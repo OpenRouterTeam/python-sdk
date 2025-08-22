@@ -6,6 +6,7 @@ sources:
         sourceBlobDigest: sha256:454f1b880a0882a70f78eacccb2c33e3d9d19134a0738b0e21487984a7bf2e63
         tags:
             - latest
+            - speakeasy-sdk-regen-1755878373
             - 1.0.0
 targets:
     open-router:
@@ -14,7 +15,7 @@ targets:
         sourceRevisionDigest: sha256:30b19a8759608792fb4d27f6bf28d5982d7e2a8cf5b3faf34ba3507a62f9f106
         sourceBlobDigest: sha256:454f1b880a0882a70f78eacccb2c33e3d9d19134a0738b0e21487984a7bf2e63
         codeSamplesNamespace: open-router-chat-completions-api-python-code-samples
-        codeSamplesRevisionDigest: sha256:3a91ac3dc92c4f41025bfbe2ab316844707268e93ea1947cd4fe8996f01620b5
+        codeSamplesRevisionDigest: sha256:9ce1951254983ff6edc533d67fea93254d9e0d124057ce826721a1449a9ba36c
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
