@@ -20,21 +20,21 @@ For more information about the API: [OpenRouter Documentation](https://openroute
 <!-- Start Table of Contents [toc] -->
 ## Table of Contents
 <!-- $toc-max-depth=2 -->
-  * [SDK Installation](#sdk-installation)
-  * [IDE Support](#ide-support)
-  * [SDK Example Usage](#sdk-example-usage)
-  * [Authentication](#authentication)
-  * [Available Resources and Operations](#available-resources-and-operations)
-  * [Server-sent event streaming](#server-sent-event-streaming)
-  * [Retries](#retries)
-  * [Error Handling](#error-handling)
-  * [Server Selection](#server-selection)
-  * [Custom HTTP Client](#custom-http-client)
-  * [Resource Management](#resource-management)
-  * [Debugging](#debugging)
-* [Development](#development)
-  * [Maturity](#maturity)
-  * [Contributions](#contributions)
+  * [SDK Installation](https://github.com/speakeasy-sdks/openrouter-python-sdk/blob/master/#sdk-installation)
+  * [IDE Support](https://github.com/speakeasy-sdks/openrouter-python-sdk/blob/master/#ide-support)
+  * [SDK Example Usage](https://github.com/speakeasy-sdks/openrouter-python-sdk/blob/master/#sdk-example-usage)
+  * [Authentication](https://github.com/speakeasy-sdks/openrouter-python-sdk/blob/master/#authentication)
+  * [Available Resources and Operations](https://github.com/speakeasy-sdks/openrouter-python-sdk/blob/master/#available-resources-and-operations)
+  * [Server-sent event streaming](https://github.com/speakeasy-sdks/openrouter-python-sdk/blob/master/#server-sent-event-streaming)
+  * [Retries](https://github.com/speakeasy-sdks/openrouter-python-sdk/blob/master/#retries)
+  * [Error Handling](https://github.com/speakeasy-sdks/openrouter-python-sdk/blob/master/#error-handling)
+  * [Server Selection](https://github.com/speakeasy-sdks/openrouter-python-sdk/blob/master/#server-selection)
+  * [Custom HTTP Client](https://github.com/speakeasy-sdks/openrouter-python-sdk/blob/master/#custom-http-client)
+  * [Resource Management](https://github.com/speakeasy-sdks/openrouter-python-sdk/blob/master/#resource-management)
+  * [Debugging](https://github.com/speakeasy-sdks/openrouter-python-sdk/blob/master/#debugging)
+* [Development](https://github.com/speakeasy-sdks/openrouter-python-sdk/blob/master/#development)
+  * [Maturity](https://github.com/speakeasy-sdks/openrouter-python-sdk/blob/master/#maturity)
+  * [Contributions](https://github.com/speakeasy-sdks/openrouter-python-sdk/blob/master/#contributions)
 
 <!-- End Table of Contents [toc] -->
 
@@ -213,10 +213,10 @@ with OpenRouter(
 <details open>
 <summary>Available methods</summary>
 
-### [chat](docs/sdks/chat/README.md)
+### [chat](https://github.com/speakeasy-sdks/openrouter-python-sdk/blob/master/docs/sdks/chat/README.md)
 
-* [complete](docs/sdks/chat/README.md#complete) - Create a chat completion
-* [complete_stream](docs/sdks/chat/README.md#complete_stream) - Create a chat completion
+* [complete](https://github.com/speakeasy-sdks/openrouter-python-sdk/blob/master/docs/sdks/chat/README.md#complete) - Create a chat completion
+* [complete_stream](https://github.com/speakeasy-sdks/openrouter-python-sdk/blob/master/docs/sdks/chat/README.md#complete_stream) - Create a chat completion
 
 
 </details>
@@ -319,7 +319,7 @@ with OpenRouter(
 <!-- Start Error Handling [errors] -->
 ## Error Handling
 
-[`OpenRouterError`](./src/openrouter/errors/openroutererror.py) is the base class for all HTTP error responses. It has the following properties:
+[`OpenRouterError`](https://github.com/speakeasy-sdks/openrouter-python-sdk/blob/master/./src/openrouter/errors/openroutererror.py) is the base class for all HTTP error responses. It has the following properties:
 
 | Property           | Type             | Description                                                                             |
 | ------------------ | ---------------- | --------------------------------------------------------------------------------------- |
@@ -328,7 +328,7 @@ with OpenRouter(
 | `err.headers`      | `httpx.Headers`  | HTTP response headers                                                                   |
 | `err.body`         | `str`            | HTTP body. Can be empty string if no body is returned.                                  |
 | `err.raw_response` | `httpx.Response` | Raw HTTP response                                                                       |
-| `err.data`         |                  | Optional. Some errors may contain structured data. [See Error Classes](#error-classes). |
+| `err.data`         |                  | Optional. Some errors may contain structured data. [See Error Classes](https://github.com/speakeasy-sdks/openrouter-python-sdk/blob/master/#error-classes). |
 
 ### Example
 ```python
@@ -368,8 +368,8 @@ with OpenRouter(
 
 ### Error Classes
 **Primary errors:**
-* [`OpenRouterError`](./src/openrouter/errors/openroutererror.py): The base class for HTTP error responses.
-  * [`ChatCompletionError`](./src/openrouter/errors/chatcompletionerror.py): Chat completion error response.
+* [`OpenRouterError`](https://github.com/speakeasy-sdks/openrouter-python-sdk/blob/master/./src/openrouter/errors/openroutererror.py): The base class for HTTP error responses.
+  * [`ChatCompletionError`](https://github.com/speakeasy-sdks/openrouter-python-sdk/blob/master/./src/openrouter/errors/chatcompletionerror.py): Chat completion error response.
 
 <details><summary>Less common errors (5)</summary>
 
@@ -381,8 +381,8 @@ with OpenRouter(
     * [`httpx.TimeoutException`](https://www.python-httpx.org/exceptions/#httpx.TimeoutException): HTTP request timed out.
 
 
-**Inherit from [`OpenRouterError`](./src/openrouter/errors/openroutererror.py)**:
-* [`ResponseValidationError`](./src/openrouter/errors/responsevalidationerror.py): Type mismatch between the response data and the expected Pydantic model. Provides access to the Pydantic validation error via the `cause` attribute.
+**Inherit from [`OpenRouterError`](https://github.com/speakeasy-sdks/openrouter-python-sdk/blob/master/./src/openrouter/errors/openroutererror.py)**:
+* [`ResponseValidationError`](https://github.com/speakeasy-sdks/openrouter-python-sdk/blob/master/./src/openrouter/errors/responsevalidationerror.py): Type mismatch between the response data and the expected Pydantic model. Provides access to the Pydantic validation error via the `cause` attribute.
 
 </details>
 <!-- End Error Handling [errors] -->
