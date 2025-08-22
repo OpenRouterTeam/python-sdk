@@ -1,0 +1,13 @@
+# ChatCompletionChunkChoice
+
+Streaming completion choice chunk
+
+
+## Fields
+
+| Field                                                                                                        | Type                                                                                                         | Required                                                                                                     | Description                                                                                                  |
+| ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ |
+| `delta`                                                                                                      | [models.ChatCompletionChunkChoiceDelta](../models/chatcompletionchunkchoicedelta.md)                         | :heavy_check_mark:                                                                                           | Delta changes in streaming response                                                                          |
+| `finish_reason`                                                                                              | [Nullable[models.ChatCompletionChunkChoiceFinishReason]](../models/chatcompletionchunkchoicefinishreason.md) | :heavy_check_mark:                                                                                           | N/A                                                                                                          |
+| `index`                                                                                                      | *float*                                                                                                      | :heavy_check_mark:                                                                                           | N/A                                                                                                          |
+| `logprobs`                                                                                                   | [OptionalNullable[models.ChatCompletionTokenLogprobs]](../models/chatcompletiontokenlogprobs.md)             | :heavy_minus_sign:                                                                                           | Log probabilities for the completion                                                                         |

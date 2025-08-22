@@ -1,0 +1,9 @@
+# InputAudio
+
+
+## Fields
+
+| Field                                                                                            | Type                                                                                             | Required                                                                                         | Description                                                                                      |
+| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| `data`                                                                                           | *str*                                                                                            | :heavy_check_mark:                                                                               | Base64 encoded audio data                                                                        |
+| `format_`                                                                                        | [models.ChatCompletionContentPartAudioFormat](../models/chatcompletioncontentpartaudioformat.md) | :heavy_check_mark:                                                                               | Audio format                                                                                     |

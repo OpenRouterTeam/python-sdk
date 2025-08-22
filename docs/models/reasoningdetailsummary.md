@@ -1,0 +1,14 @@
+# ReasoningDetailSummary
+
+Reasoning summary detail
+
+
+## Fields
+
+| Field                                                                                              | Type                                                                                               | Required                                                                                           | Description                                                                                        |
+| -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `type`                                                                                             | [models.ReasoningDetailSummaryType](../models/reasoningdetailsummarytype.md)                       | :heavy_check_mark:                                                                                 | N/A                                                                                                |
+| `summary`                                                                                          | *str*                                                                                              | :heavy_check_mark:                                                                                 | N/A                                                                                                |
+| `id`                                                                                               | *OptionalNullable[str]*                                                                            | :heavy_minus_sign:                                                                                 | N/A                                                                                                |
+| `format_`                                                                                          | [OptionalNullable[models.ReasoningDetailSummaryFormat]](../models/reasoningdetailsummaryformat.md) | :heavy_minus_sign:                                                                                 | N/A                                                                                                |
+| `index`                                                                                            | *Optional[float]*                                                                                  | :heavy_minus_sign:                                                                                 | N/A                                                                                                |

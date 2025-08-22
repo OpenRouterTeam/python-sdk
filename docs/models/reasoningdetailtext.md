@@ -1,0 +1,15 @@
+# ReasoningDetailText
+
+Text reasoning detail
+
+
+## Fields
+
+| Field                                                                                        | Type                                                                                         | Required                                                                                     | Description                                                                                  |
+| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `type`                                                                                       | [models.ReasoningDetailTextType](../models/reasoningdetailtexttype.md)                       | :heavy_check_mark:                                                                           | N/A                                                                                          |
+| `text`                                                                                       | *OptionalNullable[str]*                                                                      | :heavy_minus_sign:                                                                           | N/A                                                                                          |
+| `signature`                                                                                  | *OptionalNullable[str]*                                                                      | :heavy_minus_sign:                                                                           | N/A                                                                                          |
+| `id`                                                                                         | *OptionalNullable[str]*                                                                      | :heavy_minus_sign:                                                                           | N/A                                                                                          |
+| `format_`                                                                                    | [OptionalNullable[models.ReasoningDetailTextFormat]](../models/reasoningdetailtextformat.md) | :heavy_minus_sign:                                                                           | N/A                                                                                          |
+| `index`                                                                                      | *Optional[float]*                                                                            | :heavy_minus_sign:                                                                           | N/A                                                                                          |

@@ -1,0 +1,22 @@
+workflowVersion: 1.0.0
+speakeasyVersion: latest
+sources:
+    OpenRouter Chat Completions API:
+        inputs:
+            - location: .speakeasy/OAS_files/chat-completions-openapi.yaml
+        overlays:
+            - location: .speakeasy/OAS_files/overlay.yaml
+            - location: .speakeasy/OAS_files/speakeasy-modifications-overlay.yaml
+        output: .speakeasy/out.openapi.yaml
+        registry:
+            location: registry.speakeasyapi.dev/sheldon-vaughn-test/sandbox/open-router-chat-completions-api
+targets:
+    open-router:
+        target: python
+        source: OpenRouter Chat Completions API
+        codeSamples:
+            registry:
+                location: registry.speakeasyapi.dev/sheldon-vaughn-test/sandbox/open-router-chat-completions-api-python-code-samples
+            labelOverride:
+                fixedValue: Python (SDK)
+            blocking: false

@@ -1,0 +1,13 @@
+# ChatCompletionChoice
+
+Chat completion choice
+
+
+## Fields
+
+| Field                                                                                              | Type                                                                                               | Required                                                                                           | Description                                                                                        |
+| -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `finish_reason`                                                                                    | [Nullable[models.ChatCompletionChoiceFinishReason]](../models/chatcompletionchoicefinishreason.md) | :heavy_check_mark:                                                                                 | Reason the completion finished                                                                     |
+| `index`                                                                                            | *float*                                                                                            | :heavy_check_mark:                                                                                 | Choice index                                                                                       |
+| `message`                                                                                          | [models.ChatCompletionMessage](../models/chatcompletionmessage.md)                                 | :heavy_check_mark:                                                                                 | Assistant message in completion response                                                           |
+| `logprobs`                                                                                         | [OptionalNullable[models.ChatCompletionTokenLogprobs]](../models/chatcompletiontokenlogprobs.md)   | :heavy_minus_sign:                                                                                 | Log probabilities for the completion                                                               |
