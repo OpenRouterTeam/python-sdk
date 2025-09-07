@@ -64,6 +64,7 @@ class Chat(BaseSDK):
         accept_header_override: Optional[CompleteAcceptEnum] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> eventstreaming.EventStream[models.ChatCompletionChunkWrapper]: ...
+
     @overload
     def complete(
         self,
@@ -122,6 +123,7 @@ class Chat(BaseSDK):
         accept_header_override: Optional[CompleteAcceptEnum] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.ChatCompletion: ...
+
     # endregion sdk-class-body
 
     def complete(

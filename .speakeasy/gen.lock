@@ -5,8 +5,8 @@ management:
   docVersion: 1.0.0
   speakeasyVersion: 1.611.1
   generationVersion: 2.694.1
-  releaseVersion: 0.3.1
-  configChecksum: 769cc7b4eef2760d1114b6b64a644f57
+  releaseVersion: 0.3.2
+  configChecksum: e4968e5a794abb620b5e37fd25f2ec84
   repoURL: https://github.com/speakeasy-sdks/openrouter-python-sdk.git
   installationURL: https://github.com/speakeasy-sdks/openrouter-python-sdk.git
 features:
