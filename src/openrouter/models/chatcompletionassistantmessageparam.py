@@ -9,7 +9,6 @@ from .chatcompletionmessagetoolcall import (
     ChatCompletionMessageToolCall,
     ChatCompletionMessageToolCallTypedDict,
 )
-from enum import Enum
 from openrouter.types import (
     BaseModel,
     Nullable,
@@ -18,13 +17,11 @@ from openrouter.types import (
     UNSET_SENTINEL,
 )
 from pydantic import model_serializer
-from typing import Any, List, Optional, Union
+from typing import Any, List, Literal, Optional, Union
 from typing_extensions import NotRequired, TypeAliasType, TypedDict
 
 
-class ChatCompletionAssistantMessageParamRole(str, Enum):
-    ASSISTANT = "assistant"
-
+ChatCompletionAssistantMessageParamRole = Literal["assistant"]
 
 ChatCompletionAssistantMessageParamContentTypedDict = TypeAliasType(
     "ChatCompletionAssistantMessageParamContentTypedDict",

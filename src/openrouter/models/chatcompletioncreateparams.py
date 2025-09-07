@@ -14,7 +14,6 @@ from .responseformatjsonschemaschema import (
     ResponseFormatJSONSchemaSchema,
     ResponseFormatJSONSchemaSchemaTypedDict,
 )
-from enum import Enum
 from openrouter.types import (
     BaseModel,
     Nullable,
@@ -24,17 +23,12 @@ from openrouter.types import (
 )
 import pydantic
 from pydantic import model_serializer
-from typing import Any, Dict, List, Optional, Union
+from typing import Any, Dict, List, Literal, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
-class ChatCompletionCreateParamsEffort(str, Enum):
-    r"""OpenAI-style reasoning effort setting"""
-
-    HIGH = "high"
-    MEDIUM = "medium"
-    LOW = "low"
-    MINIMAL = "minimal"
+ChatCompletionCreateParamsEffort = Literal["high", "medium", "low", "minimal"]
+r"""OpenAI-style reasoning effort setting"""
 
 
 class ChatCompletionCreateParamsReasoningTypedDict(TypedDict):
@@ -94,8 +88,7 @@ class ChatCompletionCreateParamsReasoning(BaseModel):
         return m
 
 
-class ChatCompletionCreateParamsTypePython(str, Enum):
-    PYTHON = "python"
+ChatCompletionCreateParamsTypePython = Literal["python"]
 
 
 class ChatCompletionCreateParamsResponseFormatPythonTypedDict(TypedDict):
@@ -110,8 +103,7 @@ class ChatCompletionCreateParamsResponseFormatPython(BaseModel):
     type: ChatCompletionCreateParamsTypePython
 
 
-class ChatCompletionCreateParamsTypeGrammar(str, Enum):
-    GRAMMAR = "grammar"
+ChatCompletionCreateParamsTypeGrammar = Literal["grammar"]
 
 
 class ChatCompletionCreateParamsResponseFormatGrammarTypedDict(TypedDict):
@@ -131,8 +123,7 @@ class ChatCompletionCreateParamsResponseFormatGrammar(BaseModel):
     r"""Custom grammar for text generation"""
 
 
-class ChatCompletionCreateParamsTypeJSONSchema(str, Enum):
-    JSON_SCHEMA = "json_schema"
+ChatCompletionCreateParamsTypeJSONSchema = Literal["json_schema"]
 
 
 class ChatCompletionCreateParamsJSONSchemaTypedDict(TypedDict):
@@ -207,8 +198,7 @@ class ChatCompletionCreateParamsResponseFormatJSONSchema(BaseModel):
     json_schema: ChatCompletionCreateParamsJSONSchema
 
 
-class ChatCompletionCreateParamsTypeJSONObject(str, Enum):
-    JSON_OBJECT = "json_object"
+ChatCompletionCreateParamsTypeJSONObject = Literal["json_object"]
 
 
 class ChatCompletionCreateParamsResponseFormatJSONObjectTypedDict(TypedDict):
@@ -223,8 +213,7 @@ class ChatCompletionCreateParamsResponseFormatJSONObject(BaseModel):
     type: ChatCompletionCreateParamsTypeJSONObject
 
 
-class ChatCompletionCreateParamsTypeText(str, Enum):
-    TEXT = "text"
+ChatCompletionCreateParamsTypeText = Literal["text"]
 
 
 class ChatCompletionCreateParamsResponseFormatTextTypedDict(TypedDict):
@@ -291,106 +280,96 @@ class ChatCompletionCreateParamsStreamOptions(BaseModel):
     r"""Include usage information in streaming response"""
 
 
-class ChatCompletionCreateParamsReasoningEffort(str, Enum):
-    r"""Reasoning effort"""
+ChatCompletionCreateParamsReasoningEffort = Literal["high", "medium", "low", "minimal"]
+r"""Reasoning effort"""
 
-    HIGH = "high"
-    MEDIUM = "medium"
-    LOW = "low"
-    MINIMAL = "minimal"
+ChatCompletionCreateParamsDataCollection = Literal["deny", "allow"]
+r"""Data collection setting. If no available model provider meets the requirement, your request will return an error.
+- allow: (default) allow providers which store user data non-transiently and may train on it
+- deny: use only providers which do not collect user data.
 
+"""
 
-class ChatCompletionCreateParamsDataCollection(str, Enum):
-    r"""Data collection setting. If no available model provider meets the requirement, your request will return an error.
-    - allow: (default) allow providers which store user data non-transiently and may train on it
-    - deny: use only providers which do not collect user data.
-
-    """
-
-    DENY = "deny"
-    ALLOW = "allow"
-
-
-class ChatCompletionCreateParamsOrderEnum(str, Enum):
-    ANY_SCALE = "AnyScale"
-    CENT_ML = "Cent-ML"
-    HUGGING_FACE = "HuggingFace"
-    HYPERBOLIC_2 = "Hyperbolic 2"
-    LEPTON = "Lepton"
-    LYNN_2 = "Lynn 2"
-    LYNN = "Lynn"
-    MANCER = "Mancer"
-    MODAL = "Modal"
-    OCTO_AI = "OctoAI"
-    RECURSAL = "Recursal"
-    REFLECTION = "Reflection"
-    REPLICATE = "Replicate"
-    SAMBA_NOVA_2 = "SambaNova 2"
-    SF_COMPUTE = "SF Compute"
-    TOGETHER_2 = "Together 2"
-    ONE_DOT_AI = "01.AI"
-    AI21 = "AI21"
-    AION_LABS = "AionLabs"
-    ALIBABA = "Alibaba"
-    AMAZON_BEDROCK = "Amazon Bedrock"
-    ANTHROPIC = "Anthropic"
-    ATLAS_CLOUD = "AtlasCloud"
-    ATOMA = "Atoma"
-    AVIAN = "Avian"
-    AZURE = "Azure"
-    BASE_TEN = "BaseTen"
-    CEREBRAS = "Cerebras"
-    CHUTES = "Chutes"
-    CLOUDFLARE = "Cloudflare"
-    COHERE = "Cohere"
-    CROF_AI = "CrofAI"
-    CRUSOE = "Crusoe"
-    DEEP_INFRA = "DeepInfra"
-    DEEP_SEEK = "DeepSeek"
-    ENFER = "Enfer"
-    FEATHERLESS = "Featherless"
-    FIREWORKS = "Fireworks"
-    FRIENDLI = "Friendli"
-    GMI_CLOUD = "GMICloud"
-    GOOGLE = "Google"
-    GOOGLE_AI_STUDIO = "Google AI Studio"
-    GROQ = "Groq"
-    HYPERBOLIC = "Hyperbolic"
-    INCEPTION = "Inception"
-    INFERENCE_NET = "InferenceNet"
-    INFERMATIC = "Infermatic"
-    INFLECTION = "Inflection"
-    INO_CLOUD = "InoCloud"
-    KLUSTER = "Kluster"
-    LAMBDA = "Lambda"
-    LIQUID = "Liquid"
-    MANCER_2 = "Mancer 2"
-    META = "Meta"
-    MINIMAX = "Minimax"
-    MISTRAL = "Mistral"
-    MOONSHOT_AI = "Moonshot AI"
-    MORPH = "Morph"
-    N_COMPASS = "NCompass"
-    NEBIUS = "Nebius"
-    NEXT_BIT = "NextBit"
-    NINETEEN = "Nineteen"
-    NOVITA = "Novita"
-    OPEN_AI = "OpenAI"
-    OPEN_INFERENCE = "OpenInference"
-    PARASAIL = "Parasail"
-    PERPLEXITY = "Perplexity"
-    PHALA = "Phala"
-    SAMBA_NOVA = "SambaNova"
-    STEALTH = "Stealth"
-    SWITCHPOINT = "Switchpoint"
-    TARGON = "Targon"
-    TOGETHER = "Together"
-    UBICLOUD = "Ubicloud"
-    VENICE = "Venice"
-    WAND_B = "WandB"
-    X_AI = "xAI"
-    Z_AI = "Z.AI"
-
+ChatCompletionCreateParamsOrderEnum = Literal[
+    "AnyScale",
+    "Cent-ML",
+    "HuggingFace",
+    "Hyperbolic 2",
+    "Lepton",
+    "Lynn 2",
+    "Lynn",
+    "Mancer",
+    "Modal",
+    "OctoAI",
+    "Recursal",
+    "Reflection",
+    "Replicate",
+    "SambaNova 2",
+    "SF Compute",
+    "Together 2",
+    "01.AI",
+    "AI21",
+    "AionLabs",
+    "Alibaba",
+    "Amazon Bedrock",
+    "Anthropic",
+    "AtlasCloud",
+    "Atoma",
+    "Avian",
+    "Azure",
+    "BaseTen",
+    "Cerebras",
+    "Chutes",
+    "Cloudflare",
+    "Cohere",
+    "CrofAI",
+    "Crusoe",
+    "DeepInfra",
+    "DeepSeek",
+    "Enfer",
+    "Featherless",
+    "Fireworks",
+    "Friendli",
+    "GMICloud",
+    "Google",
+    "Google AI Studio",
+    "Groq",
+    "Hyperbolic",
+    "Inception",
+    "InferenceNet",
+    "Infermatic",
+    "Inflection",
+    "InoCloud",
+    "Kluster",
+    "Lambda",
+    "Liquid",
+    "Mancer 2",
+    "Meta",
+    "Minimax",
+    "Mistral",
+    "Moonshot AI",
+    "Morph",
+    "NCompass",
+    "Nebius",
+    "NextBit",
+    "Nineteen",
+    "Novita",
+    "OpenAI",
+    "OpenInference",
+    "Parasail",
+    "Perplexity",
+    "Phala",
+    "SambaNova",
+    "Stealth",
+    "Switchpoint",
+    "Targon",
+    "Together",
+    "Ubicloud",
+    "Venice",
+    "WandB",
+    "xAI",
+    "Z.AI",
+]
 
 ChatCompletionCreateParamsOrderUnionTypedDict = TypeAliasType(
     "ChatCompletionCreateParamsOrderUnionTypedDict",
@@ -404,86 +383,86 @@ ChatCompletionCreateParamsOrderUnion = TypeAliasType(
 )
 
 
-class ChatCompletionCreateParamsOnlyEnum(str, Enum):
-    ANY_SCALE = "AnyScale"
-    CENT_ML = "Cent-ML"
-    HUGGING_FACE = "HuggingFace"
-    HYPERBOLIC_2 = "Hyperbolic 2"
-    LEPTON = "Lepton"
-    LYNN_2 = "Lynn 2"
-    LYNN = "Lynn"
-    MANCER = "Mancer"
-    MODAL = "Modal"
-    OCTO_AI = "OctoAI"
-    RECURSAL = "Recursal"
-    REFLECTION = "Reflection"
-    REPLICATE = "Replicate"
-    SAMBA_NOVA_2 = "SambaNova 2"
-    SF_COMPUTE = "SF Compute"
-    TOGETHER_2 = "Together 2"
-    ONE_DOT_AI = "01.AI"
-    AI21 = "AI21"
-    AION_LABS = "AionLabs"
-    ALIBABA = "Alibaba"
-    AMAZON_BEDROCK = "Amazon Bedrock"
-    ANTHROPIC = "Anthropic"
-    ATLAS_CLOUD = "AtlasCloud"
-    ATOMA = "Atoma"
-    AVIAN = "Avian"
-    AZURE = "Azure"
-    BASE_TEN = "BaseTen"
-    CEREBRAS = "Cerebras"
-    CHUTES = "Chutes"
-    CLOUDFLARE = "Cloudflare"
-    COHERE = "Cohere"
-    CROF_AI = "CrofAI"
-    CRUSOE = "Crusoe"
-    DEEP_INFRA = "DeepInfra"
-    DEEP_SEEK = "DeepSeek"
-    ENFER = "Enfer"
-    FEATHERLESS = "Featherless"
-    FIREWORKS = "Fireworks"
-    FRIENDLI = "Friendli"
-    GMI_CLOUD = "GMICloud"
-    GOOGLE = "Google"
-    GOOGLE_AI_STUDIO = "Google AI Studio"
-    GROQ = "Groq"
-    HYPERBOLIC = "Hyperbolic"
-    INCEPTION = "Inception"
-    INFERENCE_NET = "InferenceNet"
-    INFERMATIC = "Infermatic"
-    INFLECTION = "Inflection"
-    INO_CLOUD = "InoCloud"
-    KLUSTER = "Kluster"
-    LAMBDA = "Lambda"
-    LIQUID = "Liquid"
-    MANCER_2 = "Mancer 2"
-    META = "Meta"
-    MINIMAX = "Minimax"
-    MISTRAL = "Mistral"
-    MOONSHOT_AI = "Moonshot AI"
-    MORPH = "Morph"
-    N_COMPASS = "NCompass"
-    NEBIUS = "Nebius"
-    NEXT_BIT = "NextBit"
-    NINETEEN = "Nineteen"
-    NOVITA = "Novita"
-    OPEN_AI = "OpenAI"
-    OPEN_INFERENCE = "OpenInference"
-    PARASAIL = "Parasail"
-    PERPLEXITY = "Perplexity"
-    PHALA = "Phala"
-    SAMBA_NOVA = "SambaNova"
-    STEALTH = "Stealth"
-    SWITCHPOINT = "Switchpoint"
-    TARGON = "Targon"
-    TOGETHER = "Together"
-    UBICLOUD = "Ubicloud"
-    VENICE = "Venice"
-    WAND_B = "WandB"
-    X_AI = "xAI"
-    Z_AI = "Z.AI"
-
+ChatCompletionCreateParamsOnlyEnum = Literal[
+    "AnyScale",
+    "Cent-ML",
+    "HuggingFace",
+    "Hyperbolic 2",
+    "Lepton",
+    "Lynn 2",
+    "Lynn",
+    "Mancer",
+    "Modal",
+    "OctoAI",
+    "Recursal",
+    "Reflection",
+    "Replicate",
+    "SambaNova 2",
+    "SF Compute",
+    "Together 2",
+    "01.AI",
+    "AI21",
+    "AionLabs",
+    "Alibaba",
+    "Amazon Bedrock",
+    "Anthropic",
+    "AtlasCloud",
+    "Atoma",
+    "Avian",
+    "Azure",
+    "BaseTen",
+    "Cerebras",
+    "Chutes",
+    "Cloudflare",
+    "Cohere",
+    "CrofAI",
+    "Crusoe",
+    "DeepInfra",
+    "DeepSeek",
+    "Enfer",
+    "Featherless",
+    "Fireworks",
+    "Friendli",
+    "GMICloud",
+    "Google",
+    "Google AI Studio",
+    "Groq",
+    "Hyperbolic",
+    "Inception",
+    "InferenceNet",
+    "Infermatic",
+    "Inflection",
+    "InoCloud",
+    "Kluster",
+    "Lambda",
+    "Liquid",
+    "Mancer 2",
+    "Meta",
+    "Minimax",
+    "Mistral",
+    "Moonshot AI",
+    "Morph",
+    "NCompass",
+    "Nebius",
+    "NextBit",
+    "Nineteen",
+    "Novita",
+    "OpenAI",
+    "OpenInference",
+    "Parasail",
+    "Perplexity",
+    "Phala",
+    "SambaNova",
+    "Stealth",
+    "Switchpoint",
+    "Targon",
+    "Together",
+    "Ubicloud",
+    "Venice",
+    "WandB",
+    "xAI",
+    "Z.AI",
+]
 
 ChatCompletionCreateParamsOnlyUnionTypedDict = TypeAliasType(
     "ChatCompletionCreateParamsOnlyUnionTypedDict",
@@ -497,86 +476,86 @@ ChatCompletionCreateParamsOnlyUnion = TypeAliasType(
 )
 
 
-class ChatCompletionCreateParamsIgnoreEnum(str, Enum):
-    ANY_SCALE = "AnyScale"
-    CENT_ML = "Cent-ML"
-    HUGGING_FACE = "HuggingFace"
-    HYPERBOLIC_2 = "Hyperbolic 2"
-    LEPTON = "Lepton"
-    LYNN_2 = "Lynn 2"
-    LYNN = "Lynn"
-    MANCER = "Mancer"
-    MODAL = "Modal"
-    OCTO_AI = "OctoAI"
-    RECURSAL = "Recursal"
-    REFLECTION = "Reflection"
-    REPLICATE = "Replicate"
-    SAMBA_NOVA_2 = "SambaNova 2"
-    SF_COMPUTE = "SF Compute"
-    TOGETHER_2 = "Together 2"
-    ONE_DOT_AI = "01.AI"
-    AI21 = "AI21"
-    AION_LABS = "AionLabs"
-    ALIBABA = "Alibaba"
-    AMAZON_BEDROCK = "Amazon Bedrock"
-    ANTHROPIC = "Anthropic"
-    ATLAS_CLOUD = "AtlasCloud"
-    ATOMA = "Atoma"
-    AVIAN = "Avian"
-    AZURE = "Azure"
-    BASE_TEN = "BaseTen"
-    CEREBRAS = "Cerebras"
-    CHUTES = "Chutes"
-    CLOUDFLARE = "Cloudflare"
-    COHERE = "Cohere"
-    CROF_AI = "CrofAI"
-    CRUSOE = "Crusoe"
-    DEEP_INFRA = "DeepInfra"
-    DEEP_SEEK = "DeepSeek"
-    ENFER = "Enfer"
-    FEATHERLESS = "Featherless"
-    FIREWORKS = "Fireworks"
-    FRIENDLI = "Friendli"
-    GMI_CLOUD = "GMICloud"
-    GOOGLE = "Google"
-    GOOGLE_AI_STUDIO = "Google AI Studio"
-    GROQ = "Groq"
-    HYPERBOLIC = "Hyperbolic"
-    INCEPTION = "Inception"
-    INFERENCE_NET = "InferenceNet"
-    INFERMATIC = "Infermatic"
-    INFLECTION = "Inflection"
-    INO_CLOUD = "InoCloud"
-    KLUSTER = "Kluster"
-    LAMBDA = "Lambda"
-    LIQUID = "Liquid"
-    MANCER_2 = "Mancer 2"
-    META = "Meta"
-    MINIMAX = "Minimax"
-    MISTRAL = "Mistral"
-    MOONSHOT_AI = "Moonshot AI"
-    MORPH = "Morph"
-    N_COMPASS = "NCompass"
-    NEBIUS = "Nebius"
-    NEXT_BIT = "NextBit"
-    NINETEEN = "Nineteen"
-    NOVITA = "Novita"
-    OPEN_AI = "OpenAI"
-    OPEN_INFERENCE = "OpenInference"
-    PARASAIL = "Parasail"
-    PERPLEXITY = "Perplexity"
-    PHALA = "Phala"
-    SAMBA_NOVA = "SambaNova"
-    STEALTH = "Stealth"
-    SWITCHPOINT = "Switchpoint"
-    TARGON = "Targon"
-    TOGETHER = "Together"
-    UBICLOUD = "Ubicloud"
-    VENICE = "Venice"
-    WAND_B = "WandB"
-    X_AI = "xAI"
-    Z_AI = "Z.AI"
-
+ChatCompletionCreateParamsIgnoreEnum = Literal[
+    "AnyScale",
+    "Cent-ML",
+    "HuggingFace",
+    "Hyperbolic 2",
+    "Lepton",
+    "Lynn 2",
+    "Lynn",
+    "Mancer",
+    "Modal",
+    "OctoAI",
+    "Recursal",
+    "Reflection",
+    "Replicate",
+    "SambaNova 2",
+    "SF Compute",
+    "Together 2",
+    "01.AI",
+    "AI21",
+    "AionLabs",
+    "Alibaba",
+    "Amazon Bedrock",
+    "Anthropic",
+    "AtlasCloud",
+    "Atoma",
+    "Avian",
+    "Azure",
+    "BaseTen",
+    "Cerebras",
+    "Chutes",
+    "Cloudflare",
+    "Cohere",
+    "CrofAI",
+    "Crusoe",
+    "DeepInfra",
+    "DeepSeek",
+    "Enfer",
+    "Featherless",
+    "Fireworks",
+    "Friendli",
+    "GMICloud",
+    "Google",
+    "Google AI Studio",
+    "Groq",
+    "Hyperbolic",
+    "Inception",
+    "InferenceNet",
+    "Infermatic",
+    "Inflection",
+    "InoCloud",
+    "Kluster",
+    "Lambda",
+    "Liquid",
+    "Mancer 2",
+    "Meta",
+    "Minimax",
+    "Mistral",
+    "Moonshot AI",
+    "Morph",
+    "NCompass",
+    "Nebius",
+    "NextBit",
+    "Nineteen",
+    "Novita",
+    "OpenAI",
+    "OpenInference",
+    "Parasail",
+    "Perplexity",
+    "Phala",
+    "SambaNova",
+    "Stealth",
+    "Switchpoint",
+    "Targon",
+    "Together",
+    "Ubicloud",
+    "Venice",
+    "WandB",
+    "xAI",
+    "Z.AI",
+]
 
 ChatCompletionCreateParamsIgnoreUnionTypedDict = TypeAliasType(
     "ChatCompletionCreateParamsIgnoreUnionTypedDict",
@@ -590,25 +569,12 @@ ChatCompletionCreateParamsIgnoreUnion = TypeAliasType(
 )
 
 
-class ChatCompletionCreateParamsQuantization(str, Enum):
-    INT4 = "int4"
-    INT8 = "int8"
-    FP4 = "fp4"
-    FP6 = "fp6"
-    FP8 = "fp8"
-    FP16 = "fp16"
-    BF16 = "bf16"
-    FP32 = "fp32"
-    UNKNOWN = "unknown"
+ChatCompletionCreateParamsQuantization = Literal[
+    "int4", "int8", "fp4", "fp6", "fp8", "fp16", "bf16", "fp32", "unknown"
+]
 
-
-class ChatCompletionCreateParamsSort(str, Enum):
-    r"""The sorting strategy to use for this request, if \"order\" is not specified. When set, no load balancing is performed."""
-
-    PRICE = "price"
-    THROUGHPUT = "throughput"
-    LATENCY = "latency"
-
+ChatCompletionCreateParamsSort = Literal["price", "throughput", "latency"]
+r"""The sorting strategy to use for this request, if \"order\" is not specified. When set, no load balancing is performed."""
 
 ChatCompletionCreateParamsPromptTypedDict = TypeAliasType(
     "ChatCompletionCreateParamsPromptTypedDict", Union[float, str, Any]
@@ -805,14 +771,9 @@ class ChatCompletionCreateParamsProvider(BaseModel):
         return m
 
 
-class ChatCompletionCreateParamsIDFileParser(str, Enum):
-    FILE_PARSER = "file-parser"
+ChatCompletionCreateParamsIDFileParser = Literal["file-parser"]
 
-
-class ChatCompletionCreateParamsPdfEngine(str, Enum):
-    MISTRAL_OCR = "mistral-ocr"
-    PDF_TEXT = "pdf-text"
-    NATIVE = "native"
+ChatCompletionCreateParamsPdfEngine = Literal["mistral-ocr", "pdf-text", "native"]
 
 
 class ChatCompletionCreateParamsPdfTypedDict(TypedDict):
@@ -837,8 +798,7 @@ class ChatCompletionCreateParamsPluginFileParser(BaseModel):
     pdf: Optional[ChatCompletionCreateParamsPdf] = None
 
 
-class ChatCompletionCreateParamsIDChainOfThought(str, Enum):
-    CHAIN_OF_THOUGHT = "chain-of-thought"
+ChatCompletionCreateParamsIDChainOfThought = Literal["chain-of-thought"]
 
 
 class ChatCompletionCreateParamsPluginChainOfThoughtTypedDict(TypedDict):
@@ -849,13 +809,9 @@ class ChatCompletionCreateParamsPluginChainOfThought(BaseModel):
     id: ChatCompletionCreateParamsIDChainOfThought
 
 
-class ChatCompletionCreateParamsIDWeb(str, Enum):
-    WEB = "web"
+ChatCompletionCreateParamsIDWeb = Literal["web"]
 
-
-class ChatCompletionCreateParamsEngine(str, Enum):
-    NATIVE = "native"
-    EXA = "exa"
+ChatCompletionCreateParamsEngine = Literal["native", "exa"]
 
 
 class ChatCompletionCreateParamsPluginWebTypedDict(TypedDict):
@@ -875,8 +831,7 @@ class ChatCompletionCreateParamsPluginWeb(BaseModel):
     engine: Optional[ChatCompletionCreateParamsEngine] = None
 
 
-class ChatCompletionCreateParamsIDModeration(str, Enum):
-    MODERATION = "moderation"
+ChatCompletionCreateParamsIDModeration = Literal["moderation"]
 
 
 class ChatCompletionCreateParamsPluginModerationTypedDict(TypedDict):
@@ -955,7 +910,7 @@ class ChatCompletionCreateParamsTypedDict(TypedDict):
     r"""Nucleus sampling parameter (0-1)"""
     user: NotRequired[str]
     r"""Unique user identifier"""
-    models_llm: NotRequired[Nullable[List[str]]]
+    fallback_models: NotRequired[Nullable[List[str]]]
     r"""Order of models to fallback to for this request"""
     reasoning_effort: NotRequired[Nullable[ChatCompletionCreateParamsReasoningEffort]]
     r"""Reasoning effort"""
@@ -1030,7 +985,7 @@ class ChatCompletionCreateParams(BaseModel):
     user: Optional[str] = None
     r"""Unique user identifier"""
 
-    models_llm: Annotated[
+    fallback_models: Annotated[
         OptionalNullable[List[str]], pydantic.Field(alias="models")
     ] = UNSET
     r"""Order of models to fallback to for this request"""
@@ -1069,7 +1024,7 @@ class ChatCompletionCreateParams(BaseModel):
             "tools",
             "top_p",
             "user",
-            "models_llm",
+            "fallback_models",
             "reasoning_effort",
             "provider",
             "plugins",
@@ -1089,7 +1044,7 @@ class ChatCompletionCreateParams(BaseModel):
             "stream_options",
             "temperature",
             "top_p",
-            "models_llm",
+            "fallback_models",
             "reasoning_effort",
             "provider",
         ]

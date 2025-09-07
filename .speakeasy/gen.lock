@@ -1,19 +1,20 @@
 lockVersion: 2.0.0
 id: 232c6d4f-b0fd-4172-8f1b-e2421566e9b4
 management:
-  docChecksum: 003bbbc167e4db8bd3f147793a6648e1
+  docChecksum: 98b4f227e767bb91333b3b3469d93fa5
   docVersion: 1.0.0
-  speakeasyVersion: 1.606.2
-  generationVersion: 2.687.1
-  releaseVersion: 0.1.3
-  configChecksum: d572a56cfb69d7061ad0319f157ff5d8
+  speakeasyVersion: 1.611.1
+  generationVersion: 2.694.1
+  releaseVersion: 0.5.2
+  configChecksum: 4619605fbeb6f4488feb5336aa62bab6
   repoURL: https://github.com/speakeasy-sdks/openrouter-python-sdk.git
   installationURL: https://github.com/speakeasy-sdks/openrouter-python-sdk.git
 features:
   python:
     additionalDependencies: 1.0.0
     constsAndDefaults: 1.0.5
-    core: 5.19.9
+    core: 5.20.3
+    customCodeRegions: 0.1.1
     defaultEnabledRetries: 0.2.0
     devContainers: 3.0.0
     enumUnions: 0.1.0
@@ -29,7 +30,7 @@ features:
     responseFormat: 1.0.1
     retries: 3.0.2
     sdkHooks: 1.1.0
-    serverEvents: 1.0.7
+    serverEvents: 1.0.8
     serverEventsSentinels: 0.1.0
     unions: 3.0.4
 generatedFiles:
@@ -308,16 +309,16 @@ examples:
         "200":
           application/json: {"id": "<id>", "choices": [], "created": 6977.95, "model": "El Camino", "object": "chat.completion"}
         "400":
-          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "type": "<value>"}}
+          application/json: {"error": {"code": null, "message": "<value>"}}
         "500":
-          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "type": "<value>"}}
+          application/json: {"error": {"code": null, "message": "<value>"}}
   streamChatCompletion:
     speakeasy-default-stream-chat-completion:
       requestBody:
         application/json: {"messages": [{"role": "user", "content": "Hello, how are you?"}], "stream": true, "temperature": 1, "top_p": 1}
       responses:
         "400":
-          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "type": "<value>"}}
+          application/json: {"error": {"code": null, "message": "<value>"}}
         "500":
-          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "type": "<value>"}}
+          application/json: {"error": {"code": null, "message": "<value>"}}
 examplesVersion: 1.0.2

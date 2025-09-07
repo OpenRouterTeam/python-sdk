@@ -125,17 +125,17 @@ Generally, the SDK will work well with most IDEs out of the box. However, when u
 
 ```python
 # Synchronous Example
-from openrouter import OpenRouter, models
+from openrouter import OpenRouter
 import os
 
 
 with OpenRouter(
-    bearer_auth=os.getenv("OPENROUTER_BEARER_AUTH", ""),
+    api_key=os.getenv("OPENROUTER_API_KEY", ""),
 ) as open_router:
 
     res = open_router.chat.complete(messages=[
         {
-            "role": models.ChatCompletionUserMessageParamRole.USER,
+            "role": "user",
             "content": "Hello, how are you?",
         },
     ], stream=False, temperature=1, top_p=1)
@@ -150,18 +150,18 @@ The same SDK client can also be used to make asynchronous requests by importing 
 ```python
 # Asynchronous Example
 import asyncio
-from openrouter import OpenRouter, models
+from openrouter import OpenRouter
 import os
 
 async def main():
 
     async with OpenRouter(
-        bearer_auth=os.getenv("OPENROUTER_BEARER_AUTH", ""),
+        api_key=os.getenv("OPENROUTER_API_KEY", ""),
     ) as open_router:
 
         res = await open_router.chat.complete_async(messages=[
             {
-                "role": models.ChatCompletionUserMessageParamRole.USER,
+                "role": "user",
                 "content": "Hello, how are you?",
             },
         ], stream=False, temperature=1, top_p=1)
@@ -180,23 +180,23 @@ asyncio.run(main())
 
 This SDK supports the following security scheme globally:
 
-| Name          | Type | Scheme      | Environment Variable     |
-| ------------- | ---- | ----------- | ------------------------ |
-| `bearer_auth` | http | HTTP Bearer | `OPENROUTER_BEARER_AUTH` |
+| Name      | Type | Scheme      | Environment Variable |
+| --------- | ---- | ----------- | -------------------- |
+| `api_key` | http | HTTP Bearer | `OPENROUTER_API_KEY` |
 
-To authenticate with the API the `bearer_auth` parameter must be set when initializing the SDK client instance. For example:
+To authenticate with the API the `api_key` parameter must be set when initializing the SDK client instance. For example:
 ```python
-from openrouter import OpenRouter, models
+from openrouter import OpenRouter
 import os
 
 
 with OpenRouter(
-    bearer_auth=os.getenv("OPENROUTER_BEARER_AUTH", ""),
+    api_key=os.getenv("OPENROUTER_API_KEY", ""),
 ) as open_router:
 
     res = open_router.chat.complete(messages=[
         {
-            "role": models.ChatCompletionUserMessageParamRole.USER,
+            "role": "user",
             "content": "Hello, how are you?",
         },
     ], stream=False, temperature=1, top_p=1)
@@ -235,17 +235,17 @@ The stream is also a [Context Manager][context-manager] and can be used with the
 underlying connection when the context is exited.
 
 ```python
-from openrouter import OpenRouter, models
+from openrouter import OpenRouter
 import os
 
 
 with OpenRouter(
-    bearer_auth=os.getenv("OPENROUTER_BEARER_AUTH", ""),
+    api_key=os.getenv("OPENROUTER_API_KEY", ""),
 ) as open_router:
 
     res = open_router.chat.complete_stream(messages=[
         {
-            "role": models.ChatCompletionUserMessageParamRole.USER,
+            "role": "user",
             "content": "Hello, how are you?",
         },
     ], stream=True, temperature=1, top_p=1)
@@ -269,18 +269,18 @@ Some of the endpoints in this SDK support retries. If you use the SDK without an
 
 To change the default retry strategy for a single API call, simply provide a `RetryConfig` object to the call:
 ```python
-from openrouter import OpenRouter, models
+from openrouter import OpenRouter
 from openrouter.utils import BackoffStrategy, RetryConfig
 import os
 
 
 with OpenRouter(
-    bearer_auth=os.getenv("OPENROUTER_BEARER_AUTH", ""),
+    api_key=os.getenv("OPENROUTER_API_KEY", ""),
 ) as open_router:
 
     res = open_router.chat.complete(messages=[
         {
-            "role": models.ChatCompletionUserMessageParamRole.USER,
+            "role": "user",
             "content": "Hello, how are you?",
         },
     ], stream=False, temperature=1, top_p=1,
@@ -293,19 +293,19 @@ with OpenRouter(
 
 If you'd like to override the default retry strategy for all operations that support retries, you can use the `retry_config` optional parameter when initializing the SDK:
 ```python
-from openrouter import OpenRouter, models
+from openrouter import OpenRouter
 from openrouter.utils import BackoffStrategy, RetryConfig
 import os
 
 
 with OpenRouter(
     retry_config=RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False),
-    bearer_auth=os.getenv("OPENROUTER_BEARER_AUTH", ""),
+    api_key=os.getenv("OPENROUTER_API_KEY", ""),
 ) as open_router:
 
     res = open_router.chat.complete(messages=[
         {
-            "role": models.ChatCompletionUserMessageParamRole.USER,
+            "role": "user",
             "content": "Hello, how are you?",
         },
     ], stream=False, temperature=1, top_p=1)
@@ -332,19 +332,19 @@ with OpenRouter(
 
 ### Example
 ```python
-from openrouter import OpenRouter, errors, models
+from openrouter import OpenRouter, errors
 import os
 
 
 with OpenRouter(
-    bearer_auth=os.getenv("OPENROUTER_BEARER_AUTH", ""),
+    api_key=os.getenv("OPENROUTER_API_KEY", ""),
 ) as open_router:
     res = None
     try:
 
         res = open_router.chat.complete(messages=[
             {
-                "role": models.ChatCompletionUserMessageParamRole.USER,
+                "role": "user",
                 "content": "Hello, how are you?",
             },
         ], stream=False, temperature=1, top_p=1)
@@ -401,18 +401,18 @@ The default server `https://{provider_url}/api/v1` contains variables and is set
 #### Example
 
 ```python
-from openrouter import OpenRouter, models
+from openrouter import OpenRouter
 import os
 
 
 with OpenRouter(
     provider_url="https://ruddy-guacamole.info/"
-    bearer_auth=os.getenv("OPENROUTER_BEARER_AUTH", ""),
+    api_key=os.getenv("OPENROUTER_API_KEY", ""),
 ) as open_router:
 
     res = open_router.chat.complete(messages=[
         {
-            "role": models.ChatCompletionUserMessageParamRole.USER,
+            "role": "user",
             "content": "Hello, how are you?",
         },
     ], stream=False, temperature=1, top_p=1)
@@ -426,18 +426,18 @@ with OpenRouter(
 
 The default server can be overridden globally by passing a URL to the `server_url: str` optional parameter when initializing the SDK client instance. For example:
 ```python
-from openrouter import OpenRouter, models
+from openrouter import OpenRouter
 import os
 
 
 with OpenRouter(
     server_url="https://openrouter.ai/api/v1",
-    bearer_auth=os.getenv("OPENROUTER_BEARER_AUTH", ""),
+    api_key=os.getenv("OPENROUTER_API_KEY", ""),
 ) as open_router:
 
     res = open_router.chat.complete(messages=[
         {
-            "role": models.ChatCompletionUserMessageParamRole.USER,
+            "role": "user",
             "content": "Hello, how are you?",
         },
     ], stream=False, temperature=1, top_p=1)
@@ -542,7 +542,7 @@ import os
 def main():
 
     with OpenRouter(
-        bearer_auth=os.getenv("OPENROUTER_BEARER_AUTH", ""),
+        api_key=os.getenv("OPENROUTER_API_KEY", ""),
     ) as open_router:
         # Rest of application here...
 
@@ -551,7 +551,7 @@ def main():
 async def amain():
 
     async with OpenRouter(
-        bearer_auth=os.getenv("OPENROUTER_BEARER_AUTH", ""),
+        api_key=os.getenv("OPENROUTER_API_KEY", ""),
     ) as open_router:
         # Rest of application here...
 ```

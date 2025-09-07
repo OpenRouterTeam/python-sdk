@@ -6,7 +6,6 @@ from .chatcompletionchunkchoice import (
     ChatCompletionChunkChoiceTypedDict,
 )
 from .completionusage import CompletionUsage, CompletionUsageTypedDict
-from enum import Enum
 from openrouter.types import (
     BaseModel,
     Nullable,
@@ -15,12 +14,11 @@ from openrouter.types import (
     UNSET_SENTINEL,
 )
 from pydantic import model_serializer
-from typing import List, Optional
+from typing import List, Literal, Optional
 from typing_extensions import NotRequired, TypedDict
 
 
-class ChatCompletionChunkObject(str, Enum):
-    CHAT_COMPLETION_CHUNK = "chat.completion.chunk"
+ChatCompletionChunkObject = Literal["chat.completion.chunk"]
 
 
 class ChatCompletionChunkTypedDict(TypedDict):

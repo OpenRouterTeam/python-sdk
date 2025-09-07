@@ -69,7 +69,7 @@ class Chat(BaseSDK):
         ] = None,
         top_p: OptionalNullable[float] = 1,
         user: Optional[str] = None,
-        models_llm: OptionalNullable[List[str]] = UNSET,
+        fallback_models: OptionalNullable[List[str]] = UNSET,
         reasoning_effort: OptionalNullable[
             models.ChatCompletionCreateParamsReasoningEffort
         ] = UNSET,
@@ -115,7 +115,7 @@ class Chat(BaseSDK):
         :param tools: Available tools for function calling
         :param top_p: Nucleus sampling parameter (0-1)
         :param user: Unique user identifier
-        :param models_llm: Order of models to fallback to for this request
+        :param fallback_models: Order of models to fallback to for this request
         :param reasoning_effort: Reasoning effort
         :param provider: When multiple model providers are available, optionally indicate your routing preference.
         :param plugins: Plugins you want to enable for this request, including their settings.
@@ -170,7 +170,7 @@ class Chat(BaseSDK):
             ),
             top_p=top_p,
             user=user,
-            models_llm=models_llm,
+            fallback_models=fallback_models,
             reasoning_effort=reasoning_effort,
             provider=utils.get_pydantic_model(
                 provider, OptionalNullable[models.ChatCompletionCreateParamsProvider]
@@ -305,7 +305,7 @@ class Chat(BaseSDK):
         ] = None,
         top_p: OptionalNullable[float] = 1,
         user: Optional[str] = None,
-        models_llm: OptionalNullable[List[str]] = UNSET,
+        fallback_models: OptionalNullable[List[str]] = UNSET,
         reasoning_effort: OptionalNullable[
             models.ChatCompletionCreateParamsReasoningEffort
         ] = UNSET,
@@ -351,7 +351,7 @@ class Chat(BaseSDK):
         :param tools: Available tools for function calling
         :param top_p: Nucleus sampling parameter (0-1)
         :param user: Unique user identifier
-        :param models_llm: Order of models to fallback to for this request
+        :param fallback_models: Order of models to fallback to for this request
         :param reasoning_effort: Reasoning effort
         :param provider: When multiple model providers are available, optionally indicate your routing preference.
         :param plugins: Plugins you want to enable for this request, including their settings.
@@ -406,7 +406,7 @@ class Chat(BaseSDK):
             ),
             top_p=top_p,
             user=user,
-            models_llm=models_llm,
+            fallback_models=fallback_models,
             reasoning_effort=reasoning_effort,
             provider=utils.get_pydantic_model(
                 provider, OptionalNullable[models.ChatCompletionCreateParamsProvider]
@@ -541,7 +541,7 @@ class Chat(BaseSDK):
         ] = None,
         top_p: OptionalNullable[float] = 1,
         user: Optional[str] = None,
-        models_llm: OptionalNullable[List[str]] = UNSET,
+        fallback_models: OptionalNullable[List[str]] = UNSET,
         reasoning_effort: OptionalNullable[
             models.ChatStreamCompletionCreateParamsReasoningEffort
         ] = UNSET,
@@ -587,7 +587,7 @@ class Chat(BaseSDK):
         :param tools: Available tools for function calling
         :param top_p: Nucleus sampling parameter (0-1)
         :param user: Unique user identifier
-        :param models_llm: Order of models to fallback to for this request
+        :param fallback_models: Order of models to fallback to for this request
         :param reasoning_effort: Reasoning effort
         :param provider: When multiple model providers are available, optionally indicate your routing preference.
         :param plugins: Plugins you want to enable for this request, including their settings.
@@ -643,7 +643,7 @@ class Chat(BaseSDK):
             ),
             top_p=top_p,
             user=user,
-            models_llm=models_llm,
+            fallback_models=fallback_models,
             reasoning_effort=reasoning_effort,
             provider=utils.get_pydantic_model(
                 provider,
@@ -706,6 +706,7 @@ class Chat(BaseSDK):
                     raw, models.StreamChatCompletionResponseBody
                 ),
                 sentinel="[DONE]",
+                client_ref=self,
             )
         if utils.match_response(http_res, ["400", "401", "429"], "application/json"):
             http_res_text = utils.stream_to_text(http_res)
@@ -792,7 +793,7 @@ class Chat(BaseSDK):
         ] = None,
         top_p: OptionalNullable[float] = 1,
         user: Optional[str] = None,
-        models_llm: OptionalNullable[List[str]] = UNSET,
+        fallback_models: OptionalNullable[List[str]] = UNSET,
         reasoning_effort: OptionalNullable[
             models.ChatStreamCompletionCreateParamsReasoningEffort
         ] = UNSET,
@@ -838,7 +839,7 @@ class Chat(BaseSDK):
         :param tools: Available tools for function calling
         :param top_p: Nucleus sampling parameter (0-1)
         :param user: Unique user identifier
-        :param models_llm: Order of models to fallback to for this request
+        :param fallback_models: Order of models to fallback to for this request
         :param reasoning_effort: Reasoning effort
         :param provider: When multiple model providers are available, optionally indicate your routing preference.
         :param plugins: Plugins you want to enable for this request, including their settings.
@@ -894,7 +895,7 @@ class Chat(BaseSDK):
             ),
             top_p=top_p,
             user=user,
-            models_llm=models_llm,
+            fallback_models=fallback_models,
             reasoning_effort=reasoning_effort,
             provider=utils.get_pydantic_model(
                 provider,
@@ -957,6 +958,7 @@ class Chat(BaseSDK):
                     raw, models.StreamChatCompletionResponseBody
                 ),
                 sentinel="[DONE]",
+                client_ref=self,
             )
         if utils.match_response(http_res, ["400", "401", "429"], "application/json"):
             http_res_text = await utils.stream_to_text_async(http_res)

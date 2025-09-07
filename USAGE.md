@@ -1,17 +1,17 @@
 <!-- Start SDK Example Usage [usage] -->
 ```python
 # Synchronous Example
-from openrouter import OpenRouter, models
+from openrouter import OpenRouter
 import os
 
 
 with OpenRouter(
-    bearer_auth=os.getenv("OPENROUTER_BEARER_AUTH", ""),
+    api_key=os.getenv("OPENROUTER_API_KEY", ""),
 ) as open_router:
 
     res = open_router.chat.complete(messages=[
         {
-            "role": models.ChatCompletionUserMessageParamRole.USER,
+            "role": "user",
             "content": "Hello, how are you?",
         },
     ], stream=False, temperature=1, top_p=1)
@@ -26,18 +26,18 @@ The same SDK client can also be used to make asynchronous requests by importing 
 ```python
 # Asynchronous Example
 import asyncio
-from openrouter import OpenRouter, models
+from openrouter import OpenRouter
 import os
 
 async def main():
 
     async with OpenRouter(
-        bearer_auth=os.getenv("OPENROUTER_BEARER_AUTH", ""),
+        api_key=os.getenv("OPENROUTER_API_KEY", ""),
     ) as open_router:
 
         res = await open_router.chat.complete_async(messages=[
             {
-                "role": models.ChatCompletionUserMessageParamRole.USER,
+                "role": "user",
                 "content": "Hello, how are you?",
             },
         ], stream=False, temperature=1, top_p=1)

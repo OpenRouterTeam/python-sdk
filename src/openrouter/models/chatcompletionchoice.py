@@ -6,7 +6,6 @@ from .chatcompletiontokenlogprobs import (
     ChatCompletionTokenLogprobs,
     ChatCompletionTokenLogprobsTypedDict,
 )
-from enum import Enum
 from openrouter.types import (
     BaseModel,
     Nullable,
@@ -15,17 +14,14 @@ from openrouter.types import (
     UNSET_SENTINEL,
 )
 from pydantic import model_serializer
+from typing import Literal
 from typing_extensions import NotRequired, TypedDict
 
 
-class ChatCompletionChoiceFinishReason(str, Enum):
-    r"""Reason the completion finished"""
-
-    TOOL_CALLS = "tool_calls"
-    STOP = "stop"
-    LENGTH = "length"
-    CONTENT_FILTER = "content_filter"
-    ERROR = "error"
+ChatCompletionChoiceFinishReason = Literal[
+    "tool_calls", "stop", "length", "content_filter", "error"
+]
+r"""Reason the completion finished"""
 
 
 class ChatCompletionChoiceTypedDict(TypedDict):

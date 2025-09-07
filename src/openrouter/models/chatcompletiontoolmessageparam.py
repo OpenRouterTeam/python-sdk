@@ -5,15 +5,12 @@ from .chatcompletioncontentpart import (
     ChatCompletionContentPart,
     ChatCompletionContentPartTypedDict,
 )
-from enum import Enum
 from openrouter.types import BaseModel
-from typing import List, Union
+from typing import List, Literal, Union
 from typing_extensions import TypeAliasType, TypedDict
 
 
-class ChatCompletionToolMessageParamRole(str, Enum):
-    TOOL = "tool"
-
+ChatCompletionToolMessageParamRole = Literal["tool"]
 
 ChatCompletionToolMessageParamContentTypedDict = TypeAliasType(
     "ChatCompletionToolMessageParamContentTypedDict",

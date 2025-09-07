@@ -9,3 +9,4 @@ pyrightconfig.json
 **/.speakeasy/temp/
 **/.speakeasy/logs/
 .speakeasy/reports
+.env
