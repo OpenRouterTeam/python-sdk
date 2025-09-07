@@ -222,6 +222,7 @@ with OpenRouter(
 ### [chat](docs/sdks/chat/README.md)
 
 * [complete](docs/sdks/chat/README.md#complete) - Create a chat completion
+* [complete_stream](docs/sdks/chat/README.md#complete_stream) - Create a chat completion
 
 
 </details>

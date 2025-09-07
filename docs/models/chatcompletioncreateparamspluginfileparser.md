@@ -1,0 +1,10 @@
+# ChatCompletionCreateParamsPluginFileParser
+
+
+## Fields
+
+| Field                                                                                                | Type                                                                                                 | Required                                                                                             | Description                                                                                          |
+| ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `id`                                                                                                 | [models.ChatCompletionCreateParamsIDFileParser](../models/chatcompletioncreateparamsidfileparser.md) | :heavy_check_mark:                                                                                   | N/A                                                                                                  |
+| `max_files`                                                                                          | *Optional[float]*                                                                                    | :heavy_minus_sign:                                                                                   | N/A                                                                                                  |
+| `pdf`                                                                                                | [Optional[models.ChatCompletionCreateParamsPdf]](../models/chatcompletioncreateparamspdf.md)         | :heavy_minus_sign:                                                                                   | N/A                                                                                                  |

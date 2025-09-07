@@ -222,6 +222,7 @@ with OpenRouter(
 ### [chat](https://github.com/speakeasy-sdks/openrouter-python-sdk/blob/master/docs/sdks/chat/README.md)
 
 * [complete](https://github.com/speakeasy-sdks/openrouter-python-sdk/blob/master/docs/sdks/chat/README.md#complete) - Create a chat completion
+* [complete_stream](https://github.com/speakeasy-sdks/openrouter-python-sdk/blob/master/docs/sdks/chat/README.md#complete_stream) - Create a chat completion
 
 
 </details>

@@ -24,6 +24,7 @@ class OpenRouter(BaseSDK):
     """
 
     chat: "Chat"
+    r"""Chat completion operations"""
     _sub_sdk_map = {
         "chat": ("openrouter.chat", "Chat"),
     }

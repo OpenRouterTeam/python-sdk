@@ -27,29 +27,29 @@ from typing import Any, Dict, List, Literal, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
-Effort = Literal["high", "medium", "low", "minimal"]
+ChatCompletionCreateParamsEffort = Literal["high", "medium", "low", "minimal"]
 r"""OpenAI-style reasoning effort setting"""
 
 
-class ReasoningTypedDict(TypedDict):
+class ChatCompletionCreateParamsReasoningTypedDict(TypedDict):
     r"""Reasoning configuration"""
 
     enabled: NotRequired[bool]
     r"""Enables reasoning with default settings. Only work for some models."""
-    effort: NotRequired[Nullable[Effort]]
+    effort: NotRequired[Nullable[ChatCompletionCreateParamsEffort]]
     r"""OpenAI-style reasoning effort setting"""
     max_tokens: NotRequired[Nullable[float]]
     r"""non-OpenAI-style reasoning effort setting"""
     exclude: NotRequired[bool]
 
 
-class Reasoning(BaseModel):
+class ChatCompletionCreateParamsReasoning(BaseModel):
     r"""Reasoning configuration"""
 
     enabled: Optional[bool] = None
     r"""Enables reasoning with default settings. Only work for some models."""
 
-    effort: OptionalNullable[Effort] = UNSET
+    effort: OptionalNullable[ChatCompletionCreateParamsEffort] = UNSET
     r"""OpenAI-style reasoning effort setting"""
 
     max_tokens: OptionalNullable[float] = UNSET
@@ -88,45 +88,45 @@ class Reasoning(BaseModel):
         return m
 
 
-TypePython = Literal["python"]
+ChatCompletionCreateParamsTypePython = Literal["python"]
 
 
-class ResponseFormatPythonTypedDict(TypedDict):
+class ChatCompletionCreateParamsResponseFormatPythonTypedDict(TypedDict):
     r"""Python code response format"""
 
-    type: TypePython
+    type: ChatCompletionCreateParamsTypePython
 
 
-class ResponseFormatPython(BaseModel):
+class ChatCompletionCreateParamsResponseFormatPython(BaseModel):
     r"""Python code response format"""
 
-    type: TypePython
+    type: ChatCompletionCreateParamsTypePython
 
 
-TypeGrammar = Literal["grammar"]
+ChatCompletionCreateParamsTypeGrammar = Literal["grammar"]
 
 
-class ResponseFormatGrammarTypedDict(TypedDict):
+class ChatCompletionCreateParamsResponseFormatGrammarTypedDict(TypedDict):
     r"""Custom grammar response format"""
 
-    type: TypeGrammar
+    type: ChatCompletionCreateParamsTypeGrammar
     grammar: str
     r"""Custom grammar for text generation"""
 
 
-class ResponseFormatGrammar(BaseModel):
+class ChatCompletionCreateParamsResponseFormatGrammar(BaseModel):
     r"""Custom grammar response format"""
 
-    type: TypeGrammar
+    type: ChatCompletionCreateParamsTypeGrammar
 
     grammar: str
     r"""Custom grammar for text generation"""
 
 
-TypeJSONSchema = Literal["json_schema"]
+ChatCompletionCreateParamsTypeJSONSchema = Literal["json_schema"]
 
 
-class JSONSchemaTypedDict(TypedDict):
+class ChatCompletionCreateParamsJSONSchemaTypedDict(TypedDict):
     name: str
     r"""Schema name (a-z, A-Z, 0-9, underscores, dashes, max 64 chars)"""
     description: NotRequired[str]
@@ -137,7 +137,7 @@ class JSONSchemaTypedDict(TypedDict):
     r"""Enable strict schema adherence"""
 
 
-class JSONSchema(BaseModel):
+class ChatCompletionCreateParamsJSONSchema(BaseModel):
     name: str
     r"""Schema name (a-z, A-Z, 0-9, underscores, dashes, max 64 chars)"""
 
@@ -183,110 +183,114 @@ class JSONSchema(BaseModel):
         return m
 
 
-class ResponseFormatJSONSchemaTypedDict(TypedDict):
+class ChatCompletionCreateParamsResponseFormatJSONSchemaTypedDict(TypedDict):
     r"""JSON Schema response format for structured outputs"""
 
-    type: TypeJSONSchema
-    json_schema: JSONSchemaTypedDict
+    type: ChatCompletionCreateParamsTypeJSONSchema
+    json_schema: ChatCompletionCreateParamsJSONSchemaTypedDict
 
 
-class ResponseFormatJSONSchema(BaseModel):
+class ChatCompletionCreateParamsResponseFormatJSONSchema(BaseModel):
     r"""JSON Schema response format for structured outputs"""
 
-    type: TypeJSONSchema
+    type: ChatCompletionCreateParamsTypeJSONSchema
 
-    json_schema: JSONSchema
-
-
-TypeJSONObject = Literal["json_object"]
+    json_schema: ChatCompletionCreateParamsJSONSchema
 
 
-class ResponseFormatJSONObjectTypedDict(TypedDict):
+ChatCompletionCreateParamsTypeJSONObject = Literal["json_object"]
+
+
+class ChatCompletionCreateParamsResponseFormatJSONObjectTypedDict(TypedDict):
     r"""JSON object response format"""
 
-    type: TypeJSONObject
+    type: ChatCompletionCreateParamsTypeJSONObject
 
 
-class ResponseFormatJSONObject(BaseModel):
+class ChatCompletionCreateParamsResponseFormatJSONObject(BaseModel):
     r"""JSON object response format"""
 
-    type: TypeJSONObject
+    type: ChatCompletionCreateParamsTypeJSONObject
 
 
 ChatCompletionCreateParamsTypeText = Literal["text"]
 
 
-class ResponseFormatTextTypedDict(TypedDict):
+class ChatCompletionCreateParamsResponseFormatTextTypedDict(TypedDict):
     r"""Default text response format"""
 
     type: ChatCompletionCreateParamsTypeText
 
 
-class ResponseFormatText(BaseModel):
+class ChatCompletionCreateParamsResponseFormatText(BaseModel):
     r"""Default text response format"""
 
     type: ChatCompletionCreateParamsTypeText
 
 
-ResponseFormatTypedDict = TypeAliasType(
-    "ResponseFormatTypedDict",
+ChatCompletionCreateParamsResponseFormatUnionTypedDict = TypeAliasType(
+    "ChatCompletionCreateParamsResponseFormatUnionTypedDict",
     Union[
-        ResponseFormatTextTypedDict,
-        ResponseFormatJSONObjectTypedDict,
-        ResponseFormatPythonTypedDict,
-        ResponseFormatJSONSchemaTypedDict,
-        ResponseFormatGrammarTypedDict,
+        ChatCompletionCreateParamsResponseFormatTextTypedDict,
+        ChatCompletionCreateParamsResponseFormatJSONObjectTypedDict,
+        ChatCompletionCreateParamsResponseFormatPythonTypedDict,
+        ChatCompletionCreateParamsResponseFormatJSONSchemaTypedDict,
+        ChatCompletionCreateParamsResponseFormatGrammarTypedDict,
     ],
 )
 r"""Response format configuration"""
 
 
-ResponseFormat = TypeAliasType(
-    "ResponseFormat",
+ChatCompletionCreateParamsResponseFormatUnion = TypeAliasType(
+    "ChatCompletionCreateParamsResponseFormatUnion",
     Union[
-        ResponseFormatText,
-        ResponseFormatJSONObject,
-        ResponseFormatPython,
-        ResponseFormatJSONSchema,
-        ResponseFormatGrammar,
+        ChatCompletionCreateParamsResponseFormatText,
+        ChatCompletionCreateParamsResponseFormatJSONObject,
+        ChatCompletionCreateParamsResponseFormatPython,
+        ChatCompletionCreateParamsResponseFormatJSONSchema,
+        ChatCompletionCreateParamsResponseFormatGrammar,
     ],
 )
 r"""Response format configuration"""
 
 
-StopTypedDict = TypeAliasType("StopTypedDict", Union[str, List[str], Any])
+ChatCompletionCreateParamsStopTypedDict = TypeAliasType(
+    "ChatCompletionCreateParamsStopTypedDict", Union[str, List[str], Any]
+)
 r"""Stop sequences (up to 4)"""
 
 
-Stop = TypeAliasType("Stop", Union[str, List[str], Any])
+ChatCompletionCreateParamsStop = TypeAliasType(
+    "ChatCompletionCreateParamsStop", Union[str, List[str], Any]
+)
 r"""Stop sequences (up to 4)"""
 
 
-class StreamOptionsTypedDict(TypedDict):
+class ChatCompletionCreateParamsStreamOptionsTypedDict(TypedDict):
     r"""Streaming configuration options"""
 
     include_usage: NotRequired[bool]
     r"""Include usage information in streaming response"""
 
 
-class StreamOptions(BaseModel):
+class ChatCompletionCreateParamsStreamOptions(BaseModel):
     r"""Streaming configuration options"""
 
     include_usage: Optional[bool] = None
     r"""Include usage information in streaming response"""
 
 
-ReasoningEffort = Literal["high", "medium", "low", "minimal"]
+ChatCompletionCreateParamsReasoningEffort = Literal["high", "medium", "low", "minimal"]
 r"""Reasoning effort"""
 
-DataCollection = Literal["deny", "allow"]
+ChatCompletionCreateParamsDataCollection = Literal["deny", "allow"]
 r"""Data collection setting. If no available model provider meets the requirement, your request will return an error.
 - allow: (default) allow providers which store user data non-transiently and may train on it
 - deny: use only providers which do not collect user data.
 
 """
 
-OrderEnum = Literal[
+ChatCompletionCreateParamsOrderEnum = Literal[
     "AnyScale",
     "Cent-ML",
     "HuggingFace",
@@ -367,13 +371,19 @@ OrderEnum = Literal[
     "Z.AI",
 ]
 
-OrderTypedDict = TypeAliasType("OrderTypedDict", Union[OrderEnum, str])
+ChatCompletionCreateParamsOrderUnionTypedDict = TypeAliasType(
+    "ChatCompletionCreateParamsOrderUnionTypedDict",
+    Union[ChatCompletionCreateParamsOrderEnum, str],
+)
 
 
-Order = TypeAliasType("Order", Union[OrderEnum, str])
+ChatCompletionCreateParamsOrderUnion = TypeAliasType(
+    "ChatCompletionCreateParamsOrderUnion",
+    Union[ChatCompletionCreateParamsOrderEnum, str],
+)
 
 
-OnlyEnum = Literal[
+ChatCompletionCreateParamsOnlyEnum = Literal[
     "AnyScale",
     "Cent-ML",
     "HuggingFace",
@@ -454,13 +464,19 @@ OnlyEnum = Literal[
     "Z.AI",
 ]
 
-OnlyTypedDict = TypeAliasType("OnlyTypedDict", Union[OnlyEnum, str])
+ChatCompletionCreateParamsOnlyUnionTypedDict = TypeAliasType(
+    "ChatCompletionCreateParamsOnlyUnionTypedDict",
+    Union[ChatCompletionCreateParamsOnlyEnum, str],
+)
 
 
-Only = TypeAliasType("Only", Union[OnlyEnum, str])
+ChatCompletionCreateParamsOnlyUnion = TypeAliasType(
+    "ChatCompletionCreateParamsOnlyUnion",
+    Union[ChatCompletionCreateParamsOnlyEnum, str],
+)
 
 
-IgnoreEnum = Literal[
+ChatCompletionCreateParamsIgnoreEnum = Literal[
     "AnyScale",
     "Cent-ML",
     "HuggingFace",
@@ -541,74 +557,100 @@ IgnoreEnum = Literal[
     "Z.AI",
 ]
 
-IgnoreTypedDict = TypeAliasType("IgnoreTypedDict", Union[IgnoreEnum, str])
+ChatCompletionCreateParamsIgnoreUnionTypedDict = TypeAliasType(
+    "ChatCompletionCreateParamsIgnoreUnionTypedDict",
+    Union[ChatCompletionCreateParamsIgnoreEnum, str],
+)
 
 
-Ignore = TypeAliasType("Ignore", Union[IgnoreEnum, str])
+ChatCompletionCreateParamsIgnoreUnion = TypeAliasType(
+    "ChatCompletionCreateParamsIgnoreUnion",
+    Union[ChatCompletionCreateParamsIgnoreEnum, str],
+)
 
 
-Quantization = Literal[
+ChatCompletionCreateParamsQuantization = Literal[
     "int4", "int8", "fp4", "fp6", "fp8", "fp16", "bf16", "fp32", "unknown"
 ]
 
-Sort = Literal["price", "throughput", "latency"]
+ChatCompletionCreateParamsSort = Literal["price", "throughput", "latency"]
 r"""The sorting strategy to use for this request, if \"order\" is not specified. When set, no load balancing is performed."""
 
-PromptTypedDict = TypeAliasType("PromptTypedDict", Union[float, str, Any])
+ChatCompletionCreateParamsPromptTypedDict = TypeAliasType(
+    "ChatCompletionCreateParamsPromptTypedDict", Union[float, str, Any]
+)
 
 
-Prompt = TypeAliasType("Prompt", Union[float, str, Any])
+ChatCompletionCreateParamsPrompt = TypeAliasType(
+    "ChatCompletionCreateParamsPrompt", Union[float, str, Any]
+)
 
 
-CompletionTypedDict = TypeAliasType("CompletionTypedDict", Union[float, str, Any])
+ChatCompletionCreateParamsCompletionTypedDict = TypeAliasType(
+    "ChatCompletionCreateParamsCompletionTypedDict", Union[float, str, Any]
+)
 
 
-Completion = TypeAliasType("Completion", Union[float, str, Any])
+ChatCompletionCreateParamsCompletion = TypeAliasType(
+    "ChatCompletionCreateParamsCompletion", Union[float, str, Any]
+)
 
 
-ImageTypedDict = TypeAliasType("ImageTypedDict", Union[float, str, Any])
+ChatCompletionCreateParamsImageTypedDict = TypeAliasType(
+    "ChatCompletionCreateParamsImageTypedDict", Union[float, str, Any]
+)
 
 
-Image = TypeAliasType("Image", Union[float, str, Any])
+ChatCompletionCreateParamsImage = TypeAliasType(
+    "ChatCompletionCreateParamsImage", Union[float, str, Any]
+)
 
 
-AudioTypedDict = TypeAliasType("AudioTypedDict", Union[float, str, Any])
+ChatCompletionCreateParamsAudioTypedDict = TypeAliasType(
+    "ChatCompletionCreateParamsAudioTypedDict", Union[float, str, Any]
+)
 
 
-Audio = TypeAliasType("Audio", Union[float, str, Any])
+ChatCompletionCreateParamsAudio = TypeAliasType(
+    "ChatCompletionCreateParamsAudio", Union[float, str, Any]
+)
 
 
-RequestTypedDict = TypeAliasType("RequestTypedDict", Union[float, str, Any])
+ChatCompletionCreateParamsRequestTypedDict = TypeAliasType(
+    "ChatCompletionCreateParamsRequestTypedDict", Union[float, str, Any]
+)
 
 
-Request = TypeAliasType("Request", Union[float, str, Any])
+ChatCompletionCreateParamsRequest = TypeAliasType(
+    "ChatCompletionCreateParamsRequest", Union[float, str, Any]
+)
 
 
-class MaxPriceTypedDict(TypedDict):
+class ChatCompletionCreateParamsMaxPriceTypedDict(TypedDict):
     r"""The object specifying the maximum price you want to pay for this request. USD price per million tokens, for prompt and completion."""
 
-    prompt: NotRequired[PromptTypedDict]
-    completion: NotRequired[CompletionTypedDict]
-    image: NotRequired[ImageTypedDict]
-    audio: NotRequired[AudioTypedDict]
-    request: NotRequired[RequestTypedDict]
+    prompt: NotRequired[ChatCompletionCreateParamsPromptTypedDict]
+    completion: NotRequired[ChatCompletionCreateParamsCompletionTypedDict]
+    image: NotRequired[ChatCompletionCreateParamsImageTypedDict]
+    audio: NotRequired[ChatCompletionCreateParamsAudioTypedDict]
+    request: NotRequired[ChatCompletionCreateParamsRequestTypedDict]
 
 
-class MaxPrice(BaseModel):
+class ChatCompletionCreateParamsMaxPrice(BaseModel):
     r"""The object specifying the maximum price you want to pay for this request. USD price per million tokens, for prompt and completion."""
 
-    prompt: Optional[Prompt] = None
+    prompt: Optional[ChatCompletionCreateParamsPrompt] = None
 
-    completion: Optional[Completion] = None
+    completion: Optional[ChatCompletionCreateParamsCompletion] = None
 
-    image: Optional[Image] = None
+    image: Optional[ChatCompletionCreateParamsImage] = None
 
-    audio: Optional[Audio] = None
+    audio: Optional[ChatCompletionCreateParamsAudio] = None
 
-    request: Optional[Request] = None
+    request: Optional[ChatCompletionCreateParamsRequest] = None
 
 
-class ProviderTypedDict(TypedDict):
+class ChatCompletionCreateParamsProviderTypedDict(TypedDict):
     r"""When multiple model providers are available, optionally indicate your routing preference."""
 
     allow_fallbacks: NotRequired[Nullable[bool]]
@@ -619,27 +661,27 @@ class ProviderTypedDict(TypedDict):
     """
     require_parameters: NotRequired[Nullable[bool]]
     r"""Whether to filter providers to only those that support the parameters you've provided. If this setting is omitted or set to false, then providers will receive only the parameters they support, and ignore the rest."""
-    data_collection: NotRequired[Nullable[DataCollection]]
+    data_collection: NotRequired[Nullable[ChatCompletionCreateParamsDataCollection]]
     r"""Data collection setting. If no available model provider meets the requirement, your request will return an error.
     - allow: (default) allow providers which store user data non-transiently and may train on it
     - deny: use only providers which do not collect user data.
 
     """
-    order: NotRequired[Nullable[List[OrderTypedDict]]]
+    order: NotRequired[Nullable[List[ChatCompletionCreateParamsOrderUnionTypedDict]]]
     r"""An ordered list of provider slugs. The router will attempt to use the first provider in the subset of this list that supports your requested model, and fall back to the next if it is unavailable. If no providers are available, the request will fail with an error message."""
-    only: NotRequired[Nullable[List[OnlyTypedDict]]]
+    only: NotRequired[Nullable[List[ChatCompletionCreateParamsOnlyUnionTypedDict]]]
     r"""List of provider slugs to allow. If provided, this list is merged with your account-wide allowed provider settings for this request."""
-    ignore: NotRequired[Nullable[List[IgnoreTypedDict]]]
+    ignore: NotRequired[Nullable[List[ChatCompletionCreateParamsIgnoreUnionTypedDict]]]
     r"""List of provider slugs to ignore. If provided, this list is merged with your account-wide ignored provider settings for this request."""
-    quantizations: NotRequired[Nullable[List[Quantization]]]
+    quantizations: NotRequired[Nullable[List[ChatCompletionCreateParamsQuantization]]]
     r"""A list of quantization levels to filter the provider by."""
-    sort: NotRequired[Nullable[Sort]]
+    sort: NotRequired[Nullable[ChatCompletionCreateParamsSort]]
     r"""The sorting strategy to use for this request, if \"order\" is not specified. When set, no load balancing is performed."""
-    max_price: NotRequired[MaxPriceTypedDict]
+    max_price: NotRequired[ChatCompletionCreateParamsMaxPriceTypedDict]
     r"""The object specifying the maximum price you want to pay for this request. USD price per million tokens, for prompt and completion."""
 
 
-class Provider(BaseModel):
+class ChatCompletionCreateParamsProvider(BaseModel):
     r"""When multiple model providers are available, optionally indicate your routing preference."""
 
     allow_fallbacks: OptionalNullable[bool] = UNSET
@@ -652,29 +694,31 @@ class Provider(BaseModel):
     require_parameters: OptionalNullable[bool] = UNSET
     r"""Whether to filter providers to only those that support the parameters you've provided. If this setting is omitted or set to false, then providers will receive only the parameters they support, and ignore the rest."""
 
-    data_collection: OptionalNullable[DataCollection] = UNSET
+    data_collection: OptionalNullable[ChatCompletionCreateParamsDataCollection] = UNSET
     r"""Data collection setting. If no available model provider meets the requirement, your request will return an error.
     - allow: (default) allow providers which store user data non-transiently and may train on it
     - deny: use only providers which do not collect user data.
 
     """
 
-    order: OptionalNullable[List[Order]] = UNSET
+    order: OptionalNullable[List[ChatCompletionCreateParamsOrderUnion]] = UNSET
     r"""An ordered list of provider slugs. The router will attempt to use the first provider in the subset of this list that supports your requested model, and fall back to the next if it is unavailable. If no providers are available, the request will fail with an error message."""
 
-    only: OptionalNullable[List[Only]] = UNSET
+    only: OptionalNullable[List[ChatCompletionCreateParamsOnlyUnion]] = UNSET
     r"""List of provider slugs to allow. If provided, this list is merged with your account-wide allowed provider settings for this request."""
 
-    ignore: OptionalNullable[List[Ignore]] = UNSET
+    ignore: OptionalNullable[List[ChatCompletionCreateParamsIgnoreUnion]] = UNSET
     r"""List of provider slugs to ignore. If provided, this list is merged with your account-wide ignored provider settings for this request."""
 
-    quantizations: OptionalNullable[List[Quantization]] = UNSET
+    quantizations: OptionalNullable[List[ChatCompletionCreateParamsQuantization]] = (
+        UNSET
+    )
     r"""A list of quantization levels to filter the provider by."""
 
-    sort: OptionalNullable[Sort] = UNSET
+    sort: OptionalNullable[ChatCompletionCreateParamsSort] = UNSET
     r"""The sorting strategy to use for this request, if \"order\" is not specified. When set, no load balancing is performed."""
 
-    max_price: Optional[MaxPrice] = None
+    max_price: Optional[ChatCompletionCreateParamsMaxPrice] = None
     r"""The object specifying the maximum price you want to pay for this request. USD price per million tokens, for prompt and completion."""
 
     @model_serializer(mode="wrap")
@@ -727,90 +771,96 @@ class Provider(BaseModel):
         return m
 
 
-IDFileParser = Literal["file-parser"]
+ChatCompletionCreateParamsIDFileParser = Literal["file-parser"]
 
-PdfEngine = Literal["mistral-ocr", "pdf-text", "native"]
-
-
-class PdfTypedDict(TypedDict):
-    engine: NotRequired[PdfEngine]
+ChatCompletionCreateParamsPdfEngine = Literal["mistral-ocr", "pdf-text", "native"]
 
 
-class Pdf(BaseModel):
-    engine: Optional[PdfEngine] = None
+class ChatCompletionCreateParamsPdfTypedDict(TypedDict):
+    engine: NotRequired[ChatCompletionCreateParamsPdfEngine]
 
 
-class PluginFileParserTypedDict(TypedDict):
-    id: IDFileParser
+class ChatCompletionCreateParamsPdf(BaseModel):
+    engine: Optional[ChatCompletionCreateParamsPdfEngine] = None
+
+
+class ChatCompletionCreateParamsPluginFileParserTypedDict(TypedDict):
+    id: ChatCompletionCreateParamsIDFileParser
     max_files: NotRequired[float]
-    pdf: NotRequired[PdfTypedDict]
+    pdf: NotRequired[ChatCompletionCreateParamsPdfTypedDict]
 
 
-class PluginFileParser(BaseModel):
-    id: IDFileParser
+class ChatCompletionCreateParamsPluginFileParser(BaseModel):
+    id: ChatCompletionCreateParamsIDFileParser
 
     max_files: Optional[float] = None
 
-    pdf: Optional[Pdf] = None
+    pdf: Optional[ChatCompletionCreateParamsPdf] = None
 
 
-IDChainOfThought = Literal["chain-of-thought"]
+ChatCompletionCreateParamsIDChainOfThought = Literal["chain-of-thought"]
 
 
-class PluginChainOfThoughtTypedDict(TypedDict):
-    id: IDChainOfThought
+class ChatCompletionCreateParamsPluginChainOfThoughtTypedDict(TypedDict):
+    id: ChatCompletionCreateParamsIDChainOfThought
 
 
-class PluginChainOfThought(BaseModel):
-    id: IDChainOfThought
+class ChatCompletionCreateParamsPluginChainOfThought(BaseModel):
+    id: ChatCompletionCreateParamsIDChainOfThought
 
 
-IDWeb = Literal["web"]
+ChatCompletionCreateParamsIDWeb = Literal["web"]
 
-Engine = Literal["native", "exa"]
+ChatCompletionCreateParamsEngine = Literal["native", "exa"]
 
 
-class PluginWebTypedDict(TypedDict):
-    id: IDWeb
+class ChatCompletionCreateParamsPluginWebTypedDict(TypedDict):
+    id: ChatCompletionCreateParamsIDWeb
     max_results: NotRequired[float]
     search_prompt: NotRequired[str]
-    engine: NotRequired[Engine]
+    engine: NotRequired[ChatCompletionCreateParamsEngine]
 
 
-class PluginWeb(BaseModel):
-    id: IDWeb
+class ChatCompletionCreateParamsPluginWeb(BaseModel):
+    id: ChatCompletionCreateParamsIDWeb
 
     max_results: Optional[float] = None
 
     search_prompt: Optional[str] = None
 
-    engine: Optional[Engine] = None
+    engine: Optional[ChatCompletionCreateParamsEngine] = None
 
 
-IDModeration = Literal["moderation"]
+ChatCompletionCreateParamsIDModeration = Literal["moderation"]
 
 
-class PluginModerationTypedDict(TypedDict):
-    id: IDModeration
+class ChatCompletionCreateParamsPluginModerationTypedDict(TypedDict):
+    id: ChatCompletionCreateParamsIDModeration
 
 
-class PluginModeration(BaseModel):
-    id: IDModeration
+class ChatCompletionCreateParamsPluginModeration(BaseModel):
+    id: ChatCompletionCreateParamsIDModeration
 
 
-PluginTypedDict = TypeAliasType(
-    "PluginTypedDict",
+ChatCompletionCreateParamsPluginUnionTypedDict = TypeAliasType(
+    "ChatCompletionCreateParamsPluginUnionTypedDict",
     Union[
-        PluginModerationTypedDict,
-        PluginChainOfThoughtTypedDict,
-        PluginFileParserTypedDict,
-        PluginWebTypedDict,
+        ChatCompletionCreateParamsPluginModerationTypedDict,
+        ChatCompletionCreateParamsPluginChainOfThoughtTypedDict,
+        ChatCompletionCreateParamsPluginFileParserTypedDict,
+        ChatCompletionCreateParamsPluginWebTypedDict,
     ],
 )
 
 
-Plugin = TypeAliasType(
-    "Plugin", Union[PluginModeration, PluginChainOfThought, PluginFileParser, PluginWeb]
+ChatCompletionCreateParamsPluginUnion = TypeAliasType(
+    "ChatCompletionCreateParamsPluginUnion",
+    Union[
+        ChatCompletionCreateParamsPluginModeration,
+        ChatCompletionCreateParamsPluginChainOfThought,
+        ChatCompletionCreateParamsPluginFileParser,
+        ChatCompletionCreateParamsPluginWeb,
+    ],
 )
 
 
@@ -837,17 +887,19 @@ class ChatCompletionCreateParamsTypedDict(TypedDict):
     r"""Key-value pairs for additional object information (max 16 pairs, 64 char keys, 512 char values)"""
     presence_penalty: NotRequired[Nullable[float]]
     r"""Presence penalty (-2.0 to 2.0)"""
-    reasoning: NotRequired[Nullable[ReasoningTypedDict]]
+    reasoning: NotRequired[Nullable[ChatCompletionCreateParamsReasoningTypedDict]]
     r"""Reasoning configuration"""
-    response_format: NotRequired[ResponseFormatTypedDict]
+    response_format: NotRequired[ChatCompletionCreateParamsResponseFormatUnionTypedDict]
     r"""Response format configuration"""
     seed: NotRequired[Nullable[int]]
     r"""Random seed for deterministic outputs"""
-    stop: NotRequired[Nullable[StopTypedDict]]
+    stop: NotRequired[Nullable[ChatCompletionCreateParamsStopTypedDict]]
     r"""Stop sequences (up to 4)"""
     stream: NotRequired[Nullable[bool]]
     r"""Enable streaming response"""
-    stream_options: NotRequired[Nullable[StreamOptionsTypedDict]]
+    stream_options: NotRequired[
+        Nullable[ChatCompletionCreateParamsStreamOptionsTypedDict]
+    ]
     temperature: NotRequired[Nullable[float]]
     r"""Sampling temperature (0-2)"""
     tool_choice: NotRequired[ChatCompletionToolChoiceOptionTypedDict]
@@ -858,13 +910,13 @@ class ChatCompletionCreateParamsTypedDict(TypedDict):
     r"""Nucleus sampling parameter (0-1)"""
     user: NotRequired[str]
     r"""Unique user identifier"""
-    model_list: NotRequired[Nullable[List[str]]]
+    fallback_models: NotRequired[Nullable[List[str]]]
     r"""Order of models to fallback to for this request"""
-    reasoning_effort: NotRequired[Nullable[ReasoningEffort]]
+    reasoning_effort: NotRequired[Nullable[ChatCompletionCreateParamsReasoningEffort]]
     r"""Reasoning effort"""
-    provider: NotRequired[Nullable[ProviderTypedDict]]
+    provider: NotRequired[Nullable[ChatCompletionCreateParamsProviderTypedDict]]
     r"""When multiple model providers are available, optionally indicate your routing preference."""
-    plugins: NotRequired[List[PluginTypedDict]]
+    plugins: NotRequired[List[ChatCompletionCreateParamsPluginUnionTypedDict]]
     r"""Plugins you want to enable for this request, including their settings."""
 
 
@@ -901,22 +953,22 @@ class ChatCompletionCreateParams(BaseModel):
     presence_penalty: OptionalNullable[float] = UNSET
     r"""Presence penalty (-2.0 to 2.0)"""
 
-    reasoning: OptionalNullable[Reasoning] = UNSET
+    reasoning: OptionalNullable[ChatCompletionCreateParamsReasoning] = UNSET
     r"""Reasoning configuration"""
 
-    response_format: Optional[ResponseFormat] = None
+    response_format: Optional[ChatCompletionCreateParamsResponseFormatUnion] = None
     r"""Response format configuration"""
 
     seed: OptionalNullable[int] = UNSET
     r"""Random seed for deterministic outputs"""
 
-    stop: OptionalNullable[Stop] = UNSET
+    stop: OptionalNullable[ChatCompletionCreateParamsStop] = UNSET
     r"""Stop sequences (up to 4)"""
 
     stream: OptionalNullable[bool] = False
     r"""Enable streaming response"""
 
-    stream_options: OptionalNullable[StreamOptions] = UNSET
+    stream_options: OptionalNullable[ChatCompletionCreateParamsStreamOptions] = UNSET
 
     temperature: OptionalNullable[float] = 1
     r"""Sampling temperature (0-2)"""
@@ -933,18 +985,20 @@ class ChatCompletionCreateParams(BaseModel):
     user: Optional[str] = None
     r"""Unique user identifier"""
 
-    model_list: Annotated[
+    fallback_models: Annotated[
         OptionalNullable[List[str]], pydantic.Field(alias="models")
     ] = UNSET
     r"""Order of models to fallback to for this request"""
 
-    reasoning_effort: OptionalNullable[ReasoningEffort] = UNSET
+    reasoning_effort: OptionalNullable[ChatCompletionCreateParamsReasoningEffort] = (
+        UNSET
+    )
     r"""Reasoning effort"""
 
-    provider: OptionalNullable[Provider] = UNSET
+    provider: OptionalNullable[ChatCompletionCreateParamsProvider] = UNSET
     r"""When multiple model providers are available, optionally indicate your routing preference."""
 
-    plugins: Optional[List[Plugin]] = None
+    plugins: Optional[List[ChatCompletionCreateParamsPluginUnion]] = None
     r"""Plugins you want to enable for this request, including their settings."""
 
     @model_serializer(mode="wrap")
@@ -970,7 +1024,7 @@ class ChatCompletionCreateParams(BaseModel):
             "tools",
             "top_p",
             "user",
-            "model_list",
+            "fallback_models",
             "reasoning_effort",
             "provider",
             "plugins",
@@ -990,7 +1044,7 @@ class ChatCompletionCreateParams(BaseModel):
             "stream_options",
             "temperature",
             "top_p",
-            "model_list",
+            "fallback_models",
             "reasoning_effort",
             "provider",
         ]
