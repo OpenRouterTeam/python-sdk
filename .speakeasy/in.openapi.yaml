@@ -1534,10 +1534,6 @@ paths:
               schema:
                 $ref: "#/components/schemas/ChatCompletion"
                 description: Non-streaming response when stream=false
-            text/event-stream:
-              x-speakeasy-sse-sentinel: "[DONE]"
-              schema:
-                $ref: "#/components/schemas/ChatCompletionChunkWrapper"
         "400":
           description: Bad request - invalid parameters
           content:
