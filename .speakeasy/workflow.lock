@@ -20,7 +20,7 @@ workflow:
     sources:
         OpenRouter Chat Completions API:
             inputs:
-                - location: .speakeasy/OAS_files/chat-completions-openapi.yaml
+                - location: .speakeasy/input.openapi.yaml
             output: .speakeasy/out.openapi.yaml
             registry:
                 location: registry.speakeasyapi.dev/sheldon-vaughn-test/sandbox/open-router-chat-completions-api
