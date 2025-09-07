@@ -491,7 +491,6 @@ class Chat(BaseSDK):
             List[models.ChatCompletionMessageParam],
             List[models.ChatCompletionMessageParamTypedDict],
         ],
-        stream: OptionalNullable[bool] = False,
         model: Optional[str] = None,
         frequency_penalty: OptionalNullable[float] = UNSET,
         logit_bias: OptionalNullable[Dict[str, float]] = UNSET,
@@ -520,6 +519,7 @@ class Chat(BaseSDK):
                 models.ChatStreamCompletionCreateParamsStopTypedDict,
             ]
         ] = UNSET,
+        stream: Optional[bool] = True,
         stream_options: OptionalNullable[
             Union[
                 models.ChatStreamCompletionCreateParamsStreamOptions,
@@ -567,7 +567,6 @@ class Chat(BaseSDK):
         Creates a model response for the given chat conversation. Supports both streaming and non-streaming modes.
 
         :param messages: List of messages for the conversation
-        :param stream: Enable streaming response
         :param model: Model to use for completion
         :param frequency_penalty: Frequency penalty (-2.0 to 2.0)
         :param logit_bias: Token logit bias adjustments
@@ -581,6 +580,7 @@ class Chat(BaseSDK):
         :param response_format: Response format configuration
         :param seed: Random seed for deterministic outputs
         :param stop: Stop sequences (up to 4)
+        :param stream: Enable streaming response
         :param stream_options:
         :param temperature: Sampling temperature (0-2)
         :param tool_choice: Tool choice configuration
@@ -607,7 +607,6 @@ class Chat(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = models.ChatStreamCompletionCreateParams(
-            stream=stream,
             messages=utils.get_pydantic_model(
                 messages, List[models.ChatCompletionMessageParam]
             ),
@@ -630,6 +629,7 @@ class Chat(BaseSDK):
             ),
             seed=seed,
             stop=stop,
+            stream=stream,
             stream_options=utils.get_pydantic_model(
                 stream_options,
                 OptionalNullable[models.ChatStreamCompletionCreateParamsStreamOptions],
@@ -743,7 +743,6 @@ class Chat(BaseSDK):
             List[models.ChatCompletionMessageParam],
             List[models.ChatCompletionMessageParamTypedDict],
         ],
-        stream: OptionalNullable[bool] = False,
         model: Optional[str] = None,
         frequency_penalty: OptionalNullable[float] = UNSET,
         logit_bias: OptionalNullable[Dict[str, float]] = UNSET,
@@ -772,6 +771,7 @@ class Chat(BaseSDK):
                 models.ChatStreamCompletionCreateParamsStopTypedDict,
             ]
         ] = UNSET,
+        stream: Optional[bool] = True,
         stream_options: OptionalNullable[
             Union[
                 models.ChatStreamCompletionCreateParamsStreamOptions,
@@ -819,7 +819,6 @@ class Chat(BaseSDK):
         Creates a model response for the given chat conversation. Supports both streaming and non-streaming modes.
 
         :param messages: List of messages for the conversation
-        :param stream: Enable streaming response
         :param model: Model to use for completion
         :param frequency_penalty: Frequency penalty (-2.0 to 2.0)
         :param logit_bias: Token logit bias adjustments
@@ -833,6 +832,7 @@ class Chat(BaseSDK):
         :param response_format: Response format configuration
         :param seed: Random seed for deterministic outputs
         :param stop: Stop sequences (up to 4)
+        :param stream: Enable streaming response
         :param stream_options:
         :param temperature: Sampling temperature (0-2)
         :param tool_choice: Tool choice configuration
@@ -859,7 +859,6 @@ class Chat(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = models.ChatStreamCompletionCreateParams(
-            stream=stream,
             messages=utils.get_pydantic_model(
                 messages, List[models.ChatCompletionMessageParam]
             ),
@@ -882,6 +881,7 @@ class Chat(BaseSDK):
             ),
             seed=seed,
             stop=stop,
+            stream=stream,
             stream_options=utils.get_pydantic_model(
                 stream_options,
                 OptionalNullable[models.ChatStreamCompletionCreateParamsStreamOptions],

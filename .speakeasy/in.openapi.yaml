@@ -1501,6 +1501,7 @@ components:
       description: Chat completion request parameters
     ChatStreamCompletionCreateParams:
       allOf:
+        - $ref: '#/components/schemas/ChatCompletionCreateParams'
         - type: object
           properties:
             stream:
@@ -1509,7 +1510,6 @@ components:
                 - true
               default: true
               description: Enable streaming response
-        - $ref: '#/components/schemas/ChatCompletionCreateParams'
   parameters: {}
 paths:
   /chat/completions:

@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 232c6d4f-b0fd-4172-8f1b-e2421566e9b4
 management:
-  docChecksum: 15ebbb27870a24f8f19c47eecc775af8
+  docChecksum: 98b4f227e767bb91333b3b3469d93fa5
   docVersion: 1.0.0
   speakeasyVersion: 1.611.1
   generationVersion: 2.694.1
-  releaseVersion: 0.5.1
-  configChecksum: 568679387340b2a17402ed3f9ffbf851
+  releaseVersion: 0.5.2
+  configChecksum: 4619605fbeb6f4488feb5336aa62bab6
   repoURL: https://github.com/speakeasy-sdks/openrouter-python-sdk.git
   installationURL: https://github.com/speakeasy-sdks/openrouter-python-sdk.git
 features:
@@ -315,7 +315,7 @@ examples:
   streamChatCompletion:
     speakeasy-default-stream-chat-completion:
       requestBody:
-        application/json: {"stream": false, "messages": [{"role": "user", "content": "Hello, how are you?"}], "temperature": 1, "top_p": 1}
+        application/json: {"messages": [{"role": "user", "content": "Hello, how are you?"}], "stream": true, "temperature": 1, "top_p": 1}
       responses:
         "400":
           application/json: {"error": {"code": null, "message": "<value>"}}

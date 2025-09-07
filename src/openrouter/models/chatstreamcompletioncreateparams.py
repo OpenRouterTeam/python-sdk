@@ -883,8 +883,6 @@ class ChatStreamCompletionCreateParamsTypedDict(TypedDict):
 
     messages: List[ChatCompletionMessageParamTypedDict]
     r"""List of messages for the conversation"""
-    stream: NotRequired[Nullable[bool]]
-    r"""Enable streaming response"""
     model: NotRequired[str]
     r"""Model to use for completion"""
     frequency_penalty: NotRequired[Nullable[float]]
@@ -913,6 +911,8 @@ class ChatStreamCompletionCreateParamsTypedDict(TypedDict):
     r"""Random seed for deterministic outputs"""
     stop: NotRequired[Nullable[ChatStreamCompletionCreateParamsStopTypedDict]]
     r"""Stop sequences (up to 4)"""
+    stream: NotRequired[bool]
+    r"""Enable streaming response"""
     stream_options: NotRequired[
         Nullable[ChatStreamCompletionCreateParamsStreamOptionsTypedDict]
     ]
@@ -943,9 +943,6 @@ class ChatStreamCompletionCreateParams(BaseModel):
 
     messages: List[ChatCompletionMessageParam]
     r"""List of messages for the conversation"""
-
-    stream: OptionalNullable[bool] = False
-    r"""Enable streaming response"""
 
     model: Optional[str] = None
     r"""Model to use for completion"""
@@ -988,6 +985,9 @@ class ChatStreamCompletionCreateParams(BaseModel):
     stop: OptionalNullable[ChatStreamCompletionCreateParamsStop] = UNSET
     r"""Stop sequences (up to 4)"""
 
+    stream: Optional[bool] = True
+    r"""Enable streaming response"""
+
     stream_options: OptionalNullable[ChatStreamCompletionCreateParamsStreamOptions] = (
         UNSET
     )
@@ -1026,7 +1026,6 @@ class ChatStreamCompletionCreateParams(BaseModel):
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = [
-            "stream",
             "model",
             "frequency_penalty",
             "logit_bias",
@@ -1040,6 +1039,7 @@ class ChatStreamCompletionCreateParams(BaseModel):
             "response_format",
             "seed",
             "stop",
+            "stream",
             "stream_options",
             "temperature",
             "tool_choice",
@@ -1052,7 +1052,6 @@ class ChatStreamCompletionCreateParams(BaseModel):
             "plugins",
         ]
         nullable_fields = [
-            "stream",
             "frequency_penalty",
             "logit_bias",
             "logprobs",

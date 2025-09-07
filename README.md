@@ -248,7 +248,7 @@ with OpenRouter(
             "role": "user",
             "content": "Hello, how are you?",
         },
-    ], stream=False, temperature=1, top_p=1)
+    ], stream=True, temperature=1, top_p=1)
 
     with res as event_stream:
         for event in event_stream:
