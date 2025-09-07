@@ -64,8 +64,8 @@ def get_security_from_env(security: Any, security_class: Any) -> Optional[BaseMo
 
     security_dict: Any = {}
 
-    if os.getenv("OPENROUTER_BEARER_AUTH"):
-        security_dict["bearer_auth"] = os.getenv("OPENROUTER_BEARER_AUTH")
+    if os.getenv("OPENROUTER_API_KEY"):
+        security_dict["api_key"] = os.getenv("OPENROUTER_API_KEY")
 
     return security_class(**security_dict) if security_dict else None
 

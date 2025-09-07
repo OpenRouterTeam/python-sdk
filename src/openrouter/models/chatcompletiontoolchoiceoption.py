@@ -5,22 +5,15 @@ from .chatcompletionnamedtoolchoice import (
     ChatCompletionNamedToolChoice,
     ChatCompletionNamedToolChoiceTypedDict,
 )
-from enum import Enum
-from typing import Union
+from typing import Literal, Union
 from typing_extensions import TypeAliasType
 
 
-class ChatCompletionToolChoiceOptionRequired(str, Enum):
-    REQUIRED = "required"
+ChatCompletionToolChoiceOptionRequired = Literal["required"]
 
+ChatCompletionToolChoiceOptionAuto = Literal["auto"]
 
-class ChatCompletionToolChoiceOptionAuto(str, Enum):
-    AUTO = "auto"
-
-
-class ChatCompletionToolChoiceOptionNone(str, Enum):
-    NONE = "none"
-
+ChatCompletionToolChoiceOptionNone = Literal["none"]
 
 ChatCompletionToolChoiceOptionTypedDict = TypeAliasType(
     "ChatCompletionToolChoiceOptionTypedDict",

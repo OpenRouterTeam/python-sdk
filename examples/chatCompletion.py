@@ -8,13 +8,12 @@ import os
 from openrouter import OpenRouter
 
 with OpenRouter(
-    bearer_auth=os.getenv("OPENROUTER_API_KEY"),
+    api_key=os.getenv("OPENROUTER_API_KEY"),
 ) as sdk:
     result = sdk.chat.complete(
-        model="openai/gpt-3.5-turbo",
         messages=[
             {"role": "user", "content": "Hello, world!"},
         ],
+        model="openai/gpt-3.5-turbo",
     )
-
-print(result)
+    print("Basic completion:", result)

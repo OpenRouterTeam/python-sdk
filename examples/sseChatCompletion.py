@@ -5,22 +5,24 @@ dependencies = [
 ]
 
 import os
-from openrouter import OpenRouter, models
+from openrouter import OpenRouter
 
 with OpenRouter(
-    bearer_auth=os.getenv("OPENROUTER_API_KEY", ""),
+    api_key=os.getenv("OPENROUTER_API_KEY", ""),
 ) as open_router:
-
-    res = open_router.chat.complete_stream(messages=[
-        {
-            "role": "user",
-            "content": "Hello, how are you?",
-        },
-        
-    ], model="openai/gpt-3.5-turbo", stream=True, temperature=1, top_p=1)
+    res = open_router.chat.complete(
+        messages=[
+            {
+                "role": "user",
+                "content": "Hello, how are you?",
+            },
+        ],
+        model="openai/gpt-3.5-turbo",
+        stream=True
+    )
 
     with res as event_stream:
         for event in event_stream:
             if event.data.choices and event.data.choices[0].delta.content:
                 print(event.data.choices[0].delta.content, end='', flush=True)
-        print()  # New line at the end
+        print()

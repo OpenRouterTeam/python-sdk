@@ -14,7 +14,6 @@ from .responseformatjsonschemaschema import (
     ResponseFormatJSONSchemaSchema,
     ResponseFormatJSONSchemaSchemaTypedDict,
 )
-from enum import Enum
 from openrouter.types import (
     BaseModel,
     Nullable,
@@ -24,38 +23,33 @@ from openrouter.types import (
 )
 import pydantic
 from pydantic import model_serializer
-from typing import Any, Dict, List, Optional, Union
+from typing import Any, Dict, List, Literal, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
-class ChatCompletionCreateParamsEffort(str, Enum):
-    r"""OpenAI-style reasoning effort setting"""
-
-    HIGH = "high"
-    MEDIUM = "medium"
-    LOW = "low"
-    MINIMAL = "minimal"
+Effort = Literal["high", "medium", "low", "minimal"]
+r"""OpenAI-style reasoning effort setting"""
 
 
-class ChatCompletionCreateParamsReasoningTypedDict(TypedDict):
+class ReasoningTypedDict(TypedDict):
     r"""Reasoning configuration"""
 
     enabled: NotRequired[bool]
     r"""Enables reasoning with default settings. Only work for some models."""
-    effort: NotRequired[Nullable[ChatCompletionCreateParamsEffort]]
+    effort: NotRequired[Nullable[Effort]]
     r"""OpenAI-style reasoning effort setting"""
     max_tokens: NotRequired[Nullable[float]]
     r"""non-OpenAI-style reasoning effort setting"""
     exclude: NotRequired[bool]
 
 
-class ChatCompletionCreateParamsReasoning(BaseModel):
+class Reasoning(BaseModel):
     r"""Reasoning configuration"""
 
     enabled: Optional[bool] = None
     r"""Enables reasoning with default settings. Only work for some models."""
 
-    effort: OptionalNullable[ChatCompletionCreateParamsEffort] = UNSET
+    effort: OptionalNullable[Effort] = UNSET
     r"""OpenAI-style reasoning effort setting"""
 
     max_tokens: OptionalNullable[float] = UNSET
@@ -94,48 +88,45 @@ class ChatCompletionCreateParamsReasoning(BaseModel):
         return m
 
 
-class ChatCompletionCreateParamsTypePython(str, Enum):
-    PYTHON = "python"
+TypePython = Literal["python"]
 
 
-class ChatCompletionCreateParamsResponseFormatPythonTypedDict(TypedDict):
+class ResponseFormatPythonTypedDict(TypedDict):
     r"""Python code response format"""
 
-    type: ChatCompletionCreateParamsTypePython
+    type: TypePython
 
 
-class ChatCompletionCreateParamsResponseFormatPython(BaseModel):
+class ResponseFormatPython(BaseModel):
     r"""Python code response format"""
 
-    type: ChatCompletionCreateParamsTypePython
+    type: TypePython
 
 
-class ChatCompletionCreateParamsTypeGrammar(str, Enum):
-    GRAMMAR = "grammar"
+TypeGrammar = Literal["grammar"]
 
 
-class ChatCompletionCreateParamsResponseFormatGrammarTypedDict(TypedDict):
+class ResponseFormatGrammarTypedDict(TypedDict):
     r"""Custom grammar response format"""
 
-    type: ChatCompletionCreateParamsTypeGrammar
+    type: TypeGrammar
     grammar: str
     r"""Custom grammar for text generation"""
 
 
-class ChatCompletionCreateParamsResponseFormatGrammar(BaseModel):
+class ResponseFormatGrammar(BaseModel):
     r"""Custom grammar response format"""
 
-    type: ChatCompletionCreateParamsTypeGrammar
+    type: TypeGrammar
 
     grammar: str
     r"""Custom grammar for text generation"""
 
 
-class ChatCompletionCreateParamsTypeJSONSchema(str, Enum):
-    JSON_SCHEMA = "json_schema"
+TypeJSONSchema = Literal["json_schema"]
 
 
-class ChatCompletionCreateParamsJSONSchemaTypedDict(TypedDict):
+class JSONSchemaTypedDict(TypedDict):
     name: str
     r"""Schema name (a-z, A-Z, 0-9, underscores, dashes, max 64 chars)"""
     description: NotRequired[str]
@@ -146,7 +137,7 @@ class ChatCompletionCreateParamsJSONSchemaTypedDict(TypedDict):
     r"""Enable strict schema adherence"""
 
 
-class ChatCompletionCreateParamsJSONSchema(BaseModel):
+class JSONSchema(BaseModel):
     name: str
     r"""Schema name (a-z, A-Z, 0-9, underscores, dashes, max 64 chars)"""
 
@@ -192,499 +183,432 @@ class ChatCompletionCreateParamsJSONSchema(BaseModel):
         return m
 
 
-class ChatCompletionCreateParamsResponseFormatJSONSchemaTypedDict(TypedDict):
+class ResponseFormatJSONSchemaTypedDict(TypedDict):
     r"""JSON Schema response format for structured outputs"""
 
-    type: ChatCompletionCreateParamsTypeJSONSchema
-    json_schema: ChatCompletionCreateParamsJSONSchemaTypedDict
+    type: TypeJSONSchema
+    json_schema: JSONSchemaTypedDict
 
 
-class ChatCompletionCreateParamsResponseFormatJSONSchema(BaseModel):
+class ResponseFormatJSONSchema(BaseModel):
     r"""JSON Schema response format for structured outputs"""
 
-    type: ChatCompletionCreateParamsTypeJSONSchema
+    type: TypeJSONSchema
 
-    json_schema: ChatCompletionCreateParamsJSONSchema
-
-
-class ChatCompletionCreateParamsTypeJSONObject(str, Enum):
-    JSON_OBJECT = "json_object"
+    json_schema: JSONSchema
 
 
-class ChatCompletionCreateParamsResponseFormatJSONObjectTypedDict(TypedDict):
+TypeJSONObject = Literal["json_object"]
+
+
+class ResponseFormatJSONObjectTypedDict(TypedDict):
     r"""JSON object response format"""
 
-    type: ChatCompletionCreateParamsTypeJSONObject
+    type: TypeJSONObject
 
 
-class ChatCompletionCreateParamsResponseFormatJSONObject(BaseModel):
+class ResponseFormatJSONObject(BaseModel):
     r"""JSON object response format"""
 
-    type: ChatCompletionCreateParamsTypeJSONObject
+    type: TypeJSONObject
 
 
-class ChatCompletionCreateParamsTypeText(str, Enum):
-    TEXT = "text"
+ChatCompletionCreateParamsTypeText = Literal["text"]
 
 
-class ChatCompletionCreateParamsResponseFormatTextTypedDict(TypedDict):
+class ResponseFormatTextTypedDict(TypedDict):
     r"""Default text response format"""
 
     type: ChatCompletionCreateParamsTypeText
 
 
-class ChatCompletionCreateParamsResponseFormatText(BaseModel):
+class ResponseFormatText(BaseModel):
     r"""Default text response format"""
 
     type: ChatCompletionCreateParamsTypeText
 
 
-ChatCompletionCreateParamsResponseFormatUnionTypedDict = TypeAliasType(
-    "ChatCompletionCreateParamsResponseFormatUnionTypedDict",
+ResponseFormatTypedDict = TypeAliasType(
+    "ResponseFormatTypedDict",
     Union[
-        ChatCompletionCreateParamsResponseFormatTextTypedDict,
-        ChatCompletionCreateParamsResponseFormatJSONObjectTypedDict,
-        ChatCompletionCreateParamsResponseFormatPythonTypedDict,
-        ChatCompletionCreateParamsResponseFormatJSONSchemaTypedDict,
-        ChatCompletionCreateParamsResponseFormatGrammarTypedDict,
+        ResponseFormatTextTypedDict,
+        ResponseFormatJSONObjectTypedDict,
+        ResponseFormatPythonTypedDict,
+        ResponseFormatJSONSchemaTypedDict,
+        ResponseFormatGrammarTypedDict,
     ],
 )
 r"""Response format configuration"""
 
 
-ChatCompletionCreateParamsResponseFormatUnion = TypeAliasType(
-    "ChatCompletionCreateParamsResponseFormatUnion",
+ResponseFormat = TypeAliasType(
+    "ResponseFormat",
     Union[
-        ChatCompletionCreateParamsResponseFormatText,
-        ChatCompletionCreateParamsResponseFormatJSONObject,
-        ChatCompletionCreateParamsResponseFormatPython,
-        ChatCompletionCreateParamsResponseFormatJSONSchema,
-        ChatCompletionCreateParamsResponseFormatGrammar,
+        ResponseFormatText,
+        ResponseFormatJSONObject,
+        ResponseFormatPython,
+        ResponseFormatJSONSchema,
+        ResponseFormatGrammar,
     ],
 )
 r"""Response format configuration"""
 
 
-ChatCompletionCreateParamsStopTypedDict = TypeAliasType(
-    "ChatCompletionCreateParamsStopTypedDict", Union[str, List[str], Any]
-)
+StopTypedDict = TypeAliasType("StopTypedDict", Union[str, List[str], Any])
 r"""Stop sequences (up to 4)"""
 
 
-ChatCompletionCreateParamsStop = TypeAliasType(
-    "ChatCompletionCreateParamsStop", Union[str, List[str], Any]
-)
+Stop = TypeAliasType("Stop", Union[str, List[str], Any])
 r"""Stop sequences (up to 4)"""
 
 
-class ChatCompletionCreateParamsStreamOptionsTypedDict(TypedDict):
+class StreamOptionsTypedDict(TypedDict):
     r"""Streaming configuration options"""
 
     include_usage: NotRequired[bool]
     r"""Include usage information in streaming response"""
 
 
-class ChatCompletionCreateParamsStreamOptions(BaseModel):
+class StreamOptions(BaseModel):
     r"""Streaming configuration options"""
 
     include_usage: Optional[bool] = None
     r"""Include usage information in streaming response"""
 
 
-class ChatCompletionCreateParamsReasoningEffort(str, Enum):
-    r"""Reasoning effort"""
+ReasoningEffort = Literal["high", "medium", "low", "minimal"]
+r"""Reasoning effort"""
 
-    HIGH = "high"
-    MEDIUM = "medium"
-    LOW = "low"
-    MINIMAL = "minimal"
+DataCollection = Literal["deny", "allow"]
+r"""Data collection setting. If no available model provider meets the requirement, your request will return an error.
+- allow: (default) allow providers which store user data non-transiently and may train on it
+- deny: use only providers which do not collect user data.
 
+"""
 
-class ChatCompletionCreateParamsDataCollection(str, Enum):
-    r"""Data collection setting. If no available model provider meets the requirement, your request will return an error.
-    - allow: (default) allow providers which store user data non-transiently and may train on it
-    - deny: use only providers which do not collect user data.
+OrderEnum = Literal[
+    "AnyScale",
+    "Cent-ML",
+    "HuggingFace",
+    "Hyperbolic 2",
+    "Lepton",
+    "Lynn 2",
+    "Lynn",
+    "Mancer",
+    "Modal",
+    "OctoAI",
+    "Recursal",
+    "Reflection",
+    "Replicate",
+    "SambaNova 2",
+    "SF Compute",
+    "Together 2",
+    "01.AI",
+    "AI21",
+    "AionLabs",
+    "Alibaba",
+    "Amazon Bedrock",
+    "Anthropic",
+    "AtlasCloud",
+    "Atoma",
+    "Avian",
+    "Azure",
+    "BaseTen",
+    "Cerebras",
+    "Chutes",
+    "Cloudflare",
+    "Cohere",
+    "CrofAI",
+    "Crusoe",
+    "DeepInfra",
+    "DeepSeek",
+    "Enfer",
+    "Featherless",
+    "Fireworks",
+    "Friendli",
+    "GMICloud",
+    "Google",
+    "Google AI Studio",
+    "Groq",
+    "Hyperbolic",
+    "Inception",
+    "InferenceNet",
+    "Infermatic",
+    "Inflection",
+    "InoCloud",
+    "Kluster",
+    "Lambda",
+    "Liquid",
+    "Mancer 2",
+    "Meta",
+    "Minimax",
+    "Mistral",
+    "Moonshot AI",
+    "Morph",
+    "NCompass",
+    "Nebius",
+    "NextBit",
+    "Nineteen",
+    "Novita",
+    "OpenAI",
+    "OpenInference",
+    "Parasail",
+    "Perplexity",
+    "Phala",
+    "SambaNova",
+    "Stealth",
+    "Switchpoint",
+    "Targon",
+    "Together",
+    "Ubicloud",
+    "Venice",
+    "WandB",
+    "xAI",
+    "Z.AI",
+]
 
-    """
-
-    DENY = "deny"
-    ALLOW = "allow"
-
-
-class ChatCompletionCreateParamsOrderEnum(str, Enum):
-    ANY_SCALE = "AnyScale"
-    CENT_ML = "Cent-ML"
-    HUGGING_FACE = "HuggingFace"
-    HYPERBOLIC_2 = "Hyperbolic 2"
-    LEPTON = "Lepton"
-    LYNN_2 = "Lynn 2"
-    LYNN = "Lynn"
-    MANCER = "Mancer"
-    MODAL = "Modal"
-    OCTO_AI = "OctoAI"
-    RECURSAL = "Recursal"
-    REFLECTION = "Reflection"
-    REPLICATE = "Replicate"
-    SAMBA_NOVA_2 = "SambaNova 2"
-    SF_COMPUTE = "SF Compute"
-    TOGETHER_2 = "Together 2"
-    ONE_DOT_AI = "01.AI"
-    AI21 = "AI21"
-    AION_LABS = "AionLabs"
-    ALIBABA = "Alibaba"
-    AMAZON_BEDROCK = "Amazon Bedrock"
-    ANTHROPIC = "Anthropic"
-    ATLAS_CLOUD = "AtlasCloud"
-    ATOMA = "Atoma"
-    AVIAN = "Avian"
-    AZURE = "Azure"
-    BASE_TEN = "BaseTen"
-    CEREBRAS = "Cerebras"
-    CHUTES = "Chutes"
-    CLOUDFLARE = "Cloudflare"
-    COHERE = "Cohere"
-    CROF_AI = "CrofAI"
-    CRUSOE = "Crusoe"
-    DEEP_INFRA = "DeepInfra"
-    DEEP_SEEK = "DeepSeek"
-    ENFER = "Enfer"
-    FEATHERLESS = "Featherless"
-    FIREWORKS = "Fireworks"
-    FRIENDLI = "Friendli"
-    GMI_CLOUD = "GMICloud"
-    GOOGLE = "Google"
-    GOOGLE_AI_STUDIO = "Google AI Studio"
-    GROQ = "Groq"
-    HYPERBOLIC = "Hyperbolic"
-    INCEPTION = "Inception"
-    INFERENCE_NET = "InferenceNet"
-    INFERMATIC = "Infermatic"
-    INFLECTION = "Inflection"
-    INO_CLOUD = "InoCloud"
-    KLUSTER = "Kluster"
-    LAMBDA = "Lambda"
-    LIQUID = "Liquid"
-    MANCER_2 = "Mancer 2"
-    META = "Meta"
-    MINIMAX = "Minimax"
-    MISTRAL = "Mistral"
-    MOONSHOT_AI = "Moonshot AI"
-    MORPH = "Morph"
-    N_COMPASS = "NCompass"
-    NEBIUS = "Nebius"
-    NEXT_BIT = "NextBit"
-    NINETEEN = "Nineteen"
-    NOVITA = "Novita"
-    OPEN_AI = "OpenAI"
-    OPEN_INFERENCE = "OpenInference"
-    PARASAIL = "Parasail"
-    PERPLEXITY = "Perplexity"
-    PHALA = "Phala"
-    SAMBA_NOVA = "SambaNova"
-    STEALTH = "Stealth"
-    SWITCHPOINT = "Switchpoint"
-    TARGON = "Targon"
-    TOGETHER = "Together"
-    UBICLOUD = "Ubicloud"
-    VENICE = "Venice"
-    WAND_B = "WandB"
-    X_AI = "xAI"
-    Z_AI = "Z.AI"
+OrderTypedDict = TypeAliasType("OrderTypedDict", Union[OrderEnum, str])
 
 
-ChatCompletionCreateParamsOrderUnionTypedDict = TypeAliasType(
-    "ChatCompletionCreateParamsOrderUnionTypedDict",
-    Union[ChatCompletionCreateParamsOrderEnum, str],
-)
+Order = TypeAliasType("Order", Union[OrderEnum, str])
 
 
-ChatCompletionCreateParamsOrderUnion = TypeAliasType(
-    "ChatCompletionCreateParamsOrderUnion",
-    Union[ChatCompletionCreateParamsOrderEnum, str],
-)
+OnlyEnum = Literal[
+    "AnyScale",
+    "Cent-ML",
+    "HuggingFace",
+    "Hyperbolic 2",
+    "Lepton",
+    "Lynn 2",
+    "Lynn",
+    "Mancer",
+    "Modal",
+    "OctoAI",
+    "Recursal",
+    "Reflection",
+    "Replicate",
+    "SambaNova 2",
+    "SF Compute",
+    "Together 2",
+    "01.AI",
+    "AI21",
+    "AionLabs",
+    "Alibaba",
+    "Amazon Bedrock",
+    "Anthropic",
+    "AtlasCloud",
+    "Atoma",
+    "Avian",
+    "Azure",
+    "BaseTen",
+    "Cerebras",
+    "Chutes",
+    "Cloudflare",
+    "Cohere",
+    "CrofAI",
+    "Crusoe",
+    "DeepInfra",
+    "DeepSeek",
+    "Enfer",
+    "Featherless",
+    "Fireworks",
+    "Friendli",
+    "GMICloud",
+    "Google",
+    "Google AI Studio",
+    "Groq",
+    "Hyperbolic",
+    "Inception",
+    "InferenceNet",
+    "Infermatic",
+    "Inflection",
+    "InoCloud",
+    "Kluster",
+    "Lambda",
+    "Liquid",
+    "Mancer 2",
+    "Meta",
+    "Minimax",
+    "Mistral",
+    "Moonshot AI",
+    "Morph",
+    "NCompass",
+    "Nebius",
+    "NextBit",
+    "Nineteen",
+    "Novita",
+    "OpenAI",
+    "OpenInference",
+    "Parasail",
+    "Perplexity",
+    "Phala",
+    "SambaNova",
+    "Stealth",
+    "Switchpoint",
+    "Targon",
+    "Together",
+    "Ubicloud",
+    "Venice",
+    "WandB",
+    "xAI",
+    "Z.AI",
+]
+
+OnlyTypedDict = TypeAliasType("OnlyTypedDict", Union[OnlyEnum, str])
 
 
-class ChatCompletionCreateParamsOnlyEnum(str, Enum):
-    ANY_SCALE = "AnyScale"
-    CENT_ML = "Cent-ML"
-    HUGGING_FACE = "HuggingFace"
-    HYPERBOLIC_2 = "Hyperbolic 2"
-    LEPTON = "Lepton"
-    LYNN_2 = "Lynn 2"
-    LYNN = "Lynn"
-    MANCER = "Mancer"
-    MODAL = "Modal"
-    OCTO_AI = "OctoAI"
-    RECURSAL = "Recursal"
-    REFLECTION = "Reflection"
-    REPLICATE = "Replicate"
-    SAMBA_NOVA_2 = "SambaNova 2"
-    SF_COMPUTE = "SF Compute"
-    TOGETHER_2 = "Together 2"
-    ONE_DOT_AI = "01.AI"
-    AI21 = "AI21"
-    AION_LABS = "AionLabs"
-    ALIBABA = "Alibaba"
-    AMAZON_BEDROCK = "Amazon Bedrock"
-    ANTHROPIC = "Anthropic"
-    ATLAS_CLOUD = "AtlasCloud"
-    ATOMA = "Atoma"
-    AVIAN = "Avian"
-    AZURE = "Azure"
-    BASE_TEN = "BaseTen"
-    CEREBRAS = "Cerebras"
-    CHUTES = "Chutes"
-    CLOUDFLARE = "Cloudflare"
-    COHERE = "Cohere"
-    CROF_AI = "CrofAI"
-    CRUSOE = "Crusoe"
-    DEEP_INFRA = "DeepInfra"
-    DEEP_SEEK = "DeepSeek"
-    ENFER = "Enfer"
-    FEATHERLESS = "Featherless"
-    FIREWORKS = "Fireworks"
-    FRIENDLI = "Friendli"
-    GMI_CLOUD = "GMICloud"
-    GOOGLE = "Google"
-    GOOGLE_AI_STUDIO = "Google AI Studio"
-    GROQ = "Groq"
-    HYPERBOLIC = "Hyperbolic"
-    INCEPTION = "Inception"
-    INFERENCE_NET = "InferenceNet"
-    INFERMATIC = "Infermatic"
-    INFLECTION = "Inflection"
-    INO_CLOUD = "InoCloud"
-    KLUSTER = "Kluster"
-    LAMBDA = "Lambda"
-    LIQUID = "Liquid"
-    MANCER_2 = "Mancer 2"
-    META = "Meta"
-    MINIMAX = "Minimax"
-    MISTRAL = "Mistral"
-    MOONSHOT_AI = "Moonshot AI"
-    MORPH = "Morph"
-    N_COMPASS = "NCompass"
-    NEBIUS = "Nebius"
-    NEXT_BIT = "NextBit"
-    NINETEEN = "Nineteen"
-    NOVITA = "Novita"
-    OPEN_AI = "OpenAI"
-    OPEN_INFERENCE = "OpenInference"
-    PARASAIL = "Parasail"
-    PERPLEXITY = "Perplexity"
-    PHALA = "Phala"
-    SAMBA_NOVA = "SambaNova"
-    STEALTH = "Stealth"
-    SWITCHPOINT = "Switchpoint"
-    TARGON = "Targon"
-    TOGETHER = "Together"
-    UBICLOUD = "Ubicloud"
-    VENICE = "Venice"
-    WAND_B = "WandB"
-    X_AI = "xAI"
-    Z_AI = "Z.AI"
+Only = TypeAliasType("Only", Union[OnlyEnum, str])
 
 
-ChatCompletionCreateParamsOnlyUnionTypedDict = TypeAliasType(
-    "ChatCompletionCreateParamsOnlyUnionTypedDict",
-    Union[ChatCompletionCreateParamsOnlyEnum, str],
-)
+IgnoreEnum = Literal[
+    "AnyScale",
+    "Cent-ML",
+    "HuggingFace",
+    "Hyperbolic 2",
+    "Lepton",
+    "Lynn 2",
+    "Lynn",
+    "Mancer",
+    "Modal",
+    "OctoAI",
+    "Recursal",
+    "Reflection",
+    "Replicate",
+    "SambaNova 2",
+    "SF Compute",
+    "Together 2",
+    "01.AI",
+    "AI21",
+    "AionLabs",
+    "Alibaba",
+    "Amazon Bedrock",
+    "Anthropic",
+    "AtlasCloud",
+    "Atoma",
+    "Avian",
+    "Azure",
+    "BaseTen",
+    "Cerebras",
+    "Chutes",
+    "Cloudflare",
+    "Cohere",
+    "CrofAI",
+    "Crusoe",
+    "DeepInfra",
+    "DeepSeek",
+    "Enfer",
+    "Featherless",
+    "Fireworks",
+    "Friendli",
+    "GMICloud",
+    "Google",
+    "Google AI Studio",
+    "Groq",
+    "Hyperbolic",
+    "Inception",
+    "InferenceNet",
+    "Infermatic",
+    "Inflection",
+    "InoCloud",
+    "Kluster",
+    "Lambda",
+    "Liquid",
+    "Mancer 2",
+    "Meta",
+    "Minimax",
+    "Mistral",
+    "Moonshot AI",
+    "Morph",
+    "NCompass",
+    "Nebius",
+    "NextBit",
+    "Nineteen",
+    "Novita",
+    "OpenAI",
+    "OpenInference",
+    "Parasail",
+    "Perplexity",
+    "Phala",
+    "SambaNova",
+    "Stealth",
+    "Switchpoint",
+    "Targon",
+    "Together",
+    "Ubicloud",
+    "Venice",
+    "WandB",
+    "xAI",
+    "Z.AI",
+]
+
+IgnoreTypedDict = TypeAliasType("IgnoreTypedDict", Union[IgnoreEnum, str])
 
 
-ChatCompletionCreateParamsOnlyUnion = TypeAliasType(
-    "ChatCompletionCreateParamsOnlyUnion",
-    Union[ChatCompletionCreateParamsOnlyEnum, str],
-)
+Ignore = TypeAliasType("Ignore", Union[IgnoreEnum, str])
 
 
-class ChatCompletionCreateParamsIgnoreEnum(str, Enum):
-    ANY_SCALE = "AnyScale"
-    CENT_ML = "Cent-ML"
-    HUGGING_FACE = "HuggingFace"
-    HYPERBOLIC_2 = "Hyperbolic 2"
-    LEPTON = "Lepton"
-    LYNN_2 = "Lynn 2"
-    LYNN = "Lynn"
-    MANCER = "Mancer"
-    MODAL = "Modal"
-    OCTO_AI = "OctoAI"
-    RECURSAL = "Recursal"
-    REFLECTION = "Reflection"
-    REPLICATE = "Replicate"
-    SAMBA_NOVA_2 = "SambaNova 2"
-    SF_COMPUTE = "SF Compute"
-    TOGETHER_2 = "Together 2"
-    ONE_DOT_AI = "01.AI"
-    AI21 = "AI21"
-    AION_LABS = "AionLabs"
-    ALIBABA = "Alibaba"
-    AMAZON_BEDROCK = "Amazon Bedrock"
-    ANTHROPIC = "Anthropic"
-    ATLAS_CLOUD = "AtlasCloud"
-    ATOMA = "Atoma"
-    AVIAN = "Avian"
-    AZURE = "Azure"
-    BASE_TEN = "BaseTen"
-    CEREBRAS = "Cerebras"
-    CHUTES = "Chutes"
-    CLOUDFLARE = "Cloudflare"
-    COHERE = "Cohere"
-    CROF_AI = "CrofAI"
-    CRUSOE = "Crusoe"
-    DEEP_INFRA = "DeepInfra"
-    DEEP_SEEK = "DeepSeek"
-    ENFER = "Enfer"
-    FEATHERLESS = "Featherless"
-    FIREWORKS = "Fireworks"
-    FRIENDLI = "Friendli"
-    GMI_CLOUD = "GMICloud"
-    GOOGLE = "Google"
-    GOOGLE_AI_STUDIO = "Google AI Studio"
-    GROQ = "Groq"
-    HYPERBOLIC = "Hyperbolic"
-    INCEPTION = "Inception"
-    INFERENCE_NET = "InferenceNet"
-    INFERMATIC = "Infermatic"
-    INFLECTION = "Inflection"
-    INO_CLOUD = "InoCloud"
-    KLUSTER = "Kluster"
-    LAMBDA = "Lambda"
-    LIQUID = "Liquid"
-    MANCER_2 = "Mancer 2"
-    META = "Meta"
-    MINIMAX = "Minimax"
-    MISTRAL = "Mistral"
-    MOONSHOT_AI = "Moonshot AI"
-    MORPH = "Morph"
-    N_COMPASS = "NCompass"
-    NEBIUS = "Nebius"
-    NEXT_BIT = "NextBit"
-    NINETEEN = "Nineteen"
-    NOVITA = "Novita"
-    OPEN_AI = "OpenAI"
-    OPEN_INFERENCE = "OpenInference"
-    PARASAIL = "Parasail"
-    PERPLEXITY = "Perplexity"
-    PHALA = "Phala"
-    SAMBA_NOVA = "SambaNova"
-    STEALTH = "Stealth"
-    SWITCHPOINT = "Switchpoint"
-    TARGON = "Targon"
-    TOGETHER = "Together"
-    UBICLOUD = "Ubicloud"
-    VENICE = "Venice"
-    WAND_B = "WandB"
-    X_AI = "xAI"
-    Z_AI = "Z.AI"
+Quantization = Literal[
+    "int4", "int8", "fp4", "fp6", "fp8", "fp16", "bf16", "fp32", "unknown"
+]
+
+Sort = Literal["price", "throughput", "latency"]
+r"""The sorting strategy to use for this request, if \"order\" is not specified. When set, no load balancing is performed."""
+
+PromptTypedDict = TypeAliasType("PromptTypedDict", Union[float, str, Any])
 
 
-ChatCompletionCreateParamsIgnoreUnionTypedDict = TypeAliasType(
-    "ChatCompletionCreateParamsIgnoreUnionTypedDict",
-    Union[ChatCompletionCreateParamsIgnoreEnum, str],
-)
+Prompt = TypeAliasType("Prompt", Union[float, str, Any])
 
 
-ChatCompletionCreateParamsIgnoreUnion = TypeAliasType(
-    "ChatCompletionCreateParamsIgnoreUnion",
-    Union[ChatCompletionCreateParamsIgnoreEnum, str],
-)
+CompletionTypedDict = TypeAliasType("CompletionTypedDict", Union[float, str, Any])
 
 
-class ChatCompletionCreateParamsQuantization(str, Enum):
-    INT4 = "int4"
-    INT8 = "int8"
-    FP4 = "fp4"
-    FP6 = "fp6"
-    FP8 = "fp8"
-    FP16 = "fp16"
-    BF16 = "bf16"
-    FP32 = "fp32"
-    UNKNOWN = "unknown"
+Completion = TypeAliasType("Completion", Union[float, str, Any])
 
 
-class ChatCompletionCreateParamsSort(str, Enum):
-    r"""The sorting strategy to use for this request, if \"order\" is not specified. When set, no load balancing is performed."""
-
-    PRICE = "price"
-    THROUGHPUT = "throughput"
-    LATENCY = "latency"
+ImageTypedDict = TypeAliasType("ImageTypedDict", Union[float, str, Any])
 
 
-ChatCompletionCreateParamsPromptTypedDict = TypeAliasType(
-    "ChatCompletionCreateParamsPromptTypedDict", Union[float, str, Any]
-)
+Image = TypeAliasType("Image", Union[float, str, Any])
 
 
-ChatCompletionCreateParamsPrompt = TypeAliasType(
-    "ChatCompletionCreateParamsPrompt", Union[float, str, Any]
-)
+AudioTypedDict = TypeAliasType("AudioTypedDict", Union[float, str, Any])
 
 
-ChatCompletionCreateParamsCompletionTypedDict = TypeAliasType(
-    "ChatCompletionCreateParamsCompletionTypedDict", Union[float, str, Any]
-)
+Audio = TypeAliasType("Audio", Union[float, str, Any])
 
 
-ChatCompletionCreateParamsCompletion = TypeAliasType(
-    "ChatCompletionCreateParamsCompletion", Union[float, str, Any]
-)
+RequestTypedDict = TypeAliasType("RequestTypedDict", Union[float, str, Any])
 
 
-ChatCompletionCreateParamsImageTypedDict = TypeAliasType(
-    "ChatCompletionCreateParamsImageTypedDict", Union[float, str, Any]
-)
+Request = TypeAliasType("Request", Union[float, str, Any])
 
 
-ChatCompletionCreateParamsImage = TypeAliasType(
-    "ChatCompletionCreateParamsImage", Union[float, str, Any]
-)
-
-
-ChatCompletionCreateParamsAudioTypedDict = TypeAliasType(
-    "ChatCompletionCreateParamsAudioTypedDict", Union[float, str, Any]
-)
-
-
-ChatCompletionCreateParamsAudio = TypeAliasType(
-    "ChatCompletionCreateParamsAudio", Union[float, str, Any]
-)
-
-
-ChatCompletionCreateParamsRequestTypedDict = TypeAliasType(
-    "ChatCompletionCreateParamsRequestTypedDict", Union[float, str, Any]
-)
-
-
-ChatCompletionCreateParamsRequest = TypeAliasType(
-    "ChatCompletionCreateParamsRequest", Union[float, str, Any]
-)
-
-
-class ChatCompletionCreateParamsMaxPriceTypedDict(TypedDict):
+class MaxPriceTypedDict(TypedDict):
     r"""The object specifying the maximum price you want to pay for this request. USD price per million tokens, for prompt and completion."""
 
-    prompt: NotRequired[ChatCompletionCreateParamsPromptTypedDict]
-    completion: NotRequired[ChatCompletionCreateParamsCompletionTypedDict]
-    image: NotRequired[ChatCompletionCreateParamsImageTypedDict]
-    audio: NotRequired[ChatCompletionCreateParamsAudioTypedDict]
-    request: NotRequired[ChatCompletionCreateParamsRequestTypedDict]
+    prompt: NotRequired[PromptTypedDict]
+    completion: NotRequired[CompletionTypedDict]
+    image: NotRequired[ImageTypedDict]
+    audio: NotRequired[AudioTypedDict]
+    request: NotRequired[RequestTypedDict]
 
 
-class ChatCompletionCreateParamsMaxPrice(BaseModel):
+class MaxPrice(BaseModel):
     r"""The object specifying the maximum price you want to pay for this request. USD price per million tokens, for prompt and completion."""
 
-    prompt: Optional[ChatCompletionCreateParamsPrompt] = None
+    prompt: Optional[Prompt] = None
 
-    completion: Optional[ChatCompletionCreateParamsCompletion] = None
+    completion: Optional[Completion] = None
 
-    image: Optional[ChatCompletionCreateParamsImage] = None
+    image: Optional[Image] = None
 
-    audio: Optional[ChatCompletionCreateParamsAudio] = None
+    audio: Optional[Audio] = None
 
-    request: Optional[ChatCompletionCreateParamsRequest] = None
+    request: Optional[Request] = None
 
 
-class ChatCompletionCreateParamsProviderTypedDict(TypedDict):
+class ProviderTypedDict(TypedDict):
     r"""When multiple model providers are available, optionally indicate your routing preference."""
 
     allow_fallbacks: NotRequired[Nullable[bool]]
@@ -695,27 +619,27 @@ class ChatCompletionCreateParamsProviderTypedDict(TypedDict):
     """
     require_parameters: NotRequired[Nullable[bool]]
     r"""Whether to filter providers to only those that support the parameters you've provided. If this setting is omitted or set to false, then providers will receive only the parameters they support, and ignore the rest."""
-    data_collection: NotRequired[Nullable[ChatCompletionCreateParamsDataCollection]]
+    data_collection: NotRequired[Nullable[DataCollection]]
     r"""Data collection setting. If no available model provider meets the requirement, your request will return an error.
     - allow: (default) allow providers which store user data non-transiently and may train on it
     - deny: use only providers which do not collect user data.
 
     """
-    order: NotRequired[Nullable[List[ChatCompletionCreateParamsOrderUnionTypedDict]]]
+    order: NotRequired[Nullable[List[OrderTypedDict]]]
     r"""An ordered list of provider slugs. The router will attempt to use the first provider in the subset of this list that supports your requested model, and fall back to the next if it is unavailable. If no providers are available, the request will fail with an error message."""
-    only: NotRequired[Nullable[List[ChatCompletionCreateParamsOnlyUnionTypedDict]]]
+    only: NotRequired[Nullable[List[OnlyTypedDict]]]
     r"""List of provider slugs to allow. If provided, this list is merged with your account-wide allowed provider settings for this request."""
-    ignore: NotRequired[Nullable[List[ChatCompletionCreateParamsIgnoreUnionTypedDict]]]
+    ignore: NotRequired[Nullable[List[IgnoreTypedDict]]]
     r"""List of provider slugs to ignore. If provided, this list is merged with your account-wide ignored provider settings for this request."""
-    quantizations: NotRequired[Nullable[List[ChatCompletionCreateParamsQuantization]]]
+    quantizations: NotRequired[Nullable[List[Quantization]]]
     r"""A list of quantization levels to filter the provider by."""
-    sort: NotRequired[Nullable[ChatCompletionCreateParamsSort]]
+    sort: NotRequired[Nullable[Sort]]
     r"""The sorting strategy to use for this request, if \"order\" is not specified. When set, no load balancing is performed."""
-    max_price: NotRequired[ChatCompletionCreateParamsMaxPriceTypedDict]
+    max_price: NotRequired[MaxPriceTypedDict]
     r"""The object specifying the maximum price you want to pay for this request. USD price per million tokens, for prompt and completion."""
 
 
-class ChatCompletionCreateParamsProvider(BaseModel):
+class Provider(BaseModel):
     r"""When multiple model providers are available, optionally indicate your routing preference."""
 
     allow_fallbacks: OptionalNullable[bool] = UNSET
@@ -728,31 +652,29 @@ class ChatCompletionCreateParamsProvider(BaseModel):
     require_parameters: OptionalNullable[bool] = UNSET
     r"""Whether to filter providers to only those that support the parameters you've provided. If this setting is omitted or set to false, then providers will receive only the parameters they support, and ignore the rest."""
 
-    data_collection: OptionalNullable[ChatCompletionCreateParamsDataCollection] = UNSET
+    data_collection: OptionalNullable[DataCollection] = UNSET
     r"""Data collection setting. If no available model provider meets the requirement, your request will return an error.
     - allow: (default) allow providers which store user data non-transiently and may train on it
     - deny: use only providers which do not collect user data.
 
     """
 
-    order: OptionalNullable[List[ChatCompletionCreateParamsOrderUnion]] = UNSET
+    order: OptionalNullable[List[Order]] = UNSET
     r"""An ordered list of provider slugs. The router will attempt to use the first provider in the subset of this list that supports your requested model, and fall back to the next if it is unavailable. If no providers are available, the request will fail with an error message."""
 
-    only: OptionalNullable[List[ChatCompletionCreateParamsOnlyUnion]] = UNSET
+    only: OptionalNullable[List[Only]] = UNSET
     r"""List of provider slugs to allow. If provided, this list is merged with your account-wide allowed provider settings for this request."""
 
-    ignore: OptionalNullable[List[ChatCompletionCreateParamsIgnoreUnion]] = UNSET
+    ignore: OptionalNullable[List[Ignore]] = UNSET
     r"""List of provider slugs to ignore. If provided, this list is merged with your account-wide ignored provider settings for this request."""
 
-    quantizations: OptionalNullable[List[ChatCompletionCreateParamsQuantization]] = (
-        UNSET
-    )
+    quantizations: OptionalNullable[List[Quantization]] = UNSET
     r"""A list of quantization levels to filter the provider by."""
 
-    sort: OptionalNullable[ChatCompletionCreateParamsSort] = UNSET
+    sort: OptionalNullable[Sort] = UNSET
     r"""The sorting strategy to use for this request, if \"order\" is not specified. When set, no load balancing is performed."""
 
-    max_price: Optional[ChatCompletionCreateParamsMaxPrice] = None
+    max_price: Optional[MaxPrice] = None
     r"""The object specifying the maximum price you want to pay for this request. USD price per million tokens, for prompt and completion."""
 
     @model_serializer(mode="wrap")
@@ -805,107 +727,90 @@ class ChatCompletionCreateParamsProvider(BaseModel):
         return m
 
 
-class ChatCompletionCreateParamsIDFileParser(str, Enum):
-    FILE_PARSER = "file-parser"
+IDFileParser = Literal["file-parser"]
+
+PdfEngine = Literal["mistral-ocr", "pdf-text", "native"]
 
 
-class ChatCompletionCreateParamsPdfEngine(str, Enum):
-    MISTRAL_OCR = "mistral-ocr"
-    PDF_TEXT = "pdf-text"
-    NATIVE = "native"
+class PdfTypedDict(TypedDict):
+    engine: NotRequired[PdfEngine]
 
 
-class ChatCompletionCreateParamsPdfTypedDict(TypedDict):
-    engine: NotRequired[ChatCompletionCreateParamsPdfEngine]
+class Pdf(BaseModel):
+    engine: Optional[PdfEngine] = None
 
 
-class ChatCompletionCreateParamsPdf(BaseModel):
-    engine: Optional[ChatCompletionCreateParamsPdfEngine] = None
-
-
-class ChatCompletionCreateParamsPluginFileParserTypedDict(TypedDict):
-    id: ChatCompletionCreateParamsIDFileParser
+class PluginFileParserTypedDict(TypedDict):
+    id: IDFileParser
     max_files: NotRequired[float]
-    pdf: NotRequired[ChatCompletionCreateParamsPdfTypedDict]
+    pdf: NotRequired[PdfTypedDict]
 
 
-class ChatCompletionCreateParamsPluginFileParser(BaseModel):
-    id: ChatCompletionCreateParamsIDFileParser
+class PluginFileParser(BaseModel):
+    id: IDFileParser
 
     max_files: Optional[float] = None
 
-    pdf: Optional[ChatCompletionCreateParamsPdf] = None
+    pdf: Optional[Pdf] = None
 
 
-class ChatCompletionCreateParamsIDChainOfThought(str, Enum):
-    CHAIN_OF_THOUGHT = "chain-of-thought"
+IDChainOfThought = Literal["chain-of-thought"]
 
 
-class ChatCompletionCreateParamsPluginChainOfThoughtTypedDict(TypedDict):
-    id: ChatCompletionCreateParamsIDChainOfThought
+class PluginChainOfThoughtTypedDict(TypedDict):
+    id: IDChainOfThought
 
 
-class ChatCompletionCreateParamsPluginChainOfThought(BaseModel):
-    id: ChatCompletionCreateParamsIDChainOfThought
+class PluginChainOfThought(BaseModel):
+    id: IDChainOfThought
 
 
-class ChatCompletionCreateParamsIDWeb(str, Enum):
-    WEB = "web"
+IDWeb = Literal["web"]
+
+Engine = Literal["native", "exa"]
 
 
-class ChatCompletionCreateParamsEngine(str, Enum):
-    NATIVE = "native"
-    EXA = "exa"
-
-
-class ChatCompletionCreateParamsPluginWebTypedDict(TypedDict):
-    id: ChatCompletionCreateParamsIDWeb
+class PluginWebTypedDict(TypedDict):
+    id: IDWeb
     max_results: NotRequired[float]
     search_prompt: NotRequired[str]
-    engine: NotRequired[ChatCompletionCreateParamsEngine]
+    engine: NotRequired[Engine]
 
 
-class ChatCompletionCreateParamsPluginWeb(BaseModel):
-    id: ChatCompletionCreateParamsIDWeb
+class PluginWeb(BaseModel):
+    id: IDWeb
 
     max_results: Optional[float] = None
 
     search_prompt: Optional[str] = None
 
-    engine: Optional[ChatCompletionCreateParamsEngine] = None
+    engine: Optional[Engine] = None
 
 
-class ChatCompletionCreateParamsIDModeration(str, Enum):
-    MODERATION = "moderation"
+IDModeration = Literal["moderation"]
 
 
-class ChatCompletionCreateParamsPluginModerationTypedDict(TypedDict):
-    id: ChatCompletionCreateParamsIDModeration
+class PluginModerationTypedDict(TypedDict):
+    id: IDModeration
 
 
-class ChatCompletionCreateParamsPluginModeration(BaseModel):
-    id: ChatCompletionCreateParamsIDModeration
+class PluginModeration(BaseModel):
+    id: IDModeration
 
 
-ChatCompletionCreateParamsPluginUnionTypedDict = TypeAliasType(
-    "ChatCompletionCreateParamsPluginUnionTypedDict",
+PluginTypedDict = TypeAliasType(
+    "PluginTypedDict",
     Union[
-        ChatCompletionCreateParamsPluginModerationTypedDict,
-        ChatCompletionCreateParamsPluginChainOfThoughtTypedDict,
-        ChatCompletionCreateParamsPluginFileParserTypedDict,
-        ChatCompletionCreateParamsPluginWebTypedDict,
+        PluginModerationTypedDict,
+        PluginChainOfThoughtTypedDict,
+        PluginFileParserTypedDict,
+        PluginWebTypedDict,
     ],
 )
 
 
-ChatCompletionCreateParamsPluginUnion = TypeAliasType(
-    "ChatCompletionCreateParamsPluginUnion",
-    Union[
-        ChatCompletionCreateParamsPluginModeration,
-        ChatCompletionCreateParamsPluginChainOfThought,
-        ChatCompletionCreateParamsPluginFileParser,
-        ChatCompletionCreateParamsPluginWeb,
-    ],
+Plugin = TypeAliasType(
+    "Plugin", Union[PluginModeration, PluginChainOfThought, PluginFileParser, PluginWeb]
 )
 
 
@@ -932,19 +837,17 @@ class ChatCompletionCreateParamsTypedDict(TypedDict):
     r"""Key-value pairs for additional object information (max 16 pairs, 64 char keys, 512 char values)"""
     presence_penalty: NotRequired[Nullable[float]]
     r"""Presence penalty (-2.0 to 2.0)"""
-    reasoning: NotRequired[Nullable[ChatCompletionCreateParamsReasoningTypedDict]]
+    reasoning: NotRequired[Nullable[ReasoningTypedDict]]
     r"""Reasoning configuration"""
-    response_format: NotRequired[ChatCompletionCreateParamsResponseFormatUnionTypedDict]
+    response_format: NotRequired[ResponseFormatTypedDict]
     r"""Response format configuration"""
     seed: NotRequired[Nullable[int]]
     r"""Random seed for deterministic outputs"""
-    stop: NotRequired[Nullable[ChatCompletionCreateParamsStopTypedDict]]
+    stop: NotRequired[Nullable[StopTypedDict]]
     r"""Stop sequences (up to 4)"""
     stream: NotRequired[Nullable[bool]]
     r"""Enable streaming response"""
-    stream_options: NotRequired[
-        Nullable[ChatCompletionCreateParamsStreamOptionsTypedDict]
-    ]
+    stream_options: NotRequired[Nullable[StreamOptionsTypedDict]]
     temperature: NotRequired[Nullable[float]]
     r"""Sampling temperature (0-2)"""
     tool_choice: NotRequired[ChatCompletionToolChoiceOptionTypedDict]
@@ -955,13 +858,13 @@ class ChatCompletionCreateParamsTypedDict(TypedDict):
     r"""Nucleus sampling parameter (0-1)"""
     user: NotRequired[str]
     r"""Unique user identifier"""
-    models_llm: NotRequired[Nullable[List[str]]]
+    model_list: NotRequired[Nullable[List[str]]]
     r"""Order of models to fallback to for this request"""
-    reasoning_effort: NotRequired[Nullable[ChatCompletionCreateParamsReasoningEffort]]
+    reasoning_effort: NotRequired[Nullable[ReasoningEffort]]
     r"""Reasoning effort"""
-    provider: NotRequired[Nullable[ChatCompletionCreateParamsProviderTypedDict]]
+    provider: NotRequired[Nullable[ProviderTypedDict]]
     r"""When multiple model providers are available, optionally indicate your routing preference."""
-    plugins: NotRequired[List[ChatCompletionCreateParamsPluginUnionTypedDict]]
+    plugins: NotRequired[List[PluginTypedDict]]
     r"""Plugins you want to enable for this request, including their settings."""
 
 
@@ -998,22 +901,22 @@ class ChatCompletionCreateParams(BaseModel):
     presence_penalty: OptionalNullable[float] = UNSET
     r"""Presence penalty (-2.0 to 2.0)"""
 
-    reasoning: OptionalNullable[ChatCompletionCreateParamsReasoning] = UNSET
+    reasoning: OptionalNullable[Reasoning] = UNSET
     r"""Reasoning configuration"""
 
-    response_format: Optional[ChatCompletionCreateParamsResponseFormatUnion] = None
+    response_format: Optional[ResponseFormat] = None
     r"""Response format configuration"""
 
     seed: OptionalNullable[int] = UNSET
     r"""Random seed for deterministic outputs"""
 
-    stop: OptionalNullable[ChatCompletionCreateParamsStop] = UNSET
+    stop: OptionalNullable[Stop] = UNSET
     r"""Stop sequences (up to 4)"""
 
     stream: OptionalNullable[bool] = False
     r"""Enable streaming response"""
 
-    stream_options: OptionalNullable[ChatCompletionCreateParamsStreamOptions] = UNSET
+    stream_options: OptionalNullable[StreamOptions] = UNSET
 
     temperature: OptionalNullable[float] = 1
     r"""Sampling temperature (0-2)"""
@@ -1030,20 +933,18 @@ class ChatCompletionCreateParams(BaseModel):
     user: Optional[str] = None
     r"""Unique user identifier"""
 
-    models_llm: Annotated[
+    model_list: Annotated[
         OptionalNullable[List[str]], pydantic.Field(alias="models")
     ] = UNSET
     r"""Order of models to fallback to for this request"""
 
-    reasoning_effort: OptionalNullable[ChatCompletionCreateParamsReasoningEffort] = (
-        UNSET
-    )
+    reasoning_effort: OptionalNullable[ReasoningEffort] = UNSET
     r"""Reasoning effort"""
 
-    provider: OptionalNullable[ChatCompletionCreateParamsProvider] = UNSET
+    provider: OptionalNullable[Provider] = UNSET
     r"""When multiple model providers are available, optionally indicate your routing preference."""
 
-    plugins: Optional[List[ChatCompletionCreateParamsPluginUnion]] = None
+    plugins: Optional[List[Plugin]] = None
     r"""Plugins you want to enable for this request, including their settings."""
 
     @model_serializer(mode="wrap")
@@ -1069,7 +970,7 @@ class ChatCompletionCreateParams(BaseModel):
             "tools",
             "top_p",
             "user",
-            "models_llm",
+            "model_list",
             "reasoning_effort",
             "provider",
             "plugins",
@@ -1089,7 +990,7 @@ class ChatCompletionCreateParams(BaseModel):
             "stream_options",
             "temperature",
             "top_p",
-            "models_llm",
+            "model_list",
             "reasoning_effort",
             "provider",
         ]

@@ -17,7 +17,7 @@ servers:
         default: openrouter.ai
     description: Production server
 security:
-  - BearerAuth: []
+  - ApiKey: []
 tags:
   - name: Chat
     description: Chat completion operations
@@ -26,11 +26,17 @@ externalDocs:
   url: https://openrouter.ai/docs
 components:
   securitySchemes:
-    BearerAuth:
+    ApiKey:
       type: http
       scheme: bearer
       description: API key as bearer token in Authorization header
   schemas:
+    ChatCompletionChunkWrapper:
+      type: object
+      required: [data]
+      properties:
+        data:
+          $ref: '#/components/schemas/ChatCompletionChunk'
     ChatCompletionMessageToolCall:
       type: object
       properties:
@@ -433,6 +439,7 @@ components:
         system_fingerprint:
           type: string
           description: System fingerprint
+          nullable: true
         usage:
           $ref: '#/components/schemas/CompletionUsage'
       required:
@@ -449,7 +456,7 @@ components:
           type: object
           properties:
             code:
-              type: string
+              type: number
               nullable: true
             message:
               type: string
@@ -461,8 +468,6 @@ components:
           required:
             - code
             - message
-            - param
-            - type
           description: Error object structure
       required:
         - error
@@ -572,6 +577,7 @@ components:
             - chat.completion.chunk
         system_fingerprint:
           type: string
+          nullable: true
         usage:
           $ref: '#/components/schemas/CompletionUsage'
       required:
@@ -1055,7 +1061,7 @@ components:
           type: string
           description: Unique user identifier
         models:
-          x-speakeasy-name-override: models_llm
+          x-speakeasy-name-override: model_list
           type: array
           nullable: true
           items:
@@ -1497,6 +1503,8 @@ paths:
   /chat/completions:
     post:
       operationId: createChatCompletion
+      x-speakeasy-group: chat
+      x-speakeasy-name-override: complete
       summary: Create a chat completion
       description: Creates a model response for the given chat conversation. Supports both streaming and non-streaming modes.
       tags:
@@ -1514,14 +1522,12 @@ paths:
           content:
             application/json:
               schema:
-                oneOf:
-                  - $ref: '#/components/schemas/ChatCompletion'
-                    description: Non-streaming response when stream=false
-                  - $ref: '#/components/schemas/ChatCompletionChunk'
-                    description: Individual chunk in streaming response when stream=true
+                $ref: '#/components/schemas/ChatCompletion'
+                description: Non-streaming response when stream=false
             text/event-stream:
+              x-speakeasy-sse-sentinel: '[DONE]'
               schema:
-                $ref: '#/components/schemas/ChatCompletionChunk'
+                $ref: '#/components/schemas/ChatCompletionChunkWrapper'
         '400':
           description: Bad request - invalid parameters
           content:

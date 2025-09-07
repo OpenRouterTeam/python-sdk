@@ -10,6 +10,7 @@ import importlib
 from openrouter import models, utils
 from openrouter._hooks import SDKHooks
 from openrouter.types import OptionalNullable, UNSET
+import sys
 from typing import Any, Callable, Dict, List, Optional, TYPE_CHECKING, Union, cast
 import weakref
 
@@ -23,14 +24,13 @@ class OpenRouter(BaseSDK):
     """
 
     chat: "Chat"
-    r"""Chat completion operations"""
     _sub_sdk_map = {
         "chat": ("openrouter.chat", "Chat"),
     }
 
     def __init__(
         self,
-        bearer_auth: Optional[Union[Optional[str], Callable[[], Optional[str]]]] = None,
+        api_key: Optional[Union[Optional[str], Callable[[], Optional[str]]]] = None,
         provider_url: Optional[str] = None,
         server_idx: Optional[int] = None,
         server_url: Optional[str] = None,
@@ -43,7 +43,7 @@ class OpenRouter(BaseSDK):
     ) -> None:
         r"""Instantiates the SDK configuring it with the provided parameters.
 
-        :param bearer_auth: The bearer_auth required for authentication
+        :param api_key: The api_key required for authentication
         :param provider_url: Allows setting the provider_url variable for url substitution
         :param server_idx: The index of the server to use for all methods
         :param server_url: The server URL to use for all methods
@@ -75,11 +75,11 @@ class OpenRouter(BaseSDK):
         ), "The provided async_client must implement the AsyncHttpClient protocol."
 
         security: Any = None
-        if callable(bearer_auth):
+        if callable(api_key):
             # pylint: disable=unnecessary-lambda-assignment
-            security = lambda: models.Security(bearer_auth=bearer_auth())
+            security = lambda: models.Security(api_key=api_key())
         else:
-            security = models.Security(bearer_auth=bearer_auth)
+            security = models.Security(api_key=api_key)
 
         if server_url is not None:
             if url_params is not None:
@@ -105,6 +105,7 @@ class OpenRouter(BaseSDK):
                 timeout_ms=timeout_ms,
                 debug_logger=debug_logger,
             ),
+            parent_ref=self,
         )
 
         hooks = SDKHooks()
@@ -124,13 +125,24 @@ class OpenRouter(BaseSDK):
             self.sdk_configuration.async_client_supplied,
         )
 
+    def dynamic_import(self, modname, retries=3):
+        for attempt in range(retries):
+            try:
+                return importlib.import_module(modname)
+            except KeyError:
+                # Clear any half-initialized module and retry
+                sys.modules.pop(modname, None)
+                if attempt == retries - 1:
+                    break
+        raise KeyError(f"Failed to import module '{modname}' after {retries} attempts")
+
     def __getattr__(self, name: str):
         if name in self._sub_sdk_map:
             module_path, class_name = self._sub_sdk_map[name]
             try:
-                module = importlib.import_module(module_path)
+                module = self.dynamic_import(module_path)
                 klass = getattr(module, class_name)
-                instance = klass(self.sdk_configuration)
+                instance = klass(self.sdk_configuration, parent_ref=self)
                 setattr(self, name, instance)
                 return instance
             except ImportError as e:
