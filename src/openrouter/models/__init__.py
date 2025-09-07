@@ -46,10 +46,6 @@ if TYPE_CHECKING:
         ChatCompletionChunkChoiceDeltaToolCallType,
         ChatCompletionChunkChoiceDeltaToolCallTypedDict,
     )
-    from .chatcompletionchunkwrapper import (
-        ChatCompletionChunkWrapper,
-        ChatCompletionChunkWrapperTypedDict,
-    )
     from .chatcompletioncontentpart import (
         ChatCompletionContentPart,
         ChatCompletionContentPartTypedDict,
@@ -304,10 +300,6 @@ if TYPE_CHECKING:
         PromptTokensDetails,
         PromptTokensDetailsTypedDict,
     )
-    from .createchatcompletionop import (
-        CreateChatCompletionResponse,
-        CreateChatCompletionResponseTypedDict,
-    )
     from .fileannotationdetail import (
         ContentImageURL,
         ContentImageURLTypedDict,
@@ -387,8 +379,6 @@ __all__ = [
     "ChatCompletionChunkChoiceTypedDict",
     "ChatCompletionChunkObject",
     "ChatCompletionChunkTypedDict",
-    "ChatCompletionChunkWrapper",
-    "ChatCompletionChunkWrapperTypedDict",
     "ChatCompletionContentPart",
     "ChatCompletionContentPartAudio",
     "ChatCompletionContentPartAudioFormat",
@@ -605,8 +595,6 @@ __all__ = [
     "ContentTextTypedDict",
     "ContentTypeImageURL",
     "ContentTypeText",
-    "CreateChatCompletionResponse",
-    "CreateChatCompletionResponseTypedDict",
     "Detail",
     "Error",
     "ErrorTypedDict",
@@ -682,8 +670,6 @@ _dynamic_imports: dict[str, str] = {
     "ChatCompletionChunkChoiceDeltaToolCallFunctionTypedDict": ".chatcompletionchunkchoicedeltatoolcall",
     "ChatCompletionChunkChoiceDeltaToolCallType": ".chatcompletionchunkchoicedeltatoolcall",
     "ChatCompletionChunkChoiceDeltaToolCallTypedDict": ".chatcompletionchunkchoicedeltatoolcall",
-    "ChatCompletionChunkWrapper": ".chatcompletionchunkwrapper",
-    "ChatCompletionChunkWrapperTypedDict": ".chatcompletionchunkwrapper",
     "ChatCompletionContentPart": ".chatcompletioncontentpart",
     "ChatCompletionContentPartTypedDict": ".chatcompletioncontentpart",
     "ChatCompletionContentPartAudio": ".chatcompletioncontentpartaudio",
@@ -903,8 +889,6 @@ _dynamic_imports: dict[str, str] = {
     "CompletionUsageTypedDict": ".completionusage",
     "PromptTokensDetails": ".completionusage",
     "PromptTokensDetailsTypedDict": ".completionusage",
-    "CreateChatCompletionResponse": ".createchatcompletionop",
-    "CreateChatCompletionResponseTypedDict": ".createchatcompletionop",
     "ContentImageURL": ".fileannotationdetail",
     "ContentImageURLTypedDict": ".fileannotationdetail",
     "ContentText": ".fileannotationdetail",

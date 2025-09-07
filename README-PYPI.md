@@ -140,10 +140,8 @@ with OpenRouter(
         },
     ], stream=False, temperature=1, top_p=1)
 
-    with res as event_stream:
-        for event in event_stream:
-            # handle event
-            print(event, flush=True)
+    # Handle response
+    print(res)
 ```
 
 </br>
@@ -168,10 +166,8 @@ async def main():
             },
         ], stream=False, temperature=1, top_p=1)
 
-        async with res as event_stream:
-            async for event in event_stream:
-                # handle event
-                print(event, flush=True)
+        # Handle response
+        print(res)
 
 asyncio.run(main())
 ```
@@ -205,10 +201,8 @@ with OpenRouter(
         },
     ], stream=False, temperature=1, top_p=1)
 
-    with res as event_stream:
-        for event in event_stream:
-            # handle event
-            print(event, flush=True)
+    # Handle response
+    print(res)
 
 ```
 <!-- End Authentication [security] -->
@@ -249,7 +243,7 @@ with OpenRouter(
     api_key=os.getenv("OPENROUTER_API_KEY", ""),
 ) as open_router:
 
-    res = open_router.chat.complete(messages=[
+    res = open_router.chat.complete_stream(messages=[
         {
             "role": "user",
             "content": "Hello, how are you?",
@@ -292,10 +286,8 @@ with OpenRouter(
     ], stream=False, temperature=1, top_p=1,
         RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False))
 
-    with res as event_stream:
-        for event in event_stream:
-            # handle event
-            print(event, flush=True)
+    # Handle response
+    print(res)
 
 ```
 
@@ -318,10 +310,8 @@ with OpenRouter(
         },
     ], stream=False, temperature=1, top_p=1)
 
-    with res as event_stream:
-        for event in event_stream:
-            # handle event
-            print(event, flush=True)
+    # Handle response
+    print(res)
 
 ```
 <!-- End Retries [retries] -->
@@ -359,10 +349,8 @@ with OpenRouter(
             },
         ], stream=False, temperature=1, top_p=1)
 
-        with res as event_stream:
-            for event in event_stream:
-                # handle event
-                print(event, flush=True)
+        # Handle response
+        print(res)
 
 
     except errors.OpenRouterError as e:
@@ -429,10 +417,8 @@ with OpenRouter(
         },
     ], stream=False, temperature=1, top_p=1)
 
-    with res as event_stream:
-        for event in event_stream:
-            # handle event
-            print(event, flush=True)
+    # Handle response
+    print(res)
 
 ```
 
@@ -456,10 +442,8 @@ with OpenRouter(
         },
     ], stream=False, temperature=1, top_p=1)
 
-    with res as event_stream:
-        for event in event_stream:
-            # handle event
-            print(event, flush=True)
+    # Handle response
+    print(res)
 
 ```
 <!-- End Server Selection [server] -->

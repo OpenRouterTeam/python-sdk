@@ -1,17 +1,16 @@
 lockVersion: 2.0.0
 id: 232c6d4f-b0fd-4172-8f1b-e2421566e9b4
 management:
-  docChecksum: f7eafe8edffbaf9ef5bb835b345c5a9e
+  docChecksum: 15ebbb27870a24f8f19c47eecc775af8
   docVersion: 1.0.0
   speakeasyVersion: 1.611.1
   generationVersion: 2.694.1
-  releaseVersion: 0.4.1
-  configChecksum: 613707bdc6463db5dce971bc9cb430bb
+  releaseVersion: 0.5.1
+  configChecksum: 568679387340b2a17402ed3f9ffbf851
   repoURL: https://github.com/speakeasy-sdks/openrouter-python-sdk.git
   installationURL: https://github.com/speakeasy-sdks/openrouter-python-sdk.git
 features:
   python:
-    acceptHeaders: 3.0.0
     additionalDependencies: 1.0.0
     constsAndDefaults: 1.0.5
     core: 5.20.3
@@ -58,7 +57,6 @@ generatedFiles:
   - docs/models/chatcompletionchunkchoicedeltatoolcalltype.md
   - docs/models/chatcompletionchunkchoicefinishreason.md
   - docs/models/chatcompletionchunkobject.md
-  - docs/models/chatcompletionchunkwrapper.md
   - docs/models/chatcompletioncontentpart.md
   - docs/models/chatcompletioncontentpartaudio.md
   - docs/models/chatcompletioncontentpartaudioformat.md
@@ -194,7 +192,6 @@ generatedFiles:
   - docs/models/contenttext.md
   - docs/models/contenttypeimageurl.md
   - docs/models/contenttypetext.md
-  - docs/models/createchatcompletionresponse.md
   - docs/models/detail.md
   - docs/models/error.md
   - docs/models/file.md
@@ -253,7 +250,6 @@ generatedFiles:
   - src/openrouter/models/chatcompletionchunkchoice.py
   - src/openrouter/models/chatcompletionchunkchoicedelta.py
   - src/openrouter/models/chatcompletionchunkchoicedeltatoolcall.py
-  - src/openrouter/models/chatcompletionchunkwrapper.py
   - src/openrouter/models/chatcompletioncontentpart.py
   - src/openrouter/models/chatcompletioncontentpartaudio.py
   - src/openrouter/models/chatcompletioncontentpartimage.py
@@ -273,7 +269,6 @@ generatedFiles:
   - src/openrouter/models/chatcompletionusermessageparam.py
   - src/openrouter/models/chatstreamcompletioncreateparams.py
   - src/openrouter/models/completionusage.py
-  - src/openrouter/models/createchatcompletionop.py
   - src/openrouter/models/fileannotationdetail.py
   - src/openrouter/models/reasoningdetail.py
   - src/openrouter/models/reasoningdetailencrypted.py

@@ -16,10 +16,8 @@ with OpenRouter(
         },
     ], stream=False, temperature=1, top_p=1)
 
-    with res as event_stream:
-        for event in event_stream:
-            # handle event
-            print(event, flush=True)
+    # Handle response
+    print(res)
 ```
 
 </br>
@@ -44,10 +42,8 @@ async def main():
             },
         ], stream=False, temperature=1, top_p=1)
 
-        async with res as event_stream:
-            async for event in event_stream:
-                # handle event
-                print(event, flush=True)
+        # Handle response
+        print(res)
 
 asyncio.run(main())
 ```
