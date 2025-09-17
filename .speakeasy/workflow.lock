@@ -1,19 +1,20 @@
-speakeasyVersion: 1.612.0
+speakeasyVersion: 1.617.1
 sources:
     OpenRouter Chat Completions API:
         sourceNamespace: open-router-chat-completions-api
-        sourceRevisionDigest: sha256:30b19a8759608792fb4d27f6bf28d5982d7e2a8cf5b3faf34ba3507a62f9f106
-        sourceBlobDigest: sha256:454f1b880a0882a70f78eacccb2c33e3d9d19134a0738b0e21487984a7bf2e63
+        sourceRevisionDigest: sha256:a7746404e672bbb6dcd8354532d0c627d24522844c39d58011d4cd9c7e8ebd20
+        sourceBlobDigest: sha256:67c793fef9c039a2c351fc6ba7ed9a6119059023fe3fbd1022645d7494c2c63c
         tags:
             - latest
-            - speakeasy-sdk-regen-1755878373
             - 1.0.0
 targets:
     open-router:
         source: OpenRouter Chat Completions API
         sourceNamespace: open-router-chat-completions-api
-        sourceRevisionDigest: sha256:30b19a8759608792fb4d27f6bf28d5982d7e2a8cf5b3faf34ba3507a62f9f106
-        sourceBlobDigest: sha256:454f1b880a0882a70f78eacccb2c33e3d9d19134a0738b0e21487984a7bf2e63
+        sourceRevisionDigest: sha256:a7746404e672bbb6dcd8354532d0c627d24522844c39d58011d4cd9c7e8ebd20
+        sourceBlobDigest: sha256:67c793fef9c039a2c351fc6ba7ed9a6119059023fe3fbd1022645d7494c2c63c
+        codeSamplesNamespace: open-router-chat-completions-api-python-code-samples
+        codeSamplesRevisionDigest: sha256:fb054934c4d0de58a48ca8cdfde7b4210f71c425fb9dfad02e8824b8a1848774
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
@@ -23,14 +24,14 @@ workflow:
                 - location: .speakeasy/in.openapi.yaml
             output: .speakeasy/out.openapi.yaml
             registry:
-                location: registry.speakeasyapi.dev/sheldon-vaughn-test/sandbox/open-router-chat-completions-api
+                location: registry.speakeasyapi.dev/openrouter/sdk/open-router-chat-completions-api
     targets:
         open-router:
             target: python
             source: OpenRouter Chat Completions API
             codeSamples:
                 registry:
-                    location: registry.speakeasyapi.dev/sheldon-vaughn-test/sandbox/open-router-chat-completions-api-python-code-samples
+                    location: registry.speakeasyapi.dev/openrouter/sdk/open-router-chat-completions-api-python-code-samples
                 labelOverride:
                     fixedValue: Python (SDK)
                 blocking: false

@@ -132,7 +132,7 @@ class Chat(BaseSDK):
         timeout_ms: Optional[int] = None,
         accept_header_override: Optional[CompleteAcceptEnum] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> eventstreaming.EventStream[models.ChatCompletionChunkWrapper]: ...
+    ) -> eventstreaming.EventStream[models.ChatCompletionChunk]: ...
 
     def complete(
         self,
@@ -334,7 +334,7 @@ class Chat(BaseSDK):
                 http_res,
                 lambda raw: utils.unmarshal_json(
                     raw, models.ChatCompletionChunkWrapper
-                ),
+                ).data,
                 sentinel="[DONE]",
                 client_ref=self,
             )
@@ -482,7 +482,7 @@ class Chat(BaseSDK):
         timeout_ms: Optional[int] = None,
         accept_header_override: Optional[CompleteAcceptEnum] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> eventstreaming.EventStreamAsync[models.ChatCompletionChunkWrapper]: ...
+    ) -> eventstreaming.EventStreamAsync[models.ChatCompletionChunk]: ...
 
     async def complete_async(
         self,
@@ -684,7 +684,7 @@ class Chat(BaseSDK):
                 http_res,
                 lambda raw: utils.unmarshal_json(
                     raw, models.ChatCompletionChunkWrapper
-                ),
+                ).data,
                 sentinel="[DONE]",
                 client_ref=self,
             )

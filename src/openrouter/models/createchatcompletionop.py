@@ -2,10 +2,7 @@
 
 from __future__ import annotations
 from .chatcompletion import ChatCompletion, ChatCompletionTypedDict
-from .chatcompletionchunkwrapper import (
-    ChatCompletionChunkWrapper,
-    ChatCompletionChunkWrapperTypedDict,
-)
+from .chatcompletionchunk import ChatCompletionChunk, ChatCompletionChunkTypedDict
 from openrouter.utils import eventstreaming
 from typing import Union
 from typing_extensions import TypeAliasType
@@ -16,8 +13,8 @@ CreateChatCompletionResponseTypedDict = TypeAliasType(
     Union[
         ChatCompletionTypedDict,
         Union[
-            eventstreaming.EventStream[ChatCompletionChunkWrapperTypedDict],
-            eventstreaming.EventStreamAsync[ChatCompletionChunkWrapperTypedDict],
+            eventstreaming.EventStream[ChatCompletionChunkTypedDict],
+            eventstreaming.EventStreamAsync[ChatCompletionChunkTypedDict],
         ],
     ],
 )
@@ -28,8 +25,8 @@ CreateChatCompletionResponse = TypeAliasType(
     Union[
         ChatCompletion,
         Union[
-            eventstreaming.EventStream[ChatCompletionChunkWrapper],
-            eventstreaming.EventStreamAsync[ChatCompletionChunkWrapper],
+            eventstreaming.EventStream[ChatCompletionChunk],
+            eventstreaming.EventStreamAsync[ChatCompletionChunk],
         ],
     ],
 )
