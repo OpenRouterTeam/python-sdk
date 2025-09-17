@@ -3,10 +3,10 @@ id: 232c6d4f-b0fd-4172-8f1b-e2421566e9b4
 management:
   docChecksum: f629b0ca18ec064975608b5eea7aebfd
   docVersion: 1.0.0
-  speakeasyVersion: 1.612.0
-  generationVersion: 2.695.0
-  releaseVersion: 0.6.2
-  configChecksum: f369a2bbdc8e34f44647641a40369e29
+  speakeasyVersion: 1.617.1
+  generationVersion: 2.701.8
+  releaseVersion: 0.6.3
+  configChecksum: c3dd5d0094a141e47c41e765753d73c6
   repoURL: https://github.com/speakeasy-sdks/openrouter-python-sdk.git
   installationURL: https://github.com/speakeasy-sdks/openrouter-python-sdk.git
 features:
@@ -14,14 +14,14 @@ features:
     acceptHeaders: 3.0.0
     additionalDependencies: 1.0.0
     constsAndDefaults: 1.0.5
-    core: 5.20.3
+    core: 5.20.4
     customCodeRegions: 0.1.1
     defaultEnabledRetries: 0.2.0
     devContainers: 3.0.0
     enumUnions: 0.1.0
     envVarSecurityUsage: 0.3.2
     flatRequests: 1.0.1
-    globalSecurity: 3.0.3
+    globalSecurity: 3.0.4
     globalSecurityCallbacks: 1.0.0
     globalSecurityFlattening: 1.0.0
     globalServerURLs: 3.1.1
@@ -32,7 +32,7 @@ features:
     responseFormat: 1.0.1
     retries: 3.0.2
     sdkHooks: 1.1.0
-    serverEvents: 1.0.8
+    serverEvents: 1.0.9
     serverEventsSentinels: 0.1.0
     unions: 3.0.4
 generatedFiles:

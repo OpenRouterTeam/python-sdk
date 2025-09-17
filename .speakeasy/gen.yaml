@@ -19,6 +19,7 @@ generation:
   auth:
     oAuth2ClientCredentialsEnabled: true
     oAuth2PasswordEnabled: true
+    hoistGlobalSecurity: true
   inferSSEOverload: true
   sdkHooksConfigAccess: true
   tests:
@@ -26,7 +27,7 @@ generation:
     generateNewTests: true
     skipResponseBodyAssertions: false
 python:
-  version: 0.6.2
+  version: 0.6.3
   additionalDependencies:
     dev: {}
     main: {}
@@ -65,4 +66,5 @@ python:
   pytestFilterWarnings: []
   pytestTimeout: 0
   responseFormat: flat
+  sseFlatResponse: false
   templateVersion: v2
