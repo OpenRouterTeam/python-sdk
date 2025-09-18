@@ -7,17 +7,20 @@ from openrouter.types import (
     OptionalNullable,
     UNSET,
     UNSET_SENTINEL,
+    UnrecognizedStr,
 )
+from openrouter.utils import validate_open_enum
 import pydantic
 from pydantic import model_serializer
-from typing import Literal, Optional
+from pydantic.functional_validators import PlainValidator
+from typing import Literal, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 ReasoningDetailSummaryType = Literal["reasoning.summary"]
 
-ReasoningDetailSummaryFormat = Literal[
-    "unknown", "openai-responses-v1", "anthropic-claude-v1"
+ReasoningDetailSummaryFormat = Union[
+    Literal["unknown", "openai-responses-v1", "anthropic-claude-v1"], UnrecognizedStr
 ]
 
 
@@ -41,7 +44,11 @@ class ReasoningDetailSummary(BaseModel):
     id: OptionalNullable[str] = UNSET
 
     format_: Annotated[
-        OptionalNullable[ReasoningDetailSummaryFormat], pydantic.Field(alias="format")
+        Annotated[
+            OptionalNullable[ReasoningDetailSummaryFormat],
+            PlainValidator(validate_open_enum(False)),
+        ],
+        pydantic.Field(alias="format"),
     ] = "anthropic-claude-v1"
 
     index: Optional[float] = None

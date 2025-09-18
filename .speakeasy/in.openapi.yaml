@@ -12,6 +12,7 @@ info:
     url: https://opensource.org/licenses/MIT
 servers:
   - url: https://{provider_url}/api/v1
+    x-speakeasy-server-id: production
     variables:
       provider_url:
         default: openrouter.ai
@@ -77,6 +78,7 @@ components:
           type: string
           nullable: true
         format:
+          x-speakeasy-unknown-values: allow
           type: string
           nullable: true
           enum:
@@ -103,6 +105,7 @@ components:
           type: string
           nullable: true
         format:
+          x-speakeasy-unknown-values: allow
           type: string
           nullable: true
           enum:
@@ -133,6 +136,7 @@ components:
           type: string
           nullable: true
         format:
+          x-speakeasy-unknown-values: allow
           type: string
           nullable: true
           enum:
@@ -351,6 +355,7 @@ components:
       type: object
       properties:
         finish_reason:
+          x-speakeasy-unknown-values: allow
           type: string
           nullable: true
           enum:
@@ -541,6 +546,7 @@ components:
         delta:
           $ref: '#/components/schemas/ChatCompletionChunkChoiceDelta'
         finish_reason:
+          x-speakeasy-unknown-values: allow
           type: string
           nullable: true
           enum:
@@ -649,6 +655,7 @@ components:
               type: string
               description: Base64 encoded audio data
             format:
+              x-speakeasy-unknown-values: allow
               type: string
               enum:
                 - wav

@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 03e733ff-14c6-48f8-87a5-37a1a4588594
 management:
-  docChecksum: f629b0ca18ec064975608b5eea7aebfd
+  docChecksum: 7849dd264d8d3676743d325682310ed7
   docVersion: 1.0.0
-  speakeasyVersion: 1.617.1
-  generationVersion: 2.701.8
+  speakeasyVersion: 1.618.1
+  generationVersion: 2.702.0
   releaseVersion: 0.1.0
-  configChecksum: ee7ed66772b5663ad6d381d1b4142fe2
+  configChecksum: 9b2fc6a03dd7103d87270af55bb29a50
 features:
   python:
     acceptHeaders: 3.0.0
@@ -27,11 +27,13 @@ features:
     methodArguments: 1.0.2
     nameOverrides: 3.0.1
     nullables: 1.0.1
+    openEnums: 1.0.1
     responseFormat: 1.0.1
     retries: 3.0.2
     sdkHooks: 1.1.0
     serverEvents: 1.0.9
     serverEventsSentinels: 0.1.0
+    serverIDs: 3.0.0
     unions: 3.0.4
 generatedFiles:
   - .devcontainer/README.md

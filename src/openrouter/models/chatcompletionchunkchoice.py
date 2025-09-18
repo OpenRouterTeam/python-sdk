@@ -15,14 +15,17 @@ from openrouter.types import (
     OptionalNullable,
     UNSET,
     UNSET_SENTINEL,
+    UnrecognizedStr,
 )
+from openrouter.utils import validate_open_enum
 from pydantic import model_serializer
-from typing import Literal
-from typing_extensions import NotRequired, TypedDict
+from pydantic.functional_validators import PlainValidator
+from typing import Literal, Union
+from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-ChatCompletionChunkChoiceFinishReason = Literal[
-    "tool_calls", "stop", "length", "content_filter", "error"
+ChatCompletionChunkChoiceFinishReason = Union[
+    Literal["tool_calls", "stop", "length", "content_filter", "error"], UnrecognizedStr
 ]
 
 
@@ -43,7 +46,10 @@ class ChatCompletionChunkChoice(BaseModel):
     delta: ChatCompletionChunkChoiceDelta
     r"""Delta changes in streaming response"""
 
-    finish_reason: Nullable[ChatCompletionChunkChoiceFinishReason]
+    finish_reason: Annotated[
+        Nullable[ChatCompletionChunkChoiceFinishReason],
+        PlainValidator(validate_open_enum(False)),
+    ]
 
     index: float
 

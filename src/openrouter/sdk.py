@@ -11,7 +11,7 @@ from openrouter import models, utils
 from openrouter._hooks import SDKHooks
 from openrouter.types import OptionalNullable, UNSET
 import sys
-from typing import Any, Callable, Dict, List, Optional, TYPE_CHECKING, Union, cast
+from typing import Any, Callable, Dict, Optional, TYPE_CHECKING, Union, cast
 import weakref
 
 if TYPE_CHECKING:
@@ -32,7 +32,7 @@ class OpenRouter(BaseSDK):
         self,
         api_key: Optional[Union[Optional[str], Callable[[], Optional[str]]]] = None,
         provider_url: Optional[str] = None,
-        server_idx: Optional[int] = None,
+        server: Optional[str] = None,
         server_url: Optional[str] = None,
         url_params: Optional[Dict[str, str]] = None,
         client: Optional[HttpClient] = None,
@@ -45,7 +45,7 @@ class OpenRouter(BaseSDK):
 
         :param api_key: The api_key required for authentication
         :param provider_url: Allows setting the provider_url variable for url substitution
-        :param server_idx: The index of the server to use for all methods
+        :param server: The server by name to use for all methods
         :param server_url: The server URL to use for all methods
         :param url_params: Parameters to optionally template the server URL with
         :param client: The HTTP client to use for all synchronous methods
@@ -84,11 +84,12 @@ class OpenRouter(BaseSDK):
         if server_url is not None:
             if url_params is not None:
                 server_url = utils.template_url(server_url, url_params)
-        server_defaults: List[Dict[str, str]] = [
-            {
+
+        server_defaults: Dict[str, Dict[str, str]] = {
+            "production": {
                 "provider_url": provider_url or "openrouter.ai",
             },
-        ]
+        }
 
         BaseSDK.__init__(
             self,
@@ -99,7 +100,7 @@ class OpenRouter(BaseSDK):
                 async_client_supplied=async_client_supplied,
                 security=security,
                 server_url=server_url,
-                server_idx=server_idx,
+                server=server,
                 server_defaults=server_defaults,
                 retry_config=retry_config,
                 timeout_ms=timeout_ms,

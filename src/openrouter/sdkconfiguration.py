@@ -12,13 +12,14 @@ from dataclasses import dataclass, field
 from openrouter import models
 from openrouter.types import OptionalNullable, UNSET
 from pydantic import Field
-from typing import Callable, Dict, List, Optional, Tuple, Union
+from typing import Callable, Dict, Optional, Tuple, Union
 
 
-SERVERS = [
-    "https://{provider_url}/api/v1",
-    # Production server
-]
+SERVER_PRODUCTION = "production"
+r"""Production server"""
+SERVERS = {
+    SERVER_PRODUCTION: "https://{provider_url}/api/v1",
+}
 """Contains the list of servers available to the SDK"""
 
 
@@ -31,8 +32,8 @@ class SDKConfiguration:
     debug_logger: Logger
     security: Optional[Union[models.Security, Callable[[], models.Security]]] = None
     server_url: Optional[str] = ""
-    server_idx: Optional[int] = 0
-    server_defaults: List[Dict[str, str]] = field(default_factory=List)
+    server: Optional[str] = ""
+    server_defaults: Dict[str, Dict[str, str]] = field(default_factory=Dict)
     language: str = "python"
     openapi_doc_version: str = __openapi_doc_version__
     sdk_version: str = __version__
@@ -44,7 +45,10 @@ class SDKConfiguration:
     def get_server_details(self) -> Tuple[str, Dict[str, str]]:
         if self.server_url is not None and self.server_url:
             return remove_suffix(self.server_url, "/"), {}
-        if self.server_idx is None:
-            self.server_idx = 0
+        if not self.server:
+            self.server = SERVER_PRODUCTION
 
-        return SERVERS[self.server_idx], self.server_defaults[self.server_idx]
+        if self.server not in SERVERS:
+            raise ValueError(f'Invalid server "{self.server}"')
+
+        return SERVERS[self.server], self.server_defaults.get(self.server, {})

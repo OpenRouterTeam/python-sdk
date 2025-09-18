@@ -12,14 +12,17 @@ from openrouter.types import (
     OptionalNullable,
     UNSET,
     UNSET_SENTINEL,
+    UnrecognizedStr,
 )
+from openrouter.utils import validate_open_enum
 from pydantic import model_serializer
-from typing import Literal
-from typing_extensions import NotRequired, TypedDict
+from pydantic.functional_validators import PlainValidator
+from typing import Literal, Union
+from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-ChatCompletionChoiceFinishReason = Literal[
-    "tool_calls", "stop", "length", "content_filter", "error"
+ChatCompletionChoiceFinishReason = Union[
+    Literal["tool_calls", "stop", "length", "content_filter", "error"], UnrecognizedStr
 ]
 r"""Reason the completion finished"""
 
@@ -40,7 +43,10 @@ class ChatCompletionChoiceTypedDict(TypedDict):
 class ChatCompletionChoice(BaseModel):
     r"""Chat completion choice"""
 
-    finish_reason: Nullable[ChatCompletionChoiceFinishReason]
+    finish_reason: Annotated[
+        Nullable[ChatCompletionChoiceFinishReason],
+        PlainValidator(validate_open_enum(False)),
+    ]
     r"""Reason the completion finished"""
 
     index: float
