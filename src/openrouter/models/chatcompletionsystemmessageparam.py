@@ -10,7 +10,8 @@ from typing import List, Literal, Optional, Union
 from typing_extensions import NotRequired, TypeAliasType, TypedDict
 
 
-ChatCompletionSystemMessageParamRole = Literal["system"]
+ChatCompletionSystemMessageParamRole = Literal["system",]
+
 
 ChatCompletionSystemMessageParamContentTypedDict = TypeAliasType(
     "ChatCompletionSystemMessageParamContentTypedDict",

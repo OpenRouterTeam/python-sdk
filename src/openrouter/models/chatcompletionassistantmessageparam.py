@@ -21,7 +21,8 @@ from typing import Any, List, Literal, Optional, Union
 from typing_extensions import NotRequired, TypeAliasType, TypedDict
 
 
-ChatCompletionAssistantMessageParamRole = Literal["assistant"]
+ChatCompletionAssistantMessageParamRole = Literal["assistant",]
+
 
 ChatCompletionAssistantMessageParamContentTypedDict = TypeAliasType(
     "ChatCompletionAssistantMessageParamContentTypedDict",

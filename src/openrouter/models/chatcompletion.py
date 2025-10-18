@@ -15,7 +15,7 @@ from typing import List, Literal, Optional
 from typing_extensions import NotRequired, TypedDict
 
 
-ChatCompletionObject = Literal["chat.completion"]
+ChatCompletionObject = Literal["chat.completion",]
 
 
 class ChatCompletionTypedDict(TypedDict):

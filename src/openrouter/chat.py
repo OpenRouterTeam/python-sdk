@@ -71,9 +71,43 @@ class Chat(BaseSDK):
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
-        accept_header_override: Optional[CompleteAcceptEnum] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ChatCompletion: ...
+    ) -> models.ChatCompletion:
+        r"""Create a chat completion
+
+        Creates a model response for the given chat conversation. Supports both streaming and non-streaming modes.
+
+        :param messages: List of messages for the conversation
+        :param model: Model to use for completion
+        :param frequency_penalty: Frequency penalty (-2.0 to 2.0)
+        :param logit_bias: Token logit bias adjustments
+        :param logprobs: Return log probabilities
+        :param top_logprobs: Number of top log probabilities to return (0-20)
+        :param max_completion_tokens: Maximum tokens in completion
+        :param max_tokens: Maximum tokens (deprecated, use max_completion_tokens)
+        :param metadata: Key-value pairs for additional object information (max 16 pairs, 64 char keys, 512 char values)
+        :param presence_penalty: Presence penalty (-2.0 to 2.0)
+        :param reasoning: Reasoning configuration
+        :param response_format: Response format configuration
+        :param seed: Random seed for deterministic outputs
+        :param stop: Stop sequences (up to 4)
+        :param stream: Enable streaming response
+        :param stream_options:
+        :param temperature: Sampling temperature (0-2)
+        :param tool_choice: Tool choice configuration
+        :param tools: Available tools for function calling
+        :param top_p: Nucleus sampling parameter (0-1)
+        :param user: Unique user identifier
+        :param fallback_models: Order of models to fallback to for this request
+        :param reasoning_effort: Reasoning effort
+        :param provider: When multiple model providers are available, optionally indicate your routing preference.
+        :param plugins: Plugins you want to enable for this request, including their settings.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param accept_header_override: Override the default accept header for this method
+        :param http_headers: Additional headers to set or replace on requests.
+        """
 
     @overload
     def complete(
@@ -130,9 +164,43 @@ class Chat(BaseSDK):
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
-        accept_header_override: Optional[CompleteAcceptEnum] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> eventstreaming.EventStream[models.ChatCompletionChunk]: ...
+    ) -> eventstreaming.EventStream[models.ChatCompletionChunk]:
+        r"""Create a chat completion
+
+        Creates a model response for the given chat conversation. Supports both streaming and non-streaming modes.
+
+        :param messages: List of messages for the conversation
+        :param model: Model to use for completion
+        :param frequency_penalty: Frequency penalty (-2.0 to 2.0)
+        :param logit_bias: Token logit bias adjustments
+        :param logprobs: Return log probabilities
+        :param top_logprobs: Number of top log probabilities to return (0-20)
+        :param max_completion_tokens: Maximum tokens in completion
+        :param max_tokens: Maximum tokens (deprecated, use max_completion_tokens)
+        :param metadata: Key-value pairs for additional object information (max 16 pairs, 64 char keys, 512 char values)
+        :param presence_penalty: Presence penalty (-2.0 to 2.0)
+        :param reasoning: Reasoning configuration
+        :param response_format: Response format configuration
+        :param seed: Random seed for deterministic outputs
+        :param stop: Stop sequences (up to 4)
+        :param stream: Enable streaming response
+        :param stream_options:
+        :param temperature: Sampling temperature (0-2)
+        :param tool_choice: Tool choice configuration
+        :param tools: Available tools for function calling
+        :param top_p: Nucleus sampling parameter (0-1)
+        :param user: Unique user identifier
+        :param fallback_models: Order of models to fallback to for this request
+        :param reasoning_effort: Reasoning effort
+        :param provider: When multiple model providers are available, optionally indicate your routing preference.
+        :param plugins: Plugins you want to enable for this request, including their settings.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param accept_header_override: Override the default accept header for this method
+        :param http_headers: Additional headers to set or replace on requests.
+        """
 
     def complete(
         self,
@@ -188,7 +256,6 @@ class Chat(BaseSDK):
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
-        accept_header_override: Optional[CompleteAcceptEnum] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.CreateChatCompletionResponse:
         r"""Create a chat completion
@@ -288,9 +355,7 @@ class Chat(BaseSDK):
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value=accept_header_override.value
-            if accept_header_override is not None
-            else "application/json;q=1, text/event-stream;q=0",
+            accept_header_value="text/event-stream" if stream else "application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
@@ -312,7 +377,7 @@ class Chat(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="createChatCompletion",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -421,9 +486,43 @@ class Chat(BaseSDK):
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
-        accept_header_override: Optional[CompleteAcceptEnum] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ChatCompletion: ...
+    ) -> models.ChatCompletion:
+        r"""Create a chat completion
+
+        Creates a model response for the given chat conversation. Supports both streaming and non-streaming modes.
+
+        :param messages: List of messages for the conversation
+        :param model: Model to use for completion
+        :param frequency_penalty: Frequency penalty (-2.0 to 2.0)
+        :param logit_bias: Token logit bias adjustments
+        :param logprobs: Return log probabilities
+        :param top_logprobs: Number of top log probabilities to return (0-20)
+        :param max_completion_tokens: Maximum tokens in completion
+        :param max_tokens: Maximum tokens (deprecated, use max_completion_tokens)
+        :param metadata: Key-value pairs for additional object information (max 16 pairs, 64 char keys, 512 char values)
+        :param presence_penalty: Presence penalty (-2.0 to 2.0)
+        :param reasoning: Reasoning configuration
+        :param response_format: Response format configuration
+        :param seed: Random seed for deterministic outputs
+        :param stop: Stop sequences (up to 4)
+        :param stream: Enable streaming response
+        :param stream_options:
+        :param temperature: Sampling temperature (0-2)
+        :param tool_choice: Tool choice configuration
+        :param tools: Available tools for function calling
+        :param top_p: Nucleus sampling parameter (0-1)
+        :param user: Unique user identifier
+        :param fallback_models: Order of models to fallback to for this request
+        :param reasoning_effort: Reasoning effort
+        :param provider: When multiple model providers are available, optionally indicate your routing preference.
+        :param plugins: Plugins you want to enable for this request, including their settings.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param accept_header_override: Override the default accept header for this method
+        :param http_headers: Additional headers to set or replace on requests.
+        """
 
     @overload
     async def complete_async(
@@ -480,9 +579,43 @@ class Chat(BaseSDK):
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
-        accept_header_override: Optional[CompleteAcceptEnum] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> eventstreaming.EventStreamAsync[models.ChatCompletionChunk]: ...
+    ) -> eventstreaming.EventStreamAsync[models.ChatCompletionChunk]:
+        r"""Create a chat completion
+
+        Creates a model response for the given chat conversation. Supports both streaming and non-streaming modes.
+
+        :param messages: List of messages for the conversation
+        :param model: Model to use for completion
+        :param frequency_penalty: Frequency penalty (-2.0 to 2.0)
+        :param logit_bias: Token logit bias adjustments
+        :param logprobs: Return log probabilities
+        :param top_logprobs: Number of top log probabilities to return (0-20)
+        :param max_completion_tokens: Maximum tokens in completion
+        :param max_tokens: Maximum tokens (deprecated, use max_completion_tokens)
+        :param metadata: Key-value pairs for additional object information (max 16 pairs, 64 char keys, 512 char values)
+        :param presence_penalty: Presence penalty (-2.0 to 2.0)
+        :param reasoning: Reasoning configuration
+        :param response_format: Response format configuration
+        :param seed: Random seed for deterministic outputs
+        :param stop: Stop sequences (up to 4)
+        :param stream: Enable streaming response
+        :param stream_options:
+        :param temperature: Sampling temperature (0-2)
+        :param tool_choice: Tool choice configuration
+        :param tools: Available tools for function calling
+        :param top_p: Nucleus sampling parameter (0-1)
+        :param user: Unique user identifier
+        :param fallback_models: Order of models to fallback to for this request
+        :param reasoning_effort: Reasoning effort
+        :param provider: When multiple model providers are available, optionally indicate your routing preference.
+        :param plugins: Plugins you want to enable for this request, including their settings.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param accept_header_override: Override the default accept header for this method
+        :param http_headers: Additional headers to set or replace on requests.
+        """
 
     async def complete_async(
         self,
@@ -538,7 +671,6 @@ class Chat(BaseSDK):
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
-        accept_header_override: Optional[CompleteAcceptEnum] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.CreateChatCompletionResponse:
         r"""Create a chat completion
@@ -638,9 +770,7 @@ class Chat(BaseSDK):
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value=accept_header_override.value
-            if accept_header_override is not None
-            else "application/json;q=1, text/event-stream;q=0",
+            accept_header_value="text/event-stream" if stream else "application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
@@ -662,7 +792,7 @@ class Chat(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="createChatCompletion",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),

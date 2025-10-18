@@ -9,11 +9,14 @@ from typing import Literal, Union
 from typing_extensions import TypeAliasType
 
 
-ChatCompletionToolChoiceOptionRequired = Literal["required"]
+ChatCompletionToolChoiceOptionRequired = Literal["required",]
 
-ChatCompletionToolChoiceOptionAuto = Literal["auto"]
 
-ChatCompletionToolChoiceOptionNone = Literal["none"]
+ChatCompletionToolChoiceOptionAuto = Literal["auto",]
+
+
+ChatCompletionToolChoiceOptionNone = Literal["none",]
+
 
 ChatCompletionToolChoiceOptionTypedDict = TypeAliasType(
     "ChatCompletionToolChoiceOptionTypedDict",

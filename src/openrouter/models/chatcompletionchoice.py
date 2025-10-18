@@ -22,7 +22,14 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 ChatCompletionChoiceFinishReason = Union[
-    Literal["tool_calls", "stop", "length", "content_filter", "error"], UnrecognizedStr
+    Literal[
+        "tool_calls",
+        "stop",
+        "length",
+        "content_filter",
+        "error",
+    ],
+    UnrecognizedStr,
 ]
 r"""Reason the completion finished"""
 

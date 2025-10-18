@@ -10,7 +10,8 @@ from typing import List, Literal, Optional, Union
 from typing_extensions import NotRequired, TypeAliasType, TypedDict
 
 
-ChatCompletionUserMessageParamRole = Literal["user"]
+ChatCompletionUserMessageParamRole = Literal["user",]
+
 
 ChatCompletionUserMessageParamContentTypedDict = TypeAliasType(
     "ChatCompletionUserMessageParamContentTypedDict",

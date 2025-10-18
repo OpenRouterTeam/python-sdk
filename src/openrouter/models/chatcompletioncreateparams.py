@@ -27,7 +27,12 @@ from typing import Any, Dict, List, Literal, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
-Effort = Literal["high", "medium", "low", "minimal"]
+Effort = Literal[
+    "high",
+    "medium",
+    "low",
+    "minimal",
+]
 r"""OpenAI-style reasoning effort setting"""
 
 
@@ -88,7 +93,7 @@ class Reasoning(BaseModel):
         return m
 
 
-TypePython = Literal["python"]
+TypePython = Literal["python",]
 
 
 class ResponseFormatPythonTypedDict(TypedDict):
@@ -103,7 +108,7 @@ class ResponseFormatPython(BaseModel):
     type: TypePython
 
 
-TypeGrammar = Literal["grammar"]
+TypeGrammar = Literal["grammar",]
 
 
 class ResponseFormatGrammarTypedDict(TypedDict):
@@ -123,7 +128,7 @@ class ResponseFormatGrammar(BaseModel):
     r"""Custom grammar for text generation"""
 
 
-TypeJSONSchema = Literal["json_schema"]
+TypeJSONSchema = Literal["json_schema",]
 
 
 class JSONSchemaTypedDict(TypedDict):
@@ -198,7 +203,7 @@ class ResponseFormatJSONSchema(BaseModel):
     json_schema: JSONSchema
 
 
-TypeJSONObject = Literal["json_object"]
+TypeJSONObject = Literal["json_object",]
 
 
 class ResponseFormatJSONObjectTypedDict(TypedDict):
@@ -213,7 +218,7 @@ class ResponseFormatJSONObject(BaseModel):
     type: TypeJSONObject
 
 
-ChatCompletionCreateParamsTypeText = Literal["text"]
+ChatCompletionCreateParamsTypeText = Literal["text",]
 
 
 class ResponseFormatTextTypedDict(TypedDict):
@@ -276,15 +281,25 @@ class StreamOptions(BaseModel):
     r"""Include usage information in streaming response"""
 
 
-ReasoningEffort = Literal["high", "medium", "low", "minimal"]
+ReasoningEffort = Literal[
+    "high",
+    "medium",
+    "low",
+    "minimal",
+]
 r"""Reasoning effort"""
 
-DataCollection = Literal["deny", "allow"]
+
+DataCollection = Literal[
+    "deny",
+    "allow",
+]
 r"""Data collection setting. If no available model provider meets the requirement, your request will return an error.
 - allow: (default) allow providers which store user data non-transiently and may train on it
 - deny: use only providers which do not collect user data.
 
 """
+
 
 OrderEnum = Literal[
     "AnyScale",
@@ -366,6 +381,7 @@ OrderEnum = Literal[
     "xAI",
     "Z.AI",
 ]
+
 
 OrderTypedDict = TypeAliasType("OrderTypedDict", Union[OrderEnum, str])
 
@@ -454,6 +470,7 @@ OnlyEnum = Literal[
     "Z.AI",
 ]
 
+
 OnlyTypedDict = TypeAliasType("OnlyTypedDict", Union[OnlyEnum, str])
 
 
@@ -541,6 +558,7 @@ IgnoreEnum = Literal[
     "Z.AI",
 ]
 
+
 IgnoreTypedDict = TypeAliasType("IgnoreTypedDict", Union[IgnoreEnum, str])
 
 
@@ -548,11 +566,25 @@ Ignore = TypeAliasType("Ignore", Union[IgnoreEnum, str])
 
 
 Quantization = Literal[
-    "int4", "int8", "fp4", "fp6", "fp8", "fp16", "bf16", "fp32", "unknown"
+    "int4",
+    "int8",
+    "fp4",
+    "fp6",
+    "fp8",
+    "fp16",
+    "bf16",
+    "fp32",
+    "unknown",
 ]
 
-Sort = Literal["price", "throughput", "latency"]
+
+Sort = Literal[
+    "price",
+    "throughput",
+    "latency",
+]
 r"""The sorting strategy to use for this request, if \"order\" is not specified. When set, no load balancing is performed."""
+
 
 PromptTypedDict = TypeAliasType("PromptTypedDict", Union[float, str, Any])
 
@@ -727,9 +759,14 @@ class Provider(BaseModel):
         return m
 
 
-IDFileParser = Literal["file-parser"]
+IDFileParser = Literal["file-parser",]
 
-PdfEngine = Literal["mistral-ocr", "pdf-text", "native"]
+
+PdfEngine = Literal[
+    "mistral-ocr",
+    "pdf-text",
+    "native",
+]
 
 
 class PdfTypedDict(TypedDict):
@@ -754,7 +791,7 @@ class PluginFileParser(BaseModel):
     pdf: Optional[Pdf] = None
 
 
-IDChainOfThought = Literal["chain-of-thought"]
+IDChainOfThought = Literal["chain-of-thought",]
 
 
 class PluginChainOfThoughtTypedDict(TypedDict):
@@ -765,9 +802,13 @@ class PluginChainOfThought(BaseModel):
     id: IDChainOfThought
 
 
-IDWeb = Literal["web"]
+IDWeb = Literal["web",]
 
-Engine = Literal["native", "exa"]
+
+Engine = Literal[
+    "native",
+    "exa",
+]
 
 
 class PluginWebTypedDict(TypedDict):
@@ -787,7 +828,7 @@ class PluginWeb(BaseModel):
     engine: Optional[Engine] = None
 
 
-IDModeration = Literal["moderation"]
+IDModeration = Literal["moderation",]
 
 
 class PluginModerationTypedDict(TypedDict):

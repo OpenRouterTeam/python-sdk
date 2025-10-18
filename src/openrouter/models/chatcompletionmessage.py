@@ -19,7 +19,7 @@ from typing import List, Literal, Optional
 from typing_extensions import NotRequired, TypedDict
 
 
-ChatCompletionMessageRole = Literal["assistant"]
+ChatCompletionMessageRole = Literal["assistant",]
 
 
 class ChatCompletionMessageTypedDict(TypedDict):

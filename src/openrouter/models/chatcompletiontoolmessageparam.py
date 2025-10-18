@@ -10,7 +10,8 @@ from typing import List, Literal, Union
 from typing_extensions import TypeAliasType, TypedDict
 
 
-ChatCompletionToolMessageParamRole = Literal["tool"]
+ChatCompletionToolMessageParamRole = Literal["tool",]
+
 
 ChatCompletionToolMessageParamContentTypedDict = TypeAliasType(
     "ChatCompletionToolMessageParamContentTypedDict",

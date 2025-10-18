@@ -3,16 +3,18 @@ id: 03e733ff-14c6-48f8-87a5-37a1a4588594
 management:
   docChecksum: 7849dd264d8d3676743d325682310ed7
   docVersion: 1.0.0
-  speakeasyVersion: 1.618.1
-  generationVersion: 2.702.0
-  releaseVersion: 0.1.0
-  configChecksum: 9b2fc6a03dd7103d87270af55bb29a50
+  speakeasyVersion: 1.637.0
+  generationVersion: 2.727.4
+  releaseVersion: 0.2.0
+  configChecksum: 320fda6b4b08d65b4a1434360fed3638
+  repoURL: https://github.com/OpenRouterTeam/python-sdk.git
+  installationURL: https://github.com/OpenRouterTeam/python-sdk.git
 features:
   python:
     acceptHeaders: 3.0.0
     additionalDependencies: 1.0.0
     constsAndDefaults: 1.0.5
-    core: 5.20.4
+    core: 5.23.0
     customCodeRegions: 0.1.1
     defaultEnabledRetries: 0.2.0
     devContainers: 3.0.0
@@ -23,7 +25,7 @@ features:
     globalSecurityCallbacks: 1.0.0
     globalSecurityFlattening: 1.0.0
     globalServerURLs: 3.1.1
-    groups: 3.0.0
+    groups: 3.0.1
     methodArguments: 1.0.2
     nameOverrides: 3.0.1
     nullables: 1.0.1
@@ -31,10 +33,10 @@ features:
     responseFormat: 1.0.1
     retries: 3.0.2
     sdkHooks: 1.1.0
-    serverEvents: 1.0.9
+    serverEvents: 1.0.11
     serverEventsSentinels: 0.1.0
     serverIDs: 3.0.0
-    unions: 3.0.4
+    unions: 3.1.0
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json
@@ -178,10 +180,10 @@ generatedFiles:
   - docs/models/urlcitationannotationdetailtype.md
   - docs/models/utils/retryconfig.md
   - docs/sdks/chat/README.md
-  - docs/sdks/openrouter/README.md
   - py.typed
   - pylintrc
   - pyproject.toml
+  - scripts/prepare_readme.py
   - scripts/publish.sh
   - src/openrouter/__init__.py
   - src/openrouter/_hooks/__init__.py

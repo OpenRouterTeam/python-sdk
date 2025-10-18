@@ -17,10 +17,16 @@ from typing import Literal, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-ReasoningDetailEncryptedType = Literal["reasoning.encrypted"]
+ReasoningDetailEncryptedType = Literal["reasoning.encrypted",]
+
 
 ReasoningDetailEncryptedFormat = Union[
-    Literal["unknown", "openai-responses-v1", "anthropic-claude-v1"], UnrecognizedStr
+    Literal[
+        "unknown",
+        "openai-responses-v1",
+        "anthropic-claude-v1",
+    ],
+    UnrecognizedStr,
 ]
 
 

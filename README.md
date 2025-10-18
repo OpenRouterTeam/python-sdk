@@ -57,7 +57,7 @@ The SDK can be installed with *uv*, *pip*, or *poetry* package managers.
 *uv* is a fast Python package installer and resolver, designed as a drop-in replacement for pip and pip-tools. It's recommended for its speed and modern Python tooling capabilities.
 
 ```bash
-uv add git+<UNSET>.git
+uv add git+https://github.com/OpenRouterTeam/python-sdk.git
 ```
 
 ### PIP
@@ -65,7 +65,7 @@ uv add git+<UNSET>.git
 *PIP* is the default package installer for Python, enabling easy installation and management of packages from PyPI via the command line.
 
 ```bash
-pip install git+<UNSET>.git
+pip install git+https://github.com/OpenRouterTeam/python-sdk.git
 ```
 
 ### Poetry
@@ -73,7 +73,7 @@ pip install git+<UNSET>.git
 *Poetry* is a modern tool that simplifies dependency management and package publishing by using a single `pyproject.toml` file to handle project metadata and dependencies.
 
 ```bash
-poetry add git+<UNSET>.git
+poetry add git+https://github.com/OpenRouterTeam/python-sdk.git
 ```
 
 ### Shell and script usage with `uv`
@@ -149,6 +149,7 @@ with OpenRouter(
 </br>
 
 The same SDK client can also be used to make asynchronous requests by importing asyncio.
+
 ```python
 # Asynchronous Example
 import asyncio
@@ -222,7 +223,6 @@ with OpenRouter(
 ### [chat](docs/sdks/chat/README.md)
 
 * [complete](docs/sdks/chat/README.md#complete) - Create a chat completion
-
 
 </details>
 <!-- End Available Resources and Operations [operations] -->

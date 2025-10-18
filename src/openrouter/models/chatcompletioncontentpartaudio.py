@@ -9,10 +9,20 @@ from typing import Literal, Union
 from typing_extensions import Annotated, TypedDict
 
 
-ChatCompletionContentPartAudioType = Literal["input_audio"]
+ChatCompletionContentPartAudioType = Literal["input_audio",]
+
 
 ChatCompletionContentPartAudioFormat = Union[
-    Literal["wav", "mp3", "flac", "m4a", "ogg", "pcm16", "pcm24"], UnrecognizedStr
+    Literal[
+        "wav",
+        "mp3",
+        "flac",
+        "m4a",
+        "ogg",
+        "pcm16",
+        "pcm24",
+    ],
+    UnrecognizedStr,
 ]
 r"""Audio format"""
 

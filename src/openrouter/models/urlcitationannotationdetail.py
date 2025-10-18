@@ -6,7 +6,7 @@ from typing import Literal, Optional
 from typing_extensions import NotRequired, TypedDict
 
 
-URLCitationAnnotationDetailType = Literal["url_citation"]
+URLCitationAnnotationDetailType = Literal["url_citation",]
 
 
 class URLCitationTypedDict(TypedDict):

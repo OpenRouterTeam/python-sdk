@@ -14,7 +14,7 @@ class ChatCompletionErrorData(BaseModel):
     r"""Error object structure"""
 
 
-@dataclass(frozen=True)
+@dataclass(unsafe_hash=True)
 class ChatCompletionError(OpenRouterError):
     r"""Chat completion error response"""
 

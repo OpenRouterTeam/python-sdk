@@ -19,7 +19,7 @@ from typing import List, Literal, Optional
 from typing_extensions import NotRequired, TypedDict
 
 
-ChatCompletionChunkChoiceDeltaRole = Literal["assistant"]
+ChatCompletionChunkChoiceDeltaRole = Literal["assistant",]
 r"""The role of the message author"""
 
 

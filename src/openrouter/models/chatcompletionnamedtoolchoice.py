@@ -6,7 +6,7 @@ from typing import Literal
 from typing_extensions import TypedDict
 
 
-ChatCompletionNamedToolChoiceType = Literal["function"]
+ChatCompletionNamedToolChoiceType = Literal["function",]
 
 
 class ChatCompletionNamedToolChoiceFunctionTypedDict(TypedDict):

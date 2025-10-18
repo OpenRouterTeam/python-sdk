@@ -20,21 +20,21 @@ For more information about the API: [OpenRouter Documentation](https://openroute
 <!-- Start Table of Contents [toc] -->
 ## Table of Contents
 <!-- $toc-max-depth=2 -->
-  * [SDK Installation](https://github.com/speakeasy-sdks/openrouter-python-sdk/blob/master/#sdk-installation)
-  * [IDE Support](https://github.com/speakeasy-sdks/openrouter-python-sdk/blob/master/#ide-support)
-  * [SDK Example Usage](https://github.com/speakeasy-sdks/openrouter-python-sdk/blob/master/#sdk-example-usage)
-  * [Authentication](https://github.com/speakeasy-sdks/openrouter-python-sdk/blob/master/#authentication)
-  * [Available Resources and Operations](https://github.com/speakeasy-sdks/openrouter-python-sdk/blob/master/#available-resources-and-operations)
-  * [Server-sent event streaming](https://github.com/speakeasy-sdks/openrouter-python-sdk/blob/master/#server-sent-event-streaming)
-  * [Retries](https://github.com/speakeasy-sdks/openrouter-python-sdk/blob/master/#retries)
-  * [Error Handling](https://github.com/speakeasy-sdks/openrouter-python-sdk/blob/master/#error-handling)
-  * [Server Selection](https://github.com/speakeasy-sdks/openrouter-python-sdk/blob/master/#server-selection)
-  * [Custom HTTP Client](https://github.com/speakeasy-sdks/openrouter-python-sdk/blob/master/#custom-http-client)
-  * [Resource Management](https://github.com/speakeasy-sdks/openrouter-python-sdk/blob/master/#resource-management)
-  * [Debugging](https://github.com/speakeasy-sdks/openrouter-python-sdk/blob/master/#debugging)
-* [Development](https://github.com/speakeasy-sdks/openrouter-python-sdk/blob/master/#development)
-  * [Maturity](https://github.com/speakeasy-sdks/openrouter-python-sdk/blob/master/#maturity)
-  * [Contributions](https://github.com/speakeasy-sdks/openrouter-python-sdk/blob/master/#contributions)
+  * [SDK Installation](https://github.com/OpenRouterTeam/python-sdk/blob/master/#sdk-installation)
+  * [IDE Support](https://github.com/OpenRouterTeam/python-sdk/blob/master/#ide-support)
+  * [SDK Example Usage](https://github.com/OpenRouterTeam/python-sdk/blob/master/#sdk-example-usage)
+  * [Authentication](https://github.com/OpenRouterTeam/python-sdk/blob/master/#authentication)
+  * [Available Resources and Operations](https://github.com/OpenRouterTeam/python-sdk/blob/master/#available-resources-and-operations)
+  * [Server-sent event streaming](https://github.com/OpenRouterTeam/python-sdk/blob/master/#server-sent-event-streaming)
+  * [Retries](https://github.com/OpenRouterTeam/python-sdk/blob/master/#retries)
+  * [Error Handling](https://github.com/OpenRouterTeam/python-sdk/blob/master/#error-handling)
+  * [Server Selection](https://github.com/OpenRouterTeam/python-sdk/blob/master/#server-selection)
+  * [Custom HTTP Client](https://github.com/OpenRouterTeam/python-sdk/blob/master/#custom-http-client)
+  * [Resource Management](https://github.com/OpenRouterTeam/python-sdk/blob/master/#resource-management)
+  * [Debugging](https://github.com/OpenRouterTeam/python-sdk/blob/master/#debugging)
+* [Development](https://github.com/OpenRouterTeam/python-sdk/blob/master/#development)
+  * [Maturity](https://github.com/OpenRouterTeam/python-sdk/blob/master/#maturity)
+  * [Contributions](https://github.com/OpenRouterTeam/python-sdk/blob/master/#contributions)
 
 <!-- End Table of Contents [toc] -->
 
@@ -57,7 +57,7 @@ The SDK can be installed with *uv*, *pip*, or *poetry* package managers.
 *uv* is a fast Python package installer and resolver, designed as a drop-in replacement for pip and pip-tools. It's recommended for its speed and modern Python tooling capabilities.
 
 ```bash
-uv add git+https://github.com/speakeasy-sdks/openrouter-python-sdk.git
+uv add git+https://github.com/OpenRouterTeam/python-sdk.git
 ```
 
 ### PIP
@@ -65,7 +65,7 @@ uv add git+https://github.com/speakeasy-sdks/openrouter-python-sdk.git
 *PIP* is the default package installer for Python, enabling easy installation and management of packages from PyPI via the command line.
 
 ```bash
-pip install git+https://github.com/speakeasy-sdks/openrouter-python-sdk.git
+pip install git+https://github.com/OpenRouterTeam/python-sdk.git
 ```
 
 ### Poetry
@@ -73,7 +73,7 @@ pip install git+https://github.com/speakeasy-sdks/openrouter-python-sdk.git
 *Poetry* is a modern tool that simplifies dependency management and package publishing by using a single `pyproject.toml` file to handle project metadata and dependencies.
 
 ```bash
-poetry add git+https://github.com/speakeasy-sdks/openrouter-python-sdk.git
+poetry add git+https://github.com/OpenRouterTeam/python-sdk.git
 ```
 
 ### Shell and script usage with `uv`
@@ -149,6 +149,7 @@ with OpenRouter(
 </br>
 
 The same SDK client can also be used to make asynchronous requests by importing asyncio.
+
 ```python
 # Asynchronous Example
 import asyncio
@@ -219,10 +220,9 @@ with OpenRouter(
 <details open>
 <summary>Available methods</summary>
 
-### [chat](https://github.com/speakeasy-sdks/openrouter-python-sdk/blob/master/docs/sdks/chat/README.md)
+### [chat](https://github.com/OpenRouterTeam/python-sdk/blob/master/docs/sdks/chat/README.md)
 
-* [complete](https://github.com/speakeasy-sdks/openrouter-python-sdk/blob/master/docs/sdks/chat/README.md#complete) - Create a chat completion
-
+* [complete](https://github.com/OpenRouterTeam/python-sdk/blob/master/docs/sdks/chat/README.md#complete) - Create a chat completion
 
 </details>
 <!-- End Available Resources and Operations [operations] -->
@@ -328,7 +328,7 @@ with OpenRouter(
 <!-- Start Error Handling [errors] -->
 ## Error Handling
 
-[`OpenRouterError`](https://github.com/speakeasy-sdks/openrouter-python-sdk/blob/master/./src/openrouter/errors/openroutererror.py) is the base class for all HTTP error responses. It has the following properties:
+[`OpenRouterError`](https://github.com/OpenRouterTeam/python-sdk/blob/master/./src/openrouter/errors/openroutererror.py) is the base class for all HTTP error responses. It has the following properties:
 
 | Property           | Type             | Description                                                                             |
 | ------------------ | ---------------- | --------------------------------------------------------------------------------------- |
@@ -337,7 +337,7 @@ with OpenRouter(
 | `err.headers`      | `httpx.Headers`  | HTTP response headers                                                                   |
 | `err.body`         | `str`            | HTTP body. Can be empty string if no body is returned.                                  |
 | `err.raw_response` | `httpx.Response` | Raw HTTP response                                                                       |
-| `err.data`         |                  | Optional. Some errors may contain structured data. [See Error Classes](https://github.com/speakeasy-sdks/openrouter-python-sdk/blob/master/#error-classes). |
+| `err.data`         |                  | Optional. Some errors may contain structured data. [See Error Classes](https://github.com/OpenRouterTeam/python-sdk/blob/master/#error-classes). |
 
 ### Example
 ```python
@@ -379,8 +379,8 @@ with OpenRouter(
 
 ### Error Classes
 **Primary errors:**
-* [`OpenRouterError`](https://github.com/speakeasy-sdks/openrouter-python-sdk/blob/master/./src/openrouter/errors/openroutererror.py): The base class for HTTP error responses.
-  * [`ChatCompletionError`](https://github.com/speakeasy-sdks/openrouter-python-sdk/blob/master/./src/openrouter/errors/chatcompletionerror.py): Chat completion error response.
+* [`OpenRouterError`](https://github.com/OpenRouterTeam/python-sdk/blob/master/./src/openrouter/errors/openroutererror.py): The base class for HTTP error responses.
+  * [`ChatCompletionError`](https://github.com/OpenRouterTeam/python-sdk/blob/master/./src/openrouter/errors/chatcompletionerror.py): Chat completion error response.
 
 <details><summary>Less common errors (5)</summary>
 
@@ -392,8 +392,8 @@ with OpenRouter(
     * [`httpx.TimeoutException`](https://www.python-httpx.org/exceptions/#httpx.TimeoutException): HTTP request timed out.
 
 
-**Inherit from [`OpenRouterError`](https://github.com/speakeasy-sdks/openrouter-python-sdk/blob/master/./src/openrouter/errors/openroutererror.py)**:
-* [`ResponseValidationError`](https://github.com/speakeasy-sdks/openrouter-python-sdk/blob/master/./src/openrouter/errors/responsevalidationerror.py): Type mismatch between the response data and the expected Pydantic model. Provides access to the Pydantic validation error via the `cause` attribute.
+**Inherit from [`OpenRouterError`](https://github.com/OpenRouterTeam/python-sdk/blob/master/./src/openrouter/errors/openroutererror.py)**:
+* [`ResponseValidationError`](https://github.com/OpenRouterTeam/python-sdk/blob/master/./src/openrouter/errors/responsevalidationerror.py): Type mismatch between the response data and the expected Pydantic model. Provides access to the Pydantic validation error via the `cause` attribute.
 
 </details>
 <!-- End Error Handling [errors] -->
@@ -401,9 +401,15 @@ with OpenRouter(
 <!-- Start Server Selection [server] -->
 ## Server Selection
 
-### Server Variables
+### Select Server by Name
 
-The default server `https://{provider_url}/api/v1` contains variables and is set to `https://openrouter.ai/api/v1` by default. To override default values, the following parameters are available when initializing the SDK client instance:
+You can override the default server globally by passing a server name to the `server: str` optional parameter when initializing the SDK client instance. The selected server will then be used as the default on the operations that use it. This table lists the names associated with the available servers:
+
+| Name         | Server                          | Variables      | Description       |
+| ------------ | ------------------------------- | -------------- | ----------------- |
+| `production` | `https://{provider_url}/api/v1` | `provider_url` | Production server |
+
+If the selected server has variables, you may override its default values through the additional parameters made available in the SDK constructor:
 
 | Variable       | Parameter           | Default           | Description |
 | -------------- | ------------------- | ----------------- | ----------- |
@@ -417,6 +423,7 @@ import os
 
 
 with OpenRouter(
+    server="production",
     provider_url="https://ruddy-guacamole.info/"
     api_key=os.getenv("OPENROUTER_API_KEY", ""),
 ) as open_router:
@@ -437,7 +444,7 @@ with OpenRouter(
 
 ### Override Server URL Per-Client
 
-The default server can be overridden globally by passing a URL to the `server_url: str` optional parameter when initializing the SDK client instance. For example:
+The default server can also be overridden globally by passing a URL to the `server_url: str` optional parameter when initializing the SDK client instance. For example:
 ```python
 from openrouter import OpenRouter
 import os

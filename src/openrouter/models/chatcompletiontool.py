@@ -13,7 +13,7 @@ from typing import Literal, Optional
 from typing_extensions import NotRequired, TypedDict
 
 
-ChatCompletionToolType = Literal["function"]
+ChatCompletionToolType = Literal["function",]
 
 
 class ParametersTypedDict(TypedDict):

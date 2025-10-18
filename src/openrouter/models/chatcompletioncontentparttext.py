@@ -6,7 +6,7 @@ from typing import Literal
 from typing_extensions import TypedDict
 
 
-ChatCompletionContentPartTextType = Literal["text"]
+ChatCompletionContentPartTextType = Literal["text",]
 
 
 class ChatCompletionContentPartTextTypedDict(TypedDict):

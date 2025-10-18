@@ -18,7 +18,7 @@ from typing import List, Literal, Optional
 from typing_extensions import NotRequired, TypedDict
 
 
-ChatCompletionChunkObject = Literal["chat.completion.chunk"]
+ChatCompletionChunkObject = Literal["chat.completion.chunk",]
 
 
 class ChatCompletionChunkTypedDict(TypedDict):

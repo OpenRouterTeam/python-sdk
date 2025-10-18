@@ -25,7 +25,14 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 ChatCompletionChunkChoiceFinishReason = Union[
-    Literal["tool_calls", "stop", "length", "content_filter", "error"], UnrecognizedStr
+    Literal[
+        "tool_calls",
+        "stop",
+        "length",
+        "content_filter",
+        "error",
+    ],
+    UnrecognizedStr,
 ]
 
 

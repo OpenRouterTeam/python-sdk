@@ -6,9 +6,10 @@ from typing import List, Literal, Optional, Union
 from typing_extensions import NotRequired, TypeAliasType, TypedDict
 
 
-TypeFile = Literal["file"]
+TypeFile = Literal["file",]
 
-ContentTypeImageURL = Literal["image_url"]
+
+ContentTypeImageURL = Literal["image_url",]
 
 
 class FileAnnotationDetailImageURLTypedDict(TypedDict):
@@ -30,7 +31,7 @@ class ContentImageURL(BaseModel):
     image_url: FileAnnotationDetailImageURL
 
 
-ContentTypeText = Literal["text"]
+ContentTypeText = Literal["text",]
 
 
 class ContentTextTypedDict(TypedDict):

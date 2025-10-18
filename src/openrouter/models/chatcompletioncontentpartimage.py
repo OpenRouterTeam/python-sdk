@@ -6,9 +6,14 @@ from typing import Literal, Optional
 from typing_extensions import NotRequired, TypedDict
 
 
-ChatCompletionContentPartImageType = Literal["image_url"]
+ChatCompletionContentPartImageType = Literal["image_url",]
 
-Detail = Literal["auto", "low", "high"]
+
+Detail = Literal[
+    "auto",
+    "low",
+    "high",
+]
 r"""Image detail level for vision models"""
 
 

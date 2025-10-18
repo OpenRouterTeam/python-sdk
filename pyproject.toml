@@ -1,15 +1,16 @@
 [project]
 name = "openrouter"
-version = "0.1.0"
+version = "0.2.0"
 description = "The OpenRouter Python SDK."
 authors = [{ name = "Speakeasy" },]
-readme = "README.md"
+readme = "README-PYPI.md"
 requires-python = ">=3.9.2"
 dependencies = [
     "httpcore >=1.0.9",
     "httpx >=0.28.1",
     "pydantic >=2.11.2",
 ]
+urls.repository = "https://github.com/OpenRouterTeam/python-sdk.git"
 
 [dependency-groups]
 dev = [

@@ -6,7 +6,7 @@ from typing import Literal, Optional
 from typing_extensions import NotRequired, TypedDict
 
 
-ChatCompletionChunkChoiceDeltaToolCallType = Literal["function"]
+ChatCompletionChunkChoiceDeltaToolCallType = Literal["function",]
 r"""Tool call type"""
 
 
