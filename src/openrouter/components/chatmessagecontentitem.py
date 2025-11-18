@@ -5,6 +5,10 @@ from .chatmessagecontentitemaudio import (
     ChatMessageContentItemAudio,
     ChatMessageContentItemAudioTypedDict,
 )
+from .chatmessagecontentitemfile import (
+    ChatMessageContentItemFile,
+    ChatMessageContentItemFileTypedDict,
+)
 from .chatmessagecontentitemimage import (
     ChatMessageContentItemImage,
     ChatMessageContentItemImageTypedDict,
@@ -29,6 +33,7 @@ ChatMessageContentItemTypedDict = TypeAliasType(
         ChatMessageContentItemTextTypedDict,
         ChatMessageContentItemImageTypedDict,
         ChatMessageContentItemAudioTypedDict,
+        ChatMessageContentItemFileTypedDict,
         ChatMessageContentItemVideoTypedDict,
     ],
 )
@@ -41,6 +46,7 @@ ChatMessageContentItem = Annotated[
         Annotated[ChatMessageContentItemAudio, Tag("input_audio")],
         Annotated[ChatMessageContentItemVideo, Tag("input_video")],
         Annotated[ChatMessageContentItemVideo, Tag("video_url")],
+        Annotated[ChatMessageContentItemFile, Tag("file")],
     ],
     Discriminator(lambda m: get_discriminator(m, "type", "type")),
 ]

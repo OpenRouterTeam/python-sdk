@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: cfd52247-6a25-4c6d-bbce-fe6fce0cd69d
 management:
-  docChecksum: 4cc4a9d9115d0eca9a5eb4786505579d
+  docChecksum: c70fe15adf85b7e7749bd16a443507da
   docVersion: 1.0.0
   speakeasyVersion: 1.658.2
   generationVersion: 2.755.9
-  releaseVersion: 0.0.19
-  configChecksum: 834d5c1cea368e35ab6535ffb2bf9e7a
+  releaseVersion: 0.0.21
+  configChecksum: fcf282e1f92a17d5f4a7b368adf40f1b
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
@@ -67,6 +67,7 @@ generatedFiles:
   - docs/components/chatmessagecontentitemaudio.md
   - docs/components/chatmessagecontentitemaudioformat.md
   - docs/components/chatmessagecontentitemaudioinputaudio.md
+  - docs/components/chatmessagecontentitemfile.md
   - docs/components/chatmessagecontentitemimage.md
   - docs/components/chatmessagecontentitemimagedetail.md
   - docs/components/chatmessagecontentitemtext.md
@@ -110,6 +111,7 @@ generatedFiles:
   - docs/components/effort.md
   - docs/components/endpointstatus.md
   - docs/components/engine.md
+  - docs/components/file.md
   - docs/components/filecitation.md
   - docs/components/filecitationtype.md
   - docs/components/filepath.md
@@ -554,6 +556,7 @@ generatedFiles:
   - src/openrouter/components/chatgenerationtokenusage.py
   - src/openrouter/components/chatmessagecontentitem.py
   - src/openrouter/components/chatmessagecontentitemaudio.py
+  - src/openrouter/components/chatmessagecontentitemfile.py
   - src/openrouter/components/chatmessagecontentitemimage.py
   - src/openrouter/components/chatmessagecontentitemtext.py
   - src/openrouter/components/chatmessagecontentitemvideo.py

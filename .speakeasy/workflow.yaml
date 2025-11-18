@@ -1,16 +1,19 @@
 workflowVersion: 1.0.0
 speakeasyVersion: latest
 sources:
-    -OAS:
+    OpenRouter API:
         inputs:
-            - location: registry.speakeasyapi.dev/openrouter/sdk/open-router-chat-completions-api:main
+            - location: .speakeasy/in.openapi.yaml
+        overlays:
+            - location: .speakeasy/overlays/open-enums.overlay.yaml
+            - location: .speakeasy/overlays/remove-rss-responses.overlay.yaml
         output: .speakeasy/out.openapi.yaml
         registry:
-            location: registry.speakeasyapi.dev/openrouter/sdk/-oas
+            location: registry.speakeasyapi.dev/openrouter/sdk/open-router-chat-completions-api
 targets:
-    open-router:
+    openrouter:
         target: python
-        source: -OAS
+        source: OpenRouter API
         publish:
             pypi:
                 token: $pypi_token
