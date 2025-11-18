@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: cfd52247-6a25-4c6d-bbce-fe6fce0cd69d
 management:
-  docChecksum: c70fe15adf85b7e7749bd16a443507da
+  docChecksum: 459a4007b7391a38a6e9c7249c84c3bf
   docVersion: 1.0.0
   speakeasyVersion: 1.658.2
   generationVersion: 2.755.9
-  releaseVersion: 0.0.21
-  configChecksum: fcf282e1f92a17d5f4a7b368adf40f1b
+  releaseVersion: 0.0.22
+  configChecksum: dbd5388c5e9e39132e6f3418d4959462
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
@@ -74,6 +74,7 @@ generatedFiles:
   - docs/components/chatmessagecontentitemvideo.md
   - docs/components/chatmessagecontentitemvideoinputvideo.md
   - docs/components/chatmessagecontentitemvideovideourl.md
+  - docs/components/chatmessagecontentitemvideovideourlvideourl.md
   - docs/components/chatmessagetokenlogprob.md
   - docs/components/chatmessagetokenlogprobs.md
   - docs/components/chatmessagetoolcall.md
@@ -418,8 +419,7 @@ generatedFiles:
   - docs/components/usermessage.md
   - docs/components/usermessagecontent.md
   - docs/components/variables.md
-  - docs/components/videourl1.md
-  - docs/components/videourl2.md
+  - docs/components/videourl.md
   - docs/components/websearchpreviewtooluserlocation.md
   - docs/components/websearchpreviewtooluserlocationtype.md
   - docs/components/websearchstatus.md
@@ -687,6 +687,7 @@ generatedFiles:
   - src/openrouter/components/unprocessableentityresponseerrordata.py
   - src/openrouter/components/urlcitation.py
   - src/openrouter/components/usermessage.py
+  - src/openrouter/components/videourl.py
   - src/openrouter/components/websearchpreviewtooluserlocation.py
   - src/openrouter/components/websearchstatus.py
   - src/openrouter/credits.py

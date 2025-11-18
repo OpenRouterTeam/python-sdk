@@ -1,4 +1,4 @@
-# VideoURL2
+# ChatMessageContentItemVideoVideoURLVideoURL
 
 
 ## Fields
