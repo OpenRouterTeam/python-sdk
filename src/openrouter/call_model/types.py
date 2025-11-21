@@ -6,7 +6,7 @@ with comprehensive docstrings.
 """
 
 from enum import Enum
-from typing import Any, Dict, List, Optional, TypedDict
+from typing import TypedDict
 
 
 # Type aliases for clarity and maintainability
@@ -16,7 +16,7 @@ ToolCallId = str
 EventType = str
 """Type of SSE event (e.g., 'content.delta', 'tool.call')."""
 
-StreamEvent = Dict[str, Any]
+StreamEvent = dict[str, object]
 """Raw SSE event dictionary from the API."""
 
 
@@ -57,11 +57,11 @@ class ToolContext(TypedDict, total=False):
     """
 
     number_of_turns: int
-    message_history: List[Dict[str, Any]]
-    model: Optional[str]
-    models: Optional[List[str]]
-    previous_tool_results: Optional[List[Dict[str, Any]]]
-    request_id: Optional[str]
+    message_history: list[dict[str, object]]
+    model: str | None
+    models: list[str] | None
+    previous_tool_results: list[dict[str, object]] | None
+    request_id: str | None
 
 
 class ResponseState(str, Enum):
@@ -103,7 +103,7 @@ class CachedData(TypedDict, total=False):
         ... }
     """
 
-    message: Optional[Dict[str, Any]]
-    text: Optional[str]
-    tool_calls: Optional[List[Dict[str, Any]]]
-    raw_response: Optional[Dict[str, Any]]
+    message: dict[str, object] | None
+    text: str | None
+    tool_calls: list[dict[str, object]] | None
+    raw_response: dict[str, object] | None

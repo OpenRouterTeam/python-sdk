@@ -4,7 +4,7 @@ This module defines the exception hierarchy for call_model operations,
 providing actionable error messages with context for debugging.
 """
 
-from typing import Any, Dict, List, Optional
+from typing import override
 
 
 class CallModelError(Exception):
@@ -19,11 +19,15 @@ class CallModelError(Exception):
         context: Optional dictionary with additional error context
     """
 
+    message: str
+    code: str | None
+    context: dict[str, object]
+
     def __init__(
         self,
         message: str,
-        code: Optional[str] = None,
-        context: Optional[Dict[str, Any]] = None,
+        code: str | None = None,
+        context: dict[str, object] | None = None,
     ):
         """Initialize the error with message, code, and context.
 
@@ -37,6 +41,7 @@ class CallModelError(Exception):
         self.code = code
         self.context = context or {}
 
+    @override
     def __str__(self) -> str:
         """Return the error message."""
         return self.message
@@ -59,7 +64,10 @@ class ToolExecutionError(CallModelError):
         ...     )
     """
 
-    def __init__(self, tool_name: str, error: Exception, context: Dict[str, Any]):
+    tool_name: str
+    original_error: Exception
+
+    def __init__(self, tool_name: str, error: Exception, context: dict[str, object]):
         """Initialize the tool execution error.
 
         Args:
@@ -92,7 +100,10 @@ class ToolValidationError(CallModelError):
         ... )
     """
 
-    def __init__(self, tool_name: str, validation_errors: List[str]):
+    tool_name: str
+    validation_errors: list[str]
+
+    def __init__(self, tool_name: str, validation_errors: list[str]):
         """Initialize the tool validation error.
 
         Args:
@@ -120,7 +131,9 @@ class StreamInterruptedError(CallModelError):
         ... )
     """
 
-    def __init__(self, last_event: Optional[Dict[str, Any]] = None):
+    last_event: dict[str, object] | None
+
+    def __init__(self, last_event: dict[str, object] | None = None):
         """Initialize the stream interrupted error.
 
         Args:
@@ -146,6 +159,9 @@ class MaxToolRoundsExceededError(CallModelError):
     Example:
         >>> raise MaxToolRoundsExceededError(rounds=10, max_rounds=5)
     """
+
+    rounds: int
+    max_rounds: int
 
     def __init__(self, rounds: int, max_rounds: int):
         """Initialize the max tool rounds exceeded error.
