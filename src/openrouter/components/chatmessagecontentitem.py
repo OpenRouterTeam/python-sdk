@@ -26,9 +26,9 @@ from typing_extensions import Annotated, TypeAliasType
 ChatMessageContentItemTypedDict = TypeAliasType(
     "ChatMessageContentItemTypedDict",
     Union[
-        ChatMessageContentItemTextTypedDict,
         ChatMessageContentItemImageTypedDict,
         ChatMessageContentItemAudioTypedDict,
+        ChatMessageContentItemTextTypedDict,
         ChatMessageContentItemVideoTypedDict,
     ],
 )

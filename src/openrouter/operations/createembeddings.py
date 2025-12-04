@@ -15,8 +15,8 @@ from openrouter.types import (
     UNSET_SENTINEL,
     UnrecognizedStr,
 )
-from openrouter.utils import validate_open_enum
-from pydantic import model_serializer
+from openrouter.utils import get_discriminator, validate_open_enum
+from pydantic import Discriminator, Tag, model_serializer
 from pydantic.functional_validators import PlainValidator
 from typing import Any, List, Literal, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
@@ -63,7 +63,13 @@ ContentTypedDict = TypeAliasType(
 )
 
 
-Content = TypeAliasType("Content", Union[ContentText, ContentImageURL])
+Content = Annotated[
+    Union[
+        Annotated[ContentText, Tag("text")],
+        Annotated[ContentImageURL, Tag("image_url")],
+    ],
+    Discriminator(lambda m: get_discriminator(m, "type", "type")),
+]
 
 
 class InputTypedDict(TypedDict):
@@ -389,7 +395,7 @@ class Usage(BaseModel):
     cost: Optional[float] = None
 
 
-class CreateEmbeddingsResponseBodyTypedDict(TypedDict):
+class CreateEmbeddingsResponseTypedDict(TypedDict):
     r"""Embedding response"""
 
     object: Object
@@ -399,7 +405,7 @@ class CreateEmbeddingsResponseBodyTypedDict(TypedDict):
     usage: NotRequired[UsageTypedDict]
 
 
-class CreateEmbeddingsResponseBody(BaseModel):
+class CreateEmbeddingsResponse(BaseModel):
     r"""Embedding response"""
 
     object: Object
@@ -411,14 +417,3 @@ class CreateEmbeddingsResponseBody(BaseModel):
     id: Optional[str] = None
 
     usage: Optional[Usage] = None
-
-
-CreateEmbeddingsResponseTypedDict = TypeAliasType(
-    "CreateEmbeddingsResponseTypedDict",
-    Union[CreateEmbeddingsResponseBodyTypedDict, str],
-)
-
-
-CreateEmbeddingsResponse = TypeAliasType(
-    "CreateEmbeddingsResponse", Union[CreateEmbeddingsResponseBody, str]
-)

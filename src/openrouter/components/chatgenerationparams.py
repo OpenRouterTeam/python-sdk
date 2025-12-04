@@ -21,9 +21,9 @@ from openrouter.types import (
     UNSET_SENTINEL,
     UnrecognizedStr,
 )
-from openrouter.utils import validate_const, validate_open_enum
+from openrouter.utils import get_discriminator, validate_const, validate_open_enum
 import pydantic
-from pydantic import model_serializer
+from pydantic import Discriminator, Tag, model_serializer
 from pydantic.functional_validators import AfterValidator, PlainValidator
 from typing import Any, Dict, List, Literal, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
@@ -134,16 +134,16 @@ ChatGenerationParamsResponseFormatUnionTypedDict = TypeAliasType(
 )
 
 
-ChatGenerationParamsResponseFormatUnion = TypeAliasType(
-    "ChatGenerationParamsResponseFormatUnion",
+ChatGenerationParamsResponseFormatUnion = Annotated[
     Union[
-        ChatGenerationParamsResponseFormatText,
-        ChatGenerationParamsResponseFormatJSONObject,
-        ChatGenerationParamsResponseFormatPython,
-        ResponseFormatJSONSchema,
-        ResponseFormatTextGrammar,
+        Annotated[ChatGenerationParamsResponseFormatText, Tag("text")],
+        Annotated[ChatGenerationParamsResponseFormatJSONObject, Tag("json_object")],
+        Annotated[ResponseFormatJSONSchema, Tag("json_schema")],
+        Annotated[ResponseFormatTextGrammar, Tag("grammar")],
+        Annotated[ChatGenerationParamsResponseFormatPython, Tag("python")],
     ],
-)
+    Discriminator(lambda m: get_discriminator(m, "type", "type")),
+]
 
 
 ChatGenerationParamsStopTypedDict = TypeAliasType(
@@ -154,6 +154,14 @@ ChatGenerationParamsStopTypedDict = TypeAliasType(
 ChatGenerationParamsStop = TypeAliasType(
     "ChatGenerationParamsStop", Union[str, List[str]]
 )
+
+
+class DebugTypedDict(TypedDict):
+    echo_upstream_body: NotRequired[bool]
+
+
+class Debug(BaseModel):
+    echo_upstream_body: Optional[bool] = None
 
 
 class ChatGenerationParamsTypedDict(TypedDict):
@@ -179,6 +187,7 @@ class ChatGenerationParamsTypedDict(TypedDict):
     tools: NotRequired[List[ToolDefinitionJSONTypedDict]]
     top_p: NotRequired[Nullable[float]]
     user: NotRequired[str]
+    debug: NotRequired[DebugTypedDict]
 
 
 class ChatGenerationParams(BaseModel):
@@ -226,6 +235,8 @@ class ChatGenerationParams(BaseModel):
 
     user: Optional[str] = None
 
+    debug: Optional[Debug] = None
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = [
@@ -250,6 +261,7 @@ class ChatGenerationParams(BaseModel):
             "tools",
             "top_p",
             "user",
+            "debug",
         ]
         nullable_fields = [
             "frequency_penalty",

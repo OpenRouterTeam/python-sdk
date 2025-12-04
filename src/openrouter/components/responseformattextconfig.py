@@ -10,8 +10,10 @@ from .responsesformattextjsonschemaconfig import (
     ResponsesFormatTextJSONSchemaConfig,
     ResponsesFormatTextJSONSchemaConfigTypedDict,
 )
+from openrouter.utils import get_discriminator
+from pydantic import Discriminator, Tag
 from typing import Union
-from typing_extensions import TypeAliasType
+from typing_extensions import Annotated, TypeAliasType
 
 
 ResponseFormatTextConfigTypedDict = TypeAliasType(
@@ -25,12 +27,12 @@ ResponseFormatTextConfigTypedDict = TypeAliasType(
 r"""Text response format configuration"""
 
 
-ResponseFormatTextConfig = TypeAliasType(
-    "ResponseFormatTextConfig",
+ResponseFormatTextConfig = Annotated[
     Union[
-        ResponsesFormatText,
-        ResponsesFormatJSONObject,
-        ResponsesFormatTextJSONSchemaConfig,
+        Annotated[ResponsesFormatText, Tag("text")],
+        Annotated[ResponsesFormatJSONObject, Tag("json_object")],
+        Annotated[ResponsesFormatTextJSONSchemaConfig, Tag("json_schema")],
     ],
-)
+    Discriminator(lambda m: get_discriminator(m, "type", "type")),
+]
 r"""Text response format configuration"""

@@ -21,3 +21,9 @@ value: components.PluginWeb = /* values here */
 value: components.PluginFileParser = /* values here */
 ```
 
+### `components.PluginResponseHealing`
+
+```python
+value: components.PluginResponseHealing = /* values here */
+```
+

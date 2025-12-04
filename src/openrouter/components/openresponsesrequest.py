@@ -44,9 +44,10 @@ from openrouter.types import (
     UNSET_SENTINEL,
     UnrecognizedStr,
 )
-from openrouter.utils import validate_open_enum
-from pydantic import model_serializer
-from pydantic.functional_validators import PlainValidator
+from openrouter.utils import get_discriminator, validate_const, validate_open_enum
+import pydantic
+from pydantic import Discriminator, Tag, model_serializer
+from pydantic.functional_validators import AfterValidator, PlainValidator
 from typing import Any, Dict, List, Literal, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
@@ -120,28 +121,22 @@ OpenResponsesRequestToolUnionTypedDict = TypeAliasType(
 )
 
 
-OpenResponsesRequestToolUnion = TypeAliasType(
-    "OpenResponsesRequestToolUnion",
+OpenResponsesRequestToolUnion = Annotated[
     Union[
-        OpenResponsesWebSearchPreviewTool,
-        OpenResponsesWebSearchPreview20250311Tool,
-        OpenResponsesWebSearchTool,
-        OpenResponsesWebSearch20250826Tool,
-        OpenResponsesRequestToolFunction,
+        Annotated[OpenResponsesRequestToolFunction, Tag("function")],
+        Annotated[OpenResponsesWebSearchPreviewTool, Tag("web_search_preview")],
+        Annotated[
+            OpenResponsesWebSearchPreview20250311Tool,
+            Tag("web_search_preview_2025_03_11"),
+        ],
+        Annotated[OpenResponsesWebSearchTool, Tag("web_search")],
+        Annotated[OpenResponsesWebSearch20250826Tool, Tag("web_search_2025_08_26")],
     ],
-)
-
-
-ServiceTier = Union[
-    Literal[
-        "auto",
-        "default",
-        "flex",
-        "priority",
-        "scale",
-    ],
-    UnrecognizedStr,
+    Discriminator(lambda m: get_discriminator(m, "type", "type")),
 ]
+
+
+ServiceTier = Literal["auto",]
 
 
 Truncation = Union[
@@ -353,6 +348,17 @@ class Provider(BaseModel):
         return m
 
 
+IDResponseHealing = Literal["response-healing",]
+
+
+class PluginResponseHealingTypedDict(TypedDict):
+    id: IDResponseHealing
+
+
+class PluginResponseHealing(BaseModel):
+    id: IDResponseHealing
+
+
 IDFileParser = Literal["file-parser",]
 
 
@@ -434,11 +440,24 @@ class PluginModeration(BaseModel):
 
 PluginTypedDict = TypeAliasType(
     "PluginTypedDict",
-    Union[PluginModerationTypedDict, PluginFileParserTypedDict, PluginWebTypedDict],
+    Union[
+        PluginModerationTypedDict,
+        PluginResponseHealingTypedDict,
+        PluginFileParserTypedDict,
+        PluginWebTypedDict,
+    ],
 )
 
 
-Plugin = TypeAliasType("Plugin", Union[PluginModeration, PluginFileParser, PluginWeb])
+Plugin = Annotated[
+    Union[
+        Annotated[PluginModeration, Tag("moderation")],
+        Annotated[PluginWeb, Tag("web")],
+        Annotated[PluginFileParser, Tag("file-parser")],
+        Annotated[PluginResponseHealing, Tag("response-healing")],
+    ],
+    Discriminator(lambda m: get_discriminator(m, "id", "id")),
+]
 
 
 class OpenResponsesRequestTypedDict(TypedDict):
@@ -468,8 +487,8 @@ class OpenResponsesRequestTypedDict(TypedDict):
     include: NotRequired[Nullable[List[OpenAIResponsesIncludable]]]
     background: NotRequired[Nullable[bool]]
     safety_identifier: NotRequired[Nullable[str]]
-    store: NotRequired[Nullable[bool]]
-    service_tier: NotRequired[Nullable[ServiceTier]]
+    store: Literal[False]
+    service_tier: NotRequired[ServiceTier]
     truncation: NotRequired[Nullable[Truncation]]
     stream: NotRequired[bool]
     provider: NotRequired[Nullable[ProviderTypedDict]]
@@ -533,11 +552,12 @@ class OpenResponsesRequest(BaseModel):
 
     safety_identifier: OptionalNullable[str] = UNSET
 
-    store: OptionalNullable[bool] = UNSET
+    STORE: Annotated[
+        Annotated[Optional[Literal[False]], AfterValidator(validate_const(False))],
+        pydantic.Field(alias="store"),
+    ] = False
 
-    service_tier: Annotated[
-        OptionalNullable[ServiceTier], PlainValidator(validate_open_enum(False))
-    ] = UNSET
+    service_tier: Optional[ServiceTier] = "auto"
 
     truncation: Annotated[
         OptionalNullable[Truncation], PlainValidator(validate_open_enum(False))
@@ -599,8 +619,6 @@ class OpenResponsesRequest(BaseModel):
             "include",
             "background",
             "safety_identifier",
-            "store",
-            "service_tier",
             "truncation",
             "provider",
         ]

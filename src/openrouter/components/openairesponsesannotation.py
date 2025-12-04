@@ -4,8 +4,10 @@ from __future__ import annotations
 from .filecitation import FileCitation, FileCitationTypedDict
 from .filepath import FilePath, FilePathTypedDict
 from .urlcitation import URLCitation, URLCitationTypedDict
+from openrouter.utils import get_discriminator
+from pydantic import Discriminator, Tag
 from typing import Union
-from typing_extensions import TypeAliasType
+from typing_extensions import Annotated, TypeAliasType
 
 
 OpenAIResponsesAnnotationTypedDict = TypeAliasType(
@@ -14,6 +16,11 @@ OpenAIResponsesAnnotationTypedDict = TypeAliasType(
 )
 
 
-OpenAIResponsesAnnotation = TypeAliasType(
-    "OpenAIResponsesAnnotation", Union[FilePath, FileCitation, URLCitation]
-)
+OpenAIResponsesAnnotation = Annotated[
+    Union[
+        Annotated[FileCitation, Tag("file_citation")],
+        Annotated[URLCitation, Tag("url_citation")],
+        Annotated[FilePath, Tag("file_path")],
+    ],
+    Discriminator(lambda m: get_discriminator(m, "type", "type")),
+]

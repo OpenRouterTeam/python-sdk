@@ -17,6 +17,7 @@ class CompletionResponseTypedDict(TypedDict):
     model: str
     choices: List[CompletionChoiceTypedDict]
     object: Literal["text_completion"]
+    provider: NotRequired[str]
     system_fingerprint: NotRequired[str]
     usage: NotRequired[CompletionUsageTypedDict]
 
@@ -37,6 +38,8 @@ class CompletionResponse(BaseModel):
         ],
         pydantic.Field(alias="object"),
     ] = "text_completion"
+
+    provider: Optional[str] = None
 
     system_fingerprint: Optional[str] = None
 

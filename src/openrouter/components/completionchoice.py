@@ -2,12 +2,19 @@
 
 from __future__ import annotations
 from .completionlogprobs import CompletionLogprobs, CompletionLogprobsTypedDict
-from openrouter.types import BaseModel, Nullable, UNSET_SENTINEL, UnrecognizedStr
+from openrouter.types import (
+    BaseModel,
+    Nullable,
+    OptionalNullable,
+    UNSET,
+    UNSET_SENTINEL,
+    UnrecognizedStr,
+)
 from openrouter.utils import validate_open_enum
 from pydantic import model_serializer
 from pydantic.functional_validators import PlainValidator
-from typing import Literal, Union
-from typing_extensions import Annotated, TypedDict
+from typing import Literal, Optional, Union
+from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 CompletionFinishReason = Union[
@@ -25,6 +32,8 @@ class CompletionChoiceTypedDict(TypedDict):
     index: float
     logprobs: Nullable[CompletionLogprobsTypedDict]
     finish_reason: Nullable[CompletionFinishReason]
+    native_finish_reason: NotRequired[str]
+    reasoning: NotRequired[Nullable[str]]
 
 
 class CompletionChoice(BaseModel):
@@ -38,10 +47,14 @@ class CompletionChoice(BaseModel):
         Nullable[CompletionFinishReason], PlainValidator(validate_open_enum(False))
     ]
 
+    native_finish_reason: Optional[str] = None
+
+    reasoning: OptionalNullable[str] = UNSET
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = []
-        nullable_fields = ["logprobs", "finish_reason"]
+        optional_fields = ["native_finish_reason", "reasoning"]
+        nullable_fields = ["logprobs", "finish_reason", "reasoning"]
         null_default_fields = []
 
         serialized = handler(self)

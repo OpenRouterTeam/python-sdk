@@ -3464,12 +3464,14 @@ components:
                 - AionLabs
                 - Alibaba
                 - Amazon Bedrock
+                - Amazon Nova
                 - Anthropic
-                - Arcee
+                - Arcee AI
                 - AtlasCloud
                 - Avian
                 - Azure
                 - BaseTen
+                - BytePlus
                 - Black Forest Labs
                 - Cerebras
                 - Chutes
@@ -3484,6 +3486,7 @@ components:
                 - Fireworks
                 - Friendli
                 - GMICloud
+                - GoPomelo
                 - Google
                 - Google AI Studio
                 - Groq
@@ -3514,6 +3517,7 @@ components:
                 - SambaNova
                 - SiliconFlow
                 - Stealth
+                - StreamLake
                 - Switchpoint
                 - Targon
                 - Together
@@ -3648,18 +3652,13 @@ components:
                     nullable: true
                 store:
                     type: boolean
-                    nullable: true
+                    const: false
+                    default: false
                 service_tier:
-                    allOf:
-                        - $ref: '#/components/schemas/OpenAIResponsesServiceTier'
-                        - enum:
-                            - auto
-                            - default
-                            - flex
-                            - scale
-                            - priority
-                          example: auto
-                          x-speakeasy-unknown-values: allow
+                    type: string
+                    enum:
+                        - auto
+                    default: auto
                 truncation:
                     allOf:
                         - $ref: '#/components/schemas/OpenAIResponsesTruncation'
@@ -3801,6 +3800,14 @@ components:
                                                 - pdf-text
                                                 - native
                                             x-speakeasy-unknown-values: allow
+                              required:
+                                - id
+                            - type: object
+                              properties:
+                                id:
+                                    type: string
+                                    enum:
+                                        - response-healing
                               required:
                                 - id
                     description: Plugins you want to enable for this request, including their settings.
@@ -4597,6 +4604,10 @@ components:
                       status: default
                       uptime_last_30m: 99.5
                       supports_implicit_caching: true
+        __schema0:
+            anyOf:
+                - $ref: '#/components/schemas/ChatCompletionFinishReason'
+                - type: 'null'
         ModelName:
             type: string
         ChatMessageContentItemText:
@@ -4607,6 +4618,8 @@ components:
                     const: text
                 text:
                     type: string
+                cache_control:
+                    $ref: '#/components/schemas/ChatMessageContentItemCacheControl'
             required:
                 - type
                 - text
@@ -4646,15 +4659,6 @@ components:
                             type: string
                         format:
                             type: string
-                            enum:
-                                - wav
-                                - mp3
-                                - flac
-                                - m4a
-                                - ogg
-                                - pcm16
-                                - pcm24
-                            x-speakeasy-unknown-values: allow
                     required:
                         - data
                         - format
@@ -4832,16 +4836,14 @@ components:
                 - prompt_tokens
                 - total_tokens
         ChatCompletionFinishReason:
-            anyOf:
-                - type: string
-                  enum:
-                    - tool_calls
-                    - stop
-                    - length
-                    - content_filter
-                    - error
-                  x-speakeasy-unknown-values: allow
-                - type: 'null'
+            type: string
+            enum:
+                - tool_calls
+                - stop
+                - length
+                - content_filter
+                - error
+            x-speakeasy-unknown-values: allow
         JSONSchemaConfig:
             type: object
             properties:
@@ -4883,6 +4885,20 @@ components:
             required:
                 - type
                 - grammar
+        ChatMessageContentItemCacheControl:
+            type: object
+            properties:
+                type:
+                    type: string
+                    const: ephemeral
+                ttl:
+                    type: string
+                    enum:
+                        - 5m
+                        - 1h
+                    x-speakeasy-unknown-values: allow
+            required:
+                - type
         SystemMessage:
             type: object
             properties:
@@ -5194,13 +5210,18 @@ components:
                         - type: 'null'
                 user:
                     type: string
+                debug:
+                    type: object
+                    properties:
+                        echo_upstream_body:
+                            type: boolean
             required:
                 - messages
         ChatResponseChoice:
             type: object
             properties:
                 finish_reason:
-                    $ref: '#/components/schemas/ChatCompletionFinishReason'
+                    $ref: '#/components/schemas/__schema0'
                 index:
                     type: number
                 message:
@@ -5261,7 +5282,7 @@ components:
                 delta:
                     $ref: '#/components/schemas/ChatStreamingMessageChunk'
                 finish_reason:
-                    $ref: '#/components/schemas/ChatCompletionFinishReason'
+                    $ref: '#/components/schemas/__schema0'
                 index:
                     type: number
                 logprobs:
@@ -5594,6 +5615,12 @@ components:
                         - type: 'null'
                 finish_reason:
                     $ref: '#/components/schemas/CompletionFinishReason'
+                native_finish_reason:
+                    type: string
+                reasoning:
+                    anyOf:
+                        - type: string
+                        - type: 'null'
             required:
                 - text
                 - index
@@ -5611,6 +5638,8 @@ components:
                     type: number
                 model:
                     type: string
+                provider:
+                    type: string
                 system_fingerprint:
                     type: string
                 choices:
@@ -5626,7 +5655,7 @@ components:
                 - model
                 - choices
             additionalProperties: false
-    parameters: {}
+    parameters: {AppIdentifier: {name: HTTP-Referer, in: header, schema: {type: string}, description: "The app identifier should be your app's URL and is used as the primary identifier for rankings.\nThis is used to track API usage per application.\n"}, AppDisplayName: {name: X-Title, in: header, schema: {type: string}, description: "The app display name allows you to customize how your app appears in OpenRouter's dashboard.\n"}}
     securitySchemes:
         apiKey:
             type: http
@@ -5829,6 +5858,26 @@ paths:
                         application/json:
                             schema:
                                 type: object
+                                properties:
+                                    data:
+                                        type: object
+                                        properties:
+                                            total_credits:
+                                                type: number
+                                                description: Total credits purchased
+                                                example: 100.5
+                                            total_usage:
+                                                type: number
+                                                description: Total credits used
+                                                example: 25.75
+                                        required:
+                                            - total_credits
+                                            - total_usage
+                                        example:
+                                            total_credits: 100.5
+                                            total_usage: 25.75
+                                required:
+                                    - data
                                 description: Total credits purchased and used
                                 example:
                                     data:
@@ -6193,11 +6242,6 @@ paths:
                                     - object
                                     - data
                                     - model
-                        text/event-stream:
-                            schema:
-                                type: string
-                                description: Not used for embeddings - embeddings do not support streaming
-                            x-speakeasy-sse-sentinel: '[DONE]'
                 '400':
                     description: Bad Request - Invalid request parameters or malformed input
                     content:
@@ -6730,12 +6774,14 @@ paths:
                         - AionLabs
                         - Alibaba
                         - Amazon Bedrock
+                        - Amazon Nova
                         - Anthropic
-                        - Arcee
+                        - Arcee AI
                         - AtlasCloud
                         - Avian
                         - Azure
                         - BaseTen
+                        - BytePlus
                         - Black Forest Labs
                         - Cerebras
                         - Chutes
@@ -6750,6 +6796,7 @@ paths:
                         - Fireworks
                         - Friendli
                         - GMICloud
+                        - GoPomelo
                         - Google
                         - Google AI Studio
                         - Groq
@@ -6780,6 +6827,7 @@ paths:
                         - SambaNova
                         - SiliconFlow
                         - Stealth
+                        - StreamLake
                         - Switchpoint
                         - Targon
                         - Together
@@ -8385,3 +8433,7 @@ x-retry-strategy:
     initialDelay: 500
     maxDelay: 60000
     maxAttempts: 3
+x-speakeasy-globals:
+    parameters:
+        - $ref: "#/components/parameters/AppIdentifier"
+        - $ref: "#/components/parameters/AppDisplayName"

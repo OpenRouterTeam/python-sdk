@@ -30,7 +30,7 @@ generation:
     generateNewTests: true
     skipResponseBodyAssertions: false
 python:
-  version: 0.0.19
+  version: 0.1.0
   additionalDependencies:
     dev: {}
     main: {}
@@ -62,12 +62,14 @@ python:
       operations: operations
       shared: components
       webhooks: ""
+  inferUnionDiscriminators: true
   inputModelSuffix: input
   legacyPyright: false
   license: Apache-2.0
   maxMethodParams: 999
   methodArguments: infer-optional-args
   moduleName: ""
+  multipartArrayFormat: legacy
   outputModelSuffix: output
   packageManager: uv
   packageName: openrouter

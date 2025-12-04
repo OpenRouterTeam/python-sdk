@@ -10,8 +10,9 @@ from .systemmessage import SystemMessage, SystemMessageTypedDict
 from .toolresponsemessage import ToolResponseMessage, ToolResponseMessageTypedDict
 from .usermessage import UserMessage, UserMessageTypedDict
 from openrouter.types import BaseModel
-from openrouter.utils import validate_const
+from openrouter.utils import get_discriminator, validate_const
 import pydantic
+from pydantic import Discriminator, Tag
 from pydantic.functional_validators import AfterValidator
 from typing import List, Literal, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
@@ -56,13 +57,13 @@ MessageTypedDict = TypeAliasType(
 )
 
 
-Message = TypeAliasType(
-    "Message",
+Message = Annotated[
     Union[
-        SystemMessage,
-        UserMessage,
-        MessageDeveloper,
-        ToolResponseMessage,
-        AssistantMessage,
+        Annotated[SystemMessage, Tag("system")],
+        Annotated[UserMessage, Tag("user")],
+        Annotated[MessageDeveloper, Tag("developer")],
+        Annotated[AssistantMessage, Tag("assistant")],
+        Annotated[ToolResponseMessage, Tag("tool")],
     ],
-)
+    Discriminator(lambda m: get_discriminator(m, "role", "role")),
+]

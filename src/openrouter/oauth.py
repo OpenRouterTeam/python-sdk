@@ -74,6 +74,7 @@ class OAuth(BaseSDK):
                 "json",
                 operations.ExchangeAuthCodeForAPIKeyRequest,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -194,6 +195,7 @@ class OAuth(BaseSDK):
                 "json",
                 operations.ExchangeAuthCodeForAPIKeyRequest,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -316,6 +318,7 @@ class OAuth(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", operations.CreateAuthKeysCodeRequest
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -438,6 +441,7 @@ class OAuth(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", operations.CreateAuthKeysCodeRequest
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 

@@ -2,8 +2,9 @@
 
 from __future__ import annotations
 from openrouter.types import BaseModel
-from openrouter.utils import validate_const
+from openrouter.utils import get_discriminator, validate_const
 import pydantic
+from pydantic import Discriminator, Tag
 from pydantic.functional_validators import AfterValidator
 from typing import Literal, Union
 from typing_extensions import Annotated, TypeAliasType, TypedDict
@@ -64,7 +65,10 @@ ChatMessageContentItemVideoTypedDict = TypeAliasType(
 )
 
 
-ChatMessageContentItemVideo = TypeAliasType(
-    "ChatMessageContentItemVideo",
-    Union[ChatMessageContentItemVideoInputVideo, ChatMessageContentItemVideoVideoURL],
-)
+ChatMessageContentItemVideo = Annotated[
+    Union[
+        Annotated[ChatMessageContentItemVideoInputVideo, Tag("input_video")],
+        Annotated[ChatMessageContentItemVideoVideoURL, Tag("video_url")],
+    ],
+    Discriminator(lambda m: get_discriminator(m, "type", "type")),
+]

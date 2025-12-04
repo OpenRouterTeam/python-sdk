@@ -5,9 +5,28 @@ from openrouter.types import BaseModel
 from typing_extensions import TypedDict
 
 
+class GetCreditsDataTypedDict(TypedDict):
+    total_credits: float
+    r"""Total credits purchased"""
+    total_usage: float
+    r"""Total credits used"""
+
+
+class GetCreditsData(BaseModel):
+    total_credits: float
+    r"""Total credits purchased"""
+
+    total_usage: float
+    r"""Total credits used"""
+
+
 class GetCreditsResponseTypedDict(TypedDict):
     r"""Total credits purchased and used"""
+
+    data: GetCreditsDataTypedDict
 
 
 class GetCreditsResponse(BaseModel):
     r"""Total credits purchased and used"""
+
+    data: GetCreditsData

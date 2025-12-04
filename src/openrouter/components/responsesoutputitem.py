@@ -25,8 +25,10 @@ from .responseswebsearchcalloutput import (
     ResponsesWebSearchCallOutput,
     ResponsesWebSearchCallOutputTypedDict,
 )
+from openrouter.utils import get_discriminator
+from pydantic import Discriminator, Tag
 from typing import Union
-from typing_extensions import TypeAliasType
+from typing_extensions import Annotated, TypeAliasType
 
 
 ResponsesOutputItemTypedDict = TypeAliasType(
@@ -43,15 +45,15 @@ ResponsesOutputItemTypedDict = TypeAliasType(
 r"""An output item from the response"""
 
 
-ResponsesOutputItem = TypeAliasType(
-    "ResponsesOutputItem",
+ResponsesOutputItem = Annotated[
     Union[
-        ResponsesWebSearchCallOutput,
-        ResponsesOutputItemFileSearchCall,
-        ResponsesImageGenerationCall,
-        ResponsesOutputMessage,
-        ResponsesOutputItemReasoning,
-        ResponsesOutputItemFunctionCall,
+        Annotated[ResponsesOutputMessage, Tag("message")],
+        Annotated[ResponsesOutputItemReasoning, Tag("reasoning")],
+        Annotated[ResponsesOutputItemFunctionCall, Tag("function_call")],
+        Annotated[ResponsesWebSearchCallOutput, Tag("web_search_call")],
+        Annotated[ResponsesOutputItemFileSearchCall, Tag("file_search_call")],
+        Annotated[ResponsesImageGenerationCall, Tag("image_generation_call")],
     ],
-)
+    Discriminator(lambda m: get_discriminator(m, "type", "type")),
+]
 r"""An output item from the response"""

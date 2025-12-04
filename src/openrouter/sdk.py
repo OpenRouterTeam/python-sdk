@@ -9,6 +9,7 @@ import httpx
 import importlib
 from openrouter import components, utils
 from openrouter._hooks import SDKHooks
+from openrouter.models import internal
 from openrouter.types import OptionalNullable, UNSET
 import sys
 from typing import Any, Callable, Dict, Optional, TYPE_CHECKING, Union, cast
@@ -77,6 +78,8 @@ class OpenRouter(BaseSDK):
     def __init__(
         self,
         api_key: Optional[Union[Optional[str], Callable[[], Optional[str]]]] = None,
+        http_referer: Optional[str] = None,
+        x_title: Optional[str] = None,
         server: Optional[str] = None,
         server_url: Optional[str] = None,
         url_params: Optional[Dict[str, str]] = None,
@@ -89,6 +92,8 @@ class OpenRouter(BaseSDK):
         r"""Instantiates the SDK configuring it with the provided parameters.
 
         :param api_key: The api_key required for authentication
+        :param http_referer: Configures the http_referer parameter for all supported operations
+        :param x_title: Configures the x_title parameter for all supported operations
         :param server: The server by name to use for all methods
         :param server_url: The server URL to use for all methods
         :param url_params: Parameters to optionally template the server URL with
@@ -129,6 +134,13 @@ class OpenRouter(BaseSDK):
             if url_params is not None:
                 server_url = utils.template_url(server_url, url_params)
 
+        _globals = internal.Globals(
+            http_referer=utils.get_global_from_env(
+                http_referer, "OPENROUTER_HTTP_REFERER", str
+            ),
+            x_title=utils.get_global_from_env(x_title, "OPENROUTER_X_TITLE", str),
+        )
+
         BaseSDK.__init__(
             self,
             SDKConfiguration(
@@ -136,6 +148,7 @@ class OpenRouter(BaseSDK):
                 client_supplied=client_supplied,
                 async_client=async_client,
                 async_client_supplied=async_client_supplied,
+                globals=_globals,
                 security=security,
                 server_url=server_url,
                 server=server,

@@ -7,8 +7,10 @@ from .openairesponsesrefusalcontent import (
 )
 from .responseoutputtext import ResponseOutputText, ResponseOutputTextTypedDict
 from openrouter.types import BaseModel
+from openrouter.utils import get_discriminator
+from pydantic import Discriminator, Tag
 from typing import List, Literal, Optional, Union
-from typing_extensions import NotRequired, TypeAliasType, TypedDict
+from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
 ResponsesOutputMessageRole = Literal["assistant",]
@@ -52,10 +54,13 @@ ResponsesOutputMessageContentTypedDict = TypeAliasType(
 )
 
 
-ResponsesOutputMessageContent = TypeAliasType(
-    "ResponsesOutputMessageContent",
-    Union[OpenAIResponsesRefusalContent, ResponseOutputText],
-)
+ResponsesOutputMessageContent = Annotated[
+    Union[
+        Annotated[ResponseOutputText, Tag("output_text")],
+        Annotated[OpenAIResponsesRefusalContent, Tag("refusal")],
+    ],
+    Discriminator(lambda m: get_discriminator(m, "type", "type")),
+]
 
 
 class ResponsesOutputMessageTypedDict(TypedDict):

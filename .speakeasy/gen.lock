@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: cfd52247-6a25-4c6d-bbce-fe6fce0cd69d
 management:
-  docChecksum: 4cc4a9d9115d0eca9a5eb4786505579d
+  docChecksum: d2e69fbbac1477d094fdfc212c13670c
   docVersion: 1.0.0
-  speakeasyVersion: 1.658.2
-  generationVersion: 2.755.9
-  releaseVersion: 0.0.19
-  configChecksum: 834d5c1cea368e35ab6535ffb2bf9e7a
+  speakeasyVersion: 1.668.0
+  generationVersion: 2.770.0
+  releaseVersion: 0.1.0
+  configChecksum: fa0d13fb5fd38982a589d64e64b0d87d
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
@@ -15,7 +15,7 @@ features:
     acceptHeaders: 3.0.0
     additionalDependencies: 1.0.0
     constsAndDefaults: 1.0.5
-    core: 5.23.9
+    core: 5.23.13
     defaultEnabledRetries: 0.2.0
     deprecations: 3.0.2
     devContainers: 3.0.0
@@ -27,6 +27,7 @@ features:
     globalSecurityCallbacks: 1.0.0
     globalSecurityFlattening: 1.0.0
     globalServerURLs: 3.2.0
+    globals: 3.0.0
     groups: 3.0.1
     methodArguments: 1.0.2
     methodSecurity: 3.0.1
@@ -34,8 +35,8 @@ features:
     nullables: 1.0.1
     openEnums: 1.0.1
     responseFormat: 1.0.1
-    retries: 3.0.2
-    sdkHooks: 1.1.0
+    retries: 3.0.3
+    sdkHooks: 1.2.0
     serverEvents: 1.0.11
     serverEventsSentinels: 0.1.0
     serverIDs: 3.0.0
@@ -65,8 +66,8 @@ generatedFiles:
   - docs/components/chatgenerationtokenusage.md
   - docs/components/chatmessagecontentitem.md
   - docs/components/chatmessagecontentitemaudio.md
-  - docs/components/chatmessagecontentitemaudioformat.md
   - docs/components/chatmessagecontentitemaudioinputaudio.md
+  - docs/components/chatmessagecontentitemcachecontrol.md
   - docs/components/chatmessagecontentitemimage.md
   - docs/components/chatmessagecontentitemimagedetail.md
   - docs/components/chatmessagecontentitemtext.md
@@ -105,6 +106,7 @@ generatedFiles:
   - docs/components/costdetails.md
   - docs/components/createchargerequest.md
   - docs/components/datacollection.md
+  - docs/components/debug.md
   - docs/components/defaultparameters.md
   - docs/components/edgenetworktimeoutresponseerrordata.md
   - docs/components/effort.md
@@ -117,6 +119,7 @@ generatedFiles:
   - docs/components/forbiddenresponseerrordata.md
   - docs/components/idfileparser.md
   - docs/components/idmoderation.md
+  - docs/components/idresponsehealing.md
   - docs/components/idweb.md
   - docs/components/ignore.md
   - docs/components/imagegenerationstatus.md
@@ -300,6 +303,7 @@ generatedFiles:
   - docs/components/plugin.md
   - docs/components/pluginfileparser.md
   - docs/components/pluginmoderation.md
+  - docs/components/pluginresponsehealing.md
   - docs/components/pluginweb.md
   - docs/components/pricing.md
   - docs/components/prompt.md
@@ -391,6 +395,7 @@ generatedFiles:
   - docs/components/toplogprob.md
   - docs/components/topproviderinfo.md
   - docs/components/truncation.md
+  - docs/components/ttl.md
   - docs/components/type.md
   - docs/components/typeresponsecompleted.md
   - docs/components/typeresponsecontentpartadded.md
@@ -436,6 +441,7 @@ generatedFiles:
   - docs/errors/toomanyrequestsresponseerror.md
   - docs/errors/unauthorizedresponseerror.md
   - docs/errors/unprocessableentityresponseerror.md
+  - docs/models/internal/globals.md
   - docs/models/utils/retryconfig.md
   - docs/operations/apitype.md
   - docs/operations/calldata.md
@@ -453,7 +459,6 @@ generatedFiles:
   - docs/operations/createembeddingsprovider.md
   - docs/operations/createembeddingsrequest.md
   - docs/operations/createembeddingsresponse.md
-  - docs/operations/createembeddingsresponsebody.md
   - docs/operations/createkeysdata.md
   - docs/operations/createkeyslimitreset.md
   - docs/operations/createkeysrequest.md
@@ -467,6 +472,7 @@ generatedFiles:
   - docs/operations/exchangeauthcodeforapikeycodechallengemethod.md
   - docs/operations/exchangeauthcodeforapikeyrequest.md
   - docs/operations/exchangeauthcodeforapikeyresponse.md
+  - docs/operations/getcreditsdata.md
   - docs/operations/getcreditsresponse.md
   - docs/operations/getcurrentkeydata.md
   - docs/operations/getcurrentkeyresponse.md
@@ -549,11 +555,13 @@ generatedFiles:
   - src/openrouter/components/assistantmessage.py
   - src/openrouter/components/badgatewayresponseerrordata.py
   - src/openrouter/components/badrequestresponseerrordata.py
+  - src/openrouter/components/chatcompletionfinishreason.py
   - src/openrouter/components/chaterror.py
   - src/openrouter/components/chatgenerationparams.py
   - src/openrouter/components/chatgenerationtokenusage.py
   - src/openrouter/components/chatmessagecontentitem.py
   - src/openrouter/components/chatmessagecontentitemaudio.py
+  - src/openrouter/components/chatmessagecontentitemcachecontrol.py
   - src/openrouter/components/chatmessagecontentitemimage.py
   - src/openrouter/components/chatmessagecontentitemtext.py
   - src/openrouter/components/chatmessagecontentitemvideo.py
@@ -562,6 +570,7 @@ generatedFiles:
   - src/openrouter/components/chatmessagetoolcall.py
   - src/openrouter/components/chatresponse.py
   - src/openrouter/components/chatresponsechoice.py
+  - src/openrouter/components/chatstreamingchoice.py
   - src/openrouter/components/chatstreamingmessagechunk.py
   - src/openrouter/components/chatstreamingmessagetoolcall.py
   - src/openrouter/components/chatstreamingresponsechunk.py
@@ -711,6 +720,9 @@ generatedFiles:
   - src/openrouter/errors/unprocessableentityresponse_error.py
   - src/openrouter/generations.py
   - src/openrouter/httpclient.py
+  - src/openrouter/models/__init__.py
+  - src/openrouter/models/internal/__init__.py
+  - src/openrouter/models/internal/globals.py
   - src/openrouter/models_.py
   - src/openrouter/oauth.py
   - src/openrouter/operations/__init__.py
@@ -764,7 +776,7 @@ examples:
   createResponses:
     speakeasy-default-create-responses:
       requestBody:
-        application/json: {"input": [{"type": "message", "role": "user", "content": "Hello, how are you?"}], "tools": [{"type": "function", "name": "get_current_weather", "description": "Get the current weather in a given location", "parameters": {"type": "object", "properties": {"location": {"type": "string"}}}}], "model": "anthropic/claude-4.5-sonnet-20250929", "temperature": 0.7, "top_p": 0.9, "stream": false}
+        application/json: {"input": [{"type": "message", "role": "user", "content": "Hello, how are you?"}], "tools": [{"type": "function", "name": "get_current_weather", "description": "Get the current weather in a given location", "parameters": {"type": "object", "properties": {"location": {"type": "string"}}}}], "model": "anthropic/claude-4.5-sonnet-20250929", "temperature": 0.7, "top_p": 0.9, "store": false, "service_tier": "auto", "stream": false}
       responses:
         "200":
           application/json: {"id": "resp-abc123", "object": "response", "created_at": 1704067200, "model": "gpt-4", "status": "completed", "output": [{"id": "msg-abc123", "role": "assistant", "type": "message", "status": "completed", "content": [{"type": "output_text", "text": "Hello! How can I help you today?", "annotations": []}]}], "error": null, "incomplete_details": null, "usage": {"input_tokens": 10, "input_tokens_details": {"cached_tokens": 0}, "output_tokens": 25, "output_tokens_details": {"reasoning_tokens": 0}, "total_tokens": 35}, "max_output_tokens": null, "temperature": null, "top_p": null, "instructions": null, "metadata": null, "tools": [], "tool_choice": "auto", "parallel_tool_calls": true}
@@ -814,7 +826,7 @@ examples:
     speakeasy-default-get-credits:
       responses:
         "200":
-          application/json: {}
+          application/json: {"data": {"total_credits": 100.5, "total_usage": 25.75}}
         "401":
           application/json: {"error": {"code": 401, "message": "Missing Authentication header"}}
         "403":
@@ -1104,3 +1116,4 @@ examples:
         "500":
           application/json: {"error": {"code": "<value>", "message": "<value>"}}
 examplesVersion: 1.0.2
+releaseNotes: "## Python SDK Changes:\n* `open_router.beta.responses.send()`:  `request` **Changed** **Breaking** :warning:\n* `open_router.embeddings.generate()`:  `response.status[200].content[text/event-stream` **Removed** **Breaking** :warning:\n* `open_router.chat.send()`: \n  *  `request` **Changed** **Breaking** :warning:\n  *  `response.choices.[].message.content.[array].[]` **Changed** **Breaking** :warning:\n* `open_router.credits.get_credits()`:  `response.data` **Added**\n* `open_router.parameters.get_parameters()`:  `request.provider` **Changed**\n* `open_router.completions.generate()`:  `response` **Changed**\n"

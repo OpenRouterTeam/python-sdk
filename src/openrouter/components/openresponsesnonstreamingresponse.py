@@ -48,8 +48,8 @@ from openrouter.types import (
     UNSET,
     UNSET_SENTINEL,
 )
-from openrouter.utils import validate_open_enum
-from pydantic import model_serializer
+from openrouter.utils import get_discriminator, validate_open_enum
+from pydantic import Discriminator, Tag, model_serializer
 from pydantic.functional_validators import PlainValidator
 from typing import Any, Dict, List, Literal, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
@@ -127,16 +127,19 @@ OpenResponsesNonStreamingResponseToolUnionTypedDict = TypeAliasType(
 )
 
 
-OpenResponsesNonStreamingResponseToolUnion = TypeAliasType(
-    "OpenResponsesNonStreamingResponseToolUnion",
+OpenResponsesNonStreamingResponseToolUnion = Annotated[
     Union[
-        OpenResponsesWebSearchPreviewTool,
-        OpenResponsesWebSearchPreview20250311Tool,
-        OpenResponsesWebSearchTool,
-        OpenResponsesWebSearch20250826Tool,
-        OpenResponsesNonStreamingResponseToolFunction,
+        Annotated[OpenResponsesNonStreamingResponseToolFunction, Tag("function")],
+        Annotated[OpenResponsesWebSearchPreviewTool, Tag("web_search_preview")],
+        Annotated[
+            OpenResponsesWebSearchPreview20250311Tool,
+            Tag("web_search_preview_2025_03_11"),
+        ],
+        Annotated[OpenResponsesWebSearchTool, Tag("web_search")],
+        Annotated[OpenResponsesWebSearch20250826Tool, Tag("web_search_2025_08_26")],
     ],
-)
+    Discriminator(lambda m: get_discriminator(m, "type", "type")),
+]
 
 
 class OpenResponsesNonStreamingResponseTypedDict(TypedDict):

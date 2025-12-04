@@ -16,9 +16,9 @@ from openrouter.types import (
     UNSET,
     UNSET_SENTINEL,
 )
-from openrouter.utils import validate_const
+from openrouter.utils import get_discriminator, validate_const
 import pydantic
-from pydantic import model_serializer
+from pydantic import Discriminator, Tag, model_serializer
 from pydantic.functional_validators import AfterValidator
 from typing import Dict, List, Literal, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
@@ -127,16 +127,16 @@ CompletionCreateParamsResponseFormatUnionTypedDict = TypeAliasType(
 )
 
 
-CompletionCreateParamsResponseFormatUnion = TypeAliasType(
-    "CompletionCreateParamsResponseFormatUnion",
+CompletionCreateParamsResponseFormatUnion = Annotated[
     Union[
-        CompletionCreateParamsResponseFormatText,
-        CompletionCreateParamsResponseFormatJSONObject,
-        CompletionCreateParamsResponseFormatPython,
-        ResponseFormatJSONSchema,
-        ResponseFormatTextGrammar,
+        Annotated[CompletionCreateParamsResponseFormatText, Tag("text")],
+        Annotated[CompletionCreateParamsResponseFormatJSONObject, Tag("json_object")],
+        Annotated[ResponseFormatJSONSchema, Tag("json_schema")],
+        Annotated[ResponseFormatTextGrammar, Tag("grammar")],
+        Annotated[CompletionCreateParamsResponseFormatPython, Tag("python")],
     ],
-)
+    Discriminator(lambda m: get_discriminator(m, "type", "type")),
+]
 
 
 class CompletionCreateParamsTypedDict(TypedDict):

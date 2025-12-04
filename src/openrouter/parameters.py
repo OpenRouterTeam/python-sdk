@@ -68,6 +68,7 @@ class Parameters(BaseSDK):
             security=utils.get_pydantic_model(
                 security, operations.GetParametersSecurity
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -179,6 +180,7 @@ class Parameters(BaseSDK):
             security=utils.get_pydantic_model(
                 security, operations.GetParametersSecurity
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 

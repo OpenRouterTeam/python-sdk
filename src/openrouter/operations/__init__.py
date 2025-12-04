@@ -45,8 +45,6 @@ if TYPE_CHECKING:
         CreateEmbeddingsRequest,
         CreateEmbeddingsRequestTypedDict,
         CreateEmbeddingsResponse,
-        CreateEmbeddingsResponseBody,
-        CreateEmbeddingsResponseBodyTypedDict,
         CreateEmbeddingsResponseTypedDict,
         Embedding,
         EmbeddingTypedDict,
@@ -100,7 +98,12 @@ if TYPE_CHECKING:
         ExchangeAuthCodeForAPIKeyResponse,
         ExchangeAuthCodeForAPIKeyResponseTypedDict,
     )
-    from .getcredits import GetCreditsResponse, GetCreditsResponseTypedDict
+    from .getcredits import (
+        GetCreditsData,
+        GetCreditsDataTypedDict,
+        GetCreditsResponse,
+        GetCreditsResponseTypedDict,
+    )
     from .getcurrentkey import (
         GetCurrentKeyData,
         GetCurrentKeyDataTypedDict,
@@ -216,8 +219,6 @@ __all__ = [
     "CreateEmbeddingsRequest",
     "CreateEmbeddingsRequestTypedDict",
     "CreateEmbeddingsResponse",
-    "CreateEmbeddingsResponseBody",
-    "CreateEmbeddingsResponseBodyTypedDict",
     "CreateEmbeddingsResponseTypedDict",
     "CreateKeysData",
     "CreateKeysDataTypedDict",
@@ -242,6 +243,8 @@ __all__ = [
     "ExchangeAuthCodeForAPIKeyRequestTypedDict",
     "ExchangeAuthCodeForAPIKeyResponse",
     "ExchangeAuthCodeForAPIKeyResponseTypedDict",
+    "GetCreditsData",
+    "GetCreditsDataTypedDict",
     "GetCreditsResponse",
     "GetCreditsResponseTypedDict",
     "GetCurrentKeyData",
@@ -370,8 +373,6 @@ _dynamic_imports: dict[str, str] = {
     "CreateEmbeddingsRequest": ".createembeddings",
     "CreateEmbeddingsRequestTypedDict": ".createembeddings",
     "CreateEmbeddingsResponse": ".createembeddings",
-    "CreateEmbeddingsResponseBody": ".createembeddings",
-    "CreateEmbeddingsResponseBodyTypedDict": ".createembeddings",
     "CreateEmbeddingsResponseTypedDict": ".createembeddings",
     "Embedding": ".createembeddings",
     "EmbeddingTypedDict": ".createembeddings",
@@ -416,6 +417,8 @@ _dynamic_imports: dict[str, str] = {
     "ExchangeAuthCodeForAPIKeyRequestTypedDict": ".exchangeauthcodeforapikey",
     "ExchangeAuthCodeForAPIKeyResponse": ".exchangeauthcodeforapikey",
     "ExchangeAuthCodeForAPIKeyResponseTypedDict": ".exchangeauthcodeforapikey",
+    "GetCreditsData": ".getcredits",
+    "GetCreditsDataTypedDict": ".getcredits",
     "GetCreditsResponse": ".getcredits",
     "GetCreditsResponseTypedDict": ".getcredits",
     "GetCurrentKeyData": ".getcurrentkey",

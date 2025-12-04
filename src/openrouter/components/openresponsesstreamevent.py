@@ -59,8 +59,10 @@ from .reasoningtextcontent import ReasoningTextContent, ReasoningTextContentType
 from .responseoutputtext import ResponseOutputText, ResponseOutputTextTypedDict
 from .responsesoutputitem import ResponsesOutputItem, ResponsesOutputItemTypedDict
 from openrouter.types import BaseModel
+from openrouter.utils import get_discriminator
+from pydantic import Discriminator, Tag
 from typing import List, Literal, Union
-from typing_extensions import TypeAliasType, TypedDict
+from typing_extensions import Annotated, TypeAliasType, TypedDict
 
 
 TypeResponseReasoningSummaryPartDone = Literal["response.reasoning_summary_part.done",]
@@ -328,10 +330,14 @@ Part2TypedDict = TypeAliasType(
 )
 
 
-Part2 = TypeAliasType(
-    "Part2",
-    Union[ReasoningTextContent, OpenAIResponsesRefusalContent, ResponseOutputText],
-)
+Part2 = Annotated[
+    Union[
+        Annotated[ResponseOutputText, Tag("output_text")],
+        Annotated[ReasoningTextContent, Tag("reasoning_text")],
+        Annotated[OpenAIResponsesRefusalContent, Tag("refusal")],
+    ],
+    Discriminator(lambda m: get_discriminator(m, "type", "type")),
+]
 
 
 class OpenResponsesStreamEventResponseContentPartDoneTypedDict(TypedDict):
@@ -374,10 +380,14 @@ Part1TypedDict = TypeAliasType(
 )
 
 
-Part1 = TypeAliasType(
-    "Part1",
-    Union[ReasoningTextContent, OpenAIResponsesRefusalContent, ResponseOutputText],
-)
+Part1 = Annotated[
+    Union[
+        Annotated[ResponseOutputText, Tag("output_text")],
+        Annotated[ReasoningTextContent, Tag("reasoning_text")],
+        Annotated[OpenAIResponsesRefusalContent, Tag("refusal")],
+    ],
+    Discriminator(lambda m: get_discriminator(m, "type", "type")),
+]
 
 
 class OpenResponsesStreamEventResponseContentPartAddedTypedDict(TypedDict):
@@ -609,36 +619,97 @@ OpenResponsesStreamEventTypedDict = TypeAliasType(
 r"""Union of all possible event types emitted during response streaming"""
 
 
-OpenResponsesStreamEvent = TypeAliasType(
-    "OpenResponsesStreamEvent",
+OpenResponsesStreamEvent = Annotated[
     Union[
-        OpenResponsesStreamEventResponseCreated,
-        OpenResponsesStreamEventResponseInProgress,
-        OpenResponsesStreamEventResponseCompleted,
-        OpenResponsesStreamEventResponseIncomplete,
-        OpenResponsesStreamEventResponseFailed,
-        OpenResponsesStreamEventResponseOutputItemAdded,
-        OpenResponsesStreamEventResponseOutputItemDone,
-        OpenResponsesImageGenCallCompleted,
-        OpenResponsesImageGenCallGenerating,
-        OpenResponsesImageGenCallInProgress,
-        OpenResponsesErrorEvent,
-        OpenResponsesStreamEventResponseFunctionCallArgumentsDelta,
-        OpenResponsesStreamEventResponseRefusalDelta,
-        OpenResponsesReasoningSummaryPartAddedEvent,
-        OpenResponsesStreamEventResponseContentPartAdded,
-        OpenResponsesImageGenCallPartialImage,
-        OpenResponsesStreamEventResponseFunctionCallArgumentsDone,
-        OpenResponsesReasoningDeltaEvent,
-        OpenResponsesReasoningDoneEvent,
-        OpenResponsesStreamEventResponseRefusalDone,
-        OpenResponsesStreamEventResponseReasoningSummaryPartDone,
-        OpenResponsesReasoningSummaryTextDeltaEvent,
-        OpenResponsesReasoningSummaryTextDoneEvent,
-        OpenResponsesStreamEventResponseContentPartDone,
-        OpenResponsesStreamEventResponseOutputTextDelta,
-        OpenResponsesStreamEventResponseOutputTextDone,
-        OpenResponsesStreamEventResponseOutputTextAnnotationAdded,
+        Annotated[OpenResponsesStreamEventResponseCreated, Tag("response.created")],
+        Annotated[
+            OpenResponsesStreamEventResponseInProgress, Tag("response.in_progress")
+        ],
+        Annotated[OpenResponsesStreamEventResponseCompleted, Tag("response.completed")],
+        Annotated[
+            OpenResponsesStreamEventResponseIncomplete, Tag("response.incomplete")
+        ],
+        Annotated[OpenResponsesStreamEventResponseFailed, Tag("response.failed")],
+        Annotated[OpenResponsesErrorEvent, Tag("error")],
+        Annotated[
+            OpenResponsesStreamEventResponseOutputItemAdded,
+            Tag("response.output_item.added"),
+        ],
+        Annotated[
+            OpenResponsesStreamEventResponseOutputItemDone,
+            Tag("response.output_item.done"),
+        ],
+        Annotated[
+            OpenResponsesStreamEventResponseContentPartAdded,
+            Tag("response.content_part.added"),
+        ],
+        Annotated[
+            OpenResponsesStreamEventResponseContentPartDone,
+            Tag("response.content_part.done"),
+        ],
+        Annotated[
+            OpenResponsesStreamEventResponseOutputTextDelta,
+            Tag("response.output_text.delta"),
+        ],
+        Annotated[
+            OpenResponsesStreamEventResponseOutputTextDone,
+            Tag("response.output_text.done"),
+        ],
+        Annotated[
+            OpenResponsesStreamEventResponseRefusalDelta, Tag("response.refusal.delta")
+        ],
+        Annotated[
+            OpenResponsesStreamEventResponseRefusalDone, Tag("response.refusal.done")
+        ],
+        Annotated[
+            OpenResponsesStreamEventResponseOutputTextAnnotationAdded,
+            Tag("response.output_text.annotation.added"),
+        ],
+        Annotated[
+            OpenResponsesStreamEventResponseFunctionCallArgumentsDelta,
+            Tag("response.function_call_arguments.delta"),
+        ],
+        Annotated[
+            OpenResponsesStreamEventResponseFunctionCallArgumentsDone,
+            Tag("response.function_call_arguments.done"),
+        ],
+        Annotated[
+            OpenResponsesReasoningDeltaEvent, Tag("response.reasoning_text.delta")
+        ],
+        Annotated[OpenResponsesReasoningDoneEvent, Tag("response.reasoning_text.done")],
+        Annotated[
+            OpenResponsesReasoningSummaryPartAddedEvent,
+            Tag("response.reasoning_summary_part.added"),
+        ],
+        Annotated[
+            OpenResponsesStreamEventResponseReasoningSummaryPartDone,
+            Tag("response.reasoning_summary_part.done"),
+        ],
+        Annotated[
+            OpenResponsesReasoningSummaryTextDeltaEvent,
+            Tag("response.reasoning_summary_text.delta"),
+        ],
+        Annotated[
+            OpenResponsesReasoningSummaryTextDoneEvent,
+            Tag("response.reasoning_summary_text.done"),
+        ],
+        Annotated[
+            OpenResponsesImageGenCallInProgress,
+            Tag("response.image_generation_call.in_progress"),
+        ],
+        Annotated[
+            OpenResponsesImageGenCallGenerating,
+            Tag("response.image_generation_call.generating"),
+        ],
+        Annotated[
+            OpenResponsesImageGenCallPartialImage,
+            Tag("response.image_generation_call.partial_image"),
+        ],
+        Annotated[
+            OpenResponsesImageGenCallCompleted,
+            Tag("response.image_generation_call.completed"),
+        ],
     ],
-)
+    Discriminator(lambda m: get_discriminator(m, "type", "type")),
+]
 r"""Union of all possible event types emitted during response streaming"""
