@@ -406,7 +406,6 @@ class OpenResponsesRequestPluginFileParserTypedDict(TypedDict):
     id: IDFileParser
     enabled: NotRequired[bool]
     r"""Set to false to disable the file-parser plugin for this request. Defaults to true."""
-    max_files: NotRequired[float]
     pdf: NotRequired[OpenResponsesRequestPdfTypedDict]
 
 
@@ -415,8 +414,6 @@ class OpenResponsesRequestPluginFileParser(BaseModel):
 
     enabled: Optional[bool] = None
     r"""Set to false to disable the file-parser plugin for this request. Defaults to true."""
-
-    max_files: Optional[float] = None
 
     pdf: Optional[OpenResponsesRequestPdf] = None
 

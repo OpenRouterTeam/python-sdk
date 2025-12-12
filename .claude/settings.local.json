@@ -1,9 +1,7 @@
 {
   "permissions": {
     "allow": [
-      "Bash(python3:*)",
-      "Bash(git push:*)",
-      "Bash(gh pr create:*)"
+      "Bash(python3:*)"
     ],
     "deny": [],
     "ask": []

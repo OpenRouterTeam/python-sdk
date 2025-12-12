@@ -7,10 +7,12 @@ This example demonstrates how to:
 """
 
 from openrouter import OpenRouter
-from openrouter.utils import (
+from openrouter.utils.oauth_create_sha256_code_challenge import (
     oauth_create_sha256_code_challenge,
-    oauth_create_authorization_url,
     CreateSHA256CodeChallengeRequest,
+)
+from openrouter.utils.oauth_create_authorization_url import (
+    oauth_create_authorization_url,
     CreateAuthorizationUrlRequestWithPKCE,
 )
 

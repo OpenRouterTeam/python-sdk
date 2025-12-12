@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: cfd52247-6a25-4c6d-bbce-fe6fce0cd69d
 management:
-  docChecksum: e929ecf569d79ab96a315332a4855566
+  docChecksum: 775966841832e95cb8d37401c576b4b6
   docVersion: 1.0.0
   speakeasyVersion: 1.666.0
   generationVersion: 2.768.0
-  releaseVersion: 0.0.22
-  configChecksum: 0afda3910a58a8d797ac6674fa858711
+  releaseVersion: 0.0.16
+  configChecksum: cd00e781b0ef78cfcb3fe812f51e93ff
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true

@@ -276,7 +276,6 @@ class ChatGenerationParamsPdf(BaseModel):
 class ChatGenerationParamsPluginFileParserTypedDict(TypedDict):
     id: Literal["file-parser"]
     enabled: NotRequired[bool]
-    max_files: NotRequired[float]
     pdf: NotRequired[ChatGenerationParamsPdfTypedDict]
 
 
@@ -289,8 +288,6 @@ class ChatGenerationParamsPluginFileParser(BaseModel):
     ] = "file-parser"
 
     enabled: Optional[bool] = None
-
-    max_files: Optional[float] = None
 
     pdf: Optional[ChatGenerationParamsPdf] = None
 
