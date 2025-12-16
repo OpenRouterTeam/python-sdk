@@ -28,8 +28,7 @@ class Embeddings(BaseSDK):
         user: Optional[str] = None,
         provider: Optional[
             Union[
-                operations.CreateEmbeddingsProvider,
-                operations.CreateEmbeddingsProviderTypedDict,
+                components.ProviderPreferences, components.ProviderPreferencesTypedDict
             ]
         ] = None,
         input_type: Optional[str] = None,
@@ -48,7 +47,7 @@ class Embeddings(BaseSDK):
         :param encoding_format:
         :param dimensions:
         :param user:
-        :param provider:
+        :param provider: Provider routing preferences for the request.
         :param input_type:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -73,7 +72,7 @@ class Embeddings(BaseSDK):
             dimensions=dimensions,
             user=user,
             provider=utils.get_pydantic_model(
-                provider, Optional[operations.CreateEmbeddingsProvider]
+                provider, Optional[components.ProviderPreferences]
             ),
             input_type=input_type,
         )
@@ -216,8 +215,7 @@ class Embeddings(BaseSDK):
         user: Optional[str] = None,
         provider: Optional[
             Union[
-                operations.CreateEmbeddingsProvider,
-                operations.CreateEmbeddingsProviderTypedDict,
+                components.ProviderPreferences, components.ProviderPreferencesTypedDict
             ]
         ] = None,
         input_type: Optional[str] = None,
@@ -236,7 +234,7 @@ class Embeddings(BaseSDK):
         :param encoding_format:
         :param dimensions:
         :param user:
-        :param provider:
+        :param provider: Provider routing preferences for the request.
         :param input_type:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -261,7 +259,7 @@ class Embeddings(BaseSDK):
             dimensions=dimensions,
             user=user,
             provider=utils.get_pydantic_model(
-                provider, Optional[operations.CreateEmbeddingsProvider]
+                provider, Optional[components.ProviderPreferences]
             ),
             input_type=input_type,
         )

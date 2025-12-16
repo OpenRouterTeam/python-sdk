@@ -28,6 +28,7 @@ Parameter = Union[
         "parallel_tool_calls",
         "include_reasoning",
         "reasoning",
+        "reasoning_effort",
         "web_search_options",
         "verbosity",
     ],

@@ -33,7 +33,7 @@ class Chat(BaseSDK):
                 List[components.ChatGenerationParamsPluginUnionTypedDict],
             ]
         ] = None,
-        route: OptionalNullable[components.ChatGenerationParamsRoute] = UNSET,
+        route: OptionalNullable[components.Route] = UNSET,
         user: Optional[str] = None,
         session_id: Optional[str] = None,
         model: Optional[str] = None,
@@ -88,7 +88,7 @@ class Chat(BaseSDK):
         :param messages:
         :param provider: When multiple model providers are available, optionally indicate your routing preference.
         :param plugins: Plugins you want to enable for this request, including their settings.
-        :param route: Routing strategy for multiple models: \"fallback\" (default) uses secondary models as backups, \"sort\" sorts all endpoints together by routing criteria.
+        :param route:
         :param user:
         :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 128 characters.
         :param model:
@@ -136,7 +136,7 @@ class Chat(BaseSDK):
                 List[components.ChatGenerationParamsPluginUnionTypedDict],
             ]
         ] = None,
-        route: OptionalNullable[components.ChatGenerationParamsRoute] = UNSET,
+        route: OptionalNullable[components.Route] = UNSET,
         user: Optional[str] = None,
         session_id: Optional[str] = None,
         model: Optional[str] = None,
@@ -191,7 +191,7 @@ class Chat(BaseSDK):
         :param messages:
         :param provider: When multiple model providers are available, optionally indicate your routing preference.
         :param plugins: Plugins you want to enable for this request, including their settings.
-        :param route: Routing strategy for multiple models: \"fallback\" (default) uses secondary models as backups, \"sort\" sorts all endpoints together by routing criteria.
+        :param route:
         :param user:
         :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 128 characters.
         :param model:
@@ -238,7 +238,7 @@ class Chat(BaseSDK):
                 List[components.ChatGenerationParamsPluginUnionTypedDict],
             ]
         ] = None,
-        route: OptionalNullable[components.ChatGenerationParamsRoute] = UNSET,
+        route: OptionalNullable[components.Route] = UNSET,
         user: Optional[str] = None,
         session_id: Optional[str] = None,
         model: Optional[str] = None,
@@ -293,7 +293,7 @@ class Chat(BaseSDK):
         :param messages:
         :param provider: When multiple model providers are available, optionally indicate your routing preference.
         :param plugins: Plugins you want to enable for this request, including their settings.
-        :param route: Routing strategy for multiple models: \"fallback\" (default) uses secondary models as backups, \"sort\" sorts all endpoints together by routing criteria.
+        :param route:
         :param user:
         :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 128 characters.
         :param model:
@@ -480,7 +480,7 @@ class Chat(BaseSDK):
                 List[components.ChatGenerationParamsPluginUnionTypedDict],
             ]
         ] = None,
-        route: OptionalNullable[components.ChatGenerationParamsRoute] = UNSET,
+        route: OptionalNullable[components.Route] = UNSET,
         user: Optional[str] = None,
         session_id: Optional[str] = None,
         model: Optional[str] = None,
@@ -535,7 +535,7 @@ class Chat(BaseSDK):
         :param messages:
         :param provider: When multiple model providers are available, optionally indicate your routing preference.
         :param plugins: Plugins you want to enable for this request, including their settings.
-        :param route: Routing strategy for multiple models: \"fallback\" (default) uses secondary models as backups, \"sort\" sorts all endpoints together by routing criteria.
+        :param route:
         :param user:
         :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 128 characters.
         :param model:
@@ -583,7 +583,7 @@ class Chat(BaseSDK):
                 List[components.ChatGenerationParamsPluginUnionTypedDict],
             ]
         ] = None,
-        route: OptionalNullable[components.ChatGenerationParamsRoute] = UNSET,
+        route: OptionalNullable[components.Route] = UNSET,
         user: Optional[str] = None,
         session_id: Optional[str] = None,
         model: Optional[str] = None,
@@ -638,7 +638,7 @@ class Chat(BaseSDK):
         :param messages:
         :param provider: When multiple model providers are available, optionally indicate your routing preference.
         :param plugins: Plugins you want to enable for this request, including their settings.
-        :param route: Routing strategy for multiple models: \"fallback\" (default) uses secondary models as backups, \"sort\" sorts all endpoints together by routing criteria.
+        :param route:
         :param user:
         :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 128 characters.
         :param model:
@@ -685,7 +685,7 @@ class Chat(BaseSDK):
                 List[components.ChatGenerationParamsPluginUnionTypedDict],
             ]
         ] = None,
-        route: OptionalNullable[components.ChatGenerationParamsRoute] = UNSET,
+        route: OptionalNullable[components.Route] = UNSET,
         user: Optional[str] = None,
         session_id: Optional[str] = None,
         model: Optional[str] = None,
@@ -740,7 +740,7 @@ class Chat(BaseSDK):
         :param messages:
         :param provider: When multiple model providers are available, optionally indicate your routing preference.
         :param plugins: Plugins you want to enable for this request, including their settings.
-        :param route: Routing strategy for multiple models: \"fallback\" (default) uses secondary models as backups, \"sort\" sorts all endpoints together by routing criteria.
+        :param route:
         :param user:
         :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 128 characters.
         :param model:

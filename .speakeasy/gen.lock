@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: cfd52247-6a25-4c6d-bbce-fe6fce0cd69d
 management:
-  docChecksum: e929ecf569d79ab96a315332a4855566
+  docChecksum: a5b3a567dd4de3ab77a9f0b23d4a9f10
   docVersion: 1.0.0
   speakeasyVersion: 1.666.0
   generationVersion: 2.768.0
-  releaseVersion: 0.0.22
-  configChecksum: 0afda3910a58a8d797ac6674fa858711
+  releaseVersion: 0.0.17
+  configChecksum: 50ef18bf69272fc09c257e3562e1b0df
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
@@ -29,6 +29,7 @@ features:
     globalServerURLs: 3.2.0
     globals: 3.0.0
     groups: 3.0.1
+    ignores: 3.0.1
     methodArguments: 1.0.2
     methodSecurity: 3.0.1
     nameOverrides: 3.0.1
@@ -59,10 +60,7 @@ generatedFiles:
   - docs/components/chaterrorerror.md
   - docs/components/chatgenerationparams.md
   - docs/components/chatgenerationparamsdatacollection.md
-  - docs/components/chatgenerationparamsengine.md
   - docs/components/chatgenerationparamsmaxprice.md
-  - docs/components/chatgenerationparamspdf.md
-  - docs/components/chatgenerationparamspdfengine.md
   - docs/components/chatgenerationparamspluginfileparser.md
   - docs/components/chatgenerationparamspluginmoderation.md
   - docs/components/chatgenerationparamspluginresponsehealing.md
@@ -73,7 +71,6 @@ generatedFiles:
   - docs/components/chatgenerationparamsresponseformatpython.md
   - docs/components/chatgenerationparamsresponseformattext.md
   - docs/components/chatgenerationparamsresponseformatunion.md
-  - docs/components/chatgenerationparamsroute.md
   - docs/components/chatgenerationparamsstop.md
   - docs/components/chatgenerationtokenusage.md
   - docs/components/chatmessagecontentitem.md
@@ -123,6 +120,7 @@ generatedFiles:
   - docs/components/edgenetworktimeoutresponseerrordata.md
   - docs/components/effort.md
   - docs/components/endpointstatus.md
+  - docs/components/engine.md
   - docs/components/filecitation.md
   - docs/components/filecitationtype.md
   - docs/components/filepath.md
@@ -132,7 +130,6 @@ generatedFiles:
   - docs/components/idmoderation.md
   - docs/components/idresponsehealing.md
   - docs/components/idweb.md
-  - docs/components/ignore.md
   - docs/components/imagegenerationstatus.md
   - docs/components/imageurl.md
   - docs/components/inputmodality.md
@@ -155,7 +152,6 @@ generatedFiles:
   - docs/components/namedtoolchoicefunction.md
   - docs/components/notfoundresponseerrordata.md
   - docs/components/object.md
-  - docs/components/only.md
   - docs/components/openairesponsesannotation.md
   - docs/components/openairesponsesincludable.md
   - docs/components/openairesponsesincompletedetails.md
@@ -254,17 +250,17 @@ generatedFiles:
   - docs/components/openresponsesreasoningsummarytextdoneeventtype.md
   - docs/components/openresponsesreasoningtype.md
   - docs/components/openresponsesrequest.md
-  - docs/components/openresponsesrequestengine.md
+  - docs/components/openresponsesrequestignore.md
   - docs/components/openresponsesrequestmaxprice.md
-  - docs/components/openresponsesrequestpdf.md
-  - docs/components/openresponsesrequestpdfengine.md
+  - docs/components/openresponsesrequestonly.md
+  - docs/components/openresponsesrequestorder.md
   - docs/components/openresponsesrequestpluginfileparser.md
   - docs/components/openresponsesrequestpluginmoderation.md
   - docs/components/openresponsesrequestpluginresponsehealing.md
   - docs/components/openresponsesrequestpluginunion.md
   - docs/components/openresponsesrequestpluginweb.md
   - docs/components/openresponsesrequestprovider.md
-  - docs/components/openresponsesrequestroute.md
+  - docs/components/openresponsesrequestsort.md
   - docs/components/openresponsesrequesttoolfunction.md
   - docs/components/openresponsesrequesttoolunion.md
   - docs/components/openresponsesrequesttype.md
@@ -300,7 +296,6 @@ generatedFiles:
   - docs/components/openresponseswebsearchtool.md
   - docs/components/openresponseswebsearchtoolfilters.md
   - docs/components/openresponseswebsearchtooltype.md
-  - docs/components/order.md
   - docs/components/outputitemimagegenerationcall.md
   - docs/components/outputitemimagegenerationcalltype.md
   - docs/components/outputmessage.md
@@ -316,15 +311,33 @@ generatedFiles:
   - docs/components/parameter.md
   - docs/components/part1.md
   - docs/components/part2.md
+  - docs/components/partition.md
   - docs/components/payloadtoolargeresponseerrordata.md
   - docs/components/paymentrequiredresponseerrordata.md
+  - docs/components/pdf.md
+  - docs/components/pdfengine.md
+  - docs/components/pdfparserengine.md
+  - docs/components/pdfparseroptions.md
   - docs/components/perrequestlimits.md
   - docs/components/pricing.md
   - docs/components/prompt.md
   - docs/components/prompttokensdetails.md
   - docs/components/providername.md
   - docs/components/provideroverloadedresponseerrordata.md
+  - docs/components/providerpreferences.md
+  - docs/components/providerpreferencesignore.md
+  - docs/components/providerpreferencesmaxprice.md
+  - docs/components/providerpreferencesonly.md
+  - docs/components/providerpreferencesorder.md
+  - docs/components/providerpreferencespartition.md
+  - docs/components/providerpreferencesprovidersort.md
+  - docs/components/providerpreferencesprovidersortconfig.md
+  - docs/components/providerpreferencessortunion.md
   - docs/components/providersort.md
+  - docs/components/providersortconfig.md
+  - docs/components/providersortconfigenum.md
+  - docs/components/providersortconfigunion.md
+  - docs/components/providersortunion.md
   - docs/components/publicendpoint.md
   - docs/components/publicendpointquantization.md
   - docs/components/publicpricing.md
@@ -393,12 +406,18 @@ generatedFiles:
   - docs/components/responseswebsearchuserlocationtype.md
   - docs/components/responsetextconfig.md
   - docs/components/responsetextconfigverbosity.md
+  - docs/components/route.md
   - docs/components/schema0.md
   - docs/components/schema0enum.md
+  - docs/components/schema3.md
+  - docs/components/schema3reasoningencrypted.md
+  - docs/components/schema3reasoningsummary.md
+  - docs/components/schema3reasoningtext.md
+  - docs/components/schema5.md
   - docs/components/security.md
   - docs/components/servicetier.md
   - docs/components/serviceunavailableresponseerrordata.md
-  - docs/components/sort.md
+  - docs/components/sortenum.md
   - docs/components/streamoptions.md
   - docs/components/systemmessage.md
   - docs/components/systemmessagecontent.md
@@ -440,6 +459,7 @@ generatedFiles:
   - docs/components/variables.md
   - docs/components/videourl1.md
   - docs/components/videourl2.md
+  - docs/components/websearchengine.md
   - docs/components/websearchpreviewtooluserlocation.md
   - docs/components/websearchpreviewtooluserlocationtype.md
   - docs/components/websearchstatus.md
@@ -473,7 +493,6 @@ generatedFiles:
   - docs/operations/createcoinbasechargeresponse.md
   - docs/operations/createcoinbasechargesecurity.md
   - docs/operations/createembeddingsdata.md
-  - docs/operations/createembeddingsprovider.md
   - docs/operations/createembeddingsrequest.md
   - docs/operations/createembeddingsresponse.md
   - docs/operations/createembeddingsresponsebody.md
@@ -502,13 +521,11 @@ generatedFiles:
   - docs/operations/getkeyresponse.md
   - docs/operations/getmodelsrequest.md
   - docs/operations/getparametersdata.md
-  - docs/operations/getparametersprovider.md
   - docs/operations/getparametersrequest.md
   - docs/operations/getparametersresponse.md
   - docs/operations/getparameterssecurity.md
   - docs/operations/getuseractivityrequest.md
   - docs/operations/getuseractivityresponse.md
-  - docs/operations/ignore.md
   - docs/operations/imageurl.md
   - docs/operations/input.md
   - docs/operations/inputunion.md
@@ -521,12 +538,9 @@ generatedFiles:
   - docs/operations/listprovidersresponse.md
   - docs/operations/listrequest.md
   - docs/operations/listresponse.md
-  - docs/operations/maxprice.md
   - docs/operations/metadata.md
   - docs/operations/object.md
   - docs/operations/objectembedding.md
-  - docs/operations/only.md
-  - docs/operations/order.md
   - docs/operations/ratelimit.md
   - docs/operations/sendchatcompletionrequestresponse.md
   - docs/operations/supportedparameter.md
@@ -570,6 +584,7 @@ generatedFiles:
   - src/openrouter/completions.py
   - src/openrouter/components/__init__.py
   - src/openrouter/components/_schema0.py
+  - src/openrouter/components/_schema3.py
   - src/openrouter/components/activityitem.py
   - src/openrouter/components/assistantmessage.py
   - src/openrouter/components/badgatewayresponseerrordata.py
@@ -667,10 +682,15 @@ generatedFiles:
   - src/openrouter/components/parameter.py
   - src/openrouter/components/payloadtoolargeresponseerrordata.py
   - src/openrouter/components/paymentrequiredresponseerrordata.py
+  - src/openrouter/components/pdfparserengine.py
+  - src/openrouter/components/pdfparseroptions.py
   - src/openrouter/components/perrequestlimits.py
   - src/openrouter/components/providername.py
   - src/openrouter/components/provideroverloadedresponseerrordata.py
+  - src/openrouter/components/providerpreferences.py
   - src/openrouter/components/providersort.py
+  - src/openrouter/components/providersortconfig.py
+  - src/openrouter/components/providersortunion.py
   - src/openrouter/components/publicendpoint.py
   - src/openrouter/components/publicpricing.py
   - src/openrouter/components/quantization.py
@@ -712,6 +732,7 @@ generatedFiles:
   - src/openrouter/components/unprocessableentityresponseerrordata.py
   - src/openrouter/components/urlcitation.py
   - src/openrouter/components/usermessage.py
+  - src/openrouter/components/websearchengine.py
   - src/openrouter/components/websearchpreviewtooluserlocation.py
   - src/openrouter/components/websearchstatus.py
   - src/openrouter/credits.py

@@ -84,7 +84,6 @@ class Responses(BaseSDK):
                 List[components.OpenResponsesRequestPluginUnionTypedDict],
             ]
         ] = None,
-        route: OptionalNullable[components.OpenResponsesRequestRoute] = UNSET,
         user: Optional[str] = None,
         session_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -121,7 +120,6 @@ class Responses(BaseSDK):
         :param stream:
         :param provider: When multiple model providers are available, optionally indicate your routing preference.
         :param plugins: Plugins you want to enable for this request, including their settings.
-        :param route: Routing strategy for multiple models: \"fallback\" (default) uses secondary models as backups, \"sort\" sorts all endpoints together by routing criteria.
         :param user: A unique identifier representing your end-user, which helps distinguish between different users of your app. This allows your app to identify specific users in case of abuse reports, preventing your entire app from being affected by the actions of individual users. Maximum of 128 characters.
         :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 128 characters.
         :param retries: Override the default retry configuration for this method
@@ -197,7 +195,6 @@ class Responses(BaseSDK):
                 List[components.OpenResponsesRequestPluginUnionTypedDict],
             ]
         ] = None,
-        route: OptionalNullable[components.OpenResponsesRequestRoute] = UNSET,
         user: Optional[str] = None,
         session_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -234,7 +231,6 @@ class Responses(BaseSDK):
         :param stream:
         :param provider: When multiple model providers are available, optionally indicate your routing preference.
         :param plugins: Plugins you want to enable for this request, including their settings.
-        :param route: Routing strategy for multiple models: \"fallback\" (default) uses secondary models as backups, \"sort\" sorts all endpoints together by routing criteria.
         :param user: A unique identifier representing your end-user, which helps distinguish between different users of your app. This allows your app to identify specific users in case of abuse reports, preventing your entire app from being affected by the actions of individual users. Maximum of 128 characters.
         :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 128 characters.
         :param retries: Override the default retry configuration for this method
@@ -309,7 +305,6 @@ class Responses(BaseSDK):
                 List[components.OpenResponsesRequestPluginUnionTypedDict],
             ]
         ] = None,
-        route: OptionalNullable[components.OpenResponsesRequestRoute] = UNSET,
         user: Optional[str] = None,
         session_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -346,7 +341,6 @@ class Responses(BaseSDK):
         :param stream:
         :param provider: When multiple model providers are available, optionally indicate your routing preference.
         :param plugins: Plugins you want to enable for this request, including their settings.
-        :param route: Routing strategy for multiple models: \"fallback\" (default) uses secondary models as backups, \"sort\" sorts all endpoints together by routing criteria.
         :param user: A unique identifier representing your end-user, which helps distinguish between different users of your app. This allows your app to identify specific users in case of abuse reports, preventing your entire app from being affected by the actions of individual users. Maximum of 128 characters.
         :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 128 characters.
         :param retries: Override the default retry configuration for this method
@@ -407,7 +401,6 @@ class Responses(BaseSDK):
             plugins=utils.get_pydantic_model(
                 plugins, Optional[List[components.OpenResponsesRequestPluginUnion]]
             ),
-            route=route,
             user=user,
             session_id=session_id,
         )
@@ -667,7 +660,6 @@ class Responses(BaseSDK):
                 List[components.OpenResponsesRequestPluginUnionTypedDict],
             ]
         ] = None,
-        route: OptionalNullable[components.OpenResponsesRequestRoute] = UNSET,
         user: Optional[str] = None,
         session_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -704,7 +696,6 @@ class Responses(BaseSDK):
         :param stream:
         :param provider: When multiple model providers are available, optionally indicate your routing preference.
         :param plugins: Plugins you want to enable for this request, including their settings.
-        :param route: Routing strategy for multiple models: \"fallback\" (default) uses secondary models as backups, \"sort\" sorts all endpoints together by routing criteria.
         :param user: A unique identifier representing your end-user, which helps distinguish between different users of your app. This allows your app to identify specific users in case of abuse reports, preventing your entire app from being affected by the actions of individual users. Maximum of 128 characters.
         :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 128 characters.
         :param retries: Override the default retry configuration for this method
@@ -780,7 +771,6 @@ class Responses(BaseSDK):
                 List[components.OpenResponsesRequestPluginUnionTypedDict],
             ]
         ] = None,
-        route: OptionalNullable[components.OpenResponsesRequestRoute] = UNSET,
         user: Optional[str] = None,
         session_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -817,7 +807,6 @@ class Responses(BaseSDK):
         :param stream:
         :param provider: When multiple model providers are available, optionally indicate your routing preference.
         :param plugins: Plugins you want to enable for this request, including their settings.
-        :param route: Routing strategy for multiple models: \"fallback\" (default) uses secondary models as backups, \"sort\" sorts all endpoints together by routing criteria.
         :param user: A unique identifier representing your end-user, which helps distinguish between different users of your app. This allows your app to identify specific users in case of abuse reports, preventing your entire app from being affected by the actions of individual users. Maximum of 128 characters.
         :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 128 characters.
         :param retries: Override the default retry configuration for this method
@@ -892,7 +881,6 @@ class Responses(BaseSDK):
                 List[components.OpenResponsesRequestPluginUnionTypedDict],
             ]
         ] = None,
-        route: OptionalNullable[components.OpenResponsesRequestRoute] = UNSET,
         user: Optional[str] = None,
         session_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -929,7 +917,6 @@ class Responses(BaseSDK):
         :param stream:
         :param provider: When multiple model providers are available, optionally indicate your routing preference.
         :param plugins: Plugins you want to enable for this request, including their settings.
-        :param route: Routing strategy for multiple models: \"fallback\" (default) uses secondary models as backups, \"sort\" sorts all endpoints together by routing criteria.
         :param user: A unique identifier representing your end-user, which helps distinguish between different users of your app. This allows your app to identify specific users in case of abuse reports, preventing your entire app from being affected by the actions of individual users. Maximum of 128 characters.
         :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 128 characters.
         :param retries: Override the default retry configuration for this method
@@ -990,7 +977,6 @@ class Responses(BaseSDK):
             plugins=utils.get_pydantic_model(
                 plugins, Optional[List[components.OpenResponsesRequestPluginUnion]]
             ),
-            route=route,
             user=user,
             session_id=session_id,
         )

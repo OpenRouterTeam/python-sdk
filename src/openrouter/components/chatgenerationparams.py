@@ -4,6 +4,7 @@ from __future__ import annotations
 from ._schema0 import Schema0, Schema0TypedDict
 from .chatstreamoptions import ChatStreamOptions, ChatStreamOptionsTypedDict
 from .message import Message, MessageTypedDict
+from .providersortunion import ProviderSortUnion, ProviderSortUnionTypedDict
 from .reasoningsummaryverbosity import ReasoningSummaryVerbosity
 from .responseformatjsonschema import (
     ResponseFormatJSONSchema,
@@ -50,16 +51,6 @@ Quantizations = Union[
         "bf16",
         "fp32",
         "unknown",
-    ],
-    UnrecognizedStr,
-]
-
-
-Sort = Union[
-    Literal[
-        "price",
-        "throughput",
-        "latency",
     ],
     UnrecognizedStr,
 ]
@@ -114,14 +105,14 @@ class ChatGenerationParamsProviderTypedDict(TypedDict):
     r"""List of provider slugs to ignore. If provided, this list is merged with your account-wide ignored provider settings for this request."""
     quantizations: NotRequired[Nullable[List[Quantizations]]]
     r"""A list of quantization levels to filter the provider by."""
-    sort: NotRequired[Nullable[Sort]]
+    sort: NotRequired[Nullable[ProviderSortUnionTypedDict]]
     r"""The sorting strategy to use for this request, if \"order\" is not specified. When set, no load balancing is performed."""
     max_price: NotRequired[ChatGenerationParamsMaxPriceTypedDict]
     r"""The object specifying the maximum price you want to pay for this request. USD price per million tokens, for prompt and completion."""
+    preferred_min_throughput: NotRequired[Nullable[float]]
+    preferred_max_latency: NotRequired[Nullable[float]]
     min_throughput: NotRequired[Nullable[float]]
-    r"""The minimum throughput (in tokens per second) required for this request. Only providers serving the model with at least this throughput will be used."""
     max_latency: NotRequired[Nullable[float]]
-    r"""The maximum latency (in seconds) allowed for this request. Only providers serving the model with better than this latency will be used."""
 
 
 class ChatGenerationParamsProvider(BaseModel):
@@ -163,19 +154,19 @@ class ChatGenerationParamsProvider(BaseModel):
     ] = UNSET
     r"""A list of quantization levels to filter the provider by."""
 
-    sort: Annotated[
-        OptionalNullable[Sort], PlainValidator(validate_open_enum(False))
-    ] = UNSET
+    sort: OptionalNullable[ProviderSortUnion] = UNSET
     r"""The sorting strategy to use for this request, if \"order\" is not specified. When set, no load balancing is performed."""
 
     max_price: Optional[ChatGenerationParamsMaxPrice] = None
     r"""The object specifying the maximum price you want to pay for this request. USD price per million tokens, for prompt and completion."""
 
+    preferred_min_throughput: OptionalNullable[float] = UNSET
+
+    preferred_max_latency: OptionalNullable[float] = UNSET
+
     min_throughput: OptionalNullable[float] = UNSET
-    r"""The minimum throughput (in tokens per second) required for this request. Only providers serving the model with at least this throughput will be used."""
 
     max_latency: OptionalNullable[float] = UNSET
-    r"""The maximum latency (in seconds) allowed for this request. Only providers serving the model with better than this latency will be used."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
@@ -191,6 +182,8 @@ class ChatGenerationParamsProvider(BaseModel):
             "quantizations",
             "sort",
             "max_price",
+            "preferred_min_throughput",
+            "preferred_max_latency",
             "min_throughput",
             "max_latency",
         ]
@@ -205,6 +198,8 @@ class ChatGenerationParamsProvider(BaseModel):
             "ignore",
             "quantizations",
             "sort",
+            "preferred_min_throughput",
+            "preferred_max_latency",
             "min_throughput",
             "max_latency",
         ]
@@ -252,7 +247,7 @@ class ChatGenerationParamsPluginResponseHealing(BaseModel):
     enabled: Optional[bool] = None
 
 
-ChatGenerationParamsPdfEngine = Union[
+PdfEngine = Union[
     Literal[
         "mistral-ocr",
         "pdf-text",
@@ -262,22 +257,20 @@ ChatGenerationParamsPdfEngine = Union[
 ]
 
 
-class ChatGenerationParamsPdfTypedDict(TypedDict):
-    engine: NotRequired[ChatGenerationParamsPdfEngine]
+class PdfTypedDict(TypedDict):
+    engine: NotRequired[PdfEngine]
 
 
-class ChatGenerationParamsPdf(BaseModel):
+class Pdf(BaseModel):
     engine: Annotated[
-        Optional[ChatGenerationParamsPdfEngine],
-        PlainValidator(validate_open_enum(False)),
+        Optional[PdfEngine], PlainValidator(validate_open_enum(False))
     ] = None
 
 
 class ChatGenerationParamsPluginFileParserTypedDict(TypedDict):
     id: Literal["file-parser"]
     enabled: NotRequired[bool]
-    max_files: NotRequired[float]
-    pdf: NotRequired[ChatGenerationParamsPdfTypedDict]
+    pdf: NotRequired[PdfTypedDict]
 
 
 class ChatGenerationParamsPluginFileParser(BaseModel):
@@ -290,12 +283,10 @@ class ChatGenerationParamsPluginFileParser(BaseModel):
 
     enabled: Optional[bool] = None
 
-    max_files: Optional[float] = None
-
-    pdf: Optional[ChatGenerationParamsPdf] = None
+    pdf: Optional[Pdf] = None
 
 
-ChatGenerationParamsEngine = Union[
+Engine = Union[
     Literal[
         "native",
         "exa",
@@ -309,7 +300,7 @@ class ChatGenerationParamsPluginWebTypedDict(TypedDict):
     enabled: NotRequired[bool]
     max_results: NotRequired[float]
     search_prompt: NotRequired[str]
-    engine: NotRequired[ChatGenerationParamsEngine]
+    engine: NotRequired[Engine]
 
 
 class ChatGenerationParamsPluginWeb(BaseModel):
@@ -324,9 +315,9 @@ class ChatGenerationParamsPluginWeb(BaseModel):
 
     search_prompt: Optional[str] = None
 
-    engine: Annotated[
-        Optional[ChatGenerationParamsEngine], PlainValidator(validate_open_enum(False))
-    ] = None
+    engine: Annotated[Optional[Engine], PlainValidator(validate_open_enum(False))] = (
+        None
+    )
 
 
 class ChatGenerationParamsPluginModerationTypedDict(TypedDict):
@@ -362,7 +353,7 @@ ChatGenerationParamsPluginUnion = Annotated[
 ]
 
 
-ChatGenerationParamsRoute = Union[
+Route = Union[
     Literal[
         "fallback",
         "sort",
@@ -373,12 +364,12 @@ ChatGenerationParamsRoute = Union[
 
 Effort = Union[
     Literal[
-        "none",
-        "minimal",
-        "low",
-        "medium",
-        "high",
         "xhigh",
+        "high",
+        "medium",
+        "low",
+        "minimal",
+        "none",
     ],
     UnrecognizedStr,
 ]
@@ -513,8 +504,7 @@ class ChatGenerationParamsTypedDict(TypedDict):
     r"""When multiple model providers are available, optionally indicate your routing preference."""
     plugins: NotRequired[List[ChatGenerationParamsPluginUnionTypedDict]]
     r"""Plugins you want to enable for this request, including their settings."""
-    route: NotRequired[Nullable[ChatGenerationParamsRoute]]
-    r"""Routing strategy for multiple models: \"fallback\" (default) uses secondary models as backups, \"sort\" sorts all endpoints together by routing criteria."""
+    route: NotRequired[Nullable[Route]]
     user: NotRequired[str]
     session_id: NotRequired[str]
     r"""A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 128 characters."""
@@ -551,10 +541,8 @@ class ChatGenerationParams(BaseModel):
     r"""Plugins you want to enable for this request, including their settings."""
 
     route: Annotated[
-        OptionalNullable[ChatGenerationParamsRoute],
-        PlainValidator(validate_open_enum(False)),
+        OptionalNullable[Route], PlainValidator(validate_open_enum(False))
     ] = UNSET
-    r"""Routing strategy for multiple models: \"fallback\" (default) uses secondary models as backups, \"sort\" sorts all endpoints together by routing criteria."""
 
     user: Optional[str] = None
 

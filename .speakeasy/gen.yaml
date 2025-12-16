@@ -31,7 +31,7 @@ generation:
     skipResponseBodyAssertions: false
   preApplyUnionDiscriminators: true
 python:
-  version: 0.0.22
+  version: 0.0.17
   additionalDependencies:
     dev: {}
     main: {}
@@ -39,6 +39,8 @@ python:
     - id
     - object
     - input
+    - models
+    - hash
   asyncMode: both
   authors:
     - OpenRouter
