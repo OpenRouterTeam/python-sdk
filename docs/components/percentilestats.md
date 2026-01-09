@@ -1,6 +1,6 @@
 # PercentileStats
 
-Latency percentiles in seconds over the last 30 minutes. Latency measures time to first token.
+Latency percentiles in milliseconds over the last 30 minutes. Latency measures time to first token. Only visible when authenticated with an API key or cookie; returns null for unauthenticated requests.
 
 
 ## Fields

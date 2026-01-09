@@ -6,7 +6,7 @@ from typing_extensions import TypedDict
 
 
 class PercentileStatsTypedDict(TypedDict):
-    r"""Latency percentiles in seconds over the last 30 minutes. Latency measures time to first token."""
+    r"""Latency percentiles in milliseconds over the last 30 minutes. Latency measures time to first token. Only visible when authenticated with an API key or cookie; returns null for unauthenticated requests."""
 
     p50: float
     r"""Median (50th percentile)"""
@@ -19,7 +19,7 @@ class PercentileStatsTypedDict(TypedDict):
 
 
 class PercentileStats(BaseModel):
-    r"""Latency percentiles in seconds over the last 30 minutes. Latency measures time to first token."""
+    r"""Latency percentiles in milliseconds over the last 30 minutes. Latency measures time to first token. Only visible when authenticated with an API key or cookie; returns null for unauthenticated requests."""
 
     p50: float
     r"""Median (50th percentile)"""

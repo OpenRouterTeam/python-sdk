@@ -4701,7 +4701,8 @@ components:
         - p75
         - p90
         - p99
-      description: Latency percentiles in seconds over the last 30 minutes. Latency measures time to first token.
+      description: >-
+        Latency percentiles in milliseconds over the last 30 minutes. Latency measures time to first token. Only visible when authenticated with an API key or cookie; returns null for unauthenticated requests.
     PublicEndpoint:
       type: object
       properties:
@@ -4775,7 +4776,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/PercentileStats'
             - description: >-
-                Throughput percentiles in tokens per second over the last 30 minutes. Throughput measures output token generation speed.
+                Throughput percentiles in tokens per second over the last 30 minutes. Throughput measures output token generation speed. Only visible when authenticated with an API key or cookie; returns null for unauthenticated requests.
       required:
         - name
         - model_name

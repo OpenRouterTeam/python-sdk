@@ -113,7 +113,7 @@ class PublicEndpointTypedDict(TypedDict):
     uptime_last_30m: Nullable[float]
     supports_implicit_caching: bool
     latency_last_30m: Nullable[PercentileStatsTypedDict]
-    r"""Latency percentiles in seconds over the last 30 minutes. Latency measures time to first token."""
+    r"""Latency percentiles in milliseconds over the last 30 minutes. Latency measures time to first token. Only visible when authenticated with an API key or cookie; returns null for unauthenticated requests."""
     throughput_last_30m: Nullable[PercentileStatsTypedDict]
     status: NotRequired[EndpointStatus]
 
@@ -150,7 +150,7 @@ class PublicEndpoint(BaseModel):
     supports_implicit_caching: bool
 
     latency_last_30m: Nullable[PercentileStats]
-    r"""Latency percentiles in seconds over the last 30 minutes. Latency measures time to first token."""
+    r"""Latency percentiles in milliseconds over the last 30 minutes. Latency measures time to first token. Only visible when authenticated with an API key or cookie; returns null for unauthenticated requests."""
 
     throughput_last_30m: Nullable[PercentileStats]
 
