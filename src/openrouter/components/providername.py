@@ -38,6 +38,7 @@ ProviderName = Union[
         "Groq",
         "Hyperbolic",
         "Inception",
+        "Inceptron",
         "InferenceNet",
         "Infermatic",
         "Inflection",

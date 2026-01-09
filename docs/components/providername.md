@@ -36,6 +36,7 @@
 | `GROQ`              | Groq                |
 | `HYPERBOLIC`        | Hyperbolic          |
 | `INCEPTION`         | Inception           |
+| `INCEPTRON`         | Inceptron           |
 | `INFERENCE_NET`     | InferenceNet        |
 | `INFERMATIC`        | Infermatic          |
 | `INFLECTION`        | Inflection          |
