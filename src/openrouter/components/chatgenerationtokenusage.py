@@ -72,12 +72,15 @@ class CompletionTokensDetails(BaseModel):
 
 class PromptTokensDetailsTypedDict(TypedDict):
     cached_tokens: NotRequired[float]
+    cache_write_tokens: NotRequired[float]
     audio_tokens: NotRequired[float]
     video_tokens: NotRequired[float]
 
 
 class PromptTokensDetails(BaseModel):
     cached_tokens: Optional[float] = None
+
+    cache_write_tokens: Optional[float] = None
 
     audio_tokens: Optional[float] = None
 

@@ -26,5 +26,6 @@
 | `PARALLEL_TOOL_CALLS` | parallel_tool_calls   |
 | `INCLUDE_REASONING`   | include_reasoning     |
 | `REASONING`           | reasoning             |
+| `REASONING_EFFORT`    | reasoning_effort      |
 | `WEB_SEARCH_OPTIONS`  | web_search_options    |
 | `VERBOSITY`           | verbosity             |

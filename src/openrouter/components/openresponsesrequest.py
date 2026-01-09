@@ -33,9 +33,18 @@ from .openresponseswebsearchtool import (
     OpenResponsesWebSearchTool,
     OpenResponsesWebSearchToolTypedDict,
 )
+from .pdfparseroptions import PDFParserOptions, PDFParserOptionsTypedDict
+from .preferredmaxlatency import PreferredMaxLatency, PreferredMaxLatencyTypedDict
+from .preferredminthroughput import (
+    PreferredMinThroughput,
+    PreferredMinThroughputTypedDict,
+)
 from .providername import ProviderName
 from .providersort import ProviderSort
+from .providersortconfig import ProviderSortConfig, ProviderSortConfigTypedDict
 from .quantization import Quantization
+from .responsesoutputmodality import ResponsesOutputModality
+from .websearchengine import WebSearchEngine
 from openrouter.types import (
     BaseModel,
     Nullable,
@@ -136,6 +145,16 @@ OpenResponsesRequestToolUnion = Annotated[
 ]
 
 
+OpenResponsesRequestImageConfigTypedDict = TypeAliasType(
+    "OpenResponsesRequestImageConfigTypedDict", Union[str, float]
+)
+
+
+OpenResponsesRequestImageConfig = TypeAliasType(
+    "OpenResponsesRequestImageConfig", Union[str, float]
+)
+
+
 ServiceTier = Literal["auto",]
 
 
@@ -148,31 +167,55 @@ Truncation = Union[
 ]
 
 
-OrderTypedDict = TypeAliasType("OrderTypedDict", Union[ProviderName, str])
+OpenResponsesRequestOrderTypedDict = TypeAliasType(
+    "OpenResponsesRequestOrderTypedDict", Union[ProviderName, str]
+)
 
 
-Order = TypeAliasType(
-    "Order",
+OpenResponsesRequestOrder = TypeAliasType(
+    "OpenResponsesRequestOrder",
     Union[Annotated[ProviderName, PlainValidator(validate_open_enum(False))], str],
 )
 
 
-OnlyTypedDict = TypeAliasType("OnlyTypedDict", Union[ProviderName, str])
+OpenResponsesRequestOnlyTypedDict = TypeAliasType(
+    "OpenResponsesRequestOnlyTypedDict", Union[ProviderName, str]
+)
 
 
-Only = TypeAliasType(
-    "Only",
+OpenResponsesRequestOnly = TypeAliasType(
+    "OpenResponsesRequestOnly",
     Union[Annotated[ProviderName, PlainValidator(validate_open_enum(False))], str],
 )
 
 
-IgnoreTypedDict = TypeAliasType("IgnoreTypedDict", Union[ProviderName, str])
+OpenResponsesRequestIgnoreTypedDict = TypeAliasType(
+    "OpenResponsesRequestIgnoreTypedDict", Union[ProviderName, str]
+)
 
 
-Ignore = TypeAliasType(
-    "Ignore",
+OpenResponsesRequestIgnore = TypeAliasType(
+    "OpenResponsesRequestIgnore",
     Union[Annotated[ProviderName, PlainValidator(validate_open_enum(False))], str],
 )
+
+
+OpenResponsesRequestSortTypedDict = TypeAliasType(
+    "OpenResponsesRequestSortTypedDict",
+    Union[ProviderSortConfigTypedDict, ProviderSort, Any],
+)
+r"""The sorting strategy to use for this request, if \"order\" is not specified. When set, no load balancing is performed."""
+
+
+OpenResponsesRequestSort = TypeAliasType(
+    "OpenResponsesRequestSort",
+    Union[
+        ProviderSortConfig,
+        Annotated[ProviderSort, PlainValidator(validate_open_enum(False))],
+        Any,
+    ],
+)
+r"""The sorting strategy to use for this request, if \"order\" is not specified. When set, no load balancing is performed."""
 
 
 class OpenResponsesRequestMaxPriceTypedDict(TypedDict):
@@ -230,22 +273,22 @@ class OpenResponsesRequestProviderTypedDict(TypedDict):
     r"""Whether to restrict routing to only ZDR (Zero Data Retention) endpoints. When true, only endpoints that do not retain prompts will be used."""
     enforce_distillable_text: NotRequired[Nullable[bool]]
     r"""Whether to restrict routing to only models that allow text distillation. When true, only models where the author has allowed distillation will be used."""
-    order: NotRequired[Nullable[List[OrderTypedDict]]]
+    order: NotRequired[Nullable[List[OpenResponsesRequestOrderTypedDict]]]
     r"""An ordered list of provider slugs. The router will attempt to use the first provider in the subset of this list that supports your requested model, and fall back to the next if it is unavailable. If no providers are available, the request will fail with an error message."""
-    only: NotRequired[Nullable[List[OnlyTypedDict]]]
+    only: NotRequired[Nullable[List[OpenResponsesRequestOnlyTypedDict]]]
     r"""List of provider slugs to allow. If provided, this list is merged with your account-wide allowed provider settings for this request."""
-    ignore: NotRequired[Nullable[List[IgnoreTypedDict]]]
+    ignore: NotRequired[Nullable[List[OpenResponsesRequestIgnoreTypedDict]]]
     r"""List of provider slugs to ignore. If provided, this list is merged with your account-wide ignored provider settings for this request."""
     quantizations: NotRequired[Nullable[List[Quantization]]]
     r"""A list of quantization levels to filter the provider by."""
-    sort: NotRequired[Nullable[ProviderSort]]
+    sort: NotRequired[Nullable[OpenResponsesRequestSortTypedDict]]
     r"""The sorting strategy to use for this request, if \"order\" is not specified. When set, no load balancing is performed."""
     max_price: NotRequired[OpenResponsesRequestMaxPriceTypedDict]
     r"""The object specifying the maximum price you want to pay for this request. USD price per million tokens, for prompt and completion."""
-    min_throughput: NotRequired[Nullable[float]]
-    r"""The minimum throughput (in tokens per second) required for this request. Only providers serving the model with at least this throughput will be used."""
-    max_latency: NotRequired[Nullable[float]]
-    r"""The maximum latency (in seconds) allowed for this request. Only providers serving the model with better than this latency will be used."""
+    preferred_min_throughput: NotRequired[Nullable[PreferredMinThroughputTypedDict]]
+    r"""Preferred minimum throughput (in tokens per second). Can be a number (applies to p50) or an object with percentile-specific cutoffs. Endpoints below the threshold(s) may still be used, but are deprioritized in routing. When using fallback models, this may cause a fallback model to be used instead of the primary model if it meets the threshold."""
+    preferred_max_latency: NotRequired[Nullable[PreferredMaxLatencyTypedDict]]
+    r"""Preferred maximum latency (in seconds). Can be a number (applies to p50) or an object with percentile-specific cutoffs. Endpoints above the threshold(s) may still be used, but are deprioritized in routing. When using fallback models, this may cause a fallback model to be used instead of the primary model if it meets the threshold."""
 
 
 class OpenResponsesRequestProvider(BaseModel):
@@ -276,13 +319,13 @@ class OpenResponsesRequestProvider(BaseModel):
     enforce_distillable_text: OptionalNullable[bool] = UNSET
     r"""Whether to restrict routing to only models that allow text distillation. When true, only models where the author has allowed distillation will be used."""
 
-    order: OptionalNullable[List[Order]] = UNSET
+    order: OptionalNullable[List[OpenResponsesRequestOrder]] = UNSET
     r"""An ordered list of provider slugs. The router will attempt to use the first provider in the subset of this list that supports your requested model, and fall back to the next if it is unavailable. If no providers are available, the request will fail with an error message."""
 
-    only: OptionalNullable[List[Only]] = UNSET
+    only: OptionalNullable[List[OpenResponsesRequestOnly]] = UNSET
     r"""List of provider slugs to allow. If provided, this list is merged with your account-wide allowed provider settings for this request."""
 
-    ignore: OptionalNullable[List[Ignore]] = UNSET
+    ignore: OptionalNullable[List[OpenResponsesRequestIgnore]] = UNSET
     r"""List of provider slugs to ignore. If provided, this list is merged with your account-wide ignored provider settings for this request."""
 
     quantizations: OptionalNullable[
@@ -290,19 +333,17 @@ class OpenResponsesRequestProvider(BaseModel):
     ] = UNSET
     r"""A list of quantization levels to filter the provider by."""
 
-    sort: Annotated[
-        OptionalNullable[ProviderSort], PlainValidator(validate_open_enum(False))
-    ] = UNSET
+    sort: OptionalNullable[OpenResponsesRequestSort] = UNSET
     r"""The sorting strategy to use for this request, if \"order\" is not specified. When set, no load balancing is performed."""
 
     max_price: Optional[OpenResponsesRequestMaxPrice] = None
     r"""The object specifying the maximum price you want to pay for this request. USD price per million tokens, for prompt and completion."""
 
-    min_throughput: OptionalNullable[float] = UNSET
-    r"""The minimum throughput (in tokens per second) required for this request. Only providers serving the model with at least this throughput will be used."""
+    preferred_min_throughput: OptionalNullable[PreferredMinThroughput] = UNSET
+    r"""Preferred minimum throughput (in tokens per second). Can be a number (applies to p50) or an object with percentile-specific cutoffs. Endpoints below the threshold(s) may still be used, but are deprioritized in routing. When using fallback models, this may cause a fallback model to be used instead of the primary model if it meets the threshold."""
 
-    max_latency: OptionalNullable[float] = UNSET
-    r"""The maximum latency (in seconds) allowed for this request. Only providers serving the model with better than this latency will be used."""
+    preferred_max_latency: OptionalNullable[PreferredMaxLatency] = UNSET
+    r"""Preferred maximum latency (in seconds). Can be a number (applies to p50) or an object with percentile-specific cutoffs. Endpoints above the threshold(s) may still be used, but are deprioritized in routing. When using fallback models, this may cause a fallback model to be used instead of the primary model if it meets the threshold."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
@@ -318,8 +359,8 @@ class OpenResponsesRequestProvider(BaseModel):
             "quantizations",
             "sort",
             "max_price",
-            "min_throughput",
-            "max_latency",
+            "preferred_min_throughput",
+            "preferred_max_latency",
         ]
         nullable_fields = [
             "allow_fallbacks",
@@ -332,8 +373,8 @@ class OpenResponsesRequestProvider(BaseModel):
             "ignore",
             "quantizations",
             "sort",
-            "min_throughput",
-            "max_latency",
+            "preferred_min_throughput",
+            "preferred_max_latency",
         ]
         null_default_fields = []
 
@@ -381,32 +422,12 @@ class OpenResponsesRequestPluginResponseHealing(BaseModel):
 IDFileParser = Literal["file-parser",]
 
 
-OpenResponsesRequestPdfEngine = Union[
-    Literal[
-        "mistral-ocr",
-        "pdf-text",
-        "native",
-    ],
-    UnrecognizedStr,
-]
-
-
-class OpenResponsesRequestPdfTypedDict(TypedDict):
-    engine: NotRequired[OpenResponsesRequestPdfEngine]
-
-
-class OpenResponsesRequestPdf(BaseModel):
-    engine: Annotated[
-        Optional[OpenResponsesRequestPdfEngine],
-        PlainValidator(validate_open_enum(False)),
-    ] = None
-
-
 class OpenResponsesRequestPluginFileParserTypedDict(TypedDict):
     id: IDFileParser
     enabled: NotRequired[bool]
     r"""Set to false to disable the file-parser plugin for this request. Defaults to true."""
-    pdf: NotRequired[OpenResponsesRequestPdfTypedDict]
+    pdf: NotRequired[PDFParserOptionsTypedDict]
+    r"""Options for PDF parsing."""
 
 
 class OpenResponsesRequestPluginFileParser(BaseModel):
@@ -415,19 +436,11 @@ class OpenResponsesRequestPluginFileParser(BaseModel):
     enabled: Optional[bool] = None
     r"""Set to false to disable the file-parser plugin for this request. Defaults to true."""
 
-    pdf: Optional[OpenResponsesRequestPdf] = None
+    pdf: Optional[PDFParserOptions] = None
+    r"""Options for PDF parsing."""
 
 
 IDWeb = Literal["web",]
-
-
-OpenResponsesRequestEngine = Union[
-    Literal[
-        "native",
-        "exa",
-    ],
-    UnrecognizedStr,
-]
 
 
 class OpenResponsesRequestPluginWebTypedDict(TypedDict):
@@ -436,7 +449,8 @@ class OpenResponsesRequestPluginWebTypedDict(TypedDict):
     r"""Set to false to disable the web-search plugin for this request. Defaults to true."""
     max_results: NotRequired[float]
     search_prompt: NotRequired[str]
-    engine: NotRequired[OpenResponsesRequestEngine]
+    engine: NotRequired[WebSearchEngine]
+    r"""The search engine to use for web search."""
 
 
 class OpenResponsesRequestPluginWeb(BaseModel):
@@ -450,8 +464,9 @@ class OpenResponsesRequestPluginWeb(BaseModel):
     search_prompt: Optional[str] = None
 
     engine: Annotated[
-        Optional[OpenResponsesRequestEngine], PlainValidator(validate_open_enum(False))
+        Optional[WebSearchEngine], PlainValidator(validate_open_enum(False))
     ] = None
+    r"""The search engine to use for web search."""
 
 
 IDModeration = Literal["moderation",]
@@ -465,11 +480,33 @@ class OpenResponsesRequestPluginModeration(BaseModel):
     id: IDModeration
 
 
+IDAutoRouter = Literal["auto-router",]
+
+
+class OpenResponsesRequestPluginAutoRouterTypedDict(TypedDict):
+    id: IDAutoRouter
+    enabled: NotRequired[bool]
+    r"""Set to false to disable the auto-router plugin for this request. Defaults to true."""
+    allowed_models: NotRequired[List[str]]
+    r"""List of model patterns to filter which models the auto-router can route between. Supports wildcards (e.g., \"anthropic/*\" matches all Anthropic models). When not specified, uses the default supported models list."""
+
+
+class OpenResponsesRequestPluginAutoRouter(BaseModel):
+    id: IDAutoRouter
+
+    enabled: Optional[bool] = None
+    r"""Set to false to disable the auto-router plugin for this request. Defaults to true."""
+
+    allowed_models: Optional[List[str]] = None
+    r"""List of model patterns to filter which models the auto-router can route between. Supports wildcards (e.g., \"anthropic/*\" matches all Anthropic models). When not specified, uses the default supported models list."""
+
+
 OpenResponsesRequestPluginUnionTypedDict = TypeAliasType(
     "OpenResponsesRequestPluginUnionTypedDict",
     Union[
         OpenResponsesRequestPluginModerationTypedDict,
         OpenResponsesRequestPluginResponseHealingTypedDict,
+        OpenResponsesRequestPluginAutoRouterTypedDict,
         OpenResponsesRequestPluginFileParserTypedDict,
         OpenResponsesRequestPluginWebTypedDict,
     ],
@@ -478,6 +515,7 @@ OpenResponsesRequestPluginUnionTypedDict = TypeAliasType(
 
 OpenResponsesRequestPluginUnion = Annotated[
     Union[
+        Annotated[OpenResponsesRequestPluginAutoRouter, Tag("auto-router")],
         Annotated[OpenResponsesRequestPluginModeration, Tag("moderation")],
         Annotated[OpenResponsesRequestPluginWeb, Tag("web")],
         Annotated[OpenResponsesRequestPluginFileParser, Tag("file-parser")],
@@ -485,16 +523,6 @@ OpenResponsesRequestPluginUnion = Annotated[
     ],
     Discriminator(lambda m: get_discriminator(m, "id", "id")),
 ]
-
-
-OpenResponsesRequestRoute = Union[
-    Literal[
-        "fallback",
-        "sort",
-    ],
-    UnrecognizedStr,
-]
-r"""Routing strategy for multiple models: \"fallback\" (default) uses secondary models as backups, \"sort\" sorts all endpoints together by routing criteria."""
 
 
 class OpenResponsesRequestTypedDict(TypedDict):
@@ -518,6 +546,10 @@ class OpenResponsesRequestTypedDict(TypedDict):
     temperature: NotRequired[Nullable[float]]
     top_p: NotRequired[Nullable[float]]
     top_k: NotRequired[float]
+    image_config: NotRequired[Dict[str, OpenResponsesRequestImageConfigTypedDict]]
+    r"""Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/features/multimodal/image-generation for more details."""
+    modalities: NotRequired[List[ResponsesOutputModality]]
+    r"""Output modalities for the response. Supported values are \"text\" and \"image\"."""
     prompt_cache_key: NotRequired[Nullable[str]]
     previous_response_id: NotRequired[Nullable[str]]
     prompt: NotRequired[Nullable[OpenAIResponsesPromptTypedDict]]
@@ -532,8 +564,6 @@ class OpenResponsesRequestTypedDict(TypedDict):
     r"""When multiple model providers are available, optionally indicate your routing preference."""
     plugins: NotRequired[List[OpenResponsesRequestPluginUnionTypedDict]]
     r"""Plugins you want to enable for this request, including their settings."""
-    route: NotRequired[Nullable[OpenResponsesRequestRoute]]
-    r"""Routing strategy for multiple models: \"fallback\" (default) uses secondary models as backups, \"sort\" sorts all endpoints together by routing criteria."""
     user: NotRequired[str]
     r"""A unique identifier representing your end-user, which helps distinguish between different users of your app. This allows your app to identify specific users in case of abuse reports, preventing your entire app from being affected by the actions of individual users. Maximum of 128 characters."""
     session_id: NotRequired[str]
@@ -575,6 +605,18 @@ class OpenResponsesRequest(BaseModel):
 
     top_k: Optional[float] = None
 
+    image_config: Optional[Dict[str, OpenResponsesRequestImageConfig]] = None
+    r"""Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/features/multimodal/image-generation for more details."""
+
+    modalities: Optional[
+        List[
+            Annotated[
+                ResponsesOutputModality, PlainValidator(validate_open_enum(False))
+            ]
+        ]
+    ] = None
+    r"""Output modalities for the response. Supported values are \"text\" and \"image\"."""
+
     prompt_cache_key: OptionalNullable[str] = UNSET
 
     previous_response_id: OptionalNullable[str] = UNSET
@@ -612,12 +654,6 @@ class OpenResponsesRequest(BaseModel):
     plugins: Optional[List[OpenResponsesRequestPluginUnion]] = None
     r"""Plugins you want to enable for this request, including their settings."""
 
-    route: Annotated[
-        OptionalNullable[OpenResponsesRequestRoute],
-        PlainValidator(validate_open_enum(False)),
-    ] = UNSET
-    r"""Routing strategy for multiple models: \"fallback\" (default) uses secondary models as backups, \"sort\" sorts all endpoints together by routing criteria."""
-
     user: Optional[str] = None
     r"""A unique identifier representing your end-user, which helps distinguish between different users of your app. This allows your app to identify specific users in case of abuse reports, preventing your entire app from being affected by the actions of individual users. Maximum of 128 characters."""
 
@@ -641,6 +677,8 @@ class OpenResponsesRequest(BaseModel):
             "temperature",
             "top_p",
             "top_k",
+            "image_config",
+            "modalities",
             "prompt_cache_key",
             "previous_response_id",
             "prompt",
@@ -653,7 +691,6 @@ class OpenResponsesRequest(BaseModel):
             "stream",
             "provider",
             "plugins",
-            "route",
             "user",
             "session_id",
         ]
@@ -673,7 +710,6 @@ class OpenResponsesRequest(BaseModel):
             "safety_identifier",
             "truncation",
             "provider",
-            "route",
         ]
         null_default_fields = []
 

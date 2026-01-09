@@ -3,6 +3,12 @@
 
 ## Supported Types
 
+### `components.ChatGenerationParamsPluginAutoRouter`
+
+```python
+value: components.ChatGenerationParamsPluginAutoRouter = /* values here */
+```
+
 ### `components.ChatGenerationParamsPluginModeration`
 
 ```python

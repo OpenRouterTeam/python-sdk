@@ -33,7 +33,7 @@ class Chat(BaseSDK):
                 List[components.ChatGenerationParamsPluginUnionTypedDict],
             ]
         ] = None,
-        route: OptionalNullable[components.ChatGenerationParamsRoute] = UNSET,
+        route: OptionalNullable[components.Route] = UNSET,
         user: Optional[str] = None,
         session_id: Optional[str] = None,
         model: Optional[str] = None,
@@ -76,6 +76,13 @@ class Chat(BaseSDK):
         ] = None,
         top_p: OptionalNullable[float] = UNSET,
         debug: Optional[Union[components.Debug, components.DebugTypedDict]] = None,
+        image_config: Optional[
+            Union[
+                Dict[str, components.ChatGenerationParamsImageConfig],
+                Dict[str, components.ChatGenerationParamsImageConfigTypedDict],
+            ]
+        ] = None,
+        modalities: Optional[List[components.Modality]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -88,7 +95,7 @@ class Chat(BaseSDK):
         :param messages:
         :param provider: When multiple model providers are available, optionally indicate your routing preference.
         :param plugins: Plugins you want to enable for this request, including their settings.
-        :param route: Routing strategy for multiple models: \"fallback\" (default) uses secondary models as backups, \"sort\" sorts all endpoints together by routing criteria.
+        :param route:
         :param user:
         :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 128 characters.
         :param model:
@@ -112,6 +119,8 @@ class Chat(BaseSDK):
         :param tools:
         :param top_p:
         :param debug:
+        :param image_config:
+        :param modalities:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -136,7 +145,7 @@ class Chat(BaseSDK):
                 List[components.ChatGenerationParamsPluginUnionTypedDict],
             ]
         ] = None,
-        route: OptionalNullable[components.ChatGenerationParamsRoute] = UNSET,
+        route: OptionalNullable[components.Route] = UNSET,
         user: Optional[str] = None,
         session_id: Optional[str] = None,
         model: Optional[str] = None,
@@ -179,6 +188,13 @@ class Chat(BaseSDK):
         ] = None,
         top_p: OptionalNullable[float] = UNSET,
         debug: Optional[Union[components.Debug, components.DebugTypedDict]] = None,
+        image_config: Optional[
+            Union[
+                Dict[str, components.ChatGenerationParamsImageConfig],
+                Dict[str, components.ChatGenerationParamsImageConfigTypedDict],
+            ]
+        ] = None,
+        modalities: Optional[List[components.Modality]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -191,7 +207,7 @@ class Chat(BaseSDK):
         :param messages:
         :param provider: When multiple model providers are available, optionally indicate your routing preference.
         :param plugins: Plugins you want to enable for this request, including their settings.
-        :param route: Routing strategy for multiple models: \"fallback\" (default) uses secondary models as backups, \"sort\" sorts all endpoints together by routing criteria.
+        :param route:
         :param user:
         :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 128 characters.
         :param model:
@@ -215,6 +231,8 @@ class Chat(BaseSDK):
         :param tools:
         :param top_p:
         :param debug:
+        :param image_config:
+        :param modalities:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -238,7 +256,7 @@ class Chat(BaseSDK):
                 List[components.ChatGenerationParamsPluginUnionTypedDict],
             ]
         ] = None,
-        route: OptionalNullable[components.ChatGenerationParamsRoute] = UNSET,
+        route: OptionalNullable[components.Route] = UNSET,
         user: Optional[str] = None,
         session_id: Optional[str] = None,
         model: Optional[str] = None,
@@ -281,6 +299,13 @@ class Chat(BaseSDK):
         ] = None,
         top_p: OptionalNullable[float] = UNSET,
         debug: Optional[Union[components.Debug, components.DebugTypedDict]] = None,
+        image_config: Optional[
+            Union[
+                Dict[str, components.ChatGenerationParamsImageConfig],
+                Dict[str, components.ChatGenerationParamsImageConfigTypedDict],
+            ]
+        ] = None,
+        modalities: Optional[List[components.Modality]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -293,7 +318,7 @@ class Chat(BaseSDK):
         :param messages:
         :param provider: When multiple model providers are available, optionally indicate your routing preference.
         :param plugins: Plugins you want to enable for this request, including their settings.
-        :param route: Routing strategy for multiple models: \"fallback\" (default) uses secondary models as backups, \"sort\" sorts all endpoints together by routing criteria.
+        :param route:
         :param user:
         :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 128 characters.
         :param model:
@@ -317,6 +342,8 @@ class Chat(BaseSDK):
         :param tools:
         :param top_p:
         :param debug:
+        :param image_config:
+        :param modalities:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -374,6 +401,8 @@ class Chat(BaseSDK):
             ),
             top_p=top_p,
             debug=utils.get_pydantic_model(debug, Optional[components.Debug]),
+            image_config=image_config,
+            modalities=modalities,
         )
 
         req = self._build_request(
@@ -480,7 +509,7 @@ class Chat(BaseSDK):
                 List[components.ChatGenerationParamsPluginUnionTypedDict],
             ]
         ] = None,
-        route: OptionalNullable[components.ChatGenerationParamsRoute] = UNSET,
+        route: OptionalNullable[components.Route] = UNSET,
         user: Optional[str] = None,
         session_id: Optional[str] = None,
         model: Optional[str] = None,
@@ -523,6 +552,13 @@ class Chat(BaseSDK):
         ] = None,
         top_p: OptionalNullable[float] = UNSET,
         debug: Optional[Union[components.Debug, components.DebugTypedDict]] = None,
+        image_config: Optional[
+            Union[
+                Dict[str, components.ChatGenerationParamsImageConfig],
+                Dict[str, components.ChatGenerationParamsImageConfigTypedDict],
+            ]
+        ] = None,
+        modalities: Optional[List[components.Modality]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -535,7 +571,7 @@ class Chat(BaseSDK):
         :param messages:
         :param provider: When multiple model providers are available, optionally indicate your routing preference.
         :param plugins: Plugins you want to enable for this request, including their settings.
-        :param route: Routing strategy for multiple models: \"fallback\" (default) uses secondary models as backups, \"sort\" sorts all endpoints together by routing criteria.
+        :param route:
         :param user:
         :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 128 characters.
         :param model:
@@ -559,6 +595,8 @@ class Chat(BaseSDK):
         :param tools:
         :param top_p:
         :param debug:
+        :param image_config:
+        :param modalities:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -583,7 +621,7 @@ class Chat(BaseSDK):
                 List[components.ChatGenerationParamsPluginUnionTypedDict],
             ]
         ] = None,
-        route: OptionalNullable[components.ChatGenerationParamsRoute] = UNSET,
+        route: OptionalNullable[components.Route] = UNSET,
         user: Optional[str] = None,
         session_id: Optional[str] = None,
         model: Optional[str] = None,
@@ -626,6 +664,13 @@ class Chat(BaseSDK):
         ] = None,
         top_p: OptionalNullable[float] = UNSET,
         debug: Optional[Union[components.Debug, components.DebugTypedDict]] = None,
+        image_config: Optional[
+            Union[
+                Dict[str, components.ChatGenerationParamsImageConfig],
+                Dict[str, components.ChatGenerationParamsImageConfigTypedDict],
+            ]
+        ] = None,
+        modalities: Optional[List[components.Modality]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -638,7 +683,7 @@ class Chat(BaseSDK):
         :param messages:
         :param provider: When multiple model providers are available, optionally indicate your routing preference.
         :param plugins: Plugins you want to enable for this request, including their settings.
-        :param route: Routing strategy for multiple models: \"fallback\" (default) uses secondary models as backups, \"sort\" sorts all endpoints together by routing criteria.
+        :param route:
         :param user:
         :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 128 characters.
         :param model:
@@ -662,6 +707,8 @@ class Chat(BaseSDK):
         :param tools:
         :param top_p:
         :param debug:
+        :param image_config:
+        :param modalities:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -685,7 +732,7 @@ class Chat(BaseSDK):
                 List[components.ChatGenerationParamsPluginUnionTypedDict],
             ]
         ] = None,
-        route: OptionalNullable[components.ChatGenerationParamsRoute] = UNSET,
+        route: OptionalNullable[components.Route] = UNSET,
         user: Optional[str] = None,
         session_id: Optional[str] = None,
         model: Optional[str] = None,
@@ -728,6 +775,13 @@ class Chat(BaseSDK):
         ] = None,
         top_p: OptionalNullable[float] = UNSET,
         debug: Optional[Union[components.Debug, components.DebugTypedDict]] = None,
+        image_config: Optional[
+            Union[
+                Dict[str, components.ChatGenerationParamsImageConfig],
+                Dict[str, components.ChatGenerationParamsImageConfigTypedDict],
+            ]
+        ] = None,
+        modalities: Optional[List[components.Modality]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -740,7 +794,7 @@ class Chat(BaseSDK):
         :param messages:
         :param provider: When multiple model providers are available, optionally indicate your routing preference.
         :param plugins: Plugins you want to enable for this request, including their settings.
-        :param route: Routing strategy for multiple models: \"fallback\" (default) uses secondary models as backups, \"sort\" sorts all endpoints together by routing criteria.
+        :param route:
         :param user:
         :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 128 characters.
         :param model:
@@ -764,6 +818,8 @@ class Chat(BaseSDK):
         :param tools:
         :param top_p:
         :param debug:
+        :param image_config:
+        :param modalities:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -821,6 +877,8 @@ class Chat(BaseSDK):
             ),
             top_p=top_p,
             debug=utils.get_pydantic_model(debug, Optional[components.Debug]),
+            image_config=image_config,
+            modalities=modalities,
         )
 
         req = self._build_request_async(

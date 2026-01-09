@@ -58,6 +58,13 @@ class Responses(BaseSDK):
         temperature: OptionalNullable[float] = UNSET,
         top_p: OptionalNullable[float] = UNSET,
         top_k: Optional[float] = None,
+        image_config: Optional[
+            Union[
+                Dict[str, components.OpenResponsesRequestImageConfig],
+                Dict[str, components.OpenResponsesRequestImageConfigTypedDict],
+            ]
+        ] = None,
+        modalities: Optional[List[components.ResponsesOutputModality]] = None,
         prompt_cache_key: OptionalNullable[str] = UNSET,
         previous_response_id: OptionalNullable[str] = UNSET,
         prompt: OptionalNullable[
@@ -84,7 +91,6 @@ class Responses(BaseSDK):
                 List[components.OpenResponsesRequestPluginUnionTypedDict],
             ]
         ] = None,
-        route: OptionalNullable[components.OpenResponsesRequestRoute] = UNSET,
         user: Optional[str] = None,
         session_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -110,6 +116,8 @@ class Responses(BaseSDK):
         :param temperature:
         :param top_p:
         :param top_k:
+        :param image_config: Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/features/multimodal/image-generation for more details.
+        :param modalities: Output modalities for the response. Supported values are \"text\" and \"image\".
         :param prompt_cache_key:
         :param previous_response_id:
         :param prompt:
@@ -121,7 +129,6 @@ class Responses(BaseSDK):
         :param stream:
         :param provider: When multiple model providers are available, optionally indicate your routing preference.
         :param plugins: Plugins you want to enable for this request, including their settings.
-        :param route: Routing strategy for multiple models: \"fallback\" (default) uses secondary models as backups, \"sort\" sorts all endpoints together by routing criteria.
         :param user: A unique identifier representing your end-user, which helps distinguish between different users of your app. This allows your app to identify specific users in case of abuse reports, preventing your entire app from being affected by the actions of individual users. Maximum of 128 characters.
         :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 128 characters.
         :param retries: Override the default retry configuration for this method
@@ -171,6 +178,13 @@ class Responses(BaseSDK):
         temperature: OptionalNullable[float] = UNSET,
         top_p: OptionalNullable[float] = UNSET,
         top_k: Optional[float] = None,
+        image_config: Optional[
+            Union[
+                Dict[str, components.OpenResponsesRequestImageConfig],
+                Dict[str, components.OpenResponsesRequestImageConfigTypedDict],
+            ]
+        ] = None,
+        modalities: Optional[List[components.ResponsesOutputModality]] = None,
         prompt_cache_key: OptionalNullable[str] = UNSET,
         previous_response_id: OptionalNullable[str] = UNSET,
         prompt: OptionalNullable[
@@ -197,7 +211,6 @@ class Responses(BaseSDK):
                 List[components.OpenResponsesRequestPluginUnionTypedDict],
             ]
         ] = None,
-        route: OptionalNullable[components.OpenResponsesRequestRoute] = UNSET,
         user: Optional[str] = None,
         session_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -223,6 +236,8 @@ class Responses(BaseSDK):
         :param temperature:
         :param top_p:
         :param top_k:
+        :param image_config: Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/features/multimodal/image-generation for more details.
+        :param modalities: Output modalities for the response. Supported values are \"text\" and \"image\".
         :param prompt_cache_key:
         :param previous_response_id:
         :param prompt:
@@ -234,7 +249,6 @@ class Responses(BaseSDK):
         :param stream:
         :param provider: When multiple model providers are available, optionally indicate your routing preference.
         :param plugins: Plugins you want to enable for this request, including their settings.
-        :param route: Routing strategy for multiple models: \"fallback\" (default) uses secondary models as backups, \"sort\" sorts all endpoints together by routing criteria.
         :param user: A unique identifier representing your end-user, which helps distinguish between different users of your app. This allows your app to identify specific users in case of abuse reports, preventing your entire app from being affected by the actions of individual users. Maximum of 128 characters.
         :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 128 characters.
         :param retries: Override the default retry configuration for this method
@@ -283,6 +297,13 @@ class Responses(BaseSDK):
         temperature: OptionalNullable[float] = UNSET,
         top_p: OptionalNullable[float] = UNSET,
         top_k: Optional[float] = None,
+        image_config: Optional[
+            Union[
+                Dict[str, components.OpenResponsesRequestImageConfig],
+                Dict[str, components.OpenResponsesRequestImageConfigTypedDict],
+            ]
+        ] = None,
+        modalities: Optional[List[components.ResponsesOutputModality]] = None,
         prompt_cache_key: OptionalNullable[str] = UNSET,
         previous_response_id: OptionalNullable[str] = UNSET,
         prompt: OptionalNullable[
@@ -309,7 +330,6 @@ class Responses(BaseSDK):
                 List[components.OpenResponsesRequestPluginUnionTypedDict],
             ]
         ] = None,
-        route: OptionalNullable[components.OpenResponsesRequestRoute] = UNSET,
         user: Optional[str] = None,
         session_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -335,6 +355,8 @@ class Responses(BaseSDK):
         :param temperature:
         :param top_p:
         :param top_k:
+        :param image_config: Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/features/multimodal/image-generation for more details.
+        :param modalities: Output modalities for the response. Supported values are \"text\" and \"image\".
         :param prompt_cache_key:
         :param previous_response_id:
         :param prompt:
@@ -346,7 +368,6 @@ class Responses(BaseSDK):
         :param stream:
         :param provider: When multiple model providers are available, optionally indicate your routing preference.
         :param plugins: Plugins you want to enable for this request, including their settings.
-        :param route: Routing strategy for multiple models: \"fallback\" (default) uses secondary models as backups, \"sort\" sorts all endpoints together by routing criteria.
         :param user: A unique identifier representing your end-user, which helps distinguish between different users of your app. This allows your app to identify specific users in case of abuse reports, preventing your entire app from being affected by the actions of individual users. Maximum of 128 characters.
         :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 128 characters.
         :param retries: Override the default retry configuration for this method
@@ -390,6 +411,8 @@ class Responses(BaseSDK):
             temperature=temperature,
             top_p=top_p,
             top_k=top_k,
+            image_config=image_config,
+            modalities=modalities,
             prompt_cache_key=prompt_cache_key,
             previous_response_id=previous_response_id,
             prompt=utils.get_pydantic_model(
@@ -407,7 +430,6 @@ class Responses(BaseSDK):
             plugins=utils.get_pydantic_model(
                 plugins, Optional[List[components.OpenResponsesRequestPluginUnion]]
             ),
-            route=route,
             user=user,
             session_id=session_id,
         )
@@ -641,6 +663,13 @@ class Responses(BaseSDK):
         temperature: OptionalNullable[float] = UNSET,
         top_p: OptionalNullable[float] = UNSET,
         top_k: Optional[float] = None,
+        image_config: Optional[
+            Union[
+                Dict[str, components.OpenResponsesRequestImageConfig],
+                Dict[str, components.OpenResponsesRequestImageConfigTypedDict],
+            ]
+        ] = None,
+        modalities: Optional[List[components.ResponsesOutputModality]] = None,
         prompt_cache_key: OptionalNullable[str] = UNSET,
         previous_response_id: OptionalNullable[str] = UNSET,
         prompt: OptionalNullable[
@@ -667,7 +696,6 @@ class Responses(BaseSDK):
                 List[components.OpenResponsesRequestPluginUnionTypedDict],
             ]
         ] = None,
-        route: OptionalNullable[components.OpenResponsesRequestRoute] = UNSET,
         user: Optional[str] = None,
         session_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -693,6 +721,8 @@ class Responses(BaseSDK):
         :param temperature:
         :param top_p:
         :param top_k:
+        :param image_config: Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/features/multimodal/image-generation for more details.
+        :param modalities: Output modalities for the response. Supported values are \"text\" and \"image\".
         :param prompt_cache_key:
         :param previous_response_id:
         :param prompt:
@@ -704,7 +734,6 @@ class Responses(BaseSDK):
         :param stream:
         :param provider: When multiple model providers are available, optionally indicate your routing preference.
         :param plugins: Plugins you want to enable for this request, including their settings.
-        :param route: Routing strategy for multiple models: \"fallback\" (default) uses secondary models as backups, \"sort\" sorts all endpoints together by routing criteria.
         :param user: A unique identifier representing your end-user, which helps distinguish between different users of your app. This allows your app to identify specific users in case of abuse reports, preventing your entire app from being affected by the actions of individual users. Maximum of 128 characters.
         :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 128 characters.
         :param retries: Override the default retry configuration for this method
@@ -754,6 +783,13 @@ class Responses(BaseSDK):
         temperature: OptionalNullable[float] = UNSET,
         top_p: OptionalNullable[float] = UNSET,
         top_k: Optional[float] = None,
+        image_config: Optional[
+            Union[
+                Dict[str, components.OpenResponsesRequestImageConfig],
+                Dict[str, components.OpenResponsesRequestImageConfigTypedDict],
+            ]
+        ] = None,
+        modalities: Optional[List[components.ResponsesOutputModality]] = None,
         prompt_cache_key: OptionalNullable[str] = UNSET,
         previous_response_id: OptionalNullable[str] = UNSET,
         prompt: OptionalNullable[
@@ -780,7 +816,6 @@ class Responses(BaseSDK):
                 List[components.OpenResponsesRequestPluginUnionTypedDict],
             ]
         ] = None,
-        route: OptionalNullable[components.OpenResponsesRequestRoute] = UNSET,
         user: Optional[str] = None,
         session_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -806,6 +841,8 @@ class Responses(BaseSDK):
         :param temperature:
         :param top_p:
         :param top_k:
+        :param image_config: Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/features/multimodal/image-generation for more details.
+        :param modalities: Output modalities for the response. Supported values are \"text\" and \"image\".
         :param prompt_cache_key:
         :param previous_response_id:
         :param prompt:
@@ -817,7 +854,6 @@ class Responses(BaseSDK):
         :param stream:
         :param provider: When multiple model providers are available, optionally indicate your routing preference.
         :param plugins: Plugins you want to enable for this request, including their settings.
-        :param route: Routing strategy for multiple models: \"fallback\" (default) uses secondary models as backups, \"sort\" sorts all endpoints together by routing criteria.
         :param user: A unique identifier representing your end-user, which helps distinguish between different users of your app. This allows your app to identify specific users in case of abuse reports, preventing your entire app from being affected by the actions of individual users. Maximum of 128 characters.
         :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 128 characters.
         :param retries: Override the default retry configuration for this method
@@ -866,6 +902,13 @@ class Responses(BaseSDK):
         temperature: OptionalNullable[float] = UNSET,
         top_p: OptionalNullable[float] = UNSET,
         top_k: Optional[float] = None,
+        image_config: Optional[
+            Union[
+                Dict[str, components.OpenResponsesRequestImageConfig],
+                Dict[str, components.OpenResponsesRequestImageConfigTypedDict],
+            ]
+        ] = None,
+        modalities: Optional[List[components.ResponsesOutputModality]] = None,
         prompt_cache_key: OptionalNullable[str] = UNSET,
         previous_response_id: OptionalNullable[str] = UNSET,
         prompt: OptionalNullable[
@@ -892,7 +935,6 @@ class Responses(BaseSDK):
                 List[components.OpenResponsesRequestPluginUnionTypedDict],
             ]
         ] = None,
-        route: OptionalNullable[components.OpenResponsesRequestRoute] = UNSET,
         user: Optional[str] = None,
         session_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -918,6 +960,8 @@ class Responses(BaseSDK):
         :param temperature:
         :param top_p:
         :param top_k:
+        :param image_config: Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/features/multimodal/image-generation for more details.
+        :param modalities: Output modalities for the response. Supported values are \"text\" and \"image\".
         :param prompt_cache_key:
         :param previous_response_id:
         :param prompt:
@@ -929,7 +973,6 @@ class Responses(BaseSDK):
         :param stream:
         :param provider: When multiple model providers are available, optionally indicate your routing preference.
         :param plugins: Plugins you want to enable for this request, including their settings.
-        :param route: Routing strategy for multiple models: \"fallback\" (default) uses secondary models as backups, \"sort\" sorts all endpoints together by routing criteria.
         :param user: A unique identifier representing your end-user, which helps distinguish between different users of your app. This allows your app to identify specific users in case of abuse reports, preventing your entire app from being affected by the actions of individual users. Maximum of 128 characters.
         :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 128 characters.
         :param retries: Override the default retry configuration for this method
@@ -973,6 +1016,8 @@ class Responses(BaseSDK):
             temperature=temperature,
             top_p=top_p,
             top_k=top_k,
+            image_config=image_config,
+            modalities=modalities,
             prompt_cache_key=prompt_cache_key,
             previous_response_id=previous_response_id,
             prompt=utils.get_pydantic_model(
@@ -990,7 +1035,6 @@ class Responses(BaseSDK):
             plugins=utils.get_pydantic_model(
                 plugins, Optional[List[components.OpenResponsesRequestPluginUnion]]
             ),
-            route=route,
             user=user,
             session_id=session_id,
         )
