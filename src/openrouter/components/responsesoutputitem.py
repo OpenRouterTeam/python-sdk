@@ -38,8 +38,8 @@ ResponsesOutputItemTypedDict = TypeAliasType(
         ResponsesOutputItemFileSearchCallTypedDict,
         ResponsesImageGenerationCallTypedDict,
         ResponsesOutputMessageTypedDict,
-        ResponsesOutputItemReasoningTypedDict,
         ResponsesOutputItemFunctionCallTypedDict,
+        ResponsesOutputItemReasoningTypedDict,
     ],
 )
 r"""An output item from the response"""

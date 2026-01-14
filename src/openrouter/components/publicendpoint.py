@@ -3,6 +3,7 @@
 from __future__ import annotations
 from .endpointstatus import EndpointStatus
 from .parameter import Parameter
+from .percentilestats import PercentileStats, PercentileStatsTypedDict
 from .providername import ProviderName
 from openrouter.types import BaseModel, Nullable, UNSET_SENTINEL, UnrecognizedStr
 from openrouter.utils import validate_open_enum
@@ -111,6 +112,9 @@ class PublicEndpointTypedDict(TypedDict):
     supported_parameters: List[Parameter]
     uptime_last_30m: Nullable[float]
     supports_implicit_caching: bool
+    latency_last_30m: Nullable[PercentileStatsTypedDict]
+    r"""Latency percentiles in milliseconds over the last 30 minutes. Latency measures time to first token. Only visible when authenticated with an API key or cookie; returns null for unauthenticated requests."""
+    throughput_last_30m: Nullable[PercentileStatsTypedDict]
     status: NotRequired[EndpointStatus]
 
 
@@ -145,6 +149,11 @@ class PublicEndpoint(BaseModel):
 
     supports_implicit_caching: bool
 
+    latency_last_30m: Nullable[PercentileStats]
+    r"""Latency percentiles in milliseconds over the last 30 minutes. Latency measures time to first token. Only visible when authenticated with an API key or cookie; returns null for unauthenticated requests."""
+
+    throughput_last_30m: Nullable[PercentileStats]
+
     status: Annotated[
         Optional[EndpointStatus], PlainValidator(validate_open_enum(True))
     ] = None
@@ -157,6 +166,8 @@ class PublicEndpoint(BaseModel):
             "max_completion_tokens",
             "max_prompt_tokens",
             "uptime_last_30m",
+            "latency_last_30m",
+            "throughput_last_30m",
         ]
         null_default_fields = []
 

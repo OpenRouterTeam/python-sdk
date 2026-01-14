@@ -8,13 +8,13 @@ from typing import List
 from typing_extensions import Annotated, TypedDict
 
 
-class TopLogprobTypedDict(TypedDict):
+class ChatMessageTokenLogprobTopLogprobTypedDict(TypedDict):
     token: str
     logprob: float
     bytes_: Nullable[List[float]]
 
 
-class TopLogprob(BaseModel):
+class ChatMessageTokenLogprobTopLogprob(BaseModel):
     token: str
 
     logprob: float
@@ -56,7 +56,7 @@ class ChatMessageTokenLogprobTypedDict(TypedDict):
     token: str
     logprob: float
     bytes_: Nullable[List[float]]
-    top_logprobs: List[TopLogprobTypedDict]
+    top_logprobs: List[ChatMessageTokenLogprobTopLogprobTypedDict]
 
 
 class ChatMessageTokenLogprob(BaseModel):
@@ -66,7 +66,7 @@ class ChatMessageTokenLogprob(BaseModel):
 
     bytes_: Annotated[Nullable[List[float]], pydantic.Field(alias="bytes")]
 
-    top_logprobs: List[TopLogprob]
+    top_logprobs: List[ChatMessageTokenLogprobTopLogprob]
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

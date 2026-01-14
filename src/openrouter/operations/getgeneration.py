@@ -96,6 +96,8 @@ class GetGenerationDataTypedDict(TypedDict):
     r"""External user identifier"""
     api_type: Nullable[APIType]
     r"""Type of API used for the generation"""
+    router: Nullable[str]
+    r"""Router used for the request (e.g., openrouter/auto)"""
 
 
 class GetGenerationData(BaseModel):
@@ -197,6 +199,9 @@ class GetGenerationData(BaseModel):
     api_type: Annotated[Nullable[APIType], PlainValidator(validate_open_enum(False))]
     r"""Type of API used for the generation"""
 
+    router: Nullable[str]
+    r"""Router used for the request (e.g., openrouter/auto)"""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = []
@@ -226,6 +231,7 @@ class GetGenerationData(BaseModel):
             "native_finish_reason",
             "external_user",
             "api_type",
+            "router",
         ]
         null_default_fields = []
 

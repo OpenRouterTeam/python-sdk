@@ -76,6 +76,13 @@ class Chat(BaseSDK):
         ] = None,
         top_p: OptionalNullable[float] = UNSET,
         debug: Optional[Union[components.Debug, components.DebugTypedDict]] = None,
+        image_config: Optional[
+            Union[
+                Dict[str, components.ChatGenerationParamsImageConfig],
+                Dict[str, components.ChatGenerationParamsImageConfigTypedDict],
+            ]
+        ] = None,
+        modalities: Optional[List[components.Modality]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -112,6 +119,8 @@ class Chat(BaseSDK):
         :param tools:
         :param top_p:
         :param debug:
+        :param image_config:
+        :param modalities:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -179,6 +188,13 @@ class Chat(BaseSDK):
         ] = None,
         top_p: OptionalNullable[float] = UNSET,
         debug: Optional[Union[components.Debug, components.DebugTypedDict]] = None,
+        image_config: Optional[
+            Union[
+                Dict[str, components.ChatGenerationParamsImageConfig],
+                Dict[str, components.ChatGenerationParamsImageConfigTypedDict],
+            ]
+        ] = None,
+        modalities: Optional[List[components.Modality]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -215,6 +231,8 @@ class Chat(BaseSDK):
         :param tools:
         :param top_p:
         :param debug:
+        :param image_config:
+        :param modalities:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -281,6 +299,13 @@ class Chat(BaseSDK):
         ] = None,
         top_p: OptionalNullable[float] = UNSET,
         debug: Optional[Union[components.Debug, components.DebugTypedDict]] = None,
+        image_config: Optional[
+            Union[
+                Dict[str, components.ChatGenerationParamsImageConfig],
+                Dict[str, components.ChatGenerationParamsImageConfigTypedDict],
+            ]
+        ] = None,
+        modalities: Optional[List[components.Modality]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -317,6 +342,8 @@ class Chat(BaseSDK):
         :param tools:
         :param top_p:
         :param debug:
+        :param image_config:
+        :param modalities:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -374,6 +401,8 @@ class Chat(BaseSDK):
             ),
             top_p=top_p,
             debug=utils.get_pydantic_model(debug, Optional[components.Debug]),
+            image_config=image_config,
+            modalities=modalities,
         )
 
         req = self._build_request(
@@ -523,6 +552,13 @@ class Chat(BaseSDK):
         ] = None,
         top_p: OptionalNullable[float] = UNSET,
         debug: Optional[Union[components.Debug, components.DebugTypedDict]] = None,
+        image_config: Optional[
+            Union[
+                Dict[str, components.ChatGenerationParamsImageConfig],
+                Dict[str, components.ChatGenerationParamsImageConfigTypedDict],
+            ]
+        ] = None,
+        modalities: Optional[List[components.Modality]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -559,6 +595,8 @@ class Chat(BaseSDK):
         :param tools:
         :param top_p:
         :param debug:
+        :param image_config:
+        :param modalities:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -626,6 +664,13 @@ class Chat(BaseSDK):
         ] = None,
         top_p: OptionalNullable[float] = UNSET,
         debug: Optional[Union[components.Debug, components.DebugTypedDict]] = None,
+        image_config: Optional[
+            Union[
+                Dict[str, components.ChatGenerationParamsImageConfig],
+                Dict[str, components.ChatGenerationParamsImageConfigTypedDict],
+            ]
+        ] = None,
+        modalities: Optional[List[components.Modality]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -662,6 +707,8 @@ class Chat(BaseSDK):
         :param tools:
         :param top_p:
         :param debug:
+        :param image_config:
+        :param modalities:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -728,6 +775,13 @@ class Chat(BaseSDK):
         ] = None,
         top_p: OptionalNullable[float] = UNSET,
         debug: Optional[Union[components.Debug, components.DebugTypedDict]] = None,
+        image_config: Optional[
+            Union[
+                Dict[str, components.ChatGenerationParamsImageConfig],
+                Dict[str, components.ChatGenerationParamsImageConfigTypedDict],
+            ]
+        ] = None,
+        modalities: Optional[List[components.Modality]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -764,6 +818,8 @@ class Chat(BaseSDK):
         :param tools:
         :param top_p:
         :param debug:
+        :param image_config:
+        :param modalities:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -821,6 +877,8 @@ class Chat(BaseSDK):
             ),
             top_p=top_p,
             debug=utils.get_pydantic_model(debug, Optional[components.Debug]),
+            image_config=image_config,
+            modalities=modalities,
         )
 
         req = self._build_request_async(

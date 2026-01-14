@@ -3,16 +3,24 @@
 from __future__ import annotations
 from .responseinputaudio import ResponseInputAudio, ResponseInputAudioTypedDict
 from .responseinputfile import ResponseInputFile, ResponseInputFileTypedDict
-from .responseinputimage import ResponseInputImage, ResponseInputImageTypedDict
 from .responseinputtext import ResponseInputText, ResponseInputTextTypedDict
-from openrouter.types import BaseModel
-from openrouter.utils import get_discriminator
-from pydantic import Discriminator, Tag
+from .responseinputvideo import ResponseInputVideo, ResponseInputVideoTypedDict
+from openrouter.types import (
+    BaseModel,
+    Nullable,
+    OptionalNullable,
+    UNSET,
+    UNSET_SENTINEL,
+    UnrecognizedStr,
+)
+from openrouter.utils import get_discriminator, validate_open_enum
+from pydantic import Discriminator, Tag, model_serializer
+from pydantic.functional_validators import PlainValidator
 from typing import List, Literal, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
-OpenResponsesEasyInputMessageType = Literal["message",]
+OpenResponsesEasyInputMessageTypeMessage = Literal["message",]
 
 
 OpenResponsesEasyInputMessageRoleDeveloper = Literal["developer",]
@@ -49,49 +57,114 @@ OpenResponsesEasyInputMessageRoleUnion = TypeAliasType(
 )
 
 
-OpenResponsesEasyInputMessageContent1TypedDict = TypeAliasType(
-    "OpenResponsesEasyInputMessageContent1TypedDict",
+OpenResponsesEasyInputMessageContentType = Literal["input_image",]
+
+
+OpenResponsesEasyInputMessageDetail = Union[
+    Literal[
+        "auto",
+        "high",
+        "low",
+    ],
+    UnrecognizedStr,
+]
+
+
+class OpenResponsesEasyInputMessageContentInputImageTypedDict(TypedDict):
+    r"""Image input content item"""
+
+    type: OpenResponsesEasyInputMessageContentType
+    detail: OpenResponsesEasyInputMessageDetail
+    image_url: NotRequired[Nullable[str]]
+
+
+class OpenResponsesEasyInputMessageContentInputImage(BaseModel):
+    r"""Image input content item"""
+
+    type: OpenResponsesEasyInputMessageContentType
+
+    detail: Annotated[
+        OpenResponsesEasyInputMessageDetail, PlainValidator(validate_open_enum(False))
+    ]
+
+    image_url: OptionalNullable[str] = UNSET
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = ["image_url"]
+        nullable_fields = ["image_url"]
+        null_default_fields = []
+
+        serialized = handler(self)
+
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+            serialized.pop(k, None)
+
+            optional_nullable = k in optional_fields and k in nullable_fields
+            is_set = (
+                self.__pydantic_fields_set__.intersection({n})
+                or k in null_default_fields
+            )  # pylint: disable=no-member
+
+            if val is not None and val != UNSET_SENTINEL:
+                m[k] = val
+            elif val != UNSET_SENTINEL and (
+                not k in optional_fields or (optional_nullable and is_set)
+            ):
+                m[k] = val
+
+        return m
+
+
+OpenResponsesEasyInputMessageContentUnion1TypedDict = TypeAliasType(
+    "OpenResponsesEasyInputMessageContentUnion1TypedDict",
     Union[
         ResponseInputTextTypedDict,
         ResponseInputAudioTypedDict,
-        ResponseInputImageTypedDict,
+        ResponseInputVideoTypedDict,
+        OpenResponsesEasyInputMessageContentInputImageTypedDict,
         ResponseInputFileTypedDict,
     ],
 )
 
 
-OpenResponsesEasyInputMessageContent1 = Annotated[
+OpenResponsesEasyInputMessageContentUnion1 = Annotated[
     Union[
         Annotated[ResponseInputText, Tag("input_text")],
-        Annotated[ResponseInputImage, Tag("input_image")],
+        Annotated[OpenResponsesEasyInputMessageContentInputImage, Tag("input_image")],
         Annotated[ResponseInputFile, Tag("input_file")],
         Annotated[ResponseInputAudio, Tag("input_audio")],
+        Annotated[ResponseInputVideo, Tag("input_video")],
     ],
     Discriminator(lambda m: get_discriminator(m, "type", "type")),
 ]
 
 
-OpenResponsesEasyInputMessageContent2TypedDict = TypeAliasType(
-    "OpenResponsesEasyInputMessageContent2TypedDict",
-    Union[List[OpenResponsesEasyInputMessageContent1TypedDict], str],
+OpenResponsesEasyInputMessageContentUnion2TypedDict = TypeAliasType(
+    "OpenResponsesEasyInputMessageContentUnion2TypedDict",
+    Union[List[OpenResponsesEasyInputMessageContentUnion1TypedDict], str],
 )
 
 
-OpenResponsesEasyInputMessageContent2 = TypeAliasType(
-    "OpenResponsesEasyInputMessageContent2",
-    Union[List[OpenResponsesEasyInputMessageContent1], str],
+OpenResponsesEasyInputMessageContentUnion2 = TypeAliasType(
+    "OpenResponsesEasyInputMessageContentUnion2",
+    Union[List[OpenResponsesEasyInputMessageContentUnion1], str],
 )
 
 
 class OpenResponsesEasyInputMessageTypedDict(TypedDict):
     role: OpenResponsesEasyInputMessageRoleUnionTypedDict
-    content: OpenResponsesEasyInputMessageContent2TypedDict
-    type: NotRequired[OpenResponsesEasyInputMessageType]
+    content: OpenResponsesEasyInputMessageContentUnion2TypedDict
+    type: NotRequired[OpenResponsesEasyInputMessageTypeMessage]
 
 
 class OpenResponsesEasyInputMessage(BaseModel):
     role: OpenResponsesEasyInputMessageRoleUnion
 
-    content: OpenResponsesEasyInputMessageContent2
+    content: OpenResponsesEasyInputMessageContentUnion2
 
-    type: Optional[OpenResponsesEasyInputMessageType] = None
+    type: Optional[OpenResponsesEasyInputMessageTypeMessage] = None

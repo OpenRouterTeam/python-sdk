@@ -6,17 +6,50 @@ from .openairesponsesannotation import (
     OpenAIResponsesAnnotationTypedDict,
 )
 from openrouter.types import BaseModel
+import pydantic
 from typing import List, Literal, Optional
-from typing_extensions import NotRequired, TypedDict
+from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 ResponseOutputTextType = Literal["output_text",]
+
+
+class ResponseOutputTextTopLogprobTypedDict(TypedDict):
+    token: str
+    bytes_: List[float]
+    logprob: float
+
+
+class ResponseOutputTextTopLogprob(BaseModel):
+    token: str
+
+    bytes_: Annotated[List[float], pydantic.Field(alias="bytes")]
+
+    logprob: float
+
+
+class LogprobTypedDict(TypedDict):
+    token: str
+    bytes_: List[float]
+    logprob: float
+    top_logprobs: List[ResponseOutputTextTopLogprobTypedDict]
+
+
+class Logprob(BaseModel):
+    token: str
+
+    bytes_: Annotated[List[float], pydantic.Field(alias="bytes")]
+
+    logprob: float
+
+    top_logprobs: List[ResponseOutputTextTopLogprob]
 
 
 class ResponseOutputTextTypedDict(TypedDict):
     type: ResponseOutputTextType
     text: str
     annotations: NotRequired[List[OpenAIResponsesAnnotationTypedDict]]
+    logprobs: NotRequired[List[LogprobTypedDict]]
 
 
 class ResponseOutputText(BaseModel):
@@ -25,3 +58,5 @@ class ResponseOutputText(BaseModel):
     text: str
 
     annotations: Optional[List[OpenAIResponsesAnnotation]] = None
+
+    logprobs: Optional[List[Logprob]] = None

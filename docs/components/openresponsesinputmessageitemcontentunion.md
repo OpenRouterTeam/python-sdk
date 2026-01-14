@@ -1,4 +1,4 @@
-# OpenResponsesEasyInputMessageContent1
+# OpenResponsesInputMessageItemContentUnion
 
 
 ## Supported Types
@@ -9,10 +9,10 @@
 value: components.ResponseInputText = /* values here */
 ```
 
-### `components.ResponseInputImage`
+### `components.OpenResponsesInputMessageItemContentInputImage`
 
 ```python
-value: components.ResponseInputImage = /* values here */
+value: components.OpenResponsesInputMessageItemContentInputImage = /* values here */
 ```
 
 ### `components.ResponseInputFile`
@@ -25,5 +25,11 @@ value: components.ResponseInputFile = /* values here */
 
 ```python
 value: components.ResponseInputAudio = /* values here */
+```
+
+### `components.ResponseInputVideo`
+
+```python
+value: components.ResponseInputVideo = /* values here */
 ```
 

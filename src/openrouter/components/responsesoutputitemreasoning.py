@@ -9,10 +9,14 @@ from openrouter.types import (
     OptionalNullable,
     UNSET,
     UNSET_SENTINEL,
+    UnrecognizedStr,
 )
+from openrouter.utils import validate_open_enum
+import pydantic
 from pydantic import model_serializer
+from pydantic.functional_validators import PlainValidator
 from typing import List, Literal, Optional, Union
-from typing_extensions import NotRequired, TypeAliasType, TypedDict
+from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
 ResponsesOutputItemReasoningType = Literal["reasoning",]
@@ -47,6 +51,20 @@ ResponsesOutputItemReasoningStatusUnion = TypeAliasType(
 )
 
 
+ResponsesOutputItemReasoningFormat = Union[
+    Literal[
+        "unknown",
+        "openai-responses-v1",
+        "azure-openai-responses-v1",
+        "xai-responses-v1",
+        "anthropic-claude-v1",
+        "google-gemini-v1",
+    ],
+    UnrecognizedStr,
+]
+r"""The format of the reasoning content"""
+
+
 class ResponsesOutputItemReasoningTypedDict(TypedDict):
     r"""An output item containing reasoning"""
 
@@ -56,6 +74,10 @@ class ResponsesOutputItemReasoningTypedDict(TypedDict):
     content: NotRequired[List[ReasoningTextContentTypedDict]]
     encrypted_content: NotRequired[Nullable[str]]
     status: NotRequired[ResponsesOutputItemReasoningStatusUnionTypedDict]
+    signature: NotRequired[Nullable[str]]
+    r"""A signature for the reasoning content, used for verification"""
+    format_: NotRequired[Nullable[ResponsesOutputItemReasoningFormat]]
+    r"""The format of the reasoning content"""
 
 
 class ResponsesOutputItemReasoning(BaseModel):
@@ -73,10 +95,28 @@ class ResponsesOutputItemReasoning(BaseModel):
 
     status: Optional[ResponsesOutputItemReasoningStatusUnion] = None
 
+    signature: OptionalNullable[str] = UNSET
+    r"""A signature for the reasoning content, used for verification"""
+
+    format_: Annotated[
+        Annotated[
+            OptionalNullable[ResponsesOutputItemReasoningFormat],
+            PlainValidator(validate_open_enum(False)),
+        ],
+        pydantic.Field(alias="format"),
+    ] = UNSET
+    r"""The format of the reasoning content"""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["content", "encrypted_content", "status"]
-        nullable_fields = ["encrypted_content"]
+        optional_fields = [
+            "content",
+            "encrypted_content",
+            "status",
+            "signature",
+            "format",
+        ]
+        nullable_fields = ["encrypted_content", "signature", "format"]
         null_default_fields = []
 
         serialized = handler(self)

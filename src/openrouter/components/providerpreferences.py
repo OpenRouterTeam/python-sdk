@@ -2,6 +2,11 @@
 
 from __future__ import annotations
 from .datacollection import DataCollection
+from .preferredmaxlatency import PreferredMaxLatency, PreferredMaxLatencyTypedDict
+from .preferredminthroughput import (
+    PreferredMinThroughput,
+    PreferredMinThroughputTypedDict,
+)
 from .providername import ProviderName
 from .providersort import ProviderSort
 from .quantization import Quantization
@@ -14,7 +19,6 @@ from openrouter.types import (
     UnrecognizedStr,
 )
 from openrouter.utils import validate_open_enum
-import pydantic
 from pydantic import model_serializer
 from pydantic.functional_validators import PlainValidator
 from typing import List, Literal, Optional, Union
@@ -234,14 +238,10 @@ class ProviderPreferencesTypedDict(TypedDict):
     sort: NotRequired[Nullable[ProviderPreferencesSortUnionTypedDict]]
     max_price: NotRequired[ProviderPreferencesMaxPriceTypedDict]
     r"""The object specifying the maximum price you want to pay for this request. USD price per million tokens, for prompt and completion."""
-    preferred_min_throughput: NotRequired[Nullable[float]]
-    r"""Preferred minimum throughput (in tokens per second). Endpoints below this threshold may still be used, but are deprioritized in routing. When using fallback models, this may cause a fallback model to be used instead of the primary model if it meets the threshold."""
-    preferred_max_latency: NotRequired[Nullable[float]]
-    r"""Preferred maximum latency (in seconds). Endpoints above this threshold may still be used, but are deprioritized in routing. When using fallback models, this may cause a fallback model to be used instead of the primary model if it meets the threshold."""
-    min_throughput: NotRequired[Nullable[float]]
-    r"""**DEPRECATED** Use preferred_min_throughput instead. Backwards-compatible alias for preferred_min_throughput."""
-    max_latency: NotRequired[Nullable[float]]
-    r"""**DEPRECATED** Use preferred_max_latency instead. Backwards-compatible alias for preferred_max_latency."""
+    preferred_min_throughput: NotRequired[Nullable[PreferredMinThroughputTypedDict]]
+    r"""Preferred minimum throughput (in tokens per second). Can be a number (applies to p50) or an object with percentile-specific cutoffs. Endpoints below the threshold(s) may still be used, but are deprioritized in routing. When using fallback models, this may cause a fallback model to be used instead of the primary model if it meets the threshold."""
+    preferred_max_latency: NotRequired[Nullable[PreferredMaxLatencyTypedDict]]
+    r"""Preferred maximum latency (in seconds). Can be a number (applies to p50) or an object with percentile-specific cutoffs. Endpoints above the threshold(s) may still be used, but are deprioritized in routing. When using fallback models, this may cause a fallback model to be used instead of the primary model if it meets the threshold."""
 
 
 class ProviderPreferences(BaseModel):
@@ -291,27 +291,11 @@ class ProviderPreferences(BaseModel):
     max_price: Optional[ProviderPreferencesMaxPrice] = None
     r"""The object specifying the maximum price you want to pay for this request. USD price per million tokens, for prompt and completion."""
 
-    preferred_min_throughput: OptionalNullable[float] = UNSET
-    r"""Preferred minimum throughput (in tokens per second). Endpoints below this threshold may still be used, but are deprioritized in routing. When using fallback models, this may cause a fallback model to be used instead of the primary model if it meets the threshold."""
+    preferred_min_throughput: OptionalNullable[PreferredMinThroughput] = UNSET
+    r"""Preferred minimum throughput (in tokens per second). Can be a number (applies to p50) or an object with percentile-specific cutoffs. Endpoints below the threshold(s) may still be used, but are deprioritized in routing. When using fallback models, this may cause a fallback model to be used instead of the primary model if it meets the threshold."""
 
-    preferred_max_latency: OptionalNullable[float] = UNSET
-    r"""Preferred maximum latency (in seconds). Endpoints above this threshold may still be used, but are deprioritized in routing. When using fallback models, this may cause a fallback model to be used instead of the primary model if it meets the threshold."""
-
-    min_throughput: Annotated[
-        OptionalNullable[float],
-        pydantic.Field(
-            deprecated="warning: ** DEPRECATED ** - Use preferred_min_throughput instead.."
-        ),
-    ] = UNSET
-    r"""**DEPRECATED** Use preferred_min_throughput instead. Backwards-compatible alias for preferred_min_throughput."""
-
-    max_latency: Annotated[
-        OptionalNullable[float],
-        pydantic.Field(
-            deprecated="warning: ** DEPRECATED ** - Use preferred_max_latency instead.."
-        ),
-    ] = UNSET
-    r"""**DEPRECATED** Use preferred_max_latency instead. Backwards-compatible alias for preferred_max_latency."""
+    preferred_max_latency: OptionalNullable[PreferredMaxLatency] = UNSET
+    r"""Preferred maximum latency (in seconds). Can be a number (applies to p50) or an object with percentile-specific cutoffs. Endpoints above the threshold(s) may still be used, but are deprioritized in routing. When using fallback models, this may cause a fallback model to be used instead of the primary model if it meets the threshold."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
@@ -329,8 +313,6 @@ class ProviderPreferences(BaseModel):
             "max_price",
             "preferred_min_throughput",
             "preferred_max_latency",
-            "min_throughput",
-            "max_latency",
         ]
         nullable_fields = [
             "allow_fallbacks",
@@ -345,8 +327,6 @@ class ProviderPreferences(BaseModel):
             "sort",
             "preferred_min_throughput",
             "preferred_max_latency",
-            "min_throughput",
-            "max_latency",
         ]
         null_default_fields = []
 

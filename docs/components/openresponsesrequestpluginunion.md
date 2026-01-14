@@ -3,6 +3,12 @@
 
 ## Supported Types
 
+### `components.OpenResponsesRequestPluginAutoRouter`
+
+```python
+value: components.OpenResponsesRequestPluginAutoRouter = /* values here */
+```
+
 ### `components.OpenResponsesRequestPluginModeration`
 
 ```python

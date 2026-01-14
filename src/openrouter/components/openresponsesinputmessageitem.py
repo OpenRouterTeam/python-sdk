@@ -3,16 +3,24 @@
 from __future__ import annotations
 from .responseinputaudio import ResponseInputAudio, ResponseInputAudioTypedDict
 from .responseinputfile import ResponseInputFile, ResponseInputFileTypedDict
-from .responseinputimage import ResponseInputImage, ResponseInputImageTypedDict
 from .responseinputtext import ResponseInputText, ResponseInputTextTypedDict
-from openrouter.types import BaseModel
-from openrouter.utils import get_discriminator
-from pydantic import Discriminator, Tag
+from .responseinputvideo import ResponseInputVideo, ResponseInputVideoTypedDict
+from openrouter.types import (
+    BaseModel,
+    Nullable,
+    OptionalNullable,
+    UNSET,
+    UNSET_SENTINEL,
+    UnrecognizedStr,
+)
+from openrouter.utils import get_discriminator, validate_open_enum
+from pydantic import Discriminator, Tag, model_serializer
+from pydantic.functional_validators import PlainValidator
 from typing import List, Literal, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
-OpenResponsesInputMessageItemType = Literal["message",]
+OpenResponsesInputMessageItemTypeMessage = Literal["message",]
 
 
 OpenResponsesInputMessageItemRoleDeveloper = Literal["developer",]
@@ -44,23 +52,88 @@ OpenResponsesInputMessageItemRoleUnion = TypeAliasType(
 )
 
 
-OpenResponsesInputMessageItemContentTypedDict = TypeAliasType(
-    "OpenResponsesInputMessageItemContentTypedDict",
+OpenResponsesInputMessageItemContentType = Literal["input_image",]
+
+
+OpenResponsesInputMessageItemDetail = Union[
+    Literal[
+        "auto",
+        "high",
+        "low",
+    ],
+    UnrecognizedStr,
+]
+
+
+class OpenResponsesInputMessageItemContentInputImageTypedDict(TypedDict):
+    r"""Image input content item"""
+
+    type: OpenResponsesInputMessageItemContentType
+    detail: OpenResponsesInputMessageItemDetail
+    image_url: NotRequired[Nullable[str]]
+
+
+class OpenResponsesInputMessageItemContentInputImage(BaseModel):
+    r"""Image input content item"""
+
+    type: OpenResponsesInputMessageItemContentType
+
+    detail: Annotated[
+        OpenResponsesInputMessageItemDetail, PlainValidator(validate_open_enum(False))
+    ]
+
+    image_url: OptionalNullable[str] = UNSET
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = ["image_url"]
+        nullable_fields = ["image_url"]
+        null_default_fields = []
+
+        serialized = handler(self)
+
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+            serialized.pop(k, None)
+
+            optional_nullable = k in optional_fields and k in nullable_fields
+            is_set = (
+                self.__pydantic_fields_set__.intersection({n})
+                or k in null_default_fields
+            )  # pylint: disable=no-member
+
+            if val is not None and val != UNSET_SENTINEL:
+                m[k] = val
+            elif val != UNSET_SENTINEL and (
+                not k in optional_fields or (optional_nullable and is_set)
+            ):
+                m[k] = val
+
+        return m
+
+
+OpenResponsesInputMessageItemContentUnionTypedDict = TypeAliasType(
+    "OpenResponsesInputMessageItemContentUnionTypedDict",
     Union[
         ResponseInputTextTypedDict,
         ResponseInputAudioTypedDict,
-        ResponseInputImageTypedDict,
+        ResponseInputVideoTypedDict,
+        OpenResponsesInputMessageItemContentInputImageTypedDict,
         ResponseInputFileTypedDict,
     ],
 )
 
 
-OpenResponsesInputMessageItemContent = Annotated[
+OpenResponsesInputMessageItemContentUnion = Annotated[
     Union[
         Annotated[ResponseInputText, Tag("input_text")],
-        Annotated[ResponseInputImage, Tag("input_image")],
+        Annotated[OpenResponsesInputMessageItemContentInputImage, Tag("input_image")],
         Annotated[ResponseInputFile, Tag("input_file")],
         Annotated[ResponseInputAudio, Tag("input_audio")],
+        Annotated[ResponseInputVideo, Tag("input_video")],
     ],
     Discriminator(lambda m: get_discriminator(m, "type", "type")),
 ]
@@ -68,16 +141,16 @@ OpenResponsesInputMessageItemContent = Annotated[
 
 class OpenResponsesInputMessageItemTypedDict(TypedDict):
     role: OpenResponsesInputMessageItemRoleUnionTypedDict
-    content: List[OpenResponsesInputMessageItemContentTypedDict]
+    content: List[OpenResponsesInputMessageItemContentUnionTypedDict]
     id: NotRequired[str]
-    type: NotRequired[OpenResponsesInputMessageItemType]
+    type: NotRequired[OpenResponsesInputMessageItemTypeMessage]
 
 
 class OpenResponsesInputMessageItem(BaseModel):
     role: OpenResponsesInputMessageItemRoleUnion
 
-    content: List[OpenResponsesInputMessageItemContent]
+    content: List[OpenResponsesInputMessageItemContentUnion]
 
     id: Optional[str] = None
 
-    type: Optional[OpenResponsesInputMessageItemType] = None
+    type: Optional[OpenResponsesInputMessageItemTypeMessage] = None

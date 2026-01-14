@@ -149,24 +149,27 @@ class OpenResponsesNonStreamingResponseTypedDict(TypedDict):
     object: Object
     created_at: float
     model: str
+    status: OpenAIResponsesResponseStatus
+    completed_at: Nullable[float]
     output: List[ResponsesOutputItemTypedDict]
     error: Nullable[ResponsesErrorFieldTypedDict]
     r"""Error information returned from the API"""
     incomplete_details: Nullable[OpenAIResponsesIncompleteDetailsTypedDict]
     temperature: Nullable[float]
     top_p: Nullable[float]
+    presence_penalty: Nullable[float]
+    frequency_penalty: Nullable[float]
     instructions: Nullable[OpenAIResponsesInputUnionTypedDict]
     metadata: Nullable[Dict[str, str]]
     r"""Metadata key-value pairs for the request. Keys must be ≤64 characters and cannot contain brackets. Values must be ≤512 characters. Maximum 16 pairs allowed."""
     tools: List[OpenResponsesNonStreamingResponseToolUnionTypedDict]
     tool_choice: OpenAIResponsesToolChoiceUnionTypedDict
     parallel_tool_calls: bool
-    status: NotRequired[OpenAIResponsesResponseStatus]
     user: NotRequired[Nullable[str]]
     output_text: NotRequired[str]
     prompt_cache_key: NotRequired[Nullable[str]]
     safety_identifier: NotRequired[Nullable[str]]
-    usage: NotRequired[OpenResponsesUsageTypedDict]
+    usage: NotRequired[Nullable[OpenResponsesUsageTypedDict]]
     r"""Token usage information for the response"""
     max_tool_calls: NotRequired[Nullable[float]]
     top_logprobs: NotRequired[float]
@@ -193,6 +196,12 @@ class OpenResponsesNonStreamingResponse(BaseModel):
 
     model: str
 
+    status: Annotated[
+        OpenAIResponsesResponseStatus, PlainValidator(validate_open_enum(False))
+    ]
+
+    completed_at: Nullable[float]
+
     output: List[ResponsesOutputItem]
 
     error: Nullable[ResponsesErrorField]
@@ -203,6 +212,10 @@ class OpenResponsesNonStreamingResponse(BaseModel):
     temperature: Nullable[float]
 
     top_p: Nullable[float]
+
+    presence_penalty: Nullable[float]
+
+    frequency_penalty: Nullable[float]
 
     instructions: Nullable[OpenAIResponsesInputUnion]
 
@@ -215,11 +228,6 @@ class OpenResponsesNonStreamingResponse(BaseModel):
 
     parallel_tool_calls: bool
 
-    status: Annotated[
-        Optional[OpenAIResponsesResponseStatus],
-        PlainValidator(validate_open_enum(False)),
-    ] = None
-
     user: OptionalNullable[str] = UNSET
 
     output_text: Optional[str] = None
@@ -228,7 +236,7 @@ class OpenResponsesNonStreamingResponse(BaseModel):
 
     safety_identifier: OptionalNullable[str] = UNSET
 
-    usage: Optional[OpenResponsesUsage] = None
+    usage: OptionalNullable[OpenResponsesUsage] = UNSET
     r"""Token usage information for the response"""
 
     max_tool_calls: OptionalNullable[float] = UNSET
@@ -263,7 +271,6 @@ class OpenResponsesNonStreamingResponse(BaseModel):
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = [
-            "status",
             "user",
             "output_text",
             "prompt_cache_key",
@@ -282,15 +289,19 @@ class OpenResponsesNonStreamingResponse(BaseModel):
             "text",
         ]
         nullable_fields = [
+            "completed_at",
             "user",
             "prompt_cache_key",
             "safety_identifier",
             "error",
             "incomplete_details",
+            "usage",
             "max_tool_calls",
             "max_output_tokens",
             "temperature",
             "top_p",
+            "presence_penalty",
+            "frequency_penalty",
             "instructions",
             "metadata",
             "prompt",

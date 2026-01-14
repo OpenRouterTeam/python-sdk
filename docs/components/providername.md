@@ -31,12 +31,12 @@
 | `FIREWORKS`         | Fireworks           |
 | `FRIENDLI`          | Friendli            |
 | `GMI_CLOUD`         | GMICloud            |
-| `GO_POMELO`         | GoPomelo            |
 | `GOOGLE`            | Google              |
 | `GOOGLE_AI_STUDIO`  | Google AI Studio    |
 | `GROQ`              | Groq                |
 | `HYPERBOLIC`        | Hyperbolic          |
 | `INCEPTION`         | Inception           |
+| `INCEPTRON`         | Inceptron           |
 | `INFERENCE_NET`     | InferenceNet        |
 | `INFERMATIC`        | Infermatic          |
 | `INFLECTION`        | Inflection          |
@@ -61,13 +61,14 @@
 | `PHALA`             | Phala               |
 | `RELACE`            | Relace              |
 | `SAMBA_NOVA`        | SambaNova           |
+| `SEED`              | Seed                |
 | `SILICON_FLOW`      | SiliconFlow         |
 | `SOURCEFUL`         | Sourceful           |
 | `STEALTH`           | Stealth             |
 | `STREAM_LAKE`       | StreamLake          |
 | `SWITCHPOINT`       | Switchpoint         |
-| `TARGON`            | Targon              |
 | `TOGETHER`          | Together            |
+| `UPSTAGE`           | Upstage             |
 | `VENICE`            | Venice              |
 | `WAND_B`            | WandB               |
 | `XIAOMI`            | Xiaomi              |

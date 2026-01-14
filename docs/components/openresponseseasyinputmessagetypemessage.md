@@ -1,4 +1,4 @@
-# OpenResponsesInputMessageItemType
+# OpenResponsesEasyInputMessageTypeMessage
 
 
 ## Values

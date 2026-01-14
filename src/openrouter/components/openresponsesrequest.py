@@ -34,10 +34,16 @@ from .openresponseswebsearchtool import (
     OpenResponsesWebSearchToolTypedDict,
 )
 from .pdfparseroptions import PDFParserOptions, PDFParserOptionsTypedDict
+from .preferredmaxlatency import PreferredMaxLatency, PreferredMaxLatencyTypedDict
+from .preferredminthroughput import (
+    PreferredMinThroughput,
+    PreferredMinThroughputTypedDict,
+)
 from .providername import ProviderName
 from .providersort import ProviderSort
 from .providersortconfig import ProviderSortConfig, ProviderSortConfigTypedDict
 from .quantization import Quantization
+from .responsesoutputmodality import ResponsesOutputModality
 from .websearchengine import WebSearchEngine
 from openrouter.types import (
     BaseModel,
@@ -137,6 +143,16 @@ OpenResponsesRequestToolUnion = Annotated[
     ],
     Discriminator(lambda m: get_discriminator(m, "type", "type")),
 ]
+
+
+OpenResponsesRequestImageConfigTypedDict = TypeAliasType(
+    "OpenResponsesRequestImageConfigTypedDict", Union[str, float]
+)
+
+
+OpenResponsesRequestImageConfig = TypeAliasType(
+    "OpenResponsesRequestImageConfig", Union[str, float]
+)
 
 
 ServiceTier = Literal["auto",]
@@ -269,14 +285,10 @@ class OpenResponsesRequestProviderTypedDict(TypedDict):
     r"""The sorting strategy to use for this request, if \"order\" is not specified. When set, no load balancing is performed."""
     max_price: NotRequired[OpenResponsesRequestMaxPriceTypedDict]
     r"""The object specifying the maximum price you want to pay for this request. USD price per million tokens, for prompt and completion."""
-    preferred_min_throughput: NotRequired[Nullable[float]]
-    r"""Preferred minimum throughput (in tokens per second). Endpoints below this threshold may still be used, but are deprioritized in routing. When using fallback models, this may cause a fallback model to be used instead of the primary model if it meets the threshold."""
-    preferred_max_latency: NotRequired[Nullable[float]]
-    r"""Preferred maximum latency (in seconds). Endpoints above this threshold may still be used, but are deprioritized in routing. When using fallback models, this may cause a fallback model to be used instead of the primary model if it meets the threshold."""
-    min_throughput: NotRequired[Nullable[float]]
-    r"""**DEPRECATED** Use preferred_min_throughput instead. Backwards-compatible alias for preferred_min_throughput."""
-    max_latency: NotRequired[Nullable[float]]
-    r"""**DEPRECATED** Use preferred_max_latency instead. Backwards-compatible alias for preferred_max_latency."""
+    preferred_min_throughput: NotRequired[Nullable[PreferredMinThroughputTypedDict]]
+    r"""Preferred minimum throughput (in tokens per second). Can be a number (applies to p50) or an object with percentile-specific cutoffs. Endpoints below the threshold(s) may still be used, but are deprioritized in routing. When using fallback models, this may cause a fallback model to be used instead of the primary model if it meets the threshold."""
+    preferred_max_latency: NotRequired[Nullable[PreferredMaxLatencyTypedDict]]
+    r"""Preferred maximum latency (in seconds). Can be a number (applies to p50) or an object with percentile-specific cutoffs. Endpoints above the threshold(s) may still be used, but are deprioritized in routing. When using fallback models, this may cause a fallback model to be used instead of the primary model if it meets the threshold."""
 
 
 class OpenResponsesRequestProvider(BaseModel):
@@ -327,27 +339,11 @@ class OpenResponsesRequestProvider(BaseModel):
     max_price: Optional[OpenResponsesRequestMaxPrice] = None
     r"""The object specifying the maximum price you want to pay for this request. USD price per million tokens, for prompt and completion."""
 
-    preferred_min_throughput: OptionalNullable[float] = UNSET
-    r"""Preferred minimum throughput (in tokens per second). Endpoints below this threshold may still be used, but are deprioritized in routing. When using fallback models, this may cause a fallback model to be used instead of the primary model if it meets the threshold."""
+    preferred_min_throughput: OptionalNullable[PreferredMinThroughput] = UNSET
+    r"""Preferred minimum throughput (in tokens per second). Can be a number (applies to p50) or an object with percentile-specific cutoffs. Endpoints below the threshold(s) may still be used, but are deprioritized in routing. When using fallback models, this may cause a fallback model to be used instead of the primary model if it meets the threshold."""
 
-    preferred_max_latency: OptionalNullable[float] = UNSET
-    r"""Preferred maximum latency (in seconds). Endpoints above this threshold may still be used, but are deprioritized in routing. When using fallback models, this may cause a fallback model to be used instead of the primary model if it meets the threshold."""
-
-    min_throughput: Annotated[
-        OptionalNullable[float],
-        pydantic.Field(
-            deprecated="warning: ** DEPRECATED ** - Use preferred_min_throughput instead.."
-        ),
-    ] = UNSET
-    r"""**DEPRECATED** Use preferred_min_throughput instead. Backwards-compatible alias for preferred_min_throughput."""
-
-    max_latency: Annotated[
-        OptionalNullable[float],
-        pydantic.Field(
-            deprecated="warning: ** DEPRECATED ** - Use preferred_max_latency instead.."
-        ),
-    ] = UNSET
-    r"""**DEPRECATED** Use preferred_max_latency instead. Backwards-compatible alias for preferred_max_latency."""
+    preferred_max_latency: OptionalNullable[PreferredMaxLatency] = UNSET
+    r"""Preferred maximum latency (in seconds). Can be a number (applies to p50) or an object with percentile-specific cutoffs. Endpoints above the threshold(s) may still be used, but are deprioritized in routing. When using fallback models, this may cause a fallback model to be used instead of the primary model if it meets the threshold."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
@@ -365,8 +361,6 @@ class OpenResponsesRequestProvider(BaseModel):
             "max_price",
             "preferred_min_throughput",
             "preferred_max_latency",
-            "min_throughput",
-            "max_latency",
         ]
         nullable_fields = [
             "allow_fallbacks",
@@ -381,8 +375,6 @@ class OpenResponsesRequestProvider(BaseModel):
             "sort",
             "preferred_min_throughput",
             "preferred_max_latency",
-            "min_throughput",
-            "max_latency",
         ]
         null_default_fields = []
 
@@ -488,11 +480,33 @@ class OpenResponsesRequestPluginModeration(BaseModel):
     id: IDModeration
 
 
+IDAutoRouter = Literal["auto-router",]
+
+
+class OpenResponsesRequestPluginAutoRouterTypedDict(TypedDict):
+    id: IDAutoRouter
+    enabled: NotRequired[bool]
+    r"""Set to false to disable the auto-router plugin for this request. Defaults to true."""
+    allowed_models: NotRequired[List[str]]
+    r"""List of model patterns to filter which models the auto-router can route between. Supports wildcards (e.g., \"anthropic/*\" matches all Anthropic models). When not specified, uses the default supported models list."""
+
+
+class OpenResponsesRequestPluginAutoRouter(BaseModel):
+    id: IDAutoRouter
+
+    enabled: Optional[bool] = None
+    r"""Set to false to disable the auto-router plugin for this request. Defaults to true."""
+
+    allowed_models: Optional[List[str]] = None
+    r"""List of model patterns to filter which models the auto-router can route between. Supports wildcards (e.g., \"anthropic/*\" matches all Anthropic models). When not specified, uses the default supported models list."""
+
+
 OpenResponsesRequestPluginUnionTypedDict = TypeAliasType(
     "OpenResponsesRequestPluginUnionTypedDict",
     Union[
         OpenResponsesRequestPluginModerationTypedDict,
         OpenResponsesRequestPluginResponseHealingTypedDict,
+        OpenResponsesRequestPluginAutoRouterTypedDict,
         OpenResponsesRequestPluginFileParserTypedDict,
         OpenResponsesRequestPluginWebTypedDict,
     ],
@@ -501,6 +515,7 @@ OpenResponsesRequestPluginUnionTypedDict = TypeAliasType(
 
 OpenResponsesRequestPluginUnion = Annotated[
     Union[
+        Annotated[OpenResponsesRequestPluginAutoRouter, Tag("auto-router")],
         Annotated[OpenResponsesRequestPluginModeration, Tag("moderation")],
         Annotated[OpenResponsesRequestPluginWeb, Tag("web")],
         Annotated[OpenResponsesRequestPluginFileParser, Tag("file-parser")],
@@ -530,7 +545,15 @@ class OpenResponsesRequestTypedDict(TypedDict):
     max_output_tokens: NotRequired[Nullable[float]]
     temperature: NotRequired[Nullable[float]]
     top_p: NotRequired[Nullable[float]]
+    top_logprobs: NotRequired[Nullable[int]]
+    max_tool_calls: NotRequired[Nullable[int]]
+    presence_penalty: NotRequired[Nullable[float]]
+    frequency_penalty: NotRequired[Nullable[float]]
     top_k: NotRequired[float]
+    image_config: NotRequired[Dict[str, OpenResponsesRequestImageConfigTypedDict]]
+    r"""Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/features/multimodal/image-generation for more details."""
+    modalities: NotRequired[List[ResponsesOutputModality]]
+    r"""Output modalities for the response. Supported values are \"text\" and \"image\"."""
     prompt_cache_key: NotRequired[Nullable[str]]
     previous_response_id: NotRequired[Nullable[str]]
     prompt: NotRequired[Nullable[OpenAIResponsesPromptTypedDict]]
@@ -584,7 +607,27 @@ class OpenResponsesRequest(BaseModel):
 
     top_p: OptionalNullable[float] = UNSET
 
+    top_logprobs: OptionalNullable[int] = UNSET
+
+    max_tool_calls: OptionalNullable[int] = UNSET
+
+    presence_penalty: OptionalNullable[float] = UNSET
+
+    frequency_penalty: OptionalNullable[float] = UNSET
+
     top_k: Optional[float] = None
+
+    image_config: Optional[Dict[str, OpenResponsesRequestImageConfig]] = None
+    r"""Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/features/multimodal/image-generation for more details."""
+
+    modalities: Optional[
+        List[
+            Annotated[
+                ResponsesOutputModality, PlainValidator(validate_open_enum(False))
+            ]
+        ]
+    ] = None
+    r"""Output modalities for the response. Supported values are \"text\" and \"image\"."""
 
     prompt_cache_key: OptionalNullable[str] = UNSET
 
@@ -645,7 +688,13 @@ class OpenResponsesRequest(BaseModel):
             "max_output_tokens",
             "temperature",
             "top_p",
+            "top_logprobs",
+            "max_tool_calls",
+            "presence_penalty",
+            "frequency_penalty",
             "top_k",
+            "image_config",
+            "modalities",
             "prompt_cache_key",
             "previous_response_id",
             "prompt",
@@ -669,6 +718,10 @@ class OpenResponsesRequest(BaseModel):
             "max_output_tokens",
             "temperature",
             "top_p",
+            "top_logprobs",
+            "max_tool_calls",
+            "presence_penalty",
+            "frequency_penalty",
             "prompt_cache_key",
             "previous_response_id",
             "prompt",

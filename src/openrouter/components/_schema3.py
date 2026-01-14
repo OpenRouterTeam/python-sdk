@@ -21,6 +21,7 @@ Schema5 = Union[
     Literal[
         "unknown",
         "openai-responses-v1",
+        "azure-openai-responses-v1",
         "xai-responses-v1",
         "anthropic-claude-v1",
         "google-gemini-v1",

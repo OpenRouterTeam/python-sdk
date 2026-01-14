@@ -60,9 +60,9 @@ OpenResponsesInput1TypedDict = TypeAliasType(
         OpenResponsesFunctionCallOutputTypedDict,
         ResponsesOutputMessageTypedDict,
         OpenResponsesFunctionToolCallTypedDict,
-        ResponsesOutputItemReasoningTypedDict,
         ResponsesOutputItemFunctionCallTypedDict,
         OpenResponsesReasoningTypedDict,
+        ResponsesOutputItemReasoningTypedDict,
     ],
 )
 
@@ -78,9 +78,9 @@ OpenResponsesInput1 = TypeAliasType(
         OpenResponsesFunctionCallOutput,
         ResponsesOutputMessage,
         OpenResponsesFunctionToolCall,
-        ResponsesOutputItemReasoning,
         ResponsesOutputItemFunctionCall,
         OpenResponsesReasoning,
+        ResponsesOutputItemReasoning,
     ],
 )
 

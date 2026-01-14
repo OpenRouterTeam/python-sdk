@@ -80,6 +80,124 @@ class ChatGenerationParamsMaxPrice(BaseModel):
     request: Optional[Any] = None
 
 
+class ChatGenerationParamsPreferredMinThroughputTypedDict(TypedDict):
+    p50: NotRequired[Nullable[float]]
+    p75: NotRequired[Nullable[float]]
+    p90: NotRequired[Nullable[float]]
+    p99: NotRequired[Nullable[float]]
+
+
+class ChatGenerationParamsPreferredMinThroughput(BaseModel):
+    p50: OptionalNullable[float] = UNSET
+
+    p75: OptionalNullable[float] = UNSET
+
+    p90: OptionalNullable[float] = UNSET
+
+    p99: OptionalNullable[float] = UNSET
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = ["p50", "p75", "p90", "p99"]
+        nullable_fields = ["p50", "p75", "p90", "p99"]
+        null_default_fields = []
+
+        serialized = handler(self)
+
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+            serialized.pop(k, None)
+
+            optional_nullable = k in optional_fields and k in nullable_fields
+            is_set = (
+                self.__pydantic_fields_set__.intersection({n})
+                or k in null_default_fields
+            )  # pylint: disable=no-member
+
+            if val is not None and val != UNSET_SENTINEL:
+                m[k] = val
+            elif val != UNSET_SENTINEL and (
+                not k in optional_fields or (optional_nullable and is_set)
+            ):
+                m[k] = val
+
+        return m
+
+
+ChatGenerationParamsPreferredMinThroughputUnionTypedDict = TypeAliasType(
+    "ChatGenerationParamsPreferredMinThroughputUnionTypedDict",
+    Union[ChatGenerationParamsPreferredMinThroughputTypedDict, float],
+)
+
+
+ChatGenerationParamsPreferredMinThroughputUnion = TypeAliasType(
+    "ChatGenerationParamsPreferredMinThroughputUnion",
+    Union[ChatGenerationParamsPreferredMinThroughput, float],
+)
+
+
+class ChatGenerationParamsPreferredMaxLatencyTypedDict(TypedDict):
+    p50: NotRequired[Nullable[float]]
+    p75: NotRequired[Nullable[float]]
+    p90: NotRequired[Nullable[float]]
+    p99: NotRequired[Nullable[float]]
+
+
+class ChatGenerationParamsPreferredMaxLatency(BaseModel):
+    p50: OptionalNullable[float] = UNSET
+
+    p75: OptionalNullable[float] = UNSET
+
+    p90: OptionalNullable[float] = UNSET
+
+    p99: OptionalNullable[float] = UNSET
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = ["p50", "p75", "p90", "p99"]
+        nullable_fields = ["p50", "p75", "p90", "p99"]
+        null_default_fields = []
+
+        serialized = handler(self)
+
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+            serialized.pop(k, None)
+
+            optional_nullable = k in optional_fields and k in nullable_fields
+            is_set = (
+                self.__pydantic_fields_set__.intersection({n})
+                or k in null_default_fields
+            )  # pylint: disable=no-member
+
+            if val is not None and val != UNSET_SENTINEL:
+                m[k] = val
+            elif val != UNSET_SENTINEL and (
+                not k in optional_fields or (optional_nullable and is_set)
+            ):
+                m[k] = val
+
+        return m
+
+
+ChatGenerationParamsPreferredMaxLatencyUnionTypedDict = TypeAliasType(
+    "ChatGenerationParamsPreferredMaxLatencyUnionTypedDict",
+    Union[ChatGenerationParamsPreferredMaxLatencyTypedDict, float],
+)
+
+
+ChatGenerationParamsPreferredMaxLatencyUnion = TypeAliasType(
+    "ChatGenerationParamsPreferredMaxLatencyUnion",
+    Union[ChatGenerationParamsPreferredMaxLatency, float],
+)
+
+
 class ChatGenerationParamsProviderTypedDict(TypedDict):
     allow_fallbacks: NotRequired[Nullable[bool]]
     r"""Whether to allow backup providers to serve requests
@@ -109,10 +227,14 @@ class ChatGenerationParamsProviderTypedDict(TypedDict):
     r"""The sorting strategy to use for this request, if \"order\" is not specified. When set, no load balancing is performed."""
     max_price: NotRequired[ChatGenerationParamsMaxPriceTypedDict]
     r"""The object specifying the maximum price you want to pay for this request. USD price per million tokens, for prompt and completion."""
-    preferred_min_throughput: NotRequired[Nullable[float]]
-    preferred_max_latency: NotRequired[Nullable[float]]
-    min_throughput: NotRequired[Nullable[float]]
-    max_latency: NotRequired[Nullable[float]]
+    preferred_min_throughput: NotRequired[
+        Nullable[ChatGenerationParamsPreferredMinThroughputUnionTypedDict]
+    ]
+    r"""Preferred minimum throughput (in tokens per second). Can be a number (applies to p50) or an object with percentile-specific cutoffs. Endpoints below the threshold(s) may still be used, but are deprioritized in routing. When using fallback models, this may cause a fallback model to be used instead of the primary model if it meets the threshold."""
+    preferred_max_latency: NotRequired[
+        Nullable[ChatGenerationParamsPreferredMaxLatencyUnionTypedDict]
+    ]
+    r"""Preferred maximum latency (in seconds). Can be a number (applies to p50) or an object with percentile-specific cutoffs. Endpoints above the threshold(s) may still be used, but are deprioritized in routing. When using fallback models, this may cause a fallback model to be used instead of the primary model if it meets the threshold."""
 
 
 class ChatGenerationParamsProvider(BaseModel):
@@ -160,13 +282,15 @@ class ChatGenerationParamsProvider(BaseModel):
     max_price: Optional[ChatGenerationParamsMaxPrice] = None
     r"""The object specifying the maximum price you want to pay for this request. USD price per million tokens, for prompt and completion."""
 
-    preferred_min_throughput: OptionalNullable[float] = UNSET
+    preferred_min_throughput: OptionalNullable[
+        ChatGenerationParamsPreferredMinThroughputUnion
+    ] = UNSET
+    r"""Preferred minimum throughput (in tokens per second). Can be a number (applies to p50) or an object with percentile-specific cutoffs. Endpoints below the threshold(s) may still be used, but are deprioritized in routing. When using fallback models, this may cause a fallback model to be used instead of the primary model if it meets the threshold."""
 
-    preferred_max_latency: OptionalNullable[float] = UNSET
-
-    min_throughput: OptionalNullable[float] = UNSET
-
-    max_latency: OptionalNullable[float] = UNSET
+    preferred_max_latency: OptionalNullable[
+        ChatGenerationParamsPreferredMaxLatencyUnion
+    ] = UNSET
+    r"""Preferred maximum latency (in seconds). Can be a number (applies to p50) or an object with percentile-specific cutoffs. Endpoints above the threshold(s) may still be used, but are deprioritized in routing. When using fallback models, this may cause a fallback model to be used instead of the primary model if it meets the threshold."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
@@ -184,8 +308,6 @@ class ChatGenerationParamsProvider(BaseModel):
             "max_price",
             "preferred_min_throughput",
             "preferred_max_latency",
-            "min_throughput",
-            "max_latency",
         ]
         nullable_fields = [
             "allow_fallbacks",
@@ -200,8 +322,6 @@ class ChatGenerationParamsProvider(BaseModel):
             "sort",
             "preferred_min_throughput",
             "preferred_max_latency",
-            "min_throughput",
-            "max_latency",
         ]
         null_default_fields = []
 
@@ -331,11 +451,31 @@ class ChatGenerationParamsPluginModeration(BaseModel):
     ] = "moderation"
 
 
+class ChatGenerationParamsPluginAutoRouterTypedDict(TypedDict):
+    id: Literal["auto-router"]
+    enabled: NotRequired[bool]
+    allowed_models: NotRequired[List[str]]
+
+
+class ChatGenerationParamsPluginAutoRouter(BaseModel):
+    ID: Annotated[
+        Annotated[
+            Literal["auto-router"], AfterValidator(validate_const("auto-router"))
+        ],
+        pydantic.Field(alias="id"),
+    ] = "auto-router"
+
+    enabled: Optional[bool] = None
+
+    allowed_models: Optional[List[str]] = None
+
+
 ChatGenerationParamsPluginUnionTypedDict = TypeAliasType(
     "ChatGenerationParamsPluginUnionTypedDict",
     Union[
         ChatGenerationParamsPluginModerationTypedDict,
         ChatGenerationParamsPluginResponseHealingTypedDict,
+        ChatGenerationParamsPluginAutoRouterTypedDict,
         ChatGenerationParamsPluginFileParserTypedDict,
         ChatGenerationParamsPluginWebTypedDict,
     ],
@@ -344,6 +484,7 @@ ChatGenerationParamsPluginUnionTypedDict = TypeAliasType(
 
 ChatGenerationParamsPluginUnion = Annotated[
     Union[
+        Annotated[ChatGenerationParamsPluginAutoRouter, Tag("auto-router")],
         Annotated[ChatGenerationParamsPluginModeration, Tag("moderation")],
         Annotated[ChatGenerationParamsPluginWeb, Tag("web")],
         Annotated[ChatGenerationParamsPluginFileParser, Tag("file-parser")],
@@ -498,6 +639,25 @@ class Debug(BaseModel):
     echo_upstream_body: Optional[bool] = None
 
 
+ChatGenerationParamsImageConfigTypedDict = TypeAliasType(
+    "ChatGenerationParamsImageConfigTypedDict", Union[str, float]
+)
+
+
+ChatGenerationParamsImageConfig = TypeAliasType(
+    "ChatGenerationParamsImageConfig", Union[str, float]
+)
+
+
+Modality = Union[
+    Literal[
+        "text",
+        "image",
+    ],
+    UnrecognizedStr,
+]
+
+
 class ChatGenerationParamsTypedDict(TypedDict):
     messages: List[MessageTypedDict]
     provider: NotRequired[Nullable[ChatGenerationParamsProviderTypedDict]]
@@ -529,6 +689,8 @@ class ChatGenerationParamsTypedDict(TypedDict):
     tools: NotRequired[List[ToolDefinitionJSONTypedDict]]
     top_p: NotRequired[Nullable[float]]
     debug: NotRequired[DebugTypedDict]
+    image_config: NotRequired[Dict[str, ChatGenerationParamsImageConfigTypedDict]]
+    modalities: NotRequired[List[Modality]]
 
 
 class ChatGenerationParams(BaseModel):
@@ -591,6 +753,12 @@ class ChatGenerationParams(BaseModel):
 
     debug: Optional[Debug] = None
 
+    image_config: Optional[Dict[str, ChatGenerationParamsImageConfig]] = None
+
+    modalities: Optional[
+        List[Annotated[Modality, PlainValidator(validate_open_enum(False))]]
+    ] = None
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = [
@@ -620,6 +788,8 @@ class ChatGenerationParams(BaseModel):
             "tools",
             "top_p",
             "debug",
+            "image_config",
+            "modalities",
         ]
         nullable_fields = [
             "provider",

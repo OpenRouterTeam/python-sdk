@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: cfd52247-6a25-4c6d-bbce-fe6fce0cd69d
 management:
-  docChecksum: a5b3a567dd4de3ab77a9f0b23d4a9f10
+  docChecksum: 331e8a1f7c97c6a4a6b57eaddc80fc39
   docVersion: 1.0.0
   speakeasyVersion: 1.666.0
   generationVersion: 2.768.0
-  releaseVersion: 0.0.17
-  configChecksum: 50ef18bf69272fc09c257e3562e1b0df
+  releaseVersion: 0.0.18
+  configChecksum: 1f58284fadb5b2b9029e9ef747f2a7e9
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
@@ -60,12 +60,18 @@ generatedFiles:
   - docs/components/chaterrorerror.md
   - docs/components/chatgenerationparams.md
   - docs/components/chatgenerationparamsdatacollection.md
+  - docs/components/chatgenerationparamsimageconfig.md
   - docs/components/chatgenerationparamsmaxprice.md
+  - docs/components/chatgenerationparamspluginautorouter.md
   - docs/components/chatgenerationparamspluginfileparser.md
   - docs/components/chatgenerationparamspluginmoderation.md
   - docs/components/chatgenerationparamspluginresponsehealing.md
   - docs/components/chatgenerationparamspluginunion.md
   - docs/components/chatgenerationparamspluginweb.md
+  - docs/components/chatgenerationparamspreferredmaxlatency.md
+  - docs/components/chatgenerationparamspreferredmaxlatencyunion.md
+  - docs/components/chatgenerationparamspreferredminthroughput.md
+  - docs/components/chatgenerationparamspreferredminthroughputunion.md
   - docs/components/chatgenerationparamsprovider.md
   - docs/components/chatgenerationparamsresponseformatjsonobject.md
   - docs/components/chatgenerationparamsresponseformatpython.md
@@ -85,6 +91,7 @@ generatedFiles:
   - docs/components/chatmessagecontentitemvideovideourl.md
   - docs/components/chatmessagetokenlogprob.md
   - docs/components/chatmessagetokenlogprobs.md
+  - docs/components/chatmessagetokenlogprobtoplogprob.md
   - docs/components/chatmessagetoolcall.md
   - docs/components/chatmessagetoolcallfunction.md
   - docs/components/chatresponse.md
@@ -126,6 +133,7 @@ generatedFiles:
   - docs/components/filepath.md
   - docs/components/filepathtype.md
   - docs/components/forbiddenresponseerrordata.md
+  - docs/components/idautorouter.md
   - docs/components/idfileparser.md
   - docs/components/idmoderation.md
   - docs/components/idresponsehealing.md
@@ -138,9 +146,11 @@ generatedFiles:
   - docs/components/internalserverresponseerrordata.md
   - docs/components/jsonschemaconfig.md
   - docs/components/listendpointsresponse.md
+  - docs/components/logprob.md
   - docs/components/message.md
   - docs/components/messagecontent.md
   - docs/components/messagedeveloper.md
+  - docs/components/modality.md
   - docs/components/model.md
   - docs/components/modelarchitecture.md
   - docs/components/modelarchitectureinstructtype.md
@@ -195,14 +205,17 @@ generatedFiles:
   - docs/components/openairesponsestoolchoiceunion.md
   - docs/components/openairesponsestruncation.md
   - docs/components/openresponseseasyinputmessage.md
-  - docs/components/openresponseseasyinputmessagecontent1.md
-  - docs/components/openresponseseasyinputmessagecontent2.md
+  - docs/components/openresponseseasyinputmessagecontentinputimage.md
+  - docs/components/openresponseseasyinputmessagecontenttype.md
+  - docs/components/openresponseseasyinputmessagecontentunion1.md
+  - docs/components/openresponseseasyinputmessagecontentunion2.md
+  - docs/components/openresponseseasyinputmessagedetail.md
   - docs/components/openresponseseasyinputmessageroleassistant.md
   - docs/components/openresponseseasyinputmessageroledeveloper.md
   - docs/components/openresponseseasyinputmessagerolesystem.md
   - docs/components/openresponseseasyinputmessageroleunion.md
   - docs/components/openresponseseasyinputmessageroleuser.md
-  - docs/components/openresponseseasyinputmessagetype.md
+  - docs/components/openresponseseasyinputmessagetypemessage.md
   - docs/components/openresponseserrorevent.md
   - docs/components/openresponseserroreventtype.md
   - docs/components/openresponsesfunctioncalloutput.md
@@ -220,12 +233,15 @@ generatedFiles:
   - docs/components/openresponsesinput.md
   - docs/components/openresponsesinput1.md
   - docs/components/openresponsesinputmessageitem.md
-  - docs/components/openresponsesinputmessageitemcontent.md
+  - docs/components/openresponsesinputmessageitemcontentinputimage.md
+  - docs/components/openresponsesinputmessageitemcontenttype.md
+  - docs/components/openresponsesinputmessageitemcontentunion.md
+  - docs/components/openresponsesinputmessageitemdetail.md
   - docs/components/openresponsesinputmessageitemroledeveloper.md
   - docs/components/openresponsesinputmessageitemrolesystem.md
   - docs/components/openresponsesinputmessageitemroleunion.md
   - docs/components/openresponsesinputmessageitemroleuser.md
-  - docs/components/openresponsesinputmessageitemtype.md
+  - docs/components/openresponsesinputmessageitemtypemessage.md
   - docs/components/openresponseslogprobs.md
   - docs/components/openresponsesnonstreamingresponse.md
   - docs/components/openresponsesnonstreamingresponsetoolfunction.md
@@ -251,9 +267,11 @@ generatedFiles:
   - docs/components/openresponsesreasoningtype.md
   - docs/components/openresponsesrequest.md
   - docs/components/openresponsesrequestignore.md
+  - docs/components/openresponsesrequestimageconfig.md
   - docs/components/openresponsesrequestmaxprice.md
   - docs/components/openresponsesrequestonly.md
   - docs/components/openresponsesrequestorder.md
+  - docs/components/openresponsesrequestpluginautorouter.md
   - docs/components/openresponsesrequestpluginfileparser.md
   - docs/components/openresponsesrequestpluginmoderation.md
   - docs/components/openresponsesrequestpluginresponsehealing.md
@@ -318,7 +336,12 @@ generatedFiles:
   - docs/components/pdfengine.md
   - docs/components/pdfparserengine.md
   - docs/components/pdfparseroptions.md
+  - docs/components/percentilelatencycutoffs.md
+  - docs/components/percentilestats.md
+  - docs/components/percentilethroughputcutoffs.md
   - docs/components/perrequestlimits.md
+  - docs/components/preferredmaxlatency.md
+  - docs/components/preferredminthroughput.md
   - docs/components/pricing.md
   - docs/components/prompt.md
   - docs/components/prompttokensdetails.md
@@ -365,7 +388,10 @@ generatedFiles:
   - docs/components/responseinputimagetype.md
   - docs/components/responseinputtext.md
   - docs/components/responseinputtexttype.md
+  - docs/components/responseinputvideo.md
+  - docs/components/responseinputvideotype.md
   - docs/components/responseoutputtext.md
+  - docs/components/responseoutputtexttoplogprob.md
   - docs/components/responseoutputtexttype.md
   - docs/components/responseserrorfield.md
   - docs/components/responsesformatjsonobject.md
@@ -386,6 +412,7 @@ generatedFiles:
   - docs/components/responsesoutputitemfunctioncallstatusunion.md
   - docs/components/responsesoutputitemfunctioncalltype.md
   - docs/components/responsesoutputitemreasoning.md
+  - docs/components/responsesoutputitemreasoningformat.md
   - docs/components/responsesoutputitemreasoningstatuscompleted.md
   - docs/components/responsesoutputitemreasoningstatusincomplete.md
   - docs/components/responsesoutputitemreasoningstatusinprogress.md
@@ -399,6 +426,7 @@ generatedFiles:
   - docs/components/responsesoutputmessagestatusinprogress.md
   - docs/components/responsesoutputmessagestatusunion.md
   - docs/components/responsesoutputmessagetype.md
+  - docs/components/responsesoutputmodality.md
   - docs/components/responsessearchcontextsize.md
   - docs/components/responseswebsearchcalloutput.md
   - docs/components/responseswebsearchcalloutputtype.md
@@ -428,7 +456,6 @@ generatedFiles:
   - docs/components/toolresponsemessage.md
   - docs/components/toolresponsemessagecontent.md
   - docs/components/toomanyrequestsresponseerrordata.md
-  - docs/components/toplogprob.md
   - docs/components/topproviderinfo.md
   - docs/components/truncation.md
   - docs/components/ttl.md
@@ -684,7 +711,12 @@ generatedFiles:
   - src/openrouter/components/paymentrequiredresponseerrordata.py
   - src/openrouter/components/pdfparserengine.py
   - src/openrouter/components/pdfparseroptions.py
+  - src/openrouter/components/percentilelatencycutoffs.py
+  - src/openrouter/components/percentilestats.py
+  - src/openrouter/components/percentilethroughputcutoffs.py
   - src/openrouter/components/perrequestlimits.py
+  - src/openrouter/components/preferredmaxlatency.py
+  - src/openrouter/components/preferredminthroughput.py
   - src/openrouter/components/providername.py
   - src/openrouter/components/provideroverloadedresponseerrordata.py
   - src/openrouter/components/providerpreferences.py
@@ -705,6 +737,7 @@ generatedFiles:
   - src/openrouter/components/responseinputfile.py
   - src/openrouter/components/responseinputimage.py
   - src/openrouter/components/responseinputtext.py
+  - src/openrouter/components/responseinputvideo.py
   - src/openrouter/components/responseoutputtext.py
   - src/openrouter/components/responseserrorfield.py
   - src/openrouter/components/responsesformatjsonobject.py
@@ -716,6 +749,7 @@ generatedFiles:
   - src/openrouter/components/responsesoutputitemfunctioncall.py
   - src/openrouter/components/responsesoutputitemreasoning.py
   - src/openrouter/components/responsesoutputmessage.py
+  - src/openrouter/components/responsesoutputmodality.py
   - src/openrouter/components/responsessearchcontextsize.py
   - src/openrouter/components/responseswebsearchcalloutput.py
   - src/openrouter/components/responseswebsearchuserlocation.py
@@ -819,7 +853,7 @@ examples:
         application/json: {"store": false, "service_tier": "auto", "stream": false}
       responses:
         "200":
-          application/json: {"id": "resp-abc123", "object": "response", "created_at": 1704067200, "model": "gpt-4", "output": [{"id": "msg-abc123", "role": "assistant", "type": "message", "content": [{"type": "output_text", "text": "Hello! How can I help you today?"}]}], "error": null, "incomplete_details": null, "temperature": null, "top_p": null, "instructions": null, "metadata": null, "tools": [], "tool_choice": "auto", "parallel_tool_calls": true}
+          application/json: {"id": "resp-abc123", "object": "response", "created_at": 1704067200, "model": "gpt-4", "status": "completed", "completed_at": 2510.63, "output": [{"id": "msg-abc123", "role": "assistant", "type": "message", "content": [{"type": "output_text", "text": "Hello! How can I help you today?"}]}], "error": null, "incomplete_details": null, "temperature": null, "top_p": null, "presence_penalty": 7468.94, "frequency_penalty": 3967.09, "instructions": null, "metadata": null, "tools": [], "tool_choice": "auto", "parallel_tool_calls": true}
         "400":
           application/json: {"error": {"code": 400, "message": "Invalid request parameters"}}
         "401":
@@ -932,7 +966,7 @@ examples:
           id: "<id>"
       responses:
         "200":
-          application/json: {"data": {"id": "gen-3bhGkxlo4XFrqiabUM7NDtwDzWwG", "upstream_id": "chatcmpl-791bcf62-080e-4568-87d0-94c72e3b4946", "total_cost": 0.0015, "cache_discount": 0.0002, "upstream_inference_cost": 0.0012, "created_at": "2024-07-15T23:33:19.433273+00:00", "model": "sao10k/l3-stheno-8b", "app_id": 12345, "streamed": true, "cancelled": false, "provider_name": "Infermatic", "latency": 1250, "moderation_latency": 50, "generation_time": 1200, "finish_reason": "stop", "tokens_prompt": 10, "tokens_completion": 25, "native_tokens_prompt": 10, "native_tokens_completion": 25, "native_tokens_completion_images": 0, "native_tokens_reasoning": 5, "native_tokens_cached": 3, "num_media_prompt": 1, "num_input_audio_prompt": 0, "num_media_completion": 0, "num_search_results": 5, "origin": "https://openrouter.ai/", "usage": 0.0015, "is_byok": false, "native_finish_reason": "stop", "external_user": "user-123", "api_type": "completions"}}
+          application/json: {"data": {"id": "gen-3bhGkxlo4XFrqiabUM7NDtwDzWwG", "upstream_id": "chatcmpl-791bcf62-080e-4568-87d0-94c72e3b4946", "total_cost": 0.0015, "cache_discount": 0.0002, "upstream_inference_cost": 0.0012, "created_at": "2024-07-15T23:33:19.433273+00:00", "model": "sao10k/l3-stheno-8b", "app_id": 12345, "streamed": true, "cancelled": false, "provider_name": "Infermatic", "latency": 1250, "moderation_latency": 50, "generation_time": 1200, "finish_reason": "stop", "tokens_prompt": 10, "tokens_completion": 25, "native_tokens_prompt": 10, "native_tokens_completion": 25, "native_tokens_completion_images": 0, "native_tokens_reasoning": 5, "native_tokens_cached": 3, "num_media_prompt": 1, "num_input_audio_prompt": 0, "num_media_completion": 0, "num_search_results": 5, "origin": "https://openrouter.ai/", "usage": 0.0015, "is_byok": false, "native_finish_reason": "stop", "external_user": "user-123", "api_type": "completions", "router": "openrouter/auto"}}
         "401":
           application/json: {"error": {"code": 401, "message": "Missing Authentication header"}}
         "402":
@@ -982,7 +1016,7 @@ examples:
           slug: "<value>"
       responses:
         "200":
-          application/json: {"data": {"id": "openai/gpt-4", "name": "GPT-4", "created": 1692901234, "description": "GPT-4 is a large multimodal model that can solve difficult problems with greater accuracy.", "architecture": {"tokenizer": "GPT", "instruct_type": "chatml", "modality": "text->text", "input_modalities": ["text"], "output_modalities": ["text"]}, "endpoints": [{"name": "OpenAI: GPT-4", "model_name": "GPT-4", "context_length": 8192, "pricing": {"prompt": "0.00003", "completion": "0.00006"}, "provider_name": "OpenAI", "tag": "openai", "quantization": "fp16", "max_completion_tokens": 4096, "max_prompt_tokens": 8192, "supported_parameters": ["temperature", "top_p", "max_tokens", "frequency_penalty", "presence_penalty"], "uptime_last_30m": 99.5, "supports_implicit_caching": true}]}}
+          application/json: {"data": {"id": "openai/gpt-4", "name": "GPT-4", "created": 1692901234, "description": "GPT-4 is a large multimodal model that can solve difficult problems with greater accuracy.", "architecture": {"tokenizer": "GPT", "instruct_type": "chatml", "modality": "text->text", "input_modalities": ["text"], "output_modalities": ["text"]}, "endpoints": [{"name": "OpenAI: GPT-4", "model_name": "GPT-4", "context_length": 8192, "pricing": {"prompt": "0.00003", "completion": "0.00006"}, "provider_name": "OpenAI", "tag": "openai", "quantization": "fp16", "max_completion_tokens": 4096, "max_prompt_tokens": 8192, "supported_parameters": ["temperature", "top_p", "max_tokens", "frequency_penalty", "presence_penalty"], "uptime_last_30m": 99.5, "supports_implicit_caching": true, "latency_last_30m": {"p50": 0.25, "p75": 0.35, "p90": 0.48, "p99": 0.85}, "throughput_last_30m": {"p50": 45.2, "p75": 38.5, "p90": 28.3, "p99": 15.1}}]}}
         "404":
           application/json: {"error": {"code": 404, "message": "Resource not found"}}
         "500":
@@ -991,7 +1025,7 @@ examples:
     speakeasy-default-list-endpoints-zdr:
       responses:
         "200":
-          application/json: {"data": [{"name": "OpenAI: GPT-4", "model_name": "GPT-4", "context_length": 8192, "pricing": {"prompt": "0.00003", "completion": "0.00006"}, "provider_name": "OpenAI", "tag": "openai", "quantization": "fp16", "max_completion_tokens": 4096, "max_prompt_tokens": 8192, "supported_parameters": ["temperature", "top_p", "max_tokens"], "uptime_last_30m": 99.5, "supports_implicit_caching": true}]}
+          application/json: {"data": [{"name": "OpenAI: GPT-4", "model_name": "GPT-4", "context_length": 8192, "pricing": {"prompt": "0.00003", "completion": "0.00006"}, "provider_name": "OpenAI", "tag": "openai", "quantization": "fp16", "max_completion_tokens": 4096, "max_prompt_tokens": 8192, "supported_parameters": ["temperature", "top_p", "max_tokens"], "uptime_last_30m": 99.5, "supports_implicit_caching": true, "latency_last_30m": {"p50": 25.5, "p75": 35.2, "p90": 48.7, "p99": 85.3}, "throughput_last_30m": {"p50": 25.5, "p75": 35.2, "p90": 48.7, "p99": 85.3}}]}
         "500":
           application/json: {"error": {"code": 500, "message": "Internal Server Error"}}
   getParameters:

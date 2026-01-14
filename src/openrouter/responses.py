@@ -57,7 +57,18 @@ class Responses(BaseSDK):
         max_output_tokens: OptionalNullable[float] = UNSET,
         temperature: OptionalNullable[float] = UNSET,
         top_p: OptionalNullable[float] = UNSET,
+        top_logprobs: OptionalNullable[int] = UNSET,
+        max_tool_calls: OptionalNullable[int] = UNSET,
+        presence_penalty: OptionalNullable[float] = UNSET,
+        frequency_penalty: OptionalNullable[float] = UNSET,
         top_k: Optional[float] = None,
+        image_config: Optional[
+            Union[
+                Dict[str, components.OpenResponsesRequestImageConfig],
+                Dict[str, components.OpenResponsesRequestImageConfigTypedDict],
+            ]
+        ] = None,
+        modalities: Optional[List[components.ResponsesOutputModality]] = None,
         prompt_cache_key: OptionalNullable[str] = UNSET,
         previous_response_id: OptionalNullable[str] = UNSET,
         prompt: OptionalNullable[
@@ -108,7 +119,13 @@ class Responses(BaseSDK):
         :param max_output_tokens:
         :param temperature:
         :param top_p:
+        :param top_logprobs:
+        :param max_tool_calls:
+        :param presence_penalty:
+        :param frequency_penalty:
         :param top_k:
+        :param image_config: Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/features/multimodal/image-generation for more details.
+        :param modalities: Output modalities for the response. Supported values are \"text\" and \"image\".
         :param prompt_cache_key:
         :param previous_response_id:
         :param prompt:
@@ -168,7 +185,18 @@ class Responses(BaseSDK):
         max_output_tokens: OptionalNullable[float] = UNSET,
         temperature: OptionalNullable[float] = UNSET,
         top_p: OptionalNullable[float] = UNSET,
+        top_logprobs: OptionalNullable[int] = UNSET,
+        max_tool_calls: OptionalNullable[int] = UNSET,
+        presence_penalty: OptionalNullable[float] = UNSET,
+        frequency_penalty: OptionalNullable[float] = UNSET,
         top_k: Optional[float] = None,
+        image_config: Optional[
+            Union[
+                Dict[str, components.OpenResponsesRequestImageConfig],
+                Dict[str, components.OpenResponsesRequestImageConfigTypedDict],
+            ]
+        ] = None,
+        modalities: Optional[List[components.ResponsesOutputModality]] = None,
         prompt_cache_key: OptionalNullable[str] = UNSET,
         previous_response_id: OptionalNullable[str] = UNSET,
         prompt: OptionalNullable[
@@ -219,7 +247,13 @@ class Responses(BaseSDK):
         :param max_output_tokens:
         :param temperature:
         :param top_p:
+        :param top_logprobs:
+        :param max_tool_calls:
+        :param presence_penalty:
+        :param frequency_penalty:
         :param top_k:
+        :param image_config: Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/features/multimodal/image-generation for more details.
+        :param modalities: Output modalities for the response. Supported values are \"text\" and \"image\".
         :param prompt_cache_key:
         :param previous_response_id:
         :param prompt:
@@ -278,7 +312,18 @@ class Responses(BaseSDK):
         max_output_tokens: OptionalNullable[float] = UNSET,
         temperature: OptionalNullable[float] = UNSET,
         top_p: OptionalNullable[float] = UNSET,
+        top_logprobs: OptionalNullable[int] = UNSET,
+        max_tool_calls: OptionalNullable[int] = UNSET,
+        presence_penalty: OptionalNullable[float] = UNSET,
+        frequency_penalty: OptionalNullable[float] = UNSET,
         top_k: Optional[float] = None,
+        image_config: Optional[
+            Union[
+                Dict[str, components.OpenResponsesRequestImageConfig],
+                Dict[str, components.OpenResponsesRequestImageConfigTypedDict],
+            ]
+        ] = None,
+        modalities: Optional[List[components.ResponsesOutputModality]] = None,
         prompt_cache_key: OptionalNullable[str] = UNSET,
         previous_response_id: OptionalNullable[str] = UNSET,
         prompt: OptionalNullable[
@@ -329,7 +374,13 @@ class Responses(BaseSDK):
         :param max_output_tokens:
         :param temperature:
         :param top_p:
+        :param top_logprobs:
+        :param max_tool_calls:
+        :param presence_penalty:
+        :param frequency_penalty:
         :param top_k:
+        :param image_config: Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/features/multimodal/image-generation for more details.
+        :param modalities: Output modalities for the response. Supported values are \"text\" and \"image\".
         :param prompt_cache_key:
         :param previous_response_id:
         :param prompt:
@@ -383,7 +434,13 @@ class Responses(BaseSDK):
             max_output_tokens=max_output_tokens,
             temperature=temperature,
             top_p=top_p,
+            top_logprobs=top_logprobs,
+            max_tool_calls=max_tool_calls,
+            presence_penalty=presence_penalty,
+            frequency_penalty=frequency_penalty,
             top_k=top_k,
+            image_config=image_config,
+            modalities=modalities,
             prompt_cache_key=prompt_cache_key,
             previous_response_id=previous_response_id,
             prompt=utils.get_pydantic_model(
@@ -633,7 +690,18 @@ class Responses(BaseSDK):
         max_output_tokens: OptionalNullable[float] = UNSET,
         temperature: OptionalNullable[float] = UNSET,
         top_p: OptionalNullable[float] = UNSET,
+        top_logprobs: OptionalNullable[int] = UNSET,
+        max_tool_calls: OptionalNullable[int] = UNSET,
+        presence_penalty: OptionalNullable[float] = UNSET,
+        frequency_penalty: OptionalNullable[float] = UNSET,
         top_k: Optional[float] = None,
+        image_config: Optional[
+            Union[
+                Dict[str, components.OpenResponsesRequestImageConfig],
+                Dict[str, components.OpenResponsesRequestImageConfigTypedDict],
+            ]
+        ] = None,
+        modalities: Optional[List[components.ResponsesOutputModality]] = None,
         prompt_cache_key: OptionalNullable[str] = UNSET,
         previous_response_id: OptionalNullable[str] = UNSET,
         prompt: OptionalNullable[
@@ -684,7 +752,13 @@ class Responses(BaseSDK):
         :param max_output_tokens:
         :param temperature:
         :param top_p:
+        :param top_logprobs:
+        :param max_tool_calls:
+        :param presence_penalty:
+        :param frequency_penalty:
         :param top_k:
+        :param image_config: Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/features/multimodal/image-generation for more details.
+        :param modalities: Output modalities for the response. Supported values are \"text\" and \"image\".
         :param prompt_cache_key:
         :param previous_response_id:
         :param prompt:
@@ -744,7 +818,18 @@ class Responses(BaseSDK):
         max_output_tokens: OptionalNullable[float] = UNSET,
         temperature: OptionalNullable[float] = UNSET,
         top_p: OptionalNullable[float] = UNSET,
+        top_logprobs: OptionalNullable[int] = UNSET,
+        max_tool_calls: OptionalNullable[int] = UNSET,
+        presence_penalty: OptionalNullable[float] = UNSET,
+        frequency_penalty: OptionalNullable[float] = UNSET,
         top_k: Optional[float] = None,
+        image_config: Optional[
+            Union[
+                Dict[str, components.OpenResponsesRequestImageConfig],
+                Dict[str, components.OpenResponsesRequestImageConfigTypedDict],
+            ]
+        ] = None,
+        modalities: Optional[List[components.ResponsesOutputModality]] = None,
         prompt_cache_key: OptionalNullable[str] = UNSET,
         previous_response_id: OptionalNullable[str] = UNSET,
         prompt: OptionalNullable[
@@ -795,7 +880,13 @@ class Responses(BaseSDK):
         :param max_output_tokens:
         :param temperature:
         :param top_p:
+        :param top_logprobs:
+        :param max_tool_calls:
+        :param presence_penalty:
+        :param frequency_penalty:
         :param top_k:
+        :param image_config: Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/features/multimodal/image-generation for more details.
+        :param modalities: Output modalities for the response. Supported values are \"text\" and \"image\".
         :param prompt_cache_key:
         :param previous_response_id:
         :param prompt:
@@ -854,7 +945,18 @@ class Responses(BaseSDK):
         max_output_tokens: OptionalNullable[float] = UNSET,
         temperature: OptionalNullable[float] = UNSET,
         top_p: OptionalNullable[float] = UNSET,
+        top_logprobs: OptionalNullable[int] = UNSET,
+        max_tool_calls: OptionalNullable[int] = UNSET,
+        presence_penalty: OptionalNullable[float] = UNSET,
+        frequency_penalty: OptionalNullable[float] = UNSET,
         top_k: Optional[float] = None,
+        image_config: Optional[
+            Union[
+                Dict[str, components.OpenResponsesRequestImageConfig],
+                Dict[str, components.OpenResponsesRequestImageConfigTypedDict],
+            ]
+        ] = None,
+        modalities: Optional[List[components.ResponsesOutputModality]] = None,
         prompt_cache_key: OptionalNullable[str] = UNSET,
         previous_response_id: OptionalNullable[str] = UNSET,
         prompt: OptionalNullable[
@@ -905,7 +1007,13 @@ class Responses(BaseSDK):
         :param max_output_tokens:
         :param temperature:
         :param top_p:
+        :param top_logprobs:
+        :param max_tool_calls:
+        :param presence_penalty:
+        :param frequency_penalty:
         :param top_k:
+        :param image_config: Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/features/multimodal/image-generation for more details.
+        :param modalities: Output modalities for the response. Supported values are \"text\" and \"image\".
         :param prompt_cache_key:
         :param previous_response_id:
         :param prompt:
@@ -959,7 +1067,13 @@ class Responses(BaseSDK):
             max_output_tokens=max_output_tokens,
             temperature=temperature,
             top_p=top_p,
+            top_logprobs=top_logprobs,
+            max_tool_calls=max_tool_calls,
+            presence_penalty=presence_penalty,
+            frequency_penalty=frequency_penalty,
             top_k=top_k,
+            image_config=image_config,
+            modalities=modalities,
             prompt_cache_key=prompt_cache_key,
             previous_response_id=previous_response_id,
             prompt=utils.get_pydantic_model(
