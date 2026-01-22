@@ -31,7 +31,7 @@ generation:
     skipResponseBodyAssertions: false
   preApplyUnionDiscriminators: true
 python:
-  version: 0.1.2
+  version: 0.1.3
   additionalDependencies:
     dev: {}
     main: {}

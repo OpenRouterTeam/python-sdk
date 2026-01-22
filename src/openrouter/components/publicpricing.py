@@ -23,6 +23,8 @@ class PublicPricingTypedDict(TypedDict):
     r"""A value in string format that is a large number"""
     audio: NotRequired[str]
     r"""A value in string format that is a large number"""
+    audio_output: NotRequired[str]
+    r"""A value in string format that is a large number"""
     input_audio_cache: NotRequired[str]
     r"""A value in string format that is a large number"""
     web_search: NotRequired[str]
@@ -58,6 +60,9 @@ class PublicPricing(BaseModel):
     r"""A value in string format that is a large number"""
 
     audio: Optional[str] = None
+    r"""A value in string format that is a large number"""
+
+    audio_output: Optional[str] = None
     r"""A value in string format that is a large number"""
 
     input_audio_cache: Optional[str] = None

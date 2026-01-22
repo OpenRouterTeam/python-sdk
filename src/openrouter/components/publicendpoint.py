@@ -28,6 +28,8 @@ class PricingTypedDict(TypedDict):
     r"""A value in string format that is a large number"""
     audio: NotRequired[str]
     r"""A value in string format that is a large number"""
+    audio_output: NotRequired[str]
+    r"""A value in string format that is a large number"""
     input_audio_cache: NotRequired[str]
     r"""A value in string format that is a large number"""
     web_search: NotRequired[str]
@@ -61,6 +63,9 @@ class Pricing(BaseModel):
     r"""A value in string format that is a large number"""
 
     audio: Optional[str] = None
+    r"""A value in string format that is a large number"""
+
+    audio_output: Optional[str] = None
     r"""A value in string format that is a large number"""
 
     input_audio_cache: Optional[str] = None
@@ -101,6 +106,8 @@ class PublicEndpointTypedDict(TypedDict):
     r"""Information about a specific model endpoint"""
 
     name: str
+    model_id: str
+    r"""The unique identifier for the model (permaslug)"""
     model_name: str
     context_length: float
     pricing: PricingTypedDict
@@ -122,6 +129,9 @@ class PublicEndpoint(BaseModel):
     r"""Information about a specific model endpoint"""
 
     name: str
+
+    model_id: str
+    r"""The unique identifier for the model (permaslug)"""
 
     model_name: str
 

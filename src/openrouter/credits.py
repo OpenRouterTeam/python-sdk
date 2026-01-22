@@ -22,7 +22,7 @@ class Credits(BaseSDK):
     ) -> operations.GetCreditsResponse:
         r"""Get remaining credits
 
-        Get total credits purchased and used for the authenticated user
+        Get total credits purchased and used for the authenticated user. [Provisioning key](/docs/guides/overview/auth/provisioning-api-keys) required.
 
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -119,7 +119,7 @@ class Credits(BaseSDK):
     ) -> operations.GetCreditsResponse:
         r"""Get remaining credits
 
-        Get total credits purchased and used for the authenticated user
+        Get total credits purchased and used for the authenticated user. [Provisioning key](/docs/guides/overview/auth/provisioning-api-keys) required.
 
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method

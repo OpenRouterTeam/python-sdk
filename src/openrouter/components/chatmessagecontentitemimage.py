@@ -19,12 +19,12 @@ ChatMessageContentItemImageDetail = Union[
 ]
 
 
-class ImageURLTypedDict(TypedDict):
+class ChatMessageContentItemImageImageURLTypedDict(TypedDict):
     url: str
     detail: NotRequired[ChatMessageContentItemImageDetail]
 
 
-class ImageURL(BaseModel):
+class ChatMessageContentItemImageImageURL(BaseModel):
     url: str
 
     detail: Annotated[
@@ -34,12 +34,12 @@ class ImageURL(BaseModel):
 
 
 class ChatMessageContentItemImageTypedDict(TypedDict):
-    image_url: ImageURLTypedDict
+    image_url: ChatMessageContentItemImageImageURLTypedDict
     type: Literal["image_url"]
 
 
 class ChatMessageContentItemImage(BaseModel):
-    image_url: ImageURL
+    image_url: ChatMessageContentItemImageImageURL
 
     TYPE: Annotated[
         Annotated[Literal["image_url"], AfterValidator(validate_const("image_url"))],

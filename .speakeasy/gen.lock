@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: cfd52247-6a25-4c6d-bbce-fe6fce0cd69d
 management:
-  docChecksum: 331e8a1f7c97c6a4a6b57eaddc80fc39
+  docChecksum: 7136b263714e485a5a96ee056b6e3f36
   docVersion: 1.0.0
   speakeasyVersion: 1.666.0
   generationVersion: 2.768.0
-  releaseVersion: 0.1.2
-  configChecksum: adb2f19d89b3fd68d890e4bad6beebbf
+  releaseVersion: 0.1.3
+  configChecksum: d03f8606816d7028a10e566c4ff2ac44
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
@@ -53,6 +53,7 @@ generatedFiles:
   - docs/components/architecture.md
   - docs/components/assistantmessage.md
   - docs/components/assistantmessagecontent.md
+  - docs/components/assistantmessageimageurl.md
   - docs/components/badgatewayresponseerrordata.md
   - docs/components/badrequestresponseerrordata.md
   - docs/components/chainid.md
@@ -85,6 +86,7 @@ generatedFiles:
   - docs/components/chatmessagecontentitemcachecontrol.md
   - docs/components/chatmessagecontentitemimage.md
   - docs/components/chatmessagecontentitemimagedetail.md
+  - docs/components/chatmessagecontentitemimageimageurl.md
   - docs/components/chatmessagecontentitemtext.md
   - docs/components/chatmessagecontentitemvideo.md
   - docs/components/chatmessagecontentitemvideoinputvideo.md
@@ -138,8 +140,8 @@ generatedFiles:
   - docs/components/idmoderation.md
   - docs/components/idresponsehealing.md
   - docs/components/idweb.md
+  - docs/components/image.md
   - docs/components/imagegenerationstatus.md
-  - docs/components/imageurl.md
   - docs/components/inputmodality.md
   - docs/components/inputtokensdetails.md
   - docs/components/instructtype.md
@@ -437,11 +439,11 @@ generatedFiles:
   - docs/components/route.md
   - docs/components/schema0.md
   - docs/components/schema0enum.md
-  - docs/components/schema3.md
-  - docs/components/schema3reasoningencrypted.md
-  - docs/components/schema3reasoningsummary.md
-  - docs/components/schema3reasoningtext.md
-  - docs/components/schema5.md
+  - docs/components/schema2.md
+  - docs/components/schema2reasoningencrypted.md
+  - docs/components/schema2reasoningsummary.md
+  - docs/components/schema2reasoningtext.md
+  - docs/components/schema4.md
   - docs/components/security.md
   - docs/components/servicetier.md
   - docs/components/serviceunavailableresponseerrordata.md
@@ -508,7 +510,20 @@ generatedFiles:
   - docs/models/internal/globals.md
   - docs/models/utils/retryconfig.md
   - docs/operations/apitype.md
+  - docs/operations/bulkassignkeystoguardrailrequest.md
+  - docs/operations/bulkassignkeystoguardrailrequestbody.md
+  - docs/operations/bulkassignkeystoguardrailresponse.md
+  - docs/operations/bulkassignmemberstoguardrailrequest.md
+  - docs/operations/bulkassignmemberstoguardrailrequestbody.md
+  - docs/operations/bulkassignmemberstoguardrailresponse.md
+  - docs/operations/bulkunassignkeysfromguardrailrequest.md
+  - docs/operations/bulkunassignkeysfromguardrailrequestbody.md
+  - docs/operations/bulkunassignkeysfromguardrailresponse.md
+  - docs/operations/bulkunassignmembersfromguardrailrequest.md
+  - docs/operations/bulkunassignmembersfromguardrailrequestbody.md
+  - docs/operations/bulkunassignmembersfromguardrailresponse.md
   - docs/operations/calldata.md
+  - docs/operations/category.md
   - docs/operations/content.md
   - docs/operations/contentimageurl.md
   - docs/operations/contenttext.md
@@ -523,12 +538,19 @@ generatedFiles:
   - docs/operations/createembeddingsrequest.md
   - docs/operations/createembeddingsresponse.md
   - docs/operations/createembeddingsresponsebody.md
+  - docs/operations/createguardraildata.md
+  - docs/operations/createguardrailrequest.md
+  - docs/operations/createguardrailresetintervalrequest.md
+  - docs/operations/createguardrailresetintervalresponse.md
+  - docs/operations/createguardrailresponse.md
   - docs/operations/createkeysdata.md
   - docs/operations/createkeyslimitreset.md
   - docs/operations/createkeysrequest.md
   - docs/operations/createkeysresponse.md
   - docs/operations/createresponsesresponse.md
   - docs/operations/createresponsesresponsebody.md
+  - docs/operations/deleteguardrailrequest.md
+  - docs/operations/deleteguardrailresponse.md
   - docs/operations/deletekeysrequest.md
   - docs/operations/deletekeysresponse.md
   - docs/operations/embedding.md
@@ -543,14 +565,14 @@ generatedFiles:
   - docs/operations/getgenerationdata.md
   - docs/operations/getgenerationrequest.md
   - docs/operations/getgenerationresponse.md
+  - docs/operations/getguardraildata.md
+  - docs/operations/getguardrailrequest.md
+  - docs/operations/getguardrailresetinterval.md
+  - docs/operations/getguardrailresponse.md
   - docs/operations/getkeydata.md
   - docs/operations/getkeyrequest.md
   - docs/operations/getkeyresponse.md
   - docs/operations/getmodelsrequest.md
-  - docs/operations/getparametersdata.md
-  - docs/operations/getparametersrequest.md
-  - docs/operations/getparametersresponse.md
-  - docs/operations/getparameterssecurity.md
   - docs/operations/getuseractivityrequest.md
   - docs/operations/getuseractivityresponse.md
   - docs/operations/imageurl.md
@@ -560,6 +582,22 @@ generatedFiles:
   - docs/operations/listendpointsrequest.md
   - docs/operations/listendpointsresponse.md
   - docs/operations/listendpointszdrresponse.md
+  - docs/operations/listguardrailkeyassignmentsdata.md
+  - docs/operations/listguardrailkeyassignmentsrequest.md
+  - docs/operations/listguardrailkeyassignmentsresponse.md
+  - docs/operations/listguardrailmemberassignmentsdata.md
+  - docs/operations/listguardrailmemberassignmentsrequest.md
+  - docs/operations/listguardrailmemberassignmentsresponse.md
+  - docs/operations/listguardrailsdata.md
+  - docs/operations/listguardrailsrequest.md
+  - docs/operations/listguardrailsresetinterval.md
+  - docs/operations/listguardrailsresponse.md
+  - docs/operations/listkeyassignmentsdata.md
+  - docs/operations/listkeyassignmentsrequest.md
+  - docs/operations/listkeyassignmentsresponse.md
+  - docs/operations/listmemberassignmentsdata.md
+  - docs/operations/listmemberassignmentsrequest.md
+  - docs/operations/listmemberassignmentsresponse.md
   - docs/operations/listmodelsusersecurity.md
   - docs/operations/listprovidersdata.md
   - docs/operations/listprovidersresponse.md
@@ -570,10 +608,15 @@ generatedFiles:
   - docs/operations/objectembedding.md
   - docs/operations/ratelimit.md
   - docs/operations/sendchatcompletionrequestresponse.md
-  - docs/operations/supportedparameter.md
   - docs/operations/transferintent.md
   - docs/operations/typeimageurl.md
   - docs/operations/typetext.md
+  - docs/operations/updateguardraildata.md
+  - docs/operations/updateguardrailrequest.md
+  - docs/operations/updateguardrailrequestbody.md
+  - docs/operations/updateguardrailresetintervalrequest.md
+  - docs/operations/updateguardrailresetintervalresponse.md
+  - docs/operations/updateguardrailresponse.md
   - docs/operations/updatekeysdata.md
   - docs/operations/updatekeyslimitreset.md
   - docs/operations/updatekeysrequest.md
@@ -589,9 +632,9 @@ generatedFiles:
   - docs/sdks/embeddings/README.md
   - docs/sdks/endpoints/README.md
   - docs/sdks/generations/README.md
+  - docs/sdks/guardrails/README.md
   - docs/sdks/models/README.md
   - docs/sdks/oauth/README.md
-  - docs/sdks/parameters/README.md
   - docs/sdks/providers/README.md
   - docs/sdks/responses/README.md
   - py.typed
@@ -611,7 +654,7 @@ generatedFiles:
   - src/openrouter/completions.py
   - src/openrouter/components/__init__.py
   - src/openrouter/components/_schema0.py
-  - src/openrouter/components/_schema3.py
+  - src/openrouter/components/_schema2.py
   - src/openrouter/components/activityitem.py
   - src/openrouter/components/assistantmessage.py
   - src/openrouter/components/badgatewayresponseerrordata.py
@@ -793,6 +836,7 @@ generatedFiles:
   - src/openrouter/errors/unauthorizedresponse_error.py
   - src/openrouter/errors/unprocessableentityresponse_error.py
   - src/openrouter/generations.py
+  - src/openrouter/guardrails.py
   - src/openrouter/httpclient.py
   - src/openrouter/models/__init__.py
   - src/openrouter/models/internal/__init__.py
@@ -800,28 +844,39 @@ generatedFiles:
   - src/openrouter/models_.py
   - src/openrouter/oauth.py
   - src/openrouter/operations/__init__.py
+  - src/openrouter/operations/bulkassignkeystoguardrail.py
+  - src/openrouter/operations/bulkassignmemberstoguardrail.py
+  - src/openrouter/operations/bulkunassignkeysfromguardrail.py
+  - src/openrouter/operations/bulkunassignmembersfromguardrail.py
   - src/openrouter/operations/createauthkeyscode.py
   - src/openrouter/operations/createcoinbasecharge.py
   - src/openrouter/operations/createembeddings.py
+  - src/openrouter/operations/createguardrail.py
   - src/openrouter/operations/createkeys.py
   - src/openrouter/operations/createresponses.py
+  - src/openrouter/operations/deleteguardrail.py
   - src/openrouter/operations/deletekeys.py
   - src/openrouter/operations/exchangeauthcodeforapikey.py
   - src/openrouter/operations/getcredits.py
   - src/openrouter/operations/getcurrentkey.py
   - src/openrouter/operations/getgeneration.py
+  - src/openrouter/operations/getguardrail.py
   - src/openrouter/operations/getkey.py
   - src/openrouter/operations/getmodels.py
-  - src/openrouter/operations/getparameters.py
   - src/openrouter/operations/getuseractivity.py
   - src/openrouter/operations/list.py
   - src/openrouter/operations/listendpoints.py
   - src/openrouter/operations/listendpointszdr.py
+  - src/openrouter/operations/listguardrailkeyassignments.py
+  - src/openrouter/operations/listguardrailmemberassignments.py
+  - src/openrouter/operations/listguardrails.py
+  - src/openrouter/operations/listkeyassignments.py
+  - src/openrouter/operations/listmemberassignments.py
   - src/openrouter/operations/listmodelsuser.py
   - src/openrouter/operations/listproviders.py
   - src/openrouter/operations/sendchatcompletionrequest.py
+  - src/openrouter/operations/updateguardrail.py
   - src/openrouter/operations/updatekeys.py
-  - src/openrouter/parameters.py
   - src/openrouter/providers.py
   - src/openrouter/py.typed
   - src/openrouter/responses.py
@@ -1016,7 +1071,7 @@ examples:
           slug: "<value>"
       responses:
         "200":
-          application/json: {"data": {"id": "openai/gpt-4", "name": "GPT-4", "created": 1692901234, "description": "GPT-4 is a large multimodal model that can solve difficult problems with greater accuracy.", "architecture": {"tokenizer": "GPT", "instruct_type": "chatml", "modality": "text->text", "input_modalities": ["text"], "output_modalities": ["text"]}, "endpoints": [{"name": "OpenAI: GPT-4", "model_name": "GPT-4", "context_length": 8192, "pricing": {"prompt": "0.00003", "completion": "0.00006"}, "provider_name": "OpenAI", "tag": "openai", "quantization": "fp16", "max_completion_tokens": 4096, "max_prompt_tokens": 8192, "supported_parameters": ["temperature", "top_p", "max_tokens", "frequency_penalty", "presence_penalty"], "uptime_last_30m": 99.5, "supports_implicit_caching": true, "latency_last_30m": {"p50": 0.25, "p75": 0.35, "p90": 0.48, "p99": 0.85}, "throughput_last_30m": {"p50": 45.2, "p75": 38.5, "p90": 28.3, "p99": 15.1}}]}}
+          application/json: {"data": {"id": "openai/gpt-4", "name": "GPT-4", "created": 1692901234, "description": "GPT-4 is a large multimodal model that can solve difficult problems with greater accuracy.", "architecture": {"tokenizer": "GPT", "instruct_type": "chatml", "modality": "text->text", "input_modalities": ["text"], "output_modalities": ["text"]}, "endpoints": [{"name": "OpenAI: GPT-4", "model_id": "openai/gpt-4", "model_name": "GPT-4", "context_length": 8192, "pricing": {"prompt": "0.00003", "completion": "0.00006"}, "provider_name": "OpenAI", "tag": "openai", "quantization": "fp16", "max_completion_tokens": 4096, "max_prompt_tokens": 8192, "supported_parameters": ["temperature", "top_p", "max_tokens", "frequency_penalty", "presence_penalty"], "uptime_last_30m": 99.5, "supports_implicit_caching": true, "latency_last_30m": {"p50": 0.25, "p75": 0.35, "p90": 0.48, "p99": 0.85}, "throughput_last_30m": {"p50": 45.2, "p75": 38.5, "p90": 28.3, "p99": 15.1}}]}}
         "404":
           application/json: {"error": {"code": 404, "message": "Resource not found"}}
         "500":
@@ -1025,7 +1080,7 @@ examples:
     speakeasy-default-list-endpoints-zdr:
       responses:
         "200":
-          application/json: {"data": [{"name": "OpenAI: GPT-4", "model_name": "GPT-4", "context_length": 8192, "pricing": {"prompt": "0.00003", "completion": "0.00006"}, "provider_name": "OpenAI", "tag": "openai", "quantization": "fp16", "max_completion_tokens": 4096, "max_prompt_tokens": 8192, "supported_parameters": ["temperature", "top_p", "max_tokens"], "uptime_last_30m": 99.5, "supports_implicit_caching": true, "latency_last_30m": {"p50": 25.5, "p75": 35.2, "p90": 48.7, "p99": 85.3}, "throughput_last_30m": {"p50": 25.5, "p75": 35.2, "p90": 48.7, "p99": 85.3}}]}
+          application/json: {"data": [{"name": "OpenAI: GPT-4", "model_id": "openai/gpt-4", "model_name": "GPT-4", "context_length": 8192, "pricing": {"prompt": "0.00003", "completion": "0.00006"}, "provider_name": "OpenAI", "tag": "openai", "quantization": "fp16", "max_completion_tokens": 4096, "max_prompt_tokens": 8192, "supported_parameters": ["temperature", "top_p", "max_tokens"], "uptime_last_30m": 99.5, "supports_implicit_caching": true, "latency_last_30m": {"p50": 25.5, "p75": 35.2, "p90": 48.7, "p99": 85.3}, "throughput_last_30m": {"p50": 25.5, "p75": 35.2, "p90": 48.7, "p99": 85.3}}]}
         "500":
           application/json: {"error": {"code": 500, "message": "Internal Server Error"}}
   getParameters:
@@ -1058,7 +1113,7 @@ examples:
           offset: "0"
       responses:
         "200":
-          application/json: {"data": [{"hash": "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", "name": "My Production Key", "label": "Production API Key", "disabled": false, "limit": 100, "limit_remaining": 74.5, "limit_reset": "monthly", "include_byok_in_limit": false, "usage": 25.5, "usage_daily": 25.5, "usage_weekly": 25.5, "usage_monthly": 25.5, "byok_usage": 17.38, "byok_usage_daily": 17.38, "byok_usage_weekly": 17.38, "byok_usage_monthly": 17.38, "created_at": "2025-08-24T10:30:00Z", "updated_at": "2025-08-24T15:45:00Z"}]}
+          application/json: {"data": [{"hash": "f01d52606dc8f0a8303a7b5cc3fa07109c2e346cec7c0a16b40de462992ce943", "name": "My Production Key", "label": "Production API Key", "disabled": false, "limit": 100, "limit_remaining": 74.5, "limit_reset": "monthly", "include_byok_in_limit": false, "usage": 25.5, "usage_daily": 25.5, "usage_weekly": 25.5, "usage_monthly": 25.5, "byok_usage": 17.38, "byok_usage_daily": 17.38, "byok_usage_weekly": 17.38, "byok_usage_monthly": 17.38, "created_at": "2025-08-24T10:30:00Z", "updated_at": "2025-08-24T15:45:00Z"}]}
         "401":
           application/json: {"error": {"code": 401, "message": "Missing Authentication header"}}
         "429":
@@ -1071,7 +1126,7 @@ examples:
         application/json: {"name": "My New API Key"}
       responses:
         "201":
-          application/json: {"data": {"hash": "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", "name": "My New API Key", "label": "My New API Key", "disabled": false, "limit": 50, "limit_remaining": 50, "limit_reset": "monthly", "include_byok_in_limit": true, "usage": 0, "usage_daily": 0, "usage_weekly": 0, "usage_monthly": 0, "byok_usage": 0, "byok_usage_daily": 0, "byok_usage_weekly": 0, "byok_usage_monthly": 0, "created_at": "2025-08-24T10:30:00Z", "updated_at": null}, "key": "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"}
+          application/json: {"data": {"hash": "f01d52606dc8f0a8303a7b5cc3fa07109c2e346cec7c0a16b40de462992ce943", "name": "My New API Key", "label": "My New API Key", "disabled": false, "limit": 50, "limit_remaining": 50, "limit_reset": "monthly", "include_byok_in_limit": true, "usage": 0, "usage_daily": 0, "usage_weekly": 0, "usage_monthly": 0, "byok_usage": 0, "byok_usage_daily": 0, "byok_usage_weekly": 0, "byok_usage_monthly": 0, "created_at": "2025-08-24T10:30:00Z", "updated_at": null}, "key": "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"}
         "400":
           application/json: {"error": {"code": 400, "message": "Invalid request parameters"}}
         "401":
@@ -1084,12 +1139,12 @@ examples:
     speakeasy-default-update-keys:
       parameters:
         path:
-          hash: "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"
+          hash: "f01d52606dc8f0a8303a7b5cc3fa07109c2e346cec7c0a16b40de462992ce943"
       requestBody:
         application/json: {}
       responses:
         "200":
-          application/json: {"data": {"hash": "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", "name": "Updated API Key Name", "label": "Updated API Key Name", "disabled": false, "limit": 75, "limit_remaining": 49.5, "limit_reset": "daily", "include_byok_in_limit": true, "usage": 25.5, "usage_daily": 25.5, "usage_weekly": 25.5, "usage_monthly": 25.5, "byok_usage": 17.38, "byok_usage_daily": 17.38, "byok_usage_weekly": 17.38, "byok_usage_monthly": 17.38, "created_at": "2025-08-24T10:30:00Z", "updated_at": "2025-08-24T16:00:00Z"}}
+          application/json: {"data": {"hash": "f01d52606dc8f0a8303a7b5cc3fa07109c2e346cec7c0a16b40de462992ce943", "name": "Updated API Key Name", "label": "Updated API Key Name", "disabled": false, "limit": 75, "limit_remaining": 49.5, "limit_reset": "daily", "include_byok_in_limit": true, "usage": 25.5, "usage_daily": 25.5, "usage_weekly": 25.5, "usage_monthly": 25.5, "byok_usage": 17.38, "byok_usage_daily": 17.38, "byok_usage_weekly": 17.38, "byok_usage_monthly": 17.38, "created_at": "2025-08-24T10:30:00Z", "updated_at": "2025-08-24T16:00:00Z"}}
         "400":
           application/json: {"error": {"code": 400, "message": "Invalid request parameters"}}
         "401":
@@ -1104,7 +1159,7 @@ examples:
     speakeasy-default-delete-keys:
       parameters:
         path:
-          hash: "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"
+          hash: "f01d52606dc8f0a8303a7b5cc3fa07109c2e346cec7c0a16b40de462992ce943"
       responses:
         "200":
           application/json: {"deleted": true}
@@ -1120,10 +1175,10 @@ examples:
     speakeasy-default-get-key:
       parameters:
         path:
-          hash: "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"
+          hash: "f01d52606dc8f0a8303a7b5cc3fa07109c2e346cec7c0a16b40de462992ce943"
       responses:
         "200":
-          application/json: {"data": {"hash": "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", "name": "My Production Key", "label": "Production API Key", "disabled": false, "limit": 100, "limit_remaining": 74.5, "limit_reset": "monthly", "include_byok_in_limit": false, "usage": 25.5, "usage_daily": 25.5, "usage_weekly": 25.5, "usage_monthly": 25.5, "byok_usage": 17.38, "byok_usage_daily": 17.38, "byok_usage_weekly": 17.38, "byok_usage_monthly": 17.38, "created_at": "2025-08-24T10:30:00Z", "updated_at": "2025-08-24T15:45:00Z"}}
+          application/json: {"data": {"hash": "f01d52606dc8f0a8303a7b5cc3fa07109c2e346cec7c0a16b40de462992ce943", "name": "My Production Key", "label": "Production API Key", "disabled": false, "limit": 100, "limit_remaining": 74.5, "limit_reset": "monthly", "include_byok_in_limit": false, "usage": 25.5, "usage_daily": 25.5, "usage_weekly": 25.5, "usage_monthly": 25.5, "byok_usage": 17.38, "byok_usage_daily": 17.38, "byok_usage_weekly": 17.38, "byok_usage_monthly": 17.38, "created_at": "2025-08-24T10:30:00Z", "updated_at": "2025-08-24T15:45:00Z"}}
         "401":
           application/json: {"error": {"code": 401, "message": "Missing Authentication header"}}
         "404":
@@ -1136,7 +1191,7 @@ examples:
     speakeasy-default-get-current-key:
       responses:
         "200":
-          application/json: {"data": {"label": "sk-or-v1-au78b3456789012345678901234567890", "limit": 100, "usage": 25.5, "usage_daily": 25.5, "usage_weekly": 25.5, "usage_monthly": 25.5, "byok_usage": 17.38, "byok_usage_daily": 17.38, "byok_usage_weekly": 17.38, "byok_usage_monthly": 17.38, "is_free_tier": false, "is_provisioning_key": false, "limit_remaining": 74.5, "limit_reset": "monthly", "include_byok_in_limit": false, "rate_limit": {"requests": 1000, "interval": "1h", "note": "This field is deprecated and safe to ignore."}}}
+          application/json: {"data": {"label": "sk-or-v1-au7...890", "limit": 100, "usage": 25.5, "usage_daily": 25.5, "usage_weekly": 25.5, "usage_monthly": 25.5, "byok_usage": 17.38, "byok_usage_daily": 17.38, "byok_usage_weekly": 17.38, "byok_usage_monthly": 17.38, "is_free_tier": false, "is_provisioning_key": false, "limit_remaining": 74.5, "limit_reset": "monthly", "include_byok_in_limit": false, "rate_limit": {"requests": 1000, "interval": "1h", "note": "This field is deprecated and safe to ignore."}}}
         "401":
           application/json: {"error": {"code": 401, "message": "Missing Authentication header"}}
         "500":
@@ -1189,4 +1244,190 @@ examples:
           application/json: {"error": {"code": "<value>", "message": "<value>"}}
         "500":
           application/json: {"error": {"code": "<value>", "message": "<value>"}}
+  listGuardrails:
+    speakeasy-default-list-guardrails:
+      responses:
+        "200":
+          application/json: {"data": [{"id": "550e8400-e29b-41d4-a716-446655440000", "name": "Production Guardrail", "created_at": "2025-08-24T10:30:00Z"}], "total_count": 1}
+        "401":
+          application/json: {"error": {"code": 401, "message": "Missing Authentication header"}}
+        "500":
+          application/json: {"error": {"code": 500, "message": "Internal Server Error"}}
+  createGuardrail:
+    speakeasy-default-create-guardrail:
+      requestBody:
+        application/json: {"name": "My New Guardrail"}
+      responses:
+        "201":
+          application/json: {"data": {"id": "550e8400-e29b-41d4-a716-446655440000", "name": "My New Guardrail", "created_at": "2025-08-24T10:30:00Z"}}
+        "400":
+          application/json: {"error": {"code": 400, "message": "Invalid request parameters"}}
+        "401":
+          application/json: {"error": {"code": 401, "message": "Missing Authentication header"}}
+        "500":
+          application/json: {"error": {"code": 500, "message": "Internal Server Error"}}
+  getGuardrail:
+    speakeasy-default-get-guardrail:
+      parameters:
+        path:
+          id: "550e8400-e29b-41d4-a716-446655440000"
+      responses:
+        "200":
+          application/json: {"data": {"id": "550e8400-e29b-41d4-a716-446655440000", "name": "Production Guardrail", "created_at": "2025-08-24T10:30:00Z"}}
+        "401":
+          application/json: {"error": {"code": 401, "message": "Missing Authentication header"}}
+        "404":
+          application/json: {"error": {"code": 404, "message": "Resource not found"}}
+        "500":
+          application/json: {"error": {"code": 500, "message": "Internal Server Error"}}
+  updateGuardrail:
+    speakeasy-default-update-guardrail:
+      parameters:
+        path:
+          id: "550e8400-e29b-41d4-a716-446655440000"
+      requestBody:
+        application/json: {}
+      responses:
+        "200":
+          application/json: {"data": {"id": "550e8400-e29b-41d4-a716-446655440000", "name": "Updated Guardrail Name", "created_at": "2025-08-24T10:30:00Z"}}
+        "400":
+          application/json: {"error": {"code": 400, "message": "Invalid request parameters"}}
+        "401":
+          application/json: {"error": {"code": 401, "message": "Missing Authentication header"}}
+        "404":
+          application/json: {"error": {"code": 404, "message": "Resource not found"}}
+        "500":
+          application/json: {"error": {"code": 500, "message": "Internal Server Error"}}
+  deleteGuardrail:
+    speakeasy-default-delete-guardrail:
+      parameters:
+        path:
+          id: "550e8400-e29b-41d4-a716-446655440000"
+      responses:
+        "200":
+          application/json: {"deleted": true}
+        "401":
+          application/json: {"error": {"code": 401, "message": "Missing Authentication header"}}
+        "404":
+          application/json: {"error": {"code": 404, "message": "Resource not found"}}
+        "500":
+          application/json: {"error": {"code": 500, "message": "Internal Server Error"}}
+  listKeyAssignments:
+    speakeasy-default-list-key-assignments:
+      responses:
+        "200":
+          application/json: {"data": [{"id": "550e8400-e29b-41d4-a716-446655440000", "key_hash": "c56454edb818d6b14bc0d61c46025f1450b0f4012d12304ab40aacb519fcbc93", "guardrail_id": "550e8400-e29b-41d4-a716-446655440001", "key_name": "Production Key", "key_label": "prod-key", "assigned_by": "user_abc123", "created_at": "2025-08-24T10:30:00Z"}], "total_count": 25}
+        "401":
+          application/json: {"error": {"code": 401, "message": "Missing Authentication header"}}
+        "500":
+          application/json: {"error": {"code": 500, "message": "Internal Server Error"}}
+  listMemberAssignments:
+    speakeasy-default-list-member-assignments:
+      responses:
+        "200":
+          application/json: {"data": [{"id": "550e8400-e29b-41d4-a716-446655440000", "user_id": "user_abc123", "organization_id": "org_xyz789", "guardrail_id": "550e8400-e29b-41d4-a716-446655440001", "assigned_by": "user_abc123", "created_at": "2025-08-24T10:30:00Z"}], "total_count": 10}
+        "401":
+          application/json: {"error": {"code": 401, "message": "Missing Authentication header"}}
+        "500":
+          application/json: {"error": {"code": 500, "message": "Internal Server Error"}}
+  listGuardrailKeyAssignments:
+    speakeasy-default-list-guardrail-key-assignments:
+      parameters:
+        path:
+          id: "550e8400-e29b-41d4-a716-446655440000"
+      responses:
+        "200":
+          application/json: {"data": [], "total_count": 25}
+        "401":
+          application/json: {"error": {"code": 401, "message": "Missing Authentication header"}}
+        "404":
+          application/json: {"error": {"code": 404, "message": "Resource not found"}}
+        "500":
+          application/json: {"error": {"code": 500, "message": "Internal Server Error"}}
+  bulkAssignKeysToGuardrail:
+    speakeasy-default-bulk-assign-keys-to-guardrail:
+      parameters:
+        path:
+          id: "550e8400-e29b-41d4-a716-446655440000"
+      requestBody:
+        application/json: {"key_hashes": ["c56454edb818d6b14bc0d61c46025f1450b0f4012d12304ab40aacb519fcbc93"]}
+      responses:
+        "200":
+          application/json: {"assigned_count": 3}
+        "400":
+          application/json: {"error": {"code": 400, "message": "Invalid request parameters"}}
+        "401":
+          application/json: {"error": {"code": 401, "message": "Missing Authentication header"}}
+        "404":
+          application/json: {"error": {"code": 404, "message": "Resource not found"}}
+        "500":
+          application/json: {"error": {"code": 500, "message": "Internal Server Error"}}
+  listGuardrailMemberAssignments:
+    speakeasy-default-list-guardrail-member-assignments:
+      parameters:
+        path:
+          id: "550e8400-e29b-41d4-a716-446655440000"
+      responses:
+        "200":
+          application/json: {"data": [{"id": "550e8400-e29b-41d4-a716-446655440000", "user_id": "user_abc123", "organization_id": "org_xyz789", "guardrail_id": "550e8400-e29b-41d4-a716-446655440001", "assigned_by": "user_abc123", "created_at": "2025-08-24T10:30:00Z"}], "total_count": 10}
+        "401":
+          application/json: {"error": {"code": 401, "message": "Missing Authentication header"}}
+        "404":
+          application/json: {"error": {"code": 404, "message": "Resource not found"}}
+        "500":
+          application/json: {"error": {"code": 500, "message": "Internal Server Error"}}
+  bulkAssignMembersToGuardrail:
+    speakeasy-default-bulk-assign-members-to-guardrail:
+      parameters:
+        path:
+          id: "550e8400-e29b-41d4-a716-446655440000"
+      requestBody:
+        application/json: {"member_user_ids": ["user_abc123", "user_def456"]}
+      responses:
+        "200":
+          application/json: {"assigned_count": 2}
+        "400":
+          application/json: {"error": {"code": 400, "message": "Invalid request parameters"}}
+        "401":
+          application/json: {"error": {"code": 401, "message": "Missing Authentication header"}}
+        "404":
+          application/json: {"error": {"code": 404, "message": "Resource not found"}}
+        "500":
+          application/json: {"error": {"code": 500, "message": "Internal Server Error"}}
+  bulkUnassignKeysFromGuardrail:
+    speakeasy-default-bulk-unassign-keys-from-guardrail:
+      parameters:
+        path:
+          id: "550e8400-e29b-41d4-a716-446655440000"
+      requestBody:
+        application/json: {"key_hashes": ["c56454edb818d6b14bc0d61c46025f1450b0f4012d12304ab40aacb519fcbc93"]}
+      responses:
+        "200":
+          application/json: {"unassigned_count": 3}
+        "400":
+          application/json: {"error": {"code": 400, "message": "Invalid request parameters"}}
+        "401":
+          application/json: {"error": {"code": 401, "message": "Missing Authentication header"}}
+        "404":
+          application/json: {"error": {"code": 404, "message": "Resource not found"}}
+        "500":
+          application/json: {"error": {"code": 500, "message": "Internal Server Error"}}
+  bulkUnassignMembersFromGuardrail:
+    speakeasy-default-bulk-unassign-members-from-guardrail:
+      parameters:
+        path:
+          id: "550e8400-e29b-41d4-a716-446655440000"
+      requestBody:
+        application/json: {"member_user_ids": ["user_abc123", "user_def456"]}
+      responses:
+        "200":
+          application/json: {"unassigned_count": 2}
+        "400":
+          application/json: {"error": {"code": 400, "message": "Invalid request parameters"}}
+        "401":
+          application/json: {"error": {"code": 401, "message": "Missing Authentication header"}}
+        "404":
+          application/json: {"error": {"code": 404, "message": "Resource not found"}}
+        "500":
+          application/json: {"error": {"code": 500, "message": "Internal Server Error"}}
 examplesVersion: 1.0.2

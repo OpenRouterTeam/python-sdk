@@ -25,9 +25,9 @@ if TYPE_CHECKING:
     from openrouter.embeddings import Embeddings
     from openrouter.endpoints import Endpoints
     from openrouter.generations import Generations
+    from openrouter.guardrails import Guardrails
     from openrouter.models_ import Models
     from openrouter.oauth import OAuth
-    from openrouter.parameters import Parameters
     from openrouter.providers import Providers
 
 
@@ -49,12 +49,12 @@ class OpenRouter(BaseSDK):
     r"""Model information endpoints"""
     endpoints: "Endpoints"
     r"""Endpoint information"""
-    parameters: "Parameters"
-    r"""Parameters endpoints"""
     providers: "Providers"
     r"""Provider information endpoints"""
     api_keys: "APIKeys"
     r"""API key management endpoints"""
+    guardrails: "Guardrails"
+    r"""Guardrails endpoints"""
     o_auth: "OAuth"
     r"""OAuth authentication endpoints"""
     chat: "Chat"
@@ -67,9 +67,9 @@ class OpenRouter(BaseSDK):
         "generations": ("openrouter.generations", "Generations"),
         "models": ("openrouter.models_", "Models"),
         "endpoints": ("openrouter.endpoints", "Endpoints"),
-        "parameters": ("openrouter.parameters", "Parameters"),
         "providers": ("openrouter.providers", "Providers"),
         "api_keys": ("openrouter.api_keys", "APIKeys"),
+        "guardrails": ("openrouter.guardrails", "Guardrails"),
         "o_auth": ("openrouter.oauth", "OAuth"),
         "chat": ("openrouter.chat", "Chat"),
         "completions": ("openrouter.completions", "Completions"),

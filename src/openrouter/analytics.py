@@ -23,7 +23,7 @@ class Analytics(BaseSDK):
     ) -> operations.GetUserActivityResponse:
         r"""Get user activity grouped by endpoint
 
-        Returns user activity data grouped by endpoint for the last 30 (completed) UTC days
+        Returns user activity data grouped by endpoint for the last 30 (completed) UTC days. [Provisioning key](/docs/guides/overview/auth/provisioning-api-keys) required.
 
         :param date_: Filter by a single UTC date in the last 30 days (YYYY-MM-DD format).
         :param retries: Override the default retry configuration for this method
@@ -132,7 +132,7 @@ class Analytics(BaseSDK):
     ) -> operations.GetUserActivityResponse:
         r"""Get user activity grouped by endpoint
 
-        Returns user activity data grouped by endpoint for the last 30 (completed) UTC days
+        Returns user activity data grouped by endpoint for the last 30 (completed) UTC days. [Provisioning key](/docs/guides/overview/auth/provisioning-api-keys) required.
 
         :param date_: Filter by a single UTC date in the last 30 days (YYYY-MM-DD format).
         :param retries: Override the default retry configuration for this method

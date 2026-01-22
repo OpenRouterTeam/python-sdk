@@ -185,7 +185,7 @@ class Models(BaseSDK):
     def list(
         self,
         *,
-        category: Optional[str] = None,
+        category: Optional[operations.Category] = None,
         supported_parameters: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -194,7 +194,7 @@ class Models(BaseSDK):
     ) -> components.ModelsListResponse:
         r"""List all models and their properties
 
-        :param category:
+        :param category: Filter models by use case category
         :param supported_parameters:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -285,7 +285,7 @@ class Models(BaseSDK):
     async def list_async(
         self,
         *,
-        category: Optional[str] = None,
+        category: Optional[operations.Category] = None,
         supported_parameters: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -294,7 +294,7 @@ class Models(BaseSDK):
     ) -> components.ModelsListResponse:
         r"""List all models and their properties
 
-        :param category:
+        :param category: Filter models by use case category
         :param supported_parameters:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method

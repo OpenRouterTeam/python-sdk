@@ -10,6 +10,7 @@ OutputModality = Union[
         "text",
         "image",
         "embeddings",
+        "audio",
     ],
     UnrecognizedStr,
 ]

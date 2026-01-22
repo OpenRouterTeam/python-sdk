@@ -11,7 +11,7 @@ Analytics and usage endpoints
 
 ## get_user_activity
 
-Returns user activity data grouped by endpoint for the last 30 (completed) UTC days
+Returns user activity data grouped by endpoint for the last 30 (completed) UTC days. [Provisioning key](/docs/guides/overview/auth/provisioning-api-keys) required.
 
 ### Example Usage
 

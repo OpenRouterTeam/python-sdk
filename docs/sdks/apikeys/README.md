@@ -16,7 +16,7 @@ API key management endpoints
 
 ## list
 
-List API keys
+List all API keys for the authenticated user. [Provisioning key](/docs/guides/overview/auth/provisioning-api-keys) required.
 
 ### Example Usage
 
@@ -60,7 +60,7 @@ with OpenRouter(
 
 ## create
 
-Create a new API key
+Create a new API key for the authenticated user. [Provisioning key](/docs/guides/overview/auth/provisioning-api-keys) required.
 
 ### Example Usage
 
@@ -108,7 +108,7 @@ with OpenRouter(
 
 ## update
 
-Update an API key
+Update an existing API key. [Provisioning key](/docs/guides/overview/auth/provisioning-api-keys) required.
 
 ### Example Usage
 
@@ -122,7 +122,7 @@ with OpenRouter(
     api_key=os.getenv("OPENROUTER_API_KEY", ""),
 ) as open_router:
 
-    res = open_router.api_keys.update(hash="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")
+    res = open_router.api_keys.update(hash="f01d52606dc8f0a8303a7b5cc3fa07109c2e346cec7c0a16b40de462992ce943")
 
     # Handle response
     print(res)
@@ -133,7 +133,7 @@ with OpenRouter(
 
 | Parameter                                                                                                                                                              | Type                                                                                                                                                                   | Required                                                                                                                                                               | Description                                                                                                                                                            | Example                                                                                                                                                                |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `hash`                                                                                                                                                                 | *str*                                                                                                                                                                  | :heavy_check_mark:                                                                                                                                                     | The hash identifier of the API key to update                                                                                                                           | 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                                                                                              |
+| `hash`                                                                                                                                                                 | *str*                                                                                                                                                                  | :heavy_check_mark:                                                                                                                                                     | The hash identifier of the API key to update                                                                                                                           | f01d52606dc8f0a8303a7b5cc3fa07109c2e346cec7c0a16b40de462992ce943                                                                                                       |
 | `name`                                                                                                                                                                 | *Optional[str]*                                                                                                                                                        | :heavy_minus_sign:                                                                                                                                                     | New name for the API key                                                                                                                                               | Updated API Key Name                                                                                                                                                   |
 | `disabled`                                                                                                                                                             | *Optional[bool]*                                                                                                                                                       | :heavy_minus_sign:                                                                                                                                                     | Whether to disable the API key                                                                                                                                         | false                                                                                                                                                                  |
 | `limit`                                                                                                                                                                | *OptionalNullable[float]*                                                                                                                                              | :heavy_minus_sign:                                                                                                                                                     | New spending limit for the API key in USD                                                                                                                              | 75                                                                                                                                                                     |
@@ -158,7 +158,7 @@ with OpenRouter(
 
 ## delete
 
-Delete an API key
+Delete an existing API key. [Provisioning key](/docs/guides/overview/auth/provisioning-api-keys) required.
 
 ### Example Usage
 
@@ -172,7 +172,7 @@ with OpenRouter(
     api_key=os.getenv("OPENROUTER_API_KEY", ""),
 ) as open_router:
 
-    res = open_router.api_keys.delete(hash="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")
+    res = open_router.api_keys.delete(hash="f01d52606dc8f0a8303a7b5cc3fa07109c2e346cec7c0a16b40de462992ce943")
 
     # Handle response
     print(res)
@@ -181,10 +181,10 @@ with OpenRouter(
 
 ### Parameters
 
-| Parameter                                                                 | Type                                                                      | Required                                                                  | Description                                                               | Example                                                                   |
-| ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
-| `hash`                                                                    | *str*                                                                     | :heavy_check_mark:                                                        | The hash identifier of the API key to delete                              | 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 |
-| `retries`                                                                 | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)          | :heavy_minus_sign:                                                        | Configuration to override the default retry behavior of the client.       |                                                                           |
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         | Example                                                             |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `hash`                                                              | *str*                                                               | :heavy_check_mark:                                                  | The hash identifier of the API key to delete                        | f01d52606dc8f0a8303a7b5cc3fa07109c2e346cec7c0a16b40de462992ce943    |
+| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |                                                                     |
 
 ### Response
 
@@ -202,7 +202,7 @@ with OpenRouter(
 
 ## get
 
-Get a single API key
+Get a single API key by hash. [Provisioning key](/docs/guides/overview/auth/provisioning-api-keys) required.
 
 ### Example Usage
 
@@ -216,7 +216,7 @@ with OpenRouter(
     api_key=os.getenv("OPENROUTER_API_KEY", ""),
 ) as open_router:
 
-    res = open_router.api_keys.get(hash="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")
+    res = open_router.api_keys.get(hash="f01d52606dc8f0a8303a7b5cc3fa07109c2e346cec7c0a16b40de462992ce943")
 
     # Handle response
     print(res)
@@ -225,10 +225,10 @@ with OpenRouter(
 
 ### Parameters
 
-| Parameter                                                                 | Type                                                                      | Required                                                                  | Description                                                               | Example                                                                   |
-| ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
-| `hash`                                                                    | *str*                                                                     | :heavy_check_mark:                                                        | The hash identifier of the API key to retrieve                            | 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 |
-| `retries`                                                                 | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)          | :heavy_minus_sign:                                                        | Configuration to override the default retry behavior of the client.       |                                                                           |
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         | Example                                                             |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `hash`                                                              | *str*                                                               | :heavy_check_mark:                                                  | The hash identifier of the API key to retrieve                      | f01d52606dc8f0a8303a7b5cc3fa07109c2e346cec7c0a16b40de462992ce943    |
+| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |                                                                     |
 
 ### Response
 

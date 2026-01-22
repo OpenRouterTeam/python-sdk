@@ -8,3 +8,4 @@
 | `TEXT`       | text         |
 | `IMAGE`      | image        |
 | `EMBEDDINGS` | embeddings   |
+| `AUDIO`      | audio        |

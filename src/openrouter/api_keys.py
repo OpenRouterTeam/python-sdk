@@ -25,6 +25,8 @@ class APIKeys(BaseSDK):
     ) -> operations.ListResponse:
         r"""List API keys
 
+        List all API keys for the authenticated user. [Provisioning key](/docs/guides/overview/auth/provisioning-api-keys) required.
+
         :param include_disabled: Whether to include disabled API keys in the response
         :param offset: Number of API keys to skip for pagination
         :param retries: Override the default retry configuration for this method
@@ -129,6 +131,8 @@ class APIKeys(BaseSDK):
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> operations.ListResponse:
         r"""List API keys
+
+        List all API keys for the authenticated user. [Provisioning key](/docs/guides/overview/auth/provisioning-api-keys) required.
 
         :param include_disabled: Whether to include disabled API keys in the response
         :param offset: Number of API keys to skip for pagination
@@ -237,6 +241,8 @@ class APIKeys(BaseSDK):
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> operations.CreateKeysResponse:
         r"""Create a new API key
+
+        Create a new API key for the authenticated user. [Provisioning key](/docs/guides/overview/auth/provisioning-api-keys) required.
 
         :param name: Name for the new API key
         :param limit: Optional spending limit for the API key in USD
@@ -360,6 +366,8 @@ class APIKeys(BaseSDK):
     ) -> operations.CreateKeysResponse:
         r"""Create a new API key
 
+        Create a new API key for the authenticated user. [Provisioning key](/docs/guides/overview/auth/provisioning-api-keys) required.
+
         :param name: Name for the new API key
         :param limit: Optional spending limit for the API key in USD
         :param limit_reset: Type of limit reset for the API key (daily, weekly, monthly, or null for no reset). Resets happen automatically at midnight UTC, and weeks are Monday through Sunday.
@@ -482,6 +490,8 @@ class APIKeys(BaseSDK):
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> operations.UpdateKeysResponse:
         r"""Update an API key
+
+        Update an existing API key. [Provisioning key](/docs/guides/overview/auth/provisioning-api-keys) required.
 
         :param hash: The hash identifier of the API key to update
         :param name: New name for the API key
@@ -619,6 +629,8 @@ class APIKeys(BaseSDK):
     ) -> operations.UpdateKeysResponse:
         r"""Update an API key
 
+        Update an existing API key. [Provisioning key](/docs/guides/overview/auth/provisioning-api-keys) required.
+
         :param hash: The hash identifier of the API key to update
         :param name: New name for the API key
         :param disabled: Whether to disable the API key
@@ -750,6 +762,8 @@ class APIKeys(BaseSDK):
     ) -> operations.DeleteKeysResponse:
         r"""Delete an API key
 
+        Delete an existing API key. [Provisioning key](/docs/guides/overview/auth/provisioning-api-keys) required.
+
         :param hash: The hash identifier of the API key to delete
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -856,6 +870,8 @@ class APIKeys(BaseSDK):
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> operations.DeleteKeysResponse:
         r"""Delete an API key
+
+        Delete an existing API key. [Provisioning key](/docs/guides/overview/auth/provisioning-api-keys) required.
 
         :param hash: The hash identifier of the API key to delete
         :param retries: Override the default retry configuration for this method
@@ -964,6 +980,8 @@ class APIKeys(BaseSDK):
     ) -> operations.GetKeyResponse:
         r"""Get a single API key
 
+        Get a single API key by hash. [Provisioning key](/docs/guides/overview/auth/provisioning-api-keys) required.
+
         :param hash: The hash identifier of the API key to retrieve
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -1070,6 +1088,8 @@ class APIKeys(BaseSDK):
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> operations.GetKeyResponse:
         r"""Get a single API key
+
+        Get a single API key by hash. [Provisioning key](/docs/guides/overview/auth/provisioning-api-keys) required.
 
         :param hash: The hash identifier of the API key to retrieve
         :param retries: Override the default retry configuration for this method
