@@ -1,4 +1,4 @@
-# ChatGenerationParamsResponseFormatJSONObject
+# ResponseFormatJSONObject
 
 
 ## Fields

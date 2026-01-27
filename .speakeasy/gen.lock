@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: cfd52247-6a25-4c6d-bbce-fe6fce0cd69d
 management:
-  docChecksum: 7136b263714e485a5a96ee056b6e3f36
+  docChecksum: 342e7e8ea9cb2b7ff1c1860e18d58822
   docVersion: 1.0.0
   speakeasyVersion: 1.666.0
   generationVersion: 2.768.0
-  releaseVersion: 0.1.3
-  configChecksum: d03f8606816d7028a10e566c4ff2ac44
+  releaseVersion: 0.3.1
+  configChecksum: 9111dd60e0cc70eb4ba398a71f02a40f
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
@@ -74,11 +74,6 @@ generatedFiles:
   - docs/components/chatgenerationparamspreferredminthroughput.md
   - docs/components/chatgenerationparamspreferredminthroughputunion.md
   - docs/components/chatgenerationparamsprovider.md
-  - docs/components/chatgenerationparamsresponseformatjsonobject.md
-  - docs/components/chatgenerationparamsresponseformatpython.md
-  - docs/components/chatgenerationparamsresponseformattext.md
-  - docs/components/chatgenerationparamsresponseformatunion.md
-  - docs/components/chatgenerationparamsstop.md
   - docs/components/chatgenerationtokenusage.md
   - docs/components/chatmessagecontentitem.md
   - docs/components/chatmessagecontentitemaudio.md
@@ -109,18 +104,7 @@ generatedFiles:
   - docs/components/chatstreamoptions.md
   - docs/components/code.md
   - docs/components/codeenum.md
-  - docs/components/completionchoice.md
-  - docs/components/completioncreateparams.md
-  - docs/components/completioncreateparamsresponseformatjsonobject.md
-  - docs/components/completioncreateparamsresponseformatpython.md
-  - docs/components/completioncreateparamsresponseformattext.md
-  - docs/components/completioncreateparamsresponseformatunion.md
-  - docs/components/completioncreateparamsstop.md
-  - docs/components/completionfinishreason.md
-  - docs/components/completionlogprobs.md
-  - docs/components/completionresponse.md
   - docs/components/completiontokensdetails.md
-  - docs/components/completionusage.md
   - docs/components/costdetails.md
   - docs/components/createchargerequest.md
   - docs/components/datacollection.md
@@ -345,7 +329,6 @@ generatedFiles:
   - docs/components/preferredmaxlatency.md
   - docs/components/preferredminthroughput.md
   - docs/components/pricing.md
-  - docs/components/prompt.md
   - docs/components/prompttokensdetails.md
   - docs/components/providername.md
   - docs/components/provideroverloadedresponseerrordata.md
@@ -376,7 +359,11 @@ generatedFiles:
   - docs/components/reasoningtextcontent.md
   - docs/components/reasoningtextcontenttype.md
   - docs/components/requesttimeoutresponseerrordata.md
+  - docs/components/responseformat.md
+  - docs/components/responseformatjsonobject.md
   - docs/components/responseformatjsonschema.md
+  - docs/components/responseformatpython.md
+  - docs/components/responseformattext.md
   - docs/components/responseformattextconfig.md
   - docs/components/responseformattextgrammar.md
   - docs/components/responseinputaudio.md
@@ -448,7 +435,7 @@ generatedFiles:
   - docs/components/servicetier.md
   - docs/components/serviceunavailableresponseerrordata.md
   - docs/components/sortenum.md
-  - docs/components/streamoptions.md
+  - docs/components/stop.md
   - docs/components/systemmessage.md
   - docs/components/systemmessagecontent.md
   - docs/components/tokenizer.md
@@ -627,7 +614,6 @@ generatedFiles:
   - docs/sdks/analytics/README.md
   - docs/sdks/apikeys/README.md
   - docs/sdks/chat/README.md
-  - docs/sdks/completions/README.md
   - docs/sdks/credits/README.md
   - docs/sdks/embeddings/README.md
   - docs/sdks/endpoints/README.md
@@ -651,7 +637,6 @@ generatedFiles:
   - src/openrouter/basesdk.py
   - src/openrouter/beta.py
   - src/openrouter/chat.py
-  - src/openrouter/completions.py
   - src/openrouter/components/__init__.py
   - src/openrouter/components/_schema0.py
   - src/openrouter/components/_schema2.py
@@ -679,11 +664,6 @@ generatedFiles:
   - src/openrouter/components/chatstreamingmessagetoolcall.py
   - src/openrouter/components/chatstreamingresponsechunk.py
   - src/openrouter/components/chatstreamoptions.py
-  - src/openrouter/components/completionchoice.py
-  - src/openrouter/components/completioncreateparams.py
-  - src/openrouter/components/completionlogprobs.py
-  - src/openrouter/components/completionresponse.py
-  - src/openrouter/components/completionusage.py
   - src/openrouter/components/createchargerequest.py
   - src/openrouter/components/datacollection.py
   - src/openrouter/components/defaultparameters.py
@@ -1063,6 +1043,8 @@ examples:
           application/json: {"error": {"code": 401, "message": "Missing Authentication header"}}
         "500":
           application/json: {"error": {"code": 500, "message": "Internal Server Error"}}
+        "404":
+          application/json: {"error": {"code": 404, "message": "Resource not found"}}
   listEndpoints:
     speakeasy-default-list-endpoints:
       parameters:
