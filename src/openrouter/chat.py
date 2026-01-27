@@ -50,17 +50,11 @@ class Chat(BaseSDK):
             Union[components.Reasoning, components.ReasoningTypedDict]
         ] = None,
         response_format: Optional[
-            Union[
-                components.ChatGenerationParamsResponseFormatUnion,
-                components.ChatGenerationParamsResponseFormatUnionTypedDict,
-            ]
+            Union[components.ResponseFormat, components.ResponseFormatTypedDict]
         ] = None,
         seed: OptionalNullable[int] = UNSET,
         stop: OptionalNullable[
-            Union[
-                components.ChatGenerationParamsStop,
-                components.ChatGenerationParamsStopTypedDict,
-            ]
+            Union[components.Stop, components.StopTypedDict]
         ] = UNSET,
         stream: Union[Literal[False], None] = None,
         stream_options: OptionalNullable[
@@ -162,17 +156,11 @@ class Chat(BaseSDK):
             Union[components.Reasoning, components.ReasoningTypedDict]
         ] = None,
         response_format: Optional[
-            Union[
-                components.ChatGenerationParamsResponseFormatUnion,
-                components.ChatGenerationParamsResponseFormatUnionTypedDict,
-            ]
+            Union[components.ResponseFormat, components.ResponseFormatTypedDict]
         ] = None,
         seed: OptionalNullable[int] = UNSET,
         stop: OptionalNullable[
-            Union[
-                components.ChatGenerationParamsStop,
-                components.ChatGenerationParamsStopTypedDict,
-            ]
+            Union[components.Stop, components.StopTypedDict]
         ] = UNSET,
         stream: Literal[True],
         stream_options: OptionalNullable[
@@ -273,17 +261,11 @@ class Chat(BaseSDK):
             Union[components.Reasoning, components.ReasoningTypedDict]
         ] = None,
         response_format: Optional[
-            Union[
-                components.ChatGenerationParamsResponseFormatUnion,
-                components.ChatGenerationParamsResponseFormatUnionTypedDict,
-            ]
+            Union[components.ResponseFormat, components.ResponseFormatTypedDict]
         ] = None,
         seed: OptionalNullable[int] = UNSET,
         stop: OptionalNullable[
-            Union[
-                components.ChatGenerationParamsStop,
-                components.ChatGenerationParamsStopTypedDict,
-            ]
+            Union[components.Stop, components.StopTypedDict]
         ] = UNSET,
         stream: Optional[bool] = False,
         stream_options: OptionalNullable[
@@ -385,8 +367,7 @@ class Chat(BaseSDK):
                 reasoning, Optional[components.Reasoning]
             ),
             response_format=utils.get_pydantic_model(
-                response_format,
-                Optional[components.ChatGenerationParamsResponseFormatUnion],
+                response_format, Optional[components.ResponseFormat]
             ),
             seed=seed,
             stop=stop,
@@ -526,17 +507,11 @@ class Chat(BaseSDK):
             Union[components.Reasoning, components.ReasoningTypedDict]
         ] = None,
         response_format: Optional[
-            Union[
-                components.ChatGenerationParamsResponseFormatUnion,
-                components.ChatGenerationParamsResponseFormatUnionTypedDict,
-            ]
+            Union[components.ResponseFormat, components.ResponseFormatTypedDict]
         ] = None,
         seed: OptionalNullable[int] = UNSET,
         stop: OptionalNullable[
-            Union[
-                components.ChatGenerationParamsStop,
-                components.ChatGenerationParamsStopTypedDict,
-            ]
+            Union[components.Stop, components.StopTypedDict]
         ] = UNSET,
         stream: Union[Literal[False], None] = None,
         stream_options: OptionalNullable[
@@ -638,17 +613,11 @@ class Chat(BaseSDK):
             Union[components.Reasoning, components.ReasoningTypedDict]
         ] = None,
         response_format: Optional[
-            Union[
-                components.ChatGenerationParamsResponseFormatUnion,
-                components.ChatGenerationParamsResponseFormatUnionTypedDict,
-            ]
+            Union[components.ResponseFormat, components.ResponseFormatTypedDict]
         ] = None,
         seed: OptionalNullable[int] = UNSET,
         stop: OptionalNullable[
-            Union[
-                components.ChatGenerationParamsStop,
-                components.ChatGenerationParamsStopTypedDict,
-            ]
+            Union[components.Stop, components.StopTypedDict]
         ] = UNSET,
         stream: Literal[True],
         stream_options: OptionalNullable[
@@ -749,17 +718,11 @@ class Chat(BaseSDK):
             Union[components.Reasoning, components.ReasoningTypedDict]
         ] = None,
         response_format: Optional[
-            Union[
-                components.ChatGenerationParamsResponseFormatUnion,
-                components.ChatGenerationParamsResponseFormatUnionTypedDict,
-            ]
+            Union[components.ResponseFormat, components.ResponseFormatTypedDict]
         ] = None,
         seed: OptionalNullable[int] = UNSET,
         stop: OptionalNullable[
-            Union[
-                components.ChatGenerationParamsStop,
-                components.ChatGenerationParamsStopTypedDict,
-            ]
+            Union[components.Stop, components.StopTypedDict]
         ] = UNSET,
         stream: Optional[bool] = False,
         stream_options: OptionalNullable[
@@ -861,8 +824,7 @@ class Chat(BaseSDK):
                 reasoning, Optional[components.Reasoning]
             ),
             response_format=utils.get_pydantic_model(
-                response_format,
-                Optional[components.ChatGenerationParamsResponseFormatUnion],
+                response_format, Optional[components.ResponseFormat]
             ),
             seed=seed,
             stop=stop,

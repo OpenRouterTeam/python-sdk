@@ -562,22 +562,22 @@ class Reasoning(BaseModel):
         return m
 
 
-class ChatGenerationParamsResponseFormatPythonTypedDict(TypedDict):
+class ResponseFormatPythonTypedDict(TypedDict):
     type: Literal["python"]
 
 
-class ChatGenerationParamsResponseFormatPython(BaseModel):
+class ResponseFormatPython(BaseModel):
     TYPE: Annotated[
         Annotated[Literal["python"], AfterValidator(validate_const("python"))],
         pydantic.Field(alias="type"),
     ] = "python"
 
 
-class ChatGenerationParamsResponseFormatJSONObjectTypedDict(TypedDict):
+class ResponseFormatJSONObjectTypedDict(TypedDict):
     type: Literal["json_object"]
 
 
-class ChatGenerationParamsResponseFormatJSONObject(BaseModel):
+class ResponseFormatJSONObject(BaseModel):
     TYPE: Annotated[
         Annotated[
             Literal["json_object"], AfterValidator(validate_const("json_object"))
@@ -586,49 +586,45 @@ class ChatGenerationParamsResponseFormatJSONObject(BaseModel):
     ] = "json_object"
 
 
-class ChatGenerationParamsResponseFormatTextTypedDict(TypedDict):
+class ResponseFormatTextTypedDict(TypedDict):
     type: Literal["text"]
 
 
-class ChatGenerationParamsResponseFormatText(BaseModel):
+class ResponseFormatText(BaseModel):
     TYPE: Annotated[
         Annotated[Literal["text"], AfterValidator(validate_const("text"))],
         pydantic.Field(alias="type"),
     ] = "text"
 
 
-ChatGenerationParamsResponseFormatUnionTypedDict = TypeAliasType(
-    "ChatGenerationParamsResponseFormatUnionTypedDict",
+ResponseFormatTypedDict = TypeAliasType(
+    "ResponseFormatTypedDict",
     Union[
-        ChatGenerationParamsResponseFormatTextTypedDict,
-        ChatGenerationParamsResponseFormatJSONObjectTypedDict,
-        ChatGenerationParamsResponseFormatPythonTypedDict,
+        ResponseFormatTextTypedDict,
+        ResponseFormatJSONObjectTypedDict,
+        ResponseFormatPythonTypedDict,
         ResponseFormatJSONSchemaTypedDict,
         ResponseFormatTextGrammarTypedDict,
     ],
 )
 
 
-ChatGenerationParamsResponseFormatUnion = Annotated[
+ResponseFormat = Annotated[
     Union[
-        Annotated[ChatGenerationParamsResponseFormatText, Tag("text")],
-        Annotated[ChatGenerationParamsResponseFormatJSONObject, Tag("json_object")],
+        Annotated[ResponseFormatText, Tag("text")],
+        Annotated[ResponseFormatJSONObject, Tag("json_object")],
         Annotated[ResponseFormatJSONSchema, Tag("json_schema")],
         Annotated[ResponseFormatTextGrammar, Tag("grammar")],
-        Annotated[ChatGenerationParamsResponseFormatPython, Tag("python")],
+        Annotated[ResponseFormatPython, Tag("python")],
     ],
     Discriminator(lambda m: get_discriminator(m, "type", "type")),
 ]
 
 
-ChatGenerationParamsStopTypedDict = TypeAliasType(
-    "ChatGenerationParamsStopTypedDict", Union[str, List[str]]
-)
+StopTypedDict = TypeAliasType("StopTypedDict", Union[str, List[str]])
 
 
-ChatGenerationParamsStop = TypeAliasType(
-    "ChatGenerationParamsStop", Union[str, List[str]]
-)
+Stop = TypeAliasType("Stop", Union[str, List[str]])
 
 
 class DebugTypedDict(TypedDict):
@@ -679,9 +675,9 @@ class ChatGenerationParamsTypedDict(TypedDict):
     metadata: NotRequired[Dict[str, str]]
     presence_penalty: NotRequired[Nullable[float]]
     reasoning: NotRequired[ReasoningTypedDict]
-    response_format: NotRequired[ChatGenerationParamsResponseFormatUnionTypedDict]
+    response_format: NotRequired[ResponseFormatTypedDict]
     seed: NotRequired[Nullable[int]]
-    stop: NotRequired[Nullable[ChatGenerationParamsStopTypedDict]]
+    stop: NotRequired[Nullable[StopTypedDict]]
     stream: NotRequired[bool]
     stream_options: NotRequired[Nullable[ChatStreamOptionsTypedDict]]
     temperature: NotRequired[Nullable[float]]
@@ -733,11 +729,11 @@ class ChatGenerationParams(BaseModel):
 
     reasoning: Optional[Reasoning] = None
 
-    response_format: Optional[ChatGenerationParamsResponseFormatUnion] = None
+    response_format: Optional[ResponseFormat] = None
 
     seed: OptionalNullable[int] = UNSET
 
-    stop: OptionalNullable[ChatGenerationParamsStop] = UNSET
+    stop: OptionalNullable[Stop] = UNSET
 
     stream: Optional[bool] = False
 

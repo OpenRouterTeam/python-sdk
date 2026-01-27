@@ -1,4 +1,4 @@
-# ChatGenerationParamsResponseFormatPython
+# ResponseFormatPython
 
 
 ## Fields
