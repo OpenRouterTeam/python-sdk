@@ -5,6 +5,34 @@
 
 | Name                | Value               |
 | ------------------- | ------------------- |
+| `ANY_SCALE`         | AnyScale            |
+| `ATOMA`             | Atoma               |
+| `CENT_ML`           | Cent-ML             |
+| `CROF_AI`           | CrofAI              |
+| `ENFER`             | Enfer               |
+| `GO_POMELO`         | GoPomelo            |
+| `HUGGING_FACE`      | HuggingFace         |
+| `HYPERBOLIC_2`      | Hyperbolic 2        |
+| `INO_CLOUD`         | InoCloud            |
+| `KLUSTER`           | Kluster             |
+| `LAMBDA`            | Lambda              |
+| `LEPTON`            | Lepton              |
+| `LYNN_2`            | Lynn 2              |
+| `LYNN`              | Lynn                |
+| `MANCER`            | Mancer              |
+| `META`              | Meta                |
+| `MODAL`             | Modal               |
+| `NINETEEN`          | Nineteen            |
+| `OCTO_AI`           | OctoAI              |
+| `RECURSAL`          | Recursal            |
+| `REFLECTION`        | Reflection          |
+| `REPLICATE`         | Replicate           |
+| `SAMBA_NOVA_2`      | SambaNova 2         |
+| `SF_COMPUTE`        | SF Compute          |
+| `TARGON`            | Targon              |
+| `TOGETHER_2`        | Together 2          |
+| `UBICLOUD`          | Ubicloud            |
+| `ONE_DOT_AI`        | 01.AI               |
 | `AI21`              | AI21                |
 | `AION_LABS`         | AionLabs            |
 | `ALIBABA`           | Alibaba             |

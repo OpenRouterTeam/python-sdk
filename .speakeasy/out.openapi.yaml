@@ -2,7 +2,7 @@ openapi: 3.1.0
 info:
   title: OpenRouter API
   version: 1.0.0
-  description: OpenAI-compatible Chat Completions and Completions API with additional OpenRouter features
+  description: OpenAI-compatible API with additional OpenRouter features
   contact:
     name: OpenRouter Support
     url: https://openrouter.ai/docs
@@ -3561,6 +3561,7 @@ components:
         - AI21
         - AionLabs
         - Alibaba
+        - Ambient
         - Amazon Bedrock
         - Amazon Nova
         - Anthropic
@@ -8124,6 +8125,7 @@ components:
               - AI21
               - AionLabs
               - Alibaba
+              - Ambient
               - Amazon Bedrock
               - Amazon Nova
               - Anthropic
@@ -9350,264 +9352,6 @@ components:
       required:
         - data
       additionalProperties: false
-    CompletionFinishReason:
-      anyOf:
-        - type: string
-          enum:
-            - stop
-            - length
-            - content_filter
-          x-speakeasy-unknown-values: allow
-        - type: 'null'
-    CompletionLogprobs:
-      type: object
-      properties:
-        tokens:
-          type: array
-          items:
-            type: string
-        token_logprobs:
-          type: array
-          items:
-            type: number
-        top_logprobs:
-          anyOf:
-            - type: array
-              items:
-                type: object
-                propertyNames:
-                  type: string
-                additionalProperties:
-                  type: number
-            - type: 'null'
-        text_offset:
-          type: array
-          items:
-            type: number
-      required:
-        - tokens
-        - token_logprobs
-        - top_logprobs
-        - text_offset
-    CompletionUsage:
-      type: object
-      properties:
-        prompt_tokens:
-          type: number
-        completion_tokens:
-          type: number
-        total_tokens:
-          type: number
-      required:
-        - prompt_tokens
-        - completion_tokens
-        - total_tokens
-    CompletionCreateParams:
-      type: object
-      properties:
-        model:
-          $ref: '#/components/schemas/ModelName'
-        models:
-          type: array
-          items:
-            $ref: '#/components/schemas/ModelName'
-        prompt:
-          anyOf:
-            - type: string
-            - type: array
-              items:
-                type: string
-            - type: array
-              items:
-                type: number
-            - type: array
-              items:
-                type: array
-                items:
-                  type: number
-        best_of:
-          anyOf:
-            - type: integer
-              minimum: 1
-              maximum: 20
-            - type: 'null'
-        echo:
-          anyOf:
-            - type: boolean
-            - type: 'null'
-        frequency_penalty:
-          anyOf:
-            - type: number
-              minimum: -2
-              maximum: 2
-            - type: 'null'
-        logit_bias:
-          anyOf:
-            - type: object
-              propertyNames:
-                type: string
-              additionalProperties:
-                type: number
-            - type: 'null'
-        logprobs:
-          anyOf:
-            - type: integer
-              minimum: 0
-              maximum: 5
-            - type: 'null'
-        max_tokens:
-          anyOf:
-            - type: integer
-              minimum: 1
-              maximum: 9007199254740991
-            - type: 'null'
-        'n':
-          anyOf:
-            - type: integer
-              minimum: 1
-              maximum: 128
-            - type: 'null'
-        presence_penalty:
-          anyOf:
-            - type: number
-              minimum: -2
-              maximum: 2
-            - type: 'null'
-        seed:
-          anyOf:
-            - type: integer
-              minimum: -9007199254740991
-              maximum: 9007199254740991
-            - type: 'null'
-        stop:
-          anyOf:
-            - anyOf:
-                - type: string
-                - type: array
-                  items:
-                    type: string
-            - type: 'null'
-        stream:
-          default: false
-          type: boolean
-        stream_options:
-          anyOf:
-            - type: object
-              properties:
-                include_usage:
-                  anyOf:
-                    - type: boolean
-                    - type: 'null'
-            - type: 'null'
-        suffix:
-          anyOf:
-            - type: string
-            - type: 'null'
-        temperature:
-          anyOf:
-            - type: number
-              minimum: 0
-              maximum: 2
-            - type: 'null'
-        top_p:
-          anyOf:
-            - type: number
-              minimum: 0
-              maximum: 1
-            - type: 'null'
-        user:
-          type: string
-        metadata:
-          anyOf:
-            - type: object
-              propertyNames:
-                type: string
-              additionalProperties:
-                type: string
-            - type: 'null'
-        response_format:
-          anyOf:
-            - oneOf:
-                - type: object
-                  properties:
-                    type:
-                      type: string
-                      const: text
-                  required:
-                    - type
-                - type: object
-                  properties:
-                    type:
-                      type: string
-                      const: json_object
-                  required:
-                    - type
-                - $ref: '#/components/schemas/ResponseFormatJSONSchema'
-                - $ref: '#/components/schemas/ResponseFormatTextGrammar'
-                - type: object
-                  properties:
-                    type:
-                      type: string
-                      const: python
-                  required:
-                    - type
-              type: object
-            - type: 'null'
-      required:
-        - prompt
-    CompletionChoice:
-      type: object
-      properties:
-        text:
-          type: string
-        index:
-          type: number
-        logprobs:
-          anyOf:
-            - $ref: '#/components/schemas/CompletionLogprobs'
-            - type: 'null'
-        finish_reason:
-          $ref: '#/components/schemas/CompletionFinishReason'
-        native_finish_reason:
-          type: string
-        reasoning:
-          anyOf:
-            - type: string
-            - type: 'null'
-      required:
-        - text
-        - index
-        - logprobs
-        - finish_reason
-    CompletionResponse:
-      type: object
-      properties:
-        id:
-          type: string
-        object:
-          type: string
-          const: text_completion
-        created:
-          type: number
-        model:
-          type: string
-        provider:
-          type: string
-        system_fingerprint:
-          type: string
-        choices:
-          type: array
-          items:
-            $ref: '#/components/schemas/CompletionChoice'
-        usage:
-          $ref: '#/components/schemas/CompletionUsage'
-      required:
-        - id
-        - object
-        - created
-        - model
-        - choices
-      additionalProperties: false
   parameters: {AppIdentifier: {name: HTTP-Referer, in: header, schema: {type: string}, description: "The app identifier should be your app's URL and is used as the primary identifier for rankings.\nThis is used to track API usage per application.\n"}, AppDisplayName: {name: X-Title, in: header, schema: {type: string}, description: "The app display name allows you to customize how your app appears in OpenRouter's dashboard.\n"}}
   securitySchemes:
     apiKey:
@@ -9734,7 +9478,7 @@ paths:
       x-speakeasy-name-override: create
       x-speakeasy-stream-request-field: stream
       tags:
-        - anthropic.messages
+        - Anthropic Messages
       summary: Create a message
       description: >-
         Creates a message using the Anthropic Messages API format. Supports text, images, PDFs, tools, and extended thinking.
@@ -10621,6 +10365,131 @@ paths:
                         nullable: true
                         description: Router used for the request (e.g., openrouter/auto)
                         example: openrouter/auto
+                      provider_responses:
+                        type: array
+                        nullable: true
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                            endpoint_id:
+                              type: string
+                            model_permaslug:
+                              type: string
+                            provider_name:
+                              type: string
+                              enum:
+                                - AnyScale
+                                - Atoma
+                                - Cent-ML
+                                - CrofAI
+                                - Enfer
+                                - GoPomelo
+                                - HuggingFace
+                                - Hyperbolic 2
+                                - InoCloud
+                                - Kluster
+                                - Lambda
+                                - Lepton
+                                - Lynn 2
+                                - Lynn
+                                - Mancer
+                                - Meta
+                                - Modal
+                                - Nineteen
+                                - OctoAI
+                                - Recursal
+                                - Reflection
+                                - Replicate
+                                - SambaNova 2
+                                - SF Compute
+                                - Targon
+                                - Together 2
+                                - Ubicloud
+                                - 01.AI
+                                - AI21
+                                - AionLabs
+                                - Alibaba
+                                - Ambient
+                                - Amazon Bedrock
+                                - Amazon Nova
+                                - Anthropic
+                                - Arcee AI
+                                - AtlasCloud
+                                - Avian
+                                - Azure
+                                - BaseTen
+                                - BytePlus
+                                - Black Forest Labs
+                                - Cerebras
+                                - Chutes
+                                - Cirrascale
+                                - Clarifai
+                                - Cloudflare
+                                - Cohere
+                                - Crusoe
+                                - DeepInfra
+                                - DeepSeek
+                                - Featherless
+                                - Fireworks
+                                - Friendli
+                                - GMICloud
+                                - Google
+                                - Google AI Studio
+                                - Groq
+                                - Hyperbolic
+                                - Inception
+                                - Inceptron
+                                - InferenceNet
+                                - Infermatic
+                                - Inflection
+                                - Liquid
+                                - Mara
+                                - Mancer 2
+                                - Minimax
+                                - ModelRun
+                                - Mistral
+                                - Modular
+                                - Moonshot AI
+                                - Morph
+                                - NCompass
+                                - Nebius
+                                - NextBit
+                                - Novita
+                                - Nvidia
+                                - OpenAI
+                                - OpenInference
+                                - Parasail
+                                - Perplexity
+                                - Phala
+                                - Relace
+                                - SambaNova
+                                - Seed
+                                - SiliconFlow
+                                - Sourceful
+                                - Stealth
+                                - StreamLake
+                                - Switchpoint
+                                - Together
+                                - Upstage
+                                - Venice
+                                - WandB
+                                - Xiaomi
+                                - xAI
+                                - Z.AI
+                                - FakeProvider
+                              x-speakeasy-unknown-values: allow
+                            status:
+                              type: number
+                              nullable: true
+                            latency:
+                              type: number
+                            is_byok:
+                              type: boolean
+                          required:
+                            - status
+                        description: List of provider responses for this generation, including fallback attempts
                     required:
                       - id
                       - upstream_id
@@ -10655,6 +10524,7 @@ paths:
                       - external_user
                       - api_type
                       - router
+                      - provider_responses
                     description: Generation data
                 required:
                   - data
@@ -10787,7 +10657,9 @@ paths:
       tags:
         - Models
       x-speakeasy-name-override: listForUser
-      summary: List models filtered by user provider preferences
+      description: >-
+        List models filtered by user provider preferences, [privacy settings](https://openrouter.ai/docs/guides/privacy/logging), and [guardrails](https://openrouter.ai/docs/guides/features/guardrails). If requesting through `eu.openrouter.ai/api/v1/...` the results will be filtered to models that satisfy [EU in-region routing](https://openrouter.ai/docs/guides/privacy/logging#enterprise-eu-in-region-routing).
+      summary: List models filtered by user provider preferences, privacy settings, and guardrails
       security:
         - bearer: []
       responses:
@@ -10803,6 +10675,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UnauthorizedResponse'
+        '404':
+          description: Not Found - No eligible endpoints found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
         '500':
           description: Internal Server Error
           content:
@@ -13802,55 +13680,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ChatError'
-  /completions:
-    post:
-      summary: Create a completion
-      x-speakeasy-group: completions
-      x-speakeasy-name-override: generate
-      x-speakeasy-stream-request-field: stream
-      description: Creates a completion for the provided prompt and parameters. Supports both streaming and non-streaming modes.
-      tags:
-        - Completions
-      requestBody:
-        required: true
-        description: Completion request parameters
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CompletionCreateParams'
-      responses:
-        '200':
-          description: Successful completion response
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CompletionResponse'
-                description: Completion response
-        '400':
-          description: Bad request - invalid parameters
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ChatError'
-        '401':
-          description: Unauthorized - invalid API key
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ChatError'
-        '429':
-          description: Too many requests - rate limit exceeded
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ChatError'
-        '500':
-          description: Internal server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ChatError'
-      operationId: createCompletions
 servers:
   - url: https://openrouter.ai/api/v1
     description: Production server
@@ -13865,10 +13694,10 @@ tags:
     description: API key management endpoints
   - name: Analytics
     description: Analytics and usage endpoints
+  - name: Anthropic Messages
+    description: Anthropic Messages endpoints
   - name: Chat
     description: Chat completion endpoints
-  - name: Completions
-    description: Text completion endpoints
   - name: Credits
     description: Credit management endpoints
   - name: Embeddings
@@ -13885,8 +13714,6 @@ tags:
     description: OAuth authentication endpoints
   - name: Providers
     description: Provider information endpoints
-  - name: anthropic.messages
-    description: anthropic.messages endpoints
   - name: beta.responses
     description: beta.responses endpoints
 x-fern-base-path: /

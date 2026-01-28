@@ -13,6 +13,7 @@ Schema0Enum = Union[
         "AI21",
         "AionLabs",
         "Alibaba",
+        "Ambient",
         "Amazon Bedrock",
         "Amazon Nova",
         "Anthropic",

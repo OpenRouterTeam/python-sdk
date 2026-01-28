@@ -8,6 +8,7 @@
 | `AI21`              | AI21                |
 | `AION_LABS`         | AionLabs            |
 | `ALIBABA`           | Alibaba             |
+| `AMBIENT`           | Ambient             |
 | `AMAZON_BEDROCK`    | Amazon Bedrock      |
 | `AMAZON_NOVA`       | Amazon Nova         |
 | `ANTHROPIC`         | Anthropic           |

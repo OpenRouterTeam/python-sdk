@@ -1,4 +1,4 @@
-# ChatGenerationParamsResponseFormatText
+# ResponseFormatText
 
 
 ## Fields

@@ -20,7 +20,6 @@ if TYPE_CHECKING:
     from openrouter.api_keys import APIKeys
     from openrouter.beta import Beta
     from openrouter.chat import Chat
-    from openrouter.completions import Completions
     from openrouter.credits import Credits
     from openrouter.embeddings import Embeddings
     from openrouter.endpoints import Endpoints
@@ -32,7 +31,7 @@ if TYPE_CHECKING:
 
 
 class OpenRouter(BaseSDK):
-    r"""OpenRouter API: OpenAI-compatible Chat Completions and Completions API with additional OpenRouter features
+    r"""OpenRouter API: OpenAI-compatible API with additional OpenRouter features
     https://openrouter.ai/docs - OpenRouter Documentation
     """
 
@@ -58,7 +57,6 @@ class OpenRouter(BaseSDK):
     o_auth: "OAuth"
     r"""OAuth authentication endpoints"""
     chat: "Chat"
-    completions: "Completions"
     _sub_sdk_map = {
         "beta": ("openrouter.beta", "Beta"),
         "analytics": ("openrouter.analytics", "Analytics"),
@@ -72,7 +70,6 @@ class OpenRouter(BaseSDK):
         "guardrails": ("openrouter.guardrails", "Guardrails"),
         "o_auth": ("openrouter.oauth", "OAuth"),
         "chat": ("openrouter.chat", "Chat"),
-        "completions": ("openrouter.completions", "Completions"),
     }
 
     def __init__(
