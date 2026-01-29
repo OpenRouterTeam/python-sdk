@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: cfd52247-6a25-4c6d-bbce-fe6fce0cd69d
 management:
-  docChecksum: 7136b263714e485a5a96ee056b6e3f36
+  docChecksum: 8e4409198e29bd1054772727ad1cd368
   docVersion: 1.0.0
   speakeasyVersion: 1.666.0
   generationVersion: 2.768.0
-  releaseVersion: 0.1.3
-  configChecksum: d03f8606816d7028a10e566c4ff2ac44
+  releaseVersion: 0.4.0
+  configChecksum: 3a0d4d70223d25bf75028237ebd7e079
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
@@ -60,25 +60,7 @@ generatedFiles:
   - docs/components/chatcompletionfinishreason.md
   - docs/components/chaterrorerror.md
   - docs/components/chatgenerationparams.md
-  - docs/components/chatgenerationparamsdatacollection.md
   - docs/components/chatgenerationparamsimageconfig.md
-  - docs/components/chatgenerationparamsmaxprice.md
-  - docs/components/chatgenerationparamspluginautorouter.md
-  - docs/components/chatgenerationparamspluginfileparser.md
-  - docs/components/chatgenerationparamspluginmoderation.md
-  - docs/components/chatgenerationparamspluginresponsehealing.md
-  - docs/components/chatgenerationparamspluginunion.md
-  - docs/components/chatgenerationparamspluginweb.md
-  - docs/components/chatgenerationparamspreferredmaxlatency.md
-  - docs/components/chatgenerationparamspreferredmaxlatencyunion.md
-  - docs/components/chatgenerationparamspreferredminthroughput.md
-  - docs/components/chatgenerationparamspreferredminthroughputunion.md
-  - docs/components/chatgenerationparamsprovider.md
-  - docs/components/chatgenerationparamsresponseformatjsonobject.md
-  - docs/components/chatgenerationparamsresponseformatpython.md
-  - docs/components/chatgenerationparamsresponseformattext.md
-  - docs/components/chatgenerationparamsresponseformatunion.md
-  - docs/components/chatgenerationparamsstop.md
   - docs/components/chatgenerationtokenusage.md
   - docs/components/chatmessagecontentitem.md
   - docs/components/chatmessagecontentitemaudio.md
@@ -109,23 +91,15 @@ generatedFiles:
   - docs/components/chatstreamoptions.md
   - docs/components/code.md
   - docs/components/codeenum.md
-  - docs/components/completionchoice.md
-  - docs/components/completioncreateparams.md
-  - docs/components/completioncreateparamsresponseformatjsonobject.md
-  - docs/components/completioncreateparamsresponseformatpython.md
-  - docs/components/completioncreateparamsresponseformattext.md
-  - docs/components/completioncreateparamsresponseformatunion.md
-  - docs/components/completioncreateparamsstop.md
-  - docs/components/completionfinishreason.md
-  - docs/components/completionlogprobs.md
-  - docs/components/completionresponse.md
+  - docs/components/completion.md
   - docs/components/completiontokensdetails.md
-  - docs/components/completionusage.md
   - docs/components/costdetails.md
   - docs/components/createchargerequest.md
   - docs/components/datacollection.md
   - docs/components/debug.md
   - docs/components/defaultparameters.md
+  - docs/components/developermessage.md
+  - docs/components/developermessagecontent.md
   - docs/components/edgenetworktimeoutresponseerrordata.md
   - docs/components/effort.md
   - docs/components/endpointstatus.md
@@ -150,8 +124,6 @@ generatedFiles:
   - docs/components/listendpointsresponse.md
   - docs/components/logprob.md
   - docs/components/message.md
-  - docs/components/messagecontent.md
-  - docs/components/messagedeveloper.md
   - docs/components/modality.md
   - docs/components/model.md
   - docs/components/modelarchitecture.md
@@ -273,13 +245,6 @@ generatedFiles:
   - docs/components/openresponsesrequestmaxprice.md
   - docs/components/openresponsesrequestonly.md
   - docs/components/openresponsesrequestorder.md
-  - docs/components/openresponsesrequestpluginautorouter.md
-  - docs/components/openresponsesrequestpluginfileparser.md
-  - docs/components/openresponsesrequestpluginmoderation.md
-  - docs/components/openresponsesrequestpluginresponsehealing.md
-  - docs/components/openresponsesrequestpluginunion.md
-  - docs/components/openresponsesrequestpluginweb.md
-  - docs/components/openresponsesrequestprovider.md
   - docs/components/openresponsesrequestsort.md
   - docs/components/openresponsesrequesttoolfunction.md
   - docs/components/openresponsesrequesttoolunion.md
@@ -342,11 +307,18 @@ generatedFiles:
   - docs/components/percentilestats.md
   - docs/components/percentilethroughputcutoffs.md
   - docs/components/perrequestlimits.md
+  - docs/components/plugin.md
+  - docs/components/pluginautorouter.md
+  - docs/components/pluginfileparser.md
+  - docs/components/pluginmoderation.md
+  - docs/components/pluginresponsehealing.md
+  - docs/components/pluginweb.md
   - docs/components/preferredmaxlatency.md
   - docs/components/preferredminthroughput.md
   - docs/components/pricing.md
   - docs/components/prompt.md
   - docs/components/prompttokensdetails.md
+  - docs/components/provider.md
   - docs/components/providername.md
   - docs/components/provideroverloadedresponseerrordata.md
   - docs/components/providerpreferences.md
@@ -367,7 +339,6 @@ generatedFiles:
   - docs/components/publicendpointquantization.md
   - docs/components/publicpricing.md
   - docs/components/quantization.md
-  - docs/components/quantizations.md
   - docs/components/reason.md
   - docs/components/reasoning.md
   - docs/components/reasoningsummarytext.md
@@ -376,7 +347,11 @@ generatedFiles:
   - docs/components/reasoningtextcontent.md
   - docs/components/reasoningtextcontenttype.md
   - docs/components/requesttimeoutresponseerrordata.md
+  - docs/components/responseformat.md
+  - docs/components/responseformatjsonobject.md
   - docs/components/responseformatjsonschema.md
+  - docs/components/responseformatpython.md
+  - docs/components/responseformattext.md
   - docs/components/responseformattextconfig.md
   - docs/components/responseformattextgrammar.md
   - docs/components/responseinputaudio.md
@@ -438,17 +413,30 @@ generatedFiles:
   - docs/components/responsetextconfigverbosity.md
   - docs/components/route.md
   - docs/components/schema0.md
-  - docs/components/schema0enum.md
-  - docs/components/schema2.md
-  - docs/components/schema2reasoningencrypted.md
-  - docs/components/schema2reasoningsummary.md
-  - docs/components/schema2reasoningtext.md
-  - docs/components/schema4.md
+  - docs/components/schema10.md
+  - docs/components/schema14.md
+  - docs/components/schema15.md
+  - docs/components/schema15union.md
+  - docs/components/schema17.md
+  - docs/components/schema17autorouter.md
+  - docs/components/schema17fileparser.md
+  - docs/components/schema17moderation.md
+  - docs/components/schema17responsehealing.md
+  - docs/components/schema17web.md
+  - docs/components/schema19.md
+  - docs/components/schema19reasoningencrypted.md
+  - docs/components/schema19reasoningsummary.md
+  - docs/components/schema19reasoningtext.md
+  - docs/components/schema21.md
+  - docs/components/schema3.md
+  - docs/components/schema5.md
+  - docs/components/schema5enum.md
+  - docs/components/schema8.md
   - docs/components/security.md
   - docs/components/servicetier.md
   - docs/components/serviceunavailableresponseerrordata.md
   - docs/components/sortenum.md
-  - docs/components/streamoptions.md
+  - docs/components/stop.md
   - docs/components/systemmessage.md
   - docs/components/systemmessagecontent.md
   - docs/components/tokenizer.md
@@ -606,6 +594,8 @@ generatedFiles:
   - docs/operations/metadata.md
   - docs/operations/object.md
   - docs/operations/objectembedding.md
+  - docs/operations/providername.md
+  - docs/operations/providerresponse.md
   - docs/operations/ratelimit.md
   - docs/operations/sendchatcompletionrequestresponse.md
   - docs/operations/transferintent.md
@@ -627,7 +617,6 @@ generatedFiles:
   - docs/sdks/analytics/README.md
   - docs/sdks/apikeys/README.md
   - docs/sdks/chat/README.md
-  - docs/sdks/completions/README.md
   - docs/sdks/credits/README.md
   - docs/sdks/embeddings/README.md
   - docs/sdks/endpoints/README.md
@@ -651,10 +640,12 @@ generatedFiles:
   - src/openrouter/basesdk.py
   - src/openrouter/beta.py
   - src/openrouter/chat.py
-  - src/openrouter/completions.py
   - src/openrouter/components/__init__.py
-  - src/openrouter/components/_schema0.py
-  - src/openrouter/components/_schema2.py
+  - src/openrouter/components/_schema10.py
+  - src/openrouter/components/_schema14.py
+  - src/openrouter/components/_schema17.py
+  - src/openrouter/components/_schema19.py
+  - src/openrouter/components/_schema5.py
   - src/openrouter/components/activityitem.py
   - src/openrouter/components/assistantmessage.py
   - src/openrouter/components/badgatewayresponseerrordata.py
@@ -679,14 +670,10 @@ generatedFiles:
   - src/openrouter/components/chatstreamingmessagetoolcall.py
   - src/openrouter/components/chatstreamingresponsechunk.py
   - src/openrouter/components/chatstreamoptions.py
-  - src/openrouter/components/completionchoice.py
-  - src/openrouter/components/completioncreateparams.py
-  - src/openrouter/components/completionlogprobs.py
-  - src/openrouter/components/completionresponse.py
-  - src/openrouter/components/completionusage.py
   - src/openrouter/components/createchargerequest.py
   - src/openrouter/components/datacollection.py
   - src/openrouter/components/defaultparameters.py
+  - src/openrouter/components/developermessage.py
   - src/openrouter/components/edgenetworktimeoutresponseerrordata.py
   - src/openrouter/components/endpointstatus.py
   - src/openrouter/components/filecitation.py
@@ -1021,7 +1008,7 @@ examples:
           id: "<id>"
       responses:
         "200":
-          application/json: {"data": {"id": "gen-3bhGkxlo4XFrqiabUM7NDtwDzWwG", "upstream_id": "chatcmpl-791bcf62-080e-4568-87d0-94c72e3b4946", "total_cost": 0.0015, "cache_discount": 0.0002, "upstream_inference_cost": 0.0012, "created_at": "2024-07-15T23:33:19.433273+00:00", "model": "sao10k/l3-stheno-8b", "app_id": 12345, "streamed": true, "cancelled": false, "provider_name": "Infermatic", "latency": 1250, "moderation_latency": 50, "generation_time": 1200, "finish_reason": "stop", "tokens_prompt": 10, "tokens_completion": 25, "native_tokens_prompt": 10, "native_tokens_completion": 25, "native_tokens_completion_images": 0, "native_tokens_reasoning": 5, "native_tokens_cached": 3, "num_media_prompt": 1, "num_input_audio_prompt": 0, "num_media_completion": 0, "num_search_results": 5, "origin": "https://openrouter.ai/", "usage": 0.0015, "is_byok": false, "native_finish_reason": "stop", "external_user": "user-123", "api_type": "completions", "router": "openrouter/auto"}}
+          application/json: {"data": {"id": "gen-3bhGkxlo4XFrqiabUM7NDtwDzWwG", "upstream_id": "chatcmpl-791bcf62-080e-4568-87d0-94c72e3b4946", "total_cost": 0.0015, "cache_discount": 0.0002, "upstream_inference_cost": 0.0012, "created_at": "2024-07-15T23:33:19.433273+00:00", "model": "sao10k/l3-stheno-8b", "app_id": 12345, "streamed": true, "cancelled": false, "provider_name": "Infermatic", "latency": 1250, "moderation_latency": 50, "generation_time": 1200, "finish_reason": "stop", "tokens_prompt": 10, "tokens_completion": 25, "native_tokens_prompt": 10, "native_tokens_completion": 25, "native_tokens_completion_images": 0, "native_tokens_reasoning": 5, "native_tokens_cached": 3, "num_media_prompt": 1, "num_input_audio_prompt": 0, "num_media_completion": 0, "num_search_results": 5, "origin": "https://openrouter.ai/", "usage": 0.0015, "is_byok": false, "native_finish_reason": "stop", "external_user": "user-123", "api_type": "completions", "router": "openrouter/auto", "provider_responses": []}}
         "401":
           application/json: {"error": {"code": 401, "message": "Missing Authentication header"}}
         "402":
@@ -1063,6 +1050,8 @@ examples:
           application/json: {"error": {"code": 401, "message": "Missing Authentication header"}}
         "500":
           application/json: {"error": {"code": 500, "message": "Internal Server Error"}}
+        "404":
+          application/json: {"error": {"code": 404, "message": "Resource not found"}}
   listEndpoints:
     speakeasy-default-list-endpoints:
       parameters:

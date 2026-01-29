@@ -15,73 +15,47 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 class PricingTypedDict(TypedDict):
     prompt: str
-    r"""A value in string format that is a large number"""
     completion: str
-    r"""A value in string format that is a large number"""
     request: NotRequired[str]
-    r"""A value in string format that is a large number"""
     image: NotRequired[str]
-    r"""A value in string format that is a large number"""
     image_token: NotRequired[str]
-    r"""A value in string format that is a large number"""
     image_output: NotRequired[str]
-    r"""A value in string format that is a large number"""
     audio: NotRequired[str]
-    r"""A value in string format that is a large number"""
     audio_output: NotRequired[str]
-    r"""A value in string format that is a large number"""
     input_audio_cache: NotRequired[str]
-    r"""A value in string format that is a large number"""
     web_search: NotRequired[str]
-    r"""A value in string format that is a large number"""
     internal_reasoning: NotRequired[str]
-    r"""A value in string format that is a large number"""
     input_cache_read: NotRequired[str]
-    r"""A value in string format that is a large number"""
     input_cache_write: NotRequired[str]
-    r"""A value in string format that is a large number"""
     discount: NotRequired[float]
 
 
 class Pricing(BaseModel):
     prompt: str
-    r"""A value in string format that is a large number"""
 
     completion: str
-    r"""A value in string format that is a large number"""
 
     request: Optional[str] = None
-    r"""A value in string format that is a large number"""
 
     image: Optional[str] = None
-    r"""A value in string format that is a large number"""
 
     image_token: Optional[str] = None
-    r"""A value in string format that is a large number"""
 
     image_output: Optional[str] = None
-    r"""A value in string format that is a large number"""
 
     audio: Optional[str] = None
-    r"""A value in string format that is a large number"""
 
     audio_output: Optional[str] = None
-    r"""A value in string format that is a large number"""
 
     input_audio_cache: Optional[str] = None
-    r"""A value in string format that is a large number"""
 
     web_search: Optional[str] = None
-    r"""A value in string format that is a large number"""
 
     internal_reasoning: Optional[str] = None
-    r"""A value in string format that is a large number"""
 
     input_cache_read: Optional[str] = None
-    r"""A value in string format that is a large number"""
 
     input_cache_write: Optional[str] = None
-    r"""A value in string format that is a large number"""
 
     discount: Optional[float] = None
 
