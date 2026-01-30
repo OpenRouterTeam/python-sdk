@@ -84,16 +84,10 @@ class Responses(BaseSDK):
         truncation: OptionalNullable[components.Truncation] = UNSET,
         stream: Union[Literal[False], None] = None,
         provider: OptionalNullable[
-            Union[
-                components.OpenResponsesRequestProvider,
-                components.OpenResponsesRequestProviderTypedDict,
-            ]
+            Union[components.Provider, components.ProviderTypedDict]
         ] = UNSET,
         plugins: Optional[
-            Union[
-                List[components.OpenResponsesRequestPluginUnion],
-                List[components.OpenResponsesRequestPluginUnionTypedDict],
-            ]
+            Union[List[components.Plugin], List[components.PluginTypedDict]]
         ] = None,
         user: Optional[str] = None,
         session_id: Optional[str] = None,
@@ -212,16 +206,10 @@ class Responses(BaseSDK):
         truncation: OptionalNullable[components.Truncation] = UNSET,
         stream: Literal[True],
         provider: OptionalNullable[
-            Union[
-                components.OpenResponsesRequestProvider,
-                components.OpenResponsesRequestProviderTypedDict,
-            ]
+            Union[components.Provider, components.ProviderTypedDict]
         ] = UNSET,
         plugins: Optional[
-            Union[
-                List[components.OpenResponsesRequestPluginUnion],
-                List[components.OpenResponsesRequestPluginUnionTypedDict],
-            ]
+            Union[List[components.Plugin], List[components.PluginTypedDict]]
         ] = None,
         user: Optional[str] = None,
         session_id: Optional[str] = None,
@@ -339,16 +327,10 @@ class Responses(BaseSDK):
         truncation: OptionalNullable[components.Truncation] = UNSET,
         stream: Optional[bool] = False,
         provider: OptionalNullable[
-            Union[
-                components.OpenResponsesRequestProvider,
-                components.OpenResponsesRequestProviderTypedDict,
-            ]
+            Union[components.Provider, components.ProviderTypedDict]
         ] = UNSET,
         plugins: Optional[
-            Union[
-                List[components.OpenResponsesRequestPluginUnion],
-                List[components.OpenResponsesRequestPluginUnionTypedDict],
-            ]
+            Union[List[components.Plugin], List[components.PluginTypedDict]]
         ] = None,
         user: Optional[str] = None,
         session_id: Optional[str] = None,
@@ -453,10 +435,10 @@ class Responses(BaseSDK):
             truncation=truncation,
             stream=stream,
             provider=utils.get_pydantic_model(
-                provider, OptionalNullable[components.OpenResponsesRequestProvider]
+                provider, OptionalNullable[components.Provider]
             ),
             plugins=utils.get_pydantic_model(
-                plugins, Optional[List[components.OpenResponsesRequestPluginUnion]]
+                plugins, Optional[List[components.Plugin]]
             ),
             user=user,
             session_id=session_id,
@@ -717,16 +699,10 @@ class Responses(BaseSDK):
         truncation: OptionalNullable[components.Truncation] = UNSET,
         stream: Union[Literal[False], None] = None,
         provider: OptionalNullable[
-            Union[
-                components.OpenResponsesRequestProvider,
-                components.OpenResponsesRequestProviderTypedDict,
-            ]
+            Union[components.Provider, components.ProviderTypedDict]
         ] = UNSET,
         plugins: Optional[
-            Union[
-                List[components.OpenResponsesRequestPluginUnion],
-                List[components.OpenResponsesRequestPluginUnionTypedDict],
-            ]
+            Union[List[components.Plugin], List[components.PluginTypedDict]]
         ] = None,
         user: Optional[str] = None,
         session_id: Optional[str] = None,
@@ -845,16 +821,10 @@ class Responses(BaseSDK):
         truncation: OptionalNullable[components.Truncation] = UNSET,
         stream: Literal[True],
         provider: OptionalNullable[
-            Union[
-                components.OpenResponsesRequestProvider,
-                components.OpenResponsesRequestProviderTypedDict,
-            ]
+            Union[components.Provider, components.ProviderTypedDict]
         ] = UNSET,
         plugins: Optional[
-            Union[
-                List[components.OpenResponsesRequestPluginUnion],
-                List[components.OpenResponsesRequestPluginUnionTypedDict],
-            ]
+            Union[List[components.Plugin], List[components.PluginTypedDict]]
         ] = None,
         user: Optional[str] = None,
         session_id: Optional[str] = None,
@@ -972,16 +942,10 @@ class Responses(BaseSDK):
         truncation: OptionalNullable[components.Truncation] = UNSET,
         stream: Optional[bool] = False,
         provider: OptionalNullable[
-            Union[
-                components.OpenResponsesRequestProvider,
-                components.OpenResponsesRequestProviderTypedDict,
-            ]
+            Union[components.Provider, components.ProviderTypedDict]
         ] = UNSET,
         plugins: Optional[
-            Union[
-                List[components.OpenResponsesRequestPluginUnion],
-                List[components.OpenResponsesRequestPluginUnionTypedDict],
-            ]
+            Union[List[components.Plugin], List[components.PluginTypedDict]]
         ] = None,
         user: Optional[str] = None,
         session_id: Optional[str] = None,
@@ -1086,10 +1050,10 @@ class Responses(BaseSDK):
             truncation=truncation,
             stream=stream,
             provider=utils.get_pydantic_model(
-                provider, OptionalNullable[components.OpenResponsesRequestProvider]
+                provider, OptionalNullable[components.Provider]
             ),
             plugins=utils.get_pydantic_model(
-                plugins, Optional[List[components.OpenResponsesRequestPluginUnion]]
+                plugins, Optional[List[components.Plugin]]
             ),
             user=user,
             session_id=session_id,
