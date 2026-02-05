@@ -9,11 +9,50 @@ from openrouter.types import (
     UNSET_SENTINEL,
     UnrecognizedStr,
 )
-from openrouter.utils import validate_open_enum
+from openrouter.utils import (
+    FieldMetadata,
+    HeaderMetadata,
+    RequestMetadata,
+    validate_open_enum,
+)
+import pydantic
 from pydantic import model_serializer
 from pydantic.functional_validators import PlainValidator
 from typing import Literal, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypedDict
+
+
+class ExchangeAuthCodeForAPIKeyGlobalsTypedDict(TypedDict):
+    http_referer: NotRequired[str]
+    r"""The app identifier should be your app's URL and is used as the primary identifier for rankings.
+    This is used to track API usage per application.
+
+    """
+    x_title: NotRequired[str]
+    r"""The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+    """
+
+
+class ExchangeAuthCodeForAPIKeyGlobals(BaseModel):
+    http_referer: Annotated[
+        Optional[str],
+        pydantic.Field(alias="HTTP-Referer"),
+        FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
+    ] = None
+    r"""The app identifier should be your app's URL and is used as the primary identifier for rankings.
+    This is used to track API usage per application.
+
+    """
+
+    x_title: Annotated[
+        Optional[str],
+        pydantic.Field(alias="X-Title"),
+        FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
+    ] = None
+    r"""The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+    """
 
 
 ExchangeAuthCodeForAPIKeyCodeChallengeMethod = Union[
@@ -26,7 +65,7 @@ ExchangeAuthCodeForAPIKeyCodeChallengeMethod = Union[
 r"""The method used to generate the code challenge"""
 
 
-class ExchangeAuthCodeForAPIKeyRequestTypedDict(TypedDict):
+class ExchangeAuthCodeForAPIKeyRequestBodyTypedDict(TypedDict):
     code: str
     r"""The authorization code received from the OAuth redirect"""
     code_verifier: NotRequired[str]
@@ -37,7 +76,7 @@ class ExchangeAuthCodeForAPIKeyRequestTypedDict(TypedDict):
     r"""The method used to generate the code challenge"""
 
 
-class ExchangeAuthCodeForAPIKeyRequest(BaseModel):
+class ExchangeAuthCodeForAPIKeyRequestBody(BaseModel):
     code: str
     r"""The authorization code received from the OAuth redirect"""
 
@@ -79,6 +118,45 @@ class ExchangeAuthCodeForAPIKeyRequest(BaseModel):
                 m[k] = val
 
         return m
+
+
+class ExchangeAuthCodeForAPIKeyRequestTypedDict(TypedDict):
+    request_body: ExchangeAuthCodeForAPIKeyRequestBodyTypedDict
+    http_referer: NotRequired[str]
+    r"""The app identifier should be your app's URL and is used as the primary identifier for rankings.
+    This is used to track API usage per application.
+
+    """
+    x_title: NotRequired[str]
+    r"""The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+    """
+
+
+class ExchangeAuthCodeForAPIKeyRequest(BaseModel):
+    request_body: Annotated[
+        ExchangeAuthCodeForAPIKeyRequestBody,
+        FieldMetadata(request=RequestMetadata(media_type="application/json")),
+    ]
+
+    http_referer: Annotated[
+        Optional[str],
+        pydantic.Field(alias="HTTP-Referer"),
+        FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
+    ] = None
+    r"""The app identifier should be your app's URL and is used as the primary identifier for rankings.
+    This is used to track API usage per application.
+
+    """
+
+    x_title: Annotated[
+        Optional[str],
+        pydantic.Field(alias="X-Title"),
+        FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
+    ] = None
+    r"""The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+    """
 
 
 class ExchangeAuthCodeForAPIKeyResponseTypedDict(TypedDict):

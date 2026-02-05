@@ -2,21 +2,88 @@
 
 from __future__ import annotations
 from openrouter.types import BaseModel, Nullable, UNSET_SENTINEL, UnrecognizedStr
-from openrouter.utils import FieldMetadata, QueryParamMetadata, validate_open_enum
+from openrouter.utils import (
+    FieldMetadata,
+    HeaderMetadata,
+    QueryParamMetadata,
+    validate_open_enum,
+)
+import pydantic
 from pydantic import model_serializer
 from pydantic.functional_validators import PlainValidator
-from typing import Literal, Union
-from typing_extensions import Annotated, TypedDict
+from typing import List, Literal, Optional, Union
+from typing_extensions import Annotated, NotRequired, TypedDict
+
+
+class GetGenerationGlobalsTypedDict(TypedDict):
+    http_referer: NotRequired[str]
+    r"""The app identifier should be your app's URL and is used as the primary identifier for rankings.
+    This is used to track API usage per application.
+
+    """
+    x_title: NotRequired[str]
+    r"""The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+    """
+
+
+class GetGenerationGlobals(BaseModel):
+    http_referer: Annotated[
+        Optional[str],
+        pydantic.Field(alias="HTTP-Referer"),
+        FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
+    ] = None
+    r"""The app identifier should be your app's URL and is used as the primary identifier for rankings.
+    This is used to track API usage per application.
+
+    """
+
+    x_title: Annotated[
+        Optional[str],
+        pydantic.Field(alias="X-Title"),
+        FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
+    ] = None
+    r"""The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+    """
 
 
 class GetGenerationRequestTypedDict(TypedDict):
     id: str
+    http_referer: NotRequired[str]
+    r"""The app identifier should be your app's URL and is used as the primary identifier for rankings.
+    This is used to track API usage per application.
+
+    """
+    x_title: NotRequired[str]
+    r"""The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+    """
 
 
 class GetGenerationRequest(BaseModel):
     id: Annotated[
         str, FieldMetadata(query=QueryParamMetadata(style="form", explode=True))
     ]
+
+    http_referer: Annotated[
+        Optional[str],
+        pydantic.Field(alias="HTTP-Referer"),
+        FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
+    ] = None
+    r"""The app identifier should be your app's URL and is used as the primary identifier for rankings.
+    This is used to track API usage per application.
+
+    """
+
+    x_title: Annotated[
+        Optional[str],
+        pydantic.Field(alias="X-Title"),
+        FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
+    ] = None
+    r"""The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+    """
 
 
 APIType = Union[
@@ -27,6 +94,178 @@ APIType = Union[
     UnrecognizedStr,
 ]
 r"""Type of API used for the generation"""
+
+
+ProviderName = Union[
+    Literal[
+        "AnyScale",
+        "Atoma",
+        "Cent-ML",
+        "CrofAI",
+        "Enfer",
+        "GoPomelo",
+        "HuggingFace",
+        "Hyperbolic 2",
+        "InoCloud",
+        "Kluster",
+        "Lambda",
+        "Lepton",
+        "Lynn 2",
+        "Lynn",
+        "Mancer",
+        "Meta",
+        "Modal",
+        "Nineteen",
+        "OctoAI",
+        "Recursal",
+        "Reflection",
+        "Replicate",
+        "SambaNova 2",
+        "SF Compute",
+        "Targon",
+        "Together 2",
+        "Ubicloud",
+        "01.AI",
+        "AI21",
+        "AionLabs",
+        "Alibaba",
+        "Ambient",
+        "Amazon Bedrock",
+        "Amazon Nova",
+        "Anthropic",
+        "Arcee AI",
+        "AtlasCloud",
+        "Avian",
+        "Azure",
+        "BaseTen",
+        "BytePlus",
+        "Black Forest Labs",
+        "Cerebras",
+        "Chutes",
+        "Cirrascale",
+        "Clarifai",
+        "Cloudflare",
+        "Cohere",
+        "Crusoe",
+        "DeepInfra",
+        "DeepSeek",
+        "Featherless",
+        "Fireworks",
+        "Friendli",
+        "GMICloud",
+        "Google",
+        "Google AI Studio",
+        "Groq",
+        "Hyperbolic",
+        "Inception",
+        "Inceptron",
+        "InferenceNet",
+        "Infermatic",
+        "Inflection",
+        "Liquid",
+        "Mara",
+        "Mancer 2",
+        "Minimax",
+        "ModelRun",
+        "Mistral",
+        "Modular",
+        "Moonshot AI",
+        "Morph",
+        "NCompass",
+        "Nebius",
+        "NextBit",
+        "Novita",
+        "Nvidia",
+        "OpenAI",
+        "OpenInference",
+        "Parasail",
+        "Perplexity",
+        "Phala",
+        "Relace",
+        "SambaNova",
+        "Seed",
+        "SiliconFlow",
+        "Sourceful",
+        "StepFun",
+        "Stealth",
+        "StreamLake",
+        "Switchpoint",
+        "Together",
+        "Upstage",
+        "Venice",
+        "WandB",
+        "Xiaomi",
+        "xAI",
+        "Z.AI",
+        "FakeProvider",
+    ],
+    UnrecognizedStr,
+]
+
+
+class ProviderResponseTypedDict(TypedDict):
+    status: Nullable[float]
+    id: NotRequired[str]
+    endpoint_id: NotRequired[str]
+    model_permaslug: NotRequired[str]
+    provider_name: NotRequired[ProviderName]
+    latency: NotRequired[float]
+    is_byok: NotRequired[bool]
+
+
+class ProviderResponse(BaseModel):
+    status: Nullable[float]
+
+    id: Optional[str] = None
+
+    endpoint_id: Optional[str] = None
+
+    model_permaslug: Optional[str] = None
+
+    provider_name: Annotated[
+        Optional[ProviderName], PlainValidator(validate_open_enum(False))
+    ] = None
+
+    latency: Optional[float] = None
+
+    is_byok: Optional[bool] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = [
+            "id",
+            "endpoint_id",
+            "model_permaslug",
+            "provider_name",
+            "latency",
+            "is_byok",
+        ]
+        nullable_fields = ["status"]
+        null_default_fields = []
+
+        serialized = handler(self)
+
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+            serialized.pop(k, None)
+
+            optional_nullable = k in optional_fields and k in nullable_fields
+            is_set = (
+                self.__pydantic_fields_set__.intersection({n})
+                or k in null_default_fields
+            )  # pylint: disable=no-member
+
+            if val is not None and val != UNSET_SENTINEL:
+                m[k] = val
+            elif val != UNSET_SENTINEL and (
+                not k in optional_fields or (optional_nullable and is_set)
+            ):
+                m[k] = val
+
+        return m
 
 
 class GetGenerationDataTypedDict(TypedDict):
@@ -98,6 +337,8 @@ class GetGenerationDataTypedDict(TypedDict):
     r"""Type of API used for the generation"""
     router: Nullable[str]
     r"""Router used for the request (e.g., openrouter/auto)"""
+    provider_responses: Nullable[List[ProviderResponseTypedDict]]
+    r"""List of provider responses for this generation, including fallback attempts"""
 
 
 class GetGenerationData(BaseModel):
@@ -202,6 +443,9 @@ class GetGenerationData(BaseModel):
     router: Nullable[str]
     r"""Router used for the request (e.g., openrouter/auto)"""
 
+    provider_responses: Nullable[List[ProviderResponse]]
+    r"""List of provider responses for this generation, including fallback attempts"""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = []
@@ -232,6 +476,7 @@ class GetGenerationData(BaseModel):
             "external_user",
             "api_type",
             "router",
+            "provider_responses",
         ]
         null_default_fields = []
 

@@ -21,17 +21,13 @@ class Chat(BaseSDK):
         self,
         *,
         messages: Union[List[components.Message], List[components.MessageTypedDict]],
+        http_referer: Optional[str] = None,
+        x_title: Optional[str] = None,
         provider: OptionalNullable[
-            Union[
-                components.ChatGenerationParamsProvider,
-                components.ChatGenerationParamsProviderTypedDict,
-            ]
+            Union[components.Schema0, components.Schema0TypedDict]
         ] = UNSET,
         plugins: Optional[
-            Union[
-                List[components.ChatGenerationParamsPluginUnion],
-                List[components.ChatGenerationParamsPluginUnionTypedDict],
-            ]
+            Union[List[components.Schema17], List[components.Schema17TypedDict]]
         ] = None,
         route: OptionalNullable[components.Route] = UNSET,
         user: Optional[str] = None,
@@ -50,17 +46,11 @@ class Chat(BaseSDK):
             Union[components.Reasoning, components.ReasoningTypedDict]
         ] = None,
         response_format: Optional[
-            Union[
-                components.ChatGenerationParamsResponseFormatUnion,
-                components.ChatGenerationParamsResponseFormatUnionTypedDict,
-            ]
+            Union[components.ResponseFormat, components.ResponseFormatTypedDict]
         ] = None,
         seed: OptionalNullable[int] = UNSET,
         stop: OptionalNullable[
-            Union[
-                components.ChatGenerationParamsStop,
-                components.ChatGenerationParamsStopTypedDict,
-            ]
+            Union[components.Stop, components.StopTypedDict]
         ] = UNSET,
         stream: Union[Literal[False], None] = None,
         stream_options: OptionalNullable[
@@ -93,11 +83,16 @@ class Chat(BaseSDK):
         Sends a request for a model response for the given chat conversation. Supports both streaming and non-streaming modes.
 
         :param messages:
-        :param provider: When multiple model providers are available, optionally indicate your routing preference.
-        :param plugins: Plugins you want to enable for this request, including their settings.
+        :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
+            This is used to track API usage per application.
+
+        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+        :param provider:
+        :param plugins:
         :param route:
         :param user:
-        :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 128 characters.
+        :param session_id:
         :param model:
         :param models:
         :param frequency_penalty:
@@ -133,17 +128,13 @@ class Chat(BaseSDK):
         self,
         *,
         messages: Union[List[components.Message], List[components.MessageTypedDict]],
+        http_referer: Optional[str] = None,
+        x_title: Optional[str] = None,
         provider: OptionalNullable[
-            Union[
-                components.ChatGenerationParamsProvider,
-                components.ChatGenerationParamsProviderTypedDict,
-            ]
+            Union[components.Schema0, components.Schema0TypedDict]
         ] = UNSET,
         plugins: Optional[
-            Union[
-                List[components.ChatGenerationParamsPluginUnion],
-                List[components.ChatGenerationParamsPluginUnionTypedDict],
-            ]
+            Union[List[components.Schema17], List[components.Schema17TypedDict]]
         ] = None,
         route: OptionalNullable[components.Route] = UNSET,
         user: Optional[str] = None,
@@ -162,17 +153,11 @@ class Chat(BaseSDK):
             Union[components.Reasoning, components.ReasoningTypedDict]
         ] = None,
         response_format: Optional[
-            Union[
-                components.ChatGenerationParamsResponseFormatUnion,
-                components.ChatGenerationParamsResponseFormatUnionTypedDict,
-            ]
+            Union[components.ResponseFormat, components.ResponseFormatTypedDict]
         ] = None,
         seed: OptionalNullable[int] = UNSET,
         stop: OptionalNullable[
-            Union[
-                components.ChatGenerationParamsStop,
-                components.ChatGenerationParamsStopTypedDict,
-            ]
+            Union[components.Stop, components.StopTypedDict]
         ] = UNSET,
         stream: Literal[True],
         stream_options: OptionalNullable[
@@ -205,11 +190,16 @@ class Chat(BaseSDK):
         Sends a request for a model response for the given chat conversation. Supports both streaming and non-streaming modes.
 
         :param messages:
-        :param provider: When multiple model providers are available, optionally indicate your routing preference.
-        :param plugins: Plugins you want to enable for this request, including their settings.
+        :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
+            This is used to track API usage per application.
+
+        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+        :param provider:
+        :param plugins:
         :param route:
         :param user:
-        :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 128 characters.
+        :param session_id:
         :param model:
         :param models:
         :param frequency_penalty:
@@ -244,17 +234,13 @@ class Chat(BaseSDK):
         self,
         *,
         messages: Union[List[components.Message], List[components.MessageTypedDict]],
+        http_referer: Optional[str] = None,
+        x_title: Optional[str] = None,
         provider: OptionalNullable[
-            Union[
-                components.ChatGenerationParamsProvider,
-                components.ChatGenerationParamsProviderTypedDict,
-            ]
+            Union[components.Schema0, components.Schema0TypedDict]
         ] = UNSET,
         plugins: Optional[
-            Union[
-                List[components.ChatGenerationParamsPluginUnion],
-                List[components.ChatGenerationParamsPluginUnionTypedDict],
-            ]
+            Union[List[components.Schema17], List[components.Schema17TypedDict]]
         ] = None,
         route: OptionalNullable[components.Route] = UNSET,
         user: Optional[str] = None,
@@ -273,17 +259,11 @@ class Chat(BaseSDK):
             Union[components.Reasoning, components.ReasoningTypedDict]
         ] = None,
         response_format: Optional[
-            Union[
-                components.ChatGenerationParamsResponseFormatUnion,
-                components.ChatGenerationParamsResponseFormatUnionTypedDict,
-            ]
+            Union[components.ResponseFormat, components.ResponseFormatTypedDict]
         ] = None,
         seed: OptionalNullable[int] = UNSET,
         stop: OptionalNullable[
-            Union[
-                components.ChatGenerationParamsStop,
-                components.ChatGenerationParamsStopTypedDict,
-            ]
+            Union[components.Stop, components.StopTypedDict]
         ] = UNSET,
         stream: Optional[bool] = False,
         stream_options: OptionalNullable[
@@ -316,11 +296,16 @@ class Chat(BaseSDK):
         Sends a request for a model response for the given chat conversation. Supports both streaming and non-streaming modes.
 
         :param messages:
-        :param provider: When multiple model providers are available, optionally indicate your routing preference.
-        :param plugins: Plugins you want to enable for this request, including their settings.
+        :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
+            This is used to track API usage per application.
+
+        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+        :param provider:
+        :param plugins:
         :param route:
         :param user:
-        :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 128 characters.
+        :param session_id:
         :param model:
         :param models:
         :param frequency_penalty:
@@ -360,49 +345,52 @@ class Chat(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = components.ChatGenerationParams(
-            provider=utils.get_pydantic_model(
-                provider, OptionalNullable[components.ChatGenerationParamsProvider]
+        request = operations.SendChatCompletionRequestRequest(
+            http_referer=http_referer,
+            x_title=x_title,
+            chat_generation_params=components.ChatGenerationParams(
+                provider=utils.get_pydantic_model(
+                    provider, OptionalNullable[components.Schema0]
+                ),
+                plugins=utils.get_pydantic_model(
+                    plugins, Optional[List[components.Schema17]]
+                ),
+                route=route,
+                user=user,
+                session_id=session_id,
+                messages=utils.get_pydantic_model(messages, List[components.Message]),
+                model=model,
+                models=models,
+                frequency_penalty=frequency_penalty,
+                logit_bias=logit_bias,
+                logprobs=logprobs,
+                top_logprobs=top_logprobs,
+                max_completion_tokens=max_completion_tokens,
+                max_tokens=max_tokens,
+                metadata=metadata,
+                presence_penalty=presence_penalty,
+                reasoning=utils.get_pydantic_model(
+                    reasoning, Optional[components.Reasoning]
+                ),
+                response_format=utils.get_pydantic_model(
+                    response_format, Optional[components.ResponseFormat]
+                ),
+                seed=seed,
+                stop=stop,
+                stream=stream,
+                stream_options=utils.get_pydantic_model(
+                    stream_options, OptionalNullable[components.ChatStreamOptions]
+                ),
+                temperature=temperature,
+                tool_choice=tool_choice,
+                tools=utils.get_pydantic_model(
+                    tools, Optional[List[components.ToolDefinitionJSON]]
+                ),
+                top_p=top_p,
+                debug=utils.get_pydantic_model(debug, Optional[components.Debug]),
+                image_config=image_config,
+                modalities=modalities,
             ),
-            plugins=utils.get_pydantic_model(
-                plugins, Optional[List[components.ChatGenerationParamsPluginUnion]]
-            ),
-            route=route,
-            user=user,
-            session_id=session_id,
-            messages=utils.get_pydantic_model(messages, List[components.Message]),
-            model=model,
-            models=models,
-            frequency_penalty=frequency_penalty,
-            logit_bias=logit_bias,
-            logprobs=logprobs,
-            top_logprobs=top_logprobs,
-            max_completion_tokens=max_completion_tokens,
-            max_tokens=max_tokens,
-            metadata=metadata,
-            presence_penalty=presence_penalty,
-            reasoning=utils.get_pydantic_model(
-                reasoning, Optional[components.Reasoning]
-            ),
-            response_format=utils.get_pydantic_model(
-                response_format,
-                Optional[components.ChatGenerationParamsResponseFormatUnion],
-            ),
-            seed=seed,
-            stop=stop,
-            stream=stream,
-            stream_options=utils.get_pydantic_model(
-                stream_options, OptionalNullable[components.ChatStreamOptions]
-            ),
-            temperature=temperature,
-            tool_choice=tool_choice,
-            tools=utils.get_pydantic_model(
-                tools, Optional[List[components.ToolDefinitionJSON]]
-            ),
-            top_p=top_p,
-            debug=utils.get_pydantic_model(debug, Optional[components.Debug]),
-            image_config=image_config,
-            modalities=modalities,
         )
 
         req = self._build_request(
@@ -417,9 +405,17 @@ class Chat(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="text/event-stream" if stream else "application/json",
             http_headers=http_headers,
+            _globals=operations.SendChatCompletionRequestGlobals(
+                http_referer=self.sdk_configuration.globals.http_referer,
+                x_title=self.sdk_configuration.globals.x_title,
+            ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", components.ChatGenerationParams
+                request.chat_generation_params,
+                False,
+                False,
+                "json",
+                components.ChatGenerationParams,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -497,17 +493,13 @@ class Chat(BaseSDK):
         self,
         *,
         messages: Union[List[components.Message], List[components.MessageTypedDict]],
+        http_referer: Optional[str] = None,
+        x_title: Optional[str] = None,
         provider: OptionalNullable[
-            Union[
-                components.ChatGenerationParamsProvider,
-                components.ChatGenerationParamsProviderTypedDict,
-            ]
+            Union[components.Schema0, components.Schema0TypedDict]
         ] = UNSET,
         plugins: Optional[
-            Union[
-                List[components.ChatGenerationParamsPluginUnion],
-                List[components.ChatGenerationParamsPluginUnionTypedDict],
-            ]
+            Union[List[components.Schema17], List[components.Schema17TypedDict]]
         ] = None,
         route: OptionalNullable[components.Route] = UNSET,
         user: Optional[str] = None,
@@ -526,17 +518,11 @@ class Chat(BaseSDK):
             Union[components.Reasoning, components.ReasoningTypedDict]
         ] = None,
         response_format: Optional[
-            Union[
-                components.ChatGenerationParamsResponseFormatUnion,
-                components.ChatGenerationParamsResponseFormatUnionTypedDict,
-            ]
+            Union[components.ResponseFormat, components.ResponseFormatTypedDict]
         ] = None,
         seed: OptionalNullable[int] = UNSET,
         stop: OptionalNullable[
-            Union[
-                components.ChatGenerationParamsStop,
-                components.ChatGenerationParamsStopTypedDict,
-            ]
+            Union[components.Stop, components.StopTypedDict]
         ] = UNSET,
         stream: Union[Literal[False], None] = None,
         stream_options: OptionalNullable[
@@ -569,11 +555,16 @@ class Chat(BaseSDK):
         Sends a request for a model response for the given chat conversation. Supports both streaming and non-streaming modes.
 
         :param messages:
-        :param provider: When multiple model providers are available, optionally indicate your routing preference.
-        :param plugins: Plugins you want to enable for this request, including their settings.
+        :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
+            This is used to track API usage per application.
+
+        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+        :param provider:
+        :param plugins:
         :param route:
         :param user:
-        :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 128 characters.
+        :param session_id:
         :param model:
         :param models:
         :param frequency_penalty:
@@ -609,17 +600,13 @@ class Chat(BaseSDK):
         self,
         *,
         messages: Union[List[components.Message], List[components.MessageTypedDict]],
+        http_referer: Optional[str] = None,
+        x_title: Optional[str] = None,
         provider: OptionalNullable[
-            Union[
-                components.ChatGenerationParamsProvider,
-                components.ChatGenerationParamsProviderTypedDict,
-            ]
+            Union[components.Schema0, components.Schema0TypedDict]
         ] = UNSET,
         plugins: Optional[
-            Union[
-                List[components.ChatGenerationParamsPluginUnion],
-                List[components.ChatGenerationParamsPluginUnionTypedDict],
-            ]
+            Union[List[components.Schema17], List[components.Schema17TypedDict]]
         ] = None,
         route: OptionalNullable[components.Route] = UNSET,
         user: Optional[str] = None,
@@ -638,17 +625,11 @@ class Chat(BaseSDK):
             Union[components.Reasoning, components.ReasoningTypedDict]
         ] = None,
         response_format: Optional[
-            Union[
-                components.ChatGenerationParamsResponseFormatUnion,
-                components.ChatGenerationParamsResponseFormatUnionTypedDict,
-            ]
+            Union[components.ResponseFormat, components.ResponseFormatTypedDict]
         ] = None,
         seed: OptionalNullable[int] = UNSET,
         stop: OptionalNullable[
-            Union[
-                components.ChatGenerationParamsStop,
-                components.ChatGenerationParamsStopTypedDict,
-            ]
+            Union[components.Stop, components.StopTypedDict]
         ] = UNSET,
         stream: Literal[True],
         stream_options: OptionalNullable[
@@ -681,11 +662,16 @@ class Chat(BaseSDK):
         Sends a request for a model response for the given chat conversation. Supports both streaming and non-streaming modes.
 
         :param messages:
-        :param provider: When multiple model providers are available, optionally indicate your routing preference.
-        :param plugins: Plugins you want to enable for this request, including their settings.
+        :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
+            This is used to track API usage per application.
+
+        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+        :param provider:
+        :param plugins:
         :param route:
         :param user:
-        :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 128 characters.
+        :param session_id:
         :param model:
         :param models:
         :param frequency_penalty:
@@ -720,17 +706,13 @@ class Chat(BaseSDK):
         self,
         *,
         messages: Union[List[components.Message], List[components.MessageTypedDict]],
+        http_referer: Optional[str] = None,
+        x_title: Optional[str] = None,
         provider: OptionalNullable[
-            Union[
-                components.ChatGenerationParamsProvider,
-                components.ChatGenerationParamsProviderTypedDict,
-            ]
+            Union[components.Schema0, components.Schema0TypedDict]
         ] = UNSET,
         plugins: Optional[
-            Union[
-                List[components.ChatGenerationParamsPluginUnion],
-                List[components.ChatGenerationParamsPluginUnionTypedDict],
-            ]
+            Union[List[components.Schema17], List[components.Schema17TypedDict]]
         ] = None,
         route: OptionalNullable[components.Route] = UNSET,
         user: Optional[str] = None,
@@ -749,17 +731,11 @@ class Chat(BaseSDK):
             Union[components.Reasoning, components.ReasoningTypedDict]
         ] = None,
         response_format: Optional[
-            Union[
-                components.ChatGenerationParamsResponseFormatUnion,
-                components.ChatGenerationParamsResponseFormatUnionTypedDict,
-            ]
+            Union[components.ResponseFormat, components.ResponseFormatTypedDict]
         ] = None,
         seed: OptionalNullable[int] = UNSET,
         stop: OptionalNullable[
-            Union[
-                components.ChatGenerationParamsStop,
-                components.ChatGenerationParamsStopTypedDict,
-            ]
+            Union[components.Stop, components.StopTypedDict]
         ] = UNSET,
         stream: Optional[bool] = False,
         stream_options: OptionalNullable[
@@ -792,11 +768,16 @@ class Chat(BaseSDK):
         Sends a request for a model response for the given chat conversation. Supports both streaming and non-streaming modes.
 
         :param messages:
-        :param provider: When multiple model providers are available, optionally indicate your routing preference.
-        :param plugins: Plugins you want to enable for this request, including their settings.
+        :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
+            This is used to track API usage per application.
+
+        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+        :param provider:
+        :param plugins:
         :param route:
         :param user:
-        :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 128 characters.
+        :param session_id:
         :param model:
         :param models:
         :param frequency_penalty:
@@ -836,49 +817,52 @@ class Chat(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = components.ChatGenerationParams(
-            provider=utils.get_pydantic_model(
-                provider, OptionalNullable[components.ChatGenerationParamsProvider]
+        request = operations.SendChatCompletionRequestRequest(
+            http_referer=http_referer,
+            x_title=x_title,
+            chat_generation_params=components.ChatGenerationParams(
+                provider=utils.get_pydantic_model(
+                    provider, OptionalNullable[components.Schema0]
+                ),
+                plugins=utils.get_pydantic_model(
+                    plugins, Optional[List[components.Schema17]]
+                ),
+                route=route,
+                user=user,
+                session_id=session_id,
+                messages=utils.get_pydantic_model(messages, List[components.Message]),
+                model=model,
+                models=models,
+                frequency_penalty=frequency_penalty,
+                logit_bias=logit_bias,
+                logprobs=logprobs,
+                top_logprobs=top_logprobs,
+                max_completion_tokens=max_completion_tokens,
+                max_tokens=max_tokens,
+                metadata=metadata,
+                presence_penalty=presence_penalty,
+                reasoning=utils.get_pydantic_model(
+                    reasoning, Optional[components.Reasoning]
+                ),
+                response_format=utils.get_pydantic_model(
+                    response_format, Optional[components.ResponseFormat]
+                ),
+                seed=seed,
+                stop=stop,
+                stream=stream,
+                stream_options=utils.get_pydantic_model(
+                    stream_options, OptionalNullable[components.ChatStreamOptions]
+                ),
+                temperature=temperature,
+                tool_choice=tool_choice,
+                tools=utils.get_pydantic_model(
+                    tools, Optional[List[components.ToolDefinitionJSON]]
+                ),
+                top_p=top_p,
+                debug=utils.get_pydantic_model(debug, Optional[components.Debug]),
+                image_config=image_config,
+                modalities=modalities,
             ),
-            plugins=utils.get_pydantic_model(
-                plugins, Optional[List[components.ChatGenerationParamsPluginUnion]]
-            ),
-            route=route,
-            user=user,
-            session_id=session_id,
-            messages=utils.get_pydantic_model(messages, List[components.Message]),
-            model=model,
-            models=models,
-            frequency_penalty=frequency_penalty,
-            logit_bias=logit_bias,
-            logprobs=logprobs,
-            top_logprobs=top_logprobs,
-            max_completion_tokens=max_completion_tokens,
-            max_tokens=max_tokens,
-            metadata=metadata,
-            presence_penalty=presence_penalty,
-            reasoning=utils.get_pydantic_model(
-                reasoning, Optional[components.Reasoning]
-            ),
-            response_format=utils.get_pydantic_model(
-                response_format,
-                Optional[components.ChatGenerationParamsResponseFormatUnion],
-            ),
-            seed=seed,
-            stop=stop,
-            stream=stream,
-            stream_options=utils.get_pydantic_model(
-                stream_options, OptionalNullable[components.ChatStreamOptions]
-            ),
-            temperature=temperature,
-            tool_choice=tool_choice,
-            tools=utils.get_pydantic_model(
-                tools, Optional[List[components.ToolDefinitionJSON]]
-            ),
-            top_p=top_p,
-            debug=utils.get_pydantic_model(debug, Optional[components.Debug]),
-            image_config=image_config,
-            modalities=modalities,
         )
 
         req = self._build_request_async(
@@ -893,9 +877,17 @@ class Chat(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="text/event-stream" if stream else "application/json",
             http_headers=http_headers,
+            _globals=operations.SendChatCompletionRequestGlobals(
+                http_referer=self.sdk_configuration.globals.http_referer,
+                x_title=self.sdk_configuration.globals.x_title,
+            ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", components.ChatGenerationParams
+                request.chat_generation_params,
+                False,
+                False,
+                "json",
+                components.ChatGenerationParams,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,

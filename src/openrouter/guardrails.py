@@ -15,6 +15,8 @@ class Guardrails(BaseSDK):
     def list(
         self,
         *,
+        http_referer: Optional[str] = None,
+        x_title: Optional[str] = None,
         offset: Optional[str] = None,
         limit: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -25,6 +27,11 @@ class Guardrails(BaseSDK):
         r"""List guardrails
 
         List all guardrails for the authenticated user. [Provisioning key](/docs/guides/overview/auth/provisioning-api-keys) required.
+
+        :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
+            This is used to track API usage per application.
+
+        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
 
         :param offset: Number of records to skip for pagination
         :param limit: Maximum number of records to return (max 100)
@@ -44,6 +51,8 @@ class Guardrails(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = operations.ListGuardrailsRequest(
+            http_referer=http_referer,
+            x_title=x_title,
             offset=offset,
             limit=limit,
         )
@@ -60,6 +69,10 @@ class Guardrails(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            _globals=operations.ListGuardrailsGlobals(
+                http_referer=self.sdk_configuration.globals.http_referer,
+                x_title=self.sdk_configuration.globals.x_title,
+            ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -117,6 +130,8 @@ class Guardrails(BaseSDK):
     async def list_async(
         self,
         *,
+        http_referer: Optional[str] = None,
+        x_title: Optional[str] = None,
         offset: Optional[str] = None,
         limit: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -127,6 +142,11 @@ class Guardrails(BaseSDK):
         r"""List guardrails
 
         List all guardrails for the authenticated user. [Provisioning key](/docs/guides/overview/auth/provisioning-api-keys) required.
+
+        :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
+            This is used to track API usage per application.
+
+        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
 
         :param offset: Number of records to skip for pagination
         :param limit: Maximum number of records to return (max 100)
@@ -146,6 +166,8 @@ class Guardrails(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = operations.ListGuardrailsRequest(
+            http_referer=http_referer,
+            x_title=x_title,
             offset=offset,
             limit=limit,
         )
@@ -162,6 +184,10 @@ class Guardrails(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            _globals=operations.ListGuardrailsGlobals(
+                http_referer=self.sdk_configuration.globals.http_referer,
+                x_title=self.sdk_configuration.globals.x_title,
+            ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -220,6 +246,8 @@ class Guardrails(BaseSDK):
         self,
         *,
         name: str,
+        http_referer: Optional[str] = None,
+        x_title: Optional[str] = None,
         description: OptionalNullable[str] = UNSET,
         limit_usd: OptionalNullable[float] = UNSET,
         reset_interval: OptionalNullable[
@@ -238,6 +266,11 @@ class Guardrails(BaseSDK):
         Create a new guardrail for the authenticated user. [Provisioning key](/docs/guides/overview/auth/provisioning-api-keys) required.
 
         :param name: Name for the new guardrail
+        :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
+            This is used to track API usage per application.
+
+        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
         :param description: Description of the guardrail
         :param limit_usd: Spending limit in USD
         :param reset_interval: Interval at which the limit resets (daily, weekly, monthly)
@@ -260,13 +293,17 @@ class Guardrails(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = operations.CreateGuardrailRequest(
-            name=name,
-            description=description,
-            limit_usd=limit_usd,
-            reset_interval=reset_interval,
-            allowed_providers=allowed_providers,
-            allowed_models=allowed_models,
-            enforce_zdr=enforce_zdr,
+            http_referer=http_referer,
+            x_title=x_title,
+            request_body=operations.CreateGuardrailRequestBody(
+                name=name,
+                description=description,
+                limit_usd=limit_usd,
+                reset_interval=reset_interval,
+                allowed_providers=allowed_providers,
+                allowed_models=allowed_models,
+                enforce_zdr=enforce_zdr,
+            ),
         )
 
         req = self._build_request(
@@ -281,9 +318,17 @@ class Guardrails(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            _globals=operations.CreateGuardrailGlobals(
+                http_referer=self.sdk_configuration.globals.http_referer,
+                x_title=self.sdk_configuration.globals.x_title,
+            ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", operations.CreateGuardrailRequest
+                request.request_body,
+                False,
+                False,
+                "json",
+                operations.CreateGuardrailRequestBody,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -347,6 +392,8 @@ class Guardrails(BaseSDK):
         self,
         *,
         name: str,
+        http_referer: Optional[str] = None,
+        x_title: Optional[str] = None,
         description: OptionalNullable[str] = UNSET,
         limit_usd: OptionalNullable[float] = UNSET,
         reset_interval: OptionalNullable[
@@ -365,6 +412,11 @@ class Guardrails(BaseSDK):
         Create a new guardrail for the authenticated user. [Provisioning key](/docs/guides/overview/auth/provisioning-api-keys) required.
 
         :param name: Name for the new guardrail
+        :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
+            This is used to track API usage per application.
+
+        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
         :param description: Description of the guardrail
         :param limit_usd: Spending limit in USD
         :param reset_interval: Interval at which the limit resets (daily, weekly, monthly)
@@ -387,13 +439,17 @@ class Guardrails(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = operations.CreateGuardrailRequest(
-            name=name,
-            description=description,
-            limit_usd=limit_usd,
-            reset_interval=reset_interval,
-            allowed_providers=allowed_providers,
-            allowed_models=allowed_models,
-            enforce_zdr=enforce_zdr,
+            http_referer=http_referer,
+            x_title=x_title,
+            request_body=operations.CreateGuardrailRequestBody(
+                name=name,
+                description=description,
+                limit_usd=limit_usd,
+                reset_interval=reset_interval,
+                allowed_providers=allowed_providers,
+                allowed_models=allowed_models,
+                enforce_zdr=enforce_zdr,
+            ),
         )
 
         req = self._build_request_async(
@@ -408,9 +464,17 @@ class Guardrails(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            _globals=operations.CreateGuardrailGlobals(
+                http_referer=self.sdk_configuration.globals.http_referer,
+                x_title=self.sdk_configuration.globals.x_title,
+            ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", operations.CreateGuardrailRequest
+                request.request_body,
+                False,
+                False,
+                "json",
+                operations.CreateGuardrailRequestBody,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -474,6 +538,8 @@ class Guardrails(BaseSDK):
         self,
         *,
         id: str,
+        http_referer: Optional[str] = None,
+        x_title: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -484,6 +550,11 @@ class Guardrails(BaseSDK):
         Get a single guardrail by ID. [Provisioning key](/docs/guides/overview/auth/provisioning-api-keys) required.
 
         :param id: The unique identifier of the guardrail to retrieve
+        :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
+            This is used to track API usage per application.
+
+        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -500,6 +571,8 @@ class Guardrails(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = operations.GetGuardrailRequest(
+            http_referer=http_referer,
+            x_title=x_title,
             id=id,
         )
 
@@ -515,6 +588,10 @@ class Guardrails(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            _globals=operations.GetGuardrailGlobals(
+                http_referer=self.sdk_configuration.globals.http_referer,
+                x_title=self.sdk_configuration.globals.x_title,
+            ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -578,6 +655,8 @@ class Guardrails(BaseSDK):
         self,
         *,
         id: str,
+        http_referer: Optional[str] = None,
+        x_title: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -588,6 +667,11 @@ class Guardrails(BaseSDK):
         Get a single guardrail by ID. [Provisioning key](/docs/guides/overview/auth/provisioning-api-keys) required.
 
         :param id: The unique identifier of the guardrail to retrieve
+        :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
+            This is used to track API usage per application.
+
+        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -604,6 +688,8 @@ class Guardrails(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = operations.GetGuardrailRequest(
+            http_referer=http_referer,
+            x_title=x_title,
             id=id,
         )
 
@@ -619,6 +705,10 @@ class Guardrails(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            _globals=operations.GetGuardrailGlobals(
+                http_referer=self.sdk_configuration.globals.http_referer,
+                x_title=self.sdk_configuration.globals.x_title,
+            ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -682,6 +772,8 @@ class Guardrails(BaseSDK):
         self,
         *,
         id: str,
+        http_referer: Optional[str] = None,
+        x_title: Optional[str] = None,
         name: Optional[str] = None,
         description: OptionalNullable[str] = UNSET,
         limit_usd: OptionalNullable[float] = UNSET,
@@ -701,6 +793,11 @@ class Guardrails(BaseSDK):
         Update an existing guardrail. [Provisioning key](/docs/guides/overview/auth/provisioning-api-keys) required.
 
         :param id: The unique identifier of the guardrail to update
+        :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
+            This is used to track API usage per application.
+
+        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
         :param name: New name for the guardrail
         :param description: New description for the guardrail
         :param limit_usd: New spending limit in USD
@@ -724,6 +821,8 @@ class Guardrails(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = operations.UpdateGuardrailRequest(
+            http_referer=http_referer,
+            x_title=x_title,
             id=id,
             request_body=operations.UpdateGuardrailRequestBody(
                 name=name,
@@ -748,6 +847,10 @@ class Guardrails(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            _globals=operations.UpdateGuardrailGlobals(
+                http_referer=self.sdk_configuration.globals.http_referer,
+                x_title=self.sdk_configuration.globals.x_title,
+            ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.request_body,
@@ -823,6 +926,8 @@ class Guardrails(BaseSDK):
         self,
         *,
         id: str,
+        http_referer: Optional[str] = None,
+        x_title: Optional[str] = None,
         name: Optional[str] = None,
         description: OptionalNullable[str] = UNSET,
         limit_usd: OptionalNullable[float] = UNSET,
@@ -842,6 +947,11 @@ class Guardrails(BaseSDK):
         Update an existing guardrail. [Provisioning key](/docs/guides/overview/auth/provisioning-api-keys) required.
 
         :param id: The unique identifier of the guardrail to update
+        :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
+            This is used to track API usage per application.
+
+        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
         :param name: New name for the guardrail
         :param description: New description for the guardrail
         :param limit_usd: New spending limit in USD
@@ -865,6 +975,8 @@ class Guardrails(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = operations.UpdateGuardrailRequest(
+            http_referer=http_referer,
+            x_title=x_title,
             id=id,
             request_body=operations.UpdateGuardrailRequestBody(
                 name=name,
@@ -889,6 +1001,10 @@ class Guardrails(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            _globals=operations.UpdateGuardrailGlobals(
+                http_referer=self.sdk_configuration.globals.http_referer,
+                x_title=self.sdk_configuration.globals.x_title,
+            ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.request_body,
@@ -964,6 +1080,8 @@ class Guardrails(BaseSDK):
         self,
         *,
         id: str,
+        http_referer: Optional[str] = None,
+        x_title: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -974,6 +1092,11 @@ class Guardrails(BaseSDK):
         Delete an existing guardrail. [Provisioning key](/docs/guides/overview/auth/provisioning-api-keys) required.
 
         :param id: The unique identifier of the guardrail to delete
+        :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
+            This is used to track API usage per application.
+
+        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -990,6 +1113,8 @@ class Guardrails(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = operations.DeleteGuardrailRequest(
+            http_referer=http_referer,
+            x_title=x_title,
             id=id,
         )
 
@@ -1005,6 +1130,10 @@ class Guardrails(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            _globals=operations.DeleteGuardrailGlobals(
+                http_referer=self.sdk_configuration.globals.http_referer,
+                x_title=self.sdk_configuration.globals.x_title,
+            ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -1068,6 +1197,8 @@ class Guardrails(BaseSDK):
         self,
         *,
         id: str,
+        http_referer: Optional[str] = None,
+        x_title: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -1078,6 +1209,11 @@ class Guardrails(BaseSDK):
         Delete an existing guardrail. [Provisioning key](/docs/guides/overview/auth/provisioning-api-keys) required.
 
         :param id: The unique identifier of the guardrail to delete
+        :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
+            This is used to track API usage per application.
+
+        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1094,6 +1230,8 @@ class Guardrails(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = operations.DeleteGuardrailRequest(
+            http_referer=http_referer,
+            x_title=x_title,
             id=id,
         )
 
@@ -1109,6 +1247,10 @@ class Guardrails(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            _globals=operations.DeleteGuardrailGlobals(
+                http_referer=self.sdk_configuration.globals.http_referer,
+                x_title=self.sdk_configuration.globals.x_title,
+            ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -1171,6 +1313,8 @@ class Guardrails(BaseSDK):
     def list_key_assignments(
         self,
         *,
+        http_referer: Optional[str] = None,
+        x_title: Optional[str] = None,
         offset: Optional[str] = None,
         limit: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -1181,6 +1325,11 @@ class Guardrails(BaseSDK):
         r"""List all key assignments
 
         List all API key guardrail assignments for the authenticated user. [Provisioning key](/docs/guides/overview/auth/provisioning-api-keys) required.
+
+        :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
+            This is used to track API usage per application.
+
+        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
 
         :param offset: Number of records to skip for pagination
         :param limit: Maximum number of records to return (max 100)
@@ -1200,6 +1349,8 @@ class Guardrails(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = operations.ListKeyAssignmentsRequest(
+            http_referer=http_referer,
+            x_title=x_title,
             offset=offset,
             limit=limit,
         )
@@ -1216,6 +1367,10 @@ class Guardrails(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            _globals=operations.ListKeyAssignmentsGlobals(
+                http_referer=self.sdk_configuration.globals.http_referer,
+                x_title=self.sdk_configuration.globals.x_title,
+            ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -1275,6 +1430,8 @@ class Guardrails(BaseSDK):
     async def list_key_assignments_async(
         self,
         *,
+        http_referer: Optional[str] = None,
+        x_title: Optional[str] = None,
         offset: Optional[str] = None,
         limit: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -1285,6 +1442,11 @@ class Guardrails(BaseSDK):
         r"""List all key assignments
 
         List all API key guardrail assignments for the authenticated user. [Provisioning key](/docs/guides/overview/auth/provisioning-api-keys) required.
+
+        :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
+            This is used to track API usage per application.
+
+        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
 
         :param offset: Number of records to skip for pagination
         :param limit: Maximum number of records to return (max 100)
@@ -1304,6 +1466,8 @@ class Guardrails(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = operations.ListKeyAssignmentsRequest(
+            http_referer=http_referer,
+            x_title=x_title,
             offset=offset,
             limit=limit,
         )
@@ -1320,6 +1484,10 @@ class Guardrails(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            _globals=operations.ListKeyAssignmentsGlobals(
+                http_referer=self.sdk_configuration.globals.http_referer,
+                x_title=self.sdk_configuration.globals.x_title,
+            ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -1379,6 +1547,8 @@ class Guardrails(BaseSDK):
     def list_member_assignments(
         self,
         *,
+        http_referer: Optional[str] = None,
+        x_title: Optional[str] = None,
         offset: Optional[str] = None,
         limit: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -1389,6 +1559,11 @@ class Guardrails(BaseSDK):
         r"""List all member assignments
 
         List all organization member guardrail assignments for the authenticated user. [Provisioning key](/docs/guides/overview/auth/provisioning-api-keys) required.
+
+        :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
+            This is used to track API usage per application.
+
+        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
 
         :param offset: Number of records to skip for pagination
         :param limit: Maximum number of records to return (max 100)
@@ -1408,6 +1583,8 @@ class Guardrails(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = operations.ListMemberAssignmentsRequest(
+            http_referer=http_referer,
+            x_title=x_title,
             offset=offset,
             limit=limit,
         )
@@ -1424,6 +1601,10 @@ class Guardrails(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            _globals=operations.ListMemberAssignmentsGlobals(
+                http_referer=self.sdk_configuration.globals.http_referer,
+                x_title=self.sdk_configuration.globals.x_title,
+            ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -1483,6 +1664,8 @@ class Guardrails(BaseSDK):
     async def list_member_assignments_async(
         self,
         *,
+        http_referer: Optional[str] = None,
+        x_title: Optional[str] = None,
         offset: Optional[str] = None,
         limit: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -1493,6 +1676,11 @@ class Guardrails(BaseSDK):
         r"""List all member assignments
 
         List all organization member guardrail assignments for the authenticated user. [Provisioning key](/docs/guides/overview/auth/provisioning-api-keys) required.
+
+        :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
+            This is used to track API usage per application.
+
+        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
 
         :param offset: Number of records to skip for pagination
         :param limit: Maximum number of records to return (max 100)
@@ -1512,6 +1700,8 @@ class Guardrails(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = operations.ListMemberAssignmentsRequest(
+            http_referer=http_referer,
+            x_title=x_title,
             offset=offset,
             limit=limit,
         )
@@ -1528,6 +1718,10 @@ class Guardrails(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            _globals=operations.ListMemberAssignmentsGlobals(
+                http_referer=self.sdk_configuration.globals.http_referer,
+                x_title=self.sdk_configuration.globals.x_title,
+            ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -1588,6 +1782,8 @@ class Guardrails(BaseSDK):
         self,
         *,
         id: str,
+        http_referer: Optional[str] = None,
+        x_title: Optional[str] = None,
         offset: Optional[str] = None,
         limit: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -1600,6 +1796,11 @@ class Guardrails(BaseSDK):
         List all API key assignments for a specific guardrail. [Provisioning key](/docs/guides/overview/auth/provisioning-api-keys) required.
 
         :param id: The unique identifier of the guardrail
+        :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
+            This is used to track API usage per application.
+
+        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
         :param offset: Number of records to skip for pagination
         :param limit: Maximum number of records to return (max 100)
         :param retries: Override the default retry configuration for this method
@@ -1618,6 +1819,8 @@ class Guardrails(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = operations.ListGuardrailKeyAssignmentsRequest(
+            http_referer=http_referer,
+            x_title=x_title,
             id=id,
             offset=offset,
             limit=limit,
@@ -1635,6 +1838,10 @@ class Guardrails(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            _globals=operations.ListGuardrailKeyAssignmentsGlobals(
+                http_referer=self.sdk_configuration.globals.http_referer,
+                x_title=self.sdk_configuration.globals.x_title,
+            ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -1700,6 +1907,8 @@ class Guardrails(BaseSDK):
         self,
         *,
         id: str,
+        http_referer: Optional[str] = None,
+        x_title: Optional[str] = None,
         offset: Optional[str] = None,
         limit: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -1712,6 +1921,11 @@ class Guardrails(BaseSDK):
         List all API key assignments for a specific guardrail. [Provisioning key](/docs/guides/overview/auth/provisioning-api-keys) required.
 
         :param id: The unique identifier of the guardrail
+        :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
+            This is used to track API usage per application.
+
+        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
         :param offset: Number of records to skip for pagination
         :param limit: Maximum number of records to return (max 100)
         :param retries: Override the default retry configuration for this method
@@ -1730,6 +1944,8 @@ class Guardrails(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = operations.ListGuardrailKeyAssignmentsRequest(
+            http_referer=http_referer,
+            x_title=x_title,
             id=id,
             offset=offset,
             limit=limit,
@@ -1747,6 +1963,10 @@ class Guardrails(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            _globals=operations.ListGuardrailKeyAssignmentsGlobals(
+                http_referer=self.sdk_configuration.globals.http_referer,
+                x_title=self.sdk_configuration.globals.x_title,
+            ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -1813,6 +2033,8 @@ class Guardrails(BaseSDK):
         *,
         id: str,
         key_hashes: List[str],
+        http_referer: Optional[str] = None,
+        x_title: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -1824,6 +2046,11 @@ class Guardrails(BaseSDK):
 
         :param id: The unique identifier of the guardrail
         :param key_hashes: Array of API key hashes to assign to the guardrail
+        :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
+            This is used to track API usage per application.
+
+        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1840,6 +2067,8 @@ class Guardrails(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = operations.BulkAssignKeysToGuardrailRequest(
+            http_referer=http_referer,
+            x_title=x_title,
             id=id,
             request_body=operations.BulkAssignKeysToGuardrailRequestBody(
                 key_hashes=key_hashes,
@@ -1858,6 +2087,10 @@ class Guardrails(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            _globals=operations.BulkAssignKeysToGuardrailGlobals(
+                http_referer=self.sdk_configuration.globals.http_referer,
+                x_title=self.sdk_configuration.globals.x_title,
+            ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.request_body,
@@ -1936,6 +2169,8 @@ class Guardrails(BaseSDK):
         *,
         id: str,
         key_hashes: List[str],
+        http_referer: Optional[str] = None,
+        x_title: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -1947,6 +2182,11 @@ class Guardrails(BaseSDK):
 
         :param id: The unique identifier of the guardrail
         :param key_hashes: Array of API key hashes to assign to the guardrail
+        :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
+            This is used to track API usage per application.
+
+        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1963,6 +2203,8 @@ class Guardrails(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = operations.BulkAssignKeysToGuardrailRequest(
+            http_referer=http_referer,
+            x_title=x_title,
             id=id,
             request_body=operations.BulkAssignKeysToGuardrailRequestBody(
                 key_hashes=key_hashes,
@@ -1981,6 +2223,10 @@ class Guardrails(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            _globals=operations.BulkAssignKeysToGuardrailGlobals(
+                http_referer=self.sdk_configuration.globals.http_referer,
+                x_title=self.sdk_configuration.globals.x_title,
+            ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.request_body,
@@ -2058,6 +2304,8 @@ class Guardrails(BaseSDK):
         self,
         *,
         id: str,
+        http_referer: Optional[str] = None,
+        x_title: Optional[str] = None,
         offset: Optional[str] = None,
         limit: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -2070,6 +2318,11 @@ class Guardrails(BaseSDK):
         List all organization member assignments for a specific guardrail. [Provisioning key](/docs/guides/overview/auth/provisioning-api-keys) required.
 
         :param id: The unique identifier of the guardrail
+        :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
+            This is used to track API usage per application.
+
+        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
         :param offset: Number of records to skip for pagination
         :param limit: Maximum number of records to return (max 100)
         :param retries: Override the default retry configuration for this method
@@ -2088,6 +2341,8 @@ class Guardrails(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = operations.ListGuardrailMemberAssignmentsRequest(
+            http_referer=http_referer,
+            x_title=x_title,
             id=id,
             offset=offset,
             limit=limit,
@@ -2105,6 +2360,10 @@ class Guardrails(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            _globals=operations.ListGuardrailMemberAssignmentsGlobals(
+                http_referer=self.sdk_configuration.globals.http_referer,
+                x_title=self.sdk_configuration.globals.x_title,
+            ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -2170,6 +2429,8 @@ class Guardrails(BaseSDK):
         self,
         *,
         id: str,
+        http_referer: Optional[str] = None,
+        x_title: Optional[str] = None,
         offset: Optional[str] = None,
         limit: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -2182,6 +2443,11 @@ class Guardrails(BaseSDK):
         List all organization member assignments for a specific guardrail. [Provisioning key](/docs/guides/overview/auth/provisioning-api-keys) required.
 
         :param id: The unique identifier of the guardrail
+        :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
+            This is used to track API usage per application.
+
+        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
         :param offset: Number of records to skip for pagination
         :param limit: Maximum number of records to return (max 100)
         :param retries: Override the default retry configuration for this method
@@ -2200,6 +2466,8 @@ class Guardrails(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = operations.ListGuardrailMemberAssignmentsRequest(
+            http_referer=http_referer,
+            x_title=x_title,
             id=id,
             offset=offset,
             limit=limit,
@@ -2217,6 +2485,10 @@ class Guardrails(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            _globals=operations.ListGuardrailMemberAssignmentsGlobals(
+                http_referer=self.sdk_configuration.globals.http_referer,
+                x_title=self.sdk_configuration.globals.x_title,
+            ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -2283,6 +2555,8 @@ class Guardrails(BaseSDK):
         *,
         id: str,
         member_user_ids: List[str],
+        http_referer: Optional[str] = None,
+        x_title: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -2294,6 +2568,11 @@ class Guardrails(BaseSDK):
 
         :param id: The unique identifier of the guardrail
         :param member_user_ids: Array of member user IDs to assign to the guardrail
+        :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
+            This is used to track API usage per application.
+
+        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -2310,6 +2589,8 @@ class Guardrails(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = operations.BulkAssignMembersToGuardrailRequest(
+            http_referer=http_referer,
+            x_title=x_title,
             id=id,
             request_body=operations.BulkAssignMembersToGuardrailRequestBody(
                 member_user_ids=member_user_ids,
@@ -2328,6 +2609,10 @@ class Guardrails(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            _globals=operations.BulkAssignMembersToGuardrailGlobals(
+                http_referer=self.sdk_configuration.globals.http_referer,
+                x_title=self.sdk_configuration.globals.x_title,
+            ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.request_body,
@@ -2406,6 +2691,8 @@ class Guardrails(BaseSDK):
         *,
         id: str,
         member_user_ids: List[str],
+        http_referer: Optional[str] = None,
+        x_title: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -2417,6 +2704,11 @@ class Guardrails(BaseSDK):
 
         :param id: The unique identifier of the guardrail
         :param member_user_ids: Array of member user IDs to assign to the guardrail
+        :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
+            This is used to track API usage per application.
+
+        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -2433,6 +2725,8 @@ class Guardrails(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = operations.BulkAssignMembersToGuardrailRequest(
+            http_referer=http_referer,
+            x_title=x_title,
             id=id,
             request_body=operations.BulkAssignMembersToGuardrailRequestBody(
                 member_user_ids=member_user_ids,
@@ -2451,6 +2745,10 @@ class Guardrails(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            _globals=operations.BulkAssignMembersToGuardrailGlobals(
+                http_referer=self.sdk_configuration.globals.http_referer,
+                x_title=self.sdk_configuration.globals.x_title,
+            ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.request_body,
@@ -2529,6 +2827,8 @@ class Guardrails(BaseSDK):
         *,
         id: str,
         key_hashes: List[str],
+        http_referer: Optional[str] = None,
+        x_title: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -2540,6 +2840,11 @@ class Guardrails(BaseSDK):
 
         :param id: The unique identifier of the guardrail
         :param key_hashes: Array of API key hashes to unassign from the guardrail
+        :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
+            This is used to track API usage per application.
+
+        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -2556,6 +2861,8 @@ class Guardrails(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = operations.BulkUnassignKeysFromGuardrailRequest(
+            http_referer=http_referer,
+            x_title=x_title,
             id=id,
             request_body=operations.BulkUnassignKeysFromGuardrailRequestBody(
                 key_hashes=key_hashes,
@@ -2574,6 +2881,10 @@ class Guardrails(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            _globals=operations.BulkUnassignKeysFromGuardrailGlobals(
+                http_referer=self.sdk_configuration.globals.http_referer,
+                x_title=self.sdk_configuration.globals.x_title,
+            ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.request_body,
@@ -2652,6 +2963,8 @@ class Guardrails(BaseSDK):
         *,
         id: str,
         key_hashes: List[str],
+        http_referer: Optional[str] = None,
+        x_title: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -2663,6 +2976,11 @@ class Guardrails(BaseSDK):
 
         :param id: The unique identifier of the guardrail
         :param key_hashes: Array of API key hashes to unassign from the guardrail
+        :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
+            This is used to track API usage per application.
+
+        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -2679,6 +2997,8 @@ class Guardrails(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = operations.BulkUnassignKeysFromGuardrailRequest(
+            http_referer=http_referer,
+            x_title=x_title,
             id=id,
             request_body=operations.BulkUnassignKeysFromGuardrailRequestBody(
                 key_hashes=key_hashes,
@@ -2697,6 +3017,10 @@ class Guardrails(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            _globals=operations.BulkUnassignKeysFromGuardrailGlobals(
+                http_referer=self.sdk_configuration.globals.http_referer,
+                x_title=self.sdk_configuration.globals.x_title,
+            ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.request_body,
@@ -2775,6 +3099,8 @@ class Guardrails(BaseSDK):
         *,
         id: str,
         member_user_ids: List[str],
+        http_referer: Optional[str] = None,
+        x_title: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -2786,6 +3112,11 @@ class Guardrails(BaseSDK):
 
         :param id: The unique identifier of the guardrail
         :param member_user_ids: Array of member user IDs to unassign from the guardrail
+        :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
+            This is used to track API usage per application.
+
+        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -2802,6 +3133,8 @@ class Guardrails(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = operations.BulkUnassignMembersFromGuardrailRequest(
+            http_referer=http_referer,
+            x_title=x_title,
             id=id,
             request_body=operations.BulkUnassignMembersFromGuardrailRequestBody(
                 member_user_ids=member_user_ids,
@@ -2820,6 +3153,10 @@ class Guardrails(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            _globals=operations.BulkUnassignMembersFromGuardrailGlobals(
+                http_referer=self.sdk_configuration.globals.http_referer,
+                x_title=self.sdk_configuration.globals.x_title,
+            ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.request_body,
@@ -2898,6 +3235,8 @@ class Guardrails(BaseSDK):
         *,
         id: str,
         member_user_ids: List[str],
+        http_referer: Optional[str] = None,
+        x_title: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -2909,6 +3248,11 @@ class Guardrails(BaseSDK):
 
         :param id: The unique identifier of the guardrail
         :param member_user_ids: Array of member user IDs to unassign from the guardrail
+        :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
+            This is used to track API usage per application.
+
+        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -2925,6 +3269,8 @@ class Guardrails(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = operations.BulkUnassignMembersFromGuardrailRequest(
+            http_referer=http_referer,
+            x_title=x_title,
             id=id,
             request_body=operations.BulkUnassignMembersFromGuardrailRequestBody(
                 member_user_ids=member_user_ids,
@@ -2943,6 +3289,10 @@ class Guardrails(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            _globals=operations.BulkUnassignMembersFromGuardrailGlobals(
+                http_referer=self.sdk_configuration.globals.http_referer,
+                x_title=self.sdk_configuration.globals.x_title,
+            ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.request_body,

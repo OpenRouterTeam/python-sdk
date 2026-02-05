@@ -22,6 +22,8 @@ class Responses(BaseSDK):
     def send(
         self,
         *,
+        http_referer: Optional[str] = None,
+        x_title: Optional[str] = None,
         input: Optional[
             Union[components.OpenResponsesInput, components.OpenResponsesInputTypedDict]
         ] = None,
@@ -84,16 +86,10 @@ class Responses(BaseSDK):
         truncation: OptionalNullable[components.Truncation] = UNSET,
         stream: Union[Literal[False], None] = None,
         provider: OptionalNullable[
-            Union[
-                components.OpenResponsesRequestProvider,
-                components.OpenResponsesRequestProviderTypedDict,
-            ]
+            Union[components.Provider, components.ProviderTypedDict]
         ] = UNSET,
         plugins: Optional[
-            Union[
-                List[components.OpenResponsesRequestPluginUnion],
-                List[components.OpenResponsesRequestPluginUnionTypedDict],
-            ]
+            Union[List[components.Plugin], List[components.PluginTypedDict]]
         ] = None,
         user: Optional[str] = None,
         session_id: Optional[str] = None,
@@ -105,6 +101,11 @@ class Responses(BaseSDK):
         r"""Create a response
 
         Creates a streaming or non-streaming response using OpenResponses API format
+
+        :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
+            This is used to track API usage per application.
+
+        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
 
         :param input: Input for a response request - can be a string or array of items
         :param instructions:
@@ -150,6 +151,8 @@ class Responses(BaseSDK):
     def send(
         self,
         *,
+        http_referer: Optional[str] = None,
+        x_title: Optional[str] = None,
         input: Optional[
             Union[components.OpenResponsesInput, components.OpenResponsesInputTypedDict]
         ] = None,
@@ -212,16 +215,10 @@ class Responses(BaseSDK):
         truncation: OptionalNullable[components.Truncation] = UNSET,
         stream: Literal[True],
         provider: OptionalNullable[
-            Union[
-                components.OpenResponsesRequestProvider,
-                components.OpenResponsesRequestProviderTypedDict,
-            ]
+            Union[components.Provider, components.ProviderTypedDict]
         ] = UNSET,
         plugins: Optional[
-            Union[
-                List[components.OpenResponsesRequestPluginUnion],
-                List[components.OpenResponsesRequestPluginUnionTypedDict],
-            ]
+            Union[List[components.Plugin], List[components.PluginTypedDict]]
         ] = None,
         user: Optional[str] = None,
         session_id: Optional[str] = None,
@@ -233,6 +230,11 @@ class Responses(BaseSDK):
         r"""Create a response
 
         Creates a streaming or non-streaming response using OpenResponses API format
+
+        :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
+            This is used to track API usage per application.
+
+        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
 
         :param input: Input for a response request - can be a string or array of items
         :param instructions:
@@ -277,6 +279,8 @@ class Responses(BaseSDK):
     def send(
         self,
         *,
+        http_referer: Optional[str] = None,
+        x_title: Optional[str] = None,
         input: Optional[
             Union[components.OpenResponsesInput, components.OpenResponsesInputTypedDict]
         ] = None,
@@ -339,16 +343,10 @@ class Responses(BaseSDK):
         truncation: OptionalNullable[components.Truncation] = UNSET,
         stream: Optional[bool] = False,
         provider: OptionalNullable[
-            Union[
-                components.OpenResponsesRequestProvider,
-                components.OpenResponsesRequestProviderTypedDict,
-            ]
+            Union[components.Provider, components.ProviderTypedDict]
         ] = UNSET,
         plugins: Optional[
-            Union[
-                List[components.OpenResponsesRequestPluginUnion],
-                List[components.OpenResponsesRequestPluginUnionTypedDict],
-            ]
+            Union[List[components.Plugin], List[components.PluginTypedDict]]
         ] = None,
         user: Optional[str] = None,
         session_id: Optional[str] = None,
@@ -360,6 +358,11 @@ class Responses(BaseSDK):
         r"""Create a response
 
         Creates a streaming or non-streaming response using OpenResponses API format
+
+        :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
+            This is used to track API usage per application.
+
+        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
 
         :param input: Input for a response request - can be a string or array of items
         :param instructions:
@@ -410,56 +413,60 @@ class Responses(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = components.OpenResponsesRequest(
-            input=utils.get_pydantic_model(
-                input, Optional[components.OpenResponsesInput]
+        request = operations.CreateResponsesRequest(
+            http_referer=http_referer,
+            x_title=x_title,
+            open_responses_request=components.OpenResponsesRequest(
+                input=utils.get_pydantic_model(
+                    input, Optional[components.OpenResponsesInput]
+                ),
+                instructions=instructions,
+                metadata=metadata,
+                tools=utils.get_pydantic_model(
+                    tools, Optional[List[components.OpenResponsesRequestToolUnion]]
+                ),
+                tool_choice=utils.get_pydantic_model(
+                    tool_choice, Optional[components.OpenAIResponsesToolChoiceUnion]
+                ),
+                parallel_tool_calls=parallel_tool_calls,
+                model=model,
+                models=models,
+                text=utils.get_pydantic_model(
+                    text, Optional[components.OpenResponsesResponseText]
+                ),
+                reasoning=utils.get_pydantic_model(
+                    reasoning, OptionalNullable[components.OpenResponsesReasoningConfig]
+                ),
+                max_output_tokens=max_output_tokens,
+                temperature=temperature,
+                top_p=top_p,
+                top_logprobs=top_logprobs,
+                max_tool_calls=max_tool_calls,
+                presence_penalty=presence_penalty,
+                frequency_penalty=frequency_penalty,
+                top_k=top_k,
+                image_config=image_config,
+                modalities=modalities,
+                prompt_cache_key=prompt_cache_key,
+                previous_response_id=previous_response_id,
+                prompt=utils.get_pydantic_model(
+                    prompt, OptionalNullable[components.OpenAIResponsesPrompt]
+                ),
+                include=include,
+                background=background,
+                safety_identifier=safety_identifier,
+                service_tier=service_tier,
+                truncation=truncation,
+                stream=stream,
+                provider=utils.get_pydantic_model(
+                    provider, OptionalNullable[components.Provider]
+                ),
+                plugins=utils.get_pydantic_model(
+                    plugins, Optional[List[components.Plugin]]
+                ),
+                user=user,
+                session_id=session_id,
             ),
-            instructions=instructions,
-            metadata=metadata,
-            tools=utils.get_pydantic_model(
-                tools, Optional[List[components.OpenResponsesRequestToolUnion]]
-            ),
-            tool_choice=utils.get_pydantic_model(
-                tool_choice, Optional[components.OpenAIResponsesToolChoiceUnion]
-            ),
-            parallel_tool_calls=parallel_tool_calls,
-            model=model,
-            models=models,
-            text=utils.get_pydantic_model(
-                text, Optional[components.OpenResponsesResponseText]
-            ),
-            reasoning=utils.get_pydantic_model(
-                reasoning, OptionalNullable[components.OpenResponsesReasoningConfig]
-            ),
-            max_output_tokens=max_output_tokens,
-            temperature=temperature,
-            top_p=top_p,
-            top_logprobs=top_logprobs,
-            max_tool_calls=max_tool_calls,
-            presence_penalty=presence_penalty,
-            frequency_penalty=frequency_penalty,
-            top_k=top_k,
-            image_config=image_config,
-            modalities=modalities,
-            prompt_cache_key=prompt_cache_key,
-            previous_response_id=previous_response_id,
-            prompt=utils.get_pydantic_model(
-                prompt, OptionalNullable[components.OpenAIResponsesPrompt]
-            ),
-            include=include,
-            background=background,
-            safety_identifier=safety_identifier,
-            service_tier=service_tier,
-            truncation=truncation,
-            stream=stream,
-            provider=utils.get_pydantic_model(
-                provider, OptionalNullable[components.OpenResponsesRequestProvider]
-            ),
-            plugins=utils.get_pydantic_model(
-                plugins, Optional[List[components.OpenResponsesRequestPluginUnion]]
-            ),
-            user=user,
-            session_id=session_id,
         )
 
         req = self._build_request(
@@ -474,9 +481,17 @@ class Responses(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="text/event-stream" if stream else "application/json",
             http_headers=http_headers,
+            _globals=operations.CreateResponsesGlobals(
+                http_referer=self.sdk_configuration.globals.http_referer,
+                x_title=self.sdk_configuration.globals.x_title,
+            ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", components.OpenResponsesRequest
+                request.open_responses_request,
+                False,
+                False,
+                "json",
+                components.OpenResponsesRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -655,6 +670,8 @@ class Responses(BaseSDK):
     async def send_async(
         self,
         *,
+        http_referer: Optional[str] = None,
+        x_title: Optional[str] = None,
         input: Optional[
             Union[components.OpenResponsesInput, components.OpenResponsesInputTypedDict]
         ] = None,
@@ -717,16 +734,10 @@ class Responses(BaseSDK):
         truncation: OptionalNullable[components.Truncation] = UNSET,
         stream: Union[Literal[False], None] = None,
         provider: OptionalNullable[
-            Union[
-                components.OpenResponsesRequestProvider,
-                components.OpenResponsesRequestProviderTypedDict,
-            ]
+            Union[components.Provider, components.ProviderTypedDict]
         ] = UNSET,
         plugins: Optional[
-            Union[
-                List[components.OpenResponsesRequestPluginUnion],
-                List[components.OpenResponsesRequestPluginUnionTypedDict],
-            ]
+            Union[List[components.Plugin], List[components.PluginTypedDict]]
         ] = None,
         user: Optional[str] = None,
         session_id: Optional[str] = None,
@@ -738,6 +749,11 @@ class Responses(BaseSDK):
         r"""Create a response
 
         Creates a streaming or non-streaming response using OpenResponses API format
+
+        :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
+            This is used to track API usage per application.
+
+        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
 
         :param input: Input for a response request - can be a string or array of items
         :param instructions:
@@ -783,6 +799,8 @@ class Responses(BaseSDK):
     async def send_async(
         self,
         *,
+        http_referer: Optional[str] = None,
+        x_title: Optional[str] = None,
         input: Optional[
             Union[components.OpenResponsesInput, components.OpenResponsesInputTypedDict]
         ] = None,
@@ -845,16 +863,10 @@ class Responses(BaseSDK):
         truncation: OptionalNullable[components.Truncation] = UNSET,
         stream: Literal[True],
         provider: OptionalNullable[
-            Union[
-                components.OpenResponsesRequestProvider,
-                components.OpenResponsesRequestProviderTypedDict,
-            ]
+            Union[components.Provider, components.ProviderTypedDict]
         ] = UNSET,
         plugins: Optional[
-            Union[
-                List[components.OpenResponsesRequestPluginUnion],
-                List[components.OpenResponsesRequestPluginUnionTypedDict],
-            ]
+            Union[List[components.Plugin], List[components.PluginTypedDict]]
         ] = None,
         user: Optional[str] = None,
         session_id: Optional[str] = None,
@@ -866,6 +878,11 @@ class Responses(BaseSDK):
         r"""Create a response
 
         Creates a streaming or non-streaming response using OpenResponses API format
+
+        :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
+            This is used to track API usage per application.
+
+        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
 
         :param input: Input for a response request - can be a string or array of items
         :param instructions:
@@ -910,6 +927,8 @@ class Responses(BaseSDK):
     async def send_async(
         self,
         *,
+        http_referer: Optional[str] = None,
+        x_title: Optional[str] = None,
         input: Optional[
             Union[components.OpenResponsesInput, components.OpenResponsesInputTypedDict]
         ] = None,
@@ -972,16 +991,10 @@ class Responses(BaseSDK):
         truncation: OptionalNullable[components.Truncation] = UNSET,
         stream: Optional[bool] = False,
         provider: OptionalNullable[
-            Union[
-                components.OpenResponsesRequestProvider,
-                components.OpenResponsesRequestProviderTypedDict,
-            ]
+            Union[components.Provider, components.ProviderTypedDict]
         ] = UNSET,
         plugins: Optional[
-            Union[
-                List[components.OpenResponsesRequestPluginUnion],
-                List[components.OpenResponsesRequestPluginUnionTypedDict],
-            ]
+            Union[List[components.Plugin], List[components.PluginTypedDict]]
         ] = None,
         user: Optional[str] = None,
         session_id: Optional[str] = None,
@@ -993,6 +1006,11 @@ class Responses(BaseSDK):
         r"""Create a response
 
         Creates a streaming or non-streaming response using OpenResponses API format
+
+        :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
+            This is used to track API usage per application.
+
+        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
 
         :param input: Input for a response request - can be a string or array of items
         :param instructions:
@@ -1043,56 +1061,60 @@ class Responses(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = components.OpenResponsesRequest(
-            input=utils.get_pydantic_model(
-                input, Optional[components.OpenResponsesInput]
+        request = operations.CreateResponsesRequest(
+            http_referer=http_referer,
+            x_title=x_title,
+            open_responses_request=components.OpenResponsesRequest(
+                input=utils.get_pydantic_model(
+                    input, Optional[components.OpenResponsesInput]
+                ),
+                instructions=instructions,
+                metadata=metadata,
+                tools=utils.get_pydantic_model(
+                    tools, Optional[List[components.OpenResponsesRequestToolUnion]]
+                ),
+                tool_choice=utils.get_pydantic_model(
+                    tool_choice, Optional[components.OpenAIResponsesToolChoiceUnion]
+                ),
+                parallel_tool_calls=parallel_tool_calls,
+                model=model,
+                models=models,
+                text=utils.get_pydantic_model(
+                    text, Optional[components.OpenResponsesResponseText]
+                ),
+                reasoning=utils.get_pydantic_model(
+                    reasoning, OptionalNullable[components.OpenResponsesReasoningConfig]
+                ),
+                max_output_tokens=max_output_tokens,
+                temperature=temperature,
+                top_p=top_p,
+                top_logprobs=top_logprobs,
+                max_tool_calls=max_tool_calls,
+                presence_penalty=presence_penalty,
+                frequency_penalty=frequency_penalty,
+                top_k=top_k,
+                image_config=image_config,
+                modalities=modalities,
+                prompt_cache_key=prompt_cache_key,
+                previous_response_id=previous_response_id,
+                prompt=utils.get_pydantic_model(
+                    prompt, OptionalNullable[components.OpenAIResponsesPrompt]
+                ),
+                include=include,
+                background=background,
+                safety_identifier=safety_identifier,
+                service_tier=service_tier,
+                truncation=truncation,
+                stream=stream,
+                provider=utils.get_pydantic_model(
+                    provider, OptionalNullable[components.Provider]
+                ),
+                plugins=utils.get_pydantic_model(
+                    plugins, Optional[List[components.Plugin]]
+                ),
+                user=user,
+                session_id=session_id,
             ),
-            instructions=instructions,
-            metadata=metadata,
-            tools=utils.get_pydantic_model(
-                tools, Optional[List[components.OpenResponsesRequestToolUnion]]
-            ),
-            tool_choice=utils.get_pydantic_model(
-                tool_choice, Optional[components.OpenAIResponsesToolChoiceUnion]
-            ),
-            parallel_tool_calls=parallel_tool_calls,
-            model=model,
-            models=models,
-            text=utils.get_pydantic_model(
-                text, Optional[components.OpenResponsesResponseText]
-            ),
-            reasoning=utils.get_pydantic_model(
-                reasoning, OptionalNullable[components.OpenResponsesReasoningConfig]
-            ),
-            max_output_tokens=max_output_tokens,
-            temperature=temperature,
-            top_p=top_p,
-            top_logprobs=top_logprobs,
-            max_tool_calls=max_tool_calls,
-            presence_penalty=presence_penalty,
-            frequency_penalty=frequency_penalty,
-            top_k=top_k,
-            image_config=image_config,
-            modalities=modalities,
-            prompt_cache_key=prompt_cache_key,
-            previous_response_id=previous_response_id,
-            prompt=utils.get_pydantic_model(
-                prompt, OptionalNullable[components.OpenAIResponsesPrompt]
-            ),
-            include=include,
-            background=background,
-            safety_identifier=safety_identifier,
-            service_tier=service_tier,
-            truncation=truncation,
-            stream=stream,
-            provider=utils.get_pydantic_model(
-                provider, OptionalNullable[components.OpenResponsesRequestProvider]
-            ),
-            plugins=utils.get_pydantic_model(
-                plugins, Optional[List[components.OpenResponsesRequestPluginUnion]]
-            ),
-            user=user,
-            session_id=session_id,
         )
 
         req = self._build_request_async(
@@ -1107,9 +1129,17 @@ class Responses(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="text/event-stream" if stream else "application/json",
             http_headers=http_headers,
+            _globals=operations.CreateResponsesGlobals(
+                http_referer=self.sdk_configuration.globals.http_referer,
+                x_title=self.sdk_configuration.globals.x_title,
+            ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", components.OpenResponsesRequest
+                request.open_responses_request,
+                False,
+                False,
+                "json",
+                components.OpenResponsesRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,

@@ -15,3 +15,9 @@ value: str = /* values here */
 value: float = /* values here */
 ```
 
+### `List[Any]`
+
+```python
+value: List[Any] = /* values here */
+```
+
