@@ -10,11 +10,50 @@ from openrouter.types import (
     UNSET_SENTINEL,
     UnrecognizedStr,
 )
-from openrouter.utils import validate_open_enum
+from openrouter.utils import (
+    FieldMetadata,
+    HeaderMetadata,
+    RequestMetadata,
+    validate_open_enum,
+)
+import pydantic
 from pydantic import model_serializer
 from pydantic.functional_validators import PlainValidator
 from typing import Literal, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypedDict
+
+
+class CreateKeysGlobalsTypedDict(TypedDict):
+    http_referer: NotRequired[str]
+    r"""The app identifier should be your app's URL and is used as the primary identifier for rankings.
+    This is used to track API usage per application.
+
+    """
+    x_title: NotRequired[str]
+    r"""The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+    """
+
+
+class CreateKeysGlobals(BaseModel):
+    http_referer: Annotated[
+        Optional[str],
+        pydantic.Field(alias="HTTP-Referer"),
+        FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
+    ] = None
+    r"""The app identifier should be your app's URL and is used as the primary identifier for rankings.
+    This is used to track API usage per application.
+
+    """
+
+    x_title: Annotated[
+        Optional[str],
+        pydantic.Field(alias="X-Title"),
+        FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
+    ] = None
+    r"""The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+    """
 
 
 CreateKeysLimitReset = Union[
@@ -28,7 +67,7 @@ CreateKeysLimitReset = Union[
 r"""Type of limit reset for the API key (daily, weekly, monthly, or null for no reset). Resets happen automatically at midnight UTC, and weeks are Monday through Sunday."""
 
 
-class CreateKeysRequestTypedDict(TypedDict):
+class CreateKeysRequestBodyTypedDict(TypedDict):
     name: str
     r"""Name for the new API key"""
     limit: NotRequired[Nullable[float]]
@@ -41,7 +80,7 @@ class CreateKeysRequestTypedDict(TypedDict):
     r"""Optional ISO 8601 UTC timestamp when the API key should expire. Must be UTC, other timezones will be rejected"""
 
 
-class CreateKeysRequest(BaseModel):
+class CreateKeysRequestBody(BaseModel):
     name: str
     r"""Name for the new API key"""
 
@@ -94,6 +133,45 @@ class CreateKeysRequest(BaseModel):
                 m[k] = val
 
         return m
+
+
+class CreateKeysRequestTypedDict(TypedDict):
+    request_body: CreateKeysRequestBodyTypedDict
+    http_referer: NotRequired[str]
+    r"""The app identifier should be your app's URL and is used as the primary identifier for rankings.
+    This is used to track API usage per application.
+
+    """
+    x_title: NotRequired[str]
+    r"""The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+    """
+
+
+class CreateKeysRequest(BaseModel):
+    request_body: Annotated[
+        CreateKeysRequestBody,
+        FieldMetadata(request=RequestMetadata(media_type="application/json")),
+    ]
+
+    http_referer: Annotated[
+        Optional[str],
+        pydantic.Field(alias="HTTP-Referer"),
+        FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
+    ] = None
+    r"""The app identifier should be your app's URL and is used as the primary identifier for rankings.
+    This is used to track API usage per application.
+
+    """
+
+    x_title: Annotated[
+        Optional[str],
+        pydantic.Field(alias="X-Title"),
+        FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
+    ] = None
+    r"""The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+    """
 
 
 class CreateKeysDataTypedDict(TypedDict):

@@ -8,6 +8,7 @@
 | `AI21`              | AI21                |
 | `AION_LABS`         | AionLabs            |
 | `ALIBABA`           | Alibaba             |
+| `AMBIENT`           | Ambient             |
 | `AMAZON_BEDROCK`    | Amazon Bedrock      |
 | `AMAZON_NOVA`       | Amazon Nova         |
 | `ANTHROPIC`         | Anthropic           |
@@ -64,6 +65,7 @@
 | `SEED`              | Seed                |
 | `SILICON_FLOW`      | SiliconFlow         |
 | `SOURCEFUL`         | Sourceful           |
+| `STEP_FUN`          | StepFun             |
 | `STEALTH`           | Stealth             |
 | `STREAM_LAKE`       | StreamLake          |
 | `SWITCHPOINT`       | Switchpoint         |

@@ -15,6 +15,8 @@ class Analytics(BaseSDK):
     def get_user_activity(
         self,
         *,
+        http_referer: Optional[str] = None,
+        x_title: Optional[str] = None,
         date_: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -23,7 +25,12 @@ class Analytics(BaseSDK):
     ) -> operations.GetUserActivityResponse:
         r"""Get user activity grouped by endpoint
 
-        Returns user activity data grouped by endpoint for the last 30 (completed) UTC days. [Provisioning key](/docs/guides/overview/auth/provisioning-api-keys) required.
+        Returns user activity data grouped by endpoint for the last 30 (completed) UTC days. [Management key](/docs/guides/overview/auth/management-api-keys) required.
+
+        :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
+            This is used to track API usage per application.
+
+        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
 
         :param date_: Filter by a single UTC date in the last 30 days (YYYY-MM-DD format).
         :param retries: Override the default retry configuration for this method
@@ -42,6 +49,8 @@ class Analytics(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = operations.GetUserActivityRequest(
+            http_referer=http_referer,
+            x_title=x_title,
             date_=date_,
         )
 
@@ -57,6 +66,10 @@ class Analytics(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            _globals=operations.GetUserActivityGlobals(
+                http_referer=self.sdk_configuration.globals.http_referer,
+                x_title=self.sdk_configuration.globals.x_title,
+            ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -124,6 +137,8 @@ class Analytics(BaseSDK):
     async def get_user_activity_async(
         self,
         *,
+        http_referer: Optional[str] = None,
+        x_title: Optional[str] = None,
         date_: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -132,7 +147,12 @@ class Analytics(BaseSDK):
     ) -> operations.GetUserActivityResponse:
         r"""Get user activity grouped by endpoint
 
-        Returns user activity data grouped by endpoint for the last 30 (completed) UTC days. [Provisioning key](/docs/guides/overview/auth/provisioning-api-keys) required.
+        Returns user activity data grouped by endpoint for the last 30 (completed) UTC days. [Management key](/docs/guides/overview/auth/management-api-keys) required.
+
+        :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
+            This is used to track API usage per application.
+
+        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
 
         :param date_: Filter by a single UTC date in the last 30 days (YYYY-MM-DD format).
         :param retries: Override the default retry configuration for this method
@@ -151,6 +171,8 @@ class Analytics(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = operations.GetUserActivityRequest(
+            http_referer=http_referer,
+            x_title=x_title,
             date_=date_,
         )
 
@@ -166,6 +188,10 @@ class Analytics(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            _globals=operations.GetUserActivityGlobals(
+                http_referer=self.sdk_configuration.globals.http_referer,
+                x_title=self.sdk_configuration.globals.x_title,
+            ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,

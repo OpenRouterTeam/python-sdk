@@ -6,6 +6,8 @@ import os
 
 
 with OpenRouter(
+    http_referer="<value>",
+    x_title="<value>",
     api_key=os.getenv("OPENROUTER_API_KEY", ""),
 ) as open_router:
 
@@ -30,6 +32,8 @@ import os
 async def main():
 
     async with OpenRouter(
+        http_referer="<value>",
+        x_title="<value>",
         api_key=os.getenv("OPENROUTER_API_KEY", ""),
     ) as open_router:
 

@@ -16,6 +16,8 @@ class APIKeys(BaseSDK):
     def list(
         self,
         *,
+        http_referer: Optional[str] = None,
+        x_title: Optional[str] = None,
         include_disabled: Optional[str] = None,
         offset: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -25,7 +27,12 @@ class APIKeys(BaseSDK):
     ) -> operations.ListResponse:
         r"""List API keys
 
-        List all API keys for the authenticated user. [Provisioning key](/docs/guides/overview/auth/provisioning-api-keys) required.
+        List all API keys for the authenticated user. [Management key](/docs/guides/overview/auth/management-api-keys) required.
+
+        :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
+            This is used to track API usage per application.
+
+        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
 
         :param include_disabled: Whether to include disabled API keys in the response
         :param offset: Number of API keys to skip for pagination
@@ -45,6 +52,8 @@ class APIKeys(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = operations.ListRequest(
+            http_referer=http_referer,
+            x_title=x_title,
             include_disabled=include_disabled,
             offset=offset,
         )
@@ -61,6 +70,10 @@ class APIKeys(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            _globals=operations.ListGlobals(
+                http_referer=self.sdk_configuration.globals.http_referer,
+                x_title=self.sdk_configuration.globals.x_title,
+            ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -123,6 +136,8 @@ class APIKeys(BaseSDK):
     async def list_async(
         self,
         *,
+        http_referer: Optional[str] = None,
+        x_title: Optional[str] = None,
         include_disabled: Optional[str] = None,
         offset: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -132,7 +147,12 @@ class APIKeys(BaseSDK):
     ) -> operations.ListResponse:
         r"""List API keys
 
-        List all API keys for the authenticated user. [Provisioning key](/docs/guides/overview/auth/provisioning-api-keys) required.
+        List all API keys for the authenticated user. [Management key](/docs/guides/overview/auth/management-api-keys) required.
+
+        :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
+            This is used to track API usage per application.
+
+        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
 
         :param include_disabled: Whether to include disabled API keys in the response
         :param offset: Number of API keys to skip for pagination
@@ -152,6 +172,8 @@ class APIKeys(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = operations.ListRequest(
+            http_referer=http_referer,
+            x_title=x_title,
             include_disabled=include_disabled,
             offset=offset,
         )
@@ -168,6 +190,10 @@ class APIKeys(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            _globals=operations.ListGlobals(
+                http_referer=self.sdk_configuration.globals.http_referer,
+                x_title=self.sdk_configuration.globals.x_title,
+            ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -231,6 +257,8 @@ class APIKeys(BaseSDK):
         self,
         *,
         name: str,
+        http_referer: Optional[str] = None,
+        x_title: Optional[str] = None,
         limit: OptionalNullable[float] = UNSET,
         limit_reset: OptionalNullable[operations.CreateKeysLimitReset] = UNSET,
         include_byok_in_limit: Optional[bool] = None,
@@ -242,9 +270,14 @@ class APIKeys(BaseSDK):
     ) -> operations.CreateKeysResponse:
         r"""Create a new API key
 
-        Create a new API key for the authenticated user. [Provisioning key](/docs/guides/overview/auth/provisioning-api-keys) required.
+        Create a new API key for the authenticated user. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param name: Name for the new API key
+        :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
+            This is used to track API usage per application.
+
+        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
         :param limit: Optional spending limit for the API key in USD
         :param limit_reset: Type of limit reset for the API key (daily, weekly, monthly, or null for no reset). Resets happen automatically at midnight UTC, and weeks are Monday through Sunday.
         :param include_byok_in_limit: Whether to include BYOK usage in the limit
@@ -265,11 +298,15 @@ class APIKeys(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = operations.CreateKeysRequest(
-            name=name,
-            limit=limit,
-            limit_reset=limit_reset,
-            include_byok_in_limit=include_byok_in_limit,
-            expires_at=expires_at,
+            http_referer=http_referer,
+            x_title=x_title,
+            request_body=operations.CreateKeysRequestBody(
+                name=name,
+                limit=limit,
+                limit_reset=limit_reset,
+                include_byok_in_limit=include_byok_in_limit,
+                expires_at=expires_at,
+            ),
         )
 
         req = self._build_request(
@@ -284,9 +321,17 @@ class APIKeys(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            _globals=operations.CreateKeysGlobals(
+                http_referer=self.sdk_configuration.globals.http_referer,
+                x_title=self.sdk_configuration.globals.x_title,
+            ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", operations.CreateKeysRequest
+                request.request_body,
+                False,
+                False,
+                "json",
+                operations.CreateKeysRequestBody,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -355,6 +400,8 @@ class APIKeys(BaseSDK):
         self,
         *,
         name: str,
+        http_referer: Optional[str] = None,
+        x_title: Optional[str] = None,
         limit: OptionalNullable[float] = UNSET,
         limit_reset: OptionalNullable[operations.CreateKeysLimitReset] = UNSET,
         include_byok_in_limit: Optional[bool] = None,
@@ -366,9 +413,14 @@ class APIKeys(BaseSDK):
     ) -> operations.CreateKeysResponse:
         r"""Create a new API key
 
-        Create a new API key for the authenticated user. [Provisioning key](/docs/guides/overview/auth/provisioning-api-keys) required.
+        Create a new API key for the authenticated user. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param name: Name for the new API key
+        :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
+            This is used to track API usage per application.
+
+        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
         :param limit: Optional spending limit for the API key in USD
         :param limit_reset: Type of limit reset for the API key (daily, weekly, monthly, or null for no reset). Resets happen automatically at midnight UTC, and weeks are Monday through Sunday.
         :param include_byok_in_limit: Whether to include BYOK usage in the limit
@@ -389,11 +441,15 @@ class APIKeys(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = operations.CreateKeysRequest(
-            name=name,
-            limit=limit,
-            limit_reset=limit_reset,
-            include_byok_in_limit=include_byok_in_limit,
-            expires_at=expires_at,
+            http_referer=http_referer,
+            x_title=x_title,
+            request_body=operations.CreateKeysRequestBody(
+                name=name,
+                limit=limit,
+                limit_reset=limit_reset,
+                include_byok_in_limit=include_byok_in_limit,
+                expires_at=expires_at,
+            ),
         )
 
         req = self._build_request_async(
@@ -408,9 +464,17 @@ class APIKeys(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            _globals=operations.CreateKeysGlobals(
+                http_referer=self.sdk_configuration.globals.http_referer,
+                x_title=self.sdk_configuration.globals.x_title,
+            ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", operations.CreateKeysRequest
+                request.request_body,
+                False,
+                False,
+                "json",
+                operations.CreateKeysRequestBody,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -479,6 +543,8 @@ class APIKeys(BaseSDK):
         self,
         *,
         hash: str,
+        http_referer: Optional[str] = None,
+        x_title: Optional[str] = None,
         name: Optional[str] = None,
         disabled: Optional[bool] = None,
         limit: OptionalNullable[float] = UNSET,
@@ -491,9 +557,14 @@ class APIKeys(BaseSDK):
     ) -> operations.UpdateKeysResponse:
         r"""Update an API key
 
-        Update an existing API key. [Provisioning key](/docs/guides/overview/auth/provisioning-api-keys) required.
+        Update an existing API key. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param hash: The hash identifier of the API key to update
+        :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
+            This is used to track API usage per application.
+
+        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
         :param name: New name for the API key
         :param disabled: Whether to disable the API key
         :param limit: New spending limit for the API key in USD
@@ -515,6 +586,8 @@ class APIKeys(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = operations.UpdateKeysRequest(
+            http_referer=http_referer,
+            x_title=x_title,
             hash=hash,
             request_body=operations.UpdateKeysRequestBody(
                 name=name,
@@ -537,6 +610,10 @@ class APIKeys(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            _globals=operations.UpdateKeysGlobals(
+                http_referer=self.sdk_configuration.globals.http_referer,
+                x_title=self.sdk_configuration.globals.x_title,
+            ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.request_body,
@@ -617,6 +694,8 @@ class APIKeys(BaseSDK):
         self,
         *,
         hash: str,
+        http_referer: Optional[str] = None,
+        x_title: Optional[str] = None,
         name: Optional[str] = None,
         disabled: Optional[bool] = None,
         limit: OptionalNullable[float] = UNSET,
@@ -629,9 +708,14 @@ class APIKeys(BaseSDK):
     ) -> operations.UpdateKeysResponse:
         r"""Update an API key
 
-        Update an existing API key. [Provisioning key](/docs/guides/overview/auth/provisioning-api-keys) required.
+        Update an existing API key. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param hash: The hash identifier of the API key to update
+        :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
+            This is used to track API usage per application.
+
+        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
         :param name: New name for the API key
         :param disabled: Whether to disable the API key
         :param limit: New spending limit for the API key in USD
@@ -653,6 +737,8 @@ class APIKeys(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = operations.UpdateKeysRequest(
+            http_referer=http_referer,
+            x_title=x_title,
             hash=hash,
             request_body=operations.UpdateKeysRequestBody(
                 name=name,
@@ -675,6 +761,10 @@ class APIKeys(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            _globals=operations.UpdateKeysGlobals(
+                http_referer=self.sdk_configuration.globals.http_referer,
+                x_title=self.sdk_configuration.globals.x_title,
+            ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.request_body,
@@ -755,6 +845,8 @@ class APIKeys(BaseSDK):
         self,
         *,
         hash: str,
+        http_referer: Optional[str] = None,
+        x_title: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -762,9 +854,14 @@ class APIKeys(BaseSDK):
     ) -> operations.DeleteKeysResponse:
         r"""Delete an API key
 
-        Delete an existing API key. [Provisioning key](/docs/guides/overview/auth/provisioning-api-keys) required.
+        Delete an existing API key. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param hash: The hash identifier of the API key to delete
+        :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
+            This is used to track API usage per application.
+
+        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -781,6 +878,8 @@ class APIKeys(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = operations.DeleteKeysRequest(
+            http_referer=http_referer,
+            x_title=x_title,
             hash=hash,
         )
 
@@ -796,6 +895,10 @@ class APIKeys(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            _globals=operations.DeleteKeysGlobals(
+                http_referer=self.sdk_configuration.globals.http_referer,
+                x_title=self.sdk_configuration.globals.x_title,
+            ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -864,6 +967,8 @@ class APIKeys(BaseSDK):
         self,
         *,
         hash: str,
+        http_referer: Optional[str] = None,
+        x_title: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -871,9 +976,14 @@ class APIKeys(BaseSDK):
     ) -> operations.DeleteKeysResponse:
         r"""Delete an API key
 
-        Delete an existing API key. [Provisioning key](/docs/guides/overview/auth/provisioning-api-keys) required.
+        Delete an existing API key. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param hash: The hash identifier of the API key to delete
+        :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
+            This is used to track API usage per application.
+
+        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -890,6 +1000,8 @@ class APIKeys(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = operations.DeleteKeysRequest(
+            http_referer=http_referer,
+            x_title=x_title,
             hash=hash,
         )
 
@@ -905,6 +1017,10 @@ class APIKeys(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            _globals=operations.DeleteKeysGlobals(
+                http_referer=self.sdk_configuration.globals.http_referer,
+                x_title=self.sdk_configuration.globals.x_title,
+            ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -973,6 +1089,8 @@ class APIKeys(BaseSDK):
         self,
         *,
         hash: str,
+        http_referer: Optional[str] = None,
+        x_title: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -980,9 +1098,14 @@ class APIKeys(BaseSDK):
     ) -> operations.GetKeyResponse:
         r"""Get a single API key
 
-        Get a single API key by hash. [Provisioning key](/docs/guides/overview/auth/provisioning-api-keys) required.
+        Get a single API key by hash. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param hash: The hash identifier of the API key to retrieve
+        :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
+            This is used to track API usage per application.
+
+        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -999,6 +1122,8 @@ class APIKeys(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = operations.GetKeyRequest(
+            http_referer=http_referer,
+            x_title=x_title,
             hash=hash,
         )
 
@@ -1014,6 +1139,10 @@ class APIKeys(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            _globals=operations.GetKeyGlobals(
+                http_referer=self.sdk_configuration.globals.http_referer,
+                x_title=self.sdk_configuration.globals.x_title,
+            ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -1082,6 +1211,8 @@ class APIKeys(BaseSDK):
         self,
         *,
         hash: str,
+        http_referer: Optional[str] = None,
+        x_title: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -1089,9 +1220,14 @@ class APIKeys(BaseSDK):
     ) -> operations.GetKeyResponse:
         r"""Get a single API key
 
-        Get a single API key by hash. [Provisioning key](/docs/guides/overview/auth/provisioning-api-keys) required.
+        Get a single API key by hash. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param hash: The hash identifier of the API key to retrieve
+        :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
+            This is used to track API usage per application.
+
+        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1108,6 +1244,8 @@ class APIKeys(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = operations.GetKeyRequest(
+            http_referer=http_referer,
+            x_title=x_title,
             hash=hash,
         )
 
@@ -1123,6 +1261,10 @@ class APIKeys(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            _globals=operations.GetKeyGlobals(
+                http_referer=self.sdk_configuration.globals.http_referer,
+                x_title=self.sdk_configuration.globals.x_title,
+            ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -1190,6 +1332,8 @@ class APIKeys(BaseSDK):
     def get_current_key_metadata(
         self,
         *,
+        http_referer: Optional[str] = None,
+        x_title: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -1198,6 +1342,11 @@ class APIKeys(BaseSDK):
         r"""Get current API key
 
         Get information on the API key associated with the current authentication session
+
+        :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
+            This is used to track API usage per application.
+
+        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
 
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -1213,18 +1362,28 @@ class APIKeys(BaseSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
+
+        request = operations.GetCurrentKeyRequest(
+            http_referer=http_referer,
+            x_title=x_title,
+        )
+
         req = self._build_request(
             method="GET",
             path="/key",
             base_url=base_url,
             url_variables=url_variables,
-            request=None,
+            request=request,
             request_body_required=False,
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            _globals=operations.GetCurrentKeyGlobals(
+                http_referer=self.sdk_configuration.globals.http_referer,
+                x_title=self.sdk_configuration.globals.x_title,
+            ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -1282,6 +1441,8 @@ class APIKeys(BaseSDK):
     async def get_current_key_metadata_async(
         self,
         *,
+        http_referer: Optional[str] = None,
+        x_title: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -1290,6 +1451,11 @@ class APIKeys(BaseSDK):
         r"""Get current API key
 
         Get information on the API key associated with the current authentication session
+
+        :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
+            This is used to track API usage per application.
+
+        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
 
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -1305,18 +1471,28 @@ class APIKeys(BaseSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
+
+        request = operations.GetCurrentKeyRequest(
+            http_referer=http_referer,
+            x_title=x_title,
+        )
+
         req = self._build_request_async(
             method="GET",
             path="/key",
             base_url=base_url,
             url_variables=url_variables,
-            request=None,
+            request=request,
             request_body_required=False,
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            _globals=operations.GetCurrentKeyGlobals(
+                http_referer=self.sdk_configuration.globals.http_referer,
+                x_title=self.sdk_configuration.globals.x_title,
+            ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,

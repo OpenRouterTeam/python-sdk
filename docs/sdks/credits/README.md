@@ -12,7 +12,7 @@ Credit management endpoints
 
 ## get_credits
 
-Get total credits purchased and used for the authenticated user. [Provisioning key](/docs/guides/overview/auth/provisioning-api-keys) required.
+Get total credits purchased and used for the authenticated user. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
 ### Example Usage
 
@@ -23,6 +23,8 @@ import os
 
 
 with OpenRouter(
+    http_referer="<value>",
+    x_title="<value>",
     api_key=os.getenv("OPENROUTER_API_KEY", ""),
 ) as open_router:
 
@@ -35,9 +37,11 @@ with OpenRouter(
 
 ### Parameters
 
-| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
-| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+| Parameter                                                                                                                                         | Type                                                                                                                                              | Required                                                                                                                                          | Description                                                                                                                                       |
+| ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `http_referer`                                                                                                                                    | *Optional[str]*                                                                                                                                   | :heavy_minus_sign:                                                                                                                                | The app identifier should be your app's URL and is used as the primary identifier for rankings.<br/>This is used to track API usage per application.<br/> |
+| `x_title`                                                                                                                                         | *Optional[str]*                                                                                                                                   | :heavy_minus_sign:                                                                                                                                | The app display name allows you to customize how your app appears in OpenRouter's dashboard.<br/>                                                 |
+| `retries`                                                                                                                                         | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                                                  | :heavy_minus_sign:                                                                                                                                | Configuration to override the default retry behavior of the client.                                                                               |
 
 ### Response
 
@@ -64,7 +68,10 @@ from openrouter import OpenRouter, operations
 import os
 
 
-with OpenRouter() as open_router:
+with OpenRouter(
+    http_referer="<value>",
+    x_title="<value>",
+) as open_router:
 
     res = open_router.credits.create_coinbase_charge(security=operations.CreateCoinbaseChargeSecurity(
         bearer=os.getenv("OPENROUTER_BEARER", ""),
@@ -77,13 +84,15 @@ with OpenRouter() as open_router:
 
 ### Parameters
 
-| Parameter                                                                                   | Type                                                                                        | Required                                                                                    | Description                                                                                 |
-| ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
-| `security`                                                                                  | [operations.CreateCoinbaseChargeSecurity](../../operations/createcoinbasechargesecurity.md) | :heavy_check_mark:                                                                          | N/A                                                                                         |
-| `amount`                                                                                    | *float*                                                                                     | :heavy_check_mark:                                                                          | N/A                                                                                         |
-| `sender`                                                                                    | *str*                                                                                       | :heavy_check_mark:                                                                          | N/A                                                                                         |
-| `chain_id`                                                                                  | [components.ChainID](../../components/chainid.md)                                           | :heavy_check_mark:                                                                          | N/A                                                                                         |
-| `retries`                                                                                   | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                            | :heavy_minus_sign:                                                                          | Configuration to override the default retry behavior of the client.                         |
+| Parameter                                                                                                                                         | Type                                                                                                                                              | Required                                                                                                                                          | Description                                                                                                                                       |
+| ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `security`                                                                                                                                        | [operations.CreateCoinbaseChargeSecurity](../../operations/createcoinbasechargesecurity.md)                                                       | :heavy_check_mark:                                                                                                                                | N/A                                                                                                                                               |
+| `amount`                                                                                                                                          | *float*                                                                                                                                           | :heavy_check_mark:                                                                                                                                | N/A                                                                                                                                               |
+| `sender`                                                                                                                                          | *str*                                                                                                                                             | :heavy_check_mark:                                                                                                                                | N/A                                                                                                                                               |
+| `chain_id`                                                                                                                                        | [components.ChainID](../../components/chainid.md)                                                                                                 | :heavy_check_mark:                                                                                                                                | N/A                                                                                                                                               |
+| `http_referer`                                                                                                                                    | *Optional[str]*                                                                                                                                   | :heavy_minus_sign:                                                                                                                                | The app identifier should be your app's URL and is used as the primary identifier for rankings.<br/>This is used to track API usage per application.<br/> |
+| `x_title`                                                                                                                                         | *Optional[str]*                                                                                                                                   | :heavy_minus_sign:                                                                                                                                | The app display name allows you to customize how your app appears in OpenRouter's dashboard.<br/>                                                 |
+| `retries`                                                                                                                                         | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                                                  | :heavy_minus_sign:                                                                                                                                | Configuration to override the default retry behavior of the client.                                                                               |
 
 ### Response
 

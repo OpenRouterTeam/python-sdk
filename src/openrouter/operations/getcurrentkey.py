@@ -9,9 +9,77 @@ from openrouter.types import (
     UNSET,
     UNSET_SENTINEL,
 )
+from openrouter.utils import FieldMetadata, HeaderMetadata
 import pydantic
 from pydantic import model_serializer
+from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict, deprecated
+
+
+class GetCurrentKeyGlobalsTypedDict(TypedDict):
+    http_referer: NotRequired[str]
+    r"""The app identifier should be your app's URL and is used as the primary identifier for rankings.
+    This is used to track API usage per application.
+
+    """
+    x_title: NotRequired[str]
+    r"""The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+    """
+
+
+class GetCurrentKeyGlobals(BaseModel):
+    http_referer: Annotated[
+        Optional[str],
+        pydantic.Field(alias="HTTP-Referer"),
+        FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
+    ] = None
+    r"""The app identifier should be your app's URL and is used as the primary identifier for rankings.
+    This is used to track API usage per application.
+
+    """
+
+    x_title: Annotated[
+        Optional[str],
+        pydantic.Field(alias="X-Title"),
+        FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
+    ] = None
+    r"""The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+    """
+
+
+class GetCurrentKeyRequestTypedDict(TypedDict):
+    http_referer: NotRequired[str]
+    r"""The app identifier should be your app's URL and is used as the primary identifier for rankings.
+    This is used to track API usage per application.
+
+    """
+    x_title: NotRequired[str]
+    r"""The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+    """
+
+
+class GetCurrentKeyRequest(BaseModel):
+    http_referer: Annotated[
+        Optional[str],
+        pydantic.Field(alias="HTTP-Referer"),
+        FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
+    ] = None
+    r"""The app identifier should be your app's URL and is used as the primary identifier for rankings.
+    This is used to track API usage per application.
+
+    """
+
+    x_title: Annotated[
+        Optional[str],
+        pydantic.Field(alias="X-Title"),
+        FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
+    ] = None
+    r"""The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+    """
 
 
 @deprecated(
@@ -70,7 +138,7 @@ class GetCurrentKeyDataTypedDict(TypedDict):
     is_free_tier: bool
     r"""Whether this is a free tier API key"""
     is_provisioning_key: bool
-    r"""Whether this is a provisioning key"""
+    r"""Whether this is a management key"""
     limit_remaining: Nullable[float]
     r"""Remaining spending limit in USD"""
     limit_reset: Nullable[str]
@@ -120,7 +188,7 @@ class GetCurrentKeyData(BaseModel):
     r"""Whether this is a free tier API key"""
 
     is_provisioning_key: bool
-    r"""Whether this is a provisioning key"""
+    r"""Whether this is a management key"""
 
     limit_remaining: Nullable[float]
     r"""Remaining spending limit in USD"""

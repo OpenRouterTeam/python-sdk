@@ -17,6 +17,8 @@ class OAuth(BaseSDK):
         self,
         *,
         code: str,
+        http_referer: Optional[str] = None,
+        x_title: Optional[str] = None,
         code_verifier: Optional[str] = None,
         code_challenge_method: OptionalNullable[
             operations.ExchangeAuthCodeForAPIKeyCodeChallengeMethod
@@ -31,6 +33,11 @@ class OAuth(BaseSDK):
         Exchange an authorization code from the PKCE flow for a user-controlled API key
 
         :param code: The authorization code received from the OAuth redirect
+        :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
+            This is used to track API usage per application.
+
+        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
         :param code_verifier: The code verifier if code_challenge was used in the authorization request
         :param code_challenge_method: The method used to generate the code challenge
         :param retries: Override the default retry configuration for this method
@@ -49,9 +56,13 @@ class OAuth(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = operations.ExchangeAuthCodeForAPIKeyRequest(
-            code=code,
-            code_verifier=code_verifier,
-            code_challenge_method=code_challenge_method,
+            http_referer=http_referer,
+            x_title=x_title,
+            request_body=operations.ExchangeAuthCodeForAPIKeyRequestBody(
+                code=code,
+                code_verifier=code_verifier,
+                code_challenge_method=code_challenge_method,
+            ),
         )
 
         req = self._build_request(
@@ -66,13 +77,17 @@ class OAuth(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            _globals=operations.ExchangeAuthCodeForAPIKeyGlobals(
+                http_referer=self.sdk_configuration.globals.http_referer,
+                x_title=self.sdk_configuration.globals.x_title,
+            ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request,
+                request.request_body,
                 False,
                 False,
                 "json",
-                operations.ExchangeAuthCodeForAPIKeyRequest,
+                operations.ExchangeAuthCodeForAPIKeyRequestBody,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -138,6 +153,8 @@ class OAuth(BaseSDK):
         self,
         *,
         code: str,
+        http_referer: Optional[str] = None,
+        x_title: Optional[str] = None,
         code_verifier: Optional[str] = None,
         code_challenge_method: OptionalNullable[
             operations.ExchangeAuthCodeForAPIKeyCodeChallengeMethod
@@ -152,6 +169,11 @@ class OAuth(BaseSDK):
         Exchange an authorization code from the PKCE flow for a user-controlled API key
 
         :param code: The authorization code received from the OAuth redirect
+        :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
+            This is used to track API usage per application.
+
+        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
         :param code_verifier: The code verifier if code_challenge was used in the authorization request
         :param code_challenge_method: The method used to generate the code challenge
         :param retries: Override the default retry configuration for this method
@@ -170,9 +192,13 @@ class OAuth(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = operations.ExchangeAuthCodeForAPIKeyRequest(
-            code=code,
-            code_verifier=code_verifier,
-            code_challenge_method=code_challenge_method,
+            http_referer=http_referer,
+            x_title=x_title,
+            request_body=operations.ExchangeAuthCodeForAPIKeyRequestBody(
+                code=code,
+                code_verifier=code_verifier,
+                code_challenge_method=code_challenge_method,
+            ),
         )
 
         req = self._build_request_async(
@@ -187,13 +213,17 @@ class OAuth(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            _globals=operations.ExchangeAuthCodeForAPIKeyGlobals(
+                http_referer=self.sdk_configuration.globals.http_referer,
+                x_title=self.sdk_configuration.globals.x_title,
+            ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request,
+                request.request_body,
                 False,
                 False,
                 "json",
-                operations.ExchangeAuthCodeForAPIKeyRequest,
+                operations.ExchangeAuthCodeForAPIKeyRequestBody,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -259,6 +289,8 @@ class OAuth(BaseSDK):
         self,
         *,
         callback_url: str,
+        http_referer: Optional[str] = None,
+        x_title: Optional[str] = None,
         code_challenge: Optional[str] = None,
         code_challenge_method: Optional[
             operations.CreateAuthKeysCodeCodeChallengeMethod
@@ -275,6 +307,11 @@ class OAuth(BaseSDK):
         Create an authorization code for the PKCE flow to generate a user-controlled API key
 
         :param callback_url: The callback URL to redirect to after authorization. Note, only https URLs on ports 443 and 3000 are allowed.
+        :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
+            This is used to track API usage per application.
+
+        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
         :param code_challenge: PKCE code challenge for enhanced security
         :param code_challenge_method: The method used to generate the code challenge
         :param limit: Credit limit for the API key to be created
@@ -295,11 +332,15 @@ class OAuth(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = operations.CreateAuthKeysCodeRequest(
-            callback_url=callback_url,
-            code_challenge=code_challenge,
-            code_challenge_method=code_challenge_method,
-            limit=limit,
-            expires_at=expires_at,
+            http_referer=http_referer,
+            x_title=x_title,
+            request_body=operations.CreateAuthKeysCodeRequestBody(
+                callback_url=callback_url,
+                code_challenge=code_challenge,
+                code_challenge_method=code_challenge_method,
+                limit=limit,
+                expires_at=expires_at,
+            ),
         )
 
         req = self._build_request(
@@ -314,9 +355,17 @@ class OAuth(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            _globals=operations.CreateAuthKeysCodeGlobals(
+                http_referer=self.sdk_configuration.globals.http_referer,
+                x_title=self.sdk_configuration.globals.x_title,
+            ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", operations.CreateAuthKeysCodeRequest
+                request.request_body,
+                False,
+                False,
+                "json",
+                operations.CreateAuthKeysCodeRequestBody,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -382,6 +431,8 @@ class OAuth(BaseSDK):
         self,
         *,
         callback_url: str,
+        http_referer: Optional[str] = None,
+        x_title: Optional[str] = None,
         code_challenge: Optional[str] = None,
         code_challenge_method: Optional[
             operations.CreateAuthKeysCodeCodeChallengeMethod
@@ -398,6 +449,11 @@ class OAuth(BaseSDK):
         Create an authorization code for the PKCE flow to generate a user-controlled API key
 
         :param callback_url: The callback URL to redirect to after authorization. Note, only https URLs on ports 443 and 3000 are allowed.
+        :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
+            This is used to track API usage per application.
+
+        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
         :param code_challenge: PKCE code challenge for enhanced security
         :param code_challenge_method: The method used to generate the code challenge
         :param limit: Credit limit for the API key to be created
@@ -418,11 +474,15 @@ class OAuth(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = operations.CreateAuthKeysCodeRequest(
-            callback_url=callback_url,
-            code_challenge=code_challenge,
-            code_challenge_method=code_challenge_method,
-            limit=limit,
-            expires_at=expires_at,
+            http_referer=http_referer,
+            x_title=x_title,
+            request_body=operations.CreateAuthKeysCodeRequestBody(
+                callback_url=callback_url,
+                code_challenge=code_challenge,
+                code_challenge_method=code_challenge_method,
+                limit=limit,
+                expires_at=expires_at,
+            ),
         )
 
         req = self._build_request_async(
@@ -437,9 +497,17 @@ class OAuth(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            _globals=operations.CreateAuthKeysCodeGlobals(
+                http_referer=self.sdk_configuration.globals.http_referer,
+                x_title=self.sdk_configuration.globals.x_title,
+            ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", operations.CreateAuthKeysCodeRequest
+                request.request_body,
+                False,
+                False,
+                "json",
+                operations.CreateAuthKeysCodeRequestBody,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,

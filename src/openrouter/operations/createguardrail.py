@@ -9,11 +9,50 @@ from openrouter.types import (
     UNSET_SENTINEL,
     UnrecognizedStr,
 )
-from openrouter.utils import validate_open_enum
+from openrouter.utils import (
+    FieldMetadata,
+    HeaderMetadata,
+    RequestMetadata,
+    validate_open_enum,
+)
+import pydantic
 from pydantic import model_serializer
 from pydantic.functional_validators import PlainValidator
-from typing import List, Literal, Union
+from typing import List, Literal, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypedDict
+
+
+class CreateGuardrailGlobalsTypedDict(TypedDict):
+    http_referer: NotRequired[str]
+    r"""The app identifier should be your app's URL and is used as the primary identifier for rankings.
+    This is used to track API usage per application.
+
+    """
+    x_title: NotRequired[str]
+    r"""The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+    """
+
+
+class CreateGuardrailGlobals(BaseModel):
+    http_referer: Annotated[
+        Optional[str],
+        pydantic.Field(alias="HTTP-Referer"),
+        FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
+    ] = None
+    r"""The app identifier should be your app's URL and is used as the primary identifier for rankings.
+    This is used to track API usage per application.
+
+    """
+
+    x_title: Annotated[
+        Optional[str],
+        pydantic.Field(alias="X-Title"),
+        FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
+    ] = None
+    r"""The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+    """
 
 
 CreateGuardrailResetIntervalRequest = Union[
@@ -27,7 +66,7 @@ CreateGuardrailResetIntervalRequest = Union[
 r"""Interval at which the limit resets (daily, weekly, monthly)"""
 
 
-class CreateGuardrailRequestTypedDict(TypedDict):
+class CreateGuardrailRequestBodyTypedDict(TypedDict):
     name: str
     r"""Name for the new guardrail"""
     description: NotRequired[Nullable[str]]
@@ -44,7 +83,7 @@ class CreateGuardrailRequestTypedDict(TypedDict):
     r"""Whether to enforce zero data retention"""
 
 
-class CreateGuardrailRequest(BaseModel):
+class CreateGuardrailRequestBody(BaseModel):
     name: str
     r"""Name for the new guardrail"""
 
@@ -112,6 +151,45 @@ class CreateGuardrailRequest(BaseModel):
                 m[k] = val
 
         return m
+
+
+class CreateGuardrailRequestTypedDict(TypedDict):
+    request_body: CreateGuardrailRequestBodyTypedDict
+    http_referer: NotRequired[str]
+    r"""The app identifier should be your app's URL and is used as the primary identifier for rankings.
+    This is used to track API usage per application.
+
+    """
+    x_title: NotRequired[str]
+    r"""The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+    """
+
+
+class CreateGuardrailRequest(BaseModel):
+    request_body: Annotated[
+        CreateGuardrailRequestBody,
+        FieldMetadata(request=RequestMetadata(media_type="application/json")),
+    ]
+
+    http_referer: Annotated[
+        Optional[str],
+        pydantic.Field(alias="HTTP-Referer"),
+        FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
+    ] = None
+    r"""The app identifier should be your app's URL and is used as the primary identifier for rankings.
+    This is used to track API usage per application.
+
+    """
+
+    x_title: Annotated[
+        Optional[str],
+        pydantic.Field(alias="X-Title"),
+        FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
+    ] = None
+    r"""The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+    """
 
 
 CreateGuardrailResetIntervalResponse = Union[

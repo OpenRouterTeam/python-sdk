@@ -2,9 +2,48 @@
 
 from __future__ import annotations
 from openrouter.types import BaseModel
-from openrouter.utils import FieldMetadata, PathParamMetadata, RequestMetadata
-from typing import List
-from typing_extensions import Annotated, TypedDict
+from openrouter.utils import (
+    FieldMetadata,
+    HeaderMetadata,
+    PathParamMetadata,
+    RequestMetadata,
+)
+import pydantic
+from typing import List, Optional
+from typing_extensions import Annotated, NotRequired, TypedDict
+
+
+class BulkAssignMembersToGuardrailGlobalsTypedDict(TypedDict):
+    http_referer: NotRequired[str]
+    r"""The app identifier should be your app's URL and is used as the primary identifier for rankings.
+    This is used to track API usage per application.
+
+    """
+    x_title: NotRequired[str]
+    r"""The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+    """
+
+
+class BulkAssignMembersToGuardrailGlobals(BaseModel):
+    http_referer: Annotated[
+        Optional[str],
+        pydantic.Field(alias="HTTP-Referer"),
+        FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
+    ] = None
+    r"""The app identifier should be your app's URL and is used as the primary identifier for rankings.
+    This is used to track API usage per application.
+
+    """
+
+    x_title: Annotated[
+        Optional[str],
+        pydantic.Field(alias="X-Title"),
+        FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
+    ] = None
+    r"""The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+    """
 
 
 class BulkAssignMembersToGuardrailRequestBodyTypedDict(TypedDict):
@@ -21,6 +60,15 @@ class BulkAssignMembersToGuardrailRequestTypedDict(TypedDict):
     id: str
     r"""The unique identifier of the guardrail"""
     request_body: BulkAssignMembersToGuardrailRequestBodyTypedDict
+    http_referer: NotRequired[str]
+    r"""The app identifier should be your app's URL and is used as the primary identifier for rankings.
+    This is used to track API usage per application.
+
+    """
+    x_title: NotRequired[str]
+    r"""The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+    """
 
 
 class BulkAssignMembersToGuardrailRequest(BaseModel):
@@ -33,6 +81,25 @@ class BulkAssignMembersToGuardrailRequest(BaseModel):
         BulkAssignMembersToGuardrailRequestBody,
         FieldMetadata(request=RequestMetadata(media_type="application/json")),
     ]
+
+    http_referer: Annotated[
+        Optional[str],
+        pydantic.Field(alias="HTTP-Referer"),
+        FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
+    ] = None
+    r"""The app identifier should be your app's URL and is used as the primary identifier for rankings.
+    This is used to track API usage per application.
+
+    """
+
+    x_title: Annotated[
+        Optional[str],
+        pydantic.Field(alias="X-Title"),
+        FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
+    ] = None
+    r"""The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+    """
 
 
 class BulkAssignMembersToGuardrailResponseTypedDict(TypedDict):

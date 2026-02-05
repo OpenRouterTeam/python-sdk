@@ -15,12 +15,19 @@ class Models(BaseSDK):
     def count(
         self,
         *,
+        http_referer: Optional[str] = None,
+        x_title: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> components.ModelsCountResponse:
         r"""Get total count of available models
+
+        :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
+            This is used to track API usage per application.
+
+        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
 
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -36,18 +43,28 @@ class Models(BaseSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
+
+        request = operations.ListModelsCountRequest(
+            http_referer=http_referer,
+            x_title=x_title,
+        )
+
         req = self._build_request(
             method="GET",
             path="/models/count",
             base_url=base_url,
             url_variables=url_variables,
-            request=None,
+            request=request,
             request_body_required=False,
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            _globals=operations.ListModelsCountGlobals(
+                http_referer=self.sdk_configuration.globals.http_referer,
+                x_title=self.sdk_configuration.globals.x_title,
+            ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -100,12 +117,19 @@ class Models(BaseSDK):
     async def count_async(
         self,
         *,
+        http_referer: Optional[str] = None,
+        x_title: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> components.ModelsCountResponse:
         r"""Get total count of available models
+
+        :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
+            This is used to track API usage per application.
+
+        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
 
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -121,18 +145,28 @@ class Models(BaseSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
+
+        request = operations.ListModelsCountRequest(
+            http_referer=http_referer,
+            x_title=x_title,
+        )
+
         req = self._build_request_async(
             method="GET",
             path="/models/count",
             base_url=base_url,
             url_variables=url_variables,
-            request=None,
+            request=request,
             request_body_required=False,
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            _globals=operations.ListModelsCountGlobals(
+                http_referer=self.sdk_configuration.globals.http_referer,
+                x_title=self.sdk_configuration.globals.x_title,
+            ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -185,6 +219,8 @@ class Models(BaseSDK):
     def list(
         self,
         *,
+        http_referer: Optional[str] = None,
+        x_title: Optional[str] = None,
         category: Optional[operations.Category] = None,
         supported_parameters: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -193,6 +229,11 @@ class Models(BaseSDK):
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> components.ModelsListResponse:
         r"""List all models and their properties
+
+        :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
+            This is used to track API usage per application.
+
+        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
 
         :param category: Filter models by use case category
         :param supported_parameters:
@@ -212,6 +253,8 @@ class Models(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = operations.GetModelsRequest(
+            http_referer=http_referer,
+            x_title=x_title,
             category=category,
             supported_parameters=supported_parameters,
         )
@@ -228,6 +271,10 @@ class Models(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            _globals=operations.GetModelsGlobals(
+                http_referer=self.sdk_configuration.globals.http_referer,
+                x_title=self.sdk_configuration.globals.x_title,
+            ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -285,6 +332,8 @@ class Models(BaseSDK):
     async def list_async(
         self,
         *,
+        http_referer: Optional[str] = None,
+        x_title: Optional[str] = None,
         category: Optional[operations.Category] = None,
         supported_parameters: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -293,6 +342,11 @@ class Models(BaseSDK):
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> components.ModelsListResponse:
         r"""List all models and their properties
+
+        :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
+            This is used to track API usage per application.
+
+        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
 
         :param category: Filter models by use case category
         :param supported_parameters:
@@ -312,6 +366,8 @@ class Models(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = operations.GetModelsRequest(
+            http_referer=http_referer,
+            x_title=x_title,
             category=category,
             supported_parameters=supported_parameters,
         )
@@ -328,6 +384,10 @@ class Models(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            _globals=operations.GetModelsGlobals(
+                http_referer=self.sdk_configuration.globals.http_referer,
+                x_title=self.sdk_configuration.globals.x_title,
+            ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -389,14 +449,23 @@ class Models(BaseSDK):
             operations.ListModelsUserSecurity,
             operations.ListModelsUserSecurityTypedDict,
         ],
+        http_referer: Optional[str] = None,
+        x_title: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> components.ModelsListResponse:
-        r"""List models filtered by user provider preferences
+        r"""List models filtered by user provider preferences, privacy settings, and guardrails
+
+        List models filtered by user provider preferences, [privacy settings](https://openrouter.ai/docs/guides/privacy/logging), and [guardrails](https://openrouter.ai/docs/guides/features/guardrails). If requesting through `eu.openrouter.ai/api/v1/...` the results will be filtered to models that satisfy [EU in-region routing](https://openrouter.ai/docs/guides/privacy/logging#enterprise-eu-in-region-routing).
 
         :param security:
+        :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
+            This is used to track API usage per application.
+
+        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -411,18 +480,28 @@ class Models(BaseSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
+
+        request = operations.ListModelsUserRequest(
+            http_referer=http_referer,
+            x_title=x_title,
+        )
+
         req = self._build_request(
             method="GET",
             path="/models/user",
             base_url=base_url,
             url_variables=url_variables,
-            request=None,
+            request=request,
             request_body_required=False,
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            _globals=operations.ListModelsUserGlobals(
+                http_referer=self.sdk_configuration.globals.http_referer,
+                x_title=self.sdk_configuration.globals.x_title,
+            ),
             security=utils.get_pydantic_model(
                 security, operations.ListModelsUserSecurity
             ),
@@ -447,7 +526,7 @@ class Models(BaseSDK):
                 security_source=get_security_from_env(security, components.Security),
             ),
             request=req,
-            error_status_codes=["401", "4XX", "500", "5XX"],
+            error_status_codes=["401", "404", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -459,6 +538,11 @@ class Models(BaseSDK):
                 errors.UnauthorizedResponseErrorData, http_res
             )
             raise errors.UnauthorizedResponseError(response_data, http_res)
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.NotFoundResponseErrorData, http_res
+            )
+            raise errors.NotFoundResponseError(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(
                 errors.InternalServerResponseErrorData, http_res
@@ -484,14 +568,23 @@ class Models(BaseSDK):
             operations.ListModelsUserSecurity,
             operations.ListModelsUserSecurityTypedDict,
         ],
+        http_referer: Optional[str] = None,
+        x_title: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> components.ModelsListResponse:
-        r"""List models filtered by user provider preferences
+        r"""List models filtered by user provider preferences, privacy settings, and guardrails
+
+        List models filtered by user provider preferences, [privacy settings](https://openrouter.ai/docs/guides/privacy/logging), and [guardrails](https://openrouter.ai/docs/guides/features/guardrails). If requesting through `eu.openrouter.ai/api/v1/...` the results will be filtered to models that satisfy [EU in-region routing](https://openrouter.ai/docs/guides/privacy/logging#enterprise-eu-in-region-routing).
 
         :param security:
+        :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
+            This is used to track API usage per application.
+
+        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -506,18 +599,28 @@ class Models(BaseSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
+
+        request = operations.ListModelsUserRequest(
+            http_referer=http_referer,
+            x_title=x_title,
+        )
+
         req = self._build_request_async(
             method="GET",
             path="/models/user",
             base_url=base_url,
             url_variables=url_variables,
-            request=None,
+            request=request,
             request_body_required=False,
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            _globals=operations.ListModelsUserGlobals(
+                http_referer=self.sdk_configuration.globals.http_referer,
+                x_title=self.sdk_configuration.globals.x_title,
+            ),
             security=utils.get_pydantic_model(
                 security, operations.ListModelsUserSecurity
             ),
@@ -542,7 +645,7 @@ class Models(BaseSDK):
                 security_source=get_security_from_env(security, components.Security),
             ),
             request=req,
-            error_status_codes=["401", "4XX", "500", "5XX"],
+            error_status_codes=["401", "404", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -554,6 +657,11 @@ class Models(BaseSDK):
                 errors.UnauthorizedResponseErrorData, http_res
             )
             raise errors.UnauthorizedResponseError(response_data, http_res)
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.NotFoundResponseErrorData, http_res
+            )
+            raise errors.NotFoundResponseError(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(
                 errors.InternalServerResponseErrorData, http_res

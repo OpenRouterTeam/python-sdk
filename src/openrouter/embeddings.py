@@ -23,6 +23,8 @@ class Embeddings(BaseSDK):
         *,
         input: Union[operations.InputUnion, operations.InputUnionTypedDict],
         model: str,
+        http_referer: Optional[str] = None,
+        x_title: Optional[str] = None,
         encoding_format: Optional[operations.EncodingFormat] = None,
         dimensions: Optional[int] = None,
         user: Optional[str] = None,
@@ -44,6 +46,11 @@ class Embeddings(BaseSDK):
 
         :param input:
         :param model:
+        :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
+            This is used to track API usage per application.
+
+        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
         :param encoding_format:
         :param dimensions:
         :param user:
@@ -66,15 +73,19 @@ class Embeddings(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = operations.CreateEmbeddingsRequest(
-            input=utils.get_pydantic_model(input, operations.InputUnion),
-            model=model,
-            encoding_format=encoding_format,
-            dimensions=dimensions,
-            user=user,
-            provider=utils.get_pydantic_model(
-                provider, Optional[components.ProviderPreferences]
+            http_referer=http_referer,
+            x_title=x_title,
+            request_body=operations.CreateEmbeddingsRequestBody(
+                input=utils.get_pydantic_model(input, operations.InputUnion),
+                model=model,
+                encoding_format=encoding_format,
+                dimensions=dimensions,
+                user=user,
+                provider=utils.get_pydantic_model(
+                    provider, Optional[components.ProviderPreferences]
+                ),
+                input_type=input_type,
             ),
-            input_type=input_type,
         )
 
         req = self._build_request(
@@ -91,9 +102,17 @@ class Embeddings(BaseSDK):
             if accept_header_override is not None
             else "application/json;q=1, text/event-stream;q=0",
             http_headers=http_headers,
+            _globals=operations.CreateEmbeddingsGlobals(
+                http_referer=self.sdk_configuration.globals.http_referer,
+                x_title=self.sdk_configuration.globals.x_title,
+            ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", operations.CreateEmbeddingsRequest
+                request.request_body,
+                False,
+                False,
+                "json",
+                operations.CreateEmbeddingsRequestBody,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -210,6 +229,8 @@ class Embeddings(BaseSDK):
         *,
         input: Union[operations.InputUnion, operations.InputUnionTypedDict],
         model: str,
+        http_referer: Optional[str] = None,
+        x_title: Optional[str] = None,
         encoding_format: Optional[operations.EncodingFormat] = None,
         dimensions: Optional[int] = None,
         user: Optional[str] = None,
@@ -231,6 +252,11 @@ class Embeddings(BaseSDK):
 
         :param input:
         :param model:
+        :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
+            This is used to track API usage per application.
+
+        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
         :param encoding_format:
         :param dimensions:
         :param user:
@@ -253,15 +279,19 @@ class Embeddings(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = operations.CreateEmbeddingsRequest(
-            input=utils.get_pydantic_model(input, operations.InputUnion),
-            model=model,
-            encoding_format=encoding_format,
-            dimensions=dimensions,
-            user=user,
-            provider=utils.get_pydantic_model(
-                provider, Optional[components.ProviderPreferences]
+            http_referer=http_referer,
+            x_title=x_title,
+            request_body=operations.CreateEmbeddingsRequestBody(
+                input=utils.get_pydantic_model(input, operations.InputUnion),
+                model=model,
+                encoding_format=encoding_format,
+                dimensions=dimensions,
+                user=user,
+                provider=utils.get_pydantic_model(
+                    provider, Optional[components.ProviderPreferences]
+                ),
+                input_type=input_type,
             ),
-            input_type=input_type,
         )
 
         req = self._build_request_async(
@@ -278,9 +308,17 @@ class Embeddings(BaseSDK):
             if accept_header_override is not None
             else "application/json;q=1, text/event-stream;q=0",
             http_headers=http_headers,
+            _globals=operations.CreateEmbeddingsGlobals(
+                http_referer=self.sdk_configuration.globals.http_referer,
+                x_title=self.sdk_configuration.globals.x_title,
+            ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", operations.CreateEmbeddingsRequest
+                request.request_body,
+                False,
+                False,
+                "json",
+                operations.CreateEmbeddingsRequestBody,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -395,6 +433,8 @@ class Embeddings(BaseSDK):
     def list_models(
         self,
         *,
+        http_referer: Optional[str] = None,
+        x_title: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -403,6 +443,11 @@ class Embeddings(BaseSDK):
         r"""List all embeddings models
 
         Returns a list of all available embeddings models and their properties
+
+        :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
+            This is used to track API usage per application.
+
+        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
 
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -418,18 +463,28 @@ class Embeddings(BaseSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
+
+        request = operations.ListEmbeddingsModelsRequest(
+            http_referer=http_referer,
+            x_title=x_title,
+        )
+
         req = self._build_request(
             method="GET",
             path="/embeddings/models",
             base_url=base_url,
             url_variables=url_variables,
-            request=None,
+            request=request,
             request_body_required=False,
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            _globals=operations.ListEmbeddingsModelsGlobals(
+                http_referer=self.sdk_configuration.globals.http_referer,
+                x_title=self.sdk_configuration.globals.x_title,
+            ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -487,6 +542,8 @@ class Embeddings(BaseSDK):
     async def list_models_async(
         self,
         *,
+        http_referer: Optional[str] = None,
+        x_title: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -495,6 +552,11 @@ class Embeddings(BaseSDK):
         r"""List all embeddings models
 
         Returns a list of all available embeddings models and their properties
+
+        :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
+            This is used to track API usage per application.
+
+        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
 
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -510,18 +572,28 @@ class Embeddings(BaseSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
+
+        request = operations.ListEmbeddingsModelsRequest(
+            http_referer=http_referer,
+            x_title=x_title,
+        )
+
         req = self._build_request_async(
             method="GET",
             path="/embeddings/models",
             base_url=base_url,
             url_variables=url_variables,
-            request=None,
+            request=request,
             request_body_required=False,
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            _globals=operations.ListEmbeddingsModelsGlobals(
+                http_referer=self.sdk_configuration.globals.http_referer,
+                x_title=self.sdk_configuration.globals.x_title,
+            ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,

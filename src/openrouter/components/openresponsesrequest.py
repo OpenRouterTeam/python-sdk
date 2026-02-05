@@ -222,37 +222,29 @@ class OpenResponsesRequestMaxPriceTypedDict(TypedDict):
     r"""The object specifying the maximum price you want to pay for this request. USD price per million tokens, for prompt and completion."""
 
     prompt: NotRequired[str]
-    r"""A value in string format that is a large number"""
+    r"""Price per million prompt tokens"""
     completion: NotRequired[str]
-    r"""A value in string format that is a large number"""
     image: NotRequired[str]
-    r"""A value in string format that is a large number"""
     audio: NotRequired[str]
-    r"""A value in string format that is a large number"""
     request: NotRequired[str]
-    r"""A value in string format that is a large number"""
 
 
 class OpenResponsesRequestMaxPrice(BaseModel):
     r"""The object specifying the maximum price you want to pay for this request. USD price per million tokens, for prompt and completion."""
 
     prompt: Optional[str] = None
-    r"""A value in string format that is a large number"""
+    r"""Price per million prompt tokens"""
 
     completion: Optional[str] = None
-    r"""A value in string format that is a large number"""
 
     image: Optional[str] = None
-    r"""A value in string format that is a large number"""
 
     audio: Optional[str] = None
-    r"""A value in string format that is a large number"""
 
     request: Optional[str] = None
-    r"""A value in string format that is a large number"""
 
 
-class OpenResponsesRequestProviderTypedDict(TypedDict):
+class ProviderTypedDict(TypedDict):
     r"""When multiple model providers are available, optionally indicate your routing preference."""
 
     allow_fallbacks: NotRequired[Nullable[bool]]
@@ -291,7 +283,7 @@ class OpenResponsesRequestProviderTypedDict(TypedDict):
     r"""Preferred maximum latency (in seconds). Can be a number (applies to p50) or an object with percentile-specific cutoffs. Endpoints above the threshold(s) may still be used, but are deprioritized in routing. When using fallback models, this may cause a fallback model to be used instead of the primary model if it meets the threshold."""
 
 
-class OpenResponsesRequestProvider(BaseModel):
+class Provider(BaseModel):
     r"""When multiple model providers are available, optionally indicate your routing preference."""
 
     allow_fallbacks: OptionalNullable[bool] = UNSET
@@ -406,13 +398,13 @@ class OpenResponsesRequestProvider(BaseModel):
 IDResponseHealing = Literal["response-healing",]
 
 
-class OpenResponsesRequestPluginResponseHealingTypedDict(TypedDict):
+class PluginResponseHealingTypedDict(TypedDict):
     id: IDResponseHealing
     enabled: NotRequired[bool]
     r"""Set to false to disable the response-healing plugin for this request. Defaults to true."""
 
 
-class OpenResponsesRequestPluginResponseHealing(BaseModel):
+class PluginResponseHealing(BaseModel):
     id: IDResponseHealing
 
     enabled: Optional[bool] = None
@@ -422,7 +414,7 @@ class OpenResponsesRequestPluginResponseHealing(BaseModel):
 IDFileParser = Literal["file-parser",]
 
 
-class OpenResponsesRequestPluginFileParserTypedDict(TypedDict):
+class PluginFileParserTypedDict(TypedDict):
     id: IDFileParser
     enabled: NotRequired[bool]
     r"""Set to false to disable the file-parser plugin for this request. Defaults to true."""
@@ -430,7 +422,7 @@ class OpenResponsesRequestPluginFileParserTypedDict(TypedDict):
     r"""Options for PDF parsing."""
 
 
-class OpenResponsesRequestPluginFileParser(BaseModel):
+class PluginFileParser(BaseModel):
     id: IDFileParser
 
     enabled: Optional[bool] = None
@@ -443,7 +435,7 @@ class OpenResponsesRequestPluginFileParser(BaseModel):
 IDWeb = Literal["web",]
 
 
-class OpenResponsesRequestPluginWebTypedDict(TypedDict):
+class PluginWebTypedDict(TypedDict):
     id: IDWeb
     enabled: NotRequired[bool]
     r"""Set to false to disable the web-search plugin for this request. Defaults to true."""
@@ -453,7 +445,7 @@ class OpenResponsesRequestPluginWebTypedDict(TypedDict):
     r"""The search engine to use for web search."""
 
 
-class OpenResponsesRequestPluginWeb(BaseModel):
+class PluginWeb(BaseModel):
     id: IDWeb
 
     enabled: Optional[bool] = None
@@ -472,18 +464,18 @@ class OpenResponsesRequestPluginWeb(BaseModel):
 IDModeration = Literal["moderation",]
 
 
-class OpenResponsesRequestPluginModerationTypedDict(TypedDict):
+class PluginModerationTypedDict(TypedDict):
     id: IDModeration
 
 
-class OpenResponsesRequestPluginModeration(BaseModel):
+class PluginModeration(BaseModel):
     id: IDModeration
 
 
 IDAutoRouter = Literal["auto-router",]
 
 
-class OpenResponsesRequestPluginAutoRouterTypedDict(TypedDict):
+class PluginAutoRouterTypedDict(TypedDict):
     id: IDAutoRouter
     enabled: NotRequired[bool]
     r"""Set to false to disable the auto-router plugin for this request. Defaults to true."""
@@ -491,7 +483,7 @@ class OpenResponsesRequestPluginAutoRouterTypedDict(TypedDict):
     r"""List of model patterns to filter which models the auto-router can route between. Supports wildcards (e.g., \"anthropic/*\" matches all Anthropic models). When not specified, uses the default supported models list."""
 
 
-class OpenResponsesRequestPluginAutoRouter(BaseModel):
+class PluginAutoRouter(BaseModel):
     id: IDAutoRouter
 
     enabled: Optional[bool] = None
@@ -501,25 +493,25 @@ class OpenResponsesRequestPluginAutoRouter(BaseModel):
     r"""List of model patterns to filter which models the auto-router can route between. Supports wildcards (e.g., \"anthropic/*\" matches all Anthropic models). When not specified, uses the default supported models list."""
 
 
-OpenResponsesRequestPluginUnionTypedDict = TypeAliasType(
-    "OpenResponsesRequestPluginUnionTypedDict",
+PluginTypedDict = TypeAliasType(
+    "PluginTypedDict",
     Union[
-        OpenResponsesRequestPluginModerationTypedDict,
-        OpenResponsesRequestPluginResponseHealingTypedDict,
-        OpenResponsesRequestPluginAutoRouterTypedDict,
-        OpenResponsesRequestPluginFileParserTypedDict,
-        OpenResponsesRequestPluginWebTypedDict,
+        PluginModerationTypedDict,
+        PluginResponseHealingTypedDict,
+        PluginAutoRouterTypedDict,
+        PluginFileParserTypedDict,
+        PluginWebTypedDict,
     ],
 )
 
 
-OpenResponsesRequestPluginUnion = Annotated[
+Plugin = Annotated[
     Union[
-        Annotated[OpenResponsesRequestPluginAutoRouter, Tag("auto-router")],
-        Annotated[OpenResponsesRequestPluginModeration, Tag("moderation")],
-        Annotated[OpenResponsesRequestPluginWeb, Tag("web")],
-        Annotated[OpenResponsesRequestPluginFileParser, Tag("file-parser")],
-        Annotated[OpenResponsesRequestPluginResponseHealing, Tag("response-healing")],
+        Annotated[PluginAutoRouter, Tag("auto-router")],
+        Annotated[PluginModeration, Tag("moderation")],
+        Annotated[PluginWeb, Tag("web")],
+        Annotated[PluginFileParser, Tag("file-parser")],
+        Annotated[PluginResponseHealing, Tag("response-healing")],
     ],
     Discriminator(lambda m: get_discriminator(m, "id", "id")),
 ]
@@ -564,9 +556,9 @@ class OpenResponsesRequestTypedDict(TypedDict):
     service_tier: NotRequired[ServiceTier]
     truncation: NotRequired[Nullable[Truncation]]
     stream: NotRequired[bool]
-    provider: NotRequired[Nullable[OpenResponsesRequestProviderTypedDict]]
+    provider: NotRequired[Nullable[ProviderTypedDict]]
     r"""When multiple model providers are available, optionally indicate your routing preference."""
-    plugins: NotRequired[List[OpenResponsesRequestPluginUnionTypedDict]]
+    plugins: NotRequired[List[PluginTypedDict]]
     r"""Plugins you want to enable for this request, including their settings."""
     user: NotRequired[str]
     r"""A unique identifier representing your end-user, which helps distinguish between different users of your app. This allows your app to identify specific users in case of abuse reports, preventing your entire app from being affected by the actions of individual users. Maximum of 128 characters."""
@@ -660,10 +652,10 @@ class OpenResponsesRequest(BaseModel):
 
     stream: Optional[bool] = False
 
-    provider: OptionalNullable[OpenResponsesRequestProvider] = UNSET
+    provider: OptionalNullable[Provider] = UNSET
     r"""When multiple model providers are available, optionally indicate your routing preference."""
 
-    plugins: Optional[List[OpenResponsesRequestPluginUnion]] = None
+    plugins: Optional[List[Plugin]] = None
     r"""Plugins you want to enable for this request, including their settings."""
 
     user: Optional[str] = None

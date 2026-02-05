@@ -15,6 +15,8 @@ class Credits(BaseSDK):
     def get_credits(
         self,
         *,
+        http_referer: Optional[str] = None,
+        x_title: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -22,7 +24,12 @@ class Credits(BaseSDK):
     ) -> operations.GetCreditsResponse:
         r"""Get remaining credits
 
-        Get total credits purchased and used for the authenticated user. [Provisioning key](/docs/guides/overview/auth/provisioning-api-keys) required.
+        Get total credits purchased and used for the authenticated user. [Management key](/docs/guides/overview/auth/management-api-keys) required.
+
+        :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
+            This is used to track API usage per application.
+
+        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
 
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -38,18 +45,28 @@ class Credits(BaseSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
+
+        request = operations.GetCreditsRequest(
+            http_referer=http_referer,
+            x_title=x_title,
+        )
+
         req = self._build_request(
             method="GET",
             path="/credits",
             base_url=base_url,
             url_variables=url_variables,
-            request=None,
+            request=request,
             request_body_required=False,
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            _globals=operations.GetCreditsGlobals(
+                http_referer=self.sdk_configuration.globals.http_referer,
+                x_title=self.sdk_configuration.globals.x_title,
+            ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -112,6 +129,8 @@ class Credits(BaseSDK):
     async def get_credits_async(
         self,
         *,
+        http_referer: Optional[str] = None,
+        x_title: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -119,7 +138,12 @@ class Credits(BaseSDK):
     ) -> operations.GetCreditsResponse:
         r"""Get remaining credits
 
-        Get total credits purchased and used for the authenticated user. [Provisioning key](/docs/guides/overview/auth/provisioning-api-keys) required.
+        Get total credits purchased and used for the authenticated user. [Management key](/docs/guides/overview/auth/management-api-keys) required.
+
+        :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
+            This is used to track API usage per application.
+
+        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
 
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -135,18 +159,28 @@ class Credits(BaseSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
+
+        request = operations.GetCreditsRequest(
+            http_referer=http_referer,
+            x_title=x_title,
+        )
+
         req = self._build_request_async(
             method="GET",
             path="/credits",
             base_url=base_url,
             url_variables=url_variables,
-            request=None,
+            request=request,
             request_body_required=False,
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            _globals=operations.GetCreditsGlobals(
+                http_referer=self.sdk_configuration.globals.http_referer,
+                x_title=self.sdk_configuration.globals.x_title,
+            ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -216,6 +250,8 @@ class Credits(BaseSDK):
         amount: float,
         sender: str,
         chain_id: components.ChainID,
+        http_referer: Optional[str] = None,
+        x_title: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -229,6 +265,11 @@ class Credits(BaseSDK):
         :param amount:
         :param sender:
         :param chain_id:
+        :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
+            This is used to track API usage per application.
+
+        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -244,10 +285,14 @@ class Credits(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = components.CreateChargeRequest(
-            amount=amount,
-            sender=sender,
-            chain_id=chain_id,
+        request = operations.CreateCoinbaseChargeRequest(
+            http_referer=http_referer,
+            x_title=x_title,
+            create_charge_request=components.CreateChargeRequest(
+                amount=amount,
+                sender=sender,
+                chain_id=chain_id,
+            ),
         )
 
         req = self._build_request(
@@ -262,11 +307,19 @@ class Credits(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            _globals=operations.CreateCoinbaseChargeGlobals(
+                http_referer=self.sdk_configuration.globals.http_referer,
+                x_title=self.sdk_configuration.globals.x_title,
+            ),
             security=utils.get_pydantic_model(
                 security, operations.CreateCoinbaseChargeSecurity
             ),
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", components.CreateChargeRequest
+                request.create_charge_request,
+                False,
+                False,
+                "json",
+                components.CreateChargeRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -341,6 +394,8 @@ class Credits(BaseSDK):
         amount: float,
         sender: str,
         chain_id: components.ChainID,
+        http_referer: Optional[str] = None,
+        x_title: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -354,6 +409,11 @@ class Credits(BaseSDK):
         :param amount:
         :param sender:
         :param chain_id:
+        :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
+            This is used to track API usage per application.
+
+        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -369,10 +429,14 @@ class Credits(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = components.CreateChargeRequest(
-            amount=amount,
-            sender=sender,
-            chain_id=chain_id,
+        request = operations.CreateCoinbaseChargeRequest(
+            http_referer=http_referer,
+            x_title=x_title,
+            create_charge_request=components.CreateChargeRequest(
+                amount=amount,
+                sender=sender,
+                chain_id=chain_id,
+            ),
         )
 
         req = self._build_request_async(
@@ -387,11 +451,19 @@ class Credits(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            _globals=operations.CreateCoinbaseChargeGlobals(
+                http_referer=self.sdk_configuration.globals.http_referer,
+                x_title=self.sdk_configuration.globals.x_title,
+            ),
             security=utils.get_pydantic_model(
                 security, operations.CreateCoinbaseChargeSecurity
             ),
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", components.CreateChargeRequest
+                request.create_charge_request,
+                False,
+                False,
+                "json",
+                components.CreateChargeRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
