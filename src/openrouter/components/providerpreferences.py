@@ -176,34 +176,26 @@ class ProviderPreferencesMaxPriceTypedDict(TypedDict):
     r"""The object specifying the maximum price you want to pay for this request. USD price per million tokens, for prompt and completion."""
 
     prompt: NotRequired[str]
-    r"""A value in string format that is a large number"""
+    r"""Price per million prompt tokens"""
     completion: NotRequired[str]
-    r"""A value in string format that is a large number"""
     image: NotRequired[str]
-    r"""A value in string format that is a large number"""
     audio: NotRequired[str]
-    r"""A value in string format that is a large number"""
     request: NotRequired[str]
-    r"""A value in string format that is a large number"""
 
 
 class ProviderPreferencesMaxPrice(BaseModel):
     r"""The object specifying the maximum price you want to pay for this request. USD price per million tokens, for prompt and completion."""
 
     prompt: Optional[str] = None
-    r"""A value in string format that is a large number"""
+    r"""Price per million prompt tokens"""
 
     completion: Optional[str] = None
-    r"""A value in string format that is a large number"""
 
     image: Optional[str] = None
-    r"""A value in string format that is a large number"""
 
     audio: Optional[str] = None
-    r"""A value in string format that is a large number"""
 
     request: Optional[str] = None
-    r"""A value in string format that is a large number"""
 
 
 class ProviderPreferencesTypedDict(TypedDict):

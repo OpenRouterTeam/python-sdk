@@ -22,16 +22,10 @@ class Chat(BaseSDK):
         *,
         messages: Union[List[components.Message], List[components.MessageTypedDict]],
         provider: OptionalNullable[
-            Union[
-                components.ChatGenerationParamsProvider,
-                components.ChatGenerationParamsProviderTypedDict,
-            ]
+            Union[components.Schema0, components.Schema0TypedDict]
         ] = UNSET,
         plugins: Optional[
-            Union[
-                List[components.ChatGenerationParamsPluginUnion],
-                List[components.ChatGenerationParamsPluginUnionTypedDict],
-            ]
+            Union[List[components.Schema17], List[components.Schema17TypedDict]]
         ] = None,
         route: OptionalNullable[components.Route] = UNSET,
         user: Optional[str] = None,
@@ -50,17 +44,11 @@ class Chat(BaseSDK):
             Union[components.Reasoning, components.ReasoningTypedDict]
         ] = None,
         response_format: Optional[
-            Union[
-                components.ChatGenerationParamsResponseFormatUnion,
-                components.ChatGenerationParamsResponseFormatUnionTypedDict,
-            ]
+            Union[components.ResponseFormat, components.ResponseFormatTypedDict]
         ] = None,
         seed: OptionalNullable[int] = UNSET,
         stop: OptionalNullable[
-            Union[
-                components.ChatGenerationParamsStop,
-                components.ChatGenerationParamsStopTypedDict,
-            ]
+            Union[components.Stop, components.StopTypedDict]
         ] = UNSET,
         stream: Union[Literal[False], None] = None,
         stream_options: OptionalNullable[
@@ -93,11 +81,11 @@ class Chat(BaseSDK):
         Sends a request for a model response for the given chat conversation. Supports both streaming and non-streaming modes.
 
         :param messages:
-        :param provider: When multiple model providers are available, optionally indicate your routing preference.
-        :param plugins: Plugins you want to enable for this request, including their settings.
+        :param provider:
+        :param plugins:
         :param route:
         :param user:
-        :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 128 characters.
+        :param session_id:
         :param model:
         :param models:
         :param frequency_penalty:
@@ -134,16 +122,10 @@ class Chat(BaseSDK):
         *,
         messages: Union[List[components.Message], List[components.MessageTypedDict]],
         provider: OptionalNullable[
-            Union[
-                components.ChatGenerationParamsProvider,
-                components.ChatGenerationParamsProviderTypedDict,
-            ]
+            Union[components.Schema0, components.Schema0TypedDict]
         ] = UNSET,
         plugins: Optional[
-            Union[
-                List[components.ChatGenerationParamsPluginUnion],
-                List[components.ChatGenerationParamsPluginUnionTypedDict],
-            ]
+            Union[List[components.Schema17], List[components.Schema17TypedDict]]
         ] = None,
         route: OptionalNullable[components.Route] = UNSET,
         user: Optional[str] = None,
@@ -162,17 +144,11 @@ class Chat(BaseSDK):
             Union[components.Reasoning, components.ReasoningTypedDict]
         ] = None,
         response_format: Optional[
-            Union[
-                components.ChatGenerationParamsResponseFormatUnion,
-                components.ChatGenerationParamsResponseFormatUnionTypedDict,
-            ]
+            Union[components.ResponseFormat, components.ResponseFormatTypedDict]
         ] = None,
         seed: OptionalNullable[int] = UNSET,
         stop: OptionalNullable[
-            Union[
-                components.ChatGenerationParamsStop,
-                components.ChatGenerationParamsStopTypedDict,
-            ]
+            Union[components.Stop, components.StopTypedDict]
         ] = UNSET,
         stream: Literal[True],
         stream_options: OptionalNullable[
@@ -205,11 +181,11 @@ class Chat(BaseSDK):
         Sends a request for a model response for the given chat conversation. Supports both streaming and non-streaming modes.
 
         :param messages:
-        :param provider: When multiple model providers are available, optionally indicate your routing preference.
-        :param plugins: Plugins you want to enable for this request, including their settings.
+        :param provider:
+        :param plugins:
         :param route:
         :param user:
-        :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 128 characters.
+        :param session_id:
         :param model:
         :param models:
         :param frequency_penalty:
@@ -245,16 +221,10 @@ class Chat(BaseSDK):
         *,
         messages: Union[List[components.Message], List[components.MessageTypedDict]],
         provider: OptionalNullable[
-            Union[
-                components.ChatGenerationParamsProvider,
-                components.ChatGenerationParamsProviderTypedDict,
-            ]
+            Union[components.Schema0, components.Schema0TypedDict]
         ] = UNSET,
         plugins: Optional[
-            Union[
-                List[components.ChatGenerationParamsPluginUnion],
-                List[components.ChatGenerationParamsPluginUnionTypedDict],
-            ]
+            Union[List[components.Schema17], List[components.Schema17TypedDict]]
         ] = None,
         route: OptionalNullable[components.Route] = UNSET,
         user: Optional[str] = None,
@@ -273,17 +243,11 @@ class Chat(BaseSDK):
             Union[components.Reasoning, components.ReasoningTypedDict]
         ] = None,
         response_format: Optional[
-            Union[
-                components.ChatGenerationParamsResponseFormatUnion,
-                components.ChatGenerationParamsResponseFormatUnionTypedDict,
-            ]
+            Union[components.ResponseFormat, components.ResponseFormatTypedDict]
         ] = None,
         seed: OptionalNullable[int] = UNSET,
         stop: OptionalNullable[
-            Union[
-                components.ChatGenerationParamsStop,
-                components.ChatGenerationParamsStopTypedDict,
-            ]
+            Union[components.Stop, components.StopTypedDict]
         ] = UNSET,
         stream: Optional[bool] = False,
         stream_options: OptionalNullable[
@@ -316,11 +280,11 @@ class Chat(BaseSDK):
         Sends a request for a model response for the given chat conversation. Supports both streaming and non-streaming modes.
 
         :param messages:
-        :param provider: When multiple model providers are available, optionally indicate your routing preference.
-        :param plugins: Plugins you want to enable for this request, including their settings.
+        :param provider:
+        :param plugins:
         :param route:
         :param user:
-        :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 128 characters.
+        :param session_id:
         :param model:
         :param models:
         :param frequency_penalty:
@@ -362,10 +326,10 @@ class Chat(BaseSDK):
 
         request = components.ChatGenerationParams(
             provider=utils.get_pydantic_model(
-                provider, OptionalNullable[components.ChatGenerationParamsProvider]
+                provider, OptionalNullable[components.Schema0]
             ),
             plugins=utils.get_pydantic_model(
-                plugins, Optional[List[components.ChatGenerationParamsPluginUnion]]
+                plugins, Optional[List[components.Schema17]]
             ),
             route=route,
             user=user,
@@ -385,8 +349,7 @@ class Chat(BaseSDK):
                 reasoning, Optional[components.Reasoning]
             ),
             response_format=utils.get_pydantic_model(
-                response_format,
-                Optional[components.ChatGenerationParamsResponseFormatUnion],
+                response_format, Optional[components.ResponseFormat]
             ),
             seed=seed,
             stop=stop,
@@ -498,16 +461,10 @@ class Chat(BaseSDK):
         *,
         messages: Union[List[components.Message], List[components.MessageTypedDict]],
         provider: OptionalNullable[
-            Union[
-                components.ChatGenerationParamsProvider,
-                components.ChatGenerationParamsProviderTypedDict,
-            ]
+            Union[components.Schema0, components.Schema0TypedDict]
         ] = UNSET,
         plugins: Optional[
-            Union[
-                List[components.ChatGenerationParamsPluginUnion],
-                List[components.ChatGenerationParamsPluginUnionTypedDict],
-            ]
+            Union[List[components.Schema17], List[components.Schema17TypedDict]]
         ] = None,
         route: OptionalNullable[components.Route] = UNSET,
         user: Optional[str] = None,
@@ -526,17 +483,11 @@ class Chat(BaseSDK):
             Union[components.Reasoning, components.ReasoningTypedDict]
         ] = None,
         response_format: Optional[
-            Union[
-                components.ChatGenerationParamsResponseFormatUnion,
-                components.ChatGenerationParamsResponseFormatUnionTypedDict,
-            ]
+            Union[components.ResponseFormat, components.ResponseFormatTypedDict]
         ] = None,
         seed: OptionalNullable[int] = UNSET,
         stop: OptionalNullable[
-            Union[
-                components.ChatGenerationParamsStop,
-                components.ChatGenerationParamsStopTypedDict,
-            ]
+            Union[components.Stop, components.StopTypedDict]
         ] = UNSET,
         stream: Union[Literal[False], None] = None,
         stream_options: OptionalNullable[
@@ -569,11 +520,11 @@ class Chat(BaseSDK):
         Sends a request for a model response for the given chat conversation. Supports both streaming and non-streaming modes.
 
         :param messages:
-        :param provider: When multiple model providers are available, optionally indicate your routing preference.
-        :param plugins: Plugins you want to enable for this request, including their settings.
+        :param provider:
+        :param plugins:
         :param route:
         :param user:
-        :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 128 characters.
+        :param session_id:
         :param model:
         :param models:
         :param frequency_penalty:
@@ -610,16 +561,10 @@ class Chat(BaseSDK):
         *,
         messages: Union[List[components.Message], List[components.MessageTypedDict]],
         provider: OptionalNullable[
-            Union[
-                components.ChatGenerationParamsProvider,
-                components.ChatGenerationParamsProviderTypedDict,
-            ]
+            Union[components.Schema0, components.Schema0TypedDict]
         ] = UNSET,
         plugins: Optional[
-            Union[
-                List[components.ChatGenerationParamsPluginUnion],
-                List[components.ChatGenerationParamsPluginUnionTypedDict],
-            ]
+            Union[List[components.Schema17], List[components.Schema17TypedDict]]
         ] = None,
         route: OptionalNullable[components.Route] = UNSET,
         user: Optional[str] = None,
@@ -638,17 +583,11 @@ class Chat(BaseSDK):
             Union[components.Reasoning, components.ReasoningTypedDict]
         ] = None,
         response_format: Optional[
-            Union[
-                components.ChatGenerationParamsResponseFormatUnion,
-                components.ChatGenerationParamsResponseFormatUnionTypedDict,
-            ]
+            Union[components.ResponseFormat, components.ResponseFormatTypedDict]
         ] = None,
         seed: OptionalNullable[int] = UNSET,
         stop: OptionalNullable[
-            Union[
-                components.ChatGenerationParamsStop,
-                components.ChatGenerationParamsStopTypedDict,
-            ]
+            Union[components.Stop, components.StopTypedDict]
         ] = UNSET,
         stream: Literal[True],
         stream_options: OptionalNullable[
@@ -681,11 +620,11 @@ class Chat(BaseSDK):
         Sends a request for a model response for the given chat conversation. Supports both streaming and non-streaming modes.
 
         :param messages:
-        :param provider: When multiple model providers are available, optionally indicate your routing preference.
-        :param plugins: Plugins you want to enable for this request, including their settings.
+        :param provider:
+        :param plugins:
         :param route:
         :param user:
-        :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 128 characters.
+        :param session_id:
         :param model:
         :param models:
         :param frequency_penalty:
@@ -721,16 +660,10 @@ class Chat(BaseSDK):
         *,
         messages: Union[List[components.Message], List[components.MessageTypedDict]],
         provider: OptionalNullable[
-            Union[
-                components.ChatGenerationParamsProvider,
-                components.ChatGenerationParamsProviderTypedDict,
-            ]
+            Union[components.Schema0, components.Schema0TypedDict]
         ] = UNSET,
         plugins: Optional[
-            Union[
-                List[components.ChatGenerationParamsPluginUnion],
-                List[components.ChatGenerationParamsPluginUnionTypedDict],
-            ]
+            Union[List[components.Schema17], List[components.Schema17TypedDict]]
         ] = None,
         route: OptionalNullable[components.Route] = UNSET,
         user: Optional[str] = None,
@@ -749,17 +682,11 @@ class Chat(BaseSDK):
             Union[components.Reasoning, components.ReasoningTypedDict]
         ] = None,
         response_format: Optional[
-            Union[
-                components.ChatGenerationParamsResponseFormatUnion,
-                components.ChatGenerationParamsResponseFormatUnionTypedDict,
-            ]
+            Union[components.ResponseFormat, components.ResponseFormatTypedDict]
         ] = None,
         seed: OptionalNullable[int] = UNSET,
         stop: OptionalNullable[
-            Union[
-                components.ChatGenerationParamsStop,
-                components.ChatGenerationParamsStopTypedDict,
-            ]
+            Union[components.Stop, components.StopTypedDict]
         ] = UNSET,
         stream: Optional[bool] = False,
         stream_options: OptionalNullable[
@@ -792,11 +719,11 @@ class Chat(BaseSDK):
         Sends a request for a model response for the given chat conversation. Supports both streaming and non-streaming modes.
 
         :param messages:
-        :param provider: When multiple model providers are available, optionally indicate your routing preference.
-        :param plugins: Plugins you want to enable for this request, including their settings.
+        :param provider:
+        :param plugins:
         :param route:
         :param user:
-        :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 128 characters.
+        :param session_id:
         :param model:
         :param models:
         :param frequency_penalty:
@@ -838,10 +765,10 @@ class Chat(BaseSDK):
 
         request = components.ChatGenerationParams(
             provider=utils.get_pydantic_model(
-                provider, OptionalNullable[components.ChatGenerationParamsProvider]
+                provider, OptionalNullable[components.Schema0]
             ),
             plugins=utils.get_pydantic_model(
-                plugins, Optional[List[components.ChatGenerationParamsPluginUnion]]
+                plugins, Optional[List[components.Schema17]]
             ),
             route=route,
             user=user,
@@ -861,8 +788,7 @@ class Chat(BaseSDK):
                 reasoning, Optional[components.Reasoning]
             ),
             response_format=utils.get_pydantic_model(
-                response_format,
-                Optional[components.ChatGenerationParamsResponseFormatUnion],
+                response_format, Optional[components.ResponseFormat]
             ),
             seed=seed,
             stop=stop,
