@@ -182,6 +182,8 @@ import os
 def main():
 
     with OpenRouter(
+        http_referer="<value>",
+        x_title="<value>",
         api_key=os.getenv("OPENROUTER_API_KEY", ""),
     ) as open_router:
         # Rest of application here...
@@ -191,6 +193,8 @@ def main():
 async def amain():
 
     async with OpenRouter(
+        http_referer="<value>",
+        x_title="<value>",
         api_key=os.getenv("OPENROUTER_API_KEY", ""),
     ) as open_router:
         # Rest of application here...

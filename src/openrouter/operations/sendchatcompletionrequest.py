@@ -2,12 +2,96 @@
 
 from __future__ import annotations
 from openrouter.components import (
+    chatgenerationparams as components_chatgenerationparams,
     chatresponse as components_chatresponse,
     chatstreamingresponsechunk as components_chatstreamingresponsechunk,
 )
-from openrouter.utils import eventstreaming
-from typing import Union
-from typing_extensions import TypeAliasType
+from openrouter.types import BaseModel
+from openrouter.utils import (
+    FieldMetadata,
+    HeaderMetadata,
+    RequestMetadata,
+    eventstreaming,
+)
+import pydantic
+from typing import Optional, Union
+from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
+
+
+class SendChatCompletionRequestGlobalsTypedDict(TypedDict):
+    http_referer: NotRequired[str]
+    r"""The app identifier should be your app's URL and is used as the primary identifier for rankings.
+    This is used to track API usage per application.
+
+    """
+    x_title: NotRequired[str]
+    r"""The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+    """
+
+
+class SendChatCompletionRequestGlobals(BaseModel):
+    http_referer: Annotated[
+        Optional[str],
+        pydantic.Field(alias="HTTP-Referer"),
+        FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
+    ] = None
+    r"""The app identifier should be your app's URL and is used as the primary identifier for rankings.
+    This is used to track API usage per application.
+
+    """
+
+    x_title: Annotated[
+        Optional[str],
+        pydantic.Field(alias="X-Title"),
+        FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
+    ] = None
+    r"""The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+    """
+
+
+class SendChatCompletionRequestRequestTypedDict(TypedDict):
+    chat_generation_params: (
+        components_chatgenerationparams.ChatGenerationParamsTypedDict
+    )
+    r"""Chat completion request parameters"""
+    http_referer: NotRequired[str]
+    r"""The app identifier should be your app's URL and is used as the primary identifier for rankings.
+    This is used to track API usage per application.
+
+    """
+    x_title: NotRequired[str]
+    r"""The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+    """
+
+
+class SendChatCompletionRequestRequest(BaseModel):
+    chat_generation_params: Annotated[
+        components_chatgenerationparams.ChatGenerationParams,
+        FieldMetadata(request=RequestMetadata(media_type="application/json")),
+    ]
+    r"""Chat completion request parameters"""
+
+    http_referer: Annotated[
+        Optional[str],
+        pydantic.Field(alias="HTTP-Referer"),
+        FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
+    ] = None
+    r"""The app identifier should be your app's URL and is used as the primary identifier for rankings.
+    This is used to track API usage per application.
+
+    """
+
+    x_title: Annotated[
+        Optional[str],
+        pydantic.Field(alias="X-Title"),
+        FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
+    ] = None
+    r"""The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+    """
 
 
 SendChatCompletionRequestResponseTypedDict = TypeAliasType(

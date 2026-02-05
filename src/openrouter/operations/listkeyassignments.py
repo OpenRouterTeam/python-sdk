@@ -2,13 +2,56 @@
 
 from __future__ import annotations
 from openrouter.types import BaseModel, Nullable, UNSET_SENTINEL
-from openrouter.utils import FieldMetadata, QueryParamMetadata
+from openrouter.utils import FieldMetadata, HeaderMetadata, QueryParamMetadata
+import pydantic
 from pydantic import model_serializer
 from typing import List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
+class ListKeyAssignmentsGlobalsTypedDict(TypedDict):
+    http_referer: NotRequired[str]
+    r"""The app identifier should be your app's URL and is used as the primary identifier for rankings.
+    This is used to track API usage per application.
+
+    """
+    x_title: NotRequired[str]
+    r"""The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+    """
+
+
+class ListKeyAssignmentsGlobals(BaseModel):
+    http_referer: Annotated[
+        Optional[str],
+        pydantic.Field(alias="HTTP-Referer"),
+        FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
+    ] = None
+    r"""The app identifier should be your app's URL and is used as the primary identifier for rankings.
+    This is used to track API usage per application.
+
+    """
+
+    x_title: Annotated[
+        Optional[str],
+        pydantic.Field(alias="X-Title"),
+        FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
+    ] = None
+    r"""The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+    """
+
+
 class ListKeyAssignmentsRequestTypedDict(TypedDict):
+    http_referer: NotRequired[str]
+    r"""The app identifier should be your app's URL and is used as the primary identifier for rankings.
+    This is used to track API usage per application.
+
+    """
+    x_title: NotRequired[str]
+    r"""The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+    """
     offset: NotRequired[str]
     r"""Number of records to skip for pagination"""
     limit: NotRequired[str]
@@ -16,6 +59,25 @@ class ListKeyAssignmentsRequestTypedDict(TypedDict):
 
 
 class ListKeyAssignmentsRequest(BaseModel):
+    http_referer: Annotated[
+        Optional[str],
+        pydantic.Field(alias="HTTP-Referer"),
+        FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
+    ] = None
+    r"""The app identifier should be your app's URL and is used as the primary identifier for rankings.
+    This is used to track API usage per application.
+
+    """
+
+    x_title: Annotated[
+        Optional[str],
+        pydantic.Field(alias="X-Title"),
+        FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
+    ] = None
+    r"""The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+    """
+
     offset: Annotated[
         Optional[str],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),

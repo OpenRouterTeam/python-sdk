@@ -16,6 +16,8 @@ class Generations(BaseSDK):
         self,
         *,
         id: str,
+        http_referer: Optional[str] = None,
+        x_title: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -24,6 +26,11 @@ class Generations(BaseSDK):
         r"""Get request & usage metadata for a generation
 
         :param id:
+        :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
+            This is used to track API usage per application.
+
+        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -40,6 +47,8 @@ class Generations(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = operations.GetGenerationRequest(
+            http_referer=http_referer,
+            x_title=x_title,
             id=id,
         )
 
@@ -55,6 +64,10 @@ class Generations(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            _globals=operations.GetGenerationGlobals(
+                http_referer=self.sdk_configuration.globals.http_referer,
+                x_title=self.sdk_configuration.globals.x_title,
+            ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -154,6 +167,8 @@ class Generations(BaseSDK):
         self,
         *,
         id: str,
+        http_referer: Optional[str] = None,
+        x_title: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -162,6 +177,11 @@ class Generations(BaseSDK):
         r"""Get request & usage metadata for a generation
 
         :param id:
+        :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
+            This is used to track API usage per application.
+
+        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -178,6 +198,8 @@ class Generations(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = operations.GetGenerationRequest(
+            http_referer=http_referer,
+            x_title=x_title,
             id=id,
         )
 
@@ -193,6 +215,10 @@ class Generations(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            _globals=operations.GetGenerationGlobals(
+                http_referer=self.sdk_configuration.globals.http_referer,
+                x_title=self.sdk_configuration.globals.x_title,
+            ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,

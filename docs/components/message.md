@@ -15,10 +15,10 @@ value: components.SystemMessage = /* values here */
 value: components.UserMessage = /* values here */
 ```
 
-### `components.MessageDeveloper`
+### `components.DeveloperMessage`
 
 ```python
-value: components.MessageDeveloper = /* values here */
+value: components.DeveloperMessage = /* values here */
 ```
 
 ### `components.AssistantMessage`

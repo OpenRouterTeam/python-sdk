@@ -2,47 +2,14 @@
 
 from __future__ import annotations
 from .assistantmessage import AssistantMessage, AssistantMessageTypedDict
-from .chatmessagecontentitemtext import (
-    ChatMessageContentItemText,
-    ChatMessageContentItemTextTypedDict,
-)
+from .developermessage import DeveloperMessage, DeveloperMessageTypedDict
 from .systemmessage import SystemMessage, SystemMessageTypedDict
 from .toolresponsemessage import ToolResponseMessage, ToolResponseMessageTypedDict
 from .usermessage import UserMessage, UserMessageTypedDict
-from openrouter.types import BaseModel
-from openrouter.utils import get_discriminator, validate_const
-import pydantic
+from openrouter.utils import get_discriminator
 from pydantic import Discriminator, Tag
-from pydantic.functional_validators import AfterValidator
-from typing import List, Literal, Optional, Union
-from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
-
-
-MessageContentTypedDict = TypeAliasType(
-    "MessageContentTypedDict", Union[str, List[ChatMessageContentItemTextTypedDict]]
-)
-
-
-MessageContent = TypeAliasType(
-    "MessageContent", Union[str, List[ChatMessageContentItemText]]
-)
-
-
-class MessageDeveloperTypedDict(TypedDict):
-    content: MessageContentTypedDict
-    role: Literal["developer"]
-    name: NotRequired[str]
-
-
-class MessageDeveloper(BaseModel):
-    content: MessageContent
-
-    ROLE: Annotated[
-        Annotated[Literal["developer"], AfterValidator(validate_const("developer"))],
-        pydantic.Field(alias="role"),
-    ] = "developer"
-
-    name: Optional[str] = None
+from typing import Union
+from typing_extensions import Annotated, TypeAliasType
 
 
 MessageTypedDict = TypeAliasType(
@@ -50,7 +17,7 @@ MessageTypedDict = TypeAliasType(
     Union[
         SystemMessageTypedDict,
         UserMessageTypedDict,
-        MessageDeveloperTypedDict,
+        DeveloperMessageTypedDict,
         ToolResponseMessageTypedDict,
         AssistantMessageTypedDict,
     ],
@@ -61,7 +28,7 @@ Message = Annotated[
     Union[
         Annotated[SystemMessage, Tag("system")],
         Annotated[UserMessage, Tag("user")],
-        Annotated[MessageDeveloper, Tag("developer")],
+        Annotated[DeveloperMessage, Tag("developer")],
         Annotated[AssistantMessage, Tag("assistant")],
         Annotated[ToolResponseMessage, Tag("tool")],
     ],

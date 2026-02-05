@@ -2,16 +2,63 @@
 
 from __future__ import annotations
 from openrouter.types import BaseModel
-from openrouter.utils import FieldMetadata, PathParamMetadata, validate_const
+from openrouter.utils import (
+    FieldMetadata,
+    HeaderMetadata,
+    PathParamMetadata,
+    validate_const,
+)
 import pydantic
 from pydantic.functional_validators import AfterValidator
-from typing import Literal
-from typing_extensions import Annotated, TypedDict
+from typing import Literal, Optional
+from typing_extensions import Annotated, NotRequired, TypedDict
+
+
+class DeleteKeysGlobalsTypedDict(TypedDict):
+    http_referer: NotRequired[str]
+    r"""The app identifier should be your app's URL and is used as the primary identifier for rankings.
+    This is used to track API usage per application.
+
+    """
+    x_title: NotRequired[str]
+    r"""The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+    """
+
+
+class DeleteKeysGlobals(BaseModel):
+    http_referer: Annotated[
+        Optional[str],
+        pydantic.Field(alias="HTTP-Referer"),
+        FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
+    ] = None
+    r"""The app identifier should be your app's URL and is used as the primary identifier for rankings.
+    This is used to track API usage per application.
+
+    """
+
+    x_title: Annotated[
+        Optional[str],
+        pydantic.Field(alias="X-Title"),
+        FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
+    ] = None
+    r"""The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+    """
 
 
 class DeleteKeysRequestTypedDict(TypedDict):
     hash: str
     r"""The hash identifier of the API key to delete"""
+    http_referer: NotRequired[str]
+    r"""The app identifier should be your app's URL and is used as the primary identifier for rankings.
+    This is used to track API usage per application.
+
+    """
+    x_title: NotRequired[str]
+    r"""The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+    """
 
 
 class DeleteKeysRequest(BaseModel):
@@ -19,6 +66,25 @@ class DeleteKeysRequest(BaseModel):
         str, FieldMetadata(path=PathParamMetadata(style="simple", explode=False))
     ]
     r"""The hash identifier of the API key to delete"""
+
+    http_referer: Annotated[
+        Optional[str],
+        pydantic.Field(alias="HTTP-Referer"),
+        FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
+    ] = None
+    r"""The app identifier should be your app's URL and is used as the primary identifier for rankings.
+    This is used to track API usage per application.
+
+    """
+
+    x_title: Annotated[
+        Optional[str],
+        pydantic.Field(alias="X-Title"),
+        FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
+    ] = None
+    r"""The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+    """
 
 
 class DeleteKeysResponseTypedDict(TypedDict):

@@ -3,11 +3,51 @@
 from __future__ import annotations
 from openrouter.components import providerpreferences as components_providerpreferences
 from openrouter.types import BaseModel, UnrecognizedStr
-from openrouter.utils import get_discriminator, validate_open_enum
+from openrouter.utils import (
+    FieldMetadata,
+    HeaderMetadata,
+    RequestMetadata,
+    get_discriminator,
+    validate_open_enum,
+)
+import pydantic
 from pydantic import Discriminator, Tag
 from pydantic.functional_validators import PlainValidator
 from typing import List, Literal, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
+
+
+class CreateEmbeddingsGlobalsTypedDict(TypedDict):
+    http_referer: NotRequired[str]
+    r"""The app identifier should be your app's URL and is used as the primary identifier for rankings.
+    This is used to track API usage per application.
+
+    """
+    x_title: NotRequired[str]
+    r"""The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+    """
+
+
+class CreateEmbeddingsGlobals(BaseModel):
+    http_referer: Annotated[
+        Optional[str],
+        pydantic.Field(alias="HTTP-Referer"),
+        FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
+    ] = None
+    r"""The app identifier should be your app's URL and is used as the primary identifier for rankings.
+    This is used to track API usage per application.
+
+    """
+
+    x_title: Annotated[
+        Optional[str],
+        pydantic.Field(alias="X-Title"),
+        FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
+    ] = None
+    r"""The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+    """
 
 
 TypeImageURL = Literal["image_url",]
@@ -88,7 +128,7 @@ EncodingFormat = Union[
 ]
 
 
-class CreateEmbeddingsRequestTypedDict(TypedDict):
+class CreateEmbeddingsRequestBodyTypedDict(TypedDict):
     input: InputUnionTypedDict
     model: str
     encoding_format: NotRequired[EncodingFormat]
@@ -99,7 +139,7 @@ class CreateEmbeddingsRequestTypedDict(TypedDict):
     input_type: NotRequired[str]
 
 
-class CreateEmbeddingsRequest(BaseModel):
+class CreateEmbeddingsRequestBody(BaseModel):
     input: InputUnion
 
     model: str
@@ -116,6 +156,45 @@ class CreateEmbeddingsRequest(BaseModel):
     r"""Provider routing preferences for the request."""
 
     input_type: Optional[str] = None
+
+
+class CreateEmbeddingsRequestTypedDict(TypedDict):
+    request_body: CreateEmbeddingsRequestBodyTypedDict
+    http_referer: NotRequired[str]
+    r"""The app identifier should be your app's URL and is used as the primary identifier for rankings.
+    This is used to track API usage per application.
+
+    """
+    x_title: NotRequired[str]
+    r"""The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+    """
+
+
+class CreateEmbeddingsRequest(BaseModel):
+    request_body: Annotated[
+        CreateEmbeddingsRequestBody,
+        FieldMetadata(request=RequestMetadata(media_type="application/json")),
+    ]
+
+    http_referer: Annotated[
+        Optional[str],
+        pydantic.Field(alias="HTTP-Referer"),
+        FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
+    ] = None
+    r"""The app identifier should be your app's URL and is used as the primary identifier for rankings.
+    This is used to track API usage per application.
+
+    """
+
+    x_title: Annotated[
+        Optional[str],
+        pydantic.Field(alias="X-Title"),
+        FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
+    ] = None
+    r"""The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+    """
 
 
 Object = Literal["list",]

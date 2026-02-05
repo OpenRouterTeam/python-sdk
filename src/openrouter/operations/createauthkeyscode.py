@@ -10,11 +10,50 @@ from openrouter.types import (
     UNSET_SENTINEL,
     UnrecognizedStr,
 )
-from openrouter.utils import validate_open_enum
+from openrouter.utils import (
+    FieldMetadata,
+    HeaderMetadata,
+    RequestMetadata,
+    validate_open_enum,
+)
+import pydantic
 from pydantic import model_serializer
 from pydantic.functional_validators import PlainValidator
 from typing import Literal, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypedDict
+
+
+class CreateAuthKeysCodeGlobalsTypedDict(TypedDict):
+    http_referer: NotRequired[str]
+    r"""The app identifier should be your app's URL and is used as the primary identifier for rankings.
+    This is used to track API usage per application.
+
+    """
+    x_title: NotRequired[str]
+    r"""The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+    """
+
+
+class CreateAuthKeysCodeGlobals(BaseModel):
+    http_referer: Annotated[
+        Optional[str],
+        pydantic.Field(alias="HTTP-Referer"),
+        FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
+    ] = None
+    r"""The app identifier should be your app's URL and is used as the primary identifier for rankings.
+    This is used to track API usage per application.
+
+    """
+
+    x_title: Annotated[
+        Optional[str],
+        pydantic.Field(alias="X-Title"),
+        FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
+    ] = None
+    r"""The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+    """
 
 
 CreateAuthKeysCodeCodeChallengeMethod = Union[
@@ -27,7 +66,7 @@ CreateAuthKeysCodeCodeChallengeMethod = Union[
 r"""The method used to generate the code challenge"""
 
 
-class CreateAuthKeysCodeRequestTypedDict(TypedDict):
+class CreateAuthKeysCodeRequestBodyTypedDict(TypedDict):
     callback_url: str
     r"""The callback URL to redirect to after authorization. Note, only https URLs on ports 443 and 3000 are allowed."""
     code_challenge: NotRequired[str]
@@ -40,7 +79,7 @@ class CreateAuthKeysCodeRequestTypedDict(TypedDict):
     r"""Optional expiration time for the API key to be created"""
 
 
-class CreateAuthKeysCodeRequest(BaseModel):
+class CreateAuthKeysCodeRequestBody(BaseModel):
     callback_url: str
     r"""The callback URL to redirect to after authorization. Note, only https URLs on ports 443 and 3000 are allowed."""
 
@@ -93,6 +132,45 @@ class CreateAuthKeysCodeRequest(BaseModel):
                 m[k] = val
 
         return m
+
+
+class CreateAuthKeysCodeRequestTypedDict(TypedDict):
+    request_body: CreateAuthKeysCodeRequestBodyTypedDict
+    http_referer: NotRequired[str]
+    r"""The app identifier should be your app's URL and is used as the primary identifier for rankings.
+    This is used to track API usage per application.
+
+    """
+    x_title: NotRequired[str]
+    r"""The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+    """
+
+
+class CreateAuthKeysCodeRequest(BaseModel):
+    request_body: Annotated[
+        CreateAuthKeysCodeRequestBody,
+        FieldMetadata(request=RequestMetadata(media_type="application/json")),
+    ]
+
+    http_referer: Annotated[
+        Optional[str],
+        pydantic.Field(alias="HTTP-Referer"),
+        FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
+    ] = None
+    r"""The app identifier should be your app's URL and is used as the primary identifier for rankings.
+    This is used to track API usage per application.
+
+    """
+
+    x_title: Annotated[
+        Optional[str],
+        pydantic.Field(alias="X-Title"),
+        FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
+    ] = None
+    r"""The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+    """
 
 
 class CreateAuthKeysCodeDataTypedDict(TypedDict):
