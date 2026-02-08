@@ -32,6 +32,9 @@ class Chat(BaseSDK):
         route: OptionalNullable[components.Route] = UNSET,
         user: Optional[str] = None,
         session_id: Optional[str] = None,
+        trace: Optional[
+            Union[components.Schema19, components.Schema19TypedDict]
+        ] = None,
         model: Optional[str] = None,
         models: Optional[List[str]] = None,
         frequency_penalty: OptionalNullable[float] = UNSET,
@@ -93,6 +96,7 @@ class Chat(BaseSDK):
         :param route:
         :param user:
         :param session_id:
+        :param trace:
         :param model:
         :param models:
         :param frequency_penalty:
@@ -139,6 +143,9 @@ class Chat(BaseSDK):
         route: OptionalNullable[components.Route] = UNSET,
         user: Optional[str] = None,
         session_id: Optional[str] = None,
+        trace: Optional[
+            Union[components.Schema19, components.Schema19TypedDict]
+        ] = None,
         model: Optional[str] = None,
         models: Optional[List[str]] = None,
         frequency_penalty: OptionalNullable[float] = UNSET,
@@ -200,6 +207,7 @@ class Chat(BaseSDK):
         :param route:
         :param user:
         :param session_id:
+        :param trace:
         :param model:
         :param models:
         :param frequency_penalty:
@@ -245,6 +253,9 @@ class Chat(BaseSDK):
         route: OptionalNullable[components.Route] = UNSET,
         user: Optional[str] = None,
         session_id: Optional[str] = None,
+        trace: Optional[
+            Union[components.Schema19, components.Schema19TypedDict]
+        ] = None,
         model: Optional[str] = None,
         models: Optional[List[str]] = None,
         frequency_penalty: OptionalNullable[float] = UNSET,
@@ -306,6 +317,7 @@ class Chat(BaseSDK):
         :param route:
         :param user:
         :param session_id:
+        :param trace:
         :param model:
         :param models:
         :param frequency_penalty:
@@ -358,6 +370,7 @@ class Chat(BaseSDK):
                 route=route,
                 user=user,
                 session_id=session_id,
+                trace=utils.get_pydantic_model(trace, Optional[components.Schema19]),
                 messages=utils.get_pydantic_model(messages, List[components.Message]),
                 model=model,
                 models=models,
@@ -504,6 +517,9 @@ class Chat(BaseSDK):
         route: OptionalNullable[components.Route] = UNSET,
         user: Optional[str] = None,
         session_id: Optional[str] = None,
+        trace: Optional[
+            Union[components.Schema19, components.Schema19TypedDict]
+        ] = None,
         model: Optional[str] = None,
         models: Optional[List[str]] = None,
         frequency_penalty: OptionalNullable[float] = UNSET,
@@ -565,6 +581,7 @@ class Chat(BaseSDK):
         :param route:
         :param user:
         :param session_id:
+        :param trace:
         :param model:
         :param models:
         :param frequency_penalty:
@@ -611,6 +628,9 @@ class Chat(BaseSDK):
         route: OptionalNullable[components.Route] = UNSET,
         user: Optional[str] = None,
         session_id: Optional[str] = None,
+        trace: Optional[
+            Union[components.Schema19, components.Schema19TypedDict]
+        ] = None,
         model: Optional[str] = None,
         models: Optional[List[str]] = None,
         frequency_penalty: OptionalNullable[float] = UNSET,
@@ -672,6 +692,7 @@ class Chat(BaseSDK):
         :param route:
         :param user:
         :param session_id:
+        :param trace:
         :param model:
         :param models:
         :param frequency_penalty:
@@ -717,6 +738,9 @@ class Chat(BaseSDK):
         route: OptionalNullable[components.Route] = UNSET,
         user: Optional[str] = None,
         session_id: Optional[str] = None,
+        trace: Optional[
+            Union[components.Schema19, components.Schema19TypedDict]
+        ] = None,
         model: Optional[str] = None,
         models: Optional[List[str]] = None,
         frequency_penalty: OptionalNullable[float] = UNSET,
@@ -778,6 +802,7 @@ class Chat(BaseSDK):
         :param route:
         :param user:
         :param session_id:
+        :param trace:
         :param model:
         :param models:
         :param frequency_penalty:
@@ -830,6 +855,7 @@ class Chat(BaseSDK):
                 route=route,
                 user=user,
                 session_id=session_id,
+                trace=utils.get_pydantic_model(trace, Optional[components.Schema19]),
                 messages=utils.get_pydantic_model(messages, List[components.Message]),
                 model=model,
                 models=models,

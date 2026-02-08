@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: cfd52247-6a25-4c6d-bbce-fe6fce0cd69d
 management:
-  docChecksum: 56062ba1997e25ff8be6529c550e5de9
+  docChecksum: a8fed71df7458c6d948fc393e17aa9bc
   docVersion: 1.0.0
   speakeasyVersion: 1.666.0
   generationVersion: 2.768.0
-  releaseVersion: 0.6.0
-  configChecksum: 690b77f47b975e28d7e11a6b96fa1c2f
+  releaseVersion: 0.7.0
+  configChecksum: fb83a92d2ee84da7390a12353d622d23
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
@@ -14,6 +14,7 @@ features:
   python:
     acceptHeaders: 3.0.0
     additionalDependencies: 1.0.0
+    additionalProperties: 1.0.1
     constsAndDefaults: 1.0.5
     core: 5.23.13
     defaultEnabledRetries: 0.2.0
@@ -424,10 +425,11 @@ generatedFiles:
   - docs/components/schema17responsehealing.md
   - docs/components/schema17web.md
   - docs/components/schema19.md
-  - docs/components/schema19reasoningencrypted.md
-  - docs/components/schema19reasoningsummary.md
-  - docs/components/schema19reasoningtext.md
-  - docs/components/schema21.md
+  - docs/components/schema20.md
+  - docs/components/schema20reasoningencrypted.md
+  - docs/components/schema20reasoningsummary.md
+  - docs/components/schema20reasoningtext.md
+  - docs/components/schema22.md
   - docs/components/schema3.md
   - docs/components/schema5.md
   - docs/components/schema5enum.md
@@ -447,6 +449,7 @@ generatedFiles:
   - docs/components/toolresponsemessagecontent.md
   - docs/components/toomanyrequestsresponseerrordata.md
   - docs/components/topproviderinfo.md
+  - docs/components/trace.md
   - docs/components/truncation.md
   - docs/components/ttl.md
   - docs/components/type.md
@@ -695,6 +698,7 @@ generatedFiles:
   - src/openrouter/components/_schema14.py
   - src/openrouter/components/_schema17.py
   - src/openrouter/components/_schema19.py
+  - src/openrouter/components/_schema20.py
   - src/openrouter/components/_schema5.py
   - src/openrouter/components/activityitem.py
   - src/openrouter/components/assistantmessage.py

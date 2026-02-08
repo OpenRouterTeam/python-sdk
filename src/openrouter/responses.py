@@ -93,6 +93,7 @@ class Responses(BaseSDK):
         ] = None,
         user: Optional[str] = None,
         session_id: Optional[str] = None,
+        trace: Optional[Union[components.Trace, components.TraceTypedDict]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -140,6 +141,7 @@ class Responses(BaseSDK):
         :param plugins: Plugins you want to enable for this request, including their settings.
         :param user: A unique identifier representing your end-user, which helps distinguish between different users of your app. This allows your app to identify specific users in case of abuse reports, preventing your entire app from being affected by the actions of individual users. Maximum of 128 characters.
         :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 128 characters.
+        :param trace: Metadata for observability and tracing. Known keys (trace_id, trace_name, span_name, generation_name, parent_span_id) have special handling. Additional keys are passed through as custom metadata to configured broadcast destinations.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -222,6 +224,7 @@ class Responses(BaseSDK):
         ] = None,
         user: Optional[str] = None,
         session_id: Optional[str] = None,
+        trace: Optional[Union[components.Trace, components.TraceTypedDict]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -269,6 +272,7 @@ class Responses(BaseSDK):
         :param plugins: Plugins you want to enable for this request, including their settings.
         :param user: A unique identifier representing your end-user, which helps distinguish between different users of your app. This allows your app to identify specific users in case of abuse reports, preventing your entire app from being affected by the actions of individual users. Maximum of 128 characters.
         :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 128 characters.
+        :param trace: Metadata for observability and tracing. Known keys (trace_id, trace_name, span_name, generation_name, parent_span_id) have special handling. Additional keys are passed through as custom metadata to configured broadcast destinations.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -350,6 +354,7 @@ class Responses(BaseSDK):
         ] = None,
         user: Optional[str] = None,
         session_id: Optional[str] = None,
+        trace: Optional[Union[components.Trace, components.TraceTypedDict]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -397,6 +402,7 @@ class Responses(BaseSDK):
         :param plugins: Plugins you want to enable for this request, including their settings.
         :param user: A unique identifier representing your end-user, which helps distinguish between different users of your app. This allows your app to identify specific users in case of abuse reports, preventing your entire app from being affected by the actions of individual users. Maximum of 128 characters.
         :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 128 characters.
+        :param trace: Metadata for observability and tracing. Known keys (trace_id, trace_name, span_name, generation_name, parent_span_id) have special handling. Additional keys are passed through as custom metadata to configured broadcast destinations.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -466,6 +472,7 @@ class Responses(BaseSDK):
                 ),
                 user=user,
                 session_id=session_id,
+                trace=utils.get_pydantic_model(trace, Optional[components.Trace]),
             ),
         )
 
@@ -741,6 +748,7 @@ class Responses(BaseSDK):
         ] = None,
         user: Optional[str] = None,
         session_id: Optional[str] = None,
+        trace: Optional[Union[components.Trace, components.TraceTypedDict]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -788,6 +796,7 @@ class Responses(BaseSDK):
         :param plugins: Plugins you want to enable for this request, including their settings.
         :param user: A unique identifier representing your end-user, which helps distinguish between different users of your app. This allows your app to identify specific users in case of abuse reports, preventing your entire app from being affected by the actions of individual users. Maximum of 128 characters.
         :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 128 characters.
+        :param trace: Metadata for observability and tracing. Known keys (trace_id, trace_name, span_name, generation_name, parent_span_id) have special handling. Additional keys are passed through as custom metadata to configured broadcast destinations.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -870,6 +879,7 @@ class Responses(BaseSDK):
         ] = None,
         user: Optional[str] = None,
         session_id: Optional[str] = None,
+        trace: Optional[Union[components.Trace, components.TraceTypedDict]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -917,6 +927,7 @@ class Responses(BaseSDK):
         :param plugins: Plugins you want to enable for this request, including their settings.
         :param user: A unique identifier representing your end-user, which helps distinguish between different users of your app. This allows your app to identify specific users in case of abuse reports, preventing your entire app from being affected by the actions of individual users. Maximum of 128 characters.
         :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 128 characters.
+        :param trace: Metadata for observability and tracing. Known keys (trace_id, trace_name, span_name, generation_name, parent_span_id) have special handling. Additional keys are passed through as custom metadata to configured broadcast destinations.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -998,6 +1009,7 @@ class Responses(BaseSDK):
         ] = None,
         user: Optional[str] = None,
         session_id: Optional[str] = None,
+        trace: Optional[Union[components.Trace, components.TraceTypedDict]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -1045,6 +1057,7 @@ class Responses(BaseSDK):
         :param plugins: Plugins you want to enable for this request, including their settings.
         :param user: A unique identifier representing your end-user, which helps distinguish between different users of your app. This allows your app to identify specific users in case of abuse reports, preventing your entire app from being affected by the actions of individual users. Maximum of 128 characters.
         :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 128 characters.
+        :param trace: Metadata for observability and tracing. Known keys (trace_id, trace_name, span_name, generation_name, parent_span_id) have special handling. Additional keys are passed through as custom metadata to configured broadcast destinations.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1114,6 +1127,7 @@ class Responses(BaseSDK):
                 ),
                 user=user,
                 session_id=session_id,
+                trace=utils.get_pydantic_model(trace, Optional[components.Trace]),
             ),
         )
 

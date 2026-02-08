@@ -55,7 +55,7 @@ from openrouter.types import (
 )
 from openrouter.utils import get_discriminator, validate_const, validate_open_enum
 import pydantic
-from pydantic import Discriminator, Tag, model_serializer
+from pydantic import ConfigDict, Discriminator, Tag, model_serializer
 from pydantic.functional_validators import AfterValidator, PlainValidator
 from typing import Any, Dict, List, Literal, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
@@ -517,6 +517,43 @@ Plugin = Annotated[
 ]
 
 
+class TraceTypedDict(TypedDict):
+    r"""Metadata for observability and tracing. Known keys (trace_id, trace_name, span_name, generation_name, parent_span_id) have special handling. Additional keys are passed through as custom metadata to configured broadcast destinations."""
+
+    trace_id: NotRequired[str]
+    trace_name: NotRequired[str]
+    span_name: NotRequired[str]
+    generation_name: NotRequired[str]
+    parent_span_id: NotRequired[str]
+
+
+class Trace(BaseModel):
+    r"""Metadata for observability and tracing. Known keys (trace_id, trace_name, span_name, generation_name, parent_span_id) have special handling. Additional keys are passed through as custom metadata to configured broadcast destinations."""
+
+    model_config = ConfigDict(
+        populate_by_name=True, arbitrary_types_allowed=True, extra="allow"
+    )
+    __pydantic_extra__: Dict[str, Nullable[Any]] = pydantic.Field(init=False)
+
+    trace_id: Optional[str] = None
+
+    trace_name: Optional[str] = None
+
+    span_name: Optional[str] = None
+
+    generation_name: Optional[str] = None
+
+    parent_span_id: Optional[str] = None
+
+    @property
+    def additional_properties(self):
+        return self.__pydantic_extra__
+
+    @additional_properties.setter
+    def additional_properties(self, value):
+        self.__pydantic_extra__ = value  # pyright: ignore[reportIncompatibleVariableOverride]
+
+
 class OpenResponsesRequestTypedDict(TypedDict):
     r"""Request schema for Responses endpoint"""
 
@@ -564,6 +601,8 @@ class OpenResponsesRequestTypedDict(TypedDict):
     r"""A unique identifier representing your end-user, which helps distinguish between different users of your app. This allows your app to identify specific users in case of abuse reports, preventing your entire app from being affected by the actions of individual users. Maximum of 128 characters."""
     session_id: NotRequired[str]
     r"""A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 128 characters."""
+    trace: NotRequired[TraceTypedDict]
+    r"""Metadata for observability and tracing. Known keys (trace_id, trace_name, span_name, generation_name, parent_span_id) have special handling. Additional keys are passed through as custom metadata to configured broadcast destinations."""
 
 
 class OpenResponsesRequest(BaseModel):
@@ -664,6 +703,9 @@ class OpenResponsesRequest(BaseModel):
     session_id: Optional[str] = None
     r"""A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 128 characters."""
 
+    trace: Optional[Trace] = None
+    r"""Metadata for observability and tracing. Known keys (trace_id, trace_name, span_name, generation_name, parent_span_id) have special handling. Additional keys are passed through as custom metadata to configured broadcast destinations."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = [
@@ -701,6 +743,7 @@ class OpenResponsesRequest(BaseModel):
             "plugins",
             "user",
             "session_id",
+            "trace",
         ]
         nullable_fields = [
             "instructions",

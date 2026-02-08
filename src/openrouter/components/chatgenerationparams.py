@@ -3,6 +3,7 @@
 from __future__ import annotations
 from ._schema10 import Schema10, Schema10TypedDict
 from ._schema17 import Schema17, Schema17TypedDict
+from ._schema19 import Schema19, Schema19TypedDict
 from ._schema5 import Schema5, Schema5TypedDict
 from .chatstreamoptions import ChatStreamOptions, ChatStreamOptionsTypedDict
 from .message import Message, MessageTypedDict
@@ -385,6 +386,7 @@ class ChatGenerationParamsTypedDict(TypedDict):
     route: NotRequired[Nullable[Route]]
     user: NotRequired[str]
     session_id: NotRequired[str]
+    trace: NotRequired[Schema19TypedDict]
     model: NotRequired[str]
     models: NotRequired[List[str]]
     frequency_penalty: NotRequired[Nullable[float]]
@@ -424,6 +426,8 @@ class ChatGenerationParams(BaseModel):
     user: Optional[str] = None
 
     session_id: Optional[str] = None
+
+    trace: Optional[Schema19] = None
 
     model: Optional[str] = None
 
@@ -481,6 +485,7 @@ class ChatGenerationParams(BaseModel):
             "route",
             "user",
             "session_id",
+            "trace",
             "model",
             "models",
             "frequency_penalty",

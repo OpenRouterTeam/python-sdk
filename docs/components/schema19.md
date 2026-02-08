@@ -1,23 +1,13 @@
 # Schema19
 
 
-## Supported Types
+## Fields
 
-### `components.Schema19ReasoningSummary`
-
-```python
-value: components.Schema19ReasoningSummary = /* values here */
-```
-
-### `components.Schema19ReasoningEncrypted`
-
-```python
-value: components.Schema19ReasoningEncrypted = /* values here */
-```
-
-### `components.Schema19ReasoningText`
-
-```python
-value: components.Schema19ReasoningText = /* values here */
-```
-
+| Field                | Type                 | Required             | Description          |
+| -------------------- | -------------------- | -------------------- | -------------------- |
+| `trace_id`           | *Optional[str]*      | :heavy_minus_sign:   | N/A                  |
+| `trace_name`         | *Optional[str]*      | :heavy_minus_sign:   | N/A                  |
+| `span_name`          | *Optional[str]*      | :heavy_minus_sign:   | N/A                  |
+| `generation_name`    | *Optional[str]*      | :heavy_minus_sign:   | N/A                  |
+| `parent_span_id`     | *Optional[str]*      | :heavy_minus_sign:   | N/A                  |
+| `__pydantic_extra__` | Dict[str, *Any*]     | :heavy_minus_sign:   | N/A                  |
