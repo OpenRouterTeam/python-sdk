@@ -1,5 +1,7 @@
 # ProviderPreferencesProviderSort
 
+The provider sorting strategy (price, throughput, latency)
+
 
 ## Values
 

@@ -1,17 +1,11 @@
 # ChatMessageContentItemVideo
 
+Video input content part
 
-## Supported Types
 
-### `components.ChatMessageContentItemVideoInputVideo`
+## Fields
 
-```python
-value: components.ChatMessageContentItemVideoInputVideo = /* values here */
-```
-
-### `components.ChatMessageContentItemVideoVideoURL`
-
-```python
-value: components.ChatMessageContentItemVideoVideoURL = /* values here */
-```
-
+| Field                                                                                          | Type                                                                                           | Required                                                                                       | Description                                                                                    |
+| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| `type`                                                                                         | [components.ChatMessageContentItemVideoType](../components/chatmessagecontentitemvideotype.md) | :heavy_check_mark:                                                                             | N/A                                                                                            |
+| `video_url`                                                                                    | [components.VideoInput](../components/videoinput.md)                                           | :heavy_check_mark:                                                                             | Video input object                                                                             |

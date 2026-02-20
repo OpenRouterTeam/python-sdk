@@ -2,22 +2,25 @@
 
 from __future__ import annotations
 from openrouter.types import BaseModel
-from openrouter.utils import validate_const
-import pydantic
-from pydantic.functional_validators import AfterValidator
 from typing import Literal
-from typing_extensions import Annotated, TypedDict
+from typing_extensions import TypedDict
+
+
+ResponseFormatTextGrammarType = Literal["grammar",]
 
 
 class ResponseFormatTextGrammarTypedDict(TypedDict):
+    r"""Custom grammar response format"""
+
+    type: ResponseFormatTextGrammarType
     grammar: str
-    type: Literal["grammar"]
+    r"""Custom grammar for text generation"""
 
 
 class ResponseFormatTextGrammar(BaseModel):
-    grammar: str
+    r"""Custom grammar response format"""
 
-    TYPE: Annotated[
-        Annotated[Literal["grammar"], AfterValidator(validate_const("grammar"))],
-        pydantic.Field(alias="type"),
-    ] = "grammar"
+    type: ResponseFormatTextGrammarType
+
+    grammar: str
+    r"""Custom grammar for text generation"""

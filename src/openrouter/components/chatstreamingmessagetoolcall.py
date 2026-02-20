@@ -2,41 +2,57 @@
 
 from __future__ import annotations
 from openrouter.types import BaseModel
-from openrouter.utils import validate_const
-import pydantic
-from pydantic.functional_validators import AfterValidator
 from typing import Literal, Optional
-from typing_extensions import Annotated, NotRequired, TypedDict
+from typing_extensions import NotRequired, TypedDict
+
+
+ChatStreamingMessageToolCallType = Literal["function",]
+r"""Tool call type"""
 
 
 class ChatStreamingMessageToolCallFunctionTypedDict(TypedDict):
+    r"""Function call details"""
+
     name: NotRequired[str]
+    r"""Function name"""
     arguments: NotRequired[str]
+    r"""Function arguments as JSON string"""
 
 
 class ChatStreamingMessageToolCallFunction(BaseModel):
+    r"""Function call details"""
+
     name: Optional[str] = None
+    r"""Function name"""
 
     arguments: Optional[str] = None
+    r"""Function arguments as JSON string"""
 
 
 class ChatStreamingMessageToolCallTypedDict(TypedDict):
+    r"""Tool call delta for streaming responses"""
+
     index: float
+    r"""Tool call index in the array"""
     id: NotRequired[str]
-    type: Literal["function"]
+    r"""Tool call identifier"""
+    type: NotRequired[ChatStreamingMessageToolCallType]
+    r"""Tool call type"""
     function: NotRequired[ChatStreamingMessageToolCallFunctionTypedDict]
+    r"""Function call details"""
 
 
 class ChatStreamingMessageToolCall(BaseModel):
+    r"""Tool call delta for streaming responses"""
+
     index: float
+    r"""Tool call index in the array"""
 
     id: Optional[str] = None
+    r"""Tool call identifier"""
 
-    TYPE: Annotated[
-        Annotated[
-            Optional[Literal["function"]], AfterValidator(validate_const("function"))
-        ],
-        pydantic.Field(alias="type"),
-    ] = "function"
+    type: Optional[ChatStreamingMessageToolCallType] = None
+    r"""Tool call type"""
 
     function: Optional[ChatStreamingMessageToolCallFunction] = None
+    r"""Function call details"""

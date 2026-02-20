@@ -6,36 +6,43 @@ from .chatmessagecontentitemtext import (
     ChatMessageContentItemTextTypedDict,
 )
 from openrouter.types import BaseModel
-from openrouter.utils import validate_const
-import pydantic
-from pydantic.functional_validators import AfterValidator
 from typing import List, Literal, Optional, Union
-from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
+from typing_extensions import NotRequired, TypeAliasType, TypedDict
+
+
+SystemMessageRole = Literal["system",]
 
 
 SystemMessageContentTypedDict = TypeAliasType(
     "SystemMessageContentTypedDict",
     Union[str, List[ChatMessageContentItemTextTypedDict]],
 )
+r"""System message content"""
 
 
 SystemMessageContent = TypeAliasType(
     "SystemMessageContent", Union[str, List[ChatMessageContentItemText]]
 )
+r"""System message content"""
 
 
 class SystemMessageTypedDict(TypedDict):
+    r"""System message for setting behavior"""
+
+    role: SystemMessageRole
     content: SystemMessageContentTypedDict
-    role: Literal["system"]
+    r"""System message content"""
     name: NotRequired[str]
+    r"""Optional name for the system message"""
 
 
 class SystemMessage(BaseModel):
-    content: SystemMessageContent
+    r"""System message for setting behavior"""
 
-    ROLE: Annotated[
-        Annotated[Literal["system"], AfterValidator(validate_const("system"))],
-        pydantic.Field(alias="role"),
-    ] = "system"
+    role: SystemMessageRole
+
+    content: SystemMessageContent
+    r"""System message content"""
 
     name: Optional[str] = None
+    r"""Optional name for the system message"""

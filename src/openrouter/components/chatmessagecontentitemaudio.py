@@ -2,35 +2,39 @@
 
 from __future__ import annotations
 from openrouter.types import BaseModel
-from openrouter.utils import validate_const
 import pydantic
-from pydantic.functional_validators import AfterValidator
 from typing import Literal
 from typing_extensions import Annotated, TypedDict
 
 
+ChatMessageContentItemAudioType = Literal["input_audio",]
+
+
 class ChatMessageContentItemAudioInputAudioTypedDict(TypedDict):
     data: str
+    r"""Base64 encoded audio data"""
     format_: str
+    r"""Audio format (e.g., wav, mp3, flac, m4a, ogg, aiff, aac, pcm16, pcm24). Supported formats vary by provider."""
 
 
 class ChatMessageContentItemAudioInputAudio(BaseModel):
     data: str
+    r"""Base64 encoded audio data"""
 
     format_: Annotated[str, pydantic.Field(alias="format")]
+    r"""Audio format (e.g., wav, mp3, flac, m4a, ogg, aiff, aac, pcm16, pcm24). Supported formats vary by provider."""
 
 
 class ChatMessageContentItemAudioTypedDict(TypedDict):
+    r"""Audio input content part. Supported audio formats vary by provider."""
+
+    type: ChatMessageContentItemAudioType
     input_audio: ChatMessageContentItemAudioInputAudioTypedDict
-    type: Literal["input_audio"]
 
 
 class ChatMessageContentItemAudio(BaseModel):
-    input_audio: ChatMessageContentItemAudioInputAudio
+    r"""Audio input content part. Supported audio formats vary by provider."""
 
-    TYPE: Annotated[
-        Annotated[
-            Literal["input_audio"], AfterValidator(validate_const("input_audio"))
-        ],
-        pydantic.Field(alias="type"),
-    ] = "input_audio"
+    type: ChatMessageContentItemAudioType
+
+    input_audio: ChatMessageContentItemAudioInputAudio
