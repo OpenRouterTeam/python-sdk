@@ -13,3 +13,4 @@ ProviderSort = Union[
     ],
     UnrecognizedStr,
 ]
+r"""The provider sorting strategy (price, throughput, latency)"""

@@ -2,36 +2,43 @@
 
 from __future__ import annotations
 from openrouter.types import BaseModel
-from openrouter.utils import validate_const
-import pydantic
-from pydantic.functional_validators import AfterValidator
 from typing import Literal
-from typing_extensions import Annotated, TypedDict
+from typing_extensions import TypedDict
+
+
+ChatMessageToolCallType = Literal["function",]
 
 
 class ChatMessageToolCallFunctionTypedDict(TypedDict):
     name: str
+    r"""Function name to call"""
     arguments: str
+    r"""Function arguments as JSON string"""
 
 
 class ChatMessageToolCallFunction(BaseModel):
     name: str
+    r"""Function name to call"""
 
     arguments: str
+    r"""Function arguments as JSON string"""
 
 
 class ChatMessageToolCallTypedDict(TypedDict):
+    r"""Tool call made by the assistant"""
+
     id: str
+    r"""Tool call identifier"""
+    type: ChatMessageToolCallType
     function: ChatMessageToolCallFunctionTypedDict
-    type: Literal["function"]
 
 
 class ChatMessageToolCall(BaseModel):
+    r"""Tool call made by the assistant"""
+
     id: str
+    r"""Tool call identifier"""
+
+    type: ChatMessageToolCallType
 
     function: ChatMessageToolCallFunction
-
-    TYPE: Annotated[
-        Annotated[Literal["function"], AfterValidator(validate_const("function"))],
-        pydantic.Field(alias="type"),
-    ] = "function"

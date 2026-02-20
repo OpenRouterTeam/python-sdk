@@ -14,20 +14,32 @@ from typing_extensions import NotRequired, TypedDict
 
 
 class CompletionTokensDetailsTypedDict(TypedDict):
+    r"""Detailed completion token usage"""
+
     reasoning_tokens: NotRequired[Nullable[float]]
+    r"""Tokens used for reasoning"""
     audio_tokens: NotRequired[Nullable[float]]
+    r"""Tokens used for audio output"""
     accepted_prediction_tokens: NotRequired[Nullable[float]]
+    r"""Accepted prediction tokens"""
     rejected_prediction_tokens: NotRequired[Nullable[float]]
+    r"""Rejected prediction tokens"""
 
 
 class CompletionTokensDetails(BaseModel):
+    r"""Detailed completion token usage"""
+
     reasoning_tokens: OptionalNullable[float] = UNSET
+    r"""Tokens used for reasoning"""
 
     audio_tokens: OptionalNullable[float] = UNSET
+    r"""Tokens used for audio output"""
 
     accepted_prediction_tokens: OptionalNullable[float] = UNSET
+    r"""Accepted prediction tokens"""
 
     rejected_prediction_tokens: OptionalNullable[float] = UNSET
+    r"""Rejected prediction tokens"""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
@@ -71,40 +83,66 @@ class CompletionTokensDetails(BaseModel):
 
 
 class PromptTokensDetailsTypedDict(TypedDict):
+    r"""Detailed prompt token usage"""
+
     cached_tokens: NotRequired[float]
+    r"""Cached prompt tokens"""
     cache_write_tokens: NotRequired[float]
+    r"""Tokens written to cache. Only returned for models with explicit caching and cache write pricing."""
     audio_tokens: NotRequired[float]
+    r"""Audio input tokens"""
     video_tokens: NotRequired[float]
+    r"""Video input tokens"""
 
 
 class PromptTokensDetails(BaseModel):
+    r"""Detailed prompt token usage"""
+
     cached_tokens: Optional[float] = None
+    r"""Cached prompt tokens"""
 
     cache_write_tokens: Optional[float] = None
+    r"""Tokens written to cache. Only returned for models with explicit caching and cache write pricing."""
 
     audio_tokens: Optional[float] = None
+    r"""Audio input tokens"""
 
     video_tokens: Optional[float] = None
+    r"""Video input tokens"""
 
 
 class ChatGenerationTokenUsageTypedDict(TypedDict):
+    r"""Token usage statistics"""
+
     completion_tokens: float
+    r"""Number of tokens in the completion"""
     prompt_tokens: float
+    r"""Number of tokens in the prompt"""
     total_tokens: float
+    r"""Total number of tokens"""
     completion_tokens_details: NotRequired[Nullable[CompletionTokensDetailsTypedDict]]
+    r"""Detailed completion token usage"""
     prompt_tokens_details: NotRequired[Nullable[PromptTokensDetailsTypedDict]]
+    r"""Detailed prompt token usage"""
 
 
 class ChatGenerationTokenUsage(BaseModel):
+    r"""Token usage statistics"""
+
     completion_tokens: float
+    r"""Number of tokens in the completion"""
 
     prompt_tokens: float
+    r"""Number of tokens in the prompt"""
 
     total_tokens: float
+    r"""Total number of tokens"""
 
     completion_tokens_details: OptionalNullable[CompletionTokensDetails] = UNSET
+    r"""Detailed completion token usage"""
 
     prompt_tokens_details: OptionalNullable[PromptTokensDetails] = UNSET
+    r"""Detailed prompt token usage"""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

@@ -297,6 +297,8 @@ class OAuth(BaseSDK):
         ] = None,
         limit: Optional[float] = None,
         expires_at: OptionalNullable[datetime] = UNSET,
+        key_label: Optional[str] = None,
+        usage_limit_type: Optional[operations.UsageLimitType] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -316,6 +318,8 @@ class OAuth(BaseSDK):
         :param code_challenge_method: The method used to generate the code challenge
         :param limit: Credit limit for the API key to be created
         :param expires_at: Optional expiration time for the API key to be created
+        :param key_label: Optional custom label for the API key. Defaults to the app name if not provided.
+        :param usage_limit_type: Optional credit limit reset interval. When set, the credit limit resets on this interval.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -340,6 +344,8 @@ class OAuth(BaseSDK):
                 code_challenge_method=code_challenge_method,
                 limit=limit,
                 expires_at=expires_at,
+                key_label=key_label,
+                usage_limit_type=usage_limit_type,
             ),
         )
 
@@ -439,6 +445,8 @@ class OAuth(BaseSDK):
         ] = None,
         limit: Optional[float] = None,
         expires_at: OptionalNullable[datetime] = UNSET,
+        key_label: Optional[str] = None,
+        usage_limit_type: Optional[operations.UsageLimitType] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -458,6 +466,8 @@ class OAuth(BaseSDK):
         :param code_challenge_method: The method used to generate the code challenge
         :param limit: Credit limit for the API key to be created
         :param expires_at: Optional expiration time for the API key to be created
+        :param key_label: Optional custom label for the API key. Defaults to the app name if not provided.
+        :param usage_limit_type: Optional credit limit reset interval. When set, the credit limit resets on this interval.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -482,6 +492,8 @@ class OAuth(BaseSDK):
                 code_challenge_method=code_challenge_method,
                 limit=limit,
                 expires_at=expires_at,
+                key_label=key_label,
+                usage_limit_type=usage_limit_type,
             ),
         )
 

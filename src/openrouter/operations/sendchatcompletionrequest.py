@@ -55,7 +55,6 @@ class SendChatCompletionRequestRequestTypedDict(TypedDict):
     chat_generation_params: (
         components_chatgenerationparams.ChatGenerationParamsTypedDict
     )
-    r"""Chat completion request parameters"""
     http_referer: NotRequired[str]
     r"""The app identifier should be your app's URL and is used as the primary identifier for rankings.
     This is used to track API usage per application.
@@ -72,7 +71,6 @@ class SendChatCompletionRequestRequest(BaseModel):
         components_chatgenerationparams.ChatGenerationParams,
         FieldMetadata(request=RequestMetadata(media_type="application/json")),
     ]
-    r"""Chat completion request parameters"""
 
     http_referer: Annotated[
         Optional[str],
@@ -94,16 +92,30 @@ class SendChatCompletionRequestRequest(BaseModel):
     """
 
 
+class SendChatCompletionRequestResponseBodyTypedDict(TypedDict):
+    r"""Successful chat completion response"""
+
+    data: components_chatstreamingresponsechunk.ChatStreamingResponseChunkTypedDict
+    r"""Streaming chat completion chunk"""
+
+
+class SendChatCompletionRequestResponseBody(BaseModel):
+    r"""Successful chat completion response"""
+
+    data: components_chatstreamingresponsechunk.ChatStreamingResponseChunk
+    r"""Streaming chat completion chunk"""
+
+
 SendChatCompletionRequestResponseTypedDict = TypeAliasType(
     "SendChatCompletionRequestResponseTypedDict",
     Union[
         components_chatresponse.ChatResponseTypedDict,
         Union[
             eventstreaming.EventStream[
-                components_chatstreamingresponsechunk.ChatStreamingResponseChunkDataTypedDict
+                components_chatstreamingresponsechunk.ChatStreamingResponseChunkTypedDict
             ],
             eventstreaming.EventStreamAsync[
-                components_chatstreamingresponsechunk.ChatStreamingResponseChunkDataTypedDict
+                components_chatstreamingresponsechunk.ChatStreamingResponseChunkTypedDict
             ],
         ],
     ],
@@ -116,10 +128,10 @@ SendChatCompletionRequestResponse = TypeAliasType(
         components_chatresponse.ChatResponse,
         Union[
             eventstreaming.EventStream[
-                components_chatstreamingresponsechunk.ChatStreamingResponseChunkData
+                components_chatstreamingresponsechunk.ChatStreamingResponseChunk
             ],
             eventstreaming.EventStreamAsync[
-                components_chatstreamingresponsechunk.ChatStreamingResponseChunkData
+                components_chatstreamingresponsechunk.ChatStreamingResponseChunk
             ],
         ],
     ],

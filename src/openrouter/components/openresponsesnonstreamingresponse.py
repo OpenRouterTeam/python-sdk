@@ -55,7 +55,7 @@ from typing import Any, Dict, List, Literal, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
-Object = Literal["response",]
+OpenResponsesNonStreamingResponseObject = Literal["response",]
 
 
 OpenResponsesNonStreamingResponseType = Literal["function",]
@@ -146,7 +146,7 @@ class OpenResponsesNonStreamingResponseTypedDict(TypedDict):
     r"""Complete non-streaming response from the Responses API"""
 
     id: str
-    object: Object
+    object: OpenResponsesNonStreamingResponseObject
     created_at: float
     model: str
     status: OpenAIResponsesResponseStatus
@@ -190,7 +190,7 @@ class OpenResponsesNonStreamingResponse(BaseModel):
 
     id: str
 
-    object: Object
+    object: OpenResponsesNonStreamingResponseObject
 
     created_at: float
 

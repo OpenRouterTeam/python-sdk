@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 from .assistantmessage import AssistantMessage, AssistantMessageTypedDict
-from .chatcompletionfinishreason import ChatCompletionFinishReason
 from .chatmessagetokenlogprobs import (
     ChatMessageTokenLogprobs,
     ChatMessageTokenLogprobsTypedDict,
@@ -14,29 +13,36 @@ from openrouter.types import (
     UNSET,
     UNSET_SENTINEL,
 )
-from openrouter.utils import validate_open_enum
 from pydantic import model_serializer
-from pydantic.functional_validators import PlainValidator
-from typing_extensions import Annotated, NotRequired, TypedDict
+from typing import Any
+from typing_extensions import NotRequired, TypedDict
 
 
 class ChatResponseChoiceTypedDict(TypedDict):
-    finish_reason: Nullable[ChatCompletionFinishReason]
+    r"""Chat completion choice"""
+
+    finish_reason: Nullable[Any]
     index: float
+    r"""Choice index"""
     message: AssistantMessageTypedDict
+    r"""Assistant message for requests and responses"""
     logprobs: NotRequired[Nullable[ChatMessageTokenLogprobsTypedDict]]
+    r"""Log probabilities for the completion"""
 
 
 class ChatResponseChoice(BaseModel):
-    finish_reason: Annotated[
-        Nullable[ChatCompletionFinishReason], PlainValidator(validate_open_enum(False))
-    ]
+    r"""Chat completion choice"""
+
+    finish_reason: Nullable[Any]
 
     index: float
+    r"""Choice index"""
 
     message: AssistantMessage
+    r"""Assistant message for requests and responses"""
 
     logprobs: OptionalNullable[ChatMessageTokenLogprobs] = UNSET
+    r"""Log probabilities for the completion"""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

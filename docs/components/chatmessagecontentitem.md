@@ -1,5 +1,7 @@
 # ChatMessageContentItem
 
+Content part for chat completion messages
+
 
 ## Supported Types
 
@@ -21,15 +23,9 @@ value: components.ChatMessageContentItemImage = /* values here */
 value: components.ChatMessageContentItemAudio = /* values here */
 ```
 
-### `components.ChatMessageContentItemVideo`
+### `components.ChatMessageContentItem1`
 
 ```python
-value: components.ChatMessageContentItemVideo = /* values here */
-```
-
-### `components.ChatMessageContentItemVideo`
-
-```python
-value: components.ChatMessageContentItemVideo = /* values here */
+value: components.ChatMessageContentItem1 = /* values here */
 ```
 
