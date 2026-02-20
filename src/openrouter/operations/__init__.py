@@ -58,6 +58,7 @@ if TYPE_CHECKING:
         CreateAuthKeysCodeRequestTypedDict,
         CreateAuthKeysCodeResponse,
         CreateAuthKeysCodeResponseTypedDict,
+        UsageLimitType,
     )
     from .createcoinbasecharge import (
         CallData,
@@ -707,6 +708,7 @@ __all__ = [
     "UpdateKeysResponse",
     "UpdateKeysResponseTypedDict",
     "Usage",
+    "UsageLimitType",
     "UsageTypedDict",
     "Web3Data",
     "Web3DataTypedDict",
@@ -756,6 +758,7 @@ _dynamic_imports: dict[str, str] = {
     "CreateAuthKeysCodeRequestTypedDict": ".createauthkeyscode",
     "CreateAuthKeysCodeResponse": ".createauthkeyscode",
     "CreateAuthKeysCodeResponseTypedDict": ".createauthkeyscode",
+    "UsageLimitType": ".createauthkeyscode",
     "CallData": ".createcoinbasecharge",
     "CallDataTypedDict": ".createcoinbasecharge",
     "CreateCoinbaseChargeData": ".createcoinbasecharge",

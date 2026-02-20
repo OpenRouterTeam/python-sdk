@@ -45,6 +45,7 @@ Schema5Enum = Union[
         "Inceptron",
         "InferenceNet",
         "Infermatic",
+        "Io Net",
         "Inflection",
         "Liquid",
         "Mara",

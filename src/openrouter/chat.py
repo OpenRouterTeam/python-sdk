@@ -32,6 +32,9 @@ class Chat(BaseSDK):
         route: OptionalNullable[components.Route] = UNSET,
         user: Optional[str] = None,
         session_id: Optional[str] = None,
+        trace: Optional[
+            Union[components.Schema19, components.Schema19TypedDict]
+        ] = None,
         model: Optional[str] = None,
         models: Optional[List[str]] = None,
         frequency_penalty: OptionalNullable[float] = UNSET,
@@ -57,6 +60,7 @@ class Chat(BaseSDK):
             Union[components.ChatStreamOptions, components.ChatStreamOptionsTypedDict]
         ] = UNSET,
         temperature: OptionalNullable[float] = UNSET,
+        parallel_tool_calls: OptionalNullable[bool] = UNSET,
         tool_choice: Optional[Any] = None,
         tools: Optional[
             Union[
@@ -93,6 +97,7 @@ class Chat(BaseSDK):
         :param route:
         :param user:
         :param session_id:
+        :param trace:
         :param model:
         :param models:
         :param frequency_penalty:
@@ -110,6 +115,7 @@ class Chat(BaseSDK):
         :param stream:
         :param stream_options:
         :param temperature:
+        :param parallel_tool_calls:
         :param tool_choice:
         :param tools:
         :param top_p:
@@ -139,6 +145,9 @@ class Chat(BaseSDK):
         route: OptionalNullable[components.Route] = UNSET,
         user: Optional[str] = None,
         session_id: Optional[str] = None,
+        trace: Optional[
+            Union[components.Schema19, components.Schema19TypedDict]
+        ] = None,
         model: Optional[str] = None,
         models: Optional[List[str]] = None,
         frequency_penalty: OptionalNullable[float] = UNSET,
@@ -164,6 +173,7 @@ class Chat(BaseSDK):
             Union[components.ChatStreamOptions, components.ChatStreamOptionsTypedDict]
         ] = UNSET,
         temperature: OptionalNullable[float] = UNSET,
+        parallel_tool_calls: OptionalNullable[bool] = UNSET,
         tool_choice: Optional[Any] = None,
         tools: Optional[
             Union[
@@ -200,6 +210,7 @@ class Chat(BaseSDK):
         :param route:
         :param user:
         :param session_id:
+        :param trace:
         :param model:
         :param models:
         :param frequency_penalty:
@@ -217,6 +228,7 @@ class Chat(BaseSDK):
         :param stream:
         :param stream_options:
         :param temperature:
+        :param parallel_tool_calls:
         :param tool_choice:
         :param tools:
         :param top_p:
@@ -245,6 +257,9 @@ class Chat(BaseSDK):
         route: OptionalNullable[components.Route] = UNSET,
         user: Optional[str] = None,
         session_id: Optional[str] = None,
+        trace: Optional[
+            Union[components.Schema19, components.Schema19TypedDict]
+        ] = None,
         model: Optional[str] = None,
         models: Optional[List[str]] = None,
         frequency_penalty: OptionalNullable[float] = UNSET,
@@ -270,6 +285,7 @@ class Chat(BaseSDK):
             Union[components.ChatStreamOptions, components.ChatStreamOptionsTypedDict]
         ] = UNSET,
         temperature: OptionalNullable[float] = UNSET,
+        parallel_tool_calls: OptionalNullable[bool] = UNSET,
         tool_choice: Optional[Any] = None,
         tools: Optional[
             Union[
@@ -306,6 +322,7 @@ class Chat(BaseSDK):
         :param route:
         :param user:
         :param session_id:
+        :param trace:
         :param model:
         :param models:
         :param frequency_penalty:
@@ -323,6 +340,7 @@ class Chat(BaseSDK):
         :param stream:
         :param stream_options:
         :param temperature:
+        :param parallel_tool_calls:
         :param tool_choice:
         :param tools:
         :param top_p:
@@ -358,6 +376,7 @@ class Chat(BaseSDK):
                 route=route,
                 user=user,
                 session_id=session_id,
+                trace=utils.get_pydantic_model(trace, Optional[components.Schema19]),
                 messages=utils.get_pydantic_model(messages, List[components.Message]),
                 model=model,
                 models=models,
@@ -382,6 +401,7 @@ class Chat(BaseSDK):
                     stream_options, OptionalNullable[components.ChatStreamOptions]
                 ),
                 temperature=temperature,
+                parallel_tool_calls=parallel_tool_calls,
                 tool_choice=tool_choice,
                 tools=utils.get_pydantic_model(
                     tools, Optional[List[components.ToolDefinitionJSON]]
@@ -504,6 +524,9 @@ class Chat(BaseSDK):
         route: OptionalNullable[components.Route] = UNSET,
         user: Optional[str] = None,
         session_id: Optional[str] = None,
+        trace: Optional[
+            Union[components.Schema19, components.Schema19TypedDict]
+        ] = None,
         model: Optional[str] = None,
         models: Optional[List[str]] = None,
         frequency_penalty: OptionalNullable[float] = UNSET,
@@ -529,6 +552,7 @@ class Chat(BaseSDK):
             Union[components.ChatStreamOptions, components.ChatStreamOptionsTypedDict]
         ] = UNSET,
         temperature: OptionalNullable[float] = UNSET,
+        parallel_tool_calls: OptionalNullable[bool] = UNSET,
         tool_choice: Optional[Any] = None,
         tools: Optional[
             Union[
@@ -565,6 +589,7 @@ class Chat(BaseSDK):
         :param route:
         :param user:
         :param session_id:
+        :param trace:
         :param model:
         :param models:
         :param frequency_penalty:
@@ -582,6 +607,7 @@ class Chat(BaseSDK):
         :param stream:
         :param stream_options:
         :param temperature:
+        :param parallel_tool_calls:
         :param tool_choice:
         :param tools:
         :param top_p:
@@ -611,6 +637,9 @@ class Chat(BaseSDK):
         route: OptionalNullable[components.Route] = UNSET,
         user: Optional[str] = None,
         session_id: Optional[str] = None,
+        trace: Optional[
+            Union[components.Schema19, components.Schema19TypedDict]
+        ] = None,
         model: Optional[str] = None,
         models: Optional[List[str]] = None,
         frequency_penalty: OptionalNullable[float] = UNSET,
@@ -636,6 +665,7 @@ class Chat(BaseSDK):
             Union[components.ChatStreamOptions, components.ChatStreamOptionsTypedDict]
         ] = UNSET,
         temperature: OptionalNullable[float] = UNSET,
+        parallel_tool_calls: OptionalNullable[bool] = UNSET,
         tool_choice: Optional[Any] = None,
         tools: Optional[
             Union[
@@ -672,6 +702,7 @@ class Chat(BaseSDK):
         :param route:
         :param user:
         :param session_id:
+        :param trace:
         :param model:
         :param models:
         :param frequency_penalty:
@@ -689,6 +720,7 @@ class Chat(BaseSDK):
         :param stream:
         :param stream_options:
         :param temperature:
+        :param parallel_tool_calls:
         :param tool_choice:
         :param tools:
         :param top_p:
@@ -717,6 +749,9 @@ class Chat(BaseSDK):
         route: OptionalNullable[components.Route] = UNSET,
         user: Optional[str] = None,
         session_id: Optional[str] = None,
+        trace: Optional[
+            Union[components.Schema19, components.Schema19TypedDict]
+        ] = None,
         model: Optional[str] = None,
         models: Optional[List[str]] = None,
         frequency_penalty: OptionalNullable[float] = UNSET,
@@ -742,6 +777,7 @@ class Chat(BaseSDK):
             Union[components.ChatStreamOptions, components.ChatStreamOptionsTypedDict]
         ] = UNSET,
         temperature: OptionalNullable[float] = UNSET,
+        parallel_tool_calls: OptionalNullable[bool] = UNSET,
         tool_choice: Optional[Any] = None,
         tools: Optional[
             Union[
@@ -778,6 +814,7 @@ class Chat(BaseSDK):
         :param route:
         :param user:
         :param session_id:
+        :param trace:
         :param model:
         :param models:
         :param frequency_penalty:
@@ -795,6 +832,7 @@ class Chat(BaseSDK):
         :param stream:
         :param stream_options:
         :param temperature:
+        :param parallel_tool_calls:
         :param tool_choice:
         :param tools:
         :param top_p:
@@ -830,6 +868,7 @@ class Chat(BaseSDK):
                 route=route,
                 user=user,
                 session_id=session_id,
+                trace=utils.get_pydantic_model(trace, Optional[components.Schema19]),
                 messages=utils.get_pydantic_model(messages, List[components.Message]),
                 model=model,
                 models=models,
@@ -854,6 +893,7 @@ class Chat(BaseSDK):
                     stream_options, OptionalNullable[components.ChatStreamOptions]
                 ),
                 temperature=temperature,
+                parallel_tool_calls=parallel_tool_calls,
                 tool_choice=tool_choice,
                 tools=utils.get_pydantic_model(
                     tools, Optional[List[components.ToolDefinitionJSON]]

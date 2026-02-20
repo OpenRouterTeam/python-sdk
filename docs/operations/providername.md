@@ -68,6 +68,7 @@
 | `INCEPTRON`         | Inceptron           |
 | `INFERENCE_NET`     | InferenceNet        |
 | `INFERMATIC`        | Infermatic          |
+| `IO_NET`            | Io Net              |
 | `INFLECTION`        | Inflection          |
 | `LIQUID`            | Liquid              |
 | `MARA`              | Mara                |
