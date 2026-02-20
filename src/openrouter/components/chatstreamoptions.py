@@ -2,13 +2,25 @@
 
 from __future__ import annotations
 from openrouter.types import BaseModel
+import pydantic
 from typing import Optional
-from typing_extensions import NotRequired, TypedDict
+from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class ChatStreamOptionsTypedDict(TypedDict):
+    r"""Streaming configuration options"""
+
     include_usage: NotRequired[bool]
+    r"""Deprecated: This field has no effect. Full usage details are always included."""
 
 
 class ChatStreamOptions(BaseModel):
-    include_usage: Optional[bool] = None
+    r"""Streaming configuration options"""
+
+    include_usage: Annotated[
+        Optional[bool],
+        pydantic.Field(
+            deprecated="warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+        ),
+    ] = None
+    r"""Deprecated: This field has no effect. Full usage details are always included."""

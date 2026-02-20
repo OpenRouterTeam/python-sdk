@@ -2,11 +2,13 @@
 
 from __future__ import annotations
 from openrouter.types import BaseModel, UnrecognizedStr
-from openrouter.utils import validate_const, validate_open_enum
-import pydantic
-from pydantic.functional_validators import AfterValidator, PlainValidator
+from openrouter.utils import validate_open_enum
+from pydantic.functional_validators import PlainValidator
 from typing import Literal, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypedDict
+
+
+ChatMessageContentItemImageType = Literal["image_url",]
 
 
 ChatMessageContentItemImageDetail = Union[
@@ -17,31 +19,37 @@ ChatMessageContentItemImageDetail = Union[
     ],
     UnrecognizedStr,
 ]
+r"""Image detail level for vision models"""
 
 
 class ChatMessageContentItemImageImageURLTypedDict(TypedDict):
     url: str
+    r"""URL of the image (data: URLs supported)"""
     detail: NotRequired[ChatMessageContentItemImageDetail]
+    r"""Image detail level for vision models"""
 
 
 class ChatMessageContentItemImageImageURL(BaseModel):
     url: str
+    r"""URL of the image (data: URLs supported)"""
 
     detail: Annotated[
         Optional[ChatMessageContentItemImageDetail],
         PlainValidator(validate_open_enum(False)),
     ] = None
+    r"""Image detail level for vision models"""
 
 
 class ChatMessageContentItemImageTypedDict(TypedDict):
+    r"""Image content part for vision models"""
+
+    type: ChatMessageContentItemImageType
     image_url: ChatMessageContentItemImageImageURLTypedDict
-    type: Literal["image_url"]
 
 
 class ChatMessageContentItemImage(BaseModel):
-    image_url: ChatMessageContentItemImageImageURL
+    r"""Image content part for vision models"""
 
-    TYPE: Annotated[
-        Annotated[Literal["image_url"], AfterValidator(validate_const("image_url"))],
-        pydantic.Field(alias="type"),
-    ] = "image_url"
+    type: ChatMessageContentItemImageType
+
+    image_url: ChatMessageContentItemImageImageURL

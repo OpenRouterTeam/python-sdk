@@ -66,6 +66,17 @@ CreateAuthKeysCodeCodeChallengeMethod = Union[
 r"""The method used to generate the code challenge"""
 
 
+UsageLimitType = Union[
+    Literal[
+        "daily",
+        "weekly",
+        "monthly",
+    ],
+    UnrecognizedStr,
+]
+r"""Optional credit limit reset interval. When set, the credit limit resets on this interval."""
+
+
 class CreateAuthKeysCodeRequestBodyTypedDict(TypedDict):
     callback_url: str
     r"""The callback URL to redirect to after authorization. Note, only https URLs on ports 443 and 3000 are allowed."""
@@ -77,6 +88,10 @@ class CreateAuthKeysCodeRequestBodyTypedDict(TypedDict):
     r"""Credit limit for the API key to be created"""
     expires_at: NotRequired[Nullable[datetime]]
     r"""Optional expiration time for the API key to be created"""
+    key_label: NotRequired[str]
+    r"""Optional custom label for the API key. Defaults to the app name if not provided."""
+    usage_limit_type: NotRequired[UsageLimitType]
+    r"""Optional credit limit reset interval. When set, the credit limit resets on this interval."""
 
 
 class CreateAuthKeysCodeRequestBody(BaseModel):
@@ -98,6 +113,14 @@ class CreateAuthKeysCodeRequestBody(BaseModel):
     expires_at: OptionalNullable[datetime] = UNSET
     r"""Optional expiration time for the API key to be created"""
 
+    key_label: Optional[str] = None
+    r"""Optional custom label for the API key. Defaults to the app name if not provided."""
+
+    usage_limit_type: Annotated[
+        Optional[UsageLimitType], PlainValidator(validate_open_enum(False))
+    ] = None
+    r"""Optional credit limit reset interval. When set, the credit limit resets on this interval."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = [
@@ -105,6 +128,8 @@ class CreateAuthKeysCodeRequestBody(BaseModel):
             "code_challenge_method",
             "limit",
             "expires_at",
+            "key_label",
+            "usage_limit_type",
         ]
         nullable_fields = ["expires_at"]
         null_default_fields = []

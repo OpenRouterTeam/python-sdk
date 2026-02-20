@@ -161,6 +161,7 @@ ProviderName = Union[
         "Inceptron",
         "InferenceNet",
         "Infermatic",
+        "Io Net",
         "Inflection",
         "Liquid",
         "Mara",

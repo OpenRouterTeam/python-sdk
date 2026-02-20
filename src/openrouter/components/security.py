@@ -17,8 +17,8 @@ class Security(BaseModel):
         FieldMetadata(
             security=SecurityMetadata(
                 scheme=True,
-                scheme_type="http",
-                sub_type="bearer",
+                scheme_type="apiKey",
+                sub_type="header",
                 field_name="Authorization",
             )
         ),
