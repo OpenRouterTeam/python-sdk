@@ -55,7 +55,7 @@ from openrouter.types import (
 )
 from openrouter.utils import get_discriminator, validate_const, validate_open_enum
 import pydantic
-from pydantic import Discriminator, Tag, model_serializer
+from pydantic import ConfigDict, Discriminator, Tag, model_serializer
 from pydantic.functional_validators import AfterValidator, PlainValidator
 from typing import Any, Dict, List, Literal, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
@@ -244,7 +244,7 @@ class OpenResponsesRequestMaxPrice(BaseModel):
     request: Optional[str] = None
 
 
-class ProviderTypedDict(TypedDict):
+class OpenResponsesRequestProviderTypedDict(TypedDict):
     r"""When multiple model providers are available, optionally indicate your routing preference."""
 
     allow_fallbacks: NotRequired[Nullable[bool]]
@@ -283,7 +283,7 @@ class ProviderTypedDict(TypedDict):
     r"""Preferred maximum latency (in seconds). Can be a number (applies to p50) or an object with percentile-specific cutoffs. Endpoints above the threshold(s) may still be used, but are deprioritized in routing. When using fallback models, this may cause a fallback model to be used instead of the primary model if it meets the threshold."""
 
 
-class Provider(BaseModel):
+class OpenResponsesRequestProvider(BaseModel):
     r"""When multiple model providers are available, optionally indicate your routing preference."""
 
     allow_fallbacks: OptionalNullable[bool] = UNSET
@@ -395,35 +395,35 @@ class Provider(BaseModel):
         return m
 
 
-IDResponseHealing = Literal["response-healing",]
+OpenResponsesRequestIDResponseHealing = Literal["response-healing",]
 
 
-class PluginResponseHealingTypedDict(TypedDict):
-    id: IDResponseHealing
+class OpenResponsesRequestPluginResponseHealingTypedDict(TypedDict):
+    id: OpenResponsesRequestIDResponseHealing
     enabled: NotRequired[bool]
     r"""Set to false to disable the response-healing plugin for this request. Defaults to true."""
 
 
-class PluginResponseHealing(BaseModel):
-    id: IDResponseHealing
+class OpenResponsesRequestPluginResponseHealing(BaseModel):
+    id: OpenResponsesRequestIDResponseHealing
 
     enabled: Optional[bool] = None
     r"""Set to false to disable the response-healing plugin for this request. Defaults to true."""
 
 
-IDFileParser = Literal["file-parser",]
+OpenResponsesRequestIDFileParser = Literal["file-parser",]
 
 
-class PluginFileParserTypedDict(TypedDict):
-    id: IDFileParser
+class OpenResponsesRequestPluginFileParserTypedDict(TypedDict):
+    id: OpenResponsesRequestIDFileParser
     enabled: NotRequired[bool]
     r"""Set to false to disable the file-parser plugin for this request. Defaults to true."""
     pdf: NotRequired[PDFParserOptionsTypedDict]
     r"""Options for PDF parsing."""
 
 
-class PluginFileParser(BaseModel):
-    id: IDFileParser
+class OpenResponsesRequestPluginFileParser(BaseModel):
+    id: OpenResponsesRequestIDFileParser
 
     enabled: Optional[bool] = None
     r"""Set to false to disable the file-parser plugin for this request. Defaults to true."""
@@ -432,11 +432,11 @@ class PluginFileParser(BaseModel):
     r"""Options for PDF parsing."""
 
 
-IDWeb = Literal["web",]
+OpenResponsesRequestIDWeb = Literal["web",]
 
 
-class PluginWebTypedDict(TypedDict):
-    id: IDWeb
+class OpenResponsesRequestPluginWebTypedDict(TypedDict):
+    id: OpenResponsesRequestIDWeb
     enabled: NotRequired[bool]
     r"""Set to false to disable the web-search plugin for this request. Defaults to true."""
     max_results: NotRequired[float]
@@ -445,8 +445,8 @@ class PluginWebTypedDict(TypedDict):
     r"""The search engine to use for web search."""
 
 
-class PluginWeb(BaseModel):
-    id: IDWeb
+class OpenResponsesRequestPluginWeb(BaseModel):
+    id: OpenResponsesRequestIDWeb
 
     enabled: Optional[bool] = None
     r"""Set to false to disable the web-search plugin for this request. Defaults to true."""
@@ -461,30 +461,30 @@ class PluginWeb(BaseModel):
     r"""The search engine to use for web search."""
 
 
-IDModeration = Literal["moderation",]
+OpenResponsesRequestIDModeration = Literal["moderation",]
 
 
-class PluginModerationTypedDict(TypedDict):
-    id: IDModeration
+class OpenResponsesRequestPluginModerationTypedDict(TypedDict):
+    id: OpenResponsesRequestIDModeration
 
 
-class PluginModeration(BaseModel):
-    id: IDModeration
+class OpenResponsesRequestPluginModeration(BaseModel):
+    id: OpenResponsesRequestIDModeration
 
 
-IDAutoRouter = Literal["auto-router",]
+OpenResponsesRequestIDAutoRouter = Literal["auto-router",]
 
 
-class PluginAutoRouterTypedDict(TypedDict):
-    id: IDAutoRouter
+class OpenResponsesRequestPluginAutoRouterTypedDict(TypedDict):
+    id: OpenResponsesRequestIDAutoRouter
     enabled: NotRequired[bool]
     r"""Set to false to disable the auto-router plugin for this request. Defaults to true."""
     allowed_models: NotRequired[List[str]]
     r"""List of model patterns to filter which models the auto-router can route between. Supports wildcards (e.g., \"anthropic/*\" matches all Anthropic models). When not specified, uses the default supported models list."""
 
 
-class PluginAutoRouter(BaseModel):
-    id: IDAutoRouter
+class OpenResponsesRequestPluginAutoRouter(BaseModel):
+    id: OpenResponsesRequestIDAutoRouter
 
     enabled: Optional[bool] = None
     r"""Set to false to disable the auto-router plugin for this request. Defaults to true."""
@@ -493,28 +493,65 @@ class PluginAutoRouter(BaseModel):
     r"""List of model patterns to filter which models the auto-router can route between. Supports wildcards (e.g., \"anthropic/*\" matches all Anthropic models). When not specified, uses the default supported models list."""
 
 
-PluginTypedDict = TypeAliasType(
-    "PluginTypedDict",
+OpenResponsesRequestPluginUnionTypedDict = TypeAliasType(
+    "OpenResponsesRequestPluginUnionTypedDict",
     Union[
-        PluginModerationTypedDict,
-        PluginResponseHealingTypedDict,
-        PluginAutoRouterTypedDict,
-        PluginFileParserTypedDict,
-        PluginWebTypedDict,
+        OpenResponsesRequestPluginModerationTypedDict,
+        OpenResponsesRequestPluginResponseHealingTypedDict,
+        OpenResponsesRequestPluginAutoRouterTypedDict,
+        OpenResponsesRequestPluginFileParserTypedDict,
+        OpenResponsesRequestPluginWebTypedDict,
     ],
 )
 
 
-Plugin = Annotated[
+OpenResponsesRequestPluginUnion = Annotated[
     Union[
-        Annotated[PluginAutoRouter, Tag("auto-router")],
-        Annotated[PluginModeration, Tag("moderation")],
-        Annotated[PluginWeb, Tag("web")],
-        Annotated[PluginFileParser, Tag("file-parser")],
-        Annotated[PluginResponseHealing, Tag("response-healing")],
+        Annotated[OpenResponsesRequestPluginAutoRouter, Tag("auto-router")],
+        Annotated[OpenResponsesRequestPluginModeration, Tag("moderation")],
+        Annotated[OpenResponsesRequestPluginWeb, Tag("web")],
+        Annotated[OpenResponsesRequestPluginFileParser, Tag("file-parser")],
+        Annotated[OpenResponsesRequestPluginResponseHealing, Tag("response-healing")],
     ],
     Discriminator(lambda m: get_discriminator(m, "id", "id")),
 ]
+
+
+class OpenResponsesRequestTraceTypedDict(TypedDict):
+    r"""Metadata for observability and tracing. Known keys (trace_id, trace_name, span_name, generation_name, parent_span_id) have special handling. Additional keys are passed through as custom metadata to configured broadcast destinations."""
+
+    trace_id: NotRequired[str]
+    trace_name: NotRequired[str]
+    span_name: NotRequired[str]
+    generation_name: NotRequired[str]
+    parent_span_id: NotRequired[str]
+
+
+class OpenResponsesRequestTrace(BaseModel):
+    r"""Metadata for observability and tracing. Known keys (trace_id, trace_name, span_name, generation_name, parent_span_id) have special handling. Additional keys are passed through as custom metadata to configured broadcast destinations."""
+
+    model_config = ConfigDict(
+        populate_by_name=True, arbitrary_types_allowed=True, extra="allow"
+    )
+    __pydantic_extra__: Dict[str, Nullable[Any]] = pydantic.Field(init=False)
+
+    trace_id: Optional[str] = None
+
+    trace_name: Optional[str] = None
+
+    span_name: Optional[str] = None
+
+    generation_name: Optional[str] = None
+
+    parent_span_id: Optional[str] = None
+
+    @property
+    def additional_properties(self):
+        return self.__pydantic_extra__
+
+    @additional_properties.setter
+    def additional_properties(self, value):
+        self.__pydantic_extra__ = value  # pyright: ignore[reportIncompatibleVariableOverride]
 
 
 class OpenResponsesRequestTypedDict(TypedDict):
@@ -556,14 +593,16 @@ class OpenResponsesRequestTypedDict(TypedDict):
     service_tier: NotRequired[ServiceTier]
     truncation: NotRequired[Nullable[Truncation]]
     stream: NotRequired[bool]
-    provider: NotRequired[Nullable[ProviderTypedDict]]
+    provider: NotRequired[Nullable[OpenResponsesRequestProviderTypedDict]]
     r"""When multiple model providers are available, optionally indicate your routing preference."""
-    plugins: NotRequired[List[PluginTypedDict]]
+    plugins: NotRequired[List[OpenResponsesRequestPluginUnionTypedDict]]
     r"""Plugins you want to enable for this request, including their settings."""
     user: NotRequired[str]
     r"""A unique identifier representing your end-user, which helps distinguish between different users of your app. This allows your app to identify specific users in case of abuse reports, preventing your entire app from being affected by the actions of individual users. Maximum of 128 characters."""
     session_id: NotRequired[str]
     r"""A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 128 characters."""
+    trace: NotRequired[OpenResponsesRequestTraceTypedDict]
+    r"""Metadata for observability and tracing. Known keys (trace_id, trace_name, span_name, generation_name, parent_span_id) have special handling. Additional keys are passed through as custom metadata to configured broadcast destinations."""
 
 
 class OpenResponsesRequest(BaseModel):
@@ -652,10 +691,10 @@ class OpenResponsesRequest(BaseModel):
 
     stream: Optional[bool] = False
 
-    provider: OptionalNullable[Provider] = UNSET
+    provider: OptionalNullable[OpenResponsesRequestProvider] = UNSET
     r"""When multiple model providers are available, optionally indicate your routing preference."""
 
-    plugins: Optional[List[Plugin]] = None
+    plugins: Optional[List[OpenResponsesRequestPluginUnion]] = None
     r"""Plugins you want to enable for this request, including their settings."""
 
     user: Optional[str] = None
@@ -663,6 +702,9 @@ class OpenResponsesRequest(BaseModel):
 
     session_id: Optional[str] = None
     r"""A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 128 characters."""
+
+    trace: Optional[OpenResponsesRequestTrace] = None
+    r"""Metadata for observability and tracing. Known keys (trace_id, trace_name, span_name, generation_name, parent_span_id) have special handling. Additional keys are passed through as custom metadata to configured broadcast destinations."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
@@ -701,6 +743,7 @@ class OpenResponsesRequest(BaseModel):
             "plugins",
             "user",
             "session_id",
+            "trace",
         ]
         nullable_fields = [
             "instructions",

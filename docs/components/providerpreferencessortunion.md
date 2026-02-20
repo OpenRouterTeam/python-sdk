@@ -11,15 +11,15 @@ The sorting strategy to use for this request, if "order" is not specified. When 
 value: components.ProviderPreferencesProviderSort = /* values here */
 ```
 
-### `components.ProviderSortConfigUnion`
+### `components.ProviderPreferencesProviderSortConfigUnion`
 
 ```python
-value: components.ProviderSortConfigUnion = /* values here */
+value: components.ProviderPreferencesProviderSortConfigUnion = /* values here */
 ```
 
-### `components.SortEnum`
+### `components.ProviderPreferencesSortEnum`
 
 ```python
-value: components.SortEnum = /* values here */
+value: components.ProviderPreferencesSortEnum = /* values here */
 ```
 

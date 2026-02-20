@@ -38,6 +38,7 @@ class OpenRouter(BaseSDK):
     beta: "Beta"
     analytics: "Analytics"
     r"""Analytics and usage endpoints"""
+    chat: "Chat"
     credits: "Credits"
     r"""Credit management endpoints"""
     embeddings: "Embeddings"
@@ -56,10 +57,10 @@ class OpenRouter(BaseSDK):
     r"""Guardrails endpoints"""
     o_auth: "OAuth"
     r"""OAuth authentication endpoints"""
-    chat: "Chat"
     _sub_sdk_map = {
         "beta": ("openrouter.beta", "Beta"),
         "analytics": ("openrouter.analytics", "Analytics"),
+        "chat": ("openrouter.chat", "Chat"),
         "credits": ("openrouter.credits", "Credits"),
         "embeddings": ("openrouter.embeddings", "Embeddings"),
         "generations": ("openrouter.generations", "Generations"),
@@ -69,7 +70,6 @@ class OpenRouter(BaseSDK):
         "api_keys": ("openrouter.api_keys", "APIKeys"),
         "guardrails": ("openrouter.guardrails", "Guardrails"),
         "o_auth": ("openrouter.oauth", "OAuth"),
-        "chat": ("openrouter.chat", "Chat"),
     }
 
     def __init__(

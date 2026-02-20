@@ -6,35 +6,42 @@ from .chatmessagecontentitem import (
     ChatMessageContentItemTypedDict,
 )
 from openrouter.types import BaseModel
-from openrouter.utils import validate_const
-import pydantic
-from pydantic.functional_validators import AfterValidator
 from typing import List, Literal, Optional, Union
-from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
+from typing_extensions import NotRequired, TypeAliasType, TypedDict
+
+
+UserMessageRole = Literal["user",]
 
 
 UserMessageContentTypedDict = TypeAliasType(
     "UserMessageContentTypedDict", Union[str, List[ChatMessageContentItemTypedDict]]
 )
+r"""User message content"""
 
 
 UserMessageContent = TypeAliasType(
     "UserMessageContent", Union[str, List[ChatMessageContentItem]]
 )
+r"""User message content"""
 
 
 class UserMessageTypedDict(TypedDict):
+    r"""User message"""
+
+    role: UserMessageRole
     content: UserMessageContentTypedDict
-    role: Literal["user"]
+    r"""User message content"""
     name: NotRequired[str]
+    r"""Optional name for the user"""
 
 
 class UserMessage(BaseModel):
-    content: UserMessageContent
+    r"""User message"""
 
-    ROLE: Annotated[
-        Annotated[Literal["user"], AfterValidator(validate_const("user"))],
-        pydantic.Field(alias="role"),
-    ] = "user"
+    role: UserMessageRole
+
+    content: UserMessageContent
+    r"""User message content"""
 
     name: Optional[str] = None
+    r"""Optional name for the user"""

@@ -5,14 +5,14 @@ from openrouter.types import BaseModel
 from typing_extensions import TypedDict
 
 
-class ModelsCountResponseDataTypedDict(TypedDict):
+class DataTypedDict(TypedDict):
     r"""Model count data"""
 
     count: float
     r"""Total number of available models"""
 
 
-class ModelsCountResponseData(BaseModel):
+class Data(BaseModel):
     r"""Model count data"""
 
     count: float
@@ -22,12 +22,12 @@ class ModelsCountResponseData(BaseModel):
 class ModelsCountResponseTypedDict(TypedDict):
     r"""Model count data"""
 
-    data: ModelsCountResponseDataTypedDict
+    data: DataTypedDict
     r"""Model count data"""
 
 
 class ModelsCountResponse(BaseModel):
     r"""Model count data"""
 
-    data: ModelsCountResponseData
+    data: Data
     r"""Model count data"""

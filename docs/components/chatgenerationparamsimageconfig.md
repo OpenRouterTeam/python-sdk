@@ -15,9 +15,9 @@ value: str = /* values here */
 value: float = /* values here */
 ```
 
-### `List[Any]`
+### `List[Nullable[Any]]`
 
 ```python
-value: List[Any] = /* values here */
+value: List[Nullable[Any]] = /* values here */
 ```
 

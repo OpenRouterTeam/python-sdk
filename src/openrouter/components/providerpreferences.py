@@ -8,7 +8,6 @@ from .preferredminthroughput import (
     PreferredMinThroughputTypedDict,
 )
 from .providername import ProviderName
-from .providersort import ProviderSort
 from .quantization import Quantization
 from openrouter.types import (
     BaseModel,
@@ -58,7 +57,7 @@ ProviderPreferencesIgnore = TypeAliasType(
 )
 
 
-SortEnum = Union[
+ProviderPreferencesSortEnum = Union[
     Literal[
         "price",
         "throughput",
@@ -68,11 +67,22 @@ SortEnum = Union[
 ]
 
 
-ProviderSortConfigEnum = Literal[
+ProviderPreferencesProviderSortConfigEnum = Literal[
     "price",
     "throughput",
     "latency",
 ]
+
+
+ProviderPreferencesBy = Union[
+    Literal[
+        "price",
+        "throughput",
+        "latency",
+    ],
+    UnrecognizedStr,
+]
+r"""The provider sorting strategy (price, throughput, latency)"""
 
 
 ProviderPreferencesPartition = Union[
@@ -82,22 +92,28 @@ ProviderPreferencesPartition = Union[
     ],
     UnrecognizedStr,
 ]
+r"""Partitioning strategy for sorting: \"model\" (default) groups endpoints by model before sorting (fallback models remain fallbacks), \"none\" sorts all endpoints together regardless of model."""
 
 
 class ProviderPreferencesProviderSortConfigTypedDict(TypedDict):
-    by: NotRequired[Nullable[ProviderSort]]
+    by: NotRequired[Nullable[ProviderPreferencesBy]]
+    r"""The provider sorting strategy (price, throughput, latency)"""
     partition: NotRequired[Nullable[ProviderPreferencesPartition]]
+    r"""Partitioning strategy for sorting: \"model\" (default) groups endpoints by model before sorting (fallback models remain fallbacks), \"none\" sorts all endpoints together regardless of model."""
 
 
 class ProviderPreferencesProviderSortConfig(BaseModel):
     by: Annotated[
-        OptionalNullable[ProviderSort], PlainValidator(validate_open_enum(False))
+        OptionalNullable[ProviderPreferencesBy],
+        PlainValidator(validate_open_enum(False)),
     ] = UNSET
+    r"""The provider sorting strategy (price, throughput, latency)"""
 
     partition: Annotated[
         OptionalNullable[ProviderPreferencesPartition],
         PlainValidator(validate_open_enum(False)),
     ] = UNSET
+    r"""Partitioning strategy for sorting: \"model\" (default) groups endpoints by model before sorting (fallback models remain fallbacks), \"none\" sorts all endpoints together regardless of model."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
@@ -130,15 +146,20 @@ class ProviderPreferencesProviderSortConfig(BaseModel):
         return m
 
 
-ProviderSortConfigUnionTypedDict = TypeAliasType(
-    "ProviderSortConfigUnionTypedDict",
-    Union[ProviderPreferencesProviderSortConfigTypedDict, ProviderSortConfigEnum],
+ProviderPreferencesProviderSortConfigUnionTypedDict = TypeAliasType(
+    "ProviderPreferencesProviderSortConfigUnionTypedDict",
+    Union[
+        ProviderPreferencesProviderSortConfigTypedDict,
+        ProviderPreferencesProviderSortConfigEnum,
+    ],
 )
 
 
-ProviderSortConfigUnion = TypeAliasType(
-    "ProviderSortConfigUnion",
-    Union[ProviderPreferencesProviderSortConfig, ProviderSortConfigEnum],
+ProviderPreferencesProviderSortConfigUnion = TypeAliasType(
+    "ProviderPreferencesProviderSortConfigUnion",
+    Union[
+        ProviderPreferencesProviderSortConfig, ProviderPreferencesProviderSortConfigEnum
+    ],
 )
 
 
@@ -150,11 +171,16 @@ ProviderPreferencesProviderSort = Union[
     ],
     UnrecognizedStr,
 ]
+r"""The provider sorting strategy (price, throughput, latency)"""
 
 
 ProviderPreferencesSortUnionTypedDict = TypeAliasType(
     "ProviderPreferencesSortUnionTypedDict",
-    Union[ProviderPreferencesProviderSort, ProviderSortConfigUnionTypedDict, SortEnum],
+    Union[
+        ProviderPreferencesProviderSort,
+        ProviderPreferencesProviderSortConfigUnionTypedDict,
+        ProviderPreferencesSortEnum,
+    ],
 )
 r"""The sorting strategy to use for this request, if \"order\" is not specified. When set, no load balancing is performed."""
 
@@ -165,8 +191,10 @@ ProviderPreferencesSortUnion = TypeAliasType(
         Annotated[
             ProviderPreferencesProviderSort, PlainValidator(validate_open_enum(False))
         ],
-        ProviderSortConfigUnion,
-        Annotated[SortEnum, PlainValidator(validate_open_enum(False))],
+        ProviderPreferencesProviderSortConfigUnion,
+        Annotated[
+            ProviderPreferencesSortEnum, PlainValidator(validate_open_enum(False))
+        ],
     ],
 )
 r"""The sorting strategy to use for this request, if \"order\" is not specified. When set, no load balancing is performed."""

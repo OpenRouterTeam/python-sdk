@@ -11,10 +11,10 @@ Text response format configuration
 value: components.ResponsesFormatText = /* values here */
 ```
 
-### `components.ResponsesFormatJSONObject`
+### `components.ResponseFormatJSONObject`
 
 ```python
-value: components.ResponsesFormatJSONObject = /* values here */
+value: components.ResponseFormatJSONObject = /* values here */
 ```
 
 ### `components.ResponsesFormatTextJSONSchemaConfig`

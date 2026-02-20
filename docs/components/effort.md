@@ -1,5 +1,7 @@
 # Effort
 
+Constrains effort on reasoning for reasoning models
+
 
 ## Values
 

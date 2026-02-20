@@ -22,6 +22,7 @@ MessageTypedDict = TypeAliasType(
         AssistantMessageTypedDict,
     ],
 )
+r"""Chat completion message with role-based discrimination"""
 
 
 Message = Annotated[
@@ -34,3 +35,4 @@ Message = Annotated[
     ],
     Discriminator(lambda m: get_discriminator(m, "role", "role")),
 ]
+r"""Chat completion message with role-based discrimination"""

@@ -12,14 +12,22 @@ from typing_extensions import TypedDict
 
 
 class ChatMessageTokenLogprobsTypedDict(TypedDict):
+    r"""Log probabilities for the completion"""
+
     content: Nullable[List[ChatMessageTokenLogprobTypedDict]]
+    r"""Log probabilities for content tokens"""
     refusal: Nullable[List[ChatMessageTokenLogprobTypedDict]]
+    r"""Log probabilities for refusal tokens"""
 
 
 class ChatMessageTokenLogprobs(BaseModel):
+    r"""Log probabilities for the completion"""
+
     content: Nullable[List[ChatMessageTokenLogprob]]
+    r"""Log probabilities for content tokens"""
 
     refusal: Nullable[List[ChatMessageTokenLogprob]]
+    r"""Log probabilities for refusal tokens"""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

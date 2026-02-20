@@ -13,44 +13,54 @@ from openrouter.types import (
     UNSET,
     UNSET_SENTINEL,
 )
-from openrouter.utils import validate_const
-import pydantic
 from pydantic import model_serializer
-from pydantic.functional_validators import AfterValidator
 from typing import List, Literal, Optional
-from typing_extensions import Annotated, NotRequired, TypedDict
+from typing_extensions import NotRequired, TypedDict
+
+
+ChatResponseObject = Literal["chat.completion",]
 
 
 class ChatResponseTypedDict(TypedDict):
+    r"""Chat completion response"""
+
     id: str
+    r"""Unique completion identifier"""
     choices: List[ChatResponseChoiceTypedDict]
+    r"""List of completion choices"""
     created: float
+    r"""Unix timestamp of creation"""
     model: str
-    object: Literal["chat.completion"]
+    r"""Model used for completion"""
+    object: ChatResponseObject
     system_fingerprint: NotRequired[Nullable[str]]
+    r"""System fingerprint"""
     usage: NotRequired[ChatGenerationTokenUsageTypedDict]
+    r"""Token usage statistics"""
 
 
 class ChatResponse(BaseModel):
+    r"""Chat completion response"""
+
     id: str
+    r"""Unique completion identifier"""
 
     choices: List[ChatResponseChoice]
+    r"""List of completion choices"""
 
     created: float
+    r"""Unix timestamp of creation"""
 
     model: str
+    r"""Model used for completion"""
 
-    OBJECT: Annotated[
-        Annotated[
-            Literal["chat.completion"],
-            AfterValidator(validate_const("chat.completion")),
-        ],
-        pydantic.Field(alias="object"),
-    ] = "chat.completion"
+    object: ChatResponseObject
 
     system_fingerprint: OptionalNullable[str] = UNSET
+    r"""System fingerprint"""
 
     usage: Optional[ChatGenerationTokenUsage] = None
+    r"""Token usage statistics"""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

@@ -9,9 +9,9 @@
 value: components.ChatResponse = /* values here */
 ```
 
-### `Union[eventstreaming.EventStream[components.ChatStreamingResponseChunkData], eventstreaming.EventStreamAsync[components.ChatStreamingResponseChunkData]]`
+### `Union[eventstreaming.EventStream[components.ChatStreamingResponseChunk], eventstreaming.EventStreamAsync[components.ChatStreamingResponseChunk]]`
 
 ```python
-value: Union[eventstreaming.EventStream[components.ChatStreamingResponseChunkData], eventstreaming.EventStreamAsync[components.ChatStreamingResponseChunkData]] = /* values here */
+value: Union[eventstreaming.EventStream[components.ChatStreamingResponseChunk], eventstreaming.EventStreamAsync[components.ChatStreamingResponseChunk]] = /* values here */
 ```
 

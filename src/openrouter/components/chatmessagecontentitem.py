@@ -17,10 +17,31 @@ from .chatmessagecontentitemvideo import (
     ChatMessageContentItemVideo,
     ChatMessageContentItemVideoTypedDict,
 )
+from .chatmessagecontentitemvideolegacy import (
+    ChatMessageContentItemVideoLegacy,
+    ChatMessageContentItemVideoLegacyTypedDict,
+)
 from openrouter.utils import get_discriminator
 from pydantic import Discriminator, Tag
 from typing import Union
 from typing_extensions import Annotated, TypeAliasType
+
+
+ChatMessageContentItem1TypedDict = TypeAliasType(
+    "ChatMessageContentItem1TypedDict",
+    Union[
+        ChatMessageContentItemVideoLegacyTypedDict, ChatMessageContentItemVideoTypedDict
+    ],
+)
+
+
+ChatMessageContentItem1 = Annotated[
+    Union[
+        Annotated[ChatMessageContentItemVideoLegacy, Tag("input_video")],
+        Annotated[ChatMessageContentItemVideo, Tag("video_url")],
+    ],
+    Discriminator(lambda m: get_discriminator(m, "type", "type")),
+]
 
 
 ChatMessageContentItemTypedDict = TypeAliasType(
@@ -29,18 +50,19 @@ ChatMessageContentItemTypedDict = TypeAliasType(
         ChatMessageContentItemImageTypedDict,
         ChatMessageContentItemAudioTypedDict,
         ChatMessageContentItemTextTypedDict,
-        ChatMessageContentItemVideoTypedDict,
+        ChatMessageContentItem1TypedDict,
     ],
 )
+r"""Content part for chat completion messages"""
 
 
-ChatMessageContentItem = Annotated[
+ChatMessageContentItem = TypeAliasType(
+    "ChatMessageContentItem",
     Union[
-        Annotated[ChatMessageContentItemText, Tag("text")],
-        Annotated[ChatMessageContentItemImage, Tag("image_url")],
-        Annotated[ChatMessageContentItemAudio, Tag("input_audio")],
-        Annotated[ChatMessageContentItemVideo, Tag("input_video")],
-        Annotated[ChatMessageContentItemVideo, Tag("video_url")],
+        ChatMessageContentItemImage,
+        ChatMessageContentItemAudio,
+        ChatMessageContentItemText,
+        ChatMessageContentItem1,
     ],
-    Discriminator(lambda m: get_discriminator(m, "type", "type")),
-]
+)
+r"""Content part for chat completion messages"""
