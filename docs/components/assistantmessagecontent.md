@@ -1,5 +1,7 @@
 # AssistantMessageContent
 
+Assistant message content
+
 
 ## Supported Types
 
@@ -13,5 +15,11 @@ value: str = /* values here */
 
 ```python
 value: List[components.ChatMessageContentItem] = /* values here */
+```
+
+### `Any`
+
+```python
+value: Any = /* values here */
 ```
 

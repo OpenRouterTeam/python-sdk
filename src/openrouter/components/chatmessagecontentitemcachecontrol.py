@@ -2,11 +2,13 @@
 
 from __future__ import annotations
 from openrouter.types import BaseModel, UnrecognizedStr
-from openrouter.utils import validate_const, validate_open_enum
-import pydantic
-from pydantic.functional_validators import AfterValidator, PlainValidator
+from openrouter.utils import validate_open_enum
+from pydantic.functional_validators import PlainValidator
 from typing import Literal, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypedDict
+
+
+ChatMessageContentItemCacheControlType = Literal["ephemeral",]
 
 
 TTL = Union[
@@ -19,14 +21,15 @@ TTL = Union[
 
 
 class ChatMessageContentItemCacheControlTypedDict(TypedDict):
-    type: Literal["ephemeral"]
+    r"""Cache control for the content part"""
+
+    type: ChatMessageContentItemCacheControlType
     ttl: NotRequired[TTL]
 
 
 class ChatMessageContentItemCacheControl(BaseModel):
-    TYPE: Annotated[
-        Annotated[Literal["ephemeral"], AfterValidator(validate_const("ephemeral"))],
-        pydantic.Field(alias="type"),
-    ] = "ephemeral"
+    r"""Cache control for the content part"""
+
+    type: ChatMessageContentItemCacheControlType
 
     ttl: Annotated[Optional[TTL], PlainValidator(validate_open_enum(False))] = None

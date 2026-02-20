@@ -1,5 +1,7 @@
 # ChatStreamingMessageChunkRole
 
+The role of the message author
+
 
 ## Values
 
