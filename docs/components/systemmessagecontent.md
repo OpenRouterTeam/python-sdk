@@ -1,5 +1,7 @@
 # SystemMessageContent
 
+System message content
+
 
 ## Supported Types
 

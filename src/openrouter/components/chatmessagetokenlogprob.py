@@ -53,20 +53,32 @@ class ChatMessageTokenLogprobTopLogprob(BaseModel):
 
 
 class ChatMessageTokenLogprobTypedDict(TypedDict):
+    r"""Token log probability information"""
+
     token: str
+    r"""The token"""
     logprob: float
+    r"""Log probability of the token"""
     bytes_: Nullable[List[float]]
+    r"""UTF-8 bytes of the token"""
     top_logprobs: List[ChatMessageTokenLogprobTopLogprobTypedDict]
+    r"""Top alternative tokens with probabilities"""
 
 
 class ChatMessageTokenLogprob(BaseModel):
+    r"""Token log probability information"""
+
     token: str
+    r"""The token"""
 
     logprob: float
+    r"""Log probability of the token"""
 
     bytes_: Annotated[Nullable[List[float]], pydantic.Field(alias="bytes")]
+    r"""UTF-8 bytes of the token"""
 
     top_logprobs: List[ChatMessageTokenLogprobTopLogprob]
+    r"""Top alternative tokens with probabilities"""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

@@ -24,14 +24,25 @@ class Chat(BaseSDK):
         http_referer: Optional[str] = None,
         x_title: Optional[str] = None,
         provider: OptionalNullable[
-            Union[components.Schema0, components.Schema0TypedDict]
+            Union[
+                components.ChatGenerationParamsProvider,
+                components.ChatGenerationParamsProviderTypedDict,
+            ]
         ] = UNSET,
         plugins: Optional[
-            Union[List[components.Schema17], List[components.Schema17TypedDict]]
+            Union[
+                List[components.ChatGenerationParamsPluginUnion],
+                List[components.ChatGenerationParamsPluginUnionTypedDict],
+            ]
         ] = None,
-        route: OptionalNullable[components.Route] = UNSET,
         user: Optional[str] = None,
         session_id: Optional[str] = None,
+        trace: Optional[
+            Union[
+                components.ChatGenerationParamsTrace,
+                components.ChatGenerationParamsTraceTypedDict,
+            ]
+        ] = None,
         model: Optional[str] = None,
         models: Optional[List[str]] = None,
         frequency_penalty: OptionalNullable[float] = UNSET,
@@ -56,16 +67,21 @@ class Chat(BaseSDK):
         stream_options: OptionalNullable[
             Union[components.ChatStreamOptions, components.ChatStreamOptionsTypedDict]
         ] = UNSET,
-        temperature: OptionalNullable[float] = UNSET,
-        tool_choice: Optional[Any] = None,
+        temperature: OptionalNullable[float] = 1,
+        parallel_tool_calls: OptionalNullable[bool] = UNSET,
+        tool_choice: Optional[
+            Union[components.ToolChoiceOption, components.ToolChoiceOptionTypedDict]
+        ] = None,
         tools: Optional[
             Union[
                 List[components.ToolDefinitionJSON],
                 List[components.ToolDefinitionJSONTypedDict],
             ]
         ] = None,
-        top_p: OptionalNullable[float] = UNSET,
-        debug: Optional[Union[components.Debug, components.DebugTypedDict]] = None,
+        top_p: OptionalNullable[float] = 1,
+        debug: Optional[
+            Union[components.DebugOptions, components.DebugOptionsTypedDict]
+        ] = None,
         image_config: Optional[
             Union[
                 Dict[str, components.ChatGenerationParamsImageConfig],
@@ -82,40 +98,41 @@ class Chat(BaseSDK):
 
         Sends a request for a model response for the given chat conversation. Supports both streaming and non-streaming modes.
 
-        :param messages:
+        :param messages: List of messages for the conversation
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
         :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
 
-        :param provider:
-        :param plugins:
-        :param route:
-        :param user:
-        :param session_id:
-        :param model:
-        :param models:
-        :param frequency_penalty:
-        :param logit_bias:
-        :param logprobs:
-        :param top_logprobs:
-        :param max_completion_tokens:
-        :param max_tokens:
-        :param metadata:
-        :param presence_penalty:
-        :param reasoning:
-        :param response_format:
-        :param seed:
-        :param stop:
-        :param stream:
-        :param stream_options:
-        :param temperature:
-        :param tool_choice:
-        :param tools:
-        :param top_p:
-        :param debug:
-        :param image_config:
-        :param modalities:
+        :param provider: When multiple model providers are available, optionally indicate your routing preference.
+        :param plugins: Plugins you want to enable for this request, including their settings.
+        :param user: Unique user identifier
+        :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 128 characters.
+        :param trace: Metadata for observability and tracing. Known keys (trace_id, trace_name, span_name, generation_name, parent_span_id) have special handling. Additional keys are passed through as custom metadata to configured broadcast destinations.
+        :param model: Model to use for completion
+        :param models: Models to use for completion
+        :param frequency_penalty: Frequency penalty (-2.0 to 2.0)
+        :param logit_bias: Token logit bias adjustments
+        :param logprobs: Return log probabilities
+        :param top_logprobs: Number of top log probabilities to return (0-20)
+        :param max_completion_tokens: Maximum tokens in completion
+        :param max_tokens: Maximum tokens (deprecated, use max_completion_tokens)
+        :param metadata: Key-value pairs for additional object information (max 16 pairs, 64 char keys, 512 char values)
+        :param presence_penalty: Presence penalty (-2.0 to 2.0)
+        :param reasoning: Configuration options for reasoning models
+        :param response_format: Response format configuration
+        :param seed: Random seed for deterministic outputs
+        :param stop: Stop sequences (up to 4)
+        :param stream: Enable streaming response
+        :param stream_options: Streaming configuration options
+        :param temperature: Sampling temperature (0-2)
+        :param parallel_tool_calls:
+        :param tool_choice: Tool choice configuration
+        :param tools: Available tools for function calling
+        :param top_p: Nucleus sampling parameter (0-1)
+        :param debug: Debug options for inspecting request transformations (streaming only)
+        :param image_config: Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/guides/overview/multimodal/image-generation for more details.
+        :param modalities: Output modalities for the response. Supported values are \"text\" and \"image\".
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -131,14 +148,25 @@ class Chat(BaseSDK):
         http_referer: Optional[str] = None,
         x_title: Optional[str] = None,
         provider: OptionalNullable[
-            Union[components.Schema0, components.Schema0TypedDict]
+            Union[
+                components.ChatGenerationParamsProvider,
+                components.ChatGenerationParamsProviderTypedDict,
+            ]
         ] = UNSET,
         plugins: Optional[
-            Union[List[components.Schema17], List[components.Schema17TypedDict]]
+            Union[
+                List[components.ChatGenerationParamsPluginUnion],
+                List[components.ChatGenerationParamsPluginUnionTypedDict],
+            ]
         ] = None,
-        route: OptionalNullable[components.Route] = UNSET,
         user: Optional[str] = None,
         session_id: Optional[str] = None,
+        trace: Optional[
+            Union[
+                components.ChatGenerationParamsTrace,
+                components.ChatGenerationParamsTraceTypedDict,
+            ]
+        ] = None,
         model: Optional[str] = None,
         models: Optional[List[str]] = None,
         frequency_penalty: OptionalNullable[float] = UNSET,
@@ -163,16 +191,21 @@ class Chat(BaseSDK):
         stream_options: OptionalNullable[
             Union[components.ChatStreamOptions, components.ChatStreamOptionsTypedDict]
         ] = UNSET,
-        temperature: OptionalNullable[float] = UNSET,
-        tool_choice: Optional[Any] = None,
+        temperature: OptionalNullable[float] = 1,
+        parallel_tool_calls: OptionalNullable[bool] = UNSET,
+        tool_choice: Optional[
+            Union[components.ToolChoiceOption, components.ToolChoiceOptionTypedDict]
+        ] = None,
         tools: Optional[
             Union[
                 List[components.ToolDefinitionJSON],
                 List[components.ToolDefinitionJSONTypedDict],
             ]
         ] = None,
-        top_p: OptionalNullable[float] = UNSET,
-        debug: Optional[Union[components.Debug, components.DebugTypedDict]] = None,
+        top_p: OptionalNullable[float] = 1,
+        debug: Optional[
+            Union[components.DebugOptions, components.DebugOptionsTypedDict]
+        ] = None,
         image_config: Optional[
             Union[
                 Dict[str, components.ChatGenerationParamsImageConfig],
@@ -184,45 +217,46 @@ class Chat(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> eventstreaming.EventStream[components.ChatStreamingResponseChunkData]:
+    ) -> eventstreaming.EventStream[components.ChatStreamingResponseChunk]:
         r"""Create a chat completion
 
         Sends a request for a model response for the given chat conversation. Supports both streaming and non-streaming modes.
 
-        :param messages:
+        :param messages: List of messages for the conversation
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
         :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
 
-        :param provider:
-        :param plugins:
-        :param route:
-        :param user:
-        :param session_id:
-        :param model:
-        :param models:
-        :param frequency_penalty:
-        :param logit_bias:
-        :param logprobs:
-        :param top_logprobs:
-        :param max_completion_tokens:
-        :param max_tokens:
-        :param metadata:
-        :param presence_penalty:
-        :param reasoning:
-        :param response_format:
-        :param seed:
-        :param stop:
-        :param stream:
-        :param stream_options:
-        :param temperature:
-        :param tool_choice:
-        :param tools:
-        :param top_p:
-        :param debug:
-        :param image_config:
-        :param modalities:
+        :param provider: When multiple model providers are available, optionally indicate your routing preference.
+        :param plugins: Plugins you want to enable for this request, including their settings.
+        :param user: Unique user identifier
+        :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 128 characters.
+        :param trace: Metadata for observability and tracing. Known keys (trace_id, trace_name, span_name, generation_name, parent_span_id) have special handling. Additional keys are passed through as custom metadata to configured broadcast destinations.
+        :param model: Model to use for completion
+        :param models: Models to use for completion
+        :param frequency_penalty: Frequency penalty (-2.0 to 2.0)
+        :param logit_bias: Token logit bias adjustments
+        :param logprobs: Return log probabilities
+        :param top_logprobs: Number of top log probabilities to return (0-20)
+        :param max_completion_tokens: Maximum tokens in completion
+        :param max_tokens: Maximum tokens (deprecated, use max_completion_tokens)
+        :param metadata: Key-value pairs for additional object information (max 16 pairs, 64 char keys, 512 char values)
+        :param presence_penalty: Presence penalty (-2.0 to 2.0)
+        :param reasoning: Configuration options for reasoning models
+        :param response_format: Response format configuration
+        :param seed: Random seed for deterministic outputs
+        :param stop: Stop sequences (up to 4)
+        :param stream: Enable streaming response
+        :param stream_options: Streaming configuration options
+        :param temperature: Sampling temperature (0-2)
+        :param parallel_tool_calls:
+        :param tool_choice: Tool choice configuration
+        :param tools: Available tools for function calling
+        :param top_p: Nucleus sampling parameter (0-1)
+        :param debug: Debug options for inspecting request transformations (streaming only)
+        :param image_config: Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/guides/overview/multimodal/image-generation for more details.
+        :param modalities: Output modalities for the response. Supported values are \"text\" and \"image\".
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -237,14 +271,25 @@ class Chat(BaseSDK):
         http_referer: Optional[str] = None,
         x_title: Optional[str] = None,
         provider: OptionalNullable[
-            Union[components.Schema0, components.Schema0TypedDict]
+            Union[
+                components.ChatGenerationParamsProvider,
+                components.ChatGenerationParamsProviderTypedDict,
+            ]
         ] = UNSET,
         plugins: Optional[
-            Union[List[components.Schema17], List[components.Schema17TypedDict]]
+            Union[
+                List[components.ChatGenerationParamsPluginUnion],
+                List[components.ChatGenerationParamsPluginUnionTypedDict],
+            ]
         ] = None,
-        route: OptionalNullable[components.Route] = UNSET,
         user: Optional[str] = None,
         session_id: Optional[str] = None,
+        trace: Optional[
+            Union[
+                components.ChatGenerationParamsTrace,
+                components.ChatGenerationParamsTraceTypedDict,
+            ]
+        ] = None,
         model: Optional[str] = None,
         models: Optional[List[str]] = None,
         frequency_penalty: OptionalNullable[float] = UNSET,
@@ -269,16 +314,21 @@ class Chat(BaseSDK):
         stream_options: OptionalNullable[
             Union[components.ChatStreamOptions, components.ChatStreamOptionsTypedDict]
         ] = UNSET,
-        temperature: OptionalNullable[float] = UNSET,
-        tool_choice: Optional[Any] = None,
+        temperature: OptionalNullable[float] = 1,
+        parallel_tool_calls: OptionalNullable[bool] = UNSET,
+        tool_choice: Optional[
+            Union[components.ToolChoiceOption, components.ToolChoiceOptionTypedDict]
+        ] = None,
         tools: Optional[
             Union[
                 List[components.ToolDefinitionJSON],
                 List[components.ToolDefinitionJSONTypedDict],
             ]
         ] = None,
-        top_p: OptionalNullable[float] = UNSET,
-        debug: Optional[Union[components.Debug, components.DebugTypedDict]] = None,
+        top_p: OptionalNullable[float] = 1,
+        debug: Optional[
+            Union[components.DebugOptions, components.DebugOptionsTypedDict]
+        ] = None,
         image_config: Optional[
             Union[
                 Dict[str, components.ChatGenerationParamsImageConfig],
@@ -295,40 +345,41 @@ class Chat(BaseSDK):
 
         Sends a request for a model response for the given chat conversation. Supports both streaming and non-streaming modes.
 
-        :param messages:
+        :param messages: List of messages for the conversation
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
         :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
 
-        :param provider:
-        :param plugins:
-        :param route:
-        :param user:
-        :param session_id:
-        :param model:
-        :param models:
-        :param frequency_penalty:
-        :param logit_bias:
-        :param logprobs:
-        :param top_logprobs:
-        :param max_completion_tokens:
-        :param max_tokens:
-        :param metadata:
-        :param presence_penalty:
-        :param reasoning:
-        :param response_format:
-        :param seed:
-        :param stop:
-        :param stream:
-        :param stream_options:
-        :param temperature:
-        :param tool_choice:
-        :param tools:
-        :param top_p:
-        :param debug:
-        :param image_config:
-        :param modalities:
+        :param provider: When multiple model providers are available, optionally indicate your routing preference.
+        :param plugins: Plugins you want to enable for this request, including their settings.
+        :param user: Unique user identifier
+        :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 128 characters.
+        :param trace: Metadata for observability and tracing. Known keys (trace_id, trace_name, span_name, generation_name, parent_span_id) have special handling. Additional keys are passed through as custom metadata to configured broadcast destinations.
+        :param model: Model to use for completion
+        :param models: Models to use for completion
+        :param frequency_penalty: Frequency penalty (-2.0 to 2.0)
+        :param logit_bias: Token logit bias adjustments
+        :param logprobs: Return log probabilities
+        :param top_logprobs: Number of top log probabilities to return (0-20)
+        :param max_completion_tokens: Maximum tokens in completion
+        :param max_tokens: Maximum tokens (deprecated, use max_completion_tokens)
+        :param metadata: Key-value pairs for additional object information (max 16 pairs, 64 char keys, 512 char values)
+        :param presence_penalty: Presence penalty (-2.0 to 2.0)
+        :param reasoning: Configuration options for reasoning models
+        :param response_format: Response format configuration
+        :param seed: Random seed for deterministic outputs
+        :param stop: Stop sequences (up to 4)
+        :param stream: Enable streaming response
+        :param stream_options: Streaming configuration options
+        :param temperature: Sampling temperature (0-2)
+        :param parallel_tool_calls:
+        :param tool_choice: Tool choice configuration
+        :param tools: Available tools for function calling
+        :param top_p: Nucleus sampling parameter (0-1)
+        :param debug: Debug options for inspecting request transformations (streaming only)
+        :param image_config: Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/guides/overview/multimodal/image-generation for more details.
+        :param modalities: Output modalities for the response. Supported values are \"text\" and \"image\".
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -350,14 +401,16 @@ class Chat(BaseSDK):
             x_title=x_title,
             chat_generation_params=components.ChatGenerationParams(
                 provider=utils.get_pydantic_model(
-                    provider, OptionalNullable[components.Schema0]
+                    provider, OptionalNullable[components.ChatGenerationParamsProvider]
                 ),
                 plugins=utils.get_pydantic_model(
-                    plugins, Optional[List[components.Schema17]]
+                    plugins, Optional[List[components.ChatGenerationParamsPluginUnion]]
                 ),
-                route=route,
                 user=user,
                 session_id=session_id,
+                trace=utils.get_pydantic_model(
+                    trace, Optional[components.ChatGenerationParamsTrace]
+                ),
                 messages=utils.get_pydantic_model(messages, List[components.Message]),
                 model=model,
                 models=models,
@@ -382,12 +435,17 @@ class Chat(BaseSDK):
                     stream_options, OptionalNullable[components.ChatStreamOptions]
                 ),
                 temperature=temperature,
-                tool_choice=tool_choice,
+                parallel_tool_calls=parallel_tool_calls,
+                tool_choice=utils.get_pydantic_model(
+                    tool_choice, Optional[components.ToolChoiceOption]
+                ),
                 tools=utils.get_pydantic_model(
                     tools, Optional[List[components.ToolDefinitionJSON]]
                 ),
                 top_p=top_p,
-                debug=utils.get_pydantic_model(debug, Optional[components.Debug]),
+                debug=utils.get_pydantic_model(
+                    debug, Optional[components.DebugOptions]
+                ),
                 image_config=image_config,
                 modalities=modalities,
             ),
@@ -440,7 +498,23 @@ class Chat(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "401", "429", "4XX", "500", "5XX"],
+            error_status_codes=[
+                "400",
+                "401",
+                "402",
+                "404",
+                "408",
+                "413",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "502",
+                "503",
+                "524",
+                "529",
+                "5XX",
+            ],
             stream=True,
             retry_config=retry_config,
         )
@@ -455,23 +529,109 @@ class Chat(BaseSDK):
             return eventstreaming.EventStream(
                 http_res,
                 lambda raw: utils.unmarshal_json(
-                    raw, components.ChatStreamingResponseChunk
+                    raw, operations.SendChatCompletionRequestResponseBody
                 ).data,
                 sentinel="[DONE]",
                 client_ref=self,
             )
-        if utils.match_response(http_res, ["400", "401", "429"], "application/json"):
+        if utils.match_response(http_res, "400", "application/json"):
             http_res_text = utils.stream_to_text(http_res)
             response_data = unmarshal_json_response(
-                errors.ChatErrorData, http_res, http_res_text
+                errors.BadRequestResponseErrorData, http_res, http_res_text
             )
-            raise errors.ChatError(response_data, http_res, http_res_text)
+            raise errors.BadRequestResponseError(response_data, http_res, http_res_text)
+        if utils.match_response(http_res, "401", "application/json"):
+            http_res_text = utils.stream_to_text(http_res)
+            response_data = unmarshal_json_response(
+                errors.UnauthorizedResponseErrorData, http_res, http_res_text
+            )
+            raise errors.UnauthorizedResponseError(
+                response_data, http_res, http_res_text
+            )
+        if utils.match_response(http_res, "402", "application/json"):
+            http_res_text = utils.stream_to_text(http_res)
+            response_data = unmarshal_json_response(
+                errors.PaymentRequiredResponseErrorData, http_res, http_res_text
+            )
+            raise errors.PaymentRequiredResponseError(
+                response_data, http_res, http_res_text
+            )
+        if utils.match_response(http_res, "404", "application/json"):
+            http_res_text = utils.stream_to_text(http_res)
+            response_data = unmarshal_json_response(
+                errors.NotFoundResponseErrorData, http_res, http_res_text
+            )
+            raise errors.NotFoundResponseError(response_data, http_res, http_res_text)
+        if utils.match_response(http_res, "408", "application/json"):
+            http_res_text = utils.stream_to_text(http_res)
+            response_data = unmarshal_json_response(
+                errors.RequestTimeoutResponseErrorData, http_res, http_res_text
+            )
+            raise errors.RequestTimeoutResponseError(
+                response_data, http_res, http_res_text
+            )
+        if utils.match_response(http_res, "413", "application/json"):
+            http_res_text = utils.stream_to_text(http_res)
+            response_data = unmarshal_json_response(
+                errors.PayloadTooLargeResponseErrorData, http_res, http_res_text
+            )
+            raise errors.PayloadTooLargeResponseError(
+                response_data, http_res, http_res_text
+            )
+        if utils.match_response(http_res, "422", "application/json"):
+            http_res_text = utils.stream_to_text(http_res)
+            response_data = unmarshal_json_response(
+                errors.UnprocessableEntityResponseErrorData, http_res, http_res_text
+            )
+            raise errors.UnprocessableEntityResponseError(
+                response_data, http_res, http_res_text
+            )
+        if utils.match_response(http_res, "429", "application/json"):
+            http_res_text = utils.stream_to_text(http_res)
+            response_data = unmarshal_json_response(
+                errors.TooManyRequestsResponseErrorData, http_res, http_res_text
+            )
+            raise errors.TooManyRequestsResponseError(
+                response_data, http_res, http_res_text
+            )
         if utils.match_response(http_res, "500", "application/json"):
             http_res_text = utils.stream_to_text(http_res)
             response_data = unmarshal_json_response(
-                errors.ChatErrorData, http_res, http_res_text
+                errors.InternalServerResponseErrorData, http_res, http_res_text
             )
-            raise errors.ChatError(response_data, http_res, http_res_text)
+            raise errors.InternalServerResponseError(
+                response_data, http_res, http_res_text
+            )
+        if utils.match_response(http_res, "502", "application/json"):
+            http_res_text = utils.stream_to_text(http_res)
+            response_data = unmarshal_json_response(
+                errors.BadGatewayResponseErrorData, http_res, http_res_text
+            )
+            raise errors.BadGatewayResponseError(response_data, http_res, http_res_text)
+        if utils.match_response(http_res, "503", "application/json"):
+            http_res_text = utils.stream_to_text(http_res)
+            response_data = unmarshal_json_response(
+                errors.ServiceUnavailableResponseErrorData, http_res, http_res_text
+            )
+            raise errors.ServiceUnavailableResponseError(
+                response_data, http_res, http_res_text
+            )
+        if utils.match_response(http_res, "524", "application/json"):
+            http_res_text = utils.stream_to_text(http_res)
+            response_data = unmarshal_json_response(
+                errors.EdgeNetworkTimeoutResponseErrorData, http_res, http_res_text
+            )
+            raise errors.EdgeNetworkTimeoutResponseError(
+                response_data, http_res, http_res_text
+            )
+        if utils.match_response(http_res, "529", "application/json"):
+            http_res_text = utils.stream_to_text(http_res)
+            response_data = unmarshal_json_response(
+                errors.ProviderOverloadedResponseErrorData, http_res, http_res_text
+            )
+            raise errors.ProviderOverloadedResponseError(
+                response_data, http_res, http_res_text
+            )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.OpenRouterDefaultError(
@@ -496,14 +656,25 @@ class Chat(BaseSDK):
         http_referer: Optional[str] = None,
         x_title: Optional[str] = None,
         provider: OptionalNullable[
-            Union[components.Schema0, components.Schema0TypedDict]
+            Union[
+                components.ChatGenerationParamsProvider,
+                components.ChatGenerationParamsProviderTypedDict,
+            ]
         ] = UNSET,
         plugins: Optional[
-            Union[List[components.Schema17], List[components.Schema17TypedDict]]
+            Union[
+                List[components.ChatGenerationParamsPluginUnion],
+                List[components.ChatGenerationParamsPluginUnionTypedDict],
+            ]
         ] = None,
-        route: OptionalNullable[components.Route] = UNSET,
         user: Optional[str] = None,
         session_id: Optional[str] = None,
+        trace: Optional[
+            Union[
+                components.ChatGenerationParamsTrace,
+                components.ChatGenerationParamsTraceTypedDict,
+            ]
+        ] = None,
         model: Optional[str] = None,
         models: Optional[List[str]] = None,
         frequency_penalty: OptionalNullable[float] = UNSET,
@@ -528,16 +699,21 @@ class Chat(BaseSDK):
         stream_options: OptionalNullable[
             Union[components.ChatStreamOptions, components.ChatStreamOptionsTypedDict]
         ] = UNSET,
-        temperature: OptionalNullable[float] = UNSET,
-        tool_choice: Optional[Any] = None,
+        temperature: OptionalNullable[float] = 1,
+        parallel_tool_calls: OptionalNullable[bool] = UNSET,
+        tool_choice: Optional[
+            Union[components.ToolChoiceOption, components.ToolChoiceOptionTypedDict]
+        ] = None,
         tools: Optional[
             Union[
                 List[components.ToolDefinitionJSON],
                 List[components.ToolDefinitionJSONTypedDict],
             ]
         ] = None,
-        top_p: OptionalNullable[float] = UNSET,
-        debug: Optional[Union[components.Debug, components.DebugTypedDict]] = None,
+        top_p: OptionalNullable[float] = 1,
+        debug: Optional[
+            Union[components.DebugOptions, components.DebugOptionsTypedDict]
+        ] = None,
         image_config: Optional[
             Union[
                 Dict[str, components.ChatGenerationParamsImageConfig],
@@ -554,40 +730,41 @@ class Chat(BaseSDK):
 
         Sends a request for a model response for the given chat conversation. Supports both streaming and non-streaming modes.
 
-        :param messages:
+        :param messages: List of messages for the conversation
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
         :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
 
-        :param provider:
-        :param plugins:
-        :param route:
-        :param user:
-        :param session_id:
-        :param model:
-        :param models:
-        :param frequency_penalty:
-        :param logit_bias:
-        :param logprobs:
-        :param top_logprobs:
-        :param max_completion_tokens:
-        :param max_tokens:
-        :param metadata:
-        :param presence_penalty:
-        :param reasoning:
-        :param response_format:
-        :param seed:
-        :param stop:
-        :param stream:
-        :param stream_options:
-        :param temperature:
-        :param tool_choice:
-        :param tools:
-        :param top_p:
-        :param debug:
-        :param image_config:
-        :param modalities:
+        :param provider: When multiple model providers are available, optionally indicate your routing preference.
+        :param plugins: Plugins you want to enable for this request, including their settings.
+        :param user: Unique user identifier
+        :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 128 characters.
+        :param trace: Metadata for observability and tracing. Known keys (trace_id, trace_name, span_name, generation_name, parent_span_id) have special handling. Additional keys are passed through as custom metadata to configured broadcast destinations.
+        :param model: Model to use for completion
+        :param models: Models to use for completion
+        :param frequency_penalty: Frequency penalty (-2.0 to 2.0)
+        :param logit_bias: Token logit bias adjustments
+        :param logprobs: Return log probabilities
+        :param top_logprobs: Number of top log probabilities to return (0-20)
+        :param max_completion_tokens: Maximum tokens in completion
+        :param max_tokens: Maximum tokens (deprecated, use max_completion_tokens)
+        :param metadata: Key-value pairs for additional object information (max 16 pairs, 64 char keys, 512 char values)
+        :param presence_penalty: Presence penalty (-2.0 to 2.0)
+        :param reasoning: Configuration options for reasoning models
+        :param response_format: Response format configuration
+        :param seed: Random seed for deterministic outputs
+        :param stop: Stop sequences (up to 4)
+        :param stream: Enable streaming response
+        :param stream_options: Streaming configuration options
+        :param temperature: Sampling temperature (0-2)
+        :param parallel_tool_calls:
+        :param tool_choice: Tool choice configuration
+        :param tools: Available tools for function calling
+        :param top_p: Nucleus sampling parameter (0-1)
+        :param debug: Debug options for inspecting request transformations (streaming only)
+        :param image_config: Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/guides/overview/multimodal/image-generation for more details.
+        :param modalities: Output modalities for the response. Supported values are \"text\" and \"image\".
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -603,14 +780,25 @@ class Chat(BaseSDK):
         http_referer: Optional[str] = None,
         x_title: Optional[str] = None,
         provider: OptionalNullable[
-            Union[components.Schema0, components.Schema0TypedDict]
+            Union[
+                components.ChatGenerationParamsProvider,
+                components.ChatGenerationParamsProviderTypedDict,
+            ]
         ] = UNSET,
         plugins: Optional[
-            Union[List[components.Schema17], List[components.Schema17TypedDict]]
+            Union[
+                List[components.ChatGenerationParamsPluginUnion],
+                List[components.ChatGenerationParamsPluginUnionTypedDict],
+            ]
         ] = None,
-        route: OptionalNullable[components.Route] = UNSET,
         user: Optional[str] = None,
         session_id: Optional[str] = None,
+        trace: Optional[
+            Union[
+                components.ChatGenerationParamsTrace,
+                components.ChatGenerationParamsTraceTypedDict,
+            ]
+        ] = None,
         model: Optional[str] = None,
         models: Optional[List[str]] = None,
         frequency_penalty: OptionalNullable[float] = UNSET,
@@ -635,16 +823,21 @@ class Chat(BaseSDK):
         stream_options: OptionalNullable[
             Union[components.ChatStreamOptions, components.ChatStreamOptionsTypedDict]
         ] = UNSET,
-        temperature: OptionalNullable[float] = UNSET,
-        tool_choice: Optional[Any] = None,
+        temperature: OptionalNullable[float] = 1,
+        parallel_tool_calls: OptionalNullable[bool] = UNSET,
+        tool_choice: Optional[
+            Union[components.ToolChoiceOption, components.ToolChoiceOptionTypedDict]
+        ] = None,
         tools: Optional[
             Union[
                 List[components.ToolDefinitionJSON],
                 List[components.ToolDefinitionJSONTypedDict],
             ]
         ] = None,
-        top_p: OptionalNullable[float] = UNSET,
-        debug: Optional[Union[components.Debug, components.DebugTypedDict]] = None,
+        top_p: OptionalNullable[float] = 1,
+        debug: Optional[
+            Union[components.DebugOptions, components.DebugOptionsTypedDict]
+        ] = None,
         image_config: Optional[
             Union[
                 Dict[str, components.ChatGenerationParamsImageConfig],
@@ -656,45 +849,46 @@ class Chat(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> eventstreaming.EventStreamAsync[components.ChatStreamingResponseChunkData]:
+    ) -> eventstreaming.EventStreamAsync[components.ChatStreamingResponseChunk]:
         r"""Create a chat completion
 
         Sends a request for a model response for the given chat conversation. Supports both streaming and non-streaming modes.
 
-        :param messages:
+        :param messages: List of messages for the conversation
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
         :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
 
-        :param provider:
-        :param plugins:
-        :param route:
-        :param user:
-        :param session_id:
-        :param model:
-        :param models:
-        :param frequency_penalty:
-        :param logit_bias:
-        :param logprobs:
-        :param top_logprobs:
-        :param max_completion_tokens:
-        :param max_tokens:
-        :param metadata:
-        :param presence_penalty:
-        :param reasoning:
-        :param response_format:
-        :param seed:
-        :param stop:
-        :param stream:
-        :param stream_options:
-        :param temperature:
-        :param tool_choice:
-        :param tools:
-        :param top_p:
-        :param debug:
-        :param image_config:
-        :param modalities:
+        :param provider: When multiple model providers are available, optionally indicate your routing preference.
+        :param plugins: Plugins you want to enable for this request, including their settings.
+        :param user: Unique user identifier
+        :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 128 characters.
+        :param trace: Metadata for observability and tracing. Known keys (trace_id, trace_name, span_name, generation_name, parent_span_id) have special handling. Additional keys are passed through as custom metadata to configured broadcast destinations.
+        :param model: Model to use for completion
+        :param models: Models to use for completion
+        :param frequency_penalty: Frequency penalty (-2.0 to 2.0)
+        :param logit_bias: Token logit bias adjustments
+        :param logprobs: Return log probabilities
+        :param top_logprobs: Number of top log probabilities to return (0-20)
+        :param max_completion_tokens: Maximum tokens in completion
+        :param max_tokens: Maximum tokens (deprecated, use max_completion_tokens)
+        :param metadata: Key-value pairs for additional object information (max 16 pairs, 64 char keys, 512 char values)
+        :param presence_penalty: Presence penalty (-2.0 to 2.0)
+        :param reasoning: Configuration options for reasoning models
+        :param response_format: Response format configuration
+        :param seed: Random seed for deterministic outputs
+        :param stop: Stop sequences (up to 4)
+        :param stream: Enable streaming response
+        :param stream_options: Streaming configuration options
+        :param temperature: Sampling temperature (0-2)
+        :param parallel_tool_calls:
+        :param tool_choice: Tool choice configuration
+        :param tools: Available tools for function calling
+        :param top_p: Nucleus sampling parameter (0-1)
+        :param debug: Debug options for inspecting request transformations (streaming only)
+        :param image_config: Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/guides/overview/multimodal/image-generation for more details.
+        :param modalities: Output modalities for the response. Supported values are \"text\" and \"image\".
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -709,14 +903,25 @@ class Chat(BaseSDK):
         http_referer: Optional[str] = None,
         x_title: Optional[str] = None,
         provider: OptionalNullable[
-            Union[components.Schema0, components.Schema0TypedDict]
+            Union[
+                components.ChatGenerationParamsProvider,
+                components.ChatGenerationParamsProviderTypedDict,
+            ]
         ] = UNSET,
         plugins: Optional[
-            Union[List[components.Schema17], List[components.Schema17TypedDict]]
+            Union[
+                List[components.ChatGenerationParamsPluginUnion],
+                List[components.ChatGenerationParamsPluginUnionTypedDict],
+            ]
         ] = None,
-        route: OptionalNullable[components.Route] = UNSET,
         user: Optional[str] = None,
         session_id: Optional[str] = None,
+        trace: Optional[
+            Union[
+                components.ChatGenerationParamsTrace,
+                components.ChatGenerationParamsTraceTypedDict,
+            ]
+        ] = None,
         model: Optional[str] = None,
         models: Optional[List[str]] = None,
         frequency_penalty: OptionalNullable[float] = UNSET,
@@ -741,16 +946,21 @@ class Chat(BaseSDK):
         stream_options: OptionalNullable[
             Union[components.ChatStreamOptions, components.ChatStreamOptionsTypedDict]
         ] = UNSET,
-        temperature: OptionalNullable[float] = UNSET,
-        tool_choice: Optional[Any] = None,
+        temperature: OptionalNullable[float] = 1,
+        parallel_tool_calls: OptionalNullable[bool] = UNSET,
+        tool_choice: Optional[
+            Union[components.ToolChoiceOption, components.ToolChoiceOptionTypedDict]
+        ] = None,
         tools: Optional[
             Union[
                 List[components.ToolDefinitionJSON],
                 List[components.ToolDefinitionJSONTypedDict],
             ]
         ] = None,
-        top_p: OptionalNullable[float] = UNSET,
-        debug: Optional[Union[components.Debug, components.DebugTypedDict]] = None,
+        top_p: OptionalNullable[float] = 1,
+        debug: Optional[
+            Union[components.DebugOptions, components.DebugOptionsTypedDict]
+        ] = None,
         image_config: Optional[
             Union[
                 Dict[str, components.ChatGenerationParamsImageConfig],
@@ -767,40 +977,41 @@ class Chat(BaseSDK):
 
         Sends a request for a model response for the given chat conversation. Supports both streaming and non-streaming modes.
 
-        :param messages:
+        :param messages: List of messages for the conversation
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
         :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
 
-        :param provider:
-        :param plugins:
-        :param route:
-        :param user:
-        :param session_id:
-        :param model:
-        :param models:
-        :param frequency_penalty:
-        :param logit_bias:
-        :param logprobs:
-        :param top_logprobs:
-        :param max_completion_tokens:
-        :param max_tokens:
-        :param metadata:
-        :param presence_penalty:
-        :param reasoning:
-        :param response_format:
-        :param seed:
-        :param stop:
-        :param stream:
-        :param stream_options:
-        :param temperature:
-        :param tool_choice:
-        :param tools:
-        :param top_p:
-        :param debug:
-        :param image_config:
-        :param modalities:
+        :param provider: When multiple model providers are available, optionally indicate your routing preference.
+        :param plugins: Plugins you want to enable for this request, including their settings.
+        :param user: Unique user identifier
+        :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 128 characters.
+        :param trace: Metadata for observability and tracing. Known keys (trace_id, trace_name, span_name, generation_name, parent_span_id) have special handling. Additional keys are passed through as custom metadata to configured broadcast destinations.
+        :param model: Model to use for completion
+        :param models: Models to use for completion
+        :param frequency_penalty: Frequency penalty (-2.0 to 2.0)
+        :param logit_bias: Token logit bias adjustments
+        :param logprobs: Return log probabilities
+        :param top_logprobs: Number of top log probabilities to return (0-20)
+        :param max_completion_tokens: Maximum tokens in completion
+        :param max_tokens: Maximum tokens (deprecated, use max_completion_tokens)
+        :param metadata: Key-value pairs for additional object information (max 16 pairs, 64 char keys, 512 char values)
+        :param presence_penalty: Presence penalty (-2.0 to 2.0)
+        :param reasoning: Configuration options for reasoning models
+        :param response_format: Response format configuration
+        :param seed: Random seed for deterministic outputs
+        :param stop: Stop sequences (up to 4)
+        :param stream: Enable streaming response
+        :param stream_options: Streaming configuration options
+        :param temperature: Sampling temperature (0-2)
+        :param parallel_tool_calls:
+        :param tool_choice: Tool choice configuration
+        :param tools: Available tools for function calling
+        :param top_p: Nucleus sampling parameter (0-1)
+        :param debug: Debug options for inspecting request transformations (streaming only)
+        :param image_config: Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/guides/overview/multimodal/image-generation for more details.
+        :param modalities: Output modalities for the response. Supported values are \"text\" and \"image\".
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -822,14 +1033,16 @@ class Chat(BaseSDK):
             x_title=x_title,
             chat_generation_params=components.ChatGenerationParams(
                 provider=utils.get_pydantic_model(
-                    provider, OptionalNullable[components.Schema0]
+                    provider, OptionalNullable[components.ChatGenerationParamsProvider]
                 ),
                 plugins=utils.get_pydantic_model(
-                    plugins, Optional[List[components.Schema17]]
+                    plugins, Optional[List[components.ChatGenerationParamsPluginUnion]]
                 ),
-                route=route,
                 user=user,
                 session_id=session_id,
+                trace=utils.get_pydantic_model(
+                    trace, Optional[components.ChatGenerationParamsTrace]
+                ),
                 messages=utils.get_pydantic_model(messages, List[components.Message]),
                 model=model,
                 models=models,
@@ -854,12 +1067,17 @@ class Chat(BaseSDK):
                     stream_options, OptionalNullable[components.ChatStreamOptions]
                 ),
                 temperature=temperature,
-                tool_choice=tool_choice,
+                parallel_tool_calls=parallel_tool_calls,
+                tool_choice=utils.get_pydantic_model(
+                    tool_choice, Optional[components.ToolChoiceOption]
+                ),
                 tools=utils.get_pydantic_model(
                     tools, Optional[List[components.ToolDefinitionJSON]]
                 ),
                 top_p=top_p,
-                debug=utils.get_pydantic_model(debug, Optional[components.Debug]),
+                debug=utils.get_pydantic_model(
+                    debug, Optional[components.DebugOptions]
+                ),
                 image_config=image_config,
                 modalities=modalities,
             ),
@@ -912,7 +1130,23 @@ class Chat(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "401", "429", "4XX", "500", "5XX"],
+            error_status_codes=[
+                "400",
+                "401",
+                "402",
+                "404",
+                "408",
+                "413",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "502",
+                "503",
+                "524",
+                "529",
+                "5XX",
+            ],
             stream=True,
             retry_config=retry_config,
         )
@@ -927,23 +1161,109 @@ class Chat(BaseSDK):
             return eventstreaming.EventStreamAsync(
                 http_res,
                 lambda raw: utils.unmarshal_json(
-                    raw, components.ChatStreamingResponseChunk
+                    raw, operations.SendChatCompletionRequestResponseBody
                 ).data,
                 sentinel="[DONE]",
                 client_ref=self,
             )
-        if utils.match_response(http_res, ["400", "401", "429"], "application/json"):
+        if utils.match_response(http_res, "400", "application/json"):
             http_res_text = await utils.stream_to_text_async(http_res)
             response_data = unmarshal_json_response(
-                errors.ChatErrorData, http_res, http_res_text
+                errors.BadRequestResponseErrorData, http_res, http_res_text
             )
-            raise errors.ChatError(response_data, http_res, http_res_text)
+            raise errors.BadRequestResponseError(response_data, http_res, http_res_text)
+        if utils.match_response(http_res, "401", "application/json"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            response_data = unmarshal_json_response(
+                errors.UnauthorizedResponseErrorData, http_res, http_res_text
+            )
+            raise errors.UnauthorizedResponseError(
+                response_data, http_res, http_res_text
+            )
+        if utils.match_response(http_res, "402", "application/json"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            response_data = unmarshal_json_response(
+                errors.PaymentRequiredResponseErrorData, http_res, http_res_text
+            )
+            raise errors.PaymentRequiredResponseError(
+                response_data, http_res, http_res_text
+            )
+        if utils.match_response(http_res, "404", "application/json"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            response_data = unmarshal_json_response(
+                errors.NotFoundResponseErrorData, http_res, http_res_text
+            )
+            raise errors.NotFoundResponseError(response_data, http_res, http_res_text)
+        if utils.match_response(http_res, "408", "application/json"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            response_data = unmarshal_json_response(
+                errors.RequestTimeoutResponseErrorData, http_res, http_res_text
+            )
+            raise errors.RequestTimeoutResponseError(
+                response_data, http_res, http_res_text
+            )
+        if utils.match_response(http_res, "413", "application/json"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            response_data = unmarshal_json_response(
+                errors.PayloadTooLargeResponseErrorData, http_res, http_res_text
+            )
+            raise errors.PayloadTooLargeResponseError(
+                response_data, http_res, http_res_text
+            )
+        if utils.match_response(http_res, "422", "application/json"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            response_data = unmarshal_json_response(
+                errors.UnprocessableEntityResponseErrorData, http_res, http_res_text
+            )
+            raise errors.UnprocessableEntityResponseError(
+                response_data, http_res, http_res_text
+            )
+        if utils.match_response(http_res, "429", "application/json"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            response_data = unmarshal_json_response(
+                errors.TooManyRequestsResponseErrorData, http_res, http_res_text
+            )
+            raise errors.TooManyRequestsResponseError(
+                response_data, http_res, http_res_text
+            )
         if utils.match_response(http_res, "500", "application/json"):
             http_res_text = await utils.stream_to_text_async(http_res)
             response_data = unmarshal_json_response(
-                errors.ChatErrorData, http_res, http_res_text
+                errors.InternalServerResponseErrorData, http_res, http_res_text
             )
-            raise errors.ChatError(response_data, http_res, http_res_text)
+            raise errors.InternalServerResponseError(
+                response_data, http_res, http_res_text
+            )
+        if utils.match_response(http_res, "502", "application/json"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            response_data = unmarshal_json_response(
+                errors.BadGatewayResponseErrorData, http_res, http_res_text
+            )
+            raise errors.BadGatewayResponseError(response_data, http_res, http_res_text)
+        if utils.match_response(http_res, "503", "application/json"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            response_data = unmarshal_json_response(
+                errors.ServiceUnavailableResponseErrorData, http_res, http_res_text
+            )
+            raise errors.ServiceUnavailableResponseError(
+                response_data, http_res, http_res_text
+            )
+        if utils.match_response(http_res, "524", "application/json"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            response_data = unmarshal_json_response(
+                errors.EdgeNetworkTimeoutResponseErrorData, http_res, http_res_text
+            )
+            raise errors.EdgeNetworkTimeoutResponseError(
+                response_data, http_res, http_res_text
+            )
+        if utils.match_response(http_res, "529", "application/json"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            response_data = unmarshal_json_response(
+                errors.ProviderOverloadedResponseErrorData, http_res, http_res_text
+            )
+            raise errors.ProviderOverloadedResponseError(
+                response_data, http_res, http_res_text
+            )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.OpenRouterDefaultError(

@@ -13,7 +13,6 @@ from openrouter.types import (
 from openrouter.utils import validate_open_enum
 from pydantic import model_serializer
 from pydantic.functional_validators import PlainValidator
-from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
@@ -21,7 +20,7 @@ class OpenResponsesReasoningConfigTypedDict(TypedDict):
     r"""Configuration for reasoning mode in the response"""
 
     effort: NotRequired[Nullable[OpenAIResponsesReasoningEffort]]
-    summary: NotRequired[ReasoningSummaryVerbosity]
+    summary: NotRequired[Nullable[ReasoningSummaryVerbosity]]
     max_tokens: NotRequired[Nullable[float]]
     enabled: NotRequired[Nullable[bool]]
 
@@ -35,8 +34,9 @@ class OpenResponsesReasoningConfig(BaseModel):
     ] = UNSET
 
     summary: Annotated[
-        Optional[ReasoningSummaryVerbosity], PlainValidator(validate_open_enum(False))
-    ] = None
+        OptionalNullable[ReasoningSummaryVerbosity],
+        PlainValidator(validate_open_enum(False)),
+    ] = UNSET
 
     max_tokens: OptionalNullable[float] = UNSET
 
@@ -45,7 +45,7 @@ class OpenResponsesReasoningConfig(BaseModel):
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = ["effort", "summary", "max_tokens", "enabled"]
-        nullable_fields = ["effort", "max_tokens", "enabled"]
+        nullable_fields = ["effort", "summary", "max_tokens", "enabled"]
         null_default_fields = []
 
         serialized = handler(self)

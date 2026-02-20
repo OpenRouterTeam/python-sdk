@@ -70,7 +70,7 @@ class OpenResponsesReasoningTypedDict(TypedDict):
     type: OpenResponsesReasoningType
     id: str
     summary: List[ReasoningSummaryTextTypedDict]
-    content: NotRequired[List[ReasoningTextContentTypedDict]]
+    content: NotRequired[Nullable[List[ReasoningTextContentTypedDict]]]
     encrypted_content: NotRequired[Nullable[str]]
     status: NotRequired[OpenResponsesReasoningStatusUnionTypedDict]
     signature: NotRequired[Nullable[str]]
@@ -86,7 +86,7 @@ class OpenResponsesReasoning(BaseModel):
 
     summary: List[ReasoningSummaryText]
 
-    content: Optional[List[ReasoningTextContent]] = None
+    content: OptionalNullable[List[ReasoningTextContent]] = UNSET
 
     encrypted_content: OptionalNullable[str] = UNSET
 
@@ -111,7 +111,7 @@ class OpenResponsesReasoning(BaseModel):
             "signature",
             "format",
         ]
-        nullable_fields = ["encrypted_content", "signature", "format"]
+        nullable_fields = ["content", "encrypted_content", "signature", "format"]
         null_default_fields = []
 
         serialized = handler(self)

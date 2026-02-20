@@ -1,11 +1,13 @@
 # JSONSchemaConfig
 
+JSON Schema configuration object
+
 
 ## Fields
 
-| Field                    | Type                     | Required                 | Description              |
-| ------------------------ | ------------------------ | ------------------------ | ------------------------ |
-| `name`                   | *str*                    | :heavy_check_mark:       | N/A                      |
-| `description`            | *Optional[str]*          | :heavy_minus_sign:       | N/A                      |
-| `schema_`                | Dict[str, *Any*]         | :heavy_minus_sign:       | N/A                      |
-| `strict`                 | *OptionalNullable[bool]* | :heavy_minus_sign:       | N/A                      |
+| Field                                                                                            | Type                                                                                             | Required                                                                                         | Description                                                                                      | Example                                                                                          |
+| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| `name`                                                                                           | *str*                                                                                            | :heavy_check_mark:                                                                               | Schema name (a-z, A-Z, 0-9, underscores, dashes, max 64 chars)                                   | math_response                                                                                    |
+| `description`                                                                                    | *Optional[str]*                                                                                  | :heavy_minus_sign:                                                                               | Schema description for the model                                                                 | A mathematical response                                                                          |
+| `schema_`                                                                                        | Dict[str, *Nullable[Any]*]                                                                       | :heavy_minus_sign:                                                                               | JSON Schema object                                                                               | {<br/>"type": "object",<br/>"properties": {<br/>"answer": {<br/>"type": "number"<br/>}<br/>},<br/>"required": [<br/>"answer"<br/>]<br/>} |
+| `strict`                                                                                         | *OptionalNullable[bool]*                                                                         | :heavy_minus_sign:                                                                               | Enable strict schema adherence                                                                   | false                                                                                            |

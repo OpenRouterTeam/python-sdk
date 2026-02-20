@@ -13,58 +13,78 @@ from openrouter.types import (
     UNSET,
     UNSET_SENTINEL,
 )
-from openrouter.utils import validate_const
-import pydantic
 from pydantic import model_serializer
-from pydantic.functional_validators import AfterValidator
 from typing import List, Literal, Optional
-from typing_extensions import Annotated, NotRequired, TypedDict
+from typing_extensions import NotRequired, TypedDict
 
 
-class ChatStreamingResponseChunkErrorTypedDict(TypedDict):
+ChatStreamingResponseChunkObject = Literal["chat.completion.chunk",]
+
+
+class ErrorTypedDict(TypedDict):
+    r"""Error information"""
+
     message: str
+    r"""Error message"""
     code: float
+    r"""Error code"""
 
 
-class ChatStreamingResponseChunkError(BaseModel):
+class Error(BaseModel):
+    r"""Error information"""
+
     message: str
+    r"""Error message"""
 
     code: float
+    r"""Error code"""
 
 
-class ChatStreamingResponseChunkDataTypedDict(TypedDict):
+class ChatStreamingResponseChunkTypedDict(TypedDict):
+    r"""Streaming chat completion chunk"""
+
     id: str
+    r"""Unique chunk identifier"""
     choices: List[ChatStreamingChoiceTypedDict]
+    r"""List of streaming chunk choices"""
     created: float
+    r"""Unix timestamp of creation"""
     model: str
-    object: Literal["chat.completion.chunk"]
+    r"""Model used for completion"""
+    object: ChatStreamingResponseChunkObject
     system_fingerprint: NotRequired[Nullable[str]]
-    error: NotRequired[ChatStreamingResponseChunkErrorTypedDict]
+    r"""System fingerprint"""
+    error: NotRequired[ErrorTypedDict]
+    r"""Error information"""
     usage: NotRequired[ChatGenerationTokenUsageTypedDict]
+    r"""Token usage statistics"""
 
 
-class ChatStreamingResponseChunkData(BaseModel):
+class ChatStreamingResponseChunk(BaseModel):
+    r"""Streaming chat completion chunk"""
+
     id: str
+    r"""Unique chunk identifier"""
 
     choices: List[ChatStreamingChoice]
+    r"""List of streaming chunk choices"""
 
     created: float
+    r"""Unix timestamp of creation"""
 
     model: str
+    r"""Model used for completion"""
 
-    OBJECT: Annotated[
-        Annotated[
-            Literal["chat.completion.chunk"],
-            AfterValidator(validate_const("chat.completion.chunk")),
-        ],
-        pydantic.Field(alias="object"),
-    ] = "chat.completion.chunk"
+    object: ChatStreamingResponseChunkObject
 
     system_fingerprint: OptionalNullable[str] = UNSET
+    r"""System fingerprint"""
 
-    error: Optional[ChatStreamingResponseChunkError] = None
+    error: Optional[Error] = None
+    r"""Error information"""
 
     usage: Optional[ChatGenerationTokenUsage] = None
+    r"""Token usage statistics"""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
@@ -95,11 +115,3 @@ class ChatStreamingResponseChunkData(BaseModel):
                 m[k] = val
 
         return m
-
-
-class ChatStreamingResponseChunkTypedDict(TypedDict):
-    data: ChatStreamingResponseChunkDataTypedDict
-
-
-class ChatStreamingResponseChunk(BaseModel):
-    data: ChatStreamingResponseChunkData

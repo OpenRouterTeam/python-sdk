@@ -2,30 +2,33 @@
 
 from __future__ import annotations
 from openrouter.types import BaseModel
-from openrouter.utils import validate_const
-import pydantic
-from pydantic.functional_validators import AfterValidator
 from typing import Literal
-from typing_extensions import Annotated, TypedDict
+from typing_extensions import TypedDict
+
+
+NamedToolChoiceType = Literal["function",]
 
 
 class NamedToolChoiceFunctionTypedDict(TypedDict):
     name: str
+    r"""Function name to call"""
 
 
 class NamedToolChoiceFunction(BaseModel):
     name: str
+    r"""Function name to call"""
 
 
 class NamedToolChoiceTypedDict(TypedDict):
+    r"""Named tool choice for specific function"""
+
+    type: NamedToolChoiceType
     function: NamedToolChoiceFunctionTypedDict
-    type: Literal["function"]
 
 
 class NamedToolChoice(BaseModel):
-    function: NamedToolChoiceFunction
+    r"""Named tool choice for specific function"""
 
-    TYPE: Annotated[
-        Annotated[Literal["function"], AfterValidator(validate_const("function"))],
-        pydantic.Field(alias="type"),
-    ] = "function"
+    type: NamedToolChoiceType
+
+    function: NamedToolChoiceFunction

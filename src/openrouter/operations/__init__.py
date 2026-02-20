@@ -58,6 +58,7 @@ if TYPE_CHECKING:
         CreateAuthKeysCodeRequestTypedDict,
         CreateAuthKeysCodeResponse,
         CreateAuthKeysCodeResponseTypedDict,
+        UsageLimitType,
     )
     from .createcoinbasecharge import (
         CallData,
@@ -363,6 +364,8 @@ if TYPE_CHECKING:
         SendChatCompletionRequestRequest,
         SendChatCompletionRequestRequestTypedDict,
         SendChatCompletionRequestResponse,
+        SendChatCompletionRequestResponseBody,
+        SendChatCompletionRequestResponseBodyTypedDict,
         SendChatCompletionRequestResponseTypedDict,
     )
     from .updateguardrail import (
@@ -678,6 +681,8 @@ __all__ = [
     "SendChatCompletionRequestRequest",
     "SendChatCompletionRequestRequestTypedDict",
     "SendChatCompletionRequestResponse",
+    "SendChatCompletionRequestResponseBody",
+    "SendChatCompletionRequestResponseBodyTypedDict",
     "SendChatCompletionRequestResponseTypedDict",
     "TransferIntent",
     "TransferIntentTypedDict",
@@ -707,6 +712,7 @@ __all__ = [
     "UpdateKeysResponse",
     "UpdateKeysResponseTypedDict",
     "Usage",
+    "UsageLimitType",
     "UsageTypedDict",
     "Web3Data",
     "Web3DataTypedDict",
@@ -756,6 +762,7 @@ _dynamic_imports: dict[str, str] = {
     "CreateAuthKeysCodeRequestTypedDict": ".createauthkeyscode",
     "CreateAuthKeysCodeResponse": ".createauthkeyscode",
     "CreateAuthKeysCodeResponseTypedDict": ".createauthkeyscode",
+    "UsageLimitType": ".createauthkeyscode",
     "CallData": ".createcoinbasecharge",
     "CallDataTypedDict": ".createcoinbasecharge",
     "CreateCoinbaseChargeData": ".createcoinbasecharge",
@@ -1005,6 +1012,8 @@ _dynamic_imports: dict[str, str] = {
     "SendChatCompletionRequestRequest": ".sendchatcompletionrequest",
     "SendChatCompletionRequestRequestTypedDict": ".sendchatcompletionrequest",
     "SendChatCompletionRequestResponse": ".sendchatcompletionrequest",
+    "SendChatCompletionRequestResponseBody": ".sendchatcompletionrequest",
+    "SendChatCompletionRequestResponseBodyTypedDict": ".sendchatcompletionrequest",
     "SendChatCompletionRequestResponseTypedDict": ".sendchatcompletionrequest",
     "UpdateGuardrailData": ".updateguardrail",
     "UpdateGuardrailDataTypedDict": ".updateguardrail",

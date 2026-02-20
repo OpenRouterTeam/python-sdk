@@ -8,7 +8,7 @@ from typing import Literal, Union
 from typing_extensions import Annotated, TypedDict
 
 
-CodeEnum = Union[
+Code = Union[
     Literal[
         "server_error",
         "rate_limit_exceeded",
@@ -36,13 +36,13 @@ CodeEnum = Union[
 class ResponsesErrorFieldTypedDict(TypedDict):
     r"""Error information returned from the API"""
 
-    code: CodeEnum
+    code: Code
     message: str
 
 
 class ResponsesErrorField(BaseModel):
     r"""Error information returned from the API"""
 
-    code: Annotated[CodeEnum, PlainValidator(validate_open_enum(False))]
+    code: Annotated[Code, PlainValidator(validate_open_enum(False))]
 
     message: str

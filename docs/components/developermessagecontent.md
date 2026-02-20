@@ -1,5 +1,7 @@
 # DeveloperMessageContent
 
+Developer message content
+
 
 ## Supported Types
 

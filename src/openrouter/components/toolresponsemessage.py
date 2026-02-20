@@ -6,36 +6,43 @@ from .chatmessagecontentitem import (
     ChatMessageContentItemTypedDict,
 )
 from openrouter.types import BaseModel
-from openrouter.utils import validate_const
-import pydantic
-from pydantic.functional_validators import AfterValidator
 from typing import List, Literal, Union
-from typing_extensions import Annotated, TypeAliasType, TypedDict
+from typing_extensions import TypeAliasType, TypedDict
+
+
+ToolResponseMessageRole = Literal["tool",]
 
 
 ToolResponseMessageContentTypedDict = TypeAliasType(
     "ToolResponseMessageContentTypedDict",
     Union[str, List[ChatMessageContentItemTypedDict]],
 )
+r"""Tool response content"""
 
 
 ToolResponseMessageContent = TypeAliasType(
     "ToolResponseMessageContent", Union[str, List[ChatMessageContentItem]]
 )
+r"""Tool response content"""
 
 
 class ToolResponseMessageTypedDict(TypedDict):
+    r"""Tool response message"""
+
+    role: ToolResponseMessageRole
     content: ToolResponseMessageContentTypedDict
+    r"""Tool response content"""
     tool_call_id: str
-    role: Literal["tool"]
+    r"""ID of the assistant message tool call this message responds to"""
 
 
 class ToolResponseMessage(BaseModel):
+    r"""Tool response message"""
+
+    role: ToolResponseMessageRole
+
     content: ToolResponseMessageContent
+    r"""Tool response content"""
 
     tool_call_id: str
-
-    ROLE: Annotated[
-        Annotated[Literal["tool"], AfterValidator(validate_const("tool"))],
-        pydantic.Field(alias="role"),
-    ] = "tool"
+    r"""ID of the assistant message tool call this message responds to"""

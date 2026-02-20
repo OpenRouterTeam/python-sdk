@@ -1,9 +1,11 @@
 # ChatMessageContentItemImage
 
+Image content part for vision models
+
 
 ## Fields
 
 | Field                                                                                                  | Type                                                                                                   | Required                                                                                               | Description                                                                                            |
 | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ |
-| `type`                                                                                                 | *Literal["image_url"]*                                                                                 | :heavy_check_mark:                                                                                     | N/A                                                                                                    |
+| `type`                                                                                                 | [components.ChatMessageContentItemImageType](../components/chatmessagecontentitemimagetype.md)         | :heavy_check_mark:                                                                                     | N/A                                                                                                    |
 | `image_url`                                                                                            | [components.ChatMessageContentItemImageImageURL](../components/chatmessagecontentitemimageimageurl.md) | :heavy_check_mark:                                                                                     | N/A                                                                                                    |

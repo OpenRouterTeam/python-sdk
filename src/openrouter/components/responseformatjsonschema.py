@@ -3,24 +3,25 @@
 from __future__ import annotations
 from .jsonschemaconfig import JSONSchemaConfig, JSONSchemaConfigTypedDict
 from openrouter.types import BaseModel
-from openrouter.utils import validate_const
-import pydantic
-from pydantic.functional_validators import AfterValidator
 from typing import Literal
-from typing_extensions import Annotated, TypedDict
+from typing_extensions import TypedDict
+
+
+ResponseFormatJSONSchemaType = Literal["json_schema",]
 
 
 class ResponseFormatJSONSchemaTypedDict(TypedDict):
+    r"""JSON Schema response format for structured outputs"""
+
+    type: ResponseFormatJSONSchemaType
     json_schema: JSONSchemaConfigTypedDict
-    type: Literal["json_schema"]
+    r"""JSON Schema configuration object"""
 
 
 class ResponseFormatJSONSchema(BaseModel):
-    json_schema: JSONSchemaConfig
+    r"""JSON Schema response format for structured outputs"""
 
-    TYPE: Annotated[
-        Annotated[
-            Literal["json_schema"], AfterValidator(validate_const("json_schema"))
-        ],
-        pydantic.Field(alias="type"),
-    ] = "json_schema"
+    type: ResponseFormatJSONSchemaType
+
+    json_schema: JSONSchemaConfig
+    r"""JSON Schema configuration object"""
