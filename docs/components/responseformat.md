@@ -1,5 +1,7 @@
 # ResponseFormat
 
+Response format configuration
+
 
 ## Supported Types
 
@@ -27,9 +29,9 @@ value: components.ResponseFormatJSONSchema = /* values here */
 value: components.ResponseFormatTextGrammar = /* values here */
 ```
 
-### `components.ResponseFormatPython`
+### `components.ResponseFormatTextPython`
 
 ```python
-value: components.ResponseFormatPython = /* values here */
+value: components.ResponseFormatTextPython = /* values here */
 ```
 

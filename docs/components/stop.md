@@ -1,5 +1,7 @@
 # Stop
 
+Stop sequences (up to 4)
+
 
 ## Supported Types
 
@@ -13,5 +15,11 @@ value: str = /* values here */
 
 ```python
 value: List[str] = /* values here */
+```
+
+### `Any`
+
+```python
+value: Any = /* values here */
 ```
 

@@ -15,20 +15,34 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class JSONSchemaConfigTypedDict(TypedDict):
+    r"""JSON Schema configuration object"""
+
     name: str
+    r"""Schema name (a-z, A-Z, 0-9, underscores, dashes, max 64 chars)"""
     description: NotRequired[str]
-    schema_: NotRequired[Dict[str, Any]]
+    r"""Schema description for the model"""
+    schema_: NotRequired[Dict[str, Nullable[Any]]]
+    r"""JSON Schema object"""
     strict: NotRequired[Nullable[bool]]
+    r"""Enable strict schema adherence"""
 
 
 class JSONSchemaConfig(BaseModel):
+    r"""JSON Schema configuration object"""
+
     name: str
+    r"""Schema name (a-z, A-Z, 0-9, underscores, dashes, max 64 chars)"""
 
     description: Optional[str] = None
+    r"""Schema description for the model"""
 
-    schema_: Annotated[Optional[Dict[str, Any]], pydantic.Field(alias="schema")] = None
+    schema_: Annotated[
+        Optional[Dict[str, Nullable[Any]]], pydantic.Field(alias="schema")
+    ] = None
+    r"""JSON Schema object"""
 
     strict: OptionalNullable[bool] = UNSET
+    r"""Enable strict schema adherence"""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

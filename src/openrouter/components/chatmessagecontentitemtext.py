@@ -6,25 +6,28 @@ from .chatmessagecontentitemcachecontrol import (
     ChatMessageContentItemCacheControlTypedDict,
 )
 from openrouter.types import BaseModel
-from openrouter.utils import validate_const
-import pydantic
-from pydantic.functional_validators import AfterValidator
 from typing import Literal, Optional
-from typing_extensions import Annotated, NotRequired, TypedDict
+from typing_extensions import NotRequired, TypedDict
+
+
+ChatMessageContentItemTextType = Literal["text",]
 
 
 class ChatMessageContentItemTextTypedDict(TypedDict):
+    r"""Text content part"""
+
+    type: ChatMessageContentItemTextType
     text: str
-    type: Literal["text"]
     cache_control: NotRequired[ChatMessageContentItemCacheControlTypedDict]
+    r"""Cache control for the content part"""
 
 
 class ChatMessageContentItemText(BaseModel):
+    r"""Text content part"""
+
+    type: ChatMessageContentItemTextType
+
     text: str
 
-    TYPE: Annotated[
-        Annotated[Literal["text"], AfterValidator(validate_const("text"))],
-        pydantic.Field(alias="type"),
-    ] = "text"
-
     cache_control: Optional[ChatMessageContentItemCacheControl] = None
+    r"""Cache control for the content part"""

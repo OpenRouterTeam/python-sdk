@@ -3,6 +3,6 @@
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `name`             | *str*              | :heavy_check_mark: | N/A                |
+| Field                 | Type                  | Required              | Description           | Example               |
+| --------------------- | --------------------- | --------------------- | --------------------- | --------------------- |
+| `name`                | *str*                 | :heavy_check_mark:    | Function name to call | get_weather           |

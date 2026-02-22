@@ -6,36 +6,43 @@ from .chatmessagecontentitemtext import (
     ChatMessageContentItemTextTypedDict,
 )
 from openrouter.types import BaseModel
-from openrouter.utils import validate_const
-import pydantic
-from pydantic.functional_validators import AfterValidator
 from typing import List, Literal, Optional, Union
-from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
+from typing_extensions import NotRequired, TypeAliasType, TypedDict
+
+
+DeveloperMessageRole = Literal["developer",]
 
 
 DeveloperMessageContentTypedDict = TypeAliasType(
     "DeveloperMessageContentTypedDict",
     Union[str, List[ChatMessageContentItemTextTypedDict]],
 )
+r"""Developer message content"""
 
 
 DeveloperMessageContent = TypeAliasType(
     "DeveloperMessageContent", Union[str, List[ChatMessageContentItemText]]
 )
+r"""Developer message content"""
 
 
 class DeveloperMessageTypedDict(TypedDict):
+    r"""Developer message"""
+
+    role: DeveloperMessageRole
     content: DeveloperMessageContentTypedDict
-    role: Literal["developer"]
+    r"""Developer message content"""
     name: NotRequired[str]
+    r"""Optional name for the developer message"""
 
 
 class DeveloperMessage(BaseModel):
-    content: DeveloperMessageContent
+    r"""Developer message"""
 
-    ROLE: Annotated[
-        Annotated[Literal["developer"], AfterValidator(validate_const("developer"))],
-        pydantic.Field(alias="role"),
-    ] = "developer"
+    role: DeveloperMessageRole
+
+    content: DeveloperMessageContent
+    r"""Developer message content"""
 
     name: Optional[str] = None
+    r"""Optional name for the developer message"""

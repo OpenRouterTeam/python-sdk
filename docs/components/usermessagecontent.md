@@ -1,5 +1,7 @@
 # UserMessageContent
 
+User message content
+
 
 ## Supported Types
 

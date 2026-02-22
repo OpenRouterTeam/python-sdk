@@ -39,7 +39,9 @@
 | `INCEPTION`         | Inception           |
 | `INCEPTRON`         | Inceptron           |
 | `INFERENCE_NET`     | InferenceNet        |
+| `IONSTREAM`         | Ionstream           |
 | `INFERMATIC`        | Infermatic          |
+| `IO_NET`            | Io Net              |
 | `INFLECTION`        | Inflection          |
 | `LIQUID`            | Liquid              |
 | `MARA`              | Mara                |
