@@ -7909,6 +7909,31 @@ components:
               type: number
               description: Video input tokens
           description: Detailed prompt token usage
+        cost:
+          type: number
+          nullable: true
+          description: Total cost of the generation in USD
+        is_byok:
+          type: boolean
+          nullable: true
+          description: Whether the request used a bring-your-own-key provider
+        cost_details:
+          type: object
+          nullable: true
+          properties:
+            upstream_inference_cost:
+              type: number
+              nullable: true
+              description: Total upstream inference cost in USD
+            upstream_inference_prompt_cost:
+              type: number
+              nullable: true
+              description: Upstream inference cost for prompt tokens in USD
+            upstream_inference_completions_cost:
+              type: number
+              nullable: true
+              description: Upstream inference cost for completion tokens in USD
+          description: Breakdown of generation cost
       required:
         - completion_tokens
         - prompt_tokens
