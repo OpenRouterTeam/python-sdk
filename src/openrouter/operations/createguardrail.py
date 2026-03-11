@@ -28,8 +28,12 @@ class CreateGuardrailGlobalsTypedDict(TypedDict):
     This is used to track API usage per application.
 
     """
-    x_title: NotRequired[str]
+    x_open_router_title: NotRequired[str]
     r"""The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+    """
+    x_open_router_categories: NotRequired[str]
+    r"""Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
     """
 
@@ -45,12 +49,21 @@ class CreateGuardrailGlobals(BaseModel):
 
     """
 
-    x_title: Annotated[
+    x_open_router_title: Annotated[
         Optional[str],
-        pydantic.Field(alias="X-Title"),
+        pydantic.Field(alias="X-OpenRouter-Title"),
         FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
     ] = None
     r"""The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+    """
+
+    x_open_router_categories: Annotated[
+        Optional[str],
+        pydantic.Field(alias="X-OpenRouter-Categories"),
+        FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
+    ] = None
+    r"""Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
     """
 
@@ -77,6 +90,8 @@ class CreateGuardrailRequestBodyTypedDict(TypedDict):
     r"""Interval at which the limit resets (daily, weekly, monthly)"""
     allowed_providers: NotRequired[Nullable[List[str]]]
     r"""List of allowed provider IDs"""
+    ignored_providers: NotRequired[Nullable[List[str]]]
+    r"""List of provider IDs to exclude from routing"""
     allowed_models: NotRequired[Nullable[List[str]]]
     r"""Array of model identifiers (slug or canonical_slug accepted)"""
     enforce_zdr: NotRequired[Nullable[bool]]
@@ -102,6 +117,9 @@ class CreateGuardrailRequestBody(BaseModel):
     allowed_providers: OptionalNullable[List[str]] = UNSET
     r"""List of allowed provider IDs"""
 
+    ignored_providers: OptionalNullable[List[str]] = UNSET
+    r"""List of provider IDs to exclude from routing"""
+
     allowed_models: OptionalNullable[List[str]] = UNSET
     r"""Array of model identifiers (slug or canonical_slug accepted)"""
 
@@ -115,6 +133,7 @@ class CreateGuardrailRequestBody(BaseModel):
             "limit_usd",
             "reset_interval",
             "allowed_providers",
+            "ignored_providers",
             "allowed_models",
             "enforce_zdr",
         ]
@@ -123,6 +142,7 @@ class CreateGuardrailRequestBody(BaseModel):
             "limit_usd",
             "reset_interval",
             "allowed_providers",
+            "ignored_providers",
             "allowed_models",
             "enforce_zdr",
         ]
@@ -160,8 +180,12 @@ class CreateGuardrailRequestTypedDict(TypedDict):
     This is used to track API usage per application.
 
     """
-    x_title: NotRequired[str]
+    x_open_router_title: NotRequired[str]
     r"""The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+    """
+    x_open_router_categories: NotRequired[str]
+    r"""Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
     """
 
@@ -182,12 +206,21 @@ class CreateGuardrailRequest(BaseModel):
 
     """
 
-    x_title: Annotated[
+    x_open_router_title: Annotated[
         Optional[str],
-        pydantic.Field(alias="X-Title"),
+        pydantic.Field(alias="X-OpenRouter-Title"),
         FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
     ] = None
     r"""The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+    """
+
+    x_open_router_categories: Annotated[
+        Optional[str],
+        pydantic.Field(alias="X-OpenRouter-Categories"),
+        FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
+    ] = None
+    r"""Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
     """
 
@@ -220,6 +253,8 @@ class CreateGuardrailDataTypedDict(TypedDict):
     r"""Interval at which the limit resets (daily, weekly, monthly)"""
     allowed_providers: NotRequired[Nullable[List[str]]]
     r"""List of allowed provider IDs"""
+    ignored_providers: NotRequired[Nullable[List[str]]]
+    r"""List of provider IDs to exclude from routing"""
     allowed_models: NotRequired[Nullable[List[str]]]
     r"""Array of model canonical_slugs (immutable identifiers)"""
     enforce_zdr: NotRequired[Nullable[bool]]
@@ -255,6 +290,9 @@ class CreateGuardrailData(BaseModel):
     allowed_providers: OptionalNullable[List[str]] = UNSET
     r"""List of allowed provider IDs"""
 
+    ignored_providers: OptionalNullable[List[str]] = UNSET
+    r"""List of provider IDs to exclude from routing"""
+
     allowed_models: OptionalNullable[List[str]] = UNSET
     r"""Array of model canonical_slugs (immutable identifiers)"""
 
@@ -271,6 +309,7 @@ class CreateGuardrailData(BaseModel):
             "limit_usd",
             "reset_interval",
             "allowed_providers",
+            "ignored_providers",
             "allowed_models",
             "enforce_zdr",
             "updated_at",
@@ -280,6 +319,7 @@ class CreateGuardrailData(BaseModel):
             "limit_usd",
             "reset_interval",
             "allowed_providers",
+            "ignored_providers",
             "allowed_models",
             "enforce_zdr",
             "updated_at",

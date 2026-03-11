@@ -1,0 +1,23 @@
+# OpenResponsesInputContent2
+
+
+## Supported Types
+
+### `List[components.OpenResponsesInputContent1]`
+
+```python
+value: List[components.OpenResponsesInputContent1] = /* values here */
+```
+
+### `str`
+
+```python
+value: str = /* values here */
+```
+
+### `Any`
+
+```python
+value: Any = /* values here */
+```
+

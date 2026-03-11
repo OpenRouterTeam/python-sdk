@@ -10,6 +10,7 @@ ProviderSort = Union[
         "price",
         "throughput",
         "latency",
+        "exacto",
     ],
     UnrecognizedStr,
 ]

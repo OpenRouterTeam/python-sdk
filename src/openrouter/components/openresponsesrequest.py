@@ -8,7 +8,43 @@ from .openairesponsestoolchoice_union import (
     OpenAIResponsesToolChoiceUnion,
     OpenAIResponsesToolChoiceUnionTypedDict,
 )
-from .openresponsesinput import OpenResponsesInput, OpenResponsesInputTypedDict
+from .openresponsesapplypatchtool import (
+    OpenResponsesApplyPatchTool,
+    OpenResponsesApplyPatchToolTypedDict,
+)
+from .openresponsescodeinterpretertool import (
+    OpenResponsesCodeInterpreterTool,
+    OpenResponsesCodeInterpreterToolTypedDict,
+)
+from .openresponsescomputertool import (
+    OpenResponsesComputerTool,
+    OpenResponsesComputerToolTypedDict,
+)
+from .openresponsescustomtool import (
+    OpenResponsesCustomTool,
+    OpenResponsesCustomToolTypedDict,
+)
+from .openresponsesfilesearchtool import (
+    OpenResponsesFileSearchTool,
+    OpenResponsesFileSearchToolTypedDict,
+)
+from .openresponsesfunctionshelltool import (
+    OpenResponsesFunctionShellTool,
+    OpenResponsesFunctionShellToolTypedDict,
+)
+from .openresponsesimagegenerationtool import (
+    OpenResponsesImageGenerationTool,
+    OpenResponsesImageGenerationToolTypedDict,
+)
+from .openresponsesinput_union import (
+    OpenResponsesInputUnion,
+    OpenResponsesInputUnionTypedDict,
+)
+from .openresponseslocalshelltool import (
+    OpenResponsesLocalShellTool,
+    OpenResponsesLocalShellToolTypedDict,
+)
+from .openresponsesmcptool import OpenResponsesMcpTool, OpenResponsesMcpToolTypedDict
 from .openresponsesreasoningconfig import (
     OpenResponsesReasoningConfig,
     OpenResponsesReasoningConfigTypedDict,
@@ -121,11 +157,20 @@ class OpenResponsesRequestToolFunction(BaseModel):
 OpenResponsesRequestToolUnionTypedDict = TypeAliasType(
     "OpenResponsesRequestToolUnionTypedDict",
     Union[
+        OpenResponsesApplyPatchToolTypedDict,
+        OpenResponsesFunctionShellToolTypedDict,
+        OpenResponsesLocalShellToolTypedDict,
+        OpenResponsesCodeInterpreterToolTypedDict,
         OpenResponsesWebSearchPreviewToolTypedDict,
         OpenResponsesWebSearchPreview20250311ToolTypedDict,
-        OpenResponsesWebSearchToolTypedDict,
+        OpenResponsesComputerToolTypedDict,
         OpenResponsesWebSearch20250826ToolTypedDict,
+        OpenResponsesWebSearchToolTypedDict,
+        OpenResponsesCustomToolTypedDict,
         OpenResponsesRequestToolFunctionTypedDict,
+        OpenResponsesFileSearchToolTypedDict,
+        OpenResponsesMcpToolTypedDict,
+        OpenResponsesImageGenerationToolTypedDict,
     ],
 )
 
@@ -140,6 +185,15 @@ OpenResponsesRequestToolUnion = Annotated[
         ],
         Annotated[OpenResponsesWebSearchTool, Tag("web_search")],
         Annotated[OpenResponsesWebSearch20250826Tool, Tag("web_search_2025_08_26")],
+        Annotated[OpenResponsesFileSearchTool, Tag("file_search")],
+        Annotated[OpenResponsesComputerTool, Tag("computer_use_preview")],
+        Annotated[OpenResponsesCodeInterpreterTool, Tag("code_interpreter")],
+        Annotated[OpenResponsesMcpTool, Tag("mcp")],
+        Annotated[OpenResponsesImageGenerationTool, Tag("image_generation")],
+        Annotated[OpenResponsesLocalShellTool, Tag("local_shell")],
+        Annotated[OpenResponsesFunctionShellTool, Tag("shell")],
+        Annotated[OpenResponsesApplyPatchTool, Tag("apply_patch")],
+        Annotated[OpenResponsesCustomTool, Tag("custom")],
     ],
     Discriminator(lambda m: get_discriminator(m, "type", "type")),
 ]
@@ -443,6 +497,10 @@ class OpenResponsesRequestPluginWebTypedDict(TypedDict):
     search_prompt: NotRequired[str]
     engine: NotRequired[WebSearchEngine]
     r"""The search engine to use for web search."""
+    include_domains: NotRequired[List[str]]
+    r"""A list of domains to restrict web search results to. Supports wildcards (e.g. \"*.substack.com\") and path filtering (e.g. \"openai.com/blog\")."""
+    exclude_domains: NotRequired[List[str]]
+    r"""A list of domains to exclude from web search results. Supports wildcards (e.g. \"*.substack.com\") and path filtering (e.g. \"openai.com/blog\")."""
 
 
 class OpenResponsesRequestPluginWeb(BaseModel):
@@ -459,6 +517,12 @@ class OpenResponsesRequestPluginWeb(BaseModel):
         Optional[WebSearchEngine], PlainValidator(validate_open_enum(False))
     ] = None
     r"""The search engine to use for web search."""
+
+    include_domains: Optional[List[str]] = None
+    r"""A list of domains to restrict web search results to. Supports wildcards (e.g. \"*.substack.com\") and path filtering (e.g. \"openai.com/blog\")."""
+
+    exclude_domains: Optional[List[str]] = None
+    r"""A list of domains to exclude from web search results. Supports wildcards (e.g. \"*.substack.com\") and path filtering (e.g. \"openai.com/blog\")."""
 
 
 OpenResponsesRequestIDModeration = Literal["moderation",]
@@ -557,7 +621,7 @@ class OpenResponsesRequestTrace(BaseModel):
 class OpenResponsesRequestTypedDict(TypedDict):
     r"""Request schema for Responses endpoint"""
 
-    input: NotRequired[OpenResponsesInputTypedDict]
+    input: NotRequired[OpenResponsesInputUnionTypedDict]
     r"""Input for a response request - can be a string or array of items"""
     instructions: NotRequired[Nullable[str]]
     metadata: NotRequired[Nullable[Dict[str, str]]]
@@ -608,7 +672,7 @@ class OpenResponsesRequestTypedDict(TypedDict):
 class OpenResponsesRequest(BaseModel):
     r"""Request schema for Responses endpoint"""
 
-    input: Optional[OpenResponsesInput] = None
+    input: Optional[OpenResponsesInputUnion] = None
     r"""Input for a response request - can be a string or array of items"""
 
     instructions: OptionalNullable[str] = UNSET

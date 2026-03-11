@@ -21,6 +21,39 @@ from .openairesponsestoolchoice_union import (
     OpenAIResponsesToolChoiceUnionTypedDict,
 )
 from .openairesponsestruncation import OpenAIResponsesTruncation
+from .openresponsesapplypatchtool import (
+    OpenResponsesApplyPatchTool,
+    OpenResponsesApplyPatchToolTypedDict,
+)
+from .openresponsescodeinterpretertool import (
+    OpenResponsesCodeInterpreterTool,
+    OpenResponsesCodeInterpreterToolTypedDict,
+)
+from .openresponsescomputertool import (
+    OpenResponsesComputerTool,
+    OpenResponsesComputerToolTypedDict,
+)
+from .openresponsescustomtool import (
+    OpenResponsesCustomTool,
+    OpenResponsesCustomToolTypedDict,
+)
+from .openresponsesfilesearchtool import (
+    OpenResponsesFileSearchTool,
+    OpenResponsesFileSearchToolTypedDict,
+)
+from .openresponsesfunctionshelltool import (
+    OpenResponsesFunctionShellTool,
+    OpenResponsesFunctionShellToolTypedDict,
+)
+from .openresponsesimagegenerationtool import (
+    OpenResponsesImageGenerationTool,
+    OpenResponsesImageGenerationToolTypedDict,
+)
+from .openresponseslocalshelltool import (
+    OpenResponsesLocalShellTool,
+    OpenResponsesLocalShellToolTypedDict,
+)
+from .openresponsesmcptool import OpenResponsesMcpTool, OpenResponsesMcpToolTypedDict
 from .openresponsesusage import OpenResponsesUsage, OpenResponsesUsageTypedDict
 from .openresponseswebsearch20250826tool import (
     OpenResponsesWebSearch20250826Tool,
@@ -118,11 +151,20 @@ class OpenResponsesNonStreamingResponseToolFunction(BaseModel):
 OpenResponsesNonStreamingResponseToolUnionTypedDict = TypeAliasType(
     "OpenResponsesNonStreamingResponseToolUnionTypedDict",
     Union[
+        OpenResponsesApplyPatchToolTypedDict,
+        OpenResponsesFunctionShellToolTypedDict,
+        OpenResponsesLocalShellToolTypedDict,
+        OpenResponsesCodeInterpreterToolTypedDict,
         OpenResponsesWebSearchPreviewToolTypedDict,
         OpenResponsesWebSearchPreview20250311ToolTypedDict,
-        OpenResponsesWebSearchToolTypedDict,
+        OpenResponsesComputerToolTypedDict,
         OpenResponsesWebSearch20250826ToolTypedDict,
+        OpenResponsesWebSearchToolTypedDict,
+        OpenResponsesCustomToolTypedDict,
         OpenResponsesNonStreamingResponseToolFunctionTypedDict,
+        OpenResponsesFileSearchToolTypedDict,
+        OpenResponsesMcpToolTypedDict,
+        OpenResponsesImageGenerationToolTypedDict,
     ],
 )
 
@@ -137,6 +179,15 @@ OpenResponsesNonStreamingResponseToolUnion = Annotated[
         ],
         Annotated[OpenResponsesWebSearchTool, Tag("web_search")],
         Annotated[OpenResponsesWebSearch20250826Tool, Tag("web_search_2025_08_26")],
+        Annotated[OpenResponsesFileSearchTool, Tag("file_search")],
+        Annotated[OpenResponsesComputerTool, Tag("computer_use_preview")],
+        Annotated[OpenResponsesCodeInterpreterTool, Tag("code_interpreter")],
+        Annotated[OpenResponsesMcpTool, Tag("mcp")],
+        Annotated[OpenResponsesImageGenerationTool, Tag("image_generation")],
+        Annotated[OpenResponsesLocalShellTool, Tag("local_shell")],
+        Annotated[OpenResponsesFunctionShellTool, Tag("shell")],
+        Annotated[OpenResponsesApplyPatchTool, Tag("apply_patch")],
+        Annotated[OpenResponsesCustomTool, Tag("custom")],
     ],
     Discriminator(lambda m: get_discriminator(m, "type", "type")),
 ]

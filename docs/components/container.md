@@ -1,0 +1,17 @@
+# Container
+
+
+## Supported Types
+
+### `str`
+
+```python
+value: str = /* values here */
+```
+
+### `components.ContainerAuto`
+
+```python
+value: components.ContainerAuto = /* values here */
+```
+

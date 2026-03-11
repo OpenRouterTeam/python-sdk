@@ -29,3 +29,9 @@ value: components.ChatMessageContentItemAudio = /* values here */
 value: components.ChatMessageContentItem1 = /* values here */
 ```
 
+### `components.ChatMessageContentItemFile`
+
+```python
+value: components.ChatMessageContentItemFile = /* values here */
+```
+

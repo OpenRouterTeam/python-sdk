@@ -21,8 +21,12 @@ class GetGenerationGlobalsTypedDict(TypedDict):
     This is used to track API usage per application.
 
     """
-    x_title: NotRequired[str]
+    x_open_router_title: NotRequired[str]
     r"""The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+    """
+    x_open_router_categories: NotRequired[str]
+    r"""Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
     """
 
@@ -38,12 +42,21 @@ class GetGenerationGlobals(BaseModel):
 
     """
 
-    x_title: Annotated[
+    x_open_router_title: Annotated[
         Optional[str],
-        pydantic.Field(alias="X-Title"),
+        pydantic.Field(alias="X-OpenRouter-Title"),
         FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
     ] = None
     r"""The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+    """
+
+    x_open_router_categories: Annotated[
+        Optional[str],
+        pydantic.Field(alias="X-OpenRouter-Categories"),
+        FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
+    ] = None
+    r"""Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
     """
 
@@ -55,8 +68,12 @@ class GetGenerationRequestTypedDict(TypedDict):
     This is used to track API usage per application.
 
     """
-    x_title: NotRequired[str]
+    x_open_router_title: NotRequired[str]
     r"""The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+    """
+    x_open_router_categories: NotRequired[str]
+    r"""Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
     """
 
@@ -76,12 +93,21 @@ class GetGenerationRequest(BaseModel):
 
     """
 
-    x_title: Annotated[
+    x_open_router_title: Annotated[
         Optional[str],
-        pydantic.Field(alias="X-Title"),
+        pydantic.Field(alias="X-OpenRouter-Title"),
         FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
     ] = None
     r"""The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+    """
+
+    x_open_router_categories: Annotated[
+        Optional[str],
+        pydantic.Field(alias="X-OpenRouter-Categories"),
+        FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
+    ] = None
+    r"""Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
     """
 
@@ -126,6 +152,7 @@ ProviderName = Union[
         "Together 2",
         "Ubicloud",
         "01.AI",
+        "Akash",
         "AI21",
         "AionLabs",
         "Alibaba",
@@ -341,6 +368,10 @@ class GetGenerationDataTypedDict(TypedDict):
     r"""Router used for the request (e.g., openrouter/auto)"""
     provider_responses: Nullable[List[ProviderResponseTypedDict]]
     r"""List of provider responses for this generation, including fallback attempts"""
+    user_agent: Nullable[str]
+    r"""User-Agent header from the request"""
+    http_referer: Nullable[str]
+    r"""Referer header from the request"""
 
 
 class GetGenerationData(BaseModel):
@@ -448,6 +479,12 @@ class GetGenerationData(BaseModel):
     provider_responses: Nullable[List[ProviderResponse]]
     r"""List of provider responses for this generation, including fallback attempts"""
 
+    user_agent: Nullable[str]
+    r"""User-Agent header from the request"""
+
+    http_referer: Nullable[str]
+    r"""Referer header from the request"""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = []
@@ -479,6 +516,8 @@ class GetGenerationData(BaseModel):
             "api_type",
             "router",
             "provider_responses",
+            "user_agent",
+            "http_referer",
         ]
         null_default_fields = []
 

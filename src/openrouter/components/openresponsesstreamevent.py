@@ -29,7 +29,6 @@ from .openresponsesimagegencallpartialimage import (
     OpenResponsesImageGenCallPartialImage,
     OpenResponsesImageGenCallPartialImageTypedDict,
 )
-from .openresponseslogprobs import OpenResponsesLogProbs, OpenResponsesLogProbsTypedDict
 from .openresponsesnonstreamingresponse import (
     OpenResponsesNonStreamingResponse,
     OpenResponsesNonStreamingResponseTypedDict,
@@ -60,9 +59,10 @@ from .responseoutputtext import ResponseOutputText, ResponseOutputTextTypedDict
 from .responsesoutputitem import ResponsesOutputItem, ResponsesOutputItemTypedDict
 from openrouter.types import BaseModel
 from openrouter.utils import get_discriminator
+import pydantic
 from pydantic import Discriminator, Tag
-from typing import List, Literal, Union
-from typing_extensions import Annotated, TypeAliasType, TypedDict
+from typing import List, Literal, Optional, Union
+from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
 TypeResponseReasoningSummaryPartDone = Literal["response.reasoning_summary_part.done",]
@@ -254,6 +254,45 @@ class OpenResponsesStreamEventResponseRefusalDelta(BaseModel):
 TypeResponseOutputTextDone = Literal["response.output_text.done",]
 
 
+class OpenResponsesStreamEventTopLogprob2TypedDict(TypedDict):
+    r"""Alternative token with its log probability"""
+
+    token: NotRequired[str]
+    logprob: NotRequired[float]
+    bytes_: NotRequired[List[float]]
+
+
+class OpenResponsesStreamEventTopLogprob2(BaseModel):
+    r"""Alternative token with its log probability"""
+
+    token: Optional[str] = None
+
+    logprob: Optional[float] = None
+
+    bytes_: Annotated[Optional[List[float]], pydantic.Field(alias="bytes")] = None
+
+
+class OpenResponsesStreamEventLogprob2TypedDict(TypedDict):
+    r"""Log probability information for a token"""
+
+    logprob: float
+    token: str
+    top_logprobs: NotRequired[List[OpenResponsesStreamEventTopLogprob2TypedDict]]
+    bytes_: NotRequired[List[float]]
+
+
+class OpenResponsesStreamEventLogprob2(BaseModel):
+    r"""Log probability information for a token"""
+
+    logprob: float
+
+    token: str
+
+    top_logprobs: Optional[List[OpenResponsesStreamEventTopLogprob2]] = None
+
+    bytes_: Annotated[Optional[List[float]], pydantic.Field(alias="bytes")] = None
+
+
 class OpenResponsesStreamEventResponseOutputTextDoneTypedDict(TypedDict):
     r"""Event emitted when text streaming is complete"""
 
@@ -263,7 +302,7 @@ class OpenResponsesStreamEventResponseOutputTextDoneTypedDict(TypedDict):
     content_index: float
     text: str
     sequence_number: float
-    logprobs: List[OpenResponsesLogProbsTypedDict]
+    logprobs: List[OpenResponsesStreamEventLogprob2TypedDict]
 
 
 class OpenResponsesStreamEventResponseOutputTextDone(BaseModel):
@@ -281,17 +320,56 @@ class OpenResponsesStreamEventResponseOutputTextDone(BaseModel):
 
     sequence_number: float
 
-    logprobs: List[OpenResponsesLogProbs]
+    logprobs: List[OpenResponsesStreamEventLogprob2]
 
 
 TypeResponseOutputTextDelta = Literal["response.output_text.delta",]
+
+
+class OpenResponsesStreamEventTopLogprob1TypedDict(TypedDict):
+    r"""Alternative token with its log probability"""
+
+    token: NotRequired[str]
+    logprob: NotRequired[float]
+    bytes_: NotRequired[List[float]]
+
+
+class OpenResponsesStreamEventTopLogprob1(BaseModel):
+    r"""Alternative token with its log probability"""
+
+    token: Optional[str] = None
+
+    logprob: Optional[float] = None
+
+    bytes_: Annotated[Optional[List[float]], pydantic.Field(alias="bytes")] = None
+
+
+class OpenResponsesStreamEventLogprob1TypedDict(TypedDict):
+    r"""Log probability information for a token"""
+
+    logprob: float
+    token: str
+    top_logprobs: NotRequired[List[OpenResponsesStreamEventTopLogprob1TypedDict]]
+    bytes_: NotRequired[List[float]]
+
+
+class OpenResponsesStreamEventLogprob1(BaseModel):
+    r"""Log probability information for a token"""
+
+    logprob: float
+
+    token: str
+
+    top_logprobs: Optional[List[OpenResponsesStreamEventTopLogprob1]] = None
+
+    bytes_: Annotated[Optional[List[float]], pydantic.Field(alias="bytes")] = None
 
 
 class OpenResponsesStreamEventResponseOutputTextDeltaTypedDict(TypedDict):
     r"""Event emitted when a text delta is streamed"""
 
     type: TypeResponseOutputTextDelta
-    logprobs: List[OpenResponsesLogProbsTypedDict]
+    logprobs: List[OpenResponsesStreamEventLogprob1TypedDict]
     output_index: float
     item_id: str
     content_index: float
@@ -304,7 +382,7 @@ class OpenResponsesStreamEventResponseOutputTextDelta(BaseModel):
 
     type: TypeResponseOutputTextDelta
 
-    logprobs: List[OpenResponsesLogProbs]
+    logprobs: List[OpenResponsesStreamEventLogprob1]
 
     output_index: float
 

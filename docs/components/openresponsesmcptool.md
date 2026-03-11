@@ -1,0 +1,18 @@
+# OpenResponsesMcpTool
+
+MCP (Model Context Protocol) tool configuration
+
+
+## Fields
+
+| Field                                                                            | Type                                                                             | Required                                                                         | Description                                                                      |
+| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `type`                                                                           | [components.OpenResponsesMcpToolType](../components/openresponsesmcptooltype.md) | :heavy_check_mark:                                                               | N/A                                                                              |
+| `server_label`                                                                   | *str*                                                                            | :heavy_check_mark:                                                               | N/A                                                                              |
+| `allowed_tools`                                                                  | *OptionalNullable[Any]*                                                          | :heavy_minus_sign:                                                               | N/A                                                                              |
+| `authorization`                                                                  | *Optional[str]*                                                                  | :heavy_minus_sign:                                                               | N/A                                                                              |
+| `connector_id`                                                                   | [Optional[components.ConnectorID]](../components/connectorid.md)                 | :heavy_minus_sign:                                                               | N/A                                                                              |
+| `headers`                                                                        | Dict[str, *str*]                                                                 | :heavy_minus_sign:                                                               | N/A                                                                              |
+| `require_approval`                                                               | *OptionalNullable[Any]*                                                          | :heavy_minus_sign:                                                               | N/A                                                                              |
+| `server_description`                                                             | *Optional[str]*                                                                  | :heavy_minus_sign:                                                               | N/A                                                                              |
+| `server_url`                                                                     | *Optional[str]*                                                                  | :heavy_minus_sign:                                                               | N/A                                                                              |
