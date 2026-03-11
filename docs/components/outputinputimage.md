@@ -1,0 +1,12 @@
+# OutputInputImage
+
+Image input content item
+
+
+## Fields
+
+| Field                                                                                                      | Type                                                                                                       | Required                                                                                                   | Description                                                                                                |
+| ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| `type`                                                                                                     | [components.OutputType](../components/outputtype.md)                                                       | :heavy_check_mark:                                                                                         | N/A                                                                                                        |
+| `detail`                                                                                                   | [components.OpenResponsesFunctionCallOutputDetail](../components/openresponsesfunctioncalloutputdetail.md) | :heavy_check_mark:                                                                                         | N/A                                                                                                        |
+| `image_url`                                                                                                | *OptionalNullable[str]*                                                                                    | :heavy_minus_sign:                                                                                         | N/A                                                                                                        |

@@ -7,6 +7,7 @@ from typing import Literal, Union
 
 ProviderName = Union[
     Literal[
+        "Akash",
         "AI21",
         "AionLabs",
         "Alibaba",

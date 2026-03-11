@@ -5,6 +5,10 @@ from .assistantmessageimages import (
     AssistantMessageImages,
     AssistantMessageImagesTypedDict,
 )
+from .chatcompletionaudiooutput import (
+    ChatCompletionAudioOutput,
+    ChatCompletionAudioOutputTypedDict,
+)
 from .chatmessagecontentitem import (
     ChatMessageContentItem,
     ChatMessageContentItemTypedDict,
@@ -57,6 +61,8 @@ class AssistantMessageTypedDict(TypedDict):
     r"""Reasoning details for extended thinking models"""
     images: NotRequired[List[AssistantMessageImagesTypedDict]]
     r"""Generated images from image generation models"""
+    audio: NotRequired[ChatCompletionAudioOutputTypedDict]
+    r"""Audio output data or reference"""
 
 
 class AssistantMessage(BaseModel):
@@ -85,6 +91,9 @@ class AssistantMessage(BaseModel):
     images: Optional[List[AssistantMessageImages]] = None
     r"""Generated images from image generation models"""
 
+    audio: Optional[ChatCompletionAudioOutput] = None
+    r"""Audio output data or reference"""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = [
@@ -95,6 +104,7 @@ class AssistantMessage(BaseModel):
             "reasoning",
             "reasoning_details",
             "images",
+            "audio",
         ]
         nullable_fields = ["content", "refusal", "reasoning"]
         null_default_fields = []

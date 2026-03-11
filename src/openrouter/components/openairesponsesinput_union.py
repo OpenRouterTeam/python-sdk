@@ -86,10 +86,41 @@ class OpenAIResponsesInputFunctionCall(BaseModel):
 OpenAIResponsesInputTypeFunctionCallOutput = Literal["function_call_output",]
 
 
+OpenAIResponsesInputOutput1TypedDict = TypeAliasType(
+    "OpenAIResponsesInputOutput1TypedDict",
+    Union[
+        ResponseInputTextTypedDict,
+        ResponseInputImageTypedDict,
+        ResponseInputFileTypedDict,
+    ],
+)
+
+
+OpenAIResponsesInputOutput1 = Annotated[
+    Union[
+        Annotated[ResponseInputText, Tag("input_text")],
+        Annotated[ResponseInputImage, Tag("input_image")],
+        Annotated[ResponseInputFile, Tag("input_file")],
+    ],
+    Discriminator(lambda m: get_discriminator(m, "type", "type")),
+]
+
+
+OpenAIResponsesInputOutput2TypedDict = TypeAliasType(
+    "OpenAIResponsesInputOutput2TypedDict",
+    Union[str, List[OpenAIResponsesInputOutput1TypedDict]],
+)
+
+
+OpenAIResponsesInputOutput2 = TypeAliasType(
+    "OpenAIResponsesInputOutput2", Union[str, List[OpenAIResponsesInputOutput1]]
+)
+
+
 class OpenAIResponsesInputFunctionCallOutputTypedDict(TypedDict):
     type: OpenAIResponsesInputTypeFunctionCallOutput
     call_id: str
-    output: str
+    output: OpenAIResponsesInputOutput2TypedDict
     id: NotRequired[Nullable[str]]
     status: NotRequired[Nullable[ToolCallStatus]]
 
@@ -99,7 +130,7 @@ class OpenAIResponsesInputFunctionCallOutput(BaseModel):
 
     call_id: str
 
-    output: str
+    output: OpenAIResponsesInputOutput2
 
     id: OptionalNullable[str] = UNSET
 
@@ -279,10 +310,33 @@ OpenAIResponsesInputContent2 = TypeAliasType(
 )
 
 
+OpenAIResponsesInputPhaseFinalAnswer = Literal["final_answer",]
+
+
+OpenAIResponsesInputPhaseCommentary = Literal["commentary",]
+
+
+OpenAIResponsesInputPhaseUnionTypedDict = TypeAliasType(
+    "OpenAIResponsesInputPhaseUnionTypedDict",
+    Union[
+        OpenAIResponsesInputPhaseCommentary, OpenAIResponsesInputPhaseFinalAnswer, Any
+    ],
+)
+
+
+OpenAIResponsesInputPhaseUnion = TypeAliasType(
+    "OpenAIResponsesInputPhaseUnion",
+    Union[
+        OpenAIResponsesInputPhaseCommentary, OpenAIResponsesInputPhaseFinalAnswer, Any
+    ],
+)
+
+
 class OpenAIResponsesInputMessage1TypedDict(TypedDict):
     role: OpenAIResponsesInputRoleUnion1TypedDict
     content: OpenAIResponsesInputContent2TypedDict
     type: NotRequired[OpenAIResponsesInputTypeMessage1]
+    phase: NotRequired[Nullable[OpenAIResponsesInputPhaseUnionTypedDict]]
 
 
 class OpenAIResponsesInputMessage1(BaseModel):
@@ -292,6 +346,38 @@ class OpenAIResponsesInputMessage1(BaseModel):
 
     type: Optional[OpenAIResponsesInputTypeMessage1] = None
 
+    phase: OptionalNullable[OpenAIResponsesInputPhaseUnion] = UNSET
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = ["type", "phase"]
+        nullable_fields = ["phase"]
+        null_default_fields = []
+
+        serialized = handler(self)
+
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+            serialized.pop(k, None)
+
+            optional_nullable = k in optional_fields and k in nullable_fields
+            is_set = (
+                self.__pydantic_fields_set__.intersection({n})
+                or k in null_default_fields
+            )  # pylint: disable=no-member
+
+            if val is not None and val != UNSET_SENTINEL:
+                m[k] = val
+            elif val != UNSET_SENTINEL and (
+                not k in optional_fields or (optional_nullable and is_set)
+            ):
+                m[k] = val
+
+        return m
+
 
 OpenAIResponsesInputUnion1TypedDict = TypeAliasType(
     "OpenAIResponsesInputUnion1TypedDict",
@@ -300,8 +386,8 @@ OpenAIResponsesInputUnion1TypedDict = TypeAliasType(
         OpenAIResponsesInputMessage2TypedDict,
         OutputItemImageGenerationCallTypedDict,
         OpenAIResponsesInputFunctionCallOutputTypedDict,
-        OutputMessageTypedDict,
         OpenAIResponsesInputFunctionCallTypedDict,
+        OutputMessageTypedDict,
     ],
 )
 
@@ -313,8 +399,8 @@ OpenAIResponsesInputUnion1 = TypeAliasType(
         OpenAIResponsesInputMessage2,
         OutputItemImageGenerationCall,
         OpenAIResponsesInputFunctionCallOutput,
-        OutputMessage,
         OpenAIResponsesInputFunctionCall,
+        OutputMessage,
     ],
 )
 

@@ -5,10 +5,16 @@ from .chatmessagetokenlogprob import (
     ChatMessageTokenLogprob,
     ChatMessageTokenLogprobTypedDict,
 )
-from openrouter.types import BaseModel, Nullable, UNSET_SENTINEL
+from openrouter.types import (
+    BaseModel,
+    Nullable,
+    OptionalNullable,
+    UNSET,
+    UNSET_SENTINEL,
+)
 from pydantic import model_serializer
 from typing import List
-from typing_extensions import TypedDict
+from typing_extensions import NotRequired, TypedDict
 
 
 class ChatMessageTokenLogprobsTypedDict(TypedDict):
@@ -16,7 +22,7 @@ class ChatMessageTokenLogprobsTypedDict(TypedDict):
 
     content: Nullable[List[ChatMessageTokenLogprobTypedDict]]
     r"""Log probabilities for content tokens"""
-    refusal: Nullable[List[ChatMessageTokenLogprobTypedDict]]
+    refusal: NotRequired[Nullable[List[ChatMessageTokenLogprobTypedDict]]]
     r"""Log probabilities for refusal tokens"""
 
 
@@ -26,12 +32,12 @@ class ChatMessageTokenLogprobs(BaseModel):
     content: Nullable[List[ChatMessageTokenLogprob]]
     r"""Log probabilities for content tokens"""
 
-    refusal: Nullable[List[ChatMessageTokenLogprob]]
+    refusal: OptionalNullable[List[ChatMessageTokenLogprob]] = UNSET
     r"""Log probabilities for refusal tokens"""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = []
+        optional_fields = ["refusal"]
         nullable_fields = ["content", "refusal"]
         null_default_fields = []
 

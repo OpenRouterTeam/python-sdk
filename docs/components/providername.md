@@ -5,6 +5,7 @@
 
 | Name                | Value               |
 | ------------------- | ------------------- |
+| `AKASH`             | Akash               |
 | `AI21`              | AI21                |
 | `AION_LABS`         | AionLabs            |
 | `ALIBABA`           | Alibaba             |
