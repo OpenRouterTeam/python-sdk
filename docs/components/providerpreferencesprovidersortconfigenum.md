@@ -8,3 +8,4 @@
 | `PRICE`      | price        |
 | `THROUGHPUT` | throughput   |
 | `LATENCY`    | latency      |
+| `EXACTO`     | exacto       |

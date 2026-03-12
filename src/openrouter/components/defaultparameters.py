@@ -17,7 +17,10 @@ class DefaultParametersTypedDict(TypedDict):
 
     temperature: NotRequired[Nullable[float]]
     top_p: NotRequired[Nullable[float]]
+    top_k: NotRequired[Nullable[int]]
     frequency_penalty: NotRequired[Nullable[float]]
+    presence_penalty: NotRequired[Nullable[float]]
+    repetition_penalty: NotRequired[Nullable[float]]
 
 
 class DefaultParameters(BaseModel):
@@ -27,12 +30,32 @@ class DefaultParameters(BaseModel):
 
     top_p: OptionalNullable[float] = UNSET
 
+    top_k: OptionalNullable[int] = UNSET
+
     frequency_penalty: OptionalNullable[float] = UNSET
+
+    presence_penalty: OptionalNullable[float] = UNSET
+
+    repetition_penalty: OptionalNullable[float] = UNSET
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["temperature", "top_p", "frequency_penalty"]
-        nullable_fields = ["temperature", "top_p", "frequency_penalty"]
+        optional_fields = [
+            "temperature",
+            "top_p",
+            "top_k",
+            "frequency_penalty",
+            "presence_penalty",
+            "repetition_penalty",
+        ]
+        nullable_fields = [
+            "temperature",
+            "top_p",
+            "top_k",
+            "frequency_penalty",
+            "presence_penalty",
+            "repetition_penalty",
+        ]
         null_default_fields = []
 
         serialized = handler(self)

@@ -2,25 +2,146 @@
 
 from __future__ import annotations
 from .websearchstatus import WebSearchStatus
-from openrouter.types import BaseModel
-from openrouter.utils import validate_open_enum
+from openrouter.types import (
+    BaseModel,
+    Nullable,
+    OptionalNullable,
+    UNSET,
+    UNSET_SENTINEL,
+)
+from openrouter.utils import get_discriminator, validate_open_enum
+from pydantic import Discriminator, Tag, model_serializer
 from pydantic.functional_validators import PlainValidator
-from typing import Literal
-from typing_extensions import Annotated, TypedDict
+from typing import List, Literal, Optional, Union
+from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
-ResponsesWebSearchCallOutputType = Literal["web_search_call",]
+TypeWebSearchCall = Literal["web_search_call",]
+
+
+TypeFindInPage = Literal["find_in_page",]
+
+
+class ActionFindInPageTypedDict(TypedDict):
+    type: TypeFindInPage
+    pattern: str
+    url: str
+
+
+class ActionFindInPage(BaseModel):
+    type: TypeFindInPage
+
+    pattern: str
+
+    url: str
+
+
+TypeOpenPage = Literal["open_page",]
+
+
+class ActionOpenPageTypedDict(TypedDict):
+    type: TypeOpenPage
+    url: NotRequired[Nullable[str]]
+
+
+class ActionOpenPage(BaseModel):
+    type: TypeOpenPage
+
+    url: OptionalNullable[str] = UNSET
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = ["url"]
+        nullable_fields = ["url"]
+        null_default_fields = []
+
+        serialized = handler(self)
+
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+            serialized.pop(k, None)
+
+            optional_nullable = k in optional_fields and k in nullable_fields
+            is_set = (
+                self.__pydantic_fields_set__.intersection({n})
+                or k in null_default_fields
+            )  # pylint: disable=no-member
+
+            if val is not None and val != UNSET_SENTINEL:
+                m[k] = val
+            elif val != UNSET_SENTINEL and (
+                not k in optional_fields or (optional_nullable and is_set)
+            ):
+                m[k] = val
+
+        return m
+
+
+TypeSearch = Literal["search",]
+
+
+TypeURL = Literal["url",]
+
+
+class SourceTypedDict(TypedDict):
+    type: TypeURL
+    url: str
+
+
+class Source(BaseModel):
+    type: TypeURL
+
+    url: str
+
+
+class ActionSearchTypedDict(TypedDict):
+    type: TypeSearch
+    query: str
+    queries: NotRequired[List[str]]
+    sources: NotRequired[List[SourceTypedDict]]
+
+
+class ActionSearch(BaseModel):
+    type: TypeSearch
+
+    query: str
+
+    queries: Optional[List[str]] = None
+
+    sources: Optional[List[Source]] = None
+
+
+ActionTypedDict = TypeAliasType(
+    "ActionTypedDict",
+    Union[ActionOpenPageTypedDict, ActionFindInPageTypedDict, ActionSearchTypedDict],
+)
+
+
+Action = Annotated[
+    Union[
+        Annotated[ActionSearch, Tag("search")],
+        Annotated[ActionOpenPage, Tag("open_page")],
+        Annotated[ActionFindInPage, Tag("find_in_page")],
+    ],
+    Discriminator(lambda m: get_discriminator(m, "type", "type")),
+]
 
 
 class ResponsesWebSearchCallOutputTypedDict(TypedDict):
-    type: ResponsesWebSearchCallOutputType
+    type: TypeWebSearchCall
     id: str
+    action: ActionTypedDict
     status: WebSearchStatus
 
 
 class ResponsesWebSearchCallOutput(BaseModel):
-    type: ResponsesWebSearchCallOutputType
+    type: TypeWebSearchCall
 
     id: str
+
+    action: Action
 
     status: Annotated[WebSearchStatus, PlainValidator(validate_open_enum(False))]

@@ -22,7 +22,8 @@ class Chat(BaseSDK):
         *,
         messages: Union[List[components.Message], List[components.MessageTypedDict]],
         http_referer: Optional[str] = None,
-        x_title: Optional[str] = None,
+        x_open_router_title: Optional[str] = None,
+        x_open_router_categories: Optional[str] = None,
         provider: OptionalNullable[
             Union[
                 components.ChatGenerationParamsProvider,
@@ -89,6 +90,9 @@ class Chat(BaseSDK):
             ]
         ] = None,
         modalities: Optional[List[components.Modality]] = None,
+        cache_control: Optional[
+            Union[components.CacheControl, components.CacheControlTypedDict]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -102,7 +106,9 @@ class Chat(BaseSDK):
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
-        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+        :param x_open_router_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+        :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
         :param provider: When multiple model providers are available, optionally indicate your routing preference.
         :param plugins: Plugins you want to enable for this request, including their settings.
@@ -116,7 +122,7 @@ class Chat(BaseSDK):
         :param logprobs: Return log probabilities
         :param top_logprobs: Number of top log probabilities to return (0-20)
         :param max_completion_tokens: Maximum tokens in completion
-        :param max_tokens: Maximum tokens (deprecated, use max_completion_tokens)
+        :param max_tokens: Maximum tokens (deprecated, use max_completion_tokens). Note: some providers enforce a minimum of 16.
         :param metadata: Key-value pairs for additional object information (max 16 pairs, 64 char keys, 512 char values)
         :param presence_penalty: Presence penalty (-2.0 to 2.0)
         :param reasoning: Configuration options for reasoning models
@@ -132,7 +138,8 @@ class Chat(BaseSDK):
         :param top_p: Nucleus sampling parameter (0-1)
         :param debug: Debug options for inspecting request transformations (streaming only)
         :param image_config: Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/guides/overview/multimodal/image-generation for more details.
-        :param modalities: Output modalities for the response. Supported values are \"text\" and \"image\".
+        :param modalities: Output modalities for the response. Supported values are \"text\", \"image\", and \"audio\".
+        :param cache_control: Enable automatic prompt caching. When set, the system automatically applies cache breakpoints to the last cacheable block in the request. Currently supported for Anthropic Claude models.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -146,7 +153,8 @@ class Chat(BaseSDK):
         *,
         messages: Union[List[components.Message], List[components.MessageTypedDict]],
         http_referer: Optional[str] = None,
-        x_title: Optional[str] = None,
+        x_open_router_title: Optional[str] = None,
+        x_open_router_categories: Optional[str] = None,
         provider: OptionalNullable[
             Union[
                 components.ChatGenerationParamsProvider,
@@ -213,6 +221,9 @@ class Chat(BaseSDK):
             ]
         ] = None,
         modalities: Optional[List[components.Modality]] = None,
+        cache_control: Optional[
+            Union[components.CacheControl, components.CacheControlTypedDict]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -226,7 +237,9 @@ class Chat(BaseSDK):
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
-        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+        :param x_open_router_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+        :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
         :param provider: When multiple model providers are available, optionally indicate your routing preference.
         :param plugins: Plugins you want to enable for this request, including their settings.
@@ -240,7 +253,7 @@ class Chat(BaseSDK):
         :param logprobs: Return log probabilities
         :param top_logprobs: Number of top log probabilities to return (0-20)
         :param max_completion_tokens: Maximum tokens in completion
-        :param max_tokens: Maximum tokens (deprecated, use max_completion_tokens)
+        :param max_tokens: Maximum tokens (deprecated, use max_completion_tokens). Note: some providers enforce a minimum of 16.
         :param metadata: Key-value pairs for additional object information (max 16 pairs, 64 char keys, 512 char values)
         :param presence_penalty: Presence penalty (-2.0 to 2.0)
         :param reasoning: Configuration options for reasoning models
@@ -256,7 +269,8 @@ class Chat(BaseSDK):
         :param top_p: Nucleus sampling parameter (0-1)
         :param debug: Debug options for inspecting request transformations (streaming only)
         :param image_config: Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/guides/overview/multimodal/image-generation for more details.
-        :param modalities: Output modalities for the response. Supported values are \"text\" and \"image\".
+        :param modalities: Output modalities for the response. Supported values are \"text\", \"image\", and \"audio\".
+        :param cache_control: Enable automatic prompt caching. When set, the system automatically applies cache breakpoints to the last cacheable block in the request. Currently supported for Anthropic Claude models.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -269,7 +283,8 @@ class Chat(BaseSDK):
         *,
         messages: Union[List[components.Message], List[components.MessageTypedDict]],
         http_referer: Optional[str] = None,
-        x_title: Optional[str] = None,
+        x_open_router_title: Optional[str] = None,
+        x_open_router_categories: Optional[str] = None,
         provider: OptionalNullable[
             Union[
                 components.ChatGenerationParamsProvider,
@@ -336,6 +351,9 @@ class Chat(BaseSDK):
             ]
         ] = None,
         modalities: Optional[List[components.Modality]] = None,
+        cache_control: Optional[
+            Union[components.CacheControl, components.CacheControlTypedDict]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -349,7 +367,9 @@ class Chat(BaseSDK):
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
-        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+        :param x_open_router_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+        :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
         :param provider: When multiple model providers are available, optionally indicate your routing preference.
         :param plugins: Plugins you want to enable for this request, including their settings.
@@ -363,7 +383,7 @@ class Chat(BaseSDK):
         :param logprobs: Return log probabilities
         :param top_logprobs: Number of top log probabilities to return (0-20)
         :param max_completion_tokens: Maximum tokens in completion
-        :param max_tokens: Maximum tokens (deprecated, use max_completion_tokens)
+        :param max_tokens: Maximum tokens (deprecated, use max_completion_tokens). Note: some providers enforce a minimum of 16.
         :param metadata: Key-value pairs for additional object information (max 16 pairs, 64 char keys, 512 char values)
         :param presence_penalty: Presence penalty (-2.0 to 2.0)
         :param reasoning: Configuration options for reasoning models
@@ -379,7 +399,8 @@ class Chat(BaseSDK):
         :param top_p: Nucleus sampling parameter (0-1)
         :param debug: Debug options for inspecting request transformations (streaming only)
         :param image_config: Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/guides/overview/multimodal/image-generation for more details.
-        :param modalities: Output modalities for the response. Supported values are \"text\" and \"image\".
+        :param modalities: Output modalities for the response. Supported values are \"text\", \"image\", and \"audio\".
+        :param cache_control: Enable automatic prompt caching. When set, the system automatically applies cache breakpoints to the last cacheable block in the request. Currently supported for Anthropic Claude models.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -398,7 +419,8 @@ class Chat(BaseSDK):
 
         request = operations.SendChatCompletionRequestRequest(
             http_referer=http_referer,
-            x_title=x_title,
+            x_open_router_title=x_open_router_title,
+            x_open_router_categories=x_open_router_categories,
             chat_generation_params=components.ChatGenerationParams(
                 provider=utils.get_pydantic_model(
                     provider, OptionalNullable[components.ChatGenerationParamsProvider]
@@ -448,6 +470,9 @@ class Chat(BaseSDK):
                 ),
                 image_config=image_config,
                 modalities=modalities,
+                cache_control=utils.get_pydantic_model(
+                    cache_control, Optional[components.CacheControl]
+                ),
             ),
         )
 
@@ -465,7 +490,8 @@ class Chat(BaseSDK):
             http_headers=http_headers,
             _globals=operations.SendChatCompletionRequestGlobals(
                 http_referer=self.sdk_configuration.globals.http_referer,
-                x_title=self.sdk_configuration.globals.x_title,
+                x_open_router_title=self.sdk_configuration.globals.x_open_router_title,
+                x_open_router_categories=self.sdk_configuration.globals.x_open_router_categories,
             ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
@@ -654,7 +680,8 @@ class Chat(BaseSDK):
         *,
         messages: Union[List[components.Message], List[components.MessageTypedDict]],
         http_referer: Optional[str] = None,
-        x_title: Optional[str] = None,
+        x_open_router_title: Optional[str] = None,
+        x_open_router_categories: Optional[str] = None,
         provider: OptionalNullable[
             Union[
                 components.ChatGenerationParamsProvider,
@@ -721,6 +748,9 @@ class Chat(BaseSDK):
             ]
         ] = None,
         modalities: Optional[List[components.Modality]] = None,
+        cache_control: Optional[
+            Union[components.CacheControl, components.CacheControlTypedDict]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -734,7 +764,9 @@ class Chat(BaseSDK):
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
-        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+        :param x_open_router_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+        :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
         :param provider: When multiple model providers are available, optionally indicate your routing preference.
         :param plugins: Plugins you want to enable for this request, including their settings.
@@ -748,7 +780,7 @@ class Chat(BaseSDK):
         :param logprobs: Return log probabilities
         :param top_logprobs: Number of top log probabilities to return (0-20)
         :param max_completion_tokens: Maximum tokens in completion
-        :param max_tokens: Maximum tokens (deprecated, use max_completion_tokens)
+        :param max_tokens: Maximum tokens (deprecated, use max_completion_tokens). Note: some providers enforce a minimum of 16.
         :param metadata: Key-value pairs for additional object information (max 16 pairs, 64 char keys, 512 char values)
         :param presence_penalty: Presence penalty (-2.0 to 2.0)
         :param reasoning: Configuration options for reasoning models
@@ -764,7 +796,8 @@ class Chat(BaseSDK):
         :param top_p: Nucleus sampling parameter (0-1)
         :param debug: Debug options for inspecting request transformations (streaming only)
         :param image_config: Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/guides/overview/multimodal/image-generation for more details.
-        :param modalities: Output modalities for the response. Supported values are \"text\" and \"image\".
+        :param modalities: Output modalities for the response. Supported values are \"text\", \"image\", and \"audio\".
+        :param cache_control: Enable automatic prompt caching. When set, the system automatically applies cache breakpoints to the last cacheable block in the request. Currently supported for Anthropic Claude models.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -778,7 +811,8 @@ class Chat(BaseSDK):
         *,
         messages: Union[List[components.Message], List[components.MessageTypedDict]],
         http_referer: Optional[str] = None,
-        x_title: Optional[str] = None,
+        x_open_router_title: Optional[str] = None,
+        x_open_router_categories: Optional[str] = None,
         provider: OptionalNullable[
             Union[
                 components.ChatGenerationParamsProvider,
@@ -845,6 +879,9 @@ class Chat(BaseSDK):
             ]
         ] = None,
         modalities: Optional[List[components.Modality]] = None,
+        cache_control: Optional[
+            Union[components.CacheControl, components.CacheControlTypedDict]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -858,7 +895,9 @@ class Chat(BaseSDK):
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
-        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+        :param x_open_router_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+        :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
         :param provider: When multiple model providers are available, optionally indicate your routing preference.
         :param plugins: Plugins you want to enable for this request, including their settings.
@@ -872,7 +911,7 @@ class Chat(BaseSDK):
         :param logprobs: Return log probabilities
         :param top_logprobs: Number of top log probabilities to return (0-20)
         :param max_completion_tokens: Maximum tokens in completion
-        :param max_tokens: Maximum tokens (deprecated, use max_completion_tokens)
+        :param max_tokens: Maximum tokens (deprecated, use max_completion_tokens). Note: some providers enforce a minimum of 16.
         :param metadata: Key-value pairs for additional object information (max 16 pairs, 64 char keys, 512 char values)
         :param presence_penalty: Presence penalty (-2.0 to 2.0)
         :param reasoning: Configuration options for reasoning models
@@ -888,7 +927,8 @@ class Chat(BaseSDK):
         :param top_p: Nucleus sampling parameter (0-1)
         :param debug: Debug options for inspecting request transformations (streaming only)
         :param image_config: Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/guides/overview/multimodal/image-generation for more details.
-        :param modalities: Output modalities for the response. Supported values are \"text\" and \"image\".
+        :param modalities: Output modalities for the response. Supported values are \"text\", \"image\", and \"audio\".
+        :param cache_control: Enable automatic prompt caching. When set, the system automatically applies cache breakpoints to the last cacheable block in the request. Currently supported for Anthropic Claude models.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -901,7 +941,8 @@ class Chat(BaseSDK):
         *,
         messages: Union[List[components.Message], List[components.MessageTypedDict]],
         http_referer: Optional[str] = None,
-        x_title: Optional[str] = None,
+        x_open_router_title: Optional[str] = None,
+        x_open_router_categories: Optional[str] = None,
         provider: OptionalNullable[
             Union[
                 components.ChatGenerationParamsProvider,
@@ -968,6 +1009,9 @@ class Chat(BaseSDK):
             ]
         ] = None,
         modalities: Optional[List[components.Modality]] = None,
+        cache_control: Optional[
+            Union[components.CacheControl, components.CacheControlTypedDict]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -981,7 +1025,9 @@ class Chat(BaseSDK):
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
-        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+        :param x_open_router_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+        :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
         :param provider: When multiple model providers are available, optionally indicate your routing preference.
         :param plugins: Plugins you want to enable for this request, including their settings.
@@ -995,7 +1041,7 @@ class Chat(BaseSDK):
         :param logprobs: Return log probabilities
         :param top_logprobs: Number of top log probabilities to return (0-20)
         :param max_completion_tokens: Maximum tokens in completion
-        :param max_tokens: Maximum tokens (deprecated, use max_completion_tokens)
+        :param max_tokens: Maximum tokens (deprecated, use max_completion_tokens). Note: some providers enforce a minimum of 16.
         :param metadata: Key-value pairs for additional object information (max 16 pairs, 64 char keys, 512 char values)
         :param presence_penalty: Presence penalty (-2.0 to 2.0)
         :param reasoning: Configuration options for reasoning models
@@ -1011,7 +1057,8 @@ class Chat(BaseSDK):
         :param top_p: Nucleus sampling parameter (0-1)
         :param debug: Debug options for inspecting request transformations (streaming only)
         :param image_config: Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/guides/overview/multimodal/image-generation for more details.
-        :param modalities: Output modalities for the response. Supported values are \"text\" and \"image\".
+        :param modalities: Output modalities for the response. Supported values are \"text\", \"image\", and \"audio\".
+        :param cache_control: Enable automatic prompt caching. When set, the system automatically applies cache breakpoints to the last cacheable block in the request. Currently supported for Anthropic Claude models.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1030,7 +1077,8 @@ class Chat(BaseSDK):
 
         request = operations.SendChatCompletionRequestRequest(
             http_referer=http_referer,
-            x_title=x_title,
+            x_open_router_title=x_open_router_title,
+            x_open_router_categories=x_open_router_categories,
             chat_generation_params=components.ChatGenerationParams(
                 provider=utils.get_pydantic_model(
                     provider, OptionalNullable[components.ChatGenerationParamsProvider]
@@ -1080,6 +1128,9 @@ class Chat(BaseSDK):
                 ),
                 image_config=image_config,
                 modalities=modalities,
+                cache_control=utils.get_pydantic_model(
+                    cache_control, Optional[components.CacheControl]
+                ),
             ),
         )
 
@@ -1097,7 +1148,8 @@ class Chat(BaseSDK):
             http_headers=http_headers,
             _globals=operations.SendChatCompletionRequestGlobals(
                 http_referer=self.sdk_configuration.globals.http_referer,
-                x_title=self.sdk_configuration.globals.x_title,
+                x_open_router_title=self.sdk_configuration.globals.x_open_router_title,
+                x_open_router_categories=self.sdk_configuration.globals.x_open_router_categories,
             ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(

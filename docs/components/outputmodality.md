@@ -9,3 +9,4 @@
 | `IMAGE`      | image        |
 | `EMBEDDINGS` | embeddings   |
 | `AUDIO`      | audio        |
+| `VIDEO`      | video        |

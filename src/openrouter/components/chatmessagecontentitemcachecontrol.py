@@ -11,7 +11,7 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 ChatMessageContentItemCacheControlType = Literal["ephemeral",]
 
 
-TTL = Union[
+ChatMessageContentItemCacheControlTTL = Union[
     Literal[
         "5m",
         "1h",
@@ -24,7 +24,7 @@ class ChatMessageContentItemCacheControlTypedDict(TypedDict):
     r"""Cache control for the content part"""
 
     type: ChatMessageContentItemCacheControlType
-    ttl: NotRequired[TTL]
+    ttl: NotRequired[ChatMessageContentItemCacheControlTTL]
 
 
 class ChatMessageContentItemCacheControl(BaseModel):
@@ -32,4 +32,7 @@ class ChatMessageContentItemCacheControl(BaseModel):
 
     type: ChatMessageContentItemCacheControlType
 
-    ttl: Annotated[Optional[TTL], PlainValidator(validate_open_enum(False))] = None
+    ttl: Annotated[
+        Optional[ChatMessageContentItemCacheControlTTL],
+        PlainValidator(validate_open_enum(False)),
+    ] = None

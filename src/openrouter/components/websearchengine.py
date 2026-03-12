@@ -9,6 +9,8 @@ WebSearchEngine = Union[
     Literal[
         "native",
         "exa",
+        "firecrawl",
+        "parallel",
     ],
     UnrecognizedStr,
 ]

@@ -1,0 +1,25 @@
+# OpenResponsesEasyInputMessagePhaseUnion
+
+The phase of an assistant message. Use `commentary` for an intermediate assistant message and `final_answer` for the final assistant message. For follow-up requests with models like `gpt-5.3-codex` and later, preserve and resend phase on all assistant messages. Omitting it can degrade performance. Not used for user messages.
+
+
+## Supported Types
+
+### `components.OpenResponsesEasyInputMessagePhaseCommentary`
+
+```python
+value: components.OpenResponsesEasyInputMessagePhaseCommentary = /* values here */
+```
+
+### `components.OpenResponsesEasyInputMessagePhaseFinalAnswer`
+
+```python
+value: components.OpenResponsesEasyInputMessagePhaseFinalAnswer = /* values here */
+```
+
+### `Any`
+
+```python
+value: Any = /* values here */
+```
+

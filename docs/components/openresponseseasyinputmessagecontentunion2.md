@@ -15,3 +15,9 @@ value: List[components.OpenResponsesEasyInputMessageContentUnion1] = /* values h
 value: str = /* values here */
 ```
 
+### `Any`
+
+```python
+value: Any = /* values here */
+```
+

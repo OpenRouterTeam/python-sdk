@@ -1,0 +1,13 @@
+# OpenResponsesStreamEventLogprob2
+
+Log probability information for a token
+
+
+## Fields
+
+| Field                                                                                                        | Type                                                                                                         | Required                                                                                                     | Description                                                                                                  |
+| ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ |
+| `logprob`                                                                                                    | *float*                                                                                                      | :heavy_check_mark:                                                                                           | N/A                                                                                                          |
+| `token`                                                                                                      | *str*                                                                                                        | :heavy_check_mark:                                                                                           | N/A                                                                                                          |
+| `top_logprobs`                                                                                               | List[[components.OpenResponsesStreamEventTopLogprob2](../components/openresponsesstreameventtoplogprob2.md)] | :heavy_minus_sign:                                                                                           | N/A                                                                                                          |
+| `bytes_`                                                                                                     | List[*float*]                                                                                                | :heavy_minus_sign:                                                                                           | N/A                                                                                                          |

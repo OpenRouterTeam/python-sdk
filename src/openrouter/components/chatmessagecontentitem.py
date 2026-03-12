@@ -5,6 +5,10 @@ from .chatmessagecontentitemaudio import (
     ChatMessageContentItemAudio,
     ChatMessageContentItemAudioTypedDict,
 )
+from .chatmessagecontentitemfile import (
+    ChatMessageContentItemFile,
+    ChatMessageContentItemFileTypedDict,
+)
 from .chatmessagecontentitemimage import (
     ChatMessageContentItemImage,
     ChatMessageContentItemImageTypedDict,
@@ -49,6 +53,7 @@ ChatMessageContentItemTypedDict = TypeAliasType(
     Union[
         ChatMessageContentItemImageTypedDict,
         ChatMessageContentItemAudioTypedDict,
+        ChatMessageContentItemFileTypedDict,
         ChatMessageContentItemTextTypedDict,
         ChatMessageContentItem1TypedDict,
     ],
@@ -61,6 +66,7 @@ ChatMessageContentItem = TypeAliasType(
     Union[
         ChatMessageContentItemImage,
         ChatMessageContentItemAudio,
+        ChatMessageContentItemFile,
         ChatMessageContentItemText,
         ChatMessageContentItem1,
     ],

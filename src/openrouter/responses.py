@@ -23,9 +23,13 @@ class Responses(BaseSDK):
         self,
         *,
         http_referer: Optional[str] = None,
-        x_title: Optional[str] = None,
+        x_open_router_title: Optional[str] = None,
+        x_open_router_categories: Optional[str] = None,
         input: Optional[
-            Union[components.OpenResponsesInput, components.OpenResponsesInputTypedDict]
+            Union[
+                components.OpenResponsesInputUnion,
+                components.OpenResponsesInputUnionTypedDict,
+            ]
         ] = None,
         instructions: OptionalNullable[str] = UNSET,
         metadata: OptionalNullable[Dict[str, str]] = UNSET,
@@ -117,7 +121,9 @@ class Responses(BaseSDK):
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
-        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+        :param x_open_router_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+        :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
         :param input: Input for a response request - can be a string or array of items
         :param instructions:
@@ -165,9 +171,13 @@ class Responses(BaseSDK):
         self,
         *,
         http_referer: Optional[str] = None,
-        x_title: Optional[str] = None,
+        x_open_router_title: Optional[str] = None,
+        x_open_router_categories: Optional[str] = None,
         input: Optional[
-            Union[components.OpenResponsesInput, components.OpenResponsesInputTypedDict]
+            Union[
+                components.OpenResponsesInputUnion,
+                components.OpenResponsesInputUnionTypedDict,
+            ]
         ] = None,
         instructions: OptionalNullable[str] = UNSET,
         metadata: OptionalNullable[Dict[str, str]] = UNSET,
@@ -259,7 +269,9 @@ class Responses(BaseSDK):
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
-        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+        :param x_open_router_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+        :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
         :param input: Input for a response request - can be a string or array of items
         :param instructions:
@@ -306,9 +318,13 @@ class Responses(BaseSDK):
         self,
         *,
         http_referer: Optional[str] = None,
-        x_title: Optional[str] = None,
+        x_open_router_title: Optional[str] = None,
+        x_open_router_categories: Optional[str] = None,
         input: Optional[
-            Union[components.OpenResponsesInput, components.OpenResponsesInputTypedDict]
+            Union[
+                components.OpenResponsesInputUnion,
+                components.OpenResponsesInputUnionTypedDict,
+            ]
         ] = None,
         instructions: OptionalNullable[str] = UNSET,
         metadata: OptionalNullable[Dict[str, str]] = UNSET,
@@ -400,7 +416,9 @@ class Responses(BaseSDK):
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
-        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+        :param x_open_router_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+        :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
         :param input: Input for a response request - can be a string or array of items
         :param instructions:
@@ -454,10 +472,11 @@ class Responses(BaseSDK):
 
         request = operations.CreateResponsesRequest(
             http_referer=http_referer,
-            x_title=x_title,
+            x_open_router_title=x_open_router_title,
+            x_open_router_categories=x_open_router_categories,
             open_responses_request=components.OpenResponsesRequest(
                 input=utils.get_pydantic_model(
-                    input, Optional[components.OpenResponsesInput]
+                    input, Optional[components.OpenResponsesInputUnion]
                 ),
                 instructions=instructions,
                 metadata=metadata,
@@ -525,7 +544,8 @@ class Responses(BaseSDK):
             http_headers=http_headers,
             _globals=operations.CreateResponsesGlobals(
                 http_referer=self.sdk_configuration.globals.http_referer,
-                x_title=self.sdk_configuration.globals.x_title,
+                x_open_router_title=self.sdk_configuration.globals.x_open_router_title,
+                x_open_router_categories=self.sdk_configuration.globals.x_open_router_categories,
             ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
@@ -713,9 +733,13 @@ class Responses(BaseSDK):
         self,
         *,
         http_referer: Optional[str] = None,
-        x_title: Optional[str] = None,
+        x_open_router_title: Optional[str] = None,
+        x_open_router_categories: Optional[str] = None,
         input: Optional[
-            Union[components.OpenResponsesInput, components.OpenResponsesInputTypedDict]
+            Union[
+                components.OpenResponsesInputUnion,
+                components.OpenResponsesInputUnionTypedDict,
+            ]
         ] = None,
         instructions: OptionalNullable[str] = UNSET,
         metadata: OptionalNullable[Dict[str, str]] = UNSET,
@@ -807,7 +831,9 @@ class Responses(BaseSDK):
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
-        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+        :param x_open_router_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+        :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
         :param input: Input for a response request - can be a string or array of items
         :param instructions:
@@ -855,9 +881,13 @@ class Responses(BaseSDK):
         self,
         *,
         http_referer: Optional[str] = None,
-        x_title: Optional[str] = None,
+        x_open_router_title: Optional[str] = None,
+        x_open_router_categories: Optional[str] = None,
         input: Optional[
-            Union[components.OpenResponsesInput, components.OpenResponsesInputTypedDict]
+            Union[
+                components.OpenResponsesInputUnion,
+                components.OpenResponsesInputUnionTypedDict,
+            ]
         ] = None,
         instructions: OptionalNullable[str] = UNSET,
         metadata: OptionalNullable[Dict[str, str]] = UNSET,
@@ -949,7 +979,9 @@ class Responses(BaseSDK):
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
-        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+        :param x_open_router_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+        :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
         :param input: Input for a response request - can be a string or array of items
         :param instructions:
@@ -996,9 +1028,13 @@ class Responses(BaseSDK):
         self,
         *,
         http_referer: Optional[str] = None,
-        x_title: Optional[str] = None,
+        x_open_router_title: Optional[str] = None,
+        x_open_router_categories: Optional[str] = None,
         input: Optional[
-            Union[components.OpenResponsesInput, components.OpenResponsesInputTypedDict]
+            Union[
+                components.OpenResponsesInputUnion,
+                components.OpenResponsesInputUnionTypedDict,
+            ]
         ] = None,
         instructions: OptionalNullable[str] = UNSET,
         metadata: OptionalNullable[Dict[str, str]] = UNSET,
@@ -1090,7 +1126,9 @@ class Responses(BaseSDK):
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
-        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+        :param x_open_router_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+        :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
         :param input: Input for a response request - can be a string or array of items
         :param instructions:
@@ -1144,10 +1182,11 @@ class Responses(BaseSDK):
 
         request = operations.CreateResponsesRequest(
             http_referer=http_referer,
-            x_title=x_title,
+            x_open_router_title=x_open_router_title,
+            x_open_router_categories=x_open_router_categories,
             open_responses_request=components.OpenResponsesRequest(
                 input=utils.get_pydantic_model(
-                    input, Optional[components.OpenResponsesInput]
+                    input, Optional[components.OpenResponsesInputUnion]
                 ),
                 instructions=instructions,
                 metadata=metadata,
@@ -1215,7 +1254,8 @@ class Responses(BaseSDK):
             http_headers=http_headers,
             _globals=operations.CreateResponsesGlobals(
                 http_referer=self.sdk_configuration.globals.http_referer,
-                x_title=self.sdk_configuration.globals.x_title,
+                x_open_router_title=self.sdk_configuration.globals.x_open_router_title,
+                x_open_router_categories=self.sdk_configuration.globals.x_open_router_categories,
             ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(

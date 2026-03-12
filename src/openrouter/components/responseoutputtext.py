@@ -28,14 +28,14 @@ class ResponseOutputTextTopLogprob(BaseModel):
     logprob: float
 
 
-class LogprobTypedDict(TypedDict):
+class ResponseOutputTextLogprobTypedDict(TypedDict):
     token: str
     bytes_: List[float]
     logprob: float
     top_logprobs: List[ResponseOutputTextTopLogprobTypedDict]
 
 
-class Logprob(BaseModel):
+class ResponseOutputTextLogprob(BaseModel):
     token: str
 
     bytes_: Annotated[List[float], pydantic.Field(alias="bytes")]
@@ -49,7 +49,7 @@ class ResponseOutputTextTypedDict(TypedDict):
     type: ResponseOutputTextType
     text: str
     annotations: NotRequired[List[OpenAIResponsesAnnotationTypedDict]]
-    logprobs: NotRequired[List[LogprobTypedDict]]
+    logprobs: NotRequired[List[ResponseOutputTextLogprobTypedDict]]
 
 
 class ResponseOutputText(BaseModel):
@@ -59,4 +59,4 @@ class ResponseOutputText(BaseModel):
 
     annotations: Optional[List[OpenAIResponsesAnnotation]] = None
 
-    logprobs: Optional[List[Logprob]] = None
+    logprobs: Optional[List[ResponseOutputTextLogprob]] = None

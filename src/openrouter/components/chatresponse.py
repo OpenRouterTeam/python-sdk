@@ -6,13 +6,7 @@ from .chatgenerationtokenusage import (
     ChatGenerationTokenUsageTypedDict,
 )
 from .chatresponsechoice import ChatResponseChoice, ChatResponseChoiceTypedDict
-from openrouter.types import (
-    BaseModel,
-    Nullable,
-    OptionalNullable,
-    UNSET,
-    UNSET_SENTINEL,
-)
+from openrouter.types import BaseModel, Nullable, UNSET_SENTINEL
 from pydantic import model_serializer
 from typing import List, Literal, Optional
 from typing_extensions import NotRequired, TypedDict
@@ -33,7 +27,7 @@ class ChatResponseTypedDict(TypedDict):
     model: str
     r"""Model used for completion"""
     object: ChatResponseObject
-    system_fingerprint: NotRequired[Nullable[str]]
+    system_fingerprint: Nullable[str]
     r"""System fingerprint"""
     usage: NotRequired[ChatGenerationTokenUsageTypedDict]
     r"""Token usage statistics"""
@@ -56,7 +50,7 @@ class ChatResponse(BaseModel):
 
     object: ChatResponseObject
 
-    system_fingerprint: OptionalNullable[str] = UNSET
+    system_fingerprint: Nullable[str]
     r"""System fingerprint"""
 
     usage: Optional[ChatGenerationTokenUsage] = None
@@ -64,7 +58,7 @@ class ChatResponse(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["system_fingerprint", "usage"]
+        optional_fields = ["usage"]
         nullable_fields = ["system_fingerprint"]
         null_default_fields = []
 
