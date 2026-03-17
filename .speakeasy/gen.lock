@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: cfd52247-6a25-4c6d-bbce-fe6fce0cd69d
 management:
-  docChecksum: ba9a1c22e9c7d5926d71b1e78e16b482
+  docChecksum: fff8b3c28663df858db3a222b1f62d40
   docVersion: 1.0.0
   speakeasyVersion: 1.666.0
   generationVersion: 2.768.0
-  releaseVersion: 0.7.11
-  configChecksum: c2013e97e44ae07d6749ebe461b47299
+  releaseVersion: 0.9.0
+  configChecksum: e6f61aeb6e1587fb2f6f67ef3b5217c5
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
@@ -50,21 +50,31 @@ generatedFiles:
   - .gitattributes
   - .vscode/settings.json
   - USAGE.md
+  - docs/components/action.md
+  - docs/components/actionfindinpage.md
+  - docs/components/actionopenpage.md
+  - docs/components/actionsearch.md
   - docs/components/activityitem.md
+  - docs/components/allowedtools.md
+  - docs/components/always.md
   - docs/components/architecture.md
   - docs/components/assistantmessage.md
   - docs/components/assistantmessagecontent.md
   - docs/components/assistantmessageimages.md
   - docs/components/assistantmessageimagesimageurl.md
   - docs/components/assistantmessagerole.md
+  - docs/components/background.md
   - docs/components/badgatewayresponseerrordata.md
   - docs/components/badrequestresponseerrordata.md
   - docs/components/by.md
+  - docs/components/cachecontrol.md
   - docs/components/chainid.md
+  - docs/components/chatcompletionaudiooutput.md
   - docs/components/chatcompletionfinishreason.md
   - docs/components/chatgenerationparams.md
   - docs/components/chatgenerationparamsby.md
   - docs/components/chatgenerationparamsidautorouter.md
+  - docs/components/chatgenerationparamsidcontextcompression.md
   - docs/components/chatgenerationparamsidfileparser.md
   - docs/components/chatgenerationparamsidmoderation.md
   - docs/components/chatgenerationparamsidresponsehealing.md
@@ -76,6 +86,7 @@ generatedFiles:
   - docs/components/chatgenerationparamsorder.md
   - docs/components/chatgenerationparamspartition.md
   - docs/components/chatgenerationparamspluginautorouter.md
+  - docs/components/chatgenerationparamsplugincontextcompression.md
   - docs/components/chatgenerationparamspluginfileparser.md
   - docs/components/chatgenerationparamspluginmoderation.md
   - docs/components/chatgenerationparamspluginresponsehealing.md
@@ -89,6 +100,8 @@ generatedFiles:
   - docs/components/chatgenerationparamssortenum.md
   - docs/components/chatgenerationparamssortunion.md
   - docs/components/chatgenerationparamstrace.md
+  - docs/components/chatgenerationparamsttl.md
+  - docs/components/chatgenerationparamstype.md
   - docs/components/chatgenerationtokenusage.md
   - docs/components/chatmessagecontentitem.md
   - docs/components/chatmessagecontentitem1.md
@@ -96,7 +109,10 @@ generatedFiles:
   - docs/components/chatmessagecontentitemaudioinputaudio.md
   - docs/components/chatmessagecontentitemaudiotype.md
   - docs/components/chatmessagecontentitemcachecontrol.md
+  - docs/components/chatmessagecontentitemcachecontrolttl.md
   - docs/components/chatmessagecontentitemcachecontroltype.md
+  - docs/components/chatmessagecontentitemfile.md
+  - docs/components/chatmessagecontentitemfiletype.md
   - docs/components/chatmessagecontentitemimage.md
   - docs/components/chatmessagecontentitemimagedetail.md
   - docs/components/chatmessagecontentitemimageimageurl.md
@@ -127,10 +143,21 @@ generatedFiles:
   - docs/components/chatstreamoptions.md
   - docs/components/code.md
   - docs/components/completiontokensdetails.md
+  - docs/components/compoundfilter.md
+  - docs/components/compoundfiltertype.md
+  - docs/components/conflictresponseerrordata.md
+  - docs/components/connectorid.md
+  - docs/components/container.md
+  - docs/components/containerauto.md
+  - docs/components/containertype.md
+  - docs/components/contextcompressionengine.md
   - docs/components/costdetails.md
   - docs/components/createchargerequest.md
   - docs/components/data.md
   - docs/components/datacollection.md
+  - docs/components/datetimeservertool.md
+  - docs/components/datetimeservertoolparameters.md
+  - docs/components/datetimeservertooltype.md
   - docs/components/debugoptions.md
   - docs/components/defaultparameters.md
   - docs/components/developermessage.md
@@ -139,31 +166,45 @@ generatedFiles:
   - docs/components/edgenetworktimeoutresponseerrordata.md
   - docs/components/effort.md
   - docs/components/endpointstatus.md
+  - docs/components/environment.md
   - docs/components/error.md
+  - docs/components/file.md
   - docs/components/filecitation.md
   - docs/components/filecitationtype.md
   - docs/components/filepath.md
   - docs/components/filepathtype.md
+  - docs/components/filters.md
+  - docs/components/filterstype.md
   - docs/components/forbiddenresponseerrordata.md
+  - docs/components/format_.md
+  - docs/components/formatgrammar.md
+  - docs/components/formattext.md
+  - docs/components/formattypegrammar.md
+  - docs/components/formattypetext.md
   - docs/components/imagegenerationstatus.md
+  - docs/components/inputfidelity.md
+  - docs/components/inputimagemask.md
   - docs/components/inputmodality.md
   - docs/components/inputtokensdetails.md
   - docs/components/instructtype.md
   - docs/components/internalserverresponseerrordata.md
   - docs/components/jsonschemaconfig.md
   - docs/components/listendpointsresponse.md
-  - docs/components/logprob.md
+  - docs/components/memorylimit.md
   - docs/components/message.md
   - docs/components/modality.md
   - docs/components/model.md
   - docs/components/modelarchitecture.md
   - docs/components/modelarchitectureinstructtype.md
+  - docs/components/modelenum.md
   - docs/components/modelgroup.md
   - docs/components/modelscountresponse.md
   - docs/components/modelslistresponse.md
+  - docs/components/moderation.md
   - docs/components/namedtoolchoice.md
   - docs/components/namedtoolchoicefunction.md
   - docs/components/namedtoolchoicetype.md
+  - docs/components/never.md
   - docs/components/notfoundresponseerrordata.md
   - docs/components/openairesponsesannotation.md
   - docs/components/openairesponsesincludable.md
@@ -175,6 +216,11 @@ generatedFiles:
   - docs/components/openairesponsesinputfunctioncalloutput.md
   - docs/components/openairesponsesinputmessage1.md
   - docs/components/openairesponsesinputmessage2.md
+  - docs/components/openairesponsesinputoutput1.md
+  - docs/components/openairesponsesinputoutput2.md
+  - docs/components/openairesponsesinputphasecommentary.md
+  - docs/components/openairesponsesinputphasefinalanswer.md
+  - docs/components/openairesponsesinputphaseunion.md
   - docs/components/openairesponsesinputroleassistant.md
   - docs/components/openairesponsesinputroledeveloper1.md
   - docs/components/openairesponsesinputroledeveloper2.md
@@ -207,12 +253,21 @@ generatedFiles:
   - docs/components/openairesponsestoolchoicetypewebsearchpreview20250311.md
   - docs/components/openairesponsestoolchoiceunion.md
   - docs/components/openairesponsestruncation.md
+  - docs/components/openresponsesapplypatchtool.md
+  - docs/components/openresponsesapplypatchtooltype.md
+  - docs/components/openresponsescodeinterpretertool.md
+  - docs/components/openresponsescomputertool.md
+  - docs/components/openresponsescomputertooltype.md
+  - docs/components/openresponsescustomtool.md
   - docs/components/openresponseseasyinputmessage.md
   - docs/components/openresponseseasyinputmessagecontentinputimage.md
   - docs/components/openresponseseasyinputmessagecontenttype.md
   - docs/components/openresponseseasyinputmessagecontentunion1.md
   - docs/components/openresponseseasyinputmessagecontentunion2.md
   - docs/components/openresponseseasyinputmessagedetail.md
+  - docs/components/openresponseseasyinputmessagephasecommentary.md
+  - docs/components/openresponseseasyinputmessagephasefinalanswer.md
+  - docs/components/openresponseseasyinputmessagephaseunion.md
   - docs/components/openresponseseasyinputmessageroleassistant.md
   - docs/components/openresponseseasyinputmessageroledeveloper.md
   - docs/components/openresponseseasyinputmessagerolesystem.md
@@ -221,8 +276,15 @@ generatedFiles:
   - docs/components/openresponseseasyinputmessagetypemessage.md
   - docs/components/openresponseserrorevent.md
   - docs/components/openresponseserroreventtype.md
+  - docs/components/openresponsesfilesearchtool.md
+  - docs/components/openresponsesfilesearchtoolfilters.md
   - docs/components/openresponsesfunctioncalloutput.md
-  - docs/components/openresponsesfunctioncalloutputtype.md
+  - docs/components/openresponsesfunctioncalloutputdetail.md
+  - docs/components/openresponsesfunctioncalloutputoutputunion1.md
+  - docs/components/openresponsesfunctioncalloutputoutputunion2.md
+  - docs/components/openresponsesfunctioncalloutputtypefunctioncalloutput.md
+  - docs/components/openresponsesfunctionshelltool.md
+  - docs/components/openresponsesfunctionshelltooltype.md
   - docs/components/openresponsesfunctiontoolcall.md
   - docs/components/openresponsesfunctiontoolcalltype.md
   - docs/components/openresponsesimagegencallcompleted.md
@@ -233,8 +295,12 @@ generatedFiles:
   - docs/components/openresponsesimagegencallinprogresstype.md
   - docs/components/openresponsesimagegencallpartialimage.md
   - docs/components/openresponsesimagegencallpartialimagetype.md
-  - docs/components/openresponsesinput.md
-  - docs/components/openresponsesinput1.md
+  - docs/components/openresponsesimagegenerationtool.md
+  - docs/components/openresponsesimagegenerationtooltype.md
+  - docs/components/openresponsesinputcontent1.md
+  - docs/components/openresponsesinputcontent2.md
+  - docs/components/openresponsesinputformat.md
+  - docs/components/openresponsesinputmessage.md
   - docs/components/openresponsesinputmessageitem.md
   - docs/components/openresponsesinputmessageitemcontentinputimage.md
   - docs/components/openresponsesinputmessageitemcontenttype.md
@@ -245,7 +311,27 @@ generatedFiles:
   - docs/components/openresponsesinputmessageitemroleunion.md
   - docs/components/openresponsesinputmessageitemroleuser.md
   - docs/components/openresponsesinputmessageitemtypemessage.md
-  - docs/components/openresponseslogprobs.md
+  - docs/components/openresponsesinputphasecommentary.md
+  - docs/components/openresponsesinputphasefinalanswer.md
+  - docs/components/openresponsesinputphaseunion.md
+  - docs/components/openresponsesinputreasoning.md
+  - docs/components/openresponsesinputrole.md
+  - docs/components/openresponsesinputstatuscompleted1.md
+  - docs/components/openresponsesinputstatuscompleted2.md
+  - docs/components/openresponsesinputstatusincomplete1.md
+  - docs/components/openresponsesinputstatusincomplete2.md
+  - docs/components/openresponsesinputstatusinprogress1.md
+  - docs/components/openresponsesinputstatusinprogress2.md
+  - docs/components/openresponsesinputstatusunion1.md
+  - docs/components/openresponsesinputstatusunion2.md
+  - docs/components/openresponsesinputtypemessage.md
+  - docs/components/openresponsesinputtypereasoning.md
+  - docs/components/openresponsesinputunion.md
+  - docs/components/openresponsesinputunion1.md
+  - docs/components/openresponseslocalshelltool.md
+  - docs/components/openresponseslocalshelltooltype.md
+  - docs/components/openresponsesmcptool.md
+  - docs/components/openresponsesmcptooltype.md
   - docs/components/openresponsesnonstreamingresponse.md
   - docs/components/openresponsesnonstreamingresponseobject.md
   - docs/components/openresponsesnonstreamingresponsetoolfunction.md
@@ -271,6 +357,7 @@ generatedFiles:
   - docs/components/openresponsesreasoningtype.md
   - docs/components/openresponsesrequest.md
   - docs/components/openresponsesrequestidautorouter.md
+  - docs/components/openresponsesrequestidcontextcompression.md
   - docs/components/openresponsesrequestidfileparser.md
   - docs/components/openresponsesrequestidmoderation.md
   - docs/components/openresponsesrequestidresponsehealing.md
@@ -281,6 +368,7 @@ generatedFiles:
   - docs/components/openresponsesrequestonly.md
   - docs/components/openresponsesrequestorder.md
   - docs/components/openresponsesrequestpluginautorouter.md
+  - docs/components/openresponsesrequestplugincontextcompression.md
   - docs/components/openresponsesrequestpluginfileparser.md
   - docs/components/openresponsesrequestpluginmoderation.md
   - docs/components/openresponsesrequestpluginresponsehealing.md
@@ -295,6 +383,8 @@ generatedFiles:
   - docs/components/openresponsesresponsetext.md
   - docs/components/openresponsesresponsetextverbosity.md
   - docs/components/openresponsesstreamevent.md
+  - docs/components/openresponsesstreameventlogprob1.md
+  - docs/components/openresponsesstreameventlogprob2.md
   - docs/components/openresponsesstreameventresponsecompleted.md
   - docs/components/openresponsesstreameventresponsecontentpartadded.md
   - docs/components/openresponsesstreameventresponsecontentpartdone.md
@@ -312,22 +402,40 @@ generatedFiles:
   - docs/components/openresponsesstreameventresponsereasoningsummarypartdone.md
   - docs/components/openresponsesstreameventresponserefusaldelta.md
   - docs/components/openresponsesstreameventresponserefusaldone.md
-  - docs/components/openresponsestoplogprobs.md
+  - docs/components/openresponsesstreameventtoplogprob1.md
+  - docs/components/openresponsesstreameventtoplogprob2.md
   - docs/components/openresponsesusage.md
   - docs/components/openresponseswebsearch20250826tool.md
+  - docs/components/openresponseswebsearch20250826toolengine.md
   - docs/components/openresponseswebsearch20250826toolfilters.md
   - docs/components/openresponseswebsearch20250826tooltype.md
+  - docs/components/openresponseswebsearchcallcompleted.md
+  - docs/components/openresponseswebsearchcallcompletedtype.md
+  - docs/components/openresponseswebsearchcallinprogress.md
+  - docs/components/openresponseswebsearchcallinprogresstype.md
+  - docs/components/openresponseswebsearchcallsearching.md
+  - docs/components/openresponseswebsearchcallsearchingtype.md
   - docs/components/openresponseswebsearchpreview20250311tool.md
+  - docs/components/openresponseswebsearchpreview20250311toolengine.md
+  - docs/components/openresponseswebsearchpreview20250311toolfilters.md
   - docs/components/openresponseswebsearchpreview20250311tooltype.md
   - docs/components/openresponseswebsearchpreviewtool.md
+  - docs/components/openresponseswebsearchpreviewtoolengine.md
+  - docs/components/openresponseswebsearchpreviewtoolfilters.md
   - docs/components/openresponseswebsearchpreviewtooltype.md
   - docs/components/openresponseswebsearchtool.md
+  - docs/components/openresponseswebsearchtoolengine.md
   - docs/components/openresponseswebsearchtoolfilters.md
   - docs/components/openresponseswebsearchtooltype.md
+  - docs/components/outputformat.md
+  - docs/components/outputinputimage.md
   - docs/components/outputitemimagegenerationcall.md
   - docs/components/outputitemimagegenerationcalltype.md
   - docs/components/outputmessage.md
   - docs/components/outputmessagecontent.md
+  - docs/components/outputmessagephasecommentary.md
+  - docs/components/outputmessagephasefinalanswer.md
+  - docs/components/outputmessagephaseunion.md
   - docs/components/outputmessagerole.md
   - docs/components/outputmessagestatuscompleted.md
   - docs/components/outputmessagestatusincomplete.md
@@ -336,6 +444,7 @@ generatedFiles:
   - docs/components/outputmessagetype.md
   - docs/components/outputmodality.md
   - docs/components/outputtokensdetails.md
+  - docs/components/outputtype.md
   - docs/components/parameter.md
   - docs/components/part1.md
   - docs/components/part2.md
@@ -372,7 +481,10 @@ generatedFiles:
   - docs/components/publicendpoint.md
   - docs/components/publicendpointquantization.md
   - docs/components/publicpricing.md
+  - docs/components/quality.md
   - docs/components/quantization.md
+  - docs/components/ranker.md
+  - docs/components/rankingoptions.md
   - docs/components/reason.md
   - docs/components/reasoning.md
   - docs/components/reasoningdetailencrypted.md
@@ -391,6 +503,9 @@ generatedFiles:
   - docs/components/reasoningtextcontent.md
   - docs/components/reasoningtextcontenttype.md
   - docs/components/requesttimeoutresponseerrordata.md
+  - docs/components/requireapproval.md
+  - docs/components/requireapprovalalways.md
+  - docs/components/requireapprovalnever.md
   - docs/components/responseformat.md
   - docs/components/responseformatjsonobject.md
   - docs/components/responseformatjsonobjecttype.md
@@ -417,6 +532,7 @@ generatedFiles:
   - docs/components/responseinputvideo.md
   - docs/components/responseinputvideotype.md
   - docs/components/responseoutputtext.md
+  - docs/components/responseoutputtextlogprob.md
   - docs/components/responseoutputtexttoplogprob.md
   - docs/components/responseoutputtexttype.md
   - docs/components/responseserrorfield.md
@@ -444,6 +560,9 @@ generatedFiles:
   - docs/components/responsesoutputitemreasoningtype.md
   - docs/components/responsesoutputmessage.md
   - docs/components/responsesoutputmessagecontent.md
+  - docs/components/responsesoutputmessagephasecommentary.md
+  - docs/components/responsesoutputmessagephasefinalanswer.md
+  - docs/components/responsesoutputmessagephaseunion.md
   - docs/components/responsesoutputmessagerole.md
   - docs/components/responsesoutputmessagestatuscompleted.md
   - docs/components/responsesoutputmessagestatusincomplete.md
@@ -452,8 +571,12 @@ generatedFiles:
   - docs/components/responsesoutputmessagetype.md
   - docs/components/responsesoutputmodality.md
   - docs/components/responsessearchcontextsize.md
+  - docs/components/responsesservertooloutput.md
+  - docs/components/responsesservertooloutputstatus.md
   - docs/components/responseswebsearchcalloutput.md
-  - docs/components/responseswebsearchcalloutputtype.md
+  - docs/components/responseswebsearchservertool.md
+  - docs/components/responseswebsearchservertoolparameters.md
+  - docs/components/responseswebsearchservertooltype.md
   - docs/components/responseswebsearchuserlocation.md
   - docs/components/responseswebsearchuserlocationtype.md
   - docs/components/responsetextconfig.md
@@ -461,7 +584,10 @@ generatedFiles:
   - docs/components/security.md
   - docs/components/servicetier.md
   - docs/components/serviceunavailableresponseerrordata.md
+  - docs/components/size.md
+  - docs/components/source.md
   - docs/components/stop.md
+  - docs/components/syntax.md
   - docs/components/systemmessage.md
   - docs/components/systemmessagecontent.md
   - docs/components/systemmessagerole.md
@@ -473,6 +599,7 @@ generatedFiles:
   - docs/components/toolchoiceoptionrequired.md
   - docs/components/tooldefinitionjson.md
   - docs/components/tooldefinitionjsonfunction.md
+  - docs/components/tooldefinitionjsonfunctionfunction.md
   - docs/components/tooldefinitionjsontype.md
   - docs/components/toolresponsemessage.md
   - docs/components/toolresponsemessagecontent.md
@@ -480,8 +607,12 @@ generatedFiles:
   - docs/components/toomanyrequestsresponseerrordata.md
   - docs/components/topproviderinfo.md
   - docs/components/truncation.md
-  - docs/components/ttl.md
   - docs/components/type.md
+  - docs/components/typecodeinterpreter.md
+  - docs/components/typecustom.md
+  - docs/components/typefilesearch.md
+  - docs/components/typefindinpage.md
+  - docs/components/typeopenpage.md
   - docs/components/typeresponsecompleted.md
   - docs/components/typeresponsecontentpartadded.md
   - docs/components/typeresponsecontentpartdone.md
@@ -499,6 +630,9 @@ generatedFiles:
   - docs/components/typeresponsereasoningsummarypartdone.md
   - docs/components/typeresponserefusaldelta.md
   - docs/components/typeresponserefusaldone.md
+  - docs/components/typesearch.md
+  - docs/components/typeurl.md
+  - docs/components/typewebsearchcall.md
   - docs/components/unauthorizedresponseerrordata.md
   - docs/components/unprocessableentityresponseerrordata.md
   - docs/components/urlcitation.md
@@ -506,14 +640,35 @@ generatedFiles:
   - docs/components/usermessage.md
   - docs/components/usermessagecontent.md
   - docs/components/usermessagerole.md
+  - docs/components/value1.md
+  - docs/components/value2.md
   - docs/components/variables.md
   - docs/components/videoinput.md
   - docs/components/websearchengine.md
   - docs/components/websearchpreviewtooluserlocation.md
   - docs/components/websearchpreviewtooluserlocationtype.md
+  - docs/components/websearchservertool.md
+  - docs/components/websearchservertoolengine.md
+  - docs/components/websearchservertoolparameters.md
+  - docs/components/websearchservertoolparameterstype.md
+  - docs/components/websearchservertoolsearchcontextsize.md
+  - docs/components/websearchservertooltypeopenrouterwebsearch.md
+  - docs/components/websearchservertooluserlocation.md
+  - docs/components/websearchshorthand.md
+  - docs/components/websearchshorthandengine.md
+  - docs/components/websearchshorthandparameters.md
+  - docs/components/websearchshorthandparametersengine.md
+  - docs/components/websearchshorthandparameterssearchcontextsize.md
+  - docs/components/websearchshorthandparameterstype.md
+  - docs/components/websearchshorthandparametersuserlocation.md
+  - docs/components/websearchshorthandsearchcontextsize.md
+  - docs/components/websearchshorthandtype.md
+  - docs/components/websearchshorthandtypeapproximate.md
+  - docs/components/websearchshorthanduserlocation.md
   - docs/components/websearchstatus.md
   - docs/errors/badgatewayresponseerror.md
   - docs/errors/badrequestresponseerror.md
+  - docs/errors/conflictresponseerror.md
   - docs/errors/edgenetworktimeoutresponseerror.md
   - docs/errors/forbiddenresponseerror.md
   - docs/errors/internalserverresponseerror.md
@@ -729,12 +884,14 @@ generatedFiles:
   - src/openrouter/components/assistantmessageimages.py
   - src/openrouter/components/badgatewayresponseerrordata.py
   - src/openrouter/components/badrequestresponseerrordata.py
+  - src/openrouter/components/chatcompletionaudiooutput.py
   - src/openrouter/components/chatcompletionfinishreason.py
   - src/openrouter/components/chatgenerationparams.py
   - src/openrouter/components/chatgenerationtokenusage.py
   - src/openrouter/components/chatmessagecontentitem.py
   - src/openrouter/components/chatmessagecontentitemaudio.py
   - src/openrouter/components/chatmessagecontentitemcachecontrol.py
+  - src/openrouter/components/chatmessagecontentitemfile.py
   - src/openrouter/components/chatmessagecontentitemimage.py
   - src/openrouter/components/chatmessagecontentitemtext.py
   - src/openrouter/components/chatmessagecontentitemvideo.py
@@ -749,8 +906,12 @@ generatedFiles:
   - src/openrouter/components/chatstreamingmessagetoolcall.py
   - src/openrouter/components/chatstreamingresponsechunk.py
   - src/openrouter/components/chatstreamoptions.py
+  - src/openrouter/components/compoundfilter.py
+  - src/openrouter/components/conflictresponseerrordata.py
+  - src/openrouter/components/contextcompressionengine.py
   - src/openrouter/components/createchargerequest.py
   - src/openrouter/components/datacollection.py
+  - src/openrouter/components/datetimeservertool.py
   - src/openrouter/components/debugoptions.py
   - src/openrouter/components/defaultparameters.py
   - src/openrouter/components/developermessage.py
@@ -785,17 +946,25 @@ generatedFiles:
   - src/openrouter/components/openairesponsesservicetier.py
   - src/openrouter/components/openairesponsestoolchoice_union.py
   - src/openrouter/components/openairesponsestruncation.py
+  - src/openrouter/components/openresponsesapplypatchtool.py
+  - src/openrouter/components/openresponsescodeinterpretertool.py
+  - src/openrouter/components/openresponsescomputertool.py
+  - src/openrouter/components/openresponsescustomtool.py
   - src/openrouter/components/openresponseseasyinputmessage.py
   - src/openrouter/components/openresponseserrorevent.py
+  - src/openrouter/components/openresponsesfilesearchtool.py
   - src/openrouter/components/openresponsesfunctioncalloutput.py
+  - src/openrouter/components/openresponsesfunctionshelltool.py
   - src/openrouter/components/openresponsesfunctiontoolcall.py
   - src/openrouter/components/openresponsesimagegencallcompleted.py
   - src/openrouter/components/openresponsesimagegencallgenerating.py
   - src/openrouter/components/openresponsesimagegencallinprogress.py
   - src/openrouter/components/openresponsesimagegencallpartialimage.py
-  - src/openrouter/components/openresponsesinput.py
+  - src/openrouter/components/openresponsesimagegenerationtool.py
+  - src/openrouter/components/openresponsesinput_union.py
   - src/openrouter/components/openresponsesinputmessageitem.py
-  - src/openrouter/components/openresponseslogprobs.py
+  - src/openrouter/components/openresponseslocalshelltool.py
+  - src/openrouter/components/openresponsesmcptool.py
   - src/openrouter/components/openresponsesnonstreamingresponse.py
   - src/openrouter/components/openresponsesreasoning.py
   - src/openrouter/components/openresponsesreasoningconfig.py
@@ -807,9 +976,11 @@ generatedFiles:
   - src/openrouter/components/openresponsesrequest.py
   - src/openrouter/components/openresponsesresponsetext.py
   - src/openrouter/components/openresponsesstreamevent.py
-  - src/openrouter/components/openresponsestoplogprobs.py
   - src/openrouter/components/openresponsesusage.py
   - src/openrouter/components/openresponseswebsearch20250826tool.py
+  - src/openrouter/components/openresponseswebsearchcallcompleted.py
+  - src/openrouter/components/openresponseswebsearchcallinprogress.py
+  - src/openrouter/components/openresponseswebsearchcallsearching.py
   - src/openrouter/components/openresponseswebsearchpreview20250311tool.py
   - src/openrouter/components/openresponseswebsearchpreviewtool.py
   - src/openrouter/components/openresponseswebsearchtool.py
@@ -866,7 +1037,9 @@ generatedFiles:
   - src/openrouter/components/responsesoutputmessage.py
   - src/openrouter/components/responsesoutputmodality.py
   - src/openrouter/components/responsessearchcontextsize.py
+  - src/openrouter/components/responsesservertooloutput.py
   - src/openrouter/components/responseswebsearchcalloutput.py
+  - src/openrouter/components/responseswebsearchservertool.py
   - src/openrouter/components/responseswebsearchuserlocation.py
   - src/openrouter/components/responsetextconfig.py
   - src/openrouter/components/security.py
@@ -885,6 +1058,8 @@ generatedFiles:
   - src/openrouter/components/videoinput.py
   - src/openrouter/components/websearchengine.py
   - src/openrouter/components/websearchpreviewtooluserlocation.py
+  - src/openrouter/components/websearchservertool.py
+  - src/openrouter/components/websearchshorthand.py
   - src/openrouter/components/websearchstatus.py
   - src/openrouter/credits.py
   - src/openrouter/embeddings.py
@@ -892,6 +1067,7 @@ generatedFiles:
   - src/openrouter/errors/__init__.py
   - src/openrouter/errors/badgatewayresponse_error.py
   - src/openrouter/errors/badrequestresponse_error.py
+  - src/openrouter/errors/conflictresponse_error.py
   - src/openrouter/errors/edgenetworktimeoutresponse_error.py
   - src/openrouter/errors/forbiddenresponse_error.py
   - src/openrouter/errors/internalserverresponse_error.py
@@ -983,7 +1159,7 @@ examples:
         application/json: {"store": false, "service_tier": "auto", "stream": false}
       responses:
         "200":
-          application/json: {"id": "resp-abc123", "object": "response", "created_at": 1704067200, "model": "gpt-4", "status": "completed", "completed_at": 2510.63, "output": [{"id": "msg-abc123", "role": "assistant", "type": "message", "content": [{"type": "output_text", "text": "Hello! How can I help you today?"}]}], "error": null, "incomplete_details": null, "temperature": null, "top_p": null, "presence_penalty": 7468.94, "frequency_penalty": 3967.09, "instructions": null, "metadata": null, "tools": [], "tool_choice": "auto", "parallel_tool_calls": true}
+          application/json: {"id": "resp-abc123", "object": "response", "created_at": 1704067200, "model": "gpt-4", "status": "completed", "completed_at": 2510.63, "output": [{"type": "message", "status": "completed"}], "error": null, "incomplete_details": null, "temperature": null, "top_p": null, "presence_penalty": 7468.94, "frequency_penalty": 3967.09, "instructions": null, "metadata": null, "tools": [], "tool_choice": "auto", "parallel_tool_calls": true}
         "400":
           application/json: {"error": {"code": 400, "message": "Invalid request parameters"}}
         "401":
@@ -1096,7 +1272,7 @@ examples:
           id: "<id>"
       responses:
         "200":
-          application/json: {"data": {"id": "gen-3bhGkxlo4XFrqiabUM7NDtwDzWwG", "upstream_id": "chatcmpl-791bcf62-080e-4568-87d0-94c72e3b4946", "total_cost": 0.0015, "cache_discount": 0.0002, "upstream_inference_cost": 0.0012, "created_at": "2024-07-15T23:33:19.433273+00:00", "model": "sao10k/l3-stheno-8b", "app_id": 12345, "streamed": true, "cancelled": false, "provider_name": "Infermatic", "latency": 1250, "moderation_latency": 50, "generation_time": 1200, "finish_reason": "stop", "tokens_prompt": 10, "tokens_completion": 25, "native_tokens_prompt": 10, "native_tokens_completion": 25, "native_tokens_completion_images": 0, "native_tokens_reasoning": 5, "native_tokens_cached": 3, "num_media_prompt": 1, "num_input_audio_prompt": 0, "num_media_completion": 0, "num_search_results": 5, "origin": "https://openrouter.ai/", "usage": 0.0015, "is_byok": false, "native_finish_reason": "stop", "external_user": "user-123", "api_type": "completions", "router": "openrouter/auto", "provider_responses": []}}
+          application/json: {"data": {"id": "gen-3bhGkxlo4XFrqiabUM7NDtwDzWwG", "upstream_id": "chatcmpl-791bcf62-080e-4568-87d0-94c72e3b4946", "total_cost": 0.0015, "cache_discount": 0.0002, "upstream_inference_cost": 0.0012, "created_at": "2024-07-15T23:33:19.433273+00:00", "model": "sao10k/l3-stheno-8b", "app_id": 12345, "streamed": true, "cancelled": false, "provider_name": "Infermatic", "latency": 1250, "moderation_latency": 50, "generation_time": 1200, "finish_reason": "stop", "tokens_prompt": 10, "tokens_completion": 25, "native_tokens_prompt": 10, "native_tokens_completion": 25, "native_tokens_completion_images": 0, "native_tokens_reasoning": 5, "native_tokens_cached": 3, "num_media_prompt": 1, "num_input_audio_prompt": 0, "num_media_completion": 0, "num_search_results": 5, "origin": "https://openrouter.ai/", "usage": 0.0015, "is_byok": false, "native_finish_reason": "stop", "external_user": "user-123", "api_type": "completions", "router": "openrouter/auto", "provider_responses": [], "user_agent": "<value>", "http_referer": null}}
         "401":
           application/json: {"error": {"code": 401, "message": "Missing Authentication header"}}
         "402":
@@ -1120,6 +1296,8 @@ examples:
           application/json: {"data": {"count": 150}}
         "500":
           application/json: {"error": {"code": 500, "message": "Internal Server Error"}}
+        "400":
+          application/json: {"error": {"code": 400, "message": "Invalid request parameters"}}
   getModels:
     speakeasy-default-get-models:
       responses:
@@ -1299,13 +1477,15 @@ examples:
           application/json: {"error": {"code": 401, "message": "Missing Authentication header"}}
         "500":
           application/json: {"error": {"code": 500, "message": "Internal Server Error"}}
+        "409":
+          application/json: {"error": {"code": 409, "message": "Resource conflict. Please try again later."}}
   sendChatCompletionRequest:
     speakeasy-default-send-chat-completion-request:
       requestBody:
         application/json: {"messages": [{"role": "system", "content": "You are a helpful assistant."}, {"role": "user", "content": "What is the capital of France?"}], "stream": false, "temperature": 0.7, "top_p": 1}
       responses:
         "200":
-          application/json: {"id": "chatcmpl-123", "choices": [{"finish_reason": "stop", "index": 0, "message": {"role": "assistant"}}], "created": 1677652288, "model": "openai/gpt-4", "object": "chat.completion"}
+          application/json: {"id": "chatcmpl-123", "choices": [{"finish_reason": "stop", "index": 0, "message": {"role": "assistant"}}], "created": 1677652288, "model": "openai/gpt-4", "object": "chat.completion", "system_fingerprint": "fp_44709d6fcb"}
         "400":
           application/json: {"error": {"code": 400, "message": "Invalid request parameters"}}
         "500":

@@ -12,11 +12,12 @@ from openrouter.types import (
     OptionalNullable,
     UNSET,
     UNSET_SENTINEL,
+    UnrecognizedStr,
 )
 from openrouter.utils import validate_open_enum
 from pydantic import model_serializer
 from pydantic.functional_validators import PlainValidator
-from typing import List, Literal, Optional
+from typing import List, Literal, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
@@ -25,15 +26,18 @@ OpenResponsesWebSearch20250826ToolType = Literal["web_search_2025_08_26",]
 
 class OpenResponsesWebSearch20250826ToolFiltersTypedDict(TypedDict):
     allowed_domains: NotRequired[Nullable[List[str]]]
+    excluded_domains: NotRequired[Nullable[List[str]]]
 
 
 class OpenResponsesWebSearch20250826ToolFilters(BaseModel):
     allowed_domains: OptionalNullable[List[str]] = UNSET
 
+    excluded_domains: OptionalNullable[List[str]] = UNSET
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["allowed_domains"]
-        nullable_fields = ["allowed_domains"]
+        optional_fields = ["allowed_domains", "excluded_domains"]
+        nullable_fields = ["allowed_domains", "excluded_domains"]
         null_default_fields = []
 
         serialized = handler(self)
@@ -61,6 +65,17 @@ class OpenResponsesWebSearch20250826ToolFilters(BaseModel):
         return m
 
 
+OpenResponsesWebSearch20250826ToolEngine = Union[
+    Literal[
+        "auto",
+        "native",
+        "exa",
+    ],
+    UnrecognizedStr,
+]
+r"""Which search engine to use. \"auto\" (default) uses native if the provider supports it, otherwise Exa. \"native\" forces the provider's built-in search (parameters like max_results, search_context_size, and domain filters are not forwarded to the provider). \"exa\" forces the Exa search API."""
+
+
 class OpenResponsesWebSearch20250826ToolTypedDict(TypedDict):
     r"""Web search tool configuration (2025-08-26 version)"""
 
@@ -70,6 +85,10 @@ class OpenResponsesWebSearch20250826ToolTypedDict(TypedDict):
     r"""Size of the search context for web search tools"""
     user_location: NotRequired[Nullable[ResponsesWebSearchUserLocationTypedDict]]
     r"""User location information for web search"""
+    engine: NotRequired[OpenResponsesWebSearch20250826ToolEngine]
+    r"""Which search engine to use. \"auto\" (default) uses native if the provider supports it, otherwise Exa. \"native\" forces the provider's built-in search (parameters like max_results, search_context_size, and domain filters are not forwarded to the provider). \"exa\" forces the Exa search API."""
+    max_results: NotRequired[float]
+    r"""Maximum number of search results to return per search call. Defaults to 5. Only applies when using the Exa engine; ignored with native provider search."""
 
 
 class OpenResponsesWebSearch20250826Tool(BaseModel):
@@ -87,9 +106,24 @@ class OpenResponsesWebSearch20250826Tool(BaseModel):
     user_location: OptionalNullable[ResponsesWebSearchUserLocation] = UNSET
     r"""User location information for web search"""
 
+    engine: Annotated[
+        Optional[OpenResponsesWebSearch20250826ToolEngine],
+        PlainValidator(validate_open_enum(False)),
+    ] = None
+    r"""Which search engine to use. \"auto\" (default) uses native if the provider supports it, otherwise Exa. \"native\" forces the provider's built-in search (parameters like max_results, search_context_size, and domain filters are not forwarded to the provider). \"exa\" forces the Exa search API."""
+
+    max_results: Optional[float] = None
+    r"""Maximum number of search results to return per search call. Defaults to 5. Only applies when using the Exa engine; ignored with native provider search."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["filters", "search_context_size", "user_location"]
+        optional_fields = [
+            "filters",
+            "search_context_size",
+            "user_location",
+            "engine",
+            "max_results",
+        ]
         nullable_fields = ["filters", "user_location"]
         null_default_fields = []
 

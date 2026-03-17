@@ -76,7 +76,8 @@ class OpenRouter(BaseSDK):
         self,
         api_key: Optional[Union[Optional[str], Callable[[], Optional[str]]]] = None,
         http_referer: Optional[str] = None,
-        x_title: Optional[str] = None,
+        x_open_router_title: Optional[str] = None,
+        x_open_router_categories: Optional[str] = None,
         server: Optional[str] = None,
         server_url: Optional[str] = None,
         url_params: Optional[Dict[str, str]] = None,
@@ -90,7 +91,8 @@ class OpenRouter(BaseSDK):
 
         :param api_key: The api_key required for authentication
         :param http_referer: Configures the http_referer parameter for all supported operations
-        :param x_title: Configures the x_title parameter for all supported operations
+        :param x_open_router_title: Configures the x_open_router_title parameter for all supported operations
+        :param x_open_router_categories: Configures the x_open_router_categories parameter for all supported operations
         :param server: The server by name to use for all methods
         :param server_url: The server URL to use for all methods
         :param url_params: Parameters to optionally template the server URL with
@@ -135,7 +137,12 @@ class OpenRouter(BaseSDK):
             http_referer=utils.get_global_from_env(
                 http_referer, "OPENROUTER_HTTP_REFERER", str
             ),
-            x_title=utils.get_global_from_env(x_title, "OPENROUTER_X_TITLE", str),
+            x_open_router_title=utils.get_global_from_env(
+                x_open_router_title, "OPENROUTER_X_OPEN_ROUTER_TITLE", str
+            ),
+            x_open_router_categories=utils.get_global_from_env(
+                x_open_router_categories, "OPENROUTER_X_OPEN_ROUTER_CATEGORIES", str
+            ),
         )
 
         BaseSDK.__init__(

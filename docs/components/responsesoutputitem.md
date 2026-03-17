@@ -41,3 +41,9 @@ value: components.ResponsesOutputItemFileSearchCall = /* values here */
 value: components.ResponsesImageGenerationCall = /* values here */
 ```
 
+### `components.ResponsesServerToolOutput`
+
+```python
+value: components.ResponsesServerToolOutput = /* values here */
+```
+

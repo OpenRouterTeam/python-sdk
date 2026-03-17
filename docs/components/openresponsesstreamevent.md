@@ -167,3 +167,21 @@ value: components.OpenResponsesImageGenCallPartialImage = /* values here */
 value: components.OpenResponsesImageGenCallCompleted = /* values here */
 ```
 
+### `components.OpenResponsesWebSearchCallInProgress`
+
+```python
+value: components.OpenResponsesWebSearchCallInProgress = /* values here */
+```
+
+### `components.OpenResponsesWebSearchCallSearching`
+
+```python
+value: components.OpenResponsesWebSearchCallSearching = /* values here */
+```
+
+### `components.OpenResponsesWebSearchCallCompleted`
+
+```python
+value: components.OpenResponsesWebSearchCallCompleted = /* values here */
+```
+

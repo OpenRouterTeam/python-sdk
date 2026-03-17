@@ -62,6 +62,7 @@ ProviderPreferencesSortEnum = Union[
         "price",
         "throughput",
         "latency",
+        "exacto",
     ],
     UnrecognizedStr,
 ]
@@ -71,6 +72,7 @@ ProviderPreferencesProviderSortConfigEnum = Literal[
     "price",
     "throughput",
     "latency",
+    "exacto",
 ]
 
 
@@ -79,6 +81,7 @@ ProviderPreferencesBy = Union[
         "price",
         "throughput",
         "latency",
+        "exacto",
     ],
     UnrecognizedStr,
 ]
@@ -168,6 +171,7 @@ ProviderPreferencesProviderSort = Union[
         "price",
         "throughput",
         "latency",
+        "exacto",
     ],
     UnrecognizedStr,
 ]

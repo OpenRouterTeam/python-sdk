@@ -33,3 +33,9 @@ value: components.ChatGenerationParamsPluginFileParser = /* values here */
 value: components.ChatGenerationParamsPluginResponseHealing = /* values here */
 ```
 
+### `components.ChatGenerationParamsPluginContextCompression`
+
+```python
+value: components.ChatGenerationParamsPluginContextCompression = /* values here */
+```
+

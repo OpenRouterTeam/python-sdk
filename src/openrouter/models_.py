@@ -16,7 +16,9 @@ class Models(BaseSDK):
         self,
         *,
         http_referer: Optional[str] = None,
-        x_title: Optional[str] = None,
+        x_open_router_title: Optional[str] = None,
+        x_open_router_categories: Optional[str] = None,
+        output_modalities: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -27,8 +29,11 @@ class Models(BaseSDK):
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
-        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+        :param x_open_router_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
 
+        :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
+
+        :param output_modalities: Filter models by output modality. Accepts a comma-separated list of modalities (text, image, audio, embeddings) or \"all\" to include all models. Defaults to \"text\".
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -46,7 +51,9 @@ class Models(BaseSDK):
 
         request = operations.ListModelsCountRequest(
             http_referer=http_referer,
-            x_title=x_title,
+            x_open_router_title=x_open_router_title,
+            x_open_router_categories=x_open_router_categories,
+            output_modalities=output_modalities,
         )
 
         req = self._build_request(
@@ -63,7 +70,8 @@ class Models(BaseSDK):
             http_headers=http_headers,
             _globals=operations.ListModelsCountGlobals(
                 http_referer=self.sdk_configuration.globals.http_referer,
-                x_title=self.sdk_configuration.globals.x_title,
+                x_open_router_title=self.sdk_configuration.globals.x_open_router_title,
+                x_open_router_categories=self.sdk_configuration.globals.x_open_router_categories,
             ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
@@ -89,13 +97,18 @@ class Models(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["4XX", "500", "5XX"],
+            error_status_codes=["400", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(components.ModelsCountResponse, http_res)
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.BadRequestResponseErrorData, http_res
+            )
+            raise errors.BadRequestResponseError(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(
                 errors.InternalServerResponseErrorData, http_res
@@ -118,7 +131,9 @@ class Models(BaseSDK):
         self,
         *,
         http_referer: Optional[str] = None,
-        x_title: Optional[str] = None,
+        x_open_router_title: Optional[str] = None,
+        x_open_router_categories: Optional[str] = None,
+        output_modalities: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -129,8 +144,11 @@ class Models(BaseSDK):
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
-        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+        :param x_open_router_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
 
+        :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
+
+        :param output_modalities: Filter models by output modality. Accepts a comma-separated list of modalities (text, image, audio, embeddings) or \"all\" to include all models. Defaults to \"text\".
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -148,7 +166,9 @@ class Models(BaseSDK):
 
         request = operations.ListModelsCountRequest(
             http_referer=http_referer,
-            x_title=x_title,
+            x_open_router_title=x_open_router_title,
+            x_open_router_categories=x_open_router_categories,
+            output_modalities=output_modalities,
         )
 
         req = self._build_request_async(
@@ -165,7 +185,8 @@ class Models(BaseSDK):
             http_headers=http_headers,
             _globals=operations.ListModelsCountGlobals(
                 http_referer=self.sdk_configuration.globals.http_referer,
-                x_title=self.sdk_configuration.globals.x_title,
+                x_open_router_title=self.sdk_configuration.globals.x_open_router_title,
+                x_open_router_categories=self.sdk_configuration.globals.x_open_router_categories,
             ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
@@ -191,13 +212,18 @@ class Models(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["4XX", "500", "5XX"],
+            error_status_codes=["400", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(components.ModelsCountResponse, http_res)
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.BadRequestResponseErrorData, http_res
+            )
+            raise errors.BadRequestResponseError(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(
                 errors.InternalServerResponseErrorData, http_res
@@ -220,9 +246,11 @@ class Models(BaseSDK):
         self,
         *,
         http_referer: Optional[str] = None,
-        x_title: Optional[str] = None,
+        x_open_router_title: Optional[str] = None,
+        x_open_router_categories: Optional[str] = None,
         category: Optional[operations.Category] = None,
         supported_parameters: Optional[str] = None,
+        output_modalities: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -233,10 +261,13 @@ class Models(BaseSDK):
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
-        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+        :param x_open_router_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+        :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
         :param category: Filter models by use case category
         :param supported_parameters:
+        :param output_modalities: Filter models by output modality. Accepts a comma-separated list of modalities (text, image, audio, embeddings) or \"all\" to include all models. Defaults to \"text\".
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -254,9 +285,11 @@ class Models(BaseSDK):
 
         request = operations.GetModelsRequest(
             http_referer=http_referer,
-            x_title=x_title,
+            x_open_router_title=x_open_router_title,
+            x_open_router_categories=x_open_router_categories,
             category=category,
             supported_parameters=supported_parameters,
+            output_modalities=output_modalities,
         )
 
         req = self._build_request(
@@ -273,7 +306,8 @@ class Models(BaseSDK):
             http_headers=http_headers,
             _globals=operations.GetModelsGlobals(
                 http_referer=self.sdk_configuration.globals.http_referer,
-                x_title=self.sdk_configuration.globals.x_title,
+                x_open_router_title=self.sdk_configuration.globals.x_open_router_title,
+                x_open_router_categories=self.sdk_configuration.globals.x_open_router_categories,
             ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
@@ -333,9 +367,11 @@ class Models(BaseSDK):
         self,
         *,
         http_referer: Optional[str] = None,
-        x_title: Optional[str] = None,
+        x_open_router_title: Optional[str] = None,
+        x_open_router_categories: Optional[str] = None,
         category: Optional[operations.Category] = None,
         supported_parameters: Optional[str] = None,
+        output_modalities: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -346,10 +382,13 @@ class Models(BaseSDK):
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
-        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+        :param x_open_router_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+        :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
         :param category: Filter models by use case category
         :param supported_parameters:
+        :param output_modalities: Filter models by output modality. Accepts a comma-separated list of modalities (text, image, audio, embeddings) or \"all\" to include all models. Defaults to \"text\".
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -367,9 +406,11 @@ class Models(BaseSDK):
 
         request = operations.GetModelsRequest(
             http_referer=http_referer,
-            x_title=x_title,
+            x_open_router_title=x_open_router_title,
+            x_open_router_categories=x_open_router_categories,
             category=category,
             supported_parameters=supported_parameters,
+            output_modalities=output_modalities,
         )
 
         req = self._build_request_async(
@@ -386,7 +427,8 @@ class Models(BaseSDK):
             http_headers=http_headers,
             _globals=operations.GetModelsGlobals(
                 http_referer=self.sdk_configuration.globals.http_referer,
-                x_title=self.sdk_configuration.globals.x_title,
+                x_open_router_title=self.sdk_configuration.globals.x_open_router_title,
+                x_open_router_categories=self.sdk_configuration.globals.x_open_router_categories,
             ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
@@ -450,7 +492,8 @@ class Models(BaseSDK):
             operations.ListModelsUserSecurityTypedDict,
         ],
         http_referer: Optional[str] = None,
-        x_title: Optional[str] = None,
+        x_open_router_title: Optional[str] = None,
+        x_open_router_categories: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -464,7 +507,9 @@ class Models(BaseSDK):
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
-        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+        :param x_open_router_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+        :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -483,7 +528,8 @@ class Models(BaseSDK):
 
         request = operations.ListModelsUserRequest(
             http_referer=http_referer,
-            x_title=x_title,
+            x_open_router_title=x_open_router_title,
+            x_open_router_categories=x_open_router_categories,
         )
 
         req = self._build_request(
@@ -500,7 +546,8 @@ class Models(BaseSDK):
             http_headers=http_headers,
             _globals=operations.ListModelsUserGlobals(
                 http_referer=self.sdk_configuration.globals.http_referer,
-                x_title=self.sdk_configuration.globals.x_title,
+                x_open_router_title=self.sdk_configuration.globals.x_open_router_title,
+                x_open_router_categories=self.sdk_configuration.globals.x_open_router_categories,
             ),
             security=utils.get_pydantic_model(
                 security, operations.ListModelsUserSecurity
@@ -569,7 +616,8 @@ class Models(BaseSDK):
             operations.ListModelsUserSecurityTypedDict,
         ],
         http_referer: Optional[str] = None,
-        x_title: Optional[str] = None,
+        x_open_router_title: Optional[str] = None,
+        x_open_router_categories: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -583,7 +631,9 @@ class Models(BaseSDK):
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
-        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+        :param x_open_router_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+        :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -602,7 +652,8 @@ class Models(BaseSDK):
 
         request = operations.ListModelsUserRequest(
             http_referer=http_referer,
-            x_title=x_title,
+            x_open_router_title=x_open_router_title,
+            x_open_router_categories=x_open_router_categories,
         )
 
         req = self._build_request_async(
@@ -619,7 +670,8 @@ class Models(BaseSDK):
             http_headers=http_headers,
             _globals=operations.ListModelsUserGlobals(
                 http_referer=self.sdk_configuration.globals.http_referer,
-                x_title=self.sdk_configuration.globals.x_title,
+                x_open_router_title=self.sdk_configuration.globals.x_open_router_title,
+                x_open_router_categories=self.sdk_configuration.globals.x_open_router_categories,
             ),
             security=utils.get_pydantic_model(
                 security, operations.ListModelsUserSecurity

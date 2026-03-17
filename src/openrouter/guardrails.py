@@ -16,7 +16,8 @@ class Guardrails(BaseSDK):
         self,
         *,
         http_referer: Optional[str] = None,
-        x_title: Optional[str] = None,
+        x_open_router_title: Optional[str] = None,
+        x_open_router_categories: Optional[str] = None,
         offset: Optional[str] = None,
         limit: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -31,7 +32,9 @@ class Guardrails(BaseSDK):
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
-        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+        :param x_open_router_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+        :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
         :param offset: Number of records to skip for pagination
         :param limit: Maximum number of records to return (max 100)
@@ -52,7 +55,8 @@ class Guardrails(BaseSDK):
 
         request = operations.ListGuardrailsRequest(
             http_referer=http_referer,
-            x_title=x_title,
+            x_open_router_title=x_open_router_title,
+            x_open_router_categories=x_open_router_categories,
             offset=offset,
             limit=limit,
         )
@@ -71,7 +75,8 @@ class Guardrails(BaseSDK):
             http_headers=http_headers,
             _globals=operations.ListGuardrailsGlobals(
                 http_referer=self.sdk_configuration.globals.http_referer,
-                x_title=self.sdk_configuration.globals.x_title,
+                x_open_router_title=self.sdk_configuration.globals.x_open_router_title,
+                x_open_router_categories=self.sdk_configuration.globals.x_open_router_categories,
             ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
@@ -131,7 +136,8 @@ class Guardrails(BaseSDK):
         self,
         *,
         http_referer: Optional[str] = None,
-        x_title: Optional[str] = None,
+        x_open_router_title: Optional[str] = None,
+        x_open_router_categories: Optional[str] = None,
         offset: Optional[str] = None,
         limit: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -146,7 +152,9 @@ class Guardrails(BaseSDK):
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
-        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+        :param x_open_router_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+        :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
         :param offset: Number of records to skip for pagination
         :param limit: Maximum number of records to return (max 100)
@@ -167,7 +175,8 @@ class Guardrails(BaseSDK):
 
         request = operations.ListGuardrailsRequest(
             http_referer=http_referer,
-            x_title=x_title,
+            x_open_router_title=x_open_router_title,
+            x_open_router_categories=x_open_router_categories,
             offset=offset,
             limit=limit,
         )
@@ -186,7 +195,8 @@ class Guardrails(BaseSDK):
             http_headers=http_headers,
             _globals=operations.ListGuardrailsGlobals(
                 http_referer=self.sdk_configuration.globals.http_referer,
-                x_title=self.sdk_configuration.globals.x_title,
+                x_open_router_title=self.sdk_configuration.globals.x_open_router_title,
+                x_open_router_categories=self.sdk_configuration.globals.x_open_router_categories,
             ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
@@ -247,13 +257,15 @@ class Guardrails(BaseSDK):
         *,
         name: str,
         http_referer: Optional[str] = None,
-        x_title: Optional[str] = None,
+        x_open_router_title: Optional[str] = None,
+        x_open_router_categories: Optional[str] = None,
         description: OptionalNullable[str] = UNSET,
         limit_usd: OptionalNullable[float] = UNSET,
         reset_interval: OptionalNullable[
             operations.CreateGuardrailResetIntervalRequest
         ] = UNSET,
         allowed_providers: OptionalNullable[List[str]] = UNSET,
+        ignored_providers: OptionalNullable[List[str]] = UNSET,
         allowed_models: OptionalNullable[List[str]] = UNSET,
         enforce_zdr: OptionalNullable[bool] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -269,12 +281,15 @@ class Guardrails(BaseSDK):
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
-        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+        :param x_open_router_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+        :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
         :param description: Description of the guardrail
         :param limit_usd: Spending limit in USD
         :param reset_interval: Interval at which the limit resets (daily, weekly, monthly)
         :param allowed_providers: List of allowed provider IDs
+        :param ignored_providers: List of provider IDs to exclude from routing
         :param allowed_models: Array of model identifiers (slug or canonical_slug accepted)
         :param enforce_zdr: Whether to enforce zero data retention
         :param retries: Override the default retry configuration for this method
@@ -294,13 +309,15 @@ class Guardrails(BaseSDK):
 
         request = operations.CreateGuardrailRequest(
             http_referer=http_referer,
-            x_title=x_title,
+            x_open_router_title=x_open_router_title,
+            x_open_router_categories=x_open_router_categories,
             request_body=operations.CreateGuardrailRequestBody(
                 name=name,
                 description=description,
                 limit_usd=limit_usd,
                 reset_interval=reset_interval,
                 allowed_providers=allowed_providers,
+                ignored_providers=ignored_providers,
                 allowed_models=allowed_models,
                 enforce_zdr=enforce_zdr,
             ),
@@ -320,7 +337,8 @@ class Guardrails(BaseSDK):
             http_headers=http_headers,
             _globals=operations.CreateGuardrailGlobals(
                 http_referer=self.sdk_configuration.globals.http_referer,
-                x_title=self.sdk_configuration.globals.x_title,
+                x_open_router_title=self.sdk_configuration.globals.x_open_router_title,
+                x_open_router_categories=self.sdk_configuration.globals.x_open_router_categories,
             ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
@@ -393,13 +411,15 @@ class Guardrails(BaseSDK):
         *,
         name: str,
         http_referer: Optional[str] = None,
-        x_title: Optional[str] = None,
+        x_open_router_title: Optional[str] = None,
+        x_open_router_categories: Optional[str] = None,
         description: OptionalNullable[str] = UNSET,
         limit_usd: OptionalNullable[float] = UNSET,
         reset_interval: OptionalNullable[
             operations.CreateGuardrailResetIntervalRequest
         ] = UNSET,
         allowed_providers: OptionalNullable[List[str]] = UNSET,
+        ignored_providers: OptionalNullable[List[str]] = UNSET,
         allowed_models: OptionalNullable[List[str]] = UNSET,
         enforce_zdr: OptionalNullable[bool] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -415,12 +435,15 @@ class Guardrails(BaseSDK):
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
-        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+        :param x_open_router_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+        :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
         :param description: Description of the guardrail
         :param limit_usd: Spending limit in USD
         :param reset_interval: Interval at which the limit resets (daily, weekly, monthly)
         :param allowed_providers: List of allowed provider IDs
+        :param ignored_providers: List of provider IDs to exclude from routing
         :param allowed_models: Array of model identifiers (slug or canonical_slug accepted)
         :param enforce_zdr: Whether to enforce zero data retention
         :param retries: Override the default retry configuration for this method
@@ -440,13 +463,15 @@ class Guardrails(BaseSDK):
 
         request = operations.CreateGuardrailRequest(
             http_referer=http_referer,
-            x_title=x_title,
+            x_open_router_title=x_open_router_title,
+            x_open_router_categories=x_open_router_categories,
             request_body=operations.CreateGuardrailRequestBody(
                 name=name,
                 description=description,
                 limit_usd=limit_usd,
                 reset_interval=reset_interval,
                 allowed_providers=allowed_providers,
+                ignored_providers=ignored_providers,
                 allowed_models=allowed_models,
                 enforce_zdr=enforce_zdr,
             ),
@@ -466,7 +491,8 @@ class Guardrails(BaseSDK):
             http_headers=http_headers,
             _globals=operations.CreateGuardrailGlobals(
                 http_referer=self.sdk_configuration.globals.http_referer,
-                x_title=self.sdk_configuration.globals.x_title,
+                x_open_router_title=self.sdk_configuration.globals.x_open_router_title,
+                x_open_router_categories=self.sdk_configuration.globals.x_open_router_categories,
             ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
@@ -539,7 +565,8 @@ class Guardrails(BaseSDK):
         *,
         id: str,
         http_referer: Optional[str] = None,
-        x_title: Optional[str] = None,
+        x_open_router_title: Optional[str] = None,
+        x_open_router_categories: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -553,7 +580,9 @@ class Guardrails(BaseSDK):
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
-        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+        :param x_open_router_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+        :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -572,7 +601,8 @@ class Guardrails(BaseSDK):
 
         request = operations.GetGuardrailRequest(
             http_referer=http_referer,
-            x_title=x_title,
+            x_open_router_title=x_open_router_title,
+            x_open_router_categories=x_open_router_categories,
             id=id,
         )
 
@@ -590,7 +620,8 @@ class Guardrails(BaseSDK):
             http_headers=http_headers,
             _globals=operations.GetGuardrailGlobals(
                 http_referer=self.sdk_configuration.globals.http_referer,
-                x_title=self.sdk_configuration.globals.x_title,
+                x_open_router_title=self.sdk_configuration.globals.x_open_router_title,
+                x_open_router_categories=self.sdk_configuration.globals.x_open_router_categories,
             ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
@@ -656,7 +687,8 @@ class Guardrails(BaseSDK):
         *,
         id: str,
         http_referer: Optional[str] = None,
-        x_title: Optional[str] = None,
+        x_open_router_title: Optional[str] = None,
+        x_open_router_categories: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -670,7 +702,9 @@ class Guardrails(BaseSDK):
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
-        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+        :param x_open_router_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+        :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -689,7 +723,8 @@ class Guardrails(BaseSDK):
 
         request = operations.GetGuardrailRequest(
             http_referer=http_referer,
-            x_title=x_title,
+            x_open_router_title=x_open_router_title,
+            x_open_router_categories=x_open_router_categories,
             id=id,
         )
 
@@ -707,7 +742,8 @@ class Guardrails(BaseSDK):
             http_headers=http_headers,
             _globals=operations.GetGuardrailGlobals(
                 http_referer=self.sdk_configuration.globals.http_referer,
-                x_title=self.sdk_configuration.globals.x_title,
+                x_open_router_title=self.sdk_configuration.globals.x_open_router_title,
+                x_open_router_categories=self.sdk_configuration.globals.x_open_router_categories,
             ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
@@ -773,7 +809,8 @@ class Guardrails(BaseSDK):
         *,
         id: str,
         http_referer: Optional[str] = None,
-        x_title: Optional[str] = None,
+        x_open_router_title: Optional[str] = None,
+        x_open_router_categories: Optional[str] = None,
         name: Optional[str] = None,
         description: OptionalNullable[str] = UNSET,
         limit_usd: OptionalNullable[float] = UNSET,
@@ -781,6 +818,7 @@ class Guardrails(BaseSDK):
             operations.UpdateGuardrailResetIntervalRequest
         ] = UNSET,
         allowed_providers: OptionalNullable[List[str]] = UNSET,
+        ignored_providers: OptionalNullable[List[str]] = UNSET,
         allowed_models: OptionalNullable[List[str]] = UNSET,
         enforce_zdr: OptionalNullable[bool] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -796,13 +834,16 @@ class Guardrails(BaseSDK):
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
-        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+        :param x_open_router_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+        :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
         :param name: New name for the guardrail
         :param description: New description for the guardrail
         :param limit_usd: New spending limit in USD
         :param reset_interval: Interval at which the limit resets (daily, weekly, monthly)
         :param allowed_providers: New list of allowed provider IDs
+        :param ignored_providers: List of provider IDs to exclude from routing
         :param allowed_models: Array of model identifiers (slug or canonical_slug accepted)
         :param enforce_zdr: Whether to enforce zero data retention
         :param retries: Override the default retry configuration for this method
@@ -822,7 +863,8 @@ class Guardrails(BaseSDK):
 
         request = operations.UpdateGuardrailRequest(
             http_referer=http_referer,
-            x_title=x_title,
+            x_open_router_title=x_open_router_title,
+            x_open_router_categories=x_open_router_categories,
             id=id,
             request_body=operations.UpdateGuardrailRequestBody(
                 name=name,
@@ -830,6 +872,7 @@ class Guardrails(BaseSDK):
                 limit_usd=limit_usd,
                 reset_interval=reset_interval,
                 allowed_providers=allowed_providers,
+                ignored_providers=ignored_providers,
                 allowed_models=allowed_models,
                 enforce_zdr=enforce_zdr,
             ),
@@ -849,7 +892,8 @@ class Guardrails(BaseSDK):
             http_headers=http_headers,
             _globals=operations.UpdateGuardrailGlobals(
                 http_referer=self.sdk_configuration.globals.http_referer,
-                x_title=self.sdk_configuration.globals.x_title,
+                x_open_router_title=self.sdk_configuration.globals.x_open_router_title,
+                x_open_router_categories=self.sdk_configuration.globals.x_open_router_categories,
             ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
@@ -927,7 +971,8 @@ class Guardrails(BaseSDK):
         *,
         id: str,
         http_referer: Optional[str] = None,
-        x_title: Optional[str] = None,
+        x_open_router_title: Optional[str] = None,
+        x_open_router_categories: Optional[str] = None,
         name: Optional[str] = None,
         description: OptionalNullable[str] = UNSET,
         limit_usd: OptionalNullable[float] = UNSET,
@@ -935,6 +980,7 @@ class Guardrails(BaseSDK):
             operations.UpdateGuardrailResetIntervalRequest
         ] = UNSET,
         allowed_providers: OptionalNullable[List[str]] = UNSET,
+        ignored_providers: OptionalNullable[List[str]] = UNSET,
         allowed_models: OptionalNullable[List[str]] = UNSET,
         enforce_zdr: OptionalNullable[bool] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -950,13 +996,16 @@ class Guardrails(BaseSDK):
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
-        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+        :param x_open_router_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+        :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
         :param name: New name for the guardrail
         :param description: New description for the guardrail
         :param limit_usd: New spending limit in USD
         :param reset_interval: Interval at which the limit resets (daily, weekly, monthly)
         :param allowed_providers: New list of allowed provider IDs
+        :param ignored_providers: List of provider IDs to exclude from routing
         :param allowed_models: Array of model identifiers (slug or canonical_slug accepted)
         :param enforce_zdr: Whether to enforce zero data retention
         :param retries: Override the default retry configuration for this method
@@ -976,7 +1025,8 @@ class Guardrails(BaseSDK):
 
         request = operations.UpdateGuardrailRequest(
             http_referer=http_referer,
-            x_title=x_title,
+            x_open_router_title=x_open_router_title,
+            x_open_router_categories=x_open_router_categories,
             id=id,
             request_body=operations.UpdateGuardrailRequestBody(
                 name=name,
@@ -984,6 +1034,7 @@ class Guardrails(BaseSDK):
                 limit_usd=limit_usd,
                 reset_interval=reset_interval,
                 allowed_providers=allowed_providers,
+                ignored_providers=ignored_providers,
                 allowed_models=allowed_models,
                 enforce_zdr=enforce_zdr,
             ),
@@ -1003,7 +1054,8 @@ class Guardrails(BaseSDK):
             http_headers=http_headers,
             _globals=operations.UpdateGuardrailGlobals(
                 http_referer=self.sdk_configuration.globals.http_referer,
-                x_title=self.sdk_configuration.globals.x_title,
+                x_open_router_title=self.sdk_configuration.globals.x_open_router_title,
+                x_open_router_categories=self.sdk_configuration.globals.x_open_router_categories,
             ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
@@ -1081,7 +1133,8 @@ class Guardrails(BaseSDK):
         *,
         id: str,
         http_referer: Optional[str] = None,
-        x_title: Optional[str] = None,
+        x_open_router_title: Optional[str] = None,
+        x_open_router_categories: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -1095,7 +1148,9 @@ class Guardrails(BaseSDK):
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
-        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+        :param x_open_router_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+        :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -1114,7 +1169,8 @@ class Guardrails(BaseSDK):
 
         request = operations.DeleteGuardrailRequest(
             http_referer=http_referer,
-            x_title=x_title,
+            x_open_router_title=x_open_router_title,
+            x_open_router_categories=x_open_router_categories,
             id=id,
         )
 
@@ -1132,7 +1188,8 @@ class Guardrails(BaseSDK):
             http_headers=http_headers,
             _globals=operations.DeleteGuardrailGlobals(
                 http_referer=self.sdk_configuration.globals.http_referer,
-                x_title=self.sdk_configuration.globals.x_title,
+                x_open_router_title=self.sdk_configuration.globals.x_open_router_title,
+                x_open_router_categories=self.sdk_configuration.globals.x_open_router_categories,
             ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
@@ -1198,7 +1255,8 @@ class Guardrails(BaseSDK):
         *,
         id: str,
         http_referer: Optional[str] = None,
-        x_title: Optional[str] = None,
+        x_open_router_title: Optional[str] = None,
+        x_open_router_categories: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -1212,7 +1270,9 @@ class Guardrails(BaseSDK):
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
-        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+        :param x_open_router_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+        :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -1231,7 +1291,8 @@ class Guardrails(BaseSDK):
 
         request = operations.DeleteGuardrailRequest(
             http_referer=http_referer,
-            x_title=x_title,
+            x_open_router_title=x_open_router_title,
+            x_open_router_categories=x_open_router_categories,
             id=id,
         )
 
@@ -1249,7 +1310,8 @@ class Guardrails(BaseSDK):
             http_headers=http_headers,
             _globals=operations.DeleteGuardrailGlobals(
                 http_referer=self.sdk_configuration.globals.http_referer,
-                x_title=self.sdk_configuration.globals.x_title,
+                x_open_router_title=self.sdk_configuration.globals.x_open_router_title,
+                x_open_router_categories=self.sdk_configuration.globals.x_open_router_categories,
             ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
@@ -1314,7 +1376,8 @@ class Guardrails(BaseSDK):
         self,
         *,
         http_referer: Optional[str] = None,
-        x_title: Optional[str] = None,
+        x_open_router_title: Optional[str] = None,
+        x_open_router_categories: Optional[str] = None,
         offset: Optional[str] = None,
         limit: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -1329,7 +1392,9 @@ class Guardrails(BaseSDK):
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
-        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+        :param x_open_router_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+        :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
         :param offset: Number of records to skip for pagination
         :param limit: Maximum number of records to return (max 100)
@@ -1350,7 +1415,8 @@ class Guardrails(BaseSDK):
 
         request = operations.ListKeyAssignmentsRequest(
             http_referer=http_referer,
-            x_title=x_title,
+            x_open_router_title=x_open_router_title,
+            x_open_router_categories=x_open_router_categories,
             offset=offset,
             limit=limit,
         )
@@ -1369,7 +1435,8 @@ class Guardrails(BaseSDK):
             http_headers=http_headers,
             _globals=operations.ListKeyAssignmentsGlobals(
                 http_referer=self.sdk_configuration.globals.http_referer,
-                x_title=self.sdk_configuration.globals.x_title,
+                x_open_router_title=self.sdk_configuration.globals.x_open_router_title,
+                x_open_router_categories=self.sdk_configuration.globals.x_open_router_categories,
             ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
@@ -1431,7 +1498,8 @@ class Guardrails(BaseSDK):
         self,
         *,
         http_referer: Optional[str] = None,
-        x_title: Optional[str] = None,
+        x_open_router_title: Optional[str] = None,
+        x_open_router_categories: Optional[str] = None,
         offset: Optional[str] = None,
         limit: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -1446,7 +1514,9 @@ class Guardrails(BaseSDK):
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
-        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+        :param x_open_router_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+        :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
         :param offset: Number of records to skip for pagination
         :param limit: Maximum number of records to return (max 100)
@@ -1467,7 +1537,8 @@ class Guardrails(BaseSDK):
 
         request = operations.ListKeyAssignmentsRequest(
             http_referer=http_referer,
-            x_title=x_title,
+            x_open_router_title=x_open_router_title,
+            x_open_router_categories=x_open_router_categories,
             offset=offset,
             limit=limit,
         )
@@ -1486,7 +1557,8 @@ class Guardrails(BaseSDK):
             http_headers=http_headers,
             _globals=operations.ListKeyAssignmentsGlobals(
                 http_referer=self.sdk_configuration.globals.http_referer,
-                x_title=self.sdk_configuration.globals.x_title,
+                x_open_router_title=self.sdk_configuration.globals.x_open_router_title,
+                x_open_router_categories=self.sdk_configuration.globals.x_open_router_categories,
             ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
@@ -1548,7 +1620,8 @@ class Guardrails(BaseSDK):
         self,
         *,
         http_referer: Optional[str] = None,
-        x_title: Optional[str] = None,
+        x_open_router_title: Optional[str] = None,
+        x_open_router_categories: Optional[str] = None,
         offset: Optional[str] = None,
         limit: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -1563,7 +1636,9 @@ class Guardrails(BaseSDK):
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
-        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+        :param x_open_router_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+        :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
         :param offset: Number of records to skip for pagination
         :param limit: Maximum number of records to return (max 100)
@@ -1584,7 +1659,8 @@ class Guardrails(BaseSDK):
 
         request = operations.ListMemberAssignmentsRequest(
             http_referer=http_referer,
-            x_title=x_title,
+            x_open_router_title=x_open_router_title,
+            x_open_router_categories=x_open_router_categories,
             offset=offset,
             limit=limit,
         )
@@ -1603,7 +1679,8 @@ class Guardrails(BaseSDK):
             http_headers=http_headers,
             _globals=operations.ListMemberAssignmentsGlobals(
                 http_referer=self.sdk_configuration.globals.http_referer,
-                x_title=self.sdk_configuration.globals.x_title,
+                x_open_router_title=self.sdk_configuration.globals.x_open_router_title,
+                x_open_router_categories=self.sdk_configuration.globals.x_open_router_categories,
             ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
@@ -1665,7 +1742,8 @@ class Guardrails(BaseSDK):
         self,
         *,
         http_referer: Optional[str] = None,
-        x_title: Optional[str] = None,
+        x_open_router_title: Optional[str] = None,
+        x_open_router_categories: Optional[str] = None,
         offset: Optional[str] = None,
         limit: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -1680,7 +1758,9 @@ class Guardrails(BaseSDK):
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
-        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+        :param x_open_router_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+        :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
         :param offset: Number of records to skip for pagination
         :param limit: Maximum number of records to return (max 100)
@@ -1701,7 +1781,8 @@ class Guardrails(BaseSDK):
 
         request = operations.ListMemberAssignmentsRequest(
             http_referer=http_referer,
-            x_title=x_title,
+            x_open_router_title=x_open_router_title,
+            x_open_router_categories=x_open_router_categories,
             offset=offset,
             limit=limit,
         )
@@ -1720,7 +1801,8 @@ class Guardrails(BaseSDK):
             http_headers=http_headers,
             _globals=operations.ListMemberAssignmentsGlobals(
                 http_referer=self.sdk_configuration.globals.http_referer,
-                x_title=self.sdk_configuration.globals.x_title,
+                x_open_router_title=self.sdk_configuration.globals.x_open_router_title,
+                x_open_router_categories=self.sdk_configuration.globals.x_open_router_categories,
             ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
@@ -1783,7 +1865,8 @@ class Guardrails(BaseSDK):
         *,
         id: str,
         http_referer: Optional[str] = None,
-        x_title: Optional[str] = None,
+        x_open_router_title: Optional[str] = None,
+        x_open_router_categories: Optional[str] = None,
         offset: Optional[str] = None,
         limit: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -1799,7 +1882,9 @@ class Guardrails(BaseSDK):
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
-        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+        :param x_open_router_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+        :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
         :param offset: Number of records to skip for pagination
         :param limit: Maximum number of records to return (max 100)
@@ -1820,7 +1905,8 @@ class Guardrails(BaseSDK):
 
         request = operations.ListGuardrailKeyAssignmentsRequest(
             http_referer=http_referer,
-            x_title=x_title,
+            x_open_router_title=x_open_router_title,
+            x_open_router_categories=x_open_router_categories,
             id=id,
             offset=offset,
             limit=limit,
@@ -1840,7 +1926,8 @@ class Guardrails(BaseSDK):
             http_headers=http_headers,
             _globals=operations.ListGuardrailKeyAssignmentsGlobals(
                 http_referer=self.sdk_configuration.globals.http_referer,
-                x_title=self.sdk_configuration.globals.x_title,
+                x_open_router_title=self.sdk_configuration.globals.x_open_router_title,
+                x_open_router_categories=self.sdk_configuration.globals.x_open_router_categories,
             ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
@@ -1908,7 +1995,8 @@ class Guardrails(BaseSDK):
         *,
         id: str,
         http_referer: Optional[str] = None,
-        x_title: Optional[str] = None,
+        x_open_router_title: Optional[str] = None,
+        x_open_router_categories: Optional[str] = None,
         offset: Optional[str] = None,
         limit: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -1924,7 +2012,9 @@ class Guardrails(BaseSDK):
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
-        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+        :param x_open_router_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+        :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
         :param offset: Number of records to skip for pagination
         :param limit: Maximum number of records to return (max 100)
@@ -1945,7 +2035,8 @@ class Guardrails(BaseSDK):
 
         request = operations.ListGuardrailKeyAssignmentsRequest(
             http_referer=http_referer,
-            x_title=x_title,
+            x_open_router_title=x_open_router_title,
+            x_open_router_categories=x_open_router_categories,
             id=id,
             offset=offset,
             limit=limit,
@@ -1965,7 +2056,8 @@ class Guardrails(BaseSDK):
             http_headers=http_headers,
             _globals=operations.ListGuardrailKeyAssignmentsGlobals(
                 http_referer=self.sdk_configuration.globals.http_referer,
-                x_title=self.sdk_configuration.globals.x_title,
+                x_open_router_title=self.sdk_configuration.globals.x_open_router_title,
+                x_open_router_categories=self.sdk_configuration.globals.x_open_router_categories,
             ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
@@ -2034,7 +2126,8 @@ class Guardrails(BaseSDK):
         id: str,
         key_hashes: List[str],
         http_referer: Optional[str] = None,
-        x_title: Optional[str] = None,
+        x_open_router_title: Optional[str] = None,
+        x_open_router_categories: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -2049,7 +2142,9 @@ class Guardrails(BaseSDK):
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
-        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+        :param x_open_router_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+        :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -2068,7 +2163,8 @@ class Guardrails(BaseSDK):
 
         request = operations.BulkAssignKeysToGuardrailRequest(
             http_referer=http_referer,
-            x_title=x_title,
+            x_open_router_title=x_open_router_title,
+            x_open_router_categories=x_open_router_categories,
             id=id,
             request_body=operations.BulkAssignKeysToGuardrailRequestBody(
                 key_hashes=key_hashes,
@@ -2089,7 +2185,8 @@ class Guardrails(BaseSDK):
             http_headers=http_headers,
             _globals=operations.BulkAssignKeysToGuardrailGlobals(
                 http_referer=self.sdk_configuration.globals.http_referer,
-                x_title=self.sdk_configuration.globals.x_title,
+                x_open_router_title=self.sdk_configuration.globals.x_open_router_title,
+                x_open_router_categories=self.sdk_configuration.globals.x_open_router_categories,
             ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
@@ -2170,7 +2267,8 @@ class Guardrails(BaseSDK):
         id: str,
         key_hashes: List[str],
         http_referer: Optional[str] = None,
-        x_title: Optional[str] = None,
+        x_open_router_title: Optional[str] = None,
+        x_open_router_categories: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -2185,7 +2283,9 @@ class Guardrails(BaseSDK):
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
-        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+        :param x_open_router_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+        :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -2204,7 +2304,8 @@ class Guardrails(BaseSDK):
 
         request = operations.BulkAssignKeysToGuardrailRequest(
             http_referer=http_referer,
-            x_title=x_title,
+            x_open_router_title=x_open_router_title,
+            x_open_router_categories=x_open_router_categories,
             id=id,
             request_body=operations.BulkAssignKeysToGuardrailRequestBody(
                 key_hashes=key_hashes,
@@ -2225,7 +2326,8 @@ class Guardrails(BaseSDK):
             http_headers=http_headers,
             _globals=operations.BulkAssignKeysToGuardrailGlobals(
                 http_referer=self.sdk_configuration.globals.http_referer,
-                x_title=self.sdk_configuration.globals.x_title,
+                x_open_router_title=self.sdk_configuration.globals.x_open_router_title,
+                x_open_router_categories=self.sdk_configuration.globals.x_open_router_categories,
             ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
@@ -2305,7 +2407,8 @@ class Guardrails(BaseSDK):
         *,
         id: str,
         http_referer: Optional[str] = None,
-        x_title: Optional[str] = None,
+        x_open_router_title: Optional[str] = None,
+        x_open_router_categories: Optional[str] = None,
         offset: Optional[str] = None,
         limit: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -2321,7 +2424,9 @@ class Guardrails(BaseSDK):
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
-        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+        :param x_open_router_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+        :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
         :param offset: Number of records to skip for pagination
         :param limit: Maximum number of records to return (max 100)
@@ -2342,7 +2447,8 @@ class Guardrails(BaseSDK):
 
         request = operations.ListGuardrailMemberAssignmentsRequest(
             http_referer=http_referer,
-            x_title=x_title,
+            x_open_router_title=x_open_router_title,
+            x_open_router_categories=x_open_router_categories,
             id=id,
             offset=offset,
             limit=limit,
@@ -2362,7 +2468,8 @@ class Guardrails(BaseSDK):
             http_headers=http_headers,
             _globals=operations.ListGuardrailMemberAssignmentsGlobals(
                 http_referer=self.sdk_configuration.globals.http_referer,
-                x_title=self.sdk_configuration.globals.x_title,
+                x_open_router_title=self.sdk_configuration.globals.x_open_router_title,
+                x_open_router_categories=self.sdk_configuration.globals.x_open_router_categories,
             ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
@@ -2430,7 +2537,8 @@ class Guardrails(BaseSDK):
         *,
         id: str,
         http_referer: Optional[str] = None,
-        x_title: Optional[str] = None,
+        x_open_router_title: Optional[str] = None,
+        x_open_router_categories: Optional[str] = None,
         offset: Optional[str] = None,
         limit: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -2446,7 +2554,9 @@ class Guardrails(BaseSDK):
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
-        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+        :param x_open_router_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+        :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
         :param offset: Number of records to skip for pagination
         :param limit: Maximum number of records to return (max 100)
@@ -2467,7 +2577,8 @@ class Guardrails(BaseSDK):
 
         request = operations.ListGuardrailMemberAssignmentsRequest(
             http_referer=http_referer,
-            x_title=x_title,
+            x_open_router_title=x_open_router_title,
+            x_open_router_categories=x_open_router_categories,
             id=id,
             offset=offset,
             limit=limit,
@@ -2487,7 +2598,8 @@ class Guardrails(BaseSDK):
             http_headers=http_headers,
             _globals=operations.ListGuardrailMemberAssignmentsGlobals(
                 http_referer=self.sdk_configuration.globals.http_referer,
-                x_title=self.sdk_configuration.globals.x_title,
+                x_open_router_title=self.sdk_configuration.globals.x_open_router_title,
+                x_open_router_categories=self.sdk_configuration.globals.x_open_router_categories,
             ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
@@ -2556,7 +2668,8 @@ class Guardrails(BaseSDK):
         id: str,
         member_user_ids: List[str],
         http_referer: Optional[str] = None,
-        x_title: Optional[str] = None,
+        x_open_router_title: Optional[str] = None,
+        x_open_router_categories: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -2571,7 +2684,9 @@ class Guardrails(BaseSDK):
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
-        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+        :param x_open_router_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+        :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -2590,7 +2705,8 @@ class Guardrails(BaseSDK):
 
         request = operations.BulkAssignMembersToGuardrailRequest(
             http_referer=http_referer,
-            x_title=x_title,
+            x_open_router_title=x_open_router_title,
+            x_open_router_categories=x_open_router_categories,
             id=id,
             request_body=operations.BulkAssignMembersToGuardrailRequestBody(
                 member_user_ids=member_user_ids,
@@ -2611,7 +2727,8 @@ class Guardrails(BaseSDK):
             http_headers=http_headers,
             _globals=operations.BulkAssignMembersToGuardrailGlobals(
                 http_referer=self.sdk_configuration.globals.http_referer,
-                x_title=self.sdk_configuration.globals.x_title,
+                x_open_router_title=self.sdk_configuration.globals.x_open_router_title,
+                x_open_router_categories=self.sdk_configuration.globals.x_open_router_categories,
             ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
@@ -2692,7 +2809,8 @@ class Guardrails(BaseSDK):
         id: str,
         member_user_ids: List[str],
         http_referer: Optional[str] = None,
-        x_title: Optional[str] = None,
+        x_open_router_title: Optional[str] = None,
+        x_open_router_categories: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -2707,7 +2825,9 @@ class Guardrails(BaseSDK):
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
-        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+        :param x_open_router_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+        :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -2726,7 +2846,8 @@ class Guardrails(BaseSDK):
 
         request = operations.BulkAssignMembersToGuardrailRequest(
             http_referer=http_referer,
-            x_title=x_title,
+            x_open_router_title=x_open_router_title,
+            x_open_router_categories=x_open_router_categories,
             id=id,
             request_body=operations.BulkAssignMembersToGuardrailRequestBody(
                 member_user_ids=member_user_ids,
@@ -2747,7 +2868,8 @@ class Guardrails(BaseSDK):
             http_headers=http_headers,
             _globals=operations.BulkAssignMembersToGuardrailGlobals(
                 http_referer=self.sdk_configuration.globals.http_referer,
-                x_title=self.sdk_configuration.globals.x_title,
+                x_open_router_title=self.sdk_configuration.globals.x_open_router_title,
+                x_open_router_categories=self.sdk_configuration.globals.x_open_router_categories,
             ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
@@ -2828,7 +2950,8 @@ class Guardrails(BaseSDK):
         id: str,
         key_hashes: List[str],
         http_referer: Optional[str] = None,
-        x_title: Optional[str] = None,
+        x_open_router_title: Optional[str] = None,
+        x_open_router_categories: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -2843,7 +2966,9 @@ class Guardrails(BaseSDK):
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
-        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+        :param x_open_router_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+        :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -2862,7 +2987,8 @@ class Guardrails(BaseSDK):
 
         request = operations.BulkUnassignKeysFromGuardrailRequest(
             http_referer=http_referer,
-            x_title=x_title,
+            x_open_router_title=x_open_router_title,
+            x_open_router_categories=x_open_router_categories,
             id=id,
             request_body=operations.BulkUnassignKeysFromGuardrailRequestBody(
                 key_hashes=key_hashes,
@@ -2883,7 +3009,8 @@ class Guardrails(BaseSDK):
             http_headers=http_headers,
             _globals=operations.BulkUnassignKeysFromGuardrailGlobals(
                 http_referer=self.sdk_configuration.globals.http_referer,
-                x_title=self.sdk_configuration.globals.x_title,
+                x_open_router_title=self.sdk_configuration.globals.x_open_router_title,
+                x_open_router_categories=self.sdk_configuration.globals.x_open_router_categories,
             ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
@@ -2964,7 +3091,8 @@ class Guardrails(BaseSDK):
         id: str,
         key_hashes: List[str],
         http_referer: Optional[str] = None,
-        x_title: Optional[str] = None,
+        x_open_router_title: Optional[str] = None,
+        x_open_router_categories: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -2979,7 +3107,9 @@ class Guardrails(BaseSDK):
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
-        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+        :param x_open_router_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+        :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -2998,7 +3128,8 @@ class Guardrails(BaseSDK):
 
         request = operations.BulkUnassignKeysFromGuardrailRequest(
             http_referer=http_referer,
-            x_title=x_title,
+            x_open_router_title=x_open_router_title,
+            x_open_router_categories=x_open_router_categories,
             id=id,
             request_body=operations.BulkUnassignKeysFromGuardrailRequestBody(
                 key_hashes=key_hashes,
@@ -3019,7 +3150,8 @@ class Guardrails(BaseSDK):
             http_headers=http_headers,
             _globals=operations.BulkUnassignKeysFromGuardrailGlobals(
                 http_referer=self.sdk_configuration.globals.http_referer,
-                x_title=self.sdk_configuration.globals.x_title,
+                x_open_router_title=self.sdk_configuration.globals.x_open_router_title,
+                x_open_router_categories=self.sdk_configuration.globals.x_open_router_categories,
             ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
@@ -3100,7 +3232,8 @@ class Guardrails(BaseSDK):
         id: str,
         member_user_ids: List[str],
         http_referer: Optional[str] = None,
-        x_title: Optional[str] = None,
+        x_open_router_title: Optional[str] = None,
+        x_open_router_categories: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -3115,7 +3248,9 @@ class Guardrails(BaseSDK):
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
-        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+        :param x_open_router_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+        :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -3134,7 +3269,8 @@ class Guardrails(BaseSDK):
 
         request = operations.BulkUnassignMembersFromGuardrailRequest(
             http_referer=http_referer,
-            x_title=x_title,
+            x_open_router_title=x_open_router_title,
+            x_open_router_categories=x_open_router_categories,
             id=id,
             request_body=operations.BulkUnassignMembersFromGuardrailRequestBody(
                 member_user_ids=member_user_ids,
@@ -3155,7 +3291,8 @@ class Guardrails(BaseSDK):
             http_headers=http_headers,
             _globals=operations.BulkUnassignMembersFromGuardrailGlobals(
                 http_referer=self.sdk_configuration.globals.http_referer,
-                x_title=self.sdk_configuration.globals.x_title,
+                x_open_router_title=self.sdk_configuration.globals.x_open_router_title,
+                x_open_router_categories=self.sdk_configuration.globals.x_open_router_categories,
             ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
@@ -3236,7 +3373,8 @@ class Guardrails(BaseSDK):
         id: str,
         member_user_ids: List[str],
         http_referer: Optional[str] = None,
-        x_title: Optional[str] = None,
+        x_open_router_title: Optional[str] = None,
+        x_open_router_categories: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -3251,7 +3389,9 @@ class Guardrails(BaseSDK):
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
-        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+        :param x_open_router_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+        :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -3270,7 +3410,8 @@ class Guardrails(BaseSDK):
 
         request = operations.BulkUnassignMembersFromGuardrailRequest(
             http_referer=http_referer,
-            x_title=x_title,
+            x_open_router_title=x_open_router_title,
+            x_open_router_categories=x_open_router_categories,
             id=id,
             request_body=operations.BulkUnassignMembersFromGuardrailRequestBody(
                 member_user_ids=member_user_ids,
@@ -3291,7 +3432,8 @@ class Guardrails(BaseSDK):
             http_headers=http_headers,
             _globals=operations.BulkUnassignMembersFromGuardrailGlobals(
                 http_referer=self.sdk_configuration.globals.http_referer,
-                x_title=self.sdk_configuration.globals.x_title,
+                x_open_router_title=self.sdk_configuration.globals.x_open_router_title,
+                x_open_router_categories=self.sdk_configuration.globals.x_open_router_categories,
             ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(

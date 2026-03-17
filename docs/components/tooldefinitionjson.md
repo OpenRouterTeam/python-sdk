@@ -1,12 +1,49 @@
 # ToolDefinitionJSON
 
-Tool definition for function calling
+Tool definition for function calling (regular function or OpenRouter built-in server tool)
 
 
-## Fields
+## Supported Types
 
-| Field                                                                                                                                                                                                                              | Type                                                                                                                                                                                                                               | Required                                                                                                                                                                                                                           | Description                                                                                                                                                                                                                        | Example                                                                                                                                                                                                                            |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `type`                                                                                                                                                                                                                             | [components.ToolDefinitionJSONType](../components/tooldefinitionjsontype.md)                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                                                                                 | N/A                                                                                                                                                                                                                                |                                                                                                                                                                                                                                    |
-| `function`                                                                                                                                                                                                                         | [components.ToolDefinitionJSONFunction](../components/tooldefinitionjsonfunction.md)                                                                                                                                               | :heavy_check_mark:                                                                                                                                                                                                                 | Function definition for tool calling                                                                                                                                                                                               | {<br/>"name": "get_weather",<br/>"description": "Get the current weather for a location",<br/>"parameters": {<br/>"type": "object",<br/>"properties": {<br/>"location": {<br/>"type": "string",<br/>"description": "City name"<br/>}<br/>},<br/>"required": [<br/>"location"<br/>]<br/>}<br/>} |
-| `cache_control`                                                                                                                                                                                                                    | [Optional[components.ChatMessageContentItemCacheControl]](../components/chatmessagecontentitemcachecontrol.md)                                                                                                                     | :heavy_minus_sign:                                                                                                                                                                                                                 | Cache control for the content part                                                                                                                                                                                                 | {<br/>"type": "ephemeral",<br/>"ttl": "5m"<br/>}                                                                                                                                                                                   |
+### `components.ToolDefinitionJSONFunction`
+
+```python
+value: components.ToolDefinitionJSONFunction = /* values here */
+```
+
+### `components.DatetimeServerTool`
+
+```python
+value: components.DatetimeServerTool = /* values here */
+```
+
+### `components.WebSearchServerTool`
+
+```python
+value: components.WebSearchServerTool = /* values here */
+```
+
+### `components.WebSearchShorthand`
+
+```python
+value: components.WebSearchShorthand = /* values here */
+```
+
+### `components.WebSearchShorthand`
+
+```python
+value: components.WebSearchShorthand = /* values here */
+```
+
+### `components.WebSearchShorthand`
+
+```python
+value: components.WebSearchShorthand = /* values here */
+```
+
+### `components.WebSearchShorthand`
+
+```python
+value: components.WebSearchShorthand = /* values here */
+```
+

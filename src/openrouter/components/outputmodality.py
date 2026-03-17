@@ -11,6 +11,7 @@ OutputModality = Union[
         "image",
         "embeddings",
         "audio",
+        "video",
     ],
     UnrecognizedStr,
 ]

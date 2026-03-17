@@ -21,14 +21,16 @@ from .responsesoutputmessage import (
     ResponsesOutputMessage,
     ResponsesOutputMessageTypedDict,
 )
+from .responsesservertooloutput import (
+    ResponsesServerToolOutput,
+    ResponsesServerToolOutputTypedDict,
+)
 from .responseswebsearchcalloutput import (
     ResponsesWebSearchCallOutput,
     ResponsesWebSearchCallOutputTypedDict,
 )
-from openrouter.utils import get_discriminator
-from pydantic import Discriminator, Tag
 from typing import Union
-from typing_extensions import Annotated, TypeAliasType
+from typing_extensions import TypeAliasType
 
 
 ResponsesOutputItemTypedDict = TypeAliasType(
@@ -37,6 +39,7 @@ ResponsesOutputItemTypedDict = TypeAliasType(
         ResponsesWebSearchCallOutputTypedDict,
         ResponsesOutputItemFileSearchCallTypedDict,
         ResponsesImageGenerationCallTypedDict,
+        ResponsesServerToolOutputTypedDict,
         ResponsesOutputMessageTypedDict,
         ResponsesOutputItemFunctionCallTypedDict,
         ResponsesOutputItemReasoningTypedDict,
@@ -45,15 +48,16 @@ ResponsesOutputItemTypedDict = TypeAliasType(
 r"""An output item from the response"""
 
 
-ResponsesOutputItem = Annotated[
+ResponsesOutputItem = TypeAliasType(
+    "ResponsesOutputItem",
     Union[
-        Annotated[ResponsesOutputMessage, Tag("message")],
-        Annotated[ResponsesOutputItemReasoning, Tag("reasoning")],
-        Annotated[ResponsesOutputItemFunctionCall, Tag("function_call")],
-        Annotated[ResponsesWebSearchCallOutput, Tag("web_search_call")],
-        Annotated[ResponsesOutputItemFileSearchCall, Tag("file_search_call")],
-        Annotated[ResponsesImageGenerationCall, Tag("image_generation_call")],
+        ResponsesWebSearchCallOutput,
+        ResponsesOutputItemFileSearchCall,
+        ResponsesImageGenerationCall,
+        ResponsesServerToolOutput,
+        ResponsesOutputMessage,
+        ResponsesOutputItemFunctionCall,
+        ResponsesOutputItemReasoning,
     ],
-    Discriminator(lambda m: get_discriminator(m, "type", "type")),
-]
+)
 r"""An output item from the response"""

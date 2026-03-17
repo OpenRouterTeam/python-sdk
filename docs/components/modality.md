@@ -7,3 +7,4 @@
 | ------- | ------- |
 | `TEXT`  | text    |
 | `IMAGE` | image   |
+| `AUDIO` | audio   |

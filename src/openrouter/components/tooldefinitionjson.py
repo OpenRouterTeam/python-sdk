@@ -5,6 +5,9 @@ from .chatmessagecontentitemcachecontrol import (
     ChatMessageContentItemCacheControl,
     ChatMessageContentItemCacheControlTypedDict,
 )
+from .datetimeservertool import DatetimeServerTool, DatetimeServerToolTypedDict
+from .websearchservertool import WebSearchServerTool, WebSearchServerToolTypedDict
+from .websearchshorthand import WebSearchShorthand, WebSearchShorthandTypedDict
 from openrouter.types import (
     BaseModel,
     Nullable,
@@ -12,15 +15,16 @@ from openrouter.types import (
     UNSET,
     UNSET_SENTINEL,
 )
-from pydantic import model_serializer
-from typing import Any, Dict, Literal, Optional
-from typing_extensions import NotRequired, TypedDict
+from openrouter.utils import get_discriminator
+from pydantic import Discriminator, Tag, model_serializer
+from typing import Any, Dict, Literal, Optional, Union
+from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
 ToolDefinitionJSONType = Literal["function",]
 
 
-class ToolDefinitionJSONFunctionTypedDict(TypedDict):
+class ToolDefinitionJSONFunctionFunctionTypedDict(TypedDict):
     r"""Function definition for tool calling"""
 
     name: str
@@ -33,7 +37,7 @@ class ToolDefinitionJSONFunctionTypedDict(TypedDict):
     r"""Enable strict schema adherence"""
 
 
-class ToolDefinitionJSONFunction(BaseModel):
+class ToolDefinitionJSONFunctionFunction(BaseModel):
     r"""Function definition for tool calling"""
 
     name: str
@@ -79,23 +83,46 @@ class ToolDefinitionJSONFunction(BaseModel):
         return m
 
 
-class ToolDefinitionJSONTypedDict(TypedDict):
-    r"""Tool definition for function calling"""
-
+class ToolDefinitionJSONFunctionTypedDict(TypedDict):
     type: ToolDefinitionJSONType
-    function: ToolDefinitionJSONFunctionTypedDict
+    function: ToolDefinitionJSONFunctionFunctionTypedDict
     r"""Function definition for tool calling"""
     cache_control: NotRequired[ChatMessageContentItemCacheControlTypedDict]
     r"""Cache control for the content part"""
 
 
-class ToolDefinitionJSON(BaseModel):
-    r"""Tool definition for function calling"""
-
+class ToolDefinitionJSONFunction(BaseModel):
     type: ToolDefinitionJSONType
 
-    function: ToolDefinitionJSONFunction
+    function: ToolDefinitionJSONFunctionFunction
     r"""Function definition for tool calling"""
 
     cache_control: Optional[ChatMessageContentItemCacheControl] = None
     r"""Cache control for the content part"""
+
+
+ToolDefinitionJSONTypedDict = TypeAliasType(
+    "ToolDefinitionJSONTypedDict",
+    Union[
+        DatetimeServerToolTypedDict,
+        WebSearchServerToolTypedDict,
+        ToolDefinitionJSONFunctionTypedDict,
+        WebSearchShorthandTypedDict,
+    ],
+)
+r"""Tool definition for function calling (regular function or OpenRouter built-in server tool)"""
+
+
+ToolDefinitionJSON = Annotated[
+    Union[
+        Annotated[ToolDefinitionJSONFunction, Tag("function")],
+        Annotated[DatetimeServerTool, Tag("openrouter:datetime")],
+        Annotated[WebSearchServerTool, Tag("openrouter:web_search")],
+        Annotated[WebSearchShorthand, Tag("web_search")],
+        Annotated[WebSearchShorthand, Tag("web_search_preview")],
+        Annotated[WebSearchShorthand, Tag("web_search_preview_2025_03_11")],
+        Annotated[WebSearchShorthand, Tag("web_search_2025_08_26")],
+    ],
+    Discriminator(lambda m: get_discriminator(m, "type", "type")),
+]
+r"""Tool definition for function calling (regular function or OpenRouter built-in server tool)"""

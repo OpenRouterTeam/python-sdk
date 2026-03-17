@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 from .chatstreamoptions import ChatStreamOptions, ChatStreamOptionsTypedDict
+from .contextcompressionengine import ContextCompressionEngine
 from .datacollection import DataCollection
 from .debugoptions import DebugOptions, DebugOptionsTypedDict
 from .message import Message, MessageTypedDict
@@ -87,6 +88,7 @@ ChatGenerationParamsSortEnum = Union[
         "price",
         "throughput",
         "latency",
+        "exacto",
     ],
     UnrecognizedStr,
 ]
@@ -96,6 +98,7 @@ ChatGenerationParamsProviderSortConfigEnum = Literal[
     "price",
     "throughput",
     "latency",
+    "exacto",
 ]
 
 
@@ -104,6 +107,7 @@ ChatGenerationParamsBy = Union[
         "price",
         "throughput",
         "latency",
+        "exacto",
     ],
     UnrecognizedStr,
 ]
@@ -194,6 +198,7 @@ ChatGenerationParamsProviderSort = Union[
         "price",
         "throughput",
         "latency",
+        "exacto",
     ],
     UnrecognizedStr,
 ]
@@ -401,6 +406,27 @@ class ChatGenerationParamsProvider(BaseModel):
         return m
 
 
+ChatGenerationParamsIDContextCompression = Literal["context-compression",]
+
+
+class ChatGenerationParamsPluginContextCompressionTypedDict(TypedDict):
+    id: ChatGenerationParamsIDContextCompression
+    enabled: NotRequired[bool]
+    r"""Set to false to disable the context-compression plugin for this request. Defaults to true."""
+    engine: NotRequired[ContextCompressionEngine]
+    r"""The compression engine to use. Defaults to \"middle-out\"."""
+
+
+class ChatGenerationParamsPluginContextCompression(BaseModel):
+    id: ChatGenerationParamsIDContextCompression
+
+    enabled: Optional[bool] = None
+    r"""Set to false to disable the context-compression plugin for this request. Defaults to true."""
+
+    engine: Optional[ContextCompressionEngine] = None
+    r"""The compression engine to use. Defaults to \"middle-out\"."""
+
+
 ChatGenerationParamsIDResponseHealing = Literal["response-healing",]
 
 
@@ -449,6 +475,10 @@ class ChatGenerationParamsPluginWebTypedDict(TypedDict):
     search_prompt: NotRequired[str]
     engine: NotRequired[WebSearchEngine]
     r"""The search engine to use for web search."""
+    include_domains: NotRequired[List[str]]
+    r"""A list of domains to restrict web search results to. Supports wildcards (e.g. \"*.substack.com\") and path filtering (e.g. \"openai.com/blog\")."""
+    exclude_domains: NotRequired[List[str]]
+    r"""A list of domains to exclude from web search results. Supports wildcards (e.g. \"*.substack.com\") and path filtering (e.g. \"openai.com/blog\")."""
 
 
 class ChatGenerationParamsPluginWeb(BaseModel):
@@ -465,6 +495,12 @@ class ChatGenerationParamsPluginWeb(BaseModel):
         Optional[WebSearchEngine], PlainValidator(validate_open_enum(False))
     ] = None
     r"""The search engine to use for web search."""
+
+    include_domains: Optional[List[str]] = None
+    r"""A list of domains to restrict web search results to. Supports wildcards (e.g. \"*.substack.com\") and path filtering (e.g. \"openai.com/blog\")."""
+
+    exclude_domains: Optional[List[str]] = None
+    r"""A list of domains to exclude from web search results. Supports wildcards (e.g. \"*.substack.com\") and path filtering (e.g. \"openai.com/blog\")."""
 
 
 ChatGenerationParamsIDModeration = Literal["moderation",]
@@ -506,6 +542,7 @@ ChatGenerationParamsPluginUnionTypedDict = TypeAliasType(
         ChatGenerationParamsPluginResponseHealingTypedDict,
         ChatGenerationParamsPluginAutoRouterTypedDict,
         ChatGenerationParamsPluginFileParserTypedDict,
+        ChatGenerationParamsPluginContextCompressionTypedDict,
         ChatGenerationParamsPluginWebTypedDict,
     ],
 )
@@ -518,6 +555,9 @@ ChatGenerationParamsPluginUnion = Annotated[
         Annotated[ChatGenerationParamsPluginWeb, Tag("web")],
         Annotated[ChatGenerationParamsPluginFileParser, Tag("file-parser")],
         Annotated[ChatGenerationParamsPluginResponseHealing, Tag("response-healing")],
+        Annotated[
+            ChatGenerationParamsPluginContextCompression, Tag("context-compression")
+        ],
     ],
     Discriminator(lambda m: get_discriminator(m, "id", "id")),
 ]
@@ -671,9 +711,39 @@ Modality = Union[
     Literal[
         "text",
         "image",
+        "audio",
     ],
     UnrecognizedStr,
 ]
+
+
+ChatGenerationParamsType = Literal["ephemeral",]
+
+
+ChatGenerationParamsTTL = Union[
+    Literal[
+        "5m",
+        "1h",
+    ],
+    UnrecognizedStr,
+]
+
+
+class CacheControlTypedDict(TypedDict):
+    r"""Enable automatic prompt caching. When set, the system automatically applies cache breakpoints to the last cacheable block in the request. Currently supported for Anthropic Claude models."""
+
+    type: ChatGenerationParamsType
+    ttl: NotRequired[ChatGenerationParamsTTL]
+
+
+class CacheControl(BaseModel):
+    r"""Enable automatic prompt caching. When set, the system automatically applies cache breakpoints to the last cacheable block in the request. Currently supported for Anthropic Claude models."""
+
+    type: ChatGenerationParamsType
+
+    ttl: Annotated[
+        Optional[ChatGenerationParamsTTL], PlainValidator(validate_open_enum(False))
+    ] = None
 
 
 class ChatGenerationParamsTypedDict(TypedDict):
@@ -706,7 +776,7 @@ class ChatGenerationParamsTypedDict(TypedDict):
     max_completion_tokens: NotRequired[Nullable[float]]
     r"""Maximum tokens in completion"""
     max_tokens: NotRequired[Nullable[float]]
-    r"""Maximum tokens (deprecated, use max_completion_tokens)"""
+    r"""Maximum tokens (deprecated, use max_completion_tokens). Note: some providers enforce a minimum of 16."""
     metadata: NotRequired[Dict[str, str]]
     r"""Key-value pairs for additional object information (max 16 pairs, 64 char keys, 512 char values)"""
     presence_penalty: NotRequired[Nullable[float]]
@@ -737,7 +807,9 @@ class ChatGenerationParamsTypedDict(TypedDict):
     image_config: NotRequired[Dict[str, ChatGenerationParamsImageConfigTypedDict]]
     r"""Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/guides/overview/multimodal/image-generation for more details."""
     modalities: NotRequired[List[Modality]]
-    r"""Output modalities for the response. Supported values are \"text\" and \"image\"."""
+    r"""Output modalities for the response. Supported values are \"text\", \"image\", and \"audio\"."""
+    cache_control: NotRequired[CacheControlTypedDict]
+    r"""Enable automatic prompt caching. When set, the system automatically applies cache breakpoints to the last cacheable block in the request. Currently supported for Anthropic Claude models."""
 
 
 class ChatGenerationParams(BaseModel):
@@ -783,7 +855,7 @@ class ChatGenerationParams(BaseModel):
     r"""Maximum tokens in completion"""
 
     max_tokens: OptionalNullable[float] = UNSET
-    r"""Maximum tokens (deprecated, use max_completion_tokens)"""
+    r"""Maximum tokens (deprecated, use max_completion_tokens). Note: some providers enforce a minimum of 16."""
 
     metadata: Optional[Dict[str, str]] = None
     r"""Key-value pairs for additional object information (max 16 pairs, 64 char keys, 512 char values)"""
@@ -832,7 +904,10 @@ class ChatGenerationParams(BaseModel):
     modalities: Optional[
         List[Annotated[Modality, PlainValidator(validate_open_enum(False))]]
     ] = None
-    r"""Output modalities for the response. Supported values are \"text\" and \"image\"."""
+    r"""Output modalities for the response. Supported values are \"text\", \"image\", and \"audio\"."""
+
+    cache_control: Optional[CacheControl] = None
+    r"""Enable automatic prompt caching. When set, the system automatically applies cache breakpoints to the last cacheable block in the request. Currently supported for Anthropic Claude models."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
@@ -866,6 +941,7 @@ class ChatGenerationParams(BaseModel):
             "debug",
             "image_config",
             "modalities",
+            "cache_control",
         ]
         nullable_fields = [
             "provider",

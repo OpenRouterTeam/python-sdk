@@ -12,15 +12,68 @@ from openrouter.types import (
     OptionalNullable,
     UNSET,
     UNSET_SENTINEL,
+    UnrecognizedStr,
 )
 from openrouter.utils import validate_open_enum
 from pydantic import model_serializer
 from pydantic.functional_validators import PlainValidator
-from typing import Literal, Optional
+from typing import List, Literal, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 OpenResponsesWebSearchPreviewToolType = Literal["web_search_preview",]
+
+
+OpenResponsesWebSearchPreviewToolEngine = Union[
+    Literal[
+        "auto",
+        "native",
+        "exa",
+    ],
+    UnrecognizedStr,
+]
+r"""Which search engine to use. \"auto\" (default) uses native if the provider supports it, otherwise Exa. \"native\" forces the provider's built-in search (parameters like max_results, search_context_size, and domain filters are not forwarded to the provider). \"exa\" forces the Exa search API."""
+
+
+class OpenResponsesWebSearchPreviewToolFiltersTypedDict(TypedDict):
+    allowed_domains: NotRequired[Nullable[List[str]]]
+    excluded_domains: NotRequired[Nullable[List[str]]]
+
+
+class OpenResponsesWebSearchPreviewToolFilters(BaseModel):
+    allowed_domains: OptionalNullable[List[str]] = UNSET
+
+    excluded_domains: OptionalNullable[List[str]] = UNSET
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = ["allowed_domains", "excluded_domains"]
+        nullable_fields = ["allowed_domains", "excluded_domains"]
+        null_default_fields = []
+
+        serialized = handler(self)
+
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+            serialized.pop(k, None)
+
+            optional_nullable = k in optional_fields and k in nullable_fields
+            is_set = (
+                self.__pydantic_fields_set__.intersection({n})
+                or k in null_default_fields
+            )  # pylint: disable=no-member
+
+            if val is not None and val != UNSET_SENTINEL:
+                m[k] = val
+            elif val != UNSET_SENTINEL and (
+                not k in optional_fields or (optional_nullable and is_set)
+            ):
+                m[k] = val
+
+        return m
 
 
 class OpenResponsesWebSearchPreviewToolTypedDict(TypedDict):
@@ -30,6 +83,11 @@ class OpenResponsesWebSearchPreviewToolTypedDict(TypedDict):
     search_context_size: NotRequired[ResponsesSearchContextSize]
     r"""Size of the search context for web search tools"""
     user_location: NotRequired[Nullable[WebSearchPreviewToolUserLocationTypedDict]]
+    engine: NotRequired[OpenResponsesWebSearchPreviewToolEngine]
+    r"""Which search engine to use. \"auto\" (default) uses native if the provider supports it, otherwise Exa. \"native\" forces the provider's built-in search (parameters like max_results, search_context_size, and domain filters are not forwarded to the provider). \"exa\" forces the Exa search API."""
+    max_results: NotRequired[float]
+    r"""Maximum number of search results to return per search call. Defaults to 5. Only applies when using the Exa engine; ignored with native provider search."""
+    filters: NotRequired[Nullable[OpenResponsesWebSearchPreviewToolFiltersTypedDict]]
 
 
 class OpenResponsesWebSearchPreviewTool(BaseModel):
@@ -44,10 +102,27 @@ class OpenResponsesWebSearchPreviewTool(BaseModel):
 
     user_location: OptionalNullable[WebSearchPreviewToolUserLocation] = UNSET
 
+    engine: Annotated[
+        Optional[OpenResponsesWebSearchPreviewToolEngine],
+        PlainValidator(validate_open_enum(False)),
+    ] = None
+    r"""Which search engine to use. \"auto\" (default) uses native if the provider supports it, otherwise Exa. \"native\" forces the provider's built-in search (parameters like max_results, search_context_size, and domain filters are not forwarded to the provider). \"exa\" forces the Exa search API."""
+
+    max_results: Optional[float] = None
+    r"""Maximum number of search results to return per search call. Defaults to 5. Only applies when using the Exa engine; ignored with native provider search."""
+
+    filters: OptionalNullable[OpenResponsesWebSearchPreviewToolFilters] = UNSET
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["search_context_size", "user_location"]
-        nullable_fields = ["user_location"]
+        optional_fields = [
+            "search_context_size",
+            "user_location",
+            "engine",
+            "max_results",
+            "filters",
+        ]
+        nullable_fields = ["user_location", "filters"]
         null_default_fields = []
 
         serialized = handler(self)

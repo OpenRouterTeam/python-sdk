@@ -18,7 +18,8 @@ class OAuth(BaseSDK):
         *,
         code: str,
         http_referer: Optional[str] = None,
-        x_title: Optional[str] = None,
+        x_open_router_title: Optional[str] = None,
+        x_open_router_categories: Optional[str] = None,
         code_verifier: Optional[str] = None,
         code_challenge_method: OptionalNullable[
             operations.ExchangeAuthCodeForAPIKeyCodeChallengeMethod
@@ -36,7 +37,9 @@ class OAuth(BaseSDK):
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
-        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+        :param x_open_router_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+        :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
         :param code_verifier: The code verifier if code_challenge was used in the authorization request
         :param code_challenge_method: The method used to generate the code challenge
@@ -57,7 +60,8 @@ class OAuth(BaseSDK):
 
         request = operations.ExchangeAuthCodeForAPIKeyRequest(
             http_referer=http_referer,
-            x_title=x_title,
+            x_open_router_title=x_open_router_title,
+            x_open_router_categories=x_open_router_categories,
             request_body=operations.ExchangeAuthCodeForAPIKeyRequestBody(
                 code=code,
                 code_verifier=code_verifier,
@@ -79,7 +83,8 @@ class OAuth(BaseSDK):
             http_headers=http_headers,
             _globals=operations.ExchangeAuthCodeForAPIKeyGlobals(
                 http_referer=self.sdk_configuration.globals.http_referer,
-                x_title=self.sdk_configuration.globals.x_title,
+                x_open_router_title=self.sdk_configuration.globals.x_open_router_title,
+                x_open_router_categories=self.sdk_configuration.globals.x_open_router_categories,
             ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
@@ -154,7 +159,8 @@ class OAuth(BaseSDK):
         *,
         code: str,
         http_referer: Optional[str] = None,
-        x_title: Optional[str] = None,
+        x_open_router_title: Optional[str] = None,
+        x_open_router_categories: Optional[str] = None,
         code_verifier: Optional[str] = None,
         code_challenge_method: OptionalNullable[
             operations.ExchangeAuthCodeForAPIKeyCodeChallengeMethod
@@ -172,7 +178,9 @@ class OAuth(BaseSDK):
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
-        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+        :param x_open_router_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+        :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
         :param code_verifier: The code verifier if code_challenge was used in the authorization request
         :param code_challenge_method: The method used to generate the code challenge
@@ -193,7 +201,8 @@ class OAuth(BaseSDK):
 
         request = operations.ExchangeAuthCodeForAPIKeyRequest(
             http_referer=http_referer,
-            x_title=x_title,
+            x_open_router_title=x_open_router_title,
+            x_open_router_categories=x_open_router_categories,
             request_body=operations.ExchangeAuthCodeForAPIKeyRequestBody(
                 code=code,
                 code_verifier=code_verifier,
@@ -215,7 +224,8 @@ class OAuth(BaseSDK):
             http_headers=http_headers,
             _globals=operations.ExchangeAuthCodeForAPIKeyGlobals(
                 http_referer=self.sdk_configuration.globals.http_referer,
-                x_title=self.sdk_configuration.globals.x_title,
+                x_open_router_title=self.sdk_configuration.globals.x_open_router_title,
+                x_open_router_categories=self.sdk_configuration.globals.x_open_router_categories,
             ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
@@ -290,7 +300,8 @@ class OAuth(BaseSDK):
         *,
         callback_url: str,
         http_referer: Optional[str] = None,
-        x_title: Optional[str] = None,
+        x_open_router_title: Optional[str] = None,
+        x_open_router_categories: Optional[str] = None,
         code_challenge: Optional[str] = None,
         code_challenge_method: Optional[
             operations.CreateAuthKeysCodeCodeChallengeMethod
@@ -312,7 +323,9 @@ class OAuth(BaseSDK):
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
-        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+        :param x_open_router_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+        :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
         :param code_challenge: PKCE code challenge for enhanced security
         :param code_challenge_method: The method used to generate the code challenge
@@ -337,7 +350,8 @@ class OAuth(BaseSDK):
 
         request = operations.CreateAuthKeysCodeRequest(
             http_referer=http_referer,
-            x_title=x_title,
+            x_open_router_title=x_open_router_title,
+            x_open_router_categories=x_open_router_categories,
             request_body=operations.CreateAuthKeysCodeRequestBody(
                 callback_url=callback_url,
                 code_challenge=code_challenge,
@@ -363,7 +377,8 @@ class OAuth(BaseSDK):
             http_headers=http_headers,
             _globals=operations.CreateAuthKeysCodeGlobals(
                 http_referer=self.sdk_configuration.globals.http_referer,
-                x_title=self.sdk_configuration.globals.x_title,
+                x_open_router_title=self.sdk_configuration.globals.x_open_router_title,
+                x_open_router_categories=self.sdk_configuration.globals.x_open_router_categories,
             ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
@@ -396,7 +411,7 @@ class OAuth(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "401", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "409", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -415,6 +430,11 @@ class OAuth(BaseSDK):
                 errors.UnauthorizedResponseErrorData, http_res
             )
             raise errors.UnauthorizedResponseError(response_data, http_res)
+        if utils.match_response(http_res, "409", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ConflictResponseErrorData, http_res
+            )
+            raise errors.ConflictResponseError(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(
                 errors.InternalServerResponseErrorData, http_res
@@ -438,7 +458,8 @@ class OAuth(BaseSDK):
         *,
         callback_url: str,
         http_referer: Optional[str] = None,
-        x_title: Optional[str] = None,
+        x_open_router_title: Optional[str] = None,
+        x_open_router_categories: Optional[str] = None,
         code_challenge: Optional[str] = None,
         code_challenge_method: Optional[
             operations.CreateAuthKeysCodeCodeChallengeMethod
@@ -460,7 +481,9 @@ class OAuth(BaseSDK):
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
-        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+        :param x_open_router_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+        :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
         :param code_challenge: PKCE code challenge for enhanced security
         :param code_challenge_method: The method used to generate the code challenge
@@ -485,7 +508,8 @@ class OAuth(BaseSDK):
 
         request = operations.CreateAuthKeysCodeRequest(
             http_referer=http_referer,
-            x_title=x_title,
+            x_open_router_title=x_open_router_title,
+            x_open_router_categories=x_open_router_categories,
             request_body=operations.CreateAuthKeysCodeRequestBody(
                 callback_url=callback_url,
                 code_challenge=code_challenge,
@@ -511,7 +535,8 @@ class OAuth(BaseSDK):
             http_headers=http_headers,
             _globals=operations.CreateAuthKeysCodeGlobals(
                 http_referer=self.sdk_configuration.globals.http_referer,
-                x_title=self.sdk_configuration.globals.x_title,
+                x_open_router_title=self.sdk_configuration.globals.x_open_router_title,
+                x_open_router_categories=self.sdk_configuration.globals.x_open_router_categories,
             ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
@@ -544,7 +569,7 @@ class OAuth(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "401", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "409", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -563,6 +588,11 @@ class OAuth(BaseSDK):
                 errors.UnauthorizedResponseErrorData, http_res
             )
             raise errors.UnauthorizedResponseError(response_data, http_res)
+        if utils.match_response(http_res, "409", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ConflictResponseErrorData, http_res
+            )
+            raise errors.ConflictResponseError(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(
                 errors.InternalServerResponseErrorData, http_res

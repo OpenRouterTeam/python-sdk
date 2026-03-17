@@ -33,3 +33,9 @@ value: components.OpenResponsesRequestPluginFileParser = /* values here */
 value: components.OpenResponsesRequestPluginResponseHealing = /* values here */
 ```
 
+### `components.OpenResponsesRequestPluginContextCompression`
+
+```python
+value: components.OpenResponsesRequestPluginContextCompression = /* values here */
+```
+

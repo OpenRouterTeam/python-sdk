@@ -15,8 +15,12 @@ class GetUserActivityGlobalsTypedDict(TypedDict):
     This is used to track API usage per application.
 
     """
-    x_title: NotRequired[str]
+    x_open_router_title: NotRequired[str]
     r"""The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+    """
+    x_open_router_categories: NotRequired[str]
+    r"""Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
     """
 
@@ -32,12 +36,21 @@ class GetUserActivityGlobals(BaseModel):
 
     """
 
-    x_title: Annotated[
+    x_open_router_title: Annotated[
         Optional[str],
-        pydantic.Field(alias="X-Title"),
+        pydantic.Field(alias="X-OpenRouter-Title"),
         FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
     ] = None
     r"""The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+    """
+
+    x_open_router_categories: Annotated[
+        Optional[str],
+        pydantic.Field(alias="X-OpenRouter-Categories"),
+        FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
+    ] = None
+    r"""Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
     """
 
@@ -48,8 +61,12 @@ class GetUserActivityRequestTypedDict(TypedDict):
     This is used to track API usage per application.
 
     """
-    x_title: NotRequired[str]
+    x_open_router_title: NotRequired[str]
     r"""The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+    """
+    x_open_router_categories: NotRequired[str]
+    r"""Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
     """
     date_: NotRequired[str]
@@ -67,12 +84,21 @@ class GetUserActivityRequest(BaseModel):
 
     """
 
-    x_title: Annotated[
+    x_open_router_title: Annotated[
         Optional[str],
-        pydantic.Field(alias="X-Title"),
+        pydantic.Field(alias="X-OpenRouter-Title"),
         FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
     ] = None
     r"""The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+    """
+
+    x_open_router_categories: Annotated[
+        Optional[str],
+        pydantic.Field(alias="X-OpenRouter-Categories"),
+        FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
+    ] = None
+    r"""Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
     """
 

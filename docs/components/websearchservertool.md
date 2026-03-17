@@ -1,0 +1,11 @@
+# WebSearchServerTool
+
+OpenRouter built-in server tool: searches the web for current information
+
+
+## Fields
+
+| Field                                                                                                                | Type                                                                                                                 | Required                                                                                                             | Description                                                                                                          |
+| -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `type`                                                                                                               | [components.WebSearchServerToolTypeOpenrouterWebSearch](../components/websearchservertooltypeopenrouterwebsearch.md) | :heavy_check_mark:                                                                                                   | N/A                                                                                                                  |
+| `parameters`                                                                                                         | [Optional[components.WebSearchServerToolParameters]](../components/websearchservertoolparameters.md)                 | :heavy_minus_sign:                                                                                                   | N/A                                                                                                                  |

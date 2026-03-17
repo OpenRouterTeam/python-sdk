@@ -10,3 +10,4 @@ The provider sorting strategy (price, throughput, latency)
 | `PRICE`      | price        |
 | `THROUGHPUT` | throughput   |
 | `LATENCY`    | latency      |
+| `EXACTO`     | exacto       |

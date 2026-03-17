@@ -6,10 +6,16 @@ from .openairesponsesrefusalcontent import (
     OpenAIResponsesRefusalContentTypedDict,
 )
 from .responseoutputtext import ResponseOutputText, ResponseOutputTextTypedDict
-from openrouter.types import BaseModel
+from openrouter.types import (
+    BaseModel,
+    Nullable,
+    OptionalNullable,
+    UNSET,
+    UNSET_SENTINEL,
+)
 from openrouter.utils import get_discriminator
-from pydantic import Discriminator, Tag
-from typing import List, Literal, Optional, Union
+from pydantic import Discriminator, Tag, model_serializer
+from typing import Any, List, Literal, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
@@ -63,12 +69,34 @@ OutputMessageContent = Annotated[
 ]
 
 
+OutputMessagePhaseFinalAnswer = Literal["final_answer",]
+
+
+OutputMessagePhaseCommentary = Literal["commentary",]
+
+
+OutputMessagePhaseUnionTypedDict = TypeAliasType(
+    "OutputMessagePhaseUnionTypedDict",
+    Union[OutputMessagePhaseCommentary, OutputMessagePhaseFinalAnswer, Any],
+)
+r"""The phase of an assistant message. Use `commentary` for an intermediate assistant message and `final_answer` for the final assistant message. For follow-up requests with models like `gpt-5.3-codex` and later, preserve and resend phase on all assistant messages. Omitting it can degrade performance. Not used for user messages."""
+
+
+OutputMessagePhaseUnion = TypeAliasType(
+    "OutputMessagePhaseUnion",
+    Union[OutputMessagePhaseCommentary, OutputMessagePhaseFinalAnswer, Any],
+)
+r"""The phase of an assistant message. Use `commentary` for an intermediate assistant message and `final_answer` for the final assistant message. For follow-up requests with models like `gpt-5.3-codex` and later, preserve and resend phase on all assistant messages. Omitting it can degrade performance. Not used for user messages."""
+
+
 class OutputMessageTypedDict(TypedDict):
     id: str
     role: OutputMessageRole
     type: OutputMessageType
     content: List[OutputMessageContentTypedDict]
     status: NotRequired[OutputMessageStatusUnionTypedDict]
+    phase: NotRequired[Nullable[OutputMessagePhaseUnionTypedDict]]
+    r"""The phase of an assistant message. Use `commentary` for an intermediate assistant message and `final_answer` for the final assistant message. For follow-up requests with models like `gpt-5.3-codex` and later, preserve and resend phase on all assistant messages. Omitting it can degrade performance. Not used for user messages."""
 
 
 class OutputMessage(BaseModel):
@@ -81,3 +109,36 @@ class OutputMessage(BaseModel):
     content: List[OutputMessageContent]
 
     status: Optional[OutputMessageStatusUnion] = None
+
+    phase: OptionalNullable[OutputMessagePhaseUnion] = UNSET
+    r"""The phase of an assistant message. Use `commentary` for an intermediate assistant message and `final_answer` for the final assistant message. For follow-up requests with models like `gpt-5.3-codex` and later, preserve and resend phase on all assistant messages. Omitting it can degrade performance. Not used for user messages."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = ["status", "phase"]
+        nullable_fields = ["phase"]
+        null_default_fields = []
+
+        serialized = handler(self)
+
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+            serialized.pop(k, None)
+
+            optional_nullable = k in optional_fields and k in nullable_fields
+            is_set = (
+                self.__pydantic_fields_set__.intersection({n})
+                or k in null_default_fields
+            )  # pylint: disable=no-member
+
+            if val is not None and val != UNSET_SENTINEL:
+                m[k] = val
+            elif val != UNSET_SENTINEL and (
+                not k in optional_fields or (optional_nullable and is_set)
+            ):
+                m[k] = val
+
+        return m
