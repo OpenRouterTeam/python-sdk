@@ -59,6 +59,7 @@ python:
   flattenGlobalSecurity: true
   flattenRequests: true
   flatteningOrder: parameters-first
+  forwardCompatibleUnionsByDefault: "tagged-only"
   imports:
     option: openapi
     paths:
