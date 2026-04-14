@@ -12,25 +12,25 @@ ReasoningDoneEventType = Literal["response.reasoning_text.done",]
 class ReasoningDoneEventTypedDict(TypedDict):
     r"""Event emitted when reasoning text streaming is complete"""
 
-    type: ReasoningDoneEventType
-    output_index: float
+    content_index: int
     item_id: str
-    content_index: float
+    output_index: int
+    sequence_number: int
     text: str
-    sequence_number: float
+    type: ReasoningDoneEventType
 
 
 class ReasoningDoneEvent(BaseModel):
     r"""Event emitted when reasoning text streaming is complete"""
 
-    type: ReasoningDoneEventType
-
-    output_index: float
+    content_index: int
 
     item_id: str
 
-    content_index: float
+    output_index: int
+
+    sequence_number: int
 
     text: str
 
-    sequence_number: float
+    type: ReasoningDoneEventType

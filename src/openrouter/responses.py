@@ -25,48 +25,33 @@ class Responses(BaseSDK):
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
+        background: OptionalNullable[bool] = UNSET,
+        frequency_penalty: OptionalNullable[float] = UNSET,
+        image_config: Optional[
+            Union[
+                Dict[str, components.ImageConfig],
+                Dict[str, components.ImageConfigTypedDict],
+            ]
+        ] = None,
+        include: OptionalNullable[List[components.ResponseIncludesEnum]] = UNSET,
         input: Optional[
             Union[components.InputsUnion, components.InputsUnionTypedDict]
         ] = None,
         instructions: OptionalNullable[str] = UNSET,
+        max_output_tokens: OptionalNullable[int] = UNSET,
+        max_tool_calls: OptionalNullable[int] = UNSET,
         metadata: OptionalNullable[Dict[str, str]] = UNSET,
-        tools: Optional[
-            Union[
-                List[components.ResponsesRequestToolUnion],
-                List[components.ResponsesRequestToolUnionTypedDict],
-            ]
-        ] = None,
-        tool_choice: Optional[
-            Union[
-                components.OpenAIResponsesToolChoiceUnion,
-                components.OpenAIResponsesToolChoiceUnionTypedDict,
-            ]
-        ] = None,
-        parallel_tool_calls: OptionalNullable[bool] = UNSET,
+        modalities: Optional[List[components.OutputModalityEnum]] = None,
         model: Optional[str] = None,
         models: Optional[List[str]] = None,
-        text: Optional[
-            Union[components.TextExtendedConfig, components.TextExtendedConfigTypedDict]
-        ] = None,
-        reasoning: OptionalNullable[
-            Union[components.ReasoningConfig, components.ReasoningConfigTypedDict]
-        ] = UNSET,
-        max_output_tokens: OptionalNullable[float] = UNSET,
-        temperature: OptionalNullable[float] = UNSET,
-        top_p: OptionalNullable[float] = UNSET,
-        top_logprobs: OptionalNullable[int] = UNSET,
-        max_tool_calls: OptionalNullable[int] = UNSET,
-        presence_penalty: OptionalNullable[float] = UNSET,
-        frequency_penalty: OptionalNullable[float] = UNSET,
-        top_k: Optional[float] = None,
-        image_config: Optional[
+        parallel_tool_calls: OptionalNullable[bool] = UNSET,
+        plugins: Optional[
             Union[
-                Dict[str, components.ResponsesRequestImageConfig],
-                Dict[str, components.ResponsesRequestImageConfigTypedDict],
+                List[components.ResponsesRequestPlugin],
+                List[components.ResponsesRequestPluginTypedDict],
             ]
         ] = None,
-        modalities: Optional[List[components.OutputModalityEnum]] = None,
-        prompt_cache_key: OptionalNullable[str] = UNSET,
+        presence_penalty: OptionalNullable[float] = UNSET,
         previous_response_id: OptionalNullable[str] = UNSET,
         prompt: OptionalNullable[
             Union[
@@ -74,32 +59,43 @@ class Responses(BaseSDK):
                 components.StoredPromptTemplateTypedDict,
             ]
         ] = UNSET,
-        include: OptionalNullable[List[components.ResponseIncludesEnum]] = UNSET,
-        background: OptionalNullable[bool] = UNSET,
-        safety_identifier: OptionalNullable[str] = UNSET,
-        service_tier: OptionalNullable[components.ResponsesRequestServiceTier] = "auto",
-        truncation: OptionalNullable[components.OpenAIResponsesTruncation] = UNSET,
-        stream: Union[Literal[False], None] = None,
+        prompt_cache_key: OptionalNullable[str] = UNSET,
         provider: OptionalNullable[
             Union[
-                components.ResponsesRequestProvider,
-                components.ResponsesRequestProviderTypedDict,
+                components.ProviderPreferences, components.ProviderPreferencesTypedDict
             ]
         ] = UNSET,
-        plugins: Optional[
-            Union[
-                List[components.ResponsesRequestPluginUnion],
-                List[components.ResponsesRequestPluginUnionTypedDict],
-            ]
-        ] = None,
-        user: Optional[str] = None,
+        reasoning: OptionalNullable[
+            Union[components.ReasoningConfig, components.ReasoningConfigTypedDict]
+        ] = UNSET,
+        safety_identifier: OptionalNullable[str] = UNSET,
+        service_tier: OptionalNullable[components.ResponsesRequestServiceTier] = "auto",
         session_id: Optional[str] = None,
-        trace: Optional[
+        stream: Union[Literal[False], None] = None,
+        temperature: OptionalNullable[float] = UNSET,
+        text: Optional[
+            Union[components.TextExtendedConfig, components.TextExtendedConfigTypedDict]
+        ] = None,
+        tool_choice: Optional[
             Union[
-                components.ResponsesRequestTrace,
-                components.ResponsesRequestTraceTypedDict,
+                components.OpenAIResponsesToolChoiceUnion,
+                components.OpenAIResponsesToolChoiceUnionTypedDict,
             ]
         ] = None,
+        tools: Optional[
+            Union[
+                List[components.ResponsesRequestToolUnion],
+                List[components.ResponsesRequestToolUnionTypedDict],
+            ]
+        ] = None,
+        top_k: Optional[int] = None,
+        top_logprobs: OptionalNullable[int] = UNSET,
+        top_p: OptionalNullable[float] = UNSET,
+        trace: Optional[
+            Union[components.TraceConfig, components.TraceConfigTypedDict]
+        ] = None,
+        truncation: OptionalNullable[components.OpenAIResponsesTruncation] = UNSET,
+        user: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -116,40 +112,40 @@ class Responses(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
+        :param background:
+        :param frequency_penalty:
+        :param image_config: Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/guides/overview/multimodal/image-generation for more details.
+        :param include:
         :param input: Input for a response request - can be a string or array of items
         :param instructions:
+        :param max_output_tokens:
+        :param max_tool_calls:
         :param metadata: Metadata key-value pairs for the request. Keys must be ≤64 characters and cannot contain brackets. Values must be ≤512 characters. Maximum 16 pairs allowed.
-        :param tools:
-        :param tool_choice:
-        :param parallel_tool_calls:
+        :param modalities: Output modalities for the response. Supported values are \"text\" and \"image\".
         :param model:
         :param models:
-        :param text: Text output configuration including format and verbosity
-        :param reasoning: Configuration for reasoning mode in the response
-        :param max_output_tokens:
-        :param temperature:
-        :param top_p:
-        :param top_logprobs:
-        :param max_tool_calls:
+        :param parallel_tool_calls:
+        :param plugins: Plugins you want to enable for this request, including their settings.
         :param presence_penalty:
-        :param frequency_penalty:
-        :param top_k:
-        :param image_config: Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/features/multimodal/image-generation for more details.
-        :param modalities: Output modalities for the response. Supported values are \"text\" and \"image\".
-        :param prompt_cache_key:
         :param previous_response_id:
         :param prompt:
-        :param include:
-        :param background:
+        :param prompt_cache_key:
+        :param provider: When multiple model providers are available, optionally indicate your routing preference.
+        :param reasoning: Configuration for reasoning mode in the response
         :param safety_identifier:
         :param service_tier:
-        :param truncation:
-        :param stream:
-        :param provider: When multiple model providers are available, optionally indicate your routing preference.
-        :param plugins: Plugins you want to enable for this request, including their settings.
-        :param user: A unique identifier representing your end-user, which helps distinguish between different users of your app. This allows your app to identify specific users in case of abuse reports, preventing your entire app from being affected by the actions of individual users. Maximum of 256 characters.
         :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters.
+        :param stream:
+        :param temperature:
+        :param text: Text output configuration including format and verbosity
+        :param tool_choice:
+        :param tools:
+        :param top_k:
+        :param top_logprobs:
+        :param top_p:
         :param trace: Metadata for observability and tracing. Known keys (trace_id, trace_name, span_name, generation_name, parent_span_id) have special handling. Additional keys are passed through as custom metadata to configured broadcast destinations.
+        :param truncation:
+        :param user: A unique identifier representing your end-user, which helps distinguish between different users of your app. This allows your app to identify specific users in case of abuse reports, preventing your entire app from being affected by the actions of individual users. Maximum of 256 characters.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -164,48 +160,33 @@ class Responses(BaseSDK):
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
+        background: OptionalNullable[bool] = UNSET,
+        frequency_penalty: OptionalNullable[float] = UNSET,
+        image_config: Optional[
+            Union[
+                Dict[str, components.ImageConfig],
+                Dict[str, components.ImageConfigTypedDict],
+            ]
+        ] = None,
+        include: OptionalNullable[List[components.ResponseIncludesEnum]] = UNSET,
         input: Optional[
             Union[components.InputsUnion, components.InputsUnionTypedDict]
         ] = None,
         instructions: OptionalNullable[str] = UNSET,
+        max_output_tokens: OptionalNullable[int] = UNSET,
+        max_tool_calls: OptionalNullable[int] = UNSET,
         metadata: OptionalNullable[Dict[str, str]] = UNSET,
-        tools: Optional[
-            Union[
-                List[components.ResponsesRequestToolUnion],
-                List[components.ResponsesRequestToolUnionTypedDict],
-            ]
-        ] = None,
-        tool_choice: Optional[
-            Union[
-                components.OpenAIResponsesToolChoiceUnion,
-                components.OpenAIResponsesToolChoiceUnionTypedDict,
-            ]
-        ] = None,
-        parallel_tool_calls: OptionalNullable[bool] = UNSET,
+        modalities: Optional[List[components.OutputModalityEnum]] = None,
         model: Optional[str] = None,
         models: Optional[List[str]] = None,
-        text: Optional[
-            Union[components.TextExtendedConfig, components.TextExtendedConfigTypedDict]
-        ] = None,
-        reasoning: OptionalNullable[
-            Union[components.ReasoningConfig, components.ReasoningConfigTypedDict]
-        ] = UNSET,
-        max_output_tokens: OptionalNullable[float] = UNSET,
-        temperature: OptionalNullable[float] = UNSET,
-        top_p: OptionalNullable[float] = UNSET,
-        top_logprobs: OptionalNullable[int] = UNSET,
-        max_tool_calls: OptionalNullable[int] = UNSET,
-        presence_penalty: OptionalNullable[float] = UNSET,
-        frequency_penalty: OptionalNullable[float] = UNSET,
-        top_k: Optional[float] = None,
-        image_config: Optional[
+        parallel_tool_calls: OptionalNullable[bool] = UNSET,
+        plugins: Optional[
             Union[
-                Dict[str, components.ResponsesRequestImageConfig],
-                Dict[str, components.ResponsesRequestImageConfigTypedDict],
+                List[components.ResponsesRequestPlugin],
+                List[components.ResponsesRequestPluginTypedDict],
             ]
         ] = None,
-        modalities: Optional[List[components.OutputModalityEnum]] = None,
-        prompt_cache_key: OptionalNullable[str] = UNSET,
+        presence_penalty: OptionalNullable[float] = UNSET,
         previous_response_id: OptionalNullable[str] = UNSET,
         prompt: OptionalNullable[
             Union[
@@ -213,32 +194,43 @@ class Responses(BaseSDK):
                 components.StoredPromptTemplateTypedDict,
             ]
         ] = UNSET,
-        include: OptionalNullable[List[components.ResponseIncludesEnum]] = UNSET,
-        background: OptionalNullable[bool] = UNSET,
-        safety_identifier: OptionalNullable[str] = UNSET,
-        service_tier: OptionalNullable[components.ResponsesRequestServiceTier] = "auto",
-        truncation: OptionalNullable[components.OpenAIResponsesTruncation] = UNSET,
-        stream: Literal[True],
+        prompt_cache_key: OptionalNullable[str] = UNSET,
         provider: OptionalNullable[
             Union[
-                components.ResponsesRequestProvider,
-                components.ResponsesRequestProviderTypedDict,
+                components.ProviderPreferences, components.ProviderPreferencesTypedDict
             ]
         ] = UNSET,
-        plugins: Optional[
-            Union[
-                List[components.ResponsesRequestPluginUnion],
-                List[components.ResponsesRequestPluginUnionTypedDict],
-            ]
-        ] = None,
-        user: Optional[str] = None,
+        reasoning: OptionalNullable[
+            Union[components.ReasoningConfig, components.ReasoningConfigTypedDict]
+        ] = UNSET,
+        safety_identifier: OptionalNullable[str] = UNSET,
+        service_tier: OptionalNullable[components.ResponsesRequestServiceTier] = "auto",
         session_id: Optional[str] = None,
-        trace: Optional[
+        stream: Literal[True],
+        temperature: OptionalNullable[float] = UNSET,
+        text: Optional[
+            Union[components.TextExtendedConfig, components.TextExtendedConfigTypedDict]
+        ] = None,
+        tool_choice: Optional[
             Union[
-                components.ResponsesRequestTrace,
-                components.ResponsesRequestTraceTypedDict,
+                components.OpenAIResponsesToolChoiceUnion,
+                components.OpenAIResponsesToolChoiceUnionTypedDict,
             ]
         ] = None,
+        tools: Optional[
+            Union[
+                List[components.ResponsesRequestToolUnion],
+                List[components.ResponsesRequestToolUnionTypedDict],
+            ]
+        ] = None,
+        top_k: Optional[int] = None,
+        top_logprobs: OptionalNullable[int] = UNSET,
+        top_p: OptionalNullable[float] = UNSET,
+        trace: Optional[
+            Union[components.TraceConfig, components.TraceConfigTypedDict]
+        ] = None,
+        truncation: OptionalNullable[components.OpenAIResponsesTruncation] = UNSET,
+        user: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -255,40 +247,40 @@ class Responses(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
+        :param background:
+        :param frequency_penalty:
+        :param image_config: Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/guides/overview/multimodal/image-generation for more details.
+        :param include:
         :param input: Input for a response request - can be a string or array of items
         :param instructions:
+        :param max_output_tokens:
+        :param max_tool_calls:
         :param metadata: Metadata key-value pairs for the request. Keys must be ≤64 characters and cannot contain brackets. Values must be ≤512 characters. Maximum 16 pairs allowed.
-        :param tools:
-        :param tool_choice:
-        :param parallel_tool_calls:
+        :param modalities: Output modalities for the response. Supported values are \"text\" and \"image\".
         :param model:
         :param models:
-        :param text: Text output configuration including format and verbosity
-        :param reasoning: Configuration for reasoning mode in the response
-        :param max_output_tokens:
-        :param temperature:
-        :param top_p:
-        :param top_logprobs:
-        :param max_tool_calls:
+        :param parallel_tool_calls:
+        :param plugins: Plugins you want to enable for this request, including their settings.
         :param presence_penalty:
-        :param frequency_penalty:
-        :param top_k:
-        :param image_config: Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/features/multimodal/image-generation for more details.
-        :param modalities: Output modalities for the response. Supported values are \"text\" and \"image\".
-        :param prompt_cache_key:
         :param previous_response_id:
         :param prompt:
-        :param include:
-        :param background:
+        :param prompt_cache_key:
+        :param provider: When multiple model providers are available, optionally indicate your routing preference.
+        :param reasoning: Configuration for reasoning mode in the response
         :param safety_identifier:
         :param service_tier:
-        :param truncation:
-        :param stream:
-        :param provider: When multiple model providers are available, optionally indicate your routing preference.
-        :param plugins: Plugins you want to enable for this request, including their settings.
-        :param user: A unique identifier representing your end-user, which helps distinguish between different users of your app. This allows your app to identify specific users in case of abuse reports, preventing your entire app from being affected by the actions of individual users. Maximum of 256 characters.
         :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters.
+        :param stream:
+        :param temperature:
+        :param text: Text output configuration including format and verbosity
+        :param tool_choice:
+        :param tools:
+        :param top_k:
+        :param top_logprobs:
+        :param top_p:
         :param trace: Metadata for observability and tracing. Known keys (trace_id, trace_name, span_name, generation_name, parent_span_id) have special handling. Additional keys are passed through as custom metadata to configured broadcast destinations.
+        :param truncation:
+        :param user: A unique identifier representing your end-user, which helps distinguish between different users of your app. This allows your app to identify specific users in case of abuse reports, preventing your entire app from being affected by the actions of individual users. Maximum of 256 characters.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -302,48 +294,33 @@ class Responses(BaseSDK):
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
+        background: OptionalNullable[bool] = UNSET,
+        frequency_penalty: OptionalNullable[float] = UNSET,
+        image_config: Optional[
+            Union[
+                Dict[str, components.ImageConfig],
+                Dict[str, components.ImageConfigTypedDict],
+            ]
+        ] = None,
+        include: OptionalNullable[List[components.ResponseIncludesEnum]] = UNSET,
         input: Optional[
             Union[components.InputsUnion, components.InputsUnionTypedDict]
         ] = None,
         instructions: OptionalNullable[str] = UNSET,
+        max_output_tokens: OptionalNullable[int] = UNSET,
+        max_tool_calls: OptionalNullable[int] = UNSET,
         metadata: OptionalNullable[Dict[str, str]] = UNSET,
-        tools: Optional[
-            Union[
-                List[components.ResponsesRequestToolUnion],
-                List[components.ResponsesRequestToolUnionTypedDict],
-            ]
-        ] = None,
-        tool_choice: Optional[
-            Union[
-                components.OpenAIResponsesToolChoiceUnion,
-                components.OpenAIResponsesToolChoiceUnionTypedDict,
-            ]
-        ] = None,
-        parallel_tool_calls: OptionalNullable[bool] = UNSET,
+        modalities: Optional[List[components.OutputModalityEnum]] = None,
         model: Optional[str] = None,
         models: Optional[List[str]] = None,
-        text: Optional[
-            Union[components.TextExtendedConfig, components.TextExtendedConfigTypedDict]
-        ] = None,
-        reasoning: OptionalNullable[
-            Union[components.ReasoningConfig, components.ReasoningConfigTypedDict]
-        ] = UNSET,
-        max_output_tokens: OptionalNullable[float] = UNSET,
-        temperature: OptionalNullable[float] = UNSET,
-        top_p: OptionalNullable[float] = UNSET,
-        top_logprobs: OptionalNullable[int] = UNSET,
-        max_tool_calls: OptionalNullable[int] = UNSET,
-        presence_penalty: OptionalNullable[float] = UNSET,
-        frequency_penalty: OptionalNullable[float] = UNSET,
-        top_k: Optional[float] = None,
-        image_config: Optional[
+        parallel_tool_calls: OptionalNullable[bool] = UNSET,
+        plugins: Optional[
             Union[
-                Dict[str, components.ResponsesRequestImageConfig],
-                Dict[str, components.ResponsesRequestImageConfigTypedDict],
+                List[components.ResponsesRequestPlugin],
+                List[components.ResponsesRequestPluginTypedDict],
             ]
         ] = None,
-        modalities: Optional[List[components.OutputModalityEnum]] = None,
-        prompt_cache_key: OptionalNullable[str] = UNSET,
+        presence_penalty: OptionalNullable[float] = UNSET,
         previous_response_id: OptionalNullable[str] = UNSET,
         prompt: OptionalNullable[
             Union[
@@ -351,32 +328,43 @@ class Responses(BaseSDK):
                 components.StoredPromptTemplateTypedDict,
             ]
         ] = UNSET,
-        include: OptionalNullable[List[components.ResponseIncludesEnum]] = UNSET,
-        background: OptionalNullable[bool] = UNSET,
-        safety_identifier: OptionalNullable[str] = UNSET,
-        service_tier: OptionalNullable[components.ResponsesRequestServiceTier] = "auto",
-        truncation: OptionalNullable[components.OpenAIResponsesTruncation] = UNSET,
-        stream: Optional[bool] = False,
+        prompt_cache_key: OptionalNullable[str] = UNSET,
         provider: OptionalNullable[
             Union[
-                components.ResponsesRequestProvider,
-                components.ResponsesRequestProviderTypedDict,
+                components.ProviderPreferences, components.ProviderPreferencesTypedDict
             ]
         ] = UNSET,
-        plugins: Optional[
-            Union[
-                List[components.ResponsesRequestPluginUnion],
-                List[components.ResponsesRequestPluginUnionTypedDict],
-            ]
-        ] = None,
-        user: Optional[str] = None,
+        reasoning: OptionalNullable[
+            Union[components.ReasoningConfig, components.ReasoningConfigTypedDict]
+        ] = UNSET,
+        safety_identifier: OptionalNullable[str] = UNSET,
+        service_tier: OptionalNullable[components.ResponsesRequestServiceTier] = "auto",
         session_id: Optional[str] = None,
-        trace: Optional[
+        stream: Optional[bool] = False,
+        temperature: OptionalNullable[float] = UNSET,
+        text: Optional[
+            Union[components.TextExtendedConfig, components.TextExtendedConfigTypedDict]
+        ] = None,
+        tool_choice: Optional[
             Union[
-                components.ResponsesRequestTrace,
-                components.ResponsesRequestTraceTypedDict,
+                components.OpenAIResponsesToolChoiceUnion,
+                components.OpenAIResponsesToolChoiceUnionTypedDict,
             ]
         ] = None,
+        tools: Optional[
+            Union[
+                List[components.ResponsesRequestToolUnion],
+                List[components.ResponsesRequestToolUnionTypedDict],
+            ]
+        ] = None,
+        top_k: Optional[int] = None,
+        top_logprobs: OptionalNullable[int] = UNSET,
+        top_p: OptionalNullable[float] = UNSET,
+        trace: Optional[
+            Union[components.TraceConfig, components.TraceConfigTypedDict]
+        ] = None,
+        truncation: OptionalNullable[components.OpenAIResponsesTruncation] = UNSET,
+        user: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -393,40 +381,40 @@ class Responses(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
+        :param background:
+        :param frequency_penalty:
+        :param image_config: Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/guides/overview/multimodal/image-generation for more details.
+        :param include:
         :param input: Input for a response request - can be a string or array of items
         :param instructions:
+        :param max_output_tokens:
+        :param max_tool_calls:
         :param metadata: Metadata key-value pairs for the request. Keys must be ≤64 characters and cannot contain brackets. Values must be ≤512 characters. Maximum 16 pairs allowed.
-        :param tools:
-        :param tool_choice:
-        :param parallel_tool_calls:
+        :param modalities: Output modalities for the response. Supported values are \"text\" and \"image\".
         :param model:
         :param models:
-        :param text: Text output configuration including format and verbosity
-        :param reasoning: Configuration for reasoning mode in the response
-        :param max_output_tokens:
-        :param temperature:
-        :param top_p:
-        :param top_logprobs:
-        :param max_tool_calls:
+        :param parallel_tool_calls:
+        :param plugins: Plugins you want to enable for this request, including their settings.
         :param presence_penalty:
-        :param frequency_penalty:
-        :param top_k:
-        :param image_config: Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/features/multimodal/image-generation for more details.
-        :param modalities: Output modalities for the response. Supported values are \"text\" and \"image\".
-        :param prompt_cache_key:
         :param previous_response_id:
         :param prompt:
-        :param include:
-        :param background:
+        :param prompt_cache_key:
+        :param provider: When multiple model providers are available, optionally indicate your routing preference.
+        :param reasoning: Configuration for reasoning mode in the response
         :param safety_identifier:
         :param service_tier:
-        :param truncation:
-        :param stream:
-        :param provider: When multiple model providers are available, optionally indicate your routing preference.
-        :param plugins: Plugins you want to enable for this request, including their settings.
-        :param user: A unique identifier representing your end-user, which helps distinguish between different users of your app. This allows your app to identify specific users in case of abuse reports, preventing your entire app from being affected by the actions of individual users. Maximum of 256 characters.
         :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters.
+        :param stream:
+        :param temperature:
+        :param text: Text output configuration including format and verbosity
+        :param tool_choice:
+        :param tools:
+        :param top_k:
+        :param top_logprobs:
+        :param top_p:
         :param trace: Metadata for observability and tracing. Known keys (trace_id, trace_name, span_name, generation_name, parent_span_id) have special handling. Additional keys are passed through as custom metadata to configured broadcast destinations.
+        :param truncation:
+        :param user: A unique identifier representing your end-user, which helps distinguish between different users of your app. This allows your app to identify specific users in case of abuse reports, preventing your entire app from being affected by the actions of individual users. Maximum of 256 characters.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -448,56 +436,54 @@ class Responses(BaseSDK):
             x_open_router_title=x_open_router_title,
             x_open_router_categories=x_open_router_categories,
             responses_request=components.ResponsesRequest(
+                background=background,
+                frequency_penalty=frequency_penalty,
+                image_config=image_config,
+                include=include,
                 input=utils.get_pydantic_model(input, Optional[components.InputsUnion]),
                 instructions=instructions,
+                max_output_tokens=max_output_tokens,
+                max_tool_calls=max_tool_calls,
                 metadata=metadata,
-                tools=utils.get_pydantic_model(
-                    tools, Optional[List[components.ResponsesRequestToolUnion]]
-                ),
-                tool_choice=utils.get_pydantic_model(
-                    tool_choice, Optional[components.OpenAIResponsesToolChoiceUnion]
-                ),
-                parallel_tool_calls=parallel_tool_calls,
+                modalities=modalities,
                 model=model,
                 models=models,
-                text=utils.get_pydantic_model(
-                    text, Optional[components.TextExtendedConfig]
+                parallel_tool_calls=parallel_tool_calls,
+                plugins=utils.get_pydantic_model(
+                    plugins, Optional[List[components.ResponsesRequestPlugin]]
                 ),
-                reasoning=utils.get_pydantic_model(
-                    reasoning, OptionalNullable[components.ReasoningConfig]
-                ),
-                max_output_tokens=max_output_tokens,
-                temperature=temperature,
-                top_p=top_p,
-                top_logprobs=top_logprobs,
-                max_tool_calls=max_tool_calls,
                 presence_penalty=presence_penalty,
-                frequency_penalty=frequency_penalty,
-                top_k=top_k,
-                image_config=image_config,
-                modalities=modalities,
-                prompt_cache_key=prompt_cache_key,
                 previous_response_id=previous_response_id,
                 prompt=utils.get_pydantic_model(
                     prompt, OptionalNullable[components.StoredPromptTemplate]
                 ),
-                include=include,
-                background=background,
+                prompt_cache_key=prompt_cache_key,
+                provider=utils.get_pydantic_model(
+                    provider, OptionalNullable[components.ProviderPreferences]
+                ),
+                reasoning=utils.get_pydantic_model(
+                    reasoning, OptionalNullable[components.ReasoningConfig]
+                ),
                 safety_identifier=safety_identifier,
                 service_tier=service_tier,
-                truncation=truncation,
-                stream=stream,
-                provider=utils.get_pydantic_model(
-                    provider, OptionalNullable[components.ResponsesRequestProvider]
-                ),
-                plugins=utils.get_pydantic_model(
-                    plugins, Optional[List[components.ResponsesRequestPluginUnion]]
-                ),
-                user=user,
                 session_id=session_id,
-                trace=utils.get_pydantic_model(
-                    trace, Optional[components.ResponsesRequestTrace]
+                stream=stream,
+                temperature=temperature,
+                text=utils.get_pydantic_model(
+                    text, Optional[components.TextExtendedConfig]
                 ),
+                tool_choice=utils.get_pydantic_model(
+                    tool_choice, Optional[components.OpenAIResponsesToolChoiceUnion]
+                ),
+                tools=utils.get_pydantic_model(
+                    tools, Optional[List[components.ResponsesRequestToolUnion]]
+                ),
+                top_k=top_k,
+                top_logprobs=top_logprobs,
+                top_p=top_p,
+                trace=utils.get_pydantic_model(trace, Optional[components.TraceConfig]),
+                truncation=truncation,
+                user=user,
             ),
         )
 
@@ -533,10 +519,14 @@ class Responses(BaseSDK):
         if retries == UNSET:
             if self.sdk_configuration.retry_config is not UNSET:
                 retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 60000, 1.5, 3600000), True
+                )
 
         retry_config = None
         if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, ["429", "500", "502", "503", "504"])
+            retry_config = (retries, ["5XX"])
 
         http_res = self.do_request(
             hook_ctx=HookContext(
@@ -706,48 +696,33 @@ class Responses(BaseSDK):
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
+        background: OptionalNullable[bool] = UNSET,
+        frequency_penalty: OptionalNullable[float] = UNSET,
+        image_config: Optional[
+            Union[
+                Dict[str, components.ImageConfig],
+                Dict[str, components.ImageConfigTypedDict],
+            ]
+        ] = None,
+        include: OptionalNullable[List[components.ResponseIncludesEnum]] = UNSET,
         input: Optional[
             Union[components.InputsUnion, components.InputsUnionTypedDict]
         ] = None,
         instructions: OptionalNullable[str] = UNSET,
+        max_output_tokens: OptionalNullable[int] = UNSET,
+        max_tool_calls: OptionalNullable[int] = UNSET,
         metadata: OptionalNullable[Dict[str, str]] = UNSET,
-        tools: Optional[
-            Union[
-                List[components.ResponsesRequestToolUnion],
-                List[components.ResponsesRequestToolUnionTypedDict],
-            ]
-        ] = None,
-        tool_choice: Optional[
-            Union[
-                components.OpenAIResponsesToolChoiceUnion,
-                components.OpenAIResponsesToolChoiceUnionTypedDict,
-            ]
-        ] = None,
-        parallel_tool_calls: OptionalNullable[bool] = UNSET,
+        modalities: Optional[List[components.OutputModalityEnum]] = None,
         model: Optional[str] = None,
         models: Optional[List[str]] = None,
-        text: Optional[
-            Union[components.TextExtendedConfig, components.TextExtendedConfigTypedDict]
-        ] = None,
-        reasoning: OptionalNullable[
-            Union[components.ReasoningConfig, components.ReasoningConfigTypedDict]
-        ] = UNSET,
-        max_output_tokens: OptionalNullable[float] = UNSET,
-        temperature: OptionalNullable[float] = UNSET,
-        top_p: OptionalNullable[float] = UNSET,
-        top_logprobs: OptionalNullable[int] = UNSET,
-        max_tool_calls: OptionalNullable[int] = UNSET,
-        presence_penalty: OptionalNullable[float] = UNSET,
-        frequency_penalty: OptionalNullable[float] = UNSET,
-        top_k: Optional[float] = None,
-        image_config: Optional[
+        parallel_tool_calls: OptionalNullable[bool] = UNSET,
+        plugins: Optional[
             Union[
-                Dict[str, components.ResponsesRequestImageConfig],
-                Dict[str, components.ResponsesRequestImageConfigTypedDict],
+                List[components.ResponsesRequestPlugin],
+                List[components.ResponsesRequestPluginTypedDict],
             ]
         ] = None,
-        modalities: Optional[List[components.OutputModalityEnum]] = None,
-        prompt_cache_key: OptionalNullable[str] = UNSET,
+        presence_penalty: OptionalNullable[float] = UNSET,
         previous_response_id: OptionalNullable[str] = UNSET,
         prompt: OptionalNullable[
             Union[
@@ -755,32 +730,43 @@ class Responses(BaseSDK):
                 components.StoredPromptTemplateTypedDict,
             ]
         ] = UNSET,
-        include: OptionalNullable[List[components.ResponseIncludesEnum]] = UNSET,
-        background: OptionalNullable[bool] = UNSET,
-        safety_identifier: OptionalNullable[str] = UNSET,
-        service_tier: OptionalNullable[components.ResponsesRequestServiceTier] = "auto",
-        truncation: OptionalNullable[components.OpenAIResponsesTruncation] = UNSET,
-        stream: Union[Literal[False], None] = None,
+        prompt_cache_key: OptionalNullable[str] = UNSET,
         provider: OptionalNullable[
             Union[
-                components.ResponsesRequestProvider,
-                components.ResponsesRequestProviderTypedDict,
+                components.ProviderPreferences, components.ProviderPreferencesTypedDict
             ]
         ] = UNSET,
-        plugins: Optional[
-            Union[
-                List[components.ResponsesRequestPluginUnion],
-                List[components.ResponsesRequestPluginUnionTypedDict],
-            ]
-        ] = None,
-        user: Optional[str] = None,
+        reasoning: OptionalNullable[
+            Union[components.ReasoningConfig, components.ReasoningConfigTypedDict]
+        ] = UNSET,
+        safety_identifier: OptionalNullable[str] = UNSET,
+        service_tier: OptionalNullable[components.ResponsesRequestServiceTier] = "auto",
         session_id: Optional[str] = None,
-        trace: Optional[
+        stream: Union[Literal[False], None] = None,
+        temperature: OptionalNullable[float] = UNSET,
+        text: Optional[
+            Union[components.TextExtendedConfig, components.TextExtendedConfigTypedDict]
+        ] = None,
+        tool_choice: Optional[
             Union[
-                components.ResponsesRequestTrace,
-                components.ResponsesRequestTraceTypedDict,
+                components.OpenAIResponsesToolChoiceUnion,
+                components.OpenAIResponsesToolChoiceUnionTypedDict,
             ]
         ] = None,
+        tools: Optional[
+            Union[
+                List[components.ResponsesRequestToolUnion],
+                List[components.ResponsesRequestToolUnionTypedDict],
+            ]
+        ] = None,
+        top_k: Optional[int] = None,
+        top_logprobs: OptionalNullable[int] = UNSET,
+        top_p: OptionalNullable[float] = UNSET,
+        trace: Optional[
+            Union[components.TraceConfig, components.TraceConfigTypedDict]
+        ] = None,
+        truncation: OptionalNullable[components.OpenAIResponsesTruncation] = UNSET,
+        user: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -797,40 +783,40 @@ class Responses(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
+        :param background:
+        :param frequency_penalty:
+        :param image_config: Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/guides/overview/multimodal/image-generation for more details.
+        :param include:
         :param input: Input for a response request - can be a string or array of items
         :param instructions:
+        :param max_output_tokens:
+        :param max_tool_calls:
         :param metadata: Metadata key-value pairs for the request. Keys must be ≤64 characters and cannot contain brackets. Values must be ≤512 characters. Maximum 16 pairs allowed.
-        :param tools:
-        :param tool_choice:
-        :param parallel_tool_calls:
+        :param modalities: Output modalities for the response. Supported values are \"text\" and \"image\".
         :param model:
         :param models:
-        :param text: Text output configuration including format and verbosity
-        :param reasoning: Configuration for reasoning mode in the response
-        :param max_output_tokens:
-        :param temperature:
-        :param top_p:
-        :param top_logprobs:
-        :param max_tool_calls:
+        :param parallel_tool_calls:
+        :param plugins: Plugins you want to enable for this request, including their settings.
         :param presence_penalty:
-        :param frequency_penalty:
-        :param top_k:
-        :param image_config: Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/features/multimodal/image-generation for more details.
-        :param modalities: Output modalities for the response. Supported values are \"text\" and \"image\".
-        :param prompt_cache_key:
         :param previous_response_id:
         :param prompt:
-        :param include:
-        :param background:
+        :param prompt_cache_key:
+        :param provider: When multiple model providers are available, optionally indicate your routing preference.
+        :param reasoning: Configuration for reasoning mode in the response
         :param safety_identifier:
         :param service_tier:
-        :param truncation:
-        :param stream:
-        :param provider: When multiple model providers are available, optionally indicate your routing preference.
-        :param plugins: Plugins you want to enable for this request, including their settings.
-        :param user: A unique identifier representing your end-user, which helps distinguish between different users of your app. This allows your app to identify specific users in case of abuse reports, preventing your entire app from being affected by the actions of individual users. Maximum of 256 characters.
         :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters.
+        :param stream:
+        :param temperature:
+        :param text: Text output configuration including format and verbosity
+        :param tool_choice:
+        :param tools:
+        :param top_k:
+        :param top_logprobs:
+        :param top_p:
         :param trace: Metadata for observability and tracing. Known keys (trace_id, trace_name, span_name, generation_name, parent_span_id) have special handling. Additional keys are passed through as custom metadata to configured broadcast destinations.
+        :param truncation:
+        :param user: A unique identifier representing your end-user, which helps distinguish between different users of your app. This allows your app to identify specific users in case of abuse reports, preventing your entire app from being affected by the actions of individual users. Maximum of 256 characters.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -845,48 +831,33 @@ class Responses(BaseSDK):
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
+        background: OptionalNullable[bool] = UNSET,
+        frequency_penalty: OptionalNullable[float] = UNSET,
+        image_config: Optional[
+            Union[
+                Dict[str, components.ImageConfig],
+                Dict[str, components.ImageConfigTypedDict],
+            ]
+        ] = None,
+        include: OptionalNullable[List[components.ResponseIncludesEnum]] = UNSET,
         input: Optional[
             Union[components.InputsUnion, components.InputsUnionTypedDict]
         ] = None,
         instructions: OptionalNullable[str] = UNSET,
+        max_output_tokens: OptionalNullable[int] = UNSET,
+        max_tool_calls: OptionalNullable[int] = UNSET,
         metadata: OptionalNullable[Dict[str, str]] = UNSET,
-        tools: Optional[
-            Union[
-                List[components.ResponsesRequestToolUnion],
-                List[components.ResponsesRequestToolUnionTypedDict],
-            ]
-        ] = None,
-        tool_choice: Optional[
-            Union[
-                components.OpenAIResponsesToolChoiceUnion,
-                components.OpenAIResponsesToolChoiceUnionTypedDict,
-            ]
-        ] = None,
-        parallel_tool_calls: OptionalNullable[bool] = UNSET,
+        modalities: Optional[List[components.OutputModalityEnum]] = None,
         model: Optional[str] = None,
         models: Optional[List[str]] = None,
-        text: Optional[
-            Union[components.TextExtendedConfig, components.TextExtendedConfigTypedDict]
-        ] = None,
-        reasoning: OptionalNullable[
-            Union[components.ReasoningConfig, components.ReasoningConfigTypedDict]
-        ] = UNSET,
-        max_output_tokens: OptionalNullable[float] = UNSET,
-        temperature: OptionalNullable[float] = UNSET,
-        top_p: OptionalNullable[float] = UNSET,
-        top_logprobs: OptionalNullable[int] = UNSET,
-        max_tool_calls: OptionalNullable[int] = UNSET,
-        presence_penalty: OptionalNullable[float] = UNSET,
-        frequency_penalty: OptionalNullable[float] = UNSET,
-        top_k: Optional[float] = None,
-        image_config: Optional[
+        parallel_tool_calls: OptionalNullable[bool] = UNSET,
+        plugins: Optional[
             Union[
-                Dict[str, components.ResponsesRequestImageConfig],
-                Dict[str, components.ResponsesRequestImageConfigTypedDict],
+                List[components.ResponsesRequestPlugin],
+                List[components.ResponsesRequestPluginTypedDict],
             ]
         ] = None,
-        modalities: Optional[List[components.OutputModalityEnum]] = None,
-        prompt_cache_key: OptionalNullable[str] = UNSET,
+        presence_penalty: OptionalNullable[float] = UNSET,
         previous_response_id: OptionalNullable[str] = UNSET,
         prompt: OptionalNullable[
             Union[
@@ -894,32 +865,43 @@ class Responses(BaseSDK):
                 components.StoredPromptTemplateTypedDict,
             ]
         ] = UNSET,
-        include: OptionalNullable[List[components.ResponseIncludesEnum]] = UNSET,
-        background: OptionalNullable[bool] = UNSET,
-        safety_identifier: OptionalNullable[str] = UNSET,
-        service_tier: OptionalNullable[components.ResponsesRequestServiceTier] = "auto",
-        truncation: OptionalNullable[components.OpenAIResponsesTruncation] = UNSET,
-        stream: Literal[True],
+        prompt_cache_key: OptionalNullable[str] = UNSET,
         provider: OptionalNullable[
             Union[
-                components.ResponsesRequestProvider,
-                components.ResponsesRequestProviderTypedDict,
+                components.ProviderPreferences, components.ProviderPreferencesTypedDict
             ]
         ] = UNSET,
-        plugins: Optional[
-            Union[
-                List[components.ResponsesRequestPluginUnion],
-                List[components.ResponsesRequestPluginUnionTypedDict],
-            ]
-        ] = None,
-        user: Optional[str] = None,
+        reasoning: OptionalNullable[
+            Union[components.ReasoningConfig, components.ReasoningConfigTypedDict]
+        ] = UNSET,
+        safety_identifier: OptionalNullable[str] = UNSET,
+        service_tier: OptionalNullable[components.ResponsesRequestServiceTier] = "auto",
         session_id: Optional[str] = None,
-        trace: Optional[
+        stream: Literal[True],
+        temperature: OptionalNullable[float] = UNSET,
+        text: Optional[
+            Union[components.TextExtendedConfig, components.TextExtendedConfigTypedDict]
+        ] = None,
+        tool_choice: Optional[
             Union[
-                components.ResponsesRequestTrace,
-                components.ResponsesRequestTraceTypedDict,
+                components.OpenAIResponsesToolChoiceUnion,
+                components.OpenAIResponsesToolChoiceUnionTypedDict,
             ]
         ] = None,
+        tools: Optional[
+            Union[
+                List[components.ResponsesRequestToolUnion],
+                List[components.ResponsesRequestToolUnionTypedDict],
+            ]
+        ] = None,
+        top_k: Optional[int] = None,
+        top_logprobs: OptionalNullable[int] = UNSET,
+        top_p: OptionalNullable[float] = UNSET,
+        trace: Optional[
+            Union[components.TraceConfig, components.TraceConfigTypedDict]
+        ] = None,
+        truncation: OptionalNullable[components.OpenAIResponsesTruncation] = UNSET,
+        user: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -936,40 +918,40 @@ class Responses(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
+        :param background:
+        :param frequency_penalty:
+        :param image_config: Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/guides/overview/multimodal/image-generation for more details.
+        :param include:
         :param input: Input for a response request - can be a string or array of items
         :param instructions:
+        :param max_output_tokens:
+        :param max_tool_calls:
         :param metadata: Metadata key-value pairs for the request. Keys must be ≤64 characters and cannot contain brackets. Values must be ≤512 characters. Maximum 16 pairs allowed.
-        :param tools:
-        :param tool_choice:
-        :param parallel_tool_calls:
+        :param modalities: Output modalities for the response. Supported values are \"text\" and \"image\".
         :param model:
         :param models:
-        :param text: Text output configuration including format and verbosity
-        :param reasoning: Configuration for reasoning mode in the response
-        :param max_output_tokens:
-        :param temperature:
-        :param top_p:
-        :param top_logprobs:
-        :param max_tool_calls:
+        :param parallel_tool_calls:
+        :param plugins: Plugins you want to enable for this request, including their settings.
         :param presence_penalty:
-        :param frequency_penalty:
-        :param top_k:
-        :param image_config: Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/features/multimodal/image-generation for more details.
-        :param modalities: Output modalities for the response. Supported values are \"text\" and \"image\".
-        :param prompt_cache_key:
         :param previous_response_id:
         :param prompt:
-        :param include:
-        :param background:
+        :param prompt_cache_key:
+        :param provider: When multiple model providers are available, optionally indicate your routing preference.
+        :param reasoning: Configuration for reasoning mode in the response
         :param safety_identifier:
         :param service_tier:
-        :param truncation:
-        :param stream:
-        :param provider: When multiple model providers are available, optionally indicate your routing preference.
-        :param plugins: Plugins you want to enable for this request, including their settings.
-        :param user: A unique identifier representing your end-user, which helps distinguish between different users of your app. This allows your app to identify specific users in case of abuse reports, preventing your entire app from being affected by the actions of individual users. Maximum of 256 characters.
         :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters.
+        :param stream:
+        :param temperature:
+        :param text: Text output configuration including format and verbosity
+        :param tool_choice:
+        :param tools:
+        :param top_k:
+        :param top_logprobs:
+        :param top_p:
         :param trace: Metadata for observability and tracing. Known keys (trace_id, trace_name, span_name, generation_name, parent_span_id) have special handling. Additional keys are passed through as custom metadata to configured broadcast destinations.
+        :param truncation:
+        :param user: A unique identifier representing your end-user, which helps distinguish between different users of your app. This allows your app to identify specific users in case of abuse reports, preventing your entire app from being affected by the actions of individual users. Maximum of 256 characters.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -983,48 +965,33 @@ class Responses(BaseSDK):
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
+        background: OptionalNullable[bool] = UNSET,
+        frequency_penalty: OptionalNullable[float] = UNSET,
+        image_config: Optional[
+            Union[
+                Dict[str, components.ImageConfig],
+                Dict[str, components.ImageConfigTypedDict],
+            ]
+        ] = None,
+        include: OptionalNullable[List[components.ResponseIncludesEnum]] = UNSET,
         input: Optional[
             Union[components.InputsUnion, components.InputsUnionTypedDict]
         ] = None,
         instructions: OptionalNullable[str] = UNSET,
+        max_output_tokens: OptionalNullable[int] = UNSET,
+        max_tool_calls: OptionalNullable[int] = UNSET,
         metadata: OptionalNullable[Dict[str, str]] = UNSET,
-        tools: Optional[
-            Union[
-                List[components.ResponsesRequestToolUnion],
-                List[components.ResponsesRequestToolUnionTypedDict],
-            ]
-        ] = None,
-        tool_choice: Optional[
-            Union[
-                components.OpenAIResponsesToolChoiceUnion,
-                components.OpenAIResponsesToolChoiceUnionTypedDict,
-            ]
-        ] = None,
-        parallel_tool_calls: OptionalNullable[bool] = UNSET,
+        modalities: Optional[List[components.OutputModalityEnum]] = None,
         model: Optional[str] = None,
         models: Optional[List[str]] = None,
-        text: Optional[
-            Union[components.TextExtendedConfig, components.TextExtendedConfigTypedDict]
-        ] = None,
-        reasoning: OptionalNullable[
-            Union[components.ReasoningConfig, components.ReasoningConfigTypedDict]
-        ] = UNSET,
-        max_output_tokens: OptionalNullable[float] = UNSET,
-        temperature: OptionalNullable[float] = UNSET,
-        top_p: OptionalNullable[float] = UNSET,
-        top_logprobs: OptionalNullable[int] = UNSET,
-        max_tool_calls: OptionalNullable[int] = UNSET,
-        presence_penalty: OptionalNullable[float] = UNSET,
-        frequency_penalty: OptionalNullable[float] = UNSET,
-        top_k: Optional[float] = None,
-        image_config: Optional[
+        parallel_tool_calls: OptionalNullable[bool] = UNSET,
+        plugins: Optional[
             Union[
-                Dict[str, components.ResponsesRequestImageConfig],
-                Dict[str, components.ResponsesRequestImageConfigTypedDict],
+                List[components.ResponsesRequestPlugin],
+                List[components.ResponsesRequestPluginTypedDict],
             ]
         ] = None,
-        modalities: Optional[List[components.OutputModalityEnum]] = None,
-        prompt_cache_key: OptionalNullable[str] = UNSET,
+        presence_penalty: OptionalNullable[float] = UNSET,
         previous_response_id: OptionalNullable[str] = UNSET,
         prompt: OptionalNullable[
             Union[
@@ -1032,32 +999,43 @@ class Responses(BaseSDK):
                 components.StoredPromptTemplateTypedDict,
             ]
         ] = UNSET,
-        include: OptionalNullable[List[components.ResponseIncludesEnum]] = UNSET,
-        background: OptionalNullable[bool] = UNSET,
-        safety_identifier: OptionalNullable[str] = UNSET,
-        service_tier: OptionalNullable[components.ResponsesRequestServiceTier] = "auto",
-        truncation: OptionalNullable[components.OpenAIResponsesTruncation] = UNSET,
-        stream: Optional[bool] = False,
+        prompt_cache_key: OptionalNullable[str] = UNSET,
         provider: OptionalNullable[
             Union[
-                components.ResponsesRequestProvider,
-                components.ResponsesRequestProviderTypedDict,
+                components.ProviderPreferences, components.ProviderPreferencesTypedDict
             ]
         ] = UNSET,
-        plugins: Optional[
-            Union[
-                List[components.ResponsesRequestPluginUnion],
-                List[components.ResponsesRequestPluginUnionTypedDict],
-            ]
-        ] = None,
-        user: Optional[str] = None,
+        reasoning: OptionalNullable[
+            Union[components.ReasoningConfig, components.ReasoningConfigTypedDict]
+        ] = UNSET,
+        safety_identifier: OptionalNullable[str] = UNSET,
+        service_tier: OptionalNullable[components.ResponsesRequestServiceTier] = "auto",
         session_id: Optional[str] = None,
-        trace: Optional[
+        stream: Optional[bool] = False,
+        temperature: OptionalNullable[float] = UNSET,
+        text: Optional[
+            Union[components.TextExtendedConfig, components.TextExtendedConfigTypedDict]
+        ] = None,
+        tool_choice: Optional[
             Union[
-                components.ResponsesRequestTrace,
-                components.ResponsesRequestTraceTypedDict,
+                components.OpenAIResponsesToolChoiceUnion,
+                components.OpenAIResponsesToolChoiceUnionTypedDict,
             ]
         ] = None,
+        tools: Optional[
+            Union[
+                List[components.ResponsesRequestToolUnion],
+                List[components.ResponsesRequestToolUnionTypedDict],
+            ]
+        ] = None,
+        top_k: Optional[int] = None,
+        top_logprobs: OptionalNullable[int] = UNSET,
+        top_p: OptionalNullable[float] = UNSET,
+        trace: Optional[
+            Union[components.TraceConfig, components.TraceConfigTypedDict]
+        ] = None,
+        truncation: OptionalNullable[components.OpenAIResponsesTruncation] = UNSET,
+        user: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -1074,40 +1052,40 @@ class Responses(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
+        :param background:
+        :param frequency_penalty:
+        :param image_config: Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/guides/overview/multimodal/image-generation for more details.
+        :param include:
         :param input: Input for a response request - can be a string or array of items
         :param instructions:
+        :param max_output_tokens:
+        :param max_tool_calls:
         :param metadata: Metadata key-value pairs for the request. Keys must be ≤64 characters and cannot contain brackets. Values must be ≤512 characters. Maximum 16 pairs allowed.
-        :param tools:
-        :param tool_choice:
-        :param parallel_tool_calls:
+        :param modalities: Output modalities for the response. Supported values are \"text\" and \"image\".
         :param model:
         :param models:
-        :param text: Text output configuration including format and verbosity
-        :param reasoning: Configuration for reasoning mode in the response
-        :param max_output_tokens:
-        :param temperature:
-        :param top_p:
-        :param top_logprobs:
-        :param max_tool_calls:
+        :param parallel_tool_calls:
+        :param plugins: Plugins you want to enable for this request, including their settings.
         :param presence_penalty:
-        :param frequency_penalty:
-        :param top_k:
-        :param image_config: Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/features/multimodal/image-generation for more details.
-        :param modalities: Output modalities for the response. Supported values are \"text\" and \"image\".
-        :param prompt_cache_key:
         :param previous_response_id:
         :param prompt:
-        :param include:
-        :param background:
+        :param prompt_cache_key:
+        :param provider: When multiple model providers are available, optionally indicate your routing preference.
+        :param reasoning: Configuration for reasoning mode in the response
         :param safety_identifier:
         :param service_tier:
-        :param truncation:
-        :param stream:
-        :param provider: When multiple model providers are available, optionally indicate your routing preference.
-        :param plugins: Plugins you want to enable for this request, including their settings.
-        :param user: A unique identifier representing your end-user, which helps distinguish between different users of your app. This allows your app to identify specific users in case of abuse reports, preventing your entire app from being affected by the actions of individual users. Maximum of 256 characters.
         :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters.
+        :param stream:
+        :param temperature:
+        :param text: Text output configuration including format and verbosity
+        :param tool_choice:
+        :param tools:
+        :param top_k:
+        :param top_logprobs:
+        :param top_p:
         :param trace: Metadata for observability and tracing. Known keys (trace_id, trace_name, span_name, generation_name, parent_span_id) have special handling. Additional keys are passed through as custom metadata to configured broadcast destinations.
+        :param truncation:
+        :param user: A unique identifier representing your end-user, which helps distinguish between different users of your app. This allows your app to identify specific users in case of abuse reports, preventing your entire app from being affected by the actions of individual users. Maximum of 256 characters.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1129,56 +1107,54 @@ class Responses(BaseSDK):
             x_open_router_title=x_open_router_title,
             x_open_router_categories=x_open_router_categories,
             responses_request=components.ResponsesRequest(
+                background=background,
+                frequency_penalty=frequency_penalty,
+                image_config=image_config,
+                include=include,
                 input=utils.get_pydantic_model(input, Optional[components.InputsUnion]),
                 instructions=instructions,
+                max_output_tokens=max_output_tokens,
+                max_tool_calls=max_tool_calls,
                 metadata=metadata,
-                tools=utils.get_pydantic_model(
-                    tools, Optional[List[components.ResponsesRequestToolUnion]]
-                ),
-                tool_choice=utils.get_pydantic_model(
-                    tool_choice, Optional[components.OpenAIResponsesToolChoiceUnion]
-                ),
-                parallel_tool_calls=parallel_tool_calls,
+                modalities=modalities,
                 model=model,
                 models=models,
-                text=utils.get_pydantic_model(
-                    text, Optional[components.TextExtendedConfig]
+                parallel_tool_calls=parallel_tool_calls,
+                plugins=utils.get_pydantic_model(
+                    plugins, Optional[List[components.ResponsesRequestPlugin]]
                 ),
-                reasoning=utils.get_pydantic_model(
-                    reasoning, OptionalNullable[components.ReasoningConfig]
-                ),
-                max_output_tokens=max_output_tokens,
-                temperature=temperature,
-                top_p=top_p,
-                top_logprobs=top_logprobs,
-                max_tool_calls=max_tool_calls,
                 presence_penalty=presence_penalty,
-                frequency_penalty=frequency_penalty,
-                top_k=top_k,
-                image_config=image_config,
-                modalities=modalities,
-                prompt_cache_key=prompt_cache_key,
                 previous_response_id=previous_response_id,
                 prompt=utils.get_pydantic_model(
                     prompt, OptionalNullable[components.StoredPromptTemplate]
                 ),
-                include=include,
-                background=background,
+                prompt_cache_key=prompt_cache_key,
+                provider=utils.get_pydantic_model(
+                    provider, OptionalNullable[components.ProviderPreferences]
+                ),
+                reasoning=utils.get_pydantic_model(
+                    reasoning, OptionalNullable[components.ReasoningConfig]
+                ),
                 safety_identifier=safety_identifier,
                 service_tier=service_tier,
-                truncation=truncation,
-                stream=stream,
-                provider=utils.get_pydantic_model(
-                    provider, OptionalNullable[components.ResponsesRequestProvider]
-                ),
-                plugins=utils.get_pydantic_model(
-                    plugins, Optional[List[components.ResponsesRequestPluginUnion]]
-                ),
-                user=user,
                 session_id=session_id,
-                trace=utils.get_pydantic_model(
-                    trace, Optional[components.ResponsesRequestTrace]
+                stream=stream,
+                temperature=temperature,
+                text=utils.get_pydantic_model(
+                    text, Optional[components.TextExtendedConfig]
                 ),
+                tool_choice=utils.get_pydantic_model(
+                    tool_choice, Optional[components.OpenAIResponsesToolChoiceUnion]
+                ),
+                tools=utils.get_pydantic_model(
+                    tools, Optional[List[components.ResponsesRequestToolUnion]]
+                ),
+                top_k=top_k,
+                top_logprobs=top_logprobs,
+                top_p=top_p,
+                trace=utils.get_pydantic_model(trace, Optional[components.TraceConfig]),
+                truncation=truncation,
+                user=user,
             ),
         )
 
@@ -1214,10 +1190,14 @@ class Responses(BaseSDK):
         if retries == UNSET:
             if self.sdk_configuration.retry_config is not UNSET:
                 retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 60000, 1.5, 3600000), True
+                )
 
         retry_config = None
         if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, ["429", "500", "502", "503", "504"])
+            retry_config = (retries, ["5XX"])
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(

@@ -10,20 +10,20 @@ URLCitationType = Literal["url_citation",]
 
 
 class URLCitationTypedDict(TypedDict):
+    end_index: int
+    start_index: int
+    title: str
     type: URLCitationType
     url: str
-    title: str
-    start_index: float
-    end_index: float
 
 
 class URLCitation(BaseModel):
-    type: URLCitationType
+    end_index: int
 
-    url: str
+    start_index: int
 
     title: str
 
-    start_index: float
+    type: URLCitationType
 
-    end_index: float
+    url: str

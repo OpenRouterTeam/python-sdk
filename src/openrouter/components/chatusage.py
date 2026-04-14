@@ -16,43 +16,43 @@ from typing_extensions import NotRequired, TypedDict
 class CompletionTokensDetailsTypedDict(TypedDict):
     r"""Detailed completion token usage"""
 
-    reasoning_tokens: NotRequired[Nullable[float]]
-    r"""Tokens used for reasoning"""
-    audio_tokens: NotRequired[Nullable[float]]
-    r"""Tokens used for audio output"""
-    accepted_prediction_tokens: NotRequired[Nullable[float]]
+    accepted_prediction_tokens: NotRequired[Nullable[int]]
     r"""Accepted prediction tokens"""
-    rejected_prediction_tokens: NotRequired[Nullable[float]]
+    audio_tokens: NotRequired[Nullable[int]]
+    r"""Tokens used for audio output"""
+    reasoning_tokens: NotRequired[Nullable[int]]
+    r"""Tokens used for reasoning"""
+    rejected_prediction_tokens: NotRequired[Nullable[int]]
     r"""Rejected prediction tokens"""
 
 
 class CompletionTokensDetails(BaseModel):
     r"""Detailed completion token usage"""
 
-    reasoning_tokens: OptionalNullable[float] = UNSET
-    r"""Tokens used for reasoning"""
-
-    audio_tokens: OptionalNullable[float] = UNSET
-    r"""Tokens used for audio output"""
-
-    accepted_prediction_tokens: OptionalNullable[float] = UNSET
+    accepted_prediction_tokens: OptionalNullable[int] = UNSET
     r"""Accepted prediction tokens"""
 
-    rejected_prediction_tokens: OptionalNullable[float] = UNSET
+    audio_tokens: OptionalNullable[int] = UNSET
+    r"""Tokens used for audio output"""
+
+    reasoning_tokens: OptionalNullable[int] = UNSET
+    r"""Tokens used for reasoning"""
+
+    rejected_prediction_tokens: OptionalNullable[int] = UNSET
     r"""Rejected prediction tokens"""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = [
-            "reasoning_tokens",
-            "audio_tokens",
             "accepted_prediction_tokens",
+            "audio_tokens",
+            "reasoning_tokens",
             "rejected_prediction_tokens",
         ]
         nullable_fields = [
-            "reasoning_tokens",
-            "audio_tokens",
             "accepted_prediction_tokens",
+            "audio_tokens",
+            "reasoning_tokens",
             "rejected_prediction_tokens",
         ]
         null_default_fields = []
@@ -85,40 +85,40 @@ class CompletionTokensDetails(BaseModel):
 class PromptTokensDetailsTypedDict(TypedDict):
     r"""Detailed prompt token usage"""
 
-    cached_tokens: NotRequired[float]
-    r"""Cached prompt tokens"""
-    cache_write_tokens: NotRequired[float]
-    r"""Tokens written to cache. Only returned for models with explicit caching and cache write pricing."""
-    audio_tokens: NotRequired[float]
+    audio_tokens: NotRequired[int]
     r"""Audio input tokens"""
-    video_tokens: NotRequired[float]
+    cache_write_tokens: NotRequired[int]
+    r"""Tokens written to cache. Only returned for models with explicit caching and cache write pricing."""
+    cached_tokens: NotRequired[int]
+    r"""Cached prompt tokens"""
+    video_tokens: NotRequired[int]
     r"""Video input tokens"""
 
 
 class PromptTokensDetails(BaseModel):
     r"""Detailed prompt token usage"""
 
-    cached_tokens: Optional[float] = None
-    r"""Cached prompt tokens"""
-
-    cache_write_tokens: Optional[float] = None
-    r"""Tokens written to cache. Only returned for models with explicit caching and cache write pricing."""
-
-    audio_tokens: Optional[float] = None
+    audio_tokens: Optional[int] = None
     r"""Audio input tokens"""
 
-    video_tokens: Optional[float] = None
+    cache_write_tokens: Optional[int] = None
+    r"""Tokens written to cache. Only returned for models with explicit caching and cache write pricing."""
+
+    cached_tokens: Optional[int] = None
+    r"""Cached prompt tokens"""
+
+    video_tokens: Optional[int] = None
     r"""Video input tokens"""
 
 
 class ChatUsageTypedDict(TypedDict):
     r"""Token usage statistics"""
 
-    completion_tokens: float
+    completion_tokens: int
     r"""Number of tokens in the completion"""
-    prompt_tokens: float
+    prompt_tokens: int
     r"""Number of tokens in the prompt"""
-    total_tokens: float
+    total_tokens: int
     r"""Total number of tokens"""
     completion_tokens_details: NotRequired[Nullable[CompletionTokensDetailsTypedDict]]
     r"""Detailed completion token usage"""
@@ -129,13 +129,13 @@ class ChatUsageTypedDict(TypedDict):
 class ChatUsage(BaseModel):
     r"""Token usage statistics"""
 
-    completion_tokens: float
+    completion_tokens: int
     r"""Number of tokens in the completion"""
 
-    prompt_tokens: float
+    prompt_tokens: int
     r"""Number of tokens in the prompt"""
 
-    total_tokens: float
+    total_tokens: int
     r"""Total number of tokens"""
 
     completion_tokens_details: OptionalNullable[CompletionTokensDetails] = UNSET

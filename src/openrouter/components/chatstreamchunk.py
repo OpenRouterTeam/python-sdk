@@ -15,46 +15,46 @@ from typing import List, Literal, Optional
 from typing_extensions import NotRequired, TypedDict
 
 
-ChatStreamChunkObject = Literal["chat.completion.chunk",]
-
-
 class ErrorTypedDict(TypedDict):
     r"""Error information"""
 
+    code: int
+    r"""Error code"""
     message: str
     r"""Error message"""
-    code: float
-    r"""Error code"""
 
 
 class Error(BaseModel):
     r"""Error information"""
 
+    code: int
+    r"""Error code"""
+
     message: str
     r"""Error message"""
 
-    code: float
-    r"""Error code"""
+
+ChatStreamChunkObject = Literal["chat.completion.chunk",]
 
 
 class ChatStreamChunkTypedDict(TypedDict):
     r"""Streaming chat completion chunk"""
 
-    id: str
-    r"""Unique chunk identifier"""
     choices: List[ChatStreamChoiceTypedDict]
     r"""List of streaming chunk choices"""
-    created: float
+    created: int
     r"""Unix timestamp of creation"""
+    id: str
+    r"""Unique chunk identifier"""
     model: str
     r"""Model used for completion"""
     object: ChatStreamChunkObject
-    system_fingerprint: NotRequired[str]
-    r"""System fingerprint"""
-    service_tier: NotRequired[Nullable[str]]
-    r"""The service tier used by the upstream provider for this request"""
     error: NotRequired[ErrorTypedDict]
     r"""Error information"""
+    service_tier: NotRequired[Nullable[str]]
+    r"""The service tier used by the upstream provider for this request"""
+    system_fingerprint: NotRequired[str]
+    r"""System fingerprint"""
     usage: NotRequired[ChatUsageTypedDict]
     r"""Token usage statistics"""
 
@@ -62,35 +62,35 @@ class ChatStreamChunkTypedDict(TypedDict):
 class ChatStreamChunk(BaseModel):
     r"""Streaming chat completion chunk"""
 
-    id: str
-    r"""Unique chunk identifier"""
-
     choices: List[ChatStreamChoice]
     r"""List of streaming chunk choices"""
 
-    created: float
+    created: int
     r"""Unix timestamp of creation"""
+
+    id: str
+    r"""Unique chunk identifier"""
 
     model: str
     r"""Model used for completion"""
 
     object: ChatStreamChunkObject
 
-    system_fingerprint: Optional[str] = None
-    r"""System fingerprint"""
+    error: Optional[Error] = None
+    r"""Error information"""
 
     service_tier: OptionalNullable[str] = UNSET
     r"""The service tier used by the upstream provider for this request"""
 
-    error: Optional[Error] = None
-    r"""Error information"""
+    system_fingerprint: Optional[str] = None
+    r"""System fingerprint"""
 
     usage: Optional[ChatUsage] = None
     r"""Token usage statistics"""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["system_fingerprint", "service_tier", "error", "usage"]
+        optional_fields = ["error", "service_tier", "system_fingerprint", "usage"]
         nullable_fields = ["service_tier"]
         null_default_fields = []
 

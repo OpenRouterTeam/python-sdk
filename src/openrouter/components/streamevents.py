@@ -29,8 +29,14 @@ from .imagegencallpartialimageevent import (
     ImageGenCallPartialImageEvent,
     ImageGenCallPartialImageEventTypedDict,
 )
-from .openresponsesresult import OpenResponsesResult, OpenResponsesResultTypedDict
-from .outputitems import OutputItems, OutputItemsTypedDict
+from .openresponsescreatedevent import (
+    OpenResponsesCreatedEvent,
+    OpenResponsesCreatedEventTypedDict,
+)
+from .openresponsesinprogressevent import (
+    OpenResponsesInProgressEvent,
+    OpenResponsesInProgressEventTypedDict,
+)
 from .reasoningdeltaevent import ReasoningDeltaEvent, ReasoningDeltaEventTypedDict
 from .reasoningdoneevent import ReasoningDoneEvent, ReasoningDoneEventTypedDict
 from .reasoningsummarypartaddedevent import (
@@ -51,6 +57,26 @@ from .reasoningsummarytextdoneevent import (
 )
 from .refusaldeltaevent import RefusalDeltaEvent, RefusalDeltaEventTypedDict
 from .refusaldoneevent import RefusalDoneEvent, RefusalDoneEventTypedDict
+from .streameventsresponsecompleted import (
+    StreamEventsResponseCompleted,
+    StreamEventsResponseCompletedTypedDict,
+)
+from .streameventsresponsefailed import (
+    StreamEventsResponseFailed,
+    StreamEventsResponseFailedTypedDict,
+)
+from .streameventsresponseincomplete import (
+    StreamEventsResponseIncomplete,
+    StreamEventsResponseIncompleteTypedDict,
+)
+from .streameventsresponseoutputitemadded import (
+    StreamEventsResponseOutputItemAdded,
+    StreamEventsResponseOutputItemAddedTypedDict,
+)
+from .streameventsresponseoutputitemdone import (
+    StreamEventsResponseOutputItemDone,
+    StreamEventsResponseOutputItemDoneTypedDict,
+)
 from .textdeltaevent import TextDeltaEvent, TextDeltaEventTypedDict
 from .textdoneevent import TextDoneEvent, TextDoneEventTypedDict
 from .websearchcallcompletedevent import (
@@ -65,185 +91,17 @@ from .websearchcallsearchingevent import (
     WebSearchCallSearchingEvent,
     WebSearchCallSearchingEventTypedDict,
 )
-from openrouter.types import BaseModel
 from openrouter.utils import get_discriminator
 from pydantic import Discriminator, Tag
-from typing import Literal, Union
-from typing_extensions import Annotated, TypeAliasType, TypedDict
-
-
-TypeResponseOutputItemDone = Literal["response.output_item.done",]
-
-
-class StreamEventsResponseOutputItemDoneTypedDict(TypedDict):
-    r"""Event emitted when an output item is complete"""
-
-    type: TypeResponseOutputItemDone
-    output_index: float
-    item: OutputItemsTypedDict
-    r"""An output item from the response"""
-    sequence_number: float
-
-
-class StreamEventsResponseOutputItemDone(BaseModel):
-    r"""Event emitted when an output item is complete"""
-
-    type: TypeResponseOutputItemDone
-
-    output_index: float
-
-    item: OutputItems
-    r"""An output item from the response"""
-
-    sequence_number: float
-
-
-TypeResponseOutputItemAdded = Literal["response.output_item.added",]
-
-
-class StreamEventsResponseOutputItemAddedTypedDict(TypedDict):
-    r"""Event emitted when a new output item is added to the response"""
-
-    type: TypeResponseOutputItemAdded
-    output_index: float
-    item: OutputItemsTypedDict
-    r"""An output item from the response"""
-    sequence_number: float
-
-
-class StreamEventsResponseOutputItemAdded(BaseModel):
-    r"""Event emitted when a new output item is added to the response"""
-
-    type: TypeResponseOutputItemAdded
-
-    output_index: float
-
-    item: OutputItems
-    r"""An output item from the response"""
-
-    sequence_number: float
-
-
-TypeResponseFailed = Literal["response.failed",]
-
-
-class StreamEventsResponseFailedTypedDict(TypedDict):
-    r"""Event emitted when a response has failed"""
-
-    type: TypeResponseFailed
-    response: OpenResponsesResultTypedDict
-    r"""Complete non-streaming response from the Responses API"""
-    sequence_number: float
-
-
-class StreamEventsResponseFailed(BaseModel):
-    r"""Event emitted when a response has failed"""
-
-    type: TypeResponseFailed
-
-    response: OpenResponsesResult
-    r"""Complete non-streaming response from the Responses API"""
-
-    sequence_number: float
-
-
-TypeResponseIncomplete = Literal["response.incomplete",]
-
-
-class StreamEventsResponseIncompleteTypedDict(TypedDict):
-    r"""Event emitted when a response is incomplete"""
-
-    type: TypeResponseIncomplete
-    response: OpenResponsesResultTypedDict
-    r"""Complete non-streaming response from the Responses API"""
-    sequence_number: float
-
-
-class StreamEventsResponseIncomplete(BaseModel):
-    r"""Event emitted when a response is incomplete"""
-
-    type: TypeResponseIncomplete
-
-    response: OpenResponsesResult
-    r"""Complete non-streaming response from the Responses API"""
-
-    sequence_number: float
-
-
-TypeResponseCompleted = Literal["response.completed",]
-
-
-class StreamEventsResponseCompletedTypedDict(TypedDict):
-    r"""Event emitted when a response has completed successfully"""
-
-    type: TypeResponseCompleted
-    response: OpenResponsesResultTypedDict
-    r"""Complete non-streaming response from the Responses API"""
-    sequence_number: float
-
-
-class StreamEventsResponseCompleted(BaseModel):
-    r"""Event emitted when a response has completed successfully"""
-
-    type: TypeResponseCompleted
-
-    response: OpenResponsesResult
-    r"""Complete non-streaming response from the Responses API"""
-
-    sequence_number: float
-
-
-TypeResponseInProgress = Literal["response.in_progress",]
-
-
-class StreamEventsResponseInProgressTypedDict(TypedDict):
-    r"""Event emitted when a response is in progress"""
-
-    type: TypeResponseInProgress
-    response: OpenResponsesResultTypedDict
-    r"""Complete non-streaming response from the Responses API"""
-    sequence_number: float
-
-
-class StreamEventsResponseInProgress(BaseModel):
-    r"""Event emitted when a response is in progress"""
-
-    type: TypeResponseInProgress
-
-    response: OpenResponsesResult
-    r"""Complete non-streaming response from the Responses API"""
-
-    sequence_number: float
-
-
-TypeResponseCreated = Literal["response.created",]
-
-
-class StreamEventsResponseCreatedTypedDict(TypedDict):
-    r"""Event emitted when a response is created"""
-
-    type: TypeResponseCreated
-    response: OpenResponsesResultTypedDict
-    r"""Complete non-streaming response from the Responses API"""
-    sequence_number: float
-
-
-class StreamEventsResponseCreated(BaseModel):
-    r"""Event emitted when a response is created"""
-
-    type: TypeResponseCreated
-
-    response: OpenResponsesResult
-    r"""Complete non-streaming response from the Responses API"""
-
-    sequence_number: float
+from typing import Union
+from typing_extensions import Annotated, TypeAliasType
 
 
 StreamEventsTypedDict = TypeAliasType(
     "StreamEventsTypedDict",
     Union[
-        StreamEventsResponseCreatedTypedDict,
-        StreamEventsResponseInProgressTypedDict,
+        OpenResponsesCreatedEventTypedDict,
+        OpenResponsesInProgressEventTypedDict,
         StreamEventsResponseCompletedTypedDict,
         StreamEventsResponseIncompleteTypedDict,
         StreamEventsResponseFailedTypedDict,
@@ -279,31 +137,42 @@ r"""Union of all possible event types emitted during response streaming"""
 
 StreamEvents = Annotated[
     Union[
-        Annotated[StreamEventsResponseCreated, Tag("response.created")],
-        Annotated[StreamEventsResponseInProgress, Tag("response.in_progress")],
-        Annotated[StreamEventsResponseCompleted, Tag("response.completed")],
-        Annotated[StreamEventsResponseIncomplete, Tag("response.incomplete")],
-        Annotated[StreamEventsResponseFailed, Tag("response.failed")],
         Annotated[ErrorEvent, Tag("error")],
-        Annotated[
-            StreamEventsResponseOutputItemAdded, Tag("response.output_item.added")
-        ],
-        Annotated[StreamEventsResponseOutputItemDone, Tag("response.output_item.done")],
+        Annotated[StreamEventsResponseCompleted, Tag("response.completed")],
         Annotated[ContentPartAddedEvent, Tag("response.content_part.added")],
         Annotated[ContentPartDoneEvent, Tag("response.content_part.done")],
-        Annotated[TextDeltaEvent, Tag("response.output_text.delta")],
-        Annotated[TextDoneEvent, Tag("response.output_text.done")],
-        Annotated[RefusalDeltaEvent, Tag("response.refusal.delta")],
-        Annotated[RefusalDoneEvent, Tag("response.refusal.done")],
-        Annotated[AnnotationAddedEvent, Tag("response.output_text.annotation.added")],
+        Annotated[OpenResponsesCreatedEvent, Tag("response.created")],
+        Annotated[StreamEventsResponseFailed, Tag("response.failed")],
         Annotated[
             FunctionCallArgsDeltaEvent, Tag("response.function_call_arguments.delta")
         ],
         Annotated[
             FunctionCallArgsDoneEvent, Tag("response.function_call_arguments.done")
         ],
-        Annotated[ReasoningDeltaEvent, Tag("response.reasoning_text.delta")],
-        Annotated[ReasoningDoneEvent, Tag("response.reasoning_text.done")],
+        Annotated[
+            ImageGenCallCompletedEvent, Tag("response.image_generation_call.completed")
+        ],
+        Annotated[
+            ImageGenCallGeneratingEvent,
+            Tag("response.image_generation_call.generating"),
+        ],
+        Annotated[
+            ImageGenCallInProgressEvent,
+            Tag("response.image_generation_call.in_progress"),
+        ],
+        Annotated[
+            ImageGenCallPartialImageEvent,
+            Tag("response.image_generation_call.partial_image"),
+        ],
+        Annotated[OpenResponsesInProgressEvent, Tag("response.in_progress")],
+        Annotated[StreamEventsResponseIncomplete, Tag("response.incomplete")],
+        Annotated[
+            StreamEventsResponseOutputItemAdded, Tag("response.output_item.added")
+        ],
+        Annotated[StreamEventsResponseOutputItemDone, Tag("response.output_item.done")],
+        Annotated[AnnotationAddedEvent, Tag("response.output_text.annotation.added")],
+        Annotated[TextDeltaEvent, Tag("response.output_text.delta")],
+        Annotated[TextDoneEvent, Tag("response.output_text.done")],
         Annotated[
             ReasoningSummaryPartAddedEvent, Tag("response.reasoning_summary_part.added")
         ],
@@ -316,29 +185,18 @@ StreamEvents = Annotated[
         Annotated[
             ReasoningSummaryTextDoneEvent, Tag("response.reasoning_summary_text.done")
         ],
+        Annotated[ReasoningDeltaEvent, Tag("response.reasoning_text.delta")],
+        Annotated[ReasoningDoneEvent, Tag("response.reasoning_text.done")],
+        Annotated[RefusalDeltaEvent, Tag("response.refusal.delta")],
+        Annotated[RefusalDoneEvent, Tag("response.refusal.done")],
         Annotated[
-            ImageGenCallInProgressEvent,
-            Tag("response.image_generation_call.in_progress"),
-        ],
-        Annotated[
-            ImageGenCallGeneratingEvent,
-            Tag("response.image_generation_call.generating"),
-        ],
-        Annotated[
-            ImageGenCallPartialImageEvent,
-            Tag("response.image_generation_call.partial_image"),
-        ],
-        Annotated[
-            ImageGenCallCompletedEvent, Tag("response.image_generation_call.completed")
+            WebSearchCallCompletedEvent, Tag("response.web_search_call.completed")
         ],
         Annotated[
             WebSearchCallInProgressEvent, Tag("response.web_search_call.in_progress")
         ],
         Annotated[
             WebSearchCallSearchingEvent, Tag("response.web_search_call.searching")
-        ],
-        Annotated[
-            WebSearchCallCompletedEvent, Tag("response.web_search_call.completed")
         ],
     ],
     Discriminator(lambda m: get_discriminator(m, "type", "type")),

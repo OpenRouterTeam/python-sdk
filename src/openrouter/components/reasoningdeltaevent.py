@@ -12,25 +12,25 @@ ReasoningDeltaEventType = Literal["response.reasoning_text.delta",]
 class ReasoningDeltaEventTypedDict(TypedDict):
     r"""Event emitted when reasoning text delta is streamed"""
 
-    type: ReasoningDeltaEventType
-    output_index: float
-    item_id: str
-    content_index: float
+    content_index: int
     delta: str
-    sequence_number: float
+    item_id: str
+    output_index: int
+    sequence_number: int
+    type: ReasoningDeltaEventType
 
 
 class ReasoningDeltaEvent(BaseModel):
     r"""Event emitted when reasoning text delta is streamed"""
 
-    type: ReasoningDeltaEventType
-
-    output_index: float
-
-    item_id: str
-
-    content_index: float
+    content_index: int
 
     delta: str
 
-    sequence_number: float
+    item_id: str
+
+    output_index: int
+
+    sequence_number: int
+
+    type: ReasoningDeltaEventType

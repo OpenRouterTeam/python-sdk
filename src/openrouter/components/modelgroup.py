@@ -13,6 +13,7 @@ ModelGroup = Union[
         "GPT",
         "Claude",
         "Gemini",
+        "Gemma",
         "Grok",
         "Cohere",
         "Nova",

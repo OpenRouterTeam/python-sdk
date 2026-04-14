@@ -6,9 +6,6 @@ from typing import Literal, Optional, Union
 from typing_extensions import NotRequired, TypeAliasType, TypedDict
 
 
-OutputFunctionCallItemType = Literal["function_call",]
-
-
 OutputFunctionCallItemStatusInProgress = Literal["in_progress",]
 
 
@@ -38,23 +35,26 @@ OutputFunctionCallItemStatusUnion = TypeAliasType(
 )
 
 
+OutputFunctionCallItemType = Literal["function_call",]
+
+
 class OutputFunctionCallItemTypedDict(TypedDict):
-    type: OutputFunctionCallItemType
-    name: str
     arguments: str
     call_id: str
+    name: str
+    type: OutputFunctionCallItemType
     id: NotRequired[str]
     status: NotRequired[OutputFunctionCallItemStatusUnionTypedDict]
 
 
 class OutputFunctionCallItem(BaseModel):
-    type: OutputFunctionCallItemType
-
-    name: str
-
     arguments: str
 
     call_id: str
+
+    name: str
+
+    type: OutputFunctionCallItemType
 
     id: Optional[str] = None
 

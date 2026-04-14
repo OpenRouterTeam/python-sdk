@@ -3,6 +3,7 @@
 from __future__ import annotations
 from .defaultparameters import DefaultParameters, DefaultParametersTypedDict
 from .modelarchitecture import ModelArchitecture, ModelArchitectureTypedDict
+from .modellinks import ModelLinks, ModelLinksTypedDict
 from .parameter import Parameter
 from .perrequestlimits import PerRequestLimits, PerRequestLimitsTypedDict
 from .publicpricing import PublicPricing, PublicPricingTypedDict
@@ -24,103 +25,108 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 class ModelTypedDict(TypedDict):
     r"""Information about an AI model available on OpenRouter"""
 
-    id: str
-    r"""Unique identifier for the model"""
-    canonical_slug: str
-    r"""Canonical slug for the model"""
-    name: str
-    r"""Display name of the model"""
-    created: float
-    r"""Unix timestamp of when the model was created"""
-    pricing: PublicPricingTypedDict
-    r"""Pricing information for the model"""
-    context_length: Nullable[float]
-    r"""Maximum context length in tokens"""
     architecture: ModelArchitectureTypedDict
     r"""Model architecture information"""
-    top_provider: TopProviderInfoTypedDict
-    r"""Information about the top provider for this model"""
-    per_request_limits: Nullable[PerRequestLimitsTypedDict]
-    r"""Per-request token limits"""
-    supported_parameters: List[Parameter]
-    r"""List of supported parameters for this model"""
+    canonical_slug: str
+    r"""Canonical slug for the model"""
+    context_length: Nullable[int]
+    r"""Maximum context length in tokens"""
+    created: int
+    r"""Unix timestamp of when the model was created"""
     default_parameters: Nullable[DefaultParametersTypedDict]
     r"""Default parameters for this model"""
-    hugging_face_id: NotRequired[Nullable[str]]
-    r"""Hugging Face model identifier, if applicable"""
+    id: str
+    r"""Unique identifier for the model"""
+    links: ModelLinksTypedDict
+    r"""Related API endpoints and resources for this model."""
+    name: str
+    r"""Display name of the model"""
+    per_request_limits: Nullable[PerRequestLimitsTypedDict]
+    r"""Per-request token limits"""
+    pricing: PublicPricingTypedDict
+    r"""Pricing information for the model"""
+    supported_parameters: List[Parameter]
+    r"""List of supported parameters for this model"""
+    top_provider: TopProviderInfoTypedDict
+    r"""Information about the top provider for this model"""
     description: NotRequired[str]
     r"""Description of the model"""
-    knowledge_cutoff: NotRequired[Nullable[str]]
-    r"""The date up to which the model was trained on data. ISO 8601 date string (YYYY-MM-DD) or null if unknown."""
     expiration_date: NotRequired[Nullable[str]]
     r"""The date after which the model may be removed. ISO 8601 date string (YYYY-MM-DD) or null if no expiration."""
+    hugging_face_id: NotRequired[Nullable[str]]
+    r"""Hugging Face model identifier, if applicable"""
+    knowledge_cutoff: NotRequired[Nullable[str]]
+    r"""The date up to which the model was trained on data. ISO 8601 date string (YYYY-MM-DD) or null if unknown."""
 
 
 class Model(BaseModel):
     r"""Information about an AI model available on OpenRouter"""
 
-    id: str
-    r"""Unique identifier for the model"""
+    architecture: ModelArchitecture
+    r"""Model architecture information"""
 
     canonical_slug: str
     r"""Canonical slug for the model"""
 
+    context_length: Nullable[int]
+    r"""Maximum context length in tokens"""
+
+    created: int
+    r"""Unix timestamp of when the model was created"""
+
+    default_parameters: Nullable[DefaultParameters]
+    r"""Default parameters for this model"""
+
+    id: str
+    r"""Unique identifier for the model"""
+
+    links: ModelLinks
+    r"""Related API endpoints and resources for this model."""
+
     name: str
     r"""Display name of the model"""
 
-    created: float
-    r"""Unix timestamp of when the model was created"""
+    per_request_limits: Nullable[PerRequestLimits]
+    r"""Per-request token limits"""
 
     pricing: PublicPricing
     r"""Pricing information for the model"""
-
-    context_length: Nullable[float]
-    r"""Maximum context length in tokens"""
-
-    architecture: ModelArchitecture
-    r"""Model architecture information"""
-
-    top_provider: TopProviderInfo
-    r"""Information about the top provider for this model"""
-
-    per_request_limits: Nullable[PerRequestLimits]
-    r"""Per-request token limits"""
 
     supported_parameters: List[
         Annotated[Parameter, PlainValidator(validate_open_enum(False))]
     ]
     r"""List of supported parameters for this model"""
 
-    default_parameters: Nullable[DefaultParameters]
-    r"""Default parameters for this model"""
-
-    hugging_face_id: OptionalNullable[str] = UNSET
-    r"""Hugging Face model identifier, if applicable"""
+    top_provider: TopProviderInfo
+    r"""Information about the top provider for this model"""
 
     description: Optional[str] = None
     r"""Description of the model"""
 
-    knowledge_cutoff: OptionalNullable[str] = UNSET
-    r"""The date up to which the model was trained on data. ISO 8601 date string (YYYY-MM-DD) or null if unknown."""
-
     expiration_date: OptionalNullable[str] = UNSET
     r"""The date after which the model may be removed. ISO 8601 date string (YYYY-MM-DD) or null if no expiration."""
+
+    hugging_face_id: OptionalNullable[str] = UNSET
+    r"""Hugging Face model identifier, if applicable"""
+
+    knowledge_cutoff: OptionalNullable[str] = UNSET
+    r"""The date up to which the model was trained on data. ISO 8601 date string (YYYY-MM-DD) or null if unknown."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = [
-            "hugging_face_id",
             "description",
-            "knowledge_cutoff",
             "expiration_date",
+            "hugging_face_id",
+            "knowledge_cutoff",
         ]
         nullable_fields = [
-            "hugging_face_id",
             "context_length",
-            "per_request_limits",
             "default_parameters",
-            "knowledge_cutoff",
             "expiration_date",
+            "hugging_face_id",
+            "knowledge_cutoff",
+            "per_request_limits",
         ]
         null_default_fields = []
 

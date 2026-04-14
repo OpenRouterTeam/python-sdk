@@ -27,7 +27,10 @@ if TYPE_CHECKING:
     from openrouter.guardrails import Guardrails
     from openrouter.models_ import Models
     from openrouter.oauth import OAuth
+    from openrouter.organization import Organization
     from openrouter.providers import Providers
+    from openrouter.rerank import Rerank
+    from openrouter.video_generation import VideoGeneration
 
 
 class OpenRouter(BaseSDK):
@@ -35,41 +38,50 @@ class OpenRouter(BaseSDK):
     https://openrouter.ai/docs - OpenRouter Documentation
     """
 
-    beta: "Beta"
     analytics: "Analytics"
     r"""Analytics and usage endpoints"""
+    o_auth: "OAuth"
+    r"""OAuth authentication endpoints"""
     chat: "Chat"
     credits: "Credits"
     r"""Credit management endpoints"""
     embeddings: "Embeddings"
     r"""Text embedding endpoints"""
-    generations: "Generations"
-    r"""Generation history endpoints"""
-    models: "Models"
-    r"""Model information endpoints"""
     endpoints: "Endpoints"
     r"""Endpoint information"""
-    providers: "Providers"
-    r"""Provider information endpoints"""
-    api_keys: "APIKeys"
-    r"""API key management endpoints"""
+    generations: "Generations"
+    r"""Generation history endpoints"""
     guardrails: "Guardrails"
     r"""Guardrails endpoints"""
-    o_auth: "OAuth"
-    r"""OAuth authentication endpoints"""
+    api_keys: "APIKeys"
+    r"""API key management endpoints"""
+    models: "Models"
+    r"""Model information endpoints"""
+    organization: "Organization"
+    r"""Organization endpoints"""
+    providers: "Providers"
+    r"""Provider information endpoints"""
+    rerank: "Rerank"
+    r"""Rerank endpoints"""
+    beta: "Beta"
+    video_generation: "VideoGeneration"
+    r"""Video Generation endpoints"""
     _sub_sdk_map = {
-        "beta": ("openrouter.beta", "Beta"),
         "analytics": ("openrouter.analytics", "Analytics"),
+        "o_auth": ("openrouter.oauth", "OAuth"),
         "chat": ("openrouter.chat", "Chat"),
         "credits": ("openrouter.credits", "Credits"),
         "embeddings": ("openrouter.embeddings", "Embeddings"),
-        "generations": ("openrouter.generations", "Generations"),
-        "models": ("openrouter.models_", "Models"),
         "endpoints": ("openrouter.endpoints", "Endpoints"),
-        "providers": ("openrouter.providers", "Providers"),
-        "api_keys": ("openrouter.api_keys", "APIKeys"),
+        "generations": ("openrouter.generations", "Generations"),
         "guardrails": ("openrouter.guardrails", "Guardrails"),
-        "o_auth": ("openrouter.oauth", "OAuth"),
+        "api_keys": ("openrouter.api_keys", "APIKeys"),
+        "models": ("openrouter.models_", "Models"),
+        "organization": ("openrouter.organization", "Organization"),
+        "providers": ("openrouter.providers", "Providers"),
+        "rerank": ("openrouter.rerank", "Rerank"),
+        "beta": ("openrouter.beta", "Beta"),
+        "video_generation": ("openrouter.video_generation", "VideoGeneration"),
     }
 
     def __init__(

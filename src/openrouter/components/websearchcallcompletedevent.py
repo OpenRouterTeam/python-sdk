@@ -12,19 +12,19 @@ WebSearchCallCompletedEventType = Literal["response.web_search_call.completed",]
 class WebSearchCallCompletedEventTypedDict(TypedDict):
     r"""Web search call completed"""
 
-    type: WebSearchCallCompletedEventType
     item_id: str
-    output_index: float
-    sequence_number: float
+    output_index: int
+    sequence_number: int
+    type: WebSearchCallCompletedEventType
 
 
 class WebSearchCallCompletedEvent(BaseModel):
     r"""Web search call completed"""
 
-    type: WebSearchCallCompletedEventType
-
     item_id: str
 
-    output_index: float
+    output_index: int
 
-    sequence_number: float
+    sequence_number: int
+
+    type: WebSearchCallCompletedEventType

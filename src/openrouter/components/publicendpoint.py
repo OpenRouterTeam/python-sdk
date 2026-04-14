@@ -14,50 +14,50 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class PricingTypedDict(TypedDict):
-    prompt: str
     completion: str
-    request: NotRequired[str]
-    image: NotRequired[str]
-    image_token: NotRequired[str]
-    image_output: NotRequired[str]
+    prompt: str
     audio: NotRequired[str]
     audio_output: NotRequired[str]
+    discount: NotRequired[float]
+    image: NotRequired[str]
+    image_output: NotRequired[str]
+    image_token: NotRequired[str]
     input_audio_cache: NotRequired[str]
-    web_search: NotRequired[str]
-    internal_reasoning: NotRequired[str]
     input_cache_read: NotRequired[str]
     input_cache_write: NotRequired[str]
-    discount: NotRequired[float]
+    internal_reasoning: NotRequired[str]
+    request: NotRequired[str]
+    web_search: NotRequired[str]
 
 
 class Pricing(BaseModel):
-    prompt: str
-
     completion: str
 
-    request: Optional[str] = None
-
-    image: Optional[str] = None
-
-    image_token: Optional[str] = None
-
-    image_output: Optional[str] = None
+    prompt: str
 
     audio: Optional[str] = None
 
     audio_output: Optional[str] = None
 
+    discount: Optional[float] = None
+
+    image: Optional[str] = None
+
+    image_output: Optional[str] = None
+
+    image_token: Optional[str] = None
+
     input_audio_cache: Optional[str] = None
-
-    web_search: Optional[str] = None
-
-    internal_reasoning: Optional[str] = None
 
     input_cache_read: Optional[str] = None
 
     input_cache_write: Optional[str] = None
 
-    discount: Optional[float] = None
+    internal_reasoning: Optional[str] = None
+
+    request: Optional[str] = None
+
+    web_search: Optional[str] = None
 
 
 PublicEndpointQuantization = Union[
@@ -79,64 +79,74 @@ PublicEndpointQuantization = Union[
 class PublicEndpointTypedDict(TypedDict):
     r"""Information about a specific model endpoint"""
 
-    name: str
+    context_length: int
+    latency_last_30m: Nullable[PercentileStatsTypedDict]
+    r"""Latency percentiles in milliseconds over the last 30 minutes. Latency measures time to first token. Only visible when authenticated with an API key or cookie; returns null for unauthenticated requests."""
+    max_completion_tokens: Nullable[int]
+    max_prompt_tokens: Nullable[int]
     model_id: str
     r"""The unique identifier for the model (permaslug)"""
     model_name: str
-    context_length: float
+    name: str
     pricing: PricingTypedDict
     provider_name: ProviderName
-    tag: str
     quantization: Nullable[PublicEndpointQuantization]
-    max_completion_tokens: Nullable[float]
-    max_prompt_tokens: Nullable[float]
     supported_parameters: List[Parameter]
-    uptime_last_30m: Nullable[float]
     supports_implicit_caching: bool
-    latency_last_30m: Nullable[PercentileStatsTypedDict]
-    r"""Latency percentiles in milliseconds over the last 30 minutes. Latency measures time to first token. Only visible when authenticated with an API key or cookie; returns null for unauthenticated requests."""
+    tag: str
     throughput_last_30m: Nullable[PercentileStatsTypedDict]
+    uptime_last_1d: Nullable[float]
+    r"""Uptime percentage over the last 1 day, calculated as successful requests / (successful + error requests) * 100. Rate-limited requests are excluded. Returns null if insufficient data."""
+    uptime_last_30m: Nullable[float]
+    uptime_last_5m: Nullable[float]
+    r"""Uptime percentage over the last 5 minutes, calculated as successful requests / (successful + error requests) * 100. Rate-limited requests are excluded. Returns null if insufficient data."""
     status: NotRequired[EndpointStatus]
 
 
 class PublicEndpoint(BaseModel):
     r"""Information about a specific model endpoint"""
 
-    name: str
+    context_length: int
+
+    latency_last_30m: Nullable[PercentileStats]
+    r"""Latency percentiles in milliseconds over the last 30 minutes. Latency measures time to first token. Only visible when authenticated with an API key or cookie; returns null for unauthenticated requests."""
+
+    max_completion_tokens: Nullable[int]
+
+    max_prompt_tokens: Nullable[int]
 
     model_id: str
     r"""The unique identifier for the model (permaslug)"""
 
     model_name: str
 
-    context_length: float
+    name: str
 
     pricing: Pricing
 
     provider_name: Annotated[ProviderName, PlainValidator(validate_open_enum(False))]
 
-    tag: str
-
     quantization: Annotated[
         Nullable[PublicEndpointQuantization], PlainValidator(validate_open_enum(False))
     ]
-
-    max_completion_tokens: Nullable[float]
-
-    max_prompt_tokens: Nullable[float]
 
     supported_parameters: List[
         Annotated[Parameter, PlainValidator(validate_open_enum(False))]
     ]
 
-    uptime_last_30m: Nullable[float]
-
     supports_implicit_caching: bool
 
-    latency_last_30m: Nullable[PercentileStats]
-    r"""Latency percentiles in milliseconds over the last 30 minutes. Latency measures time to first token. Only visible when authenticated with an API key or cookie; returns null for unauthenticated requests."""
+    tag: str
 
     throughput_last_30m: Nullable[PercentileStats]
+
+    uptime_last_1d: Nullable[float]
+    r"""Uptime percentage over the last 1 day, calculated as successful requests / (successful + error requests) * 100. Rate-limited requests are excluded. Returns null if insufficient data."""
+
+    uptime_last_30m: Nullable[float]
+
+    uptime_last_5m: Nullable[float]
+    r"""Uptime percentage over the last 5 minutes, calculated as successful requests / (successful + error requests) * 100. Rate-limited requests are excluded. Returns null if insufficient data."""
 
     status: Annotated[
         Optional[EndpointStatus], PlainValidator(validate_open_enum(True))
@@ -146,12 +156,14 @@ class PublicEndpoint(BaseModel):
     def serialize_model(self, handler):
         optional_fields = ["status"]
         nullable_fields = [
-            "quantization",
+            "latency_last_30m",
             "max_completion_tokens",
             "max_prompt_tokens",
-            "uptime_last_30m",
-            "latency_last_30m",
+            "quantization",
             "throughput_last_30m",
+            "uptime_last_1d",
+            "uptime_last_30m",
+            "uptime_last_5m",
         ]
         null_default_fields = []
 

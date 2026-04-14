@@ -13,17 +13,17 @@ OutputFileSearchCallItemType = Literal["file_search_call",]
 
 
 class OutputFileSearchCallItemTypedDict(TypedDict):
-    type: OutputFileSearchCallItemType
     id: str
     queries: List[str]
     status: WebSearchStatus
+    type: OutputFileSearchCallItemType
 
 
 class OutputFileSearchCallItem(BaseModel):
-    type: OutputFileSearchCallItemType
-
     id: str
 
     queries: List[str]
 
     status: Annotated[WebSearchStatus, PlainValidator(validate_open_enum(False))]
+
+    type: OutputFileSearchCallItemType

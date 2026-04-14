@@ -8,9 +8,6 @@ from typing import Literal, Union
 from typing_extensions import Annotated, TypedDict
 
 
-ComputerUseServerToolType = Literal["computer_use_preview",]
-
-
 Environment = Union[
     Literal[
         "windows",
@@ -23,22 +20,25 @@ Environment = Union[
 ]
 
 
+ComputerUseServerToolType = Literal["computer_use_preview",]
+
+
 class ComputerUseServerToolTypedDict(TypedDict):
     r"""Computer use preview tool configuration"""
 
-    type: ComputerUseServerToolType
-    display_height: float
-    display_width: float
+    display_height: int
+    display_width: int
     environment: Environment
+    type: ComputerUseServerToolType
 
 
 class ComputerUseServerTool(BaseModel):
     r"""Computer use preview tool configuration"""
 
-    type: ComputerUseServerToolType
+    display_height: int
 
-    display_height: float
-
-    display_width: float
+    display_width: int
 
     environment: Annotated[Environment, PlainValidator(validate_open_enum(False))]
+
+    type: ComputerUseServerToolType

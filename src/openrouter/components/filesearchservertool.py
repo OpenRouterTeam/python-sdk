@@ -17,9 +17,6 @@ from typing import Any, List, Literal, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
-TypeFileSearch = Literal["file_search",]
-
-
 FiltersType = Union[
     Literal[
         "eq",
@@ -47,13 +44,13 @@ Value2TypedDict = TypeAliasType(
 Value2 = TypeAliasType("Value2", Union[str, float, bool, List[Value1]])
 
 
-class FileSearchServerToolFiltersTypedDict(TypedDict):
+class FiltersTypedDict(TypedDict):
     key: str
     type: FiltersType
     value: Value2TypedDict
 
 
-class FileSearchServerToolFilters(BaseModel):
+class Filters(BaseModel):
     key: str
 
     type: Annotated[FiltersType, PlainValidator(validate_open_enum(False))]
@@ -61,15 +58,12 @@ class FileSearchServerToolFilters(BaseModel):
     value: Value2
 
 
-FiltersTypedDict = TypeAliasType(
-    "FiltersTypedDict",
-    Union[CompoundFilterTypedDict, FileSearchServerToolFiltersTypedDict, Any],
+FiltersUnionTypedDict = TypeAliasType(
+    "FiltersUnionTypedDict", Union[CompoundFilterTypedDict, FiltersTypedDict, Any]
 )
 
 
-Filters = TypeAliasType(
-    "Filters", Union[CompoundFilter, FileSearchServerToolFilters, Any]
-)
+FiltersUnion = TypeAliasType("FiltersUnion", Union[CompoundFilter, Filters, Any])
 
 
 Ranker = Union[
@@ -94,12 +88,15 @@ class RankingOptions(BaseModel):
     score_threshold: Optional[float] = None
 
 
+TypeFileSearch = Literal["file_search",]
+
+
 class FileSearchServerToolTypedDict(TypedDict):
     r"""File search tool configuration"""
 
     type: TypeFileSearch
     vector_store_ids: List[str]
-    filters: NotRequired[Nullable[FiltersTypedDict]]
+    filters: NotRequired[Nullable[FiltersUnionTypedDict]]
     max_num_results: NotRequired[int]
     ranking_options: NotRequired[RankingOptionsTypedDict]
 
@@ -111,7 +108,7 @@ class FileSearchServerTool(BaseModel):
 
     vector_store_ids: List[str]
 
-    filters: OptionalNullable[Filters] = UNSET
+    filters: OptionalNullable[FiltersUnion] = UNSET
 
     max_num_results: Optional[int] = None
 

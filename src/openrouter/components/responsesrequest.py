@@ -2,20 +2,33 @@
 
 from __future__ import annotations
 from .applypatchservertool import ApplyPatchServerTool, ApplyPatchServerToolTypedDict
+from .autorouterplugin import AutoRouterPlugin, AutoRouterPluginTypedDict
+from .chatsearchmodelsservertool import (
+    ChatSearchModelsServerTool,
+    ChatSearchModelsServerToolTypedDict,
+)
 from .codeinterpreterservertool import (
     CodeInterpreterServerTool,
     CodeInterpreterServerToolTypedDict,
 )
 from .codexlocalshelltool import CodexLocalShellTool, CodexLocalShellToolTypedDict
 from .computeruseservertool import ComputerUseServerTool, ComputerUseServerToolTypedDict
-from .contextcompressionengine import ContextCompressionEngine
+from .contextcompressionplugin import (
+    ContextCompressionPlugin,
+    ContextCompressionPluginTypedDict,
+)
 from .customtool import CustomTool, CustomToolTypedDict
-from .datacollection import DataCollection
 from .datetimeservertool import DatetimeServerTool, DatetimeServerToolTypedDict
+from .fileparserplugin import FileParserPlugin, FileParserPluginTypedDict
 from .filesearchservertool import FileSearchServerTool, FileSearchServerToolTypedDict
+from .imageconfig import ImageConfig, ImageConfigTypedDict
 from .imagegenerationservertool import (
     ImageGenerationServerTool,
     ImageGenerationServerToolTypedDict,
+)
+from .imagegenerationservertool_openrouter import (
+    ImageGenerationServerToolOpenRouter,
+    ImageGenerationServerToolOpenRouterTypedDict,
 )
 from .inputs_union import InputsUnion, InputsUnionTypedDict
 from .legacy_websearchservertool import (
@@ -23,18 +36,13 @@ from .legacy_websearchservertool import (
     LegacyWebSearchServerToolTypedDict,
 )
 from .mcpservertool import McpServerTool, McpServerToolTypedDict
+from .moderationplugin import ModerationPlugin, ModerationPluginTypedDict
 from .openairesponsestoolchoice_union import (
     OpenAIResponsesToolChoiceUnion,
     OpenAIResponsesToolChoiceUnionTypedDict,
 )
 from .openairesponsestruncation import OpenAIResponsesTruncation
 from .outputmodalityenum import OutputModalityEnum
-from .pdfparseroptions import PDFParserOptions, PDFParserOptionsTypedDict
-from .preferredmaxlatency import PreferredMaxLatency, PreferredMaxLatencyTypedDict
-from .preferredminthroughput import (
-    PreferredMinThroughput,
-    PreferredMinThroughputTypedDict,
-)
 from .preview_20250311_websearchservertool import (
     Preview20250311WebSearchServerTool,
     Preview20250311WebSearchServerToolTypedDict,
@@ -43,16 +51,15 @@ from .preview_websearchservertool import (
     PreviewWebSearchServerTool,
     PreviewWebSearchServerToolTypedDict,
 )
-from .providername import ProviderName
-from .providersort import ProviderSort
-from .providersortconfig import ProviderSortConfig, ProviderSortConfigTypedDict
-from .quantization import Quantization
+from .providerpreferences import ProviderPreferences, ProviderPreferencesTypedDict
 from .reasoningconfig import ReasoningConfig, ReasoningConfigTypedDict
+from .responsehealingplugin import ResponseHealingPlugin, ResponseHealingPluginTypedDict
 from .responseincludesenum import ResponseIncludesEnum
 from .shellservertool import ShellServerTool, ShellServerToolTypedDict
 from .storedprompttemplate import StoredPromptTemplate, StoredPromptTemplateTypedDict
 from .textextendedconfig import TextExtendedConfig, TextExtendedConfigTypedDict
-from .websearchengine import WebSearchEngine
+from .traceconfig import TraceConfig, TraceConfigTypedDict
+from .websearchplugin import WebSearchPlugin, WebSearchPluginTypedDict
 from .websearchservertool import WebSearchServerTool, WebSearchServerToolTypedDict
 from .websearchservertool_openrouter import (
     WebSearchServerToolOpenRouter,
@@ -68,10 +75,48 @@ from openrouter.types import (
 )
 from openrouter.utils import get_discriminator, validate_const, validate_open_enum
 import pydantic
-from pydantic import ConfigDict, Discriminator, Tag, model_serializer
+from pydantic import Discriminator, Tag, model_serializer
 from pydantic.functional_validators import AfterValidator, PlainValidator
 from typing import Any, Dict, List, Literal, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
+
+
+ResponsesRequestPluginTypedDict = TypeAliasType(
+    "ResponsesRequestPluginTypedDict",
+    Union[
+        ModerationPluginTypedDict,
+        ResponseHealingPluginTypedDict,
+        AutoRouterPluginTypedDict,
+        FileParserPluginTypedDict,
+        ContextCompressionPluginTypedDict,
+        WebSearchPluginTypedDict,
+    ],
+)
+
+
+ResponsesRequestPlugin = Annotated[
+    Union[
+        Annotated[AutoRouterPlugin, Tag("auto-router")],
+        Annotated[ContextCompressionPlugin, Tag("context-compression")],
+        Annotated[FileParserPlugin, Tag("file-parser")],
+        Annotated[ModerationPlugin, Tag("moderation")],
+        Annotated[ResponseHealingPlugin, Tag("response-healing")],
+        Annotated[WebSearchPlugin, Tag("web")],
+    ],
+    Discriminator(lambda m: get_discriminator(m, "id", "id")),
+]
+
+
+ResponsesRequestServiceTier = Union[
+    Literal[
+        "auto",
+        "default",
+        "flex",
+        "priority",
+        "scale",
+    ],
+    UnrecognizedStr,
+]
 
 
 ResponsesRequestType = Literal["function",]
@@ -80,9 +125,9 @@ ResponsesRequestType = Literal["function",]
 class ResponsesRequestToolFunctionTypedDict(TypedDict):
     r"""Function tool definition"""
 
-    type: ResponsesRequestType
     name: str
     parameters: Nullable[Dict[str, Nullable[Any]]]
+    type: ResponsesRequestType
     description: NotRequired[Nullable[str]]
     strict: NotRequired[Nullable[bool]]
 
@@ -90,11 +135,11 @@ class ResponsesRequestToolFunctionTypedDict(TypedDict):
 class ResponsesRequestToolFunction(BaseModel):
     r"""Function tool definition"""
 
-    type: ResponsesRequestType
-
     name: str
 
     parameters: Nullable[Dict[str, Nullable[Any]]]
+
+    type: ResponsesRequestType
 
     description: OptionalNullable[str] = UNSET
 
@@ -103,7 +148,7 @@ class ResponsesRequestToolFunction(BaseModel):
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = ["description", "strict"]
-        nullable_fields = ["description", "strict", "parameters"]
+        nullable_fields = ["description", "parameters", "strict"]
         null_default_fields = []
 
         serialized = handler(self)
@@ -134,14 +179,16 @@ class ResponsesRequestToolFunction(BaseModel):
 ResponsesRequestToolUnionTypedDict = TypeAliasType(
     "ResponsesRequestToolUnionTypedDict",
     Union[
-        CodexLocalShellToolTypedDict,
         ApplyPatchServerToolTypedDict,
+        CodexLocalShellToolTypedDict,
         ShellServerToolTypedDict,
         WebSearchServerToolOpenRouterTypedDict,
-        DatetimeServerToolTypedDict,
+        ChatSearchModelsServerToolTypedDict,
+        ImageGenerationServerToolOpenRouterTypedDict,
         CodeInterpreterServerToolTypedDict,
-        CustomToolTypedDict,
+        DatetimeServerToolTypedDict,
         ComputerUseServerToolTypedDict,
+        CustomToolTypedDict,
         ResponsesRequestToolFunctionTypedDict,
         FileSearchServerToolTypedDict,
         WebSearchServerToolTypedDict,
@@ -173,662 +220,226 @@ ResponsesRequestToolUnion = Annotated[
         Annotated[ApplyPatchServerTool, Tag("apply_patch")],
         Annotated[CustomTool, Tag("custom")],
         Annotated[DatetimeServerTool, Tag("openrouter:datetime")],
+        Annotated[
+            ImageGenerationServerToolOpenRouter, Tag("openrouter:image_generation")
+        ],
+        Annotated[
+            ChatSearchModelsServerTool, Tag("openrouter:experimental__search_models")
+        ],
         Annotated[WebSearchServerToolOpenRouter, Tag("openrouter:web_search")],
     ],
     Discriminator(lambda m: get_discriminator(m, "type", "type")),
 ]
 
 
-ResponsesRequestImageConfigTypedDict = TypeAliasType(
-    "ResponsesRequestImageConfigTypedDict", Union[str, float]
-)
-
-
-ResponsesRequestImageConfig = TypeAliasType(
-    "ResponsesRequestImageConfig", Union[str, float]
-)
-
-
-ResponsesRequestServiceTier = Union[
-    Literal[
-        "auto",
-        "default",
-        "flex",
-        "priority",
-        "scale",
-    ],
-    UnrecognizedStr,
-]
-
-
-ResponsesRequestOrderTypedDict = TypeAliasType(
-    "ResponsesRequestOrderTypedDict", Union[ProviderName, str]
-)
-
-
-ResponsesRequestOrder = TypeAliasType(
-    "ResponsesRequestOrder",
-    Union[Annotated[ProviderName, PlainValidator(validate_open_enum(False))], str],
-)
-
-
-ResponsesRequestOnlyTypedDict = TypeAliasType(
-    "ResponsesRequestOnlyTypedDict", Union[ProviderName, str]
-)
-
-
-ResponsesRequestOnly = TypeAliasType(
-    "ResponsesRequestOnly",
-    Union[Annotated[ProviderName, PlainValidator(validate_open_enum(False))], str],
-)
-
-
-ResponsesRequestIgnoreTypedDict = TypeAliasType(
-    "ResponsesRequestIgnoreTypedDict", Union[ProviderName, str]
-)
-
-
-ResponsesRequestIgnore = TypeAliasType(
-    "ResponsesRequestIgnore",
-    Union[Annotated[ProviderName, PlainValidator(validate_open_enum(False))], str],
-)
-
-
-ResponsesRequestSortTypedDict = TypeAliasType(
-    "ResponsesRequestSortTypedDict",
-    Union[ProviderSortConfigTypedDict, ProviderSort, Any],
-)
-r"""The sorting strategy to use for this request, if \"order\" is not specified. When set, no load balancing is performed."""
-
-
-ResponsesRequestSort = TypeAliasType(
-    "ResponsesRequestSort",
-    Union[
-        ProviderSortConfig,
-        Annotated[ProviderSort, PlainValidator(validate_open_enum(False))],
-        Any,
-    ],
-)
-r"""The sorting strategy to use for this request, if \"order\" is not specified. When set, no load balancing is performed."""
-
-
-class ResponsesRequestMaxPriceTypedDict(TypedDict):
-    r"""The object specifying the maximum price you want to pay for this request. USD price per million tokens, for prompt and completion."""
-
-    prompt: NotRequired[str]
-    r"""Price per million prompt tokens"""
-    completion: NotRequired[str]
-    image: NotRequired[str]
-    audio: NotRequired[str]
-    request: NotRequired[str]
-
-
-class ResponsesRequestMaxPrice(BaseModel):
-    r"""The object specifying the maximum price you want to pay for this request. USD price per million tokens, for prompt and completion."""
-
-    prompt: Optional[str] = None
-    r"""Price per million prompt tokens"""
-
-    completion: Optional[str] = None
-
-    image: Optional[str] = None
-
-    audio: Optional[str] = None
-
-    request: Optional[str] = None
-
-
-class ResponsesRequestProviderTypedDict(TypedDict):
-    r"""When multiple model providers are available, optionally indicate your routing preference."""
-
-    allow_fallbacks: NotRequired[Nullable[bool]]
-    r"""Whether to allow backup providers to serve requests
-    - true: (default) when the primary provider (or your custom providers in \"order\") is unavailable, use the next best provider.
-    - false: use only the primary/custom provider, and return the upstream error if it's unavailable.
-
-    """
-    require_parameters: NotRequired[Nullable[bool]]
-    r"""Whether to filter providers to only those that support the parameters you've provided. If this setting is omitted or set to false, then providers will receive only the parameters they support, and ignore the rest."""
-    data_collection: NotRequired[Nullable[DataCollection]]
-    r"""Data collection setting. If no available model provider meets the requirement, your request will return an error.
-    - allow: (default) allow providers which store user data non-transiently and may train on it
-
-    - deny: use only providers which do not collect user data.
-    """
-    zdr: NotRequired[Nullable[bool]]
-    r"""Whether to restrict routing to only ZDR (Zero Data Retention) endpoints. When true, only endpoints that do not retain prompts will be used."""
-    enforce_distillable_text: NotRequired[Nullable[bool]]
-    r"""Whether to restrict routing to only models that allow text distillation. When true, only models where the author has allowed distillation will be used."""
-    order: NotRequired[Nullable[List[ResponsesRequestOrderTypedDict]]]
-    r"""An ordered list of provider slugs. The router will attempt to use the first provider in the subset of this list that supports your requested model, and fall back to the next if it is unavailable. If no providers are available, the request will fail with an error message."""
-    only: NotRequired[Nullable[List[ResponsesRequestOnlyTypedDict]]]
-    r"""List of provider slugs to allow. If provided, this list is merged with your account-wide allowed provider settings for this request."""
-    ignore: NotRequired[Nullable[List[ResponsesRequestIgnoreTypedDict]]]
-    r"""List of provider slugs to ignore. If provided, this list is merged with your account-wide ignored provider settings for this request."""
-    quantizations: NotRequired[Nullable[List[Quantization]]]
-    r"""A list of quantization levels to filter the provider by."""
-    sort: NotRequired[Nullable[ResponsesRequestSortTypedDict]]
-    r"""The sorting strategy to use for this request, if \"order\" is not specified. When set, no load balancing is performed."""
-    max_price: NotRequired[ResponsesRequestMaxPriceTypedDict]
-    r"""The object specifying the maximum price you want to pay for this request. USD price per million tokens, for prompt and completion."""
-    preferred_min_throughput: NotRequired[Nullable[PreferredMinThroughputTypedDict]]
-    r"""Preferred minimum throughput (in tokens per second). Can be a number (applies to p50) or an object with percentile-specific cutoffs. Endpoints below the threshold(s) may still be used, but are deprioritized in routing. When using fallback models, this may cause a fallback model to be used instead of the primary model if it meets the threshold."""
-    preferred_max_latency: NotRequired[Nullable[PreferredMaxLatencyTypedDict]]
-    r"""Preferred maximum latency (in seconds). Can be a number (applies to p50) or an object with percentile-specific cutoffs. Endpoints above the threshold(s) may still be used, but are deprioritized in routing. When using fallback models, this may cause a fallback model to be used instead of the primary model if it meets the threshold."""
-
-
-class ResponsesRequestProvider(BaseModel):
-    r"""When multiple model providers are available, optionally indicate your routing preference."""
-
-    allow_fallbacks: OptionalNullable[bool] = UNSET
-    r"""Whether to allow backup providers to serve requests
-    - true: (default) when the primary provider (or your custom providers in \"order\") is unavailable, use the next best provider.
-    - false: use only the primary/custom provider, and return the upstream error if it's unavailable.
-
-    """
-
-    require_parameters: OptionalNullable[bool] = UNSET
-    r"""Whether to filter providers to only those that support the parameters you've provided. If this setting is omitted or set to false, then providers will receive only the parameters they support, and ignore the rest."""
-
-    data_collection: Annotated[
-        OptionalNullable[DataCollection], PlainValidator(validate_open_enum(False))
-    ] = UNSET
-    r"""Data collection setting. If no available model provider meets the requirement, your request will return an error.
-    - allow: (default) allow providers which store user data non-transiently and may train on it
-
-    - deny: use only providers which do not collect user data.
-    """
-
-    zdr: OptionalNullable[bool] = UNSET
-    r"""Whether to restrict routing to only ZDR (Zero Data Retention) endpoints. When true, only endpoints that do not retain prompts will be used."""
-
-    enforce_distillable_text: OptionalNullable[bool] = UNSET
-    r"""Whether to restrict routing to only models that allow text distillation. When true, only models where the author has allowed distillation will be used."""
-
-    order: OptionalNullable[List[ResponsesRequestOrder]] = UNSET
-    r"""An ordered list of provider slugs. The router will attempt to use the first provider in the subset of this list that supports your requested model, and fall back to the next if it is unavailable. If no providers are available, the request will fail with an error message."""
-
-    only: OptionalNullable[List[ResponsesRequestOnly]] = UNSET
-    r"""List of provider slugs to allow. If provided, this list is merged with your account-wide allowed provider settings for this request."""
-
-    ignore: OptionalNullable[List[ResponsesRequestIgnore]] = UNSET
-    r"""List of provider slugs to ignore. If provided, this list is merged with your account-wide ignored provider settings for this request."""
-
-    quantizations: OptionalNullable[
-        List[Annotated[Quantization, PlainValidator(validate_open_enum(False))]]
-    ] = UNSET
-    r"""A list of quantization levels to filter the provider by."""
-
-    sort: OptionalNullable[ResponsesRequestSort] = UNSET
-    r"""The sorting strategy to use for this request, if \"order\" is not specified. When set, no load balancing is performed."""
-
-    max_price: Optional[ResponsesRequestMaxPrice] = None
-    r"""The object specifying the maximum price you want to pay for this request. USD price per million tokens, for prompt and completion."""
-
-    preferred_min_throughput: OptionalNullable[PreferredMinThroughput] = UNSET
-    r"""Preferred minimum throughput (in tokens per second). Can be a number (applies to p50) or an object with percentile-specific cutoffs. Endpoints below the threshold(s) may still be used, but are deprioritized in routing. When using fallback models, this may cause a fallback model to be used instead of the primary model if it meets the threshold."""
-
-    preferred_max_latency: OptionalNullable[PreferredMaxLatency] = UNSET
-    r"""Preferred maximum latency (in seconds). Can be a number (applies to p50) or an object with percentile-specific cutoffs. Endpoints above the threshold(s) may still be used, but are deprioritized in routing. When using fallback models, this may cause a fallback model to be used instead of the primary model if it meets the threshold."""
-
-    @model_serializer(mode="wrap")
-    def serialize_model(self, handler):
-        optional_fields = [
-            "allow_fallbacks",
-            "require_parameters",
-            "data_collection",
-            "zdr",
-            "enforce_distillable_text",
-            "order",
-            "only",
-            "ignore",
-            "quantizations",
-            "sort",
-            "max_price",
-            "preferred_min_throughput",
-            "preferred_max_latency",
-        ]
-        nullable_fields = [
-            "allow_fallbacks",
-            "require_parameters",
-            "data_collection",
-            "zdr",
-            "enforce_distillable_text",
-            "order",
-            "only",
-            "ignore",
-            "quantizations",
-            "sort",
-            "preferred_min_throughput",
-            "preferred_max_latency",
-        ]
-        null_default_fields = []
-
-        serialized = handler(self)
-
-        m = {}
-
-        for n, f in type(self).model_fields.items():
-            k = f.alias or n
-            val = serialized.get(k)
-            serialized.pop(k, None)
-
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
-
-        return m
-
-
-ResponsesRequestIDContextCompression = Literal["context-compression",]
-
-
-class ResponsesRequestPluginContextCompressionTypedDict(TypedDict):
-    id: ResponsesRequestIDContextCompression
-    enabled: NotRequired[bool]
-    r"""Set to false to disable the context-compression plugin for this request. Defaults to true."""
-    engine: NotRequired[ContextCompressionEngine]
-    r"""The compression engine to use. Defaults to \"middle-out\"."""
-
-
-class ResponsesRequestPluginContextCompression(BaseModel):
-    id: ResponsesRequestIDContextCompression
-
-    enabled: Optional[bool] = None
-    r"""Set to false to disable the context-compression plugin for this request. Defaults to true."""
-
-    engine: Optional[ContextCompressionEngine] = None
-    r"""The compression engine to use. Defaults to \"middle-out\"."""
-
-
-ResponsesRequestIDResponseHealing = Literal["response-healing",]
-
-
-class ResponsesRequestPluginResponseHealingTypedDict(TypedDict):
-    id: ResponsesRequestIDResponseHealing
-    enabled: NotRequired[bool]
-    r"""Set to false to disable the response-healing plugin for this request. Defaults to true."""
-
-
-class ResponsesRequestPluginResponseHealing(BaseModel):
-    id: ResponsesRequestIDResponseHealing
-
-    enabled: Optional[bool] = None
-    r"""Set to false to disable the response-healing plugin for this request. Defaults to true."""
-
-
-ResponsesRequestIDFileParser = Literal["file-parser",]
-
-
-class ResponsesRequestPluginFileParserTypedDict(TypedDict):
-    id: ResponsesRequestIDFileParser
-    enabled: NotRequired[bool]
-    r"""Set to false to disable the file-parser plugin for this request. Defaults to true."""
-    pdf: NotRequired[PDFParserOptionsTypedDict]
-    r"""Options for PDF parsing."""
-
-
-class ResponsesRequestPluginFileParser(BaseModel):
-    id: ResponsesRequestIDFileParser
-
-    enabled: Optional[bool] = None
-    r"""Set to false to disable the file-parser plugin for this request. Defaults to true."""
-
-    pdf: Optional[PDFParserOptions] = None
-    r"""Options for PDF parsing."""
-
-
-ResponsesRequestIDWeb = Literal["web",]
-
-
-class ResponsesRequestPluginWebTypedDict(TypedDict):
-    id: ResponsesRequestIDWeb
-    enabled: NotRequired[bool]
-    r"""Set to false to disable the web-search plugin for this request. Defaults to true."""
-    max_results: NotRequired[float]
-    search_prompt: NotRequired[str]
-    engine: NotRequired[WebSearchEngine]
-    r"""The search engine to use for web search."""
-    include_domains: NotRequired[List[str]]
-    r"""A list of domains to restrict web search results to. Supports wildcards (e.g. \"*.substack.com\") and path filtering (e.g. \"openai.com/blog\")."""
-    exclude_domains: NotRequired[List[str]]
-    r"""A list of domains to exclude from web search results. Supports wildcards (e.g. \"*.substack.com\") and path filtering (e.g. \"openai.com/blog\")."""
-
-
-class ResponsesRequestPluginWeb(BaseModel):
-    id: ResponsesRequestIDWeb
-
-    enabled: Optional[bool] = None
-    r"""Set to false to disable the web-search plugin for this request. Defaults to true."""
-
-    max_results: Optional[float] = None
-
-    search_prompt: Optional[str] = None
-
-    engine: Annotated[
-        Optional[WebSearchEngine], PlainValidator(validate_open_enum(False))
-    ] = None
-    r"""The search engine to use for web search."""
-
-    include_domains: Optional[List[str]] = None
-    r"""A list of domains to restrict web search results to. Supports wildcards (e.g. \"*.substack.com\") and path filtering (e.g. \"openai.com/blog\")."""
-
-    exclude_domains: Optional[List[str]] = None
-    r"""A list of domains to exclude from web search results. Supports wildcards (e.g. \"*.substack.com\") and path filtering (e.g. \"openai.com/blog\")."""
-
-
-ResponsesRequestIDModeration = Literal["moderation",]
-
-
-class ResponsesRequestPluginModerationTypedDict(TypedDict):
-    id: ResponsesRequestIDModeration
-
-
-class ResponsesRequestPluginModeration(BaseModel):
-    id: ResponsesRequestIDModeration
-
-
-ResponsesRequestIDAutoRouter = Literal["auto-router",]
-
-
-class ResponsesRequestPluginAutoRouterTypedDict(TypedDict):
-    id: ResponsesRequestIDAutoRouter
-    enabled: NotRequired[bool]
-    r"""Set to false to disable the auto-router plugin for this request. Defaults to true."""
-    allowed_models: NotRequired[List[str]]
-    r"""List of model patterns to filter which models the auto-router can route between. Supports wildcards (e.g., \"anthropic/*\" matches all Anthropic models). When not specified, uses the default supported models list."""
-
-
-class ResponsesRequestPluginAutoRouter(BaseModel):
-    id: ResponsesRequestIDAutoRouter
-
-    enabled: Optional[bool] = None
-    r"""Set to false to disable the auto-router plugin for this request. Defaults to true."""
-
-    allowed_models: Optional[List[str]] = None
-    r"""List of model patterns to filter which models the auto-router can route between. Supports wildcards (e.g., \"anthropic/*\" matches all Anthropic models). When not specified, uses the default supported models list."""
-
-
-ResponsesRequestPluginUnionTypedDict = TypeAliasType(
-    "ResponsesRequestPluginUnionTypedDict",
-    Union[
-        ResponsesRequestPluginModerationTypedDict,
-        ResponsesRequestPluginResponseHealingTypedDict,
-        ResponsesRequestPluginAutoRouterTypedDict,
-        ResponsesRequestPluginFileParserTypedDict,
-        ResponsesRequestPluginContextCompressionTypedDict,
-        ResponsesRequestPluginWebTypedDict,
-    ],
-)
-
-
-ResponsesRequestPluginUnion = Annotated[
-    Union[
-        Annotated[ResponsesRequestPluginAutoRouter, Tag("auto-router")],
-        Annotated[ResponsesRequestPluginModeration, Tag("moderation")],
-        Annotated[ResponsesRequestPluginWeb, Tag("web")],
-        Annotated[ResponsesRequestPluginFileParser, Tag("file-parser")],
-        Annotated[ResponsesRequestPluginResponseHealing, Tag("response-healing")],
-        Annotated[ResponsesRequestPluginContextCompression, Tag("context-compression")],
-    ],
-    Discriminator(lambda m: get_discriminator(m, "id", "id")),
-]
-
-
-class ResponsesRequestTraceTypedDict(TypedDict):
-    r"""Metadata for observability and tracing. Known keys (trace_id, trace_name, span_name, generation_name, parent_span_id) have special handling. Additional keys are passed through as custom metadata to configured broadcast destinations."""
-
-    trace_id: NotRequired[str]
-    trace_name: NotRequired[str]
-    span_name: NotRequired[str]
-    generation_name: NotRequired[str]
-    parent_span_id: NotRequired[str]
-
-
-class ResponsesRequestTrace(BaseModel):
-    r"""Metadata for observability and tracing. Known keys (trace_id, trace_name, span_name, generation_name, parent_span_id) have special handling. Additional keys are passed through as custom metadata to configured broadcast destinations."""
-
-    model_config = ConfigDict(
-        populate_by_name=True, arbitrary_types_allowed=True, extra="allow"
-    )
-    __pydantic_extra__: Dict[str, Nullable[Any]] = pydantic.Field(init=False)
-
-    trace_id: Optional[str] = None
-
-    trace_name: Optional[str] = None
-
-    span_name: Optional[str] = None
-
-    generation_name: Optional[str] = None
-
-    parent_span_id: Optional[str] = None
-
-    @property
-    def additional_properties(self):
-        return self.__pydantic_extra__
-
-    @additional_properties.setter
-    def additional_properties(self, value):
-        self.__pydantic_extra__ = value  # pyright: ignore[reportIncompatibleVariableOverride]
-
-
 class ResponsesRequestTypedDict(TypedDict):
     r"""Request schema for Responses endpoint"""
 
+    background: NotRequired[Nullable[bool]]
+    frequency_penalty: NotRequired[Nullable[float]]
+    image_config: NotRequired[Dict[str, ImageConfigTypedDict]]
+    r"""Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/guides/overview/multimodal/image-generation for more details."""
+    include: NotRequired[Nullable[List[ResponseIncludesEnum]]]
     input: NotRequired[InputsUnionTypedDict]
     r"""Input for a response request - can be a string or array of items"""
     instructions: NotRequired[Nullable[str]]
+    max_output_tokens: NotRequired[Nullable[int]]
+    max_tool_calls: NotRequired[Nullable[int]]
     metadata: NotRequired[Nullable[Dict[str, str]]]
     r"""Metadata key-value pairs for the request. Keys must be ≤64 characters and cannot contain brackets. Values must be ≤512 characters. Maximum 16 pairs allowed."""
-    tools: NotRequired[List[ResponsesRequestToolUnionTypedDict]]
-    tool_choice: NotRequired[OpenAIResponsesToolChoiceUnionTypedDict]
-    parallel_tool_calls: NotRequired[Nullable[bool]]
-    model: NotRequired[str]
-    models: NotRequired[List[str]]
-    text: NotRequired[TextExtendedConfigTypedDict]
-    r"""Text output configuration including format and verbosity"""
-    reasoning: NotRequired[Nullable[ReasoningConfigTypedDict]]
-    r"""Configuration for reasoning mode in the response"""
-    max_output_tokens: NotRequired[Nullable[float]]
-    temperature: NotRequired[Nullable[float]]
-    top_p: NotRequired[Nullable[float]]
-    top_logprobs: NotRequired[Nullable[int]]
-    max_tool_calls: NotRequired[Nullable[int]]
-    presence_penalty: NotRequired[Nullable[float]]
-    frequency_penalty: NotRequired[Nullable[float]]
-    top_k: NotRequired[float]
-    image_config: NotRequired[Dict[str, ResponsesRequestImageConfigTypedDict]]
-    r"""Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/features/multimodal/image-generation for more details."""
     modalities: NotRequired[List[OutputModalityEnum]]
     r"""Output modalities for the response. Supported values are \"text\" and \"image\"."""
-    prompt_cache_key: NotRequired[Nullable[str]]
+    model: NotRequired[str]
+    models: NotRequired[List[str]]
+    parallel_tool_calls: NotRequired[Nullable[bool]]
+    plugins: NotRequired[List[ResponsesRequestPluginTypedDict]]
+    r"""Plugins you want to enable for this request, including their settings."""
+    presence_penalty: NotRequired[Nullable[float]]
     previous_response_id: NotRequired[Nullable[str]]
     prompt: NotRequired[Nullable[StoredPromptTemplateTypedDict]]
-    include: NotRequired[Nullable[List[ResponseIncludesEnum]]]
-    background: NotRequired[Nullable[bool]]
-    safety_identifier: NotRequired[Nullable[str]]
-    store: Literal[False]
-    service_tier: NotRequired[Nullable[ResponsesRequestServiceTier]]
-    truncation: NotRequired[Nullable[OpenAIResponsesTruncation]]
-    stream: NotRequired[bool]
-    provider: NotRequired[Nullable[ResponsesRequestProviderTypedDict]]
+    prompt_cache_key: NotRequired[Nullable[str]]
+    provider: NotRequired[Nullable[ProviderPreferencesTypedDict]]
     r"""When multiple model providers are available, optionally indicate your routing preference."""
-    plugins: NotRequired[List[ResponsesRequestPluginUnionTypedDict]]
-    r"""Plugins you want to enable for this request, including their settings."""
-    user: NotRequired[str]
-    r"""A unique identifier representing your end-user, which helps distinguish between different users of your app. This allows your app to identify specific users in case of abuse reports, preventing your entire app from being affected by the actions of individual users. Maximum of 256 characters."""
+    reasoning: NotRequired[Nullable[ReasoningConfigTypedDict]]
+    r"""Configuration for reasoning mode in the response"""
+    safety_identifier: NotRequired[Nullable[str]]
+    service_tier: NotRequired[Nullable[ResponsesRequestServiceTier]]
     session_id: NotRequired[str]
     r"""A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters."""
-    trace: NotRequired[ResponsesRequestTraceTypedDict]
+    store: Literal[False]
+    stream: NotRequired[bool]
+    temperature: NotRequired[Nullable[float]]
+    text: NotRequired[TextExtendedConfigTypedDict]
+    r"""Text output configuration including format and verbosity"""
+    tool_choice: NotRequired[OpenAIResponsesToolChoiceUnionTypedDict]
+    tools: NotRequired[List[ResponsesRequestToolUnionTypedDict]]
+    top_k: NotRequired[int]
+    top_logprobs: NotRequired[Nullable[int]]
+    top_p: NotRequired[Nullable[float]]
+    trace: NotRequired[TraceConfigTypedDict]
     r"""Metadata for observability and tracing. Known keys (trace_id, trace_name, span_name, generation_name, parent_span_id) have special handling. Additional keys are passed through as custom metadata to configured broadcast destinations."""
+    truncation: NotRequired[Nullable[OpenAIResponsesTruncation]]
+    user: NotRequired[str]
+    r"""A unique identifier representing your end-user, which helps distinguish between different users of your app. This allows your app to identify specific users in case of abuse reports, preventing your entire app from being affected by the actions of individual users. Maximum of 256 characters."""
 
 
 class ResponsesRequest(BaseModel):
     r"""Request schema for Responses endpoint"""
+
+    background: OptionalNullable[bool] = UNSET
+
+    frequency_penalty: OptionalNullable[float] = UNSET
+
+    image_config: Optional[Dict[str, ImageConfig]] = None
+    r"""Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/guides/overview/multimodal/image-generation for more details."""
+
+    include: OptionalNullable[
+        List[Annotated[ResponseIncludesEnum, PlainValidator(validate_open_enum(False))]]
+    ] = UNSET
 
     input: Optional[InputsUnion] = None
     r"""Input for a response request - can be a string or array of items"""
 
     instructions: OptionalNullable[str] = UNSET
 
-    metadata: OptionalNullable[Dict[str, str]] = UNSET
-    r"""Metadata key-value pairs for the request. Keys must be ≤64 characters and cannot contain brackets. Values must be ≤512 characters. Maximum 16 pairs allowed."""
-
-    tools: Optional[List[ResponsesRequestToolUnion]] = None
-
-    tool_choice: Optional[OpenAIResponsesToolChoiceUnion] = None
-
-    parallel_tool_calls: OptionalNullable[bool] = UNSET
-
-    model: Optional[str] = None
-
-    models: Optional[List[str]] = None
-
-    text: Optional[TextExtendedConfig] = None
-    r"""Text output configuration including format and verbosity"""
-
-    reasoning: OptionalNullable[ReasoningConfig] = UNSET
-    r"""Configuration for reasoning mode in the response"""
-
-    max_output_tokens: OptionalNullable[float] = UNSET
-
-    temperature: OptionalNullable[float] = UNSET
-
-    top_p: OptionalNullable[float] = UNSET
-
-    top_logprobs: OptionalNullable[int] = UNSET
+    max_output_tokens: OptionalNullable[int] = UNSET
 
     max_tool_calls: OptionalNullable[int] = UNSET
 
-    presence_penalty: OptionalNullable[float] = UNSET
-
-    frequency_penalty: OptionalNullable[float] = UNSET
-
-    top_k: Optional[float] = None
-
-    image_config: Optional[Dict[str, ResponsesRequestImageConfig]] = None
-    r"""Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/features/multimodal/image-generation for more details."""
+    metadata: OptionalNullable[Dict[str, str]] = UNSET
+    r"""Metadata key-value pairs for the request. Keys must be ≤64 characters and cannot contain brackets. Values must be ≤512 characters. Maximum 16 pairs allowed."""
 
     modalities: Optional[
         List[Annotated[OutputModalityEnum, PlainValidator(validate_open_enum(False))]]
     ] = None
     r"""Output modalities for the response. Supported values are \"text\" and \"image\"."""
 
-    prompt_cache_key: OptionalNullable[str] = UNSET
+    model: Optional[str] = None
+
+    models: Optional[List[str]] = None
+
+    parallel_tool_calls: OptionalNullable[bool] = UNSET
+
+    plugins: Optional[List[ResponsesRequestPlugin]] = None
+    r"""Plugins you want to enable for this request, including their settings."""
+
+    presence_penalty: OptionalNullable[float] = UNSET
 
     previous_response_id: OptionalNullable[str] = UNSET
 
     prompt: OptionalNullable[StoredPromptTemplate] = UNSET
 
-    include: OptionalNullable[
-        List[Annotated[ResponseIncludesEnum, PlainValidator(validate_open_enum(False))]]
-    ] = UNSET
+    prompt_cache_key: OptionalNullable[str] = UNSET
 
-    background: OptionalNullable[bool] = UNSET
+    provider: OptionalNullable[ProviderPreferences] = UNSET
+    r"""When multiple model providers are available, optionally indicate your routing preference."""
+
+    reasoning: OptionalNullable[ReasoningConfig] = UNSET
+    r"""Configuration for reasoning mode in the response"""
 
     safety_identifier: OptionalNullable[str] = UNSET
-
-    STORE: Annotated[
-        Annotated[Optional[Literal[False]], AfterValidator(validate_const(False))],
-        pydantic.Field(alias="store"),
-    ] = False
 
     service_tier: Annotated[
         OptionalNullable[ResponsesRequestServiceTier],
         PlainValidator(validate_open_enum(False)),
     ] = "auto"
 
+    session_id: Optional[str] = None
+    r"""A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters."""
+
+    STORE: Annotated[
+        Annotated[Optional[Literal[False]], AfterValidator(validate_const(False))],
+        pydantic.Field(alias="store"),
+    ] = False
+
+    stream: Optional[bool] = False
+
+    temperature: OptionalNullable[float] = UNSET
+
+    text: Optional[TextExtendedConfig] = None
+    r"""Text output configuration including format and verbosity"""
+
+    tool_choice: Optional[OpenAIResponsesToolChoiceUnion] = None
+
+    tools: Optional[List[ResponsesRequestToolUnion]] = None
+
+    top_k: Optional[int] = None
+
+    top_logprobs: OptionalNullable[int] = UNSET
+
+    top_p: OptionalNullable[float] = UNSET
+
+    trace: Optional[TraceConfig] = None
+    r"""Metadata for observability and tracing. Known keys (trace_id, trace_name, span_name, generation_name, parent_span_id) have special handling. Additional keys are passed through as custom metadata to configured broadcast destinations."""
+
     truncation: Annotated[
         OptionalNullable[OpenAIResponsesTruncation],
         PlainValidator(validate_open_enum(False)),
     ] = UNSET
 
-    stream: Optional[bool] = False
-
-    provider: OptionalNullable[ResponsesRequestProvider] = UNSET
-    r"""When multiple model providers are available, optionally indicate your routing preference."""
-
-    plugins: Optional[List[ResponsesRequestPluginUnion]] = None
-    r"""Plugins you want to enable for this request, including their settings."""
-
     user: Optional[str] = None
     r"""A unique identifier representing your end-user, which helps distinguish between different users of your app. This allows your app to identify specific users in case of abuse reports, preventing your entire app from being affected by the actions of individual users. Maximum of 256 characters."""
-
-    session_id: Optional[str] = None
-    r"""A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters."""
-
-    trace: Optional[ResponsesRequestTrace] = None
-    r"""Metadata for observability and tracing. Known keys (trace_id, trace_name, span_name, generation_name, parent_span_id) have special handling. Additional keys are passed through as custom metadata to configured broadcast destinations."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = [
+            "background",
+            "frequency_penalty",
+            "image_config",
+            "include",
             "input",
             "instructions",
+            "max_output_tokens",
+            "max_tool_calls",
             "metadata",
-            "tools",
-            "tool_choice",
-            "parallel_tool_calls",
+            "modalities",
             "model",
             "models",
-            "text",
-            "reasoning",
-            "max_output_tokens",
-            "temperature",
-            "top_p",
-            "top_logprobs",
-            "max_tool_calls",
+            "parallel_tool_calls",
+            "plugins",
             "presence_penalty",
-            "frequency_penalty",
-            "top_k",
-            "image_config",
-            "modalities",
-            "prompt_cache_key",
             "previous_response_id",
             "prompt",
-            "include",
-            "background",
-            "safety_identifier",
-            "store",
-            "service_tier",
-            "truncation",
-            "stream",
+            "prompt_cache_key",
             "provider",
-            "plugins",
-            "user",
+            "reasoning",
+            "safety_identifier",
+            "service_tier",
             "session_id",
+            "store",
+            "stream",
+            "temperature",
+            "text",
+            "tool_choice",
+            "tools",
+            "top_k",
+            "top_logprobs",
+            "top_p",
             "trace",
+            "truncation",
+            "user",
         ]
         nullable_fields = [
+            "background",
+            "frequency_penalty",
+            "include",
             "instructions",
+            "max_output_tokens",
+            "max_tool_calls",
             "metadata",
             "parallel_tool_calls",
-            "reasoning",
-            "max_output_tokens",
-            "temperature",
-            "top_p",
-            "top_logprobs",
-            "max_tool_calls",
             "presence_penalty",
-            "frequency_penalty",
-            "prompt_cache_key",
             "previous_response_id",
             "prompt",
-            "include",
-            "background",
+            "prompt_cache_key",
+            "provider",
+            "reasoning",
             "safety_identifier",
             "service_tier",
+            "temperature",
+            "top_logprobs",
+            "top_p",
             "truncation",
-            "provider",
         ]
         null_default_fields = []
 

@@ -9,4 +9,5 @@ Type of API used for the generation
 | ------------- | ------------- |
 | `COMPLETIONS` | completions   |
 | `EMBEDDINGS`  | embeddings    |
+| `RERANK`      | rerank        |
 | `VIDEO`       | video         |

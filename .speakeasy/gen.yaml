@@ -32,7 +32,7 @@ generation:
     skipResponseBodyAssertions: false
   preApplyUnionDiscriminators: true
 python:
-  version: 0.8.1
+  version: 0.9.1
   additionalDependencies:
     dev: {}
     main: {}
@@ -59,7 +59,7 @@ python:
   flattenGlobalSecurity: true
   flattenRequests: true
   flatteningOrder: parameters-first
-  forwardCompatibleUnionsByDefault: "tagged-only"
+  forwardCompatibleUnionsByDefault: tagged-only
   imports:
     option: openapi
     paths:

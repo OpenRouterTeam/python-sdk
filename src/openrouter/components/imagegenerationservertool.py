@@ -16,9 +16,6 @@ from typing import Literal, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-ImageGenerationServerToolType = Literal["image_generation",]
-
-
 Background = Union[
     Literal[
         "transparent",
@@ -39,14 +36,14 @@ InputFidelity = Union[
 
 
 class InputImageMaskTypedDict(TypedDict):
-    image_url: NotRequired[str]
     file_id: NotRequired[str]
+    image_url: NotRequired[str]
 
 
 class InputImageMask(BaseModel):
-    image_url: Optional[str] = None
-
     file_id: Optional[str] = None
+
+    image_url: Optional[str] = None
 
 
 ModelEnum = Union[
@@ -99,6 +96,9 @@ Size = Union[
 ]
 
 
+ImageGenerationServerToolType = Literal["image_generation",]
+
+
 class ImageGenerationServerToolTypedDict(TypedDict):
     r"""Image generation tool configuration"""
 
@@ -108,9 +108,9 @@ class ImageGenerationServerToolTypedDict(TypedDict):
     input_image_mask: NotRequired[InputImageMaskTypedDict]
     model: NotRequired[ModelEnum]
     moderation: NotRequired[Moderation]
-    output_compression: NotRequired[float]
+    output_compression: NotRequired[int]
     output_format: NotRequired[OutputFormat]
-    partial_images: NotRequired[float]
+    partial_images: NotRequired[int]
     quality: NotRequired[Quality]
     size: NotRequired[Size]
 
@@ -138,13 +138,13 @@ class ImageGenerationServerTool(BaseModel):
         Optional[Moderation], PlainValidator(validate_open_enum(False))
     ] = None
 
-    output_compression: Optional[float] = None
+    output_compression: Optional[int] = None
 
     output_format: Annotated[
         Optional[OutputFormat], PlainValidator(validate_open_enum(False))
     ] = None
 
-    partial_images: Optional[float] = None
+    partial_images: Optional[int] = None
 
     quality: Annotated[Optional[Quality], PlainValidator(validate_open_enum(False))] = (
         None

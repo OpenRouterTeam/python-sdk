@@ -13,15 +13,15 @@ ChatFormatJSONSchemaConfigType = Literal["json_schema",]
 class ChatFormatJSONSchemaConfigTypedDict(TypedDict):
     r"""JSON Schema response format for structured outputs"""
 
-    type: ChatFormatJSONSchemaConfigType
     json_schema: ChatJSONSchemaConfigTypedDict
     r"""JSON Schema configuration object"""
+    type: ChatFormatJSONSchemaConfigType
 
 
 class ChatFormatJSONSchemaConfig(BaseModel):
     r"""JSON Schema response format for structured outputs"""
 
-    type: ChatFormatJSONSchemaConfigType
-
     json_schema: ChatJSONSchemaConfig
     r"""JSON Schema configuration object"""
+
+    type: ChatFormatJSONSchemaConfigType

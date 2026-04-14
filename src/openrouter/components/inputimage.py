@@ -16,9 +16,6 @@ from typing import Literal, Union
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-InputImageType = Literal["input_image",]
-
-
 InputImageDetail = Union[
     Literal[
         "auto",
@@ -29,20 +26,23 @@ InputImageDetail = Union[
 ]
 
 
+InputImageType = Literal["input_image",]
+
+
 class InputImageTypedDict(TypedDict):
     r"""Image input content item"""
 
-    type: InputImageType
     detail: InputImageDetail
+    type: InputImageType
     image_url: NotRequired[Nullable[str]]
 
 
 class InputImage(BaseModel):
     r"""Image input content item"""
 
-    type: InputImageType
-
     detail: Annotated[InputImageDetail, PlainValidator(validate_open_enum(False))]
+
+    type: InputImageType
 
     image_url: OptionalNullable[str] = UNSET
 

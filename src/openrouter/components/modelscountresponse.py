@@ -8,14 +8,14 @@ from typing_extensions import TypedDict
 class DataTypedDict(TypedDict):
     r"""Model count data"""
 
-    count: float
+    count: int
     r"""Total number of available models"""
 
 
 class Data(BaseModel):
     r"""Model count data"""
 
-    count: float
+    count: int
     r"""Total number of available models"""
 
 

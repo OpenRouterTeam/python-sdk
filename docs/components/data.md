@@ -7,4 +7,4 @@ Model count data
 
 | Field                            | Type                             | Required                         | Description                      | Example                          |
 | -------------------------------- | -------------------------------- | -------------------------------- | -------------------------------- | -------------------------------- |
-| `count`                          | *float*                          | :heavy_check_mark:               | Total number of available models | 150                              |
+| `count`                          | *int*                            | :heavy_check_mark:               | Total number of available models | 150                              |

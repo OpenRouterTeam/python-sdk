@@ -6,96 +6,53 @@ from .preview_websearchuserlocation import (
     PreviewWebSearchUserLocationTypedDict,
 )
 from .searchcontextsizeenum import SearchContextSizeEnum
+from .websearchdomainfilter import WebSearchDomainFilter, WebSearchDomainFilterTypedDict
+from .websearchengineenum import WebSearchEngineEnum
 from openrouter.types import (
     BaseModel,
     Nullable,
     OptionalNullable,
     UNSET,
     UNSET_SENTINEL,
-    UnrecognizedStr,
 )
 from openrouter.utils import validate_open_enum
 from pydantic import model_serializer
 from pydantic.functional_validators import PlainValidator
-from typing import List, Literal, Optional, Union
+from typing import Literal, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 Preview20250311WebSearchServerToolType = Literal["web_search_preview_2025_03_11",]
 
 
-Preview20250311WebSearchServerToolEngine = Union[
-    Literal[
-        "auto",
-        "native",
-        "exa",
-        "firecrawl",
-        "parallel",
-    ],
-    UnrecognizedStr,
-]
-r"""Which search engine to use. \"auto\" (default) uses native if the provider supports it, otherwise Exa. \"native\" forces the provider's built-in search. \"exa\" forces the Exa search API. \"firecrawl\" uses Firecrawl (requires BYOK). \"parallel\" uses the Parallel search API."""
-
-
-class Preview20250311WebSearchServerToolFiltersTypedDict(TypedDict):
-    allowed_domains: NotRequired[Nullable[List[str]]]
-    excluded_domains: NotRequired[Nullable[List[str]]]
-
-
-class Preview20250311WebSearchServerToolFilters(BaseModel):
-    allowed_domains: OptionalNullable[List[str]] = UNSET
-
-    excluded_domains: OptionalNullable[List[str]] = UNSET
-
-    @model_serializer(mode="wrap")
-    def serialize_model(self, handler):
-        optional_fields = ["allowed_domains", "excluded_domains"]
-        nullable_fields = ["allowed_domains", "excluded_domains"]
-        null_default_fields = []
-
-        serialized = handler(self)
-
-        m = {}
-
-        for n, f in type(self).model_fields.items():
-            k = f.alias or n
-            val = serialized.get(k)
-            serialized.pop(k, None)
-
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
-
-        return m
-
-
 class Preview20250311WebSearchServerToolTypedDict(TypedDict):
     r"""Web search preview tool configuration (2025-03-11 version)"""
 
     type: Preview20250311WebSearchServerToolType
+    engine: NotRequired[WebSearchEngineEnum]
+    r"""Which search engine to use. \"auto\" (default) uses native if the provider supports it, otherwise Exa. \"native\" forces the provider's built-in search. \"exa\" forces the Exa search API. \"firecrawl\" uses Firecrawl (requires BYOK). \"parallel\" uses the Parallel search API."""
+    filters: NotRequired[Nullable[WebSearchDomainFilterTypedDict]]
+    max_results: NotRequired[int]
+    r"""Maximum number of search results to return per search call. Defaults to 5. Applies to Exa, Firecrawl, and Parallel engines; ignored with native provider search."""
     search_context_size: NotRequired[SearchContextSizeEnum]
     r"""Size of the search context for web search tools"""
     user_location: NotRequired[Nullable[PreviewWebSearchUserLocationTypedDict]]
-    engine: NotRequired[Preview20250311WebSearchServerToolEngine]
-    r"""Which search engine to use. \"auto\" (default) uses native if the provider supports it, otherwise Exa. \"native\" forces the provider's built-in search. \"exa\" forces the Exa search API. \"firecrawl\" uses Firecrawl (requires BYOK). \"parallel\" uses the Parallel search API."""
-    max_results: NotRequired[float]
-    r"""Maximum number of search results to return per search call. Defaults to 5. Applies to Exa, Firecrawl, and Parallel engines; ignored with native provider search."""
-    filters: NotRequired[Nullable[Preview20250311WebSearchServerToolFiltersTypedDict]]
 
 
 class Preview20250311WebSearchServerTool(BaseModel):
     r"""Web search preview tool configuration (2025-03-11 version)"""
 
     type: Preview20250311WebSearchServerToolType
+
+    engine: Annotated[
+        Optional[WebSearchEngineEnum], PlainValidator(validate_open_enum(False))
+    ] = None
+    r"""Which search engine to use. \"auto\" (default) uses native if the provider supports it, otherwise Exa. \"native\" forces the provider's built-in search. \"exa\" forces the Exa search API. \"firecrawl\" uses Firecrawl (requires BYOK). \"parallel\" uses the Parallel search API."""
+
+    filters: OptionalNullable[WebSearchDomainFilter] = UNSET
+
+    max_results: Optional[int] = None
+    r"""Maximum number of search results to return per search call. Defaults to 5. Applies to Exa, Firecrawl, and Parallel engines; ignored with native provider search."""
 
     search_context_size: Annotated[
         Optional[SearchContextSizeEnum], PlainValidator(validate_open_enum(False))
@@ -104,27 +61,16 @@ class Preview20250311WebSearchServerTool(BaseModel):
 
     user_location: OptionalNullable[PreviewWebSearchUserLocation] = UNSET
 
-    engine: Annotated[
-        Optional[Preview20250311WebSearchServerToolEngine],
-        PlainValidator(validate_open_enum(False)),
-    ] = None
-    r"""Which search engine to use. \"auto\" (default) uses native if the provider supports it, otherwise Exa. \"native\" forces the provider's built-in search. \"exa\" forces the Exa search API. \"firecrawl\" uses Firecrawl (requires BYOK). \"parallel\" uses the Parallel search API."""
-
-    max_results: Optional[float] = None
-    r"""Maximum number of search results to return per search call. Defaults to 5. Applies to Exa, Firecrawl, and Parallel engines; ignored with native provider search."""
-
-    filters: OptionalNullable[Preview20250311WebSearchServerToolFilters] = UNSET
-
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = [
+            "engine",
+            "filters",
+            "max_results",
             "search_context_size",
             "user_location",
-            "engine",
-            "max_results",
-            "filters",
         ]
-        nullable_fields = ["user_location", "filters"]
+        nullable_fields = ["filters", "user_location"]
         null_default_fields = []
 
         serialized = handler(self)

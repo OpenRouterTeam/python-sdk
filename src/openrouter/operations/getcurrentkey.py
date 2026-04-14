@@ -114,12 +114,12 @@ class GetCurrentKeyRequest(BaseModel):
 class RateLimitTypedDict(TypedDict):
     r"""Legacy rate limit information about a key. Will always return -1."""
 
-    requests: float
-    r"""Number of requests allowed per interval"""
     interval: str
     r"""Rate limit interval"""
     note: str
     r"""Note about the rate limit"""
+    requests: int
+    r"""Number of requests allowed per interval"""
 
 
 @deprecated(
@@ -128,55 +128,55 @@ class RateLimitTypedDict(TypedDict):
 class RateLimit(BaseModel):
     r"""Legacy rate limit information about a key. Will always return -1."""
 
-    requests: float
-    r"""Number of requests allowed per interval"""
-
     interval: str
     r"""Rate limit interval"""
 
     note: str
     r"""Note about the rate limit"""
 
+    requests: int
+    r"""Number of requests allowed per interval"""
+
 
 class GetCurrentKeyDataTypedDict(TypedDict):
     r"""Current API key information"""
 
-    label: str
-    r"""Human-readable label for the API key"""
-    limit: Nullable[float]
-    r"""Spending limit for the API key in USD"""
-    usage: float
-    r"""Total OpenRouter credit usage (in USD) for the API key"""
-    usage_daily: float
-    r"""OpenRouter credit usage (in USD) for the current UTC day"""
-    usage_weekly: float
-    r"""OpenRouter credit usage (in USD) for the current UTC week (Monday-Sunday)"""
-    usage_monthly: float
-    r"""OpenRouter credit usage (in USD) for the current UTC month"""
     byok_usage: float
     r"""Total external BYOK usage (in USD) for the API key"""
     byok_usage_daily: float
     r"""External BYOK usage (in USD) for the current UTC day"""
-    byok_usage_weekly: float
-    r"""External BYOK usage (in USD) for the current UTC week (Monday-Sunday)"""
     byok_usage_monthly: float
     r"""External BYOK usage (in USD) for current UTC month"""
+    byok_usage_weekly: float
+    r"""External BYOK usage (in USD) for the current UTC week (Monday-Sunday)"""
+    creator_user_id: Nullable[str]
+    r"""The user ID of the key creator. For organization-owned keys, this is the member who created the key. For individual users, this is the user's own ID."""
+    include_byok_in_limit: bool
+    r"""Whether to include external BYOK usage in the credit limit"""
     is_free_tier: bool
     r"""Whether this is a free tier API key"""
     is_management_key: bool
     r"""Whether this is a management key"""
     is_provisioning_key: bool
     r"""Whether this is a management key"""
+    label: str
+    r"""Human-readable label for the API key"""
+    limit: Nullable[float]
+    r"""Spending limit for the API key in USD"""
     limit_remaining: Nullable[float]
     r"""Remaining spending limit in USD"""
     limit_reset: Nullable[str]
     r"""Type of limit reset for the API key"""
-    include_byok_in_limit: bool
-    r"""Whether to include external BYOK usage in the credit limit"""
-    creator_user_id: Nullable[str]
-    r"""The user ID of the key creator. For organization-owned keys, this is the member who created the key. For individual users, this is the user's own ID."""
     rate_limit: RateLimitTypedDict
     r"""Legacy rate limit information about a key. Will always return -1."""
+    usage: float
+    r"""Total OpenRouter credit usage (in USD) for the API key"""
+    usage_daily: float
+    r"""OpenRouter credit usage (in USD) for the current UTC day"""
+    usage_monthly: float
+    r"""OpenRouter credit usage (in USD) for the current UTC month"""
+    usage_weekly: float
+    r"""OpenRouter credit usage (in USD) for the current UTC week (Monday-Sunday)"""
     expires_at: NotRequired[Nullable[datetime]]
     r"""ISO 8601 UTC timestamp when the API key expires, or null if no expiration"""
 
@@ -184,35 +184,23 @@ class GetCurrentKeyDataTypedDict(TypedDict):
 class GetCurrentKeyData(BaseModel):
     r"""Current API key information"""
 
-    label: str
-    r"""Human-readable label for the API key"""
-
-    limit: Nullable[float]
-    r"""Spending limit for the API key in USD"""
-
-    usage: float
-    r"""Total OpenRouter credit usage (in USD) for the API key"""
-
-    usage_daily: float
-    r"""OpenRouter credit usage (in USD) for the current UTC day"""
-
-    usage_weekly: float
-    r"""OpenRouter credit usage (in USD) for the current UTC week (Monday-Sunday)"""
-
-    usage_monthly: float
-    r"""OpenRouter credit usage (in USD) for the current UTC month"""
-
     byok_usage: float
     r"""Total external BYOK usage (in USD) for the API key"""
 
     byok_usage_daily: float
     r"""External BYOK usage (in USD) for the current UTC day"""
 
+    byok_usage_monthly: float
+    r"""External BYOK usage (in USD) for current UTC month"""
+
     byok_usage_weekly: float
     r"""External BYOK usage (in USD) for the current UTC week (Monday-Sunday)"""
 
-    byok_usage_monthly: float
-    r"""External BYOK usage (in USD) for current UTC month"""
+    creator_user_id: Nullable[str]
+    r"""The user ID of the key creator. For organization-owned keys, this is the member who created the key. For individual users, this is the user's own ID."""
+
+    include_byok_in_limit: bool
+    r"""Whether to include external BYOK usage in the credit limit"""
 
     is_free_tier: bool
     r"""Whether this is a free tier API key"""
@@ -228,17 +216,17 @@ class GetCurrentKeyData(BaseModel):
     ]
     r"""Whether this is a management key"""
 
+    label: str
+    r"""Human-readable label for the API key"""
+
+    limit: Nullable[float]
+    r"""Spending limit for the API key in USD"""
+
     limit_remaining: Nullable[float]
     r"""Remaining spending limit in USD"""
 
     limit_reset: Nullable[str]
     r"""Type of limit reset for the API key"""
-
-    include_byok_in_limit: bool
-    r"""Whether to include external BYOK usage in the credit limit"""
-
-    creator_user_id: Nullable[str]
-    r"""The user ID of the key creator. For organization-owned keys, this is the member who created the key. For individual users, this is the user's own ID."""
 
     rate_limit: Annotated[
         RateLimit,
@@ -248,6 +236,18 @@ class GetCurrentKeyData(BaseModel):
     ]
     r"""Legacy rate limit information about a key. Will always return -1."""
 
+    usage: float
+    r"""Total OpenRouter credit usage (in USD) for the API key"""
+
+    usage_daily: float
+    r"""OpenRouter credit usage (in USD) for the current UTC day"""
+
+    usage_monthly: float
+    r"""OpenRouter credit usage (in USD) for the current UTC month"""
+
+    usage_weekly: float
+    r"""OpenRouter credit usage (in USD) for the current UTC week (Monday-Sunday)"""
+
     expires_at: OptionalNullable[datetime] = UNSET
     r"""ISO 8601 UTC timestamp when the API key expires, or null if no expiration"""
 
@@ -255,11 +255,11 @@ class GetCurrentKeyData(BaseModel):
     def serialize_model(self, handler):
         optional_fields = ["expires_at"]
         nullable_fields = [
+            "creator_user_id",
+            "expires_at",
             "limit",
             "limit_remaining",
             "limit_reset",
-            "expires_at",
-            "creator_user_id",
         ]
         null_default_fields = []
 

@@ -83,19 +83,30 @@ r"""Type of limit reset for the API key (daily, weekly, monthly, or null for no 
 class CreateKeysRequestBodyTypedDict(TypedDict):
     name: str
     r"""Name for the new API key"""
+    creator_user_id: NotRequired[Nullable[str]]
+    r"""Optional user ID of the key creator. Only meaningful for organization-owned keys where a specific member is creating the key."""
+    expires_at: NotRequired[Nullable[datetime]]
+    r"""Optional ISO 8601 UTC timestamp when the API key should expire. Must be UTC, other timezones will be rejected"""
+    include_byok_in_limit: NotRequired[bool]
+    r"""Whether to include BYOK usage in the limit"""
     limit: NotRequired[Nullable[float]]
     r"""Optional spending limit for the API key in USD"""
     limit_reset: NotRequired[Nullable[CreateKeysLimitReset]]
     r"""Type of limit reset for the API key (daily, weekly, monthly, or null for no reset). Resets happen automatically at midnight UTC, and weeks are Monday through Sunday."""
-    include_byok_in_limit: NotRequired[bool]
-    r"""Whether to include BYOK usage in the limit"""
-    expires_at: NotRequired[Nullable[datetime]]
-    r"""Optional ISO 8601 UTC timestamp when the API key should expire. Must be UTC, other timezones will be rejected"""
 
 
 class CreateKeysRequestBody(BaseModel):
     name: str
     r"""Name for the new API key"""
+
+    creator_user_id: OptionalNullable[str] = UNSET
+    r"""Optional user ID of the key creator. Only meaningful for organization-owned keys where a specific member is creating the key."""
+
+    expires_at: OptionalNullable[datetime] = UNSET
+    r"""Optional ISO 8601 UTC timestamp when the API key should expire. Must be UTC, other timezones will be rejected"""
+
+    include_byok_in_limit: Optional[bool] = None
+    r"""Whether to include BYOK usage in the limit"""
 
     limit: OptionalNullable[float] = UNSET
     r"""Optional spending limit for the API key in USD"""
@@ -106,21 +117,16 @@ class CreateKeysRequestBody(BaseModel):
     ] = UNSET
     r"""Type of limit reset for the API key (daily, weekly, monthly, or null for no reset). Resets happen automatically at midnight UTC, and weeks are Monday through Sunday."""
 
-    include_byok_in_limit: Optional[bool] = None
-    r"""Whether to include BYOK usage in the limit"""
-
-    expires_at: OptionalNullable[datetime] = UNSET
-    r"""Optional ISO 8601 UTC timestamp when the API key should expire. Must be UTC, other timezones will be rejected"""
-
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = [
+            "creator_user_id",
+            "expires_at",
+            "include_byok_in_limit",
             "limit",
             "limit_reset",
-            "include_byok_in_limit",
-            "expires_at",
         ]
-        nullable_fields = ["limit", "limit_reset", "expires_at"]
+        nullable_fields = ["creator_user_id", "expires_at", "limit", "limit_reset"]
         null_default_fields = []
 
         serialized = handler(self)
@@ -203,44 +209,44 @@ class CreateKeysRequest(BaseModel):
 class CreateKeysDataTypedDict(TypedDict):
     r"""The created API key information"""
 
-    hash: str
-    r"""Unique hash identifier for the API key"""
-    name: str
-    r"""Name of the API key"""
-    label: str
-    r"""Human-readable label for the API key"""
+    byok_usage: float
+    r"""Total external BYOK usage (in USD) for the API key"""
+    byok_usage_daily: float
+    r"""External BYOK usage (in USD) for the current UTC day"""
+    byok_usage_monthly: float
+    r"""External BYOK usage (in USD) for current UTC month"""
+    byok_usage_weekly: float
+    r"""External BYOK usage (in USD) for the current UTC week (Monday-Sunday)"""
+    created_at: str
+    r"""ISO 8601 timestamp of when the API key was created"""
+    creator_user_id: Nullable[str]
+    r"""The user ID of the key creator. For organization-owned keys, this is the member who created the key. For individual users, this is the user's own ID."""
     disabled: bool
     r"""Whether the API key is disabled"""
+    hash: str
+    r"""Unique hash identifier for the API key"""
+    include_byok_in_limit: bool
+    r"""Whether to include external BYOK usage in the credit limit"""
+    label: str
+    r"""Human-readable label for the API key"""
     limit: Nullable[float]
     r"""Spending limit for the API key in USD"""
     limit_remaining: Nullable[float]
     r"""Remaining spending limit in USD"""
     limit_reset: Nullable[str]
     r"""Type of limit reset for the API key"""
-    include_byok_in_limit: bool
-    r"""Whether to include external BYOK usage in the credit limit"""
+    name: str
+    r"""Name of the API key"""
+    updated_at: Nullable[str]
+    r"""ISO 8601 timestamp of when the API key was last updated"""
     usage: float
     r"""Total OpenRouter credit usage (in USD) for the API key"""
     usage_daily: float
     r"""OpenRouter credit usage (in USD) for the current UTC day"""
-    usage_weekly: float
-    r"""OpenRouter credit usage (in USD) for the current UTC week (Monday-Sunday)"""
     usage_monthly: float
     r"""OpenRouter credit usage (in USD) for the current UTC month"""
-    byok_usage: float
-    r"""Total external BYOK usage (in USD) for the API key"""
-    byok_usage_daily: float
-    r"""External BYOK usage (in USD) for the current UTC day"""
-    byok_usage_weekly: float
-    r"""External BYOK usage (in USD) for the current UTC week (Monday-Sunday)"""
-    byok_usage_monthly: float
-    r"""External BYOK usage (in USD) for current UTC month"""
-    created_at: str
-    r"""ISO 8601 timestamp of when the API key was created"""
-    updated_at: Nullable[str]
-    r"""ISO 8601 timestamp of when the API key was last updated"""
-    creator_user_id: Nullable[str]
-    r"""The user ID of the key creator. For organization-owned keys, this is the member who created the key. For individual users, this is the user's own ID."""
+    usage_weekly: float
+    r"""OpenRouter credit usage (in USD) for the current UTC week (Monday-Sunday)"""
     expires_at: NotRequired[Nullable[datetime]]
     r"""ISO 8601 UTC timestamp when the API key expires, or null if no expiration"""
 
@@ -248,17 +254,35 @@ class CreateKeysDataTypedDict(TypedDict):
 class CreateKeysData(BaseModel):
     r"""The created API key information"""
 
-    hash: str
-    r"""Unique hash identifier for the API key"""
+    byok_usage: float
+    r"""Total external BYOK usage (in USD) for the API key"""
 
-    name: str
-    r"""Name of the API key"""
+    byok_usage_daily: float
+    r"""External BYOK usage (in USD) for the current UTC day"""
 
-    label: str
-    r"""Human-readable label for the API key"""
+    byok_usage_monthly: float
+    r"""External BYOK usage (in USD) for current UTC month"""
+
+    byok_usage_weekly: float
+    r"""External BYOK usage (in USD) for the current UTC week (Monday-Sunday)"""
+
+    created_at: str
+    r"""ISO 8601 timestamp of when the API key was created"""
+
+    creator_user_id: Nullable[str]
+    r"""The user ID of the key creator. For organization-owned keys, this is the member who created the key. For individual users, this is the user's own ID."""
 
     disabled: bool
     r"""Whether the API key is disabled"""
+
+    hash: str
+    r"""Unique hash identifier for the API key"""
+
+    include_byok_in_limit: bool
+    r"""Whether to include external BYOK usage in the credit limit"""
+
+    label: str
+    r"""Human-readable label for the API key"""
 
     limit: Nullable[float]
     r"""Spending limit for the API key in USD"""
@@ -269,8 +293,11 @@ class CreateKeysData(BaseModel):
     limit_reset: Nullable[str]
     r"""Type of limit reset for the API key"""
 
-    include_byok_in_limit: bool
-    r"""Whether to include external BYOK usage in the credit limit"""
+    name: str
+    r"""Name of the API key"""
+
+    updated_at: Nullable[str]
+    r"""ISO 8601 timestamp of when the API key was last updated"""
 
     usage: float
     r"""Total OpenRouter credit usage (in USD) for the API key"""
@@ -278,32 +305,11 @@ class CreateKeysData(BaseModel):
     usage_daily: float
     r"""OpenRouter credit usage (in USD) for the current UTC day"""
 
-    usage_weekly: float
-    r"""OpenRouter credit usage (in USD) for the current UTC week (Monday-Sunday)"""
-
     usage_monthly: float
     r"""OpenRouter credit usage (in USD) for the current UTC month"""
 
-    byok_usage: float
-    r"""Total external BYOK usage (in USD) for the API key"""
-
-    byok_usage_daily: float
-    r"""External BYOK usage (in USD) for the current UTC day"""
-
-    byok_usage_weekly: float
-    r"""External BYOK usage (in USD) for the current UTC week (Monday-Sunday)"""
-
-    byok_usage_monthly: float
-    r"""External BYOK usage (in USD) for current UTC month"""
-
-    created_at: str
-    r"""ISO 8601 timestamp of when the API key was created"""
-
-    updated_at: Nullable[str]
-    r"""ISO 8601 timestamp of when the API key was last updated"""
-
-    creator_user_id: Nullable[str]
-    r"""The user ID of the key creator. For organization-owned keys, this is the member who created the key. For individual users, this is the user's own ID."""
+    usage_weekly: float
+    r"""OpenRouter credit usage (in USD) for the current UTC week (Monday-Sunday)"""
 
     expires_at: OptionalNullable[datetime] = UNSET
     r"""ISO 8601 UTC timestamp when the API key expires, or null if no expiration"""
@@ -312,12 +318,12 @@ class CreateKeysData(BaseModel):
     def serialize_model(self, handler):
         optional_fields = ["expires_at"]
         nullable_fields = [
+            "creator_user_id",
+            "expires_at",
             "limit",
             "limit_remaining",
             "limit_reset",
             "updated_at",
-            "expires_at",
-            "creator_user_id",
         ]
         null_default_fields = []
 

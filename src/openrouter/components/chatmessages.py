@@ -27,11 +27,11 @@ r"""Chat completion message with role-based discrimination"""
 
 ChatMessages = Annotated[
     Union[
-        Annotated[ChatSystemMessage, Tag("system")],
-        Annotated[ChatUserMessage, Tag("user")],
-        Annotated[ChatDeveloperMessage, Tag("developer")],
         Annotated[ChatAssistantMessage, Tag("assistant")],
+        Annotated[ChatDeveloperMessage, Tag("developer")],
+        Annotated[ChatSystemMessage, Tag("system")],
         Annotated[ChatToolMessage, Tag("tool")],
+        Annotated[ChatUserMessage, Tag("user")],
     ],
     Discriminator(lambda m: get_discriminator(m, "role", "role")),
 ]

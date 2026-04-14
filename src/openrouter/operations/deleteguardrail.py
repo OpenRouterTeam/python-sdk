@@ -2,15 +2,9 @@
 
 from __future__ import annotations
 from openrouter.types import BaseModel
-from openrouter.utils import (
-    FieldMetadata,
-    HeaderMetadata,
-    PathParamMetadata,
-    validate_const,
-)
+from openrouter.utils import FieldMetadata, HeaderMetadata, PathParamMetadata
 import pydantic
-from pydantic.functional_validators import AfterValidator
-from typing import Literal, Optional
+from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
@@ -111,20 +105,3 @@ class DeleteGuardrailRequest(BaseModel):
     r"""Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
     """
-
-
-class DeleteGuardrailResponseTypedDict(TypedDict):
-    r"""Guardrail deleted successfully"""
-
-    deleted: Literal[True]
-    r"""Confirmation that the guardrail was deleted"""
-
-
-class DeleteGuardrailResponse(BaseModel):
-    r"""Guardrail deleted successfully"""
-
-    DELETED: Annotated[
-        Annotated[Literal[True], AfterValidator(validate_const(True))],
-        pydantic.Field(alias="deleted"),
-    ] = True
-    r"""Confirmation that the guardrail was deleted"""

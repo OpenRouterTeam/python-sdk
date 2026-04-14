@@ -7,9 +7,6 @@ from typing import List, Literal, Optional, Union
 from typing_extensions import NotRequired, TypeAliasType, TypedDict
 
 
-ChatSystemMessageRole = Literal["system",]
-
-
 ChatSystemMessageContentTypedDict = TypeAliasType(
     "ChatSystemMessageContentTypedDict", Union[str, List[ChatContentTextTypedDict]]
 )
@@ -22,12 +19,15 @@ ChatSystemMessageContent = TypeAliasType(
 r"""System message content"""
 
 
+ChatSystemMessageRole = Literal["system",]
+
+
 class ChatSystemMessageTypedDict(TypedDict):
     r"""System message for setting behavior"""
 
-    role: ChatSystemMessageRole
     content: ChatSystemMessageContentTypedDict
     r"""System message content"""
+    role: ChatSystemMessageRole
     name: NotRequired[str]
     r"""Optional name for the system message"""
 
@@ -35,10 +35,10 @@ class ChatSystemMessageTypedDict(TypedDict):
 class ChatSystemMessage(BaseModel):
     r"""System message for setting behavior"""
 
-    role: ChatSystemMessageRole
-
     content: ChatSystemMessageContent
     r"""System message content"""
+
+    role: ChatSystemMessageRole
 
     name: Optional[str] = None
     r"""Optional name for the system message"""

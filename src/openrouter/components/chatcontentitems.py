@@ -16,42 +16,29 @@ from typing import Union
 from typing_extensions import Annotated, TypeAliasType
 
 
-ChatContentItems1TypedDict = TypeAliasType(
-    "ChatContentItems1TypedDict",
-    Union[LegacyChatContentVideoTypedDict, ChatContentVideoTypedDict],
-)
-
-
-ChatContentItems1 = Annotated[
-    Union[
-        Annotated[LegacyChatContentVideo, Tag("input_video")],
-        Annotated[ChatContentVideo, Tag("video_url")],
-    ],
-    Discriminator(lambda m: get_discriminator(m, "type", "type")),
-]
-
-
 ChatContentItemsTypedDict = TypeAliasType(
     "ChatContentItemsTypedDict",
     Union[
         ChatContentImageTypedDict,
         ChatContentAudioTypedDict,
+        LegacyChatContentVideoTypedDict,
+        ChatContentVideoTypedDict,
         ChatContentFileTypedDict,
         ChatContentTextTypedDict,
-        ChatContentItems1TypedDict,
     ],
 )
 r"""Content part for chat completion messages"""
 
 
-ChatContentItems = TypeAliasType(
-    "ChatContentItems",
+ChatContentItems = Annotated[
     Union[
-        ChatContentImage,
-        ChatContentAudio,
-        ChatContentFile,
-        ChatContentText,
-        ChatContentItems1,
+        Annotated[ChatContentFile, Tag("file")],
+        Annotated[ChatContentImage, Tag("image_url")],
+        Annotated[ChatContentAudio, Tag("input_audio")],
+        Annotated[LegacyChatContentVideo, Tag("input_video")],
+        Annotated[ChatContentText, Tag("text")],
+        Annotated[ChatContentVideo, Tag("video_url")],
     ],
-)
+    Discriminator(lambda m: get_discriminator(m, "type", "type")),
+]
 r"""Content part for chat completion messages"""

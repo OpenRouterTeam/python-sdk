@@ -12,15 +12,15 @@ ChatFormatGrammarConfigType = Literal["grammar",]
 class ChatFormatGrammarConfigTypedDict(TypedDict):
     r"""Custom grammar response format"""
 
-    type: ChatFormatGrammarConfigType
     grammar: str
     r"""Custom grammar for text generation"""
+    type: ChatFormatGrammarConfigType
 
 
 class ChatFormatGrammarConfig(BaseModel):
     r"""Custom grammar response format"""
 
-    type: ChatFormatGrammarConfigType
-
     grammar: str
     r"""Custom grammar for text generation"""
+
+    type: ChatFormatGrammarConfigType

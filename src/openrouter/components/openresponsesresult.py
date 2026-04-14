@@ -40,7 +40,7 @@ from .responseserrorfield import ResponsesErrorField, ResponsesErrorFieldTypedDi
 from .shellservertool import ShellServerTool, ShellServerToolTypedDict
 from .storedprompttemplate import StoredPromptTemplate, StoredPromptTemplateTypedDict
 from .textconfig import TextConfig, TextConfigTypedDict
-from .truncationenum import TruncationEnum
+from .truncation import Truncation
 from .usage import Usage, UsageTypedDict
 from .websearchservertool import WebSearchServerTool, WebSearchServerToolTypedDict
 from openrouter.types import (
@@ -66,9 +66,9 @@ OpenResponsesResultType = Literal["function",]
 class OpenResponsesResultToolFunctionTypedDict(TypedDict):
     r"""Function tool definition"""
 
-    type: OpenResponsesResultType
     name: str
     parameters: Nullable[Dict[str, Nullable[Any]]]
+    type: OpenResponsesResultType
     description: NotRequired[Nullable[str]]
     strict: NotRequired[Nullable[bool]]
 
@@ -76,11 +76,11 @@ class OpenResponsesResultToolFunctionTypedDict(TypedDict):
 class OpenResponsesResultToolFunction(BaseModel):
     r"""Function tool definition"""
 
-    type: OpenResponsesResultType
-
     name: str
 
     parameters: Nullable[Dict[str, Nullable[Any]]]
+
+    type: OpenResponsesResultType
 
     description: OptionalNullable[str] = UNSET
 
@@ -89,7 +89,7 @@ class OpenResponsesResultToolFunction(BaseModel):
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = ["description", "strict"]
-        nullable_fields = ["description", "strict", "parameters"]
+        nullable_fields = ["description", "parameters", "strict"]
         null_default_fields = []
 
         serialized = handler(self)
@@ -164,167 +164,167 @@ OpenResponsesResultToolUnion = Annotated[
 class OpenResponsesResultTypedDict(TypedDict):
     r"""Complete non-streaming response from the Responses API"""
 
-    id: str
-    object: OpenResponsesResultObject
-    created_at: float
-    model: str
-    status: OpenAIResponsesResponseStatus
-    completed_at: Nullable[float]
-    output: List[OutputItemsTypedDict]
+    completed_at: Nullable[int]
+    created_at: int
     error: Nullable[ResponsesErrorFieldTypedDict]
     r"""Error information returned from the API"""
-    incomplete_details: Nullable[IncompleteDetailsTypedDict]
-    temperature: Nullable[float]
-    top_p: Nullable[float]
-    presence_penalty: Nullable[float]
     frequency_penalty: Nullable[float]
+    id: str
+    incomplete_details: Nullable[IncompleteDetailsTypedDict]
     instructions: Nullable[BaseInputsUnionTypedDict]
     metadata: Nullable[Dict[str, str]]
     r"""Metadata key-value pairs for the request. Keys must be ≤64 characters and cannot contain brackets. Values must be ≤512 characters. Maximum 16 pairs allowed."""
-    tools: List[OpenResponsesResultToolUnionTypedDict]
-    tool_choice: OpenAIResponsesToolChoiceUnionTypedDict
+    model: str
+    object: OpenResponsesResultObject
+    output: List[OutputItemsTypedDict]
     parallel_tool_calls: bool
-    user: NotRequired[Nullable[str]]
-    output_text: NotRequired[str]
-    prompt_cache_key: NotRequired[Nullable[str]]
-    safety_identifier: NotRequired[Nullable[str]]
-    usage: NotRequired[Nullable[UsageTypedDict]]
-    r"""Token usage information for the response"""
-    max_tool_calls: NotRequired[Nullable[float]]
-    top_logprobs: NotRequired[float]
-    max_output_tokens: NotRequired[Nullable[float]]
-    prompt: NotRequired[Nullable[StoredPromptTemplateTypedDict]]
+    presence_penalty: Nullable[float]
+    status: OpenAIResponsesResponseStatus
+    temperature: Nullable[float]
+    tool_choice: OpenAIResponsesToolChoiceUnionTypedDict
+    tools: List[OpenResponsesResultToolUnionTypedDict]
+    top_p: Nullable[float]
     background: NotRequired[Nullable[bool]]
+    max_output_tokens: NotRequired[Nullable[int]]
+    max_tool_calls: NotRequired[Nullable[int]]
+    output_text: NotRequired[str]
     previous_response_id: NotRequired[Nullable[str]]
+    prompt: NotRequired[Nullable[StoredPromptTemplateTypedDict]]
+    prompt_cache_key: NotRequired[Nullable[str]]
     reasoning: NotRequired[Nullable[BaseReasoningConfigTypedDict]]
+    safety_identifier: NotRequired[Nullable[str]]
     service_tier: NotRequired[Nullable[str]]
     store: NotRequired[bool]
-    truncation: NotRequired[Nullable[TruncationEnum]]
     text: NotRequired[TextConfigTypedDict]
     r"""Text output configuration including format and verbosity"""
+    top_logprobs: NotRequired[int]
+    truncation: NotRequired[Nullable[Truncation]]
+    usage: NotRequired[Nullable[UsageTypedDict]]
+    r"""Token usage information for the response"""
+    user: NotRequired[Nullable[str]]
 
 
 class OpenResponsesResult(BaseModel):
     r"""Complete non-streaming response from the Responses API"""
 
-    id: str
+    completed_at: Nullable[int]
 
-    object: OpenResponsesResultObject
-
-    created_at: float
-
-    model: str
-
-    status: Annotated[
-        OpenAIResponsesResponseStatus, PlainValidator(validate_open_enum(False))
-    ]
-
-    completed_at: Nullable[float]
-
-    output: List[OutputItems]
+    created_at: int
 
     error: Nullable[ResponsesErrorField]
     r"""Error information returned from the API"""
 
-    incomplete_details: Nullable[IncompleteDetails]
-
-    temperature: Nullable[float]
-
-    top_p: Nullable[float]
-
-    presence_penalty: Nullable[float]
-
     frequency_penalty: Nullable[float]
+
+    id: str
+
+    incomplete_details: Nullable[IncompleteDetails]
 
     instructions: Nullable[BaseInputsUnion]
 
     metadata: Nullable[Dict[str, str]]
     r"""Metadata key-value pairs for the request. Keys must be ≤64 characters and cannot contain brackets. Values must be ≤512 characters. Maximum 16 pairs allowed."""
 
-    tools: List[OpenResponsesResultToolUnion]
+    model: str
 
-    tool_choice: OpenAIResponsesToolChoiceUnion
+    object: OpenResponsesResultObject
+
+    output: List[OutputItems]
 
     parallel_tool_calls: bool
 
-    user: OptionalNullable[str] = UNSET
+    presence_penalty: Nullable[float]
 
-    output_text: Optional[str] = None
+    status: Annotated[
+        OpenAIResponsesResponseStatus, PlainValidator(validate_open_enum(False))
+    ]
 
-    prompt_cache_key: OptionalNullable[str] = UNSET
+    temperature: Nullable[float]
 
-    safety_identifier: OptionalNullable[str] = UNSET
+    tool_choice: OpenAIResponsesToolChoiceUnion
 
-    usage: OptionalNullable[Usage] = UNSET
-    r"""Token usage information for the response"""
+    tools: List[OpenResponsesResultToolUnion]
 
-    max_tool_calls: OptionalNullable[float] = UNSET
-
-    top_logprobs: Optional[float] = None
-
-    max_output_tokens: OptionalNullable[float] = UNSET
-
-    prompt: OptionalNullable[StoredPromptTemplate] = UNSET
+    top_p: Nullable[float]
 
     background: OptionalNullable[bool] = UNSET
 
+    max_output_tokens: OptionalNullable[int] = UNSET
+
+    max_tool_calls: OptionalNullable[int] = UNSET
+
+    output_text: Optional[str] = None
+
     previous_response_id: OptionalNullable[str] = UNSET
 
+    prompt: OptionalNullable[StoredPromptTemplate] = UNSET
+
+    prompt_cache_key: OptionalNullable[str] = UNSET
+
     reasoning: OptionalNullable[BaseReasoningConfig] = UNSET
+
+    safety_identifier: OptionalNullable[str] = UNSET
 
     service_tier: OptionalNullable[str] = UNSET
 
     store: Optional[bool] = None
 
-    truncation: Annotated[
-        OptionalNullable[TruncationEnum], PlainValidator(validate_open_enum(False))
-    ] = UNSET
-
     text: Optional[TextConfig] = None
     r"""Text output configuration including format and verbosity"""
+
+    top_logprobs: Optional[int] = None
+
+    truncation: Annotated[
+        OptionalNullable[Truncation], PlainValidator(validate_open_enum(False))
+    ] = UNSET
+
+    usage: OptionalNullable[Usage] = UNSET
+    r"""Token usage information for the response"""
+
+    user: OptionalNullable[str] = UNSET
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = [
-            "user",
-            "output_text",
-            "prompt_cache_key",
-            "safety_identifier",
-            "usage",
-            "max_tool_calls",
-            "top_logprobs",
-            "max_output_tokens",
-            "prompt",
             "background",
+            "max_output_tokens",
+            "max_tool_calls",
+            "output_text",
             "previous_response_id",
+            "prompt",
+            "prompt_cache_key",
             "reasoning",
+            "safety_identifier",
             "service_tier",
             "store",
-            "truncation",
             "text",
+            "top_logprobs",
+            "truncation",
+            "usage",
+            "user",
         ]
         nullable_fields = [
+            "background",
             "completed_at",
-            "user",
-            "prompt_cache_key",
-            "safety_identifier",
             "error",
+            "frequency_penalty",
             "incomplete_details",
-            "usage",
-            "max_tool_calls",
+            "instructions",
             "max_output_tokens",
+            "max_tool_calls",
+            "metadata",
+            "presence_penalty",
+            "previous_response_id",
+            "prompt",
+            "prompt_cache_key",
+            "reasoning",
+            "safety_identifier",
+            "service_tier",
             "temperature",
             "top_p",
-            "presence_penalty",
-            "frequency_penalty",
-            "instructions",
-            "metadata",
-            "prompt",
-            "background",
-            "previous_response_id",
-            "reasoning",
-            "service_tier",
             "truncation",
+            "usage",
+            "user",
         ]
         null_default_fields = []
 

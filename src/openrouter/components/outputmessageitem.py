@@ -19,41 +19,6 @@ from typing import Any, List, Literal, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
-OutputMessageItemRole = Literal["assistant",]
-
-
-OutputMessageItemType = Literal["message",]
-
-
-OutputMessageItemStatusInProgress = Literal["in_progress",]
-
-
-OutputMessageItemStatusIncomplete = Literal["incomplete",]
-
-
-OutputMessageItemStatusCompleted = Literal["completed",]
-
-
-OutputMessageItemStatusUnionTypedDict = TypeAliasType(
-    "OutputMessageItemStatusUnionTypedDict",
-    Union[
-        OutputMessageItemStatusCompleted,
-        OutputMessageItemStatusIncomplete,
-        OutputMessageItemStatusInProgress,
-    ],
-)
-
-
-OutputMessageItemStatusUnion = TypeAliasType(
-    "OutputMessageItemStatusUnion",
-    Union[
-        OutputMessageItemStatusCompleted,
-        OutputMessageItemStatusIncomplete,
-        OutputMessageItemStatusInProgress,
-    ],
-)
-
-
 OutputMessageItemContentTypedDict = TypeAliasType(
     "OutputMessageItemContentTypedDict",
     Union[OpenAIResponsesRefusalContentTypedDict, ResponseOutputTextTypedDict],
@@ -89,37 +54,72 @@ OutputMessageItemPhaseUnion = TypeAliasType(
 r"""The phase of an assistant message. Use `commentary` for an intermediate assistant message and `final_answer` for the final assistant message. For follow-up requests with models like `gpt-5.3-codex` and later, preserve and resend phase on all assistant messages. Omitting it can degrade performance. Not used for user messages."""
 
 
+OutputMessageItemRole = Literal["assistant",]
+
+
+OutputMessageItemStatusInProgress = Literal["in_progress",]
+
+
+OutputMessageItemStatusIncomplete = Literal["incomplete",]
+
+
+OutputMessageItemStatusCompleted = Literal["completed",]
+
+
+OutputMessageItemStatusUnionTypedDict = TypeAliasType(
+    "OutputMessageItemStatusUnionTypedDict",
+    Union[
+        OutputMessageItemStatusCompleted,
+        OutputMessageItemStatusIncomplete,
+        OutputMessageItemStatusInProgress,
+    ],
+)
+
+
+OutputMessageItemStatusUnion = TypeAliasType(
+    "OutputMessageItemStatusUnion",
+    Union[
+        OutputMessageItemStatusCompleted,
+        OutputMessageItemStatusIncomplete,
+        OutputMessageItemStatusInProgress,
+    ],
+)
+
+
+OutputMessageItemType = Literal["message",]
+
+
 class OutputMessageItemTypedDict(TypedDict):
     r"""An output message item"""
 
+    content: List[OutputMessageItemContentTypedDict]
     id: str
     role: OutputMessageItemRole
     type: OutputMessageItemType
-    content: List[OutputMessageItemContentTypedDict]
-    status: NotRequired[OutputMessageItemStatusUnionTypedDict]
     phase: NotRequired[Nullable[OutputMessageItemPhaseUnionTypedDict]]
     r"""The phase of an assistant message. Use `commentary` for an intermediate assistant message and `final_answer` for the final assistant message. For follow-up requests with models like `gpt-5.3-codex` and later, preserve and resend phase on all assistant messages. Omitting it can degrade performance. Not used for user messages."""
+    status: NotRequired[OutputMessageItemStatusUnionTypedDict]
 
 
 class OutputMessageItem(BaseModel):
     r"""An output message item"""
 
+    content: List[OutputMessageItemContent]
+
     id: str
 
     role: OutputMessageItemRole
 
     type: OutputMessageItemType
 
-    content: List[OutputMessageItemContent]
-
-    status: Optional[OutputMessageItemStatusUnion] = None
-
     phase: OptionalNullable[OutputMessageItemPhaseUnion] = UNSET
     r"""The phase of an assistant message. Use `commentary` for an intermediate assistant message and `final_answer` for the final assistant message. For follow-up requests with models like `gpt-5.3-codex` and later, preserve and resend phase on all assistant messages. Omitting it can degrade performance. Not used for user messages."""
 
+    status: Optional[OutputMessageItemStatusUnion] = None
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["status", "phase"]
+        optional_fields = ["phase", "status"]
         nullable_fields = ["phase"]
         null_default_fields = []
 

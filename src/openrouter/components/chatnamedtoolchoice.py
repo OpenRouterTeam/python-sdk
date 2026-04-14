@@ -6,9 +6,6 @@ from typing import Literal
 from typing_extensions import TypedDict
 
 
-ChatNamedToolChoiceType = Literal["function",]
-
-
 class ChatNamedToolChoiceFunctionTypedDict(TypedDict):
     name: str
     r"""Function name to call"""
@@ -19,16 +16,19 @@ class ChatNamedToolChoiceFunction(BaseModel):
     r"""Function name to call"""
 
 
+ChatNamedToolChoiceType = Literal["function",]
+
+
 class ChatNamedToolChoiceTypedDict(TypedDict):
     r"""Named tool choice for specific function"""
 
-    type: ChatNamedToolChoiceType
     function: ChatNamedToolChoiceFunctionTypedDict
+    type: ChatNamedToolChoiceType
 
 
 class ChatNamedToolChoice(BaseModel):
     r"""Named tool choice for specific function"""
 
-    type: ChatNamedToolChoiceType
-
     function: ChatNamedToolChoiceFunction
+
+    type: ChatNamedToolChoiceType

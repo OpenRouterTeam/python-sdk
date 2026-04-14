@@ -19,41 +19,6 @@ from typing import Any, List, Literal, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
-OutputMessageRole = Literal["assistant",]
-
-
-OutputMessageType = Literal["message",]
-
-
-OutputMessageStatusInProgress = Literal["in_progress",]
-
-
-OutputMessageStatusIncomplete = Literal["incomplete",]
-
-
-OutputMessageStatusCompleted = Literal["completed",]
-
-
-OutputMessageStatusUnionTypedDict = TypeAliasType(
-    "OutputMessageStatusUnionTypedDict",
-    Union[
-        OutputMessageStatusCompleted,
-        OutputMessageStatusIncomplete,
-        OutputMessageStatusInProgress,
-    ],
-)
-
-
-OutputMessageStatusUnion = TypeAliasType(
-    "OutputMessageStatusUnion",
-    Union[
-        OutputMessageStatusCompleted,
-        OutputMessageStatusIncomplete,
-        OutputMessageStatusInProgress,
-    ],
-)
-
-
 OutputMessageContentTypedDict = TypeAliasType(
     "OutputMessageContentTypedDict",
     Union[OpenAIResponsesRefusalContentTypedDict, ResponseOutputTextTypedDict],
@@ -89,33 +54,68 @@ OutputMessagePhaseUnion = TypeAliasType(
 r"""The phase of an assistant message. Use `commentary` for an intermediate assistant message and `final_answer` for the final assistant message. For follow-up requests with models like `gpt-5.3-codex` and later, preserve and resend phase on all assistant messages. Omitting it can degrade performance. Not used for user messages."""
 
 
+OutputMessageRole = Literal["assistant",]
+
+
+OutputMessageStatusInProgress = Literal["in_progress",]
+
+
+OutputMessageStatusIncomplete = Literal["incomplete",]
+
+
+OutputMessageStatusCompleted = Literal["completed",]
+
+
+OutputMessageStatusUnionTypedDict = TypeAliasType(
+    "OutputMessageStatusUnionTypedDict",
+    Union[
+        OutputMessageStatusCompleted,
+        OutputMessageStatusIncomplete,
+        OutputMessageStatusInProgress,
+    ],
+)
+
+
+OutputMessageStatusUnion = TypeAliasType(
+    "OutputMessageStatusUnion",
+    Union[
+        OutputMessageStatusCompleted,
+        OutputMessageStatusIncomplete,
+        OutputMessageStatusInProgress,
+    ],
+)
+
+
+OutputMessageType = Literal["message",]
+
+
 class OutputMessageTypedDict(TypedDict):
+    content: List[OutputMessageContentTypedDict]
     id: str
     role: OutputMessageRole
     type: OutputMessageType
-    content: List[OutputMessageContentTypedDict]
-    status: NotRequired[OutputMessageStatusUnionTypedDict]
     phase: NotRequired[Nullable[OutputMessagePhaseUnionTypedDict]]
     r"""The phase of an assistant message. Use `commentary` for an intermediate assistant message and `final_answer` for the final assistant message. For follow-up requests with models like `gpt-5.3-codex` and later, preserve and resend phase on all assistant messages. Omitting it can degrade performance. Not used for user messages."""
+    status: NotRequired[OutputMessageStatusUnionTypedDict]
 
 
 class OutputMessage(BaseModel):
+    content: List[OutputMessageContent]
+
     id: str
 
     role: OutputMessageRole
 
     type: OutputMessageType
-
-    content: List[OutputMessageContent]
-
-    status: Optional[OutputMessageStatusUnion] = None
 
     phase: OptionalNullable[OutputMessagePhaseUnion] = UNSET
     r"""The phase of an assistant message. Use `commentary` for an intermediate assistant message and `final_answer` for the final assistant message. For follow-up requests with models like `gpt-5.3-codex` and later, preserve and resend phase on all assistant messages. Omitting it can degrade performance. Not used for user messages."""
 
+    status: Optional[OutputMessageStatusUnion] = None
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["status", "phase"]
+        optional_fields = ["phase", "status"]
         nullable_fields = ["phase"]
         null_default_fields = []
 

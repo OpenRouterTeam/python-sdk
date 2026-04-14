@@ -5,10 +5,10 @@ Response format configuration
 
 ## Supported Types
 
-### `components.ChatFormatTextConfig`
+### `components.ChatFormatGrammarConfig`
 
 ```python
-value: components.ChatFormatTextConfig = /* values here */
+value: components.ChatFormatGrammarConfig = /* values here */
 ```
 
 ### `components.FormatJSONObjectConfig`
@@ -23,15 +23,15 @@ value: components.FormatJSONObjectConfig = /* values here */
 value: components.ChatFormatJSONSchemaConfig = /* values here */
 ```
 
-### `components.ChatFormatGrammarConfig`
-
-```python
-value: components.ChatFormatGrammarConfig = /* values here */
-```
-
 ### `components.ChatFormatPythonConfig`
 
 ```python
 value: components.ChatFormatPythonConfig = /* values here */
+```
+
+### `components.ChatFormatTextConfig`
+
+```python
+value: components.ChatFormatTextConfig = /* values here */
 ```
 

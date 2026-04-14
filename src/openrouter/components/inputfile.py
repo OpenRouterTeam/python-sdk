@@ -20,10 +20,10 @@ class InputFileTypedDict(TypedDict):
     r"""File input content item"""
 
     type: InputFileType
-    file_id: NotRequired[Nullable[str]]
     file_data: NotRequired[str]
-    filename: NotRequired[str]
+    file_id: NotRequired[Nullable[str]]
     file_url: NotRequired[str]
+    filename: NotRequired[str]
 
 
 class InputFile(BaseModel):
@@ -31,17 +31,17 @@ class InputFile(BaseModel):
 
     type: InputFileType
 
-    file_id: OptionalNullable[str] = UNSET
-
     file_data: Optional[str] = None
 
-    filename: Optional[str] = None
+    file_id: OptionalNullable[str] = UNSET
 
     file_url: Optional[str] = None
 
+    filename: Optional[str] = None
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["file_id", "file_data", "filename", "file_url"]
+        optional_fields = ["file_data", "file_id", "file_url", "filename"]
         nullable_fields = ["file_id"]
         null_default_fields = []
 

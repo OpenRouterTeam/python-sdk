@@ -20,41 +20,6 @@ from typing import List, Literal, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
-InputMessageItemTypeMessage = Literal["message",]
-
-
-InputMessageItemRoleDeveloper = Literal["developer",]
-
-
-InputMessageItemRoleSystem = Literal["system",]
-
-
-InputMessageItemRoleUser = Literal["user",]
-
-
-InputMessageItemRoleUnionTypedDict = TypeAliasType(
-    "InputMessageItemRoleUnionTypedDict",
-    Union[
-        InputMessageItemRoleUser,
-        InputMessageItemRoleSystem,
-        InputMessageItemRoleDeveloper,
-    ],
-)
-
-
-InputMessageItemRoleUnion = TypeAliasType(
-    "InputMessageItemRoleUnion",
-    Union[
-        InputMessageItemRoleUser,
-        InputMessageItemRoleSystem,
-        InputMessageItemRoleDeveloper,
-    ],
-)
-
-
-InputMessageItemContentType = Literal["input_image",]
-
-
 InputMessageItemDetail = Union[
     Literal[
         "auto",
@@ -65,20 +30,23 @@ InputMessageItemDetail = Union[
 ]
 
 
+InputMessageItemContentType = Literal["input_image",]
+
+
 class InputMessageItemContentInputImageTypedDict(TypedDict):
     r"""Image input content item"""
 
-    type: InputMessageItemContentType
     detail: InputMessageItemDetail
+    type: InputMessageItemContentType
     image_url: NotRequired[Nullable[str]]
 
 
 class InputMessageItemContentInputImage(BaseModel):
     r"""Image input content item"""
 
-    type: InputMessageItemContentType
-
     detail: Annotated[InputMessageItemDetail, PlainValidator(validate_open_enum(False))]
+
+    type: InputMessageItemContentType
 
     image_url: OptionalNullable[str] = UNSET
 
@@ -137,25 +105,57 @@ InputMessageItemContentUnion = Annotated[
 ]
 
 
+InputMessageItemRoleDeveloper = Literal["developer",]
+
+
+InputMessageItemRoleSystem = Literal["system",]
+
+
+InputMessageItemRoleUser = Literal["user",]
+
+
+InputMessageItemRoleUnionTypedDict = TypeAliasType(
+    "InputMessageItemRoleUnionTypedDict",
+    Union[
+        InputMessageItemRoleUser,
+        InputMessageItemRoleSystem,
+        InputMessageItemRoleDeveloper,
+    ],
+)
+
+
+InputMessageItemRoleUnion = TypeAliasType(
+    "InputMessageItemRoleUnion",
+    Union[
+        InputMessageItemRoleUser,
+        InputMessageItemRoleSystem,
+        InputMessageItemRoleDeveloper,
+    ],
+)
+
+
+InputMessageItemTypeMessage = Literal["message",]
+
+
 class InputMessageItemTypedDict(TypedDict):
     role: InputMessageItemRoleUnionTypedDict
+    content: NotRequired[Nullable[List[InputMessageItemContentUnionTypedDict]]]
     id: NotRequired[str]
     type: NotRequired[InputMessageItemTypeMessage]
-    content: NotRequired[Nullable[List[InputMessageItemContentUnionTypedDict]]]
 
 
 class InputMessageItem(BaseModel):
     role: InputMessageItemRoleUnion
 
+    content: OptionalNullable[List[InputMessageItemContentUnion]] = UNSET
+
     id: Optional[str] = None
 
     type: Optional[InputMessageItemTypeMessage] = None
 
-    content: OptionalNullable[List[InputMessageItemContentUnion]] = UNSET
-
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["id", "type", "content"]
+        optional_fields = ["content", "id", "type"]
         nullable_fields = ["content"]
         null_default_fields = []
 

@@ -16,28 +16,28 @@ AnnotationAddedEventType = Literal["response.output_text.annotation.added",]
 class AnnotationAddedEventTypedDict(TypedDict):
     r"""Event emitted when a text annotation is added to output"""
 
-    type: AnnotationAddedEventType
-    output_index: float
-    item_id: str
-    content_index: float
-    sequence_number: float
-    annotation_index: float
     annotation: OpenAIResponsesAnnotationTypedDict
+    annotation_index: int
+    content_index: int
+    item_id: str
+    output_index: int
+    sequence_number: int
+    type: AnnotationAddedEventType
 
 
 class AnnotationAddedEvent(BaseModel):
     r"""Event emitted when a text annotation is added to output"""
 
-    type: AnnotationAddedEventType
+    annotation: OpenAIResponsesAnnotation
 
-    output_index: float
+    annotation_index: int
+
+    content_index: int
 
     item_id: str
 
-    content_index: float
+    output_index: int
 
-    sequence_number: float
+    sequence_number: int
 
-    annotation_index: float
-
-    annotation: OpenAIResponsesAnnotation
+    type: AnnotationAddedEventType

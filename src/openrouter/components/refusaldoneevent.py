@@ -12,25 +12,25 @@ RefusalDoneEventType = Literal["response.refusal.done",]
 class RefusalDoneEventTypedDict(TypedDict):
     r"""Event emitted when refusal streaming is complete"""
 
-    type: RefusalDoneEventType
-    output_index: float
+    content_index: int
     item_id: str
-    content_index: float
+    output_index: int
     refusal: str
-    sequence_number: float
+    sequence_number: int
+    type: RefusalDoneEventType
 
 
 class RefusalDoneEvent(BaseModel):
     r"""Event emitted when refusal streaming is complete"""
 
-    type: RefusalDoneEventType
-
-    output_index: float
+    content_index: int
 
     item_id: str
 
-    content_index: float
+    output_index: int
 
     refusal: str
 
-    sequence_number: float
+    sequence_number: int
+
+    type: RefusalDoneEventType

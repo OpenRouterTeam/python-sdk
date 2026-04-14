@@ -3,7 +3,6 @@
 from __future__ import annotations
 from .inputfile import InputFile, InputFileTypedDict
 from .inputtext import InputText, InputTextTypedDict
-from .toolcallstatusenum import ToolCallStatusEnum
 from openrouter.types import (
     BaseModel,
     Nullable,
@@ -19,12 +18,6 @@ from typing import List, Literal, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
-FunctionCallOutputItemTypeFunctionCallOutput = Literal["function_call_output",]
-
-
-OutputType = Literal["input_image",]
-
-
 FunctionCallOutputItemDetail = Union[
     Literal[
         "auto",
@@ -35,22 +28,25 @@ FunctionCallOutputItemDetail = Union[
 ]
 
 
+FunctionCallOutputItemOutputType = Literal["input_image",]
+
+
 class OutputInputImageTypedDict(TypedDict):
     r"""Image input content item"""
 
-    type: OutputType
     detail: FunctionCallOutputItemDetail
+    type: FunctionCallOutputItemOutputType
     image_url: NotRequired[Nullable[str]]
 
 
 class OutputInputImage(BaseModel):
     r"""Image input content item"""
 
-    type: OutputType
-
     detail: Annotated[
         FunctionCallOutputItemDetail, PlainValidator(validate_open_enum(False))
     ]
+
+    type: FunctionCallOutputItemOutputType
 
     image_url: OptionalNullable[str] = UNSET
 
@@ -113,29 +109,43 @@ FunctionCallOutputItemOutputUnion2 = TypeAliasType(
 )
 
 
+FunctionCallOutputItemStatus = Union[
+    Literal[
+        "in_progress",
+        "completed",
+        "incomplete",
+    ],
+    UnrecognizedStr,
+]
+
+
+FunctionCallOutputItemTypeFunctionCallOutput = Literal["function_call_output",]
+
+
 class FunctionCallOutputItemTypedDict(TypedDict):
     r"""The output from a function call execution"""
 
-    type: FunctionCallOutputItemTypeFunctionCallOutput
     call_id: str
     output: FunctionCallOutputItemOutputUnion2TypedDict
+    type: FunctionCallOutputItemTypeFunctionCallOutput
     id: NotRequired[Nullable[str]]
-    status: NotRequired[Nullable[ToolCallStatusEnum]]
+    status: NotRequired[Nullable[FunctionCallOutputItemStatus]]
 
 
 class FunctionCallOutputItem(BaseModel):
     r"""The output from a function call execution"""
 
-    type: FunctionCallOutputItemTypeFunctionCallOutput
-
     call_id: str
 
     output: FunctionCallOutputItemOutputUnion2
 
+    type: FunctionCallOutputItemTypeFunctionCallOutput
+
     id: OptionalNullable[str] = UNSET
 
     status: Annotated[
-        OptionalNullable[ToolCallStatusEnum], PlainValidator(validate_open_enum(False))
+        OptionalNullable[FunctionCallOutputItemStatus],
+        PlainValidator(validate_open_enum(False)),
     ] = UNSET
 
     @model_serializer(mode="wrap")

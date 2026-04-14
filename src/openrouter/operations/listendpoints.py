@@ -59,7 +59,9 @@ class ListEndpointsGlobals(BaseModel):
 
 class ListEndpointsRequestTypedDict(TypedDict):
     author: str
+    r"""The author/organization of the model"""
     slug: str
+    r"""The model slug"""
     http_referer: NotRequired[str]
     r"""The app identifier should be your app's URL and is used as the primary identifier for rankings.
     This is used to track API usage per application.
@@ -79,10 +81,12 @@ class ListEndpointsRequest(BaseModel):
     author: Annotated[
         str, FieldMetadata(path=PathParamMetadata(style="simple", explode=False))
     ]
+    r"""The author/organization of the model"""
 
     slug: Annotated[
         str, FieldMetadata(path=PathParamMetadata(style="simple", explode=False))
     ]
+    r"""The model slug"""
 
     http_referer: Annotated[
         Optional[str],

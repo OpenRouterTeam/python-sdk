@@ -26,15 +26,15 @@ class Embeddings(BaseSDK):
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
-        encoding_format: Optional[operations.EncodingFormat] = None,
         dimensions: Optional[int] = None,
-        user: Optional[str] = None,
-        provider: Optional[
+        encoding_format: Optional[operations.EncodingFormat] = None,
+        input_type: Optional[str] = None,
+        provider: OptionalNullable[
             Union[
                 components.ProviderPreferences, components.ProviderPreferencesTypedDict
             ]
-        ] = None,
-        input_type: Optional[str] = None,
+        ] = UNSET,
+        user: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -45,8 +45,8 @@ class Embeddings(BaseSDK):
 
         Submits an embedding request to the embeddings router
 
-        :param input:
-        :param model:
+        :param input: Text, token, or multimodal input(s) to embed
+        :param model: The model to use for embeddings
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
@@ -54,11 +54,11 @@ class Embeddings(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
-        :param encoding_format:
-        :param dimensions:
-        :param user:
-        :param provider: Provider routing preferences for the request.
-        :param input_type:
+        :param dimensions: The number of dimensions for the output embeddings
+        :param encoding_format: The format of the output embeddings
+        :param input_type: The type of input (e.g. search_query, search_document)
+        :param provider:
+        :param user: A unique identifier for the end-user
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -80,15 +80,15 @@ class Embeddings(BaseSDK):
             x_open_router_title=x_open_router_title,
             x_open_router_categories=x_open_router_categories,
             request_body=operations.CreateEmbeddingsRequestBody(
-                input=utils.get_pydantic_model(input, operations.InputUnion),
-                model=model,
-                encoding_format=encoding_format,
                 dimensions=dimensions,
-                user=user,
-                provider=utils.get_pydantic_model(
-                    provider, Optional[components.ProviderPreferences]
-                ),
+                encoding_format=encoding_format,
+                input=utils.get_pydantic_model(input, operations.InputUnion),
                 input_type=input_type,
+                model=model,
+                provider=utils.get_pydantic_model(
+                    provider, OptionalNullable[components.ProviderPreferences]
+                ),
+                user=user,
             ),
         )
 
@@ -126,10 +126,14 @@ class Embeddings(BaseSDK):
         if retries == UNSET:
             if self.sdk_configuration.retry_config is not UNSET:
                 retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 60000, 1.5, 3600000), True
+                )
 
         retry_config = None
         if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, ["429", "500", "502", "503", "504"])
+            retry_config = (retries, ["5XX"])
 
         http_res = self.do_request(
             hook_ctx=HookContext(
@@ -237,15 +241,15 @@ class Embeddings(BaseSDK):
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
-        encoding_format: Optional[operations.EncodingFormat] = None,
         dimensions: Optional[int] = None,
-        user: Optional[str] = None,
-        provider: Optional[
+        encoding_format: Optional[operations.EncodingFormat] = None,
+        input_type: Optional[str] = None,
+        provider: OptionalNullable[
             Union[
                 components.ProviderPreferences, components.ProviderPreferencesTypedDict
             ]
-        ] = None,
-        input_type: Optional[str] = None,
+        ] = UNSET,
+        user: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -256,8 +260,8 @@ class Embeddings(BaseSDK):
 
         Submits an embedding request to the embeddings router
 
-        :param input:
-        :param model:
+        :param input: Text, token, or multimodal input(s) to embed
+        :param model: The model to use for embeddings
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
@@ -265,11 +269,11 @@ class Embeddings(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
-        :param encoding_format:
-        :param dimensions:
-        :param user:
-        :param provider: Provider routing preferences for the request.
-        :param input_type:
+        :param dimensions: The number of dimensions for the output embeddings
+        :param encoding_format: The format of the output embeddings
+        :param input_type: The type of input (e.g. search_query, search_document)
+        :param provider:
+        :param user: A unique identifier for the end-user
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -291,15 +295,15 @@ class Embeddings(BaseSDK):
             x_open_router_title=x_open_router_title,
             x_open_router_categories=x_open_router_categories,
             request_body=operations.CreateEmbeddingsRequestBody(
-                input=utils.get_pydantic_model(input, operations.InputUnion),
-                model=model,
-                encoding_format=encoding_format,
                 dimensions=dimensions,
-                user=user,
-                provider=utils.get_pydantic_model(
-                    provider, Optional[components.ProviderPreferences]
-                ),
+                encoding_format=encoding_format,
+                input=utils.get_pydantic_model(input, operations.InputUnion),
                 input_type=input_type,
+                model=model,
+                provider=utils.get_pydantic_model(
+                    provider, OptionalNullable[components.ProviderPreferences]
+                ),
+                user=user,
             ),
         )
 
@@ -337,10 +341,14 @@ class Embeddings(BaseSDK):
         if retries == UNSET:
             if self.sdk_configuration.retry_config is not UNSET:
                 retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 60000, 1.5, 3600000), True
+                )
 
         retry_config = None
         if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, ["429", "500", "502", "503", "504"])
+            retry_config = (retries, ["5XX"])
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
@@ -508,10 +516,14 @@ class Embeddings(BaseSDK):
         if retries == UNSET:
             if self.sdk_configuration.retry_config is not UNSET:
                 retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 60000, 1.5, 3600000), True
+                )
 
         retry_config = None
         if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, ["429", "500", "502", "503", "504"])
+            retry_config = (retries, ["5XX"])
 
         http_res = self.do_request(
             hook_ctx=HookContext(
@@ -622,10 +634,14 @@ class Embeddings(BaseSDK):
         if retries == UNSET:
             if self.sdk_configuration.retry_config is not UNSET:
                 retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 60000, 1.5, 3600000), True
+                )
 
         retry_config = None
         if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, ["429", "500", "502", "503", "504"])
+            retry_config = (retries, ["5XX"])
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(

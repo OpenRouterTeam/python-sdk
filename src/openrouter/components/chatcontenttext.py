@@ -16,8 +16,8 @@ ChatContentTextType = Literal["text",]
 class ChatContentTextTypedDict(TypedDict):
     r"""Text content part"""
 
-    type: ChatContentTextType
     text: str
+    type: ChatContentTextType
     cache_control: NotRequired[ChatContentCacheControlTypedDict]
     r"""Cache control for the content part"""
 
@@ -25,9 +25,9 @@ class ChatContentTextTypedDict(TypedDict):
 class ChatContentText(BaseModel):
     r"""Text content part"""
 
-    type: ChatContentTextType
-
     text: str
+
+    type: ChatContentTextType
 
     cache_control: Optional[ChatContentCacheControl] = None
     r"""Cache control for the content part"""

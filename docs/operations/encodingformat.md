@@ -1,5 +1,7 @@
 # EncodingFormat
 
+The format of the output embeddings
+
 
 ## Values
 

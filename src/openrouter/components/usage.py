@@ -14,19 +14,19 @@ from typing_extensions import NotRequired, TypedDict
 
 
 class InputTokensDetailsTypedDict(TypedDict):
-    cached_tokens: float
+    cached_tokens: int
 
 
 class InputTokensDetails(BaseModel):
-    cached_tokens: float
+    cached_tokens: int
 
 
 class OutputTokensDetailsTypedDict(TypedDict):
-    reasoning_tokens: float
+    reasoning_tokens: int
 
 
 class OutputTokensDetails(BaseModel):
-    reasoning_tokens: float
+    reasoning_tokens: int
 
 
 class CostDetailsTypedDict(TypedDict):
@@ -76,42 +76,42 @@ class CostDetails(BaseModel):
 class UsageTypedDict(TypedDict):
     r"""Token usage information for the response"""
 
-    input_tokens: float
+    input_tokens: int
     input_tokens_details: InputTokensDetailsTypedDict
-    output_tokens: float
+    output_tokens: int
     output_tokens_details: OutputTokensDetailsTypedDict
-    total_tokens: float
+    total_tokens: int
     cost: NotRequired[Nullable[float]]
     r"""Cost of the completion"""
+    cost_details: NotRequired[CostDetailsTypedDict]
     is_byok: NotRequired[bool]
     r"""Whether a request was made using a Bring Your Own Key configuration"""
-    cost_details: NotRequired[CostDetailsTypedDict]
 
 
 class Usage(BaseModel):
     r"""Token usage information for the response"""
 
-    input_tokens: float
+    input_tokens: int
 
     input_tokens_details: InputTokensDetails
 
-    output_tokens: float
+    output_tokens: int
 
     output_tokens_details: OutputTokensDetails
 
-    total_tokens: float
+    total_tokens: int
 
     cost: OptionalNullable[float] = UNSET
     r"""Cost of the completion"""
 
+    cost_details: Optional[CostDetails] = None
+
     is_byok: Optional[bool] = None
     r"""Whether a request was made using a Bring Your Own Key configuration"""
 
-    cost_details: Optional[CostDetails] = None
-
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["cost", "is_byok", "cost_details"]
+        optional_fields = ["cost", "cost_details", "is_byok"]
         nullable_fields = ["cost"]
         null_default_fields = []
 

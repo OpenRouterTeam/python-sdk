@@ -7,7 +7,6 @@ from openrouter.types import OptionalNullable, UNSET
 from openrouter.utils import get_security_from_env
 from openrouter.utils.unmarshal_json_response import unmarshal_json_response
 from typing import Any, Mapping, Optional
-from typing_extensions import deprecated
 
 
 class Credits(BaseSDK):
@@ -81,10 +80,14 @@ class Credits(BaseSDK):
         if retries == UNSET:
             if self.sdk_configuration.retry_config is not UNSET:
                 retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 60000, 1.5, 3600000), True
+                )
 
         retry_config = None
         if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, ["429", "500", "502", "503", "504"])
+            retry_config = (retries, ["5XX"])
 
         http_res = self.do_request(
             hook_ctx=HookContext(
@@ -200,10 +203,14 @@ class Credits(BaseSDK):
         if retries == UNSET:
             if self.sdk_configuration.retry_config is not UNSET:
                 retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 60000, 1.5, 3600000), True
+                )
 
         retry_config = None
         if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, ["429", "500", "502", "503", "504"])
+            retry_config = (retries, ["5XX"])
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
@@ -238,224 +245,6 @@ class Credits(BaseSDK):
                 errors.InternalServerResponseErrorData, http_res
             )
             raise errors.InternalServerResponseError(response_data, http_res)
-        if utils.match_response(http_res, "4XX", "*"):
-            http_res_text = await utils.stream_to_text_async(http_res)
-            raise errors.OpenRouterDefaultError(
-                "API error occurred", http_res, http_res_text
-            )
-        if utils.match_response(http_res, "5XX", "*"):
-            http_res_text = await utils.stream_to_text_async(http_res)
-            raise errors.OpenRouterDefaultError(
-                "API error occurred", http_res, http_res_text
-            )
-
-        raise errors.OpenRouterDefaultError("Unexpected response received", http_res)
-
-    @deprecated(
-        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
-    )
-    def create_coinbase_charge(
-        self,
-        *,
-        http_referer: Optional[str] = None,
-        x_open_router_title: Optional[str] = None,
-        x_open_router_categories: Optional[str] = None,
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
-    ):
-        r"""Deprecated Coinbase Commerce charge endpoint
-
-        Deprecated. The Coinbase APIs used by this endpoint have been deprecated, so Coinbase Commerce charges have been removed. Use the web credits purchase flow instead.
-
-        :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
-            This is used to track API usage per application.
-
-        :param x_open_router_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
-
-        :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
-
-        :param retries: Override the default retry configuration for this method
-        :param server_url: Override the default server URL for this method
-        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
-        :param http_headers: Additional headers to set or replace on requests.
-        """
-        base_url = None
-        url_variables = None
-        if timeout_ms is None:
-            timeout_ms = self.sdk_configuration.timeout_ms
-
-        if server_url is not None:
-            base_url = server_url
-        else:
-            base_url = self._get_url(base_url, url_variables)
-
-        request = operations.CreateCoinbaseChargeRequest(
-            http_referer=http_referer,
-            x_open_router_title=x_open_router_title,
-            x_open_router_categories=x_open_router_categories,
-        )
-
-        req = self._build_request(
-            method="POST",
-            path="/credits/coinbase",
-            base_url=base_url,
-            url_variables=url_variables,
-            request=request,
-            request_body_required=False,
-            request_has_path_params=False,
-            request_has_query_params=False,
-            user_agent_header="user-agent",
-            accept_header_value="application/json",
-            http_headers=http_headers,
-            _globals=operations.CreateCoinbaseChargeGlobals(
-                http_referer=self.sdk_configuration.globals.http_referer,
-                x_open_router_title=self.sdk_configuration.globals.x_open_router_title,
-                x_open_router_categories=self.sdk_configuration.globals.x_open_router_categories,
-            ),
-            allow_empty_value=None,
-            timeout_ms=timeout_ms,
-        )
-
-        if retries == UNSET:
-            if self.sdk_configuration.retry_config is not UNSET:
-                retries = self.sdk_configuration.retry_config
-
-        retry_config = None
-        if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, ["429", "500", "502", "503", "504"])
-
-        http_res = self.do_request(
-            hook_ctx=HookContext(
-                config=self.sdk_configuration,
-                base_url=base_url or "",
-                operation_id="createCoinbaseCharge",
-                oauth2_scopes=None,
-                security_source=None,
-            ),
-            request=req,
-            error_status_codes=["410", "4XX", "5XX"],
-            retry_config=retry_config,
-        )
-
-        response_data: Any = None
-        if utils.match_response(http_res, "410", "application/json"):
-            response_data = unmarshal_json_response(
-                errors.GoneResponseErrorData, http_res
-            )
-            raise errors.GoneResponseError(response_data, http_res)
-        if utils.match_response(http_res, "2XX", "*"):
-            return
-        if utils.match_response(http_res, "4XX", "*"):
-            http_res_text = utils.stream_to_text(http_res)
-            raise errors.OpenRouterDefaultError(
-                "API error occurred", http_res, http_res_text
-            )
-        if utils.match_response(http_res, "5XX", "*"):
-            http_res_text = utils.stream_to_text(http_res)
-            raise errors.OpenRouterDefaultError(
-                "API error occurred", http_res, http_res_text
-            )
-
-        raise errors.OpenRouterDefaultError("Unexpected response received", http_res)
-
-    @deprecated(
-        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
-    )
-    async def create_coinbase_charge_async(
-        self,
-        *,
-        http_referer: Optional[str] = None,
-        x_open_router_title: Optional[str] = None,
-        x_open_router_categories: Optional[str] = None,
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
-    ):
-        r"""Deprecated Coinbase Commerce charge endpoint
-
-        Deprecated. The Coinbase APIs used by this endpoint have been deprecated, so Coinbase Commerce charges have been removed. Use the web credits purchase flow instead.
-
-        :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
-            This is used to track API usage per application.
-
-        :param x_open_router_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
-
-        :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
-
-        :param retries: Override the default retry configuration for this method
-        :param server_url: Override the default server URL for this method
-        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
-        :param http_headers: Additional headers to set or replace on requests.
-        """
-        base_url = None
-        url_variables = None
-        if timeout_ms is None:
-            timeout_ms = self.sdk_configuration.timeout_ms
-
-        if server_url is not None:
-            base_url = server_url
-        else:
-            base_url = self._get_url(base_url, url_variables)
-
-        request = operations.CreateCoinbaseChargeRequest(
-            http_referer=http_referer,
-            x_open_router_title=x_open_router_title,
-            x_open_router_categories=x_open_router_categories,
-        )
-
-        req = self._build_request_async(
-            method="POST",
-            path="/credits/coinbase",
-            base_url=base_url,
-            url_variables=url_variables,
-            request=request,
-            request_body_required=False,
-            request_has_path_params=False,
-            request_has_query_params=False,
-            user_agent_header="user-agent",
-            accept_header_value="application/json",
-            http_headers=http_headers,
-            _globals=operations.CreateCoinbaseChargeGlobals(
-                http_referer=self.sdk_configuration.globals.http_referer,
-                x_open_router_title=self.sdk_configuration.globals.x_open_router_title,
-                x_open_router_categories=self.sdk_configuration.globals.x_open_router_categories,
-            ),
-            allow_empty_value=None,
-            timeout_ms=timeout_ms,
-        )
-
-        if retries == UNSET:
-            if self.sdk_configuration.retry_config is not UNSET:
-                retries = self.sdk_configuration.retry_config
-
-        retry_config = None
-        if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, ["429", "500", "502", "503", "504"])
-
-        http_res = await self.do_request_async(
-            hook_ctx=HookContext(
-                config=self.sdk_configuration,
-                base_url=base_url or "",
-                operation_id="createCoinbaseCharge",
-                oauth2_scopes=None,
-                security_source=None,
-            ),
-            request=req,
-            error_status_codes=["410", "4XX", "5XX"],
-            retry_config=retry_config,
-        )
-
-        response_data: Any = None
-        if utils.match_response(http_res, "410", "application/json"):
-            response_data = unmarshal_json_response(
-                errors.GoneResponseErrorData, http_res
-            )
-            raise errors.GoneResponseError(response_data, http_res)
-        if utils.match_response(http_res, "2XX", "*"):
-            return
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.OpenRouterDefaultError(

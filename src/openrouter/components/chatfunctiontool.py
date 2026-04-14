@@ -5,15 +5,23 @@ from .chatcontentcachecontrol import (
     ChatContentCacheControl,
     ChatContentCacheControlTypedDict,
 )
-from .chatwebsearchservertool import (
-    ChatWebSearchServerTool,
-    ChatWebSearchServerToolTypedDict,
+from .chatsearchmodelsservertool import (
+    ChatSearchModelsServerTool,
+    ChatSearchModelsServerToolTypedDict,
 )
 from .chatwebsearchshorthand import (
     ChatWebSearchShorthand,
     ChatWebSearchShorthandTypedDict,
 )
 from .datetimeservertool import DatetimeServerTool, DatetimeServerToolTypedDict
+from .imagegenerationservertool_openrouter import (
+    ImageGenerationServerToolOpenRouter,
+    ImageGenerationServerToolOpenRouterTypedDict,
+)
+from .openrouterwebsearchservertool import (
+    OpenRouterWebSearchServerTool,
+    OpenRouterWebSearchServerToolTypedDict,
+)
 from openrouter.types import (
     BaseModel,
     Nullable,
@@ -25,9 +33,6 @@ from openrouter.utils import get_discriminator
 from pydantic import Discriminator, Tag, model_serializer
 from typing import Any, Dict, Literal, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
-
-
-ChatFunctionToolType = Literal["function",]
 
 
 class ChatFunctionToolFunctionFunctionTypedDict(TypedDict):
@@ -89,19 +94,22 @@ class ChatFunctionToolFunctionFunction(BaseModel):
         return m
 
 
+ChatFunctionToolType = Literal["function",]
+
+
 class ChatFunctionToolFunctionTypedDict(TypedDict):
-    type: ChatFunctionToolType
     function: ChatFunctionToolFunctionFunctionTypedDict
     r"""Function definition for tool calling"""
+    type: ChatFunctionToolType
     cache_control: NotRequired[ChatContentCacheControlTypedDict]
     r"""Cache control for the content part"""
 
 
 class ChatFunctionToolFunction(BaseModel):
-    type: ChatFunctionToolType
-
     function: ChatFunctionToolFunctionFunction
     r"""Function definition for tool calling"""
+
+    type: ChatFunctionToolType
 
     cache_control: Optional[ChatContentCacheControl] = None
     r"""Cache control for the content part"""
@@ -111,7 +119,9 @@ ChatFunctionToolTypedDict = TypeAliasType(
     "ChatFunctionToolTypedDict",
     Union[
         DatetimeServerToolTypedDict,
-        ChatWebSearchServerToolTypedDict,
+        ImageGenerationServerToolOpenRouterTypedDict,
+        ChatSearchModelsServerToolTypedDict,
+        OpenRouterWebSearchServerToolTypedDict,
         ChatFunctionToolFunctionTypedDict,
         ChatWebSearchShorthandTypedDict,
     ],
@@ -123,7 +133,13 @@ ChatFunctionTool = Annotated[
     Union[
         Annotated[ChatFunctionToolFunction, Tag("function")],
         Annotated[DatetimeServerTool, Tag("openrouter:datetime")],
-        Annotated[ChatWebSearchServerTool, Tag("openrouter:web_search")],
+        Annotated[
+            ImageGenerationServerToolOpenRouter, Tag("openrouter:image_generation")
+        ],
+        Annotated[
+            ChatSearchModelsServerTool, Tag("openrouter:experimental__search_models")
+        ],
+        Annotated[OpenRouterWebSearchServerTool, Tag("openrouter:web_search")],
         Annotated[ChatWebSearchShorthand, Tag("web_search")],
         Annotated[ChatWebSearchShorthand, Tag("web_search_preview")],
         Annotated[ChatWebSearchShorthand, Tag("web_search_preview_2025_03_11")],

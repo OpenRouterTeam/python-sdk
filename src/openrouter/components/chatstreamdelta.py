@@ -23,26 +23,25 @@ r"""The role of the message author"""
 class ChatStreamDeltaTypedDict(TypedDict):
     r"""Delta changes in streaming response"""
 
-    role: NotRequired[ChatStreamDeltaRole]
-    r"""The role of the message author"""
+    audio: NotRequired[ChatAudioOutputTypedDict]
     content: NotRequired[Nullable[str]]
     r"""Message content delta"""
     reasoning: NotRequired[Nullable[str]]
     r"""Reasoning content delta"""
-    refusal: NotRequired[Nullable[str]]
-    r"""Refusal message delta"""
-    tool_calls: NotRequired[List[ChatStreamToolCallTypedDict]]
-    r"""Tool calls delta"""
     reasoning_details: NotRequired[List[ReasoningDetailUnionTypedDict]]
     r"""Reasoning details for extended thinking models"""
-    audio: NotRequired[ChatAudioOutputTypedDict]
+    refusal: NotRequired[Nullable[str]]
+    r"""Refusal message delta"""
+    role: NotRequired[ChatStreamDeltaRole]
+    r"""The role of the message author"""
+    tool_calls: NotRequired[List[ChatStreamToolCallTypedDict]]
+    r"""Tool calls delta"""
 
 
 class ChatStreamDelta(BaseModel):
     r"""Delta changes in streaming response"""
 
-    role: Optional[ChatStreamDeltaRole] = None
-    r"""The role of the message author"""
+    audio: Optional[ChatAudioOutput] = None
 
     content: OptionalNullable[str] = UNSET
     r"""Message content delta"""
@@ -50,27 +49,28 @@ class ChatStreamDelta(BaseModel):
     reasoning: OptionalNullable[str] = UNSET
     r"""Reasoning content delta"""
 
+    reasoning_details: Optional[List[ReasoningDetailUnion]] = None
+    r"""Reasoning details for extended thinking models"""
+
     refusal: OptionalNullable[str] = UNSET
     r"""Refusal message delta"""
+
+    role: Optional[ChatStreamDeltaRole] = None
+    r"""The role of the message author"""
 
     tool_calls: Optional[List[ChatStreamToolCall]] = None
     r"""Tool calls delta"""
 
-    reasoning_details: Optional[List[ReasoningDetailUnion]] = None
-    r"""Reasoning details for extended thinking models"""
-
-    audio: Optional[ChatAudioOutput] = None
-
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = [
-            "role",
+            "audio",
             "content",
             "reasoning",
-            "refusal",
-            "tool_calls",
             "reasoning_details",
-            "audio",
+            "refusal",
+            "role",
+            "tool_calls",
         ]
         nullable_fields = ["content", "reasoning", "refusal"]
         null_default_fields = []

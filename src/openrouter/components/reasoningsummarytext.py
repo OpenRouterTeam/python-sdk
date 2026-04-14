@@ -10,11 +10,11 @@ ReasoningSummaryTextType = Literal["summary_text",]
 
 
 class ReasoningSummaryTextTypedDict(TypedDict):
-    type: ReasoningSummaryTextType
     text: str
+    type: ReasoningSummaryTextType
 
 
 class ReasoningSummaryText(BaseModel):
-    type: ReasoningSummaryTextType
-
     text: str
+
+    type: ReasoningSummaryTextType

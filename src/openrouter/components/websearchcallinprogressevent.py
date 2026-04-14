@@ -12,19 +12,19 @@ WebSearchCallInProgressEventType = Literal["response.web_search_call.in_progress
 class WebSearchCallInProgressEventTypedDict(TypedDict):
     r"""Web search call in progress"""
 
-    type: WebSearchCallInProgressEventType
     item_id: str
-    output_index: float
-    sequence_number: float
+    output_index: int
+    sequence_number: int
+    type: WebSearchCallInProgressEventType
 
 
 class WebSearchCallInProgressEvent(BaseModel):
     r"""Web search call in progress"""
 
-    type: WebSearchCallInProgressEventType
-
     item_id: str
 
-    output_index: float
+    output_index: int
 
-    sequence_number: float
+    sequence_number: int
+
+    type: WebSearchCallInProgressEventType

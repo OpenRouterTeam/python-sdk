@@ -10,11 +10,11 @@ OpenAIResponsesRefusalContentType = Literal["refusal",]
 
 
 class OpenAIResponsesRefusalContentTypedDict(TypedDict):
-    type: OpenAIResponsesRefusalContentType
     refusal: str
+    type: OpenAIResponsesRefusalContentType
 
 
 class OpenAIResponsesRefusalContent(BaseModel):
-    type: OpenAIResponsesRefusalContentType
-
     refusal: str
+
+    type: OpenAIResponsesRefusalContentType

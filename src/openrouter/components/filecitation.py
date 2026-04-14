@@ -10,17 +10,17 @@ FileCitationType = Literal["file_citation",]
 
 
 class FileCitationTypedDict(TypedDict):
-    type: FileCitationType
     file_id: str
     filename: str
-    index: float
+    index: int
+    type: FileCitationType
 
 
 class FileCitation(BaseModel):
-    type: FileCitationType
-
     file_id: str
 
     filename: str
 
-    index: float
+    index: int
+
+    type: FileCitationType

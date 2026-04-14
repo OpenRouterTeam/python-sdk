@@ -1,0 +1,10 @@
+overlay: 1.0.0
+x-speakeasy-jsonpath: rfc9535
+info:
+  title: Fix nullable pagination params
+  version: 0.0.0
+actions:
+  - target: $..parameters[?@.name == "offset" && @.in == "query"].schema
+    description: Remove nullable from offset query params to fix mypy errors in pagination helpers
+    update:
+      nullable: false

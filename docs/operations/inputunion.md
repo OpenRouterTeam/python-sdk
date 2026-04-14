@@ -1,5 +1,7 @@
 # InputUnion
 
+Text, token, or multimodal input(s) to embed
+
 
 ## Supported Types
 

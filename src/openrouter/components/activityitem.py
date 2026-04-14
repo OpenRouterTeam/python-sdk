@@ -7,33 +7,42 @@ from typing_extensions import Annotated, TypedDict
 
 
 class ActivityItemTypedDict(TypedDict):
+    byok_usage_inference: float
+    r"""BYOK inference cost in USD (external credits spent)"""
+    completion_tokens: int
+    r"""Total completion tokens generated"""
     date_: str
     r"""Date of the activity (YYYY-MM-DD format)"""
+    endpoint_id: str
+    r"""Unique identifier for the endpoint"""
     model: str
     r"""Model slug (e.g., \"openai/gpt-4.1\")"""
     model_permaslug: str
     r"""Model permaslug (e.g., \"openai/gpt-4.1-2025-04-14\")"""
-    endpoint_id: str
-    r"""Unique identifier for the endpoint"""
+    prompt_tokens: int
+    r"""Total prompt tokens used"""
     provider_name: str
     r"""Name of the provider serving this endpoint"""
+    reasoning_tokens: int
+    r"""Total reasoning tokens used"""
+    requests: int
+    r"""Number of requests made"""
     usage: float
     r"""Total cost in USD (OpenRouter credits spent)"""
-    byok_usage_inference: float
-    r"""BYOK inference cost in USD (external credits spent)"""
-    requests: float
-    r"""Number of requests made"""
-    prompt_tokens: float
-    r"""Total prompt tokens used"""
-    completion_tokens: float
-    r"""Total completion tokens generated"""
-    reasoning_tokens: float
-    r"""Total reasoning tokens used"""
 
 
 class ActivityItem(BaseModel):
+    byok_usage_inference: float
+    r"""BYOK inference cost in USD (external credits spent)"""
+
+    completion_tokens: int
+    r"""Total completion tokens generated"""
+
     date_: Annotated[str, pydantic.Field(alias="date")]
     r"""Date of the activity (YYYY-MM-DD format)"""
+
+    endpoint_id: str
+    r"""Unique identifier for the endpoint"""
 
     model: str
     r"""Model slug (e.g., \"openai/gpt-4.1\")"""
@@ -41,26 +50,17 @@ class ActivityItem(BaseModel):
     model_permaslug: str
     r"""Model permaslug (e.g., \"openai/gpt-4.1-2025-04-14\")"""
 
-    endpoint_id: str
-    r"""Unique identifier for the endpoint"""
+    prompt_tokens: int
+    r"""Total prompt tokens used"""
 
     provider_name: str
     r"""Name of the provider serving this endpoint"""
 
-    usage: float
-    r"""Total cost in USD (OpenRouter credits spent)"""
+    reasoning_tokens: int
+    r"""Total reasoning tokens used"""
 
-    byok_usage_inference: float
-    r"""BYOK inference cost in USD (external credits spent)"""
-
-    requests: float
+    requests: int
     r"""Number of requests made"""
 
-    prompt_tokens: float
-    r"""Total prompt tokens used"""
-
-    completion_tokens: float
-    r"""Total completion tokens generated"""
-
-    reasoning_tokens: float
-    r"""Total reasoning tokens used"""
+    usage: float
+    r"""Total cost in USD (OpenRouter credits spent)"""
