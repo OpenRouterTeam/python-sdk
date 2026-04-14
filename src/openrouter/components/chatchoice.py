@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 from .chatassistantmessage import ChatAssistantMessage, ChatAssistantMessageTypedDict
+from .chatfinishreasonenum import ChatFinishReasonEnum
 from .chattokenlogprobs import ChatTokenLogprobs, ChatTokenLogprobsTypedDict
 from openrouter.types import (
     BaseModel,
@@ -10,16 +11,17 @@ from openrouter.types import (
     UNSET,
     UNSET_SENTINEL,
 )
+from openrouter.utils import validate_open_enum
 from pydantic import model_serializer
-from typing import Any
-from typing_extensions import NotRequired, TypedDict
+from pydantic.functional_validators import PlainValidator
+from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class ChatChoiceTypedDict(TypedDict):
     r"""Chat completion choice"""
 
-    finish_reason: Nullable[Any]
-    index: float
+    finish_reason: Nullable[ChatFinishReasonEnum]
+    index: int
     r"""Choice index"""
     message: ChatAssistantMessageTypedDict
     r"""Assistant message for requests and responses"""
@@ -30,9 +32,11 @@ class ChatChoiceTypedDict(TypedDict):
 class ChatChoice(BaseModel):
     r"""Chat completion choice"""
 
-    finish_reason: Nullable[Any]
+    finish_reason: Annotated[
+        Nullable[ChatFinishReasonEnum], PlainValidator(validate_open_enum(False))
+    ]
 
-    index: float
+    index: int
     r"""Choice index"""
 
     message: ChatAssistantMessage

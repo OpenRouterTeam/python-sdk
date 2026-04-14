@@ -12,12 +12,10 @@ with OpenRouter(
     api_key=os.getenv("OPENROUTER_API_KEY", ""),
 ) as open_router:
 
-    res = open_router.beta.responses.send(service_tier="auto", stream=False)
+    res = open_router.analytics.get_user_activity()
 
-    with res as event_stream:
-        for event in event_stream:
-            # handle event
-            print(event, flush=True)
+    # Handle response
+    print(res)
 ```
 
 </br>
@@ -39,12 +37,10 @@ async def main():
         api_key=os.getenv("OPENROUTER_API_KEY", ""),
     ) as open_router:
 
-        res = await open_router.beta.responses.send_async(service_tier="auto", stream=False)
+        res = await open_router.analytics.get_user_activity_async()
 
-        async with res as event_stream:
-            async for event in event_stream:
-                # handle event
-                print(event, flush=True)
+        # Handle response
+        print(res)
 
 asyncio.run(main())
 ```

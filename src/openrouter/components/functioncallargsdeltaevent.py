@@ -12,22 +12,22 @@ FunctionCallArgsDeltaEventType = Literal["response.function_call_arguments.delta
 class FunctionCallArgsDeltaEventTypedDict(TypedDict):
     r"""Event emitted when function call arguments are being streamed"""
 
-    type: FunctionCallArgsDeltaEventType
-    item_id: str
-    output_index: float
     delta: str
-    sequence_number: float
+    item_id: str
+    output_index: int
+    sequence_number: int
+    type: FunctionCallArgsDeltaEventType
 
 
 class FunctionCallArgsDeltaEvent(BaseModel):
     r"""Event emitted when function call arguments are being streamed"""
 
-    type: FunctionCallArgsDeltaEventType
+    delta: str
 
     item_id: str
 
-    output_index: float
+    output_index: int
 
-    delta: str
+    sequence_number: int
 
-    sequence_number: float
+    type: FunctionCallArgsDeltaEventType

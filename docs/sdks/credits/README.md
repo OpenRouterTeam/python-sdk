@@ -7,7 +7,6 @@ Credit management endpoints
 ### Available Operations
 
 * [get_credits](#get_credits) - Get remaining credits
-* [~~create_coinbase_charge~~](#create_coinbase_charge) - Deprecated Coinbase Commerce charge endpoint :warning: **Deprecated**
 
 ## get_credits
 
@@ -56,44 +55,3 @@ with OpenRouter(
 | errors.ForbiddenResponseError      | 403                                | application/json                   |
 | errors.InternalServerResponseError | 500                                | application/json                   |
 | errors.OpenRouterDefaultError      | 4XX, 5XX                           | \*/\*                              |
-
-## ~~create_coinbase_charge~~
-
-Deprecated. The Coinbase APIs used by this endpoint have been deprecated, so Coinbase Commerce charges have been removed. Use the web credits purchase flow instead.
-
-> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
-
-### Example Usage
-
-<!-- UsageSnippet language="python" operationID="createCoinbaseCharge" method="post" path="/credits/coinbase" -->
-```python
-from openrouter import OpenRouter
-
-
-with OpenRouter(
-    http_referer="<value>",
-    x_open_router_title="<value>",
-    x_open_router_categories="<value>",
-) as open_router:
-
-    open_router.credits.create_coinbase_charge()
-
-    # Use the SDK ...
-
-```
-
-### Parameters
-
-| Parameter                                                                                                                                         | Type                                                                                                                                              | Required                                                                                                                                          | Description                                                                                                                                       |
-| ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `http_referer`                                                                                                                                    | *Optional[str]*                                                                                                                                   | :heavy_minus_sign:                                                                                                                                | The app identifier should be your app's URL and is used as the primary identifier for rankings.<br/>This is used to track API usage per application.<br/> |
-| `x_open_router_title`                                                                                                                             | *Optional[str]*                                                                                                                                   | :heavy_minus_sign:                                                                                                                                | The app display name allows you to customize how your app appears in OpenRouter's dashboard.<br/>                                                 |
-| `x_open_router_categories`                                                                                                                        | *Optional[str]*                                                                                                                                   | :heavy_minus_sign:                                                                                                                                | Comma-separated list of app categories (e.g. "cli-agent,cloud-agent"). Used for marketplace rankings.<br/>                                        |
-| `retries`                                                                                                                                         | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                                                  | :heavy_minus_sign:                                                                                                                                | Configuration to override the default retry behavior of the client.                                                                               |
-
-### Errors
-
-| Error Type                    | Status Code                   | Content Type                  |
-| ----------------------------- | ----------------------------- | ----------------------------- |
-| errors.GoneResponseError      | 410                           | application/json              |
-| errors.OpenRouterDefaultError | 4XX, 5XX                      | \*/\*                         |

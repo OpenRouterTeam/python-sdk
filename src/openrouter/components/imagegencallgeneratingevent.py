@@ -12,19 +12,19 @@ ImageGenCallGeneratingEventType = Literal["response.image_generation_call.genera
 class ImageGenCallGeneratingEventTypedDict(TypedDict):
     r"""Image generation call is generating"""
 
-    type: ImageGenCallGeneratingEventType
     item_id: str
-    output_index: float
-    sequence_number: float
+    output_index: int
+    sequence_number: int
+    type: ImageGenCallGeneratingEventType
 
 
 class ImageGenCallGeneratingEvent(BaseModel):
     r"""Image generation call is generating"""
 
-    type: ImageGenCallGeneratingEventType
-
     item_id: str
 
-    output_index: float
+    output_index: int
 
-    sequence_number: float
+    sequence_number: int
+
+    type: ImageGenCallGeneratingEventType

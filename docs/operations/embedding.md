@@ -1,5 +1,7 @@
 # Embedding
 
+Embedding vector as an array of floats or a base64 string
+
 
 ## Supported Types
 

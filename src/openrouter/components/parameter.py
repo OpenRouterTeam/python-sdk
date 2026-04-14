@@ -16,6 +16,7 @@ Parameter = Union[
         "presence_penalty",
         "repetition_penalty",
         "max_tokens",
+        "max_completion_tokens",
         "logit_bias",
         "logprobs",
         "top_logprobs",

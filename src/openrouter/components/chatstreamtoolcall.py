@@ -6,53 +6,53 @@ from typing import Literal, Optional
 from typing_extensions import NotRequired, TypedDict
 
 
-ChatStreamToolCallType = Literal["function",]
-r"""Tool call type"""
-
-
 class ChatStreamToolCallFunctionTypedDict(TypedDict):
     r"""Function call details"""
 
-    name: NotRequired[str]
-    r"""Function name"""
     arguments: NotRequired[str]
     r"""Function arguments as JSON string"""
+    name: NotRequired[str]
+    r"""Function name"""
 
 
 class ChatStreamToolCallFunction(BaseModel):
     r"""Function call details"""
 
+    arguments: Optional[str] = None
+    r"""Function arguments as JSON string"""
+
     name: Optional[str] = None
     r"""Function name"""
 
-    arguments: Optional[str] = None
-    r"""Function arguments as JSON string"""
+
+ChatStreamToolCallType = Literal["function",]
+r"""Tool call type"""
 
 
 class ChatStreamToolCallTypedDict(TypedDict):
     r"""Tool call delta for streaming responses"""
 
-    index: float
+    index: int
     r"""Tool call index in the array"""
+    function: NotRequired[ChatStreamToolCallFunctionTypedDict]
+    r"""Function call details"""
     id: NotRequired[str]
     r"""Tool call identifier"""
     type: NotRequired[ChatStreamToolCallType]
     r"""Tool call type"""
-    function: NotRequired[ChatStreamToolCallFunctionTypedDict]
-    r"""Function call details"""
 
 
 class ChatStreamToolCall(BaseModel):
     r"""Tool call delta for streaming responses"""
 
-    index: float
+    index: int
     r"""Tool call index in the array"""
+
+    function: Optional[ChatStreamToolCallFunction] = None
+    r"""Function call details"""
 
     id: Optional[str] = None
     r"""Tool call identifier"""
 
     type: Optional[ChatStreamToolCallType] = None
     r"""Tool call type"""
-
-    function: Optional[ChatStreamToolCallFunction] = None
-    r"""Function call details"""

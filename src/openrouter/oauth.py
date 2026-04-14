@@ -20,10 +20,10 @@ class OAuth(BaseSDK):
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
-        code_verifier: Optional[str] = None,
         code_challenge_method: OptionalNullable[
             operations.ExchangeAuthCodeForAPIKeyCodeChallengeMethod
         ] = UNSET,
+        code_verifier: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -41,8 +41,8 @@ class OAuth(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
-        :param code_verifier: The code verifier if code_challenge was used in the authorization request
         :param code_challenge_method: The method used to generate the code challenge
+        :param code_verifier: The code verifier if code_challenge was used in the authorization request
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -64,8 +64,8 @@ class OAuth(BaseSDK):
             x_open_router_categories=x_open_router_categories,
             request_body=operations.ExchangeAuthCodeForAPIKeyRequestBody(
                 code=code,
-                code_verifier=code_verifier,
                 code_challenge_method=code_challenge_method,
+                code_verifier=code_verifier,
             ),
         )
 
@@ -101,10 +101,14 @@ class OAuth(BaseSDK):
         if retries == UNSET:
             if self.sdk_configuration.retry_config is not UNSET:
                 retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 60000, 1.5, 3600000), True
+                )
 
         retry_config = None
         if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, ["429", "500", "502", "503", "504"])
+            retry_config = (retries, ["5XX"])
 
         http_res = self.do_request(
             hook_ctx=HookContext(
@@ -161,10 +165,10 @@ class OAuth(BaseSDK):
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
-        code_verifier: Optional[str] = None,
         code_challenge_method: OptionalNullable[
             operations.ExchangeAuthCodeForAPIKeyCodeChallengeMethod
         ] = UNSET,
+        code_verifier: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -182,8 +186,8 @@ class OAuth(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
-        :param code_verifier: The code verifier if code_challenge was used in the authorization request
         :param code_challenge_method: The method used to generate the code challenge
+        :param code_verifier: The code verifier if code_challenge was used in the authorization request
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -205,8 +209,8 @@ class OAuth(BaseSDK):
             x_open_router_categories=x_open_router_categories,
             request_body=operations.ExchangeAuthCodeForAPIKeyRequestBody(
                 code=code,
-                code_verifier=code_verifier,
                 code_challenge_method=code_challenge_method,
+                code_verifier=code_verifier,
             ),
         )
 
@@ -242,10 +246,14 @@ class OAuth(BaseSDK):
         if retries == UNSET:
             if self.sdk_configuration.retry_config is not UNSET:
                 retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 60000, 1.5, 3600000), True
+                )
 
         retry_config = None
         if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, ["429", "500", "502", "503", "504"])
+            retry_config = (retries, ["5XX"])
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
@@ -306,9 +314,9 @@ class OAuth(BaseSDK):
         code_challenge_method: Optional[
             operations.CreateAuthKeysCodeCodeChallengeMethod
         ] = None,
-        limit: Optional[float] = None,
         expires_at: OptionalNullable[datetime] = UNSET,
         key_label: Optional[str] = None,
+        limit: Optional[float] = None,
         usage_limit_type: Optional[operations.UsageLimitType] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -329,9 +337,9 @@ class OAuth(BaseSDK):
 
         :param code_challenge: PKCE code challenge for enhanced security
         :param code_challenge_method: The method used to generate the code challenge
-        :param limit: Credit limit for the API key to be created
         :param expires_at: Optional expiration time for the API key to be created
         :param key_label: Optional custom label for the API key. Defaults to the app name if not provided.
+        :param limit: Credit limit for the API key to be created
         :param usage_limit_type: Optional credit limit reset interval. When set, the credit limit resets on this interval.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -356,9 +364,9 @@ class OAuth(BaseSDK):
                 callback_url=callback_url,
                 code_challenge=code_challenge,
                 code_challenge_method=code_challenge_method,
-                limit=limit,
                 expires_at=expires_at,
                 key_label=key_label,
+                limit=limit,
                 usage_limit_type=usage_limit_type,
             ),
         )
@@ -395,10 +403,14 @@ class OAuth(BaseSDK):
         if retries == UNSET:
             if self.sdk_configuration.retry_config is not UNSET:
                 retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 60000, 1.5, 3600000), True
+                )
 
         retry_config = None
         if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, ["429", "500", "502", "503", "504"])
+            retry_config = (retries, ["5XX"])
 
         http_res = self.do_request(
             hook_ctx=HookContext(
@@ -464,9 +476,9 @@ class OAuth(BaseSDK):
         code_challenge_method: Optional[
             operations.CreateAuthKeysCodeCodeChallengeMethod
         ] = None,
-        limit: Optional[float] = None,
         expires_at: OptionalNullable[datetime] = UNSET,
         key_label: Optional[str] = None,
+        limit: Optional[float] = None,
         usage_limit_type: Optional[operations.UsageLimitType] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -487,9 +499,9 @@ class OAuth(BaseSDK):
 
         :param code_challenge: PKCE code challenge for enhanced security
         :param code_challenge_method: The method used to generate the code challenge
-        :param limit: Credit limit for the API key to be created
         :param expires_at: Optional expiration time for the API key to be created
         :param key_label: Optional custom label for the API key. Defaults to the app name if not provided.
+        :param limit: Credit limit for the API key to be created
         :param usage_limit_type: Optional credit limit reset interval. When set, the credit limit resets on this interval.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -514,9 +526,9 @@ class OAuth(BaseSDK):
                 callback_url=callback_url,
                 code_challenge=code_challenge,
                 code_challenge_method=code_challenge_method,
-                limit=limit,
                 expires_at=expires_at,
                 key_label=key_label,
+                limit=limit,
                 usage_limit_type=usage_limit_type,
             ),
         )
@@ -553,10 +565,14 @@ class OAuth(BaseSDK):
         if retries == UNSET:
             if self.sdk_configuration.retry_config is not UNSET:
                 retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 60000, 1.5, 3600000), True
+                )
 
         retry_config = None
         if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, ["429", "500", "502", "503", "504"])
+            retry_config = (retries, ["5XX"])
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(

@@ -97,12 +97,12 @@ class CreateAuthKeysCodeRequestBodyTypedDict(TypedDict):
     r"""PKCE code challenge for enhanced security"""
     code_challenge_method: NotRequired[CreateAuthKeysCodeCodeChallengeMethod]
     r"""The method used to generate the code challenge"""
-    limit: NotRequired[float]
-    r"""Credit limit for the API key to be created"""
     expires_at: NotRequired[Nullable[datetime]]
     r"""Optional expiration time for the API key to be created"""
     key_label: NotRequired[str]
     r"""Optional custom label for the API key. Defaults to the app name if not provided."""
+    limit: NotRequired[float]
+    r"""Credit limit for the API key to be created"""
     usage_limit_type: NotRequired[UsageLimitType]
     r"""Optional credit limit reset interval. When set, the credit limit resets on this interval."""
 
@@ -120,14 +120,14 @@ class CreateAuthKeysCodeRequestBody(BaseModel):
     ] = None
     r"""The method used to generate the code challenge"""
 
-    limit: Optional[float] = None
-    r"""Credit limit for the API key to be created"""
-
     expires_at: OptionalNullable[datetime] = UNSET
     r"""Optional expiration time for the API key to be created"""
 
     key_label: Optional[str] = None
     r"""Optional custom label for the API key. Defaults to the app name if not provided."""
+
+    limit: Optional[float] = None
+    r"""Credit limit for the API key to be created"""
 
     usage_limit_type: Annotated[
         Optional[UsageLimitType], PlainValidator(validate_open_enum(False))
@@ -139,9 +139,9 @@ class CreateAuthKeysCodeRequestBody(BaseModel):
         optional_fields = [
             "code_challenge",
             "code_challenge_method",
-            "limit",
             "expires_at",
             "key_label",
+            "limit",
             "usage_limit_type",
         ]
         nullable_fields = ["expires_at"]
@@ -227,25 +227,25 @@ class CreateAuthKeysCodeRequest(BaseModel):
 class CreateAuthKeysCodeDataTypedDict(TypedDict):
     r"""Auth code data"""
 
-    id: str
-    r"""The authorization code ID to use in the exchange request"""
-    app_id: float
+    app_id: int
     r"""The application ID associated with this auth code"""
     created_at: str
     r"""ISO 8601 timestamp of when the auth code was created"""
+    id: str
+    r"""The authorization code ID to use in the exchange request"""
 
 
 class CreateAuthKeysCodeData(BaseModel):
     r"""Auth code data"""
 
-    id: str
-    r"""The authorization code ID to use in the exchange request"""
-
-    app_id: float
+    app_id: int
     r"""The application ID associated with this auth code"""
 
     created_at: str
     r"""ISO 8601 timestamp of when the auth code was created"""
+
+    id: str
+    r"""The authorization code ID to use in the exchange request"""
 
 
 class CreateAuthKeysCodeResponseTypedDict(TypedDict):

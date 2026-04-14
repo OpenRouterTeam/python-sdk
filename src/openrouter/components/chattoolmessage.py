@@ -7,9 +7,6 @@ from typing import List, Literal, Union
 from typing_extensions import TypeAliasType, TypedDict
 
 
-ChatToolMessageRole = Literal["tool",]
-
-
 ChatToolMessageContentTypedDict = TypeAliasType(
     "ChatToolMessageContentTypedDict", Union[str, List[ChatContentItemsTypedDict]]
 )
@@ -22,12 +19,15 @@ ChatToolMessageContent = TypeAliasType(
 r"""Tool response content"""
 
 
+ChatToolMessageRole = Literal["tool",]
+
+
 class ChatToolMessageTypedDict(TypedDict):
     r"""Tool response message"""
 
-    role: ChatToolMessageRole
     content: ChatToolMessageContentTypedDict
     r"""Tool response content"""
+    role: ChatToolMessageRole
     tool_call_id: str
     r"""ID of the assistant message tool call this message responds to"""
 
@@ -35,10 +35,10 @@ class ChatToolMessageTypedDict(TypedDict):
 class ChatToolMessage(BaseModel):
     r"""Tool response message"""
 
-    role: ChatToolMessageRole
-
     content: ChatToolMessageContent
     r"""Tool response content"""
+
+    role: ChatToolMessageRole
 
     tool_call_id: str
     r"""ID of the assistant message tool call this message responds to"""

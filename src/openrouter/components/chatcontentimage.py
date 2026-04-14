@@ -8,9 +8,6 @@ from typing import Literal, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-ChatContentImageType = Literal["image_url",]
-
-
 ChatContentImageDetail = Union[
     Literal[
         "auto",
@@ -39,16 +36,19 @@ class ChatContentImageImageURL(BaseModel):
     r"""Image detail level for vision models"""
 
 
+ChatContentImageType = Literal["image_url",]
+
+
 class ChatContentImageTypedDict(TypedDict):
     r"""Image content part for vision models"""
 
-    type: ChatContentImageType
     image_url: ChatContentImageImageURLTypedDict
+    type: ChatContentImageType
 
 
 class ChatContentImage(BaseModel):
     r"""Image content part for vision models"""
 
-    type: ChatContentImageType
-
     image_url: ChatContentImageImageURL
+
+    type: ChatContentImageType

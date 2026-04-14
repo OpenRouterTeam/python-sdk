@@ -10,12 +10,6 @@ from typing import Literal, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
-TypeCustom = Literal["custom",]
-
-
-FormatTypeGrammar = Literal["grammar",]
-
-
 Syntax = Union[
     Literal[
         "lark",
@@ -25,18 +19,21 @@ Syntax = Union[
 ]
 
 
+FormatTypeGrammar = Literal["grammar",]
+
+
 class FormatGrammarTypedDict(TypedDict):
-    type: FormatTypeGrammar
     definition: str
     syntax: Syntax
+    type: FormatTypeGrammar
 
 
 class FormatGrammar(BaseModel):
-    type: FormatTypeGrammar
-
     definition: str
 
     syntax: Annotated[Syntax, PlainValidator(validate_open_enum(False))]
+
+    type: FormatTypeGrammar
 
 
 FormatTypeText = Literal["text",]
@@ -61,11 +58,14 @@ Format = Annotated[
 ]
 
 
+TypeCustom = Literal["custom",]
+
+
 class CustomToolTypedDict(TypedDict):
     r"""Custom tool configuration"""
 
-    type: TypeCustom
     name: str
+    type: TypeCustom
     description: NotRequired[str]
     format_: NotRequired[FormatTypedDict]
 
@@ -73,9 +73,9 @@ class CustomToolTypedDict(TypedDict):
 class CustomTool(BaseModel):
     r"""Custom tool configuration"""
 
-    type: TypeCustom
-
     name: str
+
+    type: TypeCustom
 
     description: Optional[str] = None
 

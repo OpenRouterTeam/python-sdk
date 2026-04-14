@@ -13,21 +13,28 @@ from openrouter.utils import validate_open_enum
 from pydantic import model_serializer
 from pydantic.functional_validators import PlainValidator
 from typing import Any, Dict, List, Literal, Optional, Union
-from typing_extensions import Annotated, NotRequired, TypedDict
-
-
-McpServerToolType = Literal["mcp",]
+from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
 class AllowedToolsTypedDict(TypedDict):
-    tool_names: NotRequired[List[str]]
     read_only: NotRequired[bool]
+    tool_names: NotRequired[List[str]]
 
 
 class AllowedTools(BaseModel):
+    read_only: Optional[bool] = None
+
     tool_names: Optional[List[str]] = None
 
-    read_only: Optional[bool] = None
+
+AllowedToolsUnionTypedDict = TypeAliasType(
+    "AllowedToolsUnionTypedDict", Union[AllowedToolsTypedDict, List[str], Any]
+)
+
+
+AllowedToolsUnion = TypeAliasType(
+    "AllowedToolsUnion", Union[AllowedTools, List[str], Any]
+)
 
 
 ConnectorID = Union[
@@ -51,14 +58,6 @@ RequireApprovalNever = Literal["never",]
 RequireApprovalAlways = Literal["always",]
 
 
-class NeverTypedDict(TypedDict):
-    tool_names: NotRequired[List[str]]
-
-
-class Never(BaseModel):
-    tool_names: Optional[List[str]] = None
-
-
 class AlwaysTypedDict(TypedDict):
     tool_names: NotRequired[List[str]]
 
@@ -67,27 +66,50 @@ class Always(BaseModel):
     tool_names: Optional[List[str]] = None
 
 
+class NeverTypedDict(TypedDict):
+    tool_names: NotRequired[List[str]]
+
+
+class Never(BaseModel):
+    tool_names: Optional[List[str]] = None
+
+
 class RequireApprovalTypedDict(TypedDict):
-    never: NotRequired[NeverTypedDict]
     always: NotRequired[AlwaysTypedDict]
+    never: NotRequired[NeverTypedDict]
 
 
 class RequireApproval(BaseModel):
+    always: Optional[Always] = None
+
     never: Optional[Never] = None
 
-    always: Optional[Always] = None
+
+RequireApprovalUnionTypedDict = TypeAliasType(
+    "RequireApprovalUnionTypedDict",
+    Union[RequireApprovalTypedDict, RequireApprovalAlways, RequireApprovalNever, Any],
+)
+
+
+RequireApprovalUnion = TypeAliasType(
+    "RequireApprovalUnion",
+    Union[RequireApproval, RequireApprovalAlways, RequireApprovalNever, Any],
+)
+
+
+McpServerToolType = Literal["mcp",]
 
 
 class McpServerToolTypedDict(TypedDict):
     r"""MCP (Model Context Protocol) tool configuration"""
 
-    type: McpServerToolType
     server_label: str
-    allowed_tools: NotRequired[Nullable[Any]]
+    type: McpServerToolType
+    allowed_tools: NotRequired[Nullable[AllowedToolsUnionTypedDict]]
     authorization: NotRequired[str]
     connector_id: NotRequired[ConnectorID]
     headers: NotRequired[Nullable[Dict[str, str]]]
-    require_approval: NotRequired[Nullable[Any]]
+    require_approval: NotRequired[Nullable[RequireApprovalUnionTypedDict]]
     server_description: NotRequired[str]
     server_url: NotRequired[str]
 
@@ -95,11 +117,11 @@ class McpServerToolTypedDict(TypedDict):
 class McpServerTool(BaseModel):
     r"""MCP (Model Context Protocol) tool configuration"""
 
-    type: McpServerToolType
-
     server_label: str
 
-    allowed_tools: OptionalNullable[Any] = UNSET
+    type: McpServerToolType
+
+    allowed_tools: OptionalNullable[AllowedToolsUnion] = UNSET
 
     authorization: Optional[str] = None
 
@@ -109,7 +131,7 @@ class McpServerTool(BaseModel):
 
     headers: OptionalNullable[Dict[str, str]] = UNSET
 
-    require_approval: OptionalNullable[Any] = UNSET
+    require_approval: OptionalNullable[RequireApprovalUnion] = UNSET
 
     server_description: Optional[str] = None
 

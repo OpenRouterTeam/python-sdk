@@ -33,3 +33,9 @@ value: components.OpenAIResponsesToolChoiceFunction = /* values here */
 value: components.OpenAIResponsesToolChoice = /* values here */
 ```
 
+### `components.ToolChoiceAllowed`
+
+```python
+value: components.ToolChoiceAllowed = /* values here */
+```
+

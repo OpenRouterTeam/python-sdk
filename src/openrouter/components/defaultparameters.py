@@ -9,53 +9,47 @@ from openrouter.types import (
     UNSET_SENTINEL,
 )
 from pydantic import model_serializer
+from typing import Optional
 from typing_extensions import NotRequired, TypedDict
 
 
 class DefaultParametersTypedDict(TypedDict):
     r"""Default parameters for this model"""
 
-    temperature: NotRequired[Nullable[float]]
-    top_p: NotRequired[Nullable[float]]
+    frequency_penalty: NotRequired[float]
+    presence_penalty: NotRequired[float]
+    repetition_penalty: NotRequired[float]
+    temperature: NotRequired[float]
     top_k: NotRequired[Nullable[int]]
-    frequency_penalty: NotRequired[Nullable[float]]
-    presence_penalty: NotRequired[Nullable[float]]
-    repetition_penalty: NotRequired[Nullable[float]]
+    top_p: NotRequired[float]
 
 
 class DefaultParameters(BaseModel):
     r"""Default parameters for this model"""
 
-    temperature: OptionalNullable[float] = UNSET
+    frequency_penalty: Optional[float] = None
 
-    top_p: OptionalNullable[float] = UNSET
+    presence_penalty: Optional[float] = None
+
+    repetition_penalty: Optional[float] = None
+
+    temperature: Optional[float] = None
 
     top_k: OptionalNullable[int] = UNSET
 
-    frequency_penalty: OptionalNullable[float] = UNSET
-
-    presence_penalty: OptionalNullable[float] = UNSET
-
-    repetition_penalty: OptionalNullable[float] = UNSET
+    top_p: Optional[float] = None
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = [
-            "temperature",
-            "top_p",
-            "top_k",
             "frequency_penalty",
             "presence_penalty",
             "repetition_penalty",
-        ]
-        nullable_fields = [
             "temperature",
-            "top_p",
             "top_k",
-            "frequency_penalty",
-            "presence_penalty",
-            "repetition_penalty",
+            "top_p",
         ]
+        nullable_fields = ["top_k"]
         null_default_fields = []
 
         serialized = handler(self)

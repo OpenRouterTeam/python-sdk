@@ -20,46 +20,6 @@ from typing import Any, List, Literal, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
-EasyInputMessageTypeMessage = Literal["message",]
-
-
-EasyInputMessageRoleDeveloper = Literal["developer",]
-
-
-EasyInputMessageRoleAssistant = Literal["assistant",]
-
-
-EasyInputMessageRoleSystem = Literal["system",]
-
-
-EasyInputMessageRoleUser = Literal["user",]
-
-
-EasyInputMessageRoleUnionTypedDict = TypeAliasType(
-    "EasyInputMessageRoleUnionTypedDict",
-    Union[
-        EasyInputMessageRoleUser,
-        EasyInputMessageRoleSystem,
-        EasyInputMessageRoleAssistant,
-        EasyInputMessageRoleDeveloper,
-    ],
-)
-
-
-EasyInputMessageRoleUnion = TypeAliasType(
-    "EasyInputMessageRoleUnion",
-    Union[
-        EasyInputMessageRoleUser,
-        EasyInputMessageRoleSystem,
-        EasyInputMessageRoleAssistant,
-        EasyInputMessageRoleDeveloper,
-    ],
-)
-
-
-EasyInputMessageContentType = Literal["input_image",]
-
-
 EasyInputMessageDetail = Union[
     Literal[
         "auto",
@@ -70,20 +30,23 @@ EasyInputMessageDetail = Union[
 ]
 
 
+EasyInputMessageContentType = Literal["input_image",]
+
+
 class EasyInputMessageContentInputImageTypedDict(TypedDict):
     r"""Image input content item"""
 
-    type: EasyInputMessageContentType
     detail: EasyInputMessageDetail
+    type: EasyInputMessageContentType
     image_url: NotRequired[Nullable[str]]
 
 
 class EasyInputMessageContentInputImage(BaseModel):
     r"""Image input content item"""
 
-    type: EasyInputMessageContentType
-
     detail: Annotated[EasyInputMessageDetail, PlainValidator(validate_open_enum(False))]
+
+    type: EasyInputMessageContentType
 
     image_url: OptionalNullable[str] = UNSET
 
@@ -174,27 +137,64 @@ EasyInputMessagePhaseUnion = TypeAliasType(
 r"""The phase of an assistant message. Use `commentary` for an intermediate assistant message and `final_answer` for the final assistant message. For follow-up requests with models like `gpt-5.3-codex` and later, preserve and resend phase on all assistant messages. Omitting it can degrade performance. Not used for user messages."""
 
 
+EasyInputMessageRoleDeveloper = Literal["developer",]
+
+
+EasyInputMessageRoleAssistant = Literal["assistant",]
+
+
+EasyInputMessageRoleSystem = Literal["system",]
+
+
+EasyInputMessageRoleUser = Literal["user",]
+
+
+EasyInputMessageRoleUnionTypedDict = TypeAliasType(
+    "EasyInputMessageRoleUnionTypedDict",
+    Union[
+        EasyInputMessageRoleUser,
+        EasyInputMessageRoleSystem,
+        EasyInputMessageRoleAssistant,
+        EasyInputMessageRoleDeveloper,
+    ],
+)
+
+
+EasyInputMessageRoleUnion = TypeAliasType(
+    "EasyInputMessageRoleUnion",
+    Union[
+        EasyInputMessageRoleUser,
+        EasyInputMessageRoleSystem,
+        EasyInputMessageRoleAssistant,
+        EasyInputMessageRoleDeveloper,
+    ],
+)
+
+
+EasyInputMessageTypeMessage = Literal["message",]
+
+
 class EasyInputMessageTypedDict(TypedDict):
     role: EasyInputMessageRoleUnionTypedDict
-    type: NotRequired[EasyInputMessageTypeMessage]
     content: NotRequired[Nullable[EasyInputMessageContentUnion2TypedDict]]
     phase: NotRequired[Nullable[EasyInputMessagePhaseUnionTypedDict]]
     r"""The phase of an assistant message. Use `commentary` for an intermediate assistant message and `final_answer` for the final assistant message. For follow-up requests with models like `gpt-5.3-codex` and later, preserve and resend phase on all assistant messages. Omitting it can degrade performance. Not used for user messages."""
+    type: NotRequired[EasyInputMessageTypeMessage]
 
 
 class EasyInputMessage(BaseModel):
     role: EasyInputMessageRoleUnion
-
-    type: Optional[EasyInputMessageTypeMessage] = None
 
     content: OptionalNullable[EasyInputMessageContentUnion2] = UNSET
 
     phase: OptionalNullable[EasyInputMessagePhaseUnion] = UNSET
     r"""The phase of an assistant message. Use `commentary` for an intermediate assistant message and `final_answer` for the final assistant message. For follow-up requests with models like `gpt-5.3-codex` and later, preserve and resend phase on all assistant messages. Omitting it can degrade performance. Not used for user messages."""
 
+    type: Optional[EasyInputMessageTypeMessage] = None
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["type", "content", "phase"]
+        optional_fields = ["content", "phase", "type"]
         nullable_fields = ["content", "phase"]
         null_default_fields = []
 

@@ -16,12 +16,6 @@ from typing import List, Literal, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
-TypeCodeInterpreter = Literal["code_interpreter",]
-
-
-ContainerType = Literal["auto",]
-
-
 MemoryLimit = Union[
     Literal[
         "1g",
@@ -31,6 +25,9 @@ MemoryLimit = Union[
     ],
     UnrecognizedStr,
 ]
+
+
+ContainerType = Literal["auto",]
 
 
 class ContainerAutoTypedDict(TypedDict):
@@ -87,16 +84,19 @@ ContainerTypedDict = TypeAliasType(
 Container = TypeAliasType("Container", Union[ContainerAuto, str])
 
 
+TypeCodeInterpreter = Literal["code_interpreter",]
+
+
 class CodeInterpreterServerToolTypedDict(TypedDict):
     r"""Code interpreter tool configuration"""
 
-    type: TypeCodeInterpreter
     container: ContainerTypedDict
+    type: TypeCodeInterpreter
 
 
 class CodeInterpreterServerTool(BaseModel):
     r"""Code interpreter tool configuration"""
 
-    type: TypeCodeInterpreter
-
     container: Container
+
+    type: TypeCodeInterpreter

@@ -19,17 +19,15 @@ WebSearchUserLocationType = Literal["approximate",]
 class WebSearchUserLocationTypedDict(TypedDict):
     r"""User location information for web search"""
 
-    type: NotRequired[WebSearchUserLocationType]
     city: NotRequired[Nullable[str]]
     country: NotRequired[Nullable[str]]
     region: NotRequired[Nullable[str]]
     timezone: NotRequired[Nullable[str]]
+    type: NotRequired[WebSearchUserLocationType]
 
 
 class WebSearchUserLocation(BaseModel):
     r"""User location information for web search"""
-
-    type: Optional[WebSearchUserLocationType] = None
 
     city: OptionalNullable[str] = UNSET
 
@@ -39,9 +37,11 @@ class WebSearchUserLocation(BaseModel):
 
     timezone: OptionalNullable[str] = UNSET
 
+    type: Optional[WebSearchUserLocationType] = None
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["type", "city", "country", "region", "timezone"]
+        optional_fields = ["city", "country", "region", "timezone", "type"]
         nullable_fields = ["city", "country", "region", "timezone"]
         null_default_fields = []
 

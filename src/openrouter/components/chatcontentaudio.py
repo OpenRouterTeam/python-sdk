@@ -7,9 +7,6 @@ from typing import Literal
 from typing_extensions import Annotated, TypedDict
 
 
-ChatContentAudioType = Literal["input_audio",]
-
-
 class ChatContentAudioInputAudioTypedDict(TypedDict):
     data: str
     r"""Base64 encoded audio data"""
@@ -25,16 +22,19 @@ class ChatContentAudioInputAudio(BaseModel):
     r"""Audio format (e.g., wav, mp3, flac, m4a, ogg, aiff, aac, pcm16, pcm24). Supported formats vary by provider."""
 
 
+ChatContentAudioType = Literal["input_audio",]
+
+
 class ChatContentAudioTypedDict(TypedDict):
     r"""Audio input content part. Supported audio formats vary by provider."""
 
-    type: ChatContentAudioType
     input_audio: ChatContentAudioInputAudioTypedDict
+    type: ChatContentAudioType
 
 
 class ChatContentAudio(BaseModel):
     r"""Audio input content part. Supported audio formats vary by provider."""
 
-    type: ChatContentAudioType
-
     input_audio: ChatContentAudioInputAudio
+
+    type: ChatContentAudioType

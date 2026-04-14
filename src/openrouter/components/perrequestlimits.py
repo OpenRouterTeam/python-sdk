@@ -8,17 +8,17 @@ from typing_extensions import TypedDict
 class PerRequestLimitsTypedDict(TypedDict):
     r"""Per-request token limits"""
 
-    prompt_tokens: float
-    r"""Maximum prompt tokens per request"""
     completion_tokens: float
     r"""Maximum completion tokens per request"""
+    prompt_tokens: float
+    r"""Maximum prompt tokens per request"""
 
 
 class PerRequestLimits(BaseModel):
     r"""Per-request token limits"""
 
-    prompt_tokens: float
-    r"""Maximum prompt tokens per request"""
-
     completion_tokens: float
     r"""Maximum completion tokens per request"""
+
+    prompt_tokens: float
+    r"""Maximum prompt tokens per request"""

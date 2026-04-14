@@ -12,25 +12,25 @@ RefusalDeltaEventType = Literal["response.refusal.delta",]
 class RefusalDeltaEventTypedDict(TypedDict):
     r"""Event emitted when a refusal delta is streamed"""
 
-    type: RefusalDeltaEventType
-    output_index: float
-    item_id: str
-    content_index: float
+    content_index: int
     delta: str
-    sequence_number: float
+    item_id: str
+    output_index: int
+    sequence_number: int
+    type: RefusalDeltaEventType
 
 
 class RefusalDeltaEvent(BaseModel):
     r"""Event emitted when a refusal delta is streamed"""
 
-    type: RefusalDeltaEventType
-
-    output_index: float
-
-    item_id: str
-
-    content_index: float
+    content_index: int
 
     delta: str
 
-    sequence_number: float
+    item_id: str
+
+    output_index: int
+
+    sequence_number: int
+
+    type: RefusalDeltaEventType

@@ -5,4 +5,4 @@
 
 | Field              | Type               | Required           | Description        |
 | ------------------ | ------------------ | ------------------ | ------------------ |
-| `reasoning_tokens` | *float*            | :heavy_check_mark: | N/A                |
+| `reasoning_tokens` | *int*              | :heavy_check_mark: | N/A                |

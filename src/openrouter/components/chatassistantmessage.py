@@ -18,9 +18,6 @@ from typing import Any, List, Literal, Optional, Union
 from typing_extensions import NotRequired, TypeAliasType, TypedDict
 
 
-ChatAssistantMessageRole = Literal["assistant",]
-
-
 ChatAssistantMessageContentTypedDict = TypeAliasType(
     "ChatAssistantMessageContentTypedDict",
     Union[str, List[ChatContentItemsTypedDict], Any],
@@ -34,26 +31,29 @@ ChatAssistantMessageContent = TypeAliasType(
 r"""Assistant message content"""
 
 
+ChatAssistantMessageRole = Literal["assistant",]
+
+
 class ChatAssistantMessageTypedDict(TypedDict):
     r"""Assistant message for requests and responses"""
 
     role: ChatAssistantMessageRole
+    audio: NotRequired[ChatAudioOutputTypedDict]
+    r"""Audio output data or reference"""
     content: NotRequired[Nullable[ChatAssistantMessageContentTypedDict]]
     r"""Assistant message content"""
+    images: NotRequired[List[ChatAssistantImagesTypedDict]]
+    r"""Generated images from image generation models"""
     name: NotRequired[str]
     r"""Optional name for the assistant"""
-    tool_calls: NotRequired[List[ChatToolCallTypedDict]]
-    r"""Tool calls made by the assistant"""
-    refusal: NotRequired[Nullable[str]]
-    r"""Refusal message if content was refused"""
     reasoning: NotRequired[Nullable[str]]
     r"""Reasoning output"""
     reasoning_details: NotRequired[List[ReasoningDetailUnionTypedDict]]
     r"""Reasoning details for extended thinking models"""
-    images: NotRequired[List[ChatAssistantImagesTypedDict]]
-    r"""Generated images from image generation models"""
-    audio: NotRequired[ChatAudioOutputTypedDict]
-    r"""Audio output data or reference"""
+    refusal: NotRequired[Nullable[str]]
+    r"""Refusal message if content was refused"""
+    tool_calls: NotRequired[List[ChatToolCallTypedDict]]
+    r"""Tool calls made by the assistant"""
 
 
 class ChatAssistantMessage(BaseModel):
@@ -61,17 +61,17 @@ class ChatAssistantMessage(BaseModel):
 
     role: ChatAssistantMessageRole
 
+    audio: Optional[ChatAudioOutput] = None
+    r"""Audio output data or reference"""
+
     content: OptionalNullable[ChatAssistantMessageContent] = UNSET
     r"""Assistant message content"""
 
+    images: Optional[List[ChatAssistantImages]] = None
+    r"""Generated images from image generation models"""
+
     name: Optional[str] = None
     r"""Optional name for the assistant"""
-
-    tool_calls: Optional[List[ChatToolCall]] = None
-    r"""Tool calls made by the assistant"""
-
-    refusal: OptionalNullable[str] = UNSET
-    r"""Refusal message if content was refused"""
 
     reasoning: OptionalNullable[str] = UNSET
     r"""Reasoning output"""
@@ -79,25 +79,25 @@ class ChatAssistantMessage(BaseModel):
     reasoning_details: Optional[List[ReasoningDetailUnion]] = None
     r"""Reasoning details for extended thinking models"""
 
-    images: Optional[List[ChatAssistantImages]] = None
-    r"""Generated images from image generation models"""
+    refusal: OptionalNullable[str] = UNSET
+    r"""Refusal message if content was refused"""
 
-    audio: Optional[ChatAudioOutput] = None
-    r"""Audio output data or reference"""
+    tool_calls: Optional[List[ChatToolCall]] = None
+    r"""Tool calls made by the assistant"""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = [
+            "audio",
             "content",
+            "images",
             "name",
-            "tool_calls",
-            "refusal",
             "reasoning",
             "reasoning_details",
-            "images",
-            "audio",
+            "refusal",
+            "tool_calls",
         ]
-        nullable_fields = ["content", "refusal", "reasoning"]
+        nullable_fields = ["content", "reasoning", "refusal"]
         null_default_fields = []
 
         serialized = handler(self)

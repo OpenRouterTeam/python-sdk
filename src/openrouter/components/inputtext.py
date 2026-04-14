@@ -12,13 +12,13 @@ InputTextType = Literal["input_text",]
 class InputTextTypedDict(TypedDict):
     r"""Text input content item"""
 
-    type: InputTextType
     text: str
+    type: InputTextType
 
 
 class InputText(BaseModel):
     r"""Text input content item"""
 
-    type: InputTextType
-
     text: str
+
+    type: InputTextType

@@ -2,7 +2,14 @@
 
 from __future__ import annotations
 from openrouter.components import providerpreferences as components_providerpreferences
-from openrouter.types import BaseModel, UnrecognizedStr
+from openrouter.types import (
+    BaseModel,
+    Nullable,
+    OptionalNullable,
+    UNSET,
+    UNSET_SENTINEL,
+    UnrecognizedStr,
+)
 from openrouter.utils import (
     FieldMetadata,
     HeaderMetadata,
@@ -11,7 +18,7 @@ from openrouter.utils import (
     validate_open_enum,
 )
 import pydantic
-from pydantic import Discriminator, Tag
+from pydantic import Discriminator, Tag, model_serializer
 from pydantic.functional_validators import PlainValidator
 from typing import List, Literal, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
@@ -63,7 +70,14 @@ class CreateEmbeddingsGlobals(BaseModel):
     """
 
 
-TypeImageURL = Literal["image_url",]
+EncodingFormat = Union[
+    Literal[
+        "float",
+        "base64",
+    ],
+    UnrecognizedStr,
+]
+r"""The format of the output embeddings"""
 
 
 class ImageURLTypedDict(TypedDict):
@@ -74,29 +88,32 @@ class ImageURL(BaseModel):
     url: str
 
 
+TypeImageURL = Literal["image_url",]
+
+
 class ContentImageURLTypedDict(TypedDict):
-    type: TypeImageURL
     image_url: ImageURLTypedDict
+    type: TypeImageURL
 
 
 class ContentImageURL(BaseModel):
-    type: TypeImageURL
-
     image_url: ImageURL
+
+    type: TypeImageURL
 
 
 TypeText = Literal["text",]
 
 
 class ContentTextTypedDict(TypedDict):
-    type: TypeText
     text: str
+    type: TypeText
 
 
 class ContentText(BaseModel):
-    type: TypeText
-
     text: str
+
+    type: TypeText
 
 
 ContentTypedDict = TypeAliasType(
@@ -125,50 +142,97 @@ InputUnionTypedDict = TypeAliasType(
     "InputUnionTypedDict",
     Union[str, List[str], List[float], List[List[float]], List[InputTypedDict]],
 )
+r"""Text, token, or multimodal input(s) to embed"""
 
 
 InputUnion = TypeAliasType(
     "InputUnion", Union[str, List[str], List[float], List[List[float]], List[Input]]
 )
-
-
-EncodingFormat = Union[
-    Literal[
-        "float",
-        "base64",
-    ],
-    UnrecognizedStr,
-]
+r"""Text, token, or multimodal input(s) to embed"""
 
 
 class CreateEmbeddingsRequestBodyTypedDict(TypedDict):
+    r"""Embeddings request input"""
+
     input: InputUnionTypedDict
+    r"""Text, token, or multimodal input(s) to embed"""
     model: str
-    encoding_format: NotRequired[EncodingFormat]
+    r"""The model to use for embeddings"""
     dimensions: NotRequired[int]
-    user: NotRequired[str]
-    provider: NotRequired[components_providerpreferences.ProviderPreferencesTypedDict]
-    r"""Provider routing preferences for the request."""
+    r"""The number of dimensions for the output embeddings"""
+    encoding_format: NotRequired[EncodingFormat]
+    r"""The format of the output embeddings"""
     input_type: NotRequired[str]
+    r"""The type of input (e.g. search_query, search_document)"""
+    provider: NotRequired[
+        Nullable[components_providerpreferences.ProviderPreferencesTypedDict]
+    ]
+    user: NotRequired[str]
+    r"""A unique identifier for the end-user"""
 
 
 class CreateEmbeddingsRequestBody(BaseModel):
+    r"""Embeddings request input"""
+
     input: InputUnion
+    r"""Text, token, or multimodal input(s) to embed"""
 
     model: str
+    r"""The model to use for embeddings"""
+
+    dimensions: Optional[int] = None
+    r"""The number of dimensions for the output embeddings"""
 
     encoding_format: Annotated[
         Optional[EncodingFormat], PlainValidator(validate_open_enum(False))
     ] = None
-
-    dimensions: Optional[int] = None
-
-    user: Optional[str] = None
-
-    provider: Optional[components_providerpreferences.ProviderPreferences] = None
-    r"""Provider routing preferences for the request."""
+    r"""The format of the output embeddings"""
 
     input_type: Optional[str] = None
+    r"""The type of input (e.g. search_query, search_document)"""
+
+    provider: OptionalNullable[components_providerpreferences.ProviderPreferences] = (
+        UNSET
+    )
+
+    user: Optional[str] = None
+    r"""A unique identifier for the end-user"""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = [
+            "dimensions",
+            "encoding_format",
+            "input_type",
+            "provider",
+            "user",
+        ]
+        nullable_fields = ["provider"]
+        null_default_fields = []
+
+        serialized = handler(self)
+
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+            serialized.pop(k, None)
+
+            optional_nullable = k in optional_fields and k in nullable_fields
+            is_set = (
+                self.__pydantic_fields_set__.intersection({n})
+                or k in null_default_fields
+            )  # pylint: disable=no-member
+
+            if val is not None and val != UNSET_SENTINEL:
+                m[k] = val
+            elif val != UNSET_SENTINEL and (
+                not k in optional_fields or (optional_nullable and is_set)
+            ):
+                m[k] = val
+
+        return m
 
 
 class CreateEmbeddingsRequestTypedDict(TypedDict):
@@ -223,68 +287,96 @@ class CreateEmbeddingsRequest(BaseModel):
     """
 
 
-Object = Literal["list",]
+EmbeddingTypedDict = TypeAliasType("EmbeddingTypedDict", Union[List[float], str])
+r"""Embedding vector as an array of floats or a base64 string"""
+
+
+Embedding = TypeAliasType("Embedding", Union[List[float], str])
+r"""Embedding vector as an array of floats or a base64 string"""
 
 
 ObjectEmbedding = Literal["embedding",]
 
 
-EmbeddingTypedDict = TypeAliasType("EmbeddingTypedDict", Union[List[float], str])
-
-
-Embedding = TypeAliasType("Embedding", Union[List[float], str])
-
-
 class CreateEmbeddingsDataTypedDict(TypedDict):
-    object: ObjectEmbedding
+    r"""A single embedding object"""
+
     embedding: EmbeddingTypedDict
-    index: NotRequired[float]
+    r"""Embedding vector as an array of floats or a base64 string"""
+    object: ObjectEmbedding
+    index: NotRequired[int]
+    r"""Index of the embedding in the input list"""
 
 
 class CreateEmbeddingsData(BaseModel):
-    object: ObjectEmbedding
+    r"""A single embedding object"""
 
     embedding: Embedding
+    r"""Embedding vector as an array of floats or a base64 string"""
 
-    index: Optional[float] = None
+    object: ObjectEmbedding
+
+    index: Optional[int] = None
+    r"""Index of the embedding in the input list"""
 
 
-class UsageTypedDict(TypedDict):
-    prompt_tokens: float
-    total_tokens: float
+Object = Literal["list",]
+
+
+class CreateEmbeddingsUsageTypedDict(TypedDict):
+    r"""Token usage statistics"""
+
+    prompt_tokens: int
+    r"""Number of tokens in the input"""
+    total_tokens: int
+    r"""Total number of tokens used"""
     cost: NotRequired[float]
+    r"""Cost of the request in credits"""
 
 
-class Usage(BaseModel):
-    prompt_tokens: float
+class CreateEmbeddingsUsage(BaseModel):
+    r"""Token usage statistics"""
 
-    total_tokens: float
+    prompt_tokens: int
+    r"""Number of tokens in the input"""
+
+    total_tokens: int
+    r"""Total number of tokens used"""
 
     cost: Optional[float] = None
+    r"""Cost of the request in credits"""
 
 
 class CreateEmbeddingsResponseBodyTypedDict(TypedDict):
-    r"""Embedding response"""
+    r"""Embeddings response containing embedding vectors"""
 
-    object: Object
     data: List[CreateEmbeddingsDataTypedDict]
+    r"""List of embedding objects"""
     model: str
+    r"""The model used for embeddings"""
+    object: Object
     id: NotRequired[str]
-    usage: NotRequired[UsageTypedDict]
+    r"""Unique identifier for the embeddings response"""
+    usage: NotRequired[CreateEmbeddingsUsageTypedDict]
+    r"""Token usage statistics"""
 
 
 class CreateEmbeddingsResponseBody(BaseModel):
-    r"""Embedding response"""
+    r"""Embeddings response containing embedding vectors"""
+
+    data: List[CreateEmbeddingsData]
+    r"""List of embedding objects"""
+
+    model: str
+    r"""The model used for embeddings"""
 
     object: Object
 
-    data: List[CreateEmbeddingsData]
-
-    model: str
-
     id: Optional[str] = None
+    r"""Unique identifier for the embeddings response"""
 
-    usage: Optional[Usage] = None
+    usage: Optional[CreateEmbeddingsUsage] = None
+    r"""Token usage statistics"""
 
 
 CreateEmbeddingsResponseTypedDict = TypeAliasType(

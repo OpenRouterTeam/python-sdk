@@ -25,11 +25,15 @@ from .outputimagegenerationcallitem import (
     OutputImageGenerationCallItem,
     OutputImageGenerationCallItemTypedDict,
 )
-from .outputservertoolitem import OutputServerToolItem, OutputServerToolItemTypedDict
 from .outputwebsearchcallitem import (
     OutputWebSearchCallItem,
     OutputWebSearchCallItemTypedDict,
 )
+from .outputwebsearchservertoolitem import (
+    OutputWebSearchServerToolItem,
+    OutputWebSearchServerToolItemTypedDict,
+)
+from .reasoningformat import ReasoningFormat
 from .reasoningitem import ReasoningItem, ReasoningItemTypedDict
 from .reasoningsummarytext import ReasoningSummaryText, ReasoningSummaryTextTypedDict
 from .reasoningtextcontent import ReasoningTextContent, ReasoningTextContentTypedDict
@@ -40,7 +44,6 @@ from openrouter.types import (
     OptionalNullable,
     UNSET,
     UNSET_SENTINEL,
-    UnrecognizedStr,
 )
 from openrouter.utils import get_discriminator, validate_open_enum
 import pydantic
@@ -48,9 +51,6 @@ from pydantic import Discriminator, Tag, model_serializer
 from pydantic.functional_validators import PlainValidator
 from typing import Any, List, Literal, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
-
-
-InputsTypeReasoning = Literal["reasoning",]
 
 
 InputsStatusInProgress2 = Literal["in_progress",]
@@ -74,43 +74,31 @@ InputsStatusUnion2 = TypeAliasType(
 )
 
 
-InputsFormat = Union[
-    Literal[
-        "unknown",
-        "openai-responses-v1",
-        "azure-openai-responses-v1",
-        "xai-responses-v1",
-        "anthropic-claude-v1",
-        "google-gemini-v1",
-    ],
-    UnrecognizedStr,
-]
-r"""The format of the reasoning content"""
+InputsTypeReasoning = Literal["reasoning",]
 
 
 class InputsReasoningTypedDict(TypedDict):
     r"""An output item containing reasoning"""
 
-    type: InputsTypeReasoning
     id: str
     summary: Nullable[List[ReasoningSummaryTextTypedDict]]
+    type: InputsTypeReasoning
     content: NotRequired[Nullable[List[ReasoningTextContentTypedDict]]]
     encrypted_content: NotRequired[Nullable[str]]
     status: NotRequired[InputsStatusUnion2TypedDict]
+    format_: NotRequired[Nullable[ReasoningFormat]]
     signature: NotRequired[Nullable[str]]
     r"""A signature for the reasoning content, used for verification"""
-    format_: NotRequired[Nullable[InputsFormat]]
-    r"""The format of the reasoning content"""
 
 
 class InputsReasoning(BaseModel):
     r"""An output item containing reasoning"""
 
-    type: InputsTypeReasoning
-
     id: str
 
     summary: Nullable[List[ReasoningSummaryText]]
+
+    type: InputsTypeReasoning
 
     content: OptionalNullable[List[ReasoningTextContent]] = UNSET
 
@@ -118,16 +106,15 @@ class InputsReasoning(BaseModel):
 
     status: Optional[InputsStatusUnion2] = None
 
-    signature: OptionalNullable[str] = UNSET
-    r"""A signature for the reasoning content, used for verification"""
-
     format_: Annotated[
         Annotated[
-            OptionalNullable[InputsFormat], PlainValidator(validate_open_enum(False))
+            OptionalNullable[ReasoningFormat], PlainValidator(validate_open_enum(False))
         ],
         pydantic.Field(alias="format"),
     ] = UNSET
-    r"""The format of the reasoning content"""
+
+    signature: OptionalNullable[str] = UNSET
+    r"""A signature for the reasoning content, used for verification"""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
@@ -135,15 +122,15 @@ class InputsReasoning(BaseModel):
             "content",
             "encrypted_content",
             "status",
-            "signature",
             "format",
+            "signature",
         ]
         nullable_fields = [
             "content",
-            "summary",
             "encrypted_content",
-            "signature",
+            "summary",
             "format",
+            "signature",
         ]
         null_default_fields = []
 
@@ -170,33 +157,6 @@ class InputsReasoning(BaseModel):
                 m[k] = val
 
         return m
-
-
-InputsRole = Literal["assistant",]
-
-
-InputsTypeMessage = Literal["message",]
-
-
-InputsStatusInProgress1 = Literal["in_progress",]
-
-
-InputsStatusIncomplete1 = Literal["incomplete",]
-
-
-InputsStatusCompleted1 = Literal["completed",]
-
-
-InputsStatusUnion1TypedDict = TypeAliasType(
-    "InputsStatusUnion1TypedDict",
-    Union[InputsStatusCompleted1, InputsStatusIncomplete1, InputsStatusInProgress1],
-)
-
-
-InputsStatusUnion1 = TypeAliasType(
-    "InputsStatusUnion1",
-    Union[InputsStatusCompleted1, InputsStatusIncomplete1, InputsStatusInProgress1],
-)
 
 
 InputsContent1TypedDict = TypeAliasType(
@@ -241,37 +201,64 @@ InputsPhaseUnion = TypeAliasType(
 r"""The phase of an assistant message. Use `commentary` for an intermediate assistant message and `final_answer` for the final assistant message. For follow-up requests with models like `gpt-5.3-codex` and later, preserve and resend phase on all assistant messages. Omitting it can degrade performance. Not used for user messages."""
 
 
+InputsRole = Literal["assistant",]
+
+
+InputsStatusInProgress1 = Literal["in_progress",]
+
+
+InputsStatusIncomplete1 = Literal["incomplete",]
+
+
+InputsStatusCompleted1 = Literal["completed",]
+
+
+InputsStatusUnion1TypedDict = TypeAliasType(
+    "InputsStatusUnion1TypedDict",
+    Union[InputsStatusCompleted1, InputsStatusIncomplete1, InputsStatusInProgress1],
+)
+
+
+InputsStatusUnion1 = TypeAliasType(
+    "InputsStatusUnion1",
+    Union[InputsStatusCompleted1, InputsStatusIncomplete1, InputsStatusInProgress1],
+)
+
+
+InputsTypeMessage = Literal["message",]
+
+
 class InputsMessageTypedDict(TypedDict):
     r"""An output message item"""
 
+    content: Nullable[InputsContent2TypedDict]
     id: str
     role: InputsRole
     type: InputsTypeMessage
-    content: Nullable[InputsContent2TypedDict]
-    status: NotRequired[InputsStatusUnion1TypedDict]
     phase: NotRequired[Nullable[InputsPhaseUnionTypedDict]]
     r"""The phase of an assistant message. Use `commentary` for an intermediate assistant message and `final_answer` for the final assistant message. For follow-up requests with models like `gpt-5.3-codex` and later, preserve and resend phase on all assistant messages. Omitting it can degrade performance. Not used for user messages."""
+    status: NotRequired[InputsStatusUnion1TypedDict]
 
 
 class InputsMessage(BaseModel):
     r"""An output message item"""
 
+    content: Nullable[InputsContent2]
+
     id: str
 
     role: InputsRole
 
     type: InputsTypeMessage
 
-    content: Nullable[InputsContent2]
-
-    status: Optional[InputsStatusUnion1] = None
-
     phase: OptionalNullable[InputsPhaseUnion] = UNSET
     r"""The phase of an assistant message. Use `commentary` for an intermediate assistant message and `final_answer` for the final assistant message. For follow-up requests with models like `gpt-5.3-codex` and later, preserve and resend phase on all assistant messages. Omitting it can degrade performance. Not used for user messages."""
 
+    status: Optional[InputsStatusUnion1] = None
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["status", "phase"]
+        optional_fields = ["phase", "status"]
         nullable_fields = ["content", "phase"]
         null_default_fields = []
 
@@ -303,10 +290,10 @@ class InputsMessage(BaseModel):
 InputsUnion1TypedDict = TypeAliasType(
     "InputsUnion1TypedDict",
     Union[
+        OutputWebSearchServerToolItemTypedDict,
         OutputWebSearchCallItemTypedDict,
         EasyInputMessageTypedDict,
         InputMessageItemTypedDict,
-        OutputServerToolItemTypedDict,
         OutputImageGenerationCallItemTypedDict,
         OutputFileSearchCallItemTypedDict,
         FunctionCallOutputItemTypedDict,
@@ -323,10 +310,10 @@ InputsUnion1TypedDict = TypeAliasType(
 InputsUnion1 = TypeAliasType(
     "InputsUnion1",
     Union[
+        OutputWebSearchServerToolItem,
         OutputWebSearchCallItem,
         EasyInputMessage,
         InputMessageItem,
-        OutputServerToolItem,
         OutputImageGenerationCallItem,
         OutputFileSearchCallItem,
         FunctionCallOutputItem,

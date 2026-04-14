@@ -13,25 +13,25 @@ ErrorEventType = Literal["error",]
 class ErrorEventTypedDict(TypedDict):
     r"""Event emitted when an error occurs during streaming"""
 
-    type: ErrorEventType
     code: Nullable[str]
     message: str
     param: Nullable[str]
-    sequence_number: float
+    sequence_number: int
+    type: ErrorEventType
 
 
 class ErrorEvent(BaseModel):
     r"""Event emitted when an error occurs during streaming"""
 
-    type: ErrorEventType
-
     code: Nullable[str]
 
     message: str
 
     param: Nullable[str]
 
-    sequence_number: float
+    sequence_number: int
+
+    type: ErrorEventType
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

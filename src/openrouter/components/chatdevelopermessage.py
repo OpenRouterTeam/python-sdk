@@ -7,9 +7,6 @@ from typing import List, Literal, Optional, Union
 from typing_extensions import NotRequired, TypeAliasType, TypedDict
 
 
-ChatDeveloperMessageRole = Literal["developer",]
-
-
 ChatDeveloperMessageContentTypedDict = TypeAliasType(
     "ChatDeveloperMessageContentTypedDict", Union[str, List[ChatContentTextTypedDict]]
 )
@@ -22,12 +19,15 @@ ChatDeveloperMessageContent = TypeAliasType(
 r"""Developer message content"""
 
 
+ChatDeveloperMessageRole = Literal["developer",]
+
+
 class ChatDeveloperMessageTypedDict(TypedDict):
     r"""Developer message"""
 
-    role: ChatDeveloperMessageRole
     content: ChatDeveloperMessageContentTypedDict
     r"""Developer message content"""
+    role: ChatDeveloperMessageRole
     name: NotRequired[str]
     r"""Optional name for the developer message"""
 
@@ -35,10 +35,10 @@ class ChatDeveloperMessageTypedDict(TypedDict):
 class ChatDeveloperMessage(BaseModel):
     r"""Developer message"""
 
-    role: ChatDeveloperMessageRole
-
     content: ChatDeveloperMessageContent
     r"""Developer message content"""
+
+    role: ChatDeveloperMessageRole
 
     name: Optional[str] = None
     r"""Optional name for the developer message"""

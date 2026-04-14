@@ -52,38 +52,33 @@ r"""Instruction format type"""
 class ModelArchitectureTypedDict(TypedDict):
     r"""Model architecture information"""
 
-    modality: Nullable[str]
-    r"""Primary modality of the model"""
     input_modalities: List[InputModality]
     r"""Supported input modalities"""
+    modality: Nullable[str]
+    r"""Primary modality of the model"""
     output_modalities: List[OutputModality]
     r"""Supported output modalities"""
-    tokenizer: NotRequired[ModelGroup]
-    r"""Tokenizer type used by the model"""
     instruct_type: NotRequired[Nullable[ModelArchitectureInstructType]]
     r"""Instruction format type"""
+    tokenizer: NotRequired[ModelGroup]
+    r"""Tokenizer type used by the model"""
 
 
 class ModelArchitecture(BaseModel):
     r"""Model architecture information"""
-
-    modality: Nullable[str]
-    r"""Primary modality of the model"""
 
     input_modalities: List[
         Annotated[InputModality, PlainValidator(validate_open_enum(False))]
     ]
     r"""Supported input modalities"""
 
+    modality: Nullable[str]
+    r"""Primary modality of the model"""
+
     output_modalities: List[
         Annotated[OutputModality, PlainValidator(validate_open_enum(False))]
     ]
     r"""Supported output modalities"""
-
-    tokenizer: Annotated[
-        Optional[ModelGroup], PlainValidator(validate_open_enum(False))
-    ] = None
-    r"""Tokenizer type used by the model"""
 
     instruct_type: Annotated[
         OptionalNullable[ModelArchitectureInstructType],
@@ -91,9 +86,14 @@ class ModelArchitecture(BaseModel):
     ] = UNSET
     r"""Instruction format type"""
 
+    tokenizer: Annotated[
+        Optional[ModelGroup], PlainValidator(validate_open_enum(False))
+    ] = None
+    r"""Tokenizer type used by the model"""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["tokenizer", "instruct_type"]
+        optional_fields = ["instruct_type", "tokenizer"]
         nullable_fields = ["instruct_type", "modality"]
         null_default_fields = []
 

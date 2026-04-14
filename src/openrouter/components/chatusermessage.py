@@ -7,9 +7,6 @@ from typing import List, Literal, Optional, Union
 from typing_extensions import NotRequired, TypeAliasType, TypedDict
 
 
-ChatUserMessageRole = Literal["user",]
-
-
 ChatUserMessageContentTypedDict = TypeAliasType(
     "ChatUserMessageContentTypedDict", Union[str, List[ChatContentItemsTypedDict]]
 )
@@ -22,12 +19,15 @@ ChatUserMessageContent = TypeAliasType(
 r"""User message content"""
 
 
+ChatUserMessageRole = Literal["user",]
+
+
 class ChatUserMessageTypedDict(TypedDict):
     r"""User message"""
 
-    role: ChatUserMessageRole
     content: ChatUserMessageContentTypedDict
     r"""User message content"""
+    role: ChatUserMessageRole
     name: NotRequired[str]
     r"""Optional name for the user"""
 
@@ -35,10 +35,10 @@ class ChatUserMessageTypedDict(TypedDict):
 class ChatUserMessage(BaseModel):
     r"""User message"""
 
-    role: ChatUserMessageRole
-
     content: ChatUserMessageContent
     r"""User message content"""
+
+    role: ChatUserMessageRole
 
     name: Optional[str] = None
     r"""Optional name for the user"""

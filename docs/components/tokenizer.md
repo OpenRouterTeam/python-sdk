@@ -13,6 +13,7 @@ Tokenizer type used by the model
 | `GPT`       | GPT         |
 | `CLAUDE`    | Claude      |
 | `GEMINI`    | Gemini      |
+| `GEMMA`     | Gemma       |
 | `GROK`      | Grok        |
 | `COHERE`    | Cohere      |
 | `NOVA`      | Nova        |

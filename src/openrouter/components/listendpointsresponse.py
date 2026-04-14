@@ -21,6 +21,7 @@ Tokenizer = Union[
         "GPT",
         "Claude",
         "Gemini",
+        "Gemma",
         "Grok",
         "Cohere",
         "Nova",
@@ -43,21 +44,24 @@ r"""Tokenizer type used by the model"""
 class ArchitectureTypedDict(TypedDict):
     r"""Model architecture information"""
 
-    tokenizer: Nullable[Tokenizer]
+    input_modalities: List[InputModality]
+    r"""Supported input modalities"""
     instruct_type: Nullable[InstructType]
     r"""Instruction format type"""
     modality: Nullable[str]
     r"""Primary modality of the model"""
-    input_modalities: List[InputModality]
-    r"""Supported input modalities"""
     output_modalities: List[OutputModality]
     r"""Supported output modalities"""
+    tokenizer: Nullable[Tokenizer]
 
 
 class Architecture(BaseModel):
     r"""Model architecture information"""
 
-    tokenizer: Annotated[Nullable[Tokenizer], PlainValidator(validate_open_enum(False))]
+    input_modalities: List[
+        Annotated[InputModality, PlainValidator(validate_open_enum(False))]
+    ]
+    r"""Supported input modalities"""
 
     instruct_type: Annotated[
         Nullable[InstructType], PlainValidator(validate_open_enum(False))
@@ -67,20 +71,17 @@ class Architecture(BaseModel):
     modality: Nullable[str]
     r"""Primary modality of the model"""
 
-    input_modalities: List[
-        Annotated[InputModality, PlainValidator(validate_open_enum(False))]
-    ]
-    r"""Supported input modalities"""
-
     output_modalities: List[
         Annotated[OutputModality, PlainValidator(validate_open_enum(False))]
     ]
     r"""Supported output modalities"""
 
+    tokenizer: Annotated[Nullable[Tokenizer], PlainValidator(validate_open_enum(False))]
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = []
-        nullable_fields = ["tokenizer", "instruct_type", "modality"]
+        nullable_fields = ["instruct_type", "modality", "tokenizer"]
         null_default_fields = []
 
         serialized = handler(self)
@@ -111,35 +112,35 @@ class Architecture(BaseModel):
 class ListEndpointsResponseTypedDict(TypedDict):
     r"""List of available endpoints for a model"""
 
+    architecture: ArchitectureTypedDict
+    created: int
+    r"""Unix timestamp of when the model was created"""
+    description: str
+    r"""Description of the model"""
+    endpoints: List[PublicEndpointTypedDict]
+    r"""List of available endpoints for this model"""
     id: str
     r"""Unique identifier for the model"""
     name: str
     r"""Display name of the model"""
-    created: float
-    r"""Unix timestamp of when the model was created"""
-    description: str
-    r"""Description of the model"""
-    architecture: ArchitectureTypedDict
-    endpoints: List[PublicEndpointTypedDict]
-    r"""List of available endpoints for this model"""
 
 
 class ListEndpointsResponse(BaseModel):
     r"""List of available endpoints for a model"""
 
-    id: str
-    r"""Unique identifier for the model"""
+    architecture: Architecture
 
-    name: str
-    r"""Display name of the model"""
-
-    created: float
+    created: int
     r"""Unix timestamp of when the model was created"""
 
     description: str
     r"""Description of the model"""
 
-    architecture: Architecture
-
     endpoints: List[PublicEndpoint]
     r"""List of available endpoints for this model"""
+
+    id: str
+    r"""Unique identifier for the model"""
+
+    name: str
+    r"""Display name of the model"""

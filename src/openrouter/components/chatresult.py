@@ -21,12 +21,12 @@ ChatResultObject = Literal["chat.completion",]
 class ChatResultTypedDict(TypedDict):
     r"""Chat completion response"""
 
-    id: str
-    r"""Unique completion identifier"""
     choices: List[ChatChoiceTypedDict]
     r"""List of completion choices"""
-    created: float
+    created: int
     r"""Unix timestamp of creation"""
+    id: str
+    r"""Unique completion identifier"""
     model: str
     r"""Model used for completion"""
     object: ChatResultObject
@@ -41,14 +41,14 @@ class ChatResultTypedDict(TypedDict):
 class ChatResult(BaseModel):
     r"""Chat completion response"""
 
-    id: str
-    r"""Unique completion identifier"""
-
     choices: List[ChatChoice]
     r"""List of completion choices"""
 
-    created: float
+    created: int
     r"""Unix timestamp of creation"""
+
+    id: str
+    r"""Unique completion identifier"""
 
     model: str
     r"""Model used for completion"""
@@ -67,7 +67,7 @@ class ChatResult(BaseModel):
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = ["service_tier", "usage"]
-        nullable_fields = ["system_fingerprint", "service_tier"]
+        nullable_fields = ["service_tier", "system_fingerprint"]
         null_default_fields = []
 
         serialized = handler(self)

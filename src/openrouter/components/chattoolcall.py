@@ -6,39 +6,39 @@ from typing import Literal
 from typing_extensions import TypedDict
 
 
-ChatToolCallType = Literal["function",]
-
-
 class ChatToolCallFunctionTypedDict(TypedDict):
-    name: str
-    r"""Function name to call"""
     arguments: str
     r"""Function arguments as JSON string"""
+    name: str
+    r"""Function name to call"""
 
 
 class ChatToolCallFunction(BaseModel):
+    arguments: str
+    r"""Function arguments as JSON string"""
+
     name: str
     r"""Function name to call"""
 
-    arguments: str
-    r"""Function arguments as JSON string"""
+
+ChatToolCallType = Literal["function",]
 
 
 class ChatToolCallTypedDict(TypedDict):
     r"""Tool call made by the assistant"""
 
+    function: ChatToolCallFunctionTypedDict
     id: str
     r"""Tool call identifier"""
     type: ChatToolCallType
-    function: ChatToolCallFunctionTypedDict
 
 
 class ChatToolCall(BaseModel):
     r"""Tool call made by the assistant"""
 
+    function: ChatToolCallFunction
+
     id: str
     r"""Tool call identifier"""
 
     type: ChatToolCallType
-
-    function: ChatToolCallFunction

@@ -12,25 +12,25 @@ FunctionCallArgsDoneEventType = Literal["response.function_call_arguments.done",
 class FunctionCallArgsDoneEventTypedDict(TypedDict):
     r"""Event emitted when function call arguments streaming is complete"""
 
-    type: FunctionCallArgsDoneEventType
-    item_id: str
-    output_index: float
-    name: str
     arguments: str
-    sequence_number: float
+    item_id: str
+    name: str
+    output_index: int
+    sequence_number: int
+    type: FunctionCallArgsDoneEventType
 
 
 class FunctionCallArgsDoneEvent(BaseModel):
     r"""Event emitted when function call arguments streaming is complete"""
 
-    type: FunctionCallArgsDoneEventType
+    arguments: str
 
     item_id: str
 
-    output_index: float
-
     name: str
 
-    arguments: str
+    output_index: int
 
-    sequence_number: float
+    sequence_number: int
+
+    type: FunctionCallArgsDoneEventType

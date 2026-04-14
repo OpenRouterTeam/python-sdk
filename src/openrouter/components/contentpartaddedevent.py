@@ -14,9 +14,6 @@ from typing import Literal, Union
 from typing_extensions import Annotated, TypeAliasType, TypedDict
 
 
-ContentPartAddedEventType = Literal["response.content_part.added",]
-
-
 ContentPartAddedEventPartTypedDict = TypeAliasType(
     "ContentPartAddedEventPartTypedDict",
     Union[
@@ -37,28 +34,31 @@ ContentPartAddedEventPart = Annotated[
 ]
 
 
+ContentPartAddedEventType = Literal["response.content_part.added",]
+
+
 class ContentPartAddedEventTypedDict(TypedDict):
     r"""Event emitted when a new content part is added to an output item"""
 
-    type: ContentPartAddedEventType
-    output_index: float
+    content_index: int
     item_id: str
-    content_index: float
+    output_index: int
     part: ContentPartAddedEventPartTypedDict
-    sequence_number: float
+    sequence_number: int
+    type: ContentPartAddedEventType
 
 
 class ContentPartAddedEvent(BaseModel):
     r"""Event emitted when a new content part is added to an output item"""
 
-    type: ContentPartAddedEventType
-
-    output_index: float
+    content_index: int
 
     item_id: str
 
-    content_index: float
+    output_index: int
 
     part: ContentPartAddedEventPart
 
-    sequence_number: float
+    sequence_number: int
+
+    type: ContentPartAddedEventType

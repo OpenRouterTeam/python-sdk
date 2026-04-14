@@ -13,25 +13,25 @@ ReasoningSummaryPartDoneEventType = Literal["response.reasoning_summary_part.don
 class ReasoningSummaryPartDoneEventTypedDict(TypedDict):
     r"""Event emitted when a reasoning summary part is complete"""
 
-    type: ReasoningSummaryPartDoneEventType
-    output_index: float
     item_id: str
-    summary_index: float
+    output_index: int
     part: ReasoningSummaryTextTypedDict
-    sequence_number: float
+    sequence_number: int
+    summary_index: int
+    type: ReasoningSummaryPartDoneEventType
 
 
 class ReasoningSummaryPartDoneEvent(BaseModel):
     r"""Event emitted when a reasoning summary part is complete"""
 
-    type: ReasoningSummaryPartDoneEventType
-
-    output_index: float
-
     item_id: str
 
-    summary_index: float
+    output_index: int
 
     part: ReasoningSummaryText
 
-    sequence_number: float
+    sequence_number: int
+
+    summary_index: int
+
+    type: ReasoningSummaryPartDoneEventType

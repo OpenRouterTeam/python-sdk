@@ -12,19 +12,19 @@ WebSearchCallSearchingEventType = Literal["response.web_search_call.searching",]
 class WebSearchCallSearchingEventTypedDict(TypedDict):
     r"""Web search call is searching"""
 
-    type: WebSearchCallSearchingEventType
     item_id: str
-    output_index: float
-    sequence_number: float
+    output_index: int
+    sequence_number: int
+    type: WebSearchCallSearchingEventType
 
 
 class WebSearchCallSearchingEvent(BaseModel):
     r"""Web search call is searching"""
 
-    type: WebSearchCallSearchingEventType
-
     item_id: str
 
-    output_index: float
+    output_index: int
 
-    sequence_number: float
+    sequence_number: int
+
+    type: WebSearchCallSearchingEventType

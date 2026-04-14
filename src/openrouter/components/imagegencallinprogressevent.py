@@ -12,19 +12,19 @@ ImageGenCallInProgressEventType = Literal["response.image_generation_call.in_pro
 class ImageGenCallInProgressEventTypedDict(TypedDict):
     r"""Image generation call in progress"""
 
-    type: ImageGenCallInProgressEventType
     item_id: str
-    output_index: float
-    sequence_number: float
+    output_index: int
+    sequence_number: int
+    type: ImageGenCallInProgressEventType
 
 
 class ImageGenCallInProgressEvent(BaseModel):
     r"""Image generation call in progress"""
 
-    type: ImageGenCallInProgressEventType
-
     item_id: str
 
-    output_index: float
+    output_index: int
 
-    sequence_number: float
+    sequence_number: int
+
+    type: ImageGenCallInProgressEventType

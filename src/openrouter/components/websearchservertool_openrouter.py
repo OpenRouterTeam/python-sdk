@@ -6,29 +6,29 @@ from typing import Literal, Optional
 from typing_extensions import NotRequired, TypedDict
 
 
+class ParametersTypedDict(TypedDict):
+    max_results: NotRequired[int]
+    r"""Maximum number of search results to return per search call. Defaults to 5."""
+    max_total_results: NotRequired[int]
+    r"""Maximum total number of search results across all search calls in a single request. Once this limit is reached, the tool will stop returning new results."""
+
+
+class Parameters(BaseModel):
+    max_results: Optional[int] = None
+    r"""Maximum number of search results to return per search call. Defaults to 5."""
+
+    max_total_results: Optional[int] = None
+    r"""Maximum total number of search results across all search calls in a single request. Once this limit is reached, the tool will stop returning new results."""
+
+
 WebSearchServerToolOpenRouterType = Literal["openrouter:web_search",]
-
-
-class WebSearchServerToolOpenRouterParametersTypedDict(TypedDict):
-    max_results: NotRequired[float]
-    r"""Maximum number of search results to return per search call. Defaults to 5."""
-    max_total_results: NotRequired[float]
-    r"""Maximum total number of search results across all search calls in a single request. Once this limit is reached, the tool will stop returning new results."""
-
-
-class WebSearchServerToolOpenRouterParameters(BaseModel):
-    max_results: Optional[float] = None
-    r"""Maximum number of search results to return per search call. Defaults to 5."""
-
-    max_total_results: Optional[float] = None
-    r"""Maximum total number of search results across all search calls in a single request. Once this limit is reached, the tool will stop returning new results."""
 
 
 class WebSearchServerToolOpenRouterTypedDict(TypedDict):
     r"""OpenRouter built-in server tool: searches the web for current information"""
 
     type: WebSearchServerToolOpenRouterType
-    parameters: NotRequired[WebSearchServerToolOpenRouterParametersTypedDict]
+    parameters: NotRequired[ParametersTypedDict]
 
 
 class WebSearchServerToolOpenRouter(BaseModel):
@@ -36,4 +36,4 @@ class WebSearchServerToolOpenRouter(BaseModel):
 
     type: WebSearchServerToolOpenRouterType
 
-    parameters: Optional[WebSearchServerToolOpenRouterParameters] = None
+    parameters: Optional[Parameters] = None

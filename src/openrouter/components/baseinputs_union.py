@@ -5,12 +5,23 @@ from .inputaudio import InputAudio, InputAudioTypedDict
 from .inputfile import InputFile, InputFileTypedDict
 from .inputimage import InputImage, InputImageTypedDict
 from .inputtext import InputText, InputTextTypedDict
+from .openairesponsefunctiontoolcall import (
+    OpenAIResponseFunctionToolCall,
+    OpenAIResponseFunctionToolCallTypedDict,
+)
+from .openairesponsefunctiontoolcalloutput import (
+    OpenAIResponseFunctionToolCallOutput,
+    OpenAIResponseFunctionToolCallOutputTypedDict,
+)
+from .openairesponseinputmessageitem import (
+    OpenAIResponseInputMessageItem,
+    OpenAIResponseInputMessageItemTypedDict,
+)
 from .outputitemimagegenerationcall import (
     OutputItemImageGenerationCall,
     OutputItemImageGenerationCallTypedDict,
 )
 from .outputmessage import OutputMessage, OutputMessageTypedDict
-from .toolcallstatusenum import ToolCallStatusEnum
 from openrouter.types import (
     BaseModel,
     Nullable,
@@ -18,247 +29,10 @@ from openrouter.types import (
     UNSET,
     UNSET_SENTINEL,
 )
-from openrouter.utils import get_discriminator, validate_open_enum
+from openrouter.utils import get_discriminator
 from pydantic import Discriminator, Tag, model_serializer
-from pydantic.functional_validators import PlainValidator
 from typing import Any, List, Literal, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
-
-
-BaseInputsTypeFunctionCall = Literal["function_call",]
-
-
-class BaseInputsFunctionCallTypedDict(TypedDict):
-    type: BaseInputsTypeFunctionCall
-    call_id: str
-    name: str
-    arguments: str
-    id: NotRequired[str]
-    status: NotRequired[Nullable[ToolCallStatusEnum]]
-
-
-class BaseInputsFunctionCall(BaseModel):
-    type: BaseInputsTypeFunctionCall
-
-    call_id: str
-
-    name: str
-
-    arguments: str
-
-    id: Optional[str] = None
-
-    status: Annotated[
-        OptionalNullable[ToolCallStatusEnum], PlainValidator(validate_open_enum(False))
-    ] = UNSET
-
-    @model_serializer(mode="wrap")
-    def serialize_model(self, handler):
-        optional_fields = ["id", "status"]
-        nullable_fields = ["status"]
-        null_default_fields = []
-
-        serialized = handler(self)
-
-        m = {}
-
-        for n, f in type(self).model_fields.items():
-            k = f.alias or n
-            val = serialized.get(k)
-            serialized.pop(k, None)
-
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
-
-        return m
-
-
-BaseInputsTypeFunctionCallOutput = Literal["function_call_output",]
-
-
-BaseInputsOutput1TypedDict = TypeAliasType(
-    "BaseInputsOutput1TypedDict",
-    Union[InputTextTypedDict, InputImageTypedDict, InputFileTypedDict],
-)
-
-
-BaseInputsOutput1 = Annotated[
-    Union[
-        Annotated[InputText, Tag("input_text")],
-        Annotated[InputImage, Tag("input_image")],
-        Annotated[InputFile, Tag("input_file")],
-    ],
-    Discriminator(lambda m: get_discriminator(m, "type", "type")),
-]
-
-
-BaseInputsOutput2TypedDict = TypeAliasType(
-    "BaseInputsOutput2TypedDict", Union[str, List[BaseInputsOutput1TypedDict]]
-)
-
-
-BaseInputsOutput2 = TypeAliasType(
-    "BaseInputsOutput2", Union[str, List[BaseInputsOutput1]]
-)
-
-
-class BaseInputsFunctionCallOutputTypedDict(TypedDict):
-    type: BaseInputsTypeFunctionCallOutput
-    call_id: str
-    output: BaseInputsOutput2TypedDict
-    id: NotRequired[Nullable[str]]
-    status: NotRequired[Nullable[ToolCallStatusEnum]]
-
-
-class BaseInputsFunctionCallOutput(BaseModel):
-    type: BaseInputsTypeFunctionCallOutput
-
-    call_id: str
-
-    output: BaseInputsOutput2
-
-    id: OptionalNullable[str] = UNSET
-
-    status: Annotated[
-        OptionalNullable[ToolCallStatusEnum], PlainValidator(validate_open_enum(False))
-    ] = UNSET
-
-    @model_serializer(mode="wrap")
-    def serialize_model(self, handler):
-        optional_fields = ["id", "status"]
-        nullable_fields = ["id", "status"]
-        null_default_fields = []
-
-        serialized = handler(self)
-
-        m = {}
-
-        for n, f in type(self).model_fields.items():
-            k = f.alias or n
-            val = serialized.get(k)
-            serialized.pop(k, None)
-
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
-
-        return m
-
-
-BaseInputsTypeMessage2 = Literal["message",]
-
-
-BaseInputsRoleDeveloper2 = Literal["developer",]
-
-
-BaseInputsRoleSystem2 = Literal["system",]
-
-
-BaseInputsRoleUser2 = Literal["user",]
-
-
-BaseInputsRoleUnion2TypedDict = TypeAliasType(
-    "BaseInputsRoleUnion2TypedDict",
-    Union[BaseInputsRoleUser2, BaseInputsRoleSystem2, BaseInputsRoleDeveloper2],
-)
-
-
-BaseInputsRoleUnion2 = TypeAliasType(
-    "BaseInputsRoleUnion2",
-    Union[BaseInputsRoleUser2, BaseInputsRoleSystem2, BaseInputsRoleDeveloper2],
-)
-
-
-BaseInputsContent3TypedDict = TypeAliasType(
-    "BaseInputsContent3TypedDict",
-    Union[
-        InputTextTypedDict, InputAudioTypedDict, InputImageTypedDict, InputFileTypedDict
-    ],
-)
-
-
-BaseInputsContent3 = Annotated[
-    Union[
-        Annotated[InputText, Tag("input_text")],
-        Annotated[InputImage, Tag("input_image")],
-        Annotated[InputFile, Tag("input_file")],
-        Annotated[InputAudio, Tag("input_audio")],
-    ],
-    Discriminator(lambda m: get_discriminator(m, "type", "type")),
-]
-
-
-class BaseInputsMessage2TypedDict(TypedDict):
-    id: str
-    role: BaseInputsRoleUnion2TypedDict
-    content: List[BaseInputsContent3TypedDict]
-    type: NotRequired[BaseInputsTypeMessage2]
-
-
-class BaseInputsMessage2(BaseModel):
-    id: str
-
-    role: BaseInputsRoleUnion2
-
-    content: List[BaseInputsContent3]
-
-    type: Optional[BaseInputsTypeMessage2] = None
-
-
-BaseInputsTypeMessage1 = Literal["message",]
-
-
-BaseInputsRoleDeveloper1 = Literal["developer",]
-
-
-BaseInputsRoleAssistant = Literal["assistant",]
-
-
-BaseInputsRoleSystem1 = Literal["system",]
-
-
-BaseInputsRoleUser1 = Literal["user",]
-
-
-BaseInputsRoleUnion1TypedDict = TypeAliasType(
-    "BaseInputsRoleUnion1TypedDict",
-    Union[
-        BaseInputsRoleUser1,
-        BaseInputsRoleSystem1,
-        BaseInputsRoleAssistant,
-        BaseInputsRoleDeveloper1,
-    ],
-)
-
-
-BaseInputsRoleUnion1 = TypeAliasType(
-    "BaseInputsRoleUnion1",
-    Union[
-        BaseInputsRoleUser1,
-        BaseInputsRoleSystem1,
-        BaseInputsRoleAssistant,
-        BaseInputsRoleDeveloper1,
-    ],
-)
 
 
 BaseInputsContent1TypedDict = TypeAliasType(
@@ -271,10 +45,10 @@ BaseInputsContent1TypedDict = TypeAliasType(
 
 BaseInputsContent1 = Annotated[
     Union[
-        Annotated[InputText, Tag("input_text")],
-        Annotated[InputImage, Tag("input_image")],
-        Annotated[InputFile, Tag("input_file")],
         Annotated[InputAudio, Tag("input_audio")],
+        Annotated[InputFile, Tag("input_file")],
+        Annotated[InputImage, Tag("input_image")],
+        Annotated[InputText, Tag("input_text")],
     ],
     Discriminator(lambda m: get_discriminator(m, "type", "type")),
 ]
@@ -308,25 +82,62 @@ BaseInputsPhaseUnion = TypeAliasType(
 )
 
 
-class BaseInputsMessage1TypedDict(TypedDict):
-    role: BaseInputsRoleUnion1TypedDict
+BaseInputsRoleDeveloper = Literal["developer",]
+
+
+BaseInputsRoleAssistant = Literal["assistant",]
+
+
+BaseInputsRoleSystem = Literal["system",]
+
+
+BaseInputsRoleUser = Literal["user",]
+
+
+BaseInputsRoleUnionTypedDict = TypeAliasType(
+    "BaseInputsRoleUnionTypedDict",
+    Union[
+        BaseInputsRoleUser,
+        BaseInputsRoleSystem,
+        BaseInputsRoleAssistant,
+        BaseInputsRoleDeveloper,
+    ],
+)
+
+
+BaseInputsRoleUnion = TypeAliasType(
+    "BaseInputsRoleUnion",
+    Union[
+        BaseInputsRoleUser,
+        BaseInputsRoleSystem,
+        BaseInputsRoleAssistant,
+        BaseInputsRoleDeveloper,
+    ],
+)
+
+
+BaseInputsType = Literal["message",]
+
+
+class BaseInputsMessageTypedDict(TypedDict):
     content: BaseInputsContent2TypedDict
-    type: NotRequired[BaseInputsTypeMessage1]
+    role: BaseInputsRoleUnionTypedDict
     phase: NotRequired[Nullable[BaseInputsPhaseUnionTypedDict]]
+    type: NotRequired[BaseInputsType]
 
 
-class BaseInputsMessage1(BaseModel):
-    role: BaseInputsRoleUnion1
-
+class BaseInputsMessage(BaseModel):
     content: BaseInputsContent2
 
-    type: Optional[BaseInputsTypeMessage1] = None
+    role: BaseInputsRoleUnion
 
     phase: OptionalNullable[BaseInputsPhaseUnion] = UNSET
 
+    type: Optional[BaseInputsType] = None
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["type", "phase"]
+        optional_fields = ["phase", "type"]
         nullable_fields = ["phase"]
         null_default_fields = []
 
@@ -358,11 +169,11 @@ class BaseInputsMessage1(BaseModel):
 BaseInputsUnion1TypedDict = TypeAliasType(
     "BaseInputsUnion1TypedDict",
     Union[
-        BaseInputsMessage1TypedDict,
-        BaseInputsMessage2TypedDict,
+        BaseInputsMessageTypedDict,
+        OpenAIResponseInputMessageItemTypedDict,
         OutputItemImageGenerationCallTypedDict,
-        BaseInputsFunctionCallOutputTypedDict,
-        BaseInputsFunctionCallTypedDict,
+        OpenAIResponseFunctionToolCallOutputTypedDict,
+        OpenAIResponseFunctionToolCallTypedDict,
         OutputMessageTypedDict,
     ],
 )
@@ -371,11 +182,11 @@ BaseInputsUnion1TypedDict = TypeAliasType(
 BaseInputsUnion1 = TypeAliasType(
     "BaseInputsUnion1",
     Union[
-        BaseInputsMessage1,
-        BaseInputsMessage2,
+        BaseInputsMessage,
+        OpenAIResponseInputMessageItem,
         OutputItemImageGenerationCall,
-        BaseInputsFunctionCallOutput,
-        BaseInputsFunctionCall,
+        OpenAIResponseFunctionToolCallOutput,
+        OpenAIResponseFunctionToolCall,
         OutputMessage,
     ],
 )

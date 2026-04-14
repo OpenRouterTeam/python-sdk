@@ -9,49 +9,49 @@ from typing_extensions import NotRequired, TypedDict
 class PublicPricingTypedDict(TypedDict):
     r"""Pricing information for the model"""
 
-    prompt: str
     completion: str
-    request: NotRequired[str]
-    image: NotRequired[str]
-    image_token: NotRequired[str]
-    image_output: NotRequired[str]
+    prompt: str
     audio: NotRequired[str]
     audio_output: NotRequired[str]
+    discount: NotRequired[float]
+    image: NotRequired[str]
+    image_output: NotRequired[str]
+    image_token: NotRequired[str]
     input_audio_cache: NotRequired[str]
-    web_search: NotRequired[str]
-    internal_reasoning: NotRequired[str]
     input_cache_read: NotRequired[str]
     input_cache_write: NotRequired[str]
-    discount: NotRequired[float]
+    internal_reasoning: NotRequired[str]
+    request: NotRequired[str]
+    web_search: NotRequired[str]
 
 
 class PublicPricing(BaseModel):
     r"""Pricing information for the model"""
 
-    prompt: str
-
     completion: str
 
-    request: Optional[str] = None
-
-    image: Optional[str] = None
-
-    image_token: Optional[str] = None
-
-    image_output: Optional[str] = None
+    prompt: str
 
     audio: Optional[str] = None
 
     audio_output: Optional[str] = None
 
+    discount: Optional[float] = None
+
+    image: Optional[str] = None
+
+    image_output: Optional[str] = None
+
+    image_token: Optional[str] = None
+
     input_audio_cache: Optional[str] = None
-
-    web_search: Optional[str] = None
-
-    internal_reasoning: Optional[str] = None
 
     input_cache_read: Optional[str] = None
 
     input_cache_write: Optional[str] = None
 
-    discount: Optional[float] = None
+    internal_reasoning: Optional[str] = None
+
+    request: Optional[str] = None
+
+    web_search: Optional[str] = None

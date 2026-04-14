@@ -20,13 +20,13 @@ CompoundFilterType = Union[
 class CompoundFilterTypedDict(TypedDict):
     r"""A compound filter that combines multiple comparison or compound filters"""
 
-    type: CompoundFilterType
     filters: List[Dict[str, Nullable[Any]]]
+    type: CompoundFilterType
 
 
 class CompoundFilter(BaseModel):
     r"""A compound filter that combines multiple comparison or compound filters"""
 
-    type: Annotated[CompoundFilterType, PlainValidator(validate_open_enum(False))]
-
     filters: List[Dict[str, Nullable[Any]]]
+
+    type: Annotated[CompoundFilterType, PlainValidator(validate_open_enum(False))]

@@ -29,8 +29,8 @@ r"""Reasoning detail union schema"""
 
 ReasoningDetailUnion = Annotated[
     Union[
-        Annotated[ReasoningDetailSummary, Tag("reasoning.summary")],
         Annotated[ReasoningDetailEncrypted, Tag("reasoning.encrypted")],
+        Annotated[ReasoningDetailSummary, Tag("reasoning.summary")],
         Annotated[ReasoningDetailText, Tag("reasoning.text")],
     ],
     Discriminator(lambda m: get_discriminator(m, "type", "type")),

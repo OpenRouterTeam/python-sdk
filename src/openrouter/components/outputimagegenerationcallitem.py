@@ -14,18 +14,18 @@ OutputImageGenerationCallItemType = Literal["image_generation_call",]
 
 
 class OutputImageGenerationCallItemTypedDict(TypedDict):
-    type: OutputImageGenerationCallItemType
     id: str
     status: ImageGenerationStatus
+    type: OutputImageGenerationCallItemType
     result: NotRequired[Nullable[str]]
 
 
 class OutputImageGenerationCallItem(BaseModel):
-    type: OutputImageGenerationCallItemType
-
     id: str
 
     status: Annotated[ImageGenerationStatus, PlainValidator(validate_open_enum(False))]
+
+    type: OutputImageGenerationCallItemType
 
     result: OptionalNullable[str] = None
 

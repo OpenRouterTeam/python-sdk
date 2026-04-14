@@ -9,12 +9,12 @@ from typing_extensions import NotRequired, TypedDict
 class ChatAudioOutputTypedDict(TypedDict):
     r"""Audio output data or reference"""
 
-    id: NotRequired[str]
-    r"""Audio output identifier"""
-    expires_at: NotRequired[float]
-    r"""Audio expiration timestamp"""
     data: NotRequired[str]
     r"""Base64 encoded audio data"""
+    expires_at: NotRequired[int]
+    r"""Audio expiration timestamp"""
+    id: NotRequired[str]
+    r"""Audio output identifier"""
     transcript: NotRequired[str]
     r"""Audio transcript"""
 
@@ -22,14 +22,14 @@ class ChatAudioOutputTypedDict(TypedDict):
 class ChatAudioOutput(BaseModel):
     r"""Audio output data or reference"""
 
-    id: Optional[str] = None
-    r"""Audio output identifier"""
-
-    expires_at: Optional[float] = None
-    r"""Audio expiration timestamp"""
-
     data: Optional[str] = None
     r"""Base64 encoded audio data"""
+
+    expires_at: Optional[int] = None
+    r"""Audio expiration timestamp"""
+
+    id: Optional[str] = None
+    r"""Audio output identifier"""
 
     transcript: Optional[str] = None
     r"""Audio transcript"""

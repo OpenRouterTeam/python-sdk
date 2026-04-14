@@ -14,25 +14,25 @@ ImageGenCallPartialImageEventType = Literal[
 class ImageGenCallPartialImageEventTypedDict(TypedDict):
     r"""Image generation call with partial image"""
 
-    type: ImageGenCallPartialImageEventType
     item_id: str
-    output_index: float
-    sequence_number: float
+    output_index: int
     partial_image_b64: str
-    partial_image_index: float
+    partial_image_index: int
+    sequence_number: int
+    type: ImageGenCallPartialImageEventType
 
 
 class ImageGenCallPartialImageEvent(BaseModel):
     r"""Image generation call with partial image"""
 
-    type: ImageGenCallPartialImageEventType
-
     item_id: str
 
-    output_index: float
-
-    sequence_number: float
+    output_index: int
 
     partial_image_b64: str
 
-    partial_image_index: float
+    partial_image_index: int
+
+    sequence_number: int
+
+    type: ImageGenCallPartialImageEventType

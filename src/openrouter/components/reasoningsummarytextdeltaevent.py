@@ -12,25 +12,25 @@ ReasoningSummaryTextDeltaEventType = Literal["response.reasoning_summary_text.de
 class ReasoningSummaryTextDeltaEventTypedDict(TypedDict):
     r"""Event emitted when reasoning summary text delta is streamed"""
 
-    type: ReasoningSummaryTextDeltaEventType
-    item_id: str
-    output_index: float
-    summary_index: float
     delta: str
-    sequence_number: float
+    item_id: str
+    output_index: int
+    sequence_number: int
+    summary_index: int
+    type: ReasoningSummaryTextDeltaEventType
 
 
 class ReasoningSummaryTextDeltaEvent(BaseModel):
     r"""Event emitted when reasoning summary text delta is streamed"""
 
-    type: ReasoningSummaryTextDeltaEventType
+    delta: str
 
     item_id: str
 
-    output_index: float
+    output_index: int
 
-    summary_index: float
+    sequence_number: int
 
-    delta: str
+    summary_index: int
 
-    sequence_number: float
+    type: ReasoningSummaryTextDeltaEventType

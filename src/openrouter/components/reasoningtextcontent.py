@@ -10,11 +10,11 @@ ReasoningTextContentType = Literal["reasoning_text",]
 
 
 class ReasoningTextContentTypedDict(TypedDict):
-    type: ReasoningTextContentType
     text: str
+    type: ReasoningTextContentType
 
 
 class ReasoningTextContent(BaseModel):
-    type: ReasoningTextContentType
-
     text: str
+
+    type: ReasoningTextContentType

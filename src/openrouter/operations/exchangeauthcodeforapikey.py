@@ -81,20 +81,17 @@ r"""The method used to generate the code challenge"""
 class ExchangeAuthCodeForAPIKeyRequestBodyTypedDict(TypedDict):
     code: str
     r"""The authorization code received from the OAuth redirect"""
-    code_verifier: NotRequired[str]
-    r"""The code verifier if code_challenge was used in the authorization request"""
     code_challenge_method: NotRequired[
         Nullable[ExchangeAuthCodeForAPIKeyCodeChallengeMethod]
     ]
     r"""The method used to generate the code challenge"""
+    code_verifier: NotRequired[str]
+    r"""The code verifier if code_challenge was used in the authorization request"""
 
 
 class ExchangeAuthCodeForAPIKeyRequestBody(BaseModel):
     code: str
     r"""The authorization code received from the OAuth redirect"""
-
-    code_verifier: Optional[str] = None
-    r"""The code verifier if code_challenge was used in the authorization request"""
 
     code_challenge_method: Annotated[
         OptionalNullable[ExchangeAuthCodeForAPIKeyCodeChallengeMethod],
@@ -102,9 +99,12 @@ class ExchangeAuthCodeForAPIKeyRequestBody(BaseModel):
     ] = UNSET
     r"""The method used to generate the code challenge"""
 
+    code_verifier: Optional[str] = None
+    r"""The code verifier if code_challenge was used in the authorization request"""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["code_verifier", "code_challenge_method"]
+        optional_fields = ["code_challenge_method", "code_verifier"]
         nullable_fields = ["code_challenge_method"]
         null_default_fields = []
 

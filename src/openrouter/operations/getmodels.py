@@ -97,6 +97,7 @@ class GetModelsRequestTypedDict(TypedDict):
     category: NotRequired[Category]
     r"""Filter models by use case category"""
     supported_parameters: NotRequired[str]
+    r"""Filter models by supported parameter (comma-separated)"""
     output_modalities: NotRequired[str]
     r"""Filter models by output modality. Accepts a comma-separated list of modalities (text, image, audio, embeddings) or \"all\" to include all models. Defaults to \"text\"."""
 
@@ -140,6 +141,7 @@ class GetModelsRequest(BaseModel):
         Optional[str],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
+    r"""Filter models by supported parameter (comma-separated)"""
 
     output_modalities: Annotated[
         Optional[str],

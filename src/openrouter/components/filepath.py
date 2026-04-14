@@ -10,14 +10,14 @@ FilePathType = Literal["file_path",]
 
 
 class FilePathTypedDict(TypedDict):
-    type: FilePathType
     file_id: str
-    index: float
+    index: int
+    type: FilePathType
 
 
 class FilePath(BaseModel):
-    type: FilePathType
-
     file_id: str
 
-    index: float
+    index: int
+
+    type: FilePathType
