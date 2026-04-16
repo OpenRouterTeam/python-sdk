@@ -7215,11 +7215,12 @@ components:
         effort:
           description: >-
             How much effort the model should put into its response. Higher effort levels may result in more thorough
-            analysis but take longer. Valid values are `low`, `medium`, `high`, or `max`.
+            analysis but take longer. Valid values are `low`, `medium`, `high`, `xhigh`, or `max`.
           enum:
             - low
             - medium
             - high
+            - xhigh
             - max
             - null
           example: medium
@@ -8841,6 +8842,8 @@ components:
             service_tier:
               nullable: true
               type: string
+            text:
+              $ref: '#/components/schemas/TextExtendedConfig'
             usage:
               $ref: '#/components/schemas/Usage'
           type: object
@@ -9482,6 +9485,7 @@ components:
           openrouter:browser_use: '#/components/schemas/OutputBrowserUseServerToolItem'
           openrouter:code_interpreter: '#/components/schemas/OutputCodeInterpreterServerToolItem'
           openrouter:datetime: '#/components/schemas/OutputDatetimeItem'
+          openrouter:experimental__search_models: '#/components/schemas/OutputSearchModelsServerToolItem'
           openrouter:file_search: '#/components/schemas/OutputFileSearchServerToolItem'
           openrouter:image_generation: '#/components/schemas/OutputImageGenerationServerToolItem'
           openrouter:mcp: '#/components/schemas/OutputMcpServerToolItem'
@@ -9523,6 +9527,7 @@ components:
         - $ref: '#/components/schemas/OutputToolSearchServerToolItem'
         - $ref: '#/components/schemas/OutputMemoryServerToolItem'
         - $ref: '#/components/schemas/OutputMcpServerToolItem'
+        - $ref: '#/components/schemas/OutputSearchModelsServerToolItem'
     OutputItemWebSearchCall:
       example:
         action:
@@ -9765,6 +9770,32 @@ components:
           - text: Analyzed the problem and found the optimal solution.
             type: summary_text
         type: reasoning
+    OutputSearchModelsServerToolItem:
+      description: An openrouter:experimental__search_models server tool output item
+      example:
+        arguments: '{"query":"Claude Opus"}'
+        id: sm_tmp_abc123
+        query: Claude Opus
+        status: completed
+        type: openrouter:experimental__search_models
+      properties:
+        arguments:
+          description: The JSON arguments submitted to the search tool (e.g. {"query":"Claude"})
+          type: string
+        id:
+          type: string
+        query:
+          type: string
+        status:
+          $ref: '#/components/schemas/ToolCallStatus'
+        type:
+          enum:
+            - openrouter:experimental__search_models
+          type: string
+      required:
+        - status
+        - type
+      type: object
     OutputTextEditorServerToolItem:
       description: An openrouter:text_editor server tool output item
       example:
@@ -11974,7 +12005,17 @@ components:
     TextExtendedConfig:
       allOf:
         - $ref: '#/components/schemas/TextConfig'
-        - properties: {}
+        - properties:
+            verbosity:
+              enum:
+                - low
+                - medium
+                - high
+                - xhigh
+                - max
+                - null
+              nullable: true
+              type: string
           type: object
       description: Text output configuration including format and verbosity
       example:
@@ -14819,6 +14860,11 @@ paths:
                         description: User-Agent header from the request
                         nullable: true
                         type: string
+                      web_search_engine:
+                        description: The resolved web search engine used for this generation (e.g. exa, firecrawl, parallel)
+                        example: exa
+                        nullable: true
+                        type: string
                     required:
                       - id
                       - upstream_id
@@ -14846,6 +14892,7 @@ paths:
                       - num_input_audio_prompt
                       - num_media_completion
                       - num_search_results
+                      - web_search_engine
                       - origin
                       - usage
                       - is_byok
