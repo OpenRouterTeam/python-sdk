@@ -9761,6 +9761,7 @@ components:
         - audio
         - video
         - rerank
+        - tts
       example: text
       type: string
     OutputModalityEnum:
@@ -14723,6 +14724,7 @@ paths:
                           - completions
                           - embeddings
                           - rerank
+                          - tts
                           - video
                           - null
                         nullable: true
