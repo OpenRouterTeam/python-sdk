@@ -19391,7 +19391,6 @@ paths:
                 input:
                   description: Text to synthesize
                   example: Hello world
-                  maxLength: 4096
                   type: string
                 model:
                   description: TTS model identifier
