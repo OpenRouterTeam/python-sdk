@@ -4930,6 +4930,11 @@ components:
           type: string
         reset_interval:
           $ref: '#/components/schemas/GuardrailInterval'
+        workspace_id:
+          description: The workspace to create the guardrail in. Defaults to the default workspace if not provided.
+          example: 0df9e665-d932-5740-b2c7-b52af166bc11
+          format: uuid
+          type: string
       required:
         - name
       type: object
@@ -4951,6 +4956,7 @@ components:
           name: My New Guardrail
           reset_interval: monthly
           updated_at: null
+          workspace_id: 0df9e665-d932-5740-b2c7-b52af166bc11
       properties:
         data:
           allOf:
@@ -5620,6 +5626,7 @@ components:
           name: Production Guardrail
           reset_interval: monthly
           updated_at: '2025-08-24T15:45:00Z'
+          workspace_id: 0df9e665-d932-5740-b2c7-b52af166bc11
       properties:
         data:
           allOf:
@@ -5683,6 +5690,7 @@ components:
         name: Production Guardrail
         reset_interval: monthly
         updated_at: '2025-08-24T15:45:00Z'
+        workspace_id: 0df9e665-d932-5740-b2c7-b52af166bc11
       properties:
         allowed_models:
           description: Array of model canonical_slugs (immutable identifiers)
@@ -5756,10 +5764,15 @@ components:
           example: '2025-08-24T15:45:00Z'
           nullable: true
           type: string
+        workspace_id:
+          description: The workspace ID this guardrail belongs to.
+          example: 0df9e665-d932-5740-b2c7-b52af166bc11
+          type: string
       required:
         - id
         - name
         - created_at
+        - workspace_id
       type: object
     GuardrailInterval:
       description: Interval at which the limit resets (daily, weekly, monthly)
@@ -6556,6 +6569,7 @@ components:
             name: Production Guardrail
             reset_interval: monthly
             updated_at: '2025-08-24T15:45:00Z'
+            workspace_id: 0df9e665-d932-5740-b2c7-b52af166bc11
         total_count: 1
       properties:
         data:
@@ -12333,6 +12347,7 @@ components:
           name: Updated Guardrail Name
           reset_interval: weekly
           updated_at: '2025-08-24T16:00:00Z'
+          workspace_id: 0df9e665-d932-5740-b2c7-b52af166bc11
       properties:
         data:
           allOf:
@@ -15070,6 +15085,15 @@ paths:
             maximum: 100
             minimum: 1
             type: integer
+        - description: Filter guardrails by workspace ID. By default, guardrails in the default workspace are returned.
+          in: query
+          name: workspace_id
+          required: false
+          schema:
+            description: Filter guardrails by workspace ID. By default, guardrails in the default workspace are returned.
+            example: 0df9e665-d932-5740-b2c7-b52af166bc11
+            format: uuid
+            type: string
       responses:
         '200':
           content:
@@ -15091,6 +15115,7 @@ paths:
                     name: Production Guardrail
                     reset_interval: monthly
                     updated_at: '2025-08-24T15:45:00Z'
+                    workspace_id: 0df9e665-d932-5740-b2c7-b52af166bc11
                 total_count: 1
               schema:
                 $ref: '#/components/schemas/ListGuardrailsResponse'
@@ -15175,6 +15200,7 @@ paths:
                   name: My New Guardrail
                   reset_interval: monthly
                   updated_at: null
+                  workspace_id: 0df9e665-d932-5740-b2c7-b52af166bc11
               schema:
                 $ref: '#/components/schemas/CreateGuardrailResponse'
           description: Guardrail created successfully
@@ -15198,6 +15224,16 @@ paths:
               schema:
                 $ref: '#/components/schemas/UnauthorizedResponse'
           description: Unauthorized - Authentication required or invalid credentials
+        '403':
+          content:
+            application/json:
+              example:
+                error:
+                  code: 403
+                  message: Only management keys can perform this operation
+              schema:
+                $ref: '#/components/schemas/ForbiddenResponse'
+          description: Forbidden - Authentication successful but insufficient permissions
         '500':
           content:
             application/json:
@@ -15303,6 +15339,7 @@ paths:
                   name: Production Guardrail
                   reset_interval: monthly
                   updated_at: '2025-08-24T15:45:00Z'
+                  workspace_id: 0df9e665-d932-5740-b2c7-b52af166bc11
               schema:
                 $ref: '#/components/schemas/GetGuardrailResponse'
           description: Guardrail details
@@ -15383,6 +15420,7 @@ paths:
                   name: Updated Guardrail Name
                   reset_interval: weekly
                   updated_at: '2025-08-24T16:00:00Z'
+                  workspace_id: 0df9e665-d932-5740-b2c7-b52af166bc11
               schema:
                 $ref: '#/components/schemas/UpdateGuardrailResponse'
           description: Guardrail updated successfully
