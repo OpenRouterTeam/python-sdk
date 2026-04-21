@@ -10,6 +10,7 @@
 | `AION_LABS`         | AionLabs            |
 | `ALIBABA`           | Alibaba             |
 | `AMBIENT`           | Ambient             |
+| `BAIDU`             | Baidu               |
 | `AMAZON_BEDROCK`    | Amazon Bedrock      |
 | `AMAZON_NOVA`       | Amazon Nova         |
 | `ANTHROPIC`         | Anthropic           |

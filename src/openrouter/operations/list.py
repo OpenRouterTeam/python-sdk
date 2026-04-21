@@ -80,6 +80,8 @@ class ListRequestTypedDict(TypedDict):
     r"""Whether to include disabled API keys in the response"""
     offset: NotRequired[int]
     r"""Number of API keys to skip for pagination"""
+    workspace_id: NotRequired[str]
+    r"""Filter API keys by workspace ID. By default, keys in the default workspace are returned."""
 
 
 class ListRequest(BaseModel):
@@ -123,6 +125,12 @@ class ListRequest(BaseModel):
     ] = None
     r"""Number of API keys to skip for pagination"""
 
+    workspace_id: Annotated[
+        Optional[str],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Filter API keys by workspace ID. By default, keys in the default workspace are returned."""
+
 
 class ListDataTypedDict(TypedDict):
     byok_usage: float
@@ -163,6 +171,8 @@ class ListDataTypedDict(TypedDict):
     r"""OpenRouter credit usage (in USD) for the current UTC month"""
     usage_weekly: float
     r"""OpenRouter credit usage (in USD) for the current UTC week (Monday-Sunday)"""
+    workspace_id: str
+    r"""The workspace ID this API key belongs to."""
     expires_at: NotRequired[Nullable[datetime]]
     r"""ISO 8601 UTC timestamp when the API key expires, or null if no expiration"""
 
@@ -224,6 +234,9 @@ class ListData(BaseModel):
 
     usage_weekly: float
     r"""OpenRouter credit usage (in USD) for the current UTC week (Monday-Sunday)"""
+
+    workspace_id: str
+    r"""The workspace ID this API key belongs to."""
 
     expires_at: OptionalNullable[datetime] = UNSET
     r"""ISO 8601 UTC timestamp when the API key expires, or null if no expiration"""

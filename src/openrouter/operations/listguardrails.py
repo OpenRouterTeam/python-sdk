@@ -75,6 +75,8 @@ class ListGuardrailsRequestTypedDict(TypedDict):
     r"""Number of records to skip for pagination"""
     limit: NotRequired[int]
     r"""Maximum number of records to return (max 100)"""
+    workspace_id: NotRequired[str]
+    r"""Filter guardrails by workspace ID. By default, guardrails in the default workspace are returned."""
 
 
 class ListGuardrailsRequest(BaseModel):
@@ -117,6 +119,12 @@ class ListGuardrailsRequest(BaseModel):
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
     r"""Maximum number of records to return (max 100)"""
+
+    workspace_id: Annotated[
+        Optional[str],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Filter guardrails by workspace ID. By default, guardrails in the default workspace are returned."""
 
 
 class ListGuardrailsResponseTypedDict(TypedDict):

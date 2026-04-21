@@ -56,6 +56,10 @@ from .outputmemoryservertoolitem import (
 )
 from .outputmessageitem import OutputMessageItem, OutputMessageItemTypedDict
 from .outputreasoningitem import OutputReasoningItem, OutputReasoningItemTypedDict
+from .outputsearchmodelsservertoolitem import (
+    OutputSearchModelsServerToolItem,
+    OutputSearchModelsServerToolItemTypedDict,
+)
 from .outputtexteditorservertoolitem import (
     OutputTextEditorServerToolItem,
     OutputTextEditorServerToolItemTypedDict,
@@ -94,18 +98,19 @@ OutputItemsTypedDict = TypeAliasType(
         OutputTextEditorServerToolItemTypedDict,
         OutputApplyPatchServerToolItemTypedDict,
         OutputDatetimeItemTypedDict,
+        OutputSearchModelsServerToolItemTypedDict,
         OutputMcpServerToolItemTypedDict,
         OutputBrowserUseServerToolItemTypedDict,
         OutputFunctionCallItemTypedDict,
-        OutputImageGenerationServerToolItemTypedDict,
         OutputMessageItemTypedDict,
         OutputComputerCallItemTypedDict,
         OutputWebFetchServerToolItemTypedDict,
         OutputMemoryServerToolItemTypedDict,
         OutputCodeInterpreterCallItemTypedDict,
+        OutputImageGenerationServerToolItemTypedDict,
         OutputBashServerToolItemTypedDict,
-        OutputCodeInterpreterServerToolItemTypedDict,
         OutputReasoningItemTypedDict,
+        OutputCodeInterpreterServerToolItemTypedDict,
     ],
 )
 r"""An output item from the response"""
@@ -126,6 +131,10 @@ OutputItems = Annotated[
             OutputCodeInterpreterServerToolItem, Tag("openrouter:code_interpreter")
         ],
         Annotated[OutputDatetimeItem, Tag("openrouter:datetime")],
+        Annotated[
+            OutputSearchModelsServerToolItem,
+            Tag("openrouter:experimental__search_models"),
+        ],
         Annotated[OutputFileSearchServerToolItem, Tag("openrouter:file_search")],
         Annotated[
             OutputImageGenerationServerToolItem, Tag("openrouter:image_generation")

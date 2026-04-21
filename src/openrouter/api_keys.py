@@ -257,6 +257,7 @@ class APIKeys(BaseSDK):
         x_open_router_categories: Optional[str] = None,
         include_disabled: Optional[bool] = None,
         offset: Optional[int] = None,
+        workspace_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -275,6 +276,7 @@ class APIKeys(BaseSDK):
 
         :param include_disabled: Whether to include disabled API keys in the response
         :param offset: Number of API keys to skip for pagination
+        :param workspace_id: Filter API keys by workspace ID. By default, keys in the default workspace are returned.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -296,6 +298,7 @@ class APIKeys(BaseSDK):
             x_open_router_categories=x_open_router_categories,
             include_disabled=include_disabled,
             offset=offset,
+            workspace_id=workspace_id,
         )
 
         req = self._build_request(
@@ -386,6 +389,7 @@ class APIKeys(BaseSDK):
         x_open_router_categories: Optional[str] = None,
         include_disabled: Optional[bool] = None,
         offset: Optional[int] = None,
+        workspace_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -404,6 +408,7 @@ class APIKeys(BaseSDK):
 
         :param include_disabled: Whether to include disabled API keys in the response
         :param offset: Number of API keys to skip for pagination
+        :param workspace_id: Filter API keys by workspace ID. By default, keys in the default workspace are returned.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -425,6 +430,7 @@ class APIKeys(BaseSDK):
             x_open_router_categories=x_open_router_categories,
             include_disabled=include_disabled,
             offset=offset,
+            workspace_id=workspace_id,
         )
 
         req = self._build_request_async(
@@ -519,6 +525,7 @@ class APIKeys(BaseSDK):
         include_byok_in_limit: Optional[bool] = None,
         limit: OptionalNullable[float] = UNSET,
         limit_reset: OptionalNullable[operations.CreateKeysLimitReset] = UNSET,
+        workspace_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -541,6 +548,7 @@ class APIKeys(BaseSDK):
         :param include_byok_in_limit: Whether to include BYOK usage in the limit
         :param limit: Optional spending limit for the API key in USD
         :param limit_reset: Type of limit reset for the API key (daily, weekly, monthly, or null for no reset). Resets happen automatically at midnight UTC, and weeks are Monday through Sunday.
+        :param workspace_id: The workspace to create the API key in. Defaults to the default workspace if not provided.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -567,6 +575,7 @@ class APIKeys(BaseSDK):
                 limit=limit,
                 limit_reset=limit_reset,
                 name=name,
+                workspace_id=workspace_id,
             ),
         )
 
@@ -622,7 +631,7 @@ class APIKeys(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "401", "429", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "429", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -639,6 +648,11 @@ class APIKeys(BaseSDK):
                 errors.UnauthorizedResponseErrorData, http_res
             )
             raise errors.UnauthorizedResponseError(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ForbiddenResponseErrorData, http_res
+            )
+            raise errors.ForbiddenResponseError(response_data, http_res)
         if utils.match_response(http_res, "429", "application/json"):
             response_data = unmarshal_json_response(
                 errors.TooManyRequestsResponseErrorData, http_res
@@ -674,6 +688,7 @@ class APIKeys(BaseSDK):
         include_byok_in_limit: Optional[bool] = None,
         limit: OptionalNullable[float] = UNSET,
         limit_reset: OptionalNullable[operations.CreateKeysLimitReset] = UNSET,
+        workspace_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -696,6 +711,7 @@ class APIKeys(BaseSDK):
         :param include_byok_in_limit: Whether to include BYOK usage in the limit
         :param limit: Optional spending limit for the API key in USD
         :param limit_reset: Type of limit reset for the API key (daily, weekly, monthly, or null for no reset). Resets happen automatically at midnight UTC, and weeks are Monday through Sunday.
+        :param workspace_id: The workspace to create the API key in. Defaults to the default workspace if not provided.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -722,6 +738,7 @@ class APIKeys(BaseSDK):
                 limit=limit,
                 limit_reset=limit_reset,
                 name=name,
+                workspace_id=workspace_id,
             ),
         )
 
@@ -777,7 +794,7 @@ class APIKeys(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "401", "429", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "429", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -794,6 +811,11 @@ class APIKeys(BaseSDK):
                 errors.UnauthorizedResponseErrorData, http_res
             )
             raise errors.UnauthorizedResponseError(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ForbiddenResponseErrorData, http_res
+            )
+            raise errors.ForbiddenResponseError(response_data, http_res)
         if utils.match_response(http_res, "429", "application/json"):
             response_data = unmarshal_json_response(
                 errors.TooManyRequestsResponseErrorData, http_res

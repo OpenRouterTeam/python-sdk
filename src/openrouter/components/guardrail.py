@@ -23,6 +23,8 @@ class GuardrailTypedDict(TypedDict):
     r"""Unique identifier for the guardrail"""
     name: str
     r"""Name of the guardrail"""
+    workspace_id: str
+    r"""The workspace ID this guardrail belongs to."""
     allowed_models: NotRequired[Nullable[List[str]]]
     r"""Array of model canonical_slugs (immutable identifiers)"""
     allowed_providers: NotRequired[Nullable[List[str]]]
@@ -52,6 +54,9 @@ class Guardrail(BaseModel):
 
     name: str
     r"""Name of the guardrail"""
+
+    workspace_id: str
+    r"""The workspace ID this guardrail belongs to."""
 
     allowed_models: OptionalNullable[List[str]] = UNSET
     r"""Array of model canonical_slugs (immutable identifiers)"""

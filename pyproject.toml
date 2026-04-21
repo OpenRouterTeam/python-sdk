@@ -1,9 +1,9 @@
 [project]
 name = "openrouter"
-version = "0.9.1"
+version = "0.9.2"
 description = "Official Python Client SDK for OpenRouter."
 authors = [{ name = "OpenRouter" },]
-readme = "README.md"
+readme = "README-PYPI.md"
 requires-python = ">=3.9.2"
 dependencies = [
     "httpcore >=1.0.9",
@@ -11,6 +11,7 @@ dependencies = [
     "jsonpath-python >=1.0.6",
     "pydantic >=2.11.2",
 ]
+urls.repository = "https://github.com/OpenRouterTeam/python-sdk.git"
 license = { text = "Apache-2.0" }
 
 [dependency-groups]

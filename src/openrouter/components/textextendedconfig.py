@@ -18,11 +18,13 @@ from typing import Literal, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-TextExtendedConfigVerbosity = Union[
+Verbosity = Union[
     Literal[
-        "high",
         "low",
         "medium",
+        "high",
+        "xhigh",
+        "max",
     ],
     UnrecognizedStr,
 ]
@@ -33,7 +35,7 @@ class TextExtendedConfigTypedDict(TypedDict):
 
     format_: NotRequired[FormatsTypedDict]
     r"""Text response format configuration"""
-    verbosity: NotRequired[Nullable[TextExtendedConfigVerbosity]]
+    verbosity: NotRequired[Nullable[Verbosity]]
 
 
 class TextExtendedConfig(BaseModel):
@@ -43,8 +45,7 @@ class TextExtendedConfig(BaseModel):
     r"""Text response format configuration"""
 
     verbosity: Annotated[
-        OptionalNullable[TextExtendedConfigVerbosity],
-        PlainValidator(validate_open_enum(False)),
+        OptionalNullable[Verbosity], PlainValidator(validate_open_enum(False))
     ] = UNSET
 
     @model_serializer(mode="wrap")

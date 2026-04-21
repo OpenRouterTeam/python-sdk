@@ -30,7 +30,9 @@ if TYPE_CHECKING:
     from openrouter.organization import Organization
     from openrouter.providers import Providers
     from openrouter.rerank import Rerank
+    from openrouter.tts import Tts
     from openrouter.video_generation import VideoGeneration
+    from openrouter.workspaces import Workspaces
 
 
 class OpenRouter(BaseSDK):
@@ -40,6 +42,8 @@ class OpenRouter(BaseSDK):
 
     analytics: "Analytics"
     r"""Analytics and usage endpoints"""
+    tts: "Tts"
+    r"""Text-to-speech endpoints"""
     o_auth: "OAuth"
     r"""OAuth authentication endpoints"""
     chat: "Chat"
@@ -66,8 +70,11 @@ class OpenRouter(BaseSDK):
     beta: "Beta"
     video_generation: "VideoGeneration"
     r"""Video Generation endpoints"""
+    workspaces: "Workspaces"
+    r"""Workspaces endpoints"""
     _sub_sdk_map = {
         "analytics": ("openrouter.analytics", "Analytics"),
+        "tts": ("openrouter.tts", "Tts"),
         "o_auth": ("openrouter.oauth", "OAuth"),
         "chat": ("openrouter.chat", "Chat"),
         "credits": ("openrouter.credits", "Credits"),
@@ -82,6 +89,7 @@ class OpenRouter(BaseSDK):
         "rerank": ("openrouter.rerank", "Rerank"),
         "beta": ("openrouter.beta", "Beta"),
         "video_generation": ("openrouter.video_generation", "VideoGeneration"),
+        "workspaces": ("openrouter.workspaces", "Workspaces"),
     }
 
     def __init__(

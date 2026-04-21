@@ -12,7 +12,7 @@ from openrouter.types import (
 from openrouter.utils import validate_open_enum
 from pydantic import model_serializer
 from pydantic.functional_validators import PlainValidator
-from typing import List
+from typing import List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
@@ -35,6 +35,8 @@ class CreateGuardrailRequestTypedDict(TypedDict):
     r"""Spending limit in USD"""
     reset_interval: NotRequired[Nullable[GuardrailInterval]]
     r"""Interval at which the limit resets (daily, weekly, monthly)"""
+    workspace_id: NotRequired[str]
+    r"""The workspace to create the guardrail in. Defaults to the default workspace if not provided."""
 
 
 class CreateGuardrailRequest(BaseModel):
@@ -67,6 +69,9 @@ class CreateGuardrailRequest(BaseModel):
     ] = UNSET
     r"""Interval at which the limit resets (daily, weekly, monthly)"""
 
+    workspace_id: Optional[str] = None
+    r"""The workspace to create the guardrail in. Defaults to the default workspace if not provided."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = [
@@ -78,6 +83,7 @@ class CreateGuardrailRequest(BaseModel):
             "ignored_providers",
             "limit_usd",
             "reset_interval",
+            "workspace_id",
         ]
         nullable_fields = [
             "allowed_models",

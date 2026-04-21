@@ -323,6 +323,35 @@ class CreateEmbeddingsData(BaseModel):
 Object = Literal["list",]
 
 
+class PromptTokensDetailsTypedDict(TypedDict):
+    r"""Per-modality token breakdown. Only present when the input contains 2+ modalities (e.g. text + image) and the upstream provider returns modality-level usage data. Only non-zero modality counts are included."""
+
+    audio_tokens: NotRequired[int]
+    r"""Number of audio tokens in the input"""
+    image_tokens: NotRequired[int]
+    r"""Number of image tokens in the input"""
+    text_tokens: NotRequired[int]
+    r"""Number of text tokens in the input"""
+    video_tokens: NotRequired[int]
+    r"""Number of video tokens in the input"""
+
+
+class PromptTokensDetails(BaseModel):
+    r"""Per-modality token breakdown. Only present when the input contains 2+ modalities (e.g. text + image) and the upstream provider returns modality-level usage data. Only non-zero modality counts are included."""
+
+    audio_tokens: Optional[int] = None
+    r"""Number of audio tokens in the input"""
+
+    image_tokens: Optional[int] = None
+    r"""Number of image tokens in the input"""
+
+    text_tokens: Optional[int] = None
+    r"""Number of text tokens in the input"""
+
+    video_tokens: Optional[int] = None
+    r"""Number of video tokens in the input"""
+
+
 class CreateEmbeddingsUsageTypedDict(TypedDict):
     r"""Token usage statistics"""
 
@@ -332,6 +361,8 @@ class CreateEmbeddingsUsageTypedDict(TypedDict):
     r"""Total number of tokens used"""
     cost: NotRequired[float]
     r"""Cost of the request in credits"""
+    prompt_tokens_details: NotRequired[PromptTokensDetailsTypedDict]
+    r"""Per-modality token breakdown. Only present when the input contains 2+ modalities (e.g. text + image) and the upstream provider returns modality-level usage data. Only non-zero modality counts are included."""
 
 
 class CreateEmbeddingsUsage(BaseModel):
@@ -345,6 +376,9 @@ class CreateEmbeddingsUsage(BaseModel):
 
     cost: Optional[float] = None
     r"""Cost of the request in credits"""
+
+    prompt_tokens_details: Optional[PromptTokensDetails] = None
+    r"""Per-modality token breakdown. Only present when the input contains 2+ modalities (e.g. text + image) and the upstream provider returns modality-level usage data. Only non-zero modality counts are included."""
 
 
 class CreateEmbeddingsResponseBodyTypedDict(TypedDict):

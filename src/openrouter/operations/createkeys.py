@@ -93,6 +93,8 @@ class CreateKeysRequestBodyTypedDict(TypedDict):
     r"""Optional spending limit for the API key in USD"""
     limit_reset: NotRequired[Nullable[CreateKeysLimitReset]]
     r"""Type of limit reset for the API key (daily, weekly, monthly, or null for no reset). Resets happen automatically at midnight UTC, and weeks are Monday through Sunday."""
+    workspace_id: NotRequired[str]
+    r"""The workspace to create the API key in. Defaults to the default workspace if not provided."""
 
 
 class CreateKeysRequestBody(BaseModel):
@@ -117,6 +119,9 @@ class CreateKeysRequestBody(BaseModel):
     ] = UNSET
     r"""Type of limit reset for the API key (daily, weekly, monthly, or null for no reset). Resets happen automatically at midnight UTC, and weeks are Monday through Sunday."""
 
+    workspace_id: Optional[str] = None
+    r"""The workspace to create the API key in. Defaults to the default workspace if not provided."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = [
@@ -125,6 +130,7 @@ class CreateKeysRequestBody(BaseModel):
             "include_byok_in_limit",
             "limit",
             "limit_reset",
+            "workspace_id",
         ]
         nullable_fields = ["creator_user_id", "expires_at", "limit", "limit_reset"]
         null_default_fields = []
@@ -247,6 +253,8 @@ class CreateKeysDataTypedDict(TypedDict):
     r"""OpenRouter credit usage (in USD) for the current UTC month"""
     usage_weekly: float
     r"""OpenRouter credit usage (in USD) for the current UTC week (Monday-Sunday)"""
+    workspace_id: str
+    r"""The workspace ID this API key belongs to."""
     expires_at: NotRequired[Nullable[datetime]]
     r"""ISO 8601 UTC timestamp when the API key expires, or null if no expiration"""
 
@@ -310,6 +318,9 @@ class CreateKeysData(BaseModel):
 
     usage_weekly: float
     r"""OpenRouter credit usage (in USD) for the current UTC week (Monday-Sunday)"""
+
+    workspace_id: str
+    r"""The workspace ID this API key belongs to."""
 
     expires_at: OptionalNullable[datetime] = UNSET
     r"""ISO 8601 UTC timestamp when the API key expires, or null if no expiration"""

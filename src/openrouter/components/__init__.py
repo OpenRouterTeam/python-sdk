@@ -61,6 +61,14 @@ if TYPE_CHECKING:
         BaseInputsUnionTypedDict,
     )
     from .basereasoningconfig import BaseReasoningConfig, BaseReasoningConfigTypedDict
+    from .bulkaddworkspacemembersrequest import (
+        BulkAddWorkspaceMembersRequest,
+        BulkAddWorkspaceMembersRequestTypedDict,
+    )
+    from .bulkaddworkspacemembersresponse import (
+        BulkAddWorkspaceMembersResponse,
+        BulkAddWorkspaceMembersResponseTypedDict,
+    )
     from .bulkassignkeysrequest import (
         BulkAssignKeysRequest,
         BulkAssignKeysRequestTypedDict,
@@ -76,6 +84,14 @@ if TYPE_CHECKING:
     from .bulkassignmembersresponse import (
         BulkAssignMembersResponse,
         BulkAssignMembersResponseTypedDict,
+    )
+    from .bulkremoveworkspacemembersrequest import (
+        BulkRemoveWorkspaceMembersRequest,
+        BulkRemoveWorkspaceMembersRequestTypedDict,
+    )
+    from .bulkremoveworkspacemembersresponse import (
+        BulkRemoveWorkspaceMembersResponse,
+        BulkRemoveWorkspaceMembersResponseTypedDict,
     )
     from .bulkunassignkeysrequest import (
         BulkUnassignKeysRequest,
@@ -364,6 +380,14 @@ if TYPE_CHECKING:
         CreateGuardrailResponse,
         CreateGuardrailResponseTypedDict,
     )
+    from .createworkspacerequest import (
+        CreateWorkspaceRequest,
+        CreateWorkspaceRequestTypedDict,
+    )
+    from .createworkspaceresponse import (
+        CreateWorkspaceResponse,
+        CreateWorkspaceResponseTypedDict,
+    )
     from .customtool import (
         CustomTool,
         CustomToolTypedDict,
@@ -391,6 +415,10 @@ if TYPE_CHECKING:
     from .deleteguardrailresponse import (
         DeleteGuardrailResponse,
         DeleteGuardrailResponseTypedDict,
+    )
+    from .deleteworkspaceresponse import (
+        DeleteWorkspaceResponse,
+        DeleteWorkspaceResponseTypedDict,
     )
     from .easyinputmessage import (
         EasyInputMessage,
@@ -502,9 +530,36 @@ if TYPE_CHECKING:
         OutputInputImage,
         OutputInputImageTypedDict,
     )
+    from .generationcontentdata import (
+        GenerationContentData,
+        GenerationContentDataOutput,
+        GenerationContentDataOutputTypedDict,
+        GenerationContentDataTypedDict,
+        Input1,
+        Input1TypedDict,
+        Input2,
+        Input2TypedDict,
+        InputUnion,
+        InputUnionTypedDict,
+    )
+    from .generationcontentresponse import (
+        GenerationContentResponse,
+        GenerationContentResponseTypedDict,
+    )
+    from .generationresponse import (
+        APIType,
+        GenerationResponse,
+        GenerationResponseData,
+        GenerationResponseDataTypedDict,
+        GenerationResponseTypedDict,
+    )
     from .getguardrailresponse import (
         GetGuardrailResponse,
         GetGuardrailResponseTypedDict,
+    )
+    from .getworkspaceresponse import (
+        GetWorkspaceResponse,
+        GetWorkspaceResponseTypedDict,
     )
     from .guardrail import Guardrail, GuardrailTypedDict
     from .guardrailinterval import GuardrailInterval
@@ -658,6 +713,10 @@ if TYPE_CHECKING:
         ListMemberAssignmentsResponse,
         ListMemberAssignmentsResponseTypedDict,
     )
+    from .listworkspacesresponse import (
+        ListWorkspacesResponse,
+        ListWorkspacesResponseTypedDict,
+    )
     from .mcpservertool import (
         AllowedTools,
         AllowedToolsTypedDict,
@@ -688,9 +747,9 @@ if TYPE_CHECKING:
     from .modelgroup import ModelGroup
     from .modellinks import ModelLinks, ModelLinksTypedDict
     from .modelscountresponse import (
-        Data,
-        DataTypedDict,
         ModelsCountResponse,
+        ModelsCountResponseData,
+        ModelsCountResponseDataTypedDict,
         ModelsCountResponseTypedDict,
     )
     from .modelslistresponse import ModelsListResponse, ModelsListResponseTypedDict
@@ -920,6 +979,11 @@ if TYPE_CHECKING:
         OutputReasoningItemStatusUnionTypedDict,
         OutputReasoningItemType,
         OutputReasoningItemTypedDict,
+    )
+    from .outputsearchmodelsservertoolitem import (
+        OutputSearchModelsServerToolItem,
+        OutputSearchModelsServerToolItemType,
+        OutputSearchModelsServerToolItemTypedDict,
     )
     from .outputtexteditorservertoolitem import (
         Command,
@@ -1217,7 +1281,6 @@ if TYPE_CHECKING:
         StreamLogprobTopLogprob,
         StreamLogprobTopLogprobTypedDict,
     )
-    from .textconfig import TextConfig, TextConfigTypedDict, TextConfigVerbosity
     from .textdeltaevent import (
         TextDeltaEvent,
         TextDeltaEventType,
@@ -1227,7 +1290,7 @@ if TYPE_CHECKING:
     from .textextendedconfig import (
         TextExtendedConfig,
         TextExtendedConfigTypedDict,
-        TextExtendedConfigVerbosity,
+        Verbosity,
     )
     from .toolcallstatus import ToolCallStatus
     from .toolchoiceallowed import (
@@ -1261,6 +1324,14 @@ if TYPE_CHECKING:
     from .updateguardrailresponse import (
         UpdateGuardrailResponse,
         UpdateGuardrailResponseTypedDict,
+    )
+    from .updateworkspacerequest import (
+        UpdateWorkspaceRequest,
+        UpdateWorkspaceRequestTypedDict,
+    )
+    from .updateworkspaceresponse import (
+        UpdateWorkspaceResponse,
+        UpdateWorkspaceResponseTypedDict,
     )
     from .urlcitation import URLCitation, URLCitationType, URLCitationTypedDict
     from .usage import (
@@ -1359,8 +1430,15 @@ if TYPE_CHECKING:
         WebSearchUserLocationServerToolType,
         WebSearchUserLocationServerToolTypedDict,
     )
+    from .workspace import Workspace, WorkspaceTypedDict
+    from .workspacemember import (
+        WorkspaceMember,
+        WorkspaceMemberRole,
+        WorkspaceMemberTypedDict,
+    )
 
 __all__ = [
+    "APIType",
     "Action",
     "ActionEnum",
     "ActionFindInPage",
@@ -1424,6 +1502,10 @@ __all__ = [
     "BaseInputsUnionTypedDict",
     "BaseReasoningConfig",
     "BaseReasoningConfigTypedDict",
+    "BulkAddWorkspaceMembersRequest",
+    "BulkAddWorkspaceMembersRequestTypedDict",
+    "BulkAddWorkspaceMembersResponse",
+    "BulkAddWorkspaceMembersResponseTypedDict",
     "BulkAssignKeysRequest",
     "BulkAssignKeysRequestTypedDict",
     "BulkAssignKeysResponse",
@@ -1432,6 +1514,10 @@ __all__ = [
     "BulkAssignMembersRequestTypedDict",
     "BulkAssignMembersResponse",
     "BulkAssignMembersResponseTypedDict",
+    "BulkRemoveWorkspaceMembersRequest",
+    "BulkRemoveWorkspaceMembersRequestTypedDict",
+    "BulkRemoveWorkspaceMembersResponse",
+    "BulkRemoveWorkspaceMembersResponseTypedDict",
     "BulkUnassignKeysRequest",
     "BulkUnassignKeysRequestTypedDict",
     "BulkUnassignKeysResponse",
@@ -1628,11 +1714,13 @@ __all__ = [
     "CreateGuardrailRequestTypedDict",
     "CreateGuardrailResponse",
     "CreateGuardrailResponseTypedDict",
+    "CreateWorkspaceRequest",
+    "CreateWorkspaceRequestTypedDict",
+    "CreateWorkspaceResponse",
+    "CreateWorkspaceResponseTypedDict",
     "CustomTool",
     "CustomToolTypedDict",
-    "Data",
     "DataCollection",
-    "DataTypedDict",
     "DatetimeServerTool",
     "DatetimeServerToolConfig",
     "DatetimeServerToolConfigTypedDict",
@@ -1642,6 +1730,8 @@ __all__ = [
     "DefaultParametersTypedDict",
     "DeleteGuardrailResponse",
     "DeleteGuardrailResponseTypedDict",
+    "DeleteWorkspaceResponse",
+    "DeleteWorkspaceResponseTypedDict",
     "EasyInputMessage",
     "EasyInputMessageContentInputImage",
     "EasyInputMessageContentInputImageTypedDict",
@@ -1738,8 +1828,20 @@ __all__ = [
     "FunctionCallOutputItemStatus",
     "FunctionCallOutputItemTypeFunctionCallOutput",
     "FunctionCallOutputItemTypedDict",
+    "GenerationContentData",
+    "GenerationContentDataOutput",
+    "GenerationContentDataOutputTypedDict",
+    "GenerationContentDataTypedDict",
+    "GenerationContentResponse",
+    "GenerationContentResponseTypedDict",
+    "GenerationResponse",
+    "GenerationResponseData",
+    "GenerationResponseDataTypedDict",
+    "GenerationResponseTypedDict",
     "GetGuardrailResponse",
     "GetGuardrailResponseTypedDict",
+    "GetWorkspaceResponse",
+    "GetWorkspaceResponseTypedDict",
     "Guardrail",
     "GuardrailInterval",
     "GuardrailTypedDict",
@@ -1772,6 +1874,10 @@ __all__ = [
     "ImageGenerationStatus",
     "IncompleteDetails",
     "IncompleteDetailsTypedDict",
+    "Input1",
+    "Input1TypedDict",
+    "Input2",
+    "Input2TypedDict",
     "InputAudio",
     "InputAudioInputAudio",
     "InputAudioInputAudioTypedDict",
@@ -1807,6 +1913,8 @@ __all__ = [
     "InputTextTypedDict",
     "InputTokensDetails",
     "InputTokensDetailsTypedDict",
+    "InputUnion",
+    "InputUnionTypedDict",
     "InputVideo",
     "InputVideoType",
     "InputVideoTypedDict",
@@ -1858,6 +1966,8 @@ __all__ = [
     "ListKeyAssignmentsResponseTypedDict",
     "ListMemberAssignmentsResponse",
     "ListMemberAssignmentsResponseTypedDict",
+    "ListWorkspacesResponse",
+    "ListWorkspacesResponseTypedDict",
     "Logprob",
     "LogprobTypedDict",
     "MaxPrice",
@@ -1883,6 +1993,8 @@ __all__ = [
     "ModelLinksTypedDict",
     "ModelTypedDict",
     "ModelsCountResponse",
+    "ModelsCountResponseData",
+    "ModelsCountResponseDataTypedDict",
     "ModelsCountResponseTypedDict",
     "ModelsListResponse",
     "ModelsListResponseTypedDict",
@@ -2058,6 +2170,9 @@ __all__ = [
     "OutputReasoningItemStatusUnionTypedDict",
     "OutputReasoningItemType",
     "OutputReasoningItemTypedDict",
+    "OutputSearchModelsServerToolItem",
+    "OutputSearchModelsServerToolItemType",
+    "OutputSearchModelsServerToolItemTypedDict",
     "OutputTextEditorServerToolItem",
     "OutputTextEditorServerToolItemType",
     "OutputTextEditorServerToolItemTypedDict",
@@ -2271,9 +2386,6 @@ __all__ = [
     "SupportedResolution",
     "SupportedSize",
     "Syntax",
-    "TextConfig",
-    "TextConfigTypedDict",
-    "TextConfigVerbosity",
     "TextDeltaEvent",
     "TextDeltaEventType",
     "TextDeltaEventTypedDict",
@@ -2282,7 +2394,6 @@ __all__ = [
     "TextDoneEventTypedDict",
     "TextExtendedConfig",
     "TextExtendedConfigTypedDict",
-    "TextExtendedConfigVerbosity",
     "Tokenizer",
     "TooManyRequestsResponseErrorData",
     "TooManyRequestsResponseErrorDataTypedDict",
@@ -2318,6 +2429,10 @@ __all__ = [
     "UpdateGuardrailRequestTypedDict",
     "UpdateGuardrailResponse",
     "UpdateGuardrailResponseTypedDict",
+    "UpdateWorkspaceRequest",
+    "UpdateWorkspaceRequestTypedDict",
+    "UpdateWorkspaceResponse",
+    "UpdateWorkspaceResponseTypedDict",
     "Usage",
     "UsageTypedDict",
     "Value1",
@@ -2326,6 +2441,7 @@ __all__ = [
     "Value2TypedDict",
     "Variables",
     "VariablesTypedDict",
+    "Verbosity",
     "VideoGenerationRequest",
     "VideoGenerationRequestTypedDict",
     "VideoGenerationResponse",
@@ -2371,6 +2487,11 @@ __all__ = [
     "WebSearchUserLocationServerToolTypedDict",
     "WebSearchUserLocationType",
     "WebSearchUserLocationTypedDict",
+    "Workspace",
+    "WorkspaceMember",
+    "WorkspaceMemberRole",
+    "WorkspaceMemberTypedDict",
+    "WorkspaceTypedDict",
 ]
 
 _dynamic_imports: dict[str, str] = {
@@ -2418,6 +2539,10 @@ _dynamic_imports: dict[str, str] = {
     "BaseInputsUnionTypedDict": ".baseinputs_union",
     "BaseReasoningConfig": ".basereasoningconfig",
     "BaseReasoningConfigTypedDict": ".basereasoningconfig",
+    "BulkAddWorkspaceMembersRequest": ".bulkaddworkspacemembersrequest",
+    "BulkAddWorkspaceMembersRequestTypedDict": ".bulkaddworkspacemembersrequest",
+    "BulkAddWorkspaceMembersResponse": ".bulkaddworkspacemembersresponse",
+    "BulkAddWorkspaceMembersResponseTypedDict": ".bulkaddworkspacemembersresponse",
     "BulkAssignKeysRequest": ".bulkassignkeysrequest",
     "BulkAssignKeysRequestTypedDict": ".bulkassignkeysrequest",
     "BulkAssignKeysResponse": ".bulkassignkeysresponse",
@@ -2426,6 +2551,10 @@ _dynamic_imports: dict[str, str] = {
     "BulkAssignMembersRequestTypedDict": ".bulkassignmembersrequest",
     "BulkAssignMembersResponse": ".bulkassignmembersresponse",
     "BulkAssignMembersResponseTypedDict": ".bulkassignmembersresponse",
+    "BulkRemoveWorkspaceMembersRequest": ".bulkremoveworkspacemembersrequest",
+    "BulkRemoveWorkspaceMembersRequestTypedDict": ".bulkremoveworkspacemembersrequest",
+    "BulkRemoveWorkspaceMembersResponse": ".bulkremoveworkspacemembersresponse",
+    "BulkRemoveWorkspaceMembersResponseTypedDict": ".bulkremoveworkspacemembersresponse",
     "BulkUnassignKeysRequest": ".bulkunassignkeysrequest",
     "BulkUnassignKeysRequestTypedDict": ".bulkunassignkeysrequest",
     "BulkUnassignKeysResponse": ".bulkunassignkeysresponse",
@@ -2633,6 +2762,10 @@ _dynamic_imports: dict[str, str] = {
     "CreateGuardrailRequestTypedDict": ".createguardrailrequest",
     "CreateGuardrailResponse": ".createguardrailresponse",
     "CreateGuardrailResponseTypedDict": ".createguardrailresponse",
+    "CreateWorkspaceRequest": ".createworkspacerequest",
+    "CreateWorkspaceRequestTypedDict": ".createworkspacerequest",
+    "CreateWorkspaceResponse": ".createworkspaceresponse",
+    "CreateWorkspaceResponseTypedDict": ".createworkspaceresponse",
     "CustomTool": ".customtool",
     "CustomToolTypedDict": ".customtool",
     "Format": ".customtool",
@@ -2654,6 +2787,8 @@ _dynamic_imports: dict[str, str] = {
     "DefaultParametersTypedDict": ".defaultparameters",
     "DeleteGuardrailResponse": ".deleteguardrailresponse",
     "DeleteGuardrailResponseTypedDict": ".deleteguardrailresponse",
+    "DeleteWorkspaceResponse": ".deleteworkspaceresponse",
+    "DeleteWorkspaceResponseTypedDict": ".deleteworkspaceresponse",
     "EasyInputMessage": ".easyinputmessage",
     "EasyInputMessageContentInputImage": ".easyinputmessage",
     "EasyInputMessageContentInputImageTypedDict": ".easyinputmessage",
@@ -2745,8 +2880,27 @@ _dynamic_imports: dict[str, str] = {
     "FunctionCallOutputItemTypedDict": ".functioncalloutputitem",
     "OutputInputImage": ".functioncalloutputitem",
     "OutputInputImageTypedDict": ".functioncalloutputitem",
+    "GenerationContentData": ".generationcontentdata",
+    "GenerationContentDataOutput": ".generationcontentdata",
+    "GenerationContentDataOutputTypedDict": ".generationcontentdata",
+    "GenerationContentDataTypedDict": ".generationcontentdata",
+    "Input1": ".generationcontentdata",
+    "Input1TypedDict": ".generationcontentdata",
+    "Input2": ".generationcontentdata",
+    "Input2TypedDict": ".generationcontentdata",
+    "InputUnion": ".generationcontentdata",
+    "InputUnionTypedDict": ".generationcontentdata",
+    "GenerationContentResponse": ".generationcontentresponse",
+    "GenerationContentResponseTypedDict": ".generationcontentresponse",
+    "APIType": ".generationresponse",
+    "GenerationResponse": ".generationresponse",
+    "GenerationResponseData": ".generationresponse",
+    "GenerationResponseDataTypedDict": ".generationresponse",
+    "GenerationResponseTypedDict": ".generationresponse",
     "GetGuardrailResponse": ".getguardrailresponse",
     "GetGuardrailResponseTypedDict": ".getguardrailresponse",
+    "GetWorkspaceResponse": ".getworkspaceresponse",
+    "GetWorkspaceResponseTypedDict": ".getworkspaceresponse",
     "Guardrail": ".guardrail",
     "GuardrailTypedDict": ".guardrail",
     "GuardrailInterval": ".guardrailinterval",
@@ -2872,6 +3026,8 @@ _dynamic_imports: dict[str, str] = {
     "ListKeyAssignmentsResponseTypedDict": ".listkeyassignmentsresponse",
     "ListMemberAssignmentsResponse": ".listmemberassignmentsresponse",
     "ListMemberAssignmentsResponseTypedDict": ".listmemberassignmentsresponse",
+    "ListWorkspacesResponse": ".listworkspacesresponse",
+    "ListWorkspacesResponseTypedDict": ".listworkspacesresponse",
     "AllowedTools": ".mcpservertool",
     "AllowedToolsTypedDict": ".mcpservertool",
     "AllowedToolsUnion": ".mcpservertool",
@@ -2900,9 +3056,9 @@ _dynamic_imports: dict[str, str] = {
     "ModelGroup": ".modelgroup",
     "ModelLinks": ".modellinks",
     "ModelLinksTypedDict": ".modellinks",
-    "Data": ".modelscountresponse",
-    "DataTypedDict": ".modelscountresponse",
     "ModelsCountResponse": ".modelscountresponse",
+    "ModelsCountResponseData": ".modelscountresponse",
+    "ModelsCountResponseDataTypedDict": ".modelscountresponse",
     "ModelsCountResponseTypedDict": ".modelscountresponse",
     "ModelsListResponse": ".modelslistresponse",
     "ModelsListResponseTypedDict": ".modelslistresponse",
@@ -3074,6 +3230,9 @@ _dynamic_imports: dict[str, str] = {
     "OutputReasoningItemStatusUnionTypedDict": ".outputreasoningitem",
     "OutputReasoningItemType": ".outputreasoningitem",
     "OutputReasoningItemTypedDict": ".outputreasoningitem",
+    "OutputSearchModelsServerToolItem": ".outputsearchmodelsservertoolitem",
+    "OutputSearchModelsServerToolItemType": ".outputsearchmodelsservertoolitem",
+    "OutputSearchModelsServerToolItemTypedDict": ".outputsearchmodelsservertoolitem",
     "Command": ".outputtexteditorservertoolitem",
     "OutputTextEditorServerToolItem": ".outputtexteditorservertoolitem",
     "OutputTextEditorServerToolItemType": ".outputtexteditorservertoolitem",
@@ -3281,9 +3440,6 @@ _dynamic_imports: dict[str, str] = {
     "StreamLogprobTypedDict": ".streamlogprob",
     "StreamLogprobTopLogprob": ".streamlogprobtoplogprob",
     "StreamLogprobTopLogprobTypedDict": ".streamlogprobtoplogprob",
-    "TextConfig": ".textconfig",
-    "TextConfigTypedDict": ".textconfig",
-    "TextConfigVerbosity": ".textconfig",
     "TextDeltaEvent": ".textdeltaevent",
     "TextDeltaEventType": ".textdeltaevent",
     "TextDeltaEventTypedDict": ".textdeltaevent",
@@ -3292,7 +3448,7 @@ _dynamic_imports: dict[str, str] = {
     "TextDoneEventTypedDict": ".textdoneevent",
     "TextExtendedConfig": ".textextendedconfig",
     "TextExtendedConfigTypedDict": ".textextendedconfig",
-    "TextExtendedConfigVerbosity": ".textextendedconfig",
+    "Verbosity": ".textextendedconfig",
     "ToolCallStatus": ".toolcallstatus",
     "Mode": ".toolchoiceallowed",
     "ModeAuto": ".toolchoiceallowed",
@@ -3316,6 +3472,10 @@ _dynamic_imports: dict[str, str] = {
     "UpdateGuardrailRequestTypedDict": ".updateguardrailrequest",
     "UpdateGuardrailResponse": ".updateguardrailresponse",
     "UpdateGuardrailResponseTypedDict": ".updateguardrailresponse",
+    "UpdateWorkspaceRequest": ".updateworkspacerequest",
+    "UpdateWorkspaceRequestTypedDict": ".updateworkspacerequest",
+    "UpdateWorkspaceResponse": ".updateworkspaceresponse",
+    "UpdateWorkspaceResponseTypedDict": ".updateworkspaceresponse",
     "URLCitation": ".urlcitation",
     "URLCitationType": ".urlcitation",
     "URLCitationTypedDict": ".urlcitation",
@@ -3384,6 +3544,11 @@ _dynamic_imports: dict[str, str] = {
     "WebSearchUserLocationServerTool": ".websearchuserlocationservertool",
     "WebSearchUserLocationServerToolType": ".websearchuserlocationservertool",
     "WebSearchUserLocationServerToolTypedDict": ".websearchuserlocationservertool",
+    "Workspace": ".workspace",
+    "WorkspaceTypedDict": ".workspace",
+    "WorkspaceMember": ".workspacemember",
+    "WorkspaceMemberRole": ".workspacemember",
+    "WorkspaceMemberTypedDict": ".workspacemember",
 }
 
 

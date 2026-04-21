@@ -39,7 +39,7 @@ from .preview_websearchservertool import (
 from .responseserrorfield import ResponsesErrorField, ResponsesErrorFieldTypedDict
 from .shellservertool import ShellServerTool, ShellServerToolTypedDict
 from .storedprompttemplate import StoredPromptTemplate, StoredPromptTemplateTypedDict
-from .textconfig import TextConfig, TextConfigTypedDict
+from .textextendedconfig import TextExtendedConfig, TextExtendedConfigTypedDict
 from .truncation import Truncation
 from .usage import Usage, UsageTypedDict
 from .websearchservertool import WebSearchServerTool, WebSearchServerToolTypedDict
@@ -195,7 +195,7 @@ class OpenResponsesResultTypedDict(TypedDict):
     safety_identifier: NotRequired[Nullable[str]]
     service_tier: NotRequired[Nullable[str]]
     store: NotRequired[bool]
-    text: NotRequired[TextConfigTypedDict]
+    text: NotRequired[TextExtendedConfigTypedDict]
     r"""Text output configuration including format and verbosity"""
     top_logprobs: NotRequired[int]
     truncation: NotRequired[Nullable[Truncation]]
@@ -269,7 +269,7 @@ class OpenResponsesResult(BaseModel):
 
     store: Optional[bool] = None
 
-    text: Optional[TextConfig] = None
+    text: Optional[TextExtendedConfig] = None
     r"""Text output configuration including format and verbosity"""
 
     top_logprobs: Optional[int] = None

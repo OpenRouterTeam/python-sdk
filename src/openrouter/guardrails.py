@@ -21,6 +21,7 @@ class Guardrails(BaseSDK):
         x_open_router_categories: Optional[str] = None,
         offset: Optional[int] = None,
         limit: Optional[int] = None,
+        workspace_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -39,6 +40,7 @@ class Guardrails(BaseSDK):
 
         :param offset: Number of records to skip for pagination
         :param limit: Maximum number of records to return (max 100)
+        :param workspace_id: Filter guardrails by workspace ID. By default, guardrails in the default workspace are returned.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -60,6 +62,7 @@ class Guardrails(BaseSDK):
             x_open_router_categories=x_open_router_categories,
             offset=offset,
             limit=limit,
+            workspace_id=workspace_id,
         )
 
         req = self._build_request(
@@ -132,6 +135,7 @@ class Guardrails(BaseSDK):
                 x_open_router_categories=x_open_router_categories,
                 offset=next_offset,
                 limit=limit,
+                workspace_id=workspace_id,
                 retries=retries,
             )
 
@@ -174,6 +178,7 @@ class Guardrails(BaseSDK):
         x_open_router_categories: Optional[str] = None,
         offset: Optional[int] = None,
         limit: Optional[int] = None,
+        workspace_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -192,6 +197,7 @@ class Guardrails(BaseSDK):
 
         :param offset: Number of records to skip for pagination
         :param limit: Maximum number of records to return (max 100)
+        :param workspace_id: Filter guardrails by workspace ID. By default, guardrails in the default workspace are returned.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -213,6 +219,7 @@ class Guardrails(BaseSDK):
             x_open_router_categories=x_open_router_categories,
             offset=offset,
             limit=limit,
+            workspace_id=workspace_id,
         )
 
         req = self._build_request_async(
@@ -288,6 +295,7 @@ class Guardrails(BaseSDK):
                 x_open_router_categories=x_open_router_categories,
                 offset=next_offset,
                 limit=limit,
+                workspace_id=workspace_id,
                 retries=retries,
             )
 
@@ -337,6 +345,7 @@ class Guardrails(BaseSDK):
         ignored_providers: OptionalNullable[List[str]] = UNSET,
         limit_usd: OptionalNullable[float] = UNSET,
         reset_interval: OptionalNullable[components.GuardrailInterval] = UNSET,
+        workspace_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -362,6 +371,7 @@ class Guardrails(BaseSDK):
         :param ignored_providers: List of provider IDs to exclude from routing
         :param limit_usd: Spending limit in USD
         :param reset_interval: Interval at which the limit resets (daily, weekly, monthly)
+        :param workspace_id: The workspace to create the guardrail in. Defaults to the default workspace if not provided.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -391,6 +401,7 @@ class Guardrails(BaseSDK):
                 limit_usd=limit_usd,
                 name=name,
                 reset_interval=reset_interval,
+                workspace_id=workspace_id,
             ),
         )
 
@@ -446,7 +457,7 @@ class Guardrails(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "401", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -463,6 +474,11 @@ class Guardrails(BaseSDK):
                 errors.UnauthorizedResponseErrorData, http_res
             )
             raise errors.UnauthorizedResponseError(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ForbiddenResponseErrorData, http_res
+            )
+            raise errors.ForbiddenResponseError(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(
                 errors.InternalServerResponseErrorData, http_res
@@ -496,6 +512,7 @@ class Guardrails(BaseSDK):
         ignored_providers: OptionalNullable[List[str]] = UNSET,
         limit_usd: OptionalNullable[float] = UNSET,
         reset_interval: OptionalNullable[components.GuardrailInterval] = UNSET,
+        workspace_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -521,6 +538,7 @@ class Guardrails(BaseSDK):
         :param ignored_providers: List of provider IDs to exclude from routing
         :param limit_usd: Spending limit in USD
         :param reset_interval: Interval at which the limit resets (daily, weekly, monthly)
+        :param workspace_id: The workspace to create the guardrail in. Defaults to the default workspace if not provided.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -550,6 +568,7 @@ class Guardrails(BaseSDK):
                 limit_usd=limit_usd,
                 name=name,
                 reset_interval=reset_interval,
+                workspace_id=workspace_id,
             ),
         )
 
@@ -605,7 +624,7 @@ class Guardrails(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "401", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -622,6 +641,11 @@ class Guardrails(BaseSDK):
                 errors.UnauthorizedResponseErrorData, http_res
             )
             raise errors.UnauthorizedResponseError(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ForbiddenResponseErrorData, http_res
+            )
+            raise errors.ForbiddenResponseError(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(
                 errors.InternalServerResponseErrorData, http_res

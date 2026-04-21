@@ -11,3 +11,4 @@
 | `AUDIO`      | audio        |
 | `VIDEO`      | video        |
 | `RERANK`     | rerank       |
+| `TTS`        | tts          |

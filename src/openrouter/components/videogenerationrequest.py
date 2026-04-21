@@ -44,6 +44,7 @@ class OptionsTypedDict(TypedDict):
     atoma: NotRequired[Dict[str, Nullable[Any]]]
     avian: NotRequired[Dict[str, Nullable[Any]]]
     azure: NotRequired[Dict[str, Nullable[Any]]]
+    baidu: NotRequired[Dict[str, Nullable[Any]]]
     baseten: NotRequired[Dict[str, Nullable[Any]]]
     black_forest_labs: NotRequired[Dict[str, Nullable[Any]]]
     byteplus: NotRequired[Dict[str, Nullable[Any]]]
@@ -181,6 +182,8 @@ class Options(BaseModel):
     avian: Optional[Dict[str, Nullable[Any]]] = None
 
     azure: Optional[Dict[str, Nullable[Any]]] = None
+
+    baidu: Optional[Dict[str, Nullable[Any]]] = None
 
     baseten: Optional[Dict[str, Nullable[Any]]] = None
 
