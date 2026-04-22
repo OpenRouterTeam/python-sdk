@@ -8496,6 +8496,7 @@ components:
                 - Morph
                 - NCompass
                 - Nebius
+                - Nex AGI
                 - NextBit
                 - Novita
                 - Nvidia
@@ -10951,6 +10952,7 @@ components:
         - Morph
         - NCompass
         - Nebius
+        - Nex AGI
         - NextBit
         - Novita
         - Nvidia
@@ -11265,6 +11267,7 @@ components:
             - Morph
             - NCompass
             - Nebius
+            - Nex AGI
             - NextBit
             - Novita
             - Nvidia
@@ -12656,6 +12659,10 @@ components:
                   additionalProperties:
                     nullable: true
                   type: object
+                nex-agi:
+                  additionalProperties:
+                    nullable: true
+                  type: object
                 nextbit:
                   additionalProperties:
                     nullable: true
@@ -13942,6 +13949,10 @@ components:
                     nullable: true
                   type: object
                 nebius:
+                  additionalProperties:
+                    nullable: true
+                  type: object
+                nex-agi:
                   additionalProperties:
                     nullable: true
                   type: object
