@@ -6792,8 +6792,22 @@ components:
               - $ref: '#/components/schemas/OutputWebSearchCallItem'
               - $ref: '#/components/schemas/OutputFileSearchCallItem'
               - $ref: '#/components/schemas/OutputImageGenerationCallItem'
+              - $ref: '#/components/schemas/OutputCodeInterpreterCallItem'
+              - $ref: '#/components/schemas/OutputComputerCallItem'
               - $ref: '#/components/schemas/OutputDatetimeItem'
               - $ref: '#/components/schemas/OutputWebSearchServerToolItem'
+              - $ref: '#/components/schemas/OutputCodeInterpreterServerToolItem'
+              - $ref: '#/components/schemas/OutputFileSearchServerToolItem'
+              - $ref: '#/components/schemas/OutputImageGenerationServerToolItem'
+              - $ref: '#/components/schemas/OutputBrowserUseServerToolItem'
+              - $ref: '#/components/schemas/OutputBashServerToolItem'
+              - $ref: '#/components/schemas/OutputTextEditorServerToolItem'
+              - $ref: '#/components/schemas/OutputApplyPatchServerToolItem'
+              - $ref: '#/components/schemas/OutputWebFetchServerToolItem'
+              - $ref: '#/components/schemas/OutputToolSearchServerToolItem'
+              - $ref: '#/components/schemas/OutputMemoryServerToolItem'
+              - $ref: '#/components/schemas/OutputMcpServerToolItem'
+              - $ref: '#/components/schemas/OutputSearchModelsServerToolItem'
           type: array
       description: Input for a response request - can be a string or array of items
       example:
@@ -8496,6 +8510,7 @@ components:
                 - Morph
                 - NCompass
                 - Nebius
+                - Nex AGI
                 - NextBit
                 - Novita
                 - Nvidia
@@ -10366,7 +10381,7 @@ components:
         - audio
         - video
         - rerank
-        - tts
+        - speech
       example: text
       type: string
     OutputModalityEnum:
@@ -10951,6 +10966,7 @@ components:
         - Morph
         - NCompass
         - Nebius
+        - Nex AGI
         - NextBit
         - Novita
         - Nvidia
@@ -11265,6 +11281,7 @@ components:
             - Morph
             - NCompass
             - Nebius
+            - Nex AGI
             - NextBit
             - Novita
             - Nvidia
@@ -12656,6 +12673,10 @@ components:
                   additionalProperties:
                     nullable: true
                   type: object
+                nex-agi:
+                  additionalProperties:
+                    nullable: true
+                  type: object
                 nextbit:
                   additionalProperties:
                     nullable: true
@@ -13942,6 +13963,10 @@ components:
                     nullable: true
                   type: object
                 nebius:
+                  additionalProperties:
+                    nullable: true
+                  type: object
+                nex-agi:
                   additionalProperties:
                     nullable: true
                   type: object
