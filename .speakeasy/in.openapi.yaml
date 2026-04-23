@@ -6058,6 +6058,10 @@ components:
               example: req-1727282430-aBcDeFgHiJkLmNoPqRsT
               nullable: true
               type: string
+            response_cache_source_id:
+              description: If this generation was served from response cache, contains the original generation ID. Null otherwise.
+              nullable: true
+              type: string
             router:
               description: Router used for the request (e.g., openrouter/auto)
               example: openrouter/auto
@@ -8535,6 +8539,7 @@ components:
                 - OpenAI
                 - OpenInference
                 - Parasail
+                - Poolside
                 - Perplexity
                 - Phala
                 - Recraft
@@ -10991,6 +10996,7 @@ components:
         - OpenAI
         - OpenInference
         - Parasail
+        - Poolside
         - Perplexity
         - Phala
         - Recraft
@@ -11306,6 +11312,7 @@ components:
             - OpenAI
             - OpenInference
             - Parasail
+            - Poolside
             - Perplexity
             - Phala
             - Recraft
@@ -12735,6 +12742,10 @@ components:
                   additionalProperties:
                     nullable: true
                   type: object
+                poolside:
+                  additionalProperties:
+                    nullable: true
+                  type: object
                 recraft:
                   additionalProperties:
                     nullable: true
@@ -14046,6 +14057,10 @@ components:
                     nullable: true
                   type: object
                 phala:
+                  additionalProperties:
+                    nullable: true
+                  type: object
+                poolside:
                   additionalProperties:
                     nullable: true
                   type: object
