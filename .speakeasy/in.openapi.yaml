@@ -6058,6 +6058,10 @@ components:
               example: req-1727282430-aBcDeFgHiJkLmNoPqRsT
               nullable: true
               type: string
+            response_cache_source_id:
+              description: If this generation was served from response cache, contains the original generation ID. Null otherwise.
+              nullable: true
+              type: string
             router:
               description: Router used for the request (e.g., openrouter/auto)
               example: openrouter/auto
@@ -8535,6 +8539,7 @@ components:
                 - OpenAI
                 - OpenInference
                 - Parasail
+                - Poolside
                 - Perplexity
                 - Phala
                 - Recraft
@@ -10991,6 +10996,7 @@ components:
         - OpenAI
         - OpenInference
         - Parasail
+        - Poolside
         - Perplexity
         - Phala
         - Recraft
@@ -11306,6 +11312,7 @@ components:
             - OpenAI
             - OpenInference
             - Parasail
+            - Poolside
             - Perplexity
             - Phala
             - Recraft
@@ -12735,6 +12742,10 @@ components:
                   additionalProperties:
                     nullable: true
                   type: object
+                poolside:
+                  additionalProperties:
+                    nullable: true
+                  type: object
                 recraft:
                   additionalProperties:
                     nullable: true
@@ -14049,6 +14060,10 @@ components:
                   additionalProperties:
                     nullable: true
                   type: object
+                poolside:
+                  additionalProperties:
+                    nullable: true
+                  type: object
                 recraft:
                   additionalProperties:
                     nullable: true
@@ -14631,8 +14646,27 @@ components:
           type: array
         max_results:
           type: integer
+        max_uses:
+          description: >-
+            Maximum number of times the model can invoke web search in a single turn. Passed through to native providers
+            that support it (e.g. Anthropic).
+          type: integer
         search_prompt:
           type: string
+        user_location:
+          allOf:
+            - $ref: '#/components/schemas/WebSearchUserLocation'
+            - description: >-
+                Approximate user location for location-biased search results. Passed through to native providers that
+                support it (e.g. Anthropic).
+              example:
+                city: San Francisco
+                country: US
+                region: California
+                timezone: America/Los_Angeles
+                type: approximate
+              required:
+                - type
       required:
         - id
       type: object
@@ -14753,12 +14787,16 @@ components:
         type: approximate
       properties:
         city:
+          nullable: true
           type: string
         country:
+          nullable: true
           type: string
         region:
+          nullable: true
           type: string
         timezone:
+          nullable: true
           type: string
         type:
           enum:
@@ -15061,7 +15099,9 @@ paths:
           content:
             audio/*:
               schema:
-                description: Raw audio bytestream. Content-Type varies by requested format (audio/mpeg for mp3, audio/L16 for pcm).
+                description: >-
+                  Raw audio bytestream. Content-Type varies by requested format (audio/mpeg for mp3, audio/pcm for pcm —
+                  16-bit little-endian).
                 example: <binary audio data>
                 format: binary
                 type: string
