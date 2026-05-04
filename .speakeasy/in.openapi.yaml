@@ -21687,7 +21687,6 @@ tags:
     name: Workspaces
   - description: beta.responses endpoints
     name: beta.responses
-x-fern-base-path: /
 x-retry-strategy:
   initialDelay: 500
   maxAttempts: 3
