@@ -1,4 +1,4 @@
-speakeasyVersion: 1.680.0
+speakeasyVersion: 1.763.2
 sources:
     OpenRouter API:
         sourceNamespace: open-router-chat-completions-api
@@ -17,7 +17,7 @@ targets:
         codeSamplesRevisionDigest: sha256:db86aed74d199f265e2e20442ef652dac0911c8a657ccb3e6614d56a26b8b44e
 workflow:
     workflowVersion: 1.0.0
-    speakeasyVersion: 1.680.0
+    speakeasyVersion: 1.763.2
     sources:
         OpenRouter API:
             inputs:
