@@ -14,7 +14,6 @@ from typing import Optional
 class PaymentRequiredResponseErrorData(BaseModel):
     error: components_paymentrequiredresponseerrordata.PaymentRequiredResponseErrorData
     r"""Error data for PaymentRequiredResponse"""
-
     user_id: OptionalNullable[str] = UNSET
 
 

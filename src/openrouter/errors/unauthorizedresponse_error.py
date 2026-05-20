@@ -14,7 +14,6 @@ from typing import Optional
 class UnauthorizedResponseErrorData(BaseModel):
     error: components_unauthorizedresponseerrordata.UnauthorizedResponseErrorData
     r"""Error data for UnauthorizedResponse"""
-
     user_id: OptionalNullable[str] = UNSET
 
 

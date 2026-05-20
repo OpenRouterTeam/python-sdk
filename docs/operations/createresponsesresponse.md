@@ -3,15 +3,15 @@
 
 ## Supported Types
 
-### `components.OpenResponsesNonStreamingResponse`
+### `components.OpenResponsesResult`
 
 ```python
-value: components.OpenResponsesNonStreamingResponse = /* values here */
+value: components.OpenResponsesResult = /* values here */
 ```
 
-### `Union[eventstreaming.EventStream[components.OpenResponsesStreamEvent], eventstreaming.EventStreamAsync[components.OpenResponsesStreamEvent]]`
+### `Union[eventstreaming.EventStream[components.StreamEvents], eventstreaming.EventStreamAsync[components.StreamEvents]]`
 
 ```python
-value: Union[eventstreaming.EventStream[components.OpenResponsesStreamEvent], eventstreaming.EventStreamAsync[components.OpenResponsesStreamEvent]] = /* values here */
+value: Union[eventstreaming.EventStream[components.StreamEvents], eventstreaming.EventStreamAsync[components.StreamEvents]] = /* values here */
 ```
 

@@ -21,6 +21,7 @@ By = Union[
         "price",
         "throughput",
         "latency",
+        "exacto",
     ],
     UnrecognizedStr,
 ]

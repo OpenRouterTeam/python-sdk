@@ -1,13 +1,25 @@
-.venv/
 venv/
 src/*.egg-info/
 **/__pycache__/
 .pytest_cache/
 .python-version
-.DS_Store
 pyrightconfig.json
 **/.speakeasy/temp/
 **/.speakeasy/logs/
 .speakeasy/reports
+# Build artifacts
+/dist
+__pycache__/
+*.py[cod]
+*.egg-info/
+*.egg
+# Speakeasy generation artifacts (generated in OSS repo, not here)
+.speakeasy/*.lock
+.speakeasy/*.openapi.yaml
+/docs
+# Environment
 .env
 .env.local
+.env.*.local
+.DS_Store
+.venv/

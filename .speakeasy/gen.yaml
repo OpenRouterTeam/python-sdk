@@ -25,13 +25,14 @@ generation:
   schemas:
     allOfMergeStrategy: shallowMerge
   requestBodyFieldName: ""
+  persistentEdits: {}
   tests:
     generateTests: false
     generateNewTests: true
     skipResponseBodyAssertions: false
   preApplyUnionDiscriminators: true
 python:
-  version: 0.7.11
+  version: 0.9.1
   additionalDependencies:
     dev: {}
     main: {}
@@ -46,6 +47,7 @@ python:
     - OpenRouter
   baseErrorName: OpenRouterError
   clientServerStatusCodesAsErrors: true
+  constFieldCasing: upper
   defaultErrorName: OpenRouterDefaultError
   description: Official Python Client SDK for OpenRouter.
   enableCustomCodeRegions: false
@@ -57,6 +59,7 @@ python:
   flattenGlobalSecurity: true
   flattenRequests: true
   flatteningOrder: parameters-first
+  forwardCompatibleUnionsByDefault: tagged-only
   imports:
     option: openapi
     paths:
@@ -77,6 +80,7 @@ python:
   outputModelSuffix: output
   packageManager: uv
   packageName: openrouter
+  preApplyUnionDiscriminators: false
   pytestFilterWarnings: []
   pytestTimeout: 0
   responseFormat: flat

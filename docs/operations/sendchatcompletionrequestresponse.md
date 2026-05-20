@@ -3,15 +3,15 @@
 
 ## Supported Types
 
-### `components.ChatResponse`
+### `components.ChatResult`
 
 ```python
-value: components.ChatResponse = /* values here */
+value: components.ChatResult = /* values here */
 ```
 
-### `Union[eventstreaming.EventStream[components.ChatStreamingResponseChunk], eventstreaming.EventStreamAsync[components.ChatStreamingResponseChunk]]`
+### `Union[eventstreaming.EventStream[components.ChatStreamChunk], eventstreaming.EventStreamAsync[components.ChatStreamChunk]]`
 
 ```python
-value: Union[eventstreaming.EventStream[components.ChatStreamingResponseChunk], eventstreaming.EventStreamAsync[components.ChatStreamingResponseChunk]] = /* values here */
+value: Union[eventstreaming.EventStream[components.ChatStreamChunk], eventstreaming.EventStreamAsync[components.ChatStreamChunk]] = /* values here */
 ```
 

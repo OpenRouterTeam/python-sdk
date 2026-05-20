@@ -1,5 +1,5 @@
 workflowVersion: 1.0.0
-speakeasyVersion: 1.666.0
+speakeasyVersion: 1.680.0
 sources:
     OpenRouter API:
         inputs:
@@ -8,6 +8,9 @@ sources:
             - location: .speakeasy/overlays/open-enums.overlay.yaml
             - location: .speakeasy/overlays/remove-rss-responses.overlay.yaml
             - location: .speakeasy/overlays/add-headers.overlay.yaml
+            - location: .speakeasy/overlays/allof-simplify.overlay.yaml
+            - location: .speakeasy/overlays/boolean-query-params.overlay.yaml
+            - location: .speakeasy/overlays/fix-nullable-pagination.overlay.yaml
         output: .speakeasy/out.openapi.yaml
         registry:
             location: registry.speakeasyapi.dev/openrouter/sdk/open-router-chat-completions-api

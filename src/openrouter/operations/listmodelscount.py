@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 from openrouter.types import BaseModel
-from openrouter.utils import FieldMetadata, HeaderMetadata
+from openrouter.utils import FieldMetadata, HeaderMetadata, QueryParamMetadata
 import pydantic
 from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
@@ -14,8 +14,12 @@ class ListModelsCountGlobalsTypedDict(TypedDict):
     This is used to track API usage per application.
 
     """
-    x_title: NotRequired[str]
+    x_open_router_title: NotRequired[str]
     r"""The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+    """
+    x_open_router_categories: NotRequired[str]
+    r"""Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
     """
 
@@ -31,12 +35,21 @@ class ListModelsCountGlobals(BaseModel):
 
     """
 
-    x_title: Annotated[
+    x_open_router_title: Annotated[
         Optional[str],
-        pydantic.Field(alias="X-Title"),
+        pydantic.Field(alias="X-OpenRouter-Title"),
         FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
     ] = None
     r"""The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+    """
+
+    x_open_router_categories: Annotated[
+        Optional[str],
+        pydantic.Field(alias="X-OpenRouter-Categories"),
+        FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
+    ] = None
+    r"""Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
     """
 
@@ -47,10 +60,16 @@ class ListModelsCountRequestTypedDict(TypedDict):
     This is used to track API usage per application.
 
     """
-    x_title: NotRequired[str]
+    x_open_router_title: NotRequired[str]
     r"""The app display name allows you to customize how your app appears in OpenRouter's dashboard.
 
     """
+    x_open_router_categories: NotRequired[str]
+    r"""Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
+
+    """
+    output_modalities: NotRequired[str]
+    r"""Filter models by output modality. Accepts a comma-separated list of modalities (text, image, audio, embeddings) or \"all\" to include all models. Defaults to \"text\"."""
 
 
 class ListModelsCountRequest(BaseModel):
@@ -64,11 +83,26 @@ class ListModelsCountRequest(BaseModel):
 
     """
 
-    x_title: Annotated[
+    x_open_router_title: Annotated[
         Optional[str],
-        pydantic.Field(alias="X-Title"),
+        pydantic.Field(alias="X-OpenRouter-Title"),
         FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
     ] = None
     r"""The app display name allows you to customize how your app appears in OpenRouter's dashboard.
 
     """
+
+    x_open_router_categories: Annotated[
+        Optional[str],
+        pydantic.Field(alias="X-OpenRouter-Categories"),
+        FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
+    ] = None
+    r"""Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
+
+    """
+
+    output_modalities: Annotated[
+        Optional[str],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Filter models by output modality. Accepts a comma-separated list of modalities (text, image, audio, embeddings) or \"all\" to include all models. Defaults to \"text\"."""

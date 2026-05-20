@@ -17,9 +17,9 @@ class TopProviderInfoTypedDict(TypedDict):
 
     is_moderated: bool
     r"""Whether the top provider moderates content"""
-    context_length: NotRequired[Nullable[float]]
+    context_length: NotRequired[Nullable[int]]
     r"""Context length from the top provider"""
-    max_completion_tokens: NotRequired[Nullable[float]]
+    max_completion_tokens: NotRequired[Nullable[int]]
     r"""Maximum completion tokens from the top provider"""
 
 
@@ -29,10 +29,10 @@ class TopProviderInfo(BaseModel):
     is_moderated: bool
     r"""Whether the top provider moderates content"""
 
-    context_length: OptionalNullable[float] = UNSET
+    context_length: OptionalNullable[int] = UNSET
     r"""Context length from the top provider"""
 
-    max_completion_tokens: OptionalNullable[float] = UNSET
+    max_completion_tokens: OptionalNullable[int] = UNSET
     r"""Maximum completion tokens from the top provider"""
 
     @model_serializer(mode="wrap")

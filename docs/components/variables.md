@@ -9,21 +9,21 @@
 value: str = /* values here */
 ```
 
-### `components.ResponseInputText`
+### `components.InputText`
 
 ```python
-value: components.ResponseInputText = /* values here */
+value: components.InputText = /* values here */
 ```
 
-### `components.ResponseInputImage`
+### `components.InputImage`
 
 ```python
-value: components.ResponseInputImage = /* values here */
+value: components.InputImage = /* values here */
 ```
 
-### `components.ResponseInputFile`
+### `components.InputFile`
 
 ```python
-value: components.ResponseInputFile = /* values here */
+value: components.InputFile = /* values here */
 ```
 

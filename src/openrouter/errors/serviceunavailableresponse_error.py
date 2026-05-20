@@ -14,7 +14,6 @@ from typing import Optional
 class ServiceUnavailableResponseErrorData(BaseModel):
     error: components_serviceunavailableresponseerrordata.ServiceUnavailableResponseErrorData
     r"""Error data for ServiceUnavailableResponse"""
-
     user_id: OptionalNullable[str] = UNSET
 
 

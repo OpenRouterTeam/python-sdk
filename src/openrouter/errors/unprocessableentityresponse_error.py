@@ -14,7 +14,6 @@ from typing import Optional
 class UnprocessableEntityResponseErrorData(BaseModel):
     error: components_unprocessableentityresponseerrordata.UnprocessableEntityResponseErrorData
     r"""Error data for UnprocessableEntityResponse"""
-
     user_id: OptionalNullable[str] = UNSET
 
 

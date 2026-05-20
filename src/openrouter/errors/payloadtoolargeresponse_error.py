@@ -14,7 +14,6 @@ from typing import Optional
 class PayloadTooLargeResponseErrorData(BaseModel):
     error: components_payloadtoolargeresponseerrordata.PayloadTooLargeResponseErrorData
     r"""Error data for PayloadTooLargeResponse"""
-
     user_id: OptionalNullable[str] = UNSET
 
 

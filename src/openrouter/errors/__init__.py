@@ -15,6 +15,7 @@ if TYPE_CHECKING:
         BadRequestResponseError,
         BadRequestResponseErrorData,
     )
+    from .conflictresponse_error import ConflictResponseError, ConflictResponseErrorData
     from .edgenetworktimeoutresponse_error import (
         EdgeNetworkTimeoutResponseError,
         EdgeNetworkTimeoutResponseErrorData,
@@ -69,6 +70,8 @@ __all__ = [
     "BadGatewayResponseErrorData",
     "BadRequestResponseError",
     "BadRequestResponseErrorData",
+    "ConflictResponseError",
+    "ConflictResponseErrorData",
     "EdgeNetworkTimeoutResponseError",
     "EdgeNetworkTimeoutResponseErrorData",
     "ForbiddenResponseError",
@@ -104,6 +107,8 @@ _dynamic_imports: dict[str, str] = {
     "BadGatewayResponseErrorData": ".badgatewayresponse_error",
     "BadRequestResponseError": ".badrequestresponse_error",
     "BadRequestResponseErrorData": ".badrequestresponse_error",
+    "ConflictResponseError": ".conflictresponse_error",
+    "ConflictResponseErrorData": ".conflictresponse_error",
     "EdgeNetworkTimeoutResponseError": ".edgenetworktimeoutresponse_error",
     "EdgeNetworkTimeoutResponseErrorData": ".edgenetworktimeoutresponse_error",
     "ForbiddenResponseError": ".forbiddenresponse_error",

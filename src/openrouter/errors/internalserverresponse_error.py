@@ -14,7 +14,6 @@ from typing import Optional
 class InternalServerResponseErrorData(BaseModel):
     error: components_internalserverresponseerrordata.InternalServerResponseErrorData
     r"""Error data for InternalServerResponse"""
-
     user_id: OptionalNullable[str] = UNSET
 
 

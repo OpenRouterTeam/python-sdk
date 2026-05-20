@@ -15,24 +15,47 @@ from typing_extensions import NotRequired, TypedDict
 class DefaultParametersTypedDict(TypedDict):
     r"""Default parameters for this model"""
 
-    temperature: NotRequired[Nullable[float]]
-    top_p: NotRequired[Nullable[float]]
     frequency_penalty: NotRequired[Nullable[float]]
+    presence_penalty: NotRequired[Nullable[float]]
+    repetition_penalty: NotRequired[Nullable[float]]
+    temperature: NotRequired[Nullable[float]]
+    top_k: NotRequired[Nullable[int]]
+    top_p: NotRequired[Nullable[float]]
 
 
 class DefaultParameters(BaseModel):
     r"""Default parameters for this model"""
 
+    frequency_penalty: OptionalNullable[float] = UNSET
+
+    presence_penalty: OptionalNullable[float] = UNSET
+
+    repetition_penalty: OptionalNullable[float] = UNSET
+
     temperature: OptionalNullable[float] = UNSET
+
+    top_k: OptionalNullable[int] = UNSET
 
     top_p: OptionalNullable[float] = UNSET
 
-    frequency_penalty: OptionalNullable[float] = UNSET
-
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["temperature", "top_p", "frequency_penalty"]
-        nullable_fields = ["temperature", "top_p", "frequency_penalty"]
+        optional_fields = [
+            "frequency_penalty",
+            "presence_penalty",
+            "repetition_penalty",
+            "temperature",
+            "top_k",
+            "top_p",
+        ]
+        nullable_fields = [
+            "frequency_penalty",
+            "presence_penalty",
+            "repetition_penalty",
+            "temperature",
+            "top_k",
+            "top_p",
+        ]
         null_default_fields = []
 
         serialized = handler(self)

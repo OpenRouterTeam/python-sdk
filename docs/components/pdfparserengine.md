@@ -1,12 +1,19 @@
 # PDFParserEngine
 
-The engine to use for parsing PDF files.
+The engine to use for parsing PDF files. "pdf-text" is deprecated and automatically redirected to "cloudflare-ai".
 
 
-## Values
+## Supported Types
 
-| Name          | Value         |
-| ------------- | ------------- |
-| `MISTRAL_OCR` | mistral-ocr   |
-| `PDF_TEXT`    | pdf-text      |
-| `NATIVE`      | native        |
+### `components.PDFParserEngineEnum`
+
+```python
+value: components.PDFParserEngineEnum = /* values here */
+```
+
+### `components.PDFParserEnginePDFText`
+
+```python
+value: components.PDFParserEnginePDFText = /* values here */
+```
+

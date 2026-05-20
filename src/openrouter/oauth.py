@@ -18,11 +18,12 @@ class OAuth(BaseSDK):
         *,
         code: str,
         http_referer: Optional[str] = None,
-        x_title: Optional[str] = None,
-        code_verifier: Optional[str] = None,
+        x_open_router_title: Optional[str] = None,
+        x_open_router_categories: Optional[str] = None,
         code_challenge_method: OptionalNullable[
             operations.ExchangeAuthCodeForAPIKeyCodeChallengeMethod
         ] = UNSET,
+        code_verifier: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -36,10 +37,12 @@ class OAuth(BaseSDK):
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
-        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+        :param x_open_router_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
 
-        :param code_verifier: The code verifier if code_challenge was used in the authorization request
+        :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
+
         :param code_challenge_method: The method used to generate the code challenge
+        :param code_verifier: The code verifier if code_challenge was used in the authorization request
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -57,11 +60,12 @@ class OAuth(BaseSDK):
 
         request = operations.ExchangeAuthCodeForAPIKeyRequest(
             http_referer=http_referer,
-            x_title=x_title,
+            x_open_router_title=x_open_router_title,
+            x_open_router_categories=x_open_router_categories,
             request_body=operations.ExchangeAuthCodeForAPIKeyRequestBody(
                 code=code,
-                code_verifier=code_verifier,
                 code_challenge_method=code_challenge_method,
+                code_verifier=code_verifier,
             ),
         )
 
@@ -79,7 +83,8 @@ class OAuth(BaseSDK):
             http_headers=http_headers,
             _globals=operations.ExchangeAuthCodeForAPIKeyGlobals(
                 http_referer=self.sdk_configuration.globals.http_referer,
-                x_title=self.sdk_configuration.globals.x_title,
+                x_open_router_title=self.sdk_configuration.globals.x_open_router_title,
+                x_open_router_categories=self.sdk_configuration.globals.x_open_router_categories,
             ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
@@ -96,10 +101,14 @@ class OAuth(BaseSDK):
         if retries == UNSET:
             if self.sdk_configuration.retry_config is not UNSET:
                 retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 60000, 1.5, 3600000), True
+                )
 
         retry_config = None
         if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, ["429", "500", "502", "503", "504"])
+            retry_config = (retries, ["5XX"])
 
         http_res = self.do_request(
             hook_ctx=HookContext(
@@ -154,11 +163,12 @@ class OAuth(BaseSDK):
         *,
         code: str,
         http_referer: Optional[str] = None,
-        x_title: Optional[str] = None,
-        code_verifier: Optional[str] = None,
+        x_open_router_title: Optional[str] = None,
+        x_open_router_categories: Optional[str] = None,
         code_challenge_method: OptionalNullable[
             operations.ExchangeAuthCodeForAPIKeyCodeChallengeMethod
         ] = UNSET,
+        code_verifier: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -172,10 +182,12 @@ class OAuth(BaseSDK):
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
-        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+        :param x_open_router_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
 
-        :param code_verifier: The code verifier if code_challenge was used in the authorization request
+        :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
+
         :param code_challenge_method: The method used to generate the code challenge
+        :param code_verifier: The code verifier if code_challenge was used in the authorization request
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -193,11 +205,12 @@ class OAuth(BaseSDK):
 
         request = operations.ExchangeAuthCodeForAPIKeyRequest(
             http_referer=http_referer,
-            x_title=x_title,
+            x_open_router_title=x_open_router_title,
+            x_open_router_categories=x_open_router_categories,
             request_body=operations.ExchangeAuthCodeForAPIKeyRequestBody(
                 code=code,
-                code_verifier=code_verifier,
                 code_challenge_method=code_challenge_method,
+                code_verifier=code_verifier,
             ),
         )
 
@@ -215,7 +228,8 @@ class OAuth(BaseSDK):
             http_headers=http_headers,
             _globals=operations.ExchangeAuthCodeForAPIKeyGlobals(
                 http_referer=self.sdk_configuration.globals.http_referer,
-                x_title=self.sdk_configuration.globals.x_title,
+                x_open_router_title=self.sdk_configuration.globals.x_open_router_title,
+                x_open_router_categories=self.sdk_configuration.globals.x_open_router_categories,
             ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
@@ -232,10 +246,14 @@ class OAuth(BaseSDK):
         if retries == UNSET:
             if self.sdk_configuration.retry_config is not UNSET:
                 retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 60000, 1.5, 3600000), True
+                )
 
         retry_config = None
         if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, ["429", "500", "502", "503", "504"])
+            retry_config = (retries, ["5XX"])
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
@@ -290,14 +308,15 @@ class OAuth(BaseSDK):
         *,
         callback_url: str,
         http_referer: Optional[str] = None,
-        x_title: Optional[str] = None,
+        x_open_router_title: Optional[str] = None,
+        x_open_router_categories: Optional[str] = None,
         code_challenge: Optional[str] = None,
         code_challenge_method: Optional[
             operations.CreateAuthKeysCodeCodeChallengeMethod
         ] = None,
-        limit: Optional[float] = None,
         expires_at: OptionalNullable[datetime] = UNSET,
         key_label: Optional[str] = None,
+        limit: Optional[float] = None,
         usage_limit_type: Optional[operations.UsageLimitType] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -312,13 +331,15 @@ class OAuth(BaseSDK):
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
-        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+        :param x_open_router_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+        :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
         :param code_challenge: PKCE code challenge for enhanced security
         :param code_challenge_method: The method used to generate the code challenge
-        :param limit: Credit limit for the API key to be created
         :param expires_at: Optional expiration time for the API key to be created
         :param key_label: Optional custom label for the API key. Defaults to the app name if not provided.
+        :param limit: Credit limit for the API key to be created
         :param usage_limit_type: Optional credit limit reset interval. When set, the credit limit resets on this interval.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -337,14 +358,15 @@ class OAuth(BaseSDK):
 
         request = operations.CreateAuthKeysCodeRequest(
             http_referer=http_referer,
-            x_title=x_title,
+            x_open_router_title=x_open_router_title,
+            x_open_router_categories=x_open_router_categories,
             request_body=operations.CreateAuthKeysCodeRequestBody(
                 callback_url=callback_url,
                 code_challenge=code_challenge,
                 code_challenge_method=code_challenge_method,
-                limit=limit,
                 expires_at=expires_at,
                 key_label=key_label,
+                limit=limit,
                 usage_limit_type=usage_limit_type,
             ),
         )
@@ -363,7 +385,8 @@ class OAuth(BaseSDK):
             http_headers=http_headers,
             _globals=operations.CreateAuthKeysCodeGlobals(
                 http_referer=self.sdk_configuration.globals.http_referer,
-                x_title=self.sdk_configuration.globals.x_title,
+                x_open_router_title=self.sdk_configuration.globals.x_open_router_title,
+                x_open_router_categories=self.sdk_configuration.globals.x_open_router_categories,
             ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
@@ -380,10 +403,14 @@ class OAuth(BaseSDK):
         if retries == UNSET:
             if self.sdk_configuration.retry_config is not UNSET:
                 retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 60000, 1.5, 3600000), True
+                )
 
         retry_config = None
         if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, ["429", "500", "502", "503", "504"])
+            retry_config = (retries, ["5XX"])
 
         http_res = self.do_request(
             hook_ctx=HookContext(
@@ -396,7 +423,7 @@ class OAuth(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "401", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "409", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -415,6 +442,11 @@ class OAuth(BaseSDK):
                 errors.UnauthorizedResponseErrorData, http_res
             )
             raise errors.UnauthorizedResponseError(response_data, http_res)
+        if utils.match_response(http_res, "409", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ConflictResponseErrorData, http_res
+            )
+            raise errors.ConflictResponseError(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(
                 errors.InternalServerResponseErrorData, http_res
@@ -438,14 +470,15 @@ class OAuth(BaseSDK):
         *,
         callback_url: str,
         http_referer: Optional[str] = None,
-        x_title: Optional[str] = None,
+        x_open_router_title: Optional[str] = None,
+        x_open_router_categories: Optional[str] = None,
         code_challenge: Optional[str] = None,
         code_challenge_method: Optional[
             operations.CreateAuthKeysCodeCodeChallengeMethod
         ] = None,
-        limit: Optional[float] = None,
         expires_at: OptionalNullable[datetime] = UNSET,
         key_label: Optional[str] = None,
+        limit: Optional[float] = None,
         usage_limit_type: Optional[operations.UsageLimitType] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -460,13 +493,15 @@ class OAuth(BaseSDK):
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
-        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+        :param x_open_router_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+        :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
         :param code_challenge: PKCE code challenge for enhanced security
         :param code_challenge_method: The method used to generate the code challenge
-        :param limit: Credit limit for the API key to be created
         :param expires_at: Optional expiration time for the API key to be created
         :param key_label: Optional custom label for the API key. Defaults to the app name if not provided.
+        :param limit: Credit limit for the API key to be created
         :param usage_limit_type: Optional credit limit reset interval. When set, the credit limit resets on this interval.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -485,14 +520,15 @@ class OAuth(BaseSDK):
 
         request = operations.CreateAuthKeysCodeRequest(
             http_referer=http_referer,
-            x_title=x_title,
+            x_open_router_title=x_open_router_title,
+            x_open_router_categories=x_open_router_categories,
             request_body=operations.CreateAuthKeysCodeRequestBody(
                 callback_url=callback_url,
                 code_challenge=code_challenge,
                 code_challenge_method=code_challenge_method,
-                limit=limit,
                 expires_at=expires_at,
                 key_label=key_label,
+                limit=limit,
                 usage_limit_type=usage_limit_type,
             ),
         )
@@ -511,7 +547,8 @@ class OAuth(BaseSDK):
             http_headers=http_headers,
             _globals=operations.CreateAuthKeysCodeGlobals(
                 http_referer=self.sdk_configuration.globals.http_referer,
-                x_title=self.sdk_configuration.globals.x_title,
+                x_open_router_title=self.sdk_configuration.globals.x_open_router_title,
+                x_open_router_categories=self.sdk_configuration.globals.x_open_router_categories,
             ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
@@ -528,10 +565,14 @@ class OAuth(BaseSDK):
         if retries == UNSET:
             if self.sdk_configuration.retry_config is not UNSET:
                 retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 60000, 1.5, 3600000), True
+                )
 
         retry_config = None
         if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, ["429", "500", "502", "503", "504"])
+            retry_config = (retries, ["5XX"])
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
@@ -544,7 +585,7 @@ class OAuth(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "401", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "409", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -563,6 +604,11 @@ class OAuth(BaseSDK):
                 errors.UnauthorizedResponseErrorData, http_res
             )
             raise errors.UnauthorizedResponseError(response_data, http_res)
+        if utils.match_response(http_res, "409", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ConflictResponseErrorData, http_res
+            )
+            raise errors.ConflictResponseError(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(
                 errors.InternalServerResponseErrorData, http_res

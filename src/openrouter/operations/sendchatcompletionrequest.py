@@ -2,9 +2,9 @@
 
 from __future__ import annotations
 from openrouter.components import (
-    chatgenerationparams as components_chatgenerationparams,
-    chatresponse as components_chatresponse,
-    chatstreamingresponsechunk as components_chatstreamingresponsechunk,
+    chatrequest as components_chatrequest,
+    chatresult as components_chatresult,
+    chatstreamchunk as components_chatstreamchunk,
 )
 from openrouter.types import BaseModel
 from openrouter.utils import (
@@ -24,8 +24,12 @@ class SendChatCompletionRequestGlobalsTypedDict(TypedDict):
     This is used to track API usage per application.
 
     """
-    x_title: NotRequired[str]
+    x_open_router_title: NotRequired[str]
     r"""The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+    """
+    x_open_router_categories: NotRequired[str]
+    r"""Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
     """
 
@@ -41,34 +45,45 @@ class SendChatCompletionRequestGlobals(BaseModel):
 
     """
 
-    x_title: Annotated[
+    x_open_router_title: Annotated[
         Optional[str],
-        pydantic.Field(alias="X-Title"),
+        pydantic.Field(alias="X-OpenRouter-Title"),
         FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
     ] = None
     r"""The app display name allows you to customize how your app appears in OpenRouter's dashboard.
 
     """
 
+    x_open_router_categories: Annotated[
+        Optional[str],
+        pydantic.Field(alias="X-OpenRouter-Categories"),
+        FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
+    ] = None
+    r"""Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
+
+    """
+
 
 class SendChatCompletionRequestRequestTypedDict(TypedDict):
-    chat_generation_params: (
-        components_chatgenerationparams.ChatGenerationParamsTypedDict
-    )
+    chat_request: components_chatrequest.ChatRequestTypedDict
     http_referer: NotRequired[str]
     r"""The app identifier should be your app's URL and is used as the primary identifier for rankings.
     This is used to track API usage per application.
 
     """
-    x_title: NotRequired[str]
+    x_open_router_title: NotRequired[str]
     r"""The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+    """
+    x_open_router_categories: NotRequired[str]
+    r"""Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
     """
 
 
 class SendChatCompletionRequestRequest(BaseModel):
-    chat_generation_params: Annotated[
-        components_chatgenerationparams.ChatGenerationParams,
+    chat_request: Annotated[
+        components_chatrequest.ChatRequest,
         FieldMetadata(request=RequestMetadata(media_type="application/json")),
     ]
 
@@ -82,12 +97,21 @@ class SendChatCompletionRequestRequest(BaseModel):
 
     """
 
-    x_title: Annotated[
+    x_open_router_title: Annotated[
         Optional[str],
-        pydantic.Field(alias="X-Title"),
+        pydantic.Field(alias="X-OpenRouter-Title"),
         FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
     ] = None
     r"""The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+    """
+
+    x_open_router_categories: Annotated[
+        Optional[str],
+        pydantic.Field(alias="X-OpenRouter-Categories"),
+        FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
+    ] = None
+    r"""Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
     """
 
@@ -95,27 +119,27 @@ class SendChatCompletionRequestRequest(BaseModel):
 class SendChatCompletionRequestResponseBodyTypedDict(TypedDict):
     r"""Successful chat completion response"""
 
-    data: components_chatstreamingresponsechunk.ChatStreamingResponseChunkTypedDict
+    data: components_chatstreamchunk.ChatStreamChunkTypedDict
     r"""Streaming chat completion chunk"""
 
 
 class SendChatCompletionRequestResponseBody(BaseModel):
     r"""Successful chat completion response"""
 
-    data: components_chatstreamingresponsechunk.ChatStreamingResponseChunk
+    data: components_chatstreamchunk.ChatStreamChunk
     r"""Streaming chat completion chunk"""
 
 
 SendChatCompletionRequestResponseTypedDict = TypeAliasType(
     "SendChatCompletionRequestResponseTypedDict",
     Union[
-        components_chatresponse.ChatResponseTypedDict,
+        components_chatresult.ChatResultTypedDict,
         Union[
             eventstreaming.EventStream[
-                components_chatstreamingresponsechunk.ChatStreamingResponseChunkTypedDict
+                components_chatstreamchunk.ChatStreamChunkTypedDict
             ],
             eventstreaming.EventStreamAsync[
-                components_chatstreamingresponsechunk.ChatStreamingResponseChunkTypedDict
+                components_chatstreamchunk.ChatStreamChunkTypedDict
             ],
         ],
     ],
@@ -125,14 +149,10 @@ SendChatCompletionRequestResponseTypedDict = TypeAliasType(
 SendChatCompletionRequestResponse = TypeAliasType(
     "SendChatCompletionRequestResponse",
     Union[
-        components_chatresponse.ChatResponse,
+        components_chatresult.ChatResult,
         Union[
-            eventstreaming.EventStream[
-                components_chatstreamingresponsechunk.ChatStreamingResponseChunk
-            ],
-            eventstreaming.EventStreamAsync[
-                components_chatstreamingresponsechunk.ChatStreamingResponseChunk
-            ],
+            eventstreaming.EventStream[components_chatstreamchunk.ChatStreamChunk],
+            eventstreaming.EventStreamAsync[components_chatstreamchunk.ChatStreamChunk],
         ],
     ],
 )

@@ -22,8 +22,12 @@ class GetKeyGlobalsTypedDict(TypedDict):
     This is used to track API usage per application.
 
     """
-    x_title: NotRequired[str]
+    x_open_router_title: NotRequired[str]
     r"""The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+    """
+    x_open_router_categories: NotRequired[str]
+    r"""Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
     """
 
@@ -39,12 +43,21 @@ class GetKeyGlobals(BaseModel):
 
     """
 
-    x_title: Annotated[
+    x_open_router_title: Annotated[
         Optional[str],
-        pydantic.Field(alias="X-Title"),
+        pydantic.Field(alias="X-OpenRouter-Title"),
         FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
     ] = None
     r"""The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+    """
+
+    x_open_router_categories: Annotated[
+        Optional[str],
+        pydantic.Field(alias="X-OpenRouter-Categories"),
+        FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
+    ] = None
+    r"""Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
     """
 
@@ -57,8 +70,12 @@ class GetKeyRequestTypedDict(TypedDict):
     This is used to track API usage per application.
 
     """
-    x_title: NotRequired[str]
+    x_open_router_title: NotRequired[str]
     r"""The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+    """
+    x_open_router_categories: NotRequired[str]
+    r"""Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
     """
 
@@ -79,12 +96,21 @@ class GetKeyRequest(BaseModel):
 
     """
 
-    x_title: Annotated[
+    x_open_router_title: Annotated[
         Optional[str],
-        pydantic.Field(alias="X-Title"),
+        pydantic.Field(alias="X-OpenRouter-Title"),
         FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
     ] = None
     r"""The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+    """
+
+    x_open_router_categories: Annotated[
+        Optional[str],
+        pydantic.Field(alias="X-OpenRouter-Categories"),
+        FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
+    ] = None
+    r"""Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
     """
 
@@ -92,42 +118,44 @@ class GetKeyRequest(BaseModel):
 class GetKeyDataTypedDict(TypedDict):
     r"""The API key information"""
 
-    hash: str
-    r"""Unique hash identifier for the API key"""
-    name: str
-    r"""Name of the API key"""
-    label: str
-    r"""Human-readable label for the API key"""
+    byok_usage: float
+    r"""Total external BYOK usage (in USD) for the API key"""
+    byok_usage_daily: float
+    r"""External BYOK usage (in USD) for the current UTC day"""
+    byok_usage_monthly: float
+    r"""External BYOK usage (in USD) for current UTC month"""
+    byok_usage_weekly: float
+    r"""External BYOK usage (in USD) for the current UTC week (Monday-Sunday)"""
+    created_at: str
+    r"""ISO 8601 timestamp of when the API key was created"""
+    creator_user_id: Nullable[str]
+    r"""The user ID of the key creator. For organization-owned keys, this is the member who created the key. For individual users, this is the user's own ID."""
     disabled: bool
     r"""Whether the API key is disabled"""
+    hash: str
+    r"""Unique hash identifier for the API key"""
+    include_byok_in_limit: bool
+    r"""Whether to include external BYOK usage in the credit limit"""
+    label: str
+    r"""Human-readable label for the API key"""
     limit: Nullable[float]
     r"""Spending limit for the API key in USD"""
     limit_remaining: Nullable[float]
     r"""Remaining spending limit in USD"""
     limit_reset: Nullable[str]
     r"""Type of limit reset for the API key"""
-    include_byok_in_limit: bool
-    r"""Whether to include external BYOK usage in the credit limit"""
+    name: str
+    r"""Name of the API key"""
+    updated_at: Nullable[str]
+    r"""ISO 8601 timestamp of when the API key was last updated"""
     usage: float
     r"""Total OpenRouter credit usage (in USD) for the API key"""
     usage_daily: float
     r"""OpenRouter credit usage (in USD) for the current UTC day"""
-    usage_weekly: float
-    r"""OpenRouter credit usage (in USD) for the current UTC week (Monday-Sunday)"""
     usage_monthly: float
     r"""OpenRouter credit usage (in USD) for the current UTC month"""
-    byok_usage: float
-    r"""Total external BYOK usage (in USD) for the API key"""
-    byok_usage_daily: float
-    r"""External BYOK usage (in USD) for the current UTC day"""
-    byok_usage_weekly: float
-    r"""External BYOK usage (in USD) for the current UTC week (Monday-Sunday)"""
-    byok_usage_monthly: float
-    r"""External BYOK usage (in USD) for current UTC month"""
-    created_at: str
-    r"""ISO 8601 timestamp of when the API key was created"""
-    updated_at: Nullable[str]
-    r"""ISO 8601 timestamp of when the API key was last updated"""
+    usage_weekly: float
+    r"""OpenRouter credit usage (in USD) for the current UTC week (Monday-Sunday)"""
     expires_at: NotRequired[Nullable[datetime]]
     r"""ISO 8601 UTC timestamp when the API key expires, or null if no expiration"""
 
@@ -135,17 +163,35 @@ class GetKeyDataTypedDict(TypedDict):
 class GetKeyData(BaseModel):
     r"""The API key information"""
 
-    hash: str
-    r"""Unique hash identifier for the API key"""
+    byok_usage: float
+    r"""Total external BYOK usage (in USD) for the API key"""
 
-    name: str
-    r"""Name of the API key"""
+    byok_usage_daily: float
+    r"""External BYOK usage (in USD) for the current UTC day"""
 
-    label: str
-    r"""Human-readable label for the API key"""
+    byok_usage_monthly: float
+    r"""External BYOK usage (in USD) for current UTC month"""
+
+    byok_usage_weekly: float
+    r"""External BYOK usage (in USD) for the current UTC week (Monday-Sunday)"""
+
+    created_at: str
+    r"""ISO 8601 timestamp of when the API key was created"""
+
+    creator_user_id: Nullable[str]
+    r"""The user ID of the key creator. For organization-owned keys, this is the member who created the key. For individual users, this is the user's own ID."""
 
     disabled: bool
     r"""Whether the API key is disabled"""
+
+    hash: str
+    r"""Unique hash identifier for the API key"""
+
+    include_byok_in_limit: bool
+    r"""Whether to include external BYOK usage in the credit limit"""
+
+    label: str
+    r"""Human-readable label for the API key"""
 
     limit: Nullable[float]
     r"""Spending limit for the API key in USD"""
@@ -156,8 +202,11 @@ class GetKeyData(BaseModel):
     limit_reset: Nullable[str]
     r"""Type of limit reset for the API key"""
 
-    include_byok_in_limit: bool
-    r"""Whether to include external BYOK usage in the credit limit"""
+    name: str
+    r"""Name of the API key"""
+
+    updated_at: Nullable[str]
+    r"""ISO 8601 timestamp of when the API key was last updated"""
 
     usage: float
     r"""Total OpenRouter credit usage (in USD) for the API key"""
@@ -165,29 +214,11 @@ class GetKeyData(BaseModel):
     usage_daily: float
     r"""OpenRouter credit usage (in USD) for the current UTC day"""
 
-    usage_weekly: float
-    r"""OpenRouter credit usage (in USD) for the current UTC week (Monday-Sunday)"""
-
     usage_monthly: float
     r"""OpenRouter credit usage (in USD) for the current UTC month"""
 
-    byok_usage: float
-    r"""Total external BYOK usage (in USD) for the API key"""
-
-    byok_usage_daily: float
-    r"""External BYOK usage (in USD) for the current UTC day"""
-
-    byok_usage_weekly: float
-    r"""External BYOK usage (in USD) for the current UTC week (Monday-Sunday)"""
-
-    byok_usage_monthly: float
-    r"""External BYOK usage (in USD) for current UTC month"""
-
-    created_at: str
-    r"""ISO 8601 timestamp of when the API key was created"""
-
-    updated_at: Nullable[str]
-    r"""ISO 8601 timestamp of when the API key was last updated"""
+    usage_weekly: float
+    r"""OpenRouter credit usage (in USD) for the current UTC week (Monday-Sunday)"""
 
     expires_at: OptionalNullable[datetime] = UNSET
     r"""ISO 8601 UTC timestamp when the API key expires, or null if no expiration"""
@@ -196,11 +227,12 @@ class GetKeyData(BaseModel):
     def serialize_model(self, handler):
         optional_fields = ["expires_at"]
         nullable_fields = [
+            "creator_user_id",
+            "expires_at",
             "limit",
             "limit_remaining",
             "limit_reset",
             "updated_at",
-            "expires_at",
         ]
         null_default_fields = []
 

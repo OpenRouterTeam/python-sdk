@@ -20,39 +20,49 @@ class Chat(BaseSDK):
     def send(
         self,
         *,
-        messages: Union[List[components.Message], List[components.MessageTypedDict]],
+        messages: Union[
+            List[components.ChatMessages], List[components.ChatMessagesTypedDict]
+        ],
         http_referer: Optional[str] = None,
-        x_title: Optional[str] = None,
-        provider: OptionalNullable[
+        x_open_router_title: Optional[str] = None,
+        x_open_router_categories: Optional[str] = None,
+        cache_control: Optional[
             Union[
-                components.ChatGenerationParamsProvider,
-                components.ChatGenerationParamsProviderTypedDict,
-            ]
-        ] = UNSET,
-        plugins: Optional[
-            Union[
-                List[components.ChatGenerationParamsPluginUnion],
-                List[components.ChatGenerationParamsPluginUnionTypedDict],
+                components.AnthropicCacheControlDirective,
+                components.AnthropicCacheControlDirectiveTypedDict,
             ]
         ] = None,
-        user: Optional[str] = None,
-        session_id: Optional[str] = None,
-        trace: Optional[
-            Union[
-                components.ChatGenerationParamsTrace,
-                components.ChatGenerationParamsTraceTypedDict,
-            ]
+        debug: Optional[
+            Union[components.ChatDebugOptions, components.ChatDebugOptionsTypedDict]
         ] = None,
-        model: Optional[str] = None,
-        models: Optional[List[str]] = None,
         frequency_penalty: OptionalNullable[float] = UNSET,
+        image_config: Optional[
+            Union[
+                Dict[str, components.ImageConfig],
+                Dict[str, components.ImageConfigTypedDict],
+            ]
+        ] = None,
         logit_bias: OptionalNullable[Dict[str, float]] = UNSET,
         logprobs: OptionalNullable[bool] = UNSET,
-        top_logprobs: OptionalNullable[float] = UNSET,
-        max_completion_tokens: OptionalNullable[float] = UNSET,
-        max_tokens: OptionalNullable[float] = UNSET,
+        max_completion_tokens: OptionalNullable[int] = UNSET,
+        max_tokens: OptionalNullable[int] = UNSET,
         metadata: Optional[Dict[str, str]] = None,
+        modalities: Optional[List[components.Modality]] = None,
+        model: Optional[str] = None,
+        models: Optional[List[str]] = None,
+        parallel_tool_calls: OptionalNullable[bool] = UNSET,
+        plugins: Optional[
+            Union[
+                List[components.ChatRequestPlugin],
+                List[components.ChatRequestPluginTypedDict],
+            ]
+        ] = None,
         presence_penalty: OptionalNullable[float] = UNSET,
+        provider: OptionalNullable[
+            Union[
+                components.ProviderPreferences, components.ProviderPreferencesTypedDict
+            ]
+        ] = UNSET,
         reasoning: Optional[
             Union[components.Reasoning, components.ReasoningTypedDict]
         ] = None,
@@ -60,6 +70,8 @@ class Chat(BaseSDK):
             Union[components.ResponseFormat, components.ResponseFormatTypedDict]
         ] = None,
         seed: OptionalNullable[int] = UNSET,
+        service_tier: OptionalNullable[components.ChatRequestServiceTier] = UNSET,
+        session_id: Optional[str] = None,
         stop: OptionalNullable[
             Union[components.Stop, components.StopTypedDict]
         ] = UNSET,
@@ -67,33 +79,27 @@ class Chat(BaseSDK):
         stream_options: OptionalNullable[
             Union[components.ChatStreamOptions, components.ChatStreamOptionsTypedDict]
         ] = UNSET,
-        temperature: OptionalNullable[float] = 1,
-        parallel_tool_calls: OptionalNullable[bool] = UNSET,
+        temperature: OptionalNullable[float] = UNSET,
         tool_choice: Optional[
-            Union[components.ToolChoiceOption, components.ToolChoiceOptionTypedDict]
+            Union[components.ChatToolChoice, components.ChatToolChoiceTypedDict]
         ] = None,
         tools: Optional[
             Union[
-                List[components.ToolDefinitionJSON],
-                List[components.ToolDefinitionJSONTypedDict],
+                List[components.ChatFunctionTool],
+                List[components.ChatFunctionToolTypedDict],
             ]
         ] = None,
-        top_p: OptionalNullable[float] = 1,
-        debug: Optional[
-            Union[components.DebugOptions, components.DebugOptionsTypedDict]
+        top_logprobs: OptionalNullable[int] = UNSET,
+        top_p: OptionalNullable[float] = UNSET,
+        trace: Optional[
+            Union[components.TraceConfig, components.TraceConfigTypedDict]
         ] = None,
-        image_config: Optional[
-            Union[
-                Dict[str, components.ChatGenerationParamsImageConfig],
-                Dict[str, components.ChatGenerationParamsImageConfigTypedDict],
-            ]
-        ] = None,
-        modalities: Optional[List[components.Modality]] = None,
+        user: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.ChatResponse:
+    ) -> components.ChatResult:
         r"""Create a chat completion
 
         Sends a request for a model response for the given chat conversation. Supports both streaming and non-streaming modes.
@@ -102,37 +108,41 @@ class Chat(BaseSDK):
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
-        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+        :param x_open_router_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
 
-        :param provider: When multiple model providers are available, optionally indicate your routing preference.
-        :param plugins: Plugins you want to enable for this request, including their settings.
-        :param user: Unique user identifier
-        :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 128 characters.
-        :param trace: Metadata for observability and tracing. Known keys (trace_id, trace_name, span_name, generation_name, parent_span_id) have special handling. Additional keys are passed through as custom metadata to configured broadcast destinations.
-        :param model: Model to use for completion
-        :param models: Models to use for completion
+        :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
+
+        :param cache_control:
+        :param debug: Debug options for inspecting request transformations (streaming only)
         :param frequency_penalty: Frequency penalty (-2.0 to 2.0)
+        :param image_config: Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/guides/overview/multimodal/image-generation for more details.
         :param logit_bias: Token logit bias adjustments
         :param logprobs: Return log probabilities
-        :param top_logprobs: Number of top log probabilities to return (0-20)
         :param max_completion_tokens: Maximum tokens in completion
-        :param max_tokens: Maximum tokens (deprecated, use max_completion_tokens)
+        :param max_tokens: Maximum tokens (deprecated, use max_completion_tokens). Note: some providers enforce a minimum of 16.
         :param metadata: Key-value pairs for additional object information (max 16 pairs, 64 char keys, 512 char values)
+        :param modalities: Output modalities for the response. Supported values are \"text\", \"image\", and \"audio\".
+        :param model: Model to use for completion
+        :param models: Models to use for completion
+        :param parallel_tool_calls: Whether to enable parallel function calling during tool use. When true, the model may generate multiple tool calls in a single response.
+        :param plugins: Plugins you want to enable for this request, including their settings.
         :param presence_penalty: Presence penalty (-2.0 to 2.0)
+        :param provider: When multiple model providers are available, optionally indicate your routing preference.
         :param reasoning: Configuration options for reasoning models
         :param response_format: Response format configuration
         :param seed: Random seed for deterministic outputs
+        :param service_tier: The service tier to use for processing this request.
+        :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters.
         :param stop: Stop sequences (up to 4)
         :param stream: Enable streaming response
         :param stream_options: Streaming configuration options
         :param temperature: Sampling temperature (0-2)
-        :param parallel_tool_calls:
         :param tool_choice: Tool choice configuration
         :param tools: Available tools for function calling
+        :param top_logprobs: Number of top log probabilities to return (0-20)
         :param top_p: Nucleus sampling parameter (0-1)
-        :param debug: Debug options for inspecting request transformations (streaming only)
-        :param image_config: Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/guides/overview/multimodal/image-generation for more details.
-        :param modalities: Output modalities for the response. Supported values are \"text\" and \"image\".
+        :param trace: Metadata for observability and tracing. Known keys (trace_id, trace_name, span_name, generation_name, parent_span_id) have special handling. Additional keys are passed through as custom metadata to configured broadcast destinations.
+        :param user: Unique user identifier
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -144,39 +154,49 @@ class Chat(BaseSDK):
     def send(
         self,
         *,
-        messages: Union[List[components.Message], List[components.MessageTypedDict]],
+        messages: Union[
+            List[components.ChatMessages], List[components.ChatMessagesTypedDict]
+        ],
         http_referer: Optional[str] = None,
-        x_title: Optional[str] = None,
-        provider: OptionalNullable[
+        x_open_router_title: Optional[str] = None,
+        x_open_router_categories: Optional[str] = None,
+        cache_control: Optional[
             Union[
-                components.ChatGenerationParamsProvider,
-                components.ChatGenerationParamsProviderTypedDict,
-            ]
-        ] = UNSET,
-        plugins: Optional[
-            Union[
-                List[components.ChatGenerationParamsPluginUnion],
-                List[components.ChatGenerationParamsPluginUnionTypedDict],
+                components.AnthropicCacheControlDirective,
+                components.AnthropicCacheControlDirectiveTypedDict,
             ]
         ] = None,
-        user: Optional[str] = None,
-        session_id: Optional[str] = None,
-        trace: Optional[
-            Union[
-                components.ChatGenerationParamsTrace,
-                components.ChatGenerationParamsTraceTypedDict,
-            ]
+        debug: Optional[
+            Union[components.ChatDebugOptions, components.ChatDebugOptionsTypedDict]
         ] = None,
-        model: Optional[str] = None,
-        models: Optional[List[str]] = None,
         frequency_penalty: OptionalNullable[float] = UNSET,
+        image_config: Optional[
+            Union[
+                Dict[str, components.ImageConfig],
+                Dict[str, components.ImageConfigTypedDict],
+            ]
+        ] = None,
         logit_bias: OptionalNullable[Dict[str, float]] = UNSET,
         logprobs: OptionalNullable[bool] = UNSET,
-        top_logprobs: OptionalNullable[float] = UNSET,
-        max_completion_tokens: OptionalNullable[float] = UNSET,
-        max_tokens: OptionalNullable[float] = UNSET,
+        max_completion_tokens: OptionalNullable[int] = UNSET,
+        max_tokens: OptionalNullable[int] = UNSET,
         metadata: Optional[Dict[str, str]] = None,
+        modalities: Optional[List[components.Modality]] = None,
+        model: Optional[str] = None,
+        models: Optional[List[str]] = None,
+        parallel_tool_calls: OptionalNullable[bool] = UNSET,
+        plugins: Optional[
+            Union[
+                List[components.ChatRequestPlugin],
+                List[components.ChatRequestPluginTypedDict],
+            ]
+        ] = None,
         presence_penalty: OptionalNullable[float] = UNSET,
+        provider: OptionalNullable[
+            Union[
+                components.ProviderPreferences, components.ProviderPreferencesTypedDict
+            ]
+        ] = UNSET,
         reasoning: Optional[
             Union[components.Reasoning, components.ReasoningTypedDict]
         ] = None,
@@ -184,6 +204,8 @@ class Chat(BaseSDK):
             Union[components.ResponseFormat, components.ResponseFormatTypedDict]
         ] = None,
         seed: OptionalNullable[int] = UNSET,
+        service_tier: OptionalNullable[components.ChatRequestServiceTier] = UNSET,
+        session_id: Optional[str] = None,
         stop: OptionalNullable[
             Union[components.Stop, components.StopTypedDict]
         ] = UNSET,
@@ -191,33 +213,27 @@ class Chat(BaseSDK):
         stream_options: OptionalNullable[
             Union[components.ChatStreamOptions, components.ChatStreamOptionsTypedDict]
         ] = UNSET,
-        temperature: OptionalNullable[float] = 1,
-        parallel_tool_calls: OptionalNullable[bool] = UNSET,
+        temperature: OptionalNullable[float] = UNSET,
         tool_choice: Optional[
-            Union[components.ToolChoiceOption, components.ToolChoiceOptionTypedDict]
+            Union[components.ChatToolChoice, components.ChatToolChoiceTypedDict]
         ] = None,
         tools: Optional[
             Union[
-                List[components.ToolDefinitionJSON],
-                List[components.ToolDefinitionJSONTypedDict],
+                List[components.ChatFunctionTool],
+                List[components.ChatFunctionToolTypedDict],
             ]
         ] = None,
-        top_p: OptionalNullable[float] = 1,
-        debug: Optional[
-            Union[components.DebugOptions, components.DebugOptionsTypedDict]
+        top_logprobs: OptionalNullable[int] = UNSET,
+        top_p: OptionalNullable[float] = UNSET,
+        trace: Optional[
+            Union[components.TraceConfig, components.TraceConfigTypedDict]
         ] = None,
-        image_config: Optional[
-            Union[
-                Dict[str, components.ChatGenerationParamsImageConfig],
-                Dict[str, components.ChatGenerationParamsImageConfigTypedDict],
-            ]
-        ] = None,
-        modalities: Optional[List[components.Modality]] = None,
+        user: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> eventstreaming.EventStream[components.ChatStreamingResponseChunk]:
+    ) -> eventstreaming.EventStream[components.ChatStreamChunk]:
         r"""Create a chat completion
 
         Sends a request for a model response for the given chat conversation. Supports both streaming and non-streaming modes.
@@ -226,37 +242,41 @@ class Chat(BaseSDK):
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
-        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+        :param x_open_router_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
 
-        :param provider: When multiple model providers are available, optionally indicate your routing preference.
-        :param plugins: Plugins you want to enable for this request, including their settings.
-        :param user: Unique user identifier
-        :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 128 characters.
-        :param trace: Metadata for observability and tracing. Known keys (trace_id, trace_name, span_name, generation_name, parent_span_id) have special handling. Additional keys are passed through as custom metadata to configured broadcast destinations.
-        :param model: Model to use for completion
-        :param models: Models to use for completion
+        :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
+
+        :param cache_control:
+        :param debug: Debug options for inspecting request transformations (streaming only)
         :param frequency_penalty: Frequency penalty (-2.0 to 2.0)
+        :param image_config: Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/guides/overview/multimodal/image-generation for more details.
         :param logit_bias: Token logit bias adjustments
         :param logprobs: Return log probabilities
-        :param top_logprobs: Number of top log probabilities to return (0-20)
         :param max_completion_tokens: Maximum tokens in completion
-        :param max_tokens: Maximum tokens (deprecated, use max_completion_tokens)
+        :param max_tokens: Maximum tokens (deprecated, use max_completion_tokens). Note: some providers enforce a minimum of 16.
         :param metadata: Key-value pairs for additional object information (max 16 pairs, 64 char keys, 512 char values)
+        :param modalities: Output modalities for the response. Supported values are \"text\", \"image\", and \"audio\".
+        :param model: Model to use for completion
+        :param models: Models to use for completion
+        :param parallel_tool_calls: Whether to enable parallel function calling during tool use. When true, the model may generate multiple tool calls in a single response.
+        :param plugins: Plugins you want to enable for this request, including their settings.
         :param presence_penalty: Presence penalty (-2.0 to 2.0)
+        :param provider: When multiple model providers are available, optionally indicate your routing preference.
         :param reasoning: Configuration options for reasoning models
         :param response_format: Response format configuration
         :param seed: Random seed for deterministic outputs
+        :param service_tier: The service tier to use for processing this request.
+        :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters.
         :param stop: Stop sequences (up to 4)
         :param stream: Enable streaming response
         :param stream_options: Streaming configuration options
         :param temperature: Sampling temperature (0-2)
-        :param parallel_tool_calls:
         :param tool_choice: Tool choice configuration
         :param tools: Available tools for function calling
+        :param top_logprobs: Number of top log probabilities to return (0-20)
         :param top_p: Nucleus sampling parameter (0-1)
-        :param debug: Debug options for inspecting request transformations (streaming only)
-        :param image_config: Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/guides/overview/multimodal/image-generation for more details.
-        :param modalities: Output modalities for the response. Supported values are \"text\" and \"image\".
+        :param trace: Metadata for observability and tracing. Known keys (trace_id, trace_name, span_name, generation_name, parent_span_id) have special handling. Additional keys are passed through as custom metadata to configured broadcast destinations.
+        :param user: Unique user identifier
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -267,39 +287,49 @@ class Chat(BaseSDK):
     def send(
         self,
         *,
-        messages: Union[List[components.Message], List[components.MessageTypedDict]],
+        messages: Union[
+            List[components.ChatMessages], List[components.ChatMessagesTypedDict]
+        ],
         http_referer: Optional[str] = None,
-        x_title: Optional[str] = None,
-        provider: OptionalNullable[
+        x_open_router_title: Optional[str] = None,
+        x_open_router_categories: Optional[str] = None,
+        cache_control: Optional[
             Union[
-                components.ChatGenerationParamsProvider,
-                components.ChatGenerationParamsProviderTypedDict,
-            ]
-        ] = UNSET,
-        plugins: Optional[
-            Union[
-                List[components.ChatGenerationParamsPluginUnion],
-                List[components.ChatGenerationParamsPluginUnionTypedDict],
+                components.AnthropicCacheControlDirective,
+                components.AnthropicCacheControlDirectiveTypedDict,
             ]
         ] = None,
-        user: Optional[str] = None,
-        session_id: Optional[str] = None,
-        trace: Optional[
-            Union[
-                components.ChatGenerationParamsTrace,
-                components.ChatGenerationParamsTraceTypedDict,
-            ]
+        debug: Optional[
+            Union[components.ChatDebugOptions, components.ChatDebugOptionsTypedDict]
         ] = None,
-        model: Optional[str] = None,
-        models: Optional[List[str]] = None,
         frequency_penalty: OptionalNullable[float] = UNSET,
+        image_config: Optional[
+            Union[
+                Dict[str, components.ImageConfig],
+                Dict[str, components.ImageConfigTypedDict],
+            ]
+        ] = None,
         logit_bias: OptionalNullable[Dict[str, float]] = UNSET,
         logprobs: OptionalNullable[bool] = UNSET,
-        top_logprobs: OptionalNullable[float] = UNSET,
-        max_completion_tokens: OptionalNullable[float] = UNSET,
-        max_tokens: OptionalNullable[float] = UNSET,
+        max_completion_tokens: OptionalNullable[int] = UNSET,
+        max_tokens: OptionalNullable[int] = UNSET,
         metadata: Optional[Dict[str, str]] = None,
+        modalities: Optional[List[components.Modality]] = None,
+        model: Optional[str] = None,
+        models: Optional[List[str]] = None,
+        parallel_tool_calls: OptionalNullable[bool] = UNSET,
+        plugins: Optional[
+            Union[
+                List[components.ChatRequestPlugin],
+                List[components.ChatRequestPluginTypedDict],
+            ]
+        ] = None,
         presence_penalty: OptionalNullable[float] = UNSET,
+        provider: OptionalNullable[
+            Union[
+                components.ProviderPreferences, components.ProviderPreferencesTypedDict
+            ]
+        ] = UNSET,
         reasoning: Optional[
             Union[components.Reasoning, components.ReasoningTypedDict]
         ] = None,
@@ -307,6 +337,8 @@ class Chat(BaseSDK):
             Union[components.ResponseFormat, components.ResponseFormatTypedDict]
         ] = None,
         seed: OptionalNullable[int] = UNSET,
+        service_tier: OptionalNullable[components.ChatRequestServiceTier] = UNSET,
+        session_id: Optional[str] = None,
         stop: OptionalNullable[
             Union[components.Stop, components.StopTypedDict]
         ] = UNSET,
@@ -314,28 +346,22 @@ class Chat(BaseSDK):
         stream_options: OptionalNullable[
             Union[components.ChatStreamOptions, components.ChatStreamOptionsTypedDict]
         ] = UNSET,
-        temperature: OptionalNullable[float] = 1,
-        parallel_tool_calls: OptionalNullable[bool] = UNSET,
+        temperature: OptionalNullable[float] = UNSET,
         tool_choice: Optional[
-            Union[components.ToolChoiceOption, components.ToolChoiceOptionTypedDict]
+            Union[components.ChatToolChoice, components.ChatToolChoiceTypedDict]
         ] = None,
         tools: Optional[
             Union[
-                List[components.ToolDefinitionJSON],
-                List[components.ToolDefinitionJSONTypedDict],
+                List[components.ChatFunctionTool],
+                List[components.ChatFunctionToolTypedDict],
             ]
         ] = None,
-        top_p: OptionalNullable[float] = 1,
-        debug: Optional[
-            Union[components.DebugOptions, components.DebugOptionsTypedDict]
+        top_logprobs: OptionalNullable[int] = UNSET,
+        top_p: OptionalNullable[float] = UNSET,
+        trace: Optional[
+            Union[components.TraceConfig, components.TraceConfigTypedDict]
         ] = None,
-        image_config: Optional[
-            Union[
-                Dict[str, components.ChatGenerationParamsImageConfig],
-                Dict[str, components.ChatGenerationParamsImageConfigTypedDict],
-            ]
-        ] = None,
-        modalities: Optional[List[components.Modality]] = None,
+        user: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -349,37 +375,41 @@ class Chat(BaseSDK):
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
-        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+        :param x_open_router_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
 
-        :param provider: When multiple model providers are available, optionally indicate your routing preference.
-        :param plugins: Plugins you want to enable for this request, including their settings.
-        :param user: Unique user identifier
-        :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 128 characters.
-        :param trace: Metadata for observability and tracing. Known keys (trace_id, trace_name, span_name, generation_name, parent_span_id) have special handling. Additional keys are passed through as custom metadata to configured broadcast destinations.
-        :param model: Model to use for completion
-        :param models: Models to use for completion
+        :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
+
+        :param cache_control:
+        :param debug: Debug options for inspecting request transformations (streaming only)
         :param frequency_penalty: Frequency penalty (-2.0 to 2.0)
+        :param image_config: Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/guides/overview/multimodal/image-generation for more details.
         :param logit_bias: Token logit bias adjustments
         :param logprobs: Return log probabilities
-        :param top_logprobs: Number of top log probabilities to return (0-20)
         :param max_completion_tokens: Maximum tokens in completion
-        :param max_tokens: Maximum tokens (deprecated, use max_completion_tokens)
+        :param max_tokens: Maximum tokens (deprecated, use max_completion_tokens). Note: some providers enforce a minimum of 16.
         :param metadata: Key-value pairs for additional object information (max 16 pairs, 64 char keys, 512 char values)
+        :param modalities: Output modalities for the response. Supported values are \"text\", \"image\", and \"audio\".
+        :param model: Model to use for completion
+        :param models: Models to use for completion
+        :param parallel_tool_calls: Whether to enable parallel function calling during tool use. When true, the model may generate multiple tool calls in a single response.
+        :param plugins: Plugins you want to enable for this request, including their settings.
         :param presence_penalty: Presence penalty (-2.0 to 2.0)
+        :param provider: When multiple model providers are available, optionally indicate your routing preference.
         :param reasoning: Configuration options for reasoning models
         :param response_format: Response format configuration
         :param seed: Random seed for deterministic outputs
+        :param service_tier: The service tier to use for processing this request.
+        :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters.
         :param stop: Stop sequences (up to 4)
         :param stream: Enable streaming response
         :param stream_options: Streaming configuration options
         :param temperature: Sampling temperature (0-2)
-        :param parallel_tool_calls:
         :param tool_choice: Tool choice configuration
         :param tools: Available tools for function calling
+        :param top_logprobs: Number of top log probabilities to return (0-20)
         :param top_p: Nucleus sampling parameter (0-1)
-        :param debug: Debug options for inspecting request transformations (streaming only)
-        :param image_config: Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/guides/overview/multimodal/image-generation for more details.
-        :param modalities: Output modalities for the response. Supported values are \"text\" and \"image\".
+        :param trace: Metadata for observability and tracing. Known keys (trace_id, trace_name, span_name, generation_name, parent_span_id) have special handling. Additional keys are passed through as custom metadata to configured broadcast destinations.
+        :param user: Unique user identifier
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -398,30 +428,36 @@ class Chat(BaseSDK):
 
         request = operations.SendChatCompletionRequestRequest(
             http_referer=http_referer,
-            x_title=x_title,
-            chat_generation_params=components.ChatGenerationParams(
-                provider=utils.get_pydantic_model(
-                    provider, OptionalNullable[components.ChatGenerationParamsProvider]
+            x_open_router_title=x_open_router_title,
+            x_open_router_categories=x_open_router_categories,
+            chat_request=components.ChatRequest(
+                cache_control=utils.get_pydantic_model(
+                    cache_control, Optional[components.AnthropicCacheControlDirective]
                 ),
-                plugins=utils.get_pydantic_model(
-                    plugins, Optional[List[components.ChatGenerationParamsPluginUnion]]
+                debug=utils.get_pydantic_model(
+                    debug, Optional[components.ChatDebugOptions]
                 ),
-                user=user,
-                session_id=session_id,
-                trace=utils.get_pydantic_model(
-                    trace, Optional[components.ChatGenerationParamsTrace]
-                ),
-                messages=utils.get_pydantic_model(messages, List[components.Message]),
-                model=model,
-                models=models,
                 frequency_penalty=frequency_penalty,
+                image_config=image_config,
                 logit_bias=logit_bias,
                 logprobs=logprobs,
-                top_logprobs=top_logprobs,
                 max_completion_tokens=max_completion_tokens,
                 max_tokens=max_tokens,
+                messages=utils.get_pydantic_model(
+                    messages, List[components.ChatMessages]
+                ),
                 metadata=metadata,
+                modalities=modalities,
+                model=model,
+                models=models,
+                parallel_tool_calls=parallel_tool_calls,
+                plugins=utils.get_pydantic_model(
+                    plugins, Optional[List[components.ChatRequestPlugin]]
+                ),
                 presence_penalty=presence_penalty,
+                provider=utils.get_pydantic_model(
+                    provider, OptionalNullable[components.ProviderPreferences]
+                ),
                 reasoning=utils.get_pydantic_model(
                     reasoning, Optional[components.Reasoning]
                 ),
@@ -429,25 +465,24 @@ class Chat(BaseSDK):
                     response_format, Optional[components.ResponseFormat]
                 ),
                 seed=seed,
+                service_tier=service_tier,
+                session_id=session_id,
                 stop=stop,
                 stream=stream,
                 stream_options=utils.get_pydantic_model(
                     stream_options, OptionalNullable[components.ChatStreamOptions]
                 ),
                 temperature=temperature,
-                parallel_tool_calls=parallel_tool_calls,
                 tool_choice=utils.get_pydantic_model(
-                    tool_choice, Optional[components.ToolChoiceOption]
+                    tool_choice, Optional[components.ChatToolChoice]
                 ),
                 tools=utils.get_pydantic_model(
-                    tools, Optional[List[components.ToolDefinitionJSON]]
+                    tools, Optional[List[components.ChatFunctionTool]]
                 ),
+                top_logprobs=top_logprobs,
                 top_p=top_p,
-                debug=utils.get_pydantic_model(
-                    debug, Optional[components.DebugOptions]
-                ),
-                image_config=image_config,
-                modalities=modalities,
+                trace=utils.get_pydantic_model(trace, Optional[components.TraceConfig]),
+                user=user,
             ),
         )
 
@@ -465,15 +500,12 @@ class Chat(BaseSDK):
             http_headers=http_headers,
             _globals=operations.SendChatCompletionRequestGlobals(
                 http_referer=self.sdk_configuration.globals.http_referer,
-                x_title=self.sdk_configuration.globals.x_title,
+                x_open_router_title=self.sdk_configuration.globals.x_open_router_title,
+                x_open_router_categories=self.sdk_configuration.globals.x_open_router_categories,
             ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.chat_generation_params,
-                False,
-                False,
-                "json",
-                components.ChatGenerationParams,
+                request.chat_request, False, False, "json", components.ChatRequest
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -482,10 +514,14 @@ class Chat(BaseSDK):
         if retries == UNSET:
             if self.sdk_configuration.retry_config is not UNSET:
                 retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 60000, 1.5, 3600000), True
+                )
 
         retry_config = None
         if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, ["429", "500", "502", "503", "504"])
+            retry_config = (retries, ["5XX"])
 
         http_res = self.do_request(
             hook_ctx=HookContext(
@@ -523,7 +559,7 @@ class Chat(BaseSDK):
         if utils.match_response(http_res, "200", "application/json"):
             http_res_text = utils.stream_to_text(http_res)
             return unmarshal_json_response(
-                components.ChatResponse, http_res, http_res_text
+                components.ChatResult, http_res, http_res_text
             )
         if utils.match_response(http_res, "200", "text/event-stream"):
             return eventstreaming.EventStream(
@@ -652,39 +688,49 @@ class Chat(BaseSDK):
     async def send_async(
         self,
         *,
-        messages: Union[List[components.Message], List[components.MessageTypedDict]],
+        messages: Union[
+            List[components.ChatMessages], List[components.ChatMessagesTypedDict]
+        ],
         http_referer: Optional[str] = None,
-        x_title: Optional[str] = None,
-        provider: OptionalNullable[
+        x_open_router_title: Optional[str] = None,
+        x_open_router_categories: Optional[str] = None,
+        cache_control: Optional[
             Union[
-                components.ChatGenerationParamsProvider,
-                components.ChatGenerationParamsProviderTypedDict,
-            ]
-        ] = UNSET,
-        plugins: Optional[
-            Union[
-                List[components.ChatGenerationParamsPluginUnion],
-                List[components.ChatGenerationParamsPluginUnionTypedDict],
+                components.AnthropicCacheControlDirective,
+                components.AnthropicCacheControlDirectiveTypedDict,
             ]
         ] = None,
-        user: Optional[str] = None,
-        session_id: Optional[str] = None,
-        trace: Optional[
-            Union[
-                components.ChatGenerationParamsTrace,
-                components.ChatGenerationParamsTraceTypedDict,
-            ]
+        debug: Optional[
+            Union[components.ChatDebugOptions, components.ChatDebugOptionsTypedDict]
         ] = None,
-        model: Optional[str] = None,
-        models: Optional[List[str]] = None,
         frequency_penalty: OptionalNullable[float] = UNSET,
+        image_config: Optional[
+            Union[
+                Dict[str, components.ImageConfig],
+                Dict[str, components.ImageConfigTypedDict],
+            ]
+        ] = None,
         logit_bias: OptionalNullable[Dict[str, float]] = UNSET,
         logprobs: OptionalNullable[bool] = UNSET,
-        top_logprobs: OptionalNullable[float] = UNSET,
-        max_completion_tokens: OptionalNullable[float] = UNSET,
-        max_tokens: OptionalNullable[float] = UNSET,
+        max_completion_tokens: OptionalNullable[int] = UNSET,
+        max_tokens: OptionalNullable[int] = UNSET,
         metadata: Optional[Dict[str, str]] = None,
+        modalities: Optional[List[components.Modality]] = None,
+        model: Optional[str] = None,
+        models: Optional[List[str]] = None,
+        parallel_tool_calls: OptionalNullable[bool] = UNSET,
+        plugins: Optional[
+            Union[
+                List[components.ChatRequestPlugin],
+                List[components.ChatRequestPluginTypedDict],
+            ]
+        ] = None,
         presence_penalty: OptionalNullable[float] = UNSET,
+        provider: OptionalNullable[
+            Union[
+                components.ProviderPreferences, components.ProviderPreferencesTypedDict
+            ]
+        ] = UNSET,
         reasoning: Optional[
             Union[components.Reasoning, components.ReasoningTypedDict]
         ] = None,
@@ -692,6 +738,8 @@ class Chat(BaseSDK):
             Union[components.ResponseFormat, components.ResponseFormatTypedDict]
         ] = None,
         seed: OptionalNullable[int] = UNSET,
+        service_tier: OptionalNullable[components.ChatRequestServiceTier] = UNSET,
+        session_id: Optional[str] = None,
         stop: OptionalNullable[
             Union[components.Stop, components.StopTypedDict]
         ] = UNSET,
@@ -699,33 +747,27 @@ class Chat(BaseSDK):
         stream_options: OptionalNullable[
             Union[components.ChatStreamOptions, components.ChatStreamOptionsTypedDict]
         ] = UNSET,
-        temperature: OptionalNullable[float] = 1,
-        parallel_tool_calls: OptionalNullable[bool] = UNSET,
+        temperature: OptionalNullable[float] = UNSET,
         tool_choice: Optional[
-            Union[components.ToolChoiceOption, components.ToolChoiceOptionTypedDict]
+            Union[components.ChatToolChoice, components.ChatToolChoiceTypedDict]
         ] = None,
         tools: Optional[
             Union[
-                List[components.ToolDefinitionJSON],
-                List[components.ToolDefinitionJSONTypedDict],
+                List[components.ChatFunctionTool],
+                List[components.ChatFunctionToolTypedDict],
             ]
         ] = None,
-        top_p: OptionalNullable[float] = 1,
-        debug: Optional[
-            Union[components.DebugOptions, components.DebugOptionsTypedDict]
+        top_logprobs: OptionalNullable[int] = UNSET,
+        top_p: OptionalNullable[float] = UNSET,
+        trace: Optional[
+            Union[components.TraceConfig, components.TraceConfigTypedDict]
         ] = None,
-        image_config: Optional[
-            Union[
-                Dict[str, components.ChatGenerationParamsImageConfig],
-                Dict[str, components.ChatGenerationParamsImageConfigTypedDict],
-            ]
-        ] = None,
-        modalities: Optional[List[components.Modality]] = None,
+        user: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.ChatResponse:
+    ) -> components.ChatResult:
         r"""Create a chat completion
 
         Sends a request for a model response for the given chat conversation. Supports both streaming and non-streaming modes.
@@ -734,37 +776,41 @@ class Chat(BaseSDK):
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
-        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+        :param x_open_router_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
 
-        :param provider: When multiple model providers are available, optionally indicate your routing preference.
-        :param plugins: Plugins you want to enable for this request, including their settings.
-        :param user: Unique user identifier
-        :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 128 characters.
-        :param trace: Metadata for observability and tracing. Known keys (trace_id, trace_name, span_name, generation_name, parent_span_id) have special handling. Additional keys are passed through as custom metadata to configured broadcast destinations.
-        :param model: Model to use for completion
-        :param models: Models to use for completion
+        :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
+
+        :param cache_control:
+        :param debug: Debug options for inspecting request transformations (streaming only)
         :param frequency_penalty: Frequency penalty (-2.0 to 2.0)
+        :param image_config: Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/guides/overview/multimodal/image-generation for more details.
         :param logit_bias: Token logit bias adjustments
         :param logprobs: Return log probabilities
-        :param top_logprobs: Number of top log probabilities to return (0-20)
         :param max_completion_tokens: Maximum tokens in completion
-        :param max_tokens: Maximum tokens (deprecated, use max_completion_tokens)
+        :param max_tokens: Maximum tokens (deprecated, use max_completion_tokens). Note: some providers enforce a minimum of 16.
         :param metadata: Key-value pairs for additional object information (max 16 pairs, 64 char keys, 512 char values)
+        :param modalities: Output modalities for the response. Supported values are \"text\", \"image\", and \"audio\".
+        :param model: Model to use for completion
+        :param models: Models to use for completion
+        :param parallel_tool_calls: Whether to enable parallel function calling during tool use. When true, the model may generate multiple tool calls in a single response.
+        :param plugins: Plugins you want to enable for this request, including their settings.
         :param presence_penalty: Presence penalty (-2.0 to 2.0)
+        :param provider: When multiple model providers are available, optionally indicate your routing preference.
         :param reasoning: Configuration options for reasoning models
         :param response_format: Response format configuration
         :param seed: Random seed for deterministic outputs
+        :param service_tier: The service tier to use for processing this request.
+        :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters.
         :param stop: Stop sequences (up to 4)
         :param stream: Enable streaming response
         :param stream_options: Streaming configuration options
         :param temperature: Sampling temperature (0-2)
-        :param parallel_tool_calls:
         :param tool_choice: Tool choice configuration
         :param tools: Available tools for function calling
+        :param top_logprobs: Number of top log probabilities to return (0-20)
         :param top_p: Nucleus sampling parameter (0-1)
-        :param debug: Debug options for inspecting request transformations (streaming only)
-        :param image_config: Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/guides/overview/multimodal/image-generation for more details.
-        :param modalities: Output modalities for the response. Supported values are \"text\" and \"image\".
+        :param trace: Metadata for observability and tracing. Known keys (trace_id, trace_name, span_name, generation_name, parent_span_id) have special handling. Additional keys are passed through as custom metadata to configured broadcast destinations.
+        :param user: Unique user identifier
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -776,39 +822,49 @@ class Chat(BaseSDK):
     async def send_async(
         self,
         *,
-        messages: Union[List[components.Message], List[components.MessageTypedDict]],
+        messages: Union[
+            List[components.ChatMessages], List[components.ChatMessagesTypedDict]
+        ],
         http_referer: Optional[str] = None,
-        x_title: Optional[str] = None,
-        provider: OptionalNullable[
+        x_open_router_title: Optional[str] = None,
+        x_open_router_categories: Optional[str] = None,
+        cache_control: Optional[
             Union[
-                components.ChatGenerationParamsProvider,
-                components.ChatGenerationParamsProviderTypedDict,
-            ]
-        ] = UNSET,
-        plugins: Optional[
-            Union[
-                List[components.ChatGenerationParamsPluginUnion],
-                List[components.ChatGenerationParamsPluginUnionTypedDict],
+                components.AnthropicCacheControlDirective,
+                components.AnthropicCacheControlDirectiveTypedDict,
             ]
         ] = None,
-        user: Optional[str] = None,
-        session_id: Optional[str] = None,
-        trace: Optional[
-            Union[
-                components.ChatGenerationParamsTrace,
-                components.ChatGenerationParamsTraceTypedDict,
-            ]
+        debug: Optional[
+            Union[components.ChatDebugOptions, components.ChatDebugOptionsTypedDict]
         ] = None,
-        model: Optional[str] = None,
-        models: Optional[List[str]] = None,
         frequency_penalty: OptionalNullable[float] = UNSET,
+        image_config: Optional[
+            Union[
+                Dict[str, components.ImageConfig],
+                Dict[str, components.ImageConfigTypedDict],
+            ]
+        ] = None,
         logit_bias: OptionalNullable[Dict[str, float]] = UNSET,
         logprobs: OptionalNullable[bool] = UNSET,
-        top_logprobs: OptionalNullable[float] = UNSET,
-        max_completion_tokens: OptionalNullable[float] = UNSET,
-        max_tokens: OptionalNullable[float] = UNSET,
+        max_completion_tokens: OptionalNullable[int] = UNSET,
+        max_tokens: OptionalNullable[int] = UNSET,
         metadata: Optional[Dict[str, str]] = None,
+        modalities: Optional[List[components.Modality]] = None,
+        model: Optional[str] = None,
+        models: Optional[List[str]] = None,
+        parallel_tool_calls: OptionalNullable[bool] = UNSET,
+        plugins: Optional[
+            Union[
+                List[components.ChatRequestPlugin],
+                List[components.ChatRequestPluginTypedDict],
+            ]
+        ] = None,
         presence_penalty: OptionalNullable[float] = UNSET,
+        provider: OptionalNullable[
+            Union[
+                components.ProviderPreferences, components.ProviderPreferencesTypedDict
+            ]
+        ] = UNSET,
         reasoning: Optional[
             Union[components.Reasoning, components.ReasoningTypedDict]
         ] = None,
@@ -816,6 +872,8 @@ class Chat(BaseSDK):
             Union[components.ResponseFormat, components.ResponseFormatTypedDict]
         ] = None,
         seed: OptionalNullable[int] = UNSET,
+        service_tier: OptionalNullable[components.ChatRequestServiceTier] = UNSET,
+        session_id: Optional[str] = None,
         stop: OptionalNullable[
             Union[components.Stop, components.StopTypedDict]
         ] = UNSET,
@@ -823,33 +881,27 @@ class Chat(BaseSDK):
         stream_options: OptionalNullable[
             Union[components.ChatStreamOptions, components.ChatStreamOptionsTypedDict]
         ] = UNSET,
-        temperature: OptionalNullable[float] = 1,
-        parallel_tool_calls: OptionalNullable[bool] = UNSET,
+        temperature: OptionalNullable[float] = UNSET,
         tool_choice: Optional[
-            Union[components.ToolChoiceOption, components.ToolChoiceOptionTypedDict]
+            Union[components.ChatToolChoice, components.ChatToolChoiceTypedDict]
         ] = None,
         tools: Optional[
             Union[
-                List[components.ToolDefinitionJSON],
-                List[components.ToolDefinitionJSONTypedDict],
+                List[components.ChatFunctionTool],
+                List[components.ChatFunctionToolTypedDict],
             ]
         ] = None,
-        top_p: OptionalNullable[float] = 1,
-        debug: Optional[
-            Union[components.DebugOptions, components.DebugOptionsTypedDict]
+        top_logprobs: OptionalNullable[int] = UNSET,
+        top_p: OptionalNullable[float] = UNSET,
+        trace: Optional[
+            Union[components.TraceConfig, components.TraceConfigTypedDict]
         ] = None,
-        image_config: Optional[
-            Union[
-                Dict[str, components.ChatGenerationParamsImageConfig],
-                Dict[str, components.ChatGenerationParamsImageConfigTypedDict],
-            ]
-        ] = None,
-        modalities: Optional[List[components.Modality]] = None,
+        user: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> eventstreaming.EventStreamAsync[components.ChatStreamingResponseChunk]:
+    ) -> eventstreaming.EventStreamAsync[components.ChatStreamChunk]:
         r"""Create a chat completion
 
         Sends a request for a model response for the given chat conversation. Supports both streaming and non-streaming modes.
@@ -858,37 +910,41 @@ class Chat(BaseSDK):
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
-        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+        :param x_open_router_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
 
-        :param provider: When multiple model providers are available, optionally indicate your routing preference.
-        :param plugins: Plugins you want to enable for this request, including their settings.
-        :param user: Unique user identifier
-        :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 128 characters.
-        :param trace: Metadata for observability and tracing. Known keys (trace_id, trace_name, span_name, generation_name, parent_span_id) have special handling. Additional keys are passed through as custom metadata to configured broadcast destinations.
-        :param model: Model to use for completion
-        :param models: Models to use for completion
+        :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
+
+        :param cache_control:
+        :param debug: Debug options for inspecting request transformations (streaming only)
         :param frequency_penalty: Frequency penalty (-2.0 to 2.0)
+        :param image_config: Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/guides/overview/multimodal/image-generation for more details.
         :param logit_bias: Token logit bias adjustments
         :param logprobs: Return log probabilities
-        :param top_logprobs: Number of top log probabilities to return (0-20)
         :param max_completion_tokens: Maximum tokens in completion
-        :param max_tokens: Maximum tokens (deprecated, use max_completion_tokens)
+        :param max_tokens: Maximum tokens (deprecated, use max_completion_tokens). Note: some providers enforce a minimum of 16.
         :param metadata: Key-value pairs for additional object information (max 16 pairs, 64 char keys, 512 char values)
+        :param modalities: Output modalities for the response. Supported values are \"text\", \"image\", and \"audio\".
+        :param model: Model to use for completion
+        :param models: Models to use for completion
+        :param parallel_tool_calls: Whether to enable parallel function calling during tool use. When true, the model may generate multiple tool calls in a single response.
+        :param plugins: Plugins you want to enable for this request, including their settings.
         :param presence_penalty: Presence penalty (-2.0 to 2.0)
+        :param provider: When multiple model providers are available, optionally indicate your routing preference.
         :param reasoning: Configuration options for reasoning models
         :param response_format: Response format configuration
         :param seed: Random seed for deterministic outputs
+        :param service_tier: The service tier to use for processing this request.
+        :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters.
         :param stop: Stop sequences (up to 4)
         :param stream: Enable streaming response
         :param stream_options: Streaming configuration options
         :param temperature: Sampling temperature (0-2)
-        :param parallel_tool_calls:
         :param tool_choice: Tool choice configuration
         :param tools: Available tools for function calling
+        :param top_logprobs: Number of top log probabilities to return (0-20)
         :param top_p: Nucleus sampling parameter (0-1)
-        :param debug: Debug options for inspecting request transformations (streaming only)
-        :param image_config: Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/guides/overview/multimodal/image-generation for more details.
-        :param modalities: Output modalities for the response. Supported values are \"text\" and \"image\".
+        :param trace: Metadata for observability and tracing. Known keys (trace_id, trace_name, span_name, generation_name, parent_span_id) have special handling. Additional keys are passed through as custom metadata to configured broadcast destinations.
+        :param user: Unique user identifier
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -899,39 +955,49 @@ class Chat(BaseSDK):
     async def send_async(
         self,
         *,
-        messages: Union[List[components.Message], List[components.MessageTypedDict]],
+        messages: Union[
+            List[components.ChatMessages], List[components.ChatMessagesTypedDict]
+        ],
         http_referer: Optional[str] = None,
-        x_title: Optional[str] = None,
-        provider: OptionalNullable[
+        x_open_router_title: Optional[str] = None,
+        x_open_router_categories: Optional[str] = None,
+        cache_control: Optional[
             Union[
-                components.ChatGenerationParamsProvider,
-                components.ChatGenerationParamsProviderTypedDict,
-            ]
-        ] = UNSET,
-        plugins: Optional[
-            Union[
-                List[components.ChatGenerationParamsPluginUnion],
-                List[components.ChatGenerationParamsPluginUnionTypedDict],
+                components.AnthropicCacheControlDirective,
+                components.AnthropicCacheControlDirectiveTypedDict,
             ]
         ] = None,
-        user: Optional[str] = None,
-        session_id: Optional[str] = None,
-        trace: Optional[
-            Union[
-                components.ChatGenerationParamsTrace,
-                components.ChatGenerationParamsTraceTypedDict,
-            ]
+        debug: Optional[
+            Union[components.ChatDebugOptions, components.ChatDebugOptionsTypedDict]
         ] = None,
-        model: Optional[str] = None,
-        models: Optional[List[str]] = None,
         frequency_penalty: OptionalNullable[float] = UNSET,
+        image_config: Optional[
+            Union[
+                Dict[str, components.ImageConfig],
+                Dict[str, components.ImageConfigTypedDict],
+            ]
+        ] = None,
         logit_bias: OptionalNullable[Dict[str, float]] = UNSET,
         logprobs: OptionalNullable[bool] = UNSET,
-        top_logprobs: OptionalNullable[float] = UNSET,
-        max_completion_tokens: OptionalNullable[float] = UNSET,
-        max_tokens: OptionalNullable[float] = UNSET,
+        max_completion_tokens: OptionalNullable[int] = UNSET,
+        max_tokens: OptionalNullable[int] = UNSET,
         metadata: Optional[Dict[str, str]] = None,
+        modalities: Optional[List[components.Modality]] = None,
+        model: Optional[str] = None,
+        models: Optional[List[str]] = None,
+        parallel_tool_calls: OptionalNullable[bool] = UNSET,
+        plugins: Optional[
+            Union[
+                List[components.ChatRequestPlugin],
+                List[components.ChatRequestPluginTypedDict],
+            ]
+        ] = None,
         presence_penalty: OptionalNullable[float] = UNSET,
+        provider: OptionalNullable[
+            Union[
+                components.ProviderPreferences, components.ProviderPreferencesTypedDict
+            ]
+        ] = UNSET,
         reasoning: Optional[
             Union[components.Reasoning, components.ReasoningTypedDict]
         ] = None,
@@ -939,6 +1005,8 @@ class Chat(BaseSDK):
             Union[components.ResponseFormat, components.ResponseFormatTypedDict]
         ] = None,
         seed: OptionalNullable[int] = UNSET,
+        service_tier: OptionalNullable[components.ChatRequestServiceTier] = UNSET,
+        session_id: Optional[str] = None,
         stop: OptionalNullable[
             Union[components.Stop, components.StopTypedDict]
         ] = UNSET,
@@ -946,28 +1014,22 @@ class Chat(BaseSDK):
         stream_options: OptionalNullable[
             Union[components.ChatStreamOptions, components.ChatStreamOptionsTypedDict]
         ] = UNSET,
-        temperature: OptionalNullable[float] = 1,
-        parallel_tool_calls: OptionalNullable[bool] = UNSET,
+        temperature: OptionalNullable[float] = UNSET,
         tool_choice: Optional[
-            Union[components.ToolChoiceOption, components.ToolChoiceOptionTypedDict]
+            Union[components.ChatToolChoice, components.ChatToolChoiceTypedDict]
         ] = None,
         tools: Optional[
             Union[
-                List[components.ToolDefinitionJSON],
-                List[components.ToolDefinitionJSONTypedDict],
+                List[components.ChatFunctionTool],
+                List[components.ChatFunctionToolTypedDict],
             ]
         ] = None,
-        top_p: OptionalNullable[float] = 1,
-        debug: Optional[
-            Union[components.DebugOptions, components.DebugOptionsTypedDict]
+        top_logprobs: OptionalNullable[int] = UNSET,
+        top_p: OptionalNullable[float] = UNSET,
+        trace: Optional[
+            Union[components.TraceConfig, components.TraceConfigTypedDict]
         ] = None,
-        image_config: Optional[
-            Union[
-                Dict[str, components.ChatGenerationParamsImageConfig],
-                Dict[str, components.ChatGenerationParamsImageConfigTypedDict],
-            ]
-        ] = None,
-        modalities: Optional[List[components.Modality]] = None,
+        user: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -981,37 +1043,41 @@ class Chat(BaseSDK):
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
-        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+        :param x_open_router_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
 
-        :param provider: When multiple model providers are available, optionally indicate your routing preference.
-        :param plugins: Plugins you want to enable for this request, including their settings.
-        :param user: Unique user identifier
-        :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 128 characters.
-        :param trace: Metadata for observability and tracing. Known keys (trace_id, trace_name, span_name, generation_name, parent_span_id) have special handling. Additional keys are passed through as custom metadata to configured broadcast destinations.
-        :param model: Model to use for completion
-        :param models: Models to use for completion
+        :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
+
+        :param cache_control:
+        :param debug: Debug options for inspecting request transformations (streaming only)
         :param frequency_penalty: Frequency penalty (-2.0 to 2.0)
+        :param image_config: Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/guides/overview/multimodal/image-generation for more details.
         :param logit_bias: Token logit bias adjustments
         :param logprobs: Return log probabilities
-        :param top_logprobs: Number of top log probabilities to return (0-20)
         :param max_completion_tokens: Maximum tokens in completion
-        :param max_tokens: Maximum tokens (deprecated, use max_completion_tokens)
+        :param max_tokens: Maximum tokens (deprecated, use max_completion_tokens). Note: some providers enforce a minimum of 16.
         :param metadata: Key-value pairs for additional object information (max 16 pairs, 64 char keys, 512 char values)
+        :param modalities: Output modalities for the response. Supported values are \"text\", \"image\", and \"audio\".
+        :param model: Model to use for completion
+        :param models: Models to use for completion
+        :param parallel_tool_calls: Whether to enable parallel function calling during tool use. When true, the model may generate multiple tool calls in a single response.
+        :param plugins: Plugins you want to enable for this request, including their settings.
         :param presence_penalty: Presence penalty (-2.0 to 2.0)
+        :param provider: When multiple model providers are available, optionally indicate your routing preference.
         :param reasoning: Configuration options for reasoning models
         :param response_format: Response format configuration
         :param seed: Random seed for deterministic outputs
+        :param service_tier: The service tier to use for processing this request.
+        :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters.
         :param stop: Stop sequences (up to 4)
         :param stream: Enable streaming response
         :param stream_options: Streaming configuration options
         :param temperature: Sampling temperature (0-2)
-        :param parallel_tool_calls:
         :param tool_choice: Tool choice configuration
         :param tools: Available tools for function calling
+        :param top_logprobs: Number of top log probabilities to return (0-20)
         :param top_p: Nucleus sampling parameter (0-1)
-        :param debug: Debug options for inspecting request transformations (streaming only)
-        :param image_config: Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/guides/overview/multimodal/image-generation for more details.
-        :param modalities: Output modalities for the response. Supported values are \"text\" and \"image\".
+        :param trace: Metadata for observability and tracing. Known keys (trace_id, trace_name, span_name, generation_name, parent_span_id) have special handling. Additional keys are passed through as custom metadata to configured broadcast destinations.
+        :param user: Unique user identifier
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1030,30 +1096,36 @@ class Chat(BaseSDK):
 
         request = operations.SendChatCompletionRequestRequest(
             http_referer=http_referer,
-            x_title=x_title,
-            chat_generation_params=components.ChatGenerationParams(
-                provider=utils.get_pydantic_model(
-                    provider, OptionalNullable[components.ChatGenerationParamsProvider]
+            x_open_router_title=x_open_router_title,
+            x_open_router_categories=x_open_router_categories,
+            chat_request=components.ChatRequest(
+                cache_control=utils.get_pydantic_model(
+                    cache_control, Optional[components.AnthropicCacheControlDirective]
                 ),
-                plugins=utils.get_pydantic_model(
-                    plugins, Optional[List[components.ChatGenerationParamsPluginUnion]]
+                debug=utils.get_pydantic_model(
+                    debug, Optional[components.ChatDebugOptions]
                 ),
-                user=user,
-                session_id=session_id,
-                trace=utils.get_pydantic_model(
-                    trace, Optional[components.ChatGenerationParamsTrace]
-                ),
-                messages=utils.get_pydantic_model(messages, List[components.Message]),
-                model=model,
-                models=models,
                 frequency_penalty=frequency_penalty,
+                image_config=image_config,
                 logit_bias=logit_bias,
                 logprobs=logprobs,
-                top_logprobs=top_logprobs,
                 max_completion_tokens=max_completion_tokens,
                 max_tokens=max_tokens,
+                messages=utils.get_pydantic_model(
+                    messages, List[components.ChatMessages]
+                ),
                 metadata=metadata,
+                modalities=modalities,
+                model=model,
+                models=models,
+                parallel_tool_calls=parallel_tool_calls,
+                plugins=utils.get_pydantic_model(
+                    plugins, Optional[List[components.ChatRequestPlugin]]
+                ),
                 presence_penalty=presence_penalty,
+                provider=utils.get_pydantic_model(
+                    provider, OptionalNullable[components.ProviderPreferences]
+                ),
                 reasoning=utils.get_pydantic_model(
                     reasoning, Optional[components.Reasoning]
                 ),
@@ -1061,25 +1133,24 @@ class Chat(BaseSDK):
                     response_format, Optional[components.ResponseFormat]
                 ),
                 seed=seed,
+                service_tier=service_tier,
+                session_id=session_id,
                 stop=stop,
                 stream=stream,
                 stream_options=utils.get_pydantic_model(
                     stream_options, OptionalNullable[components.ChatStreamOptions]
                 ),
                 temperature=temperature,
-                parallel_tool_calls=parallel_tool_calls,
                 tool_choice=utils.get_pydantic_model(
-                    tool_choice, Optional[components.ToolChoiceOption]
+                    tool_choice, Optional[components.ChatToolChoice]
                 ),
                 tools=utils.get_pydantic_model(
-                    tools, Optional[List[components.ToolDefinitionJSON]]
+                    tools, Optional[List[components.ChatFunctionTool]]
                 ),
+                top_logprobs=top_logprobs,
                 top_p=top_p,
-                debug=utils.get_pydantic_model(
-                    debug, Optional[components.DebugOptions]
-                ),
-                image_config=image_config,
-                modalities=modalities,
+                trace=utils.get_pydantic_model(trace, Optional[components.TraceConfig]),
+                user=user,
             ),
         )
 
@@ -1097,15 +1168,12 @@ class Chat(BaseSDK):
             http_headers=http_headers,
             _globals=operations.SendChatCompletionRequestGlobals(
                 http_referer=self.sdk_configuration.globals.http_referer,
-                x_title=self.sdk_configuration.globals.x_title,
+                x_open_router_title=self.sdk_configuration.globals.x_open_router_title,
+                x_open_router_categories=self.sdk_configuration.globals.x_open_router_categories,
             ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.chat_generation_params,
-                False,
-                False,
-                "json",
-                components.ChatGenerationParams,
+                request.chat_request, False, False, "json", components.ChatRequest
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -1114,10 +1182,14 @@ class Chat(BaseSDK):
         if retries == UNSET:
             if self.sdk_configuration.retry_config is not UNSET:
                 retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 60000, 1.5, 3600000), True
+                )
 
         retry_config = None
         if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, ["429", "500", "502", "503", "504"])
+            retry_config = (retries, ["5XX"])
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
@@ -1155,7 +1227,7 @@ class Chat(BaseSDK):
         if utils.match_response(http_res, "200", "application/json"):
             http_res_text = await utils.stream_to_text_async(http_res)
             return unmarshal_json_response(
-                components.ChatResponse, http_res, http_res_text
+                components.ChatResult, http_res, http_res_text
             )
         if utils.match_response(http_res, "200", "text/event-stream"):
             return eventstreaming.EventStreamAsync(

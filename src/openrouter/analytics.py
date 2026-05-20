@@ -16,13 +16,16 @@ class Analytics(BaseSDK):
         self,
         *,
         http_referer: Optional[str] = None,
-        x_title: Optional[str] = None,
+        x_open_router_title: Optional[str] = None,
+        x_open_router_categories: Optional[str] = None,
         date_: Optional[str] = None,
+        api_key_hash: Optional[str] = None,
+        user_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> operations.GetUserActivityResponse:
+    ) -> components.ActivityResponse:
         r"""Get user activity grouped by endpoint
 
         Returns user activity data grouped by endpoint for the last 30 (completed) UTC days. [Management key](/docs/guides/overview/auth/management-api-keys) required.
@@ -30,9 +33,13 @@ class Analytics(BaseSDK):
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
-        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+        :param x_open_router_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+        :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
         :param date_: Filter by a single UTC date in the last 30 days (YYYY-MM-DD format).
+        :param api_key_hash: Filter by API key hash (SHA-256 hex string, as returned by the keys API).
+        :param user_id: Filter by org member user ID. Only applicable for organization accounts.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -50,8 +57,11 @@ class Analytics(BaseSDK):
 
         request = operations.GetUserActivityRequest(
             http_referer=http_referer,
-            x_title=x_title,
+            x_open_router_title=x_open_router_title,
+            x_open_router_categories=x_open_router_categories,
             date_=date_,
+            api_key_hash=api_key_hash,
+            user_id=user_id,
         )
 
         req = self._build_request(
@@ -68,7 +78,8 @@ class Analytics(BaseSDK):
             http_headers=http_headers,
             _globals=operations.GetUserActivityGlobals(
                 http_referer=self.sdk_configuration.globals.http_referer,
-                x_title=self.sdk_configuration.globals.x_title,
+                x_open_router_title=self.sdk_configuration.globals.x_open_router_title,
+                x_open_router_categories=self.sdk_configuration.globals.x_open_router_categories,
             ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
@@ -78,10 +89,14 @@ class Analytics(BaseSDK):
         if retries == UNSET:
             if self.sdk_configuration.retry_config is not UNSET:
                 retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 60000, 1.5, 3600000), True
+                )
 
         retry_config = None
         if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, ["429", "500", "502", "503", "504"])
+            retry_config = (retries, ["5XX"])
 
         http_res = self.do_request(
             hook_ctx=HookContext(
@@ -94,13 +109,13 @@ class Analytics(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "404", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(operations.GetUserActivityResponse, http_res)
+            return unmarshal_json_response(components.ActivityResponse, http_res)
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.BadRequestResponseErrorData, http_res
@@ -116,6 +131,11 @@ class Analytics(BaseSDK):
                 errors.ForbiddenResponseErrorData, http_res
             )
             raise errors.ForbiddenResponseError(response_data, http_res)
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.NotFoundResponseErrorData, http_res
+            )
+            raise errors.NotFoundResponseError(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(
                 errors.InternalServerResponseErrorData, http_res
@@ -138,13 +158,16 @@ class Analytics(BaseSDK):
         self,
         *,
         http_referer: Optional[str] = None,
-        x_title: Optional[str] = None,
+        x_open_router_title: Optional[str] = None,
+        x_open_router_categories: Optional[str] = None,
         date_: Optional[str] = None,
+        api_key_hash: Optional[str] = None,
+        user_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> operations.GetUserActivityResponse:
+    ) -> components.ActivityResponse:
         r"""Get user activity grouped by endpoint
 
         Returns user activity data grouped by endpoint for the last 30 (completed) UTC days. [Management key](/docs/guides/overview/auth/management-api-keys) required.
@@ -152,9 +175,13 @@ class Analytics(BaseSDK):
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
-        :param x_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+        :param x_open_router_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+        :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
         :param date_: Filter by a single UTC date in the last 30 days (YYYY-MM-DD format).
+        :param api_key_hash: Filter by API key hash (SHA-256 hex string, as returned by the keys API).
+        :param user_id: Filter by org member user ID. Only applicable for organization accounts.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -172,8 +199,11 @@ class Analytics(BaseSDK):
 
         request = operations.GetUserActivityRequest(
             http_referer=http_referer,
-            x_title=x_title,
+            x_open_router_title=x_open_router_title,
+            x_open_router_categories=x_open_router_categories,
             date_=date_,
+            api_key_hash=api_key_hash,
+            user_id=user_id,
         )
 
         req = self._build_request_async(
@@ -190,7 +220,8 @@ class Analytics(BaseSDK):
             http_headers=http_headers,
             _globals=operations.GetUserActivityGlobals(
                 http_referer=self.sdk_configuration.globals.http_referer,
-                x_title=self.sdk_configuration.globals.x_title,
+                x_open_router_title=self.sdk_configuration.globals.x_open_router_title,
+                x_open_router_categories=self.sdk_configuration.globals.x_open_router_categories,
             ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
@@ -200,10 +231,14 @@ class Analytics(BaseSDK):
         if retries == UNSET:
             if self.sdk_configuration.retry_config is not UNSET:
                 retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 60000, 1.5, 3600000), True
+                )
 
         retry_config = None
         if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, ["429", "500", "502", "503", "504"])
+            retry_config = (retries, ["5XX"])
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
@@ -216,13 +251,13 @@ class Analytics(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "404", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(operations.GetUserActivityResponse, http_res)
+            return unmarshal_json_response(components.ActivityResponse, http_res)
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.BadRequestResponseErrorData, http_res
@@ -238,6 +273,11 @@ class Analytics(BaseSDK):
                 errors.ForbiddenResponseErrorData, http_res
             )
             raise errors.ForbiddenResponseError(response_data, http_res)
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.NotFoundResponseErrorData, http_res
+            )
+            raise errors.NotFoundResponseError(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(
                 errors.InternalServerResponseErrorData, http_res

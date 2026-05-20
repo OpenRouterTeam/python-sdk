@@ -28,8 +28,12 @@ class ExchangeAuthCodeForAPIKeyGlobalsTypedDict(TypedDict):
     This is used to track API usage per application.
 
     """
-    x_title: NotRequired[str]
+    x_open_router_title: NotRequired[str]
     r"""The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+    """
+    x_open_router_categories: NotRequired[str]
+    r"""Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
     """
 
@@ -45,12 +49,21 @@ class ExchangeAuthCodeForAPIKeyGlobals(BaseModel):
 
     """
 
-    x_title: Annotated[
+    x_open_router_title: Annotated[
         Optional[str],
-        pydantic.Field(alias="X-Title"),
+        pydantic.Field(alias="X-OpenRouter-Title"),
         FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
     ] = None
     r"""The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+    """
+
+    x_open_router_categories: Annotated[
+        Optional[str],
+        pydantic.Field(alias="X-OpenRouter-Categories"),
+        FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
+    ] = None
+    r"""Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
     """
 
@@ -68,20 +81,17 @@ r"""The method used to generate the code challenge"""
 class ExchangeAuthCodeForAPIKeyRequestBodyTypedDict(TypedDict):
     code: str
     r"""The authorization code received from the OAuth redirect"""
-    code_verifier: NotRequired[str]
-    r"""The code verifier if code_challenge was used in the authorization request"""
     code_challenge_method: NotRequired[
         Nullable[ExchangeAuthCodeForAPIKeyCodeChallengeMethod]
     ]
     r"""The method used to generate the code challenge"""
+    code_verifier: NotRequired[str]
+    r"""The code verifier if code_challenge was used in the authorization request"""
 
 
 class ExchangeAuthCodeForAPIKeyRequestBody(BaseModel):
     code: str
     r"""The authorization code received from the OAuth redirect"""
-
-    code_verifier: Optional[str] = None
-    r"""The code verifier if code_challenge was used in the authorization request"""
 
     code_challenge_method: Annotated[
         OptionalNullable[ExchangeAuthCodeForAPIKeyCodeChallengeMethod],
@@ -89,9 +99,12 @@ class ExchangeAuthCodeForAPIKeyRequestBody(BaseModel):
     ] = UNSET
     r"""The method used to generate the code challenge"""
 
+    code_verifier: Optional[str] = None
+    r"""The code verifier if code_challenge was used in the authorization request"""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["code_verifier", "code_challenge_method"]
+        optional_fields = ["code_challenge_method", "code_verifier"]
         nullable_fields = ["code_challenge_method"]
         null_default_fields = []
 
@@ -127,8 +140,12 @@ class ExchangeAuthCodeForAPIKeyRequestTypedDict(TypedDict):
     This is used to track API usage per application.
 
     """
-    x_title: NotRequired[str]
+    x_open_router_title: NotRequired[str]
     r"""The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+    """
+    x_open_router_categories: NotRequired[str]
+    r"""Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
     """
 
@@ -149,12 +166,21 @@ class ExchangeAuthCodeForAPIKeyRequest(BaseModel):
 
     """
 
-    x_title: Annotated[
+    x_open_router_title: Annotated[
         Optional[str],
-        pydantic.Field(alias="X-Title"),
+        pydantic.Field(alias="X-OpenRouter-Title"),
         FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
     ] = None
     r"""The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+    """
+
+    x_open_router_categories: Annotated[
+        Optional[str],
+        pydantic.Field(alias="X-OpenRouter-Categories"),
+        FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
+    ] = None
+    r"""Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
     """
 

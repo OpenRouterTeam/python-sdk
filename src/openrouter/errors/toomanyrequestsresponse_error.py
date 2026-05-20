@@ -14,7 +14,6 @@ from typing import Optional
 class TooManyRequestsResponseErrorData(BaseModel):
     error: components_toomanyrequestsresponseerrordata.TooManyRequestsResponseErrorData
     r"""Error data for TooManyRequestsResponse"""
-
     user_id: OptionalNullable[str] = UNSET
 
 

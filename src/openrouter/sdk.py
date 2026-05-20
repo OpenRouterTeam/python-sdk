@@ -27,7 +27,10 @@ if TYPE_CHECKING:
     from openrouter.guardrails import Guardrails
     from openrouter.models_ import Models
     from openrouter.oauth import OAuth
+    from openrouter.organization import Organization
     from openrouter.providers import Providers
+    from openrouter.rerank import Rerank
+    from openrouter.video_generation import VideoGeneration
 
 
 class OpenRouter(BaseSDK):
@@ -35,48 +38,58 @@ class OpenRouter(BaseSDK):
     https://openrouter.ai/docs - OpenRouter Documentation
     """
 
-    beta: "Beta"
     analytics: "Analytics"
     r"""Analytics and usage endpoints"""
+    o_auth: "OAuth"
+    r"""OAuth authentication endpoints"""
     chat: "Chat"
     credits: "Credits"
     r"""Credit management endpoints"""
     embeddings: "Embeddings"
     r"""Text embedding endpoints"""
-    generations: "Generations"
-    r"""Generation history endpoints"""
-    models: "Models"
-    r"""Model information endpoints"""
     endpoints: "Endpoints"
     r"""Endpoint information"""
-    providers: "Providers"
-    r"""Provider information endpoints"""
-    api_keys: "APIKeys"
-    r"""API key management endpoints"""
+    generations: "Generations"
+    r"""Generation history endpoints"""
     guardrails: "Guardrails"
     r"""Guardrails endpoints"""
-    o_auth: "OAuth"
-    r"""OAuth authentication endpoints"""
+    api_keys: "APIKeys"
+    r"""API key management endpoints"""
+    models: "Models"
+    r"""Model information endpoints"""
+    organization: "Organization"
+    r"""Organization endpoints"""
+    providers: "Providers"
+    r"""Provider information endpoints"""
+    rerank: "Rerank"
+    r"""Rerank endpoints"""
+    beta: "Beta"
+    video_generation: "VideoGeneration"
+    r"""Video Generation endpoints"""
     _sub_sdk_map = {
-        "beta": ("openrouter.beta", "Beta"),
         "analytics": ("openrouter.analytics", "Analytics"),
+        "o_auth": ("openrouter.oauth", "OAuth"),
         "chat": ("openrouter.chat", "Chat"),
         "credits": ("openrouter.credits", "Credits"),
         "embeddings": ("openrouter.embeddings", "Embeddings"),
-        "generations": ("openrouter.generations", "Generations"),
-        "models": ("openrouter.models_", "Models"),
         "endpoints": ("openrouter.endpoints", "Endpoints"),
-        "providers": ("openrouter.providers", "Providers"),
-        "api_keys": ("openrouter.api_keys", "APIKeys"),
+        "generations": ("openrouter.generations", "Generations"),
         "guardrails": ("openrouter.guardrails", "Guardrails"),
-        "o_auth": ("openrouter.oauth", "OAuth"),
+        "api_keys": ("openrouter.api_keys", "APIKeys"),
+        "models": ("openrouter.models_", "Models"),
+        "organization": ("openrouter.organization", "Organization"),
+        "providers": ("openrouter.providers", "Providers"),
+        "rerank": ("openrouter.rerank", "Rerank"),
+        "beta": ("openrouter.beta", "Beta"),
+        "video_generation": ("openrouter.video_generation", "VideoGeneration"),
     }
 
     def __init__(
         self,
         api_key: Optional[Union[Optional[str], Callable[[], Optional[str]]]] = None,
         http_referer: Optional[str] = None,
-        x_title: Optional[str] = None,
+        x_open_router_title: Optional[str] = None,
+        x_open_router_categories: Optional[str] = None,
         server: Optional[str] = None,
         server_url: Optional[str] = None,
         url_params: Optional[Dict[str, str]] = None,
@@ -90,7 +103,8 @@ class OpenRouter(BaseSDK):
 
         :param api_key: The api_key required for authentication
         :param http_referer: Configures the http_referer parameter for all supported operations
-        :param x_title: Configures the x_title parameter for all supported operations
+        :param x_open_router_title: Configures the x_open_router_title parameter for all supported operations
+        :param x_open_router_categories: Configures the x_open_router_categories parameter for all supported operations
         :param server: The server by name to use for all methods
         :param server_url: The server URL to use for all methods
         :param url_params: Parameters to optionally template the server URL with
@@ -135,7 +149,12 @@ class OpenRouter(BaseSDK):
             http_referer=utils.get_global_from_env(
                 http_referer, "OPENROUTER_HTTP_REFERER", str
             ),
-            x_title=utils.get_global_from_env(x_title, "OPENROUTER_X_TITLE", str),
+            x_open_router_title=utils.get_global_from_env(
+                x_open_router_title, "OPENROUTER_X_OPEN_ROUTER_TITLE", str
+            ),
+            x_open_router_categories=utils.get_global_from_env(
+                x_open_router_categories, "OPENROUTER_X_OPEN_ROUTER_CATEGORIES", str
+            ),
         )
 
         BaseSDK.__init__(

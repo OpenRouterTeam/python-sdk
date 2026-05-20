@@ -1,30 +1,23 @@
-speakeasyVersion: 1.666.0
+speakeasyVersion: 1.763.2
 sources:
-    -OAS:
-        sourceNamespace: open-router-chat-completions-api
-        sourceRevisionDigest: sha256:01256c8494de6bfc13c36d82ae316a6a13d402194f844618bcd4d59e34f325f3
-        sourceBlobDigest: sha256:4c80e48fd5e1cd030e68d664eb93984b4d5946867252ff1755a2bd2a05eccd4e
-        tags:
-            - latest
     OpenRouter API:
         sourceNamespace: open-router-chat-completions-api
-        sourceRevisionDigest: sha256:8a64fb1c1030c87db14bca3af4883e06b9d5853c153a5fd0f2e4c15166e034dd
-        sourceBlobDigest: sha256:7f6d7d20424f27ec13e6ae45a1599dab23f2573a69d634b1bb1c346f8a328ae9
+        sourceRevisionDigest: sha256:3982892b2b8f82bfc2a26a0f6fcc9512b665a1051dc240a9cfa29001b9453aa9
+        sourceBlobDigest: sha256:727d3c1f7d36ffbf94c57b565536d8a16804eaef4c4043dd6c98152fc1629c8f
         tags:
             - latest
-            - main
             - 1.0.0
 targets:
     open-router:
         source: OpenRouter API
         sourceNamespace: open-router-chat-completions-api
-        sourceRevisionDigest: sha256:8a64fb1c1030c87db14bca3af4883e06b9d5853c153a5fd0f2e4c15166e034dd
-        sourceBlobDigest: sha256:7f6d7d20424f27ec13e6ae45a1599dab23f2573a69d634b1bb1c346f8a328ae9
+        sourceRevisionDigest: sha256:3982892b2b8f82bfc2a26a0f6fcc9512b665a1051dc240a9cfa29001b9453aa9
+        sourceBlobDigest: sha256:727d3c1f7d36ffbf94c57b565536d8a16804eaef4c4043dd6c98152fc1629c8f
         codeSamplesNamespace: open-router-python-code-samples
-        codeSamplesRevisionDigest: sha256:349390cb3f04fb4fdd6292a33ff1ee0659846fe1e3f03bede5bf13f3e70c447f
+        codeSamplesRevisionDigest: sha256:db86aed74d199f265e2e20442ef652dac0911c8a657ccb3e6614d56a26b8b44e
 workflow:
     workflowVersion: 1.0.0
-    speakeasyVersion: 1.666.0
+    speakeasyVersion: 1.763.2
     sources:
         OpenRouter API:
             inputs:
@@ -33,6 +26,9 @@ workflow:
                 - location: .speakeasy/overlays/open-enums.overlay.yaml
                 - location: .speakeasy/overlays/remove-rss-responses.overlay.yaml
                 - location: .speakeasy/overlays/add-headers.overlay.yaml
+                - location: .speakeasy/overlays/allof-simplify.overlay.yaml
+                - location: .speakeasy/overlays/boolean-query-params.overlay.yaml
+                - location: .speakeasy/overlays/fix-nullable-pagination.overlay.yaml
             output: .speakeasy/out.openapi.yaml
             registry:
                 location: registry.speakeasyapi.dev/openrouter/sdk/open-router-chat-completions-api

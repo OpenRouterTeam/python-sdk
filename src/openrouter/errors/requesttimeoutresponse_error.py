@@ -14,7 +14,6 @@ from typing import Optional
 class RequestTimeoutResponseErrorData(BaseModel):
     error: components_requesttimeoutresponseerrordata.RequestTimeoutResponseErrorData
     r"""Error data for RequestTimeoutResponse"""
-
     user_id: OptionalNullable[str] = UNSET
 
 

@@ -14,7 +14,6 @@ from typing import Optional
 class EdgeNetworkTimeoutResponseErrorData(BaseModel):
     error: components_edgenetworktimeoutresponseerrordata.EdgeNetworkTimeoutResponseErrorData
     r"""Error data for EdgeNetworkTimeoutResponse"""
-
     user_id: OptionalNullable[str] = UNSET
 
 

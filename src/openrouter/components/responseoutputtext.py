@@ -11,51 +11,51 @@ from typing import List, Literal, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-ResponseOutputTextType = Literal["output_text",]
-
-
 class ResponseOutputTextTopLogprobTypedDict(TypedDict):
-    token: str
-    bytes_: List[float]
+    bytes_: List[int]
     logprob: float
+    token: str
 
 
 class ResponseOutputTextTopLogprob(BaseModel):
-    token: str
-
-    bytes_: Annotated[List[float], pydantic.Field(alias="bytes")]
+    bytes_: Annotated[List[int], pydantic.Field(alias="bytes")]
 
     logprob: float
+
+    token: str
 
 
 class LogprobTypedDict(TypedDict):
-    token: str
-    bytes_: List[float]
+    bytes_: List[int]
     logprob: float
+    token: str
     top_logprobs: List[ResponseOutputTextTopLogprobTypedDict]
 
 
 class Logprob(BaseModel):
-    token: str
-
-    bytes_: Annotated[List[float], pydantic.Field(alias="bytes")]
+    bytes_: Annotated[List[int], pydantic.Field(alias="bytes")]
 
     logprob: float
+
+    token: str
 
     top_logprobs: List[ResponseOutputTextTopLogprob]
 
 
+ResponseOutputTextType = Literal["output_text",]
+
+
 class ResponseOutputTextTypedDict(TypedDict):
-    type: ResponseOutputTextType
     text: str
+    type: ResponseOutputTextType
     annotations: NotRequired[List[OpenAIResponsesAnnotationTypedDict]]
     logprobs: NotRequired[List[LogprobTypedDict]]
 
 
 class ResponseOutputText(BaseModel):
-    type: ResponseOutputTextType
-
     text: str
+
+    type: ResponseOutputTextType
 
     annotations: Optional[List[OpenAIResponsesAnnotation]] = None
 

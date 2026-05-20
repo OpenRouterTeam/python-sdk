@@ -14,7 +14,6 @@ from typing import Optional
 class BadGatewayResponseErrorData(BaseModel):
     error: components_badgatewayresponseerrordata.BadGatewayResponseErrorData
     r"""Error data for BadGatewayResponse"""
-
     user_id: OptionalNullable[str] = UNSET
 
 

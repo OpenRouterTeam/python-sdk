@@ -2,9 +2,9 @@
 
 from __future__ import annotations
 from openrouter.components import (
-    openresponsesnonstreamingresponse as components_openresponsesnonstreamingresponse,
-    openresponsesrequest as components_openresponsesrequest,
-    openresponsesstreamevent as components_openresponsesstreamevent,
+    openresponsesresult as components_openresponsesresult,
+    responsesrequest as components_responsesrequest,
+    streamevents as components_streamevents,
 )
 from openrouter.types import BaseModel
 from openrouter.utils import (
@@ -24,8 +24,12 @@ class CreateResponsesGlobalsTypedDict(TypedDict):
     This is used to track API usage per application.
 
     """
-    x_title: NotRequired[str]
+    x_open_router_title: NotRequired[str]
     r"""The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+    """
+    x_open_router_categories: NotRequired[str]
+    r"""Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
     """
 
@@ -41,34 +45,45 @@ class CreateResponsesGlobals(BaseModel):
 
     """
 
-    x_title: Annotated[
+    x_open_router_title: Annotated[
         Optional[str],
-        pydantic.Field(alias="X-Title"),
+        pydantic.Field(alias="X-OpenRouter-Title"),
         FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
     ] = None
     r"""The app display name allows you to customize how your app appears in OpenRouter's dashboard.
 
     """
 
+    x_open_router_categories: Annotated[
+        Optional[str],
+        pydantic.Field(alias="X-OpenRouter-Categories"),
+        FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
+    ] = None
+    r"""Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
+
+    """
+
 
 class CreateResponsesRequestTypedDict(TypedDict):
-    open_responses_request: (
-        components_openresponsesrequest.OpenResponsesRequestTypedDict
-    )
+    responses_request: components_responsesrequest.ResponsesRequestTypedDict
     http_referer: NotRequired[str]
     r"""The app identifier should be your app's URL and is used as the primary identifier for rankings.
     This is used to track API usage per application.
 
     """
-    x_title: NotRequired[str]
+    x_open_router_title: NotRequired[str]
     r"""The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+    """
+    x_open_router_categories: NotRequired[str]
+    r"""Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
     """
 
 
 class CreateResponsesRequest(BaseModel):
-    open_responses_request: Annotated[
-        components_openresponsesrequest.OpenResponsesRequest,
+    responses_request: Annotated[
+        components_responsesrequest.ResponsesRequest,
         FieldMetadata(request=RequestMetadata(media_type="application/json")),
     ]
 
@@ -82,12 +97,21 @@ class CreateResponsesRequest(BaseModel):
 
     """
 
-    x_title: Annotated[
+    x_open_router_title: Annotated[
         Optional[str],
-        pydantic.Field(alias="X-Title"),
+        pydantic.Field(alias="X-OpenRouter-Title"),
         FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
     ] = None
     r"""The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+    """
+
+    x_open_router_categories: Annotated[
+        Optional[str],
+        pydantic.Field(alias="X-OpenRouter-Categories"),
+        FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
+    ] = None
+    r"""Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
     """
 
@@ -95,27 +119,25 @@ class CreateResponsesRequest(BaseModel):
 class CreateResponsesResponseBodyTypedDict(TypedDict):
     r"""Successful response"""
 
-    data: components_openresponsesstreamevent.OpenResponsesStreamEventTypedDict
+    data: components_streamevents.StreamEventsTypedDict
     r"""Union of all possible event types emitted during response streaming"""
 
 
 class CreateResponsesResponseBody(BaseModel):
     r"""Successful response"""
 
-    data: components_openresponsesstreamevent.OpenResponsesStreamEvent
+    data: components_streamevents.StreamEvents
     r"""Union of all possible event types emitted during response streaming"""
 
 
 CreateResponsesResponseTypedDict = TypeAliasType(
     "CreateResponsesResponseTypedDict",
     Union[
-        components_openresponsesnonstreamingresponse.OpenResponsesNonStreamingResponseTypedDict,
+        components_openresponsesresult.OpenResponsesResultTypedDict,
         Union[
-            eventstreaming.EventStream[
-                components_openresponsesstreamevent.OpenResponsesStreamEventTypedDict
-            ],
+            eventstreaming.EventStream[components_streamevents.StreamEventsTypedDict],
             eventstreaming.EventStreamAsync[
-                components_openresponsesstreamevent.OpenResponsesStreamEventTypedDict
+                components_streamevents.StreamEventsTypedDict
             ],
         ],
     ],
@@ -125,14 +147,10 @@ CreateResponsesResponseTypedDict = TypeAliasType(
 CreateResponsesResponse = TypeAliasType(
     "CreateResponsesResponse",
     Union[
-        components_openresponsesnonstreamingresponse.OpenResponsesNonStreamingResponse,
+        components_openresponsesresult.OpenResponsesResult,
         Union[
-            eventstreaming.EventStream[
-                components_openresponsesstreamevent.OpenResponsesStreamEvent
-            ],
-            eventstreaming.EventStreamAsync[
-                components_openresponsesstreamevent.OpenResponsesStreamEvent
-            ],
+            eventstreaming.EventStream[components_streamevents.StreamEvents],
+            eventstreaming.EventStreamAsync[components_streamevents.StreamEvents],
         ],
     ],
 )

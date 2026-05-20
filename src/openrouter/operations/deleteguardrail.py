@@ -2,15 +2,9 @@
 
 from __future__ import annotations
 from openrouter.types import BaseModel
-from openrouter.utils import (
-    FieldMetadata,
-    HeaderMetadata,
-    PathParamMetadata,
-    validate_const,
-)
+from openrouter.utils import FieldMetadata, HeaderMetadata, PathParamMetadata
 import pydantic
-from pydantic.functional_validators import AfterValidator
-from typing import Literal, Optional
+from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
@@ -20,8 +14,12 @@ class DeleteGuardrailGlobalsTypedDict(TypedDict):
     This is used to track API usage per application.
 
     """
-    x_title: NotRequired[str]
+    x_open_router_title: NotRequired[str]
     r"""The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+    """
+    x_open_router_categories: NotRequired[str]
+    r"""Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
     """
 
@@ -37,12 +35,21 @@ class DeleteGuardrailGlobals(BaseModel):
 
     """
 
-    x_title: Annotated[
+    x_open_router_title: Annotated[
         Optional[str],
-        pydantic.Field(alias="X-Title"),
+        pydantic.Field(alias="X-OpenRouter-Title"),
         FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
     ] = None
     r"""The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+    """
+
+    x_open_router_categories: Annotated[
+        Optional[str],
+        pydantic.Field(alias="X-OpenRouter-Categories"),
+        FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
+    ] = None
+    r"""Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
     """
 
@@ -55,8 +62,12 @@ class DeleteGuardrailRequestTypedDict(TypedDict):
     This is used to track API usage per application.
 
     """
-    x_title: NotRequired[str]
+    x_open_router_title: NotRequired[str]
     r"""The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+    """
+    x_open_router_categories: NotRequired[str]
+    r"""Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
     """
 
@@ -77,28 +88,20 @@ class DeleteGuardrailRequest(BaseModel):
 
     """
 
-    x_title: Annotated[
+    x_open_router_title: Annotated[
         Optional[str],
-        pydantic.Field(alias="X-Title"),
+        pydantic.Field(alias="X-OpenRouter-Title"),
         FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
     ] = None
     r"""The app display name allows you to customize how your app appears in OpenRouter's dashboard.
 
     """
 
+    x_open_router_categories: Annotated[
+        Optional[str],
+        pydantic.Field(alias="X-OpenRouter-Categories"),
+        FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
+    ] = None
+    r"""Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
-class DeleteGuardrailResponseTypedDict(TypedDict):
-    r"""Guardrail deleted successfully"""
-
-    deleted: Literal[True]
-    r"""Confirmation that the guardrail was deleted"""
-
-
-class DeleteGuardrailResponse(BaseModel):
-    r"""Guardrail deleted successfully"""
-
-    DELETED: Annotated[
-        Annotated[Literal[True], AfterValidator(validate_const(True))],
-        pydantic.Field(alias="deleted"),
-    ] = True
-    r"""Confirmation that the guardrail was deleted"""
+    """

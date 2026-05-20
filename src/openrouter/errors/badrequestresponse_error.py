@@ -14,7 +14,6 @@ from typing import Optional
 class BadRequestResponseErrorData(BaseModel):
     error: components_badrequestresponseerrordata.BadRequestResponseErrorData
     r"""Error data for BadRequestResponse"""
-
     user_id: OptionalNullable[str] = UNSET
 
 

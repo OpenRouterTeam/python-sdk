@@ -5,6 +5,7 @@
 
 | Name                | Value               |
 | ------------------- | ------------------- |
+| `AKASH_ML`          | AkashML             |
 | `AI21`              | AI21                |
 | `AION_LABS`         | AionLabs            |
 | `ALIBABA`           | Alibaba             |
@@ -28,6 +29,7 @@
 | `CRUSOE`            | Crusoe              |
 | `DEEP_INFRA`        | DeepInfra           |
 | `DEEP_SEEK`         | DeepSeek            |
+| `DEKA_LLM`          | DekaLLM             |
 | `FEATHERLESS`       | Featherless         |
 | `FIREWORKS`         | Fireworks           |
 | `FRIENDLI`          | Friendli            |
@@ -62,6 +64,8 @@
 | `PARASAIL`          | Parasail            |
 | `PERPLEXITY`        | Perplexity          |
 | `PHALA`             | Phala               |
+| `RECRAFT`           | Recraft             |
+| `REKA`              | Reka                |
 | `RELACE`            | Relace              |
 | `SAMBA_NOVA`        | SambaNova           |
 | `SEED`              | Seed                |

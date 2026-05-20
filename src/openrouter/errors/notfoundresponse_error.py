@@ -14,7 +14,6 @@ from typing import Optional
 class NotFoundResponseErrorData(BaseModel):
     error: components_notfoundresponseerrordata.NotFoundResponseErrorData
     r"""Error data for NotFoundResponse"""
-
     user_id: OptionalNullable[str] = UNSET
 
 

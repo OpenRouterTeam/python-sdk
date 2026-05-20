@@ -14,7 +14,6 @@ from typing import Optional
 class ProviderOverloadedResponseErrorData(BaseModel):
     error: components_provideroverloadedresponseerrordata.ProviderOverloadedResponseErrorData
     r"""Error data for ProviderOverloadedResponse"""
-
     user_id: OptionalNullable[str] = UNSET
 
 

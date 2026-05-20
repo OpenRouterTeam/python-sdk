@@ -2,15 +2,36 @@
 
 from __future__ import annotations
 from openrouter.types import UnrecognizedStr
+from openrouter.utils import validate_open_enum
+from pydantic.functional_validators import PlainValidator
 from typing import Literal, Union
+from typing_extensions import Annotated, TypeAliasType
 
 
-PDFParserEngine = Union[
+PDFParserEnginePDFText = Literal["pdf-text",]
+
+
+PDFParserEngineEnum = Union[
     Literal[
         "mistral-ocr",
-        "pdf-text",
         "native",
+        "cloudflare-ai",
     ],
     UnrecognizedStr,
 ]
-r"""The engine to use for parsing PDF files."""
+
+
+PDFParserEngineTypedDict = TypeAliasType(
+    "PDFParserEngineTypedDict", Union[PDFParserEngineEnum, PDFParserEnginePDFText]
+)
+r"""The engine to use for parsing PDF files. \"pdf-text\" is deprecated and automatically redirected to \"cloudflare-ai\"."""
+
+
+PDFParserEngine = TypeAliasType(
+    "PDFParserEngine",
+    Union[
+        Annotated[PDFParserEngineEnum, PlainValidator(validate_open_enum(False))],
+        PDFParserEnginePDFText,
+    ],
+)
+r"""The engine to use for parsing PDF files. \"pdf-text\" is deprecated and automatically redirected to \"cloudflare-ai\"."""
