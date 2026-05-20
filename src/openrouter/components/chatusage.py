@@ -143,6 +143,15 @@ class ChatUsage(BaseModel):
 
     prompt_tokens_details: OptionalNullable[PromptTokensDetails] = UNSET
     r"""Detailed prompt token usage"""
+    
+    cost: OptionalNullable[float] = UNSET
+    r"""Total cost of the request in USD"""
+
+    is_byok: OptionalNullable[bool] = UNSET
+    r"""Whether the request used bring-your-own-key"""
+
+    cost_details: OptionalNullable[dict] = UNSET
+    r"""Breakdown of cost by component (upstream_inference_cost, etc.)"""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
