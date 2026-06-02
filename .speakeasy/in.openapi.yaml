@@ -1079,6 +1079,16 @@ components:
         input_tokens: 100
         output_tokens: 50
         type: message
+    AnthropicOutputTokensDetails:
+      example:
+        thinking_tokens: 0
+      nullable: true
+      properties:
+        thinking_tokens:
+          type: integer
+      required:
+        - thinking_tokens
+      type: object
     AnthropicPlainTextSource:
       example:
         data: Hello, world!
@@ -1702,6 +1712,7 @@ components:
         inference_geo: null
         input_tokens: 100
         output_tokens: 50
+        output_tokens_details: null
         server_tool_use: null
         service_tier: standard
       properties:
@@ -1720,6 +1731,8 @@ components:
           type: integer
         output_tokens:
           type: integer
+        output_tokens_details:
+          $ref: '#/components/schemas/AnthropicOutputTokensDetails'
         server_tool_use:
           $ref: '#/components/schemas/AnthropicServerToolUsage'
         service_tier:
@@ -1727,6 +1740,7 @@ components:
       required:
         - input_tokens
         - output_tokens
+        - output_tokens_details
         - cache_creation_input_tokens
         - cache_read_input_tokens
         - cache_creation
@@ -2266,6 +2280,7 @@ components:
         allowed_models:
           - anthropic/*
           - openai/gpt-4o
+        cost_quality_tradeoff: 7
         enabled: true
         id: auto-router
       properties:
@@ -2280,6 +2295,15 @@ components:
           items:
             type: string
           type: array
+        cost_quality_tradeoff:
+          description: >-
+            Controls cost vs. quality routing tradeoff (0–10). 0 = pure quality (best model regardless of cost), 10 =
+            maximize for cost (cheapest model wins). Intermediate values blend quality and cost signals continuously.
+            Defaults to 7.
+          example: 7
+          maximum: 10
+          minimum: 0
+          type: integer
         enabled:
           description: Set to false to disable the auto-router plugin for this request. Defaults to true.
           type: boolean
@@ -2768,6 +2792,7 @@ components:
             inference_geo: null
             input_tokens: 100
             output_tokens: 50
+            output_tokens_details: null
             server_tool_use: null
             service_tier: standard
       required:
@@ -3627,9 +3652,11 @@ components:
         - cloudflare
         - cohere
         - crusoe
+        - darkbloom
         - deepinfra
         - deepseek
         - dekallm
+        - digitalocean
         - featherless
         - fireworks
         - friendli
@@ -3637,7 +3664,6 @@ components:
         - google-ai-studio
         - google-vertex
         - groq
-        - hyperbolic
         - inception
         - inceptron
         - inference-net
@@ -4452,9 +4478,10 @@ components:
           type: string
         session_id:
           description: >-
-            A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for
-            observability. If provided in both the request body and the x-session-id header, the body value takes
-            precedence. Maximum of 256 characters.
+            A unique identifier for grouping related requests (e.g., a conversation or agent workflow). When provided,
+            OpenRouter uses it as the sticky routing key, routing all requests in the session to the same provider to
+            maximize prompt cache hits. Also used for observability grouping. If provided in both the request body and
+            the x-session-id header, the body value takes precedence. Maximum of 256 characters.
           maxLength: 256
           type: string
         stop:
@@ -5443,15 +5470,40 @@ components:
         A builtin content filter entry. Builtin filters include PII detectors and the regex-based prompt injection
         detector.
       example:
-        action: block
-        label: '[PROMPT_INJECTION]'
-        slug: regex-prompt-injection
+        action: redact
+        label: '[EMAIL]'
+        slug: email
       properties:
         action:
           $ref: '#/components/schemas/ContentFilterBuiltinAction'
         label:
-          description: Optional label used in redaction placeholders (e.g. "[PROMPT_INJECTION]")
-          example: '[PROMPT_INJECTION]'
+          description: >-
+            Read-only, system-assigned redaction placeholder derived from the slug (e.g. "[EMAIL]", "[PHONE]"). Not
+            settable by the caller.
+          example: '[EMAIL]'
+          maxLength: 100
+          type: string
+        slug:
+          $ref: '#/components/schemas/ContentFilterBuiltinSlug'
+      required:
+        - slug
+        - action
+      type: object
+    ContentFilterBuiltinEntryInput:
+      description: >-
+        A builtin content filter entry for create/update requests. Labels are system-assigned and cannot be set by the
+        caller.
+      example:
+        action: redact
+        slug: email
+      properties:
+        action:
+          $ref: '#/components/schemas/ContentFilterBuiltinAction'
+        label:
+          deprecated: true
+          description: >-
+            Deprecated: labels are system-assigned and cannot be set by the caller. Accepted for backward compatibility
+            but silently ignored.
           maxLength: 100
           type: string
         slug:
@@ -5822,7 +5874,7 @@ components:
             - action: block
               slug: regex-prompt-injection
           items:
-            $ref: '#/components/schemas/ContentFilterBuiltinEntry'
+            $ref: '#/components/schemas/ContentFilterBuiltinEntryInput'
           nullable: true
           type: array
         content_filters:
@@ -5921,9 +5973,9 @@ components:
             - anthropic
             - google
           content_filter_builtins:
-            - action: block
-              label: '[PROMPT_INJECTION]'
-              slug: regex-prompt-injection
+            - action: redact
+              label: '[EMAIL]'
+              slug: email
           content_filters: null
           created_at: '2025-08-24T10:30:00Z'
           description: A guardrail for limiting API usage
@@ -5993,7 +6045,7 @@ components:
           example: false
           type: boolean
         sampling_rate:
-          description: Sampling rate between 0 and 1 (1 = 100%).
+          description: Sampling rate between 0.0001 and 1 (1 = 100%).
           example: 1
           format: double
           type: number
@@ -7272,6 +7324,7 @@ components:
                 - tts
                 - stt
                 - video
+                - image
                 - null
               nullable: true
               type: string
@@ -7398,6 +7451,11 @@ components:
               description: Origin URL of the request
               example: https://openrouter.ai/
               type: string
+            preset_id:
+              description: ID of the preset used for this generation, null if no preset was used
+              example: a9e8d400-592a-494f-908c-375efa66cafd
+              nullable: true
+              type: string
             provider_name:
               description: Name of the provider that served the request
               example: Infermatic
@@ -7513,6 +7571,7 @@ components:
             - native_finish_reason
             - external_user
             - api_type
+            - preset_id
             - router
             - provider_responses
             - user_agent
@@ -7553,9 +7612,9 @@ components:
             - anthropic
             - google
           content_filter_builtins:
-            - action: block
-              label: '[PROMPT_INJECTION]'
-              slug: regex-prompt-injection
+            - action: redact
+              label: '[EMAIL]'
+              slug: email
           content_filters: null
           created_at: '2025-08-24T10:30:00Z'
           description: Guardrail for production environment
@@ -7683,9 +7742,9 @@ components:
           - anthropic
           - google
         content_filter_builtins:
-          - action: block
-            label: '[PROMPT_INJECTION]'
-            slug: regex-prompt-injection
+          - action: redact
+            label: '[EMAIL]'
+            slug: email
         content_filters: null
         created_at: '2025-08-24T10:30:00Z'
         description: Guardrail for production environment
@@ -7728,9 +7787,9 @@ components:
             Builtin content filters applied to requests. Includes PII detectors and the regex-based prompt injection
             detector.
           example:
-            - action: block
-              label: '[PROMPT_INJECTION]'
-              slug: regex-prompt-injection
+            - action: redact
+              label: '[EMAIL]'
+              slug: email
           items:
             $ref: '#/components/schemas/ContentFilterBuiltinEntry'
           nullable: true
@@ -7976,7 +8035,7 @@ components:
       description: 'OpenRouter built-in server tool: generates images from text prompts using an image generation model'
       example:
         parameters:
-          model: openai/gpt-image-1
+          model: openai/gpt-5-image
           quality: high
           size: 1024x1024
         type: openrouter:image_generation
@@ -8700,9 +8759,9 @@ components:
               - anthropic
               - google
             content_filter_builtins:
-              - action: block
-                label: '[PROMPT_INJECTION]'
-                slug: regex-prompt-injection
+              - action: redact
+                label: '[EMAIL]'
+                slug: email
             content_filters: null
             created_at: '2025-08-24T10:30:00Z'
             description: Guardrail for production environment
@@ -9441,6 +9500,8 @@ components:
               type: array
             output_tokens:
               type: integer
+            output_tokens_details:
+              $ref: '#/components/schemas/AnthropicOutputTokensDetails'
             server_tool_use:
               nullable: true
               properties:
@@ -9455,6 +9516,7 @@ components:
           required:
             - input_tokens
             - output_tokens
+            - output_tokens_details
             - cache_creation_input_tokens
             - cache_read_input_tokens
             - server_tool_use
@@ -9688,6 +9750,7 @@ components:
           enum:
             - user
             - assistant
+            - system
           type: string
       required:
         - role
@@ -9919,9 +9982,10 @@ components:
           type: string
         session_id:
           description: >-
-            A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for
-            observability. If provided in both the request body and the x-session-id header, the body value takes
-            precedence. Maximum of 256 characters.
+            A unique identifier for grouping related requests (e.g., a conversation or agent workflow). When provided,
+            OpenRouter uses it as the sticky routing key, routing all requests in the session to the same provider to
+            maximize prompt cache hits. Also used for observability grouping. If provided in both the request body and
+            the x-session-id header, the body value takes precedence. Maximum of 256 characters.
           maxLength: 256
           type: string
         speed:
@@ -10264,7 +10328,7 @@ components:
                 input_tokens: 100
                 output_tokens: 50
                 server_tool_use: null
-                service_tier: standard
+                service_tier: default
           type: object
       description: Non-streaming response from the Anthropic Messages API with OpenRouter extensions
       example:
@@ -10288,7 +10352,7 @@ components:
           input_tokens: 12
           output_tokens: 15
           server_tool_use: null
-          service_tier: standard
+          service_tier: default
     MessagesStartEvent:
       description: Event sent at the start of a streaming message
       example:
@@ -10327,6 +10391,7 @@ components:
                 - Enfer
                 - GoPomelo
                 - HuggingFace
+                - Hyperbolic
                 - Hyperbolic 2
                 - InoCloud
                 - Kluster
@@ -10372,9 +10437,11 @@ components:
                 - Cohere
                 - Crucible
                 - Crusoe
+                - Darkbloom
                 - DeepInfra
                 - DeepSeek
                 - DekaLLM
+                - DigitalOcean
                 - Featherless
                 - Fireworks
                 - Friendli
@@ -10382,7 +10449,6 @@ components:
                 - Google
                 - Google AI Studio
                 - Groq
-                - Hyperbolic
                 - Inception
                 - Inceptron
                 - InferenceNet
@@ -10465,7 +10531,7 @@ components:
                 input_tokens: 100
                 output_tokens: 50
                 server_tool_use: null
-                service_tier: standard
+                service_tier: default
           required:
             - id
             - type
@@ -11019,7 +11085,7 @@ components:
           example: false
           type: boolean
         sampling_rate:
-          description: Sampling rate for events sent to this destination, between 0 and 1 (1 = 100%).
+          description: Sampling rate for events sent to this destination, between 0.0001 and 1 (1 = 100%).
           example: 1
           format: double
           type: number
@@ -11122,7 +11188,7 @@ components:
           example: false
           type: boolean
         sampling_rate:
-          description: Sampling rate for events sent to this destination, between 0 and 1 (1 = 100%).
+          description: Sampling rate for events sent to this destination, between 0.0001 and 1 (1 = 100%).
           example: 1
           format: double
           type: number
@@ -11236,7 +11302,7 @@ components:
           example: false
           type: boolean
         sampling_rate:
-          description: Sampling rate for events sent to this destination, between 0 and 1 (1 = 100%).
+          description: Sampling rate for events sent to this destination, between 0.0001 and 1 (1 = 100%).
           example: 1
           format: double
           type: number
@@ -11344,7 +11410,7 @@ components:
           example: false
           type: boolean
         sampling_rate:
-          description: Sampling rate for events sent to this destination, between 0 and 1 (1 = 100%).
+          description: Sampling rate for events sent to this destination, between 0.0001 and 1 (1 = 100%).
           example: 1
           format: double
           type: number
@@ -11569,7 +11635,7 @@ components:
           example: false
           type: boolean
         sampling_rate:
-          description: Sampling rate for events sent to this destination, between 0 and 1 (1 = 100%).
+          description: Sampling rate for events sent to this destination, between 0.0001 and 1 (1 = 100%).
           example: 1
           format: double
           type: number
@@ -11672,7 +11738,7 @@ components:
           example: false
           type: boolean
         sampling_rate:
-          description: Sampling rate for events sent to this destination, between 0 and 1 (1 = 100%).
+          description: Sampling rate for events sent to this destination, between 0.0001 and 1 (1 = 100%).
           example: 1
           format: double
           type: number
@@ -11779,7 +11845,7 @@ components:
           example: false
           type: boolean
         sampling_rate:
-          description: Sampling rate for events sent to this destination, between 0 and 1 (1 = 100%).
+          description: Sampling rate for events sent to this destination, between 0.0001 and 1 (1 = 100%).
           example: 1
           format: double
           type: number
@@ -11880,7 +11946,7 @@ components:
           example: false
           type: boolean
         sampling_rate:
-          description: Sampling rate for events sent to this destination, between 0 and 1 (1 = 100%).
+          description: Sampling rate for events sent to this destination, between 0.0001 and 1 (1 = 100%).
           example: 1
           format: double
           type: number
@@ -11984,7 +12050,7 @@ components:
           example: false
           type: boolean
         sampling_rate:
-          description: Sampling rate for events sent to this destination, between 0 and 1 (1 = 100%).
+          description: Sampling rate for events sent to this destination, between 0.0001 and 1 (1 = 100%).
           example: 1
           format: double
           type: number
@@ -12079,7 +12145,7 @@ components:
           example: false
           type: boolean
         sampling_rate:
-          description: Sampling rate for events sent to this destination, between 0 and 1 (1 = 100%).
+          description: Sampling rate for events sent to this destination, between 0.0001 and 1 (1 = 100%).
           example: 1
           format: double
           type: number
@@ -12177,7 +12243,7 @@ components:
           example: false
           type: boolean
         sampling_rate:
-          description: Sampling rate for events sent to this destination, between 0 and 1 (1 = 100%).
+          description: Sampling rate for events sent to this destination, between 0.0001 and 1 (1 = 100%).
           example: 1
           format: double
           type: number
@@ -12276,7 +12342,7 @@ components:
           example: false
           type: boolean
         sampling_rate:
-          description: Sampling rate for events sent to this destination, between 0 and 1 (1 = 100%).
+          description: Sampling rate for events sent to this destination, between 0.0001 and 1 (1 = 100%).
           example: 1
           format: double
           type: number
@@ -12399,7 +12465,7 @@ components:
           example: false
           type: boolean
         sampling_rate:
-          description: Sampling rate for events sent to this destination, between 0 and 1 (1 = 100%).
+          description: Sampling rate for events sent to this destination, between 0.0001 and 1 (1 = 100%).
           example: 1
           format: double
           type: number
@@ -12497,7 +12563,7 @@ components:
           example: false
           type: boolean
         sampling_rate:
-          description: Sampling rate for events sent to this destination, between 0 and 1 (1 = 100%).
+          description: Sampling rate for events sent to this destination, between 0.0001 and 1 (1 = 100%).
           example: 1
           format: double
           type: number
@@ -12608,7 +12674,7 @@ components:
           example: false
           type: boolean
         sampling_rate:
-          description: Sampling rate for events sent to this destination, between 0 and 1 (1 = 100%).
+          description: Sampling rate for events sent to this destination, between 0.0001 and 1 (1 = 100%).
           example: 1
           format: double
           type: number
@@ -12716,7 +12782,7 @@ components:
           example: false
           type: boolean
         sampling_rate:
-          description: Sampling rate for events sent to this destination, between 0 and 1 (1 = 100%).
+          description: Sampling rate for events sent to this destination, between 0.0001 and 1 (1 = 100%).
           example: 1
           format: double
           type: number
@@ -12814,7 +12880,7 @@ components:
           example: false
           type: boolean
         sampling_rate:
-          description: Sampling rate for events sent to this destination, between 0 and 1 (1 = 100%).
+          description: Sampling rate for events sent to this destination, between 0.0001 and 1 (1 = 100%).
           example: 1
           format: double
           type: number
@@ -14052,11 +14118,20 @@ components:
               model:
                 description: Slug of the analysis model that failed.
                 type: string
+              status_code:
+                description: HTTP status code from the upstream response, when available (e.g. 402, 429).
+                type: integer
             required:
               - model
               - error
             type: object
           type: array
+        failure_reason:
+          description: >-
+            Typed failure reason when the fusion run failed. Possible values include: all_panels_failed,
+            insufficient_credits, rate_limited, judge_not_valid_json, judge_schema_mismatch, judge_upstream_error,
+            judge_empty_completion.
+          type: string
         id:
           type: string
         responses:
@@ -15469,9 +15544,11 @@ components:
         - Cohere
         - Crucible
         - Crusoe
+        - Darkbloom
         - DeepInfra
         - DeepSeek
         - DekaLLM
+        - DigitalOcean
         - Featherless
         - Fireworks
         - Friendli
@@ -15479,7 +15556,6 @@ components:
         - Google
         - Google AI Studio
         - Groq
-        - Hyperbolic
         - Inception
         - Inceptron
         - InferenceNet
@@ -15654,6 +15730,10 @@ components:
           additionalProperties:
             nullable: true
           type: object
+        darkbloom:
+          additionalProperties:
+            nullable: true
+          type: object
         deepinfra:
           additionalProperties:
             nullable: true
@@ -15663,6 +15743,10 @@ components:
             nullable: true
           type: object
         dekallm:
+          additionalProperties:
+            nullable: true
+          type: object
+        digitalocean:
           additionalProperties:
             nullable: true
           type: object
@@ -16200,6 +16284,7 @@ components:
             - Enfer
             - GoPomelo
             - HuggingFace
+            - Hyperbolic
             - Hyperbolic 2
             - InoCloud
             - Kluster
@@ -16245,9 +16330,11 @@ components:
             - Cohere
             - Crucible
             - Crusoe
+            - Darkbloom
             - DeepInfra
             - DeepSeek
             - DekaLLM
+            - DigitalOcean
             - Featherless
             - Fireworks
             - Friendli
@@ -16255,7 +16342,6 @@ components:
             - Google
             - Google AI Studio
             - Groq
-            - Hyperbolic
             - Inception
             - Inceptron
             - InferenceNet
@@ -16606,6 +16692,98 @@ components:
         - unknown
       example: fp16
       type: string
+    RankingsDailyItem:
+      example:
+        date: '2026-05-11'
+        model_permaslug: openai/gpt-4o-2024-05-13
+        total_tokens: '12345678'
+      properties:
+        date:
+          description: UTC calendar date the row is aggregated over (YYYY-MM-DD).
+          example: '2026-05-11'
+          type: string
+        model_permaslug:
+          description: >-
+            Model variant permaslug (e.g. `openai/gpt-4o-2024-05-13`, `openai/gpt-4o-2024-05-13:free`). Non-default
+            variants include a `:variant` suffix and are ranked as their own entry. The reserved value `other` denotes
+            the aggregated row covering every model outside the daily top 50 for that date — always sorted last within
+            its date.
+          example: openai/gpt-4o-2024-05-13
+          type: string
+        total_tokens:
+          description: >-
+            Sum of `prompt_tokens + completion_tokens` for the day, returned as a decimal string so 64-bit values are
+            not truncated.
+          example: '12345678'
+          type: string
+      required:
+        - date
+        - model_permaslug
+        - total_tokens
+      type: object
+    RankingsDailyMeta:
+      example:
+        as_of: '2026-05-12T02:00:00Z'
+        end_date: '2026-05-11'
+        start_date: '2026-04-12'
+        version: v1
+      properties:
+        as_of:
+          description: >-
+            ISO-8601 timestamp of when the response was generated. Reflects data-freshness because the underlying
+            materialized view continuously ingests upstream events.
+          example: '2026-05-12T02:00:00Z'
+          type: string
+        end_date:
+          description: Resolved end of the date window (UTC, inclusive).
+          example: '2026-05-11'
+          type: string
+        start_date:
+          description: Resolved start of the date window (UTC, inclusive).
+          example: '2026-04-12'
+          type: string
+        version:
+          description: Dataset version. Field names and grain are stable for the life of `v1`.
+          enum:
+            - v1
+          type: string
+      required:
+        - as_of
+        - version
+        - start_date
+        - end_date
+      type: object
+    RankingsDailyResponse:
+      example:
+        data:
+          - date: '2026-05-11'
+            model_permaslug: openai/gpt-4o-2024-05-13
+            total_tokens: '12345678'
+          - date: '2026-05-11'
+            model_permaslug: anthropic/claude-3.5-sonnet-20241022
+            total_tokens: '9876543'
+        meta:
+          as_of: '2026-05-12T02:00:00Z'
+          end_date: '2026-05-11'
+          start_date: '2026-04-12'
+          version: v1
+      properties:
+        data:
+          description: >-
+            Up to 51 rows per day — the top 50 public models by `total_tokens` for each UTC calendar date in the window,
+            plus one aggregated `other` row summing every model outside that top 50 (omitted when the long tail is
+            empty). Rows are sorted by `date` ascending, then by `total_tokens` descending, with `other` pinned last
+            within its date. Ties between real models break alphabetically on `model_permaslug` so the order is stable
+            across requests.
+          items:
+            $ref: '#/components/schemas/RankingsDailyItem'
+          type: array
+        meta:
+          $ref: '#/components/schemas/RankingsDailyMeta'
+      required:
+        - data
+        - meta
+      type: object
     ReasoningConfig:
       allOf:
         - $ref: '#/components/schemas/BaseReasoningConfig'
@@ -17200,9 +17378,10 @@ components:
           type: string
         session_id:
           description: >-
-            A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for
-            observability. If provided in both the request body and the x-session-id header, the body value takes
-            precedence. Maximum of 256 characters.
+            A unique identifier for grouping related requests (e.g., a conversation or agent workflow). When provided,
+            OpenRouter uses it as the sticky routing key, routing all requests in the session to the same provider to
+            maximize prompt cache hits. Also used for observability grouping. If provided in both the request body and
+            the x-session-id header, the body value takes precedence. Maximum of 256 characters.
           maxLength: 256
           type: string
         stop_server_tools_when:
@@ -18460,7 +18639,7 @@ components:
             - action: block
               slug: regex-prompt-injection
           items:
-            $ref: '#/components/schemas/ContentFilterBuiltinEntry'
+            $ref: '#/components/schemas/ContentFilterBuiltinEntryInput'
           nullable: true
           type: array
         content_filters:
@@ -18547,9 +18726,9 @@ components:
           allowed_providers:
             - openai
           content_filter_builtins:
-            - action: block
-              label: '[PROMPT_INJECTION]'
-              slug: regex-prompt-injection
+            - action: redact
+              label: '[EMAIL]'
+              slug: email
           content_filters: null
           created_at: '2025-08-24T10:30:00Z'
           description: Updated description
@@ -18617,7 +18796,7 @@ components:
           example: false
           type: boolean
         sampling_rate:
-          description: Sampling rate between 0 and 1 (1 = 100%).
+          description: Sampling rate between 0.0001 and 1 (1 = 100%).
           example: 1
           format: double
           type: number
@@ -19165,9 +19344,9 @@ components:
         - auto
         - native
         - openrouter
-        - firecrawl
         - exa
         - parallel
+        - firecrawl
       example: auto
       type: string
     WebFetchPlugin:
@@ -19350,8 +19529,8 @@ components:
         - auto
         - native
         - exa
-        - firecrawl
         - parallel
+        - firecrawl
       example: auto
       type: string
     WebSearchPlugin:
@@ -20455,9 +20634,11 @@ paths:
               - cloudflare
               - cohere
               - crusoe
+              - darkbloom
               - deepinfra
               - deepseek
               - dekallm
+              - digitalocean
               - featherless
               - fireworks
               - friendli
@@ -20465,7 +20646,6 @@ paths:
               - google-ai-studio
               - google-vertex
               - groq
-              - hyperbolic
               - inception
               - inceptron
               - inference-net
@@ -21234,6 +21414,127 @@ paths:
       x-fern-ignore: true
       x-speakeasy-ignore: true
       x-speakeasy-name-override: createCoinbaseCharge
+  /datasets/rankings-daily:
+    get:
+      description: |-
+        Returns the top 50 public models per day by total token usage on OpenRouter, plus a
+        single aggregated `other` row per day that sums every model outside that top 50.
+        Token totals are `prompt_tokens + completion_tokens`, matching the public rankings
+        chart on openrouter.ai/rankings.
+
+        Each row is a distinct `(date, model_permaslug)` pair. The `other` row uses the
+        reserved permaslug `other` and is always returned last within its date, so callers
+        can compute `top-50 traffic / total daily traffic` without a second request.
+
+        Authenticate with any valid OpenRouter API key (same key used for inference).
+        Rate-limited to 30 requests/minute per key and 500 requests/day per account.
+
+        When republishing or quoting this dataset, OpenRouter must be cited as:
+        "Source: OpenRouter (openrouter.ai/rankings), as of {as_of}."
+
+        Token counts come from each upstream provider's own tokenizer (Anthropic counts
+        are as reported by Anthropic, OpenAI counts are as reported by OpenAI, etc.), so
+        a token in one row is not directly comparable to a token in another row from a
+        different provider.
+      operationId: getRankingsDaily
+      parameters:
+        - description: >-
+            Start of the date window in YYYY-MM-DD (UTC), inclusive. Defaults to 30 days before `end_date`. The dataset
+            begins at 2025-01-01; earlier values are clamped forward to that floor and the resolved value is echoed in
+            `meta.start_date`.
+          in: query
+          name: start_date
+          required: false
+          schema:
+            description: >-
+              Start of the date window in YYYY-MM-DD (UTC), inclusive. Defaults to 30 days before `end_date`. The
+              dataset begins at 2025-01-01; earlier values are clamped forward to that floor and the resolved value is
+              echoed in `meta.start_date`.
+            example: '2026-04-12'
+            pattern: ^\d{4}-\d{2}-\d{2}$
+            type: string
+        - description: >-
+            End of the date window in YYYY-MM-DD (UTC), inclusive. Defaults to the most recent completed UTC day. Must
+            be on or after 2025-01-01; earlier values are rejected with a 400.
+          in: query
+          name: end_date
+          required: false
+          schema:
+            description: >-
+              End of the date window in YYYY-MM-DD (UTC), inclusive. Defaults to the most recent completed UTC day. Must
+              be on or after 2025-01-01; earlier values are rejected with a 400.
+            example: '2026-05-11'
+            pattern: ^\d{4}-\d{2}-\d{2}$
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                data:
+                  - date: '2026-05-11'
+                    model_permaslug: openai/gpt-4o-2024-05-13
+                    total_tokens: '12345678'
+                  - date: '2026-05-11'
+                    model_permaslug: anthropic/claude-3.5-sonnet-20241022
+                    total_tokens: '9876543'
+                  - date: '2026-05-11'
+                    model_permaslug: other
+                    total_tokens: '4321098'
+                meta:
+                  as_of: '2026-05-12T02:00:00Z'
+                  end_date: '2026-05-11'
+                  start_date: '2026-04-12'
+                  version: v1
+              schema:
+                $ref: '#/components/schemas/RankingsDailyResponse'
+          description: >-
+            Up to 51 rows per day — the top 50 public models by `total_tokens` plus a single aggregated `other` row
+            covering every model outside that top 50. Sorted by `date` ascending, then by `total_tokens` descending,
+            with `other` pinned last within its date.
+        '400':
+          content:
+            application/json:
+              example:
+                error:
+                  code: 400
+                  message: Invalid request parameters
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+          description: Bad Request - Invalid request parameters or malformed input
+        '401':
+          content:
+            application/json:
+              example:
+                error:
+                  code: 401
+                  message: Missing Authentication header
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized - Authentication required or invalid credentials
+        '429':
+          content:
+            application/json:
+              example:
+                error:
+                  code: 429
+                  message: Rate limit exceeded
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsResponse'
+          description: Too Many Requests - Rate limit exceeded
+        '500':
+          content:
+            application/json:
+              example:
+                error:
+                  code: 500
+                  message: Internal Server Error
+              schema:
+                $ref: '#/components/schemas/InternalServerResponse'
+          description: Internal Server Error - Unexpected server error
+      summary: Daily token totals for top 50 models
+      tags:
+        - Datasets
   /embeddings:
     post:
       description: Submits an embedding request to the embeddings router
@@ -25778,7 +26079,7 @@ paths:
                   role: system
                 - content: Hello!
                   role: user
-              model: openai/gpt-4o
+              model: openai/gpt-5.4
               temperature: 0.7
             schema:
               $ref: '#/components/schemas/ChatRequest'
@@ -25794,7 +26095,7 @@ paths:
                   description: null
                   designated_version:
                     config:
-                      model: openai/gpt-4o
+                      model: openai/gpt-5.4
                       temperature: 0.7
                     created_at: '2026-04-20T10:00:00Z'
                     creator_id: user_2dHFtVWx2n56w6HkM0000000000
@@ -25877,6 +26178,252 @@ paths:
       security:
         - apiKey: []
       summary: Create a preset from a chat-completions request body
+      tags:
+        - Presets
+  /presets/{slug}/messages:
+    post:
+      description: >-
+        Creates a preset (or a new version of an existing one) from an inference request body. Only fields that overlap
+        with the preset config are persisted; other fields (e.g. `messages`, `stream`, `prompt`) are silently ignored.
+      operationId: createPresetsMessages
+      parameters:
+        - description: URL-safe slug identifying the preset. Created if it does not exist.
+          in: path
+          name: slug
+          required: true
+          schema:
+            description: URL-safe slug identifying the preset. Created if it does not exist.
+            example: my-preset
+            minLength: 1
+            type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              max_tokens: 1024
+              messages:
+                - content: Hello!
+                  role: user
+              model: anthropic/claude-4.6-sonnet
+              system: You are a helpful assistant.
+            schema:
+              $ref: '#/components/schemas/MessagesRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                data:
+                  created_at: '2026-04-20T10:00:00Z'
+                  creator_user_id: user_2dHFtVWx2n56w6HkM0000000000
+                  description: null
+                  designated_version:
+                    config:
+                      max_tokens: 1024
+                      model: anthropic/claude-4.6-sonnet
+                    created_at: '2026-04-20T10:00:00Z'
+                    creator_id: user_2dHFtVWx2n56w6HkM0000000000
+                    id: 550e8400-e29b-41d4-a716-446655440000
+                    preset_id: 650e8400-e29b-41d4-a716-446655440001
+                    system_prompt: You are a helpful assistant.
+                    updated_at: '2026-04-20T10:00:00Z'
+                    version: 1
+                  designated_version_id: 550e8400-e29b-41d4-a716-446655440000
+                  id: 650e8400-e29b-41d4-a716-446655440001
+                  name: my-preset
+                  slug: my-preset
+                  status: active
+                  status_updated_at: null
+                  updated_at: '2026-04-20T10:00:00Z'
+                  workspace_id: 750e8400-e29b-41d4-a716-446655440002
+              schema:
+                $ref: '#/components/schemas/CreatePresetFromInferenceResponse'
+          description: Preset created or updated successfully.
+        '400':
+          content:
+            application/json:
+              example:
+                error:
+                  code: 400
+                  message: Invalid request parameters
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+          description: Bad Request - Invalid request parameters or malformed input
+        '401':
+          content:
+            application/json:
+              example:
+                error:
+                  code: 401
+                  message: Missing Authentication header
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized - Authentication required or invalid credentials
+        '403':
+          content:
+            application/json:
+              example:
+                error:
+                  code: 403
+                  message: Only management keys can perform this operation
+              schema:
+                $ref: '#/components/schemas/ForbiddenResponse'
+          description: Forbidden - Authentication successful but insufficient permissions
+        '404':
+          content:
+            application/json:
+              example:
+                error:
+                  code: 404
+                  message: Resource not found
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found - Resource does not exist
+        '409':
+          content:
+            application/json:
+              example:
+                error:
+                  code: 409
+                  message: Resource conflict. Please try again later.
+              schema:
+                $ref: '#/components/schemas/ConflictResponse'
+          description: Conflict - Resource conflict or concurrent modification
+        '500':
+          content:
+            application/json:
+              example:
+                error:
+                  code: 500
+                  message: Internal Server Error
+              schema:
+                $ref: '#/components/schemas/InternalServerResponse'
+          description: Internal Server Error - Unexpected server error
+      security:
+        - apiKey: []
+      summary: Create a preset from a messages request body
+      tags:
+        - Presets
+  /presets/{slug}/responses:
+    post:
+      description: >-
+        Creates a preset (or a new version of an existing one) from an inference request body. Only fields that overlap
+        with the preset config are persisted; other fields (e.g. `messages`, `stream`, `prompt`) are silently ignored.
+      operationId: createPresetsResponses
+      parameters:
+        - description: URL-safe slug identifying the preset. Created if it does not exist.
+          in: path
+          name: slug
+          required: true
+          schema:
+            description: URL-safe slug identifying the preset. Created if it does not exist.
+            example: my-preset
+            minLength: 1
+            type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              input: Hello!
+              instructions: You are a helpful assistant.
+              model: openai/gpt-5.4
+            schema:
+              $ref: '#/components/schemas/ResponsesRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                data:
+                  created_at: '2026-04-20T10:00:00Z'
+                  creator_user_id: user_2dHFtVWx2n56w6HkM0000000000
+                  description: null
+                  designated_version:
+                    config:
+                      model: openai/gpt-5.4
+                    created_at: '2026-04-20T10:00:00Z'
+                    creator_id: user_2dHFtVWx2n56w6HkM0000000000
+                    id: 550e8400-e29b-41d4-a716-446655440000
+                    preset_id: 650e8400-e29b-41d4-a716-446655440001
+                    system_prompt: You are a helpful assistant.
+                    updated_at: '2026-04-20T10:00:00Z'
+                    version: 1
+                  designated_version_id: 550e8400-e29b-41d4-a716-446655440000
+                  id: 650e8400-e29b-41d4-a716-446655440001
+                  name: my-preset
+                  slug: my-preset
+                  status: active
+                  status_updated_at: null
+                  updated_at: '2026-04-20T10:00:00Z'
+                  workspace_id: 750e8400-e29b-41d4-a716-446655440002
+              schema:
+                $ref: '#/components/schemas/CreatePresetFromInferenceResponse'
+          description: Preset created or updated successfully.
+        '400':
+          content:
+            application/json:
+              example:
+                error:
+                  code: 400
+                  message: Invalid request parameters
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+          description: Bad Request - Invalid request parameters or malformed input
+        '401':
+          content:
+            application/json:
+              example:
+                error:
+                  code: 401
+                  message: Missing Authentication header
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized - Authentication required or invalid credentials
+        '403':
+          content:
+            application/json:
+              example:
+                error:
+                  code: 403
+                  message: Only management keys can perform this operation
+              schema:
+                $ref: '#/components/schemas/ForbiddenResponse'
+          description: Forbidden - Authentication successful but insufficient permissions
+        '404':
+          content:
+            application/json:
+              example:
+                error:
+                  code: 404
+                  message: Resource not found
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found - Resource does not exist
+        '409':
+          content:
+            application/json:
+              example:
+                error:
+                  code: 409
+                  message: Resource conflict. Please try again later.
+              schema:
+                $ref: '#/components/schemas/ConflictResponse'
+          description: Conflict - Resource conflict or concurrent modification
+        '500':
+          content:
+            application/json:
+              example:
+                error:
+                  code: 500
+                  message: Internal Server Error
+              schema:
+                $ref: '#/components/schemas/InternalServerResponse'
+          description: Internal Server Error - Unexpected server error
+      security:
+        - apiKey: []
+      summary: Create a preset from a responses request body
       tags:
         - Presets
   /providers:
@@ -27900,6 +28447,8 @@ tags:
     name: Chat
   - description: Credit management endpoints
     name: Credits
+  - description: Datasets endpoints
+    name: Datasets
   - description: Text embedding endpoints
     name: Embeddings
   - description: Endpoint information
