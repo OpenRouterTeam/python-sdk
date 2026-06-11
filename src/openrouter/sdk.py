@@ -19,18 +19,25 @@ if TYPE_CHECKING:
     from openrouter.analytics import Analytics
     from openrouter.api_keys import APIKeys
     from openrouter.beta import Beta
+    from openrouter.byok import Byok
     from openrouter.chat import Chat
     from openrouter.credits import Credits
+    from openrouter.datasets import Datasets
     from openrouter.embeddings import Embeddings
     from openrouter.endpoints import Endpoints
     from openrouter.generations import Generations
     from openrouter.guardrails import Guardrails
     from openrouter.models_ import Models
     from openrouter.oauth import OAuth
+    from openrouter.observability import Observability
     from openrouter.organization import Organization
+    from openrouter.presets import Presets
     from openrouter.providers import Providers
     from openrouter.rerank import Rerank
+    from openrouter.stt import Stt
+    from openrouter.tts import Tts
     from openrouter.video_generation import VideoGeneration
+    from openrouter.workspaces import Workspaces
 
 
 class OpenRouter(BaseSDK):
@@ -40,11 +47,20 @@ class OpenRouter(BaseSDK):
 
     analytics: "Analytics"
     r"""Analytics and usage endpoints"""
+    beta: "Beta"
+    tts: "Tts"
+    r"""Text-to-speech endpoints"""
+    stt: "Stt"
+    r"""Speech-to-text endpoints"""
     o_auth: "OAuth"
     r"""OAuth authentication endpoints"""
+    byok: "Byok"
+    r"""BYOK endpoints"""
     chat: "Chat"
     credits: "Credits"
     r"""Credit management endpoints"""
+    datasets: "Datasets"
+    r"""Datasets endpoints"""
     embeddings: "Embeddings"
     r"""Text embedding endpoints"""
     endpoints: "Endpoints"
@@ -57,31 +73,43 @@ class OpenRouter(BaseSDK):
     r"""API key management endpoints"""
     models: "Models"
     r"""Model information endpoints"""
+    observability: "Observability"
+    r"""Observability endpoints"""
     organization: "Organization"
     r"""Organization endpoints"""
+    presets: "Presets"
+    r"""Presets endpoints"""
     providers: "Providers"
     r"""Provider information endpoints"""
     rerank: "Rerank"
     r"""Rerank endpoints"""
-    beta: "Beta"
     video_generation: "VideoGeneration"
     r"""Video Generation endpoints"""
+    workspaces: "Workspaces"
+    r"""Workspaces endpoints"""
     _sub_sdk_map = {
         "analytics": ("openrouter.analytics", "Analytics"),
+        "beta": ("openrouter.beta", "Beta"),
+        "tts": ("openrouter.tts", "Tts"),
+        "stt": ("openrouter.stt", "Stt"),
         "o_auth": ("openrouter.oauth", "OAuth"),
+        "byok": ("openrouter.byok", "Byok"),
         "chat": ("openrouter.chat", "Chat"),
         "credits": ("openrouter.credits", "Credits"),
+        "datasets": ("openrouter.datasets", "Datasets"),
         "embeddings": ("openrouter.embeddings", "Embeddings"),
         "endpoints": ("openrouter.endpoints", "Endpoints"),
         "generations": ("openrouter.generations", "Generations"),
         "guardrails": ("openrouter.guardrails", "Guardrails"),
         "api_keys": ("openrouter.api_keys", "APIKeys"),
         "models": ("openrouter.models_", "Models"),
+        "observability": ("openrouter.observability", "Observability"),
         "organization": ("openrouter.organization", "Organization"),
+        "presets": ("openrouter.presets", "Presets"),
         "providers": ("openrouter.providers", "Providers"),
         "rerank": ("openrouter.rerank", "Rerank"),
-        "beta": ("openrouter.beta", "Beta"),
         "video_generation": ("openrouter.video_generation", "VideoGeneration"),
+        "workspaces": ("openrouter.workspaces", "Workspaces"),
     }
 
     def __init__(

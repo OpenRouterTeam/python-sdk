@@ -18,6 +18,7 @@ ProviderResponseProviderName = Union[
         "Enfer",
         "GoPomelo",
         "HuggingFace",
+        "Hyperbolic",
         "Hyperbolic 2",
         "InoCloud",
         "Kluster",
@@ -44,6 +45,7 @@ ProviderResponseProviderName = Union[
         "AionLabs",
         "Alibaba",
         "Ambient",
+        "Baidu",
         "Amazon Bedrock",
         "Amazon Nova",
         "Anthropic",
@@ -60,10 +62,14 @@ ProviderResponseProviderName = Union[
         "Clarifai",
         "Cloudflare",
         "Cohere",
+        "Crucible",
         "Crusoe",
+        "Darkbloom",
+        "Decart",
         "DeepInfra",
         "DeepSeek",
         "DekaLLM",
+        "DigitalOcean",
         "Featherless",
         "Fireworks",
         "Friendli",
@@ -71,7 +77,6 @@ ProviderResponseProviderName = Union[
         "Google",
         "Google AI Studio",
         "Groq",
-        "Hyperbolic",
         "Inception",
         "Inceptron",
         "InferenceNet",
@@ -90,12 +95,15 @@ ProviderResponseProviderName = Union[
         "Morph",
         "NCompass",
         "Nebius",
+        "Nex AGI",
         "NextBit",
         "Novita",
         "Nvidia",
         "OpenAI",
         "OpenInference",
         "Parasail",
+        "Poolside",
+        "Perceptron",
         "Perplexity",
         "Phala",
         "Recraft",
@@ -112,6 +120,7 @@ ProviderResponseProviderName = Union[
         "Together",
         "Upstage",
         "Venice",
+        "Wafer",
         "WandB",
         "Xiaomi",
         "xAI",
@@ -126,7 +135,7 @@ r"""Name of the provider"""
 class ProviderResponseTypedDict(TypedDict):
     r"""Details of a provider response for a generation attempt"""
 
-    status: Nullable[float]
+    status: Nullable[int]
     r"""HTTP status code from the provider"""
     endpoint_id: NotRequired[str]
     r"""Internal endpoint identifier"""
@@ -145,7 +154,7 @@ class ProviderResponseTypedDict(TypedDict):
 class ProviderResponse(BaseModel):
     r"""Details of a provider response for a generation attempt"""
 
-    status: Nullable[float]
+    status: Nullable[int]
     r"""HTTP status code from the provider"""
 
     endpoint_id: Optional[str] = None

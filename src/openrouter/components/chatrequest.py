@@ -34,11 +34,18 @@ from .formatjsonobjectconfig import (
     FormatJSONObjectConfig,
     FormatJSONObjectConfigTypedDict,
 )
+from .fusionplugin import FusionPlugin, FusionPluginTypedDict
 from .imageconfig import ImageConfig, ImageConfigTypedDict
 from .moderationplugin import ModerationPlugin, ModerationPluginTypedDict
+from .paretorouterplugin import ParetoRouterPlugin, ParetoRouterPluginTypedDict
 from .providerpreferences import ProviderPreferences, ProviderPreferencesTypedDict
 from .responsehealingplugin import ResponseHealingPlugin, ResponseHealingPluginTypedDict
+from .stopservertoolswhencondition import (
+    StopServerToolsWhenCondition,
+    StopServerToolsWhenConditionTypedDict,
+)
 from .traceconfig import TraceConfig, TraceConfigTypedDict
+from .webfetchplugin import WebFetchPlugin, WebFetchPluginTypedDict
 from .websearchplugin import WebSearchPlugin, WebSearchPluginTypedDict
 from openrouter.types import (
     BaseModel,
@@ -70,9 +77,12 @@ ChatRequestPluginTypedDict = TypeAliasType(
     Union[
         ModerationPluginTypedDict,
         ResponseHealingPluginTypedDict,
-        AutoRouterPluginTypedDict,
         FileParserPluginTypedDict,
         ContextCompressionPluginTypedDict,
+        ParetoRouterPluginTypedDict,
+        AutoRouterPluginTypedDict,
+        WebFetchPluginTypedDict,
+        FusionPluginTypedDict,
         WebSearchPluginTypedDict,
     ],
 )
@@ -83,15 +93,18 @@ ChatRequestPlugin = Annotated[
         Annotated[AutoRouterPlugin, Tag("auto-router")],
         Annotated[ContextCompressionPlugin, Tag("context-compression")],
         Annotated[FileParserPlugin, Tag("file-parser")],
+        Annotated[FusionPlugin, Tag("fusion")],
         Annotated[ModerationPlugin, Tag("moderation")],
+        Annotated[ParetoRouterPlugin, Tag("pareto-router")],
         Annotated[ResponseHealingPlugin, Tag("response-healing")],
         Annotated[WebSearchPlugin, Tag("web")],
+        Annotated[WebFetchPlugin, Tag("web-fetch")],
     ],
     Discriminator(lambda m: get_discriminator(m, "id", "id")),
 ]
 
 
-Effort = Union[
+ChatRequestEffort = Union[
     Literal[
         "xhigh",
         "high",
@@ -105,19 +118,19 @@ Effort = Union[
 r"""Constrains effort on reasoning for reasoning models"""
 
 
-class ReasoningTypedDict(TypedDict):
+class ChatRequestReasoningTypedDict(TypedDict):
     r"""Configuration options for reasoning models"""
 
-    effort: NotRequired[Nullable[Effort]]
+    effort: NotRequired[Nullable[ChatRequestEffort]]
     r"""Constrains effort on reasoning for reasoning models"""
     summary: NotRequired[Nullable[ChatReasoningSummaryVerbosityEnum]]
 
 
-class Reasoning(BaseModel):
+class ChatRequestReasoning(BaseModel):
     r"""Configuration options for reasoning models"""
 
     effort: Annotated[
-        OptionalNullable[Effort], PlainValidator(validate_open_enum(False))
+        OptionalNullable[ChatRequestEffort], PlainValidator(validate_open_enum(False))
     ] = UNSET
     r"""Constrains effort on reasoning for reasoning models"""
 
@@ -210,6 +223,7 @@ class ChatRequestTypedDict(TypedDict):
     messages: List[ChatMessagesTypedDict]
     r"""List of messages for the conversation"""
     cache_control: NotRequired[AnthropicCacheControlDirectiveTypedDict]
+    r"""Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. Currently supported for Anthropic Claude models."""
     debug: NotRequired[ChatDebugOptionsTypedDict]
     r"""Debug options for inspecting request transformations (streaming only)"""
     frequency_penalty: NotRequired[Nullable[float]]
@@ -240,7 +254,7 @@ class ChatRequestTypedDict(TypedDict):
     r"""Presence penalty (-2.0 to 2.0)"""
     provider: NotRequired[Nullable[ProviderPreferencesTypedDict]]
     r"""When multiple model providers are available, optionally indicate your routing preference."""
-    reasoning: NotRequired[ReasoningTypedDict]
+    reasoning: NotRequired[ChatRequestReasoningTypedDict]
     r"""Configuration options for reasoning models"""
     response_format: NotRequired[ResponseFormatTypedDict]
     r"""Response format configuration"""
@@ -249,9 +263,11 @@ class ChatRequestTypedDict(TypedDict):
     service_tier: NotRequired[Nullable[ChatRequestServiceTier]]
     r"""The service tier to use for processing this request."""
     session_id: NotRequired[str]
-    r"""A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters."""
+    r"""A unique identifier for grouping related requests (e.g., a conversation or agent workflow). When provided, OpenRouter uses it as the sticky routing key, routing all requests in the session to the same provider to maximize prompt cache hits. Also used for observability grouping. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters."""
     stop: NotRequired[Nullable[StopTypedDict]]
     r"""Stop sequences (up to 4)"""
+    stop_server_tools_when: NotRequired[List[StopServerToolsWhenConditionTypedDict]]
+    r"""Stop conditions for the server-tool agent loop. Any condition firing halts the loop (OR logic). When set, this overrides `max_tool_calls`."""
     stream: NotRequired[bool]
     r"""Enable streaming response"""
     stream_options: NotRequired[Nullable[ChatStreamOptionsTypedDict]]
@@ -279,6 +295,7 @@ class ChatRequest(BaseModel):
     r"""List of messages for the conversation"""
 
     cache_control: Optional[AnthropicCacheControlDirective] = None
+    r"""Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. Currently supported for Anthropic Claude models."""
 
     debug: Optional[ChatDebugOptions] = None
     r"""Debug options for inspecting request transformations (streaming only)"""
@@ -327,7 +344,7 @@ class ChatRequest(BaseModel):
     provider: OptionalNullable[ProviderPreferences] = UNSET
     r"""When multiple model providers are available, optionally indicate your routing preference."""
 
-    reasoning: Optional[Reasoning] = None
+    reasoning: Optional[ChatRequestReasoning] = None
     r"""Configuration options for reasoning models"""
 
     response_format: Optional[ResponseFormat] = None
@@ -343,10 +360,13 @@ class ChatRequest(BaseModel):
     r"""The service tier to use for processing this request."""
 
     session_id: Optional[str] = None
-    r"""A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters."""
+    r"""A unique identifier for grouping related requests (e.g., a conversation or agent workflow). When provided, OpenRouter uses it as the sticky routing key, routing all requests in the session to the same provider to maximize prompt cache hits. Also used for observability grouping. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters."""
 
     stop: OptionalNullable[Stop] = UNSET
     r"""Stop sequences (up to 4)"""
+
+    stop_server_tools_when: Optional[List[StopServerToolsWhenCondition]] = None
+    r"""Stop conditions for the server-tool agent loop. Any condition firing halts the loop (OR logic). When set, this overrides `max_tool_calls`."""
 
     stream: Optional[bool] = False
     r"""Enable streaming response"""
@@ -400,6 +420,7 @@ class ChatRequest(BaseModel):
             "service_tier",
             "session_id",
             "stop",
+            "stop_server_tools_when",
             "stream",
             "stream_options",
             "temperature",

@@ -13,6 +13,8 @@ class AutoRouterPluginTypedDict(TypedDict):
     id: AutoRouterPluginID
     allowed_models: NotRequired[List[str]]
     r"""List of model patterns to filter which models the auto-router can route between. Supports wildcards (e.g., \"anthropic/*\" matches all Anthropic models). When not specified, uses the default supported models list."""
+    cost_quality_tradeoff: NotRequired[int]
+    r"""Controls cost vs. quality routing tradeoff (0–10). 0 = pure quality (best model regardless of cost), 10 = maximize for cost (cheapest model wins). Intermediate values blend quality and cost signals continuously. Defaults to 7."""
     enabled: NotRequired[bool]
     r"""Set to false to disable the auto-router plugin for this request. Defaults to true."""
 
@@ -22,6 +24,9 @@ class AutoRouterPlugin(BaseModel):
 
     allowed_models: Optional[List[str]] = None
     r"""List of model patterns to filter which models the auto-router can route between. Supports wildcards (e.g., \"anthropic/*\" matches all Anthropic models). When not specified, uses the default supported models list."""
+
+    cost_quality_tradeoff: Optional[int] = None
+    r"""Controls cost vs. quality routing tradeoff (0–10). 0 = pure quality (best model regardless of cost), 10 = maximize for cost (cheapest model wins). Intermediate values blend quality and cost signals continuously. Defaults to 7."""
 
     enabled: Optional[bool] = None
     r"""Set to false to disable the auto-router plugin for this request. Defaults to true."""

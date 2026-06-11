@@ -62,11 +62,40 @@ class CreateRerankGlobals(BaseModel):
     """
 
 
+class DocumentRequestTypedDict(TypedDict):
+    r"""A structured document with optional text and/or image content. At least one of `text` or `image` must be provided."""
+
+    image: NotRequired[str]
+    r"""An image associated with the document, as a remote URL (http/https) or a base64-encoded data URI (data:image/...)."""
+    text: NotRequired[str]
+    r"""The document text"""
+
+
+class DocumentRequest(BaseModel):
+    r"""A structured document with optional text and/or image content. At least one of `text` or `image` must be provided."""
+
+    image: Optional[str] = None
+    r"""An image associated with the document, as a remote URL (http/https) or a base64-encoded data URI (data:image/...)."""
+
+    text: Optional[str] = None
+    r"""The document text"""
+
+
+DocumentTypedDict = TypeAliasType(
+    "DocumentTypedDict", Union[DocumentRequestTypedDict, str]
+)
+r"""A document to rerank. Either a plain string, or a structured object with optional `text` and/or `image`."""
+
+
+Document = TypeAliasType("Document", Union[DocumentRequest, str])
+r"""A document to rerank. Either a plain string, or a structured object with optional `text` and/or `image`."""
+
+
 class CreateRerankRequestBodyTypedDict(TypedDict):
     r"""Rerank request input"""
 
-    documents: List[str]
-    r"""The list of documents to rerank"""
+    documents: List[DocumentTypedDict]
+    r"""The list of documents to rerank. Documents may be plain strings, or structured objects with `text` and/or `image` for multimodal models."""
     model: str
     r"""The rerank model to use"""
     query: str
@@ -81,8 +110,8 @@ class CreateRerankRequestBodyTypedDict(TypedDict):
 class CreateRerankRequestBody(BaseModel):
     r"""Rerank request input"""
 
-    documents: List[str]
-    r"""The list of documents to rerank"""
+    documents: List[Document]
+    r"""The list of documents to rerank. Documents may be plain strings, or structured objects with `text` and/or `image` for multimodal models."""
 
     model: str
     r"""The rerank model to use"""
@@ -180,25 +209,30 @@ class CreateRerankRequest(BaseModel):
     """
 
 
-class DocumentTypedDict(TypedDict):
-    r"""The document object containing the original text"""
+class DocumentResponseTypedDict(TypedDict):
+    r"""The document object echoing the original input (text and/or image)"""
 
-    text: str
+    image: NotRequired[str]
+    r"""The image (URL or data URI) from the original document"""
+    text: NotRequired[str]
     r"""The document text"""
 
 
-class Document(BaseModel):
-    r"""The document object containing the original text"""
+class DocumentResponse(BaseModel):
+    r"""The document object echoing the original input (text and/or image)"""
 
-    text: str
+    image: Optional[str] = None
+    r"""The image (URL or data URI) from the original document"""
+
+    text: Optional[str] = None
     r"""The document text"""
 
 
 class ResultTypedDict(TypedDict):
     r"""A single rerank result"""
 
-    document: DocumentTypedDict
-    r"""The document object containing the original text"""
+    document: DocumentResponseTypedDict
+    r"""The document object echoing the original input (text and/or image)"""
     index: int
     r"""Index of the document in the original input list"""
     relevance_score: float
@@ -208,8 +242,8 @@ class ResultTypedDict(TypedDict):
 class Result(BaseModel):
     r"""A single rerank result"""
 
-    document: Document
-    r"""The document object containing the original text"""
+    document: DocumentResponse
+    r"""The document object echoing the original input (text and/or image)"""
 
     index: int
     r"""Index of the document in the original input list"""

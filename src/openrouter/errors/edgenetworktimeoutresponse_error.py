@@ -7,13 +7,14 @@ from openrouter.components import (
     edgenetworktimeoutresponseerrordata as components_edgenetworktimeoutresponseerrordata,
 )
 from openrouter.errors import OpenRouterError
-from openrouter.types import BaseModel, OptionalNullable, UNSET
-from typing import Optional
+from openrouter.types import BaseModel, Nullable, OptionalNullable, UNSET
+from typing import Any, Dict, Optional
 
 
 class EdgeNetworkTimeoutResponseErrorData(BaseModel):
     error: components_edgenetworktimeoutresponseerrordata.EdgeNetworkTimeoutResponseErrorData
     r"""Error data for EdgeNetworkTimeoutResponse"""
+    openrouter_metadata: OptionalNullable[Dict[str, Nullable[Any]]] = UNSET
     user_id: OptionalNullable[str] = UNSET
 
 

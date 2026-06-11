@@ -23,30 +23,31 @@ FunctionCallOutputItemDetail = Union[
         "auto",
         "high",
         "low",
+        "original",
     ],
     UnrecognizedStr,
 ]
 
 
-FunctionCallOutputItemOutputType = Literal["input_image",]
+FunctionCallOutputItemTypeInputImage = Literal["input_image",]
 
 
-class OutputInputImageTypedDict(TypedDict):
+class FunctionCallOutputItemOutputInputImageTypedDict(TypedDict):
     r"""Image input content item"""
 
     detail: FunctionCallOutputItemDetail
-    type: FunctionCallOutputItemOutputType
+    type: FunctionCallOutputItemTypeInputImage
     image_url: NotRequired[Nullable[str]]
 
 
-class OutputInputImage(BaseModel):
+class FunctionCallOutputItemOutputInputImage(BaseModel):
     r"""Image input content item"""
 
     detail: Annotated[
         FunctionCallOutputItemDetail, PlainValidator(validate_open_enum(False))
     ]
 
-    type: FunctionCallOutputItemOutputType
+    type: FunctionCallOutputItemTypeInputImage
 
     image_url: OptionalNullable[str] = UNSET
 
@@ -83,14 +84,18 @@ class OutputInputImage(BaseModel):
 
 FunctionCallOutputItemOutputUnion1TypedDict = TypeAliasType(
     "FunctionCallOutputItemOutputUnion1TypedDict",
-    Union[InputTextTypedDict, OutputInputImageTypedDict, InputFileTypedDict],
+    Union[
+        InputTextTypedDict,
+        FunctionCallOutputItemOutputInputImageTypedDict,
+        InputFileTypedDict,
+    ],
 )
 
 
 FunctionCallOutputItemOutputUnion1 = Annotated[
     Union[
         Annotated[InputText, Tag("input_text")],
-        Annotated[OutputInputImage, Tag("input_image")],
+        Annotated[FunctionCallOutputItemOutputInputImage, Tag("input_image")],
         Annotated[InputFile, Tag("input_file")],
     ],
     Discriminator(lambda m: get_discriminator(m, "type", "type")),

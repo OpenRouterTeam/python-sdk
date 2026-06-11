@@ -25,19 +25,20 @@ InputMessageItemDetail = Union[
         "auto",
         "high",
         "low",
+        "original",
     ],
     UnrecognizedStr,
 ]
 
 
-InputMessageItemContentType = Literal["input_image",]
+InputMessageItemTypeInputImage = Literal["input_image",]
 
 
 class InputMessageItemContentInputImageTypedDict(TypedDict):
     r"""Image input content item"""
 
     detail: InputMessageItemDetail
-    type: InputMessageItemContentType
+    type: InputMessageItemTypeInputImage
     image_url: NotRequired[Nullable[str]]
 
 
@@ -46,7 +47,7 @@ class InputMessageItemContentInputImage(BaseModel):
 
     detail: Annotated[InputMessageItemDetail, PlainValidator(validate_open_enum(False))]
 
-    type: InputMessageItemContentType
+    type: InputMessageItemTypeInputImage
 
     image_url: OptionalNullable[str] = UNSET
 

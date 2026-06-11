@@ -21,6 +21,7 @@ InputImageDetail = Union[
         "auto",
         "high",
         "low",
+        "original",
     ],
     UnrecognizedStr,
 ]

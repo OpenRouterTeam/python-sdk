@@ -78,20 +78,20 @@ class ActionOpenPage(BaseModel):
         return m
 
 
-TypeSearch = Literal["search",]
+ActionTypeSearch = Literal["search",]
 
 
-class ActionSearchTypedDict(TypedDict):
+class OutputWebSearchCallItemActionSearchTypedDict(TypedDict):
     query: str
-    type: TypeSearch
+    type: ActionTypeSearch
     queries: NotRequired[List[str]]
     sources: NotRequired[List[WebSearchSourceTypedDict]]
 
 
-class ActionSearch(BaseModel):
+class OutputWebSearchCallItemActionSearch(BaseModel):
     query: str
 
-    type: TypeSearch
+    type: ActionTypeSearch
 
     queries: Optional[List[str]] = None
 
@@ -100,13 +100,17 @@ class ActionSearch(BaseModel):
 
 ActionTypedDict = TypeAliasType(
     "ActionTypedDict",
-    Union[ActionOpenPageTypedDict, ActionFindInPageTypedDict, ActionSearchTypedDict],
+    Union[
+        ActionOpenPageTypedDict,
+        ActionFindInPageTypedDict,
+        OutputWebSearchCallItemActionSearchTypedDict,
+    ],
 )
 
 
 Action = Annotated[
     Union[
-        Annotated[ActionSearch, Tag("search")],
+        Annotated[OutputWebSearchCallItemActionSearch, Tag("search")],
         Annotated[ActionOpenPage, Tag("open_page")],
         Annotated[ActionFindInPage, Tag("find_in_page")],
     ],
@@ -118,17 +122,17 @@ TypeWebSearchCall = Literal["web_search_call",]
 
 
 class OutputWebSearchCallItemTypedDict(TypedDict):
-    action: ActionTypedDict
     id: str
     status: WebSearchStatus
     type: TypeWebSearchCall
+    action: NotRequired[ActionTypedDict]
 
 
 class OutputWebSearchCallItem(BaseModel):
-    action: Action
-
     id: str
 
     status: Annotated[WebSearchStatus, PlainValidator(validate_open_enum(False))]
 
     type: TypeWebSearchCall
+
+    action: Optional[Action] = None

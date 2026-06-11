@@ -27,6 +27,7 @@ from .openairesponsestoolchoice_union import (
     OpenAIResponsesToolChoiceUnion,
     OpenAIResponsesToolChoiceUnionTypedDict,
 )
+from .openroutermetadata import OpenRouterMetadata, OpenRouterMetadataTypedDict
 from .outputitems import OutputItems, OutputItemsTypedDict
 from .preview_20250311_websearchservertool import (
     Preview20250311WebSearchServerTool,
@@ -39,7 +40,7 @@ from .preview_websearchservertool import (
 from .responseserrorfield import ResponsesErrorField, ResponsesErrorFieldTypedDict
 from .shellservertool import ShellServerTool, ShellServerToolTypedDict
 from .storedprompttemplate import StoredPromptTemplate, StoredPromptTemplateTypedDict
-from .textconfig import TextConfig, TextConfigTypedDict
+from .textextendedconfig import TextExtendedConfig, TextExtendedConfigTypedDict
 from .truncation import Truncation
 from .usage import Usage, UsageTypedDict
 from .websearchservertool import WebSearchServerTool, WebSearchServerToolTypedDict
@@ -195,13 +196,14 @@ class OpenResponsesResultTypedDict(TypedDict):
     safety_identifier: NotRequired[Nullable[str]]
     service_tier: NotRequired[Nullable[str]]
     store: NotRequired[bool]
-    text: NotRequired[TextConfigTypedDict]
+    text: NotRequired[TextExtendedConfigTypedDict]
     r"""Text output configuration including format and verbosity"""
     top_logprobs: NotRequired[int]
     truncation: NotRequired[Nullable[Truncation]]
     usage: NotRequired[Nullable[UsageTypedDict]]
     r"""Token usage information for the response"""
     user: NotRequired[Nullable[str]]
+    openrouter_metadata: NotRequired[OpenRouterMetadataTypedDict]
 
 
 class OpenResponsesResult(BaseModel):
@@ -269,7 +271,7 @@ class OpenResponsesResult(BaseModel):
 
     store: Optional[bool] = None
 
-    text: Optional[TextConfig] = None
+    text: Optional[TextExtendedConfig] = None
     r"""Text output configuration including format and verbosity"""
 
     top_logprobs: Optional[int] = None
@@ -282,6 +284,8 @@ class OpenResponsesResult(BaseModel):
     r"""Token usage information for the response"""
 
     user: OptionalNullable[str] = UNSET
+
+    openrouter_metadata: Optional[OpenRouterMetadata] = None
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
@@ -302,6 +306,7 @@ class OpenResponsesResult(BaseModel):
             "truncation",
             "usage",
             "user",
+            "openrouter_metadata",
         ]
         nullable_fields = [
             "background",

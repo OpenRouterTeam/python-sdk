@@ -5,18 +5,55 @@ from .toolcallstatus import ToolCallStatus
 from openrouter.types import BaseModel
 from openrouter.utils import validate_open_enum
 from pydantic.functional_validators import PlainValidator
-from typing import Literal, Optional
+from typing import List, Literal, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-OutputWebSearchServerToolItemType = Literal["openrouter:web_search",]
+OutputWebSearchServerToolItemTypeURL = Literal["url",]
+
+
+class OutputWebSearchServerToolItemSourceTypedDict(TypedDict):
+    type: OutputWebSearchServerToolItemTypeURL
+    url: str
+
+
+class OutputWebSearchServerToolItemSource(BaseModel):
+    type: OutputWebSearchServerToolItemTypeURL
+
+    url: str
+
+
+OutputWebSearchServerToolItemTypeSearch = Literal["search",]
+
+
+class OutputWebSearchServerToolItemActionTypedDict(TypedDict):
+    r"""The search action performed, matching OpenAI web_search_call.action shape. Includes the query the model issued and optional source URLs returned by the search provider."""
+
+    query: str
+    type: OutputWebSearchServerToolItemTypeSearch
+    sources: NotRequired[List[OutputWebSearchServerToolItemSourceTypedDict]]
+
+
+class OutputWebSearchServerToolItemAction(BaseModel):
+    r"""The search action performed, matching OpenAI web_search_call.action shape. Includes the query the model issued and optional source URLs returned by the search provider."""
+
+    query: str
+
+    type: OutputWebSearchServerToolItemTypeSearch
+
+    sources: Optional[List[OutputWebSearchServerToolItemSource]] = None
+
+
+OutputWebSearchServerToolItemTypeOpenrouterWebSearch = Literal["openrouter:web_search",]
 
 
 class OutputWebSearchServerToolItemTypedDict(TypedDict):
     r"""An openrouter:web_search server tool output item"""
 
     status: ToolCallStatus
-    type: OutputWebSearchServerToolItemType
+    type: OutputWebSearchServerToolItemTypeOpenrouterWebSearch
+    action: NotRequired[OutputWebSearchServerToolItemActionTypedDict]
+    r"""The search action performed, matching OpenAI web_search_call.action shape. Includes the query the model issued and optional source URLs returned by the search provider."""
     id: NotRequired[str]
 
 
@@ -25,6 +62,9 @@ class OutputWebSearchServerToolItem(BaseModel):
 
     status: Annotated[ToolCallStatus, PlainValidator(validate_open_enum(False))]
 
-    type: OutputWebSearchServerToolItemType
+    type: OutputWebSearchServerToolItemTypeOpenrouterWebSearch
+
+    action: Optional[OutputWebSearchServerToolItemAction] = None
+    r"""The search action performed, matching OpenAI web_search_call.action shape. Includes the query the model issued and optional source URLs returned by the search provider."""
 
     id: Optional[str] = None

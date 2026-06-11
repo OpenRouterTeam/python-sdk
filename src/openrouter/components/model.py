@@ -47,6 +47,8 @@ class ModelTypedDict(TypedDict):
     r"""Pricing information for the model"""
     supported_parameters: List[Parameter]
     r"""List of supported parameters for this model"""
+    supported_voices: Nullable[List[str]]
+    r"""List of supported voice identifiers for TTS models. Null for non-TTS models."""
     top_provider: TopProviderInfoTypedDict
     r"""Information about the top provider for this model"""
     description: NotRequired[str]
@@ -97,6 +99,9 @@ class Model(BaseModel):
     ]
     r"""List of supported parameters for this model"""
 
+    supported_voices: Nullable[List[str]]
+    r"""List of supported voice identifiers for TTS models. Null for non-TTS models."""
+
     top_provider: TopProviderInfo
     r"""Information about the top provider for this model"""
 
@@ -127,6 +132,7 @@ class Model(BaseModel):
             "hugging_face_id",
             "knowledge_cutoff",
             "per_request_limits",
+            "supported_voices",
         ]
         null_default_fields = []
 

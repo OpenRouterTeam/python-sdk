@@ -31,18 +31,20 @@ class ChatWebSearchShorthandTypedDict(TypedDict):
 
     type: ChatWebSearchShorthandType
     allowed_domains: NotRequired[List[str]]
-    r"""Limit search results to these domains. Supported by Exa, Parallel, and most native providers (Anthropic, OpenAI, xAI). Not supported with Firecrawl or Perplexity."""
+    r"""Limit search results to these domains. Supported by Exa, Firecrawl, Parallel, and most native providers (Anthropic, OpenAI, xAI). Not supported with Perplexity. Cannot be used with excluded_domains."""
     engine: NotRequired[WebSearchEngineEnum]
     r"""Which search engine to use. \"auto\" (default) uses native if the provider supports it, otherwise Exa. \"native\" forces the provider's built-in search. \"exa\" forces the Exa search API. \"firecrawl\" uses Firecrawl (requires BYOK). \"parallel\" uses the Parallel search API."""
     excluded_domains: NotRequired[List[str]]
-    r"""Exclude search results from these domains. Supported by Exa, Parallel, Anthropic, and xAI. Not supported with Firecrawl, OpenAI (silently ignored), or Perplexity."""
+    r"""Exclude search results from these domains. Supported by Exa, Firecrawl, Parallel, Anthropic, and xAI. Not supported with OpenAI (silently ignored) or Perplexity. Cannot be used with allowed_domains."""
+    max_characters: NotRequired[int]
+    r"""Exact maximum number of characters of content per search result. Applies to the Exa and Parallel engines; ignored with native provider search and Firecrawl. For Exa, caps highlight content per result. For Parallel, caps excerpt content per result (default 1,500 when omitted). When both `max_characters` and `search_context_size` are set, `max_characters` takes precedence for both engines. When omitted, falls back to `search_context_size` mapping (Exa) or engine defaults (Parallel)."""
     max_results: NotRequired[int]
     r"""Maximum number of search results to return per search call. Defaults to 5. Applies to Exa, Firecrawl, and Parallel engines; ignored with native provider search."""
     max_total_results: NotRequired[int]
-    r"""Maximum total number of search results across all search calls in a single request. Once this limit is reached, the tool will stop returning new results. Useful for controlling cost and context size in agentic loops."""
+    r"""Maximum total number of search results across all search calls in a single request. Once this limit is reached, the tool will stop returning new results. Useful for controlling cost and context size in agentic loops. Defaults to 50 when not specified."""
     parameters: NotRequired[WebSearchConfigTypedDict]
     search_context_size: NotRequired[SearchQualityLevel]
-    r"""How much context to retrieve per result. Defaults to medium (15000 chars). Only applies when using the Exa engine; ignored with native provider search."""
+    r"""How much context to retrieve per result. Applies to Exa and Parallel engines; ignored with native provider search and Firecrawl. For Exa, pins a fixed per-result character cap (low=5,000, medium=15,000, high=30,000); when omitted, Exa picks an adaptive size per query and document (typically ~2,000–4,000 characters per result). For Parallel, controls the total characters across all results; when omitted, Parallel uses its own default size. Overridden by `max_characters` when both are set."""
     user_location: NotRequired[WebSearchUserLocationServerToolTypedDict]
     r"""Approximate user location for location-biased results."""
 
@@ -55,7 +57,7 @@ class ChatWebSearchShorthand(BaseModel):
     ]
 
     allowed_domains: Optional[List[str]] = None
-    r"""Limit search results to these domains. Supported by Exa, Parallel, and most native providers (Anthropic, OpenAI, xAI). Not supported with Firecrawl or Perplexity."""
+    r"""Limit search results to these domains. Supported by Exa, Firecrawl, Parallel, and most native providers (Anthropic, OpenAI, xAI). Not supported with Perplexity. Cannot be used with excluded_domains."""
 
     engine: Annotated[
         Optional[WebSearchEngineEnum], PlainValidator(validate_open_enum(False))
@@ -63,20 +65,23 @@ class ChatWebSearchShorthand(BaseModel):
     r"""Which search engine to use. \"auto\" (default) uses native if the provider supports it, otherwise Exa. \"native\" forces the provider's built-in search. \"exa\" forces the Exa search API. \"firecrawl\" uses Firecrawl (requires BYOK). \"parallel\" uses the Parallel search API."""
 
     excluded_domains: Optional[List[str]] = None
-    r"""Exclude search results from these domains. Supported by Exa, Parallel, Anthropic, and xAI. Not supported with Firecrawl, OpenAI (silently ignored), or Perplexity."""
+    r"""Exclude search results from these domains. Supported by Exa, Firecrawl, Parallel, Anthropic, and xAI. Not supported with OpenAI (silently ignored) or Perplexity. Cannot be used with allowed_domains."""
+
+    max_characters: Optional[int] = None
+    r"""Exact maximum number of characters of content per search result. Applies to the Exa and Parallel engines; ignored with native provider search and Firecrawl. For Exa, caps highlight content per result. For Parallel, caps excerpt content per result (default 1,500 when omitted). When both `max_characters` and `search_context_size` are set, `max_characters` takes precedence for both engines. When omitted, falls back to `search_context_size` mapping (Exa) or engine defaults (Parallel)."""
 
     max_results: Optional[int] = None
     r"""Maximum number of search results to return per search call. Defaults to 5. Applies to Exa, Firecrawl, and Parallel engines; ignored with native provider search."""
 
     max_total_results: Optional[int] = None
-    r"""Maximum total number of search results across all search calls in a single request. Once this limit is reached, the tool will stop returning new results. Useful for controlling cost and context size in agentic loops."""
+    r"""Maximum total number of search results across all search calls in a single request. Once this limit is reached, the tool will stop returning new results. Useful for controlling cost and context size in agentic loops. Defaults to 50 when not specified."""
 
     parameters: Optional[WebSearchConfig] = None
 
     search_context_size: Annotated[
         Optional[SearchQualityLevel], PlainValidator(validate_open_enum(False))
     ] = None
-    r"""How much context to retrieve per result. Defaults to medium (15000 chars). Only applies when using the Exa engine; ignored with native provider search."""
+    r"""How much context to retrieve per result. Applies to Exa and Parallel engines; ignored with native provider search and Firecrawl. For Exa, pins a fixed per-result character cap (low=5,000, medium=15,000, high=30,000); when omitted, Exa picks an adaptive size per query and document (typically ~2,000–4,000 characters per result). For Parallel, controls the total characters across all results; when omitted, Parallel uses its own default size. Overridden by `max_characters` when both are set."""
 
     user_location: Optional[WebSearchUserLocationServerTool] = None
     r"""Approximate user location for location-biased results."""

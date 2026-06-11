@@ -26,6 +26,7 @@ class Chat(BaseSDK):
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
+        x_open_router_metadata: Optional[components.MetadataLevel] = None,
         cache_control: Optional[
             Union[
                 components.AnthropicCacheControlDirective,
@@ -64,7 +65,10 @@ class Chat(BaseSDK):
             ]
         ] = UNSET,
         reasoning: Optional[
-            Union[components.Reasoning, components.ReasoningTypedDict]
+            Union[
+                components.ChatRequestReasoning,
+                components.ChatRequestReasoningTypedDict,
+            ]
         ] = None,
         response_format: Optional[
             Union[components.ResponseFormat, components.ResponseFormatTypedDict]
@@ -75,6 +79,12 @@ class Chat(BaseSDK):
         stop: OptionalNullable[
             Union[components.Stop, components.StopTypedDict]
         ] = UNSET,
+        stop_server_tools_when: Optional[
+            Union[
+                List[components.StopServerToolsWhenCondition],
+                List[components.StopServerToolsWhenConditionTypedDict],
+            ]
+        ] = None,
         stream: Union[Literal[False], None] = None,
         stream_options: OptionalNullable[
             Union[components.ChatStreamOptions, components.ChatStreamOptionsTypedDict]
@@ -112,7 +122,8 @@ class Chat(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
-        :param cache_control:
+        :param x_open_router_metadata: Opt-in to surface routing metadata on the response under `openrouter_metadata`. Defaults to `disabled`. The legacy header `X-OpenRouter-Experimental-Metadata` is also accepted for backward compatibility.
+        :param cache_control: Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. Currently supported for Anthropic Claude models.
         :param debug: Debug options for inspecting request transformations (streaming only)
         :param frequency_penalty: Frequency penalty (-2.0 to 2.0)
         :param image_config: Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/guides/overview/multimodal/image-generation for more details.
@@ -132,8 +143,9 @@ class Chat(BaseSDK):
         :param response_format: Response format configuration
         :param seed: Random seed for deterministic outputs
         :param service_tier: The service tier to use for processing this request.
-        :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters.
+        :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow). When provided, OpenRouter uses it as the sticky routing key, routing all requests in the session to the same provider to maximize prompt cache hits. Also used for observability grouping. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters.
         :param stop: Stop sequences (up to 4)
+        :param stop_server_tools_when: Stop conditions for the server-tool agent loop. Any condition firing halts the loop (OR logic). When set, this overrides `max_tool_calls`.
         :param stream: Enable streaming response
         :param stream_options: Streaming configuration options
         :param temperature: Sampling temperature (0-2)
@@ -160,6 +172,7 @@ class Chat(BaseSDK):
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
+        x_open_router_metadata: Optional[components.MetadataLevel] = None,
         cache_control: Optional[
             Union[
                 components.AnthropicCacheControlDirective,
@@ -198,7 +211,10 @@ class Chat(BaseSDK):
             ]
         ] = UNSET,
         reasoning: Optional[
-            Union[components.Reasoning, components.ReasoningTypedDict]
+            Union[
+                components.ChatRequestReasoning,
+                components.ChatRequestReasoningTypedDict,
+            ]
         ] = None,
         response_format: Optional[
             Union[components.ResponseFormat, components.ResponseFormatTypedDict]
@@ -209,6 +225,12 @@ class Chat(BaseSDK):
         stop: OptionalNullable[
             Union[components.Stop, components.StopTypedDict]
         ] = UNSET,
+        stop_server_tools_when: Optional[
+            Union[
+                List[components.StopServerToolsWhenCondition],
+                List[components.StopServerToolsWhenConditionTypedDict],
+            ]
+        ] = None,
         stream: Literal[True],
         stream_options: OptionalNullable[
             Union[components.ChatStreamOptions, components.ChatStreamOptionsTypedDict]
@@ -246,7 +268,8 @@ class Chat(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
-        :param cache_control:
+        :param x_open_router_metadata: Opt-in to surface routing metadata on the response under `openrouter_metadata`. Defaults to `disabled`. The legacy header `X-OpenRouter-Experimental-Metadata` is also accepted for backward compatibility.
+        :param cache_control: Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. Currently supported for Anthropic Claude models.
         :param debug: Debug options for inspecting request transformations (streaming only)
         :param frequency_penalty: Frequency penalty (-2.0 to 2.0)
         :param image_config: Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/guides/overview/multimodal/image-generation for more details.
@@ -266,8 +289,9 @@ class Chat(BaseSDK):
         :param response_format: Response format configuration
         :param seed: Random seed for deterministic outputs
         :param service_tier: The service tier to use for processing this request.
-        :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters.
+        :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow). When provided, OpenRouter uses it as the sticky routing key, routing all requests in the session to the same provider to maximize prompt cache hits. Also used for observability grouping. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters.
         :param stop: Stop sequences (up to 4)
+        :param stop_server_tools_when: Stop conditions for the server-tool agent loop. Any condition firing halts the loop (OR logic). When set, this overrides `max_tool_calls`.
         :param stream: Enable streaming response
         :param stream_options: Streaming configuration options
         :param temperature: Sampling temperature (0-2)
@@ -293,6 +317,7 @@ class Chat(BaseSDK):
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
+        x_open_router_metadata: Optional[components.MetadataLevel] = None,
         cache_control: Optional[
             Union[
                 components.AnthropicCacheControlDirective,
@@ -331,7 +356,10 @@ class Chat(BaseSDK):
             ]
         ] = UNSET,
         reasoning: Optional[
-            Union[components.Reasoning, components.ReasoningTypedDict]
+            Union[
+                components.ChatRequestReasoning,
+                components.ChatRequestReasoningTypedDict,
+            ]
         ] = None,
         response_format: Optional[
             Union[components.ResponseFormat, components.ResponseFormatTypedDict]
@@ -342,6 +370,12 @@ class Chat(BaseSDK):
         stop: OptionalNullable[
             Union[components.Stop, components.StopTypedDict]
         ] = UNSET,
+        stop_server_tools_when: Optional[
+            Union[
+                List[components.StopServerToolsWhenCondition],
+                List[components.StopServerToolsWhenConditionTypedDict],
+            ]
+        ] = None,
         stream: Optional[bool] = False,
         stream_options: OptionalNullable[
             Union[components.ChatStreamOptions, components.ChatStreamOptionsTypedDict]
@@ -379,7 +413,8 @@ class Chat(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
-        :param cache_control:
+        :param x_open_router_metadata: Opt-in to surface routing metadata on the response under `openrouter_metadata`. Defaults to `disabled`. The legacy header `X-OpenRouter-Experimental-Metadata` is also accepted for backward compatibility.
+        :param cache_control: Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. Currently supported for Anthropic Claude models.
         :param debug: Debug options for inspecting request transformations (streaming only)
         :param frequency_penalty: Frequency penalty (-2.0 to 2.0)
         :param image_config: Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/guides/overview/multimodal/image-generation for more details.
@@ -399,8 +434,9 @@ class Chat(BaseSDK):
         :param response_format: Response format configuration
         :param seed: Random seed for deterministic outputs
         :param service_tier: The service tier to use for processing this request.
-        :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters.
+        :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow). When provided, OpenRouter uses it as the sticky routing key, routing all requests in the session to the same provider to maximize prompt cache hits. Also used for observability grouping. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters.
         :param stop: Stop sequences (up to 4)
+        :param stop_server_tools_when: Stop conditions for the server-tool agent loop. Any condition firing halts the loop (OR logic). When set, this overrides `max_tool_calls`.
         :param stream: Enable streaming response
         :param stream_options: Streaming configuration options
         :param temperature: Sampling temperature (0-2)
@@ -430,6 +466,7 @@ class Chat(BaseSDK):
             http_referer=http_referer,
             x_open_router_title=x_open_router_title,
             x_open_router_categories=x_open_router_categories,
+            x_open_router_metadata=x_open_router_metadata,
             chat_request=components.ChatRequest(
                 cache_control=utils.get_pydantic_model(
                     cache_control, Optional[components.AnthropicCacheControlDirective]
@@ -459,7 +496,7 @@ class Chat(BaseSDK):
                     provider, OptionalNullable[components.ProviderPreferences]
                 ),
                 reasoning=utils.get_pydantic_model(
-                    reasoning, Optional[components.Reasoning]
+                    reasoning, Optional[components.ChatRequestReasoning]
                 ),
                 response_format=utils.get_pydantic_model(
                     response_format, Optional[components.ResponseFormat]
@@ -468,6 +505,10 @@ class Chat(BaseSDK):
                 service_tier=service_tier,
                 session_id=session_id,
                 stop=stop,
+                stop_server_tools_when=utils.get_pydantic_model(
+                    stop_server_tools_when,
+                    Optional[List[components.StopServerToolsWhenCondition]],
+                ),
                 stream=stream,
                 stream_options=utils.get_pydantic_model(
                     stream_options, OptionalNullable[components.ChatStreamOptions]
@@ -538,6 +579,7 @@ class Chat(BaseSDK):
                 "400",
                 "401",
                 "402",
+                "403",
                 "404",
                 "408",
                 "413",
@@ -565,7 +607,7 @@ class Chat(BaseSDK):
             return eventstreaming.EventStream(
                 http_res,
                 lambda raw: utils.unmarshal_json(
-                    raw, operations.SendChatCompletionRequestResponseBody
+                    raw, components.ChatStreamingResponse
                 ).data,
                 sentinel="[DONE]",
                 client_ref=self,
@@ -592,6 +634,12 @@ class Chat(BaseSDK):
             raise errors.PaymentRequiredResponseError(
                 response_data, http_res, http_res_text
             )
+        if utils.match_response(http_res, "403", "application/json"):
+            http_res_text = utils.stream_to_text(http_res)
+            response_data = unmarshal_json_response(
+                errors.ForbiddenResponseErrorData, http_res, http_res_text
+            )
+            raise errors.ForbiddenResponseError(response_data, http_res, http_res_text)
         if utils.match_response(http_res, "404", "application/json"):
             http_res_text = utils.stream_to_text(http_res)
             response_data = unmarshal_json_response(
@@ -694,6 +742,7 @@ class Chat(BaseSDK):
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
+        x_open_router_metadata: Optional[components.MetadataLevel] = None,
         cache_control: Optional[
             Union[
                 components.AnthropicCacheControlDirective,
@@ -732,7 +781,10 @@ class Chat(BaseSDK):
             ]
         ] = UNSET,
         reasoning: Optional[
-            Union[components.Reasoning, components.ReasoningTypedDict]
+            Union[
+                components.ChatRequestReasoning,
+                components.ChatRequestReasoningTypedDict,
+            ]
         ] = None,
         response_format: Optional[
             Union[components.ResponseFormat, components.ResponseFormatTypedDict]
@@ -743,6 +795,12 @@ class Chat(BaseSDK):
         stop: OptionalNullable[
             Union[components.Stop, components.StopTypedDict]
         ] = UNSET,
+        stop_server_tools_when: Optional[
+            Union[
+                List[components.StopServerToolsWhenCondition],
+                List[components.StopServerToolsWhenConditionTypedDict],
+            ]
+        ] = None,
         stream: Union[Literal[False], None] = None,
         stream_options: OptionalNullable[
             Union[components.ChatStreamOptions, components.ChatStreamOptionsTypedDict]
@@ -780,7 +838,8 @@ class Chat(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
-        :param cache_control:
+        :param x_open_router_metadata: Opt-in to surface routing metadata on the response under `openrouter_metadata`. Defaults to `disabled`. The legacy header `X-OpenRouter-Experimental-Metadata` is also accepted for backward compatibility.
+        :param cache_control: Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. Currently supported for Anthropic Claude models.
         :param debug: Debug options for inspecting request transformations (streaming only)
         :param frequency_penalty: Frequency penalty (-2.0 to 2.0)
         :param image_config: Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/guides/overview/multimodal/image-generation for more details.
@@ -800,8 +859,9 @@ class Chat(BaseSDK):
         :param response_format: Response format configuration
         :param seed: Random seed for deterministic outputs
         :param service_tier: The service tier to use for processing this request.
-        :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters.
+        :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow). When provided, OpenRouter uses it as the sticky routing key, routing all requests in the session to the same provider to maximize prompt cache hits. Also used for observability grouping. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters.
         :param stop: Stop sequences (up to 4)
+        :param stop_server_tools_when: Stop conditions for the server-tool agent loop. Any condition firing halts the loop (OR logic). When set, this overrides `max_tool_calls`.
         :param stream: Enable streaming response
         :param stream_options: Streaming configuration options
         :param temperature: Sampling temperature (0-2)
@@ -828,6 +888,7 @@ class Chat(BaseSDK):
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
+        x_open_router_metadata: Optional[components.MetadataLevel] = None,
         cache_control: Optional[
             Union[
                 components.AnthropicCacheControlDirective,
@@ -866,7 +927,10 @@ class Chat(BaseSDK):
             ]
         ] = UNSET,
         reasoning: Optional[
-            Union[components.Reasoning, components.ReasoningTypedDict]
+            Union[
+                components.ChatRequestReasoning,
+                components.ChatRequestReasoningTypedDict,
+            ]
         ] = None,
         response_format: Optional[
             Union[components.ResponseFormat, components.ResponseFormatTypedDict]
@@ -877,6 +941,12 @@ class Chat(BaseSDK):
         stop: OptionalNullable[
             Union[components.Stop, components.StopTypedDict]
         ] = UNSET,
+        stop_server_tools_when: Optional[
+            Union[
+                List[components.StopServerToolsWhenCondition],
+                List[components.StopServerToolsWhenConditionTypedDict],
+            ]
+        ] = None,
         stream: Literal[True],
         stream_options: OptionalNullable[
             Union[components.ChatStreamOptions, components.ChatStreamOptionsTypedDict]
@@ -914,7 +984,8 @@ class Chat(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
-        :param cache_control:
+        :param x_open_router_metadata: Opt-in to surface routing metadata on the response under `openrouter_metadata`. Defaults to `disabled`. The legacy header `X-OpenRouter-Experimental-Metadata` is also accepted for backward compatibility.
+        :param cache_control: Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. Currently supported for Anthropic Claude models.
         :param debug: Debug options for inspecting request transformations (streaming only)
         :param frequency_penalty: Frequency penalty (-2.0 to 2.0)
         :param image_config: Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/guides/overview/multimodal/image-generation for more details.
@@ -934,8 +1005,9 @@ class Chat(BaseSDK):
         :param response_format: Response format configuration
         :param seed: Random seed for deterministic outputs
         :param service_tier: The service tier to use for processing this request.
-        :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters.
+        :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow). When provided, OpenRouter uses it as the sticky routing key, routing all requests in the session to the same provider to maximize prompt cache hits. Also used for observability grouping. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters.
         :param stop: Stop sequences (up to 4)
+        :param stop_server_tools_when: Stop conditions for the server-tool agent loop. Any condition firing halts the loop (OR logic). When set, this overrides `max_tool_calls`.
         :param stream: Enable streaming response
         :param stream_options: Streaming configuration options
         :param temperature: Sampling temperature (0-2)
@@ -961,6 +1033,7 @@ class Chat(BaseSDK):
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
+        x_open_router_metadata: Optional[components.MetadataLevel] = None,
         cache_control: Optional[
             Union[
                 components.AnthropicCacheControlDirective,
@@ -999,7 +1072,10 @@ class Chat(BaseSDK):
             ]
         ] = UNSET,
         reasoning: Optional[
-            Union[components.Reasoning, components.ReasoningTypedDict]
+            Union[
+                components.ChatRequestReasoning,
+                components.ChatRequestReasoningTypedDict,
+            ]
         ] = None,
         response_format: Optional[
             Union[components.ResponseFormat, components.ResponseFormatTypedDict]
@@ -1010,6 +1086,12 @@ class Chat(BaseSDK):
         stop: OptionalNullable[
             Union[components.Stop, components.StopTypedDict]
         ] = UNSET,
+        stop_server_tools_when: Optional[
+            Union[
+                List[components.StopServerToolsWhenCondition],
+                List[components.StopServerToolsWhenConditionTypedDict],
+            ]
+        ] = None,
         stream: Optional[bool] = False,
         stream_options: OptionalNullable[
             Union[components.ChatStreamOptions, components.ChatStreamOptionsTypedDict]
@@ -1047,7 +1129,8 @@ class Chat(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
-        :param cache_control:
+        :param x_open_router_metadata: Opt-in to surface routing metadata on the response under `openrouter_metadata`. Defaults to `disabled`. The legacy header `X-OpenRouter-Experimental-Metadata` is also accepted for backward compatibility.
+        :param cache_control: Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. Currently supported for Anthropic Claude models.
         :param debug: Debug options for inspecting request transformations (streaming only)
         :param frequency_penalty: Frequency penalty (-2.0 to 2.0)
         :param image_config: Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/guides/overview/multimodal/image-generation for more details.
@@ -1067,8 +1150,9 @@ class Chat(BaseSDK):
         :param response_format: Response format configuration
         :param seed: Random seed for deterministic outputs
         :param service_tier: The service tier to use for processing this request.
-        :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters.
+        :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow). When provided, OpenRouter uses it as the sticky routing key, routing all requests in the session to the same provider to maximize prompt cache hits. Also used for observability grouping. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters.
         :param stop: Stop sequences (up to 4)
+        :param stop_server_tools_when: Stop conditions for the server-tool agent loop. Any condition firing halts the loop (OR logic). When set, this overrides `max_tool_calls`.
         :param stream: Enable streaming response
         :param stream_options: Streaming configuration options
         :param temperature: Sampling temperature (0-2)
@@ -1098,6 +1182,7 @@ class Chat(BaseSDK):
             http_referer=http_referer,
             x_open_router_title=x_open_router_title,
             x_open_router_categories=x_open_router_categories,
+            x_open_router_metadata=x_open_router_metadata,
             chat_request=components.ChatRequest(
                 cache_control=utils.get_pydantic_model(
                     cache_control, Optional[components.AnthropicCacheControlDirective]
@@ -1127,7 +1212,7 @@ class Chat(BaseSDK):
                     provider, OptionalNullable[components.ProviderPreferences]
                 ),
                 reasoning=utils.get_pydantic_model(
-                    reasoning, Optional[components.Reasoning]
+                    reasoning, Optional[components.ChatRequestReasoning]
                 ),
                 response_format=utils.get_pydantic_model(
                     response_format, Optional[components.ResponseFormat]
@@ -1136,6 +1221,10 @@ class Chat(BaseSDK):
                 service_tier=service_tier,
                 session_id=session_id,
                 stop=stop,
+                stop_server_tools_when=utils.get_pydantic_model(
+                    stop_server_tools_when,
+                    Optional[List[components.StopServerToolsWhenCondition]],
+                ),
                 stream=stream,
                 stream_options=utils.get_pydantic_model(
                     stream_options, OptionalNullable[components.ChatStreamOptions]
@@ -1206,6 +1295,7 @@ class Chat(BaseSDK):
                 "400",
                 "401",
                 "402",
+                "403",
                 "404",
                 "408",
                 "413",
@@ -1233,7 +1323,7 @@ class Chat(BaseSDK):
             return eventstreaming.EventStreamAsync(
                 http_res,
                 lambda raw: utils.unmarshal_json(
-                    raw, operations.SendChatCompletionRequestResponseBody
+                    raw, components.ChatStreamingResponse
                 ).data,
                 sentinel="[DONE]",
                 client_ref=self,
@@ -1260,6 +1350,12 @@ class Chat(BaseSDK):
             raise errors.PaymentRequiredResponseError(
                 response_data, http_res, http_res_text
             )
+        if utils.match_response(http_res, "403", "application/json"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            response_data = unmarshal_json_response(
+                errors.ForbiddenResponseErrorData, http_res, http_res_text
+            )
+            raise errors.ForbiddenResponseError(response_data, http_res, http_res_text)
         if utils.match_response(http_res, "404", "application/json"):
             http_res_text = await utils.stream_to_text_async(http_res)
             response_data = unmarshal_json_response(

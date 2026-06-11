@@ -30,24 +30,32 @@ FiltersType = Union[
 ]
 
 
-Value1TypedDict = TypeAliasType("Value1TypedDict", Union[str, float])
-
-
-Value1 = TypeAliasType("Value1", Union[str, float])
-
-
-Value2TypedDict = TypeAliasType(
-    "Value2TypedDict", Union[str, float, bool, List[Value1TypedDict]]
+FileSearchServerToolValue1TypedDict = TypeAliasType(
+    "FileSearchServerToolValue1TypedDict", Union[str, float]
 )
 
 
-Value2 = TypeAliasType("Value2", Union[str, float, bool, List[Value1]])
+FileSearchServerToolValue1 = TypeAliasType(
+    "FileSearchServerToolValue1", Union[str, float]
+)
+
+
+FileSearchServerToolValue2TypedDict = TypeAliasType(
+    "FileSearchServerToolValue2TypedDict",
+    Union[str, float, bool, List[FileSearchServerToolValue1TypedDict]],
+)
+
+
+FileSearchServerToolValue2 = TypeAliasType(
+    "FileSearchServerToolValue2",
+    Union[str, float, bool, List[FileSearchServerToolValue1]],
+)
 
 
 class FiltersTypedDict(TypedDict):
     key: str
     type: FiltersType
-    value: Value2TypedDict
+    value: FileSearchServerToolValue2TypedDict
 
 
 class Filters(BaseModel):
@@ -55,7 +63,7 @@ class Filters(BaseModel):
 
     type: Annotated[FiltersType, PlainValidator(validate_open_enum(False))]
 
-    value: Value2
+    value: FileSearchServerToolValue2
 
 
 FiltersUnionTypedDict = TypeAliasType(

@@ -24,16 +24,16 @@ class OutputLogs(BaseModel):
     type: TypeLogs
 
 
-TypeImage = Literal["image",]
+OutputCodeInterpreterCallItemTypeImage = Literal["image",]
 
 
 class OutputImageTypedDict(TypedDict):
-    type: TypeImage
+    type: OutputCodeInterpreterCallItemTypeImage
     url: str
 
 
 class OutputImage(BaseModel):
-    type: TypeImage
+    type: OutputCodeInterpreterCallItemTypeImage
 
     url: str
 

@@ -2,14 +2,78 @@
 
 from __future__ import annotations
 from .websearchengine import WebSearchEngine
-from openrouter.types import BaseModel
+from openrouter.types import (
+    BaseModel,
+    Nullable,
+    OptionalNullable,
+    UNSET,
+    UNSET_SENTINEL,
+)
 from openrouter.utils import validate_open_enum
+from pydantic import model_serializer
 from pydantic.functional_validators import PlainValidator
 from typing import List, Literal, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 WebSearchPluginID = Literal["web",]
+
+
+WebSearchPluginType = Literal["approximate",]
+
+
+class UserLocationTypedDict(TypedDict):
+    r"""Approximate user location for location-biased search results. Passed through to native providers that support it (e.g. Anthropic)."""
+
+    type: WebSearchPluginType
+    city: NotRequired[Nullable[str]]
+    country: NotRequired[Nullable[str]]
+    region: NotRequired[Nullable[str]]
+    timezone: NotRequired[Nullable[str]]
+
+
+class UserLocation(BaseModel):
+    r"""Approximate user location for location-biased search results. Passed through to native providers that support it (e.g. Anthropic)."""
+
+    type: WebSearchPluginType
+
+    city: OptionalNullable[str] = UNSET
+
+    country: OptionalNullable[str] = UNSET
+
+    region: OptionalNullable[str] = UNSET
+
+    timezone: OptionalNullable[str] = UNSET
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = ["city", "country", "region", "timezone"]
+        nullable_fields = ["city", "country", "region", "timezone"]
+        null_default_fields = []
+
+        serialized = handler(self)
+
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+            serialized.pop(k, None)
+
+            optional_nullable = k in optional_fields and k in nullable_fields
+            is_set = (
+                self.__pydantic_fields_set__.intersection({n})
+                or k in null_default_fields
+            )  # pylint: disable=no-member
+
+            if val is not None and val != UNSET_SENTINEL:
+                m[k] = val
+            elif val != UNSET_SENTINEL and (
+                not k in optional_fields or (optional_nullable and is_set)
+            ):
+                m[k] = val
+
+        return m
 
 
 class WebSearchPluginTypedDict(TypedDict):
@@ -23,7 +87,10 @@ class WebSearchPluginTypedDict(TypedDict):
     include_domains: NotRequired[List[str]]
     r"""A list of domains to restrict web search results to. Supports wildcards (e.g. \"*.substack.com\") and path filtering (e.g. \"openai.com/blog\")."""
     max_results: NotRequired[int]
+    max_uses: NotRequired[int]
+    r"""Maximum number of times the model can invoke web search in a single turn. Passed through to native providers that support it (e.g. Anthropic)."""
     search_prompt: NotRequired[str]
+    user_location: NotRequired[Nullable[UserLocationTypedDict]]
 
 
 class WebSearchPlugin(BaseModel):
@@ -45,4 +112,48 @@ class WebSearchPlugin(BaseModel):
 
     max_results: Optional[int] = None
 
+    max_uses: Optional[int] = None
+    r"""Maximum number of times the model can invoke web search in a single turn. Passed through to native providers that support it (e.g. Anthropic)."""
+
     search_prompt: Optional[str] = None
+
+    user_location: OptionalNullable[UserLocation] = UNSET
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = [
+            "enabled",
+            "engine",
+            "exclude_domains",
+            "include_domains",
+            "max_results",
+            "max_uses",
+            "search_prompt",
+            "user_location",
+        ]
+        nullable_fields = ["user_location"]
+        null_default_fields = []
+
+        serialized = handler(self)
+
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+            serialized.pop(k, None)
+
+            optional_nullable = k in optional_fields and k in nullable_fields
+            is_set = (
+                self.__pydantic_fields_set__.intersection({n})
+                or k in null_default_fields
+            )  # pylint: disable=no-member
+
+            if val is not None and val != UNSET_SENTINEL:
+                m[k] = val
+            elif val != UNSET_SENTINEL and (
+                not k in optional_fields or (optional_nullable and is_set)
+            ):
+                m[k] = val
+
+        return m

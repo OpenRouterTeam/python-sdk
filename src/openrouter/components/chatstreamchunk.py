@@ -3,6 +3,7 @@
 from __future__ import annotations
 from .chatstreamchoice import ChatStreamChoice, ChatStreamChoiceTypedDict
 from .chatusage import ChatUsage, ChatUsageTypedDict
+from .openroutermetadata import OpenRouterMetadata, OpenRouterMetadataTypedDict
 from openrouter.types import (
     BaseModel,
     Nullable,
@@ -51,6 +52,7 @@ class ChatStreamChunkTypedDict(TypedDict):
     object: ChatStreamChunkObject
     error: NotRequired[ErrorTypedDict]
     r"""Error information"""
+    openrouter_metadata: NotRequired[OpenRouterMetadataTypedDict]
     service_tier: NotRequired[Nullable[str]]
     r"""The service tier used by the upstream provider for this request"""
     system_fingerprint: NotRequired[str]
@@ -79,6 +81,8 @@ class ChatStreamChunk(BaseModel):
     error: Optional[Error] = None
     r"""Error information"""
 
+    openrouter_metadata: Optional[OpenRouterMetadata] = None
+
     service_tier: OptionalNullable[str] = UNSET
     r"""The service tier used by the upstream provider for this request"""
 
@@ -90,7 +94,13 @@ class ChatStreamChunk(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["error", "service_tier", "system_fingerprint", "usage"]
+        optional_fields = [
+            "error",
+            "openrouter_metadata",
+            "service_tier",
+            "system_fingerprint",
+            "usage",
+        ]
         nullable_fields = ["service_tier"]
         null_default_fields = []
 

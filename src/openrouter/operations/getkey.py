@@ -156,6 +156,8 @@ class GetKeyDataTypedDict(TypedDict):
     r"""OpenRouter credit usage (in USD) for the current UTC month"""
     usage_weekly: float
     r"""OpenRouter credit usage (in USD) for the current UTC week (Monday-Sunday)"""
+    workspace_id: str
+    r"""The workspace ID this API key belongs to."""
     expires_at: NotRequired[Nullable[datetime]]
     r"""ISO 8601 UTC timestamp when the API key expires, or null if no expiration"""
 
@@ -219,6 +221,9 @@ class GetKeyData(BaseModel):
 
     usage_weekly: float
     r"""OpenRouter credit usage (in USD) for the current UTC week (Monday-Sunday)"""
+
+    workspace_id: str
+    r"""The workspace ID this API key belongs to."""
 
     expires_at: OptionalNullable[datetime] = UNSET
     r"""ISO 8601 UTC timestamp when the API key expires, or null if no expiration"""

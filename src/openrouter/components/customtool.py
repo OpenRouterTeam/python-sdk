@@ -58,14 +58,14 @@ Format = Annotated[
 ]
 
 
-TypeCustom = Literal["custom",]
+CustomToolTypeCustom = Literal["custom",]
 
 
 class CustomToolTypedDict(TypedDict):
     r"""Custom tool configuration"""
 
     name: str
-    type: TypeCustom
+    type: CustomToolTypeCustom
     description: NotRequired[str]
     format_: NotRequired[FormatTypedDict]
 
@@ -75,7 +75,7 @@ class CustomTool(BaseModel):
 
     name: str
 
-    type: TypeCustom
+    type: CustomToolTypeCustom
 
     description: Optional[str] = None
 

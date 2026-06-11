@@ -7,13 +7,14 @@ from openrouter.components import (
     serviceunavailableresponseerrordata as components_serviceunavailableresponseerrordata,
 )
 from openrouter.errors import OpenRouterError
-from openrouter.types import BaseModel, OptionalNullable, UNSET
-from typing import Optional
+from openrouter.types import BaseModel, Nullable, OptionalNullable, UNSET
+from typing import Any, Dict, Optional
 
 
 class ServiceUnavailableResponseErrorData(BaseModel):
     error: components_serviceunavailableresponseerrordata.ServiceUnavailableResponseErrorData
     r"""Error data for ServiceUnavailableResponse"""
+    openrouter_metadata: OptionalNullable[Dict[str, Nullable[Any]]] = UNSET
     user_id: OptionalNullable[str] = UNSET
 
 

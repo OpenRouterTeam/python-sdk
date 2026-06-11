@@ -7,13 +7,14 @@ from openrouter.components import (
     internalserverresponseerrordata as components_internalserverresponseerrordata,
 )
 from openrouter.errors import OpenRouterError
-from openrouter.types import BaseModel, OptionalNullable, UNSET
-from typing import Optional
+from openrouter.types import BaseModel, Nullable, OptionalNullable, UNSET
+from typing import Any, Dict, Optional
 
 
 class InternalServerResponseErrorData(BaseModel):
     error: components_internalserverresponseerrordata.InternalServerResponseErrorData
     r"""Error data for InternalServerResponse"""
+    openrouter_metadata: OptionalNullable[Dict[str, Nullable[Any]]] = UNSET
     user_id: OptionalNullable[str] = UNSET
 
 

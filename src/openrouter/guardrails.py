@@ -21,6 +21,7 @@ class Guardrails(BaseSDK):
         x_open_router_categories: Optional[str] = None,
         offset: Optional[int] = None,
         limit: Optional[int] = None,
+        workspace_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -39,6 +40,7 @@ class Guardrails(BaseSDK):
 
         :param offset: Number of records to skip for pagination
         :param limit: Maximum number of records to return (max 100)
+        :param workspace_id: Filter guardrails by workspace ID. By default, guardrails in the default workspace are returned.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -60,6 +62,7 @@ class Guardrails(BaseSDK):
             x_open_router_categories=x_open_router_categories,
             offset=offset,
             limit=limit,
+            workspace_id=workspace_id,
         )
 
         req = self._build_request(
@@ -132,6 +135,7 @@ class Guardrails(BaseSDK):
                 x_open_router_categories=x_open_router_categories,
                 offset=next_offset,
                 limit=limit,
+                workspace_id=workspace_id,
                 retries=retries,
             )
 
@@ -174,6 +178,7 @@ class Guardrails(BaseSDK):
         x_open_router_categories: Optional[str] = None,
         offset: Optional[int] = None,
         limit: Optional[int] = None,
+        workspace_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -192,6 +197,7 @@ class Guardrails(BaseSDK):
 
         :param offset: Number of records to skip for pagination
         :param limit: Maximum number of records to return (max 100)
+        :param workspace_id: Filter guardrails by workspace ID. By default, guardrails in the default workspace are returned.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -213,6 +219,7 @@ class Guardrails(BaseSDK):
             x_open_router_categories=x_open_router_categories,
             offset=offset,
             limit=limit,
+            workspace_id=workspace_id,
         )
 
         req = self._build_request_async(
@@ -288,6 +295,7 @@ class Guardrails(BaseSDK):
                 x_open_router_categories=x_open_router_categories,
                 offset=next_offset,
                 limit=limit,
+                workspace_id=workspace_id,
                 retries=retries,
             )
 
@@ -331,12 +339,29 @@ class Guardrails(BaseSDK):
         x_open_router_categories: Optional[str] = None,
         allowed_models: OptionalNullable[List[str]] = UNSET,
         allowed_providers: OptionalNullable[List[str]] = UNSET,
+        content_filter_builtins: OptionalNullable[
+            Union[
+                List[components.ContentFilterBuiltinEntryInput],
+                List[components.ContentFilterBuiltinEntryInputTypedDict],
+            ]
+        ] = UNSET,
+        content_filters: OptionalNullable[
+            Union[
+                List[components.ContentFilterEntry],
+                List[components.ContentFilterEntryTypedDict],
+            ]
+        ] = UNSET,
         description: OptionalNullable[str] = UNSET,
         enforce_zdr: OptionalNullable[bool] = UNSET,
+        enforce_zdr_anthropic: OptionalNullable[bool] = UNSET,
+        enforce_zdr_google: OptionalNullable[bool] = UNSET,
+        enforce_zdr_openai: OptionalNullable[bool] = UNSET,
+        enforce_zdr_other: OptionalNullable[bool] = UNSET,
         ignored_models: OptionalNullable[List[str]] = UNSET,
         ignored_providers: OptionalNullable[List[str]] = UNSET,
         limit_usd: OptionalNullable[float] = UNSET,
         reset_interval: OptionalNullable[components.GuardrailInterval] = UNSET,
+        workspace_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -356,12 +381,19 @@ class Guardrails(BaseSDK):
 
         :param allowed_models: Array of model identifiers (slug or canonical_slug accepted)
         :param allowed_providers: List of allowed provider IDs
+        :param content_filter_builtins: Builtin content filters to apply. The \"flag\" action is only supported for \"regex-prompt-injection\"; PII slugs (email, phone, ssn, credit-card, ip-address, person-name, address) accept \"block\" or \"redact\" only.
+        :param content_filters: Custom regex content filters to apply to request messages
         :param description: Description of the guardrail
-        :param enforce_zdr: Whether to enforce zero data retention
+        :param enforce_zdr: Deprecated. Use enforce_zdr_anthropic, enforce_zdr_openai, enforce_zdr_google, and enforce_zdr_other instead. When provided, its value is copied into any of those per-provider fields that are not explicitly specified on the request.
+        :param enforce_zdr_anthropic: Whether to enforce zero data retention for Anthropic models. Falls back to enforce_zdr when not provided.
+        :param enforce_zdr_google: Whether to enforce zero data retention for Google models. Falls back to enforce_zdr when not provided.
+        :param enforce_zdr_openai: Whether to enforce zero data retention for OpenAI models. Falls back to enforce_zdr when not provided.
+        :param enforce_zdr_other: Whether to enforce zero data retention for models that are not from Anthropic, OpenAI, or Google. Falls back to enforce_zdr when not provided.
         :param ignored_models: Array of model identifiers to exclude from routing (slug or canonical_slug accepted)
         :param ignored_providers: List of provider IDs to exclude from routing
         :param limit_usd: Spending limit in USD
         :param reset_interval: Interval at which the limit resets (daily, weekly, monthly)
+        :param workspace_id: The workspace to create the guardrail in. Defaults to the default workspace if not provided.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -384,13 +416,26 @@ class Guardrails(BaseSDK):
             create_guardrail_request=components.CreateGuardrailRequest(
                 allowed_models=allowed_models,
                 allowed_providers=allowed_providers,
+                content_filter_builtins=utils.get_pydantic_model(
+                    content_filter_builtins,
+                    OptionalNullable[List[components.ContentFilterBuiltinEntryInput]],
+                ),
+                content_filters=utils.get_pydantic_model(
+                    content_filters,
+                    OptionalNullable[List[components.ContentFilterEntry]],
+                ),
                 description=description,
                 enforce_zdr=enforce_zdr,
+                enforce_zdr_anthropic=enforce_zdr_anthropic,
+                enforce_zdr_google=enforce_zdr_google,
+                enforce_zdr_openai=enforce_zdr_openai,
+                enforce_zdr_other=enforce_zdr_other,
                 ignored_models=ignored_models,
                 ignored_providers=ignored_providers,
                 limit_usd=limit_usd,
                 name=name,
                 reset_interval=reset_interval,
+                workspace_id=workspace_id,
             ),
         )
 
@@ -446,7 +491,7 @@ class Guardrails(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "401", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -463,6 +508,11 @@ class Guardrails(BaseSDK):
                 errors.UnauthorizedResponseErrorData, http_res
             )
             raise errors.UnauthorizedResponseError(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ForbiddenResponseErrorData, http_res
+            )
+            raise errors.ForbiddenResponseError(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(
                 errors.InternalServerResponseErrorData, http_res
@@ -490,12 +540,29 @@ class Guardrails(BaseSDK):
         x_open_router_categories: Optional[str] = None,
         allowed_models: OptionalNullable[List[str]] = UNSET,
         allowed_providers: OptionalNullable[List[str]] = UNSET,
+        content_filter_builtins: OptionalNullable[
+            Union[
+                List[components.ContentFilterBuiltinEntryInput],
+                List[components.ContentFilterBuiltinEntryInputTypedDict],
+            ]
+        ] = UNSET,
+        content_filters: OptionalNullable[
+            Union[
+                List[components.ContentFilterEntry],
+                List[components.ContentFilterEntryTypedDict],
+            ]
+        ] = UNSET,
         description: OptionalNullable[str] = UNSET,
         enforce_zdr: OptionalNullable[bool] = UNSET,
+        enforce_zdr_anthropic: OptionalNullable[bool] = UNSET,
+        enforce_zdr_google: OptionalNullable[bool] = UNSET,
+        enforce_zdr_openai: OptionalNullable[bool] = UNSET,
+        enforce_zdr_other: OptionalNullable[bool] = UNSET,
         ignored_models: OptionalNullable[List[str]] = UNSET,
         ignored_providers: OptionalNullable[List[str]] = UNSET,
         limit_usd: OptionalNullable[float] = UNSET,
         reset_interval: OptionalNullable[components.GuardrailInterval] = UNSET,
+        workspace_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -515,12 +582,19 @@ class Guardrails(BaseSDK):
 
         :param allowed_models: Array of model identifiers (slug or canonical_slug accepted)
         :param allowed_providers: List of allowed provider IDs
+        :param content_filter_builtins: Builtin content filters to apply. The \"flag\" action is only supported for \"regex-prompt-injection\"; PII slugs (email, phone, ssn, credit-card, ip-address, person-name, address) accept \"block\" or \"redact\" only.
+        :param content_filters: Custom regex content filters to apply to request messages
         :param description: Description of the guardrail
-        :param enforce_zdr: Whether to enforce zero data retention
+        :param enforce_zdr: Deprecated. Use enforce_zdr_anthropic, enforce_zdr_openai, enforce_zdr_google, and enforce_zdr_other instead. When provided, its value is copied into any of those per-provider fields that are not explicitly specified on the request.
+        :param enforce_zdr_anthropic: Whether to enforce zero data retention for Anthropic models. Falls back to enforce_zdr when not provided.
+        :param enforce_zdr_google: Whether to enforce zero data retention for Google models. Falls back to enforce_zdr when not provided.
+        :param enforce_zdr_openai: Whether to enforce zero data retention for OpenAI models. Falls back to enforce_zdr when not provided.
+        :param enforce_zdr_other: Whether to enforce zero data retention for models that are not from Anthropic, OpenAI, or Google. Falls back to enforce_zdr when not provided.
         :param ignored_models: Array of model identifiers to exclude from routing (slug or canonical_slug accepted)
         :param ignored_providers: List of provider IDs to exclude from routing
         :param limit_usd: Spending limit in USD
         :param reset_interval: Interval at which the limit resets (daily, weekly, monthly)
+        :param workspace_id: The workspace to create the guardrail in. Defaults to the default workspace if not provided.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -543,13 +617,26 @@ class Guardrails(BaseSDK):
             create_guardrail_request=components.CreateGuardrailRequest(
                 allowed_models=allowed_models,
                 allowed_providers=allowed_providers,
+                content_filter_builtins=utils.get_pydantic_model(
+                    content_filter_builtins,
+                    OptionalNullable[List[components.ContentFilterBuiltinEntryInput]],
+                ),
+                content_filters=utils.get_pydantic_model(
+                    content_filters,
+                    OptionalNullable[List[components.ContentFilterEntry]],
+                ),
                 description=description,
                 enforce_zdr=enforce_zdr,
+                enforce_zdr_anthropic=enforce_zdr_anthropic,
+                enforce_zdr_google=enforce_zdr_google,
+                enforce_zdr_openai=enforce_zdr_openai,
+                enforce_zdr_other=enforce_zdr_other,
                 ignored_models=ignored_models,
                 ignored_providers=ignored_providers,
                 limit_usd=limit_usd,
                 name=name,
                 reset_interval=reset_interval,
+                workspace_id=workspace_id,
             ),
         )
 
@@ -605,7 +692,7 @@ class Guardrails(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "401", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -622,6 +709,11 @@ class Guardrails(BaseSDK):
                 errors.UnauthorizedResponseErrorData, http_res
             )
             raise errors.UnauthorizedResponseError(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ForbiddenResponseErrorData, http_res
+            )
+            raise errors.ForbiddenResponseError(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(
                 errors.InternalServerResponseErrorData, http_res
@@ -1153,8 +1245,24 @@ class Guardrails(BaseSDK):
         x_open_router_categories: Optional[str] = None,
         allowed_models: OptionalNullable[List[str]] = UNSET,
         allowed_providers: OptionalNullable[List[str]] = UNSET,
+        content_filter_builtins: OptionalNullable[
+            Union[
+                List[components.ContentFilterBuiltinEntryInput],
+                List[components.ContentFilterBuiltinEntryInputTypedDict],
+            ]
+        ] = UNSET,
+        content_filters: OptionalNullable[
+            Union[
+                List[components.ContentFilterEntry],
+                List[components.ContentFilterEntryTypedDict],
+            ]
+        ] = UNSET,
         description: OptionalNullable[str] = UNSET,
         enforce_zdr: OptionalNullable[bool] = UNSET,
+        enforce_zdr_anthropic: OptionalNullable[bool] = UNSET,
+        enforce_zdr_google: OptionalNullable[bool] = UNSET,
+        enforce_zdr_openai: OptionalNullable[bool] = UNSET,
+        enforce_zdr_other: OptionalNullable[bool] = UNSET,
         ignored_models: OptionalNullable[List[str]] = UNSET,
         ignored_providers: OptionalNullable[List[str]] = UNSET,
         limit_usd: OptionalNullable[float] = UNSET,
@@ -1179,8 +1287,14 @@ class Guardrails(BaseSDK):
 
         :param allowed_models: Array of model identifiers (slug or canonical_slug accepted)
         :param allowed_providers: New list of allowed provider IDs
+        :param content_filter_builtins: Builtin content filters to apply. Set to null to remove. The \"flag\" action is only supported for \"regex-prompt-injection\"; PII slugs (email, phone, ssn, credit-card, ip-address, person-name, address) accept \"block\" or \"redact\" only.
+        :param content_filters: Custom regex content filters to apply. Set to null to remove.
         :param description: New description for the guardrail
-        :param enforce_zdr: Whether to enforce zero data retention
+        :param enforce_zdr: Deprecated. Use enforce_zdr_anthropic, enforce_zdr_openai, enforce_zdr_google, and enforce_zdr_other instead. When provided, its value is copied into any of those per-provider fields that are not explicitly specified on the request.
+        :param enforce_zdr_anthropic: Whether to enforce zero data retention for Anthropic models. Falls back to enforce_zdr when not provided.
+        :param enforce_zdr_google: Whether to enforce zero data retention for Google models. Falls back to enforce_zdr when not provided.
+        :param enforce_zdr_openai: Whether to enforce zero data retention for OpenAI models. Falls back to enforce_zdr when not provided.
+        :param enforce_zdr_other: Whether to enforce zero data retention for models that are not from Anthropic, OpenAI, or Google. Falls back to enforce_zdr when not provided.
         :param ignored_models: Array of model identifiers to exclude from routing (slug or canonical_slug accepted)
         :param ignored_providers: List of provider IDs to exclude from routing
         :param limit_usd: New spending limit in USD
@@ -1209,8 +1323,20 @@ class Guardrails(BaseSDK):
             update_guardrail_request=components.UpdateGuardrailRequest(
                 allowed_models=allowed_models,
                 allowed_providers=allowed_providers,
+                content_filter_builtins=utils.get_pydantic_model(
+                    content_filter_builtins,
+                    OptionalNullable[List[components.ContentFilterBuiltinEntryInput]],
+                ),
+                content_filters=utils.get_pydantic_model(
+                    content_filters,
+                    OptionalNullable[List[components.ContentFilterEntry]],
+                ),
                 description=description,
                 enforce_zdr=enforce_zdr,
+                enforce_zdr_anthropic=enforce_zdr_anthropic,
+                enforce_zdr_google=enforce_zdr_google,
+                enforce_zdr_openai=enforce_zdr_openai,
+                enforce_zdr_other=enforce_zdr_other,
                 ignored_models=ignored_models,
                 ignored_providers=ignored_providers,
                 limit_usd=limit_usd,
@@ -1320,8 +1446,24 @@ class Guardrails(BaseSDK):
         x_open_router_categories: Optional[str] = None,
         allowed_models: OptionalNullable[List[str]] = UNSET,
         allowed_providers: OptionalNullable[List[str]] = UNSET,
+        content_filter_builtins: OptionalNullable[
+            Union[
+                List[components.ContentFilterBuiltinEntryInput],
+                List[components.ContentFilterBuiltinEntryInputTypedDict],
+            ]
+        ] = UNSET,
+        content_filters: OptionalNullable[
+            Union[
+                List[components.ContentFilterEntry],
+                List[components.ContentFilterEntryTypedDict],
+            ]
+        ] = UNSET,
         description: OptionalNullable[str] = UNSET,
         enforce_zdr: OptionalNullable[bool] = UNSET,
+        enforce_zdr_anthropic: OptionalNullable[bool] = UNSET,
+        enforce_zdr_google: OptionalNullable[bool] = UNSET,
+        enforce_zdr_openai: OptionalNullable[bool] = UNSET,
+        enforce_zdr_other: OptionalNullable[bool] = UNSET,
         ignored_models: OptionalNullable[List[str]] = UNSET,
         ignored_providers: OptionalNullable[List[str]] = UNSET,
         limit_usd: OptionalNullable[float] = UNSET,
@@ -1346,8 +1488,14 @@ class Guardrails(BaseSDK):
 
         :param allowed_models: Array of model identifiers (slug or canonical_slug accepted)
         :param allowed_providers: New list of allowed provider IDs
+        :param content_filter_builtins: Builtin content filters to apply. Set to null to remove. The \"flag\" action is only supported for \"regex-prompt-injection\"; PII slugs (email, phone, ssn, credit-card, ip-address, person-name, address) accept \"block\" or \"redact\" only.
+        :param content_filters: Custom regex content filters to apply. Set to null to remove.
         :param description: New description for the guardrail
-        :param enforce_zdr: Whether to enforce zero data retention
+        :param enforce_zdr: Deprecated. Use enforce_zdr_anthropic, enforce_zdr_openai, enforce_zdr_google, and enforce_zdr_other instead. When provided, its value is copied into any of those per-provider fields that are not explicitly specified on the request.
+        :param enforce_zdr_anthropic: Whether to enforce zero data retention for Anthropic models. Falls back to enforce_zdr when not provided.
+        :param enforce_zdr_google: Whether to enforce zero data retention for Google models. Falls back to enforce_zdr when not provided.
+        :param enforce_zdr_openai: Whether to enforce zero data retention for OpenAI models. Falls back to enforce_zdr when not provided.
+        :param enforce_zdr_other: Whether to enforce zero data retention for models that are not from Anthropic, OpenAI, or Google. Falls back to enforce_zdr when not provided.
         :param ignored_models: Array of model identifiers to exclude from routing (slug or canonical_slug accepted)
         :param ignored_providers: List of provider IDs to exclude from routing
         :param limit_usd: New spending limit in USD
@@ -1376,8 +1524,20 @@ class Guardrails(BaseSDK):
             update_guardrail_request=components.UpdateGuardrailRequest(
                 allowed_models=allowed_models,
                 allowed_providers=allowed_providers,
+                content_filter_builtins=utils.get_pydantic_model(
+                    content_filter_builtins,
+                    OptionalNullable[List[components.ContentFilterBuiltinEntryInput]],
+                ),
+                content_filters=utils.get_pydantic_model(
+                    content_filters,
+                    OptionalNullable[List[components.ContentFilterEntry]],
+                ),
                 description=description,
                 enforce_zdr=enforce_zdr,
+                enforce_zdr_anthropic=enforce_zdr_anthropic,
+                enforce_zdr_google=enforce_zdr_google,
+                enforce_zdr_openai=enforce_zdr_openai,
+                enforce_zdr_other=enforce_zdr_other,
                 ignored_models=ignored_models,
                 ignored_providers=ignored_providers,
                 limit_usd=limit_usd,

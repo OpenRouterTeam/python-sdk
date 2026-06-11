@@ -10,8 +10,8 @@ WebSearchEngineEnum = Union[
         "auto",
         "native",
         "exa",
-        "firecrawl",
         "parallel",
+        "firecrawl",
     ],
     UnrecognizedStr,
 ]

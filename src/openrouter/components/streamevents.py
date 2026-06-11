@@ -2,8 +2,24 @@
 
 from __future__ import annotations
 from .annotationaddedevent import AnnotationAddedEvent, AnnotationAddedEventTypedDict
+from .applypatchcalloperationdiffdeltaevent import (
+    ApplyPatchCallOperationDiffDeltaEvent,
+    ApplyPatchCallOperationDiffDeltaEventTypedDict,
+)
+from .applypatchcalloperationdiffdoneevent import (
+    ApplyPatchCallOperationDiffDoneEvent,
+    ApplyPatchCallOperationDiffDoneEventTypedDict,
+)
 from .contentpartaddedevent import ContentPartAddedEvent, ContentPartAddedEventTypedDict
 from .contentpartdoneevent import ContentPartDoneEvent, ContentPartDoneEventTypedDict
+from .customtoolcallinputdeltaevent import (
+    CustomToolCallInputDeltaEvent,
+    CustomToolCallInputDeltaEventTypedDict,
+)
+from .customtoolcallinputdoneevent import (
+    CustomToolCallInputDoneEvent,
+    CustomToolCallInputDoneEventTypedDict,
+)
 from .errorevent import ErrorEvent, ErrorEventTypedDict
 from .functioncallargsdeltaevent import (
     FunctionCallArgsDeltaEvent,
@@ -12,6 +28,42 @@ from .functioncallargsdeltaevent import (
 from .functioncallargsdoneevent import (
     FunctionCallArgsDoneEvent,
     FunctionCallArgsDoneEventTypedDict,
+)
+from .fusioncallanalysiscompletedevent import (
+    FusionCallAnalysisCompletedEvent,
+    FusionCallAnalysisCompletedEventTypedDict,
+)
+from .fusioncallanalysisinprogressevent import (
+    FusionCallAnalysisInProgressEvent,
+    FusionCallAnalysisInProgressEventTypedDict,
+)
+from .fusioncallcompletedevent import (
+    FusionCallCompletedEvent,
+    FusionCallCompletedEventTypedDict,
+)
+from .fusioncallinprogressevent import (
+    FusionCallInProgressEvent,
+    FusionCallInProgressEventTypedDict,
+)
+from .fusioncallpaneladdedevent import (
+    FusionCallPanelAddedEvent,
+    FusionCallPanelAddedEventTypedDict,
+)
+from .fusioncallpanelcompletedevent import (
+    FusionCallPanelCompletedEvent,
+    FusionCallPanelCompletedEventTypedDict,
+)
+from .fusioncallpaneldeltaevent import (
+    FusionCallPanelDeltaEvent,
+    FusionCallPanelDeltaEventTypedDict,
+)
+from .fusioncallpanelfailedevent import (
+    FusionCallPanelFailedEvent,
+    FusionCallPanelFailedEventTypedDict,
+)
+from .fusioncallpanelreasoningdeltaevent import (
+    FusionCallPanelReasoningDeltaEvent,
+    FusionCallPanelReasoningDeltaEventTypedDict,
 )
 from .imagegencallcompletedevent import (
     ImageGenCallCompletedEvent,
@@ -105,28 +157,41 @@ StreamEventsTypedDict = TypeAliasType(
         StreamEventsResponseCompletedTypedDict,
         StreamEventsResponseIncompleteTypedDict,
         StreamEventsResponseFailedTypedDict,
-        StreamEventsResponseOutputItemAddedTypedDict,
-        StreamEventsResponseOutputItemDoneTypedDict,
+        FusionCallInProgressEventTypedDict,
         WebSearchCallCompletedEventTypedDict,
-        WebSearchCallSearchingEventTypedDict,
-        WebSearchCallInProgressEventTypedDict,
+        StreamEventsResponseOutputItemDoneTypedDict,
+        FusionCallCompletedEventTypedDict,
+        ImageGenCallInProgressEventTypedDict,
+        StreamEventsResponseOutputItemAddedTypedDict,
         ImageGenCallCompletedEventTypedDict,
         ImageGenCallGeneratingEventTypedDict,
-        ImageGenCallInProgressEventTypedDict,
+        WebSearchCallInProgressEventTypedDict,
+        WebSearchCallSearchingEventTypedDict,
+        FusionCallAnalysisInProgressEventTypedDict,
+        CustomToolCallInputDoneEventTypedDict,
+        CustomToolCallInputDeltaEventTypedDict,
         FunctionCallArgsDeltaEventTypedDict,
+        ApplyPatchCallOperationDiffDeltaEventTypedDict,
         ErrorEventTypedDict,
-        ReasoningSummaryTextDeltaEventTypedDict,
-        ReasoningSummaryTextDoneEventTypedDict,
-        ReasoningDeltaEventTypedDict,
-        ReasoningDoneEventTypedDict,
-        ReasoningSummaryPartAddedEventTypedDict,
+        ApplyPatchCallOperationDiffDoneEventTypedDict,
+        FusionCallPanelAddedEventTypedDict,
+        FusionCallAnalysisCompletedEventTypedDict,
         ReasoningSummaryPartDoneEventTypedDict,
-        ContentPartAddedEventTypedDict,
-        FunctionCallArgsDoneEventTypedDict,
         RefusalDoneEventTypedDict,
-        RefusalDeltaEventTypedDict,
+        ReasoningSummaryTextDoneEventTypedDict,
+        ReasoningSummaryTextDeltaEventTypedDict,
+        ReasoningSummaryPartAddedEventTypedDict,
+        ReasoningDoneEventTypedDict,
+        ReasoningDeltaEventTypedDict,
+        FunctionCallArgsDoneEventTypedDict,
+        ContentPartAddedEventTypedDict,
         ImageGenCallPartialImageEventTypedDict,
+        RefusalDeltaEventTypedDict,
         ContentPartDoneEventTypedDict,
+        FusionCallPanelDeltaEventTypedDict,
+        FusionCallPanelReasoningDeltaEventTypedDict,
+        FusionCallPanelCompletedEventTypedDict,
+        FusionCallPanelFailedEventTypedDict,
         TextDeltaEventTypedDict,
         TextDoneEventTypedDict,
         AnnotationAddedEventTypedDict,
@@ -138,16 +203,50 @@ r"""Union of all possible event types emitted during response streaming"""
 StreamEvents = Annotated[
     Union[
         Annotated[ErrorEvent, Tag("error")],
+        Annotated[
+            ApplyPatchCallOperationDiffDeltaEvent,
+            Tag("response.apply_patch_call_operation_diff.delta"),
+        ],
+        Annotated[
+            ApplyPatchCallOperationDiffDoneEvent,
+            Tag("response.apply_patch_call_operation_diff.done"),
+        ],
         Annotated[StreamEventsResponseCompleted, Tag("response.completed")],
         Annotated[ContentPartAddedEvent, Tag("response.content_part.added")],
         Annotated[ContentPartDoneEvent, Tag("response.content_part.done")],
         Annotated[OpenResponsesCreatedEvent, Tag("response.created")],
+        Annotated[
+            CustomToolCallInputDeltaEvent, Tag("response.custom_tool_call_input.delta")
+        ],
+        Annotated[
+            CustomToolCallInputDoneEvent, Tag("response.custom_tool_call_input.done")
+        ],
         Annotated[StreamEventsResponseFailed, Tag("response.failed")],
         Annotated[
             FunctionCallArgsDeltaEvent, Tag("response.function_call_arguments.delta")
         ],
         Annotated[
             FunctionCallArgsDoneEvent, Tag("response.function_call_arguments.done")
+        ],
+        Annotated[
+            FusionCallAnalysisCompletedEvent,
+            Tag("response.fusion_call.analysis.completed"),
+        ],
+        Annotated[
+            FusionCallAnalysisInProgressEvent,
+            Tag("response.fusion_call.analysis.in_progress"),
+        ],
+        Annotated[FusionCallCompletedEvent, Tag("response.fusion_call.completed")],
+        Annotated[FusionCallInProgressEvent, Tag("response.fusion_call.in_progress")],
+        Annotated[FusionCallPanelAddedEvent, Tag("response.fusion_call.panel.added")],
+        Annotated[
+            FusionCallPanelCompletedEvent, Tag("response.fusion_call.panel.completed")
+        ],
+        Annotated[FusionCallPanelDeltaEvent, Tag("response.fusion_call.panel.delta")],
+        Annotated[FusionCallPanelFailedEvent, Tag("response.fusion_call.panel.failed")],
+        Annotated[
+            FusionCallPanelReasoningDeltaEvent,
+            Tag("response.fusion_call.panel.reasoning.delta"),
         ],
         Annotated[
             ImageGenCallCompletedEvent, Tag("response.image_generation_call.completed")

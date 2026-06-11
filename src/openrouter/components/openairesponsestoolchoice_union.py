@@ -7,6 +7,28 @@ from typing import Literal, Union
 from typing_extensions import TypeAliasType, TypedDict
 
 
+OpenAIResponsesToolChoiceTypeShell = Literal["shell",]
+
+
+class OpenAIResponsesToolChoiceShellTypedDict(TypedDict):
+    type: OpenAIResponsesToolChoiceTypeShell
+
+
+class OpenAIResponsesToolChoiceShell(BaseModel):
+    type: OpenAIResponsesToolChoiceTypeShell
+
+
+OpenAIResponsesToolChoiceTypeApplyPatch = Literal["apply_patch",]
+
+
+class OpenAIResponsesToolChoiceApplyPatchTypedDict(TypedDict):
+    type: OpenAIResponsesToolChoiceTypeApplyPatch
+
+
+class OpenAIResponsesToolChoiceApplyPatch(BaseModel):
+    type: OpenAIResponsesToolChoiceTypeApplyPatch
+
+
 OpenAIResponsesToolChoiceTypeWebSearchPreview = Literal["web_search_preview",]
 
 
@@ -68,6 +90,8 @@ OpenAIResponsesToolChoiceUnionTypedDict = TypeAliasType(
     "OpenAIResponsesToolChoiceUnionTypedDict",
     Union[
         OpenAIResponsesToolChoiceTypedDict,
+        OpenAIResponsesToolChoiceApplyPatchTypedDict,
+        OpenAIResponsesToolChoiceShellTypedDict,
         OpenAIResponsesToolChoiceFunctionTypedDict,
         ToolChoiceAllowedTypedDict,
         OpenAIResponsesToolChoiceAuto,
@@ -81,6 +105,8 @@ OpenAIResponsesToolChoiceUnion = TypeAliasType(
     "OpenAIResponsesToolChoiceUnion",
     Union[
         OpenAIResponsesToolChoice,
+        OpenAIResponsesToolChoiceApplyPatch,
+        OpenAIResponsesToolChoiceShell,
         OpenAIResponsesToolChoiceFunction,
         ToolChoiceAllowed,
         OpenAIResponsesToolChoiceAuto,

@@ -60,7 +60,7 @@ class GetModelsGlobals(BaseModel):
     """
 
 
-Category = Union[
+GetModelsCategory = Union[
     Literal[
         "programming",
         "roleplay",
@@ -80,6 +80,22 @@ Category = Union[
 r"""Filter models by use case category"""
 
 
+GetModelsSort = Union[
+    Literal[
+        "most-popular",
+        "newest",
+        "top-weekly",
+        "pricing-low-to-high",
+        "pricing-high-to-low",
+        "context-high-to-low",
+        "throughput-high-to-low",
+        "latency-low-to-high",
+    ],
+    UnrecognizedStr,
+]
+r"""Sort the returned models server-side. Prefer this over fetching the full list and sorting client-side. Options: pricing-low-to-high, pricing-high-to-low (average prompt/completion price), context-high-to-low (context length), throughput-high-to-low, latency-low-to-high (recent median performance), most-popular, top-weekly (tokens processed in the last week), newest (creation date). When omitted, the existing default ordering is preserved."""
+
+
 class GetModelsRequestTypedDict(TypedDict):
     http_referer: NotRequired[str]
     r"""The app identifier should be your app's URL and is used as the primary identifier for rankings.
@@ -94,12 +110,14 @@ class GetModelsRequestTypedDict(TypedDict):
     r"""Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
     """
-    category: NotRequired[Category]
+    category: NotRequired[GetModelsCategory]
     r"""Filter models by use case category"""
     supported_parameters: NotRequired[str]
     r"""Filter models by supported parameter (comma-separated)"""
     output_modalities: NotRequired[str]
     r"""Filter models by output modality. Accepts a comma-separated list of modalities (text, image, audio, embeddings) or \"all\" to include all models. Defaults to \"text\"."""
+    sort: NotRequired[GetModelsSort]
+    r"""Sort the returned models server-side. Prefer this over fetching the full list and sorting client-side. Options: pricing-low-to-high, pricing-high-to-low (average prompt/completion price), context-high-to-low (context length), throughput-high-to-low, latency-low-to-high (recent median performance), most-popular, top-weekly (tokens processed in the last week), newest (creation date). When omitted, the existing default ordering is preserved."""
 
 
 class GetModelsRequest(BaseModel):
@@ -132,7 +150,9 @@ class GetModelsRequest(BaseModel):
     """
 
     category: Annotated[
-        Annotated[Optional[Category], PlainValidator(validate_open_enum(False))],
+        Annotated[
+            Optional[GetModelsCategory], PlainValidator(validate_open_enum(False))
+        ],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
     r"""Filter models by use case category"""
@@ -148,3 +168,9 @@ class GetModelsRequest(BaseModel):
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
     r"""Filter models by output modality. Accepts a comma-separated list of modalities (text, image, audio, embeddings) or \"all\" to include all models. Defaults to \"text\"."""
+
+    sort: Annotated[
+        Annotated[Optional[GetModelsSort], PlainValidator(validate_open_enum(False))],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Sort the returned models server-side. Prefer this over fetching the full list and sorting client-side. Options: pricing-low-to-high, pricing-high-to-low (average prompt/completion price), context-high-to-low (context length), throughput-high-to-low, latency-low-to-high (recent median performance), most-popular, top-weekly (tokens processed in the last week), newest (creation date). When omitted, the existing default ordering is preserved."""

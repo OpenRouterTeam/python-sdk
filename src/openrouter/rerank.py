@@ -21,7 +21,7 @@ class Rerank(BaseSDK):
     def rerank(
         self,
         *,
-        documents: List[str],
+        documents: Union[List[operations.Document], List[operations.DocumentTypedDict]],
         model: str,
         query: str,
         http_referer: Optional[str] = None,
@@ -43,7 +43,7 @@ class Rerank(BaseSDK):
 
         Submits a rerank request to the rerank router
 
-        :param documents: The list of documents to rerank
+        :param documents: The list of documents to rerank. Documents may be plain strings, or structured objects with `text` and/or `image` for multimodal models.
         :param model: The rerank model to use
         :param query: The search query to rerank documents against
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
@@ -76,7 +76,9 @@ class Rerank(BaseSDK):
             x_open_router_title=x_open_router_title,
             x_open_router_categories=x_open_router_categories,
             request_body=operations.CreateRerankRequestBody(
-                documents=documents,
+                documents=utils.get_pydantic_model(
+                    documents, List[operations.Document]
+                ),
                 model=model,
                 provider=utils.get_pydantic_model(
                     provider, OptionalNullable[components.ProviderPreferences]
@@ -230,7 +232,7 @@ class Rerank(BaseSDK):
     async def rerank_async(
         self,
         *,
-        documents: List[str],
+        documents: Union[List[operations.Document], List[operations.DocumentTypedDict]],
         model: str,
         query: str,
         http_referer: Optional[str] = None,
@@ -252,7 +254,7 @@ class Rerank(BaseSDK):
 
         Submits a rerank request to the rerank router
 
-        :param documents: The list of documents to rerank
+        :param documents: The list of documents to rerank. Documents may be plain strings, or structured objects with `text` and/or `image` for multimodal models.
         :param model: The rerank model to use
         :param query: The search query to rerank documents against
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
@@ -285,7 +287,9 @@ class Rerank(BaseSDK):
             x_open_router_title=x_open_router_title,
             x_open_router_categories=x_open_router_categories,
             request_body=operations.CreateRerankRequestBody(
-                documents=documents,
+                documents=utils.get_pydantic_model(
+                    documents, List[operations.Document]
+                ),
                 model=model,
                 provider=utils.get_pydantic_model(
                     provider, OptionalNullable[components.ProviderPreferences]

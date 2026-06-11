@@ -44,6 +44,8 @@ class OutputFunctionCallItemTypedDict(TypedDict):
     name: str
     type: OutputFunctionCallItemType
     id: NotRequired[str]
+    namespace: NotRequired[str]
+    r"""Namespace qualifier for tools registered as part of a namespace tool group (e.g. an MCP server)"""
     status: NotRequired[OutputFunctionCallItemStatusUnionTypedDict]
 
 
@@ -57,5 +59,8 @@ class OutputFunctionCallItem(BaseModel):
     type: OutputFunctionCallItemType
 
     id: Optional[str] = None
+
+    namespace: Optional[str] = None
+    r"""Namespace qualifier for tools registered as part of a namespace tool group (e.g. an MCP server)"""
 
     status: Optional[OutputFunctionCallItemStatusUnion] = None

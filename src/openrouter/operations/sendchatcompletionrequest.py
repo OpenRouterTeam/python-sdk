@@ -5,6 +5,7 @@ from openrouter.components import (
     chatrequest as components_chatrequest,
     chatresult as components_chatresult,
     chatstreamchunk as components_chatstreamchunk,
+    metadatalevel as components_metadatalevel,
 )
 from openrouter.types import BaseModel
 from openrouter.utils import (
@@ -12,8 +13,10 @@ from openrouter.utils import (
     HeaderMetadata,
     RequestMetadata,
     eventstreaming,
+    validate_open_enum,
 )
 import pydantic
+from pydantic.functional_validators import PlainValidator
 from typing import Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
@@ -79,6 +82,8 @@ class SendChatCompletionRequestRequestTypedDict(TypedDict):
     r"""Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
     """
+    x_open_router_metadata: NotRequired[components_metadatalevel.MetadataLevel]
+    r"""Opt-in to surface routing metadata on the response under `openrouter_metadata`. Defaults to `disabled`. The legacy header `X-OpenRouter-Experimental-Metadata` is also accepted for backward compatibility."""
 
 
 class SendChatCompletionRequestRequest(BaseModel):
@@ -115,19 +120,15 @@ class SendChatCompletionRequestRequest(BaseModel):
 
     """
 
-
-class SendChatCompletionRequestResponseBodyTypedDict(TypedDict):
-    r"""Successful chat completion response"""
-
-    data: components_chatstreamchunk.ChatStreamChunkTypedDict
-    r"""Streaming chat completion chunk"""
-
-
-class SendChatCompletionRequestResponseBody(BaseModel):
-    r"""Successful chat completion response"""
-
-    data: components_chatstreamchunk.ChatStreamChunk
-    r"""Streaming chat completion chunk"""
+    x_open_router_metadata: Annotated[
+        Annotated[
+            Optional[components_metadatalevel.MetadataLevel],
+            PlainValidator(validate_open_enum(False)),
+        ],
+        pydantic.Field(alias="X-OpenRouter-Metadata"),
+        FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
+    ] = None
+    r"""Opt-in to surface routing metadata on the response under `openrouter_metadata`. Defaults to `disabled`. The legacy header `X-OpenRouter-Experimental-Metadata` is also accepted for backward compatibility."""
 
 
 SendChatCompletionRequestResponseTypedDict = TypeAliasType(

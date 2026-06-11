@@ -18,9 +18,10 @@ class Models(BaseSDK):
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
-        category: Optional[operations.Category] = None,
+        category: Optional[operations.GetModelsCategory] = None,
         supported_parameters: Optional[str] = None,
         output_modalities: Optional[str] = None,
+        sort: Optional[operations.GetModelsSort] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -38,6 +39,7 @@ class Models(BaseSDK):
         :param category: Filter models by use case category
         :param supported_parameters: Filter models by supported parameter (comma-separated)
         :param output_modalities: Filter models by output modality. Accepts a comma-separated list of modalities (text, image, audio, embeddings) or \"all\" to include all models. Defaults to \"text\".
+        :param sort: Sort the returned models server-side. Prefer this over fetching the full list and sorting client-side. Options: pricing-low-to-high, pricing-high-to-low (average prompt/completion price), context-high-to-low (context length), throughput-high-to-low, latency-low-to-high (recent median performance), most-popular, top-weekly (tokens processed in the last week), newest (creation date). When omitted, the existing default ordering is preserved.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -60,6 +62,7 @@ class Models(BaseSDK):
             category=category,
             supported_parameters=supported_parameters,
             output_modalities=output_modalities,
+            sort=sort,
         )
 
         req = self._build_request(
@@ -143,9 +146,10 @@ class Models(BaseSDK):
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
-        category: Optional[operations.Category] = None,
+        category: Optional[operations.GetModelsCategory] = None,
         supported_parameters: Optional[str] = None,
         output_modalities: Optional[str] = None,
+        sort: Optional[operations.GetModelsSort] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -163,6 +167,7 @@ class Models(BaseSDK):
         :param category: Filter models by use case category
         :param supported_parameters: Filter models by supported parameter (comma-separated)
         :param output_modalities: Filter models by output modality. Accepts a comma-separated list of modalities (text, image, audio, embeddings) or \"all\" to include all models. Defaults to \"text\".
+        :param sort: Sort the returned models server-side. Prefer this over fetching the full list and sorting client-side. Options: pricing-low-to-high, pricing-high-to-low (average prompt/completion price), context-high-to-low (context length), throughput-high-to-low, latency-low-to-high (recent median performance), most-popular, top-weekly (tokens processed in the last week), newest (creation date). When omitted, the existing default ordering is preserved.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -185,6 +190,7 @@ class Models(BaseSDK):
             category=category,
             supported_parameters=supported_parameters,
             output_modalities=output_modalities,
+            sort=sort,
         )
 
         req = self._build_request_async(

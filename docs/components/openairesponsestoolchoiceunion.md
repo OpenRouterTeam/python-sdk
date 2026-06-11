@@ -39,3 +39,15 @@ value: components.OpenAIResponsesToolChoice = /* values here */
 value: components.ToolChoiceAllowed = /* values here */
 ```
 
+### `components.OpenAIResponsesToolChoiceApplyPatch`
+
+```python
+value: components.OpenAIResponsesToolChoiceApplyPatch = /* values here */
+```
+
+### `components.OpenAIResponsesToolChoiceShell`
+
+```python
+value: components.OpenAIResponsesToolChoiceShell = /* values here */
+```
+

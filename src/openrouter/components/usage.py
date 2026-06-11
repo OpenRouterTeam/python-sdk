@@ -29,13 +29,13 @@ class OutputTokensDetails(BaseModel):
     reasoning_tokens: int
 
 
-class CostDetailsTypedDict(TypedDict):
+class UsageCostDetailsTypedDict(TypedDict):
     upstream_inference_input_cost: float
     upstream_inference_output_cost: float
     upstream_inference_cost: NotRequired[Nullable[float]]
 
 
-class CostDetails(BaseModel):
+class UsageCostDetails(BaseModel):
     upstream_inference_input_cost: float
 
     upstream_inference_output_cost: float
@@ -83,7 +83,7 @@ class UsageTypedDict(TypedDict):
     total_tokens: int
     cost: NotRequired[Nullable[float]]
     r"""Cost of the completion"""
-    cost_details: NotRequired[CostDetailsTypedDict]
+    cost_details: NotRequired[UsageCostDetailsTypedDict]
     is_byok: NotRequired[bool]
     r"""Whether a request was made using a Bring Your Own Key configuration"""
 
@@ -104,7 +104,7 @@ class Usage(BaseModel):
     cost: OptionalNullable[float] = UNSET
     r"""Cost of the completion"""
 
-    cost_details: Optional[CostDetails] = None
+    cost_details: Optional[UsageCostDetails] = None
 
     is_byok: Optional[bool] = None
     r"""Whether a request was made using a Bring Your Own Key configuration"""

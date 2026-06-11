@@ -4,6 +4,7 @@ from __future__ import annotations
 from .toolcallstatus import ToolCallStatus
 from openrouter.types import BaseModel
 from openrouter.utils import validate_open_enum
+import pydantic
 from pydantic.functional_validators import PlainValidator
 from typing import Literal, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
@@ -18,6 +19,10 @@ class OutputWebFetchServerToolItemTypedDict(TypedDict):
     status: ToolCallStatus
     type: OutputWebFetchServerToolItemType
     content: NotRequired[str]
+    error: NotRequired[str]
+    r"""The error message if the fetch failed."""
+    http_status: NotRequired[int]
+    r"""The HTTP status code returned by the upstream URL fetch."""
     id: NotRequired[str]
     title: NotRequired[str]
     url: NotRequired[str]
@@ -31,6 +36,12 @@ class OutputWebFetchServerToolItem(BaseModel):
     type: OutputWebFetchServerToolItemType
 
     content: Optional[str] = None
+
+    error: Optional[str] = None
+    r"""The error message if the fetch failed."""
+
+    http_status: Annotated[Optional[int], pydantic.Field(alias="httpStatus")] = None
+    r"""The HTTP status code returned by the upstream URL fetch."""
 
     id: Optional[str] = None
 

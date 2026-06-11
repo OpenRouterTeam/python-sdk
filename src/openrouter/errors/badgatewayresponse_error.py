@@ -7,13 +7,14 @@ from openrouter.components import (
     badgatewayresponseerrordata as components_badgatewayresponseerrordata,
 )
 from openrouter.errors import OpenRouterError
-from openrouter.types import BaseModel, OptionalNullable, UNSET
-from typing import Optional
+from openrouter.types import BaseModel, Nullable, OptionalNullable, UNSET
+from typing import Any, Dict, Optional
 
 
 class BadGatewayResponseErrorData(BaseModel):
     error: components_badgatewayresponseerrordata.BadGatewayResponseErrorData
     r"""Error data for BadGatewayResponse"""
+    openrouter_metadata: OptionalNullable[Dict[str, Nullable[Any]]] = UNSET
     user_id: OptionalNullable[str] = UNSET
 
 

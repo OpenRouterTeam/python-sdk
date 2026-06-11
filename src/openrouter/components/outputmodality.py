@@ -13,6 +13,8 @@ OutputModality = Union[
         "audio",
         "video",
         "rerank",
+        "speech",
+        "transcription",
     ],
     UnrecognizedStr,
 ]

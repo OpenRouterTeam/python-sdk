@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 from openrouter.components import (
+    metadatalevel as components_metadatalevel,
     openresponsesresult as components_openresponsesresult,
     responsesrequest as components_responsesrequest,
     streamevents as components_streamevents,
@@ -12,8 +13,10 @@ from openrouter.utils import (
     HeaderMetadata,
     RequestMetadata,
     eventstreaming,
+    validate_open_enum,
 )
 import pydantic
+from pydantic.functional_validators import PlainValidator
 from typing import Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
@@ -79,6 +82,8 @@ class CreateResponsesRequestTypedDict(TypedDict):
     r"""Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
     """
+    x_open_router_metadata: NotRequired[components_metadatalevel.MetadataLevel]
+    r"""Opt-in to surface routing metadata on the response under `openrouter_metadata`. Defaults to `disabled`. The legacy header `X-OpenRouter-Experimental-Metadata` is also accepted for backward compatibility."""
 
 
 class CreateResponsesRequest(BaseModel):
@@ -115,19 +120,15 @@ class CreateResponsesRequest(BaseModel):
 
     """
 
-
-class CreateResponsesResponseBodyTypedDict(TypedDict):
-    r"""Successful response"""
-
-    data: components_streamevents.StreamEventsTypedDict
-    r"""Union of all possible event types emitted during response streaming"""
-
-
-class CreateResponsesResponseBody(BaseModel):
-    r"""Successful response"""
-
-    data: components_streamevents.StreamEvents
-    r"""Union of all possible event types emitted during response streaming"""
+    x_open_router_metadata: Annotated[
+        Annotated[
+            Optional[components_metadatalevel.MetadataLevel],
+            PlainValidator(validate_open_enum(False)),
+        ],
+        pydantic.Field(alias="X-OpenRouter-Metadata"),
+        FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
+    ] = None
+    r"""Opt-in to surface routing metadata on the response under `openrouter_metadata`. Defaults to `disabled`. The legacy header `X-OpenRouter-Experimental-Metadata` is also accepted for backward compatibility."""
 
 
 CreateResponsesResponseTypedDict = TypeAliasType(

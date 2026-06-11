@@ -7,13 +7,14 @@ from openrouter.components import (
     requesttimeoutresponseerrordata as components_requesttimeoutresponseerrordata,
 )
 from openrouter.errors import OpenRouterError
-from openrouter.types import BaseModel, OptionalNullable, UNSET
-from typing import Optional
+from openrouter.types import BaseModel, Nullable, OptionalNullable, UNSET
+from typing import Any, Dict, Optional
 
 
 class RequestTimeoutResponseErrorData(BaseModel):
     error: components_requesttimeoutresponseerrordata.RequestTimeoutResponseErrorData
     r"""Error data for RequestTimeoutResponse"""
+    openrouter_metadata: OptionalNullable[Dict[str, Nullable[Any]]] = UNSET
     user_id: OptionalNullable[str] = UNSET
 
 

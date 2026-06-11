@@ -7,13 +7,14 @@ from openrouter.components import (
     paymentrequiredresponseerrordata as components_paymentrequiredresponseerrordata,
 )
 from openrouter.errors import OpenRouterError
-from openrouter.types import BaseModel, OptionalNullable, UNSET
-from typing import Optional
+from openrouter.types import BaseModel, Nullable, OptionalNullable, UNSET
+from typing import Any, Dict, Optional
 
 
 class PaymentRequiredResponseErrorData(BaseModel):
     error: components_paymentrequiredresponseerrordata.PaymentRequiredResponseErrorData
     r"""Error data for PaymentRequiredResponse"""
+    openrouter_metadata: OptionalNullable[Dict[str, Nullable[Any]]] = UNSET
     user_id: OptionalNullable[str] = UNSET
 
 

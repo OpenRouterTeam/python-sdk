@@ -25,7 +25,14 @@ class Responses(BaseSDK):
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
+        x_open_router_metadata: Optional[components.MetadataLevel] = None,
         background: OptionalNullable[bool] = UNSET,
+        cache_control: Optional[
+            Union[
+                components.AnthropicCacheControlDirective,
+                components.AnthropicCacheControlDirectiveTypedDict,
+            ]
+        ] = None,
         frequency_penalty: OptionalNullable[float] = UNSET,
         image_config: Optional[
             Union[
@@ -71,6 +78,12 @@ class Responses(BaseSDK):
         safety_identifier: OptionalNullable[str] = UNSET,
         service_tier: OptionalNullable[components.ResponsesRequestServiceTier] = "auto",
         session_id: Optional[str] = None,
+        stop_server_tools_when: Optional[
+            Union[
+                List[components.StopServerToolsWhenCondition],
+                List[components.StopServerToolsWhenConditionTypedDict],
+            ]
+        ] = None,
         stream: Union[Literal[False], None] = None,
         temperature: OptionalNullable[float] = UNSET,
         text: Optional[
@@ -112,7 +125,9 @@ class Responses(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
+        :param x_open_router_metadata: Opt-in to surface routing metadata on the response under `openrouter_metadata`. Defaults to `disabled`. The legacy header `X-OpenRouter-Experimental-Metadata` is also accepted for backward compatibility.
         :param background:
+        :param cache_control: Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. Currently supported for Anthropic Claude models.
         :param frequency_penalty:
         :param image_config: Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/guides/overview/multimodal/image-generation for more details.
         :param include:
@@ -134,7 +149,8 @@ class Responses(BaseSDK):
         :param reasoning: Configuration for reasoning mode in the response
         :param safety_identifier:
         :param service_tier:
-        :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters.
+        :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow). When provided, OpenRouter uses it as the sticky routing key, routing all requests in the session to the same provider to maximize prompt cache hits. Also used for observability grouping. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters.
+        :param stop_server_tools_when: Stop conditions for the server-tool agent loop. Any condition firing halts the loop (OR logic). When set, this overrides `max_tool_calls`.
         :param stream:
         :param temperature:
         :param text: Text output configuration including format and verbosity
@@ -160,7 +176,14 @@ class Responses(BaseSDK):
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
+        x_open_router_metadata: Optional[components.MetadataLevel] = None,
         background: OptionalNullable[bool] = UNSET,
+        cache_control: Optional[
+            Union[
+                components.AnthropicCacheControlDirective,
+                components.AnthropicCacheControlDirectiveTypedDict,
+            ]
+        ] = None,
         frequency_penalty: OptionalNullable[float] = UNSET,
         image_config: Optional[
             Union[
@@ -206,6 +229,12 @@ class Responses(BaseSDK):
         safety_identifier: OptionalNullable[str] = UNSET,
         service_tier: OptionalNullable[components.ResponsesRequestServiceTier] = "auto",
         session_id: Optional[str] = None,
+        stop_server_tools_when: Optional[
+            Union[
+                List[components.StopServerToolsWhenCondition],
+                List[components.StopServerToolsWhenConditionTypedDict],
+            ]
+        ] = None,
         stream: Literal[True],
         temperature: OptionalNullable[float] = UNSET,
         text: Optional[
@@ -247,7 +276,9 @@ class Responses(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
+        :param x_open_router_metadata: Opt-in to surface routing metadata on the response under `openrouter_metadata`. Defaults to `disabled`. The legacy header `X-OpenRouter-Experimental-Metadata` is also accepted for backward compatibility.
         :param background:
+        :param cache_control: Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. Currently supported for Anthropic Claude models.
         :param frequency_penalty:
         :param image_config: Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/guides/overview/multimodal/image-generation for more details.
         :param include:
@@ -269,7 +300,8 @@ class Responses(BaseSDK):
         :param reasoning: Configuration for reasoning mode in the response
         :param safety_identifier:
         :param service_tier:
-        :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters.
+        :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow). When provided, OpenRouter uses it as the sticky routing key, routing all requests in the session to the same provider to maximize prompt cache hits. Also used for observability grouping. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters.
+        :param stop_server_tools_when: Stop conditions for the server-tool agent loop. Any condition firing halts the loop (OR logic). When set, this overrides `max_tool_calls`.
         :param stream:
         :param temperature:
         :param text: Text output configuration including format and verbosity
@@ -294,7 +326,14 @@ class Responses(BaseSDK):
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
+        x_open_router_metadata: Optional[components.MetadataLevel] = None,
         background: OptionalNullable[bool] = UNSET,
+        cache_control: Optional[
+            Union[
+                components.AnthropicCacheControlDirective,
+                components.AnthropicCacheControlDirectiveTypedDict,
+            ]
+        ] = None,
         frequency_penalty: OptionalNullable[float] = UNSET,
         image_config: Optional[
             Union[
@@ -340,6 +379,12 @@ class Responses(BaseSDK):
         safety_identifier: OptionalNullable[str] = UNSET,
         service_tier: OptionalNullable[components.ResponsesRequestServiceTier] = "auto",
         session_id: Optional[str] = None,
+        stop_server_tools_when: Optional[
+            Union[
+                List[components.StopServerToolsWhenCondition],
+                List[components.StopServerToolsWhenConditionTypedDict],
+            ]
+        ] = None,
         stream: Optional[bool] = False,
         temperature: OptionalNullable[float] = UNSET,
         text: Optional[
@@ -381,7 +426,9 @@ class Responses(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
+        :param x_open_router_metadata: Opt-in to surface routing metadata on the response under `openrouter_metadata`. Defaults to `disabled`. The legacy header `X-OpenRouter-Experimental-Metadata` is also accepted for backward compatibility.
         :param background:
+        :param cache_control: Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. Currently supported for Anthropic Claude models.
         :param frequency_penalty:
         :param image_config: Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/guides/overview/multimodal/image-generation for more details.
         :param include:
@@ -403,7 +450,8 @@ class Responses(BaseSDK):
         :param reasoning: Configuration for reasoning mode in the response
         :param safety_identifier:
         :param service_tier:
-        :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters.
+        :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow). When provided, OpenRouter uses it as the sticky routing key, routing all requests in the session to the same provider to maximize prompt cache hits. Also used for observability grouping. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters.
+        :param stop_server_tools_when: Stop conditions for the server-tool agent loop. Any condition firing halts the loop (OR logic). When set, this overrides `max_tool_calls`.
         :param stream:
         :param temperature:
         :param text: Text output configuration including format and verbosity
@@ -435,8 +483,12 @@ class Responses(BaseSDK):
             http_referer=http_referer,
             x_open_router_title=x_open_router_title,
             x_open_router_categories=x_open_router_categories,
+            x_open_router_metadata=x_open_router_metadata,
             responses_request=components.ResponsesRequest(
                 background=background,
+                cache_control=utils.get_pydantic_model(
+                    cache_control, Optional[components.AnthropicCacheControlDirective]
+                ),
                 frequency_penalty=frequency_penalty,
                 image_config=image_config,
                 include=include,
@@ -467,6 +519,10 @@ class Responses(BaseSDK):
                 safety_identifier=safety_identifier,
                 service_tier=service_tier,
                 session_id=session_id,
+                stop_server_tools_when=utils.get_pydantic_model(
+                    stop_server_tools_when,
+                    Optional[List[components.StopServerToolsWhenCondition]],
+                ),
                 stream=stream,
                 temperature=temperature,
                 text=utils.get_pydantic_model(
@@ -543,6 +599,7 @@ class Responses(BaseSDK):
                 "400",
                 "401",
                 "402",
+                "403",
                 "404",
                 "408",
                 "413",
@@ -570,7 +627,7 @@ class Responses(BaseSDK):
             return eventstreaming.EventStream(
                 http_res,
                 lambda raw: utils.unmarshal_json(
-                    raw, operations.CreateResponsesResponseBody
+                    raw, components.ResponsesStreamingResponse
                 ).data,
                 sentinel="[DONE]",
                 client_ref=self,
@@ -597,6 +654,12 @@ class Responses(BaseSDK):
             raise errors.PaymentRequiredResponseError(
                 response_data, http_res, http_res_text
             )
+        if utils.match_response(http_res, "403", "application/json"):
+            http_res_text = utils.stream_to_text(http_res)
+            response_data = unmarshal_json_response(
+                errors.ForbiddenResponseErrorData, http_res, http_res_text
+            )
+            raise errors.ForbiddenResponseError(response_data, http_res, http_res_text)
         if utils.match_response(http_res, "404", "application/json"):
             http_res_text = utils.stream_to_text(http_res)
             response_data = unmarshal_json_response(
@@ -696,7 +759,14 @@ class Responses(BaseSDK):
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
+        x_open_router_metadata: Optional[components.MetadataLevel] = None,
         background: OptionalNullable[bool] = UNSET,
+        cache_control: Optional[
+            Union[
+                components.AnthropicCacheControlDirective,
+                components.AnthropicCacheControlDirectiveTypedDict,
+            ]
+        ] = None,
         frequency_penalty: OptionalNullable[float] = UNSET,
         image_config: Optional[
             Union[
@@ -742,6 +812,12 @@ class Responses(BaseSDK):
         safety_identifier: OptionalNullable[str] = UNSET,
         service_tier: OptionalNullable[components.ResponsesRequestServiceTier] = "auto",
         session_id: Optional[str] = None,
+        stop_server_tools_when: Optional[
+            Union[
+                List[components.StopServerToolsWhenCondition],
+                List[components.StopServerToolsWhenConditionTypedDict],
+            ]
+        ] = None,
         stream: Union[Literal[False], None] = None,
         temperature: OptionalNullable[float] = UNSET,
         text: Optional[
@@ -783,7 +859,9 @@ class Responses(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
+        :param x_open_router_metadata: Opt-in to surface routing metadata on the response under `openrouter_metadata`. Defaults to `disabled`. The legacy header `X-OpenRouter-Experimental-Metadata` is also accepted for backward compatibility.
         :param background:
+        :param cache_control: Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. Currently supported for Anthropic Claude models.
         :param frequency_penalty:
         :param image_config: Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/guides/overview/multimodal/image-generation for more details.
         :param include:
@@ -805,7 +883,8 @@ class Responses(BaseSDK):
         :param reasoning: Configuration for reasoning mode in the response
         :param safety_identifier:
         :param service_tier:
-        :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters.
+        :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow). When provided, OpenRouter uses it as the sticky routing key, routing all requests in the session to the same provider to maximize prompt cache hits. Also used for observability grouping. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters.
+        :param stop_server_tools_when: Stop conditions for the server-tool agent loop. Any condition firing halts the loop (OR logic). When set, this overrides `max_tool_calls`.
         :param stream:
         :param temperature:
         :param text: Text output configuration including format and verbosity
@@ -831,7 +910,14 @@ class Responses(BaseSDK):
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
+        x_open_router_metadata: Optional[components.MetadataLevel] = None,
         background: OptionalNullable[bool] = UNSET,
+        cache_control: Optional[
+            Union[
+                components.AnthropicCacheControlDirective,
+                components.AnthropicCacheControlDirectiveTypedDict,
+            ]
+        ] = None,
         frequency_penalty: OptionalNullable[float] = UNSET,
         image_config: Optional[
             Union[
@@ -877,6 +963,12 @@ class Responses(BaseSDK):
         safety_identifier: OptionalNullable[str] = UNSET,
         service_tier: OptionalNullable[components.ResponsesRequestServiceTier] = "auto",
         session_id: Optional[str] = None,
+        stop_server_tools_when: Optional[
+            Union[
+                List[components.StopServerToolsWhenCondition],
+                List[components.StopServerToolsWhenConditionTypedDict],
+            ]
+        ] = None,
         stream: Literal[True],
         temperature: OptionalNullable[float] = UNSET,
         text: Optional[
@@ -918,7 +1010,9 @@ class Responses(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
+        :param x_open_router_metadata: Opt-in to surface routing metadata on the response under `openrouter_metadata`. Defaults to `disabled`. The legacy header `X-OpenRouter-Experimental-Metadata` is also accepted for backward compatibility.
         :param background:
+        :param cache_control: Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. Currently supported for Anthropic Claude models.
         :param frequency_penalty:
         :param image_config: Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/guides/overview/multimodal/image-generation for more details.
         :param include:
@@ -940,7 +1034,8 @@ class Responses(BaseSDK):
         :param reasoning: Configuration for reasoning mode in the response
         :param safety_identifier:
         :param service_tier:
-        :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters.
+        :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow). When provided, OpenRouter uses it as the sticky routing key, routing all requests in the session to the same provider to maximize prompt cache hits. Also used for observability grouping. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters.
+        :param stop_server_tools_when: Stop conditions for the server-tool agent loop. Any condition firing halts the loop (OR logic). When set, this overrides `max_tool_calls`.
         :param stream:
         :param temperature:
         :param text: Text output configuration including format and verbosity
@@ -965,7 +1060,14 @@ class Responses(BaseSDK):
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
+        x_open_router_metadata: Optional[components.MetadataLevel] = None,
         background: OptionalNullable[bool] = UNSET,
+        cache_control: Optional[
+            Union[
+                components.AnthropicCacheControlDirective,
+                components.AnthropicCacheControlDirectiveTypedDict,
+            ]
+        ] = None,
         frequency_penalty: OptionalNullable[float] = UNSET,
         image_config: Optional[
             Union[
@@ -1011,6 +1113,12 @@ class Responses(BaseSDK):
         safety_identifier: OptionalNullable[str] = UNSET,
         service_tier: OptionalNullable[components.ResponsesRequestServiceTier] = "auto",
         session_id: Optional[str] = None,
+        stop_server_tools_when: Optional[
+            Union[
+                List[components.StopServerToolsWhenCondition],
+                List[components.StopServerToolsWhenConditionTypedDict],
+            ]
+        ] = None,
         stream: Optional[bool] = False,
         temperature: OptionalNullable[float] = UNSET,
         text: Optional[
@@ -1052,7 +1160,9 @@ class Responses(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
+        :param x_open_router_metadata: Opt-in to surface routing metadata on the response under `openrouter_metadata`. Defaults to `disabled`. The legacy header `X-OpenRouter-Experimental-Metadata` is also accepted for backward compatibility.
         :param background:
+        :param cache_control: Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. Currently supported for Anthropic Claude models.
         :param frequency_penalty:
         :param image_config: Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/guides/overview/multimodal/image-generation for more details.
         :param include:
@@ -1074,7 +1184,8 @@ class Responses(BaseSDK):
         :param reasoning: Configuration for reasoning mode in the response
         :param safety_identifier:
         :param service_tier:
-        :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow) for observability. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters.
+        :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow). When provided, OpenRouter uses it as the sticky routing key, routing all requests in the session to the same provider to maximize prompt cache hits. Also used for observability grouping. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters.
+        :param stop_server_tools_when: Stop conditions for the server-tool agent loop. Any condition firing halts the loop (OR logic). When set, this overrides `max_tool_calls`.
         :param stream:
         :param temperature:
         :param text: Text output configuration including format and verbosity
@@ -1106,8 +1217,12 @@ class Responses(BaseSDK):
             http_referer=http_referer,
             x_open_router_title=x_open_router_title,
             x_open_router_categories=x_open_router_categories,
+            x_open_router_metadata=x_open_router_metadata,
             responses_request=components.ResponsesRequest(
                 background=background,
+                cache_control=utils.get_pydantic_model(
+                    cache_control, Optional[components.AnthropicCacheControlDirective]
+                ),
                 frequency_penalty=frequency_penalty,
                 image_config=image_config,
                 include=include,
@@ -1138,6 +1253,10 @@ class Responses(BaseSDK):
                 safety_identifier=safety_identifier,
                 service_tier=service_tier,
                 session_id=session_id,
+                stop_server_tools_when=utils.get_pydantic_model(
+                    stop_server_tools_when,
+                    Optional[List[components.StopServerToolsWhenCondition]],
+                ),
                 stream=stream,
                 temperature=temperature,
                 text=utils.get_pydantic_model(
@@ -1214,6 +1333,7 @@ class Responses(BaseSDK):
                 "400",
                 "401",
                 "402",
+                "403",
                 "404",
                 "408",
                 "413",
@@ -1241,7 +1361,7 @@ class Responses(BaseSDK):
             return eventstreaming.EventStreamAsync(
                 http_res,
                 lambda raw: utils.unmarshal_json(
-                    raw, operations.CreateResponsesResponseBody
+                    raw, components.ResponsesStreamingResponse
                 ).data,
                 sentinel="[DONE]",
                 client_ref=self,
@@ -1268,6 +1388,12 @@ class Responses(BaseSDK):
             raise errors.PaymentRequiredResponseError(
                 response_data, http_res, http_res_text
             )
+        if utils.match_response(http_res, "403", "application/json"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            response_data = unmarshal_json_response(
+                errors.ForbiddenResponseErrorData, http_res, http_res_text
+            )
+            raise errors.ForbiddenResponseError(response_data, http_res, http_res_text)
         if utils.match_response(http_res, "404", "application/json"):
             http_res_text = await utils.stream_to_text_async(http_res)
             response_data = unmarshal_json_response(

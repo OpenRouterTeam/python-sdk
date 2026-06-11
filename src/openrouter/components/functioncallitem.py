@@ -20,6 +20,8 @@ class FunctionCallItemTypedDict(TypedDict):
     id: str
     name: str
     type: FunctionCallItemType
+    namespace: NotRequired[str]
+    r"""Namespace qualifier for tools registered as part of a namespace tool group (e.g. an MCP server)"""
     status: NotRequired[ToolCallStatus]
 
 
@@ -35,6 +37,9 @@ class FunctionCallItem(BaseModel):
     name: str
 
     type: FunctionCallItemType
+
+    namespace: Optional[str] = None
+    r"""Namespace qualifier for tools registered as part of a namespace tool group (e.g. an MCP server)"""
 
     status: Annotated[
         Optional[ToolCallStatus], PlainValidator(validate_open_enum(False))

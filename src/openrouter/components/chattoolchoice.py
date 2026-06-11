@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 from .chatnamedtoolchoice import ChatNamedToolChoice, ChatNamedToolChoiceTypedDict
+from .chatservertoolchoice import ChatServerToolChoice, ChatServerToolChoiceTypedDict
 from typing import Literal, Union
 from typing_extensions import TypeAliasType
 
@@ -18,6 +19,7 @@ ChatToolChoiceNone = Literal["none",]
 ChatToolChoiceTypedDict = TypeAliasType(
     "ChatToolChoiceTypedDict",
     Union[
+        ChatServerToolChoiceTypedDict,
         ChatNamedToolChoiceTypedDict,
         ChatToolChoiceNone,
         ChatToolChoiceAuto,
@@ -30,6 +32,7 @@ r"""Tool choice configuration"""
 ChatToolChoice = TypeAliasType(
     "ChatToolChoice",
     Union[
+        ChatServerToolChoice,
         ChatNamedToolChoice,
         ChatToolChoiceNone,
         ChatToolChoiceAuto,

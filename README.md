@@ -189,7 +189,7 @@ with OpenRouter(
     api_key=os.getenv("OPENROUTER_API_KEY", ""),
 ) as open_router:
 
-    res = open_router.guardrails.list()
+    res = open_router.byok.list()
 
     while res is not None:
         # Handle items

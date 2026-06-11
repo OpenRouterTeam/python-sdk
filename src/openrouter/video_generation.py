@@ -22,6 +22,7 @@ class VideoGeneration(BaseSDK):
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
         aspect_ratio: Optional[components.AspectRatio] = None,
+        callback_url: Optional[str] = None,
         duration: Optional[int] = None,
         frame_images: Optional[
             Union[List[components.FrameImage], List[components.FrameImageTypedDict]]
@@ -29,12 +30,15 @@ class VideoGeneration(BaseSDK):
         generate_audio: Optional[bool] = None,
         input_references: Optional[
             Union[
-                List[components.ContentPartImage],
-                List[components.ContentPartImageTypedDict],
+                List[components.InputReference],
+                List[components.InputReferenceTypedDict],
             ]
         ] = None,
         provider: Optional[
-            Union[components.Provider, components.ProviderTypedDict]
+            Union[
+                components.VideoGenerationRequestProvider,
+                components.VideoGenerationRequestProviderTypedDict,
+            ]
         ] = None,
         resolution: Optional[components.Resolution] = None,
         seed: Optional[int] = None,
@@ -58,10 +62,11 @@ class VideoGeneration(BaseSDK):
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
         :param aspect_ratio: Aspect ratio of the generated video
+        :param callback_url: URL to receive a webhook notification when the video generation job completes. Overrides the workspace-level default callback URL if set. Must be HTTPS.
         :param duration: Duration of the generated video in seconds
         :param frame_images: Images to use as the first and/or last frame of the generated video. Each image must specify a frame_type of first_frame or last_frame.
         :param generate_audio: Whether to generate audio alongside the video. Defaults to the endpoint's generate_audio capability flag, false if not set.
-        :param input_references: Reference images to guide video generation
+        :param input_references: Reference assets to guide video generation. Accepts image, audio, and video references. Audio and video references are only honored by providers that support them (currently BytePlus Seedance 2.0); other providers use image references and ignore the rest.
         :param provider: Provider-specific passthrough configuration
         :param resolution: Resolution of the generated video
         :param seed: If specified, the generation will sample deterministically, such that repeated requests with the same seed and parameters should return the same result. Determinism is not guaranteed for all providers.
@@ -87,18 +92,19 @@ class VideoGeneration(BaseSDK):
             x_open_router_categories=x_open_router_categories,
             video_generation_request=components.VideoGenerationRequest(
                 aspect_ratio=aspect_ratio,
+                callback_url=callback_url,
                 duration=duration,
                 frame_images=utils.get_pydantic_model(
                     frame_images, Optional[List[components.FrameImage]]
                 ),
                 generate_audio=generate_audio,
                 input_references=utils.get_pydantic_model(
-                    input_references, Optional[List[components.ContentPartImage]]
+                    input_references, Optional[List[components.InputReference]]
                 ),
                 model=model,
                 prompt=prompt,
                 provider=utils.get_pydantic_model(
-                    provider, Optional[components.Provider]
+                    provider, Optional[components.VideoGenerationRequestProvider]
                 ),
                 resolution=resolution,
                 seed=seed,
@@ -217,6 +223,7 @@ class VideoGeneration(BaseSDK):
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
         aspect_ratio: Optional[components.AspectRatio] = None,
+        callback_url: Optional[str] = None,
         duration: Optional[int] = None,
         frame_images: Optional[
             Union[List[components.FrameImage], List[components.FrameImageTypedDict]]
@@ -224,12 +231,15 @@ class VideoGeneration(BaseSDK):
         generate_audio: Optional[bool] = None,
         input_references: Optional[
             Union[
-                List[components.ContentPartImage],
-                List[components.ContentPartImageTypedDict],
+                List[components.InputReference],
+                List[components.InputReferenceTypedDict],
             ]
         ] = None,
         provider: Optional[
-            Union[components.Provider, components.ProviderTypedDict]
+            Union[
+                components.VideoGenerationRequestProvider,
+                components.VideoGenerationRequestProviderTypedDict,
+            ]
         ] = None,
         resolution: Optional[components.Resolution] = None,
         seed: Optional[int] = None,
@@ -253,10 +263,11 @@ class VideoGeneration(BaseSDK):
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
         :param aspect_ratio: Aspect ratio of the generated video
+        :param callback_url: URL to receive a webhook notification when the video generation job completes. Overrides the workspace-level default callback URL if set. Must be HTTPS.
         :param duration: Duration of the generated video in seconds
         :param frame_images: Images to use as the first and/or last frame of the generated video. Each image must specify a frame_type of first_frame or last_frame.
         :param generate_audio: Whether to generate audio alongside the video. Defaults to the endpoint's generate_audio capability flag, false if not set.
-        :param input_references: Reference images to guide video generation
+        :param input_references: Reference assets to guide video generation. Accepts image, audio, and video references. Audio and video references are only honored by providers that support them (currently BytePlus Seedance 2.0); other providers use image references and ignore the rest.
         :param provider: Provider-specific passthrough configuration
         :param resolution: Resolution of the generated video
         :param seed: If specified, the generation will sample deterministically, such that repeated requests with the same seed and parameters should return the same result. Determinism is not guaranteed for all providers.
@@ -282,18 +293,19 @@ class VideoGeneration(BaseSDK):
             x_open_router_categories=x_open_router_categories,
             video_generation_request=components.VideoGenerationRequest(
                 aspect_ratio=aspect_ratio,
+                callback_url=callback_url,
                 duration=duration,
                 frame_images=utils.get_pydantic_model(
                     frame_images, Optional[List[components.FrameImage]]
                 ),
                 generate_audio=generate_audio,
                 input_references=utils.get_pydantic_model(
-                    input_references, Optional[List[components.ContentPartImage]]
+                    input_references, Optional[List[components.InputReference]]
                 ),
                 model=model,
                 prompt=prompt,
                 provider=utils.get_pydantic_model(
-                    provider, Optional[components.Provider]
+                    provider, Optional[components.VideoGenerationRequestProvider]
                 ),
                 resolution=resolution,
                 seed=seed,

@@ -3,6 +3,7 @@
 from __future__ import annotations
 from .chatchoice import ChatChoice, ChatChoiceTypedDict
 from .chatusage import ChatUsage, ChatUsageTypedDict
+from .openroutermetadata import OpenRouterMetadata, OpenRouterMetadataTypedDict
 from openrouter.types import (
     BaseModel,
     Nullable,
@@ -32,6 +33,7 @@ class ChatResultTypedDict(TypedDict):
     object: ChatResultObject
     system_fingerprint: Nullable[str]
     r"""System fingerprint"""
+    openrouter_metadata: NotRequired[OpenRouterMetadataTypedDict]
     service_tier: NotRequired[Nullable[str]]
     r"""The service tier used by the upstream provider for this request"""
     usage: NotRequired[ChatUsageTypedDict]
@@ -58,6 +60,8 @@ class ChatResult(BaseModel):
     system_fingerprint: Nullable[str]
     r"""System fingerprint"""
 
+    openrouter_metadata: Optional[OpenRouterMetadata] = None
+
     service_tier: OptionalNullable[str] = UNSET
     r"""The service tier used by the upstream provider for this request"""
 
@@ -66,7 +70,7 @@ class ChatResult(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["service_tier", "usage"]
+        optional_fields = ["openrouter_metadata", "service_tier", "usage"]
         nullable_fields = ["service_tier", "system_fingerprint"]
         null_default_fields = []
 

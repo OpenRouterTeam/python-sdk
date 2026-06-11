@@ -7,13 +7,14 @@ from openrouter.components import (
     unauthorizedresponseerrordata as components_unauthorizedresponseerrordata,
 )
 from openrouter.errors import OpenRouterError
-from openrouter.types import BaseModel, OptionalNullable, UNSET
-from typing import Optional
+from openrouter.types import BaseModel, Nullable, OptionalNullable, UNSET
+from typing import Any, Dict, Optional
 
 
 class UnauthorizedResponseErrorData(BaseModel):
     error: components_unauthorizedresponseerrordata.UnauthorizedResponseErrorData
     r"""Error data for UnauthorizedResponse"""
+    openrouter_metadata: OptionalNullable[Dict[str, Nullable[Any]]] = UNSET
     user_id: OptionalNullable[str] = UNSET
 
 

@@ -18,6 +18,8 @@ class OpenAIResponseFunctionToolCallTypedDict(TypedDict):
     name: str
     type: OpenAIResponseFunctionToolCallType
     id: NotRequired[str]
+    namespace: NotRequired[str]
+    r"""Namespace qualifier for tools registered as part of a namespace tool group (e.g. an MCP server)"""
     status: NotRequired[ToolCallStatus]
 
 
@@ -31,6 +33,9 @@ class OpenAIResponseFunctionToolCall(BaseModel):
     type: OpenAIResponseFunctionToolCallType
 
     id: Optional[str] = None
+
+    namespace: Optional[str] = None
+    r"""Namespace qualifier for tools registered as part of a namespace tool group (e.g. an MCP server)"""
 
     status: Annotated[
         Optional[ToolCallStatus], PlainValidator(validate_open_enum(False))

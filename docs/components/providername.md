@@ -10,6 +10,7 @@
 | `AION_LABS`         | AionLabs            |
 | `ALIBABA`           | Alibaba             |
 | `AMBIENT`           | Ambient             |
+| `BAIDU`             | Baidu               |
 | `AMAZON_BEDROCK`    | Amazon Bedrock      |
 | `AMAZON_NOVA`       | Amazon Nova         |
 | `ANTHROPIC`         | Anthropic           |
@@ -26,10 +27,14 @@
 | `CLARIFAI`          | Clarifai            |
 | `CLOUDFLARE`        | Cloudflare          |
 | `COHERE`            | Cohere              |
+| `CRUCIBLE`          | Crucible            |
 | `CRUSOE`            | Crusoe              |
+| `DARKBLOOM`         | Darkbloom           |
+| `DECART`            | Decart              |
 | `DEEP_INFRA`        | DeepInfra           |
 | `DEEP_SEEK`         | DeepSeek            |
 | `DEKA_LLM`          | DekaLLM             |
+| `DIGITAL_OCEAN`     | DigitalOcean        |
 | `FEATHERLESS`       | Featherless         |
 | `FIREWORKS`         | Fireworks           |
 | `FRIENDLI`          | Friendli            |
@@ -37,7 +42,6 @@
 | `GOOGLE`            | Google              |
 | `GOOGLE_AI_STUDIO`  | Google AI Studio    |
 | `GROQ`              | Groq                |
-| `HYPERBOLIC`        | Hyperbolic          |
 | `INCEPTION`         | Inception           |
 | `INCEPTRON`         | Inceptron           |
 | `INFERENCE_NET`     | InferenceNet        |
@@ -56,12 +60,15 @@
 | `MORPH`             | Morph               |
 | `N_COMPASS`         | NCompass            |
 | `NEBIUS`            | Nebius              |
+| `NEX_AGI`           | Nex AGI             |
 | `NEXT_BIT`          | NextBit             |
 | `NOVITA`            | Novita              |
 | `NVIDIA`            | Nvidia              |
 | `OPEN_AI`           | OpenAI              |
 | `OPEN_INFERENCE`    | OpenInference       |
 | `PARASAIL`          | Parasail            |
+| `POOLSIDE`          | Poolside            |
+| `PERCEPTRON`        | Perceptron          |
 | `PERPLEXITY`        | Perplexity          |
 | `PHALA`             | Phala               |
 | `RECRAFT`           | Recraft             |
@@ -78,6 +85,7 @@
 | `TOGETHER`          | Together            |
 | `UPSTAGE`           | Upstage             |
 | `VENICE`            | Venice              |
+| `WAFER`             | Wafer               |
 | `WAND_B`            | WandB               |
 | `XIAOMI`            | Xiaomi              |
 | `X_AI`              | xAI                 |
