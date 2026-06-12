@@ -92,7 +92,7 @@ r"""Optional credit limit reset interval. When set, the credit limit resets on t
 
 class CreateAuthKeysCodeRequestBodyTypedDict(TypedDict):
     callback_url: str
-    r"""The callback URL to redirect to after authorization. Note, only https URLs on ports 443 and 3000 are allowed."""
+    r"""The callback URL to redirect to after authorization. Supports https URLs and localhost/127.0.0.1 URLs on any port for local CLI tools."""
     code_challenge: NotRequired[str]
     r"""PKCE code challenge for enhanced security"""
     code_challenge_method: NotRequired[CreateAuthKeysCodeCodeChallengeMethod]
@@ -109,7 +109,7 @@ class CreateAuthKeysCodeRequestBodyTypedDict(TypedDict):
 
 class CreateAuthKeysCodeRequestBody(BaseModel):
     callback_url: str
-    r"""The callback URL to redirect to after authorization. Note, only https URLs on ports 443 and 3000 are allowed."""
+    r"""The callback URL to redirect to after authorization. Supports https URLs and localhost/127.0.0.1 URLs on any port for local CLI tools."""
 
     code_challenge: Optional[str] = None
     r"""PKCE code challenge for enhanced security"""

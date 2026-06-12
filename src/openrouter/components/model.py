@@ -3,6 +3,7 @@
 from __future__ import annotations
 from .defaultparameters import DefaultParameters, DefaultParametersTypedDict
 from .modelarchitecture import ModelArchitecture, ModelArchitectureTypedDict
+from .modelbenchmarks import ModelBenchmarks, ModelBenchmarksTypedDict
 from .modellinks import ModelLinks, ModelLinksTypedDict
 from .parameter import Parameter
 from .perrequestlimits import PerRequestLimits, PerRequestLimitsTypedDict
@@ -51,6 +52,8 @@ class ModelTypedDict(TypedDict):
     r"""List of supported voice identifiers for TTS models. Null for non-TTS models."""
     top_provider: TopProviderInfoTypedDict
     r"""Information about the top provider for this model"""
+    benchmarks: NotRequired[ModelBenchmarksTypedDict]
+    r"""Third-party benchmark rankings for this model. Omitted when no benchmark data is available."""
     description: NotRequired[str]
     r"""Description of the model"""
     expiration_date: NotRequired[Nullable[str]]
@@ -105,6 +108,9 @@ class Model(BaseModel):
     top_provider: TopProviderInfo
     r"""Information about the top provider for this model"""
 
+    benchmarks: Optional[ModelBenchmarks] = None
+    r"""Third-party benchmark rankings for this model. Omitted when no benchmark data is available."""
+
     description: Optional[str] = None
     r"""Description of the model"""
 
@@ -120,6 +126,7 @@ class Model(BaseModel):
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = [
+            "benchmarks",
             "description",
             "expiration_date",
             "hugging_face_id",

@@ -272,6 +272,13 @@ if TYPE_CHECKING:
         GetAppRankingsSort,
         Subcategory,
     )
+    from .getbenchmarksdesignarena import (
+        Arena,
+        GetBenchmarksDesignArenaGlobals,
+        GetBenchmarksDesignArenaGlobalsTypedDict,
+        GetBenchmarksDesignArenaRequest,
+        GetBenchmarksDesignArenaRequestTypedDict,
+    )
     from .getbyokkey import (
         GetBYOKKeyGlobals,
         GetBYOKKeyGlobalsTypedDict,
@@ -321,6 +328,12 @@ if TYPE_CHECKING:
         GetKeyRequestTypedDict,
         GetKeyResponse,
         GetKeyResponseTypedDict,
+    )
+    from .getmodel import (
+        GetModelGlobals,
+        GetModelGlobalsTypedDict,
+        GetModelRequest,
+        GetModelRequestTypedDict,
     )
     from .getmodels import (
         GetModelsCategory,
@@ -616,6 +629,7 @@ if TYPE_CHECKING:
     )
 
 __all__ = [
+    "Arena",
     "BulkAddWorkspaceMembersGlobals",
     "BulkAddWorkspaceMembersGlobalsTypedDict",
     "BulkAddWorkspaceMembersRequest",
@@ -807,6 +821,10 @@ __all__ = [
     "GetBYOKKeyGlobalsTypedDict",
     "GetBYOKKeyRequest",
     "GetBYOKKeyRequestTypedDict",
+    "GetBenchmarksDesignArenaGlobals",
+    "GetBenchmarksDesignArenaGlobalsTypedDict",
+    "GetBenchmarksDesignArenaRequest",
+    "GetBenchmarksDesignArenaRequestTypedDict",
     "GetCreditsData",
     "GetCreditsDataTypedDict",
     "GetCreditsGlobals",
@@ -839,6 +857,10 @@ __all__ = [
     "GetKeyRequestTypedDict",
     "GetKeyResponse",
     "GetKeyResponseTypedDict",
+    "GetModelGlobals",
+    "GetModelGlobalsTypedDict",
+    "GetModelRequest",
+    "GetModelRequestTypedDict",
     "GetModelsCategory",
     "GetModelsGlobals",
     "GetModelsGlobalsTypedDict",
@@ -1293,6 +1315,11 @@ _dynamic_imports: dict[str, str] = {
     "GetAppRankingsResponseTypedDict": ".getapprankings",
     "GetAppRankingsSort": ".getapprankings",
     "Subcategory": ".getapprankings",
+    "Arena": ".getbenchmarksdesignarena",
+    "GetBenchmarksDesignArenaGlobals": ".getbenchmarksdesignarena",
+    "GetBenchmarksDesignArenaGlobalsTypedDict": ".getbenchmarksdesignarena",
+    "GetBenchmarksDesignArenaRequest": ".getbenchmarksdesignarena",
+    "GetBenchmarksDesignArenaRequestTypedDict": ".getbenchmarksdesignarena",
     "GetBYOKKeyGlobals": ".getbyokkey",
     "GetBYOKKeyGlobalsTypedDict": ".getbyokkey",
     "GetBYOKKeyRequest": ".getbyokkey",
@@ -1331,6 +1358,10 @@ _dynamic_imports: dict[str, str] = {
     "GetKeyRequestTypedDict": ".getkey",
     "GetKeyResponse": ".getkey",
     "GetKeyResponseTypedDict": ".getkey",
+    "GetModelGlobals": ".getmodel",
+    "GetModelGlobalsTypedDict": ".getmodel",
+    "GetModelRequest": ".getmodel",
+    "GetModelRequestTypedDict": ".getmodel",
     "GetModelsCategory": ".getmodels",
     "GetModelsGlobals": ".getmodels",
     "GetModelsGlobalsTypedDict": ".getmodels",

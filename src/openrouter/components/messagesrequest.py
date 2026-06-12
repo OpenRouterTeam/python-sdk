@@ -50,6 +50,7 @@ from .imagegenerationservertool_openrouter import (
     ImageGenerationServerToolOpenRouter,
     ImageGenerationServerToolOpenRouterTypedDict,
 )
+from .messagesfallbackparam import MessagesFallbackParam, MessagesFallbackParamTypedDict
 from .messagesmessageparam import MessagesMessageParam, MessagesMessageParamTypedDict
 from .messagesoutputconfig import MessagesOutputConfig, MessagesOutputConfigTypedDict
 from .moderationplugin import ModerationPlugin, ModerationPluginTypedDict
@@ -1046,6 +1047,8 @@ class MessagesRequestTypedDict(TypedDict):
     cache_control: NotRequired[AnthropicCacheControlDirectiveTypedDict]
     r"""Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. Currently supported for Anthropic Claude models."""
     context_management: NotRequired[Nullable[ContextManagementTypedDict]]
+    fallbacks: NotRequired[Nullable[List[MessagesFallbackParamTypedDict]]]
+    r"""Fallback models to try if the primary model fails or refuses, in order. Handled by OpenRouter multi-model routing rather than Anthropic server-side fallbacks; cannot be combined with `models`. Each entry accepts only `model`. Maximum of 3 entries."""
     max_tokens: NotRequired[int]
     metadata: NotRequired[MetadataTypedDict]
     models: NotRequired[List[str]]
@@ -1087,6 +1090,9 @@ class MessagesRequest(BaseModel):
     r"""Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. Currently supported for Anthropic Claude models."""
 
     context_management: OptionalNullable[ContextManagement] = UNSET
+
+    fallbacks: OptionalNullable[List[MessagesFallbackParam]] = UNSET
+    r"""Fallback models to try if the primary model fails or refuses, in order. Handled by OpenRouter multi-model routing rather than Anthropic server-side fallbacks; cannot be combined with `models`. Each entry accepts only `model`. Maximum of 3 entries."""
 
     max_tokens: Optional[int] = None
 
@@ -1144,6 +1150,7 @@ class MessagesRequest(BaseModel):
         optional_fields = [
             "cache_control",
             "context_management",
+            "fallbacks",
             "max_tokens",
             "metadata",
             "models",
@@ -1166,7 +1173,13 @@ class MessagesRequest(BaseModel):
             "trace",
             "user",
         ]
-        nullable_fields = ["context_management", "messages", "provider", "speed"]
+        nullable_fields = [
+            "context_management",
+            "fallbacks",
+            "messages",
+            "provider",
+            "speed",
+        ]
         null_default_fields = []
 
         serialized = handler(self)

@@ -170,6 +170,20 @@ class ChatRequestReasoning(BaseModel):
         return m
 
 
+ChatRequestReasoningEffort = Union[
+    Literal[
+        "xhigh",
+        "high",
+        "medium",
+        "low",
+        "minimal",
+        "none",
+    ],
+    UnrecognizedStr,
+]
+r"""Shorthand for setting reasoning effort. Equivalent to setting reasoning.effort. Cannot be used simultaneously with reasoning.effort if they differ."""
+
+
 ResponseFormatTypedDict = TypeAliasType(
     "ResponseFormatTypedDict",
     Union[
@@ -240,6 +254,8 @@ class ChatRequestTypedDict(TypedDict):
     r"""Maximum tokens (deprecated, use max_completion_tokens). Note: some providers enforce a minimum of 16."""
     metadata: NotRequired[Dict[str, str]]
     r"""Key-value pairs for additional object information (max 16 pairs, 64 char keys, 512 char values)"""
+    min_p: NotRequired[Nullable[float]]
+    r"""Minimum probability threshold relative to the most likely token. Tokens with probability below min_p * (probability of top token) are filtered out. Not all providers support this parameter."""
     modalities: NotRequired[List[Modality]]
     r"""Output modalities for the response. Supported values are \"text\", \"image\", and \"audio\"."""
     model: NotRequired[str]
@@ -256,6 +272,10 @@ class ChatRequestTypedDict(TypedDict):
     r"""When multiple model providers are available, optionally indicate your routing preference."""
     reasoning: NotRequired[ChatRequestReasoningTypedDict]
     r"""Configuration options for reasoning models"""
+    reasoning_effort: NotRequired[Nullable[ChatRequestReasoningEffort]]
+    r"""Shorthand for setting reasoning effort. Equivalent to setting reasoning.effort. Cannot be used simultaneously with reasoning.effort if they differ."""
+    repetition_penalty: NotRequired[Nullable[float]]
+    r"""Penalizes tokens based on how much they have already appeared in the text. A value of 1.0 means no penalty. Values above 1.0 penalize repeated tokens more strongly. Not all providers support this parameter."""
     response_format: NotRequired[ResponseFormatTypedDict]
     r"""Response format configuration"""
     seed: NotRequired[Nullable[int]]
@@ -278,6 +298,10 @@ class ChatRequestTypedDict(TypedDict):
     r"""Tool choice configuration"""
     tools: NotRequired[List[ChatFunctionToolTypedDict]]
     r"""Available tools for function calling"""
+    top_a: NotRequired[Nullable[float]]
+    r"""Consider only tokens with \"sufficiently high\" probabilities based on the probability of the most likely token. Not all providers support this parameter."""
+    top_k: NotRequired[Nullable[int]]
+    r"""Limits the model to choose from the top K most likely tokens at each step. A value of 1 means the model will always pick the most likely next token. Not all providers support this parameter."""
     top_logprobs: NotRequired[Nullable[int]]
     r"""Number of top log probabilities to return (0-20)"""
     top_p: NotRequired[Nullable[float]]
@@ -321,6 +345,9 @@ class ChatRequest(BaseModel):
     metadata: Optional[Dict[str, str]] = None
     r"""Key-value pairs for additional object information (max 16 pairs, 64 char keys, 512 char values)"""
 
+    min_p: OptionalNullable[float] = UNSET
+    r"""Minimum probability threshold relative to the most likely token. Tokens with probability below min_p * (probability of top token) are filtered out. Not all providers support this parameter."""
+
     modalities: Optional[
         List[Annotated[Modality, PlainValidator(validate_open_enum(False))]]
     ] = None
@@ -346,6 +373,15 @@ class ChatRequest(BaseModel):
 
     reasoning: Optional[ChatRequestReasoning] = None
     r"""Configuration options for reasoning models"""
+
+    reasoning_effort: Annotated[
+        OptionalNullable[ChatRequestReasoningEffort],
+        PlainValidator(validate_open_enum(False)),
+    ] = UNSET
+    r"""Shorthand for setting reasoning effort. Equivalent to setting reasoning.effort. Cannot be used simultaneously with reasoning.effort if they differ."""
+
+    repetition_penalty: OptionalNullable[float] = UNSET
+    r"""Penalizes tokens based on how much they have already appeared in the text. A value of 1.0 means no penalty. Values above 1.0 penalize repeated tokens more strongly. Not all providers support this parameter."""
 
     response_format: Optional[ResponseFormat] = None
     r"""Response format configuration"""
@@ -383,6 +419,12 @@ class ChatRequest(BaseModel):
     tools: Optional[List[ChatFunctionTool]] = None
     r"""Available tools for function calling"""
 
+    top_a: OptionalNullable[float] = UNSET
+    r"""Consider only tokens with \"sufficiently high\" probabilities based on the probability of the most likely token. Not all providers support this parameter."""
+
+    top_k: OptionalNullable[int] = UNSET
+    r"""Limits the model to choose from the top K most likely tokens at each step. A value of 1 means the model will always pick the most likely next token. Not all providers support this parameter."""
+
     top_logprobs: OptionalNullable[int] = UNSET
     r"""Number of top log probabilities to return (0-20)"""
 
@@ -407,6 +449,7 @@ class ChatRequest(BaseModel):
             "max_completion_tokens",
             "max_tokens",
             "metadata",
+            "min_p",
             "modalities",
             "model",
             "models",
@@ -415,6 +458,8 @@ class ChatRequest(BaseModel):
             "presence_penalty",
             "provider",
             "reasoning",
+            "reasoning_effort",
+            "repetition_penalty",
             "response_format",
             "seed",
             "service_tier",
@@ -426,6 +471,8 @@ class ChatRequest(BaseModel):
             "temperature",
             "tool_choice",
             "tools",
+            "top_a",
+            "top_k",
             "top_logprobs",
             "top_p",
             "trace",
@@ -437,14 +484,19 @@ class ChatRequest(BaseModel):
             "logprobs",
             "max_completion_tokens",
             "max_tokens",
+            "min_p",
             "parallel_tool_calls",
             "presence_penalty",
             "provider",
+            "reasoning_effort",
+            "repetition_penalty",
             "seed",
             "service_tier",
             "stop",
             "stream_options",
             "temperature",
+            "top_a",
+            "top_k",
             "top_logprobs",
             "top_p",
         ]
