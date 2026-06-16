@@ -1,4 +1,4 @@
-# OpenRouter SDK (Beta)
+# OpenRouter SDK
 
 The [OpenRouter SDK](https://openrouter.ai/docs/sdks/python) is a Python toolkit designed to help you build AI-powered features and solutions. Giving you easy access to 400+ models across providers in an easy and type-safe way.
 
@@ -277,9 +277,3 @@ To run the test suite, you'll need to set up your environment with an OpenRouter
    ```bash
    pytest
    ```
-
-## Maturity
-
-This SDK is in beta, and there may be breaking changes between versions without a major version update. Therefore, we recommend pinning usage
-to a specific package version. This way, you can install the same version each time without breaking changes unless you are intentionally
-looking for the latest version. 
