@@ -30,7 +30,7 @@ class AdvisorServerToolConfigTypedDict(TypedDict):
     temperature: NotRequired[float]
     r"""Sampling temperature forwarded to the advisor call. When omitted, the provider's default applies."""
     tools: NotRequired[List[AdvisorNestedToolTypedDict]]
-    r"""Tools the advisor sub-agent may use while forming its advice. The advisor runs as an agentic sub-agent over these tools, then returns its text. Must not include the advisor tool itself."""
+    r"""Tools the advisor sub-agent may use while forming its advice. The advisor runs as an agentic sub-agent over these tools, then returns its text. Only OpenRouter server tools are supported — function tools are rejected — and the list must not include the advisor tool itself."""
 
 
 class AdvisorServerToolConfig(BaseModel):
@@ -64,4 +64,4 @@ class AdvisorServerToolConfig(BaseModel):
     r"""Sampling temperature forwarded to the advisor call. When omitted, the provider's default applies."""
 
     tools: Optional[List[AdvisorNestedTool]] = None
-    r"""Tools the advisor sub-agent may use while forming its advice. The advisor runs as an agentic sub-agent over these tools, then returns its text. Must not include the advisor tool itself."""
+    r"""Tools the advisor sub-agent may use while forming its advice. The advisor runs as an agentic sub-agent over these tools, then returns its text. Only OpenRouter server tools are supported — function tools are rejected — and the list must not include the advisor tool itself."""

@@ -9,6 +9,10 @@ from .anthropiccachecontroldirective import (
     AnthropicCacheControlDirective,
     AnthropicCacheControlDirectiveTypedDict,
 )
+from .anthropicfiledocumentsource import (
+    AnthropicFileDocumentSource,
+    AnthropicFileDocumentSourceTypedDict,
+)
 from .anthropicimageblockparam import (
     AnthropicImageBlockParam,
     AnthropicImageBlockParamTypedDict,
@@ -89,6 +93,7 @@ AnthropicDocumentBlockParamSourceUnionTypedDict = TypeAliasType(
     Union[
         SourceContentTypedDict,
         AnthropicURLPdfSourceTypedDict,
+        AnthropicFileDocumentSourceTypedDict,
         AnthropicBase64PdfSourceTypedDict,
         AnthropicPlainTextSourceTypedDict,
     ],
@@ -101,6 +106,7 @@ AnthropicDocumentBlockParamSourceUnion = Annotated[
         Annotated[AnthropicPlainTextSource, Tag("text")],
         Annotated[SourceContent, Tag("content")],
         Annotated[AnthropicURLPdfSource, Tag("url")],
+        Annotated[AnthropicFileDocumentSource, Tag("file")],
     ],
     Discriminator(lambda m: get_discriminator(m, "type", "type")),
 ]

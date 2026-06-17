@@ -25,6 +25,7 @@ if TYPE_CHECKING:
     from openrouter.datasets import Datasets
     from openrouter.embeddings import Embeddings
     from openrouter.endpoints import Endpoints
+    from openrouter.files import Files
     from openrouter.generations import Generations
     from openrouter.guardrails import Guardrails
     from openrouter.models_ import Models
@@ -65,6 +66,8 @@ class OpenRouter(BaseSDK):
     r"""Text embedding endpoints"""
     endpoints: "Endpoints"
     r"""Endpoint information"""
+    files: "Files"
+    r"""Files endpoints"""
     generations: "Generations"
     r"""Generation history endpoints"""
     guardrails: "Guardrails"
@@ -99,6 +102,7 @@ class OpenRouter(BaseSDK):
         "datasets": ("openrouter.datasets", "Datasets"),
         "embeddings": ("openrouter.embeddings", "Embeddings"),
         "endpoints": ("openrouter.endpoints", "Endpoints"),
+        "files": ("openrouter.files", "Files"),
         "generations": ("openrouter.generations", "Generations"),
         "guardrails": ("openrouter.guardrails", "Guardrails"),
         "api_keys": ("openrouter.api_keys", "APIKeys"),

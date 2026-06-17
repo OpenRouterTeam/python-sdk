@@ -92,7 +92,7 @@ r"""Optional credit limit reset interval. When set, the credit limit resets on t
 
 class CreateAuthKeysCodeRequestBodyTypedDict(TypedDict):
     callback_url: str
-    r"""The callback URL to redirect to after authorization. Note, only https URLs on ports 443 and 3000 are allowed."""
+    r"""The callback URL to redirect to after authorization. Supports https URLs and localhost/127.0.0.1 URLs on any port for local CLI tools."""
     code_challenge: NotRequired[str]
     r"""PKCE code challenge for enhanced security"""
     code_challenge_method: NotRequired[CreateAuthKeysCodeCodeChallengeMethod]
@@ -105,11 +105,13 @@ class CreateAuthKeysCodeRequestBodyTypedDict(TypedDict):
     r"""Credit limit for the API key to be created"""
     usage_limit_type: NotRequired[UsageLimitType]
     r"""Optional credit limit reset interval. When set, the credit limit resets on this interval."""
+    workspace_id: NotRequired[str]
+    r"""Optional workspace ID to associate the API key with"""
 
 
 class CreateAuthKeysCodeRequestBody(BaseModel):
     callback_url: str
-    r"""The callback URL to redirect to after authorization. Note, only https URLs on ports 443 and 3000 are allowed."""
+    r"""The callback URL to redirect to after authorization. Supports https URLs and localhost/127.0.0.1 URLs on any port for local CLI tools."""
 
     code_challenge: Optional[str] = None
     r"""PKCE code challenge for enhanced security"""
@@ -134,6 +136,9 @@ class CreateAuthKeysCodeRequestBody(BaseModel):
     ] = None
     r"""Optional credit limit reset interval. When set, the credit limit resets on this interval."""
 
+    workspace_id: Optional[str] = None
+    r"""Optional workspace ID to associate the API key with"""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = [
@@ -143,6 +148,7 @@ class CreateAuthKeysCodeRequestBody(BaseModel):
             "key_label",
             "limit",
             "usage_limit_type",
+            "workspace_id",
         ]
         nullable_fields = ["expires_at"]
         null_default_fields = []

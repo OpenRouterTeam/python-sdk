@@ -84,6 +84,10 @@ from .stopservertoolswhencondition import (
     StopServerToolsWhenConditionTypedDict,
 )
 from .storedprompttemplate import StoredPromptTemplate, StoredPromptTemplateTypedDict
+from .subagentservertool_openrouter import (
+    SubagentServerToolOpenRouter,
+    SubagentServerToolOpenRouterTypedDict,
+)
 from .textextendedconfig import TextExtendedConfig, TextExtendedConfigTypedDict
 from .traceconfig import TraceConfig, TraceConfigTypedDict
 from .webfetchplugin import WebFetchPlugin, WebFetchPluginTypedDict
@@ -217,16 +221,17 @@ ResponsesRequestToolUnionTypedDict = TypeAliasType(
         CodexLocalShellToolTypedDict,
         ApplyPatchServerToolTypedDict,
         ShellServerToolTypedDict,
+        ImageGenerationServerToolOpenRouterTypedDict,
         ChatSearchModelsServerToolTypedDict,
-        WebFetchServerToolTypedDict,
         ShellServerToolOpenRouterTypedDict,
         BashServerToolTypedDict,
         CodeInterpreterServerToolTypedDict,
         ApplyPatchServerToolOpenRouterTypedDict,
         WebSearchServerToolOpenRouterTypedDict,
-        ImageGenerationServerToolOpenRouterTypedDict,
+        WebFetchServerToolTypedDict,
         FusionServerToolOpenRouterTypedDict,
         DatetimeServerToolTypedDict,
+        SubagentServerToolOpenRouterTypedDict,
         AdvisorServerToolOpenRouterTypedDict,
         CustomToolTypedDict,
         ComputerUseServerToolTypedDict,
@@ -234,8 +239,8 @@ ResponsesRequestToolUnionTypedDict = TypeAliasType(
         FileSearchServerToolTypedDict,
         PreviewWebSearchServerToolTypedDict,
         Preview20250311WebSearchServerToolTypedDict,
-        LegacyWebSearchServerToolTypedDict,
         WebSearchServerToolTypedDict,
+        LegacyWebSearchServerToolTypedDict,
         McpServerToolTypedDict,
         ImageGenerationServerToolTypedDict,
     ],
@@ -261,6 +266,7 @@ ResponsesRequestToolUnion = Annotated[
         Annotated[ApplyPatchServerTool, Tag("apply_patch")],
         Annotated[CustomTool, Tag("custom")],
         Annotated[AdvisorServerToolOpenRouter, Tag("openrouter:advisor")],
+        Annotated[SubagentServerToolOpenRouter, Tag("openrouter:subagent")],
         Annotated[DatetimeServerTool, Tag("openrouter:datetime")],
         Annotated[FusionServerToolOpenRouter, Tag("openrouter:fusion")],
         Annotated[

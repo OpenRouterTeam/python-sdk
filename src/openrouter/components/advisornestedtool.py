@@ -9,15 +9,14 @@ from typing_extensions import NotRequired, TypedDict
 
 
 class AdvisorNestedToolTypedDict(TypedDict):
-    r"""A tool made available to the advisor sub-agent. Accepts function tools and OpenRouter server tools (e.g. openrouter:web_search). The advisor tool may not list itself."""
+    r"""A tool made available to the advisor sub-agent. Only OpenRouter server tools (e.g. openrouter:web_search) are supported; function tools are rejected because the advisor has no way to execute them. The advisor tool may not list itself."""
 
     type: str
-    function: NotRequired[Dict[str, Nullable[Any]]]
     parameters: NotRequired[Dict[str, Nullable[Any]]]
 
 
 class AdvisorNestedTool(BaseModel):
-    r"""A tool made available to the advisor sub-agent. Accepts function tools and OpenRouter server tools (e.g. openrouter:web_search). The advisor tool may not list itself."""
+    r"""A tool made available to the advisor sub-agent. Only OpenRouter server tools (e.g. openrouter:web_search) are supported; function tools are rejected because the advisor has no way to execute them. The advisor tool may not list itself."""
 
     model_config = ConfigDict(
         populate_by_name=True, arbitrary_types_allowed=True, extra="allow"
@@ -25,8 +24,6 @@ class AdvisorNestedTool(BaseModel):
     __pydantic_extra__: Dict[str, Nullable[Any]] = pydantic.Field(init=False)
 
     type: str
-
-    function: Optional[Dict[str, Nullable[Any]]] = None
 
     parameters: Optional[Dict[str, Nullable[Any]]] = None
 

@@ -70,31 +70,31 @@ Value2 = TypeAliasType("Value2", Union[str, float])
 Value1TypedDict = TypeAliasType(
     "Value1TypedDict", Union[str, float, List[Value2TypedDict]]
 )
-r"""Filter value (scalar or array depending on operator)"""
+r"""Filter value (scalar or array depending on operator). Several dimensions are enriched in responses (returned as human-readable labels), but filters must use the underlying ID: `api_key_id` — numeric ID (from generation metadata) or key hash (64-char hex from GET /api/v1/keys, resolved server-side); `user` — Clerk user ID (e.g. \"user_abc123\"), not the display name; `workspace` — workspace UUID, not the workspace name; `app` — numeric app ID, not the app title; `model` — permaslug (e.g. \"openai/gpt-4o\"), not the display name. Other dimensions (provider, origin, country, etc.) are not enriched and accept the value as returned."""
 
 
 Value1 = TypeAliasType("Value1", Union[str, float, List[Value2]])
-r"""Filter value (scalar or array depending on operator)"""
+r"""Filter value (scalar or array depending on operator). Several dimensions are enriched in responses (returned as human-readable labels), but filters must use the underlying ID: `api_key_id` — numeric ID (from generation metadata) or key hash (64-char hex from GET /api/v1/keys, resolved server-side); `user` — Clerk user ID (e.g. \"user_abc123\"), not the display name; `workspace` — workspace UUID, not the workspace name; `app` — numeric app ID, not the app title; `model` — permaslug (e.g. \"openai/gpt-4o\"), not the display name. Other dimensions (provider, origin, country, etc.) are not enriched and accept the value as returned."""
 
 
 class FilterTypedDict(TypedDict):
     field: str
-    r"""Dimension to filter on"""
+    r"""Dimension to filter on. Use the /meta endpoint for available dimensions."""
     operator: str
     r"""Filter operator"""
     value: Value1TypedDict
-    r"""Filter value (scalar or array depending on operator)"""
+    r"""Filter value (scalar or array depending on operator). Several dimensions are enriched in responses (returned as human-readable labels), but filters must use the underlying ID: `api_key_id` — numeric ID (from generation metadata) or key hash (64-char hex from GET /api/v1/keys, resolved server-side); `user` — Clerk user ID (e.g. \"user_abc123\"), not the display name; `workspace` — workspace UUID, not the workspace name; `app` — numeric app ID, not the app title; `model` — permaslug (e.g. \"openai/gpt-4o\"), not the display name. Other dimensions (provider, origin, country, etc.) are not enriched and accept the value as returned."""
 
 
 class Filter(BaseModel):
     field: str
-    r"""Dimension to filter on"""
+    r"""Dimension to filter on. Use the /meta endpoint for available dimensions."""
 
     operator: str
     r"""Filter operator"""
 
     value: Value1
-    r"""Filter value (scalar or array depending on operator)"""
+    r"""Filter value (scalar or array depending on operator). Several dimensions are enriched in responses (returned as human-readable labels), but filters must use the underlying ID: `api_key_id` — numeric ID (from generation metadata) or key hash (64-char hex from GET /api/v1/keys, resolved server-side); `user` — Clerk user ID (e.g. \"user_abc123\"), not the display name; `workspace` — workspace UUID, not the workspace name; `app` — numeric app ID, not the app title; `model` — permaslug (e.g. \"openai/gpt-4o\"), not the display name. Other dimensions (provider, origin, country, etc.) are not enriched and accept the value as returned."""
 
 
 Direction = Union[
@@ -137,7 +137,7 @@ class QueryAnalyticsRequestBodyTypedDict(TypedDict):
     granularity: NotRequired[str]
     r"""Time granularity"""
     group_limit: NotRequired[int]
-    r"""Maximum rows per distinct combination of dimensions (ClickHouse LIMIT n BY). When omitted on time-series queries (granularity + dimensions), auto-computed to avoid truncating time windows. Explicit values override the default and may truncate time buckets if set lower than the number of buckets in the range. Ignored when no dimensions are specified."""
+    r"""Maximum rows per distinct combination of dimensions. When omitted on time-series queries (granularity + dimensions), auto-computed to avoid truncating time windows. Explicit values override the default and may truncate time buckets if set lower than the number of buckets in the range. Ignored when no dimensions are specified."""
     limit: NotRequired[int]
     r"""Maximum total rows returned. Defaults to 1000. On time-series queries with dimensions and no explicit group_limit, the server may raise this to accommodate the expected number of unique time-bucket/dimension combinations."""
     order_by: NotRequired[OrderByTypedDict]
@@ -155,7 +155,7 @@ class QueryAnalyticsRequestBody(BaseModel):
     r"""Time granularity"""
 
     group_limit: Optional[int] = None
-    r"""Maximum rows per distinct combination of dimensions (ClickHouse LIMIT n BY). When omitted on time-series queries (granularity + dimensions), auto-computed to avoid truncating time windows. Explicit values override the default and may truncate time buckets if set lower than the number of buckets in the range. Ignored when no dimensions are specified."""
+    r"""Maximum rows per distinct combination of dimensions. When omitted on time-series queries (granularity + dimensions), auto-computed to avoid truncating time windows. Explicit values override the default and may truncate time buckets if set lower than the number of buckets in the range. Ignored when no dimensions are specified."""
 
     limit: Optional[int] = None
     r"""Maximum total rows returned. Defaults to 1000. On time-series queries with dimensions and no explicit group_limit, the server may raise this to accommodate the expected number of unique time-bucket/dimension combinations."""
@@ -243,6 +243,8 @@ class QueryAnalyticsData2TypedDict(TypedDict):
     data: List[QueryAnalyticsData1TypedDict]
     metadata: MetadataTypedDict
     cached_at: NotRequired[float]
+    warnings: NotRequired[List[str]]
+    r"""Warnings about filter resolution issues (e.g. unresolvable api_key_id hashes). The query still runs normally; these inform the caller that some filter values could not be resolved."""
 
 
 class QueryAnalyticsData2(BaseModel):
@@ -251,6 +253,9 @@ class QueryAnalyticsData2(BaseModel):
     metadata: Metadata
 
     cached_at: Annotated[Optional[float], pydantic.Field(alias="cachedAt")] = None
+
+    warnings: Optional[List[str]] = None
+    r"""Warnings about filter resolution issues (e.g. unresolvable api_key_id hashes). The query still runs normally; these inform the caller that some filter values could not be resolved."""
 
 
 class QueryAnalyticsResponseTypedDict(TypedDict):

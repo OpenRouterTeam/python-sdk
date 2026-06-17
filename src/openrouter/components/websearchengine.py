@@ -11,6 +11,7 @@ WebSearchEngine = Union[
         "exa",
         "firecrawl",
         "parallel",
+        "perplexity",
     ],
     UnrecognizedStr,
 ]

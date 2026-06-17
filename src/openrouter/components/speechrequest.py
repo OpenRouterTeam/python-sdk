@@ -13,14 +13,14 @@ class SpeechRequestProviderTypedDict(TypedDict):
     r"""Provider-specific passthrough configuration"""
 
     options: NotRequired[ProviderOptionsTypedDict]
-    r"""Provider-specific options keyed by provider slug. The options for the matched provider are spread into the upstream request body."""
+    r"""Provider-specific options keyed by provider slug. Only options for the matched provider are forwarded; the rest are ignored. Unrecognized keys are silently dropped."""
 
 
 class SpeechRequestProvider(BaseModel):
     r"""Provider-specific passthrough configuration"""
 
     options: Optional[ProviderOptions] = None
-    r"""Provider-specific options keyed by provider slug. The options for the matched provider are spread into the upstream request body."""
+    r"""Provider-specific options keyed by provider slug. Only options for the matched provider are forwarded; the rest are ignored. Unrecognized keys are silently dropped."""
 
 
 ResponseFormatEnum = Union[
