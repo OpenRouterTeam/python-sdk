@@ -27,10 +27,10 @@ class WebSearchServerToolTypedDict(TypedDict):
 
     type: WebSearchServerToolType
     engine: NotRequired[WebSearchEngineEnum]
-    r"""Which search engine to use. \"auto\" (default) uses native if the provider supports it, otherwise Exa. \"native\" forces the provider's built-in search. \"exa\" forces the Exa search API. \"firecrawl\" uses Firecrawl (requires BYOK). \"parallel\" uses the Parallel search API."""
+    r"""Which search engine to use. \"auto\" (default) uses native if the provider supports it, otherwise Exa. \"native\" forces the provider's built-in search. \"exa\" forces the Exa search API. \"firecrawl\" uses Firecrawl (requires BYOK). \"parallel\" uses the Parallel search API. \"perplexity\" uses the Perplexity Search API (raw ranked results)."""
     filters: NotRequired[Nullable[WebSearchDomainFilterTypedDict]]
     max_results: NotRequired[int]
-    r"""Maximum number of search results to return per search call. Defaults to 5. Applies to Exa, Firecrawl, and Parallel engines; ignored with native provider search."""
+    r"""Maximum number of search results to return per search call. Defaults to 5. Applies to Exa, Firecrawl, Parallel, and Perplexity engines; ignored with native provider search. Perplexity supports a maximum of 20; values above 20 are clamped."""
     search_context_size: NotRequired[SearchContextSizeEnum]
     r"""Size of the search context for web search tools"""
     user_location: NotRequired[Nullable[WebSearchUserLocationTypedDict]]
@@ -45,12 +45,12 @@ class WebSearchServerTool(BaseModel):
     engine: Annotated[
         Optional[WebSearchEngineEnum], PlainValidator(validate_open_enum(False))
     ] = None
-    r"""Which search engine to use. \"auto\" (default) uses native if the provider supports it, otherwise Exa. \"native\" forces the provider's built-in search. \"exa\" forces the Exa search API. \"firecrawl\" uses Firecrawl (requires BYOK). \"parallel\" uses the Parallel search API."""
+    r"""Which search engine to use. \"auto\" (default) uses native if the provider supports it, otherwise Exa. \"native\" forces the provider's built-in search. \"exa\" forces the Exa search API. \"firecrawl\" uses Firecrawl (requires BYOK). \"parallel\" uses the Parallel search API. \"perplexity\" uses the Perplexity Search API (raw ranked results)."""
 
     filters: OptionalNullable[WebSearchDomainFilter] = UNSET
 
     max_results: Optional[int] = None
-    r"""Maximum number of search results to return per search call. Defaults to 5. Applies to Exa, Firecrawl, and Parallel engines; ignored with native provider search."""
+    r"""Maximum number of search results to return per search call. Defaults to 5. Applies to Exa, Firecrawl, Parallel, and Perplexity engines; ignored with native provider search. Perplexity supports a maximum of 20; values above 20 are clamped."""
 
     search_context_size: Annotated[
         Optional[SearchContextSizeEnum], PlainValidator(validate_open_enum(False))

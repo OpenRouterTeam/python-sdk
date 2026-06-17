@@ -27,6 +27,10 @@ from .openrouterwebsearchservertool import (
     OpenRouterWebSearchServerTool,
     OpenRouterWebSearchServerToolTypedDict,
 )
+from .subagentservertool_openrouter import (
+    SubagentServerToolOpenRouter,
+    SubagentServerToolOpenRouterTypedDict,
+)
 from .webfetchservertool import WebFetchServerTool, WebFetchServerToolTypedDict
 from openrouter.types import (
     BaseModel,
@@ -129,6 +133,7 @@ ChatFunctionToolTypedDict = TypeAliasType(
         DatetimeServerToolTypedDict,
         ImageGenerationServerToolOpenRouterTypedDict,
         ChatSearchModelsServerToolTypedDict,
+        SubagentServerToolOpenRouterTypedDict,
         WebFetchServerToolTypedDict,
         OpenRouterWebSearchServerToolTypedDict,
         ChatFunctionToolFunctionTypedDict,
@@ -150,6 +155,7 @@ ChatFunctionTool = Annotated[
         Annotated[
             ChatSearchModelsServerTool, Tag("openrouter:experimental__search_models")
         ],
+        Annotated[SubagentServerToolOpenRouter, Tag("openrouter:subagent")],
         Annotated[WebFetchServerTool, Tag("openrouter:web_fetch")],
         Annotated[OpenRouterWebSearchServerTool, Tag("openrouter:web_search")],
         Annotated[ChatWebSearchShorthand, Tag("web_search")],

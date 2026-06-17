@@ -8,7 +8,7 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class ProviderOptionsTypedDict(TypedDict):
-    r"""Provider-specific options keyed by provider slug. The options for the matched provider are spread into the upstream request body."""
+    r"""Provider-specific options keyed by provider slug. Only options for the matched provider are forwarded; the rest are ignored. Unrecognized keys are silently dropped."""
 
     oneai: NotRequired[Dict[str, Nullable[Any]]]
     ai21: NotRequired[Dict[str, Nullable[Any]]]
@@ -128,7 +128,7 @@ class ProviderOptionsTypedDict(TypedDict):
 
 
 class ProviderOptions(BaseModel):
-    r"""Provider-specific options keyed by provider slug. The options for the matched provider are spread into the upstream request body."""
+    r"""Provider-specific options keyed by provider slug. Only options for the matched provider are forwarded; the rest are ignored. Unrecognized keys are silently dropped."""
 
     oneai: Annotated[
         Optional[Dict[str, Nullable[Any]]], pydantic.Field(alias="01ai")

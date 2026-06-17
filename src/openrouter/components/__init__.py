@@ -6,6 +6,7 @@ import builtins
 import sys
 
 if TYPE_CHECKING:
+    from .aabenchmarkentry import AABenchmarkEntry, AABenchmarkEntryTypedDict
     from .activityitem import ActivityItem, ActivityItemTypedDict
     from .activityresponse import ActivityResponse, ActivityResponseTypedDict
     from .advisornestedtool import AdvisorNestedTool, AdvisorNestedToolTypedDict
@@ -86,6 +87,11 @@ if TYPE_CHECKING:
         SourceContentTypedDict,
         SourceType,
         TypeDocument,
+    )
+    from .anthropicfiledocumentsource import (
+        AnthropicFileDocumentSource,
+        AnthropicFileDocumentSourceType,
+        AnthropicFileDocumentSourceTypedDict,
     )
     from .anthropicimageblockparam import (
         AnthropicImageBlockParam,
@@ -270,6 +276,38 @@ if TYPE_CHECKING:
         BashServerToolEnvironment,
         BashServerToolEnvironmentTypedDict,
     )
+    from .benchmarkpricing import BenchmarkPricing, BenchmarkPricingTypedDict
+    from .benchmarksaaitem import BenchmarksAAItem, BenchmarksAAItemTypedDict
+    from .benchmarksaameta import (
+        BenchmarksAAMeta,
+        BenchmarksAAMetaSource,
+        BenchmarksAAMetaSourceURL,
+        BenchmarksAAMetaTypedDict,
+        BenchmarksAAMetaVersion,
+    )
+    from .benchmarksaaresponse import (
+        BenchmarksAAResponse,
+        BenchmarksAAResponseTypedDict,
+    )
+    from .benchmarksdaitem import (
+        BenchmarksDAItem,
+        BenchmarksDAItemTypedDict,
+        TournamentStats,
+        TournamentStatsTypedDict,
+    )
+    from .benchmarksdameta import (
+        BenchmarksDAMeta,
+        BenchmarksDAMetaSource,
+        BenchmarksDAMetaSourceURL,
+        BenchmarksDAMetaTypedDict,
+        BenchmarksDAMetaVersion,
+        EloBounds,
+        EloBoundsTypedDict,
+    )
+    from .benchmarksdaresponse import (
+        BenchmarksDAResponse,
+        BenchmarksDAResponseTypedDict,
+    )
     from .bulkaddworkspacemembersrequest import (
         BulkAddWorkspaceMembersRequest,
         BulkAddWorkspaceMembersRequestTypedDict,
@@ -434,6 +472,7 @@ if TYPE_CHECKING:
         ChatRequestPlugin,
         ChatRequestPluginTypedDict,
         ChatRequestReasoning,
+        ChatRequestReasoningEffort,
         ChatRequestReasoningTypedDict,
         ChatRequestServiceTier,
         ChatRequestTypedDict,
@@ -727,6 +766,7 @@ if TYPE_CHECKING:
         CustomToolCallOutputItemTypeInputImage,
         CustomToolCallOutputItemTypedDict,
     )
+    from .dabenchmarkentry import DABenchmarkEntry, DABenchmarkEntryTypedDict
     from .datetimeservertool import (
         DatetimeServerTool,
         DatetimeServerToolType,
@@ -748,6 +788,10 @@ if TYPE_CHECKING:
     from .deleteobservabilitydestinationresponse import (
         DeleteObservabilityDestinationResponse,
         DeleteObservabilityDestinationResponseTypedDict,
+    )
+    from .deleteworkspacebudgetresponse import (
+        DeleteWorkspaceBudgetResponse,
+        DeleteWorkspaceBudgetResponseTypedDict,
     )
     from .deleteworkspaceresponse import (
         DeleteWorkspaceResponse,
@@ -785,6 +829,13 @@ if TYPE_CHECKING:
     from .endpointstatus import EndpointStatus
     from .errorevent import ErrorEvent, ErrorEventType, ErrorEventTypedDict
     from .filecitation import FileCitation, FileCitationType, FileCitationTypedDict
+    from .filedeleteresponse import (
+        FileDeleteResponse,
+        FileDeleteResponseType,
+        FileDeleteResponseTypedDict,
+    )
+    from .filelistresponse import FileListResponse, FileListResponseTypedDict
+    from .filemetadata import FileMetadata, FileMetadataType, FileMetadataTypedDict
     from .fileparserplugin import (
         FileParserPlugin,
         FileParserPluginID,
@@ -928,6 +979,7 @@ if TYPE_CHECKING:
         FusionPluginTool,
         FusionPluginToolTypedDict,
         FusionPluginTypedDict,
+        PresetEnum,
     )
     from .fusionservertool_openrouter import (
         FusionServerToolOpenRouter,
@@ -1156,6 +1208,10 @@ if TYPE_CHECKING:
         ListPresetVersionsResponse,
         ListPresetVersionsResponseTypedDict,
     )
+    from .listworkspacebudgetsresponse import (
+        ListWorkspaceBudgetsResponse,
+        ListWorkspaceBudgetsResponseTypedDict,
+    )
     from .listworkspacesresponse import (
         ListWorkspacesResponse,
         ListWorkspacesResponseTypedDict,
@@ -1217,6 +1273,10 @@ if TYPE_CHECKING:
         MessagesAdvisorToolResultBlock,
         MessagesAdvisorToolResultBlockType,
         MessagesAdvisorToolResultBlockTypedDict,
+    )
+    from .messagesfallbackparam import (
+        MessagesFallbackParam,
+        MessagesFallbackParamTypedDict,
     )
     from .messagesmessageparam import (
         ContentCompaction,
@@ -1373,8 +1433,10 @@ if TYPE_CHECKING:
         ModelArchitectureInstructType,
         ModelArchitectureTypedDict,
     )
+    from .modelbenchmarks import ModelBenchmarks, ModelBenchmarksTypedDict
     from .modelgroup import ModelGroup
     from .modellinks import ModelLinks, ModelLinksTypedDict
+    from .modelresponse import ModelResponse, ModelResponseTypedDict
     from .modelscountresponse import (
         ModelsCountResponse,
         ModelsCountResponseData,
@@ -1820,6 +1882,11 @@ if TYPE_CHECKING:
         TypeExit,
         TypeTimeout,
     )
+    from .outputsubagentservertoolitem import (
+        OutputSubagentServerToolItem,
+        OutputSubagentServerToolItemType,
+        OutputSubagentServerToolItemTypedDict,
+    )
     from .outputtexteditorservertoolitem import (
         Command,
         OutputTextEditorServerToolItem,
@@ -1973,7 +2040,7 @@ if TYPE_CHECKING:
     from .rankingsdailymeta import (
         RankingsDailyMeta,
         RankingsDailyMetaTypedDict,
-        Version,
+        RankingsDailyMetaVersion,
     )
     from .rankingsdailyresponse import (
         RankingsDailyResponse,
@@ -2234,6 +2301,21 @@ if TYPE_CHECKING:
     )
     from .sttresponse import STTResponse, STTResponseTypedDict
     from .sttusage import STTUsage, STTUsageTypedDict
+    from .subagentnestedtool import SubagentNestedTool, SubagentNestedToolTypedDict
+    from .subagentreasoning import (
+        SubagentReasoning,
+        SubagentReasoningEffort,
+        SubagentReasoningTypedDict,
+    )
+    from .subagentservertool_openrouter import (
+        SubagentServerToolOpenRouter,
+        SubagentServerToolOpenRouterType,
+        SubagentServerToolOpenRouterTypedDict,
+    )
+    from .subagentservertoolconfig import (
+        SubagentServerToolConfig,
+        SubagentServerToolConfigTypedDict,
+    )
     from .textdeltaevent import (
         TextDeltaEvent,
         TextDeltaEventType,
@@ -2301,6 +2383,14 @@ if TYPE_CHECKING:
     from .updateworkspaceresponse import (
         UpdateWorkspaceResponse,
         UpdateWorkspaceResponseTypedDict,
+    )
+    from .upsertworkspacebudgetrequest import (
+        UpsertWorkspaceBudgetRequest,
+        UpsertWorkspaceBudgetRequestTypedDict,
+    )
+    from .upsertworkspacebudgetresponse import (
+        UpsertWorkspaceBudgetResponse,
+        UpsertWorkspaceBudgetResponseTypedDict,
     )
     from .urlcitation import URLCitation, URLCitationType, URLCitationTypedDict
     from .usage import (
@@ -2420,6 +2510,12 @@ if TYPE_CHECKING:
         WebSearchUserLocationServerToolTypedDict,
     )
     from .workspace import Workspace, WorkspaceTypedDict
+    from .workspacebudget import (
+        ResetInterval,
+        WorkspaceBudget,
+        WorkspaceBudgetTypedDict,
+    )
+    from .workspacebudgetinterval import WorkspaceBudgetInterval
     from .workspacemember import (
         WorkspaceMember,
         WorkspaceMemberRole,
@@ -2427,6 +2523,8 @@ if TYPE_CHECKING:
     )
 
 __all__ = [
+    "AABenchmarkEntry",
+    "AABenchmarkEntryTypedDict",
     "APIType",
     "Action",
     "ActionEnum",
@@ -2496,6 +2594,9 @@ __all__ = [
     "AnthropicDocumentBlockParamSourceUnion",
     "AnthropicDocumentBlockParamSourceUnionTypedDict",
     "AnthropicDocumentBlockParamTypedDict",
+    "AnthropicFileDocumentSource",
+    "AnthropicFileDocumentSourceType",
+    "AnthropicFileDocumentSourceTypedDict",
     "AnthropicImageBlockParam",
     "AnthropicImageBlockParamSource",
     "AnthropicImageBlockParamSourceTypedDict",
@@ -2627,6 +2728,26 @@ __all__ = [
     "BashServerToolEnvironmentTypedDict",
     "BashServerToolType",
     "BashServerToolTypedDict",
+    "BenchmarkPricing",
+    "BenchmarkPricingTypedDict",
+    "BenchmarksAAItem",
+    "BenchmarksAAItemTypedDict",
+    "BenchmarksAAMeta",
+    "BenchmarksAAMetaSource",
+    "BenchmarksAAMetaSourceURL",
+    "BenchmarksAAMetaTypedDict",
+    "BenchmarksAAMetaVersion",
+    "BenchmarksAAResponse",
+    "BenchmarksAAResponseTypedDict",
+    "BenchmarksDAItem",
+    "BenchmarksDAItemTypedDict",
+    "BenchmarksDAMeta",
+    "BenchmarksDAMetaSource",
+    "BenchmarksDAMetaSourceURL",
+    "BenchmarksDAMetaTypedDict",
+    "BenchmarksDAMetaVersion",
+    "BenchmarksDAResponse",
+    "BenchmarksDAResponseTypedDict",
     "BulkAddWorkspaceMembersRequest",
     "BulkAddWorkspaceMembersRequestTypedDict",
     "BulkAddWorkspaceMembersResponse",
@@ -2736,6 +2857,7 @@ __all__ = [
     "ChatRequestPlugin",
     "ChatRequestPluginTypedDict",
     "ChatRequestReasoning",
+    "ChatRequestReasoningEffort",
     "ChatRequestReasoningTypedDict",
     "ChatRequestServiceTier",
     "ChatRequestTypedDict",
@@ -2945,6 +3067,8 @@ __all__ = [
     "CustomToolCallOutputItemTypedDict",
     "CustomToolTypeCustom",
     "CustomToolTypedDict",
+    "DABenchmarkEntry",
+    "DABenchmarkEntryTypedDict",
     "DataCollection",
     "DataRegion",
     "DatetimeServerTool",
@@ -2960,6 +3084,8 @@ __all__ = [
     "DeleteGuardrailResponseTypedDict",
     "DeleteObservabilityDestinationResponse",
     "DeleteObservabilityDestinationResponseTypedDict",
+    "DeleteWorkspaceBudgetResponse",
+    "DeleteWorkspaceBudgetResponseTypedDict",
     "DeleteWorkspaceResponse",
     "DeleteWorkspaceResponseTypedDict",
     "EasyInputMessage",
@@ -2994,6 +3120,8 @@ __all__ = [
     "EditCompact20260112TypedDict",
     "EditTypeInputTokens",
     "EditTypedDict",
+    "EloBounds",
+    "EloBoundsTypedDict",
     "EndpointInfo",
     "EndpointInfoTypedDict",
     "EndpointStatus",
@@ -3013,6 +3141,14 @@ __all__ = [
     "FileCitation",
     "FileCitationType",
     "FileCitationTypedDict",
+    "FileDeleteResponse",
+    "FileDeleteResponseType",
+    "FileDeleteResponseTypedDict",
+    "FileListResponse",
+    "FileListResponseTypedDict",
+    "FileMetadata",
+    "FileMetadataType",
+    "FileMetadataTypedDict",
     "FileParserPlugin",
     "FileParserPluginID",
     "FileParserPluginTypedDict",
@@ -3293,6 +3429,8 @@ __all__ = [
     "ListPresetVersionsResponseTypedDict",
     "ListPresetsResponse",
     "ListPresetsResponseTypedDict",
+    "ListWorkspaceBudgetsResponse",
+    "ListWorkspaceBudgetsResponseTypedDict",
     "ListWorkspacesResponse",
     "ListWorkspacesResponseTypedDict",
     "LocalShellCallItem",
@@ -3331,6 +3469,8 @@ __all__ = [
     "MessagesAdvisorToolResultBlock",
     "MessagesAdvisorToolResultBlockType",
     "MessagesAdvisorToolResultBlockTypedDict",
+    "MessagesFallbackParam",
+    "MessagesFallbackParamTypedDict",
     "MessagesMessageParam",
     "MessagesMessageParamContentUnion1",
     "MessagesMessageParamContentUnion1TypedDict",
@@ -3372,10 +3512,14 @@ __all__ = [
     "ModelArchitecture",
     "ModelArchitectureInstructType",
     "ModelArchitectureTypedDict",
+    "ModelBenchmarks",
+    "ModelBenchmarksTypedDict",
     "ModelEnum",
     "ModelGroup",
     "ModelLinks",
     "ModelLinksTypedDict",
+    "ModelResponse",
+    "ModelResponseTypedDict",
     "ModelTypedDict",
     "ModelsCountResponse",
     "ModelsCountResponseData",
@@ -3702,6 +3846,9 @@ __all__ = [
     "OutputShellCallOutputItemOutputTypedDict",
     "OutputShellCallOutputItemTypeShellCallOutput",
     "OutputShellCallOutputItemTypedDict",
+    "OutputSubagentServerToolItem",
+    "OutputSubagentServerToolItemType",
+    "OutputSubagentServerToolItemTypedDict",
     "OutputTextEditorServerToolItem",
     "OutputTextEditorServerToolItemType",
     "OutputTextEditorServerToolItemTypedDict",
@@ -3763,6 +3910,7 @@ __all__ = [
     "Preset",
     "PresetDesignatedVersion",
     "PresetDesignatedVersionTypedDict",
+    "PresetEnum",
     "PresetStatus",
     "PresetTypedDict",
     "PresetWithDesignatedVersion",
@@ -3808,6 +3956,7 @@ __all__ = [
     "RankingsDailyItemTypedDict",
     "RankingsDailyMeta",
     "RankingsDailyMetaTypedDict",
+    "RankingsDailyMetaVersion",
     "RankingsDailyResponse",
     "RankingsDailyResponseTypedDict",
     "Reason",
@@ -3874,6 +4023,7 @@ __all__ = [
     "RequireApprovalTypedDict",
     "RequireApprovalUnion",
     "RequireApprovalUnionTypedDict",
+    "ResetInterval",
     "Resolution",
     "Response",
     "ResponseFormat",
@@ -4007,6 +4157,16 @@ __all__ = [
     "StreamLogprobTopLogprob",
     "StreamLogprobTopLogprobTypedDict",
     "StreamLogprobTypedDict",
+    "SubagentNestedTool",
+    "SubagentNestedToolTypedDict",
+    "SubagentReasoning",
+    "SubagentReasoningEffort",
+    "SubagentReasoningTypedDict",
+    "SubagentServerToolConfig",
+    "SubagentServerToolConfigTypedDict",
+    "SubagentServerToolOpenRouter",
+    "SubagentServerToolOpenRouterType",
+    "SubagentServerToolOpenRouterTypedDict",
     "SupportedAspectRatio",
     "SupportedFrameImage",
     "SupportedResolution",
@@ -4066,6 +4226,8 @@ __all__ = [
     "ToolWebSearch20260209TypedDict",
     "TopProviderInfo",
     "TopProviderInfoTypedDict",
+    "TournamentStats",
+    "TournamentStatsTypedDict",
     "TraceConfig",
     "TraceConfigTypedDict",
     "Trigger",
@@ -4135,6 +4297,10 @@ __all__ = [
     "UpdateWorkspaceRequestTypedDict",
     "UpdateWorkspaceResponse",
     "UpdateWorkspaceResponseTypedDict",
+    "UpsertWorkspaceBudgetRequest",
+    "UpsertWorkspaceBudgetRequestTypedDict",
+    "UpsertWorkspaceBudgetResponse",
+    "UpsertWorkspaceBudgetResponseTypedDict",
     "Usage",
     "UsageCostDetails",
     "UsageCostDetailsTypedDict",
@@ -4144,7 +4310,6 @@ __all__ = [
     "Variables",
     "VariablesTypedDict",
     "Verbosity",
-    "Version",
     "VideoGenerationRequest",
     "VideoGenerationRequestProvider",
     "VideoGenerationRequestProviderTypedDict",
@@ -4207,6 +4372,9 @@ __all__ = [
     "WebSearchUserLocationType",
     "WebSearchUserLocationTypedDict",
     "Workspace",
+    "WorkspaceBudget",
+    "WorkspaceBudgetInterval",
+    "WorkspaceBudgetTypedDict",
     "WorkspaceMember",
     "WorkspaceMemberRole",
     "WorkspaceMemberTypedDict",
@@ -4214,6 +4382,8 @@ __all__ = [
 ]
 
 _dynamic_imports: dict[str, str] = {
+    "AABenchmarkEntry": ".aabenchmarkentry",
+    "AABenchmarkEntryTypedDict": ".aabenchmarkentry",
     "ActivityItem": ".activityitem",
     "ActivityItemTypedDict": ".activityitem",
     "ActivityResponse": ".activityresponse",
@@ -4272,6 +4442,9 @@ _dynamic_imports: dict[str, str] = {
     "SourceContentTypedDict": ".anthropicdocumentblockparam",
     "SourceType": ".anthropicdocumentblockparam",
     "TypeDocument": ".anthropicdocumentblockparam",
+    "AnthropicFileDocumentSource": ".anthropicfiledocumentsource",
+    "AnthropicFileDocumentSourceType": ".anthropicfiledocumentsource",
+    "AnthropicFileDocumentSourceTypedDict": ".anthropicfiledocumentsource",
     "AnthropicImageBlockParam": ".anthropicimageblockparam",
     "AnthropicImageBlockParamSource": ".anthropicimageblockparam",
     "AnthropicImageBlockParamSourceTypedDict": ".anthropicimageblockparam",
@@ -4396,6 +4569,30 @@ _dynamic_imports: dict[str, str] = {
     "BashServerToolEngine": ".bashservertoolengine",
     "BashServerToolEnvironment": ".bashservertoolenvironment",
     "BashServerToolEnvironmentTypedDict": ".bashservertoolenvironment",
+    "BenchmarkPricing": ".benchmarkpricing",
+    "BenchmarkPricingTypedDict": ".benchmarkpricing",
+    "BenchmarksAAItem": ".benchmarksaaitem",
+    "BenchmarksAAItemTypedDict": ".benchmarksaaitem",
+    "BenchmarksAAMeta": ".benchmarksaameta",
+    "BenchmarksAAMetaSource": ".benchmarksaameta",
+    "BenchmarksAAMetaSourceURL": ".benchmarksaameta",
+    "BenchmarksAAMetaTypedDict": ".benchmarksaameta",
+    "BenchmarksAAMetaVersion": ".benchmarksaameta",
+    "BenchmarksAAResponse": ".benchmarksaaresponse",
+    "BenchmarksAAResponseTypedDict": ".benchmarksaaresponse",
+    "BenchmarksDAItem": ".benchmarksdaitem",
+    "BenchmarksDAItemTypedDict": ".benchmarksdaitem",
+    "TournamentStats": ".benchmarksdaitem",
+    "TournamentStatsTypedDict": ".benchmarksdaitem",
+    "BenchmarksDAMeta": ".benchmarksdameta",
+    "BenchmarksDAMetaSource": ".benchmarksdameta",
+    "BenchmarksDAMetaSourceURL": ".benchmarksdameta",
+    "BenchmarksDAMetaTypedDict": ".benchmarksdameta",
+    "BenchmarksDAMetaVersion": ".benchmarksdameta",
+    "EloBounds": ".benchmarksdameta",
+    "EloBoundsTypedDict": ".benchmarksdameta",
+    "BenchmarksDAResponse": ".benchmarksdaresponse",
+    "BenchmarksDAResponseTypedDict": ".benchmarksdaresponse",
     "BulkAddWorkspaceMembersRequest": ".bulkaddworkspacemembersrequest",
     "BulkAddWorkspaceMembersRequestTypedDict": ".bulkaddworkspacemembersrequest",
     "BulkAddWorkspaceMembersResponse": ".bulkaddworkspacemembersresponse",
@@ -4507,6 +4704,7 @@ _dynamic_imports: dict[str, str] = {
     "ChatRequestPlugin": ".chatrequest",
     "ChatRequestPluginTypedDict": ".chatrequest",
     "ChatRequestReasoning": ".chatrequest",
+    "ChatRequestReasoningEffort": ".chatrequest",
     "ChatRequestReasoningTypedDict": ".chatrequest",
     "ChatRequestServiceTier": ".chatrequest",
     "ChatRequestTypedDict": ".chatrequest",
@@ -4712,6 +4910,8 @@ _dynamic_imports: dict[str, str] = {
     "CustomToolCallOutputItemTypeCustomToolCallOutput": ".customtoolcalloutputitem",
     "CustomToolCallOutputItemTypeInputImage": ".customtoolcalloutputitem",
     "CustomToolCallOutputItemTypedDict": ".customtoolcalloutputitem",
+    "DABenchmarkEntry": ".dabenchmarkentry",
+    "DABenchmarkEntryTypedDict": ".dabenchmarkentry",
     "DatetimeServerTool": ".datetimeservertool",
     "DatetimeServerToolType": ".datetimeservertool",
     "DatetimeServerToolTypedDict": ".datetimeservertool",
@@ -4725,6 +4925,8 @@ _dynamic_imports: dict[str, str] = {
     "DeleteGuardrailResponseTypedDict": ".deleteguardrailresponse",
     "DeleteObservabilityDestinationResponse": ".deleteobservabilitydestinationresponse",
     "DeleteObservabilityDestinationResponseTypedDict": ".deleteobservabilitydestinationresponse",
+    "DeleteWorkspaceBudgetResponse": ".deleteworkspacebudgetresponse",
+    "DeleteWorkspaceBudgetResponseTypedDict": ".deleteworkspacebudgetresponse",
     "DeleteWorkspaceResponse": ".deleteworkspaceresponse",
     "DeleteWorkspaceResponseTypedDict": ".deleteworkspaceresponse",
     "EasyInputMessage": ".easyinputmessage",
@@ -4761,6 +4963,14 @@ _dynamic_imports: dict[str, str] = {
     "FileCitation": ".filecitation",
     "FileCitationType": ".filecitation",
     "FileCitationTypedDict": ".filecitation",
+    "FileDeleteResponse": ".filedeleteresponse",
+    "FileDeleteResponseType": ".filedeleteresponse",
+    "FileDeleteResponseTypedDict": ".filedeleteresponse",
+    "FileListResponse": ".filelistresponse",
+    "FileListResponseTypedDict": ".filelistresponse",
+    "FileMetadata": ".filemetadata",
+    "FileMetadataType": ".filemetadata",
+    "FileMetadataTypedDict": ".filemetadata",
     "FileParserPlugin": ".fileparserplugin",
     "FileParserPluginID": ".fileparserplugin",
     "FileParserPluginTypedDict": ".fileparserplugin",
@@ -4864,6 +5074,7 @@ _dynamic_imports: dict[str, str] = {
     "FusionPluginTool": ".fusionplugin",
     "FusionPluginToolTypedDict": ".fusionplugin",
     "FusionPluginTypedDict": ".fusionplugin",
+    "PresetEnum": ".fusionplugin",
     "FusionServerToolOpenRouter": ".fusionservertool_openrouter",
     "FusionServerToolOpenRouterType": ".fusionservertool_openrouter",
     "FusionServerToolOpenRouterTypedDict": ".fusionservertool_openrouter",
@@ -5042,6 +5253,8 @@ _dynamic_imports: dict[str, str] = {
     "ListPresetsResponseTypedDict": ".listpresetsresponse",
     "ListPresetVersionsResponse": ".listpresetversionsresponse",
     "ListPresetVersionsResponseTypedDict": ".listpresetversionsresponse",
+    "ListWorkspaceBudgetsResponse": ".listworkspacebudgetsresponse",
+    "ListWorkspaceBudgetsResponseTypedDict": ".listworkspacebudgetsresponse",
     "ListWorkspacesResponse": ".listworkspacesresponse",
     "ListWorkspacesResponseTypedDict": ".listworkspacesresponse",
     "LocalShellCallItem": ".localshellcallitem",
@@ -5091,6 +5304,8 @@ _dynamic_imports: dict[str, str] = {
     "MessagesAdvisorToolResultBlock": ".messagesadvisortoolresultblock",
     "MessagesAdvisorToolResultBlockType": ".messagesadvisortoolresultblock",
     "MessagesAdvisorToolResultBlockTypedDict": ".messagesadvisortoolresultblock",
+    "MessagesFallbackParam": ".messagesfallbackparam",
+    "MessagesFallbackParamTypedDict": ".messagesfallbackparam",
     "ContentCompaction": ".messagesmessageparam",
     "ContentCompactionTypedDict": ".messagesmessageparam",
     "ContentRedactedThinking": ".messagesmessageparam",
@@ -5239,9 +5454,13 @@ _dynamic_imports: dict[str, str] = {
     "ModelArchitecture": ".modelarchitecture",
     "ModelArchitectureInstructType": ".modelarchitecture",
     "ModelArchitectureTypedDict": ".modelarchitecture",
+    "ModelBenchmarks": ".modelbenchmarks",
+    "ModelBenchmarksTypedDict": ".modelbenchmarks",
     "ModelGroup": ".modelgroup",
     "ModelLinks": ".modellinks",
     "ModelLinksTypedDict": ".modellinks",
+    "ModelResponse": ".modelresponse",
+    "ModelResponseTypedDict": ".modelresponse",
     "ModelsCountResponse": ".modelscountresponse",
     "ModelsCountResponseData": ".modelscountresponse",
     "ModelsCountResponseDataTypedDict": ".modelscountresponse",
@@ -5573,6 +5792,9 @@ _dynamic_imports: dict[str, str] = {
     "OutputShellCallOutputItemTypedDict": ".outputshellcalloutputitem",
     "TypeExit": ".outputshellcalloutputitem",
     "TypeTimeout": ".outputshellcalloutputitem",
+    "OutputSubagentServerToolItem": ".outputsubagentservertoolitem",
+    "OutputSubagentServerToolItemType": ".outputsubagentservertoolitem",
+    "OutputSubagentServerToolItemTypedDict": ".outputsubagentservertoolitem",
     "Command": ".outputtexteditorservertoolitem",
     "OutputTextEditorServerToolItem": ".outputtexteditorservertoolitem",
     "OutputTextEditorServerToolItemType": ".outputtexteditorservertoolitem",
@@ -5690,7 +5912,7 @@ _dynamic_imports: dict[str, str] = {
     "RankingsDailyItemTypedDict": ".rankingsdailyitem",
     "RankingsDailyMeta": ".rankingsdailymeta",
     "RankingsDailyMetaTypedDict": ".rankingsdailymeta",
-    "Version": ".rankingsdailymeta",
+    "RankingsDailyMetaVersion": ".rankingsdailymeta",
     "RankingsDailyResponse": ".rankingsdailyresponse",
     "RankingsDailyResponseTypedDict": ".rankingsdailyresponse",
     "ReasoningConfig": ".reasoningconfig",
@@ -5869,6 +6091,16 @@ _dynamic_imports: dict[str, str] = {
     "STTResponseTypedDict": ".sttresponse",
     "STTUsage": ".sttusage",
     "STTUsageTypedDict": ".sttusage",
+    "SubagentNestedTool": ".subagentnestedtool",
+    "SubagentNestedToolTypedDict": ".subagentnestedtool",
+    "SubagentReasoning": ".subagentreasoning",
+    "SubagentReasoningEffort": ".subagentreasoning",
+    "SubagentReasoningTypedDict": ".subagentreasoning",
+    "SubagentServerToolOpenRouter": ".subagentservertool_openrouter",
+    "SubagentServerToolOpenRouterType": ".subagentservertool_openrouter",
+    "SubagentServerToolOpenRouterTypedDict": ".subagentservertool_openrouter",
+    "SubagentServerToolConfig": ".subagentservertoolconfig",
+    "SubagentServerToolConfigTypedDict": ".subagentservertoolconfig",
     "TextDeltaEvent": ".textdeltaevent",
     "TextDeltaEventType": ".textdeltaevent",
     "TextDeltaEventTypedDict": ".textdeltaevent",
@@ -5913,6 +6145,10 @@ _dynamic_imports: dict[str, str] = {
     "UpdateWorkspaceRequestTypedDict": ".updateworkspacerequest",
     "UpdateWorkspaceResponse": ".updateworkspaceresponse",
     "UpdateWorkspaceResponseTypedDict": ".updateworkspaceresponse",
+    "UpsertWorkspaceBudgetRequest": ".upsertworkspacebudgetrequest",
+    "UpsertWorkspaceBudgetRequestTypedDict": ".upsertworkspacebudgetrequest",
+    "UpsertWorkspaceBudgetResponse": ".upsertworkspacebudgetresponse",
+    "UpsertWorkspaceBudgetResponseTypedDict": ".upsertworkspacebudgetresponse",
     "URLCitation": ".urlcitation",
     "URLCitationType": ".urlcitation",
     "URLCitationTypedDict": ".urlcitation",
@@ -5995,6 +6231,10 @@ _dynamic_imports: dict[str, str] = {
     "WebSearchUserLocationServerToolTypedDict": ".websearchuserlocationservertool",
     "Workspace": ".workspace",
     "WorkspaceTypedDict": ".workspace",
+    "ResetInterval": ".workspacebudget",
+    "WorkspaceBudget": ".workspacebudget",
+    "WorkspaceBudgetTypedDict": ".workspacebudget",
+    "WorkspaceBudgetInterval": ".workspacebudgetinterval",
     "WorkspaceMember": ".workspacemember",
     "WorkspaceMemberRole": ".workspacemember",
     "WorkspaceMemberTypedDict": ".workspacemember",

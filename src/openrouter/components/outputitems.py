@@ -81,6 +81,10 @@ from .outputshellcalloutputitem import (
     OutputShellCallOutputItem,
     OutputShellCallOutputItemTypedDict,
 )
+from .outputsubagentservertoolitem import (
+    OutputSubagentServerToolItem,
+    OutputSubagentServerToolItemTypedDict,
+)
 from .outputtexteditorservertoolitem import (
     OutputTextEditorServerToolItem,
     OutputTextEditorServerToolItemTypedDict,
@@ -138,6 +142,7 @@ OutputItemsTypedDict = TypeAliasType(
         OutputReasoningItemTypedDict,
         OutputFusionServerToolItemTypedDict,
         OutputAdvisorServerToolItemTypedDict,
+        OutputSubagentServerToolItemTypedDict,
     ],
 )
 r"""An output item from the response"""
@@ -172,6 +177,7 @@ OutputItems = Annotated[
         ],
         Annotated[OutputMcpServerToolItem, Tag("openrouter:mcp")],
         Annotated[OutputMemoryServerToolItem, Tag("openrouter:memory")],
+        Annotated[OutputSubagentServerToolItem, Tag("openrouter:subagent")],
         Annotated[OutputTextEditorServerToolItem, Tag("openrouter:text_editor")],
         Annotated[OutputToolSearchServerToolItem, Tag("openrouter:tool_search")],
         Annotated[OutputWebFetchServerToolItem, Tag("openrouter:web_fetch")],

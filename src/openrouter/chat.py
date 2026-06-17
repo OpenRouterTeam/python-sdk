@@ -48,6 +48,7 @@ class Chat(BaseSDK):
         max_completion_tokens: OptionalNullable[int] = UNSET,
         max_tokens: OptionalNullable[int] = UNSET,
         metadata: Optional[Dict[str, str]] = None,
+        min_p: OptionalNullable[float] = UNSET,
         modalities: Optional[List[components.Modality]] = None,
         model: Optional[str] = None,
         models: Optional[List[str]] = None,
@@ -70,6 +71,10 @@ class Chat(BaseSDK):
                 components.ChatRequestReasoningTypedDict,
             ]
         ] = None,
+        reasoning_effort: OptionalNullable[
+            components.ChatRequestReasoningEffort
+        ] = UNSET,
+        repetition_penalty: OptionalNullable[float] = UNSET,
         response_format: Optional[
             Union[components.ResponseFormat, components.ResponseFormatTypedDict]
         ] = None,
@@ -99,6 +104,8 @@ class Chat(BaseSDK):
                 List[components.ChatFunctionToolTypedDict],
             ]
         ] = None,
+        top_a: OptionalNullable[float] = UNSET,
+        top_k: OptionalNullable[int] = UNSET,
         top_logprobs: OptionalNullable[int] = UNSET,
         top_p: OptionalNullable[float] = UNSET,
         trace: Optional[
@@ -132,6 +139,7 @@ class Chat(BaseSDK):
         :param max_completion_tokens: Maximum tokens in completion
         :param max_tokens: Maximum tokens (deprecated, use max_completion_tokens). Note: some providers enforce a minimum of 16.
         :param metadata: Key-value pairs for additional object information (max 16 pairs, 64 char keys, 512 char values)
+        :param min_p: Minimum probability threshold relative to the most likely token. Tokens with probability below min_p * (probability of top token) are filtered out. Not all providers support this parameter.
         :param modalities: Output modalities for the response. Supported values are \"text\", \"image\", and \"audio\".
         :param model: Model to use for completion
         :param models: Models to use for completion
@@ -140,6 +148,8 @@ class Chat(BaseSDK):
         :param presence_penalty: Presence penalty (-2.0 to 2.0)
         :param provider: When multiple model providers are available, optionally indicate your routing preference.
         :param reasoning: Configuration options for reasoning models
+        :param reasoning_effort: Shorthand for setting reasoning effort. Equivalent to setting reasoning.effort. Cannot be used simultaneously with reasoning.effort if they differ.
+        :param repetition_penalty: Penalizes tokens based on how much they have already appeared in the text. A value of 1.0 means no penalty. Values above 1.0 penalize repeated tokens more strongly. Not all providers support this parameter.
         :param response_format: Response format configuration
         :param seed: Random seed for deterministic outputs
         :param service_tier: The service tier to use for processing this request.
@@ -151,6 +161,8 @@ class Chat(BaseSDK):
         :param temperature: Sampling temperature (0-2)
         :param tool_choice: Tool choice configuration
         :param tools: Available tools for function calling
+        :param top_a: Consider only tokens with \"sufficiently high\" probabilities based on the probability of the most likely token. Not all providers support this parameter.
+        :param top_k: Limits the model to choose from the top K most likely tokens at each step. A value of 1 means the model will always pick the most likely next token. Not all providers support this parameter.
         :param top_logprobs: Number of top log probabilities to return (0-20)
         :param top_p: Nucleus sampling parameter (0-1)
         :param trace: Metadata for observability and tracing. Known keys (trace_id, trace_name, span_name, generation_name, parent_span_id) have special handling. Additional keys are passed through as custom metadata to configured broadcast destinations.
@@ -194,6 +206,7 @@ class Chat(BaseSDK):
         max_completion_tokens: OptionalNullable[int] = UNSET,
         max_tokens: OptionalNullable[int] = UNSET,
         metadata: Optional[Dict[str, str]] = None,
+        min_p: OptionalNullable[float] = UNSET,
         modalities: Optional[List[components.Modality]] = None,
         model: Optional[str] = None,
         models: Optional[List[str]] = None,
@@ -216,6 +229,10 @@ class Chat(BaseSDK):
                 components.ChatRequestReasoningTypedDict,
             ]
         ] = None,
+        reasoning_effort: OptionalNullable[
+            components.ChatRequestReasoningEffort
+        ] = UNSET,
+        repetition_penalty: OptionalNullable[float] = UNSET,
         response_format: Optional[
             Union[components.ResponseFormat, components.ResponseFormatTypedDict]
         ] = None,
@@ -245,6 +262,8 @@ class Chat(BaseSDK):
                 List[components.ChatFunctionToolTypedDict],
             ]
         ] = None,
+        top_a: OptionalNullable[float] = UNSET,
+        top_k: OptionalNullable[int] = UNSET,
         top_logprobs: OptionalNullable[int] = UNSET,
         top_p: OptionalNullable[float] = UNSET,
         trace: Optional[
@@ -278,6 +297,7 @@ class Chat(BaseSDK):
         :param max_completion_tokens: Maximum tokens in completion
         :param max_tokens: Maximum tokens (deprecated, use max_completion_tokens). Note: some providers enforce a minimum of 16.
         :param metadata: Key-value pairs for additional object information (max 16 pairs, 64 char keys, 512 char values)
+        :param min_p: Minimum probability threshold relative to the most likely token. Tokens with probability below min_p * (probability of top token) are filtered out. Not all providers support this parameter.
         :param modalities: Output modalities for the response. Supported values are \"text\", \"image\", and \"audio\".
         :param model: Model to use for completion
         :param models: Models to use for completion
@@ -286,6 +306,8 @@ class Chat(BaseSDK):
         :param presence_penalty: Presence penalty (-2.0 to 2.0)
         :param provider: When multiple model providers are available, optionally indicate your routing preference.
         :param reasoning: Configuration options for reasoning models
+        :param reasoning_effort: Shorthand for setting reasoning effort. Equivalent to setting reasoning.effort. Cannot be used simultaneously with reasoning.effort if they differ.
+        :param repetition_penalty: Penalizes tokens based on how much they have already appeared in the text. A value of 1.0 means no penalty. Values above 1.0 penalize repeated tokens more strongly. Not all providers support this parameter.
         :param response_format: Response format configuration
         :param seed: Random seed for deterministic outputs
         :param service_tier: The service tier to use for processing this request.
@@ -297,6 +319,8 @@ class Chat(BaseSDK):
         :param temperature: Sampling temperature (0-2)
         :param tool_choice: Tool choice configuration
         :param tools: Available tools for function calling
+        :param top_a: Consider only tokens with \"sufficiently high\" probabilities based on the probability of the most likely token. Not all providers support this parameter.
+        :param top_k: Limits the model to choose from the top K most likely tokens at each step. A value of 1 means the model will always pick the most likely next token. Not all providers support this parameter.
         :param top_logprobs: Number of top log probabilities to return (0-20)
         :param top_p: Nucleus sampling parameter (0-1)
         :param trace: Metadata for observability and tracing. Known keys (trace_id, trace_name, span_name, generation_name, parent_span_id) have special handling. Additional keys are passed through as custom metadata to configured broadcast destinations.
@@ -339,6 +363,7 @@ class Chat(BaseSDK):
         max_completion_tokens: OptionalNullable[int] = UNSET,
         max_tokens: OptionalNullable[int] = UNSET,
         metadata: Optional[Dict[str, str]] = None,
+        min_p: OptionalNullable[float] = UNSET,
         modalities: Optional[List[components.Modality]] = None,
         model: Optional[str] = None,
         models: Optional[List[str]] = None,
@@ -361,6 +386,10 @@ class Chat(BaseSDK):
                 components.ChatRequestReasoningTypedDict,
             ]
         ] = None,
+        reasoning_effort: OptionalNullable[
+            components.ChatRequestReasoningEffort
+        ] = UNSET,
+        repetition_penalty: OptionalNullable[float] = UNSET,
         response_format: Optional[
             Union[components.ResponseFormat, components.ResponseFormatTypedDict]
         ] = None,
@@ -390,6 +419,8 @@ class Chat(BaseSDK):
                 List[components.ChatFunctionToolTypedDict],
             ]
         ] = None,
+        top_a: OptionalNullable[float] = UNSET,
+        top_k: OptionalNullable[int] = UNSET,
         top_logprobs: OptionalNullable[int] = UNSET,
         top_p: OptionalNullable[float] = UNSET,
         trace: Optional[
@@ -423,6 +454,7 @@ class Chat(BaseSDK):
         :param max_completion_tokens: Maximum tokens in completion
         :param max_tokens: Maximum tokens (deprecated, use max_completion_tokens). Note: some providers enforce a minimum of 16.
         :param metadata: Key-value pairs for additional object information (max 16 pairs, 64 char keys, 512 char values)
+        :param min_p: Minimum probability threshold relative to the most likely token. Tokens with probability below min_p * (probability of top token) are filtered out. Not all providers support this parameter.
         :param modalities: Output modalities for the response. Supported values are \"text\", \"image\", and \"audio\".
         :param model: Model to use for completion
         :param models: Models to use for completion
@@ -431,6 +463,8 @@ class Chat(BaseSDK):
         :param presence_penalty: Presence penalty (-2.0 to 2.0)
         :param provider: When multiple model providers are available, optionally indicate your routing preference.
         :param reasoning: Configuration options for reasoning models
+        :param reasoning_effort: Shorthand for setting reasoning effort. Equivalent to setting reasoning.effort. Cannot be used simultaneously with reasoning.effort if they differ.
+        :param repetition_penalty: Penalizes tokens based on how much they have already appeared in the text. A value of 1.0 means no penalty. Values above 1.0 penalize repeated tokens more strongly. Not all providers support this parameter.
         :param response_format: Response format configuration
         :param seed: Random seed for deterministic outputs
         :param service_tier: The service tier to use for processing this request.
@@ -442,6 +476,8 @@ class Chat(BaseSDK):
         :param temperature: Sampling temperature (0-2)
         :param tool_choice: Tool choice configuration
         :param tools: Available tools for function calling
+        :param top_a: Consider only tokens with \"sufficiently high\" probabilities based on the probability of the most likely token. Not all providers support this parameter.
+        :param top_k: Limits the model to choose from the top K most likely tokens at each step. A value of 1 means the model will always pick the most likely next token. Not all providers support this parameter.
         :param top_logprobs: Number of top log probabilities to return (0-20)
         :param top_p: Nucleus sampling parameter (0-1)
         :param trace: Metadata for observability and tracing. Known keys (trace_id, trace_name, span_name, generation_name, parent_span_id) have special handling. Additional keys are passed through as custom metadata to configured broadcast destinations.
@@ -484,6 +520,7 @@ class Chat(BaseSDK):
                     messages, List[components.ChatMessages]
                 ),
                 metadata=metadata,
+                min_p=min_p,
                 modalities=modalities,
                 model=model,
                 models=models,
@@ -498,6 +535,8 @@ class Chat(BaseSDK):
                 reasoning=utils.get_pydantic_model(
                     reasoning, Optional[components.ChatRequestReasoning]
                 ),
+                reasoning_effort=reasoning_effort,
+                repetition_penalty=repetition_penalty,
                 response_format=utils.get_pydantic_model(
                     response_format, Optional[components.ResponseFormat]
                 ),
@@ -520,6 +559,8 @@ class Chat(BaseSDK):
                 tools=utils.get_pydantic_model(
                     tools, Optional[List[components.ChatFunctionTool]]
                 ),
+                top_a=top_a,
+                top_k=top_k,
                 top_logprobs=top_logprobs,
                 top_p=top_p,
                 trace=utils.get_pydantic_model(trace, Optional[components.TraceConfig]),
@@ -764,6 +805,7 @@ class Chat(BaseSDK):
         max_completion_tokens: OptionalNullable[int] = UNSET,
         max_tokens: OptionalNullable[int] = UNSET,
         metadata: Optional[Dict[str, str]] = None,
+        min_p: OptionalNullable[float] = UNSET,
         modalities: Optional[List[components.Modality]] = None,
         model: Optional[str] = None,
         models: Optional[List[str]] = None,
@@ -786,6 +828,10 @@ class Chat(BaseSDK):
                 components.ChatRequestReasoningTypedDict,
             ]
         ] = None,
+        reasoning_effort: OptionalNullable[
+            components.ChatRequestReasoningEffort
+        ] = UNSET,
+        repetition_penalty: OptionalNullable[float] = UNSET,
         response_format: Optional[
             Union[components.ResponseFormat, components.ResponseFormatTypedDict]
         ] = None,
@@ -815,6 +861,8 @@ class Chat(BaseSDK):
                 List[components.ChatFunctionToolTypedDict],
             ]
         ] = None,
+        top_a: OptionalNullable[float] = UNSET,
+        top_k: OptionalNullable[int] = UNSET,
         top_logprobs: OptionalNullable[int] = UNSET,
         top_p: OptionalNullable[float] = UNSET,
         trace: Optional[
@@ -848,6 +896,7 @@ class Chat(BaseSDK):
         :param max_completion_tokens: Maximum tokens in completion
         :param max_tokens: Maximum tokens (deprecated, use max_completion_tokens). Note: some providers enforce a minimum of 16.
         :param metadata: Key-value pairs for additional object information (max 16 pairs, 64 char keys, 512 char values)
+        :param min_p: Minimum probability threshold relative to the most likely token. Tokens with probability below min_p * (probability of top token) are filtered out. Not all providers support this parameter.
         :param modalities: Output modalities for the response. Supported values are \"text\", \"image\", and \"audio\".
         :param model: Model to use for completion
         :param models: Models to use for completion
@@ -856,6 +905,8 @@ class Chat(BaseSDK):
         :param presence_penalty: Presence penalty (-2.0 to 2.0)
         :param provider: When multiple model providers are available, optionally indicate your routing preference.
         :param reasoning: Configuration options for reasoning models
+        :param reasoning_effort: Shorthand for setting reasoning effort. Equivalent to setting reasoning.effort. Cannot be used simultaneously with reasoning.effort if they differ.
+        :param repetition_penalty: Penalizes tokens based on how much they have already appeared in the text. A value of 1.0 means no penalty. Values above 1.0 penalize repeated tokens more strongly. Not all providers support this parameter.
         :param response_format: Response format configuration
         :param seed: Random seed for deterministic outputs
         :param service_tier: The service tier to use for processing this request.
@@ -867,6 +918,8 @@ class Chat(BaseSDK):
         :param temperature: Sampling temperature (0-2)
         :param tool_choice: Tool choice configuration
         :param tools: Available tools for function calling
+        :param top_a: Consider only tokens with \"sufficiently high\" probabilities based on the probability of the most likely token. Not all providers support this parameter.
+        :param top_k: Limits the model to choose from the top K most likely tokens at each step. A value of 1 means the model will always pick the most likely next token. Not all providers support this parameter.
         :param top_logprobs: Number of top log probabilities to return (0-20)
         :param top_p: Nucleus sampling parameter (0-1)
         :param trace: Metadata for observability and tracing. Known keys (trace_id, trace_name, span_name, generation_name, parent_span_id) have special handling. Additional keys are passed through as custom metadata to configured broadcast destinations.
@@ -910,6 +963,7 @@ class Chat(BaseSDK):
         max_completion_tokens: OptionalNullable[int] = UNSET,
         max_tokens: OptionalNullable[int] = UNSET,
         metadata: Optional[Dict[str, str]] = None,
+        min_p: OptionalNullable[float] = UNSET,
         modalities: Optional[List[components.Modality]] = None,
         model: Optional[str] = None,
         models: Optional[List[str]] = None,
@@ -932,6 +986,10 @@ class Chat(BaseSDK):
                 components.ChatRequestReasoningTypedDict,
             ]
         ] = None,
+        reasoning_effort: OptionalNullable[
+            components.ChatRequestReasoningEffort
+        ] = UNSET,
+        repetition_penalty: OptionalNullable[float] = UNSET,
         response_format: Optional[
             Union[components.ResponseFormat, components.ResponseFormatTypedDict]
         ] = None,
@@ -961,6 +1019,8 @@ class Chat(BaseSDK):
                 List[components.ChatFunctionToolTypedDict],
             ]
         ] = None,
+        top_a: OptionalNullable[float] = UNSET,
+        top_k: OptionalNullable[int] = UNSET,
         top_logprobs: OptionalNullable[int] = UNSET,
         top_p: OptionalNullable[float] = UNSET,
         trace: Optional[
@@ -994,6 +1054,7 @@ class Chat(BaseSDK):
         :param max_completion_tokens: Maximum tokens in completion
         :param max_tokens: Maximum tokens (deprecated, use max_completion_tokens). Note: some providers enforce a minimum of 16.
         :param metadata: Key-value pairs for additional object information (max 16 pairs, 64 char keys, 512 char values)
+        :param min_p: Minimum probability threshold relative to the most likely token. Tokens with probability below min_p * (probability of top token) are filtered out. Not all providers support this parameter.
         :param modalities: Output modalities for the response. Supported values are \"text\", \"image\", and \"audio\".
         :param model: Model to use for completion
         :param models: Models to use for completion
@@ -1002,6 +1063,8 @@ class Chat(BaseSDK):
         :param presence_penalty: Presence penalty (-2.0 to 2.0)
         :param provider: When multiple model providers are available, optionally indicate your routing preference.
         :param reasoning: Configuration options for reasoning models
+        :param reasoning_effort: Shorthand for setting reasoning effort. Equivalent to setting reasoning.effort. Cannot be used simultaneously with reasoning.effort if they differ.
+        :param repetition_penalty: Penalizes tokens based on how much they have already appeared in the text. A value of 1.0 means no penalty. Values above 1.0 penalize repeated tokens more strongly. Not all providers support this parameter.
         :param response_format: Response format configuration
         :param seed: Random seed for deterministic outputs
         :param service_tier: The service tier to use for processing this request.
@@ -1013,6 +1076,8 @@ class Chat(BaseSDK):
         :param temperature: Sampling temperature (0-2)
         :param tool_choice: Tool choice configuration
         :param tools: Available tools for function calling
+        :param top_a: Consider only tokens with \"sufficiently high\" probabilities based on the probability of the most likely token. Not all providers support this parameter.
+        :param top_k: Limits the model to choose from the top K most likely tokens at each step. A value of 1 means the model will always pick the most likely next token. Not all providers support this parameter.
         :param top_logprobs: Number of top log probabilities to return (0-20)
         :param top_p: Nucleus sampling parameter (0-1)
         :param trace: Metadata for observability and tracing. Known keys (trace_id, trace_name, span_name, generation_name, parent_span_id) have special handling. Additional keys are passed through as custom metadata to configured broadcast destinations.
@@ -1055,6 +1120,7 @@ class Chat(BaseSDK):
         max_completion_tokens: OptionalNullable[int] = UNSET,
         max_tokens: OptionalNullable[int] = UNSET,
         metadata: Optional[Dict[str, str]] = None,
+        min_p: OptionalNullable[float] = UNSET,
         modalities: Optional[List[components.Modality]] = None,
         model: Optional[str] = None,
         models: Optional[List[str]] = None,
@@ -1077,6 +1143,10 @@ class Chat(BaseSDK):
                 components.ChatRequestReasoningTypedDict,
             ]
         ] = None,
+        reasoning_effort: OptionalNullable[
+            components.ChatRequestReasoningEffort
+        ] = UNSET,
+        repetition_penalty: OptionalNullable[float] = UNSET,
         response_format: Optional[
             Union[components.ResponseFormat, components.ResponseFormatTypedDict]
         ] = None,
@@ -1106,6 +1176,8 @@ class Chat(BaseSDK):
                 List[components.ChatFunctionToolTypedDict],
             ]
         ] = None,
+        top_a: OptionalNullable[float] = UNSET,
+        top_k: OptionalNullable[int] = UNSET,
         top_logprobs: OptionalNullable[int] = UNSET,
         top_p: OptionalNullable[float] = UNSET,
         trace: Optional[
@@ -1139,6 +1211,7 @@ class Chat(BaseSDK):
         :param max_completion_tokens: Maximum tokens in completion
         :param max_tokens: Maximum tokens (deprecated, use max_completion_tokens). Note: some providers enforce a minimum of 16.
         :param metadata: Key-value pairs for additional object information (max 16 pairs, 64 char keys, 512 char values)
+        :param min_p: Minimum probability threshold relative to the most likely token. Tokens with probability below min_p * (probability of top token) are filtered out. Not all providers support this parameter.
         :param modalities: Output modalities for the response. Supported values are \"text\", \"image\", and \"audio\".
         :param model: Model to use for completion
         :param models: Models to use for completion
@@ -1147,6 +1220,8 @@ class Chat(BaseSDK):
         :param presence_penalty: Presence penalty (-2.0 to 2.0)
         :param provider: When multiple model providers are available, optionally indicate your routing preference.
         :param reasoning: Configuration options for reasoning models
+        :param reasoning_effort: Shorthand for setting reasoning effort. Equivalent to setting reasoning.effort. Cannot be used simultaneously with reasoning.effort if they differ.
+        :param repetition_penalty: Penalizes tokens based on how much they have already appeared in the text. A value of 1.0 means no penalty. Values above 1.0 penalize repeated tokens more strongly. Not all providers support this parameter.
         :param response_format: Response format configuration
         :param seed: Random seed for deterministic outputs
         :param service_tier: The service tier to use for processing this request.
@@ -1158,6 +1233,8 @@ class Chat(BaseSDK):
         :param temperature: Sampling temperature (0-2)
         :param tool_choice: Tool choice configuration
         :param tools: Available tools for function calling
+        :param top_a: Consider only tokens with \"sufficiently high\" probabilities based on the probability of the most likely token. Not all providers support this parameter.
+        :param top_k: Limits the model to choose from the top K most likely tokens at each step. A value of 1 means the model will always pick the most likely next token. Not all providers support this parameter.
         :param top_logprobs: Number of top log probabilities to return (0-20)
         :param top_p: Nucleus sampling parameter (0-1)
         :param trace: Metadata for observability and tracing. Known keys (trace_id, trace_name, span_name, generation_name, parent_span_id) have special handling. Additional keys are passed through as custom metadata to configured broadcast destinations.
@@ -1200,6 +1277,7 @@ class Chat(BaseSDK):
                     messages, List[components.ChatMessages]
                 ),
                 metadata=metadata,
+                min_p=min_p,
                 modalities=modalities,
                 model=model,
                 models=models,
@@ -1214,6 +1292,8 @@ class Chat(BaseSDK):
                 reasoning=utils.get_pydantic_model(
                     reasoning, Optional[components.ChatRequestReasoning]
                 ),
+                reasoning_effort=reasoning_effort,
+                repetition_penalty=repetition_penalty,
                 response_format=utils.get_pydantic_model(
                     response_format, Optional[components.ResponseFormat]
                 ),
@@ -1236,6 +1316,8 @@ class Chat(BaseSDK):
                 tools=utils.get_pydantic_model(
                     tools, Optional[List[components.ChatFunctionTool]]
                 ),
+                top_a=top_a,
+                top_k=top_k,
                 top_logprobs=top_logprobs,
                 top_p=top_p,
                 trace=utils.get_pydantic_model(trace, Optional[components.TraceConfig]),

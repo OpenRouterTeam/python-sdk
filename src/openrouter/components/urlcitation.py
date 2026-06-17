@@ -2,8 +2,8 @@
 
 from __future__ import annotations
 from openrouter.types import BaseModel
-from typing import Literal
-from typing_extensions import TypedDict
+from typing import Literal, Optional
+from typing_extensions import NotRequired, TypedDict
 
 
 URLCitationType = Literal["url_citation",]
@@ -15,6 +15,7 @@ class URLCitationTypedDict(TypedDict):
     title: str
     type: URLCitationType
     url: str
+    content: NotRequired[str]
 
 
 class URLCitation(BaseModel):
@@ -27,3 +28,5 @@ class URLCitation(BaseModel):
     type: URLCitationType
 
     url: str
+
+    content: Optional[str] = None

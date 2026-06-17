@@ -318,6 +318,7 @@ class OAuth(BaseSDK):
         key_label: Optional[str] = None,
         limit: Optional[float] = None,
         usage_limit_type: Optional[operations.UsageLimitType] = None,
+        workspace_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -327,7 +328,7 @@ class OAuth(BaseSDK):
 
         Create an authorization code for the PKCE flow to generate a user-controlled API key
 
-        :param callback_url: The callback URL to redirect to after authorization. Note, only https URLs on ports 443 and 3000 are allowed.
+        :param callback_url: The callback URL to redirect to after authorization. Supports https URLs and localhost/127.0.0.1 URLs on any port for local CLI tools.
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
@@ -341,6 +342,7 @@ class OAuth(BaseSDK):
         :param key_label: Optional custom label for the API key. Defaults to the app name if not provided.
         :param limit: Credit limit for the API key to be created
         :param usage_limit_type: Optional credit limit reset interval. When set, the credit limit resets on this interval.
+        :param workspace_id: Optional workspace ID to associate the API key with
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -368,6 +370,7 @@ class OAuth(BaseSDK):
                 key_label=key_label,
                 limit=limit,
                 usage_limit_type=usage_limit_type,
+                workspace_id=workspace_id,
             ),
         )
 
@@ -423,7 +426,7 @@ class OAuth(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "401", "409", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "409", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -442,6 +445,11 @@ class OAuth(BaseSDK):
                 errors.UnauthorizedResponseErrorData, http_res
             )
             raise errors.UnauthorizedResponseError(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ForbiddenResponseErrorData, http_res
+            )
+            raise errors.ForbiddenResponseError(response_data, http_res)
         if utils.match_response(http_res, "409", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ConflictResponseErrorData, http_res
@@ -480,6 +488,7 @@ class OAuth(BaseSDK):
         key_label: Optional[str] = None,
         limit: Optional[float] = None,
         usage_limit_type: Optional[operations.UsageLimitType] = None,
+        workspace_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -489,7 +498,7 @@ class OAuth(BaseSDK):
 
         Create an authorization code for the PKCE flow to generate a user-controlled API key
 
-        :param callback_url: The callback URL to redirect to after authorization. Note, only https URLs on ports 443 and 3000 are allowed.
+        :param callback_url: The callback URL to redirect to after authorization. Supports https URLs and localhost/127.0.0.1 URLs on any port for local CLI tools.
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
@@ -503,6 +512,7 @@ class OAuth(BaseSDK):
         :param key_label: Optional custom label for the API key. Defaults to the app name if not provided.
         :param limit: Credit limit for the API key to be created
         :param usage_limit_type: Optional credit limit reset interval. When set, the credit limit resets on this interval.
+        :param workspace_id: Optional workspace ID to associate the API key with
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -530,6 +540,7 @@ class OAuth(BaseSDK):
                 key_label=key_label,
                 limit=limit,
                 usage_limit_type=usage_limit_type,
+                workspace_id=workspace_id,
             ),
         )
 
@@ -585,7 +596,7 @@ class OAuth(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "401", "409", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "409", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -604,6 +615,11 @@ class OAuth(BaseSDK):
                 errors.UnauthorizedResponseErrorData, http_res
             )
             raise errors.UnauthorizedResponseError(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ForbiddenResponseErrorData, http_res
+            )
+            raise errors.ForbiddenResponseError(response_data, http_res)
         if utils.match_response(http_res, "409", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ConflictResponseErrorData, http_res

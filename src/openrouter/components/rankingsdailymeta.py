@@ -6,7 +6,7 @@ from typing import Literal
 from typing_extensions import TypedDict
 
 
-Version = Literal["v1",]
+RankingsDailyMetaVersion = Literal["v1",]
 r"""Dataset version. Field names and grain are stable for the life of `v1`."""
 
 
@@ -17,7 +17,7 @@ class RankingsDailyMetaTypedDict(TypedDict):
     r"""Resolved end of the date window (UTC, inclusive)."""
     start_date: str
     r"""Resolved start of the date window (UTC, inclusive)."""
-    version: Version
+    version: RankingsDailyMetaVersion
     r"""Dataset version. Field names and grain are stable for the life of `v1`."""
 
 
@@ -31,5 +31,5 @@ class RankingsDailyMeta(BaseModel):
     start_date: str
     r"""Resolved start of the date window (UTC, inclusive)."""
 
-    version: Version
+    version: RankingsDailyMetaVersion
     r"""Dataset version. Field names and grain are stable for the life of `v1`."""

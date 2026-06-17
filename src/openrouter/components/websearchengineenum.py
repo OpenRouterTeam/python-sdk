@@ -7,12 +7,13 @@ from typing import Literal, Union
 
 WebSearchEngineEnum = Union[
     Literal[
-        "auto",
         "native",
         "exa",
         "parallel",
         "firecrawl",
+        "perplexity",
+        "auto",
     ],
     UnrecognizedStr,
 ]
-r"""Which search engine to use. \"auto\" (default) uses native if the provider supports it, otherwise Exa. \"native\" forces the provider's built-in search. \"exa\" forces the Exa search API. \"firecrawl\" uses Firecrawl (requires BYOK). \"parallel\" uses the Parallel search API."""
+r"""Which search engine to use. \"auto\" (default) uses native if the provider supports it, otherwise Exa. \"native\" forces the provider's built-in search. \"exa\" forces the Exa search API. \"firecrawl\" uses Firecrawl (requires BYOK). \"parallel\" uses the Parallel search API. \"perplexity\" uses the Perplexity Search API (raw ranked results)."""
