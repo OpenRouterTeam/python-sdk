@@ -1436,6 +1436,7 @@ if TYPE_CHECKING:
     from .modelbenchmarks import ModelBenchmarks, ModelBenchmarksTypedDict
     from .modelgroup import ModelGroup
     from .modellinks import ModelLinks, ModelLinksTypedDict
+    from .modelreasoning import DefaultEffort, ModelReasoning, ModelReasoningTypedDict
     from .modelresponse import ModelResponse, ModelResponseTypedDict
     from .modelscountresponse import (
         ModelsCountResponse,
@@ -3076,6 +3077,7 @@ __all__ = [
     "DatetimeServerToolConfigTypedDict",
     "DatetimeServerToolType",
     "DatetimeServerToolTypedDict",
+    "DefaultEffort",
     "DefaultParameters",
     "DefaultParametersTypedDict",
     "DeleteBYOKKeyResponse",
@@ -3518,6 +3520,8 @@ __all__ = [
     "ModelGroup",
     "ModelLinks",
     "ModelLinksTypedDict",
+    "ModelReasoning",
+    "ModelReasoningTypedDict",
     "ModelResponse",
     "ModelResponseTypedDict",
     "ModelTypedDict",
@@ -5459,6 +5463,9 @@ _dynamic_imports: dict[str, str] = {
     "ModelGroup": ".modelgroup",
     "ModelLinks": ".modellinks",
     "ModelLinksTypedDict": ".modellinks",
+    "DefaultEffort": ".modelreasoning",
+    "ModelReasoning": ".modelreasoning",
+    "ModelReasoningTypedDict": ".modelreasoning",
     "ModelResponse": ".modelresponse",
     "ModelResponseTypedDict": ".modelresponse",
     "ModelsCountResponse": ".modelscountresponse",
