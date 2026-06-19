@@ -112,6 +112,68 @@ class PromptTokensDetails(BaseModel):
     r"""Video input tokens"""
 
 
+class ServerToolUseDetailsTypedDict(TypedDict):
+    r"""Usage for server-side tool execution (e.g., web search)"""
+
+    tool_calls_executed: NotRequired[Nullable[int]]
+    r"""Number of OpenRouter server tool calls that executed and produced a result"""
+    tool_calls_requested: NotRequired[Nullable[int]]
+    r"""Total number of OpenRouter server-orchestrated tool calls the model requested, across all tool types. Provider-native tools (e.g. native web search) are not counted here."""
+    web_search_requests: NotRequired[Nullable[int]]
+    r"""Number of web searches performed by server-side tools. For server-orchestrated tool calls a web search is also counted in tool_calls_requested; provider-native web search may report web_search_requests only. Do not sum the two."""
+
+
+class ServerToolUseDetails(BaseModel):
+    r"""Usage for server-side tool execution (e.g., web search)"""
+
+    tool_calls_executed: OptionalNullable[int] = UNSET
+    r"""Number of OpenRouter server tool calls that executed and produced a result"""
+
+    tool_calls_requested: OptionalNullable[int] = UNSET
+    r"""Total number of OpenRouter server-orchestrated tool calls the model requested, across all tool types. Provider-native tools (e.g. native web search) are not counted here."""
+
+    web_search_requests: OptionalNullable[int] = UNSET
+    r"""Number of web searches performed by server-side tools. For server-orchestrated tool calls a web search is also counted in tool_calls_requested; provider-native web search may report web_search_requests only. Do not sum the two."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = [
+            "tool_calls_executed",
+            "tool_calls_requested",
+            "web_search_requests",
+        ]
+        nullable_fields = [
+            "tool_calls_executed",
+            "tool_calls_requested",
+            "web_search_requests",
+        ]
+        null_default_fields = []
+
+        serialized = handler(self)
+
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+            serialized.pop(k, None)
+
+            optional_nullable = k in optional_fields and k in nullable_fields
+            is_set = (
+                self.__pydantic_fields_set__.intersection({n})
+                or k in null_default_fields
+            )  # pylint: disable=no-member
+
+            if val is not None and val != UNSET_SENTINEL:
+                m[k] = val
+            elif val != UNSET_SENTINEL and (
+                not k in optional_fields or (optional_nullable and is_set)
+            ):
+                m[k] = val
+
+        return m
+
+
 class ChatUsageTypedDict(TypedDict):
     r"""Token usage statistics"""
 
@@ -131,6 +193,8 @@ class ChatUsageTypedDict(TypedDict):
     r"""Whether a request was made using a Bring Your Own Key configuration"""
     prompt_tokens_details: NotRequired[Nullable[PromptTokensDetailsTypedDict]]
     r"""Detailed prompt token usage"""
+    server_tool_use_details: NotRequired[Nullable[ServerToolUseDetailsTypedDict]]
+    r"""Usage for server-side tool execution (e.g., web search)"""
 
 
 class ChatUsage(BaseModel):
@@ -160,6 +224,9 @@ class ChatUsage(BaseModel):
     prompt_tokens_details: OptionalNullable[PromptTokensDetails] = UNSET
     r"""Detailed prompt token usage"""
 
+    server_tool_use_details: OptionalNullable[ServerToolUseDetails] = UNSET
+    r"""Usage for server-side tool execution (e.g., web search)"""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = [
@@ -168,12 +235,14 @@ class ChatUsage(BaseModel):
             "cost_details",
             "is_byok",
             "prompt_tokens_details",
+            "server_tool_use_details",
         ]
         nullable_fields = [
             "completion_tokens_details",
             "cost",
             "cost_details",
             "prompt_tokens_details",
+            "server_tool_use_details",
         ]
         null_default_fields = []
 
