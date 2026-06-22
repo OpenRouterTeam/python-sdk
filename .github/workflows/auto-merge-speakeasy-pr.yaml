@@ -18,11 +18,17 @@ concurrency:
 jobs:
   auto-merge:
     if: |
-      github.event.sender.login == 'app/github-actions' &&
-      github.event.pull_request.user.login == 'app/github-actions' &&
+      github.event.sender.login == 'github-actions[bot]' &&
+      github.event.pull_request.user.login == 'github-actions[bot]' &&
       startsWith(github.event.pull_request.head.ref, 'speakeasy-sdk-regen-') &&
       contains(github.event.pull_request.title, '🐝 Update SDK') &&
-      contains(fromJSON('["patch", "minor", "major"]'), github.event.label.name)
+      (
+        (github.event.action == 'labeled' && contains(fromJSON('["patch", "minor", "major"]'), github.event.label.name)) ||
+        (github.event.action == 'opened' && 
+         (contains(github.event.pull_request.labels.*.name, 'patch') || 
+          contains(github.event.pull_request.labels.*.name, 'minor') || 
+          contains(github.event.pull_request.labels.*.name, 'major')))
+      )
     runs-on: ubuntu-latest
     steps:
       - name: Close superseded Speakeasy PRs
