@@ -5,7 +5,7 @@ name: Auto-merge Speakeasy PR
 
 on:
   pull_request:
-    types: [labeled]
+    types: [labeled, opened]
 
 permissions:
   contents: write
@@ -18,8 +18,8 @@ concurrency:
 jobs:
   auto-merge:
     if: |
-      github.event.sender.login == 'github-actions[bot]' &&
-      github.event.pull_request.user.login == 'github-actions[bot]' &&
+      github.event.sender.login == 'app/github-actions' &&
+      github.event.pull_request.user.login == 'app/github-actions' &&
       startsWith(github.event.pull_request.head.ref, 'speakeasy-sdk-regen-') &&
       contains(github.event.pull_request.title, '🐝 Update SDK') &&
       contains(fromJSON('["patch", "minor", "major"]'), github.event.label.name)
