@@ -5,6 +5,7 @@ from .defaultparameters import DefaultParameters, DefaultParametersTypedDict
 from .modelarchitecture import ModelArchitecture, ModelArchitectureTypedDict
 from .modelbenchmarks import ModelBenchmarks, ModelBenchmarksTypedDict
 from .modellinks import ModelLinks, ModelLinksTypedDict
+from .modelreasoning import ModelReasoning, ModelReasoningTypedDict
 from .parameter import Parameter
 from .perrequestlimits import PerRequestLimits, PerRequestLimitsTypedDict
 from .publicpricing import PublicPricing, PublicPricingTypedDict
@@ -62,6 +63,8 @@ class ModelTypedDict(TypedDict):
     r"""Hugging Face model identifier, if applicable"""
     knowledge_cutoff: NotRequired[Nullable[str]]
     r"""The date up to which the model was trained on data. ISO 8601 date string (YYYY-MM-DD) or null if unknown."""
+    reasoning: NotRequired[ModelReasoningTypedDict]
+    r"""Reasoning effort configuration. Omitted for non-reasoning models and dynamic router models."""
 
 
 class Model(BaseModel):
@@ -123,6 +126,9 @@ class Model(BaseModel):
     knowledge_cutoff: OptionalNullable[str] = UNSET
     r"""The date up to which the model was trained on data. ISO 8601 date string (YYYY-MM-DD) or null if unknown."""
 
+    reasoning: Optional[ModelReasoning] = None
+    r"""Reasoning effort configuration. Omitted for non-reasoning models and dynamic router models."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = [
@@ -131,6 +137,7 @@ class Model(BaseModel):
             "expiration_date",
             "hugging_face_id",
             "knowledge_cutoff",
+            "reasoning",
         ]
         nullable_fields = [
             "context_length",

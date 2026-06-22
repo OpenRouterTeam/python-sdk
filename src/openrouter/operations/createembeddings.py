@@ -344,6 +344,54 @@ class CreateEmbeddingsData(BaseModel):
 Object = Literal["list",]
 
 
+class CostDetailsTypedDict(TypedDict):
+    r"""Breakdown of upstream inference costs"""
+
+    upstream_inference_completions_cost: float
+    upstream_inference_prompt_cost: float
+    upstream_inference_cost: NotRequired[Nullable[float]]
+
+
+class CostDetails(BaseModel):
+    r"""Breakdown of upstream inference costs"""
+
+    upstream_inference_completions_cost: float
+
+    upstream_inference_prompt_cost: float
+
+    upstream_inference_cost: OptionalNullable[float] = UNSET
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = ["upstream_inference_cost"]
+        nullable_fields = ["upstream_inference_cost"]
+        null_default_fields = []
+
+        serialized = handler(self)
+
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+            serialized.pop(k, None)
+
+            optional_nullable = k in optional_fields and k in nullable_fields
+            is_set = (
+                self.__pydantic_fields_set__.intersection({n})
+                or k in null_default_fields
+            )  # pylint: disable=no-member
+
+            if val is not None and val != UNSET_SENTINEL:
+                m[k] = val
+            elif val != UNSET_SENTINEL and (
+                not k in optional_fields or (optional_nullable and is_set)
+            ):
+                m[k] = val
+
+        return m
+
+
 class PromptTokensDetailsTypedDict(TypedDict):
     r"""Per-modality token breakdown. Only present when the input contains 2+ modalities (e.g. text + image) and the upstream provider returns modality-level usage data. Only non-zero modality counts are included."""
 
@@ -387,6 +435,10 @@ class CreateEmbeddingsUsageTypedDict(TypedDict):
     r"""Total number of tokens used"""
     cost: NotRequired[float]
     r"""Cost of the request in credits"""
+    cost_details: NotRequired[Nullable[CostDetailsTypedDict]]
+    r"""Breakdown of upstream inference costs"""
+    is_byok: NotRequired[bool]
+    r"""Whether a request was made using a Bring Your Own Key configuration"""
     prompt_tokens_details: NotRequired[PromptTokensDetailsTypedDict]
     r"""Per-modality token breakdown. Only present when the input contains 2+ modalities (e.g. text + image) and the upstream provider returns modality-level usage data. Only non-zero modality counts are included."""
 
@@ -403,8 +455,44 @@ class CreateEmbeddingsUsage(BaseModel):
     cost: Optional[float] = None
     r"""Cost of the request in credits"""
 
+    cost_details: OptionalNullable[CostDetails] = UNSET
+    r"""Breakdown of upstream inference costs"""
+
+    is_byok: Optional[bool] = None
+    r"""Whether a request was made using a Bring Your Own Key configuration"""
+
     prompt_tokens_details: Optional[PromptTokensDetails] = None
     r"""Per-modality token breakdown. Only present when the input contains 2+ modalities (e.g. text + image) and the upstream provider returns modality-level usage data. Only non-zero modality counts are included."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = ["cost", "cost_details", "is_byok", "prompt_tokens_details"]
+        nullable_fields = ["cost_details"]
+        null_default_fields = []
+
+        serialized = handler(self)
+
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+            serialized.pop(k, None)
+
+            optional_nullable = k in optional_fields and k in nullable_fields
+            is_set = (
+                self.__pydantic_fields_set__.intersection({n})
+                or k in null_default_fields
+            )  # pylint: disable=no-member
+
+            if val is not None and val != UNSET_SENTINEL:
+                m[k] = val
+            elif val != UNSET_SENTINEL and (
+                not k in optional_fields or (optional_nullable and is_set)
+            ):
+                m[k] = val
+
+        return m
 
 
 class CreateEmbeddingsResponseBodyTypedDict(TypedDict):

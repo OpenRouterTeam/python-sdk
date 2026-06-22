@@ -18,6 +18,7 @@ import weakref
 if TYPE_CHECKING:
     from openrouter.analytics import Analytics
     from openrouter.api_keys import APIKeys
+    from openrouter.benchmarks import Benchmarks
     from openrouter.beta import Beta
     from openrouter.byok import Byok
     from openrouter.chat import Chat
@@ -55,6 +56,8 @@ class OpenRouter(BaseSDK):
     r"""Speech-to-text endpoints"""
     o_auth: "OAuth"
     r"""OAuth authentication endpoints"""
+    benchmarks: "Benchmarks"
+    r"""Benchmarks endpoints"""
     byok: "Byok"
     r"""BYOK endpoints"""
     chat: "Chat"
@@ -96,6 +99,7 @@ class OpenRouter(BaseSDK):
         "tts": ("openrouter.tts", "Tts"),
         "stt": ("openrouter.stt", "Stt"),
         "o_auth": ("openrouter.oauth", "OAuth"),
+        "benchmarks": ("openrouter.benchmarks", "Benchmarks"),
         "byok": ("openrouter.byok", "Byok"),
         "chat": ("openrouter.chat", "Chat"),
         "credits": ("openrouter.credits", "Credits"),

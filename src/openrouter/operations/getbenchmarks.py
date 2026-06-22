@@ -14,7 +14,7 @@ from typing import Literal, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-class GetBenchmarksDesignArenaGlobalsTypedDict(TypedDict):
+class GetBenchmarksGlobalsTypedDict(TypedDict):
     http_referer: NotRequired[str]
     r"""The app identifier should be your app's URL and is used as the primary identifier for rankings.
     This is used to track API usage per application.
@@ -30,7 +30,7 @@ class GetBenchmarksDesignArenaGlobalsTypedDict(TypedDict):
     """
 
 
-class GetBenchmarksDesignArenaGlobals(BaseModel):
+class GetBenchmarksGlobals(BaseModel):
     http_referer: Annotated[
         Optional[str],
         pydantic.Field(alias="HTTP-Referer"),
@@ -58,6 +58,27 @@ class GetBenchmarksDesignArenaGlobals(BaseModel):
     r"""Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
     """
+
+
+Source = Union[
+    Literal[
+        "artificial-analysis",
+        "design-arena",
+    ],
+    UnrecognizedStr,
+]
+r"""Benchmark source to query. Determines the shape of the returned items."""
+
+
+TaskType = Union[
+    Literal[
+        "coding",
+        "intelligence",
+        "agentic",
+    ],
+    UnrecognizedStr,
+]
+r"""Filter results by task type. For Artificial Analysis, maps to the corresponding index. For Design Arena, maps to the matching category."""
 
 
 Arena = Union[
@@ -68,10 +89,12 @@ Arena = Union[
     ],
     UnrecognizedStr,
 ]
-r"""Arena to query. Defaults to `models`."""
+r"""Design Arena only: arena to query. Defaults to `models` when source is `design-arena`."""
 
 
-class GetBenchmarksDesignArenaRequestTypedDict(TypedDict):
+class GetBenchmarksRequestTypedDict(TypedDict):
+    source: Source
+    r"""Benchmark source to query. Determines the shape of the returned items."""
     http_referer: NotRequired[str]
     r"""The app identifier should be your app's URL and is used as the primary identifier for rankings.
     This is used to track API usage per application.
@@ -85,15 +108,23 @@ class GetBenchmarksDesignArenaRequestTypedDict(TypedDict):
     r"""Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
     """
+    task_type: NotRequired[TaskType]
+    r"""Filter results by task type. For Artificial Analysis, maps to the corresponding index. For Design Arena, maps to the matching category."""
     arena: NotRequired[Arena]
-    r"""Arena to query. Defaults to `models`."""
+    r"""Design Arena only: arena to query. Defaults to `models` when source is `design-arena`."""
     category: NotRequired[str]
-    r"""Category within the arena (e.g. `codecategories`, `uicomponent`, `gamedev`, `3d`, `dataviz`, `image`, `video`, `svg`). When omitted, returns all categories."""
+    r"""Design Arena only: category within the arena (e.g. `codecategories`, `uicomponent`, `gamedev`, `3d`, `dataviz`, `image`, `video`, `svg`). When omitted, returns all categories."""
     max_results: NotRequired[int]
-    r"""Max results to return: per category when no category filter is applied (1–100, default 50)."""
+    r"""Max results to return (1–100, default 50)."""
 
 
-class GetBenchmarksDesignArenaRequest(BaseModel):
+class GetBenchmarksRequest(BaseModel):
+    source: Annotated[
+        Annotated[Source, PlainValidator(validate_open_enum(False))],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ]
+    r"""Benchmark source to query. Determines the shape of the returned items."""
+
     http_referer: Annotated[
         Optional[str],
         pydantic.Field(alias="HTTP-Referer"),
@@ -122,20 +153,26 @@ class GetBenchmarksDesignArenaRequest(BaseModel):
 
     """
 
+    task_type: Annotated[
+        Annotated[Optional[TaskType], PlainValidator(validate_open_enum(False))],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Filter results by task type. For Artificial Analysis, maps to the corresponding index. For Design Arena, maps to the matching category."""
+
     arena: Annotated[
         Annotated[Optional[Arena], PlainValidator(validate_open_enum(False))],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ] = "models"
-    r"""Arena to query. Defaults to `models`."""
+    ] = None
+    r"""Design Arena only: arena to query. Defaults to `models` when source is `design-arena`."""
 
     category: Annotated[
         Optional[str],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
-    r"""Category within the arena (e.g. `codecategories`, `uicomponent`, `gamedev`, `3d`, `dataviz`, `image`, `video`, `svg`). When omitted, returns all categories."""
+    r"""Design Arena only: category within the arena (e.g. `codecategories`, `uicomponent`, `gamedev`, `3d`, `dataviz`, `image`, `video`, `svg`). When omitted, returns all categories."""
 
     max_results: Annotated[
         Optional[int],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = 50
-    r"""Max results to return: per category when no category filter is applied (1–100, default 50)."""
+    r"""Max results to return (1–100, default 50)."""
