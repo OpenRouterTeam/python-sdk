@@ -7,6 +7,7 @@ from typing import Literal, Union
 
 ReasoningEffort = Union[
     Literal[
+        "max",
         "xhigh",
         "high",
         "medium",

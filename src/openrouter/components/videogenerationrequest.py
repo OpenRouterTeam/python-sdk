@@ -11,7 +11,7 @@ from typing import Any, Dict, List, Literal, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-AspectRatio = Union[
+VideoGenerationRequestAspectRatio = Union[
     Literal[
         "16:9",
         "9:16",
@@ -28,7 +28,7 @@ AspectRatio = Union[
 r"""Aspect ratio of the generated video"""
 
 
-class OptionsTypedDict(TypedDict):
+class VideoGenerationRequestOptionsTypedDict(TypedDict):
     r"""Provider-specific options keyed by provider slug. Only options for the matched provider are forwarded; the rest are ignored. Unrecognized keys are silently dropped."""
 
     oneai: NotRequired[Dict[str, Nullable[Any]]]
@@ -148,7 +148,7 @@ class OptionsTypedDict(TypedDict):
     z_ai: NotRequired[Dict[str, Nullable[Any]]]
 
 
-class Options(BaseModel):
+class VideoGenerationRequestOptions(BaseModel):
     r"""Provider-specific options keyed by provider slug. Only options for the matched provider are forwarded; the rest are ignored. Unrecognized keys are silently dropped."""
 
     oneai: Annotated[
@@ -429,16 +429,16 @@ class Options(BaseModel):
 class VideoGenerationRequestProviderTypedDict(TypedDict):
     r"""Provider-specific passthrough configuration"""
 
-    options: NotRequired[OptionsTypedDict]
+    options: NotRequired[VideoGenerationRequestOptionsTypedDict]
 
 
 class VideoGenerationRequestProvider(BaseModel):
     r"""Provider-specific passthrough configuration"""
 
-    options: Optional[Options] = None
+    options: Optional[VideoGenerationRequestOptions] = None
 
 
-Resolution = Union[
+VideoGenerationRequestResolution = Union[
     Literal[
         "480p",
         "720p",
@@ -455,7 +455,7 @@ r"""Resolution of the generated video"""
 class VideoGenerationRequestTypedDict(TypedDict):
     model: str
     prompt: str
-    aspect_ratio: NotRequired[AspectRatio]
+    aspect_ratio: NotRequired[VideoGenerationRequestAspectRatio]
     r"""Aspect ratio of the generated video"""
     callback_url: NotRequired[str]
     r"""URL to receive a webhook notification when the video generation job completes. Overrides the workspace-level default callback URL if set. Must be HTTPS."""
@@ -469,7 +469,7 @@ class VideoGenerationRequestTypedDict(TypedDict):
     r"""Reference assets to guide video generation. Accepts image, audio, and video references. Audio and video references are only honored by providers that support them (currently BytePlus Seedance 2.0); other providers use image references and ignore the rest."""
     provider: NotRequired[VideoGenerationRequestProviderTypedDict]
     r"""Provider-specific passthrough configuration"""
-    resolution: NotRequired[Resolution]
+    resolution: NotRequired[VideoGenerationRequestResolution]
     r"""Resolution of the generated video"""
     seed: NotRequired[int]
     r"""If specified, the generation will sample deterministically, such that repeated requests with the same seed and parameters should return the same result. Determinism is not guaranteed for all providers."""
@@ -483,7 +483,8 @@ class VideoGenerationRequest(BaseModel):
     prompt: str
 
     aspect_ratio: Annotated[
-        Optional[AspectRatio], PlainValidator(validate_open_enum(False))
+        Optional[VideoGenerationRequestAspectRatio],
+        PlainValidator(validate_open_enum(False)),
     ] = None
     r"""Aspect ratio of the generated video"""
 
@@ -506,7 +507,8 @@ class VideoGenerationRequest(BaseModel):
     r"""Provider-specific passthrough configuration"""
 
     resolution: Annotated[
-        Optional[Resolution], PlainValidator(validate_open_enum(False))
+        Optional[VideoGenerationRequestResolution],
+        PlainValidator(validate_open_enum(False)),
     ] = None
     r"""Resolution of the generated video"""
 

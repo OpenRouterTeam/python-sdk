@@ -15,6 +15,7 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 class ObservabilityArizeDestinationConfigTypedDict(TypedDict):
     api_key: str
     model_id: str
+    r"""The name of the tracing project in Arize AX"""
     space_key: str
     base_url: NotRequired[str]
     headers: NotRequired[Dict[str, str]]
@@ -25,6 +26,7 @@ class ObservabilityArizeDestinationConfig(BaseModel):
     api_key: Annotated[str, pydantic.Field(alias="apiKey")]
 
     model_id: Annotated[str, pydantic.Field(alias="modelId")]
+    r"""The name of the tracing project in Arize AX"""
 
     space_key: Annotated[str, pydantic.Field(alias="spaceKey")]
 

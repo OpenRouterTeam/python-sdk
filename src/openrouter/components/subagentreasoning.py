@@ -10,6 +10,7 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 SubagentReasoningEffort = Union[
     Literal[
+        "max",
         "xhigh",
         "high",
         "medium",

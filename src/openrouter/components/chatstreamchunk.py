@@ -16,7 +16,7 @@ from typing import List, Literal, Optional
 from typing_extensions import NotRequired, TypedDict
 
 
-class ErrorTypedDict(TypedDict):
+class ChatStreamChunkErrorTypedDict(TypedDict):
     r"""Error information"""
 
     code: int
@@ -25,7 +25,7 @@ class ErrorTypedDict(TypedDict):
     r"""Error message"""
 
 
-class Error(BaseModel):
+class ChatStreamChunkError(BaseModel):
     r"""Error information"""
 
     code: int
@@ -50,7 +50,7 @@ class ChatStreamChunkTypedDict(TypedDict):
     model: str
     r"""Model used for completion"""
     object: ChatStreamChunkObject
-    error: NotRequired[ErrorTypedDict]
+    error: NotRequired[ChatStreamChunkErrorTypedDict]
     r"""Error information"""
     openrouter_metadata: NotRequired[OpenRouterMetadataTypedDict]
     service_tier: NotRequired[Nullable[str]]
@@ -78,7 +78,7 @@ class ChatStreamChunk(BaseModel):
 
     object: ChatStreamChunkObject
 
-    error: Optional[Error] = None
+    error: Optional[ChatStreamChunkError] = None
     r"""Error information"""
 
     openrouter_metadata: Optional[OpenRouterMetadata] = None
