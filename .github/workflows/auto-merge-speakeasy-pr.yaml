@@ -31,9 +31,16 @@ jobs:
       )
     runs-on: ubuntu-latest
     steps:
+      - name: Generate GitHub App token
+        id: app-token
+        uses: actions/create-github-app-token@v3
+        with:
+          app-id: ${{ secrets.GH_DOCS_SYNC_APP_ID }}
+          private-key: ${{ secrets.GH_DOCS_SYNC_APP_PRIVATE_KEY }}
+
       - name: Close superseded Speakeasy PRs
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
         run: |
           set -euo pipefail
           CURRENT_PR="${{ github.event.pull_request.number }}"
@@ -64,7 +71,7 @@ jobs:
 
       - name: Auto-merge Speakeasy PR
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
         run: |
           set -euo pipefail
           PR_NUM="${{ github.event.pull_request.number }}"
