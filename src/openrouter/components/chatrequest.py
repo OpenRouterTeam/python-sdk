@@ -106,6 +106,7 @@ ChatRequestPlugin = Annotated[
 
 ChatRequestEffort = Union[
     Literal[
+        "max",
         "xhigh",
         "high",
         "medium",
@@ -172,6 +173,7 @@ class ChatRequestReasoning(BaseModel):
 
 ChatRequestReasoningEffort = Union[
     Literal[
+        "max",
         "xhigh",
         "high",
         "medium",

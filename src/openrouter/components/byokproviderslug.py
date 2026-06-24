@@ -82,6 +82,7 @@ BYOKProviderSlug = Union[
         "stepfun",
         "streamlake",
         "switchpoint",
+        "tenstorrent",
         "together",
         "upstage",
         "venice",

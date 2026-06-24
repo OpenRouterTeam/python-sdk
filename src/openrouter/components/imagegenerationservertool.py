@@ -16,7 +16,7 @@ from typing import Literal, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-Background = Union[
+ImageGenerationServerToolBackground = Union[
     Literal[
         "transparent",
         "opaque",
@@ -64,7 +64,7 @@ Moderation = Union[
 ]
 
 
-OutputFormat = Union[
+ImageGenerationServerToolOutputFormat = Union[
     Literal[
         "png",
         "webp",
@@ -74,7 +74,7 @@ OutputFormat = Union[
 ]
 
 
-Quality = Union[
+ImageGenerationServerToolQuality = Union[
     Literal[
         "low",
         "medium",
@@ -103,15 +103,15 @@ class ImageGenerationServerToolTypedDict(TypedDict):
     r"""Image generation tool configuration"""
 
     type: ImageGenerationServerToolType
-    background: NotRequired[Background]
+    background: NotRequired[ImageGenerationServerToolBackground]
     input_fidelity: NotRequired[Nullable[InputFidelity]]
     input_image_mask: NotRequired[InputImageMaskTypedDict]
     model: NotRequired[ModelEnum]
     moderation: NotRequired[Moderation]
     output_compression: NotRequired[int]
-    output_format: NotRequired[OutputFormat]
+    output_format: NotRequired[ImageGenerationServerToolOutputFormat]
     partial_images: NotRequired[int]
-    quality: NotRequired[Quality]
+    quality: NotRequired[ImageGenerationServerToolQuality]
     size: NotRequired[Size]
 
 
@@ -121,7 +121,8 @@ class ImageGenerationServerTool(BaseModel):
     type: ImageGenerationServerToolType
 
     background: Annotated[
-        Optional[Background], PlainValidator(validate_open_enum(False))
+        Optional[ImageGenerationServerToolBackground],
+        PlainValidator(validate_open_enum(False)),
     ] = None
 
     input_fidelity: Annotated[
@@ -141,14 +142,16 @@ class ImageGenerationServerTool(BaseModel):
     output_compression: Optional[int] = None
 
     output_format: Annotated[
-        Optional[OutputFormat], PlainValidator(validate_open_enum(False))
+        Optional[ImageGenerationServerToolOutputFormat],
+        PlainValidator(validate_open_enum(False)),
     ] = None
 
     partial_images: Optional[int] = None
 
-    quality: Annotated[Optional[Quality], PlainValidator(validate_open_enum(False))] = (
-        None
-    )
+    quality: Annotated[
+        Optional[ImageGenerationServerToolQuality],
+        PlainValidator(validate_open_enum(False)),
+    ] = None
 
     size: Annotated[Optional[Size], PlainValidator(validate_open_enum(False))] = None
 

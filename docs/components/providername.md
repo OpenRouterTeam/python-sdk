@@ -82,6 +82,7 @@
 | `STEALTH`           | Stealth             |
 | `STREAM_LAKE`       | StreamLake          |
 | `SWITCHPOINT`       | Switchpoint         |
+| `TENSTORRENT`       | Tenstorrent         |
 | `TOGETHER`          | Together            |
 | `UPSTAGE`           | Upstage             |
 | `VENICE`            | Venice              |

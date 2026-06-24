@@ -115,6 +115,7 @@ class ProviderOptionsTypedDict(TypedDict):
     streamlake: NotRequired[Dict[str, Nullable[Any]]]
     switchpoint: NotRequired[Dict[str, Nullable[Any]]]
     targon: NotRequired[Dict[str, Nullable[Any]]]
+    tenstorrent: NotRequired[Dict[str, Nullable[Any]]]
     together: NotRequired[Dict[str, Nullable[Any]]]
     together_lite: NotRequired[Dict[str, Nullable[Any]]]
     ubicloud: NotRequired[Dict[str, Nullable[Any]]]
@@ -379,6 +380,8 @@ class ProviderOptions(BaseModel):
     switchpoint: Optional[Dict[str, Nullable[Any]]] = None
 
     targon: Optional[Dict[str, Nullable[Any]]] = None
+
+    tenstorrent: Optional[Dict[str, Nullable[Any]]] = None
 
     together: Optional[Dict[str, Nullable[Any]]] = None
 
