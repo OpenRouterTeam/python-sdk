@@ -11,7 +11,7 @@ from typing import Any, Dict, List, Literal, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-AspectRatio = Union[
+VideoGenerationRequestAspectRatio = Union[
     Literal[
         "16:9",
         "9:16",
@@ -28,7 +28,7 @@ AspectRatio = Union[
 r"""Aspect ratio of the generated video"""
 
 
-class OptionsTypedDict(TypedDict):
+class VideoGenerationRequestOptionsTypedDict(TypedDict):
     r"""Provider-specific options keyed by provider slug. Only options for the matched provider are forwarded; the rest are ignored. Unrecognized keys are silently dropped."""
 
     oneai: NotRequired[Dict[str, Nullable[Any]]]
@@ -76,11 +76,13 @@ class OptionsTypedDict(TypedDict):
     google_vertex: NotRequired[Dict[str, Nullable[Any]]]
     gopomelo: NotRequired[Dict[str, Nullable[Any]]]
     groq: NotRequired[Dict[str, Nullable[Any]]]
+    heygen: NotRequired[Dict[str, Nullable[Any]]]
     huggingface: NotRequired[Dict[str, Nullable[Any]]]
     hyperbolic: NotRequired[Dict[str, Nullable[Any]]]
     hyperbolic_quantized: NotRequired[Dict[str, Nullable[Any]]]
     inception: NotRequired[Dict[str, Nullable[Any]]]
     inceptron: NotRequired[Dict[str, Nullable[Any]]]
+    inferact_vllm: NotRequired[Dict[str, Nullable[Any]]]
     inference_net: NotRequired[Dict[str, Nullable[Any]]]
     infermatic: NotRequired[Dict[str, Nullable[Any]]]
     inflection: NotRequired[Dict[str, Nullable[Any]]]
@@ -125,6 +127,7 @@ class OptionsTypedDict(TypedDict):
     reka: NotRequired[Dict[str, Nullable[Any]]]
     relace: NotRequired[Dict[str, Nullable[Any]]]
     replicate: NotRequired[Dict[str, Nullable[Any]]]
+    sakana_ai: NotRequired[Dict[str, Nullable[Any]]]
     sambanova: NotRequired[Dict[str, Nullable[Any]]]
     sambanova_cloaked: NotRequired[Dict[str, Nullable[Any]]]
     seed: NotRequired[Dict[str, Nullable[Any]]]
@@ -136,6 +139,7 @@ class OptionsTypedDict(TypedDict):
     streamlake: NotRequired[Dict[str, Nullable[Any]]]
     switchpoint: NotRequired[Dict[str, Nullable[Any]]]
     targon: NotRequired[Dict[str, Nullable[Any]]]
+    tenstorrent: NotRequired[Dict[str, Nullable[Any]]]
     together: NotRequired[Dict[str, Nullable[Any]]]
     together_lite: NotRequired[Dict[str, Nullable[Any]]]
     ubicloud: NotRequired[Dict[str, Nullable[Any]]]
@@ -148,7 +152,7 @@ class OptionsTypedDict(TypedDict):
     z_ai: NotRequired[Dict[str, Nullable[Any]]]
 
 
-class Options(BaseModel):
+class VideoGenerationRequestOptions(BaseModel):
     r"""Provider-specific options keyed by provider slug. Only options for the matched provider are forwarded; the rest are ignored. Unrecognized keys are silently dropped."""
 
     oneai: Annotated[
@@ -261,6 +265,8 @@ class Options(BaseModel):
 
     groq: Optional[Dict[str, Nullable[Any]]] = None
 
+    heygen: Optional[Dict[str, Nullable[Any]]] = None
+
     huggingface: Optional[Dict[str, Nullable[Any]]] = None
 
     hyperbolic: Optional[Dict[str, Nullable[Any]]] = None
@@ -272,6 +278,10 @@ class Options(BaseModel):
     inception: Optional[Dict[str, Nullable[Any]]] = None
 
     inceptron: Optional[Dict[str, Nullable[Any]]] = None
+
+    inferact_vllm: Annotated[
+        Optional[Dict[str, Nullable[Any]]], pydantic.Field(alias="inferact-vllm")
+    ] = None
 
     inference_net: Annotated[
         Optional[Dict[str, Nullable[Any]]], pydantic.Field(alias="inference-net")
@@ -375,6 +385,10 @@ class Options(BaseModel):
 
     replicate: Optional[Dict[str, Nullable[Any]]] = None
 
+    sakana_ai: Annotated[
+        Optional[Dict[str, Nullable[Any]]], pydantic.Field(alias="sakana-ai")
+    ] = None
+
     sambanova: Optional[Dict[str, Nullable[Any]]] = None
 
     sambanova_cloaked: Annotated[
@@ -400,6 +414,8 @@ class Options(BaseModel):
     switchpoint: Optional[Dict[str, Nullable[Any]]] = None
 
     targon: Optional[Dict[str, Nullable[Any]]] = None
+
+    tenstorrent: Optional[Dict[str, Nullable[Any]]] = None
 
     together: Optional[Dict[str, Nullable[Any]]] = None
 
@@ -429,16 +445,16 @@ class Options(BaseModel):
 class VideoGenerationRequestProviderTypedDict(TypedDict):
     r"""Provider-specific passthrough configuration"""
 
-    options: NotRequired[OptionsTypedDict]
+    options: NotRequired[VideoGenerationRequestOptionsTypedDict]
 
 
 class VideoGenerationRequestProvider(BaseModel):
     r"""Provider-specific passthrough configuration"""
 
-    options: Optional[Options] = None
+    options: Optional[VideoGenerationRequestOptions] = None
 
 
-Resolution = Union[
+VideoGenerationRequestResolution = Union[
     Literal[
         "480p",
         "720p",
@@ -455,7 +471,7 @@ r"""Resolution of the generated video"""
 class VideoGenerationRequestTypedDict(TypedDict):
     model: str
     prompt: str
-    aspect_ratio: NotRequired[AspectRatio]
+    aspect_ratio: NotRequired[VideoGenerationRequestAspectRatio]
     r"""Aspect ratio of the generated video"""
     callback_url: NotRequired[str]
     r"""URL to receive a webhook notification when the video generation job completes. Overrides the workspace-level default callback URL if set. Must be HTTPS."""
@@ -469,7 +485,7 @@ class VideoGenerationRequestTypedDict(TypedDict):
     r"""Reference assets to guide video generation. Accepts image, audio, and video references. Audio and video references are only honored by providers that support them (currently BytePlus Seedance 2.0); other providers use image references and ignore the rest."""
     provider: NotRequired[VideoGenerationRequestProviderTypedDict]
     r"""Provider-specific passthrough configuration"""
-    resolution: NotRequired[Resolution]
+    resolution: NotRequired[VideoGenerationRequestResolution]
     r"""Resolution of the generated video"""
     seed: NotRequired[int]
     r"""If specified, the generation will sample deterministically, such that repeated requests with the same seed and parameters should return the same result. Determinism is not guaranteed for all providers."""
@@ -483,7 +499,8 @@ class VideoGenerationRequest(BaseModel):
     prompt: str
 
     aspect_ratio: Annotated[
-        Optional[AspectRatio], PlainValidator(validate_open_enum(False))
+        Optional[VideoGenerationRequestAspectRatio],
+        PlainValidator(validate_open_enum(False)),
     ] = None
     r"""Aspect ratio of the generated video"""
 
@@ -506,7 +523,8 @@ class VideoGenerationRequest(BaseModel):
     r"""Provider-specific passthrough configuration"""
 
     resolution: Annotated[
-        Optional[Resolution], PlainValidator(validate_open_enum(False))
+        Optional[VideoGenerationRequestResolution],
+        PlainValidator(validate_open_enum(False)),
     ] = None
     r"""Resolution of the generated video"""
 

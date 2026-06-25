@@ -298,11 +298,11 @@ class ContextManagement(BaseModel):
     edits: Optional[List[Edit]] = None
 
 
-class MetadataTypedDict(TypedDict):
+class MessagesRequestMetadataTypedDict(TypedDict):
     user_id: NotRequired[Nullable[str]]
 
 
-class Metadata(BaseModel):
+class MessagesRequestMetadata(BaseModel):
     user_id: OptionalNullable[str] = UNSET
 
     @model_serializer(mode="wrap")
@@ -1050,7 +1050,7 @@ class MessagesRequestTypedDict(TypedDict):
     fallbacks: NotRequired[Nullable[List[MessagesFallbackParamTypedDict]]]
     r"""Fallback models to try if the primary model fails or refuses, in order. Handled by OpenRouter multi-model routing rather than Anthropic server-side fallbacks; cannot be combined with `models`. Each entry accepts only `model`. Maximum of 3 entries."""
     max_tokens: NotRequired[int]
-    metadata: NotRequired[MetadataTypedDict]
+    metadata: NotRequired[MessagesRequestMetadataTypedDict]
     models: NotRequired[List[str]]
     output_config: NotRequired[MessagesOutputConfigTypedDict]
     r"""Configuration for controlling output behavior. Supports the effort parameter and structured output format."""
@@ -1096,7 +1096,7 @@ class MessagesRequest(BaseModel):
 
     max_tokens: Optional[int] = None
 
-    metadata: Optional[Metadata] = None
+    metadata: Optional[MessagesRequestMetadata] = None
 
     models: Optional[List[str]] = None
 

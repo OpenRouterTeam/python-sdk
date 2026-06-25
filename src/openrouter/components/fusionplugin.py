@@ -15,6 +15,7 @@ PresetEnum = Union[
     Literal[
         "general-high",
         "general-budget",
+        "general-fast",
     ],
     UnrecognizedStr,
 ]
