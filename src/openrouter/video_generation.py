@@ -21,7 +21,7 @@ class VideoGeneration(BaseSDK):
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
-        aspect_ratio: Optional[components.AspectRatio] = None,
+        aspect_ratio: Optional[components.VideoGenerationRequestAspectRatio] = None,
         callback_url: Optional[str] = None,
         duration: Optional[int] = None,
         frame_images: Optional[
@@ -40,7 +40,7 @@ class VideoGeneration(BaseSDK):
                 components.VideoGenerationRequestProviderTypedDict,
             ]
         ] = None,
-        resolution: Optional[components.Resolution] = None,
+        resolution: Optional[components.VideoGenerationRequestResolution] = None,
         seed: Optional[int] = None,
         size: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -222,7 +222,7 @@ class VideoGeneration(BaseSDK):
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
-        aspect_ratio: Optional[components.AspectRatio] = None,
+        aspect_ratio: Optional[components.VideoGenerationRequestAspectRatio] = None,
         callback_url: Optional[str] = None,
         duration: Optional[int] = None,
         frame_images: Optional[
@@ -241,7 +241,7 @@ class VideoGeneration(BaseSDK):
                 components.VideoGenerationRequestProviderTypedDict,
             ]
         ] = None,
-        resolution: Optional[components.Resolution] = None,
+        resolution: Optional[components.VideoGenerationRequestResolution] = None,
         seed: Optional[int] = None,
         size: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,

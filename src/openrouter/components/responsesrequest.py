@@ -16,6 +16,7 @@ from .applypatchservertool_openrouter import (
 )
 from .autorouterplugin import AutoRouterPlugin, AutoRouterPluginTypedDict
 from .bashservertool import BashServerTool, BashServerToolTypedDict
+from .chatdebugoptions import ChatDebugOptions, ChatDebugOptionsTypedDict
 from .chatsearchmodelsservertool import (
     ChatSearchModelsServerTool,
     ChatSearchModelsServerToolTypedDict,
@@ -291,6 +292,8 @@ class ResponsesRequestTypedDict(TypedDict):
     background: NotRequired[Nullable[bool]]
     cache_control: NotRequired[AnthropicCacheControlDirectiveTypedDict]
     r"""Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. Currently supported for Anthropic Claude models."""
+    debug: NotRequired[ChatDebugOptionsTypedDict]
+    r"""Debug options for inspecting request transformations (streaming only)"""
     frequency_penalty: NotRequired[Nullable[float]]
     image_config: NotRequired[Dict[str, ImageConfigTypedDict]]
     r"""Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/guides/overview/multimodal/image-generation for more details."""
@@ -347,6 +350,9 @@ class ResponsesRequest(BaseModel):
 
     cache_control: Optional[AnthropicCacheControlDirective] = None
     r"""Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. Currently supported for Anthropic Claude models."""
+
+    debug: Optional[ChatDebugOptions] = None
+    r"""Debug options for inspecting request transformations (streaming only)"""
 
     frequency_penalty: OptionalNullable[float] = UNSET
 
@@ -448,6 +454,7 @@ class ResponsesRequest(BaseModel):
         optional_fields = [
             "background",
             "cache_control",
+            "debug",
             "frequency_penalty",
             "image_config",
             "include",
