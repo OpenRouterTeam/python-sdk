@@ -159,6 +159,13 @@ jobs:
                 '[.statusCheckRollup[]? | select(.status == "COMPLETED") | select(.conclusion != "SUCCESS" and .conclusion != "SKIPPED" and .conclusion != "NEUTRAL")] | length')
 
               if [ "$TOTAL" -eq 0 ]; then
+                # GITHUB_TOKEN-authored regen PRs get no pull_request checks at all,
+                # so TOTAL stays 0 forever. Wait a short grace window in case checks
+                # are merely slow to register, then proceed rather than time out.
+                if [ "$elapsed" -ge 60 ]; then
+                  echo "No checks registered after ${elapsed}s — proceeding (checkless PR)"
+                  return 0
+                fi
                 echo "Checks not yet registered — waiting ${interval}s..."
                 sleep "$interval"
                 elapsed=$((elapsed + interval))
