@@ -18,9 +18,11 @@ import weakref
 if TYPE_CHECKING:
     from openrouter.analytics import Analytics
     from openrouter.api_keys import APIKeys
+    from openrouter.benchmarks import Benchmarks
     from openrouter.beta import Beta
     from openrouter.byok import Byok
     from openrouter.chat import Chat
+    from openrouter.classifications import Classifications
     from openrouter.credits import Credits
     from openrouter.datasets import Datasets
     from openrouter.embeddings import Embeddings
@@ -28,6 +30,7 @@ if TYPE_CHECKING:
     from openrouter.files import Files
     from openrouter.generations import Generations
     from openrouter.guardrails import Guardrails
+    from openrouter.images import Images
     from openrouter.models_ import Models
     from openrouter.oauth import OAuth
     from openrouter.observability import Observability
@@ -55,9 +58,13 @@ class OpenRouter(BaseSDK):
     r"""Speech-to-text endpoints"""
     o_auth: "OAuth"
     r"""OAuth authentication endpoints"""
+    benchmarks: "Benchmarks"
+    r"""Benchmarks endpoints"""
     byok: "Byok"
     r"""BYOK endpoints"""
     chat: "Chat"
+    classifications: "Classifications"
+    r"""Task classification market-share endpoints"""
     credits: "Credits"
     r"""Credit management endpoints"""
     datasets: "Datasets"
@@ -72,6 +79,8 @@ class OpenRouter(BaseSDK):
     r"""Generation history endpoints"""
     guardrails: "Guardrails"
     r"""Guardrails endpoints"""
+    images: "Images"
+    r"""Images endpoints"""
     api_keys: "APIKeys"
     r"""API key management endpoints"""
     models: "Models"
@@ -96,8 +105,10 @@ class OpenRouter(BaseSDK):
         "tts": ("openrouter.tts", "Tts"),
         "stt": ("openrouter.stt", "Stt"),
         "o_auth": ("openrouter.oauth", "OAuth"),
+        "benchmarks": ("openrouter.benchmarks", "Benchmarks"),
         "byok": ("openrouter.byok", "Byok"),
         "chat": ("openrouter.chat", "Chat"),
+        "classifications": ("openrouter.classifications", "Classifications"),
         "credits": ("openrouter.credits", "Credits"),
         "datasets": ("openrouter.datasets", "Datasets"),
         "embeddings": ("openrouter.embeddings", "Embeddings"),
@@ -105,6 +116,7 @@ class OpenRouter(BaseSDK):
         "files": ("openrouter.files", "Files"),
         "generations": ("openrouter.generations", "Generations"),
         "guardrails": ("openrouter.guardrails", "Guardrails"),
+        "images": ("openrouter.images", "Images"),
         "api_keys": ("openrouter.api_keys", "APIKeys"),
         "models": ("openrouter.models_", "Models"),
         "observability": ("openrouter.observability", "Observability"),

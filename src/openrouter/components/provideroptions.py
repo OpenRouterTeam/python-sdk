@@ -55,11 +55,13 @@ class ProviderOptionsTypedDict(TypedDict):
     google_vertex: NotRequired[Dict[str, Nullable[Any]]]
     gopomelo: NotRequired[Dict[str, Nullable[Any]]]
     groq: NotRequired[Dict[str, Nullable[Any]]]
+    heygen: NotRequired[Dict[str, Nullable[Any]]]
     huggingface: NotRequired[Dict[str, Nullable[Any]]]
     hyperbolic: NotRequired[Dict[str, Nullable[Any]]]
     hyperbolic_quantized: NotRequired[Dict[str, Nullable[Any]]]
     inception: NotRequired[Dict[str, Nullable[Any]]]
     inceptron: NotRequired[Dict[str, Nullable[Any]]]
+    inferact_vllm: NotRequired[Dict[str, Nullable[Any]]]
     inference_net: NotRequired[Dict[str, Nullable[Any]]]
     infermatic: NotRequired[Dict[str, Nullable[Any]]]
     inflection: NotRequired[Dict[str, Nullable[Any]]]
@@ -104,6 +106,7 @@ class ProviderOptionsTypedDict(TypedDict):
     reka: NotRequired[Dict[str, Nullable[Any]]]
     relace: NotRequired[Dict[str, Nullable[Any]]]
     replicate: NotRequired[Dict[str, Nullable[Any]]]
+    sakana_ai: NotRequired[Dict[str, Nullable[Any]]]
     sambanova: NotRequired[Dict[str, Nullable[Any]]]
     sambanova_cloaked: NotRequired[Dict[str, Nullable[Any]]]
     seed: NotRequired[Dict[str, Nullable[Any]]]
@@ -115,6 +118,7 @@ class ProviderOptionsTypedDict(TypedDict):
     streamlake: NotRequired[Dict[str, Nullable[Any]]]
     switchpoint: NotRequired[Dict[str, Nullable[Any]]]
     targon: NotRequired[Dict[str, Nullable[Any]]]
+    tenstorrent: NotRequired[Dict[str, Nullable[Any]]]
     together: NotRequired[Dict[str, Nullable[Any]]]
     together_lite: NotRequired[Dict[str, Nullable[Any]]]
     ubicloud: NotRequired[Dict[str, Nullable[Any]]]
@@ -240,6 +244,8 @@ class ProviderOptions(BaseModel):
 
     groq: Optional[Dict[str, Nullable[Any]]] = None
 
+    heygen: Optional[Dict[str, Nullable[Any]]] = None
+
     huggingface: Optional[Dict[str, Nullable[Any]]] = None
 
     hyperbolic: Optional[Dict[str, Nullable[Any]]] = None
@@ -251,6 +257,10 @@ class ProviderOptions(BaseModel):
     inception: Optional[Dict[str, Nullable[Any]]] = None
 
     inceptron: Optional[Dict[str, Nullable[Any]]] = None
+
+    inferact_vllm: Annotated[
+        Optional[Dict[str, Nullable[Any]]], pydantic.Field(alias="inferact-vllm")
+    ] = None
 
     inference_net: Annotated[
         Optional[Dict[str, Nullable[Any]]], pydantic.Field(alias="inference-net")
@@ -354,6 +364,10 @@ class ProviderOptions(BaseModel):
 
     replicate: Optional[Dict[str, Nullable[Any]]] = None
 
+    sakana_ai: Annotated[
+        Optional[Dict[str, Nullable[Any]]], pydantic.Field(alias="sakana-ai")
+    ] = None
+
     sambanova: Optional[Dict[str, Nullable[Any]]] = None
 
     sambanova_cloaked: Annotated[
@@ -379,6 +393,8 @@ class ProviderOptions(BaseModel):
     switchpoint: Optional[Dict[str, Nullable[Any]]] = None
 
     targon: Optional[Dict[str, Nullable[Any]]] = None
+
+    tenstorrent: Optional[Dict[str, Nullable[Any]]] = None
 
     together: Optional[Dict[str, Nullable[Any]]] = None
 

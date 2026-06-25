@@ -5,7 +5,7 @@ from openrouter.types import BaseModel
 from typing_extensions import TypedDict
 
 
-class BenchmarkPricingTypedDict(TypedDict):
+class UnifiedBenchmarkPricingTypedDict(TypedDict):
     r"""OpenRouter pricing per token for this model. Null if pricing is unavailable."""
 
     completion: str
@@ -14,7 +14,7 @@ class BenchmarkPricingTypedDict(TypedDict):
     r"""Cost per input token (USD, decimal string)."""
 
 
-class BenchmarkPricing(BaseModel):
+class UnifiedBenchmarkPricing(BaseModel):
     r"""OpenRouter pricing per token for this model. Null if pricing is unavailable."""
 
     completion: str

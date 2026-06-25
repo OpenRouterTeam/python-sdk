@@ -33,6 +33,9 @@ class Responses(BaseSDK):
                 components.AnthropicCacheControlDirectiveTypedDict,
             ]
         ] = None,
+        debug: Optional[
+            Union[components.ChatDebugOptions, components.ChatDebugOptionsTypedDict]
+        ] = None,
         frequency_penalty: OptionalNullable[float] = UNSET,
         image_config: Optional[
             Union[
@@ -128,6 +131,7 @@ class Responses(BaseSDK):
         :param x_open_router_metadata: Opt-in to surface routing metadata on the response under `openrouter_metadata`. Defaults to `disabled`. The legacy header `X-OpenRouter-Experimental-Metadata` is also accepted for backward compatibility.
         :param background:
         :param cache_control: Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. Currently supported for Anthropic Claude models.
+        :param debug: Debug options for inspecting request transformations (streaming only)
         :param frequency_penalty:
         :param image_config: Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/guides/overview/multimodal/image-generation for more details.
         :param include:
@@ -183,6 +187,9 @@ class Responses(BaseSDK):
                 components.AnthropicCacheControlDirective,
                 components.AnthropicCacheControlDirectiveTypedDict,
             ]
+        ] = None,
+        debug: Optional[
+            Union[components.ChatDebugOptions, components.ChatDebugOptionsTypedDict]
         ] = None,
         frequency_penalty: OptionalNullable[float] = UNSET,
         image_config: Optional[
@@ -279,6 +286,7 @@ class Responses(BaseSDK):
         :param x_open_router_metadata: Opt-in to surface routing metadata on the response under `openrouter_metadata`. Defaults to `disabled`. The legacy header `X-OpenRouter-Experimental-Metadata` is also accepted for backward compatibility.
         :param background:
         :param cache_control: Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. Currently supported for Anthropic Claude models.
+        :param debug: Debug options for inspecting request transformations (streaming only)
         :param frequency_penalty:
         :param image_config: Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/guides/overview/multimodal/image-generation for more details.
         :param include:
@@ -333,6 +341,9 @@ class Responses(BaseSDK):
                 components.AnthropicCacheControlDirective,
                 components.AnthropicCacheControlDirectiveTypedDict,
             ]
+        ] = None,
+        debug: Optional[
+            Union[components.ChatDebugOptions, components.ChatDebugOptionsTypedDict]
         ] = None,
         frequency_penalty: OptionalNullable[float] = UNSET,
         image_config: Optional[
@@ -429,6 +440,7 @@ class Responses(BaseSDK):
         :param x_open_router_metadata: Opt-in to surface routing metadata on the response under `openrouter_metadata`. Defaults to `disabled`. The legacy header `X-OpenRouter-Experimental-Metadata` is also accepted for backward compatibility.
         :param background:
         :param cache_control: Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. Currently supported for Anthropic Claude models.
+        :param debug: Debug options for inspecting request transformations (streaming only)
         :param frequency_penalty:
         :param image_config: Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/guides/overview/multimodal/image-generation for more details.
         :param include:
@@ -488,6 +500,9 @@ class Responses(BaseSDK):
                 background=background,
                 cache_control=utils.get_pydantic_model(
                     cache_control, Optional[components.AnthropicCacheControlDirective]
+                ),
+                debug=utils.get_pydantic_model(
+                    debug, Optional[components.ChatDebugOptions]
                 ),
                 frequency_penalty=frequency_penalty,
                 image_config=image_config,
@@ -767,6 +782,9 @@ class Responses(BaseSDK):
                 components.AnthropicCacheControlDirectiveTypedDict,
             ]
         ] = None,
+        debug: Optional[
+            Union[components.ChatDebugOptions, components.ChatDebugOptionsTypedDict]
+        ] = None,
         frequency_penalty: OptionalNullable[float] = UNSET,
         image_config: Optional[
             Union[
@@ -862,6 +880,7 @@ class Responses(BaseSDK):
         :param x_open_router_metadata: Opt-in to surface routing metadata on the response under `openrouter_metadata`. Defaults to `disabled`. The legacy header `X-OpenRouter-Experimental-Metadata` is also accepted for backward compatibility.
         :param background:
         :param cache_control: Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. Currently supported for Anthropic Claude models.
+        :param debug: Debug options for inspecting request transformations (streaming only)
         :param frequency_penalty:
         :param image_config: Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/guides/overview/multimodal/image-generation for more details.
         :param include:
@@ -917,6 +936,9 @@ class Responses(BaseSDK):
                 components.AnthropicCacheControlDirective,
                 components.AnthropicCacheControlDirectiveTypedDict,
             ]
+        ] = None,
+        debug: Optional[
+            Union[components.ChatDebugOptions, components.ChatDebugOptionsTypedDict]
         ] = None,
         frequency_penalty: OptionalNullable[float] = UNSET,
         image_config: Optional[
@@ -1013,6 +1035,7 @@ class Responses(BaseSDK):
         :param x_open_router_metadata: Opt-in to surface routing metadata on the response under `openrouter_metadata`. Defaults to `disabled`. The legacy header `X-OpenRouter-Experimental-Metadata` is also accepted for backward compatibility.
         :param background:
         :param cache_control: Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. Currently supported for Anthropic Claude models.
+        :param debug: Debug options for inspecting request transformations (streaming only)
         :param frequency_penalty:
         :param image_config: Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/guides/overview/multimodal/image-generation for more details.
         :param include:
@@ -1067,6 +1090,9 @@ class Responses(BaseSDK):
                 components.AnthropicCacheControlDirective,
                 components.AnthropicCacheControlDirectiveTypedDict,
             ]
+        ] = None,
+        debug: Optional[
+            Union[components.ChatDebugOptions, components.ChatDebugOptionsTypedDict]
         ] = None,
         frequency_penalty: OptionalNullable[float] = UNSET,
         image_config: Optional[
@@ -1163,6 +1189,7 @@ class Responses(BaseSDK):
         :param x_open_router_metadata: Opt-in to surface routing metadata on the response under `openrouter_metadata`. Defaults to `disabled`. The legacy header `X-OpenRouter-Experimental-Metadata` is also accepted for backward compatibility.
         :param background:
         :param cache_control: Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. Currently supported for Anthropic Claude models.
+        :param debug: Debug options for inspecting request transformations (streaming only)
         :param frequency_penalty:
         :param image_config: Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/guides/overview/multimodal/image-generation for more details.
         :param include:
@@ -1222,6 +1249,9 @@ class Responses(BaseSDK):
                 background=background,
                 cache_control=utils.get_pydantic_model(
                     cache_control, Optional[components.AnthropicCacheControlDirective]
+                ),
+                debug=utils.get_pydantic_model(
+                    debug, Optional[components.ChatDebugOptions]
                 ),
                 frequency_penalty=frequency_penalty,
                 image_config=image_config,

@@ -42,12 +42,14 @@
 | `GOOGLE`            | Google              |
 | `GOOGLE_AI_STUDIO`  | Google AI Studio    |
 | `GROQ`              | Groq                |
+| `HEY_GEN`           | HeyGen              |
 | `INCEPTION`         | Inception           |
 | `INCEPTRON`         | Inceptron           |
 | `INFERENCE_NET`     | InferenceNet        |
 | `IONSTREAM`         | Ionstream           |
 | `INFERMATIC`        | Infermatic          |
 | `IO_NET`            | Io Net              |
+| `INFERACT_V_LLM`    | Inferact vLLM       |
 | `INFLECTION`        | Inflection          |
 | `LIQUID`            | Liquid              |
 | `MARA`              | Mara                |
@@ -74,6 +76,7 @@
 | `RECRAFT`           | Recraft             |
 | `REKA`              | Reka                |
 | `RELACE`            | Relace              |
+| `SAKANA_AI`         | Sakana AI           |
 | `SAMBA_NOVA`        | SambaNova           |
 | `SEED`              | Seed                |
 | `SILICON_FLOW`      | SiliconFlow         |
@@ -82,6 +85,7 @@
 | `STEALTH`           | Stealth             |
 | `STREAM_LAKE`       | StreamLake          |
 | `SWITCHPOINT`       | Switchpoint         |
+| `TENSTORRENT`       | Tenstorrent         |
 | `TOGETHER`          | Together            |
 | `UPSTAGE`           | Upstage             |
 | `VENICE`            | Venice              |

@@ -1295,7 +1295,10 @@ class Presets(BaseSDK):
         ] = UNSET,
         max_tokens: Optional[int] = None,
         metadata: Optional[
-            Union[components.Metadata, components.MetadataTypedDict]
+            Union[
+                components.MessagesRequestMetadata,
+                components.MessagesRequestMetadataTypedDict,
+            ]
         ] = None,
         models: Optional[List[str]] = None,
         output_config: Optional[
@@ -1424,7 +1427,7 @@ class Presets(BaseSDK):
                     messages, Nullable[List[components.MessagesMessageParam]]
                 ),
                 metadata=utils.get_pydantic_model(
-                    metadata, Optional[components.Metadata]
+                    metadata, Optional[components.MessagesRequestMetadata]
                 ),
                 model=model,
                 models=models,
@@ -1599,7 +1602,10 @@ class Presets(BaseSDK):
         ] = UNSET,
         max_tokens: Optional[int] = None,
         metadata: Optional[
-            Union[components.Metadata, components.MetadataTypedDict]
+            Union[
+                components.MessagesRequestMetadata,
+                components.MessagesRequestMetadataTypedDict,
+            ]
         ] = None,
         models: Optional[List[str]] = None,
         output_config: Optional[
@@ -1728,7 +1734,7 @@ class Presets(BaseSDK):
                     messages, Nullable[List[components.MessagesMessageParam]]
                 ),
                 metadata=utils.get_pydantic_model(
-                    metadata, Optional[components.Metadata]
+                    metadata, Optional[components.MessagesRequestMetadata]
                 ),
                 model=model,
                 models=models,
@@ -1886,6 +1892,9 @@ class Presets(BaseSDK):
                 components.AnthropicCacheControlDirectiveTypedDict,
             ]
         ] = None,
+        debug: Optional[
+            Union[components.ChatDebugOptions, components.ChatDebugOptionsTypedDict]
+        ] = None,
         frequency_penalty: OptionalNullable[float] = UNSET,
         image_config: Optional[
             Union[
@@ -1981,6 +1990,7 @@ class Presets(BaseSDK):
 
         :param background:
         :param cache_control: Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. Currently supported for Anthropic Claude models.
+        :param debug: Debug options for inspecting request transformations (streaming only)
         :param frequency_penalty:
         :param image_config: Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/guides/overview/multimodal/image-generation for more details.
         :param include:
@@ -2039,6 +2049,9 @@ class Presets(BaseSDK):
                 background=background,
                 cache_control=utils.get_pydantic_model(
                     cache_control, Optional[components.AnthropicCacheControlDirective]
+                ),
+                debug=utils.get_pydantic_model(
+                    debug, Optional[components.ChatDebugOptions]
                 ),
                 frequency_penalty=frequency_penalty,
                 image_config=image_config,
@@ -2212,6 +2225,9 @@ class Presets(BaseSDK):
                 components.AnthropicCacheControlDirectiveTypedDict,
             ]
         ] = None,
+        debug: Optional[
+            Union[components.ChatDebugOptions, components.ChatDebugOptionsTypedDict]
+        ] = None,
         frequency_penalty: OptionalNullable[float] = UNSET,
         image_config: Optional[
             Union[
@@ -2307,6 +2323,7 @@ class Presets(BaseSDK):
 
         :param background:
         :param cache_control: Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. Currently supported for Anthropic Claude models.
+        :param debug: Debug options for inspecting request transformations (streaming only)
         :param frequency_penalty:
         :param image_config: Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/guides/overview/multimodal/image-generation for more details.
         :param include:
@@ -2365,6 +2382,9 @@ class Presets(BaseSDK):
                 background=background,
                 cache_control=utils.get_pydantic_model(
                     cache_control, Optional[components.AnthropicCacheControlDirective]
+                ),
+                debug=utils.get_pydantic_model(
+                    debug, Optional[components.ChatDebugOptions]
                 ),
                 frequency_penalty=frequency_penalty,
                 image_config=image_config,
