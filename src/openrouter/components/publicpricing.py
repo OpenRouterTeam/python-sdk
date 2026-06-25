@@ -10,48 +10,76 @@ class PublicPricingTypedDict(TypedDict):
     r"""Pricing information for the model"""
 
     completion: str
+    r"""Price in USD per token for completion (output) generation"""
     prompt: str
+    r"""Price in USD per token for prompt (input) processing"""
     audio: NotRequired[str]
+    r"""Price in USD per audio input token"""
     audio_output: NotRequired[str]
+    r"""Price in USD per audio output token"""
     discount: NotRequired[float]
+    r"""Fractional discount applied to this endpoint's pricing; the price is multiplied by (1 - discount) (0 = no discount, 1 = free)"""
     image: NotRequired[str]
+    r"""Price in USD per input image"""
     image_output: NotRequired[str]
+    r"""Price in USD per output image"""
     image_token: NotRequired[str]
+    r"""Price in USD per image token"""
     input_audio_cache: NotRequired[str]
+    r"""Price in USD per cached audio input token"""
     input_cache_read: NotRequired[str]
+    r"""Price in USD per cached input token (read)"""
     input_cache_write: NotRequired[str]
+    r"""Price in USD per cached input token (write)"""
     internal_reasoning: NotRequired[str]
+    r"""Price in USD per internal reasoning token"""
     request: NotRequired[str]
+    r"""Price in USD per request"""
     web_search: NotRequired[str]
+    r"""Price in USD per web search"""
 
 
 class PublicPricing(BaseModel):
     r"""Pricing information for the model"""
 
     completion: str
+    r"""Price in USD per token for completion (output) generation"""
 
     prompt: str
+    r"""Price in USD per token for prompt (input) processing"""
 
     audio: Optional[str] = None
+    r"""Price in USD per audio input token"""
 
     audio_output: Optional[str] = None
+    r"""Price in USD per audio output token"""
 
     discount: Optional[float] = None
+    r"""Fractional discount applied to this endpoint's pricing; the price is multiplied by (1 - discount) (0 = no discount, 1 = free)"""
 
     image: Optional[str] = None
+    r"""Price in USD per input image"""
 
     image_output: Optional[str] = None
+    r"""Price in USD per output image"""
 
     image_token: Optional[str] = None
+    r"""Price in USD per image token"""
 
     input_audio_cache: Optional[str] = None
+    r"""Price in USD per cached audio input token"""
 
     input_cache_read: Optional[str] = None
+    r"""Price in USD per cached input token (read)"""
 
     input_cache_write: Optional[str] = None
+    r"""Price in USD per cached input token (write)"""
 
     internal_reasoning: Optional[str] = None
+    r"""Price in USD per internal reasoning token"""
 
     request: Optional[str] = None
+    r"""Price in USD per request"""
 
     web_search: Optional[str] = None
+    r"""Price in USD per web search"""

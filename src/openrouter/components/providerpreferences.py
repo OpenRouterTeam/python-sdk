@@ -52,26 +52,34 @@ class MaxPriceTypedDict(TypedDict):
     r"""The object specifying the maximum price you want to pay for this request. USD price per million tokens, for prompt and completion."""
 
     audio: NotRequired[str]
+    r"""Maximum price in USD per audio unit"""
     completion: NotRequired[str]
+    r"""Maximum price in USD per million completion tokens"""
     image: NotRequired[str]
+    r"""Maximum price in USD per image"""
     prompt: NotRequired[str]
-    r"""Price per million prompt tokens"""
+    r"""Maximum price in USD per million prompt tokens"""
     request: NotRequired[str]
+    r"""Maximum price in USD per request"""
 
 
 class MaxPrice(BaseModel):
     r"""The object specifying the maximum price you want to pay for this request. USD price per million tokens, for prompt and completion."""
 
     audio: Optional[str] = None
+    r"""Maximum price in USD per audio unit"""
 
     completion: Optional[str] = None
+    r"""Maximum price in USD per million completion tokens"""
 
     image: Optional[str] = None
+    r"""Maximum price in USD per image"""
 
     prompt: Optional[str] = None
-    r"""Price per million prompt tokens"""
+    r"""Maximum price in USD per million prompt tokens"""
 
     request: Optional[str] = None
+    r"""Maximum price in USD per request"""
 
 
 OnlyTypedDict = TypeAliasType("OnlyTypedDict", Union[ProviderName, str])
