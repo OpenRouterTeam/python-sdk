@@ -72,7 +72,7 @@ class Images(BaseSDK):
         :param input_references: Reference images to guide image-to-image generation, as base64 data URLs or HTTP(S) URLs.
         :param n: Number of images to generate (1-10). Providers that only support single-image generation reject n > 1.
         :param output_compression: Compression level (0-100) for webp/jpeg output. Ignored for png and by providers without a compression knob.
-        :param output_format: Encoding of the returned image bytes.
+        :param output_format: Encoding of the returned image bytes. Most models produce raster formats (png, jpeg, webp). SVG is supported by vectorization models (e.g. Quiver) — the SVG markup is UTF-8 base64-encoded in `b64_json`.
         :param provider: Provider-specific passthrough configuration
         :param quality: Rendering quality. Providers without a quality knob ignore this.
         :param resolution: Normalized resolution tier of the generated image. Concrete pixel dimensions are derived per-provider.
@@ -140,7 +140,7 @@ class Images(BaseSDK):
         :param input_references: Reference images to guide image-to-image generation, as base64 data URLs or HTTP(S) URLs.
         :param n: Number of images to generate (1-10). Providers that only support single-image generation reject n > 1.
         :param output_compression: Compression level (0-100) for webp/jpeg output. Ignored for png and by providers without a compression knob.
-        :param output_format: Encoding of the returned image bytes.
+        :param output_format: Encoding of the returned image bytes. Most models produce raster formats (png, jpeg, webp). SVG is supported by vectorization models (e.g. Quiver) — the SVG markup is UTF-8 base64-encoded in `b64_json`.
         :param provider: Provider-specific passthrough configuration
         :param quality: Rendering quality. Providers without a quality knob ignore this.
         :param resolution: Normalized resolution tier of the generated image. Concrete pixel dimensions are derived per-provider.
@@ -207,7 +207,7 @@ class Images(BaseSDK):
         :param input_references: Reference images to guide image-to-image generation, as base64 data URLs or HTTP(S) URLs.
         :param n: Number of images to generate (1-10). Providers that only support single-image generation reject n > 1.
         :param output_compression: Compression level (0-100) for webp/jpeg output. Ignored for png and by providers without a compression knob.
-        :param output_format: Encoding of the returned image bytes.
+        :param output_format: Encoding of the returned image bytes. Most models produce raster formats (png, jpeg, webp). SVG is supported by vectorization models (e.g. Quiver) — the SVG markup is UTF-8 base64-encoded in `b64_json`.
         :param provider: Provider-specific passthrough configuration
         :param quality: Rendering quality. Providers without a quality knob ignore this.
         :param resolution: Normalized resolution tier of the generated image. Concrete pixel dimensions are derived per-provider.
@@ -483,7 +483,7 @@ class Images(BaseSDK):
         :param input_references: Reference images to guide image-to-image generation, as base64 data URLs or HTTP(S) URLs.
         :param n: Number of images to generate (1-10). Providers that only support single-image generation reject n > 1.
         :param output_compression: Compression level (0-100) for webp/jpeg output. Ignored for png and by providers without a compression knob.
-        :param output_format: Encoding of the returned image bytes.
+        :param output_format: Encoding of the returned image bytes. Most models produce raster formats (png, jpeg, webp). SVG is supported by vectorization models (e.g. Quiver) — the SVG markup is UTF-8 base64-encoded in `b64_json`.
         :param provider: Provider-specific passthrough configuration
         :param quality: Rendering quality. Providers without a quality knob ignore this.
         :param resolution: Normalized resolution tier of the generated image. Concrete pixel dimensions are derived per-provider.
@@ -551,7 +551,7 @@ class Images(BaseSDK):
         :param input_references: Reference images to guide image-to-image generation, as base64 data URLs or HTTP(S) URLs.
         :param n: Number of images to generate (1-10). Providers that only support single-image generation reject n > 1.
         :param output_compression: Compression level (0-100) for webp/jpeg output. Ignored for png and by providers without a compression knob.
-        :param output_format: Encoding of the returned image bytes.
+        :param output_format: Encoding of the returned image bytes. Most models produce raster formats (png, jpeg, webp). SVG is supported by vectorization models (e.g. Quiver) — the SVG markup is UTF-8 base64-encoded in `b64_json`.
         :param provider: Provider-specific passthrough configuration
         :param quality: Rendering quality. Providers without a quality knob ignore this.
         :param resolution: Normalized resolution tier of the generated image. Concrete pixel dimensions are derived per-provider.
@@ -618,7 +618,7 @@ class Images(BaseSDK):
         :param input_references: Reference images to guide image-to-image generation, as base64 data URLs or HTTP(S) URLs.
         :param n: Number of images to generate (1-10). Providers that only support single-image generation reject n > 1.
         :param output_compression: Compression level (0-100) for webp/jpeg output. Ignored for png and by providers without a compression knob.
-        :param output_format: Encoding of the returned image bytes.
+        :param output_format: Encoding of the returned image bytes. Most models produce raster formats (png, jpeg, webp). SVG is supported by vectorization models (e.g. Quiver) — the SVG markup is UTF-8 base64-encoded in `b64_json`.
         :param provider: Provider-specific passthrough configuration
         :param quality: Rendering quality. Providers without a quality knob ignore this.
         :param resolution: Normalized resolution tier of the generated image. Concrete pixel dimensions are derived per-provider.

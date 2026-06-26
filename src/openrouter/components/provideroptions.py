@@ -100,6 +100,7 @@ class ProviderOptionsTypedDict(TypedDict):
     perplexity: NotRequired[Dict[str, Nullable[Any]]]
     phala: NotRequired[Dict[str, Nullable[Any]]]
     poolside: NotRequired[Dict[str, Nullable[Any]]]
+    quiver: NotRequired[Dict[str, Nullable[Any]]]
     recraft: NotRequired[Dict[str, Nullable[Any]]]
     recursal: NotRequired[Dict[str, Nullable[Any]]]
     reflection: NotRequired[Dict[str, Nullable[Any]]]
@@ -351,6 +352,8 @@ class ProviderOptions(BaseModel):
     phala: Optional[Dict[str, Nullable[Any]]] = None
 
     poolside: Optional[Dict[str, Nullable[Any]]] = None
+
+    quiver: Optional[Dict[str, Nullable[Any]]] = None
 
     recraft: Optional[Dict[str, Nullable[Any]]] = None
 
