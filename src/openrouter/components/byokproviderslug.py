@@ -74,6 +74,7 @@ BYOKProviderSlug = Union[
         "perplexity",
         "phala",
         "poolside",
+        "quiver",
         "recraft",
         "reka",
         "relace",

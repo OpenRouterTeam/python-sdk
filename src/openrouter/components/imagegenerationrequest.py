@@ -56,10 +56,11 @@ ImageGenerationRequestOutputFormat = Union[
         "png",
         "jpeg",
         "webp",
+        "svg",
     ],
     UnrecognizedStr,
 ]
-r"""Encoding of the returned image bytes."""
+r"""Encoding of the returned image bytes. Most models produce raster formats (png, jpeg, webp). SVG is supported by vectorization models (e.g. Quiver) — the SVG markup is UTF-8 base64-encoded in `b64_json`."""
 
 
 class ImageGenerationRequestOptionsTypedDict(TypedDict):
@@ -155,6 +156,7 @@ class ImageGenerationRequestOptionsTypedDict(TypedDict):
     perplexity: NotRequired[Dict[str, Nullable[Any]]]
     phala: NotRequired[Dict[str, Nullable[Any]]]
     poolside: NotRequired[Dict[str, Nullable[Any]]]
+    quiver: NotRequired[Dict[str, Nullable[Any]]]
     recraft: NotRequired[Dict[str, Nullable[Any]]]
     recursal: NotRequired[Dict[str, Nullable[Any]]]
     reflection: NotRequired[Dict[str, Nullable[Any]]]
@@ -407,6 +409,8 @@ class ImageGenerationRequestOptions(BaseModel):
 
     poolside: Optional[Dict[str, Nullable[Any]]] = None
 
+    quiver: Optional[Dict[str, Nullable[Any]]] = None
+
     recraft: Optional[Dict[str, Nullable[Any]]] = None
 
     recursal: Optional[Dict[str, Nullable[Any]]] = None
@@ -530,7 +534,7 @@ class ImageGenerationRequestTypedDict(TypedDict):
     output_compression: NotRequired[int]
     r"""Compression level (0-100) for webp/jpeg output. Ignored for png and by providers without a compression knob."""
     output_format: NotRequired[ImageGenerationRequestOutputFormat]
-    r"""Encoding of the returned image bytes."""
+    r"""Encoding of the returned image bytes. Most models produce raster formats (png, jpeg, webp). SVG is supported by vectorization models (e.g. Quiver) — the SVG markup is UTF-8 base64-encoded in `b64_json`."""
     provider: NotRequired[ImageGenerationRequestProviderTypedDict]
     r"""Provider-specific passthrough configuration"""
     quality: NotRequired[ImageGenerationRequestQuality]
@@ -579,7 +583,7 @@ class ImageGenerationRequest(BaseModel):
         Optional[ImageGenerationRequestOutputFormat],
         PlainValidator(validate_open_enum(False)),
     ] = None
-    r"""Encoding of the returned image bytes."""
+    r"""Encoding of the returned image bytes. Most models produce raster formats (png, jpeg, webp). SVG is supported by vectorization models (e.g. Quiver) — the SVG markup is UTF-8 base64-encoded in `b64_json`."""
 
     provider: Optional[ImageGenerationRequestProvider] = None
     r"""Provider-specific passthrough configuration"""

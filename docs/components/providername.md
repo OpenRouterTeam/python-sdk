@@ -91,6 +91,7 @@
 | `VENICE`            | Venice              |
 | `WAFER`             | Wafer               |
 | `WAND_B`            | WandB               |
+| `QUIVER`            | Quiver              |
 | `XIAOMI`            | Xiaomi              |
 | `X_AI`              | xAI                 |
 | `Z_AI`              | Z.AI                |

@@ -93,6 +93,7 @@ ProviderName = Union[
         "Venice",
         "Wafer",
         "WandB",
+        "Quiver",
         "Xiaomi",
         "xAI",
         "Z.AI",
