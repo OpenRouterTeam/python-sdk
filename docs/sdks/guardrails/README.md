@@ -241,7 +241,7 @@ with OpenRouter(
 
 ## update
 
-Update an existing guardrail. [Management key](/docs/guides/overview/auth/management-api-keys) required.
+Update an existing guardrail. Collection fields use replace semantics: send the full desired set on every update. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
 ### Example Usage
 
@@ -359,7 +359,7 @@ with OpenRouter(
 
 ## bulk_assign_keys
 
-Assign multiple API keys to a specific guardrail. [Management key](/docs/guides/overview/auth/management-api-keys) required.
+Assign multiple API keys to a specific guardrail. A key may hold at most one guardrail; assigning replaces any existing assignment. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
 ### Example Usage
 

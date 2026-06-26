@@ -726,7 +726,7 @@ class VideoGeneration(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/octet-stream",
+            accept_header_value="video/mp4",
             http_headers=http_headers,
             _globals=operations.ListVideosContentGlobals(
                 http_referer=self.sdk_configuration.globals.http_referer,
@@ -767,7 +767,7 @@ class VideoGeneration(BaseSDK):
         )
 
         response_data: Any = None
-        if utils.match_response(http_res, "200", "application/octet-stream"):
+        if utils.match_response(http_res, "200", "video/mp4"):
             return http_res
         if utils.match_response(http_res, "400", "application/json"):
             http_res_text = utils.stream_to_text(http_res)
@@ -878,7 +878,7 @@ class VideoGeneration(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/octet-stream",
+            accept_header_value="video/mp4",
             http_headers=http_headers,
             _globals=operations.ListVideosContentGlobals(
                 http_referer=self.sdk_configuration.globals.http_referer,
@@ -919,7 +919,7 @@ class VideoGeneration(BaseSDK):
         )
 
         response_data: Any = None
-        if utils.match_response(http_res, "200", "application/octet-stream"):
+        if utils.match_response(http_res, "200", "video/mp4"):
             return http_res
         if utils.match_response(http_res, "400", "application/json"):
             http_res_text = await utils.stream_to_text_async(http_res)

@@ -676,7 +676,7 @@ class Workspaces(BaseSDK):
     ) -> components.DeleteWorkspaceResponse:
         r"""Delete a workspace
 
-        Delete an existing workspace. The default workspace cannot be deleted. Workspaces with active API keys cannot be deleted. [Management key](/docs/guides/overview/auth/management-api-keys) required.
+        Delete an existing workspace. The default workspace cannot be deleted. Workspaces with active API keys cannot be deleted; remove the keys first. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param id: The workspace ID (UUID) or slug
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
@@ -812,7 +812,7 @@ class Workspaces(BaseSDK):
     ) -> components.DeleteWorkspaceResponse:
         r"""Delete a workspace
 
-        Delete an existing workspace. The default workspace cannot be deleted. Workspaces with active API keys cannot be deleted. [Management key](/docs/guides/overview/auth/management-api-keys) required.
+        Delete an existing workspace. The default workspace cannot be deleted. Workspaces with active API keys cannot be deleted; remove the keys first. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param id: The workspace ID (UUID) or slug
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.

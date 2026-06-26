@@ -533,7 +533,7 @@ class APIKeys(BaseSDK):
     ) -> operations.CreateKeysResponse:
         r"""Create a new API key
 
-        Create a new API key for the authenticated user. [Management key](/docs/guides/overview/auth/management-api-keys) required.
+        Create a new API key for the authenticated user. The plaintext `key` is returned only in this response. Treat it as a write-only, sensitive value; it cannot be retrieved later. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param name: Name for the new API key
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
@@ -696,7 +696,7 @@ class APIKeys(BaseSDK):
     ) -> operations.CreateKeysResponse:
         r"""Create a new API key
 
-        Create a new API key for the authenticated user. [Management key](/docs/guides/overview/auth/management-api-keys) required.
+        Create a new API key for the authenticated user. The plaintext `key` is returned only in this response. Treat it as a write-only, sensitive value; it cannot be retrieved later. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param name: Name for the new API key
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
