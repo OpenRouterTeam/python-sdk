@@ -35,7 +35,9 @@ class PricingTypedDict(TypedDict):
     input_cache_read: NotRequired[str]
     r"""Price in USD per cached input token (read)"""
     input_cache_write: NotRequired[str]
-    r"""Price in USD per cached input token (write)"""
+    r"""Price per cache-write token, in USD per token. For providers with multiple cache TTLs (e.g. Anthropic), this is the default (5-minute) cache-write rate."""
+    input_cache_write_1h: NotRequired[str]
+    r"""Price per 1-hour cache-write token, in USD per token. Only present for providers that price an extended (1-hour) cache TTL separately, such as Anthropic."""
     internal_reasoning: NotRequired[str]
     r"""Price in USD per internal reasoning token"""
     request: NotRequired[str]
@@ -76,7 +78,10 @@ class Pricing(BaseModel):
     r"""Price in USD per cached input token (read)"""
 
     input_cache_write: Optional[str] = None
-    r"""Price in USD per cached input token (write)"""
+    r"""Price per cache-write token, in USD per token. For providers with multiple cache TTLs (e.g. Anthropic), this is the default (5-minute) cache-write rate."""
+
+    input_cache_write_1h: Optional[str] = None
+    r"""Price per 1-hour cache-write token, in USD per token. Only present for providers that price an extended (1-hour) cache TTL separately, such as Anthropic."""
 
     internal_reasoning: Optional[str] = None
     r"""Price in USD per internal reasoning token"""
