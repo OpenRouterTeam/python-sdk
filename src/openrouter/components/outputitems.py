@@ -140,9 +140,9 @@ OutputItemsTypedDict = TypeAliasType(
         OutputWebFetchServerToolItemTypedDict,
         OutputCodeInterpreterServerToolItemTypedDict,
         OutputReasoningItemTypedDict,
-        OutputFusionServerToolItemTypedDict,
         OutputAdvisorServerToolItemTypedDict,
         OutputSubagentServerToolItemTypedDict,
+        OutputFusionServerToolItemTypedDict,
     ],
 )
 r"""An output item from the response"""

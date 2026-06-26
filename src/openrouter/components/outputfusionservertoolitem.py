@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 from .fusionanalysisresult import FusionAnalysisResult, FusionAnalysisResultTypedDict
+from .fusionsource import FusionSource, FusionSourceTypedDict
 from .toolcallstatus import ToolCallStatus
 from openrouter.types import BaseModel
 from openrouter.utils import validate_open_enum
@@ -60,6 +61,8 @@ class OutputFusionServerToolItemTypedDict(TypedDict):
     id: NotRequired[str]
     responses: NotRequired[List[ResponseTypedDict]]
     r"""Analysis models that produced a response in this fusion run, with each model's full panel content."""
+    sources: NotRequired[List[FusionSourceTypedDict]]
+    r"""Web pages the analysis panels and judge retrieved via web search during this fusion run, deduplicated by URL across the whole run. Present when at least one model cited a source."""
 
 
 class OutputFusionServerToolItem(BaseModel):
@@ -85,3 +88,6 @@ class OutputFusionServerToolItem(BaseModel):
 
     responses: Optional[List[Response]] = None
     r"""Analysis models that produced a response in this fusion run, with each model's full panel content."""
+
+    sources: Optional[List[FusionSource]] = None
+    r"""Web pages the analysis panels and judge retrieved via web search during this fusion run, deduplicated by URL across the whole run. Present when at least one model cited a source."""

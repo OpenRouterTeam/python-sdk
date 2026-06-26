@@ -1020,6 +1020,7 @@ if TYPE_CHECKING:
         FusionServerToolConfigToolTypedDict,
         FusionServerToolConfigTypedDict,
     )
+    from .fusionsource import FusionSource, FusionSourceTypedDict
     from .generationcontentdata import (
         GenerationContentData,
         GenerationContentDataOutput,
@@ -3423,6 +3424,8 @@ __all__ = [
     "FusionServerToolOpenRouter",
     "FusionServerToolOpenRouterType",
     "FusionServerToolOpenRouterTypedDict",
+    "FusionSource",
+    "FusionSourceTypedDict",
     "GenerationContentData",
     "GenerationContentDataOutput",
     "GenerationContentDataOutputTypedDict",
@@ -5348,6 +5351,8 @@ _dynamic_imports: dict[str, str] = {
     "FusionServerToolConfigTool": ".fusionservertoolconfig",
     "FusionServerToolConfigToolTypedDict": ".fusionservertoolconfig",
     "FusionServerToolConfigTypedDict": ".fusionservertoolconfig",
+    "FusionSource": ".fusionsource",
+    "FusionSourceTypedDict": ".fusionsource",
     "GenerationContentData": ".generationcontentdata",
     "GenerationContentDataOutput": ".generationcontentdata",
     "GenerationContentDataOutputTypedDict": ".generationcontentdata",

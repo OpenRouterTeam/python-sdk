@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c48cf606-fb42-4a45-9c23-8f0555307828
 management:
-  docChecksum: 943db43ef788f1fbf09ba21ebc37b36e
+  docChecksum: cddcae9b4e616315fb557df6404b4868
   docVersion: 1.0.0
   speakeasyVersion: 1.680.0
   generationVersion: 2.788.4
-  releaseVersion: 0.10.6
-  configChecksum: 8b6b6b859a7ac5f479ea7692967e2fa5
+  releaseVersion: 0.10.7
+  configChecksum: d7f0cac9aaaf632306fb2541355a2821
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
 persistentEdits:
-  generation_id: dd88384e-e683-40b7-b651-42a9d80338dc
-  pristine_commit_hash: 4fac0f3ddfa463658573eff12f65fc97fc7256dc
-  pristine_tree_hash: e21d30ee6d99331108acadd9040cffb37a1eaa9c
+  generation_id: f0dde523-5fb9-45aa-ae0f-98c78b96933b
+  pristine_commit_hash: 790ef7ce291dde4bc6496b02effdafb41c0069bb
+  pristine_tree_hash: bb12a2f1ef846a84b308d3e30b03e081b9674a5e
 features:
   python:
     acceptHeaders: 3.0.0
@@ -1944,6 +1944,10 @@ trackedFiles:
     id: 58ee513b0cad
     last_write_checksum: sha1:2ec57cd7447b8eecdbe6fec744c22edb3a817999
     pristine_git_object: c7121728c6509e3d02a0b431431f133067ca057d
+  docs/components/fusionsource.md:
+    id: 8e98a9da51e2
+    last_write_checksum: sha1:3e0611061189a883bfd2c1fad738798debb71e9a
+    pristine_git_object: 59ff3c09fff96145b369a5fe5165618810fa1076
   docs/components/generationcontentdata.md:
     id: 1085c488fd3a
     last_write_checksum: sha1:186d3e8118f6d393d524a91e2ac06772a7eaf818
@@ -3346,8 +3350,8 @@ trackedFiles:
     pristine_git_object: 31066e50f45a2f32c35d0389886757885704ea4a
   docs/components/outputfusionservertoolitem.md:
     id: 886e6be27ec2
-    last_write_checksum: sha1:9c957daab1d214aa7f9b997c451876c759de0eec
-    pristine_git_object: f16afb99ac514a2fa4b63fed2feea6226872a038
+    last_write_checksum: sha1:b3758081c485683416158c2f10c228958f60055b
+    pristine_git_object: be5e88a6f8bb73b9e2e7aaec2a8b4a84661e480f
   docs/components/outputfusionservertoolitemtype.md:
     id: 93233bb8c5d7
     last_write_checksum: sha1:5e9a0f90c938eaa5fc231859f48f5b9673b6b00b
@@ -6338,8 +6342,8 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:f0d810bbc878221d09f42255265a4860b6172ac0
-    pristine_git_object: 9ca17d4ad72d4df47c7353c69a7edf3977cb1052
+    last_write_checksum: sha1:9b65dbc3d45846371aa00f643e177af228862884
+    pristine_git_object: 95bc7178949e81a4db246aec1ad4018331422267
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77f44b60b98bc126557ec27391f91dfba764bb54
@@ -6366,8 +6370,8 @@ trackedFiles:
     pristine_git_object: 07ace03229fd3267623c8f48665d2c3a67c3565d
   src/openrouter/_version.py:
     id: d8d15ad6c586
-    last_write_checksum: sha1:a5ac91c143d8f29b45461e1ce1ad4573e64eb436
-    pristine_git_object: 255f8f94a0bc1085ca60c24c5ecb43d78ee1d1d5
+    last_write_checksum: sha1:933d4821e7582d4c23d068f63df4d680dffb54d2
+    pristine_git_object: eb386f771bf1a2fe478721b946d9048bddec763f
   src/openrouter/analytics.py:
     id: cb406b5aaabb
     last_write_checksum: sha1:6d47d1ab3da9cb4ac9f0a2bfe442f1a82a614f35
@@ -6406,8 +6410,8 @@ trackedFiles:
     pristine_git_object: 2654cbc562cc83940a6713b68f3967cb3f9dcfbe
   src/openrouter/components/__init__.py:
     id: 81754e97b3f4
-    last_write_checksum: sha1:e38f46d4bf8292139d85d59c2b2cb5f450367e39
-    pristine_git_object: 27e2fff5aafa475227a34c3dd5242e4e54b9e762
+    last_write_checksum: sha1:d82d36a0074b74d4556f1226230bc17565ec0171
+    pristine_git_object: 581b01ca5299006b8b6596ea466a7b26810e594b
   src/openrouter/components/aabenchmarkentry.py:
     id: e2e0f0b48c82
     last_write_checksum: sha1:1b6b66672fb80dccdc39843a98bdef6d7d804364
@@ -7256,6 +7260,10 @@ trackedFiles:
     id: 0d1d229c531f
     last_write_checksum: sha1:b0b2c44af496c446fd6bbf1396f1f97f696eff5e
     pristine_git_object: 9d5ec202c11d21002eaa7b6724d62e0710c42522
+  src/openrouter/components/fusionsource.py:
+    id: ce20a4a9f32f
+    last_write_checksum: sha1:2141dd1dd9396035bf8070878c9ec945331514c8
+    pristine_git_object: c60f29915ce3fed38a693d10b8c2de868f8ee728
   src/openrouter/components/generationcontentdata.py:
     id: 0140215b5b46
     last_write_checksum: sha1:09e15ae2acc4f44084e2206ea51e6a06f4c5ee11
@@ -7794,8 +7802,8 @@ trackedFiles:
     pristine_git_object: dcfc7a806fbf5794ad168bca00344b005e0d16ee
   src/openrouter/components/outputfusionservertoolitem.py:
     id: 1d798a2bb7ae
-    last_write_checksum: sha1:3808bb5da64abfef93437fb05e494ea492eb9818
-    pristine_git_object: 0ad5d34088e18cd0727ce13c5b9a3b8d47a94297
+    last_write_checksum: sha1:72cd3cdd5e1f505fe58c30949b4ceba8faf49644
+    pristine_git_object: 0e8e4e6ed1d5e8c5fb613c6fb1c6beee033087c3
   src/openrouter/components/outputimagegenerationcallitem.py:
     id: 48d20dc00e1c
     last_write_checksum: sha1:6795b316ac97958ba4381cdd4d6cc6108d7bd1a5
@@ -7810,8 +7818,8 @@ trackedFiles:
     pristine_git_object: 897c4727eec2497fe15e5603187e24218c08ac87
   src/openrouter/components/outputitems.py:
     id: 90f107de3116
-    last_write_checksum: sha1:31923f8d495bcd6b48594217cff463b5f868ecbb
-    pristine_git_object: a7d056e30ef0b1035d5d2e020505821dbc638143
+    last_write_checksum: sha1:e262597f5269a4d4374500a0bc9b43701cc938fa
+    pristine_git_object: da3d920280394d094a6745d0770e57373df1afc5
   src/openrouter/components/outputmcpservertoolitem.py:
     id: bb8c2536a58e
     last_write_checksum: sha1:6cbe556b2268af0142d982007b273cc43b7605c7
@@ -10560,4 +10568,4 @@ examples:
         "500":
           application/json: {"error": {"code": 500, "message": "Internal Server Error"}}
 examplesVersion: 1.0.2
-releaseNotes: "## Python SDK Changes:\n* `open_router.tts.create_speech()`: \n  *  `request.provider.options.quiver` **Added**\n* `open_router.stt.create_transcription()`: \n  *  `request.provider.options.quiver` **Added**\n* `open_router.byok.list()`:  `request.provider` **Changed**\n* `open_router.images.generate()`: \n  *  `request.provider.options.quiver` **Added**\n* `open_router.video_generation.generate()`: \n  *  `request.provider.options.quiver` **Added**\n"
+releaseNotes: "## Python SDK Changes:\n* `open_router.beta.responses.send()`: \n  *  `request.input.[array].[].[output_fusion_server_tool_item].sources` **Added**\n  *  `response` **Changed**\n* `open_router.presets.create_presets_responses()`: \n  *  `request.input.[array].[].[output_fusion_server_tool_item].sources` **Added**\n"
