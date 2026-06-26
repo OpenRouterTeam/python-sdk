@@ -10,11 +10,16 @@ from typing_extensions import NotRequired, TypedDict
 class ImageGenerationResponseDataTypedDict(TypedDict):
     b64_json: str
     r"""Base64-encoded image bytes"""
+    media_type: NotRequired[str]
+    r"""Media type (MIME type) of the image. Omitted when the output is a standard raster format (PNG). Present for non-raster outputs such as SVG (`image/svg+xml`)."""
 
 
 class ImageGenerationResponseData(BaseModel):
     b64_json: str
     r"""Base64-encoded image bytes"""
+
+    media_type: Optional[str] = None
+    r"""Media type (MIME type) of the image. Omitted when the output is a standard raster format (PNG). Present for non-raster outputs such as SVG (`image/svg+xml`)."""
 
 
 class ImageGenerationResponseTypedDict(TypedDict):

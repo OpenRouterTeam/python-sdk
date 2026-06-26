@@ -20,6 +20,8 @@ class ImageGenCompletedEventTypedDict(TypedDict):
     r"""Unix timestamp (seconds) when the image was generated"""
     type: ImageGenCompletedEventType
     r"""The event type"""
+    media_type: NotRequired[str]
+    r"""Media type (MIME type) of the image. Omitted when the output is a standard raster format (PNG). Present for non-raster outputs such as SVG (`image/svg+xml`)."""
     usage: NotRequired[ImageGenerationUsageTypedDict]
     r"""Token and cost usage for the image generation request, when available"""
 
@@ -35,6 +37,9 @@ class ImageGenCompletedEvent(BaseModel):
 
     type: ImageGenCompletedEventType
     r"""The event type"""
+
+    media_type: Optional[str] = None
+    r"""Media type (MIME type) of the image. Omitted when the output is a standard raster format (PNG). Present for non-raster outputs such as SVG (`image/svg+xml`)."""
 
     usage: Optional[ImageGenerationUsage] = None
     r"""Token and cost usage for the image generation request, when available"""
