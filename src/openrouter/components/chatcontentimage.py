@@ -13,17 +13,18 @@ ChatContentImageDetail = Union[
         "auto",
         "low",
         "high",
+        "original",
     ],
     UnrecognizedStr,
 ]
-r"""Image detail level for vision models"""
+r"""Image detail level for vision models. `original` is an OpenRouter extension (not in the OpenAI Chat Completions spec) requesting true original-resolution media; it is downgraded to `high` for providers that lack an original-resolution tier."""
 
 
 class ChatContentImageImageURLTypedDict(TypedDict):
     url: str
     r"""URL of the image (data: URLs supported)"""
     detail: NotRequired[ChatContentImageDetail]
-    r"""Image detail level for vision models"""
+    r"""Image detail level for vision models. `original` is an OpenRouter extension (not in the OpenAI Chat Completions spec) requesting true original-resolution media; it is downgraded to `high` for providers that lack an original-resolution tier."""
 
 
 class ChatContentImageImageURL(BaseModel):
@@ -33,7 +34,7 @@ class ChatContentImageImageURL(BaseModel):
     detail: Annotated[
         Optional[ChatContentImageDetail], PlainValidator(validate_open_enum(False))
     ] = None
-    r"""Image detail level for vision models"""
+    r"""Image detail level for vision models. `original` is an OpenRouter extension (not in the OpenAI Chat Completions spec) requesting true original-resolution media; it is downgraded to `high` for providers that lack an original-resolution tier."""
 
 
 ChatContentImageType = Literal["image_url",]
