@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c48cf606-fb42-4a45-9c23-8f0555307828
 management:
-  docChecksum: cddcae9b4e616315fb557df6404b4868
+  docChecksum: e7ae838af3f89aafec730d6f56a6264b
   docVersion: 1.0.0
   speakeasyVersion: 1.680.0
   generationVersion: 2.788.4
-  releaseVersion: 0.10.7
-  configChecksum: d7f0cac9aaaf632306fb2541355a2821
+  releaseVersion: 0.10.8
+  configChecksum: 8243c4a0e55e45da047a1d60c75a497d
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
 persistentEdits:
-  generation_id: f0dde523-5fb9-45aa-ae0f-98c78b96933b
-  pristine_commit_hash: 790ef7ce291dde4bc6496b02effdafb41c0069bb
-  pristine_tree_hash: bb12a2f1ef846a84b308d3e30b03e081b9674a5e
+  generation_id: 941715a1-02fc-4177-a705-0f0a75de97ec
+  pristine_commit_hash: d3f06b10deb99bed3a70737944b76cb45ba18876
+  pristine_tree_hash: 7e30bc063f631c35e1645f8790acc79f301f383f
 features:
   python:
     acceptHeaders: 3.0.0
@@ -774,12 +774,12 @@ trackedFiles:
     pristine_git_object: 79909c48a34888496f9051cf33899ca1b9a7b4fc
   docs/components/chatcontentimagedetail.md:
     id: 3f26a1053cda
-    last_write_checksum: sha1:c074cafc4780c4bc7e6d4a053c886020a89c4e42
-    pristine_git_object: 9653ab78adb9b8b9ccfcd46d186d4f9c5a2ace85
+    last_write_checksum: sha1:296d52deb9b5223ed17cfb8ff3300727e671e001
+    pristine_git_object: 1c2cfb3ab7c7f2226e3c00c65af8fb9b79ca7740
   docs/components/chatcontentimageimageurl.md:
     id: 7c66172651cc
-    last_write_checksum: sha1:f0382f65b65ec13b0747b9f7ca6aaf235c7d39d4
-    pristine_git_object: e1e9f886d59c9580dd2b0556b737508573ec03d4
+    last_write_checksum: sha1:035c15e90cd89d8a8f20a27e28cf19551df62ecd
+    pristine_git_object: 9915ffe26c36a6a8ad5054389f960f7ea3c4e7bf
   docs/components/chatcontentimagetype.md:
     id: b92a4757efe6
     last_write_checksum: sha1:ce2d8002a22bf03477cbbd88c68fc4eace9b392b
@@ -6342,8 +6342,8 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:9b65dbc3d45846371aa00f643e177af228862884
-    pristine_git_object: 95bc7178949e81a4db246aec1ad4018331422267
+    last_write_checksum: sha1:83883613f4ce5a35940a61255018ae96c5b161a3
+    pristine_git_object: 2c73ae5647842e85c54240de3c2634ef1644c424
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77f44b60b98bc126557ec27391f91dfba764bb54
@@ -6370,8 +6370,8 @@ trackedFiles:
     pristine_git_object: 07ace03229fd3267623c8f48665d2c3a67c3565d
   src/openrouter/_version.py:
     id: d8d15ad6c586
-    last_write_checksum: sha1:933d4821e7582d4c23d068f63df4d680dffb54d2
-    pristine_git_object: eb386f771bf1a2fe478721b946d9048bddec763f
+    last_write_checksum: sha1:9191ddd2824cab64aba72a37907c39c13bae5e7b
+    pristine_git_object: ae046a12bfe3757e47b922caa4ee98754663db43
   src/openrouter/analytics.py:
     id: cb406b5aaabb
     last_write_checksum: sha1:6d47d1ab3da9cb4ac9f0a2bfe442f1a82a614f35
@@ -6774,8 +6774,8 @@ trackedFiles:
     pristine_git_object: e737cbd7318fb553946f2c5a9986a9630415016e
   src/openrouter/components/chatcontentimage.py:
     id: 6897abcd5da0
-    last_write_checksum: sha1:e60f0f980421fe82190850b65948bdca3b0a7859
-    pristine_git_object: 6219f8400d09673322eaa3068c0b57dbcd662e5c
+    last_write_checksum: sha1:3e4d1947edd8b77f1ebd804e91423221e6d33682
+    pristine_git_object: 45430fd36f0e76600b818778af749de0969ae34f
   src/openrouter/components/chatcontentitems.py:
     id: c4253e14cbd3
     last_write_checksum: sha1:e17966663f37a773e5ab5fc0c5e7e09f3ab9aef4
@@ -10568,4 +10568,3 @@ examples:
         "500":
           application/json: {"error": {"code": 500, "message": "Internal Server Error"}}
 examplesVersion: 1.0.2
-releaseNotes: "## Python SDK Changes:\n* `open_router.beta.responses.send()`: \n  *  `request.input.[array].[].[output_fusion_server_tool_item].sources` **Added**\n  *  `response` **Changed**\n* `open_router.presets.create_presets_responses()`: \n  *  `request.input.[array].[].[output_fusion_server_tool_item].sources` **Added**\n"

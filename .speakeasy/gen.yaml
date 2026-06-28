@@ -32,7 +32,7 @@ generation:
     skipResponseBodyAssertions: false
   preApplyUnionDiscriminators: true
 python:
-  version: 0.10.7
+  version: 0.10.8
   additionalDependencies:
     dev: {}
     main: {}
