@@ -3,7 +3,8 @@
 from __future__ import annotations
 from .provideroptions import ProviderOptions, ProviderOptionsTypedDict
 from .sttinputaudio import STTInputAudio, STTInputAudioTypedDict
-from openrouter.types import BaseModel
+from openrouter.types import BaseModel, UNSET_SENTINEL
+from pydantic import model_serializer
 from typing import Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -20,6 +21,22 @@ class STTRequestProvider(BaseModel):
 
     options: Optional[ProviderOptions] = None
     r"""Provider-specific options keyed by provider slug. Only options for the matched provider are forwarded; the rest are ignored. Unrecognized keys are silently dropped."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["options"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class STTRequestTypedDict(TypedDict):
@@ -54,3 +71,19 @@ class STTRequest(BaseModel):
 
     temperature: Optional[float] = None
     r"""Sampling temperature for transcription"""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["language", "provider", "temperature"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

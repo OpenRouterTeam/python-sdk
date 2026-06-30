@@ -13,9 +13,9 @@ from .anthropicurlimagesource import (
     AnthropicURLImageSource,
     AnthropicURLImageSourceTypedDict,
 )
-from openrouter.types import BaseModel
+from openrouter.types import BaseModel, UNSET_SENTINEL
 from openrouter.utils import get_discriminator
-from pydantic import Discriminator, Tag
+from pydantic import Discriminator, Tag, model_serializer
 from typing import Literal, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
@@ -52,3 +52,19 @@ class AnthropicImageBlockParam(BaseModel):
 
     cache_control: Optional[AnthropicCacheControlDirective] = None
     r"""Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. Currently supported for Anthropic Claude models."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["cache_control"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

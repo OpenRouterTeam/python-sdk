@@ -1,0 +1,22 @@
+---
+title: "Distillable"
+---
+
+Filter by distillation capability. "true" returns only distillable models, "false" excludes them.
+
+## Example Usage
+
+```python
+from openrouter.operations import Distillable
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
+value: Distillable = "true"
+```
+
+
+## Values
+
+This is an open enum. Unrecognized values will not fail type checks.
+
+- `"true"`
+- `"false"`

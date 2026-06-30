@@ -1,0 +1,22 @@
+---
+title: "MetadataLevel"
+---
+
+Opt-in level for surfacing routing metadata on the response under `openrouter_metadata`.
+
+## Example Usage
+
+```python
+from openrouter.components import MetadataLevel
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
+value: MetadataLevel = "disabled"
+```
+
+
+## Values
+
+This is an open enum. Unrecognized values will not fail type checks.
+
+- `"disabled"`
+- `"enabled"`

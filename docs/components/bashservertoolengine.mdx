@@ -1,0 +1,23 @@
+---
+title: "BashServerToolEngine"
+---
+
+Which bash engine to use. "openrouter" runs commands server-side in the OpenRouter sandbox. "auto" (default) and "native" use native passthrough, returning the tool call to your application to run client-side; OpenRouter does not execute the commands.
+
+## Example Usage
+
+```python
+from openrouter.components import BashServerToolEngine
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
+value: BashServerToolEngine = "auto"
+```
+
+
+## Values
+
+This is an open enum. Unrecognized values will not fail type checks.
+
+- `"auto"`
+- `"native"`
+- `"openrouter"`

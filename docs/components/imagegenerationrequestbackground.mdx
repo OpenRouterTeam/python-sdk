@@ -1,0 +1,23 @@
+---
+title: "ImageGenerationRequestBackground"
+---
+
+Background treatment. `transparent` requires an output_format that supports alpha (png or webp).
+
+## Example Usage
+
+```python
+from openrouter.components import ImageGenerationRequestBackground
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
+value: ImageGenerationRequestBackground = "auto"
+```
+
+
+## Values
+
+This is an open enum. Unrecognized values will not fail type checks.
+
+- `"auto"`
+- `"transparent"`
+- `"opaque"`

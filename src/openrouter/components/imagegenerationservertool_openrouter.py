@@ -5,7 +5,8 @@ from .imagegenerationservertoolconfig import (
     ImageGenerationServerToolConfig,
     ImageGenerationServerToolConfigTypedDict,
 )
-from openrouter.types import BaseModel
+from openrouter.types import BaseModel, UNSET_SENTINEL
+from pydantic import model_serializer
 from typing import Literal, Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -28,3 +29,19 @@ class ImageGenerationServerToolOpenRouter(BaseModel):
 
     parameters: Optional[ImageGenerationServerToolConfig] = None
     r"""Configuration for the openrouter:image_generation server tool. Accepts all image_config params (aspect_ratio, quality, size, background, output_format, output_compression, moderation, etc.) plus a model field."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["parameters"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

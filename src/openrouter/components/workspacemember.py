@@ -2,10 +2,8 @@
 
 from __future__ import annotations
 from openrouter.types import BaseModel, UnrecognizedStr
-from openrouter.utils import validate_open_enum
-from pydantic.functional_validators import PlainValidator
 from typing import Literal, Union
-from typing_extensions import Annotated, TypedDict
+from typing_extensions import TypedDict
 
 
 WorkspaceMemberRole = Union[
@@ -38,7 +36,7 @@ class WorkspaceMember(BaseModel):
     id: str
     r"""Unique identifier for the workspace membership"""
 
-    role: Annotated[WorkspaceMemberRole, PlainValidator(validate_open_enum(False))]
+    role: WorkspaceMemberRole
     r"""Role of the member in the workspace"""
 
     user_id: str

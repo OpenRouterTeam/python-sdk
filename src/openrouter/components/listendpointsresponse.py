@@ -6,11 +6,9 @@ from .instructtype import InstructType
 from .outputmodality import OutputModality
 from .publicendpoint import PublicEndpoint, PublicEndpointTypedDict
 from openrouter.types import BaseModel, Nullable, UNSET_SENTINEL, UnrecognizedStr
-from openrouter.utils import validate_open_enum
 from pydantic import model_serializer
-from pydantic.functional_validators import PlainValidator
 from typing import List, Literal, Union
-from typing_extensions import Annotated, TypedDict
+from typing_extensions import TypedDict
 
 
 Tokenizer = Union[
@@ -58,52 +56,30 @@ class ArchitectureTypedDict(TypedDict):
 class Architecture(BaseModel):
     r"""Model architecture information"""
 
-    input_modalities: List[
-        Annotated[InputModality, PlainValidator(validate_open_enum(False))]
-    ]
+    input_modalities: List[InputModality]
     r"""Supported input modalities"""
 
-    instruct_type: Annotated[
-        Nullable[InstructType], PlainValidator(validate_open_enum(False))
-    ]
+    instruct_type: Nullable[InstructType]
     r"""Instruction format type"""
 
     modality: Nullable[str]
     r"""Primary modality of the model"""
 
-    output_modalities: List[
-        Annotated[OutputModality, PlainValidator(validate_open_enum(False))]
-    ]
+    output_modalities: List[OutputModality]
     r"""Supported output modalities"""
 
-    tokenizer: Annotated[Nullable[Tokenizer], PlainValidator(validate_open_enum(False))]
+    tokenizer: Nullable[Tokenizer]
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = []
-        nullable_fields = ["instruct_type", "modality", "tokenizer"]
-        null_default_fields = []
-
         serialized = handler(self)
-
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
-            serialized.pop(k, None)
+            val = serialized.get(k, serialized.get(n))
 
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
+            if val != UNSET_SENTINEL:
                 m[k] = val
 
         return m

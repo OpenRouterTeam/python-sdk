@@ -4,15 +4,10 @@ from __future__ import annotations
 from openrouter.components import (
     listbyokkeysresponse as components_listbyokkeysresponse,
 )
-from openrouter.types import BaseModel, UnrecognizedStr
-from openrouter.utils import (
-    FieldMetadata,
-    HeaderMetadata,
-    QueryParamMetadata,
-    validate_open_enum,
-)
+from openrouter.types import BaseModel, UNSET_SENTINEL, UnrecognizedStr
+from openrouter.utils import FieldMetadata, HeaderMetadata, QueryParamMetadata
 import pydantic
-from pydantic.functional_validators import PlainValidator
+from pydantic import model_serializer
 from typing import Awaitable, Callable, Literal, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -61,6 +56,24 @@ class ListBYOKKeysGlobals(BaseModel):
     r"""Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
     """
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            ["HTTP-Referer", "X-OpenRouter-Title", "X-OpenRouter-Categories"]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 Provider = Union[
@@ -231,10 +244,36 @@ class ListBYOKKeysRequest(BaseModel):
     r"""Optional workspace ID to filter by. Defaults to the authenticated entity's default workspace."""
 
     provider: Annotated[
-        Annotated[Optional[Provider], PlainValidator(validate_open_enum(False))],
+        Optional[Provider],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
     r"""Optional provider slug to filter by (e.g. `openai`, `anthropic`, `amazon-bedrock`)."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "HTTP-Referer",
+                "X-OpenRouter-Title",
+                "X-OpenRouter-Categories",
+                "offset",
+                "limit",
+                "workspace_id",
+                "provider",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class ListBYOKKeysResponseTypedDict(TypedDict):

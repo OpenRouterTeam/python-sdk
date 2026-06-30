@@ -1,0 +1,74 @@
+---
+title: "Stt"
+description: "Speech-to-text endpoints"
+---
+
+## Overview
+
+Speech-to-text endpoints
+
+### Available Operations
+
+* [create_transcription](#create_transcription) - Create transcription
+
+## create_transcription
+
+Transcribes audio into text. Accepts base64-encoded audio input and returns the transcribed text.
+
+### Example Usage
+
+```python
+from openrouter import OpenRouter
+import os
+
+
+with OpenRouter(
+    http_referer="<value>",
+    x_open_router_title="<value>",
+    x_open_router_categories="<value>",
+    api_key=os.getenv("OPENROUTER_API_KEY", ""),
+) as open_router:
+
+    res = open_router.stt.create_transcription(input_audio={
+        "data": "UklGRiQA...",
+        "format_": "wav",
+    }, model="openai/whisper-large-v3", language="en")
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                                                                                                         | Type                                                                                                                                              | Required                                                                                                                                          | Description                                                                                                                                       | Example                                                                                                                                           |
+| ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `input_audio`                                                                                                                                     | [components.STTInputAudio](../../components/sttinputaudio.mdx)                                                                                     | :heavy_check_mark:                                                                                                                                | Base64-encoded audio to transcribe                                                                                                                | \{<br/>"data": "UklGRiQA...",<br/>"format": "wav"<br/>}                                                                                            |
+| `model`                                                                                                                                           | *str*                                                                                                                                             | :heavy_check_mark:                                                                                                                                | STT model identifier                                                                                                                              | openai/whisper-large-v3                                                                                                                           |
+| `http_referer`                                                                                                                                    | *Optional[str]*                                                                                                                                   | :heavy_minus_sign:                                                                                                                                | The app identifier should be your app's URL and is used as the primary identifier for rankings.<br/>This is used to track API usage per application.<br/> |                                                                                                                                                   |
+| `x_open_router_title`                                                                                                                             | *Optional[str]*                                                                                                                                   | :heavy_minus_sign:                                                                                                                                | The app display name allows you to customize how your app appears in OpenRouter's dashboard.<br/>                                                 |                                                                                                                                                   |
+| `x_open_router_categories`                                                                                                                        | *Optional[str]*                                                                                                                                   | :heavy_minus_sign:                                                                                                                                | Comma-separated list of app categories (e.g. "cli-agent,cloud-agent"). Used for marketplace rankings.<br/>                                        |                                                                                                                                                   |
+| `language`                                                                                                                                        | *Optional[str]*                                                                                                                                   | :heavy_minus_sign:                                                                                                                                | ISO-639-1 language code (e.g., "en", "ja"). Auto-detected if omitted.                                                                             | en                                                                                                                                                |
+| `provider`                                                                                                                                        | [Optional[components.STTRequestProvider]](../../components/sttrequestprovider.mdx)                                                                 | :heavy_minus_sign:                                                                                                                                | Provider-specific passthrough configuration                                                                                                       |                                                                                                                                                   |
+| `temperature`                                                                                                                                     | *Optional[float]*                                                                                                                                 | :heavy_minus_sign:                                                                                                                                | Sampling temperature for transcription                                                                                                            | 0                                                                                                                                                 |
+| `retries`                                                                                                                                         | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.mdx)                                                                                  | :heavy_minus_sign:                                                                                                                                | Configuration to override the default retry behavior of the client.                                                                               |                                                                                                                                                   |
+
+### Response
+
+**[components.STTResponse](../../components/sttresponse.mdx)**
+
+### Errors
+
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| errors.BadRequestResponseError         | 400                                    | application/json                       |
+| errors.UnauthorizedResponseError       | 401                                    | application/json                       |
+| errors.PaymentRequiredResponseError    | 402                                    | application/json                       |
+| errors.NotFoundResponseError           | 404                                    | application/json                       |
+| errors.TooManyRequestsResponseError    | 429                                    | application/json                       |
+| errors.InternalServerResponseError     | 500                                    | application/json                       |
+| errors.BadGatewayResponseError         | 502                                    | application/json                       |
+| errors.ServiceUnavailableResponseError | 503                                    | application/json                       |
+| errors.EdgeNetworkTimeoutResponseError | 524                                    | application/json                       |
+| errors.ProviderOverloadedResponseError | 529                                    | application/json                       |
+| errors.OpenRouterDefaultError          | 4XX, 5XX                               | \*/\*                                  |

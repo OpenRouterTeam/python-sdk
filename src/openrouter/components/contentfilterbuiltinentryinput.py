@@ -4,10 +4,9 @@ from __future__ import annotations
 from .contentfilterbuiltinaction import ContentFilterBuiltinAction
 from .contentfilterbuiltinslug import ContentFilterBuiltinSlug
 from .promptinjectionscanscope import PromptInjectionScanScope
-from openrouter.types import BaseModel
-from openrouter.utils import validate_open_enum
+from openrouter.types import BaseModel, UNSET_SENTINEL
 import pydantic
-from pydantic.functional_validators import PlainValidator
+from pydantic import model_serializer
 from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -28,12 +27,10 @@ class ContentFilterBuiltinEntryInputTypedDict(TypedDict):
 class ContentFilterBuiltinEntryInput(BaseModel):
     r"""A builtin content filter entry for create/update requests. Labels are system-assigned and cannot be set by the caller."""
 
-    action: Annotated[
-        ContentFilterBuiltinAction, PlainValidator(validate_open_enum(False))
-    ]
+    action: ContentFilterBuiltinAction
     r"""Action taken when the builtin filter triggers"""
 
-    slug: Annotated[ContentFilterBuiltinSlug, PlainValidator(validate_open_enum(False))]
+    slug: ContentFilterBuiltinSlug
     r"""The builtin filter identifier"""
 
     label: Annotated[
@@ -44,7 +41,21 @@ class ContentFilterBuiltinEntryInput(BaseModel):
     ] = None
     r"""Deprecated: labels are system-assigned and cannot be set by the caller. Accepted for backward compatibility but silently ignored."""
 
-    scan_scope: Annotated[
-        Optional[PromptInjectionScanScope], PlainValidator(validate_open_enum(False))
-    ] = None
+    scan_scope: Optional[PromptInjectionScanScope] = None
     r"""Which message roles to scan for prompt injection. Only applies to the regex-prompt-injection builtin. Defaults to all_messages."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["label", "scan_scope"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

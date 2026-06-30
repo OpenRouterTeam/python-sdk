@@ -55,9 +55,8 @@ from openrouter.types import (
     UNSET_SENTINEL,
     UnrecognizedStr,
 )
-from openrouter.utils import get_discriminator, validate_open_enum
+from openrouter.utils import get_discriminator
 from pydantic import Discriminator, Tag, model_serializer
-from pydantic.functional_validators import PlainValidator
 from typing import Any, Dict, List, Literal, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
@@ -130,43 +129,33 @@ class ChatRequestReasoningTypedDict(TypedDict):
 class ChatRequestReasoning(BaseModel):
     r"""Configuration options for reasoning models"""
 
-    effort: Annotated[
-        OptionalNullable[ChatRequestEffort], PlainValidator(validate_open_enum(False))
-    ] = UNSET
+    effort: OptionalNullable[ChatRequestEffort] = UNSET
     r"""Constrains effort on reasoning for reasoning models"""
 
-    summary: Annotated[
-        OptionalNullable[ChatReasoningSummaryVerbosityEnum],
-        PlainValidator(validate_open_enum(False)),
-    ] = UNSET
+    summary: OptionalNullable[ChatReasoningSummaryVerbosityEnum] = UNSET
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["effort", "summary"]
-        nullable_fields = ["effort", "summary"]
-        null_default_fields = []
-
+        optional_fields = set(["effort", "summary"])
+        nullable_fields = set(["effort", "summary"])
         serialized = handler(self)
-
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
-            serialized.pop(k, None)
+            val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
 
         return m
 
@@ -350,9 +339,7 @@ class ChatRequest(BaseModel):
     min_p: OptionalNullable[float] = UNSET
     r"""Minimum probability threshold relative to the most likely token. Tokens with probability below min_p * (probability of top token) are filtered out. Not all providers support this parameter."""
 
-    modalities: Optional[
-        List[Annotated[Modality, PlainValidator(validate_open_enum(False))]]
-    ] = None
+    modalities: Optional[List[Modality]] = None
     r"""Output modalities for the response. Supported values are \"text\", \"image\", and \"audio\"."""
 
     model: Optional[str] = None
@@ -376,10 +363,7 @@ class ChatRequest(BaseModel):
     reasoning: Optional[ChatRequestReasoning] = None
     r"""Configuration options for reasoning models"""
 
-    reasoning_effort: Annotated[
-        OptionalNullable[ChatRequestReasoningEffort],
-        PlainValidator(validate_open_enum(False)),
-    ] = UNSET
+    reasoning_effort: OptionalNullable[ChatRequestReasoningEffort] = UNSET
     r"""Shorthand for setting reasoning effort. Equivalent to setting reasoning.effort. Cannot be used simultaneously with reasoning.effort if they differ."""
 
     repetition_penalty: OptionalNullable[float] = UNSET
@@ -391,10 +375,7 @@ class ChatRequest(BaseModel):
     seed: OptionalNullable[int] = UNSET
     r"""Random seed for deterministic outputs"""
 
-    service_tier: Annotated[
-        OptionalNullable[ChatRequestServiceTier],
-        PlainValidator(validate_open_enum(False)),
-    ] = UNSET
+    service_tier: OptionalNullable[ChatRequestServiceTier] = UNSET
     r"""The service tier to use for processing this request."""
 
     session_id: Optional[str] = None
@@ -441,89 +422,88 @@ class ChatRequest(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = [
-            "cache_control",
-            "debug",
-            "frequency_penalty",
-            "image_config",
-            "logit_bias",
-            "logprobs",
-            "max_completion_tokens",
-            "max_tokens",
-            "metadata",
-            "min_p",
-            "modalities",
-            "model",
-            "models",
-            "parallel_tool_calls",
-            "plugins",
-            "presence_penalty",
-            "provider",
-            "reasoning",
-            "reasoning_effort",
-            "repetition_penalty",
-            "response_format",
-            "seed",
-            "service_tier",
-            "session_id",
-            "stop",
-            "stop_server_tools_when",
-            "stream",
-            "stream_options",
-            "temperature",
-            "tool_choice",
-            "tools",
-            "top_a",
-            "top_k",
-            "top_logprobs",
-            "top_p",
-            "trace",
-            "user",
-        ]
-        nullable_fields = [
-            "frequency_penalty",
-            "logit_bias",
-            "logprobs",
-            "max_completion_tokens",
-            "max_tokens",
-            "min_p",
-            "parallel_tool_calls",
-            "presence_penalty",
-            "provider",
-            "reasoning_effort",
-            "repetition_penalty",
-            "seed",
-            "service_tier",
-            "stop",
-            "stream_options",
-            "temperature",
-            "top_a",
-            "top_k",
-            "top_logprobs",
-            "top_p",
-        ]
-        null_default_fields = []
-
+        optional_fields = set(
+            [
+                "cache_control",
+                "debug",
+                "frequency_penalty",
+                "image_config",
+                "logit_bias",
+                "logprobs",
+                "max_completion_tokens",
+                "max_tokens",
+                "metadata",
+                "min_p",
+                "modalities",
+                "model",
+                "models",
+                "parallel_tool_calls",
+                "plugins",
+                "presence_penalty",
+                "provider",
+                "reasoning",
+                "reasoning_effort",
+                "repetition_penalty",
+                "response_format",
+                "seed",
+                "service_tier",
+                "session_id",
+                "stop",
+                "stop_server_tools_when",
+                "stream",
+                "stream_options",
+                "temperature",
+                "tool_choice",
+                "tools",
+                "top_a",
+                "top_k",
+                "top_logprobs",
+                "top_p",
+                "trace",
+                "user",
+            ]
+        )
+        nullable_fields = set(
+            [
+                "frequency_penalty",
+                "logit_bias",
+                "logprobs",
+                "max_completion_tokens",
+                "max_tokens",
+                "min_p",
+                "parallel_tool_calls",
+                "presence_penalty",
+                "provider",
+                "reasoning_effort",
+                "repetition_penalty",
+                "seed",
+                "service_tier",
+                "stop",
+                "stream_options",
+                "temperature",
+                "top_a",
+                "top_k",
+                "top_logprobs",
+                "top_p",
+            ]
+        )
         serialized = handler(self)
-
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
-            serialized.pop(k, None)
+            val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
 
         return m

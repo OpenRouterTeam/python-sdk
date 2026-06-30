@@ -2,15 +2,10 @@
 
 from __future__ import annotations
 from openrouter.components import apprankingsresponse as components_apprankingsresponse
-from openrouter.types import BaseModel, UnrecognizedStr
-from openrouter.utils import (
-    FieldMetadata,
-    HeaderMetadata,
-    QueryParamMetadata,
-    validate_open_enum,
-)
+from openrouter.types import BaseModel, UNSET_SENTINEL, UnrecognizedStr
+from openrouter.utils import FieldMetadata, HeaderMetadata, QueryParamMetadata
 import pydantic
-from pydantic.functional_validators import PlainValidator
+from pydantic import model_serializer
 from typing import Awaitable, Callable, Literal, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -59,6 +54,24 @@ class GetAppRankingsGlobals(BaseModel):
     r"""Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
     """
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            ["HTTP-Referer", "X-OpenRouter-Title", "X-OpenRouter-Categories"]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 GetAppRankingsCategory = Union[
@@ -166,23 +179,19 @@ class GetAppRankingsRequest(BaseModel):
     """
 
     category: Annotated[
-        Annotated[
-            Optional[GetAppRankingsCategory], PlainValidator(validate_open_enum(False))
-        ],
+        Optional[GetAppRankingsCategory],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
     r"""Marketplace category group to filter by (e.g. `coding`). Only apps tagged with a subcategory inside this group are returned. Mutually combinable with `subcategory` — when both are supplied the `subcategory` must belong to the `category` group."""
 
     subcategory: Annotated[
-        Annotated[Optional[Subcategory], PlainValidator(validate_open_enum(False))],
+        Optional[Subcategory],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
     r"""Marketplace subcategory to filter by (e.g. `cli-agent`). Takes precedence over `category` for the actual filter; when `category` is also supplied the pair must be consistent."""
 
     sort: Annotated[
-        Annotated[
-            Optional[GetAppRankingsSort], PlainValidator(validate_open_enum(False))
-        ],
+        Optional[GetAppRankingsSort],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = "popular"
     r"""`popular` ranks apps by total token volume inside the date window. `trending` ranks apps by absolute excess token growth: window volume minus the average volume of the three equal-length periods immediately preceding the window. Apps with no excess growth are omitted from `trending` results."""
@@ -210,6 +219,35 @@ class GetAppRankingsRequest(BaseModel):
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = 0
     r"""Number of ranked apps to skip before the first returned row (0-100). Defaults to 0. `rank` stays absolute, so the first row of `offset=50` is `rank: 51`."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "HTTP-Referer",
+                "X-OpenRouter-Title",
+                "X-OpenRouter-Categories",
+                "category",
+                "subcategory",
+                "sort",
+                "start_date",
+                "end_date",
+                "limit",
+                "offset",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class GetAppRankingsResponseTypedDict(TypedDict):

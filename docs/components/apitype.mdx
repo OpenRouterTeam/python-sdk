@@ -1,0 +1,27 @@
+---
+title: "APIType"
+---
+
+Type of API used for the generation
+
+## Example Usage
+
+```python
+from openrouter.components import APIType
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
+value: APIType = "completions"
+```
+
+
+## Values
+
+This is an open enum. Unrecognized values will not fail type checks.
+
+- `"completions"`
+- `"embeddings"`
+- `"rerank"`
+- `"tts"`
+- `"stt"`
+- `"video"`
+- `"image"`

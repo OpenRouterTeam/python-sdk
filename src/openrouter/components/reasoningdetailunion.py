@@ -10,9 +10,12 @@ from .reasoningdetailsummary import (
     ReasoningDetailSummaryTypedDict,
 )
 from .reasoningdetailtext import ReasoningDetailText, ReasoningDetailTextTypedDict
-from openrouter.utils import get_discriminator
-from pydantic import Discriminator, Tag
-from typing import Union
+from functools import partial
+from openrouter.types import BaseModel
+from openrouter.utils.unions import parse_open_union
+from pydantic import ConfigDict
+from pydantic.functional_validators import BeforeValidator
+from typing import Any, Literal, Union
 from typing_extensions import Annotated, TypeAliasType
 
 
@@ -27,12 +30,38 @@ ReasoningDetailUnionTypedDict = TypeAliasType(
 r"""Reasoning detail union schema"""
 
 
+class UnknownReasoningDetailUnion(BaseModel):
+    r"""A ReasoningDetailUnion variant the SDK doesn't recognize. Preserves the raw payload."""
+
+    type: Literal["UNKNOWN"] = "UNKNOWN"
+    raw: Any
+    is_unknown: Literal[True] = True
+
+    model_config = ConfigDict(frozen=True)
+
+
+_REASONING_DETAIL_UNION_VARIANTS: dict[str, Any] = {
+    "reasoning.encrypted": ReasoningDetailEncrypted,
+    "reasoning.summary": ReasoningDetailSummary,
+    "reasoning.text": ReasoningDetailText,
+}
+
+
 ReasoningDetailUnion = Annotated[
     Union[
-        Annotated[ReasoningDetailEncrypted, Tag("reasoning.encrypted")],
-        Annotated[ReasoningDetailSummary, Tag("reasoning.summary")],
-        Annotated[ReasoningDetailText, Tag("reasoning.text")],
+        ReasoningDetailEncrypted,
+        ReasoningDetailSummary,
+        ReasoningDetailText,
+        UnknownReasoningDetailUnion,
     ],
-    Discriminator(lambda m: get_discriminator(m, "type", "type")),
+    BeforeValidator(
+        partial(
+            parse_open_union,
+            disc_key="type",
+            variants=_REASONING_DETAIL_UNION_VARIANTS,
+            unknown_cls=UnknownReasoningDetailUnion,
+            union_name="ReasoningDetailUnion",
+        )
+    ),
 ]
 r"""Reasoning detail union schema"""

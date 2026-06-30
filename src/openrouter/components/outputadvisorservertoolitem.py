@@ -2,11 +2,10 @@
 
 from __future__ import annotations
 from .toolcallstatus import ToolCallStatus
-from openrouter.types import BaseModel
-from openrouter.utils import validate_open_enum
-from pydantic.functional_validators import PlainValidator
+from openrouter.types import BaseModel, UNSET_SENTINEL
+from pydantic import model_serializer
 from typing import Literal, Optional
-from typing_extensions import Annotated, NotRequired, TypedDict
+from typing_extensions import NotRequired, TypedDict
 
 
 OutputAdvisorServerToolItemType = Literal["openrouter:advisor",]
@@ -33,7 +32,7 @@ class OutputAdvisorServerToolItemTypedDict(TypedDict):
 class OutputAdvisorServerToolItem(BaseModel):
     r"""An openrouter:advisor server tool output item"""
 
-    status: Annotated[ToolCallStatus, PlainValidator(validate_open_enum(False))]
+    status: ToolCallStatus
 
     type: OutputAdvisorServerToolItemType
 
@@ -53,3 +52,21 @@ class OutputAdvisorServerToolItem(BaseModel):
 
     prompt: Optional[str] = None
     r"""The prompt the executor sent to the advisor."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            ["advice", "error", "id", "instance_name", "model", "prompt"]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

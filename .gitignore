@@ -16,7 +16,6 @@ __pycache__/
 # Speakeasy generation artifacts (generated in OSS repo, not here)
 .speakeasy/*.lock
 .speakeasy/*.openapi.yaml
-/docs
 # Environment
 .env
 .env.local

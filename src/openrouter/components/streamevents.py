@@ -144,9 +144,12 @@ from .websearchcallsearchingevent import (
     WebSearchCallSearchingEvent,
     WebSearchCallSearchingEventTypedDict,
 )
-from openrouter.utils import get_discriminator
-from pydantic import Discriminator, Tag
-from typing import Union
+from functools import partial
+from openrouter.types import BaseModel
+from openrouter.utils.unions import parse_open_union
+from pydantic import ConfigDict
+from pydantic.functional_validators import BeforeValidator
+from typing import Any, Literal, Union
 from typing_extensions import Annotated, TypeAliasType
 
 
@@ -202,105 +205,120 @@ StreamEventsTypedDict = TypeAliasType(
 r"""Union of all possible event types emitted during response streaming"""
 
 
+class UnknownStreamEvents(BaseModel):
+    r"""A StreamEvents variant the SDK doesn't recognize. Preserves the raw payload."""
+
+    type: Literal["UNKNOWN"] = "UNKNOWN"
+    raw: Any
+    is_unknown: Literal[True] = True
+
+    model_config = ConfigDict(frozen=True)
+
+
+_STREAM_EVENTS_VARIANTS: dict[str, Any] = {
+    "error": ErrorEvent,
+    "response.apply_patch_call_operation_diff.delta": ApplyPatchCallOperationDiffDeltaEvent,
+    "response.apply_patch_call_operation_diff.done": ApplyPatchCallOperationDiffDoneEvent,
+    "response.completed": StreamEventsResponseCompleted,
+    "response.content_part.added": ContentPartAddedEvent,
+    "response.content_part.done": ContentPartDoneEvent,
+    "response.created": OpenResponsesCreatedEvent,
+    "response.custom_tool_call_input.delta": CustomToolCallInputDeltaEvent,
+    "response.custom_tool_call_input.done": CustomToolCallInputDoneEvent,
+    "response.debug": DebugEvent,
+    "response.failed": StreamEventsResponseFailed,
+    "response.function_call_arguments.delta": FunctionCallArgsDeltaEvent,
+    "response.function_call_arguments.done": FunctionCallArgsDoneEvent,
+    "response.fusion_call.analysis.completed": FusionCallAnalysisCompletedEvent,
+    "response.fusion_call.analysis.in_progress": FusionCallAnalysisInProgressEvent,
+    "response.fusion_call.completed": FusionCallCompletedEvent,
+    "response.fusion_call.in_progress": FusionCallInProgressEvent,
+    "response.fusion_call.panel.added": FusionCallPanelAddedEvent,
+    "response.fusion_call.panel.completed": FusionCallPanelCompletedEvent,
+    "response.fusion_call.panel.delta": FusionCallPanelDeltaEvent,
+    "response.fusion_call.panel.failed": FusionCallPanelFailedEvent,
+    "response.fusion_call.panel.reasoning.delta": FusionCallPanelReasoningDeltaEvent,
+    "response.image_generation_call.completed": ImageGenCallCompletedEvent,
+    "response.image_generation_call.generating": ImageGenCallGeneratingEvent,
+    "response.image_generation_call.in_progress": ImageGenCallInProgressEvent,
+    "response.image_generation_call.partial_image": ImageGenCallPartialImageEvent,
+    "response.in_progress": OpenResponsesInProgressEvent,
+    "response.incomplete": StreamEventsResponseIncomplete,
+    "response.output_item.added": StreamEventsResponseOutputItemAdded,
+    "response.output_item.done": StreamEventsResponseOutputItemDone,
+    "response.output_text.annotation.added": AnnotationAddedEvent,
+    "response.output_text.delta": TextDeltaEvent,
+    "response.output_text.done": TextDoneEvent,
+    "response.reasoning_summary_part.added": ReasoningSummaryPartAddedEvent,
+    "response.reasoning_summary_part.done": ReasoningSummaryPartDoneEvent,
+    "response.reasoning_summary_text.delta": ReasoningSummaryTextDeltaEvent,
+    "response.reasoning_summary_text.done": ReasoningSummaryTextDoneEvent,
+    "response.reasoning_text.delta": ReasoningDeltaEvent,
+    "response.reasoning_text.done": ReasoningDoneEvent,
+    "response.refusal.delta": RefusalDeltaEvent,
+    "response.refusal.done": RefusalDoneEvent,
+    "response.web_search_call.completed": WebSearchCallCompletedEvent,
+    "response.web_search_call.in_progress": WebSearchCallInProgressEvent,
+    "response.web_search_call.searching": WebSearchCallSearchingEvent,
+}
+
+
 StreamEvents = Annotated[
     Union[
-        Annotated[ErrorEvent, Tag("error")],
-        Annotated[
-            ApplyPatchCallOperationDiffDeltaEvent,
-            Tag("response.apply_patch_call_operation_diff.delta"),
-        ],
-        Annotated[
-            ApplyPatchCallOperationDiffDoneEvent,
-            Tag("response.apply_patch_call_operation_diff.done"),
-        ],
-        Annotated[StreamEventsResponseCompleted, Tag("response.completed")],
-        Annotated[ContentPartAddedEvent, Tag("response.content_part.added")],
-        Annotated[ContentPartDoneEvent, Tag("response.content_part.done")],
-        Annotated[OpenResponsesCreatedEvent, Tag("response.created")],
-        Annotated[
-            CustomToolCallInputDeltaEvent, Tag("response.custom_tool_call_input.delta")
-        ],
-        Annotated[
-            CustomToolCallInputDoneEvent, Tag("response.custom_tool_call_input.done")
-        ],
-        Annotated[DebugEvent, Tag("response.debug")],
-        Annotated[StreamEventsResponseFailed, Tag("response.failed")],
-        Annotated[
-            FunctionCallArgsDeltaEvent, Tag("response.function_call_arguments.delta")
-        ],
-        Annotated[
-            FunctionCallArgsDoneEvent, Tag("response.function_call_arguments.done")
-        ],
-        Annotated[
-            FusionCallAnalysisCompletedEvent,
-            Tag("response.fusion_call.analysis.completed"),
-        ],
-        Annotated[
-            FusionCallAnalysisInProgressEvent,
-            Tag("response.fusion_call.analysis.in_progress"),
-        ],
-        Annotated[FusionCallCompletedEvent, Tag("response.fusion_call.completed")],
-        Annotated[FusionCallInProgressEvent, Tag("response.fusion_call.in_progress")],
-        Annotated[FusionCallPanelAddedEvent, Tag("response.fusion_call.panel.added")],
-        Annotated[
-            FusionCallPanelCompletedEvent, Tag("response.fusion_call.panel.completed")
-        ],
-        Annotated[FusionCallPanelDeltaEvent, Tag("response.fusion_call.panel.delta")],
-        Annotated[FusionCallPanelFailedEvent, Tag("response.fusion_call.panel.failed")],
-        Annotated[
-            FusionCallPanelReasoningDeltaEvent,
-            Tag("response.fusion_call.panel.reasoning.delta"),
-        ],
-        Annotated[
-            ImageGenCallCompletedEvent, Tag("response.image_generation_call.completed")
-        ],
-        Annotated[
-            ImageGenCallGeneratingEvent,
-            Tag("response.image_generation_call.generating"),
-        ],
-        Annotated[
-            ImageGenCallInProgressEvent,
-            Tag("response.image_generation_call.in_progress"),
-        ],
-        Annotated[
-            ImageGenCallPartialImageEvent,
-            Tag("response.image_generation_call.partial_image"),
-        ],
-        Annotated[OpenResponsesInProgressEvent, Tag("response.in_progress")],
-        Annotated[StreamEventsResponseIncomplete, Tag("response.incomplete")],
-        Annotated[
-            StreamEventsResponseOutputItemAdded, Tag("response.output_item.added")
-        ],
-        Annotated[StreamEventsResponseOutputItemDone, Tag("response.output_item.done")],
-        Annotated[AnnotationAddedEvent, Tag("response.output_text.annotation.added")],
-        Annotated[TextDeltaEvent, Tag("response.output_text.delta")],
-        Annotated[TextDoneEvent, Tag("response.output_text.done")],
-        Annotated[
-            ReasoningSummaryPartAddedEvent, Tag("response.reasoning_summary_part.added")
-        ],
-        Annotated[
-            ReasoningSummaryPartDoneEvent, Tag("response.reasoning_summary_part.done")
-        ],
-        Annotated[
-            ReasoningSummaryTextDeltaEvent, Tag("response.reasoning_summary_text.delta")
-        ],
-        Annotated[
-            ReasoningSummaryTextDoneEvent, Tag("response.reasoning_summary_text.done")
-        ],
-        Annotated[ReasoningDeltaEvent, Tag("response.reasoning_text.delta")],
-        Annotated[ReasoningDoneEvent, Tag("response.reasoning_text.done")],
-        Annotated[RefusalDeltaEvent, Tag("response.refusal.delta")],
-        Annotated[RefusalDoneEvent, Tag("response.refusal.done")],
-        Annotated[
-            WebSearchCallCompletedEvent, Tag("response.web_search_call.completed")
-        ],
-        Annotated[
-            WebSearchCallInProgressEvent, Tag("response.web_search_call.in_progress")
-        ],
-        Annotated[
-            WebSearchCallSearchingEvent, Tag("response.web_search_call.searching")
-        ],
+        ErrorEvent,
+        ApplyPatchCallOperationDiffDeltaEvent,
+        ApplyPatchCallOperationDiffDoneEvent,
+        StreamEventsResponseCompleted,
+        ContentPartAddedEvent,
+        ContentPartDoneEvent,
+        OpenResponsesCreatedEvent,
+        CustomToolCallInputDeltaEvent,
+        CustomToolCallInputDoneEvent,
+        DebugEvent,
+        StreamEventsResponseFailed,
+        FunctionCallArgsDeltaEvent,
+        FunctionCallArgsDoneEvent,
+        FusionCallAnalysisCompletedEvent,
+        FusionCallAnalysisInProgressEvent,
+        FusionCallCompletedEvent,
+        FusionCallInProgressEvent,
+        FusionCallPanelAddedEvent,
+        FusionCallPanelCompletedEvent,
+        FusionCallPanelDeltaEvent,
+        FusionCallPanelFailedEvent,
+        FusionCallPanelReasoningDeltaEvent,
+        ImageGenCallCompletedEvent,
+        ImageGenCallGeneratingEvent,
+        ImageGenCallInProgressEvent,
+        ImageGenCallPartialImageEvent,
+        OpenResponsesInProgressEvent,
+        StreamEventsResponseIncomplete,
+        StreamEventsResponseOutputItemAdded,
+        StreamEventsResponseOutputItemDone,
+        AnnotationAddedEvent,
+        TextDeltaEvent,
+        TextDoneEvent,
+        ReasoningSummaryPartAddedEvent,
+        ReasoningSummaryPartDoneEvent,
+        ReasoningSummaryTextDeltaEvent,
+        ReasoningSummaryTextDoneEvent,
+        ReasoningDeltaEvent,
+        ReasoningDoneEvent,
+        RefusalDeltaEvent,
+        RefusalDoneEvent,
+        WebSearchCallCompletedEvent,
+        WebSearchCallInProgressEvent,
+        WebSearchCallSearchingEvent,
+        UnknownStreamEvents,
     ],
-    Discriminator(lambda m: get_discriminator(m, "type", "type")),
+    BeforeValidator(
+        partial(
+            parse_open_union,
+            disc_key="type",
+            variants=_STREAM_EVENTS_VARIANTS,
+            unknown_cls=UnknownStreamEvents,
+            union_name="StreamEvents",
+        )
+    ),
 ]
 r"""Union of all possible event types emitted during response streaming"""

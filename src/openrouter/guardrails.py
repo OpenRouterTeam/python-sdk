@@ -7,7 +7,7 @@ from openrouter._hooks import HookContext
 from openrouter.types import OptionalNullable, UNSET
 from openrouter.utils import get_security_from_env
 from openrouter.utils.unmarshal_json_response import unmarshal_json_response
-from typing import Any, Awaitable, Dict, List, Mapping, Optional, Union
+from typing import Any, Awaitable, Dict, Iterable, List, Mapping, Optional, Union
 
 
 class Guardrails(BaseSDK):
@@ -108,24 +108,26 @@ class Guardrails(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Guardrails"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["401", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
         def next_func() -> Optional[operations.ListGuardrailsResponse]:
             body = utils.unmarshal_json(http_res.text, Union[Dict[Any, Any], List[Any]])
 
-            offset = request.offset if not request.offset is None else 0
+            offset = request.offset if isinstance(request.offset, int) else 0
 
             if not http_res.text:
                 return None
             results = JSONPath("$.data").parse(body)
             if len(results) == 0 or len(results[0]) == 0:
                 return None
-            limit = request.limit if not request.limit is None else 0
-            if len(results[0]) < limit:
+            limit_ = request.limit if isinstance(request.limit, int) else 0
+            if len(results[0]) < limit_:
                 return None
             next_offset = offset + len(results[0])
 
@@ -137,6 +139,9 @@ class Guardrails(BaseSDK):
                 limit=limit,
                 workspace_id=workspace_id,
                 retries=retries,
+                server_url=server_url,
+                timeout_ms=timeout_ms,
+                http_headers=http_headers,
             )
 
         response_data: Any = None
@@ -265,9 +270,11 @@ class Guardrails(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Guardrails"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["401", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -277,15 +284,15 @@ class Guardrails(BaseSDK):
             async def empty_result():
                 return None
 
-            offset = request.offset if not request.offset is None else 0
+            offset = request.offset if isinstance(request.offset, int) else 0
 
             if not http_res.text:
                 return empty_result()
             results = JSONPath("$.data").parse(body)
             if len(results) == 0 or len(results[0]) == 0:
                 return empty_result()
-            limit = request.limit if not request.limit is None else 0
-            if len(results[0]) < limit:
+            limit_ = request.limit if isinstance(request.limit, int) else 0
+            if len(results[0]) < limit_:
                 return empty_result()
             next_offset = offset + len(results[0])
 
@@ -297,6 +304,9 @@ class Guardrails(BaseSDK):
                 limit=limit,
                 workspace_id=workspace_id,
                 retries=retries,
+                server_url=server_url,
+                timeout_ms=timeout_ms,
+                http_headers=http_headers,
             )
 
         response_data: Any = None
@@ -337,18 +347,18 @@ class Guardrails(BaseSDK):
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
-        allowed_models: OptionalNullable[List[str]] = UNSET,
-        allowed_providers: OptionalNullable[List[str]] = UNSET,
+        allowed_models: OptionalNullable[Iterable[str]] = UNSET,
+        allowed_providers: OptionalNullable[Iterable[str]] = UNSET,
         content_filter_builtins: OptionalNullable[
             Union[
-                List[components.ContentFilterBuiltinEntryInput],
-                List[components.ContentFilterBuiltinEntryInputTypedDict],
+                Iterable[components.ContentFilterBuiltinEntryInput],
+                Iterable[components.ContentFilterBuiltinEntryInputTypedDict],
             ]
         ] = UNSET,
         content_filters: OptionalNullable[
             Union[
-                List[components.ContentFilterEntry],
-                List[components.ContentFilterEntryTypedDict],
+                Iterable[components.ContentFilterEntry],
+                Iterable[components.ContentFilterEntryTypedDict],
             ]
         ] = UNSET,
         description: OptionalNullable[str] = UNSET,
@@ -357,8 +367,8 @@ class Guardrails(BaseSDK):
         enforce_zdr_google: OptionalNullable[bool] = UNSET,
         enforce_zdr_openai: OptionalNullable[bool] = UNSET,
         enforce_zdr_other: OptionalNullable[bool] = UNSET,
-        ignored_models: OptionalNullable[List[str]] = UNSET,
-        ignored_providers: OptionalNullable[List[str]] = UNSET,
+        ignored_models: OptionalNullable[Iterable[str]] = UNSET,
+        ignored_providers: OptionalNullable[Iterable[str]] = UNSET,
         limit_usd: OptionalNullable[float] = UNSET,
         reset_interval: OptionalNullable[components.GuardrailInterval] = UNSET,
         workspace_id: Optional[str] = None,
@@ -414,8 +424,12 @@ class Guardrails(BaseSDK):
             x_open_router_title=x_open_router_title,
             x_open_router_categories=x_open_router_categories,
             create_guardrail_request=components.CreateGuardrailRequest(
-                allowed_models=allowed_models,
-                allowed_providers=allowed_providers,
+                allowed_models=utils.unmarshal(
+                    allowed_models, OptionalNullable[List[str]]
+                ),
+                allowed_providers=utils.unmarshal(
+                    allowed_providers, OptionalNullable[List[str]]
+                ),
                 content_filter_builtins=utils.get_pydantic_model(
                     content_filter_builtins,
                     OptionalNullable[List[components.ContentFilterBuiltinEntryInput]],
@@ -430,8 +444,12 @@ class Guardrails(BaseSDK):
                 enforce_zdr_google=enforce_zdr_google,
                 enforce_zdr_openai=enforce_zdr_openai,
                 enforce_zdr_other=enforce_zdr_other,
-                ignored_models=ignored_models,
-                ignored_providers=ignored_providers,
+                ignored_models=utils.unmarshal(
+                    ignored_models, OptionalNullable[List[str]]
+                ),
+                ignored_providers=utils.unmarshal(
+                    ignored_providers, OptionalNullable[List[str]]
+                ),
                 limit_usd=limit_usd,
                 name=name,
                 reset_interval=reset_interval,
@@ -489,9 +507,11 @@ class Guardrails(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Guardrails"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -538,18 +558,18 @@ class Guardrails(BaseSDK):
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
-        allowed_models: OptionalNullable[List[str]] = UNSET,
-        allowed_providers: OptionalNullable[List[str]] = UNSET,
+        allowed_models: OptionalNullable[Iterable[str]] = UNSET,
+        allowed_providers: OptionalNullable[Iterable[str]] = UNSET,
         content_filter_builtins: OptionalNullable[
             Union[
-                List[components.ContentFilterBuiltinEntryInput],
-                List[components.ContentFilterBuiltinEntryInputTypedDict],
+                Iterable[components.ContentFilterBuiltinEntryInput],
+                Iterable[components.ContentFilterBuiltinEntryInputTypedDict],
             ]
         ] = UNSET,
         content_filters: OptionalNullable[
             Union[
-                List[components.ContentFilterEntry],
-                List[components.ContentFilterEntryTypedDict],
+                Iterable[components.ContentFilterEntry],
+                Iterable[components.ContentFilterEntryTypedDict],
             ]
         ] = UNSET,
         description: OptionalNullable[str] = UNSET,
@@ -558,8 +578,8 @@ class Guardrails(BaseSDK):
         enforce_zdr_google: OptionalNullable[bool] = UNSET,
         enforce_zdr_openai: OptionalNullable[bool] = UNSET,
         enforce_zdr_other: OptionalNullable[bool] = UNSET,
-        ignored_models: OptionalNullable[List[str]] = UNSET,
-        ignored_providers: OptionalNullable[List[str]] = UNSET,
+        ignored_models: OptionalNullable[Iterable[str]] = UNSET,
+        ignored_providers: OptionalNullable[Iterable[str]] = UNSET,
         limit_usd: OptionalNullable[float] = UNSET,
         reset_interval: OptionalNullable[components.GuardrailInterval] = UNSET,
         workspace_id: Optional[str] = None,
@@ -615,8 +635,12 @@ class Guardrails(BaseSDK):
             x_open_router_title=x_open_router_title,
             x_open_router_categories=x_open_router_categories,
             create_guardrail_request=components.CreateGuardrailRequest(
-                allowed_models=allowed_models,
-                allowed_providers=allowed_providers,
+                allowed_models=utils.unmarshal(
+                    allowed_models, OptionalNullable[List[str]]
+                ),
+                allowed_providers=utils.unmarshal(
+                    allowed_providers, OptionalNullable[List[str]]
+                ),
                 content_filter_builtins=utils.get_pydantic_model(
                     content_filter_builtins,
                     OptionalNullable[List[components.ContentFilterBuiltinEntryInput]],
@@ -631,8 +655,12 @@ class Guardrails(BaseSDK):
                 enforce_zdr_google=enforce_zdr_google,
                 enforce_zdr_openai=enforce_zdr_openai,
                 enforce_zdr_other=enforce_zdr_other,
-                ignored_models=ignored_models,
-                ignored_providers=ignored_providers,
+                ignored_models=utils.unmarshal(
+                    ignored_models, OptionalNullable[List[str]]
+                ),
+                ignored_providers=utils.unmarshal(
+                    ignored_providers, OptionalNullable[List[str]]
+                ),
                 limit_usd=limit_usd,
                 name=name,
                 reset_interval=reset_interval,
@@ -690,9 +718,11 @@ class Guardrails(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Guardrails"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -821,9 +851,11 @@ class Guardrails(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Guardrails"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["401", "404", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -947,9 +979,11 @@ class Guardrails(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Guardrails"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["401", "404", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -1073,9 +1107,11 @@ class Guardrails(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Guardrails"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["401", "404", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -1199,9 +1235,11 @@ class Guardrails(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Guardrails"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["401", "404", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -1243,18 +1281,18 @@ class Guardrails(BaseSDK):
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
-        allowed_models: OptionalNullable[List[str]] = UNSET,
-        allowed_providers: OptionalNullable[List[str]] = UNSET,
+        allowed_models: OptionalNullable[Iterable[str]] = UNSET,
+        allowed_providers: OptionalNullable[Iterable[str]] = UNSET,
         content_filter_builtins: OptionalNullable[
             Union[
-                List[components.ContentFilterBuiltinEntryInput],
-                List[components.ContentFilterBuiltinEntryInputTypedDict],
+                Iterable[components.ContentFilterBuiltinEntryInput],
+                Iterable[components.ContentFilterBuiltinEntryInputTypedDict],
             ]
         ] = UNSET,
         content_filters: OptionalNullable[
             Union[
-                List[components.ContentFilterEntry],
-                List[components.ContentFilterEntryTypedDict],
+                Iterable[components.ContentFilterEntry],
+                Iterable[components.ContentFilterEntryTypedDict],
             ]
         ] = UNSET,
         description: OptionalNullable[str] = UNSET,
@@ -1263,8 +1301,8 @@ class Guardrails(BaseSDK):
         enforce_zdr_google: OptionalNullable[bool] = UNSET,
         enforce_zdr_openai: OptionalNullable[bool] = UNSET,
         enforce_zdr_other: OptionalNullable[bool] = UNSET,
-        ignored_models: OptionalNullable[List[str]] = UNSET,
-        ignored_providers: OptionalNullable[List[str]] = UNSET,
+        ignored_models: OptionalNullable[Iterable[str]] = UNSET,
+        ignored_providers: OptionalNullable[Iterable[str]] = UNSET,
         limit_usd: OptionalNullable[float] = UNSET,
         name: Optional[str] = None,
         reset_interval: OptionalNullable[components.GuardrailInterval] = UNSET,
@@ -1321,8 +1359,12 @@ class Guardrails(BaseSDK):
             x_open_router_categories=x_open_router_categories,
             id=id,
             update_guardrail_request=components.UpdateGuardrailRequest(
-                allowed_models=allowed_models,
-                allowed_providers=allowed_providers,
+                allowed_models=utils.unmarshal(
+                    allowed_models, OptionalNullable[List[str]]
+                ),
+                allowed_providers=utils.unmarshal(
+                    allowed_providers, OptionalNullable[List[str]]
+                ),
                 content_filter_builtins=utils.get_pydantic_model(
                     content_filter_builtins,
                     OptionalNullable[List[components.ContentFilterBuiltinEntryInput]],
@@ -1337,8 +1379,12 @@ class Guardrails(BaseSDK):
                 enforce_zdr_google=enforce_zdr_google,
                 enforce_zdr_openai=enforce_zdr_openai,
                 enforce_zdr_other=enforce_zdr_other,
-                ignored_models=ignored_models,
-                ignored_providers=ignored_providers,
+                ignored_models=utils.unmarshal(
+                    ignored_models, OptionalNullable[List[str]]
+                ),
+                ignored_providers=utils.unmarshal(
+                    ignored_providers, OptionalNullable[List[str]]
+                ),
                 limit_usd=limit_usd,
                 name=name,
                 reset_interval=reset_interval,
@@ -1395,9 +1441,11 @@ class Guardrails(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Guardrails"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "404", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -1444,18 +1492,18 @@ class Guardrails(BaseSDK):
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
-        allowed_models: OptionalNullable[List[str]] = UNSET,
-        allowed_providers: OptionalNullable[List[str]] = UNSET,
+        allowed_models: OptionalNullable[Iterable[str]] = UNSET,
+        allowed_providers: OptionalNullable[Iterable[str]] = UNSET,
         content_filter_builtins: OptionalNullable[
             Union[
-                List[components.ContentFilterBuiltinEntryInput],
-                List[components.ContentFilterBuiltinEntryInputTypedDict],
+                Iterable[components.ContentFilterBuiltinEntryInput],
+                Iterable[components.ContentFilterBuiltinEntryInputTypedDict],
             ]
         ] = UNSET,
         content_filters: OptionalNullable[
             Union[
-                List[components.ContentFilterEntry],
-                List[components.ContentFilterEntryTypedDict],
+                Iterable[components.ContentFilterEntry],
+                Iterable[components.ContentFilterEntryTypedDict],
             ]
         ] = UNSET,
         description: OptionalNullable[str] = UNSET,
@@ -1464,8 +1512,8 @@ class Guardrails(BaseSDK):
         enforce_zdr_google: OptionalNullable[bool] = UNSET,
         enforce_zdr_openai: OptionalNullable[bool] = UNSET,
         enforce_zdr_other: OptionalNullable[bool] = UNSET,
-        ignored_models: OptionalNullable[List[str]] = UNSET,
-        ignored_providers: OptionalNullable[List[str]] = UNSET,
+        ignored_models: OptionalNullable[Iterable[str]] = UNSET,
+        ignored_providers: OptionalNullable[Iterable[str]] = UNSET,
         limit_usd: OptionalNullable[float] = UNSET,
         name: Optional[str] = None,
         reset_interval: OptionalNullable[components.GuardrailInterval] = UNSET,
@@ -1522,8 +1570,12 @@ class Guardrails(BaseSDK):
             x_open_router_categories=x_open_router_categories,
             id=id,
             update_guardrail_request=components.UpdateGuardrailRequest(
-                allowed_models=allowed_models,
-                allowed_providers=allowed_providers,
+                allowed_models=utils.unmarshal(
+                    allowed_models, OptionalNullable[List[str]]
+                ),
+                allowed_providers=utils.unmarshal(
+                    allowed_providers, OptionalNullable[List[str]]
+                ),
                 content_filter_builtins=utils.get_pydantic_model(
                     content_filter_builtins,
                     OptionalNullable[List[components.ContentFilterBuiltinEntryInput]],
@@ -1538,8 +1590,12 @@ class Guardrails(BaseSDK):
                 enforce_zdr_google=enforce_zdr_google,
                 enforce_zdr_openai=enforce_zdr_openai,
                 enforce_zdr_other=enforce_zdr_other,
-                ignored_models=ignored_models,
-                ignored_providers=ignored_providers,
+                ignored_models=utils.unmarshal(
+                    ignored_models, OptionalNullable[List[str]]
+                ),
+                ignored_providers=utils.unmarshal(
+                    ignored_providers, OptionalNullable[List[str]]
+                ),
                 limit_usd=limit_usd,
                 name=name,
                 reset_interval=reset_interval,
@@ -1596,9 +1652,11 @@ class Guardrails(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Guardrails"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "404", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -1733,24 +1791,26 @@ class Guardrails(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Guardrails"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["401", "404", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
         def next_func() -> Optional[operations.ListGuardrailKeyAssignmentsResponse]:
             body = utils.unmarshal_json(http_res.text, Union[Dict[Any, Any], List[Any]])
 
-            offset = request.offset if not request.offset is None else 0
+            offset = request.offset if isinstance(request.offset, int) else 0
 
             if not http_res.text:
                 return None
             results = JSONPath("$.data").parse(body)
             if len(results) == 0 or len(results[0]) == 0:
                 return None
-            limit = request.limit if not request.limit is None else 0
-            if len(results[0]) < limit:
+            limit_ = request.limit if isinstance(request.limit, int) else 0
+            if len(results[0]) < limit_:
                 return None
             next_offset = offset + len(results[0])
 
@@ -1762,6 +1822,9 @@ class Guardrails(BaseSDK):
                 offset=next_offset,
                 limit=limit,
                 retries=retries,
+                server_url=server_url,
+                timeout_ms=timeout_ms,
+                http_headers=http_headers,
             )
 
         response_data: Any = None
@@ -1895,9 +1958,11 @@ class Guardrails(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Guardrails"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["401", "404", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -1909,15 +1974,15 @@ class Guardrails(BaseSDK):
             async def empty_result():
                 return None
 
-            offset = request.offset if not request.offset is None else 0
+            offset = request.offset if isinstance(request.offset, int) else 0
 
             if not http_res.text:
                 return empty_result()
             results = JSONPath("$.data").parse(body)
             if len(results) == 0 or len(results[0]) == 0:
                 return empty_result()
-            limit = request.limit if not request.limit is None else 0
-            if len(results[0]) < limit:
+            limit_ = request.limit if isinstance(request.limit, int) else 0
+            if len(results[0]) < limit_:
                 return empty_result()
             next_offset = offset + len(results[0])
 
@@ -1929,6 +1994,9 @@ class Guardrails(BaseSDK):
                 offset=next_offset,
                 limit=limit,
                 retries=retries,
+                server_url=server_url,
+                timeout_ms=timeout_ms,
+                http_headers=http_headers,
             )
 
         response_data: Any = None
@@ -1971,7 +2039,7 @@ class Guardrails(BaseSDK):
         self,
         *,
         id: str,
-        key_hashes: List[str],
+        key_hashes: Iterable[str],
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
@@ -2014,7 +2082,7 @@ class Guardrails(BaseSDK):
             x_open_router_categories=x_open_router_categories,
             id=id,
             bulk_assign_keys_request=components.BulkAssignKeysRequest(
-                key_hashes=key_hashes,
+                key_hashes=utils.unmarshal(key_hashes, List[str]),
             ),
         )
 
@@ -2068,9 +2136,11 @@ class Guardrails(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Guardrails"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "404", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -2114,7 +2184,7 @@ class Guardrails(BaseSDK):
         self,
         *,
         id: str,
-        key_hashes: List[str],
+        key_hashes: Iterable[str],
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
@@ -2157,7 +2227,7 @@ class Guardrails(BaseSDK):
             x_open_router_categories=x_open_router_categories,
             id=id,
             bulk_assign_keys_request=components.BulkAssignKeysRequest(
-                key_hashes=key_hashes,
+                key_hashes=utils.unmarshal(key_hashes, List[str]),
             ),
         )
 
@@ -2211,9 +2281,11 @@ class Guardrails(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Guardrails"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "404", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -2257,7 +2329,7 @@ class Guardrails(BaseSDK):
         self,
         *,
         id: str,
-        key_hashes: List[str],
+        key_hashes: Iterable[str],
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
@@ -2300,7 +2372,7 @@ class Guardrails(BaseSDK):
             x_open_router_categories=x_open_router_categories,
             id=id,
             bulk_unassign_keys_request=components.BulkUnassignKeysRequest(
-                key_hashes=key_hashes,
+                key_hashes=utils.unmarshal(key_hashes, List[str]),
             ),
         )
 
@@ -2354,9 +2426,11 @@ class Guardrails(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Guardrails"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "404", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -2402,7 +2476,7 @@ class Guardrails(BaseSDK):
         self,
         *,
         id: str,
-        key_hashes: List[str],
+        key_hashes: Iterable[str],
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
@@ -2445,7 +2519,7 @@ class Guardrails(BaseSDK):
             x_open_router_categories=x_open_router_categories,
             id=id,
             bulk_unassign_keys_request=components.BulkUnassignKeysRequest(
-                key_hashes=key_hashes,
+                key_hashes=utils.unmarshal(key_hashes, List[str]),
             ),
         )
 
@@ -2499,9 +2573,11 @@ class Guardrails(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Guardrails"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "404", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -2638,24 +2714,26 @@ class Guardrails(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Guardrails"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["401", "404", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
         def next_func() -> Optional[operations.ListGuardrailMemberAssignmentsResponse]:
             body = utils.unmarshal_json(http_res.text, Union[Dict[Any, Any], List[Any]])
 
-            offset = request.offset if not request.offset is None else 0
+            offset = request.offset if isinstance(request.offset, int) else 0
 
             if not http_res.text:
                 return None
             results = JSONPath("$.data").parse(body)
             if len(results) == 0 or len(results[0]) == 0:
                 return None
-            limit = request.limit if not request.limit is None else 0
-            if len(results[0]) < limit:
+            limit_ = request.limit if isinstance(request.limit, int) else 0
+            if len(results[0]) < limit_:
                 return None
             next_offset = offset + len(results[0])
 
@@ -2667,6 +2745,9 @@ class Guardrails(BaseSDK):
                 offset=next_offset,
                 limit=limit,
                 retries=retries,
+                server_url=server_url,
+                timeout_ms=timeout_ms,
+                http_headers=http_headers,
             )
 
         response_data: Any = None
@@ -2800,9 +2881,11 @@ class Guardrails(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Guardrails"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["401", "404", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -2814,15 +2897,15 @@ class Guardrails(BaseSDK):
             async def empty_result():
                 return None
 
-            offset = request.offset if not request.offset is None else 0
+            offset = request.offset if isinstance(request.offset, int) else 0
 
             if not http_res.text:
                 return empty_result()
             results = JSONPath("$.data").parse(body)
             if len(results) == 0 or len(results[0]) == 0:
                 return empty_result()
-            limit = request.limit if not request.limit is None else 0
-            if len(results[0]) < limit:
+            limit_ = request.limit if isinstance(request.limit, int) else 0
+            if len(results[0]) < limit_:
                 return empty_result()
             next_offset = offset + len(results[0])
 
@@ -2834,6 +2917,9 @@ class Guardrails(BaseSDK):
                 offset=next_offset,
                 limit=limit,
                 retries=retries,
+                server_url=server_url,
+                timeout_ms=timeout_ms,
+                http_headers=http_headers,
             )
 
         response_data: Any = None
@@ -2876,7 +2962,7 @@ class Guardrails(BaseSDK):
         self,
         *,
         id: str,
-        member_user_ids: List[str],
+        member_user_ids: Iterable[str],
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
@@ -2919,7 +3005,7 @@ class Guardrails(BaseSDK):
             x_open_router_categories=x_open_router_categories,
             id=id,
             bulk_assign_members_request=components.BulkAssignMembersRequest(
-                member_user_ids=member_user_ids,
+                member_user_ids=utils.unmarshal(member_user_ids, List[str]),
             ),
         )
 
@@ -2973,9 +3059,11 @@ class Guardrails(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Guardrails"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "404", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -3021,7 +3109,7 @@ class Guardrails(BaseSDK):
         self,
         *,
         id: str,
-        member_user_ids: List[str],
+        member_user_ids: Iterable[str],
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
@@ -3064,7 +3152,7 @@ class Guardrails(BaseSDK):
             x_open_router_categories=x_open_router_categories,
             id=id,
             bulk_assign_members_request=components.BulkAssignMembersRequest(
-                member_user_ids=member_user_ids,
+                member_user_ids=utils.unmarshal(member_user_ids, List[str]),
             ),
         )
 
@@ -3118,9 +3206,11 @@ class Guardrails(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Guardrails"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "404", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -3166,7 +3256,7 @@ class Guardrails(BaseSDK):
         self,
         *,
         id: str,
-        member_user_ids: List[str],
+        member_user_ids: Iterable[str],
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
@@ -3209,7 +3299,7 @@ class Guardrails(BaseSDK):
             x_open_router_categories=x_open_router_categories,
             id=id,
             bulk_unassign_members_request=components.BulkUnassignMembersRequest(
-                member_user_ids=member_user_ids,
+                member_user_ids=utils.unmarshal(member_user_ids, List[str]),
             ),
         )
 
@@ -3263,9 +3353,11 @@ class Guardrails(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Guardrails"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "404", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -3311,7 +3403,7 @@ class Guardrails(BaseSDK):
         self,
         *,
         id: str,
-        member_user_ids: List[str],
+        member_user_ids: Iterable[str],
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
@@ -3354,7 +3446,7 @@ class Guardrails(BaseSDK):
             x_open_router_categories=x_open_router_categories,
             id=id,
             bulk_unassign_members_request=components.BulkUnassignMembersRequest(
-                member_user_ids=member_user_ids,
+                member_user_ids=utils.unmarshal(member_user_ids, List[str]),
             ),
         )
 
@@ -3408,9 +3500,11 @@ class Guardrails(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Guardrails"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "404", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -3544,24 +3638,26 @@ class Guardrails(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Guardrails"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["401", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
         def next_func() -> Optional[operations.ListKeyAssignmentsResponse]:
             body = utils.unmarshal_json(http_res.text, Union[Dict[Any, Any], List[Any]])
 
-            offset = request.offset if not request.offset is None else 0
+            offset = request.offset if isinstance(request.offset, int) else 0
 
             if not http_res.text:
                 return None
             results = JSONPath("$.data").parse(body)
             if len(results) == 0 or len(results[0]) == 0:
                 return None
-            limit = request.limit if not request.limit is None else 0
-            if len(results[0]) < limit:
+            limit_ = request.limit if isinstance(request.limit, int) else 0
+            if len(results[0]) < limit_:
                 return None
             next_offset = offset + len(results[0])
 
@@ -3572,6 +3668,9 @@ class Guardrails(BaseSDK):
                 offset=next_offset,
                 limit=limit,
                 retries=retries,
+                server_url=server_url,
+                timeout_ms=timeout_ms,
+                http_headers=http_headers,
             )
 
         response_data: Any = None
@@ -3697,9 +3796,11 @@ class Guardrails(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Guardrails"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["401", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -3709,15 +3810,15 @@ class Guardrails(BaseSDK):
             async def empty_result():
                 return None
 
-            offset = request.offset if not request.offset is None else 0
+            offset = request.offset if isinstance(request.offset, int) else 0
 
             if not http_res.text:
                 return empty_result()
             results = JSONPath("$.data").parse(body)
             if len(results) == 0 or len(results[0]) == 0:
                 return empty_result()
-            limit = request.limit if not request.limit is None else 0
-            if len(results[0]) < limit:
+            limit_ = request.limit if isinstance(request.limit, int) else 0
+            if len(results[0]) < limit_:
                 return empty_result()
             next_offset = offset + len(results[0])
 
@@ -3728,6 +3829,9 @@ class Guardrails(BaseSDK):
                 offset=next_offset,
                 limit=limit,
                 retries=retries,
+                server_url=server_url,
+                timeout_ms=timeout_ms,
+                http_headers=http_headers,
             )
 
         response_data: Any = None
@@ -3853,24 +3957,26 @@ class Guardrails(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Guardrails"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["401", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
         def next_func() -> Optional[operations.ListMemberAssignmentsResponse]:
             body = utils.unmarshal_json(http_res.text, Union[Dict[Any, Any], List[Any]])
 
-            offset = request.offset if not request.offset is None else 0
+            offset = request.offset if isinstance(request.offset, int) else 0
 
             if not http_res.text:
                 return None
             results = JSONPath("$.data").parse(body)
             if len(results) == 0 or len(results[0]) == 0:
                 return None
-            limit = request.limit if not request.limit is None else 0
-            if len(results[0]) < limit:
+            limit_ = request.limit if isinstance(request.limit, int) else 0
+            if len(results[0]) < limit_:
                 return None
             next_offset = offset + len(results[0])
 
@@ -3881,6 +3987,9 @@ class Guardrails(BaseSDK):
                 offset=next_offset,
                 limit=limit,
                 retries=retries,
+                server_url=server_url,
+                timeout_ms=timeout_ms,
+                http_headers=http_headers,
             )
 
         response_data: Any = None
@@ -4006,9 +4115,11 @@ class Guardrails(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Guardrails"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["401", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -4020,15 +4131,15 @@ class Guardrails(BaseSDK):
             async def empty_result():
                 return None
 
-            offset = request.offset if not request.offset is None else 0
+            offset = request.offset if isinstance(request.offset, int) else 0
 
             if not http_res.text:
                 return empty_result()
             results = JSONPath("$.data").parse(body)
             if len(results) == 0 or len(results[0]) == 0:
                 return empty_result()
-            limit = request.limit if not request.limit is None else 0
-            if len(results[0]) < limit:
+            limit_ = request.limit if isinstance(request.limit, int) else 0
+            if len(results[0]) < limit_:
                 return empty_result()
             next_offset = offset + len(results[0])
 
@@ -4039,6 +4150,9 @@ class Guardrails(BaseSDK):
                 offset=next_offset,
                 limit=limit,
                 retries=retries,
+                server_url=server_url,
+                timeout_ms=timeout_ms,
+                http_headers=http_headers,
             )
 
         response_data: Any = None

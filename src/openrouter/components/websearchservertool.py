@@ -12,11 +12,9 @@ from openrouter.types import (
     UNSET,
     UNSET_SENTINEL,
 )
-from openrouter.utils import validate_open_enum
 from pydantic import model_serializer
-from pydantic.functional_validators import PlainValidator
 from typing import Literal, Optional
-from typing_extensions import Annotated, NotRequired, TypedDict
+from typing_extensions import NotRequired, TypedDict
 
 
 WebSearchServerToolType = Literal["web_search_2025_08_26",]
@@ -42,9 +40,7 @@ class WebSearchServerTool(BaseModel):
 
     type: WebSearchServerToolType
 
-    engine: Annotated[
-        Optional[WebSearchEngineEnum], PlainValidator(validate_open_enum(False))
-    ] = None
+    engine: Optional[WebSearchEngineEnum] = None
     r"""Which search engine to use. \"auto\" (default) uses native if the provider supports it, otherwise Exa. \"native\" forces the provider's built-in search. \"exa\" forces the Exa search API. \"firecrawl\" uses Firecrawl (requires BYOK). \"parallel\" uses the Parallel search API. \"perplexity\" uses the Perplexity Search API (raw ranked results)."""
 
     filters: OptionalNullable[WebSearchDomainFilter] = UNSET
@@ -52,9 +48,7 @@ class WebSearchServerTool(BaseModel):
     max_results: Optional[int] = None
     r"""Maximum number of search results to return per search call. Defaults to 5. Applies to Exa, Firecrawl, Parallel, and Perplexity engines; ignored with native provider search. Perplexity supports a maximum of 20; values above 20 are clamped."""
 
-    search_context_size: Annotated[
-        Optional[SearchContextSizeEnum], PlainValidator(validate_open_enum(False))
-    ] = None
+    search_context_size: Optional[SearchContextSizeEnum] = None
     r"""Size of the search context for web search tools"""
 
     user_location: OptionalNullable[WebSearchUserLocation] = UNSET
@@ -62,36 +56,27 @@ class WebSearchServerTool(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = [
-            "engine",
-            "filters",
-            "max_results",
-            "search_context_size",
-            "user_location",
-        ]
-        nullable_fields = ["filters", "user_location"]
-        null_default_fields = []
-
+        optional_fields = set(
+            ["engine", "filters", "max_results", "search_context_size", "user_location"]
+        )
+        nullable_fields = set(["filters", "user_location"])
         serialized = handler(self)
-
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
-            serialized.pop(k, None)
+            val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
 
         return m

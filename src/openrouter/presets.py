@@ -7,7 +7,7 @@ from openrouter._hooks import HookContext
 from openrouter.types import Nullable, OptionalNullable, UNSET
 from openrouter.utils import get_security_from_env
 from openrouter.utils.unmarshal_json_response import unmarshal_json_response
-from typing import Any, Awaitable, Dict, List, Mapping, Optional, Union
+from typing import Any, Awaitable, Dict, Iterable, List, Mapping, Optional, Union
 
 
 class Presets(BaseSDK):
@@ -29,6 +29,8 @@ class Presets(BaseSDK):
         r"""List presets
 
         Lists all presets for the authenticated user, ordered by most recently updated first.
+
+        If set, this operation will use `api_key` from the global security.
 
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
@@ -81,6 +83,7 @@ class Presets(BaseSDK):
             ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
+            allowed_fields=["api_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -105,24 +108,26 @@ class Presets(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Presets"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
         def next_func() -> Optional[operations.ListPresetsResponse]:
             body = utils.unmarshal_json(http_res.text, Union[Dict[Any, Any], List[Any]])
 
-            offset = request.offset if not request.offset is None else 0
+            offset = request.offset if isinstance(request.offset, int) else 0
 
             if not http_res.text:
                 return None
             results = JSONPath("$.data").parse(body)
             if len(results) == 0 or len(results[0]) == 0:
                 return None
-            limit = request.limit if not request.limit is None else 0
-            if len(results[0]) < limit:
+            limit_ = request.limit if isinstance(request.limit, int) else 0
+            if len(results[0]) < limit_:
                 return None
             next_offset = offset + len(results[0])
 
@@ -133,6 +138,9 @@ class Presets(BaseSDK):
                 offset=next_offset,
                 limit=limit,
                 retries=retries,
+                server_url=server_url,
+                timeout_ms=timeout_ms,
+                http_headers=http_headers,
             )
 
         response_data: Any = None
@@ -188,6 +196,8 @@ class Presets(BaseSDK):
 
         Lists all presets for the authenticated user, ordered by most recently updated first.
 
+        If set, this operation will use `api_key` from the global security.
+
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
@@ -239,6 +249,7 @@ class Presets(BaseSDK):
             ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
+            allowed_fields=["api_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -263,9 +274,11 @@ class Presets(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Presets"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -275,15 +288,15 @@ class Presets(BaseSDK):
             async def empty_result():
                 return None
 
-            offset = request.offset if not request.offset is None else 0
+            offset = request.offset if isinstance(request.offset, int) else 0
 
             if not http_res.text:
                 return empty_result()
             results = JSONPath("$.data").parse(body)
             if len(results) == 0 or len(results[0]) == 0:
                 return empty_result()
-            limit = request.limit if not request.limit is None else 0
-            if len(results[0]) < limit:
+            limit_ = request.limit if isinstance(request.limit, int) else 0
+            if len(results[0]) < limit_:
                 return empty_result()
             next_offset = offset + len(results[0])
 
@@ -294,6 +307,9 @@ class Presets(BaseSDK):
                 offset=next_offset,
                 limit=limit,
                 retries=retries,
+                server_url=server_url,
+                timeout_ms=timeout_ms,
+                http_headers=http_headers,
             )
 
         response_data: Any = None
@@ -348,6 +364,8 @@ class Presets(BaseSDK):
 
         Retrieves a preset by its slug with its currently designated version inline.
 
+        If set, this operation will use `api_key` from the global security.
+
         :param slug: URL-safe slug identifying the preset.
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
@@ -397,6 +415,7 @@ class Presets(BaseSDK):
             ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
+            allowed_fields=["api_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -421,9 +440,11 @@ class Presets(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Presets"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "404", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -479,6 +500,8 @@ class Presets(BaseSDK):
 
         Retrieves a preset by its slug with its currently designated version inline.
 
+        If set, this operation will use `api_key` from the global security.
+
         :param slug: URL-safe slug identifying the preset.
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
@@ -528,6 +551,7 @@ class Presets(BaseSDK):
             ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
+            allowed_fields=["api_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -552,9 +576,11 @@ class Presets(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Presets"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "404", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -599,7 +625,8 @@ class Presets(BaseSDK):
         *,
         slug: str,
         messages: Union[
-            List[components.ChatMessages], List[components.ChatMessagesTypedDict]
+            Iterable[components.ChatMessages],
+            Iterable[components.ChatMessagesTypedDict],
         ],
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
@@ -616,24 +643,24 @@ class Presets(BaseSDK):
         frequency_penalty: OptionalNullable[float] = UNSET,
         image_config: Optional[
             Union[
-                Dict[str, components.ImageConfig],
-                Dict[str, components.ImageConfigTypedDict],
+                Mapping[str, components.ImageConfig],
+                Mapping[str, components.ImageConfigTypedDict],
             ]
         ] = None,
-        logit_bias: OptionalNullable[Dict[str, float]] = UNSET,
+        logit_bias: OptionalNullable[Mapping[str, float]] = UNSET,
         logprobs: OptionalNullable[bool] = UNSET,
         max_completion_tokens: OptionalNullable[int] = UNSET,
         max_tokens: OptionalNullable[int] = UNSET,
-        metadata: Optional[Dict[str, str]] = None,
+        metadata: Optional[Mapping[str, str]] = None,
         min_p: OptionalNullable[float] = UNSET,
-        modalities: Optional[List[components.Modality]] = None,
+        modalities: Optional[Iterable[components.Modality]] = None,
         model: Optional[str] = None,
-        models: Optional[List[str]] = None,
+        models: Optional[Iterable[str]] = None,
         parallel_tool_calls: OptionalNullable[bool] = UNSET,
         plugins: Optional[
             Union[
-                List[components.ChatRequestPlugin],
-                List[components.ChatRequestPluginTypedDict],
+                Iterable[components.ChatRequestPlugin],
+                Iterable[components.ChatRequestPluginTypedDict],
             ]
         ] = None,
         presence_penalty: OptionalNullable[float] = UNSET,
@@ -663,8 +690,8 @@ class Presets(BaseSDK):
         ] = UNSET,
         stop_server_tools_when: Optional[
             Union[
-                List[components.StopServerToolsWhenCondition],
-                List[components.StopServerToolsWhenConditionTypedDict],
+                Iterable[components.StopServerToolsWhenCondition],
+                Iterable[components.StopServerToolsWhenConditionTypedDict],
             ]
         ] = None,
         stream: Optional[bool] = False,
@@ -677,8 +704,8 @@ class Presets(BaseSDK):
         ] = None,
         tools: Optional[
             Union[
-                List[components.ChatFunctionTool],
-                List[components.ChatFunctionToolTypedDict],
+                Iterable[components.ChatFunctionTool],
+                Iterable[components.ChatFunctionToolTypedDict],
             ]
         ] = None,
         top_a: OptionalNullable[float] = UNSET,
@@ -697,6 +724,8 @@ class Presets(BaseSDK):
         r"""Create a preset from a chat-completions request body
 
         Creates a preset (or a new version of an existing one) from an inference request body. Only fields that overlap with the preset config are persisted; other fields (e.g. `messages`, `stream`, `prompt`) are silently ignored.
+
+        If set, this operation will use `api_key` from the global security.
 
         :param slug: URL-safe slug identifying the preset. Created if it does not exist.
         :param messages: List of messages for the conversation
@@ -772,19 +801,25 @@ class Presets(BaseSDK):
                     debug, Optional[components.ChatDebugOptions]
                 ),
                 frequency_penalty=frequency_penalty,
-                image_config=image_config,
-                logit_bias=logit_bias,
+                image_config=utils.unmarshal(
+                    image_config, Optional[Dict[str, components.ImageConfig]]
+                ),
+                logit_bias=utils.unmarshal(
+                    logit_bias, OptionalNullable[Dict[str, float]]
+                ),
                 logprobs=logprobs,
                 max_completion_tokens=max_completion_tokens,
                 max_tokens=max_tokens,
                 messages=utils.get_pydantic_model(
                     messages, List[components.ChatMessages]
                 ),
-                metadata=metadata,
+                metadata=utils.unmarshal(metadata, Optional[Dict[str, str]]),
                 min_p=min_p,
-                modalities=modalities,
+                modalities=utils.unmarshal(
+                    modalities, Optional[List[components.Modality]]
+                ),
                 model=model,
-                models=models,
+                models=utils.unmarshal(models, Optional[List[str]]),
                 parallel_tool_calls=parallel_tool_calls,
                 plugins=utils.get_pydantic_model(
                     plugins, Optional[List[components.ChatRequestPlugin]]
@@ -804,7 +839,7 @@ class Presets(BaseSDK):
                 seed=seed,
                 service_tier=service_tier,
                 session_id=session_id,
-                stop=stop,
+                stop=utils.unmarshal(stop, OptionalNullable[components.Stop]),
                 stop_server_tools_when=utils.get_pydantic_model(
                     stop_server_tools_when,
                     Optional[List[components.StopServerToolsWhenCondition]],
@@ -851,6 +886,7 @@ class Presets(BaseSDK):
                 request.chat_request, False, False, "json", components.ChatRequest
             ),
             allow_empty_value=None,
+            allowed_fields=["api_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -875,9 +911,11 @@ class Presets(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Presets"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "404", "409", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -934,7 +972,8 @@ class Presets(BaseSDK):
         *,
         slug: str,
         messages: Union[
-            List[components.ChatMessages], List[components.ChatMessagesTypedDict]
+            Iterable[components.ChatMessages],
+            Iterable[components.ChatMessagesTypedDict],
         ],
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
@@ -951,24 +990,24 @@ class Presets(BaseSDK):
         frequency_penalty: OptionalNullable[float] = UNSET,
         image_config: Optional[
             Union[
-                Dict[str, components.ImageConfig],
-                Dict[str, components.ImageConfigTypedDict],
+                Mapping[str, components.ImageConfig],
+                Mapping[str, components.ImageConfigTypedDict],
             ]
         ] = None,
-        logit_bias: OptionalNullable[Dict[str, float]] = UNSET,
+        logit_bias: OptionalNullable[Mapping[str, float]] = UNSET,
         logprobs: OptionalNullable[bool] = UNSET,
         max_completion_tokens: OptionalNullable[int] = UNSET,
         max_tokens: OptionalNullable[int] = UNSET,
-        metadata: Optional[Dict[str, str]] = None,
+        metadata: Optional[Mapping[str, str]] = None,
         min_p: OptionalNullable[float] = UNSET,
-        modalities: Optional[List[components.Modality]] = None,
+        modalities: Optional[Iterable[components.Modality]] = None,
         model: Optional[str] = None,
-        models: Optional[List[str]] = None,
+        models: Optional[Iterable[str]] = None,
         parallel_tool_calls: OptionalNullable[bool] = UNSET,
         plugins: Optional[
             Union[
-                List[components.ChatRequestPlugin],
-                List[components.ChatRequestPluginTypedDict],
+                Iterable[components.ChatRequestPlugin],
+                Iterable[components.ChatRequestPluginTypedDict],
             ]
         ] = None,
         presence_penalty: OptionalNullable[float] = UNSET,
@@ -998,8 +1037,8 @@ class Presets(BaseSDK):
         ] = UNSET,
         stop_server_tools_when: Optional[
             Union[
-                List[components.StopServerToolsWhenCondition],
-                List[components.StopServerToolsWhenConditionTypedDict],
+                Iterable[components.StopServerToolsWhenCondition],
+                Iterable[components.StopServerToolsWhenConditionTypedDict],
             ]
         ] = None,
         stream: Optional[bool] = False,
@@ -1012,8 +1051,8 @@ class Presets(BaseSDK):
         ] = None,
         tools: Optional[
             Union[
-                List[components.ChatFunctionTool],
-                List[components.ChatFunctionToolTypedDict],
+                Iterable[components.ChatFunctionTool],
+                Iterable[components.ChatFunctionToolTypedDict],
             ]
         ] = None,
         top_a: OptionalNullable[float] = UNSET,
@@ -1032,6 +1071,8 @@ class Presets(BaseSDK):
         r"""Create a preset from a chat-completions request body
 
         Creates a preset (or a new version of an existing one) from an inference request body. Only fields that overlap with the preset config are persisted; other fields (e.g. `messages`, `stream`, `prompt`) are silently ignored.
+
+        If set, this operation will use `api_key` from the global security.
 
         :param slug: URL-safe slug identifying the preset. Created if it does not exist.
         :param messages: List of messages for the conversation
@@ -1107,19 +1148,25 @@ class Presets(BaseSDK):
                     debug, Optional[components.ChatDebugOptions]
                 ),
                 frequency_penalty=frequency_penalty,
-                image_config=image_config,
-                logit_bias=logit_bias,
+                image_config=utils.unmarshal(
+                    image_config, Optional[Dict[str, components.ImageConfig]]
+                ),
+                logit_bias=utils.unmarshal(
+                    logit_bias, OptionalNullable[Dict[str, float]]
+                ),
                 logprobs=logprobs,
                 max_completion_tokens=max_completion_tokens,
                 max_tokens=max_tokens,
                 messages=utils.get_pydantic_model(
                     messages, List[components.ChatMessages]
                 ),
-                metadata=metadata,
+                metadata=utils.unmarshal(metadata, Optional[Dict[str, str]]),
                 min_p=min_p,
-                modalities=modalities,
+                modalities=utils.unmarshal(
+                    modalities, Optional[List[components.Modality]]
+                ),
                 model=model,
-                models=models,
+                models=utils.unmarshal(models, Optional[List[str]]),
                 parallel_tool_calls=parallel_tool_calls,
                 plugins=utils.get_pydantic_model(
                     plugins, Optional[List[components.ChatRequestPlugin]]
@@ -1139,7 +1186,7 @@ class Presets(BaseSDK):
                 seed=seed,
                 service_tier=service_tier,
                 session_id=session_id,
-                stop=stop,
+                stop=utils.unmarshal(stop, OptionalNullable[components.Stop]),
                 stop_server_tools_when=utils.get_pydantic_model(
                     stop_server_tools_when,
                     Optional[List[components.StopServerToolsWhenCondition]],
@@ -1186,6 +1233,7 @@ class Presets(BaseSDK):
                 request.chat_request, False, False, "json", components.ChatRequest
             ),
             allow_empty_value=None,
+            allowed_fields=["api_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -1210,9 +1258,11 @@ class Presets(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Presets"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "404", "409", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -1270,8 +1320,8 @@ class Presets(BaseSDK):
         slug: str,
         messages: Nullable[
             Union[
-                List[components.MessagesMessageParam],
-                List[components.MessagesMessageParamTypedDict],
+                Iterable[components.MessagesMessageParam],
+                Iterable[components.MessagesMessageParamTypedDict],
             ]
         ],
         model: str,
@@ -1289,8 +1339,8 @@ class Presets(BaseSDK):
         ] = UNSET,
         fallbacks: OptionalNullable[
             Union[
-                List[components.MessagesFallbackParam],
-                List[components.MessagesFallbackParamTypedDict],
+                Iterable[components.MessagesFallbackParam],
+                Iterable[components.MessagesFallbackParamTypedDict],
             ]
         ] = UNSET,
         max_tokens: Optional[int] = None,
@@ -1300,7 +1350,7 @@ class Presets(BaseSDK):
                 components.MessagesRequestMetadataTypedDict,
             ]
         ] = None,
-        models: Optional[List[str]] = None,
+        models: Optional[Iterable[str]] = None,
         output_config: Optional[
             Union[
                 components.MessagesOutputConfig,
@@ -1309,8 +1359,8 @@ class Presets(BaseSDK):
         ] = None,
         plugins: Optional[
             Union[
-                List[components.MessagesRequestPlugin],
-                List[components.MessagesRequestPluginTypedDict],
+                Iterable[components.MessagesRequestPlugin],
+                Iterable[components.MessagesRequestPluginTypedDict],
             ]
         ] = None,
         provider: OptionalNullable[
@@ -1321,11 +1371,11 @@ class Presets(BaseSDK):
         service_tier: Optional[str] = None,
         session_id: Optional[str] = None,
         speed: OptionalNullable[components.Speed] = UNSET,
-        stop_sequences: Optional[List[str]] = None,
+        stop_sequences: Optional[Iterable[str]] = None,
         stop_server_tools_when: Optional[
             Union[
-                List[components.StopServerToolsWhenCondition],
-                List[components.StopServerToolsWhenConditionTypedDict],
+                Iterable[components.StopServerToolsWhenCondition],
+                Iterable[components.StopServerToolsWhenConditionTypedDict],
             ]
         ] = None,
         stream: Optional[bool] = None,
@@ -1339,8 +1389,8 @@ class Presets(BaseSDK):
         ] = None,
         tools: Optional[
             Union[
-                List[components.MessagesRequestToolUnion],
-                List[components.MessagesRequestToolUnionTypedDict],
+                Iterable[components.MessagesRequestToolUnion],
+                Iterable[components.MessagesRequestToolUnionTypedDict],
             ]
         ] = None,
         top_k: Optional[int] = None,
@@ -1357,6 +1407,8 @@ class Presets(BaseSDK):
         r"""Create a preset from a messages request body
 
         Creates a preset (or a new version of an existing one) from an inference request body. Only fields that overlap with the preset config are persisted; other fields (e.g. `messages`, `stream`, `prompt`) are silently ignored.
+
+        If set, this operation will use `api_key` from the global security.
 
         :param slug: URL-safe slug identifying the preset. Created if it does not exist.
         :param messages:
@@ -1430,7 +1482,7 @@ class Presets(BaseSDK):
                     metadata, Optional[components.MessagesRequestMetadata]
                 ),
                 model=model,
-                models=models,
+                models=utils.unmarshal(models, Optional[List[str]]),
                 output_config=utils.get_pydantic_model(
                     output_config, Optional[components.MessagesOutputConfig]
                 ),
@@ -1443,7 +1495,7 @@ class Presets(BaseSDK):
                 service_tier=service_tier,
                 session_id=session_id,
                 speed=speed,
-                stop_sequences=stop_sequences,
+                stop_sequences=utils.unmarshal(stop_sequences, Optional[List[str]]),
                 stop_server_tools_when=utils.get_pydantic_model(
                     stop_server_tools_when,
                     Optional[List[components.StopServerToolsWhenCondition]],
@@ -1493,6 +1545,7 @@ class Presets(BaseSDK):
                 components.MessagesRequest,
             ),
             allow_empty_value=None,
+            allowed_fields=["api_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -1517,9 +1570,11 @@ class Presets(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Presets"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "404", "409", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -1577,8 +1632,8 @@ class Presets(BaseSDK):
         slug: str,
         messages: Nullable[
             Union[
-                List[components.MessagesMessageParam],
-                List[components.MessagesMessageParamTypedDict],
+                Iterable[components.MessagesMessageParam],
+                Iterable[components.MessagesMessageParamTypedDict],
             ]
         ],
         model: str,
@@ -1596,8 +1651,8 @@ class Presets(BaseSDK):
         ] = UNSET,
         fallbacks: OptionalNullable[
             Union[
-                List[components.MessagesFallbackParam],
-                List[components.MessagesFallbackParamTypedDict],
+                Iterable[components.MessagesFallbackParam],
+                Iterable[components.MessagesFallbackParamTypedDict],
             ]
         ] = UNSET,
         max_tokens: Optional[int] = None,
@@ -1607,7 +1662,7 @@ class Presets(BaseSDK):
                 components.MessagesRequestMetadataTypedDict,
             ]
         ] = None,
-        models: Optional[List[str]] = None,
+        models: Optional[Iterable[str]] = None,
         output_config: Optional[
             Union[
                 components.MessagesOutputConfig,
@@ -1616,8 +1671,8 @@ class Presets(BaseSDK):
         ] = None,
         plugins: Optional[
             Union[
-                List[components.MessagesRequestPlugin],
-                List[components.MessagesRequestPluginTypedDict],
+                Iterable[components.MessagesRequestPlugin],
+                Iterable[components.MessagesRequestPluginTypedDict],
             ]
         ] = None,
         provider: OptionalNullable[
@@ -1628,11 +1683,11 @@ class Presets(BaseSDK):
         service_tier: Optional[str] = None,
         session_id: Optional[str] = None,
         speed: OptionalNullable[components.Speed] = UNSET,
-        stop_sequences: Optional[List[str]] = None,
+        stop_sequences: Optional[Iterable[str]] = None,
         stop_server_tools_when: Optional[
             Union[
-                List[components.StopServerToolsWhenCondition],
-                List[components.StopServerToolsWhenConditionTypedDict],
+                Iterable[components.StopServerToolsWhenCondition],
+                Iterable[components.StopServerToolsWhenConditionTypedDict],
             ]
         ] = None,
         stream: Optional[bool] = None,
@@ -1646,8 +1701,8 @@ class Presets(BaseSDK):
         ] = None,
         tools: Optional[
             Union[
-                List[components.MessagesRequestToolUnion],
-                List[components.MessagesRequestToolUnionTypedDict],
+                Iterable[components.MessagesRequestToolUnion],
+                Iterable[components.MessagesRequestToolUnionTypedDict],
             ]
         ] = None,
         top_k: Optional[int] = None,
@@ -1664,6 +1719,8 @@ class Presets(BaseSDK):
         r"""Create a preset from a messages request body
 
         Creates a preset (or a new version of an existing one) from an inference request body. Only fields that overlap with the preset config are persisted; other fields (e.g. `messages`, `stream`, `prompt`) are silently ignored.
+
+        If set, this operation will use `api_key` from the global security.
 
         :param slug: URL-safe slug identifying the preset. Created if it does not exist.
         :param messages:
@@ -1737,7 +1794,7 @@ class Presets(BaseSDK):
                     metadata, Optional[components.MessagesRequestMetadata]
                 ),
                 model=model,
-                models=models,
+                models=utils.unmarshal(models, Optional[List[str]]),
                 output_config=utils.get_pydantic_model(
                     output_config, Optional[components.MessagesOutputConfig]
                 ),
@@ -1750,7 +1807,7 @@ class Presets(BaseSDK):
                 service_tier=service_tier,
                 session_id=session_id,
                 speed=speed,
-                stop_sequences=stop_sequences,
+                stop_sequences=utils.unmarshal(stop_sequences, Optional[List[str]]),
                 stop_server_tools_when=utils.get_pydantic_model(
                     stop_server_tools_when,
                     Optional[List[components.StopServerToolsWhenCondition]],
@@ -1800,6 +1857,7 @@ class Presets(BaseSDK):
                 components.MessagesRequest,
             ),
             allow_empty_value=None,
+            allowed_fields=["api_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -1824,9 +1882,11 @@ class Presets(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Presets"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "404", "409", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -1898,26 +1958,26 @@ class Presets(BaseSDK):
         frequency_penalty: OptionalNullable[float] = UNSET,
         image_config: Optional[
             Union[
-                Dict[str, components.ImageConfig],
-                Dict[str, components.ImageConfigTypedDict],
+                Mapping[str, components.ImageConfig],
+                Mapping[str, components.ImageConfigTypedDict],
             ]
         ] = None,
-        include: OptionalNullable[List[components.ResponseIncludesEnum]] = UNSET,
+        include: OptionalNullable[Iterable[components.ResponseIncludesEnum]] = UNSET,
         input: Optional[
             Union[components.InputsUnion, components.InputsUnionTypedDict]
         ] = None,
         instructions: OptionalNullable[str] = UNSET,
         max_output_tokens: OptionalNullable[int] = UNSET,
         max_tool_calls: OptionalNullable[int] = UNSET,
-        metadata: OptionalNullable[Dict[str, str]] = UNSET,
-        modalities: Optional[List[components.OutputModalityEnum]] = None,
+        metadata: OptionalNullable[Mapping[str, str]] = UNSET,
+        modalities: Optional[Iterable[components.OutputModalityEnum]] = None,
         model: Optional[str] = None,
-        models: Optional[List[str]] = None,
+        models: Optional[Iterable[str]] = None,
         parallel_tool_calls: OptionalNullable[bool] = UNSET,
         plugins: Optional[
             Union[
-                List[components.ResponsesRequestPlugin],
-                List[components.ResponsesRequestPluginTypedDict],
+                Iterable[components.ResponsesRequestPlugin],
+                Iterable[components.ResponsesRequestPluginTypedDict],
             ]
         ] = None,
         presence_penalty: OptionalNullable[float] = UNSET,
@@ -1942,8 +2002,8 @@ class Presets(BaseSDK):
         session_id: Optional[str] = None,
         stop_server_tools_when: Optional[
             Union[
-                List[components.StopServerToolsWhenCondition],
-                List[components.StopServerToolsWhenConditionTypedDict],
+                Iterable[components.StopServerToolsWhenCondition],
+                Iterable[components.StopServerToolsWhenConditionTypedDict],
             ]
         ] = None,
         stream: Optional[bool] = False,
@@ -1959,8 +2019,8 @@ class Presets(BaseSDK):
         ] = None,
         tools: Optional[
             Union[
-                List[components.ResponsesRequestToolUnion],
-                List[components.ResponsesRequestToolUnionTypedDict],
+                Iterable[components.ResponsesRequestToolUnion],
+                Iterable[components.ResponsesRequestToolUnionTypedDict],
             ]
         ] = None,
         top_k: Optional[int] = None,
@@ -1979,6 +2039,8 @@ class Presets(BaseSDK):
         r"""Create a preset from a responses request body
 
         Creates a preset (or a new version of an existing one) from an inference request body. Only fields that overlap with the preset config are persisted; other fields (e.g. `messages`, `stream`, `prompt`) are silently ignored.
+
+        If set, this operation will use `api_key` from the global security.
 
         :param slug: URL-safe slug identifying the preset. Created if it does not exist.
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
@@ -2054,16 +2116,22 @@ class Presets(BaseSDK):
                     debug, Optional[components.ChatDebugOptions]
                 ),
                 frequency_penalty=frequency_penalty,
-                image_config=image_config,
-                include=include,
+                image_config=utils.unmarshal(
+                    image_config, Optional[Dict[str, components.ImageConfig]]
+                ),
+                include=utils.unmarshal(
+                    include, OptionalNullable[List[components.ResponseIncludesEnum]]
+                ),
                 input=utils.get_pydantic_model(input, Optional[components.InputsUnion]),
                 instructions=instructions,
                 max_output_tokens=max_output_tokens,
                 max_tool_calls=max_tool_calls,
-                metadata=metadata,
-                modalities=modalities,
+                metadata=utils.unmarshal(metadata, OptionalNullable[Dict[str, str]]),
+                modalities=utils.unmarshal(
+                    modalities, Optional[List[components.OutputModalityEnum]]
+                ),
                 model=model,
-                models=models,
+                models=utils.unmarshal(models, Optional[List[str]]),
                 parallel_tool_calls=parallel_tool_calls,
                 plugins=utils.get_pydantic_model(
                     plugins, Optional[List[components.ResponsesRequestPlugin]]
@@ -2133,6 +2201,7 @@ class Presets(BaseSDK):
                 components.ResponsesRequest,
             ),
             allow_empty_value=None,
+            allowed_fields=["api_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -2157,9 +2226,11 @@ class Presets(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Presets"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "404", "409", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -2231,26 +2302,26 @@ class Presets(BaseSDK):
         frequency_penalty: OptionalNullable[float] = UNSET,
         image_config: Optional[
             Union[
-                Dict[str, components.ImageConfig],
-                Dict[str, components.ImageConfigTypedDict],
+                Mapping[str, components.ImageConfig],
+                Mapping[str, components.ImageConfigTypedDict],
             ]
         ] = None,
-        include: OptionalNullable[List[components.ResponseIncludesEnum]] = UNSET,
+        include: OptionalNullable[Iterable[components.ResponseIncludesEnum]] = UNSET,
         input: Optional[
             Union[components.InputsUnion, components.InputsUnionTypedDict]
         ] = None,
         instructions: OptionalNullable[str] = UNSET,
         max_output_tokens: OptionalNullable[int] = UNSET,
         max_tool_calls: OptionalNullable[int] = UNSET,
-        metadata: OptionalNullable[Dict[str, str]] = UNSET,
-        modalities: Optional[List[components.OutputModalityEnum]] = None,
+        metadata: OptionalNullable[Mapping[str, str]] = UNSET,
+        modalities: Optional[Iterable[components.OutputModalityEnum]] = None,
         model: Optional[str] = None,
-        models: Optional[List[str]] = None,
+        models: Optional[Iterable[str]] = None,
         parallel_tool_calls: OptionalNullable[bool] = UNSET,
         plugins: Optional[
             Union[
-                List[components.ResponsesRequestPlugin],
-                List[components.ResponsesRequestPluginTypedDict],
+                Iterable[components.ResponsesRequestPlugin],
+                Iterable[components.ResponsesRequestPluginTypedDict],
             ]
         ] = None,
         presence_penalty: OptionalNullable[float] = UNSET,
@@ -2275,8 +2346,8 @@ class Presets(BaseSDK):
         session_id: Optional[str] = None,
         stop_server_tools_when: Optional[
             Union[
-                List[components.StopServerToolsWhenCondition],
-                List[components.StopServerToolsWhenConditionTypedDict],
+                Iterable[components.StopServerToolsWhenCondition],
+                Iterable[components.StopServerToolsWhenConditionTypedDict],
             ]
         ] = None,
         stream: Optional[bool] = False,
@@ -2292,8 +2363,8 @@ class Presets(BaseSDK):
         ] = None,
         tools: Optional[
             Union[
-                List[components.ResponsesRequestToolUnion],
-                List[components.ResponsesRequestToolUnionTypedDict],
+                Iterable[components.ResponsesRequestToolUnion],
+                Iterable[components.ResponsesRequestToolUnionTypedDict],
             ]
         ] = None,
         top_k: Optional[int] = None,
@@ -2312,6 +2383,8 @@ class Presets(BaseSDK):
         r"""Create a preset from a responses request body
 
         Creates a preset (or a new version of an existing one) from an inference request body. Only fields that overlap with the preset config are persisted; other fields (e.g. `messages`, `stream`, `prompt`) are silently ignored.
+
+        If set, this operation will use `api_key` from the global security.
 
         :param slug: URL-safe slug identifying the preset. Created if it does not exist.
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
@@ -2387,16 +2460,22 @@ class Presets(BaseSDK):
                     debug, Optional[components.ChatDebugOptions]
                 ),
                 frequency_penalty=frequency_penalty,
-                image_config=image_config,
-                include=include,
+                image_config=utils.unmarshal(
+                    image_config, Optional[Dict[str, components.ImageConfig]]
+                ),
+                include=utils.unmarshal(
+                    include, OptionalNullable[List[components.ResponseIncludesEnum]]
+                ),
                 input=utils.get_pydantic_model(input, Optional[components.InputsUnion]),
                 instructions=instructions,
                 max_output_tokens=max_output_tokens,
                 max_tool_calls=max_tool_calls,
-                metadata=metadata,
-                modalities=modalities,
+                metadata=utils.unmarshal(metadata, OptionalNullable[Dict[str, str]]),
+                modalities=utils.unmarshal(
+                    modalities, Optional[List[components.OutputModalityEnum]]
+                ),
                 model=model,
-                models=models,
+                models=utils.unmarshal(models, Optional[List[str]]),
                 parallel_tool_calls=parallel_tool_calls,
                 plugins=utils.get_pydantic_model(
                     plugins, Optional[List[components.ResponsesRequestPlugin]]
@@ -2466,6 +2545,7 @@ class Presets(BaseSDK):
                 components.ResponsesRequest,
             ),
             allow_empty_value=None,
+            allowed_fields=["api_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -2490,9 +2570,11 @@ class Presets(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Presets"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "404", "409", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -2562,6 +2644,8 @@ class Presets(BaseSDK):
 
         Lists all versions of a preset, ordered by version number ascending (oldest first).
 
+        If set, this operation will use `api_key` from the global security.
+
         :param slug: URL-safe slug identifying the preset.
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
@@ -2615,6 +2699,7 @@ class Presets(BaseSDK):
             ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
+            allowed_fields=["api_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -2639,24 +2724,26 @@ class Presets(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Presets"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "404", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
         def next_func() -> Optional[operations.ListPresetVersionsResponse]:
             body = utils.unmarshal_json(http_res.text, Union[Dict[Any, Any], List[Any]])
 
-            offset = request.offset if not request.offset is None else 0
+            offset = request.offset if isinstance(request.offset, int) else 0
 
             if not http_res.text:
                 return None
             results = JSONPath("$.data").parse(body)
             if len(results) == 0 or len(results[0]) == 0:
                 return None
-            limit = request.limit if not request.limit is None else 0
-            if len(results[0]) < limit:
+            limit_ = request.limit if isinstance(request.limit, int) else 0
+            if len(results[0]) < limit_:
                 return None
             next_offset = offset + len(results[0])
 
@@ -2668,6 +2755,9 @@ class Presets(BaseSDK):
                 offset=next_offset,
                 limit=limit,
                 retries=retries,
+                server_url=server_url,
+                timeout_ms=timeout_ms,
+                http_headers=http_headers,
             )
 
         response_data: Any = None
@@ -2729,6 +2819,8 @@ class Presets(BaseSDK):
 
         Lists all versions of a preset, ordered by version number ascending (oldest first).
 
+        If set, this operation will use `api_key` from the global security.
+
         :param slug: URL-safe slug identifying the preset.
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
@@ -2782,6 +2874,7 @@ class Presets(BaseSDK):
             ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
+            allowed_fields=["api_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -2806,9 +2899,11 @@ class Presets(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Presets"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "404", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -2818,15 +2913,15 @@ class Presets(BaseSDK):
             async def empty_result():
                 return None
 
-            offset = request.offset if not request.offset is None else 0
+            offset = request.offset if isinstance(request.offset, int) else 0
 
             if not http_res.text:
                 return empty_result()
             results = JSONPath("$.data").parse(body)
             if len(results) == 0 or len(results[0]) == 0:
                 return empty_result()
-            limit = request.limit if not request.limit is None else 0
-            if len(results[0]) < limit:
+            limit_ = request.limit if isinstance(request.limit, int) else 0
+            if len(results[0]) < limit_:
                 return empty_result()
             next_offset = offset + len(results[0])
 
@@ -2838,6 +2933,9 @@ class Presets(BaseSDK):
                 offset=next_offset,
                 limit=limit,
                 retries=retries,
+                server_url=server_url,
+                timeout_ms=timeout_ms,
+                http_headers=http_headers,
             )
 
         response_data: Any = None
@@ -2898,6 +2996,8 @@ class Presets(BaseSDK):
 
         Retrieves a specific version of a preset by its slug and version number.
 
+        If set, this operation will use `api_key` from the global security.
+
         :param slug: URL-safe slug identifying the preset.
         :param version: Version number of the preset.
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
@@ -2949,6 +3049,7 @@ class Presets(BaseSDK):
             ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
+            allowed_fields=["api_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -2973,9 +3074,11 @@ class Presets(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Presets"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "404", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -3034,6 +3137,8 @@ class Presets(BaseSDK):
 
         Retrieves a specific version of a preset by its slug and version number.
 
+        If set, this operation will use `api_key` from the global security.
+
         :param slug: URL-safe slug identifying the preset.
         :param version: Version number of the preset.
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
@@ -3085,6 +3190,7 @@ class Presets(BaseSDK):
             ),
             security=self.sdk_configuration.security,
             allow_empty_value=None,
+            allowed_fields=["api_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -3109,9 +3215,11 @@ class Presets(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Presets"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "404", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 

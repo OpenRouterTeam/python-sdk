@@ -1,0 +1,14 @@
+---
+title: "TaskBudget"
+---
+
+Task budget for an agentic turn. The model sees a countdown of remaining tokens and uses it to prioritize work and wind down gracefully. Advisory — does not enforce a hard cap.
+
+
+## Fields
+
+| Field                                                | Type                                                 | Required                                             | Description                                          |
+| ---------------------------------------------------- | ---------------------------------------------------- | ---------------------------------------------------- | ---------------------------------------------------- |
+| `remaining`                                          | *OptionalNullable[int]*                              | :heavy_minus_sign:                                   | N/A                                                  |
+| `total`                                              | *int*                                                | :heavy_check_mark:                                   | N/A                                                  |
+| `type`                                               | [components.TypeTokens](../components/typetokens.mdx) | :heavy_check_mark:                                   | N/A                                                  |

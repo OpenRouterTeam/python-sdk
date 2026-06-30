@@ -2,10 +2,8 @@
 
 from __future__ import annotations
 from openrouter.types import BaseModel, UnrecognizedStr
-from openrouter.utils import validate_open_enum
-from pydantic.functional_validators import PlainValidator
 from typing import Literal, Union
-from typing_extensions import Annotated, TypedDict
+from typing_extensions import TypedDict
 
 
 Environment = Union[
@@ -39,6 +37,6 @@ class ComputerUseServerTool(BaseModel):
 
     display_width: int
 
-    environment: Annotated[Environment, PlainValidator(validate_open_enum(False))]
+    environment: Environment
 
     type: ComputerUseServerToolType

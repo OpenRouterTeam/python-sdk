@@ -1,0 +1,25 @@
+---
+title: "DataCollection"
+---
+
+Data collection setting. If no available model provider meets the requirement, your request will return an error.
+- allow: (default) allow providers which store user data non-transiently and may train on it
+
+- deny: use only providers which do not collect user data.
+
+## Example Usage
+
+```python
+from openrouter.components import DataCollection
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
+value: DataCollection = "deny"
+```
+
+
+## Values
+
+This is an open enum. Unrecognized values will not fail type checks.
+
+- `"deny"`
+- `"allow"`

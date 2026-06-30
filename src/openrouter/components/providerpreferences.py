@@ -18,11 +18,9 @@ from openrouter.types import (
     UNSET_SENTINEL,
     UnrecognizedStr,
 )
-from openrouter.utils import validate_open_enum
 from pydantic import model_serializer
-from pydantic.functional_validators import PlainValidator
 from typing import Any, List, Literal, Optional, Union
-from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
+from typing_extensions import NotRequired, TypeAliasType, TypedDict
 
 
 DataCollection = Union[
@@ -42,10 +40,7 @@ r"""Data collection setting. If no available model provider meets the requiremen
 IgnoreTypedDict = TypeAliasType("IgnoreTypedDict", Union[ProviderName, str])
 
 
-Ignore = TypeAliasType(
-    "Ignore",
-    Union[Annotated[ProviderName, PlainValidator(validate_open_enum(False))], str],
-)
+Ignore = TypeAliasType("Ignore", Union[ProviderName, str])
 
 
 class MaxPriceTypedDict(TypedDict):
@@ -81,23 +76,33 @@ class MaxPrice(BaseModel):
     request: Optional[str] = None
     r"""Maximum price in USD per request"""
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["audio", "completion", "image", "prompt", "request"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 OnlyTypedDict = TypeAliasType("OnlyTypedDict", Union[ProviderName, str])
 
 
-Only = TypeAliasType(
-    "Only",
-    Union[Annotated[ProviderName, PlainValidator(validate_open_enum(False))], str],
-)
+Only = TypeAliasType("Only", Union[ProviderName, str])
 
 
 OrderTypedDict = TypeAliasType("OrderTypedDict", Union[ProviderName, str])
 
 
-Order = TypeAliasType(
-    "Order",
-    Union[Annotated[ProviderName, PlainValidator(validate_open_enum(False))], str],
-)
+Order = TypeAliasType("Order", Union[ProviderName, str])
 
 
 SortTypedDict = TypeAliasType(
@@ -106,14 +111,7 @@ SortTypedDict = TypeAliasType(
 r"""The sorting strategy to use for this request, if \"order\" is not specified. When set, no load balancing is performed."""
 
 
-Sort = TypeAliasType(
-    "Sort",
-    Union[
-        ProviderSortConfig,
-        Annotated[ProviderSort, PlainValidator(validate_open_enum(False))],
-        Any,
-    ],
-)
+Sort = TypeAliasType("Sort", Union[ProviderSortConfig, ProviderSort, Any])
 r"""The sorting strategy to use for this request, if \"order\" is not specified. When set, no load balancing is performed."""
 
 
@@ -166,9 +164,7 @@ class ProviderPreferences(BaseModel):
 
     """
 
-    data_collection: Annotated[
-        OptionalNullable[DataCollection], PlainValidator(validate_open_enum(False))
-    ] = UNSET
+    data_collection: OptionalNullable[DataCollection] = UNSET
     r"""Data collection setting. If no available model provider meets the requirement, your request will return an error.
     - allow: (default) allow providers which store user data non-transiently and may train on it
 
@@ -196,9 +192,7 @@ class ProviderPreferences(BaseModel):
     preferred_min_throughput: OptionalNullable[PreferredMinThroughput] = UNSET
     r"""Preferred minimum throughput (in tokens per second). Can be a number (applies to p50) or an object with percentile-specific cutoffs. Endpoints below the threshold(s) may still be used, but are deprioritized in routing. When using fallback models, this may cause a fallback model to be used instead of the primary model if it meets the threshold."""
 
-    quantizations: OptionalNullable[
-        List[Annotated[Quantization, PlainValidator(validate_open_enum(False))]]
-    ] = UNSET
+    quantizations: OptionalNullable[List[Quantization]] = UNSET
     r"""A list of quantization levels to filter the provider by."""
 
     require_parameters: OptionalNullable[bool] = UNSET
@@ -212,57 +206,56 @@ class ProviderPreferences(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = [
-            "allow_fallbacks",
-            "data_collection",
-            "enforce_distillable_text",
-            "ignore",
-            "max_price",
-            "only",
-            "order",
-            "preferred_max_latency",
-            "preferred_min_throughput",
-            "quantizations",
-            "require_parameters",
-            "sort",
-            "zdr",
-        ]
-        nullable_fields = [
-            "allow_fallbacks",
-            "data_collection",
-            "enforce_distillable_text",
-            "ignore",
-            "only",
-            "order",
-            "preferred_max_latency",
-            "preferred_min_throughput",
-            "quantizations",
-            "require_parameters",
-            "sort",
-            "zdr",
-        ]
-        null_default_fields = []
-
+        optional_fields = set(
+            [
+                "allow_fallbacks",
+                "data_collection",
+                "enforce_distillable_text",
+                "ignore",
+                "max_price",
+                "only",
+                "order",
+                "preferred_max_latency",
+                "preferred_min_throughput",
+                "quantizations",
+                "require_parameters",
+                "sort",
+                "zdr",
+            ]
+        )
+        nullable_fields = set(
+            [
+                "allow_fallbacks",
+                "data_collection",
+                "enforce_distillable_text",
+                "ignore",
+                "only",
+                "order",
+                "preferred_max_latency",
+                "preferred_min_throughput",
+                "quantizations",
+                "require_parameters",
+                "sort",
+                "zdr",
+            ]
+        )
         serialized = handler(self)
-
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
-            serialized.pop(k, None)
+            val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
 
         return m

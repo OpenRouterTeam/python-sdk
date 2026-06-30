@@ -77,10 +77,9 @@ from openrouter.types import (
     UNSET_SENTINEL,
     UnrecognizedStr,
 )
-from openrouter.utils import get_discriminator, validate_open_enum
+from openrouter.utils import get_discriminator
 import pydantic
 from pydantic import ConfigDict, Discriminator, Tag, model_serializer
-from pydantic.functional_validators import PlainValidator
 from typing import Any, Dict, List, Literal, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
@@ -120,31 +119,26 @@ class EditCompact20260112(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["instructions", "pause_after_compaction", "trigger"]
-        nullable_fields = ["instructions", "trigger"]
-        null_default_fields = []
-
+        optional_fields = set(["instructions", "pause_after_compaction", "trigger"])
+        nullable_fields = set(["instructions", "trigger"])
         serialized = handler(self)
-
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
-            serialized.pop(k, None)
+            val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
 
         return m
 
@@ -183,6 +177,22 @@ class EditClearThinking20251015(BaseModel):
     type: TypeClearThinking20251015
 
     keep: Optional[Keep] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["keep"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 ClearToolInputsTypedDict = TypeAliasType(
@@ -235,37 +245,28 @@ class EditClearToolUses20250919(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = [
-            "clear_at_least",
-            "clear_tool_inputs",
-            "exclude_tools",
-            "keep",
-            "trigger",
-        ]
-        nullable_fields = ["clear_at_least", "clear_tool_inputs", "exclude_tools"]
-        null_default_fields = []
-
+        optional_fields = set(
+            ["clear_at_least", "clear_tool_inputs", "exclude_tools", "keep", "trigger"]
+        )
+        nullable_fields = set(["clear_at_least", "clear_tool_inputs", "exclude_tools"])
         serialized = handler(self)
-
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
-            serialized.pop(k, None)
+            val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
 
         return m
 
@@ -297,6 +298,22 @@ class ContextManagementTypedDict(TypedDict):
 class ContextManagement(BaseModel):
     edits: Optional[List[Edit]] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["edits"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class MessagesRequestMetadataTypedDict(TypedDict):
     user_id: NotRequired[Nullable[str]]
@@ -307,31 +324,26 @@ class MessagesRequestMetadata(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["user_id"]
-        nullable_fields = ["user_id"]
-        null_default_fields = []
-
+        optional_fields = set(["user_id"])
+        nullable_fields = set(["user_id"])
         serialized = handler(self)
-
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
-            serialized.pop(k, None)
+            val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
 
         return m
 
@@ -397,38 +409,30 @@ class ThinkingAdaptiveTypedDict(TypedDict):
 class ThinkingAdaptive(BaseModel):
     type: TypeAdaptive
 
-    display: Annotated[
-        OptionalNullable[AnthropicThinkingDisplay],
-        PlainValidator(validate_open_enum(False)),
-    ] = UNSET
+    display: OptionalNullable[AnthropicThinkingDisplay] = UNSET
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["display"]
-        nullable_fields = ["display"]
-        null_default_fields = []
-
+        optional_fields = set(["display"])
+        nullable_fields = set(["display"])
         serialized = handler(self)
-
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
-            serialized.pop(k, None)
+            val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
 
         return m
 
@@ -458,38 +462,30 @@ class ThinkingEnabled(BaseModel):
 
     type: TypeEnabled
 
-    display: Annotated[
-        OptionalNullable[AnthropicThinkingDisplay],
-        PlainValidator(validate_open_enum(False)),
-    ] = UNSET
+    display: OptionalNullable[AnthropicThinkingDisplay] = UNSET
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["display"]
-        nullable_fields = ["display"]
-        null_default_fields = []
-
+        optional_fields = set(["display"])
+        nullable_fields = set(["display"])
         serialized = handler(self)
-
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
-            serialized.pop(k, None)
+            val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
 
         return m
 
@@ -528,6 +524,22 @@ class ToolChoiceTool(BaseModel):
 
     disable_parallel_tool_use: Optional[bool] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["disable_parallel_tool_use"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 TypeNone = Literal["none",]
 
@@ -553,6 +565,22 @@ class ToolChoiceAny(BaseModel):
 
     disable_parallel_tool_use: Optional[bool] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["disable_parallel_tool_use"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 ToolChoiceTypeAuto = Literal["auto",]
 
@@ -566,6 +594,22 @@ class ToolChoiceAuto(BaseModel):
     type: ToolChoiceTypeAuto
 
     disable_parallel_tool_use: Optional[bool] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["disable_parallel_tool_use"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 ToolChoiceTypedDict = TypeAliasType(
@@ -626,9 +670,23 @@ class Caching(BaseModel):
 
     type: ToolTypeEphemeral
 
-    ttl: Annotated[
-        Optional[AnthropicCacheControlTTL], PlainValidator(validate_open_enum(False))
-    ] = None
+    ttl: Optional[AnthropicCacheControlTTL] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["ttl"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 NameAdvisor = Literal["advisor",]
@@ -656,13 +714,7 @@ class ToolAdvisor20260301(BaseModel):
 
     type: TypeAdvisor20260301
 
-    allowed_callers: Optional[
-        List[
-            Annotated[
-                AnthropicAllowedCallers, PlainValidator(validate_open_enum(False))
-            ]
-        ]
-    ] = None
+    allowed_callers: Optional[List[AnthropicAllowedCallers]] = None
 
     cache_control: Optional[AnthropicCacheControlDirective] = None
     r"""Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. Currently supported for Anthropic Claude models."""
@@ -675,37 +727,28 @@ class ToolAdvisor20260301(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = [
-            "allowed_callers",
-            "cache_control",
-            "caching",
-            "defer_loading",
-            "max_uses",
-        ]
-        nullable_fields = ["caching"]
-        null_default_fields = []
-
+        optional_fields = set(
+            ["allowed_callers", "cache_control", "caching", "defer_loading", "max_uses"]
+        )
+        nullable_fields = set(["caching"])
         serialized = handler(self)
-
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
-            serialized.pop(k, None)
+            val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
 
         return m
 
@@ -733,13 +776,7 @@ class ToolWebSearch20260209(BaseModel):
 
     type: TypeWebSearch20260209
 
-    allowed_callers: Optional[
-        List[
-            Annotated[
-                AnthropicAllowedCallers, PlainValidator(validate_open_enum(False))
-            ]
-        ]
-    ] = None
+    allowed_callers: Optional[List[AnthropicAllowedCallers]] = None
 
     allowed_domains: OptionalNullable[List[str]] = UNSET
 
@@ -754,43 +791,37 @@ class ToolWebSearch20260209(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = [
-            "allowed_callers",
-            "allowed_domains",
-            "blocked_domains",
-            "cache_control",
-            "max_uses",
-            "user_location",
-        ]
-        nullable_fields = [
-            "allowed_domains",
-            "blocked_domains",
-            "max_uses",
-            "user_location",
-        ]
-        null_default_fields = []
-
+        optional_fields = set(
+            [
+                "allowed_callers",
+                "allowed_domains",
+                "blocked_domains",
+                "cache_control",
+                "max_uses",
+                "user_location",
+            ]
+        )
+        nullable_fields = set(
+            ["allowed_domains", "blocked_domains", "max_uses", "user_location"]
+        )
         serialized = handler(self)
-
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
-            serialized.pop(k, None)
+            val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
 
         return m
 
@@ -830,42 +861,36 @@ class ToolWebSearch20250305(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = [
-            "allowed_domains",
-            "blocked_domains",
-            "cache_control",
-            "max_uses",
-            "user_location",
-        ]
-        nullable_fields = [
-            "allowed_domains",
-            "blocked_domains",
-            "max_uses",
-            "user_location",
-        ]
-        null_default_fields = []
-
+        optional_fields = set(
+            [
+                "allowed_domains",
+                "blocked_domains",
+                "cache_control",
+                "max_uses",
+                "user_location",
+            ]
+        )
+        nullable_fields = set(
+            ["allowed_domains", "blocked_domains", "max_uses", "user_location"]
+        )
         serialized = handler(self)
-
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
-            serialized.pop(k, None)
+            val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
 
         return m
 
@@ -891,6 +916,22 @@ class ToolTextEditor20250124(BaseModel):
     cache_control: Optional[AnthropicCacheControlDirective] = None
     r"""Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. Currently supported for Anthropic Claude models."""
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["cache_control"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 NameBash = Literal["bash",]
 
@@ -912,6 +953,22 @@ class ToolBash20250124(BaseModel):
 
     cache_control: Optional[AnthropicCacheControlDirective] = None
     r"""Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. Currently supported for Anthropic Claude models."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["cache_control"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class InputSchemaTypedDict(TypedDict):
@@ -942,32 +999,27 @@ class InputSchema(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["properties", "required", "type"]
-        nullable_fields = ["properties", "required"]
-        null_default_fields = []
-
+        optional_fields = set(["properties", "required", "type"])
+        nullable_fields = set(["properties", "required"])
         serialized = handler(self)
-
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
-            serialized.pop(k, None)
+            val = serialized.get(k, serialized.get(n))
+            serialized.pop(k, serialized.pop(n, None))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
-
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
         for k, v in serialized.items():
             m[k] = v
 
@@ -997,6 +1049,22 @@ class ToolCustom(BaseModel):
     description: Optional[str] = None
 
     type: Optional[ToolTypeCustom] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["cache_control", "description", "type"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 MessagesRequestToolUnionTypedDict = TypeAliasType(
@@ -1114,9 +1182,7 @@ class MessagesRequest(BaseModel):
     session_id: Optional[str] = None
     r"""A unique identifier for grouping related requests (e.g., a conversation or agent workflow). When provided, OpenRouter uses it as the sticky routing key, routing all requests in the session to the same provider to maximize prompt cache hits. Also used for observability grouping. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters."""
 
-    speed: Annotated[
-        OptionalNullable[Speed], PlainValidator(validate_open_enum(False))
-    ] = UNSET
+    speed: OptionalNullable[Speed] = UNSET
 
     stop_sequences: Optional[List[str]] = None
 
@@ -1147,61 +1213,54 @@ class MessagesRequest(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = [
-            "cache_control",
-            "context_management",
-            "fallbacks",
-            "max_tokens",
-            "metadata",
-            "models",
-            "output_config",
-            "plugins",
-            "provider",
-            "service_tier",
-            "session_id",
-            "speed",
-            "stop_sequences",
-            "stop_server_tools_when",
-            "stream",
-            "system",
-            "temperature",
-            "thinking",
-            "tool_choice",
-            "tools",
-            "top_k",
-            "top_p",
-            "trace",
-            "user",
-        ]
-        nullable_fields = [
-            "context_management",
-            "fallbacks",
-            "messages",
-            "provider",
-            "speed",
-        ]
-        null_default_fields = []
-
+        optional_fields = set(
+            [
+                "cache_control",
+                "context_management",
+                "fallbacks",
+                "max_tokens",
+                "metadata",
+                "models",
+                "output_config",
+                "plugins",
+                "provider",
+                "service_tier",
+                "session_id",
+                "speed",
+                "stop_sequences",
+                "stop_server_tools_when",
+                "stream",
+                "system",
+                "temperature",
+                "thinking",
+                "tool_choice",
+                "tools",
+                "top_k",
+                "top_p",
+                "trace",
+                "user",
+            ]
+        )
+        nullable_fields = set(
+            ["context_management", "fallbacks", "messages", "provider", "speed"]
+        )
         serialized = handler(self)
-
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
-            serialized.pop(k, None)
+            val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
 
         return m

@@ -1,0 +1,25 @@
+---
+title: "MessagesOutputConfigEffort"
+---
+
+How much effort the model should put into its response. Higher effort levels may result in more thorough analysis but take longer. Valid values are `low`, `medium`, `high`, `xhigh`, or `max`.
+
+## Example Usage
+
+```python
+from openrouter.components import MessagesOutputConfigEffort
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
+value: MessagesOutputConfigEffort = "low"
+```
+
+
+## Values
+
+This is an open enum. Unrecognized values will not fail type checks.
+
+- `"low"`
+- `"medium"`
+- `"high"`
+- `"xhigh"`
+- `"max"`

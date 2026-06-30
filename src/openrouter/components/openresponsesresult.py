@@ -45,6 +45,7 @@ from .textextendedconfig import TextExtendedConfig, TextExtendedConfigTypedDict
 from .truncation import Truncation
 from .usage import Usage, UsageTypedDict
 from .websearchservertool import WebSearchServerTool, WebSearchServerToolTypedDict
+from functools import partial
 from openrouter.types import (
     BaseModel,
     Nullable,
@@ -52,9 +53,9 @@ from openrouter.types import (
     UNSET,
     UNSET_SENTINEL,
 )
-from openrouter.utils import get_discriminator, validate_open_enum
-from pydantic import Discriminator, Tag, model_serializer
-from pydantic.functional_validators import PlainValidator
+from openrouter.utils.unions import parse_open_union
+from pydantic import ConfigDict, model_serializer
+from pydantic.functional_validators import BeforeValidator
 from typing import Any, Dict, List, Literal, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
@@ -90,31 +91,26 @@ class OpenResponsesResultToolFunction(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["description", "strict"]
-        nullable_fields = ["description", "parameters", "strict"]
-        null_default_fields = []
-
+        optional_fields = set(["description", "strict"])
+        nullable_fields = set(["description", "parameters", "strict"])
         serialized = handler(self)
-
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
-            serialized.pop(k, None)
+            val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
 
         return m
 
@@ -140,26 +136,61 @@ OpenResponsesResultToolUnionTypedDict = TypeAliasType(
 )
 
 
+class UnknownOpenResponsesResultToolUnion(BaseModel):
+    r"""A OpenResponsesResultToolUnion variant the SDK doesn't recognize. Preserves the raw payload."""
+
+    type: Literal["UNKNOWN"] = "UNKNOWN"
+    raw: Any
+    is_unknown: Literal[True] = True
+
+    model_config = ConfigDict(frozen=True)
+
+
+_OPEN_RESPONSES_RESULT_TOOL_UNION_VARIANTS: dict[str, Any] = {
+    "function": OpenResponsesResultToolFunction,
+    "web_search_preview": PreviewWebSearchServerTool,
+    "web_search_preview_2025_03_11": Preview20250311WebSearchServerTool,
+    "web_search": LegacyWebSearchServerTool,
+    "web_search_2025_08_26": WebSearchServerTool,
+    "file_search": FileSearchServerTool,
+    "computer_use_preview": ComputerUseServerTool,
+    "code_interpreter": CodeInterpreterServerTool,
+    "mcp": McpServerTool,
+    "image_generation": ImageGenerationServerTool,
+    "local_shell": CodexLocalShellTool,
+    "shell": ShellServerTool,
+    "apply_patch": ApplyPatchServerTool,
+    "custom": CustomTool,
+}
+
+
 OpenResponsesResultToolUnion = Annotated[
     Union[
-        Annotated[OpenResponsesResultToolFunction, Tag("function")],
-        Annotated[PreviewWebSearchServerTool, Tag("web_search_preview")],
-        Annotated[
-            Preview20250311WebSearchServerTool, Tag("web_search_preview_2025_03_11")
-        ],
-        Annotated[LegacyWebSearchServerTool, Tag("web_search")],
-        Annotated[WebSearchServerTool, Tag("web_search_2025_08_26")],
-        Annotated[FileSearchServerTool, Tag("file_search")],
-        Annotated[ComputerUseServerTool, Tag("computer_use_preview")],
-        Annotated[CodeInterpreterServerTool, Tag("code_interpreter")],
-        Annotated[McpServerTool, Tag("mcp")],
-        Annotated[ImageGenerationServerTool, Tag("image_generation")],
-        Annotated[CodexLocalShellTool, Tag("local_shell")],
-        Annotated[ShellServerTool, Tag("shell")],
-        Annotated[ApplyPatchServerTool, Tag("apply_patch")],
-        Annotated[CustomTool, Tag("custom")],
+        OpenResponsesResultToolFunction,
+        PreviewWebSearchServerTool,
+        Preview20250311WebSearchServerTool,
+        LegacyWebSearchServerTool,
+        WebSearchServerTool,
+        FileSearchServerTool,
+        ComputerUseServerTool,
+        CodeInterpreterServerTool,
+        McpServerTool,
+        ImageGenerationServerTool,
+        CodexLocalShellTool,
+        ShellServerTool,
+        ApplyPatchServerTool,
+        CustomTool,
+        UnknownOpenResponsesResultToolUnion,
     ],
-    Discriminator(lambda m: get_discriminator(m, "type", "type")),
+    BeforeValidator(
+        partial(
+            parse_open_union,
+            disc_key="type",
+            variants=_OPEN_RESPONSES_RESULT_TOOL_UNION_VARIANTS,
+            unknown_cls=UnknownOpenResponsesResultToolUnion,
+            union_name="OpenResponsesResultToolUnion",
+        )
+    ),
 ]
 
 
@@ -240,9 +271,7 @@ class OpenResponsesResult(BaseModel):
 
     presence_penalty: Nullable[float]
 
-    status: Annotated[
-        OpenAIResponsesResponseStatus, PlainValidator(validate_open_enum(False))
-    ]
+    status: OpenAIResponsesResponseStatus
 
     temperature: Nullable[float]
 
@@ -279,89 +308,84 @@ class OpenResponsesResult(BaseModel):
 
     top_logprobs: Optional[int] = None
 
-    truncation: Annotated[
-        OptionalNullable[Truncation], PlainValidator(validate_open_enum(False))
-    ] = UNSET
+    truncation: OptionalNullable[Truncation] = UNSET
 
     usage: OptionalNullable[Usage] = UNSET
     r"""Token usage information for the response"""
 
     user: OptionalNullable[str] = UNSET
 
-    error_type: Annotated[
-        Optional[APIErrorType], PlainValidator(validate_open_enum(False))
-    ] = None
+    error_type: Optional[APIErrorType] = None
     r"""Canonical OpenRouter error type, stable across all API formats"""
 
     openrouter_metadata: Optional[OpenRouterMetadata] = None
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = [
-            "background",
-            "max_output_tokens",
-            "max_tool_calls",
-            "output_text",
-            "previous_response_id",
-            "prompt",
-            "prompt_cache_key",
-            "reasoning",
-            "safety_identifier",
-            "service_tier",
-            "store",
-            "text",
-            "top_logprobs",
-            "truncation",
-            "usage",
-            "user",
-            "error_type",
-            "openrouter_metadata",
-        ]
-        nullable_fields = [
-            "background",
-            "completed_at",
-            "error",
-            "frequency_penalty",
-            "incomplete_details",
-            "instructions",
-            "max_output_tokens",
-            "max_tool_calls",
-            "metadata",
-            "presence_penalty",
-            "previous_response_id",
-            "prompt",
-            "prompt_cache_key",
-            "reasoning",
-            "safety_identifier",
-            "service_tier",
-            "temperature",
-            "top_p",
-            "truncation",
-            "usage",
-            "user",
-        ]
-        null_default_fields = []
-
+        optional_fields = set(
+            [
+                "background",
+                "max_output_tokens",
+                "max_tool_calls",
+                "output_text",
+                "previous_response_id",
+                "prompt",
+                "prompt_cache_key",
+                "reasoning",
+                "safety_identifier",
+                "service_tier",
+                "store",
+                "text",
+                "top_logprobs",
+                "truncation",
+                "usage",
+                "user",
+                "error_type",
+                "openrouter_metadata",
+            ]
+        )
+        nullable_fields = set(
+            [
+                "background",
+                "completed_at",
+                "error",
+                "frequency_penalty",
+                "incomplete_details",
+                "instructions",
+                "max_output_tokens",
+                "max_tool_calls",
+                "metadata",
+                "presence_penalty",
+                "previous_response_id",
+                "prompt",
+                "prompt_cache_key",
+                "reasoning",
+                "safety_identifier",
+                "service_tier",
+                "temperature",
+                "top_p",
+                "truncation",
+                "usage",
+                "user",
+            ]
+        )
         serialized = handler(self)
-
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
-            serialized.pop(k, None)
+            val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
 
         return m

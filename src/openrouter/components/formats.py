@@ -10,9 +10,12 @@ from .formatjsonschemaconfig import (
     FormatJSONSchemaConfigTypedDict,
 )
 from .formattextconfig import FormatTextConfig, FormatTextConfigTypedDict
-from openrouter.utils import get_discriminator
-from pydantic import Discriminator, Tag
-from typing import Union
+from functools import partial
+from openrouter.types import BaseModel
+from openrouter.utils.unions import parse_open_union
+from pydantic import ConfigDict
+from pydantic.functional_validators import BeforeValidator
+from typing import Any, Literal, Union
 from typing_extensions import Annotated, TypeAliasType
 
 
@@ -27,12 +30,35 @@ FormatsTypedDict = TypeAliasType(
 r"""Text response format configuration"""
 
 
+class UnknownFormats(BaseModel):
+    r"""A Formats variant the SDK doesn't recognize. Preserves the raw payload."""
+
+    type: Literal["UNKNOWN"] = "UNKNOWN"
+    raw: Any
+    is_unknown: Literal[True] = True
+
+    model_config = ConfigDict(frozen=True)
+
+
+_FORMATS_VARIANTS: dict[str, Any] = {
+    "text": FormatTextConfig,
+    "json_object": FormatJSONObjectConfig,
+    "json_schema": FormatJSONSchemaConfig,
+}
+
+
 Formats = Annotated[
     Union[
-        Annotated[FormatTextConfig, Tag("text")],
-        Annotated[FormatJSONObjectConfig, Tag("json_object")],
-        Annotated[FormatJSONSchemaConfig, Tag("json_schema")],
+        FormatTextConfig, FormatJSONObjectConfig, FormatJSONSchemaConfig, UnknownFormats
     ],
-    Discriminator(lambda m: get_discriminator(m, "type", "type")),
+    BeforeValidator(
+        partial(
+            parse_open_union,
+            disc_key="type",
+            variants=_FORMATS_VARIANTS,
+            unknown_cls=UnknownFormats,
+            union_name="Formats",
+        )
+    ),
 ]
 r"""Text response format configuration"""

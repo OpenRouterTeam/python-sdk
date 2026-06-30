@@ -1,0 +1,545 @@
+---
+title: "Workspaces"
+description: "Workspaces endpoints"
+---
+
+## Overview
+
+Workspaces endpoints
+
+### Available Operations
+
+* [list](#list) - List workspaces
+* [create](#create) - Create a workspace
+* [delete](#delete) - Delete a workspace
+* [get](#get) - Get a workspace
+* [update](#update) - Update a workspace
+* [list_budgets](#list_budgets) - List workspace budgets
+* [delete_budget](#delete_budget) - Delete a workspace budget
+* [set_budget](#set_budget) - Create or update a workspace budget
+* [bulk_add_members](#bulk_add_members) - Bulk add members to a workspace
+* [bulk_remove_members](#bulk_remove_members) - Bulk remove members from a workspace
+
+## list
+
+List all workspaces for the authenticated user. [Management key](/docs/guides/overview/auth/management-api-keys) required.
+
+### Example Usage
+
+```python
+from openrouter import OpenRouter
+import os
+
+
+with OpenRouter(
+    http_referer="<value>",
+    x_open_router_title="<value>",
+    x_open_router_categories="<value>",
+    api_key=os.getenv("OPENROUTER_API_KEY", ""),
+) as open_router:
+
+    res = open_router.workspaces.list()
+
+    while res is not None:
+        # Handle items
+
+        res = res.next()
+
+```
+
+### Parameters
+
+| Parameter                                                                                                                                         | Type                                                                                                                                              | Required                                                                                                                                          | Description                                                                                                                                       | Example                                                                                                                                           |
+| ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `http_referer`                                                                                                                                    | *Optional[str]*                                                                                                                                   | :heavy_minus_sign:                                                                                                                                | The app identifier should be your app's URL and is used as the primary identifier for rankings.<br/>This is used to track API usage per application.<br/> |                                                                                                                                                   |
+| `x_open_router_title`                                                                                                                             | *Optional[str]*                                                                                                                                   | :heavy_minus_sign:                                                                                                                                | The app display name allows you to customize how your app appears in OpenRouter's dashboard.<br/>                                                 |                                                                                                                                                   |
+| `x_open_router_categories`                                                                                                                        | *Optional[str]*                                                                                                                                   | :heavy_minus_sign:                                                                                                                                | Comma-separated list of app categories (e.g. "cli-agent,cloud-agent"). Used for marketplace rankings.<br/>                                        |                                                                                                                                                   |
+| `offset`                                                                                                                                          | *Optional[int]*                                                                                                                                   | :heavy_minus_sign:                                                                                                                                | Number of records to skip for pagination                                                                                                          | 0                                                                                                                                                 |
+| `limit`                                                                                                                                           | *Optional[int]*                                                                                                                                   | :heavy_minus_sign:                                                                                                                                | Maximum number of records to return (max 100)                                                                                                     | 50                                                                                                                                                |
+| `retries`                                                                                                                                         | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.mdx)                                                                                  | :heavy_minus_sign:                                                                                                                                | Configuration to override the default retry behavior of the client.                                                                               |                                                                                                                                                   |
+
+### Response
+
+**[operations.ListWorkspacesResponse](../../operations/listworkspacesresponse.mdx)**
+
+### Errors
+
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| errors.UnauthorizedResponseError   | 401                                | application/json                   |
+| errors.InternalServerResponseError | 500                                | application/json                   |
+| errors.OpenRouterDefaultError      | 4XX, 5XX                           | \*/\*                              |
+
+## create
+
+Create a new workspace for the authenticated user. [Management key](/docs/guides/overview/auth/management-api-keys) required.
+
+### Example Usage
+
+```python
+from openrouter import OpenRouter
+import os
+
+
+with OpenRouter(
+    http_referer="<value>",
+    x_open_router_title="<value>",
+    x_open_router_categories="<value>",
+    api_key=os.getenv("OPENROUTER_API_KEY", ""),
+) as open_router:
+
+    res = open_router.workspaces.create(name="Production", slug="production", default_image_model="openai/dall-e-3", default_provider_sort="price", default_text_model="openai/gpt-4o", description="Production environment workspace")
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                                                                                                         | Type                                                                                                                                              | Required                                                                                                                                          | Description                                                                                                                                       | Example                                                                                                                                           |
+| ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `name`                                                                                                                                            | *str*                                                                                                                                             | :heavy_check_mark:                                                                                                                                | Name for the new workspace                                                                                                                        | Production                                                                                                                                        |
+| `slug`                                                                                                                                            | *str*                                                                                                                                             | :heavy_check_mark:                                                                                                                                | URL-friendly slug (lowercase alphanumeric segments separated by single hyphens, no leading/trailing hyphens)                                      | production                                                                                                                                        |
+| `http_referer`                                                                                                                                    | *Optional[str]*                                                                                                                                   | :heavy_minus_sign:                                                                                                                                | The app identifier should be your app's URL and is used as the primary identifier for rankings.<br/>This is used to track API usage per application.<br/> |                                                                                                                                                   |
+| `x_open_router_title`                                                                                                                             | *Optional[str]*                                                                                                                                   | :heavy_minus_sign:                                                                                                                                | The app display name allows you to customize how your app appears in OpenRouter's dashboard.<br/>                                                 |                                                                                                                                                   |
+| `x_open_router_categories`                                                                                                                        | *Optional[str]*                                                                                                                                   | :heavy_minus_sign:                                                                                                                                | Comma-separated list of app categories (e.g. "cli-agent,cloud-agent"). Used for marketplace rankings.<br/>                                        |                                                                                                                                                   |
+| `default_image_model`                                                                                                                             | *OptionalNullable[str]*                                                                                                                           | :heavy_minus_sign:                                                                                                                                | Default image model for this workspace                                                                                                            | openai/dall-e-3                                                                                                                                   |
+| `default_provider_sort`                                                                                                                           | *OptionalNullable[str]*                                                                                                                           | :heavy_minus_sign:                                                                                                                                | Default provider sort preference (price, throughput, latency, exacto)                                                                             | price                                                                                                                                             |
+| `default_text_model`                                                                                                                              | *OptionalNullable[str]*                                                                                                                           | :heavy_minus_sign:                                                                                                                                | Default text model for this workspace                                                                                                             | openai/gpt-4o                                                                                                                                     |
+| `description`                                                                                                                                     | *OptionalNullable[str]*                                                                                                                           | :heavy_minus_sign:                                                                                                                                | Description of the workspace                                                                                                                      | Production environment workspace                                                                                                                  |
+| `io_logging_api_key_ids`                                                                                                                          | List[*int*]                                                                                                                                       | :heavy_minus_sign:                                                                                                                                | Optional array of API key IDs to filter I/O logging                                                                                               | null                                                                                                                                              |
+| `io_logging_sampling_rate`                                                                                                                        | *Optional[float]*                                                                                                                                 | :heavy_minus_sign:                                                                                                                                | Sampling rate for I/O logging (0.0001-1)                                                                                                          | 1                                                                                                                                                 |
+| `is_data_discount_logging_enabled`                                                                                                                | *Optional[bool]*                                                                                                                                  | :heavy_minus_sign:                                                                                                                                | Whether data discount logging is enabled                                                                                                          | true                                                                                                                                              |
+| `is_observability_broadcast_enabled`                                                                                                              | *Optional[bool]*                                                                                                                                  | :heavy_minus_sign:                                                                                                                                | Whether broadcast is enabled                                                                                                                      | false                                                                                                                                             |
+| `is_observability_io_logging_enabled`                                                                                                             | *Optional[bool]*                                                                                                                                  | :heavy_minus_sign:                                                                                                                                | Whether private logging is enabled                                                                                                                | false                                                                                                                                             |
+| `retries`                                                                                                                                         | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.mdx)                                                                                  | :heavy_minus_sign:                                                                                                                                | Configuration to override the default retry behavior of the client.                                                                               |                                                                                                                                                   |
+
+### Response
+
+**[components.CreateWorkspaceResponse](../../components/createworkspaceresponse.mdx)**
+
+### Errors
+
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| errors.BadRequestResponseError     | 400                                | application/json                   |
+| errors.UnauthorizedResponseError   | 401                                | application/json                   |
+| errors.ForbiddenResponseError      | 403                                | application/json                   |
+| errors.InternalServerResponseError | 500                                | application/json                   |
+| errors.OpenRouterDefaultError      | 4XX, 5XX                           | \*/\*                              |
+
+## delete
+
+Delete an existing workspace. The default workspace cannot be deleted. Workspaces with active API keys cannot be deleted; remove the keys first. [Management key](/docs/guides/overview/auth/management-api-keys) required.
+
+### Example Usage
+
+```python
+from openrouter import OpenRouter
+import os
+
+
+with OpenRouter(
+    http_referer="<value>",
+    x_open_router_title="<value>",
+    x_open_router_categories="<value>",
+    api_key=os.getenv("OPENROUTER_API_KEY", ""),
+) as open_router:
+
+    res = open_router.workspaces.delete(id="production")
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                                                                                                         | Type                                                                                                                                              | Required                                                                                                                                          | Description                                                                                                                                       | Example                                                                                                                                           |
+| ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `id`                                                                                                                                              | *str*                                                                                                                                             | :heavy_check_mark:                                                                                                                                | The workspace ID (UUID) or slug                                                                                                                   | production                                                                                                                                        |
+| `http_referer`                                                                                                                                    | *Optional[str]*                                                                                                                                   | :heavy_minus_sign:                                                                                                                                | The app identifier should be your app's URL and is used as the primary identifier for rankings.<br/>This is used to track API usage per application.<br/> |                                                                                                                                                   |
+| `x_open_router_title`                                                                                                                             | *Optional[str]*                                                                                                                                   | :heavy_minus_sign:                                                                                                                                | The app display name allows you to customize how your app appears in OpenRouter's dashboard.<br/>                                                 |                                                                                                                                                   |
+| `x_open_router_categories`                                                                                                                        | *Optional[str]*                                                                                                                                   | :heavy_minus_sign:                                                                                                                                | Comma-separated list of app categories (e.g. "cli-agent,cloud-agent"). Used for marketplace rankings.<br/>                                        |                                                                                                                                                   |
+| `retries`                                                                                                                                         | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.mdx)                                                                                  | :heavy_minus_sign:                                                                                                                                | Configuration to override the default retry behavior of the client.                                                                               |                                                                                                                                                   |
+
+### Response
+
+**[components.DeleteWorkspaceResponse](../../components/deleteworkspaceresponse.mdx)**
+
+### Errors
+
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| errors.BadRequestResponseError     | 400                                | application/json                   |
+| errors.UnauthorizedResponseError   | 401                                | application/json                   |
+| errors.ForbiddenResponseError      | 403                                | application/json                   |
+| errors.NotFoundResponseError       | 404                                | application/json                   |
+| errors.InternalServerResponseError | 500                                | application/json                   |
+| errors.OpenRouterDefaultError      | 4XX, 5XX                           | \*/\*                              |
+
+## get
+
+Get a single workspace by ID or slug. [Management key](/docs/guides/overview/auth/management-api-keys) required.
+
+### Example Usage
+
+```python
+from openrouter import OpenRouter
+import os
+
+
+with OpenRouter(
+    http_referer="<value>",
+    x_open_router_title="<value>",
+    x_open_router_categories="<value>",
+    api_key=os.getenv("OPENROUTER_API_KEY", ""),
+) as open_router:
+
+    res = open_router.workspaces.get(id="production")
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                                                                                                         | Type                                                                                                                                              | Required                                                                                                                                          | Description                                                                                                                                       | Example                                                                                                                                           |
+| ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `id`                                                                                                                                              | *str*                                                                                                                                             | :heavy_check_mark:                                                                                                                                | The workspace ID (UUID) or slug                                                                                                                   | production                                                                                                                                        |
+| `http_referer`                                                                                                                                    | *Optional[str]*                                                                                                                                   | :heavy_minus_sign:                                                                                                                                | The app identifier should be your app's URL and is used as the primary identifier for rankings.<br/>This is used to track API usage per application.<br/> |                                                                                                                                                   |
+| `x_open_router_title`                                                                                                                             | *Optional[str]*                                                                                                                                   | :heavy_minus_sign:                                                                                                                                | The app display name allows you to customize how your app appears in OpenRouter's dashboard.<br/>                                                 |                                                                                                                                                   |
+| `x_open_router_categories`                                                                                                                        | *Optional[str]*                                                                                                                                   | :heavy_minus_sign:                                                                                                                                | Comma-separated list of app categories (e.g. "cli-agent,cloud-agent"). Used for marketplace rankings.<br/>                                        |                                                                                                                                                   |
+| `retries`                                                                                                                                         | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.mdx)                                                                                  | :heavy_minus_sign:                                                                                                                                | Configuration to override the default retry behavior of the client.                                                                               |                                                                                                                                                   |
+
+### Response
+
+**[components.GetWorkspaceResponse](../../components/getworkspaceresponse.mdx)**
+
+### Errors
+
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| errors.UnauthorizedResponseError   | 401                                | application/json                   |
+| errors.NotFoundResponseError       | 404                                | application/json                   |
+| errors.InternalServerResponseError | 500                                | application/json                   |
+| errors.OpenRouterDefaultError      | 4XX, 5XX                           | \*/\*                              |
+
+## update
+
+Update an existing workspace by ID or slug. [Management key](/docs/guides/overview/auth/management-api-keys) required.
+
+### Example Usage
+
+```python
+from openrouter import OpenRouter
+import os
+
+
+with OpenRouter(
+    http_referer="<value>",
+    x_open_router_title="<value>",
+    x_open_router_categories="<value>",
+    api_key=os.getenv("OPENROUTER_API_KEY", ""),
+) as open_router:
+
+    res = open_router.workspaces.update(id="production", name="Updated Workspace", slug="updated-workspace")
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                                                                                                         | Type                                                                                                                                              | Required                                                                                                                                          | Description                                                                                                                                       | Example                                                                                                                                           |
+| ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `id`                                                                                                                                              | *str*                                                                                                                                             | :heavy_check_mark:                                                                                                                                | The workspace ID (UUID) or slug                                                                                                                   | production                                                                                                                                        |
+| `http_referer`                                                                                                                                    | *Optional[str]*                                                                                                                                   | :heavy_minus_sign:                                                                                                                                | The app identifier should be your app's URL and is used as the primary identifier for rankings.<br/>This is used to track API usage per application.<br/> |                                                                                                                                                   |
+| `x_open_router_title`                                                                                                                             | *Optional[str]*                                                                                                                                   | :heavy_minus_sign:                                                                                                                                | The app display name allows you to customize how your app appears in OpenRouter's dashboard.<br/>                                                 |                                                                                                                                                   |
+| `x_open_router_categories`                                                                                                                        | *Optional[str]*                                                                                                                                   | :heavy_minus_sign:                                                                                                                                | Comma-separated list of app categories (e.g. "cli-agent,cloud-agent"). Used for marketplace rankings.<br/>                                        |                                                                                                                                                   |
+| `default_image_model`                                                                                                                             | *OptionalNullable[str]*                                                                                                                           | :heavy_minus_sign:                                                                                                                                | Default image model for this workspace                                                                                                            | openai/dall-e-3                                                                                                                                   |
+| `default_provider_sort`                                                                                                                           | *OptionalNullable[str]*                                                                                                                           | :heavy_minus_sign:                                                                                                                                | Default provider sort preference (price, throughput, latency, exacto)                                                                             | price                                                                                                                                             |
+| `default_text_model`                                                                                                                              | *OptionalNullable[str]*                                                                                                                           | :heavy_minus_sign:                                                                                                                                | Default text model for this workspace                                                                                                             | openai/gpt-4o                                                                                                                                     |
+| `description`                                                                                                                                     | *OptionalNullable[str]*                                                                                                                           | :heavy_minus_sign:                                                                                                                                | New description for the workspace                                                                                                                 | Updated description                                                                                                                               |
+| `io_logging_api_key_ids`                                                                                                                          | List[*int*]                                                                                                                                       | :heavy_minus_sign:                                                                                                                                | Optional array of API key IDs to filter I/O logging                                                                                               | null                                                                                                                                              |
+| `io_logging_sampling_rate`                                                                                                                        | *Optional[float]*                                                                                                                                 | :heavy_minus_sign:                                                                                                                                | Sampling rate for I/O logging (0.0001-1)                                                                                                          | 1                                                                                                                                                 |
+| `is_data_discount_logging_enabled`                                                                                                                | *Optional[bool]*                                                                                                                                  | :heavy_minus_sign:                                                                                                                                | Whether data discount logging is enabled                                                                                                          | true                                                                                                                                              |
+| `is_observability_broadcast_enabled`                                                                                                              | *Optional[bool]*                                                                                                                                  | :heavy_minus_sign:                                                                                                                                | Whether broadcast is enabled                                                                                                                      | false                                                                                                                                             |
+| `is_observability_io_logging_enabled`                                                                                                             | *Optional[bool]*                                                                                                                                  | :heavy_minus_sign:                                                                                                                                | Whether private logging is enabled                                                                                                                | false                                                                                                                                             |
+| `name`                                                                                                                                            | *Optional[str]*                                                                                                                                   | :heavy_minus_sign:                                                                                                                                | New name for the workspace                                                                                                                        | Updated Workspace                                                                                                                                 |
+| `slug`                                                                                                                                            | *Optional[str]*                                                                                                                                   | :heavy_minus_sign:                                                                                                                                | New URL-friendly slug (lowercase alphanumeric segments separated by single hyphens, no leading/trailing hyphens)                                  | updated-workspace                                                                                                                                 |
+| `retries`                                                                                                                                         | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.mdx)                                                                                  | :heavy_minus_sign:                                                                                                                                | Configuration to override the default retry behavior of the client.                                                                               |                                                                                                                                                   |
+
+### Response
+
+**[components.UpdateWorkspaceResponse](../../components/updateworkspaceresponse.mdx)**
+
+### Errors
+
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| errors.BadRequestResponseError     | 400                                | application/json                   |
+| errors.UnauthorizedResponseError   | 401                                | application/json                   |
+| errors.ForbiddenResponseError      | 403                                | application/json                   |
+| errors.NotFoundResponseError       | 404                                | application/json                   |
+| errors.InternalServerResponseError | 500                                | application/json                   |
+| errors.OpenRouterDefaultError      | 4XX, 5XX                           | \*/\*                              |
+
+## list_budgets
+
+List all budgets configured for a workspace. [Management key](/docs/guides/overview/auth/management-api-keys) required.
+
+### Example Usage
+
+```python
+from openrouter import OpenRouter
+import os
+
+
+with OpenRouter(
+    http_referer="<value>",
+    x_open_router_title="<value>",
+    x_open_router_categories="<value>",
+    api_key=os.getenv("OPENROUTER_API_KEY", ""),
+) as open_router:
+
+    res = open_router.workspaces.list_budgets(id="production")
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                                                                                                         | Type                                                                                                                                              | Required                                                                                                                                          | Description                                                                                                                                       | Example                                                                                                                                           |
+| ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `id`                                                                                                                                              | *str*                                                                                                                                             | :heavy_check_mark:                                                                                                                                | The workspace ID (UUID) or slug                                                                                                                   | production                                                                                                                                        |
+| `http_referer`                                                                                                                                    | *Optional[str]*                                                                                                                                   | :heavy_minus_sign:                                                                                                                                | The app identifier should be your app's URL and is used as the primary identifier for rankings.<br/>This is used to track API usage per application.<br/> |                                                                                                                                                   |
+| `x_open_router_title`                                                                                                                             | *Optional[str]*                                                                                                                                   | :heavy_minus_sign:                                                                                                                                | The app display name allows you to customize how your app appears in OpenRouter's dashboard.<br/>                                                 |                                                                                                                                                   |
+| `x_open_router_categories`                                                                                                                        | *Optional[str]*                                                                                                                                   | :heavy_minus_sign:                                                                                                                                | Comma-separated list of app categories (e.g. "cli-agent,cloud-agent"). Used for marketplace rankings.<br/>                                        |                                                                                                                                                   |
+| `retries`                                                                                                                                         | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.mdx)                                                                                  | :heavy_minus_sign:                                                                                                                                | Configuration to override the default retry behavior of the client.                                                                               |                                                                                                                                                   |
+
+### Response
+
+**[components.ListWorkspaceBudgetsResponse](../../components/listworkspacebudgetsresponse.mdx)**
+
+### Errors
+
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| errors.UnauthorizedResponseError   | 401                                | application/json                   |
+| errors.NotFoundResponseError       | 404                                | application/json                   |
+| errors.InternalServerResponseError | 500                                | application/json                   |
+| errors.OpenRouterDefaultError      | 4XX, 5XX                           | \*/\*                              |
+
+## delete_budget
+
+Remove the budget for a given interval. [Management key](/docs/guides/overview/auth/management-api-keys) required.
+
+### Example Usage
+
+```python
+from openrouter import OpenRouter
+import os
+
+
+with OpenRouter(
+    http_referer="<value>",
+    x_open_router_title="<value>",
+    x_open_router_categories="<value>",
+    api_key=os.getenv("OPENROUTER_API_KEY", ""),
+) as open_router:
+
+    res = open_router.workspaces.delete_budget(id="production", interval="monthly")
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                                                                                                         | Type                                                                                                                                              | Required                                                                                                                                          | Description                                                                                                                                       | Example                                                                                                                                           |
+| ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `id`                                                                                                                                              | *str*                                                                                                                                             | :heavy_check_mark:                                                                                                                                | The workspace ID (UUID) or slug                                                                                                                   | production                                                                                                                                        |
+| `interval`                                                                                                                                        | [components.WorkspaceBudgetInterval](../../components/workspacebudgetinterval.mdx)                                                                 | :heavy_check_mark:                                                                                                                                | Budget reset interval. Use "lifetime" for a one-time budget that never resets.                                                                    | monthly                                                                                                                                           |
+| `http_referer`                                                                                                                                    | *Optional[str]*                                                                                                                                   | :heavy_minus_sign:                                                                                                                                | The app identifier should be your app's URL and is used as the primary identifier for rankings.<br/>This is used to track API usage per application.<br/> |                                                                                                                                                   |
+| `x_open_router_title`                                                                                                                             | *Optional[str]*                                                                                                                                   | :heavy_minus_sign:                                                                                                                                | The app display name allows you to customize how your app appears in OpenRouter's dashboard.<br/>                                                 |                                                                                                                                                   |
+| `x_open_router_categories`                                                                                                                        | *Optional[str]*                                                                                                                                   | :heavy_minus_sign:                                                                                                                                | Comma-separated list of app categories (e.g. "cli-agent,cloud-agent"). Used for marketplace rankings.<br/>                                        |                                                                                                                                                   |
+| `retries`                                                                                                                                         | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.mdx)                                                                                  | :heavy_minus_sign:                                                                                                                                | Configuration to override the default retry behavior of the client.                                                                               |                                                                                                                                                   |
+
+### Response
+
+**[components.DeleteWorkspaceBudgetResponse](../../components/deleteworkspacebudgetresponse.mdx)**
+
+### Errors
+
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| errors.UnauthorizedResponseError   | 401                                | application/json                   |
+| errors.NotFoundResponseError       | 404                                | application/json                   |
+| errors.InternalServerResponseError | 500                                | application/json                   |
+| errors.OpenRouterDefaultError      | 4XX, 5XX                           | \*/\*                              |
+
+## set_budget
+
+Create or update the budget for a given interval. Budget limits must strictly decrease as the interval narrows (lifetime > monthly > weekly > daily). [Management key](/docs/guides/overview/auth/management-api-keys) required.
+
+### Example Usage
+
+```python
+from openrouter import OpenRouter
+import os
+
+
+with OpenRouter(
+    http_referer="<value>",
+    x_open_router_title="<value>",
+    x_open_router_categories="<value>",
+    api_key=os.getenv("OPENROUTER_API_KEY", ""),
+) as open_router:
+
+    res = open_router.workspaces.set_budget(id="production", interval="monthly", limit_usd=100)
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                                                                                                         | Type                                                                                                                                              | Required                                                                                                                                          | Description                                                                                                                                       | Example                                                                                                                                           |
+| ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `id`                                                                                                                                              | *str*                                                                                                                                             | :heavy_check_mark:                                                                                                                                | The workspace ID (UUID) or slug                                                                                                                   | production                                                                                                                                        |
+| `interval`                                                                                                                                        | [components.WorkspaceBudgetInterval](../../components/workspacebudgetinterval.mdx)                                                                 | :heavy_check_mark:                                                                                                                                | Budget reset interval. Use "lifetime" for a one-time budget that never resets.                                                                    | monthly                                                                                                                                           |
+| `limit_usd`                                                                                                                                       | *float*                                                                                                                                           | :heavy_check_mark:                                                                                                                                | Spending limit in USD. Must be greater than 0.                                                                                                    | 100                                                                                                                                               |
+| `http_referer`                                                                                                                                    | *Optional[str]*                                                                                                                                   | :heavy_minus_sign:                                                                                                                                | The app identifier should be your app's URL and is used as the primary identifier for rankings.<br/>This is used to track API usage per application.<br/> |                                                                                                                                                   |
+| `x_open_router_title`                                                                                                                             | *Optional[str]*                                                                                                                                   | :heavy_minus_sign:                                                                                                                                | The app display name allows you to customize how your app appears in OpenRouter's dashboard.<br/>                                                 |                                                                                                                                                   |
+| `x_open_router_categories`                                                                                                                        | *Optional[str]*                                                                                                                                   | :heavy_minus_sign:                                                                                                                                | Comma-separated list of app categories (e.g. "cli-agent,cloud-agent"). Used for marketplace rankings.<br/>                                        |                                                                                                                                                   |
+| `retries`                                                                                                                                         | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.mdx)                                                                                  | :heavy_minus_sign:                                                                                                                                | Configuration to override the default retry behavior of the client.                                                                               |                                                                                                                                                   |
+
+### Response
+
+**[components.UpsertWorkspaceBudgetResponse](../../components/upsertworkspacebudgetresponse.mdx)**
+
+### Errors
+
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| errors.BadRequestResponseError     | 400                                | application/json                   |
+| errors.UnauthorizedResponseError   | 401                                | application/json                   |
+| errors.NotFoundResponseError       | 404                                | application/json                   |
+| errors.InternalServerResponseError | 500                                | application/json                   |
+| errors.OpenRouterDefaultError      | 4XX, 5XX                           | \*/\*                              |
+
+## bulk_add_members
+
+Add multiple organization members to a workspace. Members are assigned the same role they hold in the organization. [Management key](/docs/guides/overview/auth/management-api-keys) required.
+
+### Example Usage
+
+```python
+from openrouter import OpenRouter
+import os
+
+
+with OpenRouter(
+    http_referer="<value>",
+    x_open_router_title="<value>",
+    x_open_router_categories="<value>",
+    api_key=os.getenv("OPENROUTER_API_KEY", ""),
+) as open_router:
+
+    res = open_router.workspaces.bulk_add_members(id="production", user_ids=[
+        "user_abc123",
+        "user_def456",
+    ])
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                                                                                                         | Type                                                                                                                                              | Required                                                                                                                                          | Description                                                                                                                                       | Example                                                                                                                                           |
+| ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `id`                                                                                                                                              | *str*                                                                                                                                             | :heavy_check_mark:                                                                                                                                | The workspace ID (UUID) or slug                                                                                                                   | production                                                                                                                                        |
+| `user_ids`                                                                                                                                        | List[*str*]                                                                                                                                       | :heavy_check_mark:                                                                                                                                | List of user IDs to add to the workspace. Members are assigned the same role they hold in the organization.                                       | [<br/>"user_abc123",<br/>"user_def456"<br/>]                                                                                                      |
+| `http_referer`                                                                                                                                    | *Optional[str]*                                                                                                                                   | :heavy_minus_sign:                                                                                                                                | The app identifier should be your app's URL and is used as the primary identifier for rankings.<br/>This is used to track API usage per application.<br/> |                                                                                                                                                   |
+| `x_open_router_title`                                                                                                                             | *Optional[str]*                                                                                                                                   | :heavy_minus_sign:                                                                                                                                | The app display name allows you to customize how your app appears in OpenRouter's dashboard.<br/>                                                 |                                                                                                                                                   |
+| `x_open_router_categories`                                                                                                                        | *Optional[str]*                                                                                                                                   | :heavy_minus_sign:                                                                                                                                | Comma-separated list of app categories (e.g. "cli-agent,cloud-agent"). Used for marketplace rankings.<br/>                                        |                                                                                                                                                   |
+| `retries`                                                                                                                                         | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.mdx)                                                                                  | :heavy_minus_sign:                                                                                                                                | Configuration to override the default retry behavior of the client.                                                                               |                                                                                                                                                   |
+
+### Response
+
+**[components.BulkAddWorkspaceMembersResponse](../../components/bulkaddworkspacemembersresponse.mdx)**
+
+### Errors
+
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| errors.BadRequestResponseError     | 400                                | application/json                   |
+| errors.UnauthorizedResponseError   | 401                                | application/json                   |
+| errors.ForbiddenResponseError      | 403                                | application/json                   |
+| errors.NotFoundResponseError       | 404                                | application/json                   |
+| errors.InternalServerResponseError | 500                                | application/json                   |
+| errors.OpenRouterDefaultError      | 4XX, 5XX                           | \*/\*                              |
+
+## bulk_remove_members
+
+Remove multiple members from a workspace. Members with active API keys in the workspace cannot be removed. [Management key](/docs/guides/overview/auth/management-api-keys) required.
+
+### Example Usage
+
+```python
+from openrouter import OpenRouter
+import os
+
+
+with OpenRouter(
+    http_referer="<value>",
+    x_open_router_title="<value>",
+    x_open_router_categories="<value>",
+    api_key=os.getenv("OPENROUTER_API_KEY", ""),
+) as open_router:
+
+    res = open_router.workspaces.bulk_remove_members(id="production", user_ids=[
+        "user_abc123",
+        "user_def456",
+    ])
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                                                                                                         | Type                                                                                                                                              | Required                                                                                                                                          | Description                                                                                                                                       | Example                                                                                                                                           |
+| ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `id`                                                                                                                                              | *str*                                                                                                                                             | :heavy_check_mark:                                                                                                                                | The workspace ID (UUID) or slug                                                                                                                   | production                                                                                                                                        |
+| `user_ids`                                                                                                                                        | List[*str*]                                                                                                                                       | :heavy_check_mark:                                                                                                                                | List of user IDs to remove from the workspace                                                                                                     | [<br/>"user_abc123",<br/>"user_def456"<br/>]                                                                                                      |
+| `http_referer`                                                                                                                                    | *Optional[str]*                                                                                                                                   | :heavy_minus_sign:                                                                                                                                | The app identifier should be your app's URL and is used as the primary identifier for rankings.<br/>This is used to track API usage per application.<br/> |                                                                                                                                                   |
+| `x_open_router_title`                                                                                                                             | *Optional[str]*                                                                                                                                   | :heavy_minus_sign:                                                                                                                                | The app display name allows you to customize how your app appears in OpenRouter's dashboard.<br/>                                                 |                                                                                                                                                   |
+| `x_open_router_categories`                                                                                                                        | *Optional[str]*                                                                                                                                   | :heavy_minus_sign:                                                                                                                                | Comma-separated list of app categories (e.g. "cli-agent,cloud-agent"). Used for marketplace rankings.<br/>                                        |                                                                                                                                                   |
+| `retries`                                                                                                                                         | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.mdx)                                                                                  | :heavy_minus_sign:                                                                                                                                | Configuration to override the default retry behavior of the client.                                                                               |                                                                                                                                                   |
+
+### Response
+
+**[components.BulkRemoveWorkspaceMembersResponse](../../components/bulkremoveworkspacemembersresponse.mdx)**
+
+### Errors
+
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| errors.BadRequestResponseError     | 400                                | application/json                   |
+| errors.UnauthorizedResponseError   | 401                                | application/json                   |
+| errors.ForbiddenResponseError      | 403                                | application/json                   |
+| errors.NotFoundResponseError       | 404                                | application/json                   |
+| errors.InternalServerResponseError | 500                                | application/json                   |
+| errors.OpenRouterDefaultError      | 4XX, 5XX                           | \*/\*                              |

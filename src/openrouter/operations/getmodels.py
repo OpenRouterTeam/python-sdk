@@ -9,15 +9,9 @@ from openrouter.types import (
     UNSET_SENTINEL,
     UnrecognizedStr,
 )
-from openrouter.utils import (
-    FieldMetadata,
-    HeaderMetadata,
-    QueryParamMetadata,
-    validate_open_enum,
-)
+from openrouter.utils import FieldMetadata, HeaderMetadata, QueryParamMetadata
 import pydantic
 from pydantic import model_serializer
-from pydantic.functional_validators import PlainValidator
 from typing import Literal, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -66,6 +60,24 @@ class GetModelsGlobals(BaseModel):
     r"""Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
     """
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            ["HTTP-Referer", "X-OpenRouter-Title", "X-OpenRouter-Categories"]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 GetModelsCategory = Union[
@@ -200,9 +212,7 @@ class GetModelsRequest(BaseModel):
     """
 
     category: Annotated[
-        Annotated[
-            Optional[GetModelsCategory], PlainValidator(validate_open_enum(False))
-        ],
+        Optional[GetModelsCategory],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
     r"""Filter models by use case category"""
@@ -220,7 +230,7 @@ class GetModelsRequest(BaseModel):
     r"""Filter models by output modality. Accepts a comma-separated list of modalities (text, image, audio, embeddings) or \"all\" to include all models. Defaults to \"text\"."""
 
     sort: Annotated[
-        Annotated[Optional[GetModelsSort], PlainValidator(validate_open_enum(False))],
+        Optional[GetModelsSort],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
     r"""Sort the returned models server-side. Prefer this over fetching the full list and sorting client-side. Options: pricing-low-to-high, pricing-high-to-low (average prompt/completion price), context-high-to-low (context length), throughput-high-to-low, latency-low-to-high (recent median performance), most-popular, top-weekly (tokens processed in the last week), newest (creation date), intelligence-high-to-low (Artificial Analysis intelligence index), design-arena-elo-high-to-low (best Design Arena ELO across arenas). Models without a score for the chosen benchmark are placed last. When omitted, the existing default ordering is preserved."""
@@ -274,7 +284,7 @@ class GetModelsRequest(BaseModel):
     r"""Filter models by hosting provider. Comma-separated list of provider names."""
 
     distillable: Annotated[
-        Annotated[Optional[Distillable], PlainValidator(validate_open_enum(False))],
+        Optional[Distillable],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
     r"""Filter by distillation capability. \"true\" returns only distillable models, \"false\" excludes them."""
@@ -293,49 +303,46 @@ class GetModelsRequest(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = [
-            "HTTP-Referer",
-            "X-OpenRouter-Title",
-            "X-OpenRouter-Categories",
-            "category",
-            "supported_parameters",
-            "output_modalities",
-            "sort",
-            "q",
-            "input_modalities",
-            "context",
-            "min_price",
-            "max_price",
-            "arch",
-            "model_authors",
-            "providers",
-            "distillable",
-            "zdr",
-            "region",
-        ]
-        nullable_fields = ["min_price", "max_price"]
-        null_default_fields = []
-
+        optional_fields = set(
+            [
+                "HTTP-Referer",
+                "X-OpenRouter-Title",
+                "X-OpenRouter-Categories",
+                "category",
+                "supported_parameters",
+                "output_modalities",
+                "sort",
+                "q",
+                "input_modalities",
+                "context",
+                "min_price",
+                "max_price",
+                "arch",
+                "model_authors",
+                "providers",
+                "distillable",
+                "zdr",
+                "region",
+            ]
+        )
+        nullable_fields = set(["min_price", "max_price"])
         serialized = handler(self)
-
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
-            serialized.pop(k, None)
+            val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
 
         return m

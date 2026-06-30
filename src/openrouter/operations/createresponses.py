@@ -7,16 +7,15 @@ from openrouter.components import (
     responsesrequest as components_responsesrequest,
     streamevents as components_streamevents,
 )
-from openrouter.types import BaseModel
+from openrouter.types import BaseModel, UNSET_SENTINEL
 from openrouter.utils import (
     FieldMetadata,
     HeaderMetadata,
     RequestMetadata,
     eventstreaming,
-    validate_open_enum,
 )
 import pydantic
-from pydantic.functional_validators import PlainValidator
+from pydantic import model_serializer
 from typing import Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
@@ -65,6 +64,24 @@ class CreateResponsesGlobals(BaseModel):
     r"""Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
     """
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            ["HTTP-Referer", "X-OpenRouter-Title", "X-OpenRouter-Categories"]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class CreateResponsesRequestTypedDict(TypedDict):
@@ -121,14 +138,34 @@ class CreateResponsesRequest(BaseModel):
     """
 
     x_open_router_metadata: Annotated[
-        Annotated[
-            Optional[components_metadatalevel.MetadataLevel],
-            PlainValidator(validate_open_enum(False)),
-        ],
+        Optional[components_metadatalevel.MetadataLevel],
         pydantic.Field(alias="X-OpenRouter-Metadata"),
         FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
     ] = None
     r"""Opt-in to surface routing metadata on the response under `openrouter_metadata`. Defaults to `disabled`. The legacy header `X-OpenRouter-Experimental-Metadata` is also accepted for backward compatibility."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "HTTP-Referer",
+                "X-OpenRouter-Title",
+                "X-OpenRouter-Categories",
+                "X-OpenRouter-Metadata",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 CreateResponsesResponseTypedDict = TypeAliasType(

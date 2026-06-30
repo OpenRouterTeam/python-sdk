@@ -2,11 +2,10 @@
 
 from __future__ import annotations
 from .videogenerationusage import VideoGenerationUsage, VideoGenerationUsageTypedDict
-from openrouter.types import BaseModel, UnrecognizedStr
-from openrouter.utils import validate_open_enum
-from pydantic.functional_validators import PlainValidator
+from openrouter.types import BaseModel, UNSET_SENTINEL, UnrecognizedStr
+from pydantic import model_serializer
 from typing import List, Literal, Optional, Union
-from typing_extensions import Annotated, NotRequired, TypedDict
+from typing_extensions import NotRequired, TypedDict
 
 
 VideoGenerationResponseStatus = Union[
@@ -39,9 +38,7 @@ class VideoGenerationResponse(BaseModel):
 
     polling_url: str
 
-    status: Annotated[
-        VideoGenerationResponseStatus, PlainValidator(validate_open_enum(False))
-    ]
+    status: VideoGenerationResponseStatus
 
     error: Optional[str] = None
 
@@ -52,3 +49,19 @@ class VideoGenerationResponse(BaseModel):
 
     usage: Optional[VideoGenerationUsage] = None
     r"""Usage and cost information for the video generation. Available once the job has completed."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["error", "generation_id", "unsigned_urls", "usage"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

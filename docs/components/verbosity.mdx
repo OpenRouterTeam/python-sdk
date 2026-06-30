@@ -1,0 +1,23 @@
+---
+title: "Verbosity"
+---
+
+## Example Usage
+
+```python
+from openrouter.components import Verbosity
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
+value: Verbosity = "low"
+```
+
+
+## Values
+
+This is an open enum. Unrecognized values will not fail type checks.
+
+- `"low"`
+- `"medium"`
+- `"high"`
+- `"xhigh"`
+- `"max"`

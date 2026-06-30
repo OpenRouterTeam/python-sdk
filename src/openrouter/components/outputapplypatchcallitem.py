@@ -7,10 +7,8 @@ from .applypatchcalloperation import (
 )
 from .applypatchcallstatus import ApplyPatchCallStatus
 from openrouter.types import BaseModel
-from openrouter.utils import validate_open_enum
-from pydantic.functional_validators import PlainValidator
 from typing import Literal
-from typing_extensions import Annotated, TypedDict
+from typing_extensions import TypedDict
 
 
 OutputApplyPatchCallItemType = Literal["apply_patch_call",]
@@ -38,7 +36,7 @@ class OutputApplyPatchCallItem(BaseModel):
     operation: ApplyPatchCallOperation
     r"""The patch operation requested by an `apply_patch_call`. `create_file` and `update_file` carry a V4A diff; `delete_file` omits it."""
 
-    status: Annotated[ApplyPatchCallStatus, PlainValidator(validate_open_enum(False))]
+    status: ApplyPatchCallStatus
     r"""Lifecycle state of an `apply_patch_call` output item."""
 
     type: OutputApplyPatchCallItemType

@@ -1,0 +1,13 @@
+---
+title: "SubagentReasoning"
+---
+
+Reasoning configuration forwarded to the subagent call. Use this to control reasoning effort and token budget for models that support extended thinking.
+
+
+## Fields
+
+| Field                                                                                                                       | Type                                                                                                                        | Required                                                                                                                    | Description                                                                                                                 |
+| --------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| `effort`                                                                                                                    | [Optional[components.SubagentReasoningEffort]](../components/subagentreasoningeffort.mdx)                                    | :heavy_minus_sign:                                                                                                          | Reasoning effort level for the subagent call.                                                                               |
+| `max_tokens`                                                                                                                | *Optional[int]*                                                                                                             | :heavy_minus_sign:                                                                                                          | Maximum number of reasoning tokens the subagent may use. Accepted and validated but not yet forwarded to the subagent call. |

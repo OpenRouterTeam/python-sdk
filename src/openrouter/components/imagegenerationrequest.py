@@ -2,10 +2,9 @@
 
 from __future__ import annotations
 from .contentpartimage import ContentPartImage, ContentPartImageTypedDict
-from openrouter.types import BaseModel, Nullable, UnrecognizedStr
-from openrouter.utils import validate_open_enum
+from openrouter.types import BaseModel, Nullable, UNSET_SENTINEL, UnrecognizedStr
 import pydantic
-from pydantic.functional_validators import PlainValidator
+from pydantic import model_serializer
 from typing import Any, Dict, List, Literal, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -479,6 +478,145 @@ class ImageGenerationRequestOptions(BaseModel):
         Optional[Dict[str, Nullable[Any]]], pydantic.Field(alias="z-ai")
     ] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "01ai",
+                "ai21",
+                "aion-labs",
+                "akashml",
+                "alibaba",
+                "amazon-bedrock",
+                "amazon-nova",
+                "ambient",
+                "anthropic",
+                "anyscale",
+                "arcee-ai",
+                "atlas-cloud",
+                "atoma",
+                "avian",
+                "azure",
+                "baidu",
+                "baseten",
+                "black-forest-labs",
+                "byteplus",
+                "centml",
+                "cerebras",
+                "chutes",
+                "cirrascale",
+                "clarifai",
+                "cloudflare",
+                "cohere",
+                "crofai",
+                "crucible",
+                "crusoe",
+                "darkbloom",
+                "decart",
+                "deepinfra",
+                "deepseek",
+                "dekallm",
+                "digitalocean",
+                "enfer",
+                "fake-provider",
+                "featherless",
+                "fireworks",
+                "friendli",
+                "gmicloud",
+                "google-ai-studio",
+                "google-vertex",
+                "gopomelo",
+                "groq",
+                "heygen",
+                "huggingface",
+                "hyperbolic",
+                "hyperbolic-quantized",
+                "inception",
+                "inceptron",
+                "inferact-vllm",
+                "inference-net",
+                "infermatic",
+                "inflection",
+                "inocloud",
+                "io-net",
+                "ionstream",
+                "klusterai",
+                "lambda",
+                "lepton",
+                "liquid",
+                "lynn",
+                "lynn-private",
+                "mancer",
+                "mancer-old",
+                "mara",
+                "meta",
+                "minimax",
+                "mistral",
+                "modal",
+                "modelrun",
+                "modular",
+                "moonshotai",
+                "morph",
+                "ncompass",
+                "nebius",
+                "nex-agi",
+                "nextbit",
+                "nineteen",
+                "novita",
+                "nvidia",
+                "octoai",
+                "open-inference",
+                "openai",
+                "parasail",
+                "perceptron",
+                "perplexity",
+                "phala",
+                "poolside",
+                "quiver",
+                "recraft",
+                "recursal",
+                "reflection",
+                "reka",
+                "relace",
+                "replicate",
+                "sakana-ai",
+                "sambanova",
+                "sambanova-cloaked",
+                "seed",
+                "sf-compute",
+                "siliconflow",
+                "sourceful",
+                "stealth",
+                "stepfun",
+                "streamlake",
+                "switchpoint",
+                "targon",
+                "tenstorrent",
+                "together",
+                "together-lite",
+                "ubicloud",
+                "upstage",
+                "venice",
+                "wafer",
+                "wandb",
+                "xai",
+                "xiaomi",
+                "z-ai",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class ImageGenerationRequestProviderTypedDict(TypedDict):
     r"""Provider-specific passthrough configuration"""
@@ -490,6 +628,22 @@ class ImageGenerationRequestProvider(BaseModel):
     r"""Provider-specific passthrough configuration"""
 
     options: Optional[ImageGenerationRequestOptions] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["options"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 ImageGenerationRequestQuality = Union[
@@ -558,16 +712,10 @@ class ImageGenerationRequest(BaseModel):
     prompt: str
     r"""Text description of the desired image"""
 
-    aspect_ratio: Annotated[
-        Optional[ImageGenerationRequestAspectRatio],
-        PlainValidator(validate_open_enum(False)),
-    ] = None
+    aspect_ratio: Optional[ImageGenerationRequestAspectRatio] = None
     r"""Normalized aspect ratio of the generated image. Providers clamp to their supported subset."""
 
-    background: Annotated[
-        Optional[ImageGenerationRequestBackground],
-        PlainValidator(validate_open_enum(False)),
-    ] = None
+    background: Optional[ImageGenerationRequestBackground] = None
     r"""Background treatment. `transparent` requires an output_format that supports alpha (png or webp)."""
 
     input_references: Optional[List[ContentPartImage]] = None
@@ -579,25 +727,16 @@ class ImageGenerationRequest(BaseModel):
     output_compression: Optional[int] = None
     r"""Compression level (0-100) for webp/jpeg output. Ignored for png and by providers without a compression knob."""
 
-    output_format: Annotated[
-        Optional[ImageGenerationRequestOutputFormat],
-        PlainValidator(validate_open_enum(False)),
-    ] = None
+    output_format: Optional[ImageGenerationRequestOutputFormat] = None
     r"""Encoding of the returned image bytes. Most models produce raster formats (png, jpeg, webp). SVG is supported by vectorization models (e.g. Quiver) — the SVG markup is UTF-8 base64-encoded in `b64_json`."""
 
     provider: Optional[ImageGenerationRequestProvider] = None
     r"""Provider-specific passthrough configuration"""
 
-    quality: Annotated[
-        Optional[ImageGenerationRequestQuality],
-        PlainValidator(validate_open_enum(False)),
-    ] = None
+    quality: Optional[ImageGenerationRequestQuality] = None
     r"""Rendering quality. Providers without a quality knob ignore this."""
 
-    resolution: Annotated[
-        Optional[ImageGenerationRequestResolution],
-        PlainValidator(validate_open_enum(False)),
-    ] = None
+    resolution: Optional[ImageGenerationRequestResolution] = None
     r"""Normalized resolution tier of the generated image. Concrete pixel dimensions are derived per-provider."""
 
     seed: Optional[int] = None
@@ -608,3 +747,40 @@ class ImageGenerationRequest(BaseModel):
 
     stream: Optional[bool] = None
     r"""If true, partial images are streamed as SSE events as they become available. Only supported by providers with native streaming (currently OpenAI). Non-streaming providers ignore this flag and return a buffered response."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "aspect_ratio",
+                "background",
+                "input_references",
+                "n",
+                "output_compression",
+                "output_format",
+                "provider",
+                "quality",
+                "resolution",
+                "seed",
+                "size",
+                "stream",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
+
+try:
+    ImageGenerationRequestOptions.model_rebuild()
+except NameError:
+    pass

@@ -69,9 +69,12 @@ from .observabilitywebhookdestination import (
     ObservabilityWebhookDestination,
     ObservabilityWebhookDestinationTypedDict,
 )
-from openrouter.utils import get_discriminator
-from pydantic import Discriminator, Tag
-from typing import Union
+from functools import partial
+from openrouter.types import BaseModel
+from openrouter.utils.unions import parse_open_union
+from pydantic import ConfigDict
+from pydantic.functional_validators import BeforeValidator
+from typing import Any, Literal, Union
 from typing_extensions import Annotated, TypeAliasType
 
 
@@ -99,25 +102,65 @@ ObservabilityDestinationTypedDict = TypeAliasType(
 )
 
 
+class UnknownObservabilityDestination(BaseModel):
+    r"""A ObservabilityDestination variant the SDK doesn't recognize. Preserves the raw payload."""
+
+    type: Literal["UNKNOWN"] = "UNKNOWN"
+    raw: Any
+    is_unknown: Literal[True] = True
+
+    model_config = ConfigDict(frozen=True)
+
+
+_OBSERVABILITY_DESTINATION_VARIANTS: dict[str, Any] = {
+    "arize": ObservabilityArizeDestination,
+    "braintrust": ObservabilityBraintrustDestination,
+    "clickhouse": ObservabilityClickhouseDestination,
+    "datadog": ObservabilityDatadogDestination,
+    "grafana": ObservabilityGrafanaDestination,
+    "langfuse": ObservabilityLangfuseDestination,
+    "langsmith": ObservabilityLangsmithDestination,
+    "newrelic": ObservabilityNewrelicDestination,
+    "opik": ObservabilityOpikDestination,
+    "otel-collector": ObservabilityOtelCollectorDestination,
+    "posthog": ObservabilityPosthogDestination,
+    "ramp": ObservabilityRampDestination,
+    "s3": ObservabilityS3Destination,
+    "sentry": ObservabilitySentryDestination,
+    "snowflake": ObservabilitySnowflakeDestination,
+    "weave": ObservabilityWeaveDestination,
+    "webhook": ObservabilityWebhookDestination,
+}
+
+
 ObservabilityDestination = Annotated[
     Union[
-        Annotated[ObservabilityArizeDestination, Tag("arize")],
-        Annotated[ObservabilityBraintrustDestination, Tag("braintrust")],
-        Annotated[ObservabilityClickhouseDestination, Tag("clickhouse")],
-        Annotated[ObservabilityDatadogDestination, Tag("datadog")],
-        Annotated[ObservabilityGrafanaDestination, Tag("grafana")],
-        Annotated[ObservabilityLangfuseDestination, Tag("langfuse")],
-        Annotated[ObservabilityLangsmithDestination, Tag("langsmith")],
-        Annotated[ObservabilityNewrelicDestination, Tag("newrelic")],
-        Annotated[ObservabilityOpikDestination, Tag("opik")],
-        Annotated[ObservabilityOtelCollectorDestination, Tag("otel-collector")],
-        Annotated[ObservabilityPosthogDestination, Tag("posthog")],
-        Annotated[ObservabilityRampDestination, Tag("ramp")],
-        Annotated[ObservabilityS3Destination, Tag("s3")],
-        Annotated[ObservabilitySentryDestination, Tag("sentry")],
-        Annotated[ObservabilitySnowflakeDestination, Tag("snowflake")],
-        Annotated[ObservabilityWeaveDestination, Tag("weave")],
-        Annotated[ObservabilityWebhookDestination, Tag("webhook")],
+        ObservabilityArizeDestination,
+        ObservabilityBraintrustDestination,
+        ObservabilityClickhouseDestination,
+        ObservabilityDatadogDestination,
+        ObservabilityGrafanaDestination,
+        ObservabilityLangfuseDestination,
+        ObservabilityLangsmithDestination,
+        ObservabilityNewrelicDestination,
+        ObservabilityOpikDestination,
+        ObservabilityOtelCollectorDestination,
+        ObservabilityPosthogDestination,
+        ObservabilityRampDestination,
+        ObservabilityS3Destination,
+        ObservabilitySentryDestination,
+        ObservabilitySnowflakeDestination,
+        ObservabilityWeaveDestination,
+        ObservabilityWebhookDestination,
+        UnknownObservabilityDestination,
     ],
-    Discriminator(lambda m: get_discriminator(m, "type", "type")),
+    BeforeValidator(
+        partial(
+            parse_open_union,
+            disc_key="type",
+            variants=_OBSERVABILITY_DESTINATION_VARIANTS,
+            unknown_cls=UnknownObservabilityDestination,
+            union_name="ObservabilityDestination",
+        )
+    ),
 ]

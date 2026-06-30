@@ -1,0 +1,13 @@
+---
+title: "Caching"
+---
+
+Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. Currently supported for Anthropic Claude models.
+
+
+## Fields
+
+| Field                                                                                      | Type                                                                                       | Required                                                                                   | Description                                                                                | Example                                                                                    |
+| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
+| `ttl`                                                                                      | [Optional[components.AnthropicCacheControlTTL]](../components/anthropiccachecontrolttl.mdx) | :heavy_minus_sign:                                                                         | N/A                                                                                        | 5m                                                                                         |
+| `type`                                                                                     | [components.ToolTypeEphemeral](../components/tooltypeephemeral.mdx)                         | :heavy_check_mark:                                                                         | N/A                                                                                        |                                                                                            |

@@ -1,0 +1,23 @@
+---
+title: "ContentFilterBuiltinAction"
+---
+
+Action taken when the builtin filter triggers
+
+## Example Usage
+
+```python
+from openrouter.components import ContentFilterBuiltinAction
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
+value: ContentFilterBuiltinAction = "redact"
+```
+
+
+## Values
+
+This is an open enum. Unrecognized values will not fail type checks.
+
+- `"redact"`
+- `"block"`
+- `"flag"`

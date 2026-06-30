@@ -1,0 +1,13 @@
+---
+title: "ShellServerToolOpenRouter"
+---
+
+OpenRouter built-in server tool: runs shell commands server-side in a sandboxed container (a sandbox-backed clone of OpenAI's hosted shell tool)
+
+
+## Fields
+
+| Field                                                                                      | Type                                                                                       | Required                                                                                   | Description                                                                                | Example                                                                                    |
+| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
+| `parameters`                                                                               | [Optional[components.ShellServerToolConfig]](../components/shellservertoolconfig.mdx)       | :heavy_minus_sign:                                                                         | Configuration for the openrouter:shell server tool                                         | \{<br/>"engine": "openrouter",<br/>"environment": \{<br/>"type": "container_auto"<br/>}<br/>} |
+| `type`                                                                                     | [components.ShellServerToolOpenRouterType](../components/shellservertoolopenroutertype.mdx) | :heavy_check_mark:                                                                         | N/A                                                                                        |                                                                                            |

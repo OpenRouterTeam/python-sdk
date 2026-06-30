@@ -1,0 +1,27 @@
+---
+title: "DefaultEffort"
+---
+
+Default reasoning effort when the client enables reasoning without specifying effort. Maps to `reasoning.effort` in chat requests. When `"none"`, prefer omitting effort unless the user explicitly disables reasoning.
+
+## Example Usage
+
+```python
+from openrouter.components import DefaultEffort
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
+value: DefaultEffort = "max"
+```
+
+
+## Values
+
+This is an open enum. Unrecognized values will not fail type checks.
+
+- `"max"`
+- `"xhigh"`
+- `"high"`
+- `"medium"`
+- `"low"`
+- `"minimal"`
+- `"none"`

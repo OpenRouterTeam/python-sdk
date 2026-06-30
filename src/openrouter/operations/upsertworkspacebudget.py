@@ -5,16 +5,15 @@ from openrouter.components import (
     upsertworkspacebudgetrequest as components_upsertworkspacebudgetrequest,
     workspacebudgetinterval as components_workspacebudgetinterval,
 )
-from openrouter.types import BaseModel
+from openrouter.types import BaseModel, UNSET_SENTINEL
 from openrouter.utils import (
     FieldMetadata,
     HeaderMetadata,
     PathParamMetadata,
     RequestMetadata,
-    validate_open_enum,
 )
 import pydantic
-from pydantic.functional_validators import PlainValidator
+from pydantic import model_serializer
 from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -64,6 +63,24 @@ class UpsertWorkspaceBudgetGlobals(BaseModel):
 
     """
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            ["HTTP-Referer", "X-OpenRouter-Title", "X-OpenRouter-Categories"]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class UpsertWorkspaceBudgetRequestTypedDict(TypedDict):
     id: str
@@ -95,10 +112,7 @@ class UpsertWorkspaceBudgetRequest(BaseModel):
     r"""The workspace ID (UUID) or slug"""
 
     interval: Annotated[
-        Annotated[
-            components_workspacebudgetinterval.WorkspaceBudgetInterval,
-            PlainValidator(validate_open_enum(False)),
-        ],
+        components_workspacebudgetinterval.WorkspaceBudgetInterval,
         FieldMetadata(path=PathParamMetadata(style="simple", explode=False)),
     ]
     r"""Budget reset interval. Use \"lifetime\" for a one-time budget that never resets."""
@@ -135,3 +149,21 @@ class UpsertWorkspaceBudgetRequest(BaseModel):
     r"""Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
     """
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            ["HTTP-Referer", "X-OpenRouter-Title", "X-OpenRouter-Categories"]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

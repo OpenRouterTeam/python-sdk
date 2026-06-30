@@ -1,0 +1,31 @@
+---
+title: "Operator"
+---
+
+## Example Usage
+
+```python
+from openrouter.components import Operator
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
+value: Operator = "equals"
+```
+
+
+## Values
+
+This is an open enum. Unrecognized values will not fail type checks.
+
+- `"equals"`
+- `"not_equals"`
+- `"contains"`
+- `"not_contains"`
+- `"regex"`
+- `"starts_with"`
+- `"ends_with"`
+- `"gt"`
+- `"lt"`
+- `"gte"`
+- `"lte"`
+- `"exists"`
+- `"not_exists"`

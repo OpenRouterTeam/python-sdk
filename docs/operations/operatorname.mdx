@@ -1,0 +1,28 @@
+---
+title: "OperatorName"
+---
+
+Operator identifier used in filter definitions
+
+## Example Usage
+
+```python
+from openrouter.operations import OperatorName
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
+value: OperatorName = "eq"
+```
+
+
+## Values
+
+This is an open enum. Unrecognized values will not fail type checks.
+
+- `"eq"`
+- `"neq"`
+- `"in"`
+- `"not_in"`
+- `"gt"`
+- `"gte"`
+- `"lt"`
+- `"lte"`

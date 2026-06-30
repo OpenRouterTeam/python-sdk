@@ -1,0 +1,27 @@
+---
+title: "ChatRequestReasoningEffort"
+---
+
+Shorthand for setting reasoning effort. Equivalent to setting reasoning.effort. Cannot be used simultaneously with reasoning.effort if they differ.
+
+## Example Usage
+
+```python
+from openrouter.components import ChatRequestReasoningEffort
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
+value: ChatRequestReasoningEffort = "max"
+```
+
+
+## Values
+
+This is an open enum. Unrecognized values will not fail type checks.
+
+- `"max"`
+- `"xhigh"`
+- `"high"`
+- `"medium"`
+- `"low"`
+- `"minimal"`
+- `"none"`

@@ -10,15 +10,9 @@ from openrouter.types import (
     UNSET_SENTINEL,
     UnrecognizedStr,
 )
-from openrouter.utils import (
-    FieldMetadata,
-    HeaderMetadata,
-    RequestMetadata,
-    validate_open_enum,
-)
+from openrouter.utils import FieldMetadata, HeaderMetadata, RequestMetadata
 import pydantic
 from pydantic import model_serializer
-from pydantic.functional_validators import PlainValidator
 from typing import Literal, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -68,6 +62,24 @@ class CreateKeysGlobals(BaseModel):
 
     """
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            ["HTTP-Referer", "X-OpenRouter-Title", "X-OpenRouter-Categories"]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 CreateKeysLimitReset = Union[
     Literal[
@@ -113,10 +125,7 @@ class CreateKeysRequestBody(BaseModel):
     limit: OptionalNullable[float] = UNSET
     r"""Optional spending limit for the API key in USD"""
 
-    limit_reset: Annotated[
-        OptionalNullable[CreateKeysLimitReset],
-        PlainValidator(validate_open_enum(False)),
-    ] = UNSET
+    limit_reset: OptionalNullable[CreateKeysLimitReset] = UNSET
     r"""Type of limit reset for the API key (daily, weekly, monthly, or null for no reset). Resets happen automatically at midnight UTC, and weeks are Monday through Sunday."""
 
     workspace_id: Optional[str] = None
@@ -124,38 +133,35 @@ class CreateKeysRequestBody(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = [
-            "creator_user_id",
-            "expires_at",
-            "include_byok_in_limit",
-            "limit",
-            "limit_reset",
-            "workspace_id",
-        ]
-        nullable_fields = ["creator_user_id", "expires_at", "limit", "limit_reset"]
-        null_default_fields = []
-
+        optional_fields = set(
+            [
+                "creator_user_id",
+                "expires_at",
+                "include_byok_in_limit",
+                "limit",
+                "limit_reset",
+                "workspace_id",
+            ]
+        )
+        nullable_fields = set(["creator_user_id", "expires_at", "limit", "limit_reset"])
         serialized = handler(self)
-
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
-            serialized.pop(k, None)
+            val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
 
         return m
 
@@ -210,6 +216,24 @@ class CreateKeysRequest(BaseModel):
     r"""Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
     """
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            ["HTTP-Referer", "X-OpenRouter-Title", "X-OpenRouter-Categories"]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class CreateKeysDataTypedDict(TypedDict):
@@ -327,38 +351,35 @@ class CreateKeysData(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["expires_at"]
-        nullable_fields = [
-            "creator_user_id",
-            "expires_at",
-            "limit",
-            "limit_remaining",
-            "limit_reset",
-            "updated_at",
-        ]
-        null_default_fields = []
-
+        optional_fields = set(["expires_at"])
+        nullable_fields = set(
+            [
+                "creator_user_id",
+                "expires_at",
+                "limit",
+                "limit_remaining",
+                "limit_reset",
+                "updated_at",
+            ]
+        )
         serialized = handler(self)
-
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
-            serialized.pop(k, None)
+            val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
 
         return m
 

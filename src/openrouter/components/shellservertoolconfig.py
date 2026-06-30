@@ -6,11 +6,10 @@ from .shellservertoolenvironment import (
     ShellServerToolEnvironment,
     ShellServerToolEnvironmentTypedDict,
 )
-from openrouter.types import BaseModel
-from openrouter.utils import validate_open_enum
-from pydantic.functional_validators import PlainValidator
+from openrouter.types import BaseModel, UNSET_SENTINEL
+from pydantic import model_serializer
 from typing import Optional
-from typing_extensions import Annotated, NotRequired, TypedDict
+from typing_extensions import NotRequired, TypedDict
 
 
 class ShellServerToolConfigTypedDict(TypedDict):
@@ -27,9 +26,7 @@ class ShellServerToolConfigTypedDict(TypedDict):
 class ShellServerToolConfig(BaseModel):
     r"""Configuration for the openrouter:shell server tool"""
 
-    engine: Annotated[
-        Optional[ShellServerToolEngine], PlainValidator(validate_open_enum(False))
-    ] = None
+    engine: Optional[ShellServerToolEngine] = None
     r"""Which shell engine to use. \"openrouter\" runs commands server-side in the OpenRouter sandbox. \"auto\" (default) keeps the provider's native hosted shell when available (OpenAI); on other providers the call is routed to the OpenRouter sandbox."""
 
     environment: Optional[ShellServerToolEnvironment] = None
@@ -37,3 +34,19 @@ class ShellServerToolConfig(BaseModel):
 
     sleep_after_seconds: Optional[int] = None
     r"""How long (in seconds) the container stays warm after its last command before sleeping, freeing its capacity slot. Idle-based: each command renews the timer. Defaults to 900 (15 minutes); capped at 2592000 (30 days)."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["engine", "environment", "sleep_after_seconds"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

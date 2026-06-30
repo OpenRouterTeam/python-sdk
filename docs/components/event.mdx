@@ -1,0 +1,22 @@
+---
+title: "Event"
+---
+
+## Example Usage
+
+```python
+from openrouter.components import Event
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
+value: Event = "adapter_request"
+```
+
+
+## Values
+
+This is an open enum. Unrecognized values will not fail type checks.
+
+- `"adapter_request"`
+- `"upstream_headers_received"`
+- `"first_token_received"`
+- `"upstream_body_ended"`

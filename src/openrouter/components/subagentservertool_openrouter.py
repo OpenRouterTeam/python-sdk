@@ -5,7 +5,8 @@ from .subagentservertoolconfig import (
     SubagentServerToolConfig,
     SubagentServerToolConfigTypedDict,
 )
-from openrouter.types import BaseModel
+from openrouter.types import BaseModel, UNSET_SENTINEL
+from pydantic import model_serializer
 from typing import Literal, Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -28,3 +29,19 @@ class SubagentServerToolOpenRouter(BaseModel):
 
     parameters: Optional[SubagentServerToolConfig] = None
     r"""Configuration for the openrouter:subagent server tool."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["parameters"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
