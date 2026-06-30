@@ -101,8 +101,8 @@ TRANSIENT_ERROR_CODES = {408, 429, 500, 502, 503, 504, 524, 529}
 def _matches_retry_status_code(response: httpx.Response, status_code: str) -> bool:
     if "X" in status_code.upper():
         code_range = int(status_code[0])
-        status_major = response.status_code / 100
-        return code_range <= status_major < code_range + 1
+        status_major = response.status_code // 100
+        return code_range == status_major
 
     return response.status_code == int(status_code)
 
