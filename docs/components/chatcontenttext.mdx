@@ -1,0 +1,14 @@
+---
+title: "ChatContentText"
+---
+
+Text content part
+
+
+## Fields
+
+| Field                                                                                    | Type                                                                                     | Required                                                                                 | Description                                                                              | Example                                                                                  |
+| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `cache_control`                                                                          | [Optional[components.ChatContentCacheControl]](../components/chatcontentcachecontrol.mdx) | :heavy_minus_sign:                                                                       | Cache control for the content part                                                       | \{<br/>"ttl": "5m",<br/>"type": "ephemeral"<br/>}                                         |
+| `text`                                                                                   | *str*                                                                                    | :heavy_check_mark:                                                                       | N/A                                                                                      |                                                                                          |
+| `type`                                                                                   | [components.ChatContentTextType](../components/chatcontenttexttype.mdx)                   | :heavy_check_mark:                                                                       | N/A                                                                                      |                                                                                          |

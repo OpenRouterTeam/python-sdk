@@ -9,11 +9,9 @@ from openrouter.types import (
     UNSET_SENTINEL,
     UnrecognizedStr,
 )
-from openrouter.utils import validate_open_enum
 from pydantic import model_serializer
-from pydantic.functional_validators import PlainValidator
 from typing import Literal, Optional, Union
-from typing_extensions import Annotated, NotRequired, TypedDict
+from typing_extensions import NotRequired, TypedDict
 
 
 ImageGenerationServerToolBackground = Union[
@@ -44,6 +42,22 @@ class InputImageMask(BaseModel):
     file_id: Optional[str] = None
 
     image_url: Optional[str] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["file_id", "image_url"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 ModelEnum = Union[
@@ -120,78 +134,60 @@ class ImageGenerationServerTool(BaseModel):
 
     type: ImageGenerationServerToolType
 
-    background: Annotated[
-        Optional[ImageGenerationServerToolBackground],
-        PlainValidator(validate_open_enum(False)),
-    ] = None
+    background: Optional[ImageGenerationServerToolBackground] = None
 
-    input_fidelity: Annotated[
-        OptionalNullable[InputFidelity], PlainValidator(validate_open_enum(False))
-    ] = UNSET
+    input_fidelity: OptionalNullable[InputFidelity] = UNSET
 
     input_image_mask: Optional[InputImageMask] = None
 
-    model: Annotated[Optional[ModelEnum], PlainValidator(validate_open_enum(False))] = (
-        None
-    )
+    model: Optional[ModelEnum] = None
 
-    moderation: Annotated[
-        Optional[Moderation], PlainValidator(validate_open_enum(False))
-    ] = None
+    moderation: Optional[Moderation] = None
 
     output_compression: Optional[int] = None
 
-    output_format: Annotated[
-        Optional[ImageGenerationServerToolOutputFormat],
-        PlainValidator(validate_open_enum(False)),
-    ] = None
+    output_format: Optional[ImageGenerationServerToolOutputFormat] = None
 
     partial_images: Optional[int] = None
 
-    quality: Annotated[
-        Optional[ImageGenerationServerToolQuality],
-        PlainValidator(validate_open_enum(False)),
-    ] = None
+    quality: Optional[ImageGenerationServerToolQuality] = None
 
-    size: Annotated[Optional[Size], PlainValidator(validate_open_enum(False))] = None
+    size: Optional[Size] = None
 
     @model_serializer(mode="wrap")
-    def serialize_model(self, handler):
-        optional_fields = [
-            "background",
-            "input_fidelity",
-            "input_image_mask",
-            "model",
-            "moderation",
-            "output_compression",
-            "output_format",
-            "partial_images",
-            "quality",
-            "size",
-        ]
-        nullable_fields = ["input_fidelity"]
-        null_default_fields = []
-
+    def _serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "background",
+                "input_fidelity",
+                "input_image_mask",
+                "model",
+                "moderation",
+                "output_compression",
+                "output_format",
+                "partial_images",
+                "quality",
+                "size",
+            ]
+        )
+        nullable_fields = set(["input_fidelity"])
         serialized = handler(self)
-
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
-            serialized.pop(k, None)
+            val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
 
         return m

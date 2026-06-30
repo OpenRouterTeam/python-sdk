@@ -1,0 +1,24 @@
+---
+title: "ImageGenerationRequestResolution"
+---
+
+Normalized resolution tier of the generated image. Concrete pixel dimensions are derived per-provider.
+
+## Example Usage
+
+```python
+from openrouter.components import ImageGenerationRequestResolution
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
+value: ImageGenerationRequestResolution = "512"
+```
+
+
+## Values
+
+This is an open enum. Unrecognized values will not fail type checks.
+
+- `"512"`
+- `"1K"`
+- `"2K"`
+- `"4K"`

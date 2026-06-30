@@ -142,24 +142,26 @@ class Datasets(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Datasets"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "429", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
         def next_func() -> Optional[operations.GetAppRankingsResponse]:
             body = utils.unmarshal_json(http_res.text, Union[Dict[Any, Any], List[Any]])
 
-            offset = request.offset if not request.offset is None else 0
+            offset = request.offset if isinstance(request.offset, int) else 0
 
             if not http_res.text:
                 return None
             results = JSONPath("$.data").parse(body)
             if len(results) == 0 or len(results[0]) == 0:
                 return None
-            limit = request.limit if not request.limit is None else 50
-            if len(results[0]) < limit:
+            limit_ = request.limit if isinstance(request.limit, int) else 50
+            if len(results[0]) < limit_:
                 return None
             next_offset = offset + len(results[0])
 
@@ -175,6 +177,9 @@ class Datasets(BaseSDK):
                 limit=limit,
                 offset=next_offset,
                 retries=retries,
+                server_url=server_url,
+                timeout_ms=timeout_ms,
+                http_headers=http_headers,
             )
 
         response_data: Any = None
@@ -347,9 +352,11 @@ class Datasets(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Datasets"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "429", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -359,15 +366,15 @@ class Datasets(BaseSDK):
             async def empty_result():
                 return None
 
-            offset = request.offset if not request.offset is None else 0
+            offset = request.offset if isinstance(request.offset, int) else 0
 
             if not http_res.text:
                 return empty_result()
             results = JSONPath("$.data").parse(body)
             if len(results) == 0 or len(results[0]) == 0:
                 return empty_result()
-            limit = request.limit if not request.limit is None else 50
-            if len(results[0]) < limit:
+            limit_ = request.limit if isinstance(request.limit, int) else 50
+            if len(results[0]) < limit_:
                 return empty_result()
             next_offset = offset + len(results[0])
 
@@ -383,6 +390,9 @@ class Datasets(BaseSDK):
                 limit=limit,
                 offset=next_offset,
                 retries=retries,
+                server_url=server_url,
+                timeout_ms=timeout_ms,
+                http_headers=http_headers,
             )
 
         response_data: Any = None
@@ -536,9 +546,11 @@ class Datasets(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Datasets"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "429", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -688,9 +700,11 @@ class Datasets(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Datasets"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "429", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 

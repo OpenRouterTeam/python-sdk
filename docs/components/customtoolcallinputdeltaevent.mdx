@@ -1,0 +1,16 @@
+---
+title: "CustomToolCallInputDeltaEvent"
+---
+
+Event emitted when a custom tool call's freeform input is being streamed. Mirrors `response.function_call_arguments.delta` but for `custom` tools whose input is opaque text rather than JSON arguments.
+
+
+## Fields
+
+| Field                                                                                              | Type                                                                                               | Required                                                                                           | Description                                                                                        |
+| -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `delta`                                                                                            | *str*                                                                                              | :heavy_check_mark:                                                                                 | N/A                                                                                                |
+| `item_id`                                                                                          | *str*                                                                                              | :heavy_check_mark:                                                                                 | N/A                                                                                                |
+| `output_index`                                                                                     | *int*                                                                                              | :heavy_check_mark:                                                                                 | N/A                                                                                                |
+| `sequence_number`                                                                                  | *int*                                                                                              | :heavy_check_mark:                                                                                 | N/A                                                                                                |
+| `type`                                                                                             | [components.CustomToolCallInputDeltaEventType](../components/customtoolcallinputdeltaeventtype.mdx) | :heavy_check_mark:                                                                                 | N/A                                                                                                |

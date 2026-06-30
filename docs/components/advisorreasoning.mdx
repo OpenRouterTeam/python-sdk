@@ -1,0 +1,13 @@
+---
+title: "AdvisorReasoning"
+---
+
+Reasoning configuration forwarded to the advisor call. Use this to control reasoning effort and token budget for models that support extended thinking.
+
+
+## Fields
+
+| Field                                                                                  | Type                                                                                   | Required                                                                               | Description                                                                            |
+| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| `effort`                                                                               | [Optional[components.AdvisorReasoningEffort]](../components/advisorreasoningeffort.mdx) | :heavy_minus_sign:                                                                     | Reasoning effort level for the advisor call.                                           |
+| `max_tokens`                                                                           | *Optional[int]*                                                                        | :heavy_minus_sign:                                                                     | Maximum number of reasoning tokens the advisor may use.                                |

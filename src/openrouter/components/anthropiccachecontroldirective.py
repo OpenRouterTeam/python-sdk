@@ -2,11 +2,10 @@
 
 from __future__ import annotations
 from .anthropiccachecontrolttl import AnthropicCacheControlTTL
-from openrouter.types import BaseModel
-from openrouter.utils import validate_open_enum
-from pydantic.functional_validators import PlainValidator
+from openrouter.types import BaseModel, UNSET_SENTINEL
+from pydantic import model_serializer
 from typing import Literal, Optional
-from typing_extensions import Annotated, NotRequired, TypedDict
+from typing_extensions import NotRequired, TypedDict
 
 
 AnthropicCacheControlDirectiveType = Literal["ephemeral",]
@@ -24,6 +23,20 @@ class AnthropicCacheControlDirective(BaseModel):
 
     type: AnthropicCacheControlDirectiveType
 
-    ttl: Annotated[
-        Optional[AnthropicCacheControlTTL], PlainValidator(validate_open_enum(False))
-    ] = None
+    ttl: Optional[AnthropicCacheControlTTL] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["ttl"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

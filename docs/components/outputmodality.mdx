@@ -1,0 +1,26 @@
+---
+title: "OutputModality"
+---
+
+## Example Usage
+
+```python
+from openrouter.components import OutputModality
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
+value: OutputModality = "text"
+```
+
+
+## Values
+
+This is an open enum. Unrecognized values will not fail type checks.
+
+- `"text"`
+- `"image"`
+- `"embeddings"`
+- `"audio"`
+- `"video"`
+- `"rerank"`
+- `"speech"`
+- `"transcription"`

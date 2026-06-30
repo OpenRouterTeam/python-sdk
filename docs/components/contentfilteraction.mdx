@@ -1,0 +1,22 @@
+---
+title: "ContentFilterAction"
+---
+
+Action taken when the pattern matches
+
+## Example Usage
+
+```python
+from openrouter.components import ContentFilterAction
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
+value: ContentFilterAction = "redact"
+```
+
+
+## Values
+
+This is an open enum. Unrecognized values will not fail type checks.
+
+- `"redact"`
+- `"block"`

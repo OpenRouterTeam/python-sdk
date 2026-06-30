@@ -7,7 +7,7 @@ from openrouter._hooks import HookContext
 from openrouter.types import OptionalNullable, UNSET
 from openrouter.utils import get_security_from_env
 from openrouter.utils.unmarshal_json_response import unmarshal_json_response
-from typing import Any, Awaitable, Dict, List, Mapping, Optional, Union
+from typing import Any, Awaitable, Dict, Iterable, List, Mapping, Optional, Union
 
 
 class Workspaces(BaseSDK):
@@ -105,24 +105,26 @@ class Workspaces(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Workspaces"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["401", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
         def next_func() -> Optional[operations.ListWorkspacesResponse]:
             body = utils.unmarshal_json(http_res.text, Union[Dict[Any, Any], List[Any]])
 
-            offset = request.offset if not request.offset is None else 0
+            offset = request.offset if isinstance(request.offset, int) else 0
 
             if not http_res.text:
                 return None
             results = JSONPath("$.data").parse(body)
             if len(results) == 0 or len(results[0]) == 0:
                 return None
-            limit = request.limit if not request.limit is None else 0
-            if len(results[0]) < limit:
+            limit_ = request.limit if isinstance(request.limit, int) else 0
+            if len(results[0]) < limit_:
                 return None
             next_offset = offset + len(results[0])
 
@@ -133,6 +135,9 @@ class Workspaces(BaseSDK):
                 offset=next_offset,
                 limit=limit,
                 retries=retries,
+                server_url=server_url,
+                timeout_ms=timeout_ms,
+                http_headers=http_headers,
             )
 
         response_data: Any = None
@@ -258,9 +263,11 @@ class Workspaces(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Workspaces"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["401", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -270,15 +277,15 @@ class Workspaces(BaseSDK):
             async def empty_result():
                 return None
 
-            offset = request.offset if not request.offset is None else 0
+            offset = request.offset if isinstance(request.offset, int) else 0
 
             if not http_res.text:
                 return empty_result()
             results = JSONPath("$.data").parse(body)
             if len(results) == 0 or len(results[0]) == 0:
                 return empty_result()
-            limit = request.limit if not request.limit is None else 0
-            if len(results[0]) < limit:
+            limit_ = request.limit if isinstance(request.limit, int) else 0
+            if len(results[0]) < limit_:
                 return empty_result()
             next_offset = offset + len(results[0])
 
@@ -289,6 +296,9 @@ class Workspaces(BaseSDK):
                 offset=next_offset,
                 limit=limit,
                 retries=retries,
+                server_url=server_url,
+                timeout_ms=timeout_ms,
+                http_headers=http_headers,
             )
 
         response_data: Any = None
@@ -334,7 +344,7 @@ class Workspaces(BaseSDK):
         default_provider_sort: OptionalNullable[str] = UNSET,
         default_text_model: OptionalNullable[str] = UNSET,
         description: OptionalNullable[str] = UNSET,
-        io_logging_api_key_ids: OptionalNullable[List[int]] = UNSET,
+        io_logging_api_key_ids: OptionalNullable[Iterable[int]] = UNSET,
         io_logging_sampling_rate: Optional[float] = None,
         is_data_discount_logging_enabled: Optional[bool] = None,
         is_observability_broadcast_enabled: Optional[bool] = None,
@@ -390,7 +400,9 @@ class Workspaces(BaseSDK):
                 default_provider_sort=default_provider_sort,
                 default_text_model=default_text_model,
                 description=description,
-                io_logging_api_key_ids=io_logging_api_key_ids,
+                io_logging_api_key_ids=utils.unmarshal(
+                    io_logging_api_key_ids, OptionalNullable[List[int]]
+                ),
                 io_logging_sampling_rate=io_logging_sampling_rate,
                 is_data_discount_logging_enabled=is_data_discount_logging_enabled,
                 is_observability_broadcast_enabled=is_observability_broadcast_enabled,
@@ -450,9 +462,11 @@ class Workspaces(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Workspaces"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -504,7 +518,7 @@ class Workspaces(BaseSDK):
         default_provider_sort: OptionalNullable[str] = UNSET,
         default_text_model: OptionalNullable[str] = UNSET,
         description: OptionalNullable[str] = UNSET,
-        io_logging_api_key_ids: OptionalNullable[List[int]] = UNSET,
+        io_logging_api_key_ids: OptionalNullable[Iterable[int]] = UNSET,
         io_logging_sampling_rate: Optional[float] = None,
         is_data_discount_logging_enabled: Optional[bool] = None,
         is_observability_broadcast_enabled: Optional[bool] = None,
@@ -560,7 +574,9 @@ class Workspaces(BaseSDK):
                 default_provider_sort=default_provider_sort,
                 default_text_model=default_text_model,
                 description=description,
-                io_logging_api_key_ids=io_logging_api_key_ids,
+                io_logging_api_key_ids=utils.unmarshal(
+                    io_logging_api_key_ids, OptionalNullable[List[int]]
+                ),
                 io_logging_sampling_rate=io_logging_sampling_rate,
                 is_data_discount_logging_enabled=is_data_discount_logging_enabled,
                 is_observability_broadcast_enabled=is_observability_broadcast_enabled,
@@ -620,9 +636,11 @@ class Workspaces(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Workspaces"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -751,9 +769,11 @@ class Workspaces(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Workspaces"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "404", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -887,9 +907,11 @@ class Workspaces(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Workspaces"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "404", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -1023,9 +1045,11 @@ class Workspaces(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Workspaces"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["401", "404", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -1149,9 +1173,11 @@ class Workspaces(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Workspaces"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["401", "404", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -1197,7 +1223,7 @@ class Workspaces(BaseSDK):
         default_provider_sort: OptionalNullable[str] = UNSET,
         default_text_model: OptionalNullable[str] = UNSET,
         description: OptionalNullable[str] = UNSET,
-        io_logging_api_key_ids: OptionalNullable[List[int]] = UNSET,
+        io_logging_api_key_ids: OptionalNullable[Iterable[int]] = UNSET,
         io_logging_sampling_rate: Optional[float] = None,
         is_data_discount_logging_enabled: Optional[bool] = None,
         is_observability_broadcast_enabled: Optional[bool] = None,
@@ -1257,7 +1283,9 @@ class Workspaces(BaseSDK):
                 default_provider_sort=default_provider_sort,
                 default_text_model=default_text_model,
                 description=description,
-                io_logging_api_key_ids=io_logging_api_key_ids,
+                io_logging_api_key_ids=utils.unmarshal(
+                    io_logging_api_key_ids, OptionalNullable[List[int]]
+                ),
                 io_logging_sampling_rate=io_logging_sampling_rate,
                 is_data_discount_logging_enabled=is_data_discount_logging_enabled,
                 is_observability_broadcast_enabled=is_observability_broadcast_enabled,
@@ -1317,9 +1345,11 @@ class Workspaces(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Workspaces"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "404", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -1375,7 +1405,7 @@ class Workspaces(BaseSDK):
         default_provider_sort: OptionalNullable[str] = UNSET,
         default_text_model: OptionalNullable[str] = UNSET,
         description: OptionalNullable[str] = UNSET,
-        io_logging_api_key_ids: OptionalNullable[List[int]] = UNSET,
+        io_logging_api_key_ids: OptionalNullable[Iterable[int]] = UNSET,
         io_logging_sampling_rate: Optional[float] = None,
         is_data_discount_logging_enabled: Optional[bool] = None,
         is_observability_broadcast_enabled: Optional[bool] = None,
@@ -1435,7 +1465,9 @@ class Workspaces(BaseSDK):
                 default_provider_sort=default_provider_sort,
                 default_text_model=default_text_model,
                 description=description,
-                io_logging_api_key_ids=io_logging_api_key_ids,
+                io_logging_api_key_ids=utils.unmarshal(
+                    io_logging_api_key_ids, OptionalNullable[List[int]]
+                ),
                 io_logging_sampling_rate=io_logging_sampling_rate,
                 is_data_discount_logging_enabled=is_data_discount_logging_enabled,
                 is_observability_broadcast_enabled=is_observability_broadcast_enabled,
@@ -1495,9 +1527,11 @@ class Workspaces(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Workspaces"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "404", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -1631,9 +1665,11 @@ class Workspaces(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Workspaces"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["401", "404", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -1759,9 +1795,11 @@ class Workspaces(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Workspaces"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["401", "404", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -1890,9 +1928,11 @@ class Workspaces(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Workspaces"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["401", "404", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -2021,9 +2061,11 @@ class Workspaces(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Workspaces"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["401", "404", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -2164,9 +2206,11 @@ class Workspaces(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Workspaces"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "404", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -2312,9 +2356,11 @@ class Workspaces(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Workspaces"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "404", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -2360,7 +2406,7 @@ class Workspaces(BaseSDK):
         self,
         *,
         id: str,
-        user_ids: List[str],
+        user_ids: Iterable[str],
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
@@ -2403,7 +2449,7 @@ class Workspaces(BaseSDK):
             x_open_router_categories=x_open_router_categories,
             id=id,
             bulk_add_workspace_members_request=components.BulkAddWorkspaceMembersRequest(
-                user_ids=user_ids,
+                user_ids=utils.unmarshal(user_ids, List[str]),
             ),
         )
 
@@ -2457,9 +2503,11 @@ class Workspaces(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Workspaces"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "404", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -2510,7 +2558,7 @@ class Workspaces(BaseSDK):
         self,
         *,
         id: str,
-        user_ids: List[str],
+        user_ids: Iterable[str],
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
@@ -2553,7 +2601,7 @@ class Workspaces(BaseSDK):
             x_open_router_categories=x_open_router_categories,
             id=id,
             bulk_add_workspace_members_request=components.BulkAddWorkspaceMembersRequest(
-                user_ids=user_ids,
+                user_ids=utils.unmarshal(user_ids, List[str]),
             ),
         )
 
@@ -2607,9 +2655,11 @@ class Workspaces(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Workspaces"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "404", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -2660,7 +2710,7 @@ class Workspaces(BaseSDK):
         self,
         *,
         id: str,
-        user_ids: List[str],
+        user_ids: Iterable[str],
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
@@ -2703,7 +2753,7 @@ class Workspaces(BaseSDK):
             x_open_router_categories=x_open_router_categories,
             id=id,
             bulk_remove_workspace_members_request=components.BulkRemoveWorkspaceMembersRequest(
-                user_ids=user_ids,
+                user_ids=utils.unmarshal(user_ids, List[str]),
             ),
         )
 
@@ -2757,9 +2807,11 @@ class Workspaces(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Workspaces"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "404", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -2810,7 +2862,7 @@ class Workspaces(BaseSDK):
         self,
         *,
         id: str,
-        user_ids: List[str],
+        user_ids: Iterable[str],
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
@@ -2853,7 +2905,7 @@ class Workspaces(BaseSDK):
             x_open_router_categories=x_open_router_categories,
             id=id,
             bulk_remove_workspace_members_request=components.BulkRemoveWorkspaceMembersRequest(
-                user_ids=user_ids,
+                user_ids=utils.unmarshal(user_ids, List[str]),
             ),
         )
 
@@ -2907,9 +2959,11 @@ class Workspaces(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Workspaces"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "404", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 

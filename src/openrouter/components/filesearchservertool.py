@@ -10,11 +10,9 @@ from openrouter.types import (
     UNSET_SENTINEL,
     UnrecognizedStr,
 )
-from openrouter.utils import validate_open_enum
 from pydantic import model_serializer
-from pydantic.functional_validators import PlainValidator
 from typing import Any, List, Literal, Optional, Union
-from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
+from typing_extensions import NotRequired, TypeAliasType, TypedDict
 
 
 FiltersType = Union[
@@ -61,7 +59,7 @@ class FiltersTypedDict(TypedDict):
 class Filters(BaseModel):
     key: str
 
-    type: Annotated[FiltersType, PlainValidator(validate_open_enum(False))]
+    type: FiltersType
 
     value: FileSearchServerToolValue2
 
@@ -89,11 +87,25 @@ class RankingOptionsTypedDict(TypedDict):
 
 
 class RankingOptions(BaseModel):
-    ranker: Annotated[Optional[Ranker], PlainValidator(validate_open_enum(False))] = (
-        None
-    )
+    ranker: Optional[Ranker] = None
 
     score_threshold: Optional[float] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["ranker", "score_threshold"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 TypeFileSearch = Literal["file_search",]
@@ -124,30 +136,25 @@ class FileSearchServerTool(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["filters", "max_num_results", "ranking_options"]
-        nullable_fields = ["filters"]
-        null_default_fields = []
-
+        optional_fields = set(["filters", "max_num_results", "ranking_options"])
+        nullable_fields = set(["filters"])
         serialized = handler(self)
-
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
-            serialized.pop(k, None)
+            val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
 
         return m

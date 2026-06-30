@@ -10,10 +10,12 @@ from .unifiedbenchmarksdaitem import (
     UnifiedBenchmarksDAItemTypedDict,
 )
 from .unifiedbenchmarksmeta import UnifiedBenchmarksMeta, UnifiedBenchmarksMetaTypedDict
+from functools import partial
 from openrouter.types import BaseModel
-from openrouter.utils import get_discriminator
-from pydantic import Discriminator, Tag
-from typing import List, Union
+from openrouter.utils.unions import parse_open_union
+from pydantic import ConfigDict
+from pydantic.functional_validators import BeforeValidator
+from typing import Any, List, Literal, Union
 from typing_extensions import Annotated, TypeAliasType, TypedDict
 
 
@@ -23,12 +25,37 @@ UnifiedBenchmarksResponseDataTypedDict = TypeAliasType(
 )
 
 
+class UnknownUnifiedBenchmarksResponseData(BaseModel):
+    r"""A UnifiedBenchmarksResponseData variant the SDK doesn't recognize. Preserves the raw payload."""
+
+    source: Literal["UNKNOWN"] = "UNKNOWN"
+    raw: Any
+    is_unknown: Literal[True] = True
+
+    model_config = ConfigDict(frozen=True)
+
+
+_UNIFIED_BENCHMARKS_RESPONSE_DATA_VARIANTS: dict[str, Any] = {
+    "artificial-analysis": UnifiedBenchmarksAAItem,
+    "design-arena": UnifiedBenchmarksDAItem,
+}
+
+
 UnifiedBenchmarksResponseData = Annotated[
     Union[
-        Annotated[UnifiedBenchmarksAAItem, Tag("artificial-analysis")],
-        Annotated[UnifiedBenchmarksDAItem, Tag("design-arena")],
+        UnifiedBenchmarksAAItem,
+        UnifiedBenchmarksDAItem,
+        UnknownUnifiedBenchmarksResponseData,
     ],
-    Discriminator(lambda m: get_discriminator(m, "source", "source")),
+    BeforeValidator(
+        partial(
+            parse_open_union,
+            disc_key="source",
+            variants=_UNIFIED_BENCHMARKS_RESPONSE_DATA_VARIANTS,
+            unknown_cls=UnknownUnifiedBenchmarksResponseData,
+            union_name="UnifiedBenchmarksResponseData",
+        )
+    ),
 ]
 
 

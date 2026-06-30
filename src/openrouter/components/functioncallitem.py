@@ -2,11 +2,10 @@
 
 from __future__ import annotations
 from .toolcallstatus import ToolCallStatus
-from openrouter.types import BaseModel
-from openrouter.utils import validate_open_enum
-from pydantic.functional_validators import PlainValidator
+from openrouter.types import BaseModel, UNSET_SENTINEL
+from pydantic import model_serializer
 from typing import Literal, Optional
-from typing_extensions import Annotated, NotRequired, TypedDict
+from typing_extensions import NotRequired, TypedDict
 
 
 FunctionCallItemType = Literal["function_call",]
@@ -41,6 +40,20 @@ class FunctionCallItem(BaseModel):
     namespace: Optional[str] = None
     r"""Namespace qualifier for tools registered as part of a namespace tool group (e.g. an MCP server)"""
 
-    status: Annotated[
-        Optional[ToolCallStatus], PlainValidator(validate_open_enum(False))
-    ] = None
+    status: Optional[ToolCallStatus] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["namespace", "status"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

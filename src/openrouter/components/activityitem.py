@@ -64,3 +64,9 @@ class ActivityItem(BaseModel):
 
     usage: float
     r"""Total cost in USD (OpenRouter credits spent)"""
+
+
+try:
+    ActivityItem.model_rebuild()
+except NameError:
+    pass

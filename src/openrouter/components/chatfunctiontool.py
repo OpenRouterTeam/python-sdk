@@ -39,10 +39,9 @@ from openrouter.types import (
     UNSET,
     UNSET_SENTINEL,
 )
-from openrouter.utils import get_discriminator
-from pydantic import Discriminator, Tag, model_serializer
+from pydantic import model_serializer
 from typing import Any, Dict, Literal, Optional, Union
-from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
+from typing_extensions import NotRequired, TypeAliasType, TypedDict
 
 
 class ChatFunctionToolFunctionFunctionTypedDict(TypedDict):
@@ -75,31 +74,26 @@ class ChatFunctionToolFunctionFunction(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["description", "parameters", "strict"]
-        nullable_fields = ["strict"]
-        null_default_fields = []
-
+        optional_fields = set(["description", "parameters", "strict"])
+        nullable_fields = set(["strict"])
         serialized = handler(self)
-
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
-            serialized.pop(k, None)
+            val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
 
         return m
 
@@ -124,6 +118,22 @@ class ChatFunctionToolFunction(BaseModel):
     cache_control: Optional[ChatContentCacheControl] = None
     r"""Cache control for the content part"""
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["cache_control"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 ChatFunctionToolTypedDict = TypeAliasType(
     "ChatFunctionToolTypedDict",
@@ -143,26 +153,19 @@ ChatFunctionToolTypedDict = TypeAliasType(
 r"""Tool definition for function calling (regular function or OpenRouter built-in server tool)"""
 
 
-ChatFunctionTool = Annotated[
+ChatFunctionTool = TypeAliasType(
+    "ChatFunctionTool",
     Union[
-        Annotated[ChatFunctionToolFunction, Tag("function")],
-        Annotated[AdvisorServerToolOpenRouter, Tag("openrouter:advisor")],
-        Annotated[BashServerTool, Tag("openrouter:bash")],
-        Annotated[DatetimeServerTool, Tag("openrouter:datetime")],
-        Annotated[
-            ImageGenerationServerToolOpenRouter, Tag("openrouter:image_generation")
-        ],
-        Annotated[
-            ChatSearchModelsServerTool, Tag("openrouter:experimental__search_models")
-        ],
-        Annotated[SubagentServerToolOpenRouter, Tag("openrouter:subagent")],
-        Annotated[WebFetchServerTool, Tag("openrouter:web_fetch")],
-        Annotated[OpenRouterWebSearchServerTool, Tag("openrouter:web_search")],
-        Annotated[ChatWebSearchShorthand, Tag("web_search")],
-        Annotated[ChatWebSearchShorthand, Tag("web_search_preview")],
-        Annotated[ChatWebSearchShorthand, Tag("web_search_preview_2025_03_11")],
-        Annotated[ChatWebSearchShorthand, Tag("web_search_2025_08_26")],
+        AdvisorServerToolOpenRouter,
+        BashServerTool,
+        DatetimeServerTool,
+        ImageGenerationServerToolOpenRouter,
+        ChatSearchModelsServerTool,
+        SubagentServerToolOpenRouter,
+        WebFetchServerTool,
+        OpenRouterWebSearchServerTool,
+        ChatFunctionToolFunction,
+        ChatWebSearchShorthand,
     ],
-    Discriminator(lambda m: get_discriminator(m, "type", "type")),
-]
+)
 r"""Tool definition for function calling (regular function or OpenRouter built-in server tool)"""

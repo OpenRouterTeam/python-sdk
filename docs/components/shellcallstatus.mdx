@@ -1,0 +1,23 @@
+---
+title: "ShellCallStatus"
+---
+
+Status of a shell call or its output.
+
+## Example Usage
+
+```python
+from openrouter.components import ShellCallStatus
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
+value: ShellCallStatus = "in_progress"
+```
+
+
+## Values
+
+This is an open enum. Unrecognized values will not fail type checks.
+
+- `"in_progress"`
+- `"completed"`
+- `"incomplete"`

@@ -1,0 +1,24 @@
+---
+title: "ProviderSort"
+---
+
+The provider sorting strategy (price, throughput, latency)
+
+## Example Usage
+
+```python
+from openrouter.components import ProviderSort
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
+value: ProviderSort = "price"
+```
+
+
+## Values
+
+This is an open enum. Unrecognized values will not fail type checks.
+
+- `"price"`
+- `"throughput"`
+- `"latency"`
+- `"exacto"`

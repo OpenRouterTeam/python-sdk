@@ -9,7 +9,8 @@ from .anthropictextblockparam import (
     AnthropicTextBlockParam,
     AnthropicTextBlockParamTypedDict,
 )
-from openrouter.types import BaseModel
+from openrouter.types import BaseModel, UNSET_SENTINEL
+from pydantic import model_serializer
 from typing import List, Literal, Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -20,6 +21,22 @@ class AnthropicSearchResultBlockParamCitationsTypedDict(TypedDict):
 
 class AnthropicSearchResultBlockParamCitations(BaseModel):
     enabled: Optional[bool] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["enabled"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 AnthropicSearchResultBlockParamType = Literal["search_result",]
@@ -48,3 +65,19 @@ class AnthropicSearchResultBlockParam(BaseModel):
     r"""Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. Currently supported for Anthropic Claude models."""
 
     citations: Optional[AnthropicSearchResultBlockParamCitations] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["cache_control", "citations"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

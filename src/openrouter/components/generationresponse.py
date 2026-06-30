@@ -10,11 +10,9 @@ from openrouter.types import (
     UNSET_SENTINEL,
     UnrecognizedStr,
 )
-from openrouter.utils import validate_open_enum
 from pydantic import model_serializer
-from pydantic.functional_validators import PlainValidator
 from typing import List, Literal, Union
-from typing_extensions import Annotated, NotRequired, TypedDict
+from typing_extensions import NotRequired, TypedDict
 
 
 APIType = Union[
@@ -138,7 +136,7 @@ class GenerationResponseDataTypedDict(TypedDict):
 class GenerationResponseData(BaseModel):
     r"""Generation data"""
 
-    api_type: Annotated[Nullable[APIType], PlainValidator(validate_open_enum(False))]
+    api_type: Nullable[APIType]
     r"""Type of API used for the generation"""
 
     app_id: Nullable[int]
@@ -153,7 +151,7 @@ class GenerationResponseData(BaseModel):
     created_at: str
     r"""ISO 8601 timestamp of when the generation was created"""
 
-    data_region: Annotated[DataRegion, PlainValidator(validate_open_enum(False))]
+    data_region: DataRegion
     r"""The data region this generation was routed through. 'europe' for EU-routed requests, 'global' otherwise."""
 
     external_user: Nullable[str]
@@ -272,68 +270,65 @@ class GenerationResponseData(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["request_id", "response_cache_source_id", "session_id"]
-        nullable_fields = [
-            "api_type",
-            "app_id",
-            "cache_discount",
-            "cancelled",
-            "external_user",
-            "finish_reason",
-            "generation_time",
-            "http_referer",
-            "latency",
-            "moderation_latency",
-            "native_finish_reason",
-            "native_tokens_cached",
-            "native_tokens_completion",
-            "native_tokens_completion_images",
-            "native_tokens_prompt",
-            "native_tokens_reasoning",
-            "num_fetches",
-            "num_input_audio_prompt",
-            "num_media_completion",
-            "num_media_prompt",
-            "num_search_results",
-            "preset_id",
-            "provider_name",
-            "provider_responses",
-            "request_id",
-            "response_cache_source_id",
-            "router",
-            "service_tier",
-            "session_id",
-            "streamed",
-            "tokens_completion",
-            "tokens_prompt",
-            "upstream_id",
-            "upstream_inference_cost",
-            "user_agent",
-            "web_search_engine",
-        ]
-        null_default_fields = []
-
+        optional_fields = set(["request_id", "response_cache_source_id", "session_id"])
+        nullable_fields = set(
+            [
+                "api_type",
+                "app_id",
+                "cache_discount",
+                "cancelled",
+                "external_user",
+                "finish_reason",
+                "generation_time",
+                "http_referer",
+                "latency",
+                "moderation_latency",
+                "native_finish_reason",
+                "native_tokens_cached",
+                "native_tokens_completion",
+                "native_tokens_completion_images",
+                "native_tokens_prompt",
+                "native_tokens_reasoning",
+                "num_fetches",
+                "num_input_audio_prompt",
+                "num_media_completion",
+                "num_media_prompt",
+                "num_search_results",
+                "preset_id",
+                "provider_name",
+                "provider_responses",
+                "request_id",
+                "response_cache_source_id",
+                "router",
+                "service_tier",
+                "session_id",
+                "streamed",
+                "tokens_completion",
+                "tokens_prompt",
+                "upstream_id",
+                "upstream_inference_cost",
+                "user_agent",
+                "web_search_engine",
+            ]
+        )
         serialized = handler(self)
-
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
-            serialized.pop(k, None)
+            val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
 
         return m
 

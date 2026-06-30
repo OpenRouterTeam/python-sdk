@@ -7,7 +7,7 @@ from openrouter._hooks import HookContext
 from openrouter.types import Nullable, OptionalNullable, UNSET
 from openrouter.utils import get_security_from_env
 from openrouter.utils.unmarshal_json_response import unmarshal_json_response
-from typing import Any, Awaitable, Dict, List, Mapping, Optional, Union
+from typing import Any, Awaitable, Dict, Iterable, List, Mapping, Optional, Union
 
 
 class Observability(BaseSDK):
@@ -108,24 +108,26 @@ class Observability(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Observability"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["401", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
         def next_func() -> Optional[operations.ListObservabilityDestinationsResponse]:
             body = utils.unmarshal_json(http_res.text, Union[Dict[Any, Any], List[Any]])
 
-            offset = request.offset if not request.offset is None else 0
+            offset = request.offset if isinstance(request.offset, int) else 0
 
             if not http_res.text:
                 return None
             results = JSONPath("$.data").parse(body)
             if len(results) == 0 or len(results[0]) == 0:
                 return None
-            limit = request.limit if not request.limit is None else 0
-            if len(results[0]) < limit:
+            limit_ = request.limit if isinstance(request.limit, int) else 0
+            if len(results[0]) < limit_:
                 return None
             next_offset = offset + len(results[0])
 
@@ -137,6 +139,9 @@ class Observability(BaseSDK):
                 limit=limit,
                 workspace_id=workspace_id,
                 retries=retries,
+                server_url=server_url,
+                timeout_ms=timeout_ms,
+                http_headers=http_headers,
             )
 
         response_data: Any = None
@@ -265,9 +270,11 @@ class Observability(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Observability"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["401", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -279,15 +286,15 @@ class Observability(BaseSDK):
             async def empty_result():
                 return None
 
-            offset = request.offset if not request.offset is None else 0
+            offset = request.offset if isinstance(request.offset, int) else 0
 
             if not http_res.text:
                 return empty_result()
             results = JSONPath("$.data").parse(body)
             if len(results) == 0 or len(results[0]) == 0:
                 return empty_result()
-            limit = request.limit if not request.limit is None else 0
-            if len(results[0]) < limit:
+            limit_ = request.limit if isinstance(request.limit, int) else 0
+            if len(results[0]) < limit_:
                 return empty_result()
             next_offset = offset + len(results[0])
 
@@ -299,6 +306,9 @@ class Observability(BaseSDK):
                 limit=limit,
                 workspace_id=workspace_id,
                 retries=retries,
+                server_url=server_url,
+                timeout_ms=timeout_ms,
+                http_headers=http_headers,
             )
 
         response_data: Any = None
@@ -335,13 +345,13 @@ class Observability(BaseSDK):
     def create(
         self,
         *,
-        config: Dict[str, Nullable[Any]],
+        config: Mapping[str, Nullable[Any]],
         name: str,
         type_: components.CreateObservabilityDestinationRequestType,
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
-        api_key_hashes: OptionalNullable[List[str]] = UNSET,
+        api_key_hashes: OptionalNullable[Iterable[str]] = UNSET,
         enabled: Optional[bool] = True,
         filter_rules: OptionalNullable[
             Union[
@@ -397,8 +407,10 @@ class Observability(BaseSDK):
             x_open_router_title=x_open_router_title,
             x_open_router_categories=x_open_router_categories,
             create_observability_destination_request=components.CreateObservabilityDestinationRequest(
-                api_key_hashes=api_key_hashes,
-                config=config,
+                api_key_hashes=utils.unmarshal(
+                    api_key_hashes, OptionalNullable[List[str]]
+                ),
+                config=utils.unmarshal(config, Dict[str, Nullable[Any]]),
                 enabled=enabled,
                 filter_rules=utils.get_pydantic_model(
                     filter_rules,
@@ -462,9 +474,11 @@ class Observability(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Observability"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "409", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -514,13 +528,13 @@ class Observability(BaseSDK):
     async def create_async(
         self,
         *,
-        config: Dict[str, Nullable[Any]],
+        config: Mapping[str, Nullable[Any]],
         name: str,
         type_: components.CreateObservabilityDestinationRequestType,
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
-        api_key_hashes: OptionalNullable[List[str]] = UNSET,
+        api_key_hashes: OptionalNullable[Iterable[str]] = UNSET,
         enabled: Optional[bool] = True,
         filter_rules: OptionalNullable[
             Union[
@@ -576,8 +590,10 @@ class Observability(BaseSDK):
             x_open_router_title=x_open_router_title,
             x_open_router_categories=x_open_router_categories,
             create_observability_destination_request=components.CreateObservabilityDestinationRequest(
-                api_key_hashes=api_key_hashes,
-                config=config,
+                api_key_hashes=utils.unmarshal(
+                    api_key_hashes, OptionalNullable[List[str]]
+                ),
+                config=utils.unmarshal(config, Dict[str, Nullable[Any]]),
                 enabled=enabled,
                 filter_rules=utils.get_pydantic_model(
                     filter_rules,
@@ -641,9 +657,11 @@ class Observability(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Observability"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "409", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -779,9 +797,11 @@ class Observability(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Observability"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["401", "404", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -907,9 +927,11 @@ class Observability(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Observability"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["401", "404", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -1035,9 +1057,11 @@ class Observability(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Observability"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["401", "404", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -1163,9 +1187,11 @@ class Observability(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Observability"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["401", "404", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -1209,8 +1235,8 @@ class Observability(BaseSDK):
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
-        api_key_hashes: OptionalNullable[List[str]] = UNSET,
-        config: Optional[Dict[str, Nullable[Any]]] = None,
+        api_key_hashes: OptionalNullable[Iterable[str]] = UNSET,
+        config: Optional[Mapping[str, Nullable[Any]]] = None,
         enabled: Optional[bool] = None,
         filter_rules: OptionalNullable[
             Union[
@@ -1266,8 +1292,10 @@ class Observability(BaseSDK):
             x_open_router_categories=x_open_router_categories,
             id=id,
             update_observability_destination_request=components.UpdateObservabilityDestinationRequest(
-                api_key_hashes=api_key_hashes,
-                config=config,
+                api_key_hashes=utils.unmarshal(
+                    api_key_hashes, OptionalNullable[List[str]]
+                ),
+                config=utils.unmarshal(config, Optional[Dict[str, Nullable[Any]]]),
                 enabled=enabled,
                 filter_rules=utils.get_pydantic_model(
                     filter_rules,
@@ -1329,9 +1357,11 @@ class Observability(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Observability"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "404", "409", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -1385,8 +1415,8 @@ class Observability(BaseSDK):
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
-        api_key_hashes: OptionalNullable[List[str]] = UNSET,
-        config: Optional[Dict[str, Nullable[Any]]] = None,
+        api_key_hashes: OptionalNullable[Iterable[str]] = UNSET,
+        config: Optional[Mapping[str, Nullable[Any]]] = None,
         enabled: Optional[bool] = None,
         filter_rules: OptionalNullable[
             Union[
@@ -1442,8 +1472,10 @@ class Observability(BaseSDK):
             x_open_router_categories=x_open_router_categories,
             id=id,
             update_observability_destination_request=components.UpdateObservabilityDestinationRequest(
-                api_key_hashes=api_key_hashes,
-                config=config,
+                api_key_hashes=utils.unmarshal(
+                    api_key_hashes, OptionalNullable[List[str]]
+                ),
+                config=utils.unmarshal(config, Optional[Dict[str, Nullable[Any]]]),
                 enabled=enabled,
                 filter_rules=utils.get_pydantic_model(
                     filter_rules,
@@ -1505,9 +1537,11 @@ class Observability(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Observability"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "404", "409", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 

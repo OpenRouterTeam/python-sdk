@@ -14,11 +14,9 @@ from openrouter.types import (
     UNSET,
     UNSET_SENTINEL,
 )
-from openrouter.utils import validate_open_enum
 from pydantic import model_serializer
-from pydantic.functional_validators import PlainValidator
 from typing import List, Optional
-from typing_extensions import Annotated, NotRequired, TypedDict
+from typing_extensions import NotRequired, TypedDict
 
 
 class ImageGenerationUsageCompletionTokensDetailsTypedDict(TypedDict):
@@ -42,31 +40,26 @@ class ImageGenerationUsageCompletionTokensDetails(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["audio_tokens", "image_tokens", "reasoning_tokens"]
-        nullable_fields = ["audio_tokens", "image_tokens", "reasoning_tokens"]
-        null_default_fields = []
-
+        optional_fields = set(["audio_tokens", "image_tokens", "reasoning_tokens"])
+        nullable_fields = set(["audio_tokens", "image_tokens", "reasoning_tokens"])
         serialized = handler(self)
-
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
-            serialized.pop(k, None)
+            val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
 
         return m
 
@@ -106,43 +99,42 @@ class ImageGenerationUsagePromptTokensDetails(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = [
-            "audio_tokens",
-            "cache_write_tokens",
-            "cached_tokens",
-            "file_tokens",
-            "video_tokens",
-        ]
-        nullable_fields = [
-            "audio_tokens",
-            "cache_write_tokens",
-            "cached_tokens",
-            "file_tokens",
-            "video_tokens",
-        ]
-        null_default_fields = []
-
+        optional_fields = set(
+            [
+                "audio_tokens",
+                "cache_write_tokens",
+                "cached_tokens",
+                "file_tokens",
+                "video_tokens",
+            ]
+        )
+        nullable_fields = set(
+            [
+                "audio_tokens",
+                "cache_write_tokens",
+                "cached_tokens",
+                "file_tokens",
+                "video_tokens",
+            ]
+        )
         serialized = handler(self)
-
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
-            serialized.pop(k, None)
+            val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
 
         return m
 
@@ -172,39 +164,30 @@ class ServerToolUse(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = [
-            "tool_calls_executed",
-            "tool_calls_requested",
-            "web_search_requests",
-        ]
-        nullable_fields = [
-            "tool_calls_executed",
-            "tool_calls_requested",
-            "web_search_requests",
-        ]
-        null_default_fields = []
-
+        optional_fields = set(
+            ["tool_calls_executed", "tool_calls_requested", "web_search_requests"]
+        )
+        nullable_fields = set(
+            ["tool_calls_executed", "tool_calls_requested", "web_search_requests"]
+        )
         serialized = handler(self)
-
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
-            serialized.pop(k, None)
+            val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
 
         return m
 
@@ -277,55 +260,52 @@ class ImageGenerationUsage(BaseModel):
     service_tier: OptionalNullable[str] = UNSET
     r"""The service tier used by the upstream provider for this request"""
 
-    speed: Annotated[
-        OptionalNullable[AnthropicSpeed], PlainValidator(validate_open_enum(False))
-    ] = UNSET
+    speed: OptionalNullable[AnthropicSpeed] = UNSET
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = [
-            "completion_tokens_details",
-            "cost",
-            "cost_details",
-            "is_byok",
-            "iterations",
-            "prompt_tokens_details",
-            "server_tool_use",
-            "service_tier",
-            "speed",
-        ]
-        nullable_fields = [
-            "completion_tokens_details",
-            "cost",
-            "cost_details",
-            "iterations",
-            "prompt_tokens_details",
-            "server_tool_use",
-            "service_tier",
-            "speed",
-        ]
-        null_default_fields = []
-
+        optional_fields = set(
+            [
+                "completion_tokens_details",
+                "cost",
+                "cost_details",
+                "is_byok",
+                "iterations",
+                "prompt_tokens_details",
+                "server_tool_use",
+                "service_tier",
+                "speed",
+            ]
+        )
+        nullable_fields = set(
+            [
+                "completion_tokens_details",
+                "cost",
+                "cost_details",
+                "iterations",
+                "prompt_tokens_details",
+                "server_tool_use",
+                "service_tier",
+                "speed",
+            ]
+        )
         serialized = handler(self)
-
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
-            serialized.pop(k, None)
+            val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
 
         return m

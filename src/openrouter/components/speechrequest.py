@@ -2,11 +2,10 @@
 
 from __future__ import annotations
 from .provideroptions import ProviderOptions, ProviderOptionsTypedDict
-from openrouter.types import BaseModel, UnrecognizedStr
-from openrouter.utils import validate_open_enum
-from pydantic.functional_validators import PlainValidator
+from openrouter.types import BaseModel, UNSET_SENTINEL, UnrecognizedStr
+from pydantic import model_serializer
 from typing import Literal, Optional, Union
-from typing_extensions import Annotated, NotRequired, TypedDict
+from typing_extensions import NotRequired, TypedDict
 
 
 class SpeechRequestProviderTypedDict(TypedDict):
@@ -21,6 +20,22 @@ class SpeechRequestProvider(BaseModel):
 
     options: Optional[ProviderOptions] = None
     r"""Provider-specific options keyed by provider slug. Only options for the matched provider are forwarded; the rest are ignored. Unrecognized keys are silently dropped."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["options"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 ResponseFormatEnum = Union[
@@ -65,10 +80,24 @@ class SpeechRequest(BaseModel):
     provider: Optional[SpeechRequestProvider] = None
     r"""Provider-specific passthrough configuration"""
 
-    response_format: Annotated[
-        Optional[ResponseFormatEnum], PlainValidator(validate_open_enum(False))
-    ] = "pcm"
+    response_format: Optional[ResponseFormatEnum] = "pcm"
     r"""Audio output format"""
 
     speed: Optional[float] = None
     r"""Playback speed multiplier. Only used by models that support it (e.g. OpenAI TTS). Ignored by other providers."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["provider", "response_format", "speed"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 from .shellcallstatus import ShellCallStatus
+from functools import partial
 from openrouter.types import (
     BaseModel,
     Nullable,
@@ -9,10 +10,10 @@ from openrouter.types import (
     UNSET,
     UNSET_SENTINEL,
 )
-from openrouter.utils import get_discriminator, validate_open_enum
-from pydantic import Discriminator, Tag, model_serializer
-from pydantic.functional_validators import PlainValidator
-from typing import List, Literal, Union
+from openrouter.utils.unions import parse_open_union
+from pydantic import ConfigDict, model_serializer
+from pydantic.functional_validators import BeforeValidator
+from typing import Any, List, Literal, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
@@ -46,11 +47,33 @@ OutcomeTypedDict = TypeAliasType(
 )
 
 
+class UnknownOutcome(BaseModel):
+    r"""A Outcome variant the SDK doesn't recognize. Preserves the raw payload."""
+
+    type: Literal["UNKNOWN"] = "UNKNOWN"
+    raw: Any
+    is_unknown: Literal[True] = True
+
+    model_config = ConfigDict(frozen=True)
+
+
+_OUTCOME_VARIANTS: dict[str, Any] = {
+    "exit": OutcomeExit,
+    "timeout": OutcomeTimeout,
+}
+
+
 Outcome = Annotated[
-    Union[
-        Annotated[OutcomeExit, Tag("exit")], Annotated[OutcomeTimeout, Tag("timeout")]
-    ],
-    Discriminator(lambda m: get_discriminator(m, "type", "type")),
+    Union[OutcomeExit, OutcomeTimeout, UnknownOutcome],
+    BeforeValidator(
+        partial(
+            parse_open_union,
+            disc_key="type",
+            variants=_OUTCOME_VARIANTS,
+            unknown_cls=UnknownOutcome,
+            union_name="Outcome",
+        )
+    ),
 ]
 
 
@@ -92,7 +115,7 @@ class OutputShellCallOutputItem(BaseModel):
 
     output: List[OutputShellCallOutputItemOutput]
 
-    status: Annotated[ShellCallStatus, PlainValidator(validate_open_enum(False))]
+    status: ShellCallStatus
     r"""Status of a shell call or its output."""
 
     type: OutputShellCallOutputItemTypeShellCallOutput
@@ -101,30 +124,25 @@ class OutputShellCallOutputItem(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["max_output_length"]
-        nullable_fields = ["max_output_length"]
-        null_default_fields = []
-
+        optional_fields = set(["max_output_length"])
+        nullable_fields = set(["max_output_length"])
         serialized = handler(self)
-
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
-            serialized.pop(k, None)
+            val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
 
         return m

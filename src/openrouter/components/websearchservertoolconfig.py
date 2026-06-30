@@ -7,11 +7,10 @@ from .websearchuserlocationservertool import (
     WebSearchUserLocationServerTool,
     WebSearchUserLocationServerToolTypedDict,
 )
-from openrouter.types import BaseModel
-from openrouter.utils import validate_open_enum
-from pydantic.functional_validators import PlainValidator
+from openrouter.types import BaseModel, UNSET_SENTINEL
+from pydantic import model_serializer
 from typing import List, Optional
-from typing_extensions import Annotated, NotRequired, TypedDict
+from typing_extensions import NotRequired, TypedDict
 
 
 class WebSearchServerToolConfigTypedDict(TypedDict):
@@ -41,9 +40,7 @@ class WebSearchServerToolConfig(BaseModel):
     allowed_domains: Optional[List[str]] = None
     r"""Limit search results to these domains. Supported by Exa, Firecrawl, Parallel, Perplexity, and most native providers (Anthropic, OpenAI, xAI). Cannot be used with excluded_domains."""
 
-    engine: Annotated[
-        Optional[WebSearchEngineEnum], PlainValidator(validate_open_enum(False))
-    ] = None
+    engine: Optional[WebSearchEngineEnum] = None
     r"""Which search engine to use. \"auto\" (default) uses native if the provider supports it, otherwise Exa. \"native\" forces the provider's built-in search. \"exa\" forces the Exa search API. \"firecrawl\" uses Firecrawl (requires BYOK). \"parallel\" uses the Parallel search API. \"perplexity\" uses the Perplexity Search API (raw ranked results)."""
 
     excluded_domains: Optional[List[str]] = None
@@ -58,10 +55,35 @@ class WebSearchServerToolConfig(BaseModel):
     max_total_results: Optional[int] = None
     r"""Maximum total number of search results across all search calls in a single request. Once this limit is reached, the tool will stop returning new results. Useful for controlling cost and context size in agentic loops. Defaults to 50 when not specified."""
 
-    search_context_size: Annotated[
-        Optional[SearchQualityLevel], PlainValidator(validate_open_enum(False))
-    ] = None
+    search_context_size: Optional[SearchQualityLevel] = None
     r"""How much context to retrieve per result. Applies to Exa, Parallel, and Perplexity engines; ignored with native provider search and Firecrawl. For Exa, pins a fixed per-result character cap (low=5,000, medium=15,000, high=30,000); when omitted, Exa picks an adaptive size per query and document (typically ~2,000–4,000 characters per result). For Parallel, controls the total characters across all results; when omitted, Parallel uses its own default size. For Perplexity, maps directly to the Search API's native search_context_size parameter. Overridden by `max_characters` when both are set."""
 
     user_location: Optional[WebSearchUserLocationServerTool] = None
     r"""Approximate user location for location-biased results."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "allowed_domains",
+                "engine",
+                "excluded_domains",
+                "max_characters",
+                "max_results",
+                "max_total_results",
+                "search_context_size",
+                "user_location",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

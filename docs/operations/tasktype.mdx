@@ -1,0 +1,23 @@
+---
+title: "TaskType"
+---
+
+Filter results by task type. For Artificial Analysis, maps to the corresponding index. For Design Arena, maps to the matching category.
+
+## Example Usage
+
+```python
+from openrouter.operations import TaskType
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
+value: TaskType = "coding"
+```
+
+
+## Values
+
+This is an open enum. Unrecognized values will not fail type checks.
+
+- `"coding"`
+- `"intelligence"`
+- `"agentic"`

@@ -13,10 +13,12 @@ from .imagegenstreamerrorevent import (
     ImageGenStreamErrorEvent,
     ImageGenStreamErrorEventTypedDict,
 )
+from functools import partial
 from openrouter.types import BaseModel
-from openrouter.utils import get_discriminator
-from pydantic import Discriminator, Tag
-from typing import Union
+from openrouter.utils.unions import parse_open_union
+from pydantic import ConfigDict
+from pydantic.functional_validators import BeforeValidator
+from typing import Any, Literal, Union
 from typing_extensions import Annotated, TypeAliasType, TypedDict
 
 
@@ -30,13 +32,39 @@ ImageStreamingResponseDataTypedDict = TypeAliasType(
 )
 
 
+class UnknownImageStreamingResponseData(BaseModel):
+    r"""A ImageStreamingResponseData variant the SDK doesn't recognize. Preserves the raw payload."""
+
+    type: Literal["UNKNOWN"] = "UNKNOWN"
+    raw: Any
+    is_unknown: Literal[True] = True
+
+    model_config = ConfigDict(frozen=True)
+
+
+_IMAGE_STREAMING_RESPONSE_DATA_VARIANTS: dict[str, Any] = {
+    "image_generation.partial_image": ImageGenPartialImageEvent,
+    "image_generation.completed": ImageGenCompletedEvent,
+    "error": ImageGenStreamErrorEvent,
+}
+
+
 ImageStreamingResponseData = Annotated[
     Union[
-        Annotated[ImageGenPartialImageEvent, Tag("image_generation.partial_image")],
-        Annotated[ImageGenCompletedEvent, Tag("image_generation.completed")],
-        Annotated[ImageGenStreamErrorEvent, Tag("error")],
+        ImageGenPartialImageEvent,
+        ImageGenCompletedEvent,
+        ImageGenStreamErrorEvent,
+        UnknownImageStreamingResponseData,
     ],
-    Discriminator(lambda m: get_discriminator(m, "type", "type")),
+    BeforeValidator(
+        partial(
+            parse_open_union,
+            disc_key="type",
+            variants=_IMAGE_STREAMING_RESPONSE_DATA_VARIANTS,
+            unknown_cls=UnknownImageStreamingResponseData,
+            union_name="ImageStreamingResponseData",
+        )
+    ),
 ]
 
 

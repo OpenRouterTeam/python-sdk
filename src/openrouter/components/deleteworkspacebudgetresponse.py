@@ -20,3 +20,9 @@ class DeleteWorkspaceBudgetResponse(BaseModel):
         pydantic.Field(alias="deleted"),
     ] = True
     r"""Confirmation that the budget was deleted (or did not exist)"""
+
+
+try:
+    DeleteWorkspaceBudgetResponse.model_rebuild()
+except NameError:
+    pass

@@ -1,0 +1,222 @@
+---
+title: "VideoGeneration"
+description: "Video Generation endpoints"
+---
+
+## Overview
+
+Video Generation endpoints
+
+### Available Operations
+
+* [generate](#generate) - Submit a video generation request
+* [get_generation](#get_generation) - Poll video generation status
+* [get_video_content](#get_video_content) - Download generated video content
+* [list_videos_models](#list_videos_models) - List all video generation models
+
+## generate
+
+Submits a video generation request and returns a polling URL to check status
+
+### Example Usage
+
+```python
+from openrouter import OpenRouter
+import os
+
+
+with OpenRouter(
+    http_referer="<value>",
+    x_open_router_title="<value>",
+    x_open_router_categories="<value>",
+    api_key=os.getenv("OPENROUTER_API_KEY", ""),
+) as open_router:
+
+    res = open_router.video_generation.generate(model="google/veo-3.1", prompt="A serene mountain landscape at sunset", aspect_ratio="16:9", duration=8, resolution="720p")
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                                                                                                       | Type                                                                                                                                                                                                                                                            | Required                                                                                                                                                                                                                                                        | Description                                                                                                                                                                                                                                                     | Example                                                                                                                                                                                                                                                         |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `model`                                                                                                                                                                                                                                                         | *str*                                                                                                                                                                                                                                                           | :heavy_check_mark:                                                                                                                                                                                                                                              | N/A                                                                                                                                                                                                                                                             |                                                                                                                                                                                                                                                                 |
+| `prompt`                                                                                                                                                                                                                                                        | *str*                                                                                                                                                                                                                                                           | :heavy_check_mark:                                                                                                                                                                                                                                              | N/A                                                                                                                                                                                                                                                             |                                                                                                                                                                                                                                                                 |
+| `http_referer`                                                                                                                                                                                                                                                  | *Optional[str]*                                                                                                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                                                                                                              | The app identifier should be your app's URL and is used as the primary identifier for rankings.<br/>This is used to track API usage per application.<br/>                                                                                                       |                                                                                                                                                                                                                                                                 |
+| `x_open_router_title`                                                                                                                                                                                                                                           | *Optional[str]*                                                                                                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                                                                                                              | The app display name allows you to customize how your app appears in OpenRouter's dashboard.<br/>                                                                                                                                                               |                                                                                                                                                                                                                                                                 |
+| `x_open_router_categories`                                                                                                                                                                                                                                      | *Optional[str]*                                                                                                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                                                                                                              | Comma-separated list of app categories (e.g. "cli-agent,cloud-agent"). Used for marketplace rankings.<br/>                                                                                                                                                      |                                                                                                                                                                                                                                                                 |
+| `aspect_ratio`                                                                                                                                                                                                                                                  | [Optional[components.VideoGenerationRequestAspectRatio]](../../components/videogenerationrequestaspectratio.mdx)                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                                                                                                              | Aspect ratio of the generated video                                                                                                                                                                                                                             | 16:9                                                                                                                                                                                                                                                            |
+| `callback_url`                                                                                                                                                                                                                                                  | *Optional[str]*                                                                                                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                                                                                                              | URL to receive a webhook notification when the video generation job completes. Overrides the workspace-level default callback URL if set. Must be HTTPS.                                                                                                        | https://example.com/webhook                                                                                                                                                                                                                                     |
+| `duration`                                                                                                                                                                                                                                                      | *Optional[int]*                                                                                                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                                                                                                              | Duration of the generated video in seconds                                                                                                                                                                                                                      | 8                                                                                                                                                                                                                                                               |
+| `frame_images`                                                                                                                                                                                                                                                  | List[[components.FrameImage](../../components/frameimage.mdx)]                                                                                                                                                                                                   | :heavy_minus_sign:                                                                                                                                                                                                                                              | Images to use as the first and/or last frame of the generated video. Each image must specify a frame_type of first_frame or last_frame.                                                                                                                         |                                                                                                                                                                                                                                                                 |
+| `generate_audio`                                                                                                                                                                                                                                                | *Optional[bool]*                                                                                                                                                                                                                                                | :heavy_minus_sign:                                                                                                                                                                                                                                              | Whether to generate audio alongside the video. Defaults to the endpoint's generate_audio capability flag, false if not set.                                                                                                                                     | true                                                                                                                                                                                                                                                            |
+| `input_references`                                                                                                                                                                                                                                              | List[[components.InputReference](../../components/inputreference.mdx)]                                                                                                                                                                                           | :heavy_minus_sign:                                                                                                                                                                                                                                              | Reference assets to guide video generation. Accepts image, audio, and video references. Audio and video references are only honored by providers that support them (currently BytePlus Seedance 2.0); other providers use image references and ignore the rest. |                                                                                                                                                                                                                                                                 |
+| `provider`                                                                                                                                                                                                                                                      | [Optional[components.VideoGenerationRequestProvider]](../../components/videogenerationrequestprovider.mdx)                                                                                                                                                       | :heavy_minus_sign:                                                                                                                                                                                                                                              | Provider-specific passthrough configuration                                                                                                                                                                                                                     |                                                                                                                                                                                                                                                                 |
+| `resolution`                                                                                                                                                                                                                                                    | [Optional[components.VideoGenerationRequestResolution]](../../components/videogenerationrequestresolution.mdx)                                                                                                                                                   | :heavy_minus_sign:                                                                                                                                                                                                                                              | Resolution of the generated video                                                                                                                                                                                                                               | 720p                                                                                                                                                                                                                                                            |
+| `seed`                                                                                                                                                                                                                                                          | *Optional[int]*                                                                                                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                                                                                                              | If specified, the generation will sample deterministically, such that repeated requests with the same seed and parameters should return the same result. Determinism is not guaranteed for all providers.                                                       |                                                                                                                                                                                                                                                                 |
+| `size`                                                                                                                                                                                                                                                          | *Optional[str]*                                                                                                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                                                                                                              | Exact pixel dimensions of the generated video in "WIDTHxHEIGHT" format (e.g. "1280x720"). Interchangeable with resolution + aspect_ratio.                                                                                                                       | 1280x720                                                                                                                                                                                                                                                        |
+| `retries`                                                                                                                                                                                                                                                       | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.mdx)                                                                                                                                                                                                | :heavy_minus_sign:                                                                                                                                                                                                                                              | Configuration to override the default retry behavior of the client.                                                                                                                                                                                             |                                                                                                                                                                                                                                                                 |
+
+### Response
+
+**[components.VideoGenerationResponse](../../components/videogenerationresponse.mdx)**
+
+### Errors
+
+| Error Type                          | Status Code                         | Content Type                        |
+| ----------------------------------- | ----------------------------------- | ----------------------------------- |
+| errors.BadRequestResponseError      | 400                                 | application/json                    |
+| errors.UnauthorizedResponseError    | 401                                 | application/json                    |
+| errors.PaymentRequiredResponseError | 402                                 | application/json                    |
+| errors.NotFoundResponseError        | 404                                 | application/json                    |
+| errors.TooManyRequestsResponseError | 429                                 | application/json                    |
+| errors.InternalServerResponseError  | 500                                 | application/json                    |
+| errors.OpenRouterDefaultError       | 4XX, 5XX                            | \*/\*                               |
+
+## get_generation
+
+Returns job status and content URLs when completed
+
+### Example Usage
+
+```python
+from openrouter import OpenRouter
+import os
+
+
+with OpenRouter(
+    http_referer="<value>",
+    x_open_router_title="<value>",
+    x_open_router_categories="<value>",
+    api_key=os.getenv("OPENROUTER_API_KEY", ""),
+) as open_router:
+
+    res = open_router.video_generation.get_generation(job_id="job-abc123")
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                                                                                                         | Type                                                                                                                                              | Required                                                                                                                                          | Description                                                                                                                                       | Example                                                                                                                                           |
+| ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `job_id`                                                                                                                                          | *str*                                                                                                                                             | :heavy_check_mark:                                                                                                                                | N/A                                                                                                                                               | job-abc123                                                                                                                                        |
+| `http_referer`                                                                                                                                    | *Optional[str]*                                                                                                                                   | :heavy_minus_sign:                                                                                                                                | The app identifier should be your app's URL and is used as the primary identifier for rankings.<br/>This is used to track API usage per application.<br/> |                                                                                                                                                   |
+| `x_open_router_title`                                                                                                                             | *Optional[str]*                                                                                                                                   | :heavy_minus_sign:                                                                                                                                | The app display name allows you to customize how your app appears in OpenRouter's dashboard.<br/>                                                 |                                                                                                                                                   |
+| `x_open_router_categories`                                                                                                                        | *Optional[str]*                                                                                                                                   | :heavy_minus_sign:                                                                                                                                | Comma-separated list of app categories (e.g. "cli-agent,cloud-agent"). Used for marketplace rankings.<br/>                                        |                                                                                                                                                   |
+| `retries`                                                                                                                                         | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.mdx)                                                                                  | :heavy_minus_sign:                                                                                                                                | Configuration to override the default retry behavior of the client.                                                                               |                                                                                                                                                   |
+
+### Response
+
+**[components.VideoGenerationResponse](../../components/videogenerationresponse.mdx)**
+
+### Errors
+
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| errors.UnauthorizedResponseError   | 401                                | application/json                   |
+| errors.NotFoundResponseError       | 404                                | application/json                   |
+| errors.InternalServerResponseError | 500                                | application/json                   |
+| errors.OpenRouterDefaultError      | 4XX, 5XX                           | \*/\*                              |
+
+## get_video_content
+
+Streams the generated video content from the upstream provider
+
+### Example Usage
+
+```python
+from openrouter import OpenRouter
+import os
+
+
+with OpenRouter(
+    http_referer="<value>",
+    x_open_router_title="<value>",
+    x_open_router_categories="<value>",
+    api_key=os.getenv("OPENROUTER_API_KEY", ""),
+) as open_router:
+
+    res = open_router.video_generation.get_video_content(job_id="job-abc123", index=0)
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                                                                                                         | Type                                                                                                                                              | Required                                                                                                                                          | Description                                                                                                                                       | Example                                                                                                                                           |
+| ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `job_id`                                                                                                                                          | *str*                                                                                                                                             | :heavy_check_mark:                                                                                                                                | N/A                                                                                                                                               | job-abc123                                                                                                                                        |
+| `http_referer`                                                                                                                                    | *Optional[str]*                                                                                                                                   | :heavy_minus_sign:                                                                                                                                | The app identifier should be your app's URL and is used as the primary identifier for rankings.<br/>This is used to track API usage per application.<br/> |                                                                                                                                                   |
+| `x_open_router_title`                                                                                                                             | *Optional[str]*                                                                                                                                   | :heavy_minus_sign:                                                                                                                                | The app display name allows you to customize how your app appears in OpenRouter's dashboard.<br/>                                                 |                                                                                                                                                   |
+| `x_open_router_categories`                                                                                                                        | *Optional[str]*                                                                                                                                   | :heavy_minus_sign:                                                                                                                                | Comma-separated list of app categories (e.g. "cli-agent,cloud-agent"). Used for marketplace rankings.<br/>                                        |                                                                                                                                                   |
+| `index`                                                                                                                                           | *OptionalNullable[int]*                                                                                                                           | :heavy_minus_sign:                                                                                                                                | N/A                                                                                                                                               | 0                                                                                                                                                 |
+| `retries`                                                                                                                                         | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.mdx)                                                                                  | :heavy_minus_sign:                                                                                                                                | Configuration to override the default retry behavior of the client.                                                                               |                                                                                                                                                   |
+
+### Response
+
+**[httpx.Response](../../models/.mdx)**
+
+### Errors
+
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| errors.BadRequestResponseError     | 400                                | application/json                   |
+| errors.UnauthorizedResponseError   | 401                                | application/json                   |
+| errors.NotFoundResponseError       | 404                                | application/json                   |
+| errors.InternalServerResponseError | 500                                | application/json                   |
+| errors.BadGatewayResponseError     | 502                                | application/json                   |
+| errors.OpenRouterDefaultError      | 4XX, 5XX                           | \*/\*                              |
+
+## list_videos_models
+
+Returns a list of all available video generation models and their properties
+
+### Example Usage
+
+```python
+from openrouter import OpenRouter
+import os
+
+
+with OpenRouter(
+    http_referer="<value>",
+    x_open_router_title="<value>",
+    x_open_router_categories="<value>",
+    api_key=os.getenv("OPENROUTER_API_KEY", ""),
+) as open_router:
+
+    res = open_router.video_generation.list_videos_models()
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                                                                                                         | Type                                                                                                                                              | Required                                                                                                                                          | Description                                                                                                                                       |
+| ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `http_referer`                                                                                                                                    | *Optional[str]*                                                                                                                                   | :heavy_minus_sign:                                                                                                                                | The app identifier should be your app's URL and is used as the primary identifier for rankings.<br/>This is used to track API usage per application.<br/> |
+| `x_open_router_title`                                                                                                                             | *Optional[str]*                                                                                                                                   | :heavy_minus_sign:                                                                                                                                | The app display name allows you to customize how your app appears in OpenRouter's dashboard.<br/>                                                 |
+| `x_open_router_categories`                                                                                                                        | *Optional[str]*                                                                                                                                   | :heavy_minus_sign:                                                                                                                                | Comma-separated list of app categories (e.g. "cli-agent,cloud-agent"). Used for marketplace rankings.<br/>                                        |
+| `retries`                                                                                                                                         | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.mdx)                                                                                  | :heavy_minus_sign:                                                                                                                                | Configuration to override the default retry behavior of the client.                                                                               |
+
+### Response
+
+**[components.VideoModelsListResponse](../../components/videomodelslistresponse.mdx)**
+
+### Errors
+
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| errors.BadRequestResponseError     | 400                                | application/json                   |
+| errors.InternalServerResponseError | 500                                | application/json                   |
+| errors.OpenRouterDefaultError      | 4XX, 5XX                           | \*/\*                              |

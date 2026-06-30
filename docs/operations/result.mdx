@@ -1,0 +1,14 @@
+---
+title: "Result"
+---
+
+A single rerank result
+
+
+## Fields
+
+| Field                                                              | Type                                                               | Required                                                           | Description                                                        | Example                                                            |
+| ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ |
+| `document`                                                         | [operations.DocumentResponse](../operations/documentresponse.mdx)   | :heavy_check_mark:                                                 | The document object echoing the original input (text and/or image) |                                                                    |
+| `index`                                                            | *int*                                                              | :heavy_check_mark:                                                 | Index of the document in the original input list                   | 0                                                                  |
+| `relevance_score`                                                  | *float*                                                            | :heavy_check_mark:                                                 | Relevance score of the document to the query                       | 0.98                                                               |

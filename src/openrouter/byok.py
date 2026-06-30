@@ -7,7 +7,7 @@ from openrouter._hooks import HookContext
 from openrouter.types import OptionalNullable, UNSET
 from openrouter.utils import get_security_from_env
 from openrouter.utils.unmarshal_json_response import unmarshal_json_response
-from typing import Any, Awaitable, Dict, List, Mapping, Optional, Union
+from typing import Any, Awaitable, Dict, Iterable, List, Mapping, Optional, Union
 
 
 class Byok(BaseSDK):
@@ -111,24 +111,26 @@ class Byok(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["BYOK"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["401", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
         def next_func() -> Optional[operations.ListBYOKKeysResponse]:
             body = utils.unmarshal_json(http_res.text, Union[Dict[Any, Any], List[Any]])
 
-            offset = request.offset if not request.offset is None else 0
+            offset = request.offset if isinstance(request.offset, int) else 0
 
             if not http_res.text:
                 return None
             results = JSONPath("$.data").parse(body)
             if len(results) == 0 or len(results[0]) == 0:
                 return None
-            limit = request.limit if not request.limit is None else 0
-            if len(results[0]) < limit:
+            limit_ = request.limit if isinstance(request.limit, int) else 0
+            if len(results[0]) < limit_:
                 return None
             next_offset = offset + len(results[0])
 
@@ -141,6 +143,9 @@ class Byok(BaseSDK):
                 workspace_id=workspace_id,
                 provider=provider,
                 retries=retries,
+                server_url=server_url,
+                timeout_ms=timeout_ms,
+                http_headers=http_headers,
             )
 
         response_data: Any = None
@@ -272,9 +277,11 @@ class Byok(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["BYOK"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["401", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -284,15 +291,15 @@ class Byok(BaseSDK):
             async def empty_result():
                 return None
 
-            offset = request.offset if not request.offset is None else 0
+            offset = request.offset if isinstance(request.offset, int) else 0
 
             if not http_res.text:
                 return empty_result()
             results = JSONPath("$.data").parse(body)
             if len(results) == 0 or len(results[0]) == 0:
                 return empty_result()
-            limit = request.limit if not request.limit is None else 0
-            if len(results[0]) < limit:
+            limit_ = request.limit if isinstance(request.limit, int) else 0
+            if len(results[0]) < limit_:
                 return empty_result()
             next_offset = offset + len(results[0])
 
@@ -305,6 +312,9 @@ class Byok(BaseSDK):
                 workspace_id=workspace_id,
                 provider=provider,
                 retries=retries,
+                server_url=server_url,
+                timeout_ms=timeout_ms,
+                http_headers=http_headers,
             )
 
         response_data: Any = None
@@ -346,8 +356,8 @@ class Byok(BaseSDK):
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
-        allowed_models: OptionalNullable[List[str]] = UNSET,
-        allowed_user_ids: OptionalNullable[List[str]] = UNSET,
+        allowed_models: OptionalNullable[Iterable[str]] = UNSET,
+        allowed_user_ids: OptionalNullable[Iterable[str]] = UNSET,
         disabled: Optional[bool] = None,
         is_fallback: Optional[bool] = None,
         name: OptionalNullable[str] = UNSET,
@@ -396,8 +406,12 @@ class Byok(BaseSDK):
             x_open_router_title=x_open_router_title,
             x_open_router_categories=x_open_router_categories,
             create_byok_key_request=components.CreateBYOKKeyRequest(
-                allowed_models=allowed_models,
-                allowed_user_ids=allowed_user_ids,
+                allowed_models=utils.unmarshal(
+                    allowed_models, OptionalNullable[List[str]]
+                ),
+                allowed_user_ids=utils.unmarshal(
+                    allowed_user_ids, OptionalNullable[List[str]]
+                ),
                 disabled=disabled,
                 is_fallback=is_fallback,
                 key=key,
@@ -457,9 +471,11 @@ class Byok(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["BYOK"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -507,8 +523,8 @@ class Byok(BaseSDK):
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
-        allowed_models: OptionalNullable[List[str]] = UNSET,
-        allowed_user_ids: OptionalNullable[List[str]] = UNSET,
+        allowed_models: OptionalNullable[Iterable[str]] = UNSET,
+        allowed_user_ids: OptionalNullable[Iterable[str]] = UNSET,
         disabled: Optional[bool] = None,
         is_fallback: Optional[bool] = None,
         name: OptionalNullable[str] = UNSET,
@@ -557,8 +573,12 @@ class Byok(BaseSDK):
             x_open_router_title=x_open_router_title,
             x_open_router_categories=x_open_router_categories,
             create_byok_key_request=components.CreateBYOKKeyRequest(
-                allowed_models=allowed_models,
-                allowed_user_ids=allowed_user_ids,
+                allowed_models=utils.unmarshal(
+                    allowed_models, OptionalNullable[List[str]]
+                ),
+                allowed_user_ids=utils.unmarshal(
+                    allowed_user_ids, OptionalNullable[List[str]]
+                ),
                 disabled=disabled,
                 is_fallback=is_fallback,
                 key=key,
@@ -618,9 +638,11 @@ class Byok(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["BYOK"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -749,9 +771,11 @@ class Byok(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["BYOK"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["401", "404", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -875,9 +899,11 @@ class Byok(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["BYOK"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["401", "404", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -1001,9 +1027,11 @@ class Byok(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["BYOK"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["401", "404", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -1127,9 +1155,11 @@ class Byok(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["BYOK"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["401", "404", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -1171,8 +1201,8 @@ class Byok(BaseSDK):
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
-        allowed_models: OptionalNullable[List[str]] = UNSET,
-        allowed_user_ids: OptionalNullable[List[str]] = UNSET,
+        allowed_models: OptionalNullable[Iterable[str]] = UNSET,
+        allowed_user_ids: OptionalNullable[Iterable[str]] = UNSET,
         disabled: Optional[bool] = None,
         is_fallback: Optional[bool] = None,
         key: Optional[str] = None,
@@ -1221,8 +1251,12 @@ class Byok(BaseSDK):
             x_open_router_categories=x_open_router_categories,
             id=id,
             update_byok_key_request=components.UpdateBYOKKeyRequest(
-                allowed_models=allowed_models,
-                allowed_user_ids=allowed_user_ids,
+                allowed_models=utils.unmarshal(
+                    allowed_models, OptionalNullable[List[str]]
+                ),
+                allowed_user_ids=utils.unmarshal(
+                    allowed_user_ids, OptionalNullable[List[str]]
+                ),
                 disabled=disabled,
                 is_fallback=is_fallback,
                 key=key,
@@ -1280,9 +1314,11 @@ class Byok(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["BYOK"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "404", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -1329,8 +1365,8 @@ class Byok(BaseSDK):
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
-        allowed_models: OptionalNullable[List[str]] = UNSET,
-        allowed_user_ids: OptionalNullable[List[str]] = UNSET,
+        allowed_models: OptionalNullable[Iterable[str]] = UNSET,
+        allowed_user_ids: OptionalNullable[Iterable[str]] = UNSET,
         disabled: Optional[bool] = None,
         is_fallback: Optional[bool] = None,
         key: Optional[str] = None,
@@ -1379,8 +1415,12 @@ class Byok(BaseSDK):
             x_open_router_categories=x_open_router_categories,
             id=id,
             update_byok_key_request=components.UpdateBYOKKeyRequest(
-                allowed_models=allowed_models,
-                allowed_user_ids=allowed_user_ids,
+                allowed_models=utils.unmarshal(
+                    allowed_models, OptionalNullable[List[str]]
+                ),
+                allowed_user_ids=utils.unmarshal(
+                    allowed_user_ids, OptionalNullable[List[str]]
+                ),
                 disabled=disabled,
                 is_fallback=is_fallback,
                 key=key,
@@ -1438,9 +1478,11 @@ class Byok(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["BYOK"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "404", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 

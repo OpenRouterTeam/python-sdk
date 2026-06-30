@@ -1,0 +1,23 @@
+---
+title: "ChatFinishReasonEnum"
+---
+
+## Example Usage
+
+```python
+from openrouter.components import ChatFinishReasonEnum
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
+value: ChatFinishReasonEnum = "tool_calls"
+```
+
+
+## Values
+
+This is an open enum. Unrecognized values will not fail type checks.
+
+- `"tool_calls"`
+- `"stop"`
+- `"length"`
+- `"content_filter"`
+- `"error"`

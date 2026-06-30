@@ -2,11 +2,10 @@
 
 from __future__ import annotations
 from .applypatchengineenum import ApplyPatchEngineEnum
-from openrouter.types import BaseModel
-from openrouter.utils import validate_open_enum
-from pydantic.functional_validators import PlainValidator
+from openrouter.types import BaseModel, UNSET_SENTINEL
+from pydantic import model_serializer
 from typing import Optional
-from typing_extensions import Annotated, NotRequired, TypedDict
+from typing_extensions import NotRequired, TypedDict
 
 
 class ApplyPatchServerToolConfigTypedDict(TypedDict):
@@ -19,7 +18,21 @@ class ApplyPatchServerToolConfigTypedDict(TypedDict):
 class ApplyPatchServerToolConfig(BaseModel):
     r"""Configuration for the openrouter:apply_patch server tool"""
 
-    engine: Annotated[
-        Optional[ApplyPatchEngineEnum], PlainValidator(validate_open_enum(False))
-    ] = None
+    engine: Optional[ApplyPatchEngineEnum] = None
     r"""Which apply_patch engine to use. \"auto\" (default) uses native passthrough when the endpoint advertises native apply_patch support, otherwise falls back to OpenRouter's HITL validator. \"native\" forces native passthrough — when the endpoint does not support native, the request falls back to HITL. \"openrouter\" always runs the HITL validator. Native passthrough streams the diff incrementally via `apply_patch_call_operation_diff.delta` events; HITL buffers the diff for atomic delivery as a single delta."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["engine"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from openrouter.components import sttrequest as components_sttrequest
-from openrouter.types import BaseModel
+from openrouter.types import BaseModel, UNSET_SENTINEL
 from openrouter.utils import FieldMetadata, HeaderMetadata, RequestMetadata
 import pydantic
+from pydantic import model_serializer
 from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -53,6 +54,24 @@ class CreateAudioTranscriptionsGlobals(BaseModel):
     r"""Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
     """
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            ["HTTP-Referer", "X-OpenRouter-Title", "X-OpenRouter-Categories"]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class CreateAudioTranscriptionsRequestTypedDict(TypedDict):
@@ -105,3 +124,21 @@ class CreateAudioTranscriptionsRequest(BaseModel):
     r"""Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
     """
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            ["HTTP-Referer", "X-OpenRouter-Title", "X-OpenRouter-Categories"]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

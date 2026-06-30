@@ -20,3 +20,9 @@ class DeleteObservabilityDestinationResponse(BaseModel):
         pydantic.Field(alias="deleted"),
     ] = True
     r"""Always `true` on success."""
+
+
+try:
+    DeleteObservabilityDestinationResponse.model_rebuild()
+except NameError:
+    pass

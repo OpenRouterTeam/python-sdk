@@ -2,11 +2,10 @@
 
 from __future__ import annotations
 from .webfetchengineenum import WebFetchEngineEnum
-from openrouter.types import BaseModel
-from openrouter.utils import validate_open_enum
-from pydantic.functional_validators import PlainValidator
+from openrouter.types import BaseModel, UNSET_SENTINEL
+from pydantic import model_serializer
 from typing import List, Optional
-from typing_extensions import Annotated, NotRequired, TypedDict
+from typing_extensions import NotRequired, TypedDict
 
 
 class WebFetchServerToolConfigTypedDict(TypedDict):
@@ -33,9 +32,7 @@ class WebFetchServerToolConfig(BaseModel):
     blocked_domains: Optional[List[str]] = None
     r"""Never fetch from these domains."""
 
-    engine: Annotated[
-        Optional[WebFetchEngineEnum], PlainValidator(validate_open_enum(False))
-    ] = None
+    engine: Optional[WebFetchEngineEnum] = None
     r"""Which fetch engine to use. \"auto\" (default) uses native if the provider supports it, otherwise Exa. \"native\" forces the provider's built-in fetch. \"exa\" uses Exa Contents API. \"openrouter\" uses direct HTTP fetch. \"firecrawl\" uses Firecrawl scrape (requires BYOK). \"parallel\" uses the Parallel extract API."""
 
     max_content_tokens: Optional[int] = None
@@ -43,3 +40,27 @@ class WebFetchServerToolConfig(BaseModel):
 
     max_uses: Optional[int] = None
     r"""Maximum number of web fetches per request. Once exceeded, the tool returns an error."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "allowed_domains",
+                "blocked_domains",
+                "engine",
+                "max_content_tokens",
+                "max_uses",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

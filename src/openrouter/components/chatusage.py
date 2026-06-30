@@ -44,41 +44,40 @@ class ChatUsageCompletionTokensDetails(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = [
-            "accepted_prediction_tokens",
-            "audio_tokens",
-            "reasoning_tokens",
-            "rejected_prediction_tokens",
-        ]
-        nullable_fields = [
-            "accepted_prediction_tokens",
-            "audio_tokens",
-            "reasoning_tokens",
-            "rejected_prediction_tokens",
-        ]
-        null_default_fields = []
-
+        optional_fields = set(
+            [
+                "accepted_prediction_tokens",
+                "audio_tokens",
+                "reasoning_tokens",
+                "rejected_prediction_tokens",
+            ]
+        )
+        nullable_fields = set(
+            [
+                "accepted_prediction_tokens",
+                "audio_tokens",
+                "reasoning_tokens",
+                "rejected_prediction_tokens",
+            ]
+        )
         serialized = handler(self)
-
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
-            serialized.pop(k, None)
+            val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
 
         return m
 
@@ -111,6 +110,24 @@ class ChatUsagePromptTokensDetails(BaseModel):
     video_tokens: Optional[int] = None
     r"""Video input tokens"""
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            ["audio_tokens", "cache_write_tokens", "cached_tokens", "video_tokens"]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class ServerToolUseDetailsTypedDict(TypedDict):
     r"""Usage for server-side tool execution (e.g., web search)"""
@@ -137,39 +154,30 @@ class ServerToolUseDetails(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = [
-            "tool_calls_executed",
-            "tool_calls_requested",
-            "web_search_requests",
-        ]
-        nullable_fields = [
-            "tool_calls_executed",
-            "tool_calls_requested",
-            "web_search_requests",
-        ]
-        null_default_fields = []
-
+        optional_fields = set(
+            ["tool_calls_executed", "tool_calls_requested", "web_search_requests"]
+        )
+        nullable_fields = set(
+            ["tool_calls_executed", "tool_calls_requested", "web_search_requests"]
+        )
         serialized = handler(self)
-
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
-            serialized.pop(k, None)
+            val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
 
         return m
 
@@ -233,43 +241,42 @@ class ChatUsage(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = [
-            "completion_tokens_details",
-            "cost",
-            "cost_details",
-            "is_byok",
-            "prompt_tokens_details",
-            "server_tool_use_details",
-        ]
-        nullable_fields = [
-            "completion_tokens_details",
-            "cost",
-            "cost_details",
-            "prompt_tokens_details",
-            "server_tool_use_details",
-        ]
-        null_default_fields = []
-
+        optional_fields = set(
+            [
+                "completion_tokens_details",
+                "cost",
+                "cost_details",
+                "is_byok",
+                "prompt_tokens_details",
+                "server_tool_use_details",
+            ]
+        )
+        nullable_fields = set(
+            [
+                "completion_tokens_details",
+                "cost",
+                "cost_details",
+                "prompt_tokens_details",
+                "server_tool_use_details",
+            ]
+        )
         serialized = handler(self)
-
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
-            serialized.pop(k, None)
+            val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
 
         return m

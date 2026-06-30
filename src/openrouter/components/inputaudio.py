@@ -2,9 +2,7 @@
 
 from __future__ import annotations
 from openrouter.types import BaseModel, UnrecognizedStr
-from openrouter.utils import validate_open_enum
 import pydantic
-from pydantic.functional_validators import PlainValidator
 from typing import Literal, Union
 from typing_extensions import Annotated, TypedDict
 
@@ -26,10 +24,7 @@ class InputAudioInputAudioTypedDict(TypedDict):
 class InputAudioInputAudio(BaseModel):
     data: str
 
-    format_: Annotated[
-        Annotated[FormatEnum, PlainValidator(validate_open_enum(False))],
-        pydantic.Field(alias="format"),
-    ]
+    format_: Annotated[FormatEnum, pydantic.Field(alias="format")]
 
 
 InputAudioType = Literal["input_audio",]
@@ -48,3 +43,9 @@ class InputAudio(BaseModel):
     input_audio: InputAudioInputAudio
 
     type: InputAudioType
+
+
+try:
+    InputAudioInputAudio.model_rebuild()
+except NameError:
+    pass

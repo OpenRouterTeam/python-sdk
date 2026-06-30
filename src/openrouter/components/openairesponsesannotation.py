@@ -4,9 +4,12 @@ from __future__ import annotations
 from .filecitation import FileCitation, FileCitationTypedDict
 from .filepath import FilePath, FilePathTypedDict
 from .urlcitation import URLCitation, URLCitationTypedDict
-from openrouter.utils import get_discriminator
-from pydantic import Discriminator, Tag
-from typing import Union
+from functools import partial
+from openrouter.types import BaseModel
+from openrouter.utils.unions import parse_open_union
+from pydantic import ConfigDict
+from pydantic.functional_validators import BeforeValidator
+from typing import Any, Literal, Union
 from typing_extensions import Annotated, TypeAliasType
 
 
@@ -16,11 +19,32 @@ OpenAIResponsesAnnotationTypedDict = TypeAliasType(
 )
 
 
+class UnknownOpenAIResponsesAnnotation(BaseModel):
+    r"""A OpenAIResponsesAnnotation variant the SDK doesn't recognize. Preserves the raw payload."""
+
+    type: Literal["UNKNOWN"] = "UNKNOWN"
+    raw: Any
+    is_unknown: Literal[True] = True
+
+    model_config = ConfigDict(frozen=True)
+
+
+_OPEN_AI_RESPONSES_ANNOTATION_VARIANTS: dict[str, Any] = {
+    "file_citation": FileCitation,
+    "url_citation": URLCitation,
+    "file_path": FilePath,
+}
+
+
 OpenAIResponsesAnnotation = Annotated[
-    Union[
-        Annotated[FileCitation, Tag("file_citation")],
-        Annotated[URLCitation, Tag("url_citation")],
-        Annotated[FilePath, Tag("file_path")],
-    ],
-    Discriminator(lambda m: get_discriminator(m, "type", "type")),
+    Union[FileCitation, URLCitation, FilePath, UnknownOpenAIResponsesAnnotation],
+    BeforeValidator(
+        partial(
+            parse_open_union,
+            disc_key="type",
+            variants=_OPEN_AI_RESPONSES_ANNOTATION_VARIANTS,
+            unknown_cls=UnknownOpenAIResponsesAnnotation,
+            union_name="OpenAIResponsesAnnotation",
+        )
+    ),
 ]

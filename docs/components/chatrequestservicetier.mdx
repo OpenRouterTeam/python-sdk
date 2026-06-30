@@ -1,0 +1,25 @@
+---
+title: "ChatRequestServiceTier"
+---
+
+The service tier to use for processing this request.
+
+## Example Usage
+
+```python
+from openrouter.components import ChatRequestServiceTier
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
+value: ChatRequestServiceTier = "auto"
+```
+
+
+## Values
+
+This is an open enum. Unrecognized values will not fail type checks.
+
+- `"auto"`
+- `"default"`
+- `"flex"`
+- `"priority"`
+- `"scale"`

@@ -20,3 +20,9 @@ class DeleteWorkspaceResponse(BaseModel):
         pydantic.Field(alias="deleted"),
     ] = True
     r"""Confirmation that the workspace was deleted"""
+
+
+try:
+    DeleteWorkspaceResponse.model_rebuild()
+except NameError:
+    pass

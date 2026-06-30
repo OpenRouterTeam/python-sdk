@@ -1,0 +1,21 @@
+---
+title: "ActionEnum"
+---
+
+## Example Usage
+
+```python
+from openrouter.components import ActionEnum
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
+value: ActionEnum = "read"
+```
+
+
+## Values
+
+This is an open enum. Unrecognized values will not fail type checks.
+
+- `"read"`
+- `"write"`
+- `"delete"`

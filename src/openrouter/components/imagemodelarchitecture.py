@@ -4,10 +4,8 @@ from __future__ import annotations
 from .imageoutputmodality import ImageOutputModality
 from .inputmodality import InputModality
 from openrouter.types import BaseModel
-from openrouter.utils import validate_open_enum
-from pydantic.functional_validators import PlainValidator
 from typing import List
-from typing_extensions import Annotated, TypedDict
+from typing_extensions import TypedDict
 
 
 class ImageModelArchitectureTypedDict(TypedDict):
@@ -18,12 +16,8 @@ class ImageModelArchitectureTypedDict(TypedDict):
 
 
 class ImageModelArchitecture(BaseModel):
-    input_modalities: List[
-        Annotated[InputModality, PlainValidator(validate_open_enum(False))]
-    ]
+    input_modalities: List[InputModality]
     r"""Supported input modalities"""
 
-    output_modalities: List[
-        Annotated[ImageOutputModality, PlainValidator(validate_open_enum(False))]
-    ]
+    output_modalities: List[ImageOutputModality]
     r"""Supported output modalities"""

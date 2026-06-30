@@ -3,10 +3,9 @@
 from __future__ import annotations
 from .frameimage import FrameImage, FrameImageTypedDict
 from .inputreference import InputReference, InputReferenceTypedDict
-from openrouter.types import BaseModel, Nullable, UnrecognizedStr
-from openrouter.utils import validate_open_enum
+from openrouter.types import BaseModel, Nullable, UNSET_SENTINEL, UnrecognizedStr
 import pydantic
-from pydantic.functional_validators import PlainValidator
+from pydantic import model_serializer
 from typing import Any, Dict, List, Literal, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -444,6 +443,145 @@ class VideoGenerationRequestOptions(BaseModel):
         Optional[Dict[str, Nullable[Any]]], pydantic.Field(alias="z-ai")
     ] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "01ai",
+                "ai21",
+                "aion-labs",
+                "akashml",
+                "alibaba",
+                "amazon-bedrock",
+                "amazon-nova",
+                "ambient",
+                "anthropic",
+                "anyscale",
+                "arcee-ai",
+                "atlas-cloud",
+                "atoma",
+                "avian",
+                "azure",
+                "baidu",
+                "baseten",
+                "black-forest-labs",
+                "byteplus",
+                "centml",
+                "cerebras",
+                "chutes",
+                "cirrascale",
+                "clarifai",
+                "cloudflare",
+                "cohere",
+                "crofai",
+                "crucible",
+                "crusoe",
+                "darkbloom",
+                "decart",
+                "deepinfra",
+                "deepseek",
+                "dekallm",
+                "digitalocean",
+                "enfer",
+                "fake-provider",
+                "featherless",
+                "fireworks",
+                "friendli",
+                "gmicloud",
+                "google-ai-studio",
+                "google-vertex",
+                "gopomelo",
+                "groq",
+                "heygen",
+                "huggingface",
+                "hyperbolic",
+                "hyperbolic-quantized",
+                "inception",
+                "inceptron",
+                "inferact-vllm",
+                "inference-net",
+                "infermatic",
+                "inflection",
+                "inocloud",
+                "io-net",
+                "ionstream",
+                "klusterai",
+                "lambda",
+                "lepton",
+                "liquid",
+                "lynn",
+                "lynn-private",
+                "mancer",
+                "mancer-old",
+                "mara",
+                "meta",
+                "minimax",
+                "mistral",
+                "modal",
+                "modelrun",
+                "modular",
+                "moonshotai",
+                "morph",
+                "ncompass",
+                "nebius",
+                "nex-agi",
+                "nextbit",
+                "nineteen",
+                "novita",
+                "nvidia",
+                "octoai",
+                "open-inference",
+                "openai",
+                "parasail",
+                "perceptron",
+                "perplexity",
+                "phala",
+                "poolside",
+                "quiver",
+                "recraft",
+                "recursal",
+                "reflection",
+                "reka",
+                "relace",
+                "replicate",
+                "sakana-ai",
+                "sambanova",
+                "sambanova-cloaked",
+                "seed",
+                "sf-compute",
+                "siliconflow",
+                "sourceful",
+                "stealth",
+                "stepfun",
+                "streamlake",
+                "switchpoint",
+                "targon",
+                "tenstorrent",
+                "together",
+                "together-lite",
+                "ubicloud",
+                "upstage",
+                "venice",
+                "wafer",
+                "wandb",
+                "xai",
+                "xiaomi",
+                "z-ai",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class VideoGenerationRequestProviderTypedDict(TypedDict):
     r"""Provider-specific passthrough configuration"""
@@ -455,6 +593,22 @@ class VideoGenerationRequestProvider(BaseModel):
     r"""Provider-specific passthrough configuration"""
 
     options: Optional[VideoGenerationRequestOptions] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["options"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 VideoGenerationRequestResolution = Union[
@@ -501,10 +655,7 @@ class VideoGenerationRequest(BaseModel):
 
     prompt: str
 
-    aspect_ratio: Annotated[
-        Optional[VideoGenerationRequestAspectRatio],
-        PlainValidator(validate_open_enum(False)),
-    ] = None
+    aspect_ratio: Optional[VideoGenerationRequestAspectRatio] = None
     r"""Aspect ratio of the generated video"""
 
     callback_url: Optional[str] = None
@@ -525,10 +676,7 @@ class VideoGenerationRequest(BaseModel):
     provider: Optional[VideoGenerationRequestProvider] = None
     r"""Provider-specific passthrough configuration"""
 
-    resolution: Annotated[
-        Optional[VideoGenerationRequestResolution],
-        PlainValidator(validate_open_enum(False)),
-    ] = None
+    resolution: Optional[VideoGenerationRequestResolution] = None
     r"""Resolution of the generated video"""
 
     seed: Optional[int] = None
@@ -536,3 +684,38 @@ class VideoGenerationRequest(BaseModel):
 
     size: Optional[str] = None
     r"""Exact pixel dimensions of the generated video in \"WIDTHxHEIGHT\" format (e.g. \"1280x720\"). Interchangeable with resolution + aspect_ratio."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "aspect_ratio",
+                "callback_url",
+                "duration",
+                "frame_images",
+                "generate_audio",
+                "input_references",
+                "provider",
+                "resolution",
+                "seed",
+                "size",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
+
+try:
+    VideoGenerationRequestOptions.model_rebuild()
+except NameError:
+    pass

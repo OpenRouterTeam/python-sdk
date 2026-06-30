@@ -13,9 +13,12 @@ from .applypatchupdatefileoperation import (
     ApplyPatchUpdateFileOperation,
     ApplyPatchUpdateFileOperationTypedDict,
 )
-from openrouter.utils import get_discriminator
-from pydantic import Discriminator, Tag
-from typing import Union
+from functools import partial
+from openrouter.types import BaseModel
+from openrouter.utils.unions import parse_open_union
+from pydantic import ConfigDict
+from pydantic.functional_validators import BeforeValidator
+from typing import Any, Literal, Union
 from typing_extensions import Annotated, TypeAliasType
 
 
@@ -30,12 +33,38 @@ ApplyPatchCallOperationTypedDict = TypeAliasType(
 r"""The patch operation requested by an `apply_patch_call`. `create_file` and `update_file` carry a V4A diff; `delete_file` omits it."""
 
 
+class UnknownApplyPatchCallOperation(BaseModel):
+    r"""A ApplyPatchCallOperation variant the SDK doesn't recognize. Preserves the raw payload."""
+
+    type: Literal["UNKNOWN"] = "UNKNOWN"
+    raw: Any
+    is_unknown: Literal[True] = True
+
+    model_config = ConfigDict(frozen=True)
+
+
+_APPLY_PATCH_CALL_OPERATION_VARIANTS: dict[str, Any] = {
+    "create_file": ApplyPatchCreateFileOperation,
+    "delete_file": ApplyPatchDeleteFileOperation,
+    "update_file": ApplyPatchUpdateFileOperation,
+}
+
+
 ApplyPatchCallOperation = Annotated[
     Union[
-        Annotated[ApplyPatchCreateFileOperation, Tag("create_file")],
-        Annotated[ApplyPatchDeleteFileOperation, Tag("delete_file")],
-        Annotated[ApplyPatchUpdateFileOperation, Tag("update_file")],
+        ApplyPatchCreateFileOperation,
+        ApplyPatchDeleteFileOperation,
+        ApplyPatchUpdateFileOperation,
+        UnknownApplyPatchCallOperation,
     ],
-    Discriminator(lambda m: get_discriminator(m, "type", "type")),
+    BeforeValidator(
+        partial(
+            parse_open_union,
+            disc_key="type",
+            variants=_APPLY_PATCH_CALL_OPERATION_VARIANTS,
+            unknown_cls=UnknownApplyPatchCallOperation,
+            union_name="ApplyPatchCallOperation",
+        )
+    ),
 ]
 r"""The patch operation requested by an `apply_patch_call`. `create_file` and `update_file` carry a V4A diff; `delete_file` omits it."""

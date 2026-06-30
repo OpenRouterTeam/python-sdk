@@ -119,9 +119,11 @@ class OAuth(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["OAuth"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -264,9 +266,11 @@ class OAuth(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["OAuth"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -424,9 +428,11 @@ class OAuth(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["OAuth"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "409", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -594,9 +600,11 @@ class OAuth(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["OAuth"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "409", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 

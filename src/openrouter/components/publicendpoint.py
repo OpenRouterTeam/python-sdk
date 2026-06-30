@@ -6,11 +6,9 @@ from .parameter import Parameter
 from .percentilestats import PercentileStats, PercentileStatsTypedDict
 from .providername import ProviderName
 from openrouter.types import BaseModel, Nullable, UNSET_SENTINEL, UnrecognizedStr
-from openrouter.utils import validate_open_enum
 from pydantic import model_serializer
-from pydantic.functional_validators import PlainValidator
 from typing import List, Literal, Optional, Union
-from typing_extensions import Annotated, NotRequired, TypedDict
+from typing_extensions import NotRequired, TypedDict
 
 
 class PricingTypedDict(TypedDict):
@@ -92,6 +90,38 @@ class Pricing(BaseModel):
     web_search: Optional[str] = None
     r"""Price in USD per web search"""
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "audio",
+                "audio_output",
+                "discount",
+                "image",
+                "image_output",
+                "image_token",
+                "input_audio_cache",
+                "input_cache_read",
+                "input_cache_write",
+                "input_cache_write_1h",
+                "internal_reasoning",
+                "request",
+                "web_search",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 PublicEndpointQuantization = Union[
     Literal[
@@ -157,15 +187,11 @@ class PublicEndpoint(BaseModel):
 
     pricing: Pricing
 
-    provider_name: Annotated[ProviderName, PlainValidator(validate_open_enum(False))]
+    provider_name: ProviderName
 
-    quantization: Annotated[
-        Nullable[PublicEndpointQuantization], PlainValidator(validate_open_enum(False))
-    ]
+    quantization: Nullable[PublicEndpointQuantization]
 
-    supported_parameters: List[
-        Annotated[Parameter, PlainValidator(validate_open_enum(False))]
-    ]
+    supported_parameters: List[Parameter]
 
     supports_implicit_caching: bool
 
@@ -181,45 +207,40 @@ class PublicEndpoint(BaseModel):
     uptime_last_5m: Nullable[float]
     r"""Uptime percentage over the last 5 minutes, calculated as successful requests / (successful + error requests) * 100. Rate-limited requests are excluded. Returns null if insufficient data."""
 
-    status: Annotated[
-        Optional[EndpointStatus], PlainValidator(validate_open_enum(True))
-    ] = None
+    status: Optional[EndpointStatus] = None
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["status"]
-        nullable_fields = [
-            "latency_last_30m",
-            "max_completion_tokens",
-            "max_prompt_tokens",
-            "quantization",
-            "throughput_last_30m",
-            "uptime_last_1d",
-            "uptime_last_30m",
-            "uptime_last_5m",
-        ]
-        null_default_fields = []
-
+        optional_fields = set(["status"])
+        nullable_fields = set(
+            [
+                "latency_last_30m",
+                "max_completion_tokens",
+                "max_prompt_tokens",
+                "quantization",
+                "throughput_last_30m",
+                "uptime_last_1d",
+                "uptime_last_30m",
+                "uptime_last_5m",
+            ]
+        )
         serialized = handler(self)
-
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
-            serialized.pop(k, None)
+            val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
 
         return m

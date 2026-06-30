@@ -2,10 +2,9 @@
 
 from __future__ import annotations
 from .toolcallstatus import ToolCallStatus
-from openrouter.types import BaseModel
-from openrouter.utils import validate_open_enum
+from openrouter.types import BaseModel, UNSET_SENTINEL
 import pydantic
-from pydantic.functional_validators import PlainValidator
+from pydantic import model_serializer
 from typing import Literal, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -26,7 +25,7 @@ class OutputMcpServerToolItemTypedDict(TypedDict):
 class OutputMcpServerToolItem(BaseModel):
     r"""An openrouter:mcp server tool output item"""
 
-    status: Annotated[ToolCallStatus, PlainValidator(validate_open_enum(False))]
+    status: ToolCallStatus
 
     type: OutputMcpServerToolItemType
 
@@ -35,3 +34,25 @@ class OutputMcpServerToolItem(BaseModel):
     server_label: Annotated[Optional[str], pydantic.Field(alias="serverLabel")] = None
 
     tool_name: Annotated[Optional[str], pydantic.Field(alias="toolName")] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["id", "serverLabel", "toolName"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
+
+try:
+    OutputMcpServerToolItem.model_rebuild()
+except NameError:
+    pass

@@ -1,0 +1,23 @@
+---
+title: "UsageLimitType"
+---
+
+Optional credit limit reset interval. When set, the credit limit resets on this interval.
+
+## Example Usage
+
+```python
+from openrouter.operations import UsageLimitType
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
+value: UsageLimitType = "daily"
+```
+
+
+## Values
+
+This is an open enum. Unrecognized values will not fail type checks.
+
+- `"daily"`
+- `"weekly"`
+- `"monthly"`

@@ -2,9 +2,9 @@
 
 from __future__ import annotations
 from .toolcallstatus import ToolCallStatus
-from openrouter.types import BaseModel
-from openrouter.utils import validate_open_enum
-from pydantic.functional_validators import PlainValidator
+from openrouter.types import BaseModel, UNSET_SENTINEL
+import pydantic
+from pydantic import model_serializer
 from typing import Literal, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -15,7 +15,7 @@ OutputDatetimeItemType = Literal["openrouter:datetime",]
 class OutputDatetimeItemTypedDict(TypedDict):
     r"""An openrouter:datetime server tool output item"""
 
-    datetime: str
+    datetime_: str
     r"""ISO 8601 datetime string"""
     status: ToolCallStatus
     timezone: str
@@ -27,10 +27,10 @@ class OutputDatetimeItemTypedDict(TypedDict):
 class OutputDatetimeItem(BaseModel):
     r"""An openrouter:datetime server tool output item"""
 
-    datetime: str
+    datetime_: Annotated[str, pydantic.Field(alias="datetime")]
     r"""ISO 8601 datetime string"""
 
-    status: Annotated[ToolCallStatus, PlainValidator(validate_open_enum(False))]
+    status: ToolCallStatus
 
     timezone: str
     r"""IANA timezone name"""
@@ -38,3 +38,25 @@ class OutputDatetimeItem(BaseModel):
     type: OutputDatetimeItemType
 
     id: Optional[str] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["id"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
+
+try:
+    OutputDatetimeItem.model_rebuild()
+except NameError:
+    pass

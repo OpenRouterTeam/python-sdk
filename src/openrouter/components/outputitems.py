@@ -105,9 +105,12 @@ from .outputwebsearchservertoolitem import (
     OutputWebSearchServerToolItem,
     OutputWebSearchServerToolItemTypedDict,
 )
-from openrouter.utils import get_discriminator
-from pydantic import Discriminator, Tag
-from typing import Union
+from functools import partial
+from openrouter.types import BaseModel
+from openrouter.utils.unions import parse_open_union
+from pydantic import ConfigDict
+from pydantic.functional_validators import BeforeValidator
+from typing import Any, Literal, Union
 from typing_extensions import Annotated, TypeAliasType
 
 
@@ -148,45 +151,90 @@ OutputItemsTypedDict = TypeAliasType(
 r"""An output item from the response"""
 
 
+class UnknownOutputItems(BaseModel):
+    r"""A OutputItems variant the SDK doesn't recognize. Preserves the raw payload."""
+
+    type: Literal["UNKNOWN"] = "UNKNOWN"
+    raw: Any
+    is_unknown: Literal[True] = True
+
+    model_config = ConfigDict(frozen=True)
+
+
+_OUTPUT_ITEMS_VARIANTS: dict[str, Any] = {
+    "apply_patch_call": OutputApplyPatchCallItem,
+    "code_interpreter_call": OutputCodeInterpreterCallItem,
+    "computer_call": OutputComputerCallItem,
+    "custom_tool_call": OutputCustomToolCallItem,
+    "file_search_call": OutputFileSearchCallItem,
+    "function_call": OutputFunctionCallItem,
+    "image_generation_call": OutputImageGenerationCallItem,
+    "message": OutputMessageItem,
+    "openrouter:advisor": OutputAdvisorServerToolItem,
+    "openrouter:apply_patch": OutputApplyPatchServerToolItem,
+    "openrouter:bash": OutputBashServerToolItem,
+    "openrouter:browser_use": OutputBrowserUseServerToolItem,
+    "openrouter:code_interpreter": OutputCodeInterpreterServerToolItem,
+    "openrouter:datetime": OutputDatetimeItem,
+    "openrouter:experimental__search_models": OutputSearchModelsServerToolItem,
+    "openrouter:file_search": OutputFileSearchServerToolItem,
+    "openrouter:fusion": OutputFusionServerToolItem,
+    "openrouter:image_generation": OutputImageGenerationServerToolItem,
+    "openrouter:mcp": OutputMcpServerToolItem,
+    "openrouter:memory": OutputMemoryServerToolItem,
+    "openrouter:subagent": OutputSubagentServerToolItem,
+    "openrouter:text_editor": OutputTextEditorServerToolItem,
+    "openrouter:tool_search": OutputToolSearchServerToolItem,
+    "openrouter:web_fetch": OutputWebFetchServerToolItem,
+    "openrouter:web_search": OutputWebSearchServerToolItem,
+    "reasoning": OutputReasoningItem,
+    "shell_call": OutputShellCallItem,
+    "shell_call_output": OutputShellCallOutputItem,
+    "web_search_call": OutputWebSearchCallItem,
+}
+
+
 OutputItems = Annotated[
     Union[
-        Annotated[OutputApplyPatchCallItem, Tag("apply_patch_call")],
-        Annotated[OutputCodeInterpreterCallItem, Tag("code_interpreter_call")],
-        Annotated[OutputComputerCallItem, Tag("computer_call")],
-        Annotated[OutputCustomToolCallItem, Tag("custom_tool_call")],
-        Annotated[OutputFileSearchCallItem, Tag("file_search_call")],
-        Annotated[OutputFunctionCallItem, Tag("function_call")],
-        Annotated[OutputImageGenerationCallItem, Tag("image_generation_call")],
-        Annotated[OutputMessageItem, Tag("message")],
-        Annotated[OutputAdvisorServerToolItem, Tag("openrouter:advisor")],
-        Annotated[OutputApplyPatchServerToolItem, Tag("openrouter:apply_patch")],
-        Annotated[OutputBashServerToolItem, Tag("openrouter:bash")],
-        Annotated[OutputBrowserUseServerToolItem, Tag("openrouter:browser_use")],
-        Annotated[
-            OutputCodeInterpreterServerToolItem, Tag("openrouter:code_interpreter")
-        ],
-        Annotated[OutputDatetimeItem, Tag("openrouter:datetime")],
-        Annotated[
-            OutputSearchModelsServerToolItem,
-            Tag("openrouter:experimental__search_models"),
-        ],
-        Annotated[OutputFileSearchServerToolItem, Tag("openrouter:file_search")],
-        Annotated[OutputFusionServerToolItem, Tag("openrouter:fusion")],
-        Annotated[
-            OutputImageGenerationServerToolItem, Tag("openrouter:image_generation")
-        ],
-        Annotated[OutputMcpServerToolItem, Tag("openrouter:mcp")],
-        Annotated[OutputMemoryServerToolItem, Tag("openrouter:memory")],
-        Annotated[OutputSubagentServerToolItem, Tag("openrouter:subagent")],
-        Annotated[OutputTextEditorServerToolItem, Tag("openrouter:text_editor")],
-        Annotated[OutputToolSearchServerToolItem, Tag("openrouter:tool_search")],
-        Annotated[OutputWebFetchServerToolItem, Tag("openrouter:web_fetch")],
-        Annotated[OutputWebSearchServerToolItem, Tag("openrouter:web_search")],
-        Annotated[OutputReasoningItem, Tag("reasoning")],
-        Annotated[OutputShellCallItem, Tag("shell_call")],
-        Annotated[OutputShellCallOutputItem, Tag("shell_call_output")],
-        Annotated[OutputWebSearchCallItem, Tag("web_search_call")],
+        OutputApplyPatchCallItem,
+        OutputCodeInterpreterCallItem,
+        OutputComputerCallItem,
+        OutputCustomToolCallItem,
+        OutputFileSearchCallItem,
+        OutputFunctionCallItem,
+        OutputImageGenerationCallItem,
+        OutputMessageItem,
+        OutputAdvisorServerToolItem,
+        OutputApplyPatchServerToolItem,
+        OutputBashServerToolItem,
+        OutputBrowserUseServerToolItem,
+        OutputCodeInterpreterServerToolItem,
+        OutputDatetimeItem,
+        OutputSearchModelsServerToolItem,
+        OutputFileSearchServerToolItem,
+        OutputFusionServerToolItem,
+        OutputImageGenerationServerToolItem,
+        OutputMcpServerToolItem,
+        OutputMemoryServerToolItem,
+        OutputSubagentServerToolItem,
+        OutputTextEditorServerToolItem,
+        OutputToolSearchServerToolItem,
+        OutputWebFetchServerToolItem,
+        OutputWebSearchServerToolItem,
+        OutputReasoningItem,
+        OutputShellCallItem,
+        OutputShellCallOutputItem,
+        OutputWebSearchCallItem,
+        UnknownOutputItems,
     ],
-    Discriminator(lambda m: get_discriminator(m, "type", "type")),
+    BeforeValidator(
+        partial(
+            parse_open_union,
+            disc_key="type",
+            variants=_OUTPUT_ITEMS_VARIANTS,
+            unknown_cls=UnknownOutputItems,
+            union_name="OutputItems",
+        )
+    ),
 ]
 r"""An output item from the response"""

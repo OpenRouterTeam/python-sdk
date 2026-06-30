@@ -107,10 +107,10 @@ from openrouter.types import (
     UNSET_SENTINEL,
     UnrecognizedStr,
 )
-from openrouter.utils import get_discriminator, validate_const, validate_open_enum
+from openrouter.utils import get_discriminator, validate_const
 import pydantic
 from pydantic import Discriminator, Tag, model_serializer
-from pydantic.functional_validators import AfterValidator, PlainValidator
+from pydantic.functional_validators import AfterValidator
 from typing import Any, Dict, List, Literal, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
@@ -187,31 +187,26 @@ class ResponsesRequestToolFunction(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["description", "strict"]
-        nullable_fields = ["description", "parameters", "strict"]
-        null_default_fields = []
-
+        optional_fields = set(["description", "strict"])
+        nullable_fields = set(["description", "parameters", "strict"])
         serialized = handler(self)
-
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
-            serialized.pop(k, None)
+            val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
 
         return m
 
@@ -359,9 +354,7 @@ class ResponsesRequest(BaseModel):
     image_config: Optional[Dict[str, ImageConfig]] = None
     r"""Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/guides/overview/multimodal/image-generation for more details."""
 
-    include: OptionalNullable[
-        List[Annotated[ResponseIncludesEnum, PlainValidator(validate_open_enum(False))]]
-    ] = UNSET
+    include: OptionalNullable[List[ResponseIncludesEnum]] = UNSET
 
     input: Optional[InputsUnion] = None
     r"""Input for a response request - can be a string or array of items"""
@@ -375,9 +368,7 @@ class ResponsesRequest(BaseModel):
     metadata: OptionalNullable[Dict[str, str]] = UNSET
     r"""Metadata key-value pairs for the request. Keys must be ≤64 characters and cannot contain brackets. Values must be ≤512 characters. Maximum 16 pairs allowed."""
 
-    modalities: Optional[
-        List[Annotated[OutputModalityEnum, PlainValidator(validate_open_enum(False))]]
-    ] = None
+    modalities: Optional[List[OutputModalityEnum]] = None
     r"""Output modalities for the response. Supported values are \"text\" and \"image\"."""
 
     model: Optional[str] = None
@@ -405,10 +396,7 @@ class ResponsesRequest(BaseModel):
 
     safety_identifier: OptionalNullable[str] = UNSET
 
-    service_tier: Annotated[
-        OptionalNullable[ResponsesRequestServiceTier],
-        PlainValidator(validate_open_enum(False)),
-    ] = "auto"
+    service_tier: OptionalNullable[ResponsesRequestServiceTier] = "auto"
 
     session_id: Optional[str] = None
     r"""A unique identifier for grouping related requests (e.g., a conversation or agent workflow). When provided, OpenRouter uses it as the sticky routing key, routing all requests in the session to the same provider to maximize prompt cache hits. Also used for observability grouping. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters."""
@@ -441,100 +429,102 @@ class ResponsesRequest(BaseModel):
     trace: Optional[TraceConfig] = None
     r"""Metadata for observability and tracing. Known keys (trace_id, trace_name, span_name, generation_name, parent_span_id) have special handling. Additional keys are passed through as custom metadata to configured broadcast destinations."""
 
-    truncation: Annotated[
-        OptionalNullable[OpenAIResponsesTruncation],
-        PlainValidator(validate_open_enum(False)),
-    ] = UNSET
+    truncation: OptionalNullable[OpenAIResponsesTruncation] = UNSET
 
     user: Optional[str] = None
     r"""A unique identifier representing your end-user, which helps distinguish between different users of your app. This allows your app to identify specific users in case of abuse reports, preventing your entire app from being affected by the actions of individual users. Maximum of 256 characters."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = [
-            "background",
-            "cache_control",
-            "debug",
-            "frequency_penalty",
-            "image_config",
-            "include",
-            "input",
-            "instructions",
-            "max_output_tokens",
-            "max_tool_calls",
-            "metadata",
-            "modalities",
-            "model",
-            "models",
-            "parallel_tool_calls",
-            "plugins",
-            "presence_penalty",
-            "previous_response_id",
-            "prompt",
-            "prompt_cache_key",
-            "provider",
-            "reasoning",
-            "safety_identifier",
-            "service_tier",
-            "session_id",
-            "stop_server_tools_when",
-            "store",
-            "stream",
-            "temperature",
-            "text",
-            "tool_choice",
-            "tools",
-            "top_k",
-            "top_logprobs",
-            "top_p",
-            "trace",
-            "truncation",
-            "user",
-        ]
-        nullable_fields = [
-            "background",
-            "frequency_penalty",
-            "include",
-            "instructions",
-            "max_output_tokens",
-            "max_tool_calls",
-            "metadata",
-            "parallel_tool_calls",
-            "presence_penalty",
-            "previous_response_id",
-            "prompt",
-            "prompt_cache_key",
-            "provider",
-            "reasoning",
-            "safety_identifier",
-            "service_tier",
-            "temperature",
-            "top_logprobs",
-            "top_p",
-            "truncation",
-        ]
-        null_default_fields = []
-
+        optional_fields = set(
+            [
+                "background",
+                "cache_control",
+                "debug",
+                "frequency_penalty",
+                "image_config",
+                "include",
+                "input",
+                "instructions",
+                "max_output_tokens",
+                "max_tool_calls",
+                "metadata",
+                "modalities",
+                "model",
+                "models",
+                "parallel_tool_calls",
+                "plugins",
+                "presence_penalty",
+                "previous_response_id",
+                "prompt",
+                "prompt_cache_key",
+                "provider",
+                "reasoning",
+                "safety_identifier",
+                "service_tier",
+                "session_id",
+                "stop_server_tools_when",
+                "store",
+                "stream",
+                "temperature",
+                "text",
+                "tool_choice",
+                "tools",
+                "top_k",
+                "top_logprobs",
+                "top_p",
+                "trace",
+                "truncation",
+                "user",
+            ]
+        )
+        nullable_fields = set(
+            [
+                "background",
+                "frequency_penalty",
+                "include",
+                "instructions",
+                "max_output_tokens",
+                "max_tool_calls",
+                "metadata",
+                "parallel_tool_calls",
+                "presence_penalty",
+                "previous_response_id",
+                "prompt",
+                "prompt_cache_key",
+                "provider",
+                "reasoning",
+                "safety_identifier",
+                "service_tier",
+                "temperature",
+                "top_logprobs",
+                "top_p",
+                "truncation",
+            ]
+        )
         serialized = handler(self)
-
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
-            serialized.pop(k, None)
+            val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
 
         return m
+
+
+try:
+    ResponsesRequest.model_rebuild()
+except NameError:
+    pass

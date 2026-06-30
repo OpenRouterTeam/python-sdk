@@ -7,10 +7,12 @@ from .openairesponsesrefusalcontent import (
 )
 from .reasoningtextcontent import ReasoningTextContent, ReasoningTextContentTypedDict
 from .responseoutputtext import ResponseOutputText, ResponseOutputTextTypedDict
+from functools import partial
 from openrouter.types import BaseModel
-from openrouter.utils import get_discriminator
-from pydantic import Discriminator, Tag
-from typing import Literal, Union
+from openrouter.utils.unions import parse_open_union
+from pydantic import ConfigDict
+from pydantic.functional_validators import BeforeValidator
+from typing import Any, Literal, Union
 from typing_extensions import Annotated, TypeAliasType, TypedDict
 
 
@@ -24,13 +26,39 @@ ContentPartAddedEventPartTypedDict = TypeAliasType(
 )
 
 
+class UnknownContentPartAddedEventPart(BaseModel):
+    r"""A ContentPartAddedEventPart variant the SDK doesn't recognize. Preserves the raw payload."""
+
+    type: Literal["UNKNOWN"] = "UNKNOWN"
+    raw: Any
+    is_unknown: Literal[True] = True
+
+    model_config = ConfigDict(frozen=True)
+
+
+_CONTENT_PART_ADDED_EVENT_PART_VARIANTS: dict[str, Any] = {
+    "output_text": ResponseOutputText,
+    "reasoning_text": ReasoningTextContent,
+    "refusal": OpenAIResponsesRefusalContent,
+}
+
+
 ContentPartAddedEventPart = Annotated[
     Union[
-        Annotated[ResponseOutputText, Tag("output_text")],
-        Annotated[ReasoningTextContent, Tag("reasoning_text")],
-        Annotated[OpenAIResponsesRefusalContent, Tag("refusal")],
+        ResponseOutputText,
+        ReasoningTextContent,
+        OpenAIResponsesRefusalContent,
+        UnknownContentPartAddedEventPart,
     ],
-    Discriminator(lambda m: get_discriminator(m, "type", "type")),
+    BeforeValidator(
+        partial(
+            parse_open_union,
+            disc_key="type",
+            variants=_CONTENT_PART_ADDED_EVENT_PART_VARIANTS,
+            unknown_cls=UnknownContentPartAddedEventPart,
+            union_name="ContentPartAddedEventPart",
+        )
+    ),
 ]
 
 

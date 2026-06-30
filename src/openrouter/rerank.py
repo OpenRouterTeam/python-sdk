@@ -7,7 +7,7 @@ from openrouter._hooks import HookContext
 from openrouter.types import OptionalNullable, UNSET
 from openrouter.utils import get_security_from_env
 from openrouter.utils.unmarshal_json_response import unmarshal_json_response
-from typing import Any, List, Mapping, Optional, Union
+from typing import Any, Iterable, List, Mapping, Optional, Union
 
 
 class RerankAcceptEnum(str, Enum):
@@ -21,7 +21,9 @@ class Rerank(BaseSDK):
     def rerank(
         self,
         *,
-        documents: Union[List[operations.Document], List[operations.DocumentTypedDict]],
+        documents: Union[
+            Iterable[operations.Document], Iterable[operations.DocumentTypedDict]
+        ],
         model: str,
         query: str,
         http_referer: Optional[str] = None,
@@ -35,8 +37,8 @@ class Rerank(BaseSDK):
         top_n: Optional[int] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
         accept_header_override: Optional[RerankAcceptEnum] = None,
+        timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> operations.CreateRerankResponse:
         r"""Submit a rerank request
@@ -140,22 +142,11 @@ class Rerank(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Rerank"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=[
-                "400",
-                "401",
-                "402",
-                "404",
-                "429",
-                "4XX",
-                "500",
-                "502",
-                "503",
-                "524",
-                "529",
-                "5XX",
-            ],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -232,7 +223,9 @@ class Rerank(BaseSDK):
     async def rerank_async(
         self,
         *,
-        documents: Union[List[operations.Document], List[operations.DocumentTypedDict]],
+        documents: Union[
+            Iterable[operations.Document], Iterable[operations.DocumentTypedDict]
+        ],
         model: str,
         query: str,
         http_referer: Optional[str] = None,
@@ -246,8 +239,8 @@ class Rerank(BaseSDK):
         top_n: Optional[int] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
         accept_header_override: Optional[RerankAcceptEnum] = None,
+        timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> operations.CreateRerankResponse:
         r"""Submit a rerank request
@@ -351,22 +344,11 @@ class Rerank(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Rerank"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=[
-                "400",
-                "401",
-                "402",
-                "404",
-                "429",
-                "4XX",
-                "500",
-                "502",
-                "503",
-                "524",
-                "529",
-                "5XX",
-            ],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
