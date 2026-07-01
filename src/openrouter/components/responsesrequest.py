@@ -35,6 +35,7 @@ from .customtool import CustomTool, CustomToolTypedDict
 from .datetimeservertool import DatetimeServerTool, DatetimeServerToolTypedDict
 from .fileparserplugin import FileParserPlugin, FileParserPluginTypedDict
 from .filesearchservertool import FileSearchServerTool, FileSearchServerToolTypedDict
+from .filesservertool import FilesServerTool, FilesServerToolTypedDict
 from .fusionplugin import FusionPlugin, FusionPluginTypedDict
 from .fusionservertool_openrouter import (
     FusionServerToolOpenRouter,
@@ -217,25 +218,26 @@ ResponsesRequestToolUnionTypedDict = TypeAliasType(
         CodexLocalShellToolTypedDict,
         ApplyPatchServerToolTypedDict,
         ShellServerToolTypedDict,
+        FusionServerToolOpenRouterTypedDict,
         ImageGenerationServerToolOpenRouterTypedDict,
-        ChatSearchModelsServerToolTypedDict,
         ShellServerToolOpenRouterTypedDict,
         BashServerToolTypedDict,
         CodeInterpreterServerToolTypedDict,
         ApplyPatchServerToolOpenRouterTypedDict,
         WebSearchServerToolOpenRouterTypedDict,
         WebFetchServerToolTypedDict,
-        FusionServerToolOpenRouterTypedDict,
+        ChatSearchModelsServerToolTypedDict,
+        FilesServerToolTypedDict,
         DatetimeServerToolTypedDict,
-        SubagentServerToolOpenRouterTypedDict,
         AdvisorServerToolOpenRouterTypedDict,
+        SubagentServerToolOpenRouterTypedDict,
         CustomToolTypedDict,
         ComputerUseServerToolTypedDict,
         ResponsesRequestToolFunctionTypedDict,
         FileSearchServerToolTypedDict,
         PreviewWebSearchServerToolTypedDict,
-        Preview20250311WebSearchServerToolTypedDict,
         WebSearchServerToolTypedDict,
+        Preview20250311WebSearchServerToolTypedDict,
         LegacyWebSearchServerToolTypedDict,
         McpServerToolTypedDict,
         ImageGenerationServerToolTypedDict,
@@ -264,6 +266,7 @@ ResponsesRequestToolUnion = Annotated[
         Annotated[AdvisorServerToolOpenRouter, Tag("openrouter:advisor")],
         Annotated[SubagentServerToolOpenRouter, Tag("openrouter:subagent")],
         Annotated[DatetimeServerTool, Tag("openrouter:datetime")],
+        Annotated[FilesServerTool, Tag("openrouter:files")],
         Annotated[FusionServerToolOpenRouter, Tag("openrouter:fusion")],
         Annotated[
             ImageGenerationServerToolOpenRouter, Tag("openrouter:image_generation")
