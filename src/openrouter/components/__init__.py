@@ -893,6 +893,15 @@ if TYPE_CHECKING:
         RankingOptionsTypedDict,
         TypeFileSearch,
     )
+    from .filesservertool import (
+        FilesServerTool,
+        FilesServerToolType,
+        FilesServerToolTypedDict,
+    )
+    from .filesservertoolconfig import (
+        FilesServerToolConfig,
+        FilesServerToolConfigTypedDict,
+    )
     from .forbiddenresponseerrordata import (
         ForbiddenResponseErrorData,
         ForbiddenResponseErrorDataTypedDict,
@@ -3349,6 +3358,11 @@ __all__ = [
     "FileSearchServerToolValue2",
     "FileSearchServerToolValue2TypedDict",
     "FileTypedDict",
+    "FilesServerTool",
+    "FilesServerToolConfig",
+    "FilesServerToolConfigTypedDict",
+    "FilesServerToolType",
+    "FilesServerToolTypedDict",
     "Filters",
     "FiltersType",
     "FiltersTypedDict",
@@ -5312,6 +5326,11 @@ _dynamic_imports: dict[str, str] = {
     "RankingOptions": ".filesearchservertool",
     "RankingOptionsTypedDict": ".filesearchservertool",
     "TypeFileSearch": ".filesearchservertool",
+    "FilesServerTool": ".filesservertool",
+    "FilesServerToolType": ".filesservertool",
+    "FilesServerToolTypedDict": ".filesservertool",
+    "FilesServerToolConfig": ".filesservertoolconfig",
+    "FilesServerToolConfigTypedDict": ".filesservertoolconfig",
     "ForbiddenResponseErrorData": ".forbiddenresponseerrordata",
     "ForbiddenResponseErrorDataTypedDict": ".forbiddenresponseerrordata",
     "FormatJSONObjectConfig": ".formatjsonobjectconfig",
