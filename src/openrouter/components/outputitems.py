@@ -46,6 +46,10 @@ from .outputfilesearchservertoolitem import (
     OutputFileSearchServerToolItem,
     OutputFileSearchServerToolItemTypedDict,
 )
+from .outputfilesservertoolitem import (
+    OutputFilesServerToolItem,
+    OutputFilesServerToolItemTypedDict,
+)
 from .outputfunctioncallitem import (
     OutputFunctionCallItem,
     OutputFunctionCallItemTypedDict,
@@ -145,6 +149,7 @@ OutputItemsTypedDict = TypeAliasType(
         OutputReasoningItemTypedDict,
         OutputAdvisorServerToolItemTypedDict,
         OutputSubagentServerToolItemTypedDict,
+        OutputFilesServerToolItemTypedDict,
         OutputFusionServerToolItemTypedDict,
     ],
 )
@@ -178,6 +183,7 @@ _OUTPUT_ITEMS_VARIANTS: dict[str, Any] = {
     "openrouter:datetime": OutputDatetimeItem,
     "openrouter:experimental__search_models": OutputSearchModelsServerToolItem,
     "openrouter:file_search": OutputFileSearchServerToolItem,
+    "openrouter:files": OutputFilesServerToolItem,
     "openrouter:fusion": OutputFusionServerToolItem,
     "openrouter:image_generation": OutputImageGenerationServerToolItem,
     "openrouter:mcp": OutputMcpServerToolItem,
@@ -212,6 +218,7 @@ OutputItems = Annotated[
         OutputDatetimeItem,
         OutputSearchModelsServerToolItem,
         OutputFileSearchServerToolItem,
+        OutputFilesServerToolItem,
         OutputFusionServerToolItem,
         OutputImageGenerationServerToolItem,
         OutputMcpServerToolItem,
