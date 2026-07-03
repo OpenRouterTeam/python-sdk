@@ -1330,6 +1330,10 @@ if TYPE_CHECKING:
         ListWorkspaceBudgetsResponse,
         ListWorkspaceBudgetsResponseTypedDict,
     )
+    from .listworkspacemembersresponse import (
+        ListWorkspaceMembersResponse,
+        ListWorkspaceMembersResponseTypedDict,
+    )
     from .listworkspacesresponse import (
         ListWorkspacesResponse,
         ListWorkspacesResponseTypedDict,
@@ -3686,6 +3690,8 @@ __all__ = [
     "ListPresetsResponseTypedDict",
     "ListWorkspaceBudgetsResponse",
     "ListWorkspaceBudgetsResponseTypedDict",
+    "ListWorkspaceMembersResponse",
+    "ListWorkspaceMembersResponseTypedDict",
     "ListWorkspacesResponse",
     "ListWorkspacesResponseTypedDict",
     "LocalShellCallItem",
@@ -5651,6 +5657,8 @@ _dynamic_imports: dict[str, str] = {
     "ListPresetVersionsResponseTypedDict": ".listpresetversionsresponse",
     "ListWorkspaceBudgetsResponse": ".listworkspacebudgetsresponse",
     "ListWorkspaceBudgetsResponseTypedDict": ".listworkspacebudgetsresponse",
+    "ListWorkspaceMembersResponse": ".listworkspacemembersresponse",
+    "ListWorkspaceMembersResponseTypedDict": ".listworkspacemembersresponse",
     "ListWorkspacesResponse": ".listworkspacesresponse",
     "ListWorkspacesResponseTypedDict": ".listworkspacesresponse",
     "LocalShellCallItem": ".localshellcallitem",
