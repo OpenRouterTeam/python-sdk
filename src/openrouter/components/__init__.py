@@ -1893,6 +1893,11 @@ if TYPE_CHECKING:
         OutputFileSearchServerToolItemType,
         OutputFileSearchServerToolItemTypedDict,
     )
+    from .outputfilesservertoolitem import (
+        OutputFilesServerToolItem,
+        OutputFilesServerToolItemType,
+        OutputFilesServerToolItemTypedDict,
+    )
     from .outputfunctioncallitem import (
         OutputFunctionCallItem,
         OutputFunctionCallItemStatusCompleted,
@@ -4021,6 +4026,9 @@ __all__ = [
     "OutputFileSearchServerToolItem",
     "OutputFileSearchServerToolItemType",
     "OutputFileSearchServerToolItemTypedDict",
+    "OutputFilesServerToolItem",
+    "OutputFilesServerToolItemType",
+    "OutputFilesServerToolItemTypedDict",
     "OutputFunctionCallItem",
     "OutputFunctionCallItemStatusCompleted",
     "OutputFunctionCallItemStatusInProgress",
@@ -6112,6 +6120,9 @@ _dynamic_imports: dict[str, str] = {
     "OutputFileSearchServerToolItem": ".outputfilesearchservertoolitem",
     "OutputFileSearchServerToolItemType": ".outputfilesearchservertoolitem",
     "OutputFileSearchServerToolItemTypedDict": ".outputfilesearchservertoolitem",
+    "OutputFilesServerToolItem": ".outputfilesservertoolitem",
+    "OutputFilesServerToolItemType": ".outputfilesservertoolitem",
+    "OutputFilesServerToolItemTypedDict": ".outputfilesservertoolitem",
     "OutputFunctionCallItem": ".outputfunctioncallitem",
     "OutputFunctionCallItemStatusCompleted": ".outputfunctioncallitem",
     "OutputFunctionCallItemStatusInProgress": ".outputfunctioncallitem",
