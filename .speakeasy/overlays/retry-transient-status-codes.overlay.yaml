@@ -1,0 +1,11 @@
+overlay: 1.0.0
+x-speakeasy-jsonpath: rfc9535
+info:
+  title: Retry request-timeout and rate-limit responses
+  version: 0.0.0
+actions:
+  - target: $["x-speakeasy-retries"].statusCodes
+    description: Also retry 408 (request timeout) and 429 (rate limit), not just 5XX
+    update:
+      - "408"
+      - "429"
