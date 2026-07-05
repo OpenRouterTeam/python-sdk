@@ -2,15 +2,10 @@
 
 from __future__ import annotations
 from datetime import datetime
-from openrouter.types import BaseModel, UnrecognizedStr
-from openrouter.utils import (
-    FieldMetadata,
-    HeaderMetadata,
-    RequestMetadata,
-    validate_open_enum,
-)
+from openrouter.types import BaseModel, UNSET_SENTINEL, UnrecognizedStr
+from openrouter.utils import FieldMetadata, HeaderMetadata, RequestMetadata
 import pydantic
-from pydantic.functional_validators import PlainValidator
+from pydantic import model_serializer
 from typing import List, Literal, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
@@ -59,6 +54,24 @@ class QueryAnalyticsGlobals(BaseModel):
     r"""Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
     """
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            ["HTTP-Referer", "X-OpenRouter-Title", "X-OpenRouter-Categories"]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 Value2TypedDict = TypeAliasType("Value2TypedDict", Union[str, float])
@@ -113,7 +126,7 @@ class OrderByTypedDict(TypedDict):
 
 
 class OrderBy(BaseModel):
-    direction: Annotated[Direction, PlainValidator(validate_open_enum(False))]
+    direction: Direction
 
     field: str
     r"""Field to order by"""
@@ -163,6 +176,32 @@ class QueryAnalyticsRequestBody(BaseModel):
     order_by: Optional[OrderBy] = None
 
     time_range: Optional[TimeRange] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "dimensions",
+                "filters",
+                "granularity",
+                "group_limit",
+                "limit",
+                "order_by",
+                "time_range",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class QueryAnalyticsRequestTypedDict(TypedDict):
@@ -216,6 +255,24 @@ class QueryAnalyticsRequest(BaseModel):
 
     """
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            ["HTTP-Referer", "X-OpenRouter-Title", "X-OpenRouter-Categories"]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class QueryAnalyticsData1TypedDict(TypedDict):
     r"""A row of analytics data with metric/dimension values"""
@@ -257,6 +314,22 @@ class QueryAnalyticsData2(BaseModel):
     warnings: Optional[List[str]] = None
     r"""Warnings about filter resolution issues (e.g. unresolvable api_key_id hashes). The query still runs normally; these inform the caller that some filter values could not be resolved."""
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["cachedAt", "warnings"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class QueryAnalyticsResponseTypedDict(TypedDict):
     r"""Analytics query results"""
@@ -268,3 +341,9 @@ class QueryAnalyticsResponse(BaseModel):
     r"""Analytics query results"""
 
     data: QueryAnalyticsData2
+
+
+try:
+    QueryAnalyticsData2.model_rebuild()
+except NameError:
+    pass

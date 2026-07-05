@@ -1,0 +1,16 @@
+---
+title: "UserLocation"
+---
+
+Approximate user location for location-biased search results. Passed through to native providers that support it (e.g. Anthropic).
+
+
+## Fields
+
+| Field                                                                  | Type                                                                   | Required                                                               | Description                                                            |
+| ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| `city`                                                                 | *OptionalNullable[str]*                                                | :heavy_minus_sign:                                                     | N/A                                                                    |
+| `country`                                                              | *OptionalNullable[str]*                                                | :heavy_minus_sign:                                                     | N/A                                                                    |
+| `region`                                                               | *OptionalNullable[str]*                                                | :heavy_minus_sign:                                                     | N/A                                                                    |
+| `timezone`                                                             | *OptionalNullable[str]*                                                | :heavy_minus_sign:                                                     | N/A                                                                    |
+| `type`                                                                 | [components.WebSearchPluginType](../components/websearchplugintype.mdx) | :heavy_check_mark:                                                     | N/A                                                                    |

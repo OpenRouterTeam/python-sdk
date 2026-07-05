@@ -1,0 +1,24 @@
+---
+title: "ReasoningFormat"
+---
+
+## Example Usage
+
+```python
+from openrouter.components import ReasoningFormat
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
+value: ReasoningFormat = "unknown"
+```
+
+
+## Values
+
+This is an open enum. Unrecognized values will not fail type checks.
+
+- `"unknown"`
+- `"openai-responses-v1"`
+- `"azure-openai-responses-v1"`
+- `"xai-responses-v1"`
+- `"anthropic-claude-v1"`
+- `"google-gemini-v1"`

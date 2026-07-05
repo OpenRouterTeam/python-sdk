@@ -1,0 +1,22 @@
+---
+title: "DataRegion"
+---
+
+The data region this generation was routed through. 'europe' for EU-routed requests, 'global' otherwise.
+
+## Example Usage
+
+```python
+from openrouter.components import DataRegion
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
+value: DataRegion = "global"
+```
+
+
+## Values
+
+This is an open enum. Unrecognized values will not fail type checks.
+
+- `"global"`
+- `"europe"`

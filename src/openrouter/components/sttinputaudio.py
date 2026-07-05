@@ -23,3 +23,9 @@ class STTInputAudio(BaseModel):
 
     format_: Annotated[str, pydantic.Field(alias="format")]
     r"""Audio format (e.g., wav, mp3, flac, m4a, ogg, webm, aac). Supported formats vary by provider."""
+
+
+try:
+    STTInputAudio.model_rebuild()
+except NameError:
+    pass

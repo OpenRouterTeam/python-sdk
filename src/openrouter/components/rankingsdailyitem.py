@@ -24,3 +24,9 @@ class RankingsDailyItem(BaseModel):
 
     total_tokens: str
     r"""Sum of `prompt_tokens + completion_tokens` for the day, returned as a decimal string so 64-bit values are not truncated."""
+
+
+try:
+    RankingsDailyItem.model_rebuild()
+except NameError:
+    pass

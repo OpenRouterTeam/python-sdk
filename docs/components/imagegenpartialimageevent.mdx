@@ -1,0 +1,14 @@
+---
+title: "ImageGenPartialImageEvent"
+---
+
+Emitted when a partial image becomes available during streaming generation
+
+
+## Fields
+
+| Field                                                                                      | Type                                                                                       | Required                                                                                   | Description                                                                                |
+| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
+| `b64_json`                                                                                 | *str*                                                                                      | :heavy_check_mark:                                                                         | Base64-encoded partial image data                                                          |
+| `partial_image_index`                                                                      | *int*                                                                                      | :heavy_check_mark:                                                                         | 0-based index indicating which partial image this is in the sequence                       |
+| `type`                                                                                     | [components.ImageGenPartialImageEventType](../components/imagegenpartialimageeventtype.mdx) | :heavy_check_mark:                                                                         | The event type                                                                             |

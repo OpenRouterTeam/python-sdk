@@ -1,0 +1,13 @@
+---
+title: "WebFetchPlugin"
+---
+
+## Fields
+
+| Field                                                                                    | Type                                                                                     | Required                                                                                 | Description                                                                              |
+| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `allowed_domains`                                                                        | List[*str*]                                                                              | :heavy_minus_sign:                                                                       | Only fetch from these domains.                                                           |
+| `blocked_domains`                                                                        | List[*str*]                                                                              | :heavy_minus_sign:                                                                       | Never fetch from these domains.                                                          |
+| `id`                                                                                     | [components.WebFetchPluginID](../components/webfetchpluginid.mdx)                         | :heavy_check_mark:                                                                       | N/A                                                                                      |
+| `max_content_tokens`                                                                     | *Optional[int]*                                                                          | :heavy_minus_sign:                                                                       | Maximum content length in approximate tokens. Content exceeding this limit is truncated. |
+| `max_uses`                                                                               | *Optional[int]*                                                                          | :heavy_minus_sign:                                                                       | Maximum number of web fetches per request. Once exceeded, the tool returns an error.     |

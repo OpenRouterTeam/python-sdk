@@ -3,10 +3,8 @@
 from __future__ import annotations
 from .websearchstatus import WebSearchStatus
 from openrouter.types import BaseModel
-from openrouter.utils import validate_open_enum
-from pydantic.functional_validators import PlainValidator
 from typing import List, Literal
-from typing_extensions import Annotated, TypedDict
+from typing_extensions import TypedDict
 
 
 OutputFileSearchCallItemType = Literal["file_search_call",]
@@ -24,6 +22,6 @@ class OutputFileSearchCallItem(BaseModel):
 
     queries: List[str]
 
-    status: Annotated[WebSearchStatus, PlainValidator(validate_open_enum(False))]
+    status: WebSearchStatus
 
     type: OutputFileSearchCallItemType

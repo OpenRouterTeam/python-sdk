@@ -1,0 +1,24 @@
+---
+title: "WorkspaceBudgetInterval"
+---
+
+Budget reset interval. Use "lifetime" for a one-time budget that never resets.
+
+## Example Usage
+
+```python
+from openrouter.components import WorkspaceBudgetInterval
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
+value: WorkspaceBudgetInterval = "daily"
+```
+
+
+## Values
+
+This is an open enum. Unrecognized values will not fail type checks.
+
+- `"daily"`
+- `"weekly"`
+- `"monthly"`
+- `"lifetime"`

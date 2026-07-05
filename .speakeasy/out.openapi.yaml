@@ -4532,6 +4532,7 @@ components:
         - $ref: '#/components/schemas/AdvisorServerTool_OpenRouter'
         - $ref: '#/components/schemas/BashServerTool'
         - $ref: '#/components/schemas/DatetimeServerTool'
+        - $ref: '#/components/schemas/FilesServerTool'
         - $ref: '#/components/schemas/ImageGenerationServerTool_OpenRouter'
         - $ref: '#/components/schemas/ChatSearchModelsServerTool'
         - $ref: '#/components/schemas/SubagentServerTool_OpenRouter'
@@ -7555,6 +7556,27 @@ components:
         - type
         - vector_store_ids
       type: object
+    FilesServerTool:
+      description: >-
+        OpenRouter built-in server tool: read, write, edit, and list workspace files via the Files API. Requires the `x-openrouter-file-ids: openrouter` request header.
+      example:
+        parameters: {}
+        type: openrouter:files
+      properties:
+        parameters:
+          $ref: '#/components/schemas/FilesServerToolConfig'
+        type:
+          enum:
+            - openrouter:files
+          type: string
+      required:
+        - type
+      type: object
+    FilesServerToolConfig:
+      description: Configuration for the openrouter:files server tool
+      example: {}
+      properties: {}
+      type: object
     ForbiddenResponse:
       description: Forbidden - Authentication successful but insufficient permissions
       example:
@@ -10277,6 +10299,7 @@ components:
               - $ref: '#/components/schemas/OutputFusionServerToolItem'
               - $ref: '#/components/schemas/OutputAdvisorServerToolItem'
               - $ref: '#/components/schemas/OutputSubagentServerToolItem'
+              - $ref: '#/components/schemas/OutputFilesServerToolItem'
               - $ref: '#/components/schemas/LocalShellCallItem'
               - $ref: '#/components/schemas/LocalShellCallOutputItem'
               - $ref: '#/components/schemas/ShellCallItem'
@@ -10849,6 +10872,29 @@ components:
           type: array
       required:
         - data
+      type: object
+    ListWorkspaceMembersResponse:
+      example:
+        data:
+          - created_at: '2025-08-24T10:30:00Z'
+            id: 660e8400-e29b-41d4-a716-446655440000
+            role: member
+            user_id: user_abc123
+            workspace_id: 550e8400-e29b-41d4-a716-446655440000
+        total_count: 1
+      properties:
+        data:
+          description: List of workspace members
+          items:
+            $ref: '#/components/schemas/WorkspaceMember'
+          type: array
+        total_count:
+          description: Total number of members in the workspace
+          example: 5
+          type: integer
+      required:
+        - data
+        - total_count
       type: object
     ListWorkspacesResponse:
       example:
@@ -16169,6 +16215,43 @@ components:
         - status
         - type
       type: object
+    OutputFilesServerToolItem:
+      description: An openrouter:files server tool output item
+      example:
+        filename: notes.txt
+        id: fl_tmp_abc123
+        operation: read
+        result: '{"id":"file_abc","filename":"notes.txt","content":"hello"}'
+        status: completed
+        type: openrouter:files
+      properties:
+        error:
+          description: Error message when the file operation failed.
+          type: string
+        file_id:
+          description: The target file id supplied in the tool-call arguments.
+          type: string
+        filename:
+          description: The target filename supplied in the tool-call arguments.
+          type: string
+        id:
+          type: string
+        operation:
+          description: The file operation performed (list, read, write, or edit).
+          type: string
+        result:
+          description: JSON-serialized result of the file operation.
+          type: string
+        status:
+          $ref: '#/components/schemas/ToolCallStatus'
+        type:
+          enum:
+            - openrouter:files
+          type: string
+      required:
+        - status
+        - type
+      type: object
     OutputFunctionCallItem:
       allOf:
         - $ref: '#/components/schemas/OutputItemFunctionCall'
@@ -16617,6 +16700,7 @@ components:
           openrouter:datetime: '#/components/schemas/OutputDatetimeItem'
           openrouter:experimental__search_models: '#/components/schemas/OutputSearchModelsServerToolItem'
           openrouter:file_search: '#/components/schemas/OutputFileSearchServerToolItem'
+          openrouter:files: '#/components/schemas/OutputFilesServerToolItem'
           openrouter:fusion: '#/components/schemas/OutputFusionServerToolItem'
           openrouter:image_generation: '#/components/schemas/OutputImageGenerationServerToolItem'
           openrouter:mcp: '#/components/schemas/OutputMcpServerToolItem'
@@ -16668,6 +16752,7 @@ components:
         - $ref: '#/components/schemas/OutputFusionServerToolItem'
         - $ref: '#/components/schemas/OutputAdvisorServerToolItem'
         - $ref: '#/components/schemas/OutputSubagentServerToolItem'
+        - $ref: '#/components/schemas/OutputFilesServerToolItem'
         - $ref: '#/components/schemas/OutputCustomToolCallItem'
     OutputItemWebSearchCall:
       example:
@@ -19755,6 +19840,7 @@ components:
               - $ref: '#/components/schemas/AdvisorServerTool_OpenRouter'
               - $ref: '#/components/schemas/SubagentServerTool_OpenRouter'
               - $ref: '#/components/schemas/DatetimeServerTool'
+              - $ref: '#/components/schemas/FilesServerTool'
               - $ref: '#/components/schemas/FusionServerTool_OpenRouter'
               - $ref: '#/components/schemas/ImageGenerationServerTool_OpenRouter'
               - $ref: '#/components/schemas/ChatSearchModelsServerTool'
@@ -33880,6 +33966,115 @@ paths:
       tags:
         - Workspaces
       x-speakeasy-name-override: setBudget
+    parameters:
+      - $ref: "#/components/parameters/AppIdentifier"
+      - $ref: "#/components/parameters/AppDisplayName"
+      - $ref: "#/components/parameters/AppCategories"
+  /workspaces/{id}/members:
+    get:
+      description: >-
+        List all members of a workspace. Returns paginated results. For the default workspace, returns all organization members (implicit membership). [Management key](/docs/guides/overview/auth/management-api-keys) required.
+      operationId: listWorkspaceMembers
+      parameters:
+        - description: The workspace ID (UUID) or slug
+          in: path
+          name: id
+          required: true
+          schema:
+            description: The workspace ID (UUID) or slug
+            example: production
+            minLength: 1
+            type: string
+        - description: Number of records to skip for pagination
+          in: query
+          name: offset
+          required: false
+          schema:
+            description: Number of records to skip for pagination
+            example: 0
+            minimum: 0
+            nullable: false
+            type: integer
+        - description: Maximum number of records to return (max 100)
+          in: query
+          name: limit
+          required: false
+          schema:
+            description: Maximum number of records to return (max 100)
+            example: 50
+            maximum: 100
+            minimum: 1
+            type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                data:
+                  - created_at: '2025-08-24T10:30:00Z'
+                    id: 660e8400-e29b-41d4-a716-446655440000
+                    role: member
+                    user_id: user_abc123
+                    workspace_id: 550e8400-e29b-41d4-a716-446655440000
+                total_count: 1
+              schema:
+                $ref: '#/components/schemas/ListWorkspaceMembersResponse'
+          description: List of workspace members
+        '401':
+          content:
+            application/json:
+              example:
+                error:
+                  code: 401
+                  message: Missing Authentication header
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized - Authentication required or invalid credentials
+        '403':
+          content:
+            application/json:
+              example:
+                error:
+                  code: 403
+                  message: Only management keys can perform this operation
+              schema:
+                $ref: '#/components/schemas/ForbiddenResponse'
+          description: Forbidden - Authentication successful but insufficient permissions
+        '404':
+          content:
+            application/json:
+              example:
+                error:
+                  code: 404
+                  message: Resource not found
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found - Resource does not exist
+        '500':
+          content:
+            application/json:
+              example:
+                error:
+                  code: 500
+                  message: Internal Server Error
+              schema:
+                $ref: '#/components/schemas/InternalServerResponse'
+          description: Internal Server Error - Unexpected server error
+      summary: List workspace members
+      tags:
+        - Workspaces
+      x-speakeasy-name-override: listMembers
+      x-speakeasy-pagination:
+        inputs:
+          - in: parameters
+            name: offset
+            type: offset
+          - in: parameters
+            name: limit
+            type: limit
+        outputs:
+          results: $.data
+        type: offsetLimit
     parameters:
       - $ref: "#/components/parameters/AppIdentifier"
       - $ref: "#/components/parameters/AppDisplayName"

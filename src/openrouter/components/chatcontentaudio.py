@@ -38,3 +38,9 @@ class ChatContentAudio(BaseModel):
     input_audio: ChatContentAudioInputAudio
 
     type: ChatContentAudioType
+
+
+try:
+    ChatContentAudioInputAudio.model_rebuild()
+except NameError:
+    pass

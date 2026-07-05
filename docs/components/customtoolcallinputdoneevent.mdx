@@ -1,0 +1,16 @@
+---
+title: "CustomToolCallInputDoneEvent"
+---
+
+Event emitted when a custom tool call's freeform input streaming is complete. Mirrors `response.function_call_arguments.done` but for `custom` tools.
+
+
+## Fields
+
+| Field                                                                                            | Type                                                                                             | Required                                                                                         | Description                                                                                      |
+| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| `input`                                                                                          | *str*                                                                                            | :heavy_check_mark:                                                                               | N/A                                                                                              |
+| `item_id`                                                                                        | *str*                                                                                            | :heavy_check_mark:                                                                               | N/A                                                                                              |
+| `output_index`                                                                                   | *int*                                                                                            | :heavy_check_mark:                                                                               | N/A                                                                                              |
+| `sequence_number`                                                                                | *int*                                                                                            | :heavy_check_mark:                                                                               | N/A                                                                                              |
+| `type`                                                                                           | [components.CustomToolCallInputDoneEventType](../components/customtoolcallinputdoneeventtype.mdx) | :heavy_check_mark:                                                                               | N/A                                                                                              |

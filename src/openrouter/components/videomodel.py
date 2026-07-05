@@ -9,11 +9,9 @@ from openrouter.types import (
     UNSET_SENTINEL,
     UnrecognizedStr,
 )
-from openrouter.utils import validate_open_enum
 from pydantic import model_serializer
-from pydantic.functional_validators import PlainValidator
 from typing import Dict, List, Literal, Optional, Union
-from typing_extensions import Annotated, NotRequired, TypedDict
+from typing_extensions import NotRequired, TypedDict
 
 
 SupportedAspectRatio = Union[
@@ -152,27 +150,19 @@ class VideoModel(BaseModel):
     seed: Nullable[bool]
     r"""Whether the model supports deterministic generation via seed parameter"""
 
-    supported_aspect_ratios: Nullable[
-        List[Annotated[SupportedAspectRatio, PlainValidator(validate_open_enum(False))]]
-    ]
+    supported_aspect_ratios: Nullable[List[SupportedAspectRatio]]
     r"""Supported output aspect ratios"""
 
     supported_durations: Nullable[List[int]]
     r"""Supported video durations in seconds"""
 
-    supported_frame_images: Nullable[
-        List[Annotated[SupportedFrameImage, PlainValidator(validate_open_enum(False))]]
-    ]
+    supported_frame_images: Nullable[List[SupportedFrameImage]]
     r"""Supported frame image types (e.g. first_frame, last_frame)"""
 
-    supported_resolutions: Nullable[
-        List[Annotated[SupportedResolution, PlainValidator(validate_open_enum(False))]]
-    ]
+    supported_resolutions: Nullable[List[SupportedResolution]]
     r"""Supported output resolutions"""
 
-    supported_sizes: Nullable[
-        List[Annotated[SupportedSize, PlainValidator(validate_open_enum(False))]]
-    ]
+    supported_sizes: Nullable[List[SupportedSize]]
     r"""Supported output sizes (width x height)"""
 
     description: Optional[str] = None
@@ -186,40 +176,37 @@ class VideoModel(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["description", "hugging_face_id", "pricing_skus"]
-        nullable_fields = [
-            "generate_audio",
-            "hugging_face_id",
-            "pricing_skus",
-            "seed",
-            "supported_aspect_ratios",
-            "supported_durations",
-            "supported_frame_images",
-            "supported_resolutions",
-            "supported_sizes",
-        ]
-        null_default_fields = []
-
+        optional_fields = set(["description", "hugging_face_id", "pricing_skus"])
+        nullable_fields = set(
+            [
+                "generate_audio",
+                "hugging_face_id",
+                "pricing_skus",
+                "seed",
+                "supported_aspect_ratios",
+                "supported_durations",
+                "supported_frame_images",
+                "supported_resolutions",
+                "supported_sizes",
+            ]
+        )
         serialized = handler(self)
-
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
-            serialized.pop(k, None)
+            val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
 
         return m

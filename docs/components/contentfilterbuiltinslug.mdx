@@ -1,0 +1,28 @@
+---
+title: "ContentFilterBuiltinSlug"
+---
+
+The builtin filter identifier
+
+## Example Usage
+
+```python
+from openrouter.components import ContentFilterBuiltinSlug
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
+value: ContentFilterBuiltinSlug = "email"
+```
+
+
+## Values
+
+This is an open enum. Unrecognized values will not fail type checks.
+
+- `"email"`
+- `"phone"`
+- `"ssn"`
+- `"credit-card"`
+- `"ip-address"`
+- `"person-name"`
+- `"address"`
+- `"regex-prompt-injection"`

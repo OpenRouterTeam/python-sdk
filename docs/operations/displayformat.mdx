@@ -1,0 +1,25 @@
+---
+title: "DisplayFormat"
+---
+
+How this metric value should be formatted for display (e.g. percent → multiply by 100 and append %, currency → prefix with $)
+
+## Example Usage
+
+```python
+from openrouter.operations import DisplayFormat
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
+value: DisplayFormat = "number"
+```
+
+
+## Values
+
+This is an open enum. Unrecognized values will not fail type checks.
+
+- `"number"`
+- `"currency"`
+- `"percent"`
+- `"latency"`
+- `"throughput"`

@@ -1,0 +1,22 @@
+---
+title: "ValueType"
+---
+
+Whether the operator expects a single value or an array
+
+## Example Usage
+
+```python
+from openrouter.operations import ValueType
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
+value: ValueType = "scalar"
+```
+
+
+## Values
+
+This is an open enum. Unrecognized values will not fail type checks.
+
+- `"scalar"`
+- `"array"`

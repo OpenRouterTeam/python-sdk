@@ -2,11 +2,12 @@
 
 from __future__ import annotations
 from .toolcallstatus import ToolCallStatus
+from functools import partial
 from openrouter.types import BaseModel, Nullable, UNSET_SENTINEL
-from openrouter.utils import get_discriminator, validate_open_enum
-from pydantic import Discriminator, Tag, model_serializer
-from pydantic.functional_validators import PlainValidator
-from typing import List, Literal, Union
+from openrouter.utils.unions import parse_open_union
+from pydantic import ConfigDict, model_serializer
+from pydantic.functional_validators import BeforeValidator
+from typing import Any, List, Literal, Union
 from typing_extensions import Annotated, TypeAliasType, TypedDict
 
 
@@ -44,9 +45,33 @@ OutputCodeInterpreterCallItemOutputUnionTypedDict = TypeAliasType(
 )
 
 
+class UnknownOutputCodeInterpreterCallItemOutputUnion(BaseModel):
+    r"""A OutputCodeInterpreterCallItemOutputUnion variant the SDK doesn't recognize. Preserves the raw payload."""
+
+    type: Literal["UNKNOWN"] = "UNKNOWN"
+    raw: Any
+    is_unknown: Literal[True] = True
+
+    model_config = ConfigDict(frozen=True)
+
+
+_OUTPUT_CODE_INTERPRETER_CALL_ITEM_OUTPUT_UNION_VARIANTS: dict[str, Any] = {
+    "image": OutputImage,
+    "logs": OutputLogs,
+}
+
+
 OutputCodeInterpreterCallItemOutputUnion = Annotated[
-    Union[Annotated[OutputImage, Tag("image")], Annotated[OutputLogs, Tag("logs")]],
-    Discriminator(lambda m: get_discriminator(m, "type", "type")),
+    Union[OutputImage, OutputLogs, UnknownOutputCodeInterpreterCallItemOutputUnion],
+    BeforeValidator(
+        partial(
+            parse_open_union,
+            disc_key="type",
+            variants=_OUTPUT_CODE_INTERPRETER_CALL_ITEM_OUTPUT_UNION_VARIANTS,
+            unknown_cls=UnknownOutputCodeInterpreterCallItemOutputUnion,
+            union_name="OutputCodeInterpreterCallItemOutputUnion",
+        )
+    ),
 ]
 
 
@@ -75,36 +100,20 @@ class OutputCodeInterpreterCallItem(BaseModel):
 
     outputs: Nullable[List[OutputCodeInterpreterCallItemOutputUnion]]
 
-    status: Annotated[ToolCallStatus, PlainValidator(validate_open_enum(False))]
+    status: ToolCallStatus
 
     type: TypeCodeInterpreterCall
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = []
-        nullable_fields = ["code", "outputs"]
-        null_default_fields = []
-
         serialized = handler(self)
-
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
-            serialized.pop(k, None)
+            val = serialized.get(k, serialized.get(n))
 
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
+            if val != UNSET_SENTINEL:
                 m[k] = val
 
         return m

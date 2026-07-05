@@ -2,11 +2,10 @@
 
 from __future__ import annotations
 from .toolcallstatus import ToolCallStatus
-from openrouter.types import BaseModel
-from openrouter.utils import validate_open_enum
-from pydantic.functional_validators import PlainValidator
+from openrouter.types import BaseModel, UNSET_SENTINEL
+from pydantic import model_serializer
 from typing import List, Literal, Optional
-from typing_extensions import Annotated, NotRequired, TypedDict
+from typing_extensions import NotRequired, TypedDict
 
 
 OutputWebSearchServerToolItemTypeURL = Literal["url",]
@@ -43,6 +42,22 @@ class OutputWebSearchServerToolItemAction(BaseModel):
 
     sources: Optional[List[OutputWebSearchServerToolItemSource]] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["sources"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 OutputWebSearchServerToolItemTypeOpenrouterWebSearch = Literal["openrouter:web_search",]
 
@@ -60,7 +75,7 @@ class OutputWebSearchServerToolItemTypedDict(TypedDict):
 class OutputWebSearchServerToolItem(BaseModel):
     r"""An openrouter:web_search server tool output item"""
 
-    status: Annotated[ToolCallStatus, PlainValidator(validate_open_enum(False))]
+    status: ToolCallStatus
 
     type: OutputWebSearchServerToolItemTypeOpenrouterWebSearch
 
@@ -68,3 +83,19 @@ class OutputWebSearchServerToolItem(BaseModel):
     r"""The search action performed, matching OpenAI web_search_call.action shape. Includes the query the model issued and optional source URLs returned by the search provider."""
 
     id: Optional[str] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["action", "id"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

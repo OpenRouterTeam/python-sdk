@@ -1,0 +1,24 @@
+---
+title: "ImageGenerationRequestOutputFormat"
+---
+
+Encoding of the returned image bytes. Most models produce raster formats (png, jpeg, webp). SVG is supported by vectorization models (e.g. Quiver) — the SVG markup is UTF-8 base64-encoded in `b64_json`.
+
+## Example Usage
+
+```python
+from openrouter.components import ImageGenerationRequestOutputFormat
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
+value: ImageGenerationRequestOutputFormat = "png"
+```
+
+
+## Values
+
+This is an open enum. Unrecognized values will not fail type checks.
+
+- `"png"`
+- `"jpeg"`
+- `"webp"`
+- `"svg"`

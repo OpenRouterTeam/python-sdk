@@ -1,0 +1,18 @@
+---
+title: "TextDeltaEvent"
+---
+
+Event emitted when a text delta is streamed
+
+
+## Fields
+
+| Field                                                                | Type                                                                 | Required                                                             | Description                                                          |
+| -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| `content_index`                                                      | *int*                                                                | :heavy_check_mark:                                                   | N/A                                                                  |
+| `delta`                                                              | *str*                                                                | :heavy_check_mark:                                                   | N/A                                                                  |
+| `item_id`                                                            | *str*                                                                | :heavy_check_mark:                                                   | N/A                                                                  |
+| `logprobs`                                                           | List[[components.StreamLogprob](../components/streamlogprob.mdx)]     | :heavy_check_mark:                                                   | N/A                                                                  |
+| `output_index`                                                       | *int*                                                                | :heavy_check_mark:                                                   | N/A                                                                  |
+| `sequence_number`                                                    | *int*                                                                | :heavy_check_mark:                                                   | N/A                                                                  |
+| `type`                                                               | [components.TextDeltaEventType](../components/textdeltaeventtype.mdx) | :heavy_check_mark:                                                   | N/A                                                                  |

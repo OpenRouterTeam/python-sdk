@@ -5,11 +5,10 @@ from .anthropiccachecontroldirective import (
     AnthropicCacheControlDirective,
     AnthropicCacheControlDirectiveTypedDict,
 )
-from openrouter.types import BaseModel, Nullable, UnrecognizedStr
-from openrouter.utils import validate_open_enum
-from pydantic.functional_validators import PlainValidator
+from openrouter.types import BaseModel, Nullable, UNSET_SENTINEL, UnrecognizedStr
+from pydantic import model_serializer
 from typing import Any, Dict, List, Literal, Optional, Union
-from typing_extensions import Annotated, NotRequired, TypedDict
+from typing_extensions import NotRequired, TypedDict
 
 
 FusionServerToolConfigEffort = Union[
@@ -39,14 +38,27 @@ class FusionServerToolConfigReasoningTypedDict(TypedDict):
 class FusionServerToolConfigReasoning(BaseModel):
     r"""Reasoning configuration forwarded to panelist and judge inner calls. Use this to control reasoning effort and token budget for models that support extended thinking."""
 
-    effort: Annotated[
-        Optional[FusionServerToolConfigEffort],
-        PlainValidator(validate_open_enum(False)),
-    ] = None
+    effort: Optional[FusionServerToolConfigEffort] = None
     r"""Reasoning effort level for panelist and judge inner calls."""
 
     max_tokens: Optional[int] = None
     r"""Maximum number of reasoning tokens each panelist and judge model may use. Helps bound cost when models allocate too much budget to chain-of-thought."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["effort", "max_tokens"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class FusionServerToolConfigToolTypedDict(TypedDict):
@@ -62,6 +74,22 @@ class FusionServerToolConfigTool(BaseModel):
 
     parameters: Optional[Dict[str, Nullable[Any]]] = None
     r"""Optional configuration forwarded as the tool's `parameters` object."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["parameters"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class FusionServerToolConfigTypedDict(TypedDict):
@@ -111,3 +139,30 @@ class FusionServerToolConfig(BaseModel):
 
     tools: Optional[List[FusionServerToolConfigTool]] = None
     r"""Server tools available to panelist and judge inner calls. Each entry uses the same `{ type, parameters? }` shorthand as the outer Chat Completions request. When omitted, defaults to `[{ type: \"openrouter:web_search\" }, { type: \"openrouter:web_fetch\" }]`. Pass an empty array to disable tools entirely (panelists answer from parametric knowledge only)."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "analysis_models",
+                "cache_control",
+                "max_completion_tokens",
+                "max_tool_calls",
+                "model",
+                "reasoning",
+                "temperature",
+                "tools",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

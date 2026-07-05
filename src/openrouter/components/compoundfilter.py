@@ -2,10 +2,8 @@
 
 from __future__ import annotations
 from openrouter.types import BaseModel, Nullable, UnrecognizedStr
-from openrouter.utils import validate_open_enum
-from pydantic.functional_validators import PlainValidator
 from typing import Any, Dict, List, Literal, Union
-from typing_extensions import Annotated, TypedDict
+from typing_extensions import TypedDict
 
 
 CompoundFilterType = Union[
@@ -29,4 +27,4 @@ class CompoundFilter(BaseModel):
 
     filters: List[Dict[str, Nullable[Any]]]
 
-    type: Annotated[CompoundFilterType, PlainValidator(validate_open_enum(False))]
+    type: CompoundFilterType

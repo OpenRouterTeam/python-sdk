@@ -1,4 +1,6 @@
 pylintrc
+docs/docs.json
+docs/overview.mdx
 # Owns retry response classification (408/429/5XX + transient inner error.code on 400s).
 # Speakeasy has no overlay/hook surface for the 400-inner-code case, so this file is
 # hand-maintained; genignore stops `speakeasy generate` from overwriting it. -- Claude

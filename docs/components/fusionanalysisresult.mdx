@@ -1,0 +1,16 @@
+---
+title: "FusionAnalysisResult"
+---
+
+Structured analysis produced by the fusion judge model.
+
+
+## Fields
+
+| Field                                                                | Type                                                                 | Required                                                             | Description                                                          |
+| -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| `blind_spots`                                                        | List[*str*]                                                          | :heavy_check_mark:                                                   | N/A                                                                  |
+| `consensus`                                                          | List[*str*]                                                          | :heavy_check_mark:                                                   | N/A                                                                  |
+| `contradictions`                                                     | List[[components.Contradiction](../components/contradiction.mdx)]     | :heavy_check_mark:                                                   | N/A                                                                  |
+| `partial_coverage`                                                   | List[[components.PartialCoverage](../components/partialcoverage.mdx)] | :heavy_check_mark:                                                   | N/A                                                                  |
+| `unique_insights`                                                    | List[[components.UniqueInsight](../components/uniqueinsight.mdx)]     | :heavy_check_mark:                                                   | N/A                                                                  |

@@ -1,0 +1,37 @@
+---
+title: "CreateObservabilityDestinationRequestType"
+---
+
+The destination type. Only stable destination types are accepted.
+
+## Example Usage
+
+```python
+from openrouter.components import CreateObservabilityDestinationRequestType
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
+value: CreateObservabilityDestinationRequestType = "arize"
+```
+
+
+## Values
+
+This is an open enum. Unrecognized values will not fail type checks.
+
+- `"arize"`
+- `"braintrust"`
+- `"clickhouse"`
+- `"datadog"`
+- `"grafana"`
+- `"langfuse"`
+- `"langsmith"`
+- `"newrelic"`
+- `"opik"`
+- `"otel-collector"`
+- `"posthog"`
+- `"ramp"`
+- `"s3"`
+- `"sentry"`
+- `"snowflake"`
+- `"weave"`
+- `"webhook"`

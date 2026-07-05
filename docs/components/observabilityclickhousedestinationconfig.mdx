@@ -1,0 +1,14 @@
+---
+title: "ObservabilityClickhouseDestinationConfig"
+---
+
+## Fields
+
+| Field                                                                                  | Type                                                                                   | Required                                                                               | Description                                                                            |
+| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| `database`                                                                             | *str*                                                                                  | :heavy_check_mark:                                                                     | N/A                                                                                    |
+| `headers`                                                                              | Dict[str, *str*]                                                                       | :heavy_minus_sign:                                                                     | Custom HTTP headers to include in requests to this destination.                        |
+| `host`                                                                                 | *str*                                                                                  | :heavy_check_mark:                                                                     | N/A                                                                                    |
+| `password`                                                                             | *str*                                                                                  | :heavy_check_mark:                                                                     | N/A                                                                                    |
+| `table`                                                                                | *Optional[str]*                                                                        | :heavy_minus_sign:                                                                     | N/A                                                                                    |
+| `username`                                                                             | *str*                                                                                  | :heavy_check_mark:                                                                     | If you have not set a specific username in ClickHouse, simply type in 'default' below. |

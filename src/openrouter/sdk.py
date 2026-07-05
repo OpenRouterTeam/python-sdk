@@ -135,8 +135,8 @@ class OpenRouter(BaseSDK):
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
         server: Optional[str] = None,
-        server_url: Optional[str] = None,
         url_params: Optional[Dict[str, str]] = None,
+        server_url: Optional[str] = None,
         client: Optional[HttpClient] = None,
         async_client: Optional[AsyncHttpClient] = None,
         retry_config: OptionalNullable[RetryConfig] = UNSET,
@@ -179,7 +179,9 @@ class OpenRouter(BaseSDK):
         ), "The provided async_client must implement the AsyncHttpClient protocol."
 
         security: Any = None
-        if callable(api_key):
+        if api_key is None:
+            security = None
+        elif callable(api_key):
             # pylint: disable=unnecessary-lambda-assignment
             security = lambda: components.Security(api_key=api_key())
         else:

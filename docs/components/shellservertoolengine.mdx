@@ -1,0 +1,22 @@
+---
+title: "ShellServerToolEngine"
+---
+
+Which shell engine to use. "openrouter" runs commands server-side in the OpenRouter sandbox. "auto" (default) keeps the provider's native hosted shell when available (OpenAI); on other providers the call is routed to the OpenRouter sandbox.
+
+## Example Usage
+
+```python
+from openrouter.components import ShellServerToolEngine
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
+value: ShellServerToolEngine = "auto"
+```
+
+
+## Values
+
+This is an open enum. Unrecognized values will not fail type checks.
+
+- `"auto"`
+- `"openrouter"`

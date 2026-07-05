@@ -3,7 +3,8 @@
 from __future__ import annotations
 from .subagentnestedtool import SubagentNestedTool, SubagentNestedToolTypedDict
 from .subagentreasoning import SubagentReasoning, SubagentReasoningTypedDict
-from openrouter.types import BaseModel
+from openrouter.types import BaseModel, UNSET_SENTINEL
+from pydantic import model_serializer
 from typing import List, Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -50,3 +51,29 @@ class SubagentServerToolConfig(BaseModel):
 
     tools: Optional[List[SubagentNestedTool]] = None
     r"""Tools the subagent may use while executing a delegated task. The subagent runs as an agentic sub-agent over these tools, then returns its outcome. Only OpenRouter server tools are supported — function tools are rejected — and the list must not include the subagent tool itself."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "instructions",
+                "max_completion_tokens",
+                "max_tool_calls",
+                "model",
+                "reasoning",
+                "temperature",
+                "tools",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

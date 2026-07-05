@@ -1,0 +1,14 @@
+---
+title: "SubagentNestedTool"
+---
+
+A tool made available to the subagent. Only OpenRouter server tools (e.g. openrouter:web_search) are supported; function tools are rejected because the worker has no way to execute them. The subagent tool may not list itself.
+
+
+## Fields
+
+| Field                               | Type                                | Required                            | Description                         | Example                             |
+| ----------------------------------- | ----------------------------------- | ----------------------------------- | ----------------------------------- | ----------------------------------- |
+| `parameters`                        | Dict[str, *Nullable[Any]*]          | :heavy_minus_sign:                  | N/A                                 |                                     |
+| `type`                              | *str*                               | :heavy_check_mark:                  | N/A                                 |                                     |
+| `__pydantic_extra__`                | Dict[str, *Nullable[Any]*]          | :heavy_minus_sign:                  | N/A                                 | \{<br/>"type": "openrouter:web_search"<br/>} |

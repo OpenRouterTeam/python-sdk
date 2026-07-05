@@ -1,0 +1,35 @@
+---
+title: "Subcategory"
+---
+
+Marketplace subcategory to filter by (e.g. `cli-agent`). Takes precedence over `category` for the actual filter; when `category` is also supplied the pair must be consistent.
+
+## Example Usage
+
+```python
+from openrouter.operations import Subcategory
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
+value: Subcategory = "cli-agent"
+```
+
+
+## Values
+
+This is an open enum. Unrecognized values will not fail type checks.
+
+- `"cli-agent"`
+- `"ide-extension"`
+- `"cloud-agent"`
+- `"programming-app"`
+- `"native-app-builder"`
+- `"creative-writing"`
+- `"video-gen"`
+- `"image-gen"`
+- `"audio-gen"`
+- `"roleplay"`
+- `"game"`
+- `"writing-assistant"`
+- `"general-chat"`
+- `"personal-agent"`
+- `"legal"`

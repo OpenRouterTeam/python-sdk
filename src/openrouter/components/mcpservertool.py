@@ -9,11 +9,9 @@ from openrouter.types import (
     UNSET_SENTINEL,
     UnrecognizedStr,
 )
-from openrouter.utils import validate_open_enum
 from pydantic import model_serializer
-from pydantic.functional_validators import PlainValidator
 from typing import Any, Dict, List, Literal, Optional, Union
-from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
+from typing_extensions import NotRequired, TypeAliasType, TypedDict
 
 
 class AllowedToolsTypedDict(TypedDict):
@@ -25,6 +23,22 @@ class AllowedTools(BaseModel):
     read_only: Optional[bool] = None
 
     tool_names: Optional[List[str]] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["read_only", "tool_names"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 AllowedToolsUnionTypedDict = TypeAliasType(
@@ -65,6 +79,22 @@ class AlwaysTypedDict(TypedDict):
 class Always(BaseModel):
     tool_names: Optional[List[str]] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["tool_names"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class NeverTypedDict(TypedDict):
     tool_names: NotRequired[List[str]]
@@ -72,6 +102,22 @@ class NeverTypedDict(TypedDict):
 
 class Never(BaseModel):
     tool_names: Optional[List[str]] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["tool_names"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class RequireApprovalTypedDict(TypedDict):
@@ -83,6 +129,22 @@ class RequireApproval(BaseModel):
     always: Optional[Always] = None
 
     never: Optional[Never] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["always", "never"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 RequireApprovalUnionTypedDict = TypeAliasType(
@@ -125,9 +187,7 @@ class McpServerTool(BaseModel):
 
     authorization: Optional[str] = None
 
-    connector_id: Annotated[
-        Optional[ConnectorID], PlainValidator(validate_open_enum(False))
-    ] = None
+    connector_id: Optional[ConnectorID] = None
 
     headers: OptionalNullable[Dict[str, str]] = UNSET
 
@@ -139,38 +199,35 @@ class McpServerTool(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = [
-            "allowed_tools",
-            "authorization",
-            "connector_id",
-            "headers",
-            "require_approval",
-            "server_description",
-            "server_url",
-        ]
-        nullable_fields = ["allowed_tools", "headers", "require_approval"]
-        null_default_fields = []
-
+        optional_fields = set(
+            [
+                "allowed_tools",
+                "authorization",
+                "connector_id",
+                "headers",
+                "require_approval",
+                "server_description",
+                "server_url",
+            ]
+        )
+        nullable_fields = set(["allowed_tools", "headers", "require_approval"])
         serialized = handler(self)
-
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
-            serialized.pop(k, None)
+            val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
 
         return m

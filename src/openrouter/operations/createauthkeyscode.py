@@ -10,15 +10,9 @@ from openrouter.types import (
     UNSET_SENTINEL,
     UnrecognizedStr,
 )
-from openrouter.utils import (
-    FieldMetadata,
-    HeaderMetadata,
-    RequestMetadata,
-    validate_open_enum,
-)
+from openrouter.utils import FieldMetadata, HeaderMetadata, RequestMetadata
 import pydantic
 from pydantic import model_serializer
-from pydantic.functional_validators import PlainValidator
 from typing import Literal, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -68,6 +62,24 @@ class CreateAuthKeysCodeGlobals(BaseModel):
 
     """
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            ["HTTP-Referer", "X-OpenRouter-Title", "X-OpenRouter-Categories"]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 CreateAuthKeysCodeCodeChallengeMethod = Union[
     Literal[
@@ -116,10 +128,7 @@ class CreateAuthKeysCodeRequestBody(BaseModel):
     code_challenge: Optional[str] = None
     r"""PKCE code challenge for enhanced security"""
 
-    code_challenge_method: Annotated[
-        Optional[CreateAuthKeysCodeCodeChallengeMethod],
-        PlainValidator(validate_open_enum(False)),
-    ] = None
+    code_challenge_method: Optional[CreateAuthKeysCodeCodeChallengeMethod] = None
     r"""The method used to generate the code challenge"""
 
     expires_at: OptionalNullable[datetime] = UNSET
@@ -131,9 +140,7 @@ class CreateAuthKeysCodeRequestBody(BaseModel):
     limit: Optional[float] = None
     r"""Credit limit for the API key to be created"""
 
-    usage_limit_type: Annotated[
-        Optional[UsageLimitType], PlainValidator(validate_open_enum(False))
-    ] = None
+    usage_limit_type: Optional[UsageLimitType] = None
     r"""Optional credit limit reset interval. When set, the credit limit resets on this interval."""
 
     workspace_id: Optional[str] = None
@@ -141,39 +148,36 @@ class CreateAuthKeysCodeRequestBody(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = [
-            "code_challenge",
-            "code_challenge_method",
-            "expires_at",
-            "key_label",
-            "limit",
-            "usage_limit_type",
-            "workspace_id",
-        ]
-        nullable_fields = ["expires_at"]
-        null_default_fields = []
-
+        optional_fields = set(
+            [
+                "code_challenge",
+                "code_challenge_method",
+                "expires_at",
+                "key_label",
+                "limit",
+                "usage_limit_type",
+                "workspace_id",
+            ]
+        )
+        nullable_fields = set(["expires_at"])
         serialized = handler(self)
-
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
-            serialized.pop(k, None)
+            val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
 
         return m
 
@@ -228,6 +232,24 @@ class CreateAuthKeysCodeRequest(BaseModel):
     r"""Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
     """
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            ["HTTP-Referer", "X-OpenRouter-Title", "X-OpenRouter-Categories"]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class CreateAuthKeysCodeDataTypedDict(TypedDict):

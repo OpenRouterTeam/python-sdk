@@ -1,0 +1,22 @@
+---
+title: "PromptInjectionScanScope"
+---
+
+Which message roles to scan for prompt injection. Only applies to the regex-prompt-injection builtin. Defaults to all_messages.
+
+## Example Usage
+
+```python
+from openrouter.components import PromptInjectionScanScope
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
+value: PromptInjectionScanScope = "user_only"
+```
+
+
+## Values
+
+This is an open enum. Unrecognized values will not fail type checks.
+
+- `"user_only"`
+- `"all_messages"`

@@ -1,0 +1,23 @@
+---
+title: "ResetInterval"
+---
+
+Interval at which spend resets. Null means a lifetime (one-time) budget.
+
+## Example Usage
+
+```python
+from openrouter.components import ResetInterval
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
+value: ResetInterval = "daily"
+```
+
+
+## Values
+
+This is an open enum. Unrecognized values will not fail type checks.
+
+- `"daily"`
+- `"weekly"`
+- `"monthly"`

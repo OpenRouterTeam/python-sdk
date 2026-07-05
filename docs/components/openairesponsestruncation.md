@@ -1,9 +1,0 @@
-# OpenAIResponsesTruncation
-
-
-## Values
-
-| Name       | Value      |
-| ---------- | ---------- |
-| `AUTO`     | auto       |
-| `DISABLED` | disabled   |

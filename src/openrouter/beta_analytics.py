@@ -6,7 +6,7 @@ from openrouter._hooks import HookContext
 from openrouter.types import OptionalNullable, UNSET
 from openrouter.utils import get_security_from_env
 from openrouter.utils.unmarshal_json_response import unmarshal_json_response
-from typing import Any, List, Mapping, Optional, Union
+from typing import Any, Iterable, List, Mapping, Optional, Union
 
 
 class BetaAnalytics(BaseSDK):
@@ -98,9 +98,11 @@ class BetaAnalytics(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["beta.Analytics"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -223,9 +225,11 @@ class BetaAnalytics(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["beta.Analytics"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -265,13 +269,13 @@ class BetaAnalytics(BaseSDK):
     def query_analytics(
         self,
         *,
-        metrics: List[str],
+        metrics: Iterable[str],
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
-        dimensions: Optional[List[str]] = None,
+        dimensions: Optional[Iterable[str]] = None,
         filters: Optional[
-            Union[List[operations.Filter], List[operations.FilterTypedDict]]
+            Union[Iterable[operations.Filter], Iterable[operations.FilterTypedDict]]
         ] = None,
         granularity: Optional[str] = None,
         group_limit: Optional[int] = None,
@@ -326,14 +330,14 @@ class BetaAnalytics(BaseSDK):
             x_open_router_title=x_open_router_title,
             x_open_router_categories=x_open_router_categories,
             request_body=operations.QueryAnalyticsRequestBody(
-                dimensions=dimensions,
+                dimensions=utils.unmarshal(dimensions, Optional[List[str]]),
                 filters=utils.get_pydantic_model(
                     filters, Optional[List[operations.Filter]]
                 ),
                 granularity=granularity,
                 group_limit=group_limit,
                 limit=limit,
-                metrics=metrics,
+                metrics=utils.unmarshal(metrics, List[str]),
                 order_by=utils.get_pydantic_model(
                     order_by, Optional[operations.OrderBy]
                 ),
@@ -393,9 +397,11 @@ class BetaAnalytics(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["beta.Analytics"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "408", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -443,13 +449,13 @@ class BetaAnalytics(BaseSDK):
     async def query_analytics_async(
         self,
         *,
-        metrics: List[str],
+        metrics: Iterable[str],
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
-        dimensions: Optional[List[str]] = None,
+        dimensions: Optional[Iterable[str]] = None,
         filters: Optional[
-            Union[List[operations.Filter], List[operations.FilterTypedDict]]
+            Union[Iterable[operations.Filter], Iterable[operations.FilterTypedDict]]
         ] = None,
         granularity: Optional[str] = None,
         group_limit: Optional[int] = None,
@@ -504,14 +510,14 @@ class BetaAnalytics(BaseSDK):
             x_open_router_title=x_open_router_title,
             x_open_router_categories=x_open_router_categories,
             request_body=operations.QueryAnalyticsRequestBody(
-                dimensions=dimensions,
+                dimensions=utils.unmarshal(dimensions, Optional[List[str]]),
                 filters=utils.get_pydantic_model(
                     filters, Optional[List[operations.Filter]]
                 ),
                 granularity=granularity,
                 group_limit=group_limit,
                 limit=limit,
-                metrics=metrics,
+                metrics=utils.unmarshal(metrics, List[str]),
                 order_by=utils.get_pydantic_model(
                     order_by, Optional[operations.OrderBy]
                 ),
@@ -571,9 +577,11 @@ class BetaAnalytics(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["beta.Analytics"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "408", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 

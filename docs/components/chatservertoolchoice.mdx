@@ -1,0 +1,12 @@
+---
+title: "ChatServerToolChoice"
+---
+
+OpenRouter extension: force a specific server tool by naming it directly in `tool_choice.type` instead of wrapping it in `{ type: "function", function: { name } }`.
+
+
+## Fields
+
+| Field                                                                                                    | Type                                                                                                     | Required                                                                                                 | Description                                                                                              | Example                                                                                                  |
+| -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `type`                                                                                                   | *str*                                                                                                    | :heavy_check_mark:                                                                                       | OpenRouter server-tool type to force (e.g. `openrouter:web_search`, `web_search`, `web_search_preview`). | openrouter:web_search                                                                                    |

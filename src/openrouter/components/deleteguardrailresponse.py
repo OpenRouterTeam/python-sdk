@@ -20,3 +20,9 @@ class DeleteGuardrailResponse(BaseModel):
         pydantic.Field(alias="deleted"),
     ] = True
     r"""Confirmation that the guardrail was deleted"""
+
+
+try:
+    DeleteGuardrailResponse.model_rebuild()
+except NameError:
+    pass

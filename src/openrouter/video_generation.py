@@ -7,7 +7,7 @@ from openrouter._hooks import HookContext
 from openrouter.types import OptionalNullable, UNSET
 from openrouter.utils import get_security_from_env
 from openrouter.utils.unmarshal_json_response import unmarshal_json_response
-from typing import Any, List, Mapping, Optional, Union
+from typing import Any, Iterable, List, Mapping, Optional, Union
 
 
 class VideoGeneration(BaseSDK):
@@ -25,13 +25,16 @@ class VideoGeneration(BaseSDK):
         callback_url: Optional[str] = None,
         duration: Optional[int] = None,
         frame_images: Optional[
-            Union[List[components.FrameImage], List[components.FrameImageTypedDict]]
+            Union[
+                Iterable[components.FrameImage],
+                Iterable[components.FrameImageTypedDict],
+            ]
         ] = None,
         generate_audio: Optional[bool] = None,
         input_references: Optional[
             Union[
-                List[components.InputReference],
-                List[components.InputReferenceTypedDict],
+                Iterable[components.InputReference],
+                Iterable[components.InputReferenceTypedDict],
             ]
         ] = None,
         provider: Optional[
@@ -162,9 +165,11 @@ class VideoGeneration(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Video Generation"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "402", "404", "429", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -226,13 +231,16 @@ class VideoGeneration(BaseSDK):
         callback_url: Optional[str] = None,
         duration: Optional[int] = None,
         frame_images: Optional[
-            Union[List[components.FrameImage], List[components.FrameImageTypedDict]]
+            Union[
+                Iterable[components.FrameImage],
+                Iterable[components.FrameImageTypedDict],
+            ]
         ] = None,
         generate_audio: Optional[bool] = None,
         input_references: Optional[
             Union[
-                List[components.InputReference],
-                List[components.InputReferenceTypedDict],
+                Iterable[components.InputReference],
+                Iterable[components.InputReferenceTypedDict],
             ]
         ] = None,
         provider: Optional[
@@ -363,9 +371,11 @@ class VideoGeneration(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Video Generation"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "402", "404", "429", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -504,9 +514,11 @@ class VideoGeneration(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Video Generation"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["401", "404", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -630,9 +642,11 @@ class VideoGeneration(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Video Generation"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["401", "404", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -759,9 +773,11 @@ class VideoGeneration(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Video Generation"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "404", "4XX", "500", "502", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             stream=True,
             retry_config=retry_config,
         )
@@ -911,9 +927,11 @@ class VideoGeneration(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Video Generation"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "404", "4XX", "500", "502", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             stream=True,
             retry_config=retry_config,
         )
@@ -1057,9 +1075,11 @@ class VideoGeneration(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Video Generation"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -1175,9 +1195,11 @@ class VideoGeneration(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
+                tags=["Video Generation"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 

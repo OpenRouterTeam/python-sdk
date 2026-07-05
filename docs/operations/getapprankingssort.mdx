@@ -1,0 +1,22 @@
+---
+title: "GetAppRankingsSort"
+---
+
+`popular` ranks apps by total token volume inside the date window. `trending` ranks apps by absolute excess token growth: window volume minus the average volume of the three equal-length periods immediately preceding the window. Apps with no excess growth are omitted from `trending` results.
+
+## Example Usage
+
+```python
+from openrouter.operations import GetAppRankingsSort
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
+value: GetAppRankingsSort = "popular"
+```
+
+
+## Values
+
+This is an open enum. Unrecognized values will not fail type checks.
+
+- `"popular"`
+- `"trending"`

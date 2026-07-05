@@ -5,10 +5,12 @@ from .inputaudio import InputAudio, InputAudioTypedDict
 from .inputfile import InputFile, InputFileTypedDict
 from .inputimage import InputImage, InputImageTypedDict
 from .inputtext import InputText, InputTextTypedDict
-from openrouter.types import BaseModel
-from openrouter.utils import get_discriminator
-from pydantic import Discriminator, Tag
-from typing import List, Literal, Optional, Union
+from functools import partial
+from openrouter.types import BaseModel, UNSET_SENTINEL
+from openrouter.utils.unions import parse_open_union
+from pydantic import ConfigDict, model_serializer
+from pydantic.functional_validators import BeforeValidator
+from typing import Any, List, Literal, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
@@ -20,14 +22,41 @@ OpenAIResponseInputMessageItemContentTypedDict = TypeAliasType(
 )
 
 
+class UnknownOpenAIResponseInputMessageItemContent(BaseModel):
+    r"""A OpenAIResponseInputMessageItemContent variant the SDK doesn't recognize. Preserves the raw payload."""
+
+    type: Literal["UNKNOWN"] = "UNKNOWN"
+    raw: Any
+    is_unknown: Literal[True] = True
+
+    model_config = ConfigDict(frozen=True)
+
+
+_OPEN_AI_RESPONSE_INPUT_MESSAGE_ITEM_CONTENT_VARIANTS: dict[str, Any] = {
+    "input_audio": InputAudio,
+    "input_file": InputFile,
+    "input_image": InputImage,
+    "input_text": InputText,
+}
+
+
 OpenAIResponseInputMessageItemContent = Annotated[
     Union[
-        Annotated[InputAudio, Tag("input_audio")],
-        Annotated[InputFile, Tag("input_file")],
-        Annotated[InputImage, Tag("input_image")],
-        Annotated[InputText, Tag("input_text")],
+        InputAudio,
+        InputFile,
+        InputImage,
+        InputText,
+        UnknownOpenAIResponseInputMessageItemContent,
     ],
-    Discriminator(lambda m: get_discriminator(m, "type", "type")),
+    BeforeValidator(
+        partial(
+            parse_open_union,
+            disc_key="type",
+            variants=_OPEN_AI_RESPONSE_INPUT_MESSAGE_ITEM_CONTENT_VARIANTS,
+            unknown_cls=UnknownOpenAIResponseInputMessageItemContent,
+            union_name="OpenAIResponseInputMessageItemContent",
+        )
+    ),
 ]
 
 
@@ -78,3 +107,19 @@ class OpenAIResponseInputMessageItem(BaseModel):
     role: OpenAIResponseInputMessageItemRoleUnion
 
     type: Optional[OpenAIResponseInputMessageItemType] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["type"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

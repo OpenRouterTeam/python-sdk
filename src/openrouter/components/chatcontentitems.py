@@ -10,9 +10,12 @@ from .legacy_chatcontentvideo import (
     LegacyChatContentVideo,
     LegacyChatContentVideoTypedDict,
 )
-from openrouter.utils import get_discriminator
-from pydantic import Discriminator, Tag
-from typing import Union
+from functools import partial
+from openrouter.types import BaseModel
+from openrouter.utils.unions import parse_open_union
+from pydantic import ConfigDict
+from pydantic.functional_validators import BeforeValidator
+from typing import Any, Literal, Union
 from typing_extensions import Annotated, TypeAliasType
 
 
@@ -30,15 +33,44 @@ ChatContentItemsTypedDict = TypeAliasType(
 r"""Content part for chat completion messages"""
 
 
+class UnknownChatContentItems(BaseModel):
+    r"""A ChatContentItems variant the SDK doesn't recognize. Preserves the raw payload."""
+
+    type: Literal["UNKNOWN"] = "UNKNOWN"
+    raw: Any
+    is_unknown: Literal[True] = True
+
+    model_config = ConfigDict(frozen=True)
+
+
+_CHAT_CONTENT_ITEMS_VARIANTS: dict[str, Any] = {
+    "file": ChatContentFile,
+    "image_url": ChatContentImage,
+    "input_audio": ChatContentAudio,
+    "input_video": LegacyChatContentVideo,
+    "text": ChatContentText,
+    "video_url": ChatContentVideo,
+}
+
+
 ChatContentItems = Annotated[
     Union[
-        Annotated[ChatContentFile, Tag("file")],
-        Annotated[ChatContentImage, Tag("image_url")],
-        Annotated[ChatContentAudio, Tag("input_audio")],
-        Annotated[LegacyChatContentVideo, Tag("input_video")],
-        Annotated[ChatContentText, Tag("text")],
-        Annotated[ChatContentVideo, Tag("video_url")],
+        ChatContentFile,
+        ChatContentImage,
+        ChatContentAudio,
+        LegacyChatContentVideo,
+        ChatContentText,
+        ChatContentVideo,
+        UnknownChatContentItems,
     ],
-    Discriminator(lambda m: get_discriminator(m, "type", "type")),
+    BeforeValidator(
+        partial(
+            parse_open_union,
+            disc_key="type",
+            variants=_CHAT_CONTENT_ITEMS_VARIANTS,
+            unknown_cls=UnknownChatContentItems,
+            union_name="ChatContentItems",
+        )
+    ),
 ]
 r"""Content part for chat completion messages"""

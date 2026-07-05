@@ -1,0 +1,13 @@
+---
+title: "FusionServerToolConfigReasoning"
+---
+
+Reasoning configuration forwarded to panelist and judge inner calls. Use this to control reasoning effort and token budget for models that support extended thinking.
+
+
+## Fields
+
+| Field                                                                                                                                                | Type                                                                                                                                                 | Required                                                                                                                                             | Description                                                                                                                                          |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `effort`                                                                                                                                             | [Optional[components.FusionServerToolConfigEffort]](../components/fusionservertoolconfigeffort.mdx)                                                   | :heavy_minus_sign:                                                                                                                                   | Reasoning effort level for panelist and judge inner calls.                                                                                           |
+| `max_tokens`                                                                                                                                         | *Optional[int]*                                                                                                                                      | :heavy_minus_sign:                                                                                                                                   | Maximum number of reasoning tokens each panelist and judge model may use. Helps bound cost when models allocate too much budget to chain-of-thought. |

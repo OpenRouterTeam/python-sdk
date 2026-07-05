@@ -4,9 +4,12 @@ from __future__ import annotations
 from .booleancapability import BooleanCapability, BooleanCapabilityTypedDict
 from .enumcapability import EnumCapability, EnumCapabilityTypedDict
 from .rangecapability import RangeCapability, RangeCapabilityTypedDict
-from openrouter.utils import get_discriminator
-from pydantic import Discriminator, Tag
-from typing import Union
+from functools import partial
+from openrouter.types import BaseModel
+from openrouter.utils.unions import parse_open_union
+from pydantic import ConfigDict
+from pydantic.functional_validators import BeforeValidator
+from typing import Any, Literal, Union
 from typing_extensions import Annotated, TypeAliasType
 
 
@@ -19,12 +22,35 @@ CapabilityDescriptorTypedDict = TypeAliasType(
 r"""A typed descriptor for one supported request parameter."""
 
 
+class UnknownCapabilityDescriptor(BaseModel):
+    r"""A CapabilityDescriptor variant the SDK doesn't recognize. Preserves the raw payload."""
+
+    type: Literal["UNKNOWN"] = "UNKNOWN"
+    raw: Any
+    is_unknown: Literal[True] = True
+
+    model_config = ConfigDict(frozen=True)
+
+
+_CAPABILITY_DESCRIPTOR_VARIANTS: dict[str, Any] = {
+    "enum": EnumCapability,
+    "range": RangeCapability,
+    "boolean": BooleanCapability,
+}
+
+
 CapabilityDescriptor = Annotated[
     Union[
-        Annotated[EnumCapability, Tag("enum")],
-        Annotated[RangeCapability, Tag("range")],
-        Annotated[BooleanCapability, Tag("boolean")],
+        EnumCapability, RangeCapability, BooleanCapability, UnknownCapabilityDescriptor
     ],
-    Discriminator(lambda m: get_discriminator(m, "type", "type")),
+    BeforeValidator(
+        partial(
+            parse_open_union,
+            disc_key="type",
+            variants=_CAPABILITY_DESCRIPTOR_VARIANTS,
+            unknown_cls=UnknownCapabilityDescriptor,
+            union_name="CapabilityDescriptor",
+        )
+    ),
 ]
 r"""A typed descriptor for one supported request parameter."""

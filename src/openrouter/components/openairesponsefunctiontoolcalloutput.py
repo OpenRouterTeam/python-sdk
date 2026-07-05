@@ -4,6 +4,7 @@ from __future__ import annotations
 from .inputfile import InputFile, InputFileTypedDict
 from .inputimage import InputImage, InputImageTypedDict
 from .inputtext import InputText, InputTextTypedDict
+from functools import partial
 from openrouter.types import (
     BaseModel,
     Nullable,
@@ -12,10 +13,10 @@ from openrouter.types import (
     UNSET_SENTINEL,
     UnrecognizedStr,
 )
-from openrouter.utils import get_discriminator, validate_open_enum
-from pydantic import Discriminator, Tag, model_serializer
-from pydantic.functional_validators import PlainValidator
-from typing import List, Literal, Union
+from openrouter.utils.unions import parse_open_union
+from pydantic import ConfigDict, model_serializer
+from pydantic.functional_validators import BeforeValidator
+from typing import Any, List, Literal, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
@@ -25,13 +26,39 @@ OpenAIResponseFunctionToolCallOutputOutput1TypedDict = TypeAliasType(
 )
 
 
+class UnknownOpenAIResponseFunctionToolCallOutputOutput1(BaseModel):
+    r"""A OpenAIResponseFunctionToolCallOutputOutput1 variant the SDK doesn't recognize. Preserves the raw payload."""
+
+    type: Literal["UNKNOWN"] = "UNKNOWN"
+    raw: Any
+    is_unknown: Literal[True] = True
+
+    model_config = ConfigDict(frozen=True)
+
+
+_OPEN_AI_RESPONSE_FUNCTION_TOOL_CALL_OUTPUT_OUTPUT_1_VARIANTS: dict[str, Any] = {
+    "input_file": InputFile,
+    "input_image": InputImage,
+    "input_text": InputText,
+}
+
+
 OpenAIResponseFunctionToolCallOutputOutput1 = Annotated[
     Union[
-        Annotated[InputFile, Tag("input_file")],
-        Annotated[InputImage, Tag("input_image")],
-        Annotated[InputText, Tag("input_text")],
+        InputFile,
+        InputImage,
+        InputText,
+        UnknownOpenAIResponseFunctionToolCallOutputOutput1,
     ],
-    Discriminator(lambda m: get_discriminator(m, "type", "type")),
+    BeforeValidator(
+        partial(
+            parse_open_union,
+            disc_key="type",
+            variants=_OPEN_AI_RESPONSE_FUNCTION_TOOL_CALL_OUTPUT_OUTPUT_1_VARIANTS,
+            unknown_cls=UnknownOpenAIResponseFunctionToolCallOutputOutput1,
+            union_name="OpenAIResponseFunctionToolCallOutputOutput1",
+        )
+    ),
 ]
 
 
@@ -77,37 +104,29 @@ class OpenAIResponseFunctionToolCallOutput(BaseModel):
 
     id: OptionalNullable[str] = UNSET
 
-    status: Annotated[
-        OptionalNullable[OpenAIResponseFunctionToolCallOutputStatus],
-        PlainValidator(validate_open_enum(False)),
-    ] = UNSET
+    status: OptionalNullable[OpenAIResponseFunctionToolCallOutputStatus] = UNSET
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["id", "status"]
-        nullable_fields = ["id", "status"]
-        null_default_fields = []
-
+        optional_fields = set(["id", "status"])
+        nullable_fields = set(["id", "status"])
         serialized = handler(self)
-
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
-            serialized.pop(k, None)
+            val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
 
         return m

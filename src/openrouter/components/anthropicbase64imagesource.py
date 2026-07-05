@@ -3,10 +3,8 @@
 from __future__ import annotations
 from .anthropicimagemimetype import AnthropicImageMimeType
 from openrouter.types import BaseModel
-from openrouter.utils import validate_open_enum
-from pydantic.functional_validators import PlainValidator
 from typing import Literal
-from typing_extensions import Annotated, TypedDict
+from typing_extensions import TypedDict
 
 
 AnthropicBase64ImageSourceType = Literal["base64",]
@@ -21,8 +19,6 @@ class AnthropicBase64ImageSourceTypedDict(TypedDict):
 class AnthropicBase64ImageSource(BaseModel):
     data: str
 
-    media_type: Annotated[
-        AnthropicImageMimeType, PlainValidator(validate_open_enum(False))
-    ]
+    media_type: AnthropicImageMimeType
 
     type: AnthropicBase64ImageSourceType

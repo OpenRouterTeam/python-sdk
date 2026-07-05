@@ -1,0 +1,14 @@
+---
+title: "OutputWebSearchServerToolItemAction"
+---
+
+The search action performed, matching OpenAI web_search_call.action shape. Includes the query the model issued and optional source URLs returned by the search provider.
+
+
+## Fields
+
+| Field                                                                                                          | Type                                                                                                           | Required                                                                                                       | Description                                                                                                    |
+| -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| `query`                                                                                                        | *str*                                                                                                          | :heavy_check_mark:                                                                                             | N/A                                                                                                            |
+| `sources`                                                                                                      | List[[components.OutputWebSearchServerToolItemSource](../components/outputwebsearchservertoolitemsource.mdx)]   | :heavy_minus_sign:                                                                                             | N/A                                                                                                            |
+| `type`                                                                                                         | [components.OutputWebSearchServerToolItemTypeSearch](../components/outputwebsearchservertoolitemtypesearch.mdx) | :heavy_check_mark:                                                                                             | N/A                                                                                                            |

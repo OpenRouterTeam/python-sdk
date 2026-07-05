@@ -1,0 +1,15 @@
+---
+title: "ChatTokenLogprob"
+---
+
+Token log probability information
+
+
+## Fields
+
+| Field                                                                                      | Type                                                                                       | Required                                                                                   | Description                                                                                |
+| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
+| `bytes_`                                                                                   | List[*int*]                                                                                | :heavy_check_mark:                                                                         | UTF-8 bytes of the token                                                                   |
+| `logprob`                                                                                  | *float*                                                                                    | :heavy_check_mark:                                                                         | Log probability of the token                                                               |
+| `token`                                                                                    | *str*                                                                                      | :heavy_check_mark:                                                                         | The token                                                                                  |
+| `top_logprobs`                                                                             | List[[components.ChatTokenLogprobTopLogprob](../components/chattokenlogprobtoplogprob.mdx)] | :heavy_check_mark:                                                                         | Top alternative tokens with probabilities                                                  |
