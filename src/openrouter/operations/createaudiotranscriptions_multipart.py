@@ -7,16 +7,15 @@ from openrouter.utils import (
     FieldMetadata,
     HeaderMetadata,
     MultipartFormMetadata,
-    QueryParamMetadata,
     RequestMetadata,
 )
 import pydantic
 from pydantic import model_serializer
-from typing import IO, Optional, Union
+from typing import IO, Literal, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-class UploadFileGlobalsTypedDict(TypedDict):
+class CreateAudioTranscriptionsMultipartGlobalsTypedDict(TypedDict):
     http_referer: NotRequired[str]
     r"""The app identifier should be your app's URL and is used as the primary identifier for rankings.
     This is used to track API usage per application.
@@ -32,7 +31,7 @@ class UploadFileGlobalsTypedDict(TypedDict):
     """
 
 
-class UploadFileGlobals(BaseModel):
+class CreateAudioTranscriptionsMultipartGlobals(BaseModel):
     http_referer: Annotated[
         Optional[str],
         pydantic.Field(alias="HTTP-Referer"),
@@ -80,13 +79,13 @@ class UploadFileGlobals(BaseModel):
         return m
 
 
-class UploadFileFileTypedDict(TypedDict):
+class CreateAudioTranscriptionsMultipartFileTypedDict(TypedDict):
     file_name: str
     content: Union[bytes, IO[bytes], io.IOBase]
     content_type: NotRequired[str]
 
 
-class UploadFileFile(BaseModel):
+class CreateAudioTranscriptionsMultipartFile(BaseModel):
     file_name: Annotated[
         str, pydantic.Field(alias="fileName"), FieldMetadata(multipart=True)
     ]
@@ -120,18 +119,63 @@ class UploadFileFile(BaseModel):
         return m
 
 
-class UploadFileRequestBodyTypedDict(TypedDict):
-    file: UploadFileFileTypedDict
+ResponseFormat = Literal["json",]
+r"""The response format. Only \"json\" is supported."""
 
 
-class UploadFileRequestBody(BaseModel):
+class CreateAudioTranscriptionsMultipartRequestBodyTypedDict(TypedDict):
+    file: CreateAudioTranscriptionsMultipartFileTypedDict
+    r"""The audio file to transcribe. The format is derived from the filename extension or the file part content type. Max 25 MB; send larger files as base64 JSON via input_audio."""
+    model: str
+    r"""The model to use for transcription."""
+    language: NotRequired[str]
+    r"""The language of the input audio (ISO-639-1)."""
+    response_format: NotRequired[ResponseFormat]
+    r"""The response format. Only \"json\" is supported."""
+    temperature: NotRequired[float]
+    r"""The sampling temperature."""
+
+
+class CreateAudioTranscriptionsMultipartRequestBody(BaseModel):
     file: Annotated[
-        UploadFileFile, FieldMetadata(multipart=MultipartFormMetadata(file=True))
+        CreateAudioTranscriptionsMultipartFile,
+        FieldMetadata(multipart=MultipartFormMetadata(file=True)),
     ]
+    r"""The audio file to transcribe. The format is derived from the filename extension or the file part content type. Max 25 MB; send larger files as base64 JSON via input_audio."""
+
+    model: Annotated[str, FieldMetadata(multipart=True)]
+    r"""The model to use for transcription."""
+
+    language: Annotated[Optional[str], FieldMetadata(multipart=True)] = None
+    r"""The language of the input audio (ISO-639-1)."""
+
+    response_format: Annotated[
+        Optional[ResponseFormat], FieldMetadata(multipart=True)
+    ] = None
+    r"""The response format. Only \"json\" is supported."""
+
+    temperature: Annotated[Optional[float], FieldMetadata(multipart=True)] = None
+    r"""The sampling temperature."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["language", "response_format", "temperature"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
-class UploadFileRequestTypedDict(TypedDict):
-    request_body: UploadFileRequestBodyTypedDict
+class CreateAudioTranscriptionsMultipartRequestTypedDict(TypedDict):
+    request_body: CreateAudioTranscriptionsMultipartRequestBodyTypedDict
     http_referer: NotRequired[str]
     r"""The app identifier should be your app's URL and is used as the primary identifier for rankings.
     This is used to track API usage per application.
@@ -145,13 +189,11 @@ class UploadFileRequestTypedDict(TypedDict):
     r"""Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
     """
-    workspace_id: NotRequired[str]
-    r"""Workspace to scope the request to. Defaults to the caller’s default workspace."""
 
 
-class UploadFileRequest(BaseModel):
+class CreateAudioTranscriptionsMultipartRequest(BaseModel):
     request_body: Annotated[
-        UploadFileRequestBody,
+        CreateAudioTranscriptionsMultipartRequestBody,
         FieldMetadata(request=RequestMetadata(media_type="multipart/form-data")),
     ]
 
@@ -183,21 +225,10 @@ class UploadFileRequest(BaseModel):
 
     """
 
-    workspace_id: Annotated[
-        Optional[str],
-        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ] = None
-    r"""Workspace to scope the request to. Defaults to the caller’s default workspace."""
-
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
-            [
-                "HTTP-Referer",
-                "X-OpenRouter-Title",
-                "X-OpenRouter-Categories",
-                "workspace_id",
-            ]
+            ["HTTP-Referer", "X-OpenRouter-Title", "X-OpenRouter-Categories"]
         )
         serialized = handler(self)
         m = {}
