@@ -285,6 +285,18 @@ class Models(BaseSDK):
         distillable: Optional[operations.Distillable] = None,
         zdr: Optional[operations.Zdr] = None,
         region: Optional[operations.Region] = None,
+        min_output_price: OptionalNullable[float] = UNSET,
+        max_output_price: OptionalNullable[float] = UNSET,
+        min_age_days: OptionalNullable[int] = UNSET,
+        max_age_days: OptionalNullable[int] = UNSET,
+        min_intelligence_index: OptionalNullable[float] = UNSET,
+        max_intelligence_index: OptionalNullable[float] = UNSET,
+        min_coding_index: OptionalNullable[float] = UNSET,
+        max_coding_index: OptionalNullable[float] = UNSET,
+        min_agentic_index: OptionalNullable[float] = UNSET,
+        max_agentic_index: OptionalNullable[float] = UNSET,
+        min_tool_success_rate: OptionalNullable[float] = UNSET,
+        max_tool_success_rate: OptionalNullable[float] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -302,7 +314,7 @@ class Models(BaseSDK):
         :param category: Filter models by use case category
         :param supported_parameters: Filter models by supported parameter (comma-separated)
         :param output_modalities: Filter models by output modality. Accepts a comma-separated list of modalities (text, image, audio, embeddings) or \"all\" to include all models. Defaults to \"text\".
-        :param sort: Sort the returned models server-side. Prefer this over fetching the full list and sorting client-side. Options: pricing-low-to-high, pricing-high-to-low (average prompt/completion price), context-high-to-low (context length), throughput-high-to-low, latency-low-to-high (recent median performance), most-popular, top-weekly (tokens processed in the last week), newest (creation date), intelligence-high-to-low (Artificial Analysis intelligence index), design-arena-elo-high-to-low (best Design Arena ELO across arenas). Models without a score for the chosen benchmark are placed last. When omitted, the existing default ordering is preserved.
+        :param sort: Sort the returned models server-side. Prefer this over fetching the full list and sorting client-side. Options: pricing-low-to-high, pricing-high-to-low (average prompt/completion price), context-high-to-low (context length), throughput-high-to-low, latency-low-to-high (recent median performance), most-popular, top-weekly (tokens processed in the last week), newest (creation date), intelligence-high-to-low, coding-high-to-low, agentic-high-to-low (Artificial Analysis indices), design-arena-elo-high-to-low (best Design Arena ELO across arenas). Models without a score for the chosen benchmark are placed last. When omitted, the existing default ordering is preserved.
         :param q: Free-text search by model name or slug.
         :param input_modalities: Filter models by input modality. Comma-separated list of: text, image, audio, file.
         :param context: Minimum context length (tokens). Models with smaller context are excluded.
@@ -314,6 +326,18 @@ class Models(BaseSDK):
         :param distillable: Filter by distillation capability. \"true\" returns only distillable models, \"false\" excludes them.
         :param zdr: When set to \"true\", return only models with zero data retention endpoints.
         :param region: Filter to models with endpoints in the given data region. Currently only \"eu\" is supported.
+        :param min_output_price: Minimum completion (output) price in $/M tokens.
+        :param max_output_price: Maximum completion (output) price in $/M tokens.
+        :param min_age_days: Minimum model age in days since its creation date.
+        :param max_age_days: Maximum model age in days since its creation date.
+        :param min_intelligence_index: Minimum Artificial Analysis intelligence index.
+        :param max_intelligence_index: Maximum Artificial Analysis intelligence index.
+        :param min_coding_index: Minimum Artificial Analysis coding index.
+        :param max_coding_index: Maximum Artificial Analysis coding index.
+        :param min_agentic_index: Minimum Artificial Analysis agentic index.
+        :param max_agentic_index: Maximum Artificial Analysis agentic index.
+        :param min_tool_success_rate: Minimum tool-calling success rate, as a fraction in [0, 1] (e.g. 0.9 = 90% of requests finishing with a tool_calls finish reason).
+        :param max_tool_success_rate: Maximum tool-calling success rate, as a fraction in [0, 1].
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -348,6 +372,18 @@ class Models(BaseSDK):
             distillable=distillable,
             zdr=zdr,
             region=region,
+            min_output_price=min_output_price,
+            max_output_price=max_output_price,
+            min_age_days=min_age_days,
+            max_age_days=max_age_days,
+            min_intelligence_index=min_intelligence_index,
+            max_intelligence_index=max_intelligence_index,
+            min_coding_index=min_coding_index,
+            max_coding_index=max_coding_index,
+            min_agentic_index=min_agentic_index,
+            max_agentic_index=max_agentic_index,
+            min_tool_success_rate=min_tool_success_rate,
+            max_tool_success_rate=max_tool_success_rate,
         )
 
         req = self._build_request(
@@ -448,6 +484,18 @@ class Models(BaseSDK):
         distillable: Optional[operations.Distillable] = None,
         zdr: Optional[operations.Zdr] = None,
         region: Optional[operations.Region] = None,
+        min_output_price: OptionalNullable[float] = UNSET,
+        max_output_price: OptionalNullable[float] = UNSET,
+        min_age_days: OptionalNullable[int] = UNSET,
+        max_age_days: OptionalNullable[int] = UNSET,
+        min_intelligence_index: OptionalNullable[float] = UNSET,
+        max_intelligence_index: OptionalNullable[float] = UNSET,
+        min_coding_index: OptionalNullable[float] = UNSET,
+        max_coding_index: OptionalNullable[float] = UNSET,
+        min_agentic_index: OptionalNullable[float] = UNSET,
+        max_agentic_index: OptionalNullable[float] = UNSET,
+        min_tool_success_rate: OptionalNullable[float] = UNSET,
+        max_tool_success_rate: OptionalNullable[float] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -465,7 +513,7 @@ class Models(BaseSDK):
         :param category: Filter models by use case category
         :param supported_parameters: Filter models by supported parameter (comma-separated)
         :param output_modalities: Filter models by output modality. Accepts a comma-separated list of modalities (text, image, audio, embeddings) or \"all\" to include all models. Defaults to \"text\".
-        :param sort: Sort the returned models server-side. Prefer this over fetching the full list and sorting client-side. Options: pricing-low-to-high, pricing-high-to-low (average prompt/completion price), context-high-to-low (context length), throughput-high-to-low, latency-low-to-high (recent median performance), most-popular, top-weekly (tokens processed in the last week), newest (creation date), intelligence-high-to-low (Artificial Analysis intelligence index), design-arena-elo-high-to-low (best Design Arena ELO across arenas). Models without a score for the chosen benchmark are placed last. When omitted, the existing default ordering is preserved.
+        :param sort: Sort the returned models server-side. Prefer this over fetching the full list and sorting client-side. Options: pricing-low-to-high, pricing-high-to-low (average prompt/completion price), context-high-to-low (context length), throughput-high-to-low, latency-low-to-high (recent median performance), most-popular, top-weekly (tokens processed in the last week), newest (creation date), intelligence-high-to-low, coding-high-to-low, agentic-high-to-low (Artificial Analysis indices), design-arena-elo-high-to-low (best Design Arena ELO across arenas). Models without a score for the chosen benchmark are placed last. When omitted, the existing default ordering is preserved.
         :param q: Free-text search by model name or slug.
         :param input_modalities: Filter models by input modality. Comma-separated list of: text, image, audio, file.
         :param context: Minimum context length (tokens). Models with smaller context are excluded.
@@ -477,6 +525,18 @@ class Models(BaseSDK):
         :param distillable: Filter by distillation capability. \"true\" returns only distillable models, \"false\" excludes them.
         :param zdr: When set to \"true\", return only models with zero data retention endpoints.
         :param region: Filter to models with endpoints in the given data region. Currently only \"eu\" is supported.
+        :param min_output_price: Minimum completion (output) price in $/M tokens.
+        :param max_output_price: Maximum completion (output) price in $/M tokens.
+        :param min_age_days: Minimum model age in days since its creation date.
+        :param max_age_days: Maximum model age in days since its creation date.
+        :param min_intelligence_index: Minimum Artificial Analysis intelligence index.
+        :param max_intelligence_index: Maximum Artificial Analysis intelligence index.
+        :param min_coding_index: Minimum Artificial Analysis coding index.
+        :param max_coding_index: Maximum Artificial Analysis coding index.
+        :param min_agentic_index: Minimum Artificial Analysis agentic index.
+        :param max_agentic_index: Maximum Artificial Analysis agentic index.
+        :param min_tool_success_rate: Minimum tool-calling success rate, as a fraction in [0, 1] (e.g. 0.9 = 90% of requests finishing with a tool_calls finish reason).
+        :param max_tool_success_rate: Maximum tool-calling success rate, as a fraction in [0, 1].
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -511,6 +571,18 @@ class Models(BaseSDK):
             distillable=distillable,
             zdr=zdr,
             region=region,
+            min_output_price=min_output_price,
+            max_output_price=max_output_price,
+            min_age_days=min_age_days,
+            max_age_days=max_age_days,
+            min_intelligence_index=min_intelligence_index,
+            max_intelligence_index=max_intelligence_index,
+            min_coding_index=min_coding_index,
+            max_coding_index=max_coding_index,
+            min_agentic_index=min_agentic_index,
+            max_agentic_index=max_agentic_index,
+            min_tool_success_rate=min_tool_success_rate,
+            max_tool_success_rate=max_tool_success_rate,
         )
 
         req = self._build_request_async(
