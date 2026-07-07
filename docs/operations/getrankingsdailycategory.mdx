@@ -1,0 +1,32 @@
+---
+title: "GetRankingsDailyCategory"
+---
+
+Restrict to a use-case category (e.g. `programming`, `roleplay`). Sourced from a sampled, upsampled dataset, so `total_tokens` is an estimate and is aggregated weekly (the trailing weekly bucket may include traffic past `end_date`). Cannot be combined with `modality`, `context_bucket`, or `language_type`.
+
+## Example Usage
+
+```python
+from openrouter.operations import GetRankingsDailyCategory
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
+value: GetRankingsDailyCategory = "programming"
+```
+
+
+## Values
+
+This is an open enum. Unrecognized values will not fail type checks.
+
+- `"programming"`
+- `"roleplay"`
+- `"marketing"`
+- `"marketing/seo"`
+- `"technology"`
+- `"science"`
+- `"translation"`
+- `"legal"`
+- `"finance"`
+- `"health"`
+- `"trivia"`
+- `"academia"`

@@ -1,0 +1,22 @@
+---
+title: "LanguageType"
+---
+
+Restrict to natural-language or programming-language tagged activity. Sourced from a sampled, upsampled dataset, so `total_tokens` is an estimate and is aggregated weekly (the trailing weekly bucket may include traffic past `end_date`). Cannot be combined with `modality`, `context_bucket`, or `category`.
+
+## Example Usage
+
+```python
+from openrouter.operations import LanguageType
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
+value: LanguageType = "natural"
+```
+
+
+## Values
+
+This is an open enum. Unrecognized values will not fail type checks.
+
+- `"natural"`
+- `"programming"`

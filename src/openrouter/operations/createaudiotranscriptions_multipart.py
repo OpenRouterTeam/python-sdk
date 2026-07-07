@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 import io
-from openrouter.types import BaseModel, UNSET_SENTINEL
+from openrouter.types import BaseModel, UNSET_SENTINEL, UnrecognizedStr
 from openrouter.utils import (
     FieldMetadata,
     HeaderMetadata,
@@ -11,7 +11,7 @@ from openrouter.utils import (
 )
 import pydantic
 from pydantic import model_serializer
-from typing import IO, Literal, Optional, Union
+from typing import IO, List, Literal, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
@@ -119,8 +119,23 @@ class CreateAudioTranscriptionsMultipartFile(BaseModel):
         return m
 
 
-ResponseFormat = Literal["json",]
-r"""The response format. Only \"json\" is supported."""
+ResponseFormat = Union[
+    Literal[
+        "json",
+        "verbose_json",
+    ],
+    UnrecognizedStr,
+]
+r"""The response format. \"json\" (default) returns { text, usage }; \"verbose_json\" additionally returns task, language, duration, and segment-level timestamps (OpenAI-compatible providers only)."""
+
+
+TimestampGranularities = Union[
+    Literal[
+        "word",
+        "segment",
+    ],
+    UnrecognizedStr,
+]
 
 
 class CreateAudioTranscriptionsMultipartRequestBodyTypedDict(TypedDict):
@@ -131,9 +146,11 @@ class CreateAudioTranscriptionsMultipartRequestBodyTypedDict(TypedDict):
     language: NotRequired[str]
     r"""The language of the input audio (ISO-639-1)."""
     response_format: NotRequired[ResponseFormat]
-    r"""The response format. Only \"json\" is supported."""
+    r"""The response format. \"json\" (default) returns { text, usage }; \"verbose_json\" additionally returns task, language, duration, and segment-level timestamps (OpenAI-compatible providers only)."""
     temperature: NotRequired[float]
     r"""The sampling temperature."""
+    timestamp_granularities: NotRequired[List[TimestampGranularities]]
+    r"""Timestamp detail levels to include when response_format is \"verbose_json\". \"word\" additionally returns word-level timestamps in the words array."""
 
 
 class CreateAudioTranscriptionsMultipartRequestBody(BaseModel):
@@ -152,14 +169,23 @@ class CreateAudioTranscriptionsMultipartRequestBody(BaseModel):
     response_format: Annotated[
         Optional[ResponseFormat], FieldMetadata(multipart=True)
     ] = None
-    r"""The response format. Only \"json\" is supported."""
+    r"""The response format. \"json\" (default) returns { text, usage }; \"verbose_json\" additionally returns task, language, duration, and segment-level timestamps (OpenAI-compatible providers only)."""
 
     temperature: Annotated[Optional[float], FieldMetadata(multipart=True)] = None
     r"""The sampling temperature."""
 
+    timestamp_granularities: Annotated[
+        Optional[List[TimestampGranularities]],
+        pydantic.Field(alias="timestamp_granularities[]"),
+        FieldMetadata(multipart=True),
+    ] = None
+    r"""Timestamp detail levels to include when response_format is \"verbose_json\". \"word\" additionally returns word-level timestamps in the words array."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["language", "response_format", "temperature"])
+        optional_fields = set(
+            ["language", "response_format", "temperature", "timestamp_granularities[]"]
+        )
         serialized = handler(self)
         m = {}
 

@@ -6,7 +6,7 @@ from openrouter._hooks import HookContext
 from openrouter.types import OptionalNullable, UNSET
 from openrouter.utils import get_security_from_env
 from openrouter.utils.unmarshal_json_response import unmarshal_json_response
-from typing import Any, Mapping, Optional, Union
+from typing import Any, Iterable, List, Mapping, Optional, Union
 
 
 class Stt(BaseSDK):
@@ -24,7 +24,11 @@ class Stt(BaseSDK):
         provider: Optional[
             Union[components.STTRequestProvider, components.STTRequestProviderTypedDict]
         ] = None,
+        response_format: Optional[components.STTRequestResponseFormat] = None,
         temperature: Optional[float] = None,
+        timestamp_granularities: Optional[
+            Iterable[components.STTTimestampGranularity]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -45,7 +49,9 @@ class Stt(BaseSDK):
 
         :param language: ISO-639-1 language code (e.g., \"en\", \"ja\"). Auto-detected if omitted.
         :param provider: Provider-specific passthrough configuration
+        :param response_format: Output format. \"json\" (default) returns { text, usage }. \"verbose_json\" additionally returns task, language, duration, and segment-level timestamps; only supported by OpenAI-compatible providers.
         :param temperature: Sampling temperature for transcription
+        :param timestamp_granularities: Timestamp detail levels to include when response_format is \"verbose_json\". \"segment\" returns segment-level timestamps; \"word\" additionally returns word-level timestamps in the words array. Ignored unless response_format is \"verbose_json\".
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -74,7 +80,12 @@ class Stt(BaseSDK):
                 provider=utils.get_pydantic_model(
                     provider, Optional[components.STTRequestProvider]
                 ),
+                response_format=response_format,
                 temperature=temperature,
+                timestamp_granularities=utils.unmarshal(
+                    timestamp_granularities,
+                    Optional[List[components.STTTimestampGranularity]],
+                ),
             ),
         )
 
@@ -210,7 +221,11 @@ class Stt(BaseSDK):
         provider: Optional[
             Union[components.STTRequestProvider, components.STTRequestProviderTypedDict]
         ] = None,
+        response_format: Optional[components.STTRequestResponseFormat] = None,
         temperature: Optional[float] = None,
+        timestamp_granularities: Optional[
+            Iterable[components.STTTimestampGranularity]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -231,7 +246,9 @@ class Stt(BaseSDK):
 
         :param language: ISO-639-1 language code (e.g., \"en\", \"ja\"). Auto-detected if omitted.
         :param provider: Provider-specific passthrough configuration
+        :param response_format: Output format. \"json\" (default) returns { text, usage }. \"verbose_json\" additionally returns task, language, duration, and segment-level timestamps; only supported by OpenAI-compatible providers.
         :param temperature: Sampling temperature for transcription
+        :param timestamp_granularities: Timestamp detail levels to include when response_format is \"verbose_json\". \"segment\" returns segment-level timestamps; \"word\" additionally returns word-level timestamps in the words array. Ignored unless response_format is \"verbose_json\".
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -260,7 +277,12 @@ class Stt(BaseSDK):
                 provider=utils.get_pydantic_model(
                     provider, Optional[components.STTRequestProvider]
                 ),
+                response_format=response_format,
                 temperature=temperature,
+                timestamp_granularities=utils.unmarshal(
+                    timestamp_granularities,
+                    Optional[List[components.STTTimestampGranularity]],
+                ),
             ),
         )
 
@@ -398,6 +420,9 @@ class Stt(BaseSDK):
         language: Optional[str] = None,
         response_format: Optional[operations.ResponseFormat] = None,
         temperature: Optional[float] = None,
+        timestamp_granularities: Optional[
+            Iterable[operations.TimestampGranularities]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -417,8 +442,9 @@ class Stt(BaseSDK):
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
         :param language: The language of the input audio (ISO-639-1).
-        :param response_format: The response format. Only \"json\" is supported.
+        :param response_format: The response format. \"json\" (default) returns { text, usage }; \"verbose_json\" additionally returns task, language, duration, and segment-level timestamps (OpenAI-compatible providers only).
         :param temperature: The sampling temperature.
+        :param timestamp_granularities: Timestamp detail levels to include when response_format is \"verbose_json\". \"word\" additionally returns word-level timestamps in the words array.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -446,6 +472,10 @@ class Stt(BaseSDK):
                 model=model,
                 response_format=response_format,
                 temperature=temperature,
+                timestamp_granularities=utils.unmarshal(
+                    timestamp_granularities,
+                    Optional[List[operations.TimestampGranularities]],
+                ),
             ),
         )
 
@@ -587,6 +617,9 @@ class Stt(BaseSDK):
         language: Optional[str] = None,
         response_format: Optional[operations.ResponseFormat] = None,
         temperature: Optional[float] = None,
+        timestamp_granularities: Optional[
+            Iterable[operations.TimestampGranularities]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -606,8 +639,9 @@ class Stt(BaseSDK):
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
         :param language: The language of the input audio (ISO-639-1).
-        :param response_format: The response format. Only \"json\" is supported.
+        :param response_format: The response format. \"json\" (default) returns { text, usage }; \"verbose_json\" additionally returns task, language, duration, and segment-level timestamps (OpenAI-compatible providers only).
         :param temperature: The sampling temperature.
+        :param timestamp_granularities: Timestamp detail levels to include when response_format is \"verbose_json\". \"word\" additionally returns word-level timestamps in the words array.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -635,6 +669,10 @@ class Stt(BaseSDK):
                 model=model,
                 response_format=response_format,
                 temperature=temperature,
+                timestamp_granularities=utils.unmarshal(
+                    timestamp_granularities,
+                    Optional[List[operations.TimestampGranularities]],
+                ),
             ),
         )
 
