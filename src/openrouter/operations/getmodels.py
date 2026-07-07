@@ -111,11 +111,13 @@ GetModelsSort = Union[
         "throughput-high-to-low",
         "latency-low-to-high",
         "intelligence-high-to-low",
+        "coding-high-to-low",
+        "agentic-high-to-low",
         "design-arena-elo-high-to-low",
     ],
     UnrecognizedStr,
 ]
-r"""Sort the returned models server-side. Prefer this over fetching the full list and sorting client-side. Options: pricing-low-to-high, pricing-high-to-low (average prompt/completion price), context-high-to-low (context length), throughput-high-to-low, latency-low-to-high (recent median performance), most-popular, top-weekly (tokens processed in the last week), newest (creation date), intelligence-high-to-low (Artificial Analysis intelligence index), design-arena-elo-high-to-low (best Design Arena ELO across arenas). Models without a score for the chosen benchmark are placed last. When omitted, the existing default ordering is preserved."""
+r"""Sort the returned models server-side. Prefer this over fetching the full list and sorting client-side. Options: pricing-low-to-high, pricing-high-to-low (average prompt/completion price), context-high-to-low (context length), throughput-high-to-low, latency-low-to-high (recent median performance), most-popular, top-weekly (tokens processed in the last week), newest (creation date), intelligence-high-to-low, coding-high-to-low, agentic-high-to-low (Artificial Analysis indices), design-arena-elo-high-to-low (best Design Arena ELO across arenas). Models without a score for the chosen benchmark are placed last. When omitted, the existing default ordering is preserved."""
 
 
 Distillable = Union[
@@ -157,7 +159,7 @@ class GetModelsRequestTypedDict(TypedDict):
     output_modalities: NotRequired[str]
     r"""Filter models by output modality. Accepts a comma-separated list of modalities (text, image, audio, embeddings) or \"all\" to include all models. Defaults to \"text\"."""
     sort: NotRequired[GetModelsSort]
-    r"""Sort the returned models server-side. Prefer this over fetching the full list and sorting client-side. Options: pricing-low-to-high, pricing-high-to-low (average prompt/completion price), context-high-to-low (context length), throughput-high-to-low, latency-low-to-high (recent median performance), most-popular, top-weekly (tokens processed in the last week), newest (creation date), intelligence-high-to-low (Artificial Analysis intelligence index), design-arena-elo-high-to-low (best Design Arena ELO across arenas). Models without a score for the chosen benchmark are placed last. When omitted, the existing default ordering is preserved."""
+    r"""Sort the returned models server-side. Prefer this over fetching the full list and sorting client-side. Options: pricing-low-to-high, pricing-high-to-low (average prompt/completion price), context-high-to-low (context length), throughput-high-to-low, latency-low-to-high (recent median performance), most-popular, top-weekly (tokens processed in the last week), newest (creation date), intelligence-high-to-low, coding-high-to-low, agentic-high-to-low (Artificial Analysis indices), design-arena-elo-high-to-low (best Design Arena ELO across arenas). Models without a score for the chosen benchmark are placed last. When omitted, the existing default ordering is preserved."""
     q: NotRequired[str]
     r"""Free-text search by model name or slug."""
     input_modalities: NotRequired[str]
@@ -180,6 +182,30 @@ class GetModelsRequestTypedDict(TypedDict):
     r"""When set to \"true\", return only models with zero data retention endpoints."""
     region: NotRequired[Region]
     r"""Filter to models with endpoints in the given data region. Currently only \"eu\" is supported."""
+    min_output_price: NotRequired[Nullable[float]]
+    r"""Minimum completion (output) price in $/M tokens."""
+    max_output_price: NotRequired[Nullable[float]]
+    r"""Maximum completion (output) price in $/M tokens."""
+    min_age_days: NotRequired[Nullable[int]]
+    r"""Minimum model age in days since its creation date."""
+    max_age_days: NotRequired[Nullable[int]]
+    r"""Maximum model age in days since its creation date."""
+    min_intelligence_index: NotRequired[Nullable[float]]
+    r"""Minimum Artificial Analysis intelligence index."""
+    max_intelligence_index: NotRequired[Nullable[float]]
+    r"""Maximum Artificial Analysis intelligence index."""
+    min_coding_index: NotRequired[Nullable[float]]
+    r"""Minimum Artificial Analysis coding index."""
+    max_coding_index: NotRequired[Nullable[float]]
+    r"""Maximum Artificial Analysis coding index."""
+    min_agentic_index: NotRequired[Nullable[float]]
+    r"""Minimum Artificial Analysis agentic index."""
+    max_agentic_index: NotRequired[Nullable[float]]
+    r"""Maximum Artificial Analysis agentic index."""
+    min_tool_success_rate: NotRequired[Nullable[float]]
+    r"""Minimum tool-calling success rate, as a fraction in [0, 1] (e.g. 0.9 = 90% of requests finishing with a tool_calls finish reason)."""
+    max_tool_success_rate: NotRequired[Nullable[float]]
+    r"""Maximum tool-calling success rate, as a fraction in [0, 1]."""
 
 
 class GetModelsRequest(BaseModel):
@@ -233,7 +259,7 @@ class GetModelsRequest(BaseModel):
         Optional[GetModelsSort],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
-    r"""Sort the returned models server-side. Prefer this over fetching the full list and sorting client-side. Options: pricing-low-to-high, pricing-high-to-low (average prompt/completion price), context-high-to-low (context length), throughput-high-to-low, latency-low-to-high (recent median performance), most-popular, top-weekly (tokens processed in the last week), newest (creation date), intelligence-high-to-low (Artificial Analysis intelligence index), design-arena-elo-high-to-low (best Design Arena ELO across arenas). Models without a score for the chosen benchmark are placed last. When omitted, the existing default ordering is preserved."""
+    r"""Sort the returned models server-side. Prefer this over fetching the full list and sorting client-side. Options: pricing-low-to-high, pricing-high-to-low (average prompt/completion price), context-high-to-low (context length), throughput-high-to-low, latency-low-to-high (recent median performance), most-popular, top-weekly (tokens processed in the last week), newest (creation date), intelligence-high-to-low, coding-high-to-low, agentic-high-to-low (Artificial Analysis indices), design-arena-elo-high-to-low (best Design Arena ELO across arenas). Models without a score for the chosen benchmark are placed last. When omitted, the existing default ordering is preserved."""
 
     q: Annotated[
         Optional[str],
@@ -301,6 +327,78 @@ class GetModelsRequest(BaseModel):
     ] = None
     r"""Filter to models with endpoints in the given data region. Currently only \"eu\" is supported."""
 
+    min_output_price: Annotated[
+        OptionalNullable[float],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = UNSET
+    r"""Minimum completion (output) price in $/M tokens."""
+
+    max_output_price: Annotated[
+        OptionalNullable[float],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = UNSET
+    r"""Maximum completion (output) price in $/M tokens."""
+
+    min_age_days: Annotated[
+        OptionalNullable[int],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = UNSET
+    r"""Minimum model age in days since its creation date."""
+
+    max_age_days: Annotated[
+        OptionalNullable[int],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = UNSET
+    r"""Maximum model age in days since its creation date."""
+
+    min_intelligence_index: Annotated[
+        OptionalNullable[float],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = UNSET
+    r"""Minimum Artificial Analysis intelligence index."""
+
+    max_intelligence_index: Annotated[
+        OptionalNullable[float],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = UNSET
+    r"""Maximum Artificial Analysis intelligence index."""
+
+    min_coding_index: Annotated[
+        OptionalNullable[float],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = UNSET
+    r"""Minimum Artificial Analysis coding index."""
+
+    max_coding_index: Annotated[
+        OptionalNullable[float],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = UNSET
+    r"""Maximum Artificial Analysis coding index."""
+
+    min_agentic_index: Annotated[
+        OptionalNullable[float],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = UNSET
+    r"""Minimum Artificial Analysis agentic index."""
+
+    max_agentic_index: Annotated[
+        OptionalNullable[float],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = UNSET
+    r"""Maximum Artificial Analysis agentic index."""
+
+    min_tool_success_rate: Annotated[
+        OptionalNullable[float],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = UNSET
+    r"""Minimum tool-calling success rate, as a fraction in [0, 1] (e.g. 0.9 = 90% of requests finishing with a tool_calls finish reason)."""
+
+    max_tool_success_rate: Annotated[
+        OptionalNullable[float],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = UNSET
+    r"""Maximum tool-calling success rate, as a fraction in [0, 1]."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
@@ -323,9 +421,38 @@ class GetModelsRequest(BaseModel):
                 "distillable",
                 "zdr",
                 "region",
+                "min_output_price",
+                "max_output_price",
+                "min_age_days",
+                "max_age_days",
+                "min_intelligence_index",
+                "max_intelligence_index",
+                "min_coding_index",
+                "max_coding_index",
+                "min_agentic_index",
+                "max_agentic_index",
+                "min_tool_success_rate",
+                "max_tool_success_rate",
             ]
         )
-        nullable_fields = set(["min_price", "max_price"])
+        nullable_fields = set(
+            [
+                "min_price",
+                "max_price",
+                "min_output_price",
+                "max_output_price",
+                "min_age_days",
+                "max_age_days",
+                "min_intelligence_index",
+                "max_intelligence_index",
+                "min_coding_index",
+                "max_coding_index",
+                "min_agentic_index",
+                "max_agentic_index",
+                "min_tool_success_rate",
+                "max_tool_success_rate",
+            ]
+        )
         serialized = handler(self)
         m = {}
 
