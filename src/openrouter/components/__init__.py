@@ -2074,6 +2074,7 @@ if TYPE_CHECKING:
         ParetoRouterPlugin,
         ParetoRouterPluginID,
         ParetoRouterPluginTypedDict,
+        PriceSource,
     )
     from .payloadtoolargeresponseerrordata import (
         PayloadTooLargeResponseErrorData,
@@ -4192,6 +4193,7 @@ __all__ = [
     "PreviewWebSearchUserLocation",
     "PreviewWebSearchUserLocationType",
     "PreviewWebSearchUserLocationTypedDict",
+    "PriceSource",
     "Pricing",
     "PricingTypedDict",
     "PromptInjectionScanScope",
@@ -6262,6 +6264,7 @@ _dynamic_imports: dict[str, str] = {
     "ParetoRouterPlugin": ".paretorouterplugin",
     "ParetoRouterPluginID": ".paretorouterplugin",
     "ParetoRouterPluginTypedDict": ".paretorouterplugin",
+    "PriceSource": ".paretorouterplugin",
     "PayloadTooLargeResponseErrorData": ".payloadtoolargeresponseerrordata",
     "PayloadTooLargeResponseErrorDataTypedDict": ".payloadtoolargeresponseerrordata",
     "PaymentRequiredResponseErrorData": ".paymentrequiredresponseerrordata",

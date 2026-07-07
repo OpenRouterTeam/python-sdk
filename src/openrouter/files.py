@@ -360,7 +360,7 @@ class Files(BaseSDK):
     def upload(
         self,
         *,
-        file: Union[operations.File, operations.FileTypedDict],
+        file: Union[operations.UploadFileFile, operations.UploadFileFileTypedDict],
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
@@ -404,7 +404,7 @@ class Files(BaseSDK):
             x_open_router_categories=x_open_router_categories,
             workspace_id=workspace_id,
             request_body=operations.UploadFileRequestBody(
-                file=utils.get_pydantic_model(file, operations.File),
+                file=utils.get_pydantic_model(file, operations.UploadFileFile),
             ),
         )
 
@@ -515,7 +515,7 @@ class Files(BaseSDK):
     async def upload_async(
         self,
         *,
-        file: Union[operations.File, operations.FileTypedDict],
+        file: Union[operations.UploadFileFile, operations.UploadFileFileTypedDict],
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
@@ -559,7 +559,7 @@ class Files(BaseSDK):
             x_open_router_categories=x_open_router_categories,
             workspace_id=workspace_id,
             request_body=operations.UploadFileRequestBody(
-                file=utils.get_pydantic_model(file, operations.File),
+                file=utils.get_pydantic_model(file, operations.UploadFileFile),
             ),
         )
 

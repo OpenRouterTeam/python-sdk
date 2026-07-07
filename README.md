@@ -221,10 +221,10 @@ with OpenRouter(
     api_key=os.getenv("OPENROUTER_API_KEY", ""),
 ) as open_router:
 
-    res = open_router.files.upload(file={
+    res = open_router.stt.create_transcription_multipart(file={
         "file_name": "example.file",
         "content": open("example.file", "rb"),
-    })
+    }, model="openai/whisper-large-v3", language="en")
 
     # Handle response
     print(res)
