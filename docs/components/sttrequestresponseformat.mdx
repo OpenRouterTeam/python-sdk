@@ -1,0 +1,22 @@
+---
+title: "STTRequestResponseFormat"
+---
+
+Output format. "json" (default) returns \{ text, usage }. "verbose_json" additionally returns task, language, duration, and segment-level timestamps; only supported by OpenAI-compatible providers.
+
+## Example Usage
+
+```python
+from openrouter.components import STTRequestResponseFormat
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
+value: STTRequestResponseFormat = "json"
+```
+
+
+## Values
+
+This is an open enum. Unrecognized values will not fail type checks.
+
+- `"json"`
+- `"verbose_json"`

@@ -2,16 +2,21 @@
 title: "ResponseFormat"
 ---
 
-The response format. Only "json" is supported.
+The response format. "json" (default) returns \{ text, usage }; "verbose_json" additionally returns task, language, duration, and segment-level timestamps (OpenAI-compatible providers only).
 
 ## Example Usage
 
 ```python
 from openrouter.operations import ResponseFormat
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
 value: ResponseFormat = "json"
 ```
 
 
 ## Values
 
+This is an open enum. Unrecognized values will not fail type checks.
+
 - `"json"`
+- `"verbose_json"`

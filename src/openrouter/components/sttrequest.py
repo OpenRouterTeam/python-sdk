@@ -3,9 +3,10 @@
 from __future__ import annotations
 from .provideroptions import ProviderOptions, ProviderOptionsTypedDict
 from .sttinputaudio import STTInputAudio, STTInputAudioTypedDict
-from openrouter.types import BaseModel, UNSET_SENTINEL
+from .stttimestampgranularity import STTTimestampGranularity
+from openrouter.types import BaseModel, UNSET_SENTINEL, UnrecognizedStr
 from pydantic import model_serializer
-from typing import Optional
+from typing import List, Literal, Optional, Union
 from typing_extensions import NotRequired, TypedDict
 
 
@@ -39,6 +40,16 @@ class STTRequestProvider(BaseModel):
         return m
 
 
+STTRequestResponseFormat = Union[
+    Literal[
+        "json",
+        "verbose_json",
+    ],
+    UnrecognizedStr,
+]
+r"""Output format. \"json\" (default) returns { text, usage }. \"verbose_json\" additionally returns task, language, duration, and segment-level timestamps; only supported by OpenAI-compatible providers."""
+
+
 class STTRequestTypedDict(TypedDict):
     r"""Speech-to-text request input. Accepts a JSON body with input_audio containing base64-encoded audio."""
 
@@ -50,8 +61,12 @@ class STTRequestTypedDict(TypedDict):
     r"""ISO-639-1 language code (e.g., \"en\", \"ja\"). Auto-detected if omitted."""
     provider: NotRequired[STTRequestProviderTypedDict]
     r"""Provider-specific passthrough configuration"""
+    response_format: NotRequired[STTRequestResponseFormat]
+    r"""Output format. \"json\" (default) returns { text, usage }. \"verbose_json\" additionally returns task, language, duration, and segment-level timestamps; only supported by OpenAI-compatible providers."""
     temperature: NotRequired[float]
     r"""Sampling temperature for transcription"""
+    timestamp_granularities: NotRequired[List[STTTimestampGranularity]]
+    r"""Timestamp detail levels to include when response_format is \"verbose_json\". \"segment\" returns segment-level timestamps; \"word\" additionally returns word-level timestamps in the words array. Ignored unless response_format is \"verbose_json\"."""
 
 
 class STTRequest(BaseModel):
@@ -69,12 +84,26 @@ class STTRequest(BaseModel):
     provider: Optional[STTRequestProvider] = None
     r"""Provider-specific passthrough configuration"""
 
+    response_format: Optional[STTRequestResponseFormat] = None
+    r"""Output format. \"json\" (default) returns { text, usage }. \"verbose_json\" additionally returns task, language, duration, and segment-level timestamps; only supported by OpenAI-compatible providers."""
+
     temperature: Optional[float] = None
     r"""Sampling temperature for transcription"""
 
+    timestamp_granularities: Optional[List[STTTimestampGranularity]] = None
+    r"""Timestamp detail levels to include when response_format is \"verbose_json\". \"segment\" returns segment-level timestamps; \"word\" additionally returns word-level timestamps in the words array. Ignored unless response_format is \"verbose_json\"."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["language", "provider", "temperature"])
+        optional_fields = set(
+            [
+                "language",
+                "provider",
+                "response_format",
+                "temperature",
+                "timestamp_granularities",
+            ]
+        )
         serialized = handler(self)
         m = {}
 

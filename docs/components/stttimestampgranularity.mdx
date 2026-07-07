@@ -1,0 +1,22 @@
+---
+title: "STTTimestampGranularity"
+---
+
+A timestamp detail level for verbose_json transcription responses.
+
+## Example Usage
+
+```python
+from openrouter.components import STTTimestampGranularity
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
+value: STTTimestampGranularity = "word"
+```
+
+
+## Values
+
+This is an open enum. Unrecognized values will not fail type checks.
+
+- `"word"`
+- `"segment"`
