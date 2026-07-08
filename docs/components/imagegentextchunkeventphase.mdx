@@ -1,0 +1,23 @@
+---
+title: "ImageGenTextChunkEventPhase"
+---
+
+The generation phase this chunk belongs to. `content` is the renderable output; `reasoning` and `draft` are intermediate provider phases.
+
+## Example Usage
+
+```python
+from openrouter.components import ImageGenTextChunkEventPhase
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
+value: ImageGenTextChunkEventPhase = "content"
+```
+
+
+## Values
+
+This is an open enum. Unrecognized values will not fail type checks.
+
+- `"content"`
+- `"reasoning"`
+- `"draft"`

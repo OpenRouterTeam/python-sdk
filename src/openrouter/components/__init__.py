@@ -1179,6 +1179,12 @@ if TYPE_CHECKING:
         ImageGenStreamErrorEventType,
         ImageGenStreamErrorEventTypedDict,
     )
+    from .imagegentextchunkevent import (
+        ImageGenTextChunkEvent,
+        ImageGenTextChunkEventPhase,
+        ImageGenTextChunkEventType,
+        ImageGenTextChunkEventTypedDict,
+    )
     from .imagemodelarchitecture import (
         ImageModelArchitecture,
         ImageModelArchitectureTypedDict,
@@ -3533,6 +3539,10 @@ __all__ = [
     "ImageGenStreamErrorEventErrorTypedDict",
     "ImageGenStreamErrorEventType",
     "ImageGenStreamErrorEventTypedDict",
+    "ImageGenTextChunkEvent",
+    "ImageGenTextChunkEventPhase",
+    "ImageGenTextChunkEventType",
+    "ImageGenTextChunkEventTypedDict",
     "ImageGenerationRequest",
     "ImageGenerationRequestAspectRatio",
     "ImageGenerationRequestBackground",
@@ -5556,6 +5566,10 @@ _dynamic_imports: dict[str, str] = {
     "ImageGenStreamErrorEventErrorTypedDict": ".imagegenstreamerrorevent",
     "ImageGenStreamErrorEventType": ".imagegenstreamerrorevent",
     "ImageGenStreamErrorEventTypedDict": ".imagegenstreamerrorevent",
+    "ImageGenTextChunkEvent": ".imagegentextchunkevent",
+    "ImageGenTextChunkEventPhase": ".imagegentextchunkevent",
+    "ImageGenTextChunkEventType": ".imagegentextchunkevent",
+    "ImageGenTextChunkEventTypedDict": ".imagegentextchunkevent",
     "ImageModelArchitecture": ".imagemodelarchitecture",
     "ImageModelArchitectureTypedDict": ".imagemodelarchitecture",
     "ImageModelEndpointsResponse": ".imagemodelendpointsresponse",
