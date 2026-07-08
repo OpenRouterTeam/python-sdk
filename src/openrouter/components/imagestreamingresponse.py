@@ -13,6 +13,10 @@ from .imagegenstreamerrorevent import (
     ImageGenStreamErrorEvent,
     ImageGenStreamErrorEventTypedDict,
 )
+from .imagegentextchunkevent import (
+    ImageGenTextChunkEvent,
+    ImageGenTextChunkEventTypedDict,
+)
 from functools import partial
 from openrouter.types import BaseModel
 from openrouter.utils.unions import parse_open_union
@@ -27,6 +31,7 @@ ImageStreamingResponseDataTypedDict = TypeAliasType(
     Union[
         ImageGenStreamErrorEventTypedDict,
         ImageGenPartialImageEventTypedDict,
+        ImageGenTextChunkEventTypedDict,
         ImageGenCompletedEventTypedDict,
     ],
 )
@@ -44,6 +49,7 @@ class UnknownImageStreamingResponseData(BaseModel):
 
 _IMAGE_STREAMING_RESPONSE_DATA_VARIANTS: dict[str, Any] = {
     "image_generation.partial_image": ImageGenPartialImageEvent,
+    "image_generation.text_chunk": ImageGenTextChunkEvent,
     "image_generation.completed": ImageGenCompletedEvent,
     "error": ImageGenStreamErrorEvent,
 }
@@ -52,6 +58,7 @@ _IMAGE_STREAMING_RESPONSE_DATA_VARIANTS: dict[str, Any] = {
 ImageStreamingResponseData = Annotated[
     Union[
         ImageGenPartialImageEvent,
+        ImageGenTextChunkEvent,
         ImageGenCompletedEvent,
         ImageGenStreamErrorEvent,
         UnknownImageStreamingResponseData,
