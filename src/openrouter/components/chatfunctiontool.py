@@ -20,6 +20,10 @@ from .chatwebsearchshorthand import (
 )
 from .datetimeservertool import DatetimeServerTool, DatetimeServerToolTypedDict
 from .filesservertool import FilesServerTool, FilesServerToolTypedDict
+from .fusionservertool_openrouter import (
+    FusionServerToolOpenRouter,
+    FusionServerToolOpenRouterTypedDict,
+)
 from .imagegenerationservertool_openrouter import (
     ImageGenerationServerToolOpenRouter,
     ImageGenerationServerToolOpenRouterTypedDict,
@@ -143,6 +147,7 @@ ChatFunctionToolTypedDict = TypeAliasType(
         BashServerToolTypedDict,
         DatetimeServerToolTypedDict,
         FilesServerToolTypedDict,
+        FusionServerToolOpenRouterTypedDict,
         ImageGenerationServerToolOpenRouterTypedDict,
         ChatSearchModelsServerToolTypedDict,
         SubagentServerToolOpenRouterTypedDict,
@@ -162,6 +167,7 @@ ChatFunctionTool = TypeAliasType(
         BashServerTool,
         DatetimeServerTool,
         FilesServerTool,
+        FusionServerToolOpenRouter,
         ImageGenerationServerToolOpenRouter,
         ChatSearchModelsServerTool,
         SubagentServerToolOpenRouter,
