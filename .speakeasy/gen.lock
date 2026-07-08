@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c48cf606-fb42-4a45-9c23-8f0555307828
 management:
-  docChecksum: 50e8a290b50314df7023e7445cd94cb7
+  docChecksum: 26f46e3c834197b7bc10a6e6c1c6ba9f
   docVersion: 1.0.0
   speakeasyVersion: 1.787.0
   generationVersion: 2.914.0
-  releaseVersion: 0.11.9
-  configChecksum: 9c016c039411cba3aa46abf1ab1badb3
+  releaseVersion: 0.11.10
+  configChecksum: 196bea01b3663ba0c9fdcc5a798cbc32
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
 persistentEdits:
-  generation_id: 8e196ce1-4bb9-479a-8a36-6bbf4cf7d66f
-  pristine_commit_hash: a316fdd152bcac88410dd9cf9e6908a4416ed3c8
-  pristine_tree_hash: 6f1b53c0371fcec3591a93a8ac1967e4276cf63f
+  generation_id: aec5cf4e-117a-47a0-8159-8a6d7ca86365
+  pristine_commit_hash: 26539b409b95eeb377bfa623b3f12986c8084558
+  pristine_tree_hash: 1e58f3d7bd2923db31822357308a4c3358e7e7e5
 features:
   python:
     acceptHeaders: 3.0.0
@@ -2062,8 +2062,8 @@ trackedFiles:
     pristine_git_object: 8eb6786a519936cce87262623156a61e2f645c38
   docs/components/imagegencompletedevent.mdx:
     id: 2b1b82b2ff79
-    last_write_checksum: sha1:3d4e28577da1d6ee353a8f3bdacbc45e8a1c043a
-    pristine_git_object: 90ddd67dae34e0fed8c622edf27638d47709f3f7
+    last_write_checksum: sha1:2e4d746322e73bf36923a7f14ff6888207b660d6
+    pristine_git_object: 247d9e47e9583ec3778ca94cc3fadee3a4034376
   docs/components/imagegencompletedeventtype.mdx:
     id: dd9998bc9093
     last_write_checksum: sha1:a7d7c52d0a7c5128a40fd9f1524e8b6f372a9061
@@ -2106,8 +2106,8 @@ trackedFiles:
     pristine_git_object: b6e0e2c0dadc42fd0fbfaeb9b81f12efb62ff051
   docs/components/imagegenerationresponsedata.mdx:
     id: 1afc55d56268
-    last_write_checksum: sha1:04d65c9889436bc57b88dc1e9e98765f86d9da29
-    pristine_git_object: 78ec1e139b813231ed78ecf7f337cb277180b7a8
+    last_write_checksum: sha1:7960f5fce39a388da2aaf3a39a38d5c27f17da10
+    pristine_git_object: e36ed8937fc9401d2741d97cc03ff5c0ffc3bd52
   docs/components/imagegenerationservertool.mdx:
     id: "299013078656"
     last_write_checksum: sha1:663ae715382f7f22890ea81a43ddb3cd0c07cf6b
@@ -6442,8 +6442,8 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:238a3b1285d4733be3e0d5a000d543a456ef5394
-    pristine_git_object: 8d6f4efe9d7861f05cd73ed9fc603106d6f9238f
+    last_write_checksum: sha1:873cc7036938ca992145fa28afb0fb5ea2e513ca
+    pristine_git_object: afaaf4d246119c26a1cba696bbea015daf43fe5f
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77f44b60b98bc126557ec27391f91dfba764bb54
@@ -6470,8 +6470,8 @@ trackedFiles:
     pristine_git_object: 86713cfea633e09d33b3d4e65281071fe20e6137
   src/openrouter/_version.py:
     id: d8d15ad6c586
-    last_write_checksum: sha1:3af1feffc24d94b4b72fc4721954bc0e697b4259
-    pristine_git_object: a3f702d5d53068571a1198b71b220742e7f6214b
+    last_write_checksum: sha1:a64fdf174e7ccce65f0d2619aed5e905c88dc30d
+    pristine_git_object: f7bcfe2ddc56fb83561f2b5ef3a3475b70d3f18f
   src/openrouter/analytics.py:
     id: cb406b5aaabb
     last_write_checksum: sha1:9e709b71dd0611056dc0cec6150b578defe32841
@@ -7442,16 +7442,16 @@ trackedFiles:
     pristine_git_object: 5f17d77c25a82ad2bf7b1211d05ee665b6fee35a
   src/openrouter/components/imagegencompletedevent.py:
     id: 7a791a02cb5b
-    last_write_checksum: sha1:bd73865dd7ffd0ff9ec34b2edd484e4f0a3bde61
-    pristine_git_object: ca3f68a4504570acfdc9c095ccdecfbb636c30f1
+    last_write_checksum: sha1:497f9be381527fd1ee961450a2364a898dba875b
+    pristine_git_object: 6b9a8990973466285f9b49b366bbc5fc1ae42e41
   src/openrouter/components/imagegenerationrequest.py:
     id: f8291a7be9a0
     last_write_checksum: sha1:179a0b7ea9363fa826749e8bb6fb21074433e43e
     pristine_git_object: fbb59ab7c3ea49aa774b4fc917eb9ed9d4484d32
   src/openrouter/components/imagegenerationresponse.py:
     id: 53354cd0cbfc
-    last_write_checksum: sha1:8c42a25c58b589aad6031d2c1734eabcf1a1b143
-    pristine_git_object: 7eddf64ed888d59494938f38e2b9035e7ba2b38e
+    last_write_checksum: sha1:53f1cde7b8bfe4f9e786a76f6e57b0a1f76aced2
+    pristine_git_object: 687008d328b39a67390cdf0ab3eb8f6179ae6f7c
   src/openrouter/components/imagegenerationservertool.py:
     id: 9c95bc975f2e
     last_write_checksum: sha1:f87c338c9b54030623f7f3e32f08a064e411f76c
@@ -10760,6 +10760,3 @@ examples:
         "500":
           application/json: {"error": {"code": 500, "message": "Internal Server Error"}}
 examplesVersion: 1.0.2
-releaseNotes: |
-  ## Python SDK Changes:
-  * `open_router.images.generate()`:  `error.status[413]` **Added**
