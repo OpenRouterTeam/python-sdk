@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c48cf606-fb42-4a45-9c23-8f0555307828
 management:
-  docChecksum: 650dff337a98bf070a3d52ab3a7ab1c3
+  docChecksum: 50e8a290b50314df7023e7445cd94cb7
   docVersion: 1.0.0
   speakeasyVersion: 1.787.0
   generationVersion: 2.914.0
-  releaseVersion: 0.11.8
-  configChecksum: a51ccbb5afd956309fcd066b2592f06a
+  releaseVersion: 0.11.9
+  configChecksum: 9c016c039411cba3aa46abf1ab1badb3
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
 persistentEdits:
-  generation_id: 5184830b-3a82-41c6-bf4b-e4b5d536132f
-  pristine_commit_hash: 6261057d5344c7013ae79689331b8322cf7cc91f
-  pristine_tree_hash: 5c34f8ea38ccc5bd114c8bf2a16d8045c5c53e52
+  generation_id: 8e196ce1-4bb9-479a-8a36-6bbf4cf7d66f
+  pristine_commit_hash: a316fdd152bcac88410dd9cf9e6908a4416ed3c8
+  pristine_tree_hash: 6f1b53c0371fcec3591a93a8ac1967e4276cf63f
 features:
   python:
     acceptHeaders: 3.0.0
@@ -6386,8 +6386,8 @@ trackedFiles:
     pristine_git_object: d164a1da79b0838bd68f0a6560a0317eb86e0226
   docs/sdks/images/README.mdx:
     id: 534a6c102c4f
-    last_write_checksum: sha1:fd7a87a3091a9cc65b1f6785fff8f3b278da1660
-    pristine_git_object: 77f3172dabafbaa192b258382074cb34cfd55a5e
+    last_write_checksum: sha1:eb919a70e20e9bde335ff1e8ae52ba0a309ca5c3
+    pristine_git_object: 8277c7710decc3ee152c7fe725c90bac9784800a
   docs/sdks/models/README.mdx:
     id: 58f1ca464e0b
     last_write_checksum: sha1:2a8e7baeb6586e3b46d4da14c1e4701e4625ee7d
@@ -6442,8 +6442,8 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:3e14d3b854b2587843adcc288c3fb7a72eb4702a
-    pristine_git_object: bc961c19b4d009a656fba6ca0650d989217cbe22
+    last_write_checksum: sha1:238a3b1285d4733be3e0d5a000d543a456ef5394
+    pristine_git_object: 8d6f4efe9d7861f05cd73ed9fc603106d6f9238f
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77f44b60b98bc126557ec27391f91dfba764bb54
@@ -6470,8 +6470,8 @@ trackedFiles:
     pristine_git_object: 86713cfea633e09d33b3d4e65281071fe20e6137
   src/openrouter/_version.py:
     id: d8d15ad6c586
-    last_write_checksum: sha1:25325f38ff9226e3d977f13708341c3ede65cc51
-    pristine_git_object: b995898c8db408d20edd2aab81a06d90085d7604
+    last_write_checksum: sha1:3af1feffc24d94b4b72fc4721954bc0e697b4259
+    pristine_git_object: a3f702d5d53068571a1198b71b220742e7f6214b
   src/openrouter/analytics.py:
     id: cb406b5aaabb
     last_write_checksum: sha1:9e709b71dd0611056dc0cec6150b578defe32841
@@ -8774,8 +8774,8 @@ trackedFiles:
     pristine_git_object: 89560b566073785535643e694c112bedbd3db13d
   src/openrouter/images.py:
     id: c4d7adf63ae0
-    last_write_checksum: sha1:17dfa465ebb0408aff811872149f6ecda426a050
-    pristine_git_object: 6f5c7bad3913610dbe97f5bd03837deff83faa6b
+    last_write_checksum: sha1:2237619daf56a48c3ee0c8980178d36443ca1b13
+    pristine_git_object: b7a120ad3562280aab790be56cbf482286fe40b4
   src/openrouter/models/__init__.py:
     id: ed73b93abb3f
     last_write_checksum: sha1:932a790ae66ccd7d7022b39c659bcf72a664ebea
@@ -10721,6 +10721,8 @@ examples:
           application/json: {"error": {"code": 524, "message": "Request timed out. Please try again later."}}
         "529":
           application/json: {"error": {"code": 529, "message": "Provider returned error"}}
+        "413":
+          application/json: {"error": {"code": 413, "message": "Request payload too large"}}
   listImageModels:
     speakeasy-default-list-image-models:
       responses:
@@ -10758,4 +10760,6 @@ examples:
         "500":
           application/json: {"error": {"code": 500, "message": "Internal Server Error"}}
 examplesVersion: 1.0.2
-releaseNotes: "## Python SDK Changes:\n* `open_router.chat.send()`: \n  *  `request.tools[].union(FusionServerTool_OpenRouter)` **Added**\n* `open_router.presets.create_presets_chat_completions()`: \n  *  `request.tools[].union(FusionServerTool_OpenRouter)` **Added**\n"
+releaseNotes: |
+  ## Python SDK Changes:
+  * `open_router.images.generate()`:  `error.status[413]` **Added**
