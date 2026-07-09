@@ -1989,6 +1989,9 @@ class Presets(BaseSDK):
             ]
         ] = UNSET,
         prompt_cache_key: OptionalNullable[str] = UNSET,
+        prompt_cache_options: OptionalNullable[
+            Union[components.PromptCacheOptions, components.PromptCacheOptionsTypedDict]
+        ] = UNSET,
         provider: OptionalNullable[
             Union[
                 components.ProviderPreferences, components.ProviderPreferencesTypedDict
@@ -2070,6 +2073,7 @@ class Presets(BaseSDK):
         :param previous_response_id:
         :param prompt:
         :param prompt_cache_key:
+        :param prompt_cache_options: Request-level prompt-cache controls. `mode: \"explicit\"` disables OpenAI-managed breakpoints so only blocks marked with `prompt_cache_breakpoint` are cached. Only supported by OpenAI GPT-5.6 and newer.
         :param provider: When multiple model providers are available, optionally indicate your routing preference.
         :param reasoning: Configuration for reasoning mode in the response
         :param safety_identifier:
@@ -2142,6 +2146,10 @@ class Presets(BaseSDK):
                     prompt, OptionalNullable[components.StoredPromptTemplate]
                 ),
                 prompt_cache_key=prompt_cache_key,
+                prompt_cache_options=utils.get_pydantic_model(
+                    prompt_cache_options,
+                    OptionalNullable[components.PromptCacheOptions],
+                ),
                 provider=utils.get_pydantic_model(
                     provider, OptionalNullable[components.ProviderPreferences]
                 ),
@@ -2333,6 +2341,9 @@ class Presets(BaseSDK):
             ]
         ] = UNSET,
         prompt_cache_key: OptionalNullable[str] = UNSET,
+        prompt_cache_options: OptionalNullable[
+            Union[components.PromptCacheOptions, components.PromptCacheOptionsTypedDict]
+        ] = UNSET,
         provider: OptionalNullable[
             Union[
                 components.ProviderPreferences, components.ProviderPreferencesTypedDict
@@ -2414,6 +2425,7 @@ class Presets(BaseSDK):
         :param previous_response_id:
         :param prompt:
         :param prompt_cache_key:
+        :param prompt_cache_options: Request-level prompt-cache controls. `mode: \"explicit\"` disables OpenAI-managed breakpoints so only blocks marked with `prompt_cache_breakpoint` are cached. Only supported by OpenAI GPT-5.6 and newer.
         :param provider: When multiple model providers are available, optionally indicate your routing preference.
         :param reasoning: Configuration for reasoning mode in the response
         :param safety_identifier:
@@ -2486,6 +2498,10 @@ class Presets(BaseSDK):
                     prompt, OptionalNullable[components.StoredPromptTemplate]
                 ),
                 prompt_cache_key=prompt_cache_key,
+                prompt_cache_options=utils.get_pydantic_model(
+                    prompt_cache_options,
+                    OptionalNullable[components.PromptCacheOptions],
+                ),
                 provider=utils.get_pydantic_model(
                     provider, OptionalNullable[components.ProviderPreferences]
                 ),

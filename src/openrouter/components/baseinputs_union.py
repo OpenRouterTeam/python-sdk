@@ -53,7 +53,7 @@ from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 BaseInputsContent1TypedDict = TypeAliasType(
     "BaseInputsContent1TypedDict",
     Union[
-        InputTextTypedDict, InputAudioTypedDict, InputImageTypedDict, InputFileTypedDict
+        InputAudioTypedDict, InputTextTypedDict, InputImageTypedDict, InputFileTypedDict
     ],
 )
 

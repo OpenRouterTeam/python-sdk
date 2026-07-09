@@ -1,0 +1,23 @@
+---
+title: "ReasoningContext"
+---
+
+Controls which reasoning is available to the model. `auto` uses the model default (same as omitting); `all_turns` includes reasoning from earlier turns passed in input; `current_turn` limits to the current turn only. Only supported by OpenAI GPT-5.6 and newer.
+
+## Example Usage
+
+```python
+from openrouter.components import ReasoningContext
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
+value: ReasoningContext = "auto"
+```
+
+
+## Values
+
+This is an open enum. Unrecognized values will not fail type checks.
+
+- `"auto"`
+- `"all_turns"`
+- `"current_turn"`
