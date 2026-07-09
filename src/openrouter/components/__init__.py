@@ -2246,6 +2246,7 @@ if TYPE_CHECKING:
         ReasoningItemType,
         ReasoningItemTypedDict,
     )
+    from .reasoningmode import ReasoningMode
     from .reasoningsummarypartaddedevent import (
         ReasoningSummaryPartAddedEvent,
         ReasoningSummaryPartAddedEventType,
@@ -4282,6 +4283,7 @@ __all__ = [
     "ReasoningItemStatusUnionTypedDict",
     "ReasoningItemType",
     "ReasoningItemTypedDict",
+    "ReasoningMode",
     "ReasoningSummaryPartAddedEvent",
     "ReasoningSummaryPartAddedEventType",
     "ReasoningSummaryPartAddedEventTypedDict",
@@ -6419,6 +6421,7 @@ _dynamic_imports: dict[str, str] = {
     "ReasoningItemStatusUnionTypedDict": ".reasoningitem",
     "ReasoningItemType": ".reasoningitem",
     "ReasoningItemTypedDict": ".reasoningitem",
+    "ReasoningMode": ".reasoningmode",
     "ReasoningSummaryPartAddedEvent": ".reasoningsummarypartaddedevent",
     "ReasoningSummaryPartAddedEventType": ".reasoningsummarypartaddedevent",
     "ReasoningSummaryPartAddedEventTypedDict": ".reasoningsummarypartaddedevent",

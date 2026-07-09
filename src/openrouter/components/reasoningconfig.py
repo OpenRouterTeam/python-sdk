@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 from .reasoningeffort import ReasoningEffort
+from .reasoningmode import ReasoningMode
 from .reasoningsummaryverbosity import ReasoningSummaryVerbosity
 from openrouter.types import (
     BaseModel,
@@ -18,6 +19,8 @@ class ReasoningConfigTypedDict(TypedDict):
     r"""Configuration for reasoning mode in the response"""
 
     effort: NotRequired[Nullable[ReasoningEffort]]
+    mode: NotRequired[Nullable[ReasoningMode]]
+    r"""Selects the reasoning mode. `standard` is the default; `pro` engages deeper reasoning on models that support it, billed at standard token rates. Only supported by OpenAI GPT-5.6 and newer."""
     summary: NotRequired[Nullable[ReasoningSummaryVerbosity]]
     enabled: NotRequired[Nullable[bool]]
     max_tokens: NotRequired[Nullable[int]]
@@ -28,6 +31,9 @@ class ReasoningConfig(BaseModel):
 
     effort: OptionalNullable[ReasoningEffort] = UNSET
 
+    mode: OptionalNullable[ReasoningMode] = UNSET
+    r"""Selects the reasoning mode. `standard` is the default; `pro` engages deeper reasoning on models that support it, billed at standard token rates. Only supported by OpenAI GPT-5.6 and newer."""
+
     summary: OptionalNullable[ReasoningSummaryVerbosity] = UNSET
 
     enabled: OptionalNullable[bool] = UNSET
@@ -36,8 +42,8 @@ class ReasoningConfig(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["effort", "summary", "enabled", "max_tokens"])
-        nullable_fields = set(["effort", "summary", "enabled", "max_tokens"])
+        optional_fields = set(["effort", "mode", "summary", "enabled", "max_tokens"])
+        nullable_fields = set(["effort", "mode", "summary", "enabled", "max_tokens"])
         serialized = handler(self)
         m = {}
 

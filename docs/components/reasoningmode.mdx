@@ -1,0 +1,22 @@
+---
+title: "ReasoningMode"
+---
+
+Selects the reasoning mode. `standard` is the default; `pro` engages deeper reasoning on models that support it, billed at standard token rates. Only supported by OpenAI GPT-5.6 and newer.
+
+## Example Usage
+
+```python
+from openrouter.components import ReasoningMode
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
+value: ReasoningMode = "standard"
+```
+
+
+## Values
+
+This is an open enum. Unrecognized values will not fail type checks.
+
+- `"standard"`
+- `"pro"`
