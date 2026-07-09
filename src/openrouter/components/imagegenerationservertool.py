@@ -60,15 +60,6 @@ class InputImageMask(BaseModel):
         return m
 
 
-ModelEnum = Union[
-    Literal[
-        "gpt-image-1",
-        "gpt-image-1-mini",
-    ],
-    UnrecognizedStr,
-]
-
-
 Moderation = Union[
     Literal[
         "auto",
@@ -99,17 +90,6 @@ ImageGenerationServerToolQuality = Union[
 ]
 
 
-Size = Union[
-    Literal[
-        "1024x1024",
-        "1024x1536",
-        "1536x1024",
-        "auto",
-    ],
-    UnrecognizedStr,
-]
-
-
 ImageGenerationServerToolType = Literal["image_generation",]
 
 
@@ -120,13 +100,13 @@ class ImageGenerationServerToolTypedDict(TypedDict):
     background: NotRequired[ImageGenerationServerToolBackground]
     input_fidelity: NotRequired[Nullable[InputFidelity]]
     input_image_mask: NotRequired[InputImageMaskTypedDict]
-    model: NotRequired[ModelEnum]
+    model: NotRequired[str]
     moderation: NotRequired[Moderation]
     output_compression: NotRequired[int]
     output_format: NotRequired[ImageGenerationServerToolOutputFormat]
     partial_images: NotRequired[int]
     quality: NotRequired[ImageGenerationServerToolQuality]
-    size: NotRequired[Size]
+    size: NotRequired[str]
 
 
 class ImageGenerationServerTool(BaseModel):
@@ -140,7 +120,7 @@ class ImageGenerationServerTool(BaseModel):
 
     input_image_mask: Optional[InputImageMask] = None
 
-    model: Optional[ModelEnum] = None
+    model: Optional[str] = None
 
     moderation: Optional[Moderation] = None
 
@@ -152,10 +132,10 @@ class ImageGenerationServerTool(BaseModel):
 
     quality: Optional[ImageGenerationServerToolQuality] = None
 
-    size: Optional[Size] = None
+    size: Optional[str] = None
 
     @model_serializer(mode="wrap")
-    def _serialize_model(self, handler):
+    def serialize_model(self, handler):
         optional_fields = set(
             [
                 "background",

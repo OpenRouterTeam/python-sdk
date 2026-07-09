@@ -26,6 +26,7 @@ Code = Union[
         "empty_image_file",
         "failed_to_download_image",
         "image_file_not_found",
+        "bio_policy",
     ],
     UnrecognizedStr,
 ]
