@@ -2165,6 +2165,7 @@ if TYPE_CHECKING:
         ProviderResponse,
         ProviderResponseProviderName,
         ProviderResponseTypedDict,
+        RoutedServiceTier,
     )
     from .providersort import ProviderSort
     from .providersortconfig import (
@@ -4335,6 +4336,7 @@ __all__ = [
     "ResponsesRequestTypedDict",
     "ResponsesStreamingResponse",
     "ResponsesStreamingResponseTypedDict",
+    "RoutedServiceTier",
     "RouterAttempt",
     "RouterAttemptTypedDict",
     "RouterParams",
@@ -6352,6 +6354,7 @@ _dynamic_imports: dict[str, str] = {
     "ProviderResponse": ".providerresponse",
     "ProviderResponseProviderName": ".providerresponse",
     "ProviderResponseTypedDict": ".providerresponse",
+    "RoutedServiceTier": ".providerresponse",
     "ProviderSort": ".providersort",
     "By": ".providersortconfig",
     "Partition": ".providersortconfig",

@@ -1,0 +1,22 @@
+---
+title: "RoutedServiceTier"
+---
+
+The service tier this request was routed to (e.g. flex, priority). The tier actually applied and billed is determined by the provider response and may differ.
+
+## Example Usage
+
+```python
+from openrouter.components import RoutedServiceTier
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
+value: RoutedServiceTier = "flex"
+```
+
+
+## Values
+
+This is an open enum. Unrecognized values will not fail type checks.
+
+- `"flex"`
+- `"priority"`
