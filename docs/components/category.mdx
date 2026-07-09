@@ -1,0 +1,27 @@
+---
+title: "Category"
+---
+
+The category of feedback being reported
+
+## Example Usage
+
+```python
+from openrouter.components import Category
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
+value: Category = "latency"
+```
+
+
+## Values
+
+This is an open enum. Unrecognized values will not fail type checks.
+
+- `"latency"`
+- `"incoherence"`
+- `"incorrect_response"`
+- `"formatting"`
+- `"billing"`
+- `"api_error"`
+- `"other"`

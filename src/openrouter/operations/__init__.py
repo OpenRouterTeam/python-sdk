@@ -686,6 +686,12 @@ if TYPE_CHECKING:
         SendChatCompletionRequestResponse,
         SendChatCompletionRequestResponseTypedDict,
     )
+    from .submitgenerationfeedback import (
+        SubmitGenerationFeedbackGlobals,
+        SubmitGenerationFeedbackGlobalsTypedDict,
+        SubmitGenerationFeedbackRequest,
+        SubmitGenerationFeedbackRequestTypedDict,
+    )
     from .updatebyokkey import (
         UpdateBYOKKeyGlobals,
         UpdateBYOKKeyGlobalsTypedDict,
@@ -1248,6 +1254,10 @@ __all__ = [
     "SendChatCompletionRequestResponseTypedDict",
     "Source",
     "Subcategory",
+    "SubmitGenerationFeedbackGlobals",
+    "SubmitGenerationFeedbackGlobalsTypedDict",
+    "SubmitGenerationFeedbackRequest",
+    "SubmitGenerationFeedbackRequestTypedDict",
     "TaskType",
     "TimeRange",
     "TimeRangeTypedDict",
@@ -1825,6 +1835,10 @@ _dynamic_imports: dict[str, str] = {
     "SendChatCompletionRequestRequestTypedDict": ".sendchatcompletionrequest",
     "SendChatCompletionRequestResponse": ".sendchatcompletionrequest",
     "SendChatCompletionRequestResponseTypedDict": ".sendchatcompletionrequest",
+    "SubmitGenerationFeedbackGlobals": ".submitgenerationfeedback",
+    "SubmitGenerationFeedbackGlobalsTypedDict": ".submitgenerationfeedback",
+    "SubmitGenerationFeedbackRequest": ".submitgenerationfeedback",
+    "SubmitGenerationFeedbackRequestTypedDict": ".submitgenerationfeedback",
     "UpdateBYOKKeyGlobals": ".updatebyokkey",
     "UpdateBYOKKeyGlobalsTypedDict": ".updatebyokkey",
     "UpdateBYOKKeyRequest": ".updatebyokkey",

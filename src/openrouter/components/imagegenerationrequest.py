@@ -162,7 +162,7 @@ class ImageGenerationRequestOptionsTypedDict(TypedDict):
     reka: NotRequired[Dict[str, Nullable[Any]]]
     relace: NotRequired[Dict[str, Nullable[Any]]]
     replicate: NotRequired[Dict[str, Nullable[Any]]]
-    sakana_ai: NotRequired[Dict[str, Nullable[Any]]]
+    sakana: NotRequired[Dict[str, Nullable[Any]]]
     sambanova: NotRequired[Dict[str, Nullable[Any]]]
     sambanova_cloaked: NotRequired[Dict[str, Nullable[Any]]]
     seed: NotRequired[Dict[str, Nullable[Any]]]
@@ -422,9 +422,7 @@ class ImageGenerationRequestOptions(BaseModel):
 
     replicate: Optional[Dict[str, Nullable[Any]]] = None
 
-    sakana_ai: Annotated[
-        Optional[Dict[str, Nullable[Any]]], pydantic.Field(alias="sakana-ai")
-    ] = None
+    sakana: Optional[Dict[str, Nullable[Any]]] = None
 
     sambanova: Optional[Dict[str, Nullable[Any]]] = None
 
@@ -579,7 +577,7 @@ class ImageGenerationRequestOptions(BaseModel):
                 "reka",
                 "relace",
                 "replicate",
-                "sakana-ai",
+                "sakana",
                 "sambanova",
                 "sambanova-cloaked",
                 "seed",

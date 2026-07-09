@@ -2,17 +2,17 @@
 
 from __future__ import annotations
 from openrouter.components import (
-    listbyokkeysresponse as components_listbyokkeysresponse,
+    submitgenerationfeedbackrequest as components_submitgenerationfeedbackrequest,
 )
-from openrouter.types import BaseModel, UNSET_SENTINEL, UnrecognizedStr
-from openrouter.utils import FieldMetadata, HeaderMetadata, QueryParamMetadata
+from openrouter.types import BaseModel, UNSET_SENTINEL
+from openrouter.utils import FieldMetadata, HeaderMetadata, RequestMetadata
 import pydantic
 from pydantic import model_serializer
-from typing import Awaitable, Callable, Literal, Optional, Union
+from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-class ListBYOKKeysGlobalsTypedDict(TypedDict):
+class SubmitGenerationFeedbackGlobalsTypedDict(TypedDict):
     http_referer: NotRequired[str]
     r"""The app identifier should be your app's URL and is used as the primary identifier for rankings.
     This is used to track API usage per application.
@@ -28,7 +28,7 @@ class ListBYOKKeysGlobalsTypedDict(TypedDict):
     """
 
 
-class ListBYOKKeysGlobals(BaseModel):
+class SubmitGenerationFeedbackGlobals(BaseModel):
     http_referer: Annotated[
         Optional[str],
         pydantic.Field(alias="HTTP-Referer"),
@@ -76,103 +76,8 @@ class ListBYOKKeysGlobals(BaseModel):
         return m
 
 
-Provider = Union[
-    Literal[
-        "ai21",
-        "aion-labs",
-        "akashml",
-        "alibaba",
-        "amazon-bedrock",
-        "amazon-nova",
-        "ambient",
-        "anthropic",
-        "arcee-ai",
-        "atlas-cloud",
-        "avian",
-        "azure",
-        "baidu",
-        "baseten",
-        "black-forest-labs",
-        "byteplus",
-        "cerebras",
-        "chutes",
-        "cirrascale",
-        "clarifai",
-        "cloudflare",
-        "cohere",
-        "crusoe",
-        "darkbloom",
-        "decart",
-        "deepinfra",
-        "deepseek",
-        "dekallm",
-        "digitalocean",
-        "featherless",
-        "fireworks",
-        "friendli",
-        "gmicloud",
-        "google-ai-studio",
-        "google-vertex",
-        "groq",
-        "heygen",
-        "inception",
-        "inceptron",
-        "inferact-vllm",
-        "inference-net",
-        "infermatic",
-        "inflection",
-        "io-net",
-        "ionstream",
-        "liquid",
-        "mancer",
-        "mara",
-        "minimax",
-        "mistral",
-        "modelrun",
-        "modular",
-        "moonshotai",
-        "morph",
-        "ncompass",
-        "nebius",
-        "nex-agi",
-        "nextbit",
-        "novita",
-        "nvidia",
-        "open-inference",
-        "openai",
-        "parasail",
-        "perceptron",
-        "perplexity",
-        "phala",
-        "poolside",
-        "quiver",
-        "recraft",
-        "reka",
-        "relace",
-        "sakana",
-        "sambanova",
-        "seed",
-        "siliconflow",
-        "sourceful",
-        "stepfun",
-        "streamlake",
-        "switchpoint",
-        "tenstorrent",
-        "together",
-        "upstage",
-        "venice",
-        "wafer",
-        "wandb",
-        "xai",
-        "xiaomi",
-        "z-ai",
-    ],
-    UnrecognizedStr,
-]
-r"""Optional provider slug to filter by (e.g. `openai`, `anthropic`, `amazon-bedrock`)."""
-
-
-class ListBYOKKeysRequestTypedDict(TypedDict):
+class SubmitGenerationFeedbackRequestTypedDict(TypedDict):
+    submit_generation_feedback_request: components_submitgenerationfeedbackrequest.SubmitGenerationFeedbackRequestTypedDict
     http_referer: NotRequired[str]
     r"""The app identifier should be your app's URL and is used as the primary identifier for rankings.
     This is used to track API usage per application.
@@ -186,17 +91,14 @@ class ListBYOKKeysRequestTypedDict(TypedDict):
     r"""Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
     """
-    offset: NotRequired[int]
-    r"""Number of records to skip for pagination"""
-    limit: NotRequired[int]
-    r"""Maximum number of records to return (max 100)"""
-    workspace_id: NotRequired[str]
-    r"""Optional workspace ID to filter by. Defaults to the authenticated entity's default workspace."""
-    provider: NotRequired[Provider]
-    r"""Optional provider slug to filter by (e.g. `openai`, `anthropic`, `amazon-bedrock`)."""
 
 
-class ListBYOKKeysRequest(BaseModel):
+class SubmitGenerationFeedbackRequest(BaseModel):
+    submit_generation_feedback_request: Annotated[
+        components_submitgenerationfeedbackrequest.SubmitGenerationFeedbackRequest,
+        FieldMetadata(request=RequestMetadata(media_type="application/json")),
+    ]
+
     http_referer: Annotated[
         Optional[str],
         pydantic.Field(alias="HTTP-Referer"),
@@ -225,42 +127,10 @@ class ListBYOKKeysRequest(BaseModel):
 
     """
 
-    offset: Annotated[
-        Optional[int],
-        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ] = None
-    r"""Number of records to skip for pagination"""
-
-    limit: Annotated[
-        Optional[int],
-        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ] = None
-    r"""Maximum number of records to return (max 100)"""
-
-    workspace_id: Annotated[
-        Optional[str],
-        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ] = None
-    r"""Optional workspace ID to filter by. Defaults to the authenticated entity's default workspace."""
-
-    provider: Annotated[
-        Optional[Provider],
-        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ] = None
-    r"""Optional provider slug to filter by (e.g. `openai`, `anthropic`, `amazon-bedrock`)."""
-
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
-            [
-                "HTTP-Referer",
-                "X-OpenRouter-Title",
-                "X-OpenRouter-Categories",
-                "offset",
-                "limit",
-                "workspace_id",
-                "provider",
-            ]
+            ["HTTP-Referer", "X-OpenRouter-Title", "X-OpenRouter-Categories"]
         )
         serialized = handler(self)
         m = {}
@@ -274,16 +144,3 @@ class ListBYOKKeysRequest(BaseModel):
                     m[k] = val
 
         return m
-
-
-class ListBYOKKeysResponseTypedDict(TypedDict):
-    result: components_listbyokkeysresponse.ListBYOKKeysResponseTypedDict
-
-
-class ListBYOKKeysResponse(BaseModel):
-    next: Union[
-        Callable[[], Optional[ListBYOKKeysResponse]],
-        Callable[[], Awaitable[Optional[ListBYOKKeysResponse]]],
-    ]
-
-    result: components_listbyokkeysresponse.ListBYOKKeysResponse
