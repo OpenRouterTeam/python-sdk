@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 from .reasoningeffort import ReasoningEffort
+from .reasoningmode import ReasoningMode
 from .reasoningsummaryverbosity import ReasoningSummaryVerbosity
 from openrouter.types import (
     BaseModel,
@@ -16,18 +17,23 @@ from typing_extensions import NotRequired, TypedDict
 
 class BaseReasoningConfigTypedDict(TypedDict):
     effort: NotRequired[Nullable[ReasoningEffort]]
+    mode: NotRequired[Nullable[ReasoningMode]]
+    r"""Selects the reasoning mode. `standard` is the default; `pro` engages deeper reasoning on models that support it, billed at standard token rates. Only supported by OpenAI GPT-5.6 and newer."""
     summary: NotRequired[Nullable[ReasoningSummaryVerbosity]]
 
 
 class BaseReasoningConfig(BaseModel):
     effort: OptionalNullable[ReasoningEffort] = UNSET
 
+    mode: OptionalNullable[ReasoningMode] = UNSET
+    r"""Selects the reasoning mode. `standard` is the default; `pro` engages deeper reasoning on models that support it, billed at standard token rates. Only supported by OpenAI GPT-5.6 and newer."""
+
     summary: OptionalNullable[ReasoningSummaryVerbosity] = UNSET
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["effort", "summary"])
-        nullable_fields = set(["effort", "summary"])
+        optional_fields = set(["effort", "mode", "summary"])
+        nullable_fields = set(["effort", "mode", "summary"])
         serialized = handler(self)
         m = {}
 
