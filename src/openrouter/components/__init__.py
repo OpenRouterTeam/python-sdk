@@ -2139,6 +2139,16 @@ if TYPE_CHECKING:
         PreviewWebSearchUserLocationType,
         PreviewWebSearchUserLocationTypedDict,
     )
+    from .promptcachebreakpoint import (
+        PromptCacheBreakpoint,
+        PromptCacheBreakpointMode,
+        PromptCacheBreakpointTypedDict,
+    )
+    from .promptcacheoptions import (
+        PromptCacheOptions,
+        PromptCacheOptionsMode,
+        PromptCacheOptionsTypedDict,
+    )
     from .promptinjectionscanscope import PromptInjectionScanScope
     from .providername import ProviderName
     from .provideroptions import ProviderOptions, ProviderOptionsTypedDict
@@ -2199,6 +2209,7 @@ if TYPE_CHECKING:
         RankingsDailyResponseTypedDict,
     )
     from .reasoningconfig import ReasoningConfig, ReasoningConfigTypedDict
+    from .reasoningcontext import ReasoningContext
     from .reasoningdeltaevent import (
         ReasoningDeltaEvent,
         ReasoningDeltaEventType,
@@ -4217,6 +4228,12 @@ __all__ = [
     "PriceSource",
     "Pricing",
     "PricingTypedDict",
+    "PromptCacheBreakpoint",
+    "PromptCacheBreakpointMode",
+    "PromptCacheBreakpointTypedDict",
+    "PromptCacheOptions",
+    "PromptCacheOptionsMode",
+    "PromptCacheOptionsTypedDict",
     "PromptInjectionScanScope",
     "ProviderName",
     "ProviderOptions",
@@ -4253,6 +4270,7 @@ __all__ = [
     "Reason",
     "ReasoningConfig",
     "ReasoningConfigTypedDict",
+    "ReasoningContext",
     "ReasoningDeltaEvent",
     "ReasoningDeltaEventType",
     "ReasoningDeltaEventTypedDict",
@@ -6342,6 +6360,12 @@ _dynamic_imports: dict[str, str] = {
     "PreviewWebSearchUserLocation": ".preview_websearchuserlocation",
     "PreviewWebSearchUserLocationType": ".preview_websearchuserlocation",
     "PreviewWebSearchUserLocationTypedDict": ".preview_websearchuserlocation",
+    "PromptCacheBreakpoint": ".promptcachebreakpoint",
+    "PromptCacheBreakpointMode": ".promptcachebreakpoint",
+    "PromptCacheBreakpointTypedDict": ".promptcachebreakpoint",
+    "PromptCacheOptions": ".promptcacheoptions",
+    "PromptCacheOptionsMode": ".promptcacheoptions",
+    "PromptCacheOptionsTypedDict": ".promptcacheoptions",
     "PromptInjectionScanScope": ".promptinjectionscanscope",
     "ProviderName": ".providername",
     "ProviderOptions": ".provideroptions",
@@ -6390,6 +6414,7 @@ _dynamic_imports: dict[str, str] = {
     "RankingsDailyResponseTypedDict": ".rankingsdailyresponse",
     "ReasoningConfig": ".reasoningconfig",
     "ReasoningConfigTypedDict": ".reasoningconfig",
+    "ReasoningContext": ".reasoningcontext",
     "ReasoningDeltaEvent": ".reasoningdeltaevent",
     "ReasoningDeltaEventType": ".reasoningdeltaevent",
     "ReasoningDeltaEventTypedDict": ".reasoningdeltaevent",
