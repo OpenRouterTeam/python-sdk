@@ -2488,6 +2488,17 @@ if TYPE_CHECKING:
         SubagentServerToolConfig,
         SubagentServerToolConfigTypedDict,
     )
+    from .submitgenerationfeedbackrequest import (
+        Category,
+        SubmitGenerationFeedbackRequest,
+        SubmitGenerationFeedbackRequestTypedDict,
+    )
+    from .submitgenerationfeedbackresponse import (
+        SubmitGenerationFeedbackResponse,
+        SubmitGenerationFeedbackResponseData,
+        SubmitGenerationFeedbackResponseDataTypedDict,
+        SubmitGenerationFeedbackResponseTypedDict,
+    )
     from .taskclassificationitem import (
         TaskClassificationItem,
         TaskClassificationItemTypedDict,
@@ -2995,6 +3006,7 @@ __all__ = [
     "CachingTypedDict",
     "CapabilityDescriptor",
     "CapabilityDescriptorTypedDict",
+    "Category",
     "ChatAssistantImages",
     "ChatAssistantImagesImageURL",
     "ChatAssistantImagesImageURLTypedDict",
@@ -4486,6 +4498,12 @@ __all__ = [
     "SubagentServerToolOpenRouter",
     "SubagentServerToolOpenRouterType",
     "SubagentServerToolOpenRouterTypedDict",
+    "SubmitGenerationFeedbackRequest",
+    "SubmitGenerationFeedbackRequestTypedDict",
+    "SubmitGenerationFeedbackResponse",
+    "SubmitGenerationFeedbackResponseData",
+    "SubmitGenerationFeedbackResponseDataTypedDict",
+    "SubmitGenerationFeedbackResponseTypedDict",
     "SupportedAspectRatio",
     "SupportedFrameImage",
     "SupportedResolution",
@@ -6605,6 +6623,13 @@ _dynamic_imports: dict[str, str] = {
     "SubagentServerToolOpenRouterTypedDict": ".subagentservertool_openrouter",
     "SubagentServerToolConfig": ".subagentservertoolconfig",
     "SubagentServerToolConfigTypedDict": ".subagentservertoolconfig",
+    "Category": ".submitgenerationfeedbackrequest",
+    "SubmitGenerationFeedbackRequest": ".submitgenerationfeedbackrequest",
+    "SubmitGenerationFeedbackRequestTypedDict": ".submitgenerationfeedbackrequest",
+    "SubmitGenerationFeedbackResponse": ".submitgenerationfeedbackresponse",
+    "SubmitGenerationFeedbackResponseData": ".submitgenerationfeedbackresponse",
+    "SubmitGenerationFeedbackResponseDataTypedDict": ".submitgenerationfeedbackresponse",
+    "SubmitGenerationFeedbackResponseTypedDict": ".submitgenerationfeedbackresponse",
     "TaskClassificationItem": ".taskclassificationitem",
     "TaskClassificationItemTypedDict": ".taskclassificationitem",
     "TaskClassificationMacroCategory": ".taskclassificationmacrocategory",
