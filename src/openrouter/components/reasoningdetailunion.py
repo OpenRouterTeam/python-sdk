@@ -5,6 +5,10 @@ from .reasoningdetailencrypted import (
     ReasoningDetailEncrypted,
     ReasoningDetailEncryptedTypedDict,
 )
+from .reasoningdetailservertoolcall import (
+    ReasoningDetailServerToolCall,
+    ReasoningDetailServerToolCallTypedDict,
+)
 from .reasoningdetailsummary import (
     ReasoningDetailSummary,
     ReasoningDetailSummaryTypedDict,
@@ -25,6 +29,7 @@ ReasoningDetailUnionTypedDict = TypeAliasType(
         ReasoningDetailSummaryTypedDict,
         ReasoningDetailEncryptedTypedDict,
         ReasoningDetailTextTypedDict,
+        ReasoningDetailServerToolCallTypedDict,
     ],
 )
 r"""Reasoning detail union schema"""
@@ -42,6 +47,7 @@ class UnknownReasoningDetailUnion(BaseModel):
 
 _REASONING_DETAIL_UNION_VARIANTS: dict[str, Any] = {
     "reasoning.encrypted": ReasoningDetailEncrypted,
+    "reasoning.server_tool_call": ReasoningDetailServerToolCall,
     "reasoning.summary": ReasoningDetailSummary,
     "reasoning.text": ReasoningDetailText,
 }
@@ -50,6 +56,7 @@ _REASONING_DETAIL_UNION_VARIANTS: dict[str, Any] = {
 ReasoningDetailUnion = Annotated[
     Union[
         ReasoningDetailEncrypted,
+        ReasoningDetailServerToolCall,
         ReasoningDetailSummary,
         ReasoningDetailText,
         UnknownReasoningDetailUnion,
