@@ -2209,6 +2209,11 @@ if TYPE_CHECKING:
         ReasoningDetailEncryptedType,
         ReasoningDetailEncryptedTypedDict,
     )
+    from .reasoningdetailservertoolcall import (
+        ReasoningDetailServerToolCall,
+        ReasoningDetailServerToolCallType,
+        ReasoningDetailServerToolCallTypedDict,
+    )
     from .reasoningdetailsummary import (
         ReasoningDetailSummary,
         ReasoningDetailSummaryType,
@@ -4253,6 +4258,9 @@ __all__ = [
     "ReasoningDetailEncrypted",
     "ReasoningDetailEncryptedType",
     "ReasoningDetailEncryptedTypedDict",
+    "ReasoningDetailServerToolCall",
+    "ReasoningDetailServerToolCallType",
+    "ReasoningDetailServerToolCallTypedDict",
     "ReasoningDetailSummary",
     "ReasoningDetailSummaryType",
     "ReasoningDetailSummaryTypedDict",
@@ -6386,6 +6394,9 @@ _dynamic_imports: dict[str, str] = {
     "ReasoningDetailEncrypted": ".reasoningdetailencrypted",
     "ReasoningDetailEncryptedType": ".reasoningdetailencrypted",
     "ReasoningDetailEncryptedTypedDict": ".reasoningdetailencrypted",
+    "ReasoningDetailServerToolCall": ".reasoningdetailservertoolcall",
+    "ReasoningDetailServerToolCallType": ".reasoningdetailservertoolcall",
+    "ReasoningDetailServerToolCallTypedDict": ".reasoningdetailservertoolcall",
     "ReasoningDetailSummary": ".reasoningdetailsummary",
     "ReasoningDetailSummaryType": ".reasoningdetailsummary",
     "ReasoningDetailSummaryTypedDict": ".reasoningdetailsummary",
