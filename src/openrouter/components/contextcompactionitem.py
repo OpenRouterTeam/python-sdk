@@ -14,28 +14,28 @@ from typing import Any, Dict, Literal
 from typing_extensions import NotRequired, TypedDict
 
 
-CompactionItemType = Literal["compaction",]
+ContextCompactionItemType = Literal["context_compaction",]
 
 
-class CompactionItemTypedDict(TypedDict):
-    r"""A context compaction marker with encrypted summary"""
+class ContextCompactionItemTypedDict(TypedDict):
+    r"""A context compaction marker with an optional encrypted summary"""
 
-    encrypted_content: str
-    type: CompactionItemType
+    type: ContextCompactionItemType
+    encrypted_content: NotRequired[Nullable[str]]
     id: NotRequired[Nullable[str]]
 
 
-class CompactionItem(BaseModel):
-    r"""A context compaction marker with encrypted summary"""
+class ContextCompactionItem(BaseModel):
+    r"""A context compaction marker with an optional encrypted summary"""
 
     model_config = ConfigDict(
         populate_by_name=True, arbitrary_types_allowed=True, extra="allow"
     )
     __pydantic_extra__: Dict[str, Nullable[Any]] = pydantic.Field(init=False)
 
-    encrypted_content: str
+    type: ContextCompactionItemType
 
-    type: CompactionItemType
+    encrypted_content: OptionalNullable[str] = UNSET
 
     id: OptionalNullable[str] = UNSET
 
@@ -49,8 +49,8 @@ class CompactionItem(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["id"])
-        nullable_fields = set(["id"])
+        optional_fields = set(["encrypted_content", "id"])
+        nullable_fields = set(["encrypted_content", "id"])
         serialized = handler(self)
         m = {}
 
