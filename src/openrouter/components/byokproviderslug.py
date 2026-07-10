@@ -32,6 +32,7 @@ BYOKProviderSlug = Union[
         "crusoe",
         "darkbloom",
         "decart",
+        "deepgram",
         "deepinfra",
         "deepseek",
         "dekallm",

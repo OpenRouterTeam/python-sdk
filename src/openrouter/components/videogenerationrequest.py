@@ -61,6 +61,7 @@ class VideoGenerationRequestOptionsTypedDict(TypedDict):
     crusoe: NotRequired[Dict[str, Nullable[Any]]]
     darkbloom: NotRequired[Dict[str, Nullable[Any]]]
     decart: NotRequired[Dict[str, Nullable[Any]]]
+    deepgram: NotRequired[Dict[str, Nullable[Any]]]
     deepinfra: NotRequired[Dict[str, Nullable[Any]]]
     deepseek: NotRequired[Dict[str, Nullable[Any]]]
     dekallm: NotRequired[Dict[str, Nullable[Any]]]
@@ -230,6 +231,8 @@ class VideoGenerationRequestOptions(BaseModel):
     darkbloom: Optional[Dict[str, Nullable[Any]]] = None
 
     decart: Optional[Dict[str, Nullable[Any]]] = None
+
+    deepgram: Optional[Dict[str, Nullable[Any]]] = None
 
     deepinfra: Optional[Dict[str, Nullable[Any]]] = None
 
@@ -476,6 +479,7 @@ class VideoGenerationRequestOptions(BaseModel):
                 "crusoe",
                 "darkbloom",
                 "decart",
+                "deepgram",
                 "deepinfra",
                 "deepseek",
                 "dekallm",
