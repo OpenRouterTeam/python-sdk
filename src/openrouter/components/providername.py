@@ -33,6 +33,7 @@ ProviderName = Union[
         "Crusoe",
         "Darkbloom",
         "Decart",
+        "Deepgram",
         "DeepInfra",
         "DeepSeek",
         "DekaLLM",

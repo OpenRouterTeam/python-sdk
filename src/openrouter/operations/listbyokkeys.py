@@ -103,6 +103,7 @@ Provider = Union[
         "crusoe",
         "darkbloom",
         "decart",
+        "deepgram",
         "deepinfra",
         "deepseek",
         "dekallm",
