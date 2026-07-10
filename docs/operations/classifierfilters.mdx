@@ -1,0 +1,13 @@
+---
+title: "ClassifierFilters"
+---
+
+Filter results to generations with specific classifier tag values. Can be combined with classifier_dimensions (must use the same classifier_id) or used independently with standard dimensions.
+
+
+## Fields
+
+| Field                                                                                                                   | Type                                                                                                                    | Required                                                                                                                | Description                                                                                                             | Example                                                                                                                 |
+| ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| `classifier_id`                                                                                                         | *str*                                                                                                                   | :heavy_check_mark:                                                                                                      | UUID of the classifier whose tags to filter by. Must match classifier_dimensions.classifier_id when both are specified. | 550e8400-e29b-41d4-a716-446655440000                                                                                    |
+| `filters`                                                                                                               | List[[operations.ClassifierFiltersFilter](../operations/classifierfiltersfilter.mdx)]                                    | :heavy_check_mark:                                                                                                      | N/A                                                                                                                     |                                                                                                                         |
