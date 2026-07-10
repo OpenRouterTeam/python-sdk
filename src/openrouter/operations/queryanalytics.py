@@ -74,6 +74,102 @@ class QueryAnalyticsGlobals(BaseModel):
         return m
 
 
+class ClassifierDimensionsTypedDict(TypedDict):
+    r"""Group results by custom classifier tags, breaking down metrics by the specified dimension values. Requires an active classifier on the workspace."""
+
+    classifier_id: str
+    r"""UUID of the classifier whose tags to group by."""
+    dimension_names: NotRequired[List[str]]
+    include_nulls: NotRequired[bool]
+    r"""When true, also include generations that have no tag from this classifier. Defaults to false, which returns only classified generations."""
+
+
+class ClassifierDimensions(BaseModel):
+    r"""Group results by custom classifier tags, breaking down metrics by the specified dimension values. Requires an active classifier on the workspace."""
+
+    classifier_id: str
+    r"""UUID of the classifier whose tags to group by."""
+
+    dimension_names: Optional[List[str]] = None
+
+    include_nulls: Optional[bool] = None
+    r"""When true, also include generations that have no tag from this classifier. Defaults to false, which returns only classified generations."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["dimension_names", "include_nulls"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
+
+ValueClassifierFiltersTypedDict = TypeAliasType(
+    "ValueClassifierFiltersTypedDict", Union[str, float]
+)
+
+
+ValueClassifierFilters = TypeAliasType("ValueClassifierFilters", Union[str, float])
+
+
+ClassifierFiltersValueTypedDict = TypeAliasType(
+    "ClassifierFiltersValueTypedDict",
+    Union[str, float, List[ValueClassifierFiltersTypedDict]],
+)
+r"""Filter value. Use a scalar (string or number) for eq/neq, or an array for in/not_in."""
+
+
+ClassifierFiltersValue = TypeAliasType(
+    "ClassifierFiltersValue", Union[str, float, List[ValueClassifierFilters]]
+)
+r"""Filter value. Use a scalar (string or number) for eq/neq, or an array for in/not_in."""
+
+
+class ClassifierFiltersFilterTypedDict(TypedDict):
+    field: str
+    r"""Classifier dimension name to filter on (snake_case identifier, e.g. \"department\", \"work_type\")."""
+    operator: str
+    r"""Filter operator. Only equality/set operators are supported (eq, neq, in, not_in) — ordered comparisons are not available because classification values are strings."""
+    value: ClassifierFiltersValueTypedDict
+    r"""Filter value. Use a scalar (string or number) for eq/neq, or an array for in/not_in."""
+
+
+class ClassifierFiltersFilter(BaseModel):
+    field: str
+    r"""Classifier dimension name to filter on (snake_case identifier, e.g. \"department\", \"work_type\")."""
+
+    operator: str
+    r"""Filter operator. Only equality/set operators are supported (eq, neq, in, not_in) — ordered comparisons are not available because classification values are strings."""
+
+    value: ClassifierFiltersValue
+    r"""Filter value. Use a scalar (string or number) for eq/neq, or an array for in/not_in."""
+
+
+class ClassifierFiltersTypedDict(TypedDict):
+    r"""Filter results to generations with specific classifier tag values. Can be combined with classifier_dimensions (must use the same classifier_id) or used independently with standard dimensions."""
+
+    classifier_id: str
+    r"""UUID of the classifier whose tags to filter by. Must match classifier_dimensions.classifier_id when both are specified."""
+    filters: List[ClassifierFiltersFilterTypedDict]
+
+
+class ClassifierFilters(BaseModel):
+    r"""Filter results to generations with specific classifier tag values. Can be combined with classifier_dimensions (must use the same classifier_id) or used independently with standard dimensions."""
+
+    classifier_id: str
+    r"""UUID of the classifier whose tags to filter by. Must match classifier_dimensions.classifier_id when both are specified."""
+
+    filters: List[ClassifierFiltersFilter]
+
+
 Value2TypedDict = TypeAliasType("Value2TypedDict", Union[str, float])
 
 
@@ -145,6 +241,10 @@ class TimeRange(BaseModel):
 
 class QueryAnalyticsRequestBodyTypedDict(TypedDict):
     metrics: List[str]
+    classifier_dimensions: NotRequired[ClassifierDimensionsTypedDict]
+    r"""Group results by custom classifier tags, breaking down metrics by the specified dimension values. Requires an active classifier on the workspace."""
+    classifier_filters: NotRequired[ClassifierFiltersTypedDict]
+    r"""Filter results to generations with specific classifier tag values. Can be combined with classifier_dimensions (must use the same classifier_id) or used independently with standard dimensions."""
     dimensions: NotRequired[List[str]]
     filters: NotRequired[List[FilterTypedDict]]
     granularity: NotRequired[str]
@@ -159,6 +259,12 @@ class QueryAnalyticsRequestBodyTypedDict(TypedDict):
 
 class QueryAnalyticsRequestBody(BaseModel):
     metrics: List[str]
+
+    classifier_dimensions: Optional[ClassifierDimensions] = None
+    r"""Group results by custom classifier tags, breaking down metrics by the specified dimension values. Requires an active classifier on the workspace."""
+
+    classifier_filters: Optional[ClassifierFilters] = None
+    r"""Filter results to generations with specific classifier tag values. Can be combined with classifier_dimensions (must use the same classifier_id) or used independently with standard dimensions."""
 
     dimensions: Optional[List[str]] = None
 
@@ -181,6 +287,8 @@ class QueryAnalyticsRequestBody(BaseModel):
     def serialize_model(self, handler):
         optional_fields = set(
             [
+                "classifier_dimensions",
+                "classifier_filters",
                 "dimensions",
                 "filters",
                 "granularity",
