@@ -56,6 +56,7 @@ BYOKProviderSlug = Union[
         "liquid",
         "mancer",
         "mara",
+        "meta",
         "minimax",
         "mistral",
         "modelrun",
