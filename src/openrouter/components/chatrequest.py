@@ -11,6 +11,10 @@ from .chatformatgrammarconfig import (
     ChatFormatGrammarConfig,
     ChatFormatGrammarConfigTypedDict,
 )
+from .chatformatjsonobjectconfig import (
+    ChatFormatJSONObjectConfig,
+    ChatFormatJSONObjectConfigTypedDict,
+)
 from .chatformatjsonschemaconfig import (
     ChatFormatJSONSchemaConfig,
     ChatFormatJSONSchemaConfigTypedDict,
@@ -30,10 +34,6 @@ from .contextcompressionplugin import (
     ContextCompressionPluginTypedDict,
 )
 from .fileparserplugin import FileParserPlugin, FileParserPluginTypedDict
-from .formatjsonobjectconfig import (
-    FormatJSONObjectConfig,
-    FormatJSONObjectConfigTypedDict,
-)
 from .fusionplugin import FusionPlugin, FusionPluginTypedDict
 from .imageconfig import ImageConfig, ImageConfigTypedDict
 from .moderationplugin import ModerationPlugin, ModerationPluginTypedDict
@@ -179,7 +179,7 @@ ResponseFormatTypedDict = TypeAliasType(
     "ResponseFormatTypedDict",
     Union[
         ChatFormatTextConfigTypedDict,
-        FormatJSONObjectConfigTypedDict,
+        ChatFormatJSONObjectConfigTypedDict,
         ChatFormatPythonConfigTypedDict,
         ChatFormatJSONSchemaConfigTypedDict,
         ChatFormatGrammarConfigTypedDict,
@@ -191,7 +191,7 @@ r"""Response format configuration"""
 ResponseFormat = Annotated[
     Union[
         Annotated[ChatFormatGrammarConfig, Tag("grammar")],
-        Annotated[FormatJSONObjectConfig, Tag("json_object")],
+        Annotated[ChatFormatJSONObjectConfig, Tag("json_object")],
         Annotated[ChatFormatJSONSchemaConfig, Tag("json_schema")],
         Annotated[ChatFormatPythonConfig, Tag("python")],
         Annotated[ChatFormatTextConfig, Tag("text")],

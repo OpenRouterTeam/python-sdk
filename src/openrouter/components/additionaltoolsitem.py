@@ -11,10 +11,6 @@ from .applypatchservertool_openrouter import (
     ApplyPatchServerToolOpenRouterTypedDict,
 )
 from .bashservertool import BashServerTool, BashServerToolTypedDict
-from .chatsearchmodelsservertool import (
-    ChatSearchModelsServerTool,
-    ChatSearchModelsServerToolTypedDict,
-)
 from .codeinterpreterservertool import (
     CodeInterpreterServerTool,
     CodeInterpreterServerToolTypedDict,
@@ -49,6 +45,10 @@ from .preview_20250311_websearchservertool import (
 from .preview_websearchservertool import (
     PreviewWebSearchServerTool,
     PreviewWebSearchServerToolTypedDict,
+)
+from .searchmodelsservertool_openrouter import (
+    SearchModelsServerToolOpenRouter,
+    SearchModelsServerToolOpenRouterTypedDict,
 )
 from .shellservertool import ShellServerTool, ShellServerToolTypedDict
 from .shellservertool_openrouter import (
@@ -182,7 +182,7 @@ AdditionalToolsItemToolUnionTypedDict = TypeAliasType(
         ApplyPatchServerToolOpenRouterTypedDict,
         WebSearchServerToolOpenRouterTypedDict,
         WebFetchServerToolTypedDict,
-        ChatSearchModelsServerToolTypedDict,
+        SearchModelsServerToolOpenRouterTypedDict,
         FilesServerToolTypedDict,
         AdvisorServerToolOpenRouterTypedDict,
         SubagentServerToolOpenRouterTypedDict,
@@ -216,7 +216,7 @@ AdditionalToolsItemToolUnion = TypeAliasType(
         ApplyPatchServerToolOpenRouter,
         WebSearchServerToolOpenRouter,
         WebFetchServerTool,
-        ChatSearchModelsServerTool,
+        SearchModelsServerToolOpenRouter,
         FilesServerTool,
         AdvisorServerToolOpenRouter,
         SubagentServerToolOpenRouter,

@@ -2,12 +2,13 @@
 
 from .basesdk import BaseSDK
 from enum import Enum
+from jsonpath import JSONPath
 from openrouter import components, errors, operations, utils
 from openrouter._hooks import HookContext
 from openrouter.types import OptionalNullable, UNSET
 from openrouter.utils import get_security_from_env
 from openrouter.utils.unmarshal_json_response import unmarshal_json_response
-from typing import Any, Mapping, Optional, Union
+from typing import Any, Awaitable, Dict, List, Mapping, Optional, Union
 
 
 class GenerateAcceptEnum(str, Enum):
@@ -432,11 +433,13 @@ class Embeddings(BaseSDK):
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
+        offset: Optional[int] = 0,
+        limit: Optional[int] = 500,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.ModelsListResponse:
+    ) -> Optional[operations.ListEmbeddingsModelsResponse]:
         r"""List all embeddings models
 
         Returns a list of all available embeddings models and their properties
@@ -448,6 +451,8 @@ class Embeddings(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
+        :param offset: Number of records to skip for pagination. When both offset and limit are omitted, the full list is returned
+        :param limit: Maximum number of records to return (max 1000). When both offset and limit are omitted, the full list is returned
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -467,6 +472,8 @@ class Embeddings(BaseSDK):
             http_referer=http_referer,
             x_open_router_title=x_open_router_title,
             x_open_router_categories=x_open_router_categories,
+            offset=offset,
+            limit=limit,
         )
 
         req = self._build_request(
@@ -520,9 +527,39 @@ class Embeddings(BaseSDK):
             retry_config=retry_config,
         )
 
+        def next_func() -> Optional[operations.ListEmbeddingsModelsResponse]:
+            body = utils.unmarshal_json(http_res.text, Union[Dict[Any, Any], List[Any]])
+
+            offset = request.offset if isinstance(request.offset, int) else 0
+
+            if not http_res.text:
+                return None
+            results = JSONPath("$.data").parse(body)
+            if len(results) == 0 or len(results[0]) == 0:
+                return None
+            limit_ = request.limit if isinstance(request.limit, int) else 500
+            if len(results[0]) < limit_:
+                return None
+            next_offset = offset + len(results[0])
+
+            return self.list_models(
+                http_referer=http_referer,
+                x_open_router_title=x_open_router_title,
+                x_open_router_categories=x_open_router_categories,
+                offset=next_offset,
+                limit=limit,
+                retries=retries,
+                server_url=server_url,
+                timeout_ms=timeout_ms,
+                http_headers=http_headers,
+            )
+
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(components.ModelsListResponse, http_res)
+            return operations.ListEmbeddingsModelsResponse(
+                result=unmarshal_json_response(components.ModelsListResponse, http_res),
+                next=next_func,
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.BadRequestResponseErrorData, http_res
@@ -552,11 +589,13 @@ class Embeddings(BaseSDK):
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
+        offset: Optional[int] = 0,
+        limit: Optional[int] = 500,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.ModelsListResponse:
+    ) -> Optional[operations.ListEmbeddingsModelsResponse]:
         r"""List all embeddings models
 
         Returns a list of all available embeddings models and their properties
@@ -568,6 +607,8 @@ class Embeddings(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
+        :param offset: Number of records to skip for pagination. When both offset and limit are omitted, the full list is returned
+        :param limit: Maximum number of records to return (max 1000). When both offset and limit are omitted, the full list is returned
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -587,6 +628,8 @@ class Embeddings(BaseSDK):
             http_referer=http_referer,
             x_open_router_title=x_open_router_title,
             x_open_router_categories=x_open_router_categories,
+            offset=offset,
+            limit=limit,
         )
 
         req = self._build_request_async(
@@ -640,9 +683,42 @@ class Embeddings(BaseSDK):
             retry_config=retry_config,
         )
 
+        def next_func() -> Awaitable[Optional[operations.ListEmbeddingsModelsResponse]]:
+            body = utils.unmarshal_json(http_res.text, Union[Dict[Any, Any], List[Any]])
+
+            async def empty_result():
+                return None
+
+            offset = request.offset if isinstance(request.offset, int) else 0
+
+            if not http_res.text:
+                return empty_result()
+            results = JSONPath("$.data").parse(body)
+            if len(results) == 0 or len(results[0]) == 0:
+                return empty_result()
+            limit_ = request.limit if isinstance(request.limit, int) else 500
+            if len(results[0]) < limit_:
+                return empty_result()
+            next_offset = offset + len(results[0])
+
+            return self.list_models_async(
+                http_referer=http_referer,
+                x_open_router_title=x_open_router_title,
+                x_open_router_categories=x_open_router_categories,
+                offset=next_offset,
+                limit=limit,
+                retries=retries,
+                server_url=server_url,
+                timeout_ms=timeout_ms,
+                http_headers=http_headers,
+            )
+
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(components.ModelsListResponse, http_res)
+            return operations.ListEmbeddingsModelsResponse(
+                result=unmarshal_json_response(components.ModelsListResponse, http_res),
+                next=next_func,
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.BadRequestResponseErrorData, http_res

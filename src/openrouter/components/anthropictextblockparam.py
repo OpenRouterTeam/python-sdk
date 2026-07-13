@@ -17,13 +17,13 @@ from .anthropiccitationpagelocationparam import (
     AnthropicCitationPageLocationParam,
     AnthropicCitationPageLocationParamTypedDict,
 )
-from .anthropiccitationsearchresultlocation import (
-    AnthropicCitationSearchResultLocation,
-    AnthropicCitationSearchResultLocationTypedDict,
+from .anthropiccitationsearchresultlocationparam import (
+    AnthropicCitationSearchResultLocationParam,
+    AnthropicCitationSearchResultLocationParamTypedDict,
 )
-from .anthropiccitationwebsearchresultlocation import (
-    AnthropicCitationWebSearchResultLocation,
-    AnthropicCitationWebSearchResultLocationTypedDict,
+from .anthropiccitationwebsearchresultlocationparam import (
+    AnthropicCitationWebSearchResultLocationParam,
+    AnthropicCitationWebSearchResultLocationParamTypedDict,
 )
 from openrouter.types import (
     BaseModel,
@@ -41,11 +41,11 @@ from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 CitationTypedDict = TypeAliasType(
     "CitationTypedDict",
     Union[
-        AnthropicCitationWebSearchResultLocationTypedDict,
+        AnthropicCitationWebSearchResultLocationParamTypedDict,
         AnthropicCitationCharLocationParamTypedDict,
         AnthropicCitationPageLocationParamTypedDict,
         AnthropicCitationContentBlockLocationParamTypedDict,
-        AnthropicCitationSearchResultLocationTypedDict,
+        AnthropicCitationSearchResultLocationParamTypedDict,
     ],
 )
 
@@ -57,9 +57,12 @@ Citation = Annotated[
             AnthropicCitationContentBlockLocationParam, Tag("content_block_location")
         ],
         Annotated[AnthropicCitationPageLocationParam, Tag("page_location")],
-        Annotated[AnthropicCitationSearchResultLocation, Tag("search_result_location")],
         Annotated[
-            AnthropicCitationWebSearchResultLocation, Tag("web_search_result_location")
+            AnthropicCitationSearchResultLocationParam, Tag("search_result_location")
+        ],
+        Annotated[
+            AnthropicCitationWebSearchResultLocationParam,
+            Tag("web_search_result_location"),
         ],
     ],
     Discriminator(lambda m: get_discriminator(m, "type", "type")),

@@ -5,6 +5,7 @@ from openrouter.components import (
     contentpartinputaudio as components_contentpartinputaudio,
     contentpartinputfile as components_contentpartinputfile,
     contentpartinputvideo as components_contentpartinputvideo,
+    costdetails as components_costdetails,
     providerpreferences as components_providerpreferences,
 )
 from openrouter.types import (
@@ -383,49 +384,6 @@ class CreateEmbeddingsData(BaseModel):
 Object = Literal["list",]
 
 
-class CostDetailsTypedDict(TypedDict):
-    r"""Breakdown of upstream inference costs"""
-
-    upstream_inference_completions_cost: float
-    upstream_inference_prompt_cost: float
-    upstream_inference_cost: NotRequired[Nullable[float]]
-
-
-class CostDetails(BaseModel):
-    r"""Breakdown of upstream inference costs"""
-
-    upstream_inference_completions_cost: float
-
-    upstream_inference_prompt_cost: float
-
-    upstream_inference_cost: OptionalNullable[float] = UNSET
-
-    @model_serializer(mode="wrap")
-    def serialize_model(self, handler):
-        optional_fields = set(["upstream_inference_cost"])
-        nullable_fields = set(["upstream_inference_cost"])
-        serialized = handler(self)
-        m = {}
-
-        for n, f in type(self).model_fields.items():
-            k = f.alias or n
-            val = serialized.get(k, serialized.get(n))
-            is_nullable_and_explicitly_set = (
-                k in nullable_fields
-                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
-            )
-
-            if val != UNSET_SENTINEL:
-                if (
-                    val is not None
-                    or k not in optional_fields
-                    or is_nullable_and_explicitly_set
-                ):
-                    m[k] = val
-
-        return m
-
-
 class PromptTokensDetailsTypedDict(TypedDict):
     r"""Per-modality token breakdown. Only present when the input contains 2+ modalities (e.g. text + image) and the upstream provider returns modality-level usage data. Only non-zero modality counts are included."""
 
@@ -493,7 +451,7 @@ class CreateEmbeddingsUsageTypedDict(TypedDict):
     r"""Total number of tokens used"""
     cost: NotRequired[float]
     r"""Cost of the request in credits"""
-    cost_details: NotRequired[Nullable[CostDetailsTypedDict]]
+    cost_details: NotRequired[Nullable[components_costdetails.CostDetailsTypedDict]]
     r"""Breakdown of upstream inference costs"""
     is_byok: NotRequired[bool]
     r"""Whether a request was made using a Bring Your Own Key configuration"""
@@ -513,7 +471,7 @@ class CreateEmbeddingsUsage(BaseModel):
     cost: Optional[float] = None
     r"""Cost of the request in credits"""
 
-    cost_details: OptionalNullable[CostDetails] = UNSET
+    cost_details: OptionalNullable[components_costdetails.CostDetails] = UNSET
     r"""Breakdown of upstream inference costs"""
 
     is_byok: Optional[bool] = None
