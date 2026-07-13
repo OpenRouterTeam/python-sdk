@@ -19,8 +19,8 @@ class Organization(BaseSDK):
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
-        offset: Optional[int] = None,
-        limit: Optional[int] = None,
+        offset: Optional[int] = 0,
+        limit: Optional[int] = 50,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -123,7 +123,7 @@ class Organization(BaseSDK):
             results = JSONPath("$.data").parse(body)
             if len(results) == 0 or len(results[0]) == 0:
                 return None
-            limit_ = request.limit if isinstance(request.limit, int) else 0
+            limit_ = request.limit if isinstance(request.limit, int) else 50
             if len(results[0]) < limit_:
                 return None
             next_offset = offset + len(results[0])
@@ -182,8 +182,8 @@ class Organization(BaseSDK):
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
-        offset: Optional[int] = None,
-        limit: Optional[int] = None,
+        offset: Optional[int] = 0,
+        limit: Optional[int] = 50,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -291,7 +291,7 @@ class Organization(BaseSDK):
             results = JSONPath("$.data").parse(body)
             if len(results) == 0 or len(results[0]) == 0:
                 return empty_result()
-            limit_ = request.limit if isinstance(request.limit, int) else 0
+            limit_ = request.limit if isinstance(request.limit, int) else 50
             if len(results[0]) < limit_:
                 return empty_result()
             next_offset = offset + len(results[0])

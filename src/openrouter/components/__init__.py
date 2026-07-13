@@ -95,15 +95,15 @@ if TYPE_CHECKING:
         AnthropicCitationPageLocationParamType,
         AnthropicCitationPageLocationParamTypedDict,
     )
-    from .anthropiccitationsearchresultlocation import (
-        AnthropicCitationSearchResultLocation,
-        AnthropicCitationSearchResultLocationType,
-        AnthropicCitationSearchResultLocationTypedDict,
+    from .anthropiccitationsearchresultlocationparam import (
+        AnthropicCitationSearchResultLocationParam,
+        AnthropicCitationSearchResultLocationParamType,
+        AnthropicCitationSearchResultLocationParamTypedDict,
     )
-    from .anthropiccitationwebsearchresultlocation import (
-        AnthropicCitationWebSearchResultLocation,
-        AnthropicCitationWebSearchResultLocationType,
-        AnthropicCitationWebSearchResultLocationTypedDict,
+    from .anthropiccitationwebsearchresultlocationparam import (
+        AnthropicCitationWebSearchResultLocationParam,
+        AnthropicCitationWebSearchResultLocationParamType,
+        AnthropicCitationWebSearchResultLocationParamTypedDict,
     )
     from .anthropiccompactionusageiteration import (
         AnthropicCompactionUsageIteration,
@@ -469,6 +469,11 @@ if TYPE_CHECKING:
         ChatFormatGrammarConfig,
         ChatFormatGrammarConfigType,
         ChatFormatGrammarConfigTypedDict,
+    )
+    from .chatformatjsonobjectconfig import (
+        ChatFormatJSONObjectConfig,
+        ChatFormatJSONObjectConfigType,
+        ChatFormatJSONObjectConfigTypedDict,
     )
     from .chatformatjsonschemaconfig import (
         ChatFormatJSONSchemaConfig,
@@ -1217,6 +1222,7 @@ if TYPE_CHECKING:
         ImageGenTextChunkEventType,
         ImageGenTextChunkEventTypedDict,
     )
+    from .imageinputmodality import ImageInputModality
     from .imagemodelarchitecture import (
         ImageModelArchitecture,
         ImageModelArchitectureTypedDict,
@@ -1326,6 +1332,10 @@ if TYPE_CHECKING:
         LegacyChatContentVideo,
         LegacyChatContentVideoType,
         LegacyChatContentVideoTypedDict,
+    )
+    from .legacy_chatcontentvideoinput import (
+        LegacyChatContentVideoInput,
+        LegacyChatContentVideoInputTypedDict,
     )
     from .legacy_websearchservertool import (
         LegacyWebSearchServerTool,
@@ -1586,13 +1596,14 @@ if TYPE_CHECKING:
         TypeWebSearch20250305,
         TypeWebSearch20260209,
     )
+    from .messagessearchmodelsservertool import (
+        MessagesSearchModelsServerTool,
+        MessagesSearchModelsServerToolType,
+        MessagesSearchModelsServerToolTypedDict,
+    )
     from .metadatalevel import MetadataLevel
     from .model import Model, ModelTypedDict
-    from .modelarchitecture import (
-        ModelArchitecture,
-        ModelArchitectureInstructType,
-        ModelArchitectureTypedDict,
-    )
+    from .modelarchitecture import ModelArchitecture, ModelArchitectureTypedDict
     from .modelbenchmarks import ModelBenchmarks, ModelBenchmarksTypedDict
     from .modelgroup import ModelGroup
     from .modellinks import ModelLinks, ModelLinksTypedDict
@@ -1604,7 +1615,12 @@ if TYPE_CHECKING:
         ModelsCountResponseDataTypedDict,
         ModelsCountResponseTypedDict,
     )
-    from .modelslistresponse import ModelsListResponse, ModelsListResponseTypedDict
+    from .modelslistresponse import (
+        Links,
+        LinksTypedDict,
+        ModelsListResponse,
+        ModelsListResponseTypedDict,
+    )
     from .moderationplugin import (
         ModerationPlugin,
         ModerationPluginID,
@@ -1648,18 +1664,24 @@ if TYPE_CHECKING:
         ObservabilityDestinationTypedDict,
         UnknownObservabilityDestination,
     )
-    from .observabilityfilterrulesconfig import (
+    from .observabilityfilterrulegroup import (
         FieldT,
-        Group,
-        GroupTypedDict,
         Logic,
-        ObservabilityFilterRulesConfig,
-        ObservabilityFilterRulesConfigTypedDict,
-        ObservabilityFilterRulesConfigValue,
-        ObservabilityFilterRulesConfigValueTypedDict,
+        ObservabilityFilterRuleGroup,
+        ObservabilityFilterRuleGroupTypedDict,
+        ObservabilityFilterRuleGroupValue,
+        ObservabilityFilterRuleGroupValueTypedDict,
         Operator,
         Rule,
         RuleTypedDict,
+    )
+    from .observabilityfilterrulesconfig import (
+        ObservabilityFilterRulesConfig,
+        ObservabilityFilterRulesConfigTypedDict,
+    )
+    from .observabilityfilterrulesconfignullable import (
+        ObservabilityFilterRulesConfigNullable,
+        ObservabilityFilterRulesConfigNullableTypedDict,
     )
     from .observabilitygrafanadestination import (
         ObservabilityGrafanaDestination,
@@ -2375,6 +2397,11 @@ if TYPE_CHECKING:
     from .routerparams import RouterParams, RouterParamsTypedDict
     from .routingstrategy import RoutingStrategy
     from .searchcontextsizeenum import SearchContextSizeEnum
+    from .searchmodelsservertool_openrouter import (
+        SearchModelsServerToolOpenRouter,
+        SearchModelsServerToolOpenRouterType,
+        SearchModelsServerToolOpenRouterTypedDict,
+    )
     from .searchmodelsservertoolconfig import (
         SearchModelsServerToolConfig,
         SearchModelsServerToolConfigTypedDict,
@@ -2866,12 +2893,12 @@ __all__ = [
     "AnthropicCitationPageLocationParam",
     "AnthropicCitationPageLocationParamType",
     "AnthropicCitationPageLocationParamTypedDict",
-    "AnthropicCitationSearchResultLocation",
-    "AnthropicCitationSearchResultLocationType",
-    "AnthropicCitationSearchResultLocationTypedDict",
-    "AnthropicCitationWebSearchResultLocation",
-    "AnthropicCitationWebSearchResultLocationType",
-    "AnthropicCitationWebSearchResultLocationTypedDict",
+    "AnthropicCitationSearchResultLocationParam",
+    "AnthropicCitationSearchResultLocationParamType",
+    "AnthropicCitationSearchResultLocationParamTypedDict",
+    "AnthropicCitationWebSearchResultLocationParam",
+    "AnthropicCitationWebSearchResultLocationParamType",
+    "AnthropicCitationWebSearchResultLocationParamTypedDict",
     "AnthropicCompactionUsageIteration",
     "AnthropicCompactionUsageIterationType",
     "AnthropicCompactionUsageIterationTypedDict",
@@ -3112,6 +3139,9 @@ __all__ = [
     "ChatFormatGrammarConfig",
     "ChatFormatGrammarConfigType",
     "ChatFormatGrammarConfigTypedDict",
+    "ChatFormatJSONObjectConfig",
+    "ChatFormatJSONObjectConfigType",
+    "ChatFormatJSONObjectConfigTypedDict",
     "ChatFormatJSONSchemaConfig",
     "ChatFormatJSONSchemaConfigType",
     "ChatFormatJSONSchemaConfigTypedDict",
@@ -3592,8 +3622,6 @@ __all__ = [
     "GetPresetVersionResponseTypedDict",
     "GetWorkspaceResponse",
     "GetWorkspaceResponseTypedDict",
-    "Group",
-    "GroupTypedDict",
     "Guardrail",
     "GuardrailInterval",
     "GuardrailTypedDict",
@@ -3665,6 +3693,7 @@ __all__ = [
     "ImageGenerationUsagePromptTokensDetails",
     "ImageGenerationUsagePromptTokensDetailsTypedDict",
     "ImageGenerationUsageTypedDict",
+    "ImageInputModality",
     "ImageModelArchitecture",
     "ImageModelArchitectureTypedDict",
     "ImageModelEndpointsResponse",
@@ -3774,11 +3803,15 @@ __all__ = [
     "KeyAssignment",
     "KeyAssignmentTypedDict",
     "LegacyChatContentVideo",
+    "LegacyChatContentVideoInput",
+    "LegacyChatContentVideoInputTypedDict",
     "LegacyChatContentVideoType",
     "LegacyChatContentVideoTypedDict",
     "LegacyWebSearchServerTool",
     "LegacyWebSearchServerToolType",
     "LegacyWebSearchServerToolTypedDict",
+    "Links",
+    "LinksTypedDict",
     "ListBYOKKeysResponse",
     "ListBYOKKeysResponseTypedDict",
     "ListEndpointsResponse",
@@ -3869,6 +3902,9 @@ __all__ = [
     "MessagesRequestToolUnion",
     "MessagesRequestToolUnionTypedDict",
     "MessagesRequestTypedDict",
+    "MessagesSearchModelsServerTool",
+    "MessagesSearchModelsServerToolType",
+    "MessagesSearchModelsServerToolTypedDict",
     "MetadataLevel",
     "Method",
     "Modality",
@@ -3878,7 +3914,6 @@ __all__ = [
     "ModeTypedDict",
     "Model",
     "ModelArchitecture",
-    "ModelArchitectureInstructType",
     "ModelArchitectureTypedDict",
     "ModelBenchmarks",
     "ModelBenchmarksTypedDict",
@@ -3933,10 +3968,14 @@ __all__ = [
     "ObservabilityDatadogDestinationTypedDict",
     "ObservabilityDestination",
     "ObservabilityDestinationTypedDict",
+    "ObservabilityFilterRuleGroup",
+    "ObservabilityFilterRuleGroupTypedDict",
+    "ObservabilityFilterRuleGroupValue",
+    "ObservabilityFilterRuleGroupValueTypedDict",
     "ObservabilityFilterRulesConfig",
+    "ObservabilityFilterRulesConfigNullable",
+    "ObservabilityFilterRulesConfigNullableTypedDict",
     "ObservabilityFilterRulesConfigTypedDict",
-    "ObservabilityFilterRulesConfigValue",
-    "ObservabilityFilterRulesConfigValueTypedDict",
     "ObservabilityGrafanaDestination",
     "ObservabilityGrafanaDestinationConfig",
     "ObservabilityGrafanaDestinationConfigTypedDict",
@@ -4459,6 +4498,9 @@ __all__ = [
     "SearchContextSizeEnum",
     "SearchModelsServerToolConfig",
     "SearchModelsServerToolConfigTypedDict",
+    "SearchModelsServerToolOpenRouter",
+    "SearchModelsServerToolOpenRouterType",
+    "SearchModelsServerToolOpenRouterTypedDict",
     "SearchQualityLevel",
     "Security",
     "SecurityTypedDict",
@@ -4906,12 +4948,12 @@ _dynamic_imports: dict[str, str] = {
     "AnthropicCitationPageLocationParam": ".anthropiccitationpagelocationparam",
     "AnthropicCitationPageLocationParamType": ".anthropiccitationpagelocationparam",
     "AnthropicCitationPageLocationParamTypedDict": ".anthropiccitationpagelocationparam",
-    "AnthropicCitationSearchResultLocation": ".anthropiccitationsearchresultlocation",
-    "AnthropicCitationSearchResultLocationType": ".anthropiccitationsearchresultlocation",
-    "AnthropicCitationSearchResultLocationTypedDict": ".anthropiccitationsearchresultlocation",
-    "AnthropicCitationWebSearchResultLocation": ".anthropiccitationwebsearchresultlocation",
-    "AnthropicCitationWebSearchResultLocationType": ".anthropiccitationwebsearchresultlocation",
-    "AnthropicCitationWebSearchResultLocationTypedDict": ".anthropiccitationwebsearchresultlocation",
+    "AnthropicCitationSearchResultLocationParam": ".anthropiccitationsearchresultlocationparam",
+    "AnthropicCitationSearchResultLocationParamType": ".anthropiccitationsearchresultlocationparam",
+    "AnthropicCitationSearchResultLocationParamTypedDict": ".anthropiccitationsearchresultlocationparam",
+    "AnthropicCitationWebSearchResultLocationParam": ".anthropiccitationwebsearchresultlocationparam",
+    "AnthropicCitationWebSearchResultLocationParamType": ".anthropiccitationwebsearchresultlocationparam",
+    "AnthropicCitationWebSearchResultLocationParamTypedDict": ".anthropiccitationwebsearchresultlocationparam",
     "AnthropicCompactionUsageIteration": ".anthropiccompactionusageiteration",
     "AnthropicCompactionUsageIterationType": ".anthropiccompactionusageiteration",
     "AnthropicCompactionUsageIterationTypedDict": ".anthropiccompactionusageiteration",
@@ -5156,6 +5198,9 @@ _dynamic_imports: dict[str, str] = {
     "ChatFormatGrammarConfig": ".chatformatgrammarconfig",
     "ChatFormatGrammarConfigType": ".chatformatgrammarconfig",
     "ChatFormatGrammarConfigTypedDict": ".chatformatgrammarconfig",
+    "ChatFormatJSONObjectConfig": ".chatformatjsonobjectconfig",
+    "ChatFormatJSONObjectConfigType": ".chatformatjsonobjectconfig",
+    "ChatFormatJSONObjectConfigTypedDict": ".chatformatjsonobjectconfig",
     "ChatFormatJSONSchemaConfig": ".chatformatjsonschemaconfig",
     "ChatFormatJSONSchemaConfigType": ".chatformatjsonschemaconfig",
     "ChatFormatJSONSchemaConfigTypedDict": ".chatformatjsonschemaconfig",
@@ -5702,6 +5747,7 @@ _dynamic_imports: dict[str, str] = {
     "ImageGenTextChunkEventPhase": ".imagegentextchunkevent",
     "ImageGenTextChunkEventType": ".imagegentextchunkevent",
     "ImageGenTextChunkEventTypedDict": ".imagegentextchunkevent",
+    "ImageInputModality": ".imageinputmodality",
     "ImageModelArchitecture": ".imagemodelarchitecture",
     "ImageModelArchitectureTypedDict": ".imagemodelarchitecture",
     "ImageModelEndpointsResponse": ".imagemodelendpointsresponse",
@@ -5799,6 +5845,8 @@ _dynamic_imports: dict[str, str] = {
     "LegacyChatContentVideo": ".legacy_chatcontentvideo",
     "LegacyChatContentVideoType": ".legacy_chatcontentvideo",
     "LegacyChatContentVideoTypedDict": ".legacy_chatcontentvideo",
+    "LegacyChatContentVideoInput": ".legacy_chatcontentvideoinput",
+    "LegacyChatContentVideoInputTypedDict": ".legacy_chatcontentvideoinput",
     "LegacyWebSearchServerTool": ".legacy_websearchservertool",
     "LegacyWebSearchServerToolType": ".legacy_websearchservertool",
     "LegacyWebSearchServerToolTypedDict": ".legacy_websearchservertool",
@@ -6018,11 +6066,13 @@ _dynamic_imports: dict[str, str] = {
     "TypeTool": ".messagesrequest",
     "TypeWebSearch20250305": ".messagesrequest",
     "TypeWebSearch20260209": ".messagesrequest",
+    "MessagesSearchModelsServerTool": ".messagessearchmodelsservertool",
+    "MessagesSearchModelsServerToolType": ".messagessearchmodelsservertool",
+    "MessagesSearchModelsServerToolTypedDict": ".messagessearchmodelsservertool",
     "MetadataLevel": ".metadatalevel",
     "Model": ".model",
     "ModelTypedDict": ".model",
     "ModelArchitecture": ".modelarchitecture",
-    "ModelArchitectureInstructType": ".modelarchitecture",
     "ModelArchitectureTypedDict": ".modelarchitecture",
     "ModelBenchmarks": ".modelbenchmarks",
     "ModelBenchmarksTypedDict": ".modelbenchmarks",
@@ -6038,6 +6088,8 @@ _dynamic_imports: dict[str, str] = {
     "ModelsCountResponseData": ".modelscountresponse",
     "ModelsCountResponseDataTypedDict": ".modelscountresponse",
     "ModelsCountResponseTypedDict": ".modelscountresponse",
+    "Links": ".modelslistresponse",
+    "LinksTypedDict": ".modelslistresponse",
     "ModelsListResponse": ".modelslistresponse",
     "ModelsListResponseTypedDict": ".modelslistresponse",
     "ModerationPlugin": ".moderationplugin",
@@ -6070,17 +6122,19 @@ _dynamic_imports: dict[str, str] = {
     "ObservabilityDestination": ".observabilitydestination",
     "ObservabilityDestinationTypedDict": ".observabilitydestination",
     "UnknownObservabilityDestination": ".observabilitydestination",
-    "FieldT": ".observabilityfilterrulesconfig",
-    "Group": ".observabilityfilterrulesconfig",
-    "GroupTypedDict": ".observabilityfilterrulesconfig",
-    "Logic": ".observabilityfilterrulesconfig",
+    "FieldT": ".observabilityfilterrulegroup",
+    "Logic": ".observabilityfilterrulegroup",
+    "ObservabilityFilterRuleGroup": ".observabilityfilterrulegroup",
+    "ObservabilityFilterRuleGroupTypedDict": ".observabilityfilterrulegroup",
+    "ObservabilityFilterRuleGroupValue": ".observabilityfilterrulegroup",
+    "ObservabilityFilterRuleGroupValueTypedDict": ".observabilityfilterrulegroup",
+    "Operator": ".observabilityfilterrulegroup",
+    "Rule": ".observabilityfilterrulegroup",
+    "RuleTypedDict": ".observabilityfilterrulegroup",
     "ObservabilityFilterRulesConfig": ".observabilityfilterrulesconfig",
     "ObservabilityFilterRulesConfigTypedDict": ".observabilityfilterrulesconfig",
-    "ObservabilityFilterRulesConfigValue": ".observabilityfilterrulesconfig",
-    "ObservabilityFilterRulesConfigValueTypedDict": ".observabilityfilterrulesconfig",
-    "Operator": ".observabilityfilterrulesconfig",
-    "Rule": ".observabilityfilterrulesconfig",
-    "RuleTypedDict": ".observabilityfilterrulesconfig",
+    "ObservabilityFilterRulesConfigNullable": ".observabilityfilterrulesconfignullable",
+    "ObservabilityFilterRulesConfigNullableTypedDict": ".observabilityfilterrulesconfignullable",
     "ObservabilityGrafanaDestination": ".observabilitygrafanadestination",
     "ObservabilityGrafanaDestinationConfig": ".observabilitygrafanadestination",
     "ObservabilityGrafanaDestinationConfigTypedDict": ".observabilitygrafanadestination",
@@ -6608,6 +6662,9 @@ _dynamic_imports: dict[str, str] = {
     "RouterParamsTypedDict": ".routerparams",
     "RoutingStrategy": ".routingstrategy",
     "SearchContextSizeEnum": ".searchcontextsizeenum",
+    "SearchModelsServerToolOpenRouter": ".searchmodelsservertool_openrouter",
+    "SearchModelsServerToolOpenRouterType": ".searchmodelsservertool_openrouter",
+    "SearchModelsServerToolOpenRouterTypedDict": ".searchmodelsservertool_openrouter",
     "SearchModelsServerToolConfig": ".searchmodelsservertoolconfig",
     "SearchModelsServerToolConfigTypedDict": ".searchmodelsservertoolconfig",
     "SearchQualityLevel": ".searchqualitylevel",

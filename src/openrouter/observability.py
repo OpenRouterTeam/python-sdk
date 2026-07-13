@@ -19,8 +19,8 @@ class Observability(BaseSDK):
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
-        offset: Optional[int] = None,
-        limit: Optional[int] = None,
+        offset: Optional[int] = 0,
+        limit: Optional[int] = 50,
         workspace_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -126,7 +126,7 @@ class Observability(BaseSDK):
             results = JSONPath("$.data").parse(body)
             if len(results) == 0 or len(results[0]) == 0:
                 return None
-            limit_ = request.limit if isinstance(request.limit, int) else 0
+            limit_ = request.limit if isinstance(request.limit, int) else 50
             if len(results[0]) < limit_:
                 return None
             next_offset = offset + len(results[0])
@@ -181,8 +181,8 @@ class Observability(BaseSDK):
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
-        offset: Optional[int] = None,
-        limit: Optional[int] = None,
+        offset: Optional[int] = 0,
+        limit: Optional[int] = 50,
         workspace_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -293,7 +293,7 @@ class Observability(BaseSDK):
             results = JSONPath("$.data").parse(body)
             if len(results) == 0 or len(results[0]) == 0:
                 return empty_result()
-            limit_ = request.limit if isinstance(request.limit, int) else 0
+            limit_ = request.limit if isinstance(request.limit, int) else 50
             if len(results[0]) < limit_:
                 return empty_result()
             next_offset = offset + len(results[0])
@@ -355,8 +355,8 @@ class Observability(BaseSDK):
         enabled: Optional[bool] = True,
         filter_rules: OptionalNullable[
             Union[
-                components.ObservabilityFilterRulesConfig,
-                components.ObservabilityFilterRulesConfigTypedDict,
+                components.ObservabilityFilterRulesConfigNullable,
+                components.ObservabilityFilterRulesConfigNullableTypedDict,
             ]
         ] = UNSET,
         privacy_mode: Optional[bool] = False,
@@ -414,7 +414,7 @@ class Observability(BaseSDK):
                 enabled=enabled,
                 filter_rules=utils.get_pydantic_model(
                     filter_rules,
-                    OptionalNullable[components.ObservabilityFilterRulesConfig],
+                    OptionalNullable[components.ObservabilityFilterRulesConfigNullable],
                 ),
                 name=name,
                 privacy_mode=privacy_mode,
@@ -538,8 +538,8 @@ class Observability(BaseSDK):
         enabled: Optional[bool] = True,
         filter_rules: OptionalNullable[
             Union[
-                components.ObservabilityFilterRulesConfig,
-                components.ObservabilityFilterRulesConfigTypedDict,
+                components.ObservabilityFilterRulesConfigNullable,
+                components.ObservabilityFilterRulesConfigNullableTypedDict,
             ]
         ] = UNSET,
         privacy_mode: Optional[bool] = False,
@@ -597,7 +597,7 @@ class Observability(BaseSDK):
                 enabled=enabled,
                 filter_rules=utils.get_pydantic_model(
                     filter_rules,
-                    OptionalNullable[components.ObservabilityFilterRulesConfig],
+                    OptionalNullable[components.ObservabilityFilterRulesConfigNullable],
                 ),
                 name=name,
                 privacy_mode=privacy_mode,
@@ -1240,8 +1240,8 @@ class Observability(BaseSDK):
         enabled: Optional[bool] = None,
         filter_rules: OptionalNullable[
             Union[
-                components.ObservabilityFilterRulesConfig,
-                components.ObservabilityFilterRulesConfigTypedDict,
+                components.ObservabilityFilterRulesConfigNullable,
+                components.ObservabilityFilterRulesConfigNullableTypedDict,
             ]
         ] = UNSET,
         name: Optional[str] = None,
@@ -1299,7 +1299,7 @@ class Observability(BaseSDK):
                 enabled=enabled,
                 filter_rules=utils.get_pydantic_model(
                     filter_rules,
-                    OptionalNullable[components.ObservabilityFilterRulesConfig],
+                    OptionalNullable[components.ObservabilityFilterRulesConfigNullable],
                 ),
                 name=name,
                 privacy_mode=privacy_mode,
@@ -1420,8 +1420,8 @@ class Observability(BaseSDK):
         enabled: Optional[bool] = None,
         filter_rules: OptionalNullable[
             Union[
-                components.ObservabilityFilterRulesConfig,
-                components.ObservabilityFilterRulesConfigTypedDict,
+                components.ObservabilityFilterRulesConfigNullable,
+                components.ObservabilityFilterRulesConfigNullableTypedDict,
             ]
         ] = UNSET,
         name: Optional[str] = None,
@@ -1479,7 +1479,7 @@ class Observability(BaseSDK):
                 enabled=enabled,
                 filter_rules=utils.get_pydantic_model(
                     filter_rules,
-                    OptionalNullable[components.ObservabilityFilterRulesConfig],
+                    OptionalNullable[components.ObservabilityFilterRulesConfigNullable],
                 ),
                 name=name,
                 privacy_mode=privacy_mode,

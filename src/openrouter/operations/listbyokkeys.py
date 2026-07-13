@@ -230,13 +230,13 @@ class ListBYOKKeysRequest(BaseModel):
     offset: Annotated[
         Optional[int],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ] = None
+    ] = 0
     r"""Number of records to skip for pagination"""
 
     limit: Annotated[
         Optional[int],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ] = None
+    ] = 50
     r"""Maximum number of records to return (max 100)"""
 
     workspace_id: Annotated[

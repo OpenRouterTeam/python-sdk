@@ -7,27 +7,33 @@ from typing import Literal
 from typing_extensions import TypedDict
 
 
-AnthropicCitationWebSearchResultLocationType = Literal["web_search_result_location",]
+AnthropicCitationSearchResultLocationParamType = Literal["search_result_location",]
 
 
-class AnthropicCitationWebSearchResultLocationTypedDict(TypedDict):
+class AnthropicCitationSearchResultLocationParamTypedDict(TypedDict):
     cited_text: str
-    encrypted_index: str
+    end_block_index: int
+    search_result_index: int
+    source: str
+    start_block_index: int
     title: Nullable[str]
-    type: AnthropicCitationWebSearchResultLocationType
-    url: str
+    type: AnthropicCitationSearchResultLocationParamType
 
 
-class AnthropicCitationWebSearchResultLocation(BaseModel):
+class AnthropicCitationSearchResultLocationParam(BaseModel):
     cited_text: str
 
-    encrypted_index: str
+    end_block_index: int
+
+    search_result_index: int
+
+    source: str
+
+    start_block_index: int
 
     title: Nullable[str]
 
-    type: AnthropicCitationWebSearchResultLocationType
-
-    url: str
+    type: AnthropicCitationSearchResultLocationParamType
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

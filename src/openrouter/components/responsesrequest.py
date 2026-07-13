@@ -17,10 +17,6 @@ from .applypatchservertool_openrouter import (
 from .autorouterplugin import AutoRouterPlugin, AutoRouterPluginTypedDict
 from .bashservertool import BashServerTool, BashServerToolTypedDict
 from .chatdebugoptions import ChatDebugOptions, ChatDebugOptionsTypedDict
-from .chatsearchmodelsservertool import (
-    ChatSearchModelsServerTool,
-    ChatSearchModelsServerToolTypedDict,
-)
 from .codeinterpreterservertool import (
     CodeInterpreterServerTool,
     CodeInterpreterServerToolTypedDict,
@@ -77,6 +73,10 @@ from .providerpreferences import ProviderPreferences, ProviderPreferencesTypedDi
 from .reasoningconfig import ReasoningConfig, ReasoningConfigTypedDict
 from .responsehealingplugin import ResponseHealingPlugin, ResponseHealingPluginTypedDict
 from .responseincludesenum import ResponseIncludesEnum
+from .searchmodelsservertool_openrouter import (
+    SearchModelsServerToolOpenRouter,
+    SearchModelsServerToolOpenRouterTypedDict,
+)
 from .shellservertool import ShellServerTool, ShellServerToolTypedDict
 from .shellservertool_openrouter import (
     ShellServerToolOpenRouter,
@@ -227,7 +227,7 @@ ResponsesRequestToolUnionTypedDict = TypeAliasType(
         ApplyPatchServerToolOpenRouterTypedDict,
         WebSearchServerToolOpenRouterTypedDict,
         WebFetchServerToolTypedDict,
-        ChatSearchModelsServerToolTypedDict,
+        SearchModelsServerToolOpenRouterTypedDict,
         FilesServerToolTypedDict,
         DatetimeServerToolTypedDict,
         AdvisorServerToolOpenRouterTypedDict,
@@ -273,7 +273,8 @@ ResponsesRequestToolUnion = Annotated[
             ImageGenerationServerToolOpenRouter, Tag("openrouter:image_generation")
         ],
         Annotated[
-            ChatSearchModelsServerTool, Tag("openrouter:experimental__search_models")
+            SearchModelsServerToolOpenRouter,
+            Tag("openrouter:experimental__search_models"),
         ],
         Annotated[WebFetchServerTool, Tag("openrouter:web_fetch")],
         Annotated[WebSearchServerToolOpenRouter, Tag("openrouter:web_search")],

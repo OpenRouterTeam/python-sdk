@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 from .inputmodality import InputModality
+from .instructtype import InstructType
 from .modelgroup import ModelGroup
 from .outputmodality import OutputModality
 from openrouter.types import (
@@ -10,41 +11,10 @@ from openrouter.types import (
     OptionalNullable,
     UNSET,
     UNSET_SENTINEL,
-    UnrecognizedStr,
 )
 from pydantic import model_serializer
-from typing import List, Literal, Optional, Union
+from typing import List, Optional
 from typing_extensions import NotRequired, TypedDict
-
-
-ModelArchitectureInstructType = Union[
-    Literal[
-        "none",
-        "airoboros",
-        "alpaca",
-        "alpaca-modif",
-        "chatml",
-        "claude",
-        "code-llama",
-        "gemma",
-        "llama2",
-        "llama3",
-        "mistral",
-        "nemotron",
-        "neural",
-        "openchat",
-        "phi3",
-        "rwkv",
-        "vicuna",
-        "zephyr",
-        "deepseek-r1",
-        "deepseek-v3.1",
-        "qwq",
-        "qwen3",
-    ],
-    UnrecognizedStr,
-]
-r"""Instruction format type"""
 
 
 class ModelArchitectureTypedDict(TypedDict):
@@ -56,7 +26,7 @@ class ModelArchitectureTypedDict(TypedDict):
     r"""Primary modality of the model"""
     output_modalities: List[OutputModality]
     r"""Supported output modalities"""
-    instruct_type: NotRequired[Nullable[ModelArchitectureInstructType]]
+    instruct_type: NotRequired[Nullable[InstructType]]
     r"""Instruction format type"""
     tokenizer: NotRequired[ModelGroup]
     r"""Tokenizer type used by the model"""
@@ -74,7 +44,7 @@ class ModelArchitecture(BaseModel):
     output_modalities: List[OutputModality]
     r"""Supported output modalities"""
 
-    instruct_type: OptionalNullable[ModelArchitectureInstructType] = UNSET
+    instruct_type: OptionalNullable[InstructType] = UNSET
     r"""Instruction format type"""
 
     tokenizer: Optional[ModelGroup] = None

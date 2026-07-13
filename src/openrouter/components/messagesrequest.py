@@ -35,10 +35,6 @@ from .anthropicwebsearchtooluserlocation import (
 )
 from .autorouterplugin import AutoRouterPlugin, AutoRouterPluginTypedDict
 from .bashservertool import BashServerTool, BashServerToolTypedDict
-from .chatsearchmodelsservertool import (
-    ChatSearchModelsServerTool,
-    ChatSearchModelsServerToolTypedDict,
-)
 from .contextcompressionplugin import (
     ContextCompressionPlugin,
     ContextCompressionPluginTypedDict,
@@ -53,6 +49,10 @@ from .imagegenerationservertool_openrouter import (
 from .messagesfallbackparam import MessagesFallbackParam, MessagesFallbackParamTypedDict
 from .messagesmessageparam import MessagesMessageParam, MessagesMessageParamTypedDict
 from .messagesoutputconfig import MessagesOutputConfig, MessagesOutputConfigTypedDict
+from .messagessearchmodelsservertool import (
+    MessagesSearchModelsServerTool,
+    MessagesSearchModelsServerToolTypedDict,
+)
 from .moderationplugin import ModerationPlugin, ModerationPluginTypedDict
 from .openrouterwebsearchservertool import (
     OpenRouterWebSearchServerTool,
@@ -1070,7 +1070,7 @@ class ToolCustom(BaseModel):
 MessagesRequestToolUnionTypedDict = TypeAliasType(
     "MessagesRequestToolUnionTypedDict",
     Union[
-        ChatSearchModelsServerToolTypedDict,
+        MessagesSearchModelsServerToolTypedDict,
         BashServerToolTypedDict,
         DatetimeServerToolTypedDict,
         ImageGenerationServerToolOpenRouterTypedDict,
@@ -1090,7 +1090,7 @@ MessagesRequestToolUnionTypedDict = TypeAliasType(
 MessagesRequestToolUnion = TypeAliasType(
     "MessagesRequestToolUnion",
     Union[
-        ChatSearchModelsServerTool,
+        MessagesSearchModelsServerTool,
         BashServerTool,
         DatetimeServerTool,
         ImageGenerationServerToolOpenRouter,
