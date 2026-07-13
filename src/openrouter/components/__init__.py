@@ -2203,6 +2203,7 @@ if TYPE_CHECKING:
         PreviewWebSearchUserLocationType,
         PreviewWebSearchUserLocationTypedDict,
     )
+    from .pricingoverride import PricingOverride, PricingOverrideTypedDict
     from .promptcachebreakpoint import (
         PromptCacheBreakpoint,
         PromptCacheBreakpointMode,
@@ -4346,6 +4347,8 @@ __all__ = [
     "PreviewWebSearchUserLocationTypedDict",
     "PriceSource",
     "Pricing",
+    "PricingOverride",
+    "PricingOverrideTypedDict",
     "PricingTypedDict",
     "PromptCacheBreakpoint",
     "PromptCacheBreakpointMode",
@@ -6542,6 +6545,8 @@ _dynamic_imports: dict[str, str] = {
     "PreviewWebSearchUserLocation": ".preview_websearchuserlocation",
     "PreviewWebSearchUserLocationType": ".preview_websearchuserlocation",
     "PreviewWebSearchUserLocationTypedDict": ".preview_websearchuserlocation",
+    "PricingOverride": ".pricingoverride",
+    "PricingOverrideTypedDict": ".pricingoverride",
     "PromptCacheBreakpoint": ".promptcachebreakpoint",
     "PromptCacheBreakpointMode": ".promptcachebreakpoint",
     "PromptCacheBreakpointTypedDict": ".promptcachebreakpoint",
