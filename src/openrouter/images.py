@@ -34,8 +34,8 @@ class Images(BaseSDK):
         output_format: Optional[components.ImageGenerationRequestOutputFormat] = None,
         provider: Optional[
             Union[
-                components.ImageGenerationRequestProvider,
-                components.ImageGenerationRequestProviderTypedDict,
+                components.ImageGenerationProviderPreferences,
+                components.ImageGenerationProviderPreferencesTypedDict,
             ]
         ] = None,
         quality: Optional[components.ImageGenerationRequestQuality] = None,
@@ -67,7 +67,7 @@ class Images(BaseSDK):
         :param n: Number of images to generate (1-10). Providers that only support single-image generation reject n > 1.
         :param output_compression: Compression level (0-100) for webp/jpeg output. Ignored for png and by providers without a compression knob.
         :param output_format: Encoding of the returned image bytes. Most models produce raster formats (png, jpeg, webp). SVG is supported by vectorization models (e.g. Quiver) — the SVG markup is UTF-8 base64-encoded in `b64_json`.
-        :param provider: Provider-specific passthrough configuration
+        :param provider: Provider routing preferences and provider-specific passthrough configuration.
         :param quality: Rendering quality. Providers without a quality knob ignore this.
         :param resolution: Normalized resolution tier of the generated image. Concrete pixel dimensions are derived per-provider.
         :param seed: If specified, the generation will sample deterministically, such that repeated requests with the same seed and parameters should return the same result. Determinism is not guaranteed for all providers.
@@ -101,8 +101,8 @@ class Images(BaseSDK):
         output_format: Optional[components.ImageGenerationRequestOutputFormat] = None,
         provider: Optional[
             Union[
-                components.ImageGenerationRequestProvider,
-                components.ImageGenerationRequestProviderTypedDict,
+                components.ImageGenerationProviderPreferences,
+                components.ImageGenerationProviderPreferencesTypedDict,
             ]
         ] = None,
         quality: Optional[components.ImageGenerationRequestQuality] = None,
@@ -134,7 +134,7 @@ class Images(BaseSDK):
         :param n: Number of images to generate (1-10). Providers that only support single-image generation reject n > 1.
         :param output_compression: Compression level (0-100) for webp/jpeg output. Ignored for png and by providers without a compression knob.
         :param output_format: Encoding of the returned image bytes. Most models produce raster formats (png, jpeg, webp). SVG is supported by vectorization models (e.g. Quiver) — the SVG markup is UTF-8 base64-encoded in `b64_json`.
-        :param provider: Provider-specific passthrough configuration
+        :param provider: Provider routing preferences and provider-specific passthrough configuration.
         :param quality: Rendering quality. Providers without a quality knob ignore this.
         :param resolution: Normalized resolution tier of the generated image. Concrete pixel dimensions are derived per-provider.
         :param seed: If specified, the generation will sample deterministically, such that repeated requests with the same seed and parameters should return the same result. Determinism is not guaranteed for all providers.
@@ -168,8 +168,8 @@ class Images(BaseSDK):
         output_format: Optional[components.ImageGenerationRequestOutputFormat] = None,
         provider: Optional[
             Union[
-                components.ImageGenerationRequestProvider,
-                components.ImageGenerationRequestProviderTypedDict,
+                components.ImageGenerationProviderPreferences,
+                components.ImageGenerationProviderPreferencesTypedDict,
             ]
         ] = None,
         quality: Optional[components.ImageGenerationRequestQuality] = None,
@@ -204,7 +204,7 @@ class Images(BaseSDK):
         :param n: Number of images to generate (1-10). Providers that only support single-image generation reject n > 1.
         :param output_compression: Compression level (0-100) for webp/jpeg output. Ignored for png and by providers without a compression knob.
         :param output_format: Encoding of the returned image bytes. Most models produce raster formats (png, jpeg, webp). SVG is supported by vectorization models (e.g. Quiver) — the SVG markup is UTF-8 base64-encoded in `b64_json`.
-        :param provider: Provider-specific passthrough configuration
+        :param provider: Provider routing preferences and provider-specific passthrough configuration.
         :param quality: Rendering quality. Providers without a quality knob ignore this.
         :param resolution: Normalized resolution tier of the generated image. Concrete pixel dimensions are derived per-provider.
         :param seed: If specified, the generation will sample deterministically, such that repeated requests with the same seed and parameters should return the same result. Determinism is not guaranteed for all providers.
@@ -237,8 +237,8 @@ class Images(BaseSDK):
         output_format: Optional[components.ImageGenerationRequestOutputFormat] = None,
         provider: Optional[
             Union[
-                components.ImageGenerationRequestProvider,
-                components.ImageGenerationRequestProviderTypedDict,
+                components.ImageGenerationProviderPreferences,
+                components.ImageGenerationProviderPreferencesTypedDict,
             ]
         ] = None,
         quality: Optional[components.ImageGenerationRequestQuality] = None,
@@ -273,7 +273,7 @@ class Images(BaseSDK):
         :param n: Number of images to generate (1-10). Providers that only support single-image generation reject n > 1.
         :param output_compression: Compression level (0-100) for webp/jpeg output. Ignored for png and by providers without a compression knob.
         :param output_format: Encoding of the returned image bytes. Most models produce raster formats (png, jpeg, webp). SVG is supported by vectorization models (e.g. Quiver) — the SVG markup is UTF-8 base64-encoded in `b64_json`.
-        :param provider: Provider-specific passthrough configuration
+        :param provider: Provider routing preferences and provider-specific passthrough configuration.
         :param quality: Rendering quality. Providers without a quality knob ignore this.
         :param resolution: Normalized resolution tier of the generated image. Concrete pixel dimensions are derived per-provider.
         :param seed: If specified, the generation will sample deterministically, such that repeated requests with the same seed and parameters should return the same result. Determinism is not guaranteed for all providers.
@@ -310,7 +310,7 @@ class Images(BaseSDK):
                 output_format=output_format,
                 prompt=prompt,
                 provider=utils.get_pydantic_model(
-                    provider, Optional[components.ImageGenerationRequestProvider]
+                    provider, Optional[components.ImageGenerationProviderPreferences]
                 ),
                 quality=quality,
                 resolution=resolution,
@@ -514,8 +514,8 @@ class Images(BaseSDK):
         output_format: Optional[components.ImageGenerationRequestOutputFormat] = None,
         provider: Optional[
             Union[
-                components.ImageGenerationRequestProvider,
-                components.ImageGenerationRequestProviderTypedDict,
+                components.ImageGenerationProviderPreferences,
+                components.ImageGenerationProviderPreferencesTypedDict,
             ]
         ] = None,
         quality: Optional[components.ImageGenerationRequestQuality] = None,
@@ -547,7 +547,7 @@ class Images(BaseSDK):
         :param n: Number of images to generate (1-10). Providers that only support single-image generation reject n > 1.
         :param output_compression: Compression level (0-100) for webp/jpeg output. Ignored for png and by providers without a compression knob.
         :param output_format: Encoding of the returned image bytes. Most models produce raster formats (png, jpeg, webp). SVG is supported by vectorization models (e.g. Quiver) — the SVG markup is UTF-8 base64-encoded in `b64_json`.
-        :param provider: Provider-specific passthrough configuration
+        :param provider: Provider routing preferences and provider-specific passthrough configuration.
         :param quality: Rendering quality. Providers without a quality knob ignore this.
         :param resolution: Normalized resolution tier of the generated image. Concrete pixel dimensions are derived per-provider.
         :param seed: If specified, the generation will sample deterministically, such that repeated requests with the same seed and parameters should return the same result. Determinism is not guaranteed for all providers.
@@ -581,8 +581,8 @@ class Images(BaseSDK):
         output_format: Optional[components.ImageGenerationRequestOutputFormat] = None,
         provider: Optional[
             Union[
-                components.ImageGenerationRequestProvider,
-                components.ImageGenerationRequestProviderTypedDict,
+                components.ImageGenerationProviderPreferences,
+                components.ImageGenerationProviderPreferencesTypedDict,
             ]
         ] = None,
         quality: Optional[components.ImageGenerationRequestQuality] = None,
@@ -614,7 +614,7 @@ class Images(BaseSDK):
         :param n: Number of images to generate (1-10). Providers that only support single-image generation reject n > 1.
         :param output_compression: Compression level (0-100) for webp/jpeg output. Ignored for png and by providers without a compression knob.
         :param output_format: Encoding of the returned image bytes. Most models produce raster formats (png, jpeg, webp). SVG is supported by vectorization models (e.g. Quiver) — the SVG markup is UTF-8 base64-encoded in `b64_json`.
-        :param provider: Provider-specific passthrough configuration
+        :param provider: Provider routing preferences and provider-specific passthrough configuration.
         :param quality: Rendering quality. Providers without a quality knob ignore this.
         :param resolution: Normalized resolution tier of the generated image. Concrete pixel dimensions are derived per-provider.
         :param seed: If specified, the generation will sample deterministically, such that repeated requests with the same seed and parameters should return the same result. Determinism is not guaranteed for all providers.
@@ -648,8 +648,8 @@ class Images(BaseSDK):
         output_format: Optional[components.ImageGenerationRequestOutputFormat] = None,
         provider: Optional[
             Union[
-                components.ImageGenerationRequestProvider,
-                components.ImageGenerationRequestProviderTypedDict,
+                components.ImageGenerationProviderPreferences,
+                components.ImageGenerationProviderPreferencesTypedDict,
             ]
         ] = None,
         quality: Optional[components.ImageGenerationRequestQuality] = None,
@@ -684,7 +684,7 @@ class Images(BaseSDK):
         :param n: Number of images to generate (1-10). Providers that only support single-image generation reject n > 1.
         :param output_compression: Compression level (0-100) for webp/jpeg output. Ignored for png and by providers without a compression knob.
         :param output_format: Encoding of the returned image bytes. Most models produce raster formats (png, jpeg, webp). SVG is supported by vectorization models (e.g. Quiver) — the SVG markup is UTF-8 base64-encoded in `b64_json`.
-        :param provider: Provider-specific passthrough configuration
+        :param provider: Provider routing preferences and provider-specific passthrough configuration.
         :param quality: Rendering quality. Providers without a quality knob ignore this.
         :param resolution: Normalized resolution tier of the generated image. Concrete pixel dimensions are derived per-provider.
         :param seed: If specified, the generation will sample deterministically, such that repeated requests with the same seed and parameters should return the same result. Determinism is not guaranteed for all providers.
@@ -717,8 +717,8 @@ class Images(BaseSDK):
         output_format: Optional[components.ImageGenerationRequestOutputFormat] = None,
         provider: Optional[
             Union[
-                components.ImageGenerationRequestProvider,
-                components.ImageGenerationRequestProviderTypedDict,
+                components.ImageGenerationProviderPreferences,
+                components.ImageGenerationProviderPreferencesTypedDict,
             ]
         ] = None,
         quality: Optional[components.ImageGenerationRequestQuality] = None,
@@ -753,7 +753,7 @@ class Images(BaseSDK):
         :param n: Number of images to generate (1-10). Providers that only support single-image generation reject n > 1.
         :param output_compression: Compression level (0-100) for webp/jpeg output. Ignored for png and by providers without a compression knob.
         :param output_format: Encoding of the returned image bytes. Most models produce raster formats (png, jpeg, webp). SVG is supported by vectorization models (e.g. Quiver) — the SVG markup is UTF-8 base64-encoded in `b64_json`.
-        :param provider: Provider-specific passthrough configuration
+        :param provider: Provider routing preferences and provider-specific passthrough configuration.
         :param quality: Rendering quality. Providers without a quality knob ignore this.
         :param resolution: Normalized resolution tier of the generated image. Concrete pixel dimensions are derived per-provider.
         :param seed: If specified, the generation will sample deterministically, such that repeated requests with the same seed and parameters should return the same result. Determinism is not guaranteed for all providers.
@@ -790,7 +790,7 @@ class Images(BaseSDK):
                 output_format=output_format,
                 prompt=prompt,
                 provider=utils.get_pydantic_model(
-                    provider, Optional[components.ImageGenerationRequestProvider]
+                    provider, Optional[components.ImageGenerationProviderPreferences]
                 ),
                 quality=quality,
                 resolution=resolution,
