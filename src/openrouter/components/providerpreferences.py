@@ -37,10 +37,14 @@ r"""Data collection setting. If no available model provider meets the requiremen
 """
 
 
-IgnoreTypedDict = TypeAliasType("IgnoreTypedDict", Union[ProviderName, str])
+ProviderPreferencesIgnoreTypedDict = TypeAliasType(
+    "ProviderPreferencesIgnoreTypedDict", Union[ProviderName, str]
+)
 
 
-Ignore = TypeAliasType("Ignore", Union[ProviderName, str])
+ProviderPreferencesIgnore = TypeAliasType(
+    "ProviderPreferencesIgnore", Union[ProviderName, str]
+)
 
 
 class MaxPriceTypedDict(TypedDict):
@@ -93,25 +97,36 @@ class MaxPrice(BaseModel):
         return m
 
 
-OnlyTypedDict = TypeAliasType("OnlyTypedDict", Union[ProviderName, str])
+ProviderPreferencesOnlyTypedDict = TypeAliasType(
+    "ProviderPreferencesOnlyTypedDict", Union[ProviderName, str]
+)
 
 
-Only = TypeAliasType("Only", Union[ProviderName, str])
+ProviderPreferencesOnly = TypeAliasType(
+    "ProviderPreferencesOnly", Union[ProviderName, str]
+)
 
 
-OrderTypedDict = TypeAliasType("OrderTypedDict", Union[ProviderName, str])
+ProviderPreferencesOrderTypedDict = TypeAliasType(
+    "ProviderPreferencesOrderTypedDict", Union[ProviderName, str]
+)
 
 
-Order = TypeAliasType("Order", Union[ProviderName, str])
+ProviderPreferencesOrder = TypeAliasType(
+    "ProviderPreferencesOrder", Union[ProviderName, str]
+)
 
 
-SortTypedDict = TypeAliasType(
-    "SortTypedDict", Union[ProviderSortConfigTypedDict, ProviderSort, Any]
+ProviderPreferencesSortTypedDict = TypeAliasType(
+    "ProviderPreferencesSortTypedDict",
+    Union[ProviderSortConfigTypedDict, ProviderSort, Any],
 )
 r"""The sorting strategy to use for this request, if \"order\" is not specified. When set, no load balancing is performed."""
 
 
-Sort = TypeAliasType("Sort", Union[ProviderSortConfig, ProviderSort, Any])
+ProviderPreferencesSort = TypeAliasType(
+    "ProviderPreferencesSort", Union[ProviderSortConfig, ProviderSort, Any]
+)
 r"""The sorting strategy to use for this request, if \"order\" is not specified. When set, no load balancing is performed."""
 
 
@@ -132,13 +147,13 @@ class ProviderPreferencesTypedDict(TypedDict):
     """
     enforce_distillable_text: NotRequired[Nullable[bool]]
     r"""Whether to restrict routing to only models that allow text distillation. When true, only models where the author has allowed distillation will be used."""
-    ignore: NotRequired[Nullable[List[IgnoreTypedDict]]]
+    ignore: NotRequired[Nullable[List[ProviderPreferencesIgnoreTypedDict]]]
     r"""List of provider slugs to ignore. If provided, this list is merged with your account-wide ignored provider settings for this request."""
     max_price: NotRequired[MaxPriceTypedDict]
     r"""The object specifying the maximum price you want to pay for this request. USD price per million tokens, for prompt and completion."""
-    only: NotRequired[Nullable[List[OnlyTypedDict]]]
+    only: NotRequired[Nullable[List[ProviderPreferencesOnlyTypedDict]]]
     r"""List of provider slugs to allow. If provided, this list is merged with your account-wide allowed provider settings for this request."""
-    order: NotRequired[Nullable[List[OrderTypedDict]]]
+    order: NotRequired[Nullable[List[ProviderPreferencesOrderTypedDict]]]
     r"""An ordered list of provider slugs. The router will attempt to use the first provider in the subset of this list that supports your requested model, and fall back to the next if it is unavailable. If no providers are available, the request will fail with an error message."""
     preferred_max_latency: NotRequired[Nullable[PreferredMaxLatencyTypedDict]]
     r"""Preferred maximum latency (in seconds). Can be a number (applies to p50) or an object with percentile-specific cutoffs. Endpoints above the threshold(s) may still be used, but are deprioritized in routing. When using fallback models, this may cause a fallback model to be used instead of the primary model if it meets the threshold."""
@@ -148,7 +163,7 @@ class ProviderPreferencesTypedDict(TypedDict):
     r"""A list of quantization levels to filter the provider by."""
     require_parameters: NotRequired[Nullable[bool]]
     r"""Whether to filter providers to only those that support the parameters you've provided. If this setting is omitted or set to false, then providers will receive only the parameters they support, and ignore the rest."""
-    sort: NotRequired[Nullable[SortTypedDict]]
+    sort: NotRequired[Nullable[ProviderPreferencesSortTypedDict]]
     r"""The sorting strategy to use for this request, if \"order\" is not specified. When set, no load balancing is performed."""
     zdr: NotRequired[Nullable[bool]]
     r"""Whether to restrict routing to only ZDR (Zero Data Retention) endpoints. When true, only endpoints that do not retain prompts will be used."""
@@ -174,16 +189,16 @@ class ProviderPreferences(BaseModel):
     enforce_distillable_text: OptionalNullable[bool] = UNSET
     r"""Whether to restrict routing to only models that allow text distillation. When true, only models where the author has allowed distillation will be used."""
 
-    ignore: OptionalNullable[List[Ignore]] = UNSET
+    ignore: OptionalNullable[List[ProviderPreferencesIgnore]] = UNSET
     r"""List of provider slugs to ignore. If provided, this list is merged with your account-wide ignored provider settings for this request."""
 
     max_price: Optional[MaxPrice] = None
     r"""The object specifying the maximum price you want to pay for this request. USD price per million tokens, for prompt and completion."""
 
-    only: OptionalNullable[List[Only]] = UNSET
+    only: OptionalNullable[List[ProviderPreferencesOnly]] = UNSET
     r"""List of provider slugs to allow. If provided, this list is merged with your account-wide allowed provider settings for this request."""
 
-    order: OptionalNullable[List[Order]] = UNSET
+    order: OptionalNullable[List[ProviderPreferencesOrder]] = UNSET
     r"""An ordered list of provider slugs. The router will attempt to use the first provider in the subset of this list that supports your requested model, and fall back to the next if it is unavailable. If no providers are available, the request will fail with an error message."""
 
     preferred_max_latency: OptionalNullable[PreferredMaxLatency] = UNSET
@@ -198,7 +213,7 @@ class ProviderPreferences(BaseModel):
     require_parameters: OptionalNullable[bool] = UNSET
     r"""Whether to filter providers to only those that support the parameters you've provided. If this setting is omitted or set to false, then providers will receive only the parameters they support, and ignore the rest."""
 
-    sort: OptionalNullable[Sort] = UNSET
+    sort: OptionalNullable[ProviderPreferencesSort] = UNSET
     r"""The sorting strategy to use for this request, if \"order\" is not specified. When set, no load balancing is performed."""
 
     zdr: OptionalNullable[bool] = UNSET
