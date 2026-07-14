@@ -53,6 +53,7 @@ from .legacy_websearchservertool import (
 )
 from .mcpservertool import McpServerTool, McpServerToolTypedDict
 from .moderationplugin import ModerationPlugin, ModerationPluginTypedDict
+from .namespacetool import NamespaceTool, NamespaceToolTypedDict
 from .openairesponsestoolchoice_union import (
     OpenAIResponsesToolChoiceUnion,
     OpenAIResponsesToolChoiceUnionTypedDict,
@@ -219,8 +220,8 @@ ResponsesRequestToolUnionTypedDict = TypeAliasType(
         CodexLocalShellToolTypedDict,
         ApplyPatchServerToolTypedDict,
         ShellServerToolTypedDict,
-        FusionServerToolOpenRouterTypedDict,
-        ImageGenerationServerToolOpenRouterTypedDict,
+        FilesServerToolTypedDict,
+        SubagentServerToolOpenRouterTypedDict,
         ShellServerToolOpenRouterTypedDict,
         BashServerToolTypedDict,
         CodeInterpreterServerToolTypedDict,
@@ -228,16 +229,17 @@ ResponsesRequestToolUnionTypedDict = TypeAliasType(
         WebSearchServerToolOpenRouterTypedDict,
         WebFetchServerToolTypedDict,
         SearchModelsServerToolOpenRouterTypedDict,
-        FilesServerToolTypedDict,
+        ImageGenerationServerToolOpenRouterTypedDict,
+        FusionServerToolOpenRouterTypedDict,
         DatetimeServerToolTypedDict,
         AdvisorServerToolOpenRouterTypedDict,
-        SubagentServerToolOpenRouterTypedDict,
+        NamespaceToolTypedDict,
         CustomToolTypedDict,
         ComputerUseServerToolTypedDict,
         ResponsesRequestToolFunctionTypedDict,
         FileSearchServerToolTypedDict,
-        PreviewWebSearchServerToolTypedDict,
         WebSearchServerToolTypedDict,
+        PreviewWebSearchServerToolTypedDict,
         Preview20250311WebSearchServerToolTypedDict,
         LegacyWebSearchServerToolTypedDict,
         McpServerToolTypedDict,
@@ -264,6 +266,7 @@ ResponsesRequestToolUnion = Annotated[
         Annotated[ShellServerTool, Tag("shell")],
         Annotated[ApplyPatchServerTool, Tag("apply_patch")],
         Annotated[CustomTool, Tag("custom")],
+        Annotated[NamespaceTool, Tag("namespace")],
         Annotated[AdvisorServerToolOpenRouter, Tag("openrouter:advisor")],
         Annotated[SubagentServerToolOpenRouter, Tag("openrouter:subagent")],
         Annotated[DatetimeServerTool, Tag("openrouter:datetime")],
