@@ -111,7 +111,7 @@ class ChatFunctionToolFunctionTypedDict(TypedDict):
     r"""Function definition for tool calling"""
     type: ChatFunctionToolType
     cache_control: NotRequired[ChatContentCacheControlTypedDict]
-    r"""Cache control for the content part"""
+    r"""Anthropic-style cache breakpoint for the content part. Interchangeable with the OpenAI-style `prompt_cache_breakpoint` marker: OpenRouter converts between the two based on the provider serving the request."""
 
 
 class ChatFunctionToolFunction(BaseModel):
@@ -121,7 +121,7 @@ class ChatFunctionToolFunction(BaseModel):
     type: ChatFunctionToolType
 
     cache_control: Optional[ChatContentCacheControl] = None
-    r"""Cache control for the content part"""
+    r"""Anthropic-style cache breakpoint for the content part. Interchangeable with the OpenAI-style `prompt_cache_breakpoint` marker: OpenRouter converts between the two based on the provider serving the request."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

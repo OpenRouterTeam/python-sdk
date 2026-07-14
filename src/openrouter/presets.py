@@ -664,6 +664,10 @@ class Presets(BaseSDK):
             ]
         ] = None,
         presence_penalty: OptionalNullable[float] = UNSET,
+        prompt_cache_key: OptionalNullable[str] = UNSET,
+        prompt_cache_options: OptionalNullable[
+            Union[components.PromptCacheOptions, components.PromptCacheOptionsTypedDict]
+        ] = UNSET,
         provider: OptionalNullable[
             Union[
                 components.ProviderPreferences, components.ProviderPreferencesTypedDict
@@ -736,7 +740,7 @@ class Presets(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
-        :param cache_control: Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. Currently supported for Anthropic Claude models.
+        :param cache_control: Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. When set on an individual content block, it marks an explicit cache breakpoint; block-level markers also work on OpenAI models that support explicit prompt caching — OpenRouter converts them to the provider's native format.
         :param debug: Debug options for inspecting request transformations (streaming only)
         :param frequency_penalty: Frequency penalty (-2.0 to 2.0)
         :param image_config: Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/guides/overview/multimodal/image-generation for more details.
@@ -752,6 +756,8 @@ class Presets(BaseSDK):
         :param parallel_tool_calls: Whether to enable parallel function calling during tool use. When true, the model may generate multiple tool calls in a single response.
         :param plugins: Plugins you want to enable for this request, including their settings.
         :param presence_penalty: Presence penalty (-2.0 to 2.0)
+        :param prompt_cache_key:
+        :param prompt_cache_options: Request-level prompt-cache controls. `mode: \"explicit\"` disables OpenAI-managed breakpoints so only blocks marked with `prompt_cache_breakpoint` are cached. Only supported by OpenAI GPT-5.6 and newer.
         :param provider: When multiple model providers are available, optionally indicate your routing preference.
         :param reasoning: Configuration options for reasoning models
         :param reasoning_effort: Shorthand for setting reasoning effort. Equivalent to setting reasoning.effort. Cannot be used simultaneously with reasoning.effort if they differ.
@@ -825,6 +831,11 @@ class Presets(BaseSDK):
                     plugins, Optional[List[components.ChatRequestPlugin]]
                 ),
                 presence_penalty=presence_penalty,
+                prompt_cache_key=prompt_cache_key,
+                prompt_cache_options=utils.get_pydantic_model(
+                    prompt_cache_options,
+                    OptionalNullable[components.PromptCacheOptions],
+                ),
                 provider=utils.get_pydantic_model(
                     provider, OptionalNullable[components.ProviderPreferences]
                 ),
@@ -1011,6 +1022,10 @@ class Presets(BaseSDK):
             ]
         ] = None,
         presence_penalty: OptionalNullable[float] = UNSET,
+        prompt_cache_key: OptionalNullable[str] = UNSET,
+        prompt_cache_options: OptionalNullable[
+            Union[components.PromptCacheOptions, components.PromptCacheOptionsTypedDict]
+        ] = UNSET,
         provider: OptionalNullable[
             Union[
                 components.ProviderPreferences, components.ProviderPreferencesTypedDict
@@ -1083,7 +1098,7 @@ class Presets(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
-        :param cache_control: Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. Currently supported for Anthropic Claude models.
+        :param cache_control: Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. When set on an individual content block, it marks an explicit cache breakpoint; block-level markers also work on OpenAI models that support explicit prompt caching — OpenRouter converts them to the provider's native format.
         :param debug: Debug options for inspecting request transformations (streaming only)
         :param frequency_penalty: Frequency penalty (-2.0 to 2.0)
         :param image_config: Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/guides/overview/multimodal/image-generation for more details.
@@ -1099,6 +1114,8 @@ class Presets(BaseSDK):
         :param parallel_tool_calls: Whether to enable parallel function calling during tool use. When true, the model may generate multiple tool calls in a single response.
         :param plugins: Plugins you want to enable for this request, including their settings.
         :param presence_penalty: Presence penalty (-2.0 to 2.0)
+        :param prompt_cache_key:
+        :param prompt_cache_options: Request-level prompt-cache controls. `mode: \"explicit\"` disables OpenAI-managed breakpoints so only blocks marked with `prompt_cache_breakpoint` are cached. Only supported by OpenAI GPT-5.6 and newer.
         :param provider: When multiple model providers are available, optionally indicate your routing preference.
         :param reasoning: Configuration options for reasoning models
         :param reasoning_effort: Shorthand for setting reasoning effort. Equivalent to setting reasoning.effort. Cannot be used simultaneously with reasoning.effort if they differ.
@@ -1172,6 +1189,11 @@ class Presets(BaseSDK):
                     plugins, Optional[List[components.ChatRequestPlugin]]
                 ),
                 presence_penalty=presence_penalty,
+                prompt_cache_key=prompt_cache_key,
+                prompt_cache_options=utils.get_pydantic_model(
+                    prompt_cache_options,
+                    OptionalNullable[components.PromptCacheOptions],
+                ),
                 provider=utils.get_pydantic_model(
                     provider, OptionalNullable[components.ProviderPreferences]
                 ),
@@ -1420,7 +1442,7 @@ class Presets(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
-        :param cache_control: Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. Currently supported for Anthropic Claude models.
+        :param cache_control: Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. When set on an individual content block, it marks an explicit cache breakpoint; block-level markers also work on OpenAI models that support explicit prompt caching — OpenRouter converts them to the provider's native format.
         :param context_management:
         :param fallbacks: Fallback models to try if the primary model fails or refuses, in order. Handled by OpenRouter multi-model routing rather than Anthropic server-side fallbacks; cannot be combined with `models`. Each entry accepts only `model`. Maximum of 3 entries.
         :param max_tokens:
@@ -1732,7 +1754,7 @@ class Presets(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
-        :param cache_control: Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. Currently supported for Anthropic Claude models.
+        :param cache_control: Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. When set on an individual content block, it marks an explicit cache breakpoint; block-level markers also work on OpenAI models that support explicit prompt caching — OpenRouter converts them to the provider's native format.
         :param context_management:
         :param fallbacks: Fallback models to try if the primary model fails or refuses, in order. Handled by OpenRouter multi-model routing rather than Anthropic server-side fallbacks; cannot be combined with `models`. Each entry accepts only `model`. Maximum of 3 entries.
         :param max_tokens:
@@ -2054,7 +2076,7 @@ class Presets(BaseSDK):
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
         :param background:
-        :param cache_control: Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. Currently supported for Anthropic Claude models.
+        :param cache_control: Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. When set on an individual content block, it marks an explicit cache breakpoint; block-level markers also work on OpenAI models that support explicit prompt caching — OpenRouter converts them to the provider's native format.
         :param debug: Debug options for inspecting request transformations (streaming only)
         :param frequency_penalty:
         :param image_config: Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/guides/overview/multimodal/image-generation for more details.
@@ -2406,7 +2428,7 @@ class Presets(BaseSDK):
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
         :param background:
-        :param cache_control: Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. Currently supported for Anthropic Claude models.
+        :param cache_control: Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. When set on an individual content block, it marks an explicit cache breakpoint; block-level markers also work on OpenAI models that support explicit prompt caching — OpenRouter converts them to the provider's native format.
         :param debug: Debug options for inspecting request transformations (streaming only)
         :param frequency_penalty:
         :param image_config: Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/guides/overview/multimodal/image-generation for more details.
