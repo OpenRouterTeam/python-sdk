@@ -367,6 +367,7 @@ class Guardrails(BaseSDK):
         enforce_zdr_google: OptionalNullable[bool] = UNSET,
         enforce_zdr_openai: OptionalNullable[bool] = UNSET,
         enforce_zdr_other: OptionalNullable[bool] = UNSET,
+        enforce_zdr_xai: OptionalNullable[bool] = UNSET,
         ignored_models: OptionalNullable[Iterable[str]] = UNSET,
         ignored_providers: OptionalNullable[Iterable[str]] = UNSET,
         limit_usd: OptionalNullable[float] = UNSET,
@@ -394,11 +395,12 @@ class Guardrails(BaseSDK):
         :param content_filter_builtins: Builtin content filters to apply. The \"flag\" action is only supported for \"regex-prompt-injection\"; PII slugs (email, phone, ssn, credit-card, ip-address, person-name, address) accept \"block\" or \"redact\" only.
         :param content_filters: Custom regex content filters to apply to request messages
         :param description: Description of the guardrail
-        :param enforce_zdr: Deprecated. Use enforce_zdr_anthropic, enforce_zdr_openai, enforce_zdr_google, and enforce_zdr_other instead. When provided, its value is copied into any of those per-provider fields that are not explicitly specified on the request.
+        :param enforce_zdr: Deprecated. Use enforce_zdr_anthropic, enforce_zdr_openai, enforce_zdr_google, enforce_zdr_xai, and enforce_zdr_other instead. When provided, its value is copied into any of those per-provider fields that are not explicitly specified on the request.
         :param enforce_zdr_anthropic: Whether to enforce zero data retention for Anthropic models. Falls back to enforce_zdr when not provided.
         :param enforce_zdr_google: Whether to enforce zero data retention for Google models. Falls back to enforce_zdr when not provided.
         :param enforce_zdr_openai: Whether to enforce zero data retention for OpenAI models. Falls back to enforce_zdr when not provided.
-        :param enforce_zdr_other: Whether to enforce zero data retention for models that are not from Anthropic, OpenAI, or Google. Falls back to enforce_zdr when not provided.
+        :param enforce_zdr_other: Whether to enforce zero data retention for models that are not from Anthropic, OpenAI, Google, or xAI. Falls back to enforce_zdr when not provided.
+        :param enforce_zdr_xai: Whether to enforce zero data retention for xAI models. Falls back to enforce_zdr when not provided.
         :param ignored_models: Array of model identifiers to exclude from routing (slug or canonical_slug accepted)
         :param ignored_providers: List of provider IDs to exclude from routing
         :param limit_usd: Spending limit in USD
@@ -444,6 +446,7 @@ class Guardrails(BaseSDK):
                 enforce_zdr_google=enforce_zdr_google,
                 enforce_zdr_openai=enforce_zdr_openai,
                 enforce_zdr_other=enforce_zdr_other,
+                enforce_zdr_xai=enforce_zdr_xai,
                 ignored_models=utils.unmarshal(
                     ignored_models, OptionalNullable[List[str]]
                 ),
@@ -578,6 +581,7 @@ class Guardrails(BaseSDK):
         enforce_zdr_google: OptionalNullable[bool] = UNSET,
         enforce_zdr_openai: OptionalNullable[bool] = UNSET,
         enforce_zdr_other: OptionalNullable[bool] = UNSET,
+        enforce_zdr_xai: OptionalNullable[bool] = UNSET,
         ignored_models: OptionalNullable[Iterable[str]] = UNSET,
         ignored_providers: OptionalNullable[Iterable[str]] = UNSET,
         limit_usd: OptionalNullable[float] = UNSET,
@@ -605,11 +609,12 @@ class Guardrails(BaseSDK):
         :param content_filter_builtins: Builtin content filters to apply. The \"flag\" action is only supported for \"regex-prompt-injection\"; PII slugs (email, phone, ssn, credit-card, ip-address, person-name, address) accept \"block\" or \"redact\" only.
         :param content_filters: Custom regex content filters to apply to request messages
         :param description: Description of the guardrail
-        :param enforce_zdr: Deprecated. Use enforce_zdr_anthropic, enforce_zdr_openai, enforce_zdr_google, and enforce_zdr_other instead. When provided, its value is copied into any of those per-provider fields that are not explicitly specified on the request.
+        :param enforce_zdr: Deprecated. Use enforce_zdr_anthropic, enforce_zdr_openai, enforce_zdr_google, enforce_zdr_xai, and enforce_zdr_other instead. When provided, its value is copied into any of those per-provider fields that are not explicitly specified on the request.
         :param enforce_zdr_anthropic: Whether to enforce zero data retention for Anthropic models. Falls back to enforce_zdr when not provided.
         :param enforce_zdr_google: Whether to enforce zero data retention for Google models. Falls back to enforce_zdr when not provided.
         :param enforce_zdr_openai: Whether to enforce zero data retention for OpenAI models. Falls back to enforce_zdr when not provided.
-        :param enforce_zdr_other: Whether to enforce zero data retention for models that are not from Anthropic, OpenAI, or Google. Falls back to enforce_zdr when not provided.
+        :param enforce_zdr_other: Whether to enforce zero data retention for models that are not from Anthropic, OpenAI, Google, or xAI. Falls back to enforce_zdr when not provided.
+        :param enforce_zdr_xai: Whether to enforce zero data retention for xAI models. Falls back to enforce_zdr when not provided.
         :param ignored_models: Array of model identifiers to exclude from routing (slug or canonical_slug accepted)
         :param ignored_providers: List of provider IDs to exclude from routing
         :param limit_usd: Spending limit in USD
@@ -655,6 +660,7 @@ class Guardrails(BaseSDK):
                 enforce_zdr_google=enforce_zdr_google,
                 enforce_zdr_openai=enforce_zdr_openai,
                 enforce_zdr_other=enforce_zdr_other,
+                enforce_zdr_xai=enforce_zdr_xai,
                 ignored_models=utils.unmarshal(
                     ignored_models, OptionalNullable[List[str]]
                 ),
@@ -1301,6 +1307,7 @@ class Guardrails(BaseSDK):
         enforce_zdr_google: OptionalNullable[bool] = UNSET,
         enforce_zdr_openai: OptionalNullable[bool] = UNSET,
         enforce_zdr_other: OptionalNullable[bool] = UNSET,
+        enforce_zdr_xai: OptionalNullable[bool] = UNSET,
         ignored_models: OptionalNullable[Iterable[str]] = UNSET,
         ignored_providers: OptionalNullable[Iterable[str]] = UNSET,
         limit_usd: OptionalNullable[float] = UNSET,
@@ -1328,11 +1335,12 @@ class Guardrails(BaseSDK):
         :param content_filter_builtins: Builtin content filters to apply. Set to null to remove. The \"flag\" action is only supported for \"regex-prompt-injection\"; PII slugs (email, phone, ssn, credit-card, ip-address, person-name, address) accept \"block\" or \"redact\" only.
         :param content_filters: Custom regex content filters to apply. Set to null to remove.
         :param description: New description for the guardrail
-        :param enforce_zdr: Deprecated. Use enforce_zdr_anthropic, enforce_zdr_openai, enforce_zdr_google, and enforce_zdr_other instead. When provided, its value is copied into any of those per-provider fields that are not explicitly specified on the request.
+        :param enforce_zdr: Deprecated. Use enforce_zdr_anthropic, enforce_zdr_openai, enforce_zdr_google, enforce_zdr_xai, and enforce_zdr_other instead. When provided, its value is copied into any of those per-provider fields that are not explicitly specified on the request.
         :param enforce_zdr_anthropic: Whether to enforce zero data retention for Anthropic models. Falls back to enforce_zdr when not provided.
         :param enforce_zdr_google: Whether to enforce zero data retention for Google models. Falls back to enforce_zdr when not provided.
         :param enforce_zdr_openai: Whether to enforce zero data retention for OpenAI models. Falls back to enforce_zdr when not provided.
-        :param enforce_zdr_other: Whether to enforce zero data retention for models that are not from Anthropic, OpenAI, or Google. Falls back to enforce_zdr when not provided.
+        :param enforce_zdr_other: Whether to enforce zero data retention for models that are not from Anthropic, OpenAI, Google, or xAI. Falls back to enforce_zdr when not provided.
+        :param enforce_zdr_xai: Whether to enforce zero data retention for xAI models. Falls back to enforce_zdr when not provided.
         :param ignored_models: Array of model identifiers to exclude from routing (slug or canonical_slug accepted)
         :param ignored_providers: List of provider IDs to exclude from routing
         :param limit_usd: New spending limit in USD
@@ -1379,6 +1387,7 @@ class Guardrails(BaseSDK):
                 enforce_zdr_google=enforce_zdr_google,
                 enforce_zdr_openai=enforce_zdr_openai,
                 enforce_zdr_other=enforce_zdr_other,
+                enforce_zdr_xai=enforce_zdr_xai,
                 ignored_models=utils.unmarshal(
                     ignored_models, OptionalNullable[List[str]]
                 ),
@@ -1512,6 +1521,7 @@ class Guardrails(BaseSDK):
         enforce_zdr_google: OptionalNullable[bool] = UNSET,
         enforce_zdr_openai: OptionalNullable[bool] = UNSET,
         enforce_zdr_other: OptionalNullable[bool] = UNSET,
+        enforce_zdr_xai: OptionalNullable[bool] = UNSET,
         ignored_models: OptionalNullable[Iterable[str]] = UNSET,
         ignored_providers: OptionalNullable[Iterable[str]] = UNSET,
         limit_usd: OptionalNullable[float] = UNSET,
@@ -1539,11 +1549,12 @@ class Guardrails(BaseSDK):
         :param content_filter_builtins: Builtin content filters to apply. Set to null to remove. The \"flag\" action is only supported for \"regex-prompt-injection\"; PII slugs (email, phone, ssn, credit-card, ip-address, person-name, address) accept \"block\" or \"redact\" only.
         :param content_filters: Custom regex content filters to apply. Set to null to remove.
         :param description: New description for the guardrail
-        :param enforce_zdr: Deprecated. Use enforce_zdr_anthropic, enforce_zdr_openai, enforce_zdr_google, and enforce_zdr_other instead. When provided, its value is copied into any of those per-provider fields that are not explicitly specified on the request.
+        :param enforce_zdr: Deprecated. Use enforce_zdr_anthropic, enforce_zdr_openai, enforce_zdr_google, enforce_zdr_xai, and enforce_zdr_other instead. When provided, its value is copied into any of those per-provider fields that are not explicitly specified on the request.
         :param enforce_zdr_anthropic: Whether to enforce zero data retention for Anthropic models. Falls back to enforce_zdr when not provided.
         :param enforce_zdr_google: Whether to enforce zero data retention for Google models. Falls back to enforce_zdr when not provided.
         :param enforce_zdr_openai: Whether to enforce zero data retention for OpenAI models. Falls back to enforce_zdr when not provided.
-        :param enforce_zdr_other: Whether to enforce zero data retention for models that are not from Anthropic, OpenAI, or Google. Falls back to enforce_zdr when not provided.
+        :param enforce_zdr_other: Whether to enforce zero data retention for models that are not from Anthropic, OpenAI, Google, or xAI. Falls back to enforce_zdr when not provided.
+        :param enforce_zdr_xai: Whether to enforce zero data retention for xAI models. Falls back to enforce_zdr when not provided.
         :param ignored_models: Array of model identifiers to exclude from routing (slug or canonical_slug accepted)
         :param ignored_providers: List of provider IDs to exclude from routing
         :param limit_usd: New spending limit in USD
@@ -1590,6 +1601,7 @@ class Guardrails(BaseSDK):
                 enforce_zdr_google=enforce_zdr_google,
                 enforce_zdr_openai=enforce_zdr_openai,
                 enforce_zdr_other=enforce_zdr_other,
+                enforce_zdr_xai=enforce_zdr_xai,
                 ignored_models=utils.unmarshal(
                     ignored_models, OptionalNullable[List[str]]
                 ),
