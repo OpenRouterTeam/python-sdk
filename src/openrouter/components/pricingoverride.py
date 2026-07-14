@@ -8,7 +8,7 @@ from typing_extensions import NotRequired, TypedDict
 
 
 class PricingOverrideTypedDict(TypedDict):
-    r"""A conditional override of the base pricing. An entry applies only when all of its condition fields (e.g. min_prompt_tokens) match the request; among applicable entries, later entries win per price key; price keys absent from an entry inherit the base price."""
+    r"""A conditional override of the base pricing. An entry applies only when all of its condition fields (e.g. min_prompt_tokens, or the utc_start/utc_end time window) match the request; among applicable entries, later entries win per price key; price keys absent from an entry inherit the base price."""
 
     audio: NotRequired[str]
     r"""Overridden price in USD per audio input token"""
@@ -26,10 +26,14 @@ class PricingOverrideTypedDict(TypedDict):
     r"""Condition: the entry applies when the total prompt tokens of a request are strictly greater than this threshold"""
     prompt: NotRequired[str]
     r"""Overridden price in USD per token for prompt (input) processing"""
+    utc_end: NotRequired[float]
+    r"""Condition: exclusive end of a daily UTC time window as an HHMM clock number (e.g. 400 = 04:00)"""
+    utc_start: NotRequired[float]
+    r"""Condition: inclusive start of a daily UTC time window as an HHMM clock number (e.g. 100 = 01:00, 1030 = 10:30). The entry applies while the current UTC time is inside the half-open window [utc_start, utc_end), which may wrap past midnight (utc_start > utc_end)."""
 
 
 class PricingOverride(BaseModel):
-    r"""A conditional override of the base pricing. An entry applies only when all of its condition fields (e.g. min_prompt_tokens) match the request; among applicable entries, later entries win per price key; price keys absent from an entry inherit the base price."""
+    r"""A conditional override of the base pricing. An entry applies only when all of its condition fields (e.g. min_prompt_tokens, or the utc_start/utc_end time window) match the request; among applicable entries, later entries win per price key; price keys absent from an entry inherit the base price."""
 
     audio: Optional[str] = None
     r"""Overridden price in USD per audio input token"""
@@ -55,6 +59,12 @@ class PricingOverride(BaseModel):
     prompt: Optional[str] = None
     r"""Overridden price in USD per token for prompt (input) processing"""
 
+    utc_end: Optional[float] = None
+    r"""Condition: exclusive end of a daily UTC time window as an HHMM clock number (e.g. 400 = 04:00)"""
+
+    utc_start: Optional[float] = None
+    r"""Condition: inclusive start of a daily UTC time window as an HHMM clock number (e.g. 100 = 01:00, 1030 = 10:30). The entry applies while the current UTC time is inside the half-open window [utc_start, utc_end), which may wrap past midnight (utc_start > utc_end)."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
@@ -67,6 +77,8 @@ class PricingOverride(BaseModel):
                 "input_cache_write_1h",
                 "min_prompt_tokens",
                 "prompt",
+                "utc_end",
+                "utc_start",
             ]
         )
         serialized = handler(self)

@@ -38,7 +38,7 @@ class PublicPricingTypedDict(TypedDict):
     internal_reasoning: NotRequired[str]
     r"""Price in USD per internal reasoning token"""
     overrides: NotRequired[List[PricingOverrideTypedDict]]
-    r"""Conditional overrides of the base pricing (e.g. long-context pricing). An entry applies when all of its condition fields (e.g. min_prompt_tokens) match the request; among applicable entries, later entries win per key; price keys absent from an entry inherit the base price. The top-level pricing keys always reflect the price that applies under default conditions."""
+    r"""Conditional overrides of the base pricing (e.g. long-context or time-based pricing). An entry applies when all of its condition fields (e.g. min_prompt_tokens, or the utc_start/utc_end time window) match the request; among applicable entries, later entries win per key; price keys absent from an entry inherit the base price. The top-level pricing keys always reflect the price that applies under default conditions."""
     request: NotRequired[str]
     r"""Price in USD per request"""
     web_search: NotRequired[str]
@@ -88,7 +88,7 @@ class PublicPricing(BaseModel):
     r"""Price in USD per internal reasoning token"""
 
     overrides: Optional[List[PricingOverride]] = None
-    r"""Conditional overrides of the base pricing (e.g. long-context pricing). An entry applies when all of its condition fields (e.g. min_prompt_tokens) match the request; among applicable entries, later entries win per key; price keys absent from an entry inherit the base price. The top-level pricing keys always reflect the price that applies under default conditions."""
+    r"""Conditional overrides of the base pricing (e.g. long-context or time-based pricing). An entry applies when all of its condition fields (e.g. min_prompt_tokens, or the utc_start/utc_end time window) match the request; among applicable entries, later entries win per key; price keys absent from an entry inherit the base price. The top-level pricing keys always reflect the price that applies under default conditions."""
 
     request: Optional[str] = None
     r"""Price in USD per request"""
