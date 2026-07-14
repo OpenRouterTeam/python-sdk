@@ -23,6 +23,7 @@ from .legacy_websearchservertool import (
     LegacyWebSearchServerToolTypedDict,
 )
 from .mcpservertool import McpServerTool, McpServerToolTypedDict
+from .namespacetool import NamespaceTool, NamespaceToolTypedDict
 from .openairesponsesresponsestatus import OpenAIResponsesResponseStatus
 from .openairesponsestoolchoice_union import (
     OpenAIResponsesToolChoiceUnion,
@@ -122,6 +123,7 @@ OpenResponsesResultToolUnionTypedDict = TypeAliasType(
         ApplyPatchServerToolTypedDict,
         ShellServerToolTypedDict,
         CodeInterpreterServerToolTypedDict,
+        NamespaceToolTypedDict,
         CustomToolTypedDict,
         ComputerUseServerToolTypedDict,
         OpenResponsesResultToolFunctionTypedDict,
@@ -161,6 +163,7 @@ _OPEN_RESPONSES_RESULT_TOOL_UNION_VARIANTS: dict[str, Any] = {
     "shell": ShellServerTool,
     "apply_patch": ApplyPatchServerTool,
     "custom": CustomTool,
+    "namespace": NamespaceTool,
 }
 
 
@@ -180,6 +183,7 @@ OpenResponsesResultToolUnion = Annotated[
         ShellServerTool,
         ApplyPatchServerTool,
         CustomTool,
+        NamespaceTool,
         UnknownOpenResponsesResultToolUnion,
     ],
     BeforeValidator(
