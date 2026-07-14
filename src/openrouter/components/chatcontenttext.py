@@ -5,7 +5,14 @@ from .chatcontentcachecontrol import (
     ChatContentCacheControl,
     ChatContentCacheControlTypedDict,
 )
-from openrouter.types import BaseModel, UNSET_SENTINEL
+from .promptcachebreakpoint import PromptCacheBreakpoint, PromptCacheBreakpointTypedDict
+from openrouter.types import (
+    BaseModel,
+    Nullable,
+    OptionalNullable,
+    UNSET,
+    UNSET_SENTINEL,
+)
 from pydantic import model_serializer
 from typing import Literal, Optional
 from typing_extensions import NotRequired, TypedDict
@@ -20,7 +27,9 @@ class ChatContentTextTypedDict(TypedDict):
     text: str
     type: ChatContentTextType
     cache_control: NotRequired[ChatContentCacheControlTypedDict]
-    r"""Cache control for the content part"""
+    r"""Anthropic-style cache breakpoint for the content part. Interchangeable with the OpenAI-style `prompt_cache_breakpoint` marker: OpenRouter converts between the two based on the provider serving the request."""
+    prompt_cache_breakpoint: NotRequired[Nullable[PromptCacheBreakpointTypedDict]]
+    r"""Marks an explicit prompt-cache boundary on this content block (OpenAI-style). Everything through the block carrying this marker is part of the candidate cached prefix. Supported natively by OpenAI GPT-5.6 and newer; on providers that use Anthropic-style `cache_control`, OpenRouter converts the marker to that format automatically."""
 
 
 class ChatContentText(BaseModel):
@@ -31,20 +40,32 @@ class ChatContentText(BaseModel):
     type: ChatContentTextType
 
     cache_control: Optional[ChatContentCacheControl] = None
-    r"""Cache control for the content part"""
+    r"""Anthropic-style cache breakpoint for the content part. Interchangeable with the OpenAI-style `prompt_cache_breakpoint` marker: OpenRouter converts between the two based on the provider serving the request."""
+
+    prompt_cache_breakpoint: OptionalNullable[PromptCacheBreakpoint] = UNSET
+    r"""Marks an explicit prompt-cache boundary on this content block (OpenAI-style). Everything through the block carrying this marker is part of the candidate cached prefix. Supported natively by OpenAI GPT-5.6 and newer; on providers that use Anthropic-style `cache_control`, OpenRouter converts the marker to that format automatically."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["cache_control"])
+        optional_fields = set(["cache_control", "prompt_cache_breakpoint"])
+        nullable_fields = set(["prompt_cache_breakpoint"])
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
             if val != UNSET_SENTINEL:
-                if val is not None or k not in optional_fields:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
                     m[k] = val
 
         return m

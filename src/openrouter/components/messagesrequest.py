@@ -659,14 +659,14 @@ ToolTypeEphemeral = Literal["ephemeral",]
 
 
 class CachingTypedDict(TypedDict):
-    r"""Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. Currently supported for Anthropic Claude models."""
+    r"""Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. When set on an individual content block, it marks an explicit cache breakpoint; block-level markers also work on OpenAI models that support explicit prompt caching — OpenRouter converts them to the provider's native format."""
 
     type: ToolTypeEphemeral
     ttl: NotRequired[AnthropicCacheControlTTL]
 
 
 class Caching(BaseModel):
-    r"""Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. Currently supported for Anthropic Claude models."""
+    r"""Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. When set on an individual content block, it marks an explicit cache breakpoint; block-level markers also work on OpenAI models that support explicit prompt caching — OpenRouter converts them to the provider's native format."""
 
     type: ToolTypeEphemeral
 
@@ -701,7 +701,7 @@ class ToolAdvisor20260301TypedDict(TypedDict):
     type: TypeAdvisor20260301
     allowed_callers: NotRequired[List[AnthropicAllowedCallers]]
     cache_control: NotRequired[AnthropicCacheControlDirectiveTypedDict]
-    r"""Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. Currently supported for Anthropic Claude models."""
+    r"""Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. When set on an individual content block, it marks an explicit cache breakpoint; block-level markers also work on OpenAI models that support explicit prompt caching — OpenRouter converts them to the provider's native format."""
     caching: NotRequired[Nullable[CachingTypedDict]]
     defer_loading: NotRequired[bool]
     max_uses: NotRequired[int]
@@ -717,7 +717,7 @@ class ToolAdvisor20260301(BaseModel):
     allowed_callers: Optional[List[AnthropicAllowedCallers]] = None
 
     cache_control: Optional[AnthropicCacheControlDirective] = None
-    r"""Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. Currently supported for Anthropic Claude models."""
+    r"""Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. When set on an individual content block, it marks an explicit cache breakpoint; block-level markers also work on OpenAI models that support explicit prompt caching — OpenRouter converts them to the provider's native format."""
 
     caching: OptionalNullable[Caching] = UNSET
 
@@ -766,7 +766,7 @@ class ToolWebSearch20260209TypedDict(TypedDict):
     allowed_domains: NotRequired[Nullable[List[str]]]
     blocked_domains: NotRequired[Nullable[List[str]]]
     cache_control: NotRequired[AnthropicCacheControlDirectiveTypedDict]
-    r"""Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. Currently supported for Anthropic Claude models."""
+    r"""Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. When set on an individual content block, it marks an explicit cache breakpoint; block-level markers also work on OpenAI models that support explicit prompt caching — OpenRouter converts them to the provider's native format."""
     max_uses: NotRequired[Nullable[int]]
     user_location: NotRequired[Nullable[AnthropicWebSearchToolUserLocationTypedDict]]
 
@@ -783,7 +783,7 @@ class ToolWebSearch20260209(BaseModel):
     blocked_domains: OptionalNullable[List[str]] = UNSET
 
     cache_control: Optional[AnthropicCacheControlDirective] = None
-    r"""Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. Currently supported for Anthropic Claude models."""
+    r"""Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. When set on an individual content block, it marks an explicit cache breakpoint; block-level markers also work on OpenAI models that support explicit prompt caching — OpenRouter converts them to the provider's native format."""
 
     max_uses: OptionalNullable[int] = UNSET
 
@@ -838,7 +838,7 @@ class ToolWebSearch20250305TypedDict(TypedDict):
     allowed_domains: NotRequired[Nullable[List[str]]]
     blocked_domains: NotRequired[Nullable[List[str]]]
     cache_control: NotRequired[AnthropicCacheControlDirectiveTypedDict]
-    r"""Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. Currently supported for Anthropic Claude models."""
+    r"""Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. When set on an individual content block, it marks an explicit cache breakpoint; block-level markers also work on OpenAI models that support explicit prompt caching — OpenRouter converts them to the provider's native format."""
     max_uses: NotRequired[Nullable[int]]
     user_location: NotRequired[Nullable[AnthropicWebSearchToolUserLocationTypedDict]]
 
@@ -853,7 +853,7 @@ class ToolWebSearch20250305(BaseModel):
     blocked_domains: OptionalNullable[List[str]] = UNSET
 
     cache_control: Optional[AnthropicCacheControlDirective] = None
-    r"""Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. Currently supported for Anthropic Claude models."""
+    r"""Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. When set on an individual content block, it marks an explicit cache breakpoint; block-level markers also work on OpenAI models that support explicit prompt caching — OpenRouter converts them to the provider's native format."""
 
     max_uses: OptionalNullable[int] = UNSET
 
@@ -905,7 +905,7 @@ class ToolTextEditor20250124TypedDict(TypedDict):
     name: NameStrReplaceEditor
     type: TypeTextEditor20250124
     cache_control: NotRequired[AnthropicCacheControlDirectiveTypedDict]
-    r"""Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. Currently supported for Anthropic Claude models."""
+    r"""Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. When set on an individual content block, it marks an explicit cache breakpoint; block-level markers also work on OpenAI models that support explicit prompt caching — OpenRouter converts them to the provider's native format."""
 
 
 class ToolTextEditor20250124(BaseModel):
@@ -914,7 +914,7 @@ class ToolTextEditor20250124(BaseModel):
     type: TypeTextEditor20250124
 
     cache_control: Optional[AnthropicCacheControlDirective] = None
-    r"""Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. Currently supported for Anthropic Claude models."""
+    r"""Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. When set on an individual content block, it marks an explicit cache breakpoint; block-level markers also work on OpenAI models that support explicit prompt caching — OpenRouter converts them to the provider's native format."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
@@ -943,7 +943,7 @@ class ToolBash20250124TypedDict(TypedDict):
     name: NameBash
     type: TypeBash20250124
     cache_control: NotRequired[AnthropicCacheControlDirectiveTypedDict]
-    r"""Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. Currently supported for Anthropic Claude models."""
+    r"""Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. When set on an individual content block, it marks an explicit cache breakpoint; block-level markers also work on OpenAI models that support explicit prompt caching — OpenRouter converts them to the provider's native format."""
 
 
 class ToolBash20250124(BaseModel):
@@ -952,7 +952,7 @@ class ToolBash20250124(BaseModel):
     type: TypeBash20250124
 
     cache_control: Optional[AnthropicCacheControlDirective] = None
-    r"""Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. Currently supported for Anthropic Claude models."""
+    r"""Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. When set on an individual content block, it marks an explicit cache breakpoint; block-level markers also work on OpenAI models that support explicit prompt caching — OpenRouter converts them to the provider's native format."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
@@ -1033,7 +1033,7 @@ class ToolCustomTypedDict(TypedDict):
     input_schema: InputSchemaTypedDict
     name: str
     cache_control: NotRequired[AnthropicCacheControlDirectiveTypedDict]
-    r"""Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. Currently supported for Anthropic Claude models."""
+    r"""Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. When set on an individual content block, it marks an explicit cache breakpoint; block-level markers also work on OpenAI models that support explicit prompt caching — OpenRouter converts them to the provider's native format."""
     description: NotRequired[str]
     type: NotRequired[ToolTypeCustom]
 
@@ -1044,7 +1044,7 @@ class ToolCustom(BaseModel):
     name: str
 
     cache_control: Optional[AnthropicCacheControlDirective] = None
-    r"""Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. Currently supported for Anthropic Claude models."""
+    r"""Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. When set on an individual content block, it marks an explicit cache breakpoint; block-level markers also work on OpenAI models that support explicit prompt caching — OpenRouter converts them to the provider's native format."""
 
     description: Optional[str] = None
 
@@ -1113,7 +1113,7 @@ class MessagesRequestTypedDict(TypedDict):
     messages: Nullable[List[MessagesMessageParamTypedDict]]
     model: str
     cache_control: NotRequired[AnthropicCacheControlDirectiveTypedDict]
-    r"""Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. Currently supported for Anthropic Claude models."""
+    r"""Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. When set on an individual content block, it marks an explicit cache breakpoint; block-level markers also work on OpenAI models that support explicit prompt caching — OpenRouter converts them to the provider's native format."""
     context_management: NotRequired[Nullable[ContextManagementTypedDict]]
     fallbacks: NotRequired[Nullable[List[MessagesFallbackParamTypedDict]]]
     r"""Fallback models to try if the primary model fails or refuses, in order. Handled by OpenRouter multi-model routing rather than Anthropic server-side fallbacks; cannot be combined with `models`. Each entry accepts only `model`. Maximum of 3 entries."""
@@ -1155,7 +1155,7 @@ class MessagesRequest(BaseModel):
     model: str
 
     cache_control: Optional[AnthropicCacheControlDirective] = None
-    r"""Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. Currently supported for Anthropic Claude models."""
+    r"""Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. When set on an individual content block, it marks an explicit cache breakpoint; block-level markers also work on OpenAI models that support explicit prompt caching — OpenRouter converts them to the provider's native format."""
 
     context_management: OptionalNullable[ContextManagement] = UNSET
 
