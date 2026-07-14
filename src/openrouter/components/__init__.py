@@ -611,8 +611,6 @@ if TYPE_CHECKING:
         ChatUsagePromptTokensDetails,
         ChatUsagePromptTokensDetailsTypedDict,
         ChatUsageTypedDict,
-        ServerToolUseDetails,
-        ServerToolUseDetailsTypedDict,
     )
     from .chatusermessage import (
         ChatUserMessage,
@@ -2423,6 +2421,10 @@ if TYPE_CHECKING:
     )
     from .searchqualitylevel import SearchQualityLevel
     from .security import Security, SecurityTypedDict
+    from .servertoolusedetails import (
+        ServerToolUseDetails,
+        ServerToolUseDetailsTypedDict,
+    )
     from .serviceunavailableresponseerrordata import (
         ServiceUnavailableResponseErrorData,
         ServiceUnavailableResponseErrorDataTypedDict,
@@ -5331,8 +5333,6 @@ _dynamic_imports: dict[str, str] = {
     "ChatUsagePromptTokensDetails": ".chatusage",
     "ChatUsagePromptTokensDetailsTypedDict": ".chatusage",
     "ChatUsageTypedDict": ".chatusage",
-    "ServerToolUseDetails": ".chatusage",
-    "ServerToolUseDetailsTypedDict": ".chatusage",
     "ChatUserMessage": ".chatusermessage",
     "ChatUserMessageContent": ".chatusermessage",
     "ChatUserMessageContentTypedDict": ".chatusermessage",
@@ -6709,6 +6709,8 @@ _dynamic_imports: dict[str, str] = {
     "SearchQualityLevel": ".searchqualitylevel",
     "Security": ".security",
     "SecurityTypedDict": ".security",
+    "ServerToolUseDetails": ".servertoolusedetails",
+    "ServerToolUseDetailsTypedDict": ".servertoolusedetails",
     "ServiceUnavailableResponseErrorData": ".serviceunavailableresponseerrordata",
     "ServiceUnavailableResponseErrorDataTypedDict": ".serviceunavailableresponseerrordata",
     "ShellCallItem": ".shellcallitem",
