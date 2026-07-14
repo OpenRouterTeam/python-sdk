@@ -80,6 +80,10 @@ if TYPE_CHECKING:
         AnthropicCacheControlDirectiveTypedDict,
     )
     from .anthropiccachecontrolttl import AnthropicCacheControlTTL
+    from .anthropiccachecreation import (
+        AnthropicCacheCreation,
+        AnthropicCacheCreationTypedDict,
+    )
     from .anthropiccitationcharlocationparam import (
         AnthropicCitationCharLocationParam,
         AnthropicCitationCharLocationParamType,
@@ -2895,6 +2899,8 @@ __all__ = [
     "AnthropicCacheControlDirectiveType",
     "AnthropicCacheControlDirectiveTypedDict",
     "AnthropicCacheControlTTL",
+    "AnthropicCacheCreation",
+    "AnthropicCacheCreationTypedDict",
     "AnthropicCitationCharLocationParam",
     "AnthropicCitationCharLocationParamType",
     "AnthropicCitationCharLocationParamTypedDict",
@@ -4960,6 +4966,8 @@ _dynamic_imports: dict[str, str] = {
     "AnthropicCacheControlDirectiveType": ".anthropiccachecontroldirective",
     "AnthropicCacheControlDirectiveTypedDict": ".anthropiccachecontroldirective",
     "AnthropicCacheControlTTL": ".anthropiccachecontrolttl",
+    "AnthropicCacheCreation": ".anthropiccachecreation",
+    "AnthropicCacheCreationTypedDict": ".anthropiccachecreation",
     "AnthropicCitationCharLocationParam": ".anthropiccitationcharlocationparam",
     "AnthropicCitationCharLocationParamType": ".anthropiccitationcharlocationparam",
     "AnthropicCitationCharLocationParamTypedDict": ".anthropiccitationcharlocationparam",
