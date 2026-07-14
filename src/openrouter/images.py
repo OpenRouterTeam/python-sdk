@@ -34,8 +34,8 @@ class Images(BaseSDK):
         output_format: Optional[components.ImageGenerationRequestOutputFormat] = None,
         provider: Optional[
             Union[
-                components.ImageGenerationRequestProvider,
-                components.ImageGenerationRequestProviderTypedDict,
+                components.ImageGenerationProviderPreferences,
+                components.ImageGenerationProviderPreferencesTypedDict,
             ]
         ] = None,
         quality: Optional[components.ImageGenerationRequestQuality] = None,
@@ -67,11 +67,11 @@ class Images(BaseSDK):
         :param n: Number of images to generate (1-10). Providers that only support single-image generation reject n > 1.
         :param output_compression: Compression level (0-100) for webp/jpeg output. Ignored for png and by providers without a compression knob.
         :param output_format: Encoding of the returned image bytes. Most models produce raster formats (png, jpeg, webp). SVG is supported by vectorization models (e.g. Quiver) — the SVG markup is UTF-8 base64-encoded in `b64_json`.
-        :param provider: Provider-specific passthrough configuration
+        :param provider: Provider routing preferences and provider-specific passthrough configuration.
         :param quality: Rendering quality. Providers without a quality knob ignore this.
         :param resolution: Normalized resolution tier of the generated image. Concrete pixel dimensions are derived per-provider.
         :param seed: If specified, the generation will sample deterministically, such that repeated requests with the same seed and parameters should return the same result. Determinism is not guaranteed for all providers.
-        :param size: Optional. A convenience shorthand for output dimensions — pass a tier (\"2K\", \"4K\") or explicit pixels (\"2048x2048\") and we normalize it to the right dimensions for the chosen provider. Interchangeable with resolution + aspect_ratio; use those directly for enumerated, per-model discoverable values. Conflicting size + resolution/aspect_ratio is rejected.
+        :param size: Optional. A convenience shorthand for output dimensions — pass a tier (\"2K\", \"4K\") or explicit pixels (\"2048x2048\") and we normalize it to the right dimensions for the chosen provider. A tier size is equivalent to setting `resolution` and combines with `aspect_ratio`. An explicit pixel size is authoritative: a mismatched `resolution` or `aspect_ratio` alongside it is rejected with a 400.
         :param stream: If true, partial images are streamed as SSE events as they become available. Only supported by providers with native streaming (currently OpenAI). Non-streaming providers ignore this flag and return a buffered response.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -101,8 +101,8 @@ class Images(BaseSDK):
         output_format: Optional[components.ImageGenerationRequestOutputFormat] = None,
         provider: Optional[
             Union[
-                components.ImageGenerationRequestProvider,
-                components.ImageGenerationRequestProviderTypedDict,
+                components.ImageGenerationProviderPreferences,
+                components.ImageGenerationProviderPreferencesTypedDict,
             ]
         ] = None,
         quality: Optional[components.ImageGenerationRequestQuality] = None,
@@ -134,11 +134,11 @@ class Images(BaseSDK):
         :param n: Number of images to generate (1-10). Providers that only support single-image generation reject n > 1.
         :param output_compression: Compression level (0-100) for webp/jpeg output. Ignored for png and by providers without a compression knob.
         :param output_format: Encoding of the returned image bytes. Most models produce raster formats (png, jpeg, webp). SVG is supported by vectorization models (e.g. Quiver) — the SVG markup is UTF-8 base64-encoded in `b64_json`.
-        :param provider: Provider-specific passthrough configuration
+        :param provider: Provider routing preferences and provider-specific passthrough configuration.
         :param quality: Rendering quality. Providers without a quality knob ignore this.
         :param resolution: Normalized resolution tier of the generated image. Concrete pixel dimensions are derived per-provider.
         :param seed: If specified, the generation will sample deterministically, such that repeated requests with the same seed and parameters should return the same result. Determinism is not guaranteed for all providers.
-        :param size: Optional. A convenience shorthand for output dimensions — pass a tier (\"2K\", \"4K\") or explicit pixels (\"2048x2048\") and we normalize it to the right dimensions for the chosen provider. Interchangeable with resolution + aspect_ratio; use those directly for enumerated, per-model discoverable values. Conflicting size + resolution/aspect_ratio is rejected.
+        :param size: Optional. A convenience shorthand for output dimensions — pass a tier (\"2K\", \"4K\") or explicit pixels (\"2048x2048\") and we normalize it to the right dimensions for the chosen provider. A tier size is equivalent to setting `resolution` and combines with `aspect_ratio`. An explicit pixel size is authoritative: a mismatched `resolution` or `aspect_ratio` alongside it is rejected with a 400.
         :param stream: If true, partial images are streamed as SSE events as they become available. Only supported by providers with native streaming (currently OpenAI). Non-streaming providers ignore this flag and return a buffered response.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -168,8 +168,8 @@ class Images(BaseSDK):
         output_format: Optional[components.ImageGenerationRequestOutputFormat] = None,
         provider: Optional[
             Union[
-                components.ImageGenerationRequestProvider,
-                components.ImageGenerationRequestProviderTypedDict,
+                components.ImageGenerationProviderPreferences,
+                components.ImageGenerationProviderPreferencesTypedDict,
             ]
         ] = None,
         quality: Optional[components.ImageGenerationRequestQuality] = None,
@@ -204,11 +204,11 @@ class Images(BaseSDK):
         :param n: Number of images to generate (1-10). Providers that only support single-image generation reject n > 1.
         :param output_compression: Compression level (0-100) for webp/jpeg output. Ignored for png and by providers without a compression knob.
         :param output_format: Encoding of the returned image bytes. Most models produce raster formats (png, jpeg, webp). SVG is supported by vectorization models (e.g. Quiver) — the SVG markup is UTF-8 base64-encoded in `b64_json`.
-        :param provider: Provider-specific passthrough configuration
+        :param provider: Provider routing preferences and provider-specific passthrough configuration.
         :param quality: Rendering quality. Providers without a quality knob ignore this.
         :param resolution: Normalized resolution tier of the generated image. Concrete pixel dimensions are derived per-provider.
         :param seed: If specified, the generation will sample deterministically, such that repeated requests with the same seed and parameters should return the same result. Determinism is not guaranteed for all providers.
-        :param size: Optional. A convenience shorthand for output dimensions — pass a tier (\"2K\", \"4K\") or explicit pixels (\"2048x2048\") and we normalize it to the right dimensions for the chosen provider. Interchangeable with resolution + aspect_ratio; use those directly for enumerated, per-model discoverable values. Conflicting size + resolution/aspect_ratio is rejected.
+        :param size: Optional. A convenience shorthand for output dimensions — pass a tier (\"2K\", \"4K\") or explicit pixels (\"2048x2048\") and we normalize it to the right dimensions for the chosen provider. A tier size is equivalent to setting `resolution` and combines with `aspect_ratio`. An explicit pixel size is authoritative: a mismatched `resolution` or `aspect_ratio` alongside it is rejected with a 400.
         :param stream: If true, partial images are streamed as SSE events as they become available. Only supported by providers with native streaming (currently OpenAI). Non-streaming providers ignore this flag and return a buffered response.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -237,8 +237,8 @@ class Images(BaseSDK):
         output_format: Optional[components.ImageGenerationRequestOutputFormat] = None,
         provider: Optional[
             Union[
-                components.ImageGenerationRequestProvider,
-                components.ImageGenerationRequestProviderTypedDict,
+                components.ImageGenerationProviderPreferences,
+                components.ImageGenerationProviderPreferencesTypedDict,
             ]
         ] = None,
         quality: Optional[components.ImageGenerationRequestQuality] = None,
@@ -273,11 +273,11 @@ class Images(BaseSDK):
         :param n: Number of images to generate (1-10). Providers that only support single-image generation reject n > 1.
         :param output_compression: Compression level (0-100) for webp/jpeg output. Ignored for png and by providers without a compression knob.
         :param output_format: Encoding of the returned image bytes. Most models produce raster formats (png, jpeg, webp). SVG is supported by vectorization models (e.g. Quiver) — the SVG markup is UTF-8 base64-encoded in `b64_json`.
-        :param provider: Provider-specific passthrough configuration
+        :param provider: Provider routing preferences and provider-specific passthrough configuration.
         :param quality: Rendering quality. Providers without a quality knob ignore this.
         :param resolution: Normalized resolution tier of the generated image. Concrete pixel dimensions are derived per-provider.
         :param seed: If specified, the generation will sample deterministically, such that repeated requests with the same seed and parameters should return the same result. Determinism is not guaranteed for all providers.
-        :param size: Optional. A convenience shorthand for output dimensions — pass a tier (\"2K\", \"4K\") or explicit pixels (\"2048x2048\") and we normalize it to the right dimensions for the chosen provider. Interchangeable with resolution + aspect_ratio; use those directly for enumerated, per-model discoverable values. Conflicting size + resolution/aspect_ratio is rejected.
+        :param size: Optional. A convenience shorthand for output dimensions — pass a tier (\"2K\", \"4K\") or explicit pixels (\"2048x2048\") and we normalize it to the right dimensions for the chosen provider. A tier size is equivalent to setting `resolution` and combines with `aspect_ratio`. An explicit pixel size is authoritative: a mismatched `resolution` or `aspect_ratio` alongside it is rejected with a 400.
         :param stream: If true, partial images are streamed as SSE events as they become available. Only supported by providers with native streaming (currently OpenAI). Non-streaming providers ignore this flag and return a buffered response.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -310,7 +310,7 @@ class Images(BaseSDK):
                 output_format=output_format,
                 prompt=prompt,
                 provider=utils.get_pydantic_model(
-                    provider, Optional[components.ImageGenerationRequestProvider]
+                    provider, Optional[components.ImageGenerationProviderPreferences]
                 ),
                 quality=quality,
                 resolution=resolution,
@@ -430,6 +430,14 @@ class Images(BaseSDK):
                 errors.NotFoundResponseErrorData, http_res, http_res_text
             )
             raise errors.NotFoundResponseError(response_data, http_res, http_res_text)
+        if utils.match_response(http_res, "413", "application/json"):
+            http_res_text = utils.stream_to_text(http_res)
+            response_data = unmarshal_json_response(
+                errors.PayloadTooLargeResponseErrorData, http_res, http_res_text
+            )
+            raise errors.PayloadTooLargeResponseError(
+                response_data, http_res, http_res_text
+            )
         if utils.match_response(http_res, "429", "application/json"):
             http_res_text = utils.stream_to_text(http_res)
             response_data = unmarshal_json_response(
@@ -506,8 +514,8 @@ class Images(BaseSDK):
         output_format: Optional[components.ImageGenerationRequestOutputFormat] = None,
         provider: Optional[
             Union[
-                components.ImageGenerationRequestProvider,
-                components.ImageGenerationRequestProviderTypedDict,
+                components.ImageGenerationProviderPreferences,
+                components.ImageGenerationProviderPreferencesTypedDict,
             ]
         ] = None,
         quality: Optional[components.ImageGenerationRequestQuality] = None,
@@ -539,11 +547,11 @@ class Images(BaseSDK):
         :param n: Number of images to generate (1-10). Providers that only support single-image generation reject n > 1.
         :param output_compression: Compression level (0-100) for webp/jpeg output. Ignored for png and by providers without a compression knob.
         :param output_format: Encoding of the returned image bytes. Most models produce raster formats (png, jpeg, webp). SVG is supported by vectorization models (e.g. Quiver) — the SVG markup is UTF-8 base64-encoded in `b64_json`.
-        :param provider: Provider-specific passthrough configuration
+        :param provider: Provider routing preferences and provider-specific passthrough configuration.
         :param quality: Rendering quality. Providers without a quality knob ignore this.
         :param resolution: Normalized resolution tier of the generated image. Concrete pixel dimensions are derived per-provider.
         :param seed: If specified, the generation will sample deterministically, such that repeated requests with the same seed and parameters should return the same result. Determinism is not guaranteed for all providers.
-        :param size: Optional. A convenience shorthand for output dimensions — pass a tier (\"2K\", \"4K\") or explicit pixels (\"2048x2048\") and we normalize it to the right dimensions for the chosen provider. Interchangeable with resolution + aspect_ratio; use those directly for enumerated, per-model discoverable values. Conflicting size + resolution/aspect_ratio is rejected.
+        :param size: Optional. A convenience shorthand for output dimensions — pass a tier (\"2K\", \"4K\") or explicit pixels (\"2048x2048\") and we normalize it to the right dimensions for the chosen provider. A tier size is equivalent to setting `resolution` and combines with `aspect_ratio`. An explicit pixel size is authoritative: a mismatched `resolution` or `aspect_ratio` alongside it is rejected with a 400.
         :param stream: If true, partial images are streamed as SSE events as they become available. Only supported by providers with native streaming (currently OpenAI). Non-streaming providers ignore this flag and return a buffered response.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -573,8 +581,8 @@ class Images(BaseSDK):
         output_format: Optional[components.ImageGenerationRequestOutputFormat] = None,
         provider: Optional[
             Union[
-                components.ImageGenerationRequestProvider,
-                components.ImageGenerationRequestProviderTypedDict,
+                components.ImageGenerationProviderPreferences,
+                components.ImageGenerationProviderPreferencesTypedDict,
             ]
         ] = None,
         quality: Optional[components.ImageGenerationRequestQuality] = None,
@@ -606,11 +614,11 @@ class Images(BaseSDK):
         :param n: Number of images to generate (1-10). Providers that only support single-image generation reject n > 1.
         :param output_compression: Compression level (0-100) for webp/jpeg output. Ignored for png and by providers without a compression knob.
         :param output_format: Encoding of the returned image bytes. Most models produce raster formats (png, jpeg, webp). SVG is supported by vectorization models (e.g. Quiver) — the SVG markup is UTF-8 base64-encoded in `b64_json`.
-        :param provider: Provider-specific passthrough configuration
+        :param provider: Provider routing preferences and provider-specific passthrough configuration.
         :param quality: Rendering quality. Providers without a quality knob ignore this.
         :param resolution: Normalized resolution tier of the generated image. Concrete pixel dimensions are derived per-provider.
         :param seed: If specified, the generation will sample deterministically, such that repeated requests with the same seed and parameters should return the same result. Determinism is not guaranteed for all providers.
-        :param size: Optional. A convenience shorthand for output dimensions — pass a tier (\"2K\", \"4K\") or explicit pixels (\"2048x2048\") and we normalize it to the right dimensions for the chosen provider. Interchangeable with resolution + aspect_ratio; use those directly for enumerated, per-model discoverable values. Conflicting size + resolution/aspect_ratio is rejected.
+        :param size: Optional. A convenience shorthand for output dimensions — pass a tier (\"2K\", \"4K\") or explicit pixels (\"2048x2048\") and we normalize it to the right dimensions for the chosen provider. A tier size is equivalent to setting `resolution` and combines with `aspect_ratio`. An explicit pixel size is authoritative: a mismatched `resolution` or `aspect_ratio` alongside it is rejected with a 400.
         :param stream: If true, partial images are streamed as SSE events as they become available. Only supported by providers with native streaming (currently OpenAI). Non-streaming providers ignore this flag and return a buffered response.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -640,8 +648,8 @@ class Images(BaseSDK):
         output_format: Optional[components.ImageGenerationRequestOutputFormat] = None,
         provider: Optional[
             Union[
-                components.ImageGenerationRequestProvider,
-                components.ImageGenerationRequestProviderTypedDict,
+                components.ImageGenerationProviderPreferences,
+                components.ImageGenerationProviderPreferencesTypedDict,
             ]
         ] = None,
         quality: Optional[components.ImageGenerationRequestQuality] = None,
@@ -676,11 +684,11 @@ class Images(BaseSDK):
         :param n: Number of images to generate (1-10). Providers that only support single-image generation reject n > 1.
         :param output_compression: Compression level (0-100) for webp/jpeg output. Ignored for png and by providers without a compression knob.
         :param output_format: Encoding of the returned image bytes. Most models produce raster formats (png, jpeg, webp). SVG is supported by vectorization models (e.g. Quiver) — the SVG markup is UTF-8 base64-encoded in `b64_json`.
-        :param provider: Provider-specific passthrough configuration
+        :param provider: Provider routing preferences and provider-specific passthrough configuration.
         :param quality: Rendering quality. Providers without a quality knob ignore this.
         :param resolution: Normalized resolution tier of the generated image. Concrete pixel dimensions are derived per-provider.
         :param seed: If specified, the generation will sample deterministically, such that repeated requests with the same seed and parameters should return the same result. Determinism is not guaranteed for all providers.
-        :param size: Optional. A convenience shorthand for output dimensions — pass a tier (\"2K\", \"4K\") or explicit pixels (\"2048x2048\") and we normalize it to the right dimensions for the chosen provider. Interchangeable with resolution + aspect_ratio; use those directly for enumerated, per-model discoverable values. Conflicting size + resolution/aspect_ratio is rejected.
+        :param size: Optional. A convenience shorthand for output dimensions — pass a tier (\"2K\", \"4K\") or explicit pixels (\"2048x2048\") and we normalize it to the right dimensions for the chosen provider. A tier size is equivalent to setting `resolution` and combines with `aspect_ratio`. An explicit pixel size is authoritative: a mismatched `resolution` or `aspect_ratio` alongside it is rejected with a 400.
         :param stream: If true, partial images are streamed as SSE events as they become available. Only supported by providers with native streaming (currently OpenAI). Non-streaming providers ignore this flag and return a buffered response.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -709,8 +717,8 @@ class Images(BaseSDK):
         output_format: Optional[components.ImageGenerationRequestOutputFormat] = None,
         provider: Optional[
             Union[
-                components.ImageGenerationRequestProvider,
-                components.ImageGenerationRequestProviderTypedDict,
+                components.ImageGenerationProviderPreferences,
+                components.ImageGenerationProviderPreferencesTypedDict,
             ]
         ] = None,
         quality: Optional[components.ImageGenerationRequestQuality] = None,
@@ -745,11 +753,11 @@ class Images(BaseSDK):
         :param n: Number of images to generate (1-10). Providers that only support single-image generation reject n > 1.
         :param output_compression: Compression level (0-100) for webp/jpeg output. Ignored for png and by providers without a compression knob.
         :param output_format: Encoding of the returned image bytes. Most models produce raster formats (png, jpeg, webp). SVG is supported by vectorization models (e.g. Quiver) — the SVG markup is UTF-8 base64-encoded in `b64_json`.
-        :param provider: Provider-specific passthrough configuration
+        :param provider: Provider routing preferences and provider-specific passthrough configuration.
         :param quality: Rendering quality. Providers without a quality knob ignore this.
         :param resolution: Normalized resolution tier of the generated image. Concrete pixel dimensions are derived per-provider.
         :param seed: If specified, the generation will sample deterministically, such that repeated requests with the same seed and parameters should return the same result. Determinism is not guaranteed for all providers.
-        :param size: Optional. A convenience shorthand for output dimensions — pass a tier (\"2K\", \"4K\") or explicit pixels (\"2048x2048\") and we normalize it to the right dimensions for the chosen provider. Interchangeable with resolution + aspect_ratio; use those directly for enumerated, per-model discoverable values. Conflicting size + resolution/aspect_ratio is rejected.
+        :param size: Optional. A convenience shorthand for output dimensions — pass a tier (\"2K\", \"4K\") or explicit pixels (\"2048x2048\") and we normalize it to the right dimensions for the chosen provider. A tier size is equivalent to setting `resolution` and combines with `aspect_ratio`. An explicit pixel size is authoritative: a mismatched `resolution` or `aspect_ratio` alongside it is rejected with a 400.
         :param stream: If true, partial images are streamed as SSE events as they become available. Only supported by providers with native streaming (currently OpenAI). Non-streaming providers ignore this flag and return a buffered response.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -782,7 +790,7 @@ class Images(BaseSDK):
                 output_format=output_format,
                 prompt=prompt,
                 provider=utils.get_pydantic_model(
-                    provider, Optional[components.ImageGenerationRequestProvider]
+                    provider, Optional[components.ImageGenerationProviderPreferences]
                 ),
                 quality=quality,
                 resolution=resolution,
@@ -902,6 +910,14 @@ class Images(BaseSDK):
                 errors.NotFoundResponseErrorData, http_res, http_res_text
             )
             raise errors.NotFoundResponseError(response_data, http_res, http_res_text)
+        if utils.match_response(http_res, "413", "application/json"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            response_data = unmarshal_json_response(
+                errors.PayloadTooLargeResponseErrorData, http_res, http_res_text
+            )
+            raise errors.PayloadTooLargeResponseError(
+                response_data, http_res, http_res_text
+            )
         if utils.match_response(http_res, "429", "application/json"):
             http_res_text = await utils.stream_to_text_async(http_res)
             response_data = unmarshal_json_response(

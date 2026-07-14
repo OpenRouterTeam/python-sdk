@@ -17,13 +17,13 @@ from .anthropiccitationpagelocationparam import (
     AnthropicCitationPageLocationParam,
     AnthropicCitationPageLocationParamTypedDict,
 )
-from .anthropiccitationsearchresultlocation import (
-    AnthropicCitationSearchResultLocation,
-    AnthropicCitationSearchResultLocationTypedDict,
+from .anthropiccitationsearchresultlocationparam import (
+    AnthropicCitationSearchResultLocationParam,
+    AnthropicCitationSearchResultLocationParamTypedDict,
 )
-from .anthropiccitationwebsearchresultlocation import (
-    AnthropicCitationWebSearchResultLocation,
-    AnthropicCitationWebSearchResultLocationTypedDict,
+from .anthropiccitationwebsearchresultlocationparam import (
+    AnthropicCitationWebSearchResultLocationParam,
+    AnthropicCitationWebSearchResultLocationParamTypedDict,
 )
 from openrouter.types import (
     BaseModel,
@@ -41,11 +41,11 @@ from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 CitationTypedDict = TypeAliasType(
     "CitationTypedDict",
     Union[
-        AnthropicCitationWebSearchResultLocationTypedDict,
+        AnthropicCitationWebSearchResultLocationParamTypedDict,
         AnthropicCitationCharLocationParamTypedDict,
         AnthropicCitationPageLocationParamTypedDict,
         AnthropicCitationContentBlockLocationParamTypedDict,
-        AnthropicCitationSearchResultLocationTypedDict,
+        AnthropicCitationSearchResultLocationParamTypedDict,
     ],
 )
 
@@ -57,9 +57,12 @@ Citation = Annotated[
             AnthropicCitationContentBlockLocationParam, Tag("content_block_location")
         ],
         Annotated[AnthropicCitationPageLocationParam, Tag("page_location")],
-        Annotated[AnthropicCitationSearchResultLocation, Tag("search_result_location")],
         Annotated[
-            AnthropicCitationWebSearchResultLocation, Tag("web_search_result_location")
+            AnthropicCitationSearchResultLocationParam, Tag("search_result_location")
+        ],
+        Annotated[
+            AnthropicCitationWebSearchResultLocationParam,
+            Tag("web_search_result_location"),
         ],
     ],
     Discriminator(lambda m: get_discriminator(m, "type", "type")),
@@ -73,7 +76,7 @@ class AnthropicTextBlockParamTypedDict(TypedDict):
     text: str
     type: AnthropicTextBlockParamType
     cache_control: NotRequired[AnthropicCacheControlDirectiveTypedDict]
-    r"""Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. Currently supported for Anthropic Claude models."""
+    r"""Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. When set on an individual content block, it marks an explicit cache breakpoint; block-level markers also work on OpenAI models that support explicit prompt caching — OpenRouter converts them to the provider's native format."""
     citations: NotRequired[Nullable[List[CitationTypedDict]]]
 
 
@@ -83,7 +86,7 @@ class AnthropicTextBlockParam(BaseModel):
     type: AnthropicTextBlockParamType
 
     cache_control: Optional[AnthropicCacheControlDirective] = None
-    r"""Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. Currently supported for Anthropic Claude models."""
+    r"""Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. When set on an individual content block, it marks an explicit cache breakpoint; block-level markers also work on OpenAI models that support explicit prompt caching — OpenRouter converts them to the provider's native format."""
 
     citations: OptionalNullable[List[Citation]] = UNSET
 

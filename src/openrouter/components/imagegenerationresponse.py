@@ -12,7 +12,7 @@ class ImageGenerationResponseDataTypedDict(TypedDict):
     b64_json: str
     r"""Base64-encoded image bytes"""
     media_type: NotRequired[str]
-    r"""Media type (MIME type) of the image. Omitted when the output is a standard raster format (PNG). Present for non-raster outputs such as SVG (`image/svg+xml`)."""
+    r"""Media type (MIME type) of the image, e.g. `image/png`, `image/jpeg`, `image/webp`, `image/svg+xml`. May be omitted if the format could not be determined."""
 
 
 class ImageGenerationResponseData(BaseModel):
@@ -20,7 +20,7 @@ class ImageGenerationResponseData(BaseModel):
     r"""Base64-encoded image bytes"""
 
     media_type: Optional[str] = None
-    r"""Media type (MIME type) of the image. Omitted when the output is a standard raster format (PNG). Present for non-raster outputs such as SVG (`image/svg+xml`)."""
+    r"""Media type (MIME type) of the image, e.g. `image/png`, `image/jpeg`, `image/webp`, `image/svg+xml`. May be omitted if the format could not be determined."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

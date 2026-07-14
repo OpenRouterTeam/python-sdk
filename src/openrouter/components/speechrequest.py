@@ -38,7 +38,7 @@ class SpeechRequestProvider(BaseModel):
         return m
 
 
-ResponseFormatEnum = Union[
+SpeechRequestResponseFormat = Union[
     Literal[
         "mp3",
         "pcm",
@@ -59,7 +59,7 @@ class SpeechRequestTypedDict(TypedDict):
     r"""Voice identifier (provider-specific)."""
     provider: NotRequired[SpeechRequestProviderTypedDict]
     r"""Provider-specific passthrough configuration"""
-    response_format: NotRequired[ResponseFormatEnum]
+    response_format: NotRequired[SpeechRequestResponseFormat]
     r"""Audio output format"""
     speed: NotRequired[float]
     r"""Playback speed multiplier. Only used by models that support it (e.g. OpenAI TTS). Ignored by other providers."""
@@ -80,7 +80,7 @@ class SpeechRequest(BaseModel):
     provider: Optional[SpeechRequestProvider] = None
     r"""Provider-specific passthrough configuration"""
 
-    response_format: Optional[ResponseFormatEnum] = "pcm"
+    response_format: Optional[SpeechRequestResponseFormat] = "pcm"
     r"""Audio output format"""
 
     speed: Optional[float] = None

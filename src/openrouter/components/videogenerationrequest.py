@@ -61,6 +61,7 @@ class VideoGenerationRequestOptionsTypedDict(TypedDict):
     crusoe: NotRequired[Dict[str, Nullable[Any]]]
     darkbloom: NotRequired[Dict[str, Nullable[Any]]]
     decart: NotRequired[Dict[str, Nullable[Any]]]
+    deepgram: NotRequired[Dict[str, Nullable[Any]]]
     deepinfra: NotRequired[Dict[str, Nullable[Any]]]
     deepseek: NotRequired[Dict[str, Nullable[Any]]]
     dekallm: NotRequired[Dict[str, Nullable[Any]]]
@@ -127,7 +128,8 @@ class VideoGenerationRequestOptionsTypedDict(TypedDict):
     reka: NotRequired[Dict[str, Nullable[Any]]]
     relace: NotRequired[Dict[str, Nullable[Any]]]
     replicate: NotRequired[Dict[str, Nullable[Any]]]
-    sakana_ai: NotRequired[Dict[str, Nullable[Any]]]
+    sail_research: NotRequired[Dict[str, Nullable[Any]]]
+    sakana: NotRequired[Dict[str, Nullable[Any]]]
     sambanova: NotRequired[Dict[str, Nullable[Any]]]
     sambanova_cloaked: NotRequired[Dict[str, Nullable[Any]]]
     seed: NotRequired[Dict[str, Nullable[Any]]]
@@ -230,6 +232,8 @@ class VideoGenerationRequestOptions(BaseModel):
     darkbloom: Optional[Dict[str, Nullable[Any]]] = None
 
     decart: Optional[Dict[str, Nullable[Any]]] = None
+
+    deepgram: Optional[Dict[str, Nullable[Any]]] = None
 
     deepinfra: Optional[Dict[str, Nullable[Any]]] = None
 
@@ -387,9 +391,11 @@ class VideoGenerationRequestOptions(BaseModel):
 
     replicate: Optional[Dict[str, Nullable[Any]]] = None
 
-    sakana_ai: Annotated[
-        Optional[Dict[str, Nullable[Any]]], pydantic.Field(alias="sakana-ai")
+    sail_research: Annotated[
+        Optional[Dict[str, Nullable[Any]]], pydantic.Field(alias="sail-research")
     ] = None
+
+    sakana: Optional[Dict[str, Nullable[Any]]] = None
 
     sambanova: Optional[Dict[str, Nullable[Any]]] = None
 
@@ -478,6 +484,7 @@ class VideoGenerationRequestOptions(BaseModel):
                 "crusoe",
                 "darkbloom",
                 "decart",
+                "deepgram",
                 "deepinfra",
                 "deepseek",
                 "dekallm",
@@ -544,7 +551,8 @@ class VideoGenerationRequestOptions(BaseModel):
                 "reka",
                 "relace",
                 "replicate",
-                "sakana-ai",
+                "sail-research",
+                "sakana",
                 "sambanova",
                 "sambanova-cloaked",
                 "seed",

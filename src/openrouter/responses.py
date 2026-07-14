@@ -74,6 +74,9 @@ class Responses(BaseSDK):
             ]
         ] = UNSET,
         prompt_cache_key: OptionalNullable[str] = UNSET,
+        prompt_cache_options: OptionalNullable[
+            Union[components.PromptCacheOptions, components.PromptCacheOptionsTypedDict]
+        ] = UNSET,
         provider: OptionalNullable[
             Union[
                 components.ProviderPreferences, components.ProviderPreferencesTypedDict
@@ -134,7 +137,7 @@ class Responses(BaseSDK):
 
         :param x_open_router_metadata: Opt-in to surface routing metadata on the response under `openrouter_metadata`. Defaults to `disabled`. The legacy header `X-OpenRouter-Experimental-Metadata` is also accepted for backward compatibility.
         :param background:
-        :param cache_control: Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. Currently supported for Anthropic Claude models.
+        :param cache_control: Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. When set on an individual content block, it marks an explicit cache breakpoint; block-level markers also work on OpenAI models that support explicit prompt caching — OpenRouter converts them to the provider's native format.
         :param debug: Debug options for inspecting request transformations (streaming only)
         :param frequency_penalty:
         :param image_config: Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/guides/overview/multimodal/image-generation for more details.
@@ -153,6 +156,7 @@ class Responses(BaseSDK):
         :param previous_response_id:
         :param prompt:
         :param prompt_cache_key:
+        :param prompt_cache_options: Request-level prompt-cache controls. `mode: \"explicit\"` disables OpenAI-managed breakpoints so only blocks marked with `prompt_cache_breakpoint` are cached. Only supported by OpenAI GPT-5.6 and newer.
         :param provider: When multiple model providers are available, optionally indicate your routing preference.
         :param reasoning: Configuration for reasoning mode in the response
         :param safety_identifier:
@@ -228,6 +232,9 @@ class Responses(BaseSDK):
             ]
         ] = UNSET,
         prompt_cache_key: OptionalNullable[str] = UNSET,
+        prompt_cache_options: OptionalNullable[
+            Union[components.PromptCacheOptions, components.PromptCacheOptionsTypedDict]
+        ] = UNSET,
         provider: OptionalNullable[
             Union[
                 components.ProviderPreferences, components.ProviderPreferencesTypedDict
@@ -288,7 +295,7 @@ class Responses(BaseSDK):
 
         :param x_open_router_metadata: Opt-in to surface routing metadata on the response under `openrouter_metadata`. Defaults to `disabled`. The legacy header `X-OpenRouter-Experimental-Metadata` is also accepted for backward compatibility.
         :param background:
-        :param cache_control: Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. Currently supported for Anthropic Claude models.
+        :param cache_control: Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. When set on an individual content block, it marks an explicit cache breakpoint; block-level markers also work on OpenAI models that support explicit prompt caching — OpenRouter converts them to the provider's native format.
         :param debug: Debug options for inspecting request transformations (streaming only)
         :param frequency_penalty:
         :param image_config: Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/guides/overview/multimodal/image-generation for more details.
@@ -307,6 +314,7 @@ class Responses(BaseSDK):
         :param previous_response_id:
         :param prompt:
         :param prompt_cache_key:
+        :param prompt_cache_options: Request-level prompt-cache controls. `mode: \"explicit\"` disables OpenAI-managed breakpoints so only blocks marked with `prompt_cache_breakpoint` are cached. Only supported by OpenAI GPT-5.6 and newer.
         :param provider: When multiple model providers are available, optionally indicate your routing preference.
         :param reasoning: Configuration for reasoning mode in the response
         :param safety_identifier:
@@ -382,6 +390,9 @@ class Responses(BaseSDK):
             ]
         ] = UNSET,
         prompt_cache_key: OptionalNullable[str] = UNSET,
+        prompt_cache_options: OptionalNullable[
+            Union[components.PromptCacheOptions, components.PromptCacheOptionsTypedDict]
+        ] = UNSET,
         provider: OptionalNullable[
             Union[
                 components.ProviderPreferences, components.ProviderPreferencesTypedDict
@@ -445,7 +456,7 @@ class Responses(BaseSDK):
 
         :param x_open_router_metadata: Opt-in to surface routing metadata on the response under `openrouter_metadata`. Defaults to `disabled`. The legacy header `X-OpenRouter-Experimental-Metadata` is also accepted for backward compatibility.
         :param background:
-        :param cache_control: Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. Currently supported for Anthropic Claude models.
+        :param cache_control: Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. When set on an individual content block, it marks an explicit cache breakpoint; block-level markers also work on OpenAI models that support explicit prompt caching — OpenRouter converts them to the provider's native format.
         :param debug: Debug options for inspecting request transformations (streaming only)
         :param frequency_penalty:
         :param image_config: Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/guides/overview/multimodal/image-generation for more details.
@@ -464,6 +475,7 @@ class Responses(BaseSDK):
         :param previous_response_id:
         :param prompt:
         :param prompt_cache_key:
+        :param prompt_cache_options: Request-level prompt-cache controls. `mode: \"explicit\"` disables OpenAI-managed breakpoints so only blocks marked with `prompt_cache_breakpoint` are cached. Only supported by OpenAI GPT-5.6 and newer.
         :param provider: When multiple model providers are available, optionally indicate your routing preference.
         :param reasoning: Configuration for reasoning mode in the response
         :param safety_identifier:
@@ -538,6 +550,9 @@ class Responses(BaseSDK):
             ]
         ] = UNSET,
         prompt_cache_key: OptionalNullable[str] = UNSET,
+        prompt_cache_options: OptionalNullable[
+            Union[components.PromptCacheOptions, components.PromptCacheOptionsTypedDict]
+        ] = UNSET,
         provider: OptionalNullable[
             Union[
                 components.ProviderPreferences, components.ProviderPreferencesTypedDict
@@ -601,7 +616,7 @@ class Responses(BaseSDK):
 
         :param x_open_router_metadata: Opt-in to surface routing metadata on the response under `openrouter_metadata`. Defaults to `disabled`. The legacy header `X-OpenRouter-Experimental-Metadata` is also accepted for backward compatibility.
         :param background:
-        :param cache_control: Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. Currently supported for Anthropic Claude models.
+        :param cache_control: Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. When set on an individual content block, it marks an explicit cache breakpoint; block-level markers also work on OpenAI models that support explicit prompt caching — OpenRouter converts them to the provider's native format.
         :param debug: Debug options for inspecting request transformations (streaming only)
         :param frequency_penalty:
         :param image_config: Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/guides/overview/multimodal/image-generation for more details.
@@ -620,6 +635,7 @@ class Responses(BaseSDK):
         :param previous_response_id:
         :param prompt:
         :param prompt_cache_key:
+        :param prompt_cache_options: Request-level prompt-cache controls. `mode: \"explicit\"` disables OpenAI-managed breakpoints so only blocks marked with `prompt_cache_breakpoint` are cached. Only supported by OpenAI GPT-5.6 and newer.
         :param provider: When multiple model providers are available, optionally indicate your routing preference.
         :param reasoning: Configuration for reasoning mode in the response
         :param safety_identifier:
@@ -692,6 +708,10 @@ class Responses(BaseSDK):
                     prompt, OptionalNullable[components.StoredPromptTemplate]
                 ),
                 prompt_cache_key=prompt_cache_key,
+                prompt_cache_options=utils.get_pydantic_model(
+                    prompt_cache_options,
+                    OptionalNullable[components.PromptCacheOptions],
+                ),
                 provider=utils.get_pydantic_model(
                     provider, OptionalNullable[components.ProviderPreferences]
                 ),
@@ -973,6 +993,9 @@ class Responses(BaseSDK):
             ]
         ] = UNSET,
         prompt_cache_key: OptionalNullable[str] = UNSET,
+        prompt_cache_options: OptionalNullable[
+            Union[components.PromptCacheOptions, components.PromptCacheOptionsTypedDict]
+        ] = UNSET,
         provider: OptionalNullable[
             Union[
                 components.ProviderPreferences, components.ProviderPreferencesTypedDict
@@ -1033,7 +1056,7 @@ class Responses(BaseSDK):
 
         :param x_open_router_metadata: Opt-in to surface routing metadata on the response under `openrouter_metadata`. Defaults to `disabled`. The legacy header `X-OpenRouter-Experimental-Metadata` is also accepted for backward compatibility.
         :param background:
-        :param cache_control: Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. Currently supported for Anthropic Claude models.
+        :param cache_control: Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. When set on an individual content block, it marks an explicit cache breakpoint; block-level markers also work on OpenAI models that support explicit prompt caching — OpenRouter converts them to the provider's native format.
         :param debug: Debug options for inspecting request transformations (streaming only)
         :param frequency_penalty:
         :param image_config: Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/guides/overview/multimodal/image-generation for more details.
@@ -1052,6 +1075,7 @@ class Responses(BaseSDK):
         :param previous_response_id:
         :param prompt:
         :param prompt_cache_key:
+        :param prompt_cache_options: Request-level prompt-cache controls. `mode: \"explicit\"` disables OpenAI-managed breakpoints so only blocks marked with `prompt_cache_breakpoint` are cached. Only supported by OpenAI GPT-5.6 and newer.
         :param provider: When multiple model providers are available, optionally indicate your routing preference.
         :param reasoning: Configuration for reasoning mode in the response
         :param safety_identifier:
@@ -1127,6 +1151,9 @@ class Responses(BaseSDK):
             ]
         ] = UNSET,
         prompt_cache_key: OptionalNullable[str] = UNSET,
+        prompt_cache_options: OptionalNullable[
+            Union[components.PromptCacheOptions, components.PromptCacheOptionsTypedDict]
+        ] = UNSET,
         provider: OptionalNullable[
             Union[
                 components.ProviderPreferences, components.ProviderPreferencesTypedDict
@@ -1187,7 +1214,7 @@ class Responses(BaseSDK):
 
         :param x_open_router_metadata: Opt-in to surface routing metadata on the response under `openrouter_metadata`. Defaults to `disabled`. The legacy header `X-OpenRouter-Experimental-Metadata` is also accepted for backward compatibility.
         :param background:
-        :param cache_control: Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. Currently supported for Anthropic Claude models.
+        :param cache_control: Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. When set on an individual content block, it marks an explicit cache breakpoint; block-level markers also work on OpenAI models that support explicit prompt caching — OpenRouter converts them to the provider's native format.
         :param debug: Debug options for inspecting request transformations (streaming only)
         :param frequency_penalty:
         :param image_config: Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/guides/overview/multimodal/image-generation for more details.
@@ -1206,6 +1233,7 @@ class Responses(BaseSDK):
         :param previous_response_id:
         :param prompt:
         :param prompt_cache_key:
+        :param prompt_cache_options: Request-level prompt-cache controls. `mode: \"explicit\"` disables OpenAI-managed breakpoints so only blocks marked with `prompt_cache_breakpoint` are cached. Only supported by OpenAI GPT-5.6 and newer.
         :param provider: When multiple model providers are available, optionally indicate your routing preference.
         :param reasoning: Configuration for reasoning mode in the response
         :param safety_identifier:
@@ -1281,6 +1309,9 @@ class Responses(BaseSDK):
             ]
         ] = UNSET,
         prompt_cache_key: OptionalNullable[str] = UNSET,
+        prompt_cache_options: OptionalNullable[
+            Union[components.PromptCacheOptions, components.PromptCacheOptionsTypedDict]
+        ] = UNSET,
         provider: OptionalNullable[
             Union[
                 components.ProviderPreferences, components.ProviderPreferencesTypedDict
@@ -1344,7 +1375,7 @@ class Responses(BaseSDK):
 
         :param x_open_router_metadata: Opt-in to surface routing metadata on the response under `openrouter_metadata`. Defaults to `disabled`. The legacy header `X-OpenRouter-Experimental-Metadata` is also accepted for backward compatibility.
         :param background:
-        :param cache_control: Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. Currently supported for Anthropic Claude models.
+        :param cache_control: Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. When set on an individual content block, it marks an explicit cache breakpoint; block-level markers also work on OpenAI models that support explicit prompt caching — OpenRouter converts them to the provider's native format.
         :param debug: Debug options for inspecting request transformations (streaming only)
         :param frequency_penalty:
         :param image_config: Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/guides/overview/multimodal/image-generation for more details.
@@ -1363,6 +1394,7 @@ class Responses(BaseSDK):
         :param previous_response_id:
         :param prompt:
         :param prompt_cache_key:
+        :param prompt_cache_options: Request-level prompt-cache controls. `mode: \"explicit\"` disables OpenAI-managed breakpoints so only blocks marked with `prompt_cache_breakpoint` are cached. Only supported by OpenAI GPT-5.6 and newer.
         :param provider: When multiple model providers are available, optionally indicate your routing preference.
         :param reasoning: Configuration for reasoning mode in the response
         :param safety_identifier:
@@ -1437,6 +1469,9 @@ class Responses(BaseSDK):
             ]
         ] = UNSET,
         prompt_cache_key: OptionalNullable[str] = UNSET,
+        prompt_cache_options: OptionalNullable[
+            Union[components.PromptCacheOptions, components.PromptCacheOptionsTypedDict]
+        ] = UNSET,
         provider: OptionalNullable[
             Union[
                 components.ProviderPreferences, components.ProviderPreferencesTypedDict
@@ -1500,7 +1535,7 @@ class Responses(BaseSDK):
 
         :param x_open_router_metadata: Opt-in to surface routing metadata on the response under `openrouter_metadata`. Defaults to `disabled`. The legacy header `X-OpenRouter-Experimental-Metadata` is also accepted for backward compatibility.
         :param background:
-        :param cache_control: Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. Currently supported for Anthropic Claude models.
+        :param cache_control: Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. When set on an individual content block, it marks an explicit cache breakpoint; block-level markers also work on OpenAI models that support explicit prompt caching — OpenRouter converts them to the provider's native format.
         :param debug: Debug options for inspecting request transformations (streaming only)
         :param frequency_penalty:
         :param image_config: Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/guides/overview/multimodal/image-generation for more details.
@@ -1519,6 +1554,7 @@ class Responses(BaseSDK):
         :param previous_response_id:
         :param prompt:
         :param prompt_cache_key:
+        :param prompt_cache_options: Request-level prompt-cache controls. `mode: \"explicit\"` disables OpenAI-managed breakpoints so only blocks marked with `prompt_cache_breakpoint` are cached. Only supported by OpenAI GPT-5.6 and newer.
         :param provider: When multiple model providers are available, optionally indicate your routing preference.
         :param reasoning: Configuration for reasoning mode in the response
         :param safety_identifier:
@@ -1591,6 +1627,10 @@ class Responses(BaseSDK):
                     prompt, OptionalNullable[components.StoredPromptTemplate]
                 ),
                 prompt_cache_key=prompt_cache_key,
+                prompt_cache_options=utils.get_pydantic_model(
+                    prompt_cache_options,
+                    OptionalNullable[components.PromptCacheOptions],
+                ),
                 provider=utils.get_pydantic_model(
                     provider, OptionalNullable[components.ProviderPreferences]
                 ),

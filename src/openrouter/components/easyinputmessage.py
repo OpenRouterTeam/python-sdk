@@ -79,9 +79,9 @@ class EasyInputMessageContentInputImage(BaseModel):
 EasyInputMessageContentUnion1TypedDict = TypeAliasType(
     "EasyInputMessageContentUnion1TypedDict",
     Union[
-        InputTextTypedDict,
         InputAudioTypedDict,
         InputVideoTypedDict,
+        InputTextTypedDict,
         EasyInputMessageContentInputImageTypedDict,
         InputFileTypedDict,
     ],

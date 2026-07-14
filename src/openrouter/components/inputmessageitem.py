@@ -79,9 +79,9 @@ class InputMessageItemContentInputImage(BaseModel):
 InputMessageItemContentUnionTypedDict = TypeAliasType(
     "InputMessageItemContentUnionTypedDict",
     Union[
-        InputTextTypedDict,
         InputAudioTypedDict,
         InputVideoTypedDict,
+        InputTextTypedDict,
         InputMessageItemContentInputImageTypedDict,
         InputFileTypedDict,
     ],

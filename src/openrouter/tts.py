@@ -28,7 +28,7 @@ class Tts(BaseSDK):
                 components.SpeechRequestProviderTypedDict,
             ]
         ] = None,
-        response_format: Optional[components.ResponseFormatEnum] = "pcm",
+        response_format: Optional[components.SpeechRequestResponseFormat] = "pcm",
         speed: Optional[float] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -246,7 +246,7 @@ class Tts(BaseSDK):
                 components.SpeechRequestProviderTypedDict,
             ]
         ] = None,
-        response_format: Optional[components.ResponseFormatEnum] = "pcm",
+        response_format: Optional[components.SpeechRequestResponseFormat] = "pcm",
         speed: Optional[float] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,

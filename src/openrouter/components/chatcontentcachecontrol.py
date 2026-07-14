@@ -12,14 +12,14 @@ ChatContentCacheControlType = Literal["ephemeral",]
 
 
 class ChatContentCacheControlTypedDict(TypedDict):
-    r"""Cache control for the content part"""
+    r"""Anthropic-style cache breakpoint for the content part. Interchangeable with the OpenAI-style `prompt_cache_breakpoint` marker: OpenRouter converts between the two based on the provider serving the request."""
 
     type: ChatContentCacheControlType
     ttl: NotRequired[AnthropicCacheControlTTL]
 
 
 class ChatContentCacheControl(BaseModel):
-    r"""Cache control for the content part"""
+    r"""Anthropic-style cache breakpoint for the content part. Interchangeable with the OpenAI-style `prompt_cache_breakpoint` marker: OpenRouter converts between the two based on the provider serving the request."""
 
     type: ChatContentCacheControlType
 

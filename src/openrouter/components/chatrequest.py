@@ -11,6 +11,10 @@ from .chatformatgrammarconfig import (
     ChatFormatGrammarConfig,
     ChatFormatGrammarConfigTypedDict,
 )
+from .chatformatjsonobjectconfig import (
+    ChatFormatJSONObjectConfig,
+    ChatFormatJSONObjectConfigTypedDict,
+)
 from .chatformatjsonschemaconfig import (
     ChatFormatJSONSchemaConfig,
     ChatFormatJSONSchemaConfigTypedDict,
@@ -30,14 +34,11 @@ from .contextcompressionplugin import (
     ContextCompressionPluginTypedDict,
 )
 from .fileparserplugin import FileParserPlugin, FileParserPluginTypedDict
-from .formatjsonobjectconfig import (
-    FormatJSONObjectConfig,
-    FormatJSONObjectConfigTypedDict,
-)
 from .fusionplugin import FusionPlugin, FusionPluginTypedDict
 from .imageconfig import ImageConfig, ImageConfigTypedDict
 from .moderationplugin import ModerationPlugin, ModerationPluginTypedDict
 from .paretorouterplugin import ParetoRouterPlugin, ParetoRouterPluginTypedDict
+from .promptcacheoptions import PromptCacheOptions, PromptCacheOptionsTypedDict
 from .providerpreferences import ProviderPreferences, ProviderPreferencesTypedDict
 from .responsehealingplugin import ResponseHealingPlugin, ResponseHealingPluginTypedDict
 from .stopservertoolswhencondition import (
@@ -78,8 +79,8 @@ ChatRequestPluginTypedDict = TypeAliasType(
         ResponseHealingPluginTypedDict,
         FileParserPluginTypedDict,
         ContextCompressionPluginTypedDict,
-        ParetoRouterPluginTypedDict,
         AutoRouterPluginTypedDict,
+        ParetoRouterPluginTypedDict,
         WebFetchPluginTypedDict,
         FusionPluginTypedDict,
         WebSearchPluginTypedDict,
@@ -179,7 +180,7 @@ ResponseFormatTypedDict = TypeAliasType(
     "ResponseFormatTypedDict",
     Union[
         ChatFormatTextConfigTypedDict,
-        FormatJSONObjectConfigTypedDict,
+        ChatFormatJSONObjectConfigTypedDict,
         ChatFormatPythonConfigTypedDict,
         ChatFormatJSONSchemaConfigTypedDict,
         ChatFormatGrammarConfigTypedDict,
@@ -191,7 +192,7 @@ r"""Response format configuration"""
 ResponseFormat = Annotated[
     Union[
         Annotated[ChatFormatGrammarConfig, Tag("grammar")],
-        Annotated[FormatJSONObjectConfig, Tag("json_object")],
+        Annotated[ChatFormatJSONObjectConfig, Tag("json_object")],
         Annotated[ChatFormatJSONSchemaConfig, Tag("json_schema")],
         Annotated[ChatFormatPythonConfig, Tag("python")],
         Annotated[ChatFormatTextConfig, Tag("text")],
@@ -228,7 +229,7 @@ class ChatRequestTypedDict(TypedDict):
     messages: List[ChatMessagesTypedDict]
     r"""List of messages for the conversation"""
     cache_control: NotRequired[AnthropicCacheControlDirectiveTypedDict]
-    r"""Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. Currently supported for Anthropic Claude models."""
+    r"""Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. When set on an individual content block, it marks an explicit cache breakpoint; block-level markers also work on OpenAI models that support explicit prompt caching — OpenRouter converts them to the provider's native format."""
     debug: NotRequired[ChatDebugOptionsTypedDict]
     r"""Debug options for inspecting request transformations (streaming only)"""
     frequency_penalty: NotRequired[Nullable[float]]
@@ -259,6 +260,9 @@ class ChatRequestTypedDict(TypedDict):
     r"""Plugins you want to enable for this request, including their settings."""
     presence_penalty: NotRequired[Nullable[float]]
     r"""Presence penalty (-2.0 to 2.0)"""
+    prompt_cache_key: NotRequired[Nullable[str]]
+    prompt_cache_options: NotRequired[Nullable[PromptCacheOptionsTypedDict]]
+    r"""Request-level prompt-cache controls. `mode: \"explicit\"` disables OpenAI-managed breakpoints so only blocks marked with `prompt_cache_breakpoint` are cached. Only supported by OpenAI GPT-5.6 and newer."""
     provider: NotRequired[Nullable[ProviderPreferencesTypedDict]]
     r"""When multiple model providers are available, optionally indicate your routing preference."""
     reasoning: NotRequired[ChatRequestReasoningTypedDict]
@@ -310,7 +314,7 @@ class ChatRequest(BaseModel):
     r"""List of messages for the conversation"""
 
     cache_control: Optional[AnthropicCacheControlDirective] = None
-    r"""Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. Currently supported for Anthropic Claude models."""
+    r"""Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. When set on an individual content block, it marks an explicit cache breakpoint; block-level markers also work on OpenAI models that support explicit prompt caching — OpenRouter converts them to the provider's native format."""
 
     debug: Optional[ChatDebugOptions] = None
     r"""Debug options for inspecting request transformations (streaming only)"""
@@ -356,6 +360,11 @@ class ChatRequest(BaseModel):
 
     presence_penalty: OptionalNullable[float] = UNSET
     r"""Presence penalty (-2.0 to 2.0)"""
+
+    prompt_cache_key: OptionalNullable[str] = UNSET
+
+    prompt_cache_options: OptionalNullable[PromptCacheOptions] = UNSET
+    r"""Request-level prompt-cache controls. `mode: \"explicit\"` disables OpenAI-managed breakpoints so only blocks marked with `prompt_cache_breakpoint` are cached. Only supported by OpenAI GPT-5.6 and newer."""
 
     provider: OptionalNullable[ProviderPreferences] = UNSET
     r"""When multiple model providers are available, optionally indicate your routing preference."""
@@ -440,6 +449,8 @@ class ChatRequest(BaseModel):
                 "parallel_tool_calls",
                 "plugins",
                 "presence_penalty",
+                "prompt_cache_key",
+                "prompt_cache_options",
                 "provider",
                 "reasoning",
                 "reasoning_effort",
@@ -473,6 +484,8 @@ class ChatRequest(BaseModel):
                 "min_p",
                 "parallel_tool_calls",
                 "presence_penalty",
+                "prompt_cache_key",
+                "prompt_cache_options",
                 "provider",
                 "reasoning_effort",
                 "repetition_penalty",

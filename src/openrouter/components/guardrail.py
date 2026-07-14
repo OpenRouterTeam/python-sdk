@@ -42,7 +42,7 @@ class GuardrailTypedDict(TypedDict):
     description: NotRequired[Nullable[str]]
     r"""Description of the guardrail"""
     enforce_zdr: NotRequired[Nullable[bool]]
-    r"""Deprecated. Use enforce_zdr_anthropic, enforce_zdr_openai, enforce_zdr_google, and enforce_zdr_other instead. When provided, its value is copied into any of those per-provider fields that are not explicitly specified on the request."""
+    r"""Deprecated. Use enforce_zdr_anthropic, enforce_zdr_openai, enforce_zdr_google, enforce_zdr_xai, and enforce_zdr_other instead. When provided, its value is copied into any of those per-provider fields that are not explicitly specified on the request."""
     enforce_zdr_anthropic: NotRequired[Nullable[bool]]
     r"""Whether to enforce zero data retention for Anthropic models. Falls back to enforce_zdr when not provided."""
     enforce_zdr_google: NotRequired[Nullable[bool]]
@@ -50,7 +50,9 @@ class GuardrailTypedDict(TypedDict):
     enforce_zdr_openai: NotRequired[Nullable[bool]]
     r"""Whether to enforce zero data retention for OpenAI models. Falls back to enforce_zdr when not provided."""
     enforce_zdr_other: NotRequired[Nullable[bool]]
-    r"""Whether to enforce zero data retention for models that are not from Anthropic, OpenAI, or Google. Falls back to enforce_zdr when not provided."""
+    r"""Whether to enforce zero data retention for models that are not from Anthropic, OpenAI, Google, or xAI. Falls back to enforce_zdr when not provided."""
+    enforce_zdr_xai: NotRequired[Nullable[bool]]
+    r"""Whether to enforce zero data retention for xAI models. Falls back to enforce_zdr when not provided."""
     ignored_models: NotRequired[Nullable[List[str]]]
     r"""Array of model canonical_slugs to exclude from routing"""
     ignored_providers: NotRequired[Nullable[List[str]]]
@@ -97,7 +99,7 @@ class Guardrail(BaseModel):
             deprecated="warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
         ),
     ] = UNSET
-    r"""Deprecated. Use enforce_zdr_anthropic, enforce_zdr_openai, enforce_zdr_google, and enforce_zdr_other instead. When provided, its value is copied into any of those per-provider fields that are not explicitly specified on the request."""
+    r"""Deprecated. Use enforce_zdr_anthropic, enforce_zdr_openai, enforce_zdr_google, enforce_zdr_xai, and enforce_zdr_other instead. When provided, its value is copied into any of those per-provider fields that are not explicitly specified on the request."""
 
     enforce_zdr_anthropic: OptionalNullable[bool] = UNSET
     r"""Whether to enforce zero data retention for Anthropic models. Falls back to enforce_zdr when not provided."""
@@ -109,7 +111,10 @@ class Guardrail(BaseModel):
     r"""Whether to enforce zero data retention for OpenAI models. Falls back to enforce_zdr when not provided."""
 
     enforce_zdr_other: OptionalNullable[bool] = UNSET
-    r"""Whether to enforce zero data retention for models that are not from Anthropic, OpenAI, or Google. Falls back to enforce_zdr when not provided."""
+    r"""Whether to enforce zero data retention for models that are not from Anthropic, OpenAI, Google, or xAI. Falls back to enforce_zdr when not provided."""
+
+    enforce_zdr_xai: OptionalNullable[bool] = UNSET
+    r"""Whether to enforce zero data retention for xAI models. Falls back to enforce_zdr when not provided."""
 
     ignored_models: OptionalNullable[List[str]] = UNSET
     r"""Array of model canonical_slugs to exclude from routing"""
@@ -140,6 +145,7 @@ class Guardrail(BaseModel):
                 "enforce_zdr_google",
                 "enforce_zdr_openai",
                 "enforce_zdr_other",
+                "enforce_zdr_xai",
                 "ignored_models",
                 "ignored_providers",
                 "limit_usd",
@@ -159,6 +165,7 @@ class Guardrail(BaseModel):
                 "enforce_zdr_google",
                 "enforce_zdr_openai",
                 "enforce_zdr_other",
+                "enforce_zdr_xai",
                 "ignored_models",
                 "ignored_providers",
                 "limit_usd",

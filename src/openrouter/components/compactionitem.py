@@ -8,8 +8,9 @@ from openrouter.types import (
     UNSET,
     UNSET_SENTINEL,
 )
-from pydantic import model_serializer
-from typing import Literal
+import pydantic
+from pydantic import ConfigDict, model_serializer
+from typing import Any, Dict, Literal
 from typing_extensions import NotRequired, TypedDict
 
 
@@ -27,11 +28,24 @@ class CompactionItemTypedDict(TypedDict):
 class CompactionItem(BaseModel):
     r"""A context compaction marker with encrypted summary"""
 
+    model_config = ConfigDict(
+        populate_by_name=True, arbitrary_types_allowed=True, extra="allow"
+    )
+    __pydantic_extra__: Dict[str, Nullable[Any]] = pydantic.Field(init=False)
+
     encrypted_content: str
 
     type: CompactionItemType
 
     id: OptionalNullable[str] = UNSET
+
+    @property
+    def additional_properties(self):
+        return self.__pydantic_extra__
+
+    @additional_properties.setter
+    def additional_properties(self, value):
+        self.__pydantic_extra__ = value  # pyright: ignore[reportIncompatibleVariableOverride]
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
@@ -43,6 +57,7 @@ class CompactionItem(BaseModel):
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k, serialized.get(n))
+            serialized.pop(k, serialized.pop(n, None))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
                 and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
@@ -55,5 +70,7 @@ class CompactionItem(BaseModel):
                     or is_nullable_and_explicitly_set
                 ):
                     m[k] = val
+        for k, v in serialized.items():
+            m[k] = v
 
         return m

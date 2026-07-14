@@ -189,7 +189,7 @@ with OpenRouter(
     api_key=os.getenv("OPENROUTER_API_KEY", ""),
 ) as open_router:
 
-    res = open_router.byok.list()
+    res = open_router.byok.list(offset=0, limit=50)
 
     while res is not None:
         # Handle items
@@ -221,10 +221,10 @@ with OpenRouter(
     api_key=os.getenv("OPENROUTER_API_KEY", ""),
 ) as open_router:
 
-    res = open_router.files.upload(file={
+    res = open_router.stt.create_transcription_multipart(file={
         "file_name": "example.file",
         "content": open("example.file", "rb"),
-    })
+    }, model="openai/whisper-large-v3", language="en")
 
     # Handle response
     print(res)

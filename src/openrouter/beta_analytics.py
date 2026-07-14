@@ -273,6 +273,15 @@ class BetaAnalytics(BaseSDK):
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
+        classifier_dimensions: Optional[
+            Union[
+                operations.ClassifierDimensions,
+                operations.ClassifierDimensionsTypedDict,
+            ]
+        ] = None,
+        classifier_filters: Optional[
+            Union[operations.ClassifierFilters, operations.ClassifierFiltersTypedDict]
+        ] = None,
         dimensions: Optional[Iterable[str]] = None,
         filters: Optional[
             Union[Iterable[operations.Filter], Iterable[operations.FilterTypedDict]]
@@ -303,6 +312,8 @@ class BetaAnalytics(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
+        :param classifier_dimensions: Group results by custom classifier tags, breaking down metrics by the specified dimension values. Requires an active classifier on the workspace.
+        :param classifier_filters: Filter results to generations with specific classifier tag values. Can be combined with classifier_dimensions (must use the same classifier_id) or used independently with standard dimensions.
         :param dimensions:
         :param filters:
         :param granularity: Time granularity
@@ -330,6 +341,12 @@ class BetaAnalytics(BaseSDK):
             x_open_router_title=x_open_router_title,
             x_open_router_categories=x_open_router_categories,
             request_body=operations.QueryAnalyticsRequestBody(
+                classifier_dimensions=utils.get_pydantic_model(
+                    classifier_dimensions, Optional[operations.ClassifierDimensions]
+                ),
+                classifier_filters=utils.get_pydantic_model(
+                    classifier_filters, Optional[operations.ClassifierFilters]
+                ),
                 dimensions=utils.unmarshal(dimensions, Optional[List[str]]),
                 filters=utils.get_pydantic_model(
                     filters, Optional[List[operations.Filter]]
@@ -453,6 +470,15 @@ class BetaAnalytics(BaseSDK):
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
+        classifier_dimensions: Optional[
+            Union[
+                operations.ClassifierDimensions,
+                operations.ClassifierDimensionsTypedDict,
+            ]
+        ] = None,
+        classifier_filters: Optional[
+            Union[operations.ClassifierFilters, operations.ClassifierFiltersTypedDict]
+        ] = None,
         dimensions: Optional[Iterable[str]] = None,
         filters: Optional[
             Union[Iterable[operations.Filter], Iterable[operations.FilterTypedDict]]
@@ -483,6 +509,8 @@ class BetaAnalytics(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
+        :param classifier_dimensions: Group results by custom classifier tags, breaking down metrics by the specified dimension values. Requires an active classifier on the workspace.
+        :param classifier_filters: Filter results to generations with specific classifier tag values. Can be combined with classifier_dimensions (must use the same classifier_id) or used independently with standard dimensions.
         :param dimensions:
         :param filters:
         :param granularity: Time granularity
@@ -510,6 +538,12 @@ class BetaAnalytics(BaseSDK):
             x_open_router_title=x_open_router_title,
             x_open_router_categories=x_open_router_categories,
             request_body=operations.QueryAnalyticsRequestBody(
+                classifier_dimensions=utils.get_pydantic_model(
+                    classifier_dimensions, Optional[operations.ClassifierDimensions]
+                ),
+                classifier_filters=utils.get_pydantic_model(
+                    classifier_filters, Optional[operations.ClassifierFilters]
+                ),
                 dimensions=utils.unmarshal(dimensions, Optional[List[str]]),
                 filters=utils.get_pydantic_model(
                     filters, Optional[List[operations.Filter]]

@@ -29,7 +29,7 @@ with OpenRouter(
     api_key=os.getenv("OPENROUTER_API_KEY", ""),
 ) as open_router:
 
-    res = open_router.organization.list_members()
+    res = open_router.organization.list_members(offset=0, limit=50)
 
     while res is not None:
         # Handle items

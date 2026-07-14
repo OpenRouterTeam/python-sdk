@@ -2,9 +2,38 @@
 
 from __future__ import annotations
 from .model import Model, ModelTypedDict
-from openrouter.types import BaseModel
+from openrouter.types import BaseModel, Nullable, UNSET_SENTINEL
+from pydantic import model_serializer
 from typing import List
 from typing_extensions import TypedDict
+
+
+class LinksTypedDict(TypedDict):
+    r"""Pagination links"""
+
+    next: Nullable[str]
+    r"""URL for the next page of results, or null if this is the last page"""
+
+
+class Links(BaseModel):
+    r"""Pagination links"""
+
+    next: Nullable[str]
+    r"""URL for the next page of results, or null if this is the last page"""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                m[k] = val
+
+        return m
 
 
 class ModelsListResponseTypedDict(TypedDict):
@@ -12,6 +41,10 @@ class ModelsListResponseTypedDict(TypedDict):
 
     data: List[ModelTypedDict]
     r"""List of available models"""
+    links: LinksTypedDict
+    r"""Pagination links"""
+    total_count: int
+    r"""Total number of models matching the query"""
 
 
 class ModelsListResponse(BaseModel):
@@ -19,3 +52,9 @@ class ModelsListResponse(BaseModel):
 
     data: List[Model]
     r"""List of available models"""
+
+    links: Links
+    r"""Pagination links"""
+
+    total_count: int
+    r"""Total number of models matching the query"""

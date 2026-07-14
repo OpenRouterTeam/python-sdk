@@ -64,6 +64,7 @@ ProviderResponseProviderName = Union[
         "Crusoe",
         "Darkbloom",
         "Decart",
+        "Deepgram",
         "DeepInfra",
         "DeepSeek",
         "DekaLLM",
@@ -109,6 +110,7 @@ ProviderResponseProviderName = Union[
         "Recraft",
         "Reka",
         "Relace",
+        "Sail Research",
         "Sakana AI",
         "SambaNova",
         "Seed",
@@ -135,6 +137,16 @@ ProviderResponseProviderName = Union[
 r"""Name of the provider"""
 
 
+RoutedServiceTier = Union[
+    Literal[
+        "flex",
+        "priority",
+    ],
+    UnrecognizedStr,
+]
+r"""The service tier this request was routed to (e.g. flex, priority). The tier actually applied and billed is determined by the provider response and may differ."""
+
+
 class ProviderResponseTypedDict(TypedDict):
     r"""Details of a provider response for a generation attempt"""
 
@@ -152,6 +164,8 @@ class ProviderResponseTypedDict(TypedDict):
     r"""Canonical model slug"""
     provider_name: NotRequired[ProviderResponseProviderName]
     r"""Name of the provider"""
+    routed_service_tier: NotRequired[RoutedServiceTier]
+    r"""The service tier this request was routed to (e.g. flex, priority). The tier actually applied and billed is determined by the provider response and may differ."""
 
 
 class ProviderResponse(BaseModel):
@@ -178,6 +192,9 @@ class ProviderResponse(BaseModel):
     provider_name: Optional[ProviderResponseProviderName] = None
     r"""Name of the provider"""
 
+    routed_service_tier: Optional[RoutedServiceTier] = None
+    r"""The service tier this request was routed to (e.g. flex, priority). The tier actually applied and billed is determined by the provider response and may differ."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
@@ -188,6 +205,7 @@ class ProviderResponse(BaseModel):
                 "latency",
                 "model_permaslug",
                 "provider_name",
+                "routed_service_tier",
             ]
         )
         nullable_fields = set(["status"])

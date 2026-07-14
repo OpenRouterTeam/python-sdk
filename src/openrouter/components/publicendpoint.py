@@ -4,6 +4,7 @@ from __future__ import annotations
 from .endpointstatus import EndpointStatus
 from .parameter import Parameter
 from .percentilestats import PercentileStats, PercentileStatsTypedDict
+from .pricingoverride import PricingOverride, PricingOverrideTypedDict
 from .providername import ProviderName
 from openrouter.types import BaseModel, Nullable, UNSET_SENTINEL, UnrecognizedStr
 from pydantic import model_serializer
@@ -38,6 +39,8 @@ class PricingTypedDict(TypedDict):
     r"""Price per 1-hour cache-write token, in USD per token. Only present for providers that price an extended (1-hour) cache TTL separately, such as Anthropic."""
     internal_reasoning: NotRequired[str]
     r"""Price in USD per internal reasoning token"""
+    overrides: NotRequired[List[PricingOverrideTypedDict]]
+    r"""Conditional overrides of the base pricing (e.g. long-context or time-based pricing). An entry applies when all of its condition fields (e.g. min_prompt_tokens, or the utc_start/utc_end time window) match the request; among applicable entries, later entries win per key; price keys absent from an entry inherit the base price. The top-level pricing keys always reflect the price that applies under default conditions."""
     request: NotRequired[str]
     r"""Price in USD per request"""
     web_search: NotRequired[str]
@@ -84,6 +87,9 @@ class Pricing(BaseModel):
     internal_reasoning: Optional[str] = None
     r"""Price in USD per internal reasoning token"""
 
+    overrides: Optional[List[PricingOverride]] = None
+    r"""Conditional overrides of the base pricing (e.g. long-context or time-based pricing). An entry applies when all of its condition fields (e.g. min_prompt_tokens, or the utc_start/utc_end time window) match the request; among applicable entries, later entries win per key; price keys absent from an entry inherit the base price. The top-level pricing keys always reflect the price that applies under default conditions."""
+
     request: Optional[str] = None
     r"""Price in USD per request"""
 
@@ -105,6 +111,7 @@ class Pricing(BaseModel):
                 "input_cache_write",
                 "input_cache_write_1h",
                 "internal_reasoning",
+                "overrides",
                 "request",
                 "web_search",
             ]

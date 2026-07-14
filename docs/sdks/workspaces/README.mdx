@@ -39,7 +39,7 @@ with OpenRouter(
     api_key=os.getenv("OPENROUTER_API_KEY", ""),
 ) as open_router:
 
-    res = open_router.workspaces.list()
+    res = open_router.workspaces.list(offset=0, limit=50)
 
     while res is not None:
         # Handle items
@@ -455,7 +455,7 @@ with OpenRouter(
     api_key=os.getenv("OPENROUTER_API_KEY", ""),
 ) as open_router:
 
-    res = open_router.workspaces.list_members(id="production")
+    res = open_router.workspaces.list_members(id="production", offset=0, limit=50)
 
     while res is not None:
         # Handle items
@@ -546,7 +546,7 @@ with OpenRouter(
 
 ## bulk_remove_members
 
-Remove multiple members from a workspace. Members with active API keys in the workspace cannot be removed. [Management key](/docs/guides/overview/auth/management-api-keys) required.
+Remove multiple members from a workspace. Members with active API keys in the workspace cannot be removed. SCIM-managed members cannot be removed; changes must be made in your identity provider. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
 ### Example Usage
 

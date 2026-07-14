@@ -80,13 +80,13 @@ class UploadFileGlobals(BaseModel):
         return m
 
 
-class FileTypedDict(TypedDict):
+class UploadFileFileTypedDict(TypedDict):
     file_name: str
     content: Union[bytes, IO[bytes], io.IOBase]
     content_type: NotRequired[str]
 
 
-class File(BaseModel):
+class UploadFileFile(BaseModel):
     file_name: Annotated[
         str, pydantic.Field(alias="fileName"), FieldMetadata(multipart=True)
     ]
@@ -121,11 +121,13 @@ class File(BaseModel):
 
 
 class UploadFileRequestBodyTypedDict(TypedDict):
-    file: FileTypedDict
+    file: UploadFileFileTypedDict
 
 
 class UploadFileRequestBody(BaseModel):
-    file: Annotated[File, FieldMetadata(multipart=MultipartFormMetadata(file=True))]
+    file: Annotated[
+        UploadFileFile, FieldMetadata(multipart=MultipartFormMetadata(file=True))
+    ]
 
 
 class UploadFileRequestTypedDict(TypedDict):

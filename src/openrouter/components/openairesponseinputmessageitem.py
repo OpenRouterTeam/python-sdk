@@ -17,7 +17,7 @@ from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 OpenAIResponseInputMessageItemContentTypedDict = TypeAliasType(
     "OpenAIResponseInputMessageItemContentTypedDict",
     Union[
-        InputTextTypedDict, InputAudioTypedDict, InputImageTypedDict, InputFileTypedDict
+        InputAudioTypedDict, InputTextTypedDict, InputImageTypedDict, InputFileTypedDict
     ],
 )
 

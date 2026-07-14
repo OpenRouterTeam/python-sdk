@@ -6,7 +6,7 @@ from openrouter._hooks import HookContext
 from openrouter.types import OptionalNullable, UNSET
 from openrouter.utils import get_security_from_env
 from openrouter.utils.unmarshal_json_response import unmarshal_json_response
-from typing import Any, Mapping, Optional, Union
+from typing import Any, Iterable, List, Mapping, Optional, Union
 
 
 class Stt(BaseSDK):
@@ -24,7 +24,11 @@ class Stt(BaseSDK):
         provider: Optional[
             Union[components.STTRequestProvider, components.STTRequestProviderTypedDict]
         ] = None,
+        response_format: Optional[components.STTRequestResponseFormat] = None,
         temperature: Optional[float] = None,
+        timestamp_granularities: Optional[
+            Iterable[components.STTTimestampGranularity]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -32,7 +36,7 @@ class Stt(BaseSDK):
     ) -> components.STTResponse:
         r"""Create transcription
 
-        Transcribes audio into text. Accepts base64-encoded audio input and returns the transcribed text.
+        Transcribes audio into text. Accepts base64-encoded audio input as JSON or an OpenAI-style multipart/form-data file upload, and returns the transcribed text.
 
         :param input_audio: Base64-encoded audio to transcribe
         :param model: STT model identifier
@@ -45,7 +49,9 @@ class Stt(BaseSDK):
 
         :param language: ISO-639-1 language code (e.g., \"en\", \"ja\"). Auto-detected if omitted.
         :param provider: Provider-specific passthrough configuration
+        :param response_format: Output format. \"json\" (default) returns { text, usage }. \"verbose_json\" additionally returns task, language, duration, and segment-level timestamps; only supported by OpenAI-compatible providers.
         :param temperature: Sampling temperature for transcription
+        :param timestamp_granularities: Timestamp detail levels to include when response_format is \"verbose_json\". \"segment\" returns segment-level timestamps; \"word\" additionally returns word-level timestamps in the words array. Ignored unless response_format is \"verbose_json\".
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -74,7 +80,12 @@ class Stt(BaseSDK):
                 provider=utils.get_pydantic_model(
                     provider, Optional[components.STTRequestProvider]
                 ),
+                response_format=response_format,
                 temperature=temperature,
+                timestamp_granularities=utils.unmarshal(
+                    timestamp_granularities,
+                    Optional[List[components.STTTimestampGranularity]],
+                ),
             ),
         )
 
@@ -210,7 +221,11 @@ class Stt(BaseSDK):
         provider: Optional[
             Union[components.STTRequestProvider, components.STTRequestProviderTypedDict]
         ] = None,
+        response_format: Optional[components.STTRequestResponseFormat] = None,
         temperature: Optional[float] = None,
+        timestamp_granularities: Optional[
+            Iterable[components.STTTimestampGranularity]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -218,7 +233,7 @@ class Stt(BaseSDK):
     ) -> components.STTResponse:
         r"""Create transcription
 
-        Transcribes audio into text. Accepts base64-encoded audio input and returns the transcribed text.
+        Transcribes audio into text. Accepts base64-encoded audio input as JSON or an OpenAI-style multipart/form-data file upload, and returns the transcribed text.
 
         :param input_audio: Base64-encoded audio to transcribe
         :param model: STT model identifier
@@ -231,7 +246,9 @@ class Stt(BaseSDK):
 
         :param language: ISO-639-1 language code (e.g., \"en\", \"ja\"). Auto-detected if omitted.
         :param provider: Provider-specific passthrough configuration
+        :param response_format: Output format. \"json\" (default) returns { text, usage }. \"verbose_json\" additionally returns task, language, duration, and segment-level timestamps; only supported by OpenAI-compatible providers.
         :param temperature: Sampling temperature for transcription
+        :param timestamp_granularities: Timestamp detail levels to include when response_format is \"verbose_json\". \"segment\" returns segment-level timestamps; \"word\" additionally returns word-level timestamps in the words array. Ignored unless response_format is \"verbose_json\".
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -260,7 +277,12 @@ class Stt(BaseSDK):
                 provider=utils.get_pydantic_model(
                     provider, Optional[components.STTRequestProvider]
                 ),
+                response_format=response_format,
                 temperature=temperature,
+                timestamp_granularities=utils.unmarshal(
+                    timestamp_granularities,
+                    Optional[List[components.STTTimestampGranularity]],
+                ),
             ),
         )
 
@@ -306,6 +328,400 @@ class Stt(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="createAudioTranscriptions",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
+                tags=["STT"],
+                extensions=None,
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(components.STTResponse, http_res)
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.BadRequestResponseErrorData, http_res
+            )
+            raise errors.BadRequestResponseError(response_data, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UnauthorizedResponseErrorData, http_res
+            )
+            raise errors.UnauthorizedResponseError(response_data, http_res)
+        if utils.match_response(http_res, "402", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.PaymentRequiredResponseErrorData, http_res
+            )
+            raise errors.PaymentRequiredResponseError(response_data, http_res)
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.NotFoundResponseErrorData, http_res
+            )
+            raise errors.NotFoundResponseError(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.TooManyRequestsResponseErrorData, http_res
+            )
+            raise errors.TooManyRequestsResponseError(response_data, http_res)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.InternalServerResponseErrorData, http_res
+            )
+            raise errors.InternalServerResponseError(response_data, http_res)
+        if utils.match_response(http_res, "502", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.BadGatewayResponseErrorData, http_res
+            )
+            raise errors.BadGatewayResponseError(response_data, http_res)
+        if utils.match_response(http_res, "503", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ServiceUnavailableResponseErrorData, http_res
+            )
+            raise errors.ServiceUnavailableResponseError(response_data, http_res)
+        if utils.match_response(http_res, "524", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.EdgeNetworkTimeoutResponseErrorData, http_res
+            )
+            raise errors.EdgeNetworkTimeoutResponseError(response_data, http_res)
+        if utils.match_response(http_res, "529", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ProviderOverloadedResponseErrorData, http_res
+            )
+            raise errors.ProviderOverloadedResponseError(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.OpenRouterDefaultError(
+                "API error occurred", http_res, http_res_text
+            )
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.OpenRouterDefaultError(
+                "API error occurred", http_res, http_res_text
+            )
+
+        raise errors.OpenRouterDefaultError("Unexpected response received", http_res)
+
+    def create_transcription_multipart(
+        self,
+        *,
+        file: Union[
+            operations.CreateAudioTranscriptionsMultipartFile,
+            operations.CreateAudioTranscriptionsMultipartFileTypedDict,
+        ],
+        model: str,
+        http_referer: Optional[str] = None,
+        x_open_router_title: Optional[str] = None,
+        x_open_router_categories: Optional[str] = None,
+        language: Optional[str] = None,
+        response_format: Optional[operations.ResponseFormat] = None,
+        temperature: Optional[float] = None,
+        timestamp_granularities: Optional[
+            Iterable[operations.TimestampGranularities]
+        ] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> components.STTResponse:
+        r"""Create transcription
+
+        Transcribes audio into text. Accepts base64-encoded audio input as JSON or an OpenAI-style multipart/form-data file upload, and returns the transcribed text.
+
+        :param file: The audio file to transcribe. The format is derived from the filename extension or the file part content type. Max 25 MB; send larger files as base64 JSON via input_audio.
+        :param model: The model to use for transcription.
+        :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
+            This is used to track API usage per application.
+
+        :param x_open_router_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+        :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
+
+        :param language: The language of the input audio (ISO-639-1).
+        :param response_format: The response format. \"json\" (default) returns { text, usage }; \"verbose_json\" additionally returns task, language, duration, and segment-level timestamps (OpenAI-compatible providers only).
+        :param temperature: The sampling temperature.
+        :param timestamp_granularities: Timestamp detail levels to include when response_format is \"verbose_json\". \"word\" additionally returns word-level timestamps in the words array.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = operations.CreateAudioTranscriptionsMultipartRequest(
+            http_referer=http_referer,
+            x_open_router_title=x_open_router_title,
+            x_open_router_categories=x_open_router_categories,
+            request_body=operations.CreateAudioTranscriptionsMultipartRequestBody(
+                file=utils.get_pydantic_model(
+                    file, operations.CreateAudioTranscriptionsMultipartFile
+                ),
+                language=language,
+                model=model,
+                response_format=response_format,
+                temperature=temperature,
+                timestamp_granularities=utils.unmarshal(
+                    timestamp_granularities,
+                    Optional[List[operations.TimestampGranularities]],
+                ),
+            ),
+        )
+
+        req = self._build_request(
+            method="POST",
+            path="/audio/transcriptions",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            _globals=operations.CreateAudioTranscriptionsMultipartGlobals(
+                http_referer=self.sdk_configuration.globals.http_referer,
+                x_open_router_title=self.sdk_configuration.globals.x_open_router_title,
+                x_open_router_categories=self.sdk_configuration.globals.x_open_router_categories,
+            ),
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.request_body,
+                False,
+                False,
+                "multipart",
+                operations.CreateAudioTranscriptionsMultipartRequestBody,
+            ),
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 60000, 1.5, 3600000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["5XX"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="createAudioTranscriptions_multipart",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
+                tags=["STT"],
+                extensions=None,
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(components.STTResponse, http_res)
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.BadRequestResponseErrorData, http_res
+            )
+            raise errors.BadRequestResponseError(response_data, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UnauthorizedResponseErrorData, http_res
+            )
+            raise errors.UnauthorizedResponseError(response_data, http_res)
+        if utils.match_response(http_res, "402", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.PaymentRequiredResponseErrorData, http_res
+            )
+            raise errors.PaymentRequiredResponseError(response_data, http_res)
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.NotFoundResponseErrorData, http_res
+            )
+            raise errors.NotFoundResponseError(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.TooManyRequestsResponseErrorData, http_res
+            )
+            raise errors.TooManyRequestsResponseError(response_data, http_res)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.InternalServerResponseErrorData, http_res
+            )
+            raise errors.InternalServerResponseError(response_data, http_res)
+        if utils.match_response(http_res, "502", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.BadGatewayResponseErrorData, http_res
+            )
+            raise errors.BadGatewayResponseError(response_data, http_res)
+        if utils.match_response(http_res, "503", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ServiceUnavailableResponseErrorData, http_res
+            )
+            raise errors.ServiceUnavailableResponseError(response_data, http_res)
+        if utils.match_response(http_res, "524", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.EdgeNetworkTimeoutResponseErrorData, http_res
+            )
+            raise errors.EdgeNetworkTimeoutResponseError(response_data, http_res)
+        if utils.match_response(http_res, "529", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ProviderOverloadedResponseErrorData, http_res
+            )
+            raise errors.ProviderOverloadedResponseError(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.OpenRouterDefaultError(
+                "API error occurred", http_res, http_res_text
+            )
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.OpenRouterDefaultError(
+                "API error occurred", http_res, http_res_text
+            )
+
+        raise errors.OpenRouterDefaultError("Unexpected response received", http_res)
+
+    async def create_transcription_multipart_async(
+        self,
+        *,
+        file: Union[
+            operations.CreateAudioTranscriptionsMultipartFile,
+            operations.CreateAudioTranscriptionsMultipartFileTypedDict,
+        ],
+        model: str,
+        http_referer: Optional[str] = None,
+        x_open_router_title: Optional[str] = None,
+        x_open_router_categories: Optional[str] = None,
+        language: Optional[str] = None,
+        response_format: Optional[operations.ResponseFormat] = None,
+        temperature: Optional[float] = None,
+        timestamp_granularities: Optional[
+            Iterable[operations.TimestampGranularities]
+        ] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> components.STTResponse:
+        r"""Create transcription
+
+        Transcribes audio into text. Accepts base64-encoded audio input as JSON or an OpenAI-style multipart/form-data file upload, and returns the transcribed text.
+
+        :param file: The audio file to transcribe. The format is derived from the filename extension or the file part content type. Max 25 MB; send larger files as base64 JSON via input_audio.
+        :param model: The model to use for transcription.
+        :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
+            This is used to track API usage per application.
+
+        :param x_open_router_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+        :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
+
+        :param language: The language of the input audio (ISO-639-1).
+        :param response_format: The response format. \"json\" (default) returns { text, usage }; \"verbose_json\" additionally returns task, language, duration, and segment-level timestamps (OpenAI-compatible providers only).
+        :param temperature: The sampling temperature.
+        :param timestamp_granularities: Timestamp detail levels to include when response_format is \"verbose_json\". \"word\" additionally returns word-level timestamps in the words array.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = operations.CreateAudioTranscriptionsMultipartRequest(
+            http_referer=http_referer,
+            x_open_router_title=x_open_router_title,
+            x_open_router_categories=x_open_router_categories,
+            request_body=operations.CreateAudioTranscriptionsMultipartRequestBody(
+                file=utils.get_pydantic_model(
+                    file, operations.CreateAudioTranscriptionsMultipartFile
+                ),
+                language=language,
+                model=model,
+                response_format=response_format,
+                temperature=temperature,
+                timestamp_granularities=utils.unmarshal(
+                    timestamp_granularities,
+                    Optional[List[operations.TimestampGranularities]],
+                ),
+            ),
+        )
+
+        req = self._build_request_async(
+            method="POST",
+            path="/audio/transcriptions",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            _globals=operations.CreateAudioTranscriptionsMultipartGlobals(
+                http_referer=self.sdk_configuration.globals.http_referer,
+                x_open_router_title=self.sdk_configuration.globals.x_open_router_title,
+                x_open_router_categories=self.sdk_configuration.globals.x_open_router_categories,
+            ),
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.request_body,
+                False,
+                False,
+                "multipart",
+                operations.CreateAudioTranscriptionsMultipartRequestBody,
+            ),
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 60000, 1.5, 3600000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["5XX"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="createAudioTranscriptions_multipart",
                 oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security

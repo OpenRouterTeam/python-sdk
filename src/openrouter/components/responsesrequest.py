@@ -17,10 +17,6 @@ from .applypatchservertool_openrouter import (
 from .autorouterplugin import AutoRouterPlugin, AutoRouterPluginTypedDict
 from .bashservertool import BashServerTool, BashServerToolTypedDict
 from .chatdebugoptions import ChatDebugOptions, ChatDebugOptionsTypedDict
-from .chatsearchmodelsservertool import (
-    ChatSearchModelsServerTool,
-    ChatSearchModelsServerToolTypedDict,
-)
 from .codeinterpreterservertool import (
     CodeInterpreterServerTool,
     CodeInterpreterServerToolTypedDict,
@@ -72,10 +68,15 @@ from .preview_websearchservertool import (
     PreviewWebSearchServerTool,
     PreviewWebSearchServerToolTypedDict,
 )
+from .promptcacheoptions import PromptCacheOptions, PromptCacheOptionsTypedDict
 from .providerpreferences import ProviderPreferences, ProviderPreferencesTypedDict
 from .reasoningconfig import ReasoningConfig, ReasoningConfigTypedDict
 from .responsehealingplugin import ResponseHealingPlugin, ResponseHealingPluginTypedDict
 from .responseincludesenum import ResponseIncludesEnum
+from .searchmodelsservertool_openrouter import (
+    SearchModelsServerToolOpenRouter,
+    SearchModelsServerToolOpenRouterTypedDict,
+)
 from .shellservertool import ShellServerTool, ShellServerToolTypedDict
 from .shellservertool_openrouter import (
     ShellServerToolOpenRouter,
@@ -123,8 +124,8 @@ ResponsesRequestPluginTypedDict = TypeAliasType(
         ResponseHealingPluginTypedDict,
         FileParserPluginTypedDict,
         ContextCompressionPluginTypedDict,
-        ParetoRouterPluginTypedDict,
         AutoRouterPluginTypedDict,
+        ParetoRouterPluginTypedDict,
         WebFetchPluginTypedDict,
         FusionPluginTypedDict,
         WebSearchPluginTypedDict,
@@ -226,7 +227,7 @@ ResponsesRequestToolUnionTypedDict = TypeAliasType(
         ApplyPatchServerToolOpenRouterTypedDict,
         WebSearchServerToolOpenRouterTypedDict,
         WebFetchServerToolTypedDict,
-        ChatSearchModelsServerToolTypedDict,
+        SearchModelsServerToolOpenRouterTypedDict,
         FilesServerToolTypedDict,
         DatetimeServerToolTypedDict,
         AdvisorServerToolOpenRouterTypedDict,
@@ -272,7 +273,8 @@ ResponsesRequestToolUnion = Annotated[
             ImageGenerationServerToolOpenRouter, Tag("openrouter:image_generation")
         ],
         Annotated[
-            ChatSearchModelsServerTool, Tag("openrouter:experimental__search_models")
+            SearchModelsServerToolOpenRouter,
+            Tag("openrouter:experimental__search_models"),
         ],
         Annotated[WebFetchServerTool, Tag("openrouter:web_fetch")],
         Annotated[WebSearchServerToolOpenRouter, Tag("openrouter:web_search")],
@@ -289,7 +291,7 @@ class ResponsesRequestTypedDict(TypedDict):
 
     background: NotRequired[Nullable[bool]]
     cache_control: NotRequired[AnthropicCacheControlDirectiveTypedDict]
-    r"""Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. Currently supported for Anthropic Claude models."""
+    r"""Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. When set on an individual content block, it marks an explicit cache breakpoint; block-level markers also work on OpenAI models that support explicit prompt caching — OpenRouter converts them to the provider's native format."""
     debug: NotRequired[ChatDebugOptionsTypedDict]
     r"""Debug options for inspecting request transformations (streaming only)"""
     frequency_penalty: NotRequired[Nullable[float]]
@@ -314,6 +316,8 @@ class ResponsesRequestTypedDict(TypedDict):
     previous_response_id: NotRequired[Nullable[str]]
     prompt: NotRequired[Nullable[StoredPromptTemplateTypedDict]]
     prompt_cache_key: NotRequired[Nullable[str]]
+    prompt_cache_options: NotRequired[Nullable[PromptCacheOptionsTypedDict]]
+    r"""Request-level prompt-cache controls. `mode: \"explicit\"` disables OpenAI-managed breakpoints so only blocks marked with `prompt_cache_breakpoint` are cached. Only supported by OpenAI GPT-5.6 and newer."""
     provider: NotRequired[Nullable[ProviderPreferencesTypedDict]]
     r"""When multiple model providers are available, optionally indicate your routing preference."""
     reasoning: NotRequired[Nullable[ReasoningConfigTypedDict]]
@@ -347,7 +351,7 @@ class ResponsesRequest(BaseModel):
     background: OptionalNullable[bool] = UNSET
 
     cache_control: Optional[AnthropicCacheControlDirective] = None
-    r"""Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. Currently supported for Anthropic Claude models."""
+    r"""Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. When set on an individual content block, it marks an explicit cache breakpoint; block-level markers also work on OpenAI models that support explicit prompt caching — OpenRouter converts them to the provider's native format."""
 
     debug: Optional[ChatDebugOptions] = None
     r"""Debug options for inspecting request transformations (streaming only)"""
@@ -390,6 +394,9 @@ class ResponsesRequest(BaseModel):
     prompt: OptionalNullable[StoredPromptTemplate] = UNSET
 
     prompt_cache_key: OptionalNullable[str] = UNSET
+
+    prompt_cache_options: OptionalNullable[PromptCacheOptions] = UNSET
+    r"""Request-level prompt-cache controls. `mode: \"explicit\"` disables OpenAI-managed breakpoints so only blocks marked with `prompt_cache_breakpoint` are cached. Only supported by OpenAI GPT-5.6 and newer."""
 
     provider: OptionalNullable[ProviderPreferences] = UNSET
     r"""When multiple model providers are available, optionally indicate your routing preference."""
@@ -461,6 +468,7 @@ class ResponsesRequest(BaseModel):
                 "previous_response_id",
                 "prompt",
                 "prompt_cache_key",
+                "prompt_cache_options",
                 "provider",
                 "reasoning",
                 "safety_identifier",
@@ -495,6 +503,7 @@ class ResponsesRequest(BaseModel):
                 "previous_response_id",
                 "prompt",
                 "prompt_cache_key",
+                "prompt_cache_options",
                 "provider",
                 "reasoning",
                 "safety_identifier",
