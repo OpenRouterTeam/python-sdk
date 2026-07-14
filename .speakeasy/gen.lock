@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c48cf606-fb42-4a45-9c23-8f0555307828
 management:
-  docChecksum: 4c1de84906249adffa68289b1272a337
+  docChecksum: 913314e7b77524966693bb56c9a3dd24
   docVersion: 1.0.0
   speakeasyVersion: 1.787.0
   generationVersion: 2.914.0
-  releaseVersion: 0.11.27
-  configChecksum: 8c481cc9a577b723dec23a1acb6acd44
+  releaseVersion: 0.11.28
+  configChecksum: ce48138720beb4eb8841b187c03d254f
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
 persistentEdits:
-  generation_id: 29d14705-a7a0-4678-9a14-db322b73e2e9
-  pristine_commit_hash: 604984950189ec77e6d3e0907500b9a36193139a
-  pristine_tree_hash: ac64da59d036426e6a5253061a7139a4a12fd118
+  generation_id: e656f374-a717-4315-90c0-6ee70ed0cf9c
+  pristine_commit_hash: 3d5b10a16d484690e232f230a59576340aa52303
+  pristine_tree_hash: f9fc6333f4a8952a56a6ca33eb92a50cc9b98d90
 features:
   python:
     acceptHeaders: 3.0.0
@@ -244,6 +244,10 @@ trackedFiles:
     id: f047a00a8826
     last_write_checksum: sha1:7731c7cecebc8d0ea5d779a811809d4d570ed7c1
     pristine_git_object: bd3e799f85c07638dff4daf50d361bc718c47b0f
+  docs/components/anthropiccachecreation.mdx:
+    id: 76d410a5e73e
+    last_write_checksum: sha1:3b9e3d49c378acbdada5129434dc5e469ff0137f
+    pristine_git_object: c9562a64e41c396aee705ef025650900df0b43e4
   docs/components/anthropiccitationcharlocationparam.mdx:
     id: c40e539e0fb1
     last_write_checksum: sha1:bf7cb3fdf2b38b00e4b026e7c0304d9e308cbb75
@@ -2230,8 +2234,8 @@ trackedFiles:
     pristine_git_object: cabf0cccfa7d7bee9faa823d66650bc395220966
   docs/components/imagegenerationusage.mdx:
     id: 0f8faafc5148
-    last_write_checksum: sha1:be2ebcd80f3299ec6e38bf8c580ac5e28ba67d85
-    pristine_git_object: be9fe8ffa3ea8829bf61cbbdcfd5f1a17aad439d
+    last_write_checksum: sha1:7662a98019e0fb829b124d14f938ee07f5ef5519
+    pristine_git_object: cb01cf31c16ba5f1caea0be6b376e83ee0d82b59
   docs/components/imagegenerationusagecompletiontokensdetails.mdx:
     id: 71ecb25e164d
     last_write_checksum: sha1:f0843acffd7d7540b07bb384f299557e7309950d
@@ -6662,8 +6666,8 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:422b5cabaf16017ad5a03653f1cebc804d1b084d
-    pristine_git_object: feee6a6c23e707d2c4e75602176b723657b31a41
+    last_write_checksum: sha1:04c19e27f55c549187e8134f7ff3696cd428f3df
+    pristine_git_object: 38e011e2029916eabc14394ca864b6516da19017
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77f44b60b98bc126557ec27391f91dfba764bb54
@@ -6690,8 +6694,8 @@ trackedFiles:
     pristine_git_object: 86713cfea633e09d33b3d4e65281071fe20e6137
   src/openrouter/_version.py:
     id: d8d15ad6c586
-    last_write_checksum: sha1:492ccf71ca935892090ce4ccb5391ff14fa90596
-    pristine_git_object: d00a5fa67b4b8b39352d9b6491b1854749529f2f
+    last_write_checksum: sha1:fd94190abbfad4aff1ecc18a06a3b466ddd7c2b8
+    pristine_git_object: fb15497c9ae07185c9379f5151156e976ce297f5
   src/openrouter/analytics.py:
     id: cb406b5aaabb
     last_write_checksum: sha1:9e709b71dd0611056dc0cec6150b578defe32841
@@ -6730,8 +6734,8 @@ trackedFiles:
     pristine_git_object: ad3d247954547814054c01989a2dff3d12b3e4e1
   src/openrouter/components/__init__.py:
     id: 81754e97b3f4
-    last_write_checksum: sha1:5208f1af2c3420c74d0a23810dcf68807b95a130
-    pristine_git_object: 92d0e11add040db79f1848e7f697605a0b2e129c
+    last_write_checksum: sha1:84999e85717da3612e618f3115f0cf56ea91b268
+    pristine_git_object: bf5e3e9d282db9aefb6629dbe70240294aadd3d8
   src/openrouter/components/aabenchmarkentry.py:
     id: e2e0f0b48c82
     last_write_checksum: sha1:fab4d9a24d2cea937bb749d46c5f83941e99d65c
@@ -6796,6 +6800,10 @@ trackedFiles:
     id: 2ec3e3546afe
     last_write_checksum: sha1:338e193bd6929eb6ed69da9bdb4e608e5db6121b
     pristine_git_object: 05a105c6e4f6c9037f953e4620576a8494645865
+  src/openrouter/components/anthropiccachecreation.py:
+    id: 10d4a3bde2d9
+    last_write_checksum: sha1:5e3b33cda7e69aeb2e683374815796ca76ee2368
+    pristine_git_object: b08b10ce6b317954ebf7f12d09157d5cc4a19f26
   src/openrouter/components/anthropiccitationcharlocationparam.py:
     id: 6f6f0732b22f
     last_write_checksum: sha1:f06cdcdd405abb4222450f027fd38f29b05efbec
@@ -7714,8 +7722,8 @@ trackedFiles:
     pristine_git_object: eb59bfd0d4b89dde72504f8aa57533c689474ced
   src/openrouter/components/imagegenerationusage.py:
     id: f51151e8dbfa
-    last_write_checksum: sha1:810fd7e3dd1808d3c846fa4791ce3ba728dc32d6
-    pristine_git_object: 83ae9b1bc1e7624550cf432b440c20ebe6eb16f5
+    last_write_checksum: sha1:7f3f93e29e3b5018e8bf218dc167665794cf1d65
+    pristine_git_object: 089d12ed821830575a14bf6b279a750f9737c1a4
   src/openrouter/components/imagegenpartialimageevent.py:
     id: f88cea0c67fc
     last_write_checksum: sha1:2ee76cbb50b60ebe624bdfe0769a7bbdce047cd0
@@ -11137,3 +11145,6 @@ examples:
         "500":
           application/json: {"error": {"code": 500, "message": "Internal Server Error"}}
 examplesVersion: 1.0.2
+releaseNotes: |
+  ## Python SDK Changes:
+  * `open_router.images.generate()`:  `response` **Changed**
