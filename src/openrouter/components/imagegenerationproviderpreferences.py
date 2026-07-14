@@ -138,6 +138,7 @@ class ImageGenerationProviderPreferencesOptionsTypedDict(TypedDict):
     reka: NotRequired[Dict[str, Nullable[Any]]]
     relace: NotRequired[Dict[str, Nullable[Any]]]
     replicate: NotRequired[Dict[str, Nullable[Any]]]
+    sail_research: NotRequired[Dict[str, Nullable[Any]]]
     sakana: NotRequired[Dict[str, Nullable[Any]]]
     sambanova: NotRequired[Dict[str, Nullable[Any]]]
     sambanova_cloaked: NotRequired[Dict[str, Nullable[Any]]]
@@ -400,6 +401,10 @@ class ImageGenerationProviderPreferencesOptions(BaseModel):
 
     replicate: Optional[Dict[str, Nullable[Any]]] = None
 
+    sail_research: Annotated[
+        Optional[Dict[str, Nullable[Any]]], pydantic.Field(alias="sail-research")
+    ] = None
+
     sakana: Optional[Dict[str, Nullable[Any]]] = None
 
     sambanova: Optional[Dict[str, Nullable[Any]]] = None
@@ -556,6 +561,7 @@ class ImageGenerationProviderPreferencesOptions(BaseModel):
                 "reka",
                 "relace",
                 "replicate",
+                "sail-research",
                 "sakana",
                 "sambanova",
                 "sambanova-cloaked",
