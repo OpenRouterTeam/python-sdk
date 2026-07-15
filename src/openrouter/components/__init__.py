@@ -2189,6 +2189,18 @@ if TYPE_CHECKING:
     from .perrequestlimits import PerRequestLimits, PerRequestLimitsTypedDict
     from .pipelinestage import PipelineStage, PipelineStageTypedDict
     from .pipelinestagetype import PipelineStageType
+    from .prediction import (
+        Prediction,
+        PredictionContent,
+        PredictionContentTypedDict,
+        PredictionType,
+        PredictionTypedDict,
+    )
+    from .predictioncontenttext import (
+        PredictionContentText,
+        PredictionContentTextType,
+        PredictionContentTextTypedDict,
+    )
     from .preferredmaxlatency import PreferredMaxLatency, PreferredMaxLatencyTypedDict
     from .preferredminthroughput import (
         PreferredMinThroughput,
@@ -4355,6 +4367,14 @@ __all__ = [
     "PipelineStage",
     "PipelineStageType",
     "PipelineStageTypedDict",
+    "Prediction",
+    "PredictionContent",
+    "PredictionContentText",
+    "PredictionContentTextType",
+    "PredictionContentTextTypedDict",
+    "PredictionContentTypedDict",
+    "PredictionType",
+    "PredictionTypedDict",
     "PreferredMaxLatency",
     "PreferredMaxLatencyTypedDict",
     "PreferredMinThroughput",
@@ -6567,6 +6587,14 @@ _dynamic_imports: dict[str, str] = {
     "PipelineStage": ".pipelinestage",
     "PipelineStageTypedDict": ".pipelinestage",
     "PipelineStageType": ".pipelinestagetype",
+    "Prediction": ".prediction",
+    "PredictionContent": ".prediction",
+    "PredictionContentTypedDict": ".prediction",
+    "PredictionType": ".prediction",
+    "PredictionTypedDict": ".prediction",
+    "PredictionContentText": ".predictioncontenttext",
+    "PredictionContentTextType": ".predictioncontenttext",
+    "PredictionContentTextTypedDict": ".predictioncontenttext",
     "PreferredMaxLatency": ".preferredmaxlatency",
     "PreferredMaxLatencyTypedDict": ".preferredmaxlatency",
     "PreferredMinThroughput": ".preferredminthroughput",

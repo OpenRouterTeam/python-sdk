@@ -38,6 +38,7 @@ from .fusionplugin import FusionPlugin, FusionPluginTypedDict
 from .imageconfig import ImageConfig, ImageConfigTypedDict
 from .moderationplugin import ModerationPlugin, ModerationPluginTypedDict
 from .paretorouterplugin import ParetoRouterPlugin, ParetoRouterPluginTypedDict
+from .prediction import Prediction, PredictionTypedDict
 from .promptcacheoptions import PromptCacheOptions, PromptCacheOptionsTypedDict
 from .providerpreferences import ProviderPreferences, ProviderPreferencesTypedDict
 from .responsehealingplugin import ResponseHealingPlugin, ResponseHealingPluginTypedDict
@@ -258,6 +259,8 @@ class ChatRequestTypedDict(TypedDict):
     r"""Whether to enable parallel function calling during tool use. When true, the model may generate multiple tool calls in a single response."""
     plugins: NotRequired[List[ChatRequestPluginTypedDict]]
     r"""Plugins you want to enable for this request, including their settings."""
+    prediction: NotRequired[Nullable[PredictionTypedDict]]
+    r"""Static predicted output content. Supported models can use this to reduce latency when much of the response is known in advance."""
     presence_penalty: NotRequired[Nullable[float]]
     r"""Presence penalty (-2.0 to 2.0)"""
     prompt_cache_key: NotRequired[Nullable[str]]
@@ -358,6 +361,9 @@ class ChatRequest(BaseModel):
     plugins: Optional[List[ChatRequestPlugin]] = None
     r"""Plugins you want to enable for this request, including their settings."""
 
+    prediction: OptionalNullable[Prediction] = UNSET
+    r"""Static predicted output content. Supported models can use this to reduce latency when much of the response is known in advance."""
+
     presence_penalty: OptionalNullable[float] = UNSET
     r"""Presence penalty (-2.0 to 2.0)"""
 
@@ -448,6 +454,7 @@ class ChatRequest(BaseModel):
                 "models",
                 "parallel_tool_calls",
                 "plugins",
+                "prediction",
                 "presence_penalty",
                 "prompt_cache_key",
                 "prompt_cache_options",
@@ -483,6 +490,7 @@ class ChatRequest(BaseModel):
                 "max_tokens",
                 "min_p",
                 "parallel_tool_calls",
+                "prediction",
                 "presence_penalty",
                 "prompt_cache_key",
                 "prompt_cache_options",

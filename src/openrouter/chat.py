@@ -64,6 +64,9 @@ class Chat(BaseSDK):
                 Iterable[components.ChatRequestPluginTypedDict],
             ]
         ] = None,
+        prediction: OptionalNullable[
+            Union[components.Prediction, components.PredictionTypedDict]
+        ] = UNSET,
         presence_penalty: OptionalNullable[float] = UNSET,
         prompt_cache_key: OptionalNullable[str] = UNSET,
         prompt_cache_options: OptionalNullable[
@@ -154,6 +157,7 @@ class Chat(BaseSDK):
         :param models: Models to use for completion
         :param parallel_tool_calls: Whether to enable parallel function calling during tool use. When true, the model may generate multiple tool calls in a single response.
         :param plugins: Plugins you want to enable for this request, including their settings.
+        :param prediction: Static predicted output content. Supported models can use this to reduce latency when much of the response is known in advance.
         :param presence_penalty: Presence penalty (-2.0 to 2.0)
         :param prompt_cache_key:
         :param prompt_cache_options: Request-level prompt-cache controls. `mode: \"explicit\"` disables OpenAI-managed breakpoints so only blocks marked with `prompt_cache_breakpoint` are cached. Only supported by OpenAI GPT-5.6 and newer.
@@ -228,6 +232,9 @@ class Chat(BaseSDK):
                 Iterable[components.ChatRequestPluginTypedDict],
             ]
         ] = None,
+        prediction: OptionalNullable[
+            Union[components.Prediction, components.PredictionTypedDict]
+        ] = UNSET,
         presence_penalty: OptionalNullable[float] = UNSET,
         prompt_cache_key: OptionalNullable[str] = UNSET,
         prompt_cache_options: OptionalNullable[
@@ -318,6 +325,7 @@ class Chat(BaseSDK):
         :param models: Models to use for completion
         :param parallel_tool_calls: Whether to enable parallel function calling during tool use. When true, the model may generate multiple tool calls in a single response.
         :param plugins: Plugins you want to enable for this request, including their settings.
+        :param prediction: Static predicted output content. Supported models can use this to reduce latency when much of the response is known in advance.
         :param presence_penalty: Presence penalty (-2.0 to 2.0)
         :param prompt_cache_key:
         :param prompt_cache_options: Request-level prompt-cache controls. `mode: \"explicit\"` disables OpenAI-managed breakpoints so only blocks marked with `prompt_cache_breakpoint` are cached. Only supported by OpenAI GPT-5.6 and newer.
@@ -392,6 +400,9 @@ class Chat(BaseSDK):
                 Iterable[components.ChatRequestPluginTypedDict],
             ]
         ] = None,
+        prediction: OptionalNullable[
+            Union[components.Prediction, components.PredictionTypedDict]
+        ] = UNSET,
         presence_penalty: OptionalNullable[float] = UNSET,
         prompt_cache_key: OptionalNullable[str] = UNSET,
         prompt_cache_options: OptionalNullable[
@@ -484,6 +495,7 @@ class Chat(BaseSDK):
         :param models: Models to use for completion
         :param parallel_tool_calls: Whether to enable parallel function calling during tool use. When true, the model may generate multiple tool calls in a single response.
         :param plugins: Plugins you want to enable for this request, including their settings.
+        :param prediction: Static predicted output content. Supported models can use this to reduce latency when much of the response is known in advance.
         :param presence_penalty: Presence penalty (-2.0 to 2.0)
         :param prompt_cache_key:
         :param prompt_cache_options: Request-level prompt-cache controls. `mode: \"explicit\"` disables OpenAI-managed breakpoints so only blocks marked with `prompt_cache_breakpoint` are cached. Only supported by OpenAI GPT-5.6 and newer.
@@ -557,6 +569,9 @@ class Chat(BaseSDK):
                 Iterable[components.ChatRequestPluginTypedDict],
             ]
         ] = None,
+        prediction: OptionalNullable[
+            Union[components.Prediction, components.PredictionTypedDict]
+        ] = UNSET,
         presence_penalty: OptionalNullable[float] = UNSET,
         prompt_cache_key: OptionalNullable[str] = UNSET,
         prompt_cache_options: OptionalNullable[
@@ -649,6 +664,7 @@ class Chat(BaseSDK):
         :param models: Models to use for completion
         :param parallel_tool_calls: Whether to enable parallel function calling during tool use. When true, the model may generate multiple tool calls in a single response.
         :param plugins: Plugins you want to enable for this request, including their settings.
+        :param prediction: Static predicted output content. Supported models can use this to reduce latency when much of the response is known in advance.
         :param presence_penalty: Presence penalty (-2.0 to 2.0)
         :param prompt_cache_key:
         :param prompt_cache_options: Request-level prompt-cache controls. `mode: \"explicit\"` disables OpenAI-managed breakpoints so only blocks marked with `prompt_cache_breakpoint` are cached. Only supported by OpenAI GPT-5.6 and newer.
@@ -723,6 +739,9 @@ class Chat(BaseSDK):
                 parallel_tool_calls=parallel_tool_calls,
                 plugins=utils.get_pydantic_model(
                     plugins, Optional[List[components.ChatRequestPlugin]]
+                ),
+                prediction=utils.get_pydantic_model(
+                    prediction, OptionalNullable[components.Prediction]
                 ),
                 presence_penalty=presence_penalty,
                 prompt_cache_key=prompt_cache_key,
@@ -1005,6 +1024,9 @@ class Chat(BaseSDK):
                 Iterable[components.ChatRequestPluginTypedDict],
             ]
         ] = None,
+        prediction: OptionalNullable[
+            Union[components.Prediction, components.PredictionTypedDict]
+        ] = UNSET,
         presence_penalty: OptionalNullable[float] = UNSET,
         prompt_cache_key: OptionalNullable[str] = UNSET,
         prompt_cache_options: OptionalNullable[
@@ -1095,6 +1117,7 @@ class Chat(BaseSDK):
         :param models: Models to use for completion
         :param parallel_tool_calls: Whether to enable parallel function calling during tool use. When true, the model may generate multiple tool calls in a single response.
         :param plugins: Plugins you want to enable for this request, including their settings.
+        :param prediction: Static predicted output content. Supported models can use this to reduce latency when much of the response is known in advance.
         :param presence_penalty: Presence penalty (-2.0 to 2.0)
         :param prompt_cache_key:
         :param prompt_cache_options: Request-level prompt-cache controls. `mode: \"explicit\"` disables OpenAI-managed breakpoints so only blocks marked with `prompt_cache_breakpoint` are cached. Only supported by OpenAI GPT-5.6 and newer.
@@ -1169,6 +1192,9 @@ class Chat(BaseSDK):
                 Iterable[components.ChatRequestPluginTypedDict],
             ]
         ] = None,
+        prediction: OptionalNullable[
+            Union[components.Prediction, components.PredictionTypedDict]
+        ] = UNSET,
         presence_penalty: OptionalNullable[float] = UNSET,
         prompt_cache_key: OptionalNullable[str] = UNSET,
         prompt_cache_options: OptionalNullable[
@@ -1259,6 +1285,7 @@ class Chat(BaseSDK):
         :param models: Models to use for completion
         :param parallel_tool_calls: Whether to enable parallel function calling during tool use. When true, the model may generate multiple tool calls in a single response.
         :param plugins: Plugins you want to enable for this request, including their settings.
+        :param prediction: Static predicted output content. Supported models can use this to reduce latency when much of the response is known in advance.
         :param presence_penalty: Presence penalty (-2.0 to 2.0)
         :param prompt_cache_key:
         :param prompt_cache_options: Request-level prompt-cache controls. `mode: \"explicit\"` disables OpenAI-managed breakpoints so only blocks marked with `prompt_cache_breakpoint` are cached. Only supported by OpenAI GPT-5.6 and newer.
@@ -1333,6 +1360,9 @@ class Chat(BaseSDK):
                 Iterable[components.ChatRequestPluginTypedDict],
             ]
         ] = None,
+        prediction: OptionalNullable[
+            Union[components.Prediction, components.PredictionTypedDict]
+        ] = UNSET,
         presence_penalty: OptionalNullable[float] = UNSET,
         prompt_cache_key: OptionalNullable[str] = UNSET,
         prompt_cache_options: OptionalNullable[
@@ -1426,6 +1456,7 @@ class Chat(BaseSDK):
         :param models: Models to use for completion
         :param parallel_tool_calls: Whether to enable parallel function calling during tool use. When true, the model may generate multiple tool calls in a single response.
         :param plugins: Plugins you want to enable for this request, including their settings.
+        :param prediction: Static predicted output content. Supported models can use this to reduce latency when much of the response is known in advance.
         :param presence_penalty: Presence penalty (-2.0 to 2.0)
         :param prompt_cache_key:
         :param prompt_cache_options: Request-level prompt-cache controls. `mode: \"explicit\"` disables OpenAI-managed breakpoints so only blocks marked with `prompt_cache_breakpoint` are cached. Only supported by OpenAI GPT-5.6 and newer.
@@ -1499,6 +1530,9 @@ class Chat(BaseSDK):
                 Iterable[components.ChatRequestPluginTypedDict],
             ]
         ] = None,
+        prediction: OptionalNullable[
+            Union[components.Prediction, components.PredictionTypedDict]
+        ] = UNSET,
         presence_penalty: OptionalNullable[float] = UNSET,
         prompt_cache_key: OptionalNullable[str] = UNSET,
         prompt_cache_options: OptionalNullable[
@@ -1592,6 +1626,7 @@ class Chat(BaseSDK):
         :param models: Models to use for completion
         :param parallel_tool_calls: Whether to enable parallel function calling during tool use. When true, the model may generate multiple tool calls in a single response.
         :param plugins: Plugins you want to enable for this request, including their settings.
+        :param prediction: Static predicted output content. Supported models can use this to reduce latency when much of the response is known in advance.
         :param presence_penalty: Presence penalty (-2.0 to 2.0)
         :param prompt_cache_key:
         :param prompt_cache_options: Request-level prompt-cache controls. `mode: \"explicit\"` disables OpenAI-managed breakpoints so only blocks marked with `prompt_cache_breakpoint` are cached. Only supported by OpenAI GPT-5.6 and newer.
@@ -1666,6 +1701,9 @@ class Chat(BaseSDK):
                 parallel_tool_calls=parallel_tool_calls,
                 plugins=utils.get_pydantic_model(
                     plugins, Optional[List[components.ChatRequestPlugin]]
+                ),
+                prediction=utils.get_pydantic_model(
+                    prediction, OptionalNullable[components.Prediction]
                 ),
                 presence_penalty=presence_penalty,
                 prompt_cache_key=prompt_cache_key,
