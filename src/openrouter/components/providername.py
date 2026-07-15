@@ -97,6 +97,7 @@ ProviderName = Union[
         "Wafer",
         "WandB",
         "Quiver",
+        "Krea",
         "Xiaomi",
         "xAI",
         "Z.AI",

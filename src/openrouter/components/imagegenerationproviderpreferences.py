@@ -100,6 +100,7 @@ class ImageGenerationProviderPreferencesOptionsTypedDict(TypedDict):
     io_net: NotRequired[Dict[str, Nullable[Any]]]
     ionstream: NotRequired[Dict[str, Nullable[Any]]]
     klusterai: NotRequired[Dict[str, Nullable[Any]]]
+    krea: NotRequired[Dict[str, Nullable[Any]]]
     lambda_: NotRequired[Dict[str, Nullable[Any]]]
     lepton: NotRequired[Dict[str, Nullable[Any]]]
     liquid: NotRequired[Dict[str, Nullable[Any]]]
@@ -315,6 +316,8 @@ class ImageGenerationProviderPreferencesOptions(BaseModel):
 
     klusterai: Optional[Dict[str, Nullable[Any]]] = None
 
+    krea: Optional[Dict[str, Nullable[Any]]] = None
+
     lambda_: Annotated[
         Optional[Dict[str, Nullable[Any]]], pydantic.Field(alias="lambda")
     ] = None
@@ -523,6 +526,7 @@ class ImageGenerationProviderPreferencesOptions(BaseModel):
                 "io-net",
                 "ionstream",
                 "klusterai",
+                "krea",
                 "lambda",
                 "lepton",
                 "liquid",
