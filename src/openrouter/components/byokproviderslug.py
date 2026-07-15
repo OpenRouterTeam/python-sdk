@@ -53,6 +53,7 @@ BYOKProviderSlug = Union[
         "inflection",
         "io-net",
         "ionstream",
+        "krea",
         "liquid",
         "mancer",
         "mara",
