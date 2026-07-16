@@ -7,14 +7,14 @@ from openrouter.components import (
     forbiddenresponseerrordata as components_forbiddenresponseerrordata,
 )
 from openrouter.errors import OpenRouterError
-from openrouter.types import BaseModel, Nullable, OptionalNullable, UNSET
+from openrouter.types import BaseModel, OptionalNullable, UNSET
 from typing import Any, Dict, Optional
 
 
 class ForbiddenResponseErrorData(BaseModel):
     error: components_forbiddenresponseerrordata.ForbiddenResponseErrorData
     r"""Error data for ForbiddenResponse"""
-    openrouter_metadata: OptionalNullable[Dict[str, Nullable[Any]]] = UNSET
+    openrouter_metadata: OptionalNullable[Dict[str, Any]] = UNSET
     user_id: OptionalNullable[str] = UNSET
 
 

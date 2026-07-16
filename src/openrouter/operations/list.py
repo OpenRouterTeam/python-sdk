@@ -96,7 +96,7 @@ class ListRequestTypedDict(TypedDict):
     """
     include_disabled: NotRequired[bool]
     r"""Whether to include disabled API keys in the response"""
-    offset: NotRequired[int]
+    offset: NotRequired[Nullable[int]]
     r"""Number of API keys to skip for pagination"""
     workspace_id: NotRequired[str]
     r"""Filter API keys by workspace ID. By default, keys in the default workspace are returned."""
@@ -138,9 +138,9 @@ class ListRequest(BaseModel):
     r"""Whether to include disabled API keys in the response"""
 
     offset: Annotated[
-        Optional[int],
+        OptionalNullable[int],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ] = None
+    ] = UNSET
     r"""Number of API keys to skip for pagination"""
 
     workspace_id: Annotated[
@@ -161,15 +161,24 @@ class ListRequest(BaseModel):
                 "workspace_id",
             ]
         )
+        nullable_fields = set(["offset"])
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
             if val != UNSET_SENTINEL:
-                if val is not None or k not in optional_fields:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
                     m[k] = val
 
         return m

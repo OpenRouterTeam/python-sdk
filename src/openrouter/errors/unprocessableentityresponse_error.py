@@ -7,14 +7,14 @@ from openrouter.components import (
     unprocessableentityresponseerrordata as components_unprocessableentityresponseerrordata,
 )
 from openrouter.errors import OpenRouterError
-from openrouter.types import BaseModel, Nullable, OptionalNullable, UNSET
+from openrouter.types import BaseModel, OptionalNullable, UNSET
 from typing import Any, Dict, Optional
 
 
 class UnprocessableEntityResponseErrorData(BaseModel):
     error: components_unprocessableentityresponseerrordata.UnprocessableEntityResponseErrorData
     r"""Error data for UnprocessableEntityResponse"""
-    openrouter_metadata: OptionalNullable[Dict[str, Nullable[Any]]] = UNSET
+    openrouter_metadata: OptionalNullable[Dict[str, Any]] = UNSET
     user_id: OptionalNullable[str] = UNSET
 
 

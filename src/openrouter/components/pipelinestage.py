@@ -19,7 +19,7 @@ class PipelineStageTypedDict(TypedDict):
     type: PipelineStageType
     r"""Categorical kind of a pipeline stage. Multiple plugins can share a type (e.g. all guardrail-level plugins emit `guardrail`); the `name` field disambiguates which plugin emitted it."""
     cost_usd: NotRequired[Nullable[float]]
-    data: NotRequired[Dict[str, Nullable[Any]]]
+    data: NotRequired[Dict[str, Any]]
     guardrail_id: NotRequired[str]
     guardrail_scope: NotRequired[str]
     summary: NotRequired[str]
@@ -33,7 +33,7 @@ class PipelineStage(BaseModel):
 
     cost_usd: OptionalNullable[float] = UNSET
 
-    data: Optional[Dict[str, Nullable[Any]]] = None
+    data: Optional[Dict[str, Any]] = None
 
     guardrail_id: Optional[str] = None
 

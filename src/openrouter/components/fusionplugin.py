@@ -3,8 +3,8 @@
 from __future__ import annotations
 from openrouter.types import BaseModel, Nullable, UNSET_SENTINEL, UnrecognizedStr
 from pydantic import model_serializer
-from typing import Any, Dict, List, Literal, Optional, Union
-from typing_extensions import NotRequired, TypedDict
+from typing import Dict, List, Literal, Optional, Union
+from typing_extensions import NotRequired, TypeAliasType, TypedDict
 
 
 FusionPluginID = Literal["fusion",]
@@ -21,10 +21,42 @@ PresetEnum = Union[
 r"""A curated OpenRouter fusion preset (slugs follow `<task>-<tier>`, e.g. `general-high`). Expands server-side into the preset's analysis_models panel and judge model, so callers never name individual models. Explicitly provided `analysis_models` / `model` take precedence."""
 
 
+Parameters2TypedDict = TypeAliasType("Parameters2TypedDict", Union[str, float, bool])
+
+
+Parameters2 = TypeAliasType("Parameters2", Union[str, float, bool])
+
+
+Parameters1TypedDict = TypeAliasType("Parameters1TypedDict", Union[str, float, bool])
+
+
+Parameters1 = TypeAliasType("Parameters1", Union[str, float, bool])
+
+
+Parameters3TypedDict = TypeAliasType(
+    "Parameters3TypedDict",
+    Union[
+        str,
+        float,
+        bool,
+        List[Nullable[Parameters1TypedDict]],
+        Dict[str, Nullable[Parameters2TypedDict]],
+    ],
+)
+
+
+Parameters3 = TypeAliasType(
+    "Parameters3",
+    Union[
+        str, float, bool, List[Nullable[Parameters1]], Dict[str, Nullable[Parameters2]]
+    ],
+)
+
+
 class FusionPluginToolTypedDict(TypedDict):
     type: str
     r"""Server tool type identifier (e.g. \"openrouter:web_search\", \"openrouter:web_fetch\")."""
-    parameters: NotRequired[Dict[str, Nullable[Any]]]
+    parameters: NotRequired[Dict[str, Nullable[Parameters3TypedDict]]]
     r"""Optional configuration forwarded as the tool's `parameters` object."""
 
 
@@ -32,7 +64,7 @@ class FusionPluginTool(BaseModel):
     type: str
     r"""Server tool type identifier (e.g. \"openrouter:web_search\", \"openrouter:web_fetch\")."""
 
-    parameters: Optional[Dict[str, Nullable[Any]]] = None
+    parameters: Optional[Dict[str, Nullable[Parameters3]]] = None
     r"""Optional configuration forwarded as the tool's `parameters` object."""
 
     @model_serializer(mode="wrap")

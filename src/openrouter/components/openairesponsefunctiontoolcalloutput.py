@@ -4,6 +4,7 @@ from __future__ import annotations
 from .inputfile import InputFile, InputFileTypedDict
 from .inputimage import InputImage, InputImageTypedDict
 from .inputtext import InputText, InputTextTypedDict
+from .toolcallstatus import ToolCallStatus
 from functools import partial
 from openrouter.types import (
     BaseModel,
@@ -11,7 +12,6 @@ from openrouter.types import (
     OptionalNullable,
     UNSET,
     UNSET_SENTINEL,
-    UnrecognizedStr,
 )
 from openrouter.utils.unions import parse_open_union
 from pydantic import ConfigDict, model_serializer
@@ -74,16 +74,6 @@ OpenAIResponseFunctionToolCallOutputOutput2 = TypeAliasType(
 )
 
 
-OpenAIResponseFunctionToolCallOutputStatus = Union[
-    Literal[
-        "in_progress",
-        "completed",
-        "incomplete",
-    ],
-    UnrecognizedStr,
-]
-
-
 OpenAIResponseFunctionToolCallOutputType = Literal["function_call_output",]
 
 
@@ -92,7 +82,7 @@ class OpenAIResponseFunctionToolCallOutputTypedDict(TypedDict):
     output: OpenAIResponseFunctionToolCallOutputOutput2TypedDict
     type: OpenAIResponseFunctionToolCallOutputType
     id: NotRequired[Nullable[str]]
-    status: NotRequired[Nullable[OpenAIResponseFunctionToolCallOutputStatus]]
+    status: NotRequired[Nullable[ToolCallStatus]]
 
 
 class OpenAIResponseFunctionToolCallOutput(BaseModel):
@@ -104,7 +94,7 @@ class OpenAIResponseFunctionToolCallOutput(BaseModel):
 
     id: OptionalNullable[str] = UNSET
 
-    status: OptionalNullable[OpenAIResponseFunctionToolCallOutputStatus] = UNSET
+    status: OptionalNullable[ToolCallStatus] = UNSET
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

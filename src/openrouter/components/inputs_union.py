@@ -156,7 +156,7 @@ from openrouter.types import (
 from openrouter.utils import get_discriminator
 import pydantic
 from pydantic import Discriminator, Tag, model_serializer
-from typing import Any, List, Literal, Optional, Union
+from typing import List, Literal, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
@@ -266,11 +266,11 @@ InputsContent1 = Annotated[
 
 
 InputsContent2TypedDict = TypeAliasType(
-    "InputsContent2TypedDict", Union[List[InputsContent1TypedDict], str, Any]
+    "InputsContent2TypedDict", Union[List[InputsContent1TypedDict], str]
 )
 
 
-InputsContent2 = TypeAliasType("InputsContent2", Union[List[InputsContent1], str, Any])
+InputsContent2 = TypeAliasType("InputsContent2", Union[List[InputsContent1], str])
 
 
 InputsPhaseFinalAnswer = Literal["final_answer",]
@@ -280,14 +280,13 @@ InputsPhaseCommentary = Literal["commentary",]
 
 
 InputsPhaseUnionTypedDict = TypeAliasType(
-    "InputsPhaseUnionTypedDict",
-    Union[InputsPhaseCommentary, InputsPhaseFinalAnswer, Any],
+    "InputsPhaseUnionTypedDict", Union[InputsPhaseCommentary, InputsPhaseFinalAnswer]
 )
 r"""The phase of an assistant message. Use `commentary` for an intermediate assistant message and `final_answer` for the final assistant message. For follow-up requests with models like `gpt-5.3-codex` and later, preserve and resend phase on all assistant messages. Omitting it can degrade performance. Not used for user messages."""
 
 
 InputsPhaseUnion = TypeAliasType(
-    "InputsPhaseUnion", Union[InputsPhaseCommentary, InputsPhaseFinalAnswer, Any]
+    "InputsPhaseUnion", Union[InputsPhaseCommentary, InputsPhaseFinalAnswer]
 )
 r"""The phase of an assistant message. Use `commentary` for an intermediate assistant message and `final_answer` for the final assistant message. For follow-up requests with models like `gpt-5.3-codex` and later, preserve and resend phase on all assistant messages. Omitting it can degrade performance. Not used for user messages."""
 

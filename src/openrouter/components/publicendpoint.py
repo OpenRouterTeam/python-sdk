@@ -6,9 +6,10 @@ from .parameter import Parameter
 from .percentilestats import PercentileStats, PercentileStatsTypedDict
 from .pricingoverride import PricingOverride, PricingOverrideTypedDict
 from .providername import ProviderName
-from openrouter.types import BaseModel, Nullable, UNSET_SENTINEL, UnrecognizedStr
+from .quantization import Quantization
+from openrouter.types import BaseModel, Nullable, UNSET_SENTINEL
 from pydantic import model_serializer
-from typing import List, Literal, Optional, Union
+from typing import List, Optional
 from typing_extensions import NotRequired, TypedDict
 
 
@@ -130,22 +131,6 @@ class Pricing(BaseModel):
         return m
 
 
-PublicEndpointQuantization = Union[
-    Literal[
-        "int4",
-        "int8",
-        "fp4",
-        "fp6",
-        "fp8",
-        "fp16",
-        "bf16",
-        "fp32",
-        "unknown",
-    ],
-    UnrecognizedStr,
-]
-
-
 class PublicEndpointTypedDict(TypedDict):
     r"""Information about a specific model endpoint"""
 
@@ -160,7 +145,7 @@ class PublicEndpointTypedDict(TypedDict):
     name: str
     pricing: PricingTypedDict
     provider_name: ProviderName
-    quantization: Nullable[PublicEndpointQuantization]
+    quantization: Nullable[Quantization]
     supported_parameters: List[Parameter]
     supports_implicit_caching: bool
     tag: str
@@ -196,7 +181,7 @@ class PublicEndpoint(BaseModel):
 
     provider_name: ProviderName
 
-    quantization: Nullable[PublicEndpointQuantization]
+    quantization: Nullable[Quantization]
 
     supported_parameters: List[Parameter]
 

@@ -15,7 +15,7 @@ from openrouter.types import (
 )
 from openrouter.utils import get_discriminator
 from pydantic import Discriminator, Tag, model_serializer
-from typing import Any, List, Literal, Optional, Union
+from typing import List, Literal, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
@@ -102,13 +102,12 @@ EasyInputMessageContentUnion1 = Annotated[
 
 EasyInputMessageContentUnion2TypedDict = TypeAliasType(
     "EasyInputMessageContentUnion2TypedDict",
-    Union[List[EasyInputMessageContentUnion1TypedDict], str, Any],
+    Union[List[EasyInputMessageContentUnion1TypedDict], str],
 )
 
 
 EasyInputMessageContentUnion2 = TypeAliasType(
-    "EasyInputMessageContentUnion2",
-    Union[List[EasyInputMessageContentUnion1], str, Any],
+    "EasyInputMessageContentUnion2", Union[List[EasyInputMessageContentUnion1], str]
 )
 
 
@@ -120,14 +119,14 @@ EasyInputMessagePhaseCommentary = Literal["commentary",]
 
 EasyInputMessagePhaseUnionTypedDict = TypeAliasType(
     "EasyInputMessagePhaseUnionTypedDict",
-    Union[EasyInputMessagePhaseCommentary, EasyInputMessagePhaseFinalAnswer, Any],
+    Union[EasyInputMessagePhaseCommentary, EasyInputMessagePhaseFinalAnswer],
 )
 r"""The phase of an assistant message. Use `commentary` for an intermediate assistant message and `final_answer` for the final assistant message. For follow-up requests with models like `gpt-5.3-codex` and later, preserve and resend phase on all assistant messages. Omitting it can degrade performance. Not used for user messages."""
 
 
 EasyInputMessagePhaseUnion = TypeAliasType(
     "EasyInputMessagePhaseUnion",
-    Union[EasyInputMessagePhaseCommentary, EasyInputMessagePhaseFinalAnswer, Any],
+    Union[EasyInputMessagePhaseCommentary, EasyInputMessagePhaseFinalAnswer],
 )
 r"""The phase of an assistant message. Use `commentary` for an intermediate assistant message and `final_answer` for the final assistant message. For follow-up requests with models like `gpt-5.3-codex` and later, preserve and resend phase on all assistant messages. Omitting it can degrade performance. Not used for user messages."""
 

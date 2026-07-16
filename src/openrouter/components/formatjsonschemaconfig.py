@@ -21,7 +21,7 @@ class FormatJSONSchemaConfigTypedDict(TypedDict):
     r"""JSON schema constrained response format"""
 
     name: str
-    schema_: Dict[str, Nullable[Any]]
+    schema_: Dict[str, Any]
     type: FormatJSONSchemaConfigType
     description: NotRequired[str]
     strict: NotRequired[Nullable[bool]]
@@ -32,7 +32,7 @@ class FormatJSONSchemaConfig(BaseModel):
 
     name: str
 
-    schema_: Annotated[Dict[str, Nullable[Any]], pydantic.Field(alias="schema")]
+    schema_: Annotated[Dict[str, Any], pydantic.Field(alias="schema")]
 
     type: FormatJSONSchemaConfigType
 

@@ -108,13 +108,12 @@ BaseInputsPhaseCommentary = Literal["commentary",]
 
 BaseInputsPhaseUnionTypedDict = TypeAliasType(
     "BaseInputsPhaseUnionTypedDict",
-    Union[BaseInputsPhaseCommentary, BaseInputsPhaseFinalAnswer, Any],
+    Union[BaseInputsPhaseCommentary, BaseInputsPhaseFinalAnswer],
 )
 
 
 BaseInputsPhaseUnion = TypeAliasType(
-    "BaseInputsPhaseUnion",
-    Union[BaseInputsPhaseCommentary, BaseInputsPhaseFinalAnswer, Any],
+    "BaseInputsPhaseUnion", Union[BaseInputsPhaseCommentary, BaseInputsPhaseFinalAnswer]
 )
 
 
@@ -232,10 +231,8 @@ BaseInputsUnion1 = TypeAliasType(
 
 
 BaseInputsUnionTypedDict = TypeAliasType(
-    "BaseInputsUnionTypedDict", Union[str, List[BaseInputsUnion1TypedDict], Any]
+    "BaseInputsUnionTypedDict", Union[str, List[BaseInputsUnion1TypedDict]]
 )
 
 
-BaseInputsUnion = TypeAliasType(
-    "BaseInputsUnion", Union[str, List[BaseInputsUnion1], Any]
-)
+BaseInputsUnion = TypeAliasType("BaseInputsUnion", Union[str, List[BaseInputsUnion1]])

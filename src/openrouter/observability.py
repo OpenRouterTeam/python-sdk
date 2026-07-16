@@ -4,7 +4,7 @@ from .basesdk import BaseSDK
 from jsonpath import JSONPath
 from openrouter import components, errors, operations, utils
 from openrouter._hooks import HookContext
-from openrouter.types import Nullable, OptionalNullable, UNSET
+from openrouter.types import OptionalNullable, UNSET
 from openrouter.utils import get_security_from_env
 from openrouter.utils.unmarshal_json_response import unmarshal_json_response
 from typing import Any, Awaitable, Dict, Iterable, List, Mapping, Optional, Union
@@ -19,7 +19,7 @@ class Observability(BaseSDK):
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
-        offset: Optional[int] = 0,
+        offset: OptionalNullable[int] = 0,
         limit: Optional[int] = 50,
         workspace_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -181,7 +181,7 @@ class Observability(BaseSDK):
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
-        offset: Optional[int] = 0,
+        offset: OptionalNullable[int] = 0,
         limit: Optional[int] = 50,
         workspace_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -345,7 +345,7 @@ class Observability(BaseSDK):
     def create(
         self,
         *,
-        config: Mapping[str, Nullable[Any]],
+        config: Mapping[str, Any],
         name: str,
         type_: components.CreateObservabilityDestinationRequestType,
         http_referer: Optional[str] = None,
@@ -410,7 +410,7 @@ class Observability(BaseSDK):
                 api_key_hashes=utils.unmarshal(
                     api_key_hashes, OptionalNullable[List[str]]
                 ),
-                config=utils.unmarshal(config, Dict[str, Nullable[Any]]),
+                config=utils.unmarshal(config, Dict[str, Any]),
                 enabled=enabled,
                 filter_rules=utils.get_pydantic_model(
                     filter_rules,
@@ -528,7 +528,7 @@ class Observability(BaseSDK):
     async def create_async(
         self,
         *,
-        config: Mapping[str, Nullable[Any]],
+        config: Mapping[str, Any],
         name: str,
         type_: components.CreateObservabilityDestinationRequestType,
         http_referer: Optional[str] = None,
@@ -593,7 +593,7 @@ class Observability(BaseSDK):
                 api_key_hashes=utils.unmarshal(
                     api_key_hashes, OptionalNullable[List[str]]
                 ),
-                config=utils.unmarshal(config, Dict[str, Nullable[Any]]),
+                config=utils.unmarshal(config, Dict[str, Any]),
                 enabled=enabled,
                 filter_rules=utils.get_pydantic_model(
                     filter_rules,
@@ -1236,7 +1236,7 @@ class Observability(BaseSDK):
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
         api_key_hashes: OptionalNullable[Iterable[str]] = UNSET,
-        config: Optional[Mapping[str, Nullable[Any]]] = None,
+        config: Optional[Mapping[str, Any]] = None,
         enabled: Optional[bool] = None,
         filter_rules: OptionalNullable[
             Union[
@@ -1295,7 +1295,7 @@ class Observability(BaseSDK):
                 api_key_hashes=utils.unmarshal(
                     api_key_hashes, OptionalNullable[List[str]]
                 ),
-                config=utils.unmarshal(config, Optional[Dict[str, Nullable[Any]]]),
+                config=utils.unmarshal(config, Optional[Dict[str, Any]]),
                 enabled=enabled,
                 filter_rules=utils.get_pydantic_model(
                     filter_rules,
@@ -1416,7 +1416,7 @@ class Observability(BaseSDK):
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
         api_key_hashes: OptionalNullable[Iterable[str]] = UNSET,
-        config: Optional[Mapping[str, Nullable[Any]]] = None,
+        config: Optional[Mapping[str, Any]] = None,
         enabled: Optional[bool] = None,
         filter_rules: OptionalNullable[
             Union[
@@ -1475,7 +1475,7 @@ class Observability(BaseSDK):
                 api_key_hashes=utils.unmarshal(
                     api_key_hashes, OptionalNullable[List[str]]
                 ),
-                config=utils.unmarshal(config, Optional[Dict[str, Nullable[Any]]]),
+                config=utils.unmarshal(config, Optional[Dict[str, Any]]),
                 enabled=enabled,
                 filter_rules=utils.get_pydantic_model(
                     filter_rules,

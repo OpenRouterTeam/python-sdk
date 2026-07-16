@@ -31,7 +31,7 @@ class ContextCompactionItem(BaseModel):
     model_config = ConfigDict(
         populate_by_name=True, arbitrary_types_allowed=True, extra="allow"
     )
-    __pydantic_extra__: Dict[str, Nullable[Any]] = pydantic.Field(init=False)
+    __pydantic_extra__: Dict[str, Any] = pydantic.Field(init=False)
 
     type: ContextCompactionItemType
 

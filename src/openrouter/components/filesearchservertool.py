@@ -11,7 +11,7 @@ from openrouter.types import (
     UnrecognizedStr,
 )
 from pydantic import model_serializer
-from typing import Any, List, Literal, Optional, Union
+from typing import List, Literal, Optional, Union
 from typing_extensions import NotRequired, TypeAliasType, TypedDict
 
 
@@ -65,11 +65,11 @@ class Filters(BaseModel):
 
 
 FiltersUnionTypedDict = TypeAliasType(
-    "FiltersUnionTypedDict", Union[CompoundFilterTypedDict, FiltersTypedDict, Any]
+    "FiltersUnionTypedDict", Union[CompoundFilterTypedDict, FiltersTypedDict]
 )
 
 
-FiltersUnion = TypeAliasType("FiltersUnion", Union[CompoundFilter, Filters, Any])
+FiltersUnion = TypeAliasType("FiltersUnion", Union[CompoundFilter, Filters])
 
 
 Ranker = Union[

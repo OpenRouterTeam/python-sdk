@@ -21,7 +21,7 @@ class ChatJSONSchemaConfigTypedDict(TypedDict):
     r"""Schema name (a-z, A-Z, 0-9, underscores, dashes, max 64 chars)"""
     description: NotRequired[str]
     r"""Schema description for the model"""
-    schema_: NotRequired[Dict[str, Nullable[Any]]]
+    schema_: NotRequired[Dict[str, Any]]
     r"""JSON Schema object"""
     strict: NotRequired[Nullable[bool]]
     r"""Enable strict schema adherence"""
@@ -36,9 +36,7 @@ class ChatJSONSchemaConfig(BaseModel):
     description: Optional[str] = None
     r"""Schema description for the model"""
 
-    schema_: Annotated[
-        Optional[Dict[str, Nullable[Any]]], pydantic.Field(alias="schema")
-    ] = None
+    schema_: Annotated[Optional[Dict[str, Any]], pydantic.Field(alias="schema")] = None
     r"""JSON Schema object"""
 
     strict: OptionalNullable[bool] = UNSET

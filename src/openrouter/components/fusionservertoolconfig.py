@@ -5,7 +5,7 @@ from .anthropiccachecontroldirective import (
     AnthropicCacheControlDirective,
     AnthropicCacheControlDirectiveTypedDict,
 )
-from openrouter.types import BaseModel, Nullable, UNSET_SENTINEL, UnrecognizedStr
+from openrouter.types import BaseModel, UNSET_SENTINEL, UnrecognizedStr
 from pydantic import model_serializer
 from typing import Any, Dict, List, Literal, Optional, Union
 from typing_extensions import NotRequired, TypedDict
@@ -64,7 +64,7 @@ class FusionServerToolConfigReasoning(BaseModel):
 class FusionServerToolConfigToolTypedDict(TypedDict):
     type: str
     r"""Server tool type identifier (e.g. \"openrouter:web_search\", \"openrouter:web_fetch\")."""
-    parameters: NotRequired[Dict[str, Nullable[Any]]]
+    parameters: NotRequired[Dict[str, Any]]
     r"""Optional configuration forwarded as the tool's `parameters` object."""
 
 
@@ -72,7 +72,7 @@ class FusionServerToolConfigTool(BaseModel):
     type: str
     r"""Server tool type identifier (e.g. \"openrouter:web_search\", \"openrouter:web_fetch\")."""
 
-    parameters: Optional[Dict[str, Nullable[Any]]] = None
+    parameters: Optional[Dict[str, Any]] = None
     r"""Optional configuration forwarded as the tool's `parameters` object."""
 
     @model_serializer(mode="wrap")

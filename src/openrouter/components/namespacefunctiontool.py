@@ -34,8 +34,8 @@ class NamespaceFunctionToolTypedDict(TypedDict):
     allowed_callers: NotRequired[Nullable[List[AllowedCaller]]]
     defer_loading: NotRequired[bool]
     description: NotRequired[Nullable[str]]
-    output_schema: NotRequired[Nullable[Dict[str, Nullable[Any]]]]
-    parameters: NotRequired[Nullable[Dict[str, Nullable[Any]]]]
+    output_schema: NotRequired[Nullable[Dict[str, Any]]]
+    parameters: NotRequired[Nullable[Dict[str, Any]]]
     strict: NotRequired[Nullable[bool]]
 
 
@@ -52,9 +52,9 @@ class NamespaceFunctionTool(BaseModel):
 
     description: OptionalNullable[str] = UNSET
 
-    output_schema: OptionalNullable[Dict[str, Nullable[Any]]] = UNSET
+    output_schema: OptionalNullable[Dict[str, Any]] = UNSET
 
-    parameters: OptionalNullable[Dict[str, Nullable[Any]]] = UNSET
+    parameters: OptionalNullable[Dict[str, Any]] = UNSET
 
     strict: OptionalNullable[bool] = UNSET
 

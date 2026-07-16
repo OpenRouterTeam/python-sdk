@@ -10,7 +10,7 @@ from typing_extensions import TypedDict
 class PresetDesignatedVersionTypedDict(TypedDict):
     r"""A specific version of a preset, containing config and optional system prompt."""
 
-    config: Dict[str, Nullable[Any]]
+    config: Dict[str, Any]
     created_at: str
     creator_id: str
     id: str
@@ -23,7 +23,7 @@ class PresetDesignatedVersionTypedDict(TypedDict):
 class PresetDesignatedVersion(BaseModel):
     r"""A specific version of a preset, containing config and optional system prompt."""
 
-    config: Dict[str, Nullable[Any]]
+    config: Dict[str, Any]
 
     created_at: str
 

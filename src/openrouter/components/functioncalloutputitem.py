@@ -3,6 +3,7 @@
 from __future__ import annotations
 from .inputfile import InputFile, InputFileTypedDict
 from .inputtext import InputText, InputTextTypedDict
+from .toolcallstatus import ToolCallStatus
 from openrouter.types import (
     BaseModel,
     Nullable,
@@ -106,16 +107,6 @@ FunctionCallOutputItemOutputUnion2 = TypeAliasType(
 )
 
 
-FunctionCallOutputItemStatus = Union[
-    Literal[
-        "in_progress",
-        "completed",
-        "incomplete",
-    ],
-    UnrecognizedStr,
-]
-
-
 FunctionCallOutputItemTypeFunctionCallOutput = Literal["function_call_output",]
 
 
@@ -126,7 +117,7 @@ class FunctionCallOutputItemTypedDict(TypedDict):
     output: FunctionCallOutputItemOutputUnion2TypedDict
     type: FunctionCallOutputItemTypeFunctionCallOutput
     id: NotRequired[Nullable[str]]
-    status: NotRequired[Nullable[FunctionCallOutputItemStatus]]
+    status: NotRequired[Nullable[ToolCallStatus]]
 
 
 class FunctionCallOutputItem(BaseModel):
@@ -140,7 +131,7 @@ class FunctionCallOutputItem(BaseModel):
 
     id: OptionalNullable[str] = UNSET
 
-    status: OptionalNullable[FunctionCallOutputItemStatus] = UNSET
+    status: OptionalNullable[ToolCallStatus] = UNSET
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

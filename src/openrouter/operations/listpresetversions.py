@@ -4,7 +4,7 @@ from __future__ import annotations
 from openrouter.components import (
     listpresetversionsresponse as components_listpresetversionsresponse,
 )
-from openrouter.types import BaseModel, UNSET_SENTINEL
+from openrouter.types import BaseModel, Nullable, OptionalNullable, UNSET_SENTINEL
 from openrouter.utils import (
     FieldMetadata,
     HeaderMetadata,
@@ -97,7 +97,7 @@ class ListPresetVersionsRequestTypedDict(TypedDict):
     r"""Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
     """
-    offset: NotRequired[int]
+    offset: NotRequired[Nullable[int]]
     r"""Number of records to skip for pagination"""
     limit: NotRequired[int]
     r"""Maximum number of records to return (max 100)"""
@@ -138,7 +138,7 @@ class ListPresetVersionsRequest(BaseModel):
     """
 
     offset: Annotated[
-        Optional[int],
+        OptionalNullable[int],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = 0
     r"""Number of records to skip for pagination"""
@@ -160,15 +160,24 @@ class ListPresetVersionsRequest(BaseModel):
                 "limit",
             ]
         )
+        nullable_fields = set(["offset"])
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
             if val != UNSET_SENTINEL:
-                if val is not None or k not in optional_fields:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
                     m[k] = val
 
         return m

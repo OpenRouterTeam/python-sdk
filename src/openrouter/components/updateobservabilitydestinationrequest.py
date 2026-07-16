@@ -20,7 +20,7 @@ from typing_extensions import NotRequired, TypedDict
 class UpdateObservabilityDestinationRequestTypedDict(TypedDict):
     api_key_hashes: NotRequired[Nullable[List[str]]]
     r"""Optional allowlist of OpenRouter API key hashes. `null` clears the filter (all keys). Omitting leaves the current value. Must contain at least one hash if provided."""
-    config: NotRequired[Dict[str, Nullable[Any]]]
+    config: NotRequired[Dict[str, Any]]
     r"""Provider-specific configuration fields to update. Masked values are ignored; unset fields keep their current value."""
     enabled: NotRequired[bool]
     r"""Whether the destination is enabled."""
@@ -37,7 +37,7 @@ class UpdateObservabilityDestinationRequest(BaseModel):
     api_key_hashes: OptionalNullable[List[str]] = UNSET
     r"""Optional allowlist of OpenRouter API key hashes. `null` clears the filter (all keys). Omitting leaves the current value. Must contain at least one hash if provided."""
 
-    config: Optional[Dict[str, Nullable[Any]]] = None
+    config: Optional[Dict[str, Any]] = None
     r"""Provider-specific configuration fields to update. Masked values are ignored; unset fields keep their current value."""
 
     enabled: Optional[bool] = None

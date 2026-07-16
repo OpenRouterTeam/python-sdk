@@ -44,7 +44,7 @@ r"""The destination type. Only stable destination types are accepted."""
 
 
 class CreateObservabilityDestinationRequestTypedDict(TypedDict):
-    config: Dict[str, Nullable[Any]]
+    config: Dict[str, Any]
     r"""Provider-specific configuration. The shape depends on `type` and is validated server-side."""
     name: str
     r"""Human-readable name for the destination."""
@@ -65,7 +65,7 @@ class CreateObservabilityDestinationRequestTypedDict(TypedDict):
 
 
 class CreateObservabilityDestinationRequest(BaseModel):
-    config: Dict[str, Nullable[Any]]
+    config: Dict[str, Any]
     r"""Provider-specific configuration. The shape depends on `type` and is validated server-side."""
 
     name: str

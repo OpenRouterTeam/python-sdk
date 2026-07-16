@@ -2,14 +2,7 @@
 
 from __future__ import annotations
 from .toolcallstatus import ToolCallStatus
-from openrouter.types import (
-    BaseModel,
-    Nullable,
-    OptionalNullable,
-    UNSET,
-    UNSET_SENTINEL,
-    UnrecognizedStr,
-)
+from openrouter.types import BaseModel, UNSET_SENTINEL, UnrecognizedStr
 from pydantic import model_serializer
 from typing import Any, Literal, Optional, Union
 from typing_extensions import NotRequired, TypedDict
@@ -36,7 +29,7 @@ class OutputMemoryServerToolItemTypedDict(TypedDict):
     action: NotRequired[ActionEnum]
     id: NotRequired[str]
     key: NotRequired[str]
-    value: NotRequired[Nullable[Any]]
+    value: NotRequired[Any]
 
 
 class OutputMemoryServerToolItem(BaseModel):
@@ -52,29 +45,20 @@ class OutputMemoryServerToolItem(BaseModel):
 
     key: Optional[str] = None
 
-    value: OptionalNullable[Any] = UNSET
+    value: Optional[Any] = None
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(["action", "id", "key", "value"])
-        nullable_fields = set(["value"])
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k, serialized.get(n))
-            is_nullable_and_explicitly_set = (
-                k in nullable_fields
-                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
-            )
 
             if val != UNSET_SENTINEL:
-                if (
-                    val is not None
-                    or k not in optional_fields
-                    or is_nullable_and_explicitly_set
-                ):
+                if val is not None or k not in optional_fields:
                     m[k] = val
 
         return m

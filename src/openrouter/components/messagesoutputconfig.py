@@ -34,14 +34,14 @@ MessagesOutputConfigTypeJSONSchema = Literal["json_schema",]
 class MessagesOutputConfigFormatTypedDict(TypedDict):
     r"""A schema to specify Claude's output format in responses. See [structured outputs](https://platform.claude.com/docs/en/build-with-claude/structured-outputs)."""
 
-    schema_: Dict[str, Nullable[Any]]
+    schema_: Dict[str, Any]
     type: MessagesOutputConfigTypeJSONSchema
 
 
 class MessagesOutputConfigFormat(BaseModel):
     r"""A schema to specify Claude's output format in responses. See [structured outputs](https://platform.claude.com/docs/en/build-with-claude/structured-outputs)."""
 
-    schema_: Annotated[Dict[str, Nullable[Any]], pydantic.Field(alias="schema")]
+    schema_: Annotated[Dict[str, Any], pydantic.Field(alias="schema")]
 
     type: MessagesOutputConfigTypeJSONSchema
 

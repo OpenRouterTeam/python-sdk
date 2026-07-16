@@ -19,7 +19,7 @@ class Presets(BaseSDK):
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
-        offset: Optional[int] = 0,
+        offset: OptionalNullable[int] = 0,
         limit: Optional[int] = 50,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -185,7 +185,7 @@ class Presets(BaseSDK):
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
-        offset: Optional[int] = 0,
+        offset: OptionalNullable[int] = 0,
         limit: Optional[int] = 50,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -2017,7 +2017,7 @@ class Presets(BaseSDK):
             ]
         ] = None,
         presence_penalty: OptionalNullable[float] = UNSET,
-        previous_response_id: OptionalNullable[Any] = UNSET,
+        previous_response_id: Optional[Any] = None,
         prompt: OptionalNullable[
             Union[
                 components.StoredPromptTemplate,
@@ -2369,7 +2369,7 @@ class Presets(BaseSDK):
             ]
         ] = None,
         presence_penalty: OptionalNullable[float] = UNSET,
-        previous_response_id: OptionalNullable[Any] = UNSET,
+        previous_response_id: Optional[Any] = None,
         prompt: OptionalNullable[
             Union[
                 components.StoredPromptTemplate,
@@ -2685,7 +2685,7 @@ class Presets(BaseSDK):
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
-        offset: Optional[int] = 0,
+        offset: OptionalNullable[int] = 0,
         limit: Optional[int] = 50,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -2860,7 +2860,7 @@ class Presets(BaseSDK):
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
-        offset: Optional[int] = 0,
+        offset: OptionalNullable[int] = 0,
         limit: Optional[int] = 50,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,

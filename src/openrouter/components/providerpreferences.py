@@ -19,7 +19,7 @@ from openrouter.types import (
     UnrecognizedStr,
 )
 from pydantic import model_serializer
-from typing import Any, List, Literal, Optional, Union
+from typing import List, Literal, Optional, Union
 from typing_extensions import NotRequired, TypeAliasType, TypedDict
 
 
@@ -118,14 +118,13 @@ ProviderPreferencesOrder = TypeAliasType(
 
 
 ProviderPreferencesSortTypedDict = TypeAliasType(
-    "ProviderPreferencesSortTypedDict",
-    Union[ProviderSortConfigTypedDict, ProviderSort, Any],
+    "ProviderPreferencesSortTypedDict", Union[ProviderSortConfigTypedDict, ProviderSort]
 )
 r"""The sorting strategy to use for this request, if \"order\" is not specified. When set, no load balancing is performed."""
 
 
 ProviderPreferencesSort = TypeAliasType(
-    "ProviderPreferencesSort", Union[ProviderSortConfig, ProviderSort, Any]
+    "ProviderPreferencesSort", Union[ProviderSortConfig, ProviderSort]
 )
 r"""The sorting strategy to use for this request, if \"order\" is not specified. When set, no load balancing is performed."""
 
