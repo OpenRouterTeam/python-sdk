@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c48cf606-fb42-4a45-9c23-8f0555307828
 management:
-  docChecksum: 3faee851467581b4ec6e863cb109a67b
+  docChecksum: 3e3ea2ba9a1c92bebf365d35e653c059
   docVersion: 1.0.0
   speakeasyVersion: 1.787.0
   generationVersion: 2.914.0
-  releaseVersion: 0.11.36
-  configChecksum: 03ef30c1d0400ee205778af8a09d07ac
+  releaseVersion: 0.11.37
+  configChecksum: ffd7279b8cd433cb458481b61b76a36a
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
 persistentEdits:
-  generation_id: 46d669c2-1186-4cbe-b0d6-61daedba50ea
-  pristine_commit_hash: 174adbdade1a2460f702a0dbd4575051051c620f
-  pristine_tree_hash: eb358771766d6ec85d66b60d5f68598301e9a1a3
+  generation_id: 4613e353-96e3-4b5c-902f-d1713b4e4d0c
+  pristine_commit_hash: 2c5632244504445475d358c3482854a8645f0e86
+  pristine_tree_hash: 7812e0a29c30fba1f30f9afd9d7db762842203dd
 features:
   python:
     acceptHeaders: 3.0.0
@@ -4126,8 +4126,8 @@ trackedFiles:
     pristine_git_object: 2cfb4301a444ee320895855dd98311aaca93363b
   docs/components/reasoningformat.mdx:
     id: ad8b386fc1e9
-    last_write_checksum: sha1:4c324f1a8828a549ea5106b08b5de95691587f86
-    pristine_git_object: 704d0542d4b1601b7c0e67a8fd21837b701276a7
+    last_write_checksum: sha1:84154274e638e2bb3d509a93d12ddfe267f88a66
+    pristine_git_object: bde3d7813032150b75f2430aade8fd9459fa8cd9
   docs/components/reasoningitem.mdx:
     id: b878124ede47
     last_write_checksum: sha1:f740ab591ad89130eb9eefbbc507dbbe8a92195b
@@ -6710,8 +6710,8 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:b4399fee33783d1541d54e1a0a2249ed07ffd8e9
-    pristine_git_object: 404b55eae54f491f54a9b4996aa50a59b6998286
+    last_write_checksum: sha1:bc0afeea214b87734081bcc6eb909bf02d447ada
+    pristine_git_object: e147d569e954c7df70caf1d655b54f23708d9069
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77f44b60b98bc126557ec27391f91dfba764bb54
@@ -6738,8 +6738,8 @@ trackedFiles:
     pristine_git_object: 86713cfea633e09d33b3d4e65281071fe20e6137
   src/openrouter/_version.py:
     id: d8d15ad6c586
-    last_write_checksum: sha1:1cb3878e097b146d7e19e11721a1b0f60431c577
-    pristine_git_object: cf24b58ed04335423102ba88e947357ed076bccb
+    last_write_checksum: sha1:53f249d08fd214a35fa9da8c7a0166b1756cad9e
+    pristine_git_object: 9e6dd9fcca60a5c9f8e47fc344233c17ba14381d
   src/openrouter/analytics.py:
     id: cb406b5aaabb
     last_write_checksum: sha1:9e709b71dd0611056dc0cec6150b578defe32841
@@ -8530,8 +8530,8 @@ trackedFiles:
     pristine_git_object: fe3562c76fc28d2f8cacd49a12c0a0500b069147
   src/openrouter/components/reasoningformat.py:
     id: 99d79e5500b6
-    last_write_checksum: sha1:bfb111196309079ff8dcb09ab406d08a3a809e67
-    pristine_git_object: 3145901807a1b03565dab73b2738b14f27919f52
+    last_write_checksum: sha1:948e70633fd44f8f5c99a61e9c2595999a74bd5d
+    pristine_git_object: bb3b5e78ac0c0144b3eccdc307fd77b51f107552
   src/openrouter/components/reasoningitem.py:
     id: 4345f446ad97
     last_write_checksum: sha1:609a0510506f8dc70ca9cba07040b82ebdc9ec9f
@@ -11209,4 +11209,4 @@ examples:
         "500":
           application/json: {"error": {"code": 500, "message": "Internal Server Error"}}
 examplesVersion: 1.0.2
-releaseNotes: "## Python SDK Changes:\n* `open_router.beta.responses.send()`: \n  *  `request.provider.ignore[].union(ProviderName).enum(krea)` **Added**\n* `open_router.tts.create_speech()`: \n  *  `request.provider.options.krea` **Added**\n* `open_router.stt.create_transcription()`: \n  *  `request.provider.options.krea` **Added**\n* `open_router.byok.list()`: \n  *  `request.provider` **Changed**\n  *  `response.data[].provider.enum(krea)` **Added**\n* `open_router.byok.create()`: \n  *  `request.provider.enum(krea)` **Added**\n  *  `response.data.provider.enum(krea)` **Added**\n* `open_router.byok.get()`:  `response.data.provider.enum(krea)` **Added**\n* `open_router.byok.update()`:  `response.data.provider.enum(krea)` **Added**\n* `open_router.chat.send()`: \n  *  `request.provider.ignore[].union(ProviderName).enum(krea)` **Added**\n* `open_router.embeddings.generate()`: \n  *  `request.provider.ignore[].union(ProviderName).enum(krea)` **Added**\n* `open_router.endpoints.list_zdr_endpoints()`:  `response.data[].provider_name.enum(krea)` **Added**\n* `open_router.endpoints.list()`:  `response.data.endpoints[].provider_name.enum(krea)` **Added**\n* `open_router.generations.get_generation()`:  `response.data.provider_responses[].provider_name.enum(krea)` **Added**\n* `open_router.images.generate()`:  `request.provider` **Changed**\n* `open_router.presets.create_presets_chat_completions()`: \n  *  `request.provider.ignore[].union(ProviderName).enum(krea)` **Added**\n* `open_router.presets.create_presets_messages()`: \n  *  `request.provider.ignore[].union(ProviderName).enum(krea)` **Added**\n* `open_router.presets.create_presets_responses()`: \n  *  `request.provider.ignore[].union(ProviderName).enum(krea)` **Added**\n* `open_router.rerank.rerank()`: \n  *  `request.provider.ignore[].union(ProviderName).enum(krea)` **Added**\n* `open_router.video_generation.generate()`: \n  *  `request.provider.options.krea` **Added**\n"
+releaseNotes: "## Python SDK Changes:\n* `open_router.beta.responses.send()`: \n  *  `request.input.union(Array<>)[].union(ReasoningItem).format.enum(meta_responses_v1)` **Added**\n  *  `response` **Changed**\n* `open_router.chat.send()`: \n  *  `request.messages[].union(assistant).reasoning_details[].union(reasoning.text).format.enum(meta_responses_v1)` **Added**\n  *  `response` **Changed**\n* `open_router.presets.create_presets_chat_completions()`: \n  *  `request.messages[].union(assistant).reasoning_details[].union(reasoning.summary).format.enum(meta_responses_v1)` **Added**\n* `open_router.presets.create_presets_responses()`: \n  *  `request.input.union(Array<>)[].union(ReasoningItem).format.enum(meta_responses_v1)` **Added**\n"
