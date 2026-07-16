@@ -59,7 +59,7 @@ from openrouter.types import (
 )
 from openrouter.utils import get_discriminator
 from pydantic import Discriminator, Tag, model_serializer
-from typing import Any, Dict, List, Literal, Optional, Union
+from typing import Dict, List, Literal, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
@@ -216,11 +216,11 @@ ChatRequestServiceTier = Union[
 r"""The service tier to use for processing this request."""
 
 
-StopTypedDict = TypeAliasType("StopTypedDict", Union[str, List[str], Any])
+StopTypedDict = TypeAliasType("StopTypedDict", Union[str, List[str]])
 r"""Stop sequences (up to 4)"""
 
 
-Stop = TypeAliasType("Stop", Union[str, List[str], Any])
+Stop = TypeAliasType("Stop", Union[str, List[str]])
 r"""Stop sequences (up to 4)"""
 
 

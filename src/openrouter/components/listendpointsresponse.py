@@ -3,40 +3,13 @@
 from __future__ import annotations
 from .inputmodality import InputModality
 from .instructtype import InstructType
+from .modelgroup import ModelGroup
 from .outputmodality import OutputModality
 from .publicendpoint import PublicEndpoint, PublicEndpointTypedDict
-from openrouter.types import BaseModel, Nullable, UNSET_SENTINEL, UnrecognizedStr
+from openrouter.types import BaseModel, Nullable, UNSET_SENTINEL
 from pydantic import model_serializer
-from typing import List, Literal, Union
+from typing import List
 from typing_extensions import TypedDict
-
-
-Tokenizer = Union[
-    Literal[
-        "Router",
-        "Media",
-        "Other",
-        "GPT",
-        "Claude",
-        "Gemini",
-        "Gemma",
-        "Grok",
-        "Cohere",
-        "Nova",
-        "Qwen",
-        "Yi",
-        "DeepSeek",
-        "Mistral",
-        "Llama2",
-        "Llama3",
-        "Llama4",
-        "PaLM",
-        "RWKV",
-        "Qwen3",
-    ],
-    UnrecognizedStr,
-]
-r"""Tokenizer type used by the model"""
 
 
 class ArchitectureTypedDict(TypedDict):
@@ -50,7 +23,7 @@ class ArchitectureTypedDict(TypedDict):
     r"""Primary modality of the model"""
     output_modalities: List[OutputModality]
     r"""Supported output modalities"""
-    tokenizer: Nullable[Tokenizer]
+    tokenizer: Nullable[ModelGroup]
 
 
 class Architecture(BaseModel):
@@ -68,7 +41,7 @@ class Architecture(BaseModel):
     output_modalities: List[OutputModality]
     r"""Supported output modalities"""
 
-    tokenizer: Nullable[Tokenizer]
+    tokenizer: Nullable[ModelGroup]
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

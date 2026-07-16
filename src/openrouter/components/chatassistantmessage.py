@@ -14,19 +14,18 @@ from openrouter.types import (
     UNSET_SENTINEL,
 )
 from pydantic import model_serializer
-from typing import Any, List, Literal, Optional, Union
+from typing import List, Literal, Optional, Union
 from typing_extensions import NotRequired, TypeAliasType, TypedDict
 
 
 ChatAssistantMessageContentTypedDict = TypeAliasType(
-    "ChatAssistantMessageContentTypedDict",
-    Union[str, List[ChatContentItemsTypedDict], Any],
+    "ChatAssistantMessageContentTypedDict", Union[str, List[ChatContentItemsTypedDict]]
 )
 r"""Assistant message content"""
 
 
 ChatAssistantMessageContent = TypeAliasType(
-    "ChatAssistantMessageContent", Union[str, List[ChatContentItems], Any]
+    "ChatAssistantMessageContent", Union[str, List[ChatContentItems]]
 )
 r"""Assistant message content"""
 

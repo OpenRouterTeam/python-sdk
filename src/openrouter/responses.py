@@ -66,7 +66,7 @@ class Responses(BaseSDK):
             ]
         ] = None,
         presence_penalty: OptionalNullable[float] = UNSET,
-        previous_response_id: OptionalNullable[Any] = UNSET,
+        previous_response_id: Optional[Any] = None,
         prompt: OptionalNullable[
             Union[
                 components.StoredPromptTemplate,
@@ -224,7 +224,7 @@ class Responses(BaseSDK):
             ]
         ] = None,
         presence_penalty: OptionalNullable[float] = UNSET,
-        previous_response_id: OptionalNullable[Any] = UNSET,
+        previous_response_id: Optional[Any] = None,
         prompt: OptionalNullable[
             Union[
                 components.StoredPromptTemplate,
@@ -382,7 +382,7 @@ class Responses(BaseSDK):
             ]
         ] = None,
         presence_penalty: OptionalNullable[float] = UNSET,
-        previous_response_id: OptionalNullable[Any] = UNSET,
+        previous_response_id: Optional[Any] = None,
         prompt: OptionalNullable[
             Union[
                 components.StoredPromptTemplate,
@@ -542,7 +542,7 @@ class Responses(BaseSDK):
             ]
         ] = None,
         presence_penalty: OptionalNullable[float] = UNSET,
-        previous_response_id: OptionalNullable[Any] = UNSET,
+        previous_response_id: Optional[Any] = None,
         prompt: OptionalNullable[
             Union[
                 components.StoredPromptTemplate,
@@ -985,7 +985,7 @@ class Responses(BaseSDK):
             ]
         ] = None,
         presence_penalty: OptionalNullable[float] = UNSET,
-        previous_response_id: OptionalNullable[Any] = UNSET,
+        previous_response_id: Optional[Any] = None,
         prompt: OptionalNullable[
             Union[
                 components.StoredPromptTemplate,
@@ -1143,7 +1143,7 @@ class Responses(BaseSDK):
             ]
         ] = None,
         presence_penalty: OptionalNullable[float] = UNSET,
-        previous_response_id: OptionalNullable[Any] = UNSET,
+        previous_response_id: Optional[Any] = None,
         prompt: OptionalNullable[
             Union[
                 components.StoredPromptTemplate,
@@ -1301,7 +1301,7 @@ class Responses(BaseSDK):
             ]
         ] = None,
         presence_penalty: OptionalNullable[float] = UNSET,
-        previous_response_id: OptionalNullable[Any] = UNSET,
+        previous_response_id: Optional[Any] = None,
         prompt: OptionalNullable[
             Union[
                 components.StoredPromptTemplate,
@@ -1461,7 +1461,7 @@ class Responses(BaseSDK):
             ]
         ] = None,
         presence_penalty: OptionalNullable[float] = UNSET,
-        previous_response_id: OptionalNullable[Any] = UNSET,
+        previous_response_id: Optional[Any] = None,
         prompt: OptionalNullable[
             Union[
                 components.StoredPromptTemplate,

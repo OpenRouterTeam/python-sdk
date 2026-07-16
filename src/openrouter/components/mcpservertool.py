@@ -10,7 +10,7 @@ from openrouter.types import (
     UnrecognizedStr,
 )
 from pydantic import model_serializer
-from typing import Any, Dict, List, Literal, Optional, Union
+from typing import Dict, List, Literal, Optional, Union
 from typing_extensions import NotRequired, TypeAliasType, TypedDict
 
 
@@ -42,13 +42,11 @@ class AllowedTools(BaseModel):
 
 
 AllowedToolsUnionTypedDict = TypeAliasType(
-    "AllowedToolsUnionTypedDict", Union[AllowedToolsTypedDict, List[str], Any]
+    "AllowedToolsUnionTypedDict", Union[AllowedToolsTypedDict, List[str]]
 )
 
 
-AllowedToolsUnion = TypeAliasType(
-    "AllowedToolsUnion", Union[AllowedTools, List[str], Any]
-)
+AllowedToolsUnion = TypeAliasType("AllowedToolsUnion", Union[AllowedTools, List[str]])
 
 
 ConnectorID = Union[
@@ -149,13 +147,13 @@ class RequireApproval(BaseModel):
 
 RequireApprovalUnionTypedDict = TypeAliasType(
     "RequireApprovalUnionTypedDict",
-    Union[RequireApprovalTypedDict, RequireApprovalAlways, RequireApprovalNever, Any],
+    Union[RequireApprovalTypedDict, RequireApprovalAlways, RequireApprovalNever],
 )
 
 
 RequireApprovalUnion = TypeAliasType(
     "RequireApprovalUnion",
-    Union[RequireApproval, RequireApprovalAlways, RequireApprovalNever, Any],
+    Union[RequireApproval, RequireApprovalAlways, RequireApprovalNever],
 )
 
 

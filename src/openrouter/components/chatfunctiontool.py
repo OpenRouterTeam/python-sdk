@@ -56,7 +56,7 @@ class ChatFunctionToolFunctionFunctionTypedDict(TypedDict):
     r"""Function name (a-z, A-Z, 0-9, underscores, dashes, max 64 chars)"""
     description: NotRequired[str]
     r"""Function description for the model"""
-    parameters: NotRequired[Dict[str, Nullable[Any]]]
+    parameters: NotRequired[Dict[str, Any]]
     r"""Function parameters as JSON Schema object"""
     strict: NotRequired[Nullable[bool]]
     r"""Enable strict schema adherence"""
@@ -71,7 +71,7 @@ class ChatFunctionToolFunctionFunction(BaseModel):
     description: Optional[str] = None
     r"""Function description for the model"""
 
-    parameters: Optional[Dict[str, Nullable[Any]]] = None
+    parameters: Optional[Dict[str, Any]] = None
     r"""Function parameters as JSON Schema object"""
 
     strict: OptionalNullable[bool] = UNSET

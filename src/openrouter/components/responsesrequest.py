@@ -71,7 +71,10 @@ from .preview_websearchservertool import (
 )
 from .promptcacheoptions import PromptCacheOptions, PromptCacheOptionsTypedDict
 from .providerpreferences import ProviderPreferences, ProviderPreferencesTypedDict
-from .reasoningconfig import ReasoningConfig, ReasoningConfigTypedDict
+from .reasoningcontext import ReasoningContext
+from .reasoningeffort import ReasoningEffort
+from .reasoningmode import ReasoningMode
+from .reasoningsummaryverbosity import ReasoningSummaryVerbosity
 from .responsehealingplugin import ResponseHealingPlugin, ResponseHealingPluginTypedDict
 from .responseincludesenum import ResponseIncludesEnum
 from .searchmodelsservertool_openrouter import (
@@ -150,6 +153,62 @@ ResponsesRequestPlugin = Annotated[
 ]
 
 
+class ReasoningConfigTypedDict(TypedDict):
+    context: NotRequired[Nullable[ReasoningContext]]
+    r"""Controls which reasoning is available to the model. `auto` uses the model default (same as omitting); `all_turns` includes reasoning from earlier turns passed in input; `current_turn` limits to the current turn only. Only supported by OpenAI GPT-5.6 and newer."""
+    effort: NotRequired[Nullable[ReasoningEffort]]
+    mode: NotRequired[Nullable[ReasoningMode]]
+    r"""Selects the reasoning mode. `standard` is the default; `pro` engages deeper reasoning on models that support it, billed at standard token rates. Only supported by OpenAI GPT-5.6 and newer."""
+    summary: NotRequired[Nullable[ReasoningSummaryVerbosity]]
+    enabled: NotRequired[Nullable[bool]]
+    max_tokens: NotRequired[Nullable[int]]
+
+
+class ReasoningConfig(BaseModel):
+    context: OptionalNullable[ReasoningContext] = UNSET
+    r"""Controls which reasoning is available to the model. `auto` uses the model default (same as omitting); `all_turns` includes reasoning from earlier turns passed in input; `current_turn` limits to the current turn only. Only supported by OpenAI GPT-5.6 and newer."""
+
+    effort: OptionalNullable[ReasoningEffort] = UNSET
+
+    mode: OptionalNullable[ReasoningMode] = UNSET
+    r"""Selects the reasoning mode. `standard` is the default; `pro` engages deeper reasoning on models that support it, billed at standard token rates. Only supported by OpenAI GPT-5.6 and newer."""
+
+    summary: OptionalNullable[ReasoningSummaryVerbosity] = UNSET
+
+    enabled: OptionalNullable[bool] = UNSET
+
+    max_tokens: OptionalNullable[int] = UNSET
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            ["context", "effort", "mode", "summary", "enabled", "max_tokens"]
+        )
+        nullable_fields = set(
+            ["context", "effort", "mode", "summary", "enabled", "max_tokens"]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
+
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
+
+        return m
+
+
 ResponsesRequestServiceTier = Union[
     Literal[
         "auto",
@@ -169,7 +228,7 @@ class ResponsesRequestToolFunctionTypedDict(TypedDict):
     r"""Function tool definition"""
 
     name: str
-    parameters: Nullable[Dict[str, Nullable[Any]]]
+    parameters: Nullable[Dict[str, Any]]
     type: ResponsesRequestType
     description: NotRequired[Nullable[str]]
     strict: NotRequired[Nullable[bool]]
@@ -180,7 +239,7 @@ class ResponsesRequestToolFunction(BaseModel):
 
     name: str
 
-    parameters: Nullable[Dict[str, Nullable[Any]]]
+    parameters: Nullable[Dict[str, Any]]
 
     type: ResponsesRequestType
 
@@ -316,7 +375,7 @@ class ResponsesRequestTypedDict(TypedDict):
     plugins: NotRequired[List[ResponsesRequestPluginTypedDict]]
     r"""Plugins you want to enable for this request, including their settings."""
     presence_penalty: NotRequired[Nullable[float]]
-    previous_response_id: NotRequired[Nullable[Any]]
+    previous_response_id: NotRequired[Any]
     r"""Not supported. The Responses API is stateless: no responses are stored, so a previous response cannot be referenced. Requests with a non-null value are rejected with a 400 error. Send the full conversation history in `input` instead."""
     prompt: NotRequired[Nullable[StoredPromptTemplateTypedDict]]
     prompt_cache_key: NotRequired[Nullable[str]]
@@ -393,7 +452,7 @@ class ResponsesRequest(BaseModel):
 
     presence_penalty: OptionalNullable[float] = UNSET
 
-    previous_response_id: OptionalNullable[Any] = UNSET
+    previous_response_id: Optional[Any] = None
     r"""Not supported. The Responses API is stateless: no responses are stored, so a previous response cannot be referenced. Requests with a non-null value are rejected with a 400 error. Send the full conversation history in `input` instead."""
 
     prompt: OptionalNullable[StoredPromptTemplate] = UNSET
@@ -505,7 +564,6 @@ class ResponsesRequest(BaseModel):
                 "metadata",
                 "parallel_tool_calls",
                 "presence_penalty",
-                "previous_response_id",
                 "prompt",
                 "prompt_cache_key",
                 "prompt_cache_options",

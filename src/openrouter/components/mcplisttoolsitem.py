@@ -9,30 +9,30 @@ from openrouter.types import (
     UNSET_SENTINEL,
 )
 from pydantic import model_serializer
-from typing import Any, Dict, List, Literal
+from typing import Any, Dict, List, Literal, Optional
 from typing_extensions import NotRequired, TypedDict
 
 
 class McpListToolsItemToolTypedDict(TypedDict):
-    input_schema: Dict[str, Nullable[Any]]
+    input_schema: Dict[str, Any]
     name: str
-    annotations: NotRequired[Nullable[Any]]
+    annotations: NotRequired[Any]
     description: NotRequired[Nullable[str]]
 
 
 class McpListToolsItemTool(BaseModel):
-    input_schema: Dict[str, Nullable[Any]]
+    input_schema: Dict[str, Any]
 
     name: str
 
-    annotations: OptionalNullable[Any] = UNSET
+    annotations: Optional[Any] = None
 
     description: OptionalNullable[str] = UNSET
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(["annotations", "description"])
-        nullable_fields = set(["annotations", "description"])
+        nullable_fields = set(["description"])
         serialized = handler(self)
         m = {}
 

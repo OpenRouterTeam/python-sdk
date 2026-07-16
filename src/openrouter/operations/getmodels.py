@@ -153,7 +153,7 @@ class GetModelsRequestTypedDict(TypedDict):
     r"""Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
     """
-    offset: NotRequired[int]
+    offset: NotRequired[Nullable[int]]
     r"""Number of records to skip for pagination. When both offset and limit are omitted, the full list is returned"""
     limit: NotRequired[int]
     r"""Maximum number of records to return (max 1000). When both offset and limit are omitted, the full list is returned"""
@@ -243,7 +243,7 @@ class GetModelsRequest(BaseModel):
     """
 
     offset: Annotated[
-        Optional[int],
+        OptionalNullable[int],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = 0
     r"""Number of records to skip for pagination. When both offset and limit are omitted, the full list is returned"""
@@ -456,6 +456,7 @@ class GetModelsRequest(BaseModel):
         )
         nullable_fields = set(
             [
+                "offset",
                 "min_price",
                 "max_price",
                 "min_output_price",

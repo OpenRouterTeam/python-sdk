@@ -103,7 +103,7 @@ class AdditionalToolsItemTool(BaseModel):
     model_config = ConfigDict(
         populate_by_name=True, arbitrary_types_allowed=True, extra="allow"
     )
-    __pydantic_extra__: Dict[str, Nullable[Any]] = pydantic.Field(init=False)
+    __pydantic_extra__: Dict[str, Any] = pydantic.Field(init=False)
 
     type: str
 
@@ -116,15 +116,15 @@ class AdditionalToolsItemTool(BaseModel):
         self.__pydantic_extra__ = value  # pyright: ignore[reportIncompatibleVariableOverride]
 
 
-AdditionalToolsItemTypeFunction = Literal["function",]
+AdditionalToolsItemToolType = Literal["function",]
 
 
 class AdditionalToolsItemToolFunctionTypedDict(TypedDict):
     r"""Function tool definition"""
 
     name: str
-    parameters: Nullable[Dict[str, Nullable[Any]]]
-    type: AdditionalToolsItemTypeFunction
+    parameters: Nullable[Dict[str, Any]]
+    type: AdditionalToolsItemToolType
     description: NotRequired[Nullable[str]]
     strict: NotRequired[Nullable[bool]]
 
@@ -134,9 +134,9 @@ class AdditionalToolsItemToolFunction(BaseModel):
 
     name: str
 
-    parameters: Nullable[Dict[str, Nullable[Any]]]
+    parameters: Nullable[Dict[str, Any]]
 
-    type: AdditionalToolsItemTypeFunction
+    type: AdditionalToolsItemToolType
 
     description: OptionalNullable[str] = UNSET
 

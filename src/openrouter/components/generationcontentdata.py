@@ -8,11 +8,11 @@ from typing_extensions import TypeAliasType, TypedDict
 
 
 class Input2TypedDict(TypedDict):
-    messages: List[Nullable[Any]]
+    messages: List[Any]
 
 
 class Input2(BaseModel):
-    messages: List[Nullable[Any]]
+    messages: List[Any]
 
 
 class Input1TypedDict(TypedDict):

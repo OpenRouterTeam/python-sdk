@@ -7,14 +7,14 @@ from openrouter.components import (
     provideroverloadedresponseerrordata as components_provideroverloadedresponseerrordata,
 )
 from openrouter.errors import OpenRouterError
-from openrouter.types import BaseModel, Nullable, OptionalNullable, UNSET
+from openrouter.types import BaseModel, OptionalNullable, UNSET
 from typing import Any, Dict, Optional
 
 
 class ProviderOverloadedResponseErrorData(BaseModel):
     error: components_provideroverloadedresponseerrordata.ProviderOverloadedResponseErrorData
     r"""Error data for ProviderOverloadedResponse"""
-    openrouter_metadata: OptionalNullable[Dict[str, Nullable[Any]]] = UNSET
+    openrouter_metadata: OptionalNullable[Dict[str, Any]] = UNSET
     user_id: OptionalNullable[str] = UNSET
 
 

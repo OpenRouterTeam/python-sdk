@@ -40,11 +40,11 @@ from .preview_websearchservertool import (
     PreviewWebSearchServerToolTypedDict,
 )
 from .responseserrorfield import ResponsesErrorField, ResponsesErrorFieldTypedDict
+from .servertoolusedetails import ServerToolUseDetails, ServerToolUseDetailsTypedDict
 from .shellservertool import ShellServerTool, ShellServerToolTypedDict
 from .storedprompttemplate import StoredPromptTemplate, StoredPromptTemplateTypedDict
 from .textextendedconfig import TextExtendedConfig, TextExtendedConfigTypedDict
 from .truncation import Truncation
-from .usage import Usage, UsageTypedDict
 from .websearchservertool import WebSearchServerTool, WebSearchServerToolTypedDict
 from functools import partial
 from openrouter.types import (
@@ -71,7 +71,7 @@ class OpenResponsesResultToolFunctionTypedDict(TypedDict):
     r"""Function tool definition"""
 
     name: str
-    parameters: Nullable[Dict[str, Nullable[Any]]]
+    parameters: Nullable[Dict[str, Any]]
     type: OpenResponsesResultType
     description: NotRequired[Nullable[str]]
     strict: NotRequired[Nullable[bool]]
@@ -82,7 +82,7 @@ class OpenResponsesResultToolFunction(BaseModel):
 
     name: str
 
-    parameters: Nullable[Dict[str, Nullable[Any]]]
+    parameters: Nullable[Dict[str, Any]]
 
     type: OpenResponsesResultType
 
@@ -196,6 +196,154 @@ OpenResponsesResultToolUnion = Annotated[
         )
     ),
 ]
+
+
+class InputTokensDetailsTypedDict(TypedDict):
+    cached_tokens: int
+    cache_write_tokens: NotRequired[Nullable[int]]
+
+
+class InputTokensDetails(BaseModel):
+    cached_tokens: int
+
+    cache_write_tokens: OptionalNullable[int] = UNSET
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["cache_write_tokens"])
+        nullable_fields = set(["cache_write_tokens"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
+
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
+
+        return m
+
+
+class OutputTokensDetailsTypedDict(TypedDict):
+    reasoning_tokens: int
+
+
+class OutputTokensDetails(BaseModel):
+    reasoning_tokens: int
+
+
+class UsageCostDetailsTypedDict(TypedDict):
+    upstream_inference_input_cost: float
+    upstream_inference_output_cost: float
+    upstream_inference_cost: NotRequired[Nullable[float]]
+
+
+class UsageCostDetails(BaseModel):
+    upstream_inference_input_cost: float
+
+    upstream_inference_output_cost: float
+
+    upstream_inference_cost: OptionalNullable[float] = UNSET
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["upstream_inference_cost"])
+        nullable_fields = set(["upstream_inference_cost"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
+
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
+
+        return m
+
+
+class UsageTypedDict(TypedDict):
+    input_tokens: int
+    input_tokens_details: InputTokensDetailsTypedDict
+    output_tokens: int
+    output_tokens_details: OutputTokensDetailsTypedDict
+    total_tokens: int
+    cost: NotRequired[Nullable[float]]
+    r"""Cost of the completion"""
+    cost_details: NotRequired[UsageCostDetailsTypedDict]
+    is_byok: NotRequired[bool]
+    r"""Whether a request was made using a Bring Your Own Key configuration"""
+    server_tool_use_details: NotRequired[Nullable[ServerToolUseDetailsTypedDict]]
+    r"""Usage for server-side tool execution (e.g., web search)"""
+
+
+class Usage(BaseModel):
+    input_tokens: int
+
+    input_tokens_details: InputTokensDetails
+
+    output_tokens: int
+
+    output_tokens_details: OutputTokensDetails
+
+    total_tokens: int
+
+    cost: OptionalNullable[float] = UNSET
+    r"""Cost of the completion"""
+
+    cost_details: Optional[UsageCostDetails] = None
+
+    is_byok: Optional[bool] = None
+    r"""Whether a request was made using a Bring Your Own Key configuration"""
+
+    server_tool_use_details: OptionalNullable[ServerToolUseDetails] = UNSET
+    r"""Usage for server-side tool execution (e.g., web search)"""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            ["cost", "cost_details", "is_byok", "server_tool_use_details"]
+        )
+        nullable_fields = set(["cost", "server_tool_use_details"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
+
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
+
+        return m
 
 
 class OpenResponsesResultTypedDict(TypedDict):

@@ -2,7 +2,13 @@
 
 from __future__ import annotations
 from openrouter.components import apprankingsresponse as components_apprankingsresponse
-from openrouter.types import BaseModel, UNSET_SENTINEL, UnrecognizedStr
+from openrouter.types import (
+    BaseModel,
+    Nullable,
+    OptionalNullable,
+    UNSET_SENTINEL,
+    UnrecognizedStr,
+)
 from openrouter.utils import FieldMetadata, HeaderMetadata, QueryParamMetadata
 import pydantic
 from pydantic import model_serializer
@@ -145,7 +151,7 @@ class GetAppRankingsRequestTypedDict(TypedDict):
     r"""End of the date window in YYYY-MM-DD (UTC), inclusive. Defaults to the most recent completed UTC day. Must be on or after 2025-01-01; earlier values are rejected with a 400."""
     limit: NotRequired[int]
     r"""Maximum number of apps to return (1-100). Defaults to 50."""
-    offset: NotRequired[int]
+    offset: NotRequired[Nullable[int]]
     r"""Number of ranked apps to skip before the first returned row (0-100). Defaults to 0. `rank` stays absolute, so the first row of `offset=50` is `rank: 51`."""
 
 
@@ -215,7 +221,7 @@ class GetAppRankingsRequest(BaseModel):
     r"""Maximum number of apps to return (1-100). Defaults to 50."""
 
     offset: Annotated[
-        Optional[int],
+        OptionalNullable[int],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = 0
     r"""Number of ranked apps to skip before the first returned row (0-100). Defaults to 0. `rank` stays absolute, so the first row of `offset=50` is `rank: 51`."""
@@ -236,15 +242,24 @@ class GetAppRankingsRequest(BaseModel):
                 "offset",
             ]
         )
+        nullable_fields = set(["offset"])
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
             if val != UNSET_SENTINEL:
-                if val is not None or k not in optional_fields:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
                     m[k] = val
 
         return m

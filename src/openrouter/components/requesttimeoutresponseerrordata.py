@@ -18,7 +18,7 @@ class RequestTimeoutResponseErrorDataTypedDict(TypedDict):
 
     code: int
     message: str
-    metadata: NotRequired[Nullable[Dict[str, Nullable[Any]]]]
+    metadata: NotRequired[Nullable[Dict[str, Any]]]
 
 
 class RequestTimeoutResponseErrorData(BaseModel):
@@ -28,7 +28,7 @@ class RequestTimeoutResponseErrorData(BaseModel):
 
     message: str
 
-    metadata: OptionalNullable[Dict[str, Nullable[Any]]] = UNSET
+    metadata: OptionalNullable[Dict[str, Any]] = UNSET
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

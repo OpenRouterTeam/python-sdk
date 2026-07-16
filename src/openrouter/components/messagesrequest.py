@@ -6,7 +6,6 @@ from .anthropiccachecontroldirective import (
     AnthropicCacheControlDirective,
     AnthropicCacheControlDirectiveTypedDict,
 )
-from .anthropiccachecontrolttl import AnthropicCacheControlTTL
 from .anthropicinputtokensclearatleast import (
     AnthropicInputTokensClearAtLeast,
     AnthropicInputTokensClearAtLeastTypedDict,
@@ -196,11 +195,11 @@ class EditClearThinking20251015(BaseModel):
 
 
 ClearToolInputsTypedDict = TypeAliasType(
-    "ClearToolInputsTypedDict", Union[bool, List[str], Any]
+    "ClearToolInputsTypedDict", Union[bool, List[str]]
 )
 
 
-ClearToolInputs = TypeAliasType("ClearToolInputs", Union[bool, List[str], Any])
+ClearToolInputs = TypeAliasType("ClearToolInputs", Union[bool, List[str]])
 
 
 TriggerTypedDict = TypeAliasType(
@@ -642,7 +641,7 @@ class MessagesRequestTool(BaseModel):
     model_config = ConfigDict(
         populate_by_name=True, arbitrary_types_allowed=True, extra="allow"
     )
-    __pydantic_extra__: Dict[str, Nullable[Any]] = pydantic.Field(init=False)
+    __pydantic_extra__: Dict[str, Any] = pydantic.Field(init=False)
 
     type: str
 
@@ -653,40 +652,6 @@ class MessagesRequestTool(BaseModel):
     @additional_properties.setter
     def additional_properties(self, value):
         self.__pydantic_extra__ = value  # pyright: ignore[reportIncompatibleVariableOverride]
-
-
-ToolTypeEphemeral = Literal["ephemeral",]
-
-
-class CachingTypedDict(TypedDict):
-    r"""Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. When set on an individual content block, it marks an explicit cache breakpoint; block-level markers also work on OpenAI models that support explicit prompt caching — OpenRouter converts them to the provider's native format."""
-
-    type: ToolTypeEphemeral
-    ttl: NotRequired[AnthropicCacheControlTTL]
-
-
-class Caching(BaseModel):
-    r"""Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. When set on an individual content block, it marks an explicit cache breakpoint; block-level markers also work on OpenAI models that support explicit prompt caching — OpenRouter converts them to the provider's native format."""
-
-    type: ToolTypeEphemeral
-
-    ttl: Optional[AnthropicCacheControlTTL] = None
-
-    @model_serializer(mode="wrap")
-    def serialize_model(self, handler):
-        optional_fields = set(["ttl"])
-        serialized = handler(self)
-        m = {}
-
-        for n, f in type(self).model_fields.items():
-            k = f.alias or n
-            val = serialized.get(k, serialized.get(n))
-
-            if val != UNSET_SENTINEL:
-                if val is not None or k not in optional_fields:
-                    m[k] = val
-
-        return m
 
 
 NameAdvisor = Literal["advisor",]
@@ -702,7 +667,7 @@ class ToolAdvisor20260301TypedDict(TypedDict):
     allowed_callers: NotRequired[List[AnthropicAllowedCallers]]
     cache_control: NotRequired[AnthropicCacheControlDirectiveTypedDict]
     r"""Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. When set on an individual content block, it marks an explicit cache breakpoint; block-level markers also work on OpenAI models that support explicit prompt caching — OpenRouter converts them to the provider's native format."""
-    caching: NotRequired[Nullable[CachingTypedDict]]
+    caching: NotRequired[Nullable[AnthropicCacheControlDirectiveTypedDict]]
     defer_loading: NotRequired[bool]
     max_uses: NotRequired[int]
 
@@ -719,7 +684,7 @@ class ToolAdvisor20260301(BaseModel):
     cache_control: Optional[AnthropicCacheControlDirective] = None
     r"""Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. When set on an individual content block, it marks an explicit cache breakpoint; block-level markers also work on OpenAI models that support explicit prompt caching — OpenRouter converts them to the provider's native format."""
 
-    caching: OptionalNullable[Caching] = UNSET
+    caching: OptionalNullable[AnthropicCacheControlDirective] = UNSET
 
     defer_loading: Optional[bool] = None
 
@@ -972,7 +937,7 @@ class ToolBash20250124(BaseModel):
 
 
 class InputSchemaTypedDict(TypedDict):
-    properties: NotRequired[Nullable[Any]]
+    properties: NotRequired[Any]
     required: NotRequired[Nullable[List[str]]]
     type: NotRequired[str]
 
@@ -981,9 +946,9 @@ class InputSchema(BaseModel):
     model_config = ConfigDict(
         populate_by_name=True, arbitrary_types_allowed=True, extra="allow"
     )
-    __pydantic_extra__: Dict[str, Nullable[Any]] = pydantic.Field(init=False)
+    __pydantic_extra__: Dict[str, Any] = pydantic.Field(init=False)
 
-    properties: OptionalNullable[Any] = UNSET
+    properties: Optional[Any] = None
 
     required: OptionalNullable[List[str]] = UNSET
 
@@ -1000,7 +965,7 @@ class InputSchema(BaseModel):
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(["properties", "required", "type"])
-        nullable_fields = set(["properties", "required"])
+        nullable_fields = set(["required"])
         serialized = handler(self)
         m = {}
 
