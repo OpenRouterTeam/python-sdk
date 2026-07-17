@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c48cf606-fb42-4a45-9c23-8f0555307828
 management:
-  docChecksum: 1d1fbee3790c1c92c11a1812b74ca906
+  docChecksum: 6dbc066243539a97a1e225d3d6391b61
   docVersion: 1.0.0
   speakeasyVersion: 1.787.0
   generationVersion: 2.914.0
-  releaseVersion: 0.11.40
-  configChecksum: 4979c1e57b670ed5748debe188b549e8
+  releaseVersion: 0.11.41
+  configChecksum: ddac6556ba465f524a1cec7a31b32b0a
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
 persistentEdits:
-  generation_id: 7f9458b3-8f8f-4f6c-b7cd-2fd963dd9322
-  pristine_commit_hash: ba1661a777ab5ae1aee3bedf7c4501d97245da1a
-  pristine_tree_hash: e3eecf07c82d4c6b75e99b15a4e0c52f24cd70d9
+  generation_id: 8314c8ef-99b5-48c1-8a60-4626f255bef4
+  pristine_commit_hash: 550028ddd21d236997e3a4e2dca4e50a5f5ab419
+  pristine_tree_hash: 439cc92e5a9b273693102bea2fafe65e409b9757
 features:
   python:
     acceptHeaders: 3.0.0
@@ -3314,8 +3314,8 @@ trackedFiles:
     pristine_git_object: 09effe2d3fe45536c8b0aa0f23c02ce19b15f62c
   docs/components/openresponsesresult.mdx:
     id: d0fed85674d2
-    last_write_checksum: sha1:2ffbf6a72d81a6bc5585fe5b71c9e57a89694118
-    pristine_git_object: b987eca82266acf1fac32040d53f940a69ab9766
+    last_write_checksum: sha1:3bc26b772dfc3397c0da7b769b16d938eede91fb
+    pristine_git_object: f5c81b7142316cd4a6ec8a96c192b682a1a34ff8
   docs/components/openresponsesresultobject.mdx:
     id: 93b1fcc70132
     last_write_checksum: sha1:7579ee1bb9e0d20c55cf54a8ca2ccbc950d2921d
@@ -6694,8 +6694,8 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:3c5edb81c415444ed7ca7f29537020fe0191c168
-    pristine_git_object: 9e010896eb50ec116d8c8d8281eab4cec11fcee5
+    last_write_checksum: sha1:0110d38ef96fe2ab6c76b19c6f151e5d5f19d550
+    pristine_git_object: 1a2b61bcea2b580dbe603784edc8309e6b6ddc65
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77f44b60b98bc126557ec27391f91dfba764bb54
@@ -6722,8 +6722,8 @@ trackedFiles:
     pristine_git_object: 86713cfea633e09d33b3d4e65281071fe20e6137
   src/openrouter/_version.py:
     id: d8d15ad6c586
-    last_write_checksum: sha1:00873996242e32dae6a85490475ff0f1ace09971
-    pristine_git_object: 96b7185e5478492793a8ccec2af6951a6952c819
+    last_write_checksum: sha1:cce8b5c35f58d8675f8cd2b0b77ab4d63047e389
+    pristine_git_object: 6f847a9d821ebe3dd1b8eeb3259e4cad78297843
   src/openrouter/analytics.py:
     id: cb406b5aaabb
     last_write_checksum: sha1:9e709b71dd0611056dc0cec6150b578defe32841
@@ -8162,8 +8162,8 @@ trackedFiles:
     pristine_git_object: 08d990d8cc07b7928158fc55784cd9d613f4c58b
   src/openrouter/components/openresponsesresult.py:
     id: 78f7e33b19e6
-    last_write_checksum: sha1:737262cfbd36e4b60e859213c9bb5c229a21bc9d
-    pristine_git_object: bf2d31cf24e062ae72d9083a926619d0406cc268
+    last_write_checksum: sha1:35ed4f39bfe05c8d56e14166be09adc76b3fb0ec
+    pristine_git_object: f3be4e665351b3b08a77a2fa324ca88aad4ec4e9
   src/openrouter/components/openroutermetadata.py:
     id: 87062f38be59
     last_write_checksum: sha1:65c4b563aea67eb15f1fc6d859856a081a1cc78f
@@ -11189,4 +11189,6 @@ examples:
         "500":
           application/json: {"error": {"code": 500, "message": "Internal Server Error"}}
 examplesVersion: 1.0.2
-releaseNotes: "## Python SDK Changes:\n* `open_router.beta.responses.send()`: \n  *  `request.plugins[].union(auto-beta-router)` **Added**\n* `open_router.chat.send()`: \n  *  `request.plugins[].union(auto-beta-router)` **Added**\n* `open_router.presets.create_presets_chat_completions()`: \n  *  `request.plugins[].union(auto-beta-router)` **Added**\n* `open_router.presets.create_presets_messages()`: \n  *  `request.plugins[].union(auto-beta-router)` **Added**\n* `open_router.presets.create_presets_responses()`: \n  *  `request.plugins[].union(auto-beta-router)` **Added**\n"
+releaseNotes: |
+  ## Python SDK Changes:
+  * `open_router.beta.responses.send()`:  `response` **Changed**

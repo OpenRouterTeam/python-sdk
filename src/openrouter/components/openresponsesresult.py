@@ -39,6 +39,7 @@ from .preview_websearchservertool import (
     PreviewWebSearchServerTool,
     PreviewWebSearchServerToolTypedDict,
 )
+from .promptcacheoptions import PromptCacheOptions, PromptCacheOptionsTypedDict
 from .responseserrorfield import ResponsesErrorField, ResponsesErrorFieldTypedDict
 from .servertoolusedetails import ServerToolUseDetails, ServerToolUseDetailsTypedDict
 from .shellservertool import ShellServerTool, ShellServerToolTypedDict
@@ -376,6 +377,8 @@ class OpenResponsesResultTypedDict(TypedDict):
     previous_response_id: NotRequired[Nullable[str]]
     prompt: NotRequired[Nullable[StoredPromptTemplateTypedDict]]
     prompt_cache_key: NotRequired[Nullable[str]]
+    prompt_cache_options: NotRequired[Nullable[PromptCacheOptionsTypedDict]]
+    r"""Request-level prompt-cache controls. `mode: \"explicit\"` disables OpenAI-managed breakpoints so only blocks marked with `prompt_cache_breakpoint` are cached. Only supported by OpenAI GPT-5.6 and newer."""
     reasoning: NotRequired[Nullable[BaseReasoningConfigTypedDict]]
     safety_identifier: NotRequired[Nullable[str]]
     service_tier: NotRequired[Nullable[str]]
@@ -447,6 +450,9 @@ class OpenResponsesResult(BaseModel):
 
     prompt_cache_key: OptionalNullable[str] = UNSET
 
+    prompt_cache_options: OptionalNullable[PromptCacheOptions] = UNSET
+    r"""Request-level prompt-cache controls. `mode: \"explicit\"` disables OpenAI-managed breakpoints so only blocks marked with `prompt_cache_breakpoint` are cached. Only supported by OpenAI GPT-5.6 and newer."""
+
     reasoning: OptionalNullable[BaseReasoningConfig] = UNSET
 
     safety_identifier: OptionalNullable[str] = UNSET
@@ -483,6 +489,7 @@ class OpenResponsesResult(BaseModel):
                 "previous_response_id",
                 "prompt",
                 "prompt_cache_key",
+                "prompt_cache_options",
                 "reasoning",
                 "safety_identifier",
                 "service_tier",
@@ -511,6 +518,7 @@ class OpenResponsesResult(BaseModel):
                 "previous_response_id",
                 "prompt",
                 "prompt_cache_key",
+                "prompt_cache_options",
                 "reasoning",
                 "safety_identifier",
                 "service_tier",
