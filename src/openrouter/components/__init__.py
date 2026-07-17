@@ -287,6 +287,11 @@ if TYPE_CHECKING:
     )
     from .apprankingsitem import AppRankingsItem, AppRankingsItemTypedDict
     from .apprankingsresponse import AppRankingsResponse, AppRankingsResponseTypedDict
+    from .autobetarouterplugin import (
+        AutoBetaRouterPlugin,
+        AutoBetaRouterPluginID,
+        AutoBetaRouterPluginTypedDict,
+    )
     from .autorouterplugin import (
         AutoRouterPlugin,
         AutoRouterPluginID,
@@ -3054,6 +3059,9 @@ __all__ = [
     "ArchitectureTypedDict",
     "AudioURL",
     "AudioURLTypedDict",
+    "AutoBetaRouterPlugin",
+    "AutoBetaRouterPluginID",
+    "AutoBetaRouterPluginTypedDict",
     "AutoRouterPlugin",
     "AutoRouterPluginID",
     "AutoRouterPluginTypedDict",
@@ -5138,6 +5146,9 @@ _dynamic_imports: dict[str, str] = {
     "AppRankingsItemTypedDict": ".apprankingsitem",
     "AppRankingsResponse": ".apprankingsresponse",
     "AppRankingsResponseTypedDict": ".apprankingsresponse",
+    "AutoBetaRouterPlugin": ".autobetarouterplugin",
+    "AutoBetaRouterPluginID": ".autobetarouterplugin",
+    "AutoBetaRouterPluginTypedDict": ".autobetarouterplugin",
     "AutoRouterPlugin": ".autorouterplugin",
     "AutoRouterPluginID": ".autorouterplugin",
     "AutoRouterPluginTypedDict": ".autorouterplugin",

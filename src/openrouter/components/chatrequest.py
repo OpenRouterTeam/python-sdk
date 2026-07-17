@@ -5,6 +5,7 @@ from .anthropiccachecontroldirective import (
     AnthropicCacheControlDirective,
     AnthropicCacheControlDirectiveTypedDict,
 )
+from .autobetarouterplugin import AutoBetaRouterPlugin, AutoBetaRouterPluginTypedDict
 from .autorouterplugin import AutoRouterPlugin, AutoRouterPluginTypedDict
 from .chatdebugoptions import ChatDebugOptions, ChatDebugOptionsTypedDict
 from .chatformatgrammarconfig import (
@@ -81,6 +82,7 @@ ChatRequestPluginTypedDict = TypeAliasType(
         FileParserPluginTypedDict,
         ContextCompressionPluginTypedDict,
         AutoRouterPluginTypedDict,
+        AutoBetaRouterPluginTypedDict,
         ParetoRouterPluginTypedDict,
         WebFetchPluginTypedDict,
         FusionPluginTypedDict,
@@ -91,6 +93,7 @@ ChatRequestPluginTypedDict = TypeAliasType(
 
 ChatRequestPlugin = Annotated[
     Union[
+        Annotated[AutoBetaRouterPlugin, Tag("auto-beta-router")],
         Annotated[AutoRouterPlugin, Tag("auto-router")],
         Annotated[ContextCompressionPlugin, Tag("context-compression")],
         Annotated[FileParserPlugin, Tag("file-parser")],
