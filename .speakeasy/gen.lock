@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c48cf606-fb42-4a45-9c23-8f0555307828
 management:
-  docChecksum: e7a20e65c63d39b2c9e86629b75b1c0f
+  docChecksum: 1d1fbee3790c1c92c11a1812b74ca906
   docVersion: 1.0.0
   speakeasyVersion: 1.787.0
   generationVersion: 2.914.0
-  releaseVersion: 0.11.39
-  configChecksum: 6d000e7a5fcb167e73aec7c44eff962a
+  releaseVersion: 0.11.40
+  configChecksum: 4979c1e57b670ed5748debe188b549e8
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
 persistentEdits:
-  generation_id: 31657d12-a4c4-4629-9686-93d38f7a08b3
-  pristine_commit_hash: 7ab9ffc7b4ce13ca2ae7796dccf6ea17ac767132
-  pristine_tree_hash: 308ff6011f58aff4b39b0a575c9dcc3cfce0fcf9
+  generation_id: 7f9458b3-8f8f-4f6c-b7cd-2fd963dd9322
+  pristine_commit_hash: ba1661a777ab5ae1aee3bedf7c4501d97245da1a
+  pristine_tree_hash: e3eecf07c82d4c6b75e99b15a4e0c52f24cd70d9
 features:
   python:
     acceptHeaders: 3.0.0
@@ -592,6 +592,14 @@ trackedFiles:
     id: c457db82a4ac
     last_write_checksum: sha1:eda63702a1bab370efe326a661950ea0b864169e
     pristine_git_object: ef98b1de499df79940ccacaf5da0be2d635b104e
+  docs/components/autobetarouterplugin.mdx:
+    id: 036f0e51d7c9
+    last_write_checksum: sha1:b648a619be77a80e33f96af758d841246bd8cf76
+    pristine_git_object: c83f98331693171217fa2287613ff155aafab99b
+  docs/components/autobetarouterpluginid.mdx:
+    id: 619eb7d92a83
+    last_write_checksum: sha1:47b80552a64dbc3dc37421630fddf931ffe5c795
+    pristine_git_object: 800b8e4a3fd07f10592e3ee8f9c15c7e57398d4c
   docs/components/autorouterplugin.mdx:
     id: 4d62f9b36bc2
     last_write_checksum: sha1:b0058abe56fb36523cac5296b6124fa84cb006a2
@@ -974,8 +982,8 @@ trackedFiles:
     pristine_git_object: 643c118fe458c24cdaeca90edceadf1c7d1c9cc2
   docs/components/chatrequestplugin.mdx:
     id: 157782a43de6
-    last_write_checksum: sha1:c918d35c8f0d9796fdaf78cb9d55a6c866d05413
-    pristine_git_object: 2ef1d9e43930650344033d25272c4d3d97923169
+    last_write_checksum: sha1:5640129e2200984c11b3270e5f11c90ae6c27d92
+    pristine_git_object: d3f53df2e3276a674daf173e124dc1e333623015
   docs/components/chatrequestreasoning.mdx:
     id: 8f0176992b3e
     last_write_checksum: sha1:84576cd6513f125955685c7bdfe315ef886160eb
@@ -2770,8 +2778,8 @@ trackedFiles:
     pristine_git_object: fb2a55630750a5c10fe509403c6d95cbfa8373c5
   docs/components/messagesrequestplugin.mdx:
     id: 45918e4b5c26
-    last_write_checksum: sha1:955d6b458b4cc3b30b3a3a20e07d832ce72f1365
-    pristine_git_object: eaf4fe4fcbe67dbaacdde671b7774b00e0e31d42
+    last_write_checksum: sha1:aa7ed0525e0103b0f2f2982efb3aa801b7ccedcc
+    pristine_git_object: b7d6c3e4f2a01940721228b55b89d3e71efecafd
   docs/components/messagesrequesttool.mdx:
     id: f9dc5aede7ad
     last_write_checksum: sha1:dfa67d1bcd58e5743ba4bcd14d50bb1f5d2b836c
@@ -4286,8 +4294,8 @@ trackedFiles:
     pristine_git_object: ce6df6a25691a4e35b54d39fee2ed70c5816199b
   docs/components/responsesrequestplugin.mdx:
     id: 4d550c41c85f
-    last_write_checksum: sha1:ab9d1e6c062cd51fc976da6ccf393e9974171f7b
-    pristine_git_object: 7121cf5ea925e054ff60296a7d7ce2ecfceb4d80
+    last_write_checksum: sha1:486d5ac6de82e6ac569b21e3d6cfab548585e4b9
+    pristine_git_object: ac8d199b05338da3acb32b8a833973e575c2685c
   docs/components/responsesrequestservicetier.mdx:
     id: 5000ee5983ff
     last_write_checksum: sha1:97a6f6dae00368174adedb8bd994aa5c23d0a550
@@ -6686,8 +6694,8 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:69a8177dec61e251312345fdd0b1ad7e0e58ed7b
-    pristine_git_object: fdc023cd07a203ba786d079f1017261293e9f51c
+    last_write_checksum: sha1:3c5edb81c415444ed7ca7f29537020fe0191c168
+    pristine_git_object: 9e010896eb50ec116d8c8d8281eab4cec11fcee5
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77f44b60b98bc126557ec27391f91dfba764bb54
@@ -6714,8 +6722,8 @@ trackedFiles:
     pristine_git_object: 86713cfea633e09d33b3d4e65281071fe20e6137
   src/openrouter/_version.py:
     id: d8d15ad6c586
-    last_write_checksum: sha1:7682f73c786562798d5810ff7b3de7d39435f42b
-    pristine_git_object: 243368c88e9f460e17730c69426e5124382aa128
+    last_write_checksum: sha1:00873996242e32dae6a85490475ff0f1ace09971
+    pristine_git_object: 96b7185e5478492793a8ccec2af6951a6952c819
   src/openrouter/analytics.py:
     id: cb406b5aaabb
     last_write_checksum: sha1:9e709b71dd0611056dc0cec6150b578defe32841
@@ -6754,8 +6762,8 @@ trackedFiles:
     pristine_git_object: ad3d247954547814054c01989a2dff3d12b3e4e1
   src/openrouter/components/__init__.py:
     id: 81754e97b3f4
-    last_write_checksum: sha1:07b9aeff1106305dd79e6fb4dbaf972eac3f4fae
-    pristine_git_object: 0e0ce5441a9ecf21d7fe17c3cc20d57b1581aadf
+    last_write_checksum: sha1:dce2c813bcfebc2a79cfbc0dc1db2e87bfabacdb
+    pristine_git_object: 22991510efa00ab13dfc12b0d82f8b32ff322e32
   src/openrouter/components/aabenchmarkentry.py:
     id: e2e0f0b48c82
     last_write_checksum: sha1:fab4d9a24d2cea937bb749d46c5f83941e99d65c
@@ -7000,6 +7008,10 @@ trackedFiles:
     id: 9152f7bbc9bd
     last_write_checksum: sha1:3995ff20e5a93c96f2160a143434e89feded1dd3
     pristine_git_object: 2ccc3d9be586133e5d5138c77eacefa243987fb5
+  src/openrouter/components/autobetarouterplugin.py:
+    id: bb4119e5d4dc
+    last_write_checksum: sha1:220e129ad2d10530cacf49b05f7c7d248f9ce4dc
+    pristine_git_object: cb193d9fa2f7fc8a17c7939202a936b415f544d6
   src/openrouter/components/autorouterplugin.py:
     id: cf49add5d1ae
     last_write_checksum: sha1:e4ad3fb36054b4d0d05321f07fa025611e76c878
@@ -7202,8 +7214,8 @@ trackedFiles:
     pristine_git_object: 8bbde153b53887e426989fd5b0486b6dc1122810
   src/openrouter/components/chatrequest.py:
     id: 5e39eaefa9cf
-    last_write_checksum: sha1:f2109212b68e692918dc3a68c8e6b16457b3c066
-    pristine_git_object: 4d1c948ef6a1c79406cee0da0f5770df6cc89ada
+    last_write_checksum: sha1:06c402d0c185bd24c685644466e74f24377a2079
+    pristine_git_object: 36c34489c172d40952ac003640e9a7fdd3adce3f
   src/openrouter/components/chatresult.py:
     id: 9062fe2935fe
     last_write_checksum: sha1:2ff1963c54e7e79500115c8549c8d395f4e336d1
@@ -7950,8 +7962,8 @@ trackedFiles:
     pristine_git_object: 7e69d1f775baece5f94b03d35bcd884d5e6f519d
   src/openrouter/components/messagesrequest.py:
     id: 72b1f339024d
-    last_write_checksum: sha1:0c18b84a8cc917987084dbdda6519f5f5b7dff54
-    pristine_git_object: 96e50f1f8a68d444c544a147ddf25a4567a3a158
+    last_write_checksum: sha1:8547ffd7bc6d6f539150c210b9efd6058b699939
+    pristine_git_object: 7f1eb937e9f337c7d2039ab6d5d5055a62533d65
   src/openrouter/components/messagessearchmodelsservertool.py:
     id: 53d755edb120
     last_write_checksum: sha1:389786fc22ba4bb47b0a086b7aa321f2f04fe943
@@ -8570,8 +8582,8 @@ trackedFiles:
     pristine_git_object: f38c8edcb616d9e7cbd0f724fbb9d9f5aae014f9
   src/openrouter/components/responsesrequest.py:
     id: 8c850080ec5d
-    last_write_checksum: sha1:269f36b8fe206e48755ad8f9082e91f5dd980635
-    pristine_git_object: f7102dca4c956b04c23ea43d74c29d4737b981d5
+    last_write_checksum: sha1:62a6164069d0982e9ef3e79979766320b605f455
+    pristine_git_object: a039c13c0208b40bf9e4debcf4ccb493999f3f96
   src/openrouter/components/responsesstreamingresponse.py:
     id: 142379f3bd90
     last_write_checksum: sha1:a48d6f3610f5d15248ef4d25a0d88a0a4a1a9db7
@@ -11177,3 +11189,4 @@ examples:
         "500":
           application/json: {"error": {"code": 500, "message": "Internal Server Error"}}
 examplesVersion: 1.0.2
+releaseNotes: "## Python SDK Changes:\n* `open_router.beta.responses.send()`: \n  *  `request.plugins[].union(auto-beta-router)` **Added**\n* `open_router.chat.send()`: \n  *  `request.plugins[].union(auto-beta-router)` **Added**\n* `open_router.presets.create_presets_chat_completions()`: \n  *  `request.plugins[].union(auto-beta-router)` **Added**\n* `open_router.presets.create_presets_messages()`: \n  *  `request.plugins[].union(auto-beta-router)` **Added**\n* `open_router.presets.create_presets_responses()`: \n  *  `request.plugins[].union(auto-beta-router)` **Added**\n"

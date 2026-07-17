@@ -14,6 +14,7 @@ from .applypatchservertool_openrouter import (
     ApplyPatchServerToolOpenRouter,
     ApplyPatchServerToolOpenRouterTypedDict,
 )
+from .autobetarouterplugin import AutoBetaRouterPlugin, AutoBetaRouterPluginTypedDict
 from .autorouterplugin import AutoRouterPlugin, AutoRouterPluginTypedDict
 from .bashservertool import BashServerTool, BashServerToolTypedDict
 from .chatdebugoptions import ChatDebugOptions, ChatDebugOptionsTypedDict
@@ -129,6 +130,7 @@ ResponsesRequestPluginTypedDict = TypeAliasType(
         FileParserPluginTypedDict,
         ContextCompressionPluginTypedDict,
         AutoRouterPluginTypedDict,
+        AutoBetaRouterPluginTypedDict,
         ParetoRouterPluginTypedDict,
         WebFetchPluginTypedDict,
         FusionPluginTypedDict,
@@ -139,6 +141,7 @@ ResponsesRequestPluginTypedDict = TypeAliasType(
 
 ResponsesRequestPlugin = Annotated[
     Union[
+        Annotated[AutoBetaRouterPlugin, Tag("auto-beta-router")],
         Annotated[AutoRouterPlugin, Tag("auto-router")],
         Annotated[ContextCompressionPlugin, Tag("context-compression")],
         Annotated[FileParserPlugin, Tag("file-parser")],

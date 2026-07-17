@@ -32,6 +32,7 @@ from .anthropicwebsearchtooluserlocation import (
     AnthropicWebSearchToolUserLocation,
     AnthropicWebSearchToolUserLocationTypedDict,
 )
+from .autobetarouterplugin import AutoBetaRouterPlugin, AutoBetaRouterPluginTypedDict
 from .autorouterplugin import AutoRouterPlugin, AutoRouterPluginTypedDict
 from .bashservertool import BashServerTool, BashServerToolTypedDict
 from .contextcompressionplugin import (
@@ -355,6 +356,7 @@ MessagesRequestPluginTypedDict = TypeAliasType(
         FileParserPluginTypedDict,
         ContextCompressionPluginTypedDict,
         AutoRouterPluginTypedDict,
+        AutoBetaRouterPluginTypedDict,
         ParetoRouterPluginTypedDict,
         WebFetchPluginTypedDict,
         FusionPluginTypedDict,
@@ -365,6 +367,7 @@ MessagesRequestPluginTypedDict = TypeAliasType(
 
 MessagesRequestPlugin = Annotated[
     Union[
+        Annotated[AutoBetaRouterPlugin, Tag("auto-beta-router")],
         Annotated[AutoRouterPlugin, Tag("auto-router")],
         Annotated[ContextCompressionPlugin, Tag("context-compression")],
         Annotated[FileParserPlugin, Tag("file-parser")],
