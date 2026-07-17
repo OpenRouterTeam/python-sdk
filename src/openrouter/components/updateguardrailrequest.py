@@ -28,7 +28,7 @@ class UpdateGuardrailRequestTypedDict(TypedDict):
     content_filter_builtins: NotRequired[
         Nullable[List[ContentFilterBuiltinEntryInputTypedDict]]
     ]
-    r"""Builtin content filters to apply. Set to null to remove. The \"flag\" action is only supported for \"regex-prompt-injection\"; PII slugs (email, phone, ssn, credit-card, ip-address, person-name, address) accept \"block\" or \"redact\" only."""
+    r"""Builtin content filters to apply. Set to null to remove. Every builtin slug supports \"block\", \"redact\", and the detect-only \"flag\" action."""
     content_filters: NotRequired[Nullable[List[ContentFilterEntryTypedDict]]]
     r"""Custom regex content filters to apply. Set to null to remove."""
     description: NotRequired[Nullable[str]]
@@ -67,7 +67,7 @@ class UpdateGuardrailRequest(BaseModel):
     content_filter_builtins: OptionalNullable[List[ContentFilterBuiltinEntryInput]] = (
         UNSET
     )
-    r"""Builtin content filters to apply. Set to null to remove. The \"flag\" action is only supported for \"regex-prompt-injection\"; PII slugs (email, phone, ssn, credit-card, ip-address, person-name, address) accept \"block\" or \"redact\" only."""
+    r"""Builtin content filters to apply. Set to null to remove. Every builtin slug supports \"block\", \"redact\", and the detect-only \"flag\" action."""
 
     content_filters: OptionalNullable[List[ContentFilterEntry]] = UNSET
     r"""Custom regex content filters to apply. Set to null to remove."""

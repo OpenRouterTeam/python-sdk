@@ -392,7 +392,7 @@ class Guardrails(BaseSDK):
 
         :param allowed_models: Array of model identifiers (slug or canonical_slug accepted)
         :param allowed_providers: List of allowed provider IDs
-        :param content_filter_builtins: Builtin content filters to apply. The \"flag\" action is only supported for \"regex-prompt-injection\"; PII slugs (email, phone, ssn, credit-card, ip-address, person-name, address) accept \"block\" or \"redact\" only.
+        :param content_filter_builtins: Builtin content filters to apply. Every builtin slug supports \"block\", \"redact\", and the detect-only \"flag\" action.
         :param content_filters: Custom regex content filters to apply to request messages
         :param description: Description of the guardrail
         :param enforce_zdr: Deprecated. Use enforce_zdr_anthropic, enforce_zdr_openai, enforce_zdr_google, enforce_zdr_xai, and enforce_zdr_other instead. When provided, its value is copied into any of those per-provider fields that are not explicitly specified on the request.
@@ -606,7 +606,7 @@ class Guardrails(BaseSDK):
 
         :param allowed_models: Array of model identifiers (slug or canonical_slug accepted)
         :param allowed_providers: List of allowed provider IDs
-        :param content_filter_builtins: Builtin content filters to apply. The \"flag\" action is only supported for \"regex-prompt-injection\"; PII slugs (email, phone, ssn, credit-card, ip-address, person-name, address) accept \"block\" or \"redact\" only.
+        :param content_filter_builtins: Builtin content filters to apply. Every builtin slug supports \"block\", \"redact\", and the detect-only \"flag\" action.
         :param content_filters: Custom regex content filters to apply to request messages
         :param description: Description of the guardrail
         :param enforce_zdr: Deprecated. Use enforce_zdr_anthropic, enforce_zdr_openai, enforce_zdr_google, enforce_zdr_xai, and enforce_zdr_other instead. When provided, its value is copied into any of those per-provider fields that are not explicitly specified on the request.
@@ -1332,7 +1332,7 @@ class Guardrails(BaseSDK):
 
         :param allowed_models: Array of model identifiers (slug or canonical_slug accepted)
         :param allowed_providers: New list of allowed provider IDs
-        :param content_filter_builtins: Builtin content filters to apply. Set to null to remove. The \"flag\" action is only supported for \"regex-prompt-injection\"; PII slugs (email, phone, ssn, credit-card, ip-address, person-name, address) accept \"block\" or \"redact\" only.
+        :param content_filter_builtins: Builtin content filters to apply. Set to null to remove. Every builtin slug supports \"block\", \"redact\", and the detect-only \"flag\" action.
         :param content_filters: Custom regex content filters to apply. Set to null to remove.
         :param description: New description for the guardrail
         :param enforce_zdr: Deprecated. Use enforce_zdr_anthropic, enforce_zdr_openai, enforce_zdr_google, enforce_zdr_xai, and enforce_zdr_other instead. When provided, its value is copied into any of those per-provider fields that are not explicitly specified on the request.
@@ -1546,7 +1546,7 @@ class Guardrails(BaseSDK):
 
         :param allowed_models: Array of model identifiers (slug or canonical_slug accepted)
         :param allowed_providers: New list of allowed provider IDs
-        :param content_filter_builtins: Builtin content filters to apply. Set to null to remove. The \"flag\" action is only supported for \"regex-prompt-injection\"; PII slugs (email, phone, ssn, credit-card, ip-address, person-name, address) accept \"block\" or \"redact\" only.
+        :param content_filter_builtins: Builtin content filters to apply. Set to null to remove. Every builtin slug supports \"block\", \"redact\", and the detect-only \"flag\" action.
         :param content_filters: Custom regex content filters to apply. Set to null to remove.
         :param description: New description for the guardrail
         :param enforce_zdr: Deprecated. Use enforce_zdr_anthropic, enforce_zdr_openai, enforce_zdr_google, enforce_zdr_xai, and enforce_zdr_other instead. When provided, its value is copied into any of those per-provider fields that are not explicitly specified on the request.

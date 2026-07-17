@@ -9,6 +9,7 @@ ContentFilterAction = Union[
     Literal[
         "redact",
         "block",
+        "flag",
     ],
     UnrecognizedStr,
 ]
