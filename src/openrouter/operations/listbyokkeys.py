@@ -116,6 +116,7 @@ Provider = Union[
         "digitalocean",
         "featherless",
         "fireworks",
+        "fish-audio",
         "friendli",
         "gmicloud",
         "google-ai-studio",

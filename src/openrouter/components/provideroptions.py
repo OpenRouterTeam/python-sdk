@@ -51,6 +51,7 @@ class ProviderOptionsTypedDict(TypedDict):
     fake_provider: NotRequired[Dict[str, Any]]
     featherless: NotRequired[Dict[str, Any]]
     fireworks: NotRequired[Dict[str, Any]]
+    fish_audio: NotRequired[Dict[str, Any]]
     friendli: NotRequired[Dict[str, Any]]
     gmicloud: NotRequired[Dict[str, Any]]
     google_ai_studio: NotRequired[Dict[str, Any]]
@@ -233,6 +234,10 @@ class ProviderOptions(BaseModel):
     featherless: Optional[Dict[str, Any]] = None
 
     fireworks: Optional[Dict[str, Any]] = None
+
+    fish_audio: Annotated[
+        Optional[Dict[str, Any]], pydantic.Field(alias="fish-audio")
+    ] = None
 
     friendli: Optional[Dict[str, Any]] = None
 
@@ -470,6 +475,7 @@ class ProviderOptions(BaseModel):
                 "fake-provider",
                 "featherless",
                 "fireworks",
+                "fish-audio",
                 "friendli",
                 "gmicloud",
                 "google-ai-studio",
