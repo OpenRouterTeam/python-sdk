@@ -639,7 +639,6 @@ r"""Resolution of the generated video"""
 
 class VideoGenerationRequestTypedDict(TypedDict):
     model: str
-    prompt: str
     aspect_ratio: NotRequired[VideoGenerationRequestAspectRatio]
     r"""Aspect ratio of the generated video"""
     callback_url: NotRequired[str]
@@ -652,6 +651,8 @@ class VideoGenerationRequestTypedDict(TypedDict):
     r"""Whether to generate audio alongside the video. Defaults to the endpoint's generate_audio capability flag, false if not set."""
     input_references: NotRequired[List[InputReferenceTypedDict]]
     r"""Reference assets to guide video generation. Accepts image, audio, and video references. Audio and video references are only honored by providers that support them (currently BytePlus Seedance 2.0); other providers use image references and ignore the rest."""
+    prompt: NotRequired[str]
+    r"""Text prompt describing the video to generate. Optional for models that support generating a video from image input alone; required by all other models."""
     provider: NotRequired[VideoGenerationRequestProviderTypedDict]
     r"""Provider-specific passthrough configuration"""
     resolution: NotRequired[VideoGenerationRequestResolution]
@@ -664,8 +665,6 @@ class VideoGenerationRequestTypedDict(TypedDict):
 
 class VideoGenerationRequest(BaseModel):
     model: str
-
-    prompt: str
 
     aspect_ratio: Optional[VideoGenerationRequestAspectRatio] = None
     r"""Aspect ratio of the generated video"""
@@ -684,6 +683,9 @@ class VideoGenerationRequest(BaseModel):
 
     input_references: Optional[List[InputReference]] = None
     r"""Reference assets to guide video generation. Accepts image, audio, and video references. Audio and video references are only honored by providers that support them (currently BytePlus Seedance 2.0); other providers use image references and ignore the rest."""
+
+    prompt: Optional[str] = None
+    r"""Text prompt describing the video to generate. Optional for models that support generating a video from image input alone; required by all other models."""
 
     provider: Optional[VideoGenerationRequestProvider] = None
     r"""Provider-specific passthrough configuration"""
@@ -707,6 +709,7 @@ class VideoGenerationRequest(BaseModel):
                 "frame_images",
                 "generate_audio",
                 "input_references",
+                "prompt",
                 "provider",
                 "resolution",
                 "seed",

@@ -17,7 +17,6 @@ class VideoGeneration(BaseSDK):
         self,
         *,
         model: str,
-        prompt: str,
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
@@ -37,6 +36,7 @@ class VideoGeneration(BaseSDK):
                 Iterable[components.InputReferenceTypedDict],
             ]
         ] = None,
+        prompt: Optional[str] = None,
         provider: Optional[
             Union[
                 components.VideoGenerationRequestProvider,
@@ -56,7 +56,6 @@ class VideoGeneration(BaseSDK):
         Submits a video generation request and returns a polling URL to check status
 
         :param model:
-        :param prompt:
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
@@ -70,6 +69,7 @@ class VideoGeneration(BaseSDK):
         :param frame_images: Images to use as the first and/or last frame of the generated video. Each image must specify a frame_type of first_frame or last_frame.
         :param generate_audio: Whether to generate audio alongside the video. Defaults to the endpoint's generate_audio capability flag, false if not set.
         :param input_references: Reference assets to guide video generation. Accepts image, audio, and video references. Audio and video references are only honored by providers that support them (currently BytePlus Seedance 2.0); other providers use image references and ignore the rest.
+        :param prompt: Text prompt describing the video to generate. Optional for models that support generating a video from image input alone; required by all other models.
         :param provider: Provider-specific passthrough configuration
         :param resolution: Resolution of the generated video
         :param seed: If specified, the generation will sample deterministically, such that repeated requests with the same seed and parameters should return the same result. Determinism is not guaranteed for all providers.
@@ -223,7 +223,6 @@ class VideoGeneration(BaseSDK):
         self,
         *,
         model: str,
-        prompt: str,
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
@@ -243,6 +242,7 @@ class VideoGeneration(BaseSDK):
                 Iterable[components.InputReferenceTypedDict],
             ]
         ] = None,
+        prompt: Optional[str] = None,
         provider: Optional[
             Union[
                 components.VideoGenerationRequestProvider,
@@ -262,7 +262,6 @@ class VideoGeneration(BaseSDK):
         Submits a video generation request and returns a polling URL to check status
 
         :param model:
-        :param prompt:
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
@@ -276,6 +275,7 @@ class VideoGeneration(BaseSDK):
         :param frame_images: Images to use as the first and/or last frame of the generated video. Each image must specify a frame_type of first_frame or last_frame.
         :param generate_audio: Whether to generate audio alongside the video. Defaults to the endpoint's generate_audio capability flag, false if not set.
         :param input_references: Reference assets to guide video generation. Accepts image, audio, and video references. Audio and video references are only honored by providers that support them (currently BytePlus Seedance 2.0); other providers use image references and ignore the rest.
+        :param prompt: Text prompt describing the video to generate. Optional for models that support generating a video from image input alone; required by all other models.
         :param provider: Provider-specific passthrough configuration
         :param resolution: Resolution of the generated video
         :param seed: If specified, the generation will sample deterministically, such that repeated requests with the same seed and parameters should return the same result. Determinism is not guaranteed for all providers.
