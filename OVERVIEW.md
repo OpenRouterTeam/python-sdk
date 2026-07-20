@@ -2,6 +2,8 @@
 
 The OpenRouter Python SDK is a type-safe toolkit for building AI applications with access to 400+ language models through a unified API.
 
+The SDK is stable as of v1.0.
+
 ## Why use the OpenRouter SDK?
 
 Integrating AI models into applications involves handling different provider APIs, managing model-specific requirements, and avoiding common implementation mistakes. The OpenRouter SDK standardizes these integrations and protects you from footguns.
@@ -103,7 +105,7 @@ pip install openrouter
 poetry add openrouter
 ```
 
-**Requirements:** Python 3.9 or higher
+**Requirements:** Python 3.10 or higher
 
 Get your API key from [openrouter.ai/settings/keys](https://openrouter.ai/settings/keys).
 
