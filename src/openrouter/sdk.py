@@ -137,6 +137,7 @@ class OpenRouter(BaseSDK):
         server: Optional[str] = None,
         url_params: Optional[Dict[str, str]] = None,
         server_url: Optional[str] = None,
+        base_url: Optional[str] = None,
         client: Optional[HttpClient] = None,
         async_client: Optional[AsyncHttpClient] = None,
         retry_config: OptionalNullable[RetryConfig] = UNSET,
@@ -186,6 +187,9 @@ class OpenRouter(BaseSDK):
             security = lambda: components.Security(api_key=api_key())
         else:
             security = components.Security(api_key=api_key)
+
+        if server_url is None and base_url is not None:
+            server_url = base_url
 
         if server_url is not None:
             if url_params is not None:
