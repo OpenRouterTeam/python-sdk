@@ -17,6 +17,10 @@ class OutputBashServerToolItemTypedDict(TypedDict):
 
     status: ToolCallStatus
     type: OutputBashServerToolItemType
+    arguments: NotRequired[str]
+    r"""The raw tool-call arguments string as emitted by the model."""
+    call_id: NotRequired[str]
+    r"""The model-generated tool call id from the originating turn."""
     command: NotRequired[str]
     exit_code: NotRequired[int]
     id: NotRequired[str]
@@ -31,6 +35,12 @@ class OutputBashServerToolItem(BaseModel):
 
     type: OutputBashServerToolItemType
 
+    arguments: Optional[str] = None
+    r"""The raw tool-call arguments string as emitted by the model."""
+
+    call_id: Optional[str] = None
+    r"""The model-generated tool call id from the originating turn."""
+
     command: Optional[str] = None
 
     exit_code: Annotated[Optional[int], pydantic.Field(alias="exitCode")] = None
@@ -43,7 +53,9 @@ class OutputBashServerToolItem(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["command", "exitCode", "id", "stderr", "stdout"])
+        optional_fields = set(
+            ["arguments", "call_id", "command", "exitCode", "id", "stderr", "stdout"]
+        )
         serialized = handler(self)
         m = {}
 
