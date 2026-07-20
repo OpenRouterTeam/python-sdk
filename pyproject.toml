@@ -1,6 +1,6 @@
 [project]
 name = "openrouter"
-version = "1.0.0"
+version = "1.0.1"
 description = "Official Python Client SDK for OpenRouter."
 authors = [{ name = "OpenRouter" },]
 readme = "README-PYPI.md"
@@ -51,4 +51,5 @@ ignore_missing_imports = true
 [tool.pyright]
 venvPath = "."
 venv = ".venv"
+
 

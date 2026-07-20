@@ -141,7 +141,6 @@ OutputItemsTypedDict = TypeAliasType(
         OutputMemoryServerToolItemTypedDict,
         OutputMessageItemTypedDict,
         OutputShellCallOutputItemTypedDict,
-        OutputBashServerToolItemTypedDict,
         OutputFunctionCallItemTypedDict,
         OutputImageGenerationServerToolItemTypedDict,
         OutputWebFetchServerToolItemTypedDict,
@@ -150,6 +149,7 @@ OutputItemsTypedDict = TypeAliasType(
         OutputAdvisorServerToolItemTypedDict,
         OutputSubagentServerToolItemTypedDict,
         OutputFilesServerToolItemTypedDict,
+        OutputBashServerToolItemTypedDict,
         OutputFusionServerToolItemTypedDict,
     ],
 )
