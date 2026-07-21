@@ -418,12 +418,12 @@ InputsUnion1TypedDict = TypeAliasType(
         OutputFilesServerToolItemTypedDict,
         InputsReasoningTypedDict,
         ReasoningItemTypedDict,
-        OutputSubagentServerToolItemTypedDict,
         OutputCodeInterpreterServerToolItemTypedDict,
         OutputAdvisorServerToolItemTypedDict,
         OutputWebFetchServerToolItemTypedDict,
         OutputBashServerToolItemTypedDict,
         OutputFusionServerToolItemTypedDict,
+        OutputSubagentServerToolItemTypedDict,
     ],
 )
 
@@ -474,12 +474,12 @@ InputsUnion1 = TypeAliasType(
         OutputFilesServerToolItem,
         InputsReasoning,
         ReasoningItem,
-        OutputSubagentServerToolItem,
         OutputCodeInterpreterServerToolItem,
         OutputAdvisorServerToolItem,
         OutputWebFetchServerToolItem,
         OutputBashServerToolItem,
         OutputFusionServerToolItem,
+        OutputSubagentServerToolItem,
     ],
 )
 

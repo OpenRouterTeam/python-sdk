@@ -19,7 +19,7 @@ class SubagentServerToolOpenRouterTypedDict(TypedDict):
 
     type: SubagentServerToolOpenRouterType
     parameters: NotRequired[SubagentServerToolConfigTypedDict]
-    r"""Configuration for the openrouter:subagent server tool."""
+    r"""Configuration for one openrouter:subagent server tool entry."""
 
 
 class SubagentServerToolOpenRouter(BaseModel):
@@ -28,7 +28,7 @@ class SubagentServerToolOpenRouter(BaseModel):
     type: SubagentServerToolOpenRouterType
 
     parameters: Optional[SubagentServerToolConfig] = None
-    r"""Configuration for the openrouter:subagent server tool."""
+    r"""Configuration for one openrouter:subagent server tool entry."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

@@ -147,10 +147,10 @@ OutputItemsTypedDict = TypeAliasType(
         OutputCodeInterpreterServerToolItemTypedDict,
         OutputReasoningItemTypedDict,
         OutputAdvisorServerToolItemTypedDict,
-        OutputSubagentServerToolItemTypedDict,
         OutputFilesServerToolItemTypedDict,
         OutputBashServerToolItemTypedDict,
         OutputFusionServerToolItemTypedDict,
+        OutputSubagentServerToolItemTypedDict,
     ],
 )
 r"""An output item from the response"""
