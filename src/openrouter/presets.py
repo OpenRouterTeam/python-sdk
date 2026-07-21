@@ -2098,7 +2098,7 @@ class Presets(BaseSDK):
         :param input: Input for a response request - can be a string or array of items
         :param instructions:
         :param max_output_tokens:
-        :param max_tool_calls:
+        :param max_tool_calls: Maximum number of server-tool (e.g. `openrouter:web_search`) agent steps the model may take during a request. Defaults to 30, which is also the maximum. Ignored when `stop_server_tools_when` is set.
         :param metadata: Metadata key-value pairs for the request. Keys must be ≤64 characters and cannot contain brackets. Values must be ≤512 characters. Maximum 16 pairs allowed.
         :param modalities: Output modalities for the response. Supported values are \"text\" and \"image\".
         :param model:
@@ -2450,7 +2450,7 @@ class Presets(BaseSDK):
         :param input: Input for a response request - can be a string or array of items
         :param instructions:
         :param max_output_tokens:
-        :param max_tool_calls:
+        :param max_tool_calls: Maximum number of server-tool (e.g. `openrouter:web_search`) agent steps the model may take during a request. Defaults to 30, which is also the maximum. Ignored when `stop_server_tools_when` is set.
         :param metadata: Metadata key-value pairs for the request. Keys must be ≤64 characters and cannot contain brackets. Values must be ≤512 characters. Maximum 16 pairs allowed.
         :param modalities: Output modalities for the response. Supported values are \"text\" and \"image\".
         :param model:
