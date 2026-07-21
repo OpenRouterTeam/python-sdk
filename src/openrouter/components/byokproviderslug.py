@@ -82,6 +82,7 @@ BYOKProviderSlug = Union[
         "recraft",
         "reka",
         "relace",
+        "runway",
         "sail-research",
         "sakana",
         "sambanova",
