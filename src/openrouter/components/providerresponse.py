@@ -130,6 +130,7 @@ ProviderResponseProviderName = Union[
         "WandB",
         "Quiver",
         "Krea",
+        "Runway",
         "Xiaomi",
         "xAI",
         "Z.AI",
