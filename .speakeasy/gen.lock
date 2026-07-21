@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c48cf606-fb42-4a45-9c23-8f0555307828
 management:
-  docChecksum: 399c7e53a7a023cfb7dbcafad7851326
+  docChecksum: 8e07de0f6821302f71821721af2f11a0
   docVersion: 1.0.0
   speakeasyVersion: 1.787.0
   generationVersion: 2.914.0
-  releaseVersion: 1.0.4
-  configChecksum: 5549373d94647348301fe6e7f5ce1834
+  releaseVersion: 1.0.5
+  configChecksum: 4d7aad5830dff85e31e3884bda8241c7
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
 persistentEdits:
-  generation_id: acd9866c-af26-4c9c-be88-35ed2fcaab7a
-  pristine_commit_hash: b292fe68911fe816712b8808e0660b28357b6e9b
-  pristine_tree_hash: 888574e44a12214b245ef1b3f83a72de29b82f49
+  generation_id: 6a4e44e9-7356-40d1-b295-298702d23df0
+  pristine_commit_hash: 0f3b8afd7c369cb8c420c55a3b15cc3a2a37b4bc
+  pristine_tree_hash: 8d16b1f1cd0dba4e394cac91034c0334fda33ae5
 features:
   python:
     acceptHeaders: 3.0.0
@@ -6586,8 +6586,8 @@ trackedFiles:
     pristine_git_object: 4e5df61630ce21da071bcc35a50a8cca491d6e4f
   docs/sdks/apikeys/README.mdx:
     id: 27fcaae1c346
-    last_write_checksum: sha1:f9cdf4bb1df96dbdf3f53715afdb50eba53987fa
-    pristine_git_object: f741a3265276750fbc01b9740977d56066ef9016
+    last_write_checksum: sha1:b8bd517a7a2960d003ab350130008b402927af6b
+    pristine_git_object: c8541c5c189bae01e80db73fd88767391d7dbb9b
   docs/sdks/benchmarks/README.mdx:
     id: 5b483a6770ba
     last_write_checksum: sha1:580442b871377a1d5191d9d3d1f30b20667115fe
@@ -6598,8 +6598,8 @@ trackedFiles:
     pristine_git_object: 6e4b06ff97f02da5d31d78f478094db32dfdaa6f
   docs/sdks/byok/README.mdx:
     id: 17792f3b180d
-    last_write_checksum: sha1:ef3255b140cd84373866d15321ea04e205b99c35
-    pristine_git_object: e813aadac9a310cfbe0da371716b17181121f55f
+    last_write_checksum: sha1:e2871404d5619b9a2adbdf02be1dd26e7e2bcd5e
+    pristine_git_object: 4cc46421714dbd2c155d4df6db12cd612c876f49
   docs/sdks/chat/README.mdx:
     id: 1dd859c23fe1
     last_write_checksum: sha1:d8714b18af250e3d59ad005b9de2fa1aa3f47463
@@ -6634,8 +6634,8 @@ trackedFiles:
     pristine_git_object: f262b34982a18293f5ae22bfbbf385010bfcdc9c
   docs/sdks/guardrails/README.mdx:
     id: a0cd4218b8fa
-    last_write_checksum: sha1:f527fd75a617e0bd58bb500dee9e60319585b183
-    pristine_git_object: 2b3bb1cef3ad1ba8a6d7bee3b2fa5b5034124a18
+    last_write_checksum: sha1:afc6465cf8d72a3d831fb997091bd6e17ebe16c1
+    pristine_git_object: d47c7dbbb703d191889d87ad3fe9c09f3210288e
   docs/sdks/images/README.mdx:
     id: 534a6c102c4f
     last_write_checksum: sha1:1c0a9c704bdd9090f5a0a74f4d9ae0c4360707bb
@@ -6650,8 +6650,8 @@ trackedFiles:
     pristine_git_object: c8f7dfd9fd46b60a5814250f8cb2de313166e2c3
   docs/sdks/observability/README.mdx:
     id: 75811527e651
-    last_write_checksum: sha1:165808ebbc4b2513862032852233adb6f5ee336d
-    pristine_git_object: 6a36341f9157463e34d7bf6dc98edb1739afad95
+    last_write_checksum: sha1:939e6208f7d7a62992e2df529ccfa763afa7a646
+    pristine_git_object: 3a4d24cc8068f03f5319035abce43527103e8c32
   docs/sdks/organization/README.mdx:
     id: f41b85542db0
     last_write_checksum: sha1:3d384483978c2c141bc145ac7bf9d8b1a4120593
@@ -6694,8 +6694,8 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:3cc151276b0020579009943c3aac224d64ddc096
-    pristine_git_object: 8b6d077fb58c087b50d4965e1d3ac21ceebaf487
+    last_write_checksum: sha1:aab75f4608d55ea23d4ead3765686704de271519
+    pristine_git_object: 0893dd1eef6959d8caee4e4dea40df921e31a789
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77f44b60b98bc126557ec27391f91dfba764bb54
@@ -6722,16 +6722,16 @@ trackedFiles:
     pristine_git_object: 86713cfea633e09d33b3d4e65281071fe20e6137
   src/openrouter/_version.py:
     id: d8d15ad6c586
-    last_write_checksum: sha1:a42b9cab0bbacc54e3efc34f6fbd270a9670f6fe
-    pristine_git_object: 8207a6f09990184407b170fd48d06080b7bb9461
+    last_write_checksum: sha1:2723a9f6d161892aa6abe6d5c9f3d104fced6b0d
+    pristine_git_object: df0953d7bc28f2fe9a3522ea33db0eb99816fa45
   src/openrouter/analytics.py:
     id: cb406b5aaabb
     last_write_checksum: sha1:9e709b71dd0611056dc0cec6150b578defe32841
     pristine_git_object: ddb44a129e8f45e7524fe5615a23f1ccc70bbe71
   src/openrouter/api_keys.py:
     id: 876fac88fff6
-    last_write_checksum: sha1:2553ca36bd8465991f00b9b65317244b7444ab83
-    pristine_git_object: 09084e39118b774fecf211ff5af0c56ad93761f9
+    last_write_checksum: sha1:ada03aff96976f0570e594a3143595c25ca05f18
+    pristine_git_object: dec0852524b4b59e697be154204a726ad6afbdbc
   src/openrouter/basesdk.py:
     id: c5733c5a1e12
     last_write_checksum: sha1:65769ff2cb5473f85b364c6213a0ddc8c68644ea
@@ -6750,8 +6750,8 @@ trackedFiles:
     pristine_git_object: 1b01f0c081ffc8a42fa56d335f95ec3121e4b5e6
   src/openrouter/byok.py:
     id: bec352462ae1
-    last_write_checksum: sha1:8440c0d936757b90fb3eca91193a26a8de3d4f32
-    pristine_git_object: 213f83f9ea7dc942bdd3b960c1f2ba36a6181d70
+    last_write_checksum: sha1:b6e23eeb00a67208ad47b0ea77d56e92933af2b7
+    pristine_git_object: afa29b7f2224546b46df7a7ccb1e51b1f748cfe0
   src/openrouter/chat.py:
     id: 723fdce15c1d
     last_write_checksum: sha1:1497d43947fc61b2d8dbe0b609f82475141357b0
@@ -9118,8 +9118,8 @@ trackedFiles:
     pristine_git_object: f6dbf5440466ba6b1d92442cad1b91e2b3587c52
   src/openrouter/guardrails.py:
     id: 705839f34e66
-    last_write_checksum: sha1:0cfd3f3cab5c34d33c425aab439fa1e4a4599e54
-    pristine_git_object: e80ca9d5d26f8048f96c4a14b56e3568c5694d60
+    last_write_checksum: sha1:54443b78ac73ff7ea38aea6b8e4f470509d605ce
+    pristine_git_object: 6c3aec39b1f1dce0d1c3a90d52b08c98dabf9a03
   src/openrouter/httpclient.py:
     id: e9311185443d
     last_write_checksum: sha1:5e55338d6ee9f01ab648cad4380201a8a3da7dd7
@@ -9150,8 +9150,8 @@ trackedFiles:
     pristine_git_object: d6a938412d5c82be874e958ba4a3043bd46284d3
   src/openrouter/observability.py:
     id: 6a17f32d3f33
-    last_write_checksum: sha1:92a23c7f390209f143277e9bcab363e99e601134
-    pristine_git_object: e59a1eb3047eadeadef109cc3fb55fa34154c026
+    last_write_checksum: sha1:99f4ecf43d1846288ced461f300cd2d5c8070b13
+    pristine_git_object: 0f62389a8410522fe76eed82c64227903a8605c5
   src/openrouter/operations/__init__.py:
     id: 9afcea1e7161
     last_write_checksum: sha1:e56a2031fc05ced63f1e1c769fc3407b290890a8
@@ -9920,6 +9920,8 @@ examples:
           application/json: {"error": {"code": 429, "message": "Rate limit exceeded"}}
         "500":
           application/json: {"error": {"code": 500, "message": "Internal Server Error"}}
+        "400":
+          application/json: {"error": {"code": 400, "message": "Invalid request parameters"}}
   createKeys:
     speakeasy-default-create-keys:
       requestBody:
@@ -10011,6 +10013,8 @@ examples:
           application/json: {"error": {"code": 401, "message": "Missing Authentication header"}}
         "500":
           application/json: {"error": {"code": 500, "message": "Internal Server Error"}}
+        "400":
+          application/json: {"error": {"code": 400, "message": "Invalid request parameters"}}
   createGuardrail:
     speakeasy-default-create-guardrail:
       requestBody:
@@ -10461,6 +10465,8 @@ examples:
           application/json: {"error": {"code": 401, "message": "Missing Authentication header"}}
         "500":
           application/json: {"error": {"code": 500, "message": "Internal Server Error"}}
+        "400":
+          application/json: {"error": {"code": 400, "message": "Invalid request parameters"}}
   createBYOKKey:
     speakeasy-default-create-BYOK-key:
       requestBody:
@@ -10590,6 +10596,8 @@ examples:
           application/json: {"error": {"code": 401, "message": "Missing Authentication header"}}
         "500":
           application/json: {"error": {"code": 500, "message": "Internal Server Error"}}
+        "400":
+          application/json: {"error": {"code": 400, "message": "Invalid request parameters"}}
   createObservabilityDestination:
     speakeasy-default-create-observability-destination:
       requestBody:
@@ -11201,3 +11209,9 @@ examples:
         "500":
           application/json: {"error": {"code": 500, "message": "Internal Server Error"}}
 examplesVersion: 1.0.2
+releaseNotes: |
+  ## Python SDK Changes:
+  * `open_router.byok.list()`:  `error.status[400]` **Added**
+  * `open_router.guardrails.list()`:  `error.status[400]` **Added**
+  * `open_router.api_keys.list()`:  `error.status[400]` **Added**
+  * `open_router.observability.list()`:  `error.status[400]` **Added**

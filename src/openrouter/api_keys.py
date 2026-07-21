@@ -359,6 +359,11 @@ class APIKeys(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(operations.ListResponse, http_res)
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.BadRequestResponseErrorData, http_res
+            )
+            raise errors.BadRequestResponseError(response_data, http_res)
         if utils.match_response(http_res, "401", "application/json"):
             response_data = unmarshal_json_response(
                 errors.UnauthorizedResponseErrorData, http_res
@@ -493,6 +498,11 @@ class APIKeys(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(operations.ListResponse, http_res)
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.BadRequestResponseErrorData, http_res
+            )
+            raise errors.BadRequestResponseError(response_data, http_res)
         if utils.match_response(http_res, "401", "application/json"):
             response_data = unmarshal_json_response(
                 errors.UnauthorizedResponseErrorData, http_res
