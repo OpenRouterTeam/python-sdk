@@ -288,7 +288,7 @@ class ChatRequestTypedDict(TypedDict):
     stop: NotRequired[Nullable[StopTypedDict]]
     r"""Stop sequences (up to 4)"""
     stop_server_tools_when: NotRequired[List[StopServerToolsWhenConditionTypedDict]]
-    r"""Stop conditions for the server-tool agent loop. Any condition firing halts the loop (OR logic). When set, this overrides `max_tool_calls`."""
+    r"""Stop conditions for the server-tool agent loop. Any condition firing halts the loop (OR logic). When set, this overrides `max_tool_calls`. When a condition fires while the model is still emitting tool calls, the pending tool calls are executed and one final turn is made with tool calls disabled so the response ends with a natural-language answer instead of an unfinished tool call."""
     stream: NotRequired[bool]
     r"""Enable streaming response"""
     stream_options: NotRequired[Nullable[ChatStreamOptionsTypedDict]]
@@ -403,7 +403,7 @@ class ChatRequest(BaseModel):
     r"""Stop sequences (up to 4)"""
 
     stop_server_tools_when: Optional[List[StopServerToolsWhenCondition]] = None
-    r"""Stop conditions for the server-tool agent loop. Any condition firing halts the loop (OR logic). When set, this overrides `max_tool_calls`."""
+    r"""Stop conditions for the server-tool agent loop. Any condition firing halts the loop (OR logic). When set, this overrides `max_tool_calls`. When a condition fires while the model is still emitting tool calls, the pending tool calls are executed and one final turn is made with tool calls disabled so the response ends with a natural-language answer instead of an unfinished tool call."""
 
     stream: Optional[bool] = False
     r"""Enable streaming response"""
