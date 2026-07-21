@@ -19,8 +19,12 @@ class OutputSubagentServerToolItemTypedDict(TypedDict):
     error: NotRequired[str]
     r"""Error message when the subagent task did not produce an outcome."""
     id: NotRequired[str]
+    instance_name: NotRequired[str]
+    r"""Provider-safe function name of the specific subagent instance that produced this item (e.g. `openrouter_subagent__1`). Present only on items from non-default instances — the second and later subagent entries in the request `tools` array. The first (default) instance omits it, even when multiple subagents are configured. When a replayed item echoes this field back, the transcript rehydrates the call under that instance's tool. This identity is positional: it is derived from the index of the subagent entry in the request `tools` array, so keep the order of subagent entries stable across requests in a conversation."""
     model: NotRequired[str]
     r"""Slug of the worker model that executed the task."""
+    name: NotRequired[str]
+    r"""Configured name of the subagent that executed the task (the `name` on its tool entry). Present only for named subagents; omitted for an unnamed (default) subagent."""
     outcome: NotRequired[str]
     r"""The worker model's result (the outcome text returned to the delegating model)."""
     task_description: NotRequired[str]
@@ -41,8 +45,14 @@ class OutputSubagentServerToolItem(BaseModel):
 
     id: Optional[str] = None
 
+    instance_name: Optional[str] = None
+    r"""Provider-safe function name of the specific subagent instance that produced this item (e.g. `openrouter_subagent__1`). Present only on items from non-default instances — the second and later subagent entries in the request `tools` array. The first (default) instance omits it, even when multiple subagents are configured. When a replayed item echoes this field back, the transcript rehydrates the call under that instance's tool. This identity is positional: it is derived from the index of the subagent entry in the request `tools` array, so keep the order of subagent entries stable across requests in a conversation."""
+
     model: Optional[str] = None
     r"""Slug of the worker model that executed the task."""
+
+    name: Optional[str] = None
+    r"""Configured name of the subagent that executed the task (the `name` on its tool entry). Present only for named subagents; omitted for an unnamed (default) subagent."""
 
     outcome: Optional[str] = None
     r"""The worker model's result (the outcome text returned to the delegating model)."""
@@ -56,7 +66,16 @@ class OutputSubagentServerToolItem(BaseModel):
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
-            ["error", "id", "model", "outcome", "task_description", "task_name"]
+            [
+                "error",
+                "id",
+                "instance_name",
+                "model",
+                "name",
+                "outcome",
+                "task_description",
+                "task_name",
+            ]
         )
         serialized = handler(self)
         m = {}

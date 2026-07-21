@@ -10,7 +10,7 @@ from typing_extensions import NotRequired, TypedDict
 
 
 class SubagentServerToolConfigTypedDict(TypedDict):
-    r"""Configuration for the openrouter:subagent server tool."""
+    r"""Configuration for one openrouter:subagent server tool entry."""
 
     instructions: NotRequired[str]
     r"""System instructions for the subagent. When omitted, the subagent responds with no system prompt of its own."""
@@ -20,6 +20,8 @@ class SubagentServerToolConfigTypedDict(TypedDict):
     r"""Maximum number of tool-calling steps the subagent may take during its agentic loop. Capped at 25. Only relevant when the subagent is given tools. Accepted and validated but not yet enforced on the subagent call."""
     model: NotRequired[str]
     r"""Slug of the model that executes delegated tasks (any OpenRouter model). Typically a smaller, cheaper, faster model than the one delegating. When omitted, the model from the outer API request is used. The subagent tool itself cannot be the subagent model."""
+    name: NotRequired[str]
+    r"""Optional name for this subagent. The model sees one tool per named subagent (and one default for an unnamed entry). Names must be unique across subagent entries. Letters, digits, spaces, underscores, and dashes; trimmed; 1–64 chars."""
     reasoning: NotRequired[SubagentReasoningTypedDict]
     r"""Reasoning configuration forwarded to the subagent call. Use this to control reasoning effort and token budget for models that support extended thinking."""
     temperature: NotRequired[float]
@@ -29,7 +31,7 @@ class SubagentServerToolConfigTypedDict(TypedDict):
 
 
 class SubagentServerToolConfig(BaseModel):
-    r"""Configuration for the openrouter:subagent server tool."""
+    r"""Configuration for one openrouter:subagent server tool entry."""
 
     instructions: Optional[str] = None
     r"""System instructions for the subagent. When omitted, the subagent responds with no system prompt of its own."""
@@ -42,6 +44,9 @@ class SubagentServerToolConfig(BaseModel):
 
     model: Optional[str] = None
     r"""Slug of the model that executes delegated tasks (any OpenRouter model). Typically a smaller, cheaper, faster model than the one delegating. When omitted, the model from the outer API request is used. The subagent tool itself cannot be the subagent model."""
+
+    name: Optional[str] = None
+    r"""Optional name for this subagent. The model sees one tool per named subagent (and one default for an unnamed entry). Names must be unique across subagent entries. Letters, digits, spaces, underscores, and dashes; trimmed; 1–64 chars."""
 
     reasoning: Optional[SubagentReasoning] = None
     r"""Reasoning configuration forwarded to the subagent call. Use this to control reasoning effort and token budget for models that support extended thinking."""
@@ -60,6 +65,7 @@ class SubagentServerToolConfig(BaseModel):
                 "max_completion_tokens",
                 "max_tool_calls",
                 "model",
+                "name",
                 "reasoning",
                 "temperature",
                 "tools",
