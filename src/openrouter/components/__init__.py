@@ -189,6 +189,18 @@ if TYPE_CHECKING:
         AnthropicThinkingTurnsType,
         AnthropicThinkingTurnsTypedDict,
     )
+    from .anthropictoolsearchtoolbm25 import (
+        AnthropicToolSearchToolBm25,
+        AnthropicToolSearchToolBm25Name,
+        AnthropicToolSearchToolBm25Type,
+        AnthropicToolSearchToolBm25TypedDict,
+    )
+    from .anthropictoolsearchtoolregex import (
+        AnthropicToolSearchToolRegex,
+        AnthropicToolSearchToolRegexName,
+        AnthropicToolSearchToolRegexType,
+        AnthropicToolSearchToolRegexTypedDict,
+    )
     from .anthropictooluseskeep import (
         AnthropicToolUsesKeep,
         AnthropicToolUsesKeepType,
@@ -2995,6 +3007,14 @@ __all__ = [
     "AnthropicThinkingTurns",
     "AnthropicThinkingTurnsType",
     "AnthropicThinkingTurnsTypedDict",
+    "AnthropicToolSearchToolBm25",
+    "AnthropicToolSearchToolBm25Name",
+    "AnthropicToolSearchToolBm25Type",
+    "AnthropicToolSearchToolBm25TypedDict",
+    "AnthropicToolSearchToolRegex",
+    "AnthropicToolSearchToolRegexName",
+    "AnthropicToolSearchToolRegexType",
+    "AnthropicToolSearchToolRegexTypedDict",
     "AnthropicToolUsesKeep",
     "AnthropicToolUsesKeepType",
     "AnthropicToolUsesKeepTypedDict",
@@ -5084,6 +5104,14 @@ _dynamic_imports: dict[str, str] = {
     "AnthropicThinkingTurns": ".anthropicthinkingturns",
     "AnthropicThinkingTurnsType": ".anthropicthinkingturns",
     "AnthropicThinkingTurnsTypedDict": ".anthropicthinkingturns",
+    "AnthropicToolSearchToolBm25": ".anthropictoolsearchtoolbm25",
+    "AnthropicToolSearchToolBm25Name": ".anthropictoolsearchtoolbm25",
+    "AnthropicToolSearchToolBm25Type": ".anthropictoolsearchtoolbm25",
+    "AnthropicToolSearchToolBm25TypedDict": ".anthropictoolsearchtoolbm25",
+    "AnthropicToolSearchToolRegex": ".anthropictoolsearchtoolregex",
+    "AnthropicToolSearchToolRegexName": ".anthropictoolsearchtoolregex",
+    "AnthropicToolSearchToolRegexType": ".anthropictoolsearchtoolregex",
+    "AnthropicToolSearchToolRegexTypedDict": ".anthropictoolsearchtoolregex",
     "AnthropicToolUsesKeep": ".anthropictooluseskeep",
     "AnthropicToolUsesKeepType": ".anthropictooluseskeep",
     "AnthropicToolUsesKeepTypedDict": ".anthropictooluseskeep",

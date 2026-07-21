@@ -394,7 +394,7 @@ class ResponsesRequestTypedDict(TypedDict):
     session_id: NotRequired[str]
     r"""A unique identifier for grouping related requests (e.g., a conversation or agent workflow). When provided, OpenRouter uses it as the sticky routing key, routing all requests in the session to the same provider to maximize prompt cache hits. Also used for observability grouping. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters."""
     stop_server_tools_when: NotRequired[List[StopServerToolsWhenConditionTypedDict]]
-    r"""Stop conditions for the server-tool agent loop. Any condition firing halts the loop (OR logic). When set, this overrides `max_tool_calls`."""
+    r"""Stop conditions for the server-tool agent loop. Any condition firing halts the loop (OR logic). When set, this overrides `max_tool_calls`. When a condition fires while the model is still emitting tool calls, the pending tool calls are executed and one final turn is made with tool calls disabled so the response ends with a natural-language answer instead of an unfinished tool call."""
     store: Literal[False]
     stream: NotRequired[bool]
     temperature: NotRequired[Nullable[float]]
@@ -481,7 +481,7 @@ class ResponsesRequest(BaseModel):
     r"""A unique identifier for grouping related requests (e.g., a conversation or agent workflow). When provided, OpenRouter uses it as the sticky routing key, routing all requests in the session to the same provider to maximize prompt cache hits. Also used for observability grouping. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters."""
 
     stop_server_tools_when: Optional[List[StopServerToolsWhenCondition]] = None
-    r"""Stop conditions for the server-tool agent loop. Any condition firing halts the loop (OR logic). When set, this overrides `max_tool_calls`."""
+    r"""Stop conditions for the server-tool agent loop. Any condition firing halts the loop (OR logic). When set, this overrides `max_tool_calls`. When a condition fires while the model is still emitting tool calls, the pending tool calls are executed and one final turn is made with tool calls disabled so the response ends with a natural-language answer instead of an unfinished tool call."""
 
     STORE: Annotated[
         Annotated[Optional[Literal[False]], AfterValidator(validate_const(False))],

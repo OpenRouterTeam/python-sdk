@@ -23,6 +23,14 @@ from .anthropicthinkingturns import (
     AnthropicThinkingTurns,
     AnthropicThinkingTurnsTypedDict,
 )
+from .anthropictoolsearchtoolbm25 import (
+    AnthropicToolSearchToolBm25,
+    AnthropicToolSearchToolBm25TypedDict,
+)
+from .anthropictoolsearchtoolregex import (
+    AnthropicToolSearchToolRegex,
+    AnthropicToolSearchToolRegexTypedDict,
+)
 from .anthropictooluseskeep import AnthropicToolUsesKeep, AnthropicToolUsesKeepTypedDict
 from .anthropictoolusestrigger import (
     AnthropicToolUsesTrigger,
@@ -1039,18 +1047,20 @@ MessagesRequestToolUnionTypedDict = TypeAliasType(
     "MessagesRequestToolUnionTypedDict",
     Union[
         MessagesSearchModelsServerToolTypedDict,
-        BashServerToolTypedDict,
         DatetimeServerToolTypedDict,
-        ImageGenerationServerToolOpenRouterTypedDict,
-        WebFetchServerToolTypedDict,
-        OpenRouterWebSearchServerToolTypedDict,
         MessagesRequestToolTypedDict,
+        OpenRouterWebSearchServerToolTypedDict,
+        ImageGenerationServerToolOpenRouterTypedDict,
+        BashServerToolTypedDict,
+        WebFetchServerToolTypedDict,
         ToolBash20250124TypedDict,
         ToolTextEditor20250124TypedDict,
         ToolCustomTypedDict,
+        AnthropicToolSearchToolBm25TypedDict,
+        AnthropicToolSearchToolRegexTypedDict,
         ToolWebSearch20250305TypedDict,
-        ToolWebSearch20260209TypedDict,
         ToolAdvisor20260301TypedDict,
+        ToolWebSearch20260209TypedDict,
     ],
 )
 
@@ -1059,18 +1069,20 @@ MessagesRequestToolUnion = TypeAliasType(
     "MessagesRequestToolUnion",
     Union[
         MessagesSearchModelsServerTool,
-        BashServerTool,
         DatetimeServerTool,
-        ImageGenerationServerToolOpenRouter,
-        WebFetchServerTool,
-        OpenRouterWebSearchServerTool,
         MessagesRequestTool,
+        OpenRouterWebSearchServerTool,
+        ImageGenerationServerToolOpenRouter,
+        BashServerTool,
+        WebFetchServerTool,
         ToolBash20250124,
         ToolTextEditor20250124,
         ToolCustom,
+        AnthropicToolSearchToolBm25,
+        AnthropicToolSearchToolRegex,
         ToolWebSearch20250305,
-        ToolWebSearch20260209,
         ToolAdvisor20260301,
+        ToolWebSearch20260209,
     ],
 )
 
@@ -1100,7 +1112,7 @@ class MessagesRequestTypedDict(TypedDict):
     speed: NotRequired[Nullable[Speed]]
     stop_sequences: NotRequired[List[str]]
     stop_server_tools_when: NotRequired[List[StopServerToolsWhenConditionTypedDict]]
-    r"""Stop conditions for the server-tool agent loop. Any condition firing halts the loop (OR logic). When set, this overrides `max_tool_calls`."""
+    r"""Stop conditions for the server-tool agent loop. Any condition firing halts the loop (OR logic). When set, this overrides `max_tool_calls`. When a condition fires while the model is still emitting tool calls, the pending tool calls are executed and one final turn is made with tool calls disabled so the response ends with a natural-language answer instead of an unfinished tool call."""
     stream: NotRequired[bool]
     system: NotRequired[SystemTypedDict]
     temperature: NotRequired[float]
@@ -1155,7 +1167,7 @@ class MessagesRequest(BaseModel):
     stop_sequences: Optional[List[str]] = None
 
     stop_server_tools_when: Optional[List[StopServerToolsWhenCondition]] = None
-    r"""Stop conditions for the server-tool agent loop. Any condition firing halts the loop (OR logic). When set, this overrides `max_tool_calls`."""
+    r"""Stop conditions for the server-tool agent loop. Any condition firing halts the loop (OR logic). When set, this overrides `max_tool_calls`. When a condition fires while the model is still emitting tool calls, the pending tool calls are executed and one final turn is made with tool calls disabled so the response ends with a natural-language answer instead of an unfinished tool call."""
 
     stream: Optional[bool] = None
 
