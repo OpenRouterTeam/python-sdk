@@ -56,6 +56,7 @@ class VideoGenerationRequestOptionsTypedDict(TypedDict):
     clarifai: NotRequired[Dict[str, Any]]
     cloudflare: NotRequired[Dict[str, Any]]
     cohere: NotRequired[Dict[str, Any]]
+    coreweave: NotRequired[Dict[str, Any]]
     crofai: NotRequired[Dict[str, Any]]
     crucible: NotRequired[Dict[str, Any]]
     crusoe: NotRequired[Dict[str, Any]]
@@ -224,6 +225,8 @@ class VideoGenerationRequestOptions(BaseModel):
     cloudflare: Optional[Dict[str, Any]] = None
 
     cohere: Optional[Dict[str, Any]] = None
+
+    coreweave: Optional[Dict[str, Any]] = None
 
     crofai: Optional[Dict[str, Any]] = None
 
@@ -483,6 +486,7 @@ class VideoGenerationRequestOptions(BaseModel):
                 "clarifai",
                 "cloudflare",
                 "cohere",
+                "coreweave",
                 "crofai",
                 "crucible",
                 "crusoe",
