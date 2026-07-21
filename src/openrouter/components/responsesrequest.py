@@ -368,6 +368,7 @@ class ResponsesRequestTypedDict(TypedDict):
     instructions: NotRequired[Nullable[str]]
     max_output_tokens: NotRequired[Nullable[int]]
     max_tool_calls: NotRequired[Nullable[int]]
+    r"""Maximum number of server-tool (e.g. `openrouter:web_search`) agent steps the model may take during a request. Defaults to 30, which is also the maximum. Ignored when `stop_server_tools_when` is set."""
     metadata: NotRequired[Nullable[Dict[str, str]]]
     r"""Metadata key-value pairs for the request. Keys must be ≤64 characters and cannot contain brackets. Values must be ≤512 characters. Maximum 16 pairs allowed."""
     modalities: NotRequired[List[OutputModalityEnum]]
@@ -437,6 +438,7 @@ class ResponsesRequest(BaseModel):
     max_output_tokens: OptionalNullable[int] = UNSET
 
     max_tool_calls: OptionalNullable[int] = UNSET
+    r"""Maximum number of server-tool (e.g. `openrouter:web_search`) agent steps the model may take during a request. Defaults to 30, which is also the maximum. Ignored when `stop_server_tools_when` is set."""
 
     metadata: OptionalNullable[Dict[str, str]] = UNSET
     r"""Metadata key-value pairs for the request. Keys must be ≤64 characters and cannot contain brackets. Values must be ≤512 characters. Maximum 16 pairs allowed."""
