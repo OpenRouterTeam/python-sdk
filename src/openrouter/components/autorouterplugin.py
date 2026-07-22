@@ -18,6 +18,8 @@ class AutoRouterPluginTypedDict(TypedDict):
     r"""Controls cost vs. quality routing tradeoff (0–10). 0 = pure quality (best model regardless of cost), 10 = maximize for cost (cheapest model wins). Intermediate values blend quality and cost signals continuously. Defaults to 7."""
     enabled: NotRequired[bool]
     r"""Set to false to disable the auto-router plugin for this request. Defaults to true."""
+    pin_model: NotRequired[bool]
+    r"""When true, reuses the model from the most recent assistant message's `model` attribute for subsequent turns. Defaults to false."""
 
 
 class AutoRouterPlugin(BaseModel):
@@ -32,9 +34,14 @@ class AutoRouterPlugin(BaseModel):
     enabled: Optional[bool] = None
     r"""Set to false to disable the auto-router plugin for this request. Defaults to true."""
 
+    pin_model: Optional[bool] = None
+    r"""When true, reuses the model from the most recent assistant message's `model` attribute for subsequent turns. Defaults to false."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["allowed_models", "cost_quality_tradeoff", "enabled"])
+        optional_fields = set(
+            ["allowed_models", "cost_quality_tradeoff", "enabled", "pin_model"]
+        )
         serialized = handler(self)
         m = {}
 
