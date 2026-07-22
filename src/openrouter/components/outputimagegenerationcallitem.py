@@ -4,7 +4,7 @@ from __future__ import annotations
 from .imagegenerationstatus import ImageGenerationStatus
 from openrouter.types import BaseModel, Nullable, OptionalNullable, UNSET_SENTINEL
 from pydantic import model_serializer
-from typing import Literal
+from typing import Literal, Optional
 from typing_extensions import NotRequired, TypedDict
 
 
@@ -16,6 +16,8 @@ class OutputImageGenerationCallItemTypedDict(TypedDict):
     status: ImageGenerationStatus
     type: OutputImageGenerationCallItemType
     result: NotRequired[Nullable[str]]
+    prompt: NotRequired[str]
+    r"""The prompt (possibly rewritten) that the image was generated from."""
 
 
 class OutputImageGenerationCallItem(BaseModel):
@@ -27,9 +29,12 @@ class OutputImageGenerationCallItem(BaseModel):
 
     result: OptionalNullable[str] = None
 
+    prompt: Optional[str] = None
+    r"""The prompt (possibly rewritten) that the image was generated from."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["result"])
+        optional_fields = set(["result", "prompt"])
         nullable_fields = set(["result"])
         null_default_fields = set(["result"])
         serialized = handler(self)
