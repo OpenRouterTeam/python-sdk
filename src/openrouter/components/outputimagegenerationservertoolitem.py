@@ -26,6 +26,8 @@ class OutputImageGenerationServerToolItemTypedDict(TypedDict):
     id: NotRequired[str]
     image_b64: NotRequired[str]
     image_url: NotRequired[str]
+    prompt: NotRequired[str]
+    r"""The prompt (possibly rewritten) that the image was generated from."""
     result: NotRequired[Nullable[str]]
     r"""The generated image as a base64-encoded string or URL, matching OpenAI image_generation_call format"""
     revised_prompt: NotRequired[str]
@@ -44,6 +46,9 @@ class OutputImageGenerationServerToolItem(BaseModel):
 
     image_url: Annotated[Optional[str], pydantic.Field(alias="imageUrl")] = None
 
+    prompt: Optional[str] = None
+    r"""The prompt (possibly rewritten) that the image was generated from."""
+
     result: OptionalNullable[str] = UNSET
     r"""The generated image as a base64-encoded string or URL, matching OpenAI image_generation_call format"""
 
@@ -53,7 +58,9 @@ class OutputImageGenerationServerToolItem(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["id", "imageB64", "imageUrl", "result", "revisedPrompt"])
+        optional_fields = set(
+            ["id", "imageB64", "imageUrl", "prompt", "result", "revisedPrompt"]
+        )
         nullable_fields = set(["result"])
         serialized = handler(self)
         m = {}
