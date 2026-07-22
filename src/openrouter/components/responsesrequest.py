@@ -390,6 +390,7 @@ class ResponsesRequestTypedDict(TypedDict):
     reasoning: NotRequired[Nullable[ReasoningConfigTypedDict]]
     r"""Configuration for reasoning mode in the response"""
     safety_identifier: NotRequired[Nullable[str]]
+    r"""Recommended per-end-user identifier for abuse isolation. Use a stable ID, hash, or pseudonym. When a provider requires a user identity, OpenRouter folds it into the hashed identity sent upstream and never forwards it raw. If omitted, requests use an account-level identity, so provider policy blocks can affect the whole account."""
     service_tier: NotRequired[Nullable[ResponsesRequestServiceTier]]
     session_id: NotRequired[str]
     r"""A unique identifier for grouping related requests (e.g., a conversation or agent workflow). When provided, OpenRouter uses it as the sticky routing key, routing all requests in the session to the same provider to maximize prompt cache hits. Also used for observability grouping. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters."""
@@ -474,6 +475,7 @@ class ResponsesRequest(BaseModel):
     r"""Configuration for reasoning mode in the response"""
 
     safety_identifier: OptionalNullable[str] = UNSET
+    r"""Recommended per-end-user identifier for abuse isolation. Use a stable ID, hash, or pseudonym. When a provider requires a user identity, OpenRouter folds it into the hashed identity sent upstream and never forwards it raw. If omitted, requests use an account-level identity, so provider policy blocks can affect the whole account."""
 
     service_tier: OptionalNullable[ResponsesRequestServiceTier] = "auto"
 
