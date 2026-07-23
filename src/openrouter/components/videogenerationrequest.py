@@ -134,6 +134,7 @@ class VideoGenerationRequestOptionsTypedDict(TypedDict):
     runway: NotRequired[Dict[str, Any]]
     sail_research: NotRequired[Dict[str, Any]]
     sakana: NotRequired[Dict[str, Any]]
+    sakana_ai: NotRequired[Dict[str, Any]]
     sambanova: NotRequired[Dict[str, Any]]
     sambanova_cloaked: NotRequired[Dict[str, Any]]
     seed: NotRequired[Dict[str, Any]]
@@ -154,6 +155,7 @@ class VideoGenerationRequestOptionsTypedDict(TypedDict):
     venice: NotRequired[Dict[str, Any]]
     wafer: NotRequired[Dict[str, Any]]
     wandb: NotRequired[Dict[str, Any]]
+    wandb_legacy: NotRequired[Dict[str, Any]]
     xai: NotRequired[Dict[str, Any]]
     xiaomi: NotRequired[Dict[str, Any]]
     z_ai: NotRequired[Dict[str, Any]]
@@ -404,6 +406,10 @@ class VideoGenerationRequestOptions(BaseModel):
 
     sakana: Optional[Dict[str, Any]] = None
 
+    sakana_ai: Annotated[
+        Optional[Dict[str, Any]], pydantic.Field(alias="sakana-ai")
+    ] = None
+
     sambanova: Optional[Dict[str, Any]] = None
 
     sambanova_cloaked: Annotated[
@@ -449,6 +455,10 @@ class VideoGenerationRequestOptions(BaseModel):
     wafer: Optional[Dict[str, Any]] = None
 
     wandb: Optional[Dict[str, Any]] = None
+
+    wandb_legacy: Annotated[
+        Optional[Dict[str, Any]], pydantic.Field(alias="wandb-legacy")
+    ] = None
 
     xai: Optional[Dict[str, Any]] = None
 
@@ -564,6 +574,7 @@ class VideoGenerationRequestOptions(BaseModel):
                 "runway",
                 "sail-research",
                 "sakana",
+                "sakana-ai",
                 "sambanova",
                 "sambanova-cloaked",
                 "seed",
@@ -584,6 +595,7 @@ class VideoGenerationRequestOptions(BaseModel):
                 "venice",
                 "wafer",
                 "wandb",
+                "wandb-legacy",
                 "xai",
                 "xiaomi",
                 "z-ai",
