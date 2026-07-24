@@ -1,0 +1,22 @@
+---
+title: "Beta.Responses"
+description: "Deprecated alias for responses endpoints"
+---
+
+## Overview
+
+Deprecated: `open_router.beta.responses` remains available as a compatibility alias for existing callers. Use `open_router.responses` instead. The beta alias is scheduled for removal on a future sunset date (TBD).
+
+### Available Operations
+
+* [send](../responses/README#send) - Create a response
+
+## Migration
+
+```python
+# GA (use this)
+res = open_router.responses.send(service_tier="auto", stream=False)
+
+# Deprecated alias (still works)
+res = open_router.beta.responses.send(service_tier="auto", stream=False)
+```
