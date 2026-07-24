@@ -13241,6 +13241,7 @@ components:
                 - 'Modular'
                 - 'Moonshot AI'
                 - 'Morph'
+                - 'VoyageAI by MongoDB'
                 - 'NCompass'
                 - 'Nebius'
                 - 'Nex AGI'
@@ -19010,6 +19011,7 @@ components:
         - 'Modular'
         - 'Moonshot AI'
         - 'Morph'
+        - 'VoyageAI by MongoDB'
         - 'NCompass'
         - 'Nebius'
         - 'Nex AGI'
@@ -19428,6 +19430,9 @@ components:
         venice:
           additionalProperties: {}
           type: 'object'
+        voyageai:
+          additionalProperties: {}
+          type: 'object'
         wafer:
           additionalProperties: {}
           type: 'object'
@@ -19724,6 +19729,7 @@ components:
             - 'Modular'
             - 'Moonshot AI'
             - 'Morph'
+            - 'VoyageAI by MongoDB'
             - 'NCompass'
             - 'Nebius'
             - 'Nex AGI'

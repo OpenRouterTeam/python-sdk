@@ -134,6 +134,7 @@ class ProviderOptionsTypedDict(TypedDict):
     ubicloud: NotRequired[Dict[str, Any]]
     upstage: NotRequired[Dict[str, Any]]
     venice: NotRequired[Dict[str, Any]]
+    voyageai: NotRequired[Dict[str, Any]]
     wafer: NotRequired[Dict[str, Any]]
     wandb: NotRequired[Dict[str, Any]]
     wandb_legacy: NotRequired[Dict[str, Any]]
@@ -433,6 +434,8 @@ class ProviderOptions(BaseModel):
 
     venice: Optional[Dict[str, Any]] = None
 
+    voyageai: Optional[Dict[str, Any]] = None
+
     wafer: Optional[Dict[str, Any]] = None
 
     wandb: Optional[Dict[str, Any]] = None
@@ -574,6 +577,7 @@ class ProviderOptions(BaseModel):
                 "ubicloud",
                 "upstage",
                 "venice",
+                "voyageai",
                 "wafer",
                 "wandb",
                 "wandb-legacy",
