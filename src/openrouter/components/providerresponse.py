@@ -96,6 +96,7 @@ ProviderResponseProviderName = Union[
         "Modular",
         "Moonshot AI",
         "Morph",
+        "VoyageAI by MongoDB",
         "NCompass",
         "Nebius",
         "Nex AGI",
