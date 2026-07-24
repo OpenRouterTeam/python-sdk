@@ -29,6 +29,14 @@ from .messagesadvisortoolresultblock import (
     MessagesAdvisorToolResultBlock,
     MessagesAdvisorToolResultBlockTypedDict,
 )
+from .messagestooladditionblock import (
+    MessagesToolAdditionBlock,
+    MessagesToolAdditionBlockTypedDict,
+)
+from .messagestoolremovalblock import (
+    MessagesToolRemovalBlock,
+    MessagesToolRemovalBlockTypedDict,
+)
 from openrouter.types import BaseModel, Nullable, UNSET_SENTINEL, UnrecognizedStr
 from openrouter.utils import get_discriminator
 from pydantic import Discriminator, Tag, model_serializer
@@ -231,18 +239,18 @@ class ContentThinking(BaseModel):
     type: TypeThinking
 
 
-TypeToolReference = Literal["tool_reference",]
+MessagesMessageParamTypeToolReference = Literal["tool_reference",]
 
 
 class ContentToolReferenceTypedDict(TypedDict):
     tool_name: str
-    type: TypeToolReference
+    type: MessagesMessageParamTypeToolReference
 
 
 class ContentToolReference(BaseModel):
     tool_name: str
 
-    type: TypeToolReference
+    type: MessagesMessageParamTypeToolReference
 
 
 MessagesMessageParamContentUnion1TypedDict = TypeAliasType(
@@ -366,18 +374,20 @@ class ContentToolUse(BaseModel):
 MessagesMessageParamContentUnion4TypedDict = TypeAliasType(
     "MessagesMessageParamContentUnion4TypedDict",
     Union[
+        MessagesToolRemovalBlockTypedDict,
+        MessagesToolAdditionBlockTypedDict,
         ContentRedactedThinkingTypedDict,
+        ContentCompactionTypedDict,
         AnthropicImageBlockParamTypedDict,
         ContentThinkingTypedDict,
-        ContentCompactionTypedDict,
         MessagesAdvisorToolResultBlockTypedDict,
         AnthropicTextBlockParamTypedDict,
         ContentWebSearchToolResultTypedDict,
         ContentToolUseTypedDict,
-        ContentToolResultTypedDict,
         ContentServerToolUseTypedDict,
-        AnthropicDocumentBlockParamTypedDict,
+        ContentToolResultTypedDict,
         AnthropicSearchResultBlockParamTypedDict,
+        AnthropicDocumentBlockParamTypedDict,
     ],
 )
 
@@ -396,6 +406,8 @@ MessagesMessageParamContentUnion4 = Annotated[
         Annotated[AnthropicSearchResultBlockParam, Tag("search_result")],
         Annotated[ContentCompaction, Tag("compaction")],
         Annotated[MessagesAdvisorToolResultBlock, Tag("advisor_tool_result")],
+        Annotated[MessagesToolAdditionBlock, Tag("tool_addition")],
+        Annotated[MessagesToolRemovalBlock, Tag("tool_removal")],
     ],
     Discriminator(lambda m: get_discriminator(m, "type", "type")),
 ]

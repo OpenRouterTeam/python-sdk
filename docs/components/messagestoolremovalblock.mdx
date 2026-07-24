@@ -1,0 +1,13 @@
+---
+title: "MessagesToolRemovalBlock"
+---
+
+Removes a tool from the conversation mid-conversation without invalidating the prompt cache. Only valid in `role: "system"` messages. Not supported on Claude Sonnet 5 or models older than Claude Opus 4.8.
+
+
+## Fields
+
+| Field                                                                                    | Type                                                                                     | Required                                                                                 | Description                                                                              |
+| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `tool`                                                                                   | [components.MessagesToolRemovalBlockTool](../components/messagestoolremovalblocktool.mdx) | :heavy_check_mark:                                                                       | N/A                                                                                      |
+| `type`                                                                                   | [components.TypeToolRemoval](../components/typetoolremoval.mdx)                           | :heavy_check_mark:                                                                       | N/A                                                                                      |
