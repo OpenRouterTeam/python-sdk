@@ -380,6 +380,7 @@ class Guardrails(BaseSDK):
         enforce_zdr_xai: OptionalNullable[bool] = UNSET,
         ignored_models: OptionalNullable[Iterable[str]] = UNSET,
         ignored_providers: OptionalNullable[Iterable[str]] = UNSET,
+        include_byok_in_budgets: Optional[bool] = None,
         limit_usd: OptionalNullable[float] = UNSET,
         reset_interval: OptionalNullable[components.GuardrailInterval] = UNSET,
         workspace_id: Optional[str] = None,
@@ -413,6 +414,7 @@ class Guardrails(BaseSDK):
         :param enforce_zdr_xai: Whether to enforce zero data retention for xAI models. Falls back to enforce_zdr when not provided.
         :param ignored_models: Array of model identifiers to exclude from routing (slug or canonical_slug accepted)
         :param ignored_providers: List of provider IDs to exclude from routing
+        :param include_byok_in_budgets: Whether BYOK (bring-your-own-key) inference spend counts toward this guardrail's limit_usd, in addition to OpenRouter credit spend. Defaults to false.
         :param limit_usd: Spending limit in USD
         :param reset_interval: Interval at which the limit resets (daily, weekly, monthly)
         :param workspace_id: The workspace to create the guardrail in. Defaults to the default workspace if not provided.
@@ -463,6 +465,7 @@ class Guardrails(BaseSDK):
                 ignored_providers=utils.unmarshal(
                     ignored_providers, OptionalNullable[List[str]]
                 ),
+                include_byok_in_budgets=include_byok_in_budgets,
                 limit_usd=limit_usd,
                 name=name,
                 reset_interval=reset_interval,
@@ -594,6 +597,7 @@ class Guardrails(BaseSDK):
         enforce_zdr_xai: OptionalNullable[bool] = UNSET,
         ignored_models: OptionalNullable[Iterable[str]] = UNSET,
         ignored_providers: OptionalNullable[Iterable[str]] = UNSET,
+        include_byok_in_budgets: Optional[bool] = None,
         limit_usd: OptionalNullable[float] = UNSET,
         reset_interval: OptionalNullable[components.GuardrailInterval] = UNSET,
         workspace_id: Optional[str] = None,
@@ -627,6 +631,7 @@ class Guardrails(BaseSDK):
         :param enforce_zdr_xai: Whether to enforce zero data retention for xAI models. Falls back to enforce_zdr when not provided.
         :param ignored_models: Array of model identifiers to exclude from routing (slug or canonical_slug accepted)
         :param ignored_providers: List of provider IDs to exclude from routing
+        :param include_byok_in_budgets: Whether BYOK (bring-your-own-key) inference spend counts toward this guardrail's limit_usd, in addition to OpenRouter credit spend. Defaults to false.
         :param limit_usd: Spending limit in USD
         :param reset_interval: Interval at which the limit resets (daily, weekly, monthly)
         :param workspace_id: The workspace to create the guardrail in. Defaults to the default workspace if not provided.
@@ -677,6 +682,7 @@ class Guardrails(BaseSDK):
                 ignored_providers=utils.unmarshal(
                     ignored_providers, OptionalNullable[List[str]]
                 ),
+                include_byok_in_budgets=include_byok_in_budgets,
                 limit_usd=limit_usd,
                 name=name,
                 reset_interval=reset_interval,
@@ -1320,6 +1326,7 @@ class Guardrails(BaseSDK):
         enforce_zdr_xai: OptionalNullable[bool] = UNSET,
         ignored_models: OptionalNullable[Iterable[str]] = UNSET,
         ignored_providers: OptionalNullable[Iterable[str]] = UNSET,
+        include_byok_in_budgets: Optional[bool] = None,
         limit_usd: OptionalNullable[float] = UNSET,
         name: Optional[str] = None,
         reset_interval: OptionalNullable[components.GuardrailInterval] = UNSET,
@@ -1353,6 +1360,7 @@ class Guardrails(BaseSDK):
         :param enforce_zdr_xai: Whether to enforce zero data retention for xAI models. Falls back to enforce_zdr when not provided.
         :param ignored_models: Array of model identifiers to exclude from routing (slug or canonical_slug accepted)
         :param ignored_providers: List of provider IDs to exclude from routing
+        :param include_byok_in_budgets: Whether BYOK (bring-your-own-key) inference spend counts toward this guardrail's limit_usd, in addition to OpenRouter credit spend. Omit to leave unchanged.
         :param limit_usd: New spending limit in USD
         :param name: New name for the guardrail
         :param reset_interval: Interval at which the limit resets (daily, weekly, monthly)
@@ -1404,6 +1412,7 @@ class Guardrails(BaseSDK):
                 ignored_providers=utils.unmarshal(
                     ignored_providers, OptionalNullable[List[str]]
                 ),
+                include_byok_in_budgets=include_byok_in_budgets,
                 limit_usd=limit_usd,
                 name=name,
                 reset_interval=reset_interval,
@@ -1534,6 +1543,7 @@ class Guardrails(BaseSDK):
         enforce_zdr_xai: OptionalNullable[bool] = UNSET,
         ignored_models: OptionalNullable[Iterable[str]] = UNSET,
         ignored_providers: OptionalNullable[Iterable[str]] = UNSET,
+        include_byok_in_budgets: Optional[bool] = None,
         limit_usd: OptionalNullable[float] = UNSET,
         name: Optional[str] = None,
         reset_interval: OptionalNullable[components.GuardrailInterval] = UNSET,
@@ -1567,6 +1577,7 @@ class Guardrails(BaseSDK):
         :param enforce_zdr_xai: Whether to enforce zero data retention for xAI models. Falls back to enforce_zdr when not provided.
         :param ignored_models: Array of model identifiers to exclude from routing (slug or canonical_slug accepted)
         :param ignored_providers: List of provider IDs to exclude from routing
+        :param include_byok_in_budgets: Whether BYOK (bring-your-own-key) inference spend counts toward this guardrail's limit_usd, in addition to OpenRouter credit spend. Omit to leave unchanged.
         :param limit_usd: New spending limit in USD
         :param name: New name for the guardrail
         :param reset_interval: Interval at which the limit resets (daily, weekly, monthly)
@@ -1618,6 +1629,7 @@ class Guardrails(BaseSDK):
                 ignored_providers=utils.unmarshal(
                     ignored_providers, OptionalNullable[List[str]]
                 ),
+                include_byok_in_budgets=include_byok_in_budgets,
                 limit_usd=limit_usd,
                 name=name,
                 reset_interval=reset_interval,
