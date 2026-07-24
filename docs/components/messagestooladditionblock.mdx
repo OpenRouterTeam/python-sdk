@@ -1,0 +1,13 @@
+---
+title: "MessagesToolAdditionBlock"
+---
+
+Loads a previously deferred tool (declared in `tools` with `defer_loading: true`) mid-conversation without invalidating the prompt cache. Only valid in `role: "system"` messages. Not supported on Claude Sonnet 5 or models older than Claude Opus 4.8.
+
+
+## Fields
+
+| Field                                                                                      | Type                                                                                       | Required                                                                                   | Description                                                                                |
+| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
+| `tool`                                                                                     | [components.MessagesToolAdditionBlockTool](../components/messagestooladditionblocktool.mdx) | :heavy_check_mark:                                                                         | N/A                                                                                        |
+| `type`                                                                                     | [components.TypeToolAddition](../components/typetooladdition.mdx)                           | :heavy_check_mark:                                                                         | N/A                                                                                        |
