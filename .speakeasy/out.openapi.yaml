@@ -1206,10 +1206,6 @@ components:
           type:
             - 'string'
             - 'null'
-        encrypted_content:
-          type:
-            - 'string'
-            - 'null'
         type:
           enum:
             - 'compaction'
@@ -12062,10 +12058,6 @@ components:
                   type:
                     - 'string'
                     - 'null'
-                encrypted_content:
-                  type:
-                    - 'string'
-                    - 'null'
                 type:
                   enum:
                     - 'compaction_delta'
@@ -12113,10 +12105,6 @@ components:
             - $ref: '#/components/schemas/AnthropicAdvisorToolResult'
             - properties:
                 content:
-                  type:
-                    - 'string'
-                    - 'null'
-                encrypted_content:
                   type:
                     - 'string'
                     - 'null'
@@ -12469,10 +12457,6 @@ components:
                       cache_control:
                         $ref: '#/components/schemas/AnthropicCacheControlDirective'
                       content:
-                        type:
-                          - 'string'
-                          - 'null'
-                      encrypted_content:
                         type:
                           - 'string'
                           - 'null'
@@ -13421,46 +13405,18 @@ components:
           type: 'tool_reference'
         type: 'tool_addition'
       properties:
-        cache_control:
-          $ref: '#/components/schemas/AnthropicCacheControlDirective'
         tool:
-          oneOf:
-            - properties:
-                name:
-                  type: 'string'
-                type:
-                  enum:
-                    - 'tool_reference'
-                  type: 'string'
-              required:
-                - 'type'
-                - 'name'
-              type: 'object'
-            - properties:
-                name:
-                  type: 'string'
-                server_name:
-                  type: 'string'
-                type:
-                  enum:
-                    - 'mcp_tool_reference'
-                  type: 'string'
-              required:
-                - 'type'
-                - 'name'
-                - 'server_name'
-              type: 'object'
-            - properties:
-                server_name:
-                  type: 'string'
-                type:
-                  enum:
-                    - 'mcp_toolset_reference'
-                  type: 'string'
-              required:
-                - 'type'
-                - 'server_name'
-              type: 'object'
+          properties:
+            name:
+              type: 'string'
+            type:
+              enum:
+                - 'tool_reference'
+              type: 'string'
+          required:
+            - 'type'
+            - 'name'
+          type: 'object'
         type:
           enum:
             - 'tool_addition'
@@ -13477,46 +13433,18 @@ components:
           type: 'tool_reference'
         type: 'tool_removal'
       properties:
-        cache_control:
-          $ref: '#/components/schemas/AnthropicCacheControlDirective'
         tool:
-          oneOf:
-            - properties:
-                name:
-                  type: 'string'
-                type:
-                  enum:
-                    - 'tool_reference'
-                  type: 'string'
-              required:
-                - 'type'
-                - 'name'
-              type: 'object'
-            - properties:
-                name:
-                  type: 'string'
-                server_name:
-                  type: 'string'
-                type:
-                  enum:
-                    - 'mcp_tool_reference'
-                  type: 'string'
-              required:
-                - 'type'
-                - 'name'
-                - 'server_name'
-              type: 'object'
-            - properties:
-                server_name:
-                  type: 'string'
-                type:
-                  enum:
-                    - 'mcp_toolset_reference'
-                  type: 'string'
-              required:
-                - 'type'
-                - 'server_name'
-              type: 'object'
+          properties:
+            name:
+              type: 'string'
+            type:
+              enum:
+                - 'tool_reference'
+              type: 'string'
+          required:
+            - 'type'
+            - 'name'
+          type: 'object'
         type:
           enum:
             - 'tool_removal'
@@ -16846,7 +16774,6 @@ components:
       enum:
         - 'end_turn'
         - 'max_tokens'
-        - 'model_context_window_exceeded'
         - 'stop_sequence'
         - 'tool_use'
         - 'pause_turn'

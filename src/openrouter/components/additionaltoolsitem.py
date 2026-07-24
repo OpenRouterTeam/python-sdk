@@ -116,7 +116,7 @@ class AdditionalToolsItemTool(BaseModel):
         self.__pydantic_extra__ = value  # pyright: ignore[reportIncompatibleVariableOverride]
 
 
-AdditionalToolsItemTypeFunction = Literal["function",]
+AdditionalToolsItemToolType = Literal["function",]
 
 
 class AdditionalToolsItemToolFunctionTypedDict(TypedDict):
@@ -124,7 +124,7 @@ class AdditionalToolsItemToolFunctionTypedDict(TypedDict):
 
     name: str
     parameters: Nullable[Dict[str, Any]]
-    type: AdditionalToolsItemTypeFunction
+    type: AdditionalToolsItemToolType
     description: NotRequired[Nullable[str]]
     strict: NotRequired[Nullable[bool]]
 
@@ -136,7 +136,7 @@ class AdditionalToolsItemToolFunction(BaseModel):
 
     parameters: Nullable[Dict[str, Any]]
 
-    type: AdditionalToolsItemTypeFunction
+    type: AdditionalToolsItemToolType
 
     description: OptionalNullable[str] = UNSET
 
