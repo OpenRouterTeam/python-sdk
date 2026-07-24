@@ -25,6 +25,8 @@ class GuardrailTypedDict(TypedDict):
     r"""ISO 8601 timestamp of when the guardrail was created"""
     id: str
     r"""Unique identifier for the guardrail"""
+    include_byok_in_budgets: bool
+    r"""Whether BYOK (bring-your-own-key) inference spend counts toward this guardrail's limit_usd, in addition to OpenRouter credit spend."""
     name: str
     r"""Name of the guardrail"""
     workspace_id: str
@@ -71,6 +73,9 @@ class Guardrail(BaseModel):
 
     id: str
     r"""Unique identifier for the guardrail"""
+
+    include_byok_in_budgets: bool
+    r"""Whether BYOK (bring-your-own-key) inference spend counts toward this guardrail's limit_usd, in addition to OpenRouter credit spend."""
 
     name: str
     r"""Name of the guardrail"""

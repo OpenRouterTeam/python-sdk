@@ -49,6 +49,8 @@ class UpdateGuardrailRequestTypedDict(TypedDict):
     r"""Array of model identifiers to exclude from routing (slug or canonical_slug accepted)"""
     ignored_providers: NotRequired[Nullable[List[str]]]
     r"""List of provider IDs to exclude from routing"""
+    include_byok_in_budgets: NotRequired[bool]
+    r"""Whether BYOK (bring-your-own-key) inference spend counts toward this guardrail's limit_usd, in addition to OpenRouter credit spend. Omit to leave unchanged."""
     limit_usd: NotRequired[Nullable[float]]
     r"""New spending limit in USD"""
     name: NotRequired[str]
@@ -104,6 +106,9 @@ class UpdateGuardrailRequest(BaseModel):
     ignored_providers: OptionalNullable[List[str]] = UNSET
     r"""List of provider IDs to exclude from routing"""
 
+    include_byok_in_budgets: Optional[bool] = None
+    r"""Whether BYOK (bring-your-own-key) inference spend counts toward this guardrail's limit_usd, in addition to OpenRouter credit spend. Omit to leave unchanged."""
+
     limit_usd: OptionalNullable[float] = UNSET
     r"""New spending limit in USD"""
 
@@ -130,6 +135,7 @@ class UpdateGuardrailRequest(BaseModel):
                 "enforce_zdr_xai",
                 "ignored_models",
                 "ignored_providers",
+                "include_byok_in_budgets",
                 "limit_usd",
                 "name",
                 "reset_interval",
