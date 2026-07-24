@@ -26,6 +26,8 @@ class STTSegmentTypedDict(TypedDict):
     r"""Probability the segment contains no speech"""
     seek: NotRequired[int]
     r"""Seek offset of the segment"""
+    speaker: NotRequired[int]
+    r"""Speaker index for the segment, present when the provider returns diarization data"""
     temperature: NotRequired[float]
     r"""Temperature used for the segment"""
     tokens: NotRequired[List[int]]
@@ -59,6 +61,9 @@ class STTSegment(BaseModel):
     seek: Optional[int] = None
     r"""Seek offset of the segment"""
 
+    speaker: Optional[int] = None
+    r"""Speaker index for the segment, present when the provider returns diarization data"""
+
     temperature: Optional[float] = None
     r"""Temperature used for the segment"""
 
@@ -73,6 +78,7 @@ class STTSegment(BaseModel):
                 "compression_ratio",
                 "no_speech_prob",
                 "seek",
+                "speaker",
                 "temperature",
                 "tokens",
             ]
