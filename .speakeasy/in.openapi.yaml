@@ -34288,7 +34288,7 @@ paths:
           description: 'Provider Overloaded - Provider is temporarily overloaded'
       summary: 'Create a response'
       tags:
-        - 'beta.responses'
+        - 'responses'
       x-speakeasy-name-override: 'send'
       x-speakeasy-stream-request-field: 'stream'
   /videos:
@@ -35571,7 +35571,10 @@ tags:
     name: 'Workspaces'
   - description: 'beta.Analytics endpoints'
     name: 'beta.Analytics'
-  - description: 'beta.responses endpoints'
+  - description: 'responses endpoints'
+    name: 'responses'
+  - deprecated: true
+    description: 'Deprecated alias for responses endpoints. Use responses instead. Scheduled for removal (sunset date TBD).'
     name: 'beta.responses'
 x-retry-strategy:
   initialDelay: 500

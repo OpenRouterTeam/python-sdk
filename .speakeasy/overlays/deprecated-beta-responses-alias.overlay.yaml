@@ -1,0 +1,17 @@
+overlay: 1.0.0
+x-speakeasy-jsonpath: rfc9535
+info:
+  title: Keep beta.responses as a deprecated SDK alias
+  version: 0.0.0
+actions:
+  - target: $.paths["/responses"].post
+    description: Expose /responses under the canonical responses namespace and the deprecated beta.responses alias
+    update:
+      tags:
+        - responses
+        - beta.responses
+  - target: $.tags[?(@.name == "beta.responses")]
+    description: Mark beta.responses as a deprecated SDK alias
+    update:
+      description: Deprecated alias for responses endpoints. Use responses instead. Scheduled for removal (sunset date TBD).
+      deprecated: true

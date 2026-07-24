@@ -11,7 +11,7 @@ class Beta(BaseSDK):
     analytics: BetaAnalytics
     r"""beta.Analytics endpoints"""
     responses: Responses
-    r"""beta.responses endpoints"""
+    r"""Deprecated alias for responses endpoints. Use client.responses instead. Scheduled for removal (sunset date TBD)."""
 
     def __init__(
         self, sdk_config: SDKConfiguration, parent_ref: Optional[object] = None
