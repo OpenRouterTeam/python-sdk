@@ -43,6 +43,8 @@ class ChatAssistantMessageTypedDict(TypedDict):
     r"""Assistant message content"""
     images: NotRequired[List[ChatAssistantImagesTypedDict]]
     r"""Generated images from image generation models"""
+    model: NotRequired[str]
+    r"""Model that generated this assistant message"""
     name: NotRequired[str]
     r"""Optional name for the assistant"""
     reasoning: NotRequired[Nullable[str]]
@@ -69,6 +71,9 @@ class ChatAssistantMessage(BaseModel):
     images: Optional[List[ChatAssistantImages]] = None
     r"""Generated images from image generation models"""
 
+    model: Optional[str] = None
+    r"""Model that generated this assistant message"""
+
     name: Optional[str] = None
     r"""Optional name for the assistant"""
 
@@ -91,6 +96,7 @@ class ChatAssistantMessage(BaseModel):
                 "audio",
                 "content",
                 "images",
+                "model",
                 "name",
                 "reasoning",
                 "reasoning_details",

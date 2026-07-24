@@ -1,6 +1,10 @@
+![hero illustration](./assets/banner.png)
+
 # OpenRouter SDK
 
 The [OpenRouter SDK](https://openrouter.ai/docs/sdks/python) is a Python toolkit designed to help you build AI-powered features and solutions. Giving you easy access to 400+ models across providers in an easy and type-safe way.
+
+The OpenRouter Python SDK is stable as of v1.0.
 
 To learn more about how to use the OpenRouter SDK, check out our [API Reference](https://openrouter.ai/docs/sdks/python/reference) and [Documentation](https://openrouter.ai/docs/sdks/python).
 
@@ -77,7 +81,7 @@ Once that is saved to a file, you can run it with `uv run script.py` where
 <!-- Start Requirements [requirements] -->
 ## Requirements
 
-This SDK requires Python 3.9 or higher. For Python version support policy, see the SDK Installation section above.
+This SDK requires Python 3.10 or higher. For Python version support policy, see the SDK Installation section above.
 <!-- End Requirements [requirements] -->
 
 <!-- Start IDE Support [idesupport] -->

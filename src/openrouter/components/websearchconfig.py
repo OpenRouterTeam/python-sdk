@@ -26,6 +26,8 @@ class WebSearchConfigTypedDict(TypedDict):
     r"""Maximum number of search results to return per search call. Defaults to 5. Applies to Exa, Firecrawl, Parallel, and Perplexity engines; ignored with native provider search. Perplexity supports a maximum of 20; values above 20 are clamped."""
     max_total_results: NotRequired[int]
     r"""Maximum total number of search results across all search calls in a single request. Once this limit is reached, the tool will stop returning new results. Useful for controlling cost and context size in agentic loops. Defaults to 50 when not specified."""
+    max_uses: NotRequired[int]
+    r"""Maximum number of web searches the model may perform in a single request. Once reached, further search calls return an error result instead of executing. Applies to the Exa, Firecrawl, Parallel, and Perplexity engines. With native provider search, forwarded only to Anthropic (as `max_uses`); other native search providers have no equivalent parameter and ignore it."""
     search_context_size: NotRequired[SearchQualityLevel]
     r"""How much context to retrieve per result. Applies to Exa, Parallel, and Perplexity engines; ignored with native provider search and Firecrawl. For Exa, pins a fixed per-result character cap (low=5,000, medium=15,000, high=30,000); when omitted, Exa picks an adaptive size per query and document (typically ~2,000–4,000 characters per result). For Parallel, controls the total characters across all results; when omitted, Parallel uses its own default size. For Perplexity, maps directly to the Search API's native search_context_size parameter. Overridden by `max_characters` when both are set."""
     user_location: NotRequired[WebSearchUserLocationServerToolTypedDict]
@@ -51,6 +53,9 @@ class WebSearchConfig(BaseModel):
     max_total_results: Optional[int] = None
     r"""Maximum total number of search results across all search calls in a single request. Once this limit is reached, the tool will stop returning new results. Useful for controlling cost and context size in agentic loops. Defaults to 50 when not specified."""
 
+    max_uses: Optional[int] = None
+    r"""Maximum number of web searches the model may perform in a single request. Once reached, further search calls return an error result instead of executing. Applies to the Exa, Firecrawl, Parallel, and Perplexity engines. With native provider search, forwarded only to Anthropic (as `max_uses`); other native search providers have no equivalent parameter and ignore it."""
+
     search_context_size: Optional[SearchQualityLevel] = None
     r"""How much context to retrieve per result. Applies to Exa, Parallel, and Perplexity engines; ignored with native provider search and Firecrawl. For Exa, pins a fixed per-result character cap (low=5,000, medium=15,000, high=30,000); when omitted, Exa picks an adaptive size per query and document (typically ~2,000–4,000 characters per result). For Parallel, controls the total characters across all results; when omitted, Parallel uses its own default size. For Perplexity, maps directly to the Search API's native search_context_size parameter. Overridden by `max_characters` when both are set."""
 
@@ -67,6 +72,7 @@ class WebSearchConfig(BaseModel):
                 "max_characters",
                 "max_results",
                 "max_total_results",
+                "max_uses",
                 "search_context_size",
                 "user_location",
             ]

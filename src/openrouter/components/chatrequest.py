@@ -81,10 +81,10 @@ ChatRequestPluginTypedDict = TypeAliasType(
         ResponseHealingPluginTypedDict,
         FileParserPluginTypedDict,
         ContextCompressionPluginTypedDict,
-        AutoRouterPluginTypedDict,
         AutoBetaRouterPluginTypedDict,
-        ParetoRouterPluginTypedDict,
+        AutoRouterPluginTypedDict,
         WebFetchPluginTypedDict,
+        ParetoRouterPluginTypedDict,
         FusionPluginTypedDict,
         WebSearchPluginTypedDict,
     ],
@@ -288,7 +288,7 @@ class ChatRequestTypedDict(TypedDict):
     stop: NotRequired[Nullable[StopTypedDict]]
     r"""Stop sequences (up to 4)"""
     stop_server_tools_when: NotRequired[List[StopServerToolsWhenConditionTypedDict]]
-    r"""Stop conditions for the server-tool agent loop. Any condition firing halts the loop (OR logic). When set, this overrides `max_tool_calls`."""
+    r"""Stop conditions for the server-tool agent loop. Any condition firing halts the loop (OR logic). When set, this overrides `max_tool_calls`. When a condition fires while the model is still emitting tool calls, the pending tool calls are executed and one final turn is made with tool calls disabled so the response ends with a natural-language answer instead of an unfinished tool call."""
     stream: NotRequired[bool]
     r"""Enable streaming response"""
     stream_options: NotRequired[Nullable[ChatStreamOptionsTypedDict]]
@@ -310,7 +310,7 @@ class ChatRequestTypedDict(TypedDict):
     trace: NotRequired[TraceConfigTypedDict]
     r"""Metadata for observability and tracing. Known keys (trace_id, trace_name, span_name, generation_name, parent_span_id) have special handling. Additional keys are passed through as custom metadata to configured broadcast destinations."""
     user: NotRequired[str]
-    r"""Unique user identifier"""
+    r"""Per-end-user identifier for abuse isolation. Use a stable ID, hash, or pseudonym. When a provider requires a user identity, OpenRouter folds it into the hashed identity sent upstream and never forwards it raw. If omitted, requests use an account-level identity, so provider policy blocks can affect the whole account."""
 
 
 class ChatRequest(BaseModel):
@@ -403,7 +403,7 @@ class ChatRequest(BaseModel):
     r"""Stop sequences (up to 4)"""
 
     stop_server_tools_when: Optional[List[StopServerToolsWhenCondition]] = None
-    r"""Stop conditions for the server-tool agent loop. Any condition firing halts the loop (OR logic). When set, this overrides `max_tool_calls`."""
+    r"""Stop conditions for the server-tool agent loop. Any condition firing halts the loop (OR logic). When set, this overrides `max_tool_calls`. When a condition fires while the model is still emitting tool calls, the pending tool calls are executed and one final turn is made with tool calls disabled so the response ends with a natural-language answer instead of an unfinished tool call."""
 
     stream: Optional[bool] = False
     r"""Enable streaming response"""
@@ -436,7 +436,7 @@ class ChatRequest(BaseModel):
     r"""Metadata for observability and tracing. Known keys (trace_id, trace_name, span_name, generation_name, parent_span_id) have special handling. Additional keys are passed through as custom metadata to configured broadcast destinations."""
 
     user: Optional[str] = None
-    r"""Unique user identifier"""
+    r"""Per-end-user identifier for abuse isolation. Use a stable ID, hash, or pseudonym. When a provider requires a user identity, OpenRouter folds it into the hashed identity sent upstream and never forwards it raw. If omitted, requests use an account-level identity, so provider policy blocks can affect the whole account."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

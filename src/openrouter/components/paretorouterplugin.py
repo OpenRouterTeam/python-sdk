@@ -17,17 +17,19 @@ PriceSource = Union[
     ],
     UnrecognizedStr,
 ]
-r"""Price source for the Pareto frontier cost axis. \"prompt\" uses catalog list price (endpoint.pricing.prompt). \"weighted_avg\" uses traffic-weighted effective input price from ClickHouse, falling back to prompt price for models without traffic data. Defaults to \"prompt\"."""
+r"""Price source for the Pareto frontier cost axis and for enforcing max_price. \"prompt\" uses catalog list price (endpoint.pricing.prompt). \"weighted_avg\" uses traffic-weighted effective input price from ClickHouse, falling back to prompt price for models without traffic data. Defaults to \"prompt\"."""
 
 
 class ParetoRouterPluginTypedDict(TypedDict):
     id: ParetoRouterPluginID
     enabled: NotRequired[bool]
     r"""Set to false to disable the pareto-router plugin for this request. Defaults to true."""
+    max_price: NotRequired[float]
+    r"""Maximum input price in USD per million tokens. When set, quality-tier selection (min_coding_score) is bypassed: the router computes the Pareto frontier over the top coding models and routes to the best-scoring frontier model priced at or below this cap, falling back through cheaper frontier models, then non-frontier models. Enforced against the price source given by price_source. Returns 404 when no candidate satisfies the cap."""
     min_coding_score: NotRequired[float]
-    r"""Minimum coding quality score between 0 and 1. Maps to internal quality tiers: >= 0.66 → high (top coding models), >= 0.33 → medium (strong modern flagships), < 0.33 → low (capable coders above the median). Omit to default to the highest tier (equivalent to >= 0.66)."""
+    r"""Minimum coding quality score between 0 and 1. Maps to internal quality tiers: >= 0.66 → high (top coding models), >= 0.33 → medium (strong modern flagships), < 0.33 → low (capable coders above the median). Omit to default to the highest tier (equivalent to >= 0.66). Not used when max_price is set (price-based selection takes over)."""
     price_source: NotRequired[PriceSource]
-    r"""Price source for the Pareto frontier cost axis. \"prompt\" uses catalog list price (endpoint.pricing.prompt). \"weighted_avg\" uses traffic-weighted effective input price from ClickHouse, falling back to prompt price for models without traffic data. Defaults to \"prompt\"."""
+    r"""Price source for the Pareto frontier cost axis and for enforcing max_price. \"prompt\" uses catalog list price (endpoint.pricing.prompt). \"weighted_avg\" uses traffic-weighted effective input price from ClickHouse, falling back to prompt price for models without traffic data. Defaults to \"prompt\"."""
 
 
 class ParetoRouterPlugin(BaseModel):
@@ -36,15 +38,20 @@ class ParetoRouterPlugin(BaseModel):
     enabled: Optional[bool] = None
     r"""Set to false to disable the pareto-router plugin for this request. Defaults to true."""
 
+    max_price: Optional[float] = None
+    r"""Maximum input price in USD per million tokens. When set, quality-tier selection (min_coding_score) is bypassed: the router computes the Pareto frontier over the top coding models and routes to the best-scoring frontier model priced at or below this cap, falling back through cheaper frontier models, then non-frontier models. Enforced against the price source given by price_source. Returns 404 when no candidate satisfies the cap."""
+
     min_coding_score: Optional[float] = None
-    r"""Minimum coding quality score between 0 and 1. Maps to internal quality tiers: >= 0.66 → high (top coding models), >= 0.33 → medium (strong modern flagships), < 0.33 → low (capable coders above the median). Omit to default to the highest tier (equivalent to >= 0.66)."""
+    r"""Minimum coding quality score between 0 and 1. Maps to internal quality tiers: >= 0.66 → high (top coding models), >= 0.33 → medium (strong modern flagships), < 0.33 → low (capable coders above the median). Omit to default to the highest tier (equivalent to >= 0.66). Not used when max_price is set (price-based selection takes over)."""
 
     price_source: Optional[PriceSource] = None
-    r"""Price source for the Pareto frontier cost axis. \"prompt\" uses catalog list price (endpoint.pricing.prompt). \"weighted_avg\" uses traffic-weighted effective input price from ClickHouse, falling back to prompt price for models without traffic data. Defaults to \"prompt\"."""
+    r"""Price source for the Pareto frontier cost axis and for enforcing max_price. \"prompt\" uses catalog list price (endpoint.pricing.prompt). \"weighted_avg\" uses traffic-weighted effective input price from ClickHouse, falling back to prompt price for models without traffic data. Defaults to \"prompt\"."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["enabled", "min_coding_score", "price_source"])
+        optional_fields = set(
+            ["enabled", "max_price", "min_coding_score", "price_source"]
+        )
         serialized = handler(self)
         m = {}
 

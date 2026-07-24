@@ -2033,6 +2033,54 @@ components:
         - 'error_message'
         - 'type'
       type: 'object'
+    AnthropicToolSearchToolBm25:
+      properties:
+        allowed_callers:
+          $ref: '#/components/schemas/AnthropicAllowedCallers'
+        cache_control:
+          $ref: '#/components/schemas/AnthropicCacheControlDirective'
+        defer_loading:
+          type: 'boolean'
+        name:
+          enum:
+            - 'tool_search_tool_bm25'
+          type: 'string'
+        strict:
+          type: 'boolean'
+        type:
+          enum:
+            - 'tool_search_tool_bm25_20251119'
+            - 'tool_search_tool_bm25'
+          type: 'string'
+          x-speakeasy-unknown-values: allow
+      required:
+        - 'type'
+        - 'name'
+      type: 'object'
+    AnthropicToolSearchToolRegex:
+      properties:
+        allowed_callers:
+          $ref: '#/components/schemas/AnthropicAllowedCallers'
+        cache_control:
+          $ref: '#/components/schemas/AnthropicCacheControlDirective'
+        defer_loading:
+          type: 'boolean'
+        name:
+          enum:
+            - 'tool_search_tool_regex'
+          type: 'string'
+        strict:
+          type: 'boolean'
+        type:
+          enum:
+            - 'tool_search_tool_regex_20251119'
+            - 'tool_search_tool_regex'
+          type: 'string'
+          x-speakeasy-unknown-values: allow
+      required:
+        - 'type'
+        - 'name'
+      type: 'object'
     AnthropicToolSearchToolResult:
       example:
         content:
@@ -2819,7 +2867,7 @@ components:
         allowed_models:
           - 'anthropic/*'
           - 'openai/gpt-4o'
-        cost_quality_tradeoff: 7
+        cost_quality_tradeoff: 9
         enabled: true
         id: 'auto-beta-router'
       properties:
@@ -2833,8 +2881,8 @@ components:
             type: 'string'
           type: 'array'
         cost_quality_tradeoff:
-          description: 'Balances routing between cost and quality on a 0-10 scale. The auto-beta-router ranks models for the classified task type by community spend share, then filters candidates by their average cost per generation for that task. Higher values favor cheaper models: 10 keeps only models around the cheapest 10th percentile, while 0 permits models up to the 90th percentile for cost. Defaults to 7.'
-          example: 7
+          description: 'Balances routing between cost and quality on a 0-10 scale. The auto-beta-router ranks models for the classified task type by community spend share, then filters candidates by their average cost per generation for that task. Higher values favor cheaper models: 10 keeps only models around the cheapest 10th percentile, while 0 permits models up to the 90th percentile for cost. Defaults to 9.'
+          example: 9
           maximum: 10
           minimum: 0
           type: 'integer'
@@ -2856,6 +2904,7 @@ components:
         cost_quality_tradeoff: 7
         enabled: true
         id: 'auto-router'
+        pin_model: false
       properties:
         allowed_models:
           description: 'List of model patterns to filter which models the auto-router can route between. Supports wildcards (e.g., "anthropic/*" matches all Anthropic models). When not specified, uses the default supported models list.'
@@ -2879,6 +2928,10 @@ components:
           enum:
             - 'auto-router'
           type: 'string'
+        pin_model:
+          description: 'When true, reuses the model from the most recent assistant message''s `model` attribute for subsequent turns. Defaults to false.'
+          example: false
+          type: 'boolean'
       required:
         - 'id'
       type: 'object'
@@ -4302,6 +4355,7 @@ components:
         - 'clarifai'
         - 'cloudflare'
         - 'cohere'
+        - 'coreweave'
         - 'crusoe'
         - 'darkbloom'
         - 'decart'
@@ -4355,8 +4409,10 @@ components:
         - 'recraft'
         - 'reka'
         - 'relace'
+        - 'runway'
         - 'sail-research'
         - 'sakana'
+        - 'sakana-ai'
         - 'sambanova'
         - 'seed'
         - 'siliconflow'
@@ -4371,6 +4427,7 @@ components:
         - 'venice'
         - 'wafer'
         - 'wandb'
+        - 'wandb-legacy'
         - 'xai'
         - 'xiaomi'
         - 'z-ai'
@@ -4419,6 +4476,7 @@ components:
       description: 'Assistant message for requests and responses'
       example:
         content: 'The capital of France is Paris.'
+        model: 'openai/gpt-4o'
         role: 'assistant'
       properties:
         audio:
@@ -4433,6 +4491,10 @@ components:
           description: 'Assistant message content'
         images:
           $ref: '#/components/schemas/ChatAssistantImages'
+        model:
+          description: 'Model that generated this assistant message'
+          example: 'openai/gpt-4o'
+          type: 'string'
         name:
           description: 'Optional name for the assistant'
           type: 'string'
@@ -5308,7 +5370,7 @@ components:
         trace:
           $ref: '#/components/schemas/TraceConfig'
         user:
-          description: 'Unique user identifier'
+          description: 'Per-end-user identifier for abuse isolation. Use a stable ID, hash, or pseudonym. When a provider requires a user identity, OpenRouter folds it into the hashed identity sent upstream and never forwards it raw. If omitted, requests use an account-level identity, so provider policy blocks can affect the whole account.'
           example: 'user-123'
           type: 'string'
       required:
@@ -5969,6 +6031,10 @@ components:
         max_total_results:
           description: 'Maximum total number of search results across all search calls in a single request. Once this limit is reached, the tool will stop returning new results. Useful for controlling cost and context size in agentic loops. Defaults to 50 when not specified.'
           example: 50
+          type: 'integer'
+        max_uses:
+          description: 'Maximum number of web searches the model may perform in a single request. Once reached, further search calls return an error result instead of executing. Applies to the Exa, Firecrawl, Parallel, and Perplexity engines. With native provider search, forwarded only to Anthropic (as `max_uses`); other native search providers have no equivalent parameter and ignore it.'
+          example: 3
           type: 'integer'
         parameters:
           $ref: '#/components/schemas/WebSearchConfig'
@@ -6872,6 +6938,10 @@ components:
           type:
             - 'array'
             - 'null'
+        include_byok_in_budgets:
+          description: 'Whether BYOK (bring-your-own-key) inference spend counts toward this guardrail''s limit_usd, in addition to OpenRouter credit spend. Defaults to false.'
+          example: false
+          type: 'boolean'
         limit_usd:
           description: 'Spending limit in USD'
           example: 50
@@ -6919,6 +6989,7 @@ components:
           id: '550e8400-e29b-41d4-a716-446655440000'
           ignored_models: null
           ignored_providers: null
+          include_byok_in_budgets: false
           limit_usd: 50
           name: 'My New Guardrail'
           reset_interval: 'monthly'
@@ -7151,6 +7222,7 @@ components:
         data:
           created_at: '2025-08-24T10:30:00Z'
           created_by: 'user_abc123'
+          default_guardrail_id: '595d5849-7e86-51fd-a7c0-705c34e4afff'
           default_image_model: 'openai/dall-e-3'
           default_provider_sort: 'price'
           default_text_model: 'openai/gpt-4o'
@@ -8716,7 +8788,7 @@ components:
         cache_control:
           $ref: '#/components/schemas/AnthropicCacheControlDirective'
         max_completion_tokens:
-          description: 'Maximum number of output tokens (including reasoning tokens) each panelist and the judge model may produce per inner call. Controls the total output budget so reasoning-heavy models like GPT-5.5 do not exhaust their token allowance before producing visible text. When omitted, panelists default to 32000 and the judge to 50000.'
+          description: 'Maximum number of output tokens (including reasoning tokens) each panelist and the judge model may produce per inner call. Controls the total output budget so reasoning-heavy models like GPT-5.5 do not exhaust their token allowance before producing visible text. When omitted, panelists default to 32000 and the judge to 20000.'
           example: 16384
           type: 'integer'
         max_tool_calls:
@@ -9272,6 +9344,7 @@ components:
           id: '550e8400-e29b-41d4-a716-446655440000'
           ignored_models: null
           ignored_providers: null
+          include_byok_in_budgets: false
           limit_usd: 100
           name: 'Production Guardrail'
           reset_interval: 'monthly'
@@ -9368,6 +9441,7 @@ components:
         data:
           created_at: '2025-08-24T10:30:00Z'
           created_by: 'user_abc123'
+          default_guardrail_id: '595d5849-7e86-51fd-a7c0-705c34e4afff'
           default_image_model: 'openai/dall-e-3'
           default_provider_sort: 'price'
           default_text_model: 'openai/gpt-4o'
@@ -9452,6 +9526,7 @@ components:
         id: '550e8400-e29b-41d4-a716-446655440000'
         ignored_models: null
         ignored_providers: null
+        include_byok_in_budgets: false
         limit_usd: 100
         name: 'Production Guardrail'
         reset_interval: 'monthly'
@@ -9572,6 +9647,10 @@ components:
           type:
             - 'array'
             - 'null'
+        include_byok_in_budgets:
+          description: 'Whether BYOK (bring-your-own-key) inference spend counts toward this guardrail''s limit_usd, in addition to OpenRouter credit spend.'
+          example: false
+          type: 'boolean'
         limit_usd:
           description: 'Spending limit in USD'
           example: 100
@@ -9598,6 +9677,7 @@ components:
       required:
         - 'id'
         - 'name'
+        - 'include_byok_in_budgets'
         - 'created_at'
         - 'workspace_id'
       type: 'object'
@@ -11099,6 +11179,10 @@ components:
           description: 'Maximum number of search results to return per search call. Defaults to 5. Applies to Exa, Firecrawl, Parallel, and Perplexity engines; ignored with native provider search. Perplexity supports a maximum of 20; values above 20 are clamped.'
           example: 5
           type: 'integer'
+        max_uses:
+          description: 'Maximum number of web searches the model may perform in a single request. Once reached, further search calls return an error result instead of executing. Applies to the Exa, Firecrawl, Parallel, and Perplexity engines. With native provider search, forwarded only to Anthropic (as `max_uses`); other native search providers have no equivalent parameter and ignore it.'
+          example: 3
+          type: 'integer'
         search_context_size:
           $ref: '#/components/schemas/SearchContextSizeEnum'
         type:
@@ -11277,6 +11361,7 @@ components:
             id: '550e8400-e29b-41d4-a716-446655440000'
             ignored_models: null
             ignored_providers: null
+            include_byok_in_budgets: false
             limit_usd: 100
             name: 'Production Guardrail'
             reset_interval: 'monthly'
@@ -11478,6 +11563,7 @@ components:
         data:
           - created_at: '2025-08-24T10:30:00Z'
             created_by: 'user_abc123'
+            default_guardrail_id: '595d5849-7e86-51fd-a7c0-705c34e4afff'
             default_image_model: 'openai/dall-e-3'
             default_provider_sort: 'price'
             default_text_model: 'openai/gpt-4o'
@@ -12383,6 +12469,8 @@ components:
                       - 'content'
                     type: 'object'
                   - $ref: '#/components/schemas/MessagesAdvisorToolResultBlock'
+                  - $ref: '#/components/schemas/MessagesToolAdditionBlock'
+                  - $ref: '#/components/schemas/MessagesToolRemovalBlock'
               type: 'array'
         role:
           enum:
@@ -12742,6 +12830,8 @@ components:
               - properties:
                   cache_control:
                     $ref: '#/components/schemas/AnthropicCacheControlDirective'
+                  defer_loading:
+                    type: 'boolean'
                   description:
                     type: 'string'
                   input_schema:
@@ -12907,6 +12997,8 @@ components:
                 required:
                   - 'type'
                 type: 'object'
+              - $ref: '#/components/schemas/AnthropicToolSearchToolBm25'
+              - $ref: '#/components/schemas/AnthropicToolSearchToolRegex'
           type: 'array'
         top_k:
           type: 'integer'
@@ -13112,6 +13204,7 @@ components:
                 - 'Clarifai'
                 - 'Cloudflare'
                 - 'Cohere'
+                - 'CoreWeave'
                 - 'Crucible'
                 - 'Crusoe'
                 - 'Darkbloom'
@@ -13183,6 +13276,7 @@ components:
                 - 'WandB'
                 - 'Quiver'
                 - 'Krea'
+                - 'Runway'
                 - 'Xiaomi'
                 - 'xAI'
                 - 'Z.AI'
@@ -13301,6 +13395,62 @@ components:
       required:
         - 'event'
         - 'data'
+      type: 'object'
+    MessagesToolAdditionBlock:
+      description: 'Loads a previously deferred tool (declared in `tools` with `defer_loading: true`) mid-conversation without invalidating the prompt cache. Only valid in `role: "system"` messages. Not supported on Claude Sonnet 5 or models older than Claude Opus 4.8.'
+      example:
+        tool:
+          name: 'get_forecast'
+          type: 'tool_reference'
+        type: 'tool_addition'
+      properties:
+        tool:
+          properties:
+            name:
+              type: 'string'
+            type:
+              enum:
+                - 'tool_reference'
+              type: 'string'
+          required:
+            - 'type'
+            - 'name'
+          type: 'object'
+        type:
+          enum:
+            - 'tool_addition'
+          type: 'string'
+      required:
+        - 'type'
+        - 'tool'
+      type: 'object'
+    MessagesToolRemovalBlock:
+      description: 'Removes a tool from the conversation mid-conversation without invalidating the prompt cache. Only valid in `role: "system"` messages. Not supported on Claude Sonnet 5 or models older than Claude Opus 4.8.'
+      example:
+        tool:
+          name: 'get_weather'
+          type: 'tool_reference'
+        type: 'tool_removal'
+      properties:
+        tool:
+          properties:
+            name:
+              type: 'string'
+            type:
+              enum:
+                - 'tool_reference'
+              type: 'string'
+          required:
+            - 'type'
+            - 'name'
+          type: 'object'
+        type:
+          enum:
+            - 'tool_removal'
+          type: 'string'
+      required:
+        - 'type'
+        - 'tool'
       type: 'object'
     MetadataLevel:
       description: 'Opt-in level for surfacing routing metadata on the response under `openrouter_metadata`.'
@@ -16738,6 +16888,12 @@ components:
         stdout: "total 0\n"
         type: 'openrouter:bash'
       properties:
+        arguments:
+          description: 'The raw tool-call arguments string as emitted by the model.'
+          type: 'string'
+        call_id:
+          description: 'The model-generated tool call id from the originating turn.'
+          type: 'string'
         command:
           type: 'string'
         exitCode:
@@ -17086,7 +17242,10 @@ components:
     OutputImageGenerationCallItem:
       allOf:
         - $ref: '#/components/schemas/OutputItemImageGenerationCall'
-        - properties: {}
+        - properties:
+            prompt:
+              description: 'The prompt (possibly rewritten) that the image was generated from.'
+              type: 'string'
           type: 'object'
       example:
         id: 'img-abc123'
@@ -17107,6 +17266,9 @@ components:
         imageB64:
           type: 'string'
         imageUrl:
+          type: 'string'
+        prompt:
+          description: 'The prompt (possibly rewritten) that the image was generated from.'
           type: 'string'
         result:
           description: 'The generated image as a base64-encoded string or URL, matching OpenAI image_generation_call format'
@@ -17906,8 +18068,16 @@ components:
           type: 'string'
         id:
           type: 'string'
+        instance_name:
+          description: 'Provider-safe function name of the specific subagent instance that produced this item (e.g. `openrouter_subagent__1`). Present only on items from non-default instances — the second and later subagent entries in the request `tools` array. The first (default) instance omits it, even when multiple subagents are configured. When a replayed item echoes this field back, the transcript rehydrates the call under that instance''s tool. This identity is positional: it is derived from the index of the subagent entry in the request `tools` array, so keep the order of subagent entries stable across requests in a conversation.'
+          example: 'openrouter_subagent__1'
+          type: 'string'
         model:
           description: 'Slug of the worker model that executed the task.'
+          type: 'string'
+        name:
+          description: 'Configured name of the subagent that executed the task (the `name` on its tool entry). Present only for named subagents; omitted for an unnamed (default) subagent.'
+          example: 'summarizer'
           type: 'string'
         outcome:
           description: 'The worker model''s result (the outcome text returned to the delegating model).'
@@ -18108,7 +18278,7 @@ components:
       example:
         enabled: true
         id: 'pareto-router'
-        min_coding_score: 0.8
+        max_price: 5
         price_source: 'prompt'
       properties:
         enabled:
@@ -18118,15 +18288,21 @@ components:
           enum:
             - 'pareto-router'
           type: 'string'
+        max_price:
+          description: 'Maximum input price in USD per million tokens. When set, quality-tier selection (min_coding_score) is bypassed: the router computes the Pareto frontier over the top coding models and routes to the best-scoring frontier model priced at or below this cap, falling back through cheaper frontier models, then non-frontier models. Enforced against the price source given by price_source. Returns 404 when no candidate satisfies the cap.'
+          example: 5
+          format: 'double'
+          minimum: 0
+          type: 'number'
         min_coding_score:
-          description: 'Minimum coding quality score between 0 and 1. Maps to internal quality tiers: >= 0.66 → high (top coding models), >= 0.33 → medium (strong modern flagships), < 0.33 → low (capable coders above the median). Omit to default to the highest tier (equivalent to >= 0.66).'
+          description: 'Minimum coding quality score between 0 and 1. Maps to internal quality tiers: >= 0.66 → high (top coding models), >= 0.33 → medium (strong modern flagships), < 0.33 → low (capable coders above the median). Omit to default to the highest tier (equivalent to >= 0.66). Not used when max_price is set (price-based selection takes over).'
           example: 0.8
           format: 'double'
           maximum: 1
           minimum: 0
           type: 'number'
         price_source:
-          description: 'Price source for the Pareto frontier cost axis. "prompt" uses catalog list price (endpoint.pricing.prompt). "weighted_avg" uses traffic-weighted effective input price from ClickHouse, falling back to prompt price for models without traffic data. Defaults to "prompt".'
+          description: 'Price source for the Pareto frontier cost axis and for enforcing max_price. "prompt" uses catalog list price (endpoint.pricing.prompt). "weighted_avg" uses traffic-weighted effective input price from ClickHouse, falling back to prompt price for models without traffic data. Defaults to "prompt".'
           enum:
             - 'prompt'
             - 'weighted_avg'
@@ -18615,6 +18791,10 @@ components:
           description: 'Maximum number of search results to return per search call. Defaults to 5. Applies to Exa, Firecrawl, Parallel, and Perplexity engines; ignored with native provider search. Perplexity supports a maximum of 20; values above 20 are clamped.'
           example: 5
           type: 'integer'
+        max_uses:
+          description: 'Maximum number of web searches the model may perform in a single request. Once reached, further search calls return an error result instead of executing. Applies to the Exa, Firecrawl, Parallel, and Perplexity engines. With native provider search, forwarded only to Anthropic (as `max_uses`); other native search providers have no equivalent parameter and ignore it.'
+          example: 3
+          type: 'integer'
         search_context_size:
           $ref: '#/components/schemas/SearchContextSizeEnum'
         type:
@@ -18638,6 +18818,10 @@ components:
         max_results:
           description: 'Maximum number of search results to return per search call. Defaults to 5. Applies to Exa, Firecrawl, Parallel, and Perplexity engines; ignored with native provider search. Perplexity supports a maximum of 20; values above 20 are clamped.'
           example: 5
+          type: 'integer'
+        max_uses:
+          description: 'Maximum number of web searches the model may perform in a single request. Once reached, further search calls return an error result instead of executing. Applies to the Exa, Firecrawl, Parallel, and Perplexity engines. With native provider search, forwarded only to Anthropic (as `max_uses`); other native search providers have no equivalent parameter and ignore it.'
+          example: 3
           type: 'integer'
         search_context_size:
           $ref: '#/components/schemas/SearchContextSizeEnum'
@@ -18789,6 +18973,7 @@ components:
         - 'Clarifai'
         - 'Cloudflare'
         - 'Cohere'
+        - 'CoreWeave'
         - 'Crucible'
         - 'Crusoe'
         - 'Darkbloom'
@@ -18860,6 +19045,7 @@ components:
         - 'WandB'
         - 'Quiver'
         - 'Krea'
+        - 'Runway'
         - 'Xiaomi'
         - 'xAI'
         - 'Z.AI'
@@ -18949,6 +19135,9 @@ components:
           additionalProperties: {}
           type: 'object'
         cohere:
+          additionalProperties: {}
+          type: 'object'
+        coreweave:
           additionalProperties: {}
           type: 'object'
         crofai:
@@ -19173,10 +19362,16 @@ components:
         replicate:
           additionalProperties: {}
           type: 'object'
+        runway:
+          additionalProperties: {}
+          type: 'object'
         sail-research:
           additionalProperties: {}
           type: 'object'
         sakana:
+          additionalProperties: {}
+          type: 'object'
+        sakana-ai:
           additionalProperties: {}
           type: 'object'
         sambanova:
@@ -19237,6 +19432,9 @@ components:
           additionalProperties: {}
           type: 'object'
         wandb:
+          additionalProperties: {}
+          type: 'object'
+        wandb-legacy:
           additionalProperties: {}
           type: 'object'
         xai:
@@ -19489,6 +19687,7 @@ components:
             - 'Clarifai'
             - 'Cloudflare'
             - 'Cohere'
+            - 'CoreWeave'
             - 'Crucible'
             - 'Crusoe'
             - 'Darkbloom'
@@ -19560,6 +19759,7 @@ components:
             - 'WandB'
             - 'Quiver'
             - 'Krea'
+            - 'Runway'
             - 'Xiaomi'
             - 'xAI'
             - 'Z.AI'
@@ -20575,6 +20775,8 @@ components:
             - 'integer'
             - 'null'
         max_tool_calls:
+          description: 'Maximum number of server-tool (e.g. `openrouter:web_search`) agent steps the model may take during a request. Defaults to 30, which is also the maximum. Ignored when `stop_server_tools_when` is set.'
+          example: 30
           type:
             - 'integer'
             - 'null'
@@ -20648,6 +20850,8 @@ components:
         route:
           $ref: '#/components/schemas/DeprecatedRoute'
         safety_identifier:
+          description: 'Recommended per-end-user identifier for abuse isolation. Use a stable ID, hash, or pseudonym. When a provider requires a user identity, OpenRouter folds it into the hashed identity sent upstream and never forwards it raw. If omitted, requests use an account-level identity, so provider policy blocks can affect the whole account.'
+          example: 'user-123'
           type:
             - 'string'
             - 'null'
@@ -21166,7 +21370,7 @@ components:
         - 'voice'
       type: 'object'
     StopServerToolsWhen:
-      description: 'Stop conditions for the server-tool agent loop. Any condition firing halts the loop (OR logic). When set, this overrides `max_tool_calls`.'
+      description: 'Stop conditions for the server-tool agent loop. Any condition firing halts the loop (OR logic). When set, this overrides `max_tool_calls`. When a condition fires while the model is still emitting tool calls, the pending tool calls are executed and one final turn is made with tool calls disabled so the response ends with a natural-language answer instead of an unfinished tool call.'
       example:
         - step_count: 5
           type: 'step_count_is'
@@ -21702,6 +21906,7 @@ components:
         id: 0
         no_speech_prob: 0.01
         seek: 0
+        speaker: 0
         start: 0
         temperature: 0
         text: 'Hello there.'
@@ -21733,6 +21938,10 @@ components:
           type: 'number'
         seek:
           description: 'Seek offset of the segment'
+          example: 0
+          type: 'integer'
+        speaker:
+          description: 'Speaker index for the segment, present when the provider returns diarization data'
           example: 0
           type: 'integer'
         start:
@@ -21803,6 +22012,7 @@ components:
       description: 'A timestamped word, returned when the provider includes word-level timestamps'
       example:
         end: 0.4
+        speaker: 0
         start: 0
         word: 'Hello'
       properties:
@@ -21811,6 +22021,10 @@ components:
           example: 0.4
           format: 'double'
           type: 'number'
+        speaker:
+          description: 'Speaker index for the word, present when the provider returns diarization data'
+          example: 0
+          type: 'integer'
         start:
           description: 'Word start time in seconds'
           example: 0
@@ -21877,9 +22091,10 @@ components:
         - 'type'
       type: 'object'
     SubagentServerToolConfig:
-      description: 'Configuration for the openrouter:subagent server tool.'
+      description: 'Configuration for one openrouter:subagent server tool entry.'
       example:
         model: '~anthropic/claude-haiku-latest'
+        name: 'summarizer'
       properties:
         instructions:
           description: 'System instructions for the subagent. When omitted, the subagent responds with no system prompt of its own.'
@@ -21898,6 +22113,13 @@ components:
         model:
           description: 'Slug of the model that executes delegated tasks (any OpenRouter model). Typically a smaller, cheaper, faster model than the one delegating. When omitted, the model from the outer API request is used. The subagent tool itself cannot be the subagent model.'
           example: '~anthropic/claude-haiku-latest'
+          type: 'string'
+        name:
+          description: 'Optional name for this subagent. The model sees one tool per named subagent (and one default for an unnamed entry). Names must be unique across subagent entries. Letters, digits, spaces, underscores, and dashes; trimmed; 1–64 chars.'
+          example: 'summarizer'
+          maxLength: 64
+          minLength: 1
+          pattern: '^[a-zA-Z0-9 _-]+$'
           type: 'string'
         reasoning:
           $ref: '#/components/schemas/SubagentReasoning'
@@ -22899,6 +23121,10 @@ components:
           type:
             - 'array'
             - 'null'
+        include_byok_in_budgets:
+          description: 'Whether BYOK (bring-your-own-key) inference spend counts toward this guardrail''s limit_usd, in addition to OpenRouter credit spend. Omit to leave unchanged.'
+          example: true
+          type: 'boolean'
         limit_usd:
           description: 'New spending limit in USD'
           example: 75
@@ -22937,6 +23163,7 @@ components:
           id: '550e8400-e29b-41d4-a716-446655440000'
           ignored_models: null
           ignored_providers: null
+          include_byok_in_budgets: true
           limit_usd: 75
           name: 'Updated Guardrail Name'
           reset_interval: 'weekly'
@@ -23094,6 +23321,7 @@ components:
         data:
           created_at: '2025-08-24T10:30:00Z'
           created_by: 'user_abc123'
+          default_guardrail_id: '595d5849-7e86-51fd-a7c0-705c34e4afff'
           default_image_model: 'openai/dall-e-3'
           default_provider_sort: 'price'
           default_text_model: 'openai/gpt-4o'
@@ -23721,6 +23949,10 @@ components:
           description: 'Maximum total number of search results across all search calls in a single request. Once this limit is reached, the tool will stop returning new results. Useful for controlling cost and context size in agentic loops. Defaults to 50 when not specified.'
           example: 50
           type: 'integer'
+        max_uses:
+          description: 'Maximum number of web searches the model may perform in a single request. Once reached, further search calls return an error result instead of executing. Applies to the Exa, Firecrawl, Parallel, and Perplexity engines. With native provider search, forwarded only to Anthropic (as `max_uses`); other native search providers have no equivalent parameter and ignore it.'
+          example: 3
+          type: 'integer'
         search_context_size:
           $ref: '#/components/schemas/SearchQualityLevel'
         user_location:
@@ -23843,6 +24075,10 @@ components:
           description: 'Maximum number of search results to return per search call. Defaults to 5. Applies to Exa, Firecrawl, Parallel, and Perplexity engines; ignored with native provider search. Perplexity supports a maximum of 20; values above 20 are clamped.'
           example: 5
           type: 'integer'
+        max_uses:
+          description: 'Maximum number of web searches the model may perform in a single request. Once reached, further search calls return an error result instead of executing. Applies to the Exa, Firecrawl, Parallel, and Perplexity engines. With native provider search, forwarded only to Anthropic (as `max_uses`); other native search providers have no equivalent parameter and ignore it.'
+          example: 3
+          type: 'integer'
         search_context_size:
           $ref: '#/components/schemas/SearchContextSizeEnum'
         type:
@@ -23899,6 +24135,10 @@ components:
         max_total_results:
           description: 'Maximum total number of search results across all search calls in a single request. Once this limit is reached, the tool will stop returning new results. Useful for controlling cost and context size in agentic loops. Defaults to 50 when not specified.'
           example: 50
+          type: 'integer'
+        max_uses:
+          description: 'Maximum number of web searches the model may perform in a single request. Once reached, further search calls return an error result instead of executing. Applies to the Exa, Firecrawl, Parallel, and Perplexity engines. With native provider search, forwarded only to Anthropic (as `max_uses`); other native search providers have no equivalent parameter and ignore it.'
+          example: 3
           type: 'integer'
         search_context_size:
           $ref: '#/components/schemas/SearchQualityLevel'
@@ -23995,6 +24235,7 @@ components:
       example:
         created_at: '2025-08-24T10:30:00Z'
         created_by: 'user_abc123'
+        default_guardrail_id: '595d5849-7e86-51fd-a7c0-705c34e4afff'
         default_image_model: 'openai/dall-e-3'
         default_provider_sort: 'price'
         default_text_model: 'openai/gpt-4o'
@@ -24019,6 +24260,11 @@ components:
           type:
             - 'string'
             - 'null'
+        default_guardrail_id:
+          description: 'Deterministic ID of the workspace''s implicitly-created default guardrail'
+          example: '595d5849-7e86-51fd-a7c0-705c34e4afff'
+          format: 'uuid'
+          type: 'string'
         default_image_model:
           description: 'Default image model for this workspace'
           example: 'openai/dall-e-3'
@@ -24089,6 +24335,7 @@ components:
             - 'null'
       required:
         - 'id'
+        - 'default_guardrail_id'
         - 'name'
         - 'slug'
         - 'description'
@@ -25596,6 +25843,7 @@ paths:
               - 'clarifai'
               - 'cloudflare'
               - 'cohere'
+              - 'coreweave'
               - 'crusoe'
               - 'darkbloom'
               - 'decart'
@@ -25649,8 +25897,10 @@ paths:
               - 'recraft'
               - 'reka'
               - 'relace'
+              - 'runway'
               - 'sail-research'
               - 'sakana'
+              - 'sakana-ai'
               - 'sambanova'
               - 'seed'
               - 'siliconflow'
@@ -25665,6 +25915,7 @@ paths:
               - 'venice'
               - 'wafer'
               - 'wandb'
+              - 'wandb-legacy'
               - 'xai'
               - 'xiaomi'
               - 'z-ai'
@@ -25693,6 +25944,16 @@ paths:
               schema:
                 $ref: '#/components/schemas/ListBYOKKeysResponse'
           description: 'List of BYOK credentials'
+        '400':
+          content:
+            application/json:
+              example:
+                error:
+                  code: 400
+                  message: 'Invalid request parameters'
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+          description: 'Bad Request - Invalid request parameters or malformed input'
         '401':
           content:
             application/json:
@@ -27498,6 +27759,7 @@ paths:
       summary: 'List files'
       tags:
         - 'Files'
+      x-hidden: true
       x-speakeasy-name-override: 'list'
       x-speakeasy-pagination:
         inputs:
@@ -27613,6 +27875,7 @@ paths:
       summary: 'Upload a file'
       tags:
         - 'Files'
+      x-hidden: true
       x-speakeasy-name-override: 'upload'
     parameters:
       - $ref: "#/components/parameters/AppIdentifier"
@@ -27691,6 +27954,7 @@ paths:
       summary: 'Delete a file'
       tags:
         - 'Files'
+      x-hidden: true
       x-speakeasy-name-override: 'delete'
     get:
       description: 'Retrieves metadata for a single file owned by the requesting workspace.'
@@ -27769,6 +28033,7 @@ paths:
       summary: 'Get file metadata'
       tags:
         - 'Files'
+      x-hidden: true
       x-speakeasy-name-override: 'retrieve'
     parameters:
       - $ref: "#/components/parameters/AppIdentifier"
@@ -27856,6 +28121,7 @@ paths:
       summary: 'Download file content'
       tags:
         - 'Files'
+      x-hidden: true
       x-speakeasy-name-override: 'download'
     parameters:
       - $ref: "#/components/parameters/AppIdentifier"
@@ -28266,6 +28532,7 @@ paths:
                     id: '550e8400-e29b-41d4-a716-446655440000'
                     ignored_models: null
                     ignored_providers: null
+                    include_byok_in_budgets: false
                     limit_usd: 100
                     name: 'Production Guardrail'
                     reset_interval: 'monthly'
@@ -28275,6 +28542,16 @@ paths:
               schema:
                 $ref: '#/components/schemas/ListGuardrailsResponse'
           description: 'List of guardrails'
+        '400':
+          content:
+            application/json:
+              example:
+                error:
+                  code: 400
+                  message: 'Invalid request parameters'
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+          description: 'Bad Request - Invalid request parameters or malformed input'
         '401':
           content:
             application/json:
@@ -28358,6 +28635,7 @@ paths:
                   id: '550e8400-e29b-41d4-a716-446655440000'
                   ignored_models: null
                   ignored_providers: null
+                  include_byok_in_budgets: false
                   limit_usd: 50
                   name: 'My New Guardrail'
                   reset_interval: 'monthly'
@@ -28501,6 +28779,7 @@ paths:
                   id: '550e8400-e29b-41d4-a716-446655440000'
                   ignored_models: null
                   ignored_providers: null
+                  include_byok_in_budgets: false
                   limit_usd: 100
                   name: 'Production Guardrail'
                   reset_interval: 'monthly'
@@ -28587,6 +28866,7 @@ paths:
                   id: '550e8400-e29b-41d4-a716-446655440000'
                   ignored_models: null
                   ignored_providers: null
+                  include_byok_in_budgets: true
                   limit_usd: 75
                   name: 'Updated Guardrail Name'
                   reset_interval: 'weekly'
@@ -30113,6 +30393,16 @@ paths:
                   - 'data'
                 type: 'object'
           description: 'List of API keys'
+        '400':
+          content:
+            application/json:
+              example:
+                error:
+                  code: 400
+                  message: 'Invalid request parameters'
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+          description: 'Bad Request - Invalid request parameters or malformed input'
         '401':
           content:
             application/json:
@@ -32274,6 +32564,16 @@ paths:
               schema:
                 $ref: '#/components/schemas/ListObservabilityDestinationsResponse'
           description: 'List of observability destinations'
+        '400':
+          content:
+            application/json:
+              example:
+                error:
+                  code: 400
+                  message: 'Invalid request parameters'
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+          description: 'Bad Request - Invalid request parameters or malformed input'
         '401':
           content:
             application/json:
@@ -35069,6 +35369,7 @@ paths:
                 data:
                   - created_at: '2025-08-24T10:30:00Z'
                     created_by: 'user_abc123'
+                    default_guardrail_id: '595d5849-7e86-51fd-a7c0-705c34e4afff'
                     default_image_model: 'openai/dall-e-3'
                     default_provider_sort: 'price'
                     default_text_model: 'openai/gpt-4o'
@@ -35145,6 +35446,7 @@ paths:
                 data:
                   created_at: '2025-08-24T10:30:00Z'
                   created_by: 'user_abc123'
+                  default_guardrail_id: '595d5849-7e86-51fd-a7c0-705c34e4afff'
                   default_image_model: 'openai/dall-e-3'
                   default_provider_sort: 'price'
                   default_text_model: 'openai/gpt-4o'
@@ -35307,6 +35609,7 @@ paths:
                 data:
                   created_at: '2025-08-24T10:30:00Z'
                   created_by: 'user_abc123'
+                  default_guardrail_id: '595d5849-7e86-51fd-a7c0-705c34e4afff'
                   default_image_model: 'openai/dall-e-3'
                   default_provider_sort: 'price'
                   default_text_model: 'openai/gpt-4o'
@@ -35387,6 +35690,7 @@ paths:
                 data:
                   created_at: '2025-08-24T10:30:00Z'
                   created_by: 'user_abc123'
+                  default_guardrail_id: '595d5849-7e86-51fd-a7c0-705c34e4afff'
                   default_image_model: 'openai/dall-e-3'
                   default_provider_sort: 'price'
                   default_text_model: 'openai/gpt-4o'

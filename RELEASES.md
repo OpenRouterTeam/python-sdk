@@ -3,7 +3,7 @@
 ## 2025-11-15 18:16:18
 ### Changes
 Based on:
-- OpenAPI Doc  
+- OpenAPI Doc
 - Speakeasy CLI 1.658.1 (2.755.6) https://github.com/speakeasy-api/speakeasy
 ### Generated
 - [python v0.0.16] .
@@ -13,7 +13,7 @@ Based on:
 ## 2026-06-11 00:55:55
 ### Changes
 Based on:
-- OpenAPI Doc  
+- OpenAPI Doc
 - Speakeasy CLI 1.680.0 (2.788.4) https://github.com/speakeasy-api/speakeasy
 ### Generated
 - [python v0.9.2] .
@@ -23,7 +23,7 @@ Based on:
 ## 2026-06-17 00:59:07
 ### Changes
 Based on:
-- OpenAPI Doc  
+- OpenAPI Doc
 - Speakeasy CLI 1.680.0 (2.788.4) https://github.com/speakeasy-api/speakeasy
 ### Generated
 - [python v0.10.0] .
@@ -33,7 +33,7 @@ Based on:
 ## 2026-06-25 21:56:51
 ### Changes
 Based on:
-- OpenAPI Doc  
+- OpenAPI Doc
 - Speakeasy CLI 1.680.0 (2.788.4) https://github.com/speakeasy-api/speakeasy
 ### Generated
 - [python v0.10.1] .
@@ -43,7 +43,7 @@ Based on:
 ## 2026-06-25 22:28:38
 ### Changes
 Based on:
-- OpenAPI Doc  
+- OpenAPI Doc
 - Speakeasy CLI 1.680.0 (2.788.4) https://github.com/speakeasy-api/speakeasy
 ### Generated
 - [python v0.10.2] .
@@ -53,7 +53,7 @@ Based on:
 ## 2026-06-26 00:15:50
 ### Changes
 Based on:
-- OpenAPI Doc  
+- OpenAPI Doc
 - Speakeasy CLI 1.680.0 (2.788.4) https://github.com/speakeasy-api/speakeasy
 ### Generated
 - [python v0.10.3] .
@@ -63,7 +63,7 @@ Based on:
 ## 2026-06-26 12:06:01
 ### Changes
 Based on:
-- OpenAPI Doc  
+- OpenAPI Doc
 - Speakeasy CLI 1.680.0 (2.788.4) https://github.com/speakeasy-api/speakeasy
 ### Generated
 - [python v0.10.4] .
@@ -73,7 +73,7 @@ Based on:
 ## 2026-06-26 14:36:56
 ### Changes
 Based on:
-- OpenAPI Doc  
+- OpenAPI Doc
 - Speakeasy CLI 1.680.0 (2.788.4) https://github.com/speakeasy-api/speakeasy
 ### Generated
 - [python v0.10.5] .
@@ -83,7 +83,7 @@ Based on:
 ## 2026-06-26 18:19:11
 ### Changes
 Based on:
-- OpenAPI Doc  
+- OpenAPI Doc
 - Speakeasy CLI 1.680.0 (2.788.4) https://github.com/speakeasy-api/speakeasy
 ### Generated
 - [python v0.10.6] .
@@ -93,7 +93,7 @@ Based on:
 ## 2026-06-26 23:43:40
 ### Changes
 Based on:
-- OpenAPI Doc  
+- OpenAPI Doc
 - Speakeasy CLI 1.680.0 (2.788.4) https://github.com/speakeasy-api/speakeasy
 ### Generated
 - [python v0.10.7] .
@@ -103,7 +103,7 @@ Based on:
 ## 2026-06-28 15:27:21
 ### Changes
 Based on:
-- OpenAPI Doc  
+- OpenAPI Doc
 - Speakeasy CLI 1.680.0 (2.788.4) https://github.com/speakeasy-api/speakeasy
 ### Generated
 - [python v0.10.8] .
@@ -113,7 +113,7 @@ Based on:
 ## 2026-07-01 16:13:11
 ### Changes
 Based on:
-- OpenAPI Doc  
+- OpenAPI Doc
 - Speakeasy CLI 1.787.0 (2.914.0) https://github.com/speakeasy-api/speakeasy
 ### Generated
 - [python v0.11.1] .
@@ -123,7 +123,7 @@ Based on:
 ## 2026-07-03 15:05:16
 ### Changes
 Based on:
-- OpenAPI Doc  
+- OpenAPI Doc
 - Speakeasy CLI 1.787.0 (2.914.0) https://github.com/speakeasy-api/speakeasy
 ### Generated
 - [python v0.11.2] .
@@ -133,7 +133,7 @@ Based on:
 ## 2026-07-03 19:54:08
 ### Changes
 Based on:
-- OpenAPI Doc  
+- OpenAPI Doc
 - Speakeasy CLI 1.787.0 (2.914.0) https://github.com/speakeasy-api/speakeasy
 ### Generated
 - [python v0.11.3] .
@@ -143,7 +143,7 @@ Based on:
 ## 2026-07-07 14:30:37
 ### Changes
 Based on:
-- OpenAPI Doc  
+- OpenAPI Doc
 - Speakeasy CLI 1.787.0 (2.914.0) https://github.com/speakeasy-api/speakeasy
 ### Generated
 - [python v0.11.4] .
@@ -153,7 +153,7 @@ Based on:
 ## 2026-07-07 17:24:44
 ### Changes
 Based on:
-- OpenAPI Doc  
+- OpenAPI Doc
 - Speakeasy CLI 1.787.0 (2.914.0) https://github.com/speakeasy-api/speakeasy
 ### Generated
 - [python v0.11.5] .
@@ -163,7 +163,7 @@ Based on:
 ## 2026-07-07 19:09:09
 ### Changes
 Based on:
-- OpenAPI Doc  
+- OpenAPI Doc
 - Speakeasy CLI 1.787.0 (2.914.0) https://github.com/speakeasy-api/speakeasy
 ### Generated
 - [python v0.11.6] .
@@ -173,7 +173,7 @@ Based on:
 ## 2026-07-07 21:46:35
 ### Changes
 Based on:
-- OpenAPI Doc  
+- OpenAPI Doc
 - Speakeasy CLI 1.787.0 (2.914.0) https://github.com/speakeasy-api/speakeasy
 ### Generated
 - [python v0.11.7] .
@@ -183,7 +183,7 @@ Based on:
 ## 2026-07-08 03:29:04
 ### Changes
 Based on:
-- OpenAPI Doc  
+- OpenAPI Doc
 - Speakeasy CLI 1.787.0 (2.914.0) https://github.com/speakeasy-api/speakeasy
 ### Generated
 - [python v0.11.8] .
@@ -569,3 +569,204 @@ Based on:
 - [python v0.11.46] .
 ### Releases
 - [PyPI v0.11.46] https://pypi.org/project/openrouter/0.11.46 - .
+
+## 2026-07-20 17:00:00
+### Changes
+Based on:
+- OpenAPI Doc
+- Speakeasy CLI 1.787.0 (2.914.0) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [python v1.0.0] .
+### Releases
+- [PyPI v1.0.0] https://pypi.org/project/openrouter/1.0.0 - .
+
+
+## 2026-07-20 22:08:52
+### Changes
+Based on:
+- OpenAPI Doc
+- Speakeasy CLI 1.787.0 (2.914.0) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [python v1.0.1] .
+### Releases
+- [PyPI v1.0.1] https://pypi.org/project/openrouter/1.0.1 - .
+
+## 2026-07-21 01:10:43
+### Changes
+Based on:
+- OpenAPI Doc
+- Speakeasy CLI 1.787.0 (2.914.0) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [python v1.0.2] .
+### Releases
+- [PyPI v1.0.2] https://pypi.org/project/openrouter/1.0.2 - .
+
+## 2026-07-21 05:27:47
+### Changes
+Based on:
+- OpenAPI Doc
+- Speakeasy CLI 1.787.0 (2.914.0) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [python v1.0.3] .
+### Releases
+- [PyPI v1.0.3] https://pypi.org/project/openrouter/1.0.3 - .
+
+## 2026-07-21 17:47:46
+### Changes
+Based on:
+- OpenAPI Doc
+- Speakeasy CLI 1.787.0 (2.914.0) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [python v1.0.4] .
+### Releases
+- [PyPI v1.0.4] https://pypi.org/project/openrouter/1.0.4 - .
+
+## 2026-07-21 18:28:38
+### Changes
+Based on:
+- OpenAPI Doc
+- Speakeasy CLI 1.787.0 (2.914.0) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [python v1.0.5] .
+### Releases
+- [PyPI v1.0.5] https://pypi.org/project/openrouter/1.0.5 - .
+
+## 2026-07-21 19:45:34
+### Changes
+Based on:
+- OpenAPI Doc
+- Speakeasy CLI 1.787.0 (2.914.0) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [python v1.0.6] .
+### Releases
+- [PyPI v1.0.6] https://pypi.org/project/openrouter/1.0.6 - .
+
+## 2026-07-21 20:44:06
+### Changes
+Based on:
+- OpenAPI Doc
+- Speakeasy CLI 1.787.0 (2.914.0) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [python v1.0.7] .
+### Releases
+- [PyPI v1.0.7] https://pypi.org/project/openrouter/1.0.7 - .
+
+## 2026-07-21 22:40:39
+### Changes
+Based on:
+- OpenAPI Doc
+- Speakeasy CLI 1.787.0 (2.914.0) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [python v1.0.8] .
+### Releases
+- [PyPI v1.0.8] https://pypi.org/project/openrouter/1.0.8 - .
+
+## 2026-07-22 00:03:16
+### Changes
+Based on:
+- OpenAPI Doc
+- Speakeasy CLI 1.787.0 (2.914.0) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [python v1.0.9] .
+### Releases
+- [PyPI v1.0.9] https://pypi.org/project/openrouter/1.0.9 - .
+
+## 2026-07-22 17:59:44
+### Changes
+Based on:
+- OpenAPI Doc
+- Speakeasy CLI 1.787.0 (2.914.0) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [python v1.0.10] .
+### Releases
+- [PyPI v1.0.10] https://pypi.org/project/openrouter/1.0.10 - .
+
+## 2026-07-22 18:13:44
+### Changes
+Based on:
+- OpenAPI Doc
+- Speakeasy CLI 1.787.0 (2.914.0) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [python v1.0.11] .
+### Releases
+- [PyPI v1.0.11] https://pypi.org/project/openrouter/1.0.11 - .
+
+## 2026-07-22 18:22:28
+### Changes
+Based on:
+- OpenAPI Doc
+- Speakeasy CLI 1.787.0 (2.914.0) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [python v1.0.12] .
+### Releases
+- [PyPI v1.0.12] https://pypi.org/project/openrouter/1.0.12 - .
+
+## 2026-07-22 19:13:13
+### Changes
+Based on:
+- OpenAPI Doc
+- Speakeasy CLI 1.787.0 (2.914.0) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [python v1.0.13] .
+### Releases
+- [PyPI v1.0.13] https://pypi.org/project/openrouter/1.0.13 - .
+
+## 2026-07-22 21:50:47
+### Changes
+Based on:
+- OpenAPI Doc
+- Speakeasy CLI 1.787.0 (2.914.0) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [python v1.0.14] .
+### Releases
+- [PyPI v1.0.14] https://pypi.org/project/openrouter/1.0.14 - .
+
+## 2026-07-23 23:21:28
+### Changes
+Based on:
+- OpenAPI Doc
+- Speakeasy CLI 1.787.0 (2.914.0) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [python v1.0.15] .
+### Releases
+- [PyPI v1.0.15] https://pypi.org/project/openrouter/1.0.15 - .
+
+## 2026-07-24 00:17:15
+### Changes
+Based on:
+- OpenAPI Doc
+- Speakeasy CLI 1.787.0 (2.914.0) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [python v1.0.16] .
+### Releases
+- [PyPI v1.0.16] https://pypi.org/project/openrouter/1.0.16 - .
+
+## 2026-07-24 00:30:17
+### Changes
+Based on:
+- OpenAPI Doc
+- Speakeasy CLI 1.787.0 (2.914.0) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [python v1.0.17] .
+### Releases
+- [PyPI v1.0.17] https://pypi.org/project/openrouter/1.0.17 - .
+
+## 2026-07-24 01:36:04
+### Changes
+Based on:
+- OpenAPI Doc
+- Speakeasy CLI 1.787.0 (2.914.0) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [python v1.0.18] .
+### Releases
+- [PyPI v1.0.18] https://pypi.org/project/openrouter/1.0.18 - .
+
+## 2026-07-24 17:55:08
+### Changes
+Based on:
+- OpenAPI Doc
+- Speakeasy CLI 1.787.0 (2.914.0) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [python v1.0.19] .
+### Releases
+- [PyPI v1.0.19] https://pypi.org/project/openrouter/1.0.19 - .
