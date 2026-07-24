@@ -32,6 +32,8 @@ class PreviewWebSearchServerToolTypedDict(TypedDict):
     filters: NotRequired[Nullable[WebSearchDomainFilterTypedDict]]
     max_results: NotRequired[int]
     r"""Maximum number of search results to return per search call. Defaults to 5. Applies to Exa, Firecrawl, Parallel, and Perplexity engines; ignored with native provider search. Perplexity supports a maximum of 20; values above 20 are clamped."""
+    max_uses: NotRequired[int]
+    r"""Maximum number of web searches the model may perform in a single request. Once reached, further search calls return an error result instead of executing. Applies to the Exa, Firecrawl, Parallel, and Perplexity engines. With native provider search, forwarded only to Anthropic (as `max_uses`); other native search providers have no equivalent parameter and ignore it."""
     search_context_size: NotRequired[SearchContextSizeEnum]
     r"""Size of the search context for web search tools"""
     user_location: NotRequired[Nullable[PreviewWebSearchUserLocationTypedDict]]
@@ -50,6 +52,9 @@ class PreviewWebSearchServerTool(BaseModel):
     max_results: Optional[int] = None
     r"""Maximum number of search results to return per search call. Defaults to 5. Applies to Exa, Firecrawl, Parallel, and Perplexity engines; ignored with native provider search. Perplexity supports a maximum of 20; values above 20 are clamped."""
 
+    max_uses: Optional[int] = None
+    r"""Maximum number of web searches the model may perform in a single request. Once reached, further search calls return an error result instead of executing. Applies to the Exa, Firecrawl, Parallel, and Perplexity engines. With native provider search, forwarded only to Anthropic (as `max_uses`); other native search providers have no equivalent parameter and ignore it."""
+
     search_context_size: Optional[SearchContextSizeEnum] = None
     r"""Size of the search context for web search tools"""
 
@@ -58,7 +63,14 @@ class PreviewWebSearchServerTool(BaseModel):
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
-            ["engine", "filters", "max_results", "search_context_size", "user_location"]
+            [
+                "engine",
+                "filters",
+                "max_results",
+                "max_uses",
+                "search_context_size",
+                "user_location",
+            ]
         )
         nullable_fields = set(["filters", "user_location"])
         serialized = handler(self)
