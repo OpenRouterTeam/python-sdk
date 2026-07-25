@@ -35,6 +35,7 @@ class ProviderOptionsTypedDict(TypedDict):
     chutes: NotRequired[Dict[str, Any]]
     cirrascale: NotRequired[Dict[str, Any]]
     clarifai: NotRequired[Dict[str, Any]]
+    claude_on_aws: NotRequired[Dict[str, Any]]
     cloudflare: NotRequired[Dict[str, Any]]
     cohere: NotRequired[Dict[str, Any]]
     coreweave: NotRequired[Dict[str, Any]]
@@ -205,6 +206,10 @@ class ProviderOptions(BaseModel):
     cirrascale: Optional[Dict[str, Any]] = None
 
     clarifai: Optional[Dict[str, Any]] = None
+
+    claude_on_aws: Annotated[
+        Optional[Dict[str, Any]], pydantic.Field(alias="claude-on-aws")
+    ] = None
 
     cloudflare: Optional[Dict[str, Any]] = None
 
@@ -478,6 +483,7 @@ class ProviderOptions(BaseModel):
                 "chutes",
                 "cirrascale",
                 "clarifai",
+                "claude-on-aws",
                 "cloudflare",
                 "cohere",
                 "coreweave",

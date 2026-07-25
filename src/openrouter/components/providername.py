@@ -26,6 +26,7 @@ ProviderName = Union[
         "Cerebras",
         "Chutes",
         "Cirrascale",
+        "Claude Platform on AWS",
         "Clarifai",
         "Cloudflare",
         "Cohere",
