@@ -35881,9 +35881,6 @@ tags:
     name: 'beta.Analytics'
   - description: 'responses endpoints'
     name: 'responses'
-  - deprecated: true
-    description: 'Deprecated alias for responses endpoints. Use responses instead. Scheduled for removal (sunset date TBD).'
-    name: 'beta.responses'
 x-retry-strategy:
   initialDelay: 500
   maxAttempts: 3
