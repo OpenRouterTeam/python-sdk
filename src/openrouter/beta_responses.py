@@ -19,8 +19,8 @@ from typing import (
 )
 
 
-class Responses(BaseSDK):
-    r"""responses endpoints"""
+class BetaResponses(BaseSDK):
+    r"""Deprecated alias for responses endpoints. Use responses instead. Scheduled for removal (sunset date TBD)."""
 
     @overload
     def send(

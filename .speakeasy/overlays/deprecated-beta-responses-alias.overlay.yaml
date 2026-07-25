@@ -1,0 +1,23 @@
+overlay: 1.0.0
+x-speakeasy-jsonpath: rfc9535
+info:
+  title: Keep beta.responses as a deprecated SDK alias
+  version: 0.0.0
+actions:
+  # `update` appends to the existing tags list, so only the alias is listed here;
+  # re-listing `responses` would duplicate the canonical tag.
+  - target: $.paths["/responses"].post
+    description: Add beta.responses as a second (deprecated) SDK namespace for the responses operation
+    update:
+      tags:
+        - beta.responses
+  # Define the tag here rather than editing one in the input spec: the monorepo
+  # sdk-bot overwrites in.openapi.yaml with the GA-only spec, which carries no
+  # beta.responses tag, so a filter-based edit would silently match nothing and
+  # drop the deprecation notice.
+  - target: $.tags
+    description: Define the deprecated beta.responses tag
+    update:
+      - name: beta.responses
+        deprecated: true
+        description: Deprecated alias for responses endpoints. Use responses instead. Scheduled for removal (sunset date TBD).

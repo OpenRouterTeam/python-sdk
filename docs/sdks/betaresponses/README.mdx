@@ -1,11 +1,11 @@
 ---
-title: "Responses"
-description: "responses endpoints"
+title: "Beta.Responses"
+description: "Deprecated alias for responses endpoints. Use responses instead. Scheduled for removal (sunset date TBD)."
 ---
 
 ## Overview
 
-responses endpoints
+Deprecated alias for responses endpoints. Use responses instead. Scheduled for removal (sunset date TBD).
 
 ### Available Operations
 
@@ -29,7 +29,7 @@ with OpenRouter(
     api_key=os.getenv("OPENROUTER_API_KEY", ""),
 ) as open_router:
 
-    res = open_router.responses.send(service_tier="auto", stream=False)
+    res = open_router.beta.responses.send(service_tier="auto", stream=False)
 
     with res as event_stream:
         for event in event_stream:
@@ -51,7 +51,7 @@ with OpenRouter(
     api_key=os.getenv("OPENROUTER_API_KEY", ""),
 ) as open_router:
 
-    res = open_router.responses.send(service_tier="auto", stream=False)
+    res = open_router.beta.responses.send(service_tier="auto", stream=False)
 
     with res as event_stream:
         for event in event_stream:

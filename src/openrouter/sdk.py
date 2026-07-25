@@ -38,6 +38,7 @@ if TYPE_CHECKING:
     from openrouter.presets import Presets
     from openrouter.providers import Providers
     from openrouter.rerank import Rerank
+    from openrouter.responses import Responses
     from openrouter.stt import Stt
     from openrouter.tts import Tts
     from openrouter.video_generation import VideoGeneration
@@ -95,6 +96,8 @@ class OpenRouter(BaseSDK):
     r"""Provider information endpoints"""
     rerank: "Rerank"
     r"""Rerank endpoints"""
+    responses: "Responses"
+    r"""responses endpoints"""
     video_generation: "VideoGeneration"
     r"""Video Generation endpoints"""
     workspaces: "Workspaces"
@@ -124,6 +127,7 @@ class OpenRouter(BaseSDK):
         "presets": ("openrouter.presets", "Presets"),
         "providers": ("openrouter.providers", "Providers"),
         "rerank": ("openrouter.rerank", "Rerank"),
+        "responses": ("openrouter.responses", "Responses"),
         "video_generation": ("openrouter.video_generation", "VideoGeneration"),
         "workspaces": ("openrouter.workspaces", "Workspaces"),
     }

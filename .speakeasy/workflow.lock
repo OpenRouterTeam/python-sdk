@@ -2,8 +2,8 @@ speakeasyVersion: 1.787.0
 sources:
     OpenRouter API:
         sourceNamespace: open-router-chat-completions-api
-        sourceRevisionDigest: sha256:bb9814e3281a9e0c3024eaa6567726ce1522ce6ccf1a05f1206563bccba3bcec
-        sourceBlobDigest: sha256:040172eadbe8a42c5cc61b80aa158f3211bac5e469aca169ad8d0555056d3bea
+        sourceRevisionDigest: sha256:357663a2d3a9676da4b760aa05c45ca0114b2051d6eb3b5d420965915c7e587e
+        sourceBlobDigest: sha256:8bc72d29f0b30052d8fdf6fe99ce3d2b1c575428671c9350a6da7aedfaf615b5
         tags:
             - latest
             - 1.0.0
@@ -11,10 +11,10 @@ targets:
     open-router:
         source: OpenRouter API
         sourceNamespace: open-router-chat-completions-api
-        sourceRevisionDigest: sha256:bb9814e3281a9e0c3024eaa6567726ce1522ce6ccf1a05f1206563bccba3bcec
-        sourceBlobDigest: sha256:040172eadbe8a42c5cc61b80aa158f3211bac5e469aca169ad8d0555056d3bea
+        sourceRevisionDigest: sha256:357663a2d3a9676da4b760aa05c45ca0114b2051d6eb3b5d420965915c7e587e
+        sourceBlobDigest: sha256:8bc72d29f0b30052d8fdf6fe99ce3d2b1c575428671c9350a6da7aedfaf615b5
         codeSamplesNamespace: open-router-python-code-samples
-        codeSamplesRevisionDigest: sha256:1821552e46e96ec3536132a65e72ad74f213f58fc59900072da10b8c2428fedc
+        codeSamplesRevisionDigest: sha256:cdacb4b0a23b51908530ed8eb261c9a2e0202cb35ac88ae7d7941fc938def943
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: 1.787.0
@@ -29,6 +29,7 @@ workflow:
                 - location: .speakeasy/overlays/allof-simplify.overlay.yaml
                 - location: .speakeasy/overlays/boolean-query-params.overlay.yaml
                 - location: .speakeasy/overlays/fix-nullable-pagination.overlay.yaml
+                - location: .speakeasy/overlays/deprecated-beta-responses-alias.overlay.yaml
             output: .speakeasy/out.openapi.yaml
             registry:
                 location: registry.speakeasyapi.dev/openrouter/sdk/open-router-chat-completions-api
