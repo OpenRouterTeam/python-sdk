@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c48cf606-fb42-4a45-9c23-8f0555307828
 management:
-  docChecksum: 2732bb0597a1bae6e1c23e019d29b2d9
+  docChecksum: 9113a7305d3e82947d8c33d6039e8dbd
   docVersion: 1.0.0
   speakeasyVersion: 1.787.0
   generationVersion: 2.914.0
-  releaseVersion: 1.1.2
-  configChecksum: 79d7c51f43cf0d18cd634a1f59d3578d
+  releaseVersion: 1.1.3
+  configChecksum: cb3fd4a6586a7f86b0dc1afb8f4c8086
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
 persistentEdits:
-  generation_id: fa2bc6b4-6a92-49aa-beb3-a7946a5bc9e6
-  pristine_commit_hash: 7738b46e149e8bb7a9179a74fd1aeb7f589eb5a2
-  pristine_tree_hash: 8d8cde036dab846c58d8251ccae72a377b98bd70
+  generation_id: 0f091cb8-383d-4217-9cda-2847d1610613
+  pristine_commit_hash: 62cc4232ae65e4fdb4686eea4c82a435bce3fc61
+  pristine_tree_hash: 1affacc31a4e3f8273cc2e65e8c7fc7a7743adf4
 features:
   python:
     acceptHeaders: 3.0.0
@@ -4114,8 +4114,8 @@ trackedFiles:
     pristine_git_object: 894ca95c033795d50895fec5b8a6a18cd4a459c3
   docs/components/quantization.mdx:
     id: 9d062e4ee362
-    last_write_checksum: sha1:4cb3588933fe1ca8592669f8ec1bef1cf0986e28
-    pristine_git_object: cdbf8d73f319e091b6514c6bae0dc8bb56fd8c96
+    last_write_checksum: sha1:0baac45af2448938fb70f2076caaac66834bd3ce
+    pristine_git_object: 80f51dc8e90b6642365ab8d409b6f100f07ccab0
   docs/components/rangecapability.mdx:
     id: 8c2d6524bd62
     last_write_checksum: sha1:e583c16a52c5811d882ddbe20cee0a7006035356
@@ -6794,8 +6794,8 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:a3faeb201b5b56c334ae0aa090a0d419367107a5
-    pristine_git_object: bd7d6a8fcdcd04aefe23f9605ba5efffa2fb73fa
+    last_write_checksum: sha1:20eec34f85e9495974c6a58e1c5c255a4e4d3610
+    pristine_git_object: 8d90711cece3a5cf5036efdb673cf74d4925c41f
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77f44b60b98bc126557ec27391f91dfba764bb54
@@ -6822,8 +6822,8 @@ trackedFiles:
     pristine_git_object: 86713cfea633e09d33b3d4e65281071fe20e6137
   src/openrouter/_version.py:
     id: d8d15ad6c586
-    last_write_checksum: sha1:8b0dc8809ab571576936df79964c00a494fb9692
-    pristine_git_object: f86fc9420669ee30d5494afc733bd19c01d78517
+    last_write_checksum: sha1:3339ae9dcbe322721b4ec424d923b77b2b698da3
+    pristine_git_object: 107a1ac26dfef2dc9fa35ca3bde802df0f6d712e
   src/openrouter/analytics.py:
     id: cb406b5aaabb
     last_write_checksum: sha1:9e709b71dd0611056dc0cec6150b578defe32841
@@ -8578,8 +8578,8 @@ trackedFiles:
     pristine_git_object: 34b9d18bf50bcce3c150fffff684f41e8e79a2bd
   src/openrouter/components/quantization.py:
     id: bde317b3d703
-    last_write_checksum: sha1:96b042899bfb818f20d282be76ad37fc948a599d
-    pristine_git_object: dfcecafdc6d2a3a3dbc7beec2f07e1258415b2b4
+    last_write_checksum: sha1:cc9c8d954733d128b53938fbc403bf97b064c09c
+    pristine_git_object: 2357bc53054b91764777e23dde3ea7d67693a17d
   src/openrouter/components/rangecapability.py:
     id: ac3aad570488
     last_write_checksum: sha1:9eaed841f5e178925a070ebcbe6f18b4178dbaab
@@ -11329,4 +11329,4 @@ examples:
         "500":
           application/json: {"error": {"code": 500, "message": "Internal Server Error"}}
 examplesVersion: 1.0.2
-releaseNotes: "## Python SDK Changes:\n* `open_router.beta.responses.send()`: \n  *  `request.provider.ignore[].union(ProviderName).enum(modal)` **Added**\n* `open_router.byok.list()`: \n  *  `request.provider` **Changed**\n  *  `response.data[].provider.enum(modal)` **Added**\n* `open_router.byok.create()`: \n  *  `request.provider.enum(modal)` **Added**\n  *  `response.data.provider.enum(modal)` **Added**\n* `open_router.byok.get()`:  `response.data.provider.enum(modal)` **Added**\n* `open_router.byok.update()`:  `response.data.provider.enum(modal)` **Added**\n* `open_router.chat.send()`: \n  *  `request.provider.ignore[].union(ProviderName).enum(modal)` **Added**\n* `open_router.embeddings.generate()`: \n  *  `request.provider.ignore[].union(ProviderName).enum(modal)` **Added**\n* `open_router.endpoints.list_zdr_endpoints()`:  `response.data[].provider_name.enum(modal)` **Added**\n* `open_router.endpoints.list()`:  `response.data.endpoints[].provider_name.enum(modal)` **Added**\n* `open_router.images.generate()`: \n  *  `request.provider.ignore[].union(ProviderName).enum(modal)` **Added**\n* `open_router.presets.create_presets_chat_completions()`: \n  *  `request.provider.ignore[].union(ProviderName).enum(modal)` **Added**\n* `open_router.presets.create_presets_messages()`: \n  *  `request.provider.ignore[].union(ProviderName).enum(modal)` **Added**\n* `open_router.presets.create_presets_responses()`: \n  *  `request.provider.ignore[].union(ProviderName).enum(modal)` **Added**\n* `open_router.rerank.rerank()`: \n  *  `request.provider.ignore[].union(ProviderName).enum(modal)` **Added**\n* `open_router.responses.send()`: \n  *  `request.provider.ignore[].union(ProviderName).enum(modal)` **Added**\n"
+releaseNotes: "## Python SDK Changes:\n* `open_router.beta.responses.send()`: \n  *  `request.provider.quantizations[]` **Changed**\n* `open_router.chat.send()`: \n  *  `request.provider.quantizations[]` **Changed**\n* `open_router.embeddings.generate()`: \n  *  `request.provider.quantizations[]` **Changed**\n* `open_router.endpoints.list_zdr_endpoints()`:  `response.data[].quantization` **Changed**\n* `open_router.endpoints.list()`:  `response.data.endpoints[].quantization` **Changed**\n* `open_router.presets.create_presets_chat_completions()`: \n  *  `request.provider.quantizations[]` **Changed**\n* `open_router.presets.create_presets_messages()`: \n  *  `request.provider.quantizations[]` **Changed**\n* `open_router.presets.create_presets_responses()`: \n  *  `request.provider.quantizations[]` **Changed**\n* `open_router.rerank.rerank()`: \n  *  `request.provider.quantizations[]` **Changed**\n* `open_router.responses.send()`: \n  *  `request.provider.quantizations[]` **Changed**\n"
