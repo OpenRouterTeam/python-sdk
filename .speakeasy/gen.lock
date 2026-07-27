@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c48cf606-fb42-4a45-9c23-8f0555307828
 management:
-  docChecksum: 2434d5160187a6ae7c71b2e9bad17de8
+  docChecksum: 48d5a81172df7e47f0a05fd4a90ce217
   docVersion: 1.0.0
   speakeasyVersion: 1.787.0
   generationVersion: 2.914.0
-  releaseVersion: 1.1.4
-  configChecksum: 027eee401633037af6be73f65d9247c5
+  releaseVersion: 1.1.5
+  configChecksum: 366ee98787158293e8d90134db38bd17
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
 persistentEdits:
-  generation_id: 7ecddae6-8bad-43ba-8332-93ae1146d05e
-  pristine_commit_hash: 173c7cab1d0ed716c50c41e70c54143e53705fa9
-  pristine_tree_hash: c53479998d8039592bc56dbfa9c254d89a54fabd
+  generation_id: c0de5ec0-83f9-4bc0-a0fc-b6923ac4f43d
+  pristine_commit_hash: c2a5bb7caed893bd0d62131d4d2e04db8a162db2
+  pristine_tree_hash: c37a7a6d463a342ca36da91f1ded0c85a852aa5f
 features:
   python:
     acceptHeaders: 3.0.0
@@ -6794,8 +6794,8 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:a8ed1f37c4b26cdf008c3b699e888693c7bbc876
-    pristine_git_object: 4a72e3026083e01a2947d1dc8f966eb76a144432
+    last_write_checksum: sha1:cd60d35abf54ca3250cf89188a1083620ec7f26d
+    pristine_git_object: 5359be57c68bde0baa392e275381c906a0691d0a
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77f44b60b98bc126557ec27391f91dfba764bb54
@@ -6822,8 +6822,8 @@ trackedFiles:
     pristine_git_object: 86713cfea633e09d33b3d4e65281071fe20e6137
   src/openrouter/_version.py:
     id: d8d15ad6c586
-    last_write_checksum: sha1:c56e4ea9aa34c66504fc607be73517cb2d561529
-    pristine_git_object: a2c6d09a03f7b79e5fbfb6abb37e327542235604
+    last_write_checksum: sha1:7ed944ea23e58377537ef854af17f5a96ac80b8e
+    pristine_git_object: d1b834456918071dc73a76b4e3166b2d1e1f1086
   src/openrouter/analytics.py:
     id: cb406b5aaabb
     last_write_checksum: sha1:9e709b71dd0611056dc0cec6150b578defe32841
@@ -11329,4 +11329,3 @@ examples:
         "500":
           application/json: {"error": {"code": 500, "message": "Internal Server Error"}}
 examplesVersion: 1.0.2
-releaseNotes: "## Python SDK Changes:\n* `open_router.beta.responses.send()`: \n  *  `request.input.union(Array<>)[].union(ReasoningItem).format.enum(bedrock_openai_responses_v1)` **Added**\n  *  `response` **Changed**\n* `open_router.chat.send()`: \n  *  `request.messages[].union(assistant).reasoning_details[].union(reasoning.server_tool_call).format.enum(bedrock_openai_responses_v1)` **Added**\n  *  `response` **Changed**\n* `open_router.presets.create_presets_chat_completions()`: \n  *  `request.messages[].union(assistant).reasoning_details[].union(reasoning.summary).format.enum(bedrock_openai_responses_v1)` **Added**\n* `open_router.presets.create_presets_responses()`: \n  *  `request.input.union(Array<>)[].union(ReasoningItem).format.enum(bedrock_openai_responses_v1)` **Added**\n* `open_router.responses.send()`: \n  *  `request.input.union(Array<>)[].union(ReasoningItem).format.enum(bedrock_openai_responses_v1)` **Added**\n  *  `response` **Changed**\n"
