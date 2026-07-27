@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c48cf606-fb42-4a45-9c23-8f0555307828
 management:
-  docChecksum: 9113a7305d3e82947d8c33d6039e8dbd
+  docChecksum: 2434d5160187a6ae7c71b2e9bad17de8
   docVersion: 1.0.0
   speakeasyVersion: 1.787.0
   generationVersion: 2.914.0
-  releaseVersion: 1.1.3
-  configChecksum: cb3fd4a6586a7f86b0dc1afb8f4c8086
+  releaseVersion: 1.1.4
+  configChecksum: 027eee401633037af6be73f65d9247c5
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
 persistentEdits:
-  generation_id: 0f091cb8-383d-4217-9cda-2847d1610613
-  pristine_commit_hash: 62cc4232ae65e4fdb4686eea4c82a435bce3fc61
-  pristine_tree_hash: 1affacc31a4e3f8273cc2e65e8c7fc7a7743adf4
+  generation_id: 7ecddae6-8bad-43ba-8332-93ae1146d05e
+  pristine_commit_hash: 173c7cab1d0ed716c50c41e70c54143e53705fa9
+  pristine_tree_hash: c53479998d8039592bc56dbfa9c254d89a54fabd
 features:
   python:
     acceptHeaders: 3.0.0
@@ -4218,8 +4218,8 @@ trackedFiles:
     pristine_git_object: 2cfb4301a444ee320895855dd98311aaca93363b
   docs/components/reasoningformat.mdx:
     id: ad8b386fc1e9
-    last_write_checksum: sha1:84154274e638e2bb3d509a93d12ddfe267f88a66
-    pristine_git_object: bde3d7813032150b75f2430aade8fd9459fa8cd9
+    last_write_checksum: sha1:c953267e339ca45e5320f3c3b2117779a93d436e
+    pristine_git_object: f84f4b7eda3860b09d05c08c78f6df82c28fd623
   docs/components/reasoningitem.mdx:
     id: b878124ede47
     last_write_checksum: sha1:f740ab591ad89130eb9eefbbc507dbbe8a92195b
@@ -6794,8 +6794,8 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:20eec34f85e9495974c6a58e1c5c255a4e4d3610
-    pristine_git_object: 8d90711cece3a5cf5036efdb673cf74d4925c41f
+    last_write_checksum: sha1:a8ed1f37c4b26cdf008c3b699e888693c7bbc876
+    pristine_git_object: 4a72e3026083e01a2947d1dc8f966eb76a144432
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77f44b60b98bc126557ec27391f91dfba764bb54
@@ -6822,8 +6822,8 @@ trackedFiles:
     pristine_git_object: 86713cfea633e09d33b3d4e65281071fe20e6137
   src/openrouter/_version.py:
     id: d8d15ad6c586
-    last_write_checksum: sha1:3339ae9dcbe322721b4ec424d923b77b2b698da3
-    pristine_git_object: 107a1ac26dfef2dc9fa35ca3bde802df0f6d712e
+    last_write_checksum: sha1:c56e4ea9aa34c66504fc607be73517cb2d561529
+    pristine_git_object: a2c6d09a03f7b79e5fbfb6abb37e327542235604
   src/openrouter/analytics.py:
     id: cb406b5aaabb
     last_write_checksum: sha1:9e709b71dd0611056dc0cec6150b578defe32841
@@ -8634,8 +8634,8 @@ trackedFiles:
     pristine_git_object: fe3562c76fc28d2f8cacd49a12c0a0500b069147
   src/openrouter/components/reasoningformat.py:
     id: 99d79e5500b6
-    last_write_checksum: sha1:948e70633fd44f8f5c99a61e9c2595999a74bd5d
-    pristine_git_object: bb3b5e78ac0c0144b3eccdc307fd77b51f107552
+    last_write_checksum: sha1:d16619e0b61eb4cfd28613ba58a9f88ca1009891
+    pristine_git_object: bb39b492091d8932b75a5482ecd62d3076a50096
   src/openrouter/components/reasoningitem.py:
     id: 4345f446ad97
     last_write_checksum: sha1:609a0510506f8dc70ca9cba07040b82ebdc9ec9f
@@ -11329,4 +11329,4 @@ examples:
         "500":
           application/json: {"error": {"code": 500, "message": "Internal Server Error"}}
 examplesVersion: 1.0.2
-releaseNotes: "## Python SDK Changes:\n* `open_router.beta.responses.send()`: \n  *  `request.provider.quantizations[]` **Changed**\n* `open_router.chat.send()`: \n  *  `request.provider.quantizations[]` **Changed**\n* `open_router.embeddings.generate()`: \n  *  `request.provider.quantizations[]` **Changed**\n* `open_router.endpoints.list_zdr_endpoints()`:  `response.data[].quantization` **Changed**\n* `open_router.endpoints.list()`:  `response.data.endpoints[].quantization` **Changed**\n* `open_router.presets.create_presets_chat_completions()`: \n  *  `request.provider.quantizations[]` **Changed**\n* `open_router.presets.create_presets_messages()`: \n  *  `request.provider.quantizations[]` **Changed**\n* `open_router.presets.create_presets_responses()`: \n  *  `request.provider.quantizations[]` **Changed**\n* `open_router.rerank.rerank()`: \n  *  `request.provider.quantizations[]` **Changed**\n* `open_router.responses.send()`: \n  *  `request.provider.quantizations[]` **Changed**\n"
+releaseNotes: "## Python SDK Changes:\n* `open_router.beta.responses.send()`: \n  *  `request.input.union(Array<>)[].union(ReasoningItem).format.enum(bedrock_openai_responses_v1)` **Added**\n  *  `response` **Changed**\n* `open_router.chat.send()`: \n  *  `request.messages[].union(assistant).reasoning_details[].union(reasoning.server_tool_call).format.enum(bedrock_openai_responses_v1)` **Added**\n  *  `response` **Changed**\n* `open_router.presets.create_presets_chat_completions()`: \n  *  `request.messages[].union(assistant).reasoning_details[].union(reasoning.summary).format.enum(bedrock_openai_responses_v1)` **Added**\n* `open_router.presets.create_presets_responses()`: \n  *  `request.input.union(Array<>)[].union(ReasoningItem).format.enum(bedrock_openai_responses_v1)` **Added**\n* `open_router.responses.send()`: \n  *  `request.input.union(Array<>)[].union(ReasoningItem).format.enum(bedrock_openai_responses_v1)` **Added**\n  *  `response` **Changed**\n"
