@@ -124,6 +124,57 @@ with OpenRouter(
 
 </br>
 
+### Web Search
+
+The SDK includes native types for OpenRouter web search. For Chat Completions, pass the OpenRouter server tool in `tools`:
+
+```python
+from openrouter import OpenRouter, components
+import os
+
+
+with OpenRouter(api_key=os.getenv("OPENROUTER_API_KEY", "")) as open_router:
+    res = open_router.chat.send(
+        model="openai/gpt-4o",
+        messages=[{"role": "user", "content": "What changed in AI today?"}],
+        tools=[
+            components.OpenRouterWebSearchServerTool(
+                type="openrouter:web_search",
+                parameters=components.WebSearchConfig(
+                    max_results=5,
+                    search_context_size="medium",
+                ),
+            )
+        ],
+    )
+```
+
+For the Responses API, use the Responses server-tool type:
+
+```python
+from openrouter import OpenRouter, components
+import os
+
+
+with OpenRouter(api_key=os.getenv("OPENROUTER_API_KEY", "")) as open_router:
+    res = open_router.responses.send(
+        model="openai/gpt-4o",
+        input="What changed in AI today?",
+        tools=[
+            components.WebSearchServerToolOpenRouter(
+                type="openrouter:web_search",
+                parameters=components.WebSearchServerToolConfig(
+                    max_results=5,
+                    search_context_size="medium",
+                ),
+            )
+        ],
+        stream=False,
+    )
+```
+
+The SDK also supports OpenRouter's web-search plugin via `components.WebSearchPlugin(id="web", ...)` for request shapes that accept `plugins`.
+
 The same SDK client can also be used to make asynchronous requests by importing asyncio.
 
 ```python
