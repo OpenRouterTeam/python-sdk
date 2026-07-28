@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c48cf606-fb42-4a45-9c23-8f0555307828
 management:
-  docChecksum: a85cf9e0f5d8d33150fd6c4f7f022a72
+  docChecksum: 426319a5c6585750c57e4cec41ea2a89
   docVersion: 1.0.0
   speakeasyVersion: 1.787.0
   generationVersion: 2.914.0
-  releaseVersion: 1.1.7
-  configChecksum: c55f72f8fc5fe60111dcf6db8bb475e4
+  releaseVersion: 1.1.8
+  configChecksum: ac2e66aca7e4214d06bea8a22b34a380
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
 persistentEdits:
-  generation_id: 73b125b7-861d-4ed7-b039-c59035d09a09
-  pristine_commit_hash: e85aaafee4cd2175cf7eb0b15e7b0169d76a4913
-  pristine_tree_hash: 2de837cd786af70349c7ad77c6c59554a1b4f1c0
+  generation_id: 74eaa39b-d3cc-436a-a479-59d95f60d97a
+  pristine_commit_hash: bcb19a910e78770dad3220b402c527a995a329a6
+  pristine_tree_hash: ccd23afd1bcaa04d3c51dd0b6cfcfcbba08d91dc
 features:
   python:
     acceptHeaders: 3.0.0
@@ -5766,8 +5766,8 @@ trackedFiles:
     pristine_git_object: 7cab840ae2623e4f8ccd5d34b4997e8243cd72d8
   docs/operations/deletefilerequest.mdx:
     id: fa38696c8455
-    last_write_checksum: sha1:7eb16774a8ae2220532b26d9f22e0bf84c66d539
-    pristine_git_object: 3202a43f729c1d8699d46ef23f62074d04114e08
+    last_write_checksum: sha1:001d42b9af6e87c48c58c00b08a519db30a508d4
+    pristine_git_object: a41b1ee131eef8ef7d2c6be1f2030f86041ee14c
   docs/operations/deleteguardrailglobals.mdx:
     id: f3c051209faf
     last_write_checksum: sha1:1b12ecd3f259ec98d2377fceeb967163ddaba3cb
@@ -5846,8 +5846,8 @@ trackedFiles:
     pristine_git_object: 8415a66852abad293076598cc27010eddfcfa130
   docs/operations/downloadfilecontentrequest.mdx:
     id: 04df99863d55
-    last_write_checksum: sha1:5e6181d6eb82ac0b2616de79b2aecea9baa36c32
-    pristine_git_object: dcb0cb35b97a8dfa539c246bed8756b3aa8bf814
+    last_write_checksum: sha1:e5a85a6a6732effe878ee459804e4a84fbcbd1fd
+    pristine_git_object: 8b858feced07daaed68ce83fa477ee27796904e7
   docs/operations/embedding.mdx:
     id: 591dd7891964
     last_write_checksum: sha1:8c8196e7ea5cf8a0a43a4495d721e4fa19530ffc
@@ -5970,8 +5970,8 @@ trackedFiles:
     pristine_git_object: 4b9270d76df3ac3ff1402b6ae3c5132d54c666fe
   docs/operations/getfilemetadatarequest.mdx:
     id: "092777656353"
-    last_write_checksum: sha1:460587859ae661d766c6e37a2eebf8bfd0b70cb4
-    pristine_git_object: eee139554482af3a619776aaa1290bbe2330067f
+    last_write_checksum: sha1:719dc08ca7076a0a75063fae9c9cbc23bfac2ab4
+    pristine_git_object: 4cf0f5421df690c9f3e2c5ec44276a1b59581abd
   docs/operations/getgenerationglobals.mdx:
     id: 43ac280f4639
     last_write_checksum: sha1:1e3b8a4dcd3f112ae32edfca342dd01cc9bde7bd
@@ -6186,12 +6186,12 @@ trackedFiles:
     pristine_git_object: 5e86176bf6809f16e19cd7006288ea8d55911070
   docs/operations/listfilesrequest.mdx:
     id: 86c9594f103f
-    last_write_checksum: sha1:e2231e9798368d5dd629bc1b92a0fa4fc88d2501
-    pristine_git_object: 567c8a2e0864b4e4264ccce371f98e7377d2a4ef
+    last_write_checksum: sha1:7ed07315e04db865877d2ad1c9be84c4977fe28b
+    pristine_git_object: a5a1b70a9b38f2563fea202a52adc0fe8ab7f60d
   docs/operations/listfilesresponse.mdx:
     id: b2a0050d55de
-    last_write_checksum: sha1:a6b61a40a390cfd71e6b83fd6a75a106c9f8486a
-    pristine_git_object: ba3f4b56aed07f6d26ac7c9bd1d1dc21d93245d8
+    last_write_checksum: sha1:ffd1ee4a12704d53dc63b7133965b334d32844be
+    pristine_git_object: 6cb55f6d74e06eb9b6c948f6dac304d2f3379582
   docs/operations/listgenerationcontentglobals.mdx:
     id: 37713baa8939
     last_write_checksum: sha1:f893103835ccc22cc34baa4dce22480a7c000f0a
@@ -6726,8 +6726,8 @@ trackedFiles:
     pristine_git_object: f8cebc2061d7428904766956be45ca70e5519be4
   docs/sdks/files/README.mdx:
     id: 1a0c257e330c
-    last_write_checksum: sha1:e21cb3c8c0e1c48ca7bc6799e764f45790578d3d
-    pristine_git_object: 8ed39ab511e8430389a8cb92bed10b088a586006
+    last_write_checksum: sha1:21cf411ff5c897140db8611e612d082ab923ccce
+    pristine_git_object: b0cde3e3a703132befdb96ad10c17bf036b7464a
   docs/sdks/generations/README.mdx:
     id: a754fecc8514
     last_write_checksum: sha1:b5f8035c676b5eb050472ed9697b64718aed8f17
@@ -6794,8 +6794,8 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:0d371612f67d3aa230d83b60acf29182e31b9646
-    pristine_git_object: d10bd26cf565d2937a50b6496001281de5a4789b
+    last_write_checksum: sha1:446f9f3ef13059e3ecd08897e3579b29be215aab
+    pristine_git_object: 82ed4d517a49e2857cd5e3f4b97755a5ad5a47f2
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77f44b60b98bc126557ec27391f91dfba764bb54
@@ -6822,8 +6822,8 @@ trackedFiles:
     pristine_git_object: 86713cfea633e09d33b3d4e65281071fe20e6137
   src/openrouter/_version.py:
     id: d8d15ad6c586
-    last_write_checksum: sha1:91f6031c7d0fbc4dce68f0a099ba371446291d38
-    pristine_git_object: 2894c2f7345f3d9ffab296784bf8a1568f3e1467
+    last_write_checksum: sha1:892747913f5d6d14a21196c26130003671487c72
+    pristine_git_object: f26c24e9d7f1da80e974056164cef83b24752b37
   src/openrouter/analytics.py:
     id: cb406b5aaabb
     last_write_checksum: sha1:9e709b71dd0611056dc0cec6150b578defe32841
@@ -11073,7 +11073,7 @@ examples:
     speakeasy-default-list-files:
       responses:
         "200":
-          application/json: {"cursor": null, "data": [{"created_at": "2025-01-01T00:00:00Z", "downloadable": false, "filename": "document.pdf", "id": "file_011CNha8iCJcU1wXNR6q4V8w", "mime_type": "application/pdf", "size_bytes": 1024000, "type": "file"}], "first_id": "file_011CNha8iCJcU1wXNR6q4V8w", "has_more": false, "last_id": "file_011CNha8iCJcU1wXNR6q4V8w"}
+          application/json: {"cursor": null, "data": [{"created_at": "2025-01-01T00:00:00Z", "downloadable": false, "filename": "document.pdf", "id": "or_file_011CNha8iCJcU1wXNR6q4V8w", "mime_type": "application/pdf", "size_bytes": 1024000, "type": "file"}], "first_id": "or_file_011CNha8iCJcU1wXNR6q4V8w", "has_more": false, "last_id": "or_file_011CNha8iCJcU1wXNR6q4V8w"}
         "400":
           application/json: {"error": {"code": 400, "message": "Invalid request parameters"}}
         "401":
@@ -11088,7 +11088,7 @@ examples:
         multipart/form-data: {"file": "x-file: example.file"}
       responses:
         "200":
-          application/json: {"created_at": "2025-01-01T00:00:00Z", "downloadable": false, "filename": "document.pdf", "id": "file_011CNha8iCJcU1wXNR6q4V8w", "mime_type": "application/pdf", "size_bytes": 1024000, "type": "file"}
+          application/json: {"created_at": "2025-01-01T00:00:00Z", "downloadable": false, "filename": "document.pdf", "id": "or_file_011CNha8iCJcU1wXNR6q4V8w", "mime_type": "application/pdf", "size_bytes": 1024000, "type": "file"}
         "400":
           application/json: {"error": {"code": 400, "message": "Invalid request parameters"}}
         "401":
@@ -11108,7 +11108,7 @@ examples:
           file_id: "file_011CNha8iCJcU1wXNR6q4V8w"
       responses:
         "200":
-          application/json: {"id": "file_011CNha8iCJcU1wXNR6q4V8w", "type": "file_deleted"}
+          application/json: {"id": "or_file_011CNha8iCJcU1wXNR6q4V8w", "type": "file_deleted"}
         "401":
           application/json: {"error": {"code": 401, "message": "Missing Authentication header"}}
         "404":
@@ -11124,7 +11124,7 @@ examples:
           file_id: "file_011CNha8iCJcU1wXNR6q4V8w"
       responses:
         "200":
-          application/json: {"created_at": "2025-01-01T00:00:00Z", "downloadable": false, "filename": "document.pdf", "id": "file_011CNha8iCJcU1wXNR6q4V8w", "mime_type": "application/pdf", "size_bytes": 1024000, "type": "file"}
+          application/json: {"created_at": "2025-01-01T00:00:00Z", "downloadable": false, "filename": "document.pdf", "id": "or_file_011CNha8iCJcU1wXNR6q4V8w", "mime_type": "application/pdf", "size_bytes": 1024000, "type": "file"}
         "401":
           application/json: {"error": {"code": 401, "message": "Missing Authentication header"}}
         "404":
@@ -11329,4 +11329,3 @@ examples:
         "500":
           application/json: {"error": {"code": 500, "message": "Internal Server Error"}}
 examplesVersion: 1.0.2
-releaseNotes: "## Python SDK Changes:\n* `open_router.beta.responses.send()`: \n  *  `request.input.union(Array<>)[].union(AdditionalToolsItem).tools[].union(Legacy_WebSearchServerTool).filters.blocked_domains` **Added**\n  *  `response` **Changed**\n* `open_router.presets.create_presets_responses()`: \n  *  `request.input.union(Array<>)[].union(AdditionalToolsItem).tools[].union(Preview_WebSearchServerTool).filters.blocked_domains` **Added**\n* `open_router.responses.send()`: \n  *  `request.input.union(Array<>)[].union(AdditionalToolsItem).tools[].union(Preview_20250311_WebSearchServerTool).filters.blocked_domains` **Added**\n  *  `response` **Changed**\n"
