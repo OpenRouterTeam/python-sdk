@@ -34,10 +34,11 @@ DataRegion = Union[
     Literal[
         "global",
         "europe",
+        "us",
     ],
     UnrecognizedStr,
 ]
-r"""The data region this generation was routed through. 'europe' for EU-routed requests, 'global' otherwise."""
+r"""The data region this generation was routed through: 'global', 'europe', or 'us'."""
 
 
 class GenerationResponseDataTypedDict(TypedDict):
@@ -54,7 +55,7 @@ class GenerationResponseDataTypedDict(TypedDict):
     created_at: str
     r"""ISO 8601 timestamp of when the generation was created"""
     data_region: DataRegion
-    r"""The data region this generation was routed through. 'europe' for EU-routed requests, 'global' otherwise."""
+    r"""The data region this generation was routed through: 'global', 'europe', or 'us'."""
     external_user: Nullable[str]
     r"""External user identifier"""
     finish_reason: Nullable[str]
@@ -152,7 +153,7 @@ class GenerationResponseData(BaseModel):
     r"""ISO 8601 timestamp of when the generation was created"""
 
     data_region: DataRegion
-    r"""The data region this generation was routed through. 'europe' for EU-routed requests, 'global' otherwise."""
+    r"""The data region this generation was routed through: 'global', 'europe', or 'us'."""
 
     external_user: Nullable[str]
     r"""External user identifier"""
