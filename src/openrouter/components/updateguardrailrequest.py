@@ -33,6 +33,12 @@ class UpdateGuardrailRequestTypedDict(TypedDict):
     r"""Custom regex content filters to apply. Set to null to remove."""
     description: NotRequired[Nullable[str]]
     r"""New description for the guardrail"""
+    enable_free_model_publication: NotRequired[Nullable[bool]]
+    r"""Whether this guardrail allows free endpoints that publish prompts."""
+    enable_free_model_training: NotRequired[Nullable[bool]]
+    r"""Whether this guardrail allows free endpoints that train on request data."""
+    enable_paid_model_training: NotRequired[Nullable[bool]]
+    r"""Whether this guardrail allows paid endpoints that train on request data."""
     enforce_zdr: NotRequired[Nullable[bool]]
     r"""Deprecated. Use enforce_zdr_anthropic, enforce_zdr_openai, enforce_zdr_google, enforce_zdr_xai, and enforce_zdr_other instead. When provided, its value is copied into any of those per-provider fields that are not explicitly specified on the request."""
     enforce_zdr_anthropic: NotRequired[Nullable[bool]]
@@ -76,6 +82,15 @@ class UpdateGuardrailRequest(BaseModel):
 
     description: OptionalNullable[str] = UNSET
     r"""New description for the guardrail"""
+
+    enable_free_model_publication: OptionalNullable[bool] = UNSET
+    r"""Whether this guardrail allows free endpoints that publish prompts."""
+
+    enable_free_model_training: OptionalNullable[bool] = UNSET
+    r"""Whether this guardrail allows free endpoints that train on request data."""
+
+    enable_paid_model_training: OptionalNullable[bool] = UNSET
+    r"""Whether this guardrail allows paid endpoints that train on request data."""
 
     enforce_zdr: Annotated[
         OptionalNullable[bool],
@@ -127,6 +142,9 @@ class UpdateGuardrailRequest(BaseModel):
                 "content_filter_builtins",
                 "content_filters",
                 "description",
+                "enable_free_model_publication",
+                "enable_free_model_training",
+                "enable_paid_model_training",
                 "enforce_zdr",
                 "enforce_zdr_anthropic",
                 "enforce_zdr_google",
@@ -148,6 +166,9 @@ class UpdateGuardrailRequest(BaseModel):
                 "content_filter_builtins",
                 "content_filters",
                 "description",
+                "enable_free_model_publication",
+                "enable_free_model_training",
+                "enable_paid_model_training",
                 "enforce_zdr",
                 "enforce_zdr_anthropic",
                 "enforce_zdr_google",
