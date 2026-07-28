@@ -372,6 +372,9 @@ class Guardrails(BaseSDK):
             ]
         ] = UNSET,
         description: OptionalNullable[str] = UNSET,
+        enable_free_model_publication: OptionalNullable[bool] = UNSET,
+        enable_free_model_training: OptionalNullable[bool] = UNSET,
+        enable_paid_model_training: OptionalNullable[bool] = UNSET,
         enforce_zdr: OptionalNullable[bool] = UNSET,
         enforce_zdr_anthropic: OptionalNullable[bool] = UNSET,
         enforce_zdr_google: OptionalNullable[bool] = UNSET,
@@ -406,6 +409,9 @@ class Guardrails(BaseSDK):
         :param content_filter_builtins: Builtin content filters to apply. Every builtin slug supports \"block\", \"redact\", and the detect-only \"flag\" action.
         :param content_filters: Custom regex content filters to apply to request messages
         :param description: Description of the guardrail
+        :param enable_free_model_publication: Whether this guardrail allows free endpoints that publish prompts.
+        :param enable_free_model_training: Whether this guardrail allows free endpoints that train on request data.
+        :param enable_paid_model_training: Whether this guardrail allows paid endpoints that train on request data.
         :param enforce_zdr: Deprecated. Use enforce_zdr_anthropic, enforce_zdr_openai, enforce_zdr_google, enforce_zdr_xai, and enforce_zdr_other instead. When provided, its value is copied into any of those per-provider fields that are not explicitly specified on the request.
         :param enforce_zdr_anthropic: Whether to enforce zero data retention for Anthropic models. Falls back to enforce_zdr when not provided.
         :param enforce_zdr_google: Whether to enforce zero data retention for Google models. Falls back to enforce_zdr when not provided.
@@ -453,6 +459,9 @@ class Guardrails(BaseSDK):
                     OptionalNullable[List[components.ContentFilterEntry]],
                 ),
                 description=description,
+                enable_free_model_publication=enable_free_model_publication,
+                enable_free_model_training=enable_free_model_training,
+                enable_paid_model_training=enable_paid_model_training,
                 enforce_zdr=enforce_zdr,
                 enforce_zdr_anthropic=enforce_zdr_anthropic,
                 enforce_zdr_google=enforce_zdr_google,
@@ -589,6 +598,9 @@ class Guardrails(BaseSDK):
             ]
         ] = UNSET,
         description: OptionalNullable[str] = UNSET,
+        enable_free_model_publication: OptionalNullable[bool] = UNSET,
+        enable_free_model_training: OptionalNullable[bool] = UNSET,
+        enable_paid_model_training: OptionalNullable[bool] = UNSET,
         enforce_zdr: OptionalNullable[bool] = UNSET,
         enforce_zdr_anthropic: OptionalNullable[bool] = UNSET,
         enforce_zdr_google: OptionalNullable[bool] = UNSET,
@@ -623,6 +635,9 @@ class Guardrails(BaseSDK):
         :param content_filter_builtins: Builtin content filters to apply. Every builtin slug supports \"block\", \"redact\", and the detect-only \"flag\" action.
         :param content_filters: Custom regex content filters to apply to request messages
         :param description: Description of the guardrail
+        :param enable_free_model_publication: Whether this guardrail allows free endpoints that publish prompts.
+        :param enable_free_model_training: Whether this guardrail allows free endpoints that train on request data.
+        :param enable_paid_model_training: Whether this guardrail allows paid endpoints that train on request data.
         :param enforce_zdr: Deprecated. Use enforce_zdr_anthropic, enforce_zdr_openai, enforce_zdr_google, enforce_zdr_xai, and enforce_zdr_other instead. When provided, its value is copied into any of those per-provider fields that are not explicitly specified on the request.
         :param enforce_zdr_anthropic: Whether to enforce zero data retention for Anthropic models. Falls back to enforce_zdr when not provided.
         :param enforce_zdr_google: Whether to enforce zero data retention for Google models. Falls back to enforce_zdr when not provided.
@@ -670,6 +685,9 @@ class Guardrails(BaseSDK):
                     OptionalNullable[List[components.ContentFilterEntry]],
                 ),
                 description=description,
+                enable_free_model_publication=enable_free_model_publication,
+                enable_free_model_training=enable_free_model_training,
+                enable_paid_model_training=enable_paid_model_training,
                 enforce_zdr=enforce_zdr,
                 enforce_zdr_anthropic=enforce_zdr_anthropic,
                 enforce_zdr_google=enforce_zdr_google,
@@ -1318,6 +1336,9 @@ class Guardrails(BaseSDK):
             ]
         ] = UNSET,
         description: OptionalNullable[str] = UNSET,
+        enable_free_model_publication: OptionalNullable[bool] = UNSET,
+        enable_free_model_training: OptionalNullable[bool] = UNSET,
+        enable_paid_model_training: OptionalNullable[bool] = UNSET,
         enforce_zdr: OptionalNullable[bool] = UNSET,
         enforce_zdr_anthropic: OptionalNullable[bool] = UNSET,
         enforce_zdr_google: OptionalNullable[bool] = UNSET,
@@ -1352,6 +1373,9 @@ class Guardrails(BaseSDK):
         :param content_filter_builtins: Builtin content filters to apply. Set to null to remove. Every builtin slug supports \"block\", \"redact\", and the detect-only \"flag\" action.
         :param content_filters: Custom regex content filters to apply. Set to null to remove.
         :param description: New description for the guardrail
+        :param enable_free_model_publication: Whether this guardrail allows free endpoints that publish prompts.
+        :param enable_free_model_training: Whether this guardrail allows free endpoints that train on request data.
+        :param enable_paid_model_training: Whether this guardrail allows paid endpoints that train on request data.
         :param enforce_zdr: Deprecated. Use enforce_zdr_anthropic, enforce_zdr_openai, enforce_zdr_google, enforce_zdr_xai, and enforce_zdr_other instead. When provided, its value is copied into any of those per-provider fields that are not explicitly specified on the request.
         :param enforce_zdr_anthropic: Whether to enforce zero data retention for Anthropic models. Falls back to enforce_zdr when not provided.
         :param enforce_zdr_google: Whether to enforce zero data retention for Google models. Falls back to enforce_zdr when not provided.
@@ -1400,6 +1424,9 @@ class Guardrails(BaseSDK):
                     OptionalNullable[List[components.ContentFilterEntry]],
                 ),
                 description=description,
+                enable_free_model_publication=enable_free_model_publication,
+                enable_free_model_training=enable_free_model_training,
+                enable_paid_model_training=enable_paid_model_training,
                 enforce_zdr=enforce_zdr,
                 enforce_zdr_anthropic=enforce_zdr_anthropic,
                 enforce_zdr_google=enforce_zdr_google,
@@ -1535,6 +1562,9 @@ class Guardrails(BaseSDK):
             ]
         ] = UNSET,
         description: OptionalNullable[str] = UNSET,
+        enable_free_model_publication: OptionalNullable[bool] = UNSET,
+        enable_free_model_training: OptionalNullable[bool] = UNSET,
+        enable_paid_model_training: OptionalNullable[bool] = UNSET,
         enforce_zdr: OptionalNullable[bool] = UNSET,
         enforce_zdr_anthropic: OptionalNullable[bool] = UNSET,
         enforce_zdr_google: OptionalNullable[bool] = UNSET,
@@ -1569,6 +1599,9 @@ class Guardrails(BaseSDK):
         :param content_filter_builtins: Builtin content filters to apply. Set to null to remove. Every builtin slug supports \"block\", \"redact\", and the detect-only \"flag\" action.
         :param content_filters: Custom regex content filters to apply. Set to null to remove.
         :param description: New description for the guardrail
+        :param enable_free_model_publication: Whether this guardrail allows free endpoints that publish prompts.
+        :param enable_free_model_training: Whether this guardrail allows free endpoints that train on request data.
+        :param enable_paid_model_training: Whether this guardrail allows paid endpoints that train on request data.
         :param enforce_zdr: Deprecated. Use enforce_zdr_anthropic, enforce_zdr_openai, enforce_zdr_google, enforce_zdr_xai, and enforce_zdr_other instead. When provided, its value is copied into any of those per-provider fields that are not explicitly specified on the request.
         :param enforce_zdr_anthropic: Whether to enforce zero data retention for Anthropic models. Falls back to enforce_zdr when not provided.
         :param enforce_zdr_google: Whether to enforce zero data retention for Google models. Falls back to enforce_zdr when not provided.
@@ -1617,6 +1650,9 @@ class Guardrails(BaseSDK):
                     OptionalNullable[List[components.ContentFilterEntry]],
                 ),
                 description=description,
+                enable_free_model_publication=enable_free_model_publication,
+                enable_free_model_training=enable_free_model_training,
+                enable_paid_model_training=enable_paid_model_training,
                 enforce_zdr=enforce_zdr,
                 enforce_zdr_anthropic=enforce_zdr_anthropic,
                 enforce_zdr_google=enforce_zdr_google,
