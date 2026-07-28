@@ -301,11 +301,13 @@ if TYPE_CHECKING:
     from .apprankingsresponse import AppRankingsResponse, AppRankingsResponseTypedDict
     from .autobetarouterplugin import (
         AutoBetaRouterPlugin,
+        AutoBetaRouterPluginCostTier,
         AutoBetaRouterPluginID,
         AutoBetaRouterPluginTypedDict,
     )
     from .autorouterplugin import (
         AutoRouterPlugin,
+        AutoRouterPluginCostTier,
         AutoRouterPluginID,
         AutoRouterPluginTypedDict,
     )
@@ -3112,9 +3114,11 @@ __all__ = [
     "AudioURL",
     "AudioURLTypedDict",
     "AutoBetaRouterPlugin",
+    "AutoBetaRouterPluginCostTier",
     "AutoBetaRouterPluginID",
     "AutoBetaRouterPluginTypedDict",
     "AutoRouterPlugin",
+    "AutoRouterPluginCostTier",
     "AutoRouterPluginID",
     "AutoRouterPluginTypedDict",
     "BYOKKey",
@@ -5235,9 +5239,11 @@ _dynamic_imports: dict[str, str] = {
     "AppRankingsResponse": ".apprankingsresponse",
     "AppRankingsResponseTypedDict": ".apprankingsresponse",
     "AutoBetaRouterPlugin": ".autobetarouterplugin",
+    "AutoBetaRouterPluginCostTier": ".autobetarouterplugin",
     "AutoBetaRouterPluginID": ".autobetarouterplugin",
     "AutoBetaRouterPluginTypedDict": ".autobetarouterplugin",
     "AutoRouterPlugin": ".autorouterplugin",
+    "AutoRouterPluginCostTier": ".autorouterplugin",
     "AutoRouterPluginID": ".autorouterplugin",
     "AutoRouterPluginTypedDict": ".autorouterplugin",
     "BadGatewayResponseErrorData": ".badgatewayresponseerrordata",
