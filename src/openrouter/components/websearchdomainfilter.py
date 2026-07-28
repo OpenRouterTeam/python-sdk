@@ -15,18 +15,25 @@ from typing_extensions import NotRequired, TypedDict
 
 class WebSearchDomainFilterTypedDict(TypedDict):
     allowed_domains: NotRequired[Nullable[List[str]]]
+    blocked_domains: NotRequired[Nullable[List[str]]]
     excluded_domains: NotRequired[Nullable[List[str]]]
 
 
 class WebSearchDomainFilter(BaseModel):
     allowed_domains: OptionalNullable[List[str]] = UNSET
 
+    blocked_domains: OptionalNullable[List[str]] = UNSET
+
     excluded_domains: OptionalNullable[List[str]] = UNSET
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["allowed_domains", "excluded_domains"])
-        nullable_fields = set(["allowed_domains", "excluded_domains"])
+        optional_fields = set(
+            ["allowed_domains", "blocked_domains", "excluded_domains"]
+        )
+        nullable_fields = set(
+            ["allowed_domains", "blocked_domains", "excluded_domains"]
+        )
         serialized = handler(self)
         m = {}
 

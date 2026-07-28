@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c48cf606-fb42-4a45-9c23-8f0555307828
 management:
-  docChecksum: ef196b7b8b17b8af9ade078f1eeee2c0
+  docChecksum: a85cf9e0f5d8d33150fd6c4f7f022a72
   docVersion: 1.0.0
   speakeasyVersion: 1.787.0
   generationVersion: 2.914.0
-  releaseVersion: 1.1.6
-  configChecksum: 548cc80ca457bf3455cd71e3bbab74fd
+  releaseVersion: 1.1.7
+  configChecksum: c55f72f8fc5fe60111dcf6db8bb475e4
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
 persistentEdits:
-  generation_id: d3020812-3cc9-4147-8689-da5e4d3132ef
-  pristine_commit_hash: 7f67540f77f8090772e6db753cd4c228655b6ab0
-  pristine_tree_hash: 65857091513cf2e3a4deba682803a4d00a6ffc27
+  generation_id: 73b125b7-861d-4ed7-b039-c59035d09a09
+  pristine_commit_hash: e85aaafee4cd2175cf7eb0b15e7b0169d76a4913
+  pristine_tree_hash: 2de837cd786af70349c7ad77c6c59554a1b4f1c0
 features:
   python:
     acceptHeaders: 3.0.0
@@ -1178,8 +1178,8 @@ trackedFiles:
     pristine_git_object: 11d6c22059efcf4e3b0d6b15b39a67678adc7a4b
   docs/components/chatwebsearchshorthand.mdx:
     id: 40f0c0a47ef4
-    last_write_checksum: sha1:70479a0b9c1972263715bdf48a6b24dea2a0f1a5
-    pristine_git_object: 0ddc2d3421f5f808c09c8c1d721d3ee347e2de38
+    last_write_checksum: sha1:ad81bf3478b4f9f7a2c261258e361f73ce621fa4
+    pristine_git_object: 3bd2348d4bda43b0d1157b6f5523666754aa1fb5
   docs/components/chatwebsearchshorthandtype.mdx:
     id: ce16c0139963
     last_write_checksum: sha1:1637ce5dac9fc9c87df3793d46a4eff33282e0a3
@@ -2598,8 +2598,8 @@ trackedFiles:
     pristine_git_object: 63991d9ba8aedd15e34bdc73c8f99fbdcda2d037
   docs/components/legacywebsearchservertool.mdx:
     id: 0b47ff5dd0c4
-    last_write_checksum: sha1:afabfb572c01159fba046a3743982ff2209df8ef
-    pristine_git_object: 004025a7d9377b7781cfe0f05a163b7a810dcca2
+    last_write_checksum: sha1:052167b691dabe51ac07c9a7c5377005e01f59a2
+    pristine_git_object: b7073786f83c5e1e66342aff13924837658df723
   docs/components/legacywebsearchservertooltype.mdx:
     id: 192fa7358f3b
     last_write_checksum: sha1:c82facbab1f9b4f53e06a6e3986b886f2a9b9b00
@@ -4002,16 +4002,16 @@ trackedFiles:
     pristine_git_object: 56d189d99021af45f7fa6fb143af33d7d08cedcb
   docs/components/preview20250311websearchservertool.mdx:
     id: aeecb65a50e0
-    last_write_checksum: sha1:ef24b4b2ec4d2860e80e5fb3d1c6f73dd2c97945
-    pristine_git_object: d734b67ee2937717d0758e70ff7cf0c9e6ed88de
+    last_write_checksum: sha1:f778c999aee30436fe19d5718949df949b812dbf
+    pristine_git_object: ef9b4c5ad08274dfbddc534c4511074c1f84cf7d
   docs/components/preview20250311websearchservertooltype.mdx:
     id: cedcfeda38d6
     last_write_checksum: sha1:f7ac2913cc8c24d851c06d02c06742f9fe435084
     pristine_git_object: 3669d05ce38327fa9b3d9a8c66c1de208a5f30e2
   docs/components/previewwebsearchservertool.mdx:
     id: 2695e6e2fdfb
-    last_write_checksum: sha1:46ea9605eb3d8d7052a57684b86f686c2e520dfb
-    pristine_git_object: df18b19f02904491741e59c2c762b441bd9f7761
+    last_write_checksum: sha1:e58226ef3bf42fbecdbbaed6577b5eb3b0661952
+    pristine_git_object: adbba6fbe7961a8213451bdd9780fdc6e1445fe3
   docs/components/previewwebsearchservertooltype.mdx:
     id: 4b6373295164
     last_write_checksum: sha1:b28bae247d5a91d62f9be9877cd6f437628be49e
@@ -5282,12 +5282,12 @@ trackedFiles:
     pristine_git_object: 6453f10f1843521ab57609e00cea4459984d565b
   docs/components/websearchconfig.mdx:
     id: 6d343d63543d
-    last_write_checksum: sha1:390164276ab8f4e4dea9e282f16e9c6b4f03a631
-    pristine_git_object: c748e3b28ba3d4ff3972472e712dfb808c2aee52
+    last_write_checksum: sha1:1b57dd852a7dd0321b82fe08dd965ade7501eb49
+    pristine_git_object: d7fecd7b2b02da6a0373ea88c089c5047f7b651d
   docs/components/websearchdomainfilter.mdx:
     id: e6aef0d8853a
-    last_write_checksum: sha1:e537f3dea8da557bc1a96ac339099088041ff5ad
-    pristine_git_object: 7f963cd91692d20ac4615c5300d332b19ec832c0
+    last_write_checksum: sha1:3f5103c40e44f2a6d9d11052e6f5dc88284c4fca
+    pristine_git_object: de20da27508098029e535331d9002f475dbbe7da
   docs/components/websearchengine.mdx:
     id: 2000e63cfaeb
     last_write_checksum: sha1:495298bf169acc6e0adb86a97c5e412d371b1425
@@ -5310,12 +5310,12 @@ trackedFiles:
     pristine_git_object: 35edaa6c73e1f7c3731d7d5005897f72ca4ed496
   docs/components/websearchservertool.mdx:
     id: cf9994f5aba9
-    last_write_checksum: sha1:17ca2a930ebb7d80949f89708a35136bb1623bfb
-    pristine_git_object: c9d9926f40fafd2fb63cf977530a3291e6fb3947
+    last_write_checksum: sha1:8c213f86650026608aeeb96d587ae0c67277149d
+    pristine_git_object: 30f7dd631fadeed7e891f9743f642cc7b5711676
   docs/components/websearchservertoolconfig.mdx:
     id: bb335e5d49e5
-    last_write_checksum: sha1:3077af6ed4e4b3b657a6168e305f2f6cc3bccf22
-    pristine_git_object: 90e572e0a0a41517bb5e7952ff3555ec185cc4bd
+    last_write_checksum: sha1:665afb30cb0c42ed3fd5498afadb416390ecf51a
+    pristine_git_object: 373a48eeae93dc54bf79fabca0c5e9cfe3307507
   docs/components/websearchservertoolopenrouter.mdx:
     id: d1e3cf613d26
     last_write_checksum: sha1:014a351e3ba7d11d72eeb622e088215abdf7d4eb
@@ -6794,8 +6794,8 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:aee065f71cf68ab4dba5b2afb46b13310977d6ff
-    pristine_git_object: 921465df249ebeeb6ba51bacfa08ad314f51c5d5
+    last_write_checksum: sha1:0d371612f67d3aa230d83b60acf29182e31b9646
+    pristine_git_object: d10bd26cf565d2937a50b6496001281de5a4789b
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77f44b60b98bc126557ec27391f91dfba764bb54
@@ -6822,8 +6822,8 @@ trackedFiles:
     pristine_git_object: 86713cfea633e09d33b3d4e65281071fe20e6137
   src/openrouter/_version.py:
     id: d8d15ad6c586
-    last_write_checksum: sha1:40326bee126ce6a2f05bb8a5d8e6be79bfba6a20
-    pristine_git_object: bf343337191f635de7b4b2e0c7dfb8c2486ee0b8
+    last_write_checksum: sha1:91f6031c7d0fbc4dce68f0a099ba371446291d38
+    pristine_git_object: 2894c2f7345f3d9ffab296784bf8a1568f3e1467
   src/openrouter/analytics.py:
     id: cb406b5aaabb
     last_write_checksum: sha1:9e709b71dd0611056dc0cec6150b578defe32841
@@ -7398,8 +7398,8 @@ trackedFiles:
     pristine_git_object: d5ebd465c8d843f4bc1f0763d136d31960ab2efa
   src/openrouter/components/chatwebsearchshorthand.py:
     id: 13091b97a3f6
-    last_write_checksum: sha1:0981957b40db4dcf14b2f267043b71b940d50fd5
-    pristine_git_object: 485d31ac6fdb519bfe199a985f2280c10405449c
+    last_write_checksum: sha1:802cd0682a84f95a08a695a5f4d6769280b52c6b
+    pristine_git_object: 9f6dcda909dcaec4511ecd0cc1e51b36e086c7c6
   src/openrouter/components/codeinterpreterservertool.py:
     id: a72c520afbf9
     last_write_checksum: sha1:89e529b98c4b42a9d573f9234ee44f702e8bfcb7
@@ -9070,12 +9070,12 @@ trackedFiles:
     pristine_git_object: adceee794cf8135f5db3b2d741dc6e4de9c4e968
   src/openrouter/components/websearchconfig.py:
     id: 3884d9509e8c
-    last_write_checksum: sha1:71c23fc4151ddf9535d41f432a5cfbc91a0daf04
-    pristine_git_object: c45df2dc89258098abaf6d2cd016e88fbc76ee7d
+    last_write_checksum: sha1:3c77abecb2202a8b47fffb10a4c806353123f1f9
+    pristine_git_object: 9ed297456c30c9f033c000480e71608e1b45452b
   src/openrouter/components/websearchdomainfilter.py:
     id: 4a7307ed2ba6
-    last_write_checksum: sha1:8754e3ef0b0c92fd72db36bbebada0d4fedb079c
-    pristine_git_object: 20bd1b8097661625894b73fb16eccbe5451e27f5
+    last_write_checksum: sha1:15246ac9135fd303e0522b8b570f27254b90495d
+    pristine_git_object: ecc3f66476f8cb5a0de8e9fc1e260f141b58b338
   src/openrouter/components/websearchengine.py:
     id: 9e028088afc7
     last_write_checksum: sha1:cd81a891b0304187d5abbb7e9972543333e51bf8
@@ -9098,8 +9098,8 @@ trackedFiles:
     pristine_git_object: cac816de64f204cda6c706eee57f0d72b8b860eb
   src/openrouter/components/websearchservertoolconfig.py:
     id: ebdaa99d47da
-    last_write_checksum: sha1:1541e1aa4a48ba9b63439e0eccd27cb1ea2ecee3
-    pristine_git_object: d195f79ad2a7ac53fc2f755ca1be4728dd11eb89
+    last_write_checksum: sha1:fd899b9014ee44193c66ce5e019db53136023f6b
+    pristine_git_object: a22eb95a6c73c2b67920109122d703b2c537bee3
   src/openrouter/components/websearchsource.py:
     id: a1fe81b68a7b
     last_write_checksum: sha1:fa30e5813682231d742fb6861f0fe92f655c8e81
@@ -11329,7 +11329,4 @@ examples:
         "500":
           application/json: {"error": {"code": 500, "message": "Internal Server Error"}}
 examplesVersion: 1.0.2
-releaseNotes: |
-  ## Python SDK Changes:
-  * `open_router.beta.responses.send()`:  `response.[].data.union(response.fusion_call.analysis.in_progress).analyst_model` **Added**
-  * `open_router.responses.send()`:  `response.[].data.union(response.fusion_call.analysis.in_progress).analyst_model` **Added**
+releaseNotes: "## Python SDK Changes:\n* `open_router.beta.responses.send()`: \n  *  `request.input.union(Array<>)[].union(AdditionalToolsItem).tools[].union(Legacy_WebSearchServerTool).filters.blocked_domains` **Added**\n  *  `response` **Changed**\n* `open_router.presets.create_presets_responses()`: \n  *  `request.input.union(Array<>)[].union(AdditionalToolsItem).tools[].union(Preview_WebSearchServerTool).filters.blocked_domains` **Added**\n* `open_router.responses.send()`: \n  *  `request.input.union(Array<>)[].union(AdditionalToolsItem).tools[].union(Preview_20250311_WebSearchServerTool).filters.blocked_domains` **Added**\n  *  `response` **Changed**\n"
