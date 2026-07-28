@@ -2,8 +2,9 @@
 
 from __future__ import annotations
 from openrouter.types import BaseModel
+import pydantic
 from typing import Literal
-from typing_extensions import TypedDict
+from typing_extensions import Annotated, TypedDict
 
 
 FusionCallAnalysisInProgressEventType = Literal[
@@ -12,21 +13,33 @@ FusionCallAnalysisInProgressEventType = Literal[
 
 
 class FusionCallAnalysisInProgressEventTypedDict(TypedDict):
-    r"""Emitted when the fusion judge starts producing the structured analysis."""
+    r"""Emitted when the fusion analyst starts producing the structured analysis."""
 
+    analyst_model: str
+    r"""Slug of the model producing the structured analysis."""
     item_id: str
     judge_model: str
+    r"""Deprecated alias of `analyst_model`, kept so existing consumers keep working. Always carries the same value. Use `analyst_model`."""
     output_index: int
     sequence_number: int
     type: FusionCallAnalysisInProgressEventType
 
 
 class FusionCallAnalysisInProgressEvent(BaseModel):
-    r"""Emitted when the fusion judge starts producing the structured analysis."""
+    r"""Emitted when the fusion analyst starts producing the structured analysis."""
+
+    analyst_model: str
+    r"""Slug of the model producing the structured analysis."""
 
     item_id: str
 
-    judge_model: str
+    judge_model: Annotated[
+        str,
+        pydantic.Field(
+            deprecated="warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+        ),
+    ]
+    r"""Deprecated alias of `analyst_model`, kept so existing consumers keep working. Always carries the same value. Use `analyst_model`."""
 
     output_index: int
 

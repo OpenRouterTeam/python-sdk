@@ -11,7 +11,7 @@ class FusionSourceTypedDict(TypedDict):
     title: str
     r"""Title of the retrieved web page."""
     url: str
-    r"""URL of the web page a panel or the judge retrieved during the run."""
+    r"""URL of the web page a panel or the analyst retrieved during the run."""
 
 
 class FusionSource(BaseModel):
@@ -21,4 +21,4 @@ class FusionSource(BaseModel):
     r"""Title of the retrieved web page."""
 
     url: str
-    r"""URL of the web page a panel or the judge retrieved during the run."""
+    r"""URL of the web page a panel or the analyst retrieved during the run."""

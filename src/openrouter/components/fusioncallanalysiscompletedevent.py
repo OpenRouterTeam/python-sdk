@@ -13,10 +13,10 @@ FusionCallAnalysisCompletedEventType = Literal[
 
 
 class FusionCallAnalysisCompletedEventTypedDict(TypedDict):
-    r"""Emitted when the fusion judge completes with the structured analysis."""
+    r"""Emitted when the fusion analyst completes with the structured analysis."""
 
     analysis: FusionAnalysisResultTypedDict
-    r"""Structured analysis produced by the fusion judge model."""
+    r"""Structured analysis produced by the fusion analyst model."""
     item_id: str
     output_index: int
     sequence_number: int
@@ -24,10 +24,10 @@ class FusionCallAnalysisCompletedEventTypedDict(TypedDict):
 
 
 class FusionCallAnalysisCompletedEvent(BaseModel):
-    r"""Emitted when the fusion judge completes with the structured analysis."""
+    r"""Emitted when the fusion analyst completes with the structured analysis."""
 
     analysis: FusionAnalysisResult
-    r"""Structured analysis produced by the fusion judge model."""
+    r"""Structured analysis produced by the fusion analyst model."""
 
     item_id: str
 

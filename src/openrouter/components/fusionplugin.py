@@ -18,7 +18,7 @@ PresetEnum = Union[
     ],
     UnrecognizedStr,
 ]
-r"""A curated OpenRouter fusion preset (slugs follow `<task>-<tier>`, e.g. `general-high`). Expands server-side into the preset's analysis_models panel and judge model, so callers never name individual models. Explicitly provided `analysis_models` / `model` take precedence."""
+r"""A curated OpenRouter fusion preset (slugs follow `<task>-<tier>`, e.g. `general-high`). Expands server-side into the preset's analysis_models panel and analyst model, so callers never name individual models. Explicitly provided `analysis_models` / `model` take precedence."""
 
 
 Parameters2TypedDict = TypeAliasType("Parameters2TypedDict", Union[str, float, bool])
@@ -87,39 +87,39 @@ class FusionPluginTool(BaseModel):
 class FusionPluginTypedDict(TypedDict):
     id: FusionPluginID
     analysis_models: NotRequired[List[str]]
-    r"""Slugs of models to run in parallel as the \"expert panel\" the judge analyzes. Each model receives the same user prompt with web_search + web_fetch enabled. Capped at 8 models to bound cost amplification. When omitted, defaults to the Quality preset from the /labs/fusion UI (~anthropic/claude-opus-latest, ~openai/gpt-latest, ~google/gemini-pro-latest)."""
+    r"""Slugs of models to run in parallel as the \"expert panel\" the analyst analyzes. Each model receives the same user prompt with web_search + web_fetch enabled. Capped at 8 models to bound cost amplification. When omitted, defaults to the Quality preset from the /labs/fusion UI (~anthropic/claude-opus-latest, ~openai/gpt-latest, ~google/gemini-pro-latest)."""
     enabled: NotRequired[bool]
     r"""Set to false to disable the fusion plugin for this request. Defaults to true."""
     max_tool_calls: NotRequired[int]
-    r"""Maximum number of tool-calling steps each panelist (analysis model) and the judge model may take during their agentic web-research loop. Models with web_search/web_fetch enabled iterate until they produce a text response or hit this ceiling. Defaults to 8. Capped at 16."""
+    r"""Maximum number of tool-calling steps each panelist (analysis model) and the analyst model may take during their agentic web-research loop. Models with web_search/web_fetch enabled iterate until they produce a text response or hit this ceiling. Defaults to 8. Capped at 16."""
     model: NotRequired[str]
-    r"""Slug of the model that performs both the judge step (with web_search + web_fetch) and the final synthesis. When omitted, defaults to the first model in the Quality preset."""
+    r"""Slug of the model that performs both the analyst step (with web_search + web_fetch) and the final synthesis. When omitted, defaults to the first model in the Quality preset."""
     preset: NotRequired[PresetEnum]
-    r"""A curated OpenRouter fusion preset (slugs follow `<task>-<tier>`, e.g. `general-high`). Expands server-side into the preset's analysis_models panel and judge model, so callers never name individual models. Explicitly provided `analysis_models` / `model` take precedence."""
+    r"""A curated OpenRouter fusion preset (slugs follow `<task>-<tier>`, e.g. `general-high`). Expands server-side into the preset's analysis_models panel and analyst model, so callers never name individual models. Explicitly provided `analysis_models` / `model` take precedence."""
     tools: NotRequired[List[FusionPluginToolTypedDict]]
-    r"""Server tools available to panelist and judge inner calls. Each entry uses the same `{ type, parameters? }` shorthand as the outer Chat Completions request. When omitted, defaults to `[{ type: \"openrouter:web_search\" }, { type: \"openrouter:web_fetch\" }]`. Pass an empty array to disable tools entirely (panelists answer from parametric knowledge only)."""
+    r"""Server tools available to panelist and analyst inner calls. Each entry uses the same `{ type, parameters? }` shorthand as the outer Chat Completions request. When omitted, defaults to `[{ type: \"openrouter:web_search\" }, { type: \"openrouter:web_fetch\" }]`. Pass an empty array to disable tools entirely (panelists answer from parametric knowledge only)."""
 
 
 class FusionPlugin(BaseModel):
     id: FusionPluginID
 
     analysis_models: Optional[List[str]] = None
-    r"""Slugs of models to run in parallel as the \"expert panel\" the judge analyzes. Each model receives the same user prompt with web_search + web_fetch enabled. Capped at 8 models to bound cost amplification. When omitted, defaults to the Quality preset from the /labs/fusion UI (~anthropic/claude-opus-latest, ~openai/gpt-latest, ~google/gemini-pro-latest)."""
+    r"""Slugs of models to run in parallel as the \"expert panel\" the analyst analyzes. Each model receives the same user prompt with web_search + web_fetch enabled. Capped at 8 models to bound cost amplification. When omitted, defaults to the Quality preset from the /labs/fusion UI (~anthropic/claude-opus-latest, ~openai/gpt-latest, ~google/gemini-pro-latest)."""
 
     enabled: Optional[bool] = None
     r"""Set to false to disable the fusion plugin for this request. Defaults to true."""
 
     max_tool_calls: Optional[int] = None
-    r"""Maximum number of tool-calling steps each panelist (analysis model) and the judge model may take during their agentic web-research loop. Models with web_search/web_fetch enabled iterate until they produce a text response or hit this ceiling. Defaults to 8. Capped at 16."""
+    r"""Maximum number of tool-calling steps each panelist (analysis model) and the analyst model may take during their agentic web-research loop. Models with web_search/web_fetch enabled iterate until they produce a text response or hit this ceiling. Defaults to 8. Capped at 16."""
 
     model: Optional[str] = None
-    r"""Slug of the model that performs both the judge step (with web_search + web_fetch) and the final synthesis. When omitted, defaults to the first model in the Quality preset."""
+    r"""Slug of the model that performs both the analyst step (with web_search + web_fetch) and the final synthesis. When omitted, defaults to the first model in the Quality preset."""
 
     preset: Optional[PresetEnum] = None
-    r"""A curated OpenRouter fusion preset (slugs follow `<task>-<tier>`, e.g. `general-high`). Expands server-side into the preset's analysis_models panel and judge model, so callers never name individual models. Explicitly provided `analysis_models` / `model` take precedence."""
+    r"""A curated OpenRouter fusion preset (slugs follow `<task>-<tier>`, e.g. `general-high`). Expands server-side into the preset's analysis_models panel and analyst model, so callers never name individual models. Explicitly provided `analysis_models` / `model` take precedence."""
 
     tools: Optional[List[FusionPluginTool]] = None
-    r"""Server tools available to panelist and judge inner calls. Each entry uses the same `{ type, parameters? }` shorthand as the outer Chat Completions request. When omitted, defaults to `[{ type: \"openrouter:web_search\" }, { type: \"openrouter:web_fetch\" }]`. Pass an empty array to disable tools entirely (panelists answer from parametric knowledge only)."""
+    r"""Server tools available to panelist and analyst inner calls. Each entry uses the same `{ type, parameters? }` shorthand as the outer Chat Completions request. When omitted, defaults to `[{ type: \"openrouter:web_search\" }, { type: \"openrouter:web_fetch\" }]`. Pass an empty array to disable tools entirely (panelists answer from parametric knowledge only)."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
