@@ -51,7 +51,7 @@ class UniqueInsight(BaseModel):
 
 
 class FusionAnalysisResultTypedDict(TypedDict):
-    r"""Structured analysis produced by the fusion judge model."""
+    r"""Structured analysis produced by the fusion analyst model."""
 
     blind_spots: List[str]
     consensus: List[str]
@@ -61,7 +61,7 @@ class FusionAnalysisResultTypedDict(TypedDict):
 
 
 class FusionAnalysisResult(BaseModel):
-    r"""Structured analysis produced by the fusion judge model."""
+    r"""Structured analysis produced by the fusion analyst model."""
 
     blind_spots: List[str]
 

@@ -23,26 +23,26 @@ FusionServerToolConfigEffort = Union[
     ],
     UnrecognizedStr,
 ]
-r"""Reasoning effort level for panelist and judge inner calls."""
+r"""Reasoning effort level for panelist and analyst inner calls."""
 
 
 class FusionServerToolConfigReasoningTypedDict(TypedDict):
-    r"""Reasoning configuration forwarded to panelist and judge inner calls. Use this to control reasoning effort and token budget for models that support extended thinking."""
+    r"""Reasoning configuration forwarded to panelist and analyst inner calls. Use this to control reasoning effort and token budget for models that support extended thinking."""
 
     effort: NotRequired[FusionServerToolConfigEffort]
-    r"""Reasoning effort level for panelist and judge inner calls."""
+    r"""Reasoning effort level for panelist and analyst inner calls."""
     max_tokens: NotRequired[int]
-    r"""Maximum number of reasoning tokens each panelist and judge model may use. Helps bound cost when models allocate too much budget to chain-of-thought."""
+    r"""Maximum number of reasoning tokens each panelist and analyst model may use. Helps bound cost when models allocate too much budget to chain-of-thought."""
 
 
 class FusionServerToolConfigReasoning(BaseModel):
-    r"""Reasoning configuration forwarded to panelist and judge inner calls. Use this to control reasoning effort and token budget for models that support extended thinking."""
+    r"""Reasoning configuration forwarded to panelist and analyst inner calls. Use this to control reasoning effort and token budget for models that support extended thinking."""
 
     effort: Optional[FusionServerToolConfigEffort] = None
-    r"""Reasoning effort level for panelist and judge inner calls."""
+    r"""Reasoning effort level for panelist and analyst inner calls."""
 
     max_tokens: Optional[int] = None
-    r"""Maximum number of reasoning tokens each panelist and judge model may use. Helps bound cost when models allocate too much budget to chain-of-thought."""
+    r"""Maximum number of reasoning tokens each panelist and analyst model may use. Helps bound cost when models allocate too much budget to chain-of-thought."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
@@ -96,49 +96,49 @@ class FusionServerToolConfigTypedDict(TypedDict):
     r"""Configuration for the openrouter:fusion server tool."""
 
     analysis_models: NotRequired[List[str]]
-    r"""Slugs of models to run in parallel as the analysis panel. Each model receives the user prompt with openrouter:web_search and openrouter:web_fetch enabled, then a judge model summarizes the collective output into structured analysis JSON. Capped at 8 models to bound cost amplification. Defaults to the Quality preset from /labs/fusion."""
+    r"""Slugs of models to run in parallel as the analysis panel. Each model receives the user prompt with openrouter:web_search and openrouter:web_fetch enabled, then an analyst model summarizes the collective output into structured analysis JSON. Capped at 8 models to bound cost amplification. Defaults to the Quality preset from /labs/fusion."""
     cache_control: NotRequired[AnthropicCacheControlDirectiveTypedDict]
     r"""Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. When set on an individual content block, it marks an explicit cache breakpoint; block-level markers also work on OpenAI models that support explicit prompt caching — OpenRouter converts them to the provider's native format."""
     max_completion_tokens: NotRequired[int]
-    r"""Maximum number of output tokens (including reasoning tokens) each panelist and the judge model may produce per inner call. Controls the total output budget so reasoning-heavy models like GPT-5.5 do not exhaust their token allowance before producing visible text. When omitted, panelists default to 32000 and the judge to 20000."""
+    r"""Maximum number of output tokens (including reasoning tokens) each panelist and the analyst model may produce per inner call. Controls the total output budget so reasoning-heavy models like GPT-5.5 do not exhaust their token allowance before producing visible text. When omitted, panelists default to 32000 and the analyst to 20000."""
     max_tool_calls: NotRequired[int]
-    r"""Maximum number of tool-calling steps each panelist (analysis model) and the judge model may take during their agentic web-research loop. Models with web_search/web_fetch enabled iterate until they produce a text response or hit this ceiling. Defaults to 8. Capped at 16."""
+    r"""Maximum number of tool-calling steps each panelist (analysis model) and the analyst model may take during their agentic web-research loop. Models with web_search/web_fetch enabled iterate until they produce a text response or hit this ceiling. Defaults to 8. Capped at 16."""
     model: NotRequired[str]
-    r"""Slug of the judge model that produces the structured analysis JSON. Defaults to the model used in the outer API request."""
+    r"""Slug of the analyst model that produces the structured analysis JSON. Defaults to the model used in the outer API request."""
     reasoning: NotRequired[FusionServerToolConfigReasoningTypedDict]
-    r"""Reasoning configuration forwarded to panelist and judge inner calls. Use this to control reasoning effort and token budget for models that support extended thinking."""
+    r"""Reasoning configuration forwarded to panelist and analyst inner calls. Use this to control reasoning effort and token budget for models that support extended thinking."""
     temperature: NotRequired[float]
-    r"""Temperature forwarded to panelist inner calls. The judge always runs at temperature 0 regardless of this value. When omitted, the provider's default applies."""
+    r"""Temperature forwarded to panelist inner calls. The analyst always runs at temperature 0 regardless of this value. When omitted, the provider's default applies."""
     tools: NotRequired[List[FusionServerToolConfigToolTypedDict]]
-    r"""Server tools available to panelist and judge inner calls. Each entry uses the same `{ type, parameters? }` shorthand as the outer Chat Completions request. When omitted, defaults to `[{ type: \"openrouter:web_search\" }, { type: \"openrouter:web_fetch\" }]`. Pass an empty array to disable tools entirely (panelists answer from parametric knowledge only)."""
+    r"""Server tools available to panelist and analyst inner calls. Each entry uses the same `{ type, parameters? }` shorthand as the outer Chat Completions request. When omitted, defaults to `[{ type: \"openrouter:web_search\" }, { type: \"openrouter:web_fetch\" }]`. Pass an empty array to disable tools entirely (panelists answer from parametric knowledge only)."""
 
 
 class FusionServerToolConfig(BaseModel):
     r"""Configuration for the openrouter:fusion server tool."""
 
     analysis_models: Optional[List[str]] = None
-    r"""Slugs of models to run in parallel as the analysis panel. Each model receives the user prompt with openrouter:web_search and openrouter:web_fetch enabled, then a judge model summarizes the collective output into structured analysis JSON. Capped at 8 models to bound cost amplification. Defaults to the Quality preset from /labs/fusion."""
+    r"""Slugs of models to run in parallel as the analysis panel. Each model receives the user prompt with openrouter:web_search and openrouter:web_fetch enabled, then an analyst model summarizes the collective output into structured analysis JSON. Capped at 8 models to bound cost amplification. Defaults to the Quality preset from /labs/fusion."""
 
     cache_control: Optional[AnthropicCacheControlDirective] = None
     r"""Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. When set on an individual content block, it marks an explicit cache breakpoint; block-level markers also work on OpenAI models that support explicit prompt caching — OpenRouter converts them to the provider's native format."""
 
     max_completion_tokens: Optional[int] = None
-    r"""Maximum number of output tokens (including reasoning tokens) each panelist and the judge model may produce per inner call. Controls the total output budget so reasoning-heavy models like GPT-5.5 do not exhaust their token allowance before producing visible text. When omitted, panelists default to 32000 and the judge to 20000."""
+    r"""Maximum number of output tokens (including reasoning tokens) each panelist and the analyst model may produce per inner call. Controls the total output budget so reasoning-heavy models like GPT-5.5 do not exhaust their token allowance before producing visible text. When omitted, panelists default to 32000 and the analyst to 20000."""
 
     max_tool_calls: Optional[int] = None
-    r"""Maximum number of tool-calling steps each panelist (analysis model) and the judge model may take during their agentic web-research loop. Models with web_search/web_fetch enabled iterate until they produce a text response or hit this ceiling. Defaults to 8. Capped at 16."""
+    r"""Maximum number of tool-calling steps each panelist (analysis model) and the analyst model may take during their agentic web-research loop. Models with web_search/web_fetch enabled iterate until they produce a text response or hit this ceiling. Defaults to 8. Capped at 16."""
 
     model: Optional[str] = None
-    r"""Slug of the judge model that produces the structured analysis JSON. Defaults to the model used in the outer API request."""
+    r"""Slug of the analyst model that produces the structured analysis JSON. Defaults to the model used in the outer API request."""
 
     reasoning: Optional[FusionServerToolConfigReasoning] = None
-    r"""Reasoning configuration forwarded to panelist and judge inner calls. Use this to control reasoning effort and token budget for models that support extended thinking."""
+    r"""Reasoning configuration forwarded to panelist and analyst inner calls. Use this to control reasoning effort and token budget for models that support extended thinking."""
 
     temperature: Optional[float] = None
-    r"""Temperature forwarded to panelist inner calls. The judge always runs at temperature 0 regardless of this value. When omitted, the provider's default applies."""
+    r"""Temperature forwarded to panelist inner calls. The analyst always runs at temperature 0 regardless of this value. When omitted, the provider's default applies."""
 
     tools: Optional[List[FusionServerToolConfigTool]] = None
-    r"""Server tools available to panelist and judge inner calls. Each entry uses the same `{ type, parameters? }` shorthand as the outer Chat Completions request. When omitted, defaults to `[{ type: \"openrouter:web_search\" }, { type: \"openrouter:web_fetch\" }]`. Pass an empty array to disable tools entirely (panelists answer from parametric knowledge only)."""
+    r"""Server tools available to panelist and analyst inner calls. Each entry uses the same `{ type, parameters? }` shorthand as the outer Chat Completions request. When omitted, defaults to `[{ type: \"openrouter:web_search\" }, { type: \"openrouter:web_fetch\" }]`. Pass an empty array to disable tools entirely (panelists answer from parametric knowledge only)."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

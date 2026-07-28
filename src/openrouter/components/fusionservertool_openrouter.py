@@ -15,7 +15,7 @@ FusionServerToolOpenRouterType = Literal["openrouter:fusion",]
 
 
 class FusionServerToolOpenRouterTypedDict(TypedDict):
-    r"""OpenRouter built-in server tool: fans out the user prompt to a panel of analysis models, then asks a judge model to summarize their collective output as structured JSON the outer model can synthesize from."""
+    r"""OpenRouter built-in server tool: fans out the user prompt to a panel of analysis models, then asks an analyst model to summarize their collective output as structured JSON the outer model can synthesize from."""
 
     type: FusionServerToolOpenRouterType
     parameters: NotRequired[FusionServerToolConfigTypedDict]
@@ -23,7 +23,7 @@ class FusionServerToolOpenRouterTypedDict(TypedDict):
 
 
 class FusionServerToolOpenRouter(BaseModel):
-    r"""OpenRouter built-in server tool: fans out the user prompt to a panel of analysis models, then asks a judge model to summarize their collective output as structured JSON the outer model can synthesize from."""
+    r"""OpenRouter built-in server tool: fans out the user prompt to a panel of analysis models, then asks an analyst model to summarize their collective output as structured JSON the outer model can synthesize from."""
 
     type: FusionServerToolOpenRouterType
 

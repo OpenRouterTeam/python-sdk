@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c48cf606-fb42-4a45-9c23-8f0555307828
 management:
-  docChecksum: 48d5a81172df7e47f0a05fd4a90ce217
+  docChecksum: ef196b7b8b17b8af9ade078f1eeee2c0
   docVersion: 1.0.0
   speakeasyVersion: 1.787.0
   generationVersion: 2.914.0
-  releaseVersion: 1.1.5
-  configChecksum: 366ee98787158293e8d90134db38bd17
+  releaseVersion: 1.1.6
+  configChecksum: 548cc80ca457bf3455cd71e3bbab74fd
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
 persistentEdits:
-  generation_id: c0de5ec0-83f9-4bc0-a0fc-b6923ac4f43d
-  pristine_commit_hash: c2a5bb7caed893bd0d62131d4d2e04db8a162db2
-  pristine_tree_hash: c37a7a6d463a342ca36da91f1ded0c85a852aa5f
+  generation_id: d3020812-3cc9-4147-8689-da5e4d3132ef
+  pristine_commit_hash: 7f67540f77f8090772e6db753cd4c228655b6ab0
+  pristine_tree_hash: 65857091513cf2e3a4deba682803a4d00a6ffc27
 features:
   python:
     acceptHeaders: 3.0.0
@@ -1950,20 +1950,20 @@ trackedFiles:
     pristine_git_object: eff3701c44c58f6c8a93badff21969b939089a4f
   docs/components/fusionanalysisresult.mdx:
     id: a3d19bd18149
-    last_write_checksum: sha1:07be09bbe40db29df2ab80183aca39136b575dcf
-    pristine_git_object: 461abd3405a1f3625b5aba440474f5b8f438e0b5
+    last_write_checksum: sha1:3fc83d03ab1cfe864d1a8206f8beab5bfeb05d74
+    pristine_git_object: 06562dd230f2ebd22ec17bb65da8d04afa23f272
   docs/components/fusioncallanalysiscompletedevent.mdx:
     id: c0bd92da771d
-    last_write_checksum: sha1:47e2810628a394ea1d0266e2e7454ad43f656f17
-    pristine_git_object: dc3640ff8add5ace3d6dd14a3edf1262556d6d22
+    last_write_checksum: sha1:860868c080c4158b6c1a9d7dd3b6bec0575ba64b
+    pristine_git_object: 7f295a8c0ee4ff220c2347b64183560c74f8cb2e
   docs/components/fusioncallanalysiscompletedeventtype.mdx:
     id: 6ea6b2bc49c5
     last_write_checksum: sha1:667bc54812dff48413bb3ebcb4144aa5de5202dd
     pristine_git_object: 897efa69c65c240777c2639958db44191cf6ccd1
   docs/components/fusioncallanalysisinprogressevent.mdx:
     id: f3845ebae84c
-    last_write_checksum: sha1:829d05a50b21a4b30b67a869624f1224fcc52e9a
-    pristine_git_object: cd16c26cae8bece70bb9cb566a6f16b63d4f4534
+    last_write_checksum: sha1:2246ae8154596f623013b80659182d820b3c88c0
+    pristine_git_object: 6538c8ffb1c3fa508dd66d572058c462a52aa932
   docs/components/fusioncallanalysisinprogresseventtype.mdx:
     id: dab80e9a7de4
     last_write_checksum: sha1:c9bb3b13718e05441f746c08f79d9cc15eeb04bf
@@ -2026,8 +2026,8 @@ trackedFiles:
     pristine_git_object: 7b7d7a350209a88f9a688d1fab6d88fc4754664e
   docs/components/fusionplugin.mdx:
     id: 91c7b4638c7e
-    last_write_checksum: sha1:d6cb2d143277157399b5c8560827b4e5f92c1931
-    pristine_git_object: 47df2cd777c8b157b4df2ff942b9af80b36dd697
+    last_write_checksum: sha1:2361b03ff5f2910737adf0b8faee2493a63a6fb1
+    pristine_git_object: 269960766fecb39f0ead44af2cb142548d8d73b1
   docs/components/fusionpluginid.mdx:
     id: 2b90bfd2d611
     last_write_checksum: sha1:8111a4424197eb86dfccedfdc798d1a2b5a1c39e
@@ -2038,32 +2038,32 @@ trackedFiles:
     pristine_git_object: 967c0e2abcf18d52589d674bdf45d0414050b71f
   docs/components/fusionservertoolconfig.mdx:
     id: 87976811b0c3
-    last_write_checksum: sha1:897a21e872f16b3da363410d17ff89473701343d
-    pristine_git_object: 745dc5599a9a96a9727a68292c5061d7dfac0ffa
+    last_write_checksum: sha1:9a167625bd084e1bcb317ec7b88b490c79490a3d
+    pristine_git_object: 00c2183f63a67622cb53109ca8e8887473e07b07
   docs/components/fusionservertoolconfigeffort.mdx:
     id: f5ce0fbc94aa
-    last_write_checksum: sha1:4ce09a069b4eeae41ac1531027cf97dc4139927f
-    pristine_git_object: 8ba9e2e9776f6f5ff13255a95514f68003ed066c
+    last_write_checksum: sha1:6cefaed8456c5ca47af14755dcfa0df67589f59a
+    pristine_git_object: be7c289f919977a5b8f0198d2ebdd0a948e89d15
   docs/components/fusionservertoolconfigreasoning.mdx:
     id: e2814e0ec2ce
-    last_write_checksum: sha1:2cce3523a6ece5ff53b99e7508e95283d69e5f51
-    pristine_git_object: af7105baa0ce972bfccbae84a2ec91ae50ae6333
+    last_write_checksum: sha1:154bbe0864c431765820b68ac7aea9cecb1fbbe2
+    pristine_git_object: 49dd617c5c79dbb25f38384669c3bca25f5eb855
   docs/components/fusionservertoolconfigtool.mdx:
     id: cb4b076ea8f1
     last_write_checksum: sha1:ce722d9d42cb5709d45aeb7566ab510ecc185cd3
     pristine_git_object: 486dbbd1c8e0033396fa9702034d52dc07ccdd23
   docs/components/fusionservertoolopenrouter.mdx:
     id: e90614058484
-    last_write_checksum: sha1:ca700c405e7a9cb2d5f10932cd1413b0192c8527
-    pristine_git_object: 6f4149fb710f4d73e562190483469ab7c79f84fc
+    last_write_checksum: sha1:baaa7834e297973623305f58dd8846fffb22bb5c
+    pristine_git_object: dd8444b46c802116fdbfb16a55b712c5cf1cdd15
   docs/components/fusionservertoolopenroutertype.mdx:
     id: da7e7bf8b425
     last_write_checksum: sha1:e3b47af2ce0438e276c4669ddbeb373dedc8cd07
     pristine_git_object: 51199c32af27a46659b1c3d5a48e5ba11912dca8
   docs/components/fusionsource.mdx:
     id: 9c98ab0aea5a
-    last_write_checksum: sha1:5718b311bbd7315cda6723e16da7f06eca0459f4
-    pristine_git_object: b305413e07a9922a150dfb23e65164f7d2166495
+    last_write_checksum: sha1:558bcf970e10b728252d8fab1f2e1a15b747b403
+    pristine_git_object: 384c9eac32dc42b655935f262e21ecd6d125dfa0
   docs/components/generationcontentdata.mdx:
     id: 030f8930b5df
     last_write_checksum: sha1:84792e91bcca8347a02d62672fa755bd7c607cbb
@@ -3590,8 +3590,8 @@ trackedFiles:
     pristine_git_object: 700af387aa2f0f827ef4775f69fbb3900b075899
   docs/components/outputfusionservertoolitem.mdx:
     id: bc7c73cc3100
-    last_write_checksum: sha1:53565a2c163e9aacdb4f786ef71fc65063b60137
-    pristine_git_object: 996340e483ed52e0faaa69bb38aded9bcaa6d5b2
+    last_write_checksum: sha1:742a3b9abfc785a775b7f79f922945da1e8d2e48
+    pristine_git_object: 8a5941a7a9a3b47176f9f06f72d33865e949bbdc
   docs/components/outputfusionservertoolitemtype.mdx:
     id: d5337e29a21f
     last_write_checksum: sha1:133446222202e08ffceaa5944185842c21078830
@@ -3990,8 +3990,8 @@ trackedFiles:
     pristine_git_object: 5c5675beaf31e5b109617040c2d6eb9055f891d7
   docs/components/presetenum.mdx:
     id: 5c9d69c551a8
-    last_write_checksum: sha1:5d1fdd6337d62463657cfbae4a58abb21cedc03d
-    pristine_git_object: d4ae3a8992c31daf56310ec01d089eb862ed13b3
+    last_write_checksum: sha1:38f3fee4b72b586b64dcf7bca9e7baa32a668d19
+    pristine_git_object: 5c2dac2ed572fcaeccf9c195fd2695d23e065ecb
   docs/components/presetstatus.mdx:
     id: cb4faf64ee85
     last_write_checksum: sha1:7a2f2619305e77274fa23eb6a68e17c122a0fb38
@@ -6794,8 +6794,8 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:cd60d35abf54ca3250cf89188a1083620ec7f26d
-    pristine_git_object: 5359be57c68bde0baa392e275381c906a0691d0a
+    last_write_checksum: sha1:aee065f71cf68ab4dba5b2afb46b13310977d6ff
+    pristine_git_object: 921465df249ebeeb6ba51bacfa08ad314f51c5d5
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77f44b60b98bc126557ec27391f91dfba764bb54
@@ -6822,8 +6822,8 @@ trackedFiles:
     pristine_git_object: 86713cfea633e09d33b3d4e65281071fe20e6137
   src/openrouter/_version.py:
     id: d8d15ad6c586
-    last_write_checksum: sha1:7ed944ea23e58377537ef854af17f5a96ac80b8e
-    pristine_git_object: d1b834456918071dc73a76b4e3166b2d1e1f1086
+    last_write_checksum: sha1:40326bee126ce6a2f05bb8a5d8e6be79bfba6a20
+    pristine_git_object: bf343337191f635de7b4b2e0c7dfb8c2486ee0b8
   src/openrouter/analytics.py:
     id: cb406b5aaabb
     last_write_checksum: sha1:9e709b71dd0611056dc0cec6150b578defe32841
@@ -7706,16 +7706,16 @@ trackedFiles:
     pristine_git_object: 5a290e0b17b588c58fc73ff77b95bc38fac2245f
   src/openrouter/components/fusionanalysisresult.py:
     id: 8c88c59e344e
-    last_write_checksum: sha1:d1ca69c25b7e3ad67b93d94853e2054ed5e0258c
-    pristine_git_object: 44526fc446b4e41290ea9198dc6cb764ad9bbf76
+    last_write_checksum: sha1:b64559e722fac2ca6acf2d8e69ba29080d0350fd
+    pristine_git_object: 920585a43dd3228868d7dca9d9b42b66dd72f24d
   src/openrouter/components/fusioncallanalysiscompletedevent.py:
     id: 2c5e1c627905
-    last_write_checksum: sha1:2dd1d0a1771e01acc7ff760d4df5c1a39a51369b
-    pristine_git_object: c6c88ac1cd387b7679d480ca5d9cf3590e4e6688
+    last_write_checksum: sha1:c2f93ba142920407f845c06a4895d10e5711e203
+    pristine_git_object: e5cc28dd5a10d9df0074ff014bead0e28f596759
   src/openrouter/components/fusioncallanalysisinprogressevent.py:
     id: 88976d8d8503
-    last_write_checksum: sha1:7abc4dfb3dea17715135772104ce4ecb2aba5eae
-    pristine_git_object: 4031d8daac28fe0b52c53c1b640060180ed67aaf
+    last_write_checksum: sha1:f190ea6c5b88028631c87f4d8c4abf276392409a
+    pristine_git_object: 6324bc7ceafbbb700c55749efc3d696066539dc3
   src/openrouter/components/fusioncallcompletedevent.py:
     id: 40c32bcd2f02
     last_write_checksum: sha1:e0fdc079df2c1327a936ea5fa6b7efdd708c3b2f
@@ -7746,20 +7746,20 @@ trackedFiles:
     pristine_git_object: 2836ce37ac58b2b90568bbd6247fa52b982ef131
   src/openrouter/components/fusionplugin.py:
     id: c0b307f15bb0
-    last_write_checksum: sha1:567325a085e7346e160a8df3b882097aaede2777
-    pristine_git_object: 7ef18fda85990e3991922d073228970c2b7a8a65
+    last_write_checksum: sha1:5178b40046c291eca6b890290bfeef9e5db6885c
+    pristine_git_object: 9ec723b1f05f5cf6cd28987d58d6e5c542756b2c
   src/openrouter/components/fusionservertool_openrouter.py:
     id: a1d6d3aefe6f
-    last_write_checksum: sha1:5946f3beb667144593dfb06796f51995ce8140ad
-    pristine_git_object: 0015e263bbb2d817af89780610cc8f25ff852e73
+    last_write_checksum: sha1:b1e560ea3ed00d00dce53b8d5897e59c7face470
+    pristine_git_object: 6c8ceeaf14e361cee78935da98ce2da718e7f47a
   src/openrouter/components/fusionservertoolconfig.py:
     id: 0d1d229c531f
-    last_write_checksum: sha1:fdda1ef4d255f3f1860609dbf3b569271c47b4ac
-    pristine_git_object: 3e4fc18f5b963d2a29ef65d22c12ec8cba69d506
+    last_write_checksum: sha1:299e4b56a189e200e473037691e8e0e42feb66db
+    pristine_git_object: e9eec1d9f62c2aee90f3a98a4b388b2829aab9ea
   src/openrouter/components/fusionsource.py:
     id: ce20a4a9f32f
-    last_write_checksum: sha1:2141dd1dd9396035bf8070878c9ec945331514c8
-    pristine_git_object: c60f29915ce3fed38a693d10b8c2de868f8ee728
+    last_write_checksum: sha1:d38e02465da7d7d4caed6a25b3602709236d9ce6
+    pristine_git_object: cfe434755a0c8f34cc8797777eee68311dbbd243
   src/openrouter/components/generationcontentdata.py:
     id: 0140215b5b46
     last_write_checksum: sha1:8f0b1104c944ce96fa078baf47dfd9d040828c77
@@ -8350,8 +8350,8 @@ trackedFiles:
     pristine_git_object: 13dc4afc3516bdb0590427677835c1d1590c9d9d
   src/openrouter/components/outputfusionservertoolitem.py:
     id: 1d798a2bb7ae
-    last_write_checksum: sha1:6015789e687721a2f4c9313afa5ae564381920e3
-    pristine_git_object: 78b73afecc9c83608207aa23b5f0996d1ec3d33f
+    last_write_checksum: sha1:e9e1fb793c0181b4869f935265c1f15ed317ca52
+    pristine_git_object: ea89c055fd6c31c0b273b5b8934c3232bac8e67d
   src/openrouter/components/outputimagegenerationcallitem.py:
     id: 48d20dc00e1c
     last_write_checksum: sha1:339b1256fd865d8ddb8b3be54a4203ccb6498c3f
@@ -8814,8 +8814,8 @@ trackedFiles:
     pristine_git_object: a27d8806096c5db215e83fc89b4700ff94d3078f
   src/openrouter/components/streamevents.py:
     id: 331636234c76
-    last_write_checksum: sha1:b049ae1a8dd7b46726b56557e2b7440182960a7a
-    pristine_git_object: cc94aff80f6eb55e18385bc4a80db2a881d238e2
+    last_write_checksum: sha1:112335cf676d4178d1eadce236ef4f0c7ea3a7ec
+    pristine_git_object: 6e69218e4e91b0f7181b4f78a179faecee4ec913
   src/openrouter/components/streameventsresponsecompleted.py:
     id: fd244f61371c
     last_write_checksum: sha1:011e0930c7994f64dbee78c0a4c2fa5d7167d8ab
@@ -11329,3 +11329,7 @@ examples:
         "500":
           application/json: {"error": {"code": 500, "message": "Internal Server Error"}}
 examplesVersion: 1.0.2
+releaseNotes: |
+  ## Python SDK Changes:
+  * `open_router.beta.responses.send()`:  `response.[].data.union(response.fusion_call.analysis.in_progress).analyst_model` **Added**
+  * `open_router.responses.send()`:  `response.[].data.union(response.fusion_call.analysis.in_progress).analyst_model` **Added**
