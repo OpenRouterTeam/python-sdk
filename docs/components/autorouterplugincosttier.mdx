@@ -1,0 +1,25 @@
+---
+title: "AutoRouterPluginCostTier"
+---
+
+Shorthand for cost_quality_tradeoff. Higher tiers spend more on better models: low = 9, medium = 7, high = 5, xhigh = 3, and max = 1. Numeric cost_quality_tradeoff takes precedence when both are provided.
+
+## Example Usage
+
+```python
+from openrouter.components import AutoRouterPluginCostTier
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
+value: AutoRouterPluginCostTier = "low"
+```
+
+
+## Values
+
+This is an open enum. Unrecognized values will not fail type checks.
+
+- `"low"`
+- `"medium"`
+- `"high"`
+- `"xhigh"`
+- `"max"`
