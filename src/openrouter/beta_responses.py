@@ -797,7 +797,7 @@ class BetaResponses(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
-                tags=["responses", "beta.responses"],
+                tags=["Responses", "beta.responses"],
                 extensions=None,
             ),
             request=req,
@@ -1716,7 +1716,7 @@ class BetaResponses(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
-                tags=["responses", "beta.responses"],
+                tags=["Responses", "beta.responses"],
                 extensions=None,
             ),
             request=req,

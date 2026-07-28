@@ -20,7 +20,7 @@ from typing import (
 
 
 class Responses(BaseSDK):
-    r"""responses endpoints"""
+    r"""OpenAI-compatible Responses API endpoints"""
 
     @overload
     def send(
@@ -797,7 +797,7 @@ class Responses(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
-                tags=["responses", "beta.responses"],
+                tags=["Responses", "beta.responses"],
                 extensions=None,
             ),
             request=req,
@@ -1716,7 +1716,7 @@ class Responses(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
-                tags=["responses", "beta.responses"],
+                tags=["Responses", "beta.responses"],
                 extensions=None,
             ),
             request=req,

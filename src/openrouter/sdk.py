@@ -97,7 +97,7 @@ class OpenRouter(BaseSDK):
     rerank: "Rerank"
     r"""Rerank endpoints"""
     responses: "Responses"
-    r"""responses endpoints"""
+    r"""OpenAI-compatible Responses API endpoints"""
     video_generation: "VideoGeneration"
     r"""Video Generation endpoints"""
     workspaces: "Workspaces"
