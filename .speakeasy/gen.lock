@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c48cf606-fb42-4a45-9c23-8f0555307828
 management:
-  docChecksum: c1532f25a6a4baf4638964bf1c7d3db0
+  docChecksum: b501f294ae27c3e302fa9c88a4883454
   docVersion: 1.0.0
   speakeasyVersion: 1.787.0
   generationVersion: 2.914.0
-  releaseVersion: 1.1.15
-  configChecksum: c0ca7be4e27bf65e22e0ad9cc03e31be
+  releaseVersion: 1.1.16
+  configChecksum: 4e16cc5ffc76f22fbce3393dd1db7025
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
 persistentEdits:
-  generation_id: 310923b3-d9ca-40aa-91a3-0f38a4003c85
-  pristine_commit_hash: d7c2b5ba344c412c3b3fd436cf905a049c1398cb
-  pristine_tree_hash: 64340937870a67ae71e0ec76d4aac09506741453
+  generation_id: eafc23db-f7f7-439a-947c-ec7970c271a8
+  pristine_commit_hash: 08ca12cb9f20dcac1ded320fde6405ae4eae9fae
+  pristine_tree_hash: 215db775b6fcff88a4bb5ef5ef3d4060468d48f4
 features:
   python:
     acceptHeaders: 3.0.0
@@ -4858,8 +4858,8 @@ trackedFiles:
     pristine_git_object: ea274d2a7ef04a6bb8c56105e2274d962081246c
   docs/components/supportedsize.mdx:
     id: c38f709222bb
-    last_write_checksum: sha1:8b721222c2bd5b4de7f6fa84b909ffe145e06536
-    pristine_git_object: e221cb32a5810c96165b8e0a5e6a955738ee275f
+    last_write_checksum: sha1:a52625a00831a0e43b36539c73e0c6035612778c
+    pristine_git_object: fb40cc4d968fe412b1f3668804a02562b74b4020
   docs/components/syntax.mdx:
     id: 0e7a97e89dd7
     last_write_checksum: sha1:f3317e2b7efd9ed8d3317626429b481c39bd56f8
@@ -6926,8 +6926,8 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:564376f6181c036db9abe535dce0ca6a0a31c267
-    pristine_git_object: e25b6b7808f22678436c3d7cab08018cef1d43d0
+    last_write_checksum: sha1:224deaaf5f1a37c1684544d4f768dbd9b83bedb7
+    pristine_git_object: d8f03e09918661c63cf2822f7da91da7a341a634
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77f44b60b98bc126557ec27391f91dfba764bb54
@@ -6954,8 +6954,8 @@ trackedFiles:
     pristine_git_object: 86713cfea633e09d33b3d4e65281071fe20e6137
   src/openrouter/_version.py:
     id: d8d15ad6c586
-    last_write_checksum: sha1:ac930f4d2fe85067df84995c978fedf2f3c75275
-    pristine_git_object: c24b55302afdb3ff702355d6fa529036e1619489
+    last_write_checksum: sha1:45d0c3ab6c6d3a47b31ddceeed2474d1cea2fafd
+    pristine_git_object: f29a3ecd912582b9a62c3a4631e6a3da3b2bdf72
   src/openrouter/analytics.py:
     id: cb406b5aaabb
     last_write_checksum: sha1:9e709b71dd0611056dc0cec6150b578defe32841
@@ -9214,8 +9214,8 @@ trackedFiles:
     pristine_git_object: c6f80ef4af6effc740beb6e0f1abfee653340717
   src/openrouter/components/videomodel.py:
     id: a544a49f7891
-    last_write_checksum: sha1:783bcd7f4da21fc28da0e241eea621349e0fb378
-    pristine_git_object: b5760b387fe91903005ba7f5346001cc15b51e8f
+    last_write_checksum: sha1:d1bef1f7e212da577e035ba797605a3980bbbd02
+    pristine_git_object: b3d3f3931d08ac5b5cc12538efc68731be8eaa9f
   src/openrouter/components/videomodelslistresponse.py:
     id: 2e9d1ce2cf19
     last_write_checksum: sha1:b94977aa6941f7cf15c889f1b7cc69b50cd35856
@@ -11537,4 +11537,6 @@ examples:
         "500":
           application/json: {"error": {"code": 500, "message": "Internal Server Error"}}
 examplesVersion: 1.0.2
-releaseNotes: "## Python SDK Changes:\n* `open_router.beta.responses.send()`: \n  *  `request.plugins[]` **Changed**\n* `open_router.chat.send()`: \n  *  `request.plugins[]` **Changed**\n* `open_router.presets.create_presets_chat_completions()`: \n  *  `request.plugins[]` **Changed**\n* `open_router.presets.create_presets_messages()`: \n  *  `request.plugins[]` **Changed**\n* `open_router.presets.create_presets_responses()`: \n  *  `request.plugins[]` **Changed**\n* `open_router.responses.send()`: \n  *  `request.plugins[]` **Changed**\n"
+releaseNotes: |
+  ## Python SDK Changes:
+  * `open_router.video_generation.list_videos_models()`:  `response.data[].supported_sizes[]` **Changed**
