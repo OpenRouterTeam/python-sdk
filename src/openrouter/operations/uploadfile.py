@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 import io
+from openrouter.components import fileprovider as components_fileprovider
 from openrouter.types import BaseModel, UNSET_SENTINEL
 from openrouter.utils import (
     FieldMetadata,
@@ -147,6 +148,8 @@ class UploadFileRequestTypedDict(TypedDict):
     """
     workspace_id: NotRequired[str]
     r"""Workspace to scope the request to. Defaults to the caller’s default workspace."""
+    provider: NotRequired[components_fileprovider.FileProvider]
+    r"""Store or read this file on the named provider using your own API key for it. Omit to use OpenRouter storage."""
 
 
 class UploadFileRequest(BaseModel):
@@ -189,6 +192,12 @@ class UploadFileRequest(BaseModel):
     ] = None
     r"""Workspace to scope the request to. Defaults to the caller’s default workspace."""
 
+    provider: Annotated[
+        Optional[components_fileprovider.FileProvider],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Store or read this file on the named provider using your own API key for it. Omit to use OpenRouter storage."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
@@ -197,6 +206,7 @@ class UploadFileRequest(BaseModel):
                 "X-OpenRouter-Title",
                 "X-OpenRouter-Categories",
                 "workspace_id",
+                "provider",
             ]
         )
         serialized = handler(self)

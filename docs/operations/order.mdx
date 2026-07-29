@@ -1,0 +1,22 @@
+---
+title: "Order"
+---
+
+Sort direction. Only `asc` is supported by OpenRouter storage.
+
+## Example Usage
+
+```python
+from openrouter.operations import Order
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
+value: Order = "asc"
+```
+
+
+## Values
+
+This is an open enum. Unrecognized values will not fail type checks.
+
+- `"asc"`
+- `"desc"`
