@@ -2,16 +2,38 @@
 
 from __future__ import annotations
 from .workspacebudget import WorkspaceBudget, WorkspaceBudgetTypedDict
-from openrouter.types import BaseModel
-from typing import List
-from typing_extensions import TypedDict
+from openrouter.types import BaseModel, UNSET_SENTINEL
+from pydantic import model_serializer
+from typing import List, Optional
+from typing_extensions import NotRequired, TypedDict
 
 
 class ListWorkspaceBudgetsResponseTypedDict(TypedDict):
     data: List[WorkspaceBudgetTypedDict]
     r"""List of budgets configured for the workspace"""
+    include_byok_in_budgets: NotRequired[bool]
+    r"""Whether BYOK (bring-your-own-key) spend is included when enforcing the workspace's budgets. This is a workspace-wide setting that applies to all budget intervals (daily, weekly, monthly, and lifetime)."""
 
 
 class ListWorkspaceBudgetsResponse(BaseModel):
     data: List[WorkspaceBudget]
     r"""List of budgets configured for the workspace"""
+
+    include_byok_in_budgets: Optional[bool] = None
+    r"""Whether BYOK (bring-your-own-key) spend is included when enforcing the workspace's budgets. This is a workspace-wide setting that applies to all budget intervals (daily, weekly, monthly, and lifetime)."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["include_byok_in_budgets"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

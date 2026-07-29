@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 from .defaultparameters import DefaultParameters, DefaultParametersTypedDict
+from .modelaliastarget import ModelAliasTarget, ModelAliasTargetTypedDict
 from .modelarchitecture import ModelArchitecture, ModelArchitectureTypedDict
 from .modelbenchmarks import ModelBenchmarks, ModelBenchmarksTypedDict
 from .modellinks import ModelLinks, ModelLinksTypedDict
@@ -51,6 +52,8 @@ class ModelTypedDict(TypedDict):
     r"""List of supported voice identifiers for TTS models. Null for non-TTS models."""
     top_provider: TopProviderInfoTypedDict
     r"""Information about the top provider for this model"""
+    alias_target: NotRequired[ModelAliasTargetTypedDict]
+    r"""Concrete model targeted by this tilde-latest alias, when applicable"""
     benchmarks: NotRequired[ModelBenchmarksTypedDict]
     r"""Third-party benchmark rankings for this model. Omitted when no benchmark data is available."""
     description: NotRequired[str]
@@ -107,6 +110,9 @@ class Model(BaseModel):
     top_provider: TopProviderInfo
     r"""Information about the top provider for this model"""
 
+    alias_target: Optional[ModelAliasTarget] = None
+    r"""Concrete model targeted by this tilde-latest alias, when applicable"""
+
     benchmarks: Optional[ModelBenchmarks] = None
     r"""Third-party benchmark rankings for this model. Omitted when no benchmark data is available."""
 
@@ -129,6 +135,7 @@ class Model(BaseModel):
     def serialize_model(self, handler):
         optional_fields = set(
             [
+                "alias_target",
                 "benchmarks",
                 "description",
                 "expiration_date",

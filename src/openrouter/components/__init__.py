@@ -1688,6 +1688,7 @@ if TYPE_CHECKING:
     )
     from .metadatalevel import MetadataLevel
     from .model import Model, ModelTypedDict
+    from .modelaliastarget import ModelAliasTarget, ModelAliasTargetTypedDict
     from .modelarchitecture import ModelArchitecture, ModelArchitectureTypedDict
     from .modelbenchmarks import ModelBenchmarks, ModelBenchmarksTypedDict
     from .modelgroup import ModelGroup
@@ -4123,6 +4124,8 @@ __all__ = [
     "ModeRequired",
     "ModeTypedDict",
     "Model",
+    "ModelAliasTarget",
+    "ModelAliasTargetTypedDict",
     "ModelArchitecture",
     "ModelArchitectureTypedDict",
     "ModelBenchmarks",
@@ -6397,6 +6400,8 @@ _dynamic_imports: dict[str, str] = {
     "MetadataLevel": ".metadatalevel",
     "Model": ".model",
     "ModelTypedDict": ".model",
+    "ModelAliasTarget": ".modelaliastarget",
+    "ModelAliasTargetTypedDict": ".modelaliastarget",
     "ModelArchitecture": ".modelarchitecture",
     "ModelArchitectureTypedDict": ".modelarchitecture",
     "ModelBenchmarks": ".modelbenchmarks",
