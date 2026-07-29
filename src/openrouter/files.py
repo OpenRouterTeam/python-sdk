@@ -23,6 +23,11 @@ class Files(BaseSDK):
         limit: Optional[int] = None,
         cursor: Optional[str] = None,
         workspace_id: Optional[str] = None,
+        provider: Optional[components.FileProvider] = None,
+        after: Optional[str] = None,
+        after_id: Optional[str] = None,
+        before_id: Optional[str] = None,
+        order: Optional[operations.Order] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -42,6 +47,11 @@ class Files(BaseSDK):
         :param limit: Maximum number of files to return (1–1000).
         :param cursor: Opaque pagination cursor from a previous response.
         :param workspace_id: Workspace to scope the request to. Defaults to the caller’s default workspace.
+        :param provider: Store or read this file on the named provider using your own API key for it. Omit to use OpenRouter storage.
+        :param after: OpenAI-style forward cursor: the id to list after.
+        :param after_id: Anthropic-style forward cursor: the id to list after.
+        :param before_id: Anthropic-style reverse cursor. Not supported by OpenRouter storage.
+        :param order: Sort direction. Only `asc` is supported by OpenRouter storage.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -64,6 +74,11 @@ class Files(BaseSDK):
             limit=limit,
             cursor=cursor,
             workspace_id=workspace_id,
+            provider=provider,
+            after=after,
+            after_id=after_id,
+            before_id=before_id,
+            order=order,
         )
 
         req = self._build_request(
@@ -139,6 +154,11 @@ class Files(BaseSDK):
                 limit=limit,
                 cursor=next_cursor,
                 workspace_id=workspace_id,
+                provider=provider,
+                after=after,
+                after_id=after_id,
+                before_id=before_id,
+                order=order,
                 retries=retries,
                 server_url=server_url,
                 timeout_ms=timeout_ms,
@@ -161,6 +181,11 @@ class Files(BaseSDK):
                 errors.UnauthorizedResponseErrorData, http_res
             )
             raise errors.UnauthorizedResponseError(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ForbiddenResponseErrorData, http_res
+            )
+            raise errors.ForbiddenResponseError(response_data, http_res)
         if utils.match_response(http_res, "429", "application/json"):
             response_data = unmarshal_json_response(
                 errors.TooManyRequestsResponseErrorData, http_res
@@ -171,6 +196,16 @@ class Files(BaseSDK):
                 errors.InternalServerResponseErrorData, http_res
             )
             raise errors.InternalServerResponseError(response_data, http_res)
+        if utils.match_response(http_res, "502", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.BadGatewayResponseErrorData, http_res
+            )
+            raise errors.BadGatewayResponseError(response_data, http_res)
+        if utils.match_response(http_res, "503", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ServiceUnavailableResponseErrorData, http_res
+            )
+            raise errors.ServiceUnavailableResponseError(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.OpenRouterDefaultError(
@@ -193,6 +228,11 @@ class Files(BaseSDK):
         limit: Optional[int] = None,
         cursor: Optional[str] = None,
         workspace_id: Optional[str] = None,
+        provider: Optional[components.FileProvider] = None,
+        after: Optional[str] = None,
+        after_id: Optional[str] = None,
+        before_id: Optional[str] = None,
+        order: Optional[operations.Order] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -212,6 +252,11 @@ class Files(BaseSDK):
         :param limit: Maximum number of files to return (1–1000).
         :param cursor: Opaque pagination cursor from a previous response.
         :param workspace_id: Workspace to scope the request to. Defaults to the caller’s default workspace.
+        :param provider: Store or read this file on the named provider using your own API key for it. Omit to use OpenRouter storage.
+        :param after: OpenAI-style forward cursor: the id to list after.
+        :param after_id: Anthropic-style forward cursor: the id to list after.
+        :param before_id: Anthropic-style reverse cursor. Not supported by OpenRouter storage.
+        :param order: Sort direction. Only `asc` is supported by OpenRouter storage.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -234,6 +279,11 @@ class Files(BaseSDK):
             limit=limit,
             cursor=cursor,
             workspace_id=workspace_id,
+            provider=provider,
+            after=after,
+            after_id=after_id,
+            before_id=before_id,
+            order=order,
         )
 
         req = self._build_request_async(
@@ -312,6 +362,11 @@ class Files(BaseSDK):
                 limit=limit,
                 cursor=next_cursor,
                 workspace_id=workspace_id,
+                provider=provider,
+                after=after,
+                after_id=after_id,
+                before_id=before_id,
+                order=order,
                 retries=retries,
                 server_url=server_url,
                 timeout_ms=timeout_ms,
@@ -334,6 +389,11 @@ class Files(BaseSDK):
                 errors.UnauthorizedResponseErrorData, http_res
             )
             raise errors.UnauthorizedResponseError(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ForbiddenResponseErrorData, http_res
+            )
+            raise errors.ForbiddenResponseError(response_data, http_res)
         if utils.match_response(http_res, "429", "application/json"):
             response_data = unmarshal_json_response(
                 errors.TooManyRequestsResponseErrorData, http_res
@@ -344,6 +404,16 @@ class Files(BaseSDK):
                 errors.InternalServerResponseErrorData, http_res
             )
             raise errors.InternalServerResponseError(response_data, http_res)
+        if utils.match_response(http_res, "502", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.BadGatewayResponseErrorData, http_res
+            )
+            raise errors.BadGatewayResponseError(response_data, http_res)
+        if utils.match_response(http_res, "503", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ServiceUnavailableResponseErrorData, http_res
+            )
+            raise errors.ServiceUnavailableResponseError(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.OpenRouterDefaultError(
@@ -365,11 +435,12 @@ class Files(BaseSDK):
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
         workspace_id: Optional[str] = None,
+        provider: Optional[components.FileProvider] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.FileMetadata:
+    ) -> components.FileResponse:
         r"""Upload a file
 
         Uploads a file to be referenced in future API calls. The file is stored under the workspace of the authenticating API key. Maximum file size: 100 MB.
@@ -383,6 +454,7 @@ class Files(BaseSDK):
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
         :param workspace_id: Workspace to scope the request to. Defaults to the caller’s default workspace.
+        :param provider: Store or read this file on the named provider using your own API key for it. Omit to use OpenRouter storage.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -403,6 +475,7 @@ class Files(BaseSDK):
             x_open_router_title=x_open_router_title,
             x_open_router_categories=x_open_router_categories,
             workspace_id=workspace_id,
+            provider=provider,
             request_body=operations.UploadFileRequestBody(
                 file=utils.get_pydantic_model(file, operations.UploadFileFile),
             ),
@@ -468,7 +541,7 @@ class Files(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(components.FileMetadata, http_res)
+            return unmarshal_json_response(components.FileResponse, http_res)
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.BadRequestResponseErrorData, http_res
@@ -499,6 +572,16 @@ class Files(BaseSDK):
                 errors.InternalServerResponseErrorData, http_res
             )
             raise errors.InternalServerResponseError(response_data, http_res)
+        if utils.match_response(http_res, "502", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.BadGatewayResponseErrorData, http_res
+            )
+            raise errors.BadGatewayResponseError(response_data, http_res)
+        if utils.match_response(http_res, "503", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ServiceUnavailableResponseErrorData, http_res
+            )
+            raise errors.ServiceUnavailableResponseError(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.OpenRouterDefaultError(
@@ -520,11 +603,12 @@ class Files(BaseSDK):
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
         workspace_id: Optional[str] = None,
+        provider: Optional[components.FileProvider] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.FileMetadata:
+    ) -> components.FileResponse:
         r"""Upload a file
 
         Uploads a file to be referenced in future API calls. The file is stored under the workspace of the authenticating API key. Maximum file size: 100 MB.
@@ -538,6 +622,7 @@ class Files(BaseSDK):
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
         :param workspace_id: Workspace to scope the request to. Defaults to the caller’s default workspace.
+        :param provider: Store or read this file on the named provider using your own API key for it. Omit to use OpenRouter storage.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -558,6 +643,7 @@ class Files(BaseSDK):
             x_open_router_title=x_open_router_title,
             x_open_router_categories=x_open_router_categories,
             workspace_id=workspace_id,
+            provider=provider,
             request_body=operations.UploadFileRequestBody(
                 file=utils.get_pydantic_model(file, operations.UploadFileFile),
             ),
@@ -623,7 +709,7 @@ class Files(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(components.FileMetadata, http_res)
+            return unmarshal_json_response(components.FileResponse, http_res)
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.BadRequestResponseErrorData, http_res
@@ -654,6 +740,16 @@ class Files(BaseSDK):
                 errors.InternalServerResponseErrorData, http_res
             )
             raise errors.InternalServerResponseError(response_data, http_res)
+        if utils.match_response(http_res, "502", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.BadGatewayResponseErrorData, http_res
+            )
+            raise errors.BadGatewayResponseError(response_data, http_res)
+        if utils.match_response(http_res, "503", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ServiceUnavailableResponseErrorData, http_res
+            )
+            raise errors.ServiceUnavailableResponseError(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.OpenRouterDefaultError(
@@ -675,6 +771,7 @@ class Files(BaseSDK):
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
         workspace_id: Optional[str] = None,
+        provider: Optional[components.FileProvider] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -693,6 +790,7 @@ class Files(BaseSDK):
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
         :param workspace_id: Workspace to scope the request to. Defaults to the caller’s default workspace.
+        :param provider: Store or read this file on the named provider using your own API key for it. Omit to use OpenRouter storage.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -714,6 +812,7 @@ class Files(BaseSDK):
             x_open_router_categories=x_open_router_categories,
             file_id=file_id,
             workspace_id=workspace_id,
+            provider=provider,
         )
 
         req = self._build_request(
@@ -775,6 +874,11 @@ class Files(BaseSDK):
                 errors.UnauthorizedResponseErrorData, http_res
             )
             raise errors.UnauthorizedResponseError(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ForbiddenResponseErrorData, http_res
+            )
+            raise errors.ForbiddenResponseError(response_data, http_res)
         if utils.match_response(http_res, "404", "application/json"):
             response_data = unmarshal_json_response(
                 errors.NotFoundResponseErrorData, http_res
@@ -790,6 +894,16 @@ class Files(BaseSDK):
                 errors.InternalServerResponseErrorData, http_res
             )
             raise errors.InternalServerResponseError(response_data, http_res)
+        if utils.match_response(http_res, "502", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.BadGatewayResponseErrorData, http_res
+            )
+            raise errors.BadGatewayResponseError(response_data, http_res)
+        if utils.match_response(http_res, "503", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ServiceUnavailableResponseErrorData, http_res
+            )
+            raise errors.ServiceUnavailableResponseError(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.OpenRouterDefaultError(
@@ -811,6 +925,7 @@ class Files(BaseSDK):
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
         workspace_id: Optional[str] = None,
+        provider: Optional[components.FileProvider] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -829,6 +944,7 @@ class Files(BaseSDK):
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
         :param workspace_id: Workspace to scope the request to. Defaults to the caller’s default workspace.
+        :param provider: Store or read this file on the named provider using your own API key for it. Omit to use OpenRouter storage.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -850,6 +966,7 @@ class Files(BaseSDK):
             x_open_router_categories=x_open_router_categories,
             file_id=file_id,
             workspace_id=workspace_id,
+            provider=provider,
         )
 
         req = self._build_request_async(
@@ -911,6 +1028,11 @@ class Files(BaseSDK):
                 errors.UnauthorizedResponseErrorData, http_res
             )
             raise errors.UnauthorizedResponseError(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ForbiddenResponseErrorData, http_res
+            )
+            raise errors.ForbiddenResponseError(response_data, http_res)
         if utils.match_response(http_res, "404", "application/json"):
             response_data = unmarshal_json_response(
                 errors.NotFoundResponseErrorData, http_res
@@ -926,6 +1048,16 @@ class Files(BaseSDK):
                 errors.InternalServerResponseErrorData, http_res
             )
             raise errors.InternalServerResponseError(response_data, http_res)
+        if utils.match_response(http_res, "502", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.BadGatewayResponseErrorData, http_res
+            )
+            raise errors.BadGatewayResponseError(response_data, http_res)
+        if utils.match_response(http_res, "503", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ServiceUnavailableResponseErrorData, http_res
+            )
+            raise errors.ServiceUnavailableResponseError(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.OpenRouterDefaultError(
@@ -947,11 +1079,12 @@ class Files(BaseSDK):
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
         workspace_id: Optional[str] = None,
+        provider: Optional[components.FileProvider] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.FileMetadata:
+    ) -> components.FileResponse:
         r"""Get file metadata
 
         Retrieves metadata for a single file owned by the requesting workspace.
@@ -965,6 +1098,7 @@ class Files(BaseSDK):
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
         :param workspace_id: Workspace to scope the request to. Defaults to the caller’s default workspace.
+        :param provider: Store or read this file on the named provider using your own API key for it. Omit to use OpenRouter storage.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -986,6 +1120,7 @@ class Files(BaseSDK):
             x_open_router_categories=x_open_router_categories,
             file_id=file_id,
             workspace_id=workspace_id,
+            provider=provider,
         )
 
         req = self._build_request(
@@ -1041,12 +1176,17 @@ class Files(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(components.FileMetadata, http_res)
+            return unmarshal_json_response(components.FileResponse, http_res)
         if utils.match_response(http_res, "401", "application/json"):
             response_data = unmarshal_json_response(
                 errors.UnauthorizedResponseErrorData, http_res
             )
             raise errors.UnauthorizedResponseError(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ForbiddenResponseErrorData, http_res
+            )
+            raise errors.ForbiddenResponseError(response_data, http_res)
         if utils.match_response(http_res, "404", "application/json"):
             response_data = unmarshal_json_response(
                 errors.NotFoundResponseErrorData, http_res
@@ -1062,6 +1202,16 @@ class Files(BaseSDK):
                 errors.InternalServerResponseErrorData, http_res
             )
             raise errors.InternalServerResponseError(response_data, http_res)
+        if utils.match_response(http_res, "502", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.BadGatewayResponseErrorData, http_res
+            )
+            raise errors.BadGatewayResponseError(response_data, http_res)
+        if utils.match_response(http_res, "503", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ServiceUnavailableResponseErrorData, http_res
+            )
+            raise errors.ServiceUnavailableResponseError(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.OpenRouterDefaultError(
@@ -1083,11 +1233,12 @@ class Files(BaseSDK):
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
         workspace_id: Optional[str] = None,
+        provider: Optional[components.FileProvider] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.FileMetadata:
+    ) -> components.FileResponse:
         r"""Get file metadata
 
         Retrieves metadata for a single file owned by the requesting workspace.
@@ -1101,6 +1252,7 @@ class Files(BaseSDK):
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
         :param workspace_id: Workspace to scope the request to. Defaults to the caller’s default workspace.
+        :param provider: Store or read this file on the named provider using your own API key for it. Omit to use OpenRouter storage.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1122,6 +1274,7 @@ class Files(BaseSDK):
             x_open_router_categories=x_open_router_categories,
             file_id=file_id,
             workspace_id=workspace_id,
+            provider=provider,
         )
 
         req = self._build_request_async(
@@ -1177,12 +1330,17 @@ class Files(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(components.FileMetadata, http_res)
+            return unmarshal_json_response(components.FileResponse, http_res)
         if utils.match_response(http_res, "401", "application/json"):
             response_data = unmarshal_json_response(
                 errors.UnauthorizedResponseErrorData, http_res
             )
             raise errors.UnauthorizedResponseError(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ForbiddenResponseErrorData, http_res
+            )
+            raise errors.ForbiddenResponseError(response_data, http_res)
         if utils.match_response(http_res, "404", "application/json"):
             response_data = unmarshal_json_response(
                 errors.NotFoundResponseErrorData, http_res
@@ -1198,6 +1356,16 @@ class Files(BaseSDK):
                 errors.InternalServerResponseErrorData, http_res
             )
             raise errors.InternalServerResponseError(response_data, http_res)
+        if utils.match_response(http_res, "502", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.BadGatewayResponseErrorData, http_res
+            )
+            raise errors.BadGatewayResponseError(response_data, http_res)
+        if utils.match_response(http_res, "503", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ServiceUnavailableResponseErrorData, http_res
+            )
+            raise errors.ServiceUnavailableResponseError(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.OpenRouterDefaultError(
@@ -1219,6 +1387,7 @@ class Files(BaseSDK):
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
         workspace_id: Optional[str] = None,
+        provider: Optional[components.FileProvider] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -1237,6 +1406,7 @@ class Files(BaseSDK):
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
         :param workspace_id: Workspace to scope the request to. Defaults to the caller’s default workspace.
+        :param provider: Store or read this file on the named provider using your own API key for it. Omit to use OpenRouter storage.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1258,6 +1428,7 @@ class Files(BaseSDK):
             x_open_router_categories=x_open_router_categories,
             file_id=file_id,
             workspace_id=workspace_id,
+            provider=provider,
         )
 
         req = self._build_request(
@@ -1329,6 +1500,12 @@ class Files(BaseSDK):
             raise errors.UnauthorizedResponseError(
                 response_data, http_res, http_res_text
             )
+        if utils.match_response(http_res, "403", "application/json"):
+            http_res_text = utils.stream_to_text(http_res)
+            response_data = unmarshal_json_response(
+                errors.ForbiddenResponseErrorData, http_res, http_res_text
+            )
+            raise errors.ForbiddenResponseError(response_data, http_res, http_res_text)
         if utils.match_response(http_res, "404", "application/json"):
             http_res_text = utils.stream_to_text(http_res)
             response_data = unmarshal_json_response(
@@ -1349,6 +1526,20 @@ class Files(BaseSDK):
                 errors.InternalServerResponseErrorData, http_res, http_res_text
             )
             raise errors.InternalServerResponseError(
+                response_data, http_res, http_res_text
+            )
+        if utils.match_response(http_res, "502", "application/json"):
+            http_res_text = utils.stream_to_text(http_res)
+            response_data = unmarshal_json_response(
+                errors.BadGatewayResponseErrorData, http_res, http_res_text
+            )
+            raise errors.BadGatewayResponseError(response_data, http_res, http_res_text)
+        if utils.match_response(http_res, "503", "application/json"):
+            http_res_text = utils.stream_to_text(http_res)
+            response_data = unmarshal_json_response(
+                errors.ServiceUnavailableResponseErrorData, http_res, http_res_text
+            )
+            raise errors.ServiceUnavailableResponseError(
                 response_data, http_res, http_res_text
             )
         if utils.match_response(http_res, "4XX", "*"):
@@ -1375,6 +1566,7 @@ class Files(BaseSDK):
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
         workspace_id: Optional[str] = None,
+        provider: Optional[components.FileProvider] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -1393,6 +1585,7 @@ class Files(BaseSDK):
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
         :param workspace_id: Workspace to scope the request to. Defaults to the caller’s default workspace.
+        :param provider: Store or read this file on the named provider using your own API key for it. Omit to use OpenRouter storage.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1414,6 +1607,7 @@ class Files(BaseSDK):
             x_open_router_categories=x_open_router_categories,
             file_id=file_id,
             workspace_id=workspace_id,
+            provider=provider,
         )
 
         req = self._build_request_async(
@@ -1485,6 +1679,12 @@ class Files(BaseSDK):
             raise errors.UnauthorizedResponseError(
                 response_data, http_res, http_res_text
             )
+        if utils.match_response(http_res, "403", "application/json"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            response_data = unmarshal_json_response(
+                errors.ForbiddenResponseErrorData, http_res, http_res_text
+            )
+            raise errors.ForbiddenResponseError(response_data, http_res, http_res_text)
         if utils.match_response(http_res, "404", "application/json"):
             http_res_text = await utils.stream_to_text_async(http_res)
             response_data = unmarshal_json_response(
@@ -1505,6 +1705,20 @@ class Files(BaseSDK):
                 errors.InternalServerResponseErrorData, http_res, http_res_text
             )
             raise errors.InternalServerResponseError(
+                response_data, http_res, http_res_text
+            )
+        if utils.match_response(http_res, "502", "application/json"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            response_data = unmarshal_json_response(
+                errors.BadGatewayResponseErrorData, http_res, http_res_text
+            )
+            raise errors.BadGatewayResponseError(response_data, http_res, http_res_text)
+        if utils.match_response(http_res, "503", "application/json"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            response_data = unmarshal_json_response(
+                errors.ServiceUnavailableResponseErrorData, http_res, http_res_text
+            )
+            raise errors.ServiceUnavailableResponseError(
                 response_data, http_res, http_res_text
             )
         if utils.match_response(http_res, "4XX", "*"):

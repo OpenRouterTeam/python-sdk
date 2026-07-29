@@ -497,6 +497,7 @@ if TYPE_CHECKING:
         ListFilesRequestTypedDict,
         ListFilesResponse,
         ListFilesResponseTypedDict,
+        Order,
     )
     from .listgenerationcontent import (
         ListGenerationContentGlobals,
@@ -1247,6 +1248,7 @@ __all__ = [
     "Operator",
     "OperatorName",
     "OperatorTypedDict",
+    "Order",
     "OrderBy",
     "OrderByTypedDict",
     "Period",
@@ -1719,6 +1721,7 @@ _dynamic_imports: dict[str, str] = {
     "ListFilesRequestTypedDict": ".listfiles",
     "ListFilesResponse": ".listfiles",
     "ListFilesResponseTypedDict": ".listfiles",
+    "Order": ".listfiles",
     "ListGenerationContentGlobals": ".listgenerationcontent",
     "ListGenerationContentGlobalsTypedDict": ".listgenerationcontent",
     "ListGenerationContentRequest": ".listgenerationcontent",

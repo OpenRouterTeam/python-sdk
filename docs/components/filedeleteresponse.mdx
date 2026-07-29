@@ -2,12 +2,26 @@
 title: "FileDeleteResponse"
 ---
 
-Confirmation that a file was deleted.
+Confirmation that a file was deleted, in the negotiated shape.
 
 
-## Fields
+## Supported Types
 
-| Field                                                                        | Type                                                                         | Required                                                                     | Description                                                                  |
-| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| `id`                                                                         | *str*                                                                        | :heavy_check_mark:                                                           | N/A                                                                          |
-| `type`                                                                       | [components.FileDeleteResponseType](../components/filedeleteresponsetype.mdx) | :heavy_check_mark:                                                           | N/A                                                                          |
+### `components.AnthropicFileDeleted`
+
+```python
+value: components.AnthropicFileDeleted = /* values here */
+```
+
+### `components.OpenAIFileDeleted`
+
+```python
+value: components.OpenAIFileDeleted = /* values here */
+```
+
+### `components.OpenRouterFileDeleted`
+
+```python
+value: components.OpenRouterFileDeleted = /* values here */
+```
+
