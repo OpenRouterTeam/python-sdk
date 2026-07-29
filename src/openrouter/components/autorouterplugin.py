@@ -34,6 +34,8 @@ class AutoRouterPluginTypedDict(TypedDict):
     r"""Shorthand for cost_quality_tradeoff. Higher tiers spend more on better models: low = 9, medium = 7, high = 5, xhigh = 3, and max = 1. Numeric cost_quality_tradeoff takes precedence when both are provided."""
     enabled: NotRequired[bool]
     r"""Set to false to disable the auto-router plugin for this request. Defaults to true."""
+    excluded_models: NotRequired[List[str]]
+    r"""List of model patterns to exclude from auto-router selection. Supports wildcards (e.g., \"meta-llama/*\" excludes all Llama models). Applied after allowed_models, so an excluded pattern always wins over an allowed one."""
     pin_model: NotRequired[bool]
     r"""When true, reuses the model from the most recent assistant message's `model` attribute for subsequent turns. Defaults to false."""
 
@@ -58,6 +60,9 @@ class AutoRouterPlugin(BaseModel):
     enabled: Optional[bool] = None
     r"""Set to false to disable the auto-router plugin for this request. Defaults to true."""
 
+    excluded_models: Optional[List[str]] = None
+    r"""List of model patterns to exclude from auto-router selection. Supports wildcards (e.g., \"meta-llama/*\" excludes all Llama models). Applied after allowed_models, so an excluded pattern always wins over an allowed one."""
+
     pin_model: Optional[bool] = None
     r"""When true, reuses the model from the most recent assistant message's `model` attribute for subsequent turns. Defaults to false."""
 
@@ -69,6 +74,7 @@ class AutoRouterPlugin(BaseModel):
                 "cost_quality_tradeoff",
                 "cost_tier",
                 "enabled",
+                "excluded_models",
                 "pin_model",
             ]
         )
