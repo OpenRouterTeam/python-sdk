@@ -7373,6 +7373,7 @@ components:
           default_text_model: 'openai/gpt-4o'
           description: 'Production environment workspace'
           id: '550e8400-e29b-41d4-a716-446655440000'
+          include_byok_in_budgets: false
           io_logging_api_key_ids: null
           io_logging_sampling_rate: 1
           is_data_discount_logging_enabled: true
@@ -9570,6 +9571,7 @@ components:
           default_text_model: 'openai/gpt-4o'
           description: 'Production environment workspace'
           id: '550e8400-e29b-41d4-a716-446655440000'
+          include_byok_in_budgets: false
           io_logging_api_key_ids: null
           io_logging_sampling_rate: 1
           is_data_discount_logging_enabled: true
@@ -11670,12 +11672,17 @@ components:
             reset_interval: 'monthly'
             updated_at: '2025-08-24T15:45:00Z'
             workspace_id: '550e8400-e29b-41d4-a716-446655440000'
+        include_byok_in_budgets: false
       properties:
         data:
           description: 'List of budgets configured for the workspace'
           items:
             $ref: '#/components/schemas/WorkspaceBudget'
           type: 'array'
+        include_byok_in_budgets:
+          description: 'Whether BYOK (bring-your-own-key) spend is included when enforcing the workspace''s budgets. This is a workspace-wide setting that applies to all budget intervals (daily, weekly, monthly, and lifetime).'
+          example: false
+          type: 'boolean'
       required:
         - 'data'
       type: 'object'
@@ -11713,6 +11720,7 @@ components:
             default_text_model: 'openai/gpt-4o'
             description: 'Production environment workspace'
             id: '550e8400-e29b-41d4-a716-446655440000'
+            include_byok_in_budgets: false
             io_logging_api_key_ids: null
             io_logging_sampling_rate: 1
             is_data_discount_logging_enabled: true
@@ -13721,6 +13729,8 @@ components:
           is_moderated: true
           max_completion_tokens: 4096
       properties:
+        alias_target:
+          $ref: '#/components/schemas/ModelAliasTarget'
         architecture:
           $ref: '#/components/schemas/ModelArchitecture'
         benchmarks:
@@ -13808,6 +13818,22 @@ components:
         - 'default_parameters'
         - 'supported_voices'
         - 'links'
+      type: 'object'
+    ModelAliasTarget:
+      description: 'Concrete model targeted by this tilde-latest alias, when applicable'
+      example:
+        name: 'Claude Sonnet 4.5'
+        slug: 'anthropic/claude-sonnet-4.5'
+      properties:
+        name:
+          description: 'Human-readable name of the concrete model targeted by this alias'
+          type: 'string'
+        slug:
+          description: 'Routable model ID of the concrete target, matching that model row''s id'
+          type: 'string'
+      required:
+        - 'slug'
+        - 'name'
       type: 'object'
     ModelArchitecture:
       description: 'Model architecture information'
@@ -23885,6 +23911,7 @@ components:
           default_text_model: 'openai/gpt-4o'
           description: 'Production environment workspace'
           id: '550e8400-e29b-41d4-a716-446655440000'
+          include_byok_in_budgets: false
           io_logging_api_key_ids: null
           io_logging_sampling_rate: 1
           is_data_discount_logging_enabled: true
@@ -23903,8 +23930,13 @@ components:
       type: 'object'
     UpsertWorkspaceBudgetRequest:
       example:
+        include_byok_in_budgets: true
         limit_usd: 100
       properties:
+        include_byok_in_budgets:
+          description: 'Whether to include BYOK (bring-your-own-key) spend when enforcing the workspace''s budgets. This is a workspace-wide setting: it applies to every budget interval (daily, weekly, monthly, and lifetime), not just the interval being upserted in this request. Omit to leave the current setting unchanged.'
+          example: true
+          type: 'boolean'
         limit_usd:
           description: 'Spending limit in USD. Must be greater than 0.'
           example: 100
@@ -23922,11 +23954,16 @@ components:
           reset_interval: 'monthly'
           updated_at: '2025-08-24T15:45:00Z'
           workspace_id: '550e8400-e29b-41d4-a716-446655440000'
+        include_byok_in_budgets: true
       properties:
         data:
           allOf:
             - $ref: '#/components/schemas/WorkspaceBudget'
             - description: 'The created or updated budget'
+        include_byok_in_budgets:
+          description: 'Whether BYOK (bring-your-own-key) spend is included when enforcing the workspace''s budgets. This is a workspace-wide setting that applies to all budget intervals (daily, weekly, monthly, and lifetime).'
+          example: true
+          type: 'boolean'
       required:
         - 'data'
       type: 'object'
@@ -24807,6 +24844,7 @@ components:
         default_text_model: 'openai/gpt-4o'
         description: 'Production environment workspace'
         id: '550e8400-e29b-41d4-a716-446655440000'
+        include_byok_in_budgets: false
         io_logging_api_key_ids: null
         io_logging_sampling_rate: 1
         is_data_discount_logging_enabled: true
@@ -24860,6 +24898,10 @@ components:
           example: '550e8400-e29b-41d4-a716-446655440000'
           format: 'uuid'
           type: 'string'
+        include_byok_in_budgets:
+          description: 'Whether BYOK (bring-your-own-key) spend counts toward this workspace''s budgets. Set it via the workspace budget endpoints.'
+          example: false
+          type: 'boolean'
         io_logging_api_key_ids:
           description: 'Optional array of API key IDs to filter I/O logging. Null means all keys are logged.'
           example: null
@@ -36167,6 +36209,7 @@ paths:
                     default_text_model: 'openai/gpt-4o'
                     description: 'Production environment workspace'
                     id: '550e8400-e29b-41d4-a716-446655440000'
+                    include_byok_in_budgets: false
                     io_logging_api_key_ids: null
                     io_logging_sampling_rate: 1
                     is_data_discount_logging_enabled: true
@@ -36244,6 +36287,7 @@ paths:
                   default_text_model: 'openai/gpt-4o'
                   description: 'Production environment workspace'
                   id: '550e8400-e29b-41d4-a716-446655440000'
+                  include_byok_in_budgets: false
                   io_logging_api_key_ids: null
                   io_logging_sampling_rate: 1
                   is_data_discount_logging_enabled: true
@@ -36407,6 +36451,7 @@ paths:
                   default_text_model: 'openai/gpt-4o'
                   description: 'Production environment workspace'
                   id: '550e8400-e29b-41d4-a716-446655440000'
+                  include_byok_in_budgets: false
                   io_logging_api_key_ids: null
                   io_logging_sampling_rate: 1
                   is_data_discount_logging_enabled: true
@@ -36488,6 +36533,7 @@ paths:
                   default_text_model: 'openai/gpt-4o'
                   description: 'Production environment workspace'
                   id: '550e8400-e29b-41d4-a716-446655440000'
+                  include_byok_in_budgets: false
                   io_logging_api_key_ids: null
                   io_logging_sampling_rate: 1
                   is_data_discount_logging_enabled: true
@@ -36583,6 +36629,7 @@ paths:
                     reset_interval: 'monthly'
                     updated_at: '2025-08-24T15:45:00Z'
                     workspace_id: '550e8400-e29b-41d4-a716-446655440000'
+                include_byok_in_budgets: false
               schema:
                 $ref: '#/components/schemas/ListWorkspaceBudgetsResponse'
           description: 'Budgets retrieved successfully'
@@ -36689,7 +36736,7 @@ paths:
         - 'Workspaces'
       x-speakeasy-name-override: 'deleteBudget'
     put:
-      description: 'Create or update the budget for a given interval. Budget limits must strictly decrease as the interval narrows (lifetime > monthly > weekly > daily). [Management key](/docs/guides/overview/auth/management-api-keys) required.'
+      description: 'Create or update the budget for a given interval. Budget limits must strictly decrease as the interval narrows (lifetime > monthly > weekly > daily). The optional `include_byok_in_budgets` flag is a workspace-wide setting: when provided it applies to every budget interval for the workspace, not just the interval in this request. Note that a change made here is applied to budget enforcement immediately, but an already-open workspace settings page in the web dashboard may keep showing the previous value until it is reloaded. [Management key](/docs/guides/overview/auth/management-api-keys) required.'
       operationId: 'upsertWorkspaceBudget'
       parameters:
         - description: 'The workspace ID (UUID) or slug'
@@ -36712,6 +36759,7 @@ paths:
         content:
           application/json:
             example:
+              include_byok_in_budgets: true
               limit_usd: 100
             schema:
               $ref: '#/components/schemas/UpsertWorkspaceBudgetRequest'
@@ -36728,6 +36776,7 @@ paths:
                   reset_interval: 'monthly'
                   updated_at: '2025-08-24T15:45:00Z'
                   workspace_id: '550e8400-e29b-41d4-a716-446655440000'
+                include_byok_in_budgets: true
               schema:
                 $ref: '#/components/schemas/UpsertWorkspaceBudgetResponse'
           description: 'Budget created or updated successfully'

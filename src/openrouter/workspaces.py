@@ -2111,6 +2111,7 @@ class Workspaces(BaseSDK):
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
+        include_byok_in_budgets: Optional[bool] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -2118,7 +2119,7 @@ class Workspaces(BaseSDK):
     ) -> components.UpsertWorkspaceBudgetResponse:
         r"""Create or update a workspace budget
 
-        Create or update the budget for a given interval. Budget limits must strictly decrease as the interval narrows (lifetime > monthly > weekly > daily). [Management key](/docs/guides/overview/auth/management-api-keys) required.
+        Create or update the budget for a given interval. Budget limits must strictly decrease as the interval narrows (lifetime > monthly > weekly > daily). The optional `include_byok_in_budgets` flag is a workspace-wide setting: when provided it applies to every budget interval for the workspace, not just the interval in this request. Note that a change made here is applied to budget enforcement immediately, but an already-open workspace settings page in the web dashboard may keep showing the previous value until it is reloaded. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param id: The workspace ID (UUID) or slug
         :param interval: Budget reset interval. Use \"lifetime\" for a one-time budget that never resets.
@@ -2130,6 +2131,7 @@ class Workspaces(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
+        :param include_byok_in_budgets: Whether to include BYOK (bring-your-own-key) spend when enforcing the workspace's budgets. This is a workspace-wide setting: it applies to every budget interval (daily, weekly, monthly, and lifetime), not just the interval being upserted in this request. Omit to leave the current setting unchanged.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -2152,6 +2154,7 @@ class Workspaces(BaseSDK):
             id=id,
             interval=interval,
             upsert_workspace_budget_request=components.UpsertWorkspaceBudgetRequest(
+                include_byok_in_budgets=include_byok_in_budgets,
                 limit_usd=limit_usd,
             ),
         )
@@ -2261,6 +2264,7 @@ class Workspaces(BaseSDK):
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
+        include_byok_in_budgets: Optional[bool] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -2268,7 +2272,7 @@ class Workspaces(BaseSDK):
     ) -> components.UpsertWorkspaceBudgetResponse:
         r"""Create or update a workspace budget
 
-        Create or update the budget for a given interval. Budget limits must strictly decrease as the interval narrows (lifetime > monthly > weekly > daily). [Management key](/docs/guides/overview/auth/management-api-keys) required.
+        Create or update the budget for a given interval. Budget limits must strictly decrease as the interval narrows (lifetime > monthly > weekly > daily). The optional `include_byok_in_budgets` flag is a workspace-wide setting: when provided it applies to every budget interval for the workspace, not just the interval in this request. Note that a change made here is applied to budget enforcement immediately, but an already-open workspace settings page in the web dashboard may keep showing the previous value until it is reloaded. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param id: The workspace ID (UUID) or slug
         :param interval: Budget reset interval. Use \"lifetime\" for a one-time budget that never resets.
@@ -2280,6 +2284,7 @@ class Workspaces(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
+        :param include_byok_in_budgets: Whether to include BYOK (bring-your-own-key) spend when enforcing the workspace's budgets. This is a workspace-wide setting: it applies to every budget interval (daily, weekly, monthly, and lifetime), not just the interval being upserted in this request. Omit to leave the current setting unchanged.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -2302,6 +2307,7 @@ class Workspaces(BaseSDK):
             id=id,
             interval=interval,
             upsert_workspace_budget_request=components.UpsertWorkspaceBudgetRequest(
+                include_byok_in_budgets=include_byok_in_budgets,
                 limit_usd=limit_usd,
             ),
         )

@@ -3,8 +3,8 @@
 from __future__ import annotations
 from openrouter.types import BaseModel, Nullable, UNSET_SENTINEL
 from pydantic import model_serializer
-from typing import List
-from typing_extensions import TypedDict
+from typing import List, Optional
+from typing_extensions import NotRequired, TypedDict
 
 
 class WorkspaceTypedDict(TypedDict):
@@ -40,6 +40,8 @@ class WorkspaceTypedDict(TypedDict):
     r"""URL-friendly slug for the workspace"""
     updated_at: Nullable[str]
     r"""ISO 8601 timestamp of when the workspace was last updated"""
+    include_byok_in_budgets: NotRequired[bool]
+    r"""Whether BYOK (bring-your-own-key) spend counts toward this workspace's budgets. Set it via the workspace budget endpoints."""
 
 
 class Workspace(BaseModel):
@@ -91,16 +93,40 @@ class Workspace(BaseModel):
     updated_at: Nullable[str]
     r"""ISO 8601 timestamp of when the workspace was last updated"""
 
+    include_byok_in_budgets: Optional[bool] = None
+    r"""Whether BYOK (bring-your-own-key) spend counts toward this workspace's budgets. Set it via the workspace budget endpoints."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
+        optional_fields = set(["include_byok_in_budgets"])
+        nullable_fields = set(
+            [
+                "created_by",
+                "default_image_model",
+                "default_provider_sort",
+                "default_text_model",
+                "description",
+                "io_logging_api_key_ids",
+                "updated_at",
+            ]
+        )
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
             if val != UNSET_SENTINEL:
-                m[k] = val
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
 
         return m
