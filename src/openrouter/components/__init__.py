@@ -2731,6 +2731,12 @@ if TYPE_CHECKING:
         UnifiedBenchmarksMetaTypedDict,
         UnifiedBenchmarksMetaVersion,
     )
+    from .unifiedbenchmarksoritem import (
+        BenchmarkType,
+        UnifiedBenchmarksORItem,
+        UnifiedBenchmarksORItemSource,
+        UnifiedBenchmarksORItemTypedDict,
+    )
     from .unifiedbenchmarksresponse import (
         UnifiedBenchmarksResponse,
         UnifiedBenchmarksResponseData,
@@ -3159,6 +3165,7 @@ __all__ = [
     "BashServerToolEnvironmentTypedDict",
     "BashServerToolType",
     "BashServerToolTypedDict",
+    "BenchmarkType",
     "Billable",
     "BooleanCapability",
     "BooleanCapabilityType",
@@ -4897,6 +4904,9 @@ __all__ = [
     "UnifiedBenchmarksMetaSource",
     "UnifiedBenchmarksMetaTypedDict",
     "UnifiedBenchmarksMetaVersion",
+    "UnifiedBenchmarksORItem",
+    "UnifiedBenchmarksORItemSource",
+    "UnifiedBenchmarksORItemTypedDict",
     "UnifiedBenchmarksResponse",
     "UnifiedBenchmarksResponseData",
     "UnifiedBenchmarksResponseDataTypedDict",
@@ -7058,6 +7068,10 @@ _dynamic_imports: dict[str, str] = {
     "UnifiedBenchmarksMetaSource": ".unifiedbenchmarksmeta",
     "UnifiedBenchmarksMetaTypedDict": ".unifiedbenchmarksmeta",
     "UnifiedBenchmarksMetaVersion": ".unifiedbenchmarksmeta",
+    "BenchmarkType": ".unifiedbenchmarksoritem",
+    "UnifiedBenchmarksORItem": ".unifiedbenchmarksoritem",
+    "UnifiedBenchmarksORItemSource": ".unifiedbenchmarksoritem",
+    "UnifiedBenchmarksORItemTypedDict": ".unifiedbenchmarksoritem",
     "UnifiedBenchmarksResponse": ".unifiedbenchmarksresponse",
     "UnifiedBenchmarksResponseData": ".unifiedbenchmarksresponse",
     "UnifiedBenchmarksResponseDataTypedDict": ".unifiedbenchmarksresponse",
