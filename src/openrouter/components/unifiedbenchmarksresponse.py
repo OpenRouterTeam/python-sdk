@@ -10,6 +10,10 @@ from .unifiedbenchmarksdaitem import (
     UnifiedBenchmarksDAItemTypedDict,
 )
 from .unifiedbenchmarksmeta import UnifiedBenchmarksMeta, UnifiedBenchmarksMetaTypedDict
+from .unifiedbenchmarksoritem import (
+    UnifiedBenchmarksORItem,
+    UnifiedBenchmarksORItemTypedDict,
+)
 from functools import partial
 from openrouter.types import BaseModel
 from openrouter.utils.unions import parse_open_union
@@ -21,7 +25,11 @@ from typing_extensions import Annotated, TypeAliasType, TypedDict
 
 UnifiedBenchmarksResponseDataTypedDict = TypeAliasType(
     "UnifiedBenchmarksResponseDataTypedDict",
-    Union[UnifiedBenchmarksAAItemTypedDict, UnifiedBenchmarksDAItemTypedDict],
+    Union[
+        UnifiedBenchmarksAAItemTypedDict,
+        UnifiedBenchmarksORItemTypedDict,
+        UnifiedBenchmarksDAItemTypedDict,
+    ],
 )
 
 
@@ -38,6 +46,7 @@ class UnknownUnifiedBenchmarksResponseData(BaseModel):
 _UNIFIED_BENCHMARKS_RESPONSE_DATA_VARIANTS: dict[str, Any] = {
     "artificial-analysis": UnifiedBenchmarksAAItem,
     "design-arena": UnifiedBenchmarksDAItem,
+    "openrouter": UnifiedBenchmarksORItem,
 }
 
 
@@ -45,6 +54,7 @@ UnifiedBenchmarksResponseData = Annotated[
     Union[
         UnifiedBenchmarksAAItem,
         UnifiedBenchmarksDAItem,
+        UnifiedBenchmarksORItem,
         UnknownUnifiedBenchmarksResponseData,
     ],
     BeforeValidator(

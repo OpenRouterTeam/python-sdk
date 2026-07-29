@@ -11,6 +11,7 @@ UnifiedBenchmarksMetaSource = Union[
     Literal[
         "artificial-analysis",
         "design-arena",
+        "openrouter",
     ],
     UnrecognizedStr,
 ]
