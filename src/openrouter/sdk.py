@@ -20,7 +20,7 @@ if TYPE_CHECKING:
     from openrouter.api_keys import APIKeys
     from openrouter.benchmarks import Benchmarks
     from openrouter.beta import Beta
-    from openrouter.byok import Byok
+    from openrouter.byok import BYOK
     from openrouter.chat import Chat
     from openrouter.classifications import Classifications
     from openrouter.credits import Credits
@@ -39,8 +39,8 @@ if TYPE_CHECKING:
     from openrouter.providers import Providers
     from openrouter.rerank import Rerank
     from openrouter.responses import Responses
-    from openrouter.stt import Stt
-    from openrouter.tts import Tts
+    from openrouter.stt import STT
+    from openrouter.tts import TTS
     from openrouter.video_generation import VideoGeneration
     from openrouter.workspaces import Workspaces
 
@@ -53,15 +53,15 @@ class OpenRouter(BaseSDK):
     analytics: "Analytics"
     r"""Analytics and usage endpoints"""
     beta: "Beta"
-    tts: "Tts"
+    tts: "TTS"
     r"""Text-to-speech endpoints"""
-    stt: "Stt"
+    stt: "STT"
     r"""Speech-to-text endpoints"""
     o_auth: "OAuth"
     r"""OAuth authentication endpoints"""
     benchmarks: "Benchmarks"
     r"""Benchmarks endpoints"""
-    byok: "Byok"
+    byok: "BYOK"
     r"""BYOK endpoints"""
     chat: "Chat"
     classifications: "Classifications"
@@ -105,11 +105,11 @@ class OpenRouter(BaseSDK):
     _sub_sdk_map = {
         "analytics": ("openrouter.analytics", "Analytics"),
         "beta": ("openrouter.beta", "Beta"),
-        "tts": ("openrouter.tts", "Tts"),
-        "stt": ("openrouter.stt", "Stt"),
+        "tts": ("openrouter.tts", "TTS"),
+        "stt": ("openrouter.stt", "STT"),
         "o_auth": ("openrouter.oauth", "OAuth"),
         "benchmarks": ("openrouter.benchmarks", "Benchmarks"),
-        "byok": ("openrouter.byok", "Byok"),
+        "byok": ("openrouter.byok", "BYOK"),
         "chat": ("openrouter.chat", "Chat"),
         "classifications": ("openrouter.classifications", "Classifications"),
         "credits": ("openrouter.credits", "Credits"),

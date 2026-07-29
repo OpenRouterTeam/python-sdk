@@ -14,7 +14,7 @@ targets:
         sourceRevisionDigest: sha256:aa12cc112c23a77dfc1e10bf22756b6bd1975957da8bea3f11fafcefd3359811
         sourceBlobDigest: sha256:6bdf84189b2aa0a695d778dc3d73a700de1fef130cdc93b96935bfba582cfb91
         codeSamplesNamespace: open-router-python-code-samples
-        codeSamplesRevisionDigest: sha256:a787dfbbc918360e86780e75413b597b8ff9d2118d77c0fbe692b645362f2979
+        codeSamplesRevisionDigest: sha256:4550dde76c09e071ab03cd17f7085561f8392ef4184e3d43eb35d98827f95518
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: 1.787.0
