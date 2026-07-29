@@ -34,6 +34,8 @@ class AutoBetaRouterPluginTypedDict(TypedDict):
     r"""Named cost/quality setting. For auto-beta-router, tiers select cost-percentile bands: low = [0, 20), medium = [20, 40), high = [40, 60), xhigh = [60, 80), and max = [80, 100]. Numeric cost_quality_tradeoff takes precedence and retains ceiling behavior."""
     enabled: NotRequired[bool]
     r"""Set to false to disable the auto-beta-router plugin for this request. Defaults to true."""
+    excluded_models: NotRequired[List[str]]
+    r"""List of model patterns to exclude from auto-beta-router selection. Supports wildcards (e.g., \"meta-llama/*\" excludes all Llama models). Applied after allowed_models, so an excluded pattern always wins over an allowed one."""
 
 
 class AutoBetaRouterPlugin(BaseModel):
@@ -56,10 +58,19 @@ class AutoBetaRouterPlugin(BaseModel):
     enabled: Optional[bool] = None
     r"""Set to false to disable the auto-beta-router plugin for this request. Defaults to true."""
 
+    excluded_models: Optional[List[str]] = None
+    r"""List of model patterns to exclude from auto-beta-router selection. Supports wildcards (e.g., \"meta-llama/*\" excludes all Llama models). Applied after allowed_models, so an excluded pattern always wins over an allowed one."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
-            ["allowed_models", "cost_quality_tradeoff", "cost_tier", "enabled"]
+            [
+                "allowed_models",
+                "cost_quality_tradeoff",
+                "cost_tier",
+                "enabled",
+                "excluded_models",
+            ]
         )
         serialized = handler(self)
         m = {}
