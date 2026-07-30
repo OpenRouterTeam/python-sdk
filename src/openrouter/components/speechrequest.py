@@ -55,14 +55,14 @@ class SpeechRequestTypedDict(TypedDict):
     r"""Text to synthesize"""
     model: str
     r"""TTS model identifier"""
-    voice: str
-    r"""Voice identifier (provider-specific)."""
     provider: NotRequired[SpeechRequestProviderTypedDict]
     r"""Provider-specific passthrough configuration"""
     response_format: NotRequired[SpeechRequestResponseFormat]
     r"""Audio output format"""
     speed: NotRequired[float]
     r"""Playback speed multiplier. Only used by models that support it (e.g. OpenAI TTS). Ignored by other providers."""
+    voice: NotRequired[str]
+    r"""Voice identifier (provider-specific)."""
 
 
 class SpeechRequest(BaseModel):
@@ -74,9 +74,6 @@ class SpeechRequest(BaseModel):
     model: str
     r"""TTS model identifier"""
 
-    voice: str
-    r"""Voice identifier (provider-specific)."""
-
     provider: Optional[SpeechRequestProvider] = None
     r"""Provider-specific passthrough configuration"""
 
@@ -86,9 +83,12 @@ class SpeechRequest(BaseModel):
     speed: Optional[float] = None
     r"""Playback speed multiplier. Only used by models that support it (e.g. OpenAI TTS). Ignored by other providers."""
 
+    voice: Optional[str] = None
+    r"""Voice identifier (provider-specific)."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["provider", "response_format", "speed"])
+        optional_fields = set(["provider", "response_format", "speed", "voice"])
         serialized = handler(self)
         m = {}
 
