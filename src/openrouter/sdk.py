@@ -39,6 +39,7 @@ if TYPE_CHECKING:
     from openrouter.providers import Providers
     from openrouter.rerank import Rerank
     from openrouter.responses import Responses
+    from openrouter.scim import Scim
     from openrouter.stt import STT
     from openrouter.tts import TTS
     from openrouter.video_generation import VideoGeneration
@@ -98,6 +99,8 @@ class OpenRouter(BaseSDK):
     r"""Rerank endpoints"""
     responses: "Responses"
     r"""OpenAI-compatible Responses API endpoints"""
+    scim: "Scim"
+    r"""SCIM endpoints"""
     video_generation: "VideoGeneration"
     r"""Video Generation endpoints"""
     workspaces: "Workspaces"
@@ -128,6 +131,7 @@ class OpenRouter(BaseSDK):
         "providers": ("openrouter.providers", "Providers"),
         "rerank": ("openrouter.rerank", "Rerank"),
         "responses": ("openrouter.responses", "Responses"),
+        "scim": ("openrouter.scim", "Scim"),
         "video_generation": ("openrouter.video_generation", "VideoGeneration"),
         "workspaces": ("openrouter.workspaces", "Workspaces"),
     }
