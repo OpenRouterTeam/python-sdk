@@ -97,6 +97,7 @@ BYOKProviderSlug = Union[
         "switchpoint",
         "tencent",
         "tenstorrent",
+        "thinkingmachines",
         "together",
         "upstage",
         "venice",

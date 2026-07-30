@@ -126,6 +126,7 @@ ProviderResponseProviderName = Union[
         "Switchpoint",
         "Tencent",
         "Tenstorrent",
+        "Thinking Machines",
         "Together",
         "Upstage",
         "Venice",
