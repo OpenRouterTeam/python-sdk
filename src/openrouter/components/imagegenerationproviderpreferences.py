@@ -159,6 +159,7 @@ class ImageGenerationProviderPreferencesOptionsTypedDict(TypedDict):
     targon: NotRequired[Dict[str, Any]]
     tencent: NotRequired[Dict[str, Any]]
     tenstorrent: NotRequired[Dict[str, Any]]
+    thinkingmachines: NotRequired[Dict[str, Any]]
     together: NotRequired[Dict[str, Any]]
     together_lite: NotRequired[Dict[str, Any]]
     ubicloud: NotRequired[Dict[str, Any]]
@@ -456,6 +457,8 @@ class ImageGenerationProviderPreferencesOptions(BaseModel):
 
     tenstorrent: Optional[Dict[str, Any]] = None
 
+    thinkingmachines: Optional[Dict[str, Any]] = None
+
     together: Optional[Dict[str, Any]] = None
 
     together_lite: Annotated[
@@ -607,6 +610,7 @@ class ImageGenerationProviderPreferencesOptions(BaseModel):
                 "targon",
                 "tencent",
                 "tenstorrent",
+                "thinkingmachines",
                 "together",
                 "together-lite",
                 "ubicloud",
