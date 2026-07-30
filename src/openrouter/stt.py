@@ -9,7 +9,7 @@ from openrouter.utils.unmarshal_json_response import unmarshal_json_response
 from typing import Any, Iterable, List, Mapping, Optional, Union
 
 
-class Stt(BaseSDK):
+class STT(BaseSDK):
     r"""Speech-to-text endpoints"""
 
     def create_transcription(

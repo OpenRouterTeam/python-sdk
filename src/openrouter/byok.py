@@ -10,7 +10,7 @@ from openrouter.utils.unmarshal_json_response import unmarshal_json_response
 from typing import Any, Awaitable, Dict, Iterable, List, Mapping, Optional, Union
 
 
-class Byok(BaseSDK):
+class BYOK(BaseSDK):
     r"""BYOK endpoints"""
 
     def list(

@@ -10,7 +10,7 @@ from openrouter.utils.unmarshal_json_response import unmarshal_json_response
 from typing import Any, Mapping, Optional, Union
 
 
-class Tts(BaseSDK):
+class TTS(BaseSDK):
     r"""Text-to-speech endpoints"""
 
     def create_speech(
