@@ -210,13 +210,14 @@ ChatRequestServiceTier = Union[
     Literal[
         "auto",
         "default",
+        "fast",
         "flex",
         "priority",
         "scale",
     ],
     UnrecognizedStr,
 ]
-r"""The service tier to use for processing this request."""
+r"""The service tier to use for processing this request. `fast` is accepted as an alias for `priority`."""
 
 
 StopTypedDict = TypeAliasType("StopTypedDict", Union[str, List[str]])
@@ -282,7 +283,7 @@ class ChatRequestTypedDict(TypedDict):
     seed: NotRequired[Nullable[int]]
     r"""Random seed for deterministic outputs"""
     service_tier: NotRequired[Nullable[ChatRequestServiceTier]]
-    r"""The service tier to use for processing this request."""
+    r"""The service tier to use for processing this request. `fast` is accepted as an alias for `priority`."""
     session_id: NotRequired[str]
     r"""A unique identifier for grouping related requests (e.g., a conversation or agent workflow). When provided, OpenRouter uses it as the sticky routing key, routing all requests in the session to the same provider to maximize prompt cache hits. Also used for observability grouping. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters."""
     stop: NotRequired[Nullable[StopTypedDict]]
@@ -394,7 +395,7 @@ class ChatRequest(BaseModel):
     r"""Random seed for deterministic outputs"""
 
     service_tier: OptionalNullable[ChatRequestServiceTier] = UNSET
-    r"""The service tier to use for processing this request."""
+    r"""The service tier to use for processing this request. `fast` is accepted as an alias for `priority`."""
 
     session_id: Optional[str] = None
     r"""A unique identifier for grouping related requests (e.g., a conversation or agent workflow). When provided, OpenRouter uses it as the sticky routing key, routing all requests in the session to the same provider to maximize prompt cache hits. Also used for observability grouping. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters."""
