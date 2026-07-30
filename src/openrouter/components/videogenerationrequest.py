@@ -657,6 +657,7 @@ VideoGenerationRequestResolution = Union[
     Literal[
         "480p",
         "720p",
+        "768p",
         "1080p",
         "1K",
         "2K",
