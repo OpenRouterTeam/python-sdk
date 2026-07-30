@@ -18,7 +18,6 @@ class Tts(BaseSDK):
         *,
         input: str,
         model: str,
-        voice: str,
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
@@ -30,6 +29,7 @@ class Tts(BaseSDK):
         ] = None,
         response_format: Optional[components.SpeechRequestResponseFormat] = "pcm",
         speed: Optional[float] = None,
+        voice: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -41,7 +41,6 @@ class Tts(BaseSDK):
 
         :param input: Text to synthesize
         :param model: TTS model identifier
-        :param voice: Voice identifier (provider-specific).
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
@@ -52,6 +51,7 @@ class Tts(BaseSDK):
         :param provider: Provider-specific passthrough configuration
         :param response_format: Audio output format
         :param speed: Playback speed multiplier. Only used by models that support it (e.g. OpenAI TTS). Ignored by other providers.
+        :param voice: Voice identifier (provider-specific).
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -236,7 +236,6 @@ class Tts(BaseSDK):
         *,
         input: str,
         model: str,
-        voice: str,
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
@@ -248,6 +247,7 @@ class Tts(BaseSDK):
         ] = None,
         response_format: Optional[components.SpeechRequestResponseFormat] = "pcm",
         speed: Optional[float] = None,
+        voice: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -259,7 +259,6 @@ class Tts(BaseSDK):
 
         :param input: Text to synthesize
         :param model: TTS model identifier
-        :param voice: Voice identifier (provider-specific).
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
@@ -270,6 +269,7 @@ class Tts(BaseSDK):
         :param provider: Provider-specific passthrough configuration
         :param response_format: Audio output format
         :param speed: Playback speed multiplier. Only used by models that support it (e.g. OpenAI TTS). Ignored by other providers.
+        :param voice: Voice identifier (provider-specific).
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
