@@ -811,6 +811,15 @@ if TYPE_CHECKING:
         CreatePresetFromInferenceResponse,
         CreatePresetFromInferenceResponseTypedDict,
     )
+    from .createscimgroupmappingrequest import (
+        CreateScimGroupMappingRequest,
+        CreateScimGroupMappingRequestRole,
+        CreateScimGroupMappingRequestTypedDict,
+    )
+    from .createscimgroupmappingresponse import (
+        CreateScimGroupMappingResponse,
+        CreateScimGroupMappingResponseTypedDict,
+    )
     from .createworkspacerequest import (
         CreateWorkspaceRequest,
         CreateWorkspaceRequestTypedDict,
@@ -894,6 +903,10 @@ if TYPE_CHECKING:
     from .deleteobservabilitydestinationresponse import (
         DeleteObservabilityDestinationResponse,
         DeleteObservabilityDestinationResponseTypedDict,
+    )
+    from .deletescimgroupmappingresponse import (
+        DeleteScimGroupMappingResponse,
+        DeleteScimGroupMappingResponseTypedDict,
     )
     from .deleteworkspacebudgetresponse import (
         DeleteWorkspaceBudgetResponse,
@@ -1164,6 +1177,10 @@ if TYPE_CHECKING:
         GetPresetVersionResponse,
         GetPresetVersionResponseTypedDict,
     )
+    from .getscimgroupmappingresponse import (
+        GetScimGroupMappingResponse,
+        GetScimGroupMappingResponseTypedDict,
+    )
     from .getworkspaceresponse import (
         GetWorkspaceResponse,
         GetWorkspaceResponseTypedDict,
@@ -1430,6 +1447,14 @@ if TYPE_CHECKING:
     from .listpresetversionsresponse import (
         ListPresetVersionsResponse,
         ListPresetVersionsResponseTypedDict,
+    )
+    from .listscimgroupmappingsresponse import (
+        ListScimGroupMappingsResponse,
+        ListScimGroupMappingsResponseTypedDict,
+    )
+    from .listscimgroupsresponse import (
+        ListScimGroupsResponse,
+        ListScimGroupsResponseTypedDict,
     )
     from .listworkspacebudgetsresponse import (
         ListWorkspaceBudgetsResponse,
@@ -2553,6 +2578,12 @@ if TYPE_CHECKING:
     from .routerattempt import RouterAttempt, RouterAttemptTypedDict
     from .routerparams import RouterParams, RouterParamsTypedDict
     from .routingstrategy import RoutingStrategy
+    from .scimgroup import ScimGroup, ScimGroupTypedDict
+    from .scimgroupmapping import (
+        ScimGroupMapping,
+        ScimGroupMappingRole,
+        ScimGroupMappingTypedDict,
+    )
     from .searchcontextsizeenum import SearchContextSizeEnum
     from .searchmodelsservertool_openrouter import (
         SearchModelsServerToolOpenRouter,
@@ -2831,6 +2862,15 @@ if TYPE_CHECKING:
     from .updateobservabilitydestinationresponse import (
         UpdateObservabilityDestinationResponse,
         UpdateObservabilityDestinationResponseTypedDict,
+    )
+    from .updatescimgroupmappingrequest import (
+        UpdateScimGroupMappingRequest,
+        UpdateScimGroupMappingRequestRole,
+        UpdateScimGroupMappingRequestTypedDict,
+    )
+    from .updatescimgroupmappingresponse import (
+        UpdateScimGroupMappingResponse,
+        UpdateScimGroupMappingResponseTypedDict,
     )
     from .updateworkspacerequest import (
         UpdateWorkspaceRequest,
@@ -3548,6 +3588,11 @@ __all__ = [
     "CreateObservabilityDestinationResponseTypedDict",
     "CreatePresetFromInferenceResponse",
     "CreatePresetFromInferenceResponseTypedDict",
+    "CreateScimGroupMappingRequest",
+    "CreateScimGroupMappingRequestRole",
+    "CreateScimGroupMappingRequestTypedDict",
+    "CreateScimGroupMappingResponse",
+    "CreateScimGroupMappingResponseTypedDict",
     "CreateWorkspaceRequest",
     "CreateWorkspaceRequestTypedDict",
     "CreateWorkspaceResponse",
@@ -3598,6 +3643,8 @@ __all__ = [
     "DeleteGuardrailResponseTypedDict",
     "DeleteObservabilityDestinationResponse",
     "DeleteObservabilityDestinationResponseTypedDict",
+    "DeleteScimGroupMappingResponse",
+    "DeleteScimGroupMappingResponseTypedDict",
     "DeleteWorkspaceBudgetResponse",
     "DeleteWorkspaceBudgetResponseTypedDict",
     "DeleteWorkspaceResponse",
@@ -3799,6 +3846,8 @@ __all__ = [
     "GetPresetResponseTypedDict",
     "GetPresetVersionResponse",
     "GetPresetVersionResponseTypedDict",
+    "GetScimGroupMappingResponse",
+    "GetScimGroupMappingResponseTypedDict",
     "GetWorkspaceResponse",
     "GetWorkspaceResponseTypedDict",
     "Guardrail",
@@ -4013,6 +4062,10 @@ __all__ = [
     "ListPresetVersionsResponseTypedDict",
     "ListPresetsResponse",
     "ListPresetsResponseTypedDict",
+    "ListScimGroupMappingsResponse",
+    "ListScimGroupMappingsResponseTypedDict",
+    "ListScimGroupsResponse",
+    "ListScimGroupsResponseTypedDict",
     "ListWorkspaceBudgetsResponse",
     "ListWorkspaceBudgetsResponseTypedDict",
     "ListWorkspaceMembersResponse",
@@ -4759,6 +4812,11 @@ __all__ = [
     "STTUsageTypedDict",
     "STTWord",
     "STTWordTypedDict",
+    "ScimGroup",
+    "ScimGroupMapping",
+    "ScimGroupMappingRole",
+    "ScimGroupMappingTypedDict",
+    "ScimGroupTypedDict",
     "SearchContextSizeEnum",
     "SearchModelsServerToolConfig",
     "SearchModelsServerToolConfigTypedDict",
@@ -5053,6 +5111,11 @@ __all__ = [
     "UpdateObservabilityDestinationRequestTypedDict",
     "UpdateObservabilityDestinationResponse",
     "UpdateObservabilityDestinationResponseTypedDict",
+    "UpdateScimGroupMappingRequest",
+    "UpdateScimGroupMappingRequestRole",
+    "UpdateScimGroupMappingRequestTypedDict",
+    "UpdateScimGroupMappingResponse",
+    "UpdateScimGroupMappingResponseTypedDict",
     "UpdateWorkspaceRequest",
     "UpdateWorkspaceRequestTypedDict",
     "UpdateWorkspaceResponse",
@@ -5701,6 +5764,11 @@ _dynamic_imports: dict[str, str] = {
     "CreateObservabilityDestinationResponseTypedDict": ".createobservabilitydestinationresponse",
     "CreatePresetFromInferenceResponse": ".createpresetfrominferenceresponse",
     "CreatePresetFromInferenceResponseTypedDict": ".createpresetfrominferenceresponse",
+    "CreateScimGroupMappingRequest": ".createscimgroupmappingrequest",
+    "CreateScimGroupMappingRequestRole": ".createscimgroupmappingrequest",
+    "CreateScimGroupMappingRequestTypedDict": ".createscimgroupmappingrequest",
+    "CreateScimGroupMappingResponse": ".createscimgroupmappingresponse",
+    "CreateScimGroupMappingResponseTypedDict": ".createscimgroupmappingresponse",
     "CreateWorkspaceRequest": ".createworkspacerequest",
     "CreateWorkspaceRequestTypedDict": ".createworkspacerequest",
     "CreateWorkspaceResponse": ".createworkspaceresponse",
@@ -5761,6 +5829,8 @@ _dynamic_imports: dict[str, str] = {
     "DeleteGuardrailResponseTypedDict": ".deleteguardrailresponse",
     "DeleteObservabilityDestinationResponse": ".deleteobservabilitydestinationresponse",
     "DeleteObservabilityDestinationResponseTypedDict": ".deleteobservabilitydestinationresponse",
+    "DeleteScimGroupMappingResponse": ".deletescimgroupmappingresponse",
+    "DeleteScimGroupMappingResponseTypedDict": ".deletescimgroupmappingresponse",
     "DeleteWorkspaceBudgetResponse": ".deleteworkspacebudgetresponse",
     "DeleteWorkspaceBudgetResponseTypedDict": ".deleteworkspacebudgetresponse",
     "DeleteWorkspaceResponse": ".deleteworkspaceresponse",
@@ -5967,6 +6037,8 @@ _dynamic_imports: dict[str, str] = {
     "GetPresetResponseTypedDict": ".getpresetresponse",
     "GetPresetVersionResponse": ".getpresetversionresponse",
     "GetPresetVersionResponseTypedDict": ".getpresetversionresponse",
+    "GetScimGroupMappingResponse": ".getscimgroupmappingresponse",
+    "GetScimGroupMappingResponseTypedDict": ".getscimgroupmappingresponse",
     "GetWorkspaceResponse": ".getworkspaceresponse",
     "GetWorkspaceResponseTypedDict": ".getworkspaceresponse",
     "Guardrail": ".guardrail",
@@ -6173,6 +6245,10 @@ _dynamic_imports: dict[str, str] = {
     "ListPresetsResponseTypedDict": ".listpresetsresponse",
     "ListPresetVersionsResponse": ".listpresetversionsresponse",
     "ListPresetVersionsResponseTypedDict": ".listpresetversionsresponse",
+    "ListScimGroupMappingsResponse": ".listscimgroupmappingsresponse",
+    "ListScimGroupMappingsResponseTypedDict": ".listscimgroupmappingsresponse",
+    "ListScimGroupsResponse": ".listscimgroupsresponse",
+    "ListScimGroupsResponseTypedDict": ".listscimgroupsresponse",
     "ListWorkspaceBudgetsResponse": ".listworkspacebudgetsresponse",
     "ListWorkspaceBudgetsResponseTypedDict": ".listworkspacebudgetsresponse",
     "ListWorkspaceMembersResponse": ".listworkspacemembersresponse",
@@ -7042,6 +7118,11 @@ _dynamic_imports: dict[str, str] = {
     "RouterParams": ".routerparams",
     "RouterParamsTypedDict": ".routerparams",
     "RoutingStrategy": ".routingstrategy",
+    "ScimGroup": ".scimgroup",
+    "ScimGroupTypedDict": ".scimgroup",
+    "ScimGroupMapping": ".scimgroupmapping",
+    "ScimGroupMappingRole": ".scimgroupmapping",
+    "ScimGroupMappingTypedDict": ".scimgroupmapping",
     "SearchContextSizeEnum": ".searchcontextsizeenum",
     "SearchModelsServerToolOpenRouter": ".searchmodelsservertool_openrouter",
     "SearchModelsServerToolOpenRouterType": ".searchmodelsservertool_openrouter",
@@ -7231,6 +7312,11 @@ _dynamic_imports: dict[str, str] = {
     "UpdateObservabilityDestinationRequestTypedDict": ".updateobservabilitydestinationrequest",
     "UpdateObservabilityDestinationResponse": ".updateobservabilitydestinationresponse",
     "UpdateObservabilityDestinationResponseTypedDict": ".updateobservabilitydestinationresponse",
+    "UpdateScimGroupMappingRequest": ".updatescimgroupmappingrequest",
+    "UpdateScimGroupMappingRequestRole": ".updatescimgroupmappingrequest",
+    "UpdateScimGroupMappingRequestTypedDict": ".updatescimgroupmappingrequest",
+    "UpdateScimGroupMappingResponse": ".updatescimgroupmappingresponse",
+    "UpdateScimGroupMappingResponseTypedDict": ".updatescimgroupmappingresponse",
     "UpdateWorkspaceRequest": ".updateworkspacerequest",
     "UpdateWorkspaceRequestTypedDict": ".updateworkspacerequest",
     "UpdateWorkspaceResponse": ".updateworkspaceresponse",
