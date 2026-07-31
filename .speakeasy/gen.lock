@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c48cf606-fb42-4a45-9c23-8f0555307828
 management:
-  docChecksum: 90c78b88e476abf5f4b3870ddd61c40a
+  docChecksum: 04bbc41078a88cc87386c416fa055e46
   docVersion: 1.0.0
   speakeasyVersion: 1.787.0
   generationVersion: 2.914.0
-  releaseVersion: 1.1.22
-  configChecksum: 6b2b04df03e2efcd7624592d08e229ff
+  releaseVersion: 1.1.23
+  configChecksum: e308e072d38ab25dfa082923cfcb6c37
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
 persistentEdits:
-  generation_id: c8f59c2a-0f97-463f-bb28-fb80519614fb
-  pristine_commit_hash: b3e6da353d33862f593e6fa510b0f70ee067771c
-  pristine_tree_hash: 2313476e0b12016b7267eb6f5999ea90ff0bb478
+  generation_id: dfa4101d-8e6c-4dc0-982d-8c873b25d753
+  pristine_commit_hash: 1a341267d787005b16c00ddb69db3ef06f07f0ba
+  pristine_tree_hash: 0a622c78755ce17894cd25e65a2450b671dc2602
 features:
   python:
     acceptHeaders: 3.0.0
@@ -2514,8 +2514,8 @@ trackedFiles:
     pristine_git_object: ec384a2cd15b4af761c84955f7da3b98d2427564
   docs/components/inputsmessage.mdx:
     id: 8187d4987ebd
-    last_write_checksum: sha1:cb5e14bd64190feae73408111aa97509c339da0b
-    pristine_git_object: 60f7bd2f3f71f659746917b9114c09fb3dbca65a
+    last_write_checksum: sha1:b8d394bd1a17a2123888433529516baf69ef079f
+    pristine_git_object: f64aa8de68d7d5d22df98a67a1554cbdab6f8d2e
   docs/components/inputsphasecommentary.mdx:
     id: 60d1aac83135
     last_write_checksum: sha1:6876e0b49c7c8d92c4f56fcba61b511accf19a6a
@@ -7046,8 +7046,8 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:96f56c4ebc0662d57384314110cdb48736b0a78c
-    pristine_git_object: 6aa687119319926b25536567b5513375f92e0c82
+    last_write_checksum: sha1:8ad13a878e6b4cd386295697329733e9540a0fe5
+    pristine_git_object: 59d8a340a085a79e82e7f8aee53e82a3529c2392
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77f44b60b98bc126557ec27391f91dfba764bb54
@@ -7074,8 +7074,8 @@ trackedFiles:
     pristine_git_object: 86713cfea633e09d33b3d4e65281071fe20e6137
   src/openrouter/_version.py:
     id: d8d15ad6c586
-    last_write_checksum: sha1:a1b545228fda90af86edd9df0f9b77372db5282a
-    pristine_git_object: b1afeb0e7bf2f79c8a19511285b06a43adf5d1ef
+    last_write_checksum: sha1:a1df53c12984d840da2d89f1bdcfe9e149c16935
+    pristine_git_object: acc2a45cf40c9f459881a490afb4c5f3c59e92bb
   src/openrouter/analytics.py:
     id: cb406b5aaabb
     last_write_checksum: sha1:9e709b71dd0611056dc0cec6150b578defe32841
@@ -8226,8 +8226,8 @@ trackedFiles:
     pristine_git_object: a3d84a96f4553a320f5eee5d63f6bc5c244ab446
   src/openrouter/components/inputs_union.py:
     id: 17d6239cb6a7
-    last_write_checksum: sha1:c321099e2c1ca483d570db734d9218fca60aa56c
-    pristine_git_object: fdb4f4d8726aaa4373e7b869359e24873609b052
+    last_write_checksum: sha1:47b4138ee8bdcb0a779903f037d40f9ff777f00f
+    pristine_git_object: 636485dea6c14040b9357237b04489decc0d2b5a
   src/openrouter/components/inputtext.py:
     id: a995ae96be99
     last_write_checksum: sha1:2da9ff645acc96772701908830151c5a707ed021
@@ -11822,4 +11822,4 @@ examples:
         "500":
           application/json: {"error": {"code": 500, "message": "Internal Server Error"}}
 examplesVersion: 1.0.2
-releaseNotes: "## Python SDK Changes:\n* `open_router.beta.responses.send()`: \n  *  `request.service_tier.enum(fast)` **Added**\n  *  `response` **Changed**\n* `open_router.chat.send()`: \n  *  `request.service_tier.enum(fast)` **Added**\n* `open_router.presets.create_presets_chat_completions()`: \n  *  `request.service_tier.enum(fast)` **Added**\n* `open_router.presets.create_presets_responses()`: \n  *  `request.service_tier.enum(fast)` **Added**\n* `open_router.responses.send()`: \n  *  `request.service_tier.enum(fast)` **Added**\n  *  `response` **Changed**\n"
+releaseNotes: "## Python SDK Changes:\n* `open_router.beta.responses.send()`: \n  *  `request.input.union(Array<>)[].union(class (7)).type` **Changed**\n* `open_router.presets.create_presets_responses()`: \n  *  `request.input.union(Array<>)[].union(class (7)).type` **Changed**\n* `open_router.responses.send()`: \n  *  `request.input.union(Array<>)[].union(class (7)).type` **Changed**\n"
