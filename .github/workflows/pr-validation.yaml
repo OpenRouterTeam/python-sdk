@@ -35,3 +35,6 @@ jobs:
 
       - name: Lint (pylint)
         run: uv run --group dev pylint src --rcfile pylintrc
+
+      - name: Test (pytest)
+        run: uv run --group dev pytest tests
