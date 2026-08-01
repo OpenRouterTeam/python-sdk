@@ -25278,10 +25278,6 @@ components:
       description: 'API key as bearer token in Authorization header'
       scheme: 'bearer'
       type: 'http'
-    bearer:
-      description: 'API key as bearer token in Authorization header'
-      scheme: 'bearer'
-      type: 'http'
 externalDocs:
   description: 'OpenRouter Documentation'
   url: 'https://openrouter.ai/docs'
@@ -33526,8 +33522,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/InternalServerResponse'
           description: 'Internal Server Error - Unexpected server error'
-      security:
-        - bearer: []
       summary: 'List models filtered by user provider preferences, privacy settings, and guardrails'
       tags:
         - 'Models'

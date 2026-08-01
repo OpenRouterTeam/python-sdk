@@ -1,0 +1,21 @@
+overlay: 1.0.0
+x-speakeasy-jsonpath: rfc9535
+info:
+  title: Use the global apiKey scheme for GET /models/user
+  version: 0.0.0
+actions:
+  # `bearer` and `apiKey` are byte-identical schemes (http/bearer, same description),
+  # but only `apiKey` is the document-level default. Because listModelsUser named the
+  # other one, global security could not be hoisted and the generator emitted a
+  # required per-operation `security=` argument on models.list_for_user() — the only
+  # method in the SDK that ignores the client-level api_key. Dropping the override
+  # lets the operation inherit `security: [apiKey]` like the other 94 operations.
+  - target: $.paths["/models/user"].get.security
+    description: Drop the per-operation bearer override so /models/user inherits global apiKey security
+    remove: true
+  # With that override gone, `bearer` has zero references left in the document.
+  # Removing it means a future monorepo sync that points an operation at `bearer`
+  # fails generation loudly instead of silently shipping a second required credential.
+  - target: $.components.securitySchemes.bearer
+    description: Remove the now-unreferenced duplicate of the apiKey security scheme
+    remove: true
