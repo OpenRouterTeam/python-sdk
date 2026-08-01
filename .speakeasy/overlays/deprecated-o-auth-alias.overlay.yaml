@@ -1,0 +1,32 @@
+overlay: 1.0.0
+x-speakeasy-jsonpath: rfc9535
+info:
+  title: Keep o_auth as a deprecated SDK alias for oauth
+  version: 0.0.0
+actions:
+  # Registering `oauth` as an initialism in gen.yaml renames the namespace from
+  # client.o_auth to client.oauth. That attribute has been the only public name
+  # for these operations since v1.0, so the old one stays as a deprecated alias
+  # rather than breaking callers on a regen — same treatment beta.responses got.
+  #
+  # `update` appends to the existing tags list, so only the alias is listed here;
+  # re-listing `OAuth` would duplicate the canonical tag.
+  - target: $.paths["/auth/keys"].post
+    description: Add o_auth as a second (deprecated) SDK namespace for the token exchange operation
+    update:
+      tags:
+        - o_auth
+  - target: $.paths["/auth/keys/code"].post
+    description: Add o_auth as a second (deprecated) SDK namespace for the auth code operation
+    update:
+      tags:
+        - o_auth
+  # Defined here rather than edited into the input spec: the monorepo sdk-bot
+  # overwrites in.openapi.yaml and carries no o_auth tag, so a filter-based edit
+  # would silently match nothing and drop the deprecation notice.
+  - target: $.tags
+    description: Define the deprecated o_auth tag
+    update:
+      - name: o_auth
+        deprecated: true
+        description: Deprecated alias for oauth endpoints. Use oauth instead. Scheduled for removal (sunset date TBD).

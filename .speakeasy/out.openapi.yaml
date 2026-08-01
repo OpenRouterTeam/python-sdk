@@ -26274,6 +26274,7 @@ paths:
       summary: 'Exchange authorization code for API key'
       tags:
         - 'OAuth'
+        - o_auth
     parameters:
       - $ref: "#/components/parameters/AppIdentifier"
       - $ref: "#/components/parameters/AppDisplayName"
@@ -26457,6 +26458,7 @@ paths:
       summary: 'Create authorization code'
       tags:
         - 'OAuth'
+        - o_auth
       x-speakeasy-name-override: 'createAuthCode'
     parameters:
       - $ref: "#/components/parameters/AppIdentifier"
@@ -37848,6 +37850,9 @@ tags:
   - name: beta.responses
     deprecated: true
     description: Deprecated alias for responses endpoints. Use responses instead. Scheduled for removal (sunset date TBD).
+  - name: o_auth
+    deprecated: true
+    description: Deprecated alias for oauth endpoints. Use oauth instead. Scheduled for removal (sunset date TBD).
 x-retry-strategy:
   initialDelay: 500
   maxAttempts: 3
