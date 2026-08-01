@@ -13,7 +13,7 @@ class WorkspaceTypedDict(TypedDict):
     created_by: Nullable[str]
     r"""User ID of the workspace creator"""
     default_guardrail_id: str
-    r"""Deterministic ID of the workspace's implicitly-created default guardrail"""
+    r"""Deterministic ID derived from the workspace ID. The default guardrail is materialized when its configuration is first written."""
     default_image_model: Nullable[str]
     r"""Default image model for this workspace"""
     default_provider_sort: Nullable[str]
@@ -52,7 +52,7 @@ class Workspace(BaseModel):
     r"""User ID of the workspace creator"""
 
     default_guardrail_id: str
-    r"""Deterministic ID of the workspace's implicitly-created default guardrail"""
+    r"""Deterministic ID derived from the workspace ID. The default guardrail is materialized when its configuration is first written."""
 
     default_image_model: Nullable[str]
     r"""Default image model for this workspace"""
