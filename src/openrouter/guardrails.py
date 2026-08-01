@@ -1358,7 +1358,7 @@ class Guardrails(BaseSDK):
     ) -> components.UpdateGuardrailResponse:
         r"""Update a guardrail
 
-        Update an existing guardrail. Collection fields use replace semantics: send the full desired set on every update. [Management key](/docs/guides/overview/auth/management-api-keys) required.
+        Update an existing guardrail, or materialize an unconfigured workspace default guardrail. Collection fields use replace semantics: send the full desired set on every update. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param id: The unique identifier of the guardrail to update
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
@@ -1584,7 +1584,7 @@ class Guardrails(BaseSDK):
     ) -> components.UpdateGuardrailResponse:
         r"""Update a guardrail
 
-        Update an existing guardrail. Collection fields use replace semantics: send the full desired set on every update. [Management key](/docs/guides/overview/auth/management-api-keys) required.
+        Update an existing guardrail, or materialize an unconfigured workspace default guardrail. Collection fields use replace semantics: send the full desired set on every update. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param id: The unique identifier of the guardrail to update
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
