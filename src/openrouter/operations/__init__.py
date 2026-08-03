@@ -455,6 +455,7 @@ if TYPE_CHECKING:
         GetUserActivityGlobalsTypedDict,
         GetUserActivityRequest,
         GetUserActivityRequestTypedDict,
+        GroupBy,
     )
     from .getvideos import (
         GetVideosGlobals,
@@ -1133,6 +1134,7 @@ __all__ = [
     "Granularity",
     "GranularityName",
     "GranularityTypedDict",
+    "GroupBy",
     "Headquarters",
     "ImageURL",
     "ImageURLTypedDict",
@@ -1763,6 +1765,7 @@ _dynamic_imports: dict[str, str] = {
     "GetUserActivityGlobalsTypedDict": ".getuseractivity",
     "GetUserActivityRequest": ".getuseractivity",
     "GetUserActivityRequestTypedDict": ".getuseractivity",
+    "GroupBy": ".getuseractivity",
     "GetVideosGlobals": ".getvideos",
     "GetVideosGlobalsTypedDict": ".getvideos",
     "GetVideosRequest": ".getvideos",

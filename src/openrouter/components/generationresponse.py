@@ -126,6 +126,8 @@ class GenerationResponseDataTypedDict(TypedDict):
     r"""User-Agent header from the request"""
     web_search_engine: Nullable[str]
     r"""The resolved web search engine used for this generation (e.g. exa, firecrawl, parallel)"""
+    workspace_id: Nullable[str]
+    r"""ID of the workspace this generation is attributed to. Null for accounts without workspaces. Generations created before workspace resolution existed are attributed to the account default workspace."""
     request_id: NotRequired[Nullable[str]]
     r"""Unique identifier grouping all generations from a single API request"""
     response_cache_source_id: NotRequired[Nullable[str]]
@@ -260,6 +262,9 @@ class GenerationResponseData(BaseModel):
     web_search_engine: Nullable[str]
     r"""The resolved web search engine used for this generation (e.g. exa, firecrawl, parallel)"""
 
+    workspace_id: Nullable[str]
+    r"""ID of the workspace this generation is attributed to. Null for accounts without workspaces. Generations created before workspace resolution existed are attributed to the account default workspace."""
+
     request_id: OptionalNullable[str] = UNSET
     r"""Unique identifier grouping all generations from a single API request"""
 
@@ -310,6 +315,7 @@ class GenerationResponseData(BaseModel):
                 "upstream_inference_cost",
                 "user_agent",
                 "web_search_engine",
+                "workspace_id",
             ]
         )
         serialized = handler(self)
