@@ -156,6 +156,8 @@ class PublicEndpointTypedDict(TypedDict):
     uptime_last_5m: Nullable[float]
     r"""Uptime percentage over the last 5 minutes, calculated as successful requests / (successful + error requests) * 100. Rate-limited requests are excluded. Returns null if insufficient data."""
     status: NotRequired[EndpointStatus]
+    supports_voice_cloning: NotRequired[bool]
+    r"""Whether this TTS endpoint accepts inline reference audio (`input_references`) for stateless voice cloning. Requests carrying reference audio are only routed to endpoints where this is true."""
 
 
 class PublicEndpoint(BaseModel):
@@ -201,9 +203,12 @@ class PublicEndpoint(BaseModel):
 
     status: Optional[EndpointStatus] = None
 
+    supports_voice_cloning: Optional[bool] = False
+    r"""Whether this TTS endpoint accepts inline reference audio (`input_references`) for stateless voice cloning. Requests carrying reference audio are only routed to endpoints where this is true."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["status"])
+        optional_fields = set(["status", "supports_voice_cloning"])
         nullable_fields = set(
             [
                 "latency_last_30m",
