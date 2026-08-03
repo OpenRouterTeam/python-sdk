@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from .provideroptions import ProviderOptions, ProviderOptionsTypedDict
+from .speechinputreference import SpeechInputReference, SpeechInputReferenceTypedDict
 from openrouter.types import BaseModel, UNSET_SENTINEL, UnrecognizedStr
 from pydantic import model_serializer
-from typing import Literal, Optional, Union
+from typing import List, Literal, Optional, Union
 from typing_extensions import NotRequired, TypedDict
 
 
@@ -55,6 +56,8 @@ class SpeechRequestTypedDict(TypedDict):
     r"""Text to synthesize"""
     model: str
     r"""TTS model identifier"""
+    input_references: NotRequired[List[SpeechInputReferenceTypedDict]]
+    r"""Reference content for stateless voice cloning: one `input_audio` part carrying the voice sample, optionally accompanied by one `text` part with its transcript. Only routed to endpoints that support voice cloning."""
     provider: NotRequired[SpeechRequestProviderTypedDict]
     r"""Provider-specific passthrough configuration"""
     response_format: NotRequired[SpeechRequestResponseFormat]
@@ -74,6 +77,9 @@ class SpeechRequest(BaseModel):
     model: str
     r"""TTS model identifier"""
 
+    input_references: Optional[List[SpeechInputReference]] = None
+    r"""Reference content for stateless voice cloning: one `input_audio` part carrying the voice sample, optionally accompanied by one `text` part with its transcript. Only routed to endpoints that support voice cloning."""
+
     provider: Optional[SpeechRequestProvider] = None
     r"""Provider-specific passthrough configuration"""
 
@@ -88,7 +94,9 @@ class SpeechRequest(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["provider", "response_format", "speed", "voice"])
+        optional_fields = set(
+            ["input_references", "provider", "response_format", "speed", "voice"]
+        )
         serialized = handler(self)
         m = {}
 

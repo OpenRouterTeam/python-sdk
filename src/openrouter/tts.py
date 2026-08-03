@@ -7,7 +7,7 @@ from openrouter._hooks import HookContext
 from openrouter.types import OptionalNullable, UNSET
 from openrouter.utils import get_security_from_env
 from openrouter.utils.unmarshal_json_response import unmarshal_json_response
-from typing import Any, Mapping, Optional, Union
+from typing import Any, Iterable, List, Mapping, Optional, Union
 
 
 class TTS(BaseSDK):
@@ -21,6 +21,12 @@ class TTS(BaseSDK):
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
+        input_references: Optional[
+            Union[
+                Iterable[components.SpeechInputReference],
+                Iterable[components.SpeechInputReferenceTypedDict],
+            ]
+        ] = None,
         provider: Optional[
             Union[
                 components.SpeechRequestProvider,
@@ -48,6 +54,7 @@ class TTS(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
+        :param input_references: Reference content for stateless voice cloning: one `input_audio` part carrying the voice sample, optionally accompanied by one `text` part with its transcript. Only routed to endpoints that support voice cloning.
         :param provider: Provider-specific passthrough configuration
         :param response_format: Audio output format
         :param speed: Playback speed multiplier. Only used by models that support it (e.g. OpenAI TTS). Ignored by other providers.
@@ -73,6 +80,9 @@ class TTS(BaseSDK):
             x_open_router_categories=x_open_router_categories,
             speech_request=components.SpeechRequest(
                 input=input,
+                input_references=utils.get_pydantic_model(
+                    input_references, Optional[List[components.SpeechInputReference]]
+                ),
                 model=model,
                 provider=utils.get_pydantic_model(
                     provider, Optional[components.SpeechRequestProvider]
@@ -239,6 +249,12 @@ class TTS(BaseSDK):
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
+        input_references: Optional[
+            Union[
+                Iterable[components.SpeechInputReference],
+                Iterable[components.SpeechInputReferenceTypedDict],
+            ]
+        ] = None,
         provider: Optional[
             Union[
                 components.SpeechRequestProvider,
@@ -266,6 +282,7 @@ class TTS(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
+        :param input_references: Reference content for stateless voice cloning: one `input_audio` part carrying the voice sample, optionally accompanied by one `text` part with its transcript. Only routed to endpoints that support voice cloning.
         :param provider: Provider-specific passthrough configuration
         :param response_format: Audio output format
         :param speed: Playback speed multiplier. Only used by models that support it (e.g. OpenAI TTS). Ignored by other providers.
@@ -291,6 +308,9 @@ class TTS(BaseSDK):
             x_open_router_categories=x_open_router_categories,
             speech_request=components.SpeechRequest(
                 input=input,
+                input_references=utils.get_pydantic_model(
+                    input_references, Optional[List[components.SpeechInputReference]]
+                ),
                 model=model,
                 provider=utils.get_pydantic_model(
                     provider, Optional[components.SpeechRequestProvider]

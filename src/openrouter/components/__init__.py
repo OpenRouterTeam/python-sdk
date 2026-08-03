@@ -2638,6 +2638,24 @@ if TYPE_CHECKING:
         ShellServerToolEnvironment,
         ShellServerToolEnvironmentTypedDict,
     )
+    from .speechinputreference import (
+        SpeechInputReference,
+        SpeechInputReferenceTypedDict,
+    )
+    from .speechinputreferenceaudio import (
+        SpeechInputReferenceAudio,
+        SpeechInputReferenceAudioType,
+        SpeechInputReferenceAudioTypedDict,
+    )
+    from .speechinputreferenceaudioinput import (
+        SpeechInputReferenceAudioInput,
+        SpeechInputReferenceAudioInputTypedDict,
+    )
+    from .speechinputreferencetext import (
+        SpeechInputReferenceText,
+        SpeechInputReferenceTextType,
+        SpeechInputReferenceTextTypedDict,
+    )
     from .speechrequest import (
         SpeechRequest,
         SpeechRequestProvider,
@@ -4857,6 +4875,16 @@ __all__ = [
     "SourceContent",
     "SourceContentTypedDict",
     "SourceType",
+    "SpeechInputReference",
+    "SpeechInputReferenceAudio",
+    "SpeechInputReferenceAudioInput",
+    "SpeechInputReferenceAudioInputTypedDict",
+    "SpeechInputReferenceAudioType",
+    "SpeechInputReferenceAudioTypedDict",
+    "SpeechInputReferenceText",
+    "SpeechInputReferenceTextType",
+    "SpeechInputReferenceTextTypedDict",
+    "SpeechInputReferenceTypedDict",
     "SpeechRequest",
     "SpeechRequestProvider",
     "SpeechRequestProviderTypedDict",
@@ -7158,6 +7186,16 @@ _dynamic_imports: dict[str, str] = {
     "ShellServerToolEngine": ".shellservertoolengine",
     "ShellServerToolEnvironment": ".shellservertoolenvironment",
     "ShellServerToolEnvironmentTypedDict": ".shellservertoolenvironment",
+    "SpeechInputReference": ".speechinputreference",
+    "SpeechInputReferenceTypedDict": ".speechinputreference",
+    "SpeechInputReferenceAudio": ".speechinputreferenceaudio",
+    "SpeechInputReferenceAudioType": ".speechinputreferenceaudio",
+    "SpeechInputReferenceAudioTypedDict": ".speechinputreferenceaudio",
+    "SpeechInputReferenceAudioInput": ".speechinputreferenceaudioinput",
+    "SpeechInputReferenceAudioInputTypedDict": ".speechinputreferenceaudioinput",
+    "SpeechInputReferenceText": ".speechinputreferencetext",
+    "SpeechInputReferenceTextType": ".speechinputreferencetext",
+    "SpeechInputReferenceTextTypedDict": ".speechinputreferencetext",
     "SpeechRequest": ".speechrequest",
     "SpeechRequestProvider": ".speechrequest",
     "SpeechRequestProviderTypedDict": ".speechrequest",
