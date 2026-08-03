@@ -5,7 +5,7 @@ from openrouter.types import BaseModel, UNSET_SENTINEL
 from openrouter.utils import FieldMetadata, HeaderMetadata, QueryParamMetadata
 import pydantic
 from pydantic import model_serializer
-from typing import Optional
+from typing import Literal, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
@@ -73,6 +73,10 @@ class GetUserActivityGlobals(BaseModel):
         return m
 
 
+GroupBy = Literal["workspace",]
+r"""Set to 'workspace' to split each row per workspace and include `workspace_id` on every item. Omitted by default, in which case rows are aggregated across workspaces (by date, model, and endpoint) and `workspace_id` is not returned — preserving the historical response shape."""
+
+
 class GetUserActivityRequestTypedDict(TypedDict):
     http_referer: NotRequired[str]
     r"""The app identifier should be your app's URL and is used as the primary identifier for rankings.
@@ -93,6 +97,10 @@ class GetUserActivityRequestTypedDict(TypedDict):
     r"""Filter by API key hash (SHA-256 hex string, as returned by the keys API)."""
     user_id: NotRequired[str]
     r"""Filter by org member user ID. Only applicable for organization accounts."""
+    group_by: NotRequired[GroupBy]
+    r"""Set to 'workspace' to split each row per workspace and include `workspace_id` on every item. Omitted by default, in which case rows are aggregated across workspaces (by date, model, and endpoint) and `workspace_id` is not returned — preserving the historical response shape."""
+    workspace_id: NotRequired[str]
+    r"""Filter by workspace ID (UUID). Returns only activity attributed to that workspace. The workspace must belong to the authenticated account."""
 
 
 class GetUserActivityRequest(BaseModel):
@@ -143,6 +151,18 @@ class GetUserActivityRequest(BaseModel):
     ] = None
     r"""Filter by org member user ID. Only applicable for organization accounts."""
 
+    group_by: Annotated[
+        Optional[GroupBy],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Set to 'workspace' to split each row per workspace and include `workspace_id` on every item. Omitted by default, in which case rows are aggregated across workspaces (by date, model, and endpoint) and `workspace_id` is not returned — preserving the historical response shape."""
+
+    workspace_id: Annotated[
+        Optional[str],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Filter by workspace ID (UUID). Returns only activity attributed to that workspace. The workspace must belong to the authenticated account."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
@@ -153,6 +173,8 @@ class GetUserActivityRequest(BaseModel):
                 "date",
                 "api_key_hash",
                 "user_id",
+                "group_by",
+                "workspace_id",
             ]
         )
         serialized = handler(self)
