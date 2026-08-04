@@ -69,6 +69,10 @@ from .openrouterwebsearchservertool import (
 from .paretorouterplugin import ParetoRouterPlugin, ParetoRouterPluginTypedDict
 from .providerpreferences import ProviderPreferences, ProviderPreferencesTypedDict
 from .responsehealingplugin import ResponseHealingPlugin, ResponseHealingPluginTypedDict
+from .shellservertool_openrouter import (
+    ShellServerToolOpenRouter,
+    ShellServerToolOpenRouterTypedDict,
+)
 from .stopservertoolswhencondition import (
     StopServerToolsWhenCondition,
     StopServerToolsWhenConditionTypedDict,
@@ -1049,13 +1053,14 @@ class ToolCustom(BaseModel):
 MessagesRequestToolUnionTypedDict = TypeAliasType(
     "MessagesRequestToolUnionTypedDict",
     Union[
-        MessagesSearchModelsServerToolTypedDict,
-        DatetimeServerToolTypedDict,
         MessagesRequestToolTypedDict,
-        OpenRouterWebSearchServerToolTypedDict,
-        ImageGenerationServerToolOpenRouterTypedDict,
-        BashServerToolTypedDict,
         WebFetchServerToolTypedDict,
+        ShellServerToolOpenRouterTypedDict,
+        OpenRouterWebSearchServerToolTypedDict,
+        BashServerToolTypedDict,
+        DatetimeServerToolTypedDict,
+        ImageGenerationServerToolOpenRouterTypedDict,
+        MessagesSearchModelsServerToolTypedDict,
         ToolBash20250124TypedDict,
         ToolTextEditor20250124TypedDict,
         ToolCustomTypedDict,
@@ -1071,13 +1076,14 @@ MessagesRequestToolUnionTypedDict = TypeAliasType(
 MessagesRequestToolUnion = TypeAliasType(
     "MessagesRequestToolUnion",
     Union[
-        MessagesSearchModelsServerTool,
-        DatetimeServerTool,
         MessagesRequestTool,
-        OpenRouterWebSearchServerTool,
-        ImageGenerationServerToolOpenRouter,
-        BashServerTool,
         WebFetchServerTool,
+        ShellServerToolOpenRouter,
+        OpenRouterWebSearchServerTool,
+        BashServerTool,
+        DatetimeServerTool,
+        ImageGenerationServerToolOpenRouter,
+        MessagesSearchModelsServerTool,
         ToolBash20250124,
         ToolTextEditor20250124,
         ToolCustom,

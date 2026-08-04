@@ -1,0 +1,14 @@
+---
+title: "MessagesShellToolResultBlock"
+---
+
+Output of an `openrouter:shell` call from a prior assistant turn. Accepted on replay and dropped before the provider request — Anthropic has no equivalent block.
+
+
+## Fields
+
+| Field                                                                                            | Type                                                                                             | Required                                                                                         | Description                                                                                      |
+| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| `content`                                                                                        | Dict[str, *Any*]                                                                                 | :heavy_check_mark:                                                                               | N/A                                                                                              |
+| `tool_use_id`                                                                                    | *str*                                                                                            | :heavy_check_mark:                                                                               | N/A                                                                                              |
+| `type`                                                                                           | [components.MessagesShellToolResultBlockType](../components/messagesshelltoolresultblocktype.mdx) | :heavy_check_mark:                                                                               | N/A                                                                                              |
