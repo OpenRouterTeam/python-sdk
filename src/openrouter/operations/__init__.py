@@ -469,6 +469,12 @@ if TYPE_CHECKING:
         GetWorkspaceRequest,
         GetWorkspaceRequestTypedDict,
     )
+    from .getworkspacebudget import (
+        GetWorkspaceBudgetGlobals,
+        GetWorkspaceBudgetGlobalsTypedDict,
+        GetWorkspaceBudgetRequest,
+        GetWorkspaceBudgetRequestTypedDict,
+    )
     from .list import (
         ListData,
         ListDataTypedDict,
@@ -1127,6 +1133,10 @@ __all__ = [
     "GetVideosGlobalsTypedDict",
     "GetVideosRequest",
     "GetVideosRequestTypedDict",
+    "GetWorkspaceBudgetGlobals",
+    "GetWorkspaceBudgetGlobalsTypedDict",
+    "GetWorkspaceBudgetRequest",
+    "GetWorkspaceBudgetRequestTypedDict",
     "GetWorkspaceGlobals",
     "GetWorkspaceGlobalsTypedDict",
     "GetWorkspaceRequest",
@@ -1774,6 +1784,10 @@ _dynamic_imports: dict[str, str] = {
     "GetWorkspaceGlobalsTypedDict": ".getworkspace",
     "GetWorkspaceRequest": ".getworkspace",
     "GetWorkspaceRequestTypedDict": ".getworkspace",
+    "GetWorkspaceBudgetGlobals": ".getworkspacebudget",
+    "GetWorkspaceBudgetGlobalsTypedDict": ".getworkspacebudget",
+    "GetWorkspaceBudgetRequest": ".getworkspacebudget",
+    "GetWorkspaceBudgetRequestTypedDict": ".getworkspacebudget",
     "ListData": ".list",
     "ListDataTypedDict": ".list",
     "ListGlobals": ".list",

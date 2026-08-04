@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c48cf606-fb42-4a45-9c23-8f0555307828
 management:
-  docChecksum: 4bd025f53fc2580c1adab2dec1499dca
+  docChecksum: be7c11dcf47add5989f403c393b004f7
   docVersion: 1.0.0
   speakeasyVersion: 1.787.0
   generationVersion: 2.914.0
-  releaseVersion: 1.1.26
-  configChecksum: 4df5753b337f38beefa79b8bfef8319b
+  releaseVersion: 1.1.27
+  configChecksum: cd57c8a0de51b8a03c8b09310929f01e
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
 persistentEdits:
-  generation_id: 59507816-56c7-4f0b-90d2-dc5e846961fc
-  pristine_commit_hash: 120785b8533df4719a69079a96abe7c26ee4cdc8
-  pristine_tree_hash: 3ffd1100c8437295e3f7442d4ee25fecb720cf38
+  generation_id: 2bd77237-503a-4a76-a70e-c30ff7216a4d
+  pristine_commit_hash: 29dd98cf236ec587c0af26a6ee59169e4e4e24be
+  pristine_tree_hash: 6d691315fc84cf5072331ad8a3b838389435d1b0
 features:
   python:
     acceptHeaders: 3.0.0
@@ -2164,6 +2164,10 @@ trackedFiles:
     id: 59edec5c97d1
     last_write_checksum: sha1:e60a199f393362e0182d4b5aa6218294e6c1af48
     pristine_git_object: 3031bf1129e51ad652a31b7142154b49fcc4560f
+  docs/components/getworkspacebudgetresponse.mdx:
+    id: 9a7d2b80e512
+    last_write_checksum: sha1:a299ce75f8736a4d572a06a48e54e00854a63f0b
+    pristine_git_object: 2974de1ffe849cdfc1720bb7e3431a89ac4c9b14
   docs/components/getworkspaceresponse.mdx:
     id: c8d0c4683019
     last_write_checksum: sha1:5d10c3c4510cdc869a740deee62c31e9d2b02cc9
@@ -6320,6 +6324,14 @@ trackedFiles:
     id: 751150df8456
     last_write_checksum: sha1:dd91989f271487fe03882f979e24cbd19ef1d306
     pristine_git_object: 1b1c087538b67ecc69a464735f5af7bfbf777c1e
+  docs/operations/getworkspacebudgetglobals.mdx:
+    id: 364bec52e3ae
+    last_write_checksum: sha1:48f79d1434f1ce76ff36d9f86f84771f61254b3c
+    pristine_git_object: 9aa76f556ce0cdac2fa0c3755f4da8b5fc2db3c1
+  docs/operations/getworkspacebudgetrequest.mdx:
+    id: 55fa8569d4ab
+    last_write_checksum: sha1:1a609b03011bb7c2adadee5296b81d0594a786e9
+    pristine_git_object: 1e5648b8df0a67d2fd9f7da643dacf63b87fcbfb
   docs/operations/getworkspaceglobals.mdx:
     id: 50abe112c1f4
     last_write_checksum: sha1:c01276f8bf7cc4708cd3e6eeea83c4ac9d97ccf6
@@ -7066,16 +7078,16 @@ trackedFiles:
     pristine_git_object: f277730478c66312d0e4bbb21fae715a9fcf14b9
   docs/sdks/workspaces/README.mdx:
     id: 0c75d023ef6b
-    last_write_checksum: sha1:f517770e2ba836c7a0f9238dd950829207c5b1ca
-    pristine_git_object: 8fc6605c4a67012d439d41aea244c29a333ba787
+    last_write_checksum: sha1:7c5a7d137506704b9afa3d0b93323c0998df5cda
+    pristine_git_object: 9a25256ed9125277444c2d762415eab9a430f1c6
   py.typed:
     id: 258c3ed47ae4
     last_write_checksum: sha1:8efc425ffe830805ffcc0f3055871bdcdc542c60
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:aa22090e0b0c3844eabb41d5c20ff9f2437a3565
-    pristine_git_object: 21b18c4152e6a4ff00490287b5d5d878dda1f8a7
+    last_write_checksum: sha1:a264d9007e08b3eae1c2386bafd532997cef58f4
+    pristine_git_object: 7e513fdef9903e80c52e5722af29177e5be59a12
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77f44b60b98bc126557ec27391f91dfba764bb54
@@ -7102,8 +7114,8 @@ trackedFiles:
     pristine_git_object: 86713cfea633e09d33b3d4e65281071fe20e6137
   src/openrouter/_version.py:
     id: d8d15ad6c586
-    last_write_checksum: sha1:27705f13028414481341cd7909e975d4a5b560f2
-    pristine_git_object: e7538015b3cbee72d2f456e80b219849ddc5508e
+    last_write_checksum: sha1:d58a79dc88238c0e3e3fe18d9e4dc5a4f537f159
+    pristine_git_object: ace1bde4d196b0fb748a67f2dd51ee2b17331927
   src/openrouter/analytics.py:
     id: cb406b5aaabb
     last_write_checksum: sha1:3ea0f1c73fb9c101b7bc5719da4dd7bf62ff469a
@@ -7146,8 +7158,8 @@ trackedFiles:
     pristine_git_object: ad3d247954547814054c01989a2dff3d12b3e4e1
   src/openrouter/components/__init__.py:
     id: 81754e97b3f4
-    last_write_checksum: sha1:b0e873a60c008b4ef8336c155354ee8805dcb76a
-    pristine_git_object: 5659a9d1b2a765d579e4b89a13f36163b355b97a
+    last_write_checksum: sha1:6c39e9051ff665be30ed2c1e7e7f64ed272a5622
+    pristine_git_object: 2a8ad9e6785f77e990e9b1818d7d68eae15757ce
   src/openrouter/components/aabenchmarkentry.py:
     id: e2e0f0b48c82
     last_write_checksum: sha1:fab4d9a24d2cea937bb749d46c5f83941e99d65c
@@ -8104,6 +8116,10 @@ trackedFiles:
     id: f6dd9e0daa9e
     last_write_checksum: sha1:0b1ba09ad5da624c4fdbd1bff5d8919e55133cb9
     pristine_git_object: cfca9a058673bf7db640c2cec6d8dfc4f87837bd
+  src/openrouter/components/getworkspacebudgetresponse.py:
+    id: 5ae557de0b72
+    last_write_checksum: sha1:49ee6ebadd481997bf9285d709847e5db8c0911c
+    pristine_git_object: b013b7e50d1573b98fe3f4f2fb08c8494a3e449a
   src/openrouter/components/getworkspaceresponse.py:
     id: d993d0c4c3da
     last_write_checksum: sha1:918535730d1c352bcc8fd2342e1c4cea89bc357f
@@ -9658,8 +9674,8 @@ trackedFiles:
     pristine_git_object: 0f62389a8410522fe76eed82c64227903a8605c5
   src/openrouter/operations/__init__.py:
     id: 9afcea1e7161
-    last_write_checksum: sha1:10813e43c7af4d49a27bc034ae9c898a347a883c
-    pristine_git_object: 633049645a506d455ecef8e65b8a42edaf36bf42
+    last_write_checksum: sha1:7462feea63bad287e4382464c6a5bf24b401eaa2
+    pristine_git_object: 37c3c8ce47455812f19b303f0b4d34738ee1237a
   src/openrouter/operations/bulkaddworkspacemembers.py:
     id: e0ed56117619
     last_write_checksum: sha1:5c44eb0d40fdece3ac084615f6c6082be4cf1d5a
@@ -9880,6 +9896,10 @@ trackedFiles:
     id: 2ead327ab15e
     last_write_checksum: sha1:3dff8a41dc00770f6233f94b8233655f8310bc49
     pristine_git_object: 1075e4c49f582db35eb921aa25d2b2baeb803dd3
+  src/openrouter/operations/getworkspacebudget.py:
+    id: 1873b593f56e
+    last_write_checksum: sha1:099b2e1c71882774ddd7a998bd47fafffcc3b483
+    pristine_git_object: 54a57c8768e85a76803a6a4002c48a7040b11a85
   src/openrouter/operations/list.py:
     id: 3ced31e3804e
     last_write_checksum: sha1:5db489d16b321c49808ca3da9100839a72903f67
@@ -10174,8 +10194,8 @@ trackedFiles:
     pristine_git_object: 6460765cd23146b66e8b3b85bafd83ccf18d21c6
   src/openrouter/workspaces.py:
     id: cd6c533b1802
-    last_write_checksum: sha1:2a0bb110a1b5b9e9fcbca3f46dd4451b3e861cd3
-    pristine_git_object: 015ceeebf877ef713bc7257dd47d01ee2c4d144c
+    last_write_checksum: sha1:273ca910cf9ea52419cfc681410fbf00b47adbd8
+    pristine_git_object: d302cb5a478a949511c6de8bbf4260a3d0cfd536
 examples:
   createResponses:
     speakeasy-default-create-responses:
@@ -11635,6 +11655,8 @@ examples:
           application/json: {"error": {"code": 404, "message": "Resource not found"}}
         "500":
           application/json: {"error": {"code": 500, "message": "Internal Server Error"}}
+        "400":
+          application/json: {"error": {"code": 400, "message": "Invalid request parameters"}}
   upsertWorkspaceBudget:
     speakeasy-default-upsert-workspace-budget:
       parameters:
@@ -11865,9 +11887,25 @@ examples:
           application/json: {"error": {"code": 404, "message": "Resource not found"}}
         "500":
           application/json: {"error": {"code": 500, "message": "Internal Server Error"}}
+  getWorkspaceBudget:
+    speakeasy-default-get-workspace-budget:
+      parameters:
+        path:
+          id: "production"
+          interval: "monthly"
+      responses:
+        "200":
+          application/json: {"data": {"created_at": "2025-08-24T10:30:00Z", "id": "770e8400-e29b-41d4-a716-446655440000", "limit_usd": 100, "reset_interval": "monthly", "updated_at": "2025-08-24T15:45:00Z", "workspace_id": "550e8400-e29b-41d4-a716-446655440000"}}
+        "400":
+          application/json: {"error": {"code": 400, "message": "Invalid request parameters"}}
+        "401":
+          application/json: {"error": {"code": 401, "message": "Missing Authentication header"}}
+        "404":
+          application/json: {"error": {"code": 404, "message": "Resource not found"}}
+        "500":
+          application/json: {"error": {"code": 500, "message": "Internal Server Error"}}
 examplesVersion: 1.0.2
 releaseNotes: |
   ## Python SDK Changes:
-  * `open_router.tts.create_speech()`:  `request.input_references` **Added**
-  * `open_router.endpoints.list_zdr_endpoints()`:  `response.data[].supports_voice_cloning` **Added**
-  * `open_router.endpoints.list()`:  `response.data.endpoints[].supports_voice_cloning` **Added**
+  * `open_router.workspaces.get_budget()`: **Added**
+  * `open_router.workspaces.delete_budget()`:  `error.status[400]` **Added**
