@@ -29,6 +29,14 @@ from .messagesadvisortoolresultblock import (
     MessagesAdvisorToolResultBlock,
     MessagesAdvisorToolResultBlockTypedDict,
 )
+from .messagesbashtoolresultblock import (
+    MessagesBashToolResultBlock,
+    MessagesBashToolResultBlockTypedDict,
+)
+from .messagesshelltoolresultblock import (
+    MessagesShellToolResultBlock,
+    MessagesShellToolResultBlockTypedDict,
+)
 from .messagestooladditionblock import (
     MessagesToolAdditionBlock,
     MessagesToolAdditionBlockTypedDict,
@@ -385,17 +393,19 @@ MessagesMessageParamContentUnion4TypedDict = TypeAliasType(
     "MessagesMessageParamContentUnion4TypedDict",
     Union[
         ContentRedactedThinkingTypedDict,
-        AnthropicImageBlockParamTypedDict,
-        MessagesToolRemovalBlockTypedDict,
-        MessagesToolAdditionBlockTypedDict,
-        ContentThinkingTypedDict,
         MessagesAdvisorToolResultBlockTypedDict,
+        AnthropicImageBlockParamTypedDict,
+        MessagesBashToolResultBlockTypedDict,
+        MessagesShellToolResultBlockTypedDict,
+        MessagesToolRemovalBlockTypedDict,
+        ContentThinkingTypedDict,
+        MessagesToolAdditionBlockTypedDict,
+        ContentWebSearchToolResultTypedDict,
         ContentCompactionTypedDict,
         AnthropicTextBlockParamTypedDict,
-        ContentWebSearchToolResultTypedDict,
-        ContentToolUseTypedDict,
         ContentServerToolUseTypedDict,
         ContentToolResultTypedDict,
+        ContentToolUseTypedDict,
         AnthropicSearchResultBlockParamTypedDict,
         AnthropicDocumentBlockParamTypedDict,
     ],
@@ -418,6 +428,8 @@ MessagesMessageParamContentUnion4 = Annotated[
         Annotated[MessagesAdvisorToolResultBlock, Tag("advisor_tool_result")],
         Annotated[MessagesToolAdditionBlock, Tag("tool_addition")],
         Annotated[MessagesToolRemovalBlock, Tag("tool_removal")],
+        Annotated[MessagesShellToolResultBlock, Tag("openrouter_shell_tool_result")],
+        Annotated[MessagesBashToolResultBlock, Tag("openrouter_bash_tool_result")],
     ],
     Discriminator(lambda m: get_discriminator(m, "type", "type")),
 ]

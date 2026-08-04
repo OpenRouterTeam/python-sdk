@@ -1529,6 +1529,11 @@ if TYPE_CHECKING:
         MessagesAdvisorToolResultBlockType,
         MessagesAdvisorToolResultBlockTypedDict,
     )
+    from .messagesbashtoolresultblock import (
+        MessagesBashToolResultBlock,
+        MessagesBashToolResultBlockType,
+        MessagesBashToolResultBlockTypedDict,
+    )
     from .messagesfallbackparam import (
         MessagesFallbackParam,
         MessagesFallbackParamTypedDict,
@@ -1682,6 +1687,11 @@ if TYPE_CHECKING:
         MessagesSearchModelsServerTool,
         MessagesSearchModelsServerToolType,
         MessagesSearchModelsServerToolTypedDict,
+    )
+    from .messagesshelltoolresultblock import (
+        MessagesShellToolResultBlock,
+        MessagesShellToolResultBlockType,
+        MessagesShellToolResultBlockTypedDict,
     )
     from .messagestooladditionblock import (
         MessagesToolAdditionBlock,
@@ -4131,6 +4141,9 @@ __all__ = [
     "MessagesAdvisorToolResultBlock",
     "MessagesAdvisorToolResultBlockType",
     "MessagesAdvisorToolResultBlockTypedDict",
+    "MessagesBashToolResultBlock",
+    "MessagesBashToolResultBlockType",
+    "MessagesBashToolResultBlockTypedDict",
     "MessagesFallbackParam",
     "MessagesFallbackParamTypedDict",
     "MessagesMessageParam",
@@ -4167,6 +4180,9 @@ __all__ = [
     "MessagesSearchModelsServerTool",
     "MessagesSearchModelsServerToolType",
     "MessagesSearchModelsServerToolTypedDict",
+    "MessagesShellToolResultBlock",
+    "MessagesShellToolResultBlockType",
+    "MessagesShellToolResultBlockTypedDict",
     "MessagesToolAdditionBlock",
     "MessagesToolAdditionBlockToolMcpToolReference",
     "MessagesToolAdditionBlockToolMcpToolReferenceTypedDict",
@@ -6337,6 +6353,9 @@ _dynamic_imports: dict[str, str] = {
     "MessagesAdvisorToolResultBlock": ".messagesadvisortoolresultblock",
     "MessagesAdvisorToolResultBlockType": ".messagesadvisortoolresultblock",
     "MessagesAdvisorToolResultBlockTypedDict": ".messagesadvisortoolresultblock",
+    "MessagesBashToolResultBlock": ".messagesbashtoolresultblock",
+    "MessagesBashToolResultBlockType": ".messagesbashtoolresultblock",
+    "MessagesBashToolResultBlockTypedDict": ".messagesbashtoolresultblock",
     "MessagesFallbackParam": ".messagesfallbackparam",
     "MessagesFallbackParamTypedDict": ".messagesfallbackparam",
     "ContentCompaction": ".messagesmessageparam",
@@ -6481,6 +6500,9 @@ _dynamic_imports: dict[str, str] = {
     "MessagesSearchModelsServerTool": ".messagessearchmodelsservertool",
     "MessagesSearchModelsServerToolType": ".messagessearchmodelsservertool",
     "MessagesSearchModelsServerToolTypedDict": ".messagessearchmodelsservertool",
+    "MessagesShellToolResultBlock": ".messagesshelltoolresultblock",
+    "MessagesShellToolResultBlockType": ".messagesshelltoolresultblock",
+    "MessagesShellToolResultBlockTypedDict": ".messagesshelltoolresultblock",
     "MessagesToolAdditionBlock": ".messagestooladditionblock",
     "MessagesToolAdditionBlockToolMcpToolReference": ".messagestooladditionblock",
     "MessagesToolAdditionBlockToolMcpToolReferenceTypedDict": ".messagestooladditionblock",
