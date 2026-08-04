@@ -1181,6 +1181,10 @@ if TYPE_CHECKING:
         GetScimGroupMappingResponse,
         GetScimGroupMappingResponseTypedDict,
     )
+    from .getworkspacebudgetresponse import (
+        GetWorkspaceBudgetResponse,
+        GetWorkspaceBudgetResponseTypedDict,
+    )
     from .getworkspaceresponse import (
         GetWorkspaceResponse,
         GetWorkspaceResponseTypedDict,
@@ -3866,6 +3870,8 @@ __all__ = [
     "GetPresetVersionResponseTypedDict",
     "GetScimGroupMappingResponse",
     "GetScimGroupMappingResponseTypedDict",
+    "GetWorkspaceBudgetResponse",
+    "GetWorkspaceBudgetResponseTypedDict",
     "GetWorkspaceResponse",
     "GetWorkspaceResponseTypedDict",
     "Guardrail",
@@ -6067,6 +6073,8 @@ _dynamic_imports: dict[str, str] = {
     "GetPresetVersionResponseTypedDict": ".getpresetversionresponse",
     "GetScimGroupMappingResponse": ".getscimgroupmappingresponse",
     "GetScimGroupMappingResponseTypedDict": ".getscimgroupmappingresponse",
+    "GetWorkspaceBudgetResponse": ".getworkspacebudgetresponse",
+    "GetWorkspaceBudgetResponseTypedDict": ".getworkspacebudgetresponse",
     "GetWorkspaceResponse": ".getworkspaceresponse",
     "GetWorkspaceResponseTypedDict": ".getworkspaceresponse",
     "Guardrail": ".guardrail",
