@@ -12,7 +12,7 @@ FilesServerToolType = Literal["openrouter:files",]
 
 
 class FilesServerToolTypedDict(TypedDict):
-    r"""OpenRouter built-in server tool: read, write, edit, and list workspace files via the Files API. Requires the `x-openrouter-file-ids: openrouter` request header."""
+    r"""OpenRouter built-in server tool: read, write, edit, and list workspace files via the Files API. Requires an authenticated request; files come from the API key's workspace (or the default workspace for keys without one)."""
 
     type: FilesServerToolType
     parameters: NotRequired[FilesServerToolConfigTypedDict]
@@ -20,7 +20,7 @@ class FilesServerToolTypedDict(TypedDict):
 
 
 class FilesServerTool(BaseModel):
-    r"""OpenRouter built-in server tool: read, write, edit, and list workspace files via the Files API. Requires the `x-openrouter-file-ids: openrouter` request header."""
+    r"""OpenRouter built-in server tool: read, write, edit, and list workspace files via the Files API. Requires an authenticated request; files come from the API key's workspace (or the default workspace for keys without one)."""
 
     type: FilesServerToolType
 
