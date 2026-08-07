@@ -102,7 +102,7 @@ class FusionServerToolConfigTypedDict(TypedDict):
     max_completion_tokens: NotRequired[int]
     r"""Maximum number of output tokens (including reasoning tokens) each panelist and the analyst model may produce per inner call. Controls the total output budget so reasoning-heavy models like GPT-5.5 do not exhaust their token allowance before producing visible text. When omitted, panelists default to 32000 and the analyst to 20000."""
     max_tool_calls: NotRequired[int]
-    r"""Maximum number of tool-calling steps each panelist (analysis model) and the analyst model may take during their agentic web-research loop. Models with web_search/web_fetch enabled iterate until they produce a text response or hit this ceiling. Defaults to 8. Capped at 16."""
+    r"""Maximum number of tool-calling steps each panelist (analysis model) and the analyst model may take during their agentic web-research loop. Models with web_search/web_fetch enabled iterate until they produce a text response or hit this ceiling. Defaults to 4. Capped at 16."""
     model: NotRequired[str]
     r"""Slug of the analyst model that produces the structured analysis JSON. Defaults to the model used in the outer API request."""
     reasoning: NotRequired[FusionServerToolConfigReasoningTypedDict]
@@ -126,7 +126,7 @@ class FusionServerToolConfig(BaseModel):
     r"""Maximum number of output tokens (including reasoning tokens) each panelist and the analyst model may produce per inner call. Controls the total output budget so reasoning-heavy models like GPT-5.5 do not exhaust their token allowance before producing visible text. When omitted, panelists default to 32000 and the analyst to 20000."""
 
     max_tool_calls: Optional[int] = None
-    r"""Maximum number of tool-calling steps each panelist (analysis model) and the analyst model may take during their agentic web-research loop. Models with web_search/web_fetch enabled iterate until they produce a text response or hit this ceiling. Defaults to 8. Capped at 16."""
+    r"""Maximum number of tool-calling steps each panelist (analysis model) and the analyst model may take during their agentic web-research loop. Models with web_search/web_fetch enabled iterate until they produce a text response or hit this ceiling. Defaults to 4. Capped at 16."""
 
     model: Optional[str] = None
     r"""Slug of the analyst model that produces the structured analysis JSON. Defaults to the model used in the outer API request."""
