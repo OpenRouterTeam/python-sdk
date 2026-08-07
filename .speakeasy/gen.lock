@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c48cf606-fb42-4a45-9c23-8f0555307828
 management:
-  docChecksum: 4131153ef3975a36cc8d72170d342480
+  docChecksum: 01fc86077124f57b35827aad2e4f8755
   docVersion: 1.0.0
   speakeasyVersion: 1.787.0
   generationVersion: 2.914.0
-  releaseVersion: 1.1.32
-  configChecksum: edf32d3cec9d4c5f92e9eae2b5deb8eb
+  releaseVersion: 1.1.33
+  configChecksum: 65453bab23b113af1a31879f7fc03dc4
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
 persistentEdits:
-  generation_id: 734c4bb5-f98f-44b8-a4db-9c538e7df340
-  pristine_commit_hash: 10cb0a4dd3ddab140f172ceac0ba940c2f051cf1
-  pristine_tree_hash: 6d7fc5b6e9e0879e726e4ecd073aedfda2b6cfbc
+  generation_id: 20ad2ca1-60f6-48a0-95d6-167fd27a897e
+  pristine_commit_hash: 1f0772b40020e57dc94553158c5e20e89d919726
+  pristine_tree_hash: 5d1172658a619a126815e21cfbe55b6058fecc48
 features:
   python:
     acceptHeaders: 3.0.0
@@ -2082,8 +2082,8 @@ trackedFiles:
     pristine_git_object: 7b7d7a350209a88f9a688d1fab6d88fc4754664e
   docs/components/fusionplugin.mdx:
     id: 91c7b4638c7e
-    last_write_checksum: sha1:2361b03ff5f2910737adf0b8faee2493a63a6fb1
-    pristine_git_object: 269960766fecb39f0ead44af2cb142548d8d73b1
+    last_write_checksum: sha1:870595df572ae4a17b4daee349e13d8193c57241
+    pristine_git_object: 32a6b478678908aa7a2df9cc15398a4490741be3
   docs/components/fusionpluginid.mdx:
     id: 2b90bfd2d611
     last_write_checksum: sha1:8111a4424197eb86dfccedfdc798d1a2b5a1c39e
@@ -2094,8 +2094,8 @@ trackedFiles:
     pristine_git_object: 967c0e2abcf18d52589d674bdf45d0414050b71f
   docs/components/fusionservertoolconfig.mdx:
     id: 87976811b0c3
-    last_write_checksum: sha1:9a167625bd084e1bcb317ec7b88b490c79490a3d
-    pristine_git_object: 00c2183f63a67622cb53109ca8e8887473e07b07
+    last_write_checksum: sha1:b8341724db9e04e9dce2eed0568320ddbda06387
+    pristine_git_object: 2ab57e1087166f7728b2f32bbe43d500cbb8b1a8
   docs/components/fusionservertoolconfigeffort.mdx:
     id: f5ce0fbc94aa
     last_write_checksum: sha1:6cefaed8456c5ca47af14755dcfa0df67589f59a
@@ -7102,8 +7102,8 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:65343bcdff44f49aa04254e5a1641625cb4cd8f4
-    pristine_git_object: 049afe5af688a8782651d3ee9c7c1f6929e3e009
+    last_write_checksum: sha1:d94daad013b97144210fa250e9e3932cc1baf4e8
+    pristine_git_object: b2c3f31ea4987ae8992b8774f28c002b16b9448c
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77f44b60b98bc126557ec27391f91dfba764bb54
@@ -7130,8 +7130,8 @@ trackedFiles:
     pristine_git_object: 86713cfea633e09d33b3d4e65281071fe20e6137
   src/openrouter/_version.py:
     id: d8d15ad6c586
-    last_write_checksum: sha1:64bc411e30ab25dff899a976fd19988601df598a
-    pristine_git_object: 00ac74e9c910e33e163ec1cb772d4f99703b9dd1
+    last_write_checksum: sha1:606df2cc0a90a8a44622c53b0dfb293334fb8668
+    pristine_git_object: 62dec07925df42249632f250769525a6e64f0fbe
   src/openrouter/analytics.py:
     id: cb406b5aaabb
     last_write_checksum: sha1:3ea0f1c73fb9c101b7bc5719da4dd7bf62ff469a
@@ -8082,16 +8082,16 @@ trackedFiles:
     pristine_git_object: 2836ce37ac58b2b90568bbd6247fa52b982ef131
   src/openrouter/components/fusionplugin.py:
     id: c0b307f15bb0
-    last_write_checksum: sha1:5178b40046c291eca6b890290bfeef9e5db6885c
-    pristine_git_object: 9ec723b1f05f5cf6cd28987d58d6e5c542756b2c
+    last_write_checksum: sha1:ccfc15d5b3295c565987f457c86731a46e3f61bc
+    pristine_git_object: b3762615f700ff0be163417f4e88cf5b9083f0b2
   src/openrouter/components/fusionservertool_openrouter.py:
     id: a1d6d3aefe6f
     last_write_checksum: sha1:b1e560ea3ed00d00dce53b8d5897e59c7face470
     pristine_git_object: 6c8ceeaf14e361cee78935da98ce2da718e7f47a
   src/openrouter/components/fusionservertoolconfig.py:
     id: 0d1d229c531f
-    last_write_checksum: sha1:299e4b56a189e200e473037691e8e0e42feb66db
-    pristine_git_object: e9eec1d9f62c2aee90f3a98a4b388b2829aab9ea
+    last_write_checksum: sha1:ef0b6eff04b8f397fed68f91f9c23eb30279c59f
+    pristine_git_object: 8b33e51dead6bc8bc73e562b5ea4d3f75f27bdf8
   src/openrouter/components/fusionsource.py:
     id: ce20a4a9f32f
     last_write_checksum: sha1:d38e02465da7d7d4caed6a25b3602709236d9ce6
@@ -11931,4 +11931,3 @@ examples:
         "500":
           application/json: {"error": {"code": 500, "message": "Internal Server Error"}}
 examplesVersion: 1.0.2
-releaseNotes: "## Python SDK Changes:\n* `open_router.byok.list()`:  `response.data[].workspace_id` **Changed** (Breaking ⚠️)\n* `open_router.byok.create()`:  `response.data.workspace_id` **Changed** (Breaking ⚠️)\n* `open_router.byok.get()`:  `response.data.workspace_id` **Changed** (Breaking ⚠️)\n* `open_router.byok.update()`:  `response.data.workspace_id` **Changed** (Breaking ⚠️)\n* `open_router.guardrails.list()`:  `response.data[].workspace_id` **Changed** (Breaking ⚠️)\n* `open_router.guardrails.create()`:  `response.data.workspace_id` **Changed** (Breaking ⚠️)\n* `open_router.guardrails.get()`:  `response.data.workspace_id` **Changed** (Breaking ⚠️)\n* `open_router.guardrails.update()`:  `response.data.workspace_id` **Changed** (Breaking ⚠️)\n* `open_router.observability.list()`:  `response.data[]` **Changed**\n* `open_router.observability.create()`: \n  *  `request` **Changed**\n  *  `response.data` **Changed**\n* `open_router.observability.get()`:  `response.data` **Changed**\n* `open_router.observability.update()`: \n  *  `request` **Changed**\n  *  `response.data` **Changed**\n  *  `error.status[403]` **Added**\n"

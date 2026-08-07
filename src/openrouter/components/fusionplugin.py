@@ -91,7 +91,7 @@ class FusionPluginTypedDict(TypedDict):
     enabled: NotRequired[bool]
     r"""Set to false to disable the fusion plugin for this request. Defaults to true."""
     max_tool_calls: NotRequired[int]
-    r"""Maximum number of tool-calling steps each panelist (analysis model) and the analyst model may take during their agentic web-research loop. Models with web_search/web_fetch enabled iterate until they produce a text response or hit this ceiling. Defaults to 8. Capped at 16."""
+    r"""Maximum number of tool-calling steps each panelist (analysis model) and the analyst model may take during their agentic web-research loop. Models with web_search/web_fetch enabled iterate until they produce a text response or hit this ceiling. Defaults to 4. Capped at 16."""
     model: NotRequired[str]
     r"""Slug of the model that performs both the analyst step (with web_search + web_fetch) and the final synthesis. When omitted, defaults to the first model in the Quality preset."""
     preset: NotRequired[PresetEnum]
@@ -110,7 +110,7 @@ class FusionPlugin(BaseModel):
     r"""Set to false to disable the fusion plugin for this request. Defaults to true."""
 
     max_tool_calls: Optional[int] = None
-    r"""Maximum number of tool-calling steps each panelist (analysis model) and the analyst model may take during their agentic web-research loop. Models with web_search/web_fetch enabled iterate until they produce a text response or hit this ceiling. Defaults to 8. Capped at 16."""
+    r"""Maximum number of tool-calling steps each panelist (analysis model) and the analyst model may take during their agentic web-research loop. Models with web_search/web_fetch enabled iterate until they produce a text response or hit this ceiling. Defaults to 4. Capped at 16."""
 
     model: Optional[str] = None
     r"""Slug of the model that performs both the analyst step (with web_search + web_fetch) and the final synthesis. When omitted, defaults to the first model in the Quality preset."""
