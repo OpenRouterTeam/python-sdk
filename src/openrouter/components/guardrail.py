@@ -29,8 +29,8 @@ class GuardrailTypedDict(TypedDict):
     r"""Whether BYOK (bring-your-own-key) inference spend counts toward this guardrail's limit_usd, in addition to OpenRouter credit spend."""
     name: str
     r"""Name of the guardrail"""
-    workspace_id: str
-    r"""The workspace ID this guardrail belongs to."""
+    workspace_id: Nullable[str]
+    r"""The workspace this guardrail is scoped to, or `null` for an unscoped legacy guardrail predating workspaces. A `null` value does not mean the default workspace, and does not apply the guardrail across every workspace."""
     allowed_models: NotRequired[Nullable[List[str]]]
     r"""Array of model canonical_slugs (immutable identifiers)"""
     allowed_providers: NotRequired[Nullable[List[str]]]
@@ -86,8 +86,8 @@ class Guardrail(BaseModel):
     name: str
     r"""Name of the guardrail"""
 
-    workspace_id: str
-    r"""The workspace ID this guardrail belongs to."""
+    workspace_id: Nullable[str]
+    r"""The workspace this guardrail is scoped to, or `null` for an unscoped legacy guardrail predating workspaces. A `null` value does not mean the default workspace, and does not apply the guardrail across every workspace."""
 
     allowed_models: OptionalNullable[List[str]] = UNSET
     r"""Array of model canonical_slugs (immutable identifiers)"""
@@ -197,6 +197,7 @@ class Guardrail(BaseModel):
                 "limit_usd",
                 "reset_interval",
                 "updated_at",
+                "workspace_id",
             ]
         )
         serialized = handler(self)

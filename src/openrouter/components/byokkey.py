@@ -35,8 +35,8 @@ class BYOKKeyTypedDict(TypedDict):
     r"""The upstream provider this credential authenticates against, as a lowercase slug (e.g. `openai`, `anthropic`, `amazon-bedrock`)."""
     sort_order: int
     r"""Position within the provider — credentials are tried in ascending sort order."""
-    workspace_id: str
-    r"""ID of the workspace this credential belongs to."""
+    workspace_id: Nullable[str]
+    r"""The workspace this credential is scoped to, or `null` when it is global — usable across every workspace in the account. A `null` value does not mean the default workspace."""
     name: NotRequired[Nullable[str]]
     r"""Optional human-readable name for the credential."""
 
@@ -72,8 +72,8 @@ class BYOKKey(BaseModel):
     sort_order: int
     r"""Position within the provider — credentials are tried in ascending sort order."""
 
-    workspace_id: str
-    r"""ID of the workspace this credential belongs to."""
+    workspace_id: Nullable[str]
+    r"""The workspace this credential is scoped to, or `null` when it is global — usable across every workspace in the account. A `null` value does not mean the default workspace."""
 
     name: OptionalNullable[str] = UNSET
     r"""Optional human-readable name for the credential."""
@@ -82,7 +82,13 @@ class BYOKKey(BaseModel):
     def serialize_model(self, handler):
         optional_fields = set(["name"])
         nullable_fields = set(
-            ["allowed_api_key_hashes", "allowed_models", "allowed_user_ids", "name"]
+            [
+                "allowed_api_key_hashes",
+                "allowed_models",
+                "allowed_user_ids",
+                "name",
+                "workspace_id",
+            ]
         )
         serialized = handler(self)
         m = {}

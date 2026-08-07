@@ -30,7 +30,7 @@ class CreateBYOKKeyRequestTypedDict(TypedDict):
     name: NotRequired[Nullable[str]]
     r"""Optional human-readable name for the credential."""
     workspace_id: NotRequired[str]
-    r"""Optional workspace ID. Defaults to the authenticated entity's default workspace."""
+    r"""Optional workspace ID to scope the credential to. When omitted, the credential is created in the account's default workspace; if that default has been deleted, the request returns a 400 and you must pass `workspace_id` explicitly."""
 
 
 class CreateBYOKKeyRequest(BaseModel):
@@ -56,7 +56,7 @@ class CreateBYOKKeyRequest(BaseModel):
     r"""Optional human-readable name for the credential."""
 
     workspace_id: Optional[str] = None
-    r"""Optional workspace ID. Defaults to the authenticated entity's default workspace."""
+    r"""Optional workspace ID to scope the credential to. When omitted, the credential is created in the account's default workspace; if that default has been deleted, the request returns a 400 and you must pass `workspace_id` explicitly."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

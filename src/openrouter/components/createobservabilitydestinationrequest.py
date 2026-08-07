@@ -52,6 +52,12 @@ class CreateObservabilityDestinationRequestTypedDict(TypedDict):
     r"""The destination type. Only stable destination types are accepted."""
     api_key_hashes: NotRequired[Nullable[List[str]]]
     r"""Optional allowlist of OpenRouter API key hashes whose traffic is forwarded. `null` or omitted means all keys. Must contain at least one hash if provided."""
+    broadcast_generation_cost: NotRequired[bool]
+    r"""When true, include cost and billing generation metadata."""
+    broadcast_generation_identity: NotRequired[bool]
+    r"""When true, include identity generation metadata."""
+    broadcast_generation_request_context: NotRequired[bool]
+    r"""When true, include request-context generation metadata."""
     enabled: NotRequired[bool]
     r"""Whether this destination should be enabled immediately."""
     filter_rules: NotRequired[Nullable[ObservabilityFilterRulesConfigNullableTypedDict]]
@@ -77,6 +83,15 @@ class CreateObservabilityDestinationRequest(BaseModel):
     api_key_hashes: OptionalNullable[List[str]] = UNSET
     r"""Optional allowlist of OpenRouter API key hashes whose traffic is forwarded. `null` or omitted means all keys. Must contain at least one hash if provided."""
 
+    broadcast_generation_cost: Optional[bool] = False
+    r"""When true, include cost and billing generation metadata."""
+
+    broadcast_generation_identity: Optional[bool] = False
+    r"""When true, include identity generation metadata."""
+
+    broadcast_generation_request_context: Optional[bool] = False
+    r"""When true, include request-context generation metadata."""
+
     enabled: Optional[bool] = True
     r"""Whether this destination should be enabled immediately."""
 
@@ -97,6 +112,9 @@ class CreateObservabilityDestinationRequest(BaseModel):
         optional_fields = set(
             [
                 "api_key_hashes",
+                "broadcast_generation_cost",
+                "broadcast_generation_identity",
+                "broadcast_generation_request_context",
                 "enabled",
                 "filter_rules",
                 "privacy_mode",

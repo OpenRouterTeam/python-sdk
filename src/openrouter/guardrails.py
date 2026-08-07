@@ -423,7 +423,7 @@ class Guardrails(BaseSDK):
         :param include_byok_in_budgets: Whether BYOK (bring-your-own-key) inference spend counts toward this guardrail's limit_usd, in addition to OpenRouter credit spend. Defaults to false.
         :param limit_usd: Spending limit in USD
         :param reset_interval: Interval at which the limit resets (daily, weekly, monthly)
-        :param workspace_id: The workspace to create the guardrail in. Defaults to the default workspace if not provided.
+        :param workspace_id: The workspace to create the guardrail in. When omitted, the guardrail is created in the default workspace; if that default has been deleted, the request returns a 400 and you must pass `workspace_id` explicitly.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -649,7 +649,7 @@ class Guardrails(BaseSDK):
         :param include_byok_in_budgets: Whether BYOK (bring-your-own-key) inference spend counts toward this guardrail's limit_usd, in addition to OpenRouter credit spend. Defaults to false.
         :param limit_usd: Spending limit in USD
         :param reset_interval: Interval at which the limit resets (daily, weekly, monthly)
-        :param workspace_id: The workspace to create the guardrail in. Defaults to the default workspace if not provided.
+        :param workspace_id: The workspace to create the guardrail in. When omitted, the guardrail is created in the default workspace; if that default has been deleted, the request returns a 400 and you must pass `workspace_id` explicitly.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
