@@ -68,7 +68,7 @@ class VideoGeneration(BaseSDK):
         :param duration: Duration of the generated video in seconds
         :param frame_images: Images to use as the first and/or last frame of the generated video. Each image must specify a frame_type of first_frame or last_frame.
         :param generate_audio: Whether to generate audio alongside the video. Defaults to the endpoint's generate_audio capability flag, false if not set.
-        :param input_references: Reference assets to guide video generation. Accepts image, audio, and video references. Audio and video references are only honored by providers that support them (currently BytePlus Seedance 2.0); other providers use image references and ignore the rest.
+        :param input_references: Reference assets to guide video generation. Accepts image, audio, and video references. Audio and video references are only honored by providers that support them (including BytePlus Seedance generation 2 and newer); other providers use image references and ignore the rest.
         :param prompt: Text prompt describing the video to generate. Optional for models that support generating a video from image input alone; required by all other models.
         :param provider: Provider-specific passthrough configuration
         :param resolution: Resolution of the generated video
@@ -274,7 +274,7 @@ class VideoGeneration(BaseSDK):
         :param duration: Duration of the generated video in seconds
         :param frame_images: Images to use as the first and/or last frame of the generated video. Each image must specify a frame_type of first_frame or last_frame.
         :param generate_audio: Whether to generate audio alongside the video. Defaults to the endpoint's generate_audio capability flag, false if not set.
-        :param input_references: Reference assets to guide video generation. Accepts image, audio, and video references. Audio and video references are only honored by providers that support them (currently BytePlus Seedance 2.0); other providers use image references and ignore the rest.
+        :param input_references: Reference assets to guide video generation. Accepts image, audio, and video references. Audio and video references are only honored by providers that support them (including BytePlus Seedance generation 2 and newer); other providers use image references and ignore the rest.
         :param prompt: Text prompt describing the video to generate. Optional for models that support generating a video from image input alone; required by all other models.
         :param provider: Provider-specific passthrough configuration
         :param resolution: Resolution of the generated video

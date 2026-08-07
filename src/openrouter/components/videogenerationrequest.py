@@ -685,7 +685,7 @@ class VideoGenerationRequestTypedDict(TypedDict):
     generate_audio: NotRequired[bool]
     r"""Whether to generate audio alongside the video. Defaults to the endpoint's generate_audio capability flag, false if not set."""
     input_references: NotRequired[List[InputReferenceTypedDict]]
-    r"""Reference assets to guide video generation. Accepts image, audio, and video references. Audio and video references are only honored by providers that support them (currently BytePlus Seedance 2.0); other providers use image references and ignore the rest."""
+    r"""Reference assets to guide video generation. Accepts image, audio, and video references. Audio and video references are only honored by providers that support them (including BytePlus Seedance generation 2 and newer); other providers use image references and ignore the rest."""
     prompt: NotRequired[str]
     r"""Text prompt describing the video to generate. Optional for models that support generating a video from image input alone; required by all other models."""
     provider: NotRequired[VideoGenerationRequestProviderTypedDict]
@@ -717,7 +717,7 @@ class VideoGenerationRequest(BaseModel):
     r"""Whether to generate audio alongside the video. Defaults to the endpoint's generate_audio capability flag, false if not set."""
 
     input_references: Optional[List[InputReference]] = None
-    r"""Reference assets to guide video generation. Accepts image, audio, and video references. Audio and video references are only honored by providers that support them (currently BytePlus Seedance 2.0); other providers use image references and ignore the rest."""
+    r"""Reference assets to guide video generation. Accepts image, audio, and video references. Audio and video references are only honored by providers that support them (including BytePlus Seedance generation 2 and newer); other providers use image references and ignore the rest."""
 
     prompt: Optional[str] = None
     r"""Text prompt describing the video to generate. Optional for models that support generating a video from image input alone; required by all other models."""
