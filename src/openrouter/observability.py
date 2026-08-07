@@ -362,6 +362,9 @@ class Observability(BaseSDK):
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
         api_key_hashes: OptionalNullable[Iterable[str]] = UNSET,
+        broadcast_generation_cost: Optional[bool] = False,
+        broadcast_generation_identity: Optional[bool] = False,
+        broadcast_generation_request_context: Optional[bool] = False,
         enabled: Optional[bool] = True,
         filter_rules: OptionalNullable[
             Union[
@@ -392,6 +395,9 @@ class Observability(BaseSDK):
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
         :param api_key_hashes: Optional allowlist of OpenRouter API key hashes whose traffic is forwarded. `null` or omitted means all keys. Must contain at least one hash if provided.
+        :param broadcast_generation_cost: When true, include cost and billing generation metadata.
+        :param broadcast_generation_identity: When true, include identity generation metadata.
+        :param broadcast_generation_request_context: When true, include request-context generation metadata.
         :param enabled: Whether this destination should be enabled immediately.
         :param filter_rules: Optional structured filter rules controlling which events are forwarded.
         :param privacy_mode: When true, request/response bodies are not forwarded — only metadata.
@@ -420,6 +426,9 @@ class Observability(BaseSDK):
                 api_key_hashes=utils.unmarshal(
                     api_key_hashes, OptionalNullable[List[str]]
                 ),
+                broadcast_generation_cost=broadcast_generation_cost,
+                broadcast_generation_identity=broadcast_generation_identity,
+                broadcast_generation_request_context=broadcast_generation_request_context,
                 config=utils.unmarshal(config, Dict[str, Any]),
                 enabled=enabled,
                 filter_rules=utils.get_pydantic_model(
@@ -545,6 +554,9 @@ class Observability(BaseSDK):
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
         api_key_hashes: OptionalNullable[Iterable[str]] = UNSET,
+        broadcast_generation_cost: Optional[bool] = False,
+        broadcast_generation_identity: Optional[bool] = False,
+        broadcast_generation_request_context: Optional[bool] = False,
         enabled: Optional[bool] = True,
         filter_rules: OptionalNullable[
             Union[
@@ -575,6 +587,9 @@ class Observability(BaseSDK):
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
         :param api_key_hashes: Optional allowlist of OpenRouter API key hashes whose traffic is forwarded. `null` or omitted means all keys. Must contain at least one hash if provided.
+        :param broadcast_generation_cost: When true, include cost and billing generation metadata.
+        :param broadcast_generation_identity: When true, include identity generation metadata.
+        :param broadcast_generation_request_context: When true, include request-context generation metadata.
         :param enabled: Whether this destination should be enabled immediately.
         :param filter_rules: Optional structured filter rules controlling which events are forwarded.
         :param privacy_mode: When true, request/response bodies are not forwarded — only metadata.
@@ -603,6 +618,9 @@ class Observability(BaseSDK):
                 api_key_hashes=utils.unmarshal(
                     api_key_hashes, OptionalNullable[List[str]]
                 ),
+                broadcast_generation_cost=broadcast_generation_cost,
+                broadcast_generation_identity=broadcast_generation_identity,
+                broadcast_generation_request_context=broadcast_generation_request_context,
                 config=utils.unmarshal(config, Dict[str, Any]),
                 enabled=enabled,
                 filter_rules=utils.get_pydantic_model(
@@ -1246,6 +1264,9 @@ class Observability(BaseSDK):
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
         api_key_hashes: OptionalNullable[Iterable[str]] = UNSET,
+        broadcast_generation_cost: Optional[bool] = None,
+        broadcast_generation_identity: Optional[bool] = None,
+        broadcast_generation_request_context: Optional[bool] = None,
         config: Optional[Mapping[str, Any]] = None,
         enabled: Optional[bool] = None,
         filter_rules: OptionalNullable[
@@ -1275,6 +1296,9 @@ class Observability(BaseSDK):
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
         :param api_key_hashes: Optional allowlist of OpenRouter API key hashes. `null` clears the filter (all keys). Omitting leaves the current value. Must contain at least one hash if provided.
+        :param broadcast_generation_cost: Whether to include cost and billing generation metadata.
+        :param broadcast_generation_identity: Whether to include identity generation metadata.
+        :param broadcast_generation_request_context: Whether to include request-context generation metadata.
         :param config: Provider-specific configuration fields to update. Masked values are ignored; unset fields keep their current value.
         :param enabled: Whether the destination is enabled.
         :param filter_rules:
@@ -1305,6 +1329,9 @@ class Observability(BaseSDK):
                 api_key_hashes=utils.unmarshal(
                     api_key_hashes, OptionalNullable[List[str]]
                 ),
+                broadcast_generation_cost=broadcast_generation_cost,
+                broadcast_generation_identity=broadcast_generation_identity,
+                broadcast_generation_request_context=broadcast_generation_request_context,
                 config=utils.unmarshal(config, Optional[Dict[str, Any]]),
                 enabled=enabled,
                 filter_rules=utils.get_pydantic_model(
@@ -1390,6 +1417,11 @@ class Observability(BaseSDK):
                 errors.UnauthorizedResponseErrorData, http_res
             )
             raise errors.UnauthorizedResponseError(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ForbiddenResponseErrorData, http_res
+            )
+            raise errors.ForbiddenResponseError(response_data, http_res)
         if utils.match_response(http_res, "404", "application/json"):
             response_data = unmarshal_json_response(
                 errors.NotFoundResponseErrorData, http_res
@@ -1426,6 +1458,9 @@ class Observability(BaseSDK):
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
         api_key_hashes: OptionalNullable[Iterable[str]] = UNSET,
+        broadcast_generation_cost: Optional[bool] = None,
+        broadcast_generation_identity: Optional[bool] = None,
+        broadcast_generation_request_context: Optional[bool] = None,
         config: Optional[Mapping[str, Any]] = None,
         enabled: Optional[bool] = None,
         filter_rules: OptionalNullable[
@@ -1455,6 +1490,9 @@ class Observability(BaseSDK):
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
         :param api_key_hashes: Optional allowlist of OpenRouter API key hashes. `null` clears the filter (all keys). Omitting leaves the current value. Must contain at least one hash if provided.
+        :param broadcast_generation_cost: Whether to include cost and billing generation metadata.
+        :param broadcast_generation_identity: Whether to include identity generation metadata.
+        :param broadcast_generation_request_context: Whether to include request-context generation metadata.
         :param config: Provider-specific configuration fields to update. Masked values are ignored; unset fields keep their current value.
         :param enabled: Whether the destination is enabled.
         :param filter_rules:
@@ -1485,6 +1523,9 @@ class Observability(BaseSDK):
                 api_key_hashes=utils.unmarshal(
                     api_key_hashes, OptionalNullable[List[str]]
                 ),
+                broadcast_generation_cost=broadcast_generation_cost,
+                broadcast_generation_identity=broadcast_generation_identity,
+                broadcast_generation_request_context=broadcast_generation_request_context,
                 config=utils.unmarshal(config, Optional[Dict[str, Any]]),
                 enabled=enabled,
                 filter_rules=utils.get_pydantic_model(
@@ -1570,6 +1611,11 @@ class Observability(BaseSDK):
                 errors.UnauthorizedResponseErrorData, http_res
             )
             raise errors.UnauthorizedResponseError(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ForbiddenResponseErrorData, http_res
+            )
+            raise errors.ForbiddenResponseError(response_data, http_res)
         if utils.match_response(http_res, "404", "application/json"):
             response_data = unmarshal_json_response(
                 errors.NotFoundResponseErrorData, http_res

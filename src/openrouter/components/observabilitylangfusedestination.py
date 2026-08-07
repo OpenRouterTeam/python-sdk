@@ -55,6 +55,12 @@ ObservabilityLangfuseDestinationType = Literal["langfuse",]
 class ObservabilityLangfuseDestinationTypedDict(TypedDict):
     api_key_hashes: Nullable[List[str]]
     r"""Optional allowlist of OpenRouter API key hashes (`api_keys.hash`) whose traffic is forwarded to this destination. `null` means all keys."""
+    broadcast_generation_cost: bool
+    r"""When true, include cost and billing generation metadata."""
+    broadcast_generation_identity: bool
+    r"""When true, include identity generation metadata."""
+    broadcast_generation_request_context: bool
+    r"""When true, include request-context generation metadata."""
     config: ObservabilityLangfuseDestinationConfigTypedDict
     created_at: str
     r"""ISO timestamp of when the destination was created."""
@@ -80,6 +86,15 @@ class ObservabilityLangfuseDestinationTypedDict(TypedDict):
 class ObservabilityLangfuseDestination(BaseModel):
     api_key_hashes: Nullable[List[str]]
     r"""Optional allowlist of OpenRouter API key hashes (`api_keys.hash`) whose traffic is forwarded to this destination. `null` means all keys."""
+
+    broadcast_generation_cost: bool
+    r"""When true, include cost and billing generation metadata."""
+
+    broadcast_generation_identity: bool
+    r"""When true, include identity generation metadata."""
+
+    broadcast_generation_request_context: bool
+    r"""When true, include request-context generation metadata."""
 
     config: ObservabilityLangfuseDestinationConfig
 

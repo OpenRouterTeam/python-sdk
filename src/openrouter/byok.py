@@ -41,7 +41,7 @@ class BYOK(BaseSDK):
 
         :param offset: Number of records to skip for pagination
         :param limit: Maximum number of records to return (max 100)
-        :param workspace_id: Optional workspace ID to filter by. Defaults to the authenticated entity's default workspace.
+        :param workspace_id: Optional workspace ID to filter by. When omitted, resolves to the account’s default workspace; if that default has been deleted, the request returns a 400 and you must pass `workspace_id` explicitly.
         :param provider: Optional provider slug to filter by (e.g. `openai`, `anthropic`, `amazon-bedrock`).
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -212,7 +212,7 @@ class BYOK(BaseSDK):
 
         :param offset: Number of records to skip for pagination
         :param limit: Maximum number of records to return (max 100)
-        :param workspace_id: Optional workspace ID to filter by. Defaults to the authenticated entity's default workspace.
+        :param workspace_id: Optional workspace ID to filter by. When omitted, resolves to the account’s default workspace; if that default has been deleted, the request returns a 400 and you must pass `workspace_id` explicitly.
         :param provider: Optional provider slug to filter by (e.g. `openai`, `anthropic`, `amazon-bedrock`).
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -379,7 +379,7 @@ class BYOK(BaseSDK):
     ) -> components.CreateBYOKKeyResponse:
         r"""Create a BYOK provider credential
 
-        Create a new bring-your-own-key (BYOK) provider credential. The raw key is encrypted at rest and never returned in API responses. Defaults to the authenticated entity's default workspace; use the `workspace_id` body field to scope to a different workspace. Treat the raw key as write-only; it is never returned after creation. [Management key](/docs/guides/overview/auth/management-api-keys) required.
+        Create a new bring-your-own-key (BYOK) provider credential. The raw key is encrypted at rest and never returned in API responses. When `workspace_id` is omitted, the credential is created in the default workspace; if that default has been deleted, the request returns a 400 and you must pass `workspace_id` explicitly. Treat the raw key as write-only; it is never returned after creation. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param key: The raw provider API key or credential. This value is encrypted at rest and never returned in API responses.
         :param provider: The upstream provider this credential authenticates against, as a lowercase slug (e.g. `openai`, `anthropic`, `amazon-bedrock`).
@@ -395,7 +395,7 @@ class BYOK(BaseSDK):
         :param disabled: Whether this credential should be created in a disabled state.
         :param is_fallback: Whether this credential is treated as a fallback — used only after non-fallback keys for the same provider have been tried.
         :param name: Optional human-readable name for the credential.
-        :param workspace_id: Optional workspace ID. Defaults to the authenticated entity's default workspace.
+        :param workspace_id: Optional workspace ID to scope the credential to. When omitted, the credential is created in the account's default workspace; if that default has been deleted, the request returns a 400 and you must pass `workspace_id` explicitly.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -546,7 +546,7 @@ class BYOK(BaseSDK):
     ) -> components.CreateBYOKKeyResponse:
         r"""Create a BYOK provider credential
 
-        Create a new bring-your-own-key (BYOK) provider credential. The raw key is encrypted at rest and never returned in API responses. Defaults to the authenticated entity's default workspace; use the `workspace_id` body field to scope to a different workspace. Treat the raw key as write-only; it is never returned after creation. [Management key](/docs/guides/overview/auth/management-api-keys) required.
+        Create a new bring-your-own-key (BYOK) provider credential. The raw key is encrypted at rest and never returned in API responses. When `workspace_id` is omitted, the credential is created in the default workspace; if that default has been deleted, the request returns a 400 and you must pass `workspace_id` explicitly. Treat the raw key as write-only; it is never returned after creation. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param key: The raw provider API key or credential. This value is encrypted at rest and never returned in API responses.
         :param provider: The upstream provider this credential authenticates against, as a lowercase slug (e.g. `openai`, `anthropic`, `amazon-bedrock`).
@@ -562,7 +562,7 @@ class BYOK(BaseSDK):
         :param disabled: Whether this credential should be created in a disabled state.
         :param is_fallback: Whether this credential is treated as a fallback — used only after non-fallback keys for the same provider have been tried.
         :param name: Optional human-readable name for the credential.
-        :param workspace_id: Optional workspace ID. Defaults to the authenticated entity's default workspace.
+        :param workspace_id: Optional workspace ID to scope the credential to. When omitted, the credential is created in the account's default workspace; if that default has been deleted, the request returns a 400 and you must pass `workspace_id` explicitly.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
