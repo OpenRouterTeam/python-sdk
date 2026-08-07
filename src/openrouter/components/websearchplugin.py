@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 from .websearchengine import WebSearchEngine
+from .websearchmode import WebSearchMode
 from openrouter.types import (
     BaseModel,
     Nullable,
@@ -82,6 +83,8 @@ class WebSearchPluginTypedDict(TypedDict):
     max_results: NotRequired[int]
     max_uses: NotRequired[int]
     r"""Maximum number of times the model can invoke web search in a single turn. Passed through to native providers that support it (e.g. Anthropic)."""
+    mode: NotRequired[WebSearchMode]
+    r"""Engine-native search mode. Exa supports instant, fast, auto (default), deep-lite, deep, and deep-reasoning. Parallel supports turbo (default), basic, and advanced. Modes unsupported by the selected engine are ignored."""
     search_prompt: NotRequired[str]
     user_location: NotRequired[Nullable[UserLocationTypedDict]]
 
@@ -106,6 +109,9 @@ class WebSearchPlugin(BaseModel):
     max_uses: Optional[int] = None
     r"""Maximum number of times the model can invoke web search in a single turn. Passed through to native providers that support it (e.g. Anthropic)."""
 
+    mode: Optional[WebSearchMode] = None
+    r"""Engine-native search mode. Exa supports instant, fast, auto (default), deep-lite, deep, and deep-reasoning. Parallel supports turbo (default), basic, and advanced. Modes unsupported by the selected engine are ignored."""
+
     search_prompt: Optional[str] = None
 
     user_location: OptionalNullable[UserLocation] = UNSET
@@ -120,6 +126,7 @@ class WebSearchPlugin(BaseModel):
                 "include_domains",
                 "max_results",
                 "max_uses",
+                "mode",
                 "search_prompt",
                 "user_location",
             ]

@@ -8,6 +8,7 @@ from .preview_websearchuserlocation import (
 from .searchcontextsizeenum import SearchContextSizeEnum
 from .websearchdomainfilter import WebSearchDomainFilter, WebSearchDomainFilterTypedDict
 from .websearchengineenum import WebSearchEngineEnum
+from .websearchmode import WebSearchMode
 from openrouter.types import (
     BaseModel,
     Nullable,
@@ -34,6 +35,8 @@ class PreviewWebSearchServerToolTypedDict(TypedDict):
     r"""Maximum number of search results to return per search call. Defaults to 5. Applies to Exa, Firecrawl, Parallel, and Perplexity engines; ignored with native provider search. Perplexity supports a maximum of 20; values above 20 are clamped."""
     max_uses: NotRequired[int]
     r"""Maximum number of web searches the model may perform in a single request. Once reached, further search calls return an error result instead of executing. Applies to the Exa, Firecrawl, Parallel, and Perplexity engines. With native provider search, forwarded only to Anthropic (as `max_uses`); other native search providers have no equivalent parameter and ignore it."""
+    mode: NotRequired[WebSearchMode]
+    r"""Engine-native search mode. Exa supports instant, fast, auto (default), deep-lite, deep, and deep-reasoning. Parallel supports turbo (default), basic, and advanced. Modes unsupported by the selected engine are ignored."""
     search_context_size: NotRequired[SearchContextSizeEnum]
     r"""Size of the search context for web search tools"""
     user_location: NotRequired[Nullable[PreviewWebSearchUserLocationTypedDict]]
@@ -55,6 +58,9 @@ class PreviewWebSearchServerTool(BaseModel):
     max_uses: Optional[int] = None
     r"""Maximum number of web searches the model may perform in a single request. Once reached, further search calls return an error result instead of executing. Applies to the Exa, Firecrawl, Parallel, and Perplexity engines. With native provider search, forwarded only to Anthropic (as `max_uses`); other native search providers have no equivalent parameter and ignore it."""
 
+    mode: Optional[WebSearchMode] = None
+    r"""Engine-native search mode. Exa supports instant, fast, auto (default), deep-lite, deep, and deep-reasoning. Parallel supports turbo (default), basic, and advanced. Modes unsupported by the selected engine are ignored."""
+
     search_context_size: Optional[SearchContextSizeEnum] = None
     r"""Size of the search context for web search tools"""
 
@@ -68,6 +74,7 @@ class PreviewWebSearchServerTool(BaseModel):
                 "filters",
                 "max_results",
                 "max_uses",
+                "mode",
                 "search_context_size",
                 "user_location",
             ]
