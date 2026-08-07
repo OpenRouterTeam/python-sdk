@@ -2989,6 +2989,7 @@ if TYPE_CHECKING:
     )
     from .websearchengine import WebSearchEngine
     from .websearchengineenum import WebSearchEngineEnum
+    from .websearchmode import WebSearchMode
     from .websearchplugin import (
         UserLocation,
         UserLocationTypedDict,
@@ -5226,6 +5227,7 @@ __all__ = [
     "WebSearchDomainFilterTypedDict",
     "WebSearchEngine",
     "WebSearchEngineEnum",
+    "WebSearchMode",
     "WebSearchPlugin",
     "WebSearchPluginID",
     "WebSearchPluginType",
@@ -7441,6 +7443,7 @@ _dynamic_imports: dict[str, str] = {
     "WebSearchDomainFilterTypedDict": ".websearchdomainfilter",
     "WebSearchEngine": ".websearchengine",
     "WebSearchEngineEnum": ".websearchengineenum",
+    "WebSearchMode": ".websearchmode",
     "UserLocation": ".websearchplugin",
     "UserLocationTypedDict": ".websearchplugin",
     "WebSearchPlugin": ".websearchplugin",
