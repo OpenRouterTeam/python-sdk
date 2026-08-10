@@ -12,9 +12,10 @@ from openrouter.types import (
     UNSET_SENTINEL,
 )
 from openrouter.utils.unions import parse_open_union
+import pydantic
 from pydantic import ConfigDict, model_serializer
 from pydantic.functional_validators import BeforeValidator
-from typing import Any, List, Literal, Optional, Union
+from typing import Any, Dict, List, Literal, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
@@ -167,6 +168,11 @@ class OutputWebSearchCallItemTypedDict(TypedDict):
 
 
 class OutputWebSearchCallItem(BaseModel):
+    model_config = ConfigDict(
+        populate_by_name=True, arbitrary_types_allowed=True, extra="allow"
+    )
+    __pydantic_extra__: Dict[str, Any] = pydantic.Field(init=False)
+
     id: str
 
     status: WebSearchStatus
@@ -174,6 +180,14 @@ class OutputWebSearchCallItem(BaseModel):
     type: TypeWebSearchCall
 
     action: Optional[Action] = None
+
+    @property
+    def additional_properties(self):
+        return self.__pydantic_extra__
+
+    @additional_properties.setter
+    def additional_properties(self, value):
+        self.__pydantic_extra__ = value  # pyright: ignore[reportIncompatibleVariableOverride]
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
@@ -184,9 +198,12 @@ class OutputWebSearchCallItem(BaseModel):
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k, serialized.get(n))
+            serialized.pop(k, serialized.pop(n, None))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
                     m[k] = val
+        for k, v in serialized.items():
+            m[k] = v
 
         return m

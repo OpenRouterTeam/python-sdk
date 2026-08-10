@@ -29,14 +29,14 @@ FunctionCallOutputItemDetail = Union[
 ]
 
 
-FunctionCallOutputItemTypeInputImage = Literal["input_image",]
+FunctionCallOutputItemOutputType = Literal["input_image",]
 
 
 class FunctionCallOutputItemOutputInputImageTypedDict(TypedDict):
     r"""Image input content item"""
 
     detail: FunctionCallOutputItemDetail
-    type: FunctionCallOutputItemTypeInputImage
+    type: FunctionCallOutputItemOutputType
     image_url: NotRequired[Nullable[str]]
 
 
@@ -45,7 +45,7 @@ class FunctionCallOutputItemOutputInputImage(BaseModel):
 
     detail: FunctionCallOutputItemDetail
 
-    type: FunctionCallOutputItemTypeInputImage
+    type: FunctionCallOutputItemOutputType
 
     image_url: OptionalNullable[str] = UNSET
 
