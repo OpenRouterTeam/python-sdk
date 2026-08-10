@@ -28,14 +28,14 @@ CustomToolCallOutputItemDetail = Union[
 ]
 
 
-CustomToolCallOutputItemTypeInputImage = Literal["input_image",]
+CustomToolCallOutputItemOutputType = Literal["input_image",]
 
 
 class CustomToolCallOutputItemOutputInputImageTypedDict(TypedDict):
     r"""Image input content item"""
 
     detail: CustomToolCallOutputItemDetail
-    type: CustomToolCallOutputItemTypeInputImage
+    type: CustomToolCallOutputItemOutputType
     image_url: NotRequired[Nullable[str]]
 
 
@@ -44,7 +44,7 @@ class CustomToolCallOutputItemOutputInputImage(BaseModel):
 
     detail: CustomToolCallOutputItemDetail
 
-    type: CustomToolCallOutputItemTypeInputImage
+    type: CustomToolCallOutputItemOutputType
 
     image_url: OptionalNullable[str] = UNSET
 
