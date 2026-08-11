@@ -10,11 +10,11 @@ class GenerationContentResponseTypedDict(TypedDict):
     r"""Stored prompt and completion content for a generation"""
 
     data: GenerationContentDataTypedDict
-    r"""Stored prompt and completion content"""
+    r"""Stored prompt and completion content, plus the failure error when one was stored"""
 
 
 class GenerationContentResponse(BaseModel):
     r"""Stored prompt and completion content for a generation"""
 
     data: GenerationContentData
-    r"""Stored prompt and completion content"""
+    r"""Stored prompt and completion content, plus the failure error when one was stored"""
