@@ -1,0 +1,22 @@
+---
+title: "PrimaryMetric"
+---
+
+Identifies the meaning of `primary_score`: `f1_by_item` for WideSearch, `accuracy` for all other search benchmarks.
+
+## Example Usage
+
+```python
+from openrouter.components import PrimaryMetric
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
+value: PrimaryMetric = "accuracy"
+```
+
+
+## Values
+
+This is an open enum. Unrecognized values will not fail type checks.
+
+- `"accuracy"`
+- `"f1_by_item"`

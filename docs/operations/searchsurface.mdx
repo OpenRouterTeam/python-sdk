@@ -1,0 +1,22 @@
+---
+title: "SearchSurface"
+---
+
+OpenRouter search benchmarks only: filter by the request surface the lane ran on.
+
+## Example Usage
+
+```python
+from openrouter.operations import SearchSurface
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
+value: SearchSurface = "server-tool"
+```
+
+
+## Values
+
+This is an open enum. Unrecognized values will not fail type checks.
+
+- `"server-tool"`
+- `"plugin"`

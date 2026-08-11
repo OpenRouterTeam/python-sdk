@@ -1,0 +1,14 @@
+---
+title: "UnifiedBenchmarksSearchRunConfig"
+---
+
+Published lane configuration, included only when include_run_config=true. Only the agent turn count, reasoning effort, and temperature are exposed; other harness settings are intentionally not part of the public contract.
+
+
+## Fields
+
+| Field                                                                         | Type                                                                          | Required                                                                      | Description                                                                   | Example                                                                       |
+| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| `max_agent_turns`                                                             | *Nullable[int]*                                                               | :heavy_check_mark:                                                            | Agent-turn count for the published lane, or null for plugin lanes.            | 25                                                                            |
+| `reasoning_effort`                                                            | *Nullable[str]*                                                               | :heavy_check_mark:                                                            | Reasoning effort configured for the published lane, or null when omitted.     | high                                                                          |
+| `temperature`                                                                 | *Nullable[float]*                                                             | :heavy_check_mark:                                                            | Sampling temperature configured for the published lane, or null when omitted. | 0.2                                                                           |
