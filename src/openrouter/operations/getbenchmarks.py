@@ -89,10 +89,35 @@ TaskType = Union[
         "coding",
         "intelligence",
         "agentic",
+        "search",
     ],
     UnrecognizedStr,
 ]
-r"""Filter results by task type. For Artificial Analysis, maps to the corresponding index. For Design Arena, maps to the matching category."""
+r"""Filter results by task type. For Artificial Analysis, maps to the corresponding index. For Design Arena, maps to the matching category. `search` returns OpenRouter search benchmark results only."""
+
+
+BenchmarkType = Union[
+    Literal[
+        "gpqa_diamond",
+        "tau_bench_verified_airline",
+        "search_browsecomp",
+        "search_hle",
+        "search_dsqa",
+        "search_widesearch",
+    ],
+    UnrecognizedStr,
+]
+r"""Return results for one exact OpenRouter benchmark. A `search_*` value narrows the response to search results only; a classic value narrows the OpenRouter items and leaves other sources' items as they are."""
+
+
+SearchSurface = Union[
+    Literal[
+        "server-tool",
+        "plugin",
+    ],
+    UnrecognizedStr,
+]
+r"""OpenRouter search benchmarks only: filter by the request surface the lane ran on."""
 
 
 Arena = Union[
@@ -123,7 +148,15 @@ class GetBenchmarksRequestTypedDict(TypedDict):
     source: NotRequired[Source]
     r"""Benchmark source to query. Determines the shape of the returned items. When omitted, returns results from all sources."""
     task_type: NotRequired[TaskType]
-    r"""Filter results by task type. For Artificial Analysis, maps to the corresponding index. For Design Arena, maps to the matching category."""
+    r"""Filter results by task type. For Artificial Analysis, maps to the corresponding index. For Design Arena, maps to the matching category. `search` returns OpenRouter search benchmark results only."""
+    benchmark_type: NotRequired[BenchmarkType]
+    r"""Return results for one exact OpenRouter benchmark. A `search_*` value narrows the response to search results only; a classic value narrows the OpenRouter items and leaves other sources' items as they are."""
+    include_run_config: NotRequired[bool]
+    r"""Search benchmarks only: include the published lane configuration whitelist in each search item. Defaults to false. The whitelist is limited to agent turn count, reasoning effort, and temperature so future harness configuration changes do not change the public contract."""
+    search_engine: NotRequired[str]
+    r"""OpenRouter search benchmarks only: filter by the search engine used."""
+    search_surface: NotRequired[SearchSurface]
+    r"""OpenRouter search benchmarks only: filter by the request surface the lane ran on."""
     arena: NotRequired[Arena]
     r"""Design Arena only: arena to query. Defaults to `models` when source is `design-arena`."""
     category: NotRequired[str]
@@ -171,7 +204,31 @@ class GetBenchmarksRequest(BaseModel):
         Optional[TaskType],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
-    r"""Filter results by task type. For Artificial Analysis, maps to the corresponding index. For Design Arena, maps to the matching category."""
+    r"""Filter results by task type. For Artificial Analysis, maps to the corresponding index. For Design Arena, maps to the matching category. `search` returns OpenRouter search benchmark results only."""
+
+    benchmark_type: Annotated[
+        Optional[BenchmarkType],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Return results for one exact OpenRouter benchmark. A `search_*` value narrows the response to search results only; a classic value narrows the OpenRouter items and leaves other sources' items as they are."""
+
+    include_run_config: Annotated[
+        Optional[bool],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = False
+    r"""Search benchmarks only: include the published lane configuration whitelist in each search item. Defaults to false. The whitelist is limited to agent turn count, reasoning effort, and temperature so future harness configuration changes do not change the public contract."""
+
+    search_engine: Annotated[
+        Optional[str],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""OpenRouter search benchmarks only: filter by the search engine used."""
+
+    search_surface: Annotated[
+        Optional[SearchSurface],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""OpenRouter search benchmarks only: filter by the request surface the lane ran on."""
 
     arena: Annotated[
         Optional[Arena],
@@ -200,6 +257,10 @@ class GetBenchmarksRequest(BaseModel):
                 "X-OpenRouter-Categories",
                 "source",
                 "task_type",
+                "benchmark_type",
+                "include_run_config",
+                "search_engine",
+                "search_surface",
                 "arena",
                 "category",
                 "max_results",

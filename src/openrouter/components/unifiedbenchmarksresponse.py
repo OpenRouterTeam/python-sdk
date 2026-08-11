@@ -14,13 +14,13 @@ from .unifiedbenchmarksoritem import (
     UnifiedBenchmarksORItem,
     UnifiedBenchmarksORItemTypedDict,
 )
-from functools import partial
+from .unifiedbenchmarkssearchitem import (
+    UnifiedBenchmarksSearchItem,
+    UnifiedBenchmarksSearchItemTypedDict,
+)
 from openrouter.types import BaseModel
-from openrouter.utils.unions import parse_open_union
-from pydantic import ConfigDict
-from pydantic.functional_validators import BeforeValidator
-from typing import Any, List, Literal, Union
-from typing_extensions import Annotated, TypeAliasType, TypedDict
+from typing import List, Union
+from typing_extensions import TypeAliasType, TypedDict
 
 
 UnifiedBenchmarksResponseDataTypedDict = TypeAliasType(
@@ -29,44 +29,20 @@ UnifiedBenchmarksResponseDataTypedDict = TypeAliasType(
         UnifiedBenchmarksAAItemTypedDict,
         UnifiedBenchmarksORItemTypedDict,
         UnifiedBenchmarksDAItemTypedDict,
+        UnifiedBenchmarksSearchItemTypedDict,
     ],
 )
 
 
-class UnknownUnifiedBenchmarksResponseData(BaseModel):
-    r"""A UnifiedBenchmarksResponseData variant the SDK doesn't recognize. Preserves the raw payload."""
-
-    source: Literal["UNKNOWN"] = "UNKNOWN"
-    raw: Any
-    is_unknown: Literal[True] = True
-
-    model_config = ConfigDict(frozen=True)
-
-
-_UNIFIED_BENCHMARKS_RESPONSE_DATA_VARIANTS: dict[str, Any] = {
-    "artificial-analysis": UnifiedBenchmarksAAItem,
-    "design-arena": UnifiedBenchmarksDAItem,
-    "openrouter": UnifiedBenchmarksORItem,
-}
-
-
-UnifiedBenchmarksResponseData = Annotated[
+UnifiedBenchmarksResponseData = TypeAliasType(
+    "UnifiedBenchmarksResponseData",
     Union[
         UnifiedBenchmarksAAItem,
-        UnifiedBenchmarksDAItem,
         UnifiedBenchmarksORItem,
-        UnknownUnifiedBenchmarksResponseData,
+        UnifiedBenchmarksDAItem,
+        UnifiedBenchmarksSearchItem,
     ],
-    BeforeValidator(
-        partial(
-            parse_open_union,
-            disc_key="source",
-            variants=_UNIFIED_BENCHMARKS_RESPONSE_DATA_VARIANTS,
-            unknown_cls=UnknownUnifiedBenchmarksResponseData,
-            union_name="UnifiedBenchmarksResponseData",
-        )
-    ),
-]
+)
 
 
 class UnifiedBenchmarksResponseTypedDict(TypedDict):

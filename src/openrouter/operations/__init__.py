@@ -326,10 +326,12 @@ if TYPE_CHECKING:
     )
     from .getbenchmarks import (
         Arena,
+        BenchmarkType,
         GetBenchmarksGlobals,
         GetBenchmarksGlobalsTypedDict,
         GetBenchmarksRequest,
         GetBenchmarksRequestTypedDict,
+        SearchSurface,
         Source,
         TaskType,
     )
@@ -813,6 +815,7 @@ if TYPE_CHECKING:
 
 __all__ = [
     "Arena",
+    "BenchmarkType",
     "BulkAddWorkspaceMembersGlobals",
     "BulkAddWorkspaceMembersGlobalsTypedDict",
     "BulkAddWorkspaceMembersRequest",
@@ -1356,6 +1359,7 @@ __all__ = [
     "Result",
     "ResultTypedDict",
     "Role",
+    "SearchSurface",
     "SendChatCompletionRequestGlobals",
     "SendChatCompletionRequestGlobalsTypedDict",
     "SendChatCompletionRequestRequest",
@@ -1678,10 +1682,12 @@ _dynamic_imports: dict[str, str] = {
     "GetAppRankingsSort": ".getapprankings",
     "Subcategory": ".getapprankings",
     "Arena": ".getbenchmarks",
+    "BenchmarkType": ".getbenchmarks",
     "GetBenchmarksGlobals": ".getbenchmarks",
     "GetBenchmarksGlobalsTypedDict": ".getbenchmarks",
     "GetBenchmarksRequest": ".getbenchmarks",
     "GetBenchmarksRequestTypedDict": ".getbenchmarks",
+    "SearchSurface": ".getbenchmarks",
     "Source": ".getbenchmarks",
     "TaskType": ".getbenchmarks",
     "GetBYOKKeyGlobals": ".getbyokkey",

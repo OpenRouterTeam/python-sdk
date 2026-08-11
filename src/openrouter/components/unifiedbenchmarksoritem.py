@@ -7,7 +7,7 @@ from typing import Literal, Union
 from typing_extensions import TypedDict
 
 
-BenchmarkType = Union[
+UnifiedBenchmarksORItemBenchmarkType = Union[
     Literal[
         "gpqa_diamond",
         "tau_bench_verified_airline",
@@ -28,7 +28,7 @@ class UnifiedBenchmarksORItemTypedDict(TypedDict):
     r"""Standard deviation of run accuracy, or null for a single run."""
     avg_cost_per_task: Nullable[float]
     r"""Average cost per task in USD, or null if unavailable."""
-    benchmark_type: BenchmarkType
+    benchmark_type: UnifiedBenchmarksORItemBenchmarkType
     r"""OpenRouter benchmark evaluation type."""
     display_name: str
     r"""Human-readable model name."""
@@ -52,7 +52,7 @@ class UnifiedBenchmarksORItem(BaseModel):
     avg_cost_per_task: Nullable[float]
     r"""Average cost per task in USD, or null if unavailable."""
 
-    benchmark_type: BenchmarkType
+    benchmark_type: UnifiedBenchmarksORItemBenchmarkType
     r"""OpenRouter benchmark evaluation type."""
 
     display_name: str

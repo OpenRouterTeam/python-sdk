@@ -20,6 +20,10 @@ class Benchmarks(BaseSDK):
         x_open_router_categories: Optional[str] = None,
         source: Optional[operations.Source] = None,
         task_type: Optional[operations.TaskType] = None,
+        benchmark_type: Optional[operations.BenchmarkType] = None,
+        include_run_config: Optional[bool] = False,
+        search_engine: Optional[str] = None,
+        search_surface: Optional[operations.SearchSurface] = None,
         arena: Optional[operations.Arena] = None,
         category: Optional[str] = None,
         max_results: Optional[int] = None,
@@ -30,7 +34,7 @@ class Benchmarks(BaseSDK):
     ) -> components.UnifiedBenchmarksResponse:
         r"""List Benchmarks
 
-        Unified benchmark endpoint that aggregates scores from multiple benchmark sources (Artificial Analysis, Design Arena, and OpenRouter's own tau-bench and GPQA evals). Filter by source to reproduce the exact shapes from the legacy per-source endpoints, or use task_type to find models suited for specific workloads. Authenticate with any valid OpenRouter API key. Rate-limited to 30 requests/minute per key and 500 requests/day per account.
+        Unified benchmark endpoint that aggregates scores from multiple benchmark sources (Artificial Analysis, Design Arena, and OpenRouter's own tau-bench, GPQA, and web-search evals). Filter by source to reproduce the exact shapes from the legacy per-source endpoints, or use task_type to find models suited for specific workloads. Use task_type=search (or a search_* benchmark_type) for OpenRouter's search benchmarks, which publish each model's highest-scoring eligible evaluation configuration with same-configuration runs combined by task-weighted mean. Authenticate with any valid OpenRouter API key. Rate-limited to 30 requests/minute per key and 500 requests/day per account.
 
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
@@ -40,7 +44,11 @@ class Benchmarks(BaseSDK):
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
         :param source: Benchmark source to query. Determines the shape of the returned items. When omitted, returns results from all sources.
-        :param task_type: Filter results by task type. For Artificial Analysis, maps to the corresponding index. For Design Arena, maps to the matching category.
+        :param task_type: Filter results by task type. For Artificial Analysis, maps to the corresponding index. For Design Arena, maps to the matching category. `search` returns OpenRouter search benchmark results only.
+        :param benchmark_type: Return results for one exact OpenRouter benchmark. A `search_*` value narrows the response to search results only; a classic value narrows the OpenRouter items and leaves other sources' items as they are.
+        :param include_run_config: Search benchmarks only: include the published lane configuration whitelist in each search item. Defaults to false. The whitelist is limited to agent turn count, reasoning effort, and temperature so future harness configuration changes do not change the public contract.
+        :param search_engine: OpenRouter search benchmarks only: filter by the search engine used.
+        :param search_surface: OpenRouter search benchmarks only: filter by the request surface the lane ran on.
         :param arena: Design Arena only: arena to query. Defaults to `models` when source is `design-arena`.
         :param category: Design Arena only: category within the arena (e.g. `codecategories`, `uicomponent`, `gamedev`, `3d`, `dataviz`, `image`, `video`, `svg`). When omitted, returns all categories.
         :param max_results: Maximum number of items to return. When omitted, all matching results are returned.
@@ -65,6 +73,10 @@ class Benchmarks(BaseSDK):
             x_open_router_categories=x_open_router_categories,
             source=source,
             task_type=task_type,
+            benchmark_type=benchmark_type,
+            include_run_config=include_run_config,
+            search_engine=search_engine,
+            search_surface=search_surface,
             arena=arena,
             category=category,
             max_results=max_results,
@@ -167,6 +179,10 @@ class Benchmarks(BaseSDK):
         x_open_router_categories: Optional[str] = None,
         source: Optional[operations.Source] = None,
         task_type: Optional[operations.TaskType] = None,
+        benchmark_type: Optional[operations.BenchmarkType] = None,
+        include_run_config: Optional[bool] = False,
+        search_engine: Optional[str] = None,
+        search_surface: Optional[operations.SearchSurface] = None,
         arena: Optional[operations.Arena] = None,
         category: Optional[str] = None,
         max_results: Optional[int] = None,
@@ -177,7 +193,7 @@ class Benchmarks(BaseSDK):
     ) -> components.UnifiedBenchmarksResponse:
         r"""List Benchmarks
 
-        Unified benchmark endpoint that aggregates scores from multiple benchmark sources (Artificial Analysis, Design Arena, and OpenRouter's own tau-bench and GPQA evals). Filter by source to reproduce the exact shapes from the legacy per-source endpoints, or use task_type to find models suited for specific workloads. Authenticate with any valid OpenRouter API key. Rate-limited to 30 requests/minute per key and 500 requests/day per account.
+        Unified benchmark endpoint that aggregates scores from multiple benchmark sources (Artificial Analysis, Design Arena, and OpenRouter's own tau-bench, GPQA, and web-search evals). Filter by source to reproduce the exact shapes from the legacy per-source endpoints, or use task_type to find models suited for specific workloads. Use task_type=search (or a search_* benchmark_type) for OpenRouter's search benchmarks, which publish each model's highest-scoring eligible evaluation configuration with same-configuration runs combined by task-weighted mean. Authenticate with any valid OpenRouter API key. Rate-limited to 30 requests/minute per key and 500 requests/day per account.
 
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
@@ -187,7 +203,11 @@ class Benchmarks(BaseSDK):
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
         :param source: Benchmark source to query. Determines the shape of the returned items. When omitted, returns results from all sources.
-        :param task_type: Filter results by task type. For Artificial Analysis, maps to the corresponding index. For Design Arena, maps to the matching category.
+        :param task_type: Filter results by task type. For Artificial Analysis, maps to the corresponding index. For Design Arena, maps to the matching category. `search` returns OpenRouter search benchmark results only.
+        :param benchmark_type: Return results for one exact OpenRouter benchmark. A `search_*` value narrows the response to search results only; a classic value narrows the OpenRouter items and leaves other sources' items as they are.
+        :param include_run_config: Search benchmarks only: include the published lane configuration whitelist in each search item. Defaults to false. The whitelist is limited to agent turn count, reasoning effort, and temperature so future harness configuration changes do not change the public contract.
+        :param search_engine: OpenRouter search benchmarks only: filter by the search engine used.
+        :param search_surface: OpenRouter search benchmarks only: filter by the request surface the lane ran on.
         :param arena: Design Arena only: arena to query. Defaults to `models` when source is `design-arena`.
         :param category: Design Arena only: category within the arena (e.g. `codecategories`, `uicomponent`, `gamedev`, `3d`, `dataviz`, `image`, `video`, `svg`). When omitted, returns all categories.
         :param max_results: Maximum number of items to return. When omitted, all matching results are returned.
@@ -212,6 +232,10 @@ class Benchmarks(BaseSDK):
             x_open_router_categories=x_open_router_categories,
             source=source,
             task_type=task_type,
+            benchmark_type=benchmark_type,
+            include_run_config=include_run_config,
+            search_engine=search_engine,
+            search_surface=search_surface,
             arena=arena,
             category=category,
             max_results=max_results,
