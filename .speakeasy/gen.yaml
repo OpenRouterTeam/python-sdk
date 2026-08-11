@@ -56,6 +56,10 @@ python:
   customCasings:
     byok:
       initialism: true
+    oauth:
+      initialism: true
+    scim:
+      initialism: true
     stt:
       initialism: true
     tts:
