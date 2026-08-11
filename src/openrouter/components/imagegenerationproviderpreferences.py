@@ -72,6 +72,7 @@ class ImageGenerationProviderPreferencesOptionsTypedDict(TypedDict):
     crucible: NotRequired[Dict[str, Any]]
     crusoe: NotRequired[Dict[str, Any]]
     darkbloom: NotRequired[Dict[str, Any]]
+    databricks: NotRequired[Dict[str, Any]]
     decart: NotRequired[Dict[str, Any]]
     deepgram: NotRequired[Dict[str, Any]]
     deepinfra: NotRequired[Dict[str, Any]]
@@ -254,6 +255,8 @@ class ImageGenerationProviderPreferencesOptions(BaseModel):
     crusoe: Optional[Dict[str, Any]] = None
 
     darkbloom: Optional[Dict[str, Any]] = None
+
+    databricks: Optional[Dict[str, Any]] = None
 
     decart: Optional[Dict[str, Any]] = None
 
@@ -523,6 +526,7 @@ class ImageGenerationProviderPreferencesOptions(BaseModel):
                 "crucible",
                 "crusoe",
                 "darkbloom",
+                "databricks",
                 "decart",
                 "deepgram",
                 "deepinfra",

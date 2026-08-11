@@ -32,6 +32,7 @@ BYOKProviderSlug = Union[
         "coreweave",
         "crusoe",
         "darkbloom",
+        "databricks",
         "decart",
         "deepgram",
         "deepinfra",

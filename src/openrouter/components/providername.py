@@ -35,6 +35,7 @@ ProviderName = Union[
         "Crucible",
         "Crusoe",
         "Darkbloom",
+        "Databricks",
         "Decart",
         "Deepgram",
         "DeepInfra",

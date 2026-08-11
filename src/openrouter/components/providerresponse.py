@@ -64,6 +64,7 @@ ProviderResponseProviderName = Union[
         "Crucible",
         "Crusoe",
         "Darkbloom",
+        "Databricks",
         "Decart",
         "Deepgram",
         "DeepInfra",
