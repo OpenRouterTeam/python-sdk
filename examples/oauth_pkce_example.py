@@ -4,10 +4,12 @@ Example of using OAuth PKCE helper functions
 This example demonstrates how to:
 1. Generate a SHA-256 code challenge and verifier
 2. Create an authorization URL for OAuth flow
+
+Run with: uv run python examples/oauth_pkce_example.py
 """
 
 from openrouter import OpenRouter
-from openrouter.utils import (
+from openrouter.pkce import (
     oauth_create_sha256_code_challenge,
     oauth_create_authorization_url,
     CreateSHA256CodeChallengeRequest,
@@ -45,7 +47,7 @@ def main():
             code_challenge=result.code_challenge,
             code_challenge_method="S256",
             limit=10.0,  # Optional credit limit
-        )
+        ),
     )
 
     print("Authorization URL:", auth_url)

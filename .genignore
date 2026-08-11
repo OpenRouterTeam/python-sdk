@@ -1,3 +1,5 @@
 pylintrc
 docs/docs.json
 docs/overview.mdx
+examples
+src/openrouter/pkce.py
