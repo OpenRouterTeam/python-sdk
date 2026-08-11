@@ -19,6 +19,8 @@ dev = [
     "mypy ==1.15.0",
     "pylint ==3.2.3",
     "pyright ==1.1.398",
+    "pytest ==9.1.1",
+    "pytest-asyncio ==1.4.0",
 ]
 
 [tool.setuptools.packages.find]
