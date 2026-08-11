@@ -1191,6 +1191,14 @@ if TYPE_CHECKING:
         InputUnion,
         InputUnionTypedDict,
     )
+    from .generationcontenterror import (
+        GenerationContentError,
+        GenerationContentErrorTypedDict,
+    )
+    from .generationcontenterrorattempt import (
+        GenerationContentErrorAttempt,
+        GenerationContentErrorAttemptTypedDict,
+    )
     from .generationcontentresponse import (
         GenerationContentResponse,
         GenerationContentResponseTypedDict,
@@ -3932,6 +3940,10 @@ __all__ = [
     "GenerationContentDataOutput",
     "GenerationContentDataOutputTypedDict",
     "GenerationContentDataTypedDict",
+    "GenerationContentError",
+    "GenerationContentErrorAttempt",
+    "GenerationContentErrorAttemptTypedDict",
+    "GenerationContentErrorTypedDict",
     "GenerationContentResponse",
     "GenerationContentResponseTypedDict",
     "GenerationResponse",
@@ -6167,6 +6179,10 @@ _dynamic_imports: dict[str, str] = {
     "Input2TypedDict": ".generationcontentdata",
     "InputUnion": ".generationcontentdata",
     "InputUnionTypedDict": ".generationcontentdata",
+    "GenerationContentError": ".generationcontenterror",
+    "GenerationContentErrorTypedDict": ".generationcontenterror",
+    "GenerationContentErrorAttempt": ".generationcontenterrorattempt",
+    "GenerationContentErrorAttemptTypedDict": ".generationcontenterrorattempt",
     "GenerationContentResponse": ".generationcontentresponse",
     "GenerationContentResponseTypedDict": ".generationcontentresponse",
     "APIType": ".generationresponse",

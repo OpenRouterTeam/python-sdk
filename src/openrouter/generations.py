@@ -326,7 +326,7 @@ class Generations(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> components.GenerationContentResponse:
-        r"""Get stored prompt and completion content for a generation
+        r"""Get stored prompt, completion, and error content for a generation
 
         :param id: The generation ID
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
@@ -479,7 +479,7 @@ class Generations(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> components.GenerationContentResponse:
-        r"""Get stored prompt and completion content for a generation
+        r"""Get stored prompt, completion, and error content for a generation
 
         :param id: The generation ID
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.

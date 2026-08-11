@@ -1,0 +1,15 @@
+---
+title: "GenerationContentErrorAttempt"
+---
+
+A single failed upstream attempt recorded for the generation
+
+
+## Fields
+
+| Field                                                 | Type                                                  | Required                                              | Description                                           | Example                                               |
+| ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
+| `code`                                                | *int*                                                 | :heavy_check_mark:                                    | HTTP status returned by this attempt                  | 429                                                   |
+| `message`                                             | *str*                                                 | :heavy_check_mark:                                    | Error message returned by this attempt                | Provider returned error                               |
+| `provider_name`                                       | *Nullable[str]*                                       | :heavy_check_mark:                                    | Provider that served this attempt, when known         | Google                                                |
+| `raw`                                                 | *Nullable[str]*                                       | :heavy_check_mark:                                    | Raw error body returned by the provider, when stored  | \{"error":\{"code":429,"message":"Resource exhausted"}} |
