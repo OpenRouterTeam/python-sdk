@@ -2,16 +2,21 @@
 title: "Region"
 ---
 
-Filter to models with endpoints in the given data region. Currently only "eu" is supported.
+Filter to models with endpoints in the given data region ("eu" or "us").
 
 ## Example Usage
 
 ```python
 from openrouter.operations import Region
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
 value: Region = "eu"
 ```
 
 
 ## Values
 
+This is an open enum. Unrecognized values will not fail type checks.
+
 - `"eu"`
+- `"us"`

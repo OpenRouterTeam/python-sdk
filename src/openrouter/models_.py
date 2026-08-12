@@ -340,7 +340,7 @@ class Models(BaseSDK):
         :param providers: Filter models by hosting provider. Comma-separated list of provider names.
         :param distillable: Filter by distillation capability. \"true\" returns only distillable models, \"false\" excludes them.
         :param zdr: When set to \"true\", return only models with zero data retention endpoints.
-        :param region: Filter to models with endpoints in the given data region. Currently only \"eu\" is supported.
+        :param region: Filter to models with endpoints in the given data region (\"eu\" or \"us\").
         :param min_output_price: Minimum completion (output) price in $/M tokens.
         :param max_output_price: Maximum completion (output) price in $/M tokens.
         :param min_age_days: Minimum model age in days since its creation date.
@@ -607,7 +607,7 @@ class Models(BaseSDK):
         :param providers: Filter models by hosting provider. Comma-separated list of provider names.
         :param distillable: Filter by distillation capability. \"true\" returns only distillable models, \"false\" excludes them.
         :param zdr: When set to \"true\", return only models with zero data retention endpoints.
-        :param region: Filter to models with endpoints in the given data region. Currently only \"eu\" is supported.
+        :param region: Filter to models with endpoints in the given data region (\"eu\" or \"us\").
         :param min_output_price: Minimum completion (output) price in $/M tokens.
         :param max_output_price: Maximum completion (output) price in $/M tokens.
         :param min_age_days: Minimum model age in days since its creation date.
@@ -1083,7 +1083,7 @@ class Models(BaseSDK):
     ) -> Optional[operations.ListModelsUserResponse]:
         r"""List models filtered by user provider preferences, privacy settings, and guardrails
 
-        List models filtered by user provider preferences, [privacy settings](https://openrouter.ai/docs/guides/privacy/provider-logging), and [guardrails](https://openrouter.ai/docs/guides/features/guardrails). If requesting through `eu.openrouter.ai/api/v1/...` the results will be filtered to models that satisfy [EU in-region routing](https://openrouter.ai/docs/guides/privacy/provider-logging#enterprise-eu-in-region-routing).
+        List models filtered by user provider preferences, [privacy settings](https://openrouter.ai/docs/guides/privacy/provider-logging), and [guardrails](https://openrouter.ai/docs/guides/features/guardrails). If requesting through a regional hostname, the results will be filtered to models that satisfy in-region routing for that region.
 
         :param security:
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
@@ -1255,7 +1255,7 @@ class Models(BaseSDK):
     ) -> Optional[operations.ListModelsUserResponse]:
         r"""List models filtered by user provider preferences, privacy settings, and guardrails
 
-        List models filtered by user provider preferences, [privacy settings](https://openrouter.ai/docs/guides/privacy/provider-logging), and [guardrails](https://openrouter.ai/docs/guides/features/guardrails). If requesting through `eu.openrouter.ai/api/v1/...` the results will be filtered to models that satisfy [EU in-region routing](https://openrouter.ai/docs/guides/privacy/provider-logging#enterprise-eu-in-region-routing).
+        List models filtered by user provider preferences, [privacy settings](https://openrouter.ai/docs/guides/privacy/provider-logging), and [guardrails](https://openrouter.ai/docs/guides/features/guardrails). If requesting through a regional hostname, the results will be filtered to models that satisfy in-region routing for that region.
 
         :param security:
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
