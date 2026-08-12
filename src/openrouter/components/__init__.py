@@ -2661,6 +2661,13 @@ if TYPE_CHECKING:
         ServiceUnavailableResponseErrorData,
         ServiceUnavailableResponseErrorDataTypedDict,
     )
+    from .sessioncostitem import SessionCostItem, SessionCostItemTypedDict, TurnRange
+    from .sessioncostmeta import (
+        SessionCostMeta,
+        SessionCostMetaTypedDict,
+        SessionCostMetaVersion,
+    )
+    from .sessioncostresponse import SessionCostResponse, SessionCostResponseTypedDict
     from .shellcallitem import (
         ShellCallItem,
         ShellCallItemAction,
@@ -4953,6 +4960,13 @@ __all__ = [
     "ServerToolUseTypedDict",
     "ServiceUnavailableResponseErrorData",
     "ServiceUnavailableResponseErrorDataTypedDict",
+    "SessionCostItem",
+    "SessionCostItemTypedDict",
+    "SessionCostMeta",
+    "SessionCostMetaTypedDict",
+    "SessionCostMetaVersion",
+    "SessionCostResponse",
+    "SessionCostResponseTypedDict",
     "ShellCallItem",
     "ShellCallItemAction",
     "ShellCallItemActionTypedDict",
@@ -5132,6 +5146,7 @@ __all__ = [
     "TriggerInputTokensTypedDict",
     "TriggerTypedDict",
     "Truncation",
+    "TurnRange",
     "Type",
     "TypeAdaptive",
     "TypeAdditionalTools",
@@ -7303,6 +7318,14 @@ _dynamic_imports: dict[str, str] = {
     "ServerToolUseDetailsTypedDict": ".servertoolusedetails",
     "ServiceUnavailableResponseErrorData": ".serviceunavailableresponseerrordata",
     "ServiceUnavailableResponseErrorDataTypedDict": ".serviceunavailableresponseerrordata",
+    "SessionCostItem": ".sessioncostitem",
+    "SessionCostItemTypedDict": ".sessioncostitem",
+    "TurnRange": ".sessioncostitem",
+    "SessionCostMeta": ".sessioncostmeta",
+    "SessionCostMetaTypedDict": ".sessioncostmeta",
+    "SessionCostMetaVersion": ".sessioncostmeta",
+    "SessionCostResponse": ".sessioncostresponse",
+    "SessionCostResponseTypedDict": ".sessioncostresponse",
     "ShellCallItem": ".shellcallitem",
     "ShellCallItemAction": ".shellcallitem",
     "ShellCallItemActionTypedDict": ".shellcallitem",

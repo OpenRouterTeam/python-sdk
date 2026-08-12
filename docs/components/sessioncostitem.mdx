@@ -1,0 +1,13 @@
+---
+title: "SessionCostItem"
+---
+
+## Fields
+
+| Field                                              | Type                                               | Required                                           | Description                                        | Example                                            |
+| -------------------------------------------------- | -------------------------------------------------- | -------------------------------------------------- | -------------------------------------------------- | -------------------------------------------------- |
+| `app_name`                                         | *str*                                              | :heavy_check_mark:                                 | Published harness display label.                   | Hermes Agent                                       |
+| `app_slug`                                         | *str*                                              | :heavy_check_mark:                                 | Stable public slug of the harness.                 | hermes-agent                                       |
+| `median_session_cost_usd`                          | *float*                                            | :heavy_check_mark:                                 | Median USD spend per sampled session.              | 1.74                                               |
+| `model_permaslug`                                  | *str*                                              | :heavy_check_mark:                                 | Exact model permaslug.                             | anthropic/claude-4.8-opus                          |
+| `turn_range`                                       | [components.TurnRange](../components/turnrange.mdx) | :heavy_check_mark:                                 | Inclusive session turn-count range.                | 10-49-turns                                        |
