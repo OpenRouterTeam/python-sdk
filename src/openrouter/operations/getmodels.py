@@ -135,8 +135,14 @@ Zdr = Literal["true",]
 r"""When set to \"true\", return only models with zero data retention endpoints."""
 
 
-Region = Literal["eu",]
-r"""Filter to models with endpoints in the given data region. Currently only \"eu\" is supported."""
+Region = Union[
+    Literal[
+        "eu",
+        "us",
+    ],
+    UnrecognizedStr,
+]
+r"""Filter to models with endpoints in the given data region (\"eu\" or \"us\")."""
 
 
 class GetModelsRequestTypedDict(TypedDict):
@@ -186,7 +192,7 @@ class GetModelsRequestTypedDict(TypedDict):
     zdr: NotRequired[Zdr]
     r"""When set to \"true\", return only models with zero data retention endpoints."""
     region: NotRequired[Region]
-    r"""Filter to models with endpoints in the given data region. Currently only \"eu\" is supported."""
+    r"""Filter to models with endpoints in the given data region (\"eu\" or \"us\")."""
     min_output_price: NotRequired[Nullable[float]]
     r"""Minimum completion (output) price in $/M tokens."""
     max_output_price: NotRequired[Nullable[float]]
@@ -342,7 +348,7 @@ class GetModelsRequest(BaseModel):
         Optional[Region],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
-    r"""Filter to models with endpoints in the given data region. Currently only \"eu\" is supported."""
+    r"""Filter to models with endpoints in the given data region (\"eu\" or \"us\")."""
 
     min_output_price: Annotated[
         OptionalNullable[float],
