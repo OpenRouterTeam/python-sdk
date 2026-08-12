@@ -787,3 +787,378 @@ class Datasets(BaseSDK):
             )
 
         raise errors.OpenRouterDefaultError("Unexpected response received", http_res)
+
+    def get_session_cost(
+        self,
+        *,
+        http_referer: Optional[str] = None,
+        x_open_router_title: Optional[str] = None,
+        x_open_router_categories: Optional[str] = None,
+        app_slug: Optional[str] = None,
+        model: Optional[str] = None,
+        turn_range: Optional[operations.TurnRange] = None,
+        limit: Optional[int] = 100,
+        offset: OptionalNullable[int] = 0,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> Optional[operations.GetSessionCostResponse]:
+        r"""Cost per session by harness and model
+
+        Returns weekly refreshed, aggregated cost-per-session cells for the published harnesses.
+        Sessions are never pooled across apps. Medians are of per-session USD spend, and
+        privacy-preserving aggregation never exposes clerk_user_id values or per-session rows.
+
+        Filter by `app_slug`, `model`, or `turn_range`. Filtering by `model` alone works across apps
+        for harness-vs-harness comparison at a fixed model. Results refresh weekly and include the source snapshot
+        window in `meta`.
+
+        :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
+            This is used to track API usage per application.
+
+        :param x_open_router_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+        :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
+
+        :param app_slug: Filter to one published harness slug.
+        :param model: Exact model permaslug filter. Works across all harness apps.
+        :param turn_range: Filter by the inclusive number of turns in a session.
+        :param limit: Maximum number of cells to return (1-500). Defaults to 100.
+        :param offset: Number of sorted cells to skip (0-5000). Defaults to 0.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = operations.GetSessionCostRequest(
+            http_referer=http_referer,
+            x_open_router_title=x_open_router_title,
+            x_open_router_categories=x_open_router_categories,
+            app_slug=app_slug,
+            model=model,
+            turn_range=turn_range,
+            limit=limit,
+            offset=offset,
+        )
+
+        req = self._build_request(
+            method="GET",
+            path="/datasets/session-cost",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            _globals=operations.GetSessionCostGlobals(
+                http_referer=self.sdk_configuration.globals.http_referer,
+                x_open_router_title=self.sdk_configuration.globals.x_open_router_title,
+                x_open_router_categories=self.sdk_configuration.globals.x_open_router_categories,
+            ),
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 60000, 1.5, 3600000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["5XX"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="getSessionCost",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
+                tags=["Datasets"],
+                extensions=None,
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        def next_func() -> Optional[operations.GetSessionCostResponse]:
+            body = utils.unmarshal_json(http_res.text, Union[Dict[Any, Any], List[Any]])
+
+            offset = request.offset if isinstance(request.offset, int) else 0
+
+            if not http_res.text:
+                return None
+            results = JSONPath("$.data").parse(body)
+            if len(results) == 0 or len(results[0]) == 0:
+                return None
+            limit_ = request.limit if isinstance(request.limit, int) else 100
+            if len(results[0]) < limit_:
+                return None
+            next_offset = offset + len(results[0])
+
+            return self.get_session_cost(
+                http_referer=http_referer,
+                x_open_router_title=x_open_router_title,
+                x_open_router_categories=x_open_router_categories,
+                app_slug=app_slug,
+                model=model,
+                turn_range=turn_range,
+                limit=limit,
+                offset=next_offset,
+                retries=retries,
+                server_url=server_url,
+                timeout_ms=timeout_ms,
+                http_headers=http_headers,
+            )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return operations.GetSessionCostResponse(
+                result=unmarshal_json_response(
+                    components.SessionCostResponse, http_res
+                ),
+                next=next_func,
+            )
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.BadRequestResponseErrorData, http_res
+            )
+            raise errors.BadRequestResponseError(response_data, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UnauthorizedResponseErrorData, http_res
+            )
+            raise errors.UnauthorizedResponseError(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.TooManyRequestsResponseErrorData, http_res
+            )
+            raise errors.TooManyRequestsResponseError(response_data, http_res)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.InternalServerResponseErrorData, http_res
+            )
+            raise errors.InternalServerResponseError(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.OpenRouterDefaultError(
+                "API error occurred", http_res, http_res_text
+            )
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.OpenRouterDefaultError(
+                "API error occurred", http_res, http_res_text
+            )
+
+        raise errors.OpenRouterDefaultError("Unexpected response received", http_res)
+
+    async def get_session_cost_async(
+        self,
+        *,
+        http_referer: Optional[str] = None,
+        x_open_router_title: Optional[str] = None,
+        x_open_router_categories: Optional[str] = None,
+        app_slug: Optional[str] = None,
+        model: Optional[str] = None,
+        turn_range: Optional[operations.TurnRange] = None,
+        limit: Optional[int] = 100,
+        offset: OptionalNullable[int] = 0,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> Optional[operations.GetSessionCostResponse]:
+        r"""Cost per session by harness and model
+
+        Returns weekly refreshed, aggregated cost-per-session cells for the published harnesses.
+        Sessions are never pooled across apps. Medians are of per-session USD spend, and
+        privacy-preserving aggregation never exposes clerk_user_id values or per-session rows.
+
+        Filter by `app_slug`, `model`, or `turn_range`. Filtering by `model` alone works across apps
+        for harness-vs-harness comparison at a fixed model. Results refresh weekly and include the source snapshot
+        window in `meta`.
+
+        :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
+            This is used to track API usage per application.
+
+        :param x_open_router_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+        :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
+
+        :param app_slug: Filter to one published harness slug.
+        :param model: Exact model permaslug filter. Works across all harness apps.
+        :param turn_range: Filter by the inclusive number of turns in a session.
+        :param limit: Maximum number of cells to return (1-500). Defaults to 100.
+        :param offset: Number of sorted cells to skip (0-5000). Defaults to 0.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = operations.GetSessionCostRequest(
+            http_referer=http_referer,
+            x_open_router_title=x_open_router_title,
+            x_open_router_categories=x_open_router_categories,
+            app_slug=app_slug,
+            model=model,
+            turn_range=turn_range,
+            limit=limit,
+            offset=offset,
+        )
+
+        req = self._build_request_async(
+            method="GET",
+            path="/datasets/session-cost",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            _globals=operations.GetSessionCostGlobals(
+                http_referer=self.sdk_configuration.globals.http_referer,
+                x_open_router_title=self.sdk_configuration.globals.x_open_router_title,
+                x_open_router_categories=self.sdk_configuration.globals.x_open_router_categories,
+            ),
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 60000, 1.5, 3600000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["5XX"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="getSessionCost",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
+                tags=["Datasets"],
+                extensions=None,
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        def next_func() -> Awaitable[Optional[operations.GetSessionCostResponse]]:
+            body = utils.unmarshal_json(http_res.text, Union[Dict[Any, Any], List[Any]])
+
+            async def empty_result():
+                return None
+
+            offset = request.offset if isinstance(request.offset, int) else 0
+
+            if not http_res.text:
+                return empty_result()
+            results = JSONPath("$.data").parse(body)
+            if len(results) == 0 or len(results[0]) == 0:
+                return empty_result()
+            limit_ = request.limit if isinstance(request.limit, int) else 100
+            if len(results[0]) < limit_:
+                return empty_result()
+            next_offset = offset + len(results[0])
+
+            return self.get_session_cost_async(
+                http_referer=http_referer,
+                x_open_router_title=x_open_router_title,
+                x_open_router_categories=x_open_router_categories,
+                app_slug=app_slug,
+                model=model,
+                turn_range=turn_range,
+                limit=limit,
+                offset=next_offset,
+                retries=retries,
+                server_url=server_url,
+                timeout_ms=timeout_ms,
+                http_headers=http_headers,
+            )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return operations.GetSessionCostResponse(
+                result=unmarshal_json_response(
+                    components.SessionCostResponse, http_res
+                ),
+                next=next_func,
+            )
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.BadRequestResponseErrorData, http_res
+            )
+            raise errors.BadRequestResponseError(response_data, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UnauthorizedResponseErrorData, http_res
+            )
+            raise errors.UnauthorizedResponseError(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.TooManyRequestsResponseErrorData, http_res
+            )
+            raise errors.TooManyRequestsResponseError(response_data, http_res)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.InternalServerResponseErrorData, http_res
+            )
+            raise errors.InternalServerResponseError(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.OpenRouterDefaultError(
+                "API error occurred", http_res, http_res_text
+            )
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.OpenRouterDefaultError(
+                "API error occurred", http_res, http_res_text
+            )
+
+        raise errors.OpenRouterDefaultError("Unexpected response received", http_res)
