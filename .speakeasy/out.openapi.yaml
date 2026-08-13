@@ -1594,6 +1594,60 @@ components:
       type:
         - 'object'
         - 'null'
+    AnthropicMessagesErrorResponse:
+      description: 'Error response from the Anthropic Messages API'
+      example:
+        error:
+          error_type: 'invalid_request'
+          message: 'Invalid request: messages field is required'
+          type: 'invalid_request_error'
+        request_id: null
+        type: 'error'
+      properties:
+        error:
+          properties:
+            error_type:
+              $ref: '#/components/schemas/ApiErrorType'
+            message:
+              type: 'string'
+            type:
+              enum:
+                - 'invalid_request_error'
+                - 'authentication_error'
+                - 'permission_error'
+                - 'not_found_error'
+                - 'rate_limit_error'
+                - 'api_error'
+                - 'overloaded_error'
+                - 'billing_error'
+                - 'timeout_error'
+              type: 'string'
+              x-speakeasy-unknown-values: allow
+          required:
+            - 'type'
+            - 'message'
+          type: 'object'
+        metadata:
+          additionalProperties: {}
+          type: 'object'
+        openrouter_metadata:
+          additionalProperties: {}
+          type:
+            - 'object'
+            - 'null'
+        request_id:
+          type:
+            - 'string'
+            - 'null'
+        type:
+          enum:
+            - 'error'
+          type: 'string'
+      required:
+        - 'type'
+        - 'error'
+        - 'request_id'
+      type: 'object'
     AnthropicMessageUsageIteration:
       allOf:
         - $ref: '#/components/schemas/AnthropicBaseUsageIteration'
@@ -10421,7 +10475,7 @@ components:
           example: 'bytedance-seed/seedream-4.5'
           type: 'string'
         'n':
-          description: 'Number of images to generate (1-10). Providers that only support single-image generation reject n > 1.'
+          description: 'Upper bound on the number of images to generate (1-10). Providers may return fewer images, and providers that only support single-image generation reject n > 1.'
           example: 1
           type: 'integer'
         output_compression:
@@ -12756,22 +12810,6 @@ components:
         - 'delta'
         - 'usage'
       type: 'object'
-    MessagesErrorDetail:
-      example:
-        error_type: 'invalid_request'
-        message: 'Invalid request parameters'
-        type: 'invalid_request_error'
-      properties:
-        error_type:
-          $ref: '#/components/schemas/ApiErrorType'
-        message:
-          type: 'string'
-        type:
-          type: 'string'
-      required:
-        - 'type'
-        - 'message'
-      type: 'object'
     MessagesErrorEvent:
       description: 'Error event in the stream'
       example:
@@ -12795,23 +12833,6 @@ components:
           type: 'object'
         openrouter_metadata:
           $ref: '#/components/schemas/OpenRouterMetadata'
-        type:
-          enum:
-            - 'error'
-          type: 'string'
-      required:
-        - 'type'
-        - 'error'
-      type: 'object'
-    MessagesErrorResponse:
-      example:
-        error:
-          message: 'Invalid request parameters'
-          type: 'invalid_request_error'
-        type: 'error'
-      properties:
-        error:
-          $ref: '#/components/schemas/MessagesErrorDetail'
         type:
           enum:
             - 'error'
@@ -33968,9 +33989,10 @@ paths:
                 error:
                   message: 'Invalid request: messages is required'
                   type: 'invalid_request_error'
+                request_id: null
                 type: 'error'
               schema:
-                $ref: '#/components/schemas/MessagesErrorResponse'
+                $ref: '#/components/schemas/AnthropicMessagesErrorResponse'
           description: 'Invalid request error'
         '401':
           content:
@@ -33979,9 +34001,10 @@ paths:
                 error:
                   message: 'Invalid API key'
                   type: 'authentication_error'
+                request_id: null
                 type: 'error'
               schema:
-                $ref: '#/components/schemas/MessagesErrorResponse'
+                $ref: '#/components/schemas/AnthropicMessagesErrorResponse'
           description: 'Authentication error'
         '403':
           content:
@@ -33991,46 +34014,26 @@ paths:
                   summary: 'Guardrail blocked the request'
                   value:
                     error:
-                      code: 403
                       message: 'Request blocked: prompt injection patterns detected'
-                      metadata:
-                        patterns:
-                          - 'ignore all previous instructions'
+                      type: 'permission_error'
                     openrouter_metadata:
-                      attempt: 1
-                      endpoints:
-                        available:
-                          - model: 'openai/gpt-4o'
-                            provider: 'OpenAI'
-                            selected: false
-                        total: 1
-                      is_byok: false
                       pipeline:
-                        - data:
-                            action: 'blocked'
-                            detected: true
-                            engines:
-                              - 'regex'
-                            patterns:
-                              - 'ignore all previous instructions'
-                          guardrail_id: 'grd_abc123'
-                          guardrail_scope: 'api-key'
-                          name: 'regex_pi_detection'
+                        - name: 'regex_pi_detection'
                           summary: 'Blocked: prompt injection detected (1 pattern matched)'
                           type: 'guardrail'
-                      region: 'iad'
-                      requested: 'openai/gpt-4o'
-                      strategy: 'direct'
-                      summary: 'available=1'
+                    request_id: null
+                    type: 'error'
                 insufficient-permissions:
                   summary: 'Insufficient permissions'
                   value:
                     error:
-                      code: 403
                       message: 'Only management keys can perform this operation'
+                      type: 'permission_error'
+                    request_id: null
+                    type: 'error'
               schema:
-                $ref: '#/components/schemas/ForbiddenResponse'
-          description: 'Forbidden - Authentication successful but insufficient permissions, or a guardrail blocked the request. When guardrails block and the `X-OpenRouter-Metadata: enabled` header is present, the response includes `openrouter_metadata` with full routing context and a `pipeline` array containing guardrail stage details.'
+                $ref: '#/components/schemas/AnthropicMessagesErrorResponse'
+          description: 'Forbidden error'
         '404':
           content:
             application/json:
@@ -34038,9 +34041,10 @@ paths:
                 error:
                   message: 'Model not found'
                   type: 'not_found_error'
+                request_id: 'gen-xxxxxxxxxxxxxxxxxxxxxxxx'
                 type: 'error'
               schema:
-                $ref: '#/components/schemas/MessagesErrorResponse'
+                $ref: '#/components/schemas/AnthropicMessagesErrorResponse'
           description: 'Not found error'
         '429':
           content:
@@ -34049,9 +34053,10 @@ paths:
                 error:
                   message: 'Rate limit exceeded'
                   type: 'rate_limit_error'
+                request_id: 'gen-xxxxxxxxxxxxxxxxxxxxxxxx'
                 type: 'error'
               schema:
-                $ref: '#/components/schemas/MessagesErrorResponse'
+                $ref: '#/components/schemas/AnthropicMessagesErrorResponse'
           description: 'Rate limit error'
         '500':
           content:
@@ -34060,9 +34065,10 @@ paths:
                 error:
                   message: 'Internal server error'
                   type: 'api_error'
+                request_id: 'gen-xxxxxxxxxxxxxxxxxxxxxxxx'
                 type: 'error'
               schema:
-                $ref: '#/components/schemas/MessagesErrorResponse'
+                $ref: '#/components/schemas/AnthropicMessagesErrorResponse'
           description: 'API error'
         '503':
           content:
@@ -34071,9 +34077,10 @@ paths:
                 error:
                   message: 'Service temporarily overloaded'
                   type: 'overloaded_error'
+                request_id: 'gen-xxxxxxxxxxxxxxxxxxxxxxxx'
                 type: 'error'
               schema:
-                $ref: '#/components/schemas/MessagesErrorResponse'
+                $ref: '#/components/schemas/AnthropicMessagesErrorResponse'
           description: 'Overloaded error'
         '529':
           content:
@@ -34082,9 +34089,10 @@ paths:
                 error:
                   message: 'Provider is temporarily overloaded'
                   type: 'overloaded_error'
+                request_id: 'gen-xxxxxxxxxxxxxxxxxxxxxxxx'
                 type: 'error'
               schema:
-                $ref: '#/components/schemas/MessagesErrorResponse'
+                $ref: '#/components/schemas/AnthropicMessagesErrorResponse'
           description: 'Overloaded error'
       summary: 'Create a message'
       tags:

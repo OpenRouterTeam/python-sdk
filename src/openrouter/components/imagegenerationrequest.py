@@ -103,7 +103,7 @@ class ImageGenerationRequestTypedDict(TypedDict):
     input_references: NotRequired[List[ContentPartImageTypedDict]]
     r"""Reference images to guide image-to-image generation, as base64 data URLs or HTTP(S) URLs."""
     n: NotRequired[int]
-    r"""Number of images to generate (1-10). Providers that only support single-image generation reject n > 1."""
+    r"""Upper bound on the number of images to generate (1-10). Providers may return fewer images, and providers that only support single-image generation reject n > 1."""
     output_compression: NotRequired[int]
     r"""Compression level (0-100) for webp/jpeg output. Ignored for png and by providers without a compression knob."""
     output_format: NotRequired[ImageGenerationRequestOutputFormat]
@@ -141,7 +141,7 @@ class ImageGenerationRequest(BaseModel):
     r"""Reference images to guide image-to-image generation, as base64 data URLs or HTTP(S) URLs."""
 
     n: Optional[int] = None
-    r"""Number of images to generate (1-10). Providers that only support single-image generation reject n > 1."""
+    r"""Upper bound on the number of images to generate (1-10). Providers may return fewer images, and providers that only support single-image generation reject n > 1."""
 
     output_compression: Optional[int] = None
     r"""Compression level (0-100) for webp/jpeg output. Ignored for png and by providers without a compression knob."""
