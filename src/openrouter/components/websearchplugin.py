@@ -84,7 +84,7 @@ class WebSearchPluginTypedDict(TypedDict):
     max_uses: NotRequired[int]
     r"""Maximum number of times the model can invoke web search in a single turn. Passed through to native providers that support it (e.g. Anthropic)."""
     mode: NotRequired[WebSearchMode]
-    r"""Engine-native search mode. Exa supports instant, fast, auto (default), deep-lite, deep, and deep-reasoning. Parallel supports turbo, basic (default), and advanced. Modes unsupported by the selected engine are ignored."""
+    r"""Engine-native search mode. Exa supports instant, fast, auto (default), deep-lite, deep, and deep-reasoning. Parallel supports turbo, fast, basic (default), and advanced. Modes unsupported by the selected engine are ignored."""
     search_prompt: NotRequired[str]
     user_location: NotRequired[Nullable[UserLocationTypedDict]]
 
@@ -110,7 +110,7 @@ class WebSearchPlugin(BaseModel):
     r"""Maximum number of times the model can invoke web search in a single turn. Passed through to native providers that support it (e.g. Anthropic)."""
 
     mode: Optional[WebSearchMode] = None
-    r"""Engine-native search mode. Exa supports instant, fast, auto (default), deep-lite, deep, and deep-reasoning. Parallel supports turbo, basic (default), and advanced. Modes unsupported by the selected engine are ignored."""
+    r"""Engine-native search mode. Exa supports instant, fast, auto (default), deep-lite, deep, and deep-reasoning. Parallel supports turbo, fast, basic (default), and advanced. Modes unsupported by the selected engine are ignored."""
 
     search_prompt: Optional[str] = None
 
