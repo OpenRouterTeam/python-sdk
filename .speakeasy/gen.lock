@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c48cf606-fb42-4a45-9c23-8f0555307828
 management:
-  docChecksum: 2d5bcd23718a2f336acb63e4dbd5a3f4
+  docChecksum: 1e2a0333ab1ccfe5306774b00cbdbcc1
   docVersion: 1.0.0
   speakeasyVersion: 1.787.0
   generationVersion: 2.914.0
-  releaseVersion: 1.1.53
-  configChecksum: 046b9a1447a12fc06957e8165fb33a5a
+  releaseVersion: 1.1.54
+  configChecksum: 1765552a9cbf18829bcaaffcd4ab91d3
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
 persistentEdits:
-  generation_id: d0a8239a-44f6-4840-8b7d-577fd92030ac
-  pristine_commit_hash: c4f40d2d82ebd6183c92956112143a5420161520
-  pristine_tree_hash: 31f8c130d0fa462508b614115d096e2724e40099
+  generation_id: 1ed6be0d-a8eb-4a89-9f33-17e8194ac24b
+  pristine_commit_hash: b3eef92b13f15402c63132fb08e94d8dcae44de4
+  pristine_tree_hash: a85ad4f87a1877864e61a0bcaacc04a25937135b
 features:
   python:
     acceptHeaders: 3.0.0
@@ -6162,8 +6162,8 @@ trackedFiles:
     pristine_git_object: c7f6f46cb7fe3707737c51c7a1ddb435be7fec2b
   docs/operations/deleteworkspacerequest.mdx:
     id: 189f48e44c13
-    last_write_checksum: sha1:4f9b53b1fa46519f53e9559223533692c8de4480
-    pristine_git_object: cc9d4416873fe746dd63f2832af6ecb256170975
+    last_write_checksum: sha1:39f29bacfb11c79b1d953c79dca9e8101ef0b4c8
+    pristine_git_object: 50cb6375efaf00c21c0d511bea0142d735017ab2
   docs/operations/dimension.mdx:
     id: b487fdd43b73
     last_write_checksum: sha1:eb74d7de28b0132eb9599a10b080291e8f81d4c0
@@ -7226,16 +7226,16 @@ trackedFiles:
     pristine_git_object: 3ea6c23aa5715eac2c8d2e0a3d385cbaf12ad979
   docs/sdks/workspaces/README.mdx:
     id: 0c75d023ef6b
-    last_write_checksum: sha1:647c33858f05da6d34f3bfabe1b72cacc2a307ae
-    pristine_git_object: 4e623ef27c5a49e8175c4862a56b07dc8af369e9
+    last_write_checksum: sha1:529c0cf0fa3881b3564ca8182df7e50c91cd4e7f
+    pristine_git_object: 2c171445cabef01e4d8e6c51d4cabafd48975e61
   py.typed:
     id: 258c3ed47ae4
     last_write_checksum: sha1:8efc425ffe830805ffcc0f3055871bdcdc542c60
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:53e50533f146f4ac766c94b5b7b32335523c0337
-    pristine_git_object: 68ae14ebea3cc0946a60e58727930bd12accae3d
+    last_write_checksum: sha1:9436613d062c6b92fef51805fa349cf9f2024317
+    pristine_git_object: 5d1d1c4df99f6f6ea98421344af9b091c01a878c
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77f44b60b98bc126557ec27391f91dfba764bb54
@@ -7262,8 +7262,8 @@ trackedFiles:
     pristine_git_object: 86713cfea633e09d33b3d4e65281071fe20e6137
   src/openrouter/_version.py:
     id: d8d15ad6c586
-    last_write_checksum: sha1:ab7cf50544b97675cf90ac09044a0866cf9d1910
-    pristine_git_object: 81fa932cfb4133ccb4d7c1694a124ee5e3f0aafb
+    last_write_checksum: sha1:31e034517cad1c6979c3d9efa5a86270cdd84082
+    pristine_git_object: ce1d1b5a37d795079a60ac8f56dae32b4ff7aa7d
   src/openrouter/analytics.py:
     id: cb406b5aaabb
     last_write_checksum: sha1:3ea0f1c73fb9c101b7bc5719da4dd7bf62ff469a
@@ -10018,8 +10018,8 @@ trackedFiles:
     pristine_git_object: fec5503fa15f0f9588686f364f2066bf55f3ea80
   src/openrouter/operations/deleteworkspace.py:
     id: f92017ce65e8
-    last_write_checksum: sha1:16e1162c55855645fad2a3a06549bd77eddb3a6c
-    pristine_git_object: d6003d891c2a894880ea3e1262c665cebe9434dc
+    last_write_checksum: sha1:8cf5ad942a8a16cd086fa390495f37709ec55148
+    pristine_git_object: 5bc55dd0a33f1bb17eb34f05035cdabdc00ab1d4
   src/openrouter/operations/deleteworkspacebudget.py:
     id: 4043f35925db
     last_write_checksum: sha1:1b6fd5acfd6b53525c8dcff26148535d5acf0401
@@ -10418,8 +10418,8 @@ trackedFiles:
     pristine_git_object: 34a2f1e5eb9526f692341b5efa393b2b58fb7a57
   src/openrouter/workspaces.py:
     id: cd6c533b1802
-    last_write_checksum: sha1:71305961ecafbe8abace45f9c734da6e583e599b
-    pristine_git_object: bd71763eb04430ae68f6dab0a45d64a2f7515f71
+    last_write_checksum: sha1:b5ba462194c82678de9d89e2f30508d66606bdea
+    pristine_git_object: fc95e700ab5303c7ca8e1ea1ac739ae8157147bf
 examples:
   createResponses:
     speakeasy-default-create-responses:

@@ -695,7 +695,7 @@ class Workspaces(BaseSDK):
     ) -> components.DeleteWorkspaceResponse:
         r"""Delete a workspace
 
-        Delete an existing workspace. Workspaces with active API keys cannot be deleted; remove the keys first. Deleting the default workspace is currently limited to internal OpenRouter administrators while the capability rolls out; other callers receive a 403. When permitted, it requires `confirm_default_settings_deletion=true` and additionally disables the account’s unscoped inference API keys; management (provisioning) keys are retained. Deleting any workspace permanently deletes its budgets and guardrails and disables its classifiers and broadcast destinations. [Management key](/docs/guides/overview/auth/management-api-keys) required.
+        Delete an existing workspace. Workspaces with active API keys cannot be deleted; remove the keys first. Deleting the default workspace is not yet generally available; callers not enabled for it receive a 403 while the capability rolls out. When permitted, it requires `confirm_default_settings_deletion=true` and additionally disables the account’s unscoped inference API keys; management (provisioning) keys are retained. Deleting any workspace permanently deletes its budgets and guardrails and disables its classifiers and broadcast destinations. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param id: The workspace ID (UUID) or slug
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
@@ -705,7 +705,7 @@ class Workspaces(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
-        :param confirm_default_settings_deletion: Required to delete the default workspace (currently limited to internal OpenRouter administrators while the capability rolls out). Deleting it permanently disables the account’s unscoped inference API keys (management/provisioning keys are retained) and its budgets, guardrails, classifiers, and broadcast destinations. Ignored for non-default workspaces.
+        :param confirm_default_settings_deletion: Required to delete the default workspace (not yet generally available; callers not enabled for it receive a 403 while the capability rolls out). Deleting it permanently disables the account’s unscoped inference API keys (management/provisioning keys are retained) and its budgets, guardrails, classifiers, and broadcast destinations. Ignored for non-default workspaces.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -836,7 +836,7 @@ class Workspaces(BaseSDK):
     ) -> components.DeleteWorkspaceResponse:
         r"""Delete a workspace
 
-        Delete an existing workspace. Workspaces with active API keys cannot be deleted; remove the keys first. Deleting the default workspace is currently limited to internal OpenRouter administrators while the capability rolls out; other callers receive a 403. When permitted, it requires `confirm_default_settings_deletion=true` and additionally disables the account’s unscoped inference API keys; management (provisioning) keys are retained. Deleting any workspace permanently deletes its budgets and guardrails and disables its classifiers and broadcast destinations. [Management key](/docs/guides/overview/auth/management-api-keys) required.
+        Delete an existing workspace. Workspaces with active API keys cannot be deleted; remove the keys first. Deleting the default workspace is not yet generally available; callers not enabled for it receive a 403 while the capability rolls out. When permitted, it requires `confirm_default_settings_deletion=true` and additionally disables the account’s unscoped inference API keys; management (provisioning) keys are retained. Deleting any workspace permanently deletes its budgets and guardrails and disables its classifiers and broadcast destinations. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param id: The workspace ID (UUID) or slug
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
@@ -846,7 +846,7 @@ class Workspaces(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
-        :param confirm_default_settings_deletion: Required to delete the default workspace (currently limited to internal OpenRouter administrators while the capability rolls out). Deleting it permanently disables the account’s unscoped inference API keys (management/provisioning keys are retained) and its budgets, guardrails, classifiers, and broadcast destinations. Ignored for non-default workspaces.
+        :param confirm_default_settings_deletion: Required to delete the default workspace (not yet generally available; callers not enabled for it receive a 403 while the capability rolls out). Deleting it permanently disables the account’s unscoped inference API keys (management/provisioning keys are retained) and its budgets, guardrails, classifiers, and broadcast destinations. Ignored for non-default workspaces.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
