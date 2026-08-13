@@ -64,7 +64,7 @@ class Images(BaseSDK):
         :param aspect_ratio: Normalized aspect ratio of the generated image. Providers clamp to their supported subset.
         :param background: Background treatment. `transparent` requires an output_format that supports alpha (png or webp).
         :param input_references: Reference images to guide image-to-image generation, as base64 data URLs or HTTP(S) URLs.
-        :param n: Number of images to generate (1-10). Providers that only support single-image generation reject n > 1.
+        :param n: Upper bound on the number of images to generate (1-10). Providers may return fewer images, and providers that only support single-image generation reject n > 1.
         :param output_compression: Compression level (0-100) for webp/jpeg output. Ignored for png and by providers without a compression knob.
         :param output_format: Encoding of the returned image bytes. Most models produce raster formats (png, jpeg, webp). SVG is supported by vectorization models (e.g. Quiver) — the SVG markup is UTF-8 base64-encoded in `b64_json`.
         :param provider: Provider routing preferences and provider-specific passthrough configuration.
@@ -131,7 +131,7 @@ class Images(BaseSDK):
         :param aspect_ratio: Normalized aspect ratio of the generated image. Providers clamp to their supported subset.
         :param background: Background treatment. `transparent` requires an output_format that supports alpha (png or webp).
         :param input_references: Reference images to guide image-to-image generation, as base64 data URLs or HTTP(S) URLs.
-        :param n: Number of images to generate (1-10). Providers that only support single-image generation reject n > 1.
+        :param n: Upper bound on the number of images to generate (1-10). Providers may return fewer images, and providers that only support single-image generation reject n > 1.
         :param output_compression: Compression level (0-100) for webp/jpeg output. Ignored for png and by providers without a compression knob.
         :param output_format: Encoding of the returned image bytes. Most models produce raster formats (png, jpeg, webp). SVG is supported by vectorization models (e.g. Quiver) — the SVG markup is UTF-8 base64-encoded in `b64_json`.
         :param provider: Provider routing preferences and provider-specific passthrough configuration.
@@ -201,7 +201,7 @@ class Images(BaseSDK):
         :param aspect_ratio: Normalized aspect ratio of the generated image. Providers clamp to their supported subset.
         :param background: Background treatment. `transparent` requires an output_format that supports alpha (png or webp).
         :param input_references: Reference images to guide image-to-image generation, as base64 data URLs or HTTP(S) URLs.
-        :param n: Number of images to generate (1-10). Providers that only support single-image generation reject n > 1.
+        :param n: Upper bound on the number of images to generate (1-10). Providers may return fewer images, and providers that only support single-image generation reject n > 1.
         :param output_compression: Compression level (0-100) for webp/jpeg output. Ignored for png and by providers without a compression knob.
         :param output_format: Encoding of the returned image bytes. Most models produce raster formats (png, jpeg, webp). SVG is supported by vectorization models (e.g. Quiver) — the SVG markup is UTF-8 base64-encoded in `b64_json`.
         :param provider: Provider routing preferences and provider-specific passthrough configuration.
@@ -270,7 +270,7 @@ class Images(BaseSDK):
         :param aspect_ratio: Normalized aspect ratio of the generated image. Providers clamp to their supported subset.
         :param background: Background treatment. `transparent` requires an output_format that supports alpha (png or webp).
         :param input_references: Reference images to guide image-to-image generation, as base64 data URLs or HTTP(S) URLs.
-        :param n: Number of images to generate (1-10). Providers that only support single-image generation reject n > 1.
+        :param n: Upper bound on the number of images to generate (1-10). Providers may return fewer images, and providers that only support single-image generation reject n > 1.
         :param output_compression: Compression level (0-100) for webp/jpeg output. Ignored for png and by providers without a compression knob.
         :param output_format: Encoding of the returned image bytes. Most models produce raster formats (png, jpeg, webp). SVG is supported by vectorization models (e.g. Quiver) — the SVG markup is UTF-8 base64-encoded in `b64_json`.
         :param provider: Provider routing preferences and provider-specific passthrough configuration.
@@ -544,7 +544,7 @@ class Images(BaseSDK):
         :param aspect_ratio: Normalized aspect ratio of the generated image. Providers clamp to their supported subset.
         :param background: Background treatment. `transparent` requires an output_format that supports alpha (png or webp).
         :param input_references: Reference images to guide image-to-image generation, as base64 data URLs or HTTP(S) URLs.
-        :param n: Number of images to generate (1-10). Providers that only support single-image generation reject n > 1.
+        :param n: Upper bound on the number of images to generate (1-10). Providers may return fewer images, and providers that only support single-image generation reject n > 1.
         :param output_compression: Compression level (0-100) for webp/jpeg output. Ignored for png and by providers without a compression knob.
         :param output_format: Encoding of the returned image bytes. Most models produce raster formats (png, jpeg, webp). SVG is supported by vectorization models (e.g. Quiver) — the SVG markup is UTF-8 base64-encoded in `b64_json`.
         :param provider: Provider routing preferences and provider-specific passthrough configuration.
@@ -611,7 +611,7 @@ class Images(BaseSDK):
         :param aspect_ratio: Normalized aspect ratio of the generated image. Providers clamp to their supported subset.
         :param background: Background treatment. `transparent` requires an output_format that supports alpha (png or webp).
         :param input_references: Reference images to guide image-to-image generation, as base64 data URLs or HTTP(S) URLs.
-        :param n: Number of images to generate (1-10). Providers that only support single-image generation reject n > 1.
+        :param n: Upper bound on the number of images to generate (1-10). Providers may return fewer images, and providers that only support single-image generation reject n > 1.
         :param output_compression: Compression level (0-100) for webp/jpeg output. Ignored for png and by providers without a compression knob.
         :param output_format: Encoding of the returned image bytes. Most models produce raster formats (png, jpeg, webp). SVG is supported by vectorization models (e.g. Quiver) — the SVG markup is UTF-8 base64-encoded in `b64_json`.
         :param provider: Provider routing preferences and provider-specific passthrough configuration.
@@ -681,7 +681,7 @@ class Images(BaseSDK):
         :param aspect_ratio: Normalized aspect ratio of the generated image. Providers clamp to their supported subset.
         :param background: Background treatment. `transparent` requires an output_format that supports alpha (png or webp).
         :param input_references: Reference images to guide image-to-image generation, as base64 data URLs or HTTP(S) URLs.
-        :param n: Number of images to generate (1-10). Providers that only support single-image generation reject n > 1.
+        :param n: Upper bound on the number of images to generate (1-10). Providers may return fewer images, and providers that only support single-image generation reject n > 1.
         :param output_compression: Compression level (0-100) for webp/jpeg output. Ignored for png and by providers without a compression knob.
         :param output_format: Encoding of the returned image bytes. Most models produce raster formats (png, jpeg, webp). SVG is supported by vectorization models (e.g. Quiver) — the SVG markup is UTF-8 base64-encoded in `b64_json`.
         :param provider: Provider routing preferences and provider-specific passthrough configuration.
@@ -750,7 +750,7 @@ class Images(BaseSDK):
         :param aspect_ratio: Normalized aspect ratio of the generated image. Providers clamp to their supported subset.
         :param background: Background treatment. `transparent` requires an output_format that supports alpha (png or webp).
         :param input_references: Reference images to guide image-to-image generation, as base64 data URLs or HTTP(S) URLs.
-        :param n: Number of images to generate (1-10). Providers that only support single-image generation reject n > 1.
+        :param n: Upper bound on the number of images to generate (1-10). Providers may return fewer images, and providers that only support single-image generation reject n > 1.
         :param output_compression: Compression level (0-100) for webp/jpeg output. Ignored for png and by providers without a compression knob.
         :param output_format: Encoding of the returned image bytes. Most models produce raster formats (png, jpeg, webp). SVG is supported by vectorization models (e.g. Quiver) — the SVG markup is UTF-8 base64-encoded in `b64_json`.
         :param provider: Provider routing preferences and provider-specific passthrough configuration.
