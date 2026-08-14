@@ -11,7 +11,7 @@ from typing import Any, Awaitable, Dict, List, Mapping, Optional, Union
 
 
 class Datasets(BaseSDK):
-    r"""Datasets endpoints"""
+    r"""Public OpenRouter usage datasets. Data returned by these endpoints is licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/): reuse and republish it, including commercially, with attribution to OpenRouter."""
 
     def get_app_rankings(
         self,
@@ -56,6 +56,8 @@ class Datasets(BaseSDK):
         Token counts come from each upstream provider's own tokenizer, so a token attributed
         to one app is not directly comparable to a token attributed to another app whose
         traffic flows through a different provider.
+
+        Licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/): reuse and republish with attribution to OpenRouter.
 
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
@@ -266,6 +268,8 @@ class Datasets(BaseSDK):
         Token counts come from each upstream provider's own tokenizer, so a token attributed
         to one app is not directly comparable to a token attributed to another app whose
         traffic flows through a different provider.
+
+        Licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/): reuse and republish with attribution to OpenRouter.
 
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
@@ -483,6 +487,8 @@ class Datasets(BaseSDK):
         a token in one row is not directly comparable to a token in another row from a
         different provider.
 
+        Licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/): reuse and republish with attribution to OpenRouter.
+
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
@@ -659,6 +665,8 @@ class Datasets(BaseSDK):
         a token in one row is not directly comparable to a token in another row from a
         different provider.
 
+        Licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/): reuse and republish with attribution to OpenRouter.
+
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
@@ -813,6 +821,8 @@ class Datasets(BaseSDK):
         Filter by `app_slug`, `model`, or `turn_range`. Filtering by `model` alone works across apps
         for harness-vs-harness comparison at a fixed model. Results refresh weekly and include the source snapshot
         window in `meta`.
+
+        Licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/): reuse and republish with attribution to OpenRouter.
 
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
@@ -999,6 +1009,8 @@ class Datasets(BaseSDK):
         Filter by `app_slug`, `model`, or `turn_range`. Filtering by `model` alone works across apps
         for harness-vs-harness comparison at a fixed model. Results refresh weekly and include the source snapshot
         window in `meta`.
+
+        Licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/): reuse and republish with attribution to OpenRouter.
 
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
