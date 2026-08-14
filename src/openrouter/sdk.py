@@ -70,7 +70,7 @@ class OpenRouter(BaseSDK):
     credits: "Credits"
     r"""Credit management endpoints"""
     datasets: "Datasets"
-    r"""Datasets endpoints"""
+    r"""Public OpenRouter usage datasets. Data returned by these endpoints is licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/): reuse and republish it, including commercially, with attribution to OpenRouter."""
     embeddings: "Embeddings"
     r"""Text embedding endpoints"""
     endpoints: "Endpoints"
