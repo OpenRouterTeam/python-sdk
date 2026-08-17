@@ -2,7 +2,13 @@
 
 from __future__ import annotations
 from .shellcallstatus import ShellCallStatus
-from openrouter.types import BaseModel, Nullable, UNSET_SENTINEL
+from openrouter.types import (
+    BaseModel,
+    Nullable,
+    OptionalNullable,
+    UNSET,
+    UNSET_SENTINEL,
+)
 from pydantic import model_serializer
 from typing import List, Literal, Optional
 from typing_extensions import NotRequired, TypedDict
@@ -48,6 +54,8 @@ class OutputShellCallItemTypedDict(TypedDict):
     r"""Status of a shell call or its output."""
     type: OutputShellCallItemType
     action: NotRequired[OutputShellCallItemActionTypedDict]
+    arguments: NotRequired[Nullable[str]]
+    r"""The raw tool-call arguments string as emitted by the model. Echo back unchanged when replaying history; used verbatim to preserve provider prompt-cache prefixes."""
 
 
 class OutputShellCallItem(BaseModel):
@@ -64,18 +72,30 @@ class OutputShellCallItem(BaseModel):
 
     action: Optional[OutputShellCallItemAction] = None
 
+    arguments: OptionalNullable[str] = UNSET
+    r"""The raw tool-call arguments string as emitted by the model. Echo back unchanged when replaying history; used verbatim to preserve provider prompt-cache prefixes."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["action"])
+        optional_fields = set(["action", "arguments"])
+        nullable_fields = set(["arguments"])
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
             if val != UNSET_SENTINEL:
-                if val is not None or k not in optional_fields:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
                     m[k] = val
 
         return m

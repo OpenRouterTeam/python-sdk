@@ -2,7 +2,13 @@
 
 from __future__ import annotations
 from .toolcallstatus import ToolCallStatus
-from openrouter.types import BaseModel, UNSET_SENTINEL
+from openrouter.types import (
+    BaseModel,
+    Nullable,
+    OptionalNullable,
+    UNSET,
+    UNSET_SENTINEL,
+)
 import pydantic
 from pydantic import model_serializer
 from typing import Literal, Optional
@@ -17,9 +23,9 @@ class OutputBashServerToolItemTypedDict(TypedDict):
 
     status: ToolCallStatus
     type: OutputBashServerToolItemType
-    arguments: NotRequired[str]
+    arguments: NotRequired[Nullable[str]]
     r"""The raw tool-call arguments string as emitted by the model."""
-    call_id: NotRequired[str]
+    call_id: NotRequired[Nullable[str]]
     r"""The model-generated tool call id from the originating turn."""
     command: NotRequired[str]
     exit_code: NotRequired[int]
@@ -35,10 +41,10 @@ class OutputBashServerToolItem(BaseModel):
 
     type: OutputBashServerToolItemType
 
-    arguments: Optional[str] = None
+    arguments: OptionalNullable[str] = UNSET
     r"""The raw tool-call arguments string as emitted by the model."""
 
-    call_id: Optional[str] = None
+    call_id: OptionalNullable[str] = UNSET
     r"""The model-generated tool call id from the originating turn."""
 
     command: Optional[str] = None
@@ -56,15 +62,24 @@ class OutputBashServerToolItem(BaseModel):
         optional_fields = set(
             ["arguments", "call_id", "command", "exitCode", "id", "stderr", "stdout"]
         )
+        nullable_fields = set(["arguments", "call_id"])
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
             if val != UNSET_SENTINEL:
-                if val is not None or k not in optional_fields:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
                     m[k] = val
 
         return m
