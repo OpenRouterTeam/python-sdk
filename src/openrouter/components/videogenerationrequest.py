@@ -36,6 +36,7 @@ class VideoGenerationRequestOptionsTypedDict(TypedDict):
     akashml: NotRequired[Dict[str, Any]]
     alibaba: NotRequired[Dict[str, Any]]
     amazon_bedrock: NotRequired[Dict[str, Any]]
+    amazon_bedrock_claude_on_aws: NotRequired[Dict[str, Any]]
     amazon_nova: NotRequired[Dict[str, Any]]
     ambient: NotRequired[Dict[str, Any]]
     anthropic: NotRequired[Dict[str, Any]]
@@ -182,6 +183,10 @@ class VideoGenerationRequestOptions(BaseModel):
 
     amazon_bedrock: Annotated[
         Optional[Dict[str, Any]], pydantic.Field(alias="amazon-bedrock")
+    ] = None
+
+    amazon_bedrock_claude_on_aws: Annotated[
+        Optional[Dict[str, Any]], pydantic.Field(alias="amazon-bedrock/claude-on-aws")
     ] = None
 
     amazon_nova: Annotated[
@@ -490,6 +495,7 @@ class VideoGenerationRequestOptions(BaseModel):
                 "akashml",
                 "alibaba",
                 "amazon-bedrock",
+                "amazon-bedrock/claude-on-aws",
                 "amazon-nova",
                 "ambient",
                 "anthropic",
