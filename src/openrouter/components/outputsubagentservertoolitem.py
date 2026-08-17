@@ -16,6 +16,8 @@ class OutputSubagentServerToolItemTypedDict(TypedDict):
 
     status: ToolCallStatus
     type: OutputSubagentServerToolItemType
+    call_id: NotRequired[str]
+    r"""EXPERIMENTAL — subject to change without notice. The `call_id` of the tool call that spawned this subagent. This id will also be included as the `subagent_id` on any `function_call` items created by the subagent. This must be returned in the request so the `function_call` can be matched with the correct subagent. A suspended `in_progress` item is announced once and never re-emitted or terminally closed — completion arrives as a new item with the same `call_id`."""
     error: NotRequired[str]
     r"""Error message when the subagent task did not produce an outcome."""
     id: NotRequired[str]
@@ -39,6 +41,9 @@ class OutputSubagentServerToolItem(BaseModel):
     status: ToolCallStatus
 
     type: OutputSubagentServerToolItemType
+
+    call_id: Optional[str] = None
+    r"""EXPERIMENTAL — subject to change without notice. The `call_id` of the tool call that spawned this subagent. This id will also be included as the `subagent_id` on any `function_call` items created by the subagent. This must be returned in the request so the `function_call` can be matched with the correct subagent. A suspended `in_progress` item is announced once and never re-emitted or terminally closed — completion arrives as a new item with the same `call_id`."""
 
     error: Optional[str] = None
     r"""Error message when the subagent task did not produce an outcome."""
@@ -67,6 +72,7 @@ class OutputSubagentServerToolItem(BaseModel):
     def serialize_model(self, handler):
         optional_fields = set(
             [
+                "call_id",
                 "error",
                 "id",
                 "instance_name",

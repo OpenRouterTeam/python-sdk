@@ -28,7 +28,7 @@ class SubagentReasoningTypedDict(TypedDict):
     effort: NotRequired[SubagentReasoningEffort]
     r"""Reasoning effort level for the subagent call."""
     max_tokens: NotRequired[int]
-    r"""Maximum number of reasoning tokens the subagent may use. Accepted and validated but not yet forwarded to the subagent call."""
+    r"""Maximum number of reasoning tokens the subagent may use. Forwarded to the subagent call as `reasoning.max_tokens`."""
 
 
 class SubagentReasoning(BaseModel):
@@ -38,7 +38,7 @@ class SubagentReasoning(BaseModel):
     r"""Reasoning effort level for the subagent call."""
 
     max_tokens: Optional[int] = None
-    r"""Maximum number of reasoning tokens the subagent may use. Accepted and validated but not yet forwarded to the subagent call."""
+    r"""Maximum number of reasoning tokens the subagent may use. Forwarded to the subagent call as `reasoning.max_tokens`."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

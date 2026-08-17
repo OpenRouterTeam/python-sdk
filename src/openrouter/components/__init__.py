@@ -1077,6 +1077,8 @@ if TYPE_CHECKING:
     )
     from .functioncallitem import (
         FunctionCallItem,
+        FunctionCallItemSubagentItem,
+        FunctionCallItemSubagentItemTypedDict,
         FunctionCallItemType,
         FunctionCallItemTypedDict,
     )
@@ -2000,6 +2002,8 @@ if TYPE_CHECKING:
     )
     from .openairesponsefunctiontoolcall import (
         OpenAIResponseFunctionToolCall,
+        OpenAIResponseFunctionToolCallSubagentItem,
+        OpenAIResponseFunctionToolCallSubagentItemTypedDict,
         OpenAIResponseFunctionToolCallType,
         OpenAIResponseFunctionToolCallTypedDict,
     )
@@ -2191,6 +2195,8 @@ if TYPE_CHECKING:
         OutputFunctionCallItemStatusIncomplete,
         OutputFunctionCallItemStatusUnion,
         OutputFunctionCallItemStatusUnionTypedDict,
+        OutputFunctionCallItemSubagentItem,
+        OutputFunctionCallItemSubagentItemTypedDict,
         OutputFunctionCallItemType,
         OutputFunctionCallItemTypedDict,
     )
@@ -3884,6 +3890,8 @@ __all__ = [
     "FunctionCallArgsDoneEventType",
     "FunctionCallArgsDoneEventTypedDict",
     "FunctionCallItem",
+    "FunctionCallItemSubagentItem",
+    "FunctionCallItemSubagentItemTypedDict",
     "FunctionCallItemType",
     "FunctionCallItemTypedDict",
     "FunctionCallOutputItem",
@@ -4475,6 +4483,8 @@ __all__ = [
     "OpenAIResponseFunctionToolCallOutputOutput2TypedDict",
     "OpenAIResponseFunctionToolCallOutputType",
     "OpenAIResponseFunctionToolCallOutputTypedDict",
+    "OpenAIResponseFunctionToolCallSubagentItem",
+    "OpenAIResponseFunctionToolCallSubagentItemTypedDict",
     "OpenAIResponseFunctionToolCallType",
     "OpenAIResponseFunctionToolCallTypedDict",
     "OpenAIResponseInputMessageItem",
@@ -4598,6 +4608,8 @@ __all__ = [
     "OutputFunctionCallItemStatusIncomplete",
     "OutputFunctionCallItemStatusUnion",
     "OutputFunctionCallItemStatusUnionTypedDict",
+    "OutputFunctionCallItemSubagentItem",
+    "OutputFunctionCallItemSubagentItemTypedDict",
     "OutputFunctionCallItemType",
     "OutputFunctionCallItemTypedDict",
     "OutputFusionServerToolItem",
@@ -6110,6 +6122,8 @@ _dynamic_imports: dict[str, str] = {
     "FunctionCallArgsDoneEventType": ".functioncallargsdoneevent",
     "FunctionCallArgsDoneEventTypedDict": ".functioncallargsdoneevent",
     "FunctionCallItem": ".functioncallitem",
+    "FunctionCallItemSubagentItem": ".functioncallitem",
+    "FunctionCallItemSubagentItemTypedDict": ".functioncallitem",
     "FunctionCallItemType": ".functioncallitem",
     "FunctionCallItemTypedDict": ".functioncallitem",
     "FunctionCallOutputItem": ".functioncalloutputitem",
@@ -6831,6 +6845,8 @@ _dynamic_imports: dict[str, str] = {
     "OpenAIResponseCustomToolCallOutputTypedDict": ".openairesponsecustomtoolcalloutput",
     "UnknownOpenAIResponseCustomToolCallOutputOutput1": ".openairesponsecustomtoolcalloutput",
     "OpenAIResponseFunctionToolCall": ".openairesponsefunctiontoolcall",
+    "OpenAIResponseFunctionToolCallSubagentItem": ".openairesponsefunctiontoolcall",
+    "OpenAIResponseFunctionToolCallSubagentItemTypedDict": ".openairesponsefunctiontoolcall",
     "OpenAIResponseFunctionToolCallType": ".openairesponsefunctiontoolcall",
     "OpenAIResponseFunctionToolCallTypedDict": ".openairesponsefunctiontoolcall",
     "OpenAIResponseFunctionToolCallOutput": ".openairesponsefunctiontoolcalloutput",
@@ -6971,6 +6987,8 @@ _dynamic_imports: dict[str, str] = {
     "OutputFunctionCallItemStatusIncomplete": ".outputfunctioncallitem",
     "OutputFunctionCallItemStatusUnion": ".outputfunctioncallitem",
     "OutputFunctionCallItemStatusUnionTypedDict": ".outputfunctioncallitem",
+    "OutputFunctionCallItemSubagentItem": ".outputfunctioncallitem",
+    "OutputFunctionCallItemSubagentItemTypedDict": ".outputfunctioncallitem",
     "OutputFunctionCallItemType": ".outputfunctioncallitem",
     "OutputFunctionCallItemTypedDict": ".outputfunctioncallitem",
     "FailedModel": ".outputfusionservertoolitem",
