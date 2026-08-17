@@ -1,0 +1,15 @@
+---
+title: "ShellCallOutputContent"
+---
+
+Captured stdout and stderr for one command of a shell call, with its exit or timeout outcome.
+
+
+## Fields
+
+| Field                                                                                  | Type                                                                                   | Required                                                                               | Description                                                                            | Example                                                                                |
+| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| `outcome`                                                                              | [components.Outcome](../components/outcome.mdx)                                         | :heavy_check_mark:                                                                     | N/A                                                                                    |                                                                                        |
+| `stderr`                                                                               | *str*                                                                                  | :heavy_check_mark:                                                                     | N/A                                                                                    |                                                                                        |
+| `stdout`                                                                               | *str*                                                                                  | :heavy_check_mark:                                                                     | N/A                                                                                    |                                                                                        |
+| `__pydantic_extra__`                                                                   | Dict[str, *Any*]                                                                       | :heavy_minus_sign:                                                                     | N/A                                                                                    | \{<br/>"outcome": \{<br/>"exit_code": 0,<br/>"type": "exit"<br/>},<br/>"stderr": "",<br/>"stdout": "total 0\n"<br/>} |

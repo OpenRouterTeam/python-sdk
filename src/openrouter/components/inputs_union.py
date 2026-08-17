@@ -115,6 +115,10 @@ from .outputsearchmodelsservertoolitem import (
     OutputSearchModelsServerToolItem,
     OutputSearchModelsServerToolItemTypedDict,
 )
+from .outputshellservertoolitem import (
+    OutputShellServerToolItem,
+    OutputShellServerToolItemTypedDict,
+)
 from .outputsubagentservertoolitem import (
     OutputSubagentServerToolItem,
     OutputSubagentServerToolItemTypedDict,
@@ -408,13 +412,13 @@ InputsUnion1TypedDict = TypeAliasType(
         InputsMessageTypedDict,
         ShellCallOutputItemTypedDict,
         OutputComputerCallItemTypedDict,
-        ShellCallItemTypedDict,
         McpCallItemTypedDict,
         AgentMessageItemTypedDict,
+        OutputShellServerToolItemTypedDict,
         OutputCodeInterpreterCallItemTypedDict,
+        ShellCallItemTypedDict,
         OutputAdvisorServerToolItemTypedDict,
         InputsReasoningTypedDict,
-        OutputFilesServerToolItemTypedDict,
         OutputWebFetchServerToolItemTypedDict,
         ReasoningItemTypedDict,
         OutputImageGenerationServerToolItemTypedDict,
@@ -423,6 +427,7 @@ InputsUnion1TypedDict = TypeAliasType(
         OutputFunctionCallItemTypedDict,
         OutputBashServerToolItemTypedDict,
         FunctionCallItemTypedDict,
+        OutputFilesServerToolItemTypedDict,
         OutputSubagentServerToolItemTypedDict,
     ],
 )
@@ -464,13 +469,13 @@ InputsUnion1 = TypeAliasType(
         InputsMessage,
         ShellCallOutputItem,
         OutputComputerCallItem,
-        ShellCallItem,
         McpCallItem,
         AgentMessageItem,
+        OutputShellServerToolItem,
         OutputCodeInterpreterCallItem,
+        ShellCallItem,
         OutputAdvisorServerToolItem,
         InputsReasoning,
-        OutputFilesServerToolItem,
         OutputWebFetchServerToolItem,
         ReasoningItem,
         OutputImageGenerationServerToolItem,
@@ -479,6 +484,7 @@ InputsUnion1 = TypeAliasType(
         OutputFunctionCallItem,
         OutputBashServerToolItem,
         FunctionCallItem,
+        OutputFilesServerToolItem,
         OutputSubagentServerToolItem,
     ],
 )
