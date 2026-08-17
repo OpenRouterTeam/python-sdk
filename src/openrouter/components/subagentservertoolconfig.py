@@ -12,12 +12,16 @@ from typing_extensions import NotRequired, TypedDict
 class SubagentServerToolConfigTypedDict(TypedDict):
     r"""Configuration for one openrouter:subagent server tool entry."""
 
+    inherit_functions: NotRequired[bool]
+    r"""EXPERIMENTAL — subject to change without notice. When true, the subagent inherits every client function defined in the request's top-level `tools` list. Supported on the Responses API (`/api/v1/responses`) only; other APIs reject it with a `400`."""
+    inherited_function_names: NotRequired[List[str]]
+    r"""EXPERIMENTAL — subject to change without notice. Names of the top-level function tools that the subagent will inherit. Any tool that matches by name will be copied fully into the tools array of the subagent. When `inherit_functions` is `true`, this list does nothing, because every client function will be inherited by default. Names are trimmed before validation, so a whitespace-only name is rejected with a `400`. Supported on the Responses API (`/api/v1/responses`) only; other APIs reject it with a `400`."""
     instructions: NotRequired[str]
     r"""System instructions for the subagent. When omitted, the subagent responds with no system prompt of its own."""
     max_completion_tokens: NotRequired[int]
     r"""Maximum number of output tokens (including reasoning) the subagent may produce. When omitted, the provider's default applies."""
     max_tool_calls: NotRequired[int]
-    r"""Maximum number of tool-calling steps the subagent may take during its agentic loop. Capped at 25. Only relevant when the subagent is given tools. Accepted and validated but not yet enforced on the subagent call."""
+    r"""Maximum number of tool-calling steps the subagent may take during its agentic loop. Capped at 25. Only relevant when the subagent is given tools. Forwarded to the subagent call as `max_tool_calls`."""
     model: NotRequired[str]
     r"""Slug of the model that executes delegated tasks (any OpenRouter model). Typically a smaller, cheaper, faster model than the one delegating. When omitted, the model from the outer API request is used. The subagent tool itself cannot be the subagent model."""
     name: NotRequired[str]
@@ -33,6 +37,12 @@ class SubagentServerToolConfigTypedDict(TypedDict):
 class SubagentServerToolConfig(BaseModel):
     r"""Configuration for one openrouter:subagent server tool entry."""
 
+    inherit_functions: Optional[bool] = None
+    r"""EXPERIMENTAL — subject to change without notice. When true, the subagent inherits every client function defined in the request's top-level `tools` list. Supported on the Responses API (`/api/v1/responses`) only; other APIs reject it with a `400`."""
+
+    inherited_function_names: Optional[List[str]] = None
+    r"""EXPERIMENTAL — subject to change without notice. Names of the top-level function tools that the subagent will inherit. Any tool that matches by name will be copied fully into the tools array of the subagent. When `inherit_functions` is `true`, this list does nothing, because every client function will be inherited by default. Names are trimmed before validation, so a whitespace-only name is rejected with a `400`. Supported on the Responses API (`/api/v1/responses`) only; other APIs reject it with a `400`."""
+
     instructions: Optional[str] = None
     r"""System instructions for the subagent. When omitted, the subagent responds with no system prompt of its own."""
 
@@ -40,7 +50,7 @@ class SubagentServerToolConfig(BaseModel):
     r"""Maximum number of output tokens (including reasoning) the subagent may produce. When omitted, the provider's default applies."""
 
     max_tool_calls: Optional[int] = None
-    r"""Maximum number of tool-calling steps the subagent may take during its agentic loop. Capped at 25. Only relevant when the subagent is given tools. Accepted and validated but not yet enforced on the subagent call."""
+    r"""Maximum number of tool-calling steps the subagent may take during its agentic loop. Capped at 25. Only relevant when the subagent is given tools. Forwarded to the subagent call as `max_tool_calls`."""
 
     model: Optional[str] = None
     r"""Slug of the model that executes delegated tasks (any OpenRouter model). Typically a smaller, cheaper, faster model than the one delegating. When omitted, the model from the outer API request is used. The subagent tool itself cannot be the subagent model."""
@@ -61,6 +71,8 @@ class SubagentServerToolConfig(BaseModel):
     def serialize_model(self, handler):
         optional_fields = set(
             [
+                "inherit_functions",
+                "inherited_function_names",
                 "instructions",
                 "max_completion_tokens",
                 "max_tool_calls",
