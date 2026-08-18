@@ -50,6 +50,7 @@ class ImageGenerationProviderPreferencesOptionsTypedDict(TypedDict):
     amazon_nova: NotRequired[Dict[str, Any]]
     ambient: NotRequired[Dict[str, Any]]
     anthropic: NotRequired[Dict[str, Any]]
+    anthropic_2: NotRequired[Dict[str, Any]]
     anyscale: NotRequired[Dict[str, Any]]
     arcee_ai: NotRequired[Dict[str, Any]]
     atlas_cloud: NotRequired[Dict[str, Any]]
@@ -206,6 +207,10 @@ class ImageGenerationProviderPreferencesOptions(BaseModel):
     ambient: Optional[Dict[str, Any]] = None
 
     anthropic: Optional[Dict[str, Any]] = None
+
+    anthropic_2: Annotated[
+        Optional[Dict[str, Any]], pydantic.Field(alias="anthropic/2")
+    ] = None
 
     anyscale: Optional[Dict[str, Any]] = None
 
@@ -509,6 +514,7 @@ class ImageGenerationProviderPreferencesOptions(BaseModel):
                 "amazon-nova",
                 "ambient",
                 "anthropic",
+                "anthropic/2",
                 "anyscale",
                 "arcee-ai",
                 "atlas-cloud",
