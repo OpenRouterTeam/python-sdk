@@ -21,7 +21,6 @@ if TYPE_CHECKING:
         AdditionalToolsItemTypedDict,
         TypeAdditionalTools,
     )
-    from .advisornestedtool import AdvisorNestedTool, AdvisorNestedToolTypedDict
     from .advisorreasoning import (
         AdvisorReasoning,
         AdvisorReasoningEffort,
@@ -3142,8 +3141,6 @@ __all__ = [
     "AdditionalToolsItemToolUnionTypedDict",
     "AdditionalToolsItemTypeFunction",
     "AdditionalToolsItemTypedDict",
-    "AdvisorNestedTool",
-    "AdvisorNestedToolTypedDict",
     "AdvisorReasoning",
     "AdvisorReasoningEffort",
     "AdvisorReasoningTypedDict",
@@ -5399,8 +5396,6 @@ _dynamic_imports: dict[str, str] = {
     "AdditionalToolsItemTypeFunction": ".additionaltoolsitem",
     "AdditionalToolsItemTypedDict": ".additionaltoolsitem",
     "TypeAdditionalTools": ".additionaltoolsitem",
-    "AdvisorNestedTool": ".advisornestedtool",
-    "AdvisorNestedToolTypedDict": ".advisornestedtool",
     "AdvisorReasoning": ".advisorreasoning",
     "AdvisorReasoningEffort": ".advisorreasoning",
     "AdvisorReasoningTypedDict": ".advisorreasoning",

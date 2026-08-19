@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c48cf606-fb42-4a45-9c23-8f0555307828
 management:
-  docChecksum: 2ceae3a4d5ec00d9acf88a1d00032182
+  docChecksum: 70f3ab92fb1757fe6fd721c78ba894ed
   docVersion: 1.0.0
   speakeasyVersion: 1.787.0
   generationVersion: 2.914.0
-  releaseVersion: 1.1.63
-  configChecksum: 33df828b80be375edf429dd692a7b7cc
+  releaseVersion: 1.1.64
+  configChecksum: e9adf1e0afd4d8f2fedb9fe76743644d
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
 persistentEdits:
-  generation_id: 99642417-54eb-4655-a3ab-2fe2e4863d4a
-  pristine_commit_hash: 5043d6a5d18a819823e3a6d2f3ad3601b824c365
-  pristine_tree_hash: 7a9a1ad1fd3a74c63db2ffda089f947d56798304
+  generation_id: 32d709d1-2144-467d-bdd3-b0ed3dd97df8
+  pristine_commit_hash: 1203d6c0ba320025aa33aca75ea7f2bb3fd1500d
+  pristine_tree_hash: 69271419732b2548bba3b6f456bfb333c8ad70a1
 features:
   python:
     acceptHeaders: 3.0.0
@@ -132,10 +132,6 @@ trackedFiles:
     id: bf179b4008af
     last_write_checksum: sha1:c0d4fee7d39fbd3d08c44bbe0e7b929350c5d7e8
     pristine_git_object: 00ce08abaaf149eb1713cc084e87a8b1efc8df81
-  docs/components/advisornestedtool.mdx:
-    id: 71464b7dde39
-    last_write_checksum: sha1:89d7a7836c487fe84756f39b306bbfca59b1ca6c
-    pristine_git_object: 81964e19bd13c14a67371b972b99926dc712b11d
   docs/components/advisorreasoning.mdx:
     id: c4f80ddfbd1b
     last_write_checksum: sha1:9e16412ad2176b95e0c995efeb0850318ec58d37
@@ -146,12 +142,12 @@ trackedFiles:
     pristine_git_object: aa427b33bd2210325fc468dcce935c9ad2da4096
   docs/components/advisorservertoolconfig.mdx:
     id: 21d52f2c8a42
-    last_write_checksum: sha1:c998886f93312eec86a7747ad12d095c20fbf64f
-    pristine_git_object: 123fe8790d1b021480efb9e7da3176cdd2736f00
+    last_write_checksum: sha1:18215d160281c46a57b84463dfb774990a51184f
+    pristine_git_object: 5aa0ee10cafd923ef9cbb7987020cf131a6f5507
   docs/components/advisorservertoolopenrouter.mdx:
     id: ed2fd64f9766
-    last_write_checksum: sha1:d0c85e7d14ded4e6686f9463bf6a1460ce9267df
-    pristine_git_object: 928a0b80faca7f5e8faa898ebe1634c9a09c15f9
+    last_write_checksum: sha1:4aef2b661a53d38da31561ca99875d22bf12791f
+    pristine_git_object: 3c141ae5132e50d3cacec70b29da5d545220d88e
   docs/components/advisorservertoolopenroutertype.mdx:
     id: 037d49b1a02c
     last_write_checksum: sha1:1ef65dad1b6f74dad67829f8b67d65da6144922b
@@ -7254,8 +7250,8 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:59d0ec5280f78c46b6882823110d574ff257d53c
-    pristine_git_object: e412a9e64578c70e0d91b0767d1a9414506807ed
+    last_write_checksum: sha1:ed7fe7a914a6cd7a0c1609753fa5cebedba923c7
+    pristine_git_object: e823397e9b0c660033fc5146b23b734eea44ece0
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77f44b60b98bc126557ec27391f91dfba764bb54
@@ -7282,8 +7278,8 @@ trackedFiles:
     pristine_git_object: 86713cfea633e09d33b3d4e65281071fe20e6137
   src/openrouter/_version.py:
     id: d8d15ad6c586
-    last_write_checksum: sha1:660c7ddfd0347049728c32c2d01f8cb7f19e42f8
-    pristine_git_object: 7b6bb8689d72b5119416d40a7cebccdc35d11538
+    last_write_checksum: sha1:d7958726a5435981410aeaa43f2e386cbfa1a0e7
+    pristine_git_object: 31d8ed78e8fcbff03276adcb217dcf340dac50e4
   src/openrouter/analytics.py:
     id: cb406b5aaabb
     last_write_checksum: sha1:3ea0f1c73fb9c101b7bc5719da4dd7bf62ff469a
@@ -7326,8 +7322,8 @@ trackedFiles:
     pristine_git_object: ad3d247954547814054c01989a2dff3d12b3e4e1
   src/openrouter/components/__init__.py:
     id: 81754e97b3f4
-    last_write_checksum: sha1:1038d7f0c962e487787582da4d527b819f122aee
-    pristine_git_object: 84f9a9561ebe764a905326d20e6e80ba30922047
+    last_write_checksum: sha1:22904934dac60fa1c97520d0af7148864e9a05a4
+    pristine_git_object: 0ecfa1024355f685f89166989f37ddf8a98375dc
   src/openrouter/components/aabenchmarkentry.py:
     id: e2e0f0b48c82
     last_write_checksum: sha1:fab4d9a24d2cea937bb749d46c5f83941e99d65c
@@ -7344,22 +7340,18 @@ trackedFiles:
     id: 2761ab789f41
     last_write_checksum: sha1:f711aac1f44184306bed8d816190208e8c73daa5
     pristine_git_object: c9851ef1cc4b9fadc8f0cb79089282ab0b0af941
-  src/openrouter/components/advisornestedtool.py:
-    id: 768fcc6bad2b
-    last_write_checksum: sha1:23f5831fd27a32345fb4e50c1406df0510b0bf47
-    pristine_git_object: 23e5798c1057c478480a96f1cc09bebc6ca10836
   src/openrouter/components/advisorreasoning.py:
     id: d5af5c19fc73
     last_write_checksum: sha1:0fd32e4ff2d89f7cea861d6e691e82a7e1ff62f2
     pristine_git_object: 0b87e3c6bde34128215d2228f2349a44ff453a5b
   src/openrouter/components/advisorservertool_openrouter.py:
     id: 4442cd9ad387
-    last_write_checksum: sha1:74597f510ec8044437d9a0f5abd6465152141c1d
-    pristine_git_object: ffec551949aaf877801193abb0dd8ed6d015453a
+    last_write_checksum: sha1:ad191d2c52264c0f5a51f35892a744b17ac4fe6e
+    pristine_git_object: 5be72439952695c033cf270d087234703fbf1607
   src/openrouter/components/advisorservertoolconfig.py:
     id: 683887bb9db3
-    last_write_checksum: sha1:3a801b02cc92e02a00f0e26f377fb93a6893641a
-    pristine_git_object: d92e19f8e9bec36933cd3e5d7ccc1690f14b168f
+    last_write_checksum: sha1:96cab10eadadadf9663f83a003ffa5d74555287e
+    pristine_git_object: 4aca4ffde948a789118b9388fdf4638cb878e532
   src/openrouter/components/agentmessageitem.py:
     id: 6dbe0c8e2c79
     last_write_checksum: sha1:475390ec86c90a835bb2f7a1d256d6b03acbbfd5
@@ -12179,3 +12171,4 @@ examples:
         "500":
           application/json: {"error": {"code": 500, "message": "Internal Server Error"}}
 examplesVersion: 1.0.2
+releaseNotes: "## Python SDK Changes:\n* `open_router.beta.responses.send()`: \n  *  `request.input.union(Array<>)[].union(AdditionalToolsItem).tools[].union(AdvisorServerTool_OpenRouter).parameters` **Changed** (Breaking ⚠️)\n* `open_router.chat.send()`: \n  *  `request.tools[].union(AdvisorServerTool_OpenRouter).parameters` **Changed** (Breaking ⚠️)\n* `open_router.presets.create_presets_chat_completions()`: \n  *  `request.tools[].union(AdvisorServerTool_OpenRouter).parameters` **Changed** (Breaking ⚠️)\n* `open_router.presets.create_presets_responses()`: \n  *  `request.input.union(Array<>)[].union(AdditionalToolsItem).tools[].union(AdvisorServerTool_OpenRouter).parameters` **Changed** (Breaking ⚠️)\n* `open_router.responses.send()`: \n  *  `request.input.union(Array<>)[].union(AdditionalToolsItem).tools[].union(AdvisorServerTool_OpenRouter).parameters` **Changed** (Breaking ⚠️)\n"
