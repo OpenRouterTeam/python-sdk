@@ -1,0 +1,22 @@
+---
+title: "FailableToolCallStatus"
+---
+
+## Example Usage
+
+```python
+from openrouter.components import FailableToolCallStatus
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
+value: FailableToolCallStatus = "in_progress"
+```
+
+
+## Values
+
+This is an open enum. Unrecognized values will not fail type checks.
+
+- `"in_progress"`
+- `"completed"`
+- `"incomplete"`
+- `"failed"`

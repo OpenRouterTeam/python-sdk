@@ -991,6 +991,7 @@ if TYPE_CHECKING:
         EnumCapabilityTypedDict,
     )
     from .errorevent import ErrorEvent, ErrorEventType, ErrorEventTypedDict
+    from .failabletoolcallstatus import FailableToolCallStatus
     from .filecitation import FileCitation, FileCitationType, FileCitationTypedDict
     from .filedeleteresponse import (
         FileDeleteResponse,
@@ -3824,6 +3825,7 @@ __all__ = [
     "ErrorEventType",
     "ErrorEventTypedDict",
     "Event",
+    "FailableToolCallStatus",
     "FailedModel",
     "FailedModelTypedDict",
     "FieldT",
@@ -6065,6 +6067,7 @@ _dynamic_imports: dict[str, str] = {
     "ErrorEvent": ".errorevent",
     "ErrorEventType": ".errorevent",
     "ErrorEventTypedDict": ".errorevent",
+    "FailableToolCallStatus": ".failabletoolcallstatus",
     "FileCitation": ".filecitation",
     "FileCitationType": ".filecitation",
     "FileCitationTypedDict": ".filecitation",
