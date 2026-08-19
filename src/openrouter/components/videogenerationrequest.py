@@ -694,6 +694,8 @@ class VideoGenerationRequestTypedDict(TypedDict):
     r"""Aspect ratio of the generated video"""
     callback_url: NotRequired[str]
     r"""URL to receive a webhook notification when the video generation job completes. Overrides the workspace-level default callback URL if set. Must be HTTPS."""
+    creativity: NotRequired[int]
+    r"""Creativity level for video upscaling models only. This parameter is not supported by video generation models."""
     duration: NotRequired[int]
     r"""Duration of the generated video in seconds"""
     frame_images: NotRequired[List[FrameImageTypedDict]]
@@ -712,6 +714,8 @@ class VideoGenerationRequestTypedDict(TypedDict):
     r"""If specified, the generation will sample deterministically, such that repeated requests with the same seed and parameters should return the same result. Determinism is not guaranteed for all providers."""
     size: NotRequired[str]
     r"""Exact pixel dimensions of the generated video in \"WIDTHxHEIGHT\" format (e.g. \"1280x720\"). Interchangeable with resolution + aspect_ratio."""
+    upscale_factor: NotRequired[float]
+    r"""Upscale factor for video upscaling models only. This parameter is not supported by video generation models."""
 
 
 class VideoGenerationRequest(BaseModel):
@@ -722,6 +726,9 @@ class VideoGenerationRequest(BaseModel):
 
     callback_url: Optional[str] = None
     r"""URL to receive a webhook notification when the video generation job completes. Overrides the workspace-level default callback URL if set. Must be HTTPS."""
+
+    creativity: Optional[int] = None
+    r"""Creativity level for video upscaling models only. This parameter is not supported by video generation models."""
 
     duration: Optional[int] = None
     r"""Duration of the generated video in seconds"""
@@ -750,12 +757,16 @@ class VideoGenerationRequest(BaseModel):
     size: Optional[str] = None
     r"""Exact pixel dimensions of the generated video in \"WIDTHxHEIGHT\" format (e.g. \"1280x720\"). Interchangeable with resolution + aspect_ratio."""
 
+    upscale_factor: Optional[float] = None
+    r"""Upscale factor for video upscaling models only. This parameter is not supported by video generation models."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
             [
                 "aspect_ratio",
                 "callback_url",
+                "creativity",
                 "duration",
                 "frame_images",
                 "generate_audio",
@@ -765,6 +776,7 @@ class VideoGenerationRequest(BaseModel):
                 "resolution",
                 "seed",
                 "size",
+                "upscale_factor",
             ]
         )
         serialized = handler(self)

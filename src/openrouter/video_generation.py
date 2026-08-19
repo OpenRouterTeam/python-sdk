@@ -22,6 +22,7 @@ class VideoGeneration(BaseSDK):
         x_open_router_categories: Optional[str] = None,
         aspect_ratio: Optional[components.VideoGenerationRequestAspectRatio] = None,
         callback_url: Optional[str] = None,
+        creativity: Optional[int] = None,
         duration: Optional[int] = None,
         frame_images: Optional[
             Union[
@@ -46,6 +47,7 @@ class VideoGeneration(BaseSDK):
         resolution: Optional[components.VideoGenerationRequestResolution] = None,
         seed: Optional[int] = None,
         size: Optional[str] = None,
+        upscale_factor: Optional[float] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -65,6 +67,7 @@ class VideoGeneration(BaseSDK):
 
         :param aspect_ratio: Aspect ratio of the generated video
         :param callback_url: URL to receive a webhook notification when the video generation job completes. Overrides the workspace-level default callback URL if set. Must be HTTPS.
+        :param creativity: Creativity level for video upscaling models only. This parameter is not supported by video generation models.
         :param duration: Duration of the generated video in seconds
         :param frame_images: Images to use as the first and/or last frame of the generated video. Each image must specify a frame_type of first_frame or last_frame.
         :param generate_audio: Whether to generate audio alongside the video. Defaults to the endpoint's generate_audio capability flag, false if not set.
@@ -74,6 +77,7 @@ class VideoGeneration(BaseSDK):
         :param resolution: Resolution of the generated video
         :param seed: If specified, the generation will sample deterministically, such that repeated requests with the same seed and parameters should return the same result. Determinism is not guaranteed for all providers.
         :param size: Exact pixel dimensions of the generated video in \"WIDTHxHEIGHT\" format (e.g. \"1280x720\"). Interchangeable with resolution + aspect_ratio.
+        :param upscale_factor: Upscale factor for video upscaling models only. This parameter is not supported by video generation models.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -96,6 +100,7 @@ class VideoGeneration(BaseSDK):
             video_generation_request=components.VideoGenerationRequest(
                 aspect_ratio=aspect_ratio,
                 callback_url=callback_url,
+                creativity=creativity,
                 duration=duration,
                 frame_images=utils.get_pydantic_model(
                     frame_images, Optional[List[components.FrameImage]]
@@ -112,6 +117,7 @@ class VideoGeneration(BaseSDK):
                 resolution=resolution,
                 seed=seed,
                 size=size,
+                upscale_factor=upscale_factor,
             ),
         )
 
@@ -228,6 +234,7 @@ class VideoGeneration(BaseSDK):
         x_open_router_categories: Optional[str] = None,
         aspect_ratio: Optional[components.VideoGenerationRequestAspectRatio] = None,
         callback_url: Optional[str] = None,
+        creativity: Optional[int] = None,
         duration: Optional[int] = None,
         frame_images: Optional[
             Union[
@@ -252,6 +259,7 @@ class VideoGeneration(BaseSDK):
         resolution: Optional[components.VideoGenerationRequestResolution] = None,
         seed: Optional[int] = None,
         size: Optional[str] = None,
+        upscale_factor: Optional[float] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -271,6 +279,7 @@ class VideoGeneration(BaseSDK):
 
         :param aspect_ratio: Aspect ratio of the generated video
         :param callback_url: URL to receive a webhook notification when the video generation job completes. Overrides the workspace-level default callback URL if set. Must be HTTPS.
+        :param creativity: Creativity level for video upscaling models only. This parameter is not supported by video generation models.
         :param duration: Duration of the generated video in seconds
         :param frame_images: Images to use as the first and/or last frame of the generated video. Each image must specify a frame_type of first_frame or last_frame.
         :param generate_audio: Whether to generate audio alongside the video. Defaults to the endpoint's generate_audio capability flag, false if not set.
@@ -280,6 +289,7 @@ class VideoGeneration(BaseSDK):
         :param resolution: Resolution of the generated video
         :param seed: If specified, the generation will sample deterministically, such that repeated requests with the same seed and parameters should return the same result. Determinism is not guaranteed for all providers.
         :param size: Exact pixel dimensions of the generated video in \"WIDTHxHEIGHT\" format (e.g. \"1280x720\"). Interchangeable with resolution + aspect_ratio.
+        :param upscale_factor: Upscale factor for video upscaling models only. This parameter is not supported by video generation models.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -302,6 +312,7 @@ class VideoGeneration(BaseSDK):
             video_generation_request=components.VideoGenerationRequest(
                 aspect_ratio=aspect_ratio,
                 callback_url=callback_url,
+                creativity=creativity,
                 duration=duration,
                 frame_images=utils.get_pydantic_model(
                     frame_images, Optional[List[components.FrameImage]]
@@ -318,6 +329,7 @@ class VideoGeneration(BaseSDK):
                 resolution=resolution,
                 seed=seed,
                 size=size,
+                upscale_factor=upscale_factor,
             ),
         )
 

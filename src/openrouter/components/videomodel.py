@@ -122,6 +122,46 @@ SupportedSize = Union[
 ]
 
 
+class UpscaleFactorTypedDict(TypedDict):
+    r"""Supported upscale factor range for video upscaling models"""
+
+    max: NotRequired[Nullable[float]]
+    min: NotRequired[Nullable[float]]
+
+
+class UpscaleFactor(BaseModel):
+    r"""Supported upscale factor range for video upscaling models"""
+
+    max: OptionalNullable[float] = UNSET
+
+    min: OptionalNullable[float] = UNSET
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["max", "min"])
+        nullable_fields = set(["max", "min"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
+
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
+
+        return m
+
+
 class VideoModelTypedDict(TypedDict):
     allowed_passthrough_parameters: List[str]
     r"""List of parameters that are allowed to be passed through to the provider"""
@@ -129,6 +169,8 @@ class VideoModelTypedDict(TypedDict):
     r"""Canonical slug for the model"""
     created: int
     r"""Unix timestamp of when the model was created"""
+    creativity: Nullable[List[int]]
+    r"""Supported creativity levels for video upscaling models"""
     generate_audio: Nullable[bool]
     r"""Whether the model supports generating audio alongside video"""
     id: str
@@ -147,6 +189,8 @@ class VideoModelTypedDict(TypedDict):
     r"""Supported output resolutions"""
     supported_sizes: Nullable[List[SupportedSize]]
     r"""Supported output sizes (width x height)"""
+    upscale_factor: Nullable[UpscaleFactorTypedDict]
+    r"""Supported upscale factor range for video upscaling models"""
     description: NotRequired[str]
     r"""Description of the model"""
     hugging_face_id: NotRequired[Nullable[str]]
@@ -165,6 +209,9 @@ class VideoModel(BaseModel):
     created: int
     r"""Unix timestamp of when the model was created"""
 
+    creativity: Nullable[List[int]]
+    r"""Supported creativity levels for video upscaling models"""
+
     generate_audio: Nullable[bool]
     r"""Whether the model supports generating audio alongside video"""
 
@@ -192,6 +239,9 @@ class VideoModel(BaseModel):
     supported_sizes: Nullable[List[SupportedSize]]
     r"""Supported output sizes (width x height)"""
 
+    upscale_factor: Nullable[UpscaleFactor]
+    r"""Supported upscale factor range for video upscaling models"""
+
     description: Optional[str] = None
     r"""Description of the model"""
 
@@ -206,6 +256,7 @@ class VideoModel(BaseModel):
         optional_fields = set(["description", "hugging_face_id", "pricing_skus"])
         nullable_fields = set(
             [
+                "creativity",
                 "generate_audio",
                 "hugging_face_id",
                 "pricing_skus",
@@ -215,6 +266,7 @@ class VideoModel(BaseModel):
                 "supported_frame_images",
                 "supported_resolutions",
                 "supported_sizes",
+                "upscale_factor",
             ]
         )
         serialized = handler(self)
