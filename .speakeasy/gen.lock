@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c48cf606-fb42-4a45-9c23-8f0555307828
 management:
-  docChecksum: e5a84141836f41ab3cfa8f0985b48b10
+  docChecksum: 66ead69cb87d4e99eb39c9cd7fb430d8
   docVersion: 1.0.0
   speakeasyVersion: 1.787.0
   generationVersion: 2.914.0
-  releaseVersion: 1.1.68
-  configChecksum: 4152a0e0c25d7bc564c080709f7d66af
+  releaseVersion: 1.1.69
+  configChecksum: 3ebeede390eb7630c0577043ba9fcc8d
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
 persistentEdits:
-  generation_id: 967e12a4-0f46-45ca-b11a-71dd32cb068b
-  pristine_commit_hash: 77b0b4ba30336bbd09b0e7e531ff7de39df32ada
-  pristine_tree_hash: bc609fedc5c5fecbfe46eb7b6b73d141edf97427
+  generation_id: c30f667c-3a6f-463e-80a7-b3c79189080a
+  pristine_commit_hash: ed707642d7c21d53bdd56099f5fb01907acae638
+  pristine_tree_hash: b0b009b2f83449213836d1a490902659f5411f39
 features:
   python:
     acceptHeaders: 3.0.0
@@ -7138,8 +7138,8 @@ trackedFiles:
     pristine_git_object: f265978fdb338b412232349476bf1e874833c9f8
   docs/sdks/analytics/README.mdx:
     id: 281aa5320be1
-    last_write_checksum: sha1:1a3d4c929ad50c2b7f24ced91d0646e6cc9f7d1b
-    pristine_git_object: 18befad2161aca4ee4359420ba14b7affccf7ec9
+    last_write_checksum: sha1:057c1d5bb828df9d8006c27e9fdde1122c0242db
+    pristine_git_object: c1634706646332455817340f5891b4b5c9c6d16c
   docs/sdks/apikeys/README.mdx:
     id: 27fcaae1c346
     last_write_checksum: sha1:b8bd517a7a2960d003ab350130008b402927af6b
@@ -7148,10 +7148,6 @@ trackedFiles:
     id: 5b483a6770ba
     last_write_checksum: sha1:885b70fcbd2be60f51a2f58e133fd6452eb21600
     pristine_git_object: 5026ac2a283240480026d80d2f77d5528ae8bdc8
-  docs/sdks/betaanalytics/README.mdx:
-    id: 239279ebf01b
-    last_write_checksum: sha1:5a76d28d77f68efe34ebbcb72850e6a87c74d3b1
-    pristine_git_object: 6e4b06ff97f02da5d31d78f478094db32dfdaa6f
   docs/sdks/betaresponses/README.mdx:
     id: 8a1e987c9840
     last_write_checksum: sha1:da17b27cff3d9a1d9a82e6a270fe2acce62ec028
@@ -7258,8 +7254,8 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:1129f51029e6ef9115ee477f4842379091278622
-    pristine_git_object: 0fab43d82de5817438199b28da34301274d8f6ec
+    last_write_checksum: sha1:426f3411cd419d756ebbab88f015e6e10552b221
+    pristine_git_object: 6b21ff40c675a234c89d4bb9f986a46326e8f13b
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77f44b60b98bc126557ec27391f91dfba764bb54
@@ -7286,12 +7282,12 @@ trackedFiles:
     pristine_git_object: 86713cfea633e09d33b3d4e65281071fe20e6137
   src/openrouter/_version.py:
     id: d8d15ad6c586
-    last_write_checksum: sha1:88df9bb9f5ff147542e70dab5210a04529c08d11
-    pristine_git_object: 211121c2e78927b4c01979bf40690afef6d18adc
+    last_write_checksum: sha1:1d207c6f701041fcec19305a1e0e492ea64b6638
+    pristine_git_object: 65183dd35e706d54c02feec510777db21bbb55c0
   src/openrouter/analytics.py:
     id: cb406b5aaabb
-    last_write_checksum: sha1:3ea0f1c73fb9c101b7bc5719da4dd7bf62ff469a
-    pristine_git_object: ddd0b3f6c78a94ed829bb1c6dbf30bbacce7e517
+    last_write_checksum: sha1:1e0004d8d1d5d797e2b54cd1cabeb7f9489d08e9
+    pristine_git_object: 9587309db4d5e25a00131a48788456139c25e4c0
   src/openrouter/api_keys.py:
     id: 876fac88fff6
     last_write_checksum: sha1:ada03aff96976f0570e594a3143595c25ca05f18
@@ -7306,12 +7302,8 @@ trackedFiles:
     pristine_git_object: f163fcbb9c21fc1327d6c9a1eefcc60cbf9091ea
   src/openrouter/beta.py:
     id: fffdf54fd8f5
-    last_write_checksum: sha1:4e34fb96ffe38673ca72e0f8576a8eddd4134d4b
-    pristine_git_object: 6def81a950b22cb1245b0b6b76c05a8d81fedaf8
-  src/openrouter/beta_analytics.py:
-    id: 81988b170188
-    last_write_checksum: sha1:517ca1b0d4b94343e7728f156230e653f43c4641
-    pristine_git_object: 1b01f0c081ffc8a42fa56d335f95ec3121e4b5e6
+    last_write_checksum: sha1:21fb1d65cd9800c65c7a2ae520619002976e37cd
+    pristine_git_object: aa95a65cf560fd7edb0c3c6f5fed707ca5015da3
   src/openrouter/beta_responses.py:
     id: 001eaf848bf1
     last_write_checksum: sha1:cf864ff8c66d5177ac5b73ca38ddafdd77f69755
@@ -10342,8 +10334,8 @@ trackedFiles:
     pristine_git_object: f6ad93a8202863708520f9fdb7043eeb4f1f1fc6
   src/openrouter/sdk.py:
     id: ee9846c4c9c5
-    last_write_checksum: sha1:8bf6e1e1ddf2593219cdd9aa964a017ec68a0748
-    pristine_git_object: b00e07cd484d49e193c7bfe5fb822dbf4fe95406
+    last_write_checksum: sha1:78519ae3116f7cdc82ed2c757f019a663f216baa
+    pristine_git_object: 4dca8972da6ac87832ef3c3c8dcca9001256197e
   src/openrouter/sdkconfiguration.py:
     id: 55773bb98d7c
     last_write_checksum: sha1:c01826125c31a8b8bc99d9d679782c8758fae001
@@ -12183,4 +12175,9 @@ examples:
         "500":
           application/json: {"error": {"code": 500, "message": "Internal Server Error"}}
 examplesVersion: 1.0.2
-releaseNotes: "## Python SDK Changes:\n* `open_router.beta.responses.send()`: \n  *  `request.input.union(Array<>)[].union(ReasoningItem).format.enum(bedrock_xai_responses_v1)` **Added**\n  *  `response` **Changed**\n* `open_router.chat.send()`: \n  *  `request.messages[].union(assistant).reasoning_details[].union(reasoning.server_tool_call).format.enum(bedrock_xai_responses_v1)` **Added**\n  *  `response` **Changed**\n* `open_router.presets.create_presets_chat_completions()`: \n  *  `request.messages[].union(assistant).reasoning_details[].union(reasoning.summary).format.enum(bedrock_xai_responses_v1)` **Added**\n* `open_router.presets.create_presets_responses()`: \n  *  `request.input.union(Array<>)[].union(ReasoningItem).format.enum(bedrock_xai_responses_v1)` **Added**\n* `open_router.responses.send()`: \n  *  `request.input.union(Array<>)[].union(class (8)).format.enum(bedrock_xai_responses_v1)` **Added**\n  *  `response` **Changed**\n"
+releaseNotes: |
+  ## Python SDK Changes:
+  * `open_router.analytics.get_analytics_meta()`: **Added**
+  * `open_router.analytics.query_analytics()`: **Added**
+  * `open_router.beta.analytics.get_analytics_meta()`: **Removed** (Breaking ⚠️)
+  * `open_router.beta.analytics.query_analytics()`: **Removed** (Breaking ⚠️)

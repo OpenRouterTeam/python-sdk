@@ -53,7 +53,6 @@ class OpenRouter(BaseSDK):
 
     analytics: "Analytics"
     r"""Analytics and usage endpoints"""
-    beta: "Beta"
     tts: "TTS"
     r"""Text-to-speech endpoints"""
     stt: "STT"
@@ -99,6 +98,7 @@ class OpenRouter(BaseSDK):
     r"""Rerank endpoints"""
     responses: "Responses"
     r"""OpenAI-compatible Responses API endpoints"""
+    beta: "Beta"
     scim: "Scim"
     r"""SCIM endpoints"""
     video_generation: "VideoGeneration"
@@ -107,7 +107,6 @@ class OpenRouter(BaseSDK):
     r"""Workspaces endpoints"""
     _sub_sdk_map = {
         "analytics": ("openrouter.analytics", "Analytics"),
-        "beta": ("openrouter.beta", "Beta"),
         "tts": ("openrouter.tts", "TTS"),
         "stt": ("openrouter.stt", "STT"),
         "o_auth": ("openrouter.oauth", "OAuth"),
@@ -131,6 +130,7 @@ class OpenRouter(BaseSDK):
         "providers": ("openrouter.providers", "Providers"),
         "rerank": ("openrouter.rerank", "Rerank"),
         "responses": ("openrouter.responses", "Responses"),
+        "beta": ("openrouter.beta", "Beta"),
         "scim": ("openrouter.scim", "Scim"),
         "video_generation": ("openrouter.video_generation", "VideoGeneration"),
         "workspaces": ("openrouter.workspaces", "Workspaces"),
