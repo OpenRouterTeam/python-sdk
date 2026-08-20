@@ -2,14 +2,11 @@
 
 from .basesdk import BaseSDK
 from .sdkconfiguration import SDKConfiguration
-from openrouter.beta_analytics import BetaAnalytics
 from openrouter.beta_responses import BetaResponses
 from typing import Optional
 
 
 class Beta(BaseSDK):
-    analytics: BetaAnalytics
-    r"""beta.Analytics endpoints"""
     responses: BetaResponses
     r"""Deprecated alias for responses endpoints. Use responses instead. Scheduled for removal (sunset date TBD)."""
 
@@ -21,9 +18,6 @@ class Beta(BaseSDK):
         self._init_sdks()
 
     def _init_sdks(self):
-        self.analytics = BetaAnalytics(
-            self.sdk_configuration, parent_ref=self.parent_ref
-        )
         self.responses = BetaResponses(
             self.sdk_configuration, parent_ref=self.parent_ref
         )
