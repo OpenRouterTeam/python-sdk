@@ -366,6 +366,7 @@ class BYOK(BaseSDK):
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
+        allowed_api_key_hashes: OptionalNullable[Iterable[str]] = UNSET,
         allowed_models: OptionalNullable[Iterable[str]] = UNSET,
         allowed_user_ids: OptionalNullable[Iterable[str]] = UNSET,
         disabled: Optional[bool] = None,
@@ -379,7 +380,7 @@ class BYOK(BaseSDK):
     ) -> components.CreateBYOKKeyResponse:
         r"""Create a BYOK provider credential
 
-        Create a new bring-your-own-key (BYOK) provider credential. The raw key is encrypted at rest and never returned in API responses. When `workspace_id` is omitted, the credential is created in the default workspace; if that default has been deleted, the request returns a 400 and you must pass `workspace_id` explicitly. Treat the raw key as write-only; it is never returned after creation. [Management key](/docs/guides/overview/auth/management-api-keys) required.
+        Create a new bring-your-own-key (BYOK) provider credential. The raw key is encrypted at rest and never returned in API responses. When `workspace_id` is omitted, the credential is created in the default workspace; if that default has been deleted, the request returns a 400 and you must pass `workspace_id` explicitly. Treat the raw key as write-only; it is never returned after creation. Use `allowed_api_key_hashes` to restrict the credential to specific OpenRouter API keys. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param key: The raw provider API key or credential. This value is encrypted at rest and never returned in API responses.
         :param provider: The upstream provider this credential authenticates against, as a lowercase slug (e.g. `openai`, `anthropic`, `amazon-bedrock`).
@@ -390,6 +391,7 @@ class BYOK(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
+        :param allowed_api_key_hashes: Optional allowlist of OpenRouter API key hashes (`api_keys.hash`) that may use this credential. `null` means no restriction. Must contain at least one hash if provided. Hashes that do not belong to your account return a 400.
         :param allowed_models: Optional allowlist of model slugs this credential may be used for. `null` means no restriction.
         :param allowed_user_ids: Optional allowlist of user IDs that may use this credential. `null` means no restriction.
         :param disabled: Whether this credential should be created in a disabled state.
@@ -416,6 +418,9 @@ class BYOK(BaseSDK):
             x_open_router_title=x_open_router_title,
             x_open_router_categories=x_open_router_categories,
             create_byok_key_request=components.CreateBYOKKeyRequest(
+                allowed_api_key_hashes=utils.unmarshal(
+                    allowed_api_key_hashes, OptionalNullable[List[str]]
+                ),
                 allowed_models=utils.unmarshal(
                     allowed_models, OptionalNullable[List[str]]
                 ),
@@ -533,6 +538,7 @@ class BYOK(BaseSDK):
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
+        allowed_api_key_hashes: OptionalNullable[Iterable[str]] = UNSET,
         allowed_models: OptionalNullable[Iterable[str]] = UNSET,
         allowed_user_ids: OptionalNullable[Iterable[str]] = UNSET,
         disabled: Optional[bool] = None,
@@ -546,7 +552,7 @@ class BYOK(BaseSDK):
     ) -> components.CreateBYOKKeyResponse:
         r"""Create a BYOK provider credential
 
-        Create a new bring-your-own-key (BYOK) provider credential. The raw key is encrypted at rest and never returned in API responses. When `workspace_id` is omitted, the credential is created in the default workspace; if that default has been deleted, the request returns a 400 and you must pass `workspace_id` explicitly. Treat the raw key as write-only; it is never returned after creation. [Management key](/docs/guides/overview/auth/management-api-keys) required.
+        Create a new bring-your-own-key (BYOK) provider credential. The raw key is encrypted at rest and never returned in API responses. When `workspace_id` is omitted, the credential is created in the default workspace; if that default has been deleted, the request returns a 400 and you must pass `workspace_id` explicitly. Treat the raw key as write-only; it is never returned after creation. Use `allowed_api_key_hashes` to restrict the credential to specific OpenRouter API keys. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param key: The raw provider API key or credential. This value is encrypted at rest and never returned in API responses.
         :param provider: The upstream provider this credential authenticates against, as a lowercase slug (e.g. `openai`, `anthropic`, `amazon-bedrock`).
@@ -557,6 +563,7 @@ class BYOK(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
+        :param allowed_api_key_hashes: Optional allowlist of OpenRouter API key hashes (`api_keys.hash`) that may use this credential. `null` means no restriction. Must contain at least one hash if provided. Hashes that do not belong to your account return a 400.
         :param allowed_models: Optional allowlist of model slugs this credential may be used for. `null` means no restriction.
         :param allowed_user_ids: Optional allowlist of user IDs that may use this credential. `null` means no restriction.
         :param disabled: Whether this credential should be created in a disabled state.
@@ -583,6 +590,9 @@ class BYOK(BaseSDK):
             x_open_router_title=x_open_router_title,
             x_open_router_categories=x_open_router_categories,
             create_byok_key_request=components.CreateBYOKKeyRequest(
+                allowed_api_key_hashes=utils.unmarshal(
+                    allowed_api_key_hashes, OptionalNullable[List[str]]
+                ),
                 allowed_models=utils.unmarshal(
                     allowed_models, OptionalNullable[List[str]]
                 ),
@@ -1211,6 +1221,7 @@ class BYOK(BaseSDK):
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
+        allowed_api_key_hashes: OptionalNullable[Iterable[str]] = UNSET,
         allowed_models: OptionalNullable[Iterable[str]] = UNSET,
         allowed_user_ids: OptionalNullable[Iterable[str]] = UNSET,
         disabled: Optional[bool] = None,
@@ -1224,7 +1235,7 @@ class BYOK(BaseSDK):
     ) -> components.UpdateBYOKKeyResponse:
         r"""Update a BYOK provider credential
 
-        Update an existing bring-your-own-key (BYOK) provider credential by its `id`. Include the `key` field to rotate the raw provider API key in-place (the previous key material is overwritten). [Management key](/docs/guides/overview/auth/management-api-keys) required.
+        Update an existing bring-your-own-key (BYOK) provider credential by its `id`. Include the `key` field to rotate the raw provider API key in-place (the previous key material is overwritten). Use `allowed_api_key_hashes` to restrict the credential to specific OpenRouter API keys (`null` clears the restriction). [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param id: The BYOK credential ID (UUID).
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
@@ -1234,6 +1245,7 @@ class BYOK(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
+        :param allowed_api_key_hashes: Optional allowlist of OpenRouter API key hashes (`api_keys.hash`) that may use this credential. `null` clears the restriction. Must contain at least one hash if provided. Hashes that do not belong to your account return a 400.
         :param allowed_models: Optional allowlist of model slugs this credential may be used for. `null` means no restriction.
         :param allowed_user_ids: Optional allowlist of user IDs that may use this credential. `null` means no restriction.
         :param disabled: Whether this credential is disabled.
@@ -1261,6 +1273,9 @@ class BYOK(BaseSDK):
             x_open_router_categories=x_open_router_categories,
             id=id,
             update_byok_key_request=components.UpdateBYOKKeyRequest(
+                allowed_api_key_hashes=utils.unmarshal(
+                    allowed_api_key_hashes, OptionalNullable[List[str]]
+                ),
                 allowed_models=utils.unmarshal(
                     allowed_models, OptionalNullable[List[str]]
                 ),
@@ -1375,6 +1390,7 @@ class BYOK(BaseSDK):
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
+        allowed_api_key_hashes: OptionalNullable[Iterable[str]] = UNSET,
         allowed_models: OptionalNullable[Iterable[str]] = UNSET,
         allowed_user_ids: OptionalNullable[Iterable[str]] = UNSET,
         disabled: Optional[bool] = None,
@@ -1388,7 +1404,7 @@ class BYOK(BaseSDK):
     ) -> components.UpdateBYOKKeyResponse:
         r"""Update a BYOK provider credential
 
-        Update an existing bring-your-own-key (BYOK) provider credential by its `id`. Include the `key` field to rotate the raw provider API key in-place (the previous key material is overwritten). [Management key](/docs/guides/overview/auth/management-api-keys) required.
+        Update an existing bring-your-own-key (BYOK) provider credential by its `id`. Include the `key` field to rotate the raw provider API key in-place (the previous key material is overwritten). Use `allowed_api_key_hashes` to restrict the credential to specific OpenRouter API keys (`null` clears the restriction). [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param id: The BYOK credential ID (UUID).
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
@@ -1398,6 +1414,7 @@ class BYOK(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
+        :param allowed_api_key_hashes: Optional allowlist of OpenRouter API key hashes (`api_keys.hash`) that may use this credential. `null` clears the restriction. Must contain at least one hash if provided. Hashes that do not belong to your account return a 400.
         :param allowed_models: Optional allowlist of model slugs this credential may be used for. `null` means no restriction.
         :param allowed_user_ids: Optional allowlist of user IDs that may use this credential. `null` means no restriction.
         :param disabled: Whether this credential is disabled.
@@ -1425,6 +1442,9 @@ class BYOK(BaseSDK):
             x_open_router_categories=x_open_router_categories,
             id=id,
             update_byok_key_request=components.UpdateBYOKKeyRequest(
+                allowed_api_key_hashes=utils.unmarshal(
+                    allowed_api_key_hashes, OptionalNullable[List[str]]
+                ),
                 allowed_models=utils.unmarshal(
                     allowed_models, OptionalNullable[List[str]]
                 ),
