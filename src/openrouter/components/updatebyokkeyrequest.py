@@ -14,6 +14,8 @@ from typing_extensions import NotRequired, TypedDict
 
 
 class UpdateBYOKKeyRequestTypedDict(TypedDict):
+    allowed_api_key_hashes: NotRequired[Nullable[List[str]]]
+    r"""Optional allowlist of OpenRouter API key hashes (`api_keys.hash`) that may use this credential. `null` clears the restriction. Must contain at least one hash if provided. Hashes that do not belong to your account return a 400."""
     allowed_models: NotRequired[Nullable[List[str]]]
     r"""Optional allowlist of model slugs this credential may be used for. `null` means no restriction."""
     allowed_user_ids: NotRequired[Nullable[List[str]]]
@@ -29,6 +31,9 @@ class UpdateBYOKKeyRequestTypedDict(TypedDict):
 
 
 class UpdateBYOKKeyRequest(BaseModel):
+    allowed_api_key_hashes: OptionalNullable[List[str]] = UNSET
+    r"""Optional allowlist of OpenRouter API key hashes (`api_keys.hash`) that may use this credential. `null` clears the restriction. Must contain at least one hash if provided. Hashes that do not belong to your account return a 400."""
+
     allowed_models: OptionalNullable[List[str]] = UNSET
     r"""Optional allowlist of model slugs this credential may be used for. `null` means no restriction."""
 
@@ -51,6 +56,7 @@ class UpdateBYOKKeyRequest(BaseModel):
     def serialize_model(self, handler):
         optional_fields = set(
             [
+                "allowed_api_key_hashes",
                 "allowed_models",
                 "allowed_user_ids",
                 "disabled",
@@ -59,7 +65,9 @@ class UpdateBYOKKeyRequest(BaseModel):
                 "name",
             ]
         )
-        nullable_fields = set(["allowed_models", "allowed_user_ids", "name"])
+        nullable_fields = set(
+            ["allowed_api_key_hashes", "allowed_models", "allowed_user_ids", "name"]
+        )
         serialized = handler(self)
         m = {}
 
