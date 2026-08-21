@@ -30,7 +30,7 @@ class GuardrailTypedDict(TypedDict):
     name: str
     r"""Name of the guardrail"""
     workspace_id: Nullable[str]
-    r"""The workspace this guardrail is scoped to, or `null` for an unscoped legacy guardrail predating workspaces. A `null` value does not mean the default workspace, and does not apply the guardrail across every workspace."""
+    r"""The workspace this guardrail belongs to, or `null` for an unscoped legacy guardrail predating workspaces. Workspace membership organizes the guardrail; it does not apply the guardrail to the workspace's traffic. A `null` value does not mean the default workspace, and does not apply the guardrail across every workspace."""
     allowed_models: NotRequired[Nullable[List[str]]]
     r"""Array of model canonical_slugs (immutable identifiers)"""
     allowed_providers: NotRequired[Nullable[List[str]]]
@@ -87,7 +87,7 @@ class Guardrail(BaseModel):
     r"""Name of the guardrail"""
 
     workspace_id: Nullable[str]
-    r"""The workspace this guardrail is scoped to, or `null` for an unscoped legacy guardrail predating workspaces. A `null` value does not mean the default workspace, and does not apply the guardrail across every workspace."""
+    r"""The workspace this guardrail belongs to, or `null` for an unscoped legacy guardrail predating workspaces. Workspace membership organizes the guardrail; it does not apply the guardrail to the workspace's traffic. A `null` value does not mean the default workspace, and does not apply the guardrail across every workspace."""
 
     allowed_models: OptionalNullable[List[str]] = UNSET
     r"""Array of model canonical_slugs (immutable identifiers)"""

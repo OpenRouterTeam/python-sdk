@@ -394,7 +394,7 @@ class Guardrails(BaseSDK):
     ) -> components.CreateGuardrailResponse:
         r"""Create a guardrail
 
-        Create a new guardrail for the authenticated user. [Management key](/docs/guides/overview/auth/management-api-keys) required.
+        Create a new guardrail for the authenticated user. A newly created guardrail enforces nothing until it is assigned to API keys or organization members; `workspace_id` places the guardrail in a workspace but does not apply it to that workspace's traffic. To restrict all traffic in a workspace, update the workspace's default guardrail instead. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param name: Name for the new guardrail
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
@@ -423,7 +423,7 @@ class Guardrails(BaseSDK):
         :param include_byok_in_budgets: Whether BYOK (bring-your-own-key) inference spend counts toward this guardrail's limit_usd, in addition to OpenRouter credit spend. Defaults to false.
         :param limit_usd: Spending limit in USD
         :param reset_interval: Interval at which the limit resets (daily, weekly, monthly)
-        :param workspace_id: The workspace to create the guardrail in. When omitted, the guardrail is created in the default workspace; if that default has been deleted, the request returns a 400 and you must pass `workspace_id` explicitly.
+        :param workspace_id: The workspace to create the guardrail in. When omitted, the guardrail is created in the default workspace; if that default has been deleted, the request returns a 400 and you must pass `workspace_id` explicitly. This only places the guardrail in the workspace; the created guardrail enforces nothing for that workspace's traffic until it is assigned to API keys or members. To restrict all traffic in a workspace, update the workspace's default guardrail instead.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -620,7 +620,7 @@ class Guardrails(BaseSDK):
     ) -> components.CreateGuardrailResponse:
         r"""Create a guardrail
 
-        Create a new guardrail for the authenticated user. [Management key](/docs/guides/overview/auth/management-api-keys) required.
+        Create a new guardrail for the authenticated user. A newly created guardrail enforces nothing until it is assigned to API keys or organization members; `workspace_id` places the guardrail in a workspace but does not apply it to that workspace's traffic. To restrict all traffic in a workspace, update the workspace's default guardrail instead. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param name: Name for the new guardrail
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
@@ -649,7 +649,7 @@ class Guardrails(BaseSDK):
         :param include_byok_in_budgets: Whether BYOK (bring-your-own-key) inference spend counts toward this guardrail's limit_usd, in addition to OpenRouter credit spend. Defaults to false.
         :param limit_usd: Spending limit in USD
         :param reset_interval: Interval at which the limit resets (daily, weekly, monthly)
-        :param workspace_id: The workspace to create the guardrail in. When omitted, the guardrail is created in the default workspace; if that default has been deleted, the request returns a 400 and you must pass `workspace_id` explicitly.
+        :param workspace_id: The workspace to create the guardrail in. When omitted, the guardrail is created in the default workspace; if that default has been deleted, the request returns a 400 and you must pass `workspace_id` explicitly. This only places the guardrail in the workspace; the created guardrail enforces nothing for that workspace's traffic until it is assigned to API keys or members. To restrict all traffic in a workspace, update the workspace's default guardrail instead.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
