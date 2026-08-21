@@ -135,6 +135,7 @@ Provider = Union[
         "ionstream",
         "krea",
         "liquid",
+        "makora",
         "mancer",
         "mara",
         "meta",

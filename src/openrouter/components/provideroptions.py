@@ -83,6 +83,7 @@ class ProviderOptionsTypedDict(TypedDict):
     liquid: NotRequired[Dict[str, Any]]
     lynn: NotRequired[Dict[str, Any]]
     lynn_private: NotRequired[Dict[str, Any]]
+    makora: NotRequired[Dict[str, Any]]
     mancer: NotRequired[Dict[str, Any]]
     mancer_old: NotRequired[Dict[str, Any]]
     mara: NotRequired[Dict[str, Any]]
@@ -329,6 +330,8 @@ class ProviderOptions(BaseModel):
         Optional[Dict[str, Any]], pydantic.Field(alias="lynn-private")
     ] = None
 
+    makora: Optional[Dict[str, Any]] = None
+
     mancer: Optional[Dict[str, Any]] = None
 
     mancer_old: Annotated[
@@ -547,6 +550,7 @@ class ProviderOptions(BaseModel):
                 "liquid",
                 "lynn",
                 "lynn-private",
+                "makora",
                 "mancer",
                 "mancer-old",
                 "mara",
