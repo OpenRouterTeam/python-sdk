@@ -64,7 +64,7 @@ class CreateGuardrailRequestTypedDict(TypedDict):
     reset_interval: NotRequired[Nullable[GuardrailInterval]]
     r"""Interval at which the limit resets (daily, weekly, monthly)"""
     workspace_id: NotRequired[str]
-    r"""The workspace to create the guardrail in. When omitted, the guardrail is created in the default workspace; if that default has been deleted, the request returns a 400 and you must pass `workspace_id` explicitly."""
+    r"""The workspace to create the guardrail in. When omitted, the guardrail is created in the default workspace; if that default has been deleted, the request returns a 400 and you must pass `workspace_id` explicitly. This only places the guardrail in the workspace; the created guardrail enforces nothing for that workspace's traffic until it is assigned to API keys or members. To restrict all traffic in a workspace, update the workspace's default guardrail instead."""
 
 
 class CreateGuardrailRequest(BaseModel):
@@ -136,7 +136,7 @@ class CreateGuardrailRequest(BaseModel):
     r"""Interval at which the limit resets (daily, weekly, monthly)"""
 
     workspace_id: Optional[str] = None
-    r"""The workspace to create the guardrail in. When omitted, the guardrail is created in the default workspace; if that default has been deleted, the request returns a 400 and you must pass `workspace_id` explicitly."""
+    r"""The workspace to create the guardrail in. When omitted, the guardrail is created in the default workspace; if that default has been deleted, the request returns a 400 and you must pass `workspace_id` explicitly. This only places the guardrail in the workspace; the created guardrail enforces nothing for that workspace's traffic until it is assigned to API keys or members. To restrict all traffic in a workspace, update the workspace's default guardrail instead."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
