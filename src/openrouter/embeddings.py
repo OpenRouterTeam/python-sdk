@@ -180,6 +180,16 @@ class Embeddings(BaseSDK):
                 errors.NotFoundResponseErrorData, http_res
             )
             raise errors.NotFoundResponseError(response_data, http_res)
+        if utils.match_response(http_res, "408", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.RequestTimeoutResponseErrorData, http_res
+            )
+            raise errors.RequestTimeoutResponseError(response_data, http_res)
+        if utils.match_response(http_res, "413", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.PayloadTooLargeResponseErrorData, http_res
+            )
+            raise errors.PayloadTooLargeResponseError(response_data, http_res)
         if utils.match_response(http_res, "429", "application/json"):
             response_data = unmarshal_json_response(
                 errors.TooManyRequestsResponseErrorData, http_res
@@ -384,6 +394,16 @@ class Embeddings(BaseSDK):
                 errors.NotFoundResponseErrorData, http_res
             )
             raise errors.NotFoundResponseError(response_data, http_res)
+        if utils.match_response(http_res, "408", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.RequestTimeoutResponseErrorData, http_res
+            )
+            raise errors.RequestTimeoutResponseError(response_data, http_res)
+        if utils.match_response(http_res, "413", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.PayloadTooLargeResponseErrorData, http_res
+            )
+            raise errors.PayloadTooLargeResponseError(response_data, http_res)
         if utils.match_response(http_res, "429", "application/json"):
             response_data = unmarshal_json_response(
                 errors.TooManyRequestsResponseErrorData, http_res

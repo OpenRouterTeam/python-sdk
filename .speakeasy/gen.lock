@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c48cf606-fb42-4a45-9c23-8f0555307828
 management:
-  docChecksum: d6770435f346e648aef022ff53f9868b
+  docChecksum: 7f61acc9f253327b431dd21c1a81a4c8
   docVersion: 1.0.0
   speakeasyVersion: 1.787.0
   generationVersion: 2.914.0
-  releaseVersion: 1.1.72
-  configChecksum: 634fc926b43192457100f5d97b5b4016
+  releaseVersion: 1.1.73
+  configChecksum: 5d33524b8c1752f7dc142880a4ce0225
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
 persistentEdits:
-  generation_id: d7f61cdc-1068-4ed7-9b68-e40dc927e31c
-  pristine_commit_hash: 5ef33c0f7a7978c1ad65d2b662a950d67e1a60c0
-  pristine_tree_hash: aa91aec3810ae80e51c1c68a5761bef4b82733ee
+  generation_id: 770d9b72-890a-4bd9-8dfd-897630f4a338
+  pristine_commit_hash: 900541d2fb635af43bed09d5d9684c81b1102517
+  pristine_tree_hash: 197d6c6c7fff87ce50bf863e6f6da5b9a281b8e5
 features:
   python:
     acceptHeaders: 3.0.0
@@ -7174,8 +7174,8 @@ trackedFiles:
     pristine_git_object: fe31c0f4f765b9f8f3cf79f6dd403e730589db80
   docs/sdks/embeddings/README.mdx:
     id: cd71581df291
-    last_write_checksum: sha1:810a851cac701dfa79d8130a38396d0a1b8b5196
-    pristine_git_object: 23ecba4f6c3e02d44d684e15fb91cae66e043d12
+    last_write_checksum: sha1:f9a69d531fd3e23a5a65e16053b757e5acc99c02
+    pristine_git_object: beb14b7d3110913229c53c98da3d6e047af78801
   docs/sdks/endpoints/README.mdx:
     id: 62dfac9f7b71
     last_write_checksum: sha1:db7ed18401bcd4afa7382a9793c9ccafb5220497
@@ -7254,8 +7254,8 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:4ec58796921372bb9acf433f5e5839a13130a2ce
-    pristine_git_object: 558ee3ab7ce7e618a90d45e77fc87606f7c14fbc
+    last_write_checksum: sha1:596a34f32e3fe93c941603f44607714c631feeff
+    pristine_git_object: 7ec9ca7c5e6c7f7804dd5ce2ed706b52b3f942fc
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77f44b60b98bc126557ec27391f91dfba764bb54
@@ -7282,8 +7282,8 @@ trackedFiles:
     pristine_git_object: 86713cfea633e09d33b3d4e65281071fe20e6137
   src/openrouter/_version.py:
     id: d8d15ad6c586
-    last_write_checksum: sha1:35453a58a8974f75dae3ddedd9cf98977741e6ec
-    pristine_git_object: af5ec634994b1e01051eeba3d0e02a0b13bf13e1
+    last_write_checksum: sha1:f2a1b3a9993bc144f67c88d263e7f8f7b4ee748f
+    pristine_git_object: edb6ebdf6c6faf756a5909bffa446cfd9fa7be27
   src/openrouter/analytics.py:
     id: cb406b5aaabb
     last_write_checksum: sha1:1e0004d8d1d5d797e2b54cd1cabeb7f9489d08e9
@@ -9786,8 +9786,8 @@ trackedFiles:
     pristine_git_object: 0532cef994643793368c4484b8af0d247be2692e
   src/openrouter/embeddings.py:
     id: 0374ace39067
-    last_write_checksum: sha1:220cac105c58c9b42f2f9f9e6bf98f6a7beb4f96
-    pristine_git_object: f570a07115a52b248ac83ab6d80ddabca553a5db
+    last_write_checksum: sha1:8936040e99e5a69870b975bb8693669b20ac699a
+    pristine_git_object: f6bd37ea68835d6df93ecb86be1f560f512154ed
   src/openrouter/endpoints.py:
     id: 465bbf2b7939
     last_write_checksum: sha1:a04548ad80c9b1cf8ae1f5dde2e24774865c1eb8
@@ -10598,6 +10598,10 @@ examples:
           application/json: {"error": {"code": 524, "message": "Request timed out. Please try again later."}}
         "529":
           application/json: {"error": {"code": 529, "message": "Provider returned error"}}
+        "408":
+          application/json: {"error": {"code": 408, "message": "Operation timed out. Please try again later."}}
+        "413":
+          application/json: {"error": {"code": 413, "message": "Request payload too large"}}
   listEmbeddingsModels:
     speakeasy-default-list-embeddings-models:
       parameters:
@@ -12175,4 +12179,6 @@ examples:
         "500":
           application/json: {"error": {"code": 500, "message": "Internal Server Error"}}
 examplesVersion: 1.0.2
-releaseNotes: "## Python SDK Changes:\n* `open_router.tts.create_speech()`: \n  *  `request.provider.options.makora` **Added**\n* `open_router.stt.create_transcription()`: \n  *  `request.provider.options.makora` **Added**\n* `open_router.byok.list()`: \n  *  `request.provider` **Changed**\n  *  `response.data[].provider.enum(makora)` **Added**\n* `open_router.byok.create()`: \n  *  `request.provider.enum(makora)` **Added**\n  *  `response.data.provider.enum(makora)` **Added**\n* `open_router.byok.get()`:  `response.data.provider.enum(makora)` **Added**\n* `open_router.byok.update()`:  `response.data.provider.enum(makora)` **Added**\n* `open_router.chat.send()`: \n  *  `request.provider.ignore[].union(ProviderName).enum(makora)` **Added**\n* `open_router.embeddings.generate()`: \n  *  `request.provider.ignore[].union(ProviderName).enum(makora)` **Added**\n* `open_router.endpoints.list_zdr_endpoints()`:  `response.data[].provider_name.enum(makora)` **Added**\n* `open_router.endpoints.list()`:  `response.data.endpoints[].provider_name.enum(makora)` **Added**\n* `open_router.generations.get_generation()`:  `response.data.provider_responses[].provider_name.enum(makora)` **Added**\n* `open_router.images.generate()`:  `request.provider` **Changed**\n* `open_router.presets.create_presets_chat_completions()`: \n  *  `request.provider.ignore[].union(ProviderName).enum(makora)` **Added**\n* `open_router.presets.create_presets_messages()`: \n  *  `request.provider.ignore[].union(ProviderName).enum(makora)` **Added**\n* `open_router.presets.create_presets_responses()`: \n  *  `request.provider.ignore[].union(ProviderName).enum(makora)` **Added**\n* `open_router.rerank.rerank()`: \n  *  `request.provider.ignore[].union(ProviderName).enum(makora)` **Added**\n* `open_router.responses.send()`: \n  *  `request.provider.ignore[].union(ProviderName).enum(makora)` **Added**\n* `open_router.beta.responses.send()`: \n  *  `request.provider.ignore[].union(ProviderName).enum(makora)` **Added**\n* `open_router.video_generation.generate()`: \n  *  `request.provider.options.makora` **Added**\n"
+releaseNotes: |
+  ## Python SDK Changes:
+  * `open_router.embeddings.generate()`:  `error` **Changed**
