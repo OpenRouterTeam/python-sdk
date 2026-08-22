@@ -2884,6 +2884,15 @@ if TYPE_CHECKING:
         ToolChoiceAllowedType,
         ToolChoiceAllowedTypedDict,
     )
+    from .toolsearchservertool import (
+        ToolSearchServerTool,
+        ToolSearchServerToolType,
+        ToolSearchServerToolTypedDict,
+    )
+    from .toolsearchservertoolconfig import (
+        ToolSearchServerToolConfig,
+        ToolSearchServerToolConfigTypedDict,
+    )
     from .toomanyrequestsresponseerrordata import (
         TooManyRequestsResponseErrorData,
         TooManyRequestsResponseErrorDataTypedDict,
@@ -5151,6 +5160,11 @@ __all__ = [
     "ToolChoiceTypedDict",
     "ToolCustom",
     "ToolCustomTypedDict",
+    "ToolSearchServerTool",
+    "ToolSearchServerToolConfig",
+    "ToolSearchServerToolConfigTypedDict",
+    "ToolSearchServerToolType",
+    "ToolSearchServerToolTypedDict",
     "ToolTextEditor20250124",
     "ToolTextEditor20250124TypedDict",
     "ToolTypeCustom",
@@ -7499,6 +7513,11 @@ _dynamic_imports: dict[str, str] = {
     "ToolChoiceAllowed": ".toolchoiceallowed",
     "ToolChoiceAllowedType": ".toolchoiceallowed",
     "ToolChoiceAllowedTypedDict": ".toolchoiceallowed",
+    "ToolSearchServerTool": ".toolsearchservertool",
+    "ToolSearchServerToolType": ".toolsearchservertool",
+    "ToolSearchServerToolTypedDict": ".toolsearchservertool",
+    "ToolSearchServerToolConfig": ".toolsearchservertoolconfig",
+    "ToolSearchServerToolConfigTypedDict": ".toolsearchservertoolconfig",
     "TooManyRequestsResponseErrorData": ".toomanyrequestsresponseerrordata",
     "TooManyRequestsResponseErrorDataTypedDict": ".toomanyrequestsresponseerrordata",
     "TopProviderInfo": ".topproviderinfo",

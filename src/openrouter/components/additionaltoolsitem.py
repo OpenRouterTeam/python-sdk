@@ -60,6 +60,7 @@ from .subagentservertool_openrouter import (
     SubagentServerToolOpenRouter,
     SubagentServerToolOpenRouterTypedDict,
 )
+from .toolsearchservertool import ToolSearchServerTool, ToolSearchServerToolTypedDict
 from .webfetchservertool import WebFetchServerTool, WebFetchServerToolTypedDict
 from .websearchservertool import WebSearchServerTool, WebSearchServerToolTypedDict
 from .websearchservertool_openrouter import (
@@ -76,7 +77,7 @@ from openrouter.types import (
 )
 import pydantic
 from pydantic import ConfigDict, model_serializer
-from typing import Any, Dict, List, Literal, Union
+from typing import Any, Dict, List, Literal, Optional, Union
 from typing_extensions import NotRequired, TypeAliasType, TypedDict
 
 
@@ -127,6 +128,8 @@ class AdditionalToolsItemToolFunctionTypedDict(TypedDict):
     type: AdditionalToolsItemTypeFunction
     description: NotRequired[Nullable[str]]
     strict: NotRequired[Nullable[bool]]
+    defer_loading: NotRequired[bool]
+    r"""Withhold this tool from the model until `openrouter:tool_search` finds it. Requires the tool search server tool; at least one tool must remain non-deferred."""
 
 
 class AdditionalToolsItemToolFunction(BaseModel):
@@ -142,9 +145,12 @@ class AdditionalToolsItemToolFunction(BaseModel):
 
     strict: OptionalNullable[bool] = UNSET
 
+    defer_loading: Optional[bool] = None
+    r"""Withhold this tool from the model until `openrouter:tool_search` finds it. Requires the tool search server tool; at least one tool must remain non-deferred."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["description", "strict"])
+        optional_fields = set(["description", "strict", "defer_loading"])
         nullable_fields = set(["description", "parameters", "strict"])
         serialized = handler(self)
         m = {}
@@ -177,25 +183,26 @@ AdditionalToolsItemToolUnionTypedDict = TypeAliasType(
         SearchModelsServerToolOpenRouterTypedDict,
         WebFetchServerToolTypedDict,
         AdditionalToolsItemToolTypedDict,
-        ShellServerToolOpenRouterTypedDict,
+        ToolSearchServerToolTypedDict,
         CodeInterpreterServerToolTypedDict,
+        ShellServerToolOpenRouterTypedDict,
         BashServerToolTypedDict,
         ApplyPatchServerToolOpenRouterTypedDict,
         WebSearchServerToolOpenRouterTypedDict,
         ImageGenerationServerToolOpenRouterTypedDict,
         FusionServerToolOpenRouterTypedDict,
         FilesServerToolTypedDict,
-        DatetimeServerToolTypedDict,
         AdvisorServerToolOpenRouterTypedDict,
         SubagentServerToolOpenRouterTypedDict,
+        DatetimeServerToolTypedDict,
         NamespaceToolTypedDict,
         CustomToolTypedDict,
         ComputerUseServerToolTypedDict,
-        AdditionalToolsItemToolFunctionTypedDict,
         FileSearchServerToolTypedDict,
+        AdditionalToolsItemToolFunctionTypedDict,
         PreviewWebSearchServerToolTypedDict,
-        Preview20250311WebSearchServerToolTypedDict,
         WebSearchServerToolTypedDict,
+        Preview20250311WebSearchServerToolTypedDict,
         LegacyWebSearchServerToolTypedDict,
         McpServerToolTypedDict,
         ImageGenerationServerToolTypedDict,
@@ -212,25 +219,26 @@ AdditionalToolsItemToolUnion = TypeAliasType(
         SearchModelsServerToolOpenRouter,
         WebFetchServerTool,
         AdditionalToolsItemTool,
-        ShellServerToolOpenRouter,
+        ToolSearchServerTool,
         CodeInterpreterServerTool,
+        ShellServerToolOpenRouter,
         BashServerTool,
         ApplyPatchServerToolOpenRouter,
         WebSearchServerToolOpenRouter,
         ImageGenerationServerToolOpenRouter,
         FusionServerToolOpenRouter,
         FilesServerTool,
-        DatetimeServerTool,
         AdvisorServerToolOpenRouter,
         SubagentServerToolOpenRouter,
+        DatetimeServerTool,
         NamespaceTool,
         CustomTool,
         ComputerUseServerTool,
-        AdditionalToolsItemToolFunction,
         FileSearchServerTool,
+        AdditionalToolsItemToolFunction,
         PreviewWebSearchServerTool,
-        Preview20250311WebSearchServerTool,
         WebSearchServerTool,
+        Preview20250311WebSearchServerTool,
         LegacyWebSearchServerTool,
         McpServerTool,
         ImageGenerationServerTool,

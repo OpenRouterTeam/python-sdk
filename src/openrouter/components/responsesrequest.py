@@ -97,6 +97,7 @@ from .subagentservertool_openrouter import (
     SubagentServerToolOpenRouterTypedDict,
 )
 from .textextendedconfig import TextExtendedConfig, TextExtendedConfigTypedDict
+from .toolsearchservertool import ToolSearchServerTool, ToolSearchServerToolTypedDict
 from .traceconfig import TraceConfig, TraceConfigTypedDict
 from .webfetchplugin import WebFetchPlugin, WebFetchPluginTypedDict
 from .webfetchservertool import WebFetchServerTool, WebFetchServerToolTypedDict
@@ -237,6 +238,8 @@ class ResponsesRequestToolFunctionTypedDict(TypedDict):
     type: ResponsesRequestType
     description: NotRequired[Nullable[str]]
     strict: NotRequired[Nullable[bool]]
+    defer_loading: NotRequired[bool]
+    r"""Withhold this tool from the model until `openrouter:tool_search` finds it. Requires the tool search server tool; at least one tool must remain non-deferred."""
 
 
 class ResponsesRequestToolFunction(BaseModel):
@@ -252,9 +255,12 @@ class ResponsesRequestToolFunction(BaseModel):
 
     strict: OptionalNullable[bool] = UNSET
 
+    defer_loading: Optional[bool] = None
+    r"""Withhold this tool from the model until `openrouter:tool_search` finds it. Requires the tool search server tool; at least one tool must remain non-deferred."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["description", "strict"])
+        optional_fields = set(["description", "strict", "defer_loading"])
         nullable_fields = set(["description", "parameters", "strict"])
         serialized = handler(self)
         m = {}
@@ -284,27 +290,28 @@ ResponsesRequestToolUnionTypedDict = TypeAliasType(
         CodexLocalShellToolTypedDict,
         ApplyPatchServerToolTypedDict,
         ShellServerToolTypedDict,
-        FilesServerToolTypedDict,
-        SubagentServerToolOpenRouterTypedDict,
+        SearchModelsServerToolOpenRouterTypedDict,
+        WebFetchServerToolTypedDict,
+        ToolSearchServerToolTypedDict,
         ShellServerToolOpenRouterTypedDict,
-        BashServerToolTypedDict,
         CodeInterpreterServerToolTypedDict,
+        BashServerToolTypedDict,
         ApplyPatchServerToolOpenRouterTypedDict,
         WebSearchServerToolOpenRouterTypedDict,
-        WebFetchServerToolTypedDict,
-        SearchModelsServerToolOpenRouterTypedDict,
         ImageGenerationServerToolOpenRouterTypedDict,
         FusionServerToolOpenRouterTypedDict,
+        FilesServerToolTypedDict,
         DatetimeServerToolTypedDict,
         AdvisorServerToolOpenRouterTypedDict,
+        SubagentServerToolOpenRouterTypedDict,
         NamespaceToolTypedDict,
         CustomToolTypedDict,
         ComputerUseServerToolTypedDict,
-        ResponsesRequestToolFunctionTypedDict,
         FileSearchServerToolTypedDict,
-        WebSearchServerToolTypedDict,
+        ResponsesRequestToolFunctionTypedDict,
         PreviewWebSearchServerToolTypedDict,
         Preview20250311WebSearchServerToolTypedDict,
+        WebSearchServerToolTypedDict,
         LegacyWebSearchServerToolTypedDict,
         McpServerToolTypedDict,
         ImageGenerationServerToolTypedDict,
@@ -348,6 +355,7 @@ ResponsesRequestToolUnion = Annotated[
         Annotated[ApplyPatchServerToolOpenRouter, Tag("openrouter:apply_patch")],
         Annotated[BashServerTool, Tag("openrouter:bash")],
         Annotated[ShellServerToolOpenRouter, Tag("openrouter:shell")],
+        Annotated[ToolSearchServerTool, Tag("openrouter:tool_search")],
     ],
     Discriminator(lambda m: get_discriminator(m, "type", "type")),
 ]
