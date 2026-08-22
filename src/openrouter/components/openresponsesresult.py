@@ -76,6 +76,8 @@ class OpenResponsesResultToolFunctionTypedDict(TypedDict):
     type: OpenResponsesResultType
     description: NotRequired[Nullable[str]]
     strict: NotRequired[Nullable[bool]]
+    defer_loading: NotRequired[bool]
+    r"""Withhold this tool from the model until `openrouter:tool_search` finds it. Requires the tool search server tool; at least one tool must remain non-deferred."""
 
 
 class OpenResponsesResultToolFunction(BaseModel):
@@ -91,9 +93,12 @@ class OpenResponsesResultToolFunction(BaseModel):
 
     strict: OptionalNullable[bool] = UNSET
 
+    defer_loading: Optional[bool] = None
+    r"""Withhold this tool from the model until `openrouter:tool_search` finds it. Requires the tool search server tool; at least one tool must remain non-deferred."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["description", "strict"])
+        optional_fields = set(["description", "strict", "defer_loading"])
         nullable_fields = set(["description", "parameters", "strict"])
         serialized = handler(self)
         m = {}
@@ -127,8 +132,8 @@ OpenResponsesResultToolUnionTypedDict = TypeAliasType(
         NamespaceToolTypedDict,
         CustomToolTypedDict,
         ComputerUseServerToolTypedDict,
-        OpenResponsesResultToolFunctionTypedDict,
         FileSearchServerToolTypedDict,
+        OpenResponsesResultToolFunctionTypedDict,
         LegacyWebSearchServerToolTypedDict,
         WebSearchServerToolTypedDict,
         Preview20250311WebSearchServerToolTypedDict,
