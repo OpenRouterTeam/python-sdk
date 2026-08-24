@@ -74,8 +74,8 @@ class DownloadContainerFileContentGlobals(BaseModel):
 
 
 class DownloadContainerFileContentRequestTypedDict(TypedDict):
-    session_id: str
-    r"""The sandbox session id, exactly as stored — a restarted session has its own `-r<nonce>`-suffixed id."""
+    container_id: str
+    r"""The canonical container id, exactly as returned in a bash/shell tool result — a restarted session has its own `-r<nonce>`-suffixed id. A session-derived id is always `sess_` + the sanitized session key, which is not necessarily the raw session id that was sent."""
     file_id: str
     r"""Container file id (`cfile_` + base64url of the file path)."""
     http_referer: NotRequired[str]
@@ -94,10 +94,10 @@ class DownloadContainerFileContentRequestTypedDict(TypedDict):
 
 
 class DownloadContainerFileContentRequest(BaseModel):
-    session_id: Annotated[
+    container_id: Annotated[
         str, FieldMetadata(path=PathParamMetadata(style="simple", explode=False))
     ]
-    r"""The sandbox session id, exactly as stored — a restarted session has its own `-r<nonce>`-suffixed id."""
+    r"""The canonical container id, exactly as returned in a bash/shell tool result — a restarted session has its own `-r<nonce>`-suffixed id. A session-derived id is always `sess_` + the sanitized session key, which is not necessarily the raw session id that was sent."""
 
     file_id: Annotated[
         str, FieldMetadata(path=PathParamMetadata(style="simple", explode=False))

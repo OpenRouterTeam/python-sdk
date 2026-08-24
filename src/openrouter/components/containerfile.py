@@ -18,14 +18,14 @@ class ContainerFileTypedDict(TypedDict):
     bytes_: int
     r"""File size in bytes."""
     container_id: str
-    r"""The container the file belongs to — echoes the `session_id` path parameter (OpenAI field name)."""
+    r"""The container the file belongs to — echoes the `container_id` path parameter (OpenAI field name)."""
     created_at: int
     r"""Unix timestamp (seconds) when the file was last synced."""
     id: str
     r"""Container file id: `cfile_` + base64url of the file path."""
     object: ContainerFileObject
     path: str
-    r"""Session-relative file path inside the container."""
+    r"""Container-relative file path."""
     source: ContainerFileSource
     r"""Container files are always produced by the assistant sandbox."""
 
@@ -35,7 +35,7 @@ class ContainerFile(BaseModel):
     r"""File size in bytes."""
 
     container_id: str
-    r"""The container the file belongs to — echoes the `session_id` path parameter (OpenAI field name)."""
+    r"""The container the file belongs to — echoes the `container_id` path parameter (OpenAI field name)."""
 
     created_at: int
     r"""Unix timestamp (seconds) when the file was last synced."""
@@ -46,7 +46,7 @@ class ContainerFile(BaseModel):
     object: ContainerFileObject
 
     path: str
-    r"""Session-relative file path inside the container."""
+    r"""Container-relative file path."""
 
     source: ContainerFileSource
     r"""Container files are always produced by the assistant sandbox."""

@@ -11,24 +11,54 @@ from openrouter.types import (
 )
 import pydantic
 from pydantic import model_serializer
-from typing import Literal, Optional
+from typing import List, Literal, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-OutputBashServerToolItemType = Literal["openrouter:bash",]
+OutputBashServerToolItemTypeContainerFileCitation = Literal["container_file_citation",]
+
+
+class OutputBashServerToolItemFileTypedDict(TypedDict):
+    container_id: str
+    end_index: int
+    file_id: str
+    filename: str
+    start_index: int
+    type: OutputBashServerToolItemTypeContainerFileCitation
+
+
+class OutputBashServerToolItemFile(BaseModel):
+    container_id: str
+
+    end_index: int
+
+    file_id: str
+
+    filename: str
+
+    start_index: int
+
+    type: OutputBashServerToolItemTypeContainerFileCitation
+
+
+OutputBashServerToolItemTypeOpenrouterBash = Literal["openrouter:bash",]
 
 
 class OutputBashServerToolItemTypedDict(TypedDict):
     r"""An openrouter:bash server tool output item"""
 
     status: ToolCallStatus
-    type: OutputBashServerToolItemType
+    type: OutputBashServerToolItemTypeOpenrouterBash
     arguments: NotRequired[Nullable[str]]
     r"""The raw tool-call arguments string as emitted by the model."""
     call_id: NotRequired[Nullable[str]]
     r"""The model-generated tool call id from the originating turn."""
     command: NotRequired[str]
+    container_id: NotRequired[str]
+    r"""The canonical container id the command ran under — the `{container_id}` for the Container Files API, reusable as a `container_reference` in later requests. Present on every sandbox-executed call, even when no files changed."""
     exit_code: NotRequired[int]
+    files: NotRequired[List[OutputBashServerToolItemFileTypedDict]]
+    r"""Citations for the files the sandbox command created or modified, most-recently-touched first (at most 10). Retrieve them via the Container Files API."""
     id: NotRequired[str]
     stderr: NotRequired[str]
     stdout: NotRequired[str]
@@ -39,7 +69,7 @@ class OutputBashServerToolItem(BaseModel):
 
     status: ToolCallStatus
 
-    type: OutputBashServerToolItemType
+    type: OutputBashServerToolItemTypeOpenrouterBash
 
     arguments: OptionalNullable[str] = UNSET
     r"""The raw tool-call arguments string as emitted by the model."""
@@ -49,7 +79,13 @@ class OutputBashServerToolItem(BaseModel):
 
     command: Optional[str] = None
 
+    container_id: Optional[str] = None
+    r"""The canonical container id the command ran under — the `{container_id}` for the Container Files API, reusable as a `container_reference` in later requests. Present on every sandbox-executed call, even when no files changed."""
+
     exit_code: Annotated[Optional[int], pydantic.Field(alias="exitCode")] = None
+
+    files: Optional[List[OutputBashServerToolItemFile]] = None
+    r"""Citations for the files the sandbox command created or modified, most-recently-touched first (at most 10). Retrieve them via the Container Files API."""
 
     id: Optional[str] = None
 
@@ -60,7 +96,17 @@ class OutputBashServerToolItem(BaseModel):
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
-            ["arguments", "call_id", "command", "exitCode", "id", "stderr", "stdout"]
+            [
+                "arguments",
+                "call_id",
+                "command",
+                "container_id",
+                "exitCode",
+                "files",
+                "id",
+                "stderr",
+                "stdout",
+            ]
         )
         nullable_fields = set(["arguments", "call_id"])
         serialized = handler(self)

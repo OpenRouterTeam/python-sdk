@@ -57,19 +57,49 @@ class OutputShellServerToolItemAction(BaseModel):
         return m
 
 
-OutputShellServerToolItemType = Literal["openrouter:shell",]
+OutputShellServerToolItemTypeContainerFileCitation = Literal["container_file_citation",]
+
+
+class OutputShellServerToolItemFileTypedDict(TypedDict):
+    container_id: str
+    end_index: int
+    file_id: str
+    filename: str
+    start_index: int
+    type: OutputShellServerToolItemTypeContainerFileCitation
+
+
+class OutputShellServerToolItemFile(BaseModel):
+    container_id: str
+
+    end_index: int
+
+    file_id: str
+
+    filename: str
+
+    start_index: int
+
+    type: OutputShellServerToolItemTypeContainerFileCitation
+
+
+OutputShellServerToolItemTypeOpenrouterShell = Literal["openrouter:shell",]
 
 
 class OutputShellServerToolItemTypedDict(TypedDict):
     r"""An openrouter:shell server tool output item"""
 
     status: ToolCallStatus
-    type: OutputShellServerToolItemType
+    type: OutputShellServerToolItemTypeOpenrouterShell
     action: NotRequired[OutputShellServerToolItemActionTypedDict]
     arguments: NotRequired[Nullable[str]]
     r"""The raw tool-call arguments string as emitted by the model."""
     call_id: NotRequired[Nullable[str]]
     r"""The model-generated tool call id from the originating turn."""
+    container_id: NotRequired[str]
+    r"""The canonical container id the command ran under — the `{container_id}` for the Container Files API, reusable as a `container_reference` in later requests. Present on every sandbox-executed call, even when no files changed."""
+    files: NotRequired[List[OutputShellServerToolItemFileTypedDict]]
+    r"""Citations for the files the sandbox command created or modified, most-recently-touched first (at most 10). Retrieve them via the Container Files API."""
     id: NotRequired[str]
     output: NotRequired[List[ShellCallOutputContentTypedDict]]
 
@@ -79,7 +109,7 @@ class OutputShellServerToolItem(BaseModel):
 
     status: ToolCallStatus
 
-    type: OutputShellServerToolItemType
+    type: OutputShellServerToolItemTypeOpenrouterShell
 
     action: Optional[OutputShellServerToolItemAction] = None
 
@@ -89,13 +119,21 @@ class OutputShellServerToolItem(BaseModel):
     call_id: OptionalNullable[str] = UNSET
     r"""The model-generated tool call id from the originating turn."""
 
+    container_id: Optional[str] = None
+    r"""The canonical container id the command ran under — the `{container_id}` for the Container Files API, reusable as a `container_reference` in later requests. Present on every sandbox-executed call, even when no files changed."""
+
+    files: Optional[List[OutputShellServerToolItemFile]] = None
+    r"""Citations for the files the sandbox command created or modified, most-recently-touched first (at most 10). Retrieve them via the Container Files API."""
+
     id: Optional[str] = None
 
     output: Optional[List[ShellCallOutputContent]] = None
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["action", "arguments", "call_id", "id", "output"])
+        optional_fields = set(
+            ["action", "arguments", "call_id", "container_id", "files", "id", "output"]
+        )
         nullable_fields = set(["arguments", "call_id"])
         serialized = handler(self)
         m = {}
