@@ -540,6 +540,7 @@ class APIKeys(BaseSDK):
         x_open_router_categories: Optional[str] = None,
         creator_user_id: OptionalNullable[str] = UNSET,
         expires_at: OptionalNullable[datetime] = UNSET,
+        external_api_key: Optional[str] = None,
         include_byok_in_limit: Optional[bool] = None,
         limit: OptionalNullable[float] = UNSET,
         limit_reset: OptionalNullable[operations.CreateKeysLimitReset] = UNSET,
@@ -563,6 +564,7 @@ class APIKeys(BaseSDK):
 
         :param creator_user_id: Optional user ID of the key creator. Only meaningful for organization-owned keys where a specific member is creating the key.
         :param expires_at: Optional ISO 8601 UTC timestamp when the API key should expire. Must be UTC, other timezones will be rejected
+        :param external_api_key: Optional partner-supplied API key. Stored as a SHA-256 hash and never returned. Accepted only when authenticating with a Connect client secret.
         :param include_byok_in_limit: Whether to include BYOK usage in the limit
         :param limit: Optional spending limit for the API key in USD
         :param limit_reset: Type of limit reset for the API key (daily, weekly, monthly, or null for no reset). Resets happen automatically at midnight UTC, and weeks are Monday through Sunday.
@@ -589,6 +591,7 @@ class APIKeys(BaseSDK):
             request_body=operations.CreateKeysRequestBody(
                 creator_user_id=creator_user_id,
                 expires_at=expires_at,
+                external_api_key=external_api_key,
                 include_byok_in_limit=include_byok_in_limit,
                 limit=limit,
                 limit_reset=limit_reset,
@@ -705,6 +708,7 @@ class APIKeys(BaseSDK):
         x_open_router_categories: Optional[str] = None,
         creator_user_id: OptionalNullable[str] = UNSET,
         expires_at: OptionalNullable[datetime] = UNSET,
+        external_api_key: Optional[str] = None,
         include_byok_in_limit: Optional[bool] = None,
         limit: OptionalNullable[float] = UNSET,
         limit_reset: OptionalNullable[operations.CreateKeysLimitReset] = UNSET,
@@ -728,6 +732,7 @@ class APIKeys(BaseSDK):
 
         :param creator_user_id: Optional user ID of the key creator. Only meaningful for organization-owned keys where a specific member is creating the key.
         :param expires_at: Optional ISO 8601 UTC timestamp when the API key should expire. Must be UTC, other timezones will be rejected
+        :param external_api_key: Optional partner-supplied API key. Stored as a SHA-256 hash and never returned. Accepted only when authenticating with a Connect client secret.
         :param include_byok_in_limit: Whether to include BYOK usage in the limit
         :param limit: Optional spending limit for the API key in USD
         :param limit_reset: Type of limit reset for the API key (daily, weekly, monthly, or null for no reset). Resets happen automatically at midnight UTC, and weeks are Monday through Sunday.
@@ -754,6 +759,7 @@ class APIKeys(BaseSDK):
             request_body=operations.CreateKeysRequestBody(
                 creator_user_id=creator_user_id,
                 expires_at=expires_at,
+                external_api_key=external_api_key,
                 include_byok_in_limit=include_byok_in_limit,
                 limit=limit,
                 limit_reset=limit_reset,

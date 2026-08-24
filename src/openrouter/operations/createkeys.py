@@ -99,6 +99,8 @@ class CreateKeysRequestBodyTypedDict(TypedDict):
     r"""Optional user ID of the key creator. Only meaningful for organization-owned keys where a specific member is creating the key."""
     expires_at: NotRequired[Nullable[datetime]]
     r"""Optional ISO 8601 UTC timestamp when the API key should expire. Must be UTC, other timezones will be rejected"""
+    external_api_key: NotRequired[str]
+    r"""Optional partner-supplied API key. Stored as a SHA-256 hash and never returned. Accepted only when authenticating with a Connect client secret."""
     include_byok_in_limit: NotRequired[bool]
     r"""Whether to include BYOK usage in the limit"""
     limit: NotRequired[Nullable[float]]
@@ -119,6 +121,9 @@ class CreateKeysRequestBody(BaseModel):
     expires_at: OptionalNullable[datetime] = UNSET
     r"""Optional ISO 8601 UTC timestamp when the API key should expire. Must be UTC, other timezones will be rejected"""
 
+    external_api_key: Optional[str] = None
+    r"""Optional partner-supplied API key. Stored as a SHA-256 hash and never returned. Accepted only when authenticating with a Connect client secret."""
+
     include_byok_in_limit: Optional[bool] = None
     r"""Whether to include BYOK usage in the limit"""
 
@@ -137,6 +142,7 @@ class CreateKeysRequestBody(BaseModel):
             [
                 "creator_user_id",
                 "expires_at",
+                "external_api_key",
                 "include_byok_in_limit",
                 "limit",
                 "limit_reset",
