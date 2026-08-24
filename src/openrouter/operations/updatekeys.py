@@ -248,6 +248,8 @@ class UpdateKeysDataTypedDict(TypedDict):
     r"""The user ID of the key creator. For organization-owned keys, this is the member who created the key. For individual users, this is the user's own ID."""
     disabled: bool
     r"""Whether the API key is disabled"""
+    external_user: Nullable[str]
+    r"""Partner's end-user identifier used for attribution."""
     hash: str
     r"""Unique hash identifier for the API key"""
     include_byok_in_limit: bool
@@ -302,6 +304,9 @@ class UpdateKeysData(BaseModel):
     disabled: bool
     r"""Whether the API key is disabled"""
 
+    external_user: Nullable[str]
+    r"""Partner's end-user identifier used for attribution."""
+
     hash: str
     r"""Unique hash identifier for the API key"""
 
@@ -351,6 +356,7 @@ class UpdateKeysData(BaseModel):
             [
                 "creator_user_id",
                 "expires_at",
+                "external_user",
                 "limit",
                 "limit_remaining",
                 "limit_reset",
