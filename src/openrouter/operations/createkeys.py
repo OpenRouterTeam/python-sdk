@@ -100,7 +100,9 @@ class CreateKeysRequestBodyTypedDict(TypedDict):
     expires_at: NotRequired[Nullable[datetime]]
     r"""Optional ISO 8601 UTC timestamp when the API key should expire. Must be UTC, other timezones will be rejected"""
     external_api_key: NotRequired[str]
-    r"""Optional partner-supplied API key. Stored as a SHA-256 hash and never returned. Accepted only when authenticating with a Connect client secret."""
+    r"""Optional partner-supplied API key. Stored as a SHA-256 hash and never returned. Accepted only when authenticating with a Connect client secret; supplying it with a management key is rejected with 403."""
+    external_user: NotRequired[str]
+    r"""Partner's end-user identifier for attribution, between 1 and 512 characters. Accepted only when authenticating with a Connect client secret, where it is required; supplying it with a management key is rejected with 403."""
     include_byok_in_limit: NotRequired[bool]
     r"""Whether to include BYOK usage in the limit"""
     limit: NotRequired[Nullable[float]]
@@ -122,7 +124,10 @@ class CreateKeysRequestBody(BaseModel):
     r"""Optional ISO 8601 UTC timestamp when the API key should expire. Must be UTC, other timezones will be rejected"""
 
     external_api_key: Optional[str] = None
-    r"""Optional partner-supplied API key. Stored as a SHA-256 hash and never returned. Accepted only when authenticating with a Connect client secret."""
+    r"""Optional partner-supplied API key. Stored as a SHA-256 hash and never returned. Accepted only when authenticating with a Connect client secret; supplying it with a management key is rejected with 403."""
+
+    external_user: Optional[str] = None
+    r"""Partner's end-user identifier for attribution, between 1 and 512 characters. Accepted only when authenticating with a Connect client secret, where it is required; supplying it with a management key is rejected with 403."""
 
     include_byok_in_limit: Optional[bool] = None
     r"""Whether to include BYOK usage in the limit"""
@@ -143,6 +148,7 @@ class CreateKeysRequestBody(BaseModel):
                 "creator_user_id",
                 "expires_at",
                 "external_api_key",
+                "external_user",
                 "include_byok_in_limit",
                 "limit",
                 "limit_reset",
@@ -259,6 +265,8 @@ class CreateKeysDataTypedDict(TypedDict):
     r"""The user ID of the key creator. For organization-owned keys, this is the member who created the key. For individual users, this is the user's own ID."""
     disabled: bool
     r"""Whether the API key is disabled"""
+    external_user: Nullable[str]
+    r"""Partner's end-user identifier used for attribution."""
     hash: str
     r"""Unique hash identifier for the API key"""
     include_byok_in_limit: bool
@@ -313,6 +321,9 @@ class CreateKeysData(BaseModel):
     disabled: bool
     r"""Whether the API key is disabled"""
 
+    external_user: Nullable[str]
+    r"""Partner's end-user identifier used for attribution."""
+
     hash: str
     r"""Unique hash identifier for the API key"""
 
@@ -362,6 +373,7 @@ class CreateKeysData(BaseModel):
             [
                 "creator_user_id",
                 "expires_at",
+                "external_user",
                 "limit",
                 "limit_remaining",
                 "limit_reset",
