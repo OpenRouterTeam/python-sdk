@@ -740,6 +740,17 @@ if TYPE_CHECKING:
         ContainerAutoEnvironmentType,
         ContainerAutoEnvironmentTypedDict,
     )
+    from .containerfile import (
+        ContainerFile,
+        ContainerFileObject,
+        ContainerFileSource,
+        ContainerFileTypedDict,
+    )
+    from .containerfilelistresponse import (
+        ContainerFileListResponse,
+        ContainerFileListResponseObject,
+        ContainerFileListResponseTypedDict,
+    )
     from .containerreferenceenvironment import (
         ContainerReferenceEnvironment,
         ContainerReferenceEnvironmentType,
@@ -3635,6 +3646,13 @@ __all__ = [
     "ContainerAutoEnvironmentType",
     "ContainerAutoEnvironmentTypedDict",
     "ContainerAutoTypedDict",
+    "ContainerFile",
+    "ContainerFileListResponse",
+    "ContainerFileListResponseObject",
+    "ContainerFileListResponseTypedDict",
+    "ContainerFileObject",
+    "ContainerFileSource",
+    "ContainerFileTypedDict",
     "ContainerReferenceEnvironment",
     "ContainerReferenceEnvironmentType",
     "ContainerReferenceEnvironmentTypedDict",
@@ -5904,6 +5922,13 @@ _dynamic_imports: dict[str, str] = {
     "ContainerAutoEnvironment": ".containerautoenvironment",
     "ContainerAutoEnvironmentType": ".containerautoenvironment",
     "ContainerAutoEnvironmentTypedDict": ".containerautoenvironment",
+    "ContainerFile": ".containerfile",
+    "ContainerFileObject": ".containerfile",
+    "ContainerFileSource": ".containerfile",
+    "ContainerFileTypedDict": ".containerfile",
+    "ContainerFileListResponse": ".containerfilelistresponse",
+    "ContainerFileListResponseObject": ".containerfilelistresponse",
+    "ContainerFileListResponseTypedDict": ".containerfilelistresponse",
     "ContainerReferenceEnvironment": ".containerreferenceenvironment",
     "ContainerReferenceEnvironmentType": ".containerreferenceenvironment",
     "ContainerReferenceEnvironmentTypedDict": ".containerreferenceenvironment",

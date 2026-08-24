@@ -274,6 +274,12 @@ if TYPE_CHECKING:
         DeleteWorkspaceBudgetRequest,
         DeleteWorkspaceBudgetRequestTypedDict,
     )
+    from .downloadcontainerfilecontent import (
+        DownloadContainerFileContentGlobals,
+        DownloadContainerFileContentGlobalsTypedDict,
+        DownloadContainerFileContentRequest,
+        DownloadContainerFileContentRequestTypedDict,
+    )
     from .downloadfilecontent import (
         DownloadFileContentGlobals,
         DownloadFileContentGlobalsTypedDict,
@@ -340,6 +346,12 @@ if TYPE_CHECKING:
         GetBYOKKeyGlobalsTypedDict,
         GetBYOKKeyRequest,
         GetBYOKKeyRequestTypedDict,
+    )
+    from .getcontainerfile import (
+        GetContainerFileGlobals,
+        GetContainerFileGlobalsTypedDict,
+        GetContainerFileRequest,
+        GetContainerFileRequestTypedDict,
     )
     from .getcredits import (
         GetCreditsData,
@@ -504,6 +516,12 @@ if TYPE_CHECKING:
         ListBYOKKeysResponse,
         ListBYOKKeysResponseTypedDict,
         Provider,
+    )
+    from .listcontainerfiles import (
+        ListContainerFilesGlobals,
+        ListContainerFilesGlobalsTypedDict,
+        ListContainerFilesRequest,
+        ListContainerFilesRequestTypedDict,
     )
     from .listembeddingsmodels import (
         ListEmbeddingsModelsGlobals,
@@ -1022,6 +1040,10 @@ __all__ = [
     "DocumentResponse",
     "DocumentResponseTypedDict",
     "DocumentTypedDict",
+    "DownloadContainerFileContentGlobals",
+    "DownloadContainerFileContentGlobalsTypedDict",
+    "DownloadContainerFileContentRequest",
+    "DownloadContainerFileContentRequestTypedDict",
     "DownloadFileContentGlobals",
     "DownloadFileContentGlobalsTypedDict",
     "DownloadFileContentRequest",
@@ -1064,6 +1086,10 @@ __all__ = [
     "GetBenchmarksGlobalsTypedDict",
     "GetBenchmarksRequest",
     "GetBenchmarksRequestTypedDict",
+    "GetContainerFileGlobals",
+    "GetContainerFileGlobalsTypedDict",
+    "GetContainerFileRequest",
+    "GetContainerFileRequestTypedDict",
     "GetCreditsData",
     "GetCreditsDataTypedDict",
     "GetCreditsGlobals",
@@ -1180,6 +1206,10 @@ __all__ = [
     "ListBYOKKeysRequestTypedDict",
     "ListBYOKKeysResponse",
     "ListBYOKKeysResponseTypedDict",
+    "ListContainerFilesGlobals",
+    "ListContainerFilesGlobalsTypedDict",
+    "ListContainerFilesRequest",
+    "ListContainerFilesRequestTypedDict",
     "ListData",
     "ListDataTypedDict",
     "ListEmbeddingsModelsGlobals",
@@ -1655,6 +1685,10 @@ _dynamic_imports: dict[str, str] = {
     "DeleteWorkspaceBudgetGlobalsTypedDict": ".deleteworkspacebudget",
     "DeleteWorkspaceBudgetRequest": ".deleteworkspacebudget",
     "DeleteWorkspaceBudgetRequestTypedDict": ".deleteworkspacebudget",
+    "DownloadContainerFileContentGlobals": ".downloadcontainerfilecontent",
+    "DownloadContainerFileContentGlobalsTypedDict": ".downloadcontainerfilecontent",
+    "DownloadContainerFileContentRequest": ".downloadcontainerfilecontent",
+    "DownloadContainerFileContentRequestTypedDict": ".downloadcontainerfilecontent",
     "DownloadFileContentGlobals": ".downloadfilecontent",
     "DownloadFileContentGlobalsTypedDict": ".downloadfilecontent",
     "DownloadFileContentRequest": ".downloadfilecontent",
@@ -1710,6 +1744,10 @@ _dynamic_imports: dict[str, str] = {
     "GetBYOKKeyGlobalsTypedDict": ".getbyokkey",
     "GetBYOKKeyRequest": ".getbyokkey",
     "GetBYOKKeyRequestTypedDict": ".getbyokkey",
+    "GetContainerFileGlobals": ".getcontainerfile",
+    "GetContainerFileGlobalsTypedDict": ".getcontainerfile",
+    "GetContainerFileRequest": ".getcontainerfile",
+    "GetContainerFileRequestTypedDict": ".getcontainerfile",
     "GetCreditsData": ".getcredits",
     "GetCreditsDataTypedDict": ".getcredits",
     "GetCreditsGlobals": ".getcredits",
@@ -1832,6 +1870,10 @@ _dynamic_imports: dict[str, str] = {
     "ListBYOKKeysResponse": ".listbyokkeys",
     "ListBYOKKeysResponseTypedDict": ".listbyokkeys",
     "Provider": ".listbyokkeys",
+    "ListContainerFilesGlobals": ".listcontainerfiles",
+    "ListContainerFilesGlobalsTypedDict": ".listcontainerfiles",
+    "ListContainerFilesRequest": ".listcontainerfiles",
+    "ListContainerFilesRequestTypedDict": ".listcontainerfiles",
     "ListEmbeddingsModelsGlobals": ".listembeddingsmodels",
     "ListEmbeddingsModelsGlobalsTypedDict": ".listembeddingsmodels",
     "ListEmbeddingsModelsRequest": ".listembeddingsmodels",

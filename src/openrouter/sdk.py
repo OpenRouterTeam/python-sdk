@@ -23,6 +23,7 @@ if TYPE_CHECKING:
     from openrouter.byok import BYOK
     from openrouter.chat import Chat
     from openrouter.classifications import Classifications
+    from openrouter.containers import Containers
     from openrouter.credits import Credits
     from openrouter.datasets import Datasets
     from openrouter.embeddings import Embeddings
@@ -66,6 +67,8 @@ class OpenRouter(BaseSDK):
     chat: "Chat"
     classifications: "Classifications"
     r"""Task classification market-share endpoints"""
+    containers: "Containers"
+    r"""Containers endpoints"""
     credits: "Credits"
     r"""Credit management endpoints"""
     datasets: "Datasets"
@@ -114,6 +117,7 @@ class OpenRouter(BaseSDK):
         "byok": ("openrouter.byok", "BYOK"),
         "chat": ("openrouter.chat", "Chat"),
         "classifications": ("openrouter.classifications", "Classifications"),
+        "containers": ("openrouter.containers", "Containers"),
         "credits": ("openrouter.credits", "Credits"),
         "datasets": ("openrouter.datasets", "Datasets"),
         "embeddings": ("openrouter.embeddings", "Embeddings"),
