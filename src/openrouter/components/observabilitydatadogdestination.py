@@ -20,7 +20,7 @@ class ObservabilityDatadogDestinationConfigTypedDict(TypedDict):
     headers: NotRequired[Dict[str, str]]
     r"""Custom HTTP headers to include in requests to this destination."""
     url: NotRequired[str]
-    r"""Datadog API URL for your region (e.g., https://api.datadoghq.com, https://api.us3.datadoghq.com, https://api.datadoghq.eu)"""
+    r"""Datadog API URL for your region (e.g., https://api.datadoghq.com, https://api.us3.datadoghq.com, https://api.us5.datadoghq.com, https://api.datadoghq.eu)"""
 
 
 class ObservabilityDatadogDestinationConfig(BaseModel):
@@ -33,8 +33,8 @@ class ObservabilityDatadogDestinationConfig(BaseModel):
     headers: Optional[Dict[str, str]] = None
     r"""Custom HTTP headers to include in requests to this destination."""
 
-    url: Optional[str] = "https://api.us5.datadoghq.com"
-    r"""Datadog API URL for your region (e.g., https://api.datadoghq.com, https://api.us3.datadoghq.com, https://api.datadoghq.eu)"""
+    url: Optional[str] = "https://api.datadoghq.com"
+    r"""Datadog API URL for your region (e.g., https://api.datadoghq.com, https://api.us3.datadoghq.com, https://api.us5.datadoghq.com, https://api.datadoghq.eu)"""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
