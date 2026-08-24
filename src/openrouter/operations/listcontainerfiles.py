@@ -79,8 +79,8 @@ class ListContainerFilesGlobals(BaseModel):
 
 
 class ListContainerFilesRequestTypedDict(TypedDict):
-    session_id: str
-    r"""The sandbox session id, exactly as stored — a restarted session has its own `-r<nonce>`-suffixed id."""
+    container_id: str
+    r"""The canonical container id, exactly as returned in a bash/shell tool result — a restarted session has its own `-r<nonce>`-suffixed id. A session-derived id is always `sess_` + the sanitized session key, which is not necessarily the raw session id that was sent."""
     http_referer: NotRequired[str]
     r"""The app identifier should be your app's URL and is used as the primary identifier for rankings.
     This is used to track API usage per application.
@@ -101,10 +101,10 @@ class ListContainerFilesRequestTypedDict(TypedDict):
 
 
 class ListContainerFilesRequest(BaseModel):
-    session_id: Annotated[
+    container_id: Annotated[
         str, FieldMetadata(path=PathParamMetadata(style="simple", explode=False))
     ]
-    r"""The sandbox session id, exactly as stored — a restarted session has its own `-r<nonce>`-suffixed id."""
+    r"""The canonical container id, exactly as returned in a bash/shell tool result — a restarted session has its own `-r<nonce>`-suffixed id. A session-derived id is always `sess_` + the sanitized session key, which is not necessarily the raw session id that was sent."""
 
     http_referer: Annotated[
         Optional[str],

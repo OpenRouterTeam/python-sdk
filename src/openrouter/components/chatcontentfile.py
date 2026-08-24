@@ -7,7 +7,7 @@ from typing import Literal, Optional
 from typing_extensions import NotRequired, TypedDict
 
 
-class FileTypedDict(TypedDict):
+class ChatContentFileFileTypedDict(TypedDict):
     file_data: NotRequired[str]
     r"""File content as base64 data URL or URL"""
     file_id: NotRequired[str]
@@ -16,7 +16,7 @@ class FileTypedDict(TypedDict):
     r"""Original filename"""
 
 
-class File(BaseModel):
+class ChatContentFileFile(BaseModel):
     file_data: Optional[str] = None
     r"""File content as base64 data URL or URL"""
 
@@ -49,13 +49,13 @@ ChatContentFileType = Literal["file",]
 class ChatContentFileTypedDict(TypedDict):
     r"""File content part for document processing"""
 
-    file: FileTypedDict
+    file: ChatContentFileFileTypedDict
     type: ChatContentFileType
 
 
 class ChatContentFile(BaseModel):
     r"""File content part for document processing"""
 
-    file: File
+    file: ChatContentFileFile
 
     type: ChatContentFileType

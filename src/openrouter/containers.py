@@ -16,7 +16,7 @@ class Containers(BaseSDK):
     def list_container_files(
         self,
         *,
-        session_id: str,
+        container_id: str,
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
@@ -29,9 +29,9 @@ class Containers(BaseSDK):
     ) -> components.ContainerFileListResponse:
         r"""List container files
 
-        Lists the files under a sandbox session prefix, in lexicographic path order. A restarted session is a separate container with its own session id. Paginate with `limit` and `after` (pass the previous page’s `last_id`); `has_more: true` always means the next page is fetchable that way.
+        Lists the files in a container, in lexicographic path order. The container id is the canonical id returned in bash/shell tool results; a restarted session is a separate container with its own id. Paginate with `limit` and `after` (pass the previous page’s `last_id`); `has_more: true` always means the next page is fetchable that way.
 
-        :param session_id: The sandbox session id, exactly as stored — a restarted session has its own `-r<nonce>`-suffixed id.
+        :param container_id: The canonical container id, exactly as returned in a bash/shell tool result — a restarted session has its own `-r<nonce>`-suffixed id. A session-derived id is always `sess_` + the sanitized session key, which is not necessarily the raw session id that was sent.
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
@@ -60,14 +60,14 @@ class Containers(BaseSDK):
             http_referer=http_referer,
             x_open_router_title=x_open_router_title,
             x_open_router_categories=x_open_router_categories,
-            session_id=session_id,
+            container_id=container_id,
             limit=limit,
             after=after,
         )
 
         req = self._build_request(
             method="GET",
-            path="/containers/{session_id}/files",
+            path="/containers/{container_id}/files",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -167,7 +167,7 @@ class Containers(BaseSDK):
     async def list_container_files_async(
         self,
         *,
-        session_id: str,
+        container_id: str,
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
@@ -180,9 +180,9 @@ class Containers(BaseSDK):
     ) -> components.ContainerFileListResponse:
         r"""List container files
 
-        Lists the files under a sandbox session prefix, in lexicographic path order. A restarted session is a separate container with its own session id. Paginate with `limit` and `after` (pass the previous page’s `last_id`); `has_more: true` always means the next page is fetchable that way.
+        Lists the files in a container, in lexicographic path order. The container id is the canonical id returned in bash/shell tool results; a restarted session is a separate container with its own id. Paginate with `limit` and `after` (pass the previous page’s `last_id`); `has_more: true` always means the next page is fetchable that way.
 
-        :param session_id: The sandbox session id, exactly as stored — a restarted session has its own `-r<nonce>`-suffixed id.
+        :param container_id: The canonical container id, exactly as returned in a bash/shell tool result — a restarted session has its own `-r<nonce>`-suffixed id. A session-derived id is always `sess_` + the sanitized session key, which is not necessarily the raw session id that was sent.
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
@@ -211,14 +211,14 @@ class Containers(BaseSDK):
             http_referer=http_referer,
             x_open_router_title=x_open_router_title,
             x_open_router_categories=x_open_router_categories,
-            session_id=session_id,
+            container_id=container_id,
             limit=limit,
             after=after,
         )
 
         req = self._build_request_async(
             method="GET",
-            path="/containers/{session_id}/files",
+            path="/containers/{container_id}/files",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -318,7 +318,7 @@ class Containers(BaseSDK):
     def get_container_file(
         self,
         *,
-        session_id: str,
+        container_id: str,
         file_id: str,
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
@@ -330,9 +330,9 @@ class Containers(BaseSDK):
     ) -> components.ContainerFile:
         r"""Retrieve a container file
 
-        Returns the metadata of a single file under a sandbox session prefix.
+        Returns the metadata of a single file in a container.
 
-        :param session_id: The sandbox session id, exactly as stored — a restarted session has its own `-r<nonce>`-suffixed id.
+        :param container_id: The canonical container id, exactly as returned in a bash/shell tool result — a restarted session has its own `-r<nonce>`-suffixed id. A session-derived id is always `sess_` + the sanitized session key, which is not necessarily the raw session id that was sent.
         :param file_id: Container file id (`cfile_` + base64url of the file path).
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
@@ -360,13 +360,13 @@ class Containers(BaseSDK):
             http_referer=http_referer,
             x_open_router_title=x_open_router_title,
             x_open_router_categories=x_open_router_categories,
-            session_id=session_id,
+            container_id=container_id,
             file_id=file_id,
         )
 
         req = self._build_request(
             method="GET",
-            path="/containers/{session_id}/files/{file_id}",
+            path="/containers/{container_id}/files/{file_id}",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -469,7 +469,7 @@ class Containers(BaseSDK):
     async def get_container_file_async(
         self,
         *,
-        session_id: str,
+        container_id: str,
         file_id: str,
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
@@ -481,9 +481,9 @@ class Containers(BaseSDK):
     ) -> components.ContainerFile:
         r"""Retrieve a container file
 
-        Returns the metadata of a single file under a sandbox session prefix.
+        Returns the metadata of a single file in a container.
 
-        :param session_id: The sandbox session id, exactly as stored — a restarted session has its own `-r<nonce>`-suffixed id.
+        :param container_id: The canonical container id, exactly as returned in a bash/shell tool result — a restarted session has its own `-r<nonce>`-suffixed id. A session-derived id is always `sess_` + the sanitized session key, which is not necessarily the raw session id that was sent.
         :param file_id: Container file id (`cfile_` + base64url of the file path).
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
@@ -511,13 +511,13 @@ class Containers(BaseSDK):
             http_referer=http_referer,
             x_open_router_title=x_open_router_title,
             x_open_router_categories=x_open_router_categories,
-            session_id=session_id,
+            container_id=container_id,
             file_id=file_id,
         )
 
         req = self._build_request_async(
             method="GET",
-            path="/containers/{session_id}/files/{file_id}",
+            path="/containers/{container_id}/files/{file_id}",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -620,7 +620,7 @@ class Containers(BaseSDK):
     def download_container_file_content(
         self,
         *,
-        session_id: str,
+        container_id: str,
         file_id: str,
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
@@ -632,9 +632,9 @@ class Containers(BaseSDK):
     ) -> httpx.Response:
         r"""Download container file content
 
-        Streams the raw bytes of a file under a sandbox session prefix.
+        Streams the raw bytes of a file in a container.
 
-        :param session_id: The sandbox session id, exactly as stored — a restarted session has its own `-r<nonce>`-suffixed id.
+        :param container_id: The canonical container id, exactly as returned in a bash/shell tool result — a restarted session has its own `-r<nonce>`-suffixed id. A session-derived id is always `sess_` + the sanitized session key, which is not necessarily the raw session id that was sent.
         :param file_id: Container file id (`cfile_` + base64url of the file path).
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
@@ -662,13 +662,13 @@ class Containers(BaseSDK):
             http_referer=http_referer,
             x_open_router_title=x_open_router_title,
             x_open_router_categories=x_open_router_categories,
-            session_id=session_id,
+            container_id=container_id,
             file_id=file_id,
         )
 
         req = self._build_request(
             method="GET",
-            path="/containers/{session_id}/files/{file_id}/content",
+            path="/containers/{container_id}/files/{file_id}/content",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -790,7 +790,7 @@ class Containers(BaseSDK):
     async def download_container_file_content_async(
         self,
         *,
-        session_id: str,
+        container_id: str,
         file_id: str,
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
@@ -802,9 +802,9 @@ class Containers(BaseSDK):
     ) -> httpx.Response:
         r"""Download container file content
 
-        Streams the raw bytes of a file under a sandbox session prefix.
+        Streams the raw bytes of a file in a container.
 
-        :param session_id: The sandbox session id, exactly as stored — a restarted session has its own `-r<nonce>`-suffixed id.
+        :param container_id: The canonical container id, exactly as returned in a bash/shell tool result — a restarted session has its own `-r<nonce>`-suffixed id. A session-derived id is always `sess_` + the sanitized session key, which is not necessarily the raw session id that was sent.
         :param file_id: Container file id (`cfile_` + base64url of the file path).
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
@@ -832,13 +832,13 @@ class Containers(BaseSDK):
             http_referer=http_referer,
             x_open_router_title=x_open_router_title,
             x_open_router_categories=x_open_router_categories,
-            session_id=session_id,
+            container_id=container_id,
             file_id=file_id,
         )
 
         req = self._build_request_async(
             method="GET",
-            path="/containers/{session_id}/files/{file_id}/content",
+            path="/containers/{container_id}/files/{file_id}/content",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
