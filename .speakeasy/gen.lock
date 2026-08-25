@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c48cf606-fb42-4a45-9c23-8f0555307828
 management:
-  docChecksum: 8921a22ee9a28c5cd98b924a272e809e
+  docChecksum: 6b5d19b1320aae9ec59bd5bc93e4b2ef
   docVersion: 1.0.0
   speakeasyVersion: 1.787.0
   generationVersion: 2.914.0
-  releaseVersion: 1.1.85
-  configChecksum: 056db9012f4a842d5c3fbcf891459fe3
+  releaseVersion: 1.1.86
+  configChecksum: 9fb5efeed75ca7f11498acfade7c8c70
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
 persistentEdits:
-  generation_id: 86f35643-8d5a-4437-9448-84a67826db84
-  pristine_commit_hash: 38f3a057898aac5a1b7148d458af890d5a2f8ebd
-  pristine_tree_hash: cc383fb366cc3db32cb2bb5e6a6492a13d9da573
+  generation_id: 12541bfd-568a-479a-adbd-3e0d9f758130
+  pristine_commit_hash: 81cdfa3d8c75fa66f62f7314446cdc36c15d106a
+  pristine_tree_hash: 37a5f9ab483b37d0829cbf887d16a6a9f4383349
 features:
   python:
     acceptHeaders: 3.0.0
@@ -7354,8 +7354,8 @@ trackedFiles:
     pristine_git_object: 7571e2581a73919541d9712f6c1f88f9c0d2b4c9
   docs/sdks/rerank/README.mdx:
     id: 68cdfc7f7dca
-    last_write_checksum: sha1:e72927c64eb545386bb50e9d30e8092392f2eb0b
-    pristine_git_object: cd1b341b1b7c0284b9ba9b102bd8020e0d7ce707
+    last_write_checksum: sha1:6dded21b8567278fa801df5081cca63a1e64ff85
+    pristine_git_object: 68f6454a9155aaebe1650a613fd40fc7b2b5a681
   docs/sdks/responses/README.mdx:
     id: abab319e080e
     last_write_checksum: sha1:786e6be086f66f9262e19d6bbf8e32d726bea076
@@ -7366,16 +7366,16 @@ trackedFiles:
     pristine_git_object: 89918692e893f665f65a870440659a63ab821693
   docs/sdks/stt/README.mdx:
     id: 190b0dc9a5d1
-    last_write_checksum: sha1:0280bf119668798bf78f662fd41364b573c7fe53
-    pristine_git_object: 9d4c7d757474f113855db5b61136b5add011b144
+    last_write_checksum: sha1:1602f411670a9626e157cf37df8f3a90da15a4a6
+    pristine_git_object: ba30223a27208904a3a69690ae214d3f32441a39
   docs/sdks/tts/README.mdx:
     id: cd1132543884
-    last_write_checksum: sha1:b7189079cedd061c9c5cacb2351a803bedea06dc
-    pristine_git_object: 9cf862e8536690785ef58c199f61c87f8945b574
+    last_write_checksum: sha1:ff8413c231ba1a6c59ba2d30fdb1186067dbc229
+    pristine_git_object: afdf10028c5fb35ec021a71f6c943abbfa96af49
   docs/sdks/videogeneration/README.mdx:
     id: 9a8fa04c3872
-    last_write_checksum: sha1:795a3adc37bbdd3fb375708e95faa080fd614934
-    pristine_git_object: 37da69173c4be1ca80538e4c60b1fa356c77a790
+    last_write_checksum: sha1:90b6f8ccf08b13fb7e1a011306972147cc5eeac7
+    pristine_git_object: b8a724406e6cacb0ecfef890499e727808961000
   docs/sdks/workspaces/README.mdx:
     id: 0c75d023ef6b
     last_write_checksum: sha1:c079746a64ae6d17d275a869566c100b54d955bf
@@ -7386,8 +7386,8 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:d456d250d743e1fc424fe4b564385da9e801d20d
-    pristine_git_object: b06203b5c1c269dd0b8c45485ce66cf71e94f528
+    last_write_checksum: sha1:b90a63cafd4e584737c9ada6a66265ff587e9573
+    pristine_git_object: b6bb5fcafbb2e81b5eb1dae54aa8b2753bd50fb3
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77f44b60b98bc126557ec27391f91dfba764bb54
@@ -7414,8 +7414,8 @@ trackedFiles:
     pristine_git_object: 86713cfea633e09d33b3d4e65281071fe20e6137
   src/openrouter/_version.py:
     id: d8d15ad6c586
-    last_write_checksum: sha1:c0a63eddf73b86cd05f70c11ee50271a68efc6ad
-    pristine_git_object: 2edbb2f02918b24e6d5135393d66d3abfb572228
+    last_write_checksum: sha1:8bcf1f2f255e49404d1b8c7560b3d1e0ab6449b2
+    pristine_git_object: d6b53c21f23e732ffcff2894fc0e638c26463be7
   src/openrouter/analytics.py:
     id: cb406b5aaabb
     last_write_checksum: sha1:1e0004d8d1d5d797e2b54cd1cabeb7f9489d08e9
@@ -10494,8 +10494,8 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   src/openrouter/rerank.py:
     id: 8dbc1be8d76f
-    last_write_checksum: sha1:948125ce756a89cc0fb82dac1fc12b90cf2498b9
-    pristine_git_object: 76378ffba1806e0ca66fc873db1a568be0becebb
+    last_write_checksum: sha1:4236f8079e5f198ddcd79058a76c0753f7f685bc
+    pristine_git_object: cfd7de57d6bcab6642d5ccd442f8388a3a300f0c
   src/openrouter/responses.py:
     id: f2108fb635e1
     last_write_checksum: sha1:27af78b7cedb1691bb88a71271808d1e4685c2bb
@@ -10514,12 +10514,12 @@ trackedFiles:
     pristine_git_object: 26433165a0b1c25d7bd3115b9b129b18f2dc9387
   src/openrouter/stt.py:
     id: fc0c2f669423
-    last_write_checksum: sha1:155645ebde81f259a2b94811dd8d5581ccb970ac
-    pristine_git_object: 01f61f8dcefb140225a8919a0ad5416c4ce9262d
+    last_write_checksum: sha1:6fb43c31e930b653d0eb809f99e250a7cd7601ca
+    pristine_git_object: 932ea2f623bf9026e5c538d6ea387f06e73a86cd
   src/openrouter/tts.py:
     id: 5055d4b95f1d
-    last_write_checksum: sha1:d6cf60a07db7400137815b5cdf4f84a34b95f622
-    pristine_git_object: 96d5f3a8df0f888937b15e30bbef255aa366837b
+    last_write_checksum: sha1:973737d1461d3723e9de63f1f3684aae573cc3e4
+    pristine_git_object: 4c5f06473916e17766269b82a3c2ae68ce73bb1f
   src/openrouter/types/__init__.py:
     id: 5eab536205b7
     last_write_checksum: sha1:f9ad14217f832e74f594285960125add50324be9
@@ -10610,8 +10610,8 @@ trackedFiles:
     pristine_git_object: dae01a44384ac3bc13ae07453a053bf6c898ebe3
   src/openrouter/video_generation.py:
     id: d0a90c1b8efe
-    last_write_checksum: sha1:25e4ca847d4139f7e33d5611009d2b19e3f7f3ac
-    pristine_git_object: d6a2f5b25bc1bbad8bf5faa911f453f65fb0465f
+    last_write_checksum: sha1:fc044e1af054b23fc415f9d7f40303b96678ab19
+    pristine_git_object: d7a5997d75ebb156d61342c8cf55c00cee9e210d
   src/openrouter/workspaces.py:
     id: cd6c533b1802
     last_write_checksum: sha1:b796f38262144b21ebf8f77e0a842903b4098e24
@@ -11257,6 +11257,8 @@ examples:
           application/json: {"error": {"code": 524, "message": "Request timed out. Please try again later."}}
         "529":
           application/json: {"error": {"code": 529, "message": "Provider returned error"}}
+        "413":
+          application/json: {"error": {"code": 413, "message": "Request payload too large"}}
   createVideos:
     speakeasy-default-create-videos:
       requestBody:
@@ -11276,6 +11278,8 @@ examples:
           application/json: {"error": {"code": 429, "message": "Rate limit exceeded"}}
         "500":
           application/json: {"error": {"code": 500, "message": "Internal Server Error"}}
+        "413":
+          application/json: {"error": {"code": 413, "message": "Request payload too large"}}
   getVideos:
     speakeasy-default-get-videos:
       parameters:
@@ -11375,6 +11379,8 @@ examples:
           application/json: {"error": {"code": 524, "message": "Request timed out. Please try again later."}}
         "529":
           application/json: {"error": {"code": 529, "message": "Provider returned error"}}
+        "413":
+          application/json: {"error": {"code": 413, "message": "Request payload too large"}}
   createAudioTranscriptions:
     speakeasy-default-create-audio-transcriptions:
       requestBody:
@@ -11402,6 +11408,8 @@ examples:
           application/json: {"error": {"code": 524, "message": "Request timed out. Please try again later."}}
         "529":
           application/json: {"error": {"code": 529, "message": "Provider returned error"}}
+        "413":
+          application/json: {"error": {"code": 413, "message": "Request payload too large"}}
     speakeasy-default-create-audio-transcriptions-multipart:
       requestBody:
         multipart/form-data: {"file": "x-file: example.file", "model": "Escalade"}
@@ -11428,6 +11436,8 @@ examples:
           application/json: {"error": {"code": 524, "message": "Request timed out. Please try again later."}}
         "529":
           application/json: {"error": {"code": 529, "message": "Provider returned error"}}
+        "413":
+          application/json: {"error": {"code": 413, "message": "Request payload too large"}}
   listBYOKKeys:
     speakeasy-default-list-BYOK-keys:
       parameters:
@@ -12449,4 +12459,8 @@ examples:
 examplesVersion: 1.0.2
 releaseNotes: |
   ## Python SDK Changes:
-  * `open_router.containers.promote_container_file()`: **Added**
+  * `open_router.tts.create_speech()`:  `error.status[413]` **Added**
+  * `open_router.stt.create_transcription()`:  `error.status[413]` **Added**
+  * `open_router.stt.create_transcription_multipart()`:  `error.status[413]` **Added**
+  * `open_router.rerank.rerank()`:  `error.status[413]` **Added**
+  * `open_router.video_generation.generate()`:  `error.status[413]` **Added**
