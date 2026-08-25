@@ -20,7 +20,7 @@ class ShellServerToolConfigTypedDict(TypedDict):
     environment: NotRequired[ShellServerToolEnvironmentTypedDict]
     r"""Server-side execution environment for the shell tool. Only container-backed environments are supported; \"local\" shells are not."""
     sleep_after_seconds: NotRequired[int]
-    r"""How long (in seconds) the container stays warm after its last command before sleeping, freeing its capacity slot. Idle-based: each command renews the timer. Defaults to 900 (15 minutes); capped at 2592000 (30 days)."""
+    r"""How long (in seconds) the container stays warm after its last command before sleeping, freeing its capacity slot. Idle-based: each command renews the timer. Defaults to 900 (15 minutes); capped at 14400 (4 hours)."""
 
 
 class ShellServerToolConfig(BaseModel):
@@ -33,7 +33,7 @@ class ShellServerToolConfig(BaseModel):
     r"""Server-side execution environment for the shell tool. Only container-backed environments are supported; \"local\" shells are not."""
 
     sleep_after_seconds: Optional[int] = None
-    r"""How long (in seconds) the container stays warm after its last command before sleeping, freeing its capacity slot. Idle-based: each command renews the timer. Defaults to 900 (15 minutes); capped at 2592000 (30 days)."""
+    r"""How long (in seconds) the container stays warm after its last command before sleeping, freeing its capacity slot. Idle-based: each command renews the timer. Defaults to 900 (15 minutes); capped at 14400 (4 hours)."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
