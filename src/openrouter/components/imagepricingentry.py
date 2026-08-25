@@ -21,6 +21,7 @@ Billable = Union[
 
 Unit = Union[
     Literal[
+        "request",
         "image",
         "megapixel",
         "token",
