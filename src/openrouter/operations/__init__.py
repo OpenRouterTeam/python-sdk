@@ -729,6 +729,12 @@ if TYPE_CHECKING:
         ListWorkspacesResponse,
         ListWorkspacesResponseTypedDict,
     )
+    from .promotecontainerfile import (
+        PromoteContainerFileGlobals,
+        PromoteContainerFileGlobalsTypedDict,
+        PromoteContainerFileRequest,
+        PromoteContainerFileRequestTypedDict,
+    )
     from .queryanalytics import (
         ClassifierDimensions,
         ClassifierDimensionsTypedDict,
@@ -1382,6 +1388,10 @@ __all__ = [
     "OrderBy",
     "OrderByTypedDict",
     "Period",
+    "PromoteContainerFileGlobals",
+    "PromoteContainerFileGlobalsTypedDict",
+    "PromoteContainerFileRequest",
+    "PromoteContainerFileRequestTypedDict",
     "PromptTokensDetails",
     "PromptTokensDetailsTypedDict",
     "Provider",
@@ -2028,6 +2038,10 @@ _dynamic_imports: dict[str, str] = {
     "ListWorkspacesRequestTypedDict": ".listworkspaces",
     "ListWorkspacesResponse": ".listworkspaces",
     "ListWorkspacesResponseTypedDict": ".listworkspaces",
+    "PromoteContainerFileGlobals": ".promotecontainerfile",
+    "PromoteContainerFileGlobalsTypedDict": ".promotecontainerfile",
+    "PromoteContainerFileRequest": ".promotecontainerfile",
+    "PromoteContainerFileRequestTypedDict": ".promotecontainerfile",
     "ClassifierDimensions": ".queryanalytics",
     "ClassifierDimensionsTypedDict": ".queryanalytics",
     "ClassifierFilters": ".queryanalytics",
