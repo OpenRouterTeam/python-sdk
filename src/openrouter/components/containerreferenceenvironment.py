@@ -7,7 +7,7 @@ from .containernetworkpolicy import (
 )
 from openrouter.types import BaseModel, UNSET_SENTINEL
 from pydantic import model_serializer
-from typing import Literal, Optional
+from typing import List, Literal, Optional
 from typing_extensions import NotRequired, TypedDict
 
 
@@ -20,6 +20,8 @@ class ContainerReferenceEnvironmentTypedDict(TypedDict):
     container_id: str
     r"""Canonical container id to reuse (max 40 characters, letters/digits/underscores/hyphens). Any container_id previously returned by a bash or shell tool result works here and reattaches to the same container and files — including session-derived ids (sess_...) and generation-derived ids (gen_...). Note that a session-derived id is always sess_ + the sanitized session key, which is not necessarily the raw session id you sent. Using the same container_id from both the bash and shell tools shares the same files, with last-write-wins when both flush concurrently. A fresh name creates a new persistent container. Containers are always scoped to your account and workspace."""
     type: ContainerReferenceEnvironmentType
+    file_ids: NotRequired[List[str]]
+    r"""Workspace file ids (or_file_…) to attach into the container before the first command runs. Each file is copied to the container home as a writable copy named {last 8 characters of the file id}-{base filename} (a file stored as data/report.csv with id or_file_…NR6q4V8w attaches to ~/NR6q4V8w-report.csv), so same-named files never collide; the source document is never modified. Unknown, foreign, or malformed ids fail the request with a 400 before any command executes. Max 20 ids."""
     network_policy: NotRequired[ContainerNetworkPolicyTypedDict]
     r"""Network egress policy for the container. \"disabled\" blocks all outbound internet; \"allowlist\" permits only hosts matching the listed hostnames or * glob patterns (ports 80/443, DNS via Cloudflare resolvers). The policy is fixed when a container starts: sending a different policy to a warm container fails the request with a 409. Omitted: defaults to \"disabled\" (no outbound internet). For unrestricted egress, use an allowlist of [\"*\"]."""
 
@@ -32,12 +34,15 @@ class ContainerReferenceEnvironment(BaseModel):
 
     type: ContainerReferenceEnvironmentType
 
+    file_ids: Optional[List[str]] = None
+    r"""Workspace file ids (or_file_…) to attach into the container before the first command runs. Each file is copied to the container home as a writable copy named {last 8 characters of the file id}-{base filename} (a file stored as data/report.csv with id or_file_…NR6q4V8w attaches to ~/NR6q4V8w-report.csv), so same-named files never collide; the source document is never modified. Unknown, foreign, or malformed ids fail the request with a 400 before any command executes. Max 20 ids."""
+
     network_policy: Optional[ContainerNetworkPolicy] = None
     r"""Network egress policy for the container. \"disabled\" blocks all outbound internet; \"allowlist\" permits only hosts matching the listed hostnames or * glob patterns (ports 80/443, DNS via Cloudflare resolvers). The policy is fixed when a container starts: sending a different policy to a warm container fails the request with a 409. Omitted: defaults to \"disabled\" (no outbound internet). For unrestricted egress, use an allowlist of [\"*\"]."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["network_policy"])
+        optional_fields = set(["file_ids", "network_policy"])
         serialized = handler(self)
         m = {}
 
