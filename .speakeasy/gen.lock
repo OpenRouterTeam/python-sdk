@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c48cf606-fb42-4a45-9c23-8f0555307828
 management:
-  docChecksum: f6c5b72912f9dd85cb89099bbfad9fc0
+  docChecksum: 1399a961b6d0a2f35e428d48864064db
   docVersion: 1.0.0
   speakeasyVersion: 1.787.0
   generationVersion: 2.914.0
-  releaseVersion: 1.1.89
-  configChecksum: 9fc9f8573ca9396646ca57e9f26a17fe
+  releaseVersion: 1.1.90
+  configChecksum: c28142f462e8cc19ac66f39fc501f7f9
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
 persistentEdits:
-  generation_id: 2793dbee-3635-4a87-9840-16bbb9eee245
-  pristine_commit_hash: 07fc4a0dc54d733216eaf7ac5000552205fd48d7
-  pristine_tree_hash: 5e217b5ee0c32e6aac19d851c299d1dfe0e7c163
+  generation_id: 67c4ddad-6c0c-4461-a2ac-66fdcbe1d53d
+  pristine_commit_hash: 96cb29d1679688f60c40ec3f5d598677500e69d9
+  pristine_tree_hash: 61171c160980f9d8cdf063075fa9e59bad5eb612
 features:
   python:
     acceptHeaders: 3.0.0
@@ -2182,8 +2182,8 @@ trackedFiles:
     pristine_git_object: 7b7d7a350209a88f9a688d1fab6d88fc4754664e
   docs/components/fusionplugin.mdx:
     id: 91c7b4638c7e
-    last_write_checksum: sha1:870595df572ae4a17b4daee349e13d8193c57241
-    pristine_git_object: 32a6b478678908aa7a2df9cc15398a4490741be3
+    last_write_checksum: sha1:5a076ac40081a043497700e83dbd7c64d3b7dde1
+    pristine_git_object: 0cb9761c99aa8ba6332e3b64357f5b704427e467
   docs/components/fusionpluginid.mdx:
     id: 2b90bfd2d611
     last_write_checksum: sha1:8111a4424197eb86dfccedfdc798d1a2b5a1c39e
@@ -4306,8 +4306,8 @@ trackedFiles:
     pristine_git_object: 5c5675beaf31e5b109617040c2d6eb9055f891d7
   docs/components/presetenum.mdx:
     id: 5c9d69c551a8
-    last_write_checksum: sha1:38f3fee4b72b586b64dcf7bca9e7baa32a668d19
-    pristine_git_object: 5c2dac2ed572fcaeccf9c195fd2695d23e065ecb
+    last_write_checksum: sha1:2d1f19ad66e100482793ba915cd950824bd5133e
+    pristine_git_object: 210727eae53c2ed5d2e54972f941e0504621ef60
   docs/components/presetstatus.mdx:
     id: cb4faf64ee85
     last_write_checksum: sha1:7a2f2619305e77274fa23eb6a68e17c122a0fb38
@@ -7386,8 +7386,8 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:45d8374b9430f85dd1dde25cbf505b77f8931d57
-    pristine_git_object: a43ad28ca2b08dda34a73dd2cb55ee69a52b3cd9
+    last_write_checksum: sha1:78dd517a5da7ba579c7184883d6bd0b150ff2eaa
+    pristine_git_object: 0eb05d43a029c6289e4849b125b04f2c4c3767ae
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77f44b60b98bc126557ec27391f91dfba764bb54
@@ -7414,8 +7414,8 @@ trackedFiles:
     pristine_git_object: 86713cfea633e09d33b3d4e65281071fe20e6137
   src/openrouter/_version.py:
     id: d8d15ad6c586
-    last_write_checksum: sha1:2ba3a264350bdc9e4664fa885528912f37db700f
-    pristine_git_object: e162234afa195293c69464a1bb84b8475dab9c27
+    last_write_checksum: sha1:5a8813e8e1a4434589fa8e4e877fa3640aaf2a9a
+    pristine_git_object: a78909fc4ea77e5b6e84a2b5ff14308679ec38eb
   src/openrouter/analytics.py:
     id: cb406b5aaabb
     last_write_checksum: sha1:1e0004d8d1d5d797e2b54cd1cabeb7f9489d08e9
@@ -8406,8 +8406,8 @@ trackedFiles:
     pristine_git_object: 2836ce37ac58b2b90568bbd6247fa52b982ef131
   src/openrouter/components/fusionplugin.py:
     id: c0b307f15bb0
-    last_write_checksum: sha1:ccfc15d5b3295c565987f457c86731a46e3f61bc
-    pristine_git_object: b3762615f700ff0be163417f4e88cf5b9083f0b2
+    last_write_checksum: sha1:a2ad5fda5b8afec32752b0fdc9b7332b9f0454a6
+    pristine_git_object: afd9a2b9eefd33f6b5b377211a11b0b4a510d164
   src/openrouter/components/fusionservertool_openrouter.py:
     id: a1d6d3aefe6f
     last_write_checksum: sha1:b1e560ea3ed00d00dce53b8d5897e59c7face470
@@ -12457,6 +12457,3 @@ examples:
         "503":
           application/json: {"error": {"code": 503, "message": "Service temporarily unavailable"}}
 examplesVersion: 1.0.2
-releaseNotes: |
-  ## Python SDK Changes:
-  * `open_router.images.list_model_endpoints()`:  `response.endpoints[].pricing[].unit.enum(request)` **Added**
