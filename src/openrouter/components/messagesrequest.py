@@ -452,15 +452,15 @@ class ThinkingAdaptive(BaseModel):
         return m
 
 
-TypeDisabled = Literal["disabled",]
+ThinkingTypeDisabled = Literal["disabled",]
 
 
 class ThinkingDisabledTypedDict(TypedDict):
-    type: TypeDisabled
+    type: ThinkingTypeDisabled
 
 
 class ThinkingDisabled(BaseModel):
-    type: TypeDisabled
+    type: ThinkingTypeDisabled
 
 
 TypeEnabled = Literal["enabled",]
