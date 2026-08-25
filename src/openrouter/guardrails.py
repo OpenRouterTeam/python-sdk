@@ -421,7 +421,7 @@ class Guardrails(BaseSDK):
         :param ignored_models: Array of model identifiers to exclude from routing (slug or canonical_slug accepted)
         :param ignored_providers: List of provider IDs to exclude from routing
         :param include_byok_in_budgets: Whether BYOK (bring-your-own-key) inference spend counts toward this guardrail's limit_usd, in addition to OpenRouter credit spend. Defaults to false.
-        :param limit_usd: Spending limit in USD
+        :param limit_usd: Spending limit in USD. Must be provided together with `reset_interval`: a request that sets only one of the two is rejected with a 400.
         :param reset_interval: Interval at which the limit resets (daily, weekly, monthly)
         :param workspace_id: The workspace to create the guardrail in. When omitted, the guardrail is created in the default workspace; if that default has been deleted, the request returns a 400 and you must pass `workspace_id` explicitly. This only places the guardrail in the workspace; the created guardrail enforces nothing for that workspace's traffic until it is assigned to API keys or members. To restrict all traffic in a workspace, update the workspace's default guardrail instead.
         :param retries: Override the default retry configuration for this method
@@ -647,7 +647,7 @@ class Guardrails(BaseSDK):
         :param ignored_models: Array of model identifiers to exclude from routing (slug or canonical_slug accepted)
         :param ignored_providers: List of provider IDs to exclude from routing
         :param include_byok_in_budgets: Whether BYOK (bring-your-own-key) inference spend counts toward this guardrail's limit_usd, in addition to OpenRouter credit spend. Defaults to false.
-        :param limit_usd: Spending limit in USD
+        :param limit_usd: Spending limit in USD. Must be provided together with `reset_interval`: a request that sets only one of the two is rejected with a 400.
         :param reset_interval: Interval at which the limit resets (daily, weekly, monthly)
         :param workspace_id: The workspace to create the guardrail in. When omitted, the guardrail is created in the default workspace; if that default has been deleted, the request returns a 400 and you must pass `workspace_id` explicitly. This only places the guardrail in the workspace; the created guardrail enforces nothing for that workspace's traffic until it is assigned to API keys or members. To restrict all traffic in a workspace, update the workspace's default guardrail instead.
         :param retries: Override the default retry configuration for this method

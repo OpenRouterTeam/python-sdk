@@ -60,7 +60,7 @@ class CreateGuardrailRequestTypedDict(TypedDict):
     include_byok_in_budgets: NotRequired[bool]
     r"""Whether BYOK (bring-your-own-key) inference spend counts toward this guardrail's limit_usd, in addition to OpenRouter credit spend. Defaults to false."""
     limit_usd: NotRequired[Nullable[float]]
-    r"""Spending limit in USD"""
+    r"""Spending limit in USD. Must be provided together with `reset_interval`: a request that sets only one of the two is rejected with a 400."""
     reset_interval: NotRequired[Nullable[GuardrailInterval]]
     r"""Interval at which the limit resets (daily, weekly, monthly)"""
     workspace_id: NotRequired[str]
@@ -130,7 +130,7 @@ class CreateGuardrailRequest(BaseModel):
     r"""Whether BYOK (bring-your-own-key) inference spend counts toward this guardrail's limit_usd, in addition to OpenRouter credit spend. Defaults to false."""
 
     limit_usd: OptionalNullable[float] = UNSET
-    r"""Spending limit in USD"""
+    r"""Spending limit in USD. Must be provided together with `reset_interval`: a request that sets only one of the two is rejected with a 400."""
 
     reset_interval: OptionalNullable[GuardrailInterval] = UNSET
     r"""Interval at which the limit resets (daily, weekly, monthly)"""
