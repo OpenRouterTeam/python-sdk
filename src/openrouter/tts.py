@@ -179,6 +179,14 @@ class TTS(BaseSDK):
                 errors.NotFoundResponseErrorData, http_res, http_res_text
             )
             raise errors.NotFoundResponseError(response_data, http_res, http_res_text)
+        if utils.match_response(http_res, "413", "application/json"):
+            http_res_text = utils.stream_to_text(http_res)
+            response_data = unmarshal_json_response(
+                errors.PayloadTooLargeResponseErrorData, http_res, http_res_text
+            )
+            raise errors.PayloadTooLargeResponseError(
+                response_data, http_res, http_res_text
+            )
         if utils.match_response(http_res, "429", "application/json"):
             http_res_text = utils.stream_to_text(http_res)
             response_data = unmarshal_json_response(
@@ -407,6 +415,14 @@ class TTS(BaseSDK):
                 errors.NotFoundResponseErrorData, http_res, http_res_text
             )
             raise errors.NotFoundResponseError(response_data, http_res, http_res_text)
+        if utils.match_response(http_res, "413", "application/json"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            response_data = unmarshal_json_response(
+                errors.PayloadTooLargeResponseErrorData, http_res, http_res_text
+            )
+            raise errors.PayloadTooLargeResponseError(
+                response_data, http_res, http_res_text
+            )
         if utils.match_response(http_res, "429", "application/json"):
             http_res_text = await utils.stream_to_text_async(http_res)
             response_data = unmarshal_json_response(

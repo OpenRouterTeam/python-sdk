@@ -177,6 +177,11 @@ class Rerank(BaseSDK):
                 errors.NotFoundResponseErrorData, http_res
             )
             raise errors.NotFoundResponseError(response_data, http_res)
+        if utils.match_response(http_res, "413", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.PayloadTooLargeResponseErrorData, http_res
+            )
+            raise errors.PayloadTooLargeResponseError(response_data, http_res)
         if utils.match_response(http_res, "429", "application/json"):
             response_data = unmarshal_json_response(
                 errors.TooManyRequestsResponseErrorData, http_res
@@ -379,6 +384,11 @@ class Rerank(BaseSDK):
                 errors.NotFoundResponseErrorData, http_res
             )
             raise errors.NotFoundResponseError(response_data, http_res)
+        if utils.match_response(http_res, "413", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.PayloadTooLargeResponseErrorData, http_res
+            )
+            raise errors.PayloadTooLargeResponseError(response_data, http_res)
         if utils.match_response(http_res, "429", "application/json"):
             response_data = unmarshal_json_response(
                 errors.TooManyRequestsResponseErrorData, http_res
