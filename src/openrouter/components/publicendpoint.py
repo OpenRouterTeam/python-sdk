@@ -138,6 +138,7 @@ class PublicEndpointTypedDict(TypedDict):
     latency_last_30m: Nullable[PercentileStatsTypedDict]
     r"""Latency percentiles in milliseconds over the last 30 minutes. Latency measures time to first token. Only visible when authenticated with an API key or cookie; returns null for unauthenticated requests."""
     max_completion_tokens: Nullable[int]
+    r"""Maximum completion tokens for this endpoint. Input and output tokens share the context window, so the effective maximum output for a request is further limited by the context remaining after input tokens."""
     max_prompt_tokens: Nullable[int]
     model_id: str
     r"""The unique identifier for the model (permaslug)"""
@@ -169,6 +170,7 @@ class PublicEndpoint(BaseModel):
     r"""Latency percentiles in milliseconds over the last 30 minutes. Latency measures time to first token. Only visible when authenticated with an API key or cookie; returns null for unauthenticated requests."""
 
     max_completion_tokens: Nullable[int]
+    r"""Maximum completion tokens for this endpoint. Input and output tokens share the context window, so the effective maximum output for a request is further limited by the context remaining after input tokens."""
 
     max_prompt_tokens: Nullable[int]
 

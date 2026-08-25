@@ -20,7 +20,7 @@ class TopProviderInfoTypedDict(TypedDict):
     context_length: NotRequired[Nullable[int]]
     r"""Context length from the top provider"""
     max_completion_tokens: NotRequired[Nullable[int]]
-    r"""Maximum completion tokens from the top provider"""
+    r"""Maximum completion tokens from the top provider. Input and output tokens share the context window, so the effective maximum output for a request is further limited by the context remaining after input tokens."""
 
 
 class TopProviderInfo(BaseModel):
@@ -33,7 +33,7 @@ class TopProviderInfo(BaseModel):
     r"""Context length from the top provider"""
 
     max_completion_tokens: OptionalNullable[int] = UNSET
-    r"""Maximum completion tokens from the top provider"""
+    r"""Maximum completion tokens from the top provider. Input and output tokens share the context window, so the effective maximum output for a request is further limited by the context remaining after input tokens."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
