@@ -12,6 +12,7 @@ ContentFilterBuiltinSlug = Union[
         "ssn",
         "credit-card",
         "ip-address",
+        "secrets",
         "person-name",
         "address",
         "regex-prompt-injection",
