@@ -125,7 +125,7 @@ class Files(BaseSDK):
                     self.sdk_configuration.security, components.Security
                 ),
                 tags=["Files"],
-                extensions={"x-hidden": True},
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -330,7 +330,7 @@ class Files(BaseSDK):
                     self.sdk_configuration.security, components.Security
                 ),
                 tags=["Files"],
-                extensions={"x-hidden": True},
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -532,7 +532,7 @@ class Files(BaseSDK):
                     self.sdk_configuration.security, components.Security
                 ),
                 tags=["Files"],
-                extensions={"x-hidden": True},
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -700,7 +700,7 @@ class Files(BaseSDK):
                     self.sdk_configuration.security, components.Security
                 ),
                 tags=["Files"],
-                extensions={"x-hidden": True},
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -859,7 +859,7 @@ class Files(BaseSDK):
                     self.sdk_configuration.security, components.Security
                 ),
                 tags=["Files"],
-                extensions={"x-hidden": True},
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1013,7 +1013,7 @@ class Files(BaseSDK):
                     self.sdk_configuration.security, components.Security
                 ),
                 tags=["Files"],
-                extensions={"x-hidden": True},
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1167,7 +1167,7 @@ class Files(BaseSDK):
                     self.sdk_configuration.security, components.Security
                 ),
                 tags=["Files"],
-                extensions={"x-hidden": True},
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1321,7 +1321,7 @@ class Files(BaseSDK):
                     self.sdk_configuration.security, components.Security
                 ),
                 tags=["Files"],
-                extensions={"x-hidden": True},
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1475,7 +1475,7 @@ class Files(BaseSDK):
                     self.sdk_configuration.security, components.Security
                 ),
                 tags=["Files"],
-                extensions={"x-hidden": True},
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1654,7 +1654,7 @@ class Files(BaseSDK):
                     self.sdk_configuration.security, components.Security
                 ),
                 tags=["Files"],
-                extensions={"x-hidden": True},
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),

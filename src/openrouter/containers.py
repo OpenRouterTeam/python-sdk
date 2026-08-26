@@ -109,7 +109,7 @@ class Containers(BaseSDK):
                     self.sdk_configuration.security, components.Security
                 ),
                 tags=["Containers"],
-                extensions={"x-hidden": True},
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -260,7 +260,7 @@ class Containers(BaseSDK):
                     self.sdk_configuration.security, components.Security
                 ),
                 tags=["Containers"],
-                extensions={"x-hidden": True},
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -408,7 +408,7 @@ class Containers(BaseSDK):
                     self.sdk_configuration.security, components.Security
                 ),
                 tags=["Containers"],
-                extensions={"x-hidden": True},
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -559,7 +559,7 @@ class Containers(BaseSDK):
                     self.sdk_configuration.security, components.Security
                 ),
                 tags=["Containers"],
-                extensions={"x-hidden": True},
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -710,7 +710,7 @@ class Containers(BaseSDK):
                     self.sdk_configuration.security, components.Security
                 ),
                 tags=["Containers"],
-                extensions={"x-hidden": True},
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -880,7 +880,7 @@ class Containers(BaseSDK):
                     self.sdk_configuration.security, components.Security
                 ),
                 tags=["Containers"],
-                extensions={"x-hidden": True},
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1050,7 +1050,7 @@ class Containers(BaseSDK):
                     self.sdk_configuration.security, components.Security
                 ),
                 tags=["Containers"],
-                extensions={"x-hidden": True},
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1206,7 +1206,7 @@ class Containers(BaseSDK):
                     self.sdk_configuration.security, components.Security
                 ),
                 tags=["Containers"],
-                extensions={"x-hidden": True},
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
