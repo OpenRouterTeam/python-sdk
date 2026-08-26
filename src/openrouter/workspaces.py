@@ -694,7 +694,7 @@ class Workspaces(BaseSDK):
     ) -> components.DeleteWorkspaceResponse:
         r"""Delete a workspace
 
-        Delete an existing workspace. Workspaces with active API keys cannot be deleted; remove the keys first. Deleting the default workspace is not yet generally available; callers not enabled for it receive a 403 while the capability rolls out. Deleting any workspace permanently deletes its budgets and guardrails and disables its classifiers and broadcast destinations. [Management key](/docs/guides/overview/auth/management-api-keys) required.
+        Delete an existing workspace. Workspaces with active API keys cannot be deleted; remove the keys first. Deleting the default workspace requires confirm_default_workspace_deletion=true. Deleting any workspace permanently deletes its budgets and guardrails and disables its classifiers and broadcast destinations. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param id: The workspace ID (UUID) or slug
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
@@ -832,7 +832,7 @@ class Workspaces(BaseSDK):
     ) -> components.DeleteWorkspaceResponse:
         r"""Delete a workspace
 
-        Delete an existing workspace. Workspaces with active API keys cannot be deleted; remove the keys first. Deleting the default workspace is not yet generally available; callers not enabled for it receive a 403 while the capability rolls out. Deleting any workspace permanently deletes its budgets and guardrails and disables its classifiers and broadcast destinations. [Management key](/docs/guides/overview/auth/management-api-keys) required.
+        Delete an existing workspace. Workspaces with active API keys cannot be deleted; remove the keys first. Deleting the default workspace requires confirm_default_workspace_deletion=true. Deleting any workspace permanently deletes its budgets and guardrails and disables its classifiers and broadcast destinations. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param id: The workspace ID (UUID) or slug
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
