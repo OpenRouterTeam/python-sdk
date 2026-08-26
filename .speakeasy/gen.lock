@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c48cf606-fb42-4a45-9c23-8f0555307828
 management:
-  docChecksum: f11d4c6cfe6b949e42b529edb05667b0
+  docChecksum: 73a58a0b5e128814055e915eac23ce7a
   docVersion: 1.0.0
   speakeasyVersion: 1.787.0
   generationVersion: 2.914.0
-  releaseVersion: 1.1.94
-  configChecksum: e1964393fe995aca63d38b9b8193505f
+  releaseVersion: 1.1.95
+  configChecksum: 4804315aee0e4b0d88be782248c0c42b
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
 persistentEdits:
-  generation_id: 94b6e956-9153-4519-825b-12fbe9b5d850
-  pristine_commit_hash: 1a1e80aa381e4c1499ef7200c5577fe2a533c58c
-  pristine_tree_hash: 92e09dd3e70b247f154a446c5636945505470b36
+  generation_id: bfe42f10-a1f2-4342-ad91-91b85bad6c71
+  pristine_commit_hash: 5b02ee023fd11d8cdcfa91540f483182dd396c5d
+  pristine_tree_hash: 87befbc3e04969a9a553c17f9ba72400b41d5370
 features:
   python:
     acceptHeaders: 3.0.0
@@ -1430,16 +1430,16 @@ trackedFiles:
     pristine_git_object: 99919bdcad18b5ecfcb2f9c4845b577154e78073
   docs/components/contentfilterbuiltinentry.mdx:
     id: 0d811c0a46a6
-    last_write_checksum: sha1:d5e4e053ab43277896291cc9c9d67c40d6cdcbb8
-    pristine_git_object: 5bdb1f6af9ce5a6a39e02f8069aec14bb261fcec
+    last_write_checksum: sha1:ea6d82edfb58685a7bd80270b12bf5ecc85cfe0e
+    pristine_git_object: 48678dc2c64916ea7b90104d5ce9439873637568
   docs/components/contentfilterbuiltinentryinput.mdx:
     id: 87ba5e6ba529
     last_write_checksum: sha1:8ac4a21b68b34a1ead858b19d4933ea0f9cd964f
     pristine_git_object: 28e250251c5033e3ee7fe7c142e474d4b3ec2993
   docs/components/contentfilterbuiltinslug.mdx:
     id: 80b519edd96c
-    last_write_checksum: sha1:746f45dad594dadabdcdbc87dfa3377fc588b852
-    pristine_git_object: 273ad6cb49690c8abc1620a6f4dd65f3ccf87789
+    last_write_checksum: sha1:ef8f94ca92433109d8ce4da86b1a7f8bc8a13ec0
+    pristine_git_object: 76125652209b61ec2def3efe9ee8a58a2fc28a69
   docs/components/contentfilterentry.mdx:
     id: e5d65035c6cb
     last_write_checksum: sha1:451e759051c72d90ef986c9b40caa30d1eea6d84
@@ -7394,8 +7394,8 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:a14b28971dbef730b045cf72430d0da880797884
-    pristine_git_object: d193f2266b13fc9b7c8a267907ee9f3b6a698389
+    last_write_checksum: sha1:745214d32e4fa86781d4792975ccc8ea45055e3f
+    pristine_git_object: ed00b56a5301e6bc7a762c3bd42df272ce1cd419
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77f44b60b98bc126557ec27391f91dfba764bb54
@@ -7422,8 +7422,8 @@ trackedFiles:
     pristine_git_object: 86713cfea633e09d33b3d4e65281071fe20e6137
   src/openrouter/_version.py:
     id: d8d15ad6c586
-    last_write_checksum: sha1:d16a90b3e1c53710e485d1c7e4dada80d4e8e626
-    pristine_git_object: 300b51f04628eea29e5f666a30480f08d9e3ea85
+    last_write_checksum: sha1:1e60f837dad0bb31a2d738cde3421272a65de07a
+    pristine_git_object: 1619e6c75cf881a32ea6dad59de7e3738e7e55d0
   src/openrouter/analytics.py:
     id: cb406b5aaabb
     last_write_checksum: sha1:1e0004d8d1d5d797e2b54cd1cabeb7f9489d08e9
@@ -8090,16 +8090,16 @@ trackedFiles:
     pristine_git_object: d5ba92a250e53b44240e5dedb4473cbabafd65ad
   src/openrouter/components/contentfilterbuiltinentry.py:
     id: 8506c7d8aca9
-    last_write_checksum: sha1:40ccbb53ae8a8f1e14ea0ef87fe9a62d3227dcda
-    pristine_git_object: ae3d7d5a0eafdfd78e6ce5f1ebe6eb8c15b365f9
+    last_write_checksum: sha1:f48a50b2269a26b0ba40e8de62c6134de356a19d
+    pristine_git_object: bbc2cf76ff8e3de15e794e7e796e8463e617531b
   src/openrouter/components/contentfilterbuiltinentryinput.py:
     id: 98fd75740393
     last_write_checksum: sha1:4e5b2d32d259a3b19e1db9a522466957f9bea46b
     pristine_git_object: 50a14b214439c74b201df7f4664653aeb3e4153d
   src/openrouter/components/contentfilterbuiltinslug.py:
     id: f222de10f841
-    last_write_checksum: sha1:130e56231d8a3a4fd16516bf7734097471118b66
-    pristine_git_object: bbc07e6bf29faada2c71a0fd44fdaf3286b94f4b
+    last_write_checksum: sha1:e3defa6c581aff618f0f5cb5a38a52d02645f511
+    pristine_git_object: a9ea7e360c6058abdb72e86d903b5ed1c4ae4825
   src/openrouter/components/contentfilterentry.py:
     id: 149ebe184f88
     last_write_checksum: sha1:63dcb28479bc328253a4d102a6c191fa0e515394
@@ -12465,6 +12465,4 @@ examples:
         "503":
           application/json: {"error": {"code": 503, "message": "Service temporarily unavailable"}}
 examplesVersion: 1.0.2
-releaseNotes: |
-  ## Python SDK Changes:
-  * `open_router.workspaces.delete()`:  `request.confirm_default_workspace_deletion` **Added**
+releaseNotes: "## Python SDK Changes:\n* `open_router.guardrails.list()`:  `response.data[].content_filter_builtins[].slug.enum(secrets)` **Added**\n* `open_router.guardrails.create()`: \n  *  `request.content_filter_builtins[].slug.enum(secrets)` **Added**\n  *  `response.data.content_filter_builtins[].slug.enum(secrets)` **Added**\n* `open_router.guardrails.get()`:  `response.data.content_filter_builtins[].slug.enum(secrets)` **Added**\n* `open_router.guardrails.update()`: \n  *  `request.content_filter_builtins[].slug.enum(secrets)` **Added**\n  *  `response.data.content_filter_builtins[].slug.enum(secrets)` **Added**\n"

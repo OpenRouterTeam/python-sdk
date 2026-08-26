@@ -11,7 +11,7 @@ from typing_extensions import NotRequired, TypedDict
 
 
 class ContentFilterBuiltinEntryTypedDict(TypedDict):
-    r"""A builtin content filter entry. Builtin filters include PII detectors and the regex-based prompt injection detector."""
+    r"""A builtin content filter entry. Builtin filters include PII detectors, API-key and secret detectors, and the regex-based prompt injection detector."""
 
     action: ContentFilterBuiltinAction
     r"""Action taken when the builtin filter triggers"""
@@ -24,7 +24,7 @@ class ContentFilterBuiltinEntryTypedDict(TypedDict):
 
 
 class ContentFilterBuiltinEntry(BaseModel):
-    r"""A builtin content filter entry. Builtin filters include PII detectors and the regex-based prompt injection detector."""
+    r"""A builtin content filter entry. Builtin filters include PII detectors, API-key and secret detectors, and the regex-based prompt injection detector."""
 
     action: ContentFilterBuiltinAction
     r"""Action taken when the builtin filter triggers"""
