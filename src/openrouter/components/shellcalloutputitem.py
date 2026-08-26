@@ -14,11 +14,37 @@ from openrouter.types import (
     UNSET_SENTINEL,
 )
 from pydantic import model_serializer
-from typing import List, Literal
+from typing import List, Literal, Optional
 from typing_extensions import NotRequired, TypedDict
 
 
-ShellCallOutputItemType = Literal["shell_call_output",]
+ShellCallOutputItemTypeContainerFileCitation = Literal["container_file_citation",]
+
+
+class ShellCallOutputItemFileTypedDict(TypedDict):
+    container_id: str
+    end_index: int
+    file_id: str
+    filename: str
+    start_index: int
+    type: ShellCallOutputItemTypeContainerFileCitation
+
+
+class ShellCallOutputItemFile(BaseModel):
+    container_id: str
+
+    end_index: int
+
+    file_id: str
+
+    filename: str
+
+    start_index: int
+
+    type: ShellCallOutputItemTypeContainerFileCitation
+
+
+ShellCallOutputItemTypeShellCallOutput = Literal["shell_call_output",]
 
 
 class ShellCallOutputItemTypedDict(TypedDict):
@@ -26,7 +52,11 @@ class ShellCallOutputItemTypedDict(TypedDict):
 
     call_id: str
     output: List[ShellCallOutputContentTypedDict]
-    type: ShellCallOutputItemType
+    type: ShellCallOutputItemTypeShellCallOutput
+    container_id: NotRequired[str]
+    r"""The canonical container id the command ran under — the `{container_id}` for the Container Files API, reusable as a `container_reference` in later requests. Present on every sandbox-executed call, even when no files changed."""
+    files: NotRequired[List[ShellCallOutputItemFileTypedDict]]
+    r"""Citations for the files the sandbox command created or modified, most-recently-touched first (at most 10). Retrieve them via the Container Files API."""
     id: NotRequired[Nullable[str]]
     max_output_length: NotRequired[Nullable[int]]
     status: NotRequired[Nullable[ToolCallStatus]]
@@ -39,7 +69,13 @@ class ShellCallOutputItem(BaseModel):
 
     output: List[ShellCallOutputContent]
 
-    type: ShellCallOutputItemType
+    type: ShellCallOutputItemTypeShellCallOutput
+
+    container_id: Optional[str] = None
+    r"""The canonical container id the command ran under — the `{container_id}` for the Container Files API, reusable as a `container_reference` in later requests. Present on every sandbox-executed call, even when no files changed."""
+
+    files: Optional[List[ShellCallOutputItemFile]] = None
+    r"""Citations for the files the sandbox command created or modified, most-recently-touched first (at most 10). Retrieve them via the Container Files API."""
 
     id: OptionalNullable[str] = UNSET
 
@@ -49,7 +85,9 @@ class ShellCallOutputItem(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["id", "max_output_length", "status"])
+        optional_fields = set(
+            ["container_id", "files", "id", "max_output_length", "status"]
+        )
         nullable_fields = set(["id", "max_output_length", "status"])
         serialized = handler(self)
         m = {}

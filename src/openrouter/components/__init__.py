@@ -2728,7 +2728,10 @@ if TYPE_CHECKING:
     )
     from .shellcalloutputitem import (
         ShellCallOutputItem,
-        ShellCallOutputItemType,
+        ShellCallOutputItemFile,
+        ShellCallOutputItemFileTypedDict,
+        ShellCallOutputItemTypeContainerFileCitation,
+        ShellCallOutputItemTypeShellCallOutput,
         ShellCallOutputItemTypedDict,
     )
     from .shellcallstatus import ShellCallStatus
@@ -5070,7 +5073,10 @@ __all__ = [
     "ShellCallOutputContent",
     "ShellCallOutputContentTypedDict",
     "ShellCallOutputItem",
-    "ShellCallOutputItemType",
+    "ShellCallOutputItemFile",
+    "ShellCallOutputItemFileTypedDict",
+    "ShellCallOutputItemTypeContainerFileCitation",
+    "ShellCallOutputItemTypeShellCallOutput",
     "ShellCallOutputItemTypedDict",
     "ShellCallStatus",
     "ShellServerTool",
@@ -7479,7 +7485,10 @@ _dynamic_imports: dict[str, str] = {
     "TypeTimeout": ".shellcalloutputcontent",
     "UnknownOutcome": ".shellcalloutputcontent",
     "ShellCallOutputItem": ".shellcalloutputitem",
-    "ShellCallOutputItemType": ".shellcalloutputitem",
+    "ShellCallOutputItemFile": ".shellcalloutputitem",
+    "ShellCallOutputItemFileTypedDict": ".shellcalloutputitem",
+    "ShellCallOutputItemTypeContainerFileCitation": ".shellcalloutputitem",
+    "ShellCallOutputItemTypeShellCallOutput": ".shellcalloutputitem",
     "ShellCallOutputItemTypedDict": ".shellcalloutputitem",
     "ShellCallStatus": ".shellcallstatus",
     "ShellServerTool": ".shellservertool",
