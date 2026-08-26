@@ -120,6 +120,8 @@ class ImageGenerationRequestTypedDict(TypedDict):
     r"""Optional. A convenience shorthand for output dimensions — pass a tier (\"2K\", \"4K\") or explicit pixels (\"2048x2048\") and we normalize it to the right dimensions for the chosen provider. A tier size is equivalent to setting `resolution` and combines with `aspect_ratio`. An explicit pixel size is authoritative: a mismatched `resolution` or `aspect_ratio` alongside it is rejected with a 400."""
     stream: NotRequired[bool]
     r"""If true, partial images are streamed as SSE events as they become available. Only supported by providers with native streaming (currently OpenAI). Non-streaming providers ignore this flag and return a buffered response."""
+    user: NotRequired[str]
+    r"""A stable identifier for your end-users. Used to help detect and prevent abuse. Never sent to providers verbatim: for providers whose data policy requires user IDs, it is folded into a hashed, per-account upstream user identifier."""
 
 
 class ImageGenerationRequest(BaseModel):
@@ -167,6 +169,9 @@ class ImageGenerationRequest(BaseModel):
     stream: Optional[bool] = None
     r"""If true, partial images are streamed as SSE events as they become available. Only supported by providers with native streaming (currently OpenAI). Non-streaming providers ignore this flag and return a buffered response."""
 
+    user: Optional[str] = None
+    r"""A stable identifier for your end-users. Used to help detect and prevent abuse. Never sent to providers verbatim: for providers whose data policy requires user IDs, it is folded into a hashed, per-account upstream user identifier."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
@@ -183,6 +188,7 @@ class ImageGenerationRequest(BaseModel):
                 "seed",
                 "size",
                 "stream",
+                "user",
             ]
         )
         serialized = handler(self)
