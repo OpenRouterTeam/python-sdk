@@ -2,7 +2,12 @@
 
 from __future__ import annotations
 from openrouter.types import BaseModel, UNSET_SENTINEL
-from openrouter.utils import FieldMetadata, HeaderMetadata, PathParamMetadata
+from openrouter.utils import (
+    FieldMetadata,
+    HeaderMetadata,
+    PathParamMetadata,
+    QueryParamMetadata,
+)
 import pydantic
 from pydantic import model_serializer
 from typing import Optional
@@ -89,6 +94,8 @@ class DeleteWorkspaceRequestTypedDict(TypedDict):
     r"""Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
     """
+    confirm_default_workspace_deletion: NotRequired[bool]
+    r"""Required to delete the default workspace. Deleting it permanently disables the account’s unscoped inference API keys (management/provisioning keys are retained) and its budgets, guardrails, classifiers, and broadcast destinations. Ignored for non-default workspaces."""
 
 
 class DeleteWorkspaceRequest(BaseModel):
@@ -125,10 +132,21 @@ class DeleteWorkspaceRequest(BaseModel):
 
     """
 
+    confirm_default_workspace_deletion: Annotated[
+        Optional[bool],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Required to delete the default workspace. Deleting it permanently disables the account’s unscoped inference API keys (management/provisioning keys are retained) and its budgets, guardrails, classifiers, and broadcast destinations. Ignored for non-default workspaces."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
-            ["HTTP-Referer", "X-OpenRouter-Title", "X-OpenRouter-Categories"]
+            [
+                "HTTP-Referer",
+                "X-OpenRouter-Title",
+                "X-OpenRouter-Categories",
+                "confirm_default_workspace_deletion",
+            ]
         )
         serialized = handler(self)
         m = {}
