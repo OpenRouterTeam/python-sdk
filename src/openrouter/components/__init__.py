@@ -2923,6 +2923,7 @@ if TYPE_CHECKING:
         ToolChoiceAllowedType,
         ToolChoiceAllowedTypedDict,
     )
+    from .toolchoicesupport import ToolChoiceSupport, ToolChoiceSupportTypedDict
     from .toolsearchservertool import (
         ToolSearchServerTool,
         ToolSearchServerToolType,
@@ -5224,6 +5225,8 @@ __all__ = [
     "ToolChoiceAutoTypedDict",
     "ToolChoiceNone",
     "ToolChoiceNoneTypedDict",
+    "ToolChoiceSupport",
+    "ToolChoiceSupportTypedDict",
     "ToolChoiceTool",
     "ToolChoiceToolTypedDict",
     "ToolChoiceTypeAuto",
@@ -7620,6 +7623,8 @@ _dynamic_imports: dict[str, str] = {
     "ToolChoiceAllowed": ".toolchoiceallowed",
     "ToolChoiceAllowedType": ".toolchoiceallowed",
     "ToolChoiceAllowedTypedDict": ".toolchoiceallowed",
+    "ToolChoiceSupport": ".toolchoicesupport",
+    "ToolChoiceSupportTypedDict": ".toolchoicesupport",
     "ToolSearchServerTool": ".toolsearchservertool",
     "ToolSearchServerToolType": ".toolsearchservertool",
     "ToolSearchServerToolTypedDict": ".toolsearchservertool",
