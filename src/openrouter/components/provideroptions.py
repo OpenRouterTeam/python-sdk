@@ -41,6 +41,7 @@ class ProviderOptionsTypedDict(TypedDict):
     cloudflare: NotRequired[Dict[str, Any]]
     cohere: NotRequired[Dict[str, Any]]
     coreweave: NotRequired[Dict[str, Any]]
+    cosine: NotRequired[Dict[str, Any]]
     crofai: NotRequired[Dict[str, Any]]
     crucible: NotRequired[Dict[str, Any]]
     crusoe: NotRequired[Dict[str, Any]]
@@ -230,6 +231,8 @@ class ProviderOptions(BaseModel):
     cohere: Optional[Dict[str, Any]] = None
 
     coreweave: Optional[Dict[str, Any]] = None
+
+    cosine: Optional[Dict[str, Any]] = None
 
     crofai: Optional[Dict[str, Any]] = None
 
@@ -511,6 +514,7 @@ class ProviderOptions(BaseModel):
                 "cloudflare",
                 "cohere",
                 "coreweave",
+                "cosine",
                 "crofai",
                 "crucible",
                 "crusoe",

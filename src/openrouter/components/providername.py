@@ -32,6 +32,7 @@ ProviderName = Union[
         "Cloudflare",
         "Cohere",
         "CoreWeave",
+        "Cosine",
         "Crucible",
         "Crusoe",
         "Darkbloom",
