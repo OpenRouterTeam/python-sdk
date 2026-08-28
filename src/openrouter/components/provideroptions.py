@@ -103,6 +103,7 @@ class ProviderOptionsTypedDict(TypedDict):
     novita: NotRequired[Dict[str, Any]]
     nvidia: NotRequired[Dict[str, Any]]
     octoai: NotRequired[Dict[str, Any]]
+    ollama: NotRequired[Dict[str, Any]]
     open_inference: NotRequired[Dict[str, Any]]
     openai: NotRequired[Dict[str, Any]]
     parasail: NotRequired[Dict[str, Any]]
@@ -372,6 +373,8 @@ class ProviderOptions(BaseModel):
 
     octoai: Optional[Dict[str, Any]] = None
 
+    ollama: Optional[Dict[str, Any]] = None
+
     open_inference: Annotated[
         Optional[Dict[str, Any]], pydantic.Field(alias="open-inference")
     ] = None
@@ -570,6 +573,7 @@ class ProviderOptions(BaseModel):
                 "novita",
                 "nvidia",
                 "octoai",
+                "ollama",
                 "open-inference",
                 "openai",
                 "parasail",
