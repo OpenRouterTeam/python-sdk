@@ -115,6 +115,8 @@ class ListModelsUserRequestTypedDict(TypedDict):
     r"""Number of records to skip for pagination. When both offset and limit are omitted, the full list is returned"""
     limit: NotRequired[int]
     r"""Maximum number of records to return (max 1000). When both offset and limit are omitted, the full list is returned"""
+    output_modalities: NotRequired[str]
+    r"""Filter models by output modality. Accepts a comma-separated list of modalities (text, image, audio, embeddings) or \"all\" to include all models. Defaults to \"text\"."""
 
 
 class ListModelsUserRequest(BaseModel):
@@ -158,6 +160,12 @@ class ListModelsUserRequest(BaseModel):
     ] = 500
     r"""Maximum number of records to return (max 1000). When both offset and limit are omitted, the full list is returned"""
 
+    output_modalities: Annotated[
+        Optional[str],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Filter models by output modality. Accepts a comma-separated list of modalities (text, image, audio, embeddings) or \"all\" to include all models. Defaults to \"text\"."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
@@ -167,6 +175,7 @@ class ListModelsUserRequest(BaseModel):
                 "X-OpenRouter-Categories",
                 "offset",
                 "limit",
+                "output_modalities",
             ]
         )
         nullable_fields = set(["offset"])
