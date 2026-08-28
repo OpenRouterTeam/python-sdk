@@ -30,6 +30,7 @@ BYOKProviderSlug = Union[
         "cloudflare",
         "cohere",
         "coreweave",
+        "cosine",
         "crusoe",
         "darkbloom",
         "databricks",
