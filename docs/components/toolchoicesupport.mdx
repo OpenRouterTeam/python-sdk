@@ -1,0 +1,15 @@
+---
+title: "ToolChoiceSupport"
+---
+
+Per-variant `tool_choice` support. `tool_choice` in `supported_parameters` only says the parameter is accepted; these flags say which of its values passed testing.
+
+
+## Fields
+
+| Field                                                                                        | Type                                                                                         | Required                                                                                     | Description                                                                                  |
+| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `auto`                                                                                       | *bool*                                                                                       | :heavy_check_mark:                                                                           | Whether the endpoint supports `"tool_choice": "auto"`.                                       |
+| `function`                                                                                   | *bool*                                                                                       | :heavy_check_mark:                                                                           | Whether the endpoint supports naming a function, `"tool_choice": {"type": "function", ...}`. |
+| `none`                                                                                       | *bool*                                                                                       | :heavy_check_mark:                                                                           | Whether the endpoint supports `"tool_choice": "none"`.                                       |
+| `required`                                                                                   | *bool*                                                                                       | :heavy_check_mark:                                                                           | Whether the endpoint supports `"tool_choice": "required"`.                                   |

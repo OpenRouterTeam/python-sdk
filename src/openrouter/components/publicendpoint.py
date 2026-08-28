@@ -7,6 +7,7 @@ from .percentilestats import PercentileStats, PercentileStatsTypedDict
 from .pricingoverride import PricingOverride, PricingOverrideTypedDict
 from .providername import ProviderName
 from .quantization import Quantization
+from .toolchoicesupport import ToolChoiceSupport, ToolChoiceSupportTypedDict
 from openrouter.types import BaseModel, Nullable, UNSET_SENTINEL
 from pydantic import model_serializer
 from typing import List, Optional
@@ -149,6 +150,8 @@ class PublicEndpointTypedDict(TypedDict):
     quantization: Nullable[Quantization]
     supported_parameters: List[Parameter]
     supports_implicit_caching: bool
+    supports_tool_choice: ToolChoiceSupportTypedDict
+    r"""Per-variant `tool_choice` support. `tool_choice` in `supported_parameters` only says the parameter is accepted; these flags say which of its values passed testing."""
     tag: str
     throughput_last_30m: Nullable[PercentileStatsTypedDict]
     uptime_last_1d: Nullable[float]
@@ -190,6 +193,9 @@ class PublicEndpoint(BaseModel):
     supported_parameters: List[Parameter]
 
     supports_implicit_caching: bool
+
+    supports_tool_choice: ToolChoiceSupport
+    r"""Per-variant `tool_choice` support. `tool_choice` in `supported_parameters` only says the parameter is accepted; these flags say which of its values passed testing."""
 
     tag: str
 
