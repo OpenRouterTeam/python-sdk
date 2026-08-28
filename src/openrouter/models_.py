@@ -1076,6 +1076,7 @@ class Models(BaseSDK):
         x_open_router_categories: Optional[str] = None,
         offset: OptionalNullable[int] = 0,
         limit: Optional[int] = 500,
+        output_modalities: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -1083,7 +1084,7 @@ class Models(BaseSDK):
     ) -> Optional[operations.ListModelsUserResponse]:
         r"""List models filtered by user provider preferences, privacy settings, and guardrails
 
-        List models filtered by user provider preferences, [privacy settings](https://openrouter.ai/docs/guides/privacy/provider-logging), and [guardrails](https://openrouter.ai/docs/guides/features/guardrails). If requesting through a regional hostname, the results will be filtered to models that satisfy in-region routing for that region.
+        List models filtered by user provider preferences, [privacy settings](https://openrouter.ai/docs/guides/privacy/provider-logging), and [guardrails](https://openrouter.ai/docs/guides/features/guardrails). Returns text-output models by default; pass `output_modalities` (e.g. `image,audio,embeddings` or `all`) to include other modalities. If requesting through a regional hostname, the results will be filtered to models that satisfy in-region routing for that region.
 
         :param security:
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
@@ -1095,6 +1096,7 @@ class Models(BaseSDK):
 
         :param offset: Number of records to skip for pagination. When both offset and limit are omitted, the full list is returned
         :param limit: Maximum number of records to return (max 1000). When both offset and limit are omitted, the full list is returned
+        :param output_modalities: Filter models by output modality. Accepts a comma-separated list of modalities (text, image, audio, embeddings) or \"all\" to include all models. Defaults to \"text\".
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1116,6 +1118,7 @@ class Models(BaseSDK):
             x_open_router_categories=x_open_router_categories,
             offset=offset,
             limit=limit,
+            output_modalities=output_modalities,
         )
 
         req = self._build_request(
@@ -1191,6 +1194,7 @@ class Models(BaseSDK):
                 x_open_router_categories=x_open_router_categories,
                 offset=next_offset,
                 limit=limit,
+                output_modalities=output_modalities,
                 retries=retries,
                 server_url=server_url,
                 timeout_ms=timeout_ms,
@@ -1248,6 +1252,7 @@ class Models(BaseSDK):
         x_open_router_categories: Optional[str] = None,
         offset: OptionalNullable[int] = 0,
         limit: Optional[int] = 500,
+        output_modalities: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -1255,7 +1260,7 @@ class Models(BaseSDK):
     ) -> Optional[operations.ListModelsUserResponse]:
         r"""List models filtered by user provider preferences, privacy settings, and guardrails
 
-        List models filtered by user provider preferences, [privacy settings](https://openrouter.ai/docs/guides/privacy/provider-logging), and [guardrails](https://openrouter.ai/docs/guides/features/guardrails). If requesting through a regional hostname, the results will be filtered to models that satisfy in-region routing for that region.
+        List models filtered by user provider preferences, [privacy settings](https://openrouter.ai/docs/guides/privacy/provider-logging), and [guardrails](https://openrouter.ai/docs/guides/features/guardrails). Returns text-output models by default; pass `output_modalities` (e.g. `image,audio,embeddings` or `all`) to include other modalities. If requesting through a regional hostname, the results will be filtered to models that satisfy in-region routing for that region.
 
         :param security:
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
@@ -1267,6 +1272,7 @@ class Models(BaseSDK):
 
         :param offset: Number of records to skip for pagination. When both offset and limit are omitted, the full list is returned
         :param limit: Maximum number of records to return (max 1000). When both offset and limit are omitted, the full list is returned
+        :param output_modalities: Filter models by output modality. Accepts a comma-separated list of modalities (text, image, audio, embeddings) or \"all\" to include all models. Defaults to \"text\".
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1288,6 +1294,7 @@ class Models(BaseSDK):
             x_open_router_categories=x_open_router_categories,
             offset=offset,
             limit=limit,
+            output_modalities=output_modalities,
         )
 
         req = self._build_request_async(
@@ -1366,6 +1373,7 @@ class Models(BaseSDK):
                 x_open_router_categories=x_open_router_categories,
                 offset=next_offset,
                 limit=limit,
+                output_modalities=output_modalities,
                 retries=retries,
                 server_url=server_url,
                 timeout_ms=timeout_ms,
