@@ -77,6 +77,7 @@ ProviderName = Union[
         "NextBit",
         "Novita",
         "Nvidia",
+        "Ollama",
         "OpenAI",
         "OpenInference",
         "Parasail",

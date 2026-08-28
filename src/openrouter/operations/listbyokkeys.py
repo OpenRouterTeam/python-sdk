@@ -152,6 +152,7 @@ Provider = Union[
         "nextbit",
         "novita",
         "nvidia",
+        "ollama",
         "open-inference",
         "openai",
         "parasail",

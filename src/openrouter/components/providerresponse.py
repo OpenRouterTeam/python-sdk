@@ -106,6 +106,7 @@ ProviderResponseProviderName = Union[
         "NextBit",
         "Novita",
         "Nvidia",
+        "Ollama",
         "OpenAI",
         "OpenInference",
         "Parasail",
