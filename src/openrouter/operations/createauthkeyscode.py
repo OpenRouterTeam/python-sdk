@@ -110,7 +110,7 @@ class CreateAuthKeysCodeRequestBodyTypedDict(TypedDict):
     code_challenge_method: NotRequired[CreateAuthKeysCodeCodeChallengeMethod]
     r"""The method used to generate the code challenge"""
     expires_at: NotRequired[Nullable[datetime]]
-    r"""Optional expiration time for the API key to be created"""
+    r"""Optional ISO 8601 UTC expiration timestamp. Must include seconds (YYYY-MM-DDTHH:MM:SSZ; fractional seconds allowed); minute-precision timestamps are rejected."""
     key_label: NotRequired[str]
     r"""Optional custom label for the API key. Defaults to the app name if not provided."""
     limit: NotRequired[float]
@@ -132,7 +132,7 @@ class CreateAuthKeysCodeRequestBody(BaseModel):
     r"""The method used to generate the code challenge"""
 
     expires_at: OptionalNullable[datetime] = UNSET
-    r"""Optional expiration time for the API key to be created"""
+    r"""Optional ISO 8601 UTC expiration timestamp. Must include seconds (YYYY-MM-DDTHH:MM:SSZ; fractional seconds allowed); minute-precision timestamps are rejected."""
 
     key_label: Optional[str] = None
     r"""Optional custom label for the API key. Defaults to the app name if not provided."""

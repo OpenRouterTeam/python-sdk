@@ -251,13 +251,17 @@ class OrderBy(BaseModel):
 
 class TimeRangeTypedDict(TypedDict):
     end: datetime
+    r"""ISO 8601 UTC timestamp. Must include seconds (YYYY-MM-DDTHH:MM:SSZ; fractional seconds allowed); minute-precision timestamps are rejected."""
     start: datetime
+    r"""ISO 8601 UTC timestamp. Must include seconds (YYYY-MM-DDTHH:MM:SSZ; fractional seconds allowed); minute-precision timestamps are rejected."""
 
 
 class TimeRange(BaseModel):
     end: datetime
+    r"""ISO 8601 UTC timestamp. Must include seconds (YYYY-MM-DDTHH:MM:SSZ; fractional seconds allowed); minute-precision timestamps are rejected."""
 
     start: datetime
+    r"""ISO 8601 UTC timestamp. Must include seconds (YYYY-MM-DDTHH:MM:SSZ; fractional seconds allowed); minute-precision timestamps are rejected."""
 
 
 class QueryAnalyticsRequestBodyTypedDict(TypedDict):
