@@ -342,7 +342,7 @@ class OAuth(BaseSDK):
 
         :param code_challenge: PKCE code challenge for enhanced security
         :param code_challenge_method: The method used to generate the code challenge
-        :param expires_at: Optional expiration time for the API key to be created
+        :param expires_at: Optional ISO 8601 UTC expiration timestamp. Must include seconds (YYYY-MM-DDTHH:MM:SSZ; fractional seconds allowed); minute-precision timestamps are rejected.
         :param key_label: Optional custom label for the API key. Defaults to the app name if not provided.
         :param limit: Credit limit for the API key to be created
         :param usage_limit_type: Optional credit limit reset interval. When set, the credit limit resets on this interval.
@@ -514,7 +514,7 @@ class OAuth(BaseSDK):
 
         :param code_challenge: PKCE code challenge for enhanced security
         :param code_challenge_method: The method used to generate the code challenge
-        :param expires_at: Optional expiration time for the API key to be created
+        :param expires_at: Optional ISO 8601 UTC expiration timestamp. Must include seconds (YYYY-MM-DDTHH:MM:SSZ; fractional seconds allowed); minute-precision timestamps are rejected.
         :param key_label: Optional custom label for the API key. Defaults to the app name if not provided.
         :param limit: Credit limit for the API key to be created
         :param usage_limit_type: Optional credit limit reset interval. When set, the credit limit resets on this interval.
