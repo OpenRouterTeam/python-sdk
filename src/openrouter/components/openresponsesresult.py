@@ -251,6 +251,8 @@ class OutputTokensDetails(BaseModel):
 class UsageCostDetailsTypedDict(TypedDict):
     upstream_inference_input_cost: float
     upstream_inference_output_cost: float
+    server_tool_cost: NotRequired[Nullable[float]]
+    r"""Metered server-tool execution cost (for example, shell sandbox time) billed for this request, in USD. Matches the billed checkpoint and settlement amounts exactly."""
     upstream_inference_cost: NotRequired[Nullable[float]]
 
 
@@ -259,12 +261,15 @@ class UsageCostDetails(BaseModel):
 
     upstream_inference_output_cost: float
 
+    server_tool_cost: OptionalNullable[float] = UNSET
+    r"""Metered server-tool execution cost (for example, shell sandbox time) billed for this request, in USD. Matches the billed checkpoint and settlement amounts exactly."""
+
     upstream_inference_cost: OptionalNullable[float] = UNSET
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["upstream_inference_cost"])
-        nullable_fields = set(["upstream_inference_cost"])
+        optional_fields = set(["server_tool_cost", "upstream_inference_cost"])
+        nullable_fields = set(["server_tool_cost", "upstream_inference_cost"])
         serialized = handler(self)
         m = {}
 
