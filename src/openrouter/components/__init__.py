@@ -2195,6 +2195,7 @@ if TYPE_CHECKING:
     )
     from .outputcustomtoolcallitem import (
         OutputCustomToolCallItem,
+        OutputCustomToolCallItemStatus,
         OutputCustomToolCallItemType,
         OutputCustomToolCallItemTypedDict,
     )
@@ -4666,6 +4667,7 @@ __all__ = [
     "OutputComputerCallItemType",
     "OutputComputerCallItemTypedDict",
     "OutputCustomToolCallItem",
+    "OutputCustomToolCallItemStatus",
     "OutputCustomToolCallItemType",
     "OutputCustomToolCallItemTypedDict",
     "OutputDatetimeItem",
@@ -7093,6 +7095,7 @@ _dynamic_imports: dict[str, str] = {
     "PendingSafetyCheck": ".outputcomputercallitem",
     "PendingSafetyCheckTypedDict": ".outputcomputercallitem",
     "OutputCustomToolCallItem": ".outputcustomtoolcallitem",
+    "OutputCustomToolCallItemStatus": ".outputcustomtoolcallitem",
     "OutputCustomToolCallItemType": ".outputcustomtoolcallitem",
     "OutputCustomToolCallItemTypedDict": ".outputcustomtoolcallitem",
     "OutputDatetimeItem": ".outputdatetimeitem",
