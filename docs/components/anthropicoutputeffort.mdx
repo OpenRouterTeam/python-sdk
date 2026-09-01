@@ -1,14 +1,14 @@
 ---
-title: "AnthropicThinkingDisplay"
+title: "AnthropicOutputEffort"
 ---
 
 ## Example Usage
 
 ```python
-from openrouter.components import AnthropicThinkingDisplay
+from openrouter.components import AnthropicOutputEffort
 
 # Open enum: unrecognized values are captured as UnrecognizedStr
-value: AnthropicThinkingDisplay = "summarized"
+value: AnthropicOutputEffort = "low"
 ```
 
 
@@ -16,6 +16,8 @@ value: AnthropicThinkingDisplay = "summarized"
 
 This is an open enum. Unrecognized values will not fail type checks.
 
-- `"summarized"`
-- `"omitted"`
-- `"updates"`
+- `"low"`
+- `"medium"`
+- `"high"`
+- `"xhigh"`
+- `"max"`

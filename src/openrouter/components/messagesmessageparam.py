@@ -13,10 +13,15 @@ from .anthropicimageblockparam import (
     AnthropicImageBlockParam,
     AnthropicImageBlockParamTypedDict,
 )
+from .anthropicmessageoutputconfig import (
+    AnthropicMessageOutputConfig,
+    AnthropicMessageOutputConfigTypedDict,
+)
 from .anthropicsearchresultblockparam import (
     AnthropicSearchResultBlockParam,
     AnthropicSearchResultBlockParamTypedDict,
 )
+from .anthropicsystemclearat import AnthropicSystemClearAt
 from .anthropictextblockparam import (
     AnthropicTextBlockParam,
     AnthropicTextBlockParamTypedDict,
@@ -462,6 +467,8 @@ class MessagesMessageParamTypedDict(TypedDict):
 
     content: MessagesMessageParamContentUnion5TypedDict
     role: MessagesMessageParamRole
+    clear_at: NotRequired[Nullable[AnthropicSystemClearAt]]
+    output_config: NotRequired[Nullable[AnthropicMessageOutputConfigTypedDict]]
 
 
 class MessagesMessageParam(BaseModel):
@@ -470,3 +477,32 @@ class MessagesMessageParam(BaseModel):
     content: MessagesMessageParamContentUnion5
 
     role: MessagesMessageParamRole
+
+    clear_at: OptionalNullable[AnthropicSystemClearAt] = UNSET
+
+    output_config: OptionalNullable[AnthropicMessageOutputConfig] = UNSET
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["clear_at", "output_config"])
+        nullable_fields = set(["clear_at", "output_config"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
+
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
+
+        return m

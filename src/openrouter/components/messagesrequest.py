@@ -18,6 +18,10 @@ from .anthropictextblockparam import (
     AnthropicTextBlockParam,
     AnthropicTextBlockParamTypedDict,
 )
+from .anthropicthinkingblockbinding import (
+    AnthropicThinkingBlockBinding,
+    AnthropicThinkingBlockBindingTypedDict,
+)
 from .anthropicthinkingdisplay import AnthropicThinkingDisplay
 from .anthropicthinkingturns import (
     AnthropicThinkingTurns,
@@ -418,18 +422,21 @@ TypeAdaptive = Literal["adaptive",]
 
 class ThinkingAdaptiveTypedDict(TypedDict):
     type: TypeAdaptive
+    block_binding: NotRequired[Nullable[AnthropicThinkingBlockBindingTypedDict]]
     display: NotRequired[Nullable[AnthropicThinkingDisplay]]
 
 
 class ThinkingAdaptive(BaseModel):
     type: TypeAdaptive
 
+    block_binding: OptionalNullable[AnthropicThinkingBlockBinding] = UNSET
+
     display: OptionalNullable[AnthropicThinkingDisplay] = UNSET
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["display"])
-        nullable_fields = set(["display"])
+        optional_fields = set(["block_binding", "display"])
+        nullable_fields = set(["block_binding", "display"])
         serialized = handler(self)
         m = {}
 
@@ -469,6 +476,7 @@ TypeEnabled = Literal["enabled",]
 class ThinkingEnabledTypedDict(TypedDict):
     budget_tokens: int
     type: TypeEnabled
+    block_binding: NotRequired[Nullable[AnthropicThinkingBlockBindingTypedDict]]
     display: NotRequired[Nullable[AnthropicThinkingDisplay]]
 
 
@@ -477,12 +485,14 @@ class ThinkingEnabled(BaseModel):
 
     type: TypeEnabled
 
+    block_binding: OptionalNullable[AnthropicThinkingBlockBinding] = UNSET
+
     display: OptionalNullable[AnthropicThinkingDisplay] = UNSET
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["display"])
-        nullable_fields = set(["display"])
+        optional_fields = set(["block_binding", "display"])
+        nullable_fields = set(["block_binding", "display"])
         serialized = handler(self)
         m = {}
 

@@ -173,11 +173,16 @@ if TYPE_CHECKING:
         AnthropicIterationCacheCreation,
         AnthropicIterationCacheCreationTypedDict,
     )
+    from .anthropicmessageoutputconfig import (
+        AnthropicMessageOutputConfig,
+        AnthropicMessageOutputConfigTypedDict,
+    )
     from .anthropicmessageusageiteration import (
         AnthropicMessageUsageIteration,
         AnthropicMessageUsageIterationType,
         AnthropicMessageUsageIterationTypedDict,
     )
+    from .anthropicoutputeffort import AnthropicOutputEffort
     from .anthropicplaintextsource import (
         AnthropicPlainTextSource,
         AnthropicPlainTextSourceMediaType,
@@ -192,12 +197,18 @@ if TYPE_CHECKING:
         AnthropicSearchResultBlockParamTypedDict,
     )
     from .anthropicspeed import AnthropicSpeed
+    from .anthropicsystemclearat import AnthropicSystemClearAt
     from .anthropictextblockparam import (
         AnthropicTextBlockParam,
         AnthropicTextBlockParamType,
         AnthropicTextBlockParamTypedDict,
         Citation,
         CitationTypedDict,
+    )
+    from .anthropicthinkingblockbinding import (
+        AnthropicThinkingBlockBinding,
+        AnthropicThinkingBlockBindingTypedDict,
+        PrefixMismatchBehavior,
     )
     from .anthropicthinkingdisplay import AnthropicThinkingDisplay
     from .anthropicthinkingturns import (
@@ -3313,9 +3324,12 @@ __all__ = [
     "AnthropicInputTokensTriggerTypedDict",
     "AnthropicIterationCacheCreation",
     "AnthropicIterationCacheCreationTypedDict",
+    "AnthropicMessageOutputConfig",
+    "AnthropicMessageOutputConfigTypedDict",
     "AnthropicMessageUsageIteration",
     "AnthropicMessageUsageIterationType",
     "AnthropicMessageUsageIterationTypedDict",
+    "AnthropicOutputEffort",
     "AnthropicPlainTextSource",
     "AnthropicPlainTextSourceMediaType",
     "AnthropicPlainTextSourceType",
@@ -3326,9 +3340,12 @@ __all__ = [
     "AnthropicSearchResultBlockParamType",
     "AnthropicSearchResultBlockParamTypedDict",
     "AnthropicSpeed",
+    "AnthropicSystemClearAt",
     "AnthropicTextBlockParam",
     "AnthropicTextBlockParamType",
     "AnthropicTextBlockParamTypedDict",
+    "AnthropicThinkingBlockBinding",
+    "AnthropicThinkingBlockBindingTypedDict",
     "AnthropicThinkingDisplay",
     "AnthropicThinkingTurns",
     "AnthropicThinkingTurnsType",
@@ -4873,6 +4890,7 @@ __all__ = [
     "PreferredMaxLatencyTypedDict",
     "PreferredMinThroughput",
     "PreferredMinThroughputTypedDict",
+    "PrefixMismatchBehavior",
     "Preset",
     "PresetDesignatedVersion",
     "PresetDesignatedVersionTypedDict",
@@ -5632,9 +5650,12 @@ _dynamic_imports: dict[str, str] = {
     "AnthropicInputTokensTriggerTypedDict": ".anthropicinputtokenstrigger",
     "AnthropicIterationCacheCreation": ".anthropiciterationcachecreation",
     "AnthropicIterationCacheCreationTypedDict": ".anthropiciterationcachecreation",
+    "AnthropicMessageOutputConfig": ".anthropicmessageoutputconfig",
+    "AnthropicMessageOutputConfigTypedDict": ".anthropicmessageoutputconfig",
     "AnthropicMessageUsageIteration": ".anthropicmessageusageiteration",
     "AnthropicMessageUsageIterationType": ".anthropicmessageusageiteration",
     "AnthropicMessageUsageIterationTypedDict": ".anthropicmessageusageiteration",
+    "AnthropicOutputEffort": ".anthropicoutputeffort",
     "AnthropicPlainTextSource": ".anthropicplaintextsource",
     "AnthropicPlainTextSourceMediaType": ".anthropicplaintextsource",
     "AnthropicPlainTextSourceType": ".anthropicplaintextsource",
@@ -5645,11 +5666,15 @@ _dynamic_imports: dict[str, str] = {
     "AnthropicSearchResultBlockParamType": ".anthropicsearchresultblockparam",
     "AnthropicSearchResultBlockParamTypedDict": ".anthropicsearchresultblockparam",
     "AnthropicSpeed": ".anthropicspeed",
+    "AnthropicSystemClearAt": ".anthropicsystemclearat",
     "AnthropicTextBlockParam": ".anthropictextblockparam",
     "AnthropicTextBlockParamType": ".anthropictextblockparam",
     "AnthropicTextBlockParamTypedDict": ".anthropictextblockparam",
     "Citation": ".anthropictextblockparam",
     "CitationTypedDict": ".anthropictextblockparam",
+    "AnthropicThinkingBlockBinding": ".anthropicthinkingblockbinding",
+    "AnthropicThinkingBlockBindingTypedDict": ".anthropicthinkingblockbinding",
+    "PrefixMismatchBehavior": ".anthropicthinkingblockbinding",
     "AnthropicThinkingDisplay": ".anthropicthinkingdisplay",
     "AnthropicThinkingTurns": ".anthropicthinkingturns",
     "AnthropicThinkingTurnsType": ".anthropicthinkingturns",
