@@ -105,6 +105,7 @@ BYOKProviderSlug = Union[
         "together",
         "upstage",
         "venice",
+        "voyageai",
         "wafer",
         "wandb",
         "wandb-legacy",
