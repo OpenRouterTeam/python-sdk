@@ -4510,6 +4510,7 @@ components:
         - 'cloudflare'
         - 'cohere'
         - 'coreweave'
+        - 'cosine'
         - 'crusoe'
         - 'darkbloom'
         - 'databricks'
@@ -4555,6 +4556,7 @@ components:
         - 'nextbit'
         - 'novita'
         - 'nvidia'
+        - 'ollama'
         - 'open-inference'
         - 'openai'
         - 'parasail'
@@ -6737,7 +6739,7 @@ components:
       example: 'block'
       type: 'string'
     ContentFilterBuiltinEntry:
-      description: 'A builtin content filter entry. Builtin filters include PII detectors and the regex-based prompt injection detector.'
+      description: 'A builtin content filter entry. Builtin filters include PII detectors, API-key and secret detectors, and the regex-based prompt injection detector.'
       example:
         action: 'redact'
         label: '[EMAIL]'
@@ -6787,6 +6789,7 @@ components:
         - 'ssn'
         - 'credit-card'
         - 'ip-address'
+        - 'secrets'
         - 'person-name'
         - 'address'
         - 'regex-prompt-injection'
@@ -7022,10 +7025,17 @@ components:
     CostDetails:
       description: 'Breakdown of upstream inference costs'
       example:
+        server_tool_cost: null
         upstream_inference_completions_cost: 0.0004
         upstream_inference_cost: null
         upstream_inference_prompt_cost: 0.0008
       properties:
+        server_tool_cost:
+          description: 'Metered server-tool execution cost (for example, shell sandbox time) billed for this request, in USD. Matches the billed checkpoint and settlement amounts exactly.'
+          format: 'double'
+          type:
+            - 'number'
+            - 'null'
         upstream_inference_completions_cost:
           format: 'double'
           type: 'number'
@@ -7364,6 +7374,9 @@ components:
           content_filters: null
           created_at: '2025-08-24T10:30:00Z'
           description: 'A guardrail for limiting API usage'
+          enable_free_model_publication: false
+          enable_free_model_training: true
+          enable_paid_model_training: true
           enforce_zdr: null
           enforce_zdr_anthropic: true
           enforce_zdr_google: false
@@ -9825,6 +9838,9 @@ components:
           content_filters: null
           created_at: '2025-08-24T10:30:00Z'
           description: 'Guardrail for production environment'
+          enable_free_model_publication: false
+          enable_free_model_training: true
+          enable_paid_model_training: true
           enforce_zdr: null
           enforce_zdr_anthropic: true
           enforce_zdr_google: false
@@ -10565,6 +10581,10 @@ components:
         stream:
           description: 'If true, partial images are streamed as SSE events as they become available. Only supported by providers with native streaming (currently OpenAI). Non-streaming providers ignore this flag and return a buffered response.'
           type: 'boolean'
+        user:
+          description: 'A stable identifier for your end-users. Used to help detect and prevent abuse. Never sent to providers verbatim: for providers whose data policy requires user IDs, it is folded into a hashed, per-account upstream user identifier.'
+          example: 'end-user-abc123'
+          type: 'string'
       required:
         - 'model'
         - 'prompt'
@@ -11885,6 +11905,9 @@ components:
             content_filters: null
             created_at: '2025-08-24T10:30:00Z'
             description: 'Guardrail for production environment'
+            enable_free_model_publication: false
+            enable_free_model_training: true
+            enable_paid_model_training: true
             enforce_zdr: null
             enforce_zdr_anthropic: true
             enforce_zdr_google: false
@@ -13865,6 +13888,7 @@ components:
                 - 'Cloudflare'
                 - 'Cohere'
                 - 'CoreWeave'
+                - 'Cosine'
                 - 'Crucible'
                 - 'Crusoe'
                 - 'Darkbloom'
@@ -13910,6 +13934,7 @@ components:
                 - 'NextBit'
                 - 'Novita'
                 - 'Nvidia'
+                - 'Ollama'
                 - 'OpenAI'
                 - 'OpenInference'
                 - 'Parasail'
@@ -18592,6 +18617,7 @@ components:
         id: 'ctc-abc123'
         input: "*** Begin Patch\n*** End Patch"
         name: 'apply_patch'
+        status: 'completed'
         type: 'custom_tool_call'
       properties:
         call_id:
@@ -18604,6 +18630,12 @@ components:
           type: 'string'
         namespace:
           description: 'Namespace qualifier for tools registered as part of a namespace tool group (e.g. an MCP server)'
+          type: 'string'
+        status:
+          enum:
+            - 'in_progress'
+            - 'completed'
+            - 'incomplete'
           type: 'string'
         type:
           enum:
@@ -19015,6 +19047,7 @@ components:
         id: 'ctc-abc123'
         input: "*** Begin Patch\n*** End Patch"
         name: 'apply_patch'
+        status: 'completed'
         type: 'custom_tool_call'
       properties:
         call_id:
@@ -19027,6 +19060,12 @@ components:
           type: 'string'
         namespace:
           description: 'Namespace qualifier for tools registered as part of a namespace tool group (e.g. an MCP server)'
+          type: 'string'
+        status:
+          enum:
+            - 'in_progress'
+            - 'completed'
+            - 'incomplete'
           type: 'string'
         type:
           enum:
@@ -20719,6 +20758,7 @@ components:
         - 'Cloudflare'
         - 'Cohere'
         - 'CoreWeave'
+        - 'Cosine'
         - 'Crucible'
         - 'Crusoe'
         - 'Darkbloom'
@@ -20764,6 +20804,7 @@ components:
         - 'NextBit'
         - 'Novita'
         - 'Nvidia'
+        - 'Ollama'
         - 'OpenAI'
         - 'OpenInference'
         - 'Parasail'
@@ -20895,6 +20936,9 @@ components:
           additionalProperties: {}
           type: 'object'
         coreweave:
+          additionalProperties: {}
+          type: 'object'
+        cosine:
           additionalProperties: {}
           type: 'object'
         crofai:
@@ -21081,6 +21125,9 @@ components:
           additionalProperties: {}
           type: 'object'
         octoai:
+          additionalProperties: {}
+          type: 'object'
+        ollama:
           additionalProperties: {}
           type: 'object'
         open-inference:
@@ -21457,6 +21504,7 @@ components:
             - 'Cloudflare'
             - 'Cohere'
             - 'CoreWeave'
+            - 'Cosine'
             - 'Crucible'
             - 'Crusoe'
             - 'Darkbloom'
@@ -21502,6 +21550,7 @@ components:
             - 'NextBit'
             - 'Novita'
             - 'Nvidia'
+            - 'Ollama'
             - 'OpenAI'
             - 'OpenInference'
             - 'Parasail'
@@ -21607,6 +21656,19 @@ components:
         model_id: 'openai/gpt-4'
         model_name: 'GPT-4'
         name: 'OpenAI: GPT-4'
+        perf_last_30m_by_workload:
+          text_generation:
+            latency:
+              p50: 250
+              p75: 350
+              p90: 480
+              p99: 850
+            request_count: 1000
+            throughput:
+              p50: 45.2
+              p75: 38.5
+              p90: 28.3
+              p99: 15.1
         pricing:
           completion: '0.00006'
           image: '0'
@@ -21620,6 +21682,11 @@ components:
           - 'top_p'
           - 'max_tokens'
         supports_implicit_caching: true
+        supports_tool_choice:
+          auto: true
+          function: true
+          none: true
+          required: true
         supports_voice_cloning: false
         tag: 'openai'
         throughput_last_30m:
@@ -21652,6 +21719,171 @@ components:
           type: 'string'
         name:
           type: 'string'
+        perf_last_30m_by_workload:
+          additionalProperties: false
+          description: 'Endpoint performance over the last 30 minutes, keyed by the kind of request served (e.g. `text_generation`, `image_generation`). Additive to the legacy singular latency and throughput fields; image and video generation report end-to-end latency. Only visible when authenticated with an API key or cookie.'
+          properties:
+            embeddings:
+              properties:
+                latency:
+                  allOf:
+                    - $ref: '#/components/schemas/PercentileStats'
+                    - description: 'Latency percentiles in milliseconds for this workload. Image and video generation report full end-to-end generation time, because their raw latency only measures request acknowledgement; every other workload reports time to first token or result.'
+                request_count:
+                  description: 'Total requests admitted for this workload in the window.'
+                  type:
+                    - 'integer'
+                    - 'null'
+                throughput:
+                  allOf:
+                    - $ref: '#/components/schemas/PercentileStats'
+                    - description: 'Throughput percentiles in tokens per second. Only meaningful for text generation; null for workloads without token throughput.'
+              required:
+                - 'latency'
+                - 'throughput'
+                - 'request_count'
+              type: 'object'
+            image_generation:
+              properties:
+                latency:
+                  allOf:
+                    - $ref: '#/components/schemas/PercentileStats'
+                    - description: 'Latency percentiles in milliseconds for this workload. Image and video generation report full end-to-end generation time, because their raw latency only measures request acknowledgement; every other workload reports time to first token or result.'
+                request_count:
+                  description: 'Total requests admitted for this workload in the window.'
+                  type:
+                    - 'integer'
+                    - 'null'
+                throughput:
+                  allOf:
+                    - $ref: '#/components/schemas/PercentileStats'
+                    - description: 'Throughput percentiles in tokens per second. Only meaningful for text generation; null for workloads without token throughput.'
+              required:
+                - 'latency'
+                - 'throughput'
+                - 'request_count'
+              type: 'object'
+            rerank:
+              properties:
+                latency:
+                  allOf:
+                    - $ref: '#/components/schemas/PercentileStats'
+                    - description: 'Latency percentiles in milliseconds for this workload. Image and video generation report full end-to-end generation time, because their raw latency only measures request acknowledgement; every other workload reports time to first token or result.'
+                request_count:
+                  description: 'Total requests admitted for this workload in the window.'
+                  type:
+                    - 'integer'
+                    - 'null'
+                throughput:
+                  allOf:
+                    - $ref: '#/components/schemas/PercentileStats'
+                    - description: 'Throughput percentiles in tokens per second. Only meaningful for text generation; null for workloads without token throughput.'
+              required:
+                - 'latency'
+                - 'throughput'
+                - 'request_count'
+              type: 'object'
+            stt:
+              properties:
+                latency:
+                  allOf:
+                    - $ref: '#/components/schemas/PercentileStats'
+                    - description: 'Latency percentiles in milliseconds for this workload. Image and video generation report full end-to-end generation time, because their raw latency only measures request acknowledgement; every other workload reports time to first token or result.'
+                request_count:
+                  description: 'Total requests admitted for this workload in the window.'
+                  type:
+                    - 'integer'
+                    - 'null'
+                throughput:
+                  allOf:
+                    - $ref: '#/components/schemas/PercentileStats'
+                    - description: 'Throughput percentiles in tokens per second. Only meaningful for text generation; null for workloads without token throughput.'
+              required:
+                - 'latency'
+                - 'throughput'
+                - 'request_count'
+              type: 'object'
+            text_generation:
+              properties:
+                latency:
+                  allOf:
+                    - $ref: '#/components/schemas/PercentileStats'
+                    - description: 'Latency percentiles in milliseconds for this workload. Image and video generation report full end-to-end generation time, because their raw latency only measures request acknowledgement; every other workload reports time to first token or result.'
+                request_count:
+                  description: 'Total requests admitted for this workload in the window.'
+                  type:
+                    - 'integer'
+                    - 'null'
+                throughput:
+                  allOf:
+                    - $ref: '#/components/schemas/PercentileStats'
+                    - description: 'Throughput percentiles in tokens per second. Only meaningful for text generation; null for workloads without token throughput.'
+              required:
+                - 'latency'
+                - 'throughput'
+                - 'request_count'
+              type: 'object'
+            tts:
+              properties:
+                latency:
+                  allOf:
+                    - $ref: '#/components/schemas/PercentileStats'
+                    - description: 'Latency percentiles in milliseconds for this workload. Image and video generation report full end-to-end generation time, because their raw latency only measures request acknowledgement; every other workload reports time to first token or result.'
+                request_count:
+                  description: 'Total requests admitted for this workload in the window.'
+                  type:
+                    - 'integer'
+                    - 'null'
+                throughput:
+                  allOf:
+                    - $ref: '#/components/schemas/PercentileStats'
+                    - description: 'Throughput percentiles in tokens per second. Only meaningful for text generation; null for workloads without token throughput.'
+              required:
+                - 'latency'
+                - 'throughput'
+                - 'request_count'
+              type: 'object'
+            unknown:
+              properties:
+                latency:
+                  allOf:
+                    - $ref: '#/components/schemas/PercentileStats'
+                    - description: 'Latency percentiles in milliseconds for this workload. Image and video generation report full end-to-end generation time, because their raw latency only measures request acknowledgement; every other workload reports time to first token or result.'
+                request_count:
+                  description: 'Total requests admitted for this workload in the window.'
+                  type:
+                    - 'integer'
+                    - 'null'
+                throughput:
+                  allOf:
+                    - $ref: '#/components/schemas/PercentileStats'
+                    - description: 'Throughput percentiles in tokens per second. Only meaningful for text generation; null for workloads without token throughput.'
+              required:
+                - 'latency'
+                - 'throughput'
+                - 'request_count'
+              type: 'object'
+            video_generation:
+              properties:
+                latency:
+                  allOf:
+                    - $ref: '#/components/schemas/PercentileStats'
+                    - description: 'Latency percentiles in milliseconds for this workload. Image and video generation report full end-to-end generation time, because their raw latency only measures request acknowledgement; every other workload reports time to first token or result.'
+                request_count:
+                  description: 'Total requests admitted for this workload in the window.'
+                  type:
+                    - 'integer'
+                    - 'null'
+                throughput:
+                  allOf:
+                    - $ref: '#/components/schemas/PercentileStats'
+                    - description: 'Throughput percentiles in tokens per second. Only meaningful for text generation; null for workloads without token throughput.'
+              required:
+                - 'latency'
+                - 'throughput'
+                - 'request_count'
+              type: 'object'
+          type: 'object'
         pricing:
           properties:
             audio:
@@ -21723,6 +21955,8 @@ components:
           type: 'array'
         supports_implicit_caching:
           type: 'boolean'
+        supports_tool_choice:
+          $ref: '#/components/schemas/ToolChoiceSupport'
         supports_voice_cloning:
           default: false
           description: 'Whether this TTS endpoint accepts inline reference audio (`input_references`) for stateless voice cloning. Requests carrying reference audio are only routed to endpoints where this is true.'
@@ -21762,6 +21996,7 @@ components:
         - 'max_completion_tokens'
         - 'max_prompt_tokens'
         - 'supported_parameters'
+        - 'supports_tool_choice'
         - 'uptime_last_30m'
         - 'uptime_last_5m'
         - 'uptime_last_1d'
@@ -23181,6 +23416,36 @@ components:
       properties:
         call_id:
           type: 'string'
+        container_id:
+          description: 'The canonical container id the command ran under — the `{container_id}` for the Container Files API, reusable as a `container_reference` in later requests. Present on every sandbox-executed call, even when no files changed.'
+          type: 'string'
+        files:
+          description: 'Citations for the files the sandbox command created or modified, most-recently-touched first (at most 10). Retrieve them via the Container Files API.'
+          items:
+            properties:
+              container_id:
+                type: 'string'
+              end_index:
+                type: 'integer'
+              file_id:
+                type: 'string'
+              filename:
+                type: 'string'
+              start_index:
+                type: 'integer'
+              type:
+                enum:
+                  - 'container_file_citation'
+                type: 'string'
+            required:
+              - 'type'
+              - 'container_id'
+              - 'file_id'
+              - 'filename'
+              - 'start_index'
+              - 'end_index'
+            type: 'object'
+          type: 'array'
         id:
           type:
             - 'string'
@@ -24534,6 +24799,32 @@ components:
         - 'mode'
         - 'tools'
       type: 'object'
+    ToolChoiceSupport:
+      description: 'Per-variant `tool_choice` support. `tool_choice` in `supported_parameters` only says the parameter is accepted; these flags say which of its values passed testing.'
+      example:
+        auto: true
+        function: true
+        none: true
+        required: true
+      properties:
+        auto:
+          description: 'Whether the endpoint supports `"tool_choice": "auto"`.'
+          type: 'boolean'
+        function:
+          description: 'Whether the endpoint supports naming a function, `"tool_choice": {"type": "function", ...}`.'
+          type: 'boolean'
+        none:
+          description: 'Whether the endpoint supports `"tool_choice": "none"`.'
+          type: 'boolean'
+        required:
+          description: 'Whether the endpoint supports `"tool_choice": "required"`.'
+          type: 'boolean'
+      required:
+        - 'none'
+        - 'auto'
+        - 'required'
+        - 'function'
+      type: 'object'
     ToolSearchServerTool:
       description: 'OpenRouter built-in server tool: finds tools marked `defer_loading` and makes them callable'
       example:
@@ -25438,6 +25729,9 @@ components:
           content_filters: null
           created_at: '2025-08-24T10:30:00Z'
           description: 'Updated description'
+          enable_free_model_publication: false
+          enable_free_model_training: true
+          enable_paid_model_training: true
           enforce_zdr: null
           enforce_zdr_anthropic: true
           enforce_zdr_google: true
@@ -25742,6 +26036,12 @@ components:
                     - 'null'
                 cost_details:
                   properties:
+                    server_tool_cost:
+                      description: 'Metered server-tool execution cost (for example, shell sandbox time) billed for this request, in USD. Matches the billed checkpoint and settlement amounts exactly.'
+                      format: 'double'
+                      type:
+                        - 'number'
+                        - 'null'
                     upstream_inference_cost:
                       format: 'double'
                       type:
@@ -25768,6 +26068,7 @@ components:
       example:
         cost: 0.0012
         cost_details:
+          server_tool_cost: null
           upstream_inference_cost: null
           upstream_inference_input_cost: 0.0008
           upstream_inference_output_cost: 0.0004
@@ -27338,9 +27639,13 @@ paths:
                 time_range:
                   properties:
                     end:
+                      description: 'ISO 8601 UTC timestamp. Must include seconds (YYYY-MM-DDTHH:MM:SSZ; fractional seconds allowed); minute-precision timestamps are rejected.'
+                      example: '2027-12-31T23:59:59Z'
                       format: 'date-time'
                       type: 'string'
                     start:
+                      description: 'ISO 8601 UTC timestamp. Must include seconds (YYYY-MM-DDTHH:MM:SSZ; fractional seconds allowed); minute-precision timestamps are rejected.'
+                      example: '2027-12-31T23:59:59Z'
                       format: 'date-time'
                       type: 'string'
                   required:
@@ -27916,7 +28221,7 @@ paths:
                   example: 'S256'
                   type: 'string'
                 expires_at:
-                  description: 'Optional expiration time for the API key to be created'
+                  description: 'Optional ISO 8601 UTC expiration timestamp. Must include seconds (YYYY-MM-DDTHH:MM:SSZ; fractional seconds allowed); minute-precision timestamps are rejected.'
                   example: '2027-12-31T23:59:59Z'
                   format: 'date-time'
                   type:
@@ -28305,6 +28610,7 @@ paths:
               - 'cloudflare'
               - 'cohere'
               - 'coreweave'
+              - 'cosine'
               - 'crusoe'
               - 'darkbloom'
               - 'databricks'
@@ -28350,6 +28656,7 @@ paths:
               - 'nextbit'
               - 'novita'
               - 'nvidia'
+              - 'ollama'
               - 'open-inference'
               - 'openai'
               - 'parasail'
@@ -29195,7 +29502,6 @@ paths:
       summary: 'List container files'
       tags:
         - 'Containers'
-      x-hidden: true
   /containers/{container_id}/files/{file_id}:
     get:
       description: 'Returns the metadata of a single file in a container.'
@@ -29305,7 +29611,6 @@ paths:
       summary: 'Retrieve a container file'
       tags:
         - 'Containers'
-      x-hidden: true
   /containers/{container_id}/files/{file_id}/content:
     get:
       description: 'Streams the raw bytes of a file in a container.'
@@ -29409,10 +29714,9 @@ paths:
       summary: 'Download container file content'
       tags:
         - 'Containers'
-      x-hidden: true
   /containers/{container_id}/files/{file_id}/promote:
     post:
-      description: 'Copies a file from the container''s sandbox prefix into the workspace''s durable document storage, so it outlives the container. Returns the new document in the Files API shape, with a durable file id in the documents namespace. The copy counts against the workspace''s storage quota exactly like an upload.'
+      description: 'Copies a file from the container''s sandbox prefix into the workspace''s durable document storage, so it outlives the container. Returns the new document in the Files API shape, with a durable file id in the documents namespace. The copy counts against the workspace''s storage quota. Unlike a direct upload, promoted files are downloadable.'
       operationId: 'promoteContainerFile'
       parameters:
         - description: 'The canonical container id, exactly as returned in a bash/shell tool result — a restarted session has its own `-r<nonce>`-suffixed id. A session-derived id is always `sess_` + the sanitized session key, which is not necessarily the raw session id that was sent.'
@@ -29438,7 +29742,7 @@ paths:
               example:
                 _shape: 'openrouter'
                 created_at: '2026-08-23T00:00:00Z'
-                downloadable: false
+                downloadable: true
                 filename: 'out/report.csv'
                 id: 'or_file_011CNha8iCJcU1wXNR6q4V8w'
                 mime_type: 'text/csv'
@@ -29530,7 +29834,6 @@ paths:
       summary: 'Promote a container file into workspace documents'
       tags:
         - 'Containers'
-      x-hidden: true
   /credits:
     get:
       description: 'Get total credits purchased and used for the authenticated user. [Management key](/docs/guides/overview/auth/management-api-keys) required.'
@@ -30848,7 +31151,6 @@ paths:
       summary: 'List files'
       tags:
         - 'Files'
-      x-hidden: true
       x-speakeasy-name-override: 'list'
       x-speakeasy-pagination:
         inputs:
@@ -30991,7 +31293,6 @@ paths:
       summary: 'Upload a file'
       tags:
         - 'Files'
-      x-hidden: true
       x-speakeasy-name-override: 'upload'
   /files/{file_id}:
     delete:
@@ -31003,6 +31304,9 @@ paths:
           required: true
           schema:
             example: 'or_file_011CNha8iCJcU1wXNR6q4V8w'
+            maxLength: 256
+            minLength: 1
+            pattern: '^[\w-]+$'
             type: 'string'
         - description: 'Workspace to scope the request to. Defaults to the caller’s default workspace.'
           in: 'query'
@@ -31103,7 +31407,6 @@ paths:
       summary: 'Delete a file'
       tags:
         - 'Files'
-      x-hidden: true
       x-speakeasy-name-override: 'delete'
     get:
       description: 'Retrieves metadata for a single file owned by the requesting workspace.'
@@ -31114,6 +31417,9 @@ paths:
           required: true
           schema:
             example: 'or_file_011CNha8iCJcU1wXNR6q4V8w'
+            maxLength: 256
+            minLength: 1
+            pattern: '^[\w-]+$'
             type: 'string'
         - description: 'Workspace to scope the request to. Defaults to the caller’s default workspace.'
           in: 'query'
@@ -31219,7 +31525,6 @@ paths:
       summary: 'Get file metadata'
       tags:
         - 'Files'
-      x-hidden: true
       x-speakeasy-name-override: 'retrieve'
   /files/{file_id}/content:
     get:
@@ -31231,6 +31536,9 @@ paths:
           required: true
           schema:
             example: 'or_file_011CNha8iCJcU1wXNR6q4V8w'
+            maxLength: 256
+            minLength: 1
+            pattern: '^[\w-]+$'
             type: 'string'
         - description: 'Workspace to scope the request to. Defaults to the caller’s default workspace.'
           in: 'query'
@@ -31340,7 +31648,6 @@ paths:
       summary: 'Download file content'
       tags:
         - 'Files'
-      x-hidden: true
       x-speakeasy-name-override: 'download'
   /generation:
     get:
@@ -33624,7 +33931,7 @@ paths:
                     - 'string'
                     - 'null'
                 expires_at:
-                  description: 'Optional ISO 8601 UTC timestamp when the API key should expire. Must be UTC, other timezones will be rejected'
+                  description: 'Optional ISO 8601 UTC expiration timestamp. Must include seconds (YYYY-MM-DDTHH:MM:SSZ; fractional seconds allowed); minute-precision timestamps are rejected.'
                   example: '2027-12-31T23:59:59Z'
                   format: 'date-time'
                   type:
@@ -34980,12 +35287,12 @@ paths:
             description: 'Filter models by supported parameter (comma-separated)'
             example: 'temperature'
             type: 'string'
-        - description: 'Filter models by output modality. Accepts a comma-separated list of modalities (text, image, audio, embeddings) or "all" to include all models. Defaults to "text".'
+        - description: 'Filter models by output modality. Accepts a comma-separated list of modalities (text, image, embeddings, audio, video, rerank, speech, transcription) or "all" to include all models. Defaults to "text".'
           in: 'query'
           name: 'output_modalities'
           required: false
           schema:
-            description: 'Filter models by output modality. Accepts a comma-separated list of modalities (text, image, audio, embeddings) or "all" to include all models. Defaults to "text".'
+            description: 'Filter models by output modality. Accepts a comma-separated list of modalities (text, image, embeddings, audio, video, rerank, speech, transcription) or "all" to include all models. Defaults to "text".'
             example: 'text'
             type: 'string'
         - description: 'Sort the returned models server-side. Prefer this over fetching the full list and sorting client-side. Options: pricing-low-to-high, pricing-high-to-low (average prompt/completion price), context-high-to-low (context length), throughput-high-to-low, latency-low-to-high (recent median performance), most-popular, top-weekly (tokens processed in the last week), newest (creation date), intelligence-high-to-low, coding-high-to-low, agentic-high-to-low (Artificial Analysis indices), design-arena-elo-high-to-low (best Design Arena ELO across arenas). Models without a score for the chosen benchmark are placed last. When omitted, the existing default ordering is preserved.'
@@ -35488,12 +35795,12 @@ paths:
     get:
       operationId: 'listModelsCount'
       parameters:
-        - description: 'Filter models by output modality. Accepts a comma-separated list of modalities (text, image, audio, embeddings) or "all" to include all models. Defaults to "text".'
+        - description: 'Filter models by output modality. Accepts a comma-separated list of modalities (text, image, embeddings, audio, video, rerank, speech, transcription) or "all" to include all models. Defaults to "text".'
           in: 'query'
           name: 'output_modalities'
           required: false
           schema:
-            description: 'Filter models by output modality. Accepts a comma-separated list of modalities (text, image, audio, embeddings) or "all" to include all models. Defaults to "text".'
+            description: 'Filter models by output modality. Accepts a comma-separated list of modalities (text, image, embeddings, audio, video, rerank, speech, transcription) or "all" to include all models. Defaults to "text".'
             example: 'text'
             type: 'string'
       responses:
@@ -35542,7 +35849,7 @@ paths:
       x-speakeasy-name-override: 'count'
   /models/user:
     get:
-      description: 'List models filtered by user provider preferences, [privacy settings](https://openrouter.ai/docs/guides/privacy/provider-logging), and [guardrails](https://openrouter.ai/docs/guides/features/guardrails). If requesting through a regional hostname, the results will be filtered to models that satisfy in-region routing for that region.'
+      description: 'List models filtered by user provider preferences, [privacy settings](https://openrouter.ai/docs/guides/privacy/provider-logging), and [guardrails](https://openrouter.ai/docs/guides/features/guardrails). Returns text-output models by default; pass `output_modalities` (a comma-separated list of `text`, `image`, `embeddings`, `audio`, `video`, `rerank`, `speech`, `transcription`, or `all`) to include other modalities. If requesting through a regional hostname, the results will be filtered to models that satisfy in-region routing for that region.'
       operationId: 'listModelsUser'
       parameters:
         - description: 'Number of records to skip for pagination. When both offset and limit are omitted, the full list is returned'
@@ -35568,6 +35875,14 @@ paths:
             maximum: 1000
             minimum: 1
             type: 'integer'
+        - description: 'Filter models by output modality. Accepts a comma-separated list of modalities (text, image, embeddings, audio, video, rerank, speech, transcription) or "all" to include all models. Defaults to "text".'
+          in: 'query'
+          name: 'output_modalities'
+          required: false
+          schema:
+            description: 'Filter models by output modality. Accepts a comma-separated list of modalities (text, image, embeddings, audio, video, rerank, speech, transcription) or "all" to include all models. Defaults to "text".'
+            example: 'text'
+            type: 'string'
       responses:
         '200':
           content:
@@ -39062,7 +39377,7 @@ paths:
       x-speakeasy-name-override: 'create'
   /workspaces/{id}:
     delete:
-      description: 'Delete an existing workspace. Workspaces with active API keys cannot be deleted; remove the keys first. Deleting the default workspace is not yet generally available; callers not enabled for it receive a 403 while the capability rolls out. Deleting any workspace permanently deletes its budgets and guardrails and disables its classifiers and broadcast destinations. [Management key](/docs/guides/overview/auth/management-api-keys) required.'
+      description: 'Delete an existing workspace. Workspaces with active API keys cannot be deleted; remove the keys first. Deleting the default workspace requires confirm_default_workspace_deletion=true. Deleting any workspace permanently deletes its budgets and guardrails and disables its classifiers and broadcast destinations. [Management key](/docs/guides/overview/auth/management-api-keys) required.'
       operationId: 'deleteWorkspace'
       parameters:
         - description: 'The workspace ID (UUID) or slug'
@@ -39074,6 +39389,18 @@ paths:
             example: 'production'
             minLength: 1
             type: 'string'
+        - description: 'Required to delete the default workspace. Deleting it permanently disables the account’s unscoped inference API keys (management/provisioning keys are retained) and its budgets, guardrails, classifiers, and broadcast destinations. Ignored for non-default workspaces.'
+          in: 'query'
+          name: 'confirm_default_workspace_deletion'
+          required: false
+          schema:
+            description: 'Required to delete the default workspace. Deleting it permanently disables the account’s unscoped inference API keys (management/provisioning keys are retained) and its budgets, guardrails, classifiers, and broadcast destinations. Ignored for non-default workspaces.'
+            enum:
+              - 'true'
+              - 'false'
+            example: 'false'
+            type: 'string'
+            x-openrouter-type: 'boolean'
       responses:
         '200':
           content:
