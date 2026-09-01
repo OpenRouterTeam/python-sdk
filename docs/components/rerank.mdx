@@ -1,0 +1,11 @@
+---
+title: "Rerank"
+---
+
+## Fields
+
+| Field                                                                    | Type                                                                     | Required                                                                 | Description                                                              | Example                                                                  |
+| ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
+| `latency`                                                                | [Nullable[components.PercentileStats]](../components/percentilestats.mdx) | :heavy_check_mark:                                                       | N/A                                                                      | \{<br/>"p50": 25.5,<br/>"p75": 35.2,<br/>"p90": 48.7,<br/>"p99": 85.3<br/>} |
+| `request_count`                                                          | *Nullable[int]*                                                          | :heavy_check_mark:                                                       | Total requests admitted for this workload in the window.                 |                                                                          |
+| `throughput`                                                             | [Nullable[components.PercentileStats]](../components/percentilestats.mdx) | :heavy_check_mark:                                                       | N/A                                                                      | \{<br/>"p50": 25.5,<br/>"p75": 35.2,<br/>"p90": 48.7,<br/>"p99": 85.3<br/>} |
