@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c48cf606-fb42-4a45-9c23-8f0555307828
 management:
-  docChecksum: df666deb9eaab1df74f56a0778d53881
+  docChecksum: d549f1f1851d3b8566a88c2c51dca446
   docVersion: 1.0.0
   speakeasyVersion: 1.787.0
   generationVersion: 2.914.0
-  releaseVersion: 1.1.110
-  configChecksum: bfa3574af2178aad906640417b26c0c8
+  releaseVersion: 1.1.111
+  configChecksum: 644f7660e9e2fb0ebeee1312909073a7
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
 persistentEdits:
-  generation_id: 62d17f42-2a5c-4339-b577-825d2a5ed84b
-  pristine_commit_hash: 940464cb469716dac779e7de02efde754009896f
-  pristine_tree_hash: 8047514c6c874bd993d00b74bdae280ca60f846e
+  generation_id: 7ebc9620-c5b3-4fdc-b549-4e222b9db662
+  pristine_commit_hash: a7776ac3a07a59ba746e8d4accb93f38725ed124
+  pristine_tree_hash: 947f90afadc7b47906211180266c3e331a0827cd
 features:
   python:
     acceptHeaders: 3.0.0
@@ -7458,8 +7458,8 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:70bced593dbea8641583c11dfff95039b48e120f
-    pristine_git_object: 7cbf8e9d296dca294454619141acbfdc8182b9c4
+    last_write_checksum: sha1:efbcdc29ac4bfee3f46ae11671b08559d41130fb
+    pristine_git_object: 1ed6cdf52cf082be603cab094955982904ff9ea9
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77f44b60b98bc126557ec27391f91dfba764bb54
@@ -7486,8 +7486,8 @@ trackedFiles:
     pristine_git_object: 86713cfea633e09d33b3d4e65281071fe20e6137
   src/openrouter/_version.py:
     id: d8d15ad6c586
-    last_write_checksum: sha1:4976319f5f24f85f03c626d1a921e55a7152c7bc
-    pristine_git_object: 6753ace2ec4b00425829f7b5b0001462cba23d79
+    last_write_checksum: sha1:cb3f1aedcbfc00d2af7b97c32d0e14a2899ef8d0
+    pristine_git_object: 6edf25f6e9267720fa61ef6382d2972490018d1f
   src/openrouter/analytics.py:
     id: cb406b5aaabb
     last_write_checksum: sha1:1e0004d8d1d5d797e2b54cd1cabeb7f9489d08e9
@@ -12549,6 +12549,3 @@ examples:
         "503":
           application/json: {"error": {"code": 503, "message": "Service temporarily unavailable"}}
 examplesVersion: 1.0.2
-releaseNotes: |
-  ## Python SDK Changes:
-  * `open_router.presets.create_presets_messages()`:  `request` **Changed**
