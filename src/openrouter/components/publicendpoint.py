@@ -14,6 +14,306 @@ from typing import List, Optional
 from typing_extensions import NotRequired, TypedDict
 
 
+class EmbeddingsTypedDict(TypedDict):
+    latency: Nullable[PercentileStatsTypedDict]
+    request_count: Nullable[int]
+    r"""Total requests admitted for this workload in the window."""
+    throughput: Nullable[PercentileStatsTypedDict]
+
+
+class Embeddings(BaseModel):
+    latency: Nullable[PercentileStats]
+
+    request_count: Nullable[int]
+    r"""Total requests admitted for this workload in the window."""
+
+    throughput: Nullable[PercentileStats]
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                m[k] = val
+
+        return m
+
+
+class ImageGenerationTypedDict(TypedDict):
+    latency: Nullable[PercentileStatsTypedDict]
+    request_count: Nullable[int]
+    r"""Total requests admitted for this workload in the window."""
+    throughput: Nullable[PercentileStatsTypedDict]
+
+
+class ImageGeneration(BaseModel):
+    latency: Nullable[PercentileStats]
+
+    request_count: Nullable[int]
+    r"""Total requests admitted for this workload in the window."""
+
+    throughput: Nullable[PercentileStats]
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                m[k] = val
+
+        return m
+
+
+class RerankTypedDict(TypedDict):
+    latency: Nullable[PercentileStatsTypedDict]
+    request_count: Nullable[int]
+    r"""Total requests admitted for this workload in the window."""
+    throughput: Nullable[PercentileStatsTypedDict]
+
+
+class Rerank(BaseModel):
+    latency: Nullable[PercentileStats]
+
+    request_count: Nullable[int]
+    r"""Total requests admitted for this workload in the window."""
+
+    throughput: Nullable[PercentileStats]
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                m[k] = val
+
+        return m
+
+
+class STTTypedDict(TypedDict):
+    latency: Nullable[PercentileStatsTypedDict]
+    request_count: Nullable[int]
+    r"""Total requests admitted for this workload in the window."""
+    throughput: Nullable[PercentileStatsTypedDict]
+
+
+class STT(BaseModel):
+    latency: Nullable[PercentileStats]
+
+    request_count: Nullable[int]
+    r"""Total requests admitted for this workload in the window."""
+
+    throughput: Nullable[PercentileStats]
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                m[k] = val
+
+        return m
+
+
+class TextGenerationTypedDict(TypedDict):
+    latency: Nullable[PercentileStatsTypedDict]
+    request_count: Nullable[int]
+    r"""Total requests admitted for this workload in the window."""
+    throughput: Nullable[PercentileStatsTypedDict]
+
+
+class TextGeneration(BaseModel):
+    latency: Nullable[PercentileStats]
+
+    request_count: Nullable[int]
+    r"""Total requests admitted for this workload in the window."""
+
+    throughput: Nullable[PercentileStats]
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                m[k] = val
+
+        return m
+
+
+class TTSTypedDict(TypedDict):
+    latency: Nullable[PercentileStatsTypedDict]
+    request_count: Nullable[int]
+    r"""Total requests admitted for this workload in the window."""
+    throughput: Nullable[PercentileStatsTypedDict]
+
+
+class TTS(BaseModel):
+    latency: Nullable[PercentileStats]
+
+    request_count: Nullable[int]
+    r"""Total requests admitted for this workload in the window."""
+
+    throughput: Nullable[PercentileStats]
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                m[k] = val
+
+        return m
+
+
+class UnknownTypedDict(TypedDict):
+    latency: Nullable[PercentileStatsTypedDict]
+    request_count: Nullable[int]
+    r"""Total requests admitted for this workload in the window."""
+    throughput: Nullable[PercentileStatsTypedDict]
+
+
+class Unknown(BaseModel):
+    latency: Nullable[PercentileStats]
+
+    request_count: Nullable[int]
+    r"""Total requests admitted for this workload in the window."""
+
+    throughput: Nullable[PercentileStats]
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                m[k] = val
+
+        return m
+
+
+class VideoGenerationTypedDict(TypedDict):
+    latency: Nullable[PercentileStatsTypedDict]
+    request_count: Nullable[int]
+    r"""Total requests admitted for this workload in the window."""
+    throughput: Nullable[PercentileStatsTypedDict]
+
+
+class VideoGeneration(BaseModel):
+    latency: Nullable[PercentileStats]
+
+    request_count: Nullable[int]
+    r"""Total requests admitted for this workload in the window."""
+
+    throughput: Nullable[PercentileStats]
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                m[k] = val
+
+        return m
+
+
+class PerfLast30mByWorkloadTypedDict(TypedDict):
+    r"""Endpoint performance over the last 30 minutes, keyed by the kind of request served (e.g. `text_generation`, `image_generation`). Additive to the legacy singular latency and throughput fields; image and video generation report end-to-end latency. Only visible when authenticated with an API key or cookie."""
+
+    embeddings: NotRequired[EmbeddingsTypedDict]
+    image_generation: NotRequired[ImageGenerationTypedDict]
+    rerank: NotRequired[RerankTypedDict]
+    stt: NotRequired[STTTypedDict]
+    text_generation: NotRequired[TextGenerationTypedDict]
+    tts: NotRequired[TTSTypedDict]
+    unknown: NotRequired[UnknownTypedDict]
+    video_generation: NotRequired[VideoGenerationTypedDict]
+
+
+class PerfLast30mByWorkload(BaseModel):
+    r"""Endpoint performance over the last 30 minutes, keyed by the kind of request served (e.g. `text_generation`, `image_generation`). Additive to the legacy singular latency and throughput fields; image and video generation report end-to-end latency. Only visible when authenticated with an API key or cookie."""
+
+    embeddings: Optional[Embeddings] = None
+
+    image_generation: Optional[ImageGeneration] = None
+
+    rerank: Optional[Rerank] = None
+
+    stt: Optional[STT] = None
+
+    text_generation: Optional[TextGeneration] = None
+
+    tts: Optional[TTS] = None
+
+    unknown: Optional[Unknown] = None
+
+    video_generation: Optional[VideoGeneration] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "embeddings",
+                "image_generation",
+                "rerank",
+                "stt",
+                "text_generation",
+                "tts",
+                "unknown",
+                "video_generation",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
+
 class PricingTypedDict(TypedDict):
     completion: str
     r"""Price in USD per token for completion (output) generation"""
@@ -159,6 +459,8 @@ class PublicEndpointTypedDict(TypedDict):
     uptime_last_30m: Nullable[float]
     uptime_last_5m: Nullable[float]
     r"""Uptime percentage over the last 5 minutes, calculated as successful requests / (successful + error requests) * 100. Rate-limited requests are excluded. Returns null if insufficient data."""
+    perf_last_30m_by_workload: NotRequired[PerfLast30mByWorkloadTypedDict]
+    r"""Endpoint performance over the last 30 minutes, keyed by the kind of request served (e.g. `text_generation`, `image_generation`). Additive to the legacy singular latency and throughput fields; image and video generation report end-to-end latency. Only visible when authenticated with an API key or cookie."""
     status: NotRequired[EndpointStatus]
     supports_voice_cloning: NotRequired[bool]
     r"""Whether this TTS endpoint accepts inline reference audio (`input_references`) for stateless voice cloning. Requests carrying reference audio are only routed to endpoints where this is true."""
@@ -209,6 +511,9 @@ class PublicEndpoint(BaseModel):
     uptime_last_5m: Nullable[float]
     r"""Uptime percentage over the last 5 minutes, calculated as successful requests / (successful + error requests) * 100. Rate-limited requests are excluded. Returns null if insufficient data."""
 
+    perf_last_30m_by_workload: Optional[PerfLast30mByWorkload] = None
+    r"""Endpoint performance over the last 30 minutes, keyed by the kind of request served (e.g. `text_generation`, `image_generation`). Additive to the legacy singular latency and throughput fields; image and video generation report end-to-end latency. Only visible when authenticated with an API key or cookie."""
+
     status: Optional[EndpointStatus] = None
 
     supports_voice_cloning: Optional[bool] = False
@@ -216,7 +521,9 @@ class PublicEndpoint(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["status", "supports_voice_cloning"])
+        optional_fields = set(
+            ["perf_last_30m_by_workload", "status", "supports_voice_cloning"]
+        )
         nullable_fields = set(
             [
                 "latency_last_30m",
