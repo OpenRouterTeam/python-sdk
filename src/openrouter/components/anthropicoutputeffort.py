@@ -5,11 +5,13 @@ from openrouter.types import UnrecognizedStr
 from typing import Literal, Union
 
 
-AnthropicThinkingDisplay = Union[
+AnthropicOutputEffort = Union[
     Literal[
-        "summarized",
-        "omitted",
-        "updates",
+        "low",
+        "medium",
+        "high",
+        "xhigh",
+        "max",
     ],
     UnrecognizedStr,
 ]

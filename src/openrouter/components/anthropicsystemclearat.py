@@ -5,11 +5,4 @@ from openrouter.types import UnrecognizedStr
 from typing import Literal, Union
 
 
-AnthropicThinkingDisplay = Union[
-    Literal[
-        "summarized",
-        "omitted",
-        "updates",
-    ],
-    UnrecognizedStr,
-]
+AnthropicSystemClearAt = Union[Literal["next_user_message",], UnrecognizedStr]
