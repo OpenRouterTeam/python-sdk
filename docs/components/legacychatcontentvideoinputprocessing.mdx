@@ -1,0 +1,22 @@
+---
+title: "LegacyChatContentVideoInputProcessing"
+---
+
+Video processing mode. `agentic` enables agentic video processing and `static` forces fixed-rate frame sampling on providers that support it (currently Google Gemini).
+
+## Example Usage
+
+```python
+from openrouter.components import LegacyChatContentVideoInputProcessing
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
+value: LegacyChatContentVideoInputProcessing = "agentic"
+```
+
+
+## Values
+
+This is an open enum. Unrecognized values will not fail type checks.
+
+- `"agentic"`
+- `"static"`

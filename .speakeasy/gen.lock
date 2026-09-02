@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c48cf606-fb42-4a45-9c23-8f0555307828
 management:
-  docChecksum: b002127df9dff8bca921a5301f7a36ed
+  docChecksum: 00aa71dfc0c7f5973a63d3598c58ba7f
   docVersion: 1.0.0
   speakeasyVersion: 1.787.0
   generationVersion: 2.914.0
-  releaseVersion: 1.1.113
-  configChecksum: 0250e77937cc0d157589b7bc4e0a40ef
+  releaseVersion: 1.1.114
+  configChecksum: 0aa7bff58c555dba72aa3a25047637ff
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
 persistentEdits:
-  generation_id: c791fa1c-d5a4-4047-8325-b971f499d770
-  pristine_commit_hash: e0d142b3bbe8c2b2512e6908f4f9d3c79ace8f93
-  pristine_tree_hash: f3e10f9d7eca1a441f4b617ae5837a6527bdb022
+  generation_id: a8a94a72-1a68-418a-925b-a5cabe9d6925
+  pristine_commit_hash: 256542e4b63d96882313dcfb81acf56639f4b3fb
+  pristine_tree_hash: 4903f49eccb839e14cabdb9b7291d7c41a9edf2b
 features:
   python:
     acceptHeaders: 3.0.0
@@ -946,8 +946,12 @@ trackedFiles:
     pristine_git_object: b8a1d5ee3df3e7ad02845285854411d7da83a0ea
   docs/components/chatcontentvideoinput.mdx:
     id: 9c532e9e6277
-    last_write_checksum: sha1:84a6017411931c941afeaff1f21b73719deb0d2b
-    pristine_git_object: 7b80ce52b58467bc0d5d2c9f254b0ddeaaf1c03e
+    last_write_checksum: sha1:f33d33f6699a8cfd786c9f65ea076ca0385c3f4f
+    pristine_git_object: 3e3d6273f01a84573123938505c3720fae32d7c9
+  docs/components/chatcontentvideoinputprocessing.mdx:
+    id: 9234943ac2ac
+    last_write_checksum: sha1:3f34d69974f75e58cf0b5d480e93a35c4204d431
+    pristine_git_object: bcb8008836125ac68c7b8317574c82106756ca07
   docs/components/chatcontentvideotype.mdx:
     id: 55a566b293e8
     last_write_checksum: sha1:0989b559350a1399ce249828d11b48749f376d18
@@ -2738,8 +2742,12 @@ trackedFiles:
     pristine_git_object: 53081e479fffa519e65d4903e895381506bf688e
   docs/components/inputvideo.mdx:
     id: 174b24b8f614
-    last_write_checksum: sha1:a00cacecd2fc9e7679a18e99f8070ee4497947fd
-    pristine_git_object: a303045f5dcaca6830fbaf648b44a0c048603ab8
+    last_write_checksum: sha1:521c35f3ce0dc7d79a84a4522a33f83fbb77b408
+    pristine_git_object: c7e3967e6f7a0695ab5cd466dac799ad17a2d81c
+  docs/components/inputvideoprocessing.mdx:
+    id: d6eaed6b7591
+    last_write_checksum: sha1:724e96828c7bb1d7a17e4bc8b5b1c9fb5e5458d9
+    pristine_git_object: e98dfeb909dfb05c9f3916b45e283aaa69bc14cb
   docs/components/inputvideotype.mdx:
     id: ec9d78e69f7d
     last_write_checksum: sha1:baaddfd1bc97d6bc885fcf33c436b5dfefff8d29
@@ -2786,8 +2794,12 @@ trackedFiles:
     pristine_git_object: 74b480b1c49cda64a8d30cf84e91c18d4f4fa32e
   docs/components/legacychatcontentvideoinput.mdx:
     id: ca6bd671604d
-    last_write_checksum: sha1:027a30a7edefff19d85cb0065c5c1521280418bc
-    pristine_git_object: d79ac0622f1c74b02e6f5ce1667c52b8244ff049
+    last_write_checksum: sha1:c56ef325c8e418c0d14b94d5964696786598feca
+    pristine_git_object: 83f59a5631fe3a6ea59451f9b44126e0493610b3
+  docs/components/legacychatcontentvideoinputprocessing.mdx:
+    id: e943fac24c7d
+    last_write_checksum: sha1:23b65fc78f29ab9a6b9197bcd5d1e0989435b428
+    pristine_git_object: 3704bacda9aeedc8ed5ff81e657d7ce2d522edf0
   docs/components/legacychatcontentvideotype.mdx:
     id: 6ed2500f1a33
     last_write_checksum: sha1:191077107def4be932273d87f6e81a2b3aefc412
@@ -7378,8 +7390,8 @@ trackedFiles:
     pristine_git_object: fe31c0f4f765b9f8f3cf79f6dd403e730589db80
   docs/sdks/embeddings/README.mdx:
     id: cd71581df291
-    last_write_checksum: sha1:f9a69d531fd3e23a5a65e16053b757e5acc99c02
-    pristine_git_object: beb14b7d3110913229c53c98da3d6e047af78801
+    last_write_checksum: sha1:a4a6e0bb62f5d71ff6c2803539a9d621d3a3473b
+    pristine_git_object: 61d507bb094a3a06e994c89b91b401f4c2cfffda
   docs/sdks/endpoints/README.mdx:
     id: 62dfac9f7b71
     last_write_checksum: sha1:db7ed18401bcd4afa7382a9793c9ccafb5220497
@@ -7426,8 +7438,8 @@ trackedFiles:
     pristine_git_object: 7571e2581a73919541d9712f6c1f88f9c0d2b4c9
   docs/sdks/rerank/README.mdx:
     id: 68cdfc7f7dca
-    last_write_checksum: sha1:6dded21b8567278fa801df5081cca63a1e64ff85
-    pristine_git_object: 68f6454a9155aaebe1650a613fd40fc7b2b5a681
+    last_write_checksum: sha1:d4dd356c41f015df66cded3ecece8854547dd867
+    pristine_git_object: ad1d6f898b92bb69a980849fe21701dab375322d
   docs/sdks/responses/README.mdx:
     id: abab319e080e
     last_write_checksum: sha1:786e6be086f66f9262e19d6bbf8e32d726bea076
@@ -7438,16 +7450,16 @@ trackedFiles:
     pristine_git_object: 89918692e893f665f65a870440659a63ab821693
   docs/sdks/stt/README.mdx:
     id: 190b0dc9a5d1
-    last_write_checksum: sha1:1602f411670a9626e157cf37df8f3a90da15a4a6
-    pristine_git_object: ba30223a27208904a3a69690ae214d3f32441a39
+    last_write_checksum: sha1:a9885710fd21bb71b4c80a10ad54a20bf47ddca7
+    pristine_git_object: e3d0710101800912f24eefe9f6ff09b134f35309
   docs/sdks/tts/README.mdx:
     id: cd1132543884
-    last_write_checksum: sha1:ff8413c231ba1a6c59ba2d30fdb1186067dbc229
-    pristine_git_object: afdf10028c5fb35ec021a71f6c943abbfa96af49
+    last_write_checksum: sha1:42500815f5e697f034fc8a033b07e334e4439bed
+    pristine_git_object: 80af14ecc66831a2a2d09382a917731406813ccd
   docs/sdks/videogeneration/README.mdx:
     id: 9a8fa04c3872
-    last_write_checksum: sha1:90b6f8ccf08b13fb7e1a011306972147cc5eeac7
-    pristine_git_object: b8a724406e6cacb0ecfef890499e727808961000
+    last_write_checksum: sha1:55046a594a51e6ceedc5c0f2fdfab4ea16994cc9
+    pristine_git_object: c77d333eaf3d02a52e159e77e6eca4ac90e23ec8
   docs/sdks/workspaces/README.mdx:
     id: 0c75d023ef6b
     last_write_checksum: sha1:ecfd85b34b7a3a24d10e2ac68938691d51c7dc25
@@ -7458,8 +7470,8 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:864c9c2dd1b9e238561b3b05c2215f2306b365c3
-    pristine_git_object: 557f846b36ed91a83ce9fc38f1ce7acebcdef317
+    last_write_checksum: sha1:6897fd693a93be37c4b099c6162445b14c3c8d64
+    pristine_git_object: daadbbb93daa8150616ef50be56e356d4a61afd7
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77f44b60b98bc126557ec27391f91dfba764bb54
@@ -7486,8 +7498,8 @@ trackedFiles:
     pristine_git_object: 86713cfea633e09d33b3d4e65281071fe20e6137
   src/openrouter/_version.py:
     id: d8d15ad6c586
-    last_write_checksum: sha1:f0dc7bf4a152a2658bda4f4add4a8fb8cc9b08df
-    pristine_git_object: dad408a9fafc28fde91e474c45c690b2d8d130ff
+    last_write_checksum: sha1:dcdd717a27e5dd420edb005f3f03ff2a8e71f080
+    pristine_git_object: a5aa3229c41b5023d39d676c0e55badf91d1f2b6
   src/openrouter/analytics.py:
     id: cb406b5aaabb
     last_write_checksum: sha1:1e0004d8d1d5d797e2b54cd1cabeb7f9489d08e9
@@ -7526,8 +7538,8 @@ trackedFiles:
     pristine_git_object: ad3d247954547814054c01989a2dff3d12b3e4e1
   src/openrouter/components/__init__.py:
     id: 81754e97b3f4
-    last_write_checksum: sha1:4885a080d9d392d02dc42ed9de8d4ccdfccb1a8b
-    pristine_git_object: 46a4593dbf3a85c7c54747b5efb05938134a9d79
+    last_write_checksum: sha1:ee70d625d7027ee29923ba65bb5fe1e4718fd7de
+    pristine_git_object: ed8b0e61148dac5a11debbf97c028fd8dd145fec
   src/openrouter/components/aabenchmarkentry.py:
     id: e2e0f0b48c82
     last_write_checksum: sha1:fab4d9a24d2cea937bb749d46c5f83941e99d65c
@@ -7954,8 +7966,8 @@ trackedFiles:
     pristine_git_object: 2ece45eb1a09feb63d8c1aafb66ac0094258c1d9
   src/openrouter/components/chatcontentvideoinput.py:
     id: c5168472818a
-    last_write_checksum: sha1:f2cbf00b5d4a980e9a36720dc2512346234b36c1
-    pristine_git_object: 48b8e57ca95d7dd50e7172de375eadb6d052ad35
+    last_write_checksum: sha1:9c1a2eef643a5c8483d4019c1e90119d62ed1149
+    pristine_git_object: 04e593840cffc6d3baf6f56f5fa9b02756adcf76
   src/openrouter/components/chatdebugoptions.py:
     id: 03e05dcf9b0e
     last_write_checksum: sha1:52d89c7c7ad343bd9d1dcc84a13f4091eb3510ad
@@ -8342,8 +8354,8 @@ trackedFiles:
     pristine_git_object: 708dfac62530c5fcd29f6bb0be113dc34fd24718
   src/openrouter/components/easyinputmessage.py:
     id: 72619a312585
-    last_write_checksum: sha1:cfd2576c0fc43b9b6f07228e4d5c37602f765cc5
-    pristine_git_object: 7a92038fdc99c33389ec617eca08a2c687bc0e4c
+    last_write_checksum: sha1:ad4971990695b6565fe1f631966cba95e5289863
+    pristine_git_object: 33a8b190d7c6d4df90560597ea7b90f8322578a0
   src/openrouter/components/edgenetworktimeoutresponseerrordata.py:
     id: dc53aae5b171
     last_write_checksum: sha1:44373dac3bf06bd752f0c54122949a024f70d3b5
@@ -8694,8 +8706,8 @@ trackedFiles:
     pristine_git_object: 0e7edf2ba9a0c7cfa1e395b240ab55ada9bbd436
   src/openrouter/components/inputmessageitem.py:
     id: 6c5260d62714
-    last_write_checksum: sha1:b3d5ab531388f83247f204f15b9bba082f8aa035
-    pristine_git_object: e6332882b51e720126426ccdede1a60f2e90819f
+    last_write_checksum: sha1:28aa6d6daa23ef02c730d35b8009db86cba444e1
+    pristine_git_object: aa949dde32cf64fe3bd02c01e0adf4f949288143
   src/openrouter/components/inputmodality.py:
     id: ffa999fb401a
     last_write_checksum: sha1:da607c1deed71fcc11d880b7cebe92471e2ec5d4
@@ -8714,8 +8726,8 @@ trackedFiles:
     pristine_git_object: 81a4151b3b1cdb6eb262a9ede28217b6c0afd1df
   src/openrouter/components/inputvideo.py:
     id: d262affd6f7e
-    last_write_checksum: sha1:60c1792ab1f440ae67b5b451fd4d195e02783161
-    pristine_git_object: 3a2e1e59d105fa0fd794c9b8f3fa1fe51363c83e
+    last_write_checksum: sha1:010c449ce057f80339201a10ba78ff8800860a52
+    pristine_git_object: a81da55a974fa6ccb730e53d01778f2c0ac31df8
   src/openrouter/components/instructtype.py:
     id: 411acdbfeb84
     last_write_checksum: sha1:6cc1744db62a53dfa1425c8cab508f5538cd3d50
@@ -8738,8 +8750,8 @@ trackedFiles:
     pristine_git_object: 38a7bf71a9b45b3f38d0aaad567a97996f80401e
   src/openrouter/components/legacy_chatcontentvideoinput.py:
     id: 27b3187afed4
-    last_write_checksum: sha1:b9acaad63d544772ae34ba29a6eec2248b0181ac
-    pristine_git_object: 0fe43c16758210b0b304f3f31cc88ba2df5e46a0
+    last_write_checksum: sha1:a83e888c857c9269b706f2334cda2a0a4a0359a1
+    pristine_git_object: 0e7afcaa9c47ce1a6b15a90b9419aaa406c51079
   src/openrouter/components/legacy_websearchservertool.py:
     id: 8b28b05b8756
     last_write_checksum: sha1:236eb9aa2e35646d64c0b6beb172dbf0a8cade6d
@@ -10034,8 +10046,8 @@ trackedFiles:
     pristine_git_object: 0532cef994643793368c4484b8af0d247be2692e
   src/openrouter/embeddings.py:
     id: 0374ace39067
-    last_write_checksum: sha1:8936040e99e5a69870b975bb8693669b20ac699a
-    pristine_git_object: f6bd37ea68835d6df93ecb86be1f560f512154ed
+    last_write_checksum: sha1:0455c3566bed8b60aac864d5508da724b1ebc372
+    pristine_git_object: b17f06e58b2bccdf340529f1128fdadf687fdbd4
   src/openrouter/endpoints.py:
     id: 465bbf2b7939
     last_write_checksum: sha1:a04548ad80c9b1cf8ae1f5dde2e24774865c1eb8
@@ -10586,8 +10598,8 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   src/openrouter/rerank.py:
     id: 8dbc1be8d76f
-    last_write_checksum: sha1:4236f8079e5f198ddcd79058a76c0753f7f685bc
-    pristine_git_object: cfd7de57d6bcab6642d5ccd442f8388a3a300f0c
+    last_write_checksum: sha1:370bfaddfa96a3f511497dcd2cdff58e00c0b1fb
+    pristine_git_object: 327778a827e0a2b1d787bba3ac8edfd1534b71df
   src/openrouter/responses.py:
     id: f2108fb635e1
     last_write_checksum: sha1:27af78b7cedb1691bb88a71271808d1e4685c2bb
@@ -10606,12 +10618,12 @@ trackedFiles:
     pristine_git_object: 26433165a0b1c25d7bd3115b9b129b18f2dc9387
   src/openrouter/stt.py:
     id: fc0c2f669423
-    last_write_checksum: sha1:6fb43c31e930b653d0eb809f99e250a7cd7601ca
-    pristine_git_object: 932ea2f623bf9026e5c538d6ea387f06e73a86cd
+    last_write_checksum: sha1:f5269c3d75c6dbe05d64b848efcdced97e7f16a7
+    pristine_git_object: d0fcdf070fb6b37f136672a5e82f4c79f14f7a13
   src/openrouter/tts.py:
     id: 5055d4b95f1d
-    last_write_checksum: sha1:973737d1461d3723e9de63f1f3684aae573cc3e4
-    pristine_git_object: 4c5f06473916e17766269b82a3c2ae68ce73bb1f
+    last_write_checksum: sha1:6c45479abd73b0c089c7bc2bc349c568fe1a1817
+    pristine_git_object: 4b92059be9b90d86ef2e1516d98602c0b0c0aa16
   src/openrouter/types/__init__.py:
     id: 5eab536205b7
     last_write_checksum: sha1:f9ad14217f832e74f594285960125add50324be9
@@ -10702,8 +10714,8 @@ trackedFiles:
     pristine_git_object: dae01a44384ac3bc13ae07453a053bf6c898ebe3
   src/openrouter/video_generation.py:
     id: d0a90c1b8efe
-    last_write_checksum: sha1:fc044e1af054b23fc415f9d7f40303b96678ab19
-    pristine_git_object: d7a5997d75ebb156d61342c8cf55c00cee9e210d
+    last_write_checksum: sha1:7ee130360a9ea861efc0a316ca018d63a5eb5d48
+    pristine_git_object: 6fc1549e11844f2b6403eae82d07f801ef3e1ca8
   src/openrouter/workspaces.py:
     id: cd6c533b1802
     last_write_checksum: sha1:14ad98e8707e3e75185794b9a2f341ebc40b11c8
@@ -10866,6 +10878,8 @@ examples:
           application/json: {"error": {"code": 408, "message": "Operation timed out. Please try again later."}}
         "413":
           application/json: {"error": {"code": 413, "message": "Request payload too large"}}
+        "403":
+          application/json: {"error": {"code": 403, "message": "Only management keys can perform this operation"}}
   listEmbeddingsModels:
     speakeasy-default-list-embeddings-models:
       parameters:
@@ -11351,6 +11365,8 @@ examples:
           application/json: {"error": {"code": 529, "message": "Provider returned error"}}
         "413":
           application/json: {"error": {"code": 413, "message": "Request payload too large"}}
+        "403":
+          application/json: {"error": {"code": 403, "message": "Only management keys can perform this operation"}}
   createVideos:
     speakeasy-default-create-videos:
       requestBody:
@@ -11372,6 +11388,8 @@ examples:
           application/json: {"error": {"code": 500, "message": "Internal Server Error"}}
         "413":
           application/json: {"error": {"code": 413, "message": "Request payload too large"}}
+        "403":
+          application/json: {"error": {"code": 403, "message": "Only management keys can perform this operation"}}
   getVideos:
     speakeasy-default-get-videos:
       parameters:
@@ -11386,6 +11404,8 @@ examples:
           application/json: {"error": {"code": 404, "message": "Resource not found"}}
         "500":
           application/json: {"error": {"code": 500, "message": "Internal Server Error"}}
+        "403":
+          application/json: {"error": {"code": 403, "message": "Only management keys can perform this operation"}}
   listVideosContent:
     speakeasy-default-list-videos-content:
       parameters:
@@ -11407,6 +11427,8 @@ examples:
           application/json: {"error": {"code": 500, "message": "Internal Server Error"}}
         "502":
           application/json: {"error": {"code": 502, "message": "Provider returned error"}}
+        "403":
+          application/json: {"error": {"code": 403, "message": "Only management keys can perform this operation"}}
   listVideosModels:
     speakeasy-default-list-videos-models:
       responses:
@@ -11473,6 +11495,8 @@ examples:
           application/json: {"error": {"code": 529, "message": "Provider returned error"}}
         "413":
           application/json: {"error": {"code": 413, "message": "Request payload too large"}}
+        "403":
+          application/json: {"error": {"code": 403, "message": "Only management keys can perform this operation"}}
   createAudioTranscriptions:
     speakeasy-default-create-audio-transcriptions:
       requestBody:
@@ -11502,6 +11526,8 @@ examples:
           application/json: {"error": {"code": 529, "message": "Provider returned error"}}
         "413":
           application/json: {"error": {"code": 413, "message": "Request payload too large"}}
+        "403":
+          application/json: {"error": {"code": 403, "message": "Only management keys can perform this operation"}}
     speakeasy-default-create-audio-transcriptions-multipart:
       requestBody:
         multipart/form-data: {"file": "x-file: example.file", "model": "Escalade"}
@@ -11530,6 +11556,8 @@ examples:
           application/json: {"error": {"code": 529, "message": "Provider returned error"}}
         "413":
           application/json: {"error": {"code": 413, "message": "Request payload too large"}}
+        "403":
+          application/json: {"error": {"code": 403, "message": "Only management keys can perform this operation"}}
   listBYOKKeys:
     speakeasy-default-list-BYOK-keys:
       parameters:
@@ -12549,3 +12577,4 @@ examples:
         "503":
           application/json: {"error": {"code": 503, "message": "Service temporarily unavailable"}}
 examplesVersion: 1.0.2
+releaseNotes: "## Python SDK Changes:\n* `open_router.tts.create_speech()`:  `error.status[403]` **Added**\n* `open_router.stt.create_transcription()`:  `error.status[403]` **Added**\n* `open_router.stt.create_transcription_multipart()`:  `error.status[403]` **Added**\n* `open_router.chat.send()`: \n  *  `request.messages[].union(assistant).content.union(Array<ChatContentItems>)[]` **Changed**\n  *  `response.choices[].message.content.union(Array<ChatContentItems>)[]` **Changed**\n* `open_router.embeddings.generate()`:  `error.status[403]` **Added**\n* `open_router.presets.create_presets_chat_completions()`: \n  *  `request.messages[].union(assistant).content.union(Array<ChatContentItems>)[]` **Changed**\n* `open_router.presets.create_presets_responses()`: \n  *  `request.input.union(Array<>)[].union(InputMessageItem).content[].union(input_video).processing` **Added**\n* `open_router.rerank.rerank()`:  `error.status[403]` **Added**\n* `open_router.responses.send()`: \n  *  `request.input.union(Array<>)[].union(InputMessageItem).content[].union(input_video).processing` **Added**\n* `open_router.beta.responses.send()`: \n  *  `request.input.union(Array<>)[].union(InputMessageItem).content[].union(input_video).processing` **Added**\n* `open_router.video_generation.generate()`:  `error.status[403]` **Added**\n* `open_router.video_generation.get_generation()`:  `error.status[403]` **Added**\n* `open_router.video_generation.get_video_content()`:  `error.status[403]` **Added**\n"
