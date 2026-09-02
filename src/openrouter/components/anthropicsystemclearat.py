@@ -5,4 +5,10 @@ from openrouter.types import UnrecognizedStr
 from typing import Literal, Union
 
 
-AnthropicSystemClearAt = Union[Literal["next_user_message",], UnrecognizedStr]
+AnthropicSystemClearAt = Union[
+    Literal[
+        "next_user_message",
+        "never",
+    ],
+    UnrecognizedStr,
+]
