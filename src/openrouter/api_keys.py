@@ -540,8 +540,6 @@ class APIKeys(BaseSDK):
         x_open_router_categories: Optional[str] = None,
         creator_user_id: OptionalNullable[str] = UNSET,
         expires_at: OptionalNullable[datetime] = UNSET,
-        external_api_key: Optional[str] = None,
-        external_user: Optional[str] = None,
         include_byok_in_limit: Optional[bool] = None,
         limit: OptionalNullable[float] = UNSET,
         limit_reset: OptionalNullable[operations.CreateKeysLimitReset] = UNSET,
@@ -553,7 +551,7 @@ class APIKeys(BaseSDK):
     ) -> operations.CreateKeysResponse:
         r"""Create a new API key
 
-        Create a new API key for the authenticated user. The plaintext `key` is returned only in this response. Treat it as a write-only, sensitive value; it cannot be retrieved later. Authenticate with a [management key](/docs/guides/overview/auth/management-api-keys), or with a Connect client secret. `external_user` and `external_api_key` are accepted only with a client secret, and `external_user` is required there; supplying either field with a management key is rejected with 403.
+        Create a new API key for the authenticated user. The plaintext `key` is returned only in this response. Treat it as a write-only, sensitive value; it cannot be retrieved later. Authenticate with a [management key](/docs/guides/overview/auth/management-api-keys), or with a Connect client secret.
 
         :param name: Name for the new API key
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
@@ -565,8 +563,6 @@ class APIKeys(BaseSDK):
 
         :param creator_user_id: Optional user ID of the key creator. Only meaningful for organization-owned keys where a specific member is creating the key.
         :param expires_at: Optional ISO 8601 UTC expiration timestamp. Must include seconds (YYYY-MM-DDTHH:MM:SSZ; fractional seconds allowed); minute-precision timestamps are rejected.
-        :param external_api_key: Optional partner-supplied API key. Stored as a SHA-256 hash and never returned. Accepted only when authenticating with a Connect client secret; supplying it with a management key is rejected with 403.
-        :param external_user: Partner's end-user identifier for attribution, between 1 and 512 characters. Accepted only when authenticating with a Connect client secret, where it is required; supplying it with a management key is rejected with 403.
         :param include_byok_in_limit: Whether to include BYOK usage in the limit
         :param limit: Optional spending limit for the API key in USD
         :param limit_reset: Type of limit reset for the API key (daily, weekly, monthly, or null for no reset). Resets happen automatically at midnight UTC, and weeks are Monday through Sunday.
@@ -593,8 +589,6 @@ class APIKeys(BaseSDK):
             request_body=operations.CreateKeysRequestBody(
                 creator_user_id=creator_user_id,
                 expires_at=expires_at,
-                external_api_key=external_api_key,
-                external_user=external_user,
                 include_byok_in_limit=include_byok_in_limit,
                 limit=limit,
                 limit_reset=limit_reset,
@@ -711,8 +705,6 @@ class APIKeys(BaseSDK):
         x_open_router_categories: Optional[str] = None,
         creator_user_id: OptionalNullable[str] = UNSET,
         expires_at: OptionalNullable[datetime] = UNSET,
-        external_api_key: Optional[str] = None,
-        external_user: Optional[str] = None,
         include_byok_in_limit: Optional[bool] = None,
         limit: OptionalNullable[float] = UNSET,
         limit_reset: OptionalNullable[operations.CreateKeysLimitReset] = UNSET,
@@ -724,7 +716,7 @@ class APIKeys(BaseSDK):
     ) -> operations.CreateKeysResponse:
         r"""Create a new API key
 
-        Create a new API key for the authenticated user. The plaintext `key` is returned only in this response. Treat it as a write-only, sensitive value; it cannot be retrieved later. Authenticate with a [management key](/docs/guides/overview/auth/management-api-keys), or with a Connect client secret. `external_user` and `external_api_key` are accepted only with a client secret, and `external_user` is required there; supplying either field with a management key is rejected with 403.
+        Create a new API key for the authenticated user. The plaintext `key` is returned only in this response. Treat it as a write-only, sensitive value; it cannot be retrieved later. Authenticate with a [management key](/docs/guides/overview/auth/management-api-keys), or with a Connect client secret.
 
         :param name: Name for the new API key
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
@@ -736,8 +728,6 @@ class APIKeys(BaseSDK):
 
         :param creator_user_id: Optional user ID of the key creator. Only meaningful for organization-owned keys where a specific member is creating the key.
         :param expires_at: Optional ISO 8601 UTC expiration timestamp. Must include seconds (YYYY-MM-DDTHH:MM:SSZ; fractional seconds allowed); minute-precision timestamps are rejected.
-        :param external_api_key: Optional partner-supplied API key. Stored as a SHA-256 hash and never returned. Accepted only when authenticating with a Connect client secret; supplying it with a management key is rejected with 403.
-        :param external_user: Partner's end-user identifier for attribution, between 1 and 512 characters. Accepted only when authenticating with a Connect client secret, where it is required; supplying it with a management key is rejected with 403.
         :param include_byok_in_limit: Whether to include BYOK usage in the limit
         :param limit: Optional spending limit for the API key in USD
         :param limit_reset: Type of limit reset for the API key (daily, weekly, monthly, or null for no reset). Resets happen automatically at midnight UTC, and weeks are Monday through Sunday.
@@ -764,8 +754,6 @@ class APIKeys(BaseSDK):
             request_body=operations.CreateKeysRequestBody(
                 creator_user_id=creator_user_id,
                 expires_at=expires_at,
-                external_api_key=external_api_key,
-                external_user=external_user,
                 include_byok_in_limit=include_byok_in_limit,
                 limit=limit,
                 limit_reset=limit_reset,
