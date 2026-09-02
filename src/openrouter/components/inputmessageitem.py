@@ -80,9 +80,9 @@ InputMessageItemContentUnionTypedDict = TypeAliasType(
     "InputMessageItemContentUnionTypedDict",
     Union[
         InputAudioTypedDict,
-        InputVideoTypedDict,
         InputTextTypedDict,
         InputMessageItemContentInputImageTypedDict,
+        InputVideoTypedDict,
         InputFileTypedDict,
     ],
 )

@@ -504,6 +504,7 @@ if TYPE_CHECKING:
     )
     from .chatcontentvideoinput import (
         ChatContentVideoInput,
+        ChatContentVideoInputProcessing,
         ChatContentVideoInputTypedDict,
     )
     from .chatdebugoptions import ChatDebugOptions, ChatDebugOptionsTypedDict
@@ -1477,7 +1478,12 @@ if TYPE_CHECKING:
         InputsUnionTypedDict,
     )
     from .inputtext import InputText, InputTextType, InputTextTypedDict
-    from .inputvideo import InputVideo, InputVideoType, InputVideoTypedDict
+    from .inputvideo import (
+        InputVideo,
+        InputVideoProcessing,
+        InputVideoType,
+        InputVideoTypedDict,
+    )
     from .instructtype import InstructType
     from .internalserverresponseerrordata import (
         InternalServerResponseErrorData,
@@ -1496,6 +1502,7 @@ if TYPE_CHECKING:
     )
     from .legacy_chatcontentvideoinput import (
         LegacyChatContentVideoInput,
+        LegacyChatContentVideoInputProcessing,
         LegacyChatContentVideoInputTypedDict,
     )
     from .legacy_websearchservertool import (
@@ -3539,6 +3546,7 @@ __all__ = [
     "ChatContentTextTypedDict",
     "ChatContentVideo",
     "ChatContentVideoInput",
+    "ChatContentVideoInputProcessing",
     "ChatContentVideoInputTypedDict",
     "ChatContentVideoType",
     "ChatContentVideoTypedDict",
@@ -4233,6 +4241,7 @@ __all__ = [
     "InputUnion",
     "InputUnionTypedDict",
     "InputVideo",
+    "InputVideoProcessing",
     "InputVideoType",
     "InputVideoTypedDict",
     "InputsContent1",
@@ -4280,6 +4289,7 @@ __all__ = [
     "KeyAssignmentTypedDict",
     "LegacyChatContentVideo",
     "LegacyChatContentVideoInput",
+    "LegacyChatContentVideoInputProcessing",
     "LegacyChatContentVideoInputTypedDict",
     "LegacyChatContentVideoType",
     "LegacyChatContentVideoTypedDict",
@@ -5868,6 +5878,7 @@ _dynamic_imports: dict[str, str] = {
     "ChatContentVideoType": ".chatcontentvideo",
     "ChatContentVideoTypedDict": ".chatcontentvideo",
     "ChatContentVideoInput": ".chatcontentvideoinput",
+    "ChatContentVideoInputProcessing": ".chatcontentvideoinput",
     "ChatContentVideoInputTypedDict": ".chatcontentvideoinput",
     "ChatDebugOptions": ".chatdebugoptions",
     "ChatDebugOptionsTypedDict": ".chatdebugoptions",
@@ -6584,6 +6595,7 @@ _dynamic_imports: dict[str, str] = {
     "InputTextType": ".inputtext",
     "InputTextTypedDict": ".inputtext",
     "InputVideo": ".inputvideo",
+    "InputVideoProcessing": ".inputvideo",
     "InputVideoType": ".inputvideo",
     "InputVideoTypedDict": ".inputvideo",
     "InstructType": ".instructtype",
@@ -6598,6 +6610,7 @@ _dynamic_imports: dict[str, str] = {
     "LegacyChatContentVideoType": ".legacy_chatcontentvideo",
     "LegacyChatContentVideoTypedDict": ".legacy_chatcontentvideo",
     "LegacyChatContentVideoInput": ".legacy_chatcontentvideoinput",
+    "LegacyChatContentVideoInputProcessing": ".legacy_chatcontentvideoinput",
     "LegacyChatContentVideoInputTypedDict": ".legacy_chatcontentvideoinput",
     "LegacyWebSearchServerTool": ".legacy_websearchservertool",
     "LegacyWebSearchServerToolType": ".legacy_websearchservertool",
