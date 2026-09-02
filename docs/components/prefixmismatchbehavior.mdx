@@ -6,10 +6,15 @@ title: "PrefixMismatchBehavior"
 
 ```python
 from openrouter.components import PrefixMismatchBehavior
-value: PrefixMismatchBehavior = "drop_block"
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
+value: PrefixMismatchBehavior = "error"
 ```
 
 
 ## Values
 
+This is an open enum. Unrecognized values will not fail type checks.
+
+- `"error"`
 - `"drop_block"`

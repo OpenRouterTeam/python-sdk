@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c48cf606-fb42-4a45-9c23-8f0555307828
 management:
-  docChecksum: d549f1f1851d3b8566a88c2c51dca446
+  docChecksum: 391051bbe72c2ad9d26d4bcc8bdc9a54
   docVersion: 1.0.0
   speakeasyVersion: 1.787.0
   generationVersion: 2.914.0
-  releaseVersion: 1.1.111
-  configChecksum: 644f7660e9e2fb0ebeee1312909073a7
+  releaseVersion: 1.1.112
+  configChecksum: 51428b5e8a27ddf2788d8d5c76bb9db2
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
 persistentEdits:
-  generation_id: 7ebc9620-c5b3-4fdc-b549-4e222b9db662
-  pristine_commit_hash: a7776ac3a07a59ba746e8d4accb93f38725ed124
-  pristine_tree_hash: 947f90afadc7b47906211180266c3e331a0827cd
+  generation_id: b2dd422a-ced6-4187-ab9a-62ac3c0e5087
+  pristine_commit_hash: 253ef389d0a7f9e472554be901e41616bba27ddc
+  pristine_tree_hash: 5b7a07d09178eb51eb08b64ebc9b0cd0a1636eb1
 features:
   python:
     acceptHeaders: 3.0.0
@@ -438,8 +438,8 @@ trackedFiles:
     pristine_git_object: 6f1e9ce880a0c3173ce7af4d14c8508b686b8ebc
   docs/components/anthropicsystemclearat.mdx:
     id: 02e08e8b03f3
-    last_write_checksum: sha1:c82d55e50f6a6325fc10eee08812ec0394396b83
-    pristine_git_object: 5e433be8b857cc468d41d4e0a6e260b807fe9ab0
+    last_write_checksum: sha1:218693075e1fbef7a5771edf41cd93ee7eb430d4
+    pristine_git_object: 5634634926c7a09342c219cd0d865234c262baa5
   docs/components/anthropictextblockparam.mdx:
     id: bded5d409e91
     last_write_checksum: sha1:ab2ebb14dd5e54bbadf4db4aa919d1b380b844b5
@@ -450,8 +450,8 @@ trackedFiles:
     pristine_git_object: b6b0d6f9022f2046c713d768125927e22ecc9431
   docs/components/anthropicthinkingblockbinding.mdx:
     id: a1c1acf8200e
-    last_write_checksum: sha1:56022206d75726c7abc59971c9abcbce45107bfb
-    pristine_git_object: c5364b3c8a19aca6d9ebc03392a1e62c16c8c98f
+    last_write_checksum: sha1:7e7df17828f861d85a1bee793b32931eb99769e7
+    pristine_git_object: 48a032d0e9eac4798c8c4903880873f967f5dfec
   docs/components/anthropicthinkingdisplay.mdx:
     id: e068ddf6374f
     last_write_checksum: sha1:49fd044eb4759b0f447964cc276b0681ff73a3ec
@@ -4330,8 +4330,8 @@ trackedFiles:
     pristine_git_object: 9b965b8127ff716f9bac7efc3ef89f4a9727795e
   docs/components/prefixmismatchbehavior.mdx:
     id: 73d2444913c6
-    last_write_checksum: sha1:6f49bdd934501dc4a153fd645e668cae8b0e701f
-    pristine_git_object: d679a28e6f0aa4b2a398a8ea8f7f77acb0a5454f
+    last_write_checksum: sha1:9192b93e919ccc08f739324db6d1417f49471d2b
+    pristine_git_object: bb61620d909ce1c0e4df191e8570184b794ae164
   docs/components/preset.mdx:
     id: 9069cdfaddbc
     last_write_checksum: sha1:87eebf424e40efb670c2bc0f617c903a6f9d3da5
@@ -7458,8 +7458,8 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:efbcdc29ac4bfee3f46ae11671b08559d41130fb
-    pristine_git_object: 1ed6cdf52cf082be603cab094955982904ff9ea9
+    last_write_checksum: sha1:22be002a440c13f8a9a4ac3df57128b2120cdb71
+    pristine_git_object: b06eb5aba73cf71602d0a12055e249e4d48678eb
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77f44b60b98bc126557ec27391f91dfba764bb54
@@ -7486,8 +7486,8 @@ trackedFiles:
     pristine_git_object: 86713cfea633e09d33b3d4e65281071fe20e6137
   src/openrouter/_version.py:
     id: d8d15ad6c586
-    last_write_checksum: sha1:cb3f1aedcbfc00d2af7b97c32d0e14a2899ef8d0
-    pristine_git_object: 6edf25f6e9267720fa61ef6382d2972490018d1f
+    last_write_checksum: sha1:a6466e2fb6b09ffa28b5a3039bd0ee92eed793dc
+    pristine_git_object: acf7031462e82a81914ac31b23acf7fb36d856aa
   src/openrouter/analytics.py:
     id: cb406b5aaabb
     last_write_checksum: sha1:1e0004d8d1d5d797e2b54cd1cabeb7f9489d08e9
@@ -7682,16 +7682,16 @@ trackedFiles:
     pristine_git_object: 4f9c2bc739541b12c381e3d6265184af879cc1ff
   src/openrouter/components/anthropicsystemclearat.py:
     id: 1b0f42791a44
-    last_write_checksum: sha1:ddcf1a86c46a4b3ccc974cfae354820e1e638686
-    pristine_git_object: 057eb16d600e93a6c675e1a64fbd71212900db1b
+    last_write_checksum: sha1:d145b38d9f24946a9b96df823b68dc8d89bca935
+    pristine_git_object: bbbf46b31d8f513ed5fc5cb1960c0f99e49cbdb2
   src/openrouter/components/anthropictextblockparam.py:
     id: f387daeeb940
     last_write_checksum: sha1:d07d4bef39b0f763604a58604da6aa4cb7979590
     pristine_git_object: 31a1df2ee27149c8862fb8709f4898ef0535360f
   src/openrouter/components/anthropicthinkingblockbinding.py:
     id: e3f9c1ae04b6
-    last_write_checksum: sha1:a4d531705224b35ec9be29ca7b832f14218c914a
-    pristine_git_object: a9eb602db8b20489c47f2da1ef8f0cffd6e79279
+    last_write_checksum: sha1:be6fab20c77d4b9cddd70969f09370bdbde3f6a4
+    pristine_git_object: fd2bb4ce3210a4ca2e6e2ad6dd0e82d0e11193c0
   src/openrouter/components/anthropicthinkingdisplay.py:
     id: 5d63f1a15f67
     last_write_checksum: sha1:a1f845787a9e8bc3d7b4dddfe8a4adad288b16db
@@ -12549,3 +12549,6 @@ examples:
         "503":
           application/json: {"error": {"code": 503, "message": "Service temporarily unavailable"}}
 examplesVersion: 1.0.2
+releaseNotes: |
+  ## Python SDK Changes:
+  * `open_router.presets.create_presets_messages()`:  `request` **Changed**
