@@ -357,6 +357,9 @@ class Guardrails(BaseSDK):
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
+        allowed_data_regions: OptionalNullable[
+            Iterable[components.GuardrailDataRegion]
+        ] = UNSET,
         allowed_models: OptionalNullable[Iterable[str]] = UNSET,
         allowed_providers: OptionalNullable[Iterable[str]] = UNSET,
         content_filter_builtins: OptionalNullable[
@@ -404,6 +407,7 @@ class Guardrails(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
+        :param allowed_data_regions: Data regions through which requests governed by this guardrail must arrive. `global` is https://openrouter.ai, `europe` is https://eu.openrouter.ai, and `us` is https://us.openrouter.ai. Requests arriving through any other region are rejected. `null` leaves the ingress region unrestricted. When several guardrails apply (workspace default, member, API key), the effective regions are the intersection of every non-null value. An empty array is rejected.
         :param allowed_models: Array of model identifiers (slug or canonical_slug accepted)
         :param allowed_providers: List of allowed provider IDs
         :param content_filter_builtins: Builtin content filters to apply. Every builtin slug supports \"block\", \"redact\", and the detect-only \"flag\" action.
@@ -444,6 +448,10 @@ class Guardrails(BaseSDK):
             x_open_router_title=x_open_router_title,
             x_open_router_categories=x_open_router_categories,
             create_guardrail_request=components.CreateGuardrailRequest(
+                allowed_data_regions=utils.unmarshal(
+                    allowed_data_regions,
+                    OptionalNullable[List[components.GuardrailDataRegion]],
+                ),
                 allowed_models=utils.unmarshal(
                     allowed_models, OptionalNullable[List[str]]
                 ),
@@ -583,6 +591,9 @@ class Guardrails(BaseSDK):
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
+        allowed_data_regions: OptionalNullable[
+            Iterable[components.GuardrailDataRegion]
+        ] = UNSET,
         allowed_models: OptionalNullable[Iterable[str]] = UNSET,
         allowed_providers: OptionalNullable[Iterable[str]] = UNSET,
         content_filter_builtins: OptionalNullable[
@@ -630,6 +641,7 @@ class Guardrails(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
+        :param allowed_data_regions: Data regions through which requests governed by this guardrail must arrive. `global` is https://openrouter.ai, `europe` is https://eu.openrouter.ai, and `us` is https://us.openrouter.ai. Requests arriving through any other region are rejected. `null` leaves the ingress region unrestricted. When several guardrails apply (workspace default, member, API key), the effective regions are the intersection of every non-null value. An empty array is rejected.
         :param allowed_models: Array of model identifiers (slug or canonical_slug accepted)
         :param allowed_providers: List of allowed provider IDs
         :param content_filter_builtins: Builtin content filters to apply. Every builtin slug supports \"block\", \"redact\", and the detect-only \"flag\" action.
@@ -670,6 +682,10 @@ class Guardrails(BaseSDK):
             x_open_router_title=x_open_router_title,
             x_open_router_categories=x_open_router_categories,
             create_guardrail_request=components.CreateGuardrailRequest(
+                allowed_data_regions=utils.unmarshal(
+                    allowed_data_regions,
+                    OptionalNullable[List[components.GuardrailDataRegion]],
+                ),
                 allowed_models=utils.unmarshal(
                     allowed_models, OptionalNullable[List[str]]
                 ),
@@ -1321,6 +1337,9 @@ class Guardrails(BaseSDK):
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
+        allowed_data_regions: OptionalNullable[
+            Iterable[components.GuardrailDataRegion]
+        ] = UNSET,
         allowed_models: OptionalNullable[Iterable[str]] = UNSET,
         allowed_providers: OptionalNullable[Iterable[str]] = UNSET,
         content_filter_builtins: OptionalNullable[
@@ -1368,6 +1387,7 @@ class Guardrails(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
+        :param allowed_data_regions: Data regions through which requests governed by this guardrail must arrive. `global` is https://openrouter.ai, `europe` is https://eu.openrouter.ai, and `us` is https://us.openrouter.ai. Requests arriving through any other region are rejected. `null` leaves the ingress region unrestricted. When several guardrails apply (workspace default, member, API key), the effective regions are the intersection of every non-null value. An empty array is rejected.
         :param allowed_models: Array of model identifiers (slug or canonical_slug accepted)
         :param allowed_providers: New list of allowed provider IDs
         :param content_filter_builtins: Builtin content filters to apply. Set to null to remove. Every builtin slug supports \"block\", \"redact\", and the detect-only \"flag\" action.
@@ -1409,6 +1429,10 @@ class Guardrails(BaseSDK):
             x_open_router_categories=x_open_router_categories,
             id=id,
             update_guardrail_request=components.UpdateGuardrailRequest(
+                allowed_data_regions=utils.unmarshal(
+                    allowed_data_regions,
+                    OptionalNullable[List[components.GuardrailDataRegion]],
+                ),
                 allowed_models=utils.unmarshal(
                     allowed_models, OptionalNullable[List[str]]
                 ),
@@ -1547,6 +1571,9 @@ class Guardrails(BaseSDK):
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
+        allowed_data_regions: OptionalNullable[
+            Iterable[components.GuardrailDataRegion]
+        ] = UNSET,
         allowed_models: OptionalNullable[Iterable[str]] = UNSET,
         allowed_providers: OptionalNullable[Iterable[str]] = UNSET,
         content_filter_builtins: OptionalNullable[
@@ -1594,6 +1621,7 @@ class Guardrails(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
+        :param allowed_data_regions: Data regions through which requests governed by this guardrail must arrive. `global` is https://openrouter.ai, `europe` is https://eu.openrouter.ai, and `us` is https://us.openrouter.ai. Requests arriving through any other region are rejected. `null` leaves the ingress region unrestricted. When several guardrails apply (workspace default, member, API key), the effective regions are the intersection of every non-null value. An empty array is rejected.
         :param allowed_models: Array of model identifiers (slug or canonical_slug accepted)
         :param allowed_providers: New list of allowed provider IDs
         :param content_filter_builtins: Builtin content filters to apply. Set to null to remove. Every builtin slug supports \"block\", \"redact\", and the detect-only \"flag\" action.
@@ -1635,6 +1663,10 @@ class Guardrails(BaseSDK):
             x_open_router_categories=x_open_router_categories,
             id=id,
             update_guardrail_request=components.UpdateGuardrailRequest(
+                allowed_data_regions=utils.unmarshal(
+                    allowed_data_regions,
+                    OptionalNullable[List[components.GuardrailDataRegion]],
+                ),
                 allowed_models=utils.unmarshal(
                     allowed_models, OptionalNullable[List[str]]
                 ),

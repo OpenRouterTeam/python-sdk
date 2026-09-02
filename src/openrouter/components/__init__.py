@@ -1273,6 +1273,7 @@ if TYPE_CHECKING:
         GetWorkspaceResponseTypedDict,
     )
     from .guardrail import Guardrail, GuardrailTypedDict
+    from .guardraildataregion import GuardrailDataRegion
     from .guardrailinterval import GuardrailInterval
     from .imageconfig import ImageConfig, ImageConfigTypedDict
     from .imageendpoint import ImageEndpoint, ImageEndpointTypedDict
@@ -4099,6 +4100,7 @@ __all__ = [
     "GetWorkspaceResponse",
     "GetWorkspaceResponseTypedDict",
     "Guardrail",
+    "GuardrailDataRegion",
     "GuardrailInterval",
     "GuardrailTypedDict",
     "ImageConfig",
@@ -6429,6 +6431,7 @@ _dynamic_imports: dict[str, str] = {
     "GetWorkspaceResponseTypedDict": ".getworkspaceresponse",
     "Guardrail": ".guardrail",
     "GuardrailTypedDict": ".guardrail",
+    "GuardrailDataRegion": ".guardraildataregion",
     "GuardrailInterval": ".guardrailinterval",
     "ImageConfig": ".imageconfig",
     "ImageConfigTypedDict": ".imageconfig",

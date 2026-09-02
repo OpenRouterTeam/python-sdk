@@ -1,0 +1,23 @@
+---
+title: "GuardrailDataRegion"
+---
+
+An OpenRouter data region: `global` (https://openrouter.ai), `europe` (https://eu.openrouter.ai), or `us` (https://us.openrouter.ai)
+
+## Example Usage
+
+```python
+from openrouter.components import GuardrailDataRegion
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
+value: GuardrailDataRegion = "global"
+```
+
+
+## Values
+
+This is an open enum. Unrecognized values will not fail type checks.
+
+- `"global"`
+- `"europe"`
+- `"us"`

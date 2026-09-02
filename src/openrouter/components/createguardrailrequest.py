@@ -6,6 +6,7 @@ from .contentfilterbuiltinentryinput import (
     ContentFilterBuiltinEntryInputTypedDict,
 )
 from .contentfilterentry import ContentFilterEntry, ContentFilterEntryTypedDict
+from .guardraildataregion import GuardrailDataRegion
 from .guardrailinterval import GuardrailInterval
 from openrouter.types import (
     BaseModel,
@@ -23,6 +24,8 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 class CreateGuardrailRequestTypedDict(TypedDict):
     name: str
     r"""Name for the new guardrail"""
+    allowed_data_regions: NotRequired[Nullable[List[GuardrailDataRegion]]]
+    r"""Data regions through which requests governed by this guardrail must arrive. `global` is https://openrouter.ai, `europe` is https://eu.openrouter.ai, and `us` is https://us.openrouter.ai. Requests arriving through any other region are rejected. `null` leaves the ingress region unrestricted. When several guardrails apply (workspace default, member, API key), the effective regions are the intersection of every non-null value. An empty array is rejected."""
     allowed_models: NotRequired[Nullable[List[str]]]
     r"""Array of model identifiers (slug or canonical_slug accepted)"""
     allowed_providers: NotRequired[Nullable[List[str]]]
@@ -70,6 +73,9 @@ class CreateGuardrailRequestTypedDict(TypedDict):
 class CreateGuardrailRequest(BaseModel):
     name: str
     r"""Name for the new guardrail"""
+
+    allowed_data_regions: OptionalNullable[List[GuardrailDataRegion]] = UNSET
+    r"""Data regions through which requests governed by this guardrail must arrive. `global` is https://openrouter.ai, `europe` is https://eu.openrouter.ai, and `us` is https://us.openrouter.ai. Requests arriving through any other region are rejected. `null` leaves the ingress region unrestricted. When several guardrails apply (workspace default, member, API key), the effective regions are the intersection of every non-null value. An empty array is rejected."""
 
     allowed_models: OptionalNullable[List[str]] = UNSET
     r"""Array of model identifiers (slug or canonical_slug accepted)"""
@@ -142,6 +148,7 @@ class CreateGuardrailRequest(BaseModel):
     def serialize_model(self, handler):
         optional_fields = set(
             [
+                "allowed_data_regions",
                 "allowed_models",
                 "allowed_providers",
                 "content_filter_builtins",
@@ -166,6 +173,7 @@ class CreateGuardrailRequest(BaseModel):
         )
         nullable_fields = set(
             [
+                "allowed_data_regions",
                 "allowed_models",
                 "allowed_providers",
                 "content_filter_builtins",
