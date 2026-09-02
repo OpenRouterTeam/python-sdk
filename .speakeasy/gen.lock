@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c48cf606-fb42-4a45-9c23-8f0555307828
 management:
-  docChecksum: 00aa71dfc0c7f5973a63d3598c58ba7f
+  docChecksum: 2fcf515f1f19f0f7aa6ab7b88abbf8b0
   docVersion: 1.0.0
   speakeasyVersion: 1.787.0
   generationVersion: 2.914.0
-  releaseVersion: 1.1.114
-  configChecksum: 0aa7bff58c555dba72aa3a25047637ff
+  releaseVersion: 1.1.115
+  configChecksum: c4324ed99d6410d284d0ba15b1c8c7b6
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
 persistentEdits:
-  generation_id: a8a94a72-1a68-418a-925b-a5cabe9d6925
-  pristine_commit_hash: 256542e4b63d96882313dcfb81acf56639f4b3fb
-  pristine_tree_hash: 4903f49eccb839e14cabdb9b7291d7c41a9edf2b
+  generation_id: 2923c407-46ff-4dbf-90f6-40bf9fc2c6f6
+  pristine_commit_hash: f86afabf72b9199414423483da1ed9fe058ec27b
+  pristine_tree_hash: ea94eebf655086de397231127ae82622b65b3d30
 features:
   python:
     acceptHeaders: 3.0.0
@@ -7446,8 +7446,8 @@ trackedFiles:
     pristine_git_object: 4620eda5cda464ad878f498b92604b435021e5fe
   docs/sdks/scim/README.mdx:
     id: fd6d8a91a053
-    last_write_checksum: sha1:383e2108f6270137e54c1c993f655e32bd7283d6
-    pristine_git_object: 89918692e893f665f65a870440659a63ab821693
+    last_write_checksum: sha1:2e06b16b6c9d34300dfe155e8cbde7728c1b6d9c
+    pristine_git_object: 6fe10f474e510dba25ab1f7a70257408fc0b83d2
   docs/sdks/stt/README.mdx:
     id: 190b0dc9a5d1
     last_write_checksum: sha1:a9885710fd21bb71b4c80a10ad54a20bf47ddca7
@@ -7470,8 +7470,8 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:6897fd693a93be37c4b099c6162445b14c3c8d64
-    pristine_git_object: daadbbb93daa8150616ef50be56e356d4a61afd7
+    last_write_checksum: sha1:7a875e84a86961b5c465311684a15b085974f26c
+    pristine_git_object: 33b9c0acfac6719dcec24e60957a5a607ea81bda
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77f44b60b98bc126557ec27391f91dfba764bb54
@@ -7498,8 +7498,8 @@ trackedFiles:
     pristine_git_object: 86713cfea633e09d33b3d4e65281071fe20e6137
   src/openrouter/_version.py:
     id: d8d15ad6c586
-    last_write_checksum: sha1:dcdd717a27e5dd420edb005f3f03ff2a8e71f080
-    pristine_git_object: a5aa3229c41b5023d39d676c0e55badf91d1f2b6
+    last_write_checksum: sha1:ba87d8a823bde33bf0421825184ef71e2fe09ca9
+    pristine_git_object: 12a40c34abc340a2bc3ccf5087ef55d3e03f7e2f
   src/openrouter/analytics.py:
     id: cb406b5aaabb
     last_write_checksum: sha1:1e0004d8d1d5d797e2b54cd1cabeb7f9489d08e9
@@ -10606,8 +10606,8 @@ trackedFiles:
     pristine_git_object: 209f35ce4bf4054b4a7735c742eb9e4b82207f9d
   src/openrouter/scim.py:
     id: 351afd6b616e
-    last_write_checksum: sha1:a20b8969f347f771fdcd6c8ea396ce3cd74ddc45
-    pristine_git_object: f6ad93a8202863708520f9fdb7043eeb4f1f1fc6
+    last_write_checksum: sha1:60ce3b9f80f63bad718912b8f8fb166f273985c0
+    pristine_git_object: 31215372bf8bffe5ef0994d171854d997440b95d
   src/openrouter/sdk.py:
     id: ee9846c4c9c5
     last_write_checksum: sha1:d8eeaa771b4d51749dc9f3390793903e842fc0af
@@ -12577,4 +12577,3 @@ examples:
         "503":
           application/json: {"error": {"code": 503, "message": "Service temporarily unavailable"}}
 examplesVersion: 1.0.2
-releaseNotes: "## Python SDK Changes:\n* `open_router.tts.create_speech()`:  `error.status[403]` **Added**\n* `open_router.stt.create_transcription()`:  `error.status[403]` **Added**\n* `open_router.stt.create_transcription_multipart()`:  `error.status[403]` **Added**\n* `open_router.chat.send()`: \n  *  `request.messages[].union(assistant).content.union(Array<ChatContentItems>)[]` **Changed**\n  *  `response.choices[].message.content.union(Array<ChatContentItems>)[]` **Changed**\n* `open_router.embeddings.generate()`:  `error.status[403]` **Added**\n* `open_router.presets.create_presets_chat_completions()`: \n  *  `request.messages[].union(assistant).content.union(Array<ChatContentItems>)[]` **Changed**\n* `open_router.presets.create_presets_responses()`: \n  *  `request.input.union(Array<>)[].union(InputMessageItem).content[].union(input_video).processing` **Added**\n* `open_router.rerank.rerank()`:  `error.status[403]` **Added**\n* `open_router.responses.send()`: \n  *  `request.input.union(Array<>)[].union(InputMessageItem).content[].union(input_video).processing` **Added**\n* `open_router.beta.responses.send()`: \n  *  `request.input.union(Array<>)[].union(InputMessageItem).content[].union(input_video).processing` **Added**\n* `open_router.video_generation.generate()`:  `error.status[403]` **Added**\n* `open_router.video_generation.get_generation()`:  `error.status[403]` **Added**\n* `open_router.video_generation.get_video_content()`:  `error.status[403]` **Added**\n"
