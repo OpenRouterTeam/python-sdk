@@ -252,7 +252,7 @@ class UsageCostDetailsTypedDict(TypedDict):
     upstream_inference_input_cost: float
     upstream_inference_output_cost: float
     server_tool_cost: NotRequired[Nullable[float]]
-    r"""Metered server-tool execution cost (for example, shell sandbox time) billed for this request, in USD. Matches the billed checkpoint and settlement amounts exactly."""
+    r"""Metered server-tool execution cost (for example, shell sandbox time) billed for this request, in USD. Matches the billed checkpoint and settlement amounts exactly. 0 when a metered server tool ran but settled at zero dollars; absent when no metered server tool ran."""
     upstream_inference_cost: NotRequired[Nullable[float]]
 
 
@@ -262,7 +262,7 @@ class UsageCostDetails(BaseModel):
     upstream_inference_output_cost: float
 
     server_tool_cost: OptionalNullable[float] = UNSET
-    r"""Metered server-tool execution cost (for example, shell sandbox time) billed for this request, in USD. Matches the billed checkpoint and settlement amounts exactly."""
+    r"""Metered server-tool execution cost (for example, shell sandbox time) billed for this request, in USD. Matches the billed checkpoint and settlement amounts exactly. 0 when a metered server tool ran but settled at zero dollars; absent when no metered server tool ran."""
 
     upstream_inference_cost: OptionalNullable[float] = UNSET
 
