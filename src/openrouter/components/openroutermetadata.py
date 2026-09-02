@@ -21,6 +21,8 @@ class OpenRouterMetadataTypedDict(TypedDict):
     strategy: RoutingStrategy
     summary: str
     attempts: NotRequired[List[RouterAttemptTypedDict]]
+    generation_time: NotRequired[int]
+    r"""Milliseconds measured for the generation, from dispatching the upstream request until its response body ended. Divide the completion token count by this for throughput. Absent when no upstream request was dispatched."""
     params: NotRequired[RouterParamsTypedDict]
     pipeline: NotRequired[List[PipelineStageTypedDict]]
 
@@ -42,13 +44,16 @@ class OpenRouterMetadata(BaseModel):
 
     attempts: Optional[List[RouterAttempt]] = None
 
+    generation_time: Optional[int] = None
+    r"""Milliseconds measured for the generation, from dispatching the upstream request until its response body ended. Divide the completion token count by this for throughput. Absent when no upstream request was dispatched."""
+
     params: Optional[RouterParams] = None
 
     pipeline: Optional[List[PipelineStage]] = None
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["attempts", "params", "pipeline"])
+        optional_fields = set(["attempts", "generation_time", "params", "pipeline"])
         nullable_fields = set(["region"])
         serialized = handler(self)
         m = {}
