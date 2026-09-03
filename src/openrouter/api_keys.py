@@ -7,7 +7,7 @@ from openrouter._hooks import HookContext
 from openrouter.types import OptionalNullable, UNSET
 from openrouter.utils import get_security_from_env
 from openrouter.utils.unmarshal_json_response import unmarshal_json_response
-from typing import Any, Mapping, Optional
+from typing import Any, Mapping, Optional, Union
 
 
 class APIKeys(BaseSDK):
@@ -540,6 +540,9 @@ class APIKeys(BaseSDK):
         x_open_router_categories: Optional[str] = None,
         creator_user_id: OptionalNullable[str] = UNSET,
         expires_at: OptionalNullable[datetime] = UNSET,
+        external: Optional[
+            Union[operations.External, operations.ExternalTypedDict]
+        ] = None,
         include_byok_in_limit: Optional[bool] = None,
         limit: OptionalNullable[float] = UNSET,
         limit_reset: OptionalNullable[operations.CreateKeysLimitReset] = UNSET,
@@ -551,7 +554,7 @@ class APIKeys(BaseSDK):
     ) -> operations.CreateKeysResponse:
         r"""Create a new API key
 
-        Create a new API key for the authenticated user. The plaintext `key` is returned only in this response. Treat it as a write-only, sensitive value; it cannot be retrieved later. Authenticate with a [management key](/docs/guides/overview/auth/management-api-keys), or with a Connect client secret.
+        Create a new API key for the authenticated user. The plaintext `key` is returned only in this response. Treat it as a write-only, sensitive value; it cannot be retrieved later. Authenticate with a [management key](/docs/guides/overview/auth/management-api-keys). The optional `external` object associates the key with a partner-defined user and lookup key.
 
         :param name: Name for the new API key
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
@@ -563,6 +566,7 @@ class APIKeys(BaseSDK):
 
         :param creator_user_id: Optional user ID of the key creator. Only meaningful for organization-owned keys where a specific member is creating the key.
         :param expires_at: Optional ISO 8601 UTC expiration timestamp. Must include seconds (YYYY-MM-DDTHH:MM:SSZ; fractional seconds allowed); minute-precision timestamps are rejected.
+        :param external: Optional partner-defined identity associated with the created API key.
         :param include_byok_in_limit: Whether to include BYOK usage in the limit
         :param limit: Optional spending limit for the API key in USD
         :param limit_reset: Type of limit reset for the API key (daily, weekly, monthly, or null for no reset). Resets happen automatically at midnight UTC, and weeks are Monday through Sunday.
@@ -589,6 +593,9 @@ class APIKeys(BaseSDK):
             request_body=operations.CreateKeysRequestBody(
                 creator_user_id=creator_user_id,
                 expires_at=expires_at,
+                external=utils.get_pydantic_model(
+                    external, Optional[operations.External]
+                ),
                 include_byok_in_limit=include_byok_in_limit,
                 limit=limit,
                 limit_reset=limit_reset,
@@ -705,6 +712,9 @@ class APIKeys(BaseSDK):
         x_open_router_categories: Optional[str] = None,
         creator_user_id: OptionalNullable[str] = UNSET,
         expires_at: OptionalNullable[datetime] = UNSET,
+        external: Optional[
+            Union[operations.External, operations.ExternalTypedDict]
+        ] = None,
         include_byok_in_limit: Optional[bool] = None,
         limit: OptionalNullable[float] = UNSET,
         limit_reset: OptionalNullable[operations.CreateKeysLimitReset] = UNSET,
@@ -716,7 +726,7 @@ class APIKeys(BaseSDK):
     ) -> operations.CreateKeysResponse:
         r"""Create a new API key
 
-        Create a new API key for the authenticated user. The plaintext `key` is returned only in this response. Treat it as a write-only, sensitive value; it cannot be retrieved later. Authenticate with a [management key](/docs/guides/overview/auth/management-api-keys), or with a Connect client secret.
+        Create a new API key for the authenticated user. The plaintext `key` is returned only in this response. Treat it as a write-only, sensitive value; it cannot be retrieved later. Authenticate with a [management key](/docs/guides/overview/auth/management-api-keys). The optional `external` object associates the key with a partner-defined user and lookup key.
 
         :param name: Name for the new API key
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
@@ -728,6 +738,7 @@ class APIKeys(BaseSDK):
 
         :param creator_user_id: Optional user ID of the key creator. Only meaningful for organization-owned keys where a specific member is creating the key.
         :param expires_at: Optional ISO 8601 UTC expiration timestamp. Must include seconds (YYYY-MM-DDTHH:MM:SSZ; fractional seconds allowed); minute-precision timestamps are rejected.
+        :param external: Optional partner-defined identity associated with the created API key.
         :param include_byok_in_limit: Whether to include BYOK usage in the limit
         :param limit: Optional spending limit for the API key in USD
         :param limit_reset: Type of limit reset for the API key (daily, weekly, monthly, or null for no reset). Resets happen automatically at midnight UTC, and weeks are Monday through Sunday.
@@ -754,6 +765,9 @@ class APIKeys(BaseSDK):
             request_body=operations.CreateKeysRequestBody(
                 creator_user_id=creator_user_id,
                 expires_at=expires_at,
+                external=utils.get_pydantic_model(
+                    external, Optional[operations.External]
+                ),
                 include_byok_in_limit=include_byok_in_limit,
                 limit=limit,
                 limit_reset=limit_reset,
@@ -875,7 +889,7 @@ class APIKeys(BaseSDK):
     ) -> operations.DeleteKeysResponse:
         r"""Delete an API key
 
-        Delete an existing API key. Authenticate with a [management key](/docs/guides/overview/auth/management-api-keys), or with a Connect client secret. A client secret reaches only the keys that same client created; any other key responds as if it does not exist.
+        Delete an existing API key. Authenticate with a [management key](/docs/guides/overview/auth/management-api-keys).
 
         :param hash: The hash identifier of the API key to delete
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
@@ -1008,7 +1022,7 @@ class APIKeys(BaseSDK):
     ) -> operations.DeleteKeysResponse:
         r"""Delete an API key
 
-        Delete an existing API key. Authenticate with a [management key](/docs/guides/overview/auth/management-api-keys), or with a Connect client secret. A client secret reaches only the keys that same client created; any other key responds as if it does not exist.
+        Delete an existing API key. Authenticate with a [management key](/docs/guides/overview/auth/management-api-keys).
 
         :param hash: The hash identifier of the API key to delete
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
@@ -1412,7 +1426,7 @@ class APIKeys(BaseSDK):
     ) -> operations.UpdateKeysResponse:
         r"""Update an API key
 
-        Update an existing API key. Authenticate with a [management key](/docs/guides/overview/auth/management-api-keys), or with a Connect client secret. A client secret reaches only the keys that same client created; any other key responds as if it does not exist.
+        Update an existing API key. Authenticate with a [management key](/docs/guides/overview/auth/management-api-keys).
 
         :param hash: The hash identifier of the API key to update
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
@@ -1574,7 +1588,7 @@ class APIKeys(BaseSDK):
     ) -> operations.UpdateKeysResponse:
         r"""Update an API key
 
-        Update an existing API key. Authenticate with a [management key](/docs/guides/overview/auth/management-api-keys), or with a Connect client secret. A client secret reaches only the keys that same client created; any other key responds as if it does not exist.
+        Update an existing API key. Authenticate with a [management key](/docs/guides/overview/auth/management-api-keys).
 
         :param hash: The hash identifier of the API key to update
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.

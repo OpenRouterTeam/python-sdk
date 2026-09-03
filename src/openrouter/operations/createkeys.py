@@ -81,6 +81,41 @@ class CreateKeysGlobals(BaseModel):
         return m
 
 
+class ExternalTypedDict(TypedDict):
+    r"""Optional partner-defined identity associated with the created API key."""
+
+    user: str
+    r"""Partner's end-user identifier for attribution."""
+    api_key: NotRequired[str]
+    r"""Optional partner-supplied API key with a minimum length of 32 characters and sufficient entropy. Stored as a SHA-256 hash and never returned."""
+
+
+class External(BaseModel):
+    r"""Optional partner-defined identity associated with the created API key."""
+
+    user: str
+    r"""Partner's end-user identifier for attribution."""
+
+    api_key: Optional[str] = None
+    r"""Optional partner-supplied API key with a minimum length of 32 characters and sufficient entropy. Stored as a SHA-256 hash and never returned."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["api_key"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
+
 CreateKeysLimitReset = Union[
     Literal[
         "daily",
@@ -99,6 +134,8 @@ class CreateKeysRequestBodyTypedDict(TypedDict):
     r"""Optional user ID of the key creator. Only meaningful for organization-owned keys where a specific member is creating the key."""
     expires_at: NotRequired[Nullable[datetime]]
     r"""Optional ISO 8601 UTC expiration timestamp. Must include seconds (YYYY-MM-DDTHH:MM:SSZ; fractional seconds allowed); minute-precision timestamps are rejected."""
+    external: NotRequired[ExternalTypedDict]
+    r"""Optional partner-defined identity associated with the created API key."""
     include_byok_in_limit: NotRequired[bool]
     r"""Whether to include BYOK usage in the limit"""
     limit: NotRequired[Nullable[float]]
@@ -119,6 +156,9 @@ class CreateKeysRequestBody(BaseModel):
     expires_at: OptionalNullable[datetime] = UNSET
     r"""Optional ISO 8601 UTC expiration timestamp. Must include seconds (YYYY-MM-DDTHH:MM:SSZ; fractional seconds allowed); minute-precision timestamps are rejected."""
 
+    external: Optional[External] = None
+    r"""Optional partner-defined identity associated with the created API key."""
+
     include_byok_in_limit: Optional[bool] = None
     r"""Whether to include BYOK usage in the limit"""
 
@@ -137,6 +177,7 @@ class CreateKeysRequestBody(BaseModel):
             [
                 "creator_user_id",
                 "expires_at",
+                "external",
                 "include_byok_in_limit",
                 "limit",
                 "limit_reset",
