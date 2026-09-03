@@ -7315,6 +7315,16 @@ components:
         name: 'My New Guardrail'
         reset_interval: 'monthly'
       properties:
+        allowed_data_regions:
+          description: 'Data regions through which requests governed by this guardrail must arrive. `global` is https://openrouter.ai, `europe` is https://eu.openrouter.ai, and `us` is https://us.openrouter.ai. Requests arriving through any other region are rejected. `null` leaves the ingress region unrestricted. When several guardrails apply (workspace default, member, API key), the effective regions are the intersection of every non-null value. An empty array is rejected.'
+          example:
+            - 'europe'
+          items:
+            $ref: '#/components/schemas/GuardrailDataRegion'
+          minItems: 1
+          type:
+            - 'array'
+            - 'null'
         allowed_models:
           description: 'Array of model identifiers (slug or canonical_slug accepted)'
           example:
@@ -10154,6 +10164,7 @@ components:
       type: 'object'
     Guardrail:
       example:
+        allowed_data_regions: null
         allowed_models: null
         allowed_providers:
           - 'openai'
@@ -10185,6 +10196,15 @@ components:
         updated_at: '2025-08-24T15:45:00Z'
         workspace_id: '0df9e665-d932-5740-b2c7-b52af166bc11'
       properties:
+        allowed_data_regions:
+          description: 'Data regions through which requests governed by this guardrail must arrive. `global` is https://openrouter.ai, `europe` is https://eu.openrouter.ai, and `us` is https://us.openrouter.ai. Requests arriving through any other region are rejected. `null` leaves the ingress region unrestricted. When several guardrails apply (workspace default, member, API key), the effective regions are the intersection of every non-null value.'
+          example:
+            - 'europe'
+          items:
+            $ref: '#/components/schemas/GuardrailDataRegion'
+          type:
+            - 'array'
+            - 'null'
         allowed_models:
           description: 'Array of model canonical_slugs (immutable identifiers)'
           example:
@@ -10353,6 +10373,14 @@ components:
         - 'created_at'
         - 'workspace_id'
       type: 'object'
+    GuardrailDataRegion:
+      description: 'An OpenRouter data region: `global` (https://openrouter.ai), `europe` (https://eu.openrouter.ai), or `us` (https://us.openrouter.ai)'
+      enum:
+        - 'global'
+        - 'europe'
+        - 'us'
+      example: 'europe'
+      type: 'string'
     GuardrailInterval:
       description: 'Interval at which the limit resets (daily, weekly, monthly)'
       enum:
@@ -14939,6 +14967,82 @@ components:
       required:
         - 'code'
         - 'message'
+      type: 'object'
+    OAuthErrorResponse:
+      description: 'RFC 6749 §5.2 error response.'
+      example:
+        error: 'invalid_grant'
+        error_description: 'The subject token was not accepted.'
+      properties:
+        error:
+          enum:
+            - 'invalid_request'
+            - 'invalid_grant'
+            - 'unsupported_grant_type'
+            - 'invalid_scope'
+            - 'server_error'
+            - 'temporarily_unavailable'
+          type: 'string'
+        error_description:
+          type: 'string'
+      required:
+        - 'error'
+        - 'error_description'
+      type: 'object'
+    OAuthJwks:
+      description: 'RFC 7517 JWK Set of the keys OpenRouter signs access tokens with.'
+      example:
+        keys:
+          - alg: 'ES256'
+            crv: 'P-256'
+            kid: 'or-2026-09'
+            kty: 'EC'
+            use: 'sig'
+            x: 'f83OJ3D2xF1Bg8vub9tLe1gHMzV76e8Tus9uPHvRVEU'
+            'y': 'x_FEzRu9m36HLN_tue659LNpXW6pCyStikYjKIWI5a0'
+      properties:
+        keys:
+          items:
+            additionalProperties: false
+            properties:
+              alg:
+                enum:
+                  - 'ES256'
+                type: 'string'
+              crv:
+                enum:
+                  - 'P-256'
+                type: 'string'
+              kid:
+                minLength: 1
+                type: 'string'
+              kty:
+                enum:
+                  - 'EC'
+                type: 'string'
+              use:
+                enum:
+                  - 'sig'
+                type: 'string'
+              x:
+                pattern: '^[A-Za-z0-9_-]+$'
+                type: 'string'
+              'y':
+                pattern: '^[A-Za-z0-9_-]+$'
+                type: 'string'
+            required:
+              - 'kty'
+              - 'crv'
+              - 'kid'
+              - 'x'
+              - 'y'
+              - 'alg'
+              - 'use'
+            type: 'object'
+          minItems: 1
+          type: 'array'
+      required:
+        - 'keys'
       type: 'object'
     ObservabilityArizeDestination:
       example:
@@ -24917,6 +25021,92 @@ components:
       example:
         format:
           type: 'text'
+    TokenExchangeRequest:
+      description: 'RFC 8693 token exchange request body (application/x-www-form-urlencoded).'
+      example:
+        federation_policy_id: '4b2f7d1e-8c3a-4e5f-9a6b-1c2d3e4f5a6b'
+        grant_type: 'urn:ietf:params:oauth:grant-type:token-exchange'
+        subject_token: '<jwt from your identity provider>'
+        subject_token_type: 'urn:ietf:params:oauth:token-type:jwt'
+      properties:
+        federation_policy_id:
+          description: 'The federation policy to evaluate, from Settings → Workload identity. Binds the exchange to one organization.'
+          example: '4b2f7d1e-8c3a-4e5f-9a6b-1c2d3e4f5a6b'
+          format: 'uuid'
+          type: 'string'
+        grant_type:
+          description: 'Must be `urn:ietf:params:oauth:grant-type:token-exchange`.'
+          enum:
+            - 'urn:ietf:params:oauth:grant-type:token-exchange'
+          example: 'urn:ietf:params:oauth:grant-type:token-exchange'
+          type: 'string'
+        requested_token_type:
+          description: 'Optional; when present must be `urn:ietf:params:oauth:token-type:access_token`.'
+          enum:
+            - 'urn:ietf:params:oauth:token-type:access_token'
+          example: 'urn:ietf:params:oauth:token-type:access_token'
+          type: 'string'
+        scope:
+          description: 'Optional; only `inference` is available.'
+          enum:
+            - 'inference'
+          example: 'inference'
+          type: 'string'
+        subject_token:
+          description: 'The JWT issued by your identity provider.'
+          example: '<jwt from your identity provider>'
+          maxLength: 16384
+          minLength: 1
+          type: 'string'
+        subject_token_type:
+          description: 'Must be `urn:ietf:params:oauth:token-type:jwt`.'
+          enum:
+            - 'urn:ietf:params:oauth:token-type:jwt'
+          example: 'urn:ietf:params:oauth:token-type:jwt'
+          type: 'string'
+      required:
+        - 'grant_type'
+        - 'subject_token'
+        - 'federation_policy_id'
+        - 'subject_token_type'
+      type: 'object'
+    TokenExchangeResponse:
+      description: 'RFC 8693 token exchange response.'
+      example:
+        access_token: '<short-lived openrouter access token jwt>'
+        expires_in: 900
+        issued_token_type: 'urn:ietf:params:oauth:token-type:access_token'
+        scope: 'inference'
+        token_type: 'Bearer'
+      properties:
+        access_token:
+          description: 'A short-lived JWT to send as `Authorization: Bearer` to the inference API.'
+          example: '<short-lived openrouter access token jwt>'
+          type: 'string'
+        expires_in:
+          description: 'Seconds until the access token expires: at most 15 minutes, and never later than the subject token expires.'
+          example: 900
+          type: 'integer'
+        issued_token_type:
+          enum:
+            - 'urn:ietf:params:oauth:token-type:access_token'
+          example: 'urn:ietf:params:oauth:token-type:access_token'
+          type: 'string'
+        scope:
+          example: 'inference'
+          type: 'string'
+        token_type:
+          enum:
+            - 'Bearer'
+          example: 'Bearer'
+          type: 'string'
+      required:
+        - 'access_token'
+        - 'issued_token_type'
+        - 'token_type'
+        - 'expires_in'
+        - 'scope'
+      type: 'object'
     ToolCallStatus:
       enum:
         - 'in_progress'
@@ -25730,6 +25920,16 @@ components:
         name: 'Updated Guardrail Name'
         reset_interval: 'weekly'
       properties:
+        allowed_data_regions:
+          description: 'Data regions through which requests governed by this guardrail must arrive. `global` is https://openrouter.ai, `europe` is https://eu.openrouter.ai, and `us` is https://us.openrouter.ai. Requests arriving through any other region are rejected. `null` leaves the ingress region unrestricted. When several guardrails apply (workspace default, member, API key), the effective regions are the intersection of every non-null value. An empty array is rejected.'
+          example:
+            - 'europe'
+          items:
+            $ref: '#/components/schemas/GuardrailDataRegion'
+          minItems: 1
+          type:
+            - 'array'
+            - 'null'
         allowed_models:
           description: 'Array of model identifiers (slug or canonical_slug accepted)'
           example:
@@ -34090,7 +34290,7 @@ paths:
         - 'API Keys'
       x-speakeasy-name-override: 'list'
     post:
-      description: 'Create a new API key for the authenticated user. The plaintext `key` is returned only in this response. Treat it as a write-only, sensitive value; it cannot be retrieved later. Authenticate with a [management key](/docs/guides/overview/auth/management-api-keys), or with a Connect client secret.'
+      description: 'Create a new API key for the authenticated user. The plaintext `key` is returned only in this response. Treat it as a write-only, sensitive value; it cannot be retrieved later. Authenticate with a [management key](/docs/guides/overview/auth/management-api-keys). The optional `external` object associates the key with a partner-defined user and lookup key.'
       operationId: 'createKeys'
       requestBody:
         content:
@@ -34123,6 +34323,23 @@ paths:
                   type:
                     - 'string'
                     - 'null'
+                external:
+                  description: 'Optional partner-defined identity associated with the created API key.'
+                  properties:
+                    api_key:
+                      description: 'Optional partner-supplied API key with a minimum length of 32 characters and sufficient entropy. Stored as a SHA-256 hash and never returned.'
+                      maxLength: 512
+                      minLength: 32
+                      type: 'string'
+                    user:
+                      description: 'Partner''s end-user identifier for attribution.'
+                      example: 'partner-user-123'
+                      maxLength: 512
+                      minLength: 1
+                      type: 'string'
+                  required:
+                    - 'user'
+                  type: 'object'
                 include_byok_in_limit:
                   description: 'Whether to include BYOK usage in the limit'
                   example: true
@@ -34442,7 +34659,7 @@ paths:
       x-speakeasy-name-override: 'create'
   /keys/{hash}:
     delete:
-      description: 'Delete an existing API key. Authenticate with a [management key](/docs/guides/overview/auth/management-api-keys), or with a Connect client secret. A client secret reaches only the keys that same client created; any other key responds as if it does not exist.'
+      description: 'Delete an existing API key. Authenticate with a [management key](/docs/guides/overview/auth/management-api-keys).'
       operationId: 'deleteKeys'
       parameters:
         - description: 'The hash identifier of the API key to delete'
@@ -34792,7 +35009,7 @@ paths:
         - 'API Keys'
       x-speakeasy-name-override: 'get'
     patch:
-      description: 'Update an existing API key. Authenticate with a [management key](/docs/guides/overview/auth/management-api-keys), or with a Connect client secret. A client secret reaches only the keys that same client created; any other key responds as if it does not exist.'
+      description: 'Update an existing API key. Authenticate with a [management key](/docs/guides/overview/auth/management-api-keys).'
       operationId: 'updateKeys'
       parameters:
         - description: 'The hash identifier of the API key to update'
@@ -36159,6 +36376,70 @@ paths:
         outputs:
           results: '$.data'
         type: 'offsetLimit'
+  /oauth/jwks:
+    get:
+      description: 'RFC 7517 JWK Set containing the public keys OpenRouter signs access tokens with.'
+      operationId: 'listOauthJwks'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAuthJwks'
+          description: 'JWK Set'
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerResponse'
+          description: 'Signing keys are not configured'
+      summary: 'OpenRouter access token signing keys'
+      tags:
+        - 'OAuth'
+  /oauth/token:
+    post:
+      description: 'RFC 8693 token exchange. Presents a JWT from an issuer your organization trusts (Settings → Workload identity) and receives a short-lived OpenRouter access token that acts as the API key the matching federation policy targets.'
+      operationId: 'createOauthToken'
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/TokenExchangeRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenExchangeResponse'
+          description: 'Access token issued'
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAuthErrorResponse'
+          description: 'Malformed request, unsupported grant, or the subject token was not accepted'
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAuthErrorResponse'
+          description: 'Rate limited'
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAuthErrorResponse'
+          description: 'The token could not be issued'
+        '503':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAuthErrorResponse'
+          description: 'The issuer’s discovery document or JWKS could not be fetched'
+      summary: 'Exchange a workload identity token'
+      tags:
+        - 'OAuth'
   /observability/destinations:
     get:
       description: 'List the observability destinations configured for the authenticated entity''s default workspace. Use the `workspace_id` query parameter to scope the result to a different workspace. Only destinations with stable release status are surfaced — destinations of other types are excluded. [Management key](/docs/guides/overview/auth/management-api-keys) required.'
