@@ -29,6 +29,7 @@ if TYPE_CHECKING:
     )
     from .no_response_error import NoResponseError
     from .notfoundresponse_error import NotFoundResponseError, NotFoundResponseErrorData
+    from .oautherrorresponse import OAuthErrorResponse, OAuthErrorResponseData
     from .openrouterdefaulterror import OpenRouterDefaultError
     from .payloadtoolargeresponse_error import (
         PayloadTooLargeResponseError,
@@ -80,6 +81,8 @@ __all__ = [
     "NoResponseError",
     "NotFoundResponseError",
     "NotFoundResponseErrorData",
+    "OAuthErrorResponse",
+    "OAuthErrorResponseData",
     "OpenRouterDefaultError",
     "OpenRouterError",
     "PayloadTooLargeResponseError",
@@ -117,6 +120,8 @@ _dynamic_imports: dict[str, str] = {
     "NoResponseError": ".no_response_error",
     "NotFoundResponseError": ".notfoundresponse_error",
     "NotFoundResponseErrorData": ".notfoundresponse_error",
+    "OAuthErrorResponse": ".oautherrorresponse",
+    "OAuthErrorResponseData": ".oautherrorresponse",
     "OpenRouterDefaultError": ".openrouterdefaulterror",
     "PayloadTooLargeResponseError": ".payloadtoolargeresponse_error",
     "PayloadTooLargeResponseErrorData": ".payloadtoolargeresponse_error",

@@ -1,0 +1,24 @@
+---
+title: "ErrorEnum"
+---
+
+## Example Usage
+
+```python
+from openrouter.components import ErrorEnum
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
+value: ErrorEnum = "invalid_request"
+```
+
+
+## Values
+
+This is an open enum. Unrecognized values will not fail type checks.
+
+- `"invalid_request"`
+- `"invalid_grant"`
+- `"unsupported_grant_type"`
+- `"invalid_scope"`
+- `"server_error"`
+- `"temporarily_unavailable"`

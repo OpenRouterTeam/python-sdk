@@ -149,6 +149,12 @@ if TYPE_CHECKING:
         CreateKeysResponse,
         CreateKeysResponseTypedDict,
     )
+    from .createoauthtoken import (
+        CreateOauthTokenGlobals,
+        CreateOauthTokenGlobalsTypedDict,
+        CreateOauthTokenRequest,
+        CreateOauthTokenRequestTypedDict,
+    )
     from .createobservabilitydestination import (
         CreateObservabilityDestinationGlobals,
         CreateObservabilityDestinationGlobalsTypedDict,
@@ -630,6 +636,12 @@ if TYPE_CHECKING:
         ListModelsUserSecurity,
         ListModelsUserSecurityTypedDict,
     )
+    from .listoauthjwks import (
+        ListOauthJwksGlobals,
+        ListOauthJwksGlobalsTypedDict,
+        ListOauthJwksRequest,
+        ListOauthJwksRequestTypedDict,
+    )
     from .listobservabilitydestinations import (
         ListObservabilityDestinationsGlobals,
         ListObservabilityDestinationsGlobalsTypedDict,
@@ -954,6 +966,10 @@ __all__ = [
     "CreateKeysRequestTypedDict",
     "CreateKeysResponse",
     "CreateKeysResponseTypedDict",
+    "CreateOauthTokenGlobals",
+    "CreateOauthTokenGlobalsTypedDict",
+    "CreateOauthTokenRequest",
+    "CreateOauthTokenRequestTypedDict",
     "CreateObservabilityDestinationGlobals",
     "CreateObservabilityDestinationGlobalsTypedDict",
     "CreateObservabilityDestinationRequest",
@@ -1298,6 +1314,10 @@ __all__ = [
     "ListModelsUserResponseTypedDict",
     "ListModelsUserSecurity",
     "ListModelsUserSecurityTypedDict",
+    "ListOauthJwksGlobals",
+    "ListOauthJwksGlobalsTypedDict",
+    "ListOauthJwksRequest",
+    "ListOauthJwksRequestTypedDict",
     "ListObservabilityDestinationsGlobals",
     "ListObservabilityDestinationsGlobalsTypedDict",
     "ListObservabilityDestinationsRequest",
@@ -1604,6 +1624,10 @@ _dynamic_imports: dict[str, str] = {
     "CreateKeysRequestTypedDict": ".createkeys",
     "CreateKeysResponse": ".createkeys",
     "CreateKeysResponseTypedDict": ".createkeys",
+    "CreateOauthTokenGlobals": ".createoauthtoken",
+    "CreateOauthTokenGlobalsTypedDict": ".createoauthtoken",
+    "CreateOauthTokenRequest": ".createoauthtoken",
+    "CreateOauthTokenRequestTypedDict": ".createoauthtoken",
     "CreateObservabilityDestinationGlobals": ".createobservabilitydestination",
     "CreateObservabilityDestinationGlobalsTypedDict": ".createobservabilitydestination",
     "CreateObservabilityDestinationRequest": ".createobservabilitydestination",
@@ -1963,6 +1987,10 @@ _dynamic_imports: dict[str, str] = {
     "ListModelsUserResponseTypedDict": ".listmodelsuser",
     "ListModelsUserSecurity": ".listmodelsuser",
     "ListModelsUserSecurityTypedDict": ".listmodelsuser",
+    "ListOauthJwksGlobals": ".listoauthjwks",
+    "ListOauthJwksGlobalsTypedDict": ".listoauthjwks",
+    "ListOauthJwksRequest": ".listoauthjwks",
+    "ListOauthJwksRequestTypedDict": ".listoauthjwks",
     "ListObservabilityDestinationsGlobals": ".listobservabilitydestinations",
     "ListObservabilityDestinationsGlobalsTypedDict": ".listobservabilitydestinations",
     "ListObservabilityDestinationsRequest": ".listobservabilitydestinations",
