@@ -11,6 +11,8 @@ OAuth authentication endpoints
 
 * [exchange_auth_code_for_api_key](#exchange_auth_code_for_api_key) - Exchange authorization code for API key
 * [create_auth_code](#create_auth_code) - Create authorization code
+* [list_oauth_jwks](#list_oauth_jwks) - OpenRouter access token signing keys
+* [create_oauth_token](#create_oauth_token) - Exchange a workload identity token
 
 ## exchange_auth_code_for_api_key
 
@@ -118,3 +120,100 @@ with OpenRouter(
 | errors.ConflictResponseError       | 409                                | application/json                   |
 | errors.InternalServerResponseError | 500                                | application/json                   |
 | errors.OpenRouterDefaultError      | 4XX, 5XX                           | \*/\*                              |
+
+## list_oauth_jwks
+
+RFC 7517 JWK Set containing the public keys OpenRouter signs access tokens with.
+
+### Example Usage
+
+```python
+from openrouter import OpenRouter
+import os
+
+
+with OpenRouter(
+    http_referer="<value>",
+    x_open_router_title="<value>",
+    x_open_router_categories="<value>",
+    api_key=os.getenv("OPENROUTER_API_KEY", ""),
+) as open_router:
+
+    res = open_router.o_auth.list_oauth_jwks()
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                                                                                                         | Type                                                                                                                                              | Required                                                                                                                                          | Description                                                                                                                                       |
+| ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `http_referer`                                                                                                                                    | *Optional[str]*                                                                                                                                   | :heavy_minus_sign:                                                                                                                                | The app identifier should be your app's URL and is used as the primary identifier for rankings.<br/>This is used to track API usage per application.<br/> |
+| `x_open_router_title`                                                                                                                             | *Optional[str]*                                                                                                                                   | :heavy_minus_sign:                                                                                                                                | The app display name allows you to customize how your app appears in OpenRouter's dashboard.<br/>                                                 |
+| `x_open_router_categories`                                                                                                                        | *Optional[str]*                                                                                                                                   | :heavy_minus_sign:                                                                                                                                | Comma-separated list of app categories (e.g. "cli-agent,cloud-agent"). Used for marketplace rankings.<br/>                                        |
+| `retries`                                                                                                                                         | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.mdx)                                                                                  | :heavy_minus_sign:                                                                                                                                | Configuration to override the default retry behavior of the client.                                                                               |
+
+### Response
+
+**[components.OAuthJwks](../../components/oauthjwks.mdx)**
+
+### Errors
+
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| errors.InternalServerResponseError | 500                                | application/json                   |
+| errors.OpenRouterDefaultError      | 4XX, 5XX                           | \*/\*                              |
+
+## create_oauth_token
+
+RFC 8693 token exchange. Presents a JWT from an issuer your organization trusts (Settings → Workload identity) and receives a short-lived OpenRouter access token that acts as the API key the matching federation policy targets.
+
+### Example Usage
+
+```python
+from openrouter import OpenRouter
+import os
+
+
+with OpenRouter(
+    http_referer="<value>",
+    x_open_router_title="<value>",
+    x_open_router_categories="<value>",
+    api_key=os.getenv("OPENROUTER_API_KEY", ""),
+) as open_router:
+
+    res = open_router.o_auth.create_oauth_token(federation_policy_id="4b2f7d1e-8c3a-4e5f-9a6b-1c2d3e4f5a6b", grant_type="urn:ietf:params:oauth:grant-type:token-exchange", subject_token="<jwt from your identity provider>", subject_token_type="urn:ietf:params:oauth:token-type:jwt")
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                                                                                                         | Type                                                                                                                                              | Required                                                                                                                                          | Description                                                                                                                                       | Example                                                                                                                                           |
+| ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `federation_policy_id`                                                                                                                            | *str*                                                                                                                                             | :heavy_check_mark:                                                                                                                                | The federation policy to evaluate, from Settings → Workload identity. Binds the exchange to one organization.                                     | 4b2f7d1e-8c3a-4e5f-9a6b-1c2d3e4f5a6b                                                                                                              |
+| `grant_type`                                                                                                                                      | [components.GrantType](../../components/granttype.mdx)                                                                                             | :heavy_check_mark:                                                                                                                                | Must be `urn:ietf:params:oauth:grant-type:token-exchange`.                                                                                        | urn:ietf:params:oauth:grant-type:token-exchange                                                                                                   |
+| `subject_token`                                                                                                                                   | *str*                                                                                                                                             | :heavy_check_mark:                                                                                                                                | The JWT issued by your identity provider.                                                                                                         | \<jwt from your identity provider>                                                                                                                 |
+| `subject_token_type`                                                                                                                              | [components.SubjectTokenType](../../components/subjecttokentype.mdx)                                                                               | :heavy_check_mark:                                                                                                                                | Must be `urn:ietf:params:oauth:token-type:jwt`.                                                                                                   | urn:ietf:params:oauth:token-type:jwt                                                                                                              |
+| `http_referer`                                                                                                                                    | *Optional[str]*                                                                                                                                   | :heavy_minus_sign:                                                                                                                                | The app identifier should be your app's URL and is used as the primary identifier for rankings.<br/>This is used to track API usage per application.<br/> |                                                                                                                                                   |
+| `x_open_router_title`                                                                                                                             | *Optional[str]*                                                                                                                                   | :heavy_minus_sign:                                                                                                                                | The app display name allows you to customize how your app appears in OpenRouter's dashboard.<br/>                                                 |                                                                                                                                                   |
+| `x_open_router_categories`                                                                                                                        | *Optional[str]*                                                                                                                                   | :heavy_minus_sign:                                                                                                                                | Comma-separated list of app categories (e.g. "cli-agent,cloud-agent"). Used for marketplace rankings.<br/>                                        |                                                                                                                                                   |
+| `requested_token_type`                                                                                                                            | [Optional[components.RequestedTokenType]](../../components/requestedtokentype.mdx)                                                                 | :heavy_minus_sign:                                                                                                                                | Optional; when present must be `urn:ietf:params:oauth:token-type:access_token`.                                                                   | urn:ietf:params:oauth:token-type:access_token                                                                                                     |
+| `scope`                                                                                                                                           | [Optional[components.Scope]](../../components/scope.mdx)                                                                                           | :heavy_minus_sign:                                                                                                                                | Optional; only `inference` is available.                                                                                                          | inference                                                                                                                                         |
+| `retries`                                                                                                                                         | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.mdx)                                                                                  | :heavy_minus_sign:                                                                                                                                | Configuration to override the default retry behavior of the client.                                                                               |                                                                                                                                                   |
+
+### Response
+
+**[components.TokenExchangeResponse](../../components/tokenexchangeresponse.mdx)**
+
+### Errors
+
+| Error Type                    | Status Code                   | Content Type                  |
+| ----------------------------- | ----------------------------- | ----------------------------- |
+| errors.OAuthErrorResponse     | 400, 429                      | application/json              |
+| errors.OAuthErrorResponse     | 500, 503                      | application/json              |
+| errors.OpenRouterDefaultError | 4XX, 5XX                      | \*/\*                         |
