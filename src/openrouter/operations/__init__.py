@@ -148,6 +148,8 @@ if TYPE_CHECKING:
         CreateKeysRequestTypedDict,
         CreateKeysResponse,
         CreateKeysResponseTypedDict,
+        External,
+        ExternalTypedDict,
     )
     from .createoauthtoken import (
         CreateOauthTokenGlobals,
@@ -1082,6 +1084,8 @@ __all__ = [
     "ExchangeAuthCodeForAPIKeyRequestTypedDict",
     "ExchangeAuthCodeForAPIKeyResponse",
     "ExchangeAuthCodeForAPIKeyResponseTypedDict",
+    "External",
+    "ExternalTypedDict",
     "Filter",
     "FilterTypedDict",
     "GetAnalyticsMetaData",
@@ -1624,6 +1628,8 @@ _dynamic_imports: dict[str, str] = {
     "CreateKeysRequestTypedDict": ".createkeys",
     "CreateKeysResponse": ".createkeys",
     "CreateKeysResponseTypedDict": ".createkeys",
+    "External": ".createkeys",
+    "ExternalTypedDict": ".createkeys",
     "CreateOauthTokenGlobals": ".createoauthtoken",
     "CreateOauthTokenGlobalsTypedDict": ".createoauthtoken",
     "CreateOauthTokenRequest": ".createoauthtoken",
