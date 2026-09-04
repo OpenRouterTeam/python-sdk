@@ -6,6 +6,10 @@ from .applypatchcalloutputitem import (
     ApplyPatchCallOutputItem,
     ApplyPatchCallOutputItemTypedDict,
 )
+from .configurationupdateitem import (
+    ConfigurationUpdateItem,
+    ConfigurationUpdateItemTypedDict,
+)
 from .inputaudio import InputAudio, InputAudioTypedDict
 from .inputfile import InputFile, InputFileTypedDict
 from .inputimage import InputImage, InputImageTypedDict
@@ -199,6 +203,7 @@ class BaseInputsMessage(BaseModel):
 BaseInputsUnion1TypedDict = TypeAliasType(
     "BaseInputsUnion1TypedDict",
     Union[
+        ConfigurationUpdateItemTypedDict,
         BaseInputsMessageTypedDict,
         OpenAIResponseInputMessageItemTypedDict,
         OutputItemImageGenerationCallTypedDict,
@@ -216,6 +221,7 @@ BaseInputsUnion1TypedDict = TypeAliasType(
 BaseInputsUnion1 = TypeAliasType(
     "BaseInputsUnion1",
     Union[
+        ConfigurationUpdateItem,
         BaseInputsMessage,
         OpenAIResponseInputMessageItem,
         OutputItemImageGenerationCall,
