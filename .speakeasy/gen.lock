@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c48cf606-fb42-4a45-9c23-8f0555307828
 management:
-  docChecksum: 7dc091828a34b67d7e53e3661f10d732
+  docChecksum: fb37e352f340b3898e28721b71606d5d
   docVersion: 1.0.0
   speakeasyVersion: 1.787.0
   generationVersion: 2.914.0
-  releaseVersion: 1.1.123
-  configChecksum: 96ead6e5dbcc3deff78f726877f48b85
+  releaseVersion: 1.1.124
+  configChecksum: b968187363634ff4148bf9663fc26a42
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
 persistentEdits:
-  generation_id: 1df53725-b696-4dea-9c17-1eaf825607f1
-  pristine_commit_hash: 01b9c878edb6a28ad0be21677016cc536f67b9ce
-  pristine_tree_hash: 4272fd0bcdc1e58bc149cb1ee39449cb73770b76
+  generation_id: 50294a37-6869-4125-adc7-d5bcbd063480
+  pristine_commit_hash: 790f5f097f1936230cf6dd315efaed100064352b
+  pristine_tree_hash: f7208567cc8e3d4d610e0fba3d590080f117be41
 features:
   python:
     acceptHeaders: 3.0.0
@@ -1652,6 +1652,10 @@ trackedFiles:
     id: 1343f81fb7f9
     last_write_checksum: sha1:405c1e9143c6d51cebda7e415fb3b981da5e6c83
     pristine_git_object: 9ac0db3fbdb1995b37cbe28015dc24425af0660e
+  docs/components/createscimsyncjobresponse.mdx:
+    id: 1845762e5b3a
+    last_write_checksum: sha1:583c2873f92e3c5eca6efe3b36d7c4a9a8789c7a
+    pristine_git_object: 578411c9c20ce29b38854cf608060bd6e6aec69e
   docs/components/createworkspacerequest.mdx:
     id: ea85d6684017
     last_write_checksum: sha1:3fd0555fe82dbdff103995079630e6bcb7503795
@@ -2308,6 +2312,10 @@ trackedFiles:
     id: 59edec5c97d1
     last_write_checksum: sha1:e60a199f393362e0182d4b5aa6218294e6c1af48
     pristine_git_object: 3031bf1129e51ad652a31b7142154b49fcc4560f
+  docs/components/getscimsyncjobresponse.mdx:
+    id: b6ce94617601
+    last_write_checksum: sha1:4f7f13820a8f5d4da47e82136568c39d684a0d71
+    pristine_git_object: e671eabcbd7f603a2b687276bca29de1b9ac235d
   docs/components/getworkspacebudgetresponse.mdx:
     id: 9a7d2b80e512
     last_write_checksum: sha1:a299ce75f8736a4d572a06a48e54e00854a63f0b
@@ -4856,6 +4864,14 @@ trackedFiles:
     id: 0306b7b3cf78
     last_write_checksum: sha1:93f2d7d1dc60a2b1635202d83ae9f00cc314e2e6
     pristine_git_object: 94331ee57f8ebf2b21903d5ebda22e0faf23044a
+  docs/components/scimsyncjob.mdx:
+    id: 4016ff89381c
+    last_write_checksum: sha1:ece2e4108e3e1f0ddf48b2c18001e04acb5b7e71
+    pristine_git_object: 8d852b6587a1c0566e2fd496c805cf50a5d04c16
+  docs/components/scimsyncjobstatus.mdx:
+    id: 1fdb0adb6332
+    last_write_checksum: sha1:ce8e66b50b882d83464fef01336e9227a514a5cb
+    pristine_git_object: a319422a67656f477b27f3ed48149e53c6fd8405
   docs/components/scope.mdx:
     id: 25b03f56752e
     last_write_checksum: sha1:604855944477d8965aa373bbba3c15fa77a8b70d
@@ -6356,6 +6372,18 @@ trackedFiles:
     id: 0cf573a9a3b4
     last_write_checksum: sha1:19276108c153ccd0d96cb8330f559085ed6c43c9
     pristine_git_object: c5b268ab42e01e5056deaf0d432858cfa147a362
+  docs/operations/createscimsyncjobglobals.mdx:
+    id: 81b32708351d
+    last_write_checksum: sha1:91a832b54df23932dd4b465fa1f9d69230b0079d
+    pristine_git_object: 5a954d8d9789dd4a42a713ce5cfada3bd4c577fa
+  docs/operations/createscimsyncjobrequest.mdx:
+    id: f90fe2f8c1a0
+    last_write_checksum: sha1:1c557fa00de7abfc05b7e0ace778c1a488989c33
+    pristine_git_object: 46f2d75c16d7f52b9a41d4175b5012ed4e5e8925
+  docs/operations/createscimsyncjobresponse.mdx:
+    id: 56c7ec9966fa
+    last_write_checksum: sha1:b98cbf395a3bc9b53b859f3b1e8efe9ee35366bb
+    pristine_git_object: 1832b155e778ebd9eb28ebc4a4af459b95a1a506
   docs/operations/createvideosglobals.mdx:
     id: 84de29ff23d6
     last_write_checksum: sha1:b0e6bc84afd5b4bcdb3f491c64b3f5c15e74d187
@@ -6728,6 +6756,14 @@ trackedFiles:
     id: d5f5f6747522
     last_write_checksum: sha1:f86eff956c41225004a47350e31bfb0842f6b968
     pristine_git_object: 65e59b601a99b58683e4af1f7302a21c9ac3ce04
+  docs/operations/getscimsyncjobglobals.mdx:
+    id: af2a67cdfc94
+    last_write_checksum: sha1:04ebee712781c6ccd59d441d83e3b816bd31766c
+    pristine_git_object: 43e7a43da453b59c36e2be6e0a0d7153690af728
+  docs/operations/getscimsyncjobrequest.mdx:
+    id: 12c3450bce68
+    last_write_checksum: sha1:0c119f835feca10ea735f10d27e64db8a6f80cec
+    pristine_git_object: 6cf043dac4cc37cb5e25a8427d428d1f3765b80c
   docs/operations/getsessioncostglobals.mdx:
     id: 9d0a1df1aa96
     last_write_checksum: sha1:bd37b2d3bdb691f88c20db056035a03d6c332ca1
@@ -7534,8 +7570,8 @@ trackedFiles:
     pristine_git_object: 4620eda5cda464ad878f498b92604b435021e5fe
   docs/sdks/scim/README.mdx:
     id: fd6d8a91a053
-    last_write_checksum: sha1:2e06b16b6c9d34300dfe155e8cbde7728c1b6d9c
-    pristine_git_object: 6fe10f474e510dba25ab1f7a70257408fc0b83d2
+    last_write_checksum: sha1:bfa41cca8d71fe5ae3fbdc7462a1f13b402accca
+    pristine_git_object: bdfdb8fc68c3fc2377cc12ea0f6ee2a8d8c47427
   docs/sdks/stt/README.mdx:
     id: 190b0dc9a5d1
     last_write_checksum: sha1:a9885710fd21bb71b4c80a10ad54a20bf47ddca7
@@ -7558,8 +7594,8 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:256541e6e83f3d7c6b89da4f23f4a0f4d338c341
-    pristine_git_object: 39da79f245c80b7ed1ba46789bca01c973a3abc9
+    last_write_checksum: sha1:9ba71a915e0f43fe5e9b8313ee467cf89e36e014
+    pristine_git_object: 0dc5679248a9deca4b9740737096508727226756
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77f44b60b98bc126557ec27391f91dfba764bb54
@@ -7586,8 +7622,8 @@ trackedFiles:
     pristine_git_object: 86713cfea633e09d33b3d4e65281071fe20e6137
   src/openrouter/_version.py:
     id: d8d15ad6c586
-    last_write_checksum: sha1:6382be974b1a8b3cf3ca1167b055ef7a4017aca2
-    pristine_git_object: 8093dd8c13fa5b4c9132ba9de05b03ce3fda92f6
+    last_write_checksum: sha1:6d3b441c93224fe23d278a3fedead501d62b5129
+    pristine_git_object: ae345133c528dfacc31267916b607a5ffda9bda7
   src/openrouter/analytics.py:
     id: cb406b5aaabb
     last_write_checksum: sha1:1e0004d8d1d5d797e2b54cd1cabeb7f9489d08e9
@@ -7626,8 +7662,8 @@ trackedFiles:
     pristine_git_object: ad3d247954547814054c01989a2dff3d12b3e4e1
   src/openrouter/components/__init__.py:
     id: 81754e97b3f4
-    last_write_checksum: sha1:1cf6c72ab08bb8e0d913cff224c6c960be606877
-    pristine_git_object: 18024225c70341bc7c9c24257ec87b91751ec68c
+    last_write_checksum: sha1:1a85e25de993cf2d55d29822e41f284e71db009a
+    pristine_git_object: 28614d87753d7ebd555d1c7f342fe946484171a5
   src/openrouter/components/aabenchmarkentry.py:
     id: e2e0f0b48c82
     last_write_checksum: sha1:fab4d9a24d2cea937bb749d46c5f83941e99d65c
@@ -8368,6 +8404,10 @@ trackedFiles:
     id: f8798c422360
     last_write_checksum: sha1:fe554fba7ee3924661b789491b1cc31e4517119d
     pristine_git_object: 7fde9784d1da97bbd4a70b5a64d72ea8ffa7fe64
+  src/openrouter/components/createscimsyncjobresponse.py:
+    id: 5dada6452185
+    last_write_checksum: sha1:f3533b148f303fb26ac595a97269f66405faf416
+    pristine_git_object: 3a03248b4aa36f469420c5602df4f5d21a36dd68
   src/openrouter/components/createworkspacerequest.py:
     id: 3785d9b207c2
     last_write_checksum: sha1:26d39e88354ea17dc3a9c0156ddc8769dbae33a4
@@ -8652,6 +8692,10 @@ trackedFiles:
     id: f6dd9e0daa9e
     last_write_checksum: sha1:0b1ba09ad5da624c4fdbd1bff5d8919e55133cb9
     pristine_git_object: cfca9a058673bf7db640c2cec6d8dfc4f87837bd
+  src/openrouter/components/getscimsyncjobresponse.py:
+    id: 3e8fd58a9e6f
+    last_write_checksum: sha1:e229017fe78fa9f455bf9e80022d8d24a2b502da
+    pristine_git_object: 0512c0e4de62d22081a4037985574191297dee30
   src/openrouter/components/getworkspacebudgetresponse.py:
     id: 5ae557de0b72
     last_write_checksum: sha1:49ee6ebadd481997bf9285d709847e5db8c0911c
@@ -9652,6 +9696,10 @@ trackedFiles:
     id: c4d7a895a0bc
     last_write_checksum: sha1:426befccd88107766691cff08a93741c6f388471
     pristine_git_object: b2e0acc56568f3c0ff542ec141c761ad62ddad80
+  src/openrouter/components/scimsyncjob.py:
+    id: a3d7fd291eb2
+    last_write_checksum: sha1:2ba3f6314971f5d020f022296fc16bf608ff6505
+    pristine_git_object: cc7c404fbad65b557005dcd525d46720baff6d7a
   src/openrouter/components/searchcontextsizeenum.py:
     id: c246413c0bd7
     last_write_checksum: sha1:863a664a9f17def86180b0407c8233c263acfae7
@@ -10290,8 +10338,8 @@ trackedFiles:
     pristine_git_object: 5c553b76ab24d9eaef51c3bf6d85aa74391e335e
   src/openrouter/operations/__init__.py:
     id: 9afcea1e7161
-    last_write_checksum: sha1:c7fed411d14dc37465fc61bf1fe78f9ba3b18ce2
-    pristine_git_object: ceac9dee376e4d8c832b3ff4a6cc6e3bec7eb5f4
+    last_write_checksum: sha1:534f35479d3f763b301b02511da7c8211209b70e
+    pristine_git_object: 036bec20dcedd8dc0a8fbccfffc19207dba2dec9
   src/openrouter/operations/bulkaddworkspacemembers.py:
     id: e0ed56117619
     last_write_checksum: sha1:5c44eb0d40fdece3ac084615f6c6082be4cf1d5a
@@ -10384,6 +10432,10 @@ trackedFiles:
     id: 48a7da108d46
     last_write_checksum: sha1:7d510d57cce56c508847565be44dfe0f2d2812e3
     pristine_git_object: 5e9dc6fb071c8087c7edbd766dded2fc19e00c9f
+  src/openrouter/operations/createscimsyncjob.py:
+    id: 6e34c289d71d
+    last_write_checksum: sha1:3395583f3df63ed55df668d1172a9fbe507a47f0
+    pristine_git_object: bafc88732217831ec34ae960b8711e2587640ba9
   src/openrouter/operations/createvideos.py:
     id: d52f6a4a3fe4
     last_write_checksum: sha1:dbcf7068a23f48a5d4cfd9c8150206731a40cc9b
@@ -10508,6 +10560,10 @@ trackedFiles:
     id: e1222ef7697e
     last_write_checksum: sha1:e1d1933f745296958538ae7c4bdc8ead53944492
     pristine_git_object: d930ef5a4202b0ec9a88329927f7ea6373a7971f
+  src/openrouter/operations/getscimsyncjob.py:
+    id: ebdf522b9390
+    last_write_checksum: sha1:85e9956e3cf6968cc39f77148f5d032200ed9d19
+    pristine_git_object: dac49707b3c24d2c551082315434c062c7b13333
   src/openrouter/operations/getsessioncost.py:
     id: d01a691a6603
     last_write_checksum: sha1:aa6af6b0570292ca32e27400e4278ce0b21b3bce
@@ -10726,8 +10782,8 @@ trackedFiles:
     pristine_git_object: 209f35ce4bf4054b4a7735c742eb9e4b82207f9d
   src/openrouter/scim.py:
     id: 351afd6b616e
-    last_write_checksum: sha1:60ce3b9f80f63bad718912b8f8fb166f273985c0
-    pristine_git_object: 31215372bf8bffe5ef0994d171854d997440b95d
+    last_write_checksum: sha1:a26edbea830c109d7de62b14ebd5dab45892cbba
+    pristine_git_object: 716b78f3ab2001333f8386750621a35b4b76f622
   src/openrouter/sdk.py:
     id: ee9846c4c9c5
     last_write_checksum: sha1:d8eeaa771b4d51749dc9f3390793903e842fc0af
@@ -12716,5 +12772,33 @@ examples:
           application/json: {"error": "invalid_grant", "error_description": "The subject token was not accepted."}
         "500":
           application/json: {"error": "invalid_grant", "error_description": "The subject token was not accepted."}
+  createScimSyncJob:
+    speakeasy-default-create-scim-sync-job:
+      responses:
+        "202":
+          application/json: {"data": {"created_at": "1712777141098", "deleted_groups": 182193, "error_message": null, "finished_at": "<value>", "id": "7d10512f-6c8e-413d-b6f9-117bd47a1c48", "started_at": "<value>", "status": "succeeded", "synced_groups": 985942}}
+        "401":
+          application/json: {"error": {"code": 401, "message": "Missing Authentication header"}}
+        "404":
+          application/json: {"error": {"code": 404, "message": "Resource not found"}}
+        "500":
+          application/json: {"error": {"code": 500, "message": "Internal Server Error"}}
+  getScimSyncJob:
+    speakeasy-default-get-scim-sync-job:
+      parameters:
+        path:
+          id: "11506961-3c26-4184-a388-53273cc64c83"
+      responses:
+        "200":
+          application/json: {"data": {"created_at": "1709974767907", "deleted_groups": 892856, "error_message": "<value>", "finished_at": "<value>", "id": "07b0436b-79eb-4e01-940e-aa9d5306e4c4", "started_at": "<value>", "status": "queued", "synced_groups": 824296}}
+        "401":
+          application/json: {"error": {"code": 401, "message": "Missing Authentication header"}}
+        "404":
+          application/json: {"error": {"code": 404, "message": "Resource not found"}}
+        "500":
+          application/json: {"error": {"code": 500, "message": "Internal Server Error"}}
 examplesVersion: 1.0.2
-releaseNotes: "## Python SDK Changes:\n* `open_router.tts.create_speech()`: \n  *  `request.provider.options.prime_intellect` **Added**\n* `open_router.stt.create_transcription()`: \n  *  `request.provider.options.prime_intellect` **Added**\n* `open_router.byok.list()`: \n  *  `request.provider` **Changed**\n  *  `response.data[].provider.enum(prime_intellect)` **Added**\n* `open_router.byok.create()`: \n  *  `request.provider.enum(prime_intellect)` **Added**\n  *  `response.data.provider.enum(prime_intellect)` **Added**\n* `open_router.byok.get()`:  `response.data.provider.enum(prime_intellect)` **Added**\n* `open_router.byok.update()`:  `response.data.provider.enum(prime_intellect)` **Added**\n* `open_router.chat.send()`: \n  *  `request.provider.ignore[].union(ProviderName).enum(prime_intellect)` **Added**\n* `open_router.embeddings.generate()`: \n  *  `request.provider.ignore[].union(ProviderName).enum(prime_intellect)` **Added**\n* `open_router.endpoints.list_zdr_endpoints()`:  `response.data[].provider_name.enum(prime_intellect)` **Added**\n* `open_router.endpoints.list()`:  `response.data.endpoints[].provider_name.enum(prime_intellect)` **Added**\n* `open_router.generations.get_generation()`:  `response.data.provider_responses[].provider_name.enum(prime_intellect)` **Added**\n* `open_router.images.generate()`:  `request.provider` **Changed**\n* `open_router.presets.create_presets_chat_completions()`: \n  *  `request.provider.ignore[].union(ProviderName).enum(prime_intellect)` **Added**\n* `open_router.presets.create_presets_messages()`: \n  *  `request.provider.ignore[].union(ProviderName).enum(prime_intellect)` **Added**\n* `open_router.presets.create_presets_responses()`: \n  *  `request.provider.ignore[].union(ProviderName).enum(prime_intellect)` **Added**\n* `open_router.rerank.rerank()`: \n  *  `request.provider.ignore[].union(ProviderName).enum(prime_intellect)` **Added**\n* `open_router.responses.send()`: \n  *  `request.provider.ignore[].union(ProviderName).enum(prime_intellect)` **Added**\n* `open_router.beta.responses.send()`: \n  *  `request.provider.ignore[].union(ProviderName).enum(prime_intellect)` **Added**\n* `open_router.video_generation.generate()`: \n  *  `request.provider.options.prime_intellect` **Added**\n"
+releaseNotes: |
+  ## Python SDK Changes:
+  * `open_router.scim.create_sync_job()`: **Added**
+  * `open_router.scim.get_sync_job()`: **Added**
