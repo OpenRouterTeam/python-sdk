@@ -20,7 +20,7 @@ class BashServerToolConfigTypedDict(TypedDict):
     environment: NotRequired[BashServerToolEnvironmentTypedDict]
     r"""Execution environment for the bash server tool."""
     sleep_after_seconds: NotRequired[int]
-    r"""How long (in seconds) the container stays warm after its last command before sleeping, freeing its capacity slot. Idle-based: each command renews the timer. Defaults to 900 (15 minutes); capped at 14400 (4 hours)."""
+    r"""How long (in seconds) the container stays warm after its last command before sleeping, freeing its capacity slot. Idle-based: each command renews the timer. Defaults to 300 (5 minutes); capped at 14400 (4 hours)."""
 
 
 class BashServerToolConfig(BaseModel):
@@ -33,7 +33,7 @@ class BashServerToolConfig(BaseModel):
     r"""Execution environment for the bash server tool."""
 
     sleep_after_seconds: Optional[int] = None
-    r"""How long (in seconds) the container stays warm after its last command before sleeping, freeing its capacity slot. Idle-based: each command renews the timer. Defaults to 900 (15 minutes); capped at 14400 (4 hours)."""
+    r"""How long (in seconds) the container stays warm after its last command before sleeping, freeing its capacity slot. Idle-based: each command renews the timer. Defaults to 300 (5 minutes); capped at 14400 (4 hours)."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
