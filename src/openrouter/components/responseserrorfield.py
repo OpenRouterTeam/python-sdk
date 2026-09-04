@@ -27,6 +27,7 @@ Code = Union[
         "failed_to_download_image",
         "image_file_not_found",
         "bio_policy",
+        "misalignment_policy_violation",
         "data_residency_mismatch",
     ],
     UnrecognizedStr,

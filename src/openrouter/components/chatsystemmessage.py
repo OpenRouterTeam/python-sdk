@@ -2,10 +2,34 @@
 
 from __future__ import annotations
 from .chatcontenttext import ChatContentText, ChatContentTextTypedDict
-from openrouter.types import BaseModel, UNSET_SENTINEL
+from .configurationupdatereasoning import (
+    ConfigurationUpdateReasoning,
+    ConfigurationUpdateReasoningTypedDict,
+)
+from openrouter.types import (
+    BaseModel,
+    Nullable,
+    OptionalNullable,
+    UNSET,
+    UNSET_SENTINEL,
+)
 from pydantic import model_serializer
 from typing import List, Literal, Optional, Union
 from typing_extensions import NotRequired, TypeAliasType, TypedDict
+
+
+class ConfigurationUpdateTypedDict(TypedDict):
+    r"""OpenRouter extension. Changes reasoning effort from this point in the conversation onward without invalidating the prompt cache for the preceding turns. Place it on a content-less system message (`content: \"\"`) directly before the user message it should apply to, and keep it at that position in later requests. Equivalent to the OpenAI Responses `configuration_update` input item and the Anthropic Messages per-message `output_config.effort`."""
+
+    reasoning: ConfigurationUpdateReasoningTypedDict
+    r"""Reasoning settings applied from this point in the conversation onward"""
+
+
+class ConfigurationUpdate(BaseModel):
+    r"""OpenRouter extension. Changes reasoning effort from this point in the conversation onward without invalidating the prompt cache for the preceding turns. Place it on a content-less system message (`content: \"\"`) directly before the user message it should apply to, and keep it at that position in later requests. Equivalent to the OpenAI Responses `configuration_update` input item and the Anthropic Messages per-message `output_config.effort`."""
+
+    reasoning: ConfigurationUpdateReasoning
+    r"""Reasoning settings applied from this point in the conversation onward"""
 
 
 ChatSystemMessageContentTypedDict = TypeAliasType(
@@ -29,6 +53,8 @@ class ChatSystemMessageTypedDict(TypedDict):
     content: ChatSystemMessageContentTypedDict
     r"""System message content"""
     role: ChatSystemMessageRole
+    configuration_update: NotRequired[Nullable[ConfigurationUpdateTypedDict]]
+    r"""OpenRouter extension. Changes reasoning effort from this point in the conversation onward without invalidating the prompt cache for the preceding turns. Place it on a content-less system message (`content: \"\"`) directly before the user message it should apply to, and keep it at that position in later requests. Equivalent to the OpenAI Responses `configuration_update` input item and the Anthropic Messages per-message `output_config.effort`."""
     name: NotRequired[str]
     r"""Optional name for the system message"""
 
@@ -41,21 +67,33 @@ class ChatSystemMessage(BaseModel):
 
     role: ChatSystemMessageRole
 
+    configuration_update: OptionalNullable[ConfigurationUpdate] = UNSET
+    r"""OpenRouter extension. Changes reasoning effort from this point in the conversation onward without invalidating the prompt cache for the preceding turns. Place it on a content-less system message (`content: \"\"`) directly before the user message it should apply to, and keep it at that position in later requests. Equivalent to the OpenAI Responses `configuration_update` input item and the Anthropic Messages per-message `output_config.effort`."""
+
     name: Optional[str] = None
     r"""Optional name for the system message"""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["name"])
+        optional_fields = set(["configuration_update", "name"])
+        nullable_fields = set(["configuration_update"])
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
             if val != UNSET_SENTINEL:
-                if val is not None or k not in optional_fields:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
                     m[k] = val
 
         return m

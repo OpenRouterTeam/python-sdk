@@ -622,6 +622,8 @@ if TYPE_CHECKING:
         ChatSystemMessageContentTypedDict,
         ChatSystemMessageRole,
         ChatSystemMessageTypedDict,
+        ConfigurationUpdate,
+        ConfigurationUpdateTypedDict,
     )
     from .chattokenlogprob import (
         ChatTokenLogprob,
@@ -742,6 +744,16 @@ if TYPE_CHECKING:
         ComputerUseServerToolType,
         ComputerUseServerToolTypedDict,
         Environment,
+    )
+    from .configurationupdateitem import (
+        ConfigurationUpdateItem,
+        ConfigurationUpdateItemType,
+        ConfigurationUpdateItemTypedDict,
+    )
+    from .configurationupdatereasoning import (
+        ConfigurationUpdateReasoning,
+        ConfigurationUpdateReasoningEffort,
+        ConfigurationUpdateReasoningTypedDict,
     )
     from .conflictresponseerrordata import (
         ConflictResponseErrorData,
@@ -1594,12 +1606,18 @@ if TYPE_CHECKING:
         McpApprovalResponseItemTypedDict,
     )
     from .mcpcallitem import McpCallItem, McpCallItemType, McpCallItemTypedDict
+    from .mcphttperror import McpHTTPError, McpHTTPErrorType, McpHTTPErrorTypedDict
     from .mcplisttoolsitem import (
         McpListToolsItem,
         McpListToolsItemTool,
         McpListToolsItemToolTypedDict,
         McpListToolsItemType,
         McpListToolsItemTypedDict,
+    )
+    from .mcpprotocolerror import (
+        McpProtocolError,
+        McpProtocolErrorType,
+        McpProtocolErrorTypedDict,
     )
     from .mcpservertool import (
         AllowedTools,
@@ -1620,6 +1638,12 @@ if TYPE_CHECKING:
         RequireApprovalTypedDict,
         RequireApprovalUnion,
         RequireApprovalUnionTypedDict,
+    )
+    from .mcptoolcallerror import McpToolCallError, McpToolCallErrorTypedDict
+    from .mcptoolexecutionerror import (
+        McpToolExecutionError,
+        McpToolExecutionErrorType,
+        McpToolExecutionErrorTypedDict,
     )
     from .memberassignment import MemberAssignment, MemberAssignmentTypedDict
     from .messagesadvisortoolresultblock import (
@@ -3748,6 +3772,14 @@ __all__ = [
     "ComputerUseServerTool",
     "ComputerUseServerToolType",
     "ComputerUseServerToolTypedDict",
+    "ConfigurationUpdate",
+    "ConfigurationUpdateItem",
+    "ConfigurationUpdateItemType",
+    "ConfigurationUpdateItemTypedDict",
+    "ConfigurationUpdateReasoning",
+    "ConfigurationUpdateReasoningEffort",
+    "ConfigurationUpdateReasoningTypedDict",
+    "ConfigurationUpdateTypedDict",
     "ConflictResponseErrorData",
     "ConflictResponseErrorDataTypedDict",
     "ConnectorID",
@@ -4393,14 +4425,25 @@ __all__ = [
     "McpCallItem",
     "McpCallItemType",
     "McpCallItemTypedDict",
+    "McpHTTPError",
+    "McpHTTPErrorType",
+    "McpHTTPErrorTypedDict",
     "McpListToolsItem",
     "McpListToolsItemTool",
     "McpListToolsItemToolTypedDict",
     "McpListToolsItemType",
     "McpListToolsItemTypedDict",
+    "McpProtocolError",
+    "McpProtocolErrorType",
+    "McpProtocolErrorTypedDict",
     "McpServerTool",
     "McpServerToolType",
     "McpServerToolTypedDict",
+    "McpToolCallError",
+    "McpToolCallErrorTypedDict",
+    "McpToolExecutionError",
+    "McpToolExecutionErrorType",
+    "McpToolExecutionErrorTypedDict",
     "MemberAssignment",
     "MemberAssignmentTypedDict",
     "MemoryLimit",
@@ -6030,6 +6073,8 @@ _dynamic_imports: dict[str, str] = {
     "ChatSystemMessageContentTypedDict": ".chatsystemmessage",
     "ChatSystemMessageRole": ".chatsystemmessage",
     "ChatSystemMessageTypedDict": ".chatsystemmessage",
+    "ConfigurationUpdate": ".chatsystemmessage",
+    "ConfigurationUpdateTypedDict": ".chatsystemmessage",
     "ChatTokenLogprob": ".chattokenlogprob",
     "ChatTokenLogprobTopLogprob": ".chattokenlogprob",
     "ChatTokenLogprobTopLogprobTypedDict": ".chattokenlogprob",
@@ -6111,6 +6156,12 @@ _dynamic_imports: dict[str, str] = {
     "ComputerUseServerToolType": ".computeruseservertool",
     "ComputerUseServerToolTypedDict": ".computeruseservertool",
     "Environment": ".computeruseservertool",
+    "ConfigurationUpdateItem": ".configurationupdateitem",
+    "ConfigurationUpdateItemType": ".configurationupdateitem",
+    "ConfigurationUpdateItemTypedDict": ".configurationupdateitem",
+    "ConfigurationUpdateReasoning": ".configurationupdatereasoning",
+    "ConfigurationUpdateReasoningEffort": ".configurationupdatereasoning",
+    "ConfigurationUpdateReasoningTypedDict": ".configurationupdatereasoning",
     "ConflictResponseErrorData": ".conflictresponseerrordata",
     "ConflictResponseErrorDataTypedDict": ".conflictresponseerrordata",
     "ContainerAutoEnvironment": ".containerautoenvironment",
@@ -6728,11 +6779,17 @@ _dynamic_imports: dict[str, str] = {
     "McpCallItem": ".mcpcallitem",
     "McpCallItemType": ".mcpcallitem",
     "McpCallItemTypedDict": ".mcpcallitem",
+    "McpHTTPError": ".mcphttperror",
+    "McpHTTPErrorType": ".mcphttperror",
+    "McpHTTPErrorTypedDict": ".mcphttperror",
     "McpListToolsItem": ".mcplisttoolsitem",
     "McpListToolsItemTool": ".mcplisttoolsitem",
     "McpListToolsItemToolTypedDict": ".mcplisttoolsitem",
     "McpListToolsItemType": ".mcplisttoolsitem",
     "McpListToolsItemTypedDict": ".mcplisttoolsitem",
+    "McpProtocolError": ".mcpprotocolerror",
+    "McpProtocolErrorType": ".mcpprotocolerror",
+    "McpProtocolErrorTypedDict": ".mcpprotocolerror",
     "AllowedTools": ".mcpservertool",
     "AllowedToolsTypedDict": ".mcpservertool",
     "AllowedToolsUnion": ".mcpservertool",
@@ -6751,6 +6808,11 @@ _dynamic_imports: dict[str, str] = {
     "RequireApprovalTypedDict": ".mcpservertool",
     "RequireApprovalUnion": ".mcpservertool",
     "RequireApprovalUnionTypedDict": ".mcpservertool",
+    "McpToolCallError": ".mcptoolcallerror",
+    "McpToolCallErrorTypedDict": ".mcptoolcallerror",
+    "McpToolExecutionError": ".mcptoolexecutionerror",
+    "McpToolExecutionErrorType": ".mcptoolexecutionerror",
+    "McpToolExecutionErrorTypedDict": ".mcptoolexecutionerror",
     "MemberAssignment": ".memberassignment",
     "MemberAssignmentTypedDict": ".memberassignment",
     "MessagesAdvisorToolResultBlock": ".messagesadvisortoolresultblock",

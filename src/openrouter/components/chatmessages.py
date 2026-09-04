@@ -15,10 +15,10 @@ from typing_extensions import Annotated, TypeAliasType
 ChatMessagesTypedDict = TypeAliasType(
     "ChatMessagesTypedDict",
     Union[
-        ChatSystemMessageTypedDict,
         ChatUserMessageTypedDict,
         ChatDeveloperMessageTypedDict,
         ChatToolMessageTypedDict,
+        ChatSystemMessageTypedDict,
         ChatAssistantMessageTypedDict,
     ],
 )
