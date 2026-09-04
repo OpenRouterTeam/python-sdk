@@ -1,0 +1,24 @@
+---
+title: "ScimSyncJobStatus"
+---
+
+Current status of the sync job: queued, running, succeeded, or failed.
+
+## Example Usage
+
+```python
+from openrouter.components import ScimSyncJobStatus
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
+value: ScimSyncJobStatus = "queued"
+```
+
+
+## Values
+
+This is an open enum. Unrecognized values will not fail type checks.
+
+- `"queued"`
+- `"running"`
+- `"succeeded"`
+- `"failed"`

@@ -892,6 +892,10 @@ if TYPE_CHECKING:
         CreateScimGroupMappingResponse,
         CreateScimGroupMappingResponseTypedDict,
     )
+    from .createscimsyncjobresponse import (
+        CreateScimSyncJobResponse,
+        CreateScimSyncJobResponseTypedDict,
+    )
     from .createworkspacerequest import (
         CreateWorkspaceRequest,
         CreateWorkspaceRequestTypedDict,
@@ -1263,6 +1267,10 @@ if TYPE_CHECKING:
     from .getscimgroupmappingresponse import (
         GetScimGroupMappingResponse,
         GetScimGroupMappingResponseTypedDict,
+    )
+    from .getscimsyncjobresponse import (
+        GetScimSyncJobResponse,
+        GetScimSyncJobResponseTypedDict,
     )
     from .getworkspacebudgetresponse import (
         GetWorkspaceBudgetResponse,
@@ -2728,6 +2736,7 @@ if TYPE_CHECKING:
         ScimGroupMappingRole,
         ScimGroupMappingTypedDict,
     )
+    from .scimsyncjob import ScimSyncJob, ScimSyncJobStatus, ScimSyncJobTypedDict
     from .searchcontextsizeenum import SearchContextSizeEnum
     from .searchmodelsservertool_openrouter import (
         SearchModelsServerToolOpenRouter,
@@ -3859,6 +3868,8 @@ __all__ = [
     "CreateScimGroupMappingRequestTypedDict",
     "CreateScimGroupMappingResponse",
     "CreateScimGroupMappingResponseTypedDict",
+    "CreateScimSyncJobResponse",
+    "CreateScimSyncJobResponseTypedDict",
     "CreateWorkspaceRequest",
     "CreateWorkspaceRequestTypedDict",
     "CreateWorkspaceResponse",
@@ -4123,6 +4134,8 @@ __all__ = [
     "GetPresetVersionResponseTypedDict",
     "GetScimGroupMappingResponse",
     "GetScimGroupMappingResponseTypedDict",
+    "GetScimSyncJobResponse",
+    "GetScimSyncJobResponseTypedDict",
     "GetWorkspaceBudgetResponse",
     "GetWorkspaceBudgetResponseTypedDict",
     "GetWorkspaceResponse",
@@ -5139,6 +5152,9 @@ __all__ = [
     "ScimGroupMappingRole",
     "ScimGroupMappingTypedDict",
     "ScimGroupTypedDict",
+    "ScimSyncJob",
+    "ScimSyncJobStatus",
+    "ScimSyncJobTypedDict",
     "Scope",
     "SearchContextSizeEnum",
     "SearchModelsServerToolConfig",
@@ -6192,6 +6208,8 @@ _dynamic_imports: dict[str, str] = {
     "CreateScimGroupMappingRequestTypedDict": ".createscimgroupmappingrequest",
     "CreateScimGroupMappingResponse": ".createscimgroupmappingresponse",
     "CreateScimGroupMappingResponseTypedDict": ".createscimgroupmappingresponse",
+    "CreateScimSyncJobResponse": ".createscimsyncjobresponse",
+    "CreateScimSyncJobResponseTypedDict": ".createscimsyncjobresponse",
     "CreateWorkspaceRequest": ".createworkspacerequest",
     "CreateWorkspaceRequestTypedDict": ".createworkspacerequest",
     "CreateWorkspaceResponse": ".createworkspaceresponse",
@@ -6469,6 +6487,8 @@ _dynamic_imports: dict[str, str] = {
     "GetPresetVersionResponseTypedDict": ".getpresetversionresponse",
     "GetScimGroupMappingResponse": ".getscimgroupmappingresponse",
     "GetScimGroupMappingResponseTypedDict": ".getscimgroupmappingresponse",
+    "GetScimSyncJobResponse": ".getscimsyncjobresponse",
+    "GetScimSyncJobResponseTypedDict": ".getscimsyncjobresponse",
     "GetWorkspaceBudgetResponse": ".getworkspacebudgetresponse",
     "GetWorkspaceBudgetResponseTypedDict": ".getworkspacebudgetresponse",
     "GetWorkspaceResponse": ".getworkspaceresponse",
@@ -7601,6 +7621,9 @@ _dynamic_imports: dict[str, str] = {
     "ScimGroupMapping": ".scimgroupmapping",
     "ScimGroupMappingRole": ".scimgroupmapping",
     "ScimGroupMappingTypedDict": ".scimgroupmapping",
+    "ScimSyncJob": ".scimsyncjob",
+    "ScimSyncJobStatus": ".scimsyncjob",
+    "ScimSyncJobTypedDict": ".scimsyncjob",
     "SearchContextSizeEnum": ".searchcontextsizeenum",
     "SearchModelsServerToolOpenRouter": ".searchmodelsservertool_openrouter",
     "SearchModelsServerToolOpenRouterType": ".searchmodelsservertool_openrouter",
