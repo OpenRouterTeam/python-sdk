@@ -1,0 +1,24 @@
+---
+title: "ObservabilityDataRegionInput"
+---
+
+`eu` is accepted as an alias for `europe` and normalizes to `europe`.
+
+## Example Usage
+
+```python
+from openrouter.components import ObservabilityDataRegionInput
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
+value: ObservabilityDataRegionInput = "global"
+```
+
+
+## Values
+
+This is an open enum. Unrecognized values will not fail type checks.
+
+- `"global"`
+- `"europe"`
+- `"us"`
+- `"eu"`

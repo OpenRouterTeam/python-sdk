@@ -1937,6 +1937,8 @@ if TYPE_CHECKING:
         ObservabilityDatadogDestinationType,
         ObservabilityDatadogDestinationTypedDict,
     )
+    from .observabilitydataregion import ObservabilityDataRegion
+    from .observabilitydataregioninput import ObservabilityDataRegionInput
     from .observabilitydestination import (
         ObservabilityDestination,
         ObservabilityDestinationTypedDict,
@@ -4590,6 +4592,8 @@ __all__ = [
     "ObservabilityClickhouseDestinationConfigTypedDict",
     "ObservabilityClickhouseDestinationType",
     "ObservabilityClickhouseDestinationTypedDict",
+    "ObservabilityDataRegion",
+    "ObservabilityDataRegionInput",
     "ObservabilityDatadogDestination",
     "ObservabilityDatadogDestinationConfig",
     "ObservabilityDatadogDestinationConfigTypedDict",
@@ -7073,6 +7077,8 @@ _dynamic_imports: dict[str, str] = {
     "ObservabilityDatadogDestinationConfigTypedDict": ".observabilitydatadogdestination",
     "ObservabilityDatadogDestinationType": ".observabilitydatadogdestination",
     "ObservabilityDatadogDestinationTypedDict": ".observabilitydatadogdestination",
+    "ObservabilityDataRegion": ".observabilitydataregion",
+    "ObservabilityDataRegionInput": ".observabilitydataregioninput",
     "ObservabilityDestination": ".observabilitydestination",
     "ObservabilityDestinationTypedDict": ".observabilitydestination",
     "UnknownObservabilityDestination": ".observabilitydestination",
