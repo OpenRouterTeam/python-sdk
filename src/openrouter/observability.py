@@ -373,6 +373,7 @@ class Observability(BaseSDK):
             ]
         ] = UNSET,
         privacy_mode: Optional[bool] = False,
+        regions: Optional[Iterable[components.ObservabilityDataRegionInput]] = None,
         sampling_rate: Optional[float] = None,
         workspace_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -401,6 +402,7 @@ class Observability(BaseSDK):
         :param enabled: Whether this destination should be enabled immediately.
         :param filter_rules: Optional structured filter rules controlling which events are forwarded.
         :param privacy_mode: When true, request/response bodies are not forwarded — only metadata.
+        :param regions: Data regions this destination applies to. `eu` is accepted as an alias for `europe` and normalizes to `europe`. Omitting this field defaults to ['global']; the array must be non-empty.
         :param sampling_rate: Sampling rate between 0.0001 and 1 (1 = 100%).
         :param workspace_id: Optional workspace ID. Defaults to the authenticated entity's default workspace.
         :param retries: Override the default retry configuration for this method
@@ -437,6 +439,9 @@ class Observability(BaseSDK):
                 ),
                 name=name,
                 privacy_mode=privacy_mode,
+                regions=utils.unmarshal(
+                    regions, Optional[List[components.ObservabilityDataRegionInput]]
+                ),
                 sampling_rate=sampling_rate,
                 type=type_,
                 workspace_id=workspace_id,
@@ -565,6 +570,7 @@ class Observability(BaseSDK):
             ]
         ] = UNSET,
         privacy_mode: Optional[bool] = False,
+        regions: Optional[Iterable[components.ObservabilityDataRegionInput]] = None,
         sampling_rate: Optional[float] = None,
         workspace_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -593,6 +599,7 @@ class Observability(BaseSDK):
         :param enabled: Whether this destination should be enabled immediately.
         :param filter_rules: Optional structured filter rules controlling which events are forwarded.
         :param privacy_mode: When true, request/response bodies are not forwarded — only metadata.
+        :param regions: Data regions this destination applies to. `eu` is accepted as an alias for `europe` and normalizes to `europe`. Omitting this field defaults to ['global']; the array must be non-empty.
         :param sampling_rate: Sampling rate between 0.0001 and 1 (1 = 100%).
         :param workspace_id: Optional workspace ID. Defaults to the authenticated entity's default workspace.
         :param retries: Override the default retry configuration for this method
@@ -629,6 +636,9 @@ class Observability(BaseSDK):
                 ),
                 name=name,
                 privacy_mode=privacy_mode,
+                regions=utils.unmarshal(
+                    regions, Optional[List[components.ObservabilityDataRegionInput]]
+                ),
                 sampling_rate=sampling_rate,
                 type=type_,
                 workspace_id=workspace_id,
@@ -1277,6 +1287,7 @@ class Observability(BaseSDK):
         ] = UNSET,
         name: Optional[str] = None,
         privacy_mode: Optional[bool] = None,
+        regions: Optional[Iterable[components.ObservabilityDataRegionInput]] = None,
         sampling_rate: Optional[float] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -1304,6 +1315,7 @@ class Observability(BaseSDK):
         :param filter_rules:
         :param name: Human-readable name for the destination.
         :param privacy_mode: When true, request/response bodies are not forwarded — only metadata.
+        :param regions: Data regions this destination applies to. `eu` is accepted as an alias for `europe` and normalizes to `europe`. Omitting this field keeps the current value; it cannot be cleared.
         :param sampling_rate: Sampling rate between 0.0001 and 1 (1 = 100%).
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -1340,6 +1352,9 @@ class Observability(BaseSDK):
                 ),
                 name=name,
                 privacy_mode=privacy_mode,
+                regions=utils.unmarshal(
+                    regions, Optional[List[components.ObservabilityDataRegionInput]]
+                ),
                 sampling_rate=sampling_rate,
             ),
         )
@@ -1471,6 +1486,7 @@ class Observability(BaseSDK):
         ] = UNSET,
         name: Optional[str] = None,
         privacy_mode: Optional[bool] = None,
+        regions: Optional[Iterable[components.ObservabilityDataRegionInput]] = None,
         sampling_rate: Optional[float] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -1498,6 +1514,7 @@ class Observability(BaseSDK):
         :param filter_rules:
         :param name: Human-readable name for the destination.
         :param privacy_mode: When true, request/response bodies are not forwarded — only metadata.
+        :param regions: Data regions this destination applies to. `eu` is accepted as an alias for `europe` and normalizes to `europe`. Omitting this field keeps the current value; it cannot be cleared.
         :param sampling_rate: Sampling rate between 0.0001 and 1 (1 = 100%).
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -1534,6 +1551,9 @@ class Observability(BaseSDK):
                 ),
                 name=name,
                 privacy_mode=privacy_mode,
+                regions=utils.unmarshal(
+                    regions, Optional[List[components.ObservabilityDataRegionInput]]
+                ),
                 sampling_rate=sampling_rate,
             ),
         )
