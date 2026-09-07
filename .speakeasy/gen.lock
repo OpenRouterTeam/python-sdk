@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c48cf606-fb42-4a45-9c23-8f0555307828
 management:
-  docChecksum: 5cdc014e1e0db55fdd061072c1cb7a95
+  docChecksum: 4e6e233fd4bd81eb1457720250167048
   docVersion: 1.0.0
   speakeasyVersion: 1.787.0
   generationVersion: 2.914.0
-  releaseVersion: 1.1.127
-  configChecksum: dd4c63e39bf48f073622494ecad33ff7
+  releaseVersion: 1.1.128
+  configChecksum: 659b58f40aa3a5a62924f0ea281890e4
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
 persistentEdits:
-  generation_id: c3181655-779b-4074-80b2-06108326d9d4
-  pristine_commit_hash: ea6c63a371d99fd9bce4cfd5379ff9bf962ac2b0
-  pristine_tree_hash: 70e7ff7a8cbbe388b7bc3e3e896848abdf7f9020
+  generation_id: c0c5fc1c-b80c-4670-b4e7-8e51d018632e
+  pristine_commit_hash: 61f2510e8a6efdd8ed1d90a7dd5d6ccf98809299
+  pristine_tree_hash: db81211734187c8d5f86f5d6a71207d68da131c1
 features:
   python:
     acceptHeaders: 3.0.0
@@ -7650,8 +7650,8 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:484b32af2ac7a270429e651295fa6ca6afc6c6b4
-    pristine_git_object: abceeec2c564f38ef86627d6b14b6d9256ec60c2
+    last_write_checksum: sha1:6f5f6c0a068a39167fabc6dc73f6ec65c9423dd1
+    pristine_git_object: f8d669d161a383787e29f10cd90e98c12ebf664d
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77f44b60b98bc126557ec27391f91dfba764bb54
@@ -7678,8 +7678,8 @@ trackedFiles:
     pristine_git_object: 86713cfea633e09d33b3d4e65281071fe20e6137
   src/openrouter/_version.py:
     id: d8d15ad6c586
-    last_write_checksum: sha1:9d21564f850b1b655f1479a215e37a8e5a6787e6
-    pristine_git_object: 057770285c66fb42877292b9000501977f9719ed
+    last_write_checksum: sha1:c1cc25629f7765963fa89fa24aa2d82f2a749926
+    pristine_git_object: 611d81426fb720a86447fdfb37cd0f391bdb24e7
   src/openrouter/analytics.py:
     id: cb406b5aaabb
     last_write_checksum: sha1:1e0004d8d1d5d797e2b54cd1cabeb7f9489d08e9
@@ -12886,4 +12886,3 @@ examples:
         "500":
           application/json: {"error": {"code": 500, "message": "Internal Server Error"}}
 examplesVersion: 1.0.2
-releaseNotes: "## Python SDK Changes:\n* `open_router.observability.list()`:  `response.data[]` **Changed**\n* `open_router.observability.create()`: \n  *  `request.regions` **Added**\n  *  `response.data` **Changed**\n* `open_router.observability.get()`:  `response.data` **Changed**\n* `open_router.observability.update()`: \n  *  `request.regions` **Added**\n  *  `response.data` **Changed**\n"
