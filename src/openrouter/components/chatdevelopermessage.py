@@ -2,10 +2,34 @@
 
 from __future__ import annotations
 from .chatcontenttext import ChatContentText, ChatContentTextTypedDict
-from openrouter.types import BaseModel, UNSET_SENTINEL
+from .configurationupdatereasoning import (
+    ConfigurationUpdateReasoning,
+    ConfigurationUpdateReasoningTypedDict,
+)
+from openrouter.types import (
+    BaseModel,
+    Nullable,
+    OptionalNullable,
+    UNSET,
+    UNSET_SENTINEL,
+)
 from pydantic import model_serializer
 from typing import List, Literal, Optional, Union
 from typing_extensions import NotRequired, TypeAliasType, TypedDict
+
+
+class ChatDeveloperMessageConfigurationUpdateTypedDict(TypedDict):
+    r"""OpenRouter extension. Same as the system message `configuration_update`: changes reasoning effort from this point in the conversation onward without invalidating the prompt cache for the preceding turns."""
+
+    reasoning: ConfigurationUpdateReasoningTypedDict
+    r"""Reasoning settings applied from this point in the conversation onward"""
+
+
+class ChatDeveloperMessageConfigurationUpdate(BaseModel):
+    r"""OpenRouter extension. Same as the system message `configuration_update`: changes reasoning effort from this point in the conversation onward without invalidating the prompt cache for the preceding turns."""
+
+    reasoning: ConfigurationUpdateReasoning
+    r"""Reasoning settings applied from this point in the conversation onward"""
 
 
 ChatDeveloperMessageContentTypedDict = TypeAliasType(
@@ -29,6 +53,10 @@ class ChatDeveloperMessageTypedDict(TypedDict):
     content: ChatDeveloperMessageContentTypedDict
     r"""Developer message content"""
     role: ChatDeveloperMessageRole
+    configuration_update: NotRequired[
+        Nullable[ChatDeveloperMessageConfigurationUpdateTypedDict]
+    ]
+    r"""OpenRouter extension. Same as the system message `configuration_update`: changes reasoning effort from this point in the conversation onward without invalidating the prompt cache for the preceding turns."""
     name: NotRequired[str]
     r"""Optional name for the developer message"""
 
@@ -41,21 +69,35 @@ class ChatDeveloperMessage(BaseModel):
 
     role: ChatDeveloperMessageRole
 
+    configuration_update: OptionalNullable[ChatDeveloperMessageConfigurationUpdate] = (
+        UNSET
+    )
+    r"""OpenRouter extension. Same as the system message `configuration_update`: changes reasoning effort from this point in the conversation onward without invalidating the prompt cache for the preceding turns."""
+
     name: Optional[str] = None
     r"""Optional name for the developer message"""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["name"])
+        optional_fields = set(["configuration_update", "name"])
+        nullable_fields = set(["configuration_update"])
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
             if val != UNSET_SENTINEL:
-                if val is not None or k not in optional_fields:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
                     m[k] = val
 
         return m

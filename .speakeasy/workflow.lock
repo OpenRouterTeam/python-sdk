@@ -2,8 +2,8 @@ speakeasyVersion: 1.787.0
 sources:
     OpenRouter API:
         sourceNamespace: open-router-chat-completions-api
-        sourceRevisionDigest: sha256:d06ad82cf1f51f6f70dd5a83315258678fd7e3b1784b9cb760820ed39b03d939
-        sourceBlobDigest: sha256:89c69de82a6ae94c2f7431d4cd056dff20a851765efbeabac62bc24be07048fb
+        sourceRevisionDigest: sha256:9db5e05ed4848a20fd8987cee486fcdfe1acd368d310f639da6037ce96d69d59
+        sourceBlobDigest: sha256:f1762809ed137577f30a052de14e0956d80b24e83aed70decaeb33b2a3807d35
         tags:
             - latest
             - 1.0.0
@@ -11,10 +11,10 @@ targets:
     open-router:
         source: OpenRouter API
         sourceNamespace: open-router-chat-completions-api
-        sourceRevisionDigest: sha256:d06ad82cf1f51f6f70dd5a83315258678fd7e3b1784b9cb760820ed39b03d939
-        sourceBlobDigest: sha256:89c69de82a6ae94c2f7431d4cd056dff20a851765efbeabac62bc24be07048fb
+        sourceRevisionDigest: sha256:9db5e05ed4848a20fd8987cee486fcdfe1acd368d310f639da6037ce96d69d59
+        sourceBlobDigest: sha256:f1762809ed137577f30a052de14e0956d80b24e83aed70decaeb33b2a3807d35
         codeSamplesNamespace: open-router-python-code-samples
-        codeSamplesRevisionDigest: sha256:414cb983021c9d1c65cfb46d8816966e1bd7e8a300e01c791be0cec7667a626d
+        codeSamplesRevisionDigest: sha256:3e8664557224a8582118d35af373f2d58378188425b2cc6dddf7f249d2645087
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: 1.787.0
