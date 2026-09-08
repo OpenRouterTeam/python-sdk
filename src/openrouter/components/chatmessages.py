@@ -16,9 +16,9 @@ ChatMessagesTypedDict = TypeAliasType(
     "ChatMessagesTypedDict",
     Union[
         ChatUserMessageTypedDict,
-        ChatDeveloperMessageTypedDict,
         ChatToolMessageTypedDict,
         ChatSystemMessageTypedDict,
+        ChatDeveloperMessageTypedDict,
         ChatAssistantMessageTypedDict,
     ],
 )
