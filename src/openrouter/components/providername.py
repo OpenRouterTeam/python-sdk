@@ -72,7 +72,6 @@ ProviderName = Union[
         "Moonshot AI",
         "Morph",
         "VoyageAI by MongoDB",
-        "NCompass",
         "Nebius",
         "Nex AGI",
         "NextBit",
