@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c48cf606-fb42-4a45-9c23-8f0555307828
 management:
-  docChecksum: 4ee993dfd0bfbdf25a0cded889dce266
+  docChecksum: e74cb3f988447ae316936d3b8ee45e04
   docVersion: 1.0.0
   speakeasyVersion: 1.787.0
   generationVersion: 2.914.0
-  releaseVersion: 1.1.132
-  configChecksum: 9bae2e3edd32baadef36a98afa81632a
+  releaseVersion: 1.1.133
+  configChecksum: cfb7e470afb22399bf5b5e707b21f680
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
 persistentEdits:
-  generation_id: c60f4ce1-7cfe-465c-9903-2e4148e39443
-  pristine_commit_hash: 12d39dd39b207fd056e944b9f17983e9d572232f
-  pristine_tree_hash: 1ef3c92e56628829b8f0b3d3ea27742815100862
+  generation_id: 2655a100-713d-4c7c-8bb2-31ad58e0b5ef
+  pristine_commit_hash: b5dacf7786ed7569b22f672d2d08724538db04e1
+  pristine_tree_hash: 1493651b58398fad1adcd886a43a0e66a3cd4607
 features:
   python:
     acceptHeaders: 3.0.0
@@ -2458,8 +2458,8 @@ trackedFiles:
     pristine_git_object: 4901416246fb4e34fc9227d3dc0bbbc08aa717e2
   docs/components/imagegenerationrequestquality.mdx:
     id: 7699c7fce91f
-    last_write_checksum: sha1:e0c8abee1332b182aeb1228b9c7a7f4cec83e99b
-    pristine_git_object: d6f8b5bec84207d47a6c9e47a5c0ee901c7a555d
+    last_write_checksum: sha1:a11821458c8b7951edb5ba7c827e1819b236d471
+    pristine_git_object: 6e2298007e04c5cf4cb96eae577fadddb382a9ac
   docs/components/imagegenerationrequestresolution.mdx:
     id: 5dcb01b22e48
     last_write_checksum: sha1:c53e03ff5d6cf292acc6702a75bc8b09db116e46
@@ -7654,8 +7654,8 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:a3393968c829a62824be4f12877838cce1c5556e
-    pristine_git_object: a9cbfa147f10755aa75d5caec155febe97ecf7f8
+    last_write_checksum: sha1:b8f470e6b09952b59f8c175a6db2faf77233c8d1
+    pristine_git_object: b6bf77436661af352d15c8a58f4d79dbfef35502
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77f44b60b98bc126557ec27391f91dfba764bb54
@@ -7682,8 +7682,8 @@ trackedFiles:
     pristine_git_object: 86713cfea633e09d33b3d4e65281071fe20e6137
   src/openrouter/_version.py:
     id: d8d15ad6c586
-    last_write_checksum: sha1:ef47083c9eeed71f3819146bac527721528db3cb
-    pristine_git_object: ead638efa69392454c80cf46b7600eaec2928a95
+    last_write_checksum: sha1:1d70ee2a9624e3ee82b594fb61ac995277cac80a
+    pristine_git_object: 4d015b4ad468c542eb4db85443522a6c0ae90019
   src/openrouter/analytics.py:
     id: cb406b5aaabb
     last_write_checksum: sha1:1e0004d8d1d5d797e2b54cd1cabeb7f9489d08e9
@@ -8818,8 +8818,8 @@ trackedFiles:
     pristine_git_object: 99421157b49536255a82277c0182472483e2f3aa
   src/openrouter/components/imagegenerationrequest.py:
     id: f8291a7be9a0
-    last_write_checksum: sha1:06040315f7f05be92a5ef2db7908b31d07bb2921
-    pristine_git_object: d681ed7ba2e46f7ef1351a9d2ae5571f23e09790
+    last_write_checksum: sha1:d1a3c0f106fd9a6c52e5ee08ca752d42058cdb2a
+    pristine_git_object: e77b47cb8b182ba66df153c5c6e4f2d7b3e86cac
   src/openrouter/components/imagegenerationresponse.py:
     id: 53354cd0cbfc
     last_write_checksum: sha1:53f1cde7b8bfe4f9e786a76f6e57b0a1f76aced2
@@ -12890,4 +12890,6 @@ examples:
         "500":
           application/json: {"error": {"code": 500, "message": "Internal Server Error"}}
 examplesVersion: 1.0.2
-releaseNotes: "## Python SDK Changes:\n* `open_router.tts.create_speech()`: \n  *  `request.provider.options` **Changed** (Breaking ⚠️)\n* `open_router.stt.create_transcription()`: \n  *  `request.provider.options` **Changed** (Breaking ⚠️)\n* `open_router.byok.list()`: \n  *  `request.provider` **Changed** (Breaking ⚠️)\n  *  `response.data[].provider` **Changed** (Breaking ⚠️)\n* `open_router.byok.create()`: \n  *  `request.provider` **Changed** (Breaking ⚠️)\n  *  `response.data.provider` **Changed** (Breaking ⚠️)\n* `open_router.byok.get()`:  `response.data.provider` **Changed** (Breaking ⚠️)\n* `open_router.byok.update()`:  `response.data.provider` **Changed** (Breaking ⚠️)\n* `open_router.images.generate()`: \n  *  `request.provider.options` **Changed** (Breaking ⚠️)\n* `open_router.video_generation.generate()`: \n  *  `request.provider.options` **Changed** (Breaking ⚠️)\n"
+releaseNotes: |
+  ## Python SDK Changes:
+  * `open_router.images.generate()`:  `request.quality` **Changed**

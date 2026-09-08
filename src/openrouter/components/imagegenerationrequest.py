@@ -71,6 +71,8 @@ ImageGenerationRequestQuality = Union[
         "low",
         "medium",
         "high",
+        "xhigh",
+        "max",
     ],
     UnrecognizedStr,
 ]
