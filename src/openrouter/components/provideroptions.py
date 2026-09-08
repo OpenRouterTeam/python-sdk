@@ -112,7 +112,7 @@ class ProviderOptionsTypedDict(TypedDict):
     perplexity: NotRequired[Dict[str, Any]]
     phala: NotRequired[Dict[str, Any]]
     poolside: NotRequired[Dict[str, Any]]
-    prime_intellect: NotRequired[Dict[str, Any]]
+    primeintellect: NotRequired[Dict[str, Any]]
     quiver: NotRequired[Dict[str, Any]]
     recraft: NotRequired[Dict[str, Any]]
     recursal: NotRequired[Dict[str, Any]]
@@ -395,9 +395,7 @@ class ProviderOptions(BaseModel):
 
     poolside: Optional[Dict[str, Any]] = None
 
-    prime_intellect: Annotated[
-        Optional[Dict[str, Any]], pydantic.Field(alias="prime-intellect")
-    ] = None
+    primeintellect: Optional[Dict[str, Any]] = None
 
     quiver: Optional[Dict[str, Any]] = None
 
@@ -590,7 +588,7 @@ class ProviderOptions(BaseModel):
                 "perplexity",
                 "phala",
                 "poolside",
-                "prime-intellect",
+                "primeintellect",
                 "quiver",
                 "recraft",
                 "recursal",
