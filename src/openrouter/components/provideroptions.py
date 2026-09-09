@@ -97,6 +97,7 @@ class ProviderOptionsTypedDict(TypedDict):
     moonshotai: NotRequired[Dict[str, Any]]
     morph: NotRequired[Dict[str, Any]]
     ncompass: NotRequired[Dict[str, Any]]
+    near_ai: NotRequired[Dict[str, Any]]
     nebius: NotRequired[Dict[str, Any]]
     nex_agi: NotRequired[Dict[str, Any]]
     nextbit: NotRequired[Dict[str, Any]]
@@ -363,6 +364,8 @@ class ProviderOptions(BaseModel):
 
     ncompass: Optional[Dict[str, Any]] = None
 
+    near_ai: Annotated[Optional[Dict[str, Any]], pydantic.Field(alias="near-ai")] = None
+
     nebius: Optional[Dict[str, Any]] = None
 
     nex_agi: Annotated[Optional[Dict[str, Any]], pydantic.Field(alias="nex-agi")] = None
@@ -573,6 +576,7 @@ class ProviderOptions(BaseModel):
                 "moonshotai",
                 "morph",
                 "ncompass",
+                "near-ai",
                 "nebius",
                 "nex-agi",
                 "nextbit",

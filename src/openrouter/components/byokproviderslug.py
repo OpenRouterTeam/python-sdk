@@ -70,6 +70,7 @@ BYOKProviderSlug = Union[
         "modular",
         "moonshotai",
         "morph",
+        "near-ai",
         "nebius",
         "nex-agi",
         "nextbit",
