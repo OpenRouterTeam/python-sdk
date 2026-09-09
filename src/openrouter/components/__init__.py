@@ -208,6 +208,7 @@ if TYPE_CHECKING:
     from .anthropicthinkingblockbinding import (
         AnthropicThinkingBlockBinding,
         AnthropicThinkingBlockBindingTypedDict,
+        MismatchBehavior,
         PrefixMismatchBehavior,
     )
     from .anthropicthinkingdisplay import AnthropicThinkingDisplay
@@ -4530,6 +4531,7 @@ __all__ = [
     "MessagesToolRemovalBlockTypedDict",
     "MetadataLevel",
     "Method",
+    "MismatchBehavior",
     "Modality",
     "Mode",
     "ModeAuto",
@@ -5797,6 +5799,7 @@ _dynamic_imports: dict[str, str] = {
     "CitationTypedDict": ".anthropictextblockparam",
     "AnthropicThinkingBlockBinding": ".anthropicthinkingblockbinding",
     "AnthropicThinkingBlockBindingTypedDict": ".anthropicthinkingblockbinding",
+    "MismatchBehavior": ".anthropicthinkingblockbinding",
     "PrefixMismatchBehavior": ".anthropicthinkingblockbinding",
     "AnthropicThinkingDisplay": ".anthropicthinkingdisplay",
     "AnthropicThinkingTurns": ".anthropicthinkingturns",
