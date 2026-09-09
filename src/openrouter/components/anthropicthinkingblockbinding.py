@@ -9,9 +9,20 @@ from openrouter.types import (
     UNSET_SENTINEL,
     UnrecognizedStr,
 )
+import pydantic
 from pydantic import model_serializer
 from typing import Literal, Union
-from typing_extensions import NotRequired, TypedDict
+from typing_extensions import Annotated, NotRequired, TypedDict
+
+
+MismatchBehavior = Union[
+    Literal[
+        "error",
+        "drop_block",
+    ],
+    UnrecognizedStr,
+]
+r"""Deprecated: legacy alias of prefix_mismatch_behavior. Send only one of the two."""
 
 
 PrefixMismatchBehavior = Union[
@@ -24,16 +35,26 @@ PrefixMismatchBehavior = Union[
 
 
 class AnthropicThinkingBlockBindingTypedDict(TypedDict):
+    mismatch_behavior: NotRequired[Nullable[MismatchBehavior]]
+    r"""Deprecated: legacy alias of prefix_mismatch_behavior. Send only one of the two."""
     prefix_mismatch_behavior: NotRequired[Nullable[PrefixMismatchBehavior]]
 
 
 class AnthropicThinkingBlockBinding(BaseModel):
+    mismatch_behavior: Annotated[
+        OptionalNullable[MismatchBehavior],
+        pydantic.Field(
+            deprecated="warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+        ),
+    ] = UNSET
+    r"""Deprecated: legacy alias of prefix_mismatch_behavior. Send only one of the two."""
+
     prefix_mismatch_behavior: OptionalNullable[PrefixMismatchBehavior] = UNSET
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["prefix_mismatch_behavior"])
-        nullable_fields = set(["prefix_mismatch_behavior"])
+        optional_fields = set(["mismatch_behavior", "prefix_mismatch_behavior"])
+        nullable_fields = set(["mismatch_behavior", "prefix_mismatch_behavior"])
         serialized = handler(self)
         m = {}
 

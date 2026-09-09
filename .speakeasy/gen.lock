@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c48cf606-fb42-4a45-9c23-8f0555307828
 management:
-  docChecksum: cfd0e2d422eaaa7a570093b7aab3278f
+  docChecksum: a3387e7946651d9b0f4c9bad14c2f89d
   docVersion: 1.0.0
   speakeasyVersion: 1.787.0
   generationVersion: 2.914.0
-  releaseVersion: 1.1.135
-  configChecksum: 71f7b1006de83678d2ddee13a4969209
+  releaseVersion: 1.1.136
+  configChecksum: 67db93f1e36761214ec59fb3893711f1
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
 persistentEdits:
-  generation_id: 5e5c1cae-80c0-46b9-b775-25569a3a0fdf
-  pristine_commit_hash: 2d14fb57d445f9fc032c2d591633a31c3a5f9cab
-  pristine_tree_hash: ffdfbb4e18205e872800ada008e5ea2d099807da
+  generation_id: 18f9adca-844e-4d82-9af8-e4589f049ffc
+  pristine_commit_hash: 06682e4012f431dc33c894cb96d8d5f9af04a6cb
+  pristine_tree_hash: 8c95ecdf5c521174f4681f8b0afed86027335b8b
 features:
   python:
     acceptHeaders: 3.0.0
@@ -454,8 +454,8 @@ trackedFiles:
     pristine_git_object: b6b0d6f9022f2046c713d768125927e22ecc9431
   docs/components/anthropicthinkingblockbinding.mdx:
     id: a1c1acf8200e
-    last_write_checksum: sha1:7e7df17828f861d85a1bee793b32931eb99769e7
-    pristine_git_object: 48a032d0e9eac4798c8c4903880873f967f5dfec
+    last_write_checksum: sha1:cbb0e04bd04b81cf3982f01b1ca26aabc14c3c48
+    pristine_git_object: cc9f8e6a2e50fe7a992d713d9b991fb24df3ea3c
   docs/components/anthropicthinkingdisplay.mdx:
     id: e068ddf6374f
     last_write_checksum: sha1:49fd044eb4759b0f447964cc276b0681ff73a3ec
@@ -3228,6 +3228,10 @@ trackedFiles:
     id: 52eb604d9844
     last_write_checksum: sha1:a1671e63404dd1f194cf0704138919c10a9ca6c6
     pristine_git_object: 90145e7861da0ef5f30900bff09539fe2e1bdeb8
+  docs/components/mismatchbehavior.mdx:
+    id: 729a5cc8daa3
+    last_write_checksum: sha1:e964917ce0f95f4347824b1a51ac6bb120469707
+    pristine_git_object: 4082d3af84504c998dfabd7fa58cb23874dfa002
   docs/components/modality.mdx:
     id: f40fccd34eb7
     last_write_checksum: sha1:bdebebe3627c62469a2911d40a29e75f6e508f47
@@ -7654,8 +7658,8 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:5fffa80bb5d58312753c61001d246cd857d94ac9
-    pristine_git_object: 5a9b97451f670e9e4444dc5e96d48a4acde3b3c2
+    last_write_checksum: sha1:209c973823e7a7bc17ee765b9b5facb37eb2ac74
+    pristine_git_object: 342092ba6eef3bbd92e5f4b0af4a77c09b548a3a
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77f44b60b98bc126557ec27391f91dfba764bb54
@@ -7682,8 +7686,8 @@ trackedFiles:
     pristine_git_object: 86713cfea633e09d33b3d4e65281071fe20e6137
   src/openrouter/_version.py:
     id: d8d15ad6c586
-    last_write_checksum: sha1:16fa24ebcc107cf338e2c91066f0c34a772fc1fd
-    pristine_git_object: a4546d5d247805c43999234698f8c9e85f574fdd
+    last_write_checksum: sha1:546ba3e9e99af73610ca18e7bc299be3805d231f
+    pristine_git_object: 176797b84734f712c107966af58fe73fea9186d3
   src/openrouter/analytics.py:
     id: cb406b5aaabb
     last_write_checksum: sha1:1e0004d8d1d5d797e2b54cd1cabeb7f9489d08e9
@@ -7722,8 +7726,8 @@ trackedFiles:
     pristine_git_object: ad3d247954547814054c01989a2dff3d12b3e4e1
   src/openrouter/components/__init__.py:
     id: 81754e97b3f4
-    last_write_checksum: sha1:fb2fb93ccd5b1789d5e2fe360732d2544f25066a
-    pristine_git_object: 99b7ee07700944ac33248a340355e6fd73ed54ea
+    last_write_checksum: sha1:3b30a6e4f19e90e835bc26b66e832f21126d3ddf
+    pristine_git_object: 96c18dbf6603bd5817b88aec77d4351044a73439
   src/openrouter/components/aabenchmarkentry.py:
     id: e2e0f0b48c82
     last_write_checksum: sha1:fab4d9a24d2cea937bb749d46c5f83941e99d65c
@@ -7886,8 +7890,8 @@ trackedFiles:
     pristine_git_object: 31a1df2ee27149c8862fb8709f4898ef0535360f
   src/openrouter/components/anthropicthinkingblockbinding.py:
     id: e3f9c1ae04b6
-    last_write_checksum: sha1:be6fab20c77d4b9cddd70969f09370bdbde3f6a4
-    pristine_git_object: fd2bb4ce3210a4ca2e6e2ad6dd0e82d0e11193c0
+    last_write_checksum: sha1:4e0878084241d4d7295c7579996d41e596eac6c9
+    pristine_git_object: aa486bb1dff16f45af569b8e690d76e9906130e3
   src/openrouter/components/anthropicthinkingdisplay.py:
     id: 5d63f1a15f67
     last_write_checksum: sha1:a1f845787a9e8bc3d7b4dddfe8a4adad288b16db
@@ -12890,4 +12894,4 @@ examples:
         "500":
           application/json: {"error": {"code": 500, "message": "Internal Server Error"}}
 examplesVersion: 1.0.2
-releaseNotes: "## Python SDK Changes:\n* `open_router.tts.create_speech()`: \n  *  `request.provider.options.near_ai` **Added**\n* `open_router.stt.create_transcription()`: \n  *  `request.provider.options.near_ai` **Added**\n* `open_router.byok.list()`: \n  *  `request.provider` **Changed**\n  *  `response.data[].provider.enum(near_ai)` **Added**\n* `open_router.byok.create()`: \n  *  `request.provider.enum(near_ai)` **Added**\n  *  `response.data.provider.enum(near_ai)` **Added**\n* `open_router.byok.get()`:  `response.data.provider.enum(near_ai)` **Added**\n* `open_router.byok.update()`:  `response.data.provider.enum(near_ai)` **Added**\n* `open_router.chat.send()`: \n  *  `request.provider.ignore[].union(ProviderName).enum(near_ai)` **Added**\n* `open_router.embeddings.generate()`: \n  *  `request.provider.ignore[].union(ProviderName).enum(near_ai)` **Added**\n* `open_router.endpoints.list_zdr_endpoints()`:  `response.data[].provider_name.enum(near_ai)` **Added**\n* `open_router.endpoints.list()`:  `response.data.endpoints[].provider_name.enum(near_ai)` **Added**\n* `open_router.generations.get_generation()`:  `response.data.provider_responses[].provider_name.enum(near_ai)` **Added**\n* `open_router.images.generate()`:  `request.provider` **Changed**\n* `open_router.presets.create_presets_chat_completions()`: \n  *  `request.provider.ignore[].union(ProviderName).enum(near_ai)` **Added**\n* `open_router.presets.create_presets_messages()`: \n  *  `request.provider.ignore[].union(ProviderName).enum(near_ai)` **Added**\n* `open_router.presets.create_presets_responses()`: \n  *  `request.provider.ignore[].union(ProviderName).enum(near_ai)` **Added**\n* `open_router.rerank.rerank()`: \n  *  `request.provider.ignore[].union(ProviderName).enum(near_ai)` **Added**\n* `open_router.responses.send()`: \n  *  `request.provider.ignore[].union(ProviderName).enum(near_ai)` **Added**\n* `open_router.beta.responses.send()`: \n  *  `request.provider.ignore[].union(ProviderName).enum(near_ai)` **Added**\n* `open_router.video_generation.generate()`: \n  *  `request.provider.options.near_ai` **Added**\n"
+releaseNotes: "## Python SDK Changes:\n* `open_router.presets.create_presets_messages()`: \n  *  `request.thinking.union(enabled).block_binding.mismatch_behavior` **Added**\n"

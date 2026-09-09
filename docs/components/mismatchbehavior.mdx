@@ -1,0 +1,24 @@
+---
+title: "~~MismatchBehavior~~"
+---
+
+Deprecated: legacy alias of prefix_mismatch_behavior. Send only one of the two.
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
+
+## Example Usage
+
+```python
+from openrouter.components import MismatchBehavior
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
+value: MismatchBehavior = "error"
+```
+
+
+## Values
+
+This is an open enum. Unrecognized values will not fail type checks.
+
+- `"error"`
+- `"drop_block"`
