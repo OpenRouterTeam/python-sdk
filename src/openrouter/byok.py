@@ -370,7 +370,9 @@ class BYOK(BaseSDK):
         allowed_models: OptionalNullable[Iterable[str]] = UNSET,
         allowed_user_ids: OptionalNullable[Iterable[str]] = UNSET,
         disabled: Optional[bool] = None,
+        is_byok_only: Optional[bool] = None,
         is_fallback: Optional[bool] = None,
+        is_required: Optional[bool] = None,
         name: OptionalNullable[str] = UNSET,
         workspace_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -395,7 +397,9 @@ class BYOK(BaseSDK):
         :param allowed_models: Optional allowlist of model slugs this credential may be used for. `null` means no restriction.
         :param allowed_user_ids: Optional allowlist of user IDs that may use this credential. `null` means no restriction.
         :param disabled: Whether this credential should be created in a disabled state.
-        :param is_fallback: Whether this credential is treated as a fallback — used only after non-fallback keys for the same provider have been tried.
+        :param is_byok_only: Whether OpenRouter's shared endpoints on this provider are removed for every model, including models outside `allowed_models` and after all of your keys for the provider fail. The provider is skipped instead of spending OpenRouter credits. Only valid on non-fallback credentials. Defaults to `false`.
+        :param is_fallback: Whether this credential is treated as a fallback — used only after non-fallback keys for the same provider have been tried. Cannot be combined with `is_byok_only`.
+        :param is_required: Whether OpenRouter's shared endpoints on this provider are removed for the models this credential applies to (its `allowed_models`, or every model when `null`). Requests for those models run only on your keys; models outside the allowlist may still fall back to shared capacity on this provider. Defaults to `false`.
         :param name: Optional human-readable name for the credential.
         :param workspace_id: Optional workspace ID to scope the credential to. When omitted, the credential is created in the account's default workspace; if that default has been deleted, the request returns a 400 and you must pass `workspace_id` explicitly.
         :param retries: Override the default retry configuration for this method
@@ -428,7 +432,9 @@ class BYOK(BaseSDK):
                     allowed_user_ids, OptionalNullable[List[str]]
                 ),
                 disabled=disabled,
+                is_byok_only=is_byok_only,
                 is_fallback=is_fallback,
+                is_required=is_required,
                 key=key,
                 name=name,
                 provider=provider,
@@ -542,7 +548,9 @@ class BYOK(BaseSDK):
         allowed_models: OptionalNullable[Iterable[str]] = UNSET,
         allowed_user_ids: OptionalNullable[Iterable[str]] = UNSET,
         disabled: Optional[bool] = None,
+        is_byok_only: Optional[bool] = None,
         is_fallback: Optional[bool] = None,
+        is_required: Optional[bool] = None,
         name: OptionalNullable[str] = UNSET,
         workspace_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -567,7 +575,9 @@ class BYOK(BaseSDK):
         :param allowed_models: Optional allowlist of model slugs this credential may be used for. `null` means no restriction.
         :param allowed_user_ids: Optional allowlist of user IDs that may use this credential. `null` means no restriction.
         :param disabled: Whether this credential should be created in a disabled state.
-        :param is_fallback: Whether this credential is treated as a fallback — used only after non-fallback keys for the same provider have been tried.
+        :param is_byok_only: Whether OpenRouter's shared endpoints on this provider are removed for every model, including models outside `allowed_models` and after all of your keys for the provider fail. The provider is skipped instead of spending OpenRouter credits. Only valid on non-fallback credentials. Defaults to `false`.
+        :param is_fallback: Whether this credential is treated as a fallback — used only after non-fallback keys for the same provider have been tried. Cannot be combined with `is_byok_only`.
+        :param is_required: Whether OpenRouter's shared endpoints on this provider are removed for the models this credential applies to (its `allowed_models`, or every model when `null`). Requests for those models run only on your keys; models outside the allowlist may still fall back to shared capacity on this provider. Defaults to `false`.
         :param name: Optional human-readable name for the credential.
         :param workspace_id: Optional workspace ID to scope the credential to. When omitted, the credential is created in the account's default workspace; if that default has been deleted, the request returns a 400 and you must pass `workspace_id` explicitly.
         :param retries: Override the default retry configuration for this method
@@ -600,7 +610,9 @@ class BYOK(BaseSDK):
                     allowed_user_ids, OptionalNullable[List[str]]
                 ),
                 disabled=disabled,
+                is_byok_only=is_byok_only,
                 is_fallback=is_fallback,
+                is_required=is_required,
                 key=key,
                 name=name,
                 provider=provider,
@@ -1225,7 +1237,9 @@ class BYOK(BaseSDK):
         allowed_models: OptionalNullable[Iterable[str]] = UNSET,
         allowed_user_ids: OptionalNullable[Iterable[str]] = UNSET,
         disabled: Optional[bool] = None,
+        is_byok_only: Optional[bool] = None,
         is_fallback: Optional[bool] = None,
+        is_required: Optional[bool] = None,
         key: Optional[str] = None,
         name: OptionalNullable[str] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -1249,7 +1263,9 @@ class BYOK(BaseSDK):
         :param allowed_models: Optional allowlist of model slugs this credential may be used for. `null` means no restriction.
         :param allowed_user_ids: Optional allowlist of user IDs that may use this credential. `null` means no restriction.
         :param disabled: Whether this credential is disabled.
-        :param is_fallback: Whether this credential is treated as a fallback — used only after non-fallback keys for the same provider have been tried.
+        :param is_byok_only: Whether OpenRouter's shared endpoints on this provider are removed for every model, including models outside `allowed_models` and after all of your keys for the provider fail. The provider is skipped instead of spending OpenRouter credits. Only valid on non-fallback credentials. Omit to leave the stored value unchanged.
+        :param is_fallback: Whether this credential is treated as a fallback — used only after non-fallback keys for the same provider have been tried. Cannot be combined with `is_byok_only`. Omit to leave the stored value unchanged.
+        :param is_required: Whether OpenRouter's shared endpoints on this provider are removed for the models this credential applies to (its `allowed_models`, or every model when `null`). Requests for those models run only on your keys; models outside the allowlist may still fall back to shared capacity on this provider. Omit to leave the stored value unchanged.
         :param key: A new raw provider API key to rotate the credential in-place. The previous key material is overwritten and the masked label is regenerated. Encrypted at rest and never returned in API responses.
         :param name: Optional human-readable name for the credential.
         :param retries: Override the default retry configuration for this method
@@ -1283,7 +1299,9 @@ class BYOK(BaseSDK):
                     allowed_user_ids, OptionalNullable[List[str]]
                 ),
                 disabled=disabled,
+                is_byok_only=is_byok_only,
                 is_fallback=is_fallback,
+                is_required=is_required,
                 key=key,
                 name=name,
             ),
@@ -1394,7 +1412,9 @@ class BYOK(BaseSDK):
         allowed_models: OptionalNullable[Iterable[str]] = UNSET,
         allowed_user_ids: OptionalNullable[Iterable[str]] = UNSET,
         disabled: Optional[bool] = None,
+        is_byok_only: Optional[bool] = None,
         is_fallback: Optional[bool] = None,
+        is_required: Optional[bool] = None,
         key: Optional[str] = None,
         name: OptionalNullable[str] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -1418,7 +1438,9 @@ class BYOK(BaseSDK):
         :param allowed_models: Optional allowlist of model slugs this credential may be used for. `null` means no restriction.
         :param allowed_user_ids: Optional allowlist of user IDs that may use this credential. `null` means no restriction.
         :param disabled: Whether this credential is disabled.
-        :param is_fallback: Whether this credential is treated as a fallback — used only after non-fallback keys for the same provider have been tried.
+        :param is_byok_only: Whether OpenRouter's shared endpoints on this provider are removed for every model, including models outside `allowed_models` and after all of your keys for the provider fail. The provider is skipped instead of spending OpenRouter credits. Only valid on non-fallback credentials. Omit to leave the stored value unchanged.
+        :param is_fallback: Whether this credential is treated as a fallback — used only after non-fallback keys for the same provider have been tried. Cannot be combined with `is_byok_only`. Omit to leave the stored value unchanged.
+        :param is_required: Whether OpenRouter's shared endpoints on this provider are removed for the models this credential applies to (its `allowed_models`, or every model when `null`). Requests for those models run only on your keys; models outside the allowlist may still fall back to shared capacity on this provider. Omit to leave the stored value unchanged.
         :param key: A new raw provider API key to rotate the credential in-place. The previous key material is overwritten and the masked label is regenerated. Encrypted at rest and never returned in API responses.
         :param name: Optional human-readable name for the credential.
         :param retries: Override the default retry configuration for this method
@@ -1452,7 +1474,9 @@ class BYOK(BaseSDK):
                     allowed_user_ids, OptionalNullable[List[str]]
                 ),
                 disabled=disabled,
+                is_byok_only=is_byok_only,
                 is_fallback=is_fallback,
+                is_required=is_required,
                 key=key,
                 name=name,
             ),

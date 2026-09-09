@@ -27,8 +27,12 @@ class CreateBYOKKeyRequestTypedDict(TypedDict):
     r"""Optional allowlist of user IDs that may use this credential. `null` means no restriction."""
     disabled: NotRequired[bool]
     r"""Whether this credential should be created in a disabled state."""
+    is_byok_only: NotRequired[bool]
+    r"""Whether OpenRouter's shared endpoints on this provider are removed for every model, including models outside `allowed_models` and after all of your keys for the provider fail. The provider is skipped instead of spending OpenRouter credits. Only valid on non-fallback credentials. Defaults to `false`."""
     is_fallback: NotRequired[bool]
-    r"""Whether this credential is treated as a fallback — used only after non-fallback keys for the same provider have been tried."""
+    r"""Whether this credential is treated as a fallback — used only after non-fallback keys for the same provider have been tried. Cannot be combined with `is_byok_only`."""
+    is_required: NotRequired[bool]
+    r"""Whether OpenRouter's shared endpoints on this provider are removed for the models this credential applies to (its `allowed_models`, or every model when `null`). Requests for those models run only on your keys; models outside the allowlist may still fall back to shared capacity on this provider. Defaults to `false`."""
     name: NotRequired[Nullable[str]]
     r"""Optional human-readable name for the credential."""
     workspace_id: NotRequired[str]
@@ -54,8 +58,14 @@ class CreateBYOKKeyRequest(BaseModel):
     disabled: Optional[bool] = None
     r"""Whether this credential should be created in a disabled state."""
 
+    is_byok_only: Optional[bool] = None
+    r"""Whether OpenRouter's shared endpoints on this provider are removed for every model, including models outside `allowed_models` and after all of your keys for the provider fail. The provider is skipped instead of spending OpenRouter credits. Only valid on non-fallback credentials. Defaults to `false`."""
+
     is_fallback: Optional[bool] = None
-    r"""Whether this credential is treated as a fallback — used only after non-fallback keys for the same provider have been tried."""
+    r"""Whether this credential is treated as a fallback — used only after non-fallback keys for the same provider have been tried. Cannot be combined with `is_byok_only`."""
+
+    is_required: Optional[bool] = None
+    r"""Whether OpenRouter's shared endpoints on this provider are removed for the models this credential applies to (its `allowed_models`, or every model when `null`). Requests for those models run only on your keys; models outside the allowlist may still fall back to shared capacity on this provider. Defaults to `false`."""
 
     name: OptionalNullable[str] = UNSET
     r"""Optional human-readable name for the credential."""
@@ -71,7 +81,9 @@ class CreateBYOKKeyRequest(BaseModel):
                 "allowed_models",
                 "allowed_user_ids",
                 "disabled",
+                "is_byok_only",
                 "is_fallback",
+                "is_required",
                 "name",
                 "workspace_id",
             ]

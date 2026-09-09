@@ -213,7 +213,7 @@ wheels = [
 
 [[package]]
 name = "openrouter"
-version = "1.1.133"
+version = "1.1.134"
 source = { editable = "." }
 dependencies = [
     { name = "httpcore" },
