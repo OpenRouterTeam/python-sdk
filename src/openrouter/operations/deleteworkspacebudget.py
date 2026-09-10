@@ -77,7 +77,7 @@ class DeleteWorkspaceBudgetGlobals(BaseModel):
 
 
 class DeleteWorkspaceBudgetRequestTypedDict(TypedDict):
-    id: str
+    workspace_ref: str
     r"""The workspace ID (UUID) or slug"""
     interval: components_workspacebudgetinterval.WorkspaceBudgetInterval
     r"""Budget reset interval. Use \"lifetime\" for a one-time budget that never resets."""
@@ -97,7 +97,7 @@ class DeleteWorkspaceBudgetRequestTypedDict(TypedDict):
 
 
 class DeleteWorkspaceBudgetRequest(BaseModel):
-    id: Annotated[
+    workspace_ref: Annotated[
         str, FieldMetadata(path=PathParamMetadata(style="simple", explode=False))
     ]
     r"""The workspace ID (UUID) or slug"""
