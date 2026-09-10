@@ -74,7 +74,7 @@ class ListWorkspaceBudgetsGlobals(BaseModel):
 
 
 class ListWorkspaceBudgetsRequestTypedDict(TypedDict):
-    id: str
+    workspace_ref: str
     r"""The workspace ID (UUID) or slug"""
     http_referer: NotRequired[str]
     r"""The app identifier should be your app's URL and is used as the primary identifier for rankings.
@@ -92,7 +92,7 @@ class ListWorkspaceBudgetsRequestTypedDict(TypedDict):
 
 
 class ListWorkspaceBudgetsRequest(BaseModel):
-    id: Annotated[
+    workspace_ref: Annotated[
         str, FieldMetadata(path=PathParamMetadata(style="simple", explode=False))
     ]
     r"""The workspace ID (UUID) or slug"""
