@@ -9,9 +9,10 @@ from openrouter.types import (
     UNSET_SENTINEL,
     UnrecognizedStr,
 )
+import pydantic
 from pydantic import model_serializer
 from typing import Any, Dict, List, Literal, Optional, Union
-from typing_extensions import NotRequired, TypedDict
+from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 AllowedCaller = Union[
@@ -32,6 +33,8 @@ class NamespaceFunctionToolTypedDict(TypedDict):
     name: str
     type: NamespaceFunctionToolType
     allowed_callers: NotRequired[Nullable[List[AllowedCaller]]]
+    async_: NotRequired[bool]
+    r"""Lets the model keep working after calling this tool instead of waiting for its output. The tool is still executed by the client; return the result in a later request as a `function_call_output` with the original `call_id`. Only honored by providers whose Responses API supports async tools; ignored elsewhere."""
     defer_loading: NotRequired[bool]
     description: NotRequired[Nullable[str]]
     output_schema: NotRequired[Nullable[Dict[str, Any]]]
@@ -48,6 +51,9 @@ class NamespaceFunctionTool(BaseModel):
 
     allowed_callers: OptionalNullable[List[AllowedCaller]] = UNSET
 
+    async_: Annotated[Optional[bool], pydantic.Field(alias="async")] = None
+    r"""Lets the model keep working after calling this tool instead of waiting for its output. The tool is still executed by the client; return the result in a later request as a `function_call_output` with the original `call_id`. Only honored by providers whose Responses API supports async tools; ignored elsewhere."""
+
     defer_loading: Optional[bool] = None
 
     description: OptionalNullable[str] = UNSET
@@ -63,6 +69,7 @@ class NamespaceFunctionTool(BaseModel):
         optional_fields = set(
             [
                 "allowed_callers",
+                "async",
                 "defer_loading",
                 "description",
                 "output_schema",
@@ -93,3 +100,9 @@ class NamespaceFunctionTool(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    NamespaceFunctionTool.model_rebuild()
+except NameError:
+    pass

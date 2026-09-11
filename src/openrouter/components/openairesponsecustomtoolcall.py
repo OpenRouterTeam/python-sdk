@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from openrouter.types import BaseModel, UNSET_SENTINEL
+import pydantic
 from pydantic import model_serializer
 from typing import Literal, Optional
-from typing_extensions import NotRequired, TypedDict
+from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 OpenAIResponseCustomToolCallType = Literal["custom_tool_call",]
@@ -15,6 +16,8 @@ class OpenAIResponseCustomToolCallTypedDict(TypedDict):
     input: str
     name: str
     type: OpenAIResponseCustomToolCallType
+    async_: NotRequired[bool]
+    r"""True when the model called a tool declared with `async: true` and may continue its turn before the output is returned. Return the result in a later request as a `function_call_output` with this `call_id`."""
     id: NotRequired[str]
     namespace: NotRequired[str]
     r"""Namespace qualifier for tools registered as part of a namespace tool group (e.g. an MCP server)"""
@@ -29,6 +32,9 @@ class OpenAIResponseCustomToolCall(BaseModel):
 
     type: OpenAIResponseCustomToolCallType
 
+    async_: Annotated[Optional[bool], pydantic.Field(alias="async")] = None
+    r"""True when the model called a tool declared with `async: true` and may continue its turn before the output is returned. Return the result in a later request as a `function_call_output` with this `call_id`."""
+
     id: Optional[str] = None
 
     namespace: Optional[str] = None
@@ -36,7 +42,7 @@ class OpenAIResponseCustomToolCall(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["id", "namespace"])
+        optional_fields = set(["async", "id", "namespace"])
         serialized = handler(self)
         m = {}
 
@@ -49,3 +55,9 @@ class OpenAIResponseCustomToolCall(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    OpenAIResponseCustomToolCall.model_rebuild()
+except NameError:
+    pass

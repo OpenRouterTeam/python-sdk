@@ -238,6 +238,8 @@ class ResponsesRequestToolFunctionTypedDict(TypedDict):
     type: ResponsesRequestType
     description: NotRequired[Nullable[str]]
     strict: NotRequired[Nullable[bool]]
+    async_: NotRequired[bool]
+    r"""Lets the model keep working after calling this tool instead of waiting for its output. The tool is still executed by the client; return the result in a later request as a `function_call_output` with the original `call_id`. Only honored by providers whose Responses API supports async tools; ignored elsewhere."""
     defer_loading: NotRequired[bool]
     r"""Withhold this tool from the model until `openrouter:tool_search` finds it. Requires the tool search server tool; at least one tool must remain non-deferred."""
 
@@ -255,12 +257,15 @@ class ResponsesRequestToolFunction(BaseModel):
 
     strict: OptionalNullable[bool] = UNSET
 
+    async_: Annotated[Optional[bool], pydantic.Field(alias="async")] = None
+    r"""Lets the model keep working after calling this tool instead of waiting for its output. The tool is still executed by the client; return the result in a later request as a `function_call_output` with the original `call_id`. Only honored by providers whose Responses API supports async tools; ignored elsewhere."""
+
     defer_loading: Optional[bool] = None
     r"""Withhold this tool from the model until `openrouter:tool_search` finds it. Requires the tool search server tool; at least one tool must remain non-deferred."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["description", "strict", "defer_loading"])
+        optional_fields = set(["description", "strict", "async", "defer_loading"])
         nullable_fields = set(["description", "parameters", "strict"])
         serialized = handler(self)
         m = {}
@@ -305,8 +310,8 @@ ResponsesRequestToolUnionTypedDict = TypeAliasType(
         AdvisorServerToolOpenRouterTypedDict,
         SubagentServerToolOpenRouterTypedDict,
         NamespaceToolTypedDict,
-        CustomToolTypedDict,
         ComputerUseServerToolTypedDict,
+        CustomToolTypedDict,
         FileSearchServerToolTypedDict,
         ResponsesRequestToolFunctionTypedDict,
         PreviewWebSearchServerToolTypedDict,
@@ -618,6 +623,10 @@ class ResponsesRequest(BaseModel):
         return m
 
 
+try:
+    ResponsesRequestToolFunction.model_rebuild()
+except NameError:
+    pass
 try:
     ResponsesRequest.model_rebuild()
 except NameError:

@@ -91,6 +91,8 @@ class CustomToolTypedDict(TypedDict):
 
     name: str
     type: CustomToolTypeCustom
+    async_: NotRequired[bool]
+    r"""Lets the model keep working after calling this tool instead of waiting for its output. The tool is still executed by the client; return the result in a later request as a `function_call_output` with the original `call_id`. Only honored by providers whose Responses API supports async tools; ignored elsewhere."""
     description: NotRequired[str]
     format_: NotRequired[FormatTypedDict]
 
@@ -102,13 +104,16 @@ class CustomTool(BaseModel):
 
     type: CustomToolTypeCustom
 
+    async_: Annotated[Optional[bool], pydantic.Field(alias="async")] = None
+    r"""Lets the model keep working after calling this tool instead of waiting for its output. The tool is still executed by the client; return the result in a later request as a `function_call_output` with the original `call_id`. Only honored by providers whose Responses API supports async tools; ignored elsewhere."""
+
     description: Optional[str] = None
 
     format_: Annotated[Optional[Format], pydantic.Field(alias="format")] = None
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["description", "format"])
+        optional_fields = set(["async", "description", "format"])
         serialized = handler(self)
         m = {}
 
