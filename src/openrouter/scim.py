@@ -11,7 +11,7 @@ from typing import Any, Awaitable, Dict, List, Mapping, Optional, Union
 
 
 class Scim(BaseSDK):
-    r"""SCIM endpoints"""
+    r"""Management endpoints for SCIM group-to-workspace mappings, authenticated with a management key. These are not the SCIM 2.0 connector endpoints for your identity provider. In your identity provider, enter the SCIM endpoint URL shown when you enable provisioning under Settings > Members > SCIM Mappings. See https://openrouter.ai/docs/guides/features/scim-mappings#set-up-provisioning."""
 
     def list_mappings(
         self,
