@@ -24,6 +24,7 @@ class ProviderOptionsTypedDict(TypedDict):
     anthropic_2: NotRequired[Dict[str, Any]]
     anyscale: NotRequired[Dict[str, Any]]
     arcee_ai: NotRequired[Dict[str, Any]]
+    assemblyai: NotRequired[Dict[str, Any]]
     atlas_cloud: NotRequired[Dict[str, Any]]
     atoma: NotRequired[Dict[str, Any]]
     avian: NotRequired[Dict[str, Any]]
@@ -193,6 +194,8 @@ class ProviderOptions(BaseModel):
     arcee_ai: Annotated[Optional[Dict[str, Any]], pydantic.Field(alias="arcee-ai")] = (
         None
     )
+
+    assemblyai: Optional[Dict[str, Any]] = None
 
     atlas_cloud: Annotated[
         Optional[Dict[str, Any]], pydantic.Field(alias="atlas-cloud")
@@ -503,6 +506,7 @@ class ProviderOptions(BaseModel):
                 "anthropic/2",
                 "anyscale",
                 "arcee-ai",
+                "assemblyai",
                 "atlas-cloud",
                 "atoma",
                 "avian",
