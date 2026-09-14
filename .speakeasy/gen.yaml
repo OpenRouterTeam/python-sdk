@@ -36,7 +36,7 @@ generation:
   documentation: mintlify
   preApplyUnionDiscriminators: true
 python:
-  version: 1.1.139
+  version: 1.1.140
   additionalDependencies:
     dev: {}
     main: {}
