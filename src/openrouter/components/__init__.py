@@ -1295,6 +1295,10 @@ if TYPE_CHECKING:
         GetWorkspaceResponse,
         GetWorkspaceResponseTypedDict,
     )
+    from .goneresponseerrordata import (
+        GoneResponseErrorData,
+        GoneResponseErrorDataTypedDict,
+    )
     from .guardrail import Guardrail, GuardrailTypedDict
     from .guardraildataregion import GuardrailDataRegion
     from .guardrailinterval import GuardrailInterval
@@ -4179,6 +4183,8 @@ __all__ = [
     "GetWorkspaceBudgetResponseTypedDict",
     "GetWorkspaceResponse",
     "GetWorkspaceResponseTypedDict",
+    "GoneResponseErrorData",
+    "GoneResponseErrorDataTypedDict",
     "GrantType",
     "Guardrail",
     "GuardrailDataRegion",
@@ -6557,6 +6563,8 @@ _dynamic_imports: dict[str, str] = {
     "GetWorkspaceBudgetResponseTypedDict": ".getworkspacebudgetresponse",
     "GetWorkspaceResponse": ".getworkspaceresponse",
     "GetWorkspaceResponseTypedDict": ".getworkspaceresponse",
+    "GoneResponseErrorData": ".goneresponseerrordata",
+    "GoneResponseErrorDataTypedDict": ".goneresponseerrordata",
     "Guardrail": ".guardrail",
     "GuardrailTypedDict": ".guardrail",
     "GuardrailDataRegion": ".guardraildataregion",
