@@ -3,10 +3,10 @@
 import importlib.metadata
 
 __title__: str = "openrouter"
-__version__: str = "1.1.142"
+__version__: str = "1.1.143"
 __openapi_doc_version__: str = "1.0.0"
 __gen_version__: str = "2.914.0"
-__user_agent__: str = "speakeasy-sdk/python 1.1.142 2.914.0 1.0.0 openrouter"
+__user_agent__: str = "speakeasy-sdk/python 1.1.143 2.914.0 1.0.0 openrouter"
 
 try:
     if __package__ is not None:
