@@ -35,6 +35,9 @@ class Embeddings(BaseSDK):
                 components.ProviderPreferences, components.ProviderPreferencesTypedDict
             ]
         ] = UNSET,
+        trace: Optional[
+            Union[components.TraceConfig, components.TraceConfigTypedDict]
+        ] = None,
         user: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -59,6 +62,7 @@ class Embeddings(BaseSDK):
         :param encoding_format: The format of the output embeddings
         :param input_type: The type of input (e.g. search_query, search_document)
         :param provider:
+        :param trace: Metadata for observability and tracing. Known keys (trace_id, trace_name, span_name, generation_name, parent_span_id) have special handling. Additional keys are passed through as custom metadata to configured broadcast destinations.
         :param user: A unique identifier for the end-user
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -89,6 +93,7 @@ class Embeddings(BaseSDK):
                 provider=utils.get_pydantic_model(
                     provider, OptionalNullable[components.ProviderPreferences]
                 ),
+                trace=utils.get_pydantic_model(trace, Optional[components.TraceConfig]),
                 user=user,
             ),
         )
@@ -254,6 +259,9 @@ class Embeddings(BaseSDK):
                 components.ProviderPreferences, components.ProviderPreferencesTypedDict
             ]
         ] = UNSET,
+        trace: Optional[
+            Union[components.TraceConfig, components.TraceConfigTypedDict]
+        ] = None,
         user: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -278,6 +286,7 @@ class Embeddings(BaseSDK):
         :param encoding_format: The format of the output embeddings
         :param input_type: The type of input (e.g. search_query, search_document)
         :param provider:
+        :param trace: Metadata for observability and tracing. Known keys (trace_id, trace_name, span_name, generation_name, parent_span_id) have special handling. Additional keys are passed through as custom metadata to configured broadcast destinations.
         :param user: A unique identifier for the end-user
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -308,6 +317,7 @@ class Embeddings(BaseSDK):
                 provider=utils.get_pydantic_model(
                     provider, OptionalNullable[components.ProviderPreferences]
                 ),
+                trace=utils.get_pydantic_model(trace, Optional[components.TraceConfig]),
                 user=user,
             ),
         )

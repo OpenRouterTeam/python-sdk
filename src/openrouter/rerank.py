@@ -35,6 +35,9 @@ class Rerank(BaseSDK):
             ]
         ] = UNSET,
         top_n: Optional[int] = None,
+        trace: Optional[
+            Union[components.TraceConfig, components.TraceConfigTypedDict]
+        ] = None,
         user: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -58,6 +61,7 @@ class Rerank(BaseSDK):
 
         :param provider:
         :param top_n: Number of most relevant documents to return
+        :param trace: Metadata for observability and tracing. Known keys (trace_id, trace_name, span_name, generation_name, parent_span_id) have special handling. Additional keys are passed through as custom metadata to configured broadcast destinations.
         :param user: A unique identifier representing your end-user. Forwarded to Broadcast and private logging as the end-user id; never sent to the provider.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -89,6 +93,7 @@ class Rerank(BaseSDK):
                 ),
                 query=query,
                 top_n=top_n,
+                trace=utils.get_pydantic_model(trace, Optional[components.TraceConfig]),
                 user=user,
             ),
         )
@@ -250,6 +255,9 @@ class Rerank(BaseSDK):
             ]
         ] = UNSET,
         top_n: Optional[int] = None,
+        trace: Optional[
+            Union[components.TraceConfig, components.TraceConfigTypedDict]
+        ] = None,
         user: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -273,6 +281,7 @@ class Rerank(BaseSDK):
 
         :param provider:
         :param top_n: Number of most relevant documents to return
+        :param trace: Metadata for observability and tracing. Known keys (trace_id, trace_name, span_name, generation_name, parent_span_id) have special handling. Additional keys are passed through as custom metadata to configured broadcast destinations.
         :param user: A unique identifier representing your end-user. Forwarded to Broadcast and private logging as the end-user id; never sent to the provider.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -304,6 +313,7 @@ class Rerank(BaseSDK):
                 ),
                 query=query,
                 top_n=top_n,
+                trace=utils.get_pydantic_model(trace, Optional[components.TraceConfig]),
                 user=user,
             ),
         )

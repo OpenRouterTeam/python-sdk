@@ -3,6 +3,7 @@
 from __future__ import annotations
 from .provideroptions import ProviderOptions, ProviderOptionsTypedDict
 from .speechinputreference import SpeechInputReference, SpeechInputReferenceTypedDict
+from .traceconfig import TraceConfig, TraceConfigTypedDict
 from openrouter.types import BaseModel, UNSET_SENTINEL, UnrecognizedStr
 from pydantic import model_serializer
 from typing import List, Literal, Optional, Union
@@ -64,6 +65,8 @@ class SpeechRequestTypedDict(TypedDict):
     r"""Audio output format"""
     speed: NotRequired[float]
     r"""Playback speed multiplier. Only used by models that support it (e.g. OpenAI TTS). Ignored by other providers."""
+    trace: NotRequired[TraceConfigTypedDict]
+    r"""Metadata for observability and tracing. Known keys (trace_id, trace_name, span_name, generation_name, parent_span_id) have special handling. Additional keys are passed through as custom metadata to configured broadcast destinations."""
     user: NotRequired[str]
     r"""A unique identifier representing your end-user. Forwarded to Broadcast and private logging as the end-user id; never sent to the provider."""
     voice: NotRequired[str]
@@ -91,6 +94,9 @@ class SpeechRequest(BaseModel):
     speed: Optional[float] = None
     r"""Playback speed multiplier. Only used by models that support it (e.g. OpenAI TTS). Ignored by other providers."""
 
+    trace: Optional[TraceConfig] = None
+    r"""Metadata for observability and tracing. Known keys (trace_id, trace_name, span_name, generation_name, parent_span_id) have special handling. Additional keys are passed through as custom metadata to configured broadcast destinations."""
+
     user: Optional[str] = None
     r"""A unique identifier representing your end-user. Forwarded to Broadcast and private logging as the end-user id; never sent to the provider."""
 
@@ -105,6 +111,7 @@ class SpeechRequest(BaseModel):
                 "provider",
                 "response_format",
                 "speed",
+                "trace",
                 "user",
                 "voice",
             ]

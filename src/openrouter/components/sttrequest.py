@@ -4,6 +4,7 @@ from __future__ import annotations
 from .provideroptions import ProviderOptions, ProviderOptionsTypedDict
 from .sttinputaudio import STTInputAudio, STTInputAudioTypedDict
 from .stttimestampgranularity import STTTimestampGranularity
+from .traceconfig import TraceConfig, TraceConfigTypedDict
 from openrouter.types import BaseModel, UNSET_SENTINEL, UnrecognizedStr
 from pydantic import model_serializer
 from typing import List, Literal, Optional, Union
@@ -67,6 +68,8 @@ class STTRequestTypedDict(TypedDict):
     r"""Sampling temperature for transcription"""
     timestamp_granularities: NotRequired[List[STTTimestampGranularity]]
     r"""Timestamp detail levels to include when response_format is \"verbose_json\". \"segment\" returns segment-level timestamps; \"word\" additionally returns word-level timestamps in the words array. Ignored unless response_format is \"verbose_json\"."""
+    trace: NotRequired[TraceConfigTypedDict]
+    r"""Metadata for observability and tracing. Known keys (trace_id, trace_name, span_name, generation_name, parent_span_id) have special handling. Additional keys are passed through as custom metadata to configured broadcast destinations."""
     user: NotRequired[str]
     r"""A unique identifier representing your end-user. Forwarded to Broadcast and private logging as the end-user id; never sent to the provider."""
 
@@ -95,6 +98,9 @@ class STTRequest(BaseModel):
     timestamp_granularities: Optional[List[STTTimestampGranularity]] = None
     r"""Timestamp detail levels to include when response_format is \"verbose_json\". \"segment\" returns segment-level timestamps; \"word\" additionally returns word-level timestamps in the words array. Ignored unless response_format is \"verbose_json\"."""
 
+    trace: Optional[TraceConfig] = None
+    r"""Metadata for observability and tracing. Known keys (trace_id, trace_name, span_name, generation_name, parent_span_id) have special handling. Additional keys are passed through as custom metadata to configured broadcast destinations."""
+
     user: Optional[str] = None
     r"""A unique identifier representing your end-user. Forwarded to Broadcast and private logging as the end-user id; never sent to the provider."""
 
@@ -107,6 +113,7 @@ class STTRequest(BaseModel):
                 "response_format",
                 "temperature",
                 "timestamp_granularities",
+                "trace",
                 "user",
             ]
         )
