@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c48cf606-fb42-4a45-9c23-8f0555307828
 management:
-  docChecksum: 68c742eaf58c38c304bb91cbf1f3be39
+  docChecksum: 64c7fdab9cd5094257d03795e1c32093
   docVersion: 1.0.0
   speakeasyVersion: 1.787.0
   generationVersion: 2.914.0
-  releaseVersion: 1.1.143
-  configChecksum: ff27bb8d48d09365dcdd5b9390426d82
+  releaseVersion: 1.1.144
+  configChecksum: 5003e7c8d10125dcfac77dd91f99f61d
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
 persistentEdits:
-  generation_id: dd2064d2-d032-41eb-9c3f-349057e1f4da
-  pristine_commit_hash: 2539a4e8f102ceebc4a0459e04d10adce03b42ec
-  pristine_tree_hash: a036aeb5be3ffc29f2a48a3c26d5c167092714f9
+  generation_id: c32a6f51-0d86-4287-a290-9f50713de8a5
+  pristine_commit_hash: fe705ca96236ca6dc68684dfa15596cbfe45c72f
+  pristine_tree_hash: 65aab2e1250767a7446a834d74530f028f849204
 features:
   python:
     acceptHeaders: 3.0.0
@@ -7602,8 +7602,8 @@ trackedFiles:
     pristine_git_object: 064751ea194bff6b8111575603f804362960b886
   docs/sdks/guardrails/README.mdx:
     id: a0cd4218b8fa
-    last_write_checksum: sha1:aa3566d7a19dc851c85901311697c163b507d92b
-    pristine_git_object: 0475a645cfeab55bb1f13d15ba1e941f75ae562a
+    last_write_checksum: sha1:5d726806705c8c06aa1df8ecbebfa04a0214d8d4
+    pristine_git_object: d419fd3ee53c199c96b5228f7b656fa8e732bd69
   docs/sdks/images/README.mdx:
     id: 534a6c102c4f
     last_write_checksum: sha1:bc62f91590ac816c58ad954f4a888a46aee71bb9
@@ -7666,8 +7666,8 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:8f8e5267759de894d383ae4dd32d970e531dbaaa
-    pristine_git_object: 2e88d86d03214de7322bd4314ea223a6c074f178
+    last_write_checksum: sha1:9a1514fe82c68fc00bebd81cbe2cf268a2de618a
+    pristine_git_object: bbf6a5610eca8513157195c5bb5f33dad5910098
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77f44b60b98bc126557ec27391f91dfba764bb54
@@ -7694,8 +7694,8 @@ trackedFiles:
     pristine_git_object: 86713cfea633e09d33b3d4e65281071fe20e6137
   src/openrouter/_version.py:
     id: d8d15ad6c586
-    last_write_checksum: sha1:49e0609d0f28924046aaf81c882bc136c3a9d5a0
-    pristine_git_object: 093c988002cf87bcd29ed90b8885463a013c6d89
+    last_write_checksum: sha1:fd87a6f9d7a5fa6125885e31a718aae32d00d825
+    pristine_git_object: b4f8e9ce1fcf8b233ff0ddf1a527e23384b7026f
   src/openrouter/analytics.py:
     id: cb406b5aaabb
     last_write_checksum: sha1:1e0004d8d1d5d797e2b54cd1cabeb7f9489d08e9
@@ -10414,8 +10414,8 @@ trackedFiles:
     pristine_git_object: d5990c4254d4b3c5dae3f548bbec02558adadae1
   src/openrouter/guardrails.py:
     id: 705839f34e66
-    last_write_checksum: sha1:a59c2b030c154738e49d0a4ae99970d0ae343051
-    pristine_git_object: cf9a6c64cfdbc97b68586fde67d9a66a19b06496
+    last_write_checksum: sha1:1551845b6a9776480d99ef0fc1fca61e845f3de2
+    pristine_git_object: 785964ad30a2043c9d70272f15d1a3fac9635b73
   src/openrouter/httpclient.py:
     id: e9311185443d
     last_write_checksum: sha1:5e55338d6ee9f01ab648cad4380201a8a3da7dd7
@@ -11434,6 +11434,8 @@ examples:
           application/json: {"error": {"code": 500, "message": "Internal Server Error"}}
         "409":
           application/json: {"error": {"code": 409, "message": "Resource conflict. Please try again later."}}
+        "403":
+          application/json: {"error": {"code": 403, "message": "Only management keys can perform this operation"}}
   deleteGuardrail:
     speakeasy-default-delete-guardrail:
       parameters:
@@ -11509,6 +11511,8 @@ examples:
           application/json: {"error": {"code": 404, "message": "Resource not found"}}
         "500":
           application/json: {"error": {"code": 500, "message": "Internal Server Error"}}
+        "403":
+          application/json: {"error": {"code": 403, "message": "Only management keys can perform this operation"}}
   listGuardrailMemberAssignments:
     speakeasy-default-list-guardrail-member-assignments:
       parameters:
@@ -12920,4 +12924,5 @@ examples:
 examplesVersion: 1.0.2
 releaseNotes: |
   ## Python SDK Changes:
-  * `open_router.images.generate()`:  `request.aspect_ratio` **Changed**
+  * `open_router.guardrails.update()`:  `error.status[403]` **Added**
+  * `open_router.guardrails.bulk_assign_keys()`:  `error.status[403]` **Added**
