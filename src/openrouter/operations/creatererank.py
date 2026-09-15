@@ -139,6 +139,8 @@ class CreateRerankRequestBodyTypedDict(TypedDict):
     ]
     top_n: NotRequired[int]
     r"""Number of most relevant documents to return"""
+    user: NotRequired[str]
+    r"""A unique identifier representing your end-user. Forwarded to Broadcast and private logging as the end-user id; never sent to the provider."""
 
 
 class CreateRerankRequestBody(BaseModel):
@@ -160,9 +162,12 @@ class CreateRerankRequestBody(BaseModel):
     top_n: Optional[int] = None
     r"""Number of most relevant documents to return"""
 
+    user: Optional[str] = None
+    r"""A unique identifier representing your end-user. Forwarded to Broadcast and private logging as the end-user id; never sent to the provider."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["provider", "top_n"])
+        optional_fields = set(["provider", "top_n", "user"])
         nullable_fields = set(["provider"])
         serialized = handler(self)
         m = {}

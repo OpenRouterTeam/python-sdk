@@ -64,6 +64,8 @@ class SpeechRequestTypedDict(TypedDict):
     r"""Audio output format"""
     speed: NotRequired[float]
     r"""Playback speed multiplier. Only used by models that support it (e.g. OpenAI TTS). Ignored by other providers."""
+    user: NotRequired[str]
+    r"""A unique identifier representing your end-user. Forwarded to Broadcast and private logging as the end-user id; never sent to the provider."""
     voice: NotRequired[str]
     r"""Voice identifier (provider-specific)."""
 
@@ -89,13 +91,23 @@ class SpeechRequest(BaseModel):
     speed: Optional[float] = None
     r"""Playback speed multiplier. Only used by models that support it (e.g. OpenAI TTS). Ignored by other providers."""
 
+    user: Optional[str] = None
+    r"""A unique identifier representing your end-user. Forwarded to Broadcast and private logging as the end-user id; never sent to the provider."""
+
     voice: Optional[str] = None
     r"""Voice identifier (provider-specific)."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
-            ["input_references", "provider", "response_format", "speed", "voice"]
+            [
+                "input_references",
+                "provider",
+                "response_format",
+                "speed",
+                "user",
+                "voice",
+            ]
         )
         serialized = handler(self)
         m = {}

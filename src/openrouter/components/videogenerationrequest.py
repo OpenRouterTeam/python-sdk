@@ -740,6 +740,8 @@ class VideoGenerationRequestTypedDict(TypedDict):
     r"""Exact pixel dimensions of the generated video in \"WIDTHxHEIGHT\" format (e.g. \"1280x720\"). Interchangeable with resolution + aspect_ratio."""
     upscale_factor: NotRequired[float]
     r"""Upscale factor for video upscaling models only. This parameter is not supported by video generation models."""
+    user: NotRequired[str]
+    r"""A unique identifier representing your end-user. Forwarded to Broadcast and private logging as the end-user id; never sent to the provider."""
 
 
 class VideoGenerationRequest(BaseModel):
@@ -784,6 +786,9 @@ class VideoGenerationRequest(BaseModel):
     upscale_factor: Optional[float] = None
     r"""Upscale factor for video upscaling models only. This parameter is not supported by video generation models."""
 
+    user: Optional[str] = None
+    r"""A unique identifier representing your end-user. Forwarded to Broadcast and private logging as the end-user id; never sent to the provider."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
@@ -801,6 +806,7 @@ class VideoGenerationRequest(BaseModel):
                 "seed",
                 "size",
                 "upscale_factor",
+                "user",
             ]
         )
         serialized = handler(self)
