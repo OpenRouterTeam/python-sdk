@@ -35,6 +35,7 @@ class Rerank(BaseSDK):
             ]
         ] = UNSET,
         top_n: Optional[int] = None,
+        user: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         accept_header_override: Optional[RerankAcceptEnum] = None,
@@ -57,6 +58,7 @@ class Rerank(BaseSDK):
 
         :param provider:
         :param top_n: Number of most relevant documents to return
+        :param user: A unique identifier representing your end-user. Forwarded to Broadcast and private logging as the end-user id; never sent to the provider.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -87,6 +89,7 @@ class Rerank(BaseSDK):
                 ),
                 query=query,
                 top_n=top_n,
+                user=user,
             ),
         )
 
@@ -247,6 +250,7 @@ class Rerank(BaseSDK):
             ]
         ] = UNSET,
         top_n: Optional[int] = None,
+        user: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         accept_header_override: Optional[RerankAcceptEnum] = None,
@@ -269,6 +273,7 @@ class Rerank(BaseSDK):
 
         :param provider:
         :param top_n: Number of most relevant documents to return
+        :param user: A unique identifier representing your end-user. Forwarded to Broadcast and private logging as the end-user id; never sent to the provider.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -299,6 +304,7 @@ class Rerank(BaseSDK):
                 ),
                 query=query,
                 top_n=top_n,
+                user=user,
             ),
         )
 

@@ -67,6 +67,8 @@ class STTRequestTypedDict(TypedDict):
     r"""Sampling temperature for transcription"""
     timestamp_granularities: NotRequired[List[STTTimestampGranularity]]
     r"""Timestamp detail levels to include when response_format is \"verbose_json\". \"segment\" returns segment-level timestamps; \"word\" additionally returns word-level timestamps in the words array. Ignored unless response_format is \"verbose_json\"."""
+    user: NotRequired[str]
+    r"""A unique identifier representing your end-user. Forwarded to Broadcast and private logging as the end-user id; never sent to the provider."""
 
 
 class STTRequest(BaseModel):
@@ -93,6 +95,9 @@ class STTRequest(BaseModel):
     timestamp_granularities: Optional[List[STTTimestampGranularity]] = None
     r"""Timestamp detail levels to include when response_format is \"verbose_json\". \"segment\" returns segment-level timestamps; \"word\" additionally returns word-level timestamps in the words array. Ignored unless response_format is \"verbose_json\"."""
 
+    user: Optional[str] = None
+    r"""A unique identifier representing your end-user. Forwarded to Broadcast and private logging as the end-user id; never sent to the provider."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
@@ -102,6 +107,7 @@ class STTRequest(BaseModel):
                 "response_format",
                 "temperature",
                 "timestamp_granularities",
+                "user",
             ]
         )
         serialized = handler(self)

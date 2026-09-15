@@ -48,6 +48,7 @@ class VideoGeneration(BaseSDK):
         seed: Optional[int] = None,
         size: Optional[str] = None,
         upscale_factor: Optional[float] = None,
+        user: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -78,6 +79,7 @@ class VideoGeneration(BaseSDK):
         :param seed: If specified, the generation will sample deterministically, such that repeated requests with the same seed and parameters should return the same result. Determinism is not guaranteed for all providers.
         :param size: Exact pixel dimensions of the generated video in \"WIDTHxHEIGHT\" format (e.g. \"1280x720\"). Interchangeable with resolution + aspect_ratio.
         :param upscale_factor: Upscale factor for video upscaling models only. This parameter is not supported by video generation models.
+        :param user: A unique identifier representing your end-user. Forwarded to Broadcast and private logging as the end-user id; never sent to the provider.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -118,6 +120,7 @@ class VideoGeneration(BaseSDK):
                 seed=seed,
                 size=size,
                 upscale_factor=upscale_factor,
+                user=user,
             ),
         )
 
@@ -270,6 +273,7 @@ class VideoGeneration(BaseSDK):
         seed: Optional[int] = None,
         size: Optional[str] = None,
         upscale_factor: Optional[float] = None,
+        user: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -300,6 +304,7 @@ class VideoGeneration(BaseSDK):
         :param seed: If specified, the generation will sample deterministically, such that repeated requests with the same seed and parameters should return the same result. Determinism is not guaranteed for all providers.
         :param size: Exact pixel dimensions of the generated video in \"WIDTHxHEIGHT\" format (e.g. \"1280x720\"). Interchangeable with resolution + aspect_ratio.
         :param upscale_factor: Upscale factor for video upscaling models only. This parameter is not supported by video generation models.
+        :param user: A unique identifier representing your end-user. Forwarded to Broadcast and private logging as the end-user id; never sent to the provider.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -340,6 +345,7 @@ class VideoGeneration(BaseSDK):
                 seed=seed,
                 size=size,
                 upscale_factor=upscale_factor,
+                user=user,
             ),
         )
 
