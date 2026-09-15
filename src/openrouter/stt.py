@@ -29,6 +29,9 @@ class STT(BaseSDK):
         timestamp_granularities: Optional[
             Iterable[components.STTTimestampGranularity]
         ] = None,
+        trace: Optional[
+            Union[components.TraceConfig, components.TraceConfigTypedDict]
+        ] = None,
         user: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -53,6 +56,7 @@ class STT(BaseSDK):
         :param response_format: Output format. \"json\" (default) returns { text, usage }. \"verbose_json\" additionally returns task, language, duration, and segment-level timestamps; only supported by OpenAI-compatible providers.
         :param temperature: Sampling temperature for transcription
         :param timestamp_granularities: Timestamp detail levels to include when response_format is \"verbose_json\". \"segment\" returns segment-level timestamps; \"word\" additionally returns word-level timestamps in the words array. Ignored unless response_format is \"verbose_json\".
+        :param trace: Metadata for observability and tracing. Known keys (trace_id, trace_name, span_name, generation_name, parent_span_id) have special handling. Additional keys are passed through as custom metadata to configured broadcast destinations.
         :param user: A unique identifier representing your end-user. Forwarded to Broadcast and private logging as the end-user id; never sent to the provider.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -88,6 +92,7 @@ class STT(BaseSDK):
                     timestamp_granularities,
                     Optional[List[components.STTTimestampGranularity]],
                 ),
+                trace=utils.get_pydantic_model(trace, Optional[components.TraceConfig]),
                 user=user,
             ),
         )
@@ -239,6 +244,9 @@ class STT(BaseSDK):
         timestamp_granularities: Optional[
             Iterable[components.STTTimestampGranularity]
         ] = None,
+        trace: Optional[
+            Union[components.TraceConfig, components.TraceConfigTypedDict]
+        ] = None,
         user: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -263,6 +271,7 @@ class STT(BaseSDK):
         :param response_format: Output format. \"json\" (default) returns { text, usage }. \"verbose_json\" additionally returns task, language, duration, and segment-level timestamps; only supported by OpenAI-compatible providers.
         :param temperature: Sampling temperature for transcription
         :param timestamp_granularities: Timestamp detail levels to include when response_format is \"verbose_json\". \"segment\" returns segment-level timestamps; \"word\" additionally returns word-level timestamps in the words array. Ignored unless response_format is \"verbose_json\".
+        :param trace: Metadata for observability and tracing. Known keys (trace_id, trace_name, span_name, generation_name, parent_span_id) have special handling. Additional keys are passed through as custom metadata to configured broadcast destinations.
         :param user: A unique identifier representing your end-user. Forwarded to Broadcast and private logging as the end-user id; never sent to the provider.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -298,6 +307,7 @@ class STT(BaseSDK):
                     timestamp_granularities,
                     Optional[List[components.STTTimestampGranularity]],
                 ),
+                trace=utils.get_pydantic_model(trace, Optional[components.TraceConfig]),
                 user=user,
             ),
         )

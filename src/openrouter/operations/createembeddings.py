@@ -7,6 +7,7 @@ from openrouter.components import (
     contentpartinputvideo as components_contentpartinputvideo,
     costdetails as components_costdetails,
     providerpreferences as components_providerpreferences,
+    traceconfig as components_traceconfig,
 )
 from openrouter.types import (
     BaseModel,
@@ -205,6 +206,8 @@ class CreateEmbeddingsRequestBodyTypedDict(TypedDict):
     provider: NotRequired[
         Nullable[components_providerpreferences.ProviderPreferencesTypedDict]
     ]
+    trace: NotRequired[components_traceconfig.TraceConfigTypedDict]
+    r"""Metadata for observability and tracing. Known keys (trace_id, trace_name, span_name, generation_name, parent_span_id) have special handling. Additional keys are passed through as custom metadata to configured broadcast destinations."""
     user: NotRequired[str]
     r"""A unique identifier for the end-user"""
 
@@ -231,13 +234,16 @@ class CreateEmbeddingsRequestBody(BaseModel):
         UNSET
     )
 
+    trace: Optional[components_traceconfig.TraceConfig] = None
+    r"""Metadata for observability and tracing. Known keys (trace_id, trace_name, span_name, generation_name, parent_span_id) have special handling. Additional keys are passed through as custom metadata to configured broadcast destinations."""
+
     user: Optional[str] = None
     r"""A unique identifier for the end-user"""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
-            ["dimensions", "encoding_format", "input_type", "provider", "user"]
+            ["dimensions", "encoding_format", "input_type", "provider", "trace", "user"]
         )
         nullable_fields = set(["provider"])
         serialized = handler(self)

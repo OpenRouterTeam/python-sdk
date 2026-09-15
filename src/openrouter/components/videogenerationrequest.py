@@ -3,6 +3,7 @@
 from __future__ import annotations
 from .frameimage import FrameImage, FrameImageTypedDict
 from .inputreference import InputReference, InputReferenceTypedDict
+from .traceconfig import TraceConfig, TraceConfigTypedDict
 from openrouter.types import BaseModel, UNSET_SENTINEL, UnrecognizedStr
 import pydantic
 from pydantic import model_serializer
@@ -738,6 +739,8 @@ class VideoGenerationRequestTypedDict(TypedDict):
     r"""If specified, the generation will sample deterministically, such that repeated requests with the same seed and parameters should return the same result. Determinism is not guaranteed for all providers."""
     size: NotRequired[str]
     r"""Exact pixel dimensions of the generated video in \"WIDTHxHEIGHT\" format (e.g. \"1280x720\"). Interchangeable with resolution + aspect_ratio."""
+    trace: NotRequired[TraceConfigTypedDict]
+    r"""Metadata for observability and tracing. Known keys (trace_id, trace_name, span_name, generation_name, parent_span_id) have special handling. Additional keys are passed through as custom metadata to configured broadcast destinations."""
     upscale_factor: NotRequired[float]
     r"""Upscale factor for video upscaling models only. This parameter is not supported by video generation models."""
     user: NotRequired[str]
@@ -783,6 +786,9 @@ class VideoGenerationRequest(BaseModel):
     size: Optional[str] = None
     r"""Exact pixel dimensions of the generated video in \"WIDTHxHEIGHT\" format (e.g. \"1280x720\"). Interchangeable with resolution + aspect_ratio."""
 
+    trace: Optional[TraceConfig] = None
+    r"""Metadata for observability and tracing. Known keys (trace_id, trace_name, span_name, generation_name, parent_span_id) have special handling. Additional keys are passed through as custom metadata to configured broadcast destinations."""
+
     upscale_factor: Optional[float] = None
     r"""Upscale factor for video upscaling models only. This parameter is not supported by video generation models."""
 
@@ -805,6 +811,7 @@ class VideoGenerationRequest(BaseModel):
                 "resolution",
                 "seed",
                 "size",
+                "trace",
                 "upscale_factor",
                 "user",
             ]
