@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c48cf606-fb42-4a45-9c23-8f0555307828
 management:
-  docChecksum: 7bc7b168f8a8adbedd7d3086ee4f0e7b
+  docChecksum: 68c742eaf58c38c304bb91cbf1f3be39
   docVersion: 1.0.0
   speakeasyVersion: 1.787.0
   generationVersion: 2.914.0
-  releaseVersion: 1.1.142
-  configChecksum: 2825935bd6f9d013d5d9d4e1151e4fdc
+  releaseVersion: 1.1.143
+  configChecksum: ff27bb8d48d09365dcdd5b9390426d82
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
 persistentEdits:
-  generation_id: 0c89c3ac-e02e-437f-925f-0e940fcb1c69
-  pristine_commit_hash: 1820153a2350b41f02ede790ee4c170f62551c60
-  pristine_tree_hash: 24c1248728d59a2a03f82effb2af6ccfc1c4fe5c
+  generation_id: dd2064d2-d032-41eb-9c3f-349057e1f4da
+  pristine_commit_hash: 2539a4e8f102ceebc4a0459e04d10adce03b42ec
+  pristine_tree_hash: a036aeb5be3ffc29f2a48a3c26d5c167092714f9
 features:
   python:
     acceptHeaders: 3.0.0
@@ -2450,8 +2450,8 @@ trackedFiles:
     pristine_git_object: 68f653b5fdd4a2a93d4c399658e10ae30c09bd71
   docs/components/imagegenerationrequestaspectratio.mdx:
     id: bda89377f32d
-    last_write_checksum: sha1:9cc231ee222c01ce471ecff3804a9e5acb8a054f
-    pristine_git_object: 2116ac419e420262dc3a03b6460ec51c985dd1cf
+    last_write_checksum: sha1:368ddc44134948e2e04c43dd886f7469d88b7d16
+    pristine_git_object: 3f967d5244cb2986c97da5783a110d4b9d5c1bc7
   docs/components/imagegenerationrequestbackground.mdx:
     id: cab3c6c6dfc6
     last_write_checksum: sha1:ea6f2fa5f8f63600e2d1a67a784e6a93cf295975
@@ -7666,8 +7666,8 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:421d7fb44d1508180070290bc51d1b2b126f4444
-    pristine_git_object: 260abac3a276d8627301c140561f13873b7be28a
+    last_write_checksum: sha1:8f8e5267759de894d383ae4dd32d970e531dbaaa
+    pristine_git_object: 2e88d86d03214de7322bd4314ea223a6c074f178
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77f44b60b98bc126557ec27391f91dfba764bb54
@@ -7694,8 +7694,8 @@ trackedFiles:
     pristine_git_object: 86713cfea633e09d33b3d4e65281071fe20e6137
   src/openrouter/_version.py:
     id: d8d15ad6c586
-    last_write_checksum: sha1:77465790b91920df333b8d848ee0f1bfed72172a
-    pristine_git_object: 1ea509bcf742f876615b98ac389355439a4bfa2c
+    last_write_checksum: sha1:49e0609d0f28924046aaf81c882bc136c3a9d5a0
+    pristine_git_object: 093c988002cf87bcd29ed90b8885463a013c6d89
   src/openrouter/analytics.py:
     id: cb406b5aaabb
     last_write_checksum: sha1:1e0004d8d1d5d797e2b54cd1cabeb7f9489d08e9
@@ -8834,8 +8834,8 @@ trackedFiles:
     pristine_git_object: b5ff31ce7a095884cf4f6c1110eca88f8f7863ff
   src/openrouter/components/imagegenerationrequest.py:
     id: f8291a7be9a0
-    last_write_checksum: sha1:d1a3c0f106fd9a6c52e5ee08ca752d42058cdb2a
-    pristine_git_object: e77b47cb8b182ba66df153c5c6e4f2d7b3e86cac
+    last_write_checksum: sha1:960f0b468bc9e21f407c3d666002d4a2683cd2d4
+    pristine_git_object: c768a0c5b03f398698abba73867387630f8ddfd2
   src/openrouter/components/imagegenerationresponse.py:
     id: 53354cd0cbfc
     last_write_checksum: sha1:53f1cde7b8bfe4f9e786a76f6e57b0a1f76aced2
@@ -12918,4 +12918,6 @@ examples:
         "500":
           application/json: {"error": {"code": 500, "message": "Internal Server Error"}}
 examplesVersion: 1.0.2
-releaseNotes: "## Python SDK Changes:\n* `open_router.tts.create_speech()`: \n  *  `request.provider.options.assemblyai` **Added**\n* `open_router.stt.create_transcription()`: \n  *  `request.provider.options.assemblyai` **Added**\n* `open_router.byok.list()`: \n  *  `request.provider` **Changed**\n  *  `response.data[].provider.enum(assemblyai)` **Added**\n* `open_router.byok.create()`: \n  *  `request.provider.enum(assemblyai)` **Added**\n  *  `response.data.provider.enum(assemblyai)` **Added**\n* `open_router.byok.get()`:  `response.data.provider.enum(assemblyai)` **Added**\n* `open_router.byok.update()`:  `response.data.provider.enum(assemblyai)` **Added**\n* `open_router.chat.send()`: \n  *  `request.provider.ignore[].union(ProviderName).enum(assembly_ai)` **Added**\n* `open_router.embeddings.generate()`: \n  *  `request.provider.ignore[].union(ProviderName).enum(assembly_ai)` **Added**\n* `open_router.endpoints.list_zdr_endpoints()`:  `response.data[].provider_name.enum(assembly_ai)` **Added**\n* `open_router.endpoints.list()`:  `response.data.endpoints[].provider_name.enum(assembly_ai)` **Added**\n* `open_router.generations.get_generation()`:  `response.data.provider_responses[].provider_name.enum(assembly_ai)` **Added**\n* `open_router.images.generate()`:  `request.provider` **Changed**\n* `open_router.presets.create_presets_chat_completions()`: \n  *  `request.provider.ignore[].union(ProviderName).enum(assembly_ai)` **Added**\n* `open_router.presets.create_presets_messages()`: \n  *  `request.provider.ignore[].union(ProviderName).enum(assembly_ai)` **Added**\n* `open_router.presets.create_presets_responses()`: \n  *  `request.provider.ignore[].union(ProviderName).enum(assembly_ai)` **Added**\n* `open_router.rerank.rerank()`: \n  *  `request.provider.ignore[].union(ProviderName).enum(assembly_ai)` **Added**\n* `open_router.responses.send()`: \n  *  `request.provider.ignore[].union(ProviderName).enum(assembly_ai)` **Added**\n* `open_router.beta.responses.send()`: \n  *  `request.provider.ignore[].union(ProviderName).enum(assembly_ai)` **Added**\n* `open_router.video_generation.generate()`: \n  *  `request.provider.options.assemblyai` **Added**\n"
+releaseNotes: |
+  ## Python SDK Changes:
+  * `open_router.images.generate()`:  `request.aspect_ratio` **Changed**
