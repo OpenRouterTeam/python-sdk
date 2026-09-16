@@ -3157,6 +3157,24 @@ if TYPE_CHECKING:
         UpsertWorkspaceBudgetResponseTypedDict,
     )
     from .urlcitation import URLCitation, URLCitationType, URLCitationTypedDict
+    from .vaultsecret import VaultSecret, VaultSecretTypedDict
+    from .vaultsecretcopyrequest import (
+        VaultSecretCopyRequest,
+        VaultSecretCopyRequestTypedDict,
+    )
+    from .vaultsecretcopyresponse import (
+        VaultSecretCopyResponse,
+        VaultSecretCopyResponseTypedDict,
+    )
+    from .vaultsecretlistresponse import (
+        VaultSecretListResponse,
+        VaultSecretListResponseTypedDict,
+    )
+    from .vaultsecretresponse import VaultSecretResponse, VaultSecretResponseTypedDict
+    from .vaultsecretwriterequest import (
+        VaultSecretWriteRequest,
+        VaultSecretWriteRequestTypedDict,
+    )
     from .videogenerationrequest import (
         VideoGenerationRequest,
         VideoGenerationRequestAspectRatio,
@@ -5594,6 +5612,18 @@ __all__ = [
     "UtcDay",
     "Variables",
     "VariablesTypedDict",
+    "VaultSecret",
+    "VaultSecretCopyRequest",
+    "VaultSecretCopyRequestTypedDict",
+    "VaultSecretCopyResponse",
+    "VaultSecretCopyResponseTypedDict",
+    "VaultSecretListResponse",
+    "VaultSecretListResponseTypedDict",
+    "VaultSecretResponse",
+    "VaultSecretResponseTypedDict",
+    "VaultSecretTypedDict",
+    "VaultSecretWriteRequest",
+    "VaultSecretWriteRequestTypedDict",
     "Verbosity",
     "VideoGeneration",
     "VideoGenerationRequest",
@@ -7984,6 +8014,18 @@ _dynamic_imports: dict[str, str] = {
     "URLCitation": ".urlcitation",
     "URLCitationType": ".urlcitation",
     "URLCitationTypedDict": ".urlcitation",
+    "VaultSecret": ".vaultsecret",
+    "VaultSecretTypedDict": ".vaultsecret",
+    "VaultSecretCopyRequest": ".vaultsecretcopyrequest",
+    "VaultSecretCopyRequestTypedDict": ".vaultsecretcopyrequest",
+    "VaultSecretCopyResponse": ".vaultsecretcopyresponse",
+    "VaultSecretCopyResponseTypedDict": ".vaultsecretcopyresponse",
+    "VaultSecretListResponse": ".vaultsecretlistresponse",
+    "VaultSecretListResponseTypedDict": ".vaultsecretlistresponse",
+    "VaultSecretResponse": ".vaultsecretresponse",
+    "VaultSecretResponseTypedDict": ".vaultsecretresponse",
+    "VaultSecretWriteRequest": ".vaultsecretwriterequest",
+    "VaultSecretWriteRequestTypedDict": ".vaultsecretwriterequest",
     "VideoGenerationRequest": ".videogenerationrequest",
     "VideoGenerationRequestAspectRatio": ".videogenerationrequest",
     "VideoGenerationRequestOptions": ".videogenerationrequest",
