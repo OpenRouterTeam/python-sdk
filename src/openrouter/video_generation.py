@@ -46,6 +46,7 @@ class VideoGeneration(BaseSDK):
         ] = None,
         resolution: Optional[components.VideoGenerationRequestResolution] = None,
         seed: Optional[int] = None,
+        session_id: Optional[str] = None,
         size: Optional[str] = None,
         trace: Optional[
             Union[components.TraceConfig, components.TraceConfigTypedDict]
@@ -80,6 +81,7 @@ class VideoGeneration(BaseSDK):
         :param provider: Provider-specific passthrough configuration
         :param resolution: Resolution of the generated video
         :param seed: If specified, the generation will sample deterministically, such that repeated requests with the same seed and parameters should return the same result. Determinism is not guaranteed for all providers.
+        :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow). Used for observability grouping in Broadcast and private logging; never sent to the provider. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters.
         :param size: Exact pixel dimensions of the generated video in \"WIDTHxHEIGHT\" format (e.g. \"1280x720\"). Interchangeable with resolution + aspect_ratio.
         :param trace: Metadata for observability and tracing. Known keys (trace_id, trace_name, span_name, generation_name, parent_span_id) have special handling. Additional keys are passed through as custom metadata to configured broadcast destinations.
         :param upscale_factor: Upscale factor for video upscaling models only. This parameter is not supported by video generation models.
@@ -122,6 +124,7 @@ class VideoGeneration(BaseSDK):
                 ),
                 resolution=resolution,
                 seed=seed,
+                session_id=session_id,
                 size=size,
                 trace=utils.get_pydantic_model(trace, Optional[components.TraceConfig]),
                 upscale_factor=upscale_factor,
@@ -276,6 +279,7 @@ class VideoGeneration(BaseSDK):
         ] = None,
         resolution: Optional[components.VideoGenerationRequestResolution] = None,
         seed: Optional[int] = None,
+        session_id: Optional[str] = None,
         size: Optional[str] = None,
         trace: Optional[
             Union[components.TraceConfig, components.TraceConfigTypedDict]
@@ -310,6 +314,7 @@ class VideoGeneration(BaseSDK):
         :param provider: Provider-specific passthrough configuration
         :param resolution: Resolution of the generated video
         :param seed: If specified, the generation will sample deterministically, such that repeated requests with the same seed and parameters should return the same result. Determinism is not guaranteed for all providers.
+        :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow). Used for observability grouping in Broadcast and private logging; never sent to the provider. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters.
         :param size: Exact pixel dimensions of the generated video in \"WIDTHxHEIGHT\" format (e.g. \"1280x720\"). Interchangeable with resolution + aspect_ratio.
         :param trace: Metadata for observability and tracing. Known keys (trace_id, trace_name, span_name, generation_name, parent_span_id) have special handling. Additional keys are passed through as custom metadata to configured broadcast destinations.
         :param upscale_factor: Upscale factor for video upscaling models only. This parameter is not supported by video generation models.
@@ -352,6 +357,7 @@ class VideoGeneration(BaseSDK):
                 ),
                 resolution=resolution,
                 seed=seed,
+                session_id=session_id,
                 size=size,
                 trace=utils.get_pydantic_model(trace, Optional[components.TraceConfig]),
                 upscale_factor=upscale_factor,

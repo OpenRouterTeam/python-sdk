@@ -25,6 +25,7 @@ class STT(BaseSDK):
             Union[components.STTRequestProvider, components.STTRequestProviderTypedDict]
         ] = None,
         response_format: Optional[components.STTRequestResponseFormat] = None,
+        session_id: Optional[str] = None,
         temperature: Optional[float] = None,
         timestamp_granularities: Optional[
             Iterable[components.STTTimestampGranularity]
@@ -54,6 +55,7 @@ class STT(BaseSDK):
         :param language: ISO-639-1 language code (e.g., \"en\", \"ja\"). Auto-detected if omitted.
         :param provider: Provider-specific passthrough configuration
         :param response_format: Output format. \"json\" (default) returns { text, usage }. \"verbose_json\" additionally returns task, language, duration, and segment-level timestamps; only supported by OpenAI-compatible providers.
+        :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow). Used for observability grouping in Broadcast and private logging; never sent to the provider. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters.
         :param temperature: Sampling temperature for transcription
         :param timestamp_granularities: Timestamp detail levels to include when response_format is \"verbose_json\". \"segment\" returns segment-level timestamps; \"word\" additionally returns word-level timestamps in the words array. Ignored unless response_format is \"verbose_json\".
         :param trace: Metadata for observability and tracing. Known keys (trace_id, trace_name, span_name, generation_name, parent_span_id) have special handling. Additional keys are passed through as custom metadata to configured broadcast destinations.
@@ -87,6 +89,7 @@ class STT(BaseSDK):
                     provider, Optional[components.STTRequestProvider]
                 ),
                 response_format=response_format,
+                session_id=session_id,
                 temperature=temperature,
                 timestamp_granularities=utils.unmarshal(
                     timestamp_granularities,
@@ -245,6 +248,7 @@ class STT(BaseSDK):
             Union[components.STTRequestProvider, components.STTRequestProviderTypedDict]
         ] = None,
         response_format: Optional[components.STTRequestResponseFormat] = None,
+        session_id: Optional[str] = None,
         temperature: Optional[float] = None,
         timestamp_granularities: Optional[
             Iterable[components.STTTimestampGranularity]
@@ -274,6 +278,7 @@ class STT(BaseSDK):
         :param language: ISO-639-1 language code (e.g., \"en\", \"ja\"). Auto-detected if omitted.
         :param provider: Provider-specific passthrough configuration
         :param response_format: Output format. \"json\" (default) returns { text, usage }. \"verbose_json\" additionally returns task, language, duration, and segment-level timestamps; only supported by OpenAI-compatible providers.
+        :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow). Used for observability grouping in Broadcast and private logging; never sent to the provider. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters.
         :param temperature: Sampling temperature for transcription
         :param timestamp_granularities: Timestamp detail levels to include when response_format is \"verbose_json\". \"segment\" returns segment-level timestamps; \"word\" additionally returns word-level timestamps in the words array. Ignored unless response_format is \"verbose_json\".
         :param trace: Metadata for observability and tracing. Known keys (trace_id, trace_name, span_name, generation_name, parent_span_id) have special handling. Additional keys are passed through as custom metadata to configured broadcast destinations.
@@ -307,6 +312,7 @@ class STT(BaseSDK):
                     provider, Optional[components.STTRequestProvider]
                 ),
                 response_format=response_format,
+                session_id=session_id,
                 temperature=temperature,
                 timestamp_granularities=utils.unmarshal(
                     timestamp_granularities,

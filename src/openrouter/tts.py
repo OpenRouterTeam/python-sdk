@@ -34,6 +34,7 @@ class TTS(BaseSDK):
             ]
         ] = None,
         response_format: Optional[components.SpeechRequestResponseFormat] = "pcm",
+        session_id: Optional[str] = None,
         speed: Optional[float] = None,
         trace: Optional[
             Union[components.TraceConfig, components.TraceConfigTypedDict]
@@ -61,6 +62,7 @@ class TTS(BaseSDK):
         :param input_references: Reference content for stateless voice cloning: one `input_audio` part carrying the voice sample, optionally accompanied by one `text` part with its transcript. Only routed to endpoints that support voice cloning.
         :param provider: Provider-specific passthrough configuration
         :param response_format: Audio output format
+        :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow). Used for observability grouping in Broadcast and private logging; never sent to the provider. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters.
         :param speed: Playback speed multiplier. Only used by models that support it (e.g. OpenAI TTS). Ignored by other providers.
         :param trace: Metadata for observability and tracing. Known keys (trace_id, trace_name, span_name, generation_name, parent_span_id) have special handling. Additional keys are passed through as custom metadata to configured broadcast destinations.
         :param user: A unique identifier representing your end-user. Forwarded to Broadcast and private logging as the end-user id; never sent to the provider.
@@ -94,6 +96,7 @@ class TTS(BaseSDK):
                     provider, Optional[components.SpeechRequestProvider]
                 ),
                 response_format=response_format,
+                session_id=session_id,
                 speed=speed,
                 trace=utils.get_pydantic_model(trace, Optional[components.TraceConfig]),
                 user=user,
@@ -284,6 +287,7 @@ class TTS(BaseSDK):
             ]
         ] = None,
         response_format: Optional[components.SpeechRequestResponseFormat] = "pcm",
+        session_id: Optional[str] = None,
         speed: Optional[float] = None,
         trace: Optional[
             Union[components.TraceConfig, components.TraceConfigTypedDict]
@@ -311,6 +315,7 @@ class TTS(BaseSDK):
         :param input_references: Reference content for stateless voice cloning: one `input_audio` part carrying the voice sample, optionally accompanied by one `text` part with its transcript. Only routed to endpoints that support voice cloning.
         :param provider: Provider-specific passthrough configuration
         :param response_format: Audio output format
+        :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow). Used for observability grouping in Broadcast and private logging; never sent to the provider. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters.
         :param speed: Playback speed multiplier. Only used by models that support it (e.g. OpenAI TTS). Ignored by other providers.
         :param trace: Metadata for observability and tracing. Known keys (trace_id, trace_name, span_name, generation_name, parent_span_id) have special handling. Additional keys are passed through as custom metadata to configured broadcast destinations.
         :param user: A unique identifier representing your end-user. Forwarded to Broadcast and private logging as the end-user id; never sent to the provider.
@@ -344,6 +349,7 @@ class TTS(BaseSDK):
                     provider, Optional[components.SpeechRequestProvider]
                 ),
                 response_format=response_format,
+                session_id=session_id,
                 speed=speed,
                 trace=utils.get_pydantic_model(trace, Optional[components.TraceConfig]),
                 user=user,

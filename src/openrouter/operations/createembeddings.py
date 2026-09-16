@@ -206,6 +206,8 @@ class CreateEmbeddingsRequestBodyTypedDict(TypedDict):
     provider: NotRequired[
         Nullable[components_providerpreferences.ProviderPreferencesTypedDict]
     ]
+    session_id: NotRequired[str]
+    r"""A unique identifier for grouping related requests (e.g., a conversation or agent workflow). Used for observability grouping in Broadcast and private logging; never sent to the provider. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters."""
     trace: NotRequired[components_traceconfig.TraceConfigTypedDict]
     r"""Metadata for observability and tracing. Known keys (trace_id, trace_name, span_name, generation_name, parent_span_id) have special handling. Additional keys are passed through as custom metadata to configured broadcast destinations."""
     user: NotRequired[str]
@@ -234,6 +236,9 @@ class CreateEmbeddingsRequestBody(BaseModel):
         UNSET
     )
 
+    session_id: Optional[str] = None
+    r"""A unique identifier for grouping related requests (e.g., a conversation or agent workflow). Used for observability grouping in Broadcast and private logging; never sent to the provider. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters."""
+
     trace: Optional[components_traceconfig.TraceConfig] = None
     r"""Metadata for observability and tracing. Known keys (trace_id, trace_name, span_name, generation_name, parent_span_id) have special handling. Additional keys are passed through as custom metadata to configured broadcast destinations."""
 
@@ -243,7 +248,15 @@ class CreateEmbeddingsRequestBody(BaseModel):
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
-            ["dimensions", "encoding_format", "input_type", "provider", "trace", "user"]
+            [
+                "dimensions",
+                "encoding_format",
+                "input_type",
+                "provider",
+                "session_id",
+                "trace",
+                "user",
+            ]
         )
         nullable_fields = set(["provider"])
         serialized = handler(self)

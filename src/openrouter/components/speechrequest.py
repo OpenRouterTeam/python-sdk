@@ -63,6 +63,8 @@ class SpeechRequestTypedDict(TypedDict):
     r"""Provider-specific passthrough configuration"""
     response_format: NotRequired[SpeechRequestResponseFormat]
     r"""Audio output format"""
+    session_id: NotRequired[str]
+    r"""A unique identifier for grouping related requests (e.g., a conversation or agent workflow). Used for observability grouping in Broadcast and private logging; never sent to the provider. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters."""
     speed: NotRequired[float]
     r"""Playback speed multiplier. Only used by models that support it (e.g. OpenAI TTS). Ignored by other providers."""
     trace: NotRequired[TraceConfigTypedDict]
@@ -91,6 +93,9 @@ class SpeechRequest(BaseModel):
     response_format: Optional[SpeechRequestResponseFormat] = "pcm"
     r"""Audio output format"""
 
+    session_id: Optional[str] = None
+    r"""A unique identifier for grouping related requests (e.g., a conversation or agent workflow). Used for observability grouping in Broadcast and private logging; never sent to the provider. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters."""
+
     speed: Optional[float] = None
     r"""Playback speed multiplier. Only used by models that support it (e.g. OpenAI TTS). Ignored by other providers."""
 
@@ -110,6 +115,7 @@ class SpeechRequest(BaseModel):
                 "input_references",
                 "provider",
                 "response_format",
+                "session_id",
                 "speed",
                 "trace",
                 "user",
