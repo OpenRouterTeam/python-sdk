@@ -380,6 +380,7 @@ if TYPE_CHECKING:
         GetCreditsResponseTypedDict,
     )
     from .getcurrentkey import (
+        AllowedDataRegion,
         GetCurrentKeyData,
         GetCurrentKeyDataTypedDict,
         GetCurrentKeyGlobals,
@@ -875,6 +876,7 @@ if TYPE_CHECKING:
     )
 
 __all__ = [
+    "AllowedDataRegion",
     "Arena",
     "BenchmarkType",
     "BulkAddWorkspaceMembersGlobals",
@@ -1826,6 +1828,7 @@ _dynamic_imports: dict[str, str] = {
     "GetCreditsRequestTypedDict": ".getcredits",
     "GetCreditsResponse": ".getcredits",
     "GetCreditsResponseTypedDict": ".getcredits",
+    "AllowedDataRegion": ".getcurrentkey",
     "GetCurrentKeyData": ".getcurrentkey",
     "GetCurrentKeyDataTypedDict": ".getcurrentkey",
     "GetCurrentKeyGlobals": ".getcurrentkey",
