@@ -41,6 +41,12 @@ if TYPE_CHECKING:
         BulkUnassignMembersFromGuardrailRequest,
         BulkUnassignMembersFromGuardrailRequestTypedDict,
     )
+    from .copyvaultsecretstointern import (
+        CopyVaultSecretsToInternGlobals,
+        CopyVaultSecretsToInternGlobalsTypedDict,
+        CopyVaultSecretsToInternRequest,
+        CopyVaultSecretsToInternRequestTypedDict,
+    )
     from .createaudiospeech import (
         CreateAudioSpeechGlobals,
         CreateAudioSpeechGlobalsTypedDict,
@@ -255,6 +261,12 @@ if TYPE_CHECKING:
         DeleteGuardrailRequest,
         DeleteGuardrailRequestTypedDict,
     )
+    from .deleteinternvaultsecret import (
+        DeleteInternVaultSecretGlobals,
+        DeleteInternVaultSecretGlobalsTypedDict,
+        DeleteInternVaultSecretRequest,
+        DeleteInternVaultSecretRequestTypedDict,
+    )
     from .deletekeys import (
         DeleteKeysGlobals,
         DeleteKeysGlobalsTypedDict,
@@ -277,6 +289,12 @@ if TYPE_CHECKING:
         KeepMembers,
         KeepMembersEnum,
         KeepMembersTypedDict,
+    )
+    from .deletevaultsecret import (
+        DeleteVaultSecretGlobals,
+        DeleteVaultSecretGlobalsTypedDict,
+        DeleteVaultSecretRequest,
+        DeleteVaultSecretRequestTypedDict,
     )
     from .deleteworkspace import (
         DeleteWorkspaceGlobals,
@@ -621,6 +639,12 @@ if TYPE_CHECKING:
         ListImageModelsRequest,
         ListImageModelsRequestTypedDict,
     )
+    from .listinternvaultsecrets import (
+        ListInternVaultSecretsGlobals,
+        ListInternVaultSecretsGlobalsTypedDict,
+        ListInternVaultSecretsRequest,
+        ListInternVaultSecretsRequestTypedDict,
+    )
     from .listkeyassignments import (
         ListKeyAssignmentsGlobals,
         ListKeyAssignmentsGlobalsTypedDict,
@@ -724,6 +748,12 @@ if TYPE_CHECKING:
         ListScimGroupsResponse,
         ListScimGroupsResponseTypedDict,
     )
+    from .listvaultsecrets import (
+        ListVaultSecretsGlobals,
+        ListVaultSecretsGlobalsTypedDict,
+        ListVaultSecretsRequest,
+        ListVaultSecretsRequestTypedDict,
+    )
     from .listvideoscontent import (
         ListVideosContentGlobals,
         ListVideosContentGlobalsTypedDict,
@@ -808,6 +838,18 @@ if TYPE_CHECKING:
         SendChatCompletionRequestRequestTypedDict,
         SendChatCompletionRequestResponse,
         SendChatCompletionRequestResponseTypedDict,
+    )
+    from .storeinternvaultsecret import (
+        StoreInternVaultSecretGlobals,
+        StoreInternVaultSecretGlobalsTypedDict,
+        StoreInternVaultSecretRequest,
+        StoreInternVaultSecretRequestTypedDict,
+    )
+    from .storevaultsecret import (
+        StoreVaultSecretGlobals,
+        StoreVaultSecretGlobalsTypedDict,
+        StoreVaultSecretRequest,
+        StoreVaultSecretRequestTypedDict,
     )
     from .submitgenerationfeedback import (
         SubmitGenerationFeedbackGlobals,
@@ -918,6 +960,10 @@ __all__ = [
     "ContentTextTypedDict",
     "ContentTypedDict",
     "ContextBucket",
+    "CopyVaultSecretsToInternGlobals",
+    "CopyVaultSecretsToInternGlobalsTypedDict",
+    "CopyVaultSecretsToInternRequest",
+    "CopyVaultSecretsToInternRequestTypedDict",
     "CreateAudioSpeechGlobals",
     "CreateAudioSpeechGlobalsTypedDict",
     "CreateAudioSpeechRequest",
@@ -1053,6 +1099,10 @@ __all__ = [
     "DeleteGuardrailGlobalsTypedDict",
     "DeleteGuardrailRequest",
     "DeleteGuardrailRequestTypedDict",
+    "DeleteInternVaultSecretGlobals",
+    "DeleteInternVaultSecretGlobalsTypedDict",
+    "DeleteInternVaultSecretRequest",
+    "DeleteInternVaultSecretRequestTypedDict",
     "DeleteKeysGlobals",
     "DeleteKeysGlobalsTypedDict",
     "DeleteKeysRequest",
@@ -1067,6 +1117,10 @@ __all__ = [
     "DeleteScimGroupMappingGlobalsTypedDict",
     "DeleteScimGroupMappingRequest",
     "DeleteScimGroupMappingRequestTypedDict",
+    "DeleteVaultSecretGlobals",
+    "DeleteVaultSecretGlobalsTypedDict",
+    "DeleteVaultSecretRequest",
+    "DeleteVaultSecretRequestTypedDict",
     "DeleteWorkspaceBudgetGlobals",
     "DeleteWorkspaceBudgetGlobalsTypedDict",
     "DeleteWorkspaceBudgetRequest",
@@ -1320,6 +1374,10 @@ __all__ = [
     "ListImageModelsGlobalsTypedDict",
     "ListImageModelsRequest",
     "ListImageModelsRequestTypedDict",
+    "ListInternVaultSecretsGlobals",
+    "ListInternVaultSecretsGlobalsTypedDict",
+    "ListInternVaultSecretsRequest",
+    "ListInternVaultSecretsRequestTypedDict",
     "ListKeyAssignmentsGlobals",
     "ListKeyAssignmentsGlobalsTypedDict",
     "ListKeyAssignmentsRequest",
@@ -1400,6 +1458,10 @@ __all__ = [
     "ListScimGroupsRequestTypedDict",
     "ListScimGroupsResponse",
     "ListScimGroupsResponseTypedDict",
+    "ListVaultSecretsGlobals",
+    "ListVaultSecretsGlobalsTypedDict",
+    "ListVaultSecretsRequest",
+    "ListVaultSecretsRequestTypedDict",
     "ListVideosContentGlobals",
     "ListVideosContentGlobalsTypedDict",
     "ListVideosContentRequest",
@@ -1472,6 +1534,14 @@ __all__ = [
     "SendChatCompletionRequestResponse",
     "SendChatCompletionRequestResponseTypedDict",
     "Source",
+    "StoreInternVaultSecretGlobals",
+    "StoreInternVaultSecretGlobalsTypedDict",
+    "StoreInternVaultSecretRequest",
+    "StoreInternVaultSecretRequestTypedDict",
+    "StoreVaultSecretGlobals",
+    "StoreVaultSecretGlobalsTypedDict",
+    "StoreVaultSecretRequest",
+    "StoreVaultSecretRequestTypedDict",
     "Subcategory",
     "SubmitGenerationFeedbackGlobals",
     "SubmitGenerationFeedbackGlobalsTypedDict",
@@ -1564,6 +1634,10 @@ _dynamic_imports: dict[str, str] = {
     "BulkUnassignMembersFromGuardrailGlobalsTypedDict": ".bulkunassignmembersfromguardrail",
     "BulkUnassignMembersFromGuardrailRequest": ".bulkunassignmembersfromguardrail",
     "BulkUnassignMembersFromGuardrailRequestTypedDict": ".bulkunassignmembersfromguardrail",
+    "CopyVaultSecretsToInternGlobals": ".copyvaultsecretstointern",
+    "CopyVaultSecretsToInternGlobalsTypedDict": ".copyvaultsecretstointern",
+    "CopyVaultSecretsToInternRequest": ".copyvaultsecretstointern",
+    "CopyVaultSecretsToInternRequestTypedDict": ".copyvaultsecretstointern",
     "CreateAudioSpeechGlobals": ".createaudiospeech",
     "CreateAudioSpeechGlobalsTypedDict": ".createaudiospeech",
     "CreateAudioSpeechRequest": ".createaudiospeech",
@@ -1732,6 +1806,10 @@ _dynamic_imports: dict[str, str] = {
     "DeleteGuardrailGlobalsTypedDict": ".deleteguardrail",
     "DeleteGuardrailRequest": ".deleteguardrail",
     "DeleteGuardrailRequestTypedDict": ".deleteguardrail",
+    "DeleteInternVaultSecretGlobals": ".deleteinternvaultsecret",
+    "DeleteInternVaultSecretGlobalsTypedDict": ".deleteinternvaultsecret",
+    "DeleteInternVaultSecretRequest": ".deleteinternvaultsecret",
+    "DeleteInternVaultSecretRequestTypedDict": ".deleteinternvaultsecret",
     "DeleteKeysGlobals": ".deletekeys",
     "DeleteKeysGlobalsTypedDict": ".deletekeys",
     "DeleteKeysRequest": ".deletekeys",
@@ -1749,6 +1827,10 @@ _dynamic_imports: dict[str, str] = {
     "KeepMembers": ".deletescimgroupmapping",
     "KeepMembersEnum": ".deletescimgroupmapping",
     "KeepMembersTypedDict": ".deletescimgroupmapping",
+    "DeleteVaultSecretGlobals": ".deletevaultsecret",
+    "DeleteVaultSecretGlobalsTypedDict": ".deletevaultsecret",
+    "DeleteVaultSecretRequest": ".deletevaultsecret",
+    "DeleteVaultSecretRequestTypedDict": ".deletevaultsecret",
     "DeleteWorkspaceGlobals": ".deleteworkspace",
     "DeleteWorkspaceGlobalsTypedDict": ".deleteworkspace",
     "DeleteWorkspaceRequest": ".deleteworkspace",
@@ -2006,6 +2088,10 @@ _dynamic_imports: dict[str, str] = {
     "ListImageModelsGlobalsTypedDict": ".listimagemodels",
     "ListImageModelsRequest": ".listimagemodels",
     "ListImageModelsRequestTypedDict": ".listimagemodels",
+    "ListInternVaultSecretsGlobals": ".listinternvaultsecrets",
+    "ListInternVaultSecretsGlobalsTypedDict": ".listinternvaultsecrets",
+    "ListInternVaultSecretsRequest": ".listinternvaultsecrets",
+    "ListInternVaultSecretsRequestTypedDict": ".listinternvaultsecrets",
     "ListKeyAssignmentsGlobals": ".listkeyassignments",
     "ListKeyAssignmentsGlobalsTypedDict": ".listkeyassignments",
     "ListKeyAssignmentsRequest": ".listkeyassignments",
@@ -2085,6 +2171,10 @@ _dynamic_imports: dict[str, str] = {
     "ListScimGroupsRequestTypedDict": ".listscimgroups",
     "ListScimGroupsResponse": ".listscimgroups",
     "ListScimGroupsResponseTypedDict": ".listscimgroups",
+    "ListVaultSecretsGlobals": ".listvaultsecrets",
+    "ListVaultSecretsGlobalsTypedDict": ".listvaultsecrets",
+    "ListVaultSecretsRequest": ".listvaultsecrets",
+    "ListVaultSecretsRequestTypedDict": ".listvaultsecrets",
     "ListVideosContentGlobals": ".listvideoscontent",
     "ListVideosContentGlobalsTypedDict": ".listvideoscontent",
     "ListVideosContentRequest": ".listvideoscontent",
@@ -2154,6 +2244,14 @@ _dynamic_imports: dict[str, str] = {
     "SendChatCompletionRequestRequestTypedDict": ".sendchatcompletionrequest",
     "SendChatCompletionRequestResponse": ".sendchatcompletionrequest",
     "SendChatCompletionRequestResponseTypedDict": ".sendchatcompletionrequest",
+    "StoreInternVaultSecretGlobals": ".storeinternvaultsecret",
+    "StoreInternVaultSecretGlobalsTypedDict": ".storeinternvaultsecret",
+    "StoreInternVaultSecretRequest": ".storeinternvaultsecret",
+    "StoreInternVaultSecretRequestTypedDict": ".storeinternvaultsecret",
+    "StoreVaultSecretGlobals": ".storevaultsecret",
+    "StoreVaultSecretGlobalsTypedDict": ".storevaultsecret",
+    "StoreVaultSecretRequest": ".storevaultsecret",
+    "StoreVaultSecretRequestTypedDict": ".storevaultsecret",
     "SubmitGenerationFeedbackGlobals": ".submitgenerationfeedback",
     "SubmitGenerationFeedbackGlobalsTypedDict": ".submitgenerationfeedback",
     "SubmitGenerationFeedbackRequest": ".submitgenerationfeedback",
