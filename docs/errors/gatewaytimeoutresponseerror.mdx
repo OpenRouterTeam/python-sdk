@@ -1,0 +1,14 @@
+---
+title: "GatewayTimeoutResponseError"
+---
+
+Gateway Timeout - Provider did not respond before the upstream deadline
+
+
+## Fields
+
+| Field                                                                                          | Type                                                                                           | Required                                                                                       | Description                                                                                    | Example                                                                                        |
+| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| `error`                                                                                        | [components.GatewayTimeoutResponseErrorData](../components/gatewaytimeoutresponseerrordata.mdx) | :heavy_check_mark:                                                                             | Error data for GatewayTimeoutResponse                                                          | \{<br/>"code": 504,<br/>"message": "The operation was aborted due to timeout"<br/>}             |
+| `openrouter_metadata`                                                                          | Dict[str, *Any*]                                                                               | :heavy_minus_sign:                                                                             | N/A                                                                                            |                                                                                                |
+| `user_id`                                                                                      | *OptionalNullable[str]*                                                                        | :heavy_minus_sign:                                                                             | N/A                                                                                            |                                                                                                |
