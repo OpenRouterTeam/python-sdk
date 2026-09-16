@@ -471,10 +471,13 @@ class STT(BaseSDK):
         x_open_router_categories: Optional[str] = None,
         language: Optional[str] = None,
         response_format: Optional[operations.ResponseFormat] = None,
+        session_id: Optional[str] = None,
         temperature: Optional[float] = None,
         timestamp_granularities: Optional[
             Iterable[operations.TimestampGranularities]
         ] = None,
+        trace: Optional[str] = None,
+        user: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -495,8 +498,11 @@ class STT(BaseSDK):
 
         :param language: The language of the input audio (ISO-639-1).
         :param response_format: The response format. \"json\" (default) returns { text, usage }; \"verbose_json\" additionally returns task, language, duration, and segment-level timestamps (OpenAI-compatible providers only).
+        :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow). Used for observability grouping in Broadcast and private logging; never sent to the provider. If provided in both the request body and the x-session-id header, the body value takes precedence.
         :param temperature: The sampling temperature.
         :param timestamp_granularities: Timestamp detail levels to include when response_format is \"verbose_json\". \"word\" additionally returns word-level timestamps in the words array.
+        :param trace: JSON-encoded trace metadata object (trace_id, trace_name, span_name, generation_name, parent_span_id and custom keys) attached to the Broadcast trace. Must decode to a JSON object.
+        :param user: A unique identifier representing your end-user. Forwarded to Broadcast and private logging as the end-user id; never sent to the provider.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -523,11 +529,14 @@ class STT(BaseSDK):
                 language=language,
                 model=model,
                 response_format=response_format,
+                session_id=session_id,
                 temperature=temperature,
                 timestamp_granularities=utils.unmarshal(
                     timestamp_granularities,
                     Optional[List[operations.TimestampGranularities]],
                 ),
+                trace=trace,
+                user=user,
             ),
         )
 
@@ -683,10 +692,13 @@ class STT(BaseSDK):
         x_open_router_categories: Optional[str] = None,
         language: Optional[str] = None,
         response_format: Optional[operations.ResponseFormat] = None,
+        session_id: Optional[str] = None,
         temperature: Optional[float] = None,
         timestamp_granularities: Optional[
             Iterable[operations.TimestampGranularities]
         ] = None,
+        trace: Optional[str] = None,
+        user: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -707,8 +719,11 @@ class STT(BaseSDK):
 
         :param language: The language of the input audio (ISO-639-1).
         :param response_format: The response format. \"json\" (default) returns { text, usage }; \"verbose_json\" additionally returns task, language, duration, and segment-level timestamps (OpenAI-compatible providers only).
+        :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow). Used for observability grouping in Broadcast and private logging; never sent to the provider. If provided in both the request body and the x-session-id header, the body value takes precedence.
         :param temperature: The sampling temperature.
         :param timestamp_granularities: Timestamp detail levels to include when response_format is \"verbose_json\". \"word\" additionally returns word-level timestamps in the words array.
+        :param trace: JSON-encoded trace metadata object (trace_id, trace_name, span_name, generation_name, parent_span_id and custom keys) attached to the Broadcast trace. Must decode to a JSON object.
+        :param user: A unique identifier representing your end-user. Forwarded to Broadcast and private logging as the end-user id; never sent to the provider.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -735,11 +750,14 @@ class STT(BaseSDK):
                 language=language,
                 model=model,
                 response_format=response_format,
+                session_id=session_id,
                 temperature=temperature,
                 timestamp_granularities=utils.unmarshal(
                     timestamp_granularities,
                     Optional[List[operations.TimestampGranularities]],
                 ),
+                trace=trace,
+                user=user,
             ),
         )
 

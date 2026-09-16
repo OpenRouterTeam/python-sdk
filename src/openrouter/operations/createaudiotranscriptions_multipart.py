@@ -147,10 +147,16 @@ class CreateAudioTranscriptionsMultipartRequestBodyTypedDict(TypedDict):
     r"""The language of the input audio (ISO-639-1)."""
     response_format: NotRequired[ResponseFormat]
     r"""The response format. \"json\" (default) returns { text, usage }; \"verbose_json\" additionally returns task, language, duration, and segment-level timestamps (OpenAI-compatible providers only)."""
+    session_id: NotRequired[str]
+    r"""A unique identifier for grouping related requests (e.g., a conversation or agent workflow). Used for observability grouping in Broadcast and private logging; never sent to the provider. If provided in both the request body and the x-session-id header, the body value takes precedence."""
     temperature: NotRequired[float]
     r"""The sampling temperature."""
     timestamp_granularities: NotRequired[List[TimestampGranularities]]
     r"""Timestamp detail levels to include when response_format is \"verbose_json\". \"word\" additionally returns word-level timestamps in the words array."""
+    trace: NotRequired[str]
+    r"""JSON-encoded trace metadata object (trace_id, trace_name, span_name, generation_name, parent_span_id and custom keys) attached to the Broadcast trace. Must decode to a JSON object."""
+    user: NotRequired[str]
+    r"""A unique identifier representing your end-user. Forwarded to Broadcast and private logging as the end-user id; never sent to the provider."""
 
 
 class CreateAudioTranscriptionsMultipartRequestBody(BaseModel):
@@ -171,6 +177,9 @@ class CreateAudioTranscriptionsMultipartRequestBody(BaseModel):
     ] = None
     r"""The response format. \"json\" (default) returns { text, usage }; \"verbose_json\" additionally returns task, language, duration, and segment-level timestamps (OpenAI-compatible providers only)."""
 
+    session_id: Annotated[Optional[str], FieldMetadata(multipart=True)] = None
+    r"""A unique identifier for grouping related requests (e.g., a conversation or agent workflow). Used for observability grouping in Broadcast and private logging; never sent to the provider. If provided in both the request body and the x-session-id header, the body value takes precedence."""
+
     temperature: Annotated[Optional[float], FieldMetadata(multipart=True)] = None
     r"""The sampling temperature."""
 
@@ -181,10 +190,24 @@ class CreateAudioTranscriptionsMultipartRequestBody(BaseModel):
     ] = None
     r"""Timestamp detail levels to include when response_format is \"verbose_json\". \"word\" additionally returns word-level timestamps in the words array."""
 
+    trace: Annotated[Optional[str], FieldMetadata(multipart=True)] = None
+    r"""JSON-encoded trace metadata object (trace_id, trace_name, span_name, generation_name, parent_span_id and custom keys) attached to the Broadcast trace. Must decode to a JSON object."""
+
+    user: Annotated[Optional[str], FieldMetadata(multipart=True)] = None
+    r"""A unique identifier representing your end-user. Forwarded to Broadcast and private logging as the end-user id; never sent to the provider."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
-            ["language", "response_format", "temperature", "timestamp_granularities[]"]
+            [
+                "language",
+                "response_format",
+                "session_id",
+                "temperature",
+                "timestamp_granularities[]",
+                "trace",
+                "user",
+            ]
         )
         serialized = handler(self)
         m = {}
