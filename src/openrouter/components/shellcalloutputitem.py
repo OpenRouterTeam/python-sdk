@@ -55,6 +55,8 @@ class ShellCallOutputItemTypedDict(TypedDict):
     type: ShellCallOutputItemTypeShellCallOutput
     container_id: NotRequired[str]
     r"""The canonical container id the command ran under — the `{container_id}` for the Container Files API, reusable as a `container_reference` in later requests. Present on every sandbox-executed call, even when no files changed."""
+    error: NotRequired[str]
+    r"""The error message when the sandbox call failed before producing a result, as echoed from a failed `shell_call_output` emission."""
     files: NotRequired[List[ShellCallOutputItemFileTypedDict]]
     r"""Citations for the files the sandbox command created or modified, most-recently-touched first (at most 10). Retrieve them via the Container Files API."""
     id: NotRequired[Nullable[str]]
@@ -74,6 +76,9 @@ class ShellCallOutputItem(BaseModel):
     container_id: Optional[str] = None
     r"""The canonical container id the command ran under — the `{container_id}` for the Container Files API, reusable as a `container_reference` in later requests. Present on every sandbox-executed call, even when no files changed."""
 
+    error: Optional[str] = None
+    r"""The error message when the sandbox call failed before producing a result, as echoed from a failed `shell_call_output` emission."""
+
     files: Optional[List[ShellCallOutputItemFile]] = None
     r"""Citations for the files the sandbox command created or modified, most-recently-touched first (at most 10). Retrieve them via the Container Files API."""
 
@@ -86,7 +91,7 @@ class ShellCallOutputItem(BaseModel):
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
-            ["container_id", "files", "id", "max_output_length", "status"]
+            ["container_id", "error", "files", "id", "max_output_length", "status"]
         )
         nullable_fields = set(["id", "max_output_length", "status"])
         serialized = handler(self)
