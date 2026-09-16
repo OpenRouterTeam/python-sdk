@@ -11,11 +11,12 @@ from openrouter.types import (
     OptionalNullable,
     UNSET,
     UNSET_SENTINEL,
+    UnrecognizedStr,
 )
 from openrouter.utils import FieldMetadata, HeaderMetadata
 import pydantic
 from pydantic import model_serializer
-from typing import Optional
+from typing import List, Literal, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypedDict, deprecated
 
 
@@ -147,6 +148,16 @@ class GetCurrentKeyRequest(BaseModel):
         return m
 
 
+AllowedDataRegion = Union[
+    Literal[
+        "global",
+        "europe",
+        "us",
+    ],
+    UnrecognizedStr,
+]
+
+
 @deprecated(
     "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
 )
@@ -180,6 +191,8 @@ class RateLimit(BaseModel):
 class GetCurrentKeyDataTypedDict(TypedDict):
     r"""Current API key information"""
 
+    allowed_data_regions: List[AllowedDataRegion]
+    r"""Data regions permitted for this API key by the guardrail policies on the key and the account regional-routing entitlement. Empty when no region is permitted. Reflects region policy only: other key restrictions, such as management keys being blocked from inference, still apply."""
     byok_usage: float
     r"""Total external BYOK usage (in USD) for the API key"""
     byok_usage_daily: float
@@ -226,6 +239,9 @@ class GetCurrentKeyDataTypedDict(TypedDict):
 
 class GetCurrentKeyData(BaseModel):
     r"""Current API key information"""
+
+    allowed_data_regions: List[AllowedDataRegion]
+    r"""Data regions permitted for this API key by the guardrail policies on the key and the account regional-routing entitlement. Empty when no region is permitted. Reflects region policy only: other key restrictions, such as management keys being blocked from inference, still apply."""
 
     byok_usage: float
     r"""Total external BYOK usage (in USD) for the API key"""
