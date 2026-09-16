@@ -48,7 +48,7 @@ OutputShellCallOutputItemTypeShellCallOutput = Literal["shell_call_output",]
 
 
 class OutputShellCallOutputItemTypedDict(TypedDict):
-    r"""A native `shell_call_output` item matching OpenAI's Responses API shape. Carries per-command stdout, stderr, and the exit/timeout outcome."""
+    r"""A native `shell_call_output` item matching OpenAI's Responses API shape. Carries per-command stdout, stderr, and the exit/timeout outcome. A sandbox failure terminates the item as `incomplete` with `error` set."""
 
     call_id: str
     id: str
@@ -58,13 +58,15 @@ class OutputShellCallOutputItemTypedDict(TypedDict):
     type: OutputShellCallOutputItemTypeShellCallOutput
     container_id: NotRequired[str]
     r"""The canonical container id the command ran under — the `{container_id}` for the Container Files API, reusable as a `container_reference` in later requests. Present on every sandbox-executed call, even when no files changed."""
+    error: NotRequired[str]
+    r"""The error message when the sandbox call failed before producing a result (for example, the per-user container limit was reached). Set together with `status: 'incomplete'` and an empty `output`; absent on a successful call."""
     files: NotRequired[List[OutputShellCallOutputItemFileTypedDict]]
     r"""Citations for the files the sandbox command created or modified, most-recently-touched first (at most 10). Retrieve them via the Container Files API."""
     max_output_length: NotRequired[Nullable[int]]
 
 
 class OutputShellCallOutputItem(BaseModel):
-    r"""A native `shell_call_output` item matching OpenAI's Responses API shape. Carries per-command stdout, stderr, and the exit/timeout outcome."""
+    r"""A native `shell_call_output` item matching OpenAI's Responses API shape. Carries per-command stdout, stderr, and the exit/timeout outcome. A sandbox failure terminates the item as `incomplete` with `error` set."""
 
     call_id: str
 
@@ -80,6 +82,9 @@ class OutputShellCallOutputItem(BaseModel):
     container_id: Optional[str] = None
     r"""The canonical container id the command ran under — the `{container_id}` for the Container Files API, reusable as a `container_reference` in later requests. Present on every sandbox-executed call, even when no files changed."""
 
+    error: Optional[str] = None
+    r"""The error message when the sandbox call failed before producing a result (for example, the per-user container limit was reached). Set together with `status: 'incomplete'` and an empty `output`; absent on a successful call."""
+
     files: Optional[List[OutputShellCallOutputItemFile]] = None
     r"""Citations for the files the sandbox command created or modified, most-recently-touched first (at most 10). Retrieve them via the Container Files API."""
 
@@ -87,7 +92,7 @@ class OutputShellCallOutputItem(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["container_id", "files", "max_output_length"])
+        optional_fields = set(["container_id", "error", "files", "max_output_length"])
         nullable_fields = set(["max_output_length"])
         serialized = handler(self)
         m = {}
