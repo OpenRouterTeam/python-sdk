@@ -1237,6 +1237,10 @@ if TYPE_CHECKING:
         FusionServerToolConfigTypedDict,
     )
     from .fusionsource import FusionSource, FusionSourceTypedDict
+    from .gatewaytimeoutresponseerrordata import (
+        GatewayTimeoutResponseErrorData,
+        GatewayTimeoutResponseErrorDataTypedDict,
+    )
     from .generationcontentdata import (
         GenerationContentData,
         GenerationContentDataOutput,
@@ -4157,6 +4161,8 @@ __all__ = [
     "FusionServerToolOpenRouterTypedDict",
     "FusionSource",
     "FusionSourceTypedDict",
+    "GatewayTimeoutResponseErrorData",
+    "GatewayTimeoutResponseErrorDataTypedDict",
     "GenerationContentData",
     "GenerationContentDataOutput",
     "GenerationContentDataOutputTypedDict",
@@ -6531,6 +6537,8 @@ _dynamic_imports: dict[str, str] = {
     "FusionServerToolConfigTypedDict": ".fusionservertoolconfig",
     "FusionSource": ".fusionsource",
     "FusionSourceTypedDict": ".fusionsource",
+    "GatewayTimeoutResponseErrorData": ".gatewaytimeoutresponseerrordata",
+    "GatewayTimeoutResponseErrorDataTypedDict": ".gatewaytimeoutresponseerrordata",
     "GenerationContentData": ".generationcontentdata",
     "GenerationContentDataOutput": ".generationcontentdata",
     "GenerationContentDataOutputTypedDict": ".generationcontentdata",

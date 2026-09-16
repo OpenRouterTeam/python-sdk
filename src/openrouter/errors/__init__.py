@@ -23,6 +23,10 @@ if TYPE_CHECKING:
         ForbiddenResponseError,
         ForbiddenResponseErrorData,
     )
+    from .gatewaytimeoutresponse_error import (
+        GatewayTimeoutResponseError,
+        GatewayTimeoutResponseErrorData,
+    )
     from .goneresponse_error import GoneResponseError, GoneResponseErrorData
     from .internalserverresponse_error import (
         InternalServerResponseError,
@@ -77,6 +81,8 @@ __all__ = [
     "EdgeNetworkTimeoutResponseErrorData",
     "ForbiddenResponseError",
     "ForbiddenResponseErrorData",
+    "GatewayTimeoutResponseError",
+    "GatewayTimeoutResponseErrorData",
     "GoneResponseError",
     "GoneResponseErrorData",
     "InternalServerResponseError",
@@ -118,6 +124,8 @@ _dynamic_imports: dict[str, str] = {
     "EdgeNetworkTimeoutResponseErrorData": ".edgenetworktimeoutresponse_error",
     "ForbiddenResponseError": ".forbiddenresponse_error",
     "ForbiddenResponseErrorData": ".forbiddenresponse_error",
+    "GatewayTimeoutResponseError": ".gatewaytimeoutresponse_error",
+    "GatewayTimeoutResponseErrorData": ".gatewaytimeoutresponse_error",
     "GoneResponseError": ".goneresponse_error",
     "GoneResponseErrorData": ".goneresponse_error",
     "InternalServerResponseError": ".internalserverresponse_error",
