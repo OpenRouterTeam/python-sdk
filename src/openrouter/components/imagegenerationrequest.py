@@ -121,6 +121,8 @@ class ImageGenerationRequestTypedDict(TypedDict):
     r"""Normalized resolution tier of the generated image. Concrete pixel dimensions are derived per-provider."""
     seed: NotRequired[int]
     r"""If specified, the generation will sample deterministically, such that repeated requests with the same seed and parameters should return the same result. Determinism is not guaranteed for all providers."""
+    session_id: NotRequired[str]
+    r"""A unique identifier for grouping related requests (e.g., a conversation or agent workflow). Used for observability grouping in Broadcast and private logging; never sent to the provider. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters."""
     size: NotRequired[str]
     r"""Optional. A convenience shorthand for output dimensions — pass a tier (\"2K\", \"4K\") or explicit pixels (\"2048x2048\") and we normalize it to the right dimensions for the chosen provider. A tier size is equivalent to setting `resolution` and combines with `aspect_ratio`. An explicit pixel size is authoritative: a mismatched `resolution` or `aspect_ratio` alongside it is rejected with a 400."""
     stream: NotRequired[bool]
@@ -170,6 +172,9 @@ class ImageGenerationRequest(BaseModel):
     seed: Optional[int] = None
     r"""If specified, the generation will sample deterministically, such that repeated requests with the same seed and parameters should return the same result. Determinism is not guaranteed for all providers."""
 
+    session_id: Optional[str] = None
+    r"""A unique identifier for grouping related requests (e.g., a conversation or agent workflow). Used for observability grouping in Broadcast and private logging; never sent to the provider. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters."""
+
     size: Optional[str] = None
     r"""Optional. A convenience shorthand for output dimensions — pass a tier (\"2K\", \"4K\") or explicit pixels (\"2048x2048\") and we normalize it to the right dimensions for the chosen provider. A tier size is equivalent to setting `resolution` and combines with `aspect_ratio`. An explicit pixel size is authoritative: a mismatched `resolution` or `aspect_ratio` alongside it is rejected with a 400."""
 
@@ -196,6 +201,7 @@ class ImageGenerationRequest(BaseModel):
                 "quality",
                 "resolution",
                 "seed",
+                "session_id",
                 "size",
                 "stream",
                 "trace",

@@ -737,6 +737,8 @@ class VideoGenerationRequestTypedDict(TypedDict):
     r"""Resolution of the generated video"""
     seed: NotRequired[int]
     r"""If specified, the generation will sample deterministically, such that repeated requests with the same seed and parameters should return the same result. Determinism is not guaranteed for all providers."""
+    session_id: NotRequired[str]
+    r"""A unique identifier for grouping related requests (e.g., a conversation or agent workflow). Used for observability grouping in Broadcast and private logging; never sent to the provider. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters."""
     size: NotRequired[str]
     r"""Exact pixel dimensions of the generated video in \"WIDTHxHEIGHT\" format (e.g. \"1280x720\"). Interchangeable with resolution + aspect_ratio."""
     trace: NotRequired[TraceConfigTypedDict]
@@ -783,6 +785,9 @@ class VideoGenerationRequest(BaseModel):
     seed: Optional[int] = None
     r"""If specified, the generation will sample deterministically, such that repeated requests with the same seed and parameters should return the same result. Determinism is not guaranteed for all providers."""
 
+    session_id: Optional[str] = None
+    r"""A unique identifier for grouping related requests (e.g., a conversation or agent workflow). Used for observability grouping in Broadcast and private logging; never sent to the provider. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters."""
+
     size: Optional[str] = None
     r"""Exact pixel dimensions of the generated video in \"WIDTHxHEIGHT\" format (e.g. \"1280x720\"). Interchangeable with resolution + aspect_ratio."""
 
@@ -810,6 +815,7 @@ class VideoGenerationRequest(BaseModel):
                 "provider",
                 "resolution",
                 "seed",
+                "session_id",
                 "size",
                 "trace",
                 "upscale_factor",

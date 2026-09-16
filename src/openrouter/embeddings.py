@@ -35,6 +35,7 @@ class Embeddings(BaseSDK):
                 components.ProviderPreferences, components.ProviderPreferencesTypedDict
             ]
         ] = UNSET,
+        session_id: Optional[str] = None,
         trace: Optional[
             Union[components.TraceConfig, components.TraceConfigTypedDict]
         ] = None,
@@ -62,6 +63,7 @@ class Embeddings(BaseSDK):
         :param encoding_format: The format of the output embeddings
         :param input_type: The type of input (e.g. search_query, search_document)
         :param provider:
+        :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow). Used for observability grouping in Broadcast and private logging; never sent to the provider. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters.
         :param trace: Metadata for observability and tracing. Known keys (trace_id, trace_name, span_name, generation_name, parent_span_id) have special handling. Additional keys are passed through as custom metadata to configured broadcast destinations.
         :param user: A unique identifier for the end-user
         :param retries: Override the default retry configuration for this method
@@ -93,6 +95,7 @@ class Embeddings(BaseSDK):
                 provider=utils.get_pydantic_model(
                     provider, OptionalNullable[components.ProviderPreferences]
                 ),
+                session_id=session_id,
                 trace=utils.get_pydantic_model(trace, Optional[components.TraceConfig]),
                 user=user,
             ),
@@ -259,6 +262,7 @@ class Embeddings(BaseSDK):
                 components.ProviderPreferences, components.ProviderPreferencesTypedDict
             ]
         ] = UNSET,
+        session_id: Optional[str] = None,
         trace: Optional[
             Union[components.TraceConfig, components.TraceConfigTypedDict]
         ] = None,
@@ -286,6 +290,7 @@ class Embeddings(BaseSDK):
         :param encoding_format: The format of the output embeddings
         :param input_type: The type of input (e.g. search_query, search_document)
         :param provider:
+        :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow). Used for observability grouping in Broadcast and private logging; never sent to the provider. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters.
         :param trace: Metadata for observability and tracing. Known keys (trace_id, trace_name, span_name, generation_name, parent_span_id) have special handling. Additional keys are passed through as custom metadata to configured broadcast destinations.
         :param user: A unique identifier for the end-user
         :param retries: Override the default retry configuration for this method
@@ -317,6 +322,7 @@ class Embeddings(BaseSDK):
                 provider=utils.get_pydantic_model(
                     provider, OptionalNullable[components.ProviderPreferences]
                 ),
+                session_id=session_id,
                 trace=utils.get_pydantic_model(trace, Optional[components.TraceConfig]),
                 user=user,
             ),

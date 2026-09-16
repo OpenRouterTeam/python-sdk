@@ -34,6 +34,7 @@ class Rerank(BaseSDK):
                 components.ProviderPreferences, components.ProviderPreferencesTypedDict
             ]
         ] = UNSET,
+        session_id: Optional[str] = None,
         top_n: Optional[int] = None,
         trace: Optional[
             Union[components.TraceConfig, components.TraceConfigTypedDict]
@@ -60,6 +61,7 @@ class Rerank(BaseSDK):
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
         :param provider:
+        :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow). Used for observability grouping in Broadcast and private logging; never sent to the provider. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters.
         :param top_n: Number of most relevant documents to return
         :param trace: Metadata for observability and tracing. Known keys (trace_id, trace_name, span_name, generation_name, parent_span_id) have special handling. Additional keys are passed through as custom metadata to configured broadcast destinations.
         :param user: A unique identifier representing your end-user. Forwarded to Broadcast and private logging as the end-user id; never sent to the provider.
@@ -92,6 +94,7 @@ class Rerank(BaseSDK):
                     provider, OptionalNullable[components.ProviderPreferences]
                 ),
                 query=query,
+                session_id=session_id,
                 top_n=top_n,
                 trace=utils.get_pydantic_model(trace, Optional[components.TraceConfig]),
                 user=user,
@@ -254,6 +257,7 @@ class Rerank(BaseSDK):
                 components.ProviderPreferences, components.ProviderPreferencesTypedDict
             ]
         ] = UNSET,
+        session_id: Optional[str] = None,
         top_n: Optional[int] = None,
         trace: Optional[
             Union[components.TraceConfig, components.TraceConfigTypedDict]
@@ -280,6 +284,7 @@ class Rerank(BaseSDK):
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
         :param provider:
+        :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow). Used for observability grouping in Broadcast and private logging; never sent to the provider. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters.
         :param top_n: Number of most relevant documents to return
         :param trace: Metadata for observability and tracing. Known keys (trace_id, trace_name, span_name, generation_name, parent_span_id) have special handling. Additional keys are passed through as custom metadata to configured broadcast destinations.
         :param user: A unique identifier representing your end-user. Forwarded to Broadcast and private logging as the end-user id; never sent to the provider.
@@ -312,6 +317,7 @@ class Rerank(BaseSDK):
                     provider, OptionalNullable[components.ProviderPreferences]
                 ),
                 query=query,
+                session_id=session_id,
                 top_n=top_n,
                 trace=utils.get_pydantic_model(trace, Optional[components.TraceConfig]),
                 user=user,

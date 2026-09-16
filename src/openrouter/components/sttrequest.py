@@ -64,6 +64,8 @@ class STTRequestTypedDict(TypedDict):
     r"""Provider-specific passthrough configuration"""
     response_format: NotRequired[STTRequestResponseFormat]
     r"""Output format. \"json\" (default) returns { text, usage }. \"verbose_json\" additionally returns task, language, duration, and segment-level timestamps; only supported by OpenAI-compatible providers."""
+    session_id: NotRequired[str]
+    r"""A unique identifier for grouping related requests (e.g., a conversation or agent workflow). Used for observability grouping in Broadcast and private logging; never sent to the provider. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters."""
     temperature: NotRequired[float]
     r"""Sampling temperature for transcription"""
     timestamp_granularities: NotRequired[List[STTTimestampGranularity]]
@@ -92,6 +94,9 @@ class STTRequest(BaseModel):
     response_format: Optional[STTRequestResponseFormat] = None
     r"""Output format. \"json\" (default) returns { text, usage }. \"verbose_json\" additionally returns task, language, duration, and segment-level timestamps; only supported by OpenAI-compatible providers."""
 
+    session_id: Optional[str] = None
+    r"""A unique identifier for grouping related requests (e.g., a conversation or agent workflow). Used for observability grouping in Broadcast and private logging; never sent to the provider. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters."""
+
     temperature: Optional[float] = None
     r"""Sampling temperature for transcription"""
 
@@ -111,6 +116,7 @@ class STTRequest(BaseModel):
                 "language",
                 "provider",
                 "response_format",
+                "session_id",
                 "temperature",
                 "timestamp_granularities",
                 "trace",

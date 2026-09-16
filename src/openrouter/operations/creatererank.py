@@ -140,6 +140,8 @@ class CreateRerankRequestBodyTypedDict(TypedDict):
     provider: NotRequired[
         Nullable[components_providerpreferences.ProviderPreferencesTypedDict]
     ]
+    session_id: NotRequired[str]
+    r"""A unique identifier for grouping related requests (e.g., a conversation or agent workflow). Used for observability grouping in Broadcast and private logging; never sent to the provider. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters."""
     top_n: NotRequired[int]
     r"""Number of most relevant documents to return"""
     trace: NotRequired[components_traceconfig.TraceConfigTypedDict]
@@ -164,6 +166,9 @@ class CreateRerankRequestBody(BaseModel):
         UNSET
     )
 
+    session_id: Optional[str] = None
+    r"""A unique identifier for grouping related requests (e.g., a conversation or agent workflow). Used for observability grouping in Broadcast and private logging; never sent to the provider. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters."""
+
     top_n: Optional[int] = None
     r"""Number of most relevant documents to return"""
 
@@ -175,7 +180,7 @@ class CreateRerankRequestBody(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["provider", "top_n", "trace", "user"])
+        optional_fields = set(["provider", "session_id", "top_n", "trace", "user"])
         nullable_fields = set(["provider"])
         serialized = handler(self)
         m = {}
