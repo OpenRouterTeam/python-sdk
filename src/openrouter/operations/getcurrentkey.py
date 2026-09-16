@@ -2,6 +2,9 @@
 
 from __future__ import annotations
 from datetime import datetime
+from openrouter.components import (
+    freemodeldailyrequests as components_freemodeldailyrequests,
+)
 from openrouter.types import (
     BaseModel,
     Nullable,
@@ -187,6 +190,10 @@ class GetCurrentKeyDataTypedDict(TypedDict):
     r"""External BYOK usage (in USD) for the current UTC week (Monday-Sunday)"""
     creator_user_id: Nullable[str]
     r"""The user ID of the key creator. For organization-owned keys, this is the member who created the key. For individual users, this is the user's own ID."""
+    free_model_daily_requests: (
+        components_freemodeldailyrequests.FreeModelDailyRequestsTypedDict
+    )
+    r"""Free-model (`:free` variant) daily request quota for the account that owns the key. Reports the same counter and tier limit that free-model enforcement reads for accounts subject to the free-model limits; the counter resets at UTC midnight. Accounts and endpoints exempt from free-model limits, and BYOK requests, are not gated by it, so `remaining` is the tier policy rather than an enforced ceiling for them."""
     include_byok_in_limit: bool
     r"""Whether to include external BYOK usage in the credit limit"""
     is_free_tier: bool
@@ -234,6 +241,9 @@ class GetCurrentKeyData(BaseModel):
 
     creator_user_id: Nullable[str]
     r"""The user ID of the key creator. For organization-owned keys, this is the member who created the key. For individual users, this is the user's own ID."""
+
+    free_model_daily_requests: components_freemodeldailyrequests.FreeModelDailyRequests
+    r"""Free-model (`:free` variant) daily request quota for the account that owns the key. Reports the same counter and tier limit that free-model enforcement reads for accounts subject to the free-model limits; the counter resets at UTC midnight. Accounts and endpoints exempt from free-model limits, and BYOK requests, are not gated by it, so `remaining` is the tier policy rather than an enforced ceiling for them."""
 
     include_byok_in_limit: bool
     r"""Whether to include external BYOK usage in the credit limit"""

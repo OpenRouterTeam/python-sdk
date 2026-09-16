@@ -1117,6 +1117,10 @@ if TYPE_CHECKING:
         FrameImageTypedDict,
         FrameType,
     )
+    from .freemodeldailyrequests import (
+        FreeModelDailyRequests,
+        FreeModelDailyRequestsTypedDict,
+    )
     from .functioncallargsdeltaevent import (
         FunctionCallArgsDeltaEvent,
         FunctionCallArgsDeltaEventType,
@@ -4083,6 +4087,8 @@ __all__ = [
     "FrameImageType",
     "FrameImageTypedDict",
     "FrameType",
+    "FreeModelDailyRequests",
+    "FreeModelDailyRequestsTypedDict",
     "FunctionCallArgsDeltaEvent",
     "FunctionCallArgsDeltaEventType",
     "FunctionCallArgsDeltaEventTypedDict",
@@ -6440,6 +6446,8 @@ _dynamic_imports: dict[str, str] = {
     "FrameImageType": ".frameimage",
     "FrameImageTypedDict": ".frameimage",
     "FrameType": ".frameimage",
+    "FreeModelDailyRequests": ".freemodeldailyrequests",
+    "FreeModelDailyRequestsTypedDict": ".freemodeldailyrequests",
     "FunctionCallArgsDeltaEvent": ".functioncallargsdeltaevent",
     "FunctionCallArgsDeltaEventType": ".functioncallargsdeltaevent",
     "FunctionCallArgsDeltaEventTypedDict": ".functioncallargsdeltaevent",
