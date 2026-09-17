@@ -29,7 +29,7 @@ class Containers(BaseSDK):
     ) -> components.ContainerFileListResponse:
         r"""List container files
 
-        Lists the files in a container, in lexicographic path order. The container id is the canonical id returned in bash/shell tool results; a restarted session is a separate container with its own id. Paginate with `limit` and `after` (pass the previous page’s `last_id`); `has_more: true` always means the next page is fetchable that way.
+        Lists the files in a container, in lexicographic path order. The container id is the canonical id returned in bash/shell tool results; a restarted session is a separate container with its own id. Paginate with `limit` and `after` (pass the previous page’s `last_id`); `has_more: true` always means the next page is fetchable that way. `last_id` is the resume cursor: it is the last listed file’s id, except when a page ends at the per-request scan bound on hidden bookkeeping objects, where it names the scan position instead and may not appear in `data` (which can then be empty).
 
         :param container_id: The canonical container id, exactly as returned in a bash/shell tool result — a restarted session has its own `-r<nonce>`-suffixed id. A session-derived id is always `sess_` + the sanitized session key, which is not necessarily the raw session id that was sent.
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
@@ -40,7 +40,7 @@ class Containers(BaseSDK):
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
         :param limit: Maximum number of files to return (1-1000). Defaults to 100 when absent.
-        :param after: Forward cursor: a container file id from a previous page (typically `last_id`); listing resumes strictly after that file.
+        :param after: Forward cursor: the previous page’s `last_id` (or any container file id); listing resumes strictly after that path.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -180,7 +180,7 @@ class Containers(BaseSDK):
     ) -> components.ContainerFileListResponse:
         r"""List container files
 
-        Lists the files in a container, in lexicographic path order. The container id is the canonical id returned in bash/shell tool results; a restarted session is a separate container with its own id. Paginate with `limit` and `after` (pass the previous page’s `last_id`); `has_more: true` always means the next page is fetchable that way.
+        Lists the files in a container, in lexicographic path order. The container id is the canonical id returned in bash/shell tool results; a restarted session is a separate container with its own id. Paginate with `limit` and `after` (pass the previous page’s `last_id`); `has_more: true` always means the next page is fetchable that way. `last_id` is the resume cursor: it is the last listed file’s id, except when a page ends at the per-request scan bound on hidden bookkeeping objects, where it names the scan position instead and may not appear in `data` (which can then be empty).
 
         :param container_id: The canonical container id, exactly as returned in a bash/shell tool result — a restarted session has its own `-r<nonce>`-suffixed id. A session-derived id is always `sess_` + the sanitized session key, which is not necessarily the raw session id that was sent.
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
@@ -191,7 +191,7 @@ class Containers(BaseSDK):
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
         :param limit: Maximum number of files to return (1-1000). Defaults to 100 when absent.
-        :param after: Forward cursor: a container file id from a previous page (typically `last_id`); listing resumes strictly after that file.
+        :param after: Forward cursor: the previous page’s `last_id` (or any container file id); listing resumes strictly after that path.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds

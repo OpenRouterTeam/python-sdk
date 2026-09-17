@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c48cf606-fb42-4a45-9c23-8f0555307828
 management:
-  docChecksum: 25847ffa971a9e8d114afce29b7764b7
+  docChecksum: 32117153e3b76b100a2bc31ed1e162aa
   docVersion: 1.0.0
   speakeasyVersion: 1.787.0
   generationVersion: 2.914.0
-  releaseVersion: 1.1.155
-  configChecksum: cf4350f470ec772a52ab95921b521f2f
+  releaseVersion: 1.1.156
+  configChecksum: 5c41c3d1d7a24cff576ba99e5a3d87e6
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
 persistentEdits:
-  generation_id: 233a8623-f91f-4692-8456-e2275a374225
-  pristine_commit_hash: 426e4f85cc5a18a466e0588de1a733285ba45286
-  pristine_tree_hash: 6ff1b1ae5d6424f700af349f844d7a5a13fbb0b6
+  generation_id: 0a848989-5d90-41f1-a0b2-dc6e1080c605
+  pristine_commit_hash: f63c115411f8a9fd2f01123c6319f1d08d9b88b3
+  pristine_tree_hash: 5098e6125cece174513ddb1d61efe493f135e477
 features:
   python:
     acceptHeaders: 3.0.0
@@ -1422,8 +1422,8 @@ trackedFiles:
     pristine_git_object: 63e4189bba46c38e97e0ec81edb9949a088438b3
   docs/components/containerfilelistresponse.mdx:
     id: 1e09ddf3473c
-    last_write_checksum: sha1:efcc514ed1a2090ed2c7c1a383fa8949fe87e412
-    pristine_git_object: b1a1d9ad5a961fd06abd7e5377130034b714d768
+    last_write_checksum: sha1:3d52d8f8544cfccd9b0d73c97660f767f8c76bd3
+    pristine_git_object: 10eb459aaf72279b2042035007d79a22ac6c472f
   docs/components/containerfilelistresponseobject.mdx:
     id: bd9847deeba3
     last_write_checksum: sha1:76c4e51ee62059e3e234142d1d8ba71773d5a9c6
@@ -7082,8 +7082,8 @@ trackedFiles:
     pristine_git_object: 3bd312de040f562fc4b66811f89db0b06483ec1d
   docs/operations/listcontainerfilesrequest.mdx:
     id: 54073da72503
-    last_write_checksum: sha1:f9626b9daf076c5d121827e028328bce2266b49e
-    pristine_git_object: 1b42a2f26306208c8c700bcd256f31edaf443b74
+    last_write_checksum: sha1:59ba17191d4169cc9694e004eb28a9a2f7c688c6
+    pristine_git_object: 5164f3178bdb8dfc0984d723a0f5a9d467ff5250
   docs/operations/listdata.mdx:
     id: 949d8d9f5ac7
     last_write_checksum: sha1:ad6cfad0f973f73ffc93542796af523c275eb535
@@ -7778,8 +7778,8 @@ trackedFiles:
     pristine_git_object: bed5f74e5e8269cbba66943524ffa5206c933de3
   docs/sdks/containers/README.mdx:
     id: cc963972ad75
-    last_write_checksum: sha1:37ddd77ce960000f8d6b5a4ed8aa47fcecd1bf0a
-    pristine_git_object: 6c2119cad00e2ae8009e1349851fd0c915b89bc8
+    last_write_checksum: sha1:074510fd249616355476609d7c5a0e0124082949
+    pristine_git_object: a616e87543c27d3c273460512c37774a98af78f5
   docs/sdks/credits/README.mdx:
     id: 2ba51de8de3f
     last_write_checksum: sha1:08de2963f78b645eaa14fa8511552bae2ddccd75
@@ -7878,8 +7878,8 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:cb12e064674d7fec04e2e6539dfa8fd4ee676da5
-    pristine_git_object: 064099c56177379e40658b00dd72c940a589e4e2
+    last_write_checksum: sha1:85a5a4a29b4e7d11abc3ecbfa150e4d41cbc7b54
+    pristine_git_object: ab9aa030783b24f633d2d572f1d28b213281446f
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77f44b60b98bc126557ec27391f91dfba764bb54
@@ -7906,8 +7906,8 @@ trackedFiles:
     pristine_git_object: 86713cfea633e09d33b3d4e65281071fe20e6137
   src/openrouter/_version.py:
     id: d8d15ad6c586
-    last_write_checksum: sha1:3e504bc6365fa0f8fa750b7da0e8c8d9d19aedb8
-    pristine_git_object: dd5994a836b83a74bbdf39015eeacddbf60e7b43
+    last_write_checksum: sha1:fb5e9926210f311c22f6d28267f6306969fa6ed2
+    pristine_git_object: 1c31f98a0e477fd3439e344061bb0e1e7aff7c64
   src/openrouter/analytics.py:
     id: cb406b5aaabb
     last_write_checksum: sha1:1e0004d8d1d5d797e2b54cd1cabeb7f9489d08e9
@@ -8578,8 +8578,8 @@ trackedFiles:
     pristine_git_object: f9011f64bbd23aea72fa4d9a72bce9095da6c1c9
   src/openrouter/components/containerfilelistresponse.py:
     id: f1d494b9a4e9
-    last_write_checksum: sha1:cfcee9763748a5ad9ea44d0da222e2ecca8635b5
-    pristine_git_object: a2593a4d8fab2fda41f2476015a4f60f9898da2f
+    last_write_checksum: sha1:e0601115973be4896c45337622472c0ede1f2baf
+    pristine_git_object: a3ef1a4846e922e0cffef9045414a1f7b60e9bae
   src/openrouter/components/containernetworkpolicy.py:
     id: 1220566c09a4
     last_write_checksum: sha1:2753c594b183ed5a881591ffe473fcc3763afb6f
@@ -10574,8 +10574,8 @@ trackedFiles:
     pristine_git_object: ad78361d147d2edb7b5772c14501d9c25a2000b0
   src/openrouter/containers.py:
     id: 5edae5db57e9
-    last_write_checksum: sha1:b8bbbc0adfb30c63c1d6c304f204057034c9319c
-    pristine_git_object: 6cf0e3473384453e37fd5c199a3c680e97dc8a21
+    last_write_checksum: sha1:f85e2c6690147ccae53d67d70951b60b9a040e36
+    pristine_git_object: b0b365c046b2cd3812f60f2f3f2dff6189bede7e
   src/openrouter/credits.py:
     id: cdc961937101
     last_write_checksum: sha1:7ac37671d3de537eb98f15239d531e3ab3928a59
@@ -11022,8 +11022,8 @@ trackedFiles:
     pristine_git_object: 0d9dfb02d81d5cec8dc88e42e1ba4b42122649c0
   src/openrouter/operations/listcontainerfiles.py:
     id: 7a30b9291c76
-    last_write_checksum: sha1:82f933f8c2581d5f92db7312335ee3eacb23b12d
-    pristine_git_object: 07682b2f93dabf60639454d4969ed0fc9843af44
+    last_write_checksum: sha1:c51c428703923d69ea0fd6178d6313314e7b0ee9
+    pristine_git_object: 47015cefac479e2b5a5d7065fdafa7f94d53f25e
   src/openrouter/operations/listembeddingsmodels.py:
     id: bf749a1f23d6
     last_write_checksum: sha1:938440c9b9df0c3d8430792f262bffced0207d13
@@ -14471,12 +14471,3 @@ examples:
         "500":
           application/json: {"error": {"code": "not_found", "message": "Intern not found"}}
 examplesVersion: 1.0.2
-releaseNotes: |
-  ## Python SDK Changes:
-  * `open_router.interns.list_interns()`: **Added**
-  * `open_router.interns.create_intern()`: **Added**
-  * `open_router.interns.delete_intern()`: **Added**
-  * `open_router.interns.get_intern()`: **Added**
-  * `open_router.interns.update_intern()`: **Added**
-  * `open_router.interns.provision_intern()`: **Added**
-  * `open_router.interns.suspend_intern()`: **Added**
