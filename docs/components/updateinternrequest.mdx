@@ -1,0 +1,15 @@
+---
+title: "UpdateInternRequest"
+---
+
+Lifecycle settings to change. Omitted fields stay unchanged and null clears a field.
+
+
+## Fields
+
+| Field                                                           | Type                                                            | Required                                                        | Description                                                     |
+| --------------------------------------------------------------- | --------------------------------------------------------------- | --------------------------------------------------------------- | --------------------------------------------------------------- |
+| `description`                                                   | *OptionalNullable[str]*                                         | :heavy_minus_sign:                                              | New free-form description. Null clears it.                      |
+| `instructions`                                                  | *OptionalNullable[str]*                                         | :heavy_minus_sign:                                              | New standing instructions. Null clears them.                    |
+| `model`                                                         | *OptionalNullable[str]*                                         | :heavy_minus_sign:                                              | New OpenRouter model slug. Null restores the workspace default. |
+| `name`                                                          | *Optional[str]*                                                 | :heavy_minus_sign:                                              | New intern name, unique per creator within the workspace.       |

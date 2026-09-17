@@ -1,0 +1,359 @@
+---
+title: "Interns"
+description: "Create, inspect, update, provision, suspend and delete OpenRouter interns through an API key."
+---
+
+## Overview
+
+Create, inspect, update, provision, suspend and delete OpenRouter interns through an API key.
+
+### Available Operations
+
+* [list_interns](#list_interns) - List interns
+* [create_intern](#create_intern) - Create an intern
+* [delete_intern](#delete_intern) - Delete an intern
+* [get_intern](#get_intern) - Get an intern
+* [update_intern](#update_intern) - Update an intern
+* [provision_intern](#provision_intern) - Provision an intern
+* [suspend_intern](#suspend_intern) - Suspend an intern
+
+## list_interns
+
+Lists interns visible to the authenticated key, newest first. Filter by workspace and one or more lifecycle statuses. The API key selects the caller, workspace and visible interns. There is no default workspace fallback. Requests on regional hostnames such as `eu.openrouter.ai` are refused. [API key](/docs/api-reference/authentication) required.
+
+### Example Usage
+
+```python
+from openrouter import OpenRouter
+import os
+
+
+with OpenRouter(
+    http_referer="<value>",
+    x_open_router_title="<value>",
+    x_open_router_categories="<value>",
+    api_key=os.getenv("OPENROUTER_API_KEY", ""),
+) as open_router:
+
+    res = open_router.interns.list_interns()
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                                                                                                         | Type                                                                                                                                              | Required                                                                                                                                          | Description                                                                                                                                       | Example                                                                                                                                           |
+| ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `http_referer`                                                                                                                                    | *Optional[str]*                                                                                                                                   | :heavy_minus_sign:                                                                                                                                | The app identifier should be your app's URL and is used as the primary identifier for rankings.<br/>This is used to track API usage per application.<br/> |                                                                                                                                                   |
+| `x_open_router_title`                                                                                                                             | *Optional[str]*                                                                                                                                   | :heavy_minus_sign:                                                                                                                                | The app display name allows you to customize how your app appears in OpenRouter's dashboard.<br/>                                                 |                                                                                                                                                   |
+| `x_open_router_categories`                                                                                                                        | *Optional[str]*                                                                                                                                   | :heavy_minus_sign:                                                                                                                                | Comma-separated list of app categories (e.g. "cli-agent,cloud-agent"). Used for marketplace rankings.<br/>                                        |                                                                                                                                                   |
+| `limit`                                                                                                                                           | *Optional[int]*                                                                                                                                   | :heavy_minus_sign:                                                                                                                                | Maximum number of interns to return, from 1 through 500.                                                                                          | 50                                                                                                                                                |
+| `status`                                                                                                                                          | List[[operations.Status](../../operations/status.mdx)]                                                                                             | :heavy_minus_sign:                                                                                                                                | Comma-separated lifecycle statuses to include.                                                                                                    | [<br/>"queued",<br/>"running"<br/>]                                                                                                               |
+| `workspace_id`                                                                                                                                    | *Optional[str]*                                                                                                                                   | :heavy_minus_sign:                                                                                                                                | Only return interns in this workspace. It must match the API key workspace.                                                                       | 89f9f5b2-3f89-4eaf-83ca-5ceae149e8bb                                                                                                              |
+| `retries`                                                                                                                                         | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.mdx)                                                                                  | :heavy_minus_sign:                                                                                                                                | Configuration to override the default retry behavior of the client.                                                                               |                                                                                                                                                   |
+
+### Response
+
+**[components.InternListResponse](../../components/internlistresponse.mdx)**
+
+### Errors
+
+| Error Type                    | Status Code                   | Content Type                  |
+| ----------------------------- | ----------------------------- | ----------------------------- |
+| errors.InternLifecycleError   | 400, 401, 403, 404, 408       | application/json              |
+| errors.InternLifecycleError   | 500                           | application/json              |
+| errors.OpenRouterDefaultError | 4XX, 5XX                      | \*/\*                         |
+
+## create_intern
+
+Creates an intern in an explicit workspace. The operation also creates its private vault. It can start provisioning immediately or wait for a later provision call. A retry with the same idempotency key and body resumes unfinished work. The request body is capped at 1048576 bytes and a larger body is refused with 413. The API key selects the caller, workspace and visible interns. There is no default workspace fallback. Requests on regional hostnames such as `eu.openrouter.ai` are refused. [API key](/docs/api-reference/authentication) required.
+
+### Example Usage
+
+```python
+from openrouter import OpenRouter
+import os
+
+
+with OpenRouter(
+    http_referer="<value>",
+    x_open_router_title="<value>",
+    x_open_router_categories="<value>",
+    api_key=os.getenv("OPENROUTER_API_KEY", ""),
+) as open_router:
+
+    res = open_router.interns.create_intern(name="research-assistant", workspace_id="89f9f5b2-3f89-4eaf-83ca-5ceae149e8bb", provision=True)
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                                                                                                         | Type                                                                                                                                              | Required                                                                                                                                          | Description                                                                                                                                       | Example                                                                                                                                           |
+| ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `name`                                                                                                                                            | *str*                                                                                                                                             | :heavy_check_mark:                                                                                                                                | Intern name, unique per creator within the workspace.                                                                                             |                                                                                                                                                   |
+| `workspace_id`                                                                                                                                    | *str*                                                                                                                                             | :heavy_check_mark:                                                                                                                                | Workspace that will own the intern. It must match the API key workspace.                                                                          |                                                                                                                                                   |
+| `http_referer`                                                                                                                                    | *Optional[str]*                                                                                                                                   | :heavy_minus_sign:                                                                                                                                | The app identifier should be your app's URL and is used as the primary identifier for rankings.<br/>This is used to track API usage per application.<br/> |                                                                                                                                                   |
+| `x_open_router_title`                                                                                                                             | *Optional[str]*                                                                                                                                   | :heavy_minus_sign:                                                                                                                                | The app display name allows you to customize how your app appears in OpenRouter's dashboard.<br/>                                                 |                                                                                                                                                   |
+| `x_open_router_categories`                                                                                                                        | *Optional[str]*                                                                                                                                   | :heavy_minus_sign:                                                                                                                                | Comma-separated list of app categories (e.g. "cli-agent,cloud-agent"). Used for marketplace rankings.<br/>                                        |                                                                                                                                                   |
+| `idempotency_key`                                                                                                                                 | *Optional[str]*                                                                                                                                   | :heavy_minus_sign:                                                                                                                                | Key that makes retries resume the same create operation. Without one, the server derives a stable key from the request body.                      | create-research-assistant-2026-09-16                                                                                                              |
+| `description`                                                                                                                                     | *OptionalNullable[str]*                                                                                                                           | :heavy_minus_sign:                                                                                                                                | Free-form description, or null.                                                                                                                   |                                                                                                                                                   |
+| `instructions`                                                                                                                                    | *OptionalNullable[str]*                                                                                                                           | :heavy_minus_sign:                                                                                                                                | Standing instructions the intern boots with, or null.                                                                                             |                                                                                                                                                   |
+| `provision`                                                                                                                                       | *Optional[bool]*                                                                                                                                  | :heavy_minus_sign:                                                                                                                                | Start provisioning during this create operation. Defaults to false.                                                                               |                                                                                                                                                   |
+| `vault_id`                                                                                                                                        | *Optional[str]*                                                                                                                                   | :heavy_minus_sign:                                                                                                                                | Vault owned by another intern in this workspace to attach as a borrowed vault.                                                                    |                                                                                                                                                   |
+| `retries`                                                                                                                                         | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.mdx)                                                                                  | :heavy_minus_sign:                                                                                                                                | Configuration to override the default retry behavior of the client.                                                                               |                                                                                                                                                   |
+
+### Response
+
+**[components.Intern](../../components/intern.mdx)**
+
+### Errors
+
+| Error Type                        | Status Code                       | Content Type                      |
+| --------------------------------- | --------------------------------- | --------------------------------- |
+| errors.InternLifecycleError       | 400, 401, 403, 404, 408, 409, 413 | application/json                  |
+| errors.InternLifecycleError       | 500, 502                          | application/json                  |
+| errors.OpenRouterDefaultError     | 4XX, 5XX                          | \*/\*                             |
+
+## delete_intern
+
+Starts safe teardown of the intern, its runtime and its private vault. The API key selects the caller, workspace and visible interns. There is no default workspace fallback. Requests on regional hostnames such as `eu.openrouter.ai` are refused. [API key](/docs/api-reference/authentication) required.
+
+### Example Usage
+
+```python
+from openrouter import OpenRouter
+import os
+
+
+with OpenRouter(
+    http_referer="<value>",
+    x_open_router_title="<value>",
+    x_open_router_categories="<value>",
+    api_key=os.getenv("OPENROUTER_API_KEY", ""),
+) as open_router:
+
+    res = open_router.interns.delete_intern(intern_id="7c9e6679-7425-40de-944b-e07fc1f90ae7")
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                                                                                                         | Type                                                                                                                                              | Required                                                                                                                                          | Description                                                                                                                                       | Example                                                                                                                                           |
+| ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `intern_id`                                                                                                                                       | *str*                                                                                                                                             | :heavy_check_mark:                                                                                                                                | ID of an intern visible to the authenticated API key.                                                                                             | 7c9e6679-7425-40de-944b-e07fc1f90ae7                                                                                                              |
+| `http_referer`                                                                                                                                    | *Optional[str]*                                                                                                                                   | :heavy_minus_sign:                                                                                                                                | The app identifier should be your app's URL and is used as the primary identifier for rankings.<br/>This is used to track API usage per application.<br/> |                                                                                                                                                   |
+| `x_open_router_title`                                                                                                                             | *Optional[str]*                                                                                                                                   | :heavy_minus_sign:                                                                                                                                | The app display name allows you to customize how your app appears in OpenRouter's dashboard.<br/>                                                 |                                                                                                                                                   |
+| `x_open_router_categories`                                                                                                                        | *Optional[str]*                                                                                                                                   | :heavy_minus_sign:                                                                                                                                | Comma-separated list of app categories (e.g. "cli-agent,cloud-agent"). Used for marketplace rankings.<br/>                                        |                                                                                                                                                   |
+| `retries`                                                                                                                                         | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.mdx)                                                                                  | :heavy_minus_sign:                                                                                                                                | Configuration to override the default retry behavior of the client.                                                                               |                                                                                                                                                   |
+
+### Response
+
+**[components.DeleteInternResponse](../../components/deleteinternresponse.mdx)**
+
+### Errors
+
+| Error Type                    | Status Code                   | Content Type                  |
+| ----------------------------- | ----------------------------- | ----------------------------- |
+| errors.InternLifecycleError   | 401, 403, 404, 408, 409       | application/json              |
+| errors.InternLifecycleError   | 500, 502                      | application/json              |
+| errors.OpenRouterDefaultError | 4XX, 5XX                      | \*/\*                         |
+
+## get_intern
+
+Returns the public lifecycle state and settings for one visible intern. The API key selects the caller, workspace and visible interns. There is no default workspace fallback. Requests on regional hostnames such as `eu.openrouter.ai` are refused. [API key](/docs/api-reference/authentication) required.
+
+### Example Usage
+
+```python
+from openrouter import OpenRouter
+import os
+
+
+with OpenRouter(
+    http_referer="<value>",
+    x_open_router_title="<value>",
+    x_open_router_categories="<value>",
+    api_key=os.getenv("OPENROUTER_API_KEY", ""),
+) as open_router:
+
+    res = open_router.interns.get_intern(intern_id="7c9e6679-7425-40de-944b-e07fc1f90ae7")
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                                                                                                         | Type                                                                                                                                              | Required                                                                                                                                          | Description                                                                                                                                       | Example                                                                                                                                           |
+| ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `intern_id`                                                                                                                                       | *str*                                                                                                                                             | :heavy_check_mark:                                                                                                                                | ID of an intern visible to the authenticated API key.                                                                                             | 7c9e6679-7425-40de-944b-e07fc1f90ae7                                                                                                              |
+| `http_referer`                                                                                                                                    | *Optional[str]*                                                                                                                                   | :heavy_minus_sign:                                                                                                                                | The app identifier should be your app's URL and is used as the primary identifier for rankings.<br/>This is used to track API usage per application.<br/> |                                                                                                                                                   |
+| `x_open_router_title`                                                                                                                             | *Optional[str]*                                                                                                                                   | :heavy_minus_sign:                                                                                                                                | The app display name allows you to customize how your app appears in OpenRouter's dashboard.<br/>                                                 |                                                                                                                                                   |
+| `x_open_router_categories`                                                                                                                        | *Optional[str]*                                                                                                                                   | :heavy_minus_sign:                                                                                                                                | Comma-separated list of app categories (e.g. "cli-agent,cloud-agent"). Used for marketplace rankings.<br/>                                        |                                                                                                                                                   |
+| `retries`                                                                                                                                         | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.mdx)                                                                                  | :heavy_minus_sign:                                                                                                                                | Configuration to override the default retry behavior of the client.                                                                               |                                                                                                                                                   |
+
+### Response
+
+**[components.Intern](../../components/intern.mdx)**
+
+### Errors
+
+| Error Type                    | Status Code                   | Content Type                  |
+| ----------------------------- | ----------------------------- | ----------------------------- |
+| errors.InternLifecycleError   | 401, 403, 404, 408            | application/json              |
+| errors.InternLifecycleError   | 500                           | application/json              |
+| errors.OpenRouterDefaultError | 4XX, 5XX                      | \*/\*                         |
+
+## update_intern
+
+Changes the intern name, description, instructions or model. Omitted fields stay unchanged. The request body is capped at 1048576 bytes and a larger body is refused with 413. The API key selects the caller, workspace and visible interns. There is no default workspace fallback. Requests on regional hostnames such as `eu.openrouter.ai` are refused. [API key](/docs/api-reference/authentication) required.
+
+### Example Usage
+
+```python
+from openrouter import OpenRouter
+import os
+
+
+with OpenRouter(
+    http_referer="<value>",
+    x_open_router_title="<value>",
+    x_open_router_categories="<value>",
+    api_key=os.getenv("OPENROUTER_API_KEY", ""),
+) as open_router:
+
+    res = open_router.interns.update_intern(intern_id="7c9e6679-7425-40de-944b-e07fc1f90ae7", description="Researches customer questions", model="openai/gpt-5.4")
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                                                                                                         | Type                                                                                                                                              | Required                                                                                                                                          | Description                                                                                                                                       | Example                                                                                                                                           |
+| ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `intern_id`                                                                                                                                       | *str*                                                                                                                                             | :heavy_check_mark:                                                                                                                                | ID of an intern visible to the authenticated API key.                                                                                             | 7c9e6679-7425-40de-944b-e07fc1f90ae7                                                                                                              |
+| `http_referer`                                                                                                                                    | *Optional[str]*                                                                                                                                   | :heavy_minus_sign:                                                                                                                                | The app identifier should be your app's URL and is used as the primary identifier for rankings.<br/>This is used to track API usage per application.<br/> |                                                                                                                                                   |
+| `x_open_router_title`                                                                                                                             | *Optional[str]*                                                                                                                                   | :heavy_minus_sign:                                                                                                                                | The app display name allows you to customize how your app appears in OpenRouter's dashboard.<br/>                                                 |                                                                                                                                                   |
+| `x_open_router_categories`                                                                                                                        | *Optional[str]*                                                                                                                                   | :heavy_minus_sign:                                                                                                                                | Comma-separated list of app categories (e.g. "cli-agent,cloud-agent"). Used for marketplace rankings.<br/>                                        |                                                                                                                                                   |
+| `description`                                                                                                                                     | *OptionalNullable[str]*                                                                                                                           | :heavy_minus_sign:                                                                                                                                | New free-form description. Null clears it.                                                                                                        |                                                                                                                                                   |
+| `instructions`                                                                                                                                    | *OptionalNullable[str]*                                                                                                                           | :heavy_minus_sign:                                                                                                                                | New standing instructions. Null clears them.                                                                                                      |                                                                                                                                                   |
+| `model`                                                                                                                                           | *OptionalNullable[str]*                                                                                                                           | :heavy_minus_sign:                                                                                                                                | New OpenRouter model slug. Null restores the workspace default.                                                                                   |                                                                                                                                                   |
+| `name`                                                                                                                                            | *Optional[str]*                                                                                                                                   | :heavy_minus_sign:                                                                                                                                | New intern name, unique per creator within the workspace.                                                                                         |                                                                                                                                                   |
+| `retries`                                                                                                                                         | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.mdx)                                                                                  | :heavy_minus_sign:                                                                                                                                | Configuration to override the default retry behavior of the client.                                                                               |                                                                                                                                                   |
+
+### Response
+
+**[components.Intern](../../components/intern.mdx)**
+
+### Errors
+
+| Error Type                    | Status Code                   | Content Type                  |
+| ----------------------------- | ----------------------------- | ----------------------------- |
+| errors.InternLifecycleError   | 400, 401, 403, 404, 408, 413  | application/json              |
+| errors.InternLifecycleError   | 500                           | application/json              |
+| errors.OpenRouterDefaultError | 4XX, 5XX                      | \*/\*                         |
+
+## provision_intern
+
+Starts the first boot, or resumes an intern after suspension. The API key selects the caller, workspace and visible interns. There is no default workspace fallback. Requests on regional hostnames such as `eu.openrouter.ai` are refused. [API key](/docs/api-reference/authentication) required.
+
+### Example Usage
+
+```python
+from openrouter import OpenRouter
+import os
+
+
+with OpenRouter(
+    http_referer="<value>",
+    x_open_router_title="<value>",
+    x_open_router_categories="<value>",
+    api_key=os.getenv("OPENROUTER_API_KEY", ""),
+) as open_router:
+
+    res = open_router.interns.provision_intern(intern_id="7c9e6679-7425-40de-944b-e07fc1f90ae7")
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                                                                                                         | Type                                                                                                                                              | Required                                                                                                                                          | Description                                                                                                                                       | Example                                                                                                                                           |
+| ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `intern_id`                                                                                                                                       | *str*                                                                                                                                             | :heavy_check_mark:                                                                                                                                | ID of an intern visible to the authenticated API key.                                                                                             | 7c9e6679-7425-40de-944b-e07fc1f90ae7                                                                                                              |
+| `http_referer`                                                                                                                                    | *Optional[str]*                                                                                                                                   | :heavy_minus_sign:                                                                                                                                | The app identifier should be your app's URL and is used as the primary identifier for rankings.<br/>This is used to track API usage per application.<br/> |                                                                                                                                                   |
+| `x_open_router_title`                                                                                                                             | *Optional[str]*                                                                                                                                   | :heavy_minus_sign:                                                                                                                                | The app display name allows you to customize how your app appears in OpenRouter's dashboard.<br/>                                                 |                                                                                                                                                   |
+| `x_open_router_categories`                                                                                                                        | *Optional[str]*                                                                                                                                   | :heavy_minus_sign:                                                                                                                                | Comma-separated list of app categories (e.g. "cli-agent,cloud-agent"). Used for marketplace rankings.<br/>                                        |                                                                                                                                                   |
+| `retries`                                                                                                                                         | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.mdx)                                                                                  | :heavy_minus_sign:                                                                                                                                | Configuration to override the default retry behavior of the client.                                                                               |                                                                                                                                                   |
+
+### Response
+
+**[components.ProvisionInternResponse](../../components/provisioninternresponse.mdx)**
+
+### Errors
+
+| Error Type                    | Status Code                   | Content Type                  |
+| ----------------------------- | ----------------------------- | ----------------------------- |
+| errors.InternLifecycleError   | 401, 403, 404, 408, 409       | application/json              |
+| errors.InternLifecycleError   | 500, 502                      | application/json              |
+| errors.OpenRouterDefaultError | 4XX, 5XX                      | \*/\*                         |
+
+## suspend_intern
+
+Stops the intern runtime while keeping its disk and configuration for a later provision call. The API key selects the caller, workspace and visible interns. There is no default workspace fallback. Requests on regional hostnames such as `eu.openrouter.ai` are refused. [API key](/docs/api-reference/authentication) required.
+
+### Example Usage
+
+```python
+from openrouter import OpenRouter
+import os
+
+
+with OpenRouter(
+    http_referer="<value>",
+    x_open_router_title="<value>",
+    x_open_router_categories="<value>",
+    api_key=os.getenv("OPENROUTER_API_KEY", ""),
+) as open_router:
+
+    res = open_router.interns.suspend_intern(intern_id="7c9e6679-7425-40de-944b-e07fc1f90ae7")
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                                                                                                         | Type                                                                                                                                              | Required                                                                                                                                          | Description                                                                                                                                       | Example                                                                                                                                           |
+| ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `intern_id`                                                                                                                                       | *str*                                                                                                                                             | :heavy_check_mark:                                                                                                                                | ID of an intern visible to the authenticated API key.                                                                                             | 7c9e6679-7425-40de-944b-e07fc1f90ae7                                                                                                              |
+| `http_referer`                                                                                                                                    | *Optional[str]*                                                                                                                                   | :heavy_minus_sign:                                                                                                                                | The app identifier should be your app's URL and is used as the primary identifier for rankings.<br/>This is used to track API usage per application.<br/> |                                                                                                                                                   |
+| `x_open_router_title`                                                                                                                             | *Optional[str]*                                                                                                                                   | :heavy_minus_sign:                                                                                                                                | The app display name allows you to customize how your app appears in OpenRouter's dashboard.<br/>                                                 |                                                                                                                                                   |
+| `x_open_router_categories`                                                                                                                        | *Optional[str]*                                                                                                                                   | :heavy_minus_sign:                                                                                                                                | Comma-separated list of app categories (e.g. "cli-agent,cloud-agent"). Used for marketplace rankings.<br/>                                        |                                                                                                                                                   |
+| `retries`                                                                                                                                         | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.mdx)                                                                                  | :heavy_minus_sign:                                                                                                                                | Configuration to override the default retry behavior of the client.                                                                               |                                                                                                                                                   |
+
+### Response
+
+**[components.SuspendInternResponse](../../components/suspendinternresponse.mdx)**
+
+### Errors
+
+| Error Type                    | Status Code                   | Content Type                  |
+| ----------------------------- | ----------------------------- | ----------------------------- |
+| errors.InternLifecycleError   | 401, 403, 404, 408, 409       | application/json              |
+| errors.InternLifecycleError   | 500, 502                      | application/json              |
+| errors.OpenRouterDefaultError | 4XX, 5XX                      | \*/\*                         |
