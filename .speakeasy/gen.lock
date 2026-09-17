@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c48cf606-fb42-4a45-9c23-8f0555307828
 management:
-  docChecksum: 324e5e9417697fdd19ac40dbdee29092
+  docChecksum: 658f38aca7602f6f6a2560c5f87359a4
   docVersion: 1.0.0
   speakeasyVersion: 1.787.0
   generationVersion: 2.914.0
-  releaseVersion: 1.1.153
-  configChecksum: 1b1e98d91f1d9f955c562b44db842a80
+  releaseVersion: 1.1.154
+  configChecksum: 7f90f6c142a4c96321b2e4e19e6c7468
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
 persistentEdits:
-  generation_id: d17916fa-f2c2-4c10-a368-d022ee4cea26
-  pristine_commit_hash: 4308baa564414b4c16cf56988b4de95fa6b3748b
-  pristine_tree_hash: 53611524c08c7f544a475792d4162569b168363d
+  generation_id: 2de73e06-133c-4851-b00f-33203f9c0341
+  pristine_commit_hash: 9894bc0e00e3c76649b7639f4d085eebc238d9fc
+  pristine_tree_hash: 955ab838ee178e94808251ee73fab53c4305df9a
 features:
   python:
     acceptHeaders: 3.0.0
@@ -366,8 +366,8 @@ trackedFiles:
     pristine_git_object: 9be25eff134f6283b95213ba56fa2ee21c493a39
   docs/components/anthropicimageblockparamsource.mdx:
     id: 82f05c79d5cb
-    last_write_checksum: sha1:0939a26da32a1d150a58d6988b9ef8bbd49bacf4
-    pristine_git_object: 7a6eede7854ed53befd8988077bef7e0b715c150
+    last_write_checksum: sha1:fa2de1356d760c4fb128731421b10aeeb26fa6d9
+    pristine_git_object: b7448ceebbe74557ebb47150f6623b532fb7e1c7
   docs/components/anthropicimageblockparamtype.mdx:
     id: b696c47f8715
     last_write_checksum: sha1:3c6aff8307fbb3e3af1dddecfcd0a5c00c036eea
@@ -7766,8 +7766,8 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:fd4d921e42e46b6699e830c81e753256bbea0319
-    pristine_git_object: 45e7d66074138141c0a1d58ac0060b708a5a897e
+    last_write_checksum: sha1:aebd4b8e9b3bd01b7732d031ea406bff7b52b1d4
+    pristine_git_object: fed68690d305ed6cbf73ec1aa130d466b72cb7e7
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77f44b60b98bc126557ec27391f91dfba764bb54
@@ -7794,8 +7794,8 @@ trackedFiles:
     pristine_git_object: 86713cfea633e09d33b3d4e65281071fe20e6137
   src/openrouter/_version.py:
     id: d8d15ad6c586
-    last_write_checksum: sha1:f1b890fd1369a6a362ed7f88a9a369cc66501fb3
-    pristine_git_object: 1ce83d17236585b76fe03355f52f670179995cd8
+    last_write_checksum: sha1:c1b3bb26c47b1021d8365a7d31f21be3d2d5f6c3
+    pristine_git_object: e2deff10977f39b591781c92c5f635972cd61f47
   src/openrouter/analytics.py:
     id: cb406b5aaabb
     last_write_checksum: sha1:1e0004d8d1d5d797e2b54cd1cabeb7f9489d08e9
@@ -7946,8 +7946,8 @@ trackedFiles:
     pristine_git_object: def29ec5aec5f4cf84cb62c7dc6eb7c00f40ab5d
   src/openrouter/components/anthropicimageblockparam.py:
     id: 71cab07562d1
-    last_write_checksum: sha1:fbdb3a017bc51cb2848933aca87023159951a2aa
-    pristine_git_object: 7b5effbbab60e15e1daa06ad703f445d3dde96b6
+    last_write_checksum: sha1:c76478bd8f2874bf81137104fd73fdfd6b9fd1e7
+    pristine_git_object: 6c2c231ad178e98316787f0cdea2bd72046d60d9
   src/openrouter/components/anthropicimagemimetype.py:
     id: 2434bf06fc4f
     last_write_checksum: sha1:2016e4ef5d678a2af645d50cb02e022c3918d494
@@ -14209,6 +14209,4 @@ examples:
         "504":
           application/json: {"error": {"code": 504, "message": "Vault request timed out"}}
 examplesVersion: 1.0.2
-releaseNotes: |
-  ## Python SDK Changes:
-  * `open_router.stt.create_transcription_multipart()`:  `request` **Changed**
+releaseNotes: "## Python SDK Changes:\n* `open_router.presets.create_presets_messages()`: \n  *  `request.messages[].content.union(Array<>)[].union(document).source.union(content).content.union(Array<>)[].union(image).source.union(file)` **Added**\n"
