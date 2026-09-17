@@ -6,7 +6,7 @@ from typing import Literal, Union
 from typing_extensions import TypedDict
 
 
-Code = Union[
+CodeEnum = Union[
     Literal[
         "server_error",
         "rate_limit_exceeded",
@@ -38,13 +38,13 @@ Code = Union[
 class ResponsesErrorFieldTypedDict(TypedDict):
     r"""Error information returned from the API"""
 
-    code: Code
+    code: CodeEnum
     message: str
 
 
 class ResponsesErrorField(BaseModel):
     r"""Error information returned from the API"""
 
-    code: Code
+    code: CodeEnum
 
     message: str

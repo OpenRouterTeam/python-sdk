@@ -1,0 +1,28 @@
+---
+title: "InternStatus"
+---
+
+Lifecycle status.
+
+## Example Usage
+
+```python
+from openrouter.components import InternStatus
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
+value: InternStatus = "awaiting_slack_install"
+```
+
+
+## Values
+
+This is an open enum. Unrecognized values will not fail type checks.
+
+- `"awaiting_slack_install"`
+- `"queued"`
+- `"provisioning"`
+- `"running"`
+- `"failed"`
+- `"stopped"`
+- `"destroying"`
+- `"destroy_failed"`

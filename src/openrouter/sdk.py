@@ -32,6 +32,7 @@ if TYPE_CHECKING:
     from openrouter.generations import Generations
     from openrouter.guardrails import Guardrails
     from openrouter.images import Images
+    from openrouter.interns import Interns
     from openrouter.models_ import Models
     from openrouter.oauth import OAuth
     from openrouter.observability import Observability
@@ -86,6 +87,8 @@ class OpenRouter(BaseSDK):
     r"""Guardrails endpoints"""
     images: "Images"
     r"""Images endpoints"""
+    interns: "Interns"
+    r"""Create, inspect, update, provision, suspend and delete OpenRouter interns through an API key."""
     api_keys: "APIKeys"
     r"""API key management endpoints"""
     models: "Models"
@@ -129,6 +132,7 @@ class OpenRouter(BaseSDK):
         "generations": ("openrouter.generations", "Generations"),
         "guardrails": ("openrouter.guardrails", "Guardrails"),
         "images": ("openrouter.images", "Images"),
+        "interns": ("openrouter.interns", "Interns"),
         "api_keys": ("openrouter.api_keys", "APIKeys"),
         "models": ("openrouter.models_", "Models"),
         "observability": ("openrouter.observability", "Observability"),

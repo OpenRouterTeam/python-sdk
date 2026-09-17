@@ -32,6 +32,7 @@ if TYPE_CHECKING:
         InternalServerResponseError,
         InternalServerResponseErrorData,
     )
+    from .internlifecycleerror import InternLifecycleError, InternLifecycleErrorData
     from .no_response_error import NoResponseError
     from .notfoundresponse_error import NotFoundResponseError, NotFoundResponseErrorData
     from .oautherrorresponse import OAuthErrorResponse, OAuthErrorResponseData
@@ -85,6 +86,8 @@ __all__ = [
     "GatewayTimeoutResponseErrorData",
     "GoneResponseError",
     "GoneResponseErrorData",
+    "InternLifecycleError",
+    "InternLifecycleErrorData",
     "InternalServerResponseError",
     "InternalServerResponseErrorData",
     "NoResponseError",
@@ -130,6 +133,8 @@ _dynamic_imports: dict[str, str] = {
     "GoneResponseErrorData": ".goneresponse_error",
     "InternalServerResponseError": ".internalserverresponse_error",
     "InternalServerResponseErrorData": ".internalserverresponse_error",
+    "InternLifecycleError": ".internlifecycleerror",
+    "InternLifecycleErrorData": ".internlifecycleerror",
     "NoResponseError": ".no_response_error",
     "NotFoundResponseError": ".notfoundresponse_error",
     "NotFoundResponseErrorData": ".notfoundresponse_error",
