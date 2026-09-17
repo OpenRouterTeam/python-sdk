@@ -9,6 +9,10 @@ from .anthropiccachecontroldirective import (
     AnthropicCacheControlDirective,
     AnthropicCacheControlDirectiveTypedDict,
 )
+from .anthropicfiledocumentsource import (
+    AnthropicFileDocumentSource,
+    AnthropicFileDocumentSourceTypedDict,
+)
 from .anthropicurlimagesource import (
     AnthropicURLImageSource,
     AnthropicURLImageSourceTypedDict,
@@ -22,13 +26,18 @@ from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 AnthropicImageBlockParamSourceTypedDict = TypeAliasType(
     "AnthropicImageBlockParamSourceTypedDict",
-    Union[AnthropicURLImageSourceTypedDict, AnthropicBase64ImageSourceTypedDict],
+    Union[
+        AnthropicURLImageSourceTypedDict,
+        AnthropicFileDocumentSourceTypedDict,
+        AnthropicBase64ImageSourceTypedDict,
+    ],
 )
 
 
 AnthropicImageBlockParamSource = Annotated[
     Union[
         Annotated[AnthropicBase64ImageSource, Tag("base64")],
+        Annotated[AnthropicFileDocumentSource, Tag("file")],
         Annotated[AnthropicURLImageSource, Tag("url")],
     ],
     Discriminator(lambda m: get_discriminator(m, "type", "type")),
