@@ -15,8 +15,9 @@ class ContainerFileListResponseTypedDict(TypedDict):
     data: List[ContainerFileTypedDict]
     first_id: Nullable[str]
     has_more: bool
-    r"""True when another page can be fetched by passing `after=last_id`."""
+    r"""True when another page can be fetched by passing `after=last_id`; `last_id` is non-null whenever this is true."""
     last_id: Nullable[str]
+    r"""Cursor for the next page (pass as `after`). The last entry’s id, except when the page stopped at the per-request scan bound on hidden bookkeeping objects: then it names the scan position and may not appear in `data`. Null only when `has_more` is false and `data` is empty."""
     object: ContainerFileListResponseObject
 
 
@@ -26,9 +27,10 @@ class ContainerFileListResponse(BaseModel):
     first_id: Nullable[str]
 
     has_more: bool
-    r"""True when another page can be fetched by passing `after=last_id`."""
+    r"""True when another page can be fetched by passing `after=last_id`; `last_id` is non-null whenever this is true."""
 
     last_id: Nullable[str]
+    r"""Cursor for the next page (pass as `after`). The last entry’s id, except when the page stopped at the per-request scan bound on hidden bookkeeping objects: then it names the scan position and may not appear in `data`. Null only when `has_more` is false and `data` is empty."""
 
     object: ContainerFileListResponseObject
 
