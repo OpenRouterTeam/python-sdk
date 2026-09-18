@@ -10,6 +10,11 @@ from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
+CREATE_API_ALPHA_DECISIONS_SERVERS = [
+    "https://openrouter.ai",
+]
+
+
 class CreateAPIAlphaDecisionsGlobalsTypedDict(TypedDict):
     http_referer: NotRequired[str]
     r"""The app identifier should be your app's URL and is used as the primary identifier for rankings.
