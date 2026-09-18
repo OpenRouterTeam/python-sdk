@@ -14,6 +14,36 @@ from typing import List, Optional
 from typing_extensions import NotRequired, TypedDict
 
 
+class DecisionsTypedDict(TypedDict):
+    latency: Nullable[PercentileStatsTypedDict]
+    request_count: Nullable[int]
+    r"""Total requests admitted for this workload in the window."""
+    throughput: Nullable[PercentileStatsTypedDict]
+
+
+class Decisions(BaseModel):
+    latency: Nullable[PercentileStats]
+
+    request_count: Nullable[int]
+    r"""Total requests admitted for this workload in the window."""
+
+    throughput: Nullable[PercentileStats]
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                m[k] = val
+
+        return m
+
+
 class EmbeddingsTypedDict(TypedDict):
     latency: Nullable[PercentileStatsTypedDict]
     request_count: Nullable[int]
@@ -257,6 +287,7 @@ class VideoGeneration(BaseModel):
 class PerfLast30mByWorkloadTypedDict(TypedDict):
     r"""Endpoint performance over the last 30 minutes, keyed by the kind of request served (e.g. `text_generation`, `image_generation`). Additive to the legacy singular latency and throughput fields; image and video generation report end-to-end latency. Only visible when authenticated with an API key or cookie."""
 
+    decisions: NotRequired[DecisionsTypedDict]
     embeddings: NotRequired[EmbeddingsTypedDict]
     image_generation: NotRequired[ImageGenerationTypedDict]
     rerank: NotRequired[RerankTypedDict]
@@ -269,6 +300,8 @@ class PerfLast30mByWorkloadTypedDict(TypedDict):
 
 class PerfLast30mByWorkload(BaseModel):
     r"""Endpoint performance over the last 30 minutes, keyed by the kind of request served (e.g. `text_generation`, `image_generation`). Additive to the legacy singular latency and throughput fields; image and video generation report end-to-end latency. Only visible when authenticated with an API key or cookie."""
+
+    decisions: Optional[Decisions] = None
 
     embeddings: Optional[Embeddings] = None
 
@@ -290,6 +323,7 @@ class PerfLast30mByWorkload(BaseModel):
     def serialize_model(self, handler):
         optional_fields = set(
             [
+                "decisions",
                 "embeddings",
                 "image_generation",
                 "rerank",
