@@ -1,0 +1,19 @@
+overlay: 1.0.0
+x-speakeasy-jsonpath: rfc9535
+info:
+  title: Give the intern chat completion a JSON 200 sibling for the Python generator
+  version: 0.0.0
+actions:
+  - target: $.paths["/interns/{internId}/chat/completions"].post.responses["200"].content
+    description: >-
+      The public spec declares only a text/event-stream 200 for this operation.
+      With sseFlatResponse enabled, the Python generator annotates the method as
+      returning the flattened chunk while emitting an EventStream body, which
+      fails pyright and mypy and blocks every release. Declaring a JSON
+      representation of the same chunk restores the supported SSE-overload
+      shape so the generated method is typed as the union. The server still
+      streams every response.
+    update:
+      application/json:
+        schema:
+          $ref: '#/components/schemas/InternChatCompletionChunk'
