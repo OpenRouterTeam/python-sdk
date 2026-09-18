@@ -1,0 +1,14 @@
+---
+title: "InternChatError"
+---
+
+The OpenAI-compatible error object. `metadata` is present on refusals from the chat route. Authentication refusals (`401`), the departed-creator `403` and the programme `404` carry only `code` and `message`.
+
+
+## Fields
+
+| Field                                                                                    | Type                                                                                     | Required                                                                                 | Description                                                                              | Example                                                                                  |
+| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `code`                                                                                   | *int*                                                                                    | :heavy_check_mark:                                                                       | The HTTP status of the response.                                                         |                                                                                          |
+| `message`                                                                                | *str*                                                                                    | :heavy_check_mark:                                                                       | N/A                                                                                      |                                                                                          |
+| `metadata`                                                                               | [Optional[components.InternChatErrorMetadata]](../components/internchaterrormetadata.mdx) | :heavy_minus_sign:                                                                       | Machine-readable detail for the failure.                                                 | \{<br/>"reason": "interaction_not_pending"<br/>}                                          |

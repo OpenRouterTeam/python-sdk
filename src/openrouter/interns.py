@@ -4,13 +4,13 @@ from .basesdk import BaseSDK
 from openrouter import components, errors, operations, utils
 from openrouter._hooks import HookContext
 from openrouter.types import OptionalNullable, UNSET
-from openrouter.utils import get_security_from_env
+from openrouter.utils import eventstreaming, get_security_from_env
 from openrouter.utils.unmarshal_json_response import unmarshal_json_response
-from typing import Any, Iterable, List, Mapping, Optional
+from typing import Any, Iterable, List, Mapping, Optional, Union
 
 
 class Interns(BaseSDK):
-    r"""Create, inspect, update, provision, suspend and delete OpenRouter interns through an API key."""
+    r"""Create, inspect, update, provision, suspend and delete OpenRouter interns through an API key, and talk to them: the chat route streams OpenAI-compatible completions from one intern, pausing as an `openrouter.provide_input` tool call when the intern needs your permission or an answer. Available to interns programme members; other callers receive 404. See https://openrouter.ai/docs/guides/ori/intern-chat."""
 
     def list_interns(
         self,
@@ -1915,3 +1915,385 @@ class Interns(BaseSDK):
             )
 
         raise errors.OpenRouterDefaultError("Unexpected response received", http_res)
+
+    def chat(
+        self,
+        *,
+        intern_id: str,
+        messages: Union[
+            Iterable[components.InternChatMessage],
+            Iterable[components.InternChatMessageTypedDict],
+        ],
+        http_referer: Optional[str] = None,
+        x_open_router_title: Optional[str] = None,
+        x_open_router_categories: Optional[str] = None,
+        approval_mode: Optional[components.InternApprovalMode] = None,
+        model: Optional[str] = None,
+        session_id: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> Union[
+        components.InternChatCompletionChunk,
+        eventstreaming.EventStream[components.InternChatCompletionChunk],
+    ]:
+        r"""Stream a chat completion with an intern
+
+        Sends a prompt to one of your interns and streams the reply as OpenAI-compatible server-sent events ending with `[DONE]`. The run executes on the intern, which may pause to ask you something. It then streams one `openrouter.provide_input` tool call and finishes with `finish_reason: \"tool_calls\"`, and the run stays open on the intern.
+
+        Every response, whether it ends with `stop`, `tool_calls` or `error`, is followed by a final chunk with empty `choices` that carries `session_id`, then `data: [DONE]`. That chunk carries the `usage` the intern reported for the run, after `stop` or `error`, and `null` when the intern reported none. After `tool_calls` its `usage` is `null` because the turn is not over. Read through `[DONE]`: the `session_id` you need to reply arrives after the `tool_calls` finish chunk.
+
+        To answer, send a second request with the same `session_id`, the assistant message echoing that tool call, and a `tool` message whose `tool_call_id` is the tool call id and whose `content` is the answer. The answer is delivered to the run that asked and the stream continues from where it paused. A question stays open for its interaction deadline (5 minutes by default) and the run is cancelled when that passes. Rejected replies do not extend the deadline.
+
+        Closing the connection after the `[DONE]` that follows `finish_reason: \"tool_calls\"` keeps the run alive. Disconnecting while a response is still streaming cancels the run. The disconnect is noticed when the intern next writes to the stream, which during a silent tool run can take more than one 30 second heartbeat interval.
+
+        A run the intern ends while you are still connected, by cancellation or by a deadline, ends the stream with a `finish_reason: \"error\"` chunk carrying `410` and reason `run_ended`, then the final empty-`choices` chunk and `[DONE]`. That error reports only an ending the intern confirmed. A connection that breaks without that confirmation ends with reason `stream_severed`, and a client that has already disconnected is promised no final event.
+
+        Set `approval_mode` to `manual` to have the intern ask before approval-bearing tools such as the shell. Omitted, the run self-drives and consents on your behalf. The mode belongs to the run started by that prompt and must be repeated on later prompts.
+
+        Available to interns programme members. Callers outside the programme receive `404` for every path under `/api/v1/interns`.
+
+        If set, this operation will use `api_key` from the global security.
+
+        :param intern_id: The intern to talk to.
+        :param messages: The conversation. Only the last message is read. A last `user` message starts a run. A last `tool` message answers the interaction named by its `tool_call_id` and requires `session_id`.
+        :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
+            This is used to track API usage per application.
+
+        :param x_open_router_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+        :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
+
+        :param approval_mode: How the run started by this prompt handles tool approvals. `self-drive` (the default when omitted) consents on your behalf and runs the shell unsandboxed. `manual` asks you before an approval-bearing tool runs, as an `openrouter.provide_input` permission request, and keeps the shell sandboxed until an escalation is allowed. The mode applies to the run this prompt starts and is not remembered by the session. Repeat it on each new prompt that should use it. A `tool` reply continues the run under the mode it started with.
+        :param model: Echoed as `model` on the streamed chunks; the final chunk may carry the model the intern reported instead. The intern chooses its own model, so this value does not change what runs.
+        :param session_id: The daemon session to continue, as returned in `session_id` on the final chunk of an earlier response. Omit it to start a new session. Required when the last message has role `tool`.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = operations.CreateInternChatCompletionRequest(
+            http_referer=http_referer,
+            x_open_router_title=x_open_router_title,
+            x_open_router_categories=x_open_router_categories,
+            intern_id=intern_id,
+            intern_chat_completion_request=components.InternChatCompletionRequest(
+                approval_mode=approval_mode,
+                messages=utils.get_pydantic_model(
+                    messages, List[components.InternChatMessage]
+                ),
+                model=model,
+                session_id=session_id,
+            ),
+        )
+
+        req = self._build_request(
+            method="POST",
+            path="/interns/{internId}/chat/completions",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="text/event-stream"
+            if getattr(request, "stream", False) is True
+            else "application/json",
+            http_headers=http_headers,
+            _globals=operations.CreateInternChatCompletionGlobals(
+                http_referer=self.sdk_configuration.globals.http_referer,
+                x_open_router_title=self.sdk_configuration.globals.x_open_router_title,
+                x_open_router_categories=self.sdk_configuration.globals.x_open_router_categories,
+            ),
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.intern_chat_completion_request,
+                False,
+                False,
+                "json",
+                components.InternChatCompletionRequest,
+            ),
+            allow_empty_value=None,
+            allowed_fields=["api_key"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 60000, 1.5, 3600000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["5XX"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="createInternChatCompletion",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
+                tags=["Interns"],
+                extensions=None,
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            stream=getattr(request, "stream", False) is True,
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "text/event-stream"):
+            return eventstreaming.EventStream(
+                http_res,
+                lambda raw: unmarshal_json_response(
+                    components.InternChatStreamingResponse, http_res, raw
+                ).data,
+                sentinel="[DONE]",
+                client_ref=self,
+            )
+        if utils.match_response(http_res, "200", "application/json"):
+            http_res_text = utils.stream_to_text(http_res)
+            return unmarshal_json_response(
+                components.InternChatCompletionChunk, http_res, http_res_text
+            )
+        if utils.match_response(
+            http_res,
+            ["400", "401", "403", "404", "409", "410", "413", "429"],
+            "application/json",
+        ):
+            http_res_text = utils.stream_to_text(http_res)
+            response_data = unmarshal_json_response(
+                errors.InternChatErrorResponseData, http_res, http_res_text
+            )
+            raise errors.InternChatErrorResponse(response_data, http_res, http_res_text)
+        if utils.match_response(http_res, ["502", "503", "504"], "application/json"):
+            http_res_text = utils.stream_to_text(http_res)
+            response_data = unmarshal_json_response(
+                errors.InternChatErrorResponseData, http_res, http_res_text
+            )
+            raise errors.InternChatErrorResponse(response_data, http_res, http_res_text)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.OpenRouterDefaultError(
+                "API error occurred", http_res, http_res_text
+            )
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.OpenRouterDefaultError(
+                "API error occurred", http_res, http_res_text
+            )
+
+        http_res_text = utils.stream_to_text(http_res)
+        raise errors.OpenRouterDefaultError(
+            "Unexpected response received", http_res, http_res_text
+        )
+
+    async def chat_async(
+        self,
+        *,
+        intern_id: str,
+        messages: Union[
+            Iterable[components.InternChatMessage],
+            Iterable[components.InternChatMessageTypedDict],
+        ],
+        http_referer: Optional[str] = None,
+        x_open_router_title: Optional[str] = None,
+        x_open_router_categories: Optional[str] = None,
+        approval_mode: Optional[components.InternApprovalMode] = None,
+        model: Optional[str] = None,
+        session_id: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> Union[
+        components.InternChatCompletionChunk,
+        eventstreaming.EventStreamAsync[components.InternChatCompletionChunk],
+    ]:
+        r"""Stream a chat completion with an intern
+
+        Sends a prompt to one of your interns and streams the reply as OpenAI-compatible server-sent events ending with `[DONE]`. The run executes on the intern, which may pause to ask you something. It then streams one `openrouter.provide_input` tool call and finishes with `finish_reason: \"tool_calls\"`, and the run stays open on the intern.
+
+        Every response, whether it ends with `stop`, `tool_calls` or `error`, is followed by a final chunk with empty `choices` that carries `session_id`, then `data: [DONE]`. That chunk carries the `usage` the intern reported for the run, after `stop` or `error`, and `null` when the intern reported none. After `tool_calls` its `usage` is `null` because the turn is not over. Read through `[DONE]`: the `session_id` you need to reply arrives after the `tool_calls` finish chunk.
+
+        To answer, send a second request with the same `session_id`, the assistant message echoing that tool call, and a `tool` message whose `tool_call_id` is the tool call id and whose `content` is the answer. The answer is delivered to the run that asked and the stream continues from where it paused. A question stays open for its interaction deadline (5 minutes by default) and the run is cancelled when that passes. Rejected replies do not extend the deadline.
+
+        Closing the connection after the `[DONE]` that follows `finish_reason: \"tool_calls\"` keeps the run alive. Disconnecting while a response is still streaming cancels the run. The disconnect is noticed when the intern next writes to the stream, which during a silent tool run can take more than one 30 second heartbeat interval.
+
+        A run the intern ends while you are still connected, by cancellation or by a deadline, ends the stream with a `finish_reason: \"error\"` chunk carrying `410` and reason `run_ended`, then the final empty-`choices` chunk and `[DONE]`. That error reports only an ending the intern confirmed. A connection that breaks without that confirmation ends with reason `stream_severed`, and a client that has already disconnected is promised no final event.
+
+        Set `approval_mode` to `manual` to have the intern ask before approval-bearing tools such as the shell. Omitted, the run self-drives and consents on your behalf. The mode belongs to the run started by that prompt and must be repeated on later prompts.
+
+        Available to interns programme members. Callers outside the programme receive `404` for every path under `/api/v1/interns`.
+
+        If set, this operation will use `api_key` from the global security.
+
+        :param intern_id: The intern to talk to.
+        :param messages: The conversation. Only the last message is read. A last `user` message starts a run. A last `tool` message answers the interaction named by its `tool_call_id` and requires `session_id`.
+        :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
+            This is used to track API usage per application.
+
+        :param x_open_router_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+        :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
+
+        :param approval_mode: How the run started by this prompt handles tool approvals. `self-drive` (the default when omitted) consents on your behalf and runs the shell unsandboxed. `manual` asks you before an approval-bearing tool runs, as an `openrouter.provide_input` permission request, and keeps the shell sandboxed until an escalation is allowed. The mode applies to the run this prompt starts and is not remembered by the session. Repeat it on each new prompt that should use it. A `tool` reply continues the run under the mode it started with.
+        :param model: Echoed as `model` on the streamed chunks; the final chunk may carry the model the intern reported instead. The intern chooses its own model, so this value does not change what runs.
+        :param session_id: The daemon session to continue, as returned in `session_id` on the final chunk of an earlier response. Omit it to start a new session. Required when the last message has role `tool`.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = operations.CreateInternChatCompletionRequest(
+            http_referer=http_referer,
+            x_open_router_title=x_open_router_title,
+            x_open_router_categories=x_open_router_categories,
+            intern_id=intern_id,
+            intern_chat_completion_request=components.InternChatCompletionRequest(
+                approval_mode=approval_mode,
+                messages=utils.get_pydantic_model(
+                    messages, List[components.InternChatMessage]
+                ),
+                model=model,
+                session_id=session_id,
+            ),
+        )
+
+        req = self._build_request_async(
+            method="POST",
+            path="/interns/{internId}/chat/completions",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="text/event-stream"
+            if getattr(request, "stream", False) is True
+            else "application/json",
+            http_headers=http_headers,
+            _globals=operations.CreateInternChatCompletionGlobals(
+                http_referer=self.sdk_configuration.globals.http_referer,
+                x_open_router_title=self.sdk_configuration.globals.x_open_router_title,
+                x_open_router_categories=self.sdk_configuration.globals.x_open_router_categories,
+            ),
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.intern_chat_completion_request,
+                False,
+                False,
+                "json",
+                components.InternChatCompletionRequest,
+            ),
+            allow_empty_value=None,
+            allowed_fields=["api_key"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 60000, 1.5, 3600000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["5XX"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="createInternChatCompletion",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
+                tags=["Interns"],
+                extensions=None,
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            stream=getattr(request, "stream", False) is True,
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "text/event-stream"):
+            return eventstreaming.EventStreamAsync(
+                http_res,
+                lambda raw: unmarshal_json_response(
+                    components.InternChatStreamingResponse, http_res, raw
+                ).data,
+                sentinel="[DONE]",
+                client_ref=self,
+            )
+        if utils.match_response(http_res, "200", "application/json"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            return unmarshal_json_response(
+                components.InternChatCompletionChunk, http_res, http_res_text
+            )
+        if utils.match_response(
+            http_res,
+            ["400", "401", "403", "404", "409", "410", "413", "429"],
+            "application/json",
+        ):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            response_data = unmarshal_json_response(
+                errors.InternChatErrorResponseData, http_res, http_res_text
+            )
+            raise errors.InternChatErrorResponse(response_data, http_res, http_res_text)
+        if utils.match_response(http_res, ["502", "503", "504"], "application/json"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            response_data = unmarshal_json_response(
+                errors.InternChatErrorResponseData, http_res, http_res_text
+            )
+            raise errors.InternChatErrorResponse(response_data, http_res, http_res_text)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.OpenRouterDefaultError(
+                "API error occurred", http_res, http_res_text
+            )
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.OpenRouterDefaultError(
+                "API error occurred", http_res, http_res_text
+            )
+
+        http_res_text = await utils.stream_to_text_async(http_res)
+        raise errors.OpenRouterDefaultError(
+            "Unexpected response received", http_res, http_res_text
+        )

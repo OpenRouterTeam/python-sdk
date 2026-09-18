@@ -162,7 +162,9 @@ class VideoGenerationRequestOptionsTypedDict(TypedDict):
     thinkingmachines: NotRequired[Dict[str, Any]]
     together: NotRequired[Dict[str, Any]]
     together_lite: NotRequired[Dict[str, Any]]
+    typesafe: NotRequired[Dict[str, Any]]
     ubicloud: NotRequired[Dict[str, Any]]
+    unbiased: NotRequired[Dict[str, Any]]
     upstage: NotRequired[Dict[str, Any]]
     venice: NotRequired[Dict[str, Any]]
     voyageai: NotRequired[Dict[str, Any]]
@@ -487,7 +489,11 @@ class VideoGenerationRequestOptions(BaseModel):
         Optional[Dict[str, Any]], pydantic.Field(alias="together-lite")
     ] = None
 
+    typesafe: Optional[Dict[str, Any]] = None
+
     ubicloud: Optional[Dict[str, Any]] = None
+
+    unbiased: Optional[Dict[str, Any]] = None
 
     upstage: Optional[Dict[str, Any]] = None
 
@@ -644,7 +650,9 @@ class VideoGenerationRequestOptions(BaseModel):
                 "thinkingmachines",
                 "together",
                 "together-lite",
+                "typesafe",
                 "ubicloud",
+                "unbiased",
                 "upstage",
                 "venice",
                 "voyageai",
@@ -729,6 +737,8 @@ class VideoGenerationRequestTypedDict(TypedDict):
     r"""Whether to generate audio alongside the video. Defaults to the endpoint's generate_audio capability flag, false if not set."""
     input_references: NotRequired[List[InputReferenceTypedDict]]
     r"""Reference assets to guide video generation. Accepts image, audio, and video references. Audio and video references are only honored by providers that support them (including BytePlus Seedance generation 2 and newer); other providers use image references and ignore the rest."""
+    previous_job_id: NotRequired[str]
+    r"""ID of a completed video job to edit or extend, as returned by the submit response. The new job runs on the same model and endpoint that produced the previous one. Only models that support continuation accept this field."""
     prompt: NotRequired[str]
     r"""Text prompt describing the video to generate. Optional for models that support generating a video from image input alone; required by all other models."""
     provider: NotRequired[VideoGenerationRequestProviderTypedDict]
@@ -773,6 +783,9 @@ class VideoGenerationRequest(BaseModel):
     input_references: Optional[List[InputReference]] = None
     r"""Reference assets to guide video generation. Accepts image, audio, and video references. Audio and video references are only honored by providers that support them (including BytePlus Seedance generation 2 and newer); other providers use image references and ignore the rest."""
 
+    previous_job_id: Optional[str] = None
+    r"""ID of a completed video job to edit or extend, as returned by the submit response. The new job runs on the same model and endpoint that produced the previous one. Only models that support continuation accept this field."""
+
     prompt: Optional[str] = None
     r"""Text prompt describing the video to generate. Optional for models that support generating a video from image input alone; required by all other models."""
 
@@ -811,6 +824,7 @@ class VideoGenerationRequest(BaseModel):
                 "frame_images",
                 "generate_audio",
                 "input_references",
+                "previous_job_id",
                 "prompt",
                 "provider",
                 "resolution",

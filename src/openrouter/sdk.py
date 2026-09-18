@@ -16,6 +16,7 @@ from typing import Any, Callable, Dict, Optional, TYPE_CHECKING, Union, cast
 import weakref
 
 if TYPE_CHECKING:
+    from openrouter.alpha import Alpha
     from openrouter.analytics import Analytics
     from openrouter.api_keys import APIKeys
     from openrouter.benchmarks import Benchmarks
@@ -56,6 +57,7 @@ class OpenRouter(BaseSDK):
 
     analytics: "Analytics"
     r"""Analytics and usage endpoints"""
+    alpha: "Alpha"
     tts: "TTS"
     r"""Text-to-speech endpoints"""
     stt: "STT"
@@ -88,7 +90,7 @@ class OpenRouter(BaseSDK):
     images: "Images"
     r"""Images endpoints"""
     interns: "Interns"
-    r"""Create, inspect, update, provision, suspend and delete OpenRouter interns through an API key."""
+    r"""Create, inspect, update, provision, suspend and delete OpenRouter interns through an API key, and talk to them: the chat route streams OpenAI-compatible completions from one intern, pausing as an `openrouter.provide_input` tool call when the intern needs your permission or an answer. Available to interns programme members; other callers receive 404. See https://openrouter.ai/docs/guides/ori/intern-chat."""
     api_keys: "APIKeys"
     r"""API key management endpoints"""
     models: "Models"
@@ -116,6 +118,7 @@ class OpenRouter(BaseSDK):
     r"""Workspaces endpoints"""
     _sub_sdk_map = {
         "analytics": ("openrouter.analytics", "Analytics"),
+        "alpha": ("openrouter.alpha", "Alpha"),
         "tts": ("openrouter.tts", "TTS"),
         "stt": ("openrouter.stt", "STT"),
         "o_auth": ("openrouter.oauth", "OAuth"),

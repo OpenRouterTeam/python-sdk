@@ -1,0 +1,36 @@
+---
+title: "InternChatErrorMetadataReason"
+---
+
+A stable reason a client can branch on.
+
+## Example Usage
+
+```python
+from openrouter.components import InternChatErrorMetadataReason
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
+value: InternChatErrorMetadataReason = "attachment_failed"
+```
+
+
+## Values
+
+This is an open enum. Unrecognized values will not fail type checks.
+
+- `"attachment_failed"`
+- `"bad_request"`
+- `"busy"`
+- `"client_closed_request"`
+- `"interaction_not_pending"`
+- `"interaction_unknown"`
+- `"intern_not_ready"`
+- `"intern_rejected"`
+- `"intern_unreachable"`
+- `"not_found"`
+- `"payload_too_large"`
+- `"rate_limited"`
+- `"run_ended"`
+- `"stream_severed"`
+- `"timeout"`
+- `"turn_failed"`

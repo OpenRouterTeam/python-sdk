@@ -130,7 +130,7 @@ r"""The sorting strategy to use for this request, if \"order\" is not specified.
 
 
 class ProviderPreferencesTypedDict(TypedDict):
-    r"""When multiple model providers are available, optionally indicate your routing preference."""
+    r"""Provider routing preferences for the request."""
 
     allow_fallbacks: NotRequired[Nullable[bool]]
     r"""Whether to allow backup providers to serve requests
@@ -169,7 +169,7 @@ class ProviderPreferencesTypedDict(TypedDict):
 
 
 class ProviderPreferences(BaseModel):
-    r"""When multiple model providers are available, optionally indicate your routing preference."""
+    r"""Provider routing preferences for the request."""
 
     allow_fallbacks: OptionalNullable[bool] = UNSET
     r"""Whether to allow backup providers to serve requests

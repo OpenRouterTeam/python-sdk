@@ -13,6 +13,7 @@ ImageOutputModality = Union[
         "audio",
         "video",
         "rerank",
+        "decisions",
         "speech",
         "transcription",
     ],
