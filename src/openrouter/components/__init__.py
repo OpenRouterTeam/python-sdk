@@ -2780,6 +2780,8 @@ if TYPE_CHECKING:
         ProvisionInternResponseTypedDict,
     )
     from .publicendpoint import (
+        Decisions,
+        DecisionsTypedDict,
         Embeddings,
         EmbeddingsTypedDict,
         ImageGeneration,
@@ -4180,6 +4182,7 @@ __all__ = [
     "DebugEventType",
     "DebugEventTypedDict",
     "DebugTypedDict",
+    "Decisions",
     "DecisionsChoiceAnswer",
     "DecisionsChoiceAnswerType",
     "DecisionsChoiceAnswerTypedDict",
@@ -4212,6 +4215,7 @@ __all__ = [
     "DecisionsScoreQuestionInstructionsTypedDict",
     "DecisionsScoreQuestionType",
     "DecisionsScoreQuestionTypedDict",
+    "DecisionsTypedDict",
     "DefaultEffort",
     "DefaultParameters",
     "DefaultParametersTypedDict",
@@ -8058,6 +8062,8 @@ _dynamic_imports: dict[str, str] = {
     "ProviderSortConfigTypedDict": ".providersortconfig",
     "ProvisionInternResponse": ".provisioninternresponse",
     "ProvisionInternResponseTypedDict": ".provisioninternresponse",
+    "Decisions": ".publicendpoint",
+    "DecisionsTypedDict": ".publicendpoint",
     "Embeddings": ".publicendpoint",
     "EmbeddingsTypedDict": ".publicendpoint",
     "ImageGeneration": ".publicendpoint",
