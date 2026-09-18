@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c48cf606-fb42-4a45-9c23-8f0555307828
 management:
-  docChecksum: 03debdc8d24d4dddc93cea8075931d77
+  docChecksum: e9079210b57b76d5adc98a5fbfee3e26
   docVersion: 1.0.0
   speakeasyVersion: 1.787.0
   generationVersion: 2.914.0
-  releaseVersion: 1.1.159
-  configChecksum: fd98805ff1b03acfa034ef646f6b33b6
+  releaseVersion: 1.1.160
+  configChecksum: 294352f6dd2d72d42a5cbac1970b1738
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
 persistentEdits:
-  generation_id: 16700c4e-c46e-4247-b019-436fcf69246f
-  pristine_commit_hash: 330eef4f60b8f72d1510a40d7092208a9a240a90
-  pristine_tree_hash: f734119a88cf2398cccd3f7bd147f08a030f9b34
+  generation_id: a334c67c-ff14-46d1-955a-fdbb92136262
+  pristine_commit_hash: 1b2cae9732a135f60fbbde8b0f6d151194ec3632
+  pristine_tree_hash: 3ec98bd39ffcc42f451dcfb8290d213d737108f4
 features:
   python:
     acceptHeaders: 3.0.0
@@ -8158,8 +8158,8 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:270325a9d1b6cc9957b80685361a74e4c1eda8d3
-    pristine_git_object: 7bac6b6178904740ab981df0378ec88883996ac0
+    last_write_checksum: sha1:34ee2a7313a11b1fd8b2ee964ebd3f022e3f4b91
+    pristine_git_object: 787fe930bc59ade28290f768170b6c2f8cca8725
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77f44b60b98bc126557ec27391f91dfba764bb54
@@ -8186,8 +8186,8 @@ trackedFiles:
     pristine_git_object: 86713cfea633e09d33b3d4e65281071fe20e6137
   src/openrouter/_version.py:
     id: d8d15ad6c586
-    last_write_checksum: sha1:fc59ea125c8202c0d65f68a459e310521e2899e4
-    pristine_git_object: ca93db7bc4c211da0f565f1627787c63a81cbf03
+    last_write_checksum: sha1:5c1a29319dbaeec6f3940b892ececa9a973e8c77
+    pristine_git_object: a910b9c2d043f46fc7afe564dfdb2f9841a7d047
   src/openrouter/alpha.py:
     id: 306c4d93308d
     last_write_checksum: sha1:0c25a52ed5fb688ec1e923e4e82bcfc9cae49465
@@ -9498,8 +9498,8 @@ trackedFiles:
     pristine_git_object: 4a58daf7d055e111ebf204b18ee413203f06b745
   src/openrouter/components/intern.py:
     id: eed59a44b44f
-    last_write_checksum: sha1:38c4c739a2889d67367835d6220c6cc6dd3e7086
-    pristine_git_object: 0613b4b54b15c875731348e9607cebeeabf8d8fe
+    last_write_checksum: sha1:de3378c82a4f22b53cd7fa6abd7b938e89c80c4f
+    pristine_git_object: 1dd62abe61d64b90bcfa178b73df6ae656f552bc
   src/openrouter/components/internalserverresponseerrordata.py:
     id: 91397805fa13
     last_write_checksum: sha1:6307236e36dc876dbfae76cfcc29ad49461b5b5d
@@ -14816,7 +14816,7 @@ examples:
     speakeasy-default-list-interns:
       responses:
         "200":
-          application/json: {"data": [{"attached_vault_id": null, "createdAt": "2026-09-16T08:30:00.000Z", "description": "Researches customer questions", "hostname": "research-assistant.openrouter.ai", "id": "7c9e6679-7425-40de-944b-e07fc1f90ae7", "instructions": null, "lastFailureMessage": null, "model": "openai/gpt-5.4", "name": "research-assistant", "progress": null, "status": "running", "updatedAt": "2026-09-16T08:45:00.000Z", "vault_id": "b431c59d-6eed-41ac-bc89-9a89be79a121", "workspaceId": "89f9f5b2-3f89-4eaf-83ca-5ceae149e8bb"}], "has_more": false}
+          application/json: {"data": [{"attached_vault_id": null, "created_at": "2026-09-16T08:30:00.000Z", "description": "Researches customer questions", "hostname": "research-assistant.openrouter.ai", "id": "7c9e6679-7425-40de-944b-e07fc1f90ae7", "instructions": null, "last_failure_message": null, "model": "openai/gpt-5.4", "name": "research-assistant", "progress": null, "status": "running", "updated_at": "2026-09-16T08:45:00.000Z", "vault_id": "b431c59d-6eed-41ac-bc89-9a89be79a121", "workspace_id": "89f9f5b2-3f89-4eaf-83ca-5ceae149e8bb"}], "has_more": false}
         "400":
           application/json: {"error": {"code": "not_found", "message": "Intern not found"}}
         "500":
@@ -14827,7 +14827,7 @@ examples:
         application/json: {"name": "research-assistant", "provision": true, "workspace_id": "89f9f5b2-3f89-4eaf-83ca-5ceae149e8bb"}
       responses:
         "200":
-          application/json: {"attached_vault_id": null, "createdAt": "2026-09-16T08:30:00.000Z", "description": "Researches customer questions", "hostname": "research-assistant.openrouter.ai", "id": "7c9e6679-7425-40de-944b-e07fc1f90ae7", "instructions": null, "lastFailureMessage": null, "model": "openai/gpt-5.4", "name": "research-assistant", "progress": null, "status": "running", "updatedAt": "2026-09-16T08:45:00.000Z", "vault_id": "b431c59d-6eed-41ac-bc89-9a89be79a121", "workspaceId": "89f9f5b2-3f89-4eaf-83ca-5ceae149e8bb"}
+          application/json: {"attached_vault_id": null, "created_at": "2026-09-16T08:30:00.000Z", "description": "Researches customer questions", "hostname": "research-assistant.openrouter.ai", "id": "7c9e6679-7425-40de-944b-e07fc1f90ae7", "instructions": null, "last_failure_message": null, "model": "openai/gpt-5.4", "name": "research-assistant", "progress": null, "status": "running", "updated_at": "2026-09-16T08:45:00.000Z", "vault_id": "b431c59d-6eed-41ac-bc89-9a89be79a121", "workspace_id": "89f9f5b2-3f89-4eaf-83ca-5ceae149e8bb"}
         "400":
           application/json: {"error": {"code": "not_found", "message": "Intern not found"}}
         "500":
@@ -14851,7 +14851,7 @@ examples:
           internId: "7c9e6679-7425-40de-944b-e07fc1f90ae7"
       responses:
         "200":
-          application/json: {"attached_vault_id": null, "createdAt": "2026-09-16T08:30:00.000Z", "description": "Researches customer questions", "hostname": "research-assistant.openrouter.ai", "id": "7c9e6679-7425-40de-944b-e07fc1f90ae7", "instructions": null, "lastFailureMessage": null, "model": "openai/gpt-5.4", "name": "research-assistant", "progress": null, "status": "running", "updatedAt": "2026-09-16T08:45:00.000Z", "vault_id": "b431c59d-6eed-41ac-bc89-9a89be79a121", "workspaceId": "89f9f5b2-3f89-4eaf-83ca-5ceae149e8bb"}
+          application/json: {"attached_vault_id": null, "created_at": "2026-09-16T08:30:00.000Z", "description": "Researches customer questions", "hostname": "research-assistant.openrouter.ai", "id": "7c9e6679-7425-40de-944b-e07fc1f90ae7", "instructions": null, "last_failure_message": null, "model": "openai/gpt-5.4", "name": "research-assistant", "progress": null, "status": "running", "updated_at": "2026-09-16T08:45:00.000Z", "vault_id": "b431c59d-6eed-41ac-bc89-9a89be79a121", "workspace_id": "89f9f5b2-3f89-4eaf-83ca-5ceae149e8bb"}
         "401":
           application/json: {"error": {"code": "not_found", "message": "Intern not found"}}
         "500":
@@ -14865,7 +14865,7 @@ examples:
         application/json: {}
       responses:
         "200":
-          application/json: {"attached_vault_id": null, "createdAt": "2026-09-16T08:30:00.000Z", "description": "Researches customer questions", "hostname": "research-assistant.openrouter.ai", "id": "7c9e6679-7425-40de-944b-e07fc1f90ae7", "instructions": null, "lastFailureMessage": null, "model": "openai/gpt-5.4", "name": "research-assistant", "progress": null, "status": "running", "updatedAt": "2026-09-16T08:45:00.000Z", "vault_id": "b431c59d-6eed-41ac-bc89-9a89be79a121", "workspaceId": "89f9f5b2-3f89-4eaf-83ca-5ceae149e8bb"}
+          application/json: {"attached_vault_id": null, "created_at": "2026-09-16T08:30:00.000Z", "description": "Researches customer questions", "hostname": "research-assistant.openrouter.ai", "id": "7c9e6679-7425-40de-944b-e07fc1f90ae7", "instructions": null, "last_failure_message": null, "model": "openai/gpt-5.4", "name": "research-assistant", "progress": null, "status": "running", "updated_at": "2026-09-16T08:45:00.000Z", "vault_id": "b431c59d-6eed-41ac-bc89-9a89be79a121", "workspace_id": "89f9f5b2-3f89-4eaf-83ca-5ceae149e8bb"}
         "400":
           application/json: {"error": {"code": "not_found", "message": "Intern not found"}}
         "500":
@@ -14942,5 +14942,7 @@ examples:
 examplesVersion: 1.0.2
 releaseNotes: |
   ## Python SDK Changes:
-  * `open_router.endpoints.list_zdr_endpoints()`:  `response.data[].perf_last_30m_by_workload.decisions` **Added**
-  * `open_router.endpoints.list()`:  `response.data.endpoints[].perf_last_30m_by_workload.decisions` **Added**
+  * `open_router.interns.list_interns()`:  `response.data[]` **Changed** (Breaking ⚠️)
+  * `open_router.interns.create_intern()`:  `response` **Changed** (Breaking ⚠️)
+  * `open_router.interns.get_intern()`:  `response` **Changed** (Breaking ⚠️)
+  * `open_router.interns.update_intern()`:  `response` **Changed** (Breaking ⚠️)

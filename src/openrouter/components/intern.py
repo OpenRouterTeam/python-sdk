@@ -2,10 +2,9 @@
 
 from __future__ import annotations
 from openrouter.types import BaseModel, Nullable, UNSET_SENTINEL, UnrecognizedStr
-import pydantic
 from pydantic import model_serializer
 from typing import Literal, Union
-from typing_extensions import Annotated, TypedDict
+from typing_extensions import TypedDict
 
 
 class ProgressTypedDict(TypedDict):
@@ -22,13 +21,13 @@ class ProgressTypedDict(TypedDict):
 class Progress(BaseModel):
     r"""Active provisioning step, or null once provisioning has settled."""
 
-    step_label: Annotated[str, pydantic.Field(alias="stepLabel")]
+    step_label: str
     r"""Human-readable label of the active provisioning step."""
 
-    step_number: Annotated[int, pydantic.Field(alias="stepNumber")]
+    step_number: int
     r"""One-based index of the active step."""
 
-    total_steps: Annotated[int, pydantic.Field(alias="totalSteps")]
+    total_steps: int
     r"""Number of provisioning steps."""
 
 
@@ -87,7 +86,7 @@ class Intern(BaseModel):
     attached_vault_id: Nullable[str]
     r"""Vault the intern borrows from another intern, or null when it borrows none."""
 
-    created_at: Annotated[str, pydantic.Field(alias="createdAt")]
+    created_at: str
     r"""ISO 8601 creation time."""
 
     description: Nullable[str]
@@ -102,9 +101,7 @@ class Intern(BaseModel):
     instructions: Nullable[str]
     r"""Standing instructions the intern boots with."""
 
-    last_failure_message: Annotated[
-        Nullable[str], pydantic.Field(alias="lastFailureMessage")
-    ]
+    last_failure_message: Nullable[str]
     r"""Why the last provisioning attempt failed, when status is failed."""
 
     model: Nullable[str]
@@ -119,13 +116,13 @@ class Intern(BaseModel):
     status: InternStatus
     r"""Lifecycle status."""
 
-    updated_at: Annotated[str, pydantic.Field(alias="updatedAt")]
+    updated_at: str
     r"""ISO 8601 last update time."""
 
     vault_id: Nullable[str]
     r"""Vault the intern owns, or null before it has been created."""
 
-    workspace_id: Annotated[str, pydantic.Field(alias="workspaceId")]
+    workspace_id: str
     r"""Workspace that owns the intern and scopes its secrets."""
 
     @model_serializer(mode="wrap")
@@ -141,13 +138,3 @@ class Intern(BaseModel):
                 m[k] = val
 
         return m
-
-
-try:
-    Progress.model_rebuild()
-except NameError:
-    pass
-try:
-    Intern.model_rebuild()
-except NameError:
-    pass
