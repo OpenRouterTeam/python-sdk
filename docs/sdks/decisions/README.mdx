@@ -29,10 +29,36 @@ with OpenRouter(
     api_key=os.getenv("OPENROUTER_API_KEY", ""),
 ) as open_router:
 
-    res = open_router.alpha.decisions.create(model="Grand Cherokee", questions={
-
+    res = open_router.alpha.decisions.create(model="typesafe/jev-1.13", questions={
+        "is_bug": {
+            "criteria": {
+                "false": "The customer is asking a question or requesting a feature.",
+                "true": "The customer describes broken or unexpected product behavior.",
+            },
+            "instructions": "Is the customer reporting a software defect?",
+            "type": "noul",
+        },
+        "team": {
+            "criteria": {
+                "account": "Login, permissions, or profile issues.",
+                "frontend": "Rendering, layout, or browser compatibility issues.",
+                "payments": "Checkout, billing, or payment processing issues.",
+            },
+            "instructions": "Which team should own this ticket?",
+            "type": "choice",
+        },
+        "urgency": {
+            "criteria": [
+                "Can wait for the next release",
+                "Should be fixed this week",
+                "Blocking revenue right now",
+            ],
+            "instructions": "How urgent is this ticket?",
+            "type": "score",
+        },
     }, state={
-        "key": "Massachusetts",
+        "customer_tier": "enterprise",
+        "ticket": "My checkout page shows a blank screen after I click Pay. I have tried two browsers.",
     })
 
     # Handle response
