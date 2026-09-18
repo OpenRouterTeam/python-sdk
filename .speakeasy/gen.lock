@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c48cf606-fb42-4a45-9c23-8f0555307828
 management:
-  docChecksum: e9079210b57b76d5adc98a5fbfee3e26
+  docChecksum: 8ce9a95a066e4f07396577ec2532aaef
   docVersion: 1.0.0
   speakeasyVersion: 1.787.0
   generationVersion: 2.914.0
-  releaseVersion: 1.1.160
-  configChecksum: 294352f6dd2d72d42a5cbac1970b1738
+  releaseVersion: 1.1.161
+  configChecksum: 195a60f46e6e86213e3c0fd8f41a712b
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
 persistentEdits:
-  generation_id: a334c67c-ff14-46d1-955a-fdbb92136262
-  pristine_commit_hash: 1b2cae9732a135f60fbbde8b0f6d151194ec3632
-  pristine_tree_hash: 3ec98bd39ffcc42f451dcfb8290d213d737108f4
+  generation_id: 6aa3782e-b11c-47c8-8533-24934159a2b5
+  pristine_commit_hash: 515f6c5485838e35415c7cc053b02b6d3f535869
+  pristine_tree_hash: 445945c8dd3b7a39ac7f58d062d196632c8c4c7f
 features:
   python:
     acceptHeaders: 3.0.0
@@ -6166,8 +6166,8 @@ trackedFiles:
     pristine_git_object: cd3d46d3af459e7b95090a8e74e22eed448b3fdd
   docs/components/vaultsecret.mdx:
     id: f83900f9f59b
-    last_write_checksum: sha1:b1fa371ebf1c4013e68eee3d829c2806fcdf6cd9
-    pristine_git_object: f7e952ab909d88c4460040a50f71256ace063efc
+    last_write_checksum: sha1:9098b56d682969f3eb8fdf1b2a02174cc69ae75b
+    pristine_git_object: 912186ec233643a66d0d5c1c1f9c980b3df9f765
   docs/components/vaultsecretcopyrequest.mdx:
     id: 31f8edda3085
     last_write_checksum: sha1:7986ca6048fab04668b24b844f5756f33948eef6
@@ -6182,8 +6182,8 @@ trackedFiles:
     pristine_git_object: 0b17bf589ee1d32b61748a62deb3e71562497f03
   docs/components/vaultsecretresponse.mdx:
     id: 933fa3914687
-    last_write_checksum: sha1:43511297d34b0775fd672907f3044d6e02f99afd
-    pristine_git_object: 9286dbb18a96ef2539d72f107f64ab62c3f98604
+    last_write_checksum: sha1:cba8d21eb9e988bc6b1b5799792d98ba14695616
+    pristine_git_object: db67f3cfa5cb9541b65a45d66fc7c7de5fa31e2b
   docs/components/vaultsecretwriterequest.mdx:
     id: 8d1688364ae0
     last_write_checksum: sha1:dd7b982e9f3f02beb523d311abfe5c1a05ee8b57
@@ -8158,8 +8158,8 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:34ee2a7313a11b1fd8b2ee964ebd3f022e3f4b91
-    pristine_git_object: 787fe930bc59ade28290f768170b6c2f8cca8725
+    last_write_checksum: sha1:d8c7b7943a6026b790c064e2fff1760876efb401
+    pristine_git_object: 00fdf59c324d872273d041c2b9026b100c4575eb
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77f44b60b98bc126557ec27391f91dfba764bb54
@@ -8186,8 +8186,8 @@ trackedFiles:
     pristine_git_object: 86713cfea633e09d33b3d4e65281071fe20e6137
   src/openrouter/_version.py:
     id: d8d15ad6c586
-    last_write_checksum: sha1:5c1a29319dbaeec6f3940b892ececa9a973e8c77
-    pristine_git_object: a910b9c2d043f46fc7afe564dfdb2f9841a7d047
+    last_write_checksum: sha1:54e799a27c847f61441376935485ee3bc2b17a71
+    pristine_git_object: 61ea41dc67e48bdd01707aa6de9eb2dc08ecd4a4
   src/openrouter/alpha.py:
     id: 306c4d93308d
     last_write_checksum: sha1:0c25a52ed5fb688ec1e923e4e82bcfc9cae49465
@@ -10842,8 +10842,8 @@ trackedFiles:
     pristine_git_object: a0491cc8fd3bd9986146cb1176e27d5b9c9beb60
   src/openrouter/components/vaultsecret.py:
     id: 9fcf1780b21c
-    last_write_checksum: sha1:8f9d67ffe7ccc6e136436956c62cfc474239367b
-    pristine_git_object: 001689417bffff3be2613e2f9180e325caeeaef9
+    last_write_checksum: sha1:8b04cf06d4dac935e5e4d6a7fe690167a6a56ca6
+    pristine_git_object: aba4e19501d9a4ea0a4b40db2d27186c32769ee3
   src/openrouter/components/vaultsecretcopyrequest.py:
     id: d76c25d3f759
     last_write_checksum: sha1:0606f04ef3007d140e4d87e516f65263540ccb1e
@@ -10858,8 +10858,8 @@ trackedFiles:
     pristine_git_object: 5d2afe2de22d48b4553cd60e4a11eea5b7b417ed
   src/openrouter/components/vaultsecretresponse.py:
     id: 13721b687525
-    last_write_checksum: sha1:a8b37f58c39f59a73d7693b105699256320c3c5e
-    pristine_git_object: a245014a7b07b95ac665357f587e1340cff8dc85
+    last_write_checksum: sha1:211d5fc20db2ee00ea3476ffaab178121ea811a4
+    pristine_git_object: ec329629236dfe3490753b322124d1b2321a2ebf
   src/openrouter/components/vaultsecretwriterequest.py:
     id: cbb498111508
     last_write_checksum: sha1:72526fd27fea161dd2701080c2674dc96e046462
@@ -14940,9 +14940,3 @@ examples:
         "502":
           application/json: {"error": {"code": 409, "message": "That question is no longer waiting for an answer."}}
 examplesVersion: 1.0.2
-releaseNotes: |
-  ## Python SDK Changes:
-  * `open_router.interns.list_interns()`:  `response.data[]` **Changed** (Breaking ⚠️)
-  * `open_router.interns.create_intern()`:  `response` **Changed** (Breaking ⚠️)
-  * `open_router.interns.get_intern()`:  `response` **Changed** (Breaking ⚠️)
-  * `open_router.interns.update_intern()`:  `response` **Changed** (Breaking ⚠️)
