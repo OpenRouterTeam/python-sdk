@@ -1,0 +1,21 @@
+---
+title: "InternChatMessageContent"
+---
+
+Message text as a string or a list of text parts. Assistant history may carry null. Only the last message is read; earlier messages are accepted so ordinary clients can resend history.
+
+
+## Supported Types
+
+### `str`
+
+```python
+value: str = /* values here */
+```
+
+### `List[components.InternChatTextPart]`
+
+```python
+value: List[components.InternChatTextPart] = /* values here */
+```
+

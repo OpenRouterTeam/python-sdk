@@ -185,6 +185,8 @@ Provider = Union[
         "tenstorrent",
         "thinkingmachines",
         "together",
+        "typesafe",
+        "unbiased",
         "upstage",
         "venice",
         "voyageai",

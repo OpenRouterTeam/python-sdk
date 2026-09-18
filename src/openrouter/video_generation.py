@@ -37,6 +37,7 @@ class VideoGeneration(BaseSDK):
                 Iterable[components.InputReferenceTypedDict],
             ]
         ] = None,
+        previous_job_id: Optional[str] = None,
         prompt: Optional[str] = None,
         provider: Optional[
             Union[
@@ -77,6 +78,7 @@ class VideoGeneration(BaseSDK):
         :param frame_images: Images to use as the first and/or last frame of the generated video. Each image must specify a frame_type of first_frame or last_frame.
         :param generate_audio: Whether to generate audio alongside the video. Defaults to the endpoint's generate_audio capability flag, false if not set.
         :param input_references: Reference assets to guide video generation. Accepts image, audio, and video references. Audio and video references are only honored by providers that support them (including BytePlus Seedance generation 2 and newer); other providers use image references and ignore the rest.
+        :param previous_job_id: ID of a completed video job to edit or extend, as returned by the submit response. The new job runs on the same model and endpoint that produced the previous one. Only models that support continuation accept this field.
         :param prompt: Text prompt describing the video to generate. Optional for models that support generating a video from image input alone; required by all other models.
         :param provider: Provider-specific passthrough configuration
         :param resolution: Resolution of the generated video
@@ -118,6 +120,7 @@ class VideoGeneration(BaseSDK):
                     input_references, Optional[List[components.InputReference]]
                 ),
                 model=model,
+                previous_job_id=previous_job_id,
                 prompt=prompt,
                 provider=utils.get_pydantic_model(
                     provider, Optional[components.VideoGenerationRequestProvider]
@@ -270,6 +273,7 @@ class VideoGeneration(BaseSDK):
                 Iterable[components.InputReferenceTypedDict],
             ]
         ] = None,
+        previous_job_id: Optional[str] = None,
         prompt: Optional[str] = None,
         provider: Optional[
             Union[
@@ -310,6 +314,7 @@ class VideoGeneration(BaseSDK):
         :param frame_images: Images to use as the first and/or last frame of the generated video. Each image must specify a frame_type of first_frame or last_frame.
         :param generate_audio: Whether to generate audio alongside the video. Defaults to the endpoint's generate_audio capability flag, false if not set.
         :param input_references: Reference assets to guide video generation. Accepts image, audio, and video references. Audio and video references are only honored by providers that support them (including BytePlus Seedance generation 2 and newer); other providers use image references and ignore the rest.
+        :param previous_job_id: ID of a completed video job to edit or extend, as returned by the submit response. The new job runs on the same model and endpoint that produced the previous one. Only models that support continuation accept this field.
         :param prompt: Text prompt describing the video to generate. Optional for models that support generating a video from image input alone; required by all other models.
         :param provider: Provider-specific passthrough configuration
         :param resolution: Resolution of the generated video
@@ -351,6 +356,7 @@ class VideoGeneration(BaseSDK):
                     input_references, Optional[List[components.InputReference]]
                 ),
                 model=model,
+                previous_job_id=previous_job_id,
                 prompt=prompt,
                 provider=utils.get_pydantic_model(
                     provider, Optional[components.VideoGenerationRequestProvider]

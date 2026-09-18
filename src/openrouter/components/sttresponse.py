@@ -15,6 +15,8 @@ class STTResponseTypedDict(TypedDict):
 
     text: str
     r"""The transcribed text"""
+    confidence: NotRequired[float]
+    r"""Provider confidence for the whole transcript from 0 to 1, present when response_format is verbose_json and the provider scores the full transcript"""
     duration: NotRequired[float]
     r"""Duration of the input audio in seconds, present when response_format is verbose_json"""
     language: NotRequired[str]
@@ -34,6 +36,9 @@ class STTResponse(BaseModel):
 
     text: str
     r"""The transcribed text"""
+
+    confidence: Optional[float] = None
+    r"""Provider confidence for the whole transcript from 0 to 1, present when response_format is verbose_json and the provider scores the full transcript"""
 
     duration: Optional[float] = None
     r"""Duration of the input audio in seconds, present when response_format is verbose_json"""
@@ -56,7 +61,7 @@ class STTResponse(BaseModel):
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
-            ["duration", "language", "segments", "task", "usage", "words"]
+            ["confidence", "duration", "language", "segments", "task", "usage", "words"]
         )
         serialized = handler(self)
         m = {}

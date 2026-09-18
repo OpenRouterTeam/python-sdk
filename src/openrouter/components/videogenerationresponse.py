@@ -23,6 +23,7 @@ VideoGenerationResponseStatus = Union[
 
 class VideoGenerationResponseTypedDict(TypedDict):
     id: str
+    r"""The video job ID, in the `gen-vid-<timestamp>-<20 alphanumerics>` generation ID format. Pass it as `previous_job_id` to continue the generation."""
     polling_url: str
     status: VideoGenerationResponseStatus
     error: NotRequired[str]
@@ -35,6 +36,7 @@ class VideoGenerationResponseTypedDict(TypedDict):
 
 class VideoGenerationResponse(BaseModel):
     id: str
+    r"""The video job ID, in the `gen-vid-<timestamp>-<20 alphanumerics>` generation ID format. Pass it as `previous_job_id` to continue the generation."""
 
     polling_url: str
 

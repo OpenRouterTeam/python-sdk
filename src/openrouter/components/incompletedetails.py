@@ -7,7 +7,7 @@ from typing import Literal, Optional, Union
 from typing_extensions import NotRequired, TypedDict
 
 
-Reason = Union[
+IncompleteDetailsReason = Union[
     Literal[
         "max_output_tokens",
         "content_filter",
@@ -17,11 +17,11 @@ Reason = Union[
 
 
 class IncompleteDetailsTypedDict(TypedDict):
-    reason: NotRequired[Reason]
+    reason: NotRequired[IncompleteDetailsReason]
 
 
 class IncompleteDetails(BaseModel):
-    reason: Optional[Reason] = None
+    reason: Optional[IncompleteDetailsReason] = None
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

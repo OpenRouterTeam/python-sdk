@@ -24,6 +24,7 @@ APIType = Union[
         "stt",
         "video",
         "image",
+        "decisions",
     ],
     UnrecognizedStr,
 ]

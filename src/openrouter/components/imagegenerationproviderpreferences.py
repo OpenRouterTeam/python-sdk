@@ -171,7 +171,9 @@ class ImageGenerationProviderPreferencesOptionsTypedDict(TypedDict):
     thinkingmachines: NotRequired[Dict[str, Any]]
     together: NotRequired[Dict[str, Any]]
     together_lite: NotRequired[Dict[str, Any]]
+    typesafe: NotRequired[Dict[str, Any]]
     ubicloud: NotRequired[Dict[str, Any]]
+    unbiased: NotRequired[Dict[str, Any]]
     upstage: NotRequired[Dict[str, Any]]
     venice: NotRequired[Dict[str, Any]]
     voyageai: NotRequired[Dict[str, Any]]
@@ -496,7 +498,11 @@ class ImageGenerationProviderPreferencesOptions(BaseModel):
         Optional[Dict[str, Any]], pydantic.Field(alias="together-lite")
     ] = None
 
+    typesafe: Optional[Dict[str, Any]] = None
+
     ubicloud: Optional[Dict[str, Any]] = None
+
+    unbiased: Optional[Dict[str, Any]] = None
 
     upstage: Optional[Dict[str, Any]] = None
 
@@ -653,7 +659,9 @@ class ImageGenerationProviderPreferencesOptions(BaseModel):
                 "thinkingmachines",
                 "together",
                 "together-lite",
+                "typesafe",
                 "ubicloud",
+                "unbiased",
                 "upstage",
                 "venice",
                 "voyageai",

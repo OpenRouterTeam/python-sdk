@@ -16,6 +16,8 @@ class STTWordTypedDict(TypedDict):
     r"""Word start time in seconds"""
     word: str
     r"""The transcribed word"""
+    confidence: NotRequired[float]
+    r"""Provider confidence for the word from 0 to 1, present when the provider returns per-word confidence"""
     speaker: NotRequired[int]
     r"""Speaker index for the word, present when the provider returns diarization data"""
 
@@ -32,12 +34,15 @@ class STTWord(BaseModel):
     word: str
     r"""The transcribed word"""
 
+    confidence: Optional[float] = None
+    r"""Provider confidence for the word from 0 to 1, present when the provider returns per-word confidence"""
+
     speaker: Optional[int] = None
     r"""Speaker index for the word, present when the provider returns diarization data"""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["speaker"])
+        optional_fields = set(["confidence", "speaker"])
         serialized = handler(self)
         m = {}
 

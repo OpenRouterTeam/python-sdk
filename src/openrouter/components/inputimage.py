@@ -29,26 +29,29 @@ InputImageType = Literal["input_image",]
 
 
 class InputImageTypedDict(TypedDict):
-    r"""Image input content item"""
+    r"""Image input content item. Provide either an image_url (a URL or a base64 data URL) or the file_id of an uploaded image."""
 
     detail: InputImageDetail
     type: InputImageType
+    file_id: NotRequired[Nullable[str]]
     image_url: NotRequired[Nullable[str]]
 
 
 class InputImage(BaseModel):
-    r"""Image input content item"""
+    r"""Image input content item. Provide either an image_url (a URL or a base64 data URL) or the file_id of an uploaded image."""
 
     detail: InputImageDetail
 
     type: InputImageType
+
+    file_id: OptionalNullable[str] = UNSET
 
     image_url: OptionalNullable[str] = UNSET
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["image_url"])
-        nullable_fields = set(["image_url"])
+        optional_fields = set(["file_id", "image_url"])
+        nullable_fields = set(["file_id", "image_url"])
         serialized = handler(self)
         m = {}
 
