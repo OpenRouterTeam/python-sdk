@@ -223,6 +223,8 @@ class GetCurrentKeyDataTypedDict(TypedDict):
     r"""Remaining spending limit in USD"""
     limit_reset: Nullable[str]
     r"""Type of limit reset for the API key"""
+    organization_id: Nullable[str]
+    r"""The ID of the organization that owns this API key, or null when an individual account owns it."""
     rate_limit: RateLimitTypedDict
     r"""Legacy rate limit information about a key. Will always return -1."""
     usage: float
@@ -233,6 +235,8 @@ class GetCurrentKeyDataTypedDict(TypedDict):
     r"""OpenRouter credit usage (in USD) for the current UTC month"""
     usage_weekly: float
     r"""OpenRouter credit usage (in USD) for the current UTC week (Monday-Sunday)"""
+    workspace_id: Nullable[str]
+    r"""The ID of the workspace this API key spends in, or null when no active workspace resolved for it, for example because the key's workspace was deleted."""
     expires_at: NotRequired[Nullable[datetime]]
     r"""ISO 8601 UTC timestamp when the API key expires, or null if no expiration"""
 
@@ -290,6 +294,9 @@ class GetCurrentKeyData(BaseModel):
     limit_reset: Nullable[str]
     r"""Type of limit reset for the API key"""
 
+    organization_id: Nullable[str]
+    r"""The ID of the organization that owns this API key, or null when an individual account owns it."""
+
     rate_limit: Annotated[
         RateLimit,
         pydantic.Field(
@@ -310,6 +317,9 @@ class GetCurrentKeyData(BaseModel):
     usage_weekly: float
     r"""OpenRouter credit usage (in USD) for the current UTC week (Monday-Sunday)"""
 
+    workspace_id: Nullable[str]
+    r"""The ID of the workspace this API key spends in, or null when no active workspace resolved for it, for example because the key's workspace was deleted."""
+
     expires_at: OptionalNullable[datetime] = UNSET
     r"""ISO 8601 UTC timestamp when the API key expires, or null if no expiration"""
 
@@ -317,7 +327,15 @@ class GetCurrentKeyData(BaseModel):
     def serialize_model(self, handler):
         optional_fields = set(["expires_at"])
         nullable_fields = set(
-            ["creator_user_id", "expires_at", "limit", "limit_remaining", "limit_reset"]
+            [
+                "creator_user_id",
+                "expires_at",
+                "limit",
+                "limit_remaining",
+                "limit_reset",
+                "organization_id",
+                "workspace_id",
+            ]
         )
         serialized = handler(self)
         m = {}
