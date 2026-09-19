@@ -1057,6 +1057,7 @@ if TYPE_CHECKING:
         DeleteGuardrailResponse,
         DeleteGuardrailResponseTypedDict,
     )
+    from .deleteinternrequest import DeleteInternRequest, DeleteInternRequestTypedDict
     from .deleteinternresponse import (
         DeleteInternResponse,
         DeleteInternResponseTypedDict,
@@ -4223,6 +4224,8 @@ __all__ = [
     "DeleteBYOKKeyResponseTypedDict",
     "DeleteGuardrailResponse",
     "DeleteGuardrailResponseTypedDict",
+    "DeleteInternRequest",
+    "DeleteInternRequestTypedDict",
     "DeleteInternResponse",
     "DeleteInternResponseTypedDict",
     "DeleteObservabilityDestinationResponse",
@@ -6751,6 +6754,8 @@ _dynamic_imports: dict[str, str] = {
     "DeleteBYOKKeyResponseTypedDict": ".deletebyokkeyresponse",
     "DeleteGuardrailResponse": ".deleteguardrailresponse",
     "DeleteGuardrailResponseTypedDict": ".deleteguardrailresponse",
+    "DeleteInternRequest": ".deleteinternrequest",
+    "DeleteInternRequestTypedDict": ".deleteinternrequest",
     "DeleteInternResponse": ".deleteinternresponse",
     "DeleteInternResponseTypedDict": ".deleteinternresponse",
     "DeleteObservabilityDestinationResponse": ".deleteobservabilitydestinationresponse",

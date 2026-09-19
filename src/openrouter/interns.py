@@ -601,6 +601,7 @@ class Interns(BaseSDK):
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
+        acknowledge_workspace_loss: Optional[bool] = False,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -608,7 +609,7 @@ class Interns(BaseSDK):
     ) -> components.DeleteInternResponse:
         r"""Delete an intern
 
-        Starts safe teardown of the intern, its runtime and its private vault. The API key selects the caller, workspace and visible interns. There is no default workspace fallback. Requests on regional hostnames such as `eu.openrouter.ai` are refused. [API key](/docs/api-reference/authentication) required.
+        Starts safe teardown of the intern, its runtime and its private vault. The body is optional. Send `{\"acknowledge_workspace_loss\": true}` to delete a `destroy_failed` intern whose `last_failure_message` names `workspace_archive_failed`, accepting that its workspace is not backed up. The request body is capped at 1048576 bytes and a larger body is refused with 413. The API key selects the caller, workspace and visible interns. There is no default workspace fallback. Requests on regional hostnames such as `eu.openrouter.ai` are refused. [API key](/docs/api-reference/authentication) required.
 
         If set, this operation will use `api_key` from the global security.
 
@@ -620,6 +621,7 @@ class Interns(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
+        :param acknowledge_workspace_loss: Delete even though the workspace backup was not confirmed. Defaults to false, which refuses the teardown when a workspace archive is missing.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -640,6 +642,9 @@ class Interns(BaseSDK):
             x_open_router_title=x_open_router_title,
             x_open_router_categories=x_open_router_categories,
             intern_id=intern_id,
+            delete_intern_request=components.DeleteInternRequest(
+                acknowledge_workspace_loss=acknowledge_workspace_loss,
+            ),
         )
 
         req = self._build_request(
@@ -648,7 +653,7 @@ class Interns(BaseSDK):
             base_url=base_url,
             url_variables=url_variables,
             request=request,
-            request_body_required=False,
+            request_body_required=True,
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
@@ -660,6 +665,13 @@ class Interns(BaseSDK):
                 x_open_router_categories=self.sdk_configuration.globals.x_open_router_categories,
             ),
             security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.delete_intern_request,
+                False,
+                False,
+                "json",
+                components.DeleteInternRequest,
+            ),
             allow_empty_value=None,
             allowed_fields=["api_key"],
             timeout_ms=timeout_ms,
@@ -698,7 +710,9 @@ class Interns(BaseSDK):
         if utils.match_response(http_res, "202", "application/json"):
             return unmarshal_json_response(components.DeleteInternResponse, http_res)
         if utils.match_response(
-            http_res, ["401", "403", "404", "408", "409"], "application/json"
+            http_res,
+            ["400", "401", "403", "404", "408", "409", "413"],
+            "application/json",
         ):
             response_data = unmarshal_json_response(
                 errors.InternLifecycleErrorData, http_res
@@ -729,6 +743,7 @@ class Interns(BaseSDK):
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
+        acknowledge_workspace_loss: Optional[bool] = False,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -736,7 +751,7 @@ class Interns(BaseSDK):
     ) -> components.DeleteInternResponse:
         r"""Delete an intern
 
-        Starts safe teardown of the intern, its runtime and its private vault. The API key selects the caller, workspace and visible interns. There is no default workspace fallback. Requests on regional hostnames such as `eu.openrouter.ai` are refused. [API key](/docs/api-reference/authentication) required.
+        Starts safe teardown of the intern, its runtime and its private vault. The body is optional. Send `{\"acknowledge_workspace_loss\": true}` to delete a `destroy_failed` intern whose `last_failure_message` names `workspace_archive_failed`, accepting that its workspace is not backed up. The request body is capped at 1048576 bytes and a larger body is refused with 413. The API key selects the caller, workspace and visible interns. There is no default workspace fallback. Requests on regional hostnames such as `eu.openrouter.ai` are refused. [API key](/docs/api-reference/authentication) required.
 
         If set, this operation will use `api_key` from the global security.
 
@@ -748,6 +763,7 @@ class Interns(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
+        :param acknowledge_workspace_loss: Delete even though the workspace backup was not confirmed. Defaults to false, which refuses the teardown when a workspace archive is missing.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -768,6 +784,9 @@ class Interns(BaseSDK):
             x_open_router_title=x_open_router_title,
             x_open_router_categories=x_open_router_categories,
             intern_id=intern_id,
+            delete_intern_request=components.DeleteInternRequest(
+                acknowledge_workspace_loss=acknowledge_workspace_loss,
+            ),
         )
 
         req = self._build_request_async(
@@ -776,7 +795,7 @@ class Interns(BaseSDK):
             base_url=base_url,
             url_variables=url_variables,
             request=request,
-            request_body_required=False,
+            request_body_required=True,
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
@@ -788,6 +807,13 @@ class Interns(BaseSDK):
                 x_open_router_categories=self.sdk_configuration.globals.x_open_router_categories,
             ),
             security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.delete_intern_request,
+                False,
+                False,
+                "json",
+                components.DeleteInternRequest,
+            ),
             allow_empty_value=None,
             allowed_fields=["api_key"],
             timeout_ms=timeout_ms,
@@ -826,7 +852,9 @@ class Interns(BaseSDK):
         if utils.match_response(http_res, "202", "application/json"):
             return unmarshal_json_response(components.DeleteInternResponse, http_res)
         if utils.match_response(
-            http_res, ["401", "403", "404", "408", "409"], "application/json"
+            http_res,
+            ["400", "401", "403", "404", "408", "409", "413"],
+            "application/json",
         ):
             response_data = unmarshal_json_response(
                 errors.InternLifecycleErrorData, http_res
@@ -1138,7 +1166,7 @@ class Interns(BaseSDK):
 
         :param description: New free-form description. Null clears it.
         :param instructions: New standing instructions. Null clears them.
-        :param model: New OpenRouter model slug. Null restores the workspace default.
+        :param model: New OpenRouter model slug in `author/slug` form (an optional `:variant` suffix is accepted). Other shapes are refused with 400. Null restores the workspace default. Takes effect on the next provision: until then `GET` shows this configured model while chat chunks show the model the running intern reports.
         :param name: New intern name, unique per creator within the workspace.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -1287,7 +1315,7 @@ class Interns(BaseSDK):
 
         :param description: New free-form description. Null clears it.
         :param instructions: New standing instructions. Null clears them.
-        :param model: New OpenRouter model slug. Null restores the workspace default.
+        :param model: New OpenRouter model slug in `author/slug` form (an optional `:variant` suffix is accepted). Other shapes are refused with 400. Null restores the workspace default. Takes effect on the next provision: until then `GET` shows this configured model while chat chunks show the model the running intern reports.
         :param name: New intern name, unique per creator within the workspace.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -1966,8 +1994,8 @@ class Interns(BaseSDK):
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
         :param approval_mode: How the run started by this prompt handles tool approvals. `self-drive` (the default when omitted) consents on your behalf and runs the shell unsandboxed. `manual` asks you before an approval-bearing tool runs, as an `openrouter.provide_input` permission request, and keeps the shell sandboxed until an escalation is allowed. The mode applies to the run this prompt starts and is not remembered by the session. Repeat it on each new prompt that should use it. A `tool` reply continues the run under the mode it started with.
-        :param model: Accepted for OpenAI compatibility and ignored. Streamed chunks report the model the intern actually used, or `openrouter/intern` when it did not report one.
-        :param session_id: The daemon session to continue, as returned in `session_id` on the final chunk of an earlier response. Omit it to start a new session. Required when the last message has role `tool`.
+        :param model: Accepted for OpenAI compatibility and never used. The intern runs the model configured on it (`PATCH` the intern to change it). Streamed chunks report the runtime's identifier for that model as the intern reports it, or `openrouter/intern` on chunks whose event carries no model (before the intern reports one, and on the chunks the API emits itself: the timeout, run-ended and severed-stream error chunks, the stop chunk of a replay that ends without a terminal daemon event, and the final usage chunk after any of them). A usage chunk that follows a daemon completion event carries the model the intern reported.
+        :param session_id: The daemon session to continue, as returned in `session_id` on the final chunk of an earlier response. Omit it to start a new session. An id the intern has not seen before is not an error: it starts a new session under that id, so a mistyped id forks the conversation. Sessions are scoped to the intern's own daemon. Required when the last message has role `tool`.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -2157,8 +2185,8 @@ class Interns(BaseSDK):
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
         :param approval_mode: How the run started by this prompt handles tool approvals. `self-drive` (the default when omitted) consents on your behalf and runs the shell unsandboxed. `manual` asks you before an approval-bearing tool runs, as an `openrouter.provide_input` permission request, and keeps the shell sandboxed until an escalation is allowed. The mode applies to the run this prompt starts and is not remembered by the session. Repeat it on each new prompt that should use it. A `tool` reply continues the run under the mode it started with.
-        :param model: Accepted for OpenAI compatibility and ignored. Streamed chunks report the model the intern actually used, or `openrouter/intern` when it did not report one.
-        :param session_id: The daemon session to continue, as returned in `session_id` on the final chunk of an earlier response. Omit it to start a new session. Required when the last message has role `tool`.
+        :param model: Accepted for OpenAI compatibility and never used. The intern runs the model configured on it (`PATCH` the intern to change it). Streamed chunks report the runtime's identifier for that model as the intern reports it, or `openrouter/intern` on chunks whose event carries no model (before the intern reports one, and on the chunks the API emits itself: the timeout, run-ended and severed-stream error chunks, the stop chunk of a replay that ends without a terminal daemon event, and the final usage chunk after any of them). A usage chunk that follows a daemon completion event carries the model the intern reported.
+        :param session_id: The daemon session to continue, as returned in `session_id` on the final chunk of an earlier response. Omit it to start a new session. An id the intern has not seen before is not an error: it starts a new session under that id, so a mistyped id forks the conversation. Sessions are scoped to the intern's own daemon. Required when the last message has role `tool`.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds

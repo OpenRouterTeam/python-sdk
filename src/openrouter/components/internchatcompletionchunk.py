@@ -28,12 +28,12 @@ class InternChatCompletionChunkTypedDict(TypedDict):
     id: str
     r"""The completion id, constant for the whole response."""
     model: str
-    r"""The request `model` when given, or `openrouter/intern`. The final chunk may carry the model the intern reported for the run instead."""
+    r"""The runtime's identifier for the model the intern is running, as the intern reports it. Each chunk carries the model from the event behind it: `openrouter/intern` on chunks emitted before the intern has reported one and on chunks the API emits itself (timeout, run-ended and severed-stream errors and their final usage chunk), even after an earlier chunk named a model. It can change within a stream. It is not an OpenRouter model slug, and the request `model` is never used."""
     object: InternChatCompletionChunkObject
     error: NotRequired[InternChatStreamErrorTypedDict]
     r"""A failure after the response headers were sent. The chunk that carries it has `finish_reason: \"error\"`, then the final empty-`choices` chunk and `[DONE]` follow. Reasons here are `attachment_failed`, `busy`, `client_closed_request`, `interaction_not_pending`, `interaction_unknown`, `intern_unreachable`, `run_ended`, `stream_severed`, `timeout` or `turn_failed`. `run_ended` reports an ending the intern confirmed, such as a cancellation or a deadline, while `stream_severed` reports a connection lost without that confirmation."""
     session_id: NotRequired[Nullable[str]]
-    r"""On the final chunk of every response, the daemon session to continue with, or `null` when the run failed before the intern reported one. Send it as `session_id` on the next request, including the `tool` reply to an interaction."""
+    r"""On the final chunk of every response, the daemon session to continue with, or `null` when the run failed before the intern reported one. Send it as `session_id` on the next request, including the `tool` reply to an interaction. Session ids are client-visible and scoped to the intern's own daemon."""
     usage: NotRequired[Nullable[InternChatUsageTypedDict]]
     r"""Token usage for the run as the daemon reported it, on the final chunk before `[DONE]`. `null` when the daemon reported none, and always `null` after `tool_calls` because the turn is not over."""
 
@@ -50,7 +50,7 @@ class InternChatCompletionChunk(BaseModel):
     r"""The completion id, constant for the whole response."""
 
     model: str
-    r"""The request `model` when given, or `openrouter/intern`. The final chunk may carry the model the intern reported for the run instead."""
+    r"""The runtime's identifier for the model the intern is running, as the intern reports it. Each chunk carries the model from the event behind it: `openrouter/intern` on chunks emitted before the intern has reported one and on chunks the API emits itself (timeout, run-ended and severed-stream errors and their final usage chunk), even after an earlier chunk named a model. It can change within a stream. It is not an OpenRouter model slug, and the request `model` is never used."""
 
     object: InternChatCompletionChunkObject
 
@@ -58,7 +58,7 @@ class InternChatCompletionChunk(BaseModel):
     r"""A failure after the response headers were sent. The chunk that carries it has `finish_reason: \"error\"`, then the final empty-`choices` chunk and `[DONE]` follow. Reasons here are `attachment_failed`, `busy`, `client_closed_request`, `interaction_not_pending`, `interaction_unknown`, `intern_unreachable`, `run_ended`, `stream_severed`, `timeout` or `turn_failed`. `run_ended` reports an ending the intern confirmed, such as a cancellation or a deadline, while `stream_severed` reports a connection lost without that confirmation."""
 
     session_id: OptionalNullable[str] = UNSET
-    r"""On the final chunk of every response, the daemon session to continue with, or `null` when the run failed before the intern reported one. Send it as `session_id` on the next request, including the `tool` reply to an interaction."""
+    r"""On the final chunk of every response, the daemon session to continue with, or `null` when the run failed before the intern reported one. Send it as `session_id` on the next request, including the `tool` reply to an interaction. Session ids are client-visible and scoped to the intern's own daemon."""
 
     usage: OptionalNullable[InternChatUsage] = UNSET
     r"""Token usage for the run as the daemon reported it, on the final chunk before `[DONE]`. `null` when the daemon reported none, and always `null` after `tool_calls` because the turn is not over."""
