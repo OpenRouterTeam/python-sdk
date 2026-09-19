@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c48cf606-fb42-4a45-9c23-8f0555307828
 management:
-  docChecksum: 98e7150b3031e3fd420a1417065c8c33
+  docChecksum: 2e9c0843b3b5926d14c2ce981554c92a
   docVersion: 1.0.0
   speakeasyVersion: 1.787.0
   generationVersion: 2.914.0
-  releaseVersion: 1.2.3
-  configChecksum: 623dce73439db2a40cf9981582190d03
+  releaseVersion: 1.2.4
+  configChecksum: dee5dc582d328e7e93faa0b4e5b7ae9a
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
 persistentEdits:
-  generation_id: 5d7c21fa-536d-4272-9c2a-e55016282111
-  pristine_commit_hash: 1b3d14226546a1c7499d1c2514b24bb578f5cca2
-  pristine_tree_hash: 0eba64490d21ab3a4f5b7aa4e08a595d88dfb716
+  generation_id: a3f5140d-7a24-4da8-a0de-9f5f5fb461f7
+  pristine_commit_hash: 23b5246b75e0d0f16ff056132890afea299882f7
+  pristine_tree_hash: 82f2522e790ca7b6c6c92ab41522c8ee45c0f23c
 features:
   python:
     acceptHeaders: 3.0.0
@@ -8159,8 +8159,8 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:53b3f141b22a6643e7a6482d3a925c184cde880a
-    pristine_git_object: 4617f98a2d78d6cd1d6cf7f71dad83c97abdf784
+    last_write_checksum: sha1:bdd9deb8a971c07d1b58f60aa9be49a272f4091a
+    pristine_git_object: c4bbfb68c2dd7bfa194aa8882bf6dd98dfe00707
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77f44b60b98bc126557ec27391f91dfba764bb54
@@ -8187,8 +8187,8 @@ trackedFiles:
     pristine_git_object: 86713cfea633e09d33b3d4e65281071fe20e6137
   src/openrouter/_version.py:
     id: d8d15ad6c586
-    last_write_checksum: sha1:f76f1919ba451dd947efe64925dbc5eff1939bd3
-    pristine_git_object: 2ea5bbe6f2011c6d8e394549eb4b0ef9d503dcc5
+    last_write_checksum: sha1:204ec91710577183b0d13e5eb46fc40b65f894d7
+    pristine_git_object: 260a571d032accb9831be6bd14d0556d7f74991e
   src/openrouter/alpha.py:
     id: 306c4d93308d
     last_write_checksum: sha1:0c25a52ed5fb688ec1e923e4e82bcfc9cae49465
@@ -14941,4 +14941,3 @@ examples:
         "502":
           application/json: {"error": {"code": 409, "message": "That question is no longer waiting for an answer."}}
 examplesVersion: 1.0.2
-releaseNotes: "## Python SDK Changes:\n* `open_router.interns.create_intern()`:  `request.workspace_id` **Changed**\n* `open_router.interns.chat()`: \n  *  `request.messages[].union(assistant).content` **Changed**\n"
