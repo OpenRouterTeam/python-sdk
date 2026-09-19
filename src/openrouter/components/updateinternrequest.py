@@ -21,7 +21,7 @@ class UpdateInternRequestTypedDict(TypedDict):
     instructions: NotRequired[Nullable[str]]
     r"""New standing instructions. Null clears them."""
     model: NotRequired[Nullable[str]]
-    r"""New OpenRouter model slug. Null restores the workspace default."""
+    r"""New OpenRouter model slug in `author/slug` form (an optional `:variant` suffix is accepted). Other shapes are refused with 400. Null restores the workspace default. Takes effect on the next provision: until then `GET` shows this configured model while chat chunks show the model the running intern reports."""
     name: NotRequired[str]
     r"""New intern name, unique per creator within the workspace."""
 
@@ -36,7 +36,7 @@ class UpdateInternRequest(BaseModel):
     r"""New standing instructions. Null clears them."""
 
     model: OptionalNullable[str] = UNSET
-    r"""New OpenRouter model slug. Null restores the workspace default."""
+    r"""New OpenRouter model slug in `author/slug` form (an optional `:variant` suffix is accepted). Other shapes are refused with 400. Null restores the workspace default. Takes effect on the next provision: until then `GET` shows this configured model while chat chunks show the model the running intern reports."""
 
     name: Optional[str] = None
     r"""New intern name, unique per creator within the workspace."""

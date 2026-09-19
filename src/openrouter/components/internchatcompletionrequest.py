@@ -20,11 +20,11 @@ class InternChatCompletionRequestTypedDict(TypedDict):
     approval_mode: NotRequired[InternApprovalMode]
     r"""How the run started by this prompt handles tool approvals. `self-drive` (the default when omitted) consents on your behalf and runs the shell unsandboxed. `manual` asks you before an approval-bearing tool runs, as an `openrouter.provide_input` permission request, and keeps the shell sandboxed until an escalation is allowed. The mode applies to the run this prompt starts and is not remembered by the session. Repeat it on each new prompt that should use it. A `tool` reply continues the run under the mode it started with."""
     model: NotRequired[str]
-    r"""Accepted for OpenAI compatibility and ignored. Streamed chunks report the model the intern actually used, or `openrouter/intern` when it did not report one."""
+    r"""Accepted for OpenAI compatibility and never used. The intern runs the model configured on it (`PATCH` the intern to change it). Streamed chunks report the runtime's identifier for that model as the intern reports it, or `openrouter/intern` on chunks whose event carries no model (before the intern reports one, and on the chunks the API emits itself: the timeout, run-ended and severed-stream error chunks, the stop chunk of a replay that ends without a terminal daemon event, and the final usage chunk after any of them). A usage chunk that follows a daemon completion event carries the model the intern reported."""
     session_id: NotRequired[str]
-    r"""The daemon session to continue, as returned in `session_id` on the final chunk of an earlier response. Omit it to start a new session. Required when the last message has role `tool`."""
+    r"""The daemon session to continue, as returned in `session_id` on the final chunk of an earlier response. Omit it to start a new session. An id the intern has not seen before is not an error: it starts a new session under that id, so a mistyped id forks the conversation. Sessions are scoped to the intern's own daemon. Required when the last message has role `tool`."""
     stream: Literal[True]
-    r"""Must be `true`. This endpoint only streams."""
+    r"""Must be `true`. This endpoint only streams. `false` or an omitted `stream` is refused with `400` and reason `bad_request`."""
 
 
 class InternChatCompletionRequest(BaseModel):
@@ -37,16 +37,16 @@ class InternChatCompletionRequest(BaseModel):
     r"""How the run started by this prompt handles tool approvals. `self-drive` (the default when omitted) consents on your behalf and runs the shell unsandboxed. `manual` asks you before an approval-bearing tool runs, as an `openrouter.provide_input` permission request, and keeps the shell sandboxed until an escalation is allowed. The mode applies to the run this prompt starts and is not remembered by the session. Repeat it on each new prompt that should use it. A `tool` reply continues the run under the mode it started with."""
 
     model: Optional[str] = None
-    r"""Accepted for OpenAI compatibility and ignored. Streamed chunks report the model the intern actually used, or `openrouter/intern` when it did not report one."""
+    r"""Accepted for OpenAI compatibility and never used. The intern runs the model configured on it (`PATCH` the intern to change it). Streamed chunks report the runtime's identifier for that model as the intern reports it, or `openrouter/intern` on chunks whose event carries no model (before the intern reports one, and on the chunks the API emits itself: the timeout, run-ended and severed-stream error chunks, the stop chunk of a replay that ends without a terminal daemon event, and the final usage chunk after any of them). A usage chunk that follows a daemon completion event carries the model the intern reported."""
 
     session_id: Optional[str] = None
-    r"""The daemon session to continue, as returned in `session_id` on the final chunk of an earlier response. Omit it to start a new session. Required when the last message has role `tool`."""
+    r"""The daemon session to continue, as returned in `session_id` on the final chunk of an earlier response. Omit it to start a new session. An id the intern has not seen before is not an error: it starts a new session under that id, so a mistyped id forks the conversation. Sessions are scoped to the intern's own daemon. Required when the last message has role `tool`."""
 
     STREAM: Annotated[
         Annotated[Literal[True], AfterValidator(validate_const(True))],
         pydantic.Field(alias="stream"),
     ] = True
-    r"""Must be `true`. This endpoint only streams."""
+    r"""Must be `true`. This endpoint only streams. `false` or an omitted `stream` is refused with `400` and reason `bad_request`."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

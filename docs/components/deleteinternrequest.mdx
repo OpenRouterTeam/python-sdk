@@ -1,0 +1,12 @@
+---
+title: "DeleteInternRequest"
+---
+
+Optional consent for a teardown that discards the workspace.
+
+
+## Fields
+
+| Field                                                                                                                                         | Type                                                                                                                                          | Required                                                                                                                                      | Description                                                                                                                                   |
+| --------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| `acknowledge_workspace_loss`                                                                                                                  | *Optional[bool]*                                                                                                                              | :heavy_minus_sign:                                                                                                                            | Delete even though the workspace backup was not confirmed. Defaults to false, which refuses the teardown when a workspace archive is missing. |
