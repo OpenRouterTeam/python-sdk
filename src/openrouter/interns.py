@@ -20,6 +20,7 @@ class Interns(BaseSDK):
         x_open_router_categories: Optional[str] = None,
         limit: Optional[int] = None,
         status: Optional[Iterable[operations.Status]] = None,
+        starting_after: Optional[str] = None,
         workspace_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -41,6 +42,7 @@ class Interns(BaseSDK):
 
         :param limit: Maximum number of interns to return, from 1 through 500.
         :param status: Comma-separated lifecycle statuses to include.
+        :param starting_after: The opaque `next_cursor` of the previous page. Returns the interns that come after it in the newest-first order. A malformed cursor is a 400.
         :param workspace_id: Only return interns in this workspace. It must match the API key workspace.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -63,6 +65,7 @@ class Interns(BaseSDK):
             x_open_router_categories=x_open_router_categories,
             limit=limit,
             status=utils.unmarshal(status, Optional[List[operations.Status]]),
+            starting_after=starting_after,
             workspace_id=workspace_id,
         )
 
@@ -154,6 +157,7 @@ class Interns(BaseSDK):
         x_open_router_categories: Optional[str] = None,
         limit: Optional[int] = None,
         status: Optional[Iterable[operations.Status]] = None,
+        starting_after: Optional[str] = None,
         workspace_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -175,6 +179,7 @@ class Interns(BaseSDK):
 
         :param limit: Maximum number of interns to return, from 1 through 500.
         :param status: Comma-separated lifecycle statuses to include.
+        :param starting_after: The opaque `next_cursor` of the previous page. Returns the interns that come after it in the newest-first order. A malformed cursor is a 400.
         :param workspace_id: Only return interns in this workspace. It must match the API key workspace.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -197,6 +202,7 @@ class Interns(BaseSDK):
             x_open_router_categories=x_open_router_categories,
             limit=limit,
             status=utils.unmarshal(status, Optional[List[operations.Status]]),
+            starting_after=starting_after,
             workspace_id=workspace_id,
         )
 
