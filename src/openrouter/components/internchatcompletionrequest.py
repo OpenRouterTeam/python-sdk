@@ -20,7 +20,7 @@ class InternChatCompletionRequestTypedDict(TypedDict):
     approval_mode: NotRequired[InternApprovalMode]
     r"""How the run started by this prompt handles tool approvals. `self-drive` (the default when omitted) consents on your behalf and runs the shell unsandboxed. `manual` asks you before an approval-bearing tool runs, as an `openrouter.provide_input` permission request, and keeps the shell sandboxed until an escalation is allowed. The mode applies to the run this prompt starts and is not remembered by the session. Repeat it on each new prompt that should use it. A `tool` reply continues the run under the mode it started with."""
     model: NotRequired[str]
-    r"""Echoed as `model` on the streamed chunks; the final chunk may carry the model the intern reported instead. The intern chooses its own model, so this value does not change what runs."""
+    r"""Accepted for OpenAI compatibility and ignored. Streamed chunks report the model the intern actually used, or `openrouter/intern` when it did not report one."""
     session_id: NotRequired[str]
     r"""The daemon session to continue, as returned in `session_id` on the final chunk of an earlier response. Omit it to start a new session. Required when the last message has role `tool`."""
     stream: Literal[True]
@@ -37,7 +37,7 @@ class InternChatCompletionRequest(BaseModel):
     r"""How the run started by this prompt handles tool approvals. `self-drive` (the default when omitted) consents on your behalf and runs the shell unsandboxed. `manual` asks you before an approval-bearing tool runs, as an `openrouter.provide_input` permission request, and keeps the shell sandboxed until an escalation is allowed. The mode applies to the run this prompt starts and is not remembered by the session. Repeat it on each new prompt that should use it. A `tool` reply continues the run under the mode it started with."""
 
     model: Optional[str] = None
-    r"""Echoed as `model` on the streamed chunks; the final chunk may carry the model the intern reported instead. The intern chooses its own model, so this value does not change what runs."""
+    r"""Accepted for OpenAI compatibility and ignored. Streamed chunks report the model the intern actually used, or `openrouter/intern` when it did not report one."""
 
     session_id: Optional[str] = None
     r"""The daemon session to continue, as returned in `session_id` on the final chunk of an earlier response. Omit it to start a new session. Required when the last message has role `tool`."""
