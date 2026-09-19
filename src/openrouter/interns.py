@@ -284,7 +284,6 @@ class Interns(BaseSDK):
         self,
         *,
         name: str,
-        workspace_id: str,
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
@@ -293,6 +292,7 @@ class Interns(BaseSDK):
         instructions: OptionalNullable[str] = UNSET,
         provision: Optional[bool] = False,
         vault_id: Optional[str] = None,
+        workspace_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -305,7 +305,6 @@ class Interns(BaseSDK):
         If set, this operation will use `api_key` from the global security.
 
         :param name: Intern name, unique per creator within the workspace.
-        :param workspace_id: Workspace that will own the intern. It must match the API key workspace.
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
@@ -318,6 +317,7 @@ class Interns(BaseSDK):
         :param instructions: Standing instructions the intern boots with, or null.
         :param provision: Start provisioning during this create operation. Defaults to false.
         :param vault_id: Vault owned by another intern in this workspace to attach as a borrowed vault.
+        :param workspace_id: Workspace that will own the intern. Defaults to the workspace the API key resolves to. When given, it must match the API key workspace.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -441,7 +441,6 @@ class Interns(BaseSDK):
         self,
         *,
         name: str,
-        workspace_id: str,
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
@@ -450,6 +449,7 @@ class Interns(BaseSDK):
         instructions: OptionalNullable[str] = UNSET,
         provision: Optional[bool] = False,
         vault_id: Optional[str] = None,
+        workspace_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -462,7 +462,6 @@ class Interns(BaseSDK):
         If set, this operation will use `api_key` from the global security.
 
         :param name: Intern name, unique per creator within the workspace.
-        :param workspace_id: Workspace that will own the intern. It must match the API key workspace.
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
@@ -475,6 +474,7 @@ class Interns(BaseSDK):
         :param instructions: Standing instructions the intern boots with, or null.
         :param provision: Start provisioning during this create operation. Defaults to false.
         :param vault_id: Vault owned by another intern in this workspace to attach as a borrowed vault.
+        :param workspace_id: Workspace that will own the intern. Defaults to the workspace the API key resolves to. When given, it must match the API key workspace.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1946,7 +1946,7 @@ class Interns(BaseSDK):
 
         To answer, send a second request with the same `session_id`, the assistant message echoing that tool call, and a `tool` message whose `tool_call_id` is the tool call id and whose `content` is the answer. The answer is delivered to the run that asked and the stream continues from where it paused. A question stays open for its interaction deadline (5 minutes by default) and the run is cancelled when that passes. Rejected replies do not extend the deadline.
 
-        Closing the connection after the `[DONE]` that follows `finish_reason: \"tool_calls\"` keeps the run alive. Disconnecting while a response is still streaming cancels the run. The disconnect is noticed when the intern next writes to the stream, which during a silent tool run can take more than one 30 second heartbeat interval.
+        Closing the connection after the `[DONE]` that follows `finish_reason: \"tool_calls\"` keeps the run alive. Disconnecting while a response is still streaming cancels the run. The stream writes a `: keepalive` comment whenever nothing else has been written for 30 seconds, so a disconnect is noticed within that interval even while the intern is silent.
 
         A run the intern ends while you are still connected, by cancellation or by a deadline, ends the stream with a `finish_reason: \"error\"` chunk carrying `410` and reason `run_ended`, then the final empty-`choices` chunk and `[DONE]`. That error reports only an ending the intern confirmed. A connection that breaks without that confirmation ends with reason `stream_severed`, and a client that has already disconnected is promised no final event.
 
@@ -2137,7 +2137,7 @@ class Interns(BaseSDK):
 
         To answer, send a second request with the same `session_id`, the assistant message echoing that tool call, and a `tool` message whose `tool_call_id` is the tool call id and whose `content` is the answer. The answer is delivered to the run that asked and the stream continues from where it paused. A question stays open for its interaction deadline (5 minutes by default) and the run is cancelled when that passes. Rejected replies do not extend the deadline.
 
-        Closing the connection after the `[DONE]` that follows `finish_reason: \"tool_calls\"` keeps the run alive. Disconnecting while a response is still streaming cancels the run. The disconnect is noticed when the intern next writes to the stream, which during a silent tool run can take more than one 30 second heartbeat interval.
+        Closing the connection after the `[DONE]` that follows `finish_reason: \"tool_calls\"` keeps the run alive. Disconnecting while a response is still streaming cancels the run. The stream writes a `: keepalive` comment whenever nothing else has been written for 30 seconds, so a disconnect is noticed within that interval even while the intern is silent.
 
         A run the intern ends while you are still connected, by cancellation or by a deadline, ends the stream with a `finish_reason: \"error\"` chunk carrying `410` and reason `run_ended`, then the final empty-`choices` chunk and `[DONE]`. That error reports only an ending the intern confirmed. A connection that breaks without that confirmation ends with reason `stream_severed`, and a client that has already disconnected is promised no final event.
 

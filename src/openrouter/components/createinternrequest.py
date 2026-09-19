@@ -14,12 +14,10 @@ from typing_extensions import NotRequired, TypedDict
 
 
 class CreateInternRequestTypedDict(TypedDict):
-    r"""Settings for a new intern in an explicit workspace."""
+    r"""Settings for a new intern."""
 
     name: str
     r"""Intern name, unique per creator within the workspace."""
-    workspace_id: str
-    r"""Workspace that will own the intern. It must match the API key workspace."""
     description: NotRequired[Nullable[str]]
     r"""Free-form description, or null."""
     instructions: NotRequired[Nullable[str]]
@@ -28,16 +26,15 @@ class CreateInternRequestTypedDict(TypedDict):
     r"""Start provisioning during this create operation. Defaults to false."""
     vault_id: NotRequired[str]
     r"""Vault owned by another intern in this workspace to attach as a borrowed vault."""
+    workspace_id: NotRequired[str]
+    r"""Workspace that will own the intern. Defaults to the workspace the API key resolves to. When given, it must match the API key workspace."""
 
 
 class CreateInternRequest(BaseModel):
-    r"""Settings for a new intern in an explicit workspace."""
+    r"""Settings for a new intern."""
 
     name: str
     r"""Intern name, unique per creator within the workspace."""
-
-    workspace_id: str
-    r"""Workspace that will own the intern. It must match the API key workspace."""
 
     description: OptionalNullable[str] = UNSET
     r"""Free-form description, or null."""
@@ -51,9 +48,14 @@ class CreateInternRequest(BaseModel):
     vault_id: Optional[str] = None
     r"""Vault owned by another intern in this workspace to attach as a borrowed vault."""
 
+    workspace_id: Optional[str] = None
+    r"""Workspace that will own the intern. Defaults to the workspace the API key resolves to. When given, it must match the API key workspace."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["description", "instructions", "provision", "vault_id"])
+        optional_fields = set(
+            ["description", "instructions", "provision", "vault_id", "workspace_id"]
+        )
         nullable_fields = set(["description", "instructions"])
         serialized = handler(self)
         m = {}
