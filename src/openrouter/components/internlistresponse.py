@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from .intern import Intern, InternTypedDict
-from openrouter.types import BaseModel
-from typing import List
-from typing_extensions import TypedDict
+from openrouter.types import BaseModel, UNSET_SENTINEL
+from pydantic import model_serializer
+from typing import List, Optional
+from typing_extensions import NotRequired, TypedDict
 
 
 class InternListResponseTypedDict(TypedDict):
@@ -13,6 +14,8 @@ class InternListResponseTypedDict(TypedDict):
     data: List[InternTypedDict]
     has_more: bool
     r"""True when more interns match the current filters."""
+    next_cursor: NotRequired[str]
+    r"""Opaque cursor, present when `has_more` is true. Pass it as `starting_after` to fetch the next page."""
 
 
 class InternListResponse(BaseModel):
@@ -22,3 +25,22 @@ class InternListResponse(BaseModel):
 
     has_more: bool
     r"""True when more interns match the current filters."""
+
+    next_cursor: Optional[str] = None
+    r"""Opaque cursor, present when `has_more` is true. Pass it as `starting_after` to fetch the next page."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["next_cursor"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

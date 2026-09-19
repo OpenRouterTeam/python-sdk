@@ -106,6 +106,8 @@ class ListInternsRequestTypedDict(TypedDict):
     r"""Maximum number of interns to return, from 1 through 500."""
     status: NotRequired[List[Status]]
     r"""Comma-separated lifecycle statuses to include."""
+    starting_after: NotRequired[str]
+    r"""The opaque `next_cursor` of the previous page. Returns the interns that come after it in the newest-first order. A malformed cursor is a 400."""
     workspace_id: NotRequired[str]
     r"""Only return interns in this workspace. It must match the API key workspace."""
 
@@ -151,6 +153,12 @@ class ListInternsRequest(BaseModel):
     ] = None
     r"""Comma-separated lifecycle statuses to include."""
 
+    starting_after: Annotated[
+        Optional[str],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""The opaque `next_cursor` of the previous page. Returns the interns that come after it in the newest-first order. A malformed cursor is a 400."""
+
     workspace_id: Annotated[
         Optional[str],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
@@ -166,6 +174,7 @@ class ListInternsRequest(BaseModel):
                 "X-OpenRouter-Categories",
                 "limit",
                 "status",
+                "starting_after",
                 "workspace_id",
             ]
         )
