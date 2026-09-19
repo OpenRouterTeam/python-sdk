@@ -9,7 +9,13 @@ from .internchatmessagecontent import (
     InternChatMessageContent,
     InternChatMessageContentTypedDict,
 )
-from openrouter.types import BaseModel, Nullable, UNSET_SENTINEL
+from openrouter.types import (
+    BaseModel,
+    Nullable,
+    OptionalNullable,
+    UNSET,
+    UNSET_SENTINEL,
+)
 from pydantic import model_serializer
 from typing import List, Literal, Optional
 from typing_extensions import NotRequired, TypedDict
@@ -21,25 +27,25 @@ InternChatAssistantMessageRole = Literal["assistant",]
 class InternChatAssistantMessageTypedDict(TypedDict):
     r"""An assistant message from an earlier response. When answering an interaction, echo the streamed `tool_calls` here before the `tool` message."""
 
-    content: Nullable[InternChatMessageContentTypedDict]
-    r"""Message text as a string or a list of text parts. Assistant history may carry null. Only the last message is read; earlier messages are accepted so ordinary clients can resend history."""
     role: InternChatAssistantMessageRole
+    content: NotRequired[Nullable[InternChatMessageContentTypedDict]]
+    r"""Message text as a string or a list of text parts. Assistant history may carry null. Only the last message is read; earlier messages are accepted so ordinary clients can resend history."""
     tool_calls: NotRequired[List[InternChatEchoedToolCallTypedDict]]
 
 
 class InternChatAssistantMessage(BaseModel):
     r"""An assistant message from an earlier response. When answering an interaction, echo the streamed `tool_calls` here before the `tool` message."""
 
-    content: Nullable[InternChatMessageContent]
-    r"""Message text as a string or a list of text parts. Assistant history may carry null. Only the last message is read; earlier messages are accepted so ordinary clients can resend history."""
-
     role: InternChatAssistantMessageRole
+
+    content: OptionalNullable[InternChatMessageContent] = UNSET
+    r"""Message text as a string or a list of text parts. Assistant history may carry null. Only the last message is read; earlier messages are accepted so ordinary clients can resend history."""
 
     tool_calls: Optional[List[InternChatEchoedToolCall]] = None
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["tool_calls"])
+        optional_fields = set(["content", "tool_calls"])
         nullable_fields = set(["content"])
         serialized = handler(self)
         m = {}

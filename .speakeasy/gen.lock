@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c48cf606-fb42-4a45-9c23-8f0555307828
 management:
-  docChecksum: b50edb303a275cd87528559fa56a9f23
+  docChecksum: 98e7150b3031e3fd420a1417065c8c33
   docVersion: 1.0.0
   speakeasyVersion: 1.787.0
   generationVersion: 2.914.0
-  releaseVersion: 1.2.2
-  configChecksum: f59aacfc0651c61a9fc72baa8dd7804a
+  releaseVersion: 1.2.3
+  configChecksum: 623dce73439db2a40cf9981582190d03
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
 persistentEdits:
-  generation_id: c9534058-2165-4649-a72f-2119e436b427
-  pristine_commit_hash: 44783a354d54bd8233f5daff2b0b59b41b3d3a43
-  pristine_tree_hash: 509d8ec43d574910bf9c0480151873c9fd9fc0a4
+  generation_id: 5d7c21fa-536d-4272-9c2a-e55016282111
+  pristine_commit_hash: 1b3d14226546a1c7499d1c2514b24bb578f5cca2
+  pristine_tree_hash: 0eba64490d21ab3a4f5b7aa4e08a595d88dfb716
 features:
   python:
     acceptHeaders: 3.0.0
@@ -1659,8 +1659,8 @@ trackedFiles:
     pristine_git_object: 63cc820d2e3f4ddaa6d42dfef4c80006f7810cb2
   docs/components/createinternrequest.mdx:
     id: 31228037ef68
-    last_write_checksum: sha1:adb8b817fb517aae23e9417988c9e6231ef493fd
-    pristine_git_object: a14e0eafcb0825429ad47197f7036617870488a7
+    last_write_checksum: sha1:7f6dd17a2cc45ed74745d9147ec34be3530c9459
+    pristine_git_object: 28e8aee5c2ddf7faea52b6f4515b4f25bcaa77fe
   docs/components/createobservabilitydestinationrequest.mdx:
     id: 8d942a601a6e
     last_write_checksum: sha1:a266eb148b179de43a1b08282d7cadd013e5eaa1
@@ -2951,8 +2951,8 @@ trackedFiles:
     pristine_git_object: 14f94bb02c48a460c14d50a0595fc0e89b52e6af
   docs/components/internchatassistantmessage.mdx:
     id: 041634b73e1e
-    last_write_checksum: sha1:1e1737a7dad6fe27cc46dd8ade384869c3405784
-    pristine_git_object: c8cd00acd8a2ba6fc9deb39eb67c88f5df721d02
+    last_write_checksum: sha1:94e8b73e31c14adcdb26c27494e527c308a6a15b
+    pristine_git_object: 3334fd334d99f2fbb41a8991fbd1065e5aa4234d
   docs/components/internchatassistantmessagerole.mdx:
     id: 129e5368066f
     last_write_checksum: sha1:82c992193fb0cc60c16db0c54e827830edd565dc
@@ -8095,8 +8095,8 @@ trackedFiles:
     pristine_git_object: 08c687694efbecf50406ae7929029d39fb121295
   docs/sdks/interns/README.mdx:
     id: 2f8a053ffe78
-    last_write_checksum: sha1:da31cdf965e76b3d7407859c77195597dfc0f3f3
-    pristine_git_object: 7c93035351f6c24a0dbc6ad9ffa88ff6983436be
+    last_write_checksum: sha1:761b9ca2d74d524a438c0c28d6b2a8eaf094d02f
+    pristine_git_object: e1629ebefd58b9bc114f18c18ca4f789f9e28cf2
   docs/sdks/models/README.mdx:
     id: 58f1ca464e0b
     last_write_checksum: sha1:093dd30ebdd18b9763a6956915e0dcae4ae7d5e5
@@ -8159,8 +8159,8 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:9afc3fd39db73dc4ebc9191ca2f946f7d0fb314f
-    pristine_git_object: e226a37cb10351e696db48eaa6c6756d8b606fd1
+    last_write_checksum: sha1:53b3f141b22a6643e7a6482d3a925c184cde880a
+    pristine_git_object: 4617f98a2d78d6cd1d6cf7f71dad83c97abdf784
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77f44b60b98bc126557ec27391f91dfba764bb54
@@ -8187,8 +8187,8 @@ trackedFiles:
     pristine_git_object: 86713cfea633e09d33b3d4e65281071fe20e6137
   src/openrouter/_version.py:
     id: d8d15ad6c586
-    last_write_checksum: sha1:6fff83400b77ac7544e0264ec4947cf99d180892
-    pristine_git_object: d221360b25686132fe7f6ceba3fda75bc2a14bcb
+    last_write_checksum: sha1:f76f1919ba451dd947efe64925dbc5eff1939bd3
+    pristine_git_object: 2ea5bbe6f2011c6d8e394549eb4b0ef9d503dcc5
   src/openrouter/alpha.py:
     id: 306c4d93308d
     last_write_checksum: sha1:0c25a52ed5fb688ec1e923e4e82bcfc9cae49465
@@ -8963,8 +8963,8 @@ trackedFiles:
     pristine_git_object: d6c4a4dc73222668daddc2a1788d314ff30e8fe6
   src/openrouter/components/createinternrequest.py:
     id: 5722cff28787
-    last_write_checksum: sha1:304835f2ff0852585a88d22e902f5ba63b0a749c
-    pristine_git_object: f8da7513209307490563f91eeff184cd46c745a5
+    last_write_checksum: sha1:7bb6aa692c02e2c844df09e1109d47b82c53433f
+    pristine_git_object: b65a8d59c7513566b243b61ba052e2d921186153
   src/openrouter/components/createobservabilitydestinationrequest.py:
     id: 58587fb98a32
     last_write_checksum: sha1:e0acb6b3d5dda9f6101b69ab9048dfea1492bb73
@@ -9511,8 +9511,8 @@ trackedFiles:
     pristine_git_object: 988b3a736faf813db2adf006f36e0c400935bb46
   src/openrouter/components/internchatassistantmessage.py:
     id: c730f5412099
-    last_write_checksum: sha1:45ffb3fbffa40a876abaf6178c6a6cc520c49fee
-    pristine_git_object: dcace16b45df1feb6cff3cf26a81e4e57dcff01f
+    last_write_checksum: sha1:b7604b2f9bf91090ef9e55f6d77a85aeaf771762
+    pristine_git_object: 208a06d25920d4bfd39bb527b54e78be44adf9f3
   src/openrouter/components/internchatchoice.py:
     id: 9ff5592609ff
     last_write_checksum: sha1:485dfd417ca8af7b2be21f8618179db06f598076
@@ -11127,8 +11127,8 @@ trackedFiles:
     pristine_git_object: 50643a126668498dd668c7cceb9f78c03d413d32
   src/openrouter/interns.py:
     id: d18df05c5c6d
-    last_write_checksum: sha1:b0bfde773d639616f1ace6bbe828aaf443c0db2a
-    pristine_git_object: 4e354feedb9e31941e080333c7280852fcd4c823
+    last_write_checksum: sha1:46da31cb08d788fef4b47deb9da667d2ac46d7aa
+    pristine_git_object: d1dac0bfa081eb17a14a363f4c0c7d688b4b45c7
   src/openrouter/models/__init__.py:
     id: ed73b93abb3f
     last_write_checksum: sha1:932a790ae66ccd7d7022b39c659bcf72a664ebea
@@ -14825,7 +14825,7 @@ examples:
   createIntern:
     speakeasy-default-create-intern:
       requestBody:
-        application/json: {"name": "research-assistant", "provision": true, "workspace_id": "89f9f5b2-3f89-4eaf-83ca-5ceae149e8bb"}
+        application/json: {"name": "research-assistant", "provision": true}
       responses:
         "200":
           application/json: {"attached_vault_id": null, "created_at": "2026-09-16T08:30:00.000Z", "description": "Researches customer questions", "hostname": "research-assistant.openrouter.ai", "id": "7c9e6679-7425-40de-944b-e07fc1f90ae7", "instructions": null, "last_failure_message": null, "model": "openai/gpt-5.4", "name": "research-assistant", "progress": null, "status": "running", "updated_at": "2026-09-16T08:45:00.000Z", "vault_id": "b431c59d-6eed-41ac-bc89-9a89be79a121", "workspace_id": "89f9f5b2-3f89-4eaf-83ca-5ceae149e8bb"}
@@ -14941,3 +14941,4 @@ examples:
         "502":
           application/json: {"error": {"code": 409, "message": "That question is no longer waiting for an answer."}}
 examplesVersion: 1.0.2
+releaseNotes: "## Python SDK Changes:\n* `open_router.interns.create_intern()`:  `request.workspace_id` **Changed**\n* `open_router.interns.chat()`: \n  *  `request.messages[].union(assistant).content` **Changed**\n"
