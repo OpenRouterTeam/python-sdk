@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c48cf606-fb42-4a45-9c23-8f0555307828
 management:
-  docChecksum: b8ef8e6acc081583a4b4b5280d5bc66a
+  docChecksum: 10cc3bd835df5bf3fce4fe2563a34256
   docVersion: 1.0.0
   speakeasyVersion: 1.787.0
   generationVersion: 2.914.0
-  releaseVersion: 1.2.7
-  configChecksum: aa1b9118eec5df8f4c5665a1e53972cd
+  releaseVersion: 1.2.8
+  configChecksum: 5aa38056cf49b40445697d3786c6310a
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
 persistentEdits:
-  generation_id: bca11b04-b80d-49be-a6bd-00fc34f50538
-  pristine_commit_hash: c713a8d5543ed7cc25eb572945a4a4c5ea574510
-  pristine_tree_hash: ec331e7667fa75e32ef857f3c3ad74172c54ce23
+  generation_id: dce5049f-6fa8-49be-a5f5-bc657ee76aa9
+  pristine_commit_hash: 7f8731cb0345e17e75f6ee2102f01698513004ce
+  pristine_tree_hash: b9165056d686a979117bcf0e228ee3567ce2ffc4
 features:
   python:
     acceptHeaders: 3.0.0
@@ -6841,6 +6841,14 @@ trackedFiles:
     id: 56c7ec9966fa
     last_write_checksum: sha1:b98cbf395a3bc9b53b859f3b1e8efe9ee35366bb
     pristine_git_object: 1832b155e778ebd9eb28ebc4a4af459b95a1a506
+  docs/operations/createsystemoneglobals.mdx:
+    id: 41c14f5ceed1
+    last_write_checksum: sha1:96f8ca57c9f21bbfcd86edb240c79e6ca45a492c
+    pristine_git_object: 6fde4d64361c306141ada1382a473c123cf01b26
+  docs/operations/createsystemonerequest.mdx:
+    id: 482fbce116a8
+    last_write_checksum: sha1:b2631e99056ea9f80865ee9a40ffcbe5c198a432
+    pristine_git_object: 434fb7f89f9489c58dcfbf5dd065c5605206c118
   docs/operations/createvideosglobals.mdx:
     id: 84de29ff23d6
     last_write_checksum: sha1:b0e6bc84afd5b4bcdb3f491c64b3f5c15e74d187
@@ -8141,6 +8149,10 @@ trackedFiles:
     id: 190b0dc9a5d1
     last_write_checksum: sha1:9a13f8f1e26550bccf3935a36e9c3426febc6fcb
     pristine_git_object: 1a12d8375fe6ddf9ef6ee1911ce0ed6831a16942
+  docs/sdks/systemone/README.mdx:
+    id: 55c317c71f3d
+    last_write_checksum: sha1:b1ad82361fe1dbef6bedeead3783c75ec36283b6
+    pristine_git_object: fc7688ebea8e973bebc0525a820ba246b6491f81
   docs/sdks/tts/README.mdx:
     id: cd1132543884
     last_write_checksum: sha1:37918eb124f9ae0234e8047be7ec07a955458cbc
@@ -8163,8 +8175,8 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:b9b202e55e8f133fe617f5a90f83911d10664e1e
-    pristine_git_object: 11ae0f2796eb8bb374a0e12ab2cbcb284f6a1c34
+    last_write_checksum: sha1:9c9aac4feea5df58390f40a1d212f251d3b80123
+    pristine_git_object: 2fa4c827c0a455783b23e7183a3076a34e06723b
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77f44b60b98bc126557ec27391f91dfba764bb54
@@ -8191,8 +8203,8 @@ trackedFiles:
     pristine_git_object: 86713cfea633e09d33b3d4e65281071fe20e6137
   src/openrouter/_version.py:
     id: d8d15ad6c586
-    last_write_checksum: sha1:f80f256266c26716757ffd8846abb566c67c9557
-    pristine_git_object: 9e7f35935b8f44c86d1f2c350d6179a3b5bdfe58
+    last_write_checksum: sha1:bf31610e41c64a659df291327e64114d28656f4f
+    pristine_git_object: 2a441139a5a23bb3841818e1e027427935a32494
   src/openrouter/alpha.py:
     id: 306c4d93308d
     last_write_checksum: sha1:0c25a52ed5fb688ec1e923e4e82bcfc9cae49465
@@ -11163,8 +11175,8 @@ trackedFiles:
     pristine_git_object: 8680343bbc90107ae6413bd5686012b1fd75d665
   src/openrouter/operations/__init__.py:
     id: 9afcea1e7161
-    last_write_checksum: sha1:75bfcaac588b4da23900adbd7960f9a633955cf8
-    pristine_git_object: 297025948ee72fba5ef27e0efb31207d6caf55d8
+    last_write_checksum: sha1:0c2f16d015e25e4cb302ba60d5aa8cf0e4d29f9f
+    pristine_git_object: f11532262b28c15b5a367afdeff9dd415e78f53e
   src/openrouter/operations/bulkaddworkspacemembers.py:
     id: e0ed56117619
     last_write_checksum: sha1:5c44eb0d40fdece3ac084615f6c6082be4cf1d5a
@@ -11277,6 +11289,10 @@ trackedFiles:
     id: 6e34c289d71d
     last_write_checksum: sha1:3395583f3df63ed55df668d1172a9fbe507a47f0
     pristine_git_object: bafc88732217831ec34ae960b8711e2587640ba9
+  src/openrouter/operations/createsystemone.py:
+    id: 3f135b32567e
+    last_write_checksum: sha1:7afb0a0fdf95fb8c6987c3e43fd6796e63e749ec
+    pristine_git_object: 356ee5d165f57ad1dea59e7064fbaff5a5807ce6
   src/openrouter/operations/createvideos.py:
     id: d52f6a4a3fe4
     last_write_checksum: sha1:dbcf7068a23f48a5d4cfd9c8150206731a40cc9b
@@ -11675,8 +11691,8 @@ trackedFiles:
     pristine_git_object: 1bea5be2496b283307c037f131a45a25bcca3c6c
   src/openrouter/sdk.py:
     id: ee9846c4c9c5
-    last_write_checksum: sha1:242d0703dc95b748be45817ef9c7ad376e074b76
-    pristine_git_object: 0fb8d63a93c0adc8462682be6e5a0207edebe593
+    last_write_checksum: sha1:524fce02fc013302916d4e533dc358c739f0cbb4
+    pristine_git_object: 28ea1b39c429276d1e06268ac0f60652ff15a989
   src/openrouter/sdkconfiguration.py:
     id: 55773bb98d7c
     last_write_checksum: sha1:c01826125c31a8b8bc99d9d679782c8758fae001
@@ -11685,6 +11701,10 @@ trackedFiles:
     id: fc0c2f669423
     last_write_checksum: sha1:294961a1d783e04ac54c3733e4563494e241fcd7
     pristine_git_object: 7502cb976473e1324ca78330ed0f22505d01c925
+  src/openrouter/systemone.py:
+    id: 7e0a0e237bb1
+    last_write_checksum: sha1:fffd7413e70f4840b793888763631b51929eb766
+    pristine_git_object: aac5cbef3468a6b9c9fe04c3bd6c86e23de4b4e9
   src/openrouter/tts.py:
     id: 5055d4b95f1d
     last_write_checksum: sha1:cdeb84948a22d150b582c65b63a53bfab5c13109
@@ -14954,4 +14974,38 @@ examples:
           application/json: {"error": {"code": 409, "message": "That question is no longer waiting for an answer."}}
         "502":
           application/json: {"error": {"code": 409, "message": "That question is no longer waiting for an answer."}}
+  createSystemone:
+    speakeasy-default-create-systemone:
+      requestBody:
+        application/json: {"model": "Taurus", "questions": {}, "state": {"key": "Utah", "key1": "Alaska", "key2": "Ohio"}}
+      responses:
+        "200":
+          application/json: {"answers": {"key": {"score": 9690, "type": "score"}}, "model": "Model Y", "usage": {"input_tokens": 514823, "output_tokens": 883118}}
+        "400":
+          application/json: {"error": {"code": 400, "message": "Invalid request parameters"}}
+        "401":
+          application/json: {"error": {"code": 401, "message": "Missing Authentication header"}}
+        "402":
+          application/json: {"error": {"code": 402, "message": "Insufficient credits. Add more using https://openrouter.ai/credits"}}
+        "403":
+          application/json: {"error": {"code": 403, "message": "Only management keys can perform this operation"}}
+        "404":
+          application/json: {"error": {"code": 404, "message": "Resource not found"}}
+        "413":
+          application/json: {"error": {"code": 413, "message": "Request payload too large"}}
+        "429":
+          application/json: {"error": {"code": 429, "message": "Rate limit exceeded"}}
+        "500":
+          application/json: {"error": {"code": 500, "message": "Internal Server Error"}}
+        "502":
+          application/json: {"error": {"code": 502, "message": "Provider returned error"}}
+        "503":
+          application/json: {"error": {"code": 503, "message": "Service temporarily unavailable"}}
+        "524":
+          application/json: {"error": {"code": 524, "message": "Request timed out. Please try again later."}}
+        "529":
+          application/json: {"error": {"code": 529, "message": "Provider returned error"}}
 examplesVersion: 1.0.2
+releaseNotes: |
+  ## Python SDK Changes:
+  * `open_router.system_one.create()`: **Added**

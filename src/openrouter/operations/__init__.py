@@ -252,6 +252,12 @@ if TYPE_CHECKING:
         CreateScimSyncJobResponse,
         CreateScimSyncJobResponseTypedDict,
     )
+    from .createsystemone import (
+        CreateSystemoneGlobals,
+        CreateSystemoneGlobalsTypedDict,
+        CreateSystemoneRequest,
+        CreateSystemoneRequestTypedDict,
+    )
     from .createvideos import (
         CreateVideosGlobals,
         CreateVideosGlobalsTypedDict,
@@ -1151,6 +1157,10 @@ __all__ = [
     "CreateScimSyncJobRequestTypedDict",
     "CreateScimSyncJobResponse",
     "CreateScimSyncJobResponseTypedDict",
+    "CreateSystemoneGlobals",
+    "CreateSystemoneGlobalsTypedDict",
+    "CreateSystemoneRequest",
+    "CreateSystemoneRequestTypedDict",
     "CreateVideosGlobals",
     "CreateVideosGlobalsTypedDict",
     "CreateVideosRequest",
@@ -1899,6 +1909,10 @@ _dynamic_imports: dict[str, str] = {
     "CreateScimSyncJobRequestTypedDict": ".createscimsyncjob",
     "CreateScimSyncJobResponse": ".createscimsyncjob",
     "CreateScimSyncJobResponseTypedDict": ".createscimsyncjob",
+    "CreateSystemoneGlobals": ".createsystemone",
+    "CreateSystemoneGlobalsTypedDict": ".createsystemone",
+    "CreateSystemoneRequest": ".createsystemone",
+    "CreateSystemoneRequestTypedDict": ".createsystemone",
     "CreateVideosGlobals": ".createvideos",
     "CreateVideosGlobalsTypedDict": ".createvideos",
     "CreateVideosRequest": ".createvideos",
