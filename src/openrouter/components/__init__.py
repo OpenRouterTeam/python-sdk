@@ -1704,6 +1704,8 @@ if TYPE_CHECKING:
         CodeTypedDict,
         InternLifecycleErrorError,
         InternLifecycleErrorErrorTypedDict,
+        InternLifecycleErrorMetadata,
+        InternLifecycleErrorMetadataTypedDict,
     )
     from .internlistresponse import InternListResponse, InternListResponseTypedDict
     from .itemreferenceitem import (
@@ -4696,6 +4698,8 @@ __all__ = [
     "InternChatUserMessageTypedDict",
     "InternLifecycleErrorError",
     "InternLifecycleErrorErrorTypedDict",
+    "InternLifecycleErrorMetadata",
+    "InternLifecycleErrorMetadataTypedDict",
     "InternListResponse",
     "InternListResponseTypedDict",
     "InternStatus",
@@ -7230,6 +7234,8 @@ _dynamic_imports: dict[str, str] = {
     "CodeTypedDict": ".internlifecycleerror",
     "InternLifecycleErrorError": ".internlifecycleerror",
     "InternLifecycleErrorErrorTypedDict": ".internlifecycleerror",
+    "InternLifecycleErrorMetadata": ".internlifecycleerror",
+    "InternLifecycleErrorMetadataTypedDict": ".internlifecycleerror",
     "InternListResponse": ".internlistresponse",
     "InternListResponseTypedDict": ".internlistresponse",
     "ItemReferenceItem": ".itemreferenceitem",

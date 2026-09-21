@@ -161,6 +161,8 @@ if TYPE_CHECKING:
         CreateInternChatCompletionRequest,
         CreateInternChatCompletionRequestTypedDict,
         CreateInternChatCompletionResponse,
+        CreateInternChatCompletionResponseResult,
+        CreateInternChatCompletionResponseResultTypedDict,
         CreateInternChatCompletionResponseTypedDict,
     )
     from .createkeys import (
@@ -1093,6 +1095,8 @@ __all__ = [
     "CreateInternChatCompletionRequest",
     "CreateInternChatCompletionRequestTypedDict",
     "CreateInternChatCompletionResponse",
+    "CreateInternChatCompletionResponseResult",
+    "CreateInternChatCompletionResponseResultTypedDict",
     "CreateInternChatCompletionResponseTypedDict",
     "CreateInternGlobals",
     "CreateInternGlobalsTypedDict",
@@ -1839,6 +1843,8 @@ _dynamic_imports: dict[str, str] = {
     "CreateInternChatCompletionRequest": ".createinternchatcompletion",
     "CreateInternChatCompletionRequestTypedDict": ".createinternchatcompletion",
     "CreateInternChatCompletionResponse": ".createinternchatcompletion",
+    "CreateInternChatCompletionResponseResult": ".createinternchatcompletion",
+    "CreateInternChatCompletionResponseResultTypedDict": ".createinternchatcompletion",
     "CreateInternChatCompletionResponseTypedDict": ".createinternchatcompletion",
     "CreateKeysData": ".createkeys",
     "CreateKeysDataTypedDict": ".createkeys",

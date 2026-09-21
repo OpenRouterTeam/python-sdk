@@ -90,7 +90,7 @@ class CreateInternRequestTypedDict(TypedDict):
 
     """
     idempotency_key: NotRequired[str]
-    r"""Key that makes retries resume the same create operation. Without one, the server derives a stable key from the request body."""
+    r"""Key that makes retries resume the same create operation, from 1 through 255 characters. An empty or longer key is refused with 400. Without the header, the server derives a stable key from the request body."""
 
 
 class CreateInternRequest(BaseModel):
@@ -132,7 +132,7 @@ class CreateInternRequest(BaseModel):
         pydantic.Field(alias="Idempotency-Key"),
         FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
     ] = None
-    r"""Key that makes retries resume the same create operation. Without one, the server derives a stable key from the request body."""
+    r"""Key that makes retries resume the same create operation, from 1 through 255 characters. An empty or longer key is refused with 400. Without the header, the server derives a stable key from the request body."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

@@ -15,7 +15,7 @@ from openrouter.utils import (
 )
 import pydantic
 from pydantic import model_serializer
-from typing import Optional, Union
+from typing import Dict, List, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
@@ -164,8 +164,8 @@ class CreateInternChatCompletionRequest(BaseModel):
         return m
 
 
-CreateInternChatCompletionResponseTypedDict = TypeAliasType(
-    "CreateInternChatCompletionResponseTypedDict",
+CreateInternChatCompletionResponseResultTypedDict = TypeAliasType(
+    "CreateInternChatCompletionResponseResultTypedDict",
     Union[
         components_internchatcompletionchunk.InternChatCompletionChunkTypedDict,
         Union[
@@ -180,8 +180,8 @@ CreateInternChatCompletionResponseTypedDict = TypeAliasType(
 )
 
 
-CreateInternChatCompletionResponse = TypeAliasType(
-    "CreateInternChatCompletionResponse",
+CreateInternChatCompletionResponseResult = TypeAliasType(
+    "CreateInternChatCompletionResponseResult",
     Union[
         components_internchatcompletionchunk.InternChatCompletionChunk,
         Union[
@@ -194,3 +194,14 @@ CreateInternChatCompletionResponse = TypeAliasType(
         ],
     ],
 )
+
+
+class CreateInternChatCompletionResponseTypedDict(TypedDict):
+    headers: Dict[str, List[str]]
+    result: CreateInternChatCompletionResponseResultTypedDict
+
+
+class CreateInternChatCompletionResponse(BaseModel):
+    headers: Dict[str, List[str]]
+
+    result: CreateInternChatCompletionResponseResult
