@@ -708,6 +708,7 @@ class VideoGenerationRequestProvider(BaseModel):
 
 VideoGenerationRequestResolution = Union[
     Literal[
+        "360p",
         "480p",
         "720p",
         "768p",
