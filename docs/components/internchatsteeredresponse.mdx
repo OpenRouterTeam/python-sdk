@@ -1,0 +1,13 @@
+---
+title: "InternChatSteeredResponse"
+---
+
+The message was delivered into the turn already running on the same session. Its effect is streamed on that turn, not here.
+
+
+## Fields
+
+| Field                                                                                          | Type                                                                                           | Required                                                                                       | Description                                                                                    | Example                                                                                        |
+| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| `session_id`                                                                                   | *str*                                                                                          | :heavy_check_mark:                                                                             | The session of the running turn the message was delivered to.                                  | sess_01j9x0k4q7v8r2t3m6n5p8w9y1                                                                |
+| `status`                                                                                       | [components.InternChatSteeredResponseStatus](../components/internchatsteeredresponsestatus.mdx) | :heavy_check_mark:                                                                             | The message was handed to the turn already running on this session.                            |                                                                                                |

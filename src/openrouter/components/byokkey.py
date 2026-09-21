@@ -23,6 +23,8 @@ class BYOKKeyTypedDict(TypedDict):
     r"""Optional allowlist of user IDs that may use this credential. `null` means no restriction."""
     created_at: str
     r"""ISO timestamp of when the credential was created."""
+    declared_zdr: Nullable[bool]
+    r"""Your declaration of whether the upstream provider account behind this credential has zero data retention (ZDR). `null` inherits OpenRouter's data policy for the provider's endpoint; `true` declares the account ZDR so requests that require ZDR may route to this credential even when the shared endpoint retains data; `false` declares it non-ZDR so such requests never route to it. Self-declared and not verified by OpenRouter."""
     disabled: bool
     r"""Whether this credential is currently disabled."""
     id: str
@@ -57,6 +59,9 @@ class BYOKKey(BaseModel):
 
     created_at: str
     r"""ISO timestamp of when the credential was created."""
+
+    declared_zdr: Nullable[bool]
+    r"""Your declaration of whether the upstream provider account behind this credential has zero data retention (ZDR). `null` inherits OpenRouter's data policy for the provider's endpoint; `true` declares the account ZDR so requests that require ZDR may route to this credential even when the shared endpoint retains data; `false` declares it non-ZDR so such requests never route to it. Self-declared and not verified by OpenRouter."""
 
     disabled: bool
     r"""Whether this credential is currently disabled."""
@@ -96,6 +101,7 @@ class BYOKKey(BaseModel):
                 "allowed_api_key_hashes",
                 "allowed_models",
                 "allowed_user_ids",
+                "declared_zdr",
                 "name",
                 "workspace_id",
             ]

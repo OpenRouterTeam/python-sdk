@@ -369,6 +369,7 @@ class BYOK(BaseSDK):
         allowed_api_key_hashes: OptionalNullable[Iterable[str]] = UNSET,
         allowed_models: OptionalNullable[Iterable[str]] = UNSET,
         allowed_user_ids: OptionalNullable[Iterable[str]] = UNSET,
+        declared_zdr: OptionalNullable[bool] = UNSET,
         disabled: Optional[bool] = None,
         is_byok_only: Optional[bool] = None,
         is_fallback: Optional[bool] = None,
@@ -396,6 +397,7 @@ class BYOK(BaseSDK):
         :param allowed_api_key_hashes: Optional allowlist of OpenRouter API key hashes (`api_keys.hash`) that may use this credential. `null` means no restriction. Must contain at least one hash if provided. Hashes that do not belong to your account return a 400.
         :param allowed_models: Optional allowlist of model slugs this credential may be used for. `null` means no restriction.
         :param allowed_user_ids: Optional allowlist of user IDs that may use this credential. `null` means no restriction.
+        :param declared_zdr: Your declaration of whether the upstream provider account behind this credential has zero data retention (ZDR). `null` inherits OpenRouter's data policy for the provider's endpoint; `true` declares the account ZDR so requests that require ZDR may route to this credential even when the shared endpoint retains data; `false` declares it non-ZDR so such requests never route to it. Self-declared and not verified by OpenRouter. Defaults to `null`.
         :param disabled: Whether this credential should be created in a disabled state.
         :param is_byok_only: Whether OpenRouter's shared endpoints on this provider are removed for every model, including models outside `allowed_models` and after all of your keys for the provider fail. The provider is skipped instead of spending OpenRouter credits. Only valid on non-fallback credentials. Defaults to `false`.
         :param is_fallback: Whether this credential is treated as a fallback — used only after non-fallback keys for the same provider have been tried. Cannot be combined with `is_byok_only`.
@@ -431,6 +433,7 @@ class BYOK(BaseSDK):
                 allowed_user_ids=utils.unmarshal(
                     allowed_user_ids, OptionalNullable[List[str]]
                 ),
+                declared_zdr=declared_zdr,
                 disabled=disabled,
                 is_byok_only=is_byok_only,
                 is_fallback=is_fallback,
@@ -547,6 +550,7 @@ class BYOK(BaseSDK):
         allowed_api_key_hashes: OptionalNullable[Iterable[str]] = UNSET,
         allowed_models: OptionalNullable[Iterable[str]] = UNSET,
         allowed_user_ids: OptionalNullable[Iterable[str]] = UNSET,
+        declared_zdr: OptionalNullable[bool] = UNSET,
         disabled: Optional[bool] = None,
         is_byok_only: Optional[bool] = None,
         is_fallback: Optional[bool] = None,
@@ -574,6 +578,7 @@ class BYOK(BaseSDK):
         :param allowed_api_key_hashes: Optional allowlist of OpenRouter API key hashes (`api_keys.hash`) that may use this credential. `null` means no restriction. Must contain at least one hash if provided. Hashes that do not belong to your account return a 400.
         :param allowed_models: Optional allowlist of model slugs this credential may be used for. `null` means no restriction.
         :param allowed_user_ids: Optional allowlist of user IDs that may use this credential. `null` means no restriction.
+        :param declared_zdr: Your declaration of whether the upstream provider account behind this credential has zero data retention (ZDR). `null` inherits OpenRouter's data policy for the provider's endpoint; `true` declares the account ZDR so requests that require ZDR may route to this credential even when the shared endpoint retains data; `false` declares it non-ZDR so such requests never route to it. Self-declared and not verified by OpenRouter. Defaults to `null`.
         :param disabled: Whether this credential should be created in a disabled state.
         :param is_byok_only: Whether OpenRouter's shared endpoints on this provider are removed for every model, including models outside `allowed_models` and after all of your keys for the provider fail. The provider is skipped instead of spending OpenRouter credits. Only valid on non-fallback credentials. Defaults to `false`.
         :param is_fallback: Whether this credential is treated as a fallback — used only after non-fallback keys for the same provider have been tried. Cannot be combined with `is_byok_only`.
@@ -609,6 +614,7 @@ class BYOK(BaseSDK):
                 allowed_user_ids=utils.unmarshal(
                     allowed_user_ids, OptionalNullable[List[str]]
                 ),
+                declared_zdr=declared_zdr,
                 disabled=disabled,
                 is_byok_only=is_byok_only,
                 is_fallback=is_fallback,
@@ -1236,6 +1242,7 @@ class BYOK(BaseSDK):
         allowed_api_key_hashes: OptionalNullable[Iterable[str]] = UNSET,
         allowed_models: OptionalNullable[Iterable[str]] = UNSET,
         allowed_user_ids: OptionalNullable[Iterable[str]] = UNSET,
+        declared_zdr: OptionalNullable[bool] = UNSET,
         disabled: Optional[bool] = None,
         is_byok_only: Optional[bool] = None,
         is_fallback: Optional[bool] = None,
@@ -1262,6 +1269,7 @@ class BYOK(BaseSDK):
         :param allowed_api_key_hashes: Optional allowlist of OpenRouter API key hashes (`api_keys.hash`) that may use this credential. `null` clears the restriction. Must contain at least one hash if provided. Hashes that do not belong to your account return a 400.
         :param allowed_models: Optional allowlist of model slugs this credential may be used for. `null` means no restriction.
         :param allowed_user_ids: Optional allowlist of user IDs that may use this credential. `null` means no restriction.
+        :param declared_zdr: Your declaration of whether the upstream provider account behind this credential has zero data retention (ZDR). `null` inherits OpenRouter's data policy for the provider's endpoint; `true` declares the account ZDR so requests that require ZDR may route to this credential even when the shared endpoint retains data; `false` declares it non-ZDR so such requests never route to it. Self-declared and not verified by OpenRouter. Omit to leave the stored value unchanged; `null` clears the declaration.
         :param disabled: Whether this credential is disabled.
         :param is_byok_only: Whether OpenRouter's shared endpoints on this provider are removed for every model, including models outside `allowed_models` and after all of your keys for the provider fail. The provider is skipped instead of spending OpenRouter credits. Only valid on non-fallback credentials. Omit to leave the stored value unchanged.
         :param is_fallback: Whether this credential is treated as a fallback — used only after non-fallback keys for the same provider have been tried. Cannot be combined with `is_byok_only`. Omit to leave the stored value unchanged.
@@ -1298,6 +1306,7 @@ class BYOK(BaseSDK):
                 allowed_user_ids=utils.unmarshal(
                     allowed_user_ids, OptionalNullable[List[str]]
                 ),
+                declared_zdr=declared_zdr,
                 disabled=disabled,
                 is_byok_only=is_byok_only,
                 is_fallback=is_fallback,
@@ -1416,6 +1425,7 @@ class BYOK(BaseSDK):
         allowed_api_key_hashes: OptionalNullable[Iterable[str]] = UNSET,
         allowed_models: OptionalNullable[Iterable[str]] = UNSET,
         allowed_user_ids: OptionalNullable[Iterable[str]] = UNSET,
+        declared_zdr: OptionalNullable[bool] = UNSET,
         disabled: Optional[bool] = None,
         is_byok_only: Optional[bool] = None,
         is_fallback: Optional[bool] = None,
@@ -1442,6 +1452,7 @@ class BYOK(BaseSDK):
         :param allowed_api_key_hashes: Optional allowlist of OpenRouter API key hashes (`api_keys.hash`) that may use this credential. `null` clears the restriction. Must contain at least one hash if provided. Hashes that do not belong to your account return a 400.
         :param allowed_models: Optional allowlist of model slugs this credential may be used for. `null` means no restriction.
         :param allowed_user_ids: Optional allowlist of user IDs that may use this credential. `null` means no restriction.
+        :param declared_zdr: Your declaration of whether the upstream provider account behind this credential has zero data retention (ZDR). `null` inherits OpenRouter's data policy for the provider's endpoint; `true` declares the account ZDR so requests that require ZDR may route to this credential even when the shared endpoint retains data; `false` declares it non-ZDR so such requests never route to it. Self-declared and not verified by OpenRouter. Omit to leave the stored value unchanged; `null` clears the declaration.
         :param disabled: Whether this credential is disabled.
         :param is_byok_only: Whether OpenRouter's shared endpoints on this provider are removed for every model, including models outside `allowed_models` and after all of your keys for the provider fail. The provider is skipped instead of spending OpenRouter credits. Only valid on non-fallback credentials. Omit to leave the stored value unchanged.
         :param is_fallback: Whether this credential is treated as a fallback — used only after non-fallback keys for the same provider have been tried. Cannot be combined with `is_byok_only`. Omit to leave the stored value unchanged.
@@ -1478,6 +1489,7 @@ class BYOK(BaseSDK):
                 allowed_user_ids=utils.unmarshal(
                     allowed_user_ids, OptionalNullable[List[str]]
                 ),
+                declared_zdr=declared_zdr,
                 disabled=disabled,
                 is_byok_only=is_byok_only,
                 is_fallback=is_fallback,

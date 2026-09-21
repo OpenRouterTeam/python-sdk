@@ -20,11 +20,11 @@ APIType = Union[
         "completions",
         "embeddings",
         "rerank",
+        "decisions",
+        "video",
         "tts",
         "stt",
-        "video",
         "image",
-        "decisions",
     ],
     UnrecognizedStr,
 ]
