@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c48cf606-fb42-4a45-9c23-8f0555307828
 management:
-  docChecksum: 96852a8e676c17daffcd8a465ec163bf
+  docChecksum: 219138d21d3208e1bd68f92347d55010
   docVersion: 1.0.0
   speakeasyVersion: 1.787.0
   generationVersion: 2.914.0
-  releaseVersion: 1.2.12
-  configChecksum: d16185d65c9bdfcdfb73869b3b6a621f
+  releaseVersion: 1.2.13
+  configChecksum: c0af818f98f85ef347b558275e16b064
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
 persistentEdits:
-  generation_id: d885c5e1-35f6-47af-b676-213af835c000
-  pristine_commit_hash: f4a328dddf5613836eba5c89d018635e0cb26805
-  pristine_tree_hash: 8c106e26e23bd5d9f341ae4137b4f85bab642b6b
+  generation_id: a41f374d-9e61-41cc-a7da-adbbbbc8e345
+  pristine_commit_hash: 240b1991f0af1ac81205aea316704e5dfde5caa5
+  pristine_tree_hash: fe700f6e6e0763ec2ae1763a5be7f4cd00195369
 features:
   python:
     acceptHeaders: 3.0.0
@@ -8127,8 +8127,8 @@ trackedFiles:
     pristine_git_object: 08c687694efbecf50406ae7929029d39fb121295
   docs/sdks/interns/README.mdx:
     id: 2f8a053ffe78
-    last_write_checksum: sha1:5bb4be91b9cb5513e1a80bb4dd289fb58b2ceb55
-    pristine_git_object: c45371fd13d43dd0c4883df28d3e8653fd3298a3
+    last_write_checksum: sha1:cbebf5bbae2c15f93be5c5407b0f8927167abd90
+    pristine_git_object: 995fcb35decbd89a885a25568270d4e6044dea13
   docs/sdks/models/README.mdx:
     id: 58f1ca464e0b
     last_write_checksum: sha1:093dd30ebdd18b9763a6956915e0dcae4ae7d5e5
@@ -8195,8 +8195,8 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:0f27a908caef2f59a9b4f38c0d813cbca2196002
-    pristine_git_object: 94c5228ca40a2560aac632886116adaccc0d5028
+    last_write_checksum: sha1:6ac7f07a3d16945f5b9ef3a72c4cd4df1e166179
+    pristine_git_object: 8e6a8e74a275b0b884ac9aef8df139ac9b71af2d
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77f44b60b98bc126557ec27391f91dfba764bb54
@@ -8223,8 +8223,8 @@ trackedFiles:
     pristine_git_object: 86713cfea633e09d33b3d4e65281071fe20e6137
   src/openrouter/_version.py:
     id: d8d15ad6c586
-    last_write_checksum: sha1:473aead99878d6d7b03c8ebf23946926083e816d
-    pristine_git_object: 4ceb9dbd91bbcbf683170e3f2d82c979970a1cf0
+    last_write_checksum: sha1:ce7a24a8717c5a14d95cad02a9f3733362b8669b
+    pristine_git_object: 07e55bb007b89c56b5c167f1fd3b5060517aa8dc
   src/openrouter/alpha.py:
     id: 306c4d93308d
     last_write_checksum: sha1:0c25a52ed5fb688ec1e923e4e82bcfc9cae49465
@@ -11175,8 +11175,8 @@ trackedFiles:
     pristine_git_object: 50643a126668498dd668c7cceb9f78c03d413d32
   src/openrouter/interns.py:
     id: d18df05c5c6d
-    last_write_checksum: sha1:ee8a7854d254cdaf039db80a5e9daa06c3f846dc
-    pristine_git_object: 817b8db61748eb72909ecd1441c689002491b4d6
+    last_write_checksum: sha1:cdc6b94fced75725f6e09279f4562acdc180b7fb
+    pristine_git_object: 7171db09163adcbdb2588f98aec36b2806e58263
   src/openrouter/models/__init__.py:
     id: ed73b93abb3f
     last_write_checksum: sha1:932a790ae66ccd7d7022b39c659bcf72a664ebea
@@ -15044,4 +15044,10 @@ examples:
         "529":
           application/json: {"error": {"code": 529, "message": "Provider returned error"}}
 examplesVersion: 1.0.2
-releaseNotes: "## Python SDK Changes:\n* `open_router.interns.chat()`:  `response.status[202]` **Added** (Breaking ⚠️)\n* `open_router.byok.list()`:  `response.data[].declared_zdr` **Added**\n* `open_router.byok.create()`: \n  *  `request.declared_zdr` **Added**\n  *  `response.data.declared_zdr` **Added**\n* `open_router.byok.get()`:  `response.data.declared_zdr` **Added**\n* `open_router.byok.update()`: \n  *  `request.declared_zdr` **Added**\n  *  `response.data.declared_zdr` **Added**\n"
+releaseNotes: |
+  ## Python SDK Changes:
+  * `open_router.interns.create_intern()`:  `error.status[415]` **Added**
+  * `open_router.interns.delete_intern()`:  `error.status[415]` **Added**
+  * `open_router.interns.update_intern()`:  `error.status[415]` **Added**
+  * `open_router.interns.provision_intern()`:  `error.status[415]` **Added**
+  * `open_router.interns.suspend_intern()`:  `error.status[415]` **Added**
