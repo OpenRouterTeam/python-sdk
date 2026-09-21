@@ -14,6 +14,7 @@ from .anthropicinputtokenstrigger import (
     AnthropicInputTokensTrigger,
     AnthropicInputTokensTriggerTypedDict,
 )
+from .anthropicsafeguard import AnthropicSafeguard, AnthropicSafeguardTypedDict
 from .anthropictextblockparam import (
     AnthropicTextBlockParam,
     AnthropicTextBlockParamTypedDict,
@@ -1128,6 +1129,7 @@ class MessagesRequestTypedDict(TypedDict):
     r"""Plugins you want to enable for this request, including their settings."""
     provider: NotRequired[Nullable[ProviderPreferencesTypedDict]]
     r"""When multiple model providers are available, optionally indicate your routing preference."""
+    safeguards: NotRequired[Nullable[List[AnthropicSafeguardTypedDict]]]
     service_tier: NotRequired[str]
     session_id: NotRequired[str]
     r"""A unique identifier for grouping related requests (e.g., a conversation or agent workflow). When provided, OpenRouter uses it as the sticky routing key, routing all requests in the session to the same provider to maximize prompt cache hits. Also used for observability grouping. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters."""
@@ -1179,6 +1181,8 @@ class MessagesRequest(BaseModel):
     provider: OptionalNullable[ProviderPreferences] = UNSET
     r"""When multiple model providers are available, optionally indicate your routing preference."""
 
+    safeguards: OptionalNullable[List[AnthropicSafeguard]] = UNSET
+
     service_tier: Optional[str] = None
 
     session_id: Optional[str] = None
@@ -1226,6 +1230,7 @@ class MessagesRequest(BaseModel):
                 "output_config",
                 "plugins",
                 "provider",
+                "safeguards",
                 "service_tier",
                 "session_id",
                 "speed",
@@ -1244,7 +1249,14 @@ class MessagesRequest(BaseModel):
             ]
         )
         nullable_fields = set(
-            ["context_management", "fallbacks", "messages", "provider", "speed"]
+            [
+                "context_management",
+                "fallbacks",
+                "messages",
+                "provider",
+                "safeguards",
+                "speed",
+            ]
         )
         serialized = handler(self)
         m = {}
