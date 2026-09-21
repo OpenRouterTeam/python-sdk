@@ -25,6 +25,8 @@ class CreateBYOKKeyRequestTypedDict(TypedDict):
     r"""Optional allowlist of model slugs this credential may be used for. `null` means no restriction."""
     allowed_user_ids: NotRequired[Nullable[List[str]]]
     r"""Optional allowlist of user IDs that may use this credential. `null` means no restriction."""
+    declared_zdr: NotRequired[Nullable[bool]]
+    r"""Your declaration of whether the upstream provider account behind this credential has zero data retention (ZDR). `null` inherits OpenRouter's data policy for the provider's endpoint; `true` declares the account ZDR so requests that require ZDR may route to this credential even when the shared endpoint retains data; `false` declares it non-ZDR so such requests never route to it. Self-declared and not verified by OpenRouter. Defaults to `null`."""
     disabled: NotRequired[bool]
     r"""Whether this credential should be created in a disabled state."""
     is_byok_only: NotRequired[bool]
@@ -55,6 +57,9 @@ class CreateBYOKKeyRequest(BaseModel):
     allowed_user_ids: OptionalNullable[List[str]] = UNSET
     r"""Optional allowlist of user IDs that may use this credential. `null` means no restriction."""
 
+    declared_zdr: OptionalNullable[bool] = UNSET
+    r"""Your declaration of whether the upstream provider account behind this credential has zero data retention (ZDR). `null` inherits OpenRouter's data policy for the provider's endpoint; `true` declares the account ZDR so requests that require ZDR may route to this credential even when the shared endpoint retains data; `false` declares it non-ZDR so such requests never route to it. Self-declared and not verified by OpenRouter. Defaults to `null`."""
+
     disabled: Optional[bool] = None
     r"""Whether this credential should be created in a disabled state."""
 
@@ -80,6 +85,7 @@ class CreateBYOKKeyRequest(BaseModel):
                 "allowed_api_key_hashes",
                 "allowed_models",
                 "allowed_user_ids",
+                "declared_zdr",
                 "disabled",
                 "is_byok_only",
                 "is_fallback",
@@ -89,7 +95,13 @@ class CreateBYOKKeyRequest(BaseModel):
             ]
         )
         nullable_fields = set(
-            ["allowed_api_key_hashes", "allowed_models", "allowed_user_ids", "name"]
+            [
+                "allowed_api_key_hashes",
+                "allowed_models",
+                "allowed_user_ids",
+                "declared_zdr",
+                "name",
+            ]
         )
         serialized = handler(self)
         m = {}

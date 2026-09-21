@@ -1660,6 +1660,11 @@ if TYPE_CHECKING:
         InternChatPromptTokensDetails,
         InternChatPromptTokensDetailsTypedDict,
     )
+    from .internchatsteeredresponse import (
+        InternChatSteeredResponse,
+        InternChatSteeredResponseStatus,
+        InternChatSteeredResponseTypedDict,
+    )
     from .internchatstreamerror import (
         InternChatStreamError,
         InternChatStreamErrorTypedDict,
@@ -4673,6 +4678,9 @@ __all__ = [
     "InternChatMessageTypedDict",
     "InternChatPromptTokensDetails",
     "InternChatPromptTokensDetailsTypedDict",
+    "InternChatSteeredResponse",
+    "InternChatSteeredResponseStatus",
+    "InternChatSteeredResponseTypedDict",
     "InternChatStreamError",
     "InternChatStreamErrorTypedDict",
     "InternChatStreamingResponse",
@@ -7209,6 +7217,9 @@ _dynamic_imports: dict[str, str] = {
     "InternChatMessageContentTypedDict": ".internchatmessagecontent",
     "InternChatPromptTokensDetails": ".internchatprompttokensdetails",
     "InternChatPromptTokensDetailsTypedDict": ".internchatprompttokensdetails",
+    "InternChatSteeredResponse": ".internchatsteeredresponse",
+    "InternChatSteeredResponseStatus": ".internchatsteeredresponse",
+    "InternChatSteeredResponseTypedDict": ".internchatsteeredresponse",
     "InternChatStreamError": ".internchatstreamerror",
     "InternChatStreamErrorTypedDict": ".internchatstreamerror",
     "InternChatStreamingResponse": ".internchatstreamingresponse",

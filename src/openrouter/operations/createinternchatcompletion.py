@@ -4,6 +4,7 @@ from __future__ import annotations
 from openrouter.components import (
     internchatcompletionchunk as components_internchatcompletionchunk,
     internchatcompletionrequest as components_internchatcompletionrequest,
+    internchatsteeredresponse as components_internchatsteeredresponse,
 )
 from openrouter.types import BaseModel, UNSET_SENTINEL
 from openrouter.utils import (
@@ -167,6 +168,7 @@ class CreateInternChatCompletionRequest(BaseModel):
 CreateInternChatCompletionResponseResultTypedDict = TypeAliasType(
     "CreateInternChatCompletionResponseResultTypedDict",
     Union[
+        components_internchatsteeredresponse.InternChatSteeredResponseTypedDict,
         components_internchatcompletionchunk.InternChatCompletionChunkTypedDict,
         Union[
             eventstreaming.EventStream[
@@ -183,6 +185,7 @@ CreateInternChatCompletionResponseResultTypedDict = TypeAliasType(
 CreateInternChatCompletionResponseResult = TypeAliasType(
     "CreateInternChatCompletionResponseResult",
     Union[
+        components_internchatsteeredresponse.InternChatSteeredResponse,
         components_internchatcompletionchunk.InternChatCompletionChunk,
         Union[
             eventstreaming.EventStream[
