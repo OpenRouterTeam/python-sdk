@@ -1404,6 +1404,12 @@ class Presets(BaseSDK):
                 components.ProviderPreferences, components.ProviderPreferencesTypedDict
             ]
         ] = UNSET,
+        safeguards: OptionalNullable[
+            Union[
+                Iterable[components.AnthropicSafeguard],
+                Iterable[components.AnthropicSafeguardTypedDict],
+            ]
+        ] = UNSET,
         service_tier: Optional[str] = None,
         session_id: Optional[str] = None,
         speed: OptionalNullable[components.Speed] = UNSET,
@@ -1465,6 +1471,7 @@ class Presets(BaseSDK):
         :param output_config: Configuration for controlling output behavior. Supports the effort parameter and structured output format.
         :param plugins: Plugins you want to enable for this request, including their settings.
         :param provider: When multiple model providers are available, optionally indicate your routing preference.
+        :param safeguards:
         :param service_tier:
         :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow). When provided, OpenRouter uses it as the sticky routing key, routing all requests in the session to the same provider to maximize prompt cache hits. Also used for observability grouping. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters.
         :param speed:
@@ -1527,6 +1534,9 @@ class Presets(BaseSDK):
                 ),
                 provider=utils.get_pydantic_model(
                     provider, OptionalNullable[components.ProviderPreferences]
+                ),
+                safeguards=utils.get_pydantic_model(
+                    safeguards, OptionalNullable[List[components.AnthropicSafeguard]]
                 ),
                 service_tier=service_tier,
                 session_id=session_id,
@@ -1716,6 +1726,12 @@ class Presets(BaseSDK):
                 components.ProviderPreferences, components.ProviderPreferencesTypedDict
             ]
         ] = UNSET,
+        safeguards: OptionalNullable[
+            Union[
+                Iterable[components.AnthropicSafeguard],
+                Iterable[components.AnthropicSafeguardTypedDict],
+            ]
+        ] = UNSET,
         service_tier: Optional[str] = None,
         session_id: Optional[str] = None,
         speed: OptionalNullable[components.Speed] = UNSET,
@@ -1777,6 +1793,7 @@ class Presets(BaseSDK):
         :param output_config: Configuration for controlling output behavior. Supports the effort parameter and structured output format.
         :param plugins: Plugins you want to enable for this request, including their settings.
         :param provider: When multiple model providers are available, optionally indicate your routing preference.
+        :param safeguards:
         :param service_tier:
         :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow). When provided, OpenRouter uses it as the sticky routing key, routing all requests in the session to the same provider to maximize prompt cache hits. Also used for observability grouping. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters.
         :param speed:
@@ -1839,6 +1856,9 @@ class Presets(BaseSDK):
                 ),
                 provider=utils.get_pydantic_model(
                     provider, OptionalNullable[components.ProviderPreferences]
+                ),
+                safeguards=utils.get_pydantic_model(
+                    safeguards, OptionalNullable[List[components.AnthropicSafeguard]]
                 ),
                 service_tier=service_tier,
                 session_id=session_id,

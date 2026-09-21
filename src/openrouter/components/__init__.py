@@ -189,6 +189,7 @@ if TYPE_CHECKING:
         AnthropicPlainTextSourceType,
         AnthropicPlainTextSourceTypedDict,
     )
+    from .anthropicsafeguard import AnthropicSafeguard, AnthropicSafeguardTypedDict
     from .anthropicsearchresultblockparam import (
         AnthropicSearchResultBlockParam,
         AnthropicSearchResultBlockParamCitations,
@@ -3638,6 +3639,8 @@ __all__ = [
     "AnthropicPlainTextSourceMediaType",
     "AnthropicPlainTextSourceType",
     "AnthropicPlainTextSourceTypedDict",
+    "AnthropicSafeguard",
+    "AnthropicSafeguardTypedDict",
     "AnthropicSearchResultBlockParam",
     "AnthropicSearchResultBlockParamCitations",
     "AnthropicSearchResultBlockParamCitationsTypedDict",
@@ -6171,6 +6174,8 @@ _dynamic_imports: dict[str, str] = {
     "AnthropicPlainTextSourceMediaType": ".anthropicplaintextsource",
     "AnthropicPlainTextSourceType": ".anthropicplaintextsource",
     "AnthropicPlainTextSourceTypedDict": ".anthropicplaintextsource",
+    "AnthropicSafeguard": ".anthropicsafeguard",
+    "AnthropicSafeguardTypedDict": ".anthropicsafeguard",
     "AnthropicSearchResultBlockParam": ".anthropicsearchresultblockparam",
     "AnthropicSearchResultBlockParamCitations": ".anthropicsearchresultblockparam",
     "AnthropicSearchResultBlockParamCitationsTypedDict": ".anthropicsearchresultblockparam",

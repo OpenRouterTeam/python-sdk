@@ -1,0 +1,14 @@
+---
+title: "AnthropicSafeguard"
+---
+
+A server-side safeguard Anthropic evaluates alongside the completion
+
+
+## Fields
+
+| Field                                                                                         | Type                                                                                          | Required                                                                                      | Description                                                                                   | Example                                                                                       |
+| --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| `classifier_context`                                                                          | Dict[str, *Any*]                                                                              | :heavy_minus_sign:                                                                            | N/A                                                                                           |                                                                                               |
+| `type`                                                                                        | *str*                                                                                         | :heavy_check_mark:                                                                            | N/A                                                                                           |                                                                                               |
+| `__pydantic_extra__`                                                                          | Dict[str, *Any*]                                                                              | :heavy_minus_sign:                                                                            | N/A                                                                                           | \{<br/>"classifier_context": \{<br/>"permission_mode": "auto",<br/>"v": 1<br/>},<br/>"type": "dangerous_tool_use"<br/>} |
