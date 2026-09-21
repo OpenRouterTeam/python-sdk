@@ -3490,6 +3490,7 @@ if TYPE_CHECKING:
         WorkspaceMemberRole,
         WorkspaceMemberTypedDict,
     )
+    from .xsearchoptions import XSearchOptions, XSearchOptionsTypedDict
 
 __all__ = [
     "AABenchmarkEntry",
@@ -6028,6 +6029,8 @@ __all__ = [
     "WorkspaceMemberRole",
     "WorkspaceMemberTypedDict",
     "WorkspaceTypedDict",
+    "XSearchOptions",
+    "XSearchOptionsTypedDict",
 ]
 
 _dynamic_imports: dict[str, str] = {
@@ -8567,6 +8570,8 @@ _dynamic_imports: dict[str, str] = {
     "WorkspaceMember": ".workspacemember",
     "WorkspaceMemberRole": ".workspacemember",
     "WorkspaceMemberTypedDict": ".workspacemember",
+    "XSearchOptions": ".xsearchoptions",
+    "XSearchOptionsTypedDict": ".xsearchoptions",
 }
 
 

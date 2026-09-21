@@ -141,10 +141,10 @@ OpenResponsesResultToolUnionTypedDict = TypeAliasType(
         FileSearchServerToolTypedDict,
         OpenResponsesResultToolFunctionTypedDict,
         LegacyWebSearchServerToolTypedDict,
+        McpServerToolTypedDict,
         WebSearchServerToolTypedDict,
         Preview20250311WebSearchServerToolTypedDict,
         PreviewWebSearchServerToolTypedDict,
-        McpServerToolTypedDict,
         ImageGenerationServerToolTypedDict,
     ],
 )

@@ -9,6 +9,7 @@ from .searchcontextsizeenum import SearchContextSizeEnum
 from .websearchdomainfilter import WebSearchDomainFilter, WebSearchDomainFilterTypedDict
 from .websearchengineenum import WebSearchEngineEnum
 from .websearchmode import WebSearchMode
+from .xsearchoptions import XSearchOptions, XSearchOptionsTypedDict
 from openrouter.types import (
     BaseModel,
     Nullable,
@@ -40,6 +41,8 @@ class PreviewWebSearchServerToolTypedDict(TypedDict):
     search_context_size: NotRequired[SearchContextSizeEnum]
     r"""Size of the search context for web search tools"""
     user_location: NotRequired[Nullable[PreviewWebSearchUserLocationTypedDict]]
+    x_search: NotRequired[XSearchOptionsTypedDict]
+    r"""Enable SpaceXAI X (Twitter) search alongside native web search, with optional filters. Only applies to SpaceXAI endpoints with native search; omit to search the web only. X search is billed separately by SpaceXAI, per post and per user profile fetched."""
 
 
 class PreviewWebSearchServerTool(BaseModel):
@@ -66,6 +69,9 @@ class PreviewWebSearchServerTool(BaseModel):
 
     user_location: OptionalNullable[PreviewWebSearchUserLocation] = UNSET
 
+    x_search: Optional[XSearchOptions] = None
+    r"""Enable SpaceXAI X (Twitter) search alongside native web search, with optional filters. Only applies to SpaceXAI endpoints with native search; omit to search the web only. X search is billed separately by SpaceXAI, per post and per user profile fetched."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
@@ -77,6 +83,7 @@ class PreviewWebSearchServerTool(BaseModel):
                 "mode",
                 "search_context_size",
                 "user_location",
+                "x_search",
             ]
         )
         nullable_fields = set(["filters", "user_location"])
