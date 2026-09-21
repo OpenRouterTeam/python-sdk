@@ -105,7 +105,7 @@ class ListInternsRequestTypedDict(TypedDict):
     limit: NotRequired[int]
     r"""Maximum number of interns to return, from 1 through 500."""
     status: NotRequired[List[Status]]
-    r"""Comma-separated lifecycle statuses to include."""
+    r"""Comma-separated lifecycle statuses to include, at most 8. Repeats are collapsed."""
     starting_after: NotRequired[str]
     r"""The opaque `next_cursor` of the previous page. Returns the interns that come after it in the newest-first order. A malformed cursor is a 400."""
     workspace_id: NotRequired[str]
@@ -151,7 +151,7 @@ class ListInternsRequest(BaseModel):
         Optional[List[Status]],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=False)),
     ] = None
-    r"""Comma-separated lifecycle statuses to include."""
+    r"""Comma-separated lifecycle statuses to include, at most 8. Repeats are collapsed."""
 
     starting_after: Annotated[
         Optional[str],

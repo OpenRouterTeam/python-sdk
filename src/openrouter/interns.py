@@ -41,7 +41,7 @@ class Interns(BaseSDK):
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
         :param limit: Maximum number of interns to return, from 1 through 500.
-        :param status: Comma-separated lifecycle statuses to include.
+        :param status: Comma-separated lifecycle statuses to include, at most 8. Repeats are collapsed.
         :param starting_after: The opaque `next_cursor` of the previous page. Returns the interns that come after it in the newest-first order. A malformed cursor is a 400.
         :param workspace_id: Only return interns in this workspace. It must match the API key workspace.
         :param retries: Override the default retry configuration for this method
@@ -178,7 +178,7 @@ class Interns(BaseSDK):
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
         :param limit: Maximum number of interns to return, from 1 through 500.
-        :param status: Comma-separated lifecycle statuses to include.
+        :param status: Comma-separated lifecycle statuses to include, at most 8. Repeats are collapsed.
         :param starting_after: The opaque `next_cursor` of the previous page. Returns the interns that come after it in the newest-first order. A malformed cursor is a 400.
         :param workspace_id: Only return interns in this workspace. It must match the API key workspace.
         :param retries: Override the default retry configuration for this method
@@ -318,7 +318,7 @@ class Interns(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
-        :param idempotency_key: Key that makes retries resume the same create operation. Without one, the server derives a stable key from the request body.
+        :param idempotency_key: Key that makes retries resume the same create operation, from 1 through 255 characters. An empty or longer key is refused with 400. Without the header, the server derives a stable key from the request body.
         :param description: Free-form description, or null.
         :param instructions: Standing instructions the intern boots with, or null.
         :param provision: Start provisioning during this create operation. Defaults to false.
@@ -475,7 +475,7 @@ class Interns(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
-        :param idempotency_key: Key that makes retries resume the same create operation. Without one, the server derives a stable key from the request body.
+        :param idempotency_key: Key that makes retries resume the same create operation, from 1 through 255 characters. An empty or longer key is refused with 400. Without the header, the server derives a stable key from the request body.
         :param description: Free-form description, or null.
         :param instructions: Standing instructions the intern boots with, or null.
         :param provision: Start provisioning during this create operation. Defaults to false.
@@ -1265,7 +1265,9 @@ class Interns(BaseSDK):
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(components.Intern, http_res)
         if utils.match_response(
-            http_res, ["400", "401", "403", "404", "408", "413"], "application/json"
+            http_res,
+            ["400", "401", "403", "404", "408", "409", "413"],
+            "application/json",
         ):
             response_data = unmarshal_json_response(
                 errors.InternLifecycleErrorData, http_res
@@ -1414,7 +1416,9 @@ class Interns(BaseSDK):
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(components.Intern, http_res)
         if utils.match_response(
-            http_res, ["400", "401", "403", "404", "408", "413"], "application/json"
+            http_res,
+            ["400", "401", "403", "404", "408", "409", "413"],
+            "application/json",
         ):
             response_data = unmarshal_json_response(
                 errors.InternLifecycleErrorData, http_res
@@ -1452,7 +1456,7 @@ class Interns(BaseSDK):
     ) -> components.ProvisionInternResponse:
         r"""Provision an intern
 
-        Starts the first boot, or resumes an intern after suspension. The API key selects the caller, workspace and visible interns. There is no default workspace fallback. Requests on regional hostnames such as `eu.openrouter.ai` are refused. [API key](/docs/api-reference/authentication) required.
+        Starts the first boot, or resumes an intern after suspension. This operation takes no request body. A body carrying any field is refused with 400 rather than ignored. The API key selects the caller, workspace and visible interns. There is no default workspace fallback. Requests on regional hostnames such as `eu.openrouter.ai` are refused. [API key](/docs/api-reference/authentication) required.
 
         If set, this operation will use `api_key` from the global security.
 
@@ -1542,7 +1546,9 @@ class Interns(BaseSDK):
         if utils.match_response(http_res, "202", "application/json"):
             return unmarshal_json_response(components.ProvisionInternResponse, http_res)
         if utils.match_response(
-            http_res, ["401", "403", "404", "408", "409"], "application/json"
+            http_res,
+            ["400", "401", "403", "404", "408", "409", "413"],
+            "application/json",
         ):
             response_data = unmarshal_json_response(
                 errors.InternLifecycleErrorData, http_res
@@ -1580,7 +1586,7 @@ class Interns(BaseSDK):
     ) -> components.ProvisionInternResponse:
         r"""Provision an intern
 
-        Starts the first boot, or resumes an intern after suspension. The API key selects the caller, workspace and visible interns. There is no default workspace fallback. Requests on regional hostnames such as `eu.openrouter.ai` are refused. [API key](/docs/api-reference/authentication) required.
+        Starts the first boot, or resumes an intern after suspension. This operation takes no request body. A body carrying any field is refused with 400 rather than ignored. The API key selects the caller, workspace and visible interns. There is no default workspace fallback. Requests on regional hostnames such as `eu.openrouter.ai` are refused. [API key](/docs/api-reference/authentication) required.
 
         If set, this operation will use `api_key` from the global security.
 
@@ -1670,7 +1676,9 @@ class Interns(BaseSDK):
         if utils.match_response(http_res, "202", "application/json"):
             return unmarshal_json_response(components.ProvisionInternResponse, http_res)
         if utils.match_response(
-            http_res, ["401", "403", "404", "408", "409"], "application/json"
+            http_res,
+            ["400", "401", "403", "404", "408", "409", "413"],
+            "application/json",
         ):
             response_data = unmarshal_json_response(
                 errors.InternLifecycleErrorData, http_res
@@ -1708,7 +1716,7 @@ class Interns(BaseSDK):
     ) -> components.SuspendInternResponse:
         r"""Suspend an intern
 
-        Stops the intern runtime while keeping its disk and configuration for a later provision call. The API key selects the caller, workspace and visible interns. There is no default workspace fallback. Requests on regional hostnames such as `eu.openrouter.ai` are refused. [API key](/docs/api-reference/authentication) required.
+        Stops the intern runtime while keeping its disk and configuration for a later provision call. This operation takes no request body. A body carrying any field is refused with 400 rather than ignored. The API key selects the caller, workspace and visible interns. There is no default workspace fallback. Requests on regional hostnames such as `eu.openrouter.ai` are refused. [API key](/docs/api-reference/authentication) required.
 
         If set, this operation will use `api_key` from the global security.
 
@@ -1798,7 +1806,9 @@ class Interns(BaseSDK):
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(components.SuspendInternResponse, http_res)
         if utils.match_response(
-            http_res, ["401", "403", "404", "408", "409"], "application/json"
+            http_res,
+            ["400", "401", "403", "404", "408", "409", "413"],
+            "application/json",
         ):
             response_data = unmarshal_json_response(
                 errors.InternLifecycleErrorData, http_res
@@ -1836,7 +1846,7 @@ class Interns(BaseSDK):
     ) -> components.SuspendInternResponse:
         r"""Suspend an intern
 
-        Stops the intern runtime while keeping its disk and configuration for a later provision call. The API key selects the caller, workspace and visible interns. There is no default workspace fallback. Requests on regional hostnames such as `eu.openrouter.ai` are refused. [API key](/docs/api-reference/authentication) required.
+        Stops the intern runtime while keeping its disk and configuration for a later provision call. This operation takes no request body. A body carrying any field is refused with 400 rather than ignored. The API key selects the caller, workspace and visible interns. There is no default workspace fallback. Requests on regional hostnames such as `eu.openrouter.ai` are refused. [API key](/docs/api-reference/authentication) required.
 
         If set, this operation will use `api_key` from the global security.
 
@@ -1926,7 +1936,9 @@ class Interns(BaseSDK):
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(components.SuspendInternResponse, http_res)
         if utils.match_response(
-            http_res, ["401", "403", "404", "408", "409"], "application/json"
+            http_res,
+            ["400", "401", "403", "404", "408", "409", "413"],
+            "application/json",
         ):
             response_data = unmarshal_json_response(
                 errors.InternLifecycleErrorData, http_res
@@ -1969,8 +1981,8 @@ class Interns(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> Union[
-        components.InternChatCompletionChunk,
-        eventstreaming.EventStream[components.InternChatCompletionChunk],
+        operations.CreateInternChatCompletionResponse,
+        operations.CreateInternChatCompletionResponse,
     ]:
         r"""Stream a chat completion with an intern
 
@@ -2096,22 +2108,28 @@ class Interns(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "text/event-stream"):
-            return eventstreaming.EventStream(
-                http_res,
-                lambda raw: unmarshal_json_response(
-                    components.InternChatStreamingResponse, http_res, raw
-                ).data,
-                sentinel="[DONE]",
-                client_ref=self,
+            return operations.CreateInternChatCompletionResponse(
+                result=eventstreaming.EventStream(
+                    http_res,
+                    lambda raw: unmarshal_json_response(
+                        components.InternChatStreamingResponse, http_res, raw
+                    ).data,
+                    sentinel="[DONE]",
+                    client_ref=self,
+                ),
+                headers={},
             )
         if utils.match_response(http_res, "200", "application/json"):
             http_res_text = utils.stream_to_text(http_res)
-            return unmarshal_json_response(
-                components.InternChatCompletionChunk, http_res, http_res_text
+            return operations.CreateInternChatCompletionResponse(
+                result=unmarshal_json_response(
+                    components.InternChatCompletionChunk, http_res, http_res_text
+                ),
+                headers={},
             )
         if utils.match_response(
             http_res,
-            ["400", "401", "403", "404", "409", "410", "413", "429"],
+            ["400", "401", "403", "404", "408", "410", "413"],
             "application/json",
         ):
             http_res_text = utils.stream_to_text(http_res)
@@ -2119,7 +2137,19 @@ class Interns(BaseSDK):
                 errors.InternChatErrorResponseData, http_res, http_res_text
             )
             raise errors.InternChatErrorResponse(response_data, http_res, http_res_text)
-        if utils.match_response(http_res, ["502", "503", "504"], "application/json"):
+        if utils.match_response(http_res, ["409", "429"], "application/json"):
+            http_res_text = utils.stream_to_text(http_res)
+            response_data = unmarshal_json_response(
+                errors.InternChatErrorResponseData, http_res, http_res_text
+            )
+            raise errors.InternChatErrorResponse(response_data, http_res, http_res_text)
+        if utils.match_response(http_res, "503", "application/json"):
+            http_res_text = utils.stream_to_text(http_res)
+            response_data = unmarshal_json_response(
+                errors.InternChatErrorResponseData, http_res, http_res_text
+            )
+            raise errors.InternChatErrorResponse(response_data, http_res, http_res_text)
+        if utils.match_response(http_res, ["502", "504"], "application/json"):
             http_res_text = utils.stream_to_text(http_res)
             response_data = unmarshal_json_response(
                 errors.InternChatErrorResponseData, http_res, http_res_text
@@ -2160,8 +2190,8 @@ class Interns(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> Union[
-        components.InternChatCompletionChunk,
-        eventstreaming.EventStreamAsync[components.InternChatCompletionChunk],
+        operations.CreateInternChatCompletionResponse,
+        operations.CreateInternChatCompletionResponse,
     ]:
         r"""Stream a chat completion with an intern
 
@@ -2287,22 +2317,28 @@ class Interns(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "text/event-stream"):
-            return eventstreaming.EventStreamAsync(
-                http_res,
-                lambda raw: unmarshal_json_response(
-                    components.InternChatStreamingResponse, http_res, raw
-                ).data,
-                sentinel="[DONE]",
-                client_ref=self,
+            return operations.CreateInternChatCompletionResponse(
+                result=eventstreaming.EventStreamAsync(
+                    http_res,
+                    lambda raw: unmarshal_json_response(
+                        components.InternChatStreamingResponse, http_res, raw
+                    ).data,
+                    sentinel="[DONE]",
+                    client_ref=self,
+                ),
+                headers={},
             )
         if utils.match_response(http_res, "200", "application/json"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            return unmarshal_json_response(
-                components.InternChatCompletionChunk, http_res, http_res_text
+            return operations.CreateInternChatCompletionResponse(
+                result=unmarshal_json_response(
+                    components.InternChatCompletionChunk, http_res, http_res_text
+                ),
+                headers={},
             )
         if utils.match_response(
             http_res,
-            ["400", "401", "403", "404", "409", "410", "413", "429"],
+            ["400", "401", "403", "404", "408", "410", "413"],
             "application/json",
         ):
             http_res_text = await utils.stream_to_text_async(http_res)
@@ -2310,7 +2346,19 @@ class Interns(BaseSDK):
                 errors.InternChatErrorResponseData, http_res, http_res_text
             )
             raise errors.InternChatErrorResponse(response_data, http_res, http_res_text)
-        if utils.match_response(http_res, ["502", "503", "504"], "application/json"):
+        if utils.match_response(http_res, ["409", "429"], "application/json"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            response_data = unmarshal_json_response(
+                errors.InternChatErrorResponseData, http_res, http_res_text
+            )
+            raise errors.InternChatErrorResponse(response_data, http_res, http_res_text)
+        if utils.match_response(http_res, "503", "application/json"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            response_data = unmarshal_json_response(
+                errors.InternChatErrorResponseData, http_res, http_res_text
+            )
+            raise errors.InternChatErrorResponse(response_data, http_res, http_res_text)
+        if utils.match_response(http_res, ["502", "504"], "application/json"):
             http_res_text = await utils.stream_to_text_async(http_res)
             response_data = unmarshal_json_response(
                 errors.InternChatErrorResponseData, http_res, http_res_text
