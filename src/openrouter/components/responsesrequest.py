@@ -395,7 +395,7 @@ class ResponsesRequestTypedDict(TypedDict):
     r"""Plugins you want to enable for this request, including their settings."""
     presence_penalty: NotRequired[Nullable[float]]
     previous_response_id: NotRequired[Any]
-    r"""Not supported. The Responses API is stateless: no responses are stored, so a previous response cannot be referenced. Requests with a non-null value are rejected with a 400 error. Send the full conversation history in `input` instead."""
+    r"""Not supported on this proxy. Each response request is independent: no responses are stored, so a previous response cannot be referenced. Requests with a non-null value are rejected with a 400 error. Send the full conversation history in `input` instead."""
     prompt: NotRequired[Nullable[StoredPromptTemplateTypedDict]]
     prompt_cache_key: NotRequired[Nullable[str]]
     prompt_cache_options: NotRequired[Nullable[PromptCacheOptionsTypedDict]]
@@ -475,7 +475,7 @@ class ResponsesRequest(BaseModel):
     presence_penalty: OptionalNullable[float] = UNSET
 
     previous_response_id: Optional[Any] = None
-    r"""Not supported. The Responses API is stateless: no responses are stored, so a previous response cannot be referenced. Requests with a non-null value are rejected with a 400 error. Send the full conversation history in `input` instead."""
+    r"""Not supported on this proxy. Each response request is independent: no responses are stored, so a previous response cannot be referenced. Requests with a non-null value are rejected with a 400 error. Send the full conversation history in `input` instead."""
 
     prompt: OptionalNullable[StoredPromptTemplate] = UNSET
 
