@@ -8,7 +8,7 @@ from typing import Optional
 
 class Alpha(BaseSDK):
     decisions: Decisions
-    r"""Alpha feature endpoints for Decisions (questions and answers) requests"""
+    r"""Alpha feature endpoints for Decisions requests"""
 
     def __init__(
         self, sdk_config: SDKConfiguration, parent_ref: Optional[object] = None
