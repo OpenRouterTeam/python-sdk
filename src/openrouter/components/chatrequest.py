@@ -47,6 +47,10 @@ from .stopservertoolswhencondition import (
     StopServerToolsWhenCondition,
     StopServerToolsWhenConditionTypedDict,
 )
+from .switchyardrouterplugin import (
+    SwitchyardRouterPlugin,
+    SwitchyardRouterPluginTypedDict,
+)
 from .traceconfig import TraceConfig, TraceConfigTypedDict
 from .webfetchplugin import WebFetchPlugin, WebFetchPluginTypedDict
 from .websearchplugin import WebSearchPlugin, WebSearchPluginTypedDict
@@ -79,6 +83,7 @@ ChatRequestPluginTypedDict = TypeAliasType(
     Union[
         ModerationPluginTypedDict,
         ResponseHealingPluginTypedDict,
+        SwitchyardRouterPluginTypedDict,
         FileParserPluginTypedDict,
         ContextCompressionPluginTypedDict,
         WebFetchPluginTypedDict,
@@ -101,6 +106,7 @@ ChatRequestPlugin = Annotated[
         Annotated[ModerationPlugin, Tag("moderation")],
         Annotated[ParetoRouterPlugin, Tag("pareto-router")],
         Annotated[ResponseHealingPlugin, Tag("response-healing")],
+        Annotated[SwitchyardRouterPlugin, Tag("switchyard-router")],
         Annotated[WebSearchPlugin, Tag("web")],
         Annotated[WebFetchPlugin, Tag("web-fetch")],
     ],
