@@ -3183,6 +3183,12 @@ if TYPE_CHECKING:
         SuspendInternResponse,
         SuspendInternResponseTypedDict,
     )
+    from .switchyardrouterplugin import (
+        Algorithm,
+        SwitchyardRouterPlugin,
+        SwitchyardRouterPluginID,
+        SwitchyardRouterPluginTypedDict,
+    )
     from .taskclassificationitem import (
         TaskClassificationItem,
         TaskClassificationItemTypedDict,
@@ -3546,6 +3552,7 @@ __all__ = [
     "AgentMessageItemTypedDict",
     "AgentTypedDict",
     "Alg",
+    "Algorithm",
     "AllowedCaller",
     "AllowedTools",
     "AllowedToolsTypedDict",
@@ -5714,6 +5721,9 @@ __all__ = [
     "SupportedSize",
     "SuspendInternResponse",
     "SuspendInternResponseTypedDict",
+    "SwitchyardRouterPlugin",
+    "SwitchyardRouterPluginID",
+    "SwitchyardRouterPluginTypedDict",
     "Syntax",
     "System",
     "SystemTypedDict",
@@ -8383,6 +8393,10 @@ _dynamic_imports: dict[str, str] = {
     "SubmitGenerationFeedbackResponseTypedDict": ".submitgenerationfeedbackresponse",
     "SuspendInternResponse": ".suspendinternresponse",
     "SuspendInternResponseTypedDict": ".suspendinternresponse",
+    "Algorithm": ".switchyardrouterplugin",
+    "SwitchyardRouterPlugin": ".switchyardrouterplugin",
+    "SwitchyardRouterPluginID": ".switchyardrouterplugin",
+    "SwitchyardRouterPluginTypedDict": ".switchyardrouterplugin",
     "TaskClassificationItem": ".taskclassificationitem",
     "TaskClassificationItemTypedDict": ".taskclassificationitem",
     "TaskClassificationMacroCategory": ".taskclassificationmacrocategory",
