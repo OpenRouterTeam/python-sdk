@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c48cf606-fb42-4a45-9c23-8f0555307828
 management:
-  docChecksum: 31349966d46612ca1227969d47b0f79d
+  docChecksum: 0621db594a338b1995bb5df84fe1e380
   docVersion: 1.0.0
   speakeasyVersion: 1.787.0
   generationVersion: 2.914.0
-  releaseVersion: 1.2.17
-  configChecksum: bb76a8c34d1d398450baf42db21a0bea
+  releaseVersion: 1.2.18
+  configChecksum: 19931688261417651340e45f6ba359f8
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
 persistentEdits:
-  generation_id: 902418ca-b0ac-4d26-a027-8b8646cd50ab
-  pristine_commit_hash: 8fd52a1f96830c7b21c500eef71de62225323163
-  pristine_tree_hash: 84a1f403408d6a221541c7cd82c2b642aad62a25
+  generation_id: c634c8cb-cadc-4a67-baae-8b424d900b2a
+  pristine_commit_hash: 5bfb171ca7ba1b307cfacc13eec719f5a7f3731e
+  pristine_tree_hash: 2bedcc17f5560525acaea94e3fbcc23e06133193
 features:
   python:
     acceptHeaders: 3.0.0
@@ -8207,8 +8207,8 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:6c189e106ad5654791db954205dc629c2cb2684b
-    pristine_git_object: f4db2089c5ab234eef116f55de260cbce0f0c78f
+    last_write_checksum: sha1:df30e6e11da4abf2179d48d4ae869bbe459d0bdf
+    pristine_git_object: 09083682bd6fa47806b29a0412138435f86f137d
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77f44b60b98bc126557ec27391f91dfba764bb54
@@ -8235,8 +8235,8 @@ trackedFiles:
     pristine_git_object: 86713cfea633e09d33b3d4e65281071fe20e6137
   src/openrouter/_version.py:
     id: d8d15ad6c586
-    last_write_checksum: sha1:771dab4611c6122dc3c77f114d232c4a3eae4d4d
-    pristine_git_object: 9940829d7ec9f4466c80a29dcbf939b9c0418d8a
+    last_write_checksum: sha1:24d8d3a24cf55419e1c7e189efec0e0647fbb493
+    pristine_git_object: 62fe1edec430f4609a3dded87fd8d5837585063c
   src/openrouter/alpha.py:
     id: 306c4d93308d
     last_write_checksum: sha1:30f55a360f41376ab194b9ea725fe4e001a5ae1a
