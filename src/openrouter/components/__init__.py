@@ -915,6 +915,7 @@ if TYPE_CHECKING:
     )
     from .createworkspacerequest import (
         CreateWorkspaceRequest,
+        CreateWorkspaceRequestDisabledServerTool,
         CreateWorkspaceRequestTypedDict,
     )
     from .createworkspaceresponse import (
@@ -3342,6 +3343,7 @@ if TYPE_CHECKING:
     )
     from .updateworkspacerequest import (
         UpdateWorkspaceRequest,
+        UpdateWorkspaceRequestDisabledServerTool,
         UpdateWorkspaceRequestTypedDict,
     )
     from .updateworkspaceresponse import (
@@ -4149,6 +4151,7 @@ __all__ = [
     "CreateScimSyncJobResponse",
     "CreateScimSyncJobResponseTypedDict",
     "CreateWorkspaceRequest",
+    "CreateWorkspaceRequestDisabledServerTool",
     "CreateWorkspaceRequestTypedDict",
     "CreateWorkspaceResponse",
     "CreateWorkspaceResponseTypedDict",
@@ -5932,6 +5935,7 @@ __all__ = [
     "UpdateScimGroupMappingResponse",
     "UpdateScimGroupMappingResponseTypedDict",
     "UpdateWorkspaceRequest",
+    "UpdateWorkspaceRequestDisabledServerTool",
     "UpdateWorkspaceRequestTypedDict",
     "UpdateWorkspaceResponse",
     "UpdateWorkspaceResponseTypedDict",
@@ -6668,6 +6672,7 @@ _dynamic_imports: dict[str, str] = {
     "CreateScimSyncJobResponse": ".createscimsyncjobresponse",
     "CreateScimSyncJobResponseTypedDict": ".createscimsyncjobresponse",
     "CreateWorkspaceRequest": ".createworkspacerequest",
+    "CreateWorkspaceRequestDisabledServerTool": ".createworkspacerequest",
     "CreateWorkspaceRequestTypedDict": ".createworkspacerequest",
     "CreateWorkspaceResponse": ".createworkspaceresponse",
     "CreateWorkspaceResponseTypedDict": ".createworkspaceresponse",
@@ -8483,6 +8488,7 @@ _dynamic_imports: dict[str, str] = {
     "UpdateScimGroupMappingResponse": ".updatescimgroupmappingresponse",
     "UpdateScimGroupMappingResponseTypedDict": ".updatescimgroupmappingresponse",
     "UpdateWorkspaceRequest": ".updateworkspacerequest",
+    "UpdateWorkspaceRequestDisabledServerTool": ".updateworkspacerequest",
     "UpdateWorkspaceRequestTypedDict": ".updateworkspacerequest",
     "UpdateWorkspaceResponse": ".updateworkspaceresponse",
     "UpdateWorkspaceResponseTypedDict": ".updateworkspaceresponse",

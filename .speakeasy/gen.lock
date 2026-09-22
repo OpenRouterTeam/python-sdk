@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c48cf606-fb42-4a45-9c23-8f0555307828
 management:
-  docChecksum: 7bd9b89fbec22196d1905c5c343c5a3f
+  docChecksum: 77068c873b6461c3ce598e7639e7e171
   docVersion: 1.0.0
   speakeasyVersion: 1.787.0
   generationVersion: 2.914.0
-  releaseVersion: 1.2.14
-  configChecksum: 802743116b703c7d1d4da10855dfdb26
+  releaseVersion: 1.2.15
+  configChecksum: 43d078beaa84285feccc361371078355
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
 persistentEdits:
-  generation_id: 9c3c1c68-6766-4a03-af9e-8c8d26193017
-  pristine_commit_hash: 4847c3203bade2f349f3a6e921f66191fb329f49
-  pristine_tree_hash: c1bbe1d3081315160c4967c57a55f086ee11c9e9
+  generation_id: d606bc86-3789-4ac8-a973-e8c317148812
+  pristine_commit_hash: af6e39c114d0eef6d6d37a87a118f0c509dcc58e
+  pristine_tree_hash: 5a74f690938f581187d9d3e14911a3249a1c7fe5
 features:
   python:
     acceptHeaders: 3.0.0
@@ -1699,12 +1699,16 @@ trackedFiles:
     pristine_git_object: 578411c9c20ce29b38854cf608060bd6e6aec69e
   docs/components/createworkspacerequest.mdx:
     id: ea85d6684017
-    last_write_checksum: sha1:3fd0555fe82dbdff103995079630e6bcb7503795
-    pristine_git_object: 3de1021e362e3a910e0e35842e6f1cdea15cdca4
+    last_write_checksum: sha1:9c2244e40338c90da6e7cab914566c1f755da1f8
+    pristine_git_object: 2d5e2868284158cf355dbf7d86d4cc48b635c3c7
+  docs/components/createworkspacerequestdisabledservertool.mdx:
+    id: 19a533b200f9
+    last_write_checksum: sha1:88082fd2da7f18d74d3d66c57fca6afb7e5f104a
+    pristine_git_object: 8156c97be549e8be20442a45b8fc32fa5718f086
   docs/components/createworkspaceresponse.mdx:
     id: ee0c0ca3257e
-    last_write_checksum: sha1:f6de7351ddd4d0bb8990ef8e40d8cdfb24fe6c53
-    pristine_git_object: aee384f40812ab73fa2a94ee1ee24decaee754f3
+    last_write_checksum: sha1:43fe9485ebaec2a6e9eaec713f7cfd0b791de4a3
+    pristine_git_object: 27d6f40a62669b36db6ec260228cfadb36a55a09
   docs/components/criteria.mdx:
     id: 2598471a14a2
     last_write_checksum: sha1:b681aff077a72268d22afe6857d83c7da5224e9c
@@ -2475,8 +2479,8 @@ trackedFiles:
     pristine_git_object: 2974de1ffe849cdfc1720bb7e3431a89ac4c9b14
   docs/components/getworkspaceresponse.mdx:
     id: c8d0c4683019
-    last_write_checksum: sha1:5d10c3c4510cdc869a740deee62c31e9d2b02cc9
-    pristine_git_object: 42ef3f3487d6e55ad13f7ae93edd146fd46332bf
+    last_write_checksum: sha1:7ea1d0d8aad1bd2ddb0d3774eb1f8bc791cf7ce2
+    pristine_git_object: 3028ce13a0833f97730bbe1b419396cfbdcdf0eb
   docs/components/goneresponseerrordata.mdx:
     id: e6b031c25894
     last_write_checksum: sha1:89e7ba22f189a86dd12757f9f5ea3d25175b537b
@@ -6135,12 +6139,16 @@ trackedFiles:
     pristine_git_object: 651230ce14044f67b3930628c9b0a4feaab3f7e6
   docs/components/updateworkspacerequest.mdx:
     id: 9870d016bf28
-    last_write_checksum: sha1:b798c6d985770a44b3db121bb2aa6cd983ad5387
-    pristine_git_object: f7e959179cb3c4d74ad355125a253b88ef4819f2
+    last_write_checksum: sha1:ecce73854de37e1a624d840d82b38114c5335c1a
+    pristine_git_object: d0d068f603c4f4949078d61e64a0e16e825810d7
+  docs/components/updateworkspacerequestdisabledservertool.mdx:
+    id: 47cabb4adf1a
+    last_write_checksum: sha1:9a2e914479d5924d4fd303f87c93a601615f0745
+    pristine_git_object: 0ac89d206b33a5466cb729ba1a6c2cc3841229d9
   docs/components/updateworkspaceresponse.mdx:
     id: b9779063a1b3
-    last_write_checksum: sha1:3af637ba6cb6624ac3390470e21ef1d38e99c104
-    pristine_git_object: 62f4522181f9c1ebe5755bd3bd5851a611534c87
+    last_write_checksum: sha1:51c50cb5897d47059c2f1e59255bf171475c120e
+    pristine_git_object: bb50c7c718e903052b16d9f73d4c3f8a6484ec2d
   docs/components/upscalefactor.mdx:
     id: d68710dea098
     last_write_checksum: sha1:6f0c8ba91272969b8b4c7e4d420ed1090e6c4bb5
@@ -6391,8 +6399,8 @@ trackedFiles:
     pristine_git_object: e8a689098106c445424b89fe5baa348824f3a36c
   docs/components/workspace.mdx:
     id: eea9c32d09c4
-    last_write_checksum: sha1:7c46c2883ef1097c719aedc1f7e685e64f5e8f10
-    pristine_git_object: bfb57ad4dd097359b10a1081120300ea9f9348d8
+    last_write_checksum: sha1:9a689240292bb3903033db3e5232ca191135e38c
+    pristine_git_object: e3866ea05c7cd0f34a152e6e6da25beece779990
   docs/components/workspacebudget.mdx:
     id: e941741a8d84
     last_write_checksum: sha1:c94db9e8e6518f8da147deddd13cdb76a34609fc
@@ -7743,8 +7751,8 @@ trackedFiles:
     pristine_git_object: 0903d08e14ec2f3f3f2ab8668daa99cb32a638c2
   docs/operations/listworkspacesresponse.mdx:
     id: 9c0a0733f9d1
-    last_write_checksum: sha1:d4c171ab93736a42200e388ac79b280496da1be9
-    pristine_git_object: f0b5fa55d7d4da9de53d73728a27e13bfbfb30bf
+    last_write_checksum: sha1:89b57aa3a79a4374de7c876ba1bb3d307ba3208d
+    pristine_git_object: 44258f9aa86a3ce9be3f77d8bb3ada3a00388081
   docs/operations/metadata.mdx:
     id: 2dd433f031ce
     last_write_checksum: sha1:78b9ed1337be24abd728a68bff41a10a0e1421cc
@@ -8191,16 +8199,16 @@ trackedFiles:
     pristine_git_object: f317b0a45ac81d17124b0286e1df39c3eec14b99
   docs/sdks/workspaces/README.mdx:
     id: 0c75d023ef6b
-    last_write_checksum: sha1:25592df93519c9e742e7c2a3df49ea2337a47d64
-    pristine_git_object: 056f17b892cf105c2ee6e3156a37d3260c31f4fe
+    last_write_checksum: sha1:e0506418eaabc2839b16e1cdc5d963dd689226bf
+    pristine_git_object: bf6f0de6a33d64b453e558c8023931513ac367f0
   py.typed:
     id: 258c3ed47ae4
     last_write_checksum: sha1:8efc425ffe830805ffcc0f3055871bdcdc542c60
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:8c54b6c9af35c07744640b023191e7464607c6ad
-    pristine_git_object: 3c96005ec9f6061ebb0433ff241702b99831f58a
+    last_write_checksum: sha1:15ce6f7cff75913f1b08ceaa8749b18d9ebbf6d4
+    pristine_git_object: dc0216420b8e8b2880866e9f162f81d0878cb667
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77f44b60b98bc126557ec27391f91dfba764bb54
@@ -8227,8 +8235,8 @@ trackedFiles:
     pristine_git_object: 86713cfea633e09d33b3d4e65281071fe20e6137
   src/openrouter/_version.py:
     id: d8d15ad6c586
-    last_write_checksum: sha1:fd01494d6e9ee077697de96692d6f1a87b26bb5a
-    pristine_git_object: f36d1bffdd91f724ff2e13c9a2da5d123ea77f16
+    last_write_checksum: sha1:a46b9567b1482e9b54a9b56d89fe91c304c69a26
+    pristine_git_object: 22d2e2ac5c13082de840aa94cf1560638b96258c
   src/openrouter/alpha.py:
     id: 306c4d93308d
     last_write_checksum: sha1:0c25a52ed5fb688ec1e923e4e82bcfc9cae49465
@@ -8271,8 +8279,8 @@ trackedFiles:
     pristine_git_object: ad3d247954547814054c01989a2dff3d12b3e4e1
   src/openrouter/components/__init__.py:
     id: 81754e97b3f4
-    last_write_checksum: sha1:b601eeca8f608df36c42e1b6d2f5ee4af2087eab
-    pristine_git_object: c72a9ee2868adf11a45fb1b3e304c7e0f1534af8
+    last_write_checksum: sha1:8ec369374d1712f8a0a595de9fbcdb5068078afd
+    pristine_git_object: ae01b770b9ea237cd5b8f0176439c924d3ba85eb
   src/openrouter/components/aabenchmarkentry.py:
     id: e2e0f0b48c82
     last_write_checksum: sha1:fab4d9a24d2cea937bb749d46c5f83941e99d65c
@@ -9035,8 +9043,8 @@ trackedFiles:
     pristine_git_object: 3a03248b4aa36f469420c5602df4f5d21a36dd68
   src/openrouter/components/createworkspacerequest.py:
     id: 3785d9b207c2
-    last_write_checksum: sha1:26d39e88354ea17dc3a9c0156ddc8769dbae33a4
-    pristine_git_object: 0596d01d9ef84ac315f8c1e1272dd16aa51517db
+    last_write_checksum: sha1:2ba69c97be9ccf15539646697dd4c427c02a0b42
+    pristine_git_object: 70e1a4066d721ac607b1f06d6d448d07473d52c1
   src/openrouter/components/createworkspaceresponse.py:
     id: 986d9ff993c1
     last_write_checksum: sha1:7e9028b437a9e33a7541ba222cf01e6629f5c74d
@@ -10875,8 +10883,8 @@ trackedFiles:
     pristine_git_object: 2f110211bb0a6889bb6455a7a3901e0be260b170
   src/openrouter/components/updateworkspacerequest.py:
     id: 78d86b3b0a63
-    last_write_checksum: sha1:ff25d835cf026e5401004b26067c778c9e85fe38
-    pristine_git_object: f1569fcf850aeb022abbc604d6b5e206d26db6eb
+    last_write_checksum: sha1:4e8da8b27b81f6cd72483fc807dfff2413ae2ab3
+    pristine_git_object: 48897956756399c6dfe7684094e4d28e2648e754
   src/openrouter/components/updateworkspaceresponse.py:
     id: 46253fa9690a
     last_write_checksum: sha1:4708e7e4cbfddc34ffc9ed4808a88bb5b4a61ebf
@@ -11019,8 +11027,8 @@ trackedFiles:
     pristine_git_object: fda00ebca117e6d3accc21c5252351f77cf34692
   src/openrouter/components/workspace.py:
     id: 682282304bd8
-    last_write_checksum: sha1:69434be003cd92f09b14e7a8ed2fac59ebd05446
-    pristine_git_object: 68c99ace24396e1b7bd903cac6ae78a1403b9591
+    last_write_checksum: sha1:947e861015caddaf1dec255e9facd1f9860a2d3f
+    pristine_git_object: 874f99775f6348b5ad8ec15c928476f4ab88c762
   src/openrouter/components/workspacebudget.py:
     id: f80c6983502a
     last_write_checksum: sha1:14f6ab02291a2222836247463c57ed42d568a6a9
@@ -11843,8 +11851,8 @@ trackedFiles:
     pristine_git_object: 6186c32069bb403d19f20ab7af4bb94ac8bab563
   src/openrouter/workspaces.py:
     id: cd6c533b1802
-    last_write_checksum: sha1:68bf23158fc838c1ad63e871b5d2de6080a75931
-    pristine_git_object: bf45330d15a5647564e5ac5316422909621f8b03
+    last_write_checksum: sha1:7db1e53c7cca6241c73765d584904150ef13c28c
+    pristine_git_object: 7237e212353b6db8a55d654e64a8e0e18b934110
 examples:
   createResponses:
     speakeasy-default-create-responses:
@@ -15052,6 +15060,4 @@ examples:
         "529":
           application/json: {"error": {"code": 529, "message": "Provider returned error"}}
 examplesVersion: 1.0.2
-releaseNotes: |
-  ## Python SDK Changes:
-  * `open_router.presets.create_presets_messages()`:  `request.safeguards` **Added**
+releaseNotes: "## Python SDK Changes:\n* `open_router.workspaces.list()`:  `response.data[].disabled_server_tools` **Added**\n* `open_router.workspaces.create()`: \n  *  `request.disabled_server_tools` **Added**\n  *  `response.data.disabled_server_tools` **Added**\n* `open_router.workspaces.get()`:  `response.data.disabled_server_tools` **Added**\n* `open_router.workspaces.update()`: \n  *  `request.disabled_server_tools` **Added**\n  *  `response.data.disabled_server_tools` **Added**\n"

@@ -344,6 +344,9 @@ class Workspaces(BaseSDK):
         default_provider_sort: OptionalNullable[str] = UNSET,
         default_text_model: OptionalNullable[str] = UNSET,
         description: OptionalNullable[str] = UNSET,
+        disabled_server_tools: OptionalNullable[
+            Iterable[components.CreateWorkspaceRequestDisabledServerTool]
+        ] = UNSET,
         io_logging_api_key_ids: OptionalNullable[Iterable[int]] = UNSET,
         io_logging_sampling_rate: Optional[float] = None,
         is_data_discount_logging_enabled: Optional[bool] = None,
@@ -371,6 +374,7 @@ class Workspaces(BaseSDK):
         :param default_provider_sort: Default provider sort preference (price, throughput, latency, exacto)
         :param default_text_model: Default text model for this workspace
         :param description: Description of the workspace
+        :param disabled_server_tools: OpenRouter server tools that requests in this workspace may not invoke. Requests naming a disabled tool are rejected with 403. An empty array or null clears the list.
         :param io_logging_api_key_ids: Optional array of API key IDs to filter I/O logging
         :param io_logging_sampling_rate: Sampling rate for I/O logging (0.0001-1)
         :param is_data_discount_logging_enabled: Whether data discount logging is enabled
@@ -400,6 +404,12 @@ class Workspaces(BaseSDK):
                 default_provider_sort=default_provider_sort,
                 default_text_model=default_text_model,
                 description=description,
+                disabled_server_tools=utils.unmarshal(
+                    disabled_server_tools,
+                    OptionalNullable[
+                        List[components.CreateWorkspaceRequestDisabledServerTool]
+                    ],
+                ),
                 io_logging_api_key_ids=utils.unmarshal(
                     io_logging_api_key_ids, OptionalNullable[List[int]]
                 ),
@@ -518,6 +528,9 @@ class Workspaces(BaseSDK):
         default_provider_sort: OptionalNullable[str] = UNSET,
         default_text_model: OptionalNullable[str] = UNSET,
         description: OptionalNullable[str] = UNSET,
+        disabled_server_tools: OptionalNullable[
+            Iterable[components.CreateWorkspaceRequestDisabledServerTool]
+        ] = UNSET,
         io_logging_api_key_ids: OptionalNullable[Iterable[int]] = UNSET,
         io_logging_sampling_rate: Optional[float] = None,
         is_data_discount_logging_enabled: Optional[bool] = None,
@@ -545,6 +558,7 @@ class Workspaces(BaseSDK):
         :param default_provider_sort: Default provider sort preference (price, throughput, latency, exacto)
         :param default_text_model: Default text model for this workspace
         :param description: Description of the workspace
+        :param disabled_server_tools: OpenRouter server tools that requests in this workspace may not invoke. Requests naming a disabled tool are rejected with 403. An empty array or null clears the list.
         :param io_logging_api_key_ids: Optional array of API key IDs to filter I/O logging
         :param io_logging_sampling_rate: Sampling rate for I/O logging (0.0001-1)
         :param is_data_discount_logging_enabled: Whether data discount logging is enabled
@@ -574,6 +588,12 @@ class Workspaces(BaseSDK):
                 default_provider_sort=default_provider_sort,
                 default_text_model=default_text_model,
                 description=description,
+                disabled_server_tools=utils.unmarshal(
+                    disabled_server_tools,
+                    OptionalNullable[
+                        List[components.CreateWorkspaceRequestDisabledServerTool]
+                    ],
+                ),
                 io_logging_api_key_ids=utils.unmarshal(
                     io_logging_api_key_ids, OptionalNullable[List[int]]
                 ),
@@ -1229,6 +1249,9 @@ class Workspaces(BaseSDK):
         default_provider_sort: OptionalNullable[str] = UNSET,
         default_text_model: OptionalNullable[str] = UNSET,
         description: OptionalNullable[str] = UNSET,
+        disabled_server_tools: OptionalNullable[
+            Iterable[components.UpdateWorkspaceRequestDisabledServerTool]
+        ] = UNSET,
         io_logging_api_key_ids: OptionalNullable[Iterable[int]] = UNSET,
         io_logging_sampling_rate: Optional[float] = None,
         is_data_discount_logging_enabled: Optional[bool] = None,
@@ -1257,6 +1280,7 @@ class Workspaces(BaseSDK):
         :param default_provider_sort: Default provider sort preference (price, throughput, latency, exacto)
         :param default_text_model: Default text model for this workspace
         :param description: New description for the workspace
+        :param disabled_server_tools: OpenRouter server tools that requests in this workspace may not invoke. Requests naming a disabled tool are rejected with 403. An empty array or null clears the list.
         :param io_logging_api_key_ids: Optional array of API key IDs to filter I/O logging
         :param io_logging_sampling_rate: Sampling rate for I/O logging (0.0001-1)
         :param is_data_discount_logging_enabled: Whether data discount logging is enabled
@@ -1289,6 +1313,12 @@ class Workspaces(BaseSDK):
                 default_provider_sort=default_provider_sort,
                 default_text_model=default_text_model,
                 description=description,
+                disabled_server_tools=utils.unmarshal(
+                    disabled_server_tools,
+                    OptionalNullable[
+                        List[components.UpdateWorkspaceRequestDisabledServerTool]
+                    ],
+                ),
                 io_logging_api_key_ids=utils.unmarshal(
                     io_logging_api_key_ids, OptionalNullable[List[int]]
                 ),
@@ -1411,6 +1441,9 @@ class Workspaces(BaseSDK):
         default_provider_sort: OptionalNullable[str] = UNSET,
         default_text_model: OptionalNullable[str] = UNSET,
         description: OptionalNullable[str] = UNSET,
+        disabled_server_tools: OptionalNullable[
+            Iterable[components.UpdateWorkspaceRequestDisabledServerTool]
+        ] = UNSET,
         io_logging_api_key_ids: OptionalNullable[Iterable[int]] = UNSET,
         io_logging_sampling_rate: Optional[float] = None,
         is_data_discount_logging_enabled: Optional[bool] = None,
@@ -1439,6 +1472,7 @@ class Workspaces(BaseSDK):
         :param default_provider_sort: Default provider sort preference (price, throughput, latency, exacto)
         :param default_text_model: Default text model for this workspace
         :param description: New description for the workspace
+        :param disabled_server_tools: OpenRouter server tools that requests in this workspace may not invoke. Requests naming a disabled tool are rejected with 403. An empty array or null clears the list.
         :param io_logging_api_key_ids: Optional array of API key IDs to filter I/O logging
         :param io_logging_sampling_rate: Sampling rate for I/O logging (0.0001-1)
         :param is_data_discount_logging_enabled: Whether data discount logging is enabled
@@ -1471,6 +1505,12 @@ class Workspaces(BaseSDK):
                 default_provider_sort=default_provider_sort,
                 default_text_model=default_text_model,
                 description=description,
+                disabled_server_tools=utils.unmarshal(
+                    disabled_server_tools,
+                    OptionalNullable[
+                        List[components.UpdateWorkspaceRequestDisabledServerTool]
+                    ],
+                ),
                 io_logging_api_key_ids=utils.unmarshal(
                     io_logging_api_key_ids, OptionalNullable[List[int]]
                 ),
