@@ -7,10 +7,30 @@ from openrouter.types import (
     OptionalNullable,
     UNSET,
     UNSET_SENTINEL,
+    UnrecognizedStr,
 )
 from pydantic import model_serializer
-from typing import List, Optional
+from typing import List, Literal, Optional, Union
 from typing_extensions import NotRequired, TypedDict
+
+
+CreateWorkspaceRequestDisabledServerTool = Union[
+    Literal[
+        "openrouter:advisor",
+        "openrouter:apply_patch",
+        "openrouter:bash",
+        "openrouter:datetime",
+        "openrouter:fusion",
+        "openrouter:image_generation",
+        "openrouter:experimental__search_models",
+        "openrouter:shell",
+        "openrouter:subagent",
+        "openrouter:tool_search",
+        "openrouter:web_fetch",
+        "openrouter:web_search",
+    ],
+    UnrecognizedStr,
+]
 
 
 class CreateWorkspaceRequestTypedDict(TypedDict):
@@ -26,6 +46,10 @@ class CreateWorkspaceRequestTypedDict(TypedDict):
     r"""Default text model for this workspace"""
     description: NotRequired[Nullable[str]]
     r"""Description of the workspace"""
+    disabled_server_tools: NotRequired[
+        Nullable[List[CreateWorkspaceRequestDisabledServerTool]]
+    ]
+    r"""OpenRouter server tools that requests in this workspace may not invoke. Requests naming a disabled tool are rejected with 403. An empty array or null clears the list."""
     io_logging_api_key_ids: NotRequired[Nullable[List[int]]]
     r"""Optional array of API key IDs to filter I/O logging"""
     io_logging_sampling_rate: NotRequired[float]
@@ -57,6 +81,11 @@ class CreateWorkspaceRequest(BaseModel):
     description: OptionalNullable[str] = UNSET
     r"""Description of the workspace"""
 
+    disabled_server_tools: OptionalNullable[
+        List[CreateWorkspaceRequestDisabledServerTool]
+    ] = UNSET
+    r"""OpenRouter server tools that requests in this workspace may not invoke. Requests naming a disabled tool are rejected with 403. An empty array or null clears the list."""
+
     io_logging_api_key_ids: OptionalNullable[List[int]] = UNSET
     r"""Optional array of API key IDs to filter I/O logging"""
 
@@ -80,6 +109,7 @@ class CreateWorkspaceRequest(BaseModel):
                 "default_provider_sort",
                 "default_text_model",
                 "description",
+                "disabled_server_tools",
                 "io_logging_api_key_ids",
                 "io_logging_sampling_rate",
                 "is_data_discount_logging_enabled",
@@ -93,6 +123,7 @@ class CreateWorkspaceRequest(BaseModel):
                 "default_provider_sort",
                 "default_text_model",
                 "description",
+                "disabled_server_tools",
                 "io_logging_api_key_ids",
             ]
         )
