@@ -153,7 +153,7 @@ class BetaResponses(BaseSDK):
         :param parallel_tool_calls:
         :param plugins: Plugins you want to enable for this request, including their settings.
         :param presence_penalty:
-        :param previous_response_id: Not supported. The Responses API is stateless: no responses are stored, so a previous response cannot be referenced. Requests with a non-null value are rejected with a 400 error. Send the full conversation history in `input` instead.
+        :param previous_response_id: Not supported on this proxy. Each response request is independent: no responses are stored, so a previous response cannot be referenced. Requests with a non-null value are rejected with a 400 error. Send the full conversation history in `input` instead.
         :param prompt:
         :param prompt_cache_key:
         :param prompt_cache_options: Request-level prompt-cache controls. `mode: \"explicit\"` disables OpenAI-managed breakpoints so only blocks marked with `prompt_cache_breakpoint` are cached. Only supported by OpenAI GPT-5.6 and newer.
@@ -311,7 +311,7 @@ class BetaResponses(BaseSDK):
         :param parallel_tool_calls:
         :param plugins: Plugins you want to enable for this request, including their settings.
         :param presence_penalty:
-        :param previous_response_id: Not supported. The Responses API is stateless: no responses are stored, so a previous response cannot be referenced. Requests with a non-null value are rejected with a 400 error. Send the full conversation history in `input` instead.
+        :param previous_response_id: Not supported on this proxy. Each response request is independent: no responses are stored, so a previous response cannot be referenced. Requests with a non-null value are rejected with a 400 error. Send the full conversation history in `input` instead.
         :param prompt:
         :param prompt_cache_key:
         :param prompt_cache_options: Request-level prompt-cache controls. `mode: \"explicit\"` disables OpenAI-managed breakpoints so only blocks marked with `prompt_cache_breakpoint` are cached. Only supported by OpenAI GPT-5.6 and newer.
@@ -472,7 +472,7 @@ class BetaResponses(BaseSDK):
         :param parallel_tool_calls:
         :param plugins: Plugins you want to enable for this request, including their settings.
         :param presence_penalty:
-        :param previous_response_id: Not supported. The Responses API is stateless: no responses are stored, so a previous response cannot be referenced. Requests with a non-null value are rejected with a 400 error. Send the full conversation history in `input` instead.
+        :param previous_response_id: Not supported on this proxy. Each response request is independent: no responses are stored, so a previous response cannot be referenced. Requests with a non-null value are rejected with a 400 error. Send the full conversation history in `input` instead.
         :param prompt:
         :param prompt_cache_key:
         :param prompt_cache_options: Request-level prompt-cache controls. `mode: \"explicit\"` disables OpenAI-managed breakpoints so only blocks marked with `prompt_cache_breakpoint` are cached. Only supported by OpenAI GPT-5.6 and newer.
@@ -632,7 +632,7 @@ class BetaResponses(BaseSDK):
         :param parallel_tool_calls:
         :param plugins: Plugins you want to enable for this request, including their settings.
         :param presence_penalty:
-        :param previous_response_id: Not supported. The Responses API is stateless: no responses are stored, so a previous response cannot be referenced. Requests with a non-null value are rejected with a 400 error. Send the full conversation history in `input` instead.
+        :param previous_response_id: Not supported on this proxy. Each response request is independent: no responses are stored, so a previous response cannot be referenced. Requests with a non-null value are rejected with a 400 error. Send the full conversation history in `input` instead.
         :param prompt:
         :param prompt_cache_key:
         :param prompt_cache_options: Request-level prompt-cache controls. `mode: \"explicit\"` disables OpenAI-managed breakpoints so only blocks marked with `prompt_cache_breakpoint` are cached. Only supported by OpenAI GPT-5.6 and newer.
@@ -1072,7 +1072,7 @@ class BetaResponses(BaseSDK):
         :param parallel_tool_calls:
         :param plugins: Plugins you want to enable for this request, including their settings.
         :param presence_penalty:
-        :param previous_response_id: Not supported. The Responses API is stateless: no responses are stored, so a previous response cannot be referenced. Requests with a non-null value are rejected with a 400 error. Send the full conversation history in `input` instead.
+        :param previous_response_id: Not supported on this proxy. Each response request is independent: no responses are stored, so a previous response cannot be referenced. Requests with a non-null value are rejected with a 400 error. Send the full conversation history in `input` instead.
         :param prompt:
         :param prompt_cache_key:
         :param prompt_cache_options: Request-level prompt-cache controls. `mode: \"explicit\"` disables OpenAI-managed breakpoints so only blocks marked with `prompt_cache_breakpoint` are cached. Only supported by OpenAI GPT-5.6 and newer.
@@ -1230,7 +1230,7 @@ class BetaResponses(BaseSDK):
         :param parallel_tool_calls:
         :param plugins: Plugins you want to enable for this request, including their settings.
         :param presence_penalty:
-        :param previous_response_id: Not supported. The Responses API is stateless: no responses are stored, so a previous response cannot be referenced. Requests with a non-null value are rejected with a 400 error. Send the full conversation history in `input` instead.
+        :param previous_response_id: Not supported on this proxy. Each response request is independent: no responses are stored, so a previous response cannot be referenced. Requests with a non-null value are rejected with a 400 error. Send the full conversation history in `input` instead.
         :param prompt:
         :param prompt_cache_key:
         :param prompt_cache_options: Request-level prompt-cache controls. `mode: \"explicit\"` disables OpenAI-managed breakpoints so only blocks marked with `prompt_cache_breakpoint` are cached. Only supported by OpenAI GPT-5.6 and newer.
@@ -1391,7 +1391,7 @@ class BetaResponses(BaseSDK):
         :param parallel_tool_calls:
         :param plugins: Plugins you want to enable for this request, including their settings.
         :param presence_penalty:
-        :param previous_response_id: Not supported. The Responses API is stateless: no responses are stored, so a previous response cannot be referenced. Requests with a non-null value are rejected with a 400 error. Send the full conversation history in `input` instead.
+        :param previous_response_id: Not supported on this proxy. Each response request is independent: no responses are stored, so a previous response cannot be referenced. Requests with a non-null value are rejected with a 400 error. Send the full conversation history in `input` instead.
         :param prompt:
         :param prompt_cache_key:
         :param prompt_cache_options: Request-level prompt-cache controls. `mode: \"explicit\"` disables OpenAI-managed breakpoints so only blocks marked with `prompt_cache_breakpoint` are cached. Only supported by OpenAI GPT-5.6 and newer.
@@ -1551,7 +1551,7 @@ class BetaResponses(BaseSDK):
         :param parallel_tool_calls:
         :param plugins: Plugins you want to enable for this request, including their settings.
         :param presence_penalty:
-        :param previous_response_id: Not supported. The Responses API is stateless: no responses are stored, so a previous response cannot be referenced. Requests with a non-null value are rejected with a 400 error. Send the full conversation history in `input` instead.
+        :param previous_response_id: Not supported on this proxy. Each response request is independent: no responses are stored, so a previous response cannot be referenced. Requests with a non-null value are rejected with a 400 error. Send the full conversation history in `input` instead.
         :param prompt:
         :param prompt_cache_key:
         :param prompt_cache_options: Request-level prompt-cache controls. `mode: \"explicit\"` disables OpenAI-managed breakpoints so only blocks marked with `prompt_cache_breakpoint` are cached. Only supported by OpenAI GPT-5.6 and newer.
