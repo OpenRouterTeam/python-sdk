@@ -10,7 +10,7 @@ from typing import Any, Dict, Mapping, Optional, Union
 
 
 class Decisions(BaseSDK):
-    r"""Alpha feature endpoints for Decisions (questions and answers) requests"""
+    r"""Alpha feature endpoints for Decisions requests"""
 
     def create(
         self,
@@ -39,7 +39,7 @@ class Decisions(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> components.DecisionsResponse:
-        r"""Submit a Decisions (questions and answers) request
+        r"""Submit a Decisions request
 
         Submits a Decisions request to the Decisions router
 
@@ -252,7 +252,7 @@ class Decisions(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> components.DecisionsResponse:
-        r"""Submit a Decisions (questions and answers) request
+        r"""Submit a Decisions request
 
         Submits a Decisions request to the Decisions router
 
