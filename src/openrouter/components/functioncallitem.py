@@ -2,10 +2,16 @@
 
 from __future__ import annotations
 from .toolcallstatus import ToolCallStatus
-from openrouter.types import BaseModel, UNSET_SENTINEL
+from openrouter.types import (
+    BaseModel,
+    Nullable,
+    OptionalNullable,
+    UNSET,
+    UNSET_SENTINEL,
+)
 import pydantic
 from pydantic import ConfigDict, model_serializer
-from typing import Any, Dict, List, Literal, Optional
+from typing import Any, Dict, List, Literal
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
@@ -38,17 +44,17 @@ class FunctionCallItemTypedDict(TypedDict):
 
     arguments: str
     call_id: str
-    id: str
     name: str
     type: FunctionCallItemType
-    async_: NotRequired[bool]
+    async_: NotRequired[Nullable[bool]]
     r"""True when the model called a tool declared with `async: true` and may continue its turn before the output is returned. Return the result in a later request as a `function_call_output` with this `call_id`."""
-    namespace: NotRequired[str]
+    id: NotRequired[Nullable[str]]
+    namespace: NotRequired[Nullable[str]]
     r"""Namespace qualifier for tools registered as part of a namespace tool group (e.g. an MCP server)"""
-    status: NotRequired[ToolCallStatus]
-    subagent_id: NotRequired[str]
+    status: NotRequired[Nullable[ToolCallStatus]]
+    subagent_id: NotRequired[Nullable[str]]
     r"""EXPERIMENTAL — subject to change without notice. String id that matches the `call_id` of the `openrouter:subagent` server tool call that spawned the subagent. Present on every `function_call` item the subagent projects; absent on ordinary function calls."""
-    subagent_items: NotRequired[List[FunctionCallItemSubagentItemTypedDict]]
+    subagent_items: NotRequired[Nullable[List[FunctionCallItemSubagentItemTypedDict]]]
     r"""EXPERIMENTAL — subject to change without notice. The subagent's output items produced on this turn. Treat this as an opaque object; you must replay it in the request so that the subagent can continue execution of the tool with the same context. If a subagent created multiple parallel tool calls, only the first tool call will have this field. The other tool calls will only have `subagent_id`. Present only if the tool call originates from a subagent spawned by the `openrouter:subagent` server tool."""
 
 
@@ -59,30 +65,33 @@ class FunctionCallItem(BaseModel):
 
     call_id: str
 
-    id: str
-
     name: str
 
     type: FunctionCallItemType
 
-    async_: Annotated[Optional[bool], pydantic.Field(alias="async")] = None
+    async_: Annotated[OptionalNullable[bool], pydantic.Field(alias="async")] = UNSET
     r"""True when the model called a tool declared with `async: true` and may continue its turn before the output is returned. Return the result in a later request as a `function_call_output` with this `call_id`."""
 
-    namespace: Optional[str] = None
+    id: OptionalNullable[str] = UNSET
+
+    namespace: OptionalNullable[str] = UNSET
     r"""Namespace qualifier for tools registered as part of a namespace tool group (e.g. an MCP server)"""
 
-    status: Optional[ToolCallStatus] = None
+    status: OptionalNullable[ToolCallStatus] = UNSET
 
-    subagent_id: Optional[str] = None
+    subagent_id: OptionalNullable[str] = UNSET
     r"""EXPERIMENTAL — subject to change without notice. String id that matches the `call_id` of the `openrouter:subagent` server tool call that spawned the subagent. Present on every `function_call` item the subagent projects; absent on ordinary function calls."""
 
-    subagent_items: Optional[List[FunctionCallItemSubagentItem]] = None
+    subagent_items: OptionalNullable[List[FunctionCallItemSubagentItem]] = UNSET
     r"""EXPERIMENTAL — subject to change without notice. The subagent's output items produced on this turn. Treat this as an opaque object; you must replay it in the request so that the subagent can continue execution of the tool with the same context. If a subagent created multiple parallel tool calls, only the first tool call will have this field. The other tool calls will only have `subagent_id`. Present only if the tool call originates from a subagent spawned by the `openrouter:subagent` server tool."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
-            ["async", "namespace", "status", "subagent_id", "subagent_items"]
+            ["async", "id", "namespace", "status", "subagent_id", "subagent_items"]
+        )
+        nullable_fields = set(
+            ["async", "id", "namespace", "status", "subagent_id", "subagent_items"]
         )
         serialized = handler(self)
         m = {}
@@ -90,9 +99,17 @@ class FunctionCallItem(BaseModel):
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
             if val != UNSET_SENTINEL:
-                if val is not None or k not in optional_fields:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
                     m[k] = val
 
         return m

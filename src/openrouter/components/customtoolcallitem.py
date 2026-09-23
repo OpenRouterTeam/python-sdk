@@ -2,10 +2,16 @@
 
 from __future__ import annotations
 from .toolcallstatus import ToolCallStatus
-from openrouter.types import BaseModel, UNSET_SENTINEL
+from openrouter.types import (
+    BaseModel,
+    Nullable,
+    OptionalNullable,
+    UNSET,
+    UNSET_SENTINEL,
+)
 import pydantic
 from pydantic import model_serializer
-from typing import Literal, Optional
+from typing import Literal
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
@@ -19,12 +25,12 @@ class CustomToolCallItemTypedDict(TypedDict):
     input: str
     name: str
     type: CustomToolCallItemType
-    async_: NotRequired[bool]
+    async_: NotRequired[Nullable[bool]]
     r"""True when the model called a tool declared with `async: true` and may continue its turn before the output is returned. Return the result in a later request as a `function_call_output` with this `call_id`."""
-    id: NotRequired[str]
-    namespace: NotRequired[str]
+    id: NotRequired[Nullable[str]]
+    namespace: NotRequired[Nullable[str]]
     r"""Namespace qualifier for tools registered as part of a namespace tool group (e.g. an MCP server)"""
-    status: NotRequired[ToolCallStatus]
+    status: NotRequired[Nullable[ToolCallStatus]]
 
 
 class CustomToolCallItem(BaseModel):
@@ -38,28 +44,37 @@ class CustomToolCallItem(BaseModel):
 
     type: CustomToolCallItemType
 
-    async_: Annotated[Optional[bool], pydantic.Field(alias="async")] = None
+    async_: Annotated[OptionalNullable[bool], pydantic.Field(alias="async")] = UNSET
     r"""True when the model called a tool declared with `async: true` and may continue its turn before the output is returned. Return the result in a later request as a `function_call_output` with this `call_id`."""
 
-    id: Optional[str] = None
+    id: OptionalNullable[str] = UNSET
 
-    namespace: Optional[str] = None
+    namespace: OptionalNullable[str] = UNSET
     r"""Namespace qualifier for tools registered as part of a namespace tool group (e.g. an MCP server)"""
 
-    status: Optional[ToolCallStatus] = None
+    status: OptionalNullable[ToolCallStatus] = UNSET
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(["async", "id", "namespace", "status"])
+        nullable_fields = set(["async", "id", "namespace", "status"])
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
             if val != UNSET_SENTINEL:
-                if val is not None or k not in optional_fields:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
                     m[k] = val
 
         return m
