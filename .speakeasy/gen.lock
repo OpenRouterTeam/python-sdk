@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c48cf606-fb42-4a45-9c23-8f0555307828
 management:
-  docChecksum: a48af6dd312a474c88edd4e459b30474
+  docChecksum: 468cf191c8bcc65f5a8ce3e0018e2823
   docVersion: 1.0.0
   speakeasyVersion: 1.787.0
   generationVersion: 2.914.0
-  releaseVersion: 1.2.19
-  configChecksum: db8f929cb84ef27f6368356566d95dd3
+  releaseVersion: 1.2.20
+  configChecksum: 86ac2705440475f5369e51fcfea3b0e5
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
 persistentEdits:
-  generation_id: a77aba72-7f21-4c38-9490-fde2c3f75dc3
-  pristine_commit_hash: 16e15b43ebabef2fe8c1fd80ec285561d9237cf5
-  pristine_tree_hash: 10f488efd43fe2dbcb00dc72ef17e8a8487b12d1
+  generation_id: a5787b67-da19-4251-bef1-23ae549f5bd3
+  pristine_commit_hash: 89e300f89f43145c9c2987065e24dac97a46e476
+  pristine_tree_hash: b00ab492d6721240922d381ea1d29ff19a68a3ca
 features:
   python:
     acceptHeaders: 3.0.0
@@ -5791,8 +5791,8 @@ trackedFiles:
     pristine_git_object: 6817216b64de42e834ab68a072287701e621daa8
   docs/components/toolcustom.mdx:
     id: b3ea2dbc7af5
-    last_write_checksum: sha1:b05a11b62179ab9242129b616c4ac4e24357807b
-    pristine_git_object: e52e0f6a01c66838f7b55e4eef45e5612a2fb4e5
+    last_write_checksum: sha1:3659a42c9b930d77f5aecb8be29aef877d1502de
+    pristine_git_object: a4ed39817c997d4e25266c25d12498e648d77190
   docs/components/toolsearchservertool.mdx:
     id: 827c342fe25b
     last_write_checksum: sha1:62eee3897b26cfc2097be04aeb24dc578da877ec
@@ -8219,8 +8219,8 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:436f8d3098e3248e6e0f26d8d8a6fcaca4992052
-    pristine_git_object: adf7aebe740b587f93cd26db0caf61d76f4b9f6f
+    last_write_checksum: sha1:d840d09771e9321a247c7798346f48f4c79f82d2
+    pristine_git_object: cdec75962905ef0fde47759c28b7b74e62744f5a
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77f44b60b98bc126557ec27391f91dfba764bb54
@@ -8247,8 +8247,8 @@ trackedFiles:
     pristine_git_object: 86713cfea633e09d33b3d4e65281071fe20e6137
   src/openrouter/_version.py:
     id: d8d15ad6c586
-    last_write_checksum: sha1:671b03df56863efa19d966a9e87d1337d826f068
-    pristine_git_object: 6aa88e3d294eeae41c19317dfafad6f2a69d5e7c
+    last_write_checksum: sha1:4bede80cef633b1474c61639cde1ddfcd62ddce9
+    pristine_git_object: 414f7141481e8394c8e826a4ae4fd1acbdd88228
   src/openrouter/alpha.py:
     id: 306c4d93308d
     last_write_checksum: sha1:30f55a360f41376ab194b9ea725fe4e001a5ae1a
@@ -9819,8 +9819,8 @@ trackedFiles:
     pristine_git_object: 7e69d1f775baece5f94b03d35bcd884d5e6f519d
   src/openrouter/components/messagesrequest.py:
     id: 72b1f339024d
-    last_write_checksum: sha1:5bfa56761972b32daba5d10eef1ed30ded1adf24
-    pristine_git_object: 3f54e45bfad8e67704e3581071fe4d9dc7090af9
+    last_write_checksum: sha1:b5abcd9ebdda9e2f62b497d2376bcd798108db64
+    pristine_git_object: abb8605093cfb0af7babc6cf8acda945b5c12845
   src/openrouter/components/messagessearchmodelsservertool.py:
     id: 53d755edb120
     last_write_checksum: sha1:389786fc22ba4bb47b0a086b7aa321f2f04fe943
@@ -15076,4 +15076,4 @@ examples:
         "529":
           application/json: {"error": {"code": 529, "message": "Provider returned error"}}
 examplesVersion: 1.0.2
-releaseNotes: "## Python SDK Changes:\n* `open_router.chat.send()`: \n  *  `request.plugins[].union(switchyard-router)` **Added**\n* `open_router.presets.create_presets_chat_completions()`: \n  *  `request.plugins[].union(switchyard-router)` **Added**\n* `open_router.presets.create_presets_messages()`: \n  *  `request.plugins[].union(switchyard-router)` **Added**\n* `open_router.presets.create_presets_responses()`: \n  *  `request.plugins[].union(switchyard-router)` **Added**\n* `open_router.responses.send()`: \n  *  `request.plugins[].union(switchyard-router)` **Added**\n* `open_router.beta.responses.send()`: \n  *  `request.plugins[].union(switchyard-router)` **Added**\n"
+releaseNotes: "## Python SDK Changes:\n* `open_router.presets.create_presets_messages()`: \n  *  `request.tools[].union(class (0)).strict` **Added**\n"
