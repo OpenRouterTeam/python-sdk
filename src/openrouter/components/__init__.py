@@ -1706,6 +1706,12 @@ if TYPE_CHECKING:
         InternChatUserMessageRole,
         InternChatUserMessageTypedDict,
     )
+    from .interninvokeacceptedresponse import (
+        InternInvokeAcceptedResponse,
+        InternInvokeAcceptedResponseStatus,
+        InternInvokeAcceptedResponseTypedDict,
+    )
+    from .interninvokerequest import InternInvokeRequest, InternInvokeRequestTypedDict
     from .internlifecycleerror import (
         Code,
         CodeTypedDict,
@@ -4718,6 +4724,11 @@ __all__ = [
     "InternChatUserMessage",
     "InternChatUserMessageRole",
     "InternChatUserMessageTypedDict",
+    "InternInvokeAcceptedResponse",
+    "InternInvokeAcceptedResponseStatus",
+    "InternInvokeAcceptedResponseTypedDict",
+    "InternInvokeRequest",
+    "InternInvokeRequestTypedDict",
     "InternLifecycleErrorError",
     "InternLifecycleErrorErrorTypedDict",
     "InternLifecycleErrorMetadata",
@@ -7264,6 +7275,11 @@ _dynamic_imports: dict[str, str] = {
     "InternChatUserMessage": ".internchatusermessage",
     "InternChatUserMessageRole": ".internchatusermessage",
     "InternChatUserMessageTypedDict": ".internchatusermessage",
+    "InternInvokeAcceptedResponse": ".interninvokeacceptedresponse",
+    "InternInvokeAcceptedResponseStatus": ".interninvokeacceptedresponse",
+    "InternInvokeAcceptedResponseTypedDict": ".interninvokeacceptedresponse",
+    "InternInvokeRequest": ".interninvokerequest",
+    "InternInvokeRequestTypedDict": ".interninvokerequest",
     "Code": ".internlifecycleerror",
     "CodeTypedDict": ".internlifecycleerror",
     "InternLifecycleErrorError": ".internlifecycleerror",
