@@ -1706,6 +1706,7 @@ if TYPE_CHECKING:
         InternChatUserMessageRole,
         InternChatUserMessageTypedDict,
     )
+    from .interndaemonaccess import InternDaemonAccess, InternDaemonAccessTypedDict
     from .interninvokeacceptedresponse import (
         InternInvokeAcceptedResponse,
         InternInvokeAcceptedResponseStatus,
@@ -4724,6 +4725,8 @@ __all__ = [
     "InternChatUserMessage",
     "InternChatUserMessageRole",
     "InternChatUserMessageTypedDict",
+    "InternDaemonAccess",
+    "InternDaemonAccessTypedDict",
     "InternInvokeAcceptedResponse",
     "InternInvokeAcceptedResponseStatus",
     "InternInvokeAcceptedResponseTypedDict",
@@ -7275,6 +7278,8 @@ _dynamic_imports: dict[str, str] = {
     "InternChatUserMessage": ".internchatusermessage",
     "InternChatUserMessageRole": ".internchatusermessage",
     "InternChatUserMessageTypedDict": ".internchatusermessage",
+    "InternDaemonAccess": ".interndaemonaccess",
+    "InternDaemonAccessTypedDict": ".interndaemonaccess",
     "InternInvokeAcceptedResponse": ".interninvokeacceptedresponse",
     "InternInvokeAcceptedResponseStatus": ".interninvokeacceptedresponse",
     "InternInvokeAcceptedResponseTypedDict": ".interninvokeacceptedresponse",
