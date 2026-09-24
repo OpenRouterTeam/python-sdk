@@ -1492,6 +1492,8 @@ class Scim(BaseSDK):
         x_open_router_categories: Optional[str] = None,
         offset: OptionalNullable[int] = 0,
         limit: Optional[int] = 50,
+        display_name: Optional[str] = None,
+        external_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -1510,6 +1512,8 @@ class Scim(BaseSDK):
 
         :param offset: Number of records to skip for pagination
         :param limit: Maximum number of records to return (max 100)
+        :param display_name: Exact match filter on display_name. Omitted or empty returns groups unfiltered by name (subject to offset/limit). When external_id is also present, both must match.
+        :param external_id: Exact match filter on external_id, e.g. the identity provider (such as Entra ID) group object ID. Omitted or empty returns groups unfiltered by external_id (subject to offset/limit). When display_name is also present, both must match.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1531,6 +1535,8 @@ class Scim(BaseSDK):
             x_open_router_categories=x_open_router_categories,
             offset=offset,
             limit=limit,
+            display_name=display_name,
+            external_id=external_id,
         )
 
         req = self._build_request(
@@ -1605,6 +1611,8 @@ class Scim(BaseSDK):
                 x_open_router_categories=x_open_router_categories,
                 offset=next_offset,
                 limit=limit,
+                display_name=display_name,
+                external_id=external_id,
                 retries=retries,
                 server_url=server_url,
                 timeout_ms=timeout_ms,
@@ -1655,6 +1663,8 @@ class Scim(BaseSDK):
         x_open_router_categories: Optional[str] = None,
         offset: OptionalNullable[int] = 0,
         limit: Optional[int] = 50,
+        display_name: Optional[str] = None,
+        external_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -1673,6 +1683,8 @@ class Scim(BaseSDK):
 
         :param offset: Number of records to skip for pagination
         :param limit: Maximum number of records to return (max 100)
+        :param display_name: Exact match filter on display_name. Omitted or empty returns groups unfiltered by name (subject to offset/limit). When external_id is also present, both must match.
+        :param external_id: Exact match filter on external_id, e.g. the identity provider (such as Entra ID) group object ID. Omitted or empty returns groups unfiltered by external_id (subject to offset/limit). When display_name is also present, both must match.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1694,6 +1706,8 @@ class Scim(BaseSDK):
             x_open_router_categories=x_open_router_categories,
             offset=offset,
             limit=limit,
+            display_name=display_name,
+            external_id=external_id,
         )
 
         req = self._build_request_async(
@@ -1771,6 +1785,8 @@ class Scim(BaseSDK):
                 x_open_router_categories=x_open_router_categories,
                 offset=next_offset,
                 limit=limit,
+                display_name=display_name,
+                external_id=external_id,
                 retries=retries,
                 server_url=server_url,
                 timeout_ms=timeout_ms,

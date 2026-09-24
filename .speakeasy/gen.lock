@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c48cf606-fb42-4a45-9c23-8f0555307828
 management:
-  docChecksum: df3ca46aca5d14666fd33de83747f801
+  docChecksum: 815a8ec5b2e1ee82c82c5095d3adb74a
   docVersion: 1.0.0
   speakeasyVersion: 1.787.0
   generationVersion: 2.914.0
-  releaseVersion: 1.2.24
-  configChecksum: d02772c9403da27f5eb41cff25d529b1
+  releaseVersion: 1.2.25
+  configChecksum: 0060e4db5bf932035842b1a4ecf600e2
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
 persistentEdits:
-  generation_id: 54a3574d-1558-40f7-874c-16f1ae802ac5
-  pristine_commit_hash: 4789f649ebdd3f148d33513703a94b992d93c522
-  pristine_tree_hash: 862a783b0199eeb5d4508209f14851bb4e81dc28
+  generation_id: fa70824f-34c4-492b-9c18-fe0507530bd8
+  pristine_commit_hash: ae8884c39a7fe749a387b18ec98945600c5c6788
+  pristine_tree_hash: 3a8e6172d95b9e0742b02c8c8a5b7d84c83fe84f
 features:
   python:
     acceptHeaders: 3.0.0
@@ -7739,8 +7739,8 @@ trackedFiles:
     pristine_git_object: 5294ada2ed869243414124ab5c76e8a2b35f4512
   docs/operations/listscimgroupsrequest.mdx:
     id: df7ed9b0f3b3
-    last_write_checksum: sha1:26602f5d6904cdfe0d9bda06cf51f30eba59bb8d
-    pristine_git_object: 559e6e18a2281c2d63c6a7fdfa58658daa89cdd9
+    last_write_checksum: sha1:49d7c2b9ba09f2e9cd6b96f5924be7c29748ff86
+    pristine_git_object: d08e86e012e2dee5180fc66653f5f40c3195490a
   docs/operations/listscimgroupsresponse.mdx:
     id: b763a3eaa70b
     last_write_checksum: sha1:2421768f7c35319a79083c02017056bd40f21c4e
@@ -8223,8 +8223,8 @@ trackedFiles:
     pristine_git_object: eec7232321e300a7e5c2232ec0a6754d6cac11d1
   docs/sdks/scim/README.mdx:
     id: fd6d8a91a053
-    last_write_checksum: sha1:4a44eb3431bd9590ff15e3d944309dcfbbcd551c
-    pristine_git_object: c7435646cf280b7b2fbb2805b2cde15b4c570896
+    last_write_checksum: sha1:0a28f030bf42146fde86887c2b79831af07f1d4f
+    pristine_git_object: 240f5da9d86fc9dbbaa7efe345da740768c773b3
   docs/sdks/stt/README.mdx:
     id: 190b0dc9a5d1
     last_write_checksum: sha1:9a13f8f1e26550bccf3935a36e9c3426febc6fcb
@@ -8255,8 +8255,8 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:71fd2dfd99167132206446e21915b3a14726faad
-    pristine_git_object: 9d14083354029769ccc4ab1da4adf94fd6dfc1eb
+    last_write_checksum: sha1:27aeee89e2c898ea60e1475abd2f9d5e0103a4ae
+    pristine_git_object: 95f6a529d770d06e77a08344b47e041071a6cbcf
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77f44b60b98bc126557ec27391f91dfba764bb54
@@ -8283,8 +8283,8 @@ trackedFiles:
     pristine_git_object: 86713cfea633e09d33b3d4e65281071fe20e6137
   src/openrouter/_version.py:
     id: d8d15ad6c586
-    last_write_checksum: sha1:882a6f542393d7fd9dc4943bf2f7a5372a57c831
-    pristine_git_object: d7a17ff85772ba6c4ceff97c65e0ea6eab17e1d3
+    last_write_checksum: sha1:093be2bc67de726f618f6e324aa1163e20aee980
+    pristine_git_object: a3006f6b2785908f66d9c46b766df9a0ddde4373
   src/openrouter/alpha.py:
     id: 306c4d93308d
     last_write_checksum: sha1:30f55a360f41376ab194b9ea725fe4e001a5ae1a
@@ -11683,8 +11683,8 @@ trackedFiles:
     pristine_git_object: a913e2774bfb2a74def1a707076fad6cb49b6496
   src/openrouter/operations/listscimgroups.py:
     id: 9f32309bb157
-    last_write_checksum: sha1:530b9e465c38b29c313a2c3a4bc596055825fd81
-    pristine_git_object: 8d3d678ade3ba25aa65c4ff0bc3cb0783d87106a
+    last_write_checksum: sha1:2319b023e5e8bd308df04a66e535edc2ffaa289d
+    pristine_git_object: ac0de5426e797ff26d835fd88c0a4d7cb86844d3
   src/openrouter/operations/listvaultsecrets.py:
     id: 460dacce49ab
     last_write_checksum: sha1:c6fcb7a5e7f2f587888a3b087142a2c4c1f23cf9
@@ -11803,8 +11803,8 @@ trackedFiles:
     pristine_git_object: a40be38d4cbf460ecf921723841b1a414d638dee
   src/openrouter/scim.py:
     id: 351afd6b616e
-    last_write_checksum: sha1:7018e78ab1826c13e7b87bbc31890c7a4c272c44
-    pristine_git_object: 1bea5be2496b283307c037f131a45a25bcca3c6c
+    last_write_checksum: sha1:2f58c4cf29650549257e79c476de0a9500a33772
+    pristine_git_object: a28df9a26e2dd834e5bc8974c3a61d18609c79c0
   src/openrouter/sdk.py:
     id: ee9846c4c9c5
     last_write_checksum: sha1:524fce02fc013302916d4e533dc358c739f0cbb4
@@ -15164,4 +15164,4 @@ examples:
 examplesVersion: 1.0.2
 releaseNotes: |
   ## Python SDK Changes:
-  * `open_router.interns.get_intern_daemon_access()`: **Added**
+  * `open_router.scim.list_groups()`:  `request` **Changed**
