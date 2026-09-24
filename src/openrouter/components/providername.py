@@ -95,6 +95,7 @@ ProviderName = Union[
         "Sail Research",
         "Sakana AI",
         "SambaNova",
+        "ScaleDown",
         "Seed",
         "SiliconFlow",
         "Sourceful",

@@ -175,6 +175,7 @@ Provider = Union[
         "sakana",
         "sakana-ai",
         "sambanova",
+        "scaledown",
         "seed",
         "siliconflow",
         "sourceful",

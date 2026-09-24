@@ -98,6 +98,7 @@ BYOKProviderSlug = Union[
         "sakana",
         "sakana-ai",
         "sambanova",
+        "scaledown",
         "seed",
         "siliconflow",
         "sourceful",
