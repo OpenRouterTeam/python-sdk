@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c48cf606-fb42-4a45-9c23-8f0555307828
 management:
-  docChecksum: ddef32b4cd6f5d73939713b2c82a3b29
+  docChecksum: d2b87b75740c953a8d17ca0730888708
   docVersion: 1.0.0
   speakeasyVersion: 1.787.0
   generationVersion: 2.914.0
-  releaseVersion: 1.2.22
-  configChecksum: b17b6b12ede2e231b529d7155e1fc0d3
+  releaseVersion: 1.2.23
+  configChecksum: cf04b07f1113c9a5bdb836d9750c6595
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
 persistentEdits:
-  generation_id: d70feb9e-7b5f-4223-bd74-6c302290ab81
-  pristine_commit_hash: 2e2b161273a0c50a40a16292bc0e77e2cc984059
-  pristine_tree_hash: 2b4f8c135349d264802aecf405de53a0945a61f0
+  generation_id: 0ce8b7d7-40a6-4545-8c99-e46d21cddf64
+  pristine_commit_hash: f8b73026182269af46b0f4ea8eb9bce793b0deb8
+  pristine_tree_hash: 713fb275f7f68923b8b4a91d5655c233e3ab64b1
 features:
   python:
     acceptHeaders: 3.0.0
@@ -4875,8 +4875,8 @@ trackedFiles:
     pristine_git_object: 8318f521198142d8efdabba734e091545bf1a648
   docs/components/providerpreferences.mdx:
     id: adbdfaa46438
-    last_write_checksum: sha1:b02ea5ad41a466836473215d67cd3599df9e6540
-    pristine_git_object: f3203a1e3e121102c24cc9a397fa5ad1359a0fcb
+    last_write_checksum: sha1:97f058dba8ad3b18f25be9342dc43e669a00770f
+    pristine_git_object: 2ae5e4b4a20883324603d1c2c70f9e6c1b9d19a4
   docs/components/providerpreferencesignore.mdx:
     id: e0455b31c87b
     last_write_checksum: sha1:823f56c785a5c80949105fc0f4297a5b0ff2c2b2
@@ -8243,8 +8243,8 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:a262410e1db860a3666bb1a38ed3024cf6df845a
-    pristine_git_object: b6e61eb75d5b4e7050ca3c9d6ef4037f6078f02f
+    last_write_checksum: sha1:9e0f472074f415d99a56fa3306425e51f8af90b5
+    pristine_git_object: 61bf730ab52f84fd8420a110eba48cd1755bcdf4
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77f44b60b98bc126557ec27391f91dfba764bb54
@@ -8271,8 +8271,8 @@ trackedFiles:
     pristine_git_object: 86713cfea633e09d33b3d4e65281071fe20e6137
   src/openrouter/_version.py:
     id: d8d15ad6c586
-    last_write_checksum: sha1:5f2d1738ec120e5dd894bd4e7abd0f4daa948b41
-    pristine_git_object: 31edc02f24e953d9278afbf62bbbb239a715b0ad
+    last_write_checksum: sha1:6847b2055d38d2d2edf8a66e79761da1d616d0d6
+    pristine_git_object: c626fe71fb4be5da8602ef0383c70340821d974d
   src/openrouter/alpha.py:
     id: 306c4d93308d
     last_write_checksum: sha1:30f55a360f41376ab194b9ea725fe4e001a5ae1a
@@ -10383,8 +10383,8 @@ trackedFiles:
     pristine_git_object: abe660d025957d61f68148006ca2c6efdc6b13a8
   src/openrouter/components/providerpreferences.py:
     id: cdd58c8d664d
-    last_write_checksum: sha1:f8ce833648e42c8bf0bb5e60e42689b5c99a9b1a
-    pristine_git_object: aa6879d3d84a2740fff5af3c9391b513fc1e1c24
+    last_write_checksum: sha1:b65fb68115b0c8ec0f87ea9220ea9c8ebbef4fc3
+    pristine_git_object: 6cf5d428899c8722a49aa4ed5918ffe95b793549
   src/openrouter/components/providerresponse.py:
     id: ad3887be54c5
     last_write_checksum: sha1:dbd2cdd182deeaf20097ee54c9f2c39596655865
@@ -15130,4 +15130,4 @@ examples:
         "500":
           application/json: {"error": {"code": 409, "message": "That question is no longer waiting for an answer."}}
 examplesVersion: 1.0.2
-releaseNotes: "## Python SDK Changes:\n* `open_router.presets.create_presets_responses()`: \n  *  `request.input.union(Array<>)[]` **Changed** (Breaking ⚠️)\n* `open_router.responses.send()`: \n  *  `request.input.union(Array<>)[]` **Changed** (Breaking ⚠️)\n* `open_router.beta.responses.send()`: \n  *  `request.input.union(Array<>)[]` **Changed** (Breaking ⚠️)\n"
+releaseNotes: "## Python SDK Changes:\n* `open_router.alpha.decisions.create()`: \n  *  `request.provider.options` **Added**\n* `open_router.chat.send()`: \n  *  `request.provider.options` **Added**\n* `open_router.embeddings.generate()`: \n  *  `request.provider.options` **Added**\n* `open_router.presets.create_presets_chat_completions()`: \n  *  `request.provider.options` **Added**\n* `open_router.presets.create_presets_messages()`: \n  *  `request.provider.options` **Added**\n* `open_router.presets.create_presets_responses()`: \n  *  `request.provider.options` **Added**\n* `open_router.rerank.rerank()`: \n  *  `request.provider.options` **Added**\n* `open_router.responses.send()`: \n  *  `request.provider.options` **Added**\n* `open_router.beta.responses.send()`: \n  *  `request.provider.options` **Added**\n* `open_router.system_one.create()`: \n  *  `request.provider.options` **Added**\n"

@@ -7,6 +7,7 @@ from .preferredminthroughput import (
     PreferredMinThroughputTypedDict,
 )
 from .providername import ProviderName
+from .provideroptions import ProviderOptions, ProviderOptionsTypedDict
 from .providersort import ProviderSort
 from .providersortconfig import ProviderSortConfig, ProviderSortConfigTypedDict
 from .quantization import Quantization
@@ -152,6 +153,8 @@ class ProviderPreferencesTypedDict(TypedDict):
     r"""The object specifying the maximum price you want to pay for this request. USD price per million tokens, for prompt and completion."""
     only: NotRequired[Nullable[List[ProviderPreferencesOnlyTypedDict]]]
     r"""List of provider slugs to allow. If provided, this list is merged with your account-wide allowed provider settings for this request."""
+    options: NotRequired[ProviderOptionsTypedDict]
+    r"""Provider-specific options keyed by provider slug. Only options for the matched provider are forwarded; the rest are ignored. Unrecognized keys are silently dropped."""
     order: NotRequired[Nullable[List[ProviderPreferencesOrderTypedDict]]]
     r"""An ordered list of provider slugs. The router will attempt to use the first provider in the subset of this list that supports your requested model, and fall back to the next if it is unavailable. If no providers are available, the request will fail with an error message."""
     preferred_max_latency: NotRequired[Nullable[PreferredMaxLatencyTypedDict]]
@@ -197,6 +200,9 @@ class ProviderPreferences(BaseModel):
     only: OptionalNullable[List[ProviderPreferencesOnly]] = UNSET
     r"""List of provider slugs to allow. If provided, this list is merged with your account-wide allowed provider settings for this request."""
 
+    options: Optional[ProviderOptions] = None
+    r"""Provider-specific options keyed by provider slug. Only options for the matched provider are forwarded; the rest are ignored. Unrecognized keys are silently dropped."""
+
     order: OptionalNullable[List[ProviderPreferencesOrder]] = UNSET
     r"""An ordered list of provider slugs. The router will attempt to use the first provider in the subset of this list that supports your requested model, and fall back to the next if it is unavailable. If no providers are available, the request will fail with an error message."""
 
@@ -228,6 +234,7 @@ class ProviderPreferences(BaseModel):
                 "ignore",
                 "max_price",
                 "only",
+                "options",
                 "order",
                 "preferred_max_latency",
                 "preferred_min_throughput",
