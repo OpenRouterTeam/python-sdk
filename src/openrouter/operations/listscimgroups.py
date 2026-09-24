@@ -94,6 +94,10 @@ class ListScimGroupsRequestTypedDict(TypedDict):
     r"""Number of records to skip for pagination"""
     limit: NotRequired[int]
     r"""Maximum number of records to return (max 100)"""
+    display_name: NotRequired[str]
+    r"""Exact match filter on display_name. Omitted or empty returns groups unfiltered by name (subject to offset/limit). When external_id is also present, both must match."""
+    external_id: NotRequired[str]
+    r"""Exact match filter on external_id, e.g. the identity provider (such as Entra ID) group object ID. Omitted or empty returns groups unfiltered by external_id (subject to offset/limit). When display_name is also present, both must match."""
 
 
 class ListScimGroupsRequest(BaseModel):
@@ -137,6 +141,18 @@ class ListScimGroupsRequest(BaseModel):
     ] = 50
     r"""Maximum number of records to return (max 100)"""
 
+    display_name: Annotated[
+        Optional[str],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Exact match filter on display_name. Omitted or empty returns groups unfiltered by name (subject to offset/limit). When external_id is also present, both must match."""
+
+    external_id: Annotated[
+        Optional[str],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Exact match filter on external_id, e.g. the identity provider (such as Entra ID) group object ID. Omitted or empty returns groups unfiltered by external_id (subject to offset/limit). When display_name is also present, both must match."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
@@ -146,6 +162,8 @@ class ListScimGroupsRequest(BaseModel):
                 "X-OpenRouter-Categories",
                 "offset",
                 "limit",
+                "display_name",
+                "external_id",
             ]
         )
         nullable_fields = set(["offset"])
