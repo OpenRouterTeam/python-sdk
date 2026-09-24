@@ -148,6 +148,7 @@ class VideoGenerationRequestOptionsTypedDict(TypedDict):
     sakana_ai: NotRequired[Dict[str, Any]]
     sambanova: NotRequired[Dict[str, Any]]
     sambanova_cloaked: NotRequired[Dict[str, Any]]
+    scaledown: NotRequired[Dict[str, Any]]
     seed: NotRequired[Dict[str, Any]]
     sf_compute: NotRequired[Dict[str, Any]]
     siliconflow: NotRequired[Dict[str, Any]]
@@ -457,6 +458,8 @@ class VideoGenerationRequestOptions(BaseModel):
         Optional[Dict[str, Any]], pydantic.Field(alias="sambanova-cloaked")
     ] = None
 
+    scaledown: Optional[Dict[str, Any]] = None
+
     seed: Optional[Dict[str, Any]] = None
 
     sf_compute: Annotated[
@@ -636,6 +639,7 @@ class VideoGenerationRequestOptions(BaseModel):
                 "sakana-ai",
                 "sambanova",
                 "sambanova-cloaked",
+                "scaledown",
                 "seed",
                 "sf-compute",
                 "siliconflow",
