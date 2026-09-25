@@ -1462,7 +1462,7 @@ class Interns(BaseSDK):
     ) -> components.InternDaemonAccess:
         r"""Get an intern's daemon access
 
-        Returns the origin and daemon token that attach `ori tui --host` to one visible, running intern. The token is a credential: the response is sent with `Cache-Control: no-store`, each reveal is logged by caller and intern, and a caller may make 10 reveals per minute. The API key selects the caller, workspace and visible interns. There is no default workspace fallback. Requests on regional hostnames such as `eu.openrouter.ai` are refused. [API key](/docs/api-reference/authentication) required.
+        Returns the origin and daemon token that attach `ori tui --host` to one visible, running intern. The token is a credential: the response is sent with `Cache-Control: no-store`, and each reveal is logged by caller and intern. The API key selects the caller, workspace and visible interns. There is no default workspace fallback. Requests on regional hostnames such as `eu.openrouter.ai` are refused. [API key](/docs/api-reference/authentication) required.
 
         If set, this operation will use `api_key` from the global security.
 
@@ -1552,7 +1552,7 @@ class Interns(BaseSDK):
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(components.InternDaemonAccess, http_res)
         if utils.match_response(
-            http_res, ["401", "403", "404", "408", "409", "429"], "application/json"
+            http_res, ["401", "403", "404", "408", "409"], "application/json"
         ):
             response_data = unmarshal_json_response(
                 errors.InternLifecycleErrorData, http_res
@@ -1590,7 +1590,7 @@ class Interns(BaseSDK):
     ) -> components.InternDaemonAccess:
         r"""Get an intern's daemon access
 
-        Returns the origin and daemon token that attach `ori tui --host` to one visible, running intern. The token is a credential: the response is sent with `Cache-Control: no-store`, each reveal is logged by caller and intern, and a caller may make 10 reveals per minute. The API key selects the caller, workspace and visible interns. There is no default workspace fallback. Requests on regional hostnames such as `eu.openrouter.ai` are refused. [API key](/docs/api-reference/authentication) required.
+        Returns the origin and daemon token that attach `ori tui --host` to one visible, running intern. The token is a credential: the response is sent with `Cache-Control: no-store`, and each reveal is logged by caller and intern. The API key selects the caller, workspace and visible interns. There is no default workspace fallback. Requests on regional hostnames such as `eu.openrouter.ai` are refused. [API key](/docs/api-reference/authentication) required.
 
         If set, this operation will use `api_key` from the global security.
 
@@ -1680,7 +1680,7 @@ class Interns(BaseSDK):
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(components.InternDaemonAccess, http_res)
         if utils.match_response(
-            http_res, ["401", "403", "404", "408", "409", "429"], "application/json"
+            http_res, ["401", "403", "404", "408", "409"], "application/json"
         ):
             response_data = unmarshal_json_response(
                 errors.InternLifecycleErrorData, http_res
