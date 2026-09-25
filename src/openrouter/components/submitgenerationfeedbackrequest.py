@@ -7,7 +7,7 @@ from typing import Literal, Optional, Union
 from typing_extensions import NotRequired, TypedDict
 
 
-Category = Union[
+SubmitGenerationFeedbackRequestCategory = Union[
     Literal[
         "latency",
         "incoherence",
@@ -25,7 +25,7 @@ r"""The category of feedback being reported"""
 class SubmitGenerationFeedbackRequestTypedDict(TypedDict):
     r"""Structured feedback about a specific generation"""
 
-    category: Category
+    category: SubmitGenerationFeedbackRequestCategory
     r"""The category of feedback being reported"""
     generation_id: str
     r"""The generation to submit feedback on"""
@@ -36,7 +36,7 @@ class SubmitGenerationFeedbackRequestTypedDict(TypedDict):
 class SubmitGenerationFeedbackRequest(BaseModel):
     r"""Structured feedback about a specific generation"""
 
-    category: Category
+    category: SubmitGenerationFeedbackRequestCategory
     r"""The category of feedback being reported"""
 
     generation_id: str

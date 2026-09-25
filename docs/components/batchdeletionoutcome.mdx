@@ -1,0 +1,23 @@
+---
+title: "BatchDeletionOutcome"
+---
+
+Outcome for one deletion target: `deleted` (removed), `unsupported` (the provider has no batch-delete API; supported file cleanup still runs), or `not_applicable` (the batch never reached that target).
+
+## Example Usage
+
+```python
+from openrouter.components import BatchDeletionOutcome
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
+value: BatchDeletionOutcome = "deleted"
+```
+
+
+## Values
+
+This is an open enum. Unrecognized values will not fail type checks.
+
+- `"deleted"`
+- `"unsupported"`
+- `"not_applicable"`

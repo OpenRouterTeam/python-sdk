@@ -14,6 +14,11 @@ if TYPE_CHECKING:
         BadRequestResponseError,
         BadRequestResponseErrorData,
     )
+    from .batcherrorresponse import BatchErrorResponse, BatchErrorResponseData
+    from .batchpaymentrequiredresponse_error import (
+        BatchPaymentRequiredResponseError,
+        BatchPaymentRequiredResponseErrorData,
+    )
     from .conflictresponse_error import ConflictResponseError, ConflictResponseErrorData
     from .edgenetworktimeoutresponse_error import (
         EdgeNetworkTimeoutResponseError,
@@ -80,6 +85,10 @@ __all__ = [
     "BadGatewayResponseErrorData",
     "BadRequestResponseError",
     "BadRequestResponseErrorData",
+    "BatchErrorResponse",
+    "BatchErrorResponseData",
+    "BatchPaymentRequiredResponseError",
+    "BatchPaymentRequiredResponseErrorData",
     "ConflictResponseError",
     "ConflictResponseErrorData",
     "EdgeNetworkTimeoutResponseError",
@@ -127,6 +136,10 @@ _dynamic_imports: dict[str, str] = {
     "BadGatewayResponseErrorData": ".badgatewayresponse_error",
     "BadRequestResponseError": ".badrequestresponse_error",
     "BadRequestResponseErrorData": ".badrequestresponse_error",
+    "BatchErrorResponse": ".batcherrorresponse",
+    "BatchErrorResponseData": ".batcherrorresponse",
+    "BatchPaymentRequiredResponseError": ".batchpaymentrequiredresponse_error",
+    "BatchPaymentRequiredResponseErrorData": ".batchpaymentrequiredresponse_error",
     "ConflictResponseError": ".conflictresponse_error",
     "ConflictResponseErrorData": ".conflictresponse_error",
     "EdgeNetworkTimeoutResponseError": ".edgenetworktimeoutresponse_error",

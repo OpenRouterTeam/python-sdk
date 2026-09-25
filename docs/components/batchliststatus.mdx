@@ -1,0 +1,26 @@
+---
+title: "BatchListStatus"
+---
+
+A batch status that is durably represented by the list data source. `finalizing` and `cancelling` are not accepted because stored jobs collapse those phases into `in_progress`.
+
+## Example Usage
+
+```python
+from openrouter.components import BatchListStatus
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
+value: BatchListStatus = "validating"
+```
+
+
+## Values
+
+This is an open enum. Unrecognized values will not fail type checks.
+
+- `"validating"`
+- `"in_progress"`
+- `"completed"`
+- `"failed"`
+- `"expired"`
+- `"cancelled"`

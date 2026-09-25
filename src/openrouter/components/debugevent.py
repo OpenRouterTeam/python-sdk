@@ -7,7 +7,7 @@ from typing import Any, Dict, Literal, Optional, Union
 from typing_extensions import NotRequired, TypedDict
 
 
-Event = Union[
+DebugEventEvent = Union[
     Literal[
         "adapter_request",
         "upstream_headers_received",
@@ -18,29 +18,29 @@ Event = Union[
 ]
 
 
-class TimingsTypedDict(TypedDict):
+class DebugEventTimingsTypedDict(TypedDict):
     epoch_ms: int
-    event: Event
+    event: DebugEventEvent
     start_ms: int
 
 
-class Timings(BaseModel):
+class DebugEventTimings(BaseModel):
     epoch_ms: int
 
-    event: Event
+    event: DebugEventEvent
 
     start_ms: int
 
 
-class DebugTypedDict(TypedDict):
+class DebugEventDebugTypedDict(TypedDict):
     echo_upstream_body: NotRequired[Dict[str, Any]]
-    timings: NotRequired[TimingsTypedDict]
+    timings: NotRequired[DebugEventTimingsTypedDict]
 
 
-class Debug(BaseModel):
+class DebugEventDebug(BaseModel):
     echo_upstream_body: Optional[Dict[str, Any]] = None
 
-    timings: Optional[Timings] = None
+    timings: Optional[DebugEventTimings] = None
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
@@ -65,7 +65,7 @@ DebugEventType = Literal["response.debug",]
 class DebugEventTypedDict(TypedDict):
     r"""Debug event emitted when debug.echo_upstream_body is true. Contains the transformed upstream request body or timing milestones."""
 
-    debug: DebugTypedDict
+    debug: DebugEventDebugTypedDict
     sequence_number: int
     type: DebugEventType
 
@@ -73,7 +73,7 @@ class DebugEventTypedDict(TypedDict):
 class DebugEvent(BaseModel):
     r"""Debug event emitted when debug.echo_upstream_body is true. Contains the transformed upstream request body or timing milestones."""
 
-    debug: Debug
+    debug: DebugEventDebug
 
     sequence_number: int
 

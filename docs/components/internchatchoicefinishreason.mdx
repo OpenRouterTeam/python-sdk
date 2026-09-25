@@ -1,0 +1,23 @@
+---
+title: "InternChatChoiceFinishReason"
+---
+
+`null` while streaming. `stop` when the run completed, `tool_calls` when the run is waiting for the caller to answer the streamed tool call, `error` on the terminal error chunk.
+
+## Example Usage
+
+```python
+from openrouter.components import InternChatChoiceFinishReason
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
+value: InternChatChoiceFinishReason = "error"
+```
+
+
+## Values
+
+This is an open enum. Unrecognized values will not fail type checks.
+
+- `"error"`
+- `"stop"`
+- `"tool_calls"`

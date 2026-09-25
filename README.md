@@ -244,7 +244,7 @@ with OpenRouter(
     api_key=os.getenv("OPENROUTER_API_KEY", ""),
 ) as open_router:
 
-    res = open_router.byok.list(offset=0, limit=50)
+    res = open_router.batch.list()
 
     while res is not None:
         # Handle items

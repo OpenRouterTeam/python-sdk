@@ -1,0 +1,26 @@
+---
+title: "ORAnthropicStopReason"
+---
+
+## Example Usage
+
+```python
+from openrouter.components import ORAnthropicStopReason
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
+value: ORAnthropicStopReason = "end_turn"
+```
+
+
+## Values
+
+This is an open enum. Unrecognized values will not fail type checks.
+
+- `"end_turn"`
+- `"max_tokens"`
+- `"model_context_window_exceeded"`
+- `"stop_sequence"`
+- `"tool_use"`
+- `"pause_turn"`
+- `"refusal"`
+- `"compaction"`

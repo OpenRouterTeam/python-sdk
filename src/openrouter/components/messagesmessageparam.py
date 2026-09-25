@@ -111,7 +111,7 @@ class ContentCompaction(BaseModel):
         return m
 
 
-ErrorCode = Union[
+MessagesMessageParamErrorCode = Union[
     Literal[
         "invalid_tool_input",
         "unavailable",
@@ -123,18 +123,20 @@ ErrorCode = Union[
 ]
 
 
-TypeWebSearchToolResultError = Literal["web_search_tool_result_error",]
+MessagesMessageParamTypeWebSearchToolResultError = Literal[
+    "web_search_tool_result_error",
+]
 
 
 class ContentWebSearchToolResultErrorTypedDict(TypedDict):
-    error_code: ErrorCode
-    type: TypeWebSearchToolResultError
+    error_code: MessagesMessageParamErrorCode
+    type: MessagesMessageParamTypeWebSearchToolResultError
 
 
 class ContentWebSearchToolResultError(BaseModel):
-    error_code: ErrorCode
+    error_code: MessagesMessageParamErrorCode
 
-    type: TypeWebSearchToolResultError
+    type: MessagesMessageParamTypeWebSearchToolResultError
 
 
 MessagesMessageParamContentUnion3TypedDict = TypeAliasType(
@@ -152,13 +154,13 @@ MessagesMessageParamContentUnion3 = TypeAliasType(
 )
 
 
-TypeWebSearchToolResult = Literal["web_search_tool_result",]
+MessagesMessageParamTypeWebSearchToolResult = Literal["web_search_tool_result",]
 
 
 class ContentWebSearchToolResultTypedDict(TypedDict):
     content: MessagesMessageParamContentUnion3TypedDict
     tool_use_id: str
-    type: TypeWebSearchToolResult
+    type: MessagesMessageParamTypeWebSearchToolResult
     cache_control: NotRequired[AnthropicCacheControlDirectiveTypedDict]
     r"""Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. When set on an individual content block, it marks an explicit cache breakpoint; block-level markers also work on OpenAI models that support explicit prompt caching — OpenRouter converts them to the provider's native format."""
 
@@ -168,7 +170,7 @@ class ContentWebSearchToolResult(BaseModel):
 
     tool_use_id: str
 
-    type: TypeWebSearchToolResult
+    type: MessagesMessageParamTypeWebSearchToolResult
 
     cache_control: Optional[AnthropicCacheControlDirective] = None
     r"""Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. When set on an individual content block, it marks an explicit cache breakpoint; block-level markers also work on OpenAI models that support explicit prompt caching — OpenRouter converts them to the provider's native format."""
@@ -190,13 +192,13 @@ class ContentWebSearchToolResult(BaseModel):
         return m
 
 
-TypeServerToolUse = Literal["server_tool_use",]
+MessagesMessageParamTypeServerToolUse = Literal["server_tool_use",]
 
 
 class ContentServerToolUseTypedDict(TypedDict):
     id: str
     name: str
-    type: TypeServerToolUse
+    type: MessagesMessageParamTypeServerToolUse
     cache_control: NotRequired[AnthropicCacheControlDirectiveTypedDict]
     r"""Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. When set on an individual content block, it marks an explicit cache breakpoint; block-level markers also work on OpenAI models that support explicit prompt caching — OpenRouter converts them to the provider's native format."""
     input: NotRequired[Any]
@@ -207,7 +209,7 @@ class ContentServerToolUse(BaseModel):
 
     name: str
 
-    type: TypeServerToolUse
+    type: MessagesMessageParamTypeServerToolUse
 
     cache_control: Optional[AnthropicCacheControlDirective] = None
     r"""Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. When set on an individual content block, it marks an explicit cache breakpoint; block-level markers also work on OpenAI models that support explicit prompt caching — OpenRouter converts them to the provider's native format."""
@@ -231,27 +233,27 @@ class ContentServerToolUse(BaseModel):
         return m
 
 
-TypeRedactedThinking = Literal["redacted_thinking",]
+MessagesMessageParamTypeRedactedThinking = Literal["redacted_thinking",]
 
 
 class ContentRedactedThinkingTypedDict(TypedDict):
     data: str
-    type: TypeRedactedThinking
+    type: MessagesMessageParamTypeRedactedThinking
 
 
 class ContentRedactedThinking(BaseModel):
     data: str
 
-    type: TypeRedactedThinking
+    type: MessagesMessageParamTypeRedactedThinking
 
 
-TypeThinking = Literal["thinking",]
+MessagesMessageParamTypeThinking = Literal["thinking",]
 
 
 class ContentThinkingTypedDict(TypedDict):
     signature: str
     thinking: str
-    type: TypeThinking
+    type: MessagesMessageParamTypeThinking
 
 
 class ContentThinking(BaseModel):
@@ -259,7 +261,7 @@ class ContentThinking(BaseModel):
 
     thinking: str
 
-    type: TypeThinking
+    type: MessagesMessageParamTypeThinking
 
 
 MessagesMessageParamTypeToolReference = Literal["tool_reference",]
@@ -353,13 +355,13 @@ class ContentToolResult(BaseModel):
         return m
 
 
-TypeToolUse = Literal["tool_use",]
+MessagesMessageParamTypeToolUse = Literal["tool_use",]
 
 
 class ContentToolUseTypedDict(TypedDict):
     id: str
     name: str
-    type: TypeToolUse
+    type: MessagesMessageParamTypeToolUse
     cache_control: NotRequired[AnthropicCacheControlDirectiveTypedDict]
     r"""Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. When set on an individual content block, it marks an explicit cache breakpoint; block-level markers also work on OpenAI models that support explicit prompt caching — OpenRouter converts them to the provider's native format."""
     input: NotRequired[Any]
@@ -370,7 +372,7 @@ class ContentToolUse(BaseModel):
 
     name: str
 
-    type: TypeToolUse
+    type: MessagesMessageParamTypeToolUse
 
     cache_control: Optional[AnthropicCacheControlDirective] = None
     r"""Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. When set on an individual content block, it marks an explicit cache breakpoint; block-level markers also work on OpenAI models that support explicit prompt caching — OpenRouter converts them to the provider's native format."""

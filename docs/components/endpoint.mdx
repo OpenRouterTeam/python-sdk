@@ -1,0 +1,22 @@
+---
+title: "Endpoint"
+---
+
+## Example Usage
+
+```python
+from openrouter.components import Endpoint
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
+value: Endpoint = "/v1/chat/completions"
+```
+
+
+## Values
+
+This is an open enum. Unrecognized values will not fail type checks.
+
+- `"/v1/chat/completions"`
+- `"/v1/responses"`
+- `"/v1/messages"`
+- `"/v1/embeddings"`

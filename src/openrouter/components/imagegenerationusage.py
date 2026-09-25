@@ -143,7 +143,7 @@ class ImageGenerationUsagePromptTokensDetails(BaseModel):
         return m
 
 
-class ServerToolUseTypedDict(TypedDict):
+class ImageGenerationUsageServerToolUseTypedDict(TypedDict):
     r"""Usage for server-side tool execution (e.g., web search)"""
 
     tool_calls_executed: NotRequired[Nullable[int]]
@@ -154,7 +154,7 @@ class ServerToolUseTypedDict(TypedDict):
     r"""Number of web searches performed by server-side tools. For server-orchestrated tool calls a web search is also counted in tool_calls_requested; provider-native web search may report web_search_requests only. Do not sum the two."""
 
 
-class ServerToolUse(BaseModel):
+class ImageGenerationUsageServerToolUse(BaseModel):
     r"""Usage for server-side tool execution (e.g., web search)"""
 
     tool_calls_executed: OptionalNullable[int] = UNSET
@@ -220,7 +220,7 @@ class ImageGenerationUsageTypedDict(TypedDict):
         Nullable[ImageGenerationUsagePromptTokensDetailsTypedDict]
     ]
     r"""Breakdown of tokens used in the prompt."""
-    server_tool_use: NotRequired[Nullable[ServerToolUseTypedDict]]
+    server_tool_use: NotRequired[Nullable[ImageGenerationUsageServerToolUseTypedDict]]
     r"""Usage for server-side tool execution (e.g., web search)"""
     service_tier: NotRequired[Nullable[str]]
     r"""The service tier used by the upstream provider for this request"""
@@ -261,7 +261,7 @@ class ImageGenerationUsage(BaseModel):
     )
     r"""Breakdown of tokens used in the prompt."""
 
-    server_tool_use: OptionalNullable[ServerToolUse] = UNSET
+    server_tool_use: OptionalNullable[ImageGenerationUsageServerToolUse] = UNSET
     r"""Usage for server-side tool execution (e.g., web search)"""
 
     service_tier: OptionalNullable[str] = UNSET
