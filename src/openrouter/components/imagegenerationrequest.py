@@ -29,6 +29,8 @@ ImageGenerationRequestAspectRatio = Union[
         "4:5",
         "5:2",
         "5:4",
+        "5:7",
+        "7:5",
         "8:1",
         "9:16",
         "16:9",
@@ -85,6 +87,7 @@ r"""Rendering quality. Providers without a quality knob ignore this."""
 ImageGenerationRequestResolution = Union[
     Literal[
         "512",
+        "768",
         "1K",
         "2K",
         "4K",
