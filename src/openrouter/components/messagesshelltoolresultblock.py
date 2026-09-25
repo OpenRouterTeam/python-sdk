@@ -35,7 +35,9 @@ class MessagesShellToolResultBlockFile(BaseModel):
     type: MessagesShellToolResultBlockTypeContainerFileCitation
 
 
-TypeOpenrouterShellToolResult = Literal["openrouter_shell_tool_result",]
+MessagesShellToolResultBlockTypeOpenrouterShellToolResult = Literal[
+    "openrouter_shell_tool_result",
+]
 
 
 class MessagesShellToolResultBlockTypedDict(TypedDict):
@@ -43,7 +45,7 @@ class MessagesShellToolResultBlockTypedDict(TypedDict):
 
     content: Dict[str, Any]
     tool_use_id: str
-    type: TypeOpenrouterShellToolResult
+    type: MessagesShellToolResultBlockTypeOpenrouterShellToolResult
     container_id: NotRequired[str]
     r"""The canonical container id the command ran under — the `{container_id}` for the Container Files API, reusable as a `container_reference` in later requests. Present on every sandbox-executed call, even when no files changed."""
     files: NotRequired[List[MessagesShellToolResultBlockFileTypedDict]]
@@ -57,7 +59,7 @@ class MessagesShellToolResultBlock(BaseModel):
 
     tool_use_id: str
 
-    type: TypeOpenrouterShellToolResult
+    type: MessagesShellToolResultBlockTypeOpenrouterShellToolResult
 
     container_id: Optional[str] = None
     r"""The canonical container id the command ran under — the `{container_id}` for the Container Files API, reusable as a `container_reference` in later requests. Present on every sandbox-executed call, even when no files changed."""

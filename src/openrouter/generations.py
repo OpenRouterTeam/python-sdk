@@ -623,7 +623,7 @@ class Generations(BaseSDK):
     def submit_feedback(
         self,
         *,
-        category: components.Category,
+        category: components.SubmitGenerationFeedbackRequestCategory,
         generation_id: str,
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
@@ -778,7 +778,7 @@ class Generations(BaseSDK):
     async def submit_feedback_async(
         self,
         *,
-        category: components.Category,
+        category: components.SubmitGenerationFeedbackRequestCategory,
         generation_id: str,
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,

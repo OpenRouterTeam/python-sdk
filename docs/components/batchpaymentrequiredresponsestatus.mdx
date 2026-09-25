@@ -1,0 +1,26 @@
+---
+title: "BatchPaymentRequiredResponseStatus"
+---
+
+## Example Usage
+
+```python
+from openrouter.components import BatchPaymentRequiredResponseStatus
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
+value: BatchPaymentRequiredResponseStatus = "validating"
+```
+
+
+## Values
+
+This is an open enum. Unrecognized values will not fail type checks.
+
+- `"validating"`
+- `"in_progress"`
+- `"finalizing"`
+- `"completed"`
+- `"failed"`
+- `"expired"`
+- `"cancelling"`
+- `"cancelled"`

@@ -19,6 +19,7 @@ if TYPE_CHECKING:
     from openrouter.alpha import Alpha
     from openrouter.analytics import Analytics
     from openrouter.api_keys import APIKeys
+    from openrouter.batch import Batch
     from openrouter.benchmarks import Benchmarks
     from openrouter.beta import Beta
     from openrouter.byok import BYOK
@@ -65,6 +66,8 @@ class OpenRouter(BaseSDK):
     r"""Speech-to-text endpoints"""
     o_auth: "OAuth"
     r"""OAuth authentication endpoints"""
+    batch: "Batch"
+    r"""Submit, list, poll, and delete asynchronous batches of inference requests. See https://openrouter.ai/docs/batch-quickstart."""
     benchmarks: "Benchmarks"
     r"""Benchmarks endpoints"""
     byok: "BYOK"
@@ -125,6 +128,7 @@ class OpenRouter(BaseSDK):
         "tts": ("openrouter.tts", "TTS"),
         "stt": ("openrouter.stt", "STT"),
         "o_auth": ("openrouter.oauth", "OAuth"),
+        "batch": ("openrouter.batch", "Batch"),
         "benchmarks": ("openrouter.benchmarks", "Benchmarks"),
         "byok": ("openrouter.byok", "BYOK"),
         "chat": ("openrouter.chat", "Chat"),

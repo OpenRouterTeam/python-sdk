@@ -1,0 +1,12 @@
+---
+title: "BatchProviderPreferences"
+---
+
+Batch provider routing preferences. Only `provider.only` is supported.
+
+
+## Fields
+
+| Field                                                                                                                                | Type                                                                                                                                 | Required                                                                                                                             | Description                                                                                                                          | Example                                                                                                                              |
+| ------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ |
+| `only`                                                                                                                               | List[[components.BatchProviderPreferencesOnly](../components/batchproviderpreferencesonly.mdx)]                                       | :heavy_minus_sign:                                                                                                                   | List of provider slugs to allow. If provided, this list is merged with your account-wide allowed provider settings for this request. | [<br/>"openai",<br/>"anthropic"<br/>]                                                                                                |

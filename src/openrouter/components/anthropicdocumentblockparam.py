@@ -128,12 +128,12 @@ AnthropicDocumentBlockParamSourceUnion = Annotated[
 ]
 
 
-TypeDocument = Literal["document",]
+AnthropicDocumentBlockParamTypeDocument = Literal["document",]
 
 
 class AnthropicDocumentBlockParamTypedDict(TypedDict):
     source: AnthropicDocumentBlockParamSourceUnionTypedDict
-    type: TypeDocument
+    type: AnthropicDocumentBlockParamTypeDocument
     cache_control: NotRequired[AnthropicCacheControlDirectiveTypedDict]
     r"""Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. When set on an individual content block, it marks an explicit cache breakpoint; block-level markers also work on OpenAI models that support explicit prompt caching — OpenRouter converts them to the provider's native format."""
     citations: NotRequired[Nullable[AnthropicDocumentBlockParamCitationsTypedDict]]
@@ -144,7 +144,7 @@ class AnthropicDocumentBlockParamTypedDict(TypedDict):
 class AnthropicDocumentBlockParam(BaseModel):
     source: AnthropicDocumentBlockParamSourceUnion
 
-    type: TypeDocument
+    type: AnthropicDocumentBlockParamTypeDocument
 
     cache_control: Optional[AnthropicCacheControlDirective] = None
     r"""Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. When set on an individual content block, it marks an explicit cache breakpoint; block-level markers also work on OpenAI models that support explicit prompt caching — OpenRouter converts them to the provider's native format."""

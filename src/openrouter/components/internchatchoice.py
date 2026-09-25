@@ -8,7 +8,7 @@ from typing import Literal, Union
 from typing_extensions import TypedDict
 
 
-FinishReason = Union[
+InternChatChoiceFinishReason = Union[
     Literal[
         "error",
         "stop",
@@ -24,7 +24,7 @@ class InternChatChoiceTypedDict(TypedDict):
 
     delta: InternChatDeltaTypedDict
     r"""The incremental content of one chunk. The first chunk carries `role`, text chunks carry `content`, reasoning chunks carry `reasoning`, and an interaction chunk carries one complete `tool_calls` entry."""
-    finish_reason: Nullable[FinishReason]
+    finish_reason: Nullable[InternChatChoiceFinishReason]
     r"""`null` while streaming. `stop` when the run completed, `tool_calls` when the run is waiting for the caller to answer the streamed tool call, `error` on the terminal error chunk."""
     index: int
 
@@ -35,7 +35,7 @@ class InternChatChoice(BaseModel):
     delta: InternChatDelta
     r"""The incremental content of one chunk. The first chunk carries `role`, text chunks carry `content`, reasoning chunks carry `reasoning`, and an interaction chunk carries one complete `tool_calls` entry."""
 
-    finish_reason: Nullable[FinishReason]
+    finish_reason: Nullable[InternChatChoiceFinishReason]
     r"""`null` while streaming. `stop` when the run completed, `tool_calls` when the run is waiting for the caller to answer the streamed tool call, `error` on the terminal error chunk."""
 
     index: int

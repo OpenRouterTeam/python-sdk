@@ -46,12 +46,12 @@ class FailedModel(BaseModel):
         return m
 
 
-class ResponseTypedDict(TypedDict):
+class OutputFusionServerToolItemResponseTypedDict(TypedDict):
     model: str
     content: NotRequired[str]
 
 
-class Response(BaseModel):
+class OutputFusionServerToolItemResponse(BaseModel):
     model: str
 
     content: Optional[str] = None
@@ -90,7 +90,7 @@ class OutputFusionServerToolItemTypedDict(TypedDict):
     failure_reason: NotRequired[str]
     r"""Typed failure reason when the fusion run failed. Possible values include: all_panels_failed, insufficient_credits, rate_limited, invalid_model, judge_not_valid_json, judge_schema_mismatch, judge_upstream_error, judge_empty_completion. The four analysis-stage codes keep their pre-rename `judge_` spelling so existing consumers keep matching. The consumer-cancellation code is `cancelled`."""
     id: NotRequired[str]
-    responses: NotRequired[List[ResponseTypedDict]]
+    responses: NotRequired[List[OutputFusionServerToolItemResponseTypedDict]]
     r"""Analysis models that produced a response in this fusion run, with each model's full panel content."""
     sources: NotRequired[List[FusionSourceTypedDict]]
     r"""Web pages the analysis panels and analyst retrieved via web search during this fusion run, deduplicated by URL across the whole run. Present when at least one model cited a source."""
@@ -117,7 +117,7 @@ class OutputFusionServerToolItem(BaseModel):
 
     id: Optional[str] = None
 
-    responses: Optional[List[Response]] = None
+    responses: Optional[List[OutputFusionServerToolItemResponse]] = None
     r"""Analysis models that produced a response in this fusion run, with each model's full panel content."""
 
     sources: Optional[List[FusionSource]] = None
