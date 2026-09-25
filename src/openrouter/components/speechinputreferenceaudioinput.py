@@ -11,24 +11,29 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 class SpeechInputReferenceAudioInputTypedDict(TypedDict):
     r"""Reference audio input object"""
 
-    data: str
-    r"""Base64-encoded reference audio (optionally a data URI). Supported audio formats are provider-specific. Limited to 20 MiB of base64 (15 MiB of decoded audio)."""
+    data: NotRequired[str]
+    r"""Base64-encoded reference audio (optionally a data URI). Supported audio formats are provider-specific. Limited to 20 MiB of base64 (15 MiB of decoded audio). Exactly one of `data` or `url` is required."""
     format_: NotRequired[str]
     r"""Audio format of the reference audio (e.g., wav, mp3). Optional; most providers detect the format from the audio bytes."""
+    url: NotRequired[str]
+    r"""Public http(s) URL of the reference audio. OpenRouter downloads it (15 MiB max) and forwards the bytes, never the URL. Exactly one of `data` or `url` is required."""
 
 
 class SpeechInputReferenceAudioInput(BaseModel):
     r"""Reference audio input object"""
 
-    data: str
-    r"""Base64-encoded reference audio (optionally a data URI). Supported audio formats are provider-specific. Limited to 20 MiB of base64 (15 MiB of decoded audio)."""
+    data: Optional[str] = None
+    r"""Base64-encoded reference audio (optionally a data URI). Supported audio formats are provider-specific. Limited to 20 MiB of base64 (15 MiB of decoded audio). Exactly one of `data` or `url` is required."""
 
     format_: Annotated[Optional[str], pydantic.Field(alias="format")] = None
     r"""Audio format of the reference audio (e.g., wav, mp3). Optional; most providers detect the format from the audio bytes."""
 
+    url: Optional[str] = None
+    r"""Public http(s) URL of the reference audio. OpenRouter downloads it (15 MiB max) and forwards the bytes, never the URL. Exactly one of `data` or `url` is required."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["format"])
+        optional_fields = set(["data", "format", "url"])
         serialized = handler(self)
         m = {}
 

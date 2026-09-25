@@ -10,17 +10,17 @@ SpeechInputReferenceTextType = Literal["text",]
 
 
 class SpeechInputReferenceTextTypedDict(TypedDict):
-    r"""Transcript of the accompanying reference audio"""
+    r"""Transcript of an `input_audio` part"""
 
     text: str
-    r"""Transcript of the accompanying reference audio."""
+    r"""Transcript of an `input_audio` part. With a single clip it may appear before or after the clip; with multiple clips it must immediately follow the clip it transcribes."""
     type: SpeechInputReferenceTextType
 
 
 class SpeechInputReferenceText(BaseModel):
-    r"""Transcript of the accompanying reference audio"""
+    r"""Transcript of an `input_audio` part"""
 
     text: str
-    r"""Transcript of the accompanying reference audio."""
+    r"""Transcript of an `input_audio` part. With a single clip it may appear before or after the clip; with multiple clips it must immediately follow the clip it transcribes."""
 
     type: SpeechInputReferenceTextType

@@ -496,6 +496,10 @@ class PublicEndpointTypedDict(TypedDict):
     perf_last_30m_by_workload: NotRequired[PerfLast30mByWorkloadTypedDict]
     r"""Endpoint performance over the last 30 minutes, keyed by the kind of request served (e.g. `text_generation`, `image_generation`). Additive to the legacy singular latency and throughput fields; image and video generation report end-to-end latency. Only visible when authenticated with an API key or cookie."""
     status: NotRequired[EndpointStatus]
+    supports_image_reference: NotRequired[bool]
+    r"""Whether this TTS endpoint accepts an `image_url` reference describing the desired voice. Requests carrying an image reference are only routed to endpoints where this is true."""
+    supports_multiple_audio_references: NotRequired[bool]
+    r"""Whether this TTS endpoint accepts more than one `input_audio` reference clip per request. Requests carrying several clips are only routed to endpoints where this is true."""
     supports_voice_cloning: NotRequired[bool]
     r"""Whether this TTS endpoint accepts inline reference audio (`input_references`) for stateless voice cloning. Requests carrying reference audio are only routed to endpoints where this is true."""
 
@@ -550,13 +554,25 @@ class PublicEndpoint(BaseModel):
 
     status: Optional[EndpointStatus] = None
 
+    supports_image_reference: Optional[bool] = False
+    r"""Whether this TTS endpoint accepts an `image_url` reference describing the desired voice. Requests carrying an image reference are only routed to endpoints where this is true."""
+
+    supports_multiple_audio_references: Optional[bool] = False
+    r"""Whether this TTS endpoint accepts more than one `input_audio` reference clip per request. Requests carrying several clips are only routed to endpoints where this is true."""
+
     supports_voice_cloning: Optional[bool] = False
     r"""Whether this TTS endpoint accepts inline reference audio (`input_references`) for stateless voice cloning. Requests carrying reference audio are only routed to endpoints where this is true."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
-            ["perf_last_30m_by_workload", "status", "supports_voice_cloning"]
+            [
+                "perf_last_30m_by_workload",
+                "status",
+                "supports_image_reference",
+                "supports_multiple_audio_references",
+                "supports_voice_cloning",
+            ]
         )
         nullable_fields = set(
             [

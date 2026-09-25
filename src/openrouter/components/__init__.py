@@ -3069,6 +3069,15 @@ if TYPE_CHECKING:
         SpeechInputReferenceAudioInput,
         SpeechInputReferenceAudioInputTypedDict,
     )
+    from .speechinputreferenceimage import (
+        SpeechInputReferenceImage,
+        SpeechInputReferenceImageType,
+        SpeechInputReferenceImageTypedDict,
+    )
+    from .speechinputreferenceimageinput import (
+        SpeechInputReferenceImageInput,
+        SpeechInputReferenceImageInputTypedDict,
+    )
     from .speechinputreferencetext import (
         SpeechInputReferenceText,
         SpeechInputReferenceTextType,
@@ -5656,6 +5665,11 @@ __all__ = [
     "SpeechInputReferenceAudioInputTypedDict",
     "SpeechInputReferenceAudioType",
     "SpeechInputReferenceAudioTypedDict",
+    "SpeechInputReferenceImage",
+    "SpeechInputReferenceImageInput",
+    "SpeechInputReferenceImageInputTypedDict",
+    "SpeechInputReferenceImageType",
+    "SpeechInputReferenceImageTypedDict",
     "SpeechInputReferenceText",
     "SpeechInputReferenceTextType",
     "SpeechInputReferenceTextTypedDict",
@@ -8328,6 +8342,11 @@ _dynamic_imports: dict[str, str] = {
     "SpeechInputReferenceAudioTypedDict": ".speechinputreferenceaudio",
     "SpeechInputReferenceAudioInput": ".speechinputreferenceaudioinput",
     "SpeechInputReferenceAudioInputTypedDict": ".speechinputreferenceaudioinput",
+    "SpeechInputReferenceImage": ".speechinputreferenceimage",
+    "SpeechInputReferenceImageType": ".speechinputreferenceimage",
+    "SpeechInputReferenceImageTypedDict": ".speechinputreferenceimage",
+    "SpeechInputReferenceImageInput": ".speechinputreferenceimageinput",
+    "SpeechInputReferenceImageInputTypedDict": ".speechinputreferenceimageinput",
     "SpeechInputReferenceText": ".speechinputreferencetext",
     "SpeechInputReferenceTextType": ".speechinputreferencetext",
     "SpeechInputReferenceTextTypedDict": ".speechinputreferencetext",
