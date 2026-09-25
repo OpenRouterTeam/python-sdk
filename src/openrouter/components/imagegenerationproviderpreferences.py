@@ -151,6 +151,7 @@ class ImageGenerationProviderPreferencesOptionsTypedDict(TypedDict):
     reka: NotRequired[Dict[str, Any]]
     relace: NotRequired[Dict[str, Any]]
     replicate: NotRequired[Dict[str, Any]]
+    respan: NotRequired[Dict[str, Any]]
     runway: NotRequired[Dict[str, Any]]
     sail_research: NotRequired[Dict[str, Any]]
     sakana: NotRequired[Dict[str, Any]]
@@ -449,6 +450,8 @@ class ImageGenerationProviderPreferencesOptions(BaseModel):
 
     replicate: Optional[Dict[str, Any]] = None
 
+    respan: Optional[Dict[str, Any]] = None
+
     runway: Optional[Dict[str, Any]] = None
 
     sail_research: Annotated[
@@ -642,6 +645,7 @@ class ImageGenerationProviderPreferencesOptions(BaseModel):
                 "reka",
                 "relace",
                 "replicate",
+                "respan",
                 "runway",
                 "sail-research",
                 "sakana",

@@ -92,6 +92,7 @@ ProviderName = Union[
         "Recraft",
         "Reka",
         "Relace",
+        "Respan",
         "Sail Research",
         "Sakana AI",
         "SambaNova",
