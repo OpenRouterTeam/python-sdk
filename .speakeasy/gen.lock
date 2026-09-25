@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c48cf606-fb42-4a45-9c23-8f0555307828
 management:
-  docChecksum: b9eccc20975f2d78c4f6db89903814f4
+  docChecksum: 38da36adcde781d09b4b6d866704ed34
   docVersion: 1.0.0
   speakeasyVersion: 1.787.0
   generationVersion: 2.914.0
-  releaseVersion: 1.2.29
-  configChecksum: 6369337a9b0173b9862defa437569867
+  releaseVersion: 1.2.30
+  configChecksum: d95c950189da2d9ac4c9c3025a53dd7b
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
 persistentEdits:
-  generation_id: f1c72740-3df8-4af1-b2bd-e31457a36cf6
-  pristine_commit_hash: f7158adcd9a4fcecb96882daa00b468de85142cb
-  pristine_tree_hash: 18db3a50e0ec57a54a9e53131ceb5290f336d1ae
+  generation_id: ad06863e-fa9c-4634-9a2b-9fbb5e137a9f
+  pristine_commit_hash: cdad4169dd738b26ee61c27042a86fc393ee555a
+  pristine_tree_hash: cae1f24479afca006618e2e37a46fb3a805c94df
 features:
   python:
     acceptHeaders: 3.0.0
@@ -3359,8 +3359,8 @@ trackedFiles:
     pristine_git_object: 6c22de5c856350e1d6846aab0a92653698e41bd0
   docs/components/imagegenerationrequestaspectratio.mdx:
     id: bda89377f32d
-    last_write_checksum: sha1:368ddc44134948e2e04c43dd886f7469d88b7d16
-    pristine_git_object: 3f967d5244cb2986c97da5783a110d4b9d5c1bc7
+    last_write_checksum: sha1:58af560f1182c30c06f8d9413e9e7073038cdc99
+    pristine_git_object: 1c7a3f08a007ed3f55c657a7a01fa23df41f872f
   docs/components/imagegenerationrequestbackground.mdx:
     id: cab3c6c6dfc6
     last_write_checksum: sha1:ea6f2fa5f8f63600e2d1a67a784e6a93cf295975
@@ -3375,8 +3375,8 @@ trackedFiles:
     pristine_git_object: 6e2298007e04c5cf4cb96eae577fadddb382a9ac
   docs/components/imagegenerationrequestresolution.mdx:
     id: 5dcb01b22e48
-    last_write_checksum: sha1:c53e03ff5d6cf292acc6702a75bc8b09db116e46
-    pristine_git_object: 4d9385e8f8bebbc916ea152992747b1af5de1519
+    last_write_checksum: sha1:0e9f7b2d89188d71215c3efe43eefc4f5c992efd
+    pristine_git_object: fa667e57053ab75a81053150cd6ce37dc844157b
   docs/components/imagegenerationresponse.mdx:
     id: 094e477544e9
     last_write_checksum: sha1:3f998b412d3227450dc500b78c2e227385ddc6d7
@@ -9203,8 +9203,8 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:512be0c2ea776d4a2da4799dc97649a321dabafd
-    pristine_git_object: 4c30db411ff5c737e1b69f93ecaf338c4bfceb7b
+    last_write_checksum: sha1:e7df8c61352839e996902425c1e8156825852be8
+    pristine_git_object: 291d833c9389adfdb53bd489c7469321f813dbba
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77f44b60b98bc126557ec27391f91dfba764bb54
@@ -9231,8 +9231,8 @@ trackedFiles:
     pristine_git_object: 86713cfea633e09d33b3d4e65281071fe20e6137
   src/openrouter/_version.py:
     id: d8d15ad6c586
-    last_write_checksum: sha1:90bcfb627d2358e9a9e17e8f132d11f4e8d1f4ff
-    pristine_git_object: 85ff223340c8a21b688ec3a7664ce1ae0bff7c19
+    last_write_checksum: sha1:5155cac237e5665d3f12b0aacaf0f8ce9e00c26d
+    pristine_git_object: df45cec8929e5e001a27f6028575c23c1842541c
   src/openrouter/alpha.py:
     id: 306c4d93308d
     last_write_checksum: sha1:30f55a360f41376ab194b9ea725fe4e001a5ae1a
@@ -10711,8 +10711,8 @@ trackedFiles:
     pristine_git_object: 458b8e90f89c48a923b81f9cf116cce746b3d9f1
   src/openrouter/components/imagegenerationrequest.py:
     id: f8291a7be9a0
-    last_write_checksum: sha1:fcaa6c8879469974a42e7a4e351c29965e71c52e
-    pristine_git_object: bc541cb410ead6a0c91cf6a7ec6882bb823037f2
+    last_write_checksum: sha1:43396d2e7f0b98b79ed93e34cfe8d23bbb23640f
+    pristine_git_object: 58787c2624c27f314f92f6f8aed73e315a9146b8
   src/openrouter/components/imagegenerationresponse.py:
     id: 53354cd0cbfc
     last_write_checksum: sha1:53f1cde7b8bfe4f9e786a76f6e57b0a1f76aced2
@@ -16534,7 +16534,4 @@ examples:
 examplesVersion: 1.0.2
 releaseNotes: |
   ## Python SDK Changes:
-  * `open_router.batch.list()`: **Added**
-  * `open_router.batch.create_batches()`: **Added**
-  * `open_router.batch.delete()`: **Added**
-  * `open_router.batch.get_batches()`: **Added**
+  * `open_router.images.generate()`:  `request` **Changed**
