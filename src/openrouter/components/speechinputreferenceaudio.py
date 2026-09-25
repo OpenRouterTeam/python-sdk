@@ -14,7 +14,7 @@ SpeechInputReferenceAudioType = Literal["input_audio",]
 
 
 class SpeechInputReferenceAudioTypedDict(TypedDict):
-    r"""Reference audio input for stateless voice cloning"""
+    r"""Reference audio input for stateless voice cloning. Up to three parts per request; the Nth audio part is addressable from `input` as `@AudioN` on providers that support multiple references."""
 
     input_audio: SpeechInputReferenceAudioInputTypedDict
     r"""Reference audio input object"""
@@ -22,7 +22,7 @@ class SpeechInputReferenceAudioTypedDict(TypedDict):
 
 
 class SpeechInputReferenceAudio(BaseModel):
-    r"""Reference audio input for stateless voice cloning"""
+    r"""Reference audio input for stateless voice cloning. Up to three parts per request; the Nth audio part is addressable from `input` as `@AudioN` on providers that support multiple references."""
 
     input_audio: SpeechInputReferenceAudioInput
     r"""Reference audio input object"""

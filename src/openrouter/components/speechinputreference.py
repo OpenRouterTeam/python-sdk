@@ -5,6 +5,10 @@ from .speechinputreferenceaudio import (
     SpeechInputReferenceAudio,
     SpeechInputReferenceAudioTypedDict,
 )
+from .speechinputreferenceimage import (
+    SpeechInputReferenceImage,
+    SpeechInputReferenceImageTypedDict,
+)
 from .speechinputreferencetext import (
     SpeechInputReferenceText,
     SpeechInputReferenceTextTypedDict,
@@ -17,16 +21,21 @@ from typing_extensions import Annotated, TypeAliasType
 
 SpeechInputReferenceTypedDict = TypeAliasType(
     "SpeechInputReferenceTypedDict",
-    Union[SpeechInputReferenceAudioTypedDict, SpeechInputReferenceTextTypedDict],
+    Union[
+        SpeechInputReferenceAudioTypedDict,
+        SpeechInputReferenceTextTypedDict,
+        SpeechInputReferenceImageTypedDict,
+    ],
 )
-r"""Reference content part for stateless voice cloning"""
+r"""Reference content part for stateless voice cloning or voice design"""
 
 
 SpeechInputReference = Annotated[
     Union[
+        Annotated[SpeechInputReferenceImage, Tag("image_url")],
         Annotated[SpeechInputReferenceAudio, Tag("input_audio")],
         Annotated[SpeechInputReferenceText, Tag("text")],
     ],
     Discriminator(lambda m: get_discriminator(m, "type", "type")),
 ]
-r"""Reference content part for stateless voice cloning"""
+r"""Reference content part for stateless voice cloning or voice design"""
