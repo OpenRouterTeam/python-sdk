@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c48cf606-fb42-4a45-9c23-8f0555307828
 management:
-  docChecksum: a68b13fdcd5390dae9fe5b31a8862ee2
+  docChecksum: a2401ad3aac4fc5fe0c163088e172a32
   docVersion: 1.0.0
   speakeasyVersion: 1.787.0
   generationVersion: 2.914.0
-  releaseVersion: 1.2.34
-  configChecksum: f31eb68dbbf9fa0a1b8efdba3435c142
+  releaseVersion: 1.2.35
+  configChecksum: 99fb51d8358af3e7ea94d8916f060ef6
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
 persistentEdits:
-  generation_id: 6198ec44-5913-4ba3-bc10-bc6695a93298
-  pristine_commit_hash: 180a65c1c3eb9d31b46df39b15f7e00ed0b1226e
-  pristine_tree_hash: 7db81c79e309f4c6c334bbf16b8bdc5751cd7250
+  generation_id: bdd49b4a-07e2-4bec-9a1c-917e19d0a319
+  pristine_commit_hash: 336d6e1dfa93962b568293da86ac841d91076c54
+  pristine_tree_hash: 367e2dba4b71e2a346e6f4517501e55b698718ff
 features:
   python:
     acceptHeaders: 3.0.0
@@ -955,8 +955,8 @@ trackedFiles:
     pristine_git_object: 3b9150ee761d23f96f2ff4949c1aea29b42f9bce
   docs/components/anthropicwebfetchtoolresulterrorerrorcode.mdx:
     id: 4a7e2fb63acb
-    last_write_checksum: sha1:5332bd1b961a1363023176fbe0b4d49c76d13602
-    pristine_git_object: 5b08555ddd929e6475e7a082bdf65ce2e88f1c17
+    last_write_checksum: sha1:63962b5079b4a468a50c82ccfa866d554c37b827
+    pristine_git_object: f3b42af64481b1a51f9f4ab6ea46c71e2562f103
   docs/components/anthropicwebfetchtoolresulterrortype.mdx:
     id: 951939fcaedd
     last_write_checksum: sha1:4cbe77993e0f18cb30cbc963c5b49667f9cd3fe4
@@ -9223,8 +9223,8 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:b3f4cd9d7530677335f3245e22f0be29bb84be9b
-    pristine_git_object: 5dd063d139c776a66d592f8b551ca22f3c82fbab
+    last_write_checksum: sha1:b54f008b7fdbfbaaf1849253c8be898d7c563f6b
+    pristine_git_object: 286a6312a3e2dd9fb39d8e599c5d25837301a9a4
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77f44b60b98bc126557ec27391f91dfba764bb54
@@ -9251,8 +9251,8 @@ trackedFiles:
     pristine_git_object: 86713cfea633e09d33b3d4e65281071fe20e6137
   src/openrouter/_version.py:
     id: d8d15ad6c586
-    last_write_checksum: sha1:8738cc5ed484735d90f91b7ba49b92cc9594994e
-    pristine_git_object: 04b0605f4b9076957fc3ea37dae9bc5028178fd3
+    last_write_checksum: sha1:1a989db800ca9c5696c3ff58b3fa7c7be557268f
+    pristine_git_object: 32799938ba4a93c783193c958052d98e16441205
   src/openrouter/alpha.py:
     id: 306c4d93308d
     last_write_checksum: sha1:30f55a360f41376ab194b9ea725fe4e001a5ae1a
@@ -9719,8 +9719,8 @@ trackedFiles:
     pristine_git_object: c26f5546c2cad2080e3b7a87b863f31e8a05cc7b
   src/openrouter/components/anthropicwebfetchtoolresulterror.py:
     id: 583a2c91fdd4
-    last_write_checksum: sha1:bcfe568ae69844a493f3ec6e3b1b76db5ba0e5ea
-    pristine_git_object: 3e2b78c0f6226f2bbe99fe6ea2de4ecd291306ad
+    last_write_checksum: sha1:b29881a8c661b02c752f5a45c6d2c267ef72f3ed
+    pristine_git_object: a55cd7136cc17a5e6ecbf6a8f5d2d3ad5c15876f
   src/openrouter/components/anthropicwebsearchresult.py:
     id: 5c8ad6aea18e
     last_write_checksum: sha1:64d08e46e4ac5a47cdaf3ebf25361ad7c70727b6
@@ -16570,4 +16570,7 @@ examples:
         "500":
           application/json: {"error": {"code": 404, "message": "Intern not found"}}
 examplesVersion: 1.0.2
-releaseNotes: "## Python SDK Changes:\n* `open_router.interns.get_intern_daemon()`: **Added**\n* `open_router.interns.get_intern_daemon_access()`: **Deprecated**\n* `open_router.presets.create_presets_messages()`: \n  *  `request.thinking.union(between_tools)` **Added**\n"
+releaseNotes: |
+  ## Python SDK Changes:
+  * `open_router.batch.create_batches()`:  `response.results[].response.body.union(class (2)).content[].union(web_fetch_tool_result).content.union(web_fetch_tool_result_error).error_code.enum(content_too_large)` **Added**
+  * `open_router.batch.get_batches()`:  `response.results[].response.body.union(class (2)).content[].union(web_fetch_tool_result).content.union(web_fetch_tool_result_error).error_code.enum(content_too_large)` **Added**
