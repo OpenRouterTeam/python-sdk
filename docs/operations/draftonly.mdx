@@ -1,0 +1,22 @@
+---
+title: "DraftOnly"
+---
+
+When `true`, only delete the endpoint if it is still a draft (409 otherwise).
+
+## Example Usage
+
+```python
+from openrouter.operations import DraftOnly
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
+value: DraftOnly = "true"
+```
+
+
+## Values
+
+This is an open enum. Unrecognized values will not fail type checks.
+
+- `"true"`
+- `"false"`

@@ -20,6 +20,22 @@ if TYPE_CHECKING:
         BatchPaymentRequiredResponseErrorData,
     )
     from .conflictresponse_error import ConflictResponseError, ConflictResponseErrorData
+    from .createprivateendpoint import (
+        BadGateway,
+        BadGatewayUnion,
+        Conflict,
+        ConflictUnion,
+        InternalServerError,
+        InternalServerErrorUnion,
+        NotFound,
+        NotFoundUnion,
+        UnprocessableEntity,
+        UnprocessableEntityUnion,
+    )
+    from .createprivateendpointvalidationfailedresponse_error import (
+        CreatePrivateEndpointValidationFailedResponseError,
+        CreatePrivateEndpointValidationFailedResponseErrorData,
+    )
     from .edgenetworktimeoutresponse_error import (
         EdgeNetworkTimeoutResponseError,
         EdgeNetworkTimeoutResponseErrorData,
@@ -81,16 +97,22 @@ if TYPE_CHECKING:
     )
 
 __all__ = [
+    "BadGateway",
     "BadGatewayResponseError",
     "BadGatewayResponseErrorData",
+    "BadGatewayUnion",
     "BadRequestResponseError",
     "BadRequestResponseErrorData",
     "BatchErrorResponse",
     "BatchErrorResponseData",
     "BatchPaymentRequiredResponseError",
     "BatchPaymentRequiredResponseErrorData",
+    "Conflict",
     "ConflictResponseError",
     "ConflictResponseErrorData",
+    "ConflictUnion",
+    "CreatePrivateEndpointValidationFailedResponseError",
+    "CreatePrivateEndpointValidationFailedResponseErrorData",
     "EdgeNetworkTimeoutResponseError",
     "EdgeNetworkTimeoutResponseErrorData",
     "ForbiddenResponseError",
@@ -103,11 +125,15 @@ __all__ = [
     "InternChatErrorResponseData",
     "InternLifecycleError",
     "InternLifecycleErrorData",
+    "InternalServerError",
+    "InternalServerErrorUnion",
     "InternalServerResponseError",
     "InternalServerResponseErrorData",
     "NoResponseError",
+    "NotFound",
     "NotFoundResponseError",
     "NotFoundResponseErrorData",
+    "NotFoundUnion",
     "OAuthErrorResponse",
     "OAuthErrorResponseData",
     "OpenRouterDefaultError",
@@ -127,8 +153,10 @@ __all__ = [
     "TooManyRequestsResponseErrorData",
     "UnauthorizedResponseError",
     "UnauthorizedResponseErrorData",
+    "UnprocessableEntity",
     "UnprocessableEntityResponseError",
     "UnprocessableEntityResponseErrorData",
+    "UnprocessableEntityUnion",
 ]
 
 _dynamic_imports: dict[str, str] = {
@@ -142,6 +170,18 @@ _dynamic_imports: dict[str, str] = {
     "BatchPaymentRequiredResponseErrorData": ".batchpaymentrequiredresponse_error",
     "ConflictResponseError": ".conflictresponse_error",
     "ConflictResponseErrorData": ".conflictresponse_error",
+    "BadGateway": ".createprivateendpoint",
+    "BadGatewayUnion": ".createprivateendpoint",
+    "Conflict": ".createprivateendpoint",
+    "ConflictUnion": ".createprivateendpoint",
+    "InternalServerError": ".createprivateendpoint",
+    "InternalServerErrorUnion": ".createprivateendpoint",
+    "NotFound": ".createprivateendpoint",
+    "NotFoundUnion": ".createprivateendpoint",
+    "UnprocessableEntity": ".createprivateendpoint",
+    "UnprocessableEntityUnion": ".createprivateendpoint",
+    "CreatePrivateEndpointValidationFailedResponseError": ".createprivateendpointvalidationfailedresponse_error",
+    "CreatePrivateEndpointValidationFailedResponseErrorData": ".createprivateendpointvalidationfailedresponse_error",
     "EdgeNetworkTimeoutResponseError": ".edgenetworktimeoutresponse_error",
     "EdgeNetworkTimeoutResponseErrorData": ".edgenetworktimeoutresponse_error",
     "ForbiddenResponseError": ".forbiddenresponse_error",

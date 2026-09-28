@@ -5,6 +5,12 @@ from typing import Any, TYPE_CHECKING
 from openrouter.utils.dynamic_imports import lazy_getattr, lazy_dir
 
 if TYPE_CHECKING:
+    from .activateprivateendpoint import (
+        ActivatePrivateEndpointGlobals,
+        ActivatePrivateEndpointGlobalsTypedDict,
+        ActivatePrivateEndpointRequest,
+        ActivatePrivateEndpointRequestTypedDict,
+    )
     from .bulkaddworkspacemembers import (
         BulkAddWorkspaceMembersGlobals,
         BulkAddWorkspaceMembersGlobalsTypedDict,
@@ -216,6 +222,12 @@ if TYPE_CHECKING:
         CreatePresetsResponsesRequest,
         CreatePresetsResponsesRequestTypedDict,
     )
+    from .createprivateendpoint import (
+        CreatePrivateEndpointGlobals,
+        CreatePrivateEndpointGlobalsTypedDict,
+        CreatePrivateEndpointRequest,
+        CreatePrivateEndpointRequestTypedDict,
+    )
     from .creatererank import (
         CreateRerankGlobals,
         CreateRerankGlobalsTypedDict,
@@ -328,6 +340,13 @@ if TYPE_CHECKING:
         DeleteObservabilityDestinationRequest,
         DeleteObservabilityDestinationRequestTypedDict,
     )
+    from .deleteprivateendpoint import (
+        DeletePrivateEndpointGlobals,
+        DeletePrivateEndpointGlobalsTypedDict,
+        DeletePrivateEndpointRequest,
+        DeletePrivateEndpointRequestTypedDict,
+        DraftOnly,
+    )
     from .deletescimgroupmapping import (
         DeleteScimGroupMappingGlobals,
         DeleteScimGroupMappingGlobalsTypedDict,
@@ -355,6 +374,12 @@ if TYPE_CHECKING:
         DeleteWorkspaceBudgetRequest,
         DeleteWorkspaceBudgetRequestTypedDict,
     )
+    from .disableprivateendpoint import (
+        DisablePrivateEndpointGlobals,
+        DisablePrivateEndpointGlobalsTypedDict,
+        DisablePrivateEndpointRequest,
+        DisablePrivateEndpointRequestTypedDict,
+    )
     from .downloadcontainerfilecontent import (
         DownloadContainerFileContentGlobals,
         DownloadContainerFileContentGlobalsTypedDict,
@@ -366,6 +391,12 @@ if TYPE_CHECKING:
         DownloadFileContentGlobalsTypedDict,
         DownloadFileContentRequest,
         DownloadFileContentRequestTypedDict,
+    )
+    from .enableprivateendpoint import (
+        EnablePrivateEndpointGlobals,
+        EnablePrivateEndpointGlobalsTypedDict,
+        EnablePrivateEndpointRequest,
+        EnablePrivateEndpointRequestTypedDict,
     )
     from .exchangeauthcodeforapikey import (
         ExchangeAuthCodeForAPIKeyCodeChallengeMethod,
@@ -545,6 +576,12 @@ if TYPE_CHECKING:
         GetPresetVersionGlobalsTypedDict,
         GetPresetVersionRequest,
         GetPresetVersionRequestTypedDict,
+    )
+    from .getprivateendpoint import (
+        GetPrivateEndpointGlobals,
+        GetPrivateEndpointGlobalsTypedDict,
+        GetPrivateEndpointRequest,
+        GetPrivateEndpointRequestTypedDict,
     )
     from .getrankingsdaily import (
         ContextBucket,
@@ -814,6 +851,12 @@ if TYPE_CHECKING:
         ListPresetVersionsResponse,
         ListPresetVersionsResponseTypedDict,
     )
+    from .listprivateendpoints import (
+        ListPrivateEndpointsGlobals,
+        ListPrivateEndpointsGlobalsTypedDict,
+        ListPrivateEndpointsRequest,
+        ListPrivateEndpointsRequestTypedDict,
+    )
     from .listproviders import (
         Datacenter,
         Headquarters,
@@ -1000,6 +1043,18 @@ if TYPE_CHECKING:
         UpdateObservabilityDestinationRequest,
         UpdateObservabilityDestinationRequestTypedDict,
     )
+    from .updateprivateendpoint import (
+        UpdatePrivateEndpointGlobals,
+        UpdatePrivateEndpointGlobalsTypedDict,
+        UpdatePrivateEndpointRequest,
+        UpdatePrivateEndpointRequestTypedDict,
+    )
+    from .updateprivateendpointpricing import (
+        UpdatePrivateEndpointPricingGlobals,
+        UpdatePrivateEndpointPricingGlobalsTypedDict,
+        UpdatePrivateEndpointPricingRequest,
+        UpdatePrivateEndpointPricingRequestTypedDict,
+    )
     from .updatescimgroupmapping import (
         UpdateScimGroupMappingGlobals,
         UpdateScimGroupMappingGlobalsTypedDict,
@@ -1028,8 +1083,18 @@ if TYPE_CHECKING:
         UpsertWorkspaceBudgetRequest,
         UpsertWorkspaceBudgetRequestTypedDict,
     )
+    from .validateprivateendpoint import (
+        ValidatePrivateEndpointGlobals,
+        ValidatePrivateEndpointGlobalsTypedDict,
+        ValidatePrivateEndpointRequest,
+        ValidatePrivateEndpointRequestTypedDict,
+    )
 
 __all__ = [
+    "ActivatePrivateEndpointGlobals",
+    "ActivatePrivateEndpointGlobalsTypedDict",
+    "ActivatePrivateEndpointRequest",
+    "ActivatePrivateEndpointRequestTypedDict",
     "AllowedDataRegion",
     "Arena",
     "BenchmarkType",
@@ -1183,6 +1248,10 @@ __all__ = [
     "CreatePresetsResponsesGlobalsTypedDict",
     "CreatePresetsResponsesRequest",
     "CreatePresetsResponsesRequestTypedDict",
+    "CreatePrivateEndpointGlobals",
+    "CreatePrivateEndpointGlobalsTypedDict",
+    "CreatePrivateEndpointRequest",
+    "CreatePrivateEndpointRequestTypedDict",
     "CreateRerankGlobals",
     "CreateRerankGlobalsTypedDict",
     "CreateRerankRequest",
@@ -1258,6 +1327,10 @@ __all__ = [
     "DeleteObservabilityDestinationGlobalsTypedDict",
     "DeleteObservabilityDestinationRequest",
     "DeleteObservabilityDestinationRequestTypedDict",
+    "DeletePrivateEndpointGlobals",
+    "DeletePrivateEndpointGlobalsTypedDict",
+    "DeletePrivateEndpointRequest",
+    "DeletePrivateEndpointRequestTypedDict",
     "DeleteScimGroupMappingGlobals",
     "DeleteScimGroupMappingGlobalsTypedDict",
     "DeleteScimGroupMappingRequest",
@@ -1277,6 +1350,10 @@ __all__ = [
     "Dimension",
     "DimensionTypedDict",
     "Direction",
+    "DisablePrivateEndpointGlobals",
+    "DisablePrivateEndpointGlobalsTypedDict",
+    "DisablePrivateEndpointRequest",
+    "DisablePrivateEndpointRequestTypedDict",
     "DisplayFormat",
     "Distillable",
     "Document",
@@ -1293,8 +1370,13 @@ __all__ = [
     "DownloadFileContentGlobalsTypedDict",
     "DownloadFileContentRequest",
     "DownloadFileContentRequestTypedDict",
+    "DraftOnly",
     "Embedding",
     "EmbeddingTypedDict",
+    "EnablePrivateEndpointGlobals",
+    "EnablePrivateEndpointGlobalsTypedDict",
+    "EnablePrivateEndpointRequest",
+    "EnablePrivateEndpointRequestTypedDict",
     "EncodingFormat",
     "ExchangeAuthCodeForAPIKeyCodeChallengeMethod",
     "ExchangeAuthCodeForAPIKeyGlobals",
@@ -1413,6 +1495,10 @@ __all__ = [
     "GetPresetVersionGlobalsTypedDict",
     "GetPresetVersionRequest",
     "GetPresetVersionRequestTypedDict",
+    "GetPrivateEndpointGlobals",
+    "GetPrivateEndpointGlobalsTypedDict",
+    "GetPrivateEndpointRequest",
+    "GetPrivateEndpointRequestTypedDict",
     "GetRankingsDailyCategory",
     "GetRankingsDailyGlobals",
     "GetRankingsDailyGlobalsTypedDict",
@@ -1611,6 +1697,10 @@ __all__ = [
     "ListPresetsRequestTypedDict",
     "ListPresetsResponse",
     "ListPresetsResponseTypedDict",
+    "ListPrivateEndpointsGlobals",
+    "ListPrivateEndpointsGlobalsTypedDict",
+    "ListPrivateEndpointsRequest",
+    "ListPrivateEndpointsRequestTypedDict",
     "ListProvidersData",
     "ListProvidersDataTypedDict",
     "ListProvidersGlobals",
@@ -1767,6 +1857,14 @@ __all__ = [
     "UpdateObservabilityDestinationGlobalsTypedDict",
     "UpdateObservabilityDestinationRequest",
     "UpdateObservabilityDestinationRequestTypedDict",
+    "UpdatePrivateEndpointGlobals",
+    "UpdatePrivateEndpointGlobalsTypedDict",
+    "UpdatePrivateEndpointPricingGlobals",
+    "UpdatePrivateEndpointPricingGlobalsTypedDict",
+    "UpdatePrivateEndpointPricingRequest",
+    "UpdatePrivateEndpointPricingRequestTypedDict",
+    "UpdatePrivateEndpointRequest",
+    "UpdatePrivateEndpointRequestTypedDict",
     "UpdateScimGroupMappingGlobals",
     "UpdateScimGroupMappingGlobalsTypedDict",
     "UpdateScimGroupMappingRequest",
@@ -1788,6 +1886,10 @@ __all__ = [
     "UpsertWorkspaceBudgetRequest",
     "UpsertWorkspaceBudgetRequestTypedDict",
     "UsageLimitType",
+    "ValidatePrivateEndpointGlobals",
+    "ValidatePrivateEndpointGlobalsTypedDict",
+    "ValidatePrivateEndpointRequest",
+    "ValidatePrivateEndpointRequestTypedDict",
     "Value1",
     "Value1TypedDict",
     "Value2",
@@ -1800,6 +1902,10 @@ __all__ = [
 ]
 
 _dynamic_imports: dict[str, str] = {
+    "ActivatePrivateEndpointGlobals": ".activateprivateendpoint",
+    "ActivatePrivateEndpointGlobalsTypedDict": ".activateprivateendpoint",
+    "ActivatePrivateEndpointRequest": ".activateprivateendpoint",
+    "ActivatePrivateEndpointRequestTypedDict": ".activateprivateendpoint",
     "BulkAddWorkspaceMembersGlobals": ".bulkaddworkspacemembers",
     "BulkAddWorkspaceMembersGlobalsTypedDict": ".bulkaddworkspacemembers",
     "BulkAddWorkspaceMembersRequest": ".bulkaddworkspacemembers",
@@ -1961,6 +2067,10 @@ _dynamic_imports: dict[str, str] = {
     "CreatePresetsResponsesGlobalsTypedDict": ".createpresetsresponses",
     "CreatePresetsResponsesRequest": ".createpresetsresponses",
     "CreatePresetsResponsesRequestTypedDict": ".createpresetsresponses",
+    "CreatePrivateEndpointGlobals": ".createprivateendpoint",
+    "CreatePrivateEndpointGlobalsTypedDict": ".createprivateendpoint",
+    "CreatePrivateEndpointRequest": ".createprivateendpoint",
+    "CreatePrivateEndpointRequestTypedDict": ".createprivateendpoint",
     "CreateRerankGlobals": ".creatererank",
     "CreateRerankGlobalsTypedDict": ".creatererank",
     "CreateRerankRequest": ".creatererank",
@@ -2043,6 +2153,11 @@ _dynamic_imports: dict[str, str] = {
     "DeleteObservabilityDestinationGlobalsTypedDict": ".deleteobservabilitydestination",
     "DeleteObservabilityDestinationRequest": ".deleteobservabilitydestination",
     "DeleteObservabilityDestinationRequestTypedDict": ".deleteobservabilitydestination",
+    "DeletePrivateEndpointGlobals": ".deleteprivateendpoint",
+    "DeletePrivateEndpointGlobalsTypedDict": ".deleteprivateendpoint",
+    "DeletePrivateEndpointRequest": ".deleteprivateendpoint",
+    "DeletePrivateEndpointRequestTypedDict": ".deleteprivateendpoint",
+    "DraftOnly": ".deleteprivateendpoint",
     "DeleteScimGroupMappingGlobals": ".deletescimgroupmapping",
     "DeleteScimGroupMappingGlobalsTypedDict": ".deletescimgroupmapping",
     "DeleteScimGroupMappingRequest": ".deletescimgroupmapping",
@@ -2062,6 +2177,10 @@ _dynamic_imports: dict[str, str] = {
     "DeleteWorkspaceBudgetGlobalsTypedDict": ".deleteworkspacebudget",
     "DeleteWorkspaceBudgetRequest": ".deleteworkspacebudget",
     "DeleteWorkspaceBudgetRequestTypedDict": ".deleteworkspacebudget",
+    "DisablePrivateEndpointGlobals": ".disableprivateendpoint",
+    "DisablePrivateEndpointGlobalsTypedDict": ".disableprivateendpoint",
+    "DisablePrivateEndpointRequest": ".disableprivateendpoint",
+    "DisablePrivateEndpointRequestTypedDict": ".disableprivateendpoint",
     "DownloadContainerFileContentGlobals": ".downloadcontainerfilecontent",
     "DownloadContainerFileContentGlobalsTypedDict": ".downloadcontainerfilecontent",
     "DownloadContainerFileContentRequest": ".downloadcontainerfilecontent",
@@ -2070,6 +2189,10 @@ _dynamic_imports: dict[str, str] = {
     "DownloadFileContentGlobalsTypedDict": ".downloadfilecontent",
     "DownloadFileContentRequest": ".downloadfilecontent",
     "DownloadFileContentRequestTypedDict": ".downloadfilecontent",
+    "EnablePrivateEndpointGlobals": ".enableprivateendpoint",
+    "EnablePrivateEndpointGlobalsTypedDict": ".enableprivateendpoint",
+    "EnablePrivateEndpointRequest": ".enableprivateendpoint",
+    "EnablePrivateEndpointRequestTypedDict": ".enableprivateendpoint",
     "ExchangeAuthCodeForAPIKeyCodeChallengeMethod": ".exchangeauthcodeforapikey",
     "ExchangeAuthCodeForAPIKeyGlobals": ".exchangeauthcodeforapikey",
     "ExchangeAuthCodeForAPIKeyGlobalsTypedDict": ".exchangeauthcodeforapikey",
@@ -2207,6 +2330,10 @@ _dynamic_imports: dict[str, str] = {
     "GetPresetVersionGlobalsTypedDict": ".getpresetversion",
     "GetPresetVersionRequest": ".getpresetversion",
     "GetPresetVersionRequestTypedDict": ".getpresetversion",
+    "GetPrivateEndpointGlobals": ".getprivateendpoint",
+    "GetPrivateEndpointGlobalsTypedDict": ".getprivateendpoint",
+    "GetPrivateEndpointRequest": ".getprivateendpoint",
+    "GetPrivateEndpointRequestTypedDict": ".getprivateendpoint",
     "ContextBucket": ".getrankingsdaily",
     "GetRankingsDailyCategory": ".getrankingsdaily",
     "GetRankingsDailyGlobals": ".getrankingsdaily",
@@ -2405,6 +2532,10 @@ _dynamic_imports: dict[str, str] = {
     "ListPresetVersionsRequestTypedDict": ".listpresetversions",
     "ListPresetVersionsResponse": ".listpresetversions",
     "ListPresetVersionsResponseTypedDict": ".listpresetversions",
+    "ListPrivateEndpointsGlobals": ".listprivateendpoints",
+    "ListPrivateEndpointsGlobalsTypedDict": ".listprivateendpoints",
+    "ListPrivateEndpointsRequest": ".listprivateendpoints",
+    "ListPrivateEndpointsRequestTypedDict": ".listprivateendpoints",
     "Datacenter": ".listproviders",
     "Headquarters": ".listproviders",
     "ListProvidersData": ".listproviders",
@@ -2547,6 +2678,14 @@ _dynamic_imports: dict[str, str] = {
     "UpdateObservabilityDestinationGlobalsTypedDict": ".updateobservabilitydestination",
     "UpdateObservabilityDestinationRequest": ".updateobservabilitydestination",
     "UpdateObservabilityDestinationRequestTypedDict": ".updateobservabilitydestination",
+    "UpdatePrivateEndpointGlobals": ".updateprivateendpoint",
+    "UpdatePrivateEndpointGlobalsTypedDict": ".updateprivateendpoint",
+    "UpdatePrivateEndpointRequest": ".updateprivateendpoint",
+    "UpdatePrivateEndpointRequestTypedDict": ".updateprivateendpoint",
+    "UpdatePrivateEndpointPricingGlobals": ".updateprivateendpointpricing",
+    "UpdatePrivateEndpointPricingGlobalsTypedDict": ".updateprivateendpointpricing",
+    "UpdatePrivateEndpointPricingRequest": ".updateprivateendpointpricing",
+    "UpdatePrivateEndpointPricingRequestTypedDict": ".updateprivateendpointpricing",
     "UpdateScimGroupMappingGlobals": ".updatescimgroupmapping",
     "UpdateScimGroupMappingGlobalsTypedDict": ".updatescimgroupmapping",
     "UpdateScimGroupMappingRequest": ".updatescimgroupmapping",
@@ -2567,6 +2706,10 @@ _dynamic_imports: dict[str, str] = {
     "UpsertWorkspaceBudgetGlobalsTypedDict": ".upsertworkspacebudget",
     "UpsertWorkspaceBudgetRequest": ".upsertworkspacebudget",
     "UpsertWorkspaceBudgetRequestTypedDict": ".upsertworkspacebudget",
+    "ValidatePrivateEndpointGlobals": ".validateprivateendpoint",
+    "ValidatePrivateEndpointGlobalsTypedDict": ".validateprivateendpoint",
+    "ValidatePrivateEndpointRequest": ".validateprivateendpoint",
+    "ValidatePrivateEndpointRequestTypedDict": ".validateprivateendpoint",
 }
 
 

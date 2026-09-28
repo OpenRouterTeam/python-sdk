@@ -1,0 +1,23 @@
+---
+title: "PrivateEndpointStatus"
+---
+
+Lifecycle state. `draft` endpoints are not routable until validated and activated; `disabled` endpoints are activated but temporarily not routable.
+
+## Example Usage
+
+```python
+from openrouter.components import PrivateEndpointStatus
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
+value: PrivateEndpointStatus = "draft"
+```
+
+
+## Values
+
+This is an open enum. Unrecognized values will not fail type checks.
+
+- `"draft"`
+- `"active"`
+- `"disabled"`

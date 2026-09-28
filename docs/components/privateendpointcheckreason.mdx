@@ -1,0 +1,36 @@
+---
+title: "PrivateEndpointCheckReason"
+---
+
+Why the check failed.
+
+## Example Usage
+
+```python
+from openrouter.components import PrivateEndpointCheckReason
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
+value: PrivateEndpointCheckReason = "database_error"
+```
+
+
+## Values
+
+This is an open enum. Unrecognized values will not fail type checks.
+
+- `"database_error"`
+- `"endpoint_limit_reached"`
+- `"invalid_base_url"`
+- `"model_not_found"`
+- `"provider_not_found"`
+- `"endpoint_not_found"`
+- `"workspace_not_found"`
+- `"no_byok_key"`
+- `"key_decryption_failed"`
+- `"upstream_error"`
+- `"invalid_response"`
+- `"invalid_stream"`
+- `"missing_usage"`
+- `"model_mismatch"`
+- `"not_validated"`
+- `"validation_stale"`
