@@ -424,6 +424,17 @@ SystemTypedDict = TypeAliasType(
 System = TypeAliasType("System", Union[str, List[AnthropicTextBlockParam]])
 
 
+TypeBetweenTools = Literal["between_tools",]
+
+
+class ThinkingBetweenToolsTypedDict(TypedDict):
+    type: TypeBetweenTools
+
+
+class ThinkingBetweenTools(BaseModel):
+    type: TypeBetweenTools
+
+
 TypeAdaptive = Literal["adaptive",]
 
 
@@ -525,7 +536,10 @@ class ThinkingEnabled(BaseModel):
 ThinkingTypedDict = TypeAliasType(
     "ThinkingTypedDict",
     Union[
-        ThinkingDisabledTypedDict, ThinkingAdaptiveTypedDict, ThinkingEnabledTypedDict
+        ThinkingDisabledTypedDict,
+        ThinkingBetweenToolsTypedDict,
+        ThinkingAdaptiveTypedDict,
+        ThinkingEnabledTypedDict,
     ],
 )
 
@@ -535,6 +549,7 @@ Thinking = Annotated[
         Annotated[ThinkingEnabled, Tag("enabled")],
         Annotated[ThinkingDisabled, Tag("disabled")],
         Annotated[ThinkingAdaptive, Tag("adaptive")],
+        Annotated[ThinkingBetweenTools, Tag("between_tools")],
     ],
     Discriminator(lambda m: get_discriminator(m, "type", "type")),
 ]
