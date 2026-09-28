@@ -1,0 +1,23 @@
+---
+title: "PrivateEndpointDeclaredRegion"
+---
+
+Where you attest this deployment processes data. `global` means not regional; `null` means undeclared.
+
+## Example Usage
+
+```python
+from openrouter.components import PrivateEndpointDeclaredRegion
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
+value: PrivateEndpointDeclaredRegion = "global"
+```
+
+
+## Values
+
+This is an open enum. Unrecognized values will not fail type checks.
+
+- `"global"`
+- `"europe"`
+- `"us"`

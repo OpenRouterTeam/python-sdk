@@ -40,6 +40,7 @@ if TYPE_CHECKING:
     from openrouter.observability import Observability
     from openrouter.organization import Organization
     from openrouter.presets import Presets
+    from openrouter.private_endpoints import PrivateEndpoints
     from openrouter.providers import Providers
     from openrouter.rerank import Rerank
     from openrouter.responses import Responses
@@ -105,6 +106,8 @@ class OpenRouter(BaseSDK):
     r"""Organization endpoints"""
     presets: "Presets"
     r"""Presets endpoints"""
+    private_endpoints: "PrivateEndpoints"
+    r"""Private Endpoints endpoints"""
     providers: "Providers"
     r"""Provider information endpoints"""
     rerank: "Rerank"
@@ -148,6 +151,7 @@ class OpenRouter(BaseSDK):
         "observability": ("openrouter.observability", "Observability"),
         "organization": ("openrouter.organization", "Organization"),
         "presets": ("openrouter.presets", "Presets"),
+        "private_endpoints": ("openrouter.private_endpoints", "PrivateEndpoints"),
         "providers": ("openrouter.providers", "Providers"),
         "rerank": ("openrouter.rerank", "Rerank"),
         "responses": ("openrouter.responses", "Responses"),
