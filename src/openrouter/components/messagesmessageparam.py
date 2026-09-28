@@ -118,6 +118,7 @@ MessagesMessageParamErrorCode = Union[
         "max_uses_exceeded",
         "too_many_requests",
         "query_too_long",
+        "request_too_large",
     ],
     UnrecognizedStr,
 ]

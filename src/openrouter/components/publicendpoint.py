@@ -10,8 +10,18 @@ from .quantization import Quantization
 from .toolchoicesupport import ToolChoiceSupport, ToolChoiceSupportTypedDict
 from openrouter.types import BaseModel, Nullable, UNSET_SENTINEL
 from pydantic import model_serializer
-from typing import List, Optional
+from typing import Dict, List, Optional
 from typing_extensions import NotRequired, TypedDict
+
+
+class NativeToolsTypedDict(TypedDict):
+    type: str
+    r"""The provider tool type the request is translated to when this tool runs natively, e.g. `web_search_20260209` on Anthropic or `google_search` on Gemini."""
+
+
+class NativeTools(BaseModel):
+    type: str
+    r"""The provider tool type the request is translated to when this tool runs natively, e.g. `web_search_20260209` on Anthropic or `google_search` on Gemini."""
 
 
 class DecisionsTypedDict(TypedDict):
@@ -479,6 +489,8 @@ class PublicEndpointTypedDict(TypedDict):
     r"""The unique identifier for the model (permaslug)"""
     model_name: str
     name: str
+    native_tools: Dict[str, NativeToolsTypedDict]
+    r"""The server tools this endpoint accepts as the provider's own built-in tool (`engine: \"native\"`) instead of an OpenRouter engine, keyed by canonical `openrouter:*` name. Each value names the provider tool type the request is translated to. Where that tool runs (provider-side, or returned to the client as with Anthropic bash) is documented per tool. Empty when the provider has none."""
     pricing: PricingTypedDict
     provider_name: ProviderName
     quantization: Nullable[Quantization]
@@ -523,6 +535,9 @@ class PublicEndpoint(BaseModel):
     model_name: str
 
     name: str
+
+    native_tools: Dict[str, NativeTools]
+    r"""The server tools this endpoint accepts as the provider's own built-in tool (`engine: \"native\"`) instead of an OpenRouter engine, keyed by canonical `openrouter:*` name. Each value names the provider tool type the request is translated to. Where that tool runs (provider-side, or returned to the client as with Anthropic bash) is documented per tool. Empty when the provider has none."""
 
     pricing: Pricing
 

@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c48cf606-fb42-4a45-9c23-8f0555307828
 management:
-  docChecksum: ba7853a2105392192cf4ed68d71c8e80
+  docChecksum: 6cc0d48bfdb4976e09baf54df6158694
   docVersion: 1.0.0
   speakeasyVersion: 1.787.0
   generationVersion: 2.914.0
-  releaseVersion: 1.2.32
-  configChecksum: 23b2eddd5af560ad923684ed9ca3f3e4
+  releaseVersion: 1.2.33
+  configChecksum: 58719407cb0c2ba626b2f1d762c70de0
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
 persistentEdits:
-  generation_id: a215d5bf-178c-4b98-aa8c-946d60802f7b
-  pristine_commit_hash: be00b51367960629a2af4693444cb3ca953685de
-  pristine_tree_hash: 81ce8fef00ef5c43987f296d1fa473960e198165
+  generation_id: a7ddbbdb-6d06-4927-b244-bccaf9c2e3e6
+  pristine_commit_hash: 49523f4989d804be9af111c9a6c3bb1108d9ce2c
+  pristine_tree_hash: 386dbcfb15d5e45f8ab5124f9d7cd7888d4e7544
 features:
   python:
     acceptHeaders: 3.0.0
@@ -955,8 +955,8 @@ trackedFiles:
     pristine_git_object: 3b9150ee761d23f96f2ff4949c1aea29b42f9bce
   docs/components/anthropicwebfetchtoolresulterrorerrorcode.mdx:
     id: 4a7e2fb63acb
-    last_write_checksum: sha1:c50db315821815cc2fc1ec311d030630f07babfa
-    pristine_git_object: 6fe9c5d34660ba486e4bd9ffe646d2e0288048d4
+    last_write_checksum: sha1:5332bd1b961a1363023176fbe0b4d49c76d13602
+    pristine_git_object: 5b08555ddd929e6475e7a082bdf65ce2e88f1c17
   docs/components/anthropicwebfetchtoolresulterrortype.mdx:
     id: 951939fcaedd
     last_write_checksum: sha1:4cbe77993e0f18cb30cbc963c5b49667f9cd3fe4
@@ -4215,8 +4215,8 @@ trackedFiles:
     pristine_git_object: f7bb2cc53c8b844fe5f28f7cfa6c864f94994ddd
   docs/components/messagesmessageparamerrorcode.mdx:
     id: c0bbfb0a5e1c
-    last_write_checksum: sha1:c8640eefa9eb3ac018129665de90c4009b269003
-    pristine_git_object: b93c6f8f643808eed719fbeb9aa2df317a58f0e6
+    last_write_checksum: sha1:7216578e18b584ed0d2811fffa59c07c1f39e3ce
+    pristine_git_object: e67df8d74af1939a078aa884004ae5789c89b626
   docs/components/messagesmessageparamrole.mdx:
     id: cb1721b92cd6
     last_write_checksum: sha1:3f5c7431c6635c667b17e7b176b7dd4ba6f6777d
@@ -4505,6 +4505,10 @@ trackedFiles:
     id: fb5e85bb77da
     last_write_checksum: sha1:50190d6fb52c7d673ef87f34e39c620460cf932b
     pristine_git_object: f6803b05fdd0332c58b0d07e2aa819de4a8087c5
+  docs/components/nativetools.mdx:
+    id: 15bb54542fc2
+    last_write_checksum: sha1:0b6d30bcbc44a2914c2d7265e5fb1e8cd05f6c89
+    pristine_git_object: f578f85cd4f835921c968de53a7bd4ae7524be10
   docs/components/never.mdx:
     id: 7c0a5248748d
     last_write_checksum: sha1:aea21cab9eaa32c13bc278bfd7dbb1ec41127091
@@ -5811,8 +5815,8 @@ trackedFiles:
     pristine_git_object: be1e5af9301ba917704f25fdafed31c152485abf
   docs/components/publicendpoint.mdx:
     id: ec4843ef5d86
-    last_write_checksum: sha1:54822f1b82fe3c0d91cf214773a1b52a6e7cf3a3
-    pristine_git_object: fc7a3507a210a8409cfe9d528972e8d4b68b67a1
+    last_write_checksum: sha1:1e3b1f96db5774279bd275122d48ef8e89a0dca8
+    pristine_git_object: 1f6678254e2dc3289a8ca1894869bcc1a36873b1
   docs/components/publicpricing.mdx:
     id: 61fb18b7ff94
     last_write_checksum: sha1:e241420249fcbd1bf515b0f5e84934de0b207948
@@ -9203,8 +9207,8 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:b98c651779a93632a712d21b947c9f9e81237767
-    pristine_git_object: 6f500623ddd6513c9f4fc6544a2a3a125a8f866a
+    last_write_checksum: sha1:98851babb0a77721eca71165b105e28a5a60e452
+    pristine_git_object: a21ee9a4834b33cf106bd58cd9308fad1e629710
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77f44b60b98bc126557ec27391f91dfba764bb54
@@ -9231,8 +9235,8 @@ trackedFiles:
     pristine_git_object: 86713cfea633e09d33b3d4e65281071fe20e6137
   src/openrouter/_version.py:
     id: d8d15ad6c586
-    last_write_checksum: sha1:317e79a22e2957c906fe5d056b4084687663052c
-    pristine_git_object: a5e2dbcd3ba20c0c3a782d5273a8847104675fc0
+    last_write_checksum: sha1:b4baecc43ac609d4e81a60af019da14a3f241775
+    pristine_git_object: ec10a9e28e5b82f889990168a6a6178d8cd6d0d4
   src/openrouter/alpha.py:
     id: 306c4d93308d
     last_write_checksum: sha1:30f55a360f41376ab194b9ea725fe4e001a5ae1a
@@ -9279,8 +9283,8 @@ trackedFiles:
     pristine_git_object: ad3d247954547814054c01989a2dff3d12b3e4e1
   src/openrouter/components/__init__.py:
     id: 81754e97b3f4
-    last_write_checksum: sha1:a9859af57f85f48c6176e886483059c26bfb8a3c
-    pristine_git_object: 531740682a56707b21b173942a4ec7ae010813ee
+    last_write_checksum: sha1:e1aabbe8578b0aa28b25c1ea380cead2b88c6876
+    pristine_git_object: d56562d6944eae0809a82e28520c235e9c082ed1
   src/openrouter/components/aabenchmarkentry.py:
     id: e2e0f0b48c82
     last_write_checksum: sha1:fab4d9a24d2cea937bb749d46c5f83941e99d65c
@@ -9699,8 +9703,8 @@ trackedFiles:
     pristine_git_object: c26f5546c2cad2080e3b7a87b863f31e8a05cc7b
   src/openrouter/components/anthropicwebfetchtoolresulterror.py:
     id: 583a2c91fdd4
-    last_write_checksum: sha1:1a55b12b45f78d1361f92ec1821ab76a0031d024
-    pristine_git_object: 3bfb959c15cb34dfe1e8c262b8d542281d54f099
+    last_write_checksum: sha1:bcfe568ae69844a493f3ec6e3b1b76db5ba0e5ea
+    pristine_git_object: 3e2b78c0f6226f2bbe99fe6ea2de4ecd291306ad
   src/openrouter/components/anthropicwebsearchresult.py:
     id: 5c8ad6aea18e
     last_write_checksum: sha1:64d08e46e4ac5a47cdaf3ebf25361ad7c70727b6
@@ -11087,8 +11091,8 @@ trackedFiles:
     pristine_git_object: 9026664fa77c678a7a5f2b317b511ad93445cff7
   src/openrouter/components/messagesmessageparam.py:
     id: ed8bbab6720d
-    last_write_checksum: sha1:7c728a1159e94548cac466ef3469d6a60b2ed503
-    pristine_git_object: d587cc013b7c9284f320c4649d12ec3378501897
+    last_write_checksum: sha1:032872dfb96572801f92a78d58986217e831cc20
+    pristine_git_object: 34eb37a9187824b1f2b767e440ed2b34ca19ecd0
   src/openrouter/components/messagesoutputconfig.py:
     id: 54d1e297f740
     last_write_checksum: sha1:478d9f534254d60225ac89bd21ddc49d18329297
@@ -11671,8 +11675,8 @@ trackedFiles:
     pristine_git_object: 5f4a4186a9c98767217546b6b87d238fbc0155f3
   src/openrouter/components/publicendpoint.py:
     id: 848aa2ef9129
-    last_write_checksum: sha1:9df37e60706796b35acd7fd36a2ac1aa082c2904
-    pristine_git_object: cfa5b51c2a31c34b96413bc44e70f629796f3ad2
+    last_write_checksum: sha1:4081468f3100ac4b9cbf58acf39a358c2006bd3a
+    pristine_git_object: 533022aa348a1147bab3c02bf5230a021706c260
   src/openrouter/components/publicpricing.py:
     id: 96d115d83cc5
     last_write_checksum: sha1:fd8c320ac83b282eaf2405045329b55076d4311a
@@ -13459,7 +13463,7 @@ examples:
           slug: "gpt-4"
       responses:
         "200":
-          application/json: {"data": {"architecture": {"input_modalities": ["text"], "instruct_type": "chatml", "modality": "text->text", "output_modalities": ["text"], "tokenizer": "GPT"}, "created": 1692901234, "description": "GPT-4 is a large multimodal model that can solve difficult problems with greater accuracy.", "endpoints": [{"context_length": 8192, "latency_last_30m": {"p50": 0.25, "p75": 0.35, "p90": 0.48, "p99": 0.85}, "max_completion_tokens": 4096, "max_prompt_tokens": 8192, "model_id": "openai/gpt-4", "model_name": "GPT-4", "name": "OpenAI: GPT-4", "pricing": {"completion": "0.00006", "prompt": "0.00003"}, "provider_name": "OpenAI", "quantization": "fp16", "supported_parameters": ["temperature", "top_p", "max_tokens"], "supports_image_reference": false, "supports_implicit_caching": true, "supports_multiple_audio_references": false, "supports_tool_choice": {"auto": true, "function": true, "none": true, "required": true}, "supports_voice_cloning": false, "tag": "openai", "throughput_last_30m": {"p50": 45.2, "p75": 38.5, "p90": 28.3, "p99": 15.1}, "uptime_last_1d": 99.8, "uptime_last_30m": 99.5, "uptime_last_5m": 100}], "id": "openai/gpt-4", "name": "GPT-4"}}
+          application/json: {"data": {"architecture": {"input_modalities": ["text"], "instruct_type": "chatml", "modality": "text->text", "output_modalities": ["text"], "tokenizer": "GPT"}, "created": 1692901234, "description": "GPT-4 is a large multimodal model that can solve difficult problems with greater accuracy.", "endpoints": [{"context_length": 8192, "latency_last_30m": {"p50": 0.25, "p75": 0.35, "p90": 0.48, "p99": 0.85}, "max_completion_tokens": 4096, "max_prompt_tokens": 8192, "model_id": "openai/gpt-4", "model_name": "GPT-4", "name": "OpenAI: GPT-4", "native_tools": {}, "pricing": {"completion": "0.00006", "prompt": "0.00003"}, "provider_name": "OpenAI", "quantization": "fp16", "supported_parameters": ["temperature", "top_p", "max_tokens"], "supports_image_reference": false, "supports_implicit_caching": true, "supports_multiple_audio_references": false, "supports_tool_choice": {"auto": true, "function": true, "none": true, "required": true}, "supports_voice_cloning": false, "tag": "openai", "throughput_last_30m": {"p50": 45.2, "p75": 38.5, "p90": 28.3, "p99": 15.1}, "uptime_last_1d": 99.8, "uptime_last_30m": 99.5, "uptime_last_5m": 100}], "id": "openai/gpt-4", "name": "GPT-4"}}
         "404":
           application/json: {"error": {"code": 404, "message": "Resource not found"}}
         "500":
@@ -13470,7 +13474,7 @@ examples:
     speakeasy-default-list-endpoints-zdr:
       responses:
         "200":
-          application/json: {"data": [{"context_length": 8192, "latency_last_30m": {"p50": 0.25, "p75": 0.35, "p90": 0.48, "p99": 0.85}, "max_completion_tokens": 4096, "max_prompt_tokens": 8192, "model_id": "openai/gpt-4", "model_name": "GPT-4", "name": "OpenAI: GPT-4", "pricing": {"completion": "0.00006", "prompt": "0.00003"}, "provider_name": "OpenAI", "quantization": "fp16", "supported_parameters": ["temperature", "top_p", "max_tokens"], "supports_image_reference": false, "supports_implicit_caching": true, "supports_multiple_audio_references": false, "supports_tool_choice": {"auto": true, "function": true, "none": true, "required": true}, "supports_voice_cloning": false, "tag": "openai", "throughput_last_30m": {"p50": 45.2, "p75": 38.5, "p90": 28.3, "p99": 15.1}, "uptime_last_1d": 99.8, "uptime_last_30m": 99.5, "uptime_last_5m": 100}]}
+          application/json: {"data": [{"context_length": 8192, "latency_last_30m": {"p50": 0.25, "p75": 0.35, "p90": 0.48, "p99": 0.85}, "max_completion_tokens": 4096, "max_prompt_tokens": 8192, "model_id": "openai/gpt-4", "model_name": "GPT-4", "name": "OpenAI: GPT-4", "native_tools": {}, "pricing": {"completion": "0.00006", "prompt": "0.00003"}, "provider_name": "OpenAI", "quantization": "fp16", "supported_parameters": ["temperature", "top_p", "max_tokens"], "supports_image_reference": false, "supports_implicit_caching": true, "supports_multiple_audio_references": false, "supports_tool_choice": {"auto": true, "function": true, "none": true, "required": true}, "supports_voice_cloning": false, "tag": "openai", "throughput_last_30m": {"p50": 45.2, "p75": 38.5, "p90": 28.3, "p99": 15.1}, "uptime_last_1d": 99.8, "uptime_last_30m": 99.5, "uptime_last_5m": 100}]}
         "500":
           application/json: {"error": {"code": 500, "message": "Internal Server Error"}}
         "403":
@@ -16534,6 +16538,4 @@ examples:
         "500":
           application/json: {"error": {"code": 400, "message": "custom_id is required on requests[0]."}}
 examplesVersion: 1.0.2
-releaseNotes: |
-  ## Python SDK Changes:
-  * `open_router.embeddings.generate()`:  `error.status[504]` **Added**
+releaseNotes: "## Python SDK Changes:\n* `open_router.batch.create_batches()`:  `response.results[].response.body.union(class (2)).content[].union(web_fetch_tool_result).content.union(web_fetch_tool_result_error).error_code.enum(url_not_in_prior_context)` **Added**\n* `open_router.batch.get_batches()`:  `response.results[].response.body.union(class (2)).content[].union(web_fetch_tool_result).content.union(web_fetch_tool_result_error).error_code.enum(url_not_in_prior_context)` **Added**\n* `open_router.endpoints.list_zdr_endpoints()`:  `response.data[].native_tools` **Added**\n* `open_router.endpoints.list()`:  `response.data.endpoints[].native_tools` **Added**\n* `open_router.presets.create_presets_messages()`: \n  *  `request.messages[].content.union(Array<>)[].union(web_search_tool_result).content.union(class (1)).error_code.enum(request_too_large)` **Added**\n"
