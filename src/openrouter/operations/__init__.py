@@ -487,6 +487,12 @@ if TYPE_CHECKING:
         GetInternRequest,
         GetInternRequestTypedDict,
     )
+    from .getinterndaemon import (
+        GetInternDaemonGlobals,
+        GetInternDaemonGlobalsTypedDict,
+        GetInternDaemonRequest,
+        GetInternDaemonRequestTypedDict,
+    )
     from .getinterndaemonaccess import (
         GetInternDaemonAccessGlobals,
         GetInternDaemonAccessGlobalsTypedDict,
@@ -1367,6 +1373,10 @@ __all__ = [
     "GetInternDaemonAccessGlobalsTypedDict",
     "GetInternDaemonAccessRequest",
     "GetInternDaemonAccessRequestTypedDict",
+    "GetInternDaemonGlobals",
+    "GetInternDaemonGlobalsTypedDict",
+    "GetInternDaemonRequest",
+    "GetInternDaemonRequestTypedDict",
     "GetInternGlobals",
     "GetInternGlobalsTypedDict",
     "GetInternRequest",
@@ -2154,6 +2164,10 @@ _dynamic_imports: dict[str, str] = {
     "GetInternGlobalsTypedDict": ".getintern",
     "GetInternRequest": ".getintern",
     "GetInternRequestTypedDict": ".getintern",
+    "GetInternDaemonGlobals": ".getinterndaemon",
+    "GetInternDaemonGlobalsTypedDict": ".getinterndaemon",
+    "GetInternDaemonRequest": ".getinterndaemon",
+    "GetInternDaemonRequestTypedDict": ".getinterndaemon",
     "GetInternDaemonAccessGlobals": ".getinterndaemonaccess",
     "GetInternDaemonAccessGlobalsTypedDict": ".getinterndaemonaccess",
     "GetInternDaemonAccessRequest": ".getinterndaemonaccess",
