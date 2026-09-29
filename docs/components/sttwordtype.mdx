@@ -1,0 +1,22 @@
+---
+title: "STTWordType"
+---
+
+Kind of entry; omitted or "word" for spoken words, "audio_event" for non-speech sounds the provider tags with timestamps
+
+## Example Usage
+
+```python
+from openrouter.components import STTWordType
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
+value: STTWordType = "word"
+```
+
+
+## Values
+
+This is an open enum. Unrecognized values will not fail type checks.
+
+- `"word"`
+- `"audio_event"`

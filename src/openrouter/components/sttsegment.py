@@ -20,6 +20,8 @@ class STTSegmentTypedDict(TypedDict):
     r"""Transcribed text of the segment"""
     avg_logprob: NotRequired[float]
     r"""Average log probability of the segment"""
+    channel: NotRequired[int]
+    r"""Zero-based audio channel index for the segment, present when the provider transcribes channels separately"""
     compression_ratio: NotRequired[float]
     r"""Compression ratio of the segment"""
     no_speech_prob: NotRequired[float]
@@ -28,6 +30,8 @@ class STTSegmentTypedDict(TypedDict):
     r"""Seek offset of the segment"""
     speaker: NotRequired[int]
     r"""Speaker index for the segment, present when the provider returns diarization data"""
+    speaker_label: NotRequired[str]
+    r"""Provider speaker label for the segment, present when the provider labels speakers with a string"""
     temperature: NotRequired[float]
     r"""Temperature used for the segment"""
     tokens: NotRequired[List[int]]
@@ -52,6 +56,9 @@ class STTSegment(BaseModel):
     avg_logprob: Optional[float] = None
     r"""Average log probability of the segment"""
 
+    channel: Optional[int] = None
+    r"""Zero-based audio channel index for the segment, present when the provider transcribes channels separately"""
+
     compression_ratio: Optional[float] = None
     r"""Compression ratio of the segment"""
 
@@ -64,6 +71,9 @@ class STTSegment(BaseModel):
     speaker: Optional[int] = None
     r"""Speaker index for the segment, present when the provider returns diarization data"""
 
+    speaker_label: Optional[str] = None
+    r"""Provider speaker label for the segment, present when the provider labels speakers with a string"""
+
     temperature: Optional[float] = None
     r"""Temperature used for the segment"""
 
@@ -75,10 +85,12 @@ class STTSegment(BaseModel):
         optional_fields = set(
             [
                 "avg_logprob",
+                "channel",
                 "compression_ratio",
                 "no_speech_prob",
                 "seek",
                 "speaker",
+                "speaker_label",
                 "temperature",
                 "tokens",
             ]

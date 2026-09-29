@@ -139,16 +139,24 @@ TimestampGranularities = Union[
 
 
 class CreateAudioTranscriptionsMultipartRequestBodyTypedDict(TypedDict):
-    file: CreateAudioTranscriptionsMultipartFileTypedDict
-    r"""The audio file to transcribe. The format is derived from the filename extension or the file part content type. Max 25 MB; send larger files as base64 JSON via input_audio."""
     model: str
     r"""The model to use for transcription."""
+    diarize: NotRequired[bool]
+    r"""Label each word with the speaker who said it (words[].speaker, words[].speaker_label). Requires response_format \"verbose_json\" (400 otherwise); word timestamps are included even when timestamp_granularities[] omits \"word\". Only supported by some providers; 400 when the selected model cannot diarize."""
+    file: NotRequired[CreateAudioTranscriptionsMultipartFileTypedDict]
+    r"""The audio file to transcribe. The format is derived from the filename extension or the file part content type. Max 25 MB; send larger files as base64 JSON via input_audio, or by URL via source_url. Exactly one of file or source_url is required."""
+    keyterms: NotRequired[List[str]]
+    r"""Domain terms, names, or phrases to bias recognition toward; repeat the part once per term (keyterms=... is also accepted). Only supported by some providers; 400 when the selected model cannot use keyterms."""
     language: NotRequired[str]
     r"""The language of the input audio (ISO-639-1)."""
+    provider: NotRequired[str]
+    r"""JSON-encoded provider preferences object, the same shape as the JSON body field: { \"options\": { \"<provider-slug>\": { ... } } }. Only options for the matched provider are forwarded. Must decode to a JSON object."""
     response_format: NotRequired[ResponseFormat]
     r"""The response format. \"json\" (default) returns { text, usage }; \"verbose_json\" additionally returns task, language, duration, and segment-level timestamps (OpenAI-compatible providers only)."""
     session_id: NotRequired[str]
     r"""A unique identifier for grouping related requests (e.g., a conversation or agent workflow). Used for observability grouping in Broadcast and private logging; never sent to the provider. If provided in both the request body and the x-session-id header, the body value takes precedence."""
+    source_url: NotRequired[str]
+    r"""Publicly reachable http(s) URL of the audio file, downloaded by the provider directly (no size limit on our side). The format is derived from the URL path extension. Only supported by some providers; exactly one of file or source_url is required."""
     temperature: NotRequired[float]
     r"""The sampling temperature."""
     timestamp_granularities: NotRequired[List[TimestampGranularities]]
@@ -160,17 +168,30 @@ class CreateAudioTranscriptionsMultipartRequestBodyTypedDict(TypedDict):
 
 
 class CreateAudioTranscriptionsMultipartRequestBody(BaseModel):
-    file: Annotated[
-        CreateAudioTranscriptionsMultipartFile,
-        FieldMetadata(multipart=MultipartFormMetadata(file=True)),
-    ]
-    r"""The audio file to transcribe. The format is derived from the filename extension or the file part content type. Max 25 MB; send larger files as base64 JSON via input_audio."""
-
     model: Annotated[str, FieldMetadata(multipart=True)]
     r"""The model to use for transcription."""
 
+    diarize: Annotated[Optional[bool], FieldMetadata(multipart=True)] = None
+    r"""Label each word with the speaker who said it (words[].speaker, words[].speaker_label). Requires response_format \"verbose_json\" (400 otherwise); word timestamps are included even when timestamp_granularities[] omits \"word\". Only supported by some providers; 400 when the selected model cannot diarize."""
+
+    file: Annotated[
+        Optional[CreateAudioTranscriptionsMultipartFile],
+        FieldMetadata(multipart=MultipartFormMetadata(file=True)),
+    ] = None
+    r"""The audio file to transcribe. The format is derived from the filename extension or the file part content type. Max 25 MB; send larger files as base64 JSON via input_audio, or by URL via source_url. Exactly one of file or source_url is required."""
+
+    keyterms: Annotated[
+        Optional[List[str]],
+        pydantic.Field(alias="keyterms[]"),
+        FieldMetadata(multipart=True),
+    ] = None
+    r"""Domain terms, names, or phrases to bias recognition toward; repeat the part once per term (keyterms=... is also accepted). Only supported by some providers; 400 when the selected model cannot use keyterms."""
+
     language: Annotated[Optional[str], FieldMetadata(multipart=True)] = None
     r"""The language of the input audio (ISO-639-1)."""
+
+    provider: Annotated[Optional[str], FieldMetadata(multipart=True)] = None
+    r"""JSON-encoded provider preferences object, the same shape as the JSON body field: { \"options\": { \"<provider-slug>\": { ... } } }. Only options for the matched provider are forwarded. Must decode to a JSON object."""
 
     response_format: Annotated[
         Optional[ResponseFormat], FieldMetadata(multipart=True)
@@ -179,6 +200,9 @@ class CreateAudioTranscriptionsMultipartRequestBody(BaseModel):
 
     session_id: Annotated[Optional[str], FieldMetadata(multipart=True)] = None
     r"""A unique identifier for grouping related requests (e.g., a conversation or agent workflow). Used for observability grouping in Broadcast and private logging; never sent to the provider. If provided in both the request body and the x-session-id header, the body value takes precedence."""
+
+    source_url: Annotated[Optional[str], FieldMetadata(multipart=True)] = None
+    r"""Publicly reachable http(s) URL of the audio file, downloaded by the provider directly (no size limit on our side). The format is derived from the URL path extension. Only supported by some providers; exactly one of file or source_url is required."""
 
     temperature: Annotated[Optional[float], FieldMetadata(multipart=True)] = None
     r"""The sampling temperature."""
@@ -200,9 +224,14 @@ class CreateAudioTranscriptionsMultipartRequestBody(BaseModel):
     def serialize_model(self, handler):
         optional_fields = set(
             [
+                "diarize",
+                "file",
+                "keyterms[]",
                 "language",
+                "provider",
                 "response_format",
                 "session_id",
+                "source_url",
                 "temperature",
                 "timestamp_granularities[]",
                 "trace",

@@ -20,6 +20,8 @@ class STT(BaseSDK):
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
+        diarize: Optional[bool] = None,
+        keyterms: Optional[Iterable[str]] = None,
         language: Optional[str] = None,
         provider: Optional[
             Union[components.STTRequestProvider, components.STTRequestProviderTypedDict]
@@ -41,9 +43,9 @@ class STT(BaseSDK):
     ) -> components.STTResponse:
         r"""Create transcription
 
-        Transcribes audio into text. Accepts base64-encoded audio input as JSON or an OpenAI-style multipart/form-data file upload, and returns the transcribed text.
+        Transcribes audio into text. Accepts base64-encoded audio input as JSON, an OpenAI-style multipart/form-data file upload, or a URL the provider downloads directly, and returns the transcribed text.
 
-        :param input_audio: Base64-encoded audio to transcribe
+        :param input_audio: Audio to transcribe: inline base64 bytes, or a URL the provider downloads directly.
         :param model: STT model identifier
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
@@ -52,6 +54,8 @@ class STT(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
+        :param diarize: Label each word with the speaker who said it. Speaker labels are returned on the words array (speaker, speaker_label), so response_format must be \"verbose_json\" (a \"json\" request is rejected with a 400) and word timestamps are included even when timestamp_granularities omits \"word\". Only supported by some providers; the request is rejected with a 400 when the selected model cannot diarize. Providers may charge extra.
+        :param keyterms: Domain terms, names, or phrases to bias recognition toward. Only supported by some providers; the request is rejected with a 400 when the selected model cannot use keyterms. Providers may cap the number of terms or characters per term and may charge extra.
         :param language: ISO-639-1 language code (e.g., \"en\", \"ja\"). Auto-detected if omitted.
         :param provider: Provider-specific passthrough configuration
         :param response_format: Output format. \"json\" (default) returns { text, usage }. \"verbose_json\" additionally returns task, language, duration, and segment-level timestamps; only supported by OpenAI-compatible providers.
@@ -80,9 +84,11 @@ class STT(BaseSDK):
             x_open_router_title=x_open_router_title,
             x_open_router_categories=x_open_router_categories,
             stt_request=components.STTRequest(
+                diarize=diarize,
                 input_audio=utils.get_pydantic_model(
                     input_audio, components.STTInputAudio
                 ),
+                keyterms=utils.unmarshal(keyterms, Optional[List[str]]),
                 language=language,
                 model=model,
                 provider=utils.get_pydantic_model(
@@ -243,6 +249,8 @@ class STT(BaseSDK):
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
+        diarize: Optional[bool] = None,
+        keyterms: Optional[Iterable[str]] = None,
         language: Optional[str] = None,
         provider: Optional[
             Union[components.STTRequestProvider, components.STTRequestProviderTypedDict]
@@ -264,9 +272,9 @@ class STT(BaseSDK):
     ) -> components.STTResponse:
         r"""Create transcription
 
-        Transcribes audio into text. Accepts base64-encoded audio input as JSON or an OpenAI-style multipart/form-data file upload, and returns the transcribed text.
+        Transcribes audio into text. Accepts base64-encoded audio input as JSON, an OpenAI-style multipart/form-data file upload, or a URL the provider downloads directly, and returns the transcribed text.
 
-        :param input_audio: Base64-encoded audio to transcribe
+        :param input_audio: Audio to transcribe: inline base64 bytes, or a URL the provider downloads directly.
         :param model: STT model identifier
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
@@ -275,6 +283,8 @@ class STT(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
+        :param diarize: Label each word with the speaker who said it. Speaker labels are returned on the words array (speaker, speaker_label), so response_format must be \"verbose_json\" (a \"json\" request is rejected with a 400) and word timestamps are included even when timestamp_granularities omits \"word\". Only supported by some providers; the request is rejected with a 400 when the selected model cannot diarize. Providers may charge extra.
+        :param keyterms: Domain terms, names, or phrases to bias recognition toward. Only supported by some providers; the request is rejected with a 400 when the selected model cannot use keyterms. Providers may cap the number of terms or characters per term and may charge extra.
         :param language: ISO-639-1 language code (e.g., \"en\", \"ja\"). Auto-detected if omitted.
         :param provider: Provider-specific passthrough configuration
         :param response_format: Output format. \"json\" (default) returns { text, usage }. \"verbose_json\" additionally returns task, language, duration, and segment-level timestamps; only supported by OpenAI-compatible providers.
@@ -303,9 +313,11 @@ class STT(BaseSDK):
             x_open_router_title=x_open_router_title,
             x_open_router_categories=x_open_router_categories,
             stt_request=components.STTRequest(
+                diarize=diarize,
                 input_audio=utils.get_pydantic_model(
                     input_audio, components.STTInputAudio
                 ),
+                keyterms=utils.unmarshal(keyterms, Optional[List[str]]),
                 language=language,
                 model=model,
                 provider=utils.get_pydantic_model(
@@ -461,17 +473,23 @@ class STT(BaseSDK):
     def create_transcription_multipart(
         self,
         *,
-        file: Union[
-            operations.CreateAudioTranscriptionsMultipartFile,
-            operations.CreateAudioTranscriptionsMultipartFileTypedDict,
-        ],
         model: str,
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
+        diarize: Optional[bool] = None,
+        file: Optional[
+            Union[
+                operations.CreateAudioTranscriptionsMultipartFile,
+                operations.CreateAudioTranscriptionsMultipartFileTypedDict,
+            ]
+        ] = None,
+        keyterms: Optional[Iterable[str]] = None,
         language: Optional[str] = None,
+        provider: Optional[str] = None,
         response_format: Optional[operations.ResponseFormat] = None,
         session_id: Optional[str] = None,
+        source_url: Optional[str] = None,
         temperature: Optional[float] = None,
         timestamp_granularities: Optional[
             Iterable[operations.TimestampGranularities]
@@ -485,9 +503,8 @@ class STT(BaseSDK):
     ) -> components.STTResponse:
         r"""Create transcription
 
-        Transcribes audio into text. Accepts base64-encoded audio input as JSON or an OpenAI-style multipart/form-data file upload, and returns the transcribed text.
+        Transcribes audio into text. Accepts base64-encoded audio input as JSON, an OpenAI-style multipart/form-data file upload, or a URL the provider downloads directly, and returns the transcribed text.
 
-        :param file: The audio file to transcribe. The format is derived from the filename extension or the file part content type. Max 25 MB; send larger files as base64 JSON via input_audio.
         :param model: The model to use for transcription.
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
@@ -496,9 +513,14 @@ class STT(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
+        :param diarize: Label each word with the speaker who said it (words[].speaker, words[].speaker_label). Requires response_format \"verbose_json\" (400 otherwise); word timestamps are included even when timestamp_granularities[] omits \"word\". Only supported by some providers; 400 when the selected model cannot diarize.
+        :param file: The audio file to transcribe. The format is derived from the filename extension or the file part content type. Max 25 MB; send larger files as base64 JSON via input_audio, or by URL via source_url. Exactly one of file or source_url is required.
+        :param keyterms: Domain terms, names, or phrases to bias recognition toward; repeat the part once per term (keyterms=... is also accepted). Only supported by some providers; 400 when the selected model cannot use keyterms.
         :param language: The language of the input audio (ISO-639-1).
+        :param provider: JSON-encoded provider preferences object, the same shape as the JSON body field: { \"options\": { \"<provider-slug>\": { ... } } }. Only options for the matched provider are forwarded. Must decode to a JSON object.
         :param response_format: The response format. \"json\" (default) returns { text, usage }; \"verbose_json\" additionally returns task, language, duration, and segment-level timestamps (OpenAI-compatible providers only).
         :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow). Used for observability grouping in Broadcast and private logging; never sent to the provider. If provided in both the request body and the x-session-id header, the body value takes precedence.
+        :param source_url: Publicly reachable http(s) URL of the audio file, downloaded by the provider directly (no size limit on our side). The format is derived from the URL path extension. Only supported by some providers; exactly one of file or source_url is required.
         :param temperature: The sampling temperature.
         :param timestamp_granularities: Timestamp detail levels to include when response_format is \"verbose_json\". \"word\" additionally returns word-level timestamps in the words array.
         :param trace: JSON-encoded trace metadata object (trace_id, trace_name, span_name, generation_name, parent_span_id and custom keys) attached to the Broadcast trace. Must decode to a JSON object.
@@ -523,13 +545,17 @@ class STT(BaseSDK):
             x_open_router_title=x_open_router_title,
             x_open_router_categories=x_open_router_categories,
             request_body=operations.CreateAudioTranscriptionsMultipartRequestBody(
+                diarize=diarize,
                 file=utils.get_pydantic_model(
-                    file, operations.CreateAudioTranscriptionsMultipartFile
+                    file, Optional[operations.CreateAudioTranscriptionsMultipartFile]
                 ),
+                keyterms=utils.unmarshal(keyterms, Optional[List[str]]),
                 language=language,
                 model=model,
+                provider=provider,
                 response_format=response_format,
                 session_id=session_id,
+                source_url=source_url,
                 temperature=temperature,
                 timestamp_granularities=utils.unmarshal(
                     timestamp_granularities,
@@ -682,17 +708,23 @@ class STT(BaseSDK):
     async def create_transcription_multipart_async(
         self,
         *,
-        file: Union[
-            operations.CreateAudioTranscriptionsMultipartFile,
-            operations.CreateAudioTranscriptionsMultipartFileTypedDict,
-        ],
         model: str,
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
+        diarize: Optional[bool] = None,
+        file: Optional[
+            Union[
+                operations.CreateAudioTranscriptionsMultipartFile,
+                operations.CreateAudioTranscriptionsMultipartFileTypedDict,
+            ]
+        ] = None,
+        keyterms: Optional[Iterable[str]] = None,
         language: Optional[str] = None,
+        provider: Optional[str] = None,
         response_format: Optional[operations.ResponseFormat] = None,
         session_id: Optional[str] = None,
+        source_url: Optional[str] = None,
         temperature: Optional[float] = None,
         timestamp_granularities: Optional[
             Iterable[operations.TimestampGranularities]
@@ -706,9 +738,8 @@ class STT(BaseSDK):
     ) -> components.STTResponse:
         r"""Create transcription
 
-        Transcribes audio into text. Accepts base64-encoded audio input as JSON or an OpenAI-style multipart/form-data file upload, and returns the transcribed text.
+        Transcribes audio into text. Accepts base64-encoded audio input as JSON, an OpenAI-style multipart/form-data file upload, or a URL the provider downloads directly, and returns the transcribed text.
 
-        :param file: The audio file to transcribe. The format is derived from the filename extension or the file part content type. Max 25 MB; send larger files as base64 JSON via input_audio.
         :param model: The model to use for transcription.
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
@@ -717,9 +748,14 @@ class STT(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
+        :param diarize: Label each word with the speaker who said it (words[].speaker, words[].speaker_label). Requires response_format \"verbose_json\" (400 otherwise); word timestamps are included even when timestamp_granularities[] omits \"word\". Only supported by some providers; 400 when the selected model cannot diarize.
+        :param file: The audio file to transcribe. The format is derived from the filename extension or the file part content type. Max 25 MB; send larger files as base64 JSON via input_audio, or by URL via source_url. Exactly one of file or source_url is required.
+        :param keyterms: Domain terms, names, or phrases to bias recognition toward; repeat the part once per term (keyterms=... is also accepted). Only supported by some providers; 400 when the selected model cannot use keyterms.
         :param language: The language of the input audio (ISO-639-1).
+        :param provider: JSON-encoded provider preferences object, the same shape as the JSON body field: { \"options\": { \"<provider-slug>\": { ... } } }. Only options for the matched provider are forwarded. Must decode to a JSON object.
         :param response_format: The response format. \"json\" (default) returns { text, usage }; \"verbose_json\" additionally returns task, language, duration, and segment-level timestamps (OpenAI-compatible providers only).
         :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow). Used for observability grouping in Broadcast and private logging; never sent to the provider. If provided in both the request body and the x-session-id header, the body value takes precedence.
+        :param source_url: Publicly reachable http(s) URL of the audio file, downloaded by the provider directly (no size limit on our side). The format is derived from the URL path extension. Only supported by some providers; exactly one of file or source_url is required.
         :param temperature: The sampling temperature.
         :param timestamp_granularities: Timestamp detail levels to include when response_format is \"verbose_json\". \"word\" additionally returns word-level timestamps in the words array.
         :param trace: JSON-encoded trace metadata object (trace_id, trace_name, span_name, generation_name, parent_span_id and custom keys) attached to the Broadcast trace. Must decode to a JSON object.
@@ -744,13 +780,17 @@ class STT(BaseSDK):
             x_open_router_title=x_open_router_title,
             x_open_router_categories=x_open_router_categories,
             request_body=operations.CreateAudioTranscriptionsMultipartRequestBody(
+                diarize=diarize,
                 file=utils.get_pydantic_model(
-                    file, operations.CreateAudioTranscriptionsMultipartFile
+                    file, Optional[operations.CreateAudioTranscriptionsMultipartFile]
                 ),
+                keyterms=utils.unmarshal(keyterms, Optional[List[str]]),
                 language=language,
                 model=model,
+                provider=provider,
                 response_format=response_format,
                 session_id=session_id,
+                source_url=source_url,
                 temperature=temperature,
                 timestamp_granularities=utils.unmarshal(
                     timestamp_granularities,

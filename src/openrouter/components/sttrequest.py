@@ -52,12 +52,16 @@ r"""Output format. \"json\" (default) returns { text, usage }. \"verbose_json\" 
 
 
 class STTRequestTypedDict(TypedDict):
-    r"""Speech-to-text request input. Accepts a JSON body with input_audio containing base64-encoded audio."""
+    r"""Speech-to-text request input. Accepts a JSON body with input_audio containing base64-encoded audio or a URL the provider downloads."""
 
     input_audio: STTInputAudioTypedDict
-    r"""Base64-encoded audio to transcribe"""
+    r"""Audio to transcribe: inline base64 bytes, or a URL the provider downloads directly."""
     model: str
     r"""STT model identifier"""
+    diarize: NotRequired[bool]
+    r"""Label each word with the speaker who said it. Speaker labels are returned on the words array (speaker, speaker_label), so response_format must be \"verbose_json\" (a \"json\" request is rejected with a 400) and word timestamps are included even when timestamp_granularities omits \"word\". Only supported by some providers; the request is rejected with a 400 when the selected model cannot diarize. Providers may charge extra."""
+    keyterms: NotRequired[List[str]]
+    r"""Domain terms, names, or phrases to bias recognition toward. Only supported by some providers; the request is rejected with a 400 when the selected model cannot use keyterms. Providers may cap the number of terms or characters per term and may charge extra."""
     language: NotRequired[str]
     r"""ISO-639-1 language code (e.g., \"en\", \"ja\"). Auto-detected if omitted."""
     provider: NotRequired[STTRequestProviderTypedDict]
@@ -77,13 +81,19 @@ class STTRequestTypedDict(TypedDict):
 
 
 class STTRequest(BaseModel):
-    r"""Speech-to-text request input. Accepts a JSON body with input_audio containing base64-encoded audio."""
+    r"""Speech-to-text request input. Accepts a JSON body with input_audio containing base64-encoded audio or a URL the provider downloads."""
 
     input_audio: STTInputAudio
-    r"""Base64-encoded audio to transcribe"""
+    r"""Audio to transcribe: inline base64 bytes, or a URL the provider downloads directly."""
 
     model: str
     r"""STT model identifier"""
+
+    diarize: Optional[bool] = None
+    r"""Label each word with the speaker who said it. Speaker labels are returned on the words array (speaker, speaker_label), so response_format must be \"verbose_json\" (a \"json\" request is rejected with a 400) and word timestamps are included even when timestamp_granularities omits \"word\". Only supported by some providers; the request is rejected with a 400 when the selected model cannot diarize. Providers may charge extra."""
+
+    keyterms: Optional[List[str]] = None
+    r"""Domain terms, names, or phrases to bias recognition toward. Only supported by some providers; the request is rejected with a 400 when the selected model cannot use keyterms. Providers may cap the number of terms or characters per term and may charge extra."""
 
     language: Optional[str] = None
     r"""ISO-639-1 language code (e.g., \"en\", \"ja\"). Auto-detected if omitted."""
@@ -113,6 +123,8 @@ class STTRequest(BaseModel):
     def serialize_model(self, handler):
         optional_fields = set(
             [
+                "diarize",
+                "keyterms",
                 "language",
                 "provider",
                 "response_format",
