@@ -161,6 +161,7 @@ RoutedServiceTier = Union[
     Literal[
         "flex",
         "priority",
+        "ultrafast",
     ],
     UnrecognizedStr,
 ]

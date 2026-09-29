@@ -7210,7 +7210,7 @@ components:
             - 'integer'
             - 'null'
         service_tier:
-          description: 'The service tier to use for processing this request. `fast` is accepted as an alias for `priority`.'
+          description: 'The service tier to use for processing this request. `fast` is accepted as an alias for `priority`. `ultrafast` prefers ultrafast endpoints and falls back to `priority`, then default endpoints.'
           enum:
             - 'auto'
             - 'default'
@@ -7218,6 +7218,7 @@ components:
             - 'flex'
             - 'priority'
             - 'scale'
+            - 'ultrafast'
             - null
           example: 'auto'
           type:
@@ -25841,6 +25842,7 @@ components:
           enum:
             - 'flex'
             - 'priority'
+            - 'ultrafast'
           example: 'priority'
           type: 'string'
           x-speakeasy-unknown-values: allow
@@ -27187,7 +27189,7 @@ components:
             - 'null'
         service_tier:
           default: 'auto'
-          description: 'The service tier to use for processing this request. `fast` is accepted as an alias for `priority`.'
+          description: 'The service tier to use for processing this request. `fast` is accepted as an alias for `priority`. `ultrafast` prefers ultrafast endpoints and falls back to `priority`, then default endpoints.'
           enum:
             - 'auto'
             - 'default'
@@ -27195,6 +27197,7 @@ components:
             - 'flex'
             - 'priority'
             - 'scale'
+            - 'ultrafast'
             - null
           type:
             - 'string'
@@ -27566,6 +27569,7 @@ components:
         - 'flex'
         - 'priority'
         - 'scale'
+        - 'ultrafast'
         - null
       example: 'default'
       type:
