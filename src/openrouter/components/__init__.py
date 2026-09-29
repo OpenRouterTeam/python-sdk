@@ -3809,9 +3809,9 @@ if TYPE_CHECKING:
     from .tokenexchangerequest import (
         GrantType,
         RequestedTokenType,
-        Scope,
         SubjectTokenType,
         TokenExchangeRequest,
+        TokenExchangeRequestScope,
         TokenExchangeRequestTypedDict,
     )
     from .tokenexchangeresponse import (
@@ -3965,6 +3965,15 @@ if TYPE_CHECKING:
     from .validateprivateendpointrequest import (
         ValidatePrivateEndpointRequest,
         ValidatePrivateEndpointRequestTypedDict,
+    )
+    from .vaulteffectivesecret import (
+        VaultEffectiveSecret,
+        VaultEffectiveSecretScope,
+        VaultEffectiveSecretTypedDict,
+    )
+    from .vaulteffectivesecretlistresponse import (
+        VaultEffectiveSecretListResponse,
+        VaultEffectiveSecretListResponseTypedDict,
     )
     from .vaultsecret import VaultSecret, VaultSecretTypedDict
     from .vaultsecretcopyrequest import (
@@ -6594,7 +6603,6 @@ __all__ = [
     "ScimSyncJob",
     "ScimSyncJobStatus",
     "ScimSyncJobTypedDict",
-    "Scope",
     "SearchContextSizeEnum",
     "SearchModelsServerToolConfig",
     "SearchModelsServerToolConfigTypedDict",
@@ -6777,6 +6785,7 @@ __all__ = [
     "ThinkingTypeDisabled",
     "ThinkingTypedDict",
     "TokenExchangeRequest",
+    "TokenExchangeRequestScope",
     "TokenExchangeRequestTypedDict",
     "TokenExchangeResponse",
     "TokenExchangeResponseTypedDict",
@@ -6996,6 +7005,11 @@ __all__ = [
     "ValidatePrivateEndpointRequestTypedDict",
     "Variables",
     "VariablesTypedDict",
+    "VaultEffectiveSecret",
+    "VaultEffectiveSecretListResponse",
+    "VaultEffectiveSecretListResponseTypedDict",
+    "VaultEffectiveSecretScope",
+    "VaultEffectiveSecretTypedDict",
     "VaultSecret",
     "VaultSecretCopyRequest",
     "VaultSecretCopyRequestTypedDict",
@@ -9876,9 +9890,9 @@ _dynamic_imports: dict[str, str] = {
     "Verbosity": ".textextendedconfig",
     "GrantType": ".tokenexchangerequest",
     "RequestedTokenType": ".tokenexchangerequest",
-    "Scope": ".tokenexchangerequest",
     "SubjectTokenType": ".tokenexchangerequest",
     "TokenExchangeRequest": ".tokenexchangerequest",
+    "TokenExchangeRequestScope": ".tokenexchangerequest",
     "TokenExchangeRequestTypedDict": ".tokenexchangerequest",
     "IssuedTokenType": ".tokenexchangeresponse",
     "TokenExchangeResponse": ".tokenexchangeresponse",
@@ -9978,6 +9992,11 @@ _dynamic_imports: dict[str, str] = {
     "URLCitationTypedDict": ".urlcitation",
     "ValidatePrivateEndpointRequest": ".validateprivateendpointrequest",
     "ValidatePrivateEndpointRequestTypedDict": ".validateprivateendpointrequest",
+    "VaultEffectiveSecret": ".vaulteffectivesecret",
+    "VaultEffectiveSecretScope": ".vaulteffectivesecret",
+    "VaultEffectiveSecretTypedDict": ".vaulteffectivesecret",
+    "VaultEffectiveSecretListResponse": ".vaulteffectivesecretlistresponse",
+    "VaultEffectiveSecretListResponseTypedDict": ".vaulteffectivesecretlistresponse",
     "VaultSecret": ".vaultsecret",
     "VaultSecretTypedDict": ".vaultsecret",
     "VaultSecretCopyRequest": ".vaultsecretcopyrequest",

@@ -763,6 +763,12 @@ if TYPE_CHECKING:
         ListImageModelsRequest,
         ListImageModelsRequestTypedDict,
     )
+    from .listinterneffectivevaultsecrets import (
+        ListInternEffectiveVaultSecretsGlobals,
+        ListInternEffectiveVaultSecretsGlobalsTypedDict,
+        ListInternEffectiveVaultSecretsRequest,
+        ListInternEffectiveVaultSecretsRequestTypedDict,
+    )
     from .listinterns import (
         ListInternsGlobals,
         ListInternsGlobalsTypedDict,
@@ -1633,6 +1639,10 @@ __all__ = [
     "ListImageModelsGlobalsTypedDict",
     "ListImageModelsRequest",
     "ListImageModelsRequestTypedDict",
+    "ListInternEffectiveVaultSecretsGlobals",
+    "ListInternEffectiveVaultSecretsGlobalsTypedDict",
+    "ListInternEffectiveVaultSecretsRequest",
+    "ListInternEffectiveVaultSecretsRequestTypedDict",
     "ListInternVaultSecretsGlobals",
     "ListInternVaultSecretsGlobalsTypedDict",
     "ListInternVaultSecretsRequest",
@@ -2466,6 +2476,10 @@ _dynamic_imports: dict[str, str] = {
     "ListImageModelsGlobalsTypedDict": ".listimagemodels",
     "ListImageModelsRequest": ".listimagemodels",
     "ListImageModelsRequestTypedDict": ".listimagemodels",
+    "ListInternEffectiveVaultSecretsGlobals": ".listinterneffectivevaultsecrets",
+    "ListInternEffectiveVaultSecretsGlobalsTypedDict": ".listinterneffectivevaultsecrets",
+    "ListInternEffectiveVaultSecretsRequest": ".listinterneffectivevaultsecrets",
+    "ListInternEffectiveVaultSecretsRequestTypedDict": ".listinterneffectivevaultsecrets",
     "ListInternsGlobals": ".listinterns",
     "ListInternsGlobalsTypedDict": ".listinterns",
     "ListInternsRequest": ".listinterns",

@@ -16,7 +16,7 @@ RequestedTokenType = Literal["urn:ietf:params:oauth:token-type:access_token",]
 r"""Optional; when present must be `urn:ietf:params:oauth:token-type:access_token`."""
 
 
-Scope = Literal["inference",]
+TokenExchangeRequestScope = Literal["inference",]
 r"""Optional; only `inference` is available."""
 
 
@@ -37,7 +37,7 @@ class TokenExchangeRequestTypedDict(TypedDict):
     r"""Must be `urn:ietf:params:oauth:token-type:jwt`."""
     requested_token_type: NotRequired[RequestedTokenType]
     r"""Optional; when present must be `urn:ietf:params:oauth:token-type:access_token`."""
-    scope: NotRequired[Scope]
+    scope: NotRequired[TokenExchangeRequestScope]
     r"""Optional; only `inference` is available."""
 
 
@@ -61,7 +61,9 @@ class TokenExchangeRequest(BaseModel):
     ] = None
     r"""Optional; when present must be `urn:ietf:params:oauth:token-type:access_token`."""
 
-    scope: Annotated[Optional[Scope], FieldMetadata(form=True)] = None
+    scope: Annotated[Optional[TokenExchangeRequestScope], FieldMetadata(form=True)] = (
+        None
+    )
     r"""Optional; only `inference` is available."""
 
     @model_serializer(mode="wrap")
