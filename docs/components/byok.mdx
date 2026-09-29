@@ -1,0 +1,23 @@
+---
+title: "BYOK"
+---
+
+Whether the engine needs the caller's own key, saved in plugin settings: `required` (OpenRouter holds none), `optional` (OpenRouter's key is used unless the caller saved one), or `none`
+
+## Example Usage
+
+```python
+from openrouter.components import BYOK
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
+value: BYOK = "required"
+```
+
+
+## Values
+
+This is an open enum. Unrecognized values will not fail type checks.
+
+- `"required"`
+- `"optional"`
+- `"none"`

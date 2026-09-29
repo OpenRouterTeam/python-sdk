@@ -31,7 +31,7 @@ APIType = Union[
 r"""Type of API used for the generation"""
 
 
-DataRegion = Union[
+GenerationResponseDataRegion = Union[
     Literal[
         "global",
         "europe",
@@ -55,7 +55,7 @@ class GenerationResponseDataTypedDict(TypedDict):
     r"""Whether the generation was cancelled"""
     created_at: str
     r"""ISO 8601 timestamp of when the generation was created"""
-    data_region: DataRegion
+    data_region: GenerationResponseDataRegion
     r"""The data region this generation was routed through: 'global', 'europe', or 'us'."""
     external_user: Nullable[str]
     r"""External user identifier"""
@@ -155,7 +155,7 @@ class GenerationResponseData(BaseModel):
     created_at: str
     r"""ISO 8601 timestamp of when the generation was created"""
 
-    data_region: DataRegion
+    data_region: GenerationResponseDataRegion
     r"""The data region this generation was routed through: 'global', 'europe', or 'us'."""
 
     external_user: Nullable[str]

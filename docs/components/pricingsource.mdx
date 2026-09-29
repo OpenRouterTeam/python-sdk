@@ -1,0 +1,24 @@
+---
+title: "PricingSource"
+---
+
+Who bills the engine's calls beyond the model's tokens: `openrouter` (the `pricing` rows, from the caller's credits), `provider` (a per-call tool fee from the model's provider on the inference call, at its own rates), `byok` (the engine's vendor, against the caller's own key), or `none` (no charge)
+
+## Example Usage
+
+```python
+from openrouter.components import PricingSource
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
+value: PricingSource = "openrouter"
+```
+
+
+## Values
+
+This is an open enum. Unrecognized values will not fail type checks.
+
+- `"openrouter"`
+- `"provider"`
+- `"byok"`
+- `"none"`

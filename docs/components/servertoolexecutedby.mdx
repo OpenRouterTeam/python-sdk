@@ -1,0 +1,23 @@
+---
+title: "ServerToolExecutedBy"
+---
+
+Who runs the tool call: the model provider during inference (`provider`), OpenRouter (`openrouter`), or the caller's application after the call is returned (`client`).
+
+## Example Usage
+
+```python
+from openrouter.components import ServerToolExecutedBy
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
+value: ServerToolExecutedBy = "provider"
+```
+
+
+## Values
+
+This is an open enum. Unrecognized values will not fail type checks.
+
+- `"provider"`
+- `"openrouter"`
+- `"client"`
