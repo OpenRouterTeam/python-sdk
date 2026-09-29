@@ -12,6 +12,354 @@ from typing import Any, Iterable, List, Mapping, Optional
 class Vault(BaseSDK):
     r"""Store host-bound secrets for a workspace or for one intern. Scope is selected by the API key. Responses return metadata only, never secret values. See https://openrouter.ai/docs/guides/ori/vault."""
 
+    def list_intern_effective_vault_secrets(
+        self,
+        *,
+        intern_id: str,
+        http_referer: Optional[str] = None,
+        x_open_router_title: Optional[str] = None,
+        x_open_router_categories: Optional[str] = None,
+        limit: Optional[int] = 100,
+        offset: Optional[int] = 0,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> components.VaultEffectiveSecretListResponse:
+        r"""List the secrets an intern receives
+
+        Lists, one entry per name, the secret the intern's outbound requests receive: its own secrets, secrets from an attached vault, and workspace secrets, including ones stored before workspace-scoped storage. Where several vaults hold a name, the entry is the one that wins, in the order intern, attached, workspace. The same resolution decides what outbound requests receive, so this list and the intern's requests agree. `scope` says which vault the entry comes from. Responses carry metadata only, never values. Results are ordered by name and paginated with `limit` and `offset`. Returns 404 when the intern's attached vault is no longer available, since the intern then receives no secrets. The scope is selected by the API key: workspace routes act on the key's active workspace and intern routes act on one intern inside that workspace. There is no default workspace and no fallback to another scope. Every vault route, including reads, requires access to the Intern API programme and returns 404 outside it. An intern's own API key is confined to that intern: it can always read the intern's secrets and effective secrets, writes to them follow the rules above, and every other intern and every workspace route answers 404. Requests on regional hostnames such as `eu.openrouter.ai` are refused. [API key](/docs/api-reference/authentication) required.
+
+        If set, this operation will use `api_key` from the global security.
+
+        :param intern_id: UUID of an intern in the workspace selected by the API key.
+        :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
+            This is used to track API usage per application.
+
+        :param x_open_router_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+        :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
+
+        :param limit: Page size, 1 to 100. Defaults to 100.
+        :param offset: Number of secrets to skip, 0 to 10000. Defaults to 0.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = operations.ListInternEffectiveVaultSecretsRequest(
+            http_referer=http_referer,
+            x_open_router_title=x_open_router_title,
+            x_open_router_categories=x_open_router_categories,
+            intern_id=intern_id,
+            limit=limit,
+            offset=offset,
+        )
+
+        req = self._build_request(
+            method="GET",
+            path="/vault/interns/{internId}/effective-secrets",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            _globals=operations.ListInternEffectiveVaultSecretsGlobals(
+                http_referer=self.sdk_configuration.globals.http_referer,
+                x_open_router_title=self.sdk_configuration.globals.x_open_router_title,
+                x_open_router_categories=self.sdk_configuration.globals.x_open_router_categories,
+            ),
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            allowed_fields=["api_key"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 60000, 1.5, 3600000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["5XX"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="listInternEffectiveVaultSecrets",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
+                tags=["Vault"],
+                extensions=None,
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(
+                components.VaultEffectiveSecretListResponse, http_res
+            )
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.BadRequestResponseErrorData, http_res
+            )
+            raise errors.BadRequestResponseError(response_data, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UnauthorizedResponseErrorData, http_res
+            )
+            raise errors.UnauthorizedResponseError(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ForbiddenResponseErrorData, http_res
+            )
+            raise errors.ForbiddenResponseError(response_data, http_res)
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.NotFoundResponseErrorData, http_res
+            )
+            raise errors.NotFoundResponseError(response_data, http_res)
+        if utils.match_response(http_res, "408", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.RequestTimeoutResponseErrorData, http_res
+            )
+            raise errors.RequestTimeoutResponseError(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.TooManyRequestsResponseErrorData, http_res
+            )
+            raise errors.TooManyRequestsResponseError(response_data, http_res)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.InternalServerResponseErrorData, http_res
+            )
+            raise errors.InternalServerResponseError(response_data, http_res)
+        if utils.match_response(http_res, "502", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.BadGatewayResponseErrorData, http_res
+            )
+            raise errors.BadGatewayResponseError(response_data, http_res)
+        if utils.match_response(http_res, "503", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ServiceUnavailableResponseErrorData, http_res
+            )
+            raise errors.ServiceUnavailableResponseError(response_data, http_res)
+        if utils.match_response(http_res, "504", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.GatewayTimeoutResponseErrorData, http_res
+            )
+            raise errors.GatewayTimeoutResponseError(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.OpenRouterDefaultError(
+                "API error occurred", http_res, http_res_text
+            )
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.OpenRouterDefaultError(
+                "API error occurred", http_res, http_res_text
+            )
+
+        raise errors.OpenRouterDefaultError("Unexpected response received", http_res)
+
+    async def list_intern_effective_vault_secrets_async(
+        self,
+        *,
+        intern_id: str,
+        http_referer: Optional[str] = None,
+        x_open_router_title: Optional[str] = None,
+        x_open_router_categories: Optional[str] = None,
+        limit: Optional[int] = 100,
+        offset: Optional[int] = 0,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> components.VaultEffectiveSecretListResponse:
+        r"""List the secrets an intern receives
+
+        Lists, one entry per name, the secret the intern's outbound requests receive: its own secrets, secrets from an attached vault, and workspace secrets, including ones stored before workspace-scoped storage. Where several vaults hold a name, the entry is the one that wins, in the order intern, attached, workspace. The same resolution decides what outbound requests receive, so this list and the intern's requests agree. `scope` says which vault the entry comes from. Responses carry metadata only, never values. Results are ordered by name and paginated with `limit` and `offset`. Returns 404 when the intern's attached vault is no longer available, since the intern then receives no secrets. The scope is selected by the API key: workspace routes act on the key's active workspace and intern routes act on one intern inside that workspace. There is no default workspace and no fallback to another scope. Every vault route, including reads, requires access to the Intern API programme and returns 404 outside it. An intern's own API key is confined to that intern: it can always read the intern's secrets and effective secrets, writes to them follow the rules above, and every other intern and every workspace route answers 404. Requests on regional hostnames such as `eu.openrouter.ai` are refused. [API key](/docs/api-reference/authentication) required.
+
+        If set, this operation will use `api_key` from the global security.
+
+        :param intern_id: UUID of an intern in the workspace selected by the API key.
+        :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
+            This is used to track API usage per application.
+
+        :param x_open_router_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+        :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
+
+        :param limit: Page size, 1 to 100. Defaults to 100.
+        :param offset: Number of secrets to skip, 0 to 10000. Defaults to 0.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = operations.ListInternEffectiveVaultSecretsRequest(
+            http_referer=http_referer,
+            x_open_router_title=x_open_router_title,
+            x_open_router_categories=x_open_router_categories,
+            intern_id=intern_id,
+            limit=limit,
+            offset=offset,
+        )
+
+        req = self._build_request_async(
+            method="GET",
+            path="/vault/interns/{internId}/effective-secrets",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            _globals=operations.ListInternEffectiveVaultSecretsGlobals(
+                http_referer=self.sdk_configuration.globals.http_referer,
+                x_open_router_title=self.sdk_configuration.globals.x_open_router_title,
+                x_open_router_categories=self.sdk_configuration.globals.x_open_router_categories,
+            ),
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            allowed_fields=["api_key"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 60000, 1.5, 3600000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["5XX"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="listInternEffectiveVaultSecrets",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
+                tags=["Vault"],
+                extensions=None,
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(
+                components.VaultEffectiveSecretListResponse, http_res
+            )
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.BadRequestResponseErrorData, http_res
+            )
+            raise errors.BadRequestResponseError(response_data, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UnauthorizedResponseErrorData, http_res
+            )
+            raise errors.UnauthorizedResponseError(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ForbiddenResponseErrorData, http_res
+            )
+            raise errors.ForbiddenResponseError(response_data, http_res)
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.NotFoundResponseErrorData, http_res
+            )
+            raise errors.NotFoundResponseError(response_data, http_res)
+        if utils.match_response(http_res, "408", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.RequestTimeoutResponseErrorData, http_res
+            )
+            raise errors.RequestTimeoutResponseError(response_data, http_res)
+        if utils.match_response(http_res, "429", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.TooManyRequestsResponseErrorData, http_res
+            )
+            raise errors.TooManyRequestsResponseError(response_data, http_res)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.InternalServerResponseErrorData, http_res
+            )
+            raise errors.InternalServerResponseError(response_data, http_res)
+        if utils.match_response(http_res, "502", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.BadGatewayResponseErrorData, http_res
+            )
+            raise errors.BadGatewayResponseError(response_data, http_res)
+        if utils.match_response(http_res, "503", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ServiceUnavailableResponseErrorData, http_res
+            )
+            raise errors.ServiceUnavailableResponseError(response_data, http_res)
+        if utils.match_response(http_res, "504", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.GatewayTimeoutResponseErrorData, http_res
+            )
+            raise errors.GatewayTimeoutResponseError(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.OpenRouterDefaultError(
+                "API error occurred", http_res, http_res_text
+            )
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.OpenRouterDefaultError(
+                "API error occurred", http_res, http_res_text
+            )
+
+        raise errors.OpenRouterDefaultError("Unexpected response received", http_res)
+
     def list_intern_vault_secrets(
         self,
         *,
@@ -28,7 +376,7 @@ class Vault(BaseSDK):
     ) -> components.VaultSecretListResponse:
         r"""List intern secrets
 
-        Lists secret metadata stored for one intern. Responses contain names, bound hosts, fingerprints and creation times, never secret values. Results are ordered by name and paginated with `limit` and `offset`. The scope is selected by the API key: workspace routes act on the key's active workspace and intern routes act on one intern inside that workspace. There is no default workspace and no fallback to another scope. Every vault route, including reads, requires access to the Intern API programme and returns 404 outside it. Requests on regional hostnames such as `eu.openrouter.ai` are refused. [API key](/docs/api-reference/authentication) required.
+        Lists secret metadata stored for one intern. The list includes secrets stored from the dashboard or at provisioning before workspace-scoped storage; where both exist under one name, the one stored through this API is listed. Those older secrets cannot be deleted or copied through this API, and storing the same name through this API replaces them. Responses contain names, bound hosts, fingerprints and creation times, never secret values. Results are ordered by name and paginated with `limit` and `offset`. The scope is selected by the API key: workspace routes act on the key's active workspace and intern routes act on one intern inside that workspace. There is no default workspace and no fallback to another scope. Every vault route, including reads, requires access to the Intern API programme and returns 404 outside it. An intern's own API key is confined to that intern: it can always read the intern's secrets and effective secrets, writes to them follow the rules above, and every other intern and every workspace route answers 404. Requests on regional hostnames such as `eu.openrouter.ai` are refused. [API key](/docs/api-reference/authentication) required.
 
         If set, this operation will use `api_key` from the global security.
 
@@ -200,7 +548,7 @@ class Vault(BaseSDK):
     ) -> components.VaultSecretListResponse:
         r"""List intern secrets
 
-        Lists secret metadata stored for one intern. Responses contain names, bound hosts, fingerprints and creation times, never secret values. Results are ordered by name and paginated with `limit` and `offset`. The scope is selected by the API key: workspace routes act on the key's active workspace and intern routes act on one intern inside that workspace. There is no default workspace and no fallback to another scope. Every vault route, including reads, requires access to the Intern API programme and returns 404 outside it. Requests on regional hostnames such as `eu.openrouter.ai` are refused. [API key](/docs/api-reference/authentication) required.
+        Lists secret metadata stored for one intern. The list includes secrets stored from the dashboard or at provisioning before workspace-scoped storage; where both exist under one name, the one stored through this API is listed. Those older secrets cannot be deleted or copied through this API, and storing the same name through this API replaces them. Responses contain names, bound hosts, fingerprints and creation times, never secret values. Results are ordered by name and paginated with `limit` and `offset`. The scope is selected by the API key: workspace routes act on the key's active workspace and intern routes act on one intern inside that workspace. There is no default workspace and no fallback to another scope. Every vault route, including reads, requires access to the Intern API programme and returns 404 outside it. An intern's own API key is confined to that intern: it can always read the intern's secrets and effective secrets, writes to them follow the rules above, and every other intern and every workspace route answers 404. Requests on regional hostnames such as `eu.openrouter.ai` are refused. [API key](/docs/api-reference/authentication) required.
 
         If set, this operation will use `api_key` from the global security.
 
@@ -371,7 +719,7 @@ class Vault(BaseSDK):
     ):
         r"""Delete an intern secret
 
-        Deletes a secret stored for one intern. Returns 204 with no body on success and 404 when the secret does not exist in the selected scope. Writes return 503 while vault writes are disabled for the caller. The scope is selected by the API key: workspace routes act on the key's active workspace and intern routes act on one intern inside that workspace. There is no default workspace and no fallback to another scope. Every vault route, including reads, requires access to the Intern API programme and returns 404 outside it. Requests on regional hostnames such as `eu.openrouter.ai` are refused. [API key](/docs/api-reference/authentication) required.
+        Deletes a secret stored for one intern. Returns 204 with no body on success and 404 when the secret does not exist in the selected scope. Writes return 503 while vault writes are disabled for the caller. The scope is selected by the API key: workspace routes act on the key's active workspace and intern routes act on one intern inside that workspace. There is no default workspace and no fallback to another scope. Every vault route, including reads, requires access to the Intern API programme and returns 404 outside it. An intern's own API key is confined to that intern: it can always read the intern's secrets and effective secrets, writes to them follow the rules above, and every other intern and every workspace route answers 404. Requests on regional hostnames such as `eu.openrouter.ai` are refused. [API key](/docs/api-reference/authentication) required.
 
         If set, this operation will use `api_key` from the global security.
 
@@ -540,7 +888,7 @@ class Vault(BaseSDK):
     ):
         r"""Delete an intern secret
 
-        Deletes a secret stored for one intern. Returns 204 with no body on success and 404 when the secret does not exist in the selected scope. Writes return 503 while vault writes are disabled for the caller. The scope is selected by the API key: workspace routes act on the key's active workspace and intern routes act on one intern inside that workspace. There is no default workspace and no fallback to another scope. Every vault route, including reads, requires access to the Intern API programme and returns 404 outside it. Requests on regional hostnames such as `eu.openrouter.ai` are refused. [API key](/docs/api-reference/authentication) required.
+        Deletes a secret stored for one intern. Returns 204 with no body on success and 404 when the secret does not exist in the selected scope. Writes return 503 while vault writes are disabled for the caller. The scope is selected by the API key: workspace routes act on the key's active workspace and intern routes act on one intern inside that workspace. There is no default workspace and no fallback to another scope. Every vault route, including reads, requires access to the Intern API programme and returns 404 outside it. An intern's own API key is confined to that intern: it can always read the intern's secrets and effective secrets, writes to them follow the rules above, and every other intern and every workspace route answers 404. Requests on regional hostnames such as `eu.openrouter.ai` are refused. [API key](/docs/api-reference/authentication) required.
 
         If set, this operation will use `api_key` from the global security.
 
@@ -711,7 +1059,7 @@ class Vault(BaseSDK):
     ) -> components.VaultSecretResponse:
         r"""Store an intern secret
 
-        Creates or replaces a secret stored for one intern. The value is encrypted at rest and released only to the exact hostnames in `hosts`. The response carries metadata only. Writes return 503 while vault writes are disabled for the caller. The scope is selected by the API key: workspace routes act on the key's active workspace and intern routes act on one intern inside that workspace. There is no default workspace and no fallback to another scope. Every vault route, including reads, requires access to the Intern API programme and returns 404 outside it. Requests on regional hostnames such as `eu.openrouter.ai` are refused. [API key](/docs/api-reference/authentication) required.
+        Creates or replaces a secret stored for one intern. The value is encrypted at rest and released only to the exact hostnames in `hosts`. The response carries metadata only. Writes return 503 while vault writes are disabled for the caller. The scope is selected by the API key: workspace routes act on the key's active workspace and intern routes act on one intern inside that workspace. There is no default workspace and no fallback to another scope. Every vault route, including reads, requires access to the Intern API programme and returns 404 outside it. An intern's own API key is confined to that intern: it can always read the intern's secrets and effective secrets, writes to them follow the rules above, and every other intern and every workspace route answers 404. Requests on regional hostnames such as `eu.openrouter.ai` are refused. [API key](/docs/api-reference/authentication) required.
 
         If set, this operation will use `api_key` from the global security.
 
@@ -905,7 +1253,7 @@ class Vault(BaseSDK):
     ) -> components.VaultSecretResponse:
         r"""Store an intern secret
 
-        Creates or replaces a secret stored for one intern. The value is encrypted at rest and released only to the exact hostnames in `hosts`. The response carries metadata only. Writes return 503 while vault writes are disabled for the caller. The scope is selected by the API key: workspace routes act on the key's active workspace and intern routes act on one intern inside that workspace. There is no default workspace and no fallback to another scope. Every vault route, including reads, requires access to the Intern API programme and returns 404 outside it. Requests on regional hostnames such as `eu.openrouter.ai` are refused. [API key](/docs/api-reference/authentication) required.
+        Creates or replaces a secret stored for one intern. The value is encrypted at rest and released only to the exact hostnames in `hosts`. The response carries metadata only. Writes return 503 while vault writes are disabled for the caller. The scope is selected by the API key: workspace routes act on the key's active workspace and intern routes act on one intern inside that workspace. There is no default workspace and no fallback to another scope. Every vault route, including reads, requires access to the Intern API programme and returns 404 outside it. An intern's own API key is confined to that intern: it can always read the intern's secrets and effective secrets, writes to them follow the rules above, and every other intern and every workspace route answers 404. Requests on regional hostnames such as `eu.openrouter.ai` are refused. [API key](/docs/api-reference/authentication) required.
 
         If set, this operation will use `api_key` from the global security.
 
@@ -1097,7 +1445,7 @@ class Vault(BaseSDK):
     ) -> components.VaultSecretCopyResponse:
         r"""Copy workspace secrets to an intern
 
-        Copies the named workspace secrets into one intern's scope, replacing any intern secret with the same name. Each copy keeps the source value and host bindings. Every name must exist in the workspace scope or the request fails with 404 and nothing is copied. A workspace secret whose `hosts` is `null` cannot be copied: the request fails with 409 and nothing is copied until that secret is stored again with hosts. The response carries metadata only. Writes return 503 while vault writes are disabled for the caller. The scope is selected by the API key: workspace routes act on the key's active workspace and intern routes act on one intern inside that workspace. There is no default workspace and no fallback to another scope. Every vault route, including reads, requires access to the Intern API programme and returns 404 outside it. Requests on regional hostnames such as `eu.openrouter.ai` are refused. [API key](/docs/api-reference/authentication) required.
+        Copies the named workspace secrets into one intern's scope, replacing any intern secret with the same name. Each copy keeps the source value and host bindings. Every name must exist in the workspace scope or the request fails with 404 and nothing is copied. A workspace secret whose `hosts` is `null` cannot be copied: the request fails with 409 and nothing is copied until that secret is stored again with hosts. The response carries metadata only. Writes return 503 while vault writes are disabled for the caller. The scope is selected by the API key: workspace routes act on the key's active workspace and intern routes act on one intern inside that workspace. There is no default workspace and no fallback to another scope. Every vault route, including reads, requires access to the Intern API programme and returns 404 outside it. An intern's own API key is confined to that intern: it can always read the intern's secrets and effective secrets, writes to them follow the rules above, and every other intern and every workspace route answers 404. Requests on regional hostnames such as `eu.openrouter.ai` are refused. [API key](/docs/api-reference/authentication) required.
 
         If set, this operation will use `api_key` from the global security.
 
@@ -1285,7 +1633,7 @@ class Vault(BaseSDK):
     ) -> components.VaultSecretCopyResponse:
         r"""Copy workspace secrets to an intern
 
-        Copies the named workspace secrets into one intern's scope, replacing any intern secret with the same name. Each copy keeps the source value and host bindings. Every name must exist in the workspace scope or the request fails with 404 and nothing is copied. A workspace secret whose `hosts` is `null` cannot be copied: the request fails with 409 and nothing is copied until that secret is stored again with hosts. The response carries metadata only. Writes return 503 while vault writes are disabled for the caller. The scope is selected by the API key: workspace routes act on the key's active workspace and intern routes act on one intern inside that workspace. There is no default workspace and no fallback to another scope. Every vault route, including reads, requires access to the Intern API programme and returns 404 outside it. Requests on regional hostnames such as `eu.openrouter.ai` are refused. [API key](/docs/api-reference/authentication) required.
+        Copies the named workspace secrets into one intern's scope, replacing any intern secret with the same name. Each copy keeps the source value and host bindings. Every name must exist in the workspace scope or the request fails with 404 and nothing is copied. A workspace secret whose `hosts` is `null` cannot be copied: the request fails with 409 and nothing is copied until that secret is stored again with hosts. The response carries metadata only. Writes return 503 while vault writes are disabled for the caller. The scope is selected by the API key: workspace routes act on the key's active workspace and intern routes act on one intern inside that workspace. There is no default workspace and no fallback to another scope. Every vault route, including reads, requires access to the Intern API programme and returns 404 outside it. An intern's own API key is confined to that intern: it can always read the intern's secrets and effective secrets, writes to them follow the rules above, and every other intern and every workspace route answers 404. Requests on regional hostnames such as `eu.openrouter.ai` are refused. [API key](/docs/api-reference/authentication) required.
 
         If set, this operation will use `api_key` from the global security.
 
@@ -1473,7 +1821,7 @@ class Vault(BaseSDK):
     ) -> components.VaultSecretListResponse:
         r"""List workspace secrets
 
-        Lists secret metadata for the workspace of the authenticated API key. Responses contain names, bound hosts, fingerprints and creation times, never secret values. Results are ordered by name and paginated with `limit` and `offset`. The scope is selected by the API key: workspace routes act on the key's active workspace and intern routes act on one intern inside that workspace. There is no default workspace and no fallback to another scope. Every vault route, including reads, requires access to the Intern API programme and returns 404 outside it. Requests on regional hostnames such as `eu.openrouter.ai` are refused. [API key](/docs/api-reference/authentication) required.
+        Lists secret metadata for the workspace of the authenticated API key. The list includes secrets stored from the dashboard or at provisioning before workspace-scoped storage; where both exist under one name, the one stored through this API is listed. Those older secrets cannot be deleted or copied through this API, and storing the same name through this API replaces them. Responses contain names, bound hosts, fingerprints and creation times, never secret values. Results are ordered by name and paginated with `limit` and `offset`. The scope is selected by the API key: workspace routes act on the key's active workspace and intern routes act on one intern inside that workspace. There is no default workspace and no fallback to another scope. Every vault route, including reads, requires access to the Intern API programme and returns 404 outside it. An intern's own API key is confined to that intern: it can always read the intern's secrets and effective secrets, writes to them follow the rules above, and every other intern and every workspace route answers 404. Requests on regional hostnames such as `eu.openrouter.ai` are refused. [API key](/docs/api-reference/authentication) required.
 
         If set, this operation will use `api_key` from the global security.
 
@@ -1642,7 +1990,7 @@ class Vault(BaseSDK):
     ) -> components.VaultSecretListResponse:
         r"""List workspace secrets
 
-        Lists secret metadata for the workspace of the authenticated API key. Responses contain names, bound hosts, fingerprints and creation times, never secret values. Results are ordered by name and paginated with `limit` and `offset`. The scope is selected by the API key: workspace routes act on the key's active workspace and intern routes act on one intern inside that workspace. There is no default workspace and no fallback to another scope. Every vault route, including reads, requires access to the Intern API programme and returns 404 outside it. Requests on regional hostnames such as `eu.openrouter.ai` are refused. [API key](/docs/api-reference/authentication) required.
+        Lists secret metadata for the workspace of the authenticated API key. The list includes secrets stored from the dashboard or at provisioning before workspace-scoped storage; where both exist under one name, the one stored through this API is listed. Those older secrets cannot be deleted or copied through this API, and storing the same name through this API replaces them. Responses contain names, bound hosts, fingerprints and creation times, never secret values. Results are ordered by name and paginated with `limit` and `offset`. The scope is selected by the API key: workspace routes act on the key's active workspace and intern routes act on one intern inside that workspace. There is no default workspace and no fallback to another scope. Every vault route, including reads, requires access to the Intern API programme and returns 404 outside it. An intern's own API key is confined to that intern: it can always read the intern's secrets and effective secrets, writes to them follow the rules above, and every other intern and every workspace route answers 404. Requests on regional hostnames such as `eu.openrouter.ai` are refused. [API key](/docs/api-reference/authentication) required.
 
         If set, this operation will use `api_key` from the global security.
 
@@ -1810,7 +2158,7 @@ class Vault(BaseSDK):
     ):
         r"""Delete a workspace secret
 
-        Deletes a secret from the workspace of the authenticated API key. Returns 204 with no body on success and 404 when the secret does not exist in the selected scope. Writes return 503 while vault writes are disabled for the caller. The scope is selected by the API key: workspace routes act on the key's active workspace and intern routes act on one intern inside that workspace. There is no default workspace and no fallback to another scope. Every vault route, including reads, requires access to the Intern API programme and returns 404 outside it. Requests on regional hostnames such as `eu.openrouter.ai` are refused. [API key](/docs/api-reference/authentication) required.
+        Deletes a secret from the workspace of the authenticated API key. Returns 204 with no body on success and 404 when the secret does not exist in the selected scope. Writes return 503 while vault writes are disabled for the caller. The scope is selected by the API key: workspace routes act on the key's active workspace and intern routes act on one intern inside that workspace. There is no default workspace and no fallback to another scope. Every vault route, including reads, requires access to the Intern API programme and returns 404 outside it. An intern's own API key is confined to that intern: it can always read the intern's secrets and effective secrets, writes to them follow the rules above, and every other intern and every workspace route answers 404. Requests on regional hostnames such as `eu.openrouter.ai` are refused. [API key](/docs/api-reference/authentication) required.
 
         If set, this operation will use `api_key` from the global security.
 
@@ -1976,7 +2324,7 @@ class Vault(BaseSDK):
     ):
         r"""Delete a workspace secret
 
-        Deletes a secret from the workspace of the authenticated API key. Returns 204 with no body on success and 404 when the secret does not exist in the selected scope. Writes return 503 while vault writes are disabled for the caller. The scope is selected by the API key: workspace routes act on the key's active workspace and intern routes act on one intern inside that workspace. There is no default workspace and no fallback to another scope. Every vault route, including reads, requires access to the Intern API programme and returns 404 outside it. Requests on regional hostnames such as `eu.openrouter.ai` are refused. [API key](/docs/api-reference/authentication) required.
+        Deletes a secret from the workspace of the authenticated API key. Returns 204 with no body on success and 404 when the secret does not exist in the selected scope. Writes return 503 while vault writes are disabled for the caller. The scope is selected by the API key: workspace routes act on the key's active workspace and intern routes act on one intern inside that workspace. There is no default workspace and no fallback to another scope. Every vault route, including reads, requires access to the Intern API programme and returns 404 outside it. An intern's own API key is confined to that intern: it can always read the intern's secrets and effective secrets, writes to them follow the rules above, and every other intern and every workspace route answers 404. Requests on regional hostnames such as `eu.openrouter.ai` are refused. [API key](/docs/api-reference/authentication) required.
 
         If set, this operation will use `api_key` from the global security.
 
@@ -2144,7 +2492,7 @@ class Vault(BaseSDK):
     ) -> components.VaultSecretResponse:
         r"""Store a workspace secret
 
-        Creates or replaces a secret in the workspace of the authenticated API key. The value is encrypted at rest and released only to the exact hostnames in `hosts`. The response carries metadata only. Writes return 503 while vault writes are disabled for the caller. The scope is selected by the API key: workspace routes act on the key's active workspace and intern routes act on one intern inside that workspace. There is no default workspace and no fallback to another scope. Every vault route, including reads, requires access to the Intern API programme and returns 404 outside it. Requests on regional hostnames such as `eu.openrouter.ai` are refused. [API key](/docs/api-reference/authentication) required.
+        Creates or replaces a secret in the workspace of the authenticated API key. The value is encrypted at rest and released only to the exact hostnames in `hosts`. The response carries metadata only. Writes return 503 while vault writes are disabled for the caller. The scope is selected by the API key: workspace routes act on the key's active workspace and intern routes act on one intern inside that workspace. There is no default workspace and no fallback to another scope. Every vault route, including reads, requires access to the Intern API programme and returns 404 outside it. An intern's own API key is confined to that intern: it can always read the intern's secrets and effective secrets, writes to them follow the rules above, and every other intern and every workspace route answers 404. Requests on regional hostnames such as `eu.openrouter.ai` are refused. [API key](/docs/api-reference/authentication) required.
 
         If set, this operation will use `api_key` from the global security.
 
@@ -2330,7 +2678,7 @@ class Vault(BaseSDK):
     ) -> components.VaultSecretResponse:
         r"""Store a workspace secret
 
-        Creates or replaces a secret in the workspace of the authenticated API key. The value is encrypted at rest and released only to the exact hostnames in `hosts`. The response carries metadata only. Writes return 503 while vault writes are disabled for the caller. The scope is selected by the API key: workspace routes act on the key's active workspace and intern routes act on one intern inside that workspace. There is no default workspace and no fallback to another scope. Every vault route, including reads, requires access to the Intern API programme and returns 404 outside it. Requests on regional hostnames such as `eu.openrouter.ai` are refused. [API key](/docs/api-reference/authentication) required.
+        Creates or replaces a secret in the workspace of the authenticated API key. The value is encrypted at rest and released only to the exact hostnames in `hosts`. The response carries metadata only. Writes return 503 while vault writes are disabled for the caller. The scope is selected by the API key: workspace routes act on the key's active workspace and intern routes act on one intern inside that workspace. There is no default workspace and no fallback to another scope. Every vault route, including reads, requires access to the Intern API programme and returns 404 outside it. An intern's own API key is confined to that intern: it can always read the intern's secrets and effective secrets, writes to them follow the rules above, and every other intern and every workspace route answers 404. Requests on regional hostnames such as `eu.openrouter.ai` are refused. [API key](/docs/api-reference/authentication) required.
 
         If set, this operation will use `api_key` from the global security.
 
