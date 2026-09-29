@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c48cf606-fb42-4a45-9c23-8f0555307828
 management:
-  docChecksum: 157312c7b959a008c5b97a61e81d7b20
+  docChecksum: 4b995c3ae9d0d0264f71a9ed6e1dbe4e
   docVersion: 1.0.0
   speakeasyVersion: 1.787.0
   generationVersion: 2.914.0
-  releaseVersion: 1.3.4
-  configChecksum: 6d3458d3bc1f63c5197abbbfacd0f546
+  releaseVersion: 1.3.5
+  configChecksum: b2ad70554941d940596d8806b84a3e06
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
 persistentEdits:
-  generation_id: be106d32-4d4e-479e-ad07-e4aa0101c6fe
-  pristine_commit_hash: 587fb5041b57f27cf7d4ea2a19dcbdcadc2cc1c6
-  pristine_tree_hash: 37f7a2488d3b606ef14892f02dad55c0152eef43
+  generation_id: 5ca86c1a-0e74-4c00-9ef7-8a296de5d7a6
+  pristine_commit_hash: 9f828376ba0a862a7bb45adfddb62e8e6cb82154
+  pristine_tree_hash: d044ff5478833490d5ee26ead314cea5763041ef
 features:
   python:
     acceptHeaders: 3.0.0
@@ -3956,8 +3956,8 @@ trackedFiles:
     pristine_git_object: 74c61e5f750e2df770862017b6b406065398ca9e
   docs/components/jevrouterplugin.mdx:
     id: 258aa7058bc5
-    last_write_checksum: sha1:772786a50c96e16cfef4665a03f707e67ff26e7c
-    pristine_git_object: 332536f6765995a19ef9bc591a127eb8c1382049
+    last_write_checksum: sha1:45f1965d11b2f7bf53d372bbb484a0c9593aaf5f
+    pristine_git_object: d28aba8cbf9d4b8ec5d5fa09e14af97217b3b443
   docs/components/jevrouterpluginid.mdx:
     id: 30d920f53cde
     last_write_checksum: sha1:dfc1a3a7d9011c2a15b475b51eaf48ad78856ff3
@@ -9464,8 +9464,8 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:c2a0293505cf4856714ceb9dda1b3c8f44bd0e4d
-    pristine_git_object: dd8635e88fdd50fd837dc3eeb6a1712e871ccf98
+    last_write_checksum: sha1:c605659c8eb3c334251d12b44a34c888d1b440ff
+    pristine_git_object: df47bedc608b76a01be2c40c8d4c1c00b4052ac8
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77f44b60b98bc126557ec27391f91dfba764bb54
@@ -9492,8 +9492,8 @@ trackedFiles:
     pristine_git_object: 86713cfea633e09d33b3d4e65281071fe20e6137
   src/openrouter/_version.py:
     id: d8d15ad6c586
-    last_write_checksum: sha1:0560b44e32f6b1672056251e8ff85512d7d09594
-    pristine_git_object: 85647b680d04b750ec7ad5ba355d2db5731c5a92
+    last_write_checksum: sha1:bcd746841358a883683aaee5218212a4a643f4e0
+    pristine_git_object: f99b6685971cc9b713494bc45236782fbef88d9c
   src/openrouter/alpha.py:
     id: 306c4d93308d
     last_write_checksum: sha1:30f55a360f41376ab194b9ea725fe4e001a5ae1a
@@ -11232,8 +11232,8 @@ trackedFiles:
     pristine_git_object: b5a0bc16faa52f26d293eea18183e4d0b0bbb901
   src/openrouter/components/jevrouterplugin.py:
     id: fcb6e65e2e08
-    last_write_checksum: sha1:b616dfe462102792dd944877e043ba99e498bb3f
-    pristine_git_object: 6d55aa0ebee46e71aead739ad1a65f337d387c0c
+    last_write_checksum: sha1:95a6e53a9a1a6a9b46591c2e247ae3972e76d920
+    pristine_git_object: 1ec82feebee87c8dfb05890b74de47d817ab847d
   src/openrouter/components/keyassignment.py:
     id: 07a64362e7fd
     last_write_checksum: sha1:4b47a6f1ab4992ec81d7236ca28dbf94d3a4fbaf
@@ -17378,4 +17378,4 @@ examples:
         "504":
           application/json: {"error": {"code": 504, "message": "Vault request timed out"}}
 examplesVersion: 1.0.2
-releaseNotes: "## Python SDK Changes:\n* `open_router.chat.send()`: \n  *  `request.plugins[].union(jev-router)` **Added**\n* `open_router.presets.create_presets_chat_completions()`: \n  *  `request.plugins[].union(jev-router)` **Added**\n* `open_router.presets.create_presets_messages()`: \n  *  `request.plugins[].union(jev-router)` **Added**\n* `open_router.presets.create_presets_responses()`: \n  *  `request.plugins[].union(jev-router)` **Added**\n* `open_router.responses.send()`: \n  *  `request.plugins[].union(jev-router)` **Added**\n* `open_router.beta.responses.send()`: \n  *  `request.plugins[].union(jev-router)` **Added**\n"
+releaseNotes: "## Python SDK Changes:\n* `open_router.chat.send()`: \n  *  `request.plugins[].union(jev-router).allowed_models` **Added**\n* `open_router.presets.create_presets_chat_completions()`: \n  *  `request.plugins[].union(jev-router).allowed_models` **Added**\n* `open_router.presets.create_presets_messages()`: \n  *  `request.plugins[].union(jev-router).allowed_models` **Added**\n* `open_router.presets.create_presets_responses()`: \n  *  `request.plugins[].union(jev-router).allowed_models` **Added**\n* `open_router.responses.send()`: \n  *  `request.plugins[].union(jev-router).allowed_models` **Added**\n* `open_router.beta.responses.send()`: \n  *  `request.plugins[].union(jev-router).allowed_models` **Added**\n"

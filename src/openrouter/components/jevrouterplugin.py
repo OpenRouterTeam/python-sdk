@@ -12,24 +12,29 @@ JevRouterPluginID = Literal["jev-router",]
 
 class JevRouterPluginTypedDict(TypedDict):
     id: JevRouterPluginID
+    allowed_models: NotRequired[List[str]]
+    r"""Alias of `models`, matching the auto-router field name. Entries from both fields are combined."""
     excluded_models: NotRequired[List[str]]
-    r"""Remove these models from the router. Each entry is a model slug or a wildcard pattern (e.g. \"xiaomi/*\"). Up to 1024 patterns, each at most 1024 characters, with 65536 total characters across all patterns. Applied after `models`, so an excluded pattern always wins over an included one; excluding every pool model fails the request with 404 rather than routing to an excluded model."""
+    r"""Remove these models from the router. Each entry is a model slug or a wildcard pattern (e.g. \"xiaomi/*\"). A `~author/family-latest` alias matches every revision of that family. Up to 1024 patterns, each at most 1024 characters, with 65536 total characters across all patterns. Applied after `models`, so an excluded pattern always wins over an included one; when the lists leave no model the request can use, it fails with 404 rather than routing outside them."""
     models: NotRequired[List[str]]
-    r"""Restrict the router to these models. Each entry is a model slug or a wildcard pattern (e.g. \"anthropic/*\"), matched against the current pool; models outside the pool are ignored. Up to 1024 patterns, each at most 1024 characters, with 65536 total characters across all patterns. When omitted or empty, every model in the pool is a candidate; when no pool model matches, the list is ignored and the whole pool is used (`excluded_models` still apply)."""
+    r"""Restrict the router to these models. Each entry is a model slug or a wildcard pattern (e.g. \"anthropic/*\"), matched against the current pool; models outside the pool are ignored. A `~author/family-latest` alias matches every revision of that family. Up to 1024 patterns, each at most 1024 characters, with 65536 total characters across all patterns. When omitted or empty, every model in the pool is a candidate; when no pool model matches, the list is ignored and the whole pool is used (`excluded_models` still apply). `allowed_models` is an alias; entries from both fields are combined."""
 
 
 class JevRouterPlugin(BaseModel):
     id: JevRouterPluginID
 
+    allowed_models: Optional[List[str]] = None
+    r"""Alias of `models`, matching the auto-router field name. Entries from both fields are combined."""
+
     excluded_models: Optional[List[str]] = None
-    r"""Remove these models from the router. Each entry is a model slug or a wildcard pattern (e.g. \"xiaomi/*\"). Up to 1024 patterns, each at most 1024 characters, with 65536 total characters across all patterns. Applied after `models`, so an excluded pattern always wins over an included one; excluding every pool model fails the request with 404 rather than routing to an excluded model."""
+    r"""Remove these models from the router. Each entry is a model slug or a wildcard pattern (e.g. \"xiaomi/*\"). A `~author/family-latest` alias matches every revision of that family. Up to 1024 patterns, each at most 1024 characters, with 65536 total characters across all patterns. Applied after `models`, so an excluded pattern always wins over an included one; when the lists leave no model the request can use, it fails with 404 rather than routing outside them."""
 
     models: Optional[List[str]] = None
-    r"""Restrict the router to these models. Each entry is a model slug or a wildcard pattern (e.g. \"anthropic/*\"), matched against the current pool; models outside the pool are ignored. Up to 1024 patterns, each at most 1024 characters, with 65536 total characters across all patterns. When omitted or empty, every model in the pool is a candidate; when no pool model matches, the list is ignored and the whole pool is used (`excluded_models` still apply)."""
+    r"""Restrict the router to these models. Each entry is a model slug or a wildcard pattern (e.g. \"anthropic/*\"), matched against the current pool; models outside the pool are ignored. A `~author/family-latest` alias matches every revision of that family. Up to 1024 patterns, each at most 1024 characters, with 65536 total characters across all patterns. When omitted or empty, every model in the pool is a candidate; when no pool model matches, the list is ignored and the whole pool is used (`excluded_models` still apply). `allowed_models` is an alias; entries from both fields are combined."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["excluded_models", "models"])
+        optional_fields = set(["allowed_models", "excluded_models", "models"])
         serialized = handler(self)
         m = {}
 
