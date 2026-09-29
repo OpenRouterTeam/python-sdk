@@ -48,6 +48,7 @@ from .imagegenerationservertool_openrouter import (
     ImageGenerationServerToolOpenRouterTypedDict,
 )
 from .inputs_union import InputsUnion, InputsUnionTypedDict
+from .jevrouterplugin import JevRouterPlugin, JevRouterPluginTypedDict
 from .legacy_websearchservertool import (
     LegacyWebSearchServerTool,
     LegacyWebSearchServerToolTypedDict,
@@ -135,6 +136,7 @@ ResponsesRequestPluginTypedDict = TypeAliasType(
         SwitchyardRouterPluginTypedDict,
         FileParserPluginTypedDict,
         ContextCompressionPluginTypedDict,
+        JevRouterPluginTypedDict,
         WebFetchPluginTypedDict,
         ParetoRouterPluginTypedDict,
         AutoBetaRouterPluginTypedDict,
@@ -152,6 +154,7 @@ ResponsesRequestPlugin = Annotated[
         Annotated[ContextCompressionPlugin, Tag("context-compression")],
         Annotated[FileParserPlugin, Tag("file-parser")],
         Annotated[FusionPlugin, Tag("fusion")],
+        Annotated[JevRouterPlugin, Tag("jev-router")],
         Annotated[ModerationPlugin, Tag("moderation")],
         Annotated[ParetoRouterPlugin, Tag("pareto-router")],
         Annotated[ResponseHealingPlugin, Tag("response-healing")],

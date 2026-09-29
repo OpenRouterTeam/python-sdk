@@ -59,6 +59,7 @@ from .imagegenerationservertool_openrouter import (
     ImageGenerationServerToolOpenRouter,
     ImageGenerationServerToolOpenRouterTypedDict,
 )
+from .jevrouterplugin import JevRouterPlugin, JevRouterPluginTypedDict
 from .messagesfallbackparam import MessagesFallbackParam, MessagesFallbackParamTypedDict
 from .messagesmessageparam import MessagesMessageParam, MessagesMessageParamTypedDict
 from .messagesoutputconfig import MessagesOutputConfig, MessagesOutputConfigTypedDict
@@ -378,6 +379,7 @@ MessagesRequestPluginTypedDict = TypeAliasType(
         SwitchyardRouterPluginTypedDict,
         FileParserPluginTypedDict,
         ContextCompressionPluginTypedDict,
+        JevRouterPluginTypedDict,
         WebFetchPluginTypedDict,
         ParetoRouterPluginTypedDict,
         AutoBetaRouterPluginTypedDict,
@@ -395,6 +397,7 @@ MessagesRequestPlugin = Annotated[
         Annotated[ContextCompressionPlugin, Tag("context-compression")],
         Annotated[FileParserPlugin, Tag("file-parser")],
         Annotated[FusionPlugin, Tag("fusion")],
+        Annotated[JevRouterPlugin, Tag("jev-router")],
         Annotated[ModerationPlugin, Tag("moderation")],
         Annotated[ParetoRouterPlugin, Tag("pareto-router")],
         Annotated[ResponseHealingPlugin, Tag("response-healing")],

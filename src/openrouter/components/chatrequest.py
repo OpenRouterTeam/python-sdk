@@ -37,6 +37,7 @@ from .contextcompressionplugin import (
 from .fileparserplugin import FileParserPlugin, FileParserPluginTypedDict
 from .fusionplugin import FusionPlugin, FusionPluginTypedDict
 from .imageconfig import ImageConfig, ImageConfigTypedDict
+from .jevrouterplugin import JevRouterPlugin, JevRouterPluginTypedDict
 from .moderationplugin import ModerationPlugin, ModerationPluginTypedDict
 from .paretorouterplugin import ParetoRouterPlugin, ParetoRouterPluginTypedDict
 from .prediction import Prediction, PredictionTypedDict
@@ -86,6 +87,7 @@ ChatRequestPluginTypedDict = TypeAliasType(
         SwitchyardRouterPluginTypedDict,
         FileParserPluginTypedDict,
         ContextCompressionPluginTypedDict,
+        JevRouterPluginTypedDict,
         WebFetchPluginTypedDict,
         ParetoRouterPluginTypedDict,
         AutoBetaRouterPluginTypedDict,
@@ -103,6 +105,7 @@ ChatRequestPlugin = Annotated[
         Annotated[ContextCompressionPlugin, Tag("context-compression")],
         Annotated[FileParserPlugin, Tag("file-parser")],
         Annotated[FusionPlugin, Tag("fusion")],
+        Annotated[JevRouterPlugin, Tag("jev-router")],
         Annotated[ModerationPlugin, Tag("moderation")],
         Annotated[ParetoRouterPlugin, Tag("pareto-router")],
         Annotated[ResponseHealingPlugin, Tag("response-healing")],
