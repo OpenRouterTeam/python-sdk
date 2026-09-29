@@ -1029,7 +1029,9 @@ class Batch(BaseSDK):
                 errors.BatchPaymentRequiredResponseErrorData, http_res
             )
             raise errors.BatchPaymentRequiredResponseError(response_data, http_res)
-        if utils.match_response(http_res, ["401", "404", "429"], "application/json"):
+        if utils.match_response(
+            http_res, ["401", "404", "410", "429"], "application/json"
+        ):
             response_data = unmarshal_json_response(
                 errors.BatchErrorResponseData, http_res
             )
@@ -1157,7 +1159,9 @@ class Batch(BaseSDK):
                 errors.BatchPaymentRequiredResponseErrorData, http_res
             )
             raise errors.BatchPaymentRequiredResponseError(response_data, http_res)
-        if utils.match_response(http_res, ["401", "404", "429"], "application/json"):
+        if utils.match_response(
+            http_res, ["401", "404", "410", "429"], "application/json"
+        ):
             response_data = unmarshal_json_response(
                 errors.BatchErrorResponseData, http_res
             )
