@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c48cf606-fb42-4a45-9c23-8f0555307828
 management:
-  docChecksum: 3dfbbc516fcd4f5af7d4444fc707f4a0
+  docChecksum: 157312c7b959a008c5b97a61e81d7b20
   docVersion: 1.0.0
   speakeasyVersion: 1.787.0
   generationVersion: 2.914.0
-  releaseVersion: 1.3.3
-  configChecksum: 96722859d244c41fff7e97c2d850ef5a
+  releaseVersion: 1.3.4
+  configChecksum: 6d3458d3bc1f63c5197abbbfacd0f546
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
 persistentEdits:
-  generation_id: 238eeb4e-1de5-4da0-bf88-48ebda54c506
-  pristine_commit_hash: 63231bb192e7d72aee3d28b1cf9e78eae6c1087e
-  pristine_tree_hash: 60835084ca22d26b5994989d72c24d0713e7fc50
+  generation_id: be106d32-4d4e-479e-ad07-e4aa0101c6fe
+  pristine_commit_hash: 587fb5041b57f27cf7d4ea2a19dcbdcadc2cc1c6
+  pristine_tree_hash: 37f7a2488d3b606ef14892f02dad55c0152eef43
 features:
   python:
     acceptHeaders: 3.0.0
@@ -1804,8 +1804,8 @@ trackedFiles:
     pristine_git_object: 643c118fe458c24cdaeca90edceadf1c7d1c9cc2
   docs/components/chatrequestplugin.mdx:
     id: 157782a43de6
-    last_write_checksum: sha1:8facf5484222cfa6e7f233fae26bd9dd3bdb5904
-    pristine_git_object: d49c7382f84afd7c312cc3b6db4ceefd4172f3f3
+    last_write_checksum: sha1:b7d5ba44a376c4bbd992a181a970def51d62bc36
+    pristine_git_object: 22dc3e6784760feb79c1c5e0c255d8c52c5c7dba
   docs/components/chatrequestreasoning.mdx:
     id: 8f0176992b3e
     last_write_checksum: sha1:84576cd6513f125955685c7bdfe315ef886160eb
@@ -3954,6 +3954,14 @@ trackedFiles:
     id: 4a97a0028d93
     last_write_checksum: sha1:a80dda1fb6cc098102c643649ac1fac2c9df4bb9
     pristine_git_object: 74c61e5f750e2df770862017b6b406065398ca9e
+  docs/components/jevrouterplugin.mdx:
+    id: 258aa7058bc5
+    last_write_checksum: sha1:772786a50c96e16cfef4665a03f707e67ff26e7c
+    pristine_git_object: 332536f6765995a19ef9bc591a127eb8c1382049
+  docs/components/jevrouterpluginid.mdx:
+    id: 30d920f53cde
+    last_write_checksum: sha1:dfc1a3a7d9011c2a15b475b51eaf48ad78856ff3
+    pristine_git_object: 5eb47c20b3849e3ad7d3ae15a2c999b30285e509
   docs/components/keep.mdx:
     id: c3da64331e76
     last_write_checksum: sha1:f58b4b0416619717f16b37897c0cfe19bdac2362
@@ -4316,8 +4324,8 @@ trackedFiles:
     pristine_git_object: fb2a55630750a5c10fe509403c6d95cbfa8373c5
   docs/components/messagesrequestplugin.mdx:
     id: 45918e4b5c26
-    last_write_checksum: sha1:dc624f813cd9245dfe038b63dd436f000e4f6cd6
-    pristine_git_object: f5c917a2f183599ae190138bca6bb2a46871ef07
+    last_write_checksum: sha1:f328f8077bc6db2baa5bd20a6cce630ec0703c64
+    pristine_git_object: 240da49cf68e7bb365767193999525e37905902c
   docs/components/messagesrequesttool.mdx:
     id: f9dc5aede7ad
     last_write_checksum: sha1:dfa67d1bcd58e5743ba4bcd14d50bb1f5d2b836c
@@ -6204,8 +6212,8 @@ trackedFiles:
     pristine_git_object: 61e284e3ec7cc02541b74e533300ba8072cc0e6c
   docs/components/responsesrequestplugin.mdx:
     id: 4d550c41c85f
-    last_write_checksum: sha1:3f77f77765d7a5bcc3375e90d8c0a26512268ae3
-    pristine_git_object: 7637e58f87f910ea410f981718295c20d79b6e51
+    last_write_checksum: sha1:6b8983d000776727ef4ae1b8f878c5116c983255
+    pristine_git_object: 70990bd403bd20926c3c8202fd61e6ea6268eff0
   docs/components/responsesrequestservicetier.mdx:
     id: 5000ee5983ff
     last_write_checksum: sha1:3b17d5eb36a9a41d84fd38fc7478d9368975438a
@@ -9456,8 +9464,8 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:578ab8b48f8c511ad6785a9ff61a39ba4acff610
-    pristine_git_object: a94d517e1b84972de76b090b37585fb80e5c8318
+    last_write_checksum: sha1:c2a0293505cf4856714ceb9dda1b3c8f44bd0e4d
+    pristine_git_object: dd8635e88fdd50fd837dc3eeb6a1712e871ccf98
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77f44b60b98bc126557ec27391f91dfba764bb54
@@ -9484,8 +9492,8 @@ trackedFiles:
     pristine_git_object: 86713cfea633e09d33b3d4e65281071fe20e6137
   src/openrouter/_version.py:
     id: d8d15ad6c586
-    last_write_checksum: sha1:3903cafc0528515e036d3a9967f0729fa2479613
-    pristine_git_object: 65c46806afb993ee9cd58f78b4930c67cfb4ab74
+    last_write_checksum: sha1:0560b44e32f6b1672056251e8ff85512d7d09594
+    pristine_git_object: 85647b680d04b750ec7ad5ba355d2db5731c5a92
   src/openrouter/alpha.py:
     id: 306c4d93308d
     last_write_checksum: sha1:30f55a360f41376ab194b9ea725fe4e001a5ae1a
@@ -9532,8 +9540,8 @@ trackedFiles:
     pristine_git_object: ad3d247954547814054c01989a2dff3d12b3e4e1
   src/openrouter/components/__init__.py:
     id: 81754e97b3f4
-    last_write_checksum: sha1:66cb742b924019f5a71034b5f35c82417460032a
-    pristine_git_object: 5c3c0093a18643a99523be50e960a0d0dddbd754
+    last_write_checksum: sha1:87da07af0941e246f7369f761ef79dd407c934a2
+    pristine_git_object: 26f2d3ddf7feb78661aa36786af1c39a08c92098
   src/openrouter/components/aabenchmarkentry.py:
     id: e2e0f0b48c82
     last_write_checksum: sha1:fab4d9a24d2cea937bb749d46c5f83941e99d65c
@@ -10292,8 +10300,8 @@ trackedFiles:
     pristine_git_object: 8bbde153b53887e426989fd5b0486b6dc1122810
   src/openrouter/components/chatrequest.py:
     id: 5e39eaefa9cf
-    last_write_checksum: sha1:408b2e83158d3991c8df9efd13232f768609c1f0
-    pristine_git_object: f5cd7c3b431837bc96a5000e0ba403df659854ec
+    last_write_checksum: sha1:a6cac9daba13ffa180d87cc64aa53de0d411b4aa
+    pristine_git_object: 416e26207d90de151047ce101a9d6ad49c6d44e9
   src/openrouter/components/chatresult.py:
     id: 9062fe2935fe
     last_write_checksum: sha1:2ff1963c54e7e79500115c8549c8d395f4e336d1
@@ -11222,6 +11230,10 @@ trackedFiles:
     id: d3c42b5f11fb
     last_write_checksum: sha1:25fd74f1c34307a97931e1d2c138a1db347218ad
     pristine_git_object: b5a0bc16faa52f26d293eea18183e4d0b0bbb901
+  src/openrouter/components/jevrouterplugin.py:
+    id: fcb6e65e2e08
+    last_write_checksum: sha1:b616dfe462102792dd944877e043ba99e498bb3f
+    pristine_git_object: 6d55aa0ebee46e71aead739ad1a65f337d387c0c
   src/openrouter/components/keyassignment.py:
     id: 07a64362e7fd
     last_write_checksum: sha1:4b47a6f1ab4992ec81d7236ca28dbf94d3a4fbaf
@@ -11372,8 +11384,8 @@ trackedFiles:
     pristine_git_object: 7e69d1f775baece5f94b03d35bcd884d5e6f519d
   src/openrouter/components/messagesrequest.py:
     id: 72b1f339024d
-    last_write_checksum: sha1:bc002830b658a7215f6dbf67967f35be24a5efc6
-    pristine_git_object: 21aeffb2da5b1f0104aa7804b8105cf1f8381740
+    last_write_checksum: sha1:03a0d52a9d9c5dae3f9f58d4d6b1b0cc68423b16
+    pristine_git_object: 56976fb6055ade7dce6b574d221ad7471e1aea60
   src/openrouter/components/messagessearchmodelsservertool.py:
     id: 53d755edb120
     last_write_checksum: sha1:389786fc22ba4bb47b0a086b7aa321f2f04fe943
@@ -12128,8 +12140,8 @@ trackedFiles:
     pristine_git_object: 1364b9bd6384600f0f59afbe181eb0e940f686eb
   src/openrouter/components/responsesrequest.py:
     id: 8c850080ec5d
-    last_write_checksum: sha1:8831ff3cb82f6fa3b0eaba2f51ea83122ec707e2
-    pristine_git_object: 3bfc1035bf54b256022b27826b757467b4ba2583
+    last_write_checksum: sha1:28de0d1f80241721fe79a381e4d80cc421ba827d
+    pristine_git_object: e5665b8c7ac98d857160688ea5abeccffb359c39
   src/openrouter/components/responsesstreamingresponse.py:
     id: 142379f3bd90
     last_write_checksum: sha1:a48d6f3610f5d15248ef4d25a0d88a0a4a1a9db7
@@ -17366,6 +17378,4 @@ examples:
         "504":
           application/json: {"error": {"code": 504, "message": "Vault request timed out"}}
 examplesVersion: 1.0.2
-releaseNotes: |
-  ## Python SDK Changes:
-  * `open_router.batch.get_batches()`:  `error.status[410]` **Added**
+releaseNotes: "## Python SDK Changes:\n* `open_router.chat.send()`: \n  *  `request.plugins[].union(jev-router)` **Added**\n* `open_router.presets.create_presets_chat_completions()`: \n  *  `request.plugins[].union(jev-router)` **Added**\n* `open_router.presets.create_presets_messages()`: \n  *  `request.plugins[].union(jev-router)` **Added**\n* `open_router.presets.create_presets_responses()`: \n  *  `request.plugins[].union(jev-router)` **Added**\n* `open_router.responses.send()`: \n  *  `request.plugins[].union(jev-router)` **Added**\n* `open_router.beta.responses.send()`: \n  *  `request.plugins[].union(jev-router)` **Added**\n"

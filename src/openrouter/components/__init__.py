@@ -2214,6 +2214,11 @@ if TYPE_CHECKING:
         ItemReferenceItemType,
         ItemReferenceItemTypedDict,
     )
+    from .jevrouterplugin import (
+        JevRouterPlugin,
+        JevRouterPluginID,
+        JevRouterPluginTypedDict,
+    )
     from .keyassignment import KeyAssignment, KeyAssignmentTypedDict
     from .legacy_chatcontentvideo import (
         LegacyChatContentVideo,
@@ -5673,6 +5678,9 @@ __all__ = [
     "ItemReferenceItem",
     "ItemReferenceItemType",
     "ItemReferenceItemTypedDict",
+    "JevRouterPlugin",
+    "JevRouterPluginID",
+    "JevRouterPluginTypedDict",
     "Keep",
     "KeepAll",
     "KeepAllTypedDict",
@@ -8688,6 +8696,9 @@ _dynamic_imports: dict[str, str] = {
     "ItemReferenceItem": ".itemreferenceitem",
     "ItemReferenceItemType": ".itemreferenceitem",
     "ItemReferenceItemTypedDict": ".itemreferenceitem",
+    "JevRouterPlugin": ".jevrouterplugin",
+    "JevRouterPluginID": ".jevrouterplugin",
+    "JevRouterPluginTypedDict": ".jevrouterplugin",
     "KeyAssignment": ".keyassignment",
     "KeyAssignmentTypedDict": ".keyassignment",
     "LegacyChatContentVideo": ".legacy_chatcontentvideo",
