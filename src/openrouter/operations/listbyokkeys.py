@@ -121,6 +121,7 @@ Provider = Union[
         "deepseek",
         "dekallm",
         "digitalocean",
+        "elevenlabs",
         "featherless",
         "fireworks",
         "fish-audio",

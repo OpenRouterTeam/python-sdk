@@ -3733,6 +3733,8 @@ if TYPE_CHECKING:
         StreamLogprobTopLogprob,
         StreamLogprobTopLogprobTypedDict,
     )
+    from .sttentity import STTEntity, STTEntityTypedDict
+    from .sttinlineinputaudio import STTInlineInputAudio, STTInlineInputAudioTypedDict
     from .sttinputaudio import STTInputAudio, STTInputAudioTypedDict
     from .sttrequest import (
         STTRequest,
@@ -3744,8 +3746,9 @@ if TYPE_CHECKING:
     from .sttresponse import STTResponse, STTResponseTypedDict
     from .sttsegment import STTSegment, STTSegmentTypedDict
     from .stttimestampgranularity import STTTimestampGranularity
+    from .stturlinputaudio import STTURLInputAudio, STTURLInputAudioTypedDict
     from .sttusage import STTUsage, STTUsageTypedDict
-    from .sttword import STTWord, STTWordTypedDict
+    from .sttword import STTWord, STTWordType, STTWordTypedDict
     from .subagentnestedtool import SubagentNestedTool, SubagentNestedToolTypedDict
     from .subagentreasoning import (
         SubagentReasoning,
@@ -6586,6 +6589,10 @@ __all__ = [
     "Rule",
     "RuleTypedDict",
     "STT",
+    "STTEntity",
+    "STTEntityTypedDict",
+    "STTInlineInputAudio",
+    "STTInlineInputAudioTypedDict",
     "STTInputAudio",
     "STTInputAudioTypedDict",
     "STTRequest",
@@ -6599,9 +6606,12 @@ __all__ = [
     "STTSegmentTypedDict",
     "STTTimestampGranularity",
     "STTTypedDict",
+    "STTURLInputAudio",
+    "STTURLInputAudioTypedDict",
     "STTUsage",
     "STTUsageTypedDict",
     "STTWord",
+    "STTWordType",
     "STTWordTypedDict",
     "ScimGroup",
     "ScimGroupMapping",
@@ -9841,6 +9851,10 @@ _dynamic_imports: dict[str, str] = {
     "StreamLogprobTypedDict": ".streamlogprob",
     "StreamLogprobTopLogprob": ".streamlogprobtoplogprob",
     "StreamLogprobTopLogprobTypedDict": ".streamlogprobtoplogprob",
+    "STTEntity": ".sttentity",
+    "STTEntityTypedDict": ".sttentity",
+    "STTInlineInputAudio": ".sttinlineinputaudio",
+    "STTInlineInputAudioTypedDict": ".sttinlineinputaudio",
     "STTInputAudio": ".sttinputaudio",
     "STTInputAudioTypedDict": ".sttinputaudio",
     "STTRequest": ".sttrequest",
@@ -9853,9 +9867,12 @@ _dynamic_imports: dict[str, str] = {
     "STTSegment": ".sttsegment",
     "STTSegmentTypedDict": ".sttsegment",
     "STTTimestampGranularity": ".stttimestampgranularity",
+    "STTURLInputAudio": ".stturlinputaudio",
+    "STTURLInputAudioTypedDict": ".stturlinputaudio",
     "STTUsage": ".sttusage",
     "STTUsageTypedDict": ".sttusage",
     "STTWord": ".sttword",
+    "STTWordType": ".sttword",
     "STTWordTypedDict": ".sttword",
     "SubagentNestedTool": ".subagentnestedtool",
     "SubagentNestedToolTypedDict": ".subagentnestedtool",
