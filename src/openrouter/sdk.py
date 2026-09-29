@@ -47,6 +47,7 @@ if TYPE_CHECKING:
     from openrouter.scim import Scim
     from openrouter.stt import STT
     from openrouter.systemone import SystemOne
+    from openrouter.tools import Tools
     from openrouter.tts import TTS
     from openrouter.vault import Vault
     from openrouter.video_generation import VideoGeneration
@@ -119,6 +120,8 @@ class OpenRouter(BaseSDK):
     r"""Management endpoints for SCIM group-to-workspace mappings, authenticated with a management key. These are not the SCIM 2.0 connector endpoints for your identity provider. In your identity provider, enter the SCIM endpoint URL shown when you enable provisioning under Settings > Members > SCIM Mappings. See https://openrouter.ai/docs/guides/features/scim-mappings#set-up-provisioning."""
     system_one: "SystemOne"
     r"""System One endpoints for models such as Jev, compatible with the TypeSafe SDKs. See https://openrouter.ai/docs/guides/community/typesafe-sdk."""
+    tools: "Tools"
+    r"""The catalog of server tools OpenRouter runs on behalf of a model: accepted `tools[].type` spellings per API format, engines and pricing, and which endpoints run each tool natively. See https://openrouter.ai/docs/guides/features/server-tools."""
     vault: "Vault"
     r"""Store host-bound secrets for a workspace or for one intern. Scope is selected by the API key. Responses return metadata only, never secret values. See https://openrouter.ai/docs/guides/ori/vault."""
     video_generation: "VideoGeneration"
@@ -158,6 +161,7 @@ class OpenRouter(BaseSDK):
         "beta": ("openrouter.beta", "Beta"),
         "scim": ("openrouter.scim", "Scim"),
         "system_one": ("openrouter.systemone", "SystemOne"),
+        "tools": ("openrouter.tools", "Tools"),
         "vault": ("openrouter.vault", "Vault"),
         "video_generation": ("openrouter.video_generation", "VideoGeneration"),
         "workspaces": ("openrouter.workspaces", "Workspaces"),
