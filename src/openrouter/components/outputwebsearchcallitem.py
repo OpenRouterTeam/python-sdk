@@ -19,33 +19,33 @@ from typing import Any, Dict, List, Literal, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
-TypeFindInPage = Literal["find_in_page",]
+OutputWebSearchCallItemTypeFindInPage = Literal["find_in_page",]
 
 
-class ActionFindInPageTypedDict(TypedDict):
+class OutputWebSearchCallItemActionFindInPageTypedDict(TypedDict):
     pattern: str
-    type: TypeFindInPage
+    type: OutputWebSearchCallItemTypeFindInPage
     url: str
 
 
-class ActionFindInPage(BaseModel):
+class OutputWebSearchCallItemActionFindInPage(BaseModel):
     pattern: str
 
-    type: TypeFindInPage
+    type: OutputWebSearchCallItemTypeFindInPage
 
     url: str
 
 
-TypeOpenPage = Literal["open_page",]
+OutputWebSearchCallItemTypeOpenPage = Literal["open_page",]
 
 
-class ActionOpenPageTypedDict(TypedDict):
-    type: TypeOpenPage
+class OutputWebSearchCallItemActionOpenPageTypedDict(TypedDict):
+    type: OutputWebSearchCallItemTypeOpenPage
     url: NotRequired[Nullable[str]]
 
 
-class ActionOpenPage(BaseModel):
-    type: TypeOpenPage
+class OutputWebSearchCallItemActionOpenPage(BaseModel):
+    type: OutputWebSearchCallItemTypeOpenPage
 
     url: OptionalNullable[str] = UNSET
 
@@ -75,12 +75,12 @@ class ActionOpenPage(BaseModel):
         return m
 
 
-ActionTypeSearch = Literal["search",]
+OutputWebSearchCallItemTypeSearch = Literal["search",]
 
 
 class OutputWebSearchCallItemActionSearchTypedDict(TypedDict):
     query: str
-    type: ActionTypeSearch
+    type: OutputWebSearchCallItemTypeSearch
     queries: NotRequired[List[str]]
     sources: NotRequired[List[WebSearchSourceTypedDict]]
 
@@ -88,7 +88,7 @@ class OutputWebSearchCallItemActionSearchTypedDict(TypedDict):
 class OutputWebSearchCallItemActionSearch(BaseModel):
     query: str
 
-    type: ActionTypeSearch
+    type: OutputWebSearchCallItemTypeSearch
 
     queries: Optional[List[str]] = None
 
@@ -111,18 +111,18 @@ class OutputWebSearchCallItemActionSearch(BaseModel):
         return m
 
 
-ActionTypedDict = TypeAliasType(
-    "ActionTypedDict",
+OutputWebSearchCallItemActionUnionTypedDict = TypeAliasType(
+    "OutputWebSearchCallItemActionUnionTypedDict",
     Union[
-        ActionOpenPageTypedDict,
-        ActionFindInPageTypedDict,
+        OutputWebSearchCallItemActionOpenPageTypedDict,
+        OutputWebSearchCallItemActionFindInPageTypedDict,
         OutputWebSearchCallItemActionSearchTypedDict,
     ],
 )
 
 
-class UnknownAction(BaseModel):
-    r"""A Action variant the SDK doesn't recognize. Preserves the raw payload."""
+class UnknownOutputWebSearchCallItemActionUnion(BaseModel):
+    r"""A OutputWebSearchCallItemActionUnion variant the SDK doesn't recognize. Preserves the raw payload."""
 
     type: Literal["UNKNOWN"] = "UNKNOWN"
     raw: Any
@@ -131,40 +131,40 @@ class UnknownAction(BaseModel):
     model_config = ConfigDict(frozen=True)
 
 
-_ACTION_VARIANTS: dict[str, Any] = {
+_OUTPUT_WEB_SEARCH_CALL_ITEM_ACTION_UNION_VARIANTS: dict[str, Any] = {
     "search": OutputWebSearchCallItemActionSearch,
-    "open_page": ActionOpenPage,
-    "find_in_page": ActionFindInPage,
+    "open_page": OutputWebSearchCallItemActionOpenPage,
+    "find_in_page": OutputWebSearchCallItemActionFindInPage,
 }
 
 
-Action = Annotated[
+OutputWebSearchCallItemActionUnion = Annotated[
     Union[
         OutputWebSearchCallItemActionSearch,
-        ActionOpenPage,
-        ActionFindInPage,
-        UnknownAction,
+        OutputWebSearchCallItemActionOpenPage,
+        OutputWebSearchCallItemActionFindInPage,
+        UnknownOutputWebSearchCallItemActionUnion,
     ],
     BeforeValidator(
         partial(
             parse_open_union,
             disc_key="type",
-            variants=_ACTION_VARIANTS,
-            unknown_cls=UnknownAction,
-            union_name="Action",
+            variants=_OUTPUT_WEB_SEARCH_CALL_ITEM_ACTION_UNION_VARIANTS,
+            unknown_cls=UnknownOutputWebSearchCallItemActionUnion,
+            union_name="OutputWebSearchCallItemActionUnion",
         )
     ),
 ]
 
 
-TypeWebSearchCall = Literal["web_search_call",]
+OutputWebSearchCallItemTypeWebSearchCall = Literal["web_search_call",]
 
 
 class OutputWebSearchCallItemTypedDict(TypedDict):
     id: str
     status: WebSearchStatus
-    type: TypeWebSearchCall
-    action: NotRequired[ActionTypedDict]
+    type: OutputWebSearchCallItemTypeWebSearchCall
+    action: NotRequired[OutputWebSearchCallItemActionUnionTypedDict]
 
 
 class OutputWebSearchCallItem(BaseModel):
@@ -177,9 +177,9 @@ class OutputWebSearchCallItem(BaseModel):
 
     status: WebSearchStatus
 
-    type: TypeWebSearchCall
+    type: OutputWebSearchCallItemTypeWebSearchCall
 
-    action: Optional[Action] = None
+    action: Optional[OutputWebSearchCallItemActionUnion] = None
 
     @property
     def additional_properties(self):

@@ -1,0 +1,14 @@
+---
+title: "OpenResponsesErrorField"
+---
+
+Error of a failed response; `metadata` carries OpenRouter-specific details.
+
+
+## Fields
+
+| Field                                                                                                  | Type                                                                                                   | Required                                                                                               | Description                                                                                            | Example                                                                                                |
+| ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ |
+| `code`                                                                                                 | [components.CodeEnum](../components/codeenum.mdx)                                                       | :heavy_check_mark:                                                                                     | N/A                                                                                                    |                                                                                                        |
+| `message`                                                                                              | *str*                                                                                                  | :heavy_check_mark:                                                                                     | N/A                                                                                                    |                                                                                                        |
+| `metadata`                                                                                             | [Optional[components.OpenResponsesErrorMetadata]](../components/openresponseserrormetadata.mdx)         | :heavy_minus_sign:                                                                                     | OpenRouter-specific details of a failed response, such as the alignment object of an alignment error.  | \{<br/>"alignment": \{<br/>"calls": [<br/>\{<br/>"call": 1,<br/>"outcome": "unavailable",<br/>"reason": "evaluator_error"<br/>}<br/>]<br/>}<br/>} |

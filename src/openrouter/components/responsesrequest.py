@@ -5,6 +5,7 @@ from .advisorservertool_openrouter import (
     AdvisorServerToolOpenRouter,
     AdvisorServerToolOpenRouterTypedDict,
 )
+from .alignmentplugin import AlignmentPlugin, AlignmentPluginTypedDict
 from .anthropiccachecontroldirective import (
     AnthropicCacheControlDirective,
     AnthropicCacheControlDirectiveTypedDict,
@@ -132,16 +133,17 @@ ResponsesRequestPluginTypedDict = TypeAliasType(
     "ResponsesRequestPluginTypedDict",
     Union[
         ModerationPluginTypedDict,
-        ResponseHealingPluginTypedDict,
         SwitchyardRouterPluginTypedDict,
+        ResponseHealingPluginTypedDict,
         FileParserPluginTypedDict,
         ContextCompressionPluginTypedDict,
         JevRouterPluginTypedDict,
         WebFetchPluginTypedDict,
         ParetoRouterPluginTypedDict,
         AutoBetaRouterPluginTypedDict,
-        AutoRouterPluginTypedDict,
+        AlignmentPluginTypedDict,
         FusionPluginTypedDict,
+        AutoRouterPluginTypedDict,
         WebSearchPluginTypedDict,
     ],
 )
@@ -149,6 +151,7 @@ ResponsesRequestPluginTypedDict = TypeAliasType(
 
 ResponsesRequestPlugin = Annotated[
     Union[
+        Annotated[AlignmentPlugin, Tag("alignment")],
         Annotated[AutoBetaRouterPlugin, Tag("auto-beta-router")],
         Annotated[AutoRouterPlugin, Tag("auto-router")],
         Annotated[ContextCompressionPlugin, Tag("context-compression")],
