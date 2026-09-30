@@ -63,7 +63,7 @@ class TTS(BaseSDK):
         :param provider: Provider-specific passthrough configuration
         :param response_format: Audio output format
         :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow). Used for observability grouping in Broadcast and private logging; never sent to the provider. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters.
-        :param speed: Playback speed multiplier. Only used by models that support it (e.g. OpenAI TTS). Ignored by other providers.
+        :param speed: Playback speed multiplier. Honored by models that support it (e.g. OpenAI TTS). Other providers either ignore it or return a 400 for a non-default value when the model has no speed control.
         :param trace: Metadata for observability and tracing. Known keys (trace_id, trace_name, span_name, generation_name, parent_span_id) have special handling. Additional keys are passed through as custom metadata to configured broadcast destinations.
         :param user: A unique identifier representing your end-user. Forwarded to Broadcast and private logging as the end-user id; never sent to the provider.
         :param voice: Voice identifier (provider-specific).
@@ -316,7 +316,7 @@ class TTS(BaseSDK):
         :param provider: Provider-specific passthrough configuration
         :param response_format: Audio output format
         :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow). Used for observability grouping in Broadcast and private logging; never sent to the provider. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters.
-        :param speed: Playback speed multiplier. Only used by models that support it (e.g. OpenAI TTS). Ignored by other providers.
+        :param speed: Playback speed multiplier. Honored by models that support it (e.g. OpenAI TTS). Other providers either ignore it or return a 400 for a non-default value when the model has no speed control.
         :param trace: Metadata for observability and tracing. Known keys (trace_id, trace_name, span_name, generation_name, parent_span_id) have special handling. Additional keys are passed through as custom metadata to configured broadcast destinations.
         :param user: A unique identifier representing your end-user. Forwarded to Broadcast and private logging as the end-user id; never sent to the provider.
         :param voice: Voice identifier (provider-specific).

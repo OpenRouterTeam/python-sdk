@@ -66,7 +66,7 @@ class SpeechRequestTypedDict(TypedDict):
     session_id: NotRequired[str]
     r"""A unique identifier for grouping related requests (e.g., a conversation or agent workflow). Used for observability grouping in Broadcast and private logging; never sent to the provider. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters."""
     speed: NotRequired[float]
-    r"""Playback speed multiplier. Only used by models that support it (e.g. OpenAI TTS). Ignored by other providers."""
+    r"""Playback speed multiplier. Honored by models that support it (e.g. OpenAI TTS). Other providers either ignore it or return a 400 for a non-default value when the model has no speed control."""
     trace: NotRequired[TraceConfigTypedDict]
     r"""Metadata for observability and tracing. Known keys (trace_id, trace_name, span_name, generation_name, parent_span_id) have special handling. Additional keys are passed through as custom metadata to configured broadcast destinations."""
     user: NotRequired[str]
@@ -97,7 +97,7 @@ class SpeechRequest(BaseModel):
     r"""A unique identifier for grouping related requests (e.g., a conversation or agent workflow). Used for observability grouping in Broadcast and private logging; never sent to the provider. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters."""
 
     speed: Optional[float] = None
-    r"""Playback speed multiplier. Only used by models that support it (e.g. OpenAI TTS). Ignored by other providers."""
+    r"""Playback speed multiplier. Honored by models that support it (e.g. OpenAI TTS). Other providers either ignore it or return a 400 for a non-default value when the model has no speed control."""
 
     trace: Optional[TraceConfig] = None
     r"""Metadata for observability and tracing. Known keys (trace_id, trace_name, span_name, generation_name, parent_span_id) have special handling. Additional keys are passed through as custom metadata to configured broadcast destinations."""
