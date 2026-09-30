@@ -3041,6 +3041,10 @@ if TYPE_CHECKING:
         ORAnthropicShellToolResultTypedDict,
     )
     from .oranthropicstopreason import ORAnthropicStopReason
+    from .organizationsettings import (
+        OrganizationSettings,
+        OrganizationSettingsTypedDict,
+    )
     from .outputadvisorservertoolitem import (
         OutputAdvisorServerToolItem,
         OutputAdvisorServerToolItemType,
@@ -4122,6 +4126,10 @@ if TYPE_CHECKING:
     from .updateobservabilitydestinationresponse import (
         UpdateObservabilityDestinationResponse,
         UpdateObservabilityDestinationResponseTypedDict,
+    )
+    from .updateorganizationsettingsrequest import (
+        UpdateOrganizationSettingsRequest,
+        UpdateOrganizationSettingsRequestTypedDict,
     )
     from .updateprivateendpointpricingrequest import (
         UpdatePrivateEndpointPricingRequest,
@@ -6395,6 +6403,8 @@ __all__ = [
     "Operation",
     "OperationTypedDict",
     "Operator",
+    "OrganizationSettings",
+    "OrganizationSettingsTypedDict",
     "Outcome",
     "OutcomeExit",
     "OutcomeExitTypedDict",
@@ -7318,6 +7328,8 @@ __all__ = [
     "UpdateObservabilityDestinationRequestTypedDict",
     "UpdateObservabilityDestinationResponse",
     "UpdateObservabilityDestinationResponseTypedDict",
+    "UpdateOrganizationSettingsRequest",
+    "UpdateOrganizationSettingsRequestTypedDict",
     "UpdatePrivateEndpointPricingRequest",
     "UpdatePrivateEndpointPricingRequestTypedDict",
     "UpdatePrivateEndpointRequest",
@@ -9684,6 +9696,8 @@ _dynamic_imports: dict[str, str] = {
     "ORAnthropicShellToolResultTypeOpenrouterShellToolResult": ".oranthropicshelltoolresult",
     "ORAnthropicShellToolResultTypedDict": ".oranthropicshelltoolresult",
     "ORAnthropicStopReason": ".oranthropicstopreason",
+    "OrganizationSettings": ".organizationsettings",
+    "OrganizationSettingsTypedDict": ".organizationsettings",
     "OutputAdvisorServerToolItem": ".outputadvisorservertoolitem",
     "OutputAdvisorServerToolItemType": ".outputadvisorservertoolitem",
     "OutputAdvisorServerToolItemTypedDict": ".outputadvisorservertoolitem",
@@ -10467,6 +10481,8 @@ _dynamic_imports: dict[str, str] = {
     "UpdateObservabilityDestinationRequestTypedDict": ".updateobservabilitydestinationrequest",
     "UpdateObservabilityDestinationResponse": ".updateobservabilitydestinationresponse",
     "UpdateObservabilityDestinationResponseTypedDict": ".updateobservabilitydestinationresponse",
+    "UpdateOrganizationSettingsRequest": ".updateorganizationsettingsrequest",
+    "UpdateOrganizationSettingsRequestTypedDict": ".updateorganizationsettingsrequest",
     "UpdatePrivateEndpointPricingRequest": ".updateprivateendpointpricingrequest",
     "UpdatePrivateEndpointPricingRequestTypedDict": ".updateprivateendpointpricingrequest",
     "UpdatePrivateEndpointRequest": ".updateprivateendpointrequest",
