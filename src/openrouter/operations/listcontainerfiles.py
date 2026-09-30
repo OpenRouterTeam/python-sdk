@@ -97,7 +97,7 @@ class ListContainerFilesRequestTypedDict(TypedDict):
     limit: NotRequired[int]
     r"""Maximum number of files to return (1-1000). Defaults to 100 when absent."""
     after: NotRequired[str]
-    r"""Forward cursor: the previous page’s `last_id` (or any container file id); listing resumes strictly after that path."""
+    r"""Forward cursor: the previous page’s `last_id` (or any container file id); listing resumes strictly after that path. A `last_id` from a page that stopped at the scan bound may name a directory-marker path (trailing `/`) that was never listed as a file; such cursors are accepted."""
 
 
 class ListContainerFilesRequest(BaseModel):
@@ -144,7 +144,7 @@ class ListContainerFilesRequest(BaseModel):
         Optional[str],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
-    r"""Forward cursor: the previous page’s `last_id` (or any container file id); listing resumes strictly after that path."""
+    r"""Forward cursor: the previous page’s `last_id` (or any container file id); listing resumes strictly after that path. A `last_id` from a page that stopped at the scan bound may name a directory-marker path (trailing `/`) that was never listed as a file; such cursors are accepted."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
