@@ -29,6 +29,7 @@ if TYPE_CHECKING:
     from openrouter.credits import Credits
     from openrouter.datasets import Datasets
     from openrouter.embeddings import Embeddings
+    from openrouter.end_users import EndUsers
     from openrouter.endpoints import Endpoints
     from openrouter.files import Files
     from openrouter.generations import Generations
@@ -85,6 +86,8 @@ class OpenRouter(BaseSDK):
     r"""Public OpenRouter usage datasets. Data returned by these endpoints is licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/): reuse and republish it, including commercially, with attribution to OpenRouter."""
     embeddings: "Embeddings"
     r"""Text embedding endpoints"""
+    end_users: "EndUsers"
+    r"""End Users endpoints"""
     endpoints: "Endpoints"
     r"""Endpoint information"""
     files: "Files"
@@ -143,6 +146,7 @@ class OpenRouter(BaseSDK):
         "credits": ("openrouter.credits", "Credits"),
         "datasets": ("openrouter.datasets", "Datasets"),
         "embeddings": ("openrouter.embeddings", "Embeddings"),
+        "end_users": ("openrouter.end_users", "EndUsers"),
         "endpoints": ("openrouter.endpoints", "Endpoints"),
         "files": ("openrouter.files", "Files"),
         "generations": ("openrouter.generations", "Generations"),

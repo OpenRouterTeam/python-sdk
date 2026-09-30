@@ -1402,6 +1402,10 @@ if TYPE_CHECKING:
         CreateBYOKKeyResponse,
         CreateBYOKKeyResponseTypedDict,
     )
+    from .createenduserrequest import (
+        CreateEndUserRequest,
+        CreateEndUserRequestTypedDict,
+    )
     from .createguardrailrequest import (
         CreateGuardrailRequest,
         CreateGuardrailRequestTypedDict,
@@ -1651,6 +1655,8 @@ if TYPE_CHECKING:
     from .endpointinfo import EndpointInfo, EndpointInfoTypedDict
     from .endpointsmetadata import EndpointsMetadata, EndpointsMetadataTypedDict
     from .endpointstatus import EndpointStatus
+    from .enduser import EndUser, EndUserTypedDict
+    from .enduserresponse import EndUserResponse, EndUserResponseTypedDict
     from .enumcapability import (
         EnumCapability,
         EnumCapabilityType,
@@ -2300,6 +2306,10 @@ if TYPE_CHECKING:
         ArchitectureTypedDict,
         ListEndpointsResponse,
         ListEndpointsResponseTypedDict,
+    )
+    from .listendusersresponse import (
+        ListEndUsersResponse,
+        ListEndUsersResponseTypedDict,
     )
     from .listguardrailsresponse import (
         ListGuardrailsResponse,
@@ -4092,6 +4102,10 @@ if TYPE_CHECKING:
         UpdateBYOKKeyResponse,
         UpdateBYOKKeyResponseTypedDict,
     )
+    from .updateenduserrequest import (
+        UpdateEndUserRequest,
+        UpdateEndUserRequestTypedDict,
+    )
     from .updateguardrailrequest import (
         UpdateGuardrailRequest,
         UpdateGuardrailRequestTypedDict,
@@ -5264,6 +5278,8 @@ __all__ = [
     "CreateBYOKKeyRequestTypedDict",
     "CreateBYOKKeyResponse",
     "CreateBYOKKeyResponseTypedDict",
+    "CreateEndUserRequest",
+    "CreateEndUserRequestTypedDict",
     "CreateGuardrailRequest",
     "CreateGuardrailRequestTypedDict",
     "CreateGuardrailResponse",
@@ -5433,6 +5449,10 @@ __all__ = [
     "EmbeddingTypedDict",
     "Embeddings",
     "EmbeddingsTypedDict",
+    "EndUser",
+    "EndUserResponse",
+    "EndUserResponseTypedDict",
+    "EndUserTypedDict",
     "Endpoint",
     "EndpointInfo",
     "EndpointInfoTypedDict",
@@ -5918,6 +5938,8 @@ __all__ = [
     "LegendTypedDict",
     "ListBYOKKeysResponse",
     "ListBYOKKeysResponseTypedDict",
+    "ListEndUsersResponse",
+    "ListEndUsersResponseTypedDict",
     "ListEndpointsResponse",
     "ListEndpointsResponseTypedDict",
     "ListGuardrailsResponse",
@@ -7284,6 +7306,8 @@ __all__ = [
     "UpdateBYOKKeyRequestTypedDict",
     "UpdateBYOKKeyResponse",
     "UpdateBYOKKeyResponseTypedDict",
+    "UpdateEndUserRequest",
+    "UpdateEndUserRequestTypedDict",
     "UpdateGuardrailRequest",
     "UpdateGuardrailRequestTypedDict",
     "UpdateGuardrailResponse",
@@ -8420,6 +8444,8 @@ _dynamic_imports: dict[str, str] = {
     "CreateBYOKKeyRequestTypedDict": ".createbyokkeyrequest",
     "CreateBYOKKeyResponse": ".createbyokkeyresponse",
     "CreateBYOKKeyResponseTypedDict": ".createbyokkeyresponse",
+    "CreateEndUserRequest": ".createenduserrequest",
+    "CreateEndUserRequestTypedDict": ".createenduserrequest",
     "CreateGuardrailRequest": ".createguardrailrequest",
     "CreateGuardrailRequestTypedDict": ".createguardrailrequest",
     "CreateGuardrailResponse": ".createguardrailresponse",
@@ -8599,6 +8625,10 @@ _dynamic_imports: dict[str, str] = {
     "EndpointsMetadata": ".endpointsmetadata",
     "EndpointsMetadataTypedDict": ".endpointsmetadata",
     "EndpointStatus": ".endpointstatus",
+    "EndUser": ".enduser",
+    "EndUserTypedDict": ".enduser",
+    "EndUserResponse": ".enduserresponse",
+    "EndUserResponseTypedDict": ".enduserresponse",
     "EnumCapability": ".enumcapability",
     "EnumCapabilityType": ".enumcapability",
     "EnumCapabilityTypedDict": ".enumcapability",
@@ -9075,6 +9105,8 @@ _dynamic_imports: dict[str, str] = {
     "ArchitectureTypedDict": ".listendpointsresponse",
     "ListEndpointsResponse": ".listendpointsresponse",
     "ListEndpointsResponseTypedDict": ".listendpointsresponse",
+    "ListEndUsersResponse": ".listendusersresponse",
+    "ListEndUsersResponseTypedDict": ".listendusersresponse",
     "ListGuardrailsResponse": ".listguardrailsresponse",
     "ListGuardrailsResponseTypedDict": ".listguardrailsresponse",
     "ListKeyAssignmentsResponse": ".listkeyassignmentsresponse",
@@ -10423,6 +10455,8 @@ _dynamic_imports: dict[str, str] = {
     "UpdateBYOKKeyRequestTypedDict": ".updatebyokkeyrequest",
     "UpdateBYOKKeyResponse": ".updatebyokkeyresponse",
     "UpdateBYOKKeyResponseTypedDict": ".updatebyokkeyresponse",
+    "UpdateEndUserRequest": ".updateenduserrequest",
+    "UpdateEndUserRequestTypedDict": ".updateenduserrequest",
     "UpdateGuardrailRequest": ".updateguardrailrequest",
     "UpdateGuardrailRequestTypedDict": ".updateguardrailrequest",
     "UpdateGuardrailResponse": ".updateguardrailresponse",
