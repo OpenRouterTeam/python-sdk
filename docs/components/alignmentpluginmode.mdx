@@ -1,0 +1,22 @@
+---
+title: "AlignmentPluginMode"
+---
+
+`enforce`: a turn that breaks a rule is withheld, retried, and finally returned as an error. `audit`: every turn is evaluated and returned. Default `enforce`.
+
+## Example Usage
+
+```python
+from openrouter.components import AlignmentPluginMode
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
+value: AlignmentPluginMode = "enforce"
+```
+
+
+## Values
+
+This is an open enum. Unrecognized values will not fail type checks.
+
+- `"enforce"`
+- `"audit"`
