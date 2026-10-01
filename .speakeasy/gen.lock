@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c48cf606-fb42-4a45-9c23-8f0555307828
 management:
-  docChecksum: db5d16fc32dae841671e0c284a3e74b4
+  docChecksum: 8418d8ac8a0816998245098e8945e4da
   docVersion: 1.0.0
   speakeasyVersion: 1.787.0
   generationVersion: 2.914.0
-  releaseVersion: 1.3.16
-  configChecksum: 8c445214e70cd25ef7c941d59d5d5269
+  releaseVersion: 1.3.17
+  configChecksum: 37d2b4d00364742d875703d9ffcdd68d
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
 persistentEdits:
-  generation_id: 7e9fbdb9-c775-4bc8-8565-739609edbb94
-  pristine_commit_hash: a664b930e07a08cb7d45bc35df0d7e1c96078ae9
-  pristine_tree_hash: 2d585312bc84caf58e056ce8ea2c23f807ca82fb
+  generation_id: 51b6d41c-8e74-47a2-b89c-bd8f474c2de4
+  pristine_commit_hash: 291e2569c4ff1314e7c4df3131966ee300220782
+  pristine_tree_hash: 8251c7f52db4337ed4fd35bc7ab9da1b86f80cdb
 features:
   python:
     acceptHeaders: 3.0.0
@@ -88,8 +88,8 @@ trackedFiles:
     pristine_git_object: 9bed0a58221b443b943524232117bdc43e6c4014
   docs/components/activityitem.mdx:
     id: 20be851aee8a
-    last_write_checksum: sha1:4aef3633b891fc44c92cb8307adb8d3ce3e7cecd
-    pristine_git_object: 595c3f1bcc1bb17e920c06fb11df7dae95b6b858
+    last_write_checksum: sha1:9faa9e2c8b059ddff8d3ad1bb2320574c732d2a8
+    pristine_git_object: c18a6d10bc6c91827223b4c7464c9e7ac68c7e05
   docs/components/activityresponse.mdx:
     id: 5886155bc810
     last_write_checksum: sha1:64acd6c3d2db5593d8359474c4e2e31e4db62453
@@ -9948,8 +9948,8 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:a7f8282814d3a962587a530ebfd6cb5f8a994f21
-    pristine_git_object: da03951c817d1f9bc2c89224110466660b263ffd
+    last_write_checksum: sha1:0175860b3f1b2c4fe0ecd29ce9c2117cd55bd351
+    pristine_git_object: b71a3038fdf38463d61c72a645fb977a3234420e
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77f44b60b98bc126557ec27391f91dfba764bb54
@@ -9976,8 +9976,8 @@ trackedFiles:
     pristine_git_object: 86713cfea633e09d33b3d4e65281071fe20e6137
   src/openrouter/_version.py:
     id: d8d15ad6c586
-    last_write_checksum: sha1:b88ba320acfa6e84395801080f1845a445b8573a
-    pristine_git_object: 04c07c48d8aafb0e60a892bde66c111fcf0ed5b3
+    last_write_checksum: sha1:360148d6fcae9949a9054166185b7d8cf5ba88c2
+    pristine_git_object: cb8eed80311c01eefa335ad2ce99e29a4c693f10
   src/openrouter/alpha.py:
     id: 306c4d93308d
     last_write_checksum: sha1:30f55a360f41376ab194b9ea725fe4e001a5ae1a
@@ -10032,8 +10032,8 @@ trackedFiles:
     pristine_git_object: ad39bd9765938465f06b5422706fc867db11e468
   src/openrouter/components/activityitem.py:
     id: 3bbe7d35f459
-    last_write_checksum: sha1:96430ac2c3aab411c5a05f50ee31ad25eea0790f
-    pristine_git_object: 3fecf83b2b307a1a9ef7714d5111ab724abba6a6
+    last_write_checksum: sha1:ad3ecdeb41d51f3e1698f0828df6cf2eca94d72d
+    pristine_git_object: f46f04b35d85a73e61fa1e06b8b6a8f4e802a7e7
   src/openrouter/components/activityresponse.py:
     id: 0bd8d79c3144
     last_write_checksum: sha1:db8e3247cf9eb2c235d32949d36f7ae95870e8ed
@@ -14378,7 +14378,7 @@ examples:
     speakeasy-default-get-user-activity:
       responses:
         "200":
-          application/json: {"data": [{"byok_usage_inference": 0.012, "completion_tokens": 125, "date": "2025-08-24", "endpoint_id": "550e8400-e29b-41d4-a716-446655440000", "model": "openai/gpt-4.1", "model_permaslug": "openai/gpt-4.1-2025-04-14", "prompt_tokens": 50, "provider_name": "OpenAI", "reasoning_tokens": 25, "requests": 5, "usage": 0.015}]}
+          application/json: {"data": [{"byok_usage_inference": 0.012, "cached_tokens": 10, "completion_tokens": 125, "date": "2025-08-24", "endpoint_id": "550e8400-e29b-41d4-a716-446655440000", "model": "openai/gpt-4.1", "model_permaslug": "openai/gpt-4.1-2025-04-14", "prompt_tokens": 50, "provider_name": "OpenAI", "reasoning_tokens": 25, "requests": 5, "usage": 0.015}]}
         "400":
           application/json: {"error": {"code": 400, "message": "Invalid request parameters"}}
         "401":
@@ -18226,5 +18226,4 @@ examples:
 examplesVersion: 1.0.2
 releaseNotes: |
   ## Python SDK Changes:
-  * `open_router.generations.get_generation()`:  `error.status[400]` **Added**
-  * `open_router.generations.list_generation_content()`:  `error.status[400]` **Added**
+  * `open_router.analytics.get_user_activity()`:  `response.data[].cached_tokens` **Added**

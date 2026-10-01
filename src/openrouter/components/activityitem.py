@@ -11,6 +11,8 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 class ActivityItemTypedDict(TypedDict):
     byok_usage_inference: float
     r"""BYOK inference cost in USD (external credits spent)"""
+    cached_tokens: int
+    r"""Total prompt tokens read from the provider prompt cache (cache hits). Generally a subset of `prompt_tokens`; for replayed response-cache hits the provider may report the two counters over disjoint token sets, so `cached_tokens` can exceed `prompt_tokens`."""
     completion_tokens: int
     r"""Total completion tokens generated"""
     date_: str
@@ -38,6 +40,9 @@ class ActivityItemTypedDict(TypedDict):
 class ActivityItem(BaseModel):
     byok_usage_inference: float
     r"""BYOK inference cost in USD (external credits spent)"""
+
+    cached_tokens: int
+    r"""Total prompt tokens read from the provider prompt cache (cache hits). Generally a subset of `prompt_tokens`; for replayed response-cache hits the provider may report the two counters over disjoint token sets, so `cached_tokens` can exceed `prompt_tokens`."""
 
     completion_tokens: int
     r"""Total completion tokens generated"""
