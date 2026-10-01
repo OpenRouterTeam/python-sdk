@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c48cf606-fb42-4a45-9c23-8f0555307828
 management:
-  docChecksum: dd844eac13f976ba74b21b1e501372a5
+  docChecksum: e26b8aa17f6f45241fc4951237a29000
   docVersion: 1.0.0
   speakeasyVersion: 1.787.0
   generationVersion: 2.914.0
-  releaseVersion: 1.3.18
-  configChecksum: eaeed3df3e4e78face49fcef6e620417
+  releaseVersion: 1.3.19
+  configChecksum: 87456f6f148d309df07e48d003860def
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
 persistentEdits:
-  generation_id: fcc256d0-08e9-439d-baaf-2ce814fe36c9
-  pristine_commit_hash: 914891a5475c37ce0ebcb5ea12e09d9c508df8c3
-  pristine_tree_hash: ca77f14e6c48730bdad24a1ccdfb1358445e29b2
+  generation_id: 8bdc1dba-e817-48bc-8ab2-77ad1ab37468
+  pristine_commit_hash: 20353418b707d78c5ea6272809f71158c666a268
+  pristine_tree_hash: cf8aee80660bf4495a3d3312432f0d9300445178
 features:
   python:
     acceptHeaders: 3.0.0
@@ -9800,8 +9800,8 @@ trackedFiles:
     pristine_git_object: c1634706646332455817340f5891b4b5c9c6d16c
   docs/sdks/apikeys/README.mdx:
     id: 27fcaae1c346
-    last_write_checksum: sha1:3b8ddf3e038f2dc75d60c4936f270543950020a2
-    pristine_git_object: 05cb8497207bd506ac4d84c53a5977e110114806
+    last_write_checksum: sha1:40f52532a5846a5ef9fd20f3ddf00448a15e0890
+    pristine_git_object: 0c76b2d59bd6a8956de83eb064c6205fcedae331
   docs/sdks/batch/README.mdx:
     id: e367aa4f4295
     last_write_checksum: sha1:7e385b464cd4f95f6bbe7454e99a412041017ac7
@@ -9948,8 +9948,8 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:e66a3439925efa1634896c19c538834f67f793ca
-    pristine_git_object: b76990ff27d4979ff3b6ec1cf668193b6d3b93df
+    last_write_checksum: sha1:6478300ed0220742fd001e94ac77e058cf94dbf1
+    pristine_git_object: 33abb1bc7c1bfe2d3c5323de18901698616b91fb
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77f44b60b98bc126557ec27391f91dfba764bb54
@@ -9976,8 +9976,8 @@ trackedFiles:
     pristine_git_object: 86713cfea633e09d33b3d4e65281071fe20e6137
   src/openrouter/_version.py:
     id: d8d15ad6c586
-    last_write_checksum: sha1:a867b35b239e6ccc11812f193e14e29eccacf0c6
-    pristine_git_object: 70d4881e1a86b1641e4821f1d2ef8729cbc0b656
+    last_write_checksum: sha1:9aaa05abbad118e10741d8e7a6dd24396fd2a45a
+    pristine_git_object: 5020f4771011c5e9d1b51dca9a739b27cb6fdc80
   src/openrouter/alpha.py:
     id: 306c4d93308d
     last_write_checksum: sha1:30f55a360f41376ab194b9ea725fe4e001a5ae1a
@@ -9988,8 +9988,8 @@ trackedFiles:
     pristine_git_object: 9587309db4d5e25a00131a48788456139c25e4c0
   src/openrouter/api_keys.py:
     id: 876fac88fff6
-    last_write_checksum: sha1:5c198eef830a56d6030573a073bf0e349a0d8289
-    pristine_git_object: 94dd64726b491afb7913f00e8c90d94ef58d1115
+    last_write_checksum: sha1:40921c10e77aceb82de5eaf1470975e9593eaf3f
+    pristine_git_object: 7647d4bc7dfba28a1d8d31c66c1d4331f37b139c
   src/openrouter/basesdk.py:
     id: c5733c5a1e12
     last_write_checksum: sha1:65769ff2cb5473f85b364c6213a0ddc8c68644ea
@@ -14651,6 +14651,24 @@ examples:
           application/json: {"error": {"code": 429, "message": "Rate limit exceeded"}}
         "500":
           application/json: {"error": {"code": 500, "message": "Internal Server Error"}}
+    invalid_parameters:
+      parameters:
+        path:
+          hash: "f01d52606dc8f0a8303a7b5cc3fa07109c2e346cec7c0a16b40de462992ce943"
+      requestBody:
+        application/json: {}
+      responses:
+        "400":
+          application/json: {"error": {"code": 400, "message": "Invalid request parameters"}}
+    no_update_fields:
+      parameters:
+        path:
+          hash: "f01d52606dc8f0a8303a7b5cc3fa07109c2e346cec7c0a16b40de462992ce943"
+      requestBody:
+        application/json: {}
+      responses:
+        "400":
+          application/json: {"error": {"code": 400, "message": "No update fields provided"}}
   deleteKeys:
     speakeasy-default-delete-keys:
       parameters:
@@ -18224,4 +18242,3 @@ examples:
         "500":
           application/json: {"error": {"code": 500, "message": "Internal Server Error"}}
 examplesVersion: 1.0.2
-releaseNotes: "## Python SDK Changes:\n* `open_router.images.generate()`: \n  *  `request.resolution.enum(1.5k)` **Added**\n"
