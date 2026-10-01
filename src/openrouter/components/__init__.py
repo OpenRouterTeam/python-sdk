@@ -1043,6 +1043,10 @@ if TYPE_CHECKING:
         ChatDeveloperMessageRole,
         ChatDeveloperMessageTypedDict,
     )
+    from .chatdynamicservertool import (
+        ChatDynamicServerTool,
+        ChatDynamicServerToolTypedDict,
+    )
     from .chatfinishreasonenum import ChatFinishReasonEnum
     from .chatformatgrammarconfig import (
         ChatFormatGrammarConfig,
@@ -5004,6 +5008,8 @@ __all__ = [
     "ChatDeveloperMessageContentTypedDict",
     "ChatDeveloperMessageRole",
     "ChatDeveloperMessageTypedDict",
+    "ChatDynamicServerTool",
+    "ChatDynamicServerToolTypedDict",
     "ChatFinishReasonEnum",
     "ChatFormatGrammarConfig",
     "ChatFormatGrammarConfigType",
@@ -8205,6 +8211,8 @@ _dynamic_imports: dict[str, str] = {
     "ChatDeveloperMessageContentTypedDict": ".chatdevelopermessage",
     "ChatDeveloperMessageRole": ".chatdevelopermessage",
     "ChatDeveloperMessageTypedDict": ".chatdevelopermessage",
+    "ChatDynamicServerTool": ".chatdynamicservertool",
+    "ChatDynamicServerToolTypedDict": ".chatdynamicservertool",
     "ChatFinishReasonEnum": ".chatfinishreasonenum",
     "ChatFormatGrammarConfig": ".chatformatgrammarconfig",
     "ChatFormatGrammarConfigType": ".chatformatgrammarconfig",
