@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c48cf606-fb42-4a45-9c23-8f0555307828
 management:
-  docChecksum: 5b5645754152ff09b11172a49069d153
+  docChecksum: db5d16fc32dae841671e0c284a3e74b4
   docVersion: 1.0.0
   speakeasyVersion: 1.787.0
   generationVersion: 2.914.0
-  releaseVersion: 1.3.15
-  configChecksum: 64e5d33409cb8b2e41ce76d9f58127b7
+  releaseVersion: 1.3.16
+  configChecksum: 8c445214e70cd25ef7c941d59d5d5269
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
 persistentEdits:
-  generation_id: a8c41ebc-8690-454b-a32d-89a7aadca90e
-  pristine_commit_hash: 70518b7f2848dfcb8176d3b653cf5c596d096ca1
-  pristine_tree_hash: b46c51cbc555cbd171020d2e39bc570b4ef8045f
+  generation_id: 7e9fbdb9-c775-4bc8-8565-739609edbb94
+  pristine_commit_hash: a664b930e07a08cb7d45bc35df0d7e1c96078ae9
+  pristine_tree_hash: 2d585312bc84caf58e056ce8ea2c23f807ca82fb
 features:
   python:
     acceptHeaders: 3.0.0
@@ -9860,8 +9860,8 @@ trackedFiles:
     pristine_git_object: d9aef34c11d538fe9d54a41f27a913181cc4f1f5
   docs/sdks/generations/README.mdx:
     id: a754fecc8514
-    last_write_checksum: sha1:a2a58bf659333ca8715d08271ce6510c831609d4
-    pristine_git_object: a3866532ac76cdf8a492e1bdb9c2a16d4496f6db
+    last_write_checksum: sha1:46ab209542cabc2de53c1ec07eebfdaf2601f48a
+    pristine_git_object: bc1a56cbb41c8f9114c81b547713632272184da6
   docs/sdks/guardrails/README.mdx:
     id: a0cd4218b8fa
     last_write_checksum: sha1:5d726806705c8c06aa1df8ecbebfa04a0214d8d4
@@ -9948,8 +9948,8 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:31931f78679d1cd96c0b0cc7b330008d54b06958
-    pristine_git_object: c99a3a1da47f41fe0b1639b3ed43c357af380ae1
+    last_write_checksum: sha1:a7f8282814d3a962587a530ebfd6cb5f8a994f21
+    pristine_git_object: da03951c817d1f9bc2c89224110466660b263ffd
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77f44b60b98bc126557ec27391f91dfba764bb54
@@ -9976,8 +9976,8 @@ trackedFiles:
     pristine_git_object: 86713cfea633e09d33b3d4e65281071fe20e6137
   src/openrouter/_version.py:
     id: d8d15ad6c586
-    last_write_checksum: sha1:aac80623f707150bb796ba0790c175ea667a17b3
-    pristine_git_object: 6c499389544c3a128b2c99fc922d7c60e995504d
+    last_write_checksum: sha1:b88ba320acfa6e84395801080f1845a445b8573a
+    pristine_git_object: 04c07c48d8aafb0e60a892bde66c111fcf0ed5b3
   src/openrouter/alpha.py:
     id: 306c4d93308d
     last_write_checksum: sha1:30f55a360f41376ab194b9ea725fe4e001a5ae1a
@@ -13532,8 +13532,8 @@ trackedFiles:
     pristine_git_object: 1c30715cccc28393152c3b3152d144e57ca60df1
   src/openrouter/generations.py:
     id: 70e1c21042bc
-    last_write_checksum: sha1:87220277fc41836ac3bba33ffc229097c23c3384
-    pristine_git_object: c520287c94d48268045fb97a4b06dd1c8d56e041
+    last_write_checksum: sha1:b4ae45620a9ad38402e72ed42abea516aeb3aa32
+    pristine_git_object: 5698c384a36929846530cae98f69ce83a0966217
   src/openrouter/guardrails.py:
     id: 705839f34e66
     last_write_checksum: sha1:1551845b6a9776480d99ef0fc1fca61e845f3de2
@@ -14525,6 +14525,8 @@ examples:
           application/json: {"error": {"code": 524, "message": "Request timed out. Please try again later."}}
         "529":
           application/json: {"error": {"code": 529, "message": "Provider returned error"}}
+        "400":
+          application/json: {"error": {"code": 400, "message": "Invalid request parameters"}}
   listModelsCount:
     speakeasy-default-list-models-count:
       responses:
@@ -15313,6 +15315,8 @@ examples:
           application/json: {"error": {"code": 524, "message": "Request timed out. Please try again later."}}
         "529":
           application/json: {"error": {"code": 529, "message": "Provider returned error"}}
+        "400":
+          application/json: {"error": {"code": 400, "message": "Invalid request parameters"}}
   listObservabilityDestinations:
     speakeasy-default-list-observability-destinations:
       parameters:
@@ -18220,4 +18224,7 @@ examples:
         "500":
           application/json: {"error": {"code": 500, "message": "Internal Server Error"}}
 examplesVersion: 1.0.2
-releaseNotes: "## Python SDK Changes:\n* `open_router.chat.send()`: \n  *  `request.tools[].union(ChatDynamicServerTool)` **Added**\n* `open_router.presets.create_presets_chat_completions()`: \n  *  `request.tools[].union(ChatDynamicServerTool)` **Added**\n"
+releaseNotes: |
+  ## Python SDK Changes:
+  * `open_router.generations.get_generation()`:  `error.status[400]` **Added**
+  * `open_router.generations.list_generation_content()`:  `error.status[400]` **Added**
