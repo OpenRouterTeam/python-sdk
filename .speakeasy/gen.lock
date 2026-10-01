@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c48cf606-fb42-4a45-9c23-8f0555307828
 management:
-  docChecksum: df8fdb7a69d5780c2085793d8a2ec7f2
+  docChecksum: f17acca9dec5e9c7c47626ed28878a72
   docVersion: 1.0.0
   speakeasyVersion: 1.787.0
   generationVersion: 2.914.0
-  releaseVersion: 1.3.13
-  configChecksum: d5a13a7063456eda3de0f6e5357af7c3
+  releaseVersion: 1.3.14
+  configChecksum: a90a6e6d3195754e08a7c30ab394219e
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
 persistentEdits:
-  generation_id: a2b972f1-e95c-4b38-864b-fffb6be24d58
-  pristine_commit_hash: 70630ade64c1571741179d693f16cb577c125c2a
-  pristine_tree_hash: 62fd35d7ae48cd3d1fdeca74233d407b4e8bda53
+  generation_id: 70333be8-d255-4676-a3d3-a2a89f90dbf0
+  pristine_commit_hash: 239e0b920e4db1a7a50f27416a96c2008a89cf3f
+  pristine_tree_hash: 79ac7133c0970713c14ce91039c47fceaeb6e2b8
 features:
   python:
     acceptHeaders: 3.0.0
@@ -168,8 +168,8 @@ trackedFiles:
     pristine_git_object: 40fd32366dbcdd3fd91aa4bb2687208c05c12691
   docs/components/algorithm.mdx:
     id: 658002f72223
-    last_write_checksum: sha1:4639c08d891b40e3a71a9bed72182860fc9d0e66
-    pristine_git_object: 4b69568b1362e6bc0c6a6b42860979d8079f257e
+    last_write_checksum: sha1:3bdd0d2c5ce4cde07d08d08f85703e68ed8841a6
+    pristine_git_object: 99a506b93895c77bc57882e1de27e80cb152ab02
   docs/components/alignment.mdx:
     id: 27ba8ef47dd5
     last_write_checksum: sha1:b733de76ebd695555ef487862dc98eda86ee569f
@@ -7052,8 +7052,8 @@ trackedFiles:
     pristine_git_object: 7a513bd20c993f110b1fb306d9817cf049df27e4
   docs/components/switchyardrouterplugin.mdx:
     id: 86509511f517
-    last_write_checksum: sha1:7f63f9732ffe5401766bd47203cdb535df345cd6
-    pristine_git_object: aa578b97cc78cc8462f6995d735f4415f912ecdd
+    last_write_checksum: sha1:b57983478e17c7ea94545eaa202fce2721e6b12a
+    pristine_git_object: f1bc7ba1ee8e68f56092b851bd370dbcb6b0bc9a
   docs/components/switchyardrouterpluginid.mdx:
     id: f96cf92c71dd
     last_write_checksum: sha1:8e997764c9daef8157d569caeb20f26694b1f05d
@@ -9944,8 +9944,8 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:fdf122faaef51c86b7d57f8bf5ec090e5608298c
-    pristine_git_object: bbd516942f0b5958e4fb49178c0216c0c7a90410
+    last_write_checksum: sha1:226628cb86cada2660bfa9f54a4689b7d27fb5b6
+    pristine_git_object: 5f4d04294d16c95f8137fe14bed2340320c07b6f
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77f44b60b98bc126557ec27391f91dfba764bb54
@@ -9972,8 +9972,8 @@ trackedFiles:
     pristine_git_object: 86713cfea633e09d33b3d4e65281071fe20e6137
   src/openrouter/_version.py:
     id: d8d15ad6c586
-    last_write_checksum: sha1:1c5e9c85d99f2295d54ac129b3c2a1816b00c049
-    pristine_git_object: ddd0c3910fe4ba5a4d441f41c57911e443dcf4f4
+    last_write_checksum: sha1:fb8a39c5283928d1eb103f18a793534732e1db7b
+    pristine_git_object: 7f88309bbec015284754c0069382c2f9d17c841d
   src/openrouter/alpha.py:
     id: 306c4d93308d
     last_write_checksum: sha1:30f55a360f41376ab194b9ea725fe4e001a5ae1a
@@ -13032,8 +13032,8 @@ trackedFiles:
     pristine_git_object: 703bf7deed21138fa64db63e6648be4cd2f3d09d
   src/openrouter/components/switchyardrouterplugin.py:
     id: abdcef77e2bb
-    last_write_checksum: sha1:41cc1bb5fcbf330bf18b09273c0ab4a228fedca1
-    pristine_git_object: 113fbe496325dc5b2e29910f558bd7a4598b8fa0
+    last_write_checksum: sha1:2f02cdb3fecffd9d949a359667564f21c6cbb942
+    pristine_git_object: 77e3f8034ef0bdefc05ad1c7045a3d5c903269b1
   src/openrouter/components/taskclassificationitem.py:
     id: 86d4bab5ebf3
     last_write_checksum: sha1:16176fda0ccd16b0be59bb5c4b74db78eae02f36
@@ -18212,7 +18212,3 @@ examples:
         "500":
           application/json: {"error": {"code": 500, "message": "Internal Server Error"}}
 examplesVersion: 1.0.2
-releaseNotes: |
-  ## Python SDK Changes:
-  * `open_router.organization.get_settings()`: **Added**
-  * `open_router.organization.update_settings()`: **Added**
