@@ -10,6 +10,7 @@ from .chatcontentcachecontrol import (
     ChatContentCacheControl,
     ChatContentCacheControlTypedDict,
 )
+from .chatdynamicservertool import ChatDynamicServerTool, ChatDynamicServerToolTypedDict
 from .chatsearchmodelsservertool import (
     ChatSearchModelsServerTool,
     ChatSearchModelsServerToolTypedDict,
@@ -143,16 +144,17 @@ class ChatFunctionToolFunction(BaseModel):
 ChatFunctionToolTypedDict = TypeAliasType(
     "ChatFunctionToolTypedDict",
     Union[
+        ImageGenerationServerToolOpenRouterTypedDict,
         AdvisorServerToolOpenRouterTypedDict,
         BashServerToolTypedDict,
         DatetimeServerToolTypedDict,
         FilesServerToolTypedDict,
         FusionServerToolOpenRouterTypedDict,
-        ImageGenerationServerToolOpenRouterTypedDict,
         ChatSearchModelsServerToolTypedDict,
         SubagentServerToolOpenRouterTypedDict,
         WebFetchServerToolTypedDict,
         OpenRouterWebSearchServerToolTypedDict,
+        ChatDynamicServerToolTypedDict,
         ChatFunctionToolFunctionTypedDict,
         ChatWebSearchShorthandTypedDict,
     ],
@@ -163,16 +165,17 @@ r"""Tool definition for function calling (regular function or OpenRouter built-i
 ChatFunctionTool = TypeAliasType(
     "ChatFunctionTool",
     Union[
+        ImageGenerationServerToolOpenRouter,
         AdvisorServerToolOpenRouter,
         BashServerTool,
         DatetimeServerTool,
         FilesServerTool,
         FusionServerToolOpenRouter,
-        ImageGenerationServerToolOpenRouter,
         ChatSearchModelsServerTool,
         SubagentServerToolOpenRouter,
         WebFetchServerTool,
         OpenRouterWebSearchServerTool,
+        ChatDynamicServerTool,
         ChatFunctionToolFunction,
         ChatWebSearchShorthand,
     ],
