@@ -89,6 +89,7 @@ ImageGenerationRequestResolution = Union[
         "512",
         "768",
         "1K",
+        "1.5K",
         "2K",
         "4K",
     ],
