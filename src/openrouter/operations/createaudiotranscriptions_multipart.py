@@ -150,7 +150,7 @@ class CreateAudioTranscriptionsMultipartRequestBodyTypedDict(TypedDict):
     language: NotRequired[str]
     r"""The language of the input audio (ISO-639-1)."""
     provider: NotRequired[str]
-    r"""JSON-encoded provider preferences object, the same shape as the JSON body field: { \"options\": { \"<provider-slug>\": { ... } } }. Only options for the matched provider are forwarded. Must decode to a JSON object."""
+    r"""JSON-encoded provider preferences object, the same shape as the JSON body field: { \"zdr\": true, \"data_collection\": \"deny\", \"options\": { \"<provider-slug>\": { ... } } }. Only options for the matched provider are forwarded. Must decode to a JSON object."""
     response_format: NotRequired[ResponseFormat]
     r"""The response format. \"json\" (default) returns { text, usage }; \"verbose_json\" additionally returns task, language, duration, and segment-level timestamps (OpenAI-compatible providers only)."""
     session_id: NotRequired[str]
@@ -191,7 +191,7 @@ class CreateAudioTranscriptionsMultipartRequestBody(BaseModel):
     r"""The language of the input audio (ISO-639-1)."""
 
     provider: Annotated[Optional[str], FieldMetadata(multipart=True)] = None
-    r"""JSON-encoded provider preferences object, the same shape as the JSON body field: { \"options\": { \"<provider-slug>\": { ... } } }. Only options for the matched provider are forwarded. Must decode to a JSON object."""
+    r"""JSON-encoded provider preferences object, the same shape as the JSON body field: { \"zdr\": true, \"data_collection\": \"deny\", \"options\": { \"<provider-slug>\": { ... } } }. Only options for the matched provider are forwarded. Must decode to a JSON object."""
 
     response_format: Annotated[
         Optional[ResponseFormat], FieldMetadata(multipart=True)
