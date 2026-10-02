@@ -4,37 +4,85 @@ from __future__ import annotations
 from .provideroptions import ProviderOptions, ProviderOptionsTypedDict
 from .speechinputreference import SpeechInputReference, SpeechInputReferenceTypedDict
 from .traceconfig import TraceConfig, TraceConfigTypedDict
-from openrouter.types import BaseModel, UNSET_SENTINEL, UnrecognizedStr
+from openrouter.types import (
+    BaseModel,
+    Nullable,
+    OptionalNullable,
+    UNSET,
+    UNSET_SENTINEL,
+    UnrecognizedStr,
+)
 from pydantic import model_serializer
 from typing import List, Literal, Optional, Union
 from typing_extensions import NotRequired, TypedDict
 
 
-class SpeechRequestProviderTypedDict(TypedDict):
-    r"""Provider-specific passthrough configuration"""
+SpeechRequestDataCollection = Union[
+    Literal[
+        "deny",
+        "allow",
+    ],
+    UnrecognizedStr,
+]
+r"""Data collection setting. If no available model provider meets the requirement, your request will return an error.
+- allow: (default) allow providers which store user data non-transiently and may train on it
 
+- deny: use only providers which do not collect user data.
+"""
+
+
+class SpeechRequestProviderTypedDict(TypedDict):
+    r"""Provider configuration: data policy routing preferences (`zdr`, `data_collection`) and provider-specific passthrough options"""
+
+    data_collection: NotRequired[Nullable[SpeechRequestDataCollection]]
+    r"""Data collection setting. If no available model provider meets the requirement, your request will return an error.
+    - allow: (default) allow providers which store user data non-transiently and may train on it
+
+    - deny: use only providers which do not collect user data.
+    """
     options: NotRequired[ProviderOptionsTypedDict]
     r"""Provider-specific options keyed by provider slug. Only options for the matched provider are forwarded; the rest are ignored. Unrecognized keys are silently dropped."""
+    zdr: NotRequired[Nullable[bool]]
+    r"""Whether to restrict routing to only ZDR (Zero Data Retention) endpoints. When true, only endpoints that do not retain prompts will be used."""
 
 
 class SpeechRequestProvider(BaseModel):
-    r"""Provider-specific passthrough configuration"""
+    r"""Provider configuration: data policy routing preferences (`zdr`, `data_collection`) and provider-specific passthrough options"""
+
+    data_collection: OptionalNullable[SpeechRequestDataCollection] = UNSET
+    r"""Data collection setting. If no available model provider meets the requirement, your request will return an error.
+    - allow: (default) allow providers which store user data non-transiently and may train on it
+
+    - deny: use only providers which do not collect user data.
+    """
 
     options: Optional[ProviderOptions] = None
     r"""Provider-specific options keyed by provider slug. Only options for the matched provider are forwarded; the rest are ignored. Unrecognized keys are silently dropped."""
 
+    zdr: OptionalNullable[bool] = UNSET
+    r"""Whether to restrict routing to only ZDR (Zero Data Retention) endpoints. When true, only endpoints that do not retain prompts will be used."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["options"])
+        optional_fields = set(["data_collection", "options", "zdr"])
+        nullable_fields = set(["data_collection", "zdr"])
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
             if val != UNSET_SENTINEL:
-                if val is not None or k not in optional_fields:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
                     m[k] = val
 
         return m
@@ -60,7 +108,7 @@ class SpeechRequestTypedDict(TypedDict):
     input_references: NotRequired[List[SpeechInputReferenceTypedDict]]
     r"""Reference content for stateless voice cloning or voice design. Audio mode: one to three `input_audio` parts, each optionally paired with a `text` part carrying its transcript (a single clip accepts its transcript before or after it; with multiple clips each transcript immediately follows its clip); only routed to endpoints that support voice cloning (and multiple references when more than one part is sent). Image mode: exactly one `image_url` part; only routed to endpoints that support image references. The two modes cannot be mixed. An empty array is treated as no reference."""
     provider: NotRequired[SpeechRequestProviderTypedDict]
-    r"""Provider-specific passthrough configuration"""
+    r"""Provider configuration: data policy routing preferences (`zdr`, `data_collection`) and provider-specific passthrough options"""
     response_format: NotRequired[SpeechRequestResponseFormat]
     r"""Audio output format"""
     session_id: NotRequired[str]
@@ -88,7 +136,7 @@ class SpeechRequest(BaseModel):
     r"""Reference content for stateless voice cloning or voice design. Audio mode: one to three `input_audio` parts, each optionally paired with a `text` part carrying its transcript (a single clip accepts its transcript before or after it; with multiple clips each transcript immediately follows its clip); only routed to endpoints that support voice cloning (and multiple references when more than one part is sent). Image mode: exactly one `image_url` part; only routed to endpoints that support image references. The two modes cannot be mixed. An empty array is treated as no reference."""
 
     provider: Optional[SpeechRequestProvider] = None
-    r"""Provider-specific passthrough configuration"""
+    r"""Provider configuration: data policy routing preferences (`zdr`, `data_collection`) and provider-specific passthrough options"""
 
     response_format: Optional[SpeechRequestResponseFormat] = "pcm"
     r"""Audio output format"""

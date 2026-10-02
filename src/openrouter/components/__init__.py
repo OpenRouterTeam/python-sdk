@@ -3855,6 +3855,7 @@ if TYPE_CHECKING:
     )
     from .speechrequest import (
         SpeechRequest,
+        SpeechRequestDataCollection,
         SpeechRequestProvider,
         SpeechRequestProviderTypedDict,
         SpeechRequestResponseFormat,
@@ -3931,6 +3932,7 @@ if TYPE_CHECKING:
     from .sttinputaudio import STTInputAudio, STTInputAudioTypedDict
     from .sttrequest import (
         STTRequest,
+        STTRequestDataCollection,
         STTRequestProvider,
         STTRequestProviderTypedDict,
         STTRequestResponseFormat,
@@ -6914,6 +6916,7 @@ __all__ = [
     "STTInputAudio",
     "STTInputAudioTypedDict",
     "STTRequest",
+    "STTRequestDataCollection",
     "STTRequestProvider",
     "STTRequestProviderTypedDict",
     "STTRequestResponseFormat",
@@ -7028,6 +7031,7 @@ __all__ = [
     "SpeechInputReferenceTextTypedDict",
     "SpeechInputReferenceTypedDict",
     "SpeechRequest",
+    "SpeechRequestDataCollection",
     "SpeechRequestProvider",
     "SpeechRequestProviderTypedDict",
     "SpeechRequestResponseFormat",
@@ -10295,6 +10299,7 @@ _dynamic_imports: dict[str, str] = {
     "SpeechInputReferenceTextType": ".speechinputreferencetext",
     "SpeechInputReferenceTextTypedDict": ".speechinputreferencetext",
     "SpeechRequest": ".speechrequest",
+    "SpeechRequestDataCollection": ".speechrequest",
     "SpeechRequestProvider": ".speechrequest",
     "SpeechRequestProviderTypedDict": ".speechrequest",
     "SpeechRequestResponseFormat": ".speechrequest",
@@ -10349,6 +10354,7 @@ _dynamic_imports: dict[str, str] = {
     "STTInputAudio": ".sttinputaudio",
     "STTInputAudioTypedDict": ".sttinputaudio",
     "STTRequest": ".sttrequest",
+    "STTRequestDataCollection": ".sttrequest",
     "STTRequestProvider": ".sttrequest",
     "STTRequestProviderTypedDict": ".sttrequest",
     "STTRequestResponseFormat": ".sttrequest",
