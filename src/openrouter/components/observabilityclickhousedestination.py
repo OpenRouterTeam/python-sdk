@@ -7,9 +7,10 @@ from .observabilityfilterrulesconfig import (
     ObservabilityFilterRulesConfigTypedDict,
 )
 from openrouter.types import BaseModel, Nullable, UNSET_SENTINEL
+import pydantic
 from pydantic import model_serializer
 from typing import Dict, List, Literal, Optional
-from typing_extensions import NotRequired, TypedDict
+from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class ObservabilityClickhouseDestinationConfigTypedDict(TypedDict):
@@ -20,6 +21,8 @@ class ObservabilityClickhouseDestinationConfigTypedDict(TypedDict):
     r"""If you have not set a specific username in ClickHouse, simply type in 'default' below."""
     headers: NotRequired[Dict[str, str]]
     r"""Custom HTTP headers to include in requests to this destination."""
+    should_include_cache_write_tokens: NotRequired[bool]
+    r"""Send the cache_write_tokens column (schema v2). Turn this on after the table has that column."""
     table: NotRequired[str]
 
 
@@ -36,11 +39,16 @@ class ObservabilityClickhouseDestinationConfig(BaseModel):
     headers: Optional[Dict[str, str]] = None
     r"""Custom HTTP headers to include in requests to this destination."""
 
+    should_include_cache_write_tokens: Annotated[
+        Optional[bool], pydantic.Field(alias="shouldIncludeCacheWriteTokens")
+    ] = False
+    r"""Send the cache_write_tokens column (schema v2). Turn this on after the table has that column."""
+
     table: Optional[str] = "OPENROUTER_TRACES"
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["headers", "table"])
+        optional_fields = set(["headers", "shouldIncludeCacheWriteTokens", "table"])
         serialized = handler(self)
         m = {}
 
@@ -151,3 +159,9 @@ class ObservabilityClickhouseDestination(BaseModel):
                 m[k] = val
 
         return m
+
+
+try:
+    ObservabilityClickhouseDestinationConfig.model_rebuild()
+except NameError:
+    pass

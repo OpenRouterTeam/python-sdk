@@ -20,6 +20,8 @@ class ObservabilitySnowflakeDestinationConfigTypedDict(TypedDict):
     headers: NotRequired[Dict[str, str]]
     r"""Custom HTTP headers to include in requests to this destination."""
     schema_: NotRequired[str]
+    should_include_cache_write_tokens: NotRequired[bool]
+    r"""Send the cache_write_tokens column (schema v2). Turn this on after the table has that column."""
     table: NotRequired[str]
     warehouse: NotRequired[str]
 
@@ -36,13 +38,27 @@ class ObservabilitySnowflakeDestinationConfig(BaseModel):
 
     schema_: Annotated[Optional[str], pydantic.Field(alias="schema")] = "PUBLIC"
 
+    should_include_cache_write_tokens: Annotated[
+        Optional[bool], pydantic.Field(alias="shouldIncludeCacheWriteTokens")
+    ] = False
+    r"""Send the cache_write_tokens column (schema v2). Turn this on after the table has that column."""
+
     table: Optional[str] = "OPENROUTER_TRACES"
 
     warehouse: Optional[str] = "COMPUTE_WH"
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["database", "headers", "schema", "table", "warehouse"])
+        optional_fields = set(
+            [
+                "database",
+                "headers",
+                "schema",
+                "shouldIncludeCacheWriteTokens",
+                "table",
+                "warehouse",
+            ]
+        )
         serialized = handler(self)
         m = {}
 

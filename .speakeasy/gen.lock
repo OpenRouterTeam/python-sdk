@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c48cf606-fb42-4a45-9c23-8f0555307828
 management:
-  docChecksum: 8abe20dddae4e7b02440675388d04c93
+  docChecksum: 760d004875633e6348b9bfb890c3bd8c
   docVersion: 1.0.0
   speakeasyVersion: 1.787.0
   generationVersion: 2.914.0
-  releaseVersion: 1.3.20
-  configChecksum: b3a434d2fd3357e83a22f52cbc59acc9
+  releaseVersion: 1.3.21
+  configChecksum: 35810a7fae971b75e145e6ddf5b5f316
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
 persistentEdits:
-  generation_id: 22a8d81b-6962-4a7a-879b-1df85c9aa529
-  pristine_commit_hash: 63219bc8ba569212cd1e322f17d2b7c4191209fb
-  pristine_tree_hash: 429988f8c37e24ee27c671a01f27540041beeebc
+  generation_id: 6fec7917-f08d-434d-b959-507ed8cfe7cf
+  pristine_commit_hash: 85c0ac656b6f26377214e1c9ef35f34a15fed715
+  pristine_tree_hash: b46ac90e077e5e8c6697a9ef837470606e04cd13
 features:
   python:
     acceptHeaders: 3.0.0
@@ -4720,8 +4720,8 @@ trackedFiles:
     pristine_git_object: 06bb6951553af8e01844bcc1ab58d6788e18e88e
   docs/components/observabilityclickhousedestinationconfig.mdx:
     id: 31969c4f79e6
-    last_write_checksum: sha1:581b45aab6174219694069db5d2dd187aa3c081f
-    pristine_git_object: 8135b0f9c2d554388911c676dda6267320a94a4d
+    last_write_checksum: sha1:31f6bab6a9f0425555fb5c1051e5e895a1e795de
+    pristine_git_object: 1eac658c872f9b45e51491109c5cd4c5db60c25c
   docs/components/observabilityclickhousedestinationtype.mdx:
     id: ec4a466d4fb8
     last_write_checksum: sha1:ac8b55b98f1cad8f07f10bca277e6a0c8f40c1a0
@@ -4892,8 +4892,8 @@ trackedFiles:
     pristine_git_object: 712283b47b3463e807882274d9ed4e4b2963ab73
   docs/components/observabilitysnowflakedestinationconfig.mdx:
     id: 61daa1944898
-    last_write_checksum: sha1:aba368fd00883f348c77fcee080414ec433a6dfe
-    pristine_git_object: 5ad320cb4111244bdfffc9e1080c29f10b00fc8a
+    last_write_checksum: sha1:051783c3bcf38021a24d17169dc7b50c32ce1b95
+    pristine_git_object: a7b7e4788fb3982661ecd0c47701172045ee06d5
   docs/components/observabilitysnowflakedestinationtype.mdx:
     id: ce8232e3dcd7
     last_write_checksum: sha1:1f91ffa3e55e4570d5eda35028be5c61c30cb44e
@@ -9948,8 +9948,8 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:7e820afca065e42e75bc14668a7ec342fa6b70b4
-    pristine_git_object: 50c7d881e250c4d86470d49dc2e1494313d79200
+    last_write_checksum: sha1:b7e0b8d7420690eeb9bf098a294279645db0b65c
+    pristine_git_object: e3e7ae7f960e9d1baeab971bcade558710a80664
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77f44b60b98bc126557ec27391f91dfba764bb54
@@ -9976,8 +9976,8 @@ trackedFiles:
     pristine_git_object: 86713cfea633e09d33b3d4e65281071fe20e6137
   src/openrouter/_version.py:
     id: d8d15ad6c586
-    last_write_checksum: sha1:76146d46cb3c9861b3bbdf6594d03159eda4d583
-    pristine_git_object: b5d1b8b21c7fa1d8a11beca3ff1a5edce0aa29dd
+    last_write_checksum: sha1:194010eeca6ea4256079ef235ac549751778f5e3
+    pristine_git_object: 23ec6d61b1489ced1f8f923a5f68a121dae58568
   src/openrouter/alpha.py:
     id: 306c4d93308d
     last_write_checksum: sha1:30f55a360f41376ab194b9ea725fe4e001a5ae1a
@@ -12048,8 +12048,8 @@ trackedFiles:
     pristine_git_object: 2a2090608a13fdccca9ae574ce769325cdaa8a4c
   src/openrouter/components/observabilityclickhousedestination.py:
     id: 0bafb43cfee3
-    last_write_checksum: sha1:a8bbf5bbb2e00bbb88c17e94447e172737c5ef7c
-    pristine_git_object: 96995a35ce5992c1165b0773e453a20d22b74871
+    last_write_checksum: sha1:0e5aab8c5d80956bd734ce88ded65ca5596e132f
+    pristine_git_object: 15bbbb625209e9622740ff21d0d86ec67ef4aff2
   src/openrouter/components/observabilitydatadogdestination.py:
     id: 2b99c86aa089
     last_write_checksum: sha1:b36d32cbaec5869c32993d3369a8bbf5f6b78090
@@ -12120,8 +12120,8 @@ trackedFiles:
     pristine_git_object: d399e852ca35e285dc2625907c935af1af75597c
   src/openrouter/components/observabilitysnowflakedestination.py:
     id: 4e4136c11a0f
-    last_write_checksum: sha1:db6593e37769502e38685fb3254f8308a8de9665
-    pristine_git_object: 53b005e660d20b8097ba003275ecfd0373e80d11
+    last_write_checksum: sha1:cf09566381c7160ce3e93655075d919325bfd9fb
+    pristine_git_object: c24acb2fd08fcfce196528f28904fa4a5ecd00f4
   src/openrouter/components/observabilityweavedestination.py:
     id: 6ee5e9677e6c
     last_write_checksum: sha1:f89b6ca0e6f05bdcd84affb8500dcb085f3a2cae
@@ -18242,3 +18242,9 @@ examples:
         "500":
           application/json: {"error": {"code": 500, "message": "Internal Server Error"}}
 examplesVersion: 1.0.2
+releaseNotes: |
+  ## Python SDK Changes:
+  * `open_router.observability.list()`:  `response.data[]` **Changed**
+  * `open_router.observability.create()`:  `response.data` **Changed**
+  * `open_router.observability.get()`:  `response.data` **Changed**
+  * `open_router.observability.update()`:  `response.data` **Changed**
