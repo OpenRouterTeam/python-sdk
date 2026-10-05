@@ -398,7 +398,7 @@ class Batch(BaseSDK):
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
         :param completion_window:
-        :param provider: Batch provider routing preferences. Only `provider.only` is supported.
+        :param provider: Batch provider routing preferences. Only `provider.only` and `provider.allow_fallbacks` are supported.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -555,7 +555,7 @@ class Batch(BaseSDK):
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
         :param completion_window:
-        :param provider: Batch provider routing preferences. Only `provider.only` is supported.
+        :param provider: Batch provider routing preferences. Only `provider.only` and `provider.allow_fallbacks` are supported.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds

@@ -25,22 +25,35 @@ BatchProviderPreferencesOnly = TypeAliasType(
 
 
 class BatchProviderPreferencesTypedDict(TypedDict):
-    r"""Batch provider routing preferences. Only `provider.only` is supported."""
+    r"""Batch provider routing preferences. Only `provider.only` and `provider.allow_fallbacks` are supported."""
 
+    allow_fallbacks: NotRequired[Nullable[bool]]
+    r"""Whether to allow backup providers to serve requests
+    - true: (default) when the primary provider (or your custom providers in \"order\") is unavailable, use the next best provider.
+    - false: use only the primary/custom provider, and return the upstream error if it's unavailable.
+
+    """
     only: NotRequired[Nullable[List[BatchProviderPreferencesOnlyTypedDict]]]
     r"""List of provider slugs to allow. If provided, this list is merged with your account-wide allowed provider settings for this request."""
 
 
 class BatchProviderPreferences(BaseModel):
-    r"""Batch provider routing preferences. Only `provider.only` is supported."""
+    r"""Batch provider routing preferences. Only `provider.only` and `provider.allow_fallbacks` are supported."""
+
+    allow_fallbacks: OptionalNullable[bool] = UNSET
+    r"""Whether to allow backup providers to serve requests
+    - true: (default) when the primary provider (or your custom providers in \"order\") is unavailable, use the next best provider.
+    - false: use only the primary/custom provider, and return the upstream error if it's unavailable.
+
+    """
 
     only: OptionalNullable[List[BatchProviderPreferencesOnly]] = UNSET
     r"""List of provider slugs to allow. If provided, this list is merged with your account-wide allowed provider settings for this request."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["only"])
-        nullable_fields = set(["only"])
+        optional_fields = set(["allow_fallbacks", "only"])
+        nullable_fields = set(["allow_fallbacks", "only"])
         serialized = handler(self)
         m = {}
 
