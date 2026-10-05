@@ -9,7 +9,7 @@ dependencies = [
     "httpcore >=1.0.9",
     "httpx >=0.28.1",
     "jsonpath-python >=1.0.6",
-    "pydantic >=2.11.2,<2.13",
+    "pydantic >=2.11.2,<3",
 ]
 urls.repository = "https://github.com/OpenRouterTeam/python-sdk.git"
 license = { text = "Apache-2.0" }
@@ -19,6 +19,8 @@ dev = [
     "mypy ==1.15.0",
     "pylint ==3.2.3",
     "pyright ==1.1.398",
+    "pytest >=8.3",
+    "pytest-asyncio >=0.24",
 ]
 
 [tool.setuptools.packages.find]
