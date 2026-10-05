@@ -53,7 +53,7 @@ class BatchSubmitBodyTypedDict(TypedDict):
     requests: List[RequestTypedDict]
     completion_window: NotRequired[BatchSubmitBodyCompletionWindow]
     provider: NotRequired[Nullable[BatchProviderPreferencesTypedDict]]
-    r"""Batch provider routing preferences. Only `provider.only` is supported."""
+    r"""Batch provider routing preferences. Only `provider.only` and `provider.allow_fallbacks` are supported."""
 
 
 class BatchSubmitBody(BaseModel):
@@ -68,7 +68,7 @@ class BatchSubmitBody(BaseModel):
     completion_window: Optional[BatchSubmitBodyCompletionWindow] = "24h"
 
     provider: OptionalNullable[BatchProviderPreferences] = UNSET
-    r"""Batch provider routing preferences. Only `provider.only` is supported."""
+    r"""Batch provider routing preferences. Only `provider.only` and `provider.allow_fallbacks` are supported."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
