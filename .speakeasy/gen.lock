@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c48cf606-fb42-4a45-9c23-8f0555307828
 management:
-  docChecksum: b7492c8532e08af2f18fd897dafdf6c1
+  docChecksum: 92453912467fdc8c606b911a5b8e5975
   docVersion: 1.0.0
   speakeasyVersion: 1.787.0
   generationVersion: 2.914.0
-  releaseVersion: 1.3.24
-  configChecksum: aa63ea38dd7b83ed76e7143a59ca5d16
+  releaseVersion: 1.3.25
+  configChecksum: 197161ed7ce578b24625f5a89c79af0c
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
 persistentEdits:
-  generation_id: 4ef97d03-0aa9-446d-be0a-640958f32299
-  pristine_commit_hash: c9d4805d5d46221d8d1860ce211dbda546faa73e
-  pristine_tree_hash: 89ba8877386433897b1603a8162ed37431516ce4
+  generation_id: 3c68b6da-5bbc-41a4-952e-6a5dba9f015e
+  pristine_commit_hash: 71ae1ce112aa0731f0289ec5c7db29743b949733
+  pristine_tree_hash: c1fb516226b4c9d577b2086079251e204b8aca35
 features:
   python:
     acceptHeaders: 3.0.0
@@ -7072,8 +7072,8 @@ trackedFiles:
     pristine_git_object: 7a513bd20c993f110b1fb306d9817cf049df27e4
   docs/components/switchyardrouterplugin.mdx:
     id: 86509511f517
-    last_write_checksum: sha1:b57983478e17c7ea94545eaa202fce2721e6b12a
-    pristine_git_object: f1bc7ba1ee8e68f56092b851bd370dbcb6b0bc9a
+    last_write_checksum: sha1:e19d53ed8cf47cbbc53b397efcf92e5858501290
+    pristine_git_object: ac32e6b38273286cd0d66c41230f3b2a311cebd9
   docs/components/switchyardrouterpluginid.mdx:
     id: f96cf92c71dd
     last_write_checksum: sha1:8e997764c9daef8157d569caeb20f26694b1f05d
@@ -9968,8 +9968,8 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:a2d65f9ace1d87949e024d0c08f71e07170bc429
-    pristine_git_object: 62bbb0adcb4bc0cdea07dfe9b09a9d9a922e1170
+    last_write_checksum: sha1:cff128d64b1561844bb58c5c3ef88161e984ec2c
+    pristine_git_object: 1a6ea457cdf932162660ee381611299c74ce6ceb
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77f44b60b98bc126557ec27391f91dfba764bb54
@@ -9996,8 +9996,8 @@ trackedFiles:
     pristine_git_object: 86713cfea633e09d33b3d4e65281071fe20e6137
   src/openrouter/_version.py:
     id: d8d15ad6c586
-    last_write_checksum: sha1:84febebabcfc90220554d0884bf4a0fa76c14630
-    pristine_git_object: de35bd4c9d2e15c98f53f9f2ff4fe605643bfae7
+    last_write_checksum: sha1:4efea9715e5b25b9b96e4363b90af25cdd0d13a7
+    pristine_git_object: f0da1b704a54839fa591866a2849df749fc02813
   src/openrouter/alpha.py:
     id: 306c4d93308d
     last_write_checksum: sha1:30f55a360f41376ab194b9ea725fe4e001a5ae1a
@@ -10860,8 +10860,8 @@ trackedFiles:
     pristine_git_object: 8bbde153b53887e426989fd5b0486b6dc1122810
   src/openrouter/components/chatrequest.py:
     id: 5e39eaefa9cf
-    last_write_checksum: sha1:44148b0c1a8c8a13c74b524ef9ee2f36d73b3ab3
-    pristine_git_object: d6557c221253a8300c8db056c81a4215dd156c29
+    last_write_checksum: sha1:f91d8533b6eb627ea724e30fac8f37cbd329798e
+    pristine_git_object: 919ce0752fd46d1a1a1a805ecd1fadc7d60acff8
   src/openrouter/components/chatresult.py:
     id: 9062fe2935fe
     last_write_checksum: sha1:2ff1963c54e7e79500115c8549c8d395f4e336d1
@@ -11968,8 +11968,8 @@ trackedFiles:
     pristine_git_object: 7e69d1f775baece5f94b03d35bcd884d5e6f519d
   src/openrouter/components/messagesrequest.py:
     id: 72b1f339024d
-    last_write_checksum: sha1:e2e438ee67a5f722cdcaea00fb64e045d5bd9f8e
-    pristine_git_object: 1c196b22ec2d66117ef6eff4d53308f655474dc7
+    last_write_checksum: sha1:fdbdaa70b5c220aa5e7e54b9c347dcd76d2cc29d
+    pristine_git_object: 7116204489465e0e2f61db6dbf5b3441c7ed35bb
   src/openrouter/components/messagessearchmodelsservertool.py:
     id: 53d755edb120
     last_write_checksum: sha1:389786fc22ba4bb47b0a086b7aa321f2f04fe943
@@ -12760,8 +12760,8 @@ trackedFiles:
     pristine_git_object: 900bf08ec940565a8cbf55712a437775db00ca46
   src/openrouter/components/responsesrequest.py:
     id: 8c850080ec5d
-    last_write_checksum: sha1:d64e19d79a268129251e35d8b504115cbdff1297
-    pristine_git_object: 3a11a4365e3f68394d1bc8970117bffaed3c41e2
+    last_write_checksum: sha1:cd92664efa3ed17d01899eb9673fefbe94712a42
+    pristine_git_object: 515413b2e2e98051b96f39ca410641b501a48ac7
   src/openrouter/components/responsesstreamingresponse.py:
     id: 142379f3bd90
     last_write_checksum: sha1:a48d6f3610f5d15248ef4d25a0d88a0a4a1a9db7
@@ -13060,8 +13060,8 @@ trackedFiles:
     pristine_git_object: 703bf7deed21138fa64db63e6648be4cd2f3d09d
   src/openrouter/components/switchyardrouterplugin.py:
     id: abdcef77e2bb
-    last_write_checksum: sha1:2f02cdb3fecffd9d949a359667564f21c6cbb942
-    pristine_git_object: 77e3f8034ef0bdefc05ad1c7045a3d5c903269b1
+    last_write_checksum: sha1:fd7f6968c8c117e4f54b48390aafb73229453855
+    pristine_git_object: 313ec57f291f2b80a84641158d5009dd63bdb856
   src/openrouter/components/taskclassificationitem.py:
     id: 86d4bab5ebf3
     last_write_checksum: sha1:16176fda0ccd16b0be59bb5c4b74db78eae02f36
@@ -18264,4 +18264,4 @@ examples:
         "500":
           application/json: {"error": {"code": 500, "message": "Internal Server Error"}}
 examplesVersion: 1.0.2
-releaseNotes: "## Python SDK Changes:\n* `open_router.byok.list()`:  `response.data[].declared_region` **Added**\n* `open_router.byok.create()`: \n  *  `request.declared_region` **Added**\n  *  `response.data.declared_region` **Added**\n* `open_router.byok.get()`:  `response.data.declared_region` **Added**\n* `open_router.byok.update()`: \n  *  `request.declared_region` **Added**\n  *  `response.data.declared_region` **Added**\n  *  `error.status[409]` **Added**\n"
+releaseNotes: "## Python SDK Changes:\n* `open_router.chat.send()`: \n  *  `request.plugins[].union(switchyard-router).judge_model` **Added**\n* `open_router.presets.create_presets_chat_completions()`: \n  *  `request.plugins[].union(switchyard-router).judge_model` **Added**\n* `open_router.presets.create_presets_messages()`: \n  *  `request.plugins[].union(switchyard-router).judge_model` **Added**\n* `open_router.presets.create_presets_responses()`: \n  *  `request.plugins[].union(switchyard-router).judge_model` **Added**\n* `open_router.responses.send()`: \n  *  `request.plugins[].union(switchyard-router).judge_model` **Added**\n* `open_router.beta.responses.send()`: \n  *  `request.plugins[].union(switchyard-router).judge_model` **Added**\n"

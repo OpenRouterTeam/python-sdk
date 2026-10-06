@@ -133,8 +133,8 @@ ResponsesRequestPluginTypedDict = TypeAliasType(
     "ResponsesRequestPluginTypedDict",
     Union[
         ModerationPluginTypedDict,
-        SwitchyardRouterPluginTypedDict,
         ResponseHealingPluginTypedDict,
+        SwitchyardRouterPluginTypedDict,
         FileParserPluginTypedDict,
         ContextCompressionPluginTypedDict,
         JevRouterPluginTypedDict,

@@ -84,8 +84,8 @@ ChatRequestPluginTypedDict = TypeAliasType(
     "ChatRequestPluginTypedDict",
     Union[
         ModerationPluginTypedDict,
-        SwitchyardRouterPluginTypedDict,
         ResponseHealingPluginTypedDict,
+        SwitchyardRouterPluginTypedDict,
         FileParserPluginTypedDict,
         ContextCompressionPluginTypedDict,
         JevRouterPluginTypedDict,
