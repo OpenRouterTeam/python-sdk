@@ -176,6 +176,8 @@ class GetKeyDataTypedDict(TypedDict):
     r"""Whether to include external BYOK usage in the credit limit"""
     label: str
     r"""Human-readable label for the API key"""
+    last_used_at: Nullable[datetime]
+    r"""ISO 8601 UTC timestamp of the most recent usage recorded for the API key, or null if no usage has been recorded since the end of 2025"""
     limit: Nullable[float]
     r"""Spending limit for the API key in USD"""
     limit_remaining: Nullable[float]
@@ -236,6 +238,9 @@ class GetKeyData(BaseModel):
     label: str
     r"""Human-readable label for the API key"""
 
+    last_used_at: Nullable[datetime]
+    r"""ISO 8601 UTC timestamp of the most recent usage recorded for the API key, or null if no usage has been recorded since the end of 2025"""
+
     limit: Nullable[float]
     r"""Spending limit for the API key in USD"""
 
@@ -277,6 +282,7 @@ class GetKeyData(BaseModel):
                 "creator_user_id",
                 "expires_at",
                 "external_user",
+                "last_used_at",
                 "limit",
                 "limit_remaining",
                 "limit_reset",

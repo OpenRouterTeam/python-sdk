@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c48cf606-fb42-4a45-9c23-8f0555307828
 management:
-  docChecksum: 92453912467fdc8c606b911a5b8e5975
+  docChecksum: ca478c9fe977377c5080ec03921023a8
   docVersion: 1.0.0
   speakeasyVersion: 1.787.0
   generationVersion: 2.914.0
-  releaseVersion: 1.3.25
-  configChecksum: 197161ed7ce578b24625f5a89c79af0c
+  releaseVersion: 1.3.26
+  configChecksum: f1f6fdb944dd84de88b781a775f1b193
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
 persistentEdits:
-  generation_id: 3c68b6da-5bbc-41a4-952e-6a5dba9f015e
-  pristine_commit_hash: 71ae1ce112aa0731f0289ec5c7db29743b949733
-  pristine_tree_hash: c1fb516226b4c9d577b2086079251e204b8aca35
+  generation_id: 7e99d85c-0497-46d2-8f32-30b6816934f7
+  pristine_commit_hash: 6559d85090ca32fc4de97e741687929da41137e2
+  pristine_tree_hash: 3d570f3d755633ea2ee0eb370a1ed7571858d615
 features:
   python:
     acceptHeaders: 3.0.0
@@ -8272,8 +8272,8 @@ trackedFiles:
     pristine_git_object: b3a22348904b9b6e07314e82f77b08763524eb1b
   docs/operations/createkeysdata.mdx:
     id: bf8133a06827
-    last_write_checksum: sha1:315420c8bb79b06c579bf9473d1f94a26b2aa626
-    pristine_git_object: 7bcdd1c73d9fc389639976fb5a305b4ce436c66b
+    last_write_checksum: sha1:a8e15d810ead6120052ac4db3c137d500b177bae
+    pristine_git_object: 18bb520f75ea52e2d534f65d62f1d9c370a73e0f
   docs/operations/createkeysglobals.mdx:
     id: ebcc738c53da
     last_write_checksum: sha1:dcec0f5013ef76e33fc43437e5689185abf61cb1
@@ -8292,8 +8292,8 @@ trackedFiles:
     pristine_git_object: b07f924076b7262a3de54f708f12cd0ee87eab5b
   docs/operations/createkeysresponse.mdx:
     id: 08e825fab080
-    last_write_checksum: sha1:268c49a74956884d1e3b3495fdf6ee6c7383e323
-    pristine_git_object: 83f6a2a6ba3926b76f509b84b7a41bc0e10e6d58
+    last_write_checksum: sha1:143b32c4d483cd13b14703816777c1947eac29a7
+    pristine_git_object: ef2250aecae9ca3602cbc41cd4a99305cc730de7
   docs/operations/createoauthtokenglobals.mdx:
     id: 253b06bd452b
     last_write_checksum: sha1:9f7cedf50a8fed5141d767597081ea1dc97a2469
@@ -8800,8 +8800,8 @@ trackedFiles:
     pristine_git_object: cd83fdf513f2e3581b526d6fd2bee78841dfd8c6
   docs/operations/getkeydata.mdx:
     id: 6e826a999e6b
-    last_write_checksum: sha1:8b5426689eaf7f90b5f12991eeb52cf3780d95f4
-    pristine_git_object: 1e5f092708886ee92cf4c50a3fb27228fa8572ba
+    last_write_checksum: sha1:839f9b181199dc3f3596227d05e6631f1dcdb459
+    pristine_git_object: 3ad8cfab8c6a35553d58525f37db5d8025a3a97f
   docs/operations/getkeyglobals.mdx:
     id: e0e92d532c82
     last_write_checksum: sha1:5a61d6565f3977a90314a46626caa89a8ab97c32
@@ -8812,8 +8812,8 @@ trackedFiles:
     pristine_git_object: 917f4073281196fdf9aa85f2d093ce3dd8b869b6
   docs/operations/getkeyresponse.mdx:
     id: dd773bd25661
-    last_write_checksum: sha1:2f5e0d69a00d8af16ea5ab66723cf638267a422a
-    pristine_git_object: b54168e5f08390768a2d105df374bea1457536d8
+    last_write_checksum: sha1:bacb224ced61ce3b45824f4c9776c87eac29a371
+    pristine_git_object: 962912273e07a640e61a46d5b949a71d69586e66
   docs/operations/getmodelglobals.mdx:
     id: 18648d7998ae
     last_write_checksum: sha1:7d198dc0c69e793b6681e2f96a76b7d43431cd4f
@@ -9068,8 +9068,8 @@ trackedFiles:
     pristine_git_object: 90add74a591950b1c08757f18063f33a49c73f65
   docs/operations/listdata.mdx:
     id: 949d8d9f5ac7
-    last_write_checksum: sha1:ad6cfad0f973f73ffc93542796af523c275eb535
-    pristine_git_object: 9c01abd87d9c54b1c37d139f26ce8fbbed362a4e
+    last_write_checksum: sha1:85cc0dd377f335aabf60daf2cff403036ee378a1
+    pristine_git_object: a68b8ca9bb2b0d8875bd04cf1f84f001f26a3553
   docs/operations/listembeddingsmodelsglobals.mdx:
     id: b9243861091c
     last_write_checksum: sha1:d9c528e4b7a94045e306b112a6b10c53205fe591
@@ -9680,8 +9680,8 @@ trackedFiles:
     pristine_git_object: 059a2165b5a09252162e7d21d25de48eb631e29d
   docs/operations/updatekeysdata.mdx:
     id: d398ba596e27
-    last_write_checksum: sha1:f028821be32f7627428ead62d856899c3d1d0fde
-    pristine_git_object: 763bb1b482ec1067dd01ffe0e583718bd4f27d14
+    last_write_checksum: sha1:f6f5cd048b7b6037bc087eca052d0b19d22c5530
+    pristine_git_object: 46e464000bc73ddda899ba6e4451448d027849b6
   docs/operations/updatekeysglobals.mdx:
     id: b28932f180bb
     last_write_checksum: sha1:1f5778b747552e491bdfff8ae6f24fa13d94e772
@@ -9700,8 +9700,8 @@ trackedFiles:
     pristine_git_object: b293f36e7709b7bebad59271db0885d29711c2d9
   docs/operations/updatekeysresponse.mdx:
     id: a97d51fea627
-    last_write_checksum: sha1:d480d817cca85b82432bcf8f2aba01e56fe14361
-    pristine_git_object: 8bd3a4f574817f49907b51a0048fd76eba0b214b
+    last_write_checksum: sha1:e3064726562fa278b17b113764602a46e0919ffe
+    pristine_git_object: 9440f9f6b4670fbb189520ec160f96c32c1ebab1
   docs/operations/updateobservabilitydestinationglobals.mdx:
     id: f85617547bfa
     last_write_checksum: sha1:c1f4d1a72d38359c5bd04f2845a587d2ad09d493
@@ -9968,8 +9968,8 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:cff128d64b1561844bb58c5c3ef88161e984ec2c
-    pristine_git_object: 1a6ea457cdf932162660ee381611299c74ce6ceb
+    last_write_checksum: sha1:178fb5ebf2d5e2e9357df50216ef837c9c45174b
+    pristine_git_object: 112fa9a986c4f28337593041fbe9378906ee2670
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77f44b60b98bc126557ec27391f91dfba764bb54
@@ -9996,8 +9996,8 @@ trackedFiles:
     pristine_git_object: 86713cfea633e09d33b3d4e65281071fe20e6137
   src/openrouter/_version.py:
     id: d8d15ad6c586
-    last_write_checksum: sha1:4efea9715e5b25b9b96e4363b90af25cdd0d13a7
-    pristine_git_object: f0da1b704a54839fa591866a2849df749fc02813
+    last_write_checksum: sha1:6e671a7634a6396b6de4bed0c69bd623b0ebbd90
+    pristine_git_object: 235db3aed8d14857805c9f976a5bc57a154113b3
   src/openrouter/alpha.py:
     id: 306c4d93308d
     last_write_checksum: sha1:30f55a360f41376ab194b9ea725fe4e001a5ae1a
@@ -13684,8 +13684,8 @@ trackedFiles:
     pristine_git_object: e25761cb500ef9cc21adf91165fb9f11fb8379da
   src/openrouter/operations/createkeys.py:
     id: 64ad31fdaa6c
-    last_write_checksum: sha1:92e122bf7ca252e6cc1f4200cbcd6ded9a0d35a7
-    pristine_git_object: 2fe95efbdbba0908f586d84148fad57b3b8a498e
+    last_write_checksum: sha1:ab6dc89efd3f557b263ccd2211fc5b2740d8e218
+    pristine_git_object: 90b845830f0bce796bd246c59c8c14806d764d44
   src/openrouter/operations/createoauthtoken.py:
     id: 02e1c061780d
     last_write_checksum: sha1:006884cfeeecfede1434f194460b7189cae89de1
@@ -13876,8 +13876,8 @@ trackedFiles:
     pristine_git_object: 6632fbbbe4e59918369b70cf2a365880f2d315d6
   src/openrouter/operations/getkey.py:
     id: d9769da90865
-    last_write_checksum: sha1:0a73a314d782011063d9879302dbb7b829d759e3
-    pristine_git_object: ceb137da2e14569b87b579ef40f3e21a45a063bd
+    last_write_checksum: sha1:63a27034e350b578b6d5f29d6568111bc14c75c1
+    pristine_git_object: 924bb00ec6b3bcb57c9fb8442407b9c3ccc92b9d
   src/openrouter/operations/getmodel.py:
     id: 90c926cd726f
     last_write_checksum: sha1:3ba2f12410841c49e329821b8eaec5f87d5882c1
@@ -13952,8 +13952,8 @@ trackedFiles:
     pristine_git_object: e2024274ca5a6aedb60eb9d9dfdc741e04b26c03
   src/openrouter/operations/list.py:
     id: 3ced31e3804e
-    last_write_checksum: sha1:bfad6d8e4c453367e509f063825899ce72b33449
-    pristine_git_object: bec5a577e95e905673b68d02fc873b0bb9a3cd8a
+    last_write_checksum: sha1:a81bfd1c2a41849005e61cbd11502cc3bd19d417
+    pristine_git_object: 7e0c0023c907ef35c9abc797d5cf9152603e3d23
   src/openrouter/operations/listbatches.py:
     id: 9ad1345dc956
     last_write_checksum: sha1:e568e38db37703d3e2d35f460d25421f98da21a1
@@ -14152,8 +14152,8 @@ trackedFiles:
     pristine_git_object: d87519cfb18258224c2958076dedb16ff4abe208
   src/openrouter/operations/updatekeys.py:
     id: 56fb213253a8
-    last_write_checksum: sha1:143e7df66832596b325cc9f86aad485ba57d6cb8
-    pristine_git_object: 970481df256dcdef6d95f63d9a8da6b67ef354dd
+    last_write_checksum: sha1:d70e4b1e06f8b0e1569a172e263b3e541edf4442
+    pristine_git_object: 3862d92575f681cc5eb43fd27d3d57114972ed2e
   src/openrouter/operations/updateobservabilitydestination.py:
     id: 18e06708d1b4
     last_write_checksum: sha1:d490e19e8698ed5193df9d06673f975cb3a1410f
@@ -14625,7 +14625,7 @@ examples:
     speakeasy-default-list:
       responses:
         "200":
-          application/json: {"data": [{"byok_usage": 17.38, "byok_usage_daily": 17.38, "byok_usage_monthly": 17.38, "byok_usage_weekly": 17.38, "created_at": "2025-08-24T10:30:00Z", "creator_user_id": "user_2dHFtVWx2n56w6HkM0000000000", "disabled": false, "external_user": null, "hash": "f01d52606dc8f0a8303a7b5cc3fa07109c2e346cec7c0a16b40de462992ce943", "include_byok_in_limit": false, "label": "Production API Key", "limit": 100, "limit_remaining": 74.5, "limit_reset": "monthly", "name": "My Production Key", "updated_at": "2025-08-24T15:45:00Z", "usage": 25.5, "usage_daily": 25.5, "usage_monthly": 25.5, "usage_weekly": 25.5, "workspace_id": "0df9e665-d932-5740-b2c7-b52af166bc11"}]}
+          application/json: {"data": [{"byok_usage": 17.38, "byok_usage_daily": 17.38, "byok_usage_monthly": 17.38, "byok_usage_weekly": 17.38, "created_at": "2025-08-24T10:30:00Z", "creator_user_id": "user_2dHFtVWx2n56w6HkM0000000000", "disabled": false, "external_user": null, "hash": "f01d52606dc8f0a8303a7b5cc3fa07109c2e346cec7c0a16b40de462992ce943", "include_byok_in_limit": false, "label": "Production API Key", "last_used_at": "2026-09-15T15:45:00Z", "limit": 100, "limit_remaining": 74.5, "limit_reset": "monthly", "name": "My Production Key", "updated_at": "2025-08-24T15:45:00Z", "usage": 25.5, "usage_daily": 25.5, "usage_monthly": 25.5, "usage_weekly": 25.5, "workspace_id": "0df9e665-d932-5740-b2c7-b52af166bc11"}]}
         "401":
           application/json: {"error": {"code": 401, "message": "Missing Authentication header"}}
         "429":
@@ -14640,7 +14640,7 @@ examples:
         application/json: {"name": "My New API Key"}
       responses:
         "201":
-          application/json: {"data": {"byok_usage": 0, "byok_usage_daily": 0, "byok_usage_monthly": 0, "byok_usage_weekly": 0, "created_at": "2025-08-24T10:30:00Z", "creator_user_id": "user_2dHFtVWx2n56w6HkM0000000000", "disabled": false, "external_user": null, "hash": "f01d52606dc8f0a8303a7b5cc3fa07109c2e346cec7c0a16b40de462992ce943", "include_byok_in_limit": true, "label": "My New API Key", "limit": 50, "limit_remaining": 50, "limit_reset": "monthly", "name": "My New API Key", "updated_at": null, "usage": 0, "usage_daily": 0, "usage_monthly": 0, "usage_weekly": 0, "workspace_id": "0df9e665-d932-5740-b2c7-b52af166bc11"}, "key": "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"}
+          application/json: {"data": {"byok_usage": 0, "byok_usage_daily": 0, "byok_usage_monthly": 0, "byok_usage_weekly": 0, "created_at": "2025-08-24T10:30:00Z", "creator_user_id": "user_2dHFtVWx2n56w6HkM0000000000", "disabled": false, "external_user": null, "hash": "f01d52606dc8f0a8303a7b5cc3fa07109c2e346cec7c0a16b40de462992ce943", "include_byok_in_limit": true, "label": "My New API Key", "last_used_at": null, "limit": 50, "limit_remaining": 50, "limit_reset": "monthly", "name": "My New API Key", "updated_at": null, "usage": 0, "usage_daily": 0, "usage_monthly": 0, "usage_weekly": 0, "workspace_id": "0df9e665-d932-5740-b2c7-b52af166bc11"}, "key": "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"}
         "400":
           application/json: {"error": {"code": 400, "message": "Invalid request parameters"}}
         "401":
@@ -14660,7 +14660,7 @@ examples:
         application/json: {}
       responses:
         "200":
-          application/json: {"data": {"byok_usage": 17.38, "byok_usage_daily": 17.38, "byok_usage_monthly": 17.38, "byok_usage_weekly": 17.38, "created_at": "2025-08-24T10:30:00Z", "creator_user_id": "user_2dHFtVWx2n56w6HkM0000000000", "disabled": false, "external_user": null, "hash": "f01d52606dc8f0a8303a7b5cc3fa07109c2e346cec7c0a16b40de462992ce943", "include_byok_in_limit": true, "label": "Updated API Key Name", "limit": 75, "limit_remaining": 49.5, "limit_reset": "daily", "name": "Updated API Key Name", "updated_at": "2025-08-24T16:00:00Z", "usage": 25.5, "usage_daily": 25.5, "usage_monthly": 25.5, "usage_weekly": 25.5, "workspace_id": "0df9e665-d932-5740-b2c7-b52af166bc11"}}
+          application/json: {"data": {"byok_usage": 17.38, "byok_usage_daily": 17.38, "byok_usage_monthly": 17.38, "byok_usage_weekly": 17.38, "created_at": "2025-08-24T10:30:00Z", "creator_user_id": "user_2dHFtVWx2n56w6HkM0000000000", "disabled": false, "external_user": null, "hash": "f01d52606dc8f0a8303a7b5cc3fa07109c2e346cec7c0a16b40de462992ce943", "include_byok_in_limit": true, "label": "Updated API Key Name", "last_used_at": "2026-09-15T15:45:00Z", "limit": 75, "limit_remaining": 49.5, "limit_reset": "daily", "name": "Updated API Key Name", "updated_at": "2025-08-24T16:00:00Z", "usage": 25.5, "usage_daily": 25.5, "usage_monthly": 25.5, "usage_weekly": 25.5, "workspace_id": "0df9e665-d932-5740-b2c7-b52af166bc11"}}
         "400":
           application/json: {"error": {"code": 400, "message": "Invalid request parameters"}}
         "401":
@@ -14712,7 +14712,7 @@ examples:
           hash: "f01d52606dc8f0a8303a7b5cc3fa07109c2e346cec7c0a16b40de462992ce943"
       responses:
         "200":
-          application/json: {"data": {"byok_usage": 17.38, "byok_usage_daily": 17.38, "byok_usage_monthly": 17.38, "byok_usage_weekly": 17.38, "created_at": "2025-08-24T10:30:00Z", "creator_user_id": "user_2dHFtVWx2n56w6HkM0000000000", "disabled": false, "external_user": null, "hash": "f01d52606dc8f0a8303a7b5cc3fa07109c2e346cec7c0a16b40de462992ce943", "include_byok_in_limit": false, "label": "Production API Key", "limit": 100, "limit_remaining": 74.5, "limit_reset": "monthly", "name": "My Production Key", "updated_at": "2025-08-24T15:45:00Z", "usage": 25.5, "usage_daily": 25.5, "usage_monthly": 25.5, "usage_weekly": 25.5, "workspace_id": "0df9e665-d932-5740-b2c7-b52af166bc11"}}
+          application/json: {"data": {"byok_usage": 17.38, "byok_usage_daily": 17.38, "byok_usage_monthly": 17.38, "byok_usage_weekly": 17.38, "created_at": "2025-08-24T10:30:00Z", "creator_user_id": "user_2dHFtVWx2n56w6HkM0000000000", "disabled": false, "external_user": null, "hash": "f01d52606dc8f0a8303a7b5cc3fa07109c2e346cec7c0a16b40de462992ce943", "include_byok_in_limit": false, "label": "Production API Key", "last_used_at": "2026-09-15T15:45:00Z", "limit": 100, "limit_remaining": 74.5, "limit_reset": "monthly", "name": "My Production Key", "updated_at": "2025-08-24T15:45:00Z", "usage": 25.5, "usage_daily": 25.5, "usage_monthly": 25.5, "usage_weekly": 25.5, "workspace_id": "0df9e665-d932-5740-b2c7-b52af166bc11"}}
         "401":
           application/json: {"error": {"code": 401, "message": "Missing Authentication header"}}
         "404":
@@ -18264,4 +18264,9 @@ examples:
         "500":
           application/json: {"error": {"code": 500, "message": "Internal Server Error"}}
 examplesVersion: 1.0.2
-releaseNotes: "## Python SDK Changes:\n* `open_router.chat.send()`: \n  *  `request.plugins[].union(switchyard-router).judge_model` **Added**\n* `open_router.presets.create_presets_chat_completions()`: \n  *  `request.plugins[].union(switchyard-router).judge_model` **Added**\n* `open_router.presets.create_presets_messages()`: \n  *  `request.plugins[].union(switchyard-router).judge_model` **Added**\n* `open_router.presets.create_presets_responses()`: \n  *  `request.plugins[].union(switchyard-router).judge_model` **Added**\n* `open_router.responses.send()`: \n  *  `request.plugins[].union(switchyard-router).judge_model` **Added**\n* `open_router.beta.responses.send()`: \n  *  `request.plugins[].union(switchyard-router).judge_model` **Added**\n"
+releaseNotes: |
+  ## Python SDK Changes:
+  * `open_router.api_keys.list()`:  `response.data[].last_used_at` **Added**
+  * `open_router.api_keys.create()`:  `response.data.last_used_at` **Added**
+  * `open_router.api_keys.get()`:  `response.data.last_used_at` **Added**
+  * `open_router.api_keys.update()`:  `response.data.last_used_at` **Added**
