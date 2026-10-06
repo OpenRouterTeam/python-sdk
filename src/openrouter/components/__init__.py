@@ -3827,6 +3827,7 @@ if TYPE_CHECKING:
         ShellServerToolEnvironment,
         ShellServerToolEnvironmentTypedDict,
     )
+    from .speechinput import SpeechInput, SpeechInputTypedDict
     from .speechinputreference import (
         SpeechInputReference,
         SpeechInputReferenceTypedDict,
@@ -3862,6 +3863,7 @@ if TYPE_CHECKING:
         SpeechRequestResponseFormat,
         SpeechRequestTypedDict,
     )
+    from .speechturn import SpeechTurn, SpeechTurnTypedDict
     from .stopservertoolswhencondition import (
         StopServerToolsWhenCondition,
         StopServerToolsWhenConditionTypedDict,
@@ -7019,6 +7021,7 @@ __all__ = [
     "SourceContent",
     "SourceContentTypedDict",
     "SourceType",
+    "SpeechInput",
     "SpeechInputReference",
     "SpeechInputReferenceAudio",
     "SpeechInputReferenceAudioInput",
@@ -7034,12 +7037,15 @@ __all__ = [
     "SpeechInputReferenceTextType",
     "SpeechInputReferenceTextTypedDict",
     "SpeechInputReferenceTypedDict",
+    "SpeechInputTypedDict",
     "SpeechRequest",
     "SpeechRequestDataCollection",
     "SpeechRequestProvider",
     "SpeechRequestProviderTypedDict",
     "SpeechRequestResponseFormat",
     "SpeechRequestTypedDict",
+    "SpeechTurn",
+    "SpeechTurnTypedDict",
     "Speed",
     "Stance",
     "StanceTypedDict",
@@ -10290,6 +10296,8 @@ _dynamic_imports: dict[str, str] = {
     "ShellServerToolEngine": ".shellservertoolengine",
     "ShellServerToolEnvironment": ".shellservertoolenvironment",
     "ShellServerToolEnvironmentTypedDict": ".shellservertoolenvironment",
+    "SpeechInput": ".speechinput",
+    "SpeechInputTypedDict": ".speechinput",
     "SpeechInputReference": ".speechinputreference",
     "SpeechInputReferenceTypedDict": ".speechinputreference",
     "SpeechInputReferenceAudio": ".speechinputreferenceaudio",
@@ -10311,6 +10319,8 @@ _dynamic_imports: dict[str, str] = {
     "SpeechRequestProviderTypedDict": ".speechrequest",
     "SpeechRequestResponseFormat": ".speechrequest",
     "SpeechRequestTypedDict": ".speechrequest",
+    "SpeechTurn": ".speechturn",
+    "SpeechTurnTypedDict": ".speechturn",
     "StopServerToolsWhenCondition": ".stopservertoolswhencondition",
     "StopServerToolsWhenConditionTypedDict": ".stopservertoolswhencondition",
     "StopServerToolsWhenFinishReasonIs": ".stopservertoolswhenfinishreasonis",

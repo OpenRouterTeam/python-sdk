@@ -16,7 +16,7 @@ class TTS(BaseSDK):
     def create_speech(
         self,
         *,
-        input: str,
+        input: Union[components.SpeechInput, components.SpeechInputTypedDict],
         model: str,
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
@@ -27,6 +27,7 @@ class TTS(BaseSDK):
                 Iterable[components.SpeechInputReferenceTypedDict],
             ]
         ] = None,
+        instructions: Optional[str] = None,
         provider: Optional[
             Union[
                 components.SpeechRequestProvider,
@@ -50,7 +51,7 @@ class TTS(BaseSDK):
 
         Synthesizes audio from the input text. Returns a raw audio bytestream in the requested format (e.g. mp3, pcm, wav).
 
-        :param input: Text to synthesize
+        :param input: Text to synthesize, or a list of turns for multi-speaker input. Each turn has its own text, voice, and instructions. Multi-speaker input is currently supported by Gemini TTS models only.
         :param model: TTS model identifier
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
@@ -60,6 +61,7 @@ class TTS(BaseSDK):
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
         :param input_references: Reference content for stateless voice cloning or voice design. Audio mode: one to three `input_audio` parts, each optionally paired with a `text` part carrying its transcript (a single clip accepts its transcript before or after it; with multiple clips each transcript immediately follows its clip); only routed to endpoints that support voice cloning (and multiple references when more than one part is sent). Image mode: exactly one `image_url` part; only routed to endpoints that support image references. The two modes cannot be mixed. An empty array is treated as no reference.
+        :param instructions: Delivery instructions for the whole request, such as tone, pacing, or emotion. Supported by OpenAI gpt-4o-mini-tts and Gemini TTS models. Ignored by other providers.
         :param provider: Provider configuration: data policy routing preferences (`zdr`, `data_collection`) and provider-specific passthrough options
         :param response_format: Audio output format
         :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow). Used for observability grouping in Broadcast and private logging; never sent to the provider. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters.
@@ -87,10 +89,11 @@ class TTS(BaseSDK):
             x_open_router_title=x_open_router_title,
             x_open_router_categories=x_open_router_categories,
             speech_request=components.SpeechRequest(
-                input=input,
+                input=utils.get_pydantic_model(input, components.SpeechInput),
                 input_references=utils.get_pydantic_model(
                     input_references, Optional[List[components.SpeechInputReference]]
                 ),
+                instructions=instructions,
                 model=model,
                 provider=utils.get_pydantic_model(
                     provider, Optional[components.SpeechRequestProvider]
@@ -269,7 +272,7 @@ class TTS(BaseSDK):
     async def create_speech_async(
         self,
         *,
-        input: str,
+        input: Union[components.SpeechInput, components.SpeechInputTypedDict],
         model: str,
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
@@ -280,6 +283,7 @@ class TTS(BaseSDK):
                 Iterable[components.SpeechInputReferenceTypedDict],
             ]
         ] = None,
+        instructions: Optional[str] = None,
         provider: Optional[
             Union[
                 components.SpeechRequestProvider,
@@ -303,7 +307,7 @@ class TTS(BaseSDK):
 
         Synthesizes audio from the input text. Returns a raw audio bytestream in the requested format (e.g. mp3, pcm, wav).
 
-        :param input: Text to synthesize
+        :param input: Text to synthesize, or a list of turns for multi-speaker input. Each turn has its own text, voice, and instructions. Multi-speaker input is currently supported by Gemini TTS models only.
         :param model: TTS model identifier
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
@@ -313,6 +317,7 @@ class TTS(BaseSDK):
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
         :param input_references: Reference content for stateless voice cloning or voice design. Audio mode: one to three `input_audio` parts, each optionally paired with a `text` part carrying its transcript (a single clip accepts its transcript before or after it; with multiple clips each transcript immediately follows its clip); only routed to endpoints that support voice cloning (and multiple references when more than one part is sent). Image mode: exactly one `image_url` part; only routed to endpoints that support image references. The two modes cannot be mixed. An empty array is treated as no reference.
+        :param instructions: Delivery instructions for the whole request, such as tone, pacing, or emotion. Supported by OpenAI gpt-4o-mini-tts and Gemini TTS models. Ignored by other providers.
         :param provider: Provider configuration: data policy routing preferences (`zdr`, `data_collection`) and provider-specific passthrough options
         :param response_format: Audio output format
         :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow). Used for observability grouping in Broadcast and private logging; never sent to the provider. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters.
@@ -340,10 +345,11 @@ class TTS(BaseSDK):
             x_open_router_title=x_open_router_title,
             x_open_router_categories=x_open_router_categories,
             speech_request=components.SpeechRequest(
-                input=input,
+                input=utils.get_pydantic_model(input, components.SpeechInput),
                 input_references=utils.get_pydantic_model(
                     input_references, Optional[List[components.SpeechInputReference]]
                 ),
+                instructions=instructions,
                 model=model,
                 provider=utils.get_pydantic_model(
                     provider, Optional[components.SpeechRequestProvider]
