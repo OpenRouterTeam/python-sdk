@@ -376,8 +376,8 @@ MessagesRequestPluginTypedDict = TypeAliasType(
     "MessagesRequestPluginTypedDict",
     Union[
         ModerationPluginTypedDict,
-        SwitchyardRouterPluginTypedDict,
         ResponseHealingPluginTypedDict,
+        SwitchyardRouterPluginTypedDict,
         FileParserPluginTypedDict,
         ContextCompressionPluginTypedDict,
         JevRouterPluginTypedDict,
