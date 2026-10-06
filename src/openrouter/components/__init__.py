@@ -964,7 +964,7 @@ if TYPE_CHECKING:
         BulkUnassignMembersResponse,
         BulkUnassignMembersResponseTypedDict,
     )
-    from .byokkey import BYOKKey, BYOKKeyTypedDict
+    from .byokkey import BYOKKey, BYOKKeyDeclaredRegion, BYOKKeyTypedDict
     from .byokproviderslug import BYOKProviderSlug
     from .capabilitydescriptor import (
         CapabilityDescriptor,
@@ -1400,6 +1400,7 @@ if TYPE_CHECKING:
     from .costdetails import CostDetails, CostDetailsTypedDict
     from .createbyokkeyrequest import (
         CreateBYOKKeyRequest,
+        CreateBYOKKeyRequestDeclaredRegion,
         CreateBYOKKeyRequestTypedDict,
     )
     from .createbyokkeyresponse import (
@@ -4106,6 +4107,7 @@ if TYPE_CHECKING:
     )
     from .updatebyokkeyrequest import (
         UpdateBYOKKeyRequest,
+        UpdateBYOKKeyRequestDeclaredRegion,
         UpdateBYOKKeyRequestTypedDict,
     )
     from .updatebyokkeyresponse import (
@@ -4775,6 +4777,7 @@ __all__ = [
     "AutoRouterPluginTypedDict",
     "BYOK",
     "BYOKKey",
+    "BYOKKeyDeclaredRegion",
     "BYOKKeyTypedDict",
     "BYOKProviderSlug",
     "BadGatewayResponseErrorData",
@@ -5291,6 +5294,7 @@ __all__ = [
     "CostDetails",
     "CostDetailsTypedDict",
     "CreateBYOKKeyRequest",
+    "CreateBYOKKeyRequestDeclaredRegion",
     "CreateBYOKKeyRequestTypedDict",
     "CreateBYOKKeyResponse",
     "CreateBYOKKeyResponseTypedDict",
@@ -7323,6 +7327,7 @@ __all__ = [
     "UnprocessableEntityResponseErrorData",
     "UnprocessableEntityResponseErrorDataTypedDict",
     "UpdateBYOKKeyRequest",
+    "UpdateBYOKKeyRequestDeclaredRegion",
     "UpdateBYOKKeyRequestTypedDict",
     "UpdateBYOKKeyResponse",
     "UpdateBYOKKeyResponseTypedDict",
@@ -8157,6 +8162,7 @@ _dynamic_imports: dict[str, str] = {
     "BulkUnassignMembersResponse": ".bulkunassignmembersresponse",
     "BulkUnassignMembersResponseTypedDict": ".bulkunassignmembersresponse",
     "BYOKKey": ".byokkey",
+    "BYOKKeyDeclaredRegion": ".byokkey",
     "BYOKKeyTypedDict": ".byokkey",
     "BYOKProviderSlug": ".byokproviderslug",
     "CapabilityDescriptor": ".capabilitydescriptor",
@@ -8465,6 +8471,7 @@ _dynamic_imports: dict[str, str] = {
     "CostDetails": ".costdetails",
     "CostDetailsTypedDict": ".costdetails",
     "CreateBYOKKeyRequest": ".createbyokkeyrequest",
+    "CreateBYOKKeyRequestDeclaredRegion": ".createbyokkeyrequest",
     "CreateBYOKKeyRequestTypedDict": ".createbyokkeyrequest",
     "CreateBYOKKeyResponse": ".createbyokkeyresponse",
     "CreateBYOKKeyResponseTypedDict": ".createbyokkeyresponse",
@@ -10480,6 +10487,7 @@ _dynamic_imports: dict[str, str] = {
     "UnprocessableEntityResponseErrorData": ".unprocessableentityresponseerrordata",
     "UnprocessableEntityResponseErrorDataTypedDict": ".unprocessableentityresponseerrordata",
     "UpdateBYOKKeyRequest": ".updatebyokkeyrequest",
+    "UpdateBYOKKeyRequestDeclaredRegion": ".updatebyokkeyrequest",
     "UpdateBYOKKeyRequestTypedDict": ".updatebyokkeyrequest",
     "UpdateBYOKKeyResponse": ".updatebyokkeyresponse",
     "UpdateBYOKKeyResponseTypedDict": ".updatebyokkeyresponse",

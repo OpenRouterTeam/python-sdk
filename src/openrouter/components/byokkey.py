@@ -8,10 +8,22 @@ from openrouter.types import (
     OptionalNullable,
     UNSET,
     UNSET_SENTINEL,
+    UnrecognizedStr,
 )
 from pydantic import model_serializer
-from typing import List
+from typing import List, Literal, Union
 from typing_extensions import NotRequired, TypedDict
+
+
+BYOKKeyDeclaredRegion = Union[
+    Literal[
+        "global",
+        "europe",
+        "us",
+    ],
+    UnrecognizedStr,
+]
+r"""Your declaration of the data region in which the upstream provider account behind this credential processes requests, used for routing eligibility on OpenRouter's regional hosts. `null` means undeclared and `global` is behaviorally identical: the credential follows the region OpenRouter records for the endpoint. `europe` or `us` lets requests to `eu.openrouter.ai` or `us.openrouter.ai` use this credential for that provider (private endpoints, endpoints pinned to another cloud region, cross-region inference profiles and video models are excluded). Self-declared and not verified by OpenRouter. For OpenAI and Fireworks the region comes from the key material (a `{\"api_key\": ..., \"region\": ...}` key), so the value must match the key's region. Among other providers, only Azure accepts `europe` or `us`."""
 
 
 class BYOKKeyTypedDict(TypedDict):
@@ -23,6 +35,8 @@ class BYOKKeyTypedDict(TypedDict):
     r"""Optional allowlist of user IDs that may use this credential. `null` means no restriction."""
     created_at: str
     r"""ISO timestamp of when the credential was created."""
+    declared_region: Nullable[BYOKKeyDeclaredRegion]
+    r"""Your declaration of the data region in which the upstream provider account behind this credential processes requests, used for routing eligibility on OpenRouter's regional hosts. `null` means undeclared and `global` is behaviorally identical: the credential follows the region OpenRouter records for the endpoint. `europe` or `us` lets requests to `eu.openrouter.ai` or `us.openrouter.ai` use this credential for that provider (private endpoints, endpoints pinned to another cloud region, cross-region inference profiles and video models are excluded). Self-declared and not verified by OpenRouter. For OpenAI and Fireworks the region comes from the key material (a `{\"api_key\": ..., \"region\": ...}` key), so the value must match the key's region. Among other providers, only Azure accepts `europe` or `us`."""
     declared_zdr: Nullable[bool]
     r"""Your declaration of whether the upstream provider account behind this credential has zero data retention (ZDR). `null` inherits OpenRouter's data policy for the provider's endpoint; `true` declares the account ZDR so requests that require ZDR may route to this credential even when the shared endpoint retains data; `false` declares it non-ZDR so such requests never route to it. Self-declared and not verified by OpenRouter."""
     disabled: bool
@@ -59,6 +73,9 @@ class BYOKKey(BaseModel):
 
     created_at: str
     r"""ISO timestamp of when the credential was created."""
+
+    declared_region: Nullable[BYOKKeyDeclaredRegion]
+    r"""Your declaration of the data region in which the upstream provider account behind this credential processes requests, used for routing eligibility on OpenRouter's regional hosts. `null` means undeclared and `global` is behaviorally identical: the credential follows the region OpenRouter records for the endpoint. `europe` or `us` lets requests to `eu.openrouter.ai` or `us.openrouter.ai` use this credential for that provider (private endpoints, endpoints pinned to another cloud region, cross-region inference profiles and video models are excluded). Self-declared and not verified by OpenRouter. For OpenAI and Fireworks the region comes from the key material (a `{\"api_key\": ..., \"region\": ...}` key), so the value must match the key's region. Among other providers, only Azure accepts `europe` or `us`."""
 
     declared_zdr: Nullable[bool]
     r"""Your declaration of whether the upstream provider account behind this credential has zero data retention (ZDR). `null` inherits OpenRouter's data policy for the provider's endpoint; `true` declares the account ZDR so requests that require ZDR may route to this credential even when the shared endpoint retains data; `false` declares it non-ZDR so such requests never route to it. Self-declared and not verified by OpenRouter."""
@@ -101,6 +118,7 @@ class BYOKKey(BaseModel):
                 "allowed_api_key_hashes",
                 "allowed_models",
                 "allowed_user_ids",
+                "declared_region",
                 "declared_zdr",
                 "name",
                 "workspace_id",
