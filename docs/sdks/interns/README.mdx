@@ -16,6 +16,8 @@ Create, inspect, update, provision, suspend and delete OpenRouter interns throug
 * [update_intern](#update_intern) - Update an intern
 * [get_intern_daemon](#get_intern_daemon) - Get an intern's daemon access
 * [~~get_intern_daemon_access~~](#get_intern_daemon_access) - Get an intern's daemon access (deprecated alias) ⚠️ **Deprecated**
+* [~~sign_intern_daemon_access_request~~](#sign_intern_daemon_access_request) - Sign a daemon request with the caller's identity (deprecated alias) ⚠️ **Deprecated**
+* [sign_intern_daemon_request](#sign_intern_daemon_request) - Sign a daemon request with the caller's identity
 * [provision_intern](#provision_intern) - Provision an intern
 * [suspend_intern](#suspend_intern) - Suspend an intern
 * [chat](#chat) - Stream a chat completion with an intern
@@ -365,6 +367,106 @@ with OpenRouter(
 | errors.InternLifecycleError   | 401, 403, 404, 408, 409       | application/json              |
 | errors.InternLifecycleError   | 500                           | application/json              |
 | errors.OpenRouterDefaultError | 4XX, 5XX                      | \*/\*                         |
+
+## ~~sign_intern_daemon_access_request~~
+
+Deprecated alias of `POST /interns/{internId}/daemon/sign` with the same request, response, and errors. The API key selects the caller, workspace and visible interns. An intern's own API key sees only that intern: the collection and every other intern answer 404 to it. There is no default workspace fallback. Requests on regional hostnames such as `eu.openrouter.ai` are refused. [API key](/docs/api-reference/authentication) required.
+
+> ⚠️ **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
+
+### Example Usage
+
+```python
+from openrouter import OpenRouter
+import os
+
+
+with OpenRouter(
+    http_referer="<value>",
+    x_open_router_title="<value>",
+    x_open_router_categories="<value>",
+    api_key=os.getenv("OPENROUTER_API_KEY", ""),
+) as open_router:
+
+    res = open_router.interns.sign_intern_daemon_access_request(intern_id="7c9e6679-7425-40de-944b-e07fc1f90ae7", body_sha256="e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855")
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                                                                                                         | Type                                                                                                                                              | Required                                                                                                                                          | Description                                                                                                                                       | Example                                                                                                                                           |
+| ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `intern_id`                                                                                                                                       | *str*                                                                                                                                             | ✅                                                                                                                                | ID of an intern visible to the authenticated API key.                                                                                             | 7c9e6679-7425-40de-944b-e07fc1f90ae7                                                                                                              |
+| `body_sha256`                                                                                                                                     | *str*                                                                                                                                             | ✅                                                                                                                                | Lower-case hex SHA-256 of the exact bytes the CLI will send as the daemon request body.                                                           | e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855                                                                                  |
+| `http_referer`                                                                                                                                    | *Optional[str]*                                                                                                                                   | ➖                                                                                                                                | The app identifier should be your app's URL and is used as the primary identifier for rankings.<br/>This is used to track API usage per application.<br/> |                                                                                                                                                   |
+| `x_open_router_title`                                                                                                                             | *Optional[str]*                                                                                                                                   | ➖                                                                                                                                | The app display name allows you to customize how your app appears in OpenRouter's dashboard.<br/>                                                 |                                                                                                                                                   |
+| `x_open_router_categories`                                                                                                                        | *Optional[str]*                                                                                                                                   | ➖                                                                                                                                | Comma-separated list of app categories (e.g. "cli-agent,cloud-agent"). Used for marketplace rankings.<br/>                                        |                                                                                                                                                   |
+| `retries`                                                                                                                                         | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.mdx)                                                                                  | ➖                                                                                                                                | Configuration to override the default retry behavior of the client.                                                                               |                                                                                                                                                   |
+
+### Response
+
+**[operations.SignInternDaemonAccessRequestResponse](../../operations/signinterndaemonaccessrequestresponse.mdx)**
+
+### Errors
+
+| Error Type                        | Status Code                       | Content Type                      |
+| --------------------------------- | --------------------------------- | --------------------------------- |
+| errors.InternLifecycleError       | 400, 401, 403, 404, 408, 413, 415 | application/json                  |
+| errors.InternLifecycleError       | 429                               | application/json                  |
+| errors.InternLifecycleError       | 500                               | application/json                  |
+| errors.OpenRouterDefaultError     | 4XX, 5XX                          | \*/\*                             |
+
+## sign_intern_daemon_request
+
+Signs the SHA-256 digest of one request the CLI is about to send to the intern daemon, binding it to the intern and to the signed-in member so personal connections resolve. Only an OAuth session from `ori login --oidc` whose grant carries `vault:read` can sign: an API key is refused with 403 because it names no person, and an `interns`-only grant is refused with 403 because a proof releases that user's personal connections. The route is behind the same gate as chat and counts against the chat turn limiter. The response is sent with `Cache-Control: no-store`. The API key selects the caller, workspace and visible interns. An intern's own API key sees only that intern: the collection and every other intern answer 404 to it. There is no default workspace fallback. Requests on regional hostnames such as `eu.openrouter.ai` are refused. [API key](/docs/api-reference/authentication) required.
+
+### Example Usage
+
+```python
+from openrouter import OpenRouter
+import os
+
+
+with OpenRouter(
+    http_referer="<value>",
+    x_open_router_title="<value>",
+    x_open_router_categories="<value>",
+    api_key=os.getenv("OPENROUTER_API_KEY", ""),
+) as open_router:
+
+    res = open_router.interns.sign_intern_daemon_request(intern_id="7c9e6679-7425-40de-944b-e07fc1f90ae7", body_sha256="e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855")
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                                                                                                         | Type                                                                                                                                              | Required                                                                                                                                          | Description                                                                                                                                       | Example                                                                                                                                           |
+| ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `intern_id`                                                                                                                                       | *str*                                                                                                                                             | ✅                                                                                                                                | ID of an intern visible to the authenticated API key.                                                                                             | 7c9e6679-7425-40de-944b-e07fc1f90ae7                                                                                                              |
+| `body_sha256`                                                                                                                                     | *str*                                                                                                                                             | ✅                                                                                                                                | Lower-case hex SHA-256 of the exact bytes the CLI will send as the daemon request body.                                                           | e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855                                                                                  |
+| `http_referer`                                                                                                                                    | *Optional[str]*                                                                                                                                   | ➖                                                                                                                                | The app identifier should be your app's URL and is used as the primary identifier for rankings.<br/>This is used to track API usage per application.<br/> |                                                                                                                                                   |
+| `x_open_router_title`                                                                                                                             | *Optional[str]*                                                                                                                                   | ➖                                                                                                                                | The app display name allows you to customize how your app appears in OpenRouter's dashboard.<br/>                                                 |                                                                                                                                                   |
+| `x_open_router_categories`                                                                                                                        | *Optional[str]*                                                                                                                                   | ➖                                                                                                                                | Comma-separated list of app categories (e.g. "cli-agent,cloud-agent"). Used for marketplace rankings.<br/>                                        |                                                                                                                                                   |
+| `retries`                                                                                                                                         | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.mdx)                                                                                  | ➖                                                                                                                                | Configuration to override the default retry behavior of the client.                                                                               |                                                                                                                                                   |
+
+### Response
+
+**[operations.SignInternDaemonRequestResponse](../../operations/signinterndaemonrequestresponse.mdx)**
+
+### Errors
+
+| Error Type                        | Status Code                       | Content Type                      |
+| --------------------------------- | --------------------------------- | --------------------------------- |
+| errors.InternLifecycleError       | 400, 401, 403, 404, 408, 413, 415 | application/json                  |
+| errors.InternLifecycleError       | 429                               | application/json                  |
+| errors.InternLifecycleError       | 500                               | application/json                  |
+| errors.OpenRouterDefaultError     | 4XX, 5XX                          | \*/\*                             |
 
 ## provision_intern
 

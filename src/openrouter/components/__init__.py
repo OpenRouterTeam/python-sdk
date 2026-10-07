@@ -3827,6 +3827,14 @@ if TYPE_CHECKING:
         ShellServerToolEnvironment,
         ShellServerToolEnvironmentTypedDict,
     )
+    from .signinterndaemonrequest import (
+        SignInternDaemonRequest,
+        SignInternDaemonRequestTypedDict,
+    )
+    from .signinterndaemonresponse import (
+        SignInternDaemonResponse,
+        SignInternDaemonResponseTypedDict,
+    )
     from .speechinput import SpeechInput, SpeechInputTypedDict
     from .speechinputreference import (
         SpeechInputReference,
@@ -7039,6 +7047,10 @@ __all__ = [
     "ShellServerToolOpenRouterTypedDict",
     "ShellServerToolType",
     "ShellServerToolTypedDict",
+    "SignInternDaemonRequest",
+    "SignInternDaemonRequestTypedDict",
+    "SignInternDaemonResponse",
+    "SignInternDaemonResponseTypedDict",
     "SourceContent",
     "SourceContentTypedDict",
     "SourceType",
@@ -10334,6 +10346,10 @@ _dynamic_imports: dict[str, str] = {
     "ShellServerToolEngine": ".shellservertoolengine",
     "ShellServerToolEnvironment": ".shellservertoolenvironment",
     "ShellServerToolEnvironmentTypedDict": ".shellservertoolenvironment",
+    "SignInternDaemonRequest": ".signinterndaemonrequest",
+    "SignInternDaemonRequestTypedDict": ".signinterndaemonrequest",
+    "SignInternDaemonResponse": ".signinterndaemonresponse",
+    "SignInternDaemonResponseTypedDict": ".signinterndaemonresponse",
     "SpeechInput": ".speechinput",
     "SpeechInputTypedDict": ".speechinput",
     "SpeechInputReference": ".speechinputreference",
