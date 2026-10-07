@@ -22871,12 +22871,16 @@ components:
       properties:
         call_id:
           type: 'string'
+        error:
+          description: 'The error message when the tool call failed before producing a result. Set together with `status: ''failed''`; absent on a successful call.'
+          example: 'Tool execution failed'
+          type: 'string'
         id:
           type: 'string'
         operation:
           $ref: '#/components/schemas/ApplyPatchCallOperation'
         status:
-          $ref: '#/components/schemas/ToolCallStatus'
+          $ref: '#/components/schemas/FailableToolCallStatus'
         type:
           enum:
             - 'openrouter:apply_patch'
@@ -23131,10 +23135,14 @@ components:
         datetime:
           description: 'ISO 8601 datetime string'
           type: 'string'
+        error:
+          description: 'The error message when the tool call failed before producing a result. Set together with `status: ''failed''`; absent on a successful call.'
+          example: 'Tool execution failed'
+          type: 'string'
         id:
           type: 'string'
         status:
-          $ref: '#/components/schemas/ToolCallStatus'
+          $ref: '#/components/schemas/FailableToolCallStatus'
         timezone:
           description: 'IANA timezone name'
           type: 'string'
@@ -23342,6 +23350,10 @@ components:
         status: 'completed'
         type: 'openrouter:image_generation'
       properties:
+        error:
+          description: 'The error message when the tool call failed before producing a result. Set together with `status: ''failed''`; absent on a successful call.'
+          example: 'Tool execution failed'
+          type: 'string'
         id:
           type: 'string'
         imageB64:
@@ -23359,7 +23371,7 @@ components:
         revisedPrompt:
           type: 'string'
         status:
-          $ref: '#/components/schemas/ToolCallStatus'
+          $ref: '#/components/schemas/FailableToolCallStatus'
         type:
           enum:
             - 'openrouter:image_generation'
@@ -24082,12 +24094,16 @@ components:
         arguments:
           description: 'The JSON arguments submitted to the search tool (e.g. {"query":"Claude"})'
           type: 'string'
+        error:
+          description: 'The error message when the tool call failed before producing a result. Set together with `status: ''failed''`; absent on a successful call.'
+          example: 'Tool execution failed'
+          type: 'string'
         id:
           type: 'string'
         query:
           type: 'string'
         status:
-          $ref: '#/components/schemas/ToolCallStatus'
+          $ref: '#/components/schemas/FailableToolCallStatus'
         type:
           enum:
             - 'openrouter:experimental__search_models'
@@ -24400,12 +24416,16 @@ components:
         status: 'completed'
         type: 'openrouter:tool_search'
       properties:
+        error:
+          description: 'The error message when the tool call failed before producing a result. Set together with `status: ''failed''`; absent on a successful call.'
+          example: 'Tool execution failed'
+          type: 'string'
         id:
           type: 'string'
         query:
           type: 'string'
         status:
-          $ref: '#/components/schemas/ToolCallStatus'
+          $ref: '#/components/schemas/FailableToolCallStatus'
         type:
           enum:
             - 'openrouter:tool_search'
@@ -24495,10 +24515,14 @@ components:
             - 'type'
             - 'query'
           type: 'object'
+        error:
+          description: 'The error message when the tool call failed before producing a result. Set together with `status: ''failed''`; absent on a successful call.'
+          example: 'Tool execution failed'
+          type: 'string'
         id:
           type: 'string'
         status:
-          $ref: '#/components/schemas/ToolCallStatus'
+          $ref: '#/components/schemas/FailableToolCallStatus'
         type:
           enum:
             - 'openrouter:web_search'

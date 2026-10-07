@@ -5,7 +5,7 @@ from .applypatchcalloperation import (
     ApplyPatchCallOperation,
     ApplyPatchCallOperationTypedDict,
 )
-from .toolcallstatus import ToolCallStatus
+from .failabletoolcallstatus import FailableToolCallStatus
 from openrouter.types import BaseModel, UNSET_SENTINEL
 from pydantic import model_serializer
 from typing import Literal, Optional
@@ -18,9 +18,11 @@ OutputApplyPatchServerToolItemType = Literal["openrouter:apply_patch",]
 class OutputApplyPatchServerToolItemTypedDict(TypedDict):
     r"""An openrouter:apply_patch server tool output item. The turn halts when validation succeeds so the client can apply the patch and echo an `apply_patch_call_output` on the next turn."""
 
-    status: ToolCallStatus
+    status: FailableToolCallStatus
     type: OutputApplyPatchServerToolItemType
     call_id: NotRequired[str]
+    error: NotRequired[str]
+    r"""The error message when the tool call failed before producing a result. Set together with `status: 'failed'`; absent on a successful call."""
     id: NotRequired[str]
     operation: NotRequired[ApplyPatchCallOperationTypedDict]
     r"""The patch operation requested by an `apply_patch_call`. `create_file` and `update_file` carry a V4A diff; `delete_file` omits it."""
@@ -29,11 +31,14 @@ class OutputApplyPatchServerToolItemTypedDict(TypedDict):
 class OutputApplyPatchServerToolItem(BaseModel):
     r"""An openrouter:apply_patch server tool output item. The turn halts when validation succeeds so the client can apply the patch and echo an `apply_patch_call_output` on the next turn."""
 
-    status: ToolCallStatus
+    status: FailableToolCallStatus
 
     type: OutputApplyPatchServerToolItemType
 
     call_id: Optional[str] = None
+
+    error: Optional[str] = None
+    r"""The error message when the tool call failed before producing a result. Set together with `status: 'failed'`; absent on a successful call."""
 
     id: Optional[str] = None
 
@@ -42,7 +47,7 @@ class OutputApplyPatchServerToolItem(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["call_id", "id", "operation"])
+        optional_fields = set(["call_id", "error", "id", "operation"])
         serialized = handler(self)
         m = {}
 
