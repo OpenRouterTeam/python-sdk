@@ -3329,6 +3329,12 @@ if TYPE_CHECKING:
         OutputTextEditorServerToolItemType,
         OutputTextEditorServerToolItemTypedDict,
     )
+    from .outputtoolsearchcallitem import (
+        OutputToolSearchCallItem,
+        OutputToolSearchCallItemExecution,
+        OutputToolSearchCallItemType,
+        OutputToolSearchCallItemTypedDict,
+    )
     from .outputtoolsearchservertoolitem import (
         OutputToolSearchServerToolItem,
         OutputToolSearchServerToolItemType,
@@ -6650,6 +6656,10 @@ __all__ = [
     "OutputTextEditorServerToolItemTypedDict",
     "OutputTokensDetails",
     "OutputTokensDetailsTypedDict",
+    "OutputToolSearchCallItem",
+    "OutputToolSearchCallItemExecution",
+    "OutputToolSearchCallItemType",
+    "OutputToolSearchCallItemTypedDict",
     "OutputToolSearchServerToolItem",
     "OutputToolSearchServerToolItemType",
     "OutputToolSearchServerToolItemTypedDict",
@@ -9982,6 +9992,10 @@ _dynamic_imports: dict[str, str] = {
     "OutputTextEditorServerToolItem": ".outputtexteditorservertoolitem",
     "OutputTextEditorServerToolItemType": ".outputtexteditorservertoolitem",
     "OutputTextEditorServerToolItemTypedDict": ".outputtexteditorservertoolitem",
+    "OutputToolSearchCallItem": ".outputtoolsearchcallitem",
+    "OutputToolSearchCallItemExecution": ".outputtoolsearchcallitem",
+    "OutputToolSearchCallItemType": ".outputtoolsearchcallitem",
+    "OutputToolSearchCallItemTypedDict": ".outputtoolsearchcallitem",
     "OutputToolSearchServerToolItem": ".outputtoolsearchservertoolitem",
     "OutputToolSearchServerToolItemType": ".outputtoolsearchservertoolitem",
     "OutputToolSearchServerToolItemTypedDict": ".outputtoolsearchservertoolitem",
