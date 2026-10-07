@@ -97,6 +97,10 @@ from .outputtexteditorservertoolitem import (
     OutputTextEditorServerToolItem,
     OutputTextEditorServerToolItemTypedDict,
 )
+from .outputtoolsearchcallitem import (
+    OutputToolSearchCallItem,
+    OutputToolSearchCallItemTypedDict,
+)
 from .outputtoolsearchservertoolitem import (
     OutputToolSearchServerToolItem,
     OutputToolSearchServerToolItemTypedDict,
@@ -125,23 +129,24 @@ from typing_extensions import Annotated, TypeAliasType
 OutputItemsTypedDict = TypeAliasType(
     "OutputItemsTypedDict",
     Union[
-        OutputFileSearchCallItemTypedDict,
         OutputFileSearchServerToolItemTypedDict,
+        OutputFileSearchCallItemTypedDict,
+        OutputMcpServerToolItemTypedDict,
         OutputToolSearchServerToolItemTypedDict,
         OutputWebSearchCallItemTypedDict,
-        OutputMcpServerToolItemTypedDict,
         OutputImageGenerationCallItemTypedDict,
         OutputApplyPatchCallItemTypedDict,
         OutputTextEditorServerToolItemTypedDict,
         OutputBrowserUseServerToolItemTypedDict,
         OutputWebSearchServerToolItemTypedDict,
-        OutputShellCallItemTypedDict,
-        OutputSearchModelsServerToolItemTypedDict,
-        OutputMemoryServerToolItemTypedDict,
         OutputDatetimeItemTypedDict,
+        OutputMemoryServerToolItemTypedDict,
+        OutputToolSearchCallItemTypedDict,
         OutputMessageItemTypedDict,
+        OutputSearchModelsServerToolItemTypedDict,
         OutputComputerCallItemTypedDict,
         OutputApplyPatchServerToolItemTypedDict,
+        OutputShellCallItemTypedDict,
         OutputCodeInterpreterCallItemTypedDict,
         OutputWebFetchServerToolItemTypedDict,
         OutputCodeInterpreterServerToolItemTypedDict,
@@ -149,8 +154,8 @@ OutputItemsTypedDict = TypeAliasType(
         OutputAdvisorServerToolItemTypedDict,
         OutputCustomToolCallItemTypedDict,
         OutputShellCallOutputItemTypedDict,
-        OutputImageGenerationServerToolItemTypedDict,
         OutputFusionServerToolItemTypedDict,
+        OutputImageGenerationServerToolItemTypedDict,
         OutputShellServerToolItemTypedDict,
         OutputFunctionCallItemTypedDict,
         OutputFilesServerToolItemTypedDict,
@@ -202,6 +207,7 @@ _OUTPUT_ITEMS_VARIANTS: dict[str, Any] = {
     "reasoning": OutputReasoningItem,
     "shell_call": OutputShellCallItem,
     "shell_call_output": OutputShellCallOutputItem,
+    "tool_search_call": OutputToolSearchCallItem,
     "web_search_call": OutputWebSearchCallItem,
 }
 
@@ -238,6 +244,7 @@ OutputItems = Annotated[
         OutputReasoningItem,
         OutputShellCallItem,
         OutputShellCallOutputItem,
+        OutputToolSearchCallItem,
         OutputWebSearchCallItem,
         UnknownOutputItems,
     ],
