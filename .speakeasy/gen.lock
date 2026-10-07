@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c48cf606-fb42-4a45-9c23-8f0555307828
 management:
-  docChecksum: a1ed014346c4f16464ab5ecc262875cb
+  docChecksum: 4ec24ba93b3a397ecc159ac306a6bd8a
   docVersion: 1.0.0
   speakeasyVersion: 1.787.0
   generationVersion: 2.914.0
-  releaseVersion: 1.3.28
-  configChecksum: 159e30e365bd518e9eea5cd75396f1d6
+  releaseVersion: 1.3.29
+  configChecksum: 82c5f834c7b9d556fb73ec8117d817a6
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
 persistentEdits:
-  generation_id: 742d5c87-8e20-4e12-ab1e-a69ceb017371
-  pristine_commit_hash: b7d1f00d41b7f010d81639d40dc384a64705f3c1
-  pristine_tree_hash: 286d16e187346cc60f3ced032f9e9ca4498b24a3
+  generation_id: b928df92-9cae-47af-9454-7d30c8053b5a
+  pristine_commit_hash: 09a11fd1f5dcfe408a96bb057ed8339698eddf31
+  pristine_tree_hash: f9147190ea5e3cf564da92a88c2f35aa14314adc
 features:
   python:
     acceptHeaders: 3.0.0
@@ -7080,8 +7080,8 @@ trackedFiles:
     pristine_git_object: 7a513bd20c993f110b1fb306d9817cf049df27e4
   docs/components/switchyardrouterplugin.mdx:
     id: 86509511f517
-    last_write_checksum: sha1:e19d53ed8cf47cbbc53b397efcf92e5858501290
-    pristine_git_object: ac32e6b38273286cd0d66c41230f3b2a311cebd9
+    last_write_checksum: sha1:72a811fcbb48baea6071851820eb1bb2122be5ac
+    pristine_git_object: 7a3a09ce093e0451b2edd9d2b1f32e81860342ea
   docs/components/switchyardrouterpluginid.mdx:
     id: f96cf92c71dd
     last_write_checksum: sha1:8e997764c9daef8157d569caeb20f26694b1f05d
@@ -9976,8 +9976,8 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:79a03a25a2956efbd3e42a1ca16e7836905a1174
-    pristine_git_object: b93d38f21aa2598da457d1dad3df4be1778587f9
+    last_write_checksum: sha1:a0a0e377dad68cf07ff46b62dc13b119f3d1f334
+    pristine_git_object: c90d15d83489495c8e51cd6c4ab79e70d0348b0c
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77f44b60b98bc126557ec27391f91dfba764bb54
@@ -10004,8 +10004,8 @@ trackedFiles:
     pristine_git_object: 86713cfea633e09d33b3d4e65281071fe20e6137
   src/openrouter/_version.py:
     id: d8d15ad6c586
-    last_write_checksum: sha1:34b48de79f405cabf4d9321e0dced5e487b67f04
-    pristine_git_object: f8805030dd9c4d775b5958b00fd0efb2e3a08ee1
+    last_write_checksum: sha1:2fac6475fda86b96345a2f0011083661ee2a9c9b
+    pristine_git_object: 3400c5d8b99dc456d96a8d06265bf6814af68eaa
   src/openrouter/alpha.py:
     id: 306c4d93308d
     last_write_checksum: sha1:30f55a360f41376ab194b9ea725fe4e001a5ae1a
@@ -13076,8 +13076,8 @@ trackedFiles:
     pristine_git_object: 703bf7deed21138fa64db63e6648be4cd2f3d09d
   src/openrouter/components/switchyardrouterplugin.py:
     id: abdcef77e2bb
-    last_write_checksum: sha1:fd7f6968c8c117e4f54b48390aafb73229453855
-    pristine_git_object: 313ec57f291f2b80a84641158d5009dd63bdb856
+    last_write_checksum: sha1:913d38596c2cbfe32aecf10033727d556f6bbb48
+    pristine_git_object: 964d60a6656d9dadc3482f011c237160ee074d82
   src/openrouter/components/taskclassificationitem.py:
     id: 86d4bab5ebf3
     last_write_checksum: sha1:16176fda0ccd16b0be59bb5c4b74db78eae02f36
@@ -18280,4 +18280,3 @@ examples:
         "500":
           application/json: {"error": {"code": 500, "message": "Internal Server Error"}}
 examplesVersion: 1.0.2
-releaseNotes: "## Python SDK Changes:\n* `open_router.batch.create_batches()`:  `response.results[].response.body.union(OpenResponsesResult).output[]` **Changed**\n* `open_router.batch.get_batches()`:  `response.results[].response.body.union(OpenResponsesResult).output[]` **Changed**\n* `open_router.presets.create_presets_responses()`: \n  *  `request.input.union(Array<>)[]` **Changed**\n* `open_router.responses.send()`: \n  *  `request.input.union(Array<>)[]` **Changed**\n  *  `response` **Changed**\n* `open_router.beta.responses.send()`: \n  *  `request.input.union(Array<>)[]` **Changed**\n  *  `response` **Changed**\n"
