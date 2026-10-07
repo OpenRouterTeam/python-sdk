@@ -1,0 +1,17 @@
+---
+title: "ToolSearchOutputItem"
+---
+
+The tools a client-executed tool search loaded
+
+
+## Fields
+
+| Field                                                                                                  | Type                                                                                                   | Required                                                                                               | Description                                                                                            |
+| ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ |
+| `call_id`                                                                                              | *str*                                                                                                  | ✅                                                                                     | N/A                                                                                                    |
+| `execution`                                                                                            | [components.ToolSearchOutputItemExecution](../components/toolsearchoutputitemexecution.mdx)             | ✅                                                                                     | N/A                                                                                                    |
+| `id`                                                                                                   | *OptionalNullable[str]*                                                                                | ➖                                                                                     | N/A                                                                                                    |
+| `status`                                                                                               | [OptionalNullable[components.ToolSearchOutputItemStatus]](../components/toolsearchoutputitemstatus.mdx) | ➖                                                                                     | N/A                                                                                                    |
+| `tools`                                                                                                | List[[components.ToolSearchOutputItemToolUnion](../components/toolsearchoutputitemtoolunion.mdx)]       | ✅                                                                                     | N/A                                                                                                    |
+| `type`                                                                                                 | [components.TypeToolSearchOutput](../components/typetoolsearchoutput.mdx)                               | ✅                                                                                     | N/A                                                                                                    |
