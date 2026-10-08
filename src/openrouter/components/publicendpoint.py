@@ -501,10 +501,10 @@ class PublicEndpointTypedDict(TypedDict):
     tag: str
     throughput_last_30m: Nullable[PercentileStatsTypedDict]
     uptime_last_1d: Nullable[float]
-    r"""Uptime percentage over the last 1 day, calculated as successful requests / (successful + error requests) * 100. Rate-limited requests are excluded. Returns null if insufficient data."""
+    r"""Uptime percentage over the last day: the share of minutes in which at least 80% of provider attempts succeeded, counting only minutes with 10 or more attempts. Rate-limited and caller-caused failures are excluded. Null when no minute had enough traffic."""
     uptime_last_30m: Nullable[float]
     uptime_last_5m: Nullable[float]
-    r"""Uptime percentage over the last 5 minutes, calculated as successful requests / (successful + error requests) * 100. Rate-limited requests are excluded. Returns null if insufficient data."""
+    r"""Uptime percentage over the last 5 minutes: the share of minutes in which at least 80% of provider attempts succeeded, counting only minutes with 10 or more attempts. Rate-limited and caller-caused failures are excluded. Null when no minute had enough traffic."""
     perf_last_30m_by_workload: NotRequired[PerfLast30mByWorkloadTypedDict]
     r"""Endpoint performance over the last 30 minutes, keyed by the kind of request served (e.g. `text_generation`, `image_generation`). Additive to the legacy singular latency and throughput fields; image and video generation report end-to-end latency. Only visible when authenticated with an API key or cookie."""
     status: NotRequired[EndpointStatus]
@@ -557,12 +557,12 @@ class PublicEndpoint(BaseModel):
     throughput_last_30m: Nullable[PercentileStats]
 
     uptime_last_1d: Nullable[float]
-    r"""Uptime percentage over the last 1 day, calculated as successful requests / (successful + error requests) * 100. Rate-limited requests are excluded. Returns null if insufficient data."""
+    r"""Uptime percentage over the last day: the share of minutes in which at least 80% of provider attempts succeeded, counting only minutes with 10 or more attempts. Rate-limited and caller-caused failures are excluded. Null when no minute had enough traffic."""
 
     uptime_last_30m: Nullable[float]
 
     uptime_last_5m: Nullable[float]
-    r"""Uptime percentage over the last 5 minutes, calculated as successful requests / (successful + error requests) * 100. Rate-limited requests are excluded. Returns null if insufficient data."""
+    r"""Uptime percentage over the last 5 minutes: the share of minutes in which at least 80% of provider attempts succeeded, counting only minutes with 10 or more attempts. Rate-limited and caller-caused failures are excluded. Null when no minute had enough traffic."""
 
     perf_last_30m_by_workload: Optional[PerfLast30mByWorkload] = None
     r"""Endpoint performance over the last 30 minutes, keyed by the kind of request served (e.g. `text_generation`, `image_generation`). Additive to the legacy singular latency and throughput fields; image and video generation report end-to-end latency. Only visible when authenticated with an API key or cookie."""
