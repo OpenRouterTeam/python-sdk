@@ -14,6 +14,8 @@ class JevRouterPluginTypedDict(TypedDict):
     id: JevRouterPluginID
     allowed_models: NotRequired[List[str]]
     r"""Alias of `models`, matching the auto-router field name. Entries from both fields are combined."""
+    cost_tier: NotRequired[str]
+    r"""Select low, medium, high, or a cost tier configured by the operator. Overrides the live-config tier and replaces the shared routing policy with that tier. Omit to use the live configuration. Model exclusions and the router kill switch still apply."""
     excluded_models: NotRequired[List[str]]
     r"""Remove these models from the router. Each entry is a model slug or a wildcard pattern (e.g. \"xiaomi/*\"). A `~author/family-latest` alias matches every revision of that family. Up to 1024 patterns, each at most 1024 characters, with 65536 total characters across all patterns. Applied after `models`, so an excluded pattern always wins over an included one; when the lists leave no model the request can use, it fails with 404 rather than routing outside them."""
     models: NotRequired[List[str]]
@@ -26,6 +28,9 @@ class JevRouterPlugin(BaseModel):
     allowed_models: Optional[List[str]] = None
     r"""Alias of `models`, matching the auto-router field name. Entries from both fields are combined."""
 
+    cost_tier: Optional[str] = None
+    r"""Select low, medium, high, or a cost tier configured by the operator. Overrides the live-config tier and replaces the shared routing policy with that tier. Omit to use the live configuration. Model exclusions and the router kill switch still apply."""
+
     excluded_models: Optional[List[str]] = None
     r"""Remove these models from the router. Each entry is a model slug or a wildcard pattern (e.g. \"xiaomi/*\"). A `~author/family-latest` alias matches every revision of that family. Up to 1024 patterns, each at most 1024 characters, with 65536 total characters across all patterns. Applied after `models`, so an excluded pattern always wins over an included one; when the lists leave no model the request can use, it fails with 404 rather than routing outside them."""
 
@@ -34,7 +39,9 @@ class JevRouterPlugin(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["allowed_models", "excluded_models", "models"])
+        optional_fields = set(
+            ["allowed_models", "cost_tier", "excluded_models", "models"]
+        )
         serialized = handler(self)
         m = {}
 
