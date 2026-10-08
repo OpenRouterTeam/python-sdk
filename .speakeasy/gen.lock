@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c48cf606-fb42-4a45-9c23-8f0555307828
 management:
-  docChecksum: ecada540acdd445630d247e256651c84
+  docChecksum: c98e1ba69d232add01050169f6837a2d
   docVersion: 1.0.0
   speakeasyVersion: 1.787.0
   generationVersion: 2.914.0
-  releaseVersion: 1.3.34
-  configChecksum: d3b5574a6d57a05a8347156685f184ce
+  releaseVersion: 1.3.35
+  configChecksum: b4b91d9d3fb0d1bb064819befc0f9f88
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
 persistentEdits:
-  generation_id: f08089be-3c13-4f21-9627-772cc3203e39
-  pristine_commit_hash: 2dbb19f561390c25fac6187412b5fc0a6e1af76b
-  pristine_tree_hash: ac876b26073202ee594774777e1c5d8b32edf981
+  generation_id: 9382cb62-85b1-4f92-806a-6b342970afb2
+  pristine_commit_hash: 55ce979582ad7e5e3b094299b40e0af7001f412f
+  pristine_tree_hash: 55959c2af0e4739bada096ec32501f4a1852a856
 features:
   python:
     acceptHeaders: 3.0.0
@@ -10068,8 +10068,8 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:8567eb9de9354b155ee7b8f7df19689d9732e3ce
-    pristine_git_object: b70e410a85a644fdf1b83e42cd765685a0afed6a
+    last_write_checksum: sha1:6e62337820140ab881a83d5ad55091bad1df5835
+    pristine_git_object: d15268cdbd758f0b37869fdf55148ab26d365c79
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77f44b60b98bc126557ec27391f91dfba764bb54
@@ -10096,8 +10096,8 @@ trackedFiles:
     pristine_git_object: 86713cfea633e09d33b3d4e65281071fe20e6137
   src/openrouter/_version.py:
     id: d8d15ad6c586
-    last_write_checksum: sha1:bfbbaf7417332947e4cb826190da2c30aefb99b0
-    pristine_git_object: 4a0e03d34865fd798ad600d523a7178616e98b4b
+    last_write_checksum: sha1:f0f513de0b735033d37ee351ffc5aa90fce54d0b
+    pristine_git_object: fa675c869493242eac7dd09388f2009fde12a9d1
   src/openrouter/alpha.py:
     id: 306c4d93308d
     last_write_checksum: sha1:30f55a360f41376ab194b9ea725fe4e001a5ae1a
@@ -18432,4 +18432,3 @@ examples:
         "500":
           application/json: {"error": {"code": 404, "message": "Intern not found"}}
 examplesVersion: 1.0.2
-releaseNotes: "## Python SDK Changes:\n* `open_router.chat.send()`: \n  *  `request.plugins[].union(jev-router).cost_tier` **Added**\n* `open_router.presets.create_presets_chat_completions()`: \n  *  `request.plugins[].union(jev-router).cost_tier` **Added**\n* `open_router.presets.create_presets_messages()`: \n  *  `request.plugins[].union(jev-router).cost_tier` **Added**\n* `open_router.presets.create_presets_responses()`: \n  *  `request.plugins[].union(jev-router).cost_tier` **Added**\n* `open_router.responses.send()`: \n  *  `request.plugins[].union(jev-router).cost_tier` **Added**\n* `open_router.beta.responses.send()`: \n  *  `request.plugins[].union(jev-router).cost_tier` **Added**\n"
