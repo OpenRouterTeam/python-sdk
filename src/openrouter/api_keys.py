@@ -260,6 +260,7 @@ class APIKeys(BaseSDK):
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
         include_disabled: Optional[bool] = None,
+        include_expired: Optional[bool] = None,
         offset: OptionalNullable[int] = UNSET,
         workspace_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -279,6 +280,7 @@ class APIKeys(BaseSDK):
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
         :param include_disabled: Whether to include disabled API keys in the response
+        :param include_expired: Whether to include expired API keys in the response. Expired keys are excluded by default and returned only when this is true.
         :param offset: Number of API keys to skip for pagination
         :param workspace_id: Filter API keys by workspace ID. By default, keys in the default workspace are returned.
         :param retries: Override the default retry configuration for this method
@@ -301,6 +303,7 @@ class APIKeys(BaseSDK):
             x_open_router_title=x_open_router_title,
             x_open_router_categories=x_open_router_categories,
             include_disabled=include_disabled,
+            include_expired=include_expired,
             offset=offset,
             workspace_id=workspace_id,
         )
@@ -399,6 +402,7 @@ class APIKeys(BaseSDK):
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
         include_disabled: Optional[bool] = None,
+        include_expired: Optional[bool] = None,
         offset: OptionalNullable[int] = UNSET,
         workspace_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -418,6 +422,7 @@ class APIKeys(BaseSDK):
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
         :param include_disabled: Whether to include disabled API keys in the response
+        :param include_expired: Whether to include expired API keys in the response. Expired keys are excluded by default and returned only when this is true.
         :param offset: Number of API keys to skip for pagination
         :param workspace_id: Filter API keys by workspace ID. By default, keys in the default workspace are returned.
         :param retries: Override the default retry configuration for this method
@@ -440,6 +445,7 @@ class APIKeys(BaseSDK):
             x_open_router_title=x_open_router_title,
             x_open_router_categories=x_open_router_categories,
             include_disabled=include_disabled,
+            include_expired=include_expired,
             offset=offset,
             workspace_id=workspace_id,
         )

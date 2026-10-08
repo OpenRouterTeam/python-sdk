@@ -96,6 +96,8 @@ class ListRequestTypedDict(TypedDict):
     """
     include_disabled: NotRequired[bool]
     r"""Whether to include disabled API keys in the response"""
+    include_expired: NotRequired[bool]
+    r"""Whether to include expired API keys in the response. Expired keys are excluded by default and returned only when this is true."""
     offset: NotRequired[Nullable[int]]
     r"""Number of API keys to skip for pagination"""
     workspace_id: NotRequired[str]
@@ -137,6 +139,12 @@ class ListRequest(BaseModel):
     ] = None
     r"""Whether to include disabled API keys in the response"""
 
+    include_expired: Annotated[
+        Optional[bool],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Whether to include expired API keys in the response. Expired keys are excluded by default and returned only when this is true."""
+
     offset: Annotated[
         OptionalNullable[int],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
@@ -157,6 +165,7 @@ class ListRequest(BaseModel):
                 "X-OpenRouter-Title",
                 "X-OpenRouter-Categories",
                 "include_disabled",
+                "include_expired",
                 "offset",
                 "workspace_id",
             ]
