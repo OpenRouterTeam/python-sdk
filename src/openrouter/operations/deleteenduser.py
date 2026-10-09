@@ -75,7 +75,7 @@ class DeleteEndUserGlobals(BaseModel):
 
 class DeleteEndUserRequestTypedDict(TypedDict):
     user: str
-    r"""Immutable case-sensitive tracking string supplied as user on inference requests. URL-encode it in resource paths."""
+    r"""Immutable case-sensitive tracking string supplied as user on inference requests or as external.user on API keys: 1 to 512 characters, well-formed Unicode, no NUL, no surrounding whitespace. URL-encode it in resource paths; an ID of `.` or `..` cannot be addressed by path, so look it up with the list filter."""
     http_referer: NotRequired[str]
     r"""The app identifier should be your app's URL and is used as the primary identifier for rankings.
     This is used to track API usage per application.
@@ -95,7 +95,7 @@ class DeleteEndUserRequest(BaseModel):
     user: Annotated[
         str, FieldMetadata(path=PathParamMetadata(style="simple", explode=False))
     ]
-    r"""Immutable case-sensitive tracking string supplied as user on inference requests. URL-encode it in resource paths."""
+    r"""Immutable case-sensitive tracking string supplied as user on inference requests or as external.user on API keys: 1 to 512 characters, well-formed Unicode, no NUL, no surrounding whitespace. URL-encode it in resource paths; an ID of `.` or `..` cannot be addressed by path, so look it up with the list filter."""
 
     http_referer: Annotated[
         Optional[str],

@@ -95,7 +95,7 @@ class ListEndUsersRequestTypedDict(TypedDict):
     limit: NotRequired[int]
     r"""Maximum number of records to return (max 100)"""
     user: NotRequired[str]
-    r"""Immutable case-sensitive tracking string supplied as user on inference requests. URL-encode it in resource paths."""
+    r"""Immutable case-sensitive tracking string supplied as user on inference requests or as external.user on API keys: 1 to 512 characters, well-formed Unicode, no NUL, no surrounding whitespace. URL-encode it in resource paths; an ID of `.` or `..` cannot be addressed by path, so look it up with the list filter."""
     include_inactive: NotRequired[bool]
     r"""Include deactivated registrations."""
 
@@ -145,7 +145,7 @@ class ListEndUsersRequest(BaseModel):
         Optional[str],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
-    r"""Immutable case-sensitive tracking string supplied as user on inference requests. URL-encode it in resource paths."""
+    r"""Immutable case-sensitive tracking string supplied as user on inference requests or as external.user on API keys: 1 to 512 characters, well-formed Unicode, no NUL, no surrounding whitespace. URL-encode it in resource paths; an ID of `.` or `..` cannot be addressed by path, so look it up with the list filter."""
 
     include_inactive: Annotated[
         Optional[bool],
