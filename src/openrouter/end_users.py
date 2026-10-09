@@ -41,7 +41,7 @@ class EndUsers(BaseSDK):
 
         :param offset: Number of records to skip for pagination
         :param limit: Maximum number of records to return (max 100)
-        :param user: Immutable case-sensitive tracking string supplied as user on inference requests. URL-encode it in resource paths.
+        :param user: Immutable case-sensitive tracking string supplied as user on inference requests or as external.user on API keys: 1 to 512 characters, well-formed Unicode, no NUL, no surrounding whitespace. URL-encode it in resource paths; an ID of `.` or `..` cannot be addressed by path, so look it up with the list filter.
         :param include_inactive: Include deactivated registrations.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -217,7 +217,7 @@ class EndUsers(BaseSDK):
 
         :param offset: Number of records to skip for pagination
         :param limit: Maximum number of records to return (max 100)
-        :param user: Immutable case-sensitive tracking string supplied as user on inference requests. URL-encode it in resource paths.
+        :param user: Immutable case-sensitive tracking string supplied as user on inference requests or as external.user on API keys: 1 to 512 characters, well-formed Unicode, no NUL, no surrounding whitespace. URL-encode it in resource paths; an ID of `.` or `..` cannot be addressed by path, so look it up with the list filter.
         :param include_inactive: Include deactivated registrations.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -384,7 +384,7 @@ class EndUsers(BaseSDK):
 
         Register a caller-supplied tracking ID under the authenticated organization. No login account, policy, or credentials are created. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
-        :param user: Immutable case-sensitive tracking string supplied as user on inference requests. URL-encode it in resource paths.
+        :param user: Immutable case-sensitive tracking string supplied as user on inference requests or as external.user on API keys: 1 to 512 characters, well-formed Unicode, no NUL, no surrounding whitespace. URL-encode it in resource paths; an ID of `.` or `..` cannot be addressed by path, so look it up with the list filter.
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
@@ -531,7 +531,7 @@ class EndUsers(BaseSDK):
 
         Register a caller-supplied tracking ID under the authenticated organization. No login account, policy, or credentials are created. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
-        :param user: Immutable case-sensitive tracking string supplied as user on inference requests. URL-encode it in resource paths.
+        :param user: Immutable case-sensitive tracking string supplied as user on inference requests or as external.user on API keys: 1 to 512 characters, well-formed Unicode, no NUL, no surrounding whitespace. URL-encode it in resource paths; an ID of `.` or `..` cannot be addressed by path, so look it up with the list filter.
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
@@ -678,7 +678,7 @@ class EndUsers(BaseSDK):
 
         Soft-deactivate a registration while retaining its tracking ID. Repeat deactivation succeeds. This does not block inference; reactivate through PATCH. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
-        :param user: Immutable case-sensitive tracking string supplied as user on inference requests. URL-encode it in resource paths.
+        :param user: Immutable case-sensitive tracking string supplied as user on inference requests or as external.user on API keys: 1 to 512 characters, well-formed Unicode, no NUL, no surrounding whitespace. URL-encode it in resource paths; an ID of `.` or `..` cannot be addressed by path, so look it up with the list filter.
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
@@ -811,7 +811,7 @@ class EndUsers(BaseSDK):
 
         Soft-deactivate a registration while retaining its tracking ID. Repeat deactivation succeeds. This does not block inference; reactivate through PATCH. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
-        :param user: Immutable case-sensitive tracking string supplied as user on inference requests. URL-encode it in resource paths.
+        :param user: Immutable case-sensitive tracking string supplied as user on inference requests or as external.user on API keys: 1 to 512 characters, well-formed Unicode, no NUL, no surrounding whitespace. URL-encode it in resource paths; an ID of `.` or `..` cannot be addressed by path, so look it up with the list filter.
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
@@ -944,7 +944,7 @@ class EndUsers(BaseSDK):
 
         Retrieve an active or inactive registration by its URL-encoded, caller-supplied tracking ID. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
-        :param user: Immutable case-sensitive tracking string supplied as user on inference requests. URL-encode it in resource paths.
+        :param user: Immutable case-sensitive tracking string supplied as user on inference requests or as external.user on API keys: 1 to 512 characters, well-formed Unicode, no NUL, no surrounding whitespace. URL-encode it in resource paths; an ID of `.` or `..` cannot be addressed by path, so look it up with the list filter.
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
@@ -1077,7 +1077,7 @@ class EndUsers(BaseSDK):
 
         Retrieve an active or inactive registration by its URL-encoded, caller-supplied tracking ID. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
-        :param user: Immutable case-sensitive tracking string supplied as user on inference requests. URL-encode it in resource paths.
+        :param user: Immutable case-sensitive tracking string supplied as user on inference requests or as external.user on API keys: 1 to 512 characters, well-formed Unicode, no NUL, no surrounding whitespace. URL-encode it in resource paths; an ID of `.` or `..` cannot be addressed by path, so look it up with the list filter.
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
@@ -1211,7 +1211,7 @@ class EndUsers(BaseSDK):
 
         Update registration state without changing identity. State changes do not enforce inference access. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
-        :param user: Immutable case-sensitive tracking string supplied as user on inference requests. URL-encode it in resource paths.
+        :param user: Immutable case-sensitive tracking string supplied as user on inference requests or as external.user on API keys: 1 to 512 characters, well-formed Unicode, no NUL, no surrounding whitespace. URL-encode it in resource paths; an ID of `.` or `..` cannot be addressed by path, so look it up with the list filter.
         :param is_active: Registration state only; does not enforce inference access.
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
@@ -1356,7 +1356,7 @@ class EndUsers(BaseSDK):
 
         Update registration state without changing identity. State changes do not enforce inference access. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
-        :param user: Immutable case-sensitive tracking string supplied as user on inference requests. URL-encode it in resource paths.
+        :param user: Immutable case-sensitive tracking string supplied as user on inference requests or as external.user on API keys: 1 to 512 characters, well-formed Unicode, no NUL, no surrounding whitespace. URL-encode it in resource paths; an ID of `.` or `..` cannot be addressed by path, so look it up with the list filter.
         :param is_active: Registration state only; does not enforce inference access.
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.

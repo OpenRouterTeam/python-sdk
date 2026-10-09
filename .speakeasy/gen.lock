@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c48cf606-fb42-4a45-9c23-8f0555307828
 management:
-  docChecksum: ebc7e3d3b83b1e57518f82dcf9e1f242
+  docChecksum: e36f5b0a3c7fd4027d0b9ea6f4b9a110
   docVersion: 1.0.0
   speakeasyVersion: 1.787.0
   generationVersion: 2.914.0
-  releaseVersion: 1.3.37
-  configChecksum: f0b9fdbbc6aac3d5a2d50f6b769ccdf0
+  releaseVersion: 1.3.38
+  configChecksum: e4bd8fd2b0f58e2df0005ee4f4d4cadb
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
 persistentEdits:
-  generation_id: dd9194c7-eb12-4216-91f8-9f957b55c821
-  pristine_commit_hash: a1fc0bef9e86053c1fa7d7f6acf5e5c82a4e6a05
-  pristine_tree_hash: 6bbc2bccb8fef43facd8dad7fc10be053bec24ca
+  generation_id: 270f4490-638a-4fa9-8adb-ed9df61fc625
+  pristine_commit_hash: 907860ed89bd59e72bd8f83289758fa0348a3106
+  pristine_tree_hash: 014a4d0a79b6310b5fdba8b111811f55e1aa196e
 features:
   python:
     acceptHeaders: 3.0.0
@@ -2504,8 +2504,8 @@ trackedFiles:
     pristine_git_object: 4da6fbee689d2362efb2470e07eedabdb2cb5d90
   docs/components/createenduserrequest.mdx:
     id: e82c759c8be2
-    last_write_checksum: sha1:a91e5f439be4943f1d2012ae04c52d129fb95326
-    pristine_git_object: daaedee3ad25549548155e792662282505bd099e
+    last_write_checksum: sha1:44cd7f3e8324d92154c2d2706f94ecf23efd1582
+    pristine_git_object: 9d28e4c7e863cf97b10b6415b1525aa8871800e2
   docs/components/createguardrailrequest.mdx:
     id: c1a768f054c0
     last_write_checksum: sha1:d32d712d132971b34f6d81d28ff45d22d919f4ac
@@ -2928,8 +2928,8 @@ trackedFiles:
     pristine_git_object: 72c5b4fb8441c2a4337dc9906fa81b01bb92f126
   docs/components/enduser.mdx:
     id: a690fe4da7fa
-    last_write_checksum: sha1:67fae70e3bac87655ed152cf389b9f21b3211e83
-    pristine_git_object: 331116736dabd659c02f4aa9fa23835017b2d043
+    last_write_checksum: sha1:71ba5b6752f46e9bc1570453d67ddcaeec79e7a3
+    pristine_git_object: 27621b0e603d4b102797d6ff00b37aab255253fa
   docs/components/enduserresponse.mdx:
     id: e340b96bf3b4
     last_write_checksum: sha1:83fbaf74d163f2498007397e3c37f06db8086c0a
@@ -8524,8 +8524,8 @@ trackedFiles:
     pristine_git_object: 07094eff6bf7c06a69ac4181ae000c55a9482dc0
   docs/operations/deleteenduserrequest.mdx:
     id: 5033dca978c6
-    last_write_checksum: sha1:f3dc8c200980f206035f781db10d4be74d20f6d6
-    pristine_git_object: ad4cacf77e1ba21cfd6b82ba325b2c4a4d72937c
+    last_write_checksum: sha1:7e316723ba8d8d6575b5c1567e421670a1188f78
+    pristine_git_object: 39556c28d38694191f1dae3dfe033d84d8afe7f8
   docs/operations/deletefileglobals.mdx:
     id: b95c49d91968
     last_write_checksum: sha1:1eaa5442be2df2702baf53f5dddedd40ce930fcc
@@ -8824,8 +8824,8 @@ trackedFiles:
     pristine_git_object: 9ec66ba16256d22f51356ac3ac0b2195a454f121
   docs/operations/getenduserrequest.mdx:
     id: 19de93747569
-    last_write_checksum: sha1:32592160c298cedac111022380ba02f466c88a3d
-    pristine_git_object: 501f7d298695ab0b7eb5ee0aaeffa35dadf6f67c
+    last_write_checksum: sha1:58dadfa90b5c6ecb3db474193d0b7836451d264b
+    pristine_git_object: 1e234b288b192c1ef9eba64af8d6d9fa29f86ff5
   docs/operations/getfilemetadataglobals.mdx:
     id: e4f16f1ce98e
     last_write_checksum: sha1:f736518bdebac4aa8c9caf9071e0670885bd83b3
@@ -9188,8 +9188,8 @@ trackedFiles:
     pristine_git_object: 3b3fecc1e477bafabe93350df4bec82cad5ebfe3
   docs/operations/listendusersrequest.mdx:
     id: 07d0f1292e9c
-    last_write_checksum: sha1:00fec8ef51775ba9dd3e6c7f8b5f2215e7fd7fd6
-    pristine_git_object: 0dd8516dbc7e33fa177e38f8624978643aa7bba7
+    last_write_checksum: sha1:466d28dea033aa91d107876ed52c3ef569b508c2
+    pristine_git_object: a115cdba4475eb799c82260c33424979c4f6139e
   docs/operations/listendusersresponse.mdx:
     id: c939c37b2eb5
     last_write_checksum: sha1:b27d7044dd883f11fcd98d67b234120b13364c81
@@ -9760,8 +9760,8 @@ trackedFiles:
     pristine_git_object: de504b1ca4a7fee6076860abdc5c200708c68b0f
   docs/operations/updateenduserrequest.mdx:
     id: c61c7edc838b
-    last_write_checksum: sha1:bc25b716e93ea4ef8700cf514634924acb715d84
-    pristine_git_object: 62ae0d75e3ef262ff61485f53f9e103316097953
+    last_write_checksum: sha1:db3527b11dfa692fbf4701892baeee2d521ec9de
+    pristine_git_object: 6ff8bd561fc4529968569115abd89c80e8496e48
   docs/operations/updateguardrailglobals.mdx:
     id: e3ce035d5a7c
     last_write_checksum: sha1:6dc745162b36e08d38d6ea094282f5c45baf71f2
@@ -9972,8 +9972,8 @@ trackedFiles:
     pristine_git_object: f8cebc2061d7428904766956be45ca70e5519be4
   docs/sdks/endusers/README.mdx:
     id: ba369f05185b
-    last_write_checksum: sha1:0eec372c7e75bea130e1cdd6405348dc49bfd938
-    pristine_git_object: 8f4e8760a7ad9ced8023005e8b304f316c116273
+    last_write_checksum: sha1:be9024bf28ffb333df23ee77a212a20035f14391
+    pristine_git_object: a586a1d471685c8a58d221849133875a9937a582
   docs/sdks/files/README.mdx:
     id: 1a0c257e330c
     last_write_checksum: sha1:f92d58e58f2ac2048faa8b4420c1663a48e20959
@@ -10068,8 +10068,8 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:f63816ab5bf8c9a16d01f579225288815559dbc7
-    pristine_git_object: cd9346a6d7117a0407b379d8a7ceda0e0f3e6dd6
+    last_write_checksum: sha1:87608fa73ad6c92030a5be3c51c5fab1b91a8214
+    pristine_git_object: aa0d65646f50aa083cf4ac2c30f2312d6cbfda0e
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77f44b60b98bc126557ec27391f91dfba764bb54
@@ -10096,8 +10096,8 @@ trackedFiles:
     pristine_git_object: 86713cfea633e09d33b3d4e65281071fe20e6137
   src/openrouter/_version.py:
     id: d8d15ad6c586
-    last_write_checksum: sha1:fff121505ae3b28de24dc4df942612687ef85b7f
-    pristine_git_object: 8e291f70ffe631c899662d9eb6816bae809214bd
+    last_write_checksum: sha1:fcd39011e14117ccbfcb21862b1666be429366d1
+    pristine_git_object: ad79feb4786ef68c1945619a95c7438fd3514cea
   src/openrouter/alpha.py:
     id: 306c4d93308d
     last_write_checksum: sha1:30f55a360f41376ab194b9ea725fe4e001a5ae1a
@@ -11200,8 +11200,8 @@ trackedFiles:
     pristine_git_object: fcfd9d646f216fdbb715cbbaefa4382d75750b79
   src/openrouter/components/createenduserrequest.py:
     id: 68e7dcf03498
-    last_write_checksum: sha1:53f7c250769b1bd14e9b5e67f0270790289574e3
-    pristine_git_object: 25623d5f15909380334415605a51f7f6beea9e1c
+    last_write_checksum: sha1:24f5f96795a7f0fb068a6fa7e190efe21742031a
+    pristine_git_object: be0ce3784071a98e96fe996eb9da24455af72ac8
   src/openrouter/components/createguardrailrequest.py:
     id: 34d69149fb33
     last_write_checksum: sha1:af6fca661fed3b42e547333b14750448c46b43cf
@@ -11384,8 +11384,8 @@ trackedFiles:
     pristine_git_object: ed5f8af0c599b1e55bb1939bc1d2aff0aeef610d
   src/openrouter/components/enduser.py:
     id: 1fad1ecc5e12
-    last_write_checksum: sha1:8f11cd6a99d28247d4e422a7eb38bb401101852f
-    pristine_git_object: 1b20f1bbc5c0898cf7bb19a2bb268c65a0747a79
+    last_write_checksum: sha1:657e97e403ec637a65660ee9ab910dc964d16999
+    pristine_git_object: 8fb0d41a1140171b1b7cb768ae213352b3b374c0
   src/openrouter/components/enduserresponse.py:
     id: 3da82145da68
     last_write_checksum: sha1:794963d7fadbbaf7bfb91983d83bec71c9a10556
@@ -13552,8 +13552,8 @@ trackedFiles:
     pristine_git_object: 6f392ba268a36c1101c027f6a2fbf87e2cd68d10
   src/openrouter/end_users.py:
     id: d6787489a521
-    last_write_checksum: sha1:bb121c7899ae37fd7c8a897dd524be453816ee79
-    pristine_git_object: 544e6911aca76db7531c73d52d7f0b420a1851f0
+    last_write_checksum: sha1:eeecf6f03761a421f6eb5d0e83e1ae2fbf897658
+    pristine_git_object: 79f82063362a766941cb98f6eb1b52b07f47095b
   src/openrouter/endpoints.py:
     id: 465bbf2b7939
     last_write_checksum: sha1:a04548ad80c9b1cf8ae1f5dde2e24774865c1eb8
@@ -13876,8 +13876,8 @@ trackedFiles:
     pristine_git_object: 2148ca98c6cde1506783e9c5f2f522226a27e428
   src/openrouter/operations/deleteenduser.py:
     id: f17d13ce6e08
-    last_write_checksum: sha1:8bdd5d0135fd346136d447e97a96d0e58004d850
-    pristine_git_object: 34d3359a609a0a2d466af2e182e2e7a67d30f5b4
+    last_write_checksum: sha1:df545775816b99555a52d3c2a2f83099d67c433a
+    pristine_git_object: 9f5bf991fe204b4f1bcc1c565695821e0503d4b0
   src/openrouter/operations/deletefile.py:
     id: 7035af059141
     last_write_checksum: sha1:9eef35ceee470a0dceb64d463ec499a2e8bad9b5
@@ -13976,8 +13976,8 @@ trackedFiles:
     pristine_git_object: f6f9e817724dfd60e747f7c35f297c96bedad819
   src/openrouter/operations/getenduser.py:
     id: d20b891f0b70
-    last_write_checksum: sha1:8b5a84a6d6782b6afd98d9d195887b23939f9e6d
-    pristine_git_object: ec4817b78ab7619d405586bf192733c11cbb46a1
+    last_write_checksum: sha1:59cc03ff95d5c7e9afa42f7beeaceca7cd8e0d78
+    pristine_git_object: 6045517c861f9f6b86e679949f20e4e2079914b2
   src/openrouter/operations/getfilemetadata.py:
     id: 408c34486769
     last_write_checksum: sha1:592b6646b4ff082d8427ea08e79e6b34be490857
@@ -14108,8 +14108,8 @@ trackedFiles:
     pristine_git_object: f5bd1f67dc835230e6d282e0500cbf3b5781eab4
   src/openrouter/operations/listendusers.py:
     id: 5a2a070b97a4
-    last_write_checksum: sha1:57df0a74677bf676dbabd86e10cb653834339725
-    pristine_git_object: 2997608bf4b80c6eaf5ef889f417e26a7ab187a1
+    last_write_checksum: sha1:d9194b8534fd8676bd414c893a812bc21d76a598
+    pristine_git_object: 324d796df4da5b32aae811275fb74df7e15d8644
   src/openrouter/operations/listfiles.py:
     id: fd89527f4236
     last_write_checksum: sha1:b4a0b5c4b4152ed8c2766afbaf9d9557ceb347f3
@@ -14276,8 +14276,8 @@ trackedFiles:
     pristine_git_object: cf8b4ee9febb198afe12c27d03c72902eaa8baf0
   src/openrouter/operations/updateenduser.py:
     id: 62d2ff1bbd3e
-    last_write_checksum: sha1:ad15bb7939a3306707e6711b06e27bf68fb8cc33
-    pristine_git_object: 2e0d7cce1294b09b88f9e40403362267479b421e
+    last_write_checksum: sha1:9d281239d168158a33f27a9c5047729680723c97
+    pristine_git_object: 9249d1f01d95aa8375aa7e69e5c9ffe122ba9128
   src/openrouter/operations/updateguardrail.py:
     id: 6cfb33d7d40c
     last_write_checksum: sha1:bf4f6b9899c176fa012acc607556a66d6e85a51b
