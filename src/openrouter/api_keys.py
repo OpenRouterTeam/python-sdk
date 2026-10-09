@@ -1425,6 +1425,7 @@ class APIKeys(BaseSDK):
         limit: OptionalNullable[float] = UNSET,
         limit_reset: OptionalNullable[operations.UpdateKeysLimitReset] = UNSET,
         name: Optional[str] = None,
+        workspace_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -1434,8 +1435,10 @@ class APIKeys(BaseSDK):
 
         Update an existing API key. Authenticate with a [management key](/docs/guides/overview/auth/management-api-keys).
 
+        Set `workspace_id` to move the key to another workspace. The key keeps its value, and any other fields in the same request are applied atomically with the move. Guardrail selections move with the key; other workspace-scoped settings (presets, BYOK keys, broadcast destinations, routing rules) do not. A move into or out of a HIPAA workspace is refused with `403`. In an organization, if the key's creator is not a member of a non-default target workspace, the request fails with `409`; add them to the workspace first.
+
         <Warning>
-        You can't change `workspace_id` through the API. The request body accepts only the fields listed below, and unrecognized fields are ignored. To move a key to another workspace, use the OpenRouter dashboard. If the body contains none of the accepted fields, the request fails with `400` and the message `No update fields provided`.
+        The request body accepts only the fields listed below, and unrecognized fields are ignored. If the body contains none of the accepted fields, the request fails with `400` and the message `No update fields provided`.
         </Warning>
 
         :param hash: The hash identifier of the API key to update
@@ -1451,6 +1454,7 @@ class APIKeys(BaseSDK):
         :param limit: New spending limit for the API key in USD
         :param limit_reset: New limit reset type for the API key (daily, weekly, monthly, or null for no reset). Resets happen automatically at midnight UTC, and weeks are Monday through Sunday.
         :param name: New name for the API key
+        :param workspace_id: Move the API key to this workspace. The key keeps its value; guardrail selections move with it, while other workspace-scoped settings (presets, BYOK keys, broadcast destinations, routing rules) do not. Sending the key's current workspace is a no-op.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1477,6 +1481,7 @@ class APIKeys(BaseSDK):
                 limit=limit,
                 limit_reset=limit_reset,
                 name=name,
+                workspace_id=workspace_id,
             ),
         )
 
@@ -1551,11 +1556,21 @@ class APIKeys(BaseSDK):
                 errors.UnauthorizedResponseErrorData, http_res
             )
             raise errors.UnauthorizedResponseError(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ForbiddenResponseErrorData, http_res
+            )
+            raise errors.ForbiddenResponseError(response_data, http_res)
         if utils.match_response(http_res, "404", "application/json"):
             response_data = unmarshal_json_response(
                 errors.NotFoundResponseErrorData, http_res
             )
             raise errors.NotFoundResponseError(response_data, http_res)
+        if utils.match_response(http_res, "409", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ConflictResponseErrorData, http_res
+            )
+            raise errors.ConflictResponseError(response_data, http_res)
         if utils.match_response(http_res, "429", "application/json"):
             response_data = unmarshal_json_response(
                 errors.TooManyRequestsResponseErrorData, http_res
@@ -1591,6 +1606,7 @@ class APIKeys(BaseSDK):
         limit: OptionalNullable[float] = UNSET,
         limit_reset: OptionalNullable[operations.UpdateKeysLimitReset] = UNSET,
         name: Optional[str] = None,
+        workspace_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -1600,8 +1616,10 @@ class APIKeys(BaseSDK):
 
         Update an existing API key. Authenticate with a [management key](/docs/guides/overview/auth/management-api-keys).
 
+        Set `workspace_id` to move the key to another workspace. The key keeps its value, and any other fields in the same request are applied atomically with the move. Guardrail selections move with the key; other workspace-scoped settings (presets, BYOK keys, broadcast destinations, routing rules) do not. A move into or out of a HIPAA workspace is refused with `403`. In an organization, if the key's creator is not a member of a non-default target workspace, the request fails with `409`; add them to the workspace first.
+
         <Warning>
-        You can't change `workspace_id` through the API. The request body accepts only the fields listed below, and unrecognized fields are ignored. To move a key to another workspace, use the OpenRouter dashboard. If the body contains none of the accepted fields, the request fails with `400` and the message `No update fields provided`.
+        The request body accepts only the fields listed below, and unrecognized fields are ignored. If the body contains none of the accepted fields, the request fails with `400` and the message `No update fields provided`.
         </Warning>
 
         :param hash: The hash identifier of the API key to update
@@ -1617,6 +1635,7 @@ class APIKeys(BaseSDK):
         :param limit: New spending limit for the API key in USD
         :param limit_reset: New limit reset type for the API key (daily, weekly, monthly, or null for no reset). Resets happen automatically at midnight UTC, and weeks are Monday through Sunday.
         :param name: New name for the API key
+        :param workspace_id: Move the API key to this workspace. The key keeps its value; guardrail selections move with it, while other workspace-scoped settings (presets, BYOK keys, broadcast destinations, routing rules) do not. Sending the key's current workspace is a no-op.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1643,6 +1662,7 @@ class APIKeys(BaseSDK):
                 limit=limit,
                 limit_reset=limit_reset,
                 name=name,
+                workspace_id=workspace_id,
             ),
         )
 
@@ -1717,11 +1737,21 @@ class APIKeys(BaseSDK):
                 errors.UnauthorizedResponseErrorData, http_res
             )
             raise errors.UnauthorizedResponseError(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ForbiddenResponseErrorData, http_res
+            )
+            raise errors.ForbiddenResponseError(response_data, http_res)
         if utils.match_response(http_res, "404", "application/json"):
             response_data = unmarshal_json_response(
                 errors.NotFoundResponseErrorData, http_res
             )
             raise errors.NotFoundResponseError(response_data, http_res)
+        if utils.match_response(http_res, "409", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ConflictResponseErrorData, http_res
+            )
+            raise errors.ConflictResponseError(response_data, http_res)
         if utils.match_response(http_res, "429", "application/json"):
             response_data = unmarshal_json_response(
                 errors.TooManyRequestsResponseErrorData, http_res

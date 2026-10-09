@@ -108,6 +108,8 @@ class UpdateKeysRequestBodyTypedDict(TypedDict):
     r"""New limit reset type for the API key (daily, weekly, monthly, or null for no reset). Resets happen automatically at midnight UTC, and weeks are Monday through Sunday."""
     name: NotRequired[str]
     r"""New name for the API key"""
+    workspace_id: NotRequired[str]
+    r"""Move the API key to this workspace. The key keeps its value; guardrail selections move with it, while other workspace-scoped settings (presets, BYOK keys, broadcast destinations, routing rules) do not. Sending the key's current workspace is a no-op."""
 
 
 class UpdateKeysRequestBody(BaseModel):
@@ -126,10 +128,20 @@ class UpdateKeysRequestBody(BaseModel):
     name: Optional[str] = None
     r"""New name for the API key"""
 
+    workspace_id: Optional[str] = None
+    r"""Move the API key to this workspace. The key keeps its value; guardrail selections move with it, while other workspace-scoped settings (presets, BYOK keys, broadcast destinations, routing rules) do not. Sending the key's current workspace is a no-op."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
-            ["disabled", "include_byok_in_limit", "limit", "limit_reset", "name"]
+            [
+                "disabled",
+                "include_byok_in_limit",
+                "limit",
+                "limit_reset",
+                "name",
+                "workspace_id",
+            ]
         )
         nullable_fields = set(["limit", "limit_reset"])
         serialized = handler(self)
