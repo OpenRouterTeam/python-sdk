@@ -21,7 +21,7 @@ r"""`enforce`: a turn that breaks a rule is withheld, retried, and finally retur
 
 
 class AlignmentPluginTypedDict(TypedDict):
-    r"""Beta. States the listed rules to the model and evaluates every turn against them. Requests are evaluated only for entities admitted to the beta; the configuration, metadata, and error shapes may change."""
+    r"""Beta. States the listed rules to the model and evaluates every turn against them; the configuration, metadata, and error shapes may change."""
 
     id: AlignmentPluginID
     rules: List[str]
@@ -37,7 +37,7 @@ class AlignmentPluginTypedDict(TypedDict):
 
 
 class AlignmentPlugin(BaseModel):
-    r"""Beta. States the listed rules to the model and evaluates every turn against them. Requests are evaluated only for entities admitted to the beta; the configuration, metadata, and error shapes may change."""
+    r"""Beta. States the listed rules to the model and evaluates every turn against them; the configuration, metadata, and error shapes may change."""
 
     id: AlignmentPluginID
 
