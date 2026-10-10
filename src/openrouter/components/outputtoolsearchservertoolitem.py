@@ -4,8 +4,22 @@ from __future__ import annotations
 from .failabletoolcallstatus import FailableToolCallStatus
 from openrouter.types import BaseModel, UNSET_SENTINEL
 from pydantic import model_serializer
-from typing import Literal, Optional
+from typing import Any, Dict, List, Literal, Optional
 from typing_extensions import NotRequired, TypedDict
+
+
+class MatchTypedDict(TypedDict):
+    definition: Dict[str, Any]
+    schema_digest: str
+    tool_id: str
+
+
+class Match(BaseModel):
+    definition: Dict[str, Any]
+
+    schema_digest: str
+
+    tool_id: str
 
 
 OutputToolSearchServerToolItemType = Literal["openrouter:tool_search",]
@@ -19,6 +33,7 @@ class OutputToolSearchServerToolItemTypedDict(TypedDict):
     error: NotRequired[str]
     r"""The error message when the tool call failed before producing a result. Set together with `status: 'failed'`; absent on a successful call."""
     id: NotRequired[str]
+    matches: NotRequired[List[MatchTypedDict]]
     query: NotRequired[str]
 
 
@@ -34,11 +49,13 @@ class OutputToolSearchServerToolItem(BaseModel):
 
     id: Optional[str] = None
 
+    matches: Optional[List[Match]] = None
+
     query: Optional[str] = None
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["error", "id", "query"])
+        optional_fields = set(["error", "id", "matches", "query"])
         serialized = handler(self)
         m = {}
 

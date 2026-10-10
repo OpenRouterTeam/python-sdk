@@ -120,6 +120,15 @@ class AdditionalToolsItemTool(BaseModel):
 AdditionalToolsItemTypeFunction = Literal["function",]
 
 
+AdditionalToolsItemAllowedCaller = Union[
+    Literal[
+        "direct",
+        "programmatic",
+    ],
+    UnrecognizedStr,
+]
+
+
 class AdditionalToolsItemToolFunctionTypedDict(TypedDict):
     r"""Function tool definition"""
 
@@ -128,10 +137,12 @@ class AdditionalToolsItemToolFunctionTypedDict(TypedDict):
     type: AdditionalToolsItemTypeFunction
     description: NotRequired[Nullable[str]]
     strict: NotRequired[Nullable[bool]]
+    allowed_callers: NotRequired[Nullable[List[AdditionalToolsItemAllowedCaller]]]
     async_: NotRequired[bool]
     r"""Lets the model keep working after calling this tool instead of waiting for its output. The tool is still executed by the client; return the result in a later request as a `function_call_output` with the original `call_id`. Only honored by providers whose Responses API supports async tools; ignored elsewhere."""
     defer_loading: NotRequired[bool]
-    r"""Withhold this tool from the model until `openrouter:tool_search` finds it. Requires the tool search server tool; at least one tool must remain non-deferred."""
+    r"""Withhold this tool from the model until `openrouter:tool_search` finds it. Where the request declares no search tool, OpenRouter may add `openrouter:tool_search` to serve the flag, and otherwise sends the tool in full. A request that declares the search tool itself must keep at least one tool non-deferred."""
+    output_schema: NotRequired[Nullable[Dict[str, Any]]]
 
 
 class AdditionalToolsItemToolFunction(BaseModel):
@@ -147,16 +158,31 @@ class AdditionalToolsItemToolFunction(BaseModel):
 
     strict: OptionalNullable[bool] = UNSET
 
+    allowed_callers: OptionalNullable[List[AdditionalToolsItemAllowedCaller]] = UNSET
+
     async_: Annotated[Optional[bool], pydantic.Field(alias="async")] = None
     r"""Lets the model keep working after calling this tool instead of waiting for its output. The tool is still executed by the client; return the result in a later request as a `function_call_output` with the original `call_id`. Only honored by providers whose Responses API supports async tools; ignored elsewhere."""
 
     defer_loading: Optional[bool] = None
-    r"""Withhold this tool from the model until `openrouter:tool_search` finds it. Requires the tool search server tool; at least one tool must remain non-deferred."""
+    r"""Withhold this tool from the model until `openrouter:tool_search` finds it. Where the request declares no search tool, OpenRouter may add `openrouter:tool_search` to serve the flag, and otherwise sends the tool in full. A request that declares the search tool itself must keep at least one tool non-deferred."""
+
+    output_schema: OptionalNullable[Dict[str, Any]] = UNSET
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["description", "strict", "async", "defer_loading"])
-        nullable_fields = set(["description", "parameters", "strict"])
+        optional_fields = set(
+            [
+                "description",
+                "strict",
+                "allowed_callers",
+                "async",
+                "defer_loading",
+                "output_schema",
+            ]
+        )
+        nullable_fields = set(
+            ["description", "parameters", "strict", "allowed_callers", "output_schema"]
+        )
         serialized = handler(self)
         m = {}
 
@@ -202,10 +228,10 @@ AdditionalToolsItemToolUnionTypedDict = TypeAliasType(
         DatetimeServerToolTypedDict,
         NamespaceToolTypedDict,
         ComputerUseServerToolTypedDict,
-        CustomToolTypedDict,
         FileSearchServerToolTypedDict,
-        AdditionalToolsItemToolFunctionTypedDict,
+        CustomToolTypedDict,
         PreviewWebSearchServerToolTypedDict,
+        AdditionalToolsItemToolFunctionTypedDict,
         WebSearchServerToolTypedDict,
         Preview20250311WebSearchServerToolTypedDict,
         LegacyWebSearchServerToolTypedDict,
@@ -238,10 +264,10 @@ AdditionalToolsItemToolUnion = TypeAliasType(
         DatetimeServerTool,
         NamespaceTool,
         ComputerUseServerTool,
-        CustomTool,
         FileSearchServerTool,
-        AdditionalToolsItemToolFunction,
+        CustomTool,
         PreviewWebSearchServerTool,
+        AdditionalToolsItemToolFunction,
         WebSearchServerTool,
         Preview20250311WebSearchServerTool,
         LegacyWebSearchServerTool,

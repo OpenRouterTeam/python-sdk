@@ -7,7 +7,7 @@ from typing import Literal, Union
 from typing_extensions import TypedDict
 
 
-ResetInterval = Union[
+WorkspaceBudgetResetInterval = Union[
     Literal[
         "daily",
         "weekly",
@@ -25,7 +25,7 @@ class WorkspaceBudgetTypedDict(TypedDict):
     r"""Unique identifier for the budget"""
     limit_usd: float
     r"""Spending limit in USD for this interval"""
-    reset_interval: Nullable[ResetInterval]
+    reset_interval: Nullable[WorkspaceBudgetResetInterval]
     r"""Interval at which spend resets. Null means a lifetime (one-time) budget."""
     updated_at: str
     r"""ISO 8601 timestamp of when the budget was last updated"""
@@ -43,7 +43,7 @@ class WorkspaceBudget(BaseModel):
     limit_usd: float
     r"""Spending limit in USD for this interval"""
 
-    reset_interval: Nullable[ResetInterval]
+    reset_interval: Nullable[WorkspaceBudgetResetInterval]
     r"""Interval at which spend resets. Null means a lifetime (one-time) budget."""
 
     updated_at: str

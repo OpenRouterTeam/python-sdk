@@ -10,6 +10,7 @@ if TYPE_CHECKING:
     from .activityresponse import ActivityResponse, ActivityResponseTypedDict
     from .additionaltoolsitem import (
         AdditionalToolsItem,
+        AdditionalToolsItemAllowedCaller,
         AdditionalToolsItemRole,
         AdditionalToolsItemTool,
         AdditionalToolsItemToolFunction,
@@ -1595,6 +1596,32 @@ if TYPE_CHECKING:
         DecisionsScoreQuestionTypedDict,
     )
     from .defaultparameters import DefaultParameters, DefaultParametersTypedDict
+    from .deferredbm25search import (
+        DeferredBm25Search,
+        DeferredBm25SearchType,
+        DeferredBm25SearchTypedDict,
+    )
+    from .deferredcustomsearch import (
+        DeferredCustomSearch,
+        DeferredCustomSearchType,
+        DeferredCustomSearchTypedDict,
+    )
+    from .deferredregexsearch import (
+        DeferredRegexSearch,
+        DeferredRegexSearchType,
+        DeferredRegexSearchTypedDict,
+    )
+    from .deferredtoolscontrol import (
+        DeferredToolsControl,
+        DeferredToolsControlTypedDict,
+        Profile,
+        Protocol,
+        Validation,
+    )
+    from .deferredtoolssearchstrategy import (
+        DeferredToolsSearchStrategy,
+        DeferredToolsSearchStrategyTypedDict,
+    )
     from .deletebyokkeyresponse import (
         DeleteBYOKKeyResponse,
         DeleteBYOKKeyResponseTypedDict,
@@ -2287,6 +2314,12 @@ if TYPE_CHECKING:
         JevRouterPluginTypedDict,
     )
     from .keyassignment import KeyAssignment, KeyAssignmentTypedDict
+    from .keybudget import (
+        KeyBudget,
+        KeyBudgetResetInterval,
+        KeyBudgetScope,
+        KeyBudgetTypedDict,
+    )
     from .legacy_chatcontentvideo import (
         LegacyChatContentVideo,
         LegacyChatContentVideoType,
@@ -2677,8 +2710,8 @@ if TYPE_CHECKING:
     )
     from .multimodalmedia import MultimodalMedia, MultimodalMediaTypedDict
     from .namespacefunctiontool import (
-        AllowedCaller,
         NamespaceFunctionTool,
+        NamespaceFunctionToolAllowedCaller,
         NamespaceFunctionToolType,
         NamespaceFunctionToolTypedDict,
     )
@@ -2976,6 +3009,7 @@ if TYPE_CHECKING:
         InputTokensDetails,
         InputTokensDetailsTypedDict,
         OpenResponsesResult,
+        OpenResponsesResultAllowedCaller,
         OpenResponsesResultObject,
         OpenResponsesResultToolFunction,
         OpenResponsesResultToolFunctionTypedDict,
@@ -3046,6 +3080,16 @@ if TYPE_CHECKING:
         ORAnthropicShellToolResultTypedDict,
     )
     from .oranthropicstopreason import ORAnthropicStopReason
+    from .oranthropictoolsearchresult import (
+        ORAnthropicToolSearchResult,
+        ORAnthropicToolSearchResultType,
+        ORAnthropicToolSearchResultTypedDict,
+    )
+    from .oranthropictoolsearchresultparam import (
+        ORAnthropicToolSearchResultParam,
+        ORAnthropicToolSearchResultParamType,
+        ORAnthropicToolSearchResultParamTypedDict,
+    )
     from .organizationsettings import (
         OrganizationSettings,
         OrganizationSettingsTypedDict,
@@ -3336,6 +3380,8 @@ if TYPE_CHECKING:
         OutputToolSearchCallItemTypedDict,
     )
     from .outputtoolsearchservertoolitem import (
+        Match,
+        MatchTypedDict,
         OutputToolSearchServerToolItem,
         OutputToolSearchServerToolItemType,
         OutputToolSearchServerToolItemTypedDict,
@@ -3693,6 +3739,7 @@ if TYPE_CHECKING:
         ReasoningConfig,
         ReasoningConfigTypedDict,
         ResponsesRequest,
+        ResponsesRequestAllowedCaller,
         ResponsesRequestPlugin,
         ResponsesRequestPluginTypedDict,
         ResponsesRequestServiceTier,
@@ -4060,6 +4107,7 @@ if TYPE_CHECKING:
     )
     from .toolsearchoutputitem import (
         ToolSearchOutputItem,
+        ToolSearchOutputItemAllowedCaller,
         ToolSearchOutputItemExecution,
         ToolSearchOutputItemStatus,
         ToolSearchOutputItemTool,
@@ -4354,8 +4402,8 @@ if TYPE_CHECKING:
     )
     from .workspace import Workspace, WorkspaceTypedDict
     from .workspacebudget import (
-        ResetInterval,
         WorkspaceBudget,
+        WorkspaceBudgetResetInterval,
         WorkspaceBudgetTypedDict,
     )
     from .workspacebudgetinterval import WorkspaceBudgetInterval
@@ -4377,6 +4425,7 @@ __all__ = [
     "ActivityResponse",
     "ActivityResponseTypedDict",
     "AdditionalToolsItem",
+    "AdditionalToolsItemAllowedCaller",
     "AdditionalToolsItemRole",
     "AdditionalToolsItemTool",
     "AdditionalToolsItemToolFunction",
@@ -4445,7 +4494,6 @@ __all__ = [
     "AlignmentUnavailableCallRecordOutcome",
     "AlignmentUnavailableCallRecordReason",
     "AlignmentUnavailableCallRecordTypedDict",
-    "AllowedCaller",
     "AllowedTools",
     "AllowedToolsTypedDict",
     "AllowedToolsUnion",
@@ -5450,6 +5498,19 @@ __all__ = [
     "DefaultEffort",
     "DefaultParameters",
     "DefaultParametersTypedDict",
+    "DeferredBm25Search",
+    "DeferredBm25SearchType",
+    "DeferredBm25SearchTypedDict",
+    "DeferredCustomSearch",
+    "DeferredCustomSearchType",
+    "DeferredCustomSearchTypedDict",
+    "DeferredRegexSearch",
+    "DeferredRegexSearchType",
+    "DeferredRegexSearchTypedDict",
+    "DeferredToolsControl",
+    "DeferredToolsControlTypedDict",
+    "DeferredToolsSearchStrategy",
+    "DeferredToolsSearchStrategyTypedDict",
     "DeleteBYOKKeyResponse",
     "DeleteBYOKKeyResponseTypedDict",
     "DeleteGuardrailResponse",
@@ -5980,6 +6041,10 @@ __all__ = [
     "Key",
     "KeyAssignment",
     "KeyAssignmentTypedDict",
+    "KeyBudget",
+    "KeyBudgetResetInterval",
+    "KeyBudgetScope",
+    "KeyBudgetTypedDict",
     "KeyTypedDict",
     "Kty",
     "LegacyChatContentVideo",
@@ -6045,6 +6110,8 @@ __all__ = [
     "ManagedPrivateEndpointResponse",
     "ManagedPrivateEndpointResponseTypedDict",
     "ManagedPrivateEndpointTypedDict",
+    "Match",
+    "MatchTypedDict",
     "MaxPrice",
     "MaxPriceTypedDict",
     "McpApprovalRequestItem",
@@ -6207,6 +6274,7 @@ __all__ = [
     "NameWebSearch1",
     "NameWebSearch2",
     "NamespaceFunctionTool",
+    "NamespaceFunctionToolAllowedCaller",
     "NamespaceFunctionToolType",
     "NamespaceFunctionToolTypedDict",
     "NamespaceTool",
@@ -6244,6 +6312,12 @@ __all__ = [
     "ORAnthropicShellToolResultTypeOpenrouterShellToolResult",
     "ORAnthropicShellToolResultTypedDict",
     "ORAnthropicStopReason",
+    "ORAnthropicToolSearchResult",
+    "ORAnthropicToolSearchResultParam",
+    "ORAnthropicToolSearchResultParamType",
+    "ORAnthropicToolSearchResultParamTypedDict",
+    "ORAnthropicToolSearchResultType",
+    "ORAnthropicToolSearchResultTypedDict",
     "ObjectEmbedding",
     "ObservabilityArizeDestination",
     "ObservabilityArizeDestinationConfig",
@@ -6425,6 +6499,7 @@ __all__ = [
     "OpenResponsesInProgressEventType",
     "OpenResponsesInProgressEventTypedDict",
     "OpenResponsesResult",
+    "OpenResponsesResultAllowedCaller",
     "OpenResponsesResultObject",
     "OpenResponsesResultToolFunction",
     "OpenResponsesResultToolFunctionTypedDict",
@@ -6785,6 +6860,7 @@ __all__ = [
     "PrivateEndpointValidationResponse",
     "PrivateEndpointValidationResponseTypedDict",
     "PrivateEndpointValidationTypedDict",
+    "Profile",
     "Progress",
     "ProgressTypedDict",
     "PromptCacheBreakpoint",
@@ -6794,6 +6870,7 @@ __all__ = [
     "PromptCacheOptionsMode",
     "PromptCacheOptionsTypedDict",
     "PromptInjectionScanScope",
+    "Protocol",
     "ProviderName",
     "ProviderOptions",
     "ProviderOptionsTypedDict",
@@ -6917,7 +6994,6 @@ __all__ = [
     "RequireApprovalUnionTypedDict",
     "Rerank",
     "RerankTypedDict",
-    "ResetInterval",
     "ResponseFormat",
     "ResponseFormatTypedDict",
     "ResponseHealingPlugin",
@@ -6930,6 +7006,7 @@ __all__ = [
     "ResponseOutputTextType",
     "ResponseOutputTextTypedDict",
     "ResponsesRequest",
+    "ResponsesRequestAllowedCaller",
     "ResponsesRequestPlugin",
     "ResponsesRequestPluginTypedDict",
     "ResponsesRequestServiceTier",
@@ -7240,6 +7317,7 @@ __all__ = [
     "ToolSearchCallItemType",
     "ToolSearchCallItemTypedDict",
     "ToolSearchOutputItem",
+    "ToolSearchOutputItemAllowedCaller",
     "ToolSearchOutputItemExecution",
     "ToolSearchOutputItemStatus",
     "ToolSearchOutputItemTool",
@@ -7444,6 +7522,7 @@ __all__ = [
     "UtcDay",
     "ValidatePrivateEndpointRequest",
     "ValidatePrivateEndpointRequestTypedDict",
+    "Validation",
     "Variables",
     "VariablesTypedDict",
     "VaultEffectiveSecret",
@@ -7537,6 +7616,7 @@ __all__ = [
     "Workspace",
     "WorkspaceBudget",
     "WorkspaceBudgetInterval",
+    "WorkspaceBudgetResetInterval",
     "WorkspaceBudgetTypedDict",
     "WorkspaceMember",
     "WorkspaceMemberRole",
@@ -7554,6 +7634,7 @@ _dynamic_imports: dict[str, str] = {
     "ActivityResponse": ".activityresponse",
     "ActivityResponseTypedDict": ".activityresponse",
     "AdditionalToolsItem": ".additionaltoolsitem",
+    "AdditionalToolsItemAllowedCaller": ".additionaltoolsitem",
     "AdditionalToolsItemRole": ".additionaltoolsitem",
     "AdditionalToolsItemTool": ".additionaltoolsitem",
     "AdditionalToolsItemToolFunction": ".additionaltoolsitem",
@@ -8674,6 +8755,22 @@ _dynamic_imports: dict[str, str] = {
     "DecisionsScoreQuestionTypedDict": ".decisionsscorequestion",
     "DefaultParameters": ".defaultparameters",
     "DefaultParametersTypedDict": ".defaultparameters",
+    "DeferredBm25Search": ".deferredbm25search",
+    "DeferredBm25SearchType": ".deferredbm25search",
+    "DeferredBm25SearchTypedDict": ".deferredbm25search",
+    "DeferredCustomSearch": ".deferredcustomsearch",
+    "DeferredCustomSearchType": ".deferredcustomsearch",
+    "DeferredCustomSearchTypedDict": ".deferredcustomsearch",
+    "DeferredRegexSearch": ".deferredregexsearch",
+    "DeferredRegexSearchType": ".deferredregexsearch",
+    "DeferredRegexSearchTypedDict": ".deferredregexsearch",
+    "DeferredToolsControl": ".deferredtoolscontrol",
+    "DeferredToolsControlTypedDict": ".deferredtoolscontrol",
+    "Profile": ".deferredtoolscontrol",
+    "Protocol": ".deferredtoolscontrol",
+    "Validation": ".deferredtoolscontrol",
+    "DeferredToolsSearchStrategy": ".deferredtoolssearchstrategy",
+    "DeferredToolsSearchStrategyTypedDict": ".deferredtoolssearchstrategy",
     "DeleteBYOKKeyResponse": ".deletebyokkeyresponse",
     "DeleteBYOKKeyResponseTypedDict": ".deletebyokkeyresponse",
     "DeleteGuardrailResponse": ".deleteguardrailresponse",
@@ -9187,6 +9284,10 @@ _dynamic_imports: dict[str, str] = {
     "JevRouterPluginTypedDict": ".jevrouterplugin",
     "KeyAssignment": ".keyassignment",
     "KeyAssignmentTypedDict": ".keyassignment",
+    "KeyBudget": ".keybudget",
+    "KeyBudgetResetInterval": ".keybudget",
+    "KeyBudgetScope": ".keybudget",
+    "KeyBudgetTypedDict": ".keybudget",
     "LegacyChatContentVideo": ".legacy_chatcontentvideo",
     "LegacyChatContentVideoType": ".legacy_chatcontentvideo",
     "LegacyChatContentVideoTypedDict": ".legacy_chatcontentvideo",
@@ -9510,8 +9611,8 @@ _dynamic_imports: dict[str, str] = {
     "ModerationPluginTypedDict": ".moderationplugin",
     "MultimodalMedia": ".multimodalmedia",
     "MultimodalMediaTypedDict": ".multimodalmedia",
-    "AllowedCaller": ".namespacefunctiontool",
     "NamespaceFunctionTool": ".namespacefunctiontool",
+    "NamespaceFunctionToolAllowedCaller": ".namespacefunctiontool",
     "NamespaceFunctionToolType": ".namespacefunctiontool",
     "NamespaceFunctionToolTypedDict": ".namespacefunctiontool",
     "NamespaceTool": ".namespacetool",
@@ -9729,6 +9830,7 @@ _dynamic_imports: dict[str, str] = {
     "InputTokensDetails": ".openresponsesresult",
     "InputTokensDetailsTypedDict": ".openresponsesresult",
     "OpenResponsesResult": ".openresponsesresult",
+    "OpenResponsesResultAllowedCaller": ".openresponsesresult",
     "OpenResponsesResultObject": ".openresponsesresult",
     "OpenResponsesResultToolFunction": ".openresponsesresult",
     "OpenResponsesResultToolFunctionTypedDict": ".openresponsesresult",
@@ -9781,6 +9883,12 @@ _dynamic_imports: dict[str, str] = {
     "ORAnthropicShellToolResultTypeOpenrouterShellToolResult": ".oranthropicshelltoolresult",
     "ORAnthropicShellToolResultTypedDict": ".oranthropicshelltoolresult",
     "ORAnthropicStopReason": ".oranthropicstopreason",
+    "ORAnthropicToolSearchResult": ".oranthropictoolsearchresult",
+    "ORAnthropicToolSearchResultType": ".oranthropictoolsearchresult",
+    "ORAnthropicToolSearchResultTypedDict": ".oranthropictoolsearchresult",
+    "ORAnthropicToolSearchResultParam": ".oranthropictoolsearchresultparam",
+    "ORAnthropicToolSearchResultParamType": ".oranthropictoolsearchresultparam",
+    "ORAnthropicToolSearchResultParamTypedDict": ".oranthropictoolsearchresultparam",
     "OrganizationSettings": ".organizationsettings",
     "OrganizationSettingsTypedDict": ".organizationsettings",
     "OutputAdvisorServerToolItem": ".outputadvisorservertoolitem",
@@ -9996,6 +10104,8 @@ _dynamic_imports: dict[str, str] = {
     "OutputToolSearchCallItemExecution": ".outputtoolsearchcallitem",
     "OutputToolSearchCallItemType": ".outputtoolsearchcallitem",
     "OutputToolSearchCallItemTypedDict": ".outputtoolsearchcallitem",
+    "Match": ".outputtoolsearchservertoolitem",
+    "MatchTypedDict": ".outputtoolsearchservertoolitem",
     "OutputToolSearchServerToolItem": ".outputtoolsearchservertoolitem",
     "OutputToolSearchServerToolItemType": ".outputtoolsearchservertoolitem",
     "OutputToolSearchServerToolItemTypedDict": ".outputtoolsearchservertoolitem",
@@ -10253,6 +10363,7 @@ _dynamic_imports: dict[str, str] = {
     "ReasoningConfig": ".responsesrequest",
     "ReasoningConfigTypedDict": ".responsesrequest",
     "ResponsesRequest": ".responsesrequest",
+    "ResponsesRequestAllowedCaller": ".responsesrequest",
     "ResponsesRequestPlugin": ".responsesrequest",
     "ResponsesRequestPluginTypedDict": ".responsesrequest",
     "ResponsesRequestServiceTier": ".responsesrequest",
@@ -10524,6 +10635,7 @@ _dynamic_imports: dict[str, str] = {
     "ToolSearchCallItemType": ".toolsearchcallitem",
     "ToolSearchCallItemTypedDict": ".toolsearchcallitem",
     "ToolSearchOutputItem": ".toolsearchoutputitem",
+    "ToolSearchOutputItemAllowedCaller": ".toolsearchoutputitem",
     "ToolSearchOutputItemExecution": ".toolsearchoutputitem",
     "ToolSearchOutputItemStatus": ".toolsearchoutputitem",
     "ToolSearchOutputItemTool": ".toolsearchoutputitem",
@@ -10715,8 +10827,8 @@ _dynamic_imports: dict[str, str] = {
     "WebSearchUserLocationServerToolTypedDict": ".websearchuserlocationservertool",
     "Workspace": ".workspace",
     "WorkspaceTypedDict": ".workspace",
-    "ResetInterval": ".workspacebudget",
     "WorkspaceBudget": ".workspacebudget",
+    "WorkspaceBudgetResetInterval": ".workspacebudget",
     "WorkspaceBudgetTypedDict": ".workspacebudget",
     "WorkspaceBudgetInterval": ".workspacebudgetinterval",
     "WorkspaceMember": ".workspacemember",

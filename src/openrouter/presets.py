@@ -640,6 +640,12 @@ class Presets(BaseSDK):
         debug: Optional[
             Union[components.ChatDebugOptions, components.ChatDebugOptionsTypedDict]
         ] = None,
+        deferred_tools: Optional[
+            Union[
+                components.DeferredToolsControl,
+                components.DeferredToolsControlTypedDict,
+            ]
+        ] = None,
         frequency_penalty: OptionalNullable[float] = UNSET,
         image_config: Optional[
             Union[
@@ -745,6 +751,7 @@ class Presets(BaseSDK):
 
         :param cache_control: Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. When set on an individual content block, it marks an explicit cache breakpoint; block-level markers also work on OpenAI models that support explicit prompt caching — OpenRouter converts them to the provider's native format.
         :param debug: Debug options for inspecting request transformations (streaming only)
+        :param deferred_tools: Opt-in versioned router-level deferred-tool protocol. Replay assistant reasoning unchanged on continuation; keep the catalog unchanged.
         :param frequency_penalty: Frequency penalty (-2.0 to 2.0)
         :param image_config: Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/guides/overview/multimodal/image-generation for more details.
         :param logit_bias: Token logit bias adjustments
@@ -809,6 +816,9 @@ class Presets(BaseSDK):
                 ),
                 debug=utils.get_pydantic_model(
                     debug, Optional[components.ChatDebugOptions]
+                ),
+                deferred_tools=utils.get_pydantic_model(
+                    deferred_tools, Optional[components.DeferredToolsControl]
                 ),
                 frequency_penalty=frequency_penalty,
                 image_config=utils.unmarshal(
@@ -1005,6 +1015,12 @@ class Presets(BaseSDK):
         debug: Optional[
             Union[components.ChatDebugOptions, components.ChatDebugOptionsTypedDict]
         ] = None,
+        deferred_tools: Optional[
+            Union[
+                components.DeferredToolsControl,
+                components.DeferredToolsControlTypedDict,
+            ]
+        ] = None,
         frequency_penalty: OptionalNullable[float] = UNSET,
         image_config: Optional[
             Union[
@@ -1110,6 +1126,7 @@ class Presets(BaseSDK):
 
         :param cache_control: Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. When set on an individual content block, it marks an explicit cache breakpoint; block-level markers also work on OpenAI models that support explicit prompt caching — OpenRouter converts them to the provider's native format.
         :param debug: Debug options for inspecting request transformations (streaming only)
+        :param deferred_tools: Opt-in versioned router-level deferred-tool protocol. Replay assistant reasoning unchanged on continuation; keep the catalog unchanged.
         :param frequency_penalty: Frequency penalty (-2.0 to 2.0)
         :param image_config: Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/guides/overview/multimodal/image-generation for more details.
         :param logit_bias: Token logit bias adjustments
@@ -1174,6 +1191,9 @@ class Presets(BaseSDK):
                 ),
                 debug=utils.get_pydantic_model(
                     debug, Optional[components.ChatDebugOptions]
+                ),
+                deferred_tools=utils.get_pydantic_model(
+                    deferred_tools, Optional[components.DeferredToolsControl]
                 ),
                 frequency_penalty=frequency_penalty,
                 image_config=utils.unmarshal(
@@ -1373,6 +1393,12 @@ class Presets(BaseSDK):
         context_management: OptionalNullable[
             Union[components.ContextManagement, components.ContextManagementTypedDict]
         ] = UNSET,
+        deferred_tools: Optional[
+            Union[
+                components.DeferredToolsControl,
+                components.DeferredToolsControlTypedDict,
+            ]
+        ] = None,
         fallbacks: OptionalNullable[
             Union[
                 Iterable[components.MessagesFallbackParam],
@@ -1464,6 +1490,7 @@ class Presets(BaseSDK):
 
         :param cache_control: Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. When set on an individual content block, it marks an explicit cache breakpoint; block-level markers also work on OpenAI models that support explicit prompt caching — OpenRouter converts them to the provider's native format.
         :param context_management:
+        :param deferred_tools: Opt-in versioned router-level deferred-tool protocol. Replay assistant reasoning unchanged on continuation; keep the catalog unchanged.
         :param fallbacks: Fallback models to try if the primary model fails or refuses, in order. Handled by OpenRouter multi-model routing rather than Anthropic server-side fallbacks; cannot be combined with `models`. Each entry accepts only `model`. Maximum of 3 entries.
         :param max_tokens:
         :param metadata:
@@ -1513,6 +1540,9 @@ class Presets(BaseSDK):
                 ),
                 context_management=utils.get_pydantic_model(
                     context_management, OptionalNullable[components.ContextManagement]
+                ),
+                deferred_tools=utils.get_pydantic_model(
+                    deferred_tools, Optional[components.DeferredToolsControl]
                 ),
                 fallbacks=utils.get_pydantic_model(
                     fallbacks, OptionalNullable[List[components.MessagesFallbackParam]]
@@ -1695,6 +1725,12 @@ class Presets(BaseSDK):
         context_management: OptionalNullable[
             Union[components.ContextManagement, components.ContextManagementTypedDict]
         ] = UNSET,
+        deferred_tools: Optional[
+            Union[
+                components.DeferredToolsControl,
+                components.DeferredToolsControlTypedDict,
+            ]
+        ] = None,
         fallbacks: OptionalNullable[
             Union[
                 Iterable[components.MessagesFallbackParam],
@@ -1786,6 +1822,7 @@ class Presets(BaseSDK):
 
         :param cache_control: Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. When set on an individual content block, it marks an explicit cache breakpoint; block-level markers also work on OpenAI models that support explicit prompt caching — OpenRouter converts them to the provider's native format.
         :param context_management:
+        :param deferred_tools: Opt-in versioned router-level deferred-tool protocol. Replay assistant reasoning unchanged on continuation; keep the catalog unchanged.
         :param fallbacks: Fallback models to try if the primary model fails or refuses, in order. Handled by OpenRouter multi-model routing rather than Anthropic server-side fallbacks; cannot be combined with `models`. Each entry accepts only `model`. Maximum of 3 entries.
         :param max_tokens:
         :param metadata:
@@ -1835,6 +1872,9 @@ class Presets(BaseSDK):
                 ),
                 context_management=utils.get_pydantic_model(
                     context_management, OptionalNullable[components.ContextManagement]
+                ),
+                deferred_tools=utils.get_pydantic_model(
+                    deferred_tools, Optional[components.DeferredToolsControl]
                 ),
                 fallbacks=utils.get_pydantic_model(
                     fallbacks, OptionalNullable[List[components.MessagesFallbackParam]]
@@ -2011,6 +2051,12 @@ class Presets(BaseSDK):
         debug: Optional[
             Union[components.ChatDebugOptions, components.ChatDebugOptionsTypedDict]
         ] = None,
+        deferred_tools: Optional[
+            Union[
+                components.DeferredToolsControl,
+                components.DeferredToolsControlTypedDict,
+            ]
+        ] = None,
         frequency_penalty: OptionalNullable[float] = UNSET,
         image_config: Optional[
             Union[
@@ -2112,6 +2158,7 @@ class Presets(BaseSDK):
         :param background:
         :param cache_control: Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. When set on an individual content block, it marks an explicit cache breakpoint; block-level markers also work on OpenAI models that support explicit prompt caching — OpenRouter converts them to the provider's native format.
         :param debug: Debug options for inspecting request transformations (streaming only)
+        :param deferred_tools: Opt-in versioned router-level deferred-tool protocol. Replay assistant reasoning unchanged on continuation; keep the catalog unchanged.
         :param frequency_penalty:
         :param image_config: Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/guides/overview/multimodal/image-generation for more details.
         :param include:
@@ -2174,6 +2221,9 @@ class Presets(BaseSDK):
                 ),
                 debug=utils.get_pydantic_model(
                     debug, Optional[components.ChatDebugOptions]
+                ),
+                deferred_tools=utils.get_pydantic_model(
+                    deferred_tools, Optional[components.DeferredToolsControl]
                 ),
                 frequency_penalty=frequency_penalty,
                 image_config=utils.unmarshal(
@@ -2363,6 +2413,12 @@ class Presets(BaseSDK):
         debug: Optional[
             Union[components.ChatDebugOptions, components.ChatDebugOptionsTypedDict]
         ] = None,
+        deferred_tools: Optional[
+            Union[
+                components.DeferredToolsControl,
+                components.DeferredToolsControlTypedDict,
+            ]
+        ] = None,
         frequency_penalty: OptionalNullable[float] = UNSET,
         image_config: Optional[
             Union[
@@ -2464,6 +2520,7 @@ class Presets(BaseSDK):
         :param background:
         :param cache_control: Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. When set on an individual content block, it marks an explicit cache breakpoint; block-level markers also work on OpenAI models that support explicit prompt caching — OpenRouter converts them to the provider's native format.
         :param debug: Debug options for inspecting request transformations (streaming only)
+        :param deferred_tools: Opt-in versioned router-level deferred-tool protocol. Replay assistant reasoning unchanged on continuation; keep the catalog unchanged.
         :param frequency_penalty:
         :param image_config: Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/guides/overview/multimodal/image-generation for more details.
         :param include:
@@ -2526,6 +2583,9 @@ class Presets(BaseSDK):
                 ),
                 debug=utils.get_pydantic_model(
                     debug, Optional[components.ChatDebugOptions]
+                ),
+                deferred_tools=utils.get_pydantic_model(
+                    deferred_tools, Optional[components.DeferredToolsControl]
                 ),
                 frequency_penalty=frequency_penalty,
                 image_config=utils.unmarshal(

@@ -1,0 +1,23 @@
+---
+title: "KeyBudgetResetInterval"
+---
+
+UTC window the spend is counted over (weeks start Monday); null for a lifetime budget that never resets.
+
+## Example Usage
+
+```python
+from openrouter.components import KeyBudgetResetInterval
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
+value: KeyBudgetResetInterval = "daily"
+```
+
+
+## Values
+
+This is an open enum. Unrecognized values will not fail type checks.
+
+- `"daily"`
+- `"weekly"`
+- `"monthly"`

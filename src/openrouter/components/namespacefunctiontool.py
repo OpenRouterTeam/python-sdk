@@ -15,7 +15,7 @@ from typing import Any, Dict, List, Literal, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-AllowedCaller = Union[
+NamespaceFunctionToolAllowedCaller = Union[
     Literal[
         "direct",
         "programmatic",
@@ -32,7 +32,7 @@ class NamespaceFunctionToolTypedDict(TypedDict):
 
     name: str
     type: NamespaceFunctionToolType
-    allowed_callers: NotRequired[Nullable[List[AllowedCaller]]]
+    allowed_callers: NotRequired[Nullable[List[NamespaceFunctionToolAllowedCaller]]]
     async_: NotRequired[bool]
     r"""Lets the model keep working after calling this tool instead of waiting for its output. The tool is still executed by the client; return the result in a later request as a `function_call_output` with the original `call_id`. Only honored by providers whose Responses API supports async tools; ignored elsewhere."""
     defer_loading: NotRequired[bool]
@@ -49,7 +49,7 @@ class NamespaceFunctionTool(BaseModel):
 
     type: NamespaceFunctionToolType
 
-    allowed_callers: OptionalNullable[List[AllowedCaller]] = UNSET
+    allowed_callers: OptionalNullable[List[NamespaceFunctionToolAllowedCaller]] = UNSET
 
     async_: Annotated[Optional[bool], pydantic.Field(alias="async")] = None
     r"""Lets the model keep working after calling this tool instead of waiting for its output. The tool is still executed by the client; return the result in a later request as a `function_call_output` with the original `call_id`. Only honored by providers whose Responses API supports async tools; ignored elsewhere."""

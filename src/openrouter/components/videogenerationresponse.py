@@ -27,6 +27,8 @@ class VideoGenerationResponseTypedDict(TypedDict):
     polling_url: str
     status: VideoGenerationResponseStatus
     error: NotRequired[str]
+    expires_at: NotRequired[int]
+    r"""Unix timestamp in seconds when OpenRouter's stored copy of the outputs stops being available. Present only when that copy exists."""
     generation_id: NotRequired[str]
     r"""The generation ID associated with this video generation job. Available once the job has been processed."""
     unsigned_urls: NotRequired[List[str]]
@@ -44,6 +46,9 @@ class VideoGenerationResponse(BaseModel):
 
     error: Optional[str] = None
 
+    expires_at: Optional[int] = None
+    r"""Unix timestamp in seconds when OpenRouter's stored copy of the outputs stops being available. Present only when that copy exists."""
+
     generation_id: Optional[str] = None
     r"""The generation ID associated with this video generation job. Available once the job has been processed."""
 
@@ -54,7 +59,9 @@ class VideoGenerationResponse(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["error", "generation_id", "unsigned_urls", "usage"])
+        optional_fields = set(
+            ["error", "expires_at", "generation_id", "unsigned_urls", "usage"]
+        )
         serialized = handler(self)
         m = {}
 

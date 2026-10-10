@@ -54,6 +54,7 @@ from .contextcompressionplugin import (
     ContextCompressionPluginTypedDict,
 )
 from .datetimeservertool import DatetimeServerTool, DatetimeServerToolTypedDict
+from .deferredtoolscontrol import DeferredToolsControl, DeferredToolsControlTypedDict
 from .fileparserplugin import FileParserPlugin, FileParserPluginTypedDict
 from .fusionplugin import FusionPlugin, FusionPluginTypedDict
 from .imagegenerationservertool_openrouter import (
@@ -1150,6 +1151,8 @@ class MessagesRequestTypedDict(TypedDict):
     cache_control: NotRequired[AnthropicCacheControlDirectiveTypedDict]
     r"""Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. When set on an individual content block, it marks an explicit cache breakpoint; block-level markers also work on OpenAI models that support explicit prompt caching — OpenRouter converts them to the provider's native format."""
     context_management: NotRequired[Nullable[ContextManagementTypedDict]]
+    deferred_tools: NotRequired[DeferredToolsControlTypedDict]
+    r"""Opt-in versioned router-level deferred-tool protocol. Replay assistant reasoning unchanged on continuation; keep the catalog unchanged."""
     fallbacks: NotRequired[Nullable[List[MessagesFallbackParamTypedDict]]]
     r"""Fallback models to try if the primary model fails or refuses, in order. Handled by OpenRouter multi-model routing rather than Anthropic server-side fallbacks; cannot be combined with `models`. Each entry accepts only `model`. Maximum of 3 entries."""
     max_tokens: NotRequired[int]
@@ -1194,6 +1197,9 @@ class MessagesRequest(BaseModel):
     r"""Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. When set on an individual content block, it marks an explicit cache breakpoint; block-level markers also work on OpenAI models that support explicit prompt caching — OpenRouter converts them to the provider's native format."""
 
     context_management: OptionalNullable[ContextManagement] = UNSET
+
+    deferred_tools: Optional[DeferredToolsControl] = None
+    r"""Opt-in versioned router-level deferred-tool protocol. Replay assistant reasoning unchanged on continuation; keep the catalog unchanged."""
 
     fallbacks: OptionalNullable[List[MessagesFallbackParam]] = UNSET
     r"""Fallback models to try if the primary model fails or refuses, in order. Handled by OpenRouter multi-model routing rather than Anthropic server-side fallbacks; cannot be combined with `models`. Each entry accepts only `model`. Maximum of 3 entries."""
@@ -1255,6 +1261,7 @@ class MessagesRequest(BaseModel):
             [
                 "cache_control",
                 "context_management",
+                "deferred_tools",
                 "fallbacks",
                 "max_tokens",
                 "metadata",
