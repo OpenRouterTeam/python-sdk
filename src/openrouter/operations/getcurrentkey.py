@@ -4,6 +4,7 @@ from __future__ import annotations
 from datetime import datetime
 from openrouter.components import (
     freemodeldailyrequests as components_freemodeldailyrequests,
+    keybudget as components_keybudget,
 )
 from openrouter.types import (
     BaseModel,
@@ -193,6 +194,8 @@ class GetCurrentKeyDataTypedDict(TypedDict):
 
     allowed_data_regions: List[AllowedDataRegion]
     r"""Data regions permitted for this API key by the guardrail policies on the key and the account regional-routing entitlement. Empty when no region is permitted. Reflects region policy only: other key restrictions, such as management keys being blocked from inference, still apply."""
+    budgets: List[components_keybudget.KeyBudgetTypedDict]
+    r"""Every budget layer enforcement checks for requests made with this key, in the order it checks them: guardrail budgets, workspace budgets, then the key's own limit. Empty when nothing is budgeted. `effective_budget` is the budget that blocks requests first: the entry enforcement rejects on when one is already spent, otherwise the entry with the least `remaining_usd`; null when nothing is budgeted. `limit` and `limit_remaining` above describe only the key's own limit."""
     byok_usage: float
     r"""Total external BYOK usage (in USD) for the API key"""
     byok_usage_daily: float
@@ -203,6 +206,7 @@ class GetCurrentKeyDataTypedDict(TypedDict):
     r"""External BYOK usage (in USD) for the current UTC week (Monday-Sunday)"""
     creator_user_id: Nullable[str]
     r"""The user ID of the key creator. For organization-owned keys, this is the member who created the key. For individual users, this is the user's own ID."""
+    effective_budget: Nullable[components_keybudget.KeyBudgetTypedDict]
     free_model_daily_requests: (
         components_freemodeldailyrequests.FreeModelDailyRequestsTypedDict
     )
@@ -247,6 +251,9 @@ class GetCurrentKeyData(BaseModel):
     allowed_data_regions: List[AllowedDataRegion]
     r"""Data regions permitted for this API key by the guardrail policies on the key and the account regional-routing entitlement. Empty when no region is permitted. Reflects region policy only: other key restrictions, such as management keys being blocked from inference, still apply."""
 
+    budgets: List[components_keybudget.KeyBudget]
+    r"""Every budget layer enforcement checks for requests made with this key, in the order it checks them: guardrail budgets, workspace budgets, then the key's own limit. Empty when nothing is budgeted. `effective_budget` is the budget that blocks requests first: the entry enforcement rejects on when one is already spent, otherwise the entry with the least `remaining_usd`; null when nothing is budgeted. `limit` and `limit_remaining` above describe only the key's own limit."""
+
     byok_usage: float
     r"""Total external BYOK usage (in USD) for the API key"""
 
@@ -261,6 +268,8 @@ class GetCurrentKeyData(BaseModel):
 
     creator_user_id: Nullable[str]
     r"""The user ID of the key creator. For organization-owned keys, this is the member who created the key. For individual users, this is the user's own ID."""
+
+    effective_budget: Nullable[components_keybudget.KeyBudget]
 
     free_model_daily_requests: components_freemodeldailyrequests.FreeModelDailyRequests
     r"""Free-model (`:free` variant) daily request quota for the account that owns the key. Reports the same counter and tier limit that free-model enforcement reads for accounts subject to the free-model limits; the counter resets at UTC midnight. Accounts and endpoints exempt from free-model limits, and BYOK requests, are not gated by it, so `remaining` is the tier policy rather than an enforced ceiling for them."""
@@ -329,6 +338,7 @@ class GetCurrentKeyData(BaseModel):
         nullable_fields = set(
             [
                 "creator_user_id",
+                "effective_budget",
                 "expires_at",
                 "limit",
                 "limit_remaining",

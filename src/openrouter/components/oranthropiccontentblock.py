@@ -59,6 +59,10 @@ from .oranthropicshelltoolresult import (
     ORAnthropicShellToolResult,
     ORAnthropicShellToolResultTypedDict,
 )
+from .oranthropictoolsearchresult import (
+    ORAnthropicToolSearchResult,
+    ORAnthropicToolSearchResultTypedDict,
+)
 from functools import partial
 from openrouter.types import BaseModel
 from openrouter.utils.unions import parse_open_union
@@ -75,18 +79,19 @@ ORAnthropicContentBlockTypedDict = TypeAliasType(
         AnthropicContainerUploadTypedDict,
         AnthropicCompactionBlockTypedDict,
         AnthropicTextBlockTypedDict,
+        ORAnthropicToolSearchResultTypedDict,
         AnthropicAdvisorToolResultTypedDict,
         AnthropicThinkingBlockTypedDict,
-        AnthropicToolSearchToolResultTypedDict,
         AnthropicCodeExecutionToolResultTypedDict,
         AnthropicBashCodeExecutionToolResultTypedDict,
         AnthropicTextEditorCodeExecutionToolResultTypedDict,
+        AnthropicToolSearchToolResultTypedDict,
         AnthropicWebFetchToolResultTypedDict,
         AnthropicWebSearchToolResultTypedDict,
         AnthropicToolUseBlockTypedDict,
-        ORAnthropicServerToolUseBlockTypedDict,
         ORAnthropicShellToolResultTypedDict,
         ORAnthropicBashToolResultTypedDict,
+        ORAnthropicServerToolUseBlockTypedDict,
     ],
 )
 
@@ -109,6 +114,7 @@ _OR_ANTHROPIC_CONTENT_BLOCK_VARIANTS: dict[str, Any] = {
     "container_upload": AnthropicContainerUpload,
     "openrouter_bash_tool_result": ORAnthropicBashToolResult,
     "openrouter_shell_tool_result": ORAnthropicShellToolResult,
+    "openrouter_tool_search_result": ORAnthropicToolSearchResult,
     "redacted_thinking": AnthropicRedactedThinkingBlock,
     "server_tool_use": ORAnthropicServerToolUseBlock,
     "text": AnthropicTextBlock,
@@ -130,6 +136,7 @@ ORAnthropicContentBlock = Annotated[
         AnthropicContainerUpload,
         ORAnthropicBashToolResult,
         ORAnthropicShellToolResult,
+        ORAnthropicToolSearchResult,
         AnthropicRedactedThinkingBlock,
         ORAnthropicServerToolUseBlock,
         AnthropicTextBlock,

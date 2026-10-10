@@ -31,6 +31,7 @@ from .contextcompressionplugin import (
 )
 from .customtool import CustomTool, CustomToolTypedDict
 from .datetimeservertool import DatetimeServerTool, DatetimeServerToolTypedDict
+from .deferredtoolscontrol import DeferredToolsControl, DeferredToolsControlTypedDict
 from .fileparserplugin import FileParserPlugin, FileParserPluginTypedDict
 from .filesearchservertool import FileSearchServerTool, FileSearchServerToolTypedDict
 from .filesservertool import FilesServerTool, FilesServerToolTypedDict
@@ -243,6 +244,15 @@ r"""The service tier to use for processing this request. `fast` is accepted as a
 ResponsesRequestType = Literal["function",]
 
 
+ResponsesRequestAllowedCaller = Union[
+    Literal[
+        "direct",
+        "programmatic",
+    ],
+    UnrecognizedStr,
+]
+
+
 class ResponsesRequestToolFunctionTypedDict(TypedDict):
     r"""Function tool definition"""
 
@@ -251,10 +261,12 @@ class ResponsesRequestToolFunctionTypedDict(TypedDict):
     type: ResponsesRequestType
     description: NotRequired[Nullable[str]]
     strict: NotRequired[Nullable[bool]]
+    allowed_callers: NotRequired[Nullable[List[ResponsesRequestAllowedCaller]]]
     async_: NotRequired[bool]
     r"""Lets the model keep working after calling this tool instead of waiting for its output. The tool is still executed by the client; return the result in a later request as a `function_call_output` with the original `call_id`. Only honored by providers whose Responses API supports async tools; ignored elsewhere."""
     defer_loading: NotRequired[bool]
-    r"""Withhold this tool from the model until `openrouter:tool_search` finds it. Requires the tool search server tool; at least one tool must remain non-deferred."""
+    r"""Withhold this tool from the model until `openrouter:tool_search` finds it. Where the request declares no search tool, OpenRouter may add `openrouter:tool_search` to serve the flag, and otherwise sends the tool in full. A request that declares the search tool itself must keep at least one tool non-deferred."""
+    output_schema: NotRequired[Nullable[Dict[str, Any]]]
 
 
 class ResponsesRequestToolFunction(BaseModel):
@@ -270,16 +282,31 @@ class ResponsesRequestToolFunction(BaseModel):
 
     strict: OptionalNullable[bool] = UNSET
 
+    allowed_callers: OptionalNullable[List[ResponsesRequestAllowedCaller]] = UNSET
+
     async_: Annotated[Optional[bool], pydantic.Field(alias="async")] = None
     r"""Lets the model keep working after calling this tool instead of waiting for its output. The tool is still executed by the client; return the result in a later request as a `function_call_output` with the original `call_id`. Only honored by providers whose Responses API supports async tools; ignored elsewhere."""
 
     defer_loading: Optional[bool] = None
-    r"""Withhold this tool from the model until `openrouter:tool_search` finds it. Requires the tool search server tool; at least one tool must remain non-deferred."""
+    r"""Withhold this tool from the model until `openrouter:tool_search` finds it. Where the request declares no search tool, OpenRouter may add `openrouter:tool_search` to serve the flag, and otherwise sends the tool in full. A request that declares the search tool itself must keep at least one tool non-deferred."""
+
+    output_schema: OptionalNullable[Dict[str, Any]] = UNSET
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["description", "strict", "async", "defer_loading"])
-        nullable_fields = set(["description", "parameters", "strict"])
+        optional_fields = set(
+            [
+                "description",
+                "strict",
+                "allowed_callers",
+                "async",
+                "defer_loading",
+                "output_schema",
+            ]
+        )
+        nullable_fields = set(
+            ["description", "parameters", "strict", "allowed_callers", "output_schema"]
+        )
         serialized = handler(self)
         m = {}
 
@@ -324,11 +351,11 @@ ResponsesRequestToolUnionTypedDict = TypeAliasType(
         SubagentServerToolOpenRouterTypedDict,
         NamespaceToolTypedDict,
         ComputerUseServerToolTypedDict,
-        CustomToolTypedDict,
         FileSearchServerToolTypedDict,
-        ResponsesRequestToolFunctionTypedDict,
+        CustomToolTypedDict,
         PreviewWebSearchServerToolTypedDict,
         Preview20250311WebSearchServerToolTypedDict,
+        ResponsesRequestToolFunctionTypedDict,
         WebSearchServerToolTypedDict,
         LegacyWebSearchServerToolTypedDict,
         McpServerToolTypedDict,
@@ -387,6 +414,8 @@ class ResponsesRequestTypedDict(TypedDict):
     r"""Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. When set on an individual content block, it marks an explicit cache breakpoint; block-level markers also work on OpenAI models that support explicit prompt caching — OpenRouter converts them to the provider's native format."""
     debug: NotRequired[ChatDebugOptionsTypedDict]
     r"""Debug options for inspecting request transformations (streaming only)"""
+    deferred_tools: NotRequired[DeferredToolsControlTypedDict]
+    r"""Opt-in versioned router-level deferred-tool protocol. Replay assistant reasoning unchanged on continuation; keep the catalog unchanged."""
     frequency_penalty: NotRequired[Nullable[float]]
     image_config: NotRequired[Dict[str, ImageConfigTypedDict]]
     r"""Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/guides/overview/multimodal/image-generation for more details."""
@@ -452,6 +481,9 @@ class ResponsesRequest(BaseModel):
 
     debug: Optional[ChatDebugOptions] = None
     r"""Debug options for inspecting request transformations (streaming only)"""
+
+    deferred_tools: Optional[DeferredToolsControl] = None
+    r"""Opt-in versioned router-level deferred-tool protocol. Replay assistant reasoning unchanged on continuation; keep the catalog unchanged."""
 
     frequency_penalty: OptionalNullable[float] = UNSET
 
@@ -552,6 +584,7 @@ class ResponsesRequest(BaseModel):
                 "background",
                 "cache_control",
                 "debug",
+                "deferred_tools",
                 "frequency_penalty",
                 "image_config",
                 "include",

@@ -35,6 +35,7 @@ from .contextcompressionplugin import (
     ContextCompressionPlugin,
     ContextCompressionPluginTypedDict,
 )
+from .deferredtoolscontrol import DeferredToolsControl, DeferredToolsControlTypedDict
 from .fileparserplugin import FileParserPlugin, FileParserPluginTypedDict
 from .fusionplugin import FusionPlugin, FusionPluginTypedDict
 from .imageconfig import ImageConfig, ImageConfigTypedDict
@@ -250,6 +251,8 @@ class ChatRequestTypedDict(TypedDict):
     r"""Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. When set on an individual content block, it marks an explicit cache breakpoint; block-level markers also work on OpenAI models that support explicit prompt caching — OpenRouter converts them to the provider's native format."""
     debug: NotRequired[ChatDebugOptionsTypedDict]
     r"""Debug options for inspecting request transformations (streaming only)"""
+    deferred_tools: NotRequired[DeferredToolsControlTypedDict]
+    r"""Opt-in versioned router-level deferred-tool protocol. Replay assistant reasoning unchanged on continuation; keep the catalog unchanged."""
     frequency_penalty: NotRequired[Nullable[float]]
     r"""Frequency penalty (-2.0 to 2.0)"""
     image_config: NotRequired[Dict[str, ImageConfigTypedDict]]
@@ -338,6 +341,9 @@ class ChatRequest(BaseModel):
 
     debug: Optional[ChatDebugOptions] = None
     r"""Debug options for inspecting request transformations (streaming only)"""
+
+    deferred_tools: Optional[DeferredToolsControl] = None
+    r"""Opt-in versioned router-level deferred-tool protocol. Replay assistant reasoning unchanged on continuation; keep the catalog unchanged."""
 
     frequency_penalty: OptionalNullable[float] = UNSET
     r"""Frequency penalty (-2.0 to 2.0)"""
@@ -458,6 +464,7 @@ class ChatRequest(BaseModel):
             [
                 "cache_control",
                 "debug",
+                "deferred_tools",
                 "frequency_penalty",
                 "image_config",
                 "logit_bias",

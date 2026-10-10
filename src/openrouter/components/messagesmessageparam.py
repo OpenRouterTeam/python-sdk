@@ -50,6 +50,10 @@ from .messagestoolremovalblock import (
     MessagesToolRemovalBlock,
     MessagesToolRemovalBlockTypedDict,
 )
+from .oranthropictoolsearchresultparam import (
+    ORAnthropicToolSearchResultParam,
+    ORAnthropicToolSearchResultParamTypedDict,
+)
 from openrouter.types import (
     BaseModel,
     Nullable,
@@ -401,10 +405,11 @@ MessagesMessageParamContentUnion4TypedDict = TypeAliasType(
     "MessagesMessageParamContentUnion4TypedDict",
     Union[
         ContentRedactedThinkingTypedDict,
+        MessagesAdvisorToolResultBlockTypedDict,
         AnthropicImageBlockParamTypedDict,
+        ORAnthropicToolSearchResultParamTypedDict,
         MessagesToolRemovalBlockTypedDict,
         MessagesToolAdditionBlockTypedDict,
-        MessagesAdvisorToolResultBlockTypedDict,
         ContentThinkingTypedDict,
         ContentWebSearchToolResultTypedDict,
         AnthropicTextBlockParamTypedDict,
@@ -438,6 +443,9 @@ MessagesMessageParamContentUnion4 = Annotated[
         Annotated[MessagesToolRemovalBlock, Tag("tool_removal")],
         Annotated[MessagesShellToolResultBlock, Tag("openrouter_shell_tool_result")],
         Annotated[MessagesBashToolResultBlock, Tag("openrouter_bash_tool_result")],
+        Annotated[
+            ORAnthropicToolSearchResultParam, Tag("openrouter_tool_search_result")
+        ],
     ],
     Discriminator(lambda m: get_discriminator(m, "type", "type")),
 ]

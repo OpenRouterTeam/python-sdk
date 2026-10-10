@@ -1,0 +1,26 @@
+---
+title: "KeyBudgetScope"
+---
+
+Which budget layer this is, in the order enforcement checks them: the workspace default guardrail against the member aggregate (`workspace_default_member`) and against this key (`workspace_default_key`), the member guardrail (`member`), the API key guardrail (`api_key`), a workspace budget (`workspace`), or the key's own limit (`key_limit`).
+
+## Example Usage
+
+```python
+from openrouter.components import KeyBudgetScope
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
+value: KeyBudgetScope = "workspace_default_member"
+```
+
+
+## Values
+
+This is an open enum. Unrecognized values will not fail type checks.
+
+- `"workspace_default_member"`
+- `"workspace_default_key"`
+- `"member"`
+- `"api_key"`
+- `"workspace"`
+- `"key_limit"`

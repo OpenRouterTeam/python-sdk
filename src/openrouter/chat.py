@@ -41,6 +41,12 @@ class Chat(BaseSDK):
         debug: Optional[
             Union[components.ChatDebugOptions, components.ChatDebugOptionsTypedDict]
         ] = None,
+        deferred_tools: Optional[
+            Union[
+                components.DeferredToolsControl,
+                components.DeferredToolsControlTypedDict,
+            ]
+        ] = None,
         frequency_penalty: OptionalNullable[float] = UNSET,
         image_config: Optional[
             Union[
@@ -144,6 +150,7 @@ class Chat(BaseSDK):
         :param x_open_router_metadata: Opt-in to surface routing metadata on the response under `openrouter_metadata`. Defaults to `disabled`. The legacy header `X-OpenRouter-Experimental-Metadata` is also accepted for backward compatibility.
         :param cache_control: Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. When set on an individual content block, it marks an explicit cache breakpoint; block-level markers also work on OpenAI models that support explicit prompt caching — OpenRouter converts them to the provider's native format.
         :param debug: Debug options for inspecting request transformations (streaming only)
+        :param deferred_tools: Opt-in versioned router-level deferred-tool protocol. Replay assistant reasoning unchanged on continuation; keep the catalog unchanged.
         :param frequency_penalty: Frequency penalty (-2.0 to 2.0)
         :param image_config: Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/guides/overview/multimodal/image-generation for more details.
         :param logit_bias: Token logit bias adjustments
@@ -208,6 +215,12 @@ class Chat(BaseSDK):
         ] = None,
         debug: Optional[
             Union[components.ChatDebugOptions, components.ChatDebugOptionsTypedDict]
+        ] = None,
+        deferred_tools: Optional[
+            Union[
+                components.DeferredToolsControl,
+                components.DeferredToolsControlTypedDict,
+            ]
         ] = None,
         frequency_penalty: OptionalNullable[float] = UNSET,
         image_config: Optional[
@@ -312,6 +325,7 @@ class Chat(BaseSDK):
         :param x_open_router_metadata: Opt-in to surface routing metadata on the response under `openrouter_metadata`. Defaults to `disabled`. The legacy header `X-OpenRouter-Experimental-Metadata` is also accepted for backward compatibility.
         :param cache_control: Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. When set on an individual content block, it marks an explicit cache breakpoint; block-level markers also work on OpenAI models that support explicit prompt caching — OpenRouter converts them to the provider's native format.
         :param debug: Debug options for inspecting request transformations (streaming only)
+        :param deferred_tools: Opt-in versioned router-level deferred-tool protocol. Replay assistant reasoning unchanged on continuation; keep the catalog unchanged.
         :param frequency_penalty: Frequency penalty (-2.0 to 2.0)
         :param image_config: Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/guides/overview/multimodal/image-generation for more details.
         :param logit_bias: Token logit bias adjustments
@@ -376,6 +390,12 @@ class Chat(BaseSDK):
         ] = None,
         debug: Optional[
             Union[components.ChatDebugOptions, components.ChatDebugOptionsTypedDict]
+        ] = None,
+        deferred_tools: Optional[
+            Union[
+                components.DeferredToolsControl,
+                components.DeferredToolsControlTypedDict,
+            ]
         ] = None,
         frequency_penalty: OptionalNullable[float] = UNSET,
         image_config: Optional[
@@ -482,6 +502,7 @@ class Chat(BaseSDK):
         :param x_open_router_metadata: Opt-in to surface routing metadata on the response under `openrouter_metadata`. Defaults to `disabled`. The legacy header `X-OpenRouter-Experimental-Metadata` is also accepted for backward compatibility.
         :param cache_control: Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. When set on an individual content block, it marks an explicit cache breakpoint; block-level markers also work on OpenAI models that support explicit prompt caching — OpenRouter converts them to the provider's native format.
         :param debug: Debug options for inspecting request transformations (streaming only)
+        :param deferred_tools: Opt-in versioned router-level deferred-tool protocol. Replay assistant reasoning unchanged on continuation; keep the catalog unchanged.
         :param frequency_penalty: Frequency penalty (-2.0 to 2.0)
         :param image_config: Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/guides/overview/multimodal/image-generation for more details.
         :param logit_bias: Token logit bias adjustments
@@ -545,6 +566,12 @@ class Chat(BaseSDK):
         ] = None,
         debug: Optional[
             Union[components.ChatDebugOptions, components.ChatDebugOptionsTypedDict]
+        ] = None,
+        deferred_tools: Optional[
+            Union[
+                components.DeferredToolsControl,
+                components.DeferredToolsControlTypedDict,
+            ]
         ] = None,
         frequency_penalty: OptionalNullable[float] = UNSET,
         image_config: Optional[
@@ -651,6 +678,7 @@ class Chat(BaseSDK):
         :param x_open_router_metadata: Opt-in to surface routing metadata on the response under `openrouter_metadata`. Defaults to `disabled`. The legacy header `X-OpenRouter-Experimental-Metadata` is also accepted for backward compatibility.
         :param cache_control: Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. When set on an individual content block, it marks an explicit cache breakpoint; block-level markers also work on OpenAI models that support explicit prompt caching — OpenRouter converts them to the provider's native format.
         :param debug: Debug options for inspecting request transformations (streaming only)
+        :param deferred_tools: Opt-in versioned router-level deferred-tool protocol. Replay assistant reasoning unchanged on continuation; keep the catalog unchanged.
         :param frequency_penalty: Frequency penalty (-2.0 to 2.0)
         :param image_config: Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/guides/overview/multimodal/image-generation for more details.
         :param logit_bias: Token logit bias adjustments
@@ -715,6 +743,9 @@ class Chat(BaseSDK):
                 ),
                 debug=utils.get_pydantic_model(
                     debug, Optional[components.ChatDebugOptions]
+                ),
+                deferred_tools=utils.get_pydantic_model(
+                    deferred_tools, Optional[components.DeferredToolsControl]
                 ),
                 frequency_penalty=frequency_penalty,
                 image_config=utils.unmarshal(
@@ -1001,6 +1032,12 @@ class Chat(BaseSDK):
         debug: Optional[
             Union[components.ChatDebugOptions, components.ChatDebugOptionsTypedDict]
         ] = None,
+        deferred_tools: Optional[
+            Union[
+                components.DeferredToolsControl,
+                components.DeferredToolsControlTypedDict,
+            ]
+        ] = None,
         frequency_penalty: OptionalNullable[float] = UNSET,
         image_config: Optional[
             Union[
@@ -1104,6 +1141,7 @@ class Chat(BaseSDK):
         :param x_open_router_metadata: Opt-in to surface routing metadata on the response under `openrouter_metadata`. Defaults to `disabled`. The legacy header `X-OpenRouter-Experimental-Metadata` is also accepted for backward compatibility.
         :param cache_control: Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. When set on an individual content block, it marks an explicit cache breakpoint; block-level markers also work on OpenAI models that support explicit prompt caching — OpenRouter converts them to the provider's native format.
         :param debug: Debug options for inspecting request transformations (streaming only)
+        :param deferred_tools: Opt-in versioned router-level deferred-tool protocol. Replay assistant reasoning unchanged on continuation; keep the catalog unchanged.
         :param frequency_penalty: Frequency penalty (-2.0 to 2.0)
         :param image_config: Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/guides/overview/multimodal/image-generation for more details.
         :param logit_bias: Token logit bias adjustments
@@ -1168,6 +1206,12 @@ class Chat(BaseSDK):
         ] = None,
         debug: Optional[
             Union[components.ChatDebugOptions, components.ChatDebugOptionsTypedDict]
+        ] = None,
+        deferred_tools: Optional[
+            Union[
+                components.DeferredToolsControl,
+                components.DeferredToolsControlTypedDict,
+            ]
         ] = None,
         frequency_penalty: OptionalNullable[float] = UNSET,
         image_config: Optional[
@@ -1272,6 +1316,7 @@ class Chat(BaseSDK):
         :param x_open_router_metadata: Opt-in to surface routing metadata on the response under `openrouter_metadata`. Defaults to `disabled`. The legacy header `X-OpenRouter-Experimental-Metadata` is also accepted for backward compatibility.
         :param cache_control: Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. When set on an individual content block, it marks an explicit cache breakpoint; block-level markers also work on OpenAI models that support explicit prompt caching — OpenRouter converts them to the provider's native format.
         :param debug: Debug options for inspecting request transformations (streaming only)
+        :param deferred_tools: Opt-in versioned router-level deferred-tool protocol. Replay assistant reasoning unchanged on continuation; keep the catalog unchanged.
         :param frequency_penalty: Frequency penalty (-2.0 to 2.0)
         :param image_config: Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/guides/overview/multimodal/image-generation for more details.
         :param logit_bias: Token logit bias adjustments
@@ -1336,6 +1381,12 @@ class Chat(BaseSDK):
         ] = None,
         debug: Optional[
             Union[components.ChatDebugOptions, components.ChatDebugOptionsTypedDict]
+        ] = None,
+        deferred_tools: Optional[
+            Union[
+                components.DeferredToolsControl,
+                components.DeferredToolsControlTypedDict,
+            ]
         ] = None,
         frequency_penalty: OptionalNullable[float] = UNSET,
         image_config: Optional[
@@ -1443,6 +1494,7 @@ class Chat(BaseSDK):
         :param x_open_router_metadata: Opt-in to surface routing metadata on the response under `openrouter_metadata`. Defaults to `disabled`. The legacy header `X-OpenRouter-Experimental-Metadata` is also accepted for backward compatibility.
         :param cache_control: Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. When set on an individual content block, it marks an explicit cache breakpoint; block-level markers also work on OpenAI models that support explicit prompt caching — OpenRouter converts them to the provider's native format.
         :param debug: Debug options for inspecting request transformations (streaming only)
+        :param deferred_tools: Opt-in versioned router-level deferred-tool protocol. Replay assistant reasoning unchanged on continuation; keep the catalog unchanged.
         :param frequency_penalty: Frequency penalty (-2.0 to 2.0)
         :param image_config: Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/guides/overview/multimodal/image-generation for more details.
         :param logit_bias: Token logit bias adjustments
@@ -1506,6 +1558,12 @@ class Chat(BaseSDK):
         ] = None,
         debug: Optional[
             Union[components.ChatDebugOptions, components.ChatDebugOptionsTypedDict]
+        ] = None,
+        deferred_tools: Optional[
+            Union[
+                components.DeferredToolsControl,
+                components.DeferredToolsControlTypedDict,
+            ]
         ] = None,
         frequency_penalty: OptionalNullable[float] = UNSET,
         image_config: Optional[
@@ -1613,6 +1671,7 @@ class Chat(BaseSDK):
         :param x_open_router_metadata: Opt-in to surface routing metadata on the response under `openrouter_metadata`. Defaults to `disabled`. The legacy header `X-OpenRouter-Experimental-Metadata` is also accepted for backward compatibility.
         :param cache_control: Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. When set on an individual content block, it marks an explicit cache breakpoint; block-level markers also work on OpenAI models that support explicit prompt caching — OpenRouter converts them to the provider's native format.
         :param debug: Debug options for inspecting request transformations (streaming only)
+        :param deferred_tools: Opt-in versioned router-level deferred-tool protocol. Replay assistant reasoning unchanged on continuation; keep the catalog unchanged.
         :param frequency_penalty: Frequency penalty (-2.0 to 2.0)
         :param image_config: Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/guides/overview/multimodal/image-generation for more details.
         :param logit_bias: Token logit bias adjustments
@@ -1677,6 +1736,9 @@ class Chat(BaseSDK):
                 ),
                 debug=utils.get_pydantic_model(
                     debug, Optional[components.ChatDebugOptions]
+                ),
+                deferred_tools=utils.get_pydantic_model(
+                    deferred_tools, Optional[components.DeferredToolsControl]
                 ),
                 frequency_penalty=frequency_penalty,
                 image_config=utils.unmarshal(

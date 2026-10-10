@@ -55,6 +55,7 @@ class ChatFunctionToolFunctionFunctionTypedDict(TypedDict):
 
     name: str
     r"""Function name (a-z, A-Z, 0-9, underscores, dashes, max 64 chars)"""
+    defer_loading: NotRequired[bool]
     description: NotRequired[str]
     r"""Function description for the model"""
     parameters: NotRequired[Dict[str, Any]]
@@ -69,6 +70,8 @@ class ChatFunctionToolFunctionFunction(BaseModel):
     name: str
     r"""Function name (a-z, A-Z, 0-9, underscores, dashes, max 64 chars)"""
 
+    defer_loading: Optional[bool] = None
+
     description: Optional[str] = None
     r"""Function description for the model"""
 
@@ -80,7 +83,7 @@ class ChatFunctionToolFunctionFunction(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["description", "parameters", "strict"])
+        optional_fields = set(["defer_loading", "description", "parameters", "strict"])
         nullable_fields = set(["strict"])
         serialized = handler(self)
         m = {}
@@ -113,6 +116,7 @@ class ChatFunctionToolFunctionTypedDict(TypedDict):
     type: ChatFunctionToolType
     cache_control: NotRequired[ChatContentCacheControlTypedDict]
     r"""Anthropic-style cache breakpoint for the content part. Interchangeable with the OpenAI-style `prompt_cache_breakpoint` marker: OpenRouter converts between the two based on the provider serving the request."""
+    defer_loading: NotRequired[bool]
 
 
 class ChatFunctionToolFunction(BaseModel):
@@ -124,9 +128,11 @@ class ChatFunctionToolFunction(BaseModel):
     cache_control: Optional[ChatContentCacheControl] = None
     r"""Anthropic-style cache breakpoint for the content part. Interchangeable with the OpenAI-style `prompt_cache_breakpoint` marker: OpenRouter converts between the two based on the provider serving the request."""
 
+    defer_loading: Optional[bool] = None
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["cache_control"])
+        optional_fields = set(["cache_control", "defer_loading"])
         serialized = handler(self)
         m = {}
 
