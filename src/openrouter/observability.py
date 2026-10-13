@@ -363,6 +363,7 @@ class Observability(BaseSDK):
         x_open_router_categories: Optional[str] = None,
         api_key_hashes: OptionalNullable[Iterable[str]] = UNSET,
         broadcast_generation_cost: Optional[bool] = False,
+        broadcast_generation_cost_allocation: Optional[bool] = False,
         broadcast_generation_identity: Optional[bool] = False,
         broadcast_generation_request_context: Optional[bool] = False,
         enabled: Optional[bool] = True,
@@ -397,6 +398,7 @@ class Observability(BaseSDK):
 
         :param api_key_hashes: Optional allowlist of OpenRouter API key hashes whose traffic is forwarded. `null` or omitted means all keys. Must contain at least one hash if provided.
         :param broadcast_generation_cost: When true, include cost and billing generation metadata.
+        :param broadcast_generation_cost_allocation: Beta. When true, include openrouter_cost_allocation: per-token-kind usage and cost, sent only when they reconcile with the billed cost.
         :param broadcast_generation_identity: When true, include identity generation metadata.
         :param broadcast_generation_request_context: When true, include request-context generation metadata.
         :param enabled: Whether this destination should be enabled immediately.
@@ -429,6 +431,7 @@ class Observability(BaseSDK):
                     api_key_hashes, OptionalNullable[List[str]]
                 ),
                 broadcast_generation_cost=broadcast_generation_cost,
+                broadcast_generation_cost_allocation=broadcast_generation_cost_allocation,
                 broadcast_generation_identity=broadcast_generation_identity,
                 broadcast_generation_request_context=broadcast_generation_request_context,
                 config=utils.unmarshal(config, Dict[str, Any]),
@@ -560,6 +563,7 @@ class Observability(BaseSDK):
         x_open_router_categories: Optional[str] = None,
         api_key_hashes: OptionalNullable[Iterable[str]] = UNSET,
         broadcast_generation_cost: Optional[bool] = False,
+        broadcast_generation_cost_allocation: Optional[bool] = False,
         broadcast_generation_identity: Optional[bool] = False,
         broadcast_generation_request_context: Optional[bool] = False,
         enabled: Optional[bool] = True,
@@ -594,6 +598,7 @@ class Observability(BaseSDK):
 
         :param api_key_hashes: Optional allowlist of OpenRouter API key hashes whose traffic is forwarded. `null` or omitted means all keys. Must contain at least one hash if provided.
         :param broadcast_generation_cost: When true, include cost and billing generation metadata.
+        :param broadcast_generation_cost_allocation: Beta. When true, include openrouter_cost_allocation: per-token-kind usage and cost, sent only when they reconcile with the billed cost.
         :param broadcast_generation_identity: When true, include identity generation metadata.
         :param broadcast_generation_request_context: When true, include request-context generation metadata.
         :param enabled: Whether this destination should be enabled immediately.
@@ -626,6 +631,7 @@ class Observability(BaseSDK):
                     api_key_hashes, OptionalNullable[List[str]]
                 ),
                 broadcast_generation_cost=broadcast_generation_cost,
+                broadcast_generation_cost_allocation=broadcast_generation_cost_allocation,
                 broadcast_generation_identity=broadcast_generation_identity,
                 broadcast_generation_request_context=broadcast_generation_request_context,
                 config=utils.unmarshal(config, Dict[str, Any]),
@@ -1275,6 +1281,7 @@ class Observability(BaseSDK):
         x_open_router_categories: Optional[str] = None,
         api_key_hashes: OptionalNullable[Iterable[str]] = UNSET,
         broadcast_generation_cost: Optional[bool] = None,
+        broadcast_generation_cost_allocation: Optional[bool] = None,
         broadcast_generation_identity: Optional[bool] = None,
         broadcast_generation_request_context: Optional[bool] = None,
         config: Optional[Mapping[str, Any]] = None,
@@ -1308,6 +1315,7 @@ class Observability(BaseSDK):
 
         :param api_key_hashes: Optional allowlist of OpenRouter API key hashes. `null` clears the filter (all keys). Omitting leaves the current value. Must contain at least one hash if provided.
         :param broadcast_generation_cost: Whether to include cost and billing generation metadata.
+        :param broadcast_generation_cost_allocation: Beta. When true, include openrouter_cost_allocation: per-token-kind usage and cost, sent only when they reconcile with the billed cost.
         :param broadcast_generation_identity: Whether to include identity generation metadata.
         :param broadcast_generation_request_context: Whether to include request-context generation metadata.
         :param config: Provider-specific configuration fields to update. Masked values are ignored; unset fields keep their current value.
@@ -1342,6 +1350,7 @@ class Observability(BaseSDK):
                     api_key_hashes, OptionalNullable[List[str]]
                 ),
                 broadcast_generation_cost=broadcast_generation_cost,
+                broadcast_generation_cost_allocation=broadcast_generation_cost_allocation,
                 broadcast_generation_identity=broadcast_generation_identity,
                 broadcast_generation_request_context=broadcast_generation_request_context,
                 config=utils.unmarshal(config, Optional[Dict[str, Any]]),
@@ -1474,6 +1483,7 @@ class Observability(BaseSDK):
         x_open_router_categories: Optional[str] = None,
         api_key_hashes: OptionalNullable[Iterable[str]] = UNSET,
         broadcast_generation_cost: Optional[bool] = None,
+        broadcast_generation_cost_allocation: Optional[bool] = None,
         broadcast_generation_identity: Optional[bool] = None,
         broadcast_generation_request_context: Optional[bool] = None,
         config: Optional[Mapping[str, Any]] = None,
@@ -1507,6 +1517,7 @@ class Observability(BaseSDK):
 
         :param api_key_hashes: Optional allowlist of OpenRouter API key hashes. `null` clears the filter (all keys). Omitting leaves the current value. Must contain at least one hash if provided.
         :param broadcast_generation_cost: Whether to include cost and billing generation metadata.
+        :param broadcast_generation_cost_allocation: Beta. When true, include openrouter_cost_allocation: per-token-kind usage and cost, sent only when they reconcile with the billed cost.
         :param broadcast_generation_identity: Whether to include identity generation metadata.
         :param broadcast_generation_request_context: Whether to include request-context generation metadata.
         :param config: Provider-specific configuration fields to update. Masked values are ignored; unset fields keep their current value.
@@ -1541,6 +1552,7 @@ class Observability(BaseSDK):
                     api_key_hashes, OptionalNullable[List[str]]
                 ),
                 broadcast_generation_cost=broadcast_generation_cost,
+                broadcast_generation_cost_allocation=broadcast_generation_cost_allocation,
                 broadcast_generation_identity=broadcast_generation_identity,
                 broadcast_generation_request_context=broadcast_generation_request_context,
                 config=utils.unmarshal(config, Optional[Dict[str, Any]]),

@@ -61,6 +61,8 @@ class ObservabilityWeaveDestinationTypedDict(TypedDict):
     r"""Optional allowlist of OpenRouter API key hashes (`api_keys.hash`) whose traffic is forwarded to this destination. `null` means all keys."""
     broadcast_generation_cost: bool
     r"""When true, include cost and billing generation metadata."""
+    broadcast_generation_cost_allocation: bool
+    r"""Beta. When true, include openrouter_cost_allocation: per-token-kind usage and cost, sent only when they reconcile with the billed cost."""
     broadcast_generation_identity: bool
     r"""When true, include identity generation metadata."""
     broadcast_generation_request_context: bool
@@ -95,6 +97,9 @@ class ObservabilityWeaveDestination(BaseModel):
 
     broadcast_generation_cost: bool
     r"""When true, include cost and billing generation metadata."""
+
+    broadcast_generation_cost_allocation: bool
+    r"""Beta. When true, include openrouter_cost_allocation: per-token-kind usage and cost, sent only when they reconcile with the billed cost."""
 
     broadcast_generation_identity: bool
     r"""When true, include identity generation metadata."""
