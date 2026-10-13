@@ -13,6 +13,10 @@ from .outputapplypatchservertoolitem import (
     OutputApplyPatchServerToolItem,
     OutputApplyPatchServerToolItemTypedDict,
 )
+from .outputarmorblockeditem import (
+    OutputArmorBlockedItem,
+    OutputArmorBlockedItemTypedDict,
+)
 from .outputbashservertoolitem import (
     OutputBashServerToolItem,
     OutputBashServerToolItemTypedDict,
@@ -148,12 +152,13 @@ OutputItemsTypedDict = TypeAliasType(
         OutputApplyPatchServerToolItemTypedDict,
         OutputToolSearchServerToolItemTypedDict,
         OutputCodeInterpreterCallItemTypedDict,
-        OutputCustomToolCallItemTypedDict,
         OutputWebFetchServerToolItemTypedDict,
         OutputCodeInterpreterServerToolItemTypedDict,
         OutputReasoningItemTypedDict,
         OutputAdvisorServerToolItemTypedDict,
+        OutputCustomToolCallItemTypedDict,
         OutputImageGenerationServerToolItemTypedDict,
+        OutputArmorBlockedItemTypedDict,
         OutputFusionServerToolItemTypedDict,
         OutputShellCallOutputItemTypedDict,
         OutputShellServerToolItemTypedDict,
@@ -187,6 +192,7 @@ _OUTPUT_ITEMS_VARIANTS: dict[str, Any] = {
     "message": OutputMessageItem,
     "openrouter:advisor": OutputAdvisorServerToolItem,
     "openrouter:apply_patch": OutputApplyPatchServerToolItem,
+    "openrouter:armor_blocked": OutputArmorBlockedItem,
     "openrouter:bash": OutputBashServerToolItem,
     "openrouter:browser_use": OutputBrowserUseServerToolItem,
     "openrouter:code_interpreter": OutputCodeInterpreterServerToolItem,
@@ -224,6 +230,7 @@ OutputItems = Annotated[
         OutputMessageItem,
         OutputAdvisorServerToolItem,
         OutputApplyPatchServerToolItem,
+        OutputArmorBlockedItem,
         OutputBashServerToolItem,
         OutputBrowserUseServerToolItem,
         OutputCodeInterpreterServerToolItem,
