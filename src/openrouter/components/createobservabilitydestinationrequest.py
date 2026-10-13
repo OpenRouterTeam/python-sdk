@@ -55,6 +55,8 @@ class CreateObservabilityDestinationRequestTypedDict(TypedDict):
     r"""Optional allowlist of OpenRouter API key hashes whose traffic is forwarded. `null` or omitted means all keys. Must contain at least one hash if provided."""
     broadcast_generation_cost: NotRequired[bool]
     r"""When true, include cost and billing generation metadata."""
+    broadcast_generation_cost_allocation: NotRequired[bool]
+    r"""Beta. When true, include openrouter_cost_allocation: per-token-kind usage and cost, sent only when they reconcile with the billed cost."""
     broadcast_generation_identity: NotRequired[bool]
     r"""When true, include identity generation metadata."""
     broadcast_generation_request_context: NotRequired[bool]
@@ -89,6 +91,9 @@ class CreateObservabilityDestinationRequest(BaseModel):
     broadcast_generation_cost: Optional[bool] = False
     r"""When true, include cost and billing generation metadata."""
 
+    broadcast_generation_cost_allocation: Optional[bool] = False
+    r"""Beta. When true, include openrouter_cost_allocation: per-token-kind usage and cost, sent only when they reconcile with the billed cost."""
+
     broadcast_generation_identity: Optional[bool] = False
     r"""When true, include identity generation metadata."""
 
@@ -119,6 +124,7 @@ class CreateObservabilityDestinationRequest(BaseModel):
             [
                 "api_key_hashes",
                 "broadcast_generation_cost",
+                "broadcast_generation_cost_allocation",
                 "broadcast_generation_identity",
                 "broadcast_generation_request_context",
                 "enabled",
