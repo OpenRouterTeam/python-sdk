@@ -34,6 +34,8 @@ class GuardrailTypedDict(TypedDict):
     r"""The workspace this guardrail belongs to, or `null` for an unscoped legacy guardrail predating workspaces. Workspace membership organizes the guardrail; it does not apply the guardrail to the workspace's traffic. A `null` value does not mean the default workspace, and does not apply the guardrail across every workspace."""
     allow_safety_retention_google: NotRequired[Nullable[bool]]
     r"""Whether ZDR-only requests to google/* models may use endpoints that may retain prompts for safety monitoring. false allows only zero-retention endpoints. A guardrail can only be more restrictive than the account setting. Inherits the account setting when not provided."""
+    allow_safety_retention_other: NotRequired[Nullable[bool]]
+    r"""Whether ZDR-only requests to models outside the named providers (for example open-weight models on Vertex) may use endpoints that may retain prompts for safety monitoring. false allows only zero-retention endpoints. A guardrail can only be more restrictive than the account setting. Inherits the account setting when not provided."""
     allowed_data_regions: NotRequired[Nullable[List[GuardrailDataRegion]]]
     r"""Data regions through which requests governed by this guardrail must arrive. `global` is https://openrouter.ai, `europe` is https://eu.openrouter.ai, and `us` is https://us.openrouter.ai. Requests arriving through any other region are rejected. `null` leaves the ingress region unrestricted. When several guardrails apply (workspace default, member, API key), the effective regions are the intersection of every non-null value."""
     allowed_models: NotRequired[Nullable[List[str]]]
@@ -96,6 +98,9 @@ class Guardrail(BaseModel):
 
     allow_safety_retention_google: OptionalNullable[bool] = UNSET
     r"""Whether ZDR-only requests to google/* models may use endpoints that may retain prompts for safety monitoring. false allows only zero-retention endpoints. A guardrail can only be more restrictive than the account setting. Inherits the account setting when not provided."""
+
+    allow_safety_retention_other: OptionalNullable[bool] = UNSET
+    r"""Whether ZDR-only requests to models outside the named providers (for example open-weight models on Vertex) may use endpoints that may retain prompts for safety monitoring. false allows only zero-retention endpoints. A guardrail can only be more restrictive than the account setting. Inherits the account setting when not provided."""
 
     allowed_data_regions: OptionalNullable[List[GuardrailDataRegion]] = UNSET
     r"""Data regions through which requests governed by this guardrail must arrive. `global` is https://openrouter.ai, `europe` is https://eu.openrouter.ai, and `us` is https://us.openrouter.ai. Requests arriving through any other region are rejected. `null` leaves the ingress region unrestricted. When several guardrails apply (workspace default, member, API key), the effective regions are the intersection of every non-null value."""
@@ -167,6 +172,7 @@ class Guardrail(BaseModel):
         optional_fields = set(
             [
                 "allow_safety_retention_google",
+                "allow_safety_retention_other",
                 "allowed_data_regions",
                 "allowed_models",
                 "allowed_providers",
@@ -192,6 +198,7 @@ class Guardrail(BaseModel):
         nullable_fields = set(
             [
                 "allow_safety_retention_google",
+                "allow_safety_retention_other",
                 "allowed_data_regions",
                 "allowed_models",
                 "allowed_providers",
