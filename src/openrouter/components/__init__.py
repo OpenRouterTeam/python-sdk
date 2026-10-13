@@ -3109,6 +3109,12 @@ if TYPE_CHECKING:
         OutputApplyPatchServerToolItemType,
         OutputApplyPatchServerToolItemTypedDict,
     )
+    from .outputarmorblockeditem import (
+        OutputArmorBlockedItem,
+        OutputArmorBlockedItemStatus,
+        OutputArmorBlockedItemType,
+        OutputArmorBlockedItemTypedDict,
+    )
     from .outputbashservertoolitem import (
         OutputBashServerToolItem,
         OutputBashServerToolItemFile,
@@ -6544,6 +6550,10 @@ __all__ = [
     "OutputApplyPatchServerToolItem",
     "OutputApplyPatchServerToolItemType",
     "OutputApplyPatchServerToolItemTypedDict",
+    "OutputArmorBlockedItem",
+    "OutputArmorBlockedItemStatus",
+    "OutputArmorBlockedItemType",
+    "OutputArmorBlockedItemTypedDict",
     "OutputBashServerToolItem",
     "OutputBashServerToolItemFile",
     "OutputBashServerToolItemFileTypedDict",
@@ -9900,6 +9910,10 @@ _dynamic_imports: dict[str, str] = {
     "OutputApplyPatchServerToolItem": ".outputapplypatchservertoolitem",
     "OutputApplyPatchServerToolItemType": ".outputapplypatchservertoolitem",
     "OutputApplyPatchServerToolItemTypedDict": ".outputapplypatchservertoolitem",
+    "OutputArmorBlockedItem": ".outputarmorblockeditem",
+    "OutputArmorBlockedItemStatus": ".outputarmorblockeditem",
+    "OutputArmorBlockedItemType": ".outputarmorblockeditem",
+    "OutputArmorBlockedItemTypedDict": ".outputarmorblockeditem",
     "OutputBashServerToolItem": ".outputbashservertoolitem",
     "OutputBashServerToolItemFile": ".outputbashservertoolitem",
     "OutputBashServerToolItemFileTypedDict": ".outputbashservertoolitem",
