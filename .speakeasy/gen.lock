@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c48cf606-fb42-4a45-9c23-8f0555307828
 management:
-  docChecksum: 1840154f84c770bcfaac5d64913c1fd6
+  docChecksum: 74a9498efb41dcdc19f8858f4658169d
   docVersion: 1.0.0
   speakeasyVersion: 1.787.0
   generationVersion: 2.914.0
-  releaseVersion: 1.3.45
-  configChecksum: c29e3485096466a2dffee9816463f33b
+  releaseVersion: 1.3.46
+  configChecksum: 141159e444382b0c125fa2b6a8fd798c
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
 persistentEdits:
-  generation_id: 4a832f93-aec4-4832-bed6-d4ff565b7347
-  pristine_commit_hash: afca828bee1b526d94a954bf47f188c9ef49c6ce
-  pristine_tree_hash: a4c1825fca598c3582dc3009bbb4e05778824cc6
+  generation_id: 404c369a-769d-4cce-be8f-4439f1911bbb
+  pristine_commit_hash: e265fdf99a06176f920163b2163367a75c10684c
+  pristine_tree_hash: 9572ea873592996bd1755d1f82ffe15d96dc2593
 features:
   python:
     acceptHeaders: 3.0.0
@@ -2508,8 +2508,8 @@ trackedFiles:
     pristine_git_object: 9d28e4c7e863cf97b10b6415b1525aa8871800e2
   docs/components/createguardrailrequest.mdx:
     id: c1a768f054c0
-    last_write_checksum: sha1:d32d712d132971b34f6d81d28ff45d22d919f4ac
-    pristine_git_object: 3930d118781a8fbb7efdc3e347f99773828097ca
+    last_write_checksum: sha1:cea8928fa2aa97f9d157a6c0fbee5b6d8a8ce29e
+    pristine_git_object: fbc52a249c5fe348cc05e7597bfe3e0fe77d89b4
   docs/components/createguardrailresponse.mdx:
     id: 1477eebdf505
     last_write_checksum: sha1:76bb1fcafda689e9823bb21541c84e7d0bdb991d
@@ -3432,8 +3432,8 @@ trackedFiles:
     pristine_git_object: 6e17644dffb3aef799758f46d5ac781114b58c1f
   docs/components/guardrail.mdx:
     id: 91791d4c83b6
-    last_write_checksum: sha1:6f8af0e14ef12e99132304a903cc2e68adff68a0
-    pristine_git_object: 884c23302a2aa375a053e84bd702aa3b9e76595d
+    last_write_checksum: sha1:9b469e162e9f0e8cece5ff0d328ac0c70b66506a
+    pristine_git_object: 2f0f384b3ed628f4f4d15f4e3cc461f6808b0d58
   docs/components/guardraildataregion.mdx:
     id: d3be2a48aa20
     last_write_checksum: sha1:81f1c0b515e1c1c13432cae9910ce77cb9991507
@@ -6892,8 +6892,8 @@ trackedFiles:
     pristine_git_object: 5d617cac37f7b364f4dd0640246e97c34351d824
   docs/components/speechinput.mdx:
     id: 663248d32888
-    last_write_checksum: sha1:a8126cfb9764e1cd97fd896dedc4f40f7ab441bb
-    pristine_git_object: 948ee8455aede1f95245b7bfe33d04c293576edd
+    last_write_checksum: sha1:3ac2a504a301aedde4842c0a76ea324871c6b1af
+    pristine_git_object: 45150512fd74a6d8fa935b9867c4877b1f0d5916
   docs/components/speechinputreference.mdx:
     id: eb5af16936c7
     last_write_checksum: sha1:ab545b03da2161ae1ad449714b6861cd55ae66df
@@ -6932,8 +6932,8 @@ trackedFiles:
     pristine_git_object: 34f4f07fb3008df83646fa3d88ce04009274246a
   docs/components/speechrequest.mdx:
     id: 06e81b0433f6
-    last_write_checksum: sha1:ecac6988ab27bf129f774f3982e36744ec613218
-    pristine_git_object: c538a0061028cbaae17210def2258da7316b07e7
+    last_write_checksum: sha1:c2a048132db0ccec0c3b5b59ab52a78a49e83e29
+    pristine_git_object: e87bc0ab286848af07a53d51097ccdb5088ead6c
   docs/components/speechrequestdatacollection.mdx:
     id: 6c5938568888
     last_write_checksum: sha1:89a08b4c4de66c1ef7676792a38747e030ed6729
@@ -7696,8 +7696,8 @@ trackedFiles:
     pristine_git_object: 72a1c5ade4703a295e533f6e12733f464a21ff65
   docs/components/updateguardrailrequest.mdx:
     id: 450912b18db6
-    last_write_checksum: sha1:f0e2aaf8ecb96d8b53a02768ec260472490963cd
-    pristine_git_object: e42e435d516b5fb62183b7e0a65e20bdbcf25f1b
+    last_write_checksum: sha1:4f48f8b6eca22b5e1ea96814aa9a642655589755
+    pristine_git_object: dfd991a99fdac0b0076405d3ba2233d9ecf3cc52
   docs/components/updateguardrailresponse.mdx:
     id: e00dc0a0c6e0
     last_write_checksum: sha1:1be70185072640936151f861913c2b89a09d4bab
@@ -10088,8 +10088,8 @@ trackedFiles:
     pristine_git_object: bc1a56cbb41c8f9114c81b547713632272184da6
   docs/sdks/guardrails/README.mdx:
     id: a0cd4218b8fa
-    last_write_checksum: sha1:5d726806705c8c06aa1df8ecbebfa04a0214d8d4
-    pristine_git_object: d419fd3ee53c199c96b5228f7b656fa8e732bd69
+    last_write_checksum: sha1:a5ca6ada43eb3b8cdb6c29ed2c1be2a8663a5600
+    pristine_git_object: 6fbf9985e512ede6ae14dedcfa421c5b5338ef4f
   docs/sdks/images/README.mdx:
     id: 534a6c102c4f
     last_write_checksum: sha1:82a8bd22fb399fe419076afe29b9234950baf9f9
@@ -10152,8 +10152,8 @@ trackedFiles:
     pristine_git_object: 1dd30f0b898f2a842d1bb585b03d887be90e7845
   docs/sdks/tts/README.mdx:
     id: cd1132543884
-    last_write_checksum: sha1:cb9303bf791d8d9784be2815fae45f4b09f82221
-    pristine_git_object: b96e9d3ee1f40340dcd002a717920f7576b9fe3f
+    last_write_checksum: sha1:baa3374d9c06310a87893eb14a25511de061f3dc
+    pristine_git_object: 7b3c78a7323028a4668d6ce8394c8cdd4c15b67d
   docs/sdks/vault/README.mdx:
     id: 3738c6722acd
     last_write_checksum: sha1:12acdfed4c2a32488d98b6091fd8c392af516494
@@ -10172,8 +10172,8 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:bfc195206e429a0afdf9b31b204291cd59cf2e3b
-    pristine_git_object: 89e32936fd2dfc18e5348ea54d2b3de267258e85
+    last_write_checksum: sha1:3a7148e3325f6ae7604aec17d8cf09b6871117a2
+    pristine_git_object: 951c4e488ab00fa2ca68fd1226f382e44e225576
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77f44b60b98bc126557ec27391f91dfba764bb54
@@ -10200,8 +10200,8 @@ trackedFiles:
     pristine_git_object: 86713cfea633e09d33b3d4e65281071fe20e6137
   src/openrouter/_version.py:
     id: d8d15ad6c586
-    last_write_checksum: sha1:b192be1c2491a7fb42f7092a4a00748ba1f8a9f4
-    pristine_git_object: d1c45a6fa71a7a62db5c7e2bb68df374a7f61565
+    last_write_checksum: sha1:4bf11cf5cf55b3b9a3928b6ccbebc1bfb4b3cf67
+    pristine_git_object: 8022b124ae2919285f485ab56f62a5268b751705
   src/openrouter/alpha.py:
     id: 306c4d93308d
     last_write_checksum: sha1:30f55a360f41376ab194b9ea725fe4e001a5ae1a
@@ -11308,8 +11308,8 @@ trackedFiles:
     pristine_git_object: be0ce3784071a98e96fe996eb9da24455af72ac8
   src/openrouter/components/createguardrailrequest.py:
     id: 34d69149fb33
-    last_write_checksum: sha1:af6fca661fed3b42e547333b14750448c46b43cf
-    pristine_git_object: d3cb25c2acff7aa00ad2cd966e5aaeb62d6e531c
+    last_write_checksum: sha1:68757e5b5d1f5f2a5ff07d8dc460032321e49b21
+    pristine_git_object: 77ce30da985f3a890aaadca0cefdf7492d011074
   src/openrouter/components/createguardrailresponse.py:
     id: b4e1bdf1de5b
     last_write_checksum: sha1:ae20a5e7425510c240e5697d847b1cae65940bd6
@@ -11740,8 +11740,8 @@ trackedFiles:
     pristine_git_object: 1268e32c9058ed4feb7482458a64366c56201676
   src/openrouter/components/guardrail.py:
     id: 67ee78dd06e6
-    last_write_checksum: sha1:a06d7d1d1aa75b2e1c27cfa10cc5347a88821e76
-    pristine_git_object: c58c4908937be5ceb0414666315782ebb862e331
+    last_write_checksum: sha1:062a4f1c5ad066e1da29856f5dce1b5ba60b0c3c
+    pristine_git_object: 60bef2177a15cc42ade160dca9b4933ecdce6ecb
   src/openrouter/components/guardraildataregion.py:
     id: 16c31f1446b2
     last_write_checksum: sha1:52b5622a7c93a30219108f033ab0e3fbb3a396f7
@@ -13156,8 +13156,8 @@ trackedFiles:
     pristine_git_object: e44305da959380e177fcc2077d0e80ce4d522a57
   src/openrouter/components/speechinput.py:
     id: 14e46bea4b32
-    last_write_checksum: sha1:4f2acbfbb0b8df5d8d2d3916f9a081a6143fdf45
-    pristine_git_object: 676f38928a4745ddb215cb8275c401e6fb5ebc25
+    last_write_checksum: sha1:c6e320441ce7eaa95072d8796e97f082302bb326
+    pristine_git_object: e85b5d8efbe123f41f4006b0e74ee5894da3fdc2
   src/openrouter/components/speechinputreference.py:
     id: 8e2b63f83354
     last_write_checksum: sha1:b2ebc68fae64644f8bfca9b555ca7d2a7b46c9e1
@@ -13184,8 +13184,8 @@ trackedFiles:
     pristine_git_object: 4633e5d7658c500aa903ce8caa8ef86cc97b78eb
   src/openrouter/components/speechrequest.py:
     id: 2a9400167112
-    last_write_checksum: sha1:49cbabd40418cc50b15e7eef19926ce55be23a4e
-    pristine_git_object: ad116652ee8ead569fb0939c29c6966bb397717e
+    last_write_checksum: sha1:5bfcf28dde5e94e671165f5919e24b3b9de83853
+    pristine_git_object: ea07e4017cdd9b909f84129e83c0582c7effe10a
   src/openrouter/components/speechturn.py:
     id: 121e0a940f91
     last_write_checksum: sha1:31bdba00e027b81de8a3872d48e694475cf02e7a
@@ -13456,8 +13456,8 @@ trackedFiles:
     pristine_git_object: 0a8dcb3fb8d9c0c80159a622246dff4a3110bb1b
   src/openrouter/components/updateguardrailrequest.py:
     id: 6a557cd822a0
-    last_write_checksum: sha1:0e5978b49b7a37f48931dd778caf1fc46657b881
-    pristine_git_object: 21afa8a30b9688294c7c210ed45e23ea17109241
+    last_write_checksum: sha1:0894e7041ba0f23258b1234428049f20c4ea3500
+    pristine_git_object: 17311e522a8109c9c9c99808f0701da0df389ce5
   src/openrouter/components/updateguardrailresponse.py:
     id: 7b068d26ce31
     last_write_checksum: sha1:2b63cbb90747f07f775d9a22e80f74c67221fea8
@@ -13824,8 +13824,8 @@ trackedFiles:
     pristine_git_object: 5698c384a36929846530cae98f69ce83a0966217
   src/openrouter/guardrails.py:
     id: 705839f34e66
-    last_write_checksum: sha1:1551845b6a9776480d99ef0fc1fca61e845f3de2
-    pristine_git_object: 785964ad30a2043c9d70272f15d1a3fac9635b73
+    last_write_checksum: sha1:4771ac29e1010c57efa8bf7ead0a4bcef18552e6
+    pristine_git_object: f615049517074fbcc71b755e351efda8411810aa
   src/openrouter/httpclient.py:
     id: e9311185443d
     last_write_checksum: sha1:5e55338d6ee9f01ab648cad4380201a8a3da7dd7
@@ -14520,8 +14520,8 @@ trackedFiles:
     pristine_git_object: 701fa8597ff85f41a60736ade55fcb32f9ec7125
   src/openrouter/tts.py:
     id: 5055d4b95f1d
-    last_write_checksum: sha1:9826552c18767897c4dc6c3cd8c2ce41da40a344
-    pristine_git_object: 5b1bf2a61bfd3d476284465192603aa7d90adfd7
+    last_write_checksum: sha1:93fae27a87035c17b86c6e5353754c371c9c3faa
+    pristine_git_object: 001335f1dc471131bca2c942ea98c67825c7921f
   src/openrouter/types/__init__.py:
     id: 5eab536205b7
     last_write_checksum: sha1:f9ad14217f832e74f594285960125add50324be9
@@ -18576,4 +18576,4 @@ examples:
         "500":
           application/json: {"error": {"code": 404, "message": "Intern not found"}}
 examplesVersion: 1.0.2
-releaseNotes: "## Python SDK Changes:\n* `open_router.observability.list()`:  `response.data[]` **Changed**\n* `open_router.observability.create()`: \n  *  `request.broadcast_generation_cost_allocation` **Added**\n  *  `response.data` **Changed**\n* `open_router.observability.get()`:  `response.data` **Changed**\n* `open_router.observability.update()`: \n  *  `request.broadcast_generation_cost_allocation` **Added**\n  *  `response.data` **Changed**\n"
+releaseNotes: "## Python SDK Changes:\n* `open_router.guardrails.list()`:  `response.data[].allow_safety_retention_google` **Added**\n* `open_router.guardrails.create()`: \n  *  `request.allow_safety_retention_google` **Added**\n  *  `response.data.allow_safety_retention_google` **Added**\n* `open_router.guardrails.get()`:  `response.data.allow_safety_retention_google` **Added**\n* `open_router.guardrails.update()`: \n  *  `request.allow_safety_retention_google` **Added**\n  *  `response.data.allow_safety_retention_google` **Added**\n"

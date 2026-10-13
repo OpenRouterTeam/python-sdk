@@ -103,13 +103,13 @@ class SpeechRequestTypedDict(TypedDict):
     r"""Text-to-speech request input"""
 
     input: SpeechInputTypedDict
-    r"""Text to synthesize, or a list of turns for multi-speaker input. Each turn has its own text, voice, and instructions. Multi-speaker input is currently supported by Gemini TTS models only."""
+    r"""Text to synthesize, or a list of turns for multi-speaker input. Each turn has its own text, voice, and instructions. Multi-speaker input is supported by Gemini TTS models and by Fish Audio models other than S1."""
     model: str
     r"""TTS model identifier"""
     input_references: NotRequired[List[SpeechInputReferenceTypedDict]]
     r"""Reference content for stateless voice cloning or voice design. Audio mode: one to three `input_audio` parts, each optionally paired with a `text` part carrying its transcript (a single clip accepts its transcript before or after it; with multiple clips each transcript immediately follows its clip); only routed to endpoints that support voice cloning (and multiple references when more than one part is sent). Image mode: exactly one `image_url` part; only routed to endpoints that support image references. The two modes cannot be mixed. An empty array is treated as no reference."""
     instructions: NotRequired[str]
-    r"""Delivery instructions for the whole request, such as tone, pacing, or emotion. Supported by OpenAI gpt-4o-mini-tts and Gemini TTS models. Ignored by other providers."""
+    r"""Delivery instructions for the whole request, such as tone, pacing, or emotion. Supported by OpenAI gpt-4o-mini-tts, Gemini TTS, and Fish Audio models. Ignored by other providers."""
     provider: NotRequired[SpeechRequestProviderTypedDict]
     r"""Provider configuration: data policy routing preferences (`zdr`, `data_collection`) and provider-specific passthrough options"""
     response_format: NotRequired[SpeechRequestResponseFormat]
@@ -130,7 +130,7 @@ class SpeechRequest(BaseModel):
     r"""Text-to-speech request input"""
 
     input: SpeechInput
-    r"""Text to synthesize, or a list of turns for multi-speaker input. Each turn has its own text, voice, and instructions. Multi-speaker input is currently supported by Gemini TTS models only."""
+    r"""Text to synthesize, or a list of turns for multi-speaker input. Each turn has its own text, voice, and instructions. Multi-speaker input is supported by Gemini TTS models and by Fish Audio models other than S1."""
 
     model: str
     r"""TTS model identifier"""
@@ -139,7 +139,7 @@ class SpeechRequest(BaseModel):
     r"""Reference content for stateless voice cloning or voice design. Audio mode: one to three `input_audio` parts, each optionally paired with a `text` part carrying its transcript (a single clip accepts its transcript before or after it; with multiple clips each transcript immediately follows its clip); only routed to endpoints that support voice cloning (and multiple references when more than one part is sent). Image mode: exactly one `image_url` part; only routed to endpoints that support image references. The two modes cannot be mixed. An empty array is treated as no reference."""
 
     instructions: Optional[str] = None
-    r"""Delivery instructions for the whole request, such as tone, pacing, or emotion. Supported by OpenAI gpt-4o-mini-tts and Gemini TTS models. Ignored by other providers."""
+    r"""Delivery instructions for the whole request, such as tone, pacing, or emotion. Supported by OpenAI gpt-4o-mini-tts, Gemini TTS, and Fish Audio models. Ignored by other providers."""
 
     provider: Optional[SpeechRequestProvider] = None
     r"""Provider configuration: data policy routing preferences (`zdr`, `data_collection`) and provider-specific passthrough options"""
