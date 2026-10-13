@@ -9,8 +9,8 @@ from typing_extensions import TypeAliasType
 SpeechInputTypedDict = TypeAliasType(
     "SpeechInputTypedDict", Union[str, List[SpeechTurnTypedDict]]
 )
-r"""Text to synthesize, or a list of turns for multi-speaker input. Each turn has its own text, voice, and instructions. Multi-speaker input is currently supported by Gemini TTS models only."""
+r"""Text to synthesize, or a list of turns for multi-speaker input. Each turn has its own text, voice, and instructions. Multi-speaker input is supported by Gemini TTS models and by Fish Audio models other than S1."""
 
 
 SpeechInput = TypeAliasType("SpeechInput", Union[str, List[SpeechTurn]])
-r"""Text to synthesize, or a list of turns for multi-speaker input. Each turn has its own text, voice, and instructions. Multi-speaker input is currently supported by Gemini TTS models only."""
+r"""Text to synthesize, or a list of turns for multi-speaker input. Each turn has its own text, voice, and instructions. Multi-speaker input is supported by Gemini TTS models and by Fish Audio models other than S1."""
