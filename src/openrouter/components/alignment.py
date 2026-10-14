@@ -11,11 +11,11 @@ class AlignmentTypedDict(TypedDict):
     r"""Beta. The result of the alignment plugin for this request; the shape may change."""
 
     calls: List[AlignmentCallRecordTypedDict]
-    r"""One record per evaluated assistant message of the request, in the order the messages were produced."""
+    r"""One record per evaluated assistant message of the request, in the order the messages were produced. Empty when no message of the request had content to evaluate."""
 
 
 class Alignment(BaseModel):
     r"""Beta. The result of the alignment plugin for this request; the shape may change."""
 
     calls: List[AlignmentCallRecord]
-    r"""One record per evaluated assistant message of the request, in the order the messages were produced."""
+    r"""One record per evaluated assistant message of the request, in the order the messages were produced. Empty when no message of the request had content to evaluate."""

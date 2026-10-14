@@ -100,6 +100,7 @@ if TYPE_CHECKING:
         AlignmentResponsesRejectedTypedDict,
         UnknownAlignmentResponsesRejected,
     )
+    from .alignmentrule import AlignmentRule, AlignmentRuleTypedDict, Watch
     from .alignmentrulerecord import AlignmentRuleRecord, AlignmentRuleRecordTypedDict
     from .alignmentunavailablecallrecord import (
         AlignmentUnavailableCallRecord,
@@ -4493,8 +4494,10 @@ __all__ = [
     "AlignmentRejectedTypedDict",
     "AlignmentResponsesRejected",
     "AlignmentResponsesRejectedTypedDict",
+    "AlignmentRule",
     "AlignmentRuleRecord",
     "AlignmentRuleRecordTypedDict",
+    "AlignmentRuleTypedDict",
     "AlignmentTypedDict",
     "AlignmentUnavailableCallRecord",
     "AlignmentUnavailableCallRecordOutcome",
@@ -7574,6 +7577,7 @@ __all__ = [
     "VideoModelsListResponseTypedDict",
     "VideoURL",
     "VideoURLTypedDict",
+    "Watch",
     "WebFetchEngineEnum",
     "WebFetchPlugin",
     "WebFetchPluginID",
@@ -7712,6 +7716,9 @@ _dynamic_imports: dict[str, str] = {
     "AlignmentResponsesRejected": ".alignmentresponsesrejected",
     "AlignmentResponsesRejectedTypedDict": ".alignmentresponsesrejected",
     "UnknownAlignmentResponsesRejected": ".alignmentresponsesrejected",
+    "AlignmentRule": ".alignmentrule",
+    "AlignmentRuleTypedDict": ".alignmentrule",
+    "Watch": ".alignmentrule",
     "AlignmentRuleRecord": ".alignmentrulerecord",
     "AlignmentRuleRecordTypedDict": ".alignmentrulerecord",
     "AlignmentUnavailableCallRecord": ".alignmentunavailablecallrecord",
