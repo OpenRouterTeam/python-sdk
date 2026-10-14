@@ -6,6 +6,7 @@ from .anthropiccachecontroldirective import (
     AnthropicCacheControlDirective,
     AnthropicCacheControlDirectiveTypedDict,
 )
+from .armorplugin import ArmorPlugin, ArmorPluginTypedDict
 from .autobetarouterplugin import AutoBetaRouterPlugin, AutoBetaRouterPluginTypedDict
 from .autorouterplugin import AutoRouterPlugin, AutoRouterPluginTypedDict
 from .chatdebugoptions import ChatDebugOptions, ChatDebugOptionsTypedDict
@@ -96,6 +97,7 @@ ChatRequestPluginTypedDict = TypeAliasType(
         AlignmentPluginTypedDict,
         FusionPluginTypedDict,
         AutoRouterPluginTypedDict,
+        ArmorPluginTypedDict,
         WebSearchPluginTypedDict,
     ],
 )
@@ -104,6 +106,7 @@ ChatRequestPluginTypedDict = TypeAliasType(
 ChatRequestPlugin = Annotated[
     Union[
         Annotated[AlignmentPlugin, Tag("alignment")],
+        Annotated[ArmorPlugin, Tag("armor")],
         Annotated[AutoBetaRouterPlugin, Tag("auto-beta-router")],
         Annotated[AutoRouterPlugin, Tag("auto-router")],
         Annotated[ContextCompressionPlugin, Tag("context-compression")],

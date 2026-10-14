@@ -46,6 +46,7 @@ from .anthropicwebsearchtooluserlocation import (
     AnthropicWebSearchToolUserLocation,
     AnthropicWebSearchToolUserLocationTypedDict,
 )
+from .armorplugin import ArmorPlugin, ArmorPluginTypedDict
 from .autobetarouterplugin import AutoBetaRouterPlugin, AutoBetaRouterPluginTypedDict
 from .autorouterplugin import AutoRouterPlugin, AutoRouterPluginTypedDict
 from .bashservertool import BashServerTool, BashServerToolTypedDict
@@ -388,6 +389,7 @@ MessagesRequestPluginTypedDict = TypeAliasType(
         AlignmentPluginTypedDict,
         FusionPluginTypedDict,
         AutoRouterPluginTypedDict,
+        ArmorPluginTypedDict,
         WebSearchPluginTypedDict,
     ],
 )
@@ -396,6 +398,7 @@ MessagesRequestPluginTypedDict = TypeAliasType(
 MessagesRequestPlugin = Annotated[
     Union[
         Annotated[AlignmentPlugin, Tag("alignment")],
+        Annotated[ArmorPlugin, Tag("armor")],
         Annotated[AutoBetaRouterPlugin, Tag("auto-beta-router")],
         Annotated[AutoRouterPlugin, Tag("auto-router")],
         Annotated[ContextCompressionPlugin, Tag("context-compression")],

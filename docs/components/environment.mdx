@@ -2,22 +2,17 @@
 title: "Environment"
 ---
 
-## Example Usage
+## Supported Types
+
+### `str`
 
 ```python
-from openrouter.components import Environment
-
-# Open enum: unrecognized values are captured as UnrecognizedStr
-value: Environment = "windows"
+value: str = /* values here */
 ```
 
+### `components.ArmorEnvironmentEntry`
 
-## Values
+```python
+value: components.ArmorEnvironmentEntry = /* values here */
+```
 
-This is an open enum. Unrecognized values will not fail type checks.
-
-- `"windows"`
-- `"mac"`
-- `"linux"`
-- `"ubuntu"`
-- `"browser"`

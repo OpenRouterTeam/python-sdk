@@ -6,7 +6,7 @@ from typing import Literal, Union
 from typing_extensions import TypedDict
 
 
-Environment = Union[
+EnvironmentEnum = Union[
     Literal[
         "windows",
         "mac",
@@ -26,7 +26,7 @@ class ComputerUseServerToolTypedDict(TypedDict):
 
     display_height: int
     display_width: int
-    environment: Environment
+    environment: EnvironmentEnum
     type: ComputerUseServerToolType
 
 
@@ -37,6 +37,6 @@ class ComputerUseServerTool(BaseModel):
 
     display_width: int
 
-    environment: Environment
+    environment: EnvironmentEnum
 
     type: ComputerUseServerToolType

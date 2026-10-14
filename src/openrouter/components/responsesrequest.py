@@ -15,6 +15,7 @@ from .applypatchservertool_openrouter import (
     ApplyPatchServerToolOpenRouter,
     ApplyPatchServerToolOpenRouterTypedDict,
 )
+from .armorplugin import ArmorPlugin, ArmorPluginTypedDict
 from .autobetarouterplugin import AutoBetaRouterPlugin, AutoBetaRouterPluginTypedDict
 from .autorouterplugin import AutoRouterPlugin, AutoRouterPluginTypedDict
 from .bashservertool import BashServerTool, BashServerToolTypedDict
@@ -145,6 +146,7 @@ ResponsesRequestPluginTypedDict = TypeAliasType(
         AlignmentPluginTypedDict,
         FusionPluginTypedDict,
         AutoRouterPluginTypedDict,
+        ArmorPluginTypedDict,
         WebSearchPluginTypedDict,
     ],
 )
@@ -153,6 +155,7 @@ ResponsesRequestPluginTypedDict = TypeAliasType(
 ResponsesRequestPlugin = Annotated[
     Union[
         Annotated[AlignmentPlugin, Tag("alignment")],
+        Annotated[ArmorPlugin, Tag("armor")],
         Annotated[AutoBetaRouterPlugin, Tag("auto-beta-router")],
         Annotated[AutoRouterPlugin, Tag("auto-router")],
         Annotated[ContextCompressionPlugin, Tag("context-compression")],

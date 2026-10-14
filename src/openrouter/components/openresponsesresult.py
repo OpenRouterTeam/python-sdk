@@ -4,6 +4,7 @@ from __future__ import annotations
 from .alignment import Alignment, AlignmentTypedDict
 from .apierrortype import APIErrorType
 from .applypatchservertool import ApplyPatchServerTool, ApplyPatchServerToolTypedDict
+from .armorsafeguardresult import ArmorSafeguardResult, ArmorSafeguardResultTypedDict
 from .baseinputs_union import BaseInputsUnion, BaseInputsUnionTypedDict
 from .basereasoningconfig import BaseReasoningConfig, BaseReasoningConfigTypedDict
 from .codeinterpreterservertool import (
@@ -442,6 +443,8 @@ class OpenResponsesResultTypedDict(TypedDict):
     error_type: NotRequired[APIErrorType]
     r"""Canonical OpenRouter error type, stable across all API formats"""
     openrouter_metadata: NotRequired[OpenRouterMetadataTypedDict]
+    safeguard_results: NotRequired[List[ArmorSafeguardResultTypedDict]]
+    r"""OpenRouter Armor's verdict for each client tool call of this response, present whenever Armor evaluated the response (even when nothing was flagged). Independent of the `openrouter_metadata` opt-in."""
 
 
 class OpenResponsesResult(BaseModel):
@@ -530,6 +533,9 @@ class OpenResponsesResult(BaseModel):
 
     openrouter_metadata: Optional[OpenRouterMetadata] = None
 
+    safeguard_results: Optional[List[ArmorSafeguardResult]] = None
+    r"""OpenRouter Armor's verdict for each client tool call of this response, present whenever Armor evaluated the response (even when nothing was flagged). Independent of the `openrouter_metadata` opt-in."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
@@ -554,6 +560,7 @@ class OpenResponsesResult(BaseModel):
                 "alignment",
                 "error_type",
                 "openrouter_metadata",
+                "safeguard_results",
             ]
         )
         nullable_fields = set(
