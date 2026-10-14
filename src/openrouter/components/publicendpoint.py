@@ -495,6 +495,8 @@ class PublicEndpointTypedDict(TypedDict):
     provider_name: ProviderName
     quantization: Nullable[Quantization]
     supported_parameters: List[Parameter]
+    supports_diarization: bool
+    r"""Whether this STT endpoint can label each transcript segment with a speaker (speaker diarization). False when the endpoint has not declared support."""
     supports_implicit_caching: bool
     supports_tool_choice: ToolChoiceSupportTypedDict
     r"""Per-variant `tool_choice` support. `tool_choice` in `supported_parameters` only says the parameter is accepted; these flags say which of its values passed testing."""
@@ -546,6 +548,9 @@ class PublicEndpoint(BaseModel):
     quantization: Nullable[Quantization]
 
     supported_parameters: List[Parameter]
+
+    supports_diarization: bool
+    r"""Whether this STT endpoint can label each transcript segment with a speaker (speaker diarization). False when the endpoint has not declared support."""
 
     supports_implicit_caching: bool
 
