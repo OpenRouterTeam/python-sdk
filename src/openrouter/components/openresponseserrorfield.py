@@ -35,6 +35,7 @@ CodeEnum = Union[
         "cyber_policy",
         "misalignment_policy_violation",
         "data_residency_mismatch",
+        "permission_denied",
     ],
     UnrecognizedStr,
 ]
