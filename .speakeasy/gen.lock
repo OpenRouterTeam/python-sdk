@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c48cf606-fb42-4a45-9c23-8f0555307828
 management:
-  docChecksum: 590ee4e51c48434290d87d7d96273fd3
+  docChecksum: 83e429de53a4fee5a314ce6f4fee6e11
   docVersion: 1.0.0
   speakeasyVersion: 1.787.0
   generationVersion: 2.914.0
-  releaseVersion: 1.3.47
-  configChecksum: 43543058d993e1988e0a4687cc2e3914
+  releaseVersion: 1.3.48
+  configChecksum: 574e6b8f09ccafb395bf9a0882ed57ca
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
 persistentEdits:
-  generation_id: 83f43f07-025f-44fa-9700-13fee2d23524
-  pristine_commit_hash: 75d10fe87edad8d0062bddb49cc93772b6d10b4a
-  pristine_tree_hash: 34256ecd014b2bf3540a66988fb30e8fda2c7da4
+  generation_id: 98b3fd9b-4bda-4d21-a442-d1c2cd3d096a
+  pristine_commit_hash: 88f54d4e230c2b39082b5f30633b5ae0c524994f
+  pristine_tree_hash: a48b9da40dbea051ee6ec8ca1f87efca364c1502
 features:
   python:
     acceptHeaders: 3.0.0
@@ -10172,8 +10172,8 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:f302387820de8ea5d8f9976723fedac23ff3786f
-    pristine_git_object: c13e96323f81df701de49f39ffdae63fdcc8893b
+    last_write_checksum: sha1:0a19c66c31bbd6426529a7c28fc6803770c1357d
+    pristine_git_object: 0857e44ba23fc18992543cebeb5ed04b4ceb3e20
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77f44b60b98bc126557ec27391f91dfba764bb54
@@ -10200,8 +10200,8 @@ trackedFiles:
     pristine_git_object: 86713cfea633e09d33b3d4e65281071fe20e6137
   src/openrouter/_version.py:
     id: d8d15ad6c586
-    last_write_checksum: sha1:25bedf5803d4341014f4cee51fc80909b92ac722
-    pristine_git_object: 6c070152cd0c3bef0f757441bef2303b262fa377
+    last_write_checksum: sha1:13f3db67f6f51752172b1f9aa2e0bb136c357ab3
+    pristine_git_object: 0941bcdbba328d441ba36ce52c4cdc9fb3794440
   src/openrouter/alpha.py:
     id: 306c4d93308d
     last_write_checksum: sha1:30f55a360f41376ab194b9ea725fe4e001a5ae1a
@@ -18576,4 +18576,3 @@ examples:
         "500":
           application/json: {"error": {"code": 404, "message": "Intern not found"}}
 examplesVersion: 1.0.2
-releaseNotes: "## Python SDK Changes:\n* `open_router.guardrails.list()`:  `response.data[].allow_safety_retention_other` **Added**\n* `open_router.guardrails.create()`: \n  *  `request.allow_safety_retention_other` **Added**\n  *  `response.data.allow_safety_retention_other` **Added**\n* `open_router.guardrails.get()`:  `response.data.allow_safety_retention_other` **Added**\n* `open_router.guardrails.update()`: \n  *  `request.allow_safety_retention_other` **Added**\n  *  `response.data.allow_safety_retention_other` **Added**\n"
