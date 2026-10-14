@@ -1207,6 +1207,10 @@ if TYPE_CHECKING:
         ChatWebSearchShorthandType,
         ChatWebSearchShorthandTypedDict,
     )
+    from .clientclosedrequestresponseerrordata import (
+        ClientClosedRequestResponseErrorData,
+        ClientClosedRequestResponseErrorDataTypedDict,
+    )
     from .codeinterpretercallcodedeltaevent import (
         CodeInterpreterCallCodeDeltaEvent,
         CodeInterpreterCallCodeDeltaEventType,
@@ -5231,6 +5235,8 @@ __all__ = [
     "CitationTypedDict",
     "ClearToolInputs",
     "ClearToolInputsTypedDict",
+    "ClientClosedRequestResponseErrorData",
+    "ClientClosedRequestResponseErrorDataTypedDict",
     "Code",
     "CodeEnum",
     "CodeInterpreterCallCodeDeltaEvent",
@@ -8505,6 +8511,8 @@ _dynamic_imports: dict[str, str] = {
     "ChatWebSearchShorthand": ".chatwebsearchshorthand",
     "ChatWebSearchShorthandType": ".chatwebsearchshorthand",
     "ChatWebSearchShorthandTypedDict": ".chatwebsearchshorthand",
+    "ClientClosedRequestResponseErrorData": ".clientclosedrequestresponseerrordata",
+    "ClientClosedRequestResponseErrorDataTypedDict": ".clientclosedrequestresponseerrordata",
     "CodeInterpreterCallCodeDeltaEvent": ".codeinterpretercallcodedeltaevent",
     "CodeInterpreterCallCodeDeltaEventType": ".codeinterpretercallcodedeltaevent",
     "CodeInterpreterCallCodeDeltaEventTypedDict": ".codeinterpretercallcodedeltaevent",

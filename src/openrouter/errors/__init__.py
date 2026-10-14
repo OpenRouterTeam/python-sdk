@@ -19,6 +19,10 @@ if TYPE_CHECKING:
         BatchPaymentRequiredResponseError,
         BatchPaymentRequiredResponseErrorData,
     )
+    from .clientclosedrequestresponse_error import (
+        ClientClosedRequestResponseError,
+        ClientClosedRequestResponseErrorData,
+    )
     from .conflictresponse_error import ConflictResponseError, ConflictResponseErrorData
     from .createprivateendpoint import (
         BadGateway,
@@ -107,6 +111,8 @@ __all__ = [
     "BatchErrorResponseData",
     "BatchPaymentRequiredResponseError",
     "BatchPaymentRequiredResponseErrorData",
+    "ClientClosedRequestResponseError",
+    "ClientClosedRequestResponseErrorData",
     "Conflict",
     "ConflictResponseError",
     "ConflictResponseErrorData",
@@ -168,6 +174,8 @@ _dynamic_imports: dict[str, str] = {
     "BatchErrorResponseData": ".batcherrorresponse",
     "BatchPaymentRequiredResponseError": ".batchpaymentrequiredresponse_error",
     "BatchPaymentRequiredResponseErrorData": ".batchpaymentrequiredresponse_error",
+    "ClientClosedRequestResponseError": ".clientclosedrequestresponse_error",
+    "ClientClosedRequestResponseErrorData": ".clientclosedrequestresponse_error",
     "ConflictResponseError": ".conflictresponse_error",
     "ConflictResponseErrorData": ".conflictresponse_error",
     "BadGateway": ".createprivateendpoint",

@@ -208,6 +208,11 @@ class Embeddings(BaseSDK):
                 errors.TooManyRequestsResponseErrorData, http_res
             )
             raise errors.TooManyRequestsResponseError(response_data, http_res)
+        if utils.match_response(http_res, "499", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ClientClosedRequestResponseErrorData, http_res
+            )
+            raise errors.ClientClosedRequestResponseError(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(
                 errors.InternalServerResponseErrorData, http_res
@@ -440,6 +445,11 @@ class Embeddings(BaseSDK):
                 errors.TooManyRequestsResponseErrorData, http_res
             )
             raise errors.TooManyRequestsResponseError(response_data, http_res)
+        if utils.match_response(http_res, "499", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ClientClosedRequestResponseErrorData, http_res
+            )
+            raise errors.ClientClosedRequestResponseError(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(
                 errors.InternalServerResponseErrorData, http_res
