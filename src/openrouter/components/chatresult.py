@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 from .alignment import Alignment, AlignmentTypedDict
+from .armorsafeguardresult import ArmorSafeguardResult, ArmorSafeguardResultTypedDict
 from .chatchoice import ChatChoice, ChatChoiceTypedDict
 from .chatusage import ChatUsage, ChatUsageTypedDict
 from .openroutermetadata import OpenRouterMetadata, OpenRouterMetadataTypedDict
@@ -37,6 +38,8 @@ class ChatResultTypedDict(TypedDict):
     alignment: NotRequired[AlignmentTypedDict]
     r"""Beta. The result of the alignment plugin for this request; the shape may change."""
     openrouter_metadata: NotRequired[OpenRouterMetadataTypedDict]
+    safeguard_results: NotRequired[List[ArmorSafeguardResultTypedDict]]
+    r"""OpenRouter Armor's verdict for each client tool call of this response, present whenever Armor evaluated the response (even when nothing was flagged). Independent of the `openrouter_metadata` opt-in."""
     service_tier: NotRequired[Nullable[str]]
     r"""The service tier used by the upstream provider for this request"""
     usage: NotRequired[ChatUsageTypedDict]
@@ -68,6 +71,9 @@ class ChatResult(BaseModel):
 
     openrouter_metadata: Optional[OpenRouterMetadata] = None
 
+    safeguard_results: Optional[List[ArmorSafeguardResult]] = None
+    r"""OpenRouter Armor's verdict for each client tool call of this response, present whenever Armor evaluated the response (even when nothing was flagged). Independent of the `openrouter_metadata` opt-in."""
+
     service_tier: OptionalNullable[str] = UNSET
     r"""The service tier used by the upstream provider for this request"""
 
@@ -77,7 +83,13 @@ class ChatResult(BaseModel):
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
-            ["alignment", "openrouter_metadata", "service_tier", "usage"]
+            [
+                "alignment",
+                "openrouter_metadata",
+                "safeguard_results",
+                "service_tier",
+                "usage",
+            ]
         )
         nullable_fields = set(["service_tier", "system_fingerprint"])
         serialized = handler(self)

@@ -3,6 +3,7 @@
 from __future__ import annotations
 from .alignment import Alignment, AlignmentTypedDict
 from .apierrortype import APIErrorType
+from .armorsafeguardresult import ArmorSafeguardResult, ArmorSafeguardResultTypedDict
 from .chatstreamchoice import ChatStreamChoice, ChatStreamChoiceTypedDict
 from .chatusage import ChatUsage, ChatUsageTypedDict
 from .openroutermetadata import OpenRouterMetadata, OpenRouterMetadataTypedDict
@@ -112,6 +113,8 @@ class ChatStreamChunkTypedDict(TypedDict):
     error: NotRequired[ChatStreamChunkErrorTypedDict]
     r"""Error information"""
     openrouter_metadata: NotRequired[OpenRouterMetadataTypedDict]
+    safeguard_results: NotRequired[List[ArmorSafeguardResultTypedDict]]
+    r"""OpenRouter Armor's verdict for each client tool call of this response, present whenever Armor evaluated the response (even when nothing was flagged). Independent of the `openrouter_metadata` opt-in."""
     service_tier: NotRequired[Nullable[str]]
     r"""The service tier used by the upstream provider for this request"""
     system_fingerprint: NotRequired[str]
@@ -144,6 +147,9 @@ class ChatStreamChunk(BaseModel):
 
     openrouter_metadata: Optional[OpenRouterMetadata] = None
 
+    safeguard_results: Optional[List[ArmorSafeguardResult]] = None
+    r"""OpenRouter Armor's verdict for each client tool call of this response, present whenever Armor evaluated the response (even when nothing was flagged). Independent of the `openrouter_metadata` opt-in."""
+
     service_tier: OptionalNullable[str] = UNSET
     r"""The service tier used by the upstream provider for this request"""
 
@@ -160,6 +166,7 @@ class ChatStreamChunk(BaseModel):
                 "alignment",
                 "error",
                 "openrouter_metadata",
+                "safeguard_results",
                 "service_tier",
                 "system_fingerprint",
                 "usage",

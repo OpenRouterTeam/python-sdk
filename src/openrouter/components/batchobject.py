@@ -30,6 +30,7 @@ from .anthropicusageiteration import (
     AnthropicUsageIterationTypedDict,
 )
 from .apierrortype import APIErrorType
+from .armorsafeguardresult import ArmorSafeguardResult, ArmorSafeguardResultTypedDict
 from .costdetails import CostDetails, CostDetailsTypedDict
 from .finishreason import FinishReason
 from .openresponsesresult import OpenResponsesResult, OpenResponsesResultTypedDict
@@ -1528,6 +1529,8 @@ class BodyChatCompletionTypedDict(TypedDict):
     debug: NotRequired[BatchObjectDebugTypedDict]
     openrouter_metadata: NotRequired[OpenRouterMetadataTypedDict]
     provider: NotRequired[Nullable[str]]
+    safeguard_results: NotRequired[List[ArmorSafeguardResultTypedDict]]
+    r"""OpenRouter Armor's verdict for each client tool call of this response, present whenever Armor evaluated the response (even when nothing was flagged). Independent of the `openrouter_metadata` opt-in."""
     service_tier: NotRequired[Nullable[str]]
     system_fingerprint: NotRequired[Nullable[str]]
     usage: NotRequired[BodyUsage1TypedDict]
@@ -1553,6 +1556,9 @@ class BodyChatCompletion(BaseModel):
 
     provider: OptionalNullable[str] = UNSET
 
+    safeguard_results: Optional[List[ArmorSafeguardResult]] = None
+    r"""OpenRouter Armor's verdict for each client tool call of this response, present whenever Armor evaluated the response (even when nothing was flagged). Independent of the `openrouter_metadata` opt-in."""
+
     service_tier: OptionalNullable[str] = UNSET
 
     system_fingerprint: OptionalNullable[str] = UNSET
@@ -1567,6 +1573,7 @@ class BodyChatCompletion(BaseModel):
                 "debug",
                 "openrouter_metadata",
                 "provider",
+                "safeguard_results",
                 "service_tier",
                 "system_fingerprint",
                 "usage",
