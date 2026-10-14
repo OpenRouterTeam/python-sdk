@@ -32,6 +32,9 @@ class VideoGenerationResponseTypedDict(TypedDict):
     generation_id: NotRequired[str]
     r"""The generation ID associated with this video generation job. Available once the job has been processed."""
     unsigned_urls: NotRequired[List[str]]
+    r"""OpenRouter content URLs for each output. They need your API key in the `Authorization` header and keep working for as long as the output is available."""
+    urls: NotRequired[List[str]]
+    r"""Signed download URLs for OpenRouter's stored copy of each output, usable without an API key until `expires_at`. Anyone holding a URL can download that output until it expires, so treat it like a secret. Present only when the stored copy exists."""
     usage: NotRequired[VideoGenerationUsageTypedDict]
     r"""Usage and cost information for the video generation. Available once the job has completed."""
 
@@ -53,6 +56,10 @@ class VideoGenerationResponse(BaseModel):
     r"""The generation ID associated with this video generation job. Available once the job has been processed."""
 
     unsigned_urls: Optional[List[str]] = None
+    r"""OpenRouter content URLs for each output. They need your API key in the `Authorization` header and keep working for as long as the output is available."""
+
+    urls: Optional[List[str]] = None
+    r"""Signed download URLs for OpenRouter's stored copy of each output, usable without an API key until `expires_at`. Anyone holding a URL can download that output until it expires, so treat it like a secret. Present only when the stored copy exists."""
 
     usage: Optional[VideoGenerationUsage] = None
     r"""Usage and cost information for the video generation. Available once the job has completed."""
@@ -60,7 +67,7 @@ class VideoGenerationResponse(BaseModel):
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
-            ["error", "expires_at", "generation_id", "unsigned_urls", "usage"]
+            ["error", "expires_at", "generation_id", "unsigned_urls", "urls", "usage"]
         )
         serialized = handler(self)
         m = {}

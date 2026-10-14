@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c48cf606-fb42-4a45-9c23-8f0555307828
 management:
-  docChecksum: 2eccfa7a729ff2b0018b0a12fae4c6bc
+  docChecksum: e6fdcb3ac45fe92953a95a11e51d498d
   docVersion: 1.0.0
   speakeasyVersion: 1.787.0
   generationVersion: 2.914.0
-  releaseVersion: 1.3.51
-  configChecksum: 42c786fcb3f642846ab5debebe68fb64
+  releaseVersion: 1.3.52
+  configChecksum: 74884b8c46d1c1bccc664502f76b7feb
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
 persistentEdits:
-  generation_id: 06c77232-c97c-468e-a4a2-e78aaedbd796
-  pristine_commit_hash: 74630426eda728d6ce5df2f27cfec65172ae1ceb
-  pristine_tree_hash: fbd0ccb9ecf77c3064549a1d835a0fcfe6dbe645
+  generation_id: 9be81444-93da-47e2-975d-a50451e4ec19
+  pristine_commit_hash: 203afc8e6d9084ed5debbc2ab28e9a68e22872b8
+  pristine_tree_hash: 28e3e2f76f6ce62d7e2061b562575e4869558002
 features:
   python:
     acceptHeaders: 3.0.0
@@ -7984,8 +7984,8 @@ trackedFiles:
     pristine_git_object: 050aab049bb847e511ea272a5d238d7e64e6f137
   docs/components/videogenerationresponse.mdx:
     id: 3a932213188e
-    last_write_checksum: sha1:75a686f8206a46d3d9cee6cffff806e711e54bff
-    pristine_git_object: ac588d7de823b2b4aa9cd237e706016eb2d6b163
+    last_write_checksum: sha1:b4b67c4bf037f28816e7cb0411ba1bd82b023f40
+    pristine_git_object: 2651b65e02d7b0c3343ec5fa46decf5b66b0bd8a
   docs/components/videogenerationresponsestatus.mdx:
     id: 637442fde0ff
     last_write_checksum: sha1:9368ca45d569e511e5faf18118efd7e3341473a7
@@ -10288,8 +10288,8 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:6a1ae75d8efe03a70119b451c44288c8bf678175
-    pristine_git_object: 874397dbfeb9f018fc6af88bb4f0f87ae67bc263
+    last_write_checksum: sha1:ce61bf6deb895c0f82edbeba5f0dc2015a59a003
+    pristine_git_object: ab3871be8dea74478699a90f5ded5fdaa69554c6
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77f44b60b98bc126557ec27391f91dfba764bb54
@@ -10316,8 +10316,8 @@ trackedFiles:
     pristine_git_object: 86713cfea633e09d33b3d4e65281071fe20e6137
   src/openrouter/_version.py:
     id: d8d15ad6c586
-    last_write_checksum: sha1:cf60e78489d5b26972a3e812d16a23c0ba95821c
-    pristine_git_object: 77be04ec9f7f57f2e31297c26b772632914806d2
+    last_write_checksum: sha1:d376193f244b0e24a62bf670ba4c5630bd971633
+    pristine_git_object: 5a3f314c5d3d9341836be35996a9515593380437
   src/openrouter/alpha.py:
     id: 306c4d93308d
     last_write_checksum: sha1:30f55a360f41376ab194b9ea725fe4e001a5ae1a
@@ -13704,8 +13704,8 @@ trackedFiles:
     pristine_git_object: f2e96fc6eeca4714ec87fab130170cd110662cda
   src/openrouter/components/videogenerationresponse.py:
     id: 541f1321b072
-    last_write_checksum: sha1:fe3f29d50ce52d23438464c7da3a3559d0cbacf7
-    pristine_git_object: 72be512797d163955607d48d34a8d8285d3535c1
+    last_write_checksum: sha1:6ba68c4551af144f37be940f0222f434d156e275
+    pristine_git_object: 867a1aa29de8df4c3dd67498b390a53985efcd5f
   src/openrouter/components/videogenerationusage.py:
     id: dded36eba597
     last_write_checksum: sha1:a19d286bfda3ca9a373128c5118f3e6715060470
@@ -18738,4 +18738,7 @@ examples:
         "500":
           application/json: {"error": {"code": 404, "message": "Intern not found"}}
 examplesVersion: 1.0.2
-releaseNotes: "## Python SDK Changes:\n* `open_router.batch.create_batches()`:  `response.results[].response.body` **Changed**\n* `open_router.batch.get_batches()`:  `response.results[].response.body` **Changed**\n* `open_router.chat.send()`: \n  *  `request.plugins[].union(armor)` **Added**\n  *  `response` **Changed**\n* `open_router.presets.create_presets_chat_completions()`: \n  *  `request.plugins[].union(armor)` **Added**\n* `open_router.presets.create_presets_messages()`: \n  *  `request.plugins[].union(armor)` **Added**\n* `open_router.presets.create_presets_responses()`: \n  *  `request.plugins[].union(armor)` **Added**\n* `open_router.responses.send()`: \n  *  `request.plugins[].union(armor)` **Added**\n  *  `response` **Changed**\n* `open_router.beta.responses.send()`: \n  *  `request.plugins[].union(armor)` **Added**\n  *  `response` **Changed**\n"
+releaseNotes: |
+  ## Python SDK Changes:
+  * `open_router.video_generation.generate()`:  `response.urls` **Added**
+  * `open_router.video_generation.get_generation()`:  `response.urls` **Added**
