@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c48cf606-fb42-4a45-9c23-8f0555307828
 management:
-  docChecksum: f801f4232e52128b7111557fa57d74b5
+  docChecksum: d316e70cf866121b6113db353ecbb91c
   docVersion: 1.0.0
   speakeasyVersion: 1.787.0
   generationVersion: 2.914.0
-  releaseVersion: 1.3.54
-  configChecksum: 00d313ba18dc981810cce55a2880d555
+  releaseVersion: 1.3.55
+  configChecksum: e39d06d55346e2a31e2cf52ec011c465
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
 persistentEdits:
-  generation_id: defe980f-7620-40e8-b3ce-989ccb235d58
-  pristine_commit_hash: c0852c28237f34d5322a4857ed118f373cd0a42c
-  pristine_tree_hash: 85e23e2d3ce5ccb139dca246812b231e581d3a45
+  generation_id: 56378936-8e8c-40a4-b837-950c52c7089a
+  pristine_commit_hash: 5ff5c1ca17faab0314021bc38590852efa4b6803
+  pristine_tree_hash: c4349e551d597229bdd70cbc6dfa4bfe5e4f0946
 features:
   python:
     acceptHeaders: 3.0.0
@@ -328,8 +328,8 @@ trackedFiles:
     pristine_git_object: a349dfd1f9dbd073892e08bf1fec641b131e2b72
   docs/components/answers.mdx:
     id: 82e99c991e20
-    last_write_checksum: sha1:66dd9e45903fcdb94b3303437662e481c0106c5b
-    pristine_git_object: b065c94fd50b108b90c0cfe16ae4359337002376
+    last_write_checksum: sha1:5ef9a00452ff852a462ae1d311c98c677f84b160
+    pristine_git_object: 43893fe77c341f9deeed76ad83ebb2800807c7ba
   docs/components/anthropicadvisormessageusageiteration.mdx:
     id: ca0effff715e
     last_write_checksum: sha1:66558840a0330602b3e022e9686b3f2f8529b959
@@ -1650,6 +1650,10 @@ trackedFiles:
     id: 9fde49928d3a
     last_write_checksum: sha1:6746044145b81e2480e6f2757db714a467f0d1f8
     pristine_git_object: 9c583fdf315b6ac8ad38f254d932aaadde8c7ded
+  docs/components/box.mdx:
+    id: 3d683799f3f6
+    last_write_checksum: sha1:94468857693ea5a155b714cb69b5e824ecf0b3a2
+    pristine_git_object: f0a3ef77d013ac1240a223e9e5d0bc3cef932a24
   docs/components/bulkaddworkspacemembersrequest.mdx:
     id: 92f44877345a
     last_write_checksum: sha1:98e0c96a7ea1e43172ef8d71527de4c5368daa42
@@ -2746,6 +2750,26 @@ trackedFiles:
     id: 2cbde2112b18
     last_write_checksum: sha1:90f7268b80fdabbdf4f5c78aac765d6442539348
     pristine_git_object: d68a93a6e4f6d372e9be4554174339d4dbd86f67
+  docs/components/decisionsboxanswer.mdx:
+    id: feb90d039e07
+    last_write_checksum: sha1:be2c2e580a2142d9afebe9b38bb20fc6966c6c55
+    pristine_git_object: 41ff334cdc04471e07796c11665cd96b28eb1dc4
+  docs/components/decisionsboxanswertype.mdx:
+    id: 01a44eb95136
+    last_write_checksum: sha1:19ceb57f4b609bd8bd1f340976823da8e16a3fb1
+    pristine_git_object: f8ee5fe37dd3f38add083239af2ad81d55b72609
+  docs/components/decisionsboxquestion.mdx:
+    id: 9f587817bba9
+    last_write_checksum: sha1:33c0d2ed70c82e9ef11e313db6bbc8093ecb51cb
+    pristine_git_object: 3a4637a56e7215f202a9daa8db937c158495e898
+  docs/components/decisionsboxquestioninstructions.mdx:
+    id: 0bcad7c550b9
+    last_write_checksum: sha1:4e5d7bafce0a322a279b3c00d11c02429ef37fee
+    pristine_git_object: 378399c6c5316c2e35d1519476b74a155080ad01
+  docs/components/decisionsboxquestiontype.mdx:
+    id: d298c864bb79
+    last_write_checksum: sha1:cdbcc2a7397404f51a7a9cbf25f2029db19bd2fd
+    pristine_git_object: bb87797fecc8f3b4dfb0a2fb5e1494c357d086a2
   docs/components/decisionschoiceanswer.mdx:
     id: 8453afbdc1aa
     last_write_checksum: sha1:6c917d892506ab1257cf46468e58a0fb6f130f8b
@@ -6408,8 +6432,8 @@ trackedFiles:
     pristine_git_object: 80f51dc8e90b6642365ab8d409b6f100f07ccab0
   docs/components/questions.mdx:
     id: 75aa4ba39e9c
-    last_write_checksum: sha1:5239cbe0ce5d970b958a9f00551067e5cdd88c20
-    pristine_git_object: 15be03f7c7723c3a2512cfe35d8f35083a21ebbb
+    last_write_checksum: sha1:04887ce687bea3d2f6afea689e39952a7256f8ff
+    pristine_git_object: f6c2d80b0e12882e559031e0244b3c348814bc12
   docs/components/rangecapability.mdx:
     id: 8c2d6524bd62
     last_write_checksum: sha1:e583c16a52c5811d882ddbe20cee0a7006035356
@@ -10288,8 +10312,8 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:86cbe7493a02b92000f3f7c4cdf79b72828a3ed1
-    pristine_git_object: 1b0c571a8a31e326918aeb82851c57a85fe1e91e
+    last_write_checksum: sha1:708c0a6ee5849e59aa9267d8985724adcefe0baf
+    pristine_git_object: da47717cca5b6271b68c09432434be50cef94a60
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77f44b60b98bc126557ec27391f91dfba764bb54
@@ -10316,8 +10340,8 @@ trackedFiles:
     pristine_git_object: 86713cfea633e09d33b3d4e65281071fe20e6137
   src/openrouter/_version.py:
     id: d8d15ad6c586
-    last_write_checksum: sha1:b0d4346fe4f5e5d3afe0f46e5b3f1b2ba53018b6
-    pristine_git_object: ac9989f813165143912560931173c387bd9f2535
+    last_write_checksum: sha1:5493aa6a7764382c8ea44be8135d59d9a55fbfbb
+    pristine_git_object: 92d007f074d17cd79fadc9db59d6dddf7f6a565e
   src/openrouter/alpha.py:
     id: 306c4d93308d
     last_write_checksum: sha1:30f55a360f41376ab194b9ea725fe4e001a5ae1a
@@ -10364,8 +10388,8 @@ trackedFiles:
     pristine_git_object: ad3d247954547814054c01989a2dff3d12b3e4e1
   src/openrouter/components/__init__.py:
     id: 81754e97b3f4
-    last_write_checksum: sha1:4ebf0abc8f838113bc4a1ef520e3fc6b5914e7b0
-    pristine_git_object: e858066a694593b119b38a2b9fc1d20cd622433b
+    last_write_checksum: sha1:73b40ea8cba3db5ffe532a8e5c3fcc26bac02fe2
+    pristine_git_object: 070351da60f54a6439f2d5b982183b2d5fd7bf7c
   src/openrouter/components/aabenchmarkentry.py:
     id: e2e0f0b48c82
     last_write_checksum: sha1:fab4d9a24d2cea937bb749d46c5f83941e99d65c
@@ -11542,6 +11566,14 @@ trackedFiles:
     id: 5ecad6212326
     last_write_checksum: sha1:53ae856232196a956d66c6363cdaedc9f8abfe3a
     pristine_git_object: 07e98d54e6a63a4f1e0908b73ce5f8d7e16234f0
+  src/openrouter/components/decisionsboxanswer.py:
+    id: 59a9ef1c30b7
+    last_write_checksum: sha1:301ee5be0345940b0f210f797e19e537e0f8126e
+    pristine_git_object: 033cb3533e3fc0f1dfdd5ec25ac9fc50f811a0df
+  src/openrouter/components/decisionsboxquestion.py:
+    id: 1fa3ffdda918
+    last_write_checksum: sha1:ada2c9d8a20f8e0177aa00639c18922766171ad0
+    pristine_git_object: d667828ec2477ea91730faeab47c38d88f1d4ed4
   src/openrouter/components/decisionschoiceanswer.py:
     id: 53a9e8cdf870
     last_write_checksum: sha1:16380c24282a8d275d96bed268bf5d6410b56f43
@@ -11560,12 +11592,12 @@ trackedFiles:
     pristine_git_object: d6b2551a31bc9c7d8e2ed96913c097dc127c8311
   src/openrouter/components/decisionsrequest.py:
     id: 5df43fede21b
-    last_write_checksum: sha1:671d51ba36a099390f2ed53230d7363f0644f02e
-    pristine_git_object: 3f40fcff3f6beaaa879d3f23e11d35e091ad4ede
+    last_write_checksum: sha1:f83153119a2cc4e4a86d7474f13a919d7e0698dd
+    pristine_git_object: 16559575401633709561c93be6d69ea1b7c05c8f
   src/openrouter/components/decisionsresponse.py:
     id: b91b81c2cf95
-    last_write_checksum: sha1:db05bebf1bd1d7cee86819ad649531f46574f294
-    pristine_git_object: 534bf4bf7478e4c2c3f14e26243264169d381905
+    last_write_checksum: sha1:525f6ff5bd402e9d848fe5e15c32bd0eee14d236
+    pristine_git_object: 687789c6ab7c35f36394e0c3028376b24b670044
   src/openrouter/components/decisionsscoreanswer.py:
     id: af8597465725
     last_write_checksum: sha1:e12a52051ccd6f841e0238d789b816a05156d299
@@ -18746,7 +18778,4 @@ examples:
         "500":
           application/json: {"error": {"code": 404, "message": "Intern not found"}}
 examplesVersion: 1.0.2
-releaseNotes: |
-  ## Python SDK Changes:
-  * `open_router.guardrails.list_key_assignments()`:  `error` **Changed**
-  * `open_router.guardrails.list_member_assignments()`:  `error` **Changed**
+releaseNotes: "## Python SDK Changes:\n* `open_router.alpha.decisions.create()`: \n  *  `request.questions.Map<questions>.union(box)` **Added**\n  *  `response.answers.Map<answers>.union(box)` **Added**\n* `open_router.system_one.create()`: \n  *  `request.questions.Map<questions>.union(box)` **Added**\n  *  `response.answers.Map<answers>.union(box)` **Added**\n"
