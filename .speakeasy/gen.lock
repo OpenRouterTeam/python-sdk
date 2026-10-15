@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c48cf606-fb42-4a45-9c23-8f0555307828
 management:
-  docChecksum: 92108b39165950fa16e8dfbf4d3f2266
+  docChecksum: 2820c1ebeee9014a28ca30bf098f8aee
   docVersion: 1.0.0
   speakeasyVersion: 1.787.0
   generationVersion: 2.914.0
-  releaseVersion: 1.3.57
-  configChecksum: bc6d380c803d374425ffd992a616c3dd
+  releaseVersion: 1.3.58
+  configChecksum: 402618c19e749c96b24b99f3da7e25d5
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
 persistentEdits:
-  generation_id: 0d97340d-2f0f-4cb3-9013-a6398e37bc3a
-  pristine_commit_hash: 13762bdb649fcf5de52ca952a649ca2452916431
-  pristine_tree_hash: 4803d134f22a7cc41c19f4800e457809fe242162
+  generation_id: 247f2336-3669-41d1-a973-651801266f68
+  pristine_commit_hash: 7fc1c4d6c4813a5d232f4c7309e34a207afe6106
+  pristine_tree_hash: 4d8a3da59058ebca12b8b2d618a296012352b4f2
 features:
   python:
     acceptHeaders: 3.0.0
@@ -10304,8 +10304,8 @@ trackedFiles:
     pristine_git_object: 7b3c78a7323028a4668d6ce8394c8cdd4c15b67d
   docs/sdks/vault/README.mdx:
     id: 3738c6722acd
-    last_write_checksum: sha1:12acdfed4c2a32488d98b6091fd8c392af516494
-    pristine_git_object: 8d9386c0a3101f823f7509e8d6d1ebb97c8339d0
+    last_write_checksum: sha1:b608fe6954d2fc05d3982c4d071d8818ce68c1d8
+    pristine_git_object: 03052b483039f45f63018432feaa54d255506749
   docs/sdks/videogeneration/README.mdx:
     id: 9a8fa04c3872
     last_write_checksum: sha1:936739fa3beecf2583d22e02baf5186917e466b4
@@ -10320,8 +10320,8 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:f0420b2b06b3cb030d94be2f44bf6b8561c5b843
-    pristine_git_object: 60445589a7cf37d92757b4dc2825ca01d1a2e5fc
+    last_write_checksum: sha1:a86a096de48d48d3e59c20f6f49ef7bd9008c900
+    pristine_git_object: a1e0ff5e66179c29d1e07e0d2fbce8d160d63747
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77f44b60b98bc126557ec27391f91dfba764bb54
@@ -10348,8 +10348,8 @@ trackedFiles:
     pristine_git_object: 86713cfea633e09d33b3d4e65281071fe20e6137
   src/openrouter/_version.py:
     id: d8d15ad6c586
-    last_write_checksum: sha1:29be669907fe2701d7dabdb6a426b453c763617b
-    pristine_git_object: dcb23768aa23470a0e72b9f45ff92c91191c565f
+    last_write_checksum: sha1:640adf20b6b1131f18d77eead235ede40e5aadba
+    pristine_git_object: 01dfa8836269c963c723ea7abb2d21b8e5bae4bf
   src/openrouter/alpha.py:
     id: 306c4d93308d
     last_write_checksum: sha1:30f55a360f41376ab194b9ea725fe4e001a5ae1a
@@ -14808,8 +14808,8 @@ trackedFiles:
     pristine_git_object: dae01a44384ac3bc13ae07453a053bf6c898ebe3
   src/openrouter/vault.py:
     id: 0645fe426ac1
-    last_write_checksum: sha1:3a0daca68628b484130fcfec530820c6dcbde67c
-    pristine_git_object: 7619f073a18d91f4230f51f2a1915598ef4d8a48
+    last_write_checksum: sha1:04d687c1ccb0980e4bab049b684e545d88343a7d
+    pristine_git_object: fbe218be3bd8fec06925de712f3a7fd13babf41d
   src/openrouter/video_generation.py:
     id: d0a90c1b8efe
     last_write_checksum: sha1:e5fc6c816742687bad4a0ae9a9d9232945f04815
@@ -17097,6 +17097,16 @@ examples:
           application/json: {"error": {"code": 503, "message": "Service temporarily unavailable"}}
         "504":
           application/json: {"error": {"code": 504, "message": "The operation was aborted due to timeout"}}
+        "409":
+          application/json: {"error": {"code": 409, "message": "Resource conflict. Please try again later."}}
+    conflict:
+      parameters:
+        path:
+          internId: "7c9e6679-7425-40de-944b-e07fc1f90ae7"
+          name: "github_token"
+      responses:
+        "409":
+          application/json: {"error": {"code": 409, "message": "Vault request conflicts with existing secrets"}}
   storeInternVaultSecret:
     speakeasy-default-store-intern-vault-secret:
       parameters:
@@ -17292,6 +17302,16 @@ examples:
       responses:
         "504":
           application/json: {"error": {"code": 504, "message": "Vault request timed out"}}
+    conflict:
+      parameters:
+        path:
+          internId: "7c9e6679-7425-40de-944b-e07fc1f90ae7"
+          name: "github_token"
+      requestBody:
+        application/json: {"hosts": ["api.github.com"], "value": "ghp_exampleTokenValue"}
+      responses:
+        "409":
+          application/json: {"error": {"code": 409, "message": "Vault request conflicts with existing secrets"}}
   copyVaultSecretsToIntern:
     speakeasy-default-copy-vault-secrets-to-intern:
       parameters:
@@ -17735,6 +17755,15 @@ examples:
           application/json: {"error": {"code": 503, "message": "Service temporarily unavailable"}}
         "504":
           application/json: {"error": {"code": 504, "message": "The operation was aborted due to timeout"}}
+        "409":
+          application/json: {"error": {"code": 409, "message": "Resource conflict. Please try again later."}}
+    conflict:
+      parameters:
+        path:
+          name: "github_token"
+      responses:
+        "409":
+          application/json: {"error": {"code": 409, "message": "Vault request conflicts with existing secrets"}}
   storeVaultSecret:
     speakeasy-default-store-vault-secret:
       parameters:
@@ -17767,6 +17796,8 @@ examples:
           application/json: {"error": {"code": 503, "message": "Service temporarily unavailable"}}
         "504":
           application/json: {"error": {"code": 504, "message": "The operation was aborted due to timeout"}}
+        "409":
+          application/json: {"error": {"code": 409, "message": "Resource conflict. Please try again later."}}
     invalid-vault-request:
       parameters:
         path:
@@ -17902,6 +17933,15 @@ examples:
       responses:
         "504":
           application/json: {"error": {"code": 504, "message": "Vault request timed out"}}
+    conflict:
+      parameters:
+        path:
+          name: "github_token"
+      requestBody:
+        application/json: {"hosts": ["api.github.com"], "value": "ghp_exampleTokenValue"}
+      responses:
+        "409":
+          application/json: {"error": {"code": 409, "message": "Vault request conflicts with existing secrets"}}
   listInterns:
     speakeasy-default-list-interns:
       responses:
@@ -18794,5 +18834,6 @@ examples:
 examplesVersion: 1.0.2
 releaseNotes: |
   ## Python SDK Changes:
-  * `open_router.endpoints.list_zdr_endpoints()`:  `response.data[].service_tier` **Added**
-  * `open_router.endpoints.list()`:  `response.data.endpoints[].service_tier` **Added**
+  * `open_router.vault.delete_intern_vault_secret()`:  `error.status[409]` **Added**
+  * `open_router.vault.delete_vault_secret()`:  `error.status[409]` **Added**
+  * `open_router.vault.store_vault_secret()`:  `error.status[409]` **Added**
