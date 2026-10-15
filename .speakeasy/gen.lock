@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c48cf606-fb42-4a45-9c23-8f0555307828
 management:
-  docChecksum: bebc2e8fea10251aec0323a863417eab
+  docChecksum: b583c5419cb41238eb23ec5310d0eefe
   docVersion: 1.0.0
   speakeasyVersion: 1.787.0
   generationVersion: 2.914.0
-  releaseVersion: 1.3.60
-  configChecksum: eb7c86d6839742b98d33d2a96d8b5013
+  releaseVersion: 1.3.61
+  configChecksum: 4dd10f5236bd68b1856293d2cb4a4868
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
 persistentEdits:
-  generation_id: e6a5b1eb-7359-4fb4-a437-def88295741c
-  pristine_commit_hash: cb90be710af20c8724a347fff8de3e7e0a1a3608
-  pristine_tree_hash: bf3098a3566832138f8cab929b1c28b6c1a88d33
+  generation_id: ec10f6c4-3075-4f20-99cb-79e5bab7166b
+  pristine_commit_hash: 5a1c8675b0c241df8d11fe2652cbf4e200fb407f
+  pristine_tree_hash: eb5353f0e825f9787eaac5885ade5f001a7eaf1e
 features:
   python:
     acceptHeaders: 3.0.0
@@ -7020,8 +7020,8 @@ trackedFiles:
     pristine_git_object: 99478c90d4d43c6e23cbe275f97998502c2378ae
   docs/components/speechinputreferenceimage.mdx:
     id: 8e77f64c57a8
-    last_write_checksum: sha1:586ef478d847509339873a7e5bbc7134d38f1b36
-    pristine_git_object: 068290f70f3496c0a6a3b030ce6f5cb384550fb9
+    last_write_checksum: sha1:dd5d1a3a16e897982592f497fd58402ce739b113
+    pristine_git_object: bf760441b93a155b756ae9fad8f427f315e936ff
   docs/components/speechinputreferenceimageinput.mdx:
     id: 04884f13e007
     last_write_checksum: sha1:fb6443433e5735e00e7264c3dfee8389af295339
@@ -7040,8 +7040,8 @@ trackedFiles:
     pristine_git_object: 34f4f07fb3008df83646fa3d88ce04009274246a
   docs/components/speechrequest.mdx:
     id: 06e81b0433f6
-    last_write_checksum: sha1:c2a048132db0ccec0c3b5b59ab52a78a49e83e29
-    pristine_git_object: e87bc0ab286848af07a53d51097ccdb5088ead6c
+    last_write_checksum: sha1:fce189de411c036986b99d2de21a823dcd91897e
+    pristine_git_object: 036ebce5676497208c225e1110c841a39149a70f
   docs/components/speechrequestdatacollection.mdx:
     id: 6c5938568888
     last_write_checksum: sha1:89a08b4c4de66c1ef7676792a38747e030ed6729
@@ -10304,8 +10304,8 @@ trackedFiles:
     pristine_git_object: 1dd30f0b898f2a842d1bb585b03d887be90e7845
   docs/sdks/tts/README.mdx:
     id: cd1132543884
-    last_write_checksum: sha1:baa3374d9c06310a87893eb14a25511de061f3dc
-    pristine_git_object: 7b3c78a7323028a4668d6ce8394c8cdd4c15b67d
+    last_write_checksum: sha1:b7fb22570df11bee71ef3db33c436b186b23168c
+    pristine_git_object: a8923ec2c634bf0d4e80f553c29d4cc6586afd9a
   docs/sdks/vault/README.mdx:
     id: 3738c6722acd
     last_write_checksum: sha1:b608fe6954d2fc05d3982c4d071d8818ce68c1d8
@@ -10324,8 +10324,8 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:de158115560e39857ddf2f7bd50debf50f14f1f5
-    pristine_git_object: 96d4e82b753bc9dcf61521a131fdc9483f8a7e63
+    last_write_checksum: sha1:0372a5c23dad109dedc50d76356f81bc587827e1
+    pristine_git_object: bb0535ad8d221ad947dcff5bf4a7997adc14ecff
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77f44b60b98bc126557ec27391f91dfba764bb54
@@ -10352,8 +10352,8 @@ trackedFiles:
     pristine_git_object: 86713cfea633e09d33b3d4e65281071fe20e6137
   src/openrouter/_version.py:
     id: d8d15ad6c586
-    last_write_checksum: sha1:466bbdaf1a80e3946d8f91eacf4b29a1866e1c1d
-    pristine_git_object: 2b7810548e159b9920517756e64e486f2ef318e1
+    last_write_checksum: sha1:fc46f0b442635ab1eced7ce2a28fd70d00130946
+    pristine_git_object: c946511615cf4489c6c11bdb7e9108021fcf9146
   src/openrouter/alpha.py:
     id: 306c4d93308d
     last_write_checksum: sha1:30f55a360f41376ab194b9ea725fe4e001a5ae1a
@@ -13368,8 +13368,8 @@ trackedFiles:
     pristine_git_object: 33d35ab0c8d110d9253331c790c4b78b920660f3
   src/openrouter/components/speechinputreferenceimage.py:
     id: 644d542991a7
-    last_write_checksum: sha1:1e9923984145ab1fa0ced2ccccdba8997e2bba11
-    pristine_git_object: 6129f2f1ecb2c8883a1d998e2ac976d54c90ee94
+    last_write_checksum: sha1:c3eb8ac62c419901fffb5fd8534a1183c29060d1
+    pristine_git_object: b3f79479d118b226cd75760be00c9b0ae8d9a6e2
   src/openrouter/components/speechinputreferenceimageinput.py:
     id: 91a49498faa8
     last_write_checksum: sha1:b8f5ae40360a7d96de4128d730b042bcd0d2d8e8
@@ -13380,8 +13380,8 @@ trackedFiles:
     pristine_git_object: 4633e5d7658c500aa903ce8caa8ef86cc97b78eb
   src/openrouter/components/speechrequest.py:
     id: 2a9400167112
-    last_write_checksum: sha1:5bfcf28dde5e94e671165f5919e24b3b9de83853
-    pristine_git_object: ea07e4017cdd9b909f84129e83c0582c7effe10a
+    last_write_checksum: sha1:9bdc4fc5e786c7d8905534390d12969e4c63aaaf
+    pristine_git_object: ebd871980db2bb08535fba69a26993811971d81b
   src/openrouter/components/speechturn.py:
     id: 121e0a940f91
     last_write_checksum: sha1:31bdba00e027b81de8a3872d48e694475cf02e7a
@@ -14720,8 +14720,8 @@ trackedFiles:
     pristine_git_object: 701fa8597ff85f41a60736ade55fcb32f9ec7125
   src/openrouter/tts.py:
     id: 5055d4b95f1d
-    last_write_checksum: sha1:93fae27a87035c17b86c6e5353754c371c9c3faa
-    pristine_git_object: 001335f1dc471131bca2c942ea98c67825c7921f
+    last_write_checksum: sha1:a2b5c587bacc54e9255a15130318926d762b9a8b
+    pristine_git_object: 7f6f87ca20d750478ba987112d95be0550725472
   src/openrouter/types/__init__.py:
     id: 5eab536205b7
     last_write_checksum: sha1:f9ad14217f832e74f594285960125add50324be9
@@ -18836,6 +18836,3 @@ examples:
         "500":
           application/json: {"error": {"code": 404, "message": "Intern not found"}}
 examplesVersion: 1.0.2
-releaseNotes: |
-  ## Python SDK Changes:
-  * `open_router.models.list_for_user()`:  `request.sort` **Added**
