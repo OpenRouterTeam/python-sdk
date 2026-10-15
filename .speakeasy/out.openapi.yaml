@@ -31367,11 +31367,13 @@ components:
           example: 'urn:ietf:params:oauth:token-type:access_token'
           type: 'string'
         scope:
-          description: 'Optional; only `inference` is available.'
+          description: 'Optional; when present must match the policy''s key: `management` for a management key, `inference` otherwise.'
           enum:
             - 'inference'
+            - 'management'
           example: 'inference'
           type: 'string'
+          x-speakeasy-unknown-values: allow
         subject_token:
           description: 'The JWT issued by your identity provider.'
           example: '<jwt from your identity provider>'
@@ -31414,6 +31416,7 @@ components:
           example: 'urn:ietf:params:oauth:token-type:access_token'
           type: 'string'
         scope:
+          description: 'The one capability the token grants, fixed by the kind of key the policy acts as: `inference` or `management`.'
           example: 'inference'
           type: 'string'
         token_type:
