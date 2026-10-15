@@ -857,6 +857,7 @@ if TYPE_CHECKING:
         ListModelsUserResponseTypedDict,
         ListModelsUserSecurity,
         ListModelsUserSecurityTypedDict,
+        ListModelsUserSort,
     )
     from .listoauthjwks import (
         ListOauthJwksGlobals,
@@ -1791,6 +1792,7 @@ __all__ = [
     "ListModelsUserResponseTypedDict",
     "ListModelsUserSecurity",
     "ListModelsUserSecurityTypedDict",
+    "ListModelsUserSort",
     "ListOauthJwksGlobals",
     "ListOauthJwksGlobalsTypedDict",
     "ListOauthJwksRequest",
@@ -2689,6 +2691,7 @@ _dynamic_imports: dict[str, str] = {
     "ListModelsUserResponseTypedDict": ".listmodelsuser",
     "ListModelsUserSecurity": ".listmodelsuser",
     "ListModelsUserSecurityTypedDict": ".listmodelsuser",
+    "ListModelsUserSort": ".listmodelsuser",
     "ListOauthJwksGlobals": ".listoauthjwks",
     "ListOauthJwksGlobalsTypedDict": ".listoauthjwks",
     "ListOauthJwksRequest": ".listoauthjwks",
