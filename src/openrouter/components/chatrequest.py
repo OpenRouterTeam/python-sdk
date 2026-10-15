@@ -237,11 +237,13 @@ ChatRequestServiceTier = Union[
 r"""The service tier to use for processing this request. `fast` is accepted as an alias for `priority`. `ultrafast` prefers ultrafast endpoints and falls back to `priority`, then default endpoints."""
 
 
-StopTypedDict = TypeAliasType("StopTypedDict", Union[str, List[str]])
+ChatRequestStopTypedDict = TypeAliasType(
+    "ChatRequestStopTypedDict", Union[str, List[str]]
+)
 r"""Stop sequences (up to 4)"""
 
 
-Stop = TypeAliasType("Stop", Union[str, List[str]])
+ChatRequestStop = TypeAliasType("ChatRequestStop", Union[str, List[str]])
 r"""Stop sequences (up to 4)"""
 
 
@@ -305,7 +307,7 @@ class ChatRequestTypedDict(TypedDict):
     r"""The service tier to use for processing this request. `fast` is accepted as an alias for `priority`. `ultrafast` prefers ultrafast endpoints and falls back to `priority`, then default endpoints."""
     session_id: NotRequired[str]
     r"""A unique identifier for grouping related requests (e.g., a conversation or agent workflow). When provided, OpenRouter uses it as the sticky routing key, routing all requests in the session to the same provider to maximize prompt cache hits. Also used for observability grouping. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters."""
-    stop: NotRequired[Nullable[StopTypedDict]]
+    stop: NotRequired[Nullable[ChatRequestStopTypedDict]]
     r"""Stop sequences (up to 4)"""
     stop_server_tools_when: NotRequired[List[StopServerToolsWhenConditionTypedDict]]
     r"""Stop conditions for the server-tool agent loop. Any condition firing halts the loop (OR logic). When set, this overrides `max_tool_calls`. When a condition fires while the model is still emitting tool calls, the pending tool calls are executed and one final turn is made with tool calls disabled so the response ends with a natural-language answer instead of an unfinished tool call."""
@@ -422,7 +424,7 @@ class ChatRequest(BaseModel):
     session_id: Optional[str] = None
     r"""A unique identifier for grouping related requests (e.g., a conversation or agent workflow). When provided, OpenRouter uses it as the sticky routing key, routing all requests in the session to the same provider to maximize prompt cache hits. Also used for observability grouping. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters."""
 
-    stop: OptionalNullable[Stop] = UNSET
+    stop: OptionalNullable[ChatRequestStop] = UNSET
     r"""Stop sequences (up to 4)"""
 
     stop_server_tools_when: Optional[List[StopServerToolsWhenCondition]] = None

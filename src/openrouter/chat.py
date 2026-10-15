@@ -100,7 +100,7 @@ class Chat(BaseSDK):
         service_tier: OptionalNullable[components.ChatRequestServiceTier] = UNSET,
         session_id: Optional[str] = None,
         stop: OptionalNullable[
-            Union[components.Stop, components.StopTypedDict]
+            Union[components.ChatRequestStop, components.ChatRequestStopTypedDict]
         ] = UNSET,
         stop_server_tools_when: Optional[
             Union[
@@ -275,7 +275,7 @@ class Chat(BaseSDK):
         service_tier: OptionalNullable[components.ChatRequestServiceTier] = UNSET,
         session_id: Optional[str] = None,
         stop: OptionalNullable[
-            Union[components.Stop, components.StopTypedDict]
+            Union[components.ChatRequestStop, components.ChatRequestStopTypedDict]
         ] = UNSET,
         stop_server_tools_when: Optional[
             Union[
@@ -450,7 +450,7 @@ class Chat(BaseSDK):
         service_tier: OptionalNullable[components.ChatRequestServiceTier] = UNSET,
         session_id: Optional[str] = None,
         stop: OptionalNullable[
-            Union[components.Stop, components.StopTypedDict]
+            Union[components.ChatRequestStop, components.ChatRequestStopTypedDict]
         ] = UNSET,
         stop_server_tools_when: Optional[
             Union[
@@ -626,7 +626,7 @@ class Chat(BaseSDK):
         service_tier: OptionalNullable[components.ChatRequestServiceTier] = UNSET,
         session_id: Optional[str] = None,
         stop: OptionalNullable[
-            Union[components.Stop, components.StopTypedDict]
+            Union[components.ChatRequestStop, components.ChatRequestStopTypedDict]
         ] = UNSET,
         stop_server_tools_when: Optional[
             Union[
@@ -794,7 +794,9 @@ class Chat(BaseSDK):
                 seed=seed,
                 service_tier=service_tier,
                 session_id=session_id,
-                stop=utils.unmarshal(stop, OptionalNullable[components.Stop]),
+                stop=utils.unmarshal(
+                    stop, OptionalNullable[components.ChatRequestStop]
+                ),
                 stop_server_tools_when=utils.get_pydantic_model(
                     stop_server_tools_when,
                     Optional[List[components.StopServerToolsWhenCondition]],
@@ -1091,7 +1093,7 @@ class Chat(BaseSDK):
         service_tier: OptionalNullable[components.ChatRequestServiceTier] = UNSET,
         session_id: Optional[str] = None,
         stop: OptionalNullable[
-            Union[components.Stop, components.StopTypedDict]
+            Union[components.ChatRequestStop, components.ChatRequestStopTypedDict]
         ] = UNSET,
         stop_server_tools_when: Optional[
             Union[
@@ -1266,7 +1268,7 @@ class Chat(BaseSDK):
         service_tier: OptionalNullable[components.ChatRequestServiceTier] = UNSET,
         session_id: Optional[str] = None,
         stop: OptionalNullable[
-            Union[components.Stop, components.StopTypedDict]
+            Union[components.ChatRequestStop, components.ChatRequestStopTypedDict]
         ] = UNSET,
         stop_server_tools_when: Optional[
             Union[
@@ -1441,7 +1443,7 @@ class Chat(BaseSDK):
         service_tier: OptionalNullable[components.ChatRequestServiceTier] = UNSET,
         session_id: Optional[str] = None,
         stop: OptionalNullable[
-            Union[components.Stop, components.StopTypedDict]
+            Union[components.ChatRequestStop, components.ChatRequestStopTypedDict]
         ] = UNSET,
         stop_server_tools_when: Optional[
             Union[
@@ -1618,7 +1620,7 @@ class Chat(BaseSDK):
         service_tier: OptionalNullable[components.ChatRequestServiceTier] = UNSET,
         session_id: Optional[str] = None,
         stop: OptionalNullable[
-            Union[components.Stop, components.StopTypedDict]
+            Union[components.ChatRequestStop, components.ChatRequestStopTypedDict]
         ] = UNSET,
         stop_server_tools_when: Optional[
             Union[
@@ -1787,7 +1789,9 @@ class Chat(BaseSDK):
                 seed=seed,
                 service_tier=service_tier,
                 session_id=session_id,
-                stop=utils.unmarshal(stop, OptionalNullable[components.Stop]),
+                stop=utils.unmarshal(
+                    stop, OptionalNullable[components.ChatRequestStop]
+                ),
                 stop_server_tools_when=utils.get_pydantic_model(
                     stop_server_tools_when,
                     Optional[List[components.StopServerToolsWhenCondition]],
