@@ -6,6 +6,7 @@ from .parameter import Parameter
 from .percentilestats import PercentileStats, PercentileStatsTypedDict
 from .pricingoverride import PricingOverride, PricingOverrideTypedDict
 from .providername import ProviderName
+from .publicservicetier import PublicServiceTier
 from .quantization import Quantization
 from .toolchoicesupport import ToolChoiceSupport, ToolChoiceSupportTypedDict
 from openrouter.types import BaseModel, Nullable, UNSET_SENTINEL
@@ -494,6 +495,8 @@ class PublicEndpointTypedDict(TypedDict):
     pricing: PricingTypedDict
     provider_name: ProviderName
     quantization: Nullable[Quantization]
+    service_tier: Nullable[PublicServiceTier]
+    r"""The service tier this endpoint sells, or null for a standard endpoint. The same value whether the provider selects the tier with a request parameter or with a dedicated model id. Always the canonical tier: priority covers the fast request alias and the turbo, highspeed, and prime provider model-id spellings, none of which this field reports."""
     supported_parameters: List[Parameter]
     supports_diarization: bool
     r"""Whether this STT endpoint can label each transcript segment with a speaker (speaker diarization). False when the endpoint has not declared support."""
@@ -546,6 +549,9 @@ class PublicEndpoint(BaseModel):
     provider_name: ProviderName
 
     quantization: Nullable[Quantization]
+
+    service_tier: Nullable[PublicServiceTier]
+    r"""The service tier this endpoint sells, or null for a standard endpoint. The same value whether the provider selects the tier with a request parameter or with a dedicated model id. Always the canonical tier: priority covers the fast request alias and the turbo, highspeed, and prime provider model-id spellings, none of which this field reports."""
 
     supported_parameters: List[Parameter]
 
@@ -600,6 +606,7 @@ class PublicEndpoint(BaseModel):
                 "max_completion_tokens",
                 "max_prompt_tokens",
                 "quantization",
+                "service_tier",
                 "throughput_last_30m",
                 "uptime_last_1d",
                 "uptime_last_30m",

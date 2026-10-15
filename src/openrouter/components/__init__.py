@@ -3682,6 +3682,7 @@ if TYPE_CHECKING:
         VideoGenerationTypedDict,
     )
     from .publicpricing import PublicPricing, PublicPricingTypedDict
+    from .publicservicetier import PublicServiceTier
     from .quantization import Quantization
     from .rangecapability import (
         RangeCapability,
@@ -7017,6 +7018,7 @@ __all__ = [
     "PublicEndpointTypedDict",
     "PublicPricing",
     "PublicPricingTypedDict",
+    "PublicServiceTier",
     "Purpose",
     "Quantization",
     "Questions",
@@ -10474,6 +10476,7 @@ _dynamic_imports: dict[str, str] = {
     "VideoGenerationTypedDict": ".publicendpoint",
     "PublicPricing": ".publicpricing",
     "PublicPricingTypedDict": ".publicpricing",
+    "PublicServiceTier": ".publicservicetier",
     "Quantization": ".quantization",
     "RangeCapability": ".rangecapability",
     "RangeCapabilityType": ".rangecapability",
