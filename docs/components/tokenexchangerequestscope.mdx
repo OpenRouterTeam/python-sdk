@@ -2,16 +2,21 @@
 title: "TokenExchangeRequestScope"
 ---
 
-Optional; only `inference` is available.
+Optional; when present must match the policy's key: `management` for a management key, `inference` otherwise.
 
 ## Example Usage
 
 ```python
 from openrouter.components import TokenExchangeRequestScope
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
 value: TokenExchangeRequestScope = "inference"
 ```
 
 
 ## Values
 
+This is an open enum. Unrecognized values will not fail type checks.
+
 - `"inference"`
+- `"management"`

@@ -914,7 +914,7 @@ class OAuth(BaseSDK):
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
         :param requested_token_type: Optional; when present must be `urn:ietf:params:oauth:token-type:access_token`.
-        :param scope: Optional; only `inference` is available.
+        :param scope: Optional; when present must match the policy's key: `management` for a management key, `inference` otherwise.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1061,7 +1061,7 @@ class OAuth(BaseSDK):
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
         :param requested_token_type: Optional; when present must be `urn:ietf:params:oauth:token-type:access_token`.
-        :param scope: Optional; only `inference` is available.
+        :param scope: Optional; when present must match the policy's key: `management` for a management key, `inference` otherwise.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds

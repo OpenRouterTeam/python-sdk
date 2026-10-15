@@ -21,6 +21,7 @@ class TokenExchangeResponseTypedDict(TypedDict):
     r"""Seconds until the access token expires: at most 15 minutes, and never later than the subject token expires."""
     issued_token_type: IssuedTokenType
     scope: str
+    r"""The one capability the token grants, fixed by the kind of key the policy acts as: `inference` or `management`."""
     token_type: TokenType
 
 
@@ -36,5 +37,6 @@ class TokenExchangeResponse(BaseModel):
     issued_token_type: IssuedTokenType
 
     scope: str
+    r"""The one capability the token grants, fixed by the kind of key the policy acts as: `inference` or `management`."""
 
     token_type: TokenType
