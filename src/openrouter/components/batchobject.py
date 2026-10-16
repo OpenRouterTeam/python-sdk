@@ -1988,10 +1988,14 @@ class BatchObjectTypedDict(TypedDict):
     created_at: int
     endpoint: str
     error: Nullable[BatchObjectErrorTypedDict]
+    expires_at: Nullable[int]
+    r"""Unix timestamp after which the assigned provider no longer completes unfinished requests. Derived from the provider's documented batch window, so it can exceed `created_at` plus `completion_window` (Google Vertex can take up to 96 hours). `null` when the provider documents no hard expiry."""
     finalized_at: Nullable[int]
     id: str
     model: str
     object: BatchObjectObjectBatch
+    provider: Nullable[str]
+    r"""Provider OpenRouter assigned to run the batch, using the same name as the `provider` field of sync responses."""
     request_counts: BatchObjectRequestCountsTypedDict
     results: Nullable[List[ResultTypedDict]]
     status: BatchObjectStatus
@@ -2007,6 +2011,9 @@ class BatchObject(BaseModel):
 
     error: Nullable[BatchObjectError]
 
+    expires_at: Nullable[int]
+    r"""Unix timestamp after which the assigned provider no longer completes unfinished requests. Derived from the provider's documented batch window, so it can exceed `created_at` plus `completion_window` (Google Vertex can take up to 96 hours). `null` when the provider documents no hard expiry."""
+
     finalized_at: Nullable[int]
 
     id: str
@@ -2014,6 +2021,9 @@ class BatchObject(BaseModel):
     model: str
 
     object: BatchObjectObjectBatch
+
+    provider: Nullable[str]
+    r"""Provider OpenRouter assigned to run the batch, using the same name as the `provider` field of sync responses."""
 
     request_counts: BatchObjectRequestCounts
 

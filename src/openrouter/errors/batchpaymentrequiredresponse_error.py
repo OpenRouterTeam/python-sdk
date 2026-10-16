@@ -18,12 +18,16 @@ class BatchPaymentRequiredResponseErrorData(BaseModel):
     error: (
         components_batchpaymentrequiredresponse_error.BatchPaymentRequiredResponseError
     )
+    expires_at: Nullable[int]
+    r"""Unix timestamp after which the assigned provider no longer completes unfinished requests. Derived from the provider's documented batch window, so it can exceed `created_at` plus `completion_window` (Google Vertex can take up to 96 hours). `null` when the provider documents no hard expiry."""
     finalized_at: Nullable[int]
     id: str
     model: str
     object: (
         components_batchpaymentrequiredresponse_error.BatchPaymentRequiredResponseObject
     )
+    provider: Nullable[str]
+    r"""Provider OpenRouter assigned to run the batch, using the same name as the `provider` field of sync responses."""
     request_counts: components_batchpaymentrequiredresponse_error.BatchPaymentRequiredResponseRequestCounts
     results: Nullable[Any]
     r"""Always null: results are withheld until the batch charge is covered."""
