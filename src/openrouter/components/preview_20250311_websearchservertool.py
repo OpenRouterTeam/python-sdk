@@ -30,7 +30,7 @@ class Preview20250311WebSearchServerToolTypedDict(TypedDict):
 
     type: Preview20250311WebSearchServerToolType
     engine: NotRequired[WebSearchEngineEnum]
-    r"""Which search engine to use. \"auto\" (default) uses native if the provider supports it, otherwise Exa. \"native\" forces the provider's built-in search. \"exa\" forces the Exa search API. \"firecrawl\" uses Firecrawl (requires BYOK). \"parallel\" uses the Parallel search API. \"perplexity\" uses the Perplexity Search API (raw ranked results)."""
+    r"""Which search engine to use. \"auto\" (default) uses native if the provider supports it, otherwise Exa. \"native\" forces the provider's built-in search. \"exa\" forces the Exa search API. \"firecrawl\" uses the Firecrawl search API. \"parallel\" uses the Parallel search API. \"perplexity\" uses the Perplexity Search API (raw ranked results)."""
     filters: NotRequired[Nullable[WebSearchDomainFilterTypedDict]]
     max_results: NotRequired[int]
     r"""Maximum number of search results to return per search call. Defaults to 5. Applies to Exa, Firecrawl, Parallel, and Perplexity engines; ignored with native provider search. Perplexity supports a maximum of 20; values above 20 are clamped."""
@@ -51,7 +51,7 @@ class Preview20250311WebSearchServerTool(BaseModel):
     type: Preview20250311WebSearchServerToolType
 
     engine: Optional[WebSearchEngineEnum] = None
-    r"""Which search engine to use. \"auto\" (default) uses native if the provider supports it, otherwise Exa. \"native\" forces the provider's built-in search. \"exa\" forces the Exa search API. \"firecrawl\" uses Firecrawl (requires BYOK). \"parallel\" uses the Parallel search API. \"perplexity\" uses the Perplexity Search API (raw ranked results)."""
+    r"""Which search engine to use. \"auto\" (default) uses native if the provider supports it, otherwise Exa. \"native\" forces the provider's built-in search. \"exa\" forces the Exa search API. \"firecrawl\" uses the Firecrawl search API. \"parallel\" uses the Parallel search API. \"perplexity\" uses the Perplexity Search API (raw ranked results)."""
 
     filters: OptionalNullable[WebSearchDomainFilter] = UNSET
 

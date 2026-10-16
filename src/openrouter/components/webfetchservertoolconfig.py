@@ -16,7 +16,7 @@ class WebFetchServerToolConfigTypedDict(TypedDict):
     blocked_domains: NotRequired[List[str]]
     r"""Never fetch from these domains."""
     engine: NotRequired[WebFetchEngineEnum]
-    r"""Which fetch engine to use. \"auto\" (default) uses native if the provider supports it, otherwise Exa. \"native\" forces the provider's built-in fetch. \"exa\" uses Exa Contents API. \"openrouter\" uses direct HTTP fetch. \"firecrawl\" uses Firecrawl scrape (requires BYOK). \"parallel\" uses the Parallel extract API."""
+    r"""Which fetch engine to use. \"auto\" (default) uses native if the provider supports it, otherwise Exa. \"native\" forces the provider's built-in fetch. \"exa\" uses Exa Contents API. \"openrouter\" uses direct HTTP fetch. \"firecrawl\" uses Firecrawl scrape. \"parallel\" uses the Parallel extract API."""
     max_content_tokens: NotRequired[int]
     r"""Maximum content length in approximate tokens. Content exceeding this limit is truncated."""
     max_uses: NotRequired[int]
@@ -33,7 +33,7 @@ class WebFetchServerToolConfig(BaseModel):
     r"""Never fetch from these domains."""
 
     engine: Optional[WebFetchEngineEnum] = None
-    r"""Which fetch engine to use. \"auto\" (default) uses native if the provider supports it, otherwise Exa. \"native\" forces the provider's built-in fetch. \"exa\" uses Exa Contents API. \"openrouter\" uses direct HTTP fetch. \"firecrawl\" uses Firecrawl scrape (requires BYOK). \"parallel\" uses the Parallel extract API."""
+    r"""Which fetch engine to use. \"auto\" (default) uses native if the provider supports it, otherwise Exa. \"native\" forces the provider's built-in fetch. \"exa\" uses Exa Contents API. \"openrouter\" uses direct HTTP fetch. \"firecrawl\" uses Firecrawl scrape. \"parallel\" uses the Parallel extract API."""
 
     max_content_tokens: Optional[int] = None
     r"""Maximum content length in approximate tokens. Content exceeding this limit is truncated."""
