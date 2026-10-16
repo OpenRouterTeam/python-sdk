@@ -365,10 +365,14 @@ class BatchListItemTypedDict(TypedDict):
     created_at: int
     endpoint: str
     error: Nullable[BatchListItemErrorTypedDict]
+    expires_at: Nullable[int]
+    r"""Unix timestamp after which the assigned provider no longer completes unfinished requests. Derived from the provider's documented batch window, so it can exceed `created_at` plus `completion_window` (Google Vertex can take up to 96 hours). `null` when the provider documents no hard expiry."""
     finalized_at: Nullable[int]
     id: str
     model: str
     object: BatchListItemObject
+    provider: Nullable[str]
+    r"""Provider OpenRouter assigned to run the batch, using the same name as the `provider` field of sync responses."""
     request_counts: BatchListItemRequestCountsTypedDict
     results: Nullable[Any]
     r"""Always null: retrieve the batch with `GET /batches/{id}` to access its results."""
@@ -387,6 +391,9 @@ class BatchListItem(BaseModel):
 
     error: Nullable[BatchListItemError]
 
+    expires_at: Nullable[int]
+    r"""Unix timestamp after which the assigned provider no longer completes unfinished requests. Derived from the provider's documented batch window, so it can exceed `created_at` plus `completion_window` (Google Vertex can take up to 96 hours). `null` when the provider documents no hard expiry."""
+
     finalized_at: Nullable[int]
 
     id: str
@@ -394,6 +401,9 @@ class BatchListItem(BaseModel):
     model: str
 
     object: BatchListItemObject
+
+    provider: Nullable[str]
+    r"""Provider OpenRouter assigned to run the batch, using the same name as the `provider` field of sync responses."""
 
     request_counts: BatchListItemRequestCounts
 
