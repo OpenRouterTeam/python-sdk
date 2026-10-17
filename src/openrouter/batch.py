@@ -371,6 +371,7 @@ class Batch(BaseSDK):
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
+        callback_url: Optional[str] = None,
         completion_window: Optional[components.BatchSubmitBodyCompletionWindow] = "24h",
         provider: OptionalNullable[
             Union[
@@ -397,6 +398,7 @@ class Batch(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
+        :param callback_url: HTTPS URL that receives a `batch.completed`, `batch.failed`, `batch.cancelled` or `batch.expired` webhook event when the batch reaches a terminal status. Must appear before `requests` in the request body.
         :param completion_window:
         :param provider: Batch provider routing preferences. Only `provider.only` and `provider.allow_fallbacks` are supported.
         :param retries: Override the default retry configuration for this method
@@ -419,6 +421,7 @@ class Batch(BaseSDK):
             x_open_router_title=x_open_router_title,
             x_open_router_categories=x_open_router_categories,
             batch_submit_body=components.BatchSubmitBody(
+                callback_url=callback_url,
                 completion_window=completion_window,
                 endpoint=endpoint,
                 model=model,
@@ -528,6 +531,7 @@ class Batch(BaseSDK):
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
+        callback_url: Optional[str] = None,
         completion_window: Optional[components.BatchSubmitBodyCompletionWindow] = "24h",
         provider: OptionalNullable[
             Union[
@@ -554,6 +558,7 @@ class Batch(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
+        :param callback_url: HTTPS URL that receives a `batch.completed`, `batch.failed`, `batch.cancelled` or `batch.expired` webhook event when the batch reaches a terminal status. Must appear before `requests` in the request body.
         :param completion_window:
         :param provider: Batch provider routing preferences. Only `provider.only` and `provider.allow_fallbacks` are supported.
         :param retries: Override the default retry configuration for this method
@@ -576,6 +581,7 @@ class Batch(BaseSDK):
             x_open_router_title=x_open_router_title,
             x_open_router_categories=x_open_router_categories,
             batch_submit_body=components.BatchSubmitBody(
+                callback_url=callback_url,
                 completion_window=completion_window,
                 endpoint=endpoint,
                 model=model,

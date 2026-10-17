@@ -51,6 +51,8 @@ class BatchSubmitBodyTypedDict(TypedDict):
     endpoint: Endpoint
     model: str
     requests: List[RequestTypedDict]
+    callback_url: NotRequired[str]
+    r"""HTTPS URL that receives a `batch.completed`, `batch.failed`, `batch.cancelled` or `batch.expired` webhook event when the batch reaches a terminal status. Must appear before `requests` in the request body."""
     completion_window: NotRequired[BatchSubmitBodyCompletionWindow]
     provider: NotRequired[Nullable[BatchProviderPreferencesTypedDict]]
     r"""Batch provider routing preferences. Only `provider.only` and `provider.allow_fallbacks` are supported."""
@@ -65,6 +67,9 @@ class BatchSubmitBody(BaseModel):
 
     requests: List[Request]
 
+    callback_url: Optional[str] = None
+    r"""HTTPS URL that receives a `batch.completed`, `batch.failed`, `batch.cancelled` or `batch.expired` webhook event when the batch reaches a terminal status. Must appear before `requests` in the request body."""
+
     completion_window: Optional[BatchSubmitBodyCompletionWindow] = "24h"
 
     provider: OptionalNullable[BatchProviderPreferences] = UNSET
@@ -72,7 +77,7 @@ class BatchSubmitBody(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["completion_window", "provider"])
+        optional_fields = set(["callback_url", "completion_window", "provider"])
         nullable_fields = set(["provider"])
         serialized = handler(self)
         m = {}
