@@ -2944,10 +2944,10 @@ if TYPE_CHECKING:
         ObservabilityWeaveDestinationTypedDict,
     )
     from .observabilitywebhookdestination import (
-        Method,
         ObservabilityWebhookDestination,
         ObservabilityWebhookDestinationConfig,
         ObservabilityWebhookDestinationConfigTypedDict,
+        ObservabilityWebhookDestinationMethod,
         ObservabilityWebhookDestinationType,
         ObservabilityWebhookDestinationTypedDict,
     )
@@ -3956,7 +3956,10 @@ if TYPE_CHECKING:
         ShellServerToolEnvironmentTypedDict,
     )
     from .signinterndaemonrequest import (
+        Route,
+        RouteTypedDict,
         SignInternDaemonRequest,
+        SignInternDaemonRequestMethod,
         SignInternDaemonRequestTypedDict,
     )
     from .signinterndaemonresponse import (
@@ -6346,7 +6349,6 @@ __all__ = [
     "MessagesToolRemovalBlockTypeToolReference",
     "MessagesToolRemovalBlockTypedDict",
     "MetadataLevel",
-    "Method",
     "MismatchBehavior",
     "Modality",
     "Mode",
@@ -6528,6 +6530,7 @@ __all__ = [
     "ObservabilityWebhookDestination",
     "ObservabilityWebhookDestinationConfig",
     "ObservabilityWebhookDestinationConfigTypedDict",
+    "ObservabilityWebhookDestinationMethod",
     "ObservabilityWebhookDestinationType",
     "ObservabilityWebhookDestinationTypedDict",
     "OnError",
@@ -7145,6 +7148,8 @@ __all__ = [
     "ResultError",
     "ResultErrorTypedDict",
     "ResultTypedDict",
+    "Route",
+    "RouteTypedDict",
     "RoutedServiceTier",
     "RouterAttempt",
     "RouterAttemptTypedDict",
@@ -7258,6 +7263,7 @@ __all__ = [
     "ShellServerToolType",
     "ShellServerToolTypedDict",
     "SignInternDaemonRequest",
+    "SignInternDaemonRequestMethod",
     "SignInternDaemonRequestTypedDict",
     "SignInternDaemonResponse",
     "SignInternDaemonResponseTypedDict",
@@ -9925,10 +9931,10 @@ _dynamic_imports: dict[str, str] = {
     "ObservabilityWeaveDestinationConfigTypedDict": ".observabilityweavedestination",
     "ObservabilityWeaveDestinationType": ".observabilityweavedestination",
     "ObservabilityWeaveDestinationTypedDict": ".observabilityweavedestination",
-    "Method": ".observabilitywebhookdestination",
     "ObservabilityWebhookDestination": ".observabilitywebhookdestination",
     "ObservabilityWebhookDestinationConfig": ".observabilitywebhookdestination",
     "ObservabilityWebhookDestinationConfigTypedDict": ".observabilitywebhookdestination",
+    "ObservabilityWebhookDestinationMethod": ".observabilitywebhookdestination",
     "ObservabilityWebhookDestinationType": ".observabilitywebhookdestination",
     "ObservabilityWebhookDestinationTypedDict": ".observabilitywebhookdestination",
     "OpenAIFile": ".openaifile",
@@ -10672,7 +10678,10 @@ _dynamic_imports: dict[str, str] = {
     "ShellServerToolEngine": ".shellservertoolengine",
     "ShellServerToolEnvironment": ".shellservertoolenvironment",
     "ShellServerToolEnvironmentTypedDict": ".shellservertoolenvironment",
+    "Route": ".signinterndaemonrequest",
+    "RouteTypedDict": ".signinterndaemonrequest",
     "SignInternDaemonRequest": ".signinterndaemonrequest",
+    "SignInternDaemonRequestMethod": ".signinterndaemonrequest",
     "SignInternDaemonRequestTypedDict": ".signinterndaemonrequest",
     "SignInternDaemonResponse": ".signinterndaemonresponse",
     "SignInternDaemonResponseTypedDict": ".signinterndaemonresponse",

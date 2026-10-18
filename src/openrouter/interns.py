@@ -1463,7 +1463,7 @@ class Interns(BaseSDK):
     ) -> components.InternDaemonAccess:
         r"""Get an intern's daemon access
 
-        Returns the origin and daemon token that attach `ori tui --host` to one visible, running intern. The token is a credential: the response is sent with `Cache-Control: no-store`, and each reveal is logged by caller and intern. The API key selects the caller, workspace and visible interns. An intern's own API key sees only that intern: the collection and every other intern answer 404 to it. There is no default workspace fallback. Requests on regional hostnames such as `eu.openrouter.ai` are refused. [API key](/docs/api-reference/authentication) required.
+        Returns the origin and daemon token that attach `ori tui --host` to one visible, running intern. The token is a credential: only an OAuth-token caller (`ori login --oidc`) may read it, the response is sent with `Cache-Control: no-store`, and each reveal is logged by caller and intern. API keys get 403 `personal_identity_required`. The API key selects the caller, workspace and visible interns. An intern's own API key sees only that intern: the collection and every other intern answer 404 to it. There is no default workspace fallback. Requests on regional hostnames such as `eu.openrouter.ai` are refused. [API key](/docs/api-reference/authentication) required.
 
         If set, this operation will use `api_key` from the global security.
 
@@ -1591,7 +1591,7 @@ class Interns(BaseSDK):
     ) -> components.InternDaemonAccess:
         r"""Get an intern's daemon access
 
-        Returns the origin and daemon token that attach `ori tui --host` to one visible, running intern. The token is a credential: the response is sent with `Cache-Control: no-store`, and each reveal is logged by caller and intern. The API key selects the caller, workspace and visible interns. An intern's own API key sees only that intern: the collection and every other intern answer 404 to it. There is no default workspace fallback. Requests on regional hostnames such as `eu.openrouter.ai` are refused. [API key](/docs/api-reference/authentication) required.
+        Returns the origin and daemon token that attach `ori tui --host` to one visible, running intern. The token is a credential: only an OAuth-token caller (`ori login --oidc`) may read it, the response is sent with `Cache-Control: no-store`, and each reveal is logged by caller and intern. API keys get 403 `personal_identity_required`. The API key selects the caller, workspace and visible interns. An intern's own API key sees only that intern: the collection and every other intern answer 404 to it. There is no default workspace fallback. Requests on regional hostnames such as `eu.openrouter.ai` are refused. [API key](/docs/api-reference/authentication) required.
 
         If set, this operation will use `api_key` from the global security.
 
@@ -1978,6 +1978,7 @@ class Interns(BaseSDK):
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
+        route: Optional[Union[components.Route, components.RouteTypedDict]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -1998,6 +1999,7 @@ class Interns(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
+        :param route: The daemon request the proof is for. When present the response also carries the single-use, route-bound proof (`x-ori-invoke-signature-v2`, `x-ori-invoke-nonce`).
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -2020,6 +2022,7 @@ class Interns(BaseSDK):
             intern_id=intern_id,
             sign_intern_daemon_request=components.SignInternDaemonRequest(
                 body_sha256=body_sha256,
+                route=utils.get_pydantic_model(route, Optional[components.Route]),
             ),
         )
 
@@ -2133,6 +2136,7 @@ class Interns(BaseSDK):
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
+        route: Optional[Union[components.Route, components.RouteTypedDict]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -2153,6 +2157,7 @@ class Interns(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
+        :param route: The daemon request the proof is for. When present the response also carries the single-use, route-bound proof (`x-ori-invoke-signature-v2`, `x-ori-invoke-nonce`).
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -2175,6 +2180,7 @@ class Interns(BaseSDK):
             intern_id=intern_id,
             sign_intern_daemon_request=components.SignInternDaemonRequest(
                 body_sha256=body_sha256,
+                route=utils.get_pydantic_model(route, Optional[components.Route]),
             ),
         )
 
@@ -2285,6 +2291,7 @@ class Interns(BaseSDK):
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
+        route: Optional[Union[components.Route, components.RouteTypedDict]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -2305,6 +2312,7 @@ class Interns(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
+        :param route: The daemon request the proof is for. When present the response also carries the single-use, route-bound proof (`x-ori-invoke-signature-v2`, `x-ori-invoke-nonce`).
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -2327,6 +2335,7 @@ class Interns(BaseSDK):
             intern_id=intern_id,
             sign_intern_daemon_request=components.SignInternDaemonRequest(
                 body_sha256=body_sha256,
+                route=utils.get_pydantic_model(route, Optional[components.Route]),
             ),
         )
 
@@ -2437,6 +2446,7 @@ class Interns(BaseSDK):
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
+        route: Optional[Union[components.Route, components.RouteTypedDict]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -2457,6 +2467,7 @@ class Interns(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
+        :param route: The daemon request the proof is for. When present the response also carries the single-use, route-bound proof (`x-ori-invoke-signature-v2`, `x-ori-invoke-nonce`).
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -2479,6 +2490,7 @@ class Interns(BaseSDK):
             intern_id=intern_id,
             sign_intern_daemon_request=components.SignInternDaemonRequest(
                 body_sha256=body_sha256,
+                route=utils.get_pydantic_model(route, Optional[components.Route]),
             ),
         )
 

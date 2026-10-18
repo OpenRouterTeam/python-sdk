@@ -12,7 +12,7 @@ from typing import Dict, List, Literal, Optional, Union
 from typing_extensions import NotRequired, TypedDict
 
 
-Method = Union[
+ObservabilityWebhookDestinationMethod = Union[
     Literal[
         "POST",
         "PUT",
@@ -24,7 +24,7 @@ Method = Union[
 class ObservabilityWebhookDestinationConfigTypedDict(TypedDict):
     url: str
     headers: NotRequired[Dict[str, str]]
-    method: NotRequired[Method]
+    method: NotRequired[ObservabilityWebhookDestinationMethod]
 
 
 class ObservabilityWebhookDestinationConfig(BaseModel):
@@ -32,7 +32,7 @@ class ObservabilityWebhookDestinationConfig(BaseModel):
 
     headers: Optional[Dict[str, str]] = None
 
-    method: Optional[Method] = "POST"
+    method: Optional[ObservabilityWebhookDestinationMethod] = "POST"
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
