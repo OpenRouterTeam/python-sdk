@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c48cf606-fb42-4a45-9c23-8f0555307828
 management:
-  docChecksum: 279b5f97d142c9e39e195b0a84085c9d
+  docChecksum: 46c6c4f6880333ed58f4f9fded8834f8
   docVersion: 1.0.0
   speakeasyVersion: 1.787.0
   generationVersion: 2.914.0
-  releaseVersion: 1.3.66
-  configChecksum: d60333aec60c8fc9660768e2c1487354
+  releaseVersion: 1.3.67
+  configChecksum: 6049c763bbae5418007cdd2d3ecac047
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
 persistentEdits:
-  generation_id: 51013c78-9d03-44f4-ac2e-93284b41f297
-  pristine_commit_hash: df1988e5cff6b0b03406873a3986cdaaf8dff042
-  pristine_tree_hash: 1e738a4df36772d51cf0ada4ff040bb3429109b4
+  generation_id: 45d37a74-bf6f-4184-b501-ff3531b9a92e
+  pristine_commit_hash: 0d30fef1c125936e6f7f5b68bc3362a1b867d002
+  pristine_tree_hash: da4f1a85eeb0fdb4b6b2af299b959179eba01144
 features:
   python:
     acceptHeaders: 3.0.0
@@ -3988,8 +3988,8 @@ trackedFiles:
     pristine_git_object: e3e71d16be9294f68ca671f76dbcc8b6d8ecc749
   docs/components/intern.mdx:
     id: 95d0e0ffc539
-    last_write_checksum: sha1:13508092e8edb3ecd4d7aed06dc722965823d4b3
-    pristine_git_object: 71f5da0f992ab9ff76f92b2239cd8300d4a8b74f
+    last_write_checksum: sha1:1efaf0f73cb574f68983fdcf2d02f113876a07bc
+    pristine_git_object: 6959c6067cfe3ab926e62b35ae8bcdb700622478
   docs/components/internalserverresponseerrordata.mdx:
     id: 9a443dea63c5
     last_write_checksum: sha1:39c41704820f6cde2d67ec3b9f1bcac7bc1a81d0
@@ -9130,6 +9130,18 @@ trackedFiles:
     id: 9bfe3e0e8a6f
     last_write_checksum: sha1:7f2d43fe0f91149b2982edebe432faed9bfb3bea
     pristine_git_object: 118bb0d2fe8033480475600b890910226a389d65
+  docs/operations/getinterniconglobals.mdx:
+    id: afca2a95de05
+    last_write_checksum: sha1:ad615e690060f9fd36c21954928dbd711362dc2c
+    pristine_git_object: 542cb475e2a3aa6c1dcba78315b6f03ed662a7b9
+  docs/operations/getinterniconrequest.mdx:
+    id: bbe139c71b51
+    last_write_checksum: sha1:40fb590d80dac97224b8309e80a2984026e39972
+    pristine_git_object: c55add4d062c1129570cb9f69404ae09253d21c6
+  docs/operations/getinterniconresponse.mdx:
+    id: 004f6af691c2
+    last_write_checksum: sha1:7ac81f37402cebd6b37a3126f298dcb26ab5363d
+    pristine_git_object: 24a2ce7247639a56341698fc7b1a4c3809d76d68
   docs/operations/getinternrequest.mdx:
     id: 6e44684f038a
     last_write_checksum: sha1:e3b38672e96405461ef3069043f981eb45730bc1
@@ -10272,8 +10284,8 @@ trackedFiles:
     pristine_git_object: 08c687694efbecf50406ae7929029d39fb121295
   docs/sdks/interns/README.mdx:
     id: 2f8a053ffe78
-    last_write_checksum: sha1:78ad14c524469b4c89d30d0a90867da355bd090d
-    pristine_git_object: a72d409627f77eb58be18f3f8ba3074a135d465a
+    last_write_checksum: sha1:ebe5b0208ea925f4336b1620662fdc116de4e065
+    pristine_git_object: a64bdbacaade03b943c76a4cda4a7a951af27347
   docs/sdks/models/README.mdx:
     id: 58f1ca464e0b
     last_write_checksum: sha1:aab5b254f0a6dc7ab7c6d543b20c889113cc0dc9
@@ -10348,8 +10360,8 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:7337e6a742ddf8c0eace51964400336fa6230295
-    pristine_git_object: 8f7be67ffe7f60cb9210dcf954af115205edf7c6
+    last_write_checksum: sha1:4b196ba22fdb14a708a043966f53fe20ef6be545
+    pristine_git_object: c91f84b40a3a02a828b9a09dd5e4e503879bf386
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77f44b60b98bc126557ec27391f91dfba764bb54
@@ -10376,8 +10388,8 @@ trackedFiles:
     pristine_git_object: 86713cfea633e09d33b3d4e65281071fe20e6137
   src/openrouter/_version.py:
     id: d8d15ad6c586
-    last_write_checksum: sha1:3d286e29d6efe05e4e3008093b349ba5bf9358ed
-    pristine_git_object: a003753cca71e6a74f155937fea572fe184c3172
+    last_write_checksum: sha1:3f8c5a8ac3678a3d9203dbb6379abcb960b2a8b8
+    pristine_git_object: da4c9b94cbdb5a6453e266de393dffb4d48244bd
   src/openrouter/alpha.py:
     id: 306c4d93308d
     last_write_checksum: sha1:30f55a360f41376ab194b9ea725fe4e001a5ae1a
@@ -12120,8 +12132,8 @@ trackedFiles:
     pristine_git_object: 4a58daf7d055e111ebf204b18ee413203f06b745
   src/openrouter/components/intern.py:
     id: eed59a44b44f
-    last_write_checksum: sha1:de3378c82a4f22b53cd7fa6abd7b938e89c80c4f
-    pristine_git_object: 1dd62abe61d64b90bcfa178b73df6ae656f552bc
+    last_write_checksum: sha1:29b7a9aabd31b99bd0d6fb221a3f92e7e0dd9e6e
+    pristine_git_object: 0597b6a695a4b91f0dd5b793ccd5c63c17111f96
   src/openrouter/components/internalserverresponseerrordata.py:
     id: 91397805fa13
     last_write_checksum: sha1:6307236e36dc876dbfae76cfcc29ad49461b5b5d
@@ -14060,8 +14072,8 @@ trackedFiles:
     pristine_git_object: 50643a126668498dd668c7cceb9f78c03d413d32
   src/openrouter/interns.py:
     id: d18df05c5c6d
-    last_write_checksum: sha1:0e26b094dfe3e143d023a778b2c5a9415a5a458f
-    pristine_git_object: 56198d2f56c59f52eed5b35f59d54b5ec1f4247b
+    last_write_checksum: sha1:3fec15dfd9ba8948e454e4f7ed72bc432e50298a
+    pristine_git_object: 19f2e8da8c8b9042c2a0db8e65d67f0419e13ba7
   src/openrouter/models/__init__.py:
     id: ed73b93abb3f
     last_write_checksum: sha1:932a790ae66ccd7d7022b39c659bcf72a664ebea
@@ -14088,8 +14100,8 @@ trackedFiles:
     pristine_git_object: f01a5ab1865b16939c092d854fe8a7145c327058
   src/openrouter/operations/__init__.py:
     id: 9afcea1e7161
-    last_write_checksum: sha1:4a40155b5857c17e8c8aaf072175bc2227f7769f
-    pristine_git_object: 3f4ec274171a7e3f68a07190b66f48b055a5985c
+    last_write_checksum: sha1:146b043847d9ecac862a002d90d355036100a2c5
+    pristine_git_object: 265b76bdc1d266256302e03b6e6130b46e2b76cb
   src/openrouter/operations/activateprivateendpoint.py:
     id: 3b39eec5d66f
     last_write_checksum: sha1:9406e6b3d38c82895fd795f637702ef579cc6d36
@@ -14366,6 +14378,10 @@ trackedFiles:
     id: 30c4fbbddd94
     last_write_checksum: sha1:c9a4991c38d8588d2f272710f24fa430975d4fab
     pristine_git_object: 6632fbbbe4e59918369b70cf2a365880f2d315d6
+  src/openrouter/operations/getinternicon.py:
+    id: 2d450ce18c27
+    last_write_checksum: sha1:3a38094aaf42a84d058a7b79dfd07b4de54af134
+    pristine_git_object: 77a979126ab6dcc56b5536d3b295191c2589103c
   src/openrouter/operations/getkey.py:
     id: d9769da90865
     last_write_checksum: sha1:63a27034e350b578b6d5f29d6568111bc14c75c1
@@ -18989,5 +19005,24 @@ examples:
       responses:
         "504":
           application/json: {"error": {"code": 504, "message": "Vault request timed out"}}
+  getInternIcon:
+    speakeasy-default-get-intern-icon:
+      parameters:
+        path:
+          internId: "7c9e6679-7425-40de-944b-e07fc1f90ae7"
+      responses:
+        "200":
+          image/jpeg: "x-file: example.file"
+          image/png: "x-file: example.file"
+        "401":
+          application/json: {"error": {"code": 404, "message": "Intern not found"}}
+        "500":
+          application/json: {"error": {"code": 404, "message": "Intern not found"}}
 examplesVersion: 1.0.2
-releaseNotes: "## Python SDK Changes:\n* `open_router.interns.sign_intern_daemon_access_request()`: \n  *  `request.route` **Added**\n  *  `response` **Changed**\n* `open_router.interns.sign_intern_daemon_request()`: \n  *  `request.route` **Added**\n  *  `response` **Changed**\n"
+releaseNotes: |
+  ## Python SDK Changes:
+  * `open_router.interns.get_intern_icon()`: **Added**
+  * `open_router.interns.list_interns()`:  `response.data[]` **Changed**
+  * `open_router.interns.create_intern()`:  `response` **Changed**
+  * `open_router.interns.get_intern()`:  `response` **Changed**
+  * `open_router.interns.update_intern()`:  `response` **Changed**
