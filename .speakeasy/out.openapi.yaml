@@ -6959,6 +6959,7 @@ components:
         - 'open-inference'
         - 'openai'
         - 'parasail'
+        - 'pareto-alpha'
         - 'perceptron'
         - 'perplexity'
         - 'phala'
@@ -18670,6 +18671,7 @@ components:
                 - 'OpenAI'
                 - 'OpenInference'
                 - 'Parasail'
+                - 'ParetoAlpha'
                 - 'Poolside'
                 - 'PrimeIntellect'
                 - 'Perceptron'
@@ -26587,6 +26589,7 @@ components:
         - 'OpenAI'
         - 'OpenInference'
         - 'Parasail'
+        - 'ParetoAlpha'
         - 'Poolside'
         - 'PrimeIntellect'
         - 'Perceptron'
@@ -26930,6 +26933,9 @@ components:
           additionalProperties: {}
           type: 'object'
         parasail:
+          additionalProperties: {}
+          type: 'object'
+        pareto-alpha:
           additionalProperties: {}
           type: 'object'
         perceptron:
@@ -27369,6 +27375,7 @@ components:
             - 'OpenAI'
             - 'OpenInference'
             - 'Parasail'
+            - 'ParetoAlpha'
             - 'Poolside'
             - 'PrimeIntellect'
             - 'Perceptron'
@@ -36921,6 +36928,7 @@ paths:
               - 'open-inference'
               - 'openai'
               - 'parasail'
+              - 'pareto-alpha'
               - 'perceptron'
               - 'perplexity'
               - 'phala'
