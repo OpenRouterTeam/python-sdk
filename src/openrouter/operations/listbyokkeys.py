@@ -162,6 +162,7 @@ Provider = Union[
         "open-inference",
         "openai",
         "parasail",
+        "pareto-alpha",
         "perceptron",
         "perplexity",
         "phala",

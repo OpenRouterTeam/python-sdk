@@ -140,6 +140,7 @@ class ImageGenerationProviderPreferencesOptionsTypedDict(TypedDict):
     open_inference: NotRequired[Dict[str, Any]]
     openai: NotRequired[Dict[str, Any]]
     parasail: NotRequired[Dict[str, Any]]
+    pareto_alpha: NotRequired[Dict[str, Any]]
     perceptron: NotRequired[Dict[str, Any]]
     perplexity: NotRequired[Dict[str, Any]]
     phala: NotRequired[Dict[str, Any]]
@@ -429,6 +430,10 @@ class ImageGenerationProviderPreferencesOptions(BaseModel):
 
     parasail: Optional[Dict[str, Any]] = None
 
+    pareto_alpha: Annotated[
+        Optional[Dict[str, Any]], pydantic.Field(alias="pareto-alpha")
+    ] = None
+
     perceptron: Optional[Dict[str, Any]] = None
 
     perplexity: Optional[Dict[str, Any]] = None
@@ -637,6 +642,7 @@ class ImageGenerationProviderPreferencesOptions(BaseModel):
                 "open-inference",
                 "openai",
                 "parasail",
+                "pareto-alpha",
                 "perceptron",
                 "perplexity",
                 "phala",
