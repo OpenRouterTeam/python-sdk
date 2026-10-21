@@ -1,0 +1,22 @@
+---
+title: "OffReason"
+---
+
+`switched_off` for this intern, `disabled` for the whole workspace; null while on.
+
+## Example Usage
+
+```python
+from openrouter.components import OffReason
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
+value: OffReason = "switched_off"
+```
+
+
+## Values
+
+This is an open enum. Unrecognized values will not fail type checks.
+
+- `"switched_off"`
+- `"disabled"`

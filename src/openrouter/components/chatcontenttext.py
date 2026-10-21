@@ -29,7 +29,7 @@ class ChatContentTextTypedDict(TypedDict):
     cache_control: NotRequired[ChatContentCacheControlTypedDict]
     r"""Anthropic-style cache breakpoint for the content part. Interchangeable with the OpenAI-style `prompt_cache_breakpoint` marker: OpenRouter converts between the two based on the provider serving the request."""
     prompt_cache_breakpoint: NotRequired[Nullable[PromptCacheBreakpointTypedDict]]
-    r"""Marks an explicit prompt-cache boundary on this content block (OpenAI-style). Everything through the block carrying this marker is part of the candidate cached prefix. Supported natively by OpenAI GPT-5.6 and newer; on providers that use Anthropic-style `cache_control`, OpenRouter converts the marker to that format automatically."""
+    r"""Marks an explicit prompt-cache boundary on this content block (OpenAI-style). Everything through the block carrying this marker is part of the candidate cached prefix. Supported natively by OpenAI GPT-5.6 and newer; on providers that use Anthropic-style `cache_control`, OpenRouter converts the marker to that format automatically. `ttl` (\"30m\" or \"12h\") overrides the request-level `prompt_cache_options.ttl` for this boundary; 12h writes bill at the higher cache-write rate."""
 
 
 class ChatContentText(BaseModel):
@@ -43,7 +43,7 @@ class ChatContentText(BaseModel):
     r"""Anthropic-style cache breakpoint for the content part. Interchangeable with the OpenAI-style `prompt_cache_breakpoint` marker: OpenRouter converts between the two based on the provider serving the request."""
 
     prompt_cache_breakpoint: OptionalNullable[PromptCacheBreakpoint] = UNSET
-    r"""Marks an explicit prompt-cache boundary on this content block (OpenAI-style). Everything through the block carrying this marker is part of the candidate cached prefix. Supported natively by OpenAI GPT-5.6 and newer; on providers that use Anthropic-style `cache_control`, OpenRouter converts the marker to that format automatically."""
+    r"""Marks an explicit prompt-cache boundary on this content block (OpenAI-style). Everything through the block carrying this marker is part of the candidate cached prefix. Supported natively by OpenAI GPT-5.6 and newer; on providers that use Anthropic-style `cache_control`, OpenRouter converts the marker to that format automatically. `ttl` (\"30m\" or \"12h\") overrides the request-level `prompt_cache_options.ttl` for this boundary; 12h writes bill at the higher cache-write rate."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
