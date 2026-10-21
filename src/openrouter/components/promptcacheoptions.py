@@ -17,14 +17,14 @@ PromptCacheOptionsMode = Literal["explicit",]
 
 
 class PromptCacheOptionsTypedDict(TypedDict):
-    r"""Request-level prompt-cache controls. `mode: \"explicit\"` disables OpenAI-managed breakpoints so only blocks marked with `prompt_cache_breakpoint` are cached. Only supported by OpenAI GPT-5.6 and newer."""
+    r"""Request-level prompt-cache controls. `mode: \"explicit\"` disables OpenAI-managed breakpoints so only blocks marked with `prompt_cache_breakpoint` are cached. `ttl` sets the minimum cache lifetime for every breakpoint the request writes: \"30m\" (default) or \"12h\" (billed at the higher 12h cache-write rate). Only supported by OpenAI GPT-5.6 and newer."""
 
     mode: PromptCacheOptionsMode
     ttl: NotRequired[Nullable[str]]
 
 
 class PromptCacheOptions(BaseModel):
-    r"""Request-level prompt-cache controls. `mode: \"explicit\"` disables OpenAI-managed breakpoints so only blocks marked with `prompt_cache_breakpoint` are cached. Only supported by OpenAI GPT-5.6 and newer."""
+    r"""Request-level prompt-cache controls. `mode: \"explicit\"` disables OpenAI-managed breakpoints so only blocks marked with `prompt_cache_breakpoint` are cached. `ttl` sets the minimum cache lifetime for every breakpoint the request writes: \"30m\" (default) or \"12h\" (billed at the higher 12h cache-write rate). Only supported by OpenAI GPT-5.6 and newer."""
 
     mode: PromptCacheOptionsMode
 

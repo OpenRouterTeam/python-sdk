@@ -85,6 +85,8 @@ class InternTypedDict(TypedDict):
     r"""Vault the intern owns, or null before it has been created."""
     workspace_id: str
     r"""Workspace that owns the intern and scopes its secrets."""
+    can_edit: NotRequired[bool]
+    r"""Whether this key may change the intern (update, provision, suspend, delete). Present on list and retrieve; false while lifecycle writes are closed for the account."""
     created_by_you: NotRequired[bool]
     r"""Whether the user behind the key created the intern. Present on list and retrieve; absent for organization keys, which act for no user."""
     icon_sha256: NotRequired[Nullable[str]]
@@ -136,6 +138,9 @@ class Intern(BaseModel):
     workspace_id: str
     r"""Workspace that owns the intern and scopes its secrets."""
 
+    can_edit: Optional[bool] = None
+    r"""Whether this key may change the intern (update, provision, suspend, delete). Present on list and retrieve; false while lifecycle writes are closed for the account."""
+
     created_by_you: Optional[bool] = None
     r"""Whether the user behind the key created the intern. Present on list and retrieve; absent for organization keys, which act for no user."""
 
@@ -144,7 +149,7 @@ class Intern(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["created_by_you", "icon_sha256"])
+        optional_fields = set(["can_edit", "created_by_you", "icon_sha256"])
         nullable_fields = set(
             [
                 "attached_vault_id",

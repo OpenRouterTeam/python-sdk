@@ -169,7 +169,7 @@ class BetaResponses(BaseSDK):
         :param previous_response_id: Not supported on this proxy. Each response request is independent: no responses are stored, so a previous response cannot be referenced. Requests with a non-null value are rejected with a 400 error. Send the full conversation history in `input` instead.
         :param prompt:
         :param prompt_cache_key:
-        :param prompt_cache_options: Request-level prompt-cache controls. `mode: \"explicit\"` disables OpenAI-managed breakpoints so only blocks marked with `prompt_cache_breakpoint` are cached. Only supported by OpenAI GPT-5.6 and newer.
+        :param prompt_cache_options: Request-level prompt-cache controls. `mode: \"explicit\"` disables OpenAI-managed breakpoints so only blocks marked with `prompt_cache_breakpoint` are cached. `ttl` sets the minimum cache lifetime for every breakpoint the request writes: \"30m\" (default) or \"12h\" (billed at the higher 12h cache-write rate). Only supported by OpenAI GPT-5.6 and newer.
         :param provider: When multiple model providers are available, optionally indicate your routing preference.
         :param reasoning: Configuration for reasoning mode in the response
         :param safety_identifier: Recommended per-end-user identifier for abuse isolation. Use a stable ID, hash, or pseudonym. When a provider requires a user identity, OpenRouter folds it into the hashed identity sent upstream and never forwards it raw. If omitted, requests use an account-level identity, so provider policy blocks can affect the whole account.
@@ -341,7 +341,7 @@ class BetaResponses(BaseSDK):
         :param previous_response_id: Not supported on this proxy. Each response request is independent: no responses are stored, so a previous response cannot be referenced. Requests with a non-null value are rejected with a 400 error. Send the full conversation history in `input` instead.
         :param prompt:
         :param prompt_cache_key:
-        :param prompt_cache_options: Request-level prompt-cache controls. `mode: \"explicit\"` disables OpenAI-managed breakpoints so only blocks marked with `prompt_cache_breakpoint` are cached. Only supported by OpenAI GPT-5.6 and newer.
+        :param prompt_cache_options: Request-level prompt-cache controls. `mode: \"explicit\"` disables OpenAI-managed breakpoints so only blocks marked with `prompt_cache_breakpoint` are cached. `ttl` sets the minimum cache lifetime for every breakpoint the request writes: \"30m\" (default) or \"12h\" (billed at the higher 12h cache-write rate). Only supported by OpenAI GPT-5.6 and newer.
         :param provider: When multiple model providers are available, optionally indicate your routing preference.
         :param reasoning: Configuration for reasoning mode in the response
         :param safety_identifier: Recommended per-end-user identifier for abuse isolation. Use a stable ID, hash, or pseudonym. When a provider requires a user identity, OpenRouter folds it into the hashed identity sent upstream and never forwards it raw. If omitted, requests use an account-level identity, so provider policy blocks can affect the whole account.
@@ -516,7 +516,7 @@ class BetaResponses(BaseSDK):
         :param previous_response_id: Not supported on this proxy. Each response request is independent: no responses are stored, so a previous response cannot be referenced. Requests with a non-null value are rejected with a 400 error. Send the full conversation history in `input` instead.
         :param prompt:
         :param prompt_cache_key:
-        :param prompt_cache_options: Request-level prompt-cache controls. `mode: \"explicit\"` disables OpenAI-managed breakpoints so only blocks marked with `prompt_cache_breakpoint` are cached. Only supported by OpenAI GPT-5.6 and newer.
+        :param prompt_cache_options: Request-level prompt-cache controls. `mode: \"explicit\"` disables OpenAI-managed breakpoints so only blocks marked with `prompt_cache_breakpoint` are cached. `ttl` sets the minimum cache lifetime for every breakpoint the request writes: \"30m\" (default) or \"12h\" (billed at the higher 12h cache-write rate). Only supported by OpenAI GPT-5.6 and newer.
         :param provider: When multiple model providers are available, optionally indicate your routing preference.
         :param reasoning: Configuration for reasoning mode in the response
         :param safety_identifier: Recommended per-end-user identifier for abuse isolation. Use a stable ID, hash, or pseudonym. When a provider requires a user identity, OpenRouter folds it into the hashed identity sent upstream and never forwards it raw. If omitted, requests use an account-level identity, so provider policy blocks can affect the whole account.
@@ -690,7 +690,7 @@ class BetaResponses(BaseSDK):
         :param previous_response_id: Not supported on this proxy. Each response request is independent: no responses are stored, so a previous response cannot be referenced. Requests with a non-null value are rejected with a 400 error. Send the full conversation history in `input` instead.
         :param prompt:
         :param prompt_cache_key:
-        :param prompt_cache_options: Request-level prompt-cache controls. `mode: \"explicit\"` disables OpenAI-managed breakpoints so only blocks marked with `prompt_cache_breakpoint` are cached. Only supported by OpenAI GPT-5.6 and newer.
+        :param prompt_cache_options: Request-level prompt-cache controls. `mode: \"explicit\"` disables OpenAI-managed breakpoints so only blocks marked with `prompt_cache_breakpoint` are cached. `ttl` sets the minimum cache lifetime for every breakpoint the request writes: \"30m\" (default) or \"12h\" (billed at the higher 12h cache-write rate). Only supported by OpenAI GPT-5.6 and newer.
         :param provider: When multiple model providers are available, optionally indicate your routing preference.
         :param reasoning: Configuration for reasoning mode in the response
         :param safety_identifier: Recommended per-end-user identifier for abuse isolation. Use a stable ID, hash, or pseudonym. When a provider requires a user identity, OpenRouter folds it into the hashed identity sent upstream and never forwards it raw. If omitted, requests use an account-level identity, so provider policy blocks can affect the whole account.
@@ -1150,7 +1150,7 @@ class BetaResponses(BaseSDK):
         :param previous_response_id: Not supported on this proxy. Each response request is independent: no responses are stored, so a previous response cannot be referenced. Requests with a non-null value are rejected with a 400 error. Send the full conversation history in `input` instead.
         :param prompt:
         :param prompt_cache_key:
-        :param prompt_cache_options: Request-level prompt-cache controls. `mode: \"explicit\"` disables OpenAI-managed breakpoints so only blocks marked with `prompt_cache_breakpoint` are cached. Only supported by OpenAI GPT-5.6 and newer.
+        :param prompt_cache_options: Request-level prompt-cache controls. `mode: \"explicit\"` disables OpenAI-managed breakpoints so only blocks marked with `prompt_cache_breakpoint` are cached. `ttl` sets the minimum cache lifetime for every breakpoint the request writes: \"30m\" (default) or \"12h\" (billed at the higher 12h cache-write rate). Only supported by OpenAI GPT-5.6 and newer.
         :param provider: When multiple model providers are available, optionally indicate your routing preference.
         :param reasoning: Configuration for reasoning mode in the response
         :param safety_identifier: Recommended per-end-user identifier for abuse isolation. Use a stable ID, hash, or pseudonym. When a provider requires a user identity, OpenRouter folds it into the hashed identity sent upstream and never forwards it raw. If omitted, requests use an account-level identity, so provider policy blocks can affect the whole account.
@@ -1322,7 +1322,7 @@ class BetaResponses(BaseSDK):
         :param previous_response_id: Not supported on this proxy. Each response request is independent: no responses are stored, so a previous response cannot be referenced. Requests with a non-null value are rejected with a 400 error. Send the full conversation history in `input` instead.
         :param prompt:
         :param prompt_cache_key:
-        :param prompt_cache_options: Request-level prompt-cache controls. `mode: \"explicit\"` disables OpenAI-managed breakpoints so only blocks marked with `prompt_cache_breakpoint` are cached. Only supported by OpenAI GPT-5.6 and newer.
+        :param prompt_cache_options: Request-level prompt-cache controls. `mode: \"explicit\"` disables OpenAI-managed breakpoints so only blocks marked with `prompt_cache_breakpoint` are cached. `ttl` sets the minimum cache lifetime for every breakpoint the request writes: \"30m\" (default) or \"12h\" (billed at the higher 12h cache-write rate). Only supported by OpenAI GPT-5.6 and newer.
         :param provider: When multiple model providers are available, optionally indicate your routing preference.
         :param reasoning: Configuration for reasoning mode in the response
         :param safety_identifier: Recommended per-end-user identifier for abuse isolation. Use a stable ID, hash, or pseudonym. When a provider requires a user identity, OpenRouter folds it into the hashed identity sent upstream and never forwards it raw. If omitted, requests use an account-level identity, so provider policy blocks can affect the whole account.
@@ -1497,7 +1497,7 @@ class BetaResponses(BaseSDK):
         :param previous_response_id: Not supported on this proxy. Each response request is independent: no responses are stored, so a previous response cannot be referenced. Requests with a non-null value are rejected with a 400 error. Send the full conversation history in `input` instead.
         :param prompt:
         :param prompt_cache_key:
-        :param prompt_cache_options: Request-level prompt-cache controls. `mode: \"explicit\"` disables OpenAI-managed breakpoints so only blocks marked with `prompt_cache_breakpoint` are cached. Only supported by OpenAI GPT-5.6 and newer.
+        :param prompt_cache_options: Request-level prompt-cache controls. `mode: \"explicit\"` disables OpenAI-managed breakpoints so only blocks marked with `prompt_cache_breakpoint` are cached. `ttl` sets the minimum cache lifetime for every breakpoint the request writes: \"30m\" (default) or \"12h\" (billed at the higher 12h cache-write rate). Only supported by OpenAI GPT-5.6 and newer.
         :param provider: When multiple model providers are available, optionally indicate your routing preference.
         :param reasoning: Configuration for reasoning mode in the response
         :param safety_identifier: Recommended per-end-user identifier for abuse isolation. Use a stable ID, hash, or pseudonym. When a provider requires a user identity, OpenRouter folds it into the hashed identity sent upstream and never forwards it raw. If omitted, requests use an account-level identity, so provider policy blocks can affect the whole account.
@@ -1671,7 +1671,7 @@ class BetaResponses(BaseSDK):
         :param previous_response_id: Not supported on this proxy. Each response request is independent: no responses are stored, so a previous response cannot be referenced. Requests with a non-null value are rejected with a 400 error. Send the full conversation history in `input` instead.
         :param prompt:
         :param prompt_cache_key:
-        :param prompt_cache_options: Request-level prompt-cache controls. `mode: \"explicit\"` disables OpenAI-managed breakpoints so only blocks marked with `prompt_cache_breakpoint` are cached. Only supported by OpenAI GPT-5.6 and newer.
+        :param prompt_cache_options: Request-level prompt-cache controls. `mode: \"explicit\"` disables OpenAI-managed breakpoints so only blocks marked with `prompt_cache_breakpoint` are cached. `ttl` sets the minimum cache lifetime for every breakpoint the request writes: \"30m\" (default) or \"12h\" (billed at the higher 12h cache-write rate). Only supported by OpenAI GPT-5.6 and newer.
         :param provider: When multiple model providers are available, optionally indicate your routing preference.
         :param reasoning: Configuration for reasoning mode in the response
         :param safety_identifier: Recommended per-end-user identifier for abuse isolation. Use a stable ID, hash, or pseudonym. When a provider requires a user identity, OpenRouter folds it into the hashed identity sent upstream and never forwards it raw. If omitted, requests use an account-level identity, so provider policy blocks can affect the whole account.

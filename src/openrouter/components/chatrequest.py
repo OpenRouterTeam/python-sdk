@@ -290,7 +290,7 @@ class ChatRequestTypedDict(TypedDict):
     r"""Presence penalty (-2.0 to 2.0)"""
     prompt_cache_key: NotRequired[Nullable[str]]
     prompt_cache_options: NotRequired[Nullable[PromptCacheOptionsTypedDict]]
-    r"""Request-level prompt-cache controls. `mode: \"explicit\"` disables OpenAI-managed breakpoints so only blocks marked with `prompt_cache_breakpoint` are cached. Only supported by OpenAI GPT-5.6 and newer."""
+    r"""Request-level prompt-cache controls. `mode: \"explicit\"` disables OpenAI-managed breakpoints so only blocks marked with `prompt_cache_breakpoint` are cached. `ttl` sets the minimum cache lifetime for every breakpoint the request writes: \"30m\" (default) or \"12h\" (billed at the higher 12h cache-write rate). Only supported by OpenAI GPT-5.6 and newer."""
     provider: NotRequired[Nullable[ProviderPreferencesTypedDict]]
     r"""When multiple model providers are available, optionally indicate your routing preference."""
     reasoning: NotRequired[ChatRequestReasoningTypedDict]
@@ -398,7 +398,7 @@ class ChatRequest(BaseModel):
     prompt_cache_key: OptionalNullable[str] = UNSET
 
     prompt_cache_options: OptionalNullable[PromptCacheOptions] = UNSET
-    r"""Request-level prompt-cache controls. `mode: \"explicit\"` disables OpenAI-managed breakpoints so only blocks marked with `prompt_cache_breakpoint` are cached. Only supported by OpenAI GPT-5.6 and newer."""
+    r"""Request-level prompt-cache controls. `mode: \"explicit\"` disables OpenAI-managed breakpoints so only blocks marked with `prompt_cache_breakpoint` are cached. `ttl` sets the minimum cache lifetime for every breakpoint the request writes: \"30m\" (default) or \"12h\" (billed at the higher 12h cache-write rate). Only supported by OpenAI GPT-5.6 and newer."""
 
     provider: OptionalNullable[ProviderPreferences] = UNSET
     r"""When multiple model providers are available, optionally indicate your routing preference."""
