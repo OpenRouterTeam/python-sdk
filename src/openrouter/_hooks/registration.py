@@ -1,3 +1,5 @@
+import os
+
 import httpx
 
 from openrouter import components
@@ -17,9 +19,9 @@ class BlankAPIKeyIsUnsetHook(SDKInitHook, BeforeRequestHook):
     instead of sending an empty `Bearer ` token.
 
     The env var is read per request and a callable `api_key` is resolved per
-    request, so either can still yield a blank token after init; any
-    `Authorization` header whose bearer token is blank is dropped before the
-    request is sent.
+    request, so either can still yield a blank token after init; a blank
+    bearer token is replaced with `OPENROUTER_API_KEY` when that is set, and
+    otherwise the `Authorization` header is dropped.
     """
 
     def sdk_init(self, config: SDKConfiguration) -> SDKConfiguration:
@@ -37,7 +39,11 @@ class BlankAPIKeyIsUnsetHook(SDKInitHook, BeforeRequestHook):
         if auth is not None:
             scheme, _, token = auth.strip().partition(" ")
             if not auth.strip() or (scheme.lower() == "bearer" and not token.strip()):
-                del request.headers["authorization"]
+                env_key = (os.getenv("OPENROUTER_API_KEY") or "").strip()
+                if env_key:
+                    request.headers["authorization"] = f"Bearer {env_key}"
+                else:
+                    del request.headers["authorization"]
         return request
 
 
