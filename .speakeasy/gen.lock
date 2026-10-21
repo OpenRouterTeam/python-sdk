@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c48cf606-fb42-4a45-9c23-8f0555307828
 management:
-  docChecksum: 962707eb96a4d2b9c17b756299627b23
+  docChecksum: 530e507dc8ae98ab1d9d250bd8df3267
   docVersion: 1.0.0
   speakeasyVersion: 1.787.0
   generationVersion: 2.914.0
-  releaseVersion: 1.3.74
-  configChecksum: 1b387da02ff1e98430c790560c0616e1
+  releaseVersion: 1.3.75
+  configChecksum: fa2d3e3e8ff7cb847c45bd96c2496266
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
 persistentEdits:
-  generation_id: ec171076-f548-4156-8675-96a2d0fefa12
-  pristine_commit_hash: ceeae56c572cb0d48e636ae994dec6c2f70005d2
-  pristine_tree_hash: 0dad5897b92badaa2d6f366f95801630e52c3112
+  generation_id: 8dc59c19-6805-4fb2-a280-052b0932fa6b
+  pristine_commit_hash: 199721a5e4af31e3facab416ad9f109efa5236c9
+  pristine_tree_hash: af34e13179f1510cb204dee71dc0d93bbca2a9d0
 features:
   python:
     acceptHeaders: 3.0.0
@@ -10320,8 +10320,8 @@ trackedFiles:
     pristine_git_object: bc1a56cbb41c8f9114c81b547713632272184da6
   docs/sdks/guardrails/README.mdx:
     id: a0cd4218b8fa
-    last_write_checksum: sha1:e67795373d937768a569398179833cd25926bddd
-    pristine_git_object: ed0b2775e57904a66e9f92a8c51d18b56132623b
+    last_write_checksum: sha1:8a7bd8b43337d429726ac461e248aca8100b54cf
+    pristine_git_object: b5af7242eb24d0be26f7fcc82aaec22a93582670
   docs/sdks/images/README.mdx:
     id: 534a6c102c4f
     last_write_checksum: sha1:82a8bd22fb399fe419076afe29b9234950baf9f9
@@ -10396,16 +10396,16 @@ trackedFiles:
     pristine_git_object: c6f3d77733d92e9e6eb35b47ce50a0d86a7dabd1
   docs/sdks/workspaces/README.mdx:
     id: 0c75d023ef6b
-    last_write_checksum: sha1:e0506418eaabc2839b16e1cdc5d963dd689226bf
-    pristine_git_object: bf6f0de6a33d64b453e558c8023931513ac367f0
+    last_write_checksum: sha1:f3545d9f653301164e9420f787f953a0d33276f8
+    pristine_git_object: 79227bd2226ff5849825be491e43a0740f651f0e
   py.typed:
     id: 258c3ed47ae4
     last_write_checksum: sha1:8efc425ffe830805ffcc0f3055871bdcdc542c60
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:e82047c72604287f404579e9006f41e0e2695b35
-    pristine_git_object: 941d5d762455d1f323e44042bcd9943ebeb43d37
+    last_write_checksum: sha1:6efbe8012929953cbfe3ef45a7e9dfef81773d3e
+    pristine_git_object: ef5a2370facf15716afbfacbf3b67358a61b5eef
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77f44b60b98bc126557ec27391f91dfba764bb54
@@ -10432,8 +10432,8 @@ trackedFiles:
     pristine_git_object: 86713cfea633e09d33b3d4e65281071fe20e6137
   src/openrouter/_version.py:
     id: d8d15ad6c586
-    last_write_checksum: sha1:d704d78dc4c4ece2565c4faf249666baaac9d418
-    pristine_git_object: 656de700f6fb360b7344f6db1e13dfd630148585
+    last_write_checksum: sha1:e8829ec24f1122d5a13243e2e17d5e40dd1473c7
+    pristine_git_object: 514a818c783227265031fe29197d5038f2d2ce2a
   src/openrouter/alpha.py:
     id: 306c4d93308d
     last_write_checksum: sha1:30f55a360f41376ab194b9ea725fe4e001a5ae1a
@@ -14112,8 +14112,8 @@ trackedFiles:
     pristine_git_object: 5698c384a36929846530cae98f69ce83a0966217
   src/openrouter/guardrails.py:
     id: 705839f34e66
-    last_write_checksum: sha1:48c20d189c3531928c774bef03b14bc9040e105c
-    pristine_git_object: 434ea641f79989998fbe92131686d5be0ed9a072
+    last_write_checksum: sha1:156c955e4e751a229100a3261e297d2898b5d089
+    pristine_git_object: fac2d71e27a14bbe4a40fd194e7b1fe38d0a558c
   src/openrouter/httpclient.py:
     id: e9311185443d
     last_write_checksum: sha1:5e55338d6ee9f01ab648cad4380201a8a3da7dd7
@@ -14920,8 +14920,8 @@ trackedFiles:
     pristine_git_object: aeec4401e4a6aafc46fc574f06d9696a3b8170d3
   src/openrouter/workspaces.py:
     id: cd6c533b1802
-    last_write_checksum: sha1:7db1e53c7cca6241c73765d584904150ef13c28c
-    pristine_git_object: 7237e212353b6db8a55d654e64a8e0e18b934110
+    last_write_checksum: sha1:68af669c94b28b0a42648c30e72ebf55802a5da6
+    pristine_git_object: 64c2c9d42bd115cc5087bfb75c3178028888fb98
 examples:
   createResponses:
     speakeasy-default-create-responses:
@@ -15329,6 +15329,8 @@ examples:
           application/json: {"error": {"code": 500, "message": "Internal Server Error"}}
         "400":
           application/json: {"error": {"code": 400, "message": "Invalid request parameters"}}
+        "403":
+          application/json: {"error": {"code": 403, "message": "Only management keys can perform this operation"}}
   createGuardrail:
     speakeasy-default-create-guardrail:
       requestBody:
@@ -15358,6 +15360,8 @@ examples:
           application/json: {"error": {"code": 404, "message": "Resource not found"}}
         "500":
           application/json: {"error": {"code": 500, "message": "Internal Server Error"}}
+        "403":
+          application/json: {"error": {"code": 403, "message": "Only management keys can perform this operation"}}
   updateGuardrail:
     speakeasy-default-update-guardrail:
       parameters:
@@ -15394,6 +15398,8 @@ examples:
           application/json: {"error": {"code": 404, "message": "Resource not found"}}
         "500":
           application/json: {"error": {"code": 500, "message": "Internal Server Error"}}
+        "403":
+          application/json: {"error": {"code": 403, "message": "Only management keys can perform this operation"}}
   listKeyAssignments:
     speakeasy-default-list-key-assignments:
       parameters:
@@ -15411,6 +15417,8 @@ examples:
           application/json: {"error": {"code": 400, "message": "Invalid request parameters"}}
         "404":
           application/json: {"error": {"code": 404, "message": "Resource not found"}}
+        "403":
+          application/json: {"error": {"code": 403, "message": "Only management keys can perform this operation"}}
   listMemberAssignments:
     speakeasy-default-list-member-assignments:
       parameters:
@@ -15428,6 +15436,8 @@ examples:
           application/json: {"error": {"code": 400, "message": "Invalid request parameters"}}
         "404":
           application/json: {"error": {"code": 404, "message": "Resource not found"}}
+        "403":
+          application/json: {"error": {"code": 403, "message": "Only management keys can perform this operation"}}
   listGuardrailKeyAssignments:
     speakeasy-default-list-guardrail-key-assignments:
       parameters:
@@ -15445,6 +15455,8 @@ examples:
           application/json: {"error": {"code": 404, "message": "Resource not found"}}
         "500":
           application/json: {"error": {"code": 500, "message": "Internal Server Error"}}
+        "403":
+          application/json: {"error": {"code": 403, "message": "Only management keys can perform this operation"}}
   bulkAssignKeysToGuardrail:
     speakeasy-default-bulk-assign-keys-to-guardrail:
       parameters:
@@ -15482,6 +15494,8 @@ examples:
           application/json: {"error": {"code": 404, "message": "Resource not found"}}
         "500":
           application/json: {"error": {"code": 500, "message": "Internal Server Error"}}
+        "403":
+          application/json: {"error": {"code": 403, "message": "Only management keys can perform this operation"}}
   bulkAssignMembersToGuardrail:
     speakeasy-default-bulk-assign-members-to-guardrail:
       parameters:
@@ -15500,6 +15514,8 @@ examples:
           application/json: {"error": {"code": 404, "message": "Resource not found"}}
         "500":
           application/json: {"error": {"code": 500, "message": "Internal Server Error"}}
+        "403":
+          application/json: {"error": {"code": 403, "message": "Only management keys can perform this operation"}}
   bulkUnassignKeysFromGuardrail:
     speakeasy-default-bulk-unassign-keys-from-guardrail:
       parameters:
@@ -15518,6 +15534,8 @@ examples:
           application/json: {"error": {"code": 404, "message": "Resource not found"}}
         "500":
           application/json: {"error": {"code": 500, "message": "Internal Server Error"}}
+        "403":
+          application/json: {"error": {"code": 403, "message": "Only management keys can perform this operation"}}
   bulkUnassignMembersFromGuardrail:
     speakeasy-default-bulk-unassign-members-from-guardrail:
       parameters:
@@ -15536,6 +15554,8 @@ examples:
           application/json: {"error": {"code": 404, "message": "Resource not found"}}
         "500":
           application/json: {"error": {"code": 500, "message": "Internal Server Error"}}
+        "403":
+          application/json: {"error": {"code": 403, "message": "Only management keys can perform this operation"}}
   exchangeAuthCodeForAPIKey:
     speakeasy-default-exchange-auth-code-for-API-key:
       requestBody:
@@ -16183,6 +16203,8 @@ examples:
           application/json: {"error": {"code": 401, "message": "Missing Authentication header"}}
         "500":
           application/json: {"error": {"code": 500, "message": "Internal Server Error"}}
+        "403":
+          application/json: {"error": {"code": 403, "message": "Only management keys can perform this operation"}}
   createWorkspace:
     speakeasy-default-create-workspace:
       requestBody:
@@ -16230,6 +16252,8 @@ examples:
           application/json: {"error": {"code": 404, "message": "Resource not found"}}
         "500":
           application/json: {"error": {"code": 500, "message": "Internal Server Error"}}
+        "403":
+          application/json: {"error": {"code": 403, "message": "Only management keys can perform this operation"}}
   updateWorkspace:
     speakeasy-default-update-workspace:
       parameters:
@@ -16465,6 +16489,8 @@ examples:
           application/json: {"error": {"code": 404, "message": "Resource not found"}}
         "500":
           application/json: {"error": {"code": 500, "message": "Internal Server Error"}}
+        "403":
+          application/json: {"error": {"code": 403, "message": "Only management keys can perform this operation"}}
   deleteWorkspaceBudget:
     speakeasy-default-delete-workspace-budget:
       parameters:
@@ -16483,6 +16509,8 @@ examples:
           application/json: {"error": {"code": 500, "message": "Internal Server Error"}}
         "400":
           application/json: {"error": {"code": 400, "message": "Invalid request parameters"}}
+        "403":
+          application/json: {"error": {"code": 403, "message": "Only management keys can perform this operation"}}
   upsertWorkspaceBudget:
     speakeasy-default-upsert-workspace-budget:
       parameters:
@@ -16503,6 +16531,8 @@ examples:
           application/json: {"error": {"code": 404, "message": "Resource not found"}}
         "500":
           application/json: {"error": {"code": 500, "message": "Internal Server Error"}}
+        "403":
+          application/json: {"error": {"code": 403, "message": "Only management keys can perform this operation"}}
   getBenchmarks:
     speakeasy-default-get-benchmarks:
       parameters:
@@ -16735,6 +16765,8 @@ examples:
           application/json: {"error": {"code": 404, "message": "Resource not found"}}
         "500":
           application/json: {"error": {"code": 500, "message": "Internal Server Error"}}
+        "403":
+          application/json: {"error": {"code": 403, "message": "Only management keys can perform this operation"}}
   getSessionCost:
     speakeasy-default-get-session-cost:
       parameters:
@@ -19179,8 +19211,19 @@ examples:
 examplesVersion: 1.0.2
 releaseNotes: |
   ## Python SDK Changes:
-  * `open_router.interns.get_intern_daemon()`:  `response.viewer` **Added**
-  * `open_router.interns.get_intern_daemon_access()`:  `response.viewer` **Added**
-  * `open_router.organization.list_members()`:  `error.status[403]` **Added**
-  * `open_router.organization.get_settings()`:  `error.status[403]` **Added**
-  * `open_router.organization.update_settings()`:  `error.status[403]` **Added**
+  * `open_router.guardrails.list()`:  `error.status[403]` **Added**
+  * `open_router.guardrails.delete()`:  `error.status[403]` **Added**
+  * `open_router.guardrails.get()`:  `error.status[403]` **Added**
+  * `open_router.guardrails.list_guardrail_key_assignments()`:  `error.status[403]` **Added**
+  * `open_router.guardrails.bulk_unassign_keys()`:  `error.status[403]` **Added**
+  * `open_router.guardrails.list_guardrail_member_assignments()`:  `error.status[403]` **Added**
+  * `open_router.guardrails.bulk_assign_members()`:  `error.status[403]` **Added**
+  * `open_router.guardrails.bulk_unassign_members()`:  `error.status[403]` **Added**
+  * `open_router.guardrails.list_key_assignments()`:  `error.status[403]` **Added**
+  * `open_router.guardrails.list_member_assignments()`:  `error.status[403]` **Added**
+  * `open_router.workspaces.list()`:  `error.status[403]` **Added**
+  * `open_router.workspaces.get()`:  `error.status[403]` **Added**
+  * `open_router.workspaces.list_budgets()`:  `error.status[403]` **Added**
+  * `open_router.workspaces.delete_budget()`:  `error.status[403]` **Added**
+  * `open_router.workspaces.get_budget()`:  `error.status[403]` **Added**
+  * `open_router.workspaces.set_budget()`:  `error.status[403]` **Added**
