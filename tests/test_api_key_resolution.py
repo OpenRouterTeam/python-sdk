@@ -39,8 +39,9 @@ def test_blank_api_key_and_blank_env_var_sends_no_authorization(
     assert _authorization_header(api_key="") is None
 
 
-def test_blank_callable_api_key_falls_back_to_env_var(monkeypatch):
-    monkeypatch.setenv("OPENROUTER_API_KEY", "from-env")
+@pytest.mark.parametrize("env_value", ["from-env", "Bearer from-env"])
+def test_blank_callable_api_key_falls_back_to_env_var(monkeypatch, env_value):
+    monkeypatch.setenv("OPENROUTER_API_KEY", env_value)
     assert _authorization_header(api_key=lambda: "") == "Bearer from-env"
 
 

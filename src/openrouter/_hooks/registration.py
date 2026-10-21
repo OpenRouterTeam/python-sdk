@@ -40,6 +40,9 @@ class BlankAPIKeyIsUnsetHook(SDKInitHook, BeforeRequestHook):
             scheme, _, token = auth.strip().partition(" ")
             if not auth.strip() or (scheme.lower() == "bearer" and not token.strip()):
                 env_key = (os.getenv("OPENROUTER_API_KEY") or "").strip()
+                env_scheme, _, env_token = env_key.partition(" ")
+                if env_scheme.lower() == "bearer":
+                    env_key = env_token.strip()
                 if env_key:
                     request.headers["authorization"] = f"Bearer {env_key}"
                 else:
