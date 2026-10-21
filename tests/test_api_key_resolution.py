@@ -31,6 +31,14 @@ def test_blank_api_key_without_env_var_sends_no_authorization(monkeypatch):
     assert _authorization_header(api_key="") is None
 
 
+@pytest.mark.parametrize("env_value", ["", "   "])
+def test_blank_api_key_and_blank_env_var_sends_no_authorization(
+    monkeypatch, env_value
+):
+    monkeypatch.setenv("OPENROUTER_API_KEY", env_value)
+    assert _authorization_header(api_key="") is None
+
+
 def test_explicit_api_key_wins_over_env_var(monkeypatch):
     monkeypatch.setenv("OPENROUTER_API_KEY", "from-env")
     assert _authorization_header(api_key="explicit") == "Bearer explicit"
