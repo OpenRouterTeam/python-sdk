@@ -2,22 +2,17 @@
 
 from __future__ import annotations
 from openrouter.components import (
-    updateenduserrequest as components_updateenduserrequest,
+    createexternaluserrequest as components_createexternaluserrequest,
 )
 from openrouter.types import BaseModel, UNSET_SENTINEL
-from openrouter.utils import (
-    FieldMetadata,
-    HeaderMetadata,
-    PathParamMetadata,
-    RequestMetadata,
-)
+from openrouter.utils import FieldMetadata, HeaderMetadata, RequestMetadata
 import pydantic
 from pydantic import model_serializer
 from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-class UpdateEndUserGlobalsTypedDict(TypedDict):
+class CreateExternalUserGlobalsTypedDict(TypedDict):
     http_referer: NotRequired[str]
     r"""The app identifier should be your app's URL and is used as the primary identifier for rankings.
     This is used to track API usage per application.
@@ -33,7 +28,7 @@ class UpdateEndUserGlobalsTypedDict(TypedDict):
     """
 
 
-class UpdateEndUserGlobals(BaseModel):
+class CreateExternalUserGlobals(BaseModel):
     http_referer: Annotated[
         Optional[str],
         pydantic.Field(alias="HTTP-Referer"),
@@ -81,11 +76,9 @@ class UpdateEndUserGlobals(BaseModel):
         return m
 
 
-class UpdateEndUserRequestTypedDict(TypedDict):
-    user: str
-    r"""Immutable case-sensitive tracking string supplied as user on inference requests or as external.user on API keys: 1 to 512 characters, well-formed Unicode, no NUL, no surrounding whitespace. URL-encode it in resource paths; an ID of `.` or `..` cannot be addressed by path, so look it up with the list filter."""
-    update_end_user_request: (
-        components_updateenduserrequest.UpdateEndUserRequestTypedDict
+class CreateExternalUserRequestTypedDict(TypedDict):
+    create_external_user_request: (
+        components_createexternaluserrequest.CreateExternalUserRequestTypedDict
     )
     http_referer: NotRequired[str]
     r"""The app identifier should be your app's URL and is used as the primary identifier for rankings.
@@ -102,14 +95,9 @@ class UpdateEndUserRequestTypedDict(TypedDict):
     """
 
 
-class UpdateEndUserRequest(BaseModel):
-    user: Annotated[
-        str, FieldMetadata(path=PathParamMetadata(style="simple", explode=False))
-    ]
-    r"""Immutable case-sensitive tracking string supplied as user on inference requests or as external.user on API keys: 1 to 512 characters, well-formed Unicode, no NUL, no surrounding whitespace. URL-encode it in resource paths; an ID of `.` or `..` cannot be addressed by path, so look it up with the list filter."""
-
-    update_end_user_request: Annotated[
-        components_updateenduserrequest.UpdateEndUserRequest,
+class CreateExternalUserRequest(BaseModel):
+    create_external_user_request: Annotated[
+        components_createexternaluserrequest.CreateExternalUserRequest,
         FieldMetadata(request=RequestMetadata(media_type="application/json")),
     ]
 

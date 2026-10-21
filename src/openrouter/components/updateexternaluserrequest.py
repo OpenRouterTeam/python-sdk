@@ -5,11 +5,11 @@ from openrouter.types import BaseModel
 from typing_extensions import TypedDict
 
 
-class UpdateEndUserRequestTypedDict(TypedDict):
+class UpdateExternalUserRequestTypedDict(TypedDict):
     is_active: bool
     r"""Registration state only; does not enforce inference access."""
 
 
-class UpdateEndUserRequest(BaseModel):
+class UpdateExternalUserRequest(BaseModel):
     is_active: bool
     r"""Registration state only; does not enforce inference access."""

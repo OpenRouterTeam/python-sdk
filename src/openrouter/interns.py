@@ -2,6 +2,7 @@
 
 from .basesdk import BaseSDK
 from enum import Enum
+import httpx
 from openrouter import components, errors, operations, utils
 from openrouter._hooks import HookContext
 from openrouter.types import OptionalNullable, UNSET
@@ -9,11 +10,6 @@ from openrouter.utils import eventstreaming, get_security_from_env
 from openrouter.utils.unmarshal_json_response import unmarshal_json_response
 from typing import Any, Iterable, List, Mapping, Optional, Union
 from typing_extensions import deprecated
-
-
-class GetInternIconAcceptEnum(str, Enum):
-    IMAGE_JPEG = "image/jpeg"
-    IMAGE_PNG = "image/png"
 
 
 class ChatAcceptEnum(str, Enum):
@@ -2608,10 +2604,9 @@ class Interns(BaseSDK):
         v: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
-        accept_header_override: Optional[GetInternIconAcceptEnum] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> operations.GetInternIconResponse:
+    ) -> httpx.Response:
         r"""Get an intern's icon
 
         Returns the icon image of one visible intern. Pass the intern's `icon_sha256` as `v` to receive a response that can be cached indefinitely. The API key selects the caller, workspace and visible interns. An intern's own API key sees only that intern: the collection and every other intern answer 404 to it. There is no default workspace fallback. Requests on regional hostnames such as `eu.openrouter.ai` are refused. [API key](/docs/api-reference/authentication) required.
@@ -2630,7 +2625,6 @@ class Interns(BaseSDK):
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
-        :param accept_header_override: Override the default accept header for this method
         :param http_headers: Additional headers to set or replace on requests.
         """
         base_url = None
@@ -2661,9 +2655,7 @@ class Interns(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value=accept_header_override.value
-            if accept_header_override is not None
-            else "image/jpeg;q=1, image/png;q=0",
+            accept_header_value="image/*",
             http_headers=http_headers,
             _globals=operations.GetInternIconGlobals(
                 http_referer=self.sdk_configuration.globals.http_referer,
@@ -2707,9 +2699,7 @@ class Interns(BaseSDK):
         )
 
         response_data: Any = None
-        if utils.match_response(http_res, "200", "image/jpeg"):
-            return http_res
-        if utils.match_response(http_res, "200", "image/png"):
+        if utils.match_response(http_res, "200", "image/*"):
             return http_res
         if utils.match_response(
             http_res, ["401", "403", "404", "408"], "application/json"
@@ -2751,10 +2741,9 @@ class Interns(BaseSDK):
         v: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
-        accept_header_override: Optional[GetInternIconAcceptEnum] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> operations.GetInternIconResponse:
+    ) -> httpx.Response:
         r"""Get an intern's icon
 
         Returns the icon image of one visible intern. Pass the intern's `icon_sha256` as `v` to receive a response that can be cached indefinitely. The API key selects the caller, workspace and visible interns. An intern's own API key sees only that intern: the collection and every other intern answer 404 to it. There is no default workspace fallback. Requests on regional hostnames such as `eu.openrouter.ai` are refused. [API key](/docs/api-reference/authentication) required.
@@ -2773,7 +2762,6 @@ class Interns(BaseSDK):
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
-        :param accept_header_override: Override the default accept header for this method
         :param http_headers: Additional headers to set or replace on requests.
         """
         base_url = None
@@ -2804,9 +2792,7 @@ class Interns(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value=accept_header_override.value
-            if accept_header_override is not None
-            else "image/jpeg;q=1, image/png;q=0",
+            accept_header_value="image/*",
             http_headers=http_headers,
             _globals=operations.GetInternIconGlobals(
                 http_referer=self.sdk_configuration.globals.http_referer,
@@ -2850,9 +2836,7 @@ class Interns(BaseSDK):
         )
 
         response_data: Any = None
-        if utils.match_response(http_res, "200", "image/jpeg"):
-            return http_res
-        if utils.match_response(http_res, "200", "image/png"):
+        if utils.match_response(http_res, "200", "image/*"):
             return http_res
         if utils.match_response(
             http_res, ["401", "403", "404", "408"], "application/json"
