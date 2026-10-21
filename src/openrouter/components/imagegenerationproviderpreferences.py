@@ -149,6 +149,7 @@ class ImageGenerationProviderPreferencesOptionsTypedDict(TypedDict):
     quiver: NotRequired[Dict[str, Any]]
     recraft: NotRequired[Dict[str, Any]]
     recursal: NotRequired[Dict[str, Any]]
+    recursive: NotRequired[Dict[str, Any]]
     reflection: NotRequired[Dict[str, Any]]
     reka: NotRequired[Dict[str, Any]]
     relace: NotRequired[Dict[str, Any]]
@@ -450,6 +451,8 @@ class ImageGenerationProviderPreferencesOptions(BaseModel):
 
     recursal: Optional[Dict[str, Any]] = None
 
+    recursive: Optional[Dict[str, Any]] = None
+
     reflection: Optional[Dict[str, Any]] = None
 
     reka: Optional[Dict[str, Any]] = None
@@ -651,6 +654,7 @@ class ImageGenerationProviderPreferencesOptions(BaseModel):
                 "quiver",
                 "recraft",
                 "recursal",
+                "recursive",
                 "reflection",
                 "reka",
                 "relace",

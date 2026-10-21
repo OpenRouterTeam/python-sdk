@@ -170,6 +170,7 @@ Provider = Union[
         "primeintellect",
         "quiver",
         "recraft",
+        "recursive",
         "reka",
         "relace",
         "respan",

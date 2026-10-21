@@ -122,6 +122,7 @@ ProviderResponseProviderName = Union[
         "Perplexity",
         "Phala",
         "Recraft",
+        "Recursive",
         "Reka",
         "Relace",
         "Respan",
