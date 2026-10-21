@@ -3480,3 +3480,13 @@ Based on:
 - [python v1.3.71] .
 ### Releases
 - [PyPI v1.3.71] https://pypi.org/project/openrouter/1.3.71 - .
+
+## 2026-10-21 16:17:46
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.787.0 (2.914.0) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [python v1.3.72] .
+### Releases
+- [PyPI v1.3.72] https://pypi.org/project/openrouter/1.3.72 - .
