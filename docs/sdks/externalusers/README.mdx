@@ -1,19 +1,16 @@
 ---
-title: "EndUsers"
-description: "End Users endpoints"
+title: "ExternalUsers"
 ---
 
 ## Overview
 
-End Users endpoints
-
 ### Available Operations
 
-* [list](#list) - List registered end users
-* [create](#create) - Register an end user
-* [delete](#delete) - Deactivate a registered end user
-* [get](#get) - Get a registered end user
-* [update](#update) - Update a registered end user
+* [list](#list) - List registered external users
+* [create](#create) - Register an external user
+* [delete](#delete) - Deactivate a registered external user
+* [get](#get) - Get a registered external user
+* [update](#update) - Update a registered external user
 
 ## list
 
@@ -33,7 +30,7 @@ with OpenRouter(
     api_key=os.getenv("OPENROUTER_API_KEY", ""),
 ) as open_router:
 
-    res = open_router.end_users.list(offset=0, limit=50, include_inactive=False)
+    res = open_router.external_users.list(offset=0, limit=50, include_inactive=False)
 
     while res is not None:
         # Handle items
@@ -57,7 +54,7 @@ with OpenRouter(
 
 ### Response
 
-**[operations.ListEndUsersResponse](../../operations/listendusersresponse.mdx)**
+**[operations.ListExternalUsersResponse](../../operations/listexternalusersresponse.mdx)**
 
 ### Errors
 
@@ -87,7 +84,7 @@ with OpenRouter(
     api_key=os.getenv("OPENROUTER_API_KEY", ""),
 ) as open_router:
 
-    res = open_router.end_users.create(user="employee_123")
+    res = open_router.external_users.create(user="employee_123")
 
     # Handle response
     print(res)
@@ -106,7 +103,7 @@ with OpenRouter(
 
 ### Response
 
-**[components.EndUserResponse](../../components/enduserresponse.mdx)**
+**[components.ExternalUserResponse](../../components/externaluserresponse.mdx)**
 
 ### Errors
 
@@ -137,7 +134,7 @@ with OpenRouter(
     api_key=os.getenv("OPENROUTER_API_KEY", ""),
 ) as open_router:
 
-    open_router.end_users.delete(user="employee_123")
+    open_router.external_users.delete(user="employee_123")
 
     # Use the SDK ...
 
@@ -181,7 +178,7 @@ with OpenRouter(
     api_key=os.getenv("OPENROUTER_API_KEY", ""),
 ) as open_router:
 
-    res = open_router.end_users.get(user="employee_123")
+    res = open_router.external_users.get(user="employee_123")
 
     # Handle response
     print(res)
@@ -200,7 +197,7 @@ with OpenRouter(
 
 ### Response
 
-**[components.EndUserResponse](../../components/enduserresponse.mdx)**
+**[components.ExternalUserResponse](../../components/externaluserresponse.mdx)**
 
 ### Errors
 
@@ -230,7 +227,7 @@ with OpenRouter(
     api_key=os.getenv("OPENROUTER_API_KEY", ""),
 ) as open_router:
 
-    res = open_router.end_users.update(user="employee_123", is_active=True)
+    res = open_router.external_users.update(user="employee_123", is_active=True)
 
     # Handle response
     print(res)
@@ -250,7 +247,7 @@ with OpenRouter(
 
 ### Response
 
-**[components.EndUserResponse](../../components/enduserresponse.mdx)**
+**[components.ExternalUserResponse](../../components/externaluserresponse.mdx)**
 
 ### Errors
 

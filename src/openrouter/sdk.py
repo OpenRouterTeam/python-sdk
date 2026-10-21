@@ -29,8 +29,8 @@ if TYPE_CHECKING:
     from openrouter.credits import Credits
     from openrouter.datasets import Datasets
     from openrouter.embeddings import Embeddings
-    from openrouter.end_users import EndUsers
     from openrouter.endpoints import Endpoints
+    from openrouter.externalusers import ExternalUsers
     from openrouter.files import Files
     from openrouter.generations import Generations
     from openrouter.guardrails import Guardrails
@@ -86,10 +86,9 @@ class OpenRouter(BaseSDK):
     r"""Public OpenRouter usage datasets. Data returned by these endpoints is licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/): reuse and republish it, including commercially, with attribution to OpenRouter."""
     embeddings: "Embeddings"
     r"""Text embedding endpoints"""
-    end_users: "EndUsers"
-    r"""End Users endpoints"""
     endpoints: "Endpoints"
     r"""Endpoint information"""
+    external_users: "ExternalUsers"
     files: "Files"
     r"""Files endpoints"""
     generations: "Generations"
@@ -146,8 +145,8 @@ class OpenRouter(BaseSDK):
         "credits": ("openrouter.credits", "Credits"),
         "datasets": ("openrouter.datasets", "Datasets"),
         "embeddings": ("openrouter.embeddings", "Embeddings"),
-        "end_users": ("openrouter.end_users", "EndUsers"),
         "endpoints": ("openrouter.endpoints", "Endpoints"),
+        "external_users": ("openrouter.externalusers", "ExternalUsers"),
         "files": ("openrouter.files", "Files"),
         "generations": ("openrouter.generations", "Generations"),
         "guardrails": ("openrouter.guardrails", "Guardrails"),

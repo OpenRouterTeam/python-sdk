@@ -10,9 +10,7 @@ from openrouter.utils.unmarshal_json_response import unmarshal_json_response
 from typing import Any, Awaitable, Dict, List, Mapping, Optional, Union
 
 
-class EndUsers(BaseSDK):
-    r"""End Users endpoints"""
-
+class ExternalUsers(BaseSDK):
     def list(
         self,
         *,
@@ -27,8 +25,8 @@ class EndUsers(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> Optional[operations.ListEndUsersResponse]:
-        r"""List registered end users
+    ) -> Optional[operations.ListExternalUsersResponse]:
+        r"""List registered external users
 
         List registrations belonging to the authenticated organization. Inactive registrations are excluded by default. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
@@ -58,7 +56,7 @@ class EndUsers(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = operations.ListEndUsersRequest(
+        request = operations.ListExternalUsersRequest(
             http_referer=http_referer,
             x_open_router_title=x_open_router_title,
             x_open_router_categories=x_open_router_categories,
@@ -70,7 +68,7 @@ class EndUsers(BaseSDK):
 
         req = self._build_request(
             method="GET",
-            path="/end-users",
+            path="/external-users",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -80,7 +78,7 @@ class EndUsers(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            _globals=operations.ListEndUsersGlobals(
+            _globals=operations.ListExternalUsersGlobals(
                 http_referer=self.sdk_configuration.globals.http_referer,
                 x_open_router_title=self.sdk_configuration.globals.x_open_router_title,
                 x_open_router_categories=self.sdk_configuration.globals.x_open_router_categories,
@@ -106,12 +104,12 @@ class EndUsers(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="listEndUsers",
+                operation_id="listExternalUsers",
                 oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
-                tags=["End Users"],
+                tags=["External Users"],
                 extensions=None,
             ),
             request=req,
@@ -119,7 +117,7 @@ class EndUsers(BaseSDK):
             retry_config=retry_config,
         )
 
-        def next_func() -> Optional[operations.ListEndUsersResponse]:
+        def next_func() -> Optional[operations.ListExternalUsersResponse]:
             body = utils.unmarshal_json(http_res.text, Union[Dict[Any, Any], List[Any]])
 
             offset = request.offset if isinstance(request.offset, int) else 0
@@ -150,9 +148,9 @@ class EndUsers(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return operations.ListEndUsersResponse(
+            return operations.ListExternalUsersResponse(
                 result=unmarshal_json_response(
-                    components.ListEndUsersResponse, http_res
+                    components.ListExternalUsersResponse, http_res
                 ),
                 next=next_func,
             )
@@ -203,8 +201,8 @@ class EndUsers(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> Optional[operations.ListEndUsersResponse]:
-        r"""List registered end users
+    ) -> Optional[operations.ListExternalUsersResponse]:
+        r"""List registered external users
 
         List registrations belonging to the authenticated organization. Inactive registrations are excluded by default. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
@@ -234,7 +232,7 @@ class EndUsers(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = operations.ListEndUsersRequest(
+        request = operations.ListExternalUsersRequest(
             http_referer=http_referer,
             x_open_router_title=x_open_router_title,
             x_open_router_categories=x_open_router_categories,
@@ -246,7 +244,7 @@ class EndUsers(BaseSDK):
 
         req = self._build_request_async(
             method="GET",
-            path="/end-users",
+            path="/external-users",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -256,7 +254,7 @@ class EndUsers(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            _globals=operations.ListEndUsersGlobals(
+            _globals=operations.ListExternalUsersGlobals(
                 http_referer=self.sdk_configuration.globals.http_referer,
                 x_open_router_title=self.sdk_configuration.globals.x_open_router_title,
                 x_open_router_categories=self.sdk_configuration.globals.x_open_router_categories,
@@ -282,12 +280,12 @@ class EndUsers(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="listEndUsers",
+                operation_id="listExternalUsers",
                 oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
-                tags=["End Users"],
+                tags=["External Users"],
                 extensions=None,
             ),
             request=req,
@@ -295,7 +293,7 @@ class EndUsers(BaseSDK):
             retry_config=retry_config,
         )
 
-        def next_func() -> Awaitable[Optional[operations.ListEndUsersResponse]]:
+        def next_func() -> Awaitable[Optional[operations.ListExternalUsersResponse]]:
             body = utils.unmarshal_json(http_res.text, Union[Dict[Any, Any], List[Any]])
 
             async def empty_result():
@@ -329,9 +327,9 @@ class EndUsers(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return operations.ListEndUsersResponse(
+            return operations.ListExternalUsersResponse(
                 result=unmarshal_json_response(
-                    components.ListEndUsersResponse, http_res
+                    components.ListExternalUsersResponse, http_res
                 ),
                 next=next_func,
             )
@@ -379,8 +377,8 @@ class EndUsers(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.EndUserResponse:
-        r"""Register an end user
+    ) -> components.ExternalUserResponse:
+        r"""Register an external user
 
         Register a caller-supplied tracking ID under the authenticated organization. No login account, policy, or credentials are created. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
@@ -407,18 +405,18 @@ class EndUsers(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = operations.CreateEndUserRequest(
+        request = operations.CreateExternalUserRequest(
             http_referer=http_referer,
             x_open_router_title=x_open_router_title,
             x_open_router_categories=x_open_router_categories,
-            create_end_user_request=components.CreateEndUserRequest(
+            create_external_user_request=components.CreateExternalUserRequest(
                 user=user,
             ),
         )
 
         req = self._build_request(
             method="POST",
-            path="/end-users",
+            path="/external-users",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -428,18 +426,18 @@ class EndUsers(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            _globals=operations.CreateEndUserGlobals(
+            _globals=operations.CreateExternalUserGlobals(
                 http_referer=self.sdk_configuration.globals.http_referer,
                 x_open_router_title=self.sdk_configuration.globals.x_open_router_title,
                 x_open_router_categories=self.sdk_configuration.globals.x_open_router_categories,
             ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.create_end_user_request,
+                request.create_external_user_request,
                 False,
                 False,
                 "json",
-                components.CreateEndUserRequest,
+                components.CreateExternalUserRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -461,12 +459,12 @@ class EndUsers(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="createEndUser",
+                operation_id="createExternalUser",
                 oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
-                tags=["End Users"],
+                tags=["External Users"],
                 extensions=None,
             ),
             request=req,
@@ -476,7 +474,7 @@ class EndUsers(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
-            return unmarshal_json_response(components.EndUserResponse, http_res)
+            return unmarshal_json_response(components.ExternalUserResponse, http_res)
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.BadRequestResponseErrorData, http_res
@@ -526,8 +524,8 @@ class EndUsers(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.EndUserResponse:
-        r"""Register an end user
+    ) -> components.ExternalUserResponse:
+        r"""Register an external user
 
         Register a caller-supplied tracking ID under the authenticated organization. No login account, policy, or credentials are created. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
@@ -554,18 +552,18 @@ class EndUsers(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = operations.CreateEndUserRequest(
+        request = operations.CreateExternalUserRequest(
             http_referer=http_referer,
             x_open_router_title=x_open_router_title,
             x_open_router_categories=x_open_router_categories,
-            create_end_user_request=components.CreateEndUserRequest(
+            create_external_user_request=components.CreateExternalUserRequest(
                 user=user,
             ),
         )
 
         req = self._build_request_async(
             method="POST",
-            path="/end-users",
+            path="/external-users",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -575,18 +573,18 @@ class EndUsers(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            _globals=operations.CreateEndUserGlobals(
+            _globals=operations.CreateExternalUserGlobals(
                 http_referer=self.sdk_configuration.globals.http_referer,
                 x_open_router_title=self.sdk_configuration.globals.x_open_router_title,
                 x_open_router_categories=self.sdk_configuration.globals.x_open_router_categories,
             ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.create_end_user_request,
+                request.create_external_user_request,
                 False,
                 False,
                 "json",
-                components.CreateEndUserRequest,
+                components.CreateExternalUserRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -608,12 +606,12 @@ class EndUsers(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="createEndUser",
+                operation_id="createExternalUser",
                 oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
-                tags=["End Users"],
+                tags=["External Users"],
                 extensions=None,
             ),
             request=req,
@@ -623,7 +621,7 @@ class EndUsers(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
-            return unmarshal_json_response(components.EndUserResponse, http_res)
+            return unmarshal_json_response(components.ExternalUserResponse, http_res)
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.BadRequestResponseErrorData, http_res
@@ -674,7 +672,7 @@ class EndUsers(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ):
-        r"""Deactivate a registered end user
+        r"""Deactivate a registered external user
 
         Soft-deactivate a registration while retaining its tracking ID. Repeat deactivation succeeds. This does not block inference; reactivate through PATCH. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
@@ -701,7 +699,7 @@ class EndUsers(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = operations.DeleteEndUserRequest(
+        request = operations.DeleteExternalUserRequest(
             http_referer=http_referer,
             x_open_router_title=x_open_router_title,
             x_open_router_categories=x_open_router_categories,
@@ -710,7 +708,7 @@ class EndUsers(BaseSDK):
 
         req = self._build_request(
             method="DELETE",
-            path="/end-users/{user}",
+            path="/external-users/{user}",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -720,7 +718,7 @@ class EndUsers(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            _globals=operations.DeleteEndUserGlobals(
+            _globals=operations.DeleteExternalUserGlobals(
                 http_referer=self.sdk_configuration.globals.http_referer,
                 x_open_router_title=self.sdk_configuration.globals.x_open_router_title,
                 x_open_router_categories=self.sdk_configuration.globals.x_open_router_categories,
@@ -746,12 +744,12 @@ class EndUsers(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="deleteEndUser",
+                operation_id="deleteExternalUser",
                 oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
-                tags=["End Users"],
+                tags=["External Users"],
                 extensions=None,
             ),
             request=req,
@@ -807,7 +805,7 @@ class EndUsers(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ):
-        r"""Deactivate a registered end user
+        r"""Deactivate a registered external user
 
         Soft-deactivate a registration while retaining its tracking ID. Repeat deactivation succeeds. This does not block inference; reactivate through PATCH. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
@@ -834,7 +832,7 @@ class EndUsers(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = operations.DeleteEndUserRequest(
+        request = operations.DeleteExternalUserRequest(
             http_referer=http_referer,
             x_open_router_title=x_open_router_title,
             x_open_router_categories=x_open_router_categories,
@@ -843,7 +841,7 @@ class EndUsers(BaseSDK):
 
         req = self._build_request_async(
             method="DELETE",
-            path="/end-users/{user}",
+            path="/external-users/{user}",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -853,7 +851,7 @@ class EndUsers(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            _globals=operations.DeleteEndUserGlobals(
+            _globals=operations.DeleteExternalUserGlobals(
                 http_referer=self.sdk_configuration.globals.http_referer,
                 x_open_router_title=self.sdk_configuration.globals.x_open_router_title,
                 x_open_router_categories=self.sdk_configuration.globals.x_open_router_categories,
@@ -879,12 +877,12 @@ class EndUsers(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="deleteEndUser",
+                operation_id="deleteExternalUser",
                 oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
-                tags=["End Users"],
+                tags=["External Users"],
                 extensions=None,
             ),
             request=req,
@@ -939,8 +937,8 @@ class EndUsers(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.EndUserResponse:
-        r"""Get a registered end user
+    ) -> components.ExternalUserResponse:
+        r"""Get a registered external user
 
         Retrieve an active or inactive registration by its URL-encoded, caller-supplied tracking ID. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
@@ -967,7 +965,7 @@ class EndUsers(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = operations.GetEndUserRequest(
+        request = operations.GetExternalUserRequest(
             http_referer=http_referer,
             x_open_router_title=x_open_router_title,
             x_open_router_categories=x_open_router_categories,
@@ -976,7 +974,7 @@ class EndUsers(BaseSDK):
 
         req = self._build_request(
             method="GET",
-            path="/end-users/{user}",
+            path="/external-users/{user}",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -986,7 +984,7 @@ class EndUsers(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            _globals=operations.GetEndUserGlobals(
+            _globals=operations.GetExternalUserGlobals(
                 http_referer=self.sdk_configuration.globals.http_referer,
                 x_open_router_title=self.sdk_configuration.globals.x_open_router_title,
                 x_open_router_categories=self.sdk_configuration.globals.x_open_router_categories,
@@ -1012,12 +1010,12 @@ class EndUsers(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="getEndUser",
+                operation_id="getExternalUser",
                 oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
-                tags=["End Users"],
+                tags=["External Users"],
                 extensions=None,
             ),
             request=req,
@@ -1027,7 +1025,7 @@ class EndUsers(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(components.EndUserResponse, http_res)
+            return unmarshal_json_response(components.ExternalUserResponse, http_res)
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.BadRequestResponseErrorData, http_res
@@ -1072,8 +1070,8 @@ class EndUsers(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.EndUserResponse:
-        r"""Get a registered end user
+    ) -> components.ExternalUserResponse:
+        r"""Get a registered external user
 
         Retrieve an active or inactive registration by its URL-encoded, caller-supplied tracking ID. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
@@ -1100,7 +1098,7 @@ class EndUsers(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = operations.GetEndUserRequest(
+        request = operations.GetExternalUserRequest(
             http_referer=http_referer,
             x_open_router_title=x_open_router_title,
             x_open_router_categories=x_open_router_categories,
@@ -1109,7 +1107,7 @@ class EndUsers(BaseSDK):
 
         req = self._build_request_async(
             method="GET",
-            path="/end-users/{user}",
+            path="/external-users/{user}",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -1119,7 +1117,7 @@ class EndUsers(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            _globals=operations.GetEndUserGlobals(
+            _globals=operations.GetExternalUserGlobals(
                 http_referer=self.sdk_configuration.globals.http_referer,
                 x_open_router_title=self.sdk_configuration.globals.x_open_router_title,
                 x_open_router_categories=self.sdk_configuration.globals.x_open_router_categories,
@@ -1145,12 +1143,12 @@ class EndUsers(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="getEndUser",
+                operation_id="getExternalUser",
                 oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
-                tags=["End Users"],
+                tags=["External Users"],
                 extensions=None,
             ),
             request=req,
@@ -1160,7 +1158,7 @@ class EndUsers(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(components.EndUserResponse, http_res)
+            return unmarshal_json_response(components.ExternalUserResponse, http_res)
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.BadRequestResponseErrorData, http_res
@@ -1206,8 +1204,8 @@ class EndUsers(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.EndUserResponse:
-        r"""Update a registered end user
+    ) -> components.ExternalUserResponse:
+        r"""Update a registered external user
 
         Update registration state without changing identity. State changes do not enforce inference access. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
@@ -1235,19 +1233,19 @@ class EndUsers(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = operations.UpdateEndUserRequest(
+        request = operations.UpdateExternalUserRequest(
             http_referer=http_referer,
             x_open_router_title=x_open_router_title,
             x_open_router_categories=x_open_router_categories,
             user=user,
-            update_end_user_request=components.UpdateEndUserRequest(
+            update_external_user_request=components.UpdateExternalUserRequest(
                 is_active=is_active,
             ),
         )
 
         req = self._build_request(
             method="PATCH",
-            path="/end-users/{user}",
+            path="/external-users/{user}",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -1257,18 +1255,18 @@ class EndUsers(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            _globals=operations.UpdateEndUserGlobals(
+            _globals=operations.UpdateExternalUserGlobals(
                 http_referer=self.sdk_configuration.globals.http_referer,
                 x_open_router_title=self.sdk_configuration.globals.x_open_router_title,
                 x_open_router_categories=self.sdk_configuration.globals.x_open_router_categories,
             ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.update_end_user_request,
+                request.update_external_user_request,
                 False,
                 False,
                 "json",
-                components.UpdateEndUserRequest,
+                components.UpdateExternalUserRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -1290,12 +1288,12 @@ class EndUsers(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="updateEndUser",
+                operation_id="updateExternalUser",
                 oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
-                tags=["End Users"],
+                tags=["External Users"],
                 extensions=None,
             ),
             request=req,
@@ -1305,7 +1303,7 @@ class EndUsers(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(components.EndUserResponse, http_res)
+            return unmarshal_json_response(components.ExternalUserResponse, http_res)
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.BadRequestResponseErrorData, http_res
@@ -1351,8 +1349,8 @@ class EndUsers(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> components.EndUserResponse:
-        r"""Update a registered end user
+    ) -> components.ExternalUserResponse:
+        r"""Update a registered external user
 
         Update registration state without changing identity. State changes do not enforce inference access. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
@@ -1380,19 +1378,19 @@ class EndUsers(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = operations.UpdateEndUserRequest(
+        request = operations.UpdateExternalUserRequest(
             http_referer=http_referer,
             x_open_router_title=x_open_router_title,
             x_open_router_categories=x_open_router_categories,
             user=user,
-            update_end_user_request=components.UpdateEndUserRequest(
+            update_external_user_request=components.UpdateExternalUserRequest(
                 is_active=is_active,
             ),
         )
 
         req = self._build_request_async(
             method="PATCH",
-            path="/end-users/{user}",
+            path="/external-users/{user}",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -1402,18 +1400,18 @@ class EndUsers(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
-            _globals=operations.UpdateEndUserGlobals(
+            _globals=operations.UpdateExternalUserGlobals(
                 http_referer=self.sdk_configuration.globals.http_referer,
                 x_open_router_title=self.sdk_configuration.globals.x_open_router_title,
                 x_open_router_categories=self.sdk_configuration.globals.x_open_router_categories,
             ),
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.update_end_user_request,
+                request.update_external_user_request,
                 False,
                 False,
                 "json",
-                components.UpdateEndUserRequest,
+                components.UpdateExternalUserRequest,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -1435,12 +1433,12 @@ class EndUsers(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="updateEndUser",
+                operation_id="updateExternalUser",
                 oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, components.Security
                 ),
-                tags=["End Users"],
+                tags=["External Users"],
                 extensions=None,
             ),
             request=req,
@@ -1450,7 +1448,7 @@ class EndUsers(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(components.EndUserResponse, http_res)
+            return unmarshal_json_response(components.ExternalUserResponse, http_res)
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.BadRequestResponseErrorData, http_res

@@ -2,17 +2,17 @@
 
 from __future__ import annotations
 from openrouter.components import (
-    createenduserrequest as components_createenduserrequest,
+    listexternalusersresponse as components_listexternalusersresponse,
 )
-from openrouter.types import BaseModel, UNSET_SENTINEL
-from openrouter.utils import FieldMetadata, HeaderMetadata, RequestMetadata
+from openrouter.types import BaseModel, Nullable, OptionalNullable, UNSET_SENTINEL
+from openrouter.utils import FieldMetadata, HeaderMetadata, QueryParamMetadata
 import pydantic
 from pydantic import model_serializer
-from typing import Optional
+from typing import Awaitable, Callable, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-class CreateEndUserGlobalsTypedDict(TypedDict):
+class ListExternalUsersGlobalsTypedDict(TypedDict):
     http_referer: NotRequired[str]
     r"""The app identifier should be your app's URL and is used as the primary identifier for rankings.
     This is used to track API usage per application.
@@ -28,7 +28,7 @@ class CreateEndUserGlobalsTypedDict(TypedDict):
     """
 
 
-class CreateEndUserGlobals(BaseModel):
+class ListExternalUsersGlobals(BaseModel):
     http_referer: Annotated[
         Optional[str],
         pydantic.Field(alias="HTTP-Referer"),
@@ -76,10 +76,7 @@ class CreateEndUserGlobals(BaseModel):
         return m
 
 
-class CreateEndUserRequestTypedDict(TypedDict):
-    create_end_user_request: (
-        components_createenduserrequest.CreateEndUserRequestTypedDict
-    )
+class ListExternalUsersRequestTypedDict(TypedDict):
     http_referer: NotRequired[str]
     r"""The app identifier should be your app's URL and is used as the primary identifier for rankings.
     This is used to track API usage per application.
@@ -93,56 +90,113 @@ class CreateEndUserRequestTypedDict(TypedDict):
     r"""Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
     """
+    offset: NotRequired[Nullable[int]]
+    r"""Number of records to skip for pagination"""
+    limit: NotRequired[int]
+    r"""Maximum number of records to return (max 100)"""
+    user: NotRequired[str]
+    r"""Immutable case-sensitive tracking string supplied as user on inference requests or as external.user on API keys: 1 to 512 characters, well-formed Unicode, no NUL, no surrounding whitespace. URL-encode it in resource paths; an ID of `.` or `..` cannot be addressed by path, so look it up with the list filter."""
+    include_inactive: NotRequired[bool]
+    r"""Include deactivated registrations."""
 
 
-class CreateEndUserRequest(BaseModel):
-    create_end_user_request: Annotated[
-        components_createenduserrequest.CreateEndUserRequest,
-        FieldMetadata(request=RequestMetadata(media_type="application/json")),
+class ListExternalUsersRequest(BaseModel):
+    http_referer: Annotated[
+        Optional[str],
+        pydantic.Field(alias="HTTP-Referer"),
+        FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
+    ] = None
+    r"""The app identifier should be your app's URL and is used as the primary identifier for rankings.
+    This is used to track API usage per application.
+
+    """
+
+    x_open_router_title: Annotated[
+        Optional[str],
+        pydantic.Field(alias="X-OpenRouter-Title"),
+        FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
+    ] = None
+    r"""The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+    """
+
+    x_open_router_categories: Annotated[
+        Optional[str],
+        pydantic.Field(alias="X-OpenRouter-Categories"),
+        FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
+    ] = None
+    r"""Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
+
+    """
+
+    offset: Annotated[
+        OptionalNullable[int],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = 0
+    r"""Number of records to skip for pagination"""
+
+    limit: Annotated[
+        Optional[int],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = 50
+    r"""Maximum number of records to return (max 100)"""
+
+    user: Annotated[
+        Optional[str],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Immutable case-sensitive tracking string supplied as user on inference requests or as external.user on API keys: 1 to 512 characters, well-formed Unicode, no NUL, no surrounding whitespace. URL-encode it in resource paths; an ID of `.` or `..` cannot be addressed by path, so look it up with the list filter."""
+
+    include_inactive: Annotated[
+        Optional[bool],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = False
+    r"""Include deactivated registrations."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "HTTP-Referer",
+                "X-OpenRouter-Title",
+                "X-OpenRouter-Categories",
+                "offset",
+                "limit",
+                "user",
+                "include_inactive",
+            ]
+        )
+        nullable_fields = set(["offset"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
+
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
+
+        return m
+
+
+class ListExternalUsersResponseTypedDict(TypedDict):
+    result: components_listexternalusersresponse.ListExternalUsersResponseTypedDict
+
+
+class ListExternalUsersResponse(BaseModel):
+    next: Union[
+        Callable[[], Optional[ListExternalUsersResponse]],
+        Callable[[], Awaitable[Optional[ListExternalUsersResponse]]],
     ]
 
-    http_referer: Annotated[
-        Optional[str],
-        pydantic.Field(alias="HTTP-Referer"),
-        FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
-    ] = None
-    r"""The app identifier should be your app's URL and is used as the primary identifier for rankings.
-    This is used to track API usage per application.
-
-    """
-
-    x_open_router_title: Annotated[
-        Optional[str],
-        pydantic.Field(alias="X-OpenRouter-Title"),
-        FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
-    ] = None
-    r"""The app display name allows you to customize how your app appears in OpenRouter's dashboard.
-
-    """
-
-    x_open_router_categories: Annotated[
-        Optional[str],
-        pydantic.Field(alias="X-OpenRouter-Categories"),
-        FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
-    ] = None
-    r"""Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
-
-    """
-
-    @model_serializer(mode="wrap")
-    def serialize_model(self, handler):
-        optional_fields = set(
-            ["HTTP-Referer", "X-OpenRouter-Title", "X-OpenRouter-Categories"]
-        )
-        serialized = handler(self)
-        m = {}
-
-        for n, f in type(self).model_fields.items():
-            k = f.alias or n
-            val = serialized.get(k, serialized.get(n))
-
-            if val != UNSET_SENTINEL:
-                if val is not None or k not in optional_fields:
-                    m[k] = val
-
-        return m
+    result: components_listexternalusersresponse.ListExternalUsersResponse

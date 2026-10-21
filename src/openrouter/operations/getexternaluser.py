@@ -9,7 +9,7 @@ from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-class DeleteEndUserGlobalsTypedDict(TypedDict):
+class GetExternalUserGlobalsTypedDict(TypedDict):
     http_referer: NotRequired[str]
     r"""The app identifier should be your app's URL and is used as the primary identifier for rankings.
     This is used to track API usage per application.
@@ -25,7 +25,7 @@ class DeleteEndUserGlobalsTypedDict(TypedDict):
     """
 
 
-class DeleteEndUserGlobals(BaseModel):
+class GetExternalUserGlobals(BaseModel):
     http_referer: Annotated[
         Optional[str],
         pydantic.Field(alias="HTTP-Referer"),
@@ -73,7 +73,7 @@ class DeleteEndUserGlobals(BaseModel):
         return m
 
 
-class DeleteEndUserRequestTypedDict(TypedDict):
+class GetExternalUserRequestTypedDict(TypedDict):
     user: str
     r"""Immutable case-sensitive tracking string supplied as user on inference requests or as external.user on API keys: 1 to 512 characters, well-formed Unicode, no NUL, no surrounding whitespace. URL-encode it in resource paths; an ID of `.` or `..` cannot be addressed by path, so look it up with the list filter."""
     http_referer: NotRequired[str]
@@ -91,7 +91,7 @@ class DeleteEndUserRequestTypedDict(TypedDict):
     """
 
 
-class DeleteEndUserRequest(BaseModel):
+class GetExternalUserRequest(BaseModel):
     user: Annotated[
         str, FieldMetadata(path=PathParamMetadata(style="simple", explode=False))
     ]
