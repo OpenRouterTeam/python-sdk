@@ -2374,7 +2374,12 @@ if TYPE_CHECKING:
         InternConnectionList,
         InternConnectionListTypedDict,
     )
-    from .interndaemonaccess import InternDaemonAccess, InternDaemonAccessTypedDict
+    from .interndaemonaccess import (
+        InternDaemonAccess,
+        InternDaemonAccessTypedDict,
+        Viewer,
+        ViewerTypedDict,
+    )
     from .interninvokeacceptedresponse import (
         InternInvokeAcceptedResponse,
         InternInvokeAcceptedResponseStatus,
@@ -7742,6 +7747,8 @@ __all__ = [
     "VideoModelsListResponseTypedDict",
     "VideoURL",
     "VideoURLTypedDict",
+    "Viewer",
+    "ViewerTypedDict",
     "Watch",
     "WebFetchEngineEnum",
     "WebFetchPlugin",
@@ -9512,6 +9519,8 @@ _dynamic_imports: dict[str, str] = {
     "InternConnectionListTypedDict": ".internconnectionlist",
     "InternDaemonAccess": ".interndaemonaccess",
     "InternDaemonAccessTypedDict": ".interndaemonaccess",
+    "Viewer": ".interndaemonaccess",
+    "ViewerTypedDict": ".interndaemonaccess",
     "InternInvokeAcceptedResponse": ".interninvokeacceptedresponse",
     "InternInvokeAcceptedResponseStatus": ".interninvokeacceptedresponse",
     "InternInvokeAcceptedResponseTypedDict": ".interninvokeacceptedresponse",
