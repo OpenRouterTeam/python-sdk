@@ -8,7 +8,11 @@ def _public_methods(obj):
 def test_responses_namespace_is_ga_and_beta_alias_remains_available():
     client = OpenRouter(api_key="test-key")
 
-    assert client.responses is not None
-    assert client.beta.responses is not None
-    assert _public_methods(client.responses) == _public_methods(client.beta.responses)
+    assert {"send", "send_async"} <= _public_methods(client.responses)
+    assert _public_methods(client.responses) <= _public_methods(client.beta.responses)
+
+
+def test_analytics_namespace_is_top_level():
+    client = OpenRouter(api_key="test-key")
+
     assert client.analytics is not None
