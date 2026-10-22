@@ -162,6 +162,11 @@ class Observability(BaseSDK):
                 errors.UnauthorizedResponseErrorData, http_res
             )
             raise errors.UnauthorizedResponseError(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ForbiddenResponseErrorData, http_res
+            )
+            raise errors.ForbiddenResponseError(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(
                 errors.InternalServerResponseErrorData, http_res
@@ -334,6 +339,11 @@ class Observability(BaseSDK):
                 errors.UnauthorizedResponseErrorData, http_res
             )
             raise errors.UnauthorizedResponseError(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ForbiddenResponseErrorData, http_res
+            )
+            raise errors.ForbiddenResponseError(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(
                 errors.InternalServerResponseErrorData, http_res
@@ -859,6 +869,11 @@ class Observability(BaseSDK):
                 errors.UnauthorizedResponseErrorData, http_res
             )
             raise errors.UnauthorizedResponseError(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ForbiddenResponseErrorData, http_res
+            )
+            raise errors.ForbiddenResponseError(response_data, http_res)
         if utils.match_response(http_res, "404", "application/json"):
             response_data = unmarshal_json_response(
                 errors.NotFoundResponseErrorData, http_res
@@ -989,6 +1004,11 @@ class Observability(BaseSDK):
                 errors.UnauthorizedResponseErrorData, http_res
             )
             raise errors.UnauthorizedResponseError(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ForbiddenResponseErrorData, http_res
+            )
+            raise errors.ForbiddenResponseError(response_data, http_res)
         if utils.match_response(http_res, "404", "application/json"):
             response_data = unmarshal_json_response(
                 errors.NotFoundResponseErrorData, http_res
@@ -1119,6 +1139,11 @@ class Observability(BaseSDK):
                 errors.UnauthorizedResponseErrorData, http_res
             )
             raise errors.UnauthorizedResponseError(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ForbiddenResponseErrorData, http_res
+            )
+            raise errors.ForbiddenResponseError(response_data, http_res)
         if utils.match_response(http_res, "404", "application/json"):
             response_data = unmarshal_json_response(
                 errors.NotFoundResponseErrorData, http_res
@@ -1249,6 +1274,11 @@ class Observability(BaseSDK):
                 errors.UnauthorizedResponseErrorData, http_res
             )
             raise errors.UnauthorizedResponseError(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ForbiddenResponseErrorData, http_res
+            )
+            raise errors.ForbiddenResponseError(response_data, http_res)
         if utils.match_response(http_res, "404", "application/json"):
             response_data = unmarshal_json_response(
                 errors.NotFoundResponseErrorData, http_res
