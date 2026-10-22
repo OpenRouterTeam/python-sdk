@@ -15,9 +15,9 @@ class PrivateEndpointPricingTypedDict(TypedDict):
     prompt: str
     r"""USD per prompt token, as a decimal string."""
     cache_read: NotRequired[str]
-    r"""USD per cache-read prompt token, as a decimal string. Omit it to bill cache reads at the provider pricing strategy's default, which for most strategies is the prompt rate."""
+    r"""USD per cache-read prompt token, as a decimal string. When omitted, inherited from the public endpoint of the same model and provider: scaled by its cache-read to prompt ratio, or left at the pricing strategy default when it publishes no cache-read rate. Required when there is no such endpoint and the provider bills cache reads."""
     cache_write: NotRequired[str]
-    r"""USD per cache-write prompt token, as a decimal string. Omit it to bill cache writes at the provider pricing strategy's default."""
+    r"""USD per cache-write prompt token, as a decimal string. When omitted, inherited from the public endpoint of the same model and provider: scaled by its cache-write to prompt ratio, or left at the pricing strategy default when it publishes no cache-write rate. Required when there is no such endpoint and the provider bills cache writes."""
 
 
 class PrivateEndpointPricing(BaseModel):
@@ -30,10 +30,10 @@ class PrivateEndpointPricing(BaseModel):
     r"""USD per prompt token, as a decimal string."""
 
     cache_read: Optional[str] = None
-    r"""USD per cache-read prompt token, as a decimal string. Omit it to bill cache reads at the provider pricing strategy's default, which for most strategies is the prompt rate."""
+    r"""USD per cache-read prompt token, as a decimal string. When omitted, inherited from the public endpoint of the same model and provider: scaled by its cache-read to prompt ratio, or left at the pricing strategy default when it publishes no cache-read rate. Required when there is no such endpoint and the provider bills cache reads."""
 
     cache_write: Optional[str] = None
-    r"""USD per cache-write prompt token, as a decimal string. Omit it to bill cache writes at the provider pricing strategy's default."""
+    r"""USD per cache-write prompt token, as a decimal string. When omitted, inherited from the public endpoint of the same model and provider: scaled by its cache-write to prompt ratio, or left at the pricing strategy default when it publishes no cache-write rate. Required when there is no such endpoint and the provider bills cache writes."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
