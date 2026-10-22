@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v5
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5.1.0
         with:
           ref: ${{ github.event.pull_request.head.ref }}
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -31,6 +31,6 @@ jobs:
         run: scripts/gen-docs-nav.sh
 
       - name: Auto-commit docs.json navigation
-        uses: int128/update-generated-files-action@v2
+        uses: int128/update-generated-files-action@1486b210d2f982ac40d27ef55660863b006722b0 # v2.115.0
         with:
           commit-message: "Chore: regenerate docs navigation"
