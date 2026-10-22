@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c48cf606-fb42-4a45-9c23-8f0555307828
 management:
-  docChecksum: 9e161a46647f3a4d07b24c8d00578c22
+  docChecksum: 5cc03395176525639b93df58432991ac
   docVersion: 1.0.0
   speakeasyVersion: 1.787.0
   generationVersion: 2.914.0
-  releaseVersion: 1.3.77
-  configChecksum: 9b873bdd9890526d751c7121a80a9ac2
+  releaseVersion: 1.3.78
+  configChecksum: 598d8bf8b09aa3ac6bffaa9d084e2317
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
 persistentEdits:
-  generation_id: b3c0f80b-3f8f-4427-9801-fa8155208c56
-  pristine_commit_hash: 8601a2c8f2fee7271a9d1d79e423f33eff695f07
-  pristine_tree_hash: a23281b0eb793aa1deca0f2680611a1ac1b1a8fa
+  generation_id: 0b26bb11-a7b2-4b3e-9126-e92580dfdfd9
+  pristine_commit_hash: cb4f2dd35b4511b41f535e133046337fa8b43a9e
+  pristine_tree_hash: 220f89b0ba732bb603d5aa06c9c78e9c1ad4bd4c
 features:
   python:
     acceptHeaders: 3.0.0
@@ -10308,8 +10308,8 @@ trackedFiles:
     pristine_git_object: f8cebc2061d7428904766956be45ca70e5519be4
   docs/sdks/externalusers/README.mdx:
     id: 16a97e1de35f
-    last_write_checksum: sha1:70d85a7a62f388d7d48df6d1b49c466a1b88ac68
-    pristine_git_object: ff6066edfc9055d8e2d9f3c6597c7c9e9015fefd
+    last_write_checksum: sha1:8d0542500ae82270018f1cb67ef495b6c7e1fe4f
+    pristine_git_object: 9105bf9f9b8dd3e3ab639c5ab99967cce574165d
   docs/sdks/files/README.mdx:
     id: 1a0c257e330c
     last_write_checksum: sha1:cdc184e049de510b33bb1ceb5f88c33d7da2ae5c
@@ -10348,8 +10348,8 @@ trackedFiles:
     pristine_git_object: 053e655dd039e6dd37558c4b9af98c3d60ea8989
   docs/sdks/presets/README.mdx:
     id: eeb505928d52
-    last_write_checksum: sha1:a7556797ff5e3ee5568fadacf9bcdb369c664bb0
-    pristine_git_object: 28d3f17d25e50a97e4c195ea46a15ee6ab431902
+    last_write_checksum: sha1:d9fee52a78290d7e7e287d33ac5efbcd1f94d07b
+    pristine_git_object: 55b3f251872f0548ef7fcae3efdc73c2968e54fb
   docs/sdks/privateendpoints/README.mdx:
     id: 54dee70b8cc7
     last_write_checksum: sha1:2f58390d196d1c08a304b9d3c2f495281fe0c8db
@@ -10404,8 +10404,8 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:297a6ffb1c170ddc23d42034497ee1d080fc8a86
-    pristine_git_object: e31d0b8dd00bae68efea9cdf6ac571e31f090002
+    last_write_checksum: sha1:4dc6c05df0db78fd7e4b6baca88b1123a20ae48e
+    pristine_git_object: 839273f22231c0f43ef06f39f8fcfd190131c73c
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77f44b60b98bc126557ec27391f91dfba764bb54
@@ -10432,8 +10432,8 @@ trackedFiles:
     pristine_git_object: 86713cfea633e09d33b3d4e65281071fe20e6137
   src/openrouter/_version.py:
     id: d8d15ad6c586
-    last_write_checksum: sha1:bcfc37be6676e3aa3f367bda551234104c64c73a
-    pristine_git_object: 36d3d822fe628a30968823f18d3facd145954487
+    last_write_checksum: sha1:232f6f64d63e368762e63838b9aeabf2fec61a3b
+    pristine_git_object: 0075123dce6f9852aecce4c11d656a1a1ee66b96
   src/openrouter/alpha.py:
     id: 306c4d93308d
     last_write_checksum: sha1:30f55a360f41376ab194b9ea725fe4e001a5ae1a
@@ -14100,8 +14100,8 @@ trackedFiles:
     pristine_git_object: 51b56d9ca5e27c49a98d05f0414573ac5243c580
   src/openrouter/externalusers.py:
     id: cc70585846df
-    last_write_checksum: sha1:a6acd4d2edbc07dc1cf05f16faf613654d0a27d3
-    pristine_git_object: 69769bc3d2d1655af399f7db438b299f3b8a9295
+    last_write_checksum: sha1:205ad795bb94aa435f1480f5dc43902317ddbb28
+    pristine_git_object: 2b03ccea82b6bb60876b63ef75445a9e2a3760bd
   src/openrouter/files.py:
     id: 7baf7ee1f5b3
     last_write_checksum: sha1:a780217e0d86c5893c5df4877b5451385144e876
@@ -14772,8 +14772,8 @@ trackedFiles:
     pristine_git_object: ed6685a2de0af075647def8ee786e7da58f627a6
   src/openrouter/presets.py:
     id: bd0c40379dcd
-    last_write_checksum: sha1:4448330ef9bf75cdb69445b69fc289df97e8fa33
-    pristine_git_object: 559ca6ad194bd4f66bc3777d7edc040ccb041a7c
+    last_write_checksum: sha1:87a04d6bac85930b6c48bd736cd78d88ff051821
+    pristine_git_object: e5af234dce0a31822d5fb88360a740f540738d44
   src/openrouter/private_endpoints.py:
     id: fdbce8846ed0
     last_write_checksum: sha1:6b011534aab484c622e489b9abfb1545b1a77416
@@ -16084,6 +16084,8 @@ examples:
           application/json: {"error": {"code": 401, "message": "Missing Authentication header"}}
         "500":
           application/json: {"error": {"code": 500, "message": "Internal Server Error"}}
+        "403":
+          application/json: {"error": {"code": 403, "message": "Only management keys can perform this operation"}}
   getPreset:
     speakeasy-default-get-preset:
       parameters:
@@ -16100,6 +16102,8 @@ examples:
           application/json: {"error": {"code": 404, "message": "Resource not found"}}
         "500":
           application/json: {"error": {"code": 500, "message": "Internal Server Error"}}
+        "403":
+          application/json: {"error": {"code": 403, "message": "Only management keys can perform this operation"}}
   createPresetsChatCompletions:
     speakeasy-default-create-presets-chat-completions:
       parameters:
@@ -16185,6 +16189,8 @@ examples:
           application/json: {"error": {"code": 404, "message": "Resource not found"}}
         "500":
           application/json: {"error": {"code": 500, "message": "Internal Server Error"}}
+        "403":
+          application/json: {"error": {"code": 403, "message": "Only management keys can perform this operation"}}
   getPresetVersion:
     speakeasy-default-get-preset-version:
       parameters:
@@ -16202,6 +16208,8 @@ examples:
           application/json: {"error": {"code": 404, "message": "Resource not found"}}
         "500":
           application/json: {"error": {"code": 500, "message": "Internal Server Error"}}
+        "403":
+          application/json: {"error": {"code": 403, "message": "Only management keys can perform this operation"}}
   listWorkspaces:
     speakeasy-default-list-workspaces:
       parameters:
@@ -19161,6 +19169,8 @@ examples:
           application/json: {"error": {"code": 404, "message": "Resource not found"}}
         "500":
           application/json: {"error": {"code": 500, "message": "Internal Server Error"}}
+        "403":
+          application/json: {"error": {"code": 403, "message": "Only management keys can perform this operation"}}
   createExternalUser:
     speakeasy-default-create-external-user:
       requestBody:
@@ -19208,6 +19218,8 @@ examples:
           application/json: {"error": {"code": 404, "message": "Resource not found"}}
         "500":
           application/json: {"error": {"code": 500, "message": "Internal Server Error"}}
+        "403":
+          application/json: {"error": {"code": 403, "message": "Only management keys can perform this operation"}}
   updateExternalUser:
     speakeasy-default-update-external-user:
       parameters:
@@ -19241,4 +19253,9 @@ examples:
 examplesVersion: 1.0.2
 releaseNotes: |
   ## Python SDK Changes:
-  * `open_router.generations.submit_feedback()`:  `error.status[409]` **Added**
+  * `open_router.external_users.list()`:  `error.status[403]` **Added**
+  * `open_router.external_users.get()`:  `error.status[403]` **Added**
+  * `open_router.presets.list()`:  `error.status[403]` **Added**
+  * `open_router.presets.get()`:  `error.status[403]` **Added**
+  * `open_router.presets.list_versions()`:  `error.status[403]` **Added**
+  * `open_router.presets.get_version()`:  `error.status[403]` **Added**
