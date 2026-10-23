@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c48cf606-fb42-4a45-9c23-8f0555307828
 management:
-  docChecksum: 5cc03395176525639b93df58432991ac
+  docChecksum: ce3af718d344bede5e7fbac65667a273
   docVersion: 1.0.0
   speakeasyVersion: 1.787.0
   generationVersion: 2.914.0
-  releaseVersion: 1.3.78
-  configChecksum: 598d8bf8b09aa3ac6bffaa9d084e2317
+  releaseVersion: 1.3.79
+  configChecksum: d99c715292056c8059a4139c19a573ee
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
 persistentEdits:
-  generation_id: 0b26bb11-a7b2-4b3e-9126-e92580dfdfd9
-  pristine_commit_hash: cb4f2dd35b4511b41f535e133046337fa8b43a9e
-  pristine_tree_hash: 220f89b0ba732bb603d5aa06c9c78e9c1ad4bd4c
+  generation_id: f7c67753-a18c-46d6-a112-335ed42a5e2c
+  pristine_commit_hash: b54f5cca62404501cf53ec1a3c7c5fe779a1d0e7
+  pristine_tree_hash: 44866872ac3fe1447c9f7bc2a20bfbe35a2e3e98
 features:
   python:
     acceptHeaders: 3.0.0
@@ -10316,8 +10316,8 @@ trackedFiles:
     pristine_git_object: 6a18aef850a89e56f8f7b0c507c24ab1eed0022c
   docs/sdks/generations/README.mdx:
     id: a754fecc8514
-    last_write_checksum: sha1:0a7baa6b26938066352a5d4d668d19e17776643a
-    pristine_git_object: b22a992e0447d12837d88f04133ef911aafcfaaf
+    last_write_checksum: sha1:52a07507500bccb98ea65fc194125c04cfab48b5
+    pristine_git_object: c6d40a9a40b8da86373f089e6ff0de19756a7778
   docs/sdks/guardrails/README.mdx:
     id: a0cd4218b8fa
     last_write_checksum: sha1:8a7bd8b43337d429726ac461e248aca8100b54cf
@@ -10404,8 +10404,8 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:4dc6c05df0db78fd7e4b6baca88b1123a20ae48e
-    pristine_git_object: 839273f22231c0f43ef06f39f8fcfd190131c73c
+    last_write_checksum: sha1:00f20970dece430a33488ce3867718cd4f015f39
+    pristine_git_object: 17d5ed6683e134c83e15e85f376ccf0b0c249ccb
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77f44b60b98bc126557ec27391f91dfba764bb54
@@ -10432,8 +10432,8 @@ trackedFiles:
     pristine_git_object: 86713cfea633e09d33b3d4e65281071fe20e6137
   src/openrouter/_version.py:
     id: d8d15ad6c586
-    last_write_checksum: sha1:232f6f64d63e368762e63838b9aeabf2fec61a3b
-    pristine_git_object: 0075123dce6f9852aecce4c11d656a1a1ee66b96
+    last_write_checksum: sha1:e0963466ebe43f7eb6cd3d9ef0bc62defccf32e0
+    pristine_git_object: 758593058001815e80283d53d902cd20c9b7e87a
   src/openrouter/alpha.py:
     id: 306c4d93308d
     last_write_checksum: sha1:30f55a360f41376ab194b9ea725fe4e001a5ae1a
@@ -14108,8 +14108,8 @@ trackedFiles:
     pristine_git_object: 5702b46b8a0ac74ee34216b31154b0c3928a2e7f
   src/openrouter/generations.py:
     id: 70e1c21042bc
-    last_write_checksum: sha1:26521fe0a5a034c9a3c4ce763410daf99e839860
-    pristine_git_object: b899aac81fa41d1a3e6b3fee13a2cab2176e65cb
+    last_write_checksum: sha1:abed878a994631f16536b57d0ff402db99862041
+    pristine_git_object: f476af3df4132bef8812d9e925feb0dea7654fa9
   src/openrouter/guardrails.py:
     id: 705839f34e66
     last_write_checksum: sha1:156c955e4e751a229100a3261e297d2898b5d089
@@ -15125,6 +15125,8 @@ examples:
           application/json: {"error": {"code": 529, "message": "Provider returned error"}}
         "400":
           application/json: {"error": {"code": 400, "message": "Invalid request parameters"}}
+        "403":
+          application/json: {"error": {"code": 403, "message": "Only management keys can perform this operation"}}
   listModelsCount:
     speakeasy-default-list-models-count:
       responses:
@@ -19253,9 +19255,4 @@ examples:
 examplesVersion: 1.0.2
 releaseNotes: |
   ## Python SDK Changes:
-  * `open_router.external_users.list()`:  `error.status[403]` **Added**
-  * `open_router.external_users.get()`:  `error.status[403]` **Added**
-  * `open_router.presets.list()`:  `error.status[403]` **Added**
-  * `open_router.presets.get()`:  `error.status[403]` **Added**
-  * `open_router.presets.list_versions()`:  `error.status[403]` **Added**
-  * `open_router.presets.get_version()`:  `error.status[403]` **Added**
+  * `open_router.generations.get_generation()`:  `error.status[403]` **Added**
