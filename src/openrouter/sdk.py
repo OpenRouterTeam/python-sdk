@@ -35,7 +35,6 @@ if TYPE_CHECKING:
     from openrouter.generations import Generations
     from openrouter.guardrails import Guardrails
     from openrouter.images import Images
-    from openrouter.interns import Interns
     from openrouter.models_ import Models
     from openrouter.oauth import OAuth
     from openrouter.observability import Observability
@@ -97,8 +96,6 @@ class OpenRouter(BaseSDK):
     r"""Guardrails endpoints"""
     images: "Images"
     r"""Images endpoints"""
-    interns: "Interns"
-    r"""Create, inspect, update, provision, suspend and delete OpenRouter interns through an API key, and talk to them: the chat route streams OpenAI-compatible completions from one intern, pausing as an `openrouter.provide_input` tool call when the intern needs your permission or an answer. Available to interns programme members; other callers receive 404. See https://openrouter.ai/docs/guides/ori/intern-chat."""
     api_keys: "APIKeys"
     r"""API key management endpoints"""
     models: "Models"
@@ -151,7 +148,6 @@ class OpenRouter(BaseSDK):
         "generations": ("openrouter.generations", "Generations"),
         "guardrails": ("openrouter.guardrails", "Guardrails"),
         "images": ("openrouter.images", "Images"),
-        "interns": ("openrouter.interns", "Interns"),
         "api_keys": ("openrouter.api_keys", "APIKeys"),
         "models": ("openrouter.models_", "Models"),
         "observability": ("openrouter.observability", "Observability"),
