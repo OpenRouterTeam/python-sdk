@@ -776,15 +776,15 @@ class ToolAdvisor20260301(BaseModel):
         return m
 
 
-NameWebSearch2 = Literal["web_search",]
+MessagesRequestNameWebSearch2 = Literal["web_search",]
 
 
-TypeWebSearch20260209 = Literal["web_search_20260209",]
+ToolTypeWebSearch20260209 = Literal["web_search_20260209",]
 
 
 class ToolWebSearch20260209TypedDict(TypedDict):
-    name: NameWebSearch2
-    type: TypeWebSearch20260209
+    name: MessagesRequestNameWebSearch2
+    type: ToolTypeWebSearch20260209
     allowed_callers: NotRequired[List[AnthropicAllowedCallers]]
     allowed_domains: NotRequired[Nullable[List[str]]]
     blocked_domains: NotRequired[Nullable[List[str]]]
@@ -795,9 +795,9 @@ class ToolWebSearch20260209TypedDict(TypedDict):
 
 
 class ToolWebSearch20260209(BaseModel):
-    name: NameWebSearch2
+    name: MessagesRequestNameWebSearch2
 
-    type: TypeWebSearch20260209
+    type: ToolTypeWebSearch20260209
 
     allowed_callers: Optional[List[AnthropicAllowedCallers]] = None
 
@@ -849,15 +849,15 @@ class ToolWebSearch20260209(BaseModel):
         return m
 
 
-NameWebSearch1 = Literal["web_search",]
+MessagesRequestNameWebSearch1 = Literal["web_search",]
 
 
-TypeWebSearch20250305 = Literal["web_search_20250305",]
+ToolTypeWebSearch20250305 = Literal["web_search_20250305",]
 
 
 class ToolWebSearch20250305TypedDict(TypedDict):
-    name: NameWebSearch1
-    type: TypeWebSearch20250305
+    name: MessagesRequestNameWebSearch1
+    type: ToolTypeWebSearch20250305
     allowed_domains: NotRequired[Nullable[List[str]]]
     blocked_domains: NotRequired[Nullable[List[str]]]
     cache_control: NotRequired[AnthropicCacheControlDirectiveTypedDict]
@@ -867,9 +867,9 @@ class ToolWebSearch20250305TypedDict(TypedDict):
 
 
 class ToolWebSearch20250305(BaseModel):
-    name: NameWebSearch1
+    name: MessagesRequestNameWebSearch1
 
-    type: TypeWebSearch20250305
+    type: ToolTypeWebSearch20250305
 
     allowed_domains: OptionalNullable[List[str]] = UNSET
 
@@ -918,23 +918,23 @@ class ToolWebSearch20250305(BaseModel):
         return m
 
 
-NameStrReplaceEditor = Literal["str_replace_editor",]
+MessagesRequestNameStrReplaceEditor = Literal["str_replace_editor",]
 
 
-TypeTextEditor20250124 = Literal["text_editor_20250124",]
+ToolTypeTextEditor20250124 = Literal["text_editor_20250124",]
 
 
 class ToolTextEditor20250124TypedDict(TypedDict):
-    name: NameStrReplaceEditor
-    type: TypeTextEditor20250124
+    name: MessagesRequestNameStrReplaceEditor
+    type: ToolTypeTextEditor20250124
     cache_control: NotRequired[AnthropicCacheControlDirectiveTypedDict]
     r"""Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. When set on an individual content block, it marks an explicit cache breakpoint; block-level markers also work on OpenAI models that support explicit prompt caching — OpenRouter converts them to the provider's native format."""
 
 
 class ToolTextEditor20250124(BaseModel):
-    name: NameStrReplaceEditor
+    name: MessagesRequestNameStrReplaceEditor
 
-    type: TypeTextEditor20250124
+    type: ToolTypeTextEditor20250124
 
     cache_control: Optional[AnthropicCacheControlDirective] = None
     r"""Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. When set on an individual content block, it marks an explicit cache breakpoint; block-level markers also work on OpenAI models that support explicit prompt caching — OpenRouter converts them to the provider's native format."""
@@ -956,23 +956,23 @@ class ToolTextEditor20250124(BaseModel):
         return m
 
 
-NameBash = Literal["bash",]
+MessagesRequestNameBash = Literal["bash",]
 
 
-TypeBash20250124 = Literal["bash_20250124",]
+ToolTypeBash20250124 = Literal["bash_20250124",]
 
 
 class ToolBash20250124TypedDict(TypedDict):
-    name: NameBash
-    type: TypeBash20250124
+    name: MessagesRequestNameBash
+    type: ToolTypeBash20250124
     cache_control: NotRequired[AnthropicCacheControlDirectiveTypedDict]
     r"""Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. When set on an individual content block, it marks an explicit cache breakpoint; block-level markers also work on OpenAI models that support explicit prompt caching — OpenRouter converts them to the provider's native format."""
 
 
 class ToolBash20250124(BaseModel):
-    name: NameBash
+    name: MessagesRequestNameBash
 
-    type: TypeBash20250124
+    type: ToolTypeBash20250124
 
     cache_control: Optional[AnthropicCacheControlDirective] = None
     r"""Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. When set on an individual content block, it marks an explicit cache breakpoint; block-level markers also work on OpenAI models that support explicit prompt caching — OpenRouter converts them to the provider's native format."""
@@ -994,13 +994,13 @@ class ToolBash20250124(BaseModel):
         return m
 
 
-class InputSchemaTypedDict(TypedDict):
+class MessagesRequestInputSchemaTypedDict(TypedDict):
     properties: NotRequired[Any]
     required: NotRequired[Nullable[List[str]]]
     type: NotRequired[str]
 
 
-class InputSchema(BaseModel):
+class MessagesRequestInputSchema(BaseModel):
     model_config = ConfigDict(
         populate_by_name=True, arbitrary_types_allowed=True, extra="allow"
     )
@@ -1053,7 +1053,7 @@ ToolTypeCustom = Literal["custom",]
 
 
 class ToolCustomTypedDict(TypedDict):
-    input_schema: InputSchemaTypedDict
+    input_schema: MessagesRequestInputSchemaTypedDict
     name: str
     cache_control: NotRequired[AnthropicCacheControlDirectiveTypedDict]
     r"""Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. When set on an individual content block, it marks an explicit cache breakpoint; block-level markers also work on OpenAI models that support explicit prompt caching — OpenRouter converts them to the provider's native format."""
@@ -1064,7 +1064,7 @@ class ToolCustomTypedDict(TypedDict):
 
 
 class ToolCustom(BaseModel):
-    input_schema: InputSchema
+    input_schema: MessagesRequestInputSchema
 
     name: str
 

@@ -5,11 +5,28 @@ from .anthropiccachecontroldirective import (
     AnthropicCacheControlDirective,
     AnthropicCacheControlDirectiveTypedDict,
 )
+from .anthropictoolunion import AnthropicToolUnion, AnthropicToolUnionTypedDict
 from openrouter.types import BaseModel, UNSET_SENTINEL
 from openrouter.utils import get_discriminator
 from pydantic import Discriminator, Tag, model_serializer
 from typing import Literal, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
+
+
+TypeToolDefinition = Literal["tool_definition",]
+
+
+class ToolToolDefinitionTypedDict(TypedDict):
+    definition: AnthropicToolUnionTypedDict
+    r"""An Anthropic tool definition: a client-defined tool with a JSON Schema `input_schema`, or a server tool (bash, text editor, web search)."""
+    type: TypeToolDefinition
+
+
+class ToolToolDefinition(BaseModel):
+    definition: AnthropicToolUnion
+    r"""An Anthropic tool definition: a client-defined tool with a JSON Schema `input_schema`, or a server tool (bash, text editor, web search)."""
+
+    type: TypeToolDefinition
 
 
 MessagesToolAdditionBlockTypeMcpToolsetReference = Literal["mcp_toolset_reference",]
@@ -62,6 +79,7 @@ MessagesToolAdditionBlockToolUnionTypedDict = TypeAliasType(
     Union[
         MessagesToolAdditionBlockToolToolReferenceTypedDict,
         MessagesToolAdditionBlockToolMcpToolsetReferenceTypedDict,
+        ToolToolDefinitionTypedDict,
         MessagesToolAdditionBlockToolMcpToolReferenceTypedDict,
     ],
 )
@@ -77,6 +95,7 @@ MessagesToolAdditionBlockToolUnion = Annotated[
             MessagesToolAdditionBlockToolMcpToolsetReference,
             Tag("mcp_toolset_reference"),
         ],
+        Annotated[ToolToolDefinition, Tag("tool_definition")],
     ],
     Discriminator(lambda m: get_discriminator(m, "type", "type")),
 ]
@@ -86,7 +105,7 @@ TypeToolAddition = Literal["tool_addition",]
 
 
 class MessagesToolAdditionBlockTypedDict(TypedDict):
-    r"""Loads a previously deferred tool (declared in `tools` with `defer_loading: true`) mid-conversation without invalidating the prompt cache. Only valid in `role: \"system\"` messages. Not supported on Claude Sonnet 5 or models older than Claude Opus 4.8."""
+    r"""Adds a tool mid-conversation without invalidating the prompt cache: either a previously deferred tool (declared in `tools` with `defer_loading: true`, referenced by name) or a full inline `tool_definition`. Only valid in `role: \"system\"` messages. Not supported on Claude Sonnet 5 or models older than Claude Opus 4.8."""
 
     tool: MessagesToolAdditionBlockToolUnionTypedDict
     type: TypeToolAddition
@@ -95,7 +114,7 @@ class MessagesToolAdditionBlockTypedDict(TypedDict):
 
 
 class MessagesToolAdditionBlock(BaseModel):
-    r"""Loads a previously deferred tool (declared in `tools` with `defer_loading: true`) mid-conversation without invalidating the prompt cache. Only valid in `role: \"system\"` messages. Not supported on Claude Sonnet 5 or models older than Claude Opus 4.8."""
+    r"""Adds a tool mid-conversation without invalidating the prompt cache: either a previously deferred tool (declared in `tools` with `defer_loading: true`, referenced by name) or a full inline `tool_definition`. Only valid in `role: \"system\"` messages. Not supported on Claude Sonnet 5 or models older than Claude Opus 4.8."""
 
     tool: MessagesToolAdditionBlockToolUnion
 
