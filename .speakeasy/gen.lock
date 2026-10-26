@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c48cf606-fb42-4a45-9c23-8f0555307828
 management:
-  docChecksum: 52b9616e5674dc26531fa882c93d7504
+  docChecksum: 7c797e9d630b4ac23efde564dad59387
   docVersion: 1.0.0
   speakeasyVersion: 1.787.0
   generationVersion: 2.914.0
-  releaseVersion: 1.3.80
-  configChecksum: 5cb8222a959a0d468ef90ea282acea79
+  releaseVersion: 1.3.81
+  configChecksum: c9a7846e033503b0d54df9fb56fb137e
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
 persistentEdits:
-  generation_id: a6382c86-1f16-453e-9724-2bf59a1dff6c
-  pristine_commit_hash: 74b5f63f9082cc1f1a72ba0846beab57ee301c04
-  pristine_tree_hash: d92cd4818d8a8d81c11586a4ca3062ba1c493300
+  generation_id: 57d1669c-3cf6-4921-be7c-753022d06708
+  pristine_commit_hash: d1a173118275edb594367d35d448136f3c32e1e7
+  pristine_tree_hash: 14467bcfa828495c6c19607e8c5dbceef1ba4043
 features:
   python:
     acceptHeaders: 3.0.0
@@ -7072,8 +7072,8 @@ trackedFiles:
     pristine_git_object: 041306c0760698f92cee3ecd9ccca780fa15db5a
   docs/components/supportedsize.mdx:
     id: c38f709222bb
-    last_write_checksum: sha1:c9fbb7716e93b17333eedfdb7016d4281b8ac09f
-    pristine_git_object: 16f38dcf620a1a193612e4612a5e6b3300976b10
+    last_write_checksum: sha1:3bccbb66ed2ee78aadf62b52742b778d1992bb47
+    pristine_git_object: 67eedf482f85d64c7567d8838c43c4175bdec7f8
   docs/components/switchyardrouterplugin.mdx:
     id: 86509511f517
     last_write_checksum: sha1:72a811fcbb48baea6071851820eb1bb2122be5ac
@@ -9976,8 +9976,8 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:0ca5cad890feb4d71ec6abd074460eeb2d7355b8
-    pristine_git_object: 1ac8b59d964723b35cd1cfff884e2f79e8a6d95c
+    last_write_checksum: sha1:dc709e21384b23e887bd6d2f586882b22f8d7a6f
+    pristine_git_object: d0ee03e5ac9417c2e44f7ff73871c5146575d51d
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77f44b60b98bc126557ec27391f91dfba764bb54
@@ -10004,8 +10004,8 @@ trackedFiles:
     pristine_git_object: 86713cfea633e09d33b3d4e65281071fe20e6137
   src/openrouter/_version.py:
     id: d8d15ad6c586
-    last_write_checksum: sha1:3e1386277b134d51b9cf84da8e9388c97e73bd24
-    pristine_git_object: 66b62897fd1a18f5e185408f1c324f6ed1f20eae
+    last_write_checksum: sha1:ec048140fa9fffd7defdc44c2a54084b693c4a8e
+    pristine_git_object: 2484d012047f09f32394bc7904224d7e2f844cd3
   src/openrouter/alpha.py:
     id: 306c4d93308d
     last_write_checksum: sha1:30f55a360f41376ab194b9ea725fe4e001a5ae1a
@@ -13260,8 +13260,8 @@ trackedFiles:
     pristine_git_object: c6f80ef4af6effc740beb6e0f1abfee653340717
   src/openrouter/components/videomodel.py:
     id: a544a49f7891
-    last_write_checksum: sha1:12918f01083ccaf9fda86090d8b3d6c010d55880
-    pristine_git_object: f9aa031407c90e6ba1df0b14a7d6438f075d01dc
+    last_write_checksum: sha1:6713df6432c90a6ea768bed2d5b9e7a6fa3763e4
+    pristine_git_object: 2d36013f440a10d4eab7d16bb89a0ebc411403df
   src/openrouter/components/videomodelslistresponse.py:
     id: 2e9d1ce2cf19
     last_write_checksum: sha1:b94977aa6941f7cf15c889f1b7cc69b50cd35856
@@ -18595,18 +18595,4 @@ examples:
 examplesVersion: 1.0.2
 releaseNotes: |
   ## Python SDK Changes:
-  * `open_router.interns.list_interns()`: **Removed** (Breaking ⚠️)
-  * `open_router.interns.create_intern()`: **Removed** (Breaking ⚠️)
-  * `open_router.interns.delete_intern()`: **Removed** (Breaking ⚠️)
-  * `open_router.interns.get_intern()`: **Removed** (Breaking ⚠️)
-  * `open_router.interns.update_intern()`: **Removed** (Breaking ⚠️)
-  * `open_router.interns.get_intern_connections()`: **Removed** (Breaking ⚠️)
-  * `open_router.interns.get_intern_daemon()`: **Removed** (Breaking ⚠️)
-  * `open_router.interns.get_intern_daemon_access()`: **Removed** (Breaking ⚠️)
-  * `open_router.interns.sign_intern_daemon_access_request()`: **Removed** (Breaking ⚠️)
-  * `open_router.interns.sign_intern_daemon_request()`: **Removed** (Breaking ⚠️)
-  * `open_router.interns.get_intern_icon()`: **Removed** (Breaking ⚠️)
-  * `open_router.interns.provision_intern()`: **Removed** (Breaking ⚠️)
-  * `open_router.interns.suspend_intern()`: **Removed** (Breaking ⚠️)
-  * `open_router.interns.chat()`: **Removed** (Breaking ⚠️)
-  * `open_router.interns.invoke()`: **Removed** (Breaking ⚠️)
+  * `open_router.video_generation.list_videos_models()`:  `response.data[].supported_sizes[]` **Changed**
