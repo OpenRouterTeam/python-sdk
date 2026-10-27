@@ -145,6 +145,7 @@ class ImageGenerationProviderPreferencesOptionsTypedDict(TypedDict):
     perplexity: NotRequired[Dict[str, Any]]
     phala: NotRequired[Dict[str, Any]]
     poolside: NotRequired[Dict[str, Any]]
+    primalabs: NotRequired[Dict[str, Any]]
     primeintellect: NotRequired[Dict[str, Any]]
     quiver: NotRequired[Dict[str, Any]]
     recraft: NotRequired[Dict[str, Any]]
@@ -443,6 +444,8 @@ class ImageGenerationProviderPreferencesOptions(BaseModel):
 
     poolside: Optional[Dict[str, Any]] = None
 
+    primalabs: Optional[Dict[str, Any]] = None
+
     primeintellect: Optional[Dict[str, Any]] = None
 
     quiver: Optional[Dict[str, Any]] = None
@@ -650,6 +653,7 @@ class ImageGenerationProviderPreferencesOptions(BaseModel):
                 "perplexity",
                 "phala",
                 "poolside",
+                "primalabs",
                 "primeintellect",
                 "quiver",
                 "recraft",
