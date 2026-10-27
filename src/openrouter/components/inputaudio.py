@@ -7,7 +7,7 @@ from typing import Literal, Union
 from typing_extensions import Annotated, TypedDict
 
 
-FormatEnum = Union[
+InputAudioFormat = Union[
     Literal[
         "mp3",
         "wav",
@@ -18,13 +18,13 @@ FormatEnum = Union[
 
 class InputAudioInputAudioTypedDict(TypedDict):
     data: str
-    format_: FormatEnum
+    format_: InputAudioFormat
 
 
 class InputAudioInputAudio(BaseModel):
     data: str
 
-    format_: Annotated[FormatEnum, pydantic.Field(alias="format")]
+    format_: Annotated[InputAudioFormat, pydantic.Field(alias="format")]
 
 
 InputAudioType = Literal["input_audio",]
