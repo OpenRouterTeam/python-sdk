@@ -1,0 +1,24 @@
+---
+title: "ProviderEnum"
+---
+
+The object storage service that hosts the bucket. AWS S3 supports IAM role authentication; the other providers use access keys.
+
+## Example Usage
+
+```python
+from openrouter.components import ProviderEnum
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
+value: ProviderEnum = "aws"
+```
+
+
+## Values
+
+This is an open enum. Unrecognized values will not fail type checks.
+
+- `"aws"`
+- `"cloudflare_r2"`
+- `"gcs"`
+- `"other"`
