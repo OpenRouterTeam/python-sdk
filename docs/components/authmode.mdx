@@ -1,0 +1,22 @@
+---
+title: "AuthMode"
+---
+
+IAM role: OpenRouter assumes a role in your AWS account with short-lived STS credentials, so you don't share long-lived keys.
+
+## Example Usage
+
+```python
+from openrouter.components import AuthMode
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
+value: AuthMode = "access_keys"
+```
+
+
+## Values
+
+This is an open enum. Unrecognized values will not fail type checks.
+
+- `"access_keys"`
+- `"iam_role"`

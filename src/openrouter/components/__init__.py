@@ -2822,11 +2822,13 @@ if TYPE_CHECKING:
         ObservabilityRampDestinationTypedDict,
     )
     from .observabilitys3destination import (
+        AuthMode,
         ObservabilityS3Destination,
         ObservabilityS3DestinationConfig,
         ObservabilityS3DestinationConfigTypedDict,
         ObservabilityS3DestinationType,
         ObservabilityS3DestinationTypedDict,
+        ProviderEnum,
     )
     from .observabilitysentrydestination import (
         ObservabilitySentryDestination,
@@ -4860,6 +4862,7 @@ __all__ = [
     "ArmorSafeguardResultTypedDict",
     "AudioURL",
     "AudioURLTypedDict",
+    "AuthMode",
     "AutoBetaRouterPlugin",
     "AutoBetaRouterPluginCostTier",
     "AutoBetaRouterPluginID",
@@ -6817,6 +6820,7 @@ __all__ = [
     "PromptCacheOptionsTypedDict",
     "PromptInjectionScanScope",
     "Protocol",
+    "ProviderEnum",
     "ProviderName",
     "ProviderOptions",
     "ProviderOptionsTypedDict",
@@ -9666,11 +9670,13 @@ _dynamic_imports: dict[str, str] = {
     "ObservabilityRampDestinationConfigTypedDict": ".observabilityrampdestination",
     "ObservabilityRampDestinationType": ".observabilityrampdestination",
     "ObservabilityRampDestinationTypedDict": ".observabilityrampdestination",
+    "AuthMode": ".observabilitys3destination",
     "ObservabilityS3Destination": ".observabilitys3destination",
     "ObservabilityS3DestinationConfig": ".observabilitys3destination",
     "ObservabilityS3DestinationConfigTypedDict": ".observabilitys3destination",
     "ObservabilityS3DestinationType": ".observabilitys3destination",
     "ObservabilityS3DestinationTypedDict": ".observabilitys3destination",
+    "ProviderEnum": ".observabilitys3destination",
     "ObservabilitySentryDestination": ".observabilitysentrydestination",
     "ObservabilitySentryDestinationConfig": ".observabilitysentrydestination",
     "ObservabilitySentryDestinationConfigTypedDict": ".observabilitysentrydestination",
