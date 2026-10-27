@@ -87,6 +87,7 @@ ProviderName = Union[
         "Parasail",
         "ParetoAlpha",
         "Poolside",
+        "PrimaLabs",
         "PrimeIntellect",
         "Perceptron",
         "Perplexity",
