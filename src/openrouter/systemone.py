@@ -24,6 +24,12 @@ class SystemOne(BaseSDK):
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
+        assets: Optional[
+            Union[
+                Mapping[str, components.DecisionsImageAsset],
+                Mapping[str, components.DecisionsImageAssetTypedDict],
+            ]
+        ] = None,
         provider: OptionalNullable[
             Union[
                 components.ProviderPreferences, components.ProviderPreferencesTypedDict
@@ -53,6 +59,7 @@ class SystemOne(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
+        :param assets: Images keyed by reference string, as in TypeSafe's API. Write a reference wherever the image belongs in `state`, `instructions`, or `criteria`; every asset must be referenced at least once. Jev reads a reference as a whole string value or inside longer text. Other Decisions models read a whole-string reference wherever they read an `image_url` part and reject a reference inside longer text.
         :param provider:
         :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow). Used for observability grouping in Broadcast and private logging; never sent to the provider. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters.
         :param trace: Metadata for observability and tracing. Known keys (trace_id, trace_name, span_name, generation_name, parent_span_id) have special handling. Additional keys are passed through as custom metadata to configured broadcast destinations.
@@ -77,6 +84,9 @@ class SystemOne(BaseSDK):
             x_open_router_title=x_open_router_title,
             x_open_router_categories=x_open_router_categories,
             decisions_request=components.DecisionsRequest(
+                assets=utils.get_pydantic_model(
+                    assets, Optional[Dict[str, components.DecisionsImageAsset]]
+                ),
                 model=model,
                 provider=utils.get_pydantic_model(
                     provider, OptionalNullable[components.ProviderPreferences]
@@ -237,6 +247,12 @@ class SystemOne(BaseSDK):
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
+        assets: Optional[
+            Union[
+                Mapping[str, components.DecisionsImageAsset],
+                Mapping[str, components.DecisionsImageAssetTypedDict],
+            ]
+        ] = None,
         provider: OptionalNullable[
             Union[
                 components.ProviderPreferences, components.ProviderPreferencesTypedDict
@@ -266,6 +282,7 @@ class SystemOne(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
+        :param assets: Images keyed by reference string, as in TypeSafe's API. Write a reference wherever the image belongs in `state`, `instructions`, or `criteria`; every asset must be referenced at least once. Jev reads a reference as a whole string value or inside longer text. Other Decisions models read a whole-string reference wherever they read an `image_url` part and reject a reference inside longer text.
         :param provider:
         :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow). Used for observability grouping in Broadcast and private logging; never sent to the provider. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters.
         :param trace: Metadata for observability and tracing. Known keys (trace_id, trace_name, span_name, generation_name, parent_span_id) have special handling. Additional keys are passed through as custom metadata to configured broadcast destinations.
@@ -290,6 +307,9 @@ class SystemOne(BaseSDK):
             x_open_router_title=x_open_router_title,
             x_open_router_categories=x_open_router_categories,
             decisions_request=components.DecisionsRequest(
+                assets=utils.get_pydantic_model(
+                    assets, Optional[Dict[str, components.DecisionsImageAsset]]
+                ),
                 model=model,
                 provider=utils.get_pydantic_model(
                     provider, OptionalNullable[components.ProviderPreferences]

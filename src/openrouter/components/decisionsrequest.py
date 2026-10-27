@@ -6,6 +6,7 @@ from .decisionschoicequestion import (
     DecisionsChoiceQuestion,
     DecisionsChoiceQuestionTypedDict,
 )
+from .decisionsimageasset import DecisionsImageAsset, DecisionsImageAssetTypedDict
 from .decisionsnoulquestion import DecisionsNoulQuestion, DecisionsNoulQuestionTypedDict
 from .decisionsscorequestion import (
     DecisionsScoreQuestion,
@@ -63,6 +64,8 @@ class DecisionsRequestTypedDict(TypedDict):
     questions: Dict[str, QuestionsTypedDict]
     state: StateTypedDict
     r"""The content to evaluate: a plain string, or a JSON object or array of related context."""
+    assets: NotRequired[Dict[str, DecisionsImageAssetTypedDict]]
+    r"""Images keyed by reference string, as in TypeSafe's API. Write a reference wherever the image belongs in `state`, `instructions`, or `criteria`; every asset must be referenced at least once. Jev reads a reference as a whole string value or inside longer text. Other Decisions models read a whole-string reference wherever they read an `image_url` part and reject a reference inside longer text."""
     provider: NotRequired[Nullable[ProviderPreferencesTypedDict]]
     session_id: NotRequired[str]
     r"""A unique identifier for grouping related requests (e.g., a conversation or agent workflow). Used for observability grouping in Broadcast and private logging; never sent to the provider. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters."""
@@ -79,6 +82,9 @@ class DecisionsRequest(BaseModel):
     state: State
     r"""The content to evaluate: a plain string, or a JSON object or array of related context."""
 
+    assets: Optional[Dict[str, DecisionsImageAsset]] = None
+    r"""Images keyed by reference string, as in TypeSafe's API. Write a reference wherever the image belongs in `state`, `instructions`, or `criteria`; every asset must be referenced at least once. Jev reads a reference as a whole string value or inside longer text. Other Decisions models read a whole-string reference wherever they read an `image_url` part and reject a reference inside longer text."""
+
     provider: OptionalNullable[ProviderPreferences] = UNSET
 
     session_id: Optional[str] = None
@@ -91,7 +97,7 @@ class DecisionsRequest(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["provider", "session_id", "trace", "user"])
+        optional_fields = set(["assets", "provider", "session_id", "trace", "user"])
         nullable_fields = set(["provider"])
         serialized = handler(self)
         m = {}
