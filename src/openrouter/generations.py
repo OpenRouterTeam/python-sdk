@@ -777,6 +777,11 @@ class Generations(BaseSDK):
                 errors.UnauthorizedResponseErrorData, http_res
             )
             raise errors.UnauthorizedResponseError(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ForbiddenResponseErrorData, http_res
+            )
+            raise errors.ForbiddenResponseError(response_data, http_res)
         if utils.match_response(http_res, "404", "application/json"):
             response_data = unmarshal_json_response(
                 errors.NotFoundResponseErrorData, http_res
@@ -797,6 +802,11 @@ class Generations(BaseSDK):
                 errors.InternalServerResponseErrorData, http_res
             )
             raise errors.InternalServerResponseError(response_data, http_res)
+        if utils.match_response(http_res, "503", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ServiceUnavailableResponseErrorData, http_res
+            )
+            raise errors.ServiceUnavailableResponseError(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.OpenRouterDefaultError(
@@ -937,6 +947,11 @@ class Generations(BaseSDK):
                 errors.UnauthorizedResponseErrorData, http_res
             )
             raise errors.UnauthorizedResponseError(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ForbiddenResponseErrorData, http_res
+            )
+            raise errors.ForbiddenResponseError(response_data, http_res)
         if utils.match_response(http_res, "404", "application/json"):
             response_data = unmarshal_json_response(
                 errors.NotFoundResponseErrorData, http_res
@@ -957,6 +972,11 @@ class Generations(BaseSDK):
                 errors.InternalServerResponseErrorData, http_res
             )
             raise errors.InternalServerResponseError(response_data, http_res)
+        if utils.match_response(http_res, "503", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ServiceUnavailableResponseErrorData, http_res
+            )
+            raise errors.ServiceUnavailableResponseError(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.OpenRouterDefaultError(
