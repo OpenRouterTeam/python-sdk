@@ -3486,7 +3486,12 @@ if TYPE_CHECKING:
         PrivateEndpointCheckTypedDict,
     )
     from .privateendpointcheckreason import PrivateEndpointCheckReason
+    from .privateendpointdeclaredparameter import PrivateEndpointDeclaredParameter
     from .privateendpointdeclaredregion import PrivateEndpointDeclaredRegion
+    from .privateendpointparametercheck import (
+        PrivateEndpointParameterCheck,
+        PrivateEndpointParameterCheckTypedDict,
+    )
     from .privateendpointpricing import (
         PrivateEndpointPricing,
         PrivateEndpointPricingTypedDict,
@@ -4189,6 +4194,10 @@ if TYPE_CHECKING:
     from .updateorganizationsettingsrequest import (
         UpdateOrganizationSettingsRequest,
         UpdateOrganizationSettingsRequestTypedDict,
+    )
+    from .updateprivateendpointparametersrequest import (
+        UpdatePrivateEndpointParametersRequest,
+        UpdatePrivateEndpointParametersRequestTypedDict,
     )
     from .updateprivateendpointpricingrequest import (
         UpdatePrivateEndpointPricingRequest,
@@ -6796,7 +6805,10 @@ __all__ = [
     "PrivateEndpointCheck",
     "PrivateEndpointCheckReason",
     "PrivateEndpointCheckTypedDict",
+    "PrivateEndpointDeclaredParameter",
     "PrivateEndpointDeclaredRegion",
+    "PrivateEndpointParameterCheck",
+    "PrivateEndpointParameterCheckTypedDict",
     "PrivateEndpointPricing",
     "PrivateEndpointPricingTypedDict",
     "PrivateEndpointResponse",
@@ -7450,6 +7462,8 @@ __all__ = [
     "UpdateObservabilityDestinationResponseTypedDict",
     "UpdateOrganizationSettingsRequest",
     "UpdateOrganizationSettingsRequestTypedDict",
+    "UpdatePrivateEndpointParametersRequest",
+    "UpdatePrivateEndpointParametersRequestTypedDict",
     "UpdatePrivateEndpointPricingRequest",
     "UpdatePrivateEndpointPricingRequestTypedDict",
     "UpdatePrivateEndpointRequest",
@@ -10165,7 +10179,10 @@ _dynamic_imports: dict[str, str] = {
     "PrivateEndpointCheck": ".privateendpointcheck",
     "PrivateEndpointCheckTypedDict": ".privateendpointcheck",
     "PrivateEndpointCheckReason": ".privateendpointcheckreason",
+    "PrivateEndpointDeclaredParameter": ".privateendpointdeclaredparameter",
     "PrivateEndpointDeclaredRegion": ".privateendpointdeclaredregion",
+    "PrivateEndpointParameterCheck": ".privateendpointparametercheck",
+    "PrivateEndpointParameterCheckTypedDict": ".privateendpointparametercheck",
     "PrivateEndpointPricing": ".privateendpointpricing",
     "PrivateEndpointPricingTypedDict": ".privateendpointpricing",
     "PrivateEndpointResponse": ".privateendpointresponse",
@@ -10670,6 +10687,8 @@ _dynamic_imports: dict[str, str] = {
     "UpdateObservabilityDestinationResponseTypedDict": ".updateobservabilitydestinationresponse",
     "UpdateOrganizationSettingsRequest": ".updateorganizationsettingsrequest",
     "UpdateOrganizationSettingsRequestTypedDict": ".updateorganizationsettingsrequest",
+    "UpdatePrivateEndpointParametersRequest": ".updateprivateendpointparametersrequest",
+    "UpdatePrivateEndpointParametersRequestTypedDict": ".updateprivateendpointparametersrequest",
     "UpdatePrivateEndpointPricingRequest": ".updateprivateendpointpricingrequest",
     "UpdatePrivateEndpointPricingRequestTypedDict": ".updateprivateendpointpricingrequest",
     "UpdatePrivateEndpointRequest": ".updateprivateendpointrequest",
