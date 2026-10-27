@@ -5,6 +5,7 @@ from .privateendpointactivation import (
     PrivateEndpointActivation,
     PrivateEndpointActivationTypedDict,
 )
+from .privateendpointdeclaredparameter import PrivateEndpointDeclaredParameter
 from .privateendpointpricing import (
     PrivateEndpointPricing,
     PrivateEndpointPricingTypedDict,
@@ -18,7 +19,7 @@ from openrouter.types import (
     UnrecognizedStr,
 )
 from pydantic import model_serializer
-from typing import Literal, Optional, Union
+from typing import List, Literal, Optional, Union
 from typing_extensions import NotRequired, TypedDict
 
 
@@ -44,10 +45,14 @@ class CreatePrivateEndpointRequestTypedDict(TypedDict):
     r"""Validate and activate in the same call. On a failed validation the draft is kept and returned with a 422, so fix it and call `/validate` and `/activate` instead of creating it again."""
     base_url: NotRequired[str]
     r"""HTTPS base URL of your deployment. Required unless the provider derives its URL from the BYOK credential (Azure, Amazon Bedrock, Google Vertex)."""
+    declared_parameters: NotRequired[List[PrivateEndpointDeclaredParameter]]
+    r"""Parameters the upstream supports beyond the tested ones. Replaces the earlier declaration; tested parameters stay. Order and repeated names are ignored, but the list holds at most as many entries as there are declarable parameters, repeats included. `tool_choice` requires `tools` to be tested or declared."""
     declared_region: NotRequired[Nullable[CreatePrivateEndpointRequestDeclaredRegion]]
     r"""Attest where this deployment processes data."""
     declared_zdr: NotRequired[Nullable[bool]]
     r"""Attest that this deployment retains no prompt or completion data."""
+    max_completion_tokens: NotRequired[int]
+    r"""Cap on completion tokens per request. Requests asking for more skip this endpoint, and the default output length stays within it. When omitted, the cap is copied from the public endpoint for the same model and provider, if there is one."""
     pricing: NotRequired[PrivateEndpointPricingTypedDict]
     r"""Negotiated per-token rates reported for requests routed to this endpoint."""
 
@@ -68,6 +73,9 @@ class CreatePrivateEndpointRequest(BaseModel):
     base_url: Optional[str] = None
     r"""HTTPS base URL of your deployment. Required unless the provider derives its URL from the BYOK credential (Azure, Amazon Bedrock, Google Vertex)."""
 
+    declared_parameters: Optional[List[PrivateEndpointDeclaredParameter]] = None
+    r"""Parameters the upstream supports beyond the tested ones. Replaces the earlier declaration; tested parameters stay. Order and repeated names are ignored, but the list holds at most as many entries as there are declarable parameters, repeats included. `tool_choice` requires `tools` to be tested or declared."""
+
     declared_region: OptionalNullable[CreatePrivateEndpointRequestDeclaredRegion] = (
         UNSET
     )
@@ -76,13 +84,24 @@ class CreatePrivateEndpointRequest(BaseModel):
     declared_zdr: OptionalNullable[bool] = UNSET
     r"""Attest that this deployment retains no prompt or completion data."""
 
+    max_completion_tokens: Optional[int] = None
+    r"""Cap on completion tokens per request. Requests asking for more skip this endpoint, and the default output length stays within it. When omitted, the cap is copied from the public endpoint for the same model and provider, if there is one."""
+
     pricing: Optional[PrivateEndpointPricing] = None
     r"""Negotiated per-token rates reported for requests routed to this endpoint."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
-            ["activate", "base_url", "declared_region", "declared_zdr", "pricing"]
+            [
+                "activate",
+                "base_url",
+                "declared_parameters",
+                "declared_region",
+                "declared_zdr",
+                "max_completion_tokens",
+                "pricing",
+            ]
         )
         nullable_fields = set(["declared_region", "declared_zdr"])
         serialized = handler(self)

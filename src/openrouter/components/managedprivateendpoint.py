@@ -3,9 +3,15 @@
 from __future__ import annotations
 from .privateendpointdeclaredregion import PrivateEndpointDeclaredRegion
 from .privateendpointstatus import PrivateEndpointStatus
-from openrouter.types import BaseModel, Nullable, UNSET_SENTINEL
+from openrouter.types import (
+    BaseModel,
+    Nullable,
+    OptionalNullable,
+    UNSET,
+    UNSET_SENTINEL,
+)
 from pydantic import model_serializer
-from typing_extensions import TypedDict
+from typing_extensions import NotRequired, TypedDict
 
 
 class ManagedPrivateEndpointTypedDict(TypedDict):
@@ -27,6 +33,8 @@ class ManagedPrivateEndpointTypedDict(TypedDict):
     r"""Where you attest this deployment processes data. `global` means not regional; `null` means undeclared."""
     declared_zdr: Nullable[bool]
     r"""Whether you attest this deployment retains no prompt or completion data. `null` means undeclared."""
+    max_completion_tokens: NotRequired[Nullable[int]]
+    r"""Most completion tokens a request routed to this endpoint can produce, or `null` when the endpoint sets no cap beyond the model context length."""
 
 
 class ManagedPrivateEndpoint(BaseModel):
@@ -57,16 +65,38 @@ class ManagedPrivateEndpoint(BaseModel):
     declared_zdr: Nullable[bool]
     r"""Whether you attest this deployment retains no prompt or completion data. `null` means undeclared."""
 
+    max_completion_tokens: OptionalNullable[int] = UNSET
+    r"""Most completion tokens a request routed to this endpoint can produce, or `null` when the endpoint sets no cap beyond the model context length."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
+        optional_fields = set(["max_completion_tokens"])
+        nullable_fields = set(
+            [
+                "model_name",
+                "model_slug",
+                "declared_region",
+                "declared_zdr",
+                "max_completion_tokens",
+            ]
+        )
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
             if val != UNSET_SENTINEL:
-                m[k] = val
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
 
         return m

@@ -7,14 +7,23 @@ from .privateendpointpricing import (
     PrivateEndpointPricingTypedDict,
 )
 from .privateendpointstatus import PrivateEndpointStatus
-from openrouter.types import BaseModel, Nullable, UNSET_SENTINEL
+from openrouter.types import (
+    BaseModel,
+    Nullable,
+    OptionalNullable,
+    UNSET,
+    UNSET_SENTINEL,
+)
 from pydantic import model_serializer
-from typing_extensions import TypedDict
+from typing import List
+from typing_extensions import NotRequired, TypedDict
 
 
 class PrivateEndpointTypedDict(TypedDict):
     base_url: Nullable[str]
     r"""HTTPS base URL of your deployment, or `null` for providers whose URL is derived from the BYOK credential (Azure, Amazon Bedrock, Google Vertex)."""
+    declared_parameters: List[str]
+    r"""Parameters you declared the upstream supports. Requests that use a parameter only route to this endpoint when it is tested or declared."""
     declared_region: Nullable[PrivateEndpointDeclaredRegion]
     r"""Where you attest this deployment processes data. `global` means not regional; `null` means undeclared."""
     declared_zdr: Nullable[bool]
@@ -35,13 +44,20 @@ class PrivateEndpointTypedDict(TypedDict):
     r"""Slug of the upstream provider, or `null` when the provider is no longer listed."""
     status: PrivateEndpointStatus
     r"""Lifecycle state. `draft` endpoints are not routable until validated and activated; `disabled` endpoints are activated but temporarily not routable."""
+    tested_parameters: List[str]
+    r"""Parameters a validation run proved the upstream honors (`tools`, `tool_choice`, `response_format`, `structured_outputs`, `stop`). Read-only; cleared when the upstream configuration changes."""
     upstream_model_id: str
     r"""Model or deployment identifier sent to the upstream provider."""
+    max_completion_tokens: NotRequired[Nullable[int]]
+    r"""Most completion tokens a request routed to this endpoint can produce, or `null` when the endpoint sets no cap beyond the model context length."""
 
 
 class PrivateEndpoint(BaseModel):
     base_url: Nullable[str]
     r"""HTTPS base URL of your deployment, or `null` for providers whose URL is derived from the BYOK credential (Azure, Amazon Bedrock, Google Vertex)."""
+
+    declared_parameters: List[str]
+    r"""Parameters you declared the upstream supports. Requests that use a parameter only route to this endpoint when it is tested or declared."""
 
     declared_region: Nullable[PrivateEndpointDeclaredRegion]
     r"""Where you attest this deployment processes data. `global` means not regional; `null` means undeclared."""
@@ -73,19 +89,46 @@ class PrivateEndpoint(BaseModel):
     status: PrivateEndpointStatus
     r"""Lifecycle state. `draft` endpoints are not routable until validated and activated; `disabled` endpoints are activated but temporarily not routable."""
 
+    tested_parameters: List[str]
+    r"""Parameters a validation run proved the upstream honors (`tools`, `tool_choice`, `response_format`, `structured_outputs`, `stop`). Read-only; cleared when the upstream configuration changes."""
+
     upstream_model_id: str
     r"""Model or deployment identifier sent to the upstream provider."""
 
+    max_completion_tokens: OptionalNullable[int] = UNSET
+    r"""Most completion tokens a request routed to this endpoint can produce, or `null` when the endpoint sets no cap beyond the model context length."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
+        optional_fields = set(["max_completion_tokens"])
+        nullable_fields = set(
+            [
+                "base_url",
+                "declared_region",
+                "declared_zdr",
+                "max_completion_tokens",
+                "model_name",
+                "model_slug",
+                "provider_slug",
+            ]
+        )
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
             if val != UNSET_SENTINEL:
-                m[k] = val
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
 
         return m

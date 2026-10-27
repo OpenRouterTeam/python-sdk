@@ -1060,6 +1060,12 @@ if TYPE_CHECKING:
         UpdatePrivateEndpointRequest,
         UpdatePrivateEndpointRequestTypedDict,
     )
+    from .updateprivateendpointparameters import (
+        UpdatePrivateEndpointParametersGlobals,
+        UpdatePrivateEndpointParametersGlobalsTypedDict,
+        UpdatePrivateEndpointParametersRequest,
+        UpdatePrivateEndpointParametersRequestTypedDict,
+    )
     from .updateprivateendpointpricing import (
         UpdatePrivateEndpointPricingGlobals,
         UpdatePrivateEndpointPricingGlobalsTypedDict,
@@ -1881,6 +1887,10 @@ __all__ = [
     "UpdateOrganizationSettingsResponseTypedDict",
     "UpdatePrivateEndpointGlobals",
     "UpdatePrivateEndpointGlobalsTypedDict",
+    "UpdatePrivateEndpointParametersGlobals",
+    "UpdatePrivateEndpointParametersGlobalsTypedDict",
+    "UpdatePrivateEndpointParametersRequest",
+    "UpdatePrivateEndpointParametersRequestTypedDict",
     "UpdatePrivateEndpointPricingGlobals",
     "UpdatePrivateEndpointPricingGlobalsTypedDict",
     "UpdatePrivateEndpointPricingRequest",
@@ -2715,6 +2725,10 @@ _dynamic_imports: dict[str, str] = {
     "UpdatePrivateEndpointGlobalsTypedDict": ".updateprivateendpoint",
     "UpdatePrivateEndpointRequest": ".updateprivateendpoint",
     "UpdatePrivateEndpointRequestTypedDict": ".updateprivateendpoint",
+    "UpdatePrivateEndpointParametersGlobals": ".updateprivateendpointparameters",
+    "UpdatePrivateEndpointParametersGlobalsTypedDict": ".updateprivateendpointparameters",
+    "UpdatePrivateEndpointParametersRequest": ".updateprivateendpointparameters",
+    "UpdatePrivateEndpointParametersRequestTypedDict": ".updateprivateendpointparameters",
     "UpdatePrivateEndpointPricingGlobals": ".updateprivateendpointpricing",
     "UpdatePrivateEndpointPricingGlobalsTypedDict": ".updateprivateendpointpricing",
     "UpdatePrivateEndpointPricingRequest": ".updateprivateendpointpricing",

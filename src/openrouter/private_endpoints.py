@@ -6,7 +6,7 @@ from openrouter._hooks import HookContext
 from openrouter.types import OptionalNullable, UNSET
 from openrouter.utils import get_security_from_env
 from openrouter.utils.unmarshal_json_response import unmarshal_json_response
-from typing import Any, Mapping, Optional, Union
+from typing import Any, Iterable, List, Mapping, Optional, Union
 
 
 class PrivateEndpoints(BaseSDK):
@@ -293,10 +293,14 @@ class PrivateEndpoints(BaseSDK):
             ]
         ] = None,
         base_url: Optional[str] = None,
+        declared_parameters: Optional[
+            Iterable[components.PrivateEndpointDeclaredParameter]
+        ] = None,
         declared_region: OptionalNullable[
             components.CreatePrivateEndpointRequestDeclaredRegion
         ] = UNSET,
         declared_zdr: OptionalNullable[bool] = UNSET,
+        max_completion_tokens: Optional[int] = None,
         pricing: Optional[
             Union[
                 components.PrivateEndpointPricing,
@@ -322,11 +326,13 @@ class PrivateEndpoints(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
-        :param idempotency_key: Retry-safe create: a repeated create with the same key from the same organization returns the endpoint the first request created instead of creating another. The endpoint is returned as it is now. Reusing a key with a different request body (model, provider, base URL, upstream model ID, declared ZDR or region, or pricing) is rejected with 422 `idempotency_key_reused`. `activate` is not compared, and later edits to the endpoint do not affect the comparison.
+        :param idempotency_key: Retry-safe create: a repeated create with the same key from the same organization returns the endpoint the first request created instead of creating another. The endpoint is returned as it is now. Reusing a key with a different request body (model, provider, base URL, upstream model ID, declared ZDR or region, pricing, or declared parameters) is rejected with 422 `idempotency_key_reused`. Declared parameters are compared as a set, so a retry that reorders or repeats a name replays the endpoint. `activate` and `max_completion_tokens` are not compared, and later edits to the endpoint do not affect the comparison.
         :param activate: Validate and activate in the same call. On a failed validation the draft is kept and returned with a 422, so fix it and call `/validate` and `/activate` instead of creating it again.
         :param base_url: HTTPS base URL of your deployment. Required unless the provider derives its URL from the BYOK credential (Azure, Amazon Bedrock, Google Vertex).
+        :param declared_parameters: Parameters the upstream supports beyond the tested ones. Replaces the earlier declaration; tested parameters stay. Order and repeated names are ignored, but the list holds at most as many entries as there are declarable parameters, repeats included. `tool_choice` requires `tools` to be tested or declared.
         :param declared_region: Attest where this deployment processes data.
         :param declared_zdr: Attest that this deployment retains no prompt or completion data.
+        :param max_completion_tokens: Cap on completion tokens per request. Requests asking for more skip this endpoint, and the default output length stays within it. When omitted, the cap is copied from the public endpoint for the same model and provider, if there is one.
         :param pricing: Negotiated per-token rates reported for requests routed to this endpoint.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -353,8 +359,13 @@ class PrivateEndpoints(BaseSDK):
                     activate, Optional[components.PrivateEndpointActivation]
                 ),
                 base_url=base_url,
+                declared_parameters=utils.unmarshal(
+                    declared_parameters,
+                    Optional[List[components.PrivateEndpointDeclaredParameter]],
+                ),
                 declared_region=declared_region,
                 declared_zdr=declared_zdr,
+                max_completion_tokens=max_completion_tokens,
                 model_permaslug=model_permaslug,
                 pricing=utils.get_pydantic_model(
                     pricing, Optional[components.PrivateEndpointPricing]
@@ -496,10 +507,14 @@ class PrivateEndpoints(BaseSDK):
             ]
         ] = None,
         base_url: Optional[str] = None,
+        declared_parameters: Optional[
+            Iterable[components.PrivateEndpointDeclaredParameter]
+        ] = None,
         declared_region: OptionalNullable[
             components.CreatePrivateEndpointRequestDeclaredRegion
         ] = UNSET,
         declared_zdr: OptionalNullable[bool] = UNSET,
+        max_completion_tokens: Optional[int] = None,
         pricing: Optional[
             Union[
                 components.PrivateEndpointPricing,
@@ -525,11 +540,13 @@ class PrivateEndpoints(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
-        :param idempotency_key: Retry-safe create: a repeated create with the same key from the same organization returns the endpoint the first request created instead of creating another. The endpoint is returned as it is now. Reusing a key with a different request body (model, provider, base URL, upstream model ID, declared ZDR or region, or pricing) is rejected with 422 `idempotency_key_reused`. `activate` is not compared, and later edits to the endpoint do not affect the comparison.
+        :param idempotency_key: Retry-safe create: a repeated create with the same key from the same organization returns the endpoint the first request created instead of creating another. The endpoint is returned as it is now. Reusing a key with a different request body (model, provider, base URL, upstream model ID, declared ZDR or region, pricing, or declared parameters) is rejected with 422 `idempotency_key_reused`. Declared parameters are compared as a set, so a retry that reorders or repeats a name replays the endpoint. `activate` and `max_completion_tokens` are not compared, and later edits to the endpoint do not affect the comparison.
         :param activate: Validate and activate in the same call. On a failed validation the draft is kept and returned with a 422, so fix it and call `/validate` and `/activate` instead of creating it again.
         :param base_url: HTTPS base URL of your deployment. Required unless the provider derives its URL from the BYOK credential (Azure, Amazon Bedrock, Google Vertex).
+        :param declared_parameters: Parameters the upstream supports beyond the tested ones. Replaces the earlier declaration; tested parameters stay. Order and repeated names are ignored, but the list holds at most as many entries as there are declarable parameters, repeats included. `tool_choice` requires `tools` to be tested or declared.
         :param declared_region: Attest where this deployment processes data.
         :param declared_zdr: Attest that this deployment retains no prompt or completion data.
+        :param max_completion_tokens: Cap on completion tokens per request. Requests asking for more skip this endpoint, and the default output length stays within it. When omitted, the cap is copied from the public endpoint for the same model and provider, if there is one.
         :param pricing: Negotiated per-token rates reported for requests routed to this endpoint.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -556,8 +573,13 @@ class PrivateEndpoints(BaseSDK):
                     activate, Optional[components.PrivateEndpointActivation]
                 ),
                 base_url=base_url,
+                declared_parameters=utils.unmarshal(
+                    declared_parameters,
+                    Optional[List[components.PrivateEndpointDeclaredParameter]],
+                ),
                 declared_region=declared_region,
                 declared_zdr=declared_zdr,
+                max_completion_tokens=max_completion_tokens,
                 model_permaslug=model_permaslug,
                 pricing=utils.get_pydantic_model(
                     pricing, Optional[components.PrivateEndpointPricing]
@@ -2548,6 +2570,352 @@ class PrivateEndpoints(BaseSDK):
             return unmarshal_json_response(
                 components.ManagedPrivateEndpointResponse, http_res
             )
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.BadRequestResponseErrorData, http_res
+            )
+            raise errors.BadRequestResponseError(response_data, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UnauthorizedResponseErrorData, http_res
+            )
+            raise errors.UnauthorizedResponseError(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ForbiddenResponseErrorData, http_res
+            )
+            raise errors.ForbiddenResponseError(response_data, http_res)
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.NotFoundResponseErrorData, http_res
+            )
+            raise errors.NotFoundResponseError(response_data, http_res)
+        if utils.match_response(http_res, "408", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.RequestTimeoutResponseErrorData, http_res
+            )
+            raise errors.RequestTimeoutResponseError(response_data, http_res)
+        if utils.match_response(http_res, "409", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ConflictResponseErrorData, http_res
+            )
+            raise errors.ConflictResponseError(response_data, http_res)
+        if utils.match_response(http_res, "422", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UnprocessableEntityResponseErrorData, http_res
+            )
+            raise errors.UnprocessableEntityResponseError(response_data, http_res)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.InternalServerResponseErrorData, http_res
+            )
+            raise errors.InternalServerResponseError(response_data, http_res)
+        if utils.match_response(http_res, "502", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.BadGatewayResponseErrorData, http_res
+            )
+            raise errors.BadGatewayResponseError(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.OpenRouterDefaultError(
+                "API error occurred", http_res, http_res_text
+            )
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.OpenRouterDefaultError(
+                "API error occurred", http_res, http_res_text
+            )
+
+        raise errors.OpenRouterDefaultError("Unexpected response received", http_res)
+
+    def update_parameters(
+        self,
+        *,
+        id: str,
+        declared_parameters: Iterable[components.PrivateEndpointDeclaredParameter],
+        http_referer: Optional[str] = None,
+        x_open_router_title: Optional[str] = None,
+        x_open_router_categories: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> components.PrivateEndpointResponse:
+        r"""Set private endpoint supported parameters
+
+        Declare which request parameters the upstream supports beyond the ones validation proved. Applies to drafts and active endpoints; routing picks the change up for subsequent requests. The body replaces the earlier declaration and is read as a set: order and repeated names do not matter, but the list holds at most as many entries as there are declarable parameters, repeats included. `tested_parameters` stay. Returns 400 `parameters_invalid` when `tool_choice` is declared without `tools` being tested or declared. [Management key](/docs/guides/overview/auth/management-api-keys) required.
+
+        :param id: Stable identifier of the private endpoint.
+        :param declared_parameters: Parameters the upstream supports beyond the tested ones. Replaces the earlier declaration; tested parameters stay. Order and repeated names are ignored, but the list holds at most as many entries as there are declarable parameters, repeats included. `tool_choice` requires `tools` to be tested or declared.
+        :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
+            This is used to track API usage per application.
+
+        :param x_open_router_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+        :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
+
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = operations.UpdatePrivateEndpointParametersRequest(
+            http_referer=http_referer,
+            x_open_router_title=x_open_router_title,
+            x_open_router_categories=x_open_router_categories,
+            id=id,
+            update_private_endpoint_parameters_request=components.UpdatePrivateEndpointParametersRequest(
+                declared_parameters=utils.unmarshal(
+                    declared_parameters,
+                    List[components.PrivateEndpointDeclaredParameter],
+                ),
+            ),
+        )
+
+        req = self._build_request(
+            method="PUT",
+            path="/private-endpoints/{id}/parameters",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            _globals=operations.UpdatePrivateEndpointParametersGlobals(
+                http_referer=self.sdk_configuration.globals.http_referer,
+                x_open_router_title=self.sdk_configuration.globals.x_open_router_title,
+                x_open_router_categories=self.sdk_configuration.globals.x_open_router_categories,
+            ),
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.update_private_endpoint_parameters_request,
+                False,
+                False,
+                "json",
+                components.UpdatePrivateEndpointParametersRequest,
+            ),
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 60000, 1.5, 3600000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["5XX"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="updatePrivateEndpointParameters",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
+                tags=["Private Endpoints"],
+                extensions=None,
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(components.PrivateEndpointResponse, http_res)
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.BadRequestResponseErrorData, http_res
+            )
+            raise errors.BadRequestResponseError(response_data, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UnauthorizedResponseErrorData, http_res
+            )
+            raise errors.UnauthorizedResponseError(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ForbiddenResponseErrorData, http_res
+            )
+            raise errors.ForbiddenResponseError(response_data, http_res)
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.NotFoundResponseErrorData, http_res
+            )
+            raise errors.NotFoundResponseError(response_data, http_res)
+        if utils.match_response(http_res, "408", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.RequestTimeoutResponseErrorData, http_res
+            )
+            raise errors.RequestTimeoutResponseError(response_data, http_res)
+        if utils.match_response(http_res, "409", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ConflictResponseErrorData, http_res
+            )
+            raise errors.ConflictResponseError(response_data, http_res)
+        if utils.match_response(http_res, "422", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UnprocessableEntityResponseErrorData, http_res
+            )
+            raise errors.UnprocessableEntityResponseError(response_data, http_res)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.InternalServerResponseErrorData, http_res
+            )
+            raise errors.InternalServerResponseError(response_data, http_res)
+        if utils.match_response(http_res, "502", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.BadGatewayResponseErrorData, http_res
+            )
+            raise errors.BadGatewayResponseError(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.OpenRouterDefaultError(
+                "API error occurred", http_res, http_res_text
+            )
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.OpenRouterDefaultError(
+                "API error occurred", http_res, http_res_text
+            )
+
+        raise errors.OpenRouterDefaultError("Unexpected response received", http_res)
+
+    async def update_parameters_async(
+        self,
+        *,
+        id: str,
+        declared_parameters: Iterable[components.PrivateEndpointDeclaredParameter],
+        http_referer: Optional[str] = None,
+        x_open_router_title: Optional[str] = None,
+        x_open_router_categories: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> components.PrivateEndpointResponse:
+        r"""Set private endpoint supported parameters
+
+        Declare which request parameters the upstream supports beyond the ones validation proved. Applies to drafts and active endpoints; routing picks the change up for subsequent requests. The body replaces the earlier declaration and is read as a set: order and repeated names do not matter, but the list holds at most as many entries as there are declarable parameters, repeats included. `tested_parameters` stay. Returns 400 `parameters_invalid` when `tool_choice` is declared without `tools` being tested or declared. [Management key](/docs/guides/overview/auth/management-api-keys) required.
+
+        :param id: Stable identifier of the private endpoint.
+        :param declared_parameters: Parameters the upstream supports beyond the tested ones. Replaces the earlier declaration; tested parameters stay. Order and repeated names are ignored, but the list holds at most as many entries as there are declarable parameters, repeats included. `tool_choice` requires `tools` to be tested or declared.
+        :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
+            This is used to track API usage per application.
+
+        :param x_open_router_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+        :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
+
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = operations.UpdatePrivateEndpointParametersRequest(
+            http_referer=http_referer,
+            x_open_router_title=x_open_router_title,
+            x_open_router_categories=x_open_router_categories,
+            id=id,
+            update_private_endpoint_parameters_request=components.UpdatePrivateEndpointParametersRequest(
+                declared_parameters=utils.unmarshal(
+                    declared_parameters,
+                    List[components.PrivateEndpointDeclaredParameter],
+                ),
+            ),
+        )
+
+        req = self._build_request_async(
+            method="PUT",
+            path="/private-endpoints/{id}/parameters",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            _globals=operations.UpdatePrivateEndpointParametersGlobals(
+                http_referer=self.sdk_configuration.globals.http_referer,
+                x_open_router_title=self.sdk_configuration.globals.x_open_router_title,
+                x_open_router_categories=self.sdk_configuration.globals.x_open_router_categories,
+            ),
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.update_private_endpoint_parameters_request,
+                False,
+                False,
+                "json",
+                components.UpdatePrivateEndpointParametersRequest,
+            ),
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 60000, 1.5, 3600000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["5XX"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="updatePrivateEndpointParameters",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
+                tags=["Private Endpoints"],
+                extensions=None,
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(components.PrivateEndpointResponse, http_res)
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.BadRequestResponseErrorData, http_res
