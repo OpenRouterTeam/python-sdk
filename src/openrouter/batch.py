@@ -22,12 +22,8 @@ class Batch(BaseSDK):
         limit: Optional[int] = None,
         after: Optional[str] = None,
         status: Optional[Iterable[components.BatchListStatus]] = None,
-        created_after: Optional[
-            Union[components.BatchListTimestamp, components.BatchListTimestampTypedDict]
-        ] = None,
-        created_before: Optional[
-            Union[components.BatchListTimestamp, components.BatchListTimestampTypedDict]
-        ] = None,
+        created_after: Optional[Any] = None,
+        created_before: Optional[Any] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -194,12 +190,8 @@ class Batch(BaseSDK):
         limit: Optional[int] = None,
         after: Optional[str] = None,
         status: Optional[Iterable[components.BatchListStatus]] = None,
-        created_after: Optional[
-            Union[components.BatchListTimestamp, components.BatchListTimestampTypedDict]
-        ] = None,
-        created_before: Optional[
-            Union[components.BatchListTimestamp, components.BatchListTimestampTypedDict]
-        ] = None,
+        created_after: Optional[Any] = None,
+        created_before: Optional[Any] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,

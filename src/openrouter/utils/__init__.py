@@ -15,7 +15,7 @@ async def run_sync_in_thread(func: Callable[..., _T], *args) -> _T:
 
 if TYPE_CHECKING:
     from .annotations import get_discriminator
-    from .datetimes import parse_datetime
+    from .datetimes import parse_datetime, parse_duration
     from .enums import OpenEnumMeta
     from .unions import parse_open_union
     from .headers import get_headers, get_response_headers
@@ -36,6 +36,7 @@ if TYPE_CHECKING:
     from .security import get_security, get_security_from_env
 
     from .serializers import (
+        ALLOW_UNKNOWN_UNION_VARIANTS,
         get_pydantic_model,
         marshal_json,
         unmarshal,
@@ -72,6 +73,7 @@ __all__ = [
     "get_default_logger",
     "get_discriminator",
     "parse_datetime",
+    "parse_duration",
     "get_global_from_env",
     "get_headers",
     "get_pydantic_model",
@@ -107,6 +109,7 @@ __all__ = [
     "stream_to_bytes",
     "stream_to_bytes_async",
     "template_url",
+    "ALLOW_UNKNOWN_UNION_VARIANTS",
     "unmarshal",
     "unmarshal_json",
     "validate_decimal",
@@ -126,8 +129,10 @@ _dynamic_imports: dict[str, str] = {
     "get_default_logger": ".logger",
     "get_discriminator": ".annotations",
     "parse_datetime": ".datetimes",
+    "parse_duration": ".datetimes",
     "get_global_from_env": ".values",
     "get_headers": ".headers",
+    "ALLOW_UNKNOWN_UNION_VARIANTS": ".serializers",
     "get_pydantic_model": ".serializers",
     "get_query_params": ".queryparams",
     "get_response_headers": ".headers",
