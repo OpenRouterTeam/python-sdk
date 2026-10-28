@@ -4,13 +4,12 @@ from __future__ import annotations
 from openrouter.components import (
     batchlistresponse as components_batchlistresponse,
     batchliststatus as components_batchliststatus,
-    batchlisttimestamp as components_batchlisttimestamp,
 )
 from openrouter.types import BaseModel, UNSET_SENTINEL
 from openrouter.utils import FieldMetadata, HeaderMetadata, QueryParamMetadata
 import pydantic
 from pydantic import model_serializer
-from typing import Awaitable, Callable, List, Optional, Union
+from typing import Any, Awaitable, Callable, List, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
@@ -98,13 +97,9 @@ class ListBatchesRequestTypedDict(TypedDict):
     r"""Batch id from the previous page's `last_id`."""
     status: NotRequired[List[components_batchliststatus.BatchListStatus]]
     r"""Repeat this parameter to include more than one status."""
-    created_after: NotRequired[
-        components_batchlisttimestamp.BatchListTimestampTypedDict
-    ]
+    created_after: NotRequired[Any]
     r"""Only include batches created strictly after this timestamp."""
-    created_before: NotRequired[
-        components_batchlisttimestamp.BatchListTimestampTypedDict
-    ]
+    created_before: NotRequired[Any]
     r"""Only include batches created strictly before this timestamp."""
 
 
@@ -156,13 +151,13 @@ class ListBatchesRequest(BaseModel):
     r"""Repeat this parameter to include more than one status."""
 
     created_after: Annotated[
-        Optional[components_batchlisttimestamp.BatchListTimestamp],
+        Optional[Any],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
     r"""Only include batches created strictly after this timestamp."""
 
     created_before: Annotated[
-        Optional[components_batchlisttimestamp.BatchListTimestamp],
+        Optional[Any],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
     r"""Only include batches created strictly before this timestamp."""

@@ -834,7 +834,6 @@ if TYPE_CHECKING:
         BatchListResponseTypedDict,
     )
     from .batchliststatus import BatchListStatus
-    from .batchlisttimestamp import BatchListTimestamp, BatchListTimestampTypedDict
     from .batchobject import (
         Annotation,
         AnnotationContentUnion,
@@ -5009,8 +5008,6 @@ __all__ = [
     "BatchListResponseObject",
     "BatchListResponseTypedDict",
     "BatchListStatus",
-    "BatchListTimestamp",
-    "BatchListTimestampTypedDict",
     "BatchObject",
     "BatchObjectCompletionTokensDetails",
     "BatchObjectCompletionTokensDetailsTypedDict",
@@ -8279,8 +8276,6 @@ _dynamic_imports: dict[str, str] = {
     "BatchListResponseObject": ".batchlistresponse",
     "BatchListResponseTypedDict": ".batchlistresponse",
     "BatchListStatus": ".batchliststatus",
-    "BatchListTimestamp": ".batchlisttimestamp",
-    "BatchListTimestampTypedDict": ".batchlisttimestamp",
     "Annotation": ".batchobject",
     "AnnotationContentUnion": ".batchobject",
     "AnnotationContentUnionTypedDict": ".batchobject",
