@@ -1,0 +1,13 @@
+---
+title: "McpOriginStatus"
+---
+
+The vault's decision for a request to this server; null for members' own accounts, decided per acting member.
+
+
+## Fields
+
+| Field                                                                  | Type                                                                   | Required                                                               | Description                                                            |
+| ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| `failure`                                                              | *Nullable[str]*                                                        | ✅                                                     | The credential failure code when `state` is `failing`; null otherwise. |
+| `state`                                                                | [components.McpOriginState](../components/mcporiginstate.mdx)           | ✅                                                     | N/A                                                                    |

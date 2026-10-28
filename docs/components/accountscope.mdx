@@ -1,0 +1,22 @@
+---
+title: "AccountScope"
+---
+
+`workspace` applies to every intern of the workspace; `intern` to this intern alone.
+
+## Example Usage
+
+```python
+from openrouter.components import AccountScope
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
+value: AccountScope = "workspace"
+```
+
+
+## Values
+
+This is an open enum. Unrecognized values will not fail type checks.
+
+- `"workspace"`
+- `"intern"`

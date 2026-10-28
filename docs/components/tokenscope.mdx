@@ -1,0 +1,22 @@
+---
+title: "TokenScope"
+---
+
+`workspace` applies to every intern of the workspace; `intern` to this intern alone.
+
+## Example Usage
+
+```python
+from openrouter.components import TokenScope
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
+value: TokenScope = "workspace"
+```
+
+
+## Values
+
+This is an open enum. Unrecognized values will not fail type checks.
+
+- `"workspace"`
+- `"intern"`

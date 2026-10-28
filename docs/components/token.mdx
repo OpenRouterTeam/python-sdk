@@ -1,0 +1,13 @@
+---
+title: "Token"
+---
+
+## Fields
+
+| Field                                                                                | Type                                                                                 | Required                                                                             | Description                                                                          |
+| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
+| `holds_token`                                                                        | *bool*                                                                               | ✅                                                                   | N/A                                                                                  |
+| `login`                                                                              | *str*                                                                                | ✅                                                                   | N/A                                                                                  |
+| `owner`                                                                              | *Nullable[str]*                                                                      | ✅                                                                   | N/A                                                                                  |
+| `repository_count`                                                                   | *Nullable[int]*                                                                      | ✅                                                                   | N/A                                                                                  |
+| `scope`                                                                              | [components.TokenScope](../components/tokenscope.mdx)                                 | ✅                                                                   | `workspace` applies to every intern of the workspace; `intern` to this intern alone. |

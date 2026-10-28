@@ -1,0 +1,13 @@
+---
+title: "Account"
+---
+
+## Fields
+
+| Field                                                                                | Type                                                                                 | Required                                                                             | Description                                                                          |
+| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
+| `delegated_capabilities`                                                             | List[*str*]                                                                          | ✅                                                                   | N/A                                                                                  |
+| `email`                                                                              | *str*                                                                                | ✅                                                                   | N/A                                                                                  |
+| `holds_grant`                                                                        | *bool*                                                                               | ✅                                                                   | N/A                                                                                  |
+| `is_delegated_to_intern`                                                             | *bool*                                                                               | ✅                                                                   | N/A                                                                                  |
+| `scope`                                                                              | [components.AccountScope](../components/accountscope.mdx)                             | ✅                                                                   | `workspace` applies to every intern of the workspace; `intern` to this intern alone. |
