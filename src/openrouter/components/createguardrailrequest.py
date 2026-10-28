@@ -48,6 +48,8 @@ class CreateGuardrailRequestTypedDict(TypedDict):
     r"""Whether this guardrail allows free endpoints that train on request data."""
     enable_paid_model_training: NotRequired[Nullable[bool]]
     r"""Whether this guardrail allows paid endpoints that train on request data."""
+    enforce_first_party_harness_models: NotRequired[Nullable[bool]]
+    r"""Whether coding harnesses list only their vendor's own models: Codex lists OpenAI models and Claude Code and Claude Desktop list Anthropic models. Affects only the model list those harnesses request from GET /models; a model the client names directly is still routed. Any true across the workspace default, member, and API key guardrails applies."""
     enforce_zdr: NotRequired[Nullable[bool]]
     r"""Deprecated. Use enforce_zdr_anthropic, enforce_zdr_openai, enforce_zdr_google, enforce_zdr_xai, and enforce_zdr_other instead. When provided, its value is copied into any of those per-provider fields that are not explicitly specified on the request."""
     enforce_zdr_anthropic: NotRequired[Nullable[bool]]
@@ -113,6 +115,9 @@ class CreateGuardrailRequest(BaseModel):
     enable_paid_model_training: OptionalNullable[bool] = UNSET
     r"""Whether this guardrail allows paid endpoints that train on request data."""
 
+    enforce_first_party_harness_models: OptionalNullable[bool] = UNSET
+    r"""Whether coding harnesses list only their vendor's own models: Codex lists OpenAI models and Claude Code and Claude Desktop list Anthropic models. Affects only the model list those harnesses request from GET /models; a model the client names directly is still routed. Any true across the workspace default, member, and API key guardrails applies."""
+
     enforce_zdr: Annotated[
         OptionalNullable[bool],
         pydantic.Field(
@@ -169,6 +174,7 @@ class CreateGuardrailRequest(BaseModel):
                 "enable_free_model_publication",
                 "enable_free_model_training",
                 "enable_paid_model_training",
+                "enforce_first_party_harness_models",
                 "enforce_zdr",
                 "enforce_zdr_anthropic",
                 "enforce_zdr_google",
@@ -196,6 +202,7 @@ class CreateGuardrailRequest(BaseModel):
                 "enable_free_model_publication",
                 "enable_free_model_training",
                 "enable_paid_model_training",
+                "enforce_first_party_harness_models",
                 "enforce_zdr",
                 "enforce_zdr_anthropic",
                 "enforce_zdr_google",
