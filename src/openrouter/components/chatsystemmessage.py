@@ -2,10 +2,7 @@
 
 from __future__ import annotations
 from .chatcontenttext import ChatContentText, ChatContentTextTypedDict
-from .configurationupdatereasoning import (
-    ConfigurationUpdateReasoning,
-    ConfigurationUpdateReasoningTypedDict,
-)
+from .configurationupdate import ConfigurationUpdate, ConfigurationUpdateTypedDict
 from openrouter.types import (
     BaseModel,
     Nullable,
@@ -16,20 +13,6 @@ from openrouter.types import (
 from pydantic import model_serializer
 from typing import List, Literal, Optional, Union
 from typing_extensions import NotRequired, TypeAliasType, TypedDict
-
-
-class ChatSystemMessageConfigurationUpdateTypedDict(TypedDict):
-    r"""OpenRouter extension. Changes reasoning effort from this point in the conversation onward without invalidating the prompt cache for the preceding turns. Place it on a content-less system message (`content: \"\"`) directly before the user message it should apply to, and keep it at that position in later requests. Equivalent to the OpenAI Responses `configuration_update` input item and the Anthropic Messages per-message `output_config.effort`."""
-
-    reasoning: ConfigurationUpdateReasoningTypedDict
-    r"""Reasoning settings applied from this point in the conversation onward"""
-
-
-class ChatSystemMessageConfigurationUpdate(BaseModel):
-    r"""OpenRouter extension. Changes reasoning effort from this point in the conversation onward without invalidating the prompt cache for the preceding turns. Place it on a content-less system message (`content: \"\"`) directly before the user message it should apply to, and keep it at that position in later requests. Equivalent to the OpenAI Responses `configuration_update` input item and the Anthropic Messages per-message `output_config.effort`."""
-
-    reasoning: ConfigurationUpdateReasoning
-    r"""Reasoning settings applied from this point in the conversation onward"""
 
 
 ChatSystemMessageContentTypedDict = TypeAliasType(
@@ -53,9 +36,7 @@ class ChatSystemMessageTypedDict(TypedDict):
     content: ChatSystemMessageContentTypedDict
     r"""System message content"""
     role: ChatSystemMessageRole
-    configuration_update: NotRequired[
-        Nullable[ChatSystemMessageConfigurationUpdateTypedDict]
-    ]
+    configuration_update: NotRequired[Nullable[ConfigurationUpdateTypedDict]]
     r"""OpenRouter extension. Changes reasoning effort from this point in the conversation onward without invalidating the prompt cache for the preceding turns. Place it on a content-less system message (`content: \"\"`) directly before the user message it should apply to, and keep it at that position in later requests. Equivalent to the OpenAI Responses `configuration_update` input item and the Anthropic Messages per-message `output_config.effort`."""
     name: NotRequired[str]
     r"""Optional name for the system message"""
@@ -69,7 +50,7 @@ class ChatSystemMessage(BaseModel):
 
     role: ChatSystemMessageRole
 
-    configuration_update: OptionalNullable[ChatSystemMessageConfigurationUpdate] = UNSET
+    configuration_update: OptionalNullable[ConfigurationUpdate] = UNSET
     r"""OpenRouter extension. Changes reasoning effort from this point in the conversation onward without invalidating the prompt cache for the preceding turns. Place it on a content-less system message (`content: \"\"`) directly before the user message it should apply to, and keep it at that position in later requests. Equivalent to the OpenAI Responses `configuration_update` input item and the Anthropic Messages per-message `output_config.effort`."""
 
     name: Optional[str] = None

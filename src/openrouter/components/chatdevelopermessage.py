@@ -2,10 +2,7 @@
 
 from __future__ import annotations
 from .chatcontenttext import ChatContentText, ChatContentTextTypedDict
-from .configurationupdatereasoning import (
-    ConfigurationUpdateReasoning,
-    ConfigurationUpdateReasoningTypedDict,
-)
+from .configurationupdate import ConfigurationUpdate, ConfigurationUpdateTypedDict
 from openrouter.types import (
     BaseModel,
     Nullable,
@@ -16,20 +13,6 @@ from openrouter.types import (
 from pydantic import model_serializer
 from typing import List, Literal, Optional, Union
 from typing_extensions import NotRequired, TypeAliasType, TypedDict
-
-
-class ChatDeveloperMessageConfigurationUpdateTypedDict(TypedDict):
-    r"""OpenRouter extension. Same as the system message `configuration_update`: changes reasoning effort from this point in the conversation onward without invalidating the prompt cache for the preceding turns."""
-
-    reasoning: ConfigurationUpdateReasoningTypedDict
-    r"""Reasoning settings applied from this point in the conversation onward"""
-
-
-class ChatDeveloperMessageConfigurationUpdate(BaseModel):
-    r"""OpenRouter extension. Same as the system message `configuration_update`: changes reasoning effort from this point in the conversation onward without invalidating the prompt cache for the preceding turns."""
-
-    reasoning: ConfigurationUpdateReasoning
-    r"""Reasoning settings applied from this point in the conversation onward"""
 
 
 ChatDeveloperMessageContentTypedDict = TypeAliasType(
@@ -53,9 +36,7 @@ class ChatDeveloperMessageTypedDict(TypedDict):
     content: ChatDeveloperMessageContentTypedDict
     r"""Developer message content"""
     role: ChatDeveloperMessageRole
-    configuration_update: NotRequired[
-        Nullable[ChatDeveloperMessageConfigurationUpdateTypedDict]
-    ]
+    configuration_update: NotRequired[Nullable[ConfigurationUpdateTypedDict]]
     r"""OpenRouter extension. Same as the system message `configuration_update`: changes reasoning effort from this point in the conversation onward without invalidating the prompt cache for the preceding turns."""
     name: NotRequired[str]
     r"""Optional name for the developer message"""
@@ -69,9 +50,7 @@ class ChatDeveloperMessage(BaseModel):
 
     role: ChatDeveloperMessageRole
 
-    configuration_update: OptionalNullable[ChatDeveloperMessageConfigurationUpdate] = (
-        UNSET
-    )
+    configuration_update: OptionalNullable[ConfigurationUpdate] = UNSET
     r"""OpenRouter extension. Same as the system message `configuration_update`: changes reasoning effort from this point in the conversation onward without invalidating the prompt cache for the preceding turns."""
 
     name: Optional[str] = None

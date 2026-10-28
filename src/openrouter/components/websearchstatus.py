@@ -11,6 +11,7 @@ WebSearchStatus = Union[
         "searching",
         "in_progress",
         "failed",
+        "incomplete",
     ],
     UnrecognizedStr,
 ]
