@@ -132,6 +132,7 @@ class VideoGenerationRequestOptionsTypedDict(TypedDict):
     openai: NotRequired[Dict[str, Any]]
     parasail: NotRequired[Dict[str, Any]]
     pareto_alpha: NotRequired[Dict[str, Any]]
+    particle_ai: NotRequired[Dict[str, Any]]
     perceptron: NotRequired[Dict[str, Any]]
     perplexity: NotRequired[Dict[str, Any]]
     phala: NotRequired[Dict[str, Any]]
@@ -427,6 +428,10 @@ class VideoGenerationRequestOptions(BaseModel):
         Optional[Dict[str, Any]], pydantic.Field(alias="pareto-alpha")
     ] = None
 
+    particle_ai: Annotated[
+        Optional[Dict[str, Any]], pydantic.Field(alias="particle-ai")
+    ] = None
+
     perceptron: Optional[Dict[str, Any]] = None
 
     perplexity: Optional[Dict[str, Any]] = None
@@ -640,6 +645,7 @@ class VideoGenerationRequestOptions(BaseModel):
                 "openai",
                 "parasail",
                 "pareto-alpha",
+                "particle-ai",
                 "perceptron",
                 "perplexity",
                 "phala",
