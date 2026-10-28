@@ -390,6 +390,7 @@ class Guardrails(BaseSDK):
         enable_free_model_publication: OptionalNullable[bool] = UNSET,
         enable_free_model_training: OptionalNullable[bool] = UNSET,
         enable_paid_model_training: OptionalNullable[bool] = UNSET,
+        enforce_first_party_harness_models: OptionalNullable[bool] = UNSET,
         enforce_zdr: OptionalNullable[bool] = UNSET,
         enforce_zdr_anthropic: OptionalNullable[bool] = UNSET,
         enforce_zdr_google: OptionalNullable[bool] = UNSET,
@@ -430,6 +431,7 @@ class Guardrails(BaseSDK):
         :param enable_free_model_publication: Whether this guardrail allows free endpoints that publish prompts.
         :param enable_free_model_training: Whether this guardrail allows free endpoints that train on request data.
         :param enable_paid_model_training: Whether this guardrail allows paid endpoints that train on request data.
+        :param enforce_first_party_harness_models: Whether coding harnesses list only their vendor's own models: Codex lists OpenAI models and Claude Code and Claude Desktop list Anthropic models. Affects only the model list those harnesses request from GET /models; a model the client names directly is still routed. Any true across the workspace default, member, and API key guardrails applies.
         :param enforce_zdr: Deprecated. Use enforce_zdr_anthropic, enforce_zdr_openai, enforce_zdr_google, enforce_zdr_xai, and enforce_zdr_other instead. When provided, its value is copied into any of those per-provider fields that are not explicitly specified on the request.
         :param enforce_zdr_anthropic: Whether to enforce zero data retention for Anthropic models. Falls back to enforce_zdr when not provided.
         :param enforce_zdr_google: Whether to enforce zero data retention for Google models. Falls back to enforce_zdr when not provided.
@@ -486,6 +488,7 @@ class Guardrails(BaseSDK):
                 enable_free_model_publication=enable_free_model_publication,
                 enable_free_model_training=enable_free_model_training,
                 enable_paid_model_training=enable_paid_model_training,
+                enforce_first_party_harness_models=enforce_first_party_harness_models,
                 enforce_zdr=enforce_zdr,
                 enforce_zdr_anthropic=enforce_zdr_anthropic,
                 enforce_zdr_google=enforce_zdr_google,
@@ -630,6 +633,7 @@ class Guardrails(BaseSDK):
         enable_free_model_publication: OptionalNullable[bool] = UNSET,
         enable_free_model_training: OptionalNullable[bool] = UNSET,
         enable_paid_model_training: OptionalNullable[bool] = UNSET,
+        enforce_first_party_harness_models: OptionalNullable[bool] = UNSET,
         enforce_zdr: OptionalNullable[bool] = UNSET,
         enforce_zdr_anthropic: OptionalNullable[bool] = UNSET,
         enforce_zdr_google: OptionalNullable[bool] = UNSET,
@@ -670,6 +674,7 @@ class Guardrails(BaseSDK):
         :param enable_free_model_publication: Whether this guardrail allows free endpoints that publish prompts.
         :param enable_free_model_training: Whether this guardrail allows free endpoints that train on request data.
         :param enable_paid_model_training: Whether this guardrail allows paid endpoints that train on request data.
+        :param enforce_first_party_harness_models: Whether coding harnesses list only their vendor's own models: Codex lists OpenAI models and Claude Code and Claude Desktop list Anthropic models. Affects only the model list those harnesses request from GET /models; a model the client names directly is still routed. Any true across the workspace default, member, and API key guardrails applies.
         :param enforce_zdr: Deprecated. Use enforce_zdr_anthropic, enforce_zdr_openai, enforce_zdr_google, enforce_zdr_xai, and enforce_zdr_other instead. When provided, its value is copied into any of those per-provider fields that are not explicitly specified on the request.
         :param enforce_zdr_anthropic: Whether to enforce zero data retention for Anthropic models. Falls back to enforce_zdr when not provided.
         :param enforce_zdr_google: Whether to enforce zero data retention for Google models. Falls back to enforce_zdr when not provided.
@@ -726,6 +731,7 @@ class Guardrails(BaseSDK):
                 enable_free_model_publication=enable_free_model_publication,
                 enable_free_model_training=enable_free_model_training,
                 enable_paid_model_training=enable_paid_model_training,
+                enforce_first_party_harness_models=enforce_first_party_harness_models,
                 enforce_zdr=enforce_zdr,
                 enforce_zdr_anthropic=enforce_zdr_anthropic,
                 enforce_zdr_google=enforce_zdr_google,
@@ -1402,6 +1408,7 @@ class Guardrails(BaseSDK):
         enable_free_model_publication: OptionalNullable[bool] = UNSET,
         enable_free_model_training: OptionalNullable[bool] = UNSET,
         enable_paid_model_training: OptionalNullable[bool] = UNSET,
+        enforce_first_party_harness_models: OptionalNullable[bool] = UNSET,
         enforce_zdr: OptionalNullable[bool] = UNSET,
         enforce_zdr_anthropic: OptionalNullable[bool] = UNSET,
         enforce_zdr_google: OptionalNullable[bool] = UNSET,
@@ -1442,6 +1449,7 @@ class Guardrails(BaseSDK):
         :param enable_free_model_publication: Whether this guardrail allows free endpoints that publish prompts.
         :param enable_free_model_training: Whether this guardrail allows free endpoints that train on request data.
         :param enable_paid_model_training: Whether this guardrail allows paid endpoints that train on request data.
+        :param enforce_first_party_harness_models: Whether coding harnesses list only their vendor's own models: Codex lists OpenAI models and Claude Code and Claude Desktop list Anthropic models. Affects only the model list those harnesses request from GET /models; a model the client names directly is still routed. Any true across the workspace default, member, and API key guardrails applies.
         :param enforce_zdr: Deprecated. Use enforce_zdr_anthropic, enforce_zdr_openai, enforce_zdr_google, enforce_zdr_xai, and enforce_zdr_other instead. When provided, its value is copied into any of those per-provider fields that are not explicitly specified on the request.
         :param enforce_zdr_anthropic: Whether to enforce zero data retention for Anthropic models. Falls back to enforce_zdr when not provided.
         :param enforce_zdr_google: Whether to enforce zero data retention for Google models. Falls back to enforce_zdr when not provided.
@@ -1499,6 +1507,7 @@ class Guardrails(BaseSDK):
                 enable_free_model_publication=enable_free_model_publication,
                 enable_free_model_training=enable_free_model_training,
                 enable_paid_model_training=enable_paid_model_training,
+                enforce_first_party_harness_models=enforce_first_party_harness_models,
                 enforce_zdr=enforce_zdr,
                 enforce_zdr_anthropic=enforce_zdr_anthropic,
                 enforce_zdr_google=enforce_zdr_google,
@@ -1652,6 +1661,7 @@ class Guardrails(BaseSDK):
         enable_free_model_publication: OptionalNullable[bool] = UNSET,
         enable_free_model_training: OptionalNullable[bool] = UNSET,
         enable_paid_model_training: OptionalNullable[bool] = UNSET,
+        enforce_first_party_harness_models: OptionalNullable[bool] = UNSET,
         enforce_zdr: OptionalNullable[bool] = UNSET,
         enforce_zdr_anthropic: OptionalNullable[bool] = UNSET,
         enforce_zdr_google: OptionalNullable[bool] = UNSET,
@@ -1692,6 +1702,7 @@ class Guardrails(BaseSDK):
         :param enable_free_model_publication: Whether this guardrail allows free endpoints that publish prompts.
         :param enable_free_model_training: Whether this guardrail allows free endpoints that train on request data.
         :param enable_paid_model_training: Whether this guardrail allows paid endpoints that train on request data.
+        :param enforce_first_party_harness_models: Whether coding harnesses list only their vendor's own models: Codex lists OpenAI models and Claude Code and Claude Desktop list Anthropic models. Affects only the model list those harnesses request from GET /models; a model the client names directly is still routed. Any true across the workspace default, member, and API key guardrails applies.
         :param enforce_zdr: Deprecated. Use enforce_zdr_anthropic, enforce_zdr_openai, enforce_zdr_google, enforce_zdr_xai, and enforce_zdr_other instead. When provided, its value is copied into any of those per-provider fields that are not explicitly specified on the request.
         :param enforce_zdr_anthropic: Whether to enforce zero data retention for Anthropic models. Falls back to enforce_zdr when not provided.
         :param enforce_zdr_google: Whether to enforce zero data retention for Google models. Falls back to enforce_zdr when not provided.
@@ -1749,6 +1760,7 @@ class Guardrails(BaseSDK):
                 enable_free_model_publication=enable_free_model_publication,
                 enable_free_model_training=enable_free_model_training,
                 enable_paid_model_training=enable_paid_model_training,
+                enforce_first_party_harness_models=enforce_first_party_harness_models,
                 enforce_zdr=enforce_zdr,
                 enforce_zdr_anthropic=enforce_zdr_anthropic,
                 enforce_zdr_google=enforce_zdr_google,
