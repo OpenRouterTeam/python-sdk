@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c48cf606-fb42-4a45-9c23-8f0555307828
 management:
-  docChecksum: cd38c6b0d27bcda4e77540ad94350fdb
+  docChecksum: 86b31e3b2783aea03e8fc172cc5f1fdb
   docVersion: 1.0.0
   speakeasyVersion: 1.787.0
   generationVersion: 2.914.0
-  releaseVersion: 1.3.88
-  configChecksum: d1cff2367bbdfc279716b7345e547534
+  releaseVersion: 1.3.89
+  configChecksum: 79444ec5d345ecb016134f29890143fa
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
 persistentEdits:
-  generation_id: bb412b4e-2fe5-4d0c-8ebf-6bdde22a0c76
-  pristine_commit_hash: 1410a7fa153b2a0816765e3ae07af0181bc7ba56
-  pristine_tree_hash: 5232527313cc402469351b106c223d7c98c296c4
+  generation_id: bd7bd74d-54e4-469f-9a1a-9f9cfe0423d3
+  pristine_commit_hash: 6971b1e0667bf50768e507536f98d635a5aff5f6
+  pristine_tree_hash: a3141f649c56f66affe20225a37b981107587e44
 features:
   python:
     acceptHeaders: 3.0.0
@@ -1904,12 +1904,8 @@ trackedFiles:
     pristine_git_object: eee9489fd2c3f15a7cc6525688a5b0cd12839e10
   docs/components/chatdevelopermessage.mdx:
     id: 36556ee902ee
-    last_write_checksum: sha1:ea18be20bcb2210f450165c0791725485bfaa924
-    pristine_git_object: 3db8a03b39f47e61b924319f2aeb2cbec522d7ea
-  docs/components/chatdevelopermessageconfigurationupdate.mdx:
-    id: d9f8b151accf
-    last_write_checksum: sha1:fd0f3db2afacb6414e356244691b3408d9dd3282
-    pristine_git_object: f4dfd91b7aad64da9fe2196b3e1dc341b6757f01
+    last_write_checksum: sha1:b3b3bd94d65b90cce50a8d5590e7171b6985fe37
+    pristine_git_object: 5f8ccf3bcc4e949a58ac207d17a20c3c6495dfcf
   docs/components/chatdevelopermessagecontent.mdx:
     id: 0f36d5e7c6ff
     last_write_checksum: sha1:fe6c792d0d0f647b8894543c23df0d59a34f3c54
@@ -2104,12 +2100,8 @@ trackedFiles:
     pristine_git_object: 602231cf40fe0c66347bd13dd158bd75741c0759
   docs/components/chatsystemmessage.mdx:
     id: fd74aa853b84
-    last_write_checksum: sha1:b09948ed9a49c74cef962b379da78d3b71b86efb
-    pristine_git_object: d904f59d23eac44202b78b5a722bf8de0f0c7de6
-  docs/components/chatsystemmessageconfigurationupdate.mdx:
-    id: f1296b6e2ca4
-    last_write_checksum: sha1:9b6d014e6fda8b399db9265c856bf108a57921e7
-    pristine_git_object: 31dd268a4edfa81004b2f81c576d0164acd81623
+    last_write_checksum: sha1:05d7836f4113a8d872c73bcf67d510f2bf3aa788
+    pristine_git_object: d6912ab69f634bc043cebb4b2d68ff57d1dbfce9
   docs/components/chatsystemmessagecontent.mdx:
     id: a26e029e8e60
     last_write_checksum: sha1:475985246731f53936fe0e0b4d6557c54f201ed1
@@ -2338,6 +2330,10 @@ trackedFiles:
     id: e4aadaca19bc
     last_write_checksum: sha1:d7024f63ad66f7701809f41907d35f4b08e21c2b
     pristine_git_object: 37199a7b510c1e9fcb61566fb1ca2dc3d6a5428b
+  docs/components/configurationupdate.mdx:
+    id: c5bb9102459b
+    last_write_checksum: sha1:5fa67e44debc152fadb56afc34a1c5a01b28b408
+    pristine_git_object: 4d93c3ccf46db8d2cc949cfab62f8e020a76ab51
   docs/components/configurationupdateitem.mdx:
     id: c118c80819dc
     last_write_checksum: sha1:3a492618aab7f070429ce0b06d27ef33814c3fd1
@@ -8040,8 +8036,8 @@ trackedFiles:
     pristine_git_object: a7be3b3d7329f05b2811e9961bd15903541be69b
   docs/components/websearchstatus.mdx:
     id: 10ad5bbdde7e
-    last_write_checksum: sha1:9c9476967dc3135c6443efb573c474acab396a33
-    pristine_git_object: d24fe5f411ca8e3bcbaad9e364d7e7613bc8aa0f
+    last_write_checksum: sha1:3d1ba5bb9ab82deb6fc1660fd9c8799074f6f6a3
+    pristine_git_object: 8656487f961f11ef75d2a81ddbb272b43047721e
   docs/components/websearchuserlocation.mdx:
     id: 472951d8225f
     last_write_checksum: sha1:7342cfe19e978ced434c23766ef8cd796198db49
@@ -10092,8 +10088,8 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:2a16a4502bcbee9ef1d45cc1f19175adb18e322f
-    pristine_git_object: 24ac149e97d2adfcb641dec2efad2c6435bd4564
+    last_write_checksum: sha1:35fa0d4fa14345f3b6ae2c7073d35ac4ab9a5736
+    pristine_git_object: b54878e93a0e105a2f82c943267ffab705fde30c
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77f44b60b98bc126557ec27391f91dfba764bb54
@@ -10120,8 +10116,8 @@ trackedFiles:
     pristine_git_object: 86713cfea633e09d33b3d4e65281071fe20e6137
   src/openrouter/_version.py:
     id: d8d15ad6c586
-    last_write_checksum: sha1:9e1d8ca2afd40003e6910774558ff0dd37158b53
-    pristine_git_object: 98e806f8952505654ba3d620943826b6deac374f
+    last_write_checksum: sha1:699011b685b1b27f19c534dd739e7fdb8f9c4d29
+    pristine_git_object: e104c6481a0a6c5c503ba845b57811343e3b98cb
   src/openrouter/alpha.py:
     id: 306c4d93308d
     last_write_checksum: sha1:30f55a360f41376ab194b9ea725fe4e001a5ae1a
@@ -10168,8 +10164,8 @@ trackedFiles:
     pristine_git_object: ad3d247954547814054c01989a2dff3d12b3e4e1
   src/openrouter/components/__init__.py:
     id: 81754e97b3f4
-    last_write_checksum: sha1:ff2ae7aba9e0c4395dc30c0289a485748e018ddf
-    pristine_git_object: 6c4602a164f4131db1e6686b3124baf1723a3390
+    last_write_checksum: sha1:df294a97d609fccb6bf824446197837f79308f94
+    pristine_git_object: 5dea727121dee0edfa40de7fdb1bc731753167b7
   src/openrouter/components/aabenchmarkentry.py:
     id: e2e0f0b48c82
     last_write_checksum: sha1:fab4d9a24d2cea937bb749d46c5f83941e99d65c
@@ -10964,8 +10960,8 @@ trackedFiles:
     pristine_git_object: 309df1015b07e05ad2d692ed73ef1224535e8582
   src/openrouter/components/chatdevelopermessage.py:
     id: bcba94e8d19a
-    last_write_checksum: sha1:f45ebe02bdd4169102a49a3365f1067d9f936d8d
-    pristine_git_object: 59d993da3b8e9d67cd9d9378a189f9a27b9b79dd
+    last_write_checksum: sha1:60b2eb8ccd9a16045a7c40c86be0cc86c8fd7474
+    pristine_git_object: 68ab93fde1f96d599c1cb6de63dc5cca8a3610bb
   src/openrouter/components/chatdynamicservertool.py:
     id: ebd380d84eb9
     last_write_checksum: sha1:ba1487cd474edaffa46f52bbbe7673dabf3bed86
@@ -11056,8 +11052,8 @@ trackedFiles:
     pristine_git_object: 936fefc210c5b6b9e94ea708035b085b59aed2f4
   src/openrouter/components/chatsystemmessage.py:
     id: 72524b9ccaed
-    last_write_checksum: sha1:110e3e706bba5d21b4722ec9b13f8024aff1470e
-    pristine_git_object: 61a1b8eb15b56f372562c0a8f923a9a082e11957
+    last_write_checksum: sha1:8dd6757196495cc958b758d876058f8b20fccc88
+    pristine_git_object: 268361e7935348717941de77e6033d3b4b6f6d36
   src/openrouter/components/chattokenlogprob.py:
     id: 6ddf9cf44f5a
     last_write_checksum: sha1:75641fdaddc42fea10d46e9974c051f3393ff94c
@@ -11146,6 +11142,10 @@ trackedFiles:
     id: 10d96ee539dc
     last_write_checksum: sha1:303bd561791e19e9f90b5f827dd4b48383c7560b
     pristine_git_object: 142b18a2755af4d57085b1086bb3ad45286e37c1
+  src/openrouter/components/configurationupdate.py:
+    id: 07a8def2ad6a
+    last_write_checksum: sha1:bf4493b0df830700f4051b914f1202fe683018a4
+    pristine_git_object: 8ffb2715962af2bf2edcf99b1ca0c6588c55cf32
   src/openrouter/components/configurationupdateitem.py:
     id: c4b8a6acaa9c
     last_write_checksum: sha1:8983a895f7c6e57c4ed90f8da530092d84c91b9d
@@ -13472,8 +13472,8 @@ trackedFiles:
     pristine_git_object: 13e5a78c446eb248e95c1af3f2424c99d577d391
   src/openrouter/components/websearchstatus.py:
     id: 639330492ee8
-    last_write_checksum: sha1:bd1285ae6b8fb2695468777c7b22d94ce06b520e
-    pristine_git_object: a607c88285f5f8b8e0f057750cde1b6cd14244df
+    last_write_checksum: sha1:36068373c2530261a2d60916de40156e9403ce57
+    pristine_git_object: 71ba89cf6551c87c4c9c55c32a131bb6bc585aaf
   src/openrouter/components/websearchuserlocation.py:
     id: 26eff9609a46
     last_write_checksum: sha1:30cfffec9ed7c8c74a3e3efb721b8c2376ea1e3a
@@ -18781,3 +18781,4 @@ examples:
         "502":
           application/json: {"error": {"code": 502, "message": "Provider returned error"}}
 examplesVersion: 1.0.2
+releaseNotes: "## Python SDK Changes:\n* `open_router.batch.create_batches()`:  `response.results[].response.body.union(OpenResponsesResult).error.metadata.alignment.rejected.union(Array<AlignmentResponsesRejected>)[].union(web_search_call).status.enum(incomplete)` **Added**\n* `open_router.batch.get_batches()`:  `response.results[].response.body.union(OpenResponsesResult).error.metadata.alignment.rejected.union(Array<AlignmentResponsesRejected>)[].union(web_search_call).status.enum(incomplete)` **Added**\n* `open_router.presets.create_presets_responses()`: \n  *  `request.input.union(Array<>)[].union(OutputFileSearchCallItem).status.enum(incomplete)` **Added**\n* `open_router.responses.send()`: \n  *  `request.input.union(Array<>)[].union(OutputWebSearchCallItem).status.enum(incomplete)` **Added**\n  *  `response` **Changed**\n* `open_router.beta.responses.send()`: \n  *  `request.input.union(Array<>)[].union(OutputWebSearchCallItem).status.enum(incomplete)` **Added**\n  *  `response` **Changed**\n"
