@@ -9,7 +9,7 @@ class OrganizationSettingsTypedDict(TypedDict):
     id: str
     r"""ID of the organization the settings belong to"""
     is_filtered_model_catalog_enabled: bool
-    r"""When true, `GET /api/v1/models` called with one of the organization's API keys returns only the models that key can use (the `/api/v1/models/user` catalog), and the signed-in dashboard shows the same list. Anonymous requests always receive the public catalog."""
+    r"""When true, the signed-in dashboard lists only the models the organization can use. `GET /api/v1/models` called with an API key always returns only the models that key can use, whatever this setting says; anonymous requests receive the public catalog."""
 
 
 class OrganizationSettings(BaseModel):
@@ -17,4 +17,4 @@ class OrganizationSettings(BaseModel):
     r"""ID of the organization the settings belong to"""
 
     is_filtered_model_catalog_enabled: bool
-    r"""When true, `GET /api/v1/models` called with one of the organization's API keys returns only the models that key can use (the `/api/v1/models/user` catalog), and the signed-in dashboard shows the same list. Anonymous requests always receive the public catalog."""
+    r"""When true, the signed-in dashboard lists only the models the organization can use. `GET /api/v1/models` called with an API key always returns only the models that key can use, whatever this setting says; anonymous requests receive the public catalog."""
