@@ -1,10 +1,5 @@
 name: Publish
-permissions:
-  checks: write
-  contents: write
-  pull-requests: write
-  statuses: write
-  id-token: write
+permissions: {}
 "on":
   push:
     branches:
@@ -14,10 +9,32 @@ permissions:
   workflow_dispatch: {}
 jobs:
   publish:
+    permissions:
+      checks: write
+      contents: write
+      pull-requests: write
+      statuses: write
+      id-token: write
     uses: speakeasy-api/sdk-generation-action/.github/workflows/sdk-publish.yaml@68f3bfefb79354d39358bf4699863dabd2cea0f6 # v15.60.11
     with:
       target: open-router
     secrets:
       github_access_token: ${{ secrets.GITHUB_TOKEN }}
-      pypi_token: ${{ secrets.PYPI_TOKEN }}
       speakeasy_api_key: ${{ secrets.SPEAKEASY_API_KEY }}
+  # The reusable workflow skips its token-based PyPI job when useTrustedPublishing is set; this job uploads through OIDC instead.
+  publish-pypi:
+    needs: publish
+    if: ${{ needs.publish.outputs.python_regenerated == 'true' && needs.publish.outputs.publish_python == 'true' && needs.publish.outputs.use_pypi_trusted_publishing == 'true' }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          persist-credentials: false
+      - uses: speakeasy-api/sdk-generation-action/publish-pypi@68f3bfefb79354d39358bf4699863dabd2cea0f6 # v15.60.11
+        with:
+          python-directory: ${{ needs.publish.outputs.python_directory }}
+          speakeasy_api_key: ${{ secrets.SPEAKEASY_API_KEY }}
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
