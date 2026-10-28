@@ -163,6 +163,7 @@ Provider = Union[
         "openai",
         "parasail",
         "pareto-alpha",
+        "particle-ai",
         "perceptron",
         "perplexity",
         "phala",
