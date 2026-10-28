@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c48cf606-fb42-4a45-9c23-8f0555307828
 management:
-  docChecksum: 53c154fcf96c897d30be854d25995554
+  docChecksum: cd38c6b0d27bcda4e77540ad94350fdb
   docVersion: 1.0.0
   speakeasyVersion: 1.787.0
   generationVersion: 2.914.0
-  releaseVersion: 1.3.87
-  configChecksum: af14af1f010431d1a1405f151e00821e
+  releaseVersion: 1.3.88
+  configChecksum: d1cff2367bbdfc279716b7345e547534
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
 persistentEdits:
-  generation_id: 6b413384-157d-4ed9-b8aa-efc726fffbdb
-  pristine_commit_hash: 3ce2a8227b7e1f828d58ebae0dca1adfdf65a2df
-  pristine_tree_hash: ef1cba5133df158b3c5ec3dde6091d502fcded6d
+  generation_id: bb412b4e-2fe5-4d0c-8ebf-6bdde22a0c76
+  pristine_commit_hash: 1410a7fa153b2a0816765e3ae07af0181bc7ba56
+  pristine_tree_hash: 5232527313cc402469351b106c223d7c98c296c4
 features:
   python:
     acceptHeaders: 3.0.0
@@ -10040,8 +10040,8 @@ trackedFiles:
     pristine_git_object: 27c97e3ee4761cd46f2d5d96be093e1663c6ed93
   docs/sdks/privateendpoints/README.mdx:
     id: 54dee70b8cc7
-    last_write_checksum: sha1:48a23b4ac96cda69a6f76a3725bbb4c4c5f6a73f
-    pristine_git_object: 0bcec24343c9b8abd80f4633676d73158a04c929
+    last_write_checksum: sha1:450d0029db686185f379d92964a602b946bbe031
+    pristine_git_object: ab814831843fab6ff11f16239f3af00b43ea9651
   docs/sdks/providers/README.mdx:
     id: 5ea9af111324
     last_write_checksum: sha1:570b55655ee7602d3807c3218e450741f634eed6
@@ -10092,8 +10092,8 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:1c4468c3e86707e0157a2ae1df69e1b05d2ab1c4
-    pristine_git_object: 36a5174d753278b0eb8899396cb69c48675d240a
+    last_write_checksum: sha1:2a16a4502bcbee9ef1d45cc1f19175adb18e322f
+    pristine_git_object: 24ac149e97d2adfcb641dec2efad2c6435bd4564
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77f44b60b98bc126557ec27391f91dfba764bb54
@@ -10120,8 +10120,8 @@ trackedFiles:
     pristine_git_object: 86713cfea633e09d33b3d4e65281071fe20e6137
   src/openrouter/_version.py:
     id: d8d15ad6c586
-    last_write_checksum: sha1:fafc0abf6c27e3f328263d13d0aa2ae8b0d362d7
-    pristine_git_object: 04f59b4900eb9cbaa4d08571bb6682e8dfc9aa5a
+    last_write_checksum: sha1:9e1d8ca2afd40003e6910774558ff0dd37158b53
+    pristine_git_object: 98e806f8952505654ba3d620943826b6deac374f
   src/openrouter/alpha.py:
     id: 306c4d93308d
     last_write_checksum: sha1:30f55a360f41376ab194b9ea725fe4e001a5ae1a
@@ -14256,8 +14256,8 @@ trackedFiles:
     pristine_git_object: 26ecf767f8e1f98145acfa7d0fa14ffcf13955d6
   src/openrouter/private_endpoints.py:
     id: fdbce8846ed0
-    last_write_checksum: sha1:02f930fd4055a5383aa5cd58501d6894ed9597b2
-    pristine_git_object: 9f233355fdeae279bcbf361ddd08e3eac9903c43
+    last_write_checksum: sha1:786f808e29866de19964dbffac1e1dcbd7fd30ee
+    pristine_git_object: 518fc30683bf21b7a038a19948117b601e10cbb3
   src/openrouter/providers.py:
     id: debc4c48f149
     last_write_checksum: sha1:11dbc607825edee8dcc84b39ee8171e097c47acf
@@ -18781,4 +18781,3 @@ examples:
         "502":
           application/json: {"error": {"code": 502, "message": "Provider returned error"}}
 examplesVersion: 1.0.2
-releaseNotes: "## Python SDK Changes:\n* `open_router.alpha.decisions.create()`:  `request.provider` **Changed**\n* `open_router.tts.create_speech()`: \n  *  `request.provider.options.primalabs` **Added**\n* `open_router.stt.create_transcription()`: \n  *  `request.provider.options.primalabs` **Added**\n* `open_router.batch.create_batches()`: \n  *  `request.provider.only[].union(ProviderName).enum(prima_labs)` **Added**\n* `open_router.chat.send()`:  `request.provider` **Changed**\n* `open_router.embeddings.generate()`:  `request.provider` **Changed**\n* `open_router.endpoints.list_zdr_endpoints()`:  `response.data[].provider_name.enum(prima_labs)` **Added**\n* `open_router.endpoints.list()`:  `response.data.endpoints[].provider_name.enum(prima_labs)` **Added**\n* `open_router.generations.get_generation()`:  `response.data.provider_responses[].provider_name.enum(prima_labs)` **Added**\n* `open_router.images.generate()`:  `request.provider` **Changed**\n* `open_router.presets.create_presets_chat_completions()`:  `request.provider` **Changed**\n* `open_router.presets.create_presets_messages()`:  `request.provider` **Changed**\n* `open_router.presets.create_presets_responses()`:  `request.provider` **Changed**\n* `open_router.rerank.rerank()`:  `request.provider` **Changed**\n* `open_router.responses.send()`:  `request.provider` **Changed**\n* `open_router.beta.responses.send()`:  `request.provider` **Changed**\n* `open_router.system_one.create()`:  `request.provider` **Changed**\n* `open_router.video_generation.generate()`: \n  *  `request.provider.options.primalabs` **Added**\n"
