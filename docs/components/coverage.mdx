@@ -1,0 +1,14 @@
+---
+title: "Coverage"
+---
+
+What GitHub says the installation covers; null until read.
+
+
+## Fields
+
+| Field                                                                      | Type                                                                       | Required                                                                   | Description                                                                |
+| -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| `checked_at`                                                               | [date](https://docs.python.org/3/library/datetime.html#date-objects)       | :heavy_check_mark:                                                         | When GitHub answered, through the installation token the vault holds.      |
+| `repository_count`                                                         | *Nullable[int]*                                                            | :heavy_check_mark:                                                         | Repositories the installation covers; null when GitHub did not count them. |
+| `selection`                                                                | [components.Selection](../components/selection.mdx)                         | :heavy_check_mark:                                                         | N/A                                                                        |

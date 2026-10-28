@@ -1,0 +1,13 @@
+---
+title: "CustomOriginStatus"
+---
+
+The vault injection decision for this destination, at `read_at`.
+
+
+## Fields
+
+| Field                                                                  | Type                                                                   | Required                                                               | Description                                                            |
+| ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| `failure`                                                              | *Nullable[str]*                                                        | :heavy_check_mark:                                                     | The credential failure code when `state` is `failing`; null otherwise. |
+| `state`                                                                | [components.CustomOriginState](../components/customoriginstate.mdx)     | :heavy_check_mark:                                                     | N/A                                                                    |
