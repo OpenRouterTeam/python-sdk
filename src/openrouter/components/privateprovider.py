@@ -51,8 +51,9 @@ class PrivateProviderTypedDict(TypedDict):
     data_policy: Nullable[PrivateProviderDataPolicy1TypedDict]
     r"""Your declared data policy, or `null` when none was declared."""
     display_name: str
+    r"""Human-readable provider name shown in the UI."""
     name: str
-    r"""Provider name, shown in your activity, logs and Broadcast output. 2-64 letters, numbers, spaces, dots, underscores or hyphens. Cannot be changed later. Neither the name nor its slug may match a public provider name or slug (case-insensitive); other customers may use the same name."""
+    r"""Provider name, shown in your activity, logs and Broadcast output."""
     slug: str
     r"""The slug you chose, unique within your account. Use it as `provider_slug` when creating private endpoints and BYOK keys, and in `provider.order`, `only` and `ignore`."""
 
@@ -67,9 +68,10 @@ class PrivateProvider(BaseModel):
     r"""Your declared data policy, or `null` when none was declared."""
 
     display_name: str
+    r"""Human-readable provider name shown in the UI."""
 
     name: str
-    r"""Provider name, shown in your activity, logs and Broadcast output. 2-64 letters, numbers, spaces, dots, underscores or hyphens. Cannot be changed later. Neither the name nor its slug may match a public provider name or slug (case-insensitive); other customers may use the same name."""
+    r"""Provider name, shown in your activity, logs and Broadcast output."""
 
     slug: str
     r"""The slug you chose, unique within your account. Use it as `provider_slug` when creating private endpoints and BYOK keys, and in `provider.order`, `only` and `ignore`."""
