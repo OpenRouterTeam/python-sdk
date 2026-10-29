@@ -1,0 +1,24 @@
+---
+title: "PrivateEndpointReasoningReturnMechanism"
+---
+
+Where the upstream puts reasoning tokens in its response: `reasoning` and `reasoning-content` are response fields, `content-string` is inline in the message, `none` returns no reasoning. `null` uses the provider default.
+
+## Example Usage
+
+```python
+from openrouter.components import PrivateEndpointReasoningReturnMechanism
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
+value: PrivateEndpointReasoningReturnMechanism = "content-string"
+```
+
+
+## Values
+
+This is an open enum. Unrecognized values will not fail type checks.
+
+- `"content-string"`
+- `"reasoning-content"`
+- `"reasoning"`
+- `"none"`

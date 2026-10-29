@@ -1,0 +1,32 @@
+---
+title: "PrivateEndpointQuantization"
+---
+
+Weight precision the deployment runs at; `unknown` when not stated.
+
+## Example Usage
+
+```python
+from openrouter.components import PrivateEndpointQuantization
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
+value: PrivateEndpointQuantization = "int4"
+```
+
+
+## Values
+
+This is an open enum. Unrecognized values will not fail type checks.
+
+- `"int4"`
+- `"int8"`
+- `"fp4"`
+- `"mxfp4"`
+- `"nvfp4"`
+- `"fp6"`
+- `"fp8"`
+- `"mxfp8"`
+- `"fp16"`
+- `"bf16"`
+- `"fp32"`
+- `"unknown"`

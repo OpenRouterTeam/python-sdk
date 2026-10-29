@@ -10,6 +10,10 @@ from .privateendpointpricing import (
     PrivateEndpointPricing,
     PrivateEndpointPricingTypedDict,
 )
+from .updateprivateendpointsettingsrequest import (
+    UpdatePrivateEndpointSettingsRequest,
+    UpdatePrivateEndpointSettingsRequestTypedDict,
+)
 from openrouter.types import (
     BaseModel,
     Nullable,
@@ -55,6 +59,8 @@ class CreatePrivateEndpointRequestTypedDict(TypedDict):
     r"""Cap on completion tokens per request. Requests asking for more skip this endpoint, and the default output length stays within it. When omitted, the cap is copied from the public endpoint for the same model and provider, if there is one."""
     pricing: NotRequired[PrivateEndpointPricingTypedDict]
     r"""Negotiated per-token rates reported for requests routed to this endpoint."""
+    settings: NotRequired[UpdatePrivateEndpointSettingsRequestTypedDict]
+    r"""Capabilities and limits to set over the ones copied from the public endpoint for this model and provider (or from the model). Omitted fields keep the copied values."""
 
 
 class CreatePrivateEndpointRequest(BaseModel):
@@ -90,6 +96,9 @@ class CreatePrivateEndpointRequest(BaseModel):
     pricing: Optional[PrivateEndpointPricing] = None
     r"""Negotiated per-token rates reported for requests routed to this endpoint."""
 
+    settings: Optional[UpdatePrivateEndpointSettingsRequest] = None
+    r"""Capabilities and limits to set over the ones copied from the public endpoint for this model and provider (or from the model). Omitted fields keep the copied values."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
@@ -101,6 +110,7 @@ class CreatePrivateEndpointRequest(BaseModel):
                 "declared_zdr",
                 "max_completion_tokens",
                 "pricing",
+                "settings",
             ]
         )
         nullable_fields = set(["declared_region", "declared_zdr"])

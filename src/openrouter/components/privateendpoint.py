@@ -6,6 +6,10 @@ from .privateendpointpricing import (
     PrivateEndpointPricing,
     PrivateEndpointPricingTypedDict,
 )
+from .privateendpointsettings import (
+    PrivateEndpointSettings,
+    PrivateEndpointSettingsTypedDict,
+)
 from .privateendpointstatus import PrivateEndpointStatus
 from openrouter.types import (
     BaseModel,
@@ -42,6 +46,8 @@ class PrivateEndpointTypedDict(TypedDict):
     r"""Display name of the upstream provider."""
     provider_slug: Nullable[str]
     r"""Slug of the upstream provider, or `null` when the provider is no longer listed."""
+    settings: PrivateEndpointSettingsTypedDict
+    r"""Capabilities and limits routing uses for this endpoint. A new endpoint copies them from the public endpoint for the same model and provider, or from the model, and the owner can change them. Rate limits are not part of this object: a private endpoint is billed to its own upstream key, so request limits stay with the provider."""
     status: PrivateEndpointStatus
     r"""Lifecycle state. `draft` endpoints are not routable until validated and activated; `disabled` endpoints are activated but temporarily not routable."""
     tested_parameters: List[str]
@@ -85,6 +91,9 @@ class PrivateEndpoint(BaseModel):
 
     provider_slug: Nullable[str]
     r"""Slug of the upstream provider, or `null` when the provider is no longer listed."""
+
+    settings: PrivateEndpointSettings
+    r"""Capabilities and limits routing uses for this endpoint. A new endpoint copies them from the public endpoint for the same model and provider, or from the model, and the owner can change them. Rate limits are not part of this object: a private endpoint is billed to its own upstream key, so request limits stay with the provider."""
 
     status: PrivateEndpointStatus
     r"""Lifecycle state. `draft` endpoints are not routable until validated and activated; `disabled` endpoints are activated but temporarily not routable."""
