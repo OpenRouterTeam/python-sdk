@@ -63,6 +63,7 @@ BYOKProviderSlug = Union[
         "io-net",
         "ionstream",
         "krea",
+        "kt",
         "liquid",
         "makora",
         "mancer",
