@@ -81,6 +81,7 @@ class ProviderOptionsTypedDict(TypedDict):
     ionstream: NotRequired[Dict[str, Any]]
     klusterai: NotRequired[Dict[str, Any]]
     krea: NotRequired[Dict[str, Any]]
+    kt: NotRequired[Dict[str, Any]]
     lambda_: NotRequired[Dict[str, Any]]
     lepton: NotRequired[Dict[str, Any]]
     liquid: NotRequired[Dict[str, Any]]
@@ -338,6 +339,8 @@ class ProviderOptions(BaseModel):
 
     krea: Optional[Dict[str, Any]] = None
 
+    kt: Optional[Dict[str, Any]] = None
+
     lambda_: Annotated[Optional[Dict[str, Any]], pydantic.Field(alias="lambda")] = None
 
     lepton: Optional[Dict[str, Any]] = None
@@ -594,6 +597,7 @@ class ProviderOptions(BaseModel):
                 "ionstream",
                 "klusterai",
                 "krea",
+                "kt",
                 "lambda",
                 "lepton",
                 "liquid",

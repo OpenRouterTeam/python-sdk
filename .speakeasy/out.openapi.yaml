@@ -7086,6 +7086,7 @@ components:
         - 'io-net'
         - 'ionstream'
         - 'krea'
+        - 'kt'
         - 'liquid'
         - 'makora'
         - 'mancer'
@@ -18051,6 +18052,7 @@ components:
                 - 'Io Net'
                 - 'Inferact vLLM'
                 - 'Inflection'
+                - 'KT'
                 - 'Liquid'
                 - 'Makora'
                 - 'Mara'
@@ -26489,6 +26491,7 @@ components:
         - 'Io Net'
         - 'Inferact vLLM'
         - 'Inflection'
+        - 'KT'
         - 'Liquid'
         - 'Makora'
         - 'Mara'
@@ -26769,6 +26772,9 @@ components:
           additionalProperties: {}
           type: 'object'
         krea:
+          additionalProperties: {}
+          type: 'object'
+        kt:
           additionalProperties: {}
           type: 'object'
         lambda:
@@ -27287,6 +27293,7 @@ components:
             - 'Io Net'
             - 'Inferact vLLM'
             - 'Inflection'
+            - 'KT'
             - 'Liquid'
             - 'Makora'
             - 'Mara'
@@ -37299,6 +37306,7 @@ paths:
               - 'io-net'
               - 'ionstream'
               - 'krea'
+              - 'kt'
               - 'liquid'
               - 'makora'
               - 'mancer'
