@@ -85,7 +85,7 @@ class ExternalTypedDict(TypedDict):
     r"""Optional partner-defined identity associated with the created API key."""
 
     user: str
-    r"""Partner's end-user identifier for attribution."""
+    r"""Partner's external user identifier for attribution: 1 to 512 characters after surrounding whitespace is trimmed, well-formed Unicode, no NUL. For organization keys outside HIPAA workspaces, the value is registered as an external user if it does not exist yet, and the key is linked to it."""
     api_key: NotRequired[str]
     r"""Optional partner-supplied API key with a minimum length of 32 characters and sufficient entropy. Stored as a SHA-256 hash and never returned."""
 
@@ -94,7 +94,7 @@ class External(BaseModel):
     r"""Optional partner-defined identity associated with the created API key."""
 
     user: str
-    r"""Partner's end-user identifier for attribution."""
+    r"""Partner's external user identifier for attribution: 1 to 512 characters after surrounding whitespace is trimmed, well-formed Unicode, no NUL. For organization keys outside HIPAA workspaces, the value is registered as an external user if it does not exist yet, and the key is linked to it."""
 
     api_key: Optional[str] = None
     r"""Optional partner-supplied API key with a minimum length of 32 characters and sufficient entropy. Stored as a SHA-256 hash and never returned."""
