@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c48cf606-fb42-4a45-9c23-8f0555307828
 management:
-  docChecksum: dc3fb8b962f23043f02d200d2a944d1b
+  docChecksum: 4404e70bf2386dde99635a700b2cb6b3
   docVersion: 1.0.0
   speakeasyVersion: 1.803.2
   generationVersion: 2.950.13
-  releaseVersion: 1.3.95
-  configChecksum: f350f54f6e80c01d1e6c275b440e1df0
+  releaseVersion: 1.3.96
+  configChecksum: 322b8429a6ef3ce666a73239095e5385
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
 persistentEdits:
-  generation_id: 82cf7400-5c4c-4a89-8ca0-c94d086e8840
-  pristine_commit_hash: bf7784d1c302fb2f0f5233af15cb3dbf2451ff9f
-  pristine_tree_hash: c20e19579013186e7abe25047b2414b286a3e990
+  generation_id: 6488ed5b-6e07-472d-8d06-73ce5b9b4b5d
+  pristine_commit_hash: 0f6018fb2e036f393c7fb582101fb7910cc58387
+  pristine_tree_hash: 050bf44de832952ab9a2f46c34ba3c47189f58a2
 features:
   python:
     acceptHeaders: 3.0.0
@@ -4116,8 +4116,8 @@ trackedFiles:
     pristine_git_object: 74c61e5f750e2df770862017b6b406065398ca9e
   docs/components/jevrouterplugin.mdx:
     id: 258aa7058bc5
-    last_write_checksum: sha1:802f0ab75bb30d94d59d62994ce659dccd1275c1
-    pristine_git_object: 8aecc29e972acbfcd14900ba42f220874b700775
+    last_write_checksum: sha1:f1ba78a999fd265a4ae83caa21fcca1997292eb7
+    pristine_git_object: c7d2583cf205a5abc962118f9cab3762fcfa4002
   docs/components/jevrouterpluginid.mdx:
     id: 30d920f53cde
     last_write_checksum: sha1:dfc1a3a7d9011c2a15b475b51eaf48ad78856ff3
@@ -9020,8 +9020,8 @@ trackedFiles:
     pristine_git_object: a97ed140f693e92f2e9f1e2e59debea6c36bff5a
   docs/operations/external.mdx:
     id: d59b0279f5bf
-    last_write_checksum: sha1:315e9176ffc8e5bd7a8ff21a36c2c27c1c203e22
-    pristine_git_object: e12dc710726e948dada58cf157f0f01c9dc08f8f
+    last_write_checksum: sha1:affed3d5a7a7836b86f2a1d08b91d27dc3a339a9
+    pristine_git_object: 6db632a69c936d370ba30706b7af866d46c86342
   docs/operations/filter_.mdx:
     id: 79b9c7c02d3b
     last_write_checksum: sha1:9684f56fef7f0618f0d04f7e9466eb1d26d960d9
@@ -10344,8 +10344,8 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:67b9ce4eca49665f72763d35dc3d890b238ec25e
-    pristine_git_object: d6c47f734ee1b404d5d43a1e1215ca46baf7cf6c
+    last_write_checksum: sha1:42d993f11316b11379f1ee358baceddb7f10f24d
+    pristine_git_object: af8e076cf46eb077285a84765fd91bb4894e8b80
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77f44b60b98bc126557ec27391f91dfba764bb54
@@ -10372,8 +10372,8 @@ trackedFiles:
     pristine_git_object: 86713cfea633e09d33b3d4e65281071fe20e6137
   src/openrouter/_version.py:
     id: d8d15ad6c586
-    last_write_checksum: sha1:28f18ab7eb2c5c7d9d6cbf6e20b88836f9376ac0
-    pristine_git_object: 6914b067b55239318be1f00e0db14d60f95d48e5
+    last_write_checksum: sha1:36f39aac046e8eacc586ecdb2a975cca7a705577
+    pristine_git_object: 035c1db1f1b17a739346236053f46069dbceb615
   src/openrouter/alpha.py:
     id: 306c4d93308d
     last_write_checksum: sha1:30f55a360f41376ab194b9ea725fe4e001a5ae1a
@@ -12124,8 +12124,8 @@ trackedFiles:
     pristine_git_object: b5a0bc16faa52f26d293eea18183e4d0b0bbb901
   src/openrouter/components/jevrouterplugin.py:
     id: fcb6e65e2e08
-    last_write_checksum: sha1:173c62e37458233cbfb027fc4175840a3afbe8e1
-    pristine_git_object: 20c4a420bcdbbc08490c549b4d968c480d81c273
+    last_write_checksum: sha1:d3f27bd7686c3f38a13dba021a0ff578ba95e00e
+    pristine_git_object: cd0a9e0cf7b7a334a987dcb31d4b6601906c3b89
   src/openrouter/components/keyassignment.py:
     id: 07a64362e7fd
     last_write_checksum: sha1:4b47a6f1ab4992ec81d7236ca28dbf94d3a4fbaf
@@ -14056,8 +14056,8 @@ trackedFiles:
     pristine_git_object: 8216a656ec1412a034878e257bd9de9e94fa8da1
   src/openrouter/operations/createkeys.py:
     id: 64ad31fdaa6c
-    last_write_checksum: sha1:ab6dc89efd3f557b263ccd2211fc5b2740d8e218
-    pristine_git_object: 90b845830f0bce796bd246c59c8c14806d764d44
+    last_write_checksum: sha1:eebe714328243c8e6e0235e561f45ad03a0048e1
+    pristine_git_object: ce2e09a76c67cdd803e15ddd2a9189c31cbecc24
   src/openrouter/operations/createoauthtoken.py:
     id: 02e1c061780d
     last_write_checksum: sha1:006884cfeeecfede1434f194460b7189cae89de1
@@ -19221,4 +19221,3 @@ examples:
         "502":
           application/json: {"error": {"code": 502, "message": "Provider returned error"}}
 examplesVersion: 1.0.2
-releaseNotes: "## Python SDK Changes:\n* `open_router.alpha.decisions.create()`:  `request.provider` **Changed**\n* `open_router.tts.create_speech()`: \n  *  `request.provider.options.kt` **Added**\n* `open_router.stt.create_transcription()`: \n  *  `request.provider.options.kt` **Added**\n* `open_router.batch.create_batches()`: \n  *  `request.provider.only[].union(ProviderName).enum(kt)` **Added**\n* `open_router.byok.list()`: \n  *  `request.provider` **Changed**\n  *  `response.data[].provider.enum(kt)` **Added**\n* `open_router.byok.create()`: \n  *  `request.provider.enum(kt)` **Added**\n  *  `response.data.provider.enum(kt)` **Added**\n* `open_router.byok.get()`:  `response.data.provider.enum(kt)` **Added**\n* `open_router.byok.update()`:  `response.data.provider.enum(kt)` **Added**\n* `open_router.embeddings.generate()`:  `request.provider` **Changed**\n* `open_router.endpoints.list_zdr_endpoints()`:  `response.data[].provider_name.enum(kt)` **Added**\n* `open_router.endpoints.list()`:  `response.data.endpoints[].provider_name.enum(kt)` **Added**\n* `open_router.generations.get_generation()`:  `response.data.provider_responses[].provider_name.enum(kt)` **Added**\n* `open_router.presets.create_presets_chat_completions()`:  `request.provider` **Changed**\n* `open_router.presets.create_presets_messages()`:  `request.provider` **Changed**\n* `open_router.presets.create_presets_responses()`:  `request.provider` **Changed**\n* `open_router.rerank.rerank()`:  `request.provider` **Changed**\n* `open_router.system_one.create()`:  `request.provider` **Changed**\n* `open_router.video_generation.generate()`: \n  *  `request.provider.options.kt` **Added**\n"
