@@ -1,0 +1,284 @@
+---
+title: "Private Providers"
+description: "Private Providers endpoints"
+---
+
+## Overview
+
+Private Providers endpoints
+
+### Available Operations
+
+* [list](#list) - List private providers
+* [create](#create) - Create a private provider
+* [delete](#delete) - Delete a private provider
+* [get](#get) - Get a private provider
+* [update](#update) - Update a private provider
+
+## list
+
+List the organization's private providers. Requires the private endpoints entitlement. [Management key](/docs/guides/overview/auth/management-api-keys) required.
+
+### Example Usage
+
+```python
+from openrouter import OpenRouter
+import os
+
+
+with OpenRouter(
+    http_referer="<value>",
+    x_open_router_title="<value>",
+    x_open_router_categories="<value>",
+    api_key=os.getenv("OPENROUTER_API_KEY", ""),
+) as open_router:
+
+    res = open_router.private_providers.list()
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                                                                                                         | Type                                                                                                                                              | Required                                                                                                                                          | Description                                                                                                                                       |
+| ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `http_referer`                                                                                                                                    | *Optional[str]*                                                                                                                                   | ➖                                                                                                                                | The app identifier should be your app's URL and is used as the primary identifier for rankings.<br/>This is used to track API usage per application.<br/> |
+| `x_open_router_title`                                                                                                                             | *Optional[str]*                                                                                                                                   | ➖                                                                                                                                | The app display name allows you to customize how your app appears in OpenRouter's dashboard.<br/>                                                 |
+| `x_open_router_categories`                                                                                                                        | *Optional[str]*                                                                                                                                   | ➖                                                                                                                                | Comma-separated list of app categories (e.g. "cli-agent,cloud-agent"). Used for marketplace rankings.<br/>                                        |
+| `retries`                                                                                                                                         | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.mdx)                                                                                  | ➖                                                                                                                                | Configuration to override the default retry behavior of the client.                                                                               |
+
+### Response
+
+**[operations.ListPrivateProvidersResponse](../../operations/listprivateprovidersresponse.mdx)**
+
+### Errors
+
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| errors.UnauthorizedResponseError   | 401                                | application/json                   |
+| errors.ForbiddenResponseError      | 403                                | application/json                   |
+| errors.InternalServerResponseError | 500                                | application/json                   |
+| errors.OpenRouterDefaultError      | 4XX, 5XX                           | \*/\*                              |
+
+## create
+
+Create a private, bring-your-own-key provider visible only to your organization. Use its slug as `provider_slug` when creating private endpoints. Requires both the private endpoints and the private providers entitlements. [Management key](/docs/guides/overview/auth/management-api-keys) required.
+
+### Example Usage
+
+```python
+from openrouter import OpenRouter
+import os
+
+
+with OpenRouter(
+    http_referer="<value>",
+    x_open_router_title="<value>",
+    x_open_router_categories="<value>",
+    api_key=os.getenv("OPENROUTER_API_KEY", ""),
+) as open_router:
+
+    res = open_router.private_providers.create(name="Acme")
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                                                                                                                                 | Type                                                                                                                                                                                                                                                                                      | Required                                                                                                                                                                                                                                                                                  | Description                                                                                                                                                                                                                                                                               | Example                                                                                                                                                                                                                                                                                   |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `name`                                                                                                                                                                                                                                                                                    | *str*                                                                                                                                                                                                                                                                                     | ✔️                                                                                                                                                                                                                                                                        | Provider name, shown in your activity, logs and Broadcast output. 2-64 letters, numbers, spaces, dots, underscores or hyphens. Cannot be changed later. Neither the name nor its slug may match a public provider name or slug (case-insensitive); other customers may use the same name. | Acme                                                                                                                                                                                                                                                                                      |
+| `http_referer`                                                                                                                                                                                                                                                                            | *Optional[str]*                                                                                                                                                                                                                                                                           | ➖                                                                                                                                                                                                                                                                        | The app identifier should be your app's URL and is used as the primary identifier for rankings.<br/>This is used to track API usage per application.<br/>                                                                                                                                 |                                                                                                                                                                                                                                                                                           |
+| `x_open_router_title`                                                                                                                                                                                                                                                                     | *Optional[str]*                                                                                                                                                                                                                                                                           | ➖                                                                                                                                                                                                                                                                        | The app display name allows you to customize how your app appears in OpenRouter's dashboard.<br/>                                                                                                                                                                                         |                                                                                                                                                                                                                                                                                           |
+| `x_open_router_categories`                                                                                                                                                                                                                                                                | *Optional[str]*                                                                                                                                                                                                                                                                           | ➖                                                                                                                                                                                                                                                                        | Comma-separated list of app categories (e.g. "cli-agent,cloud-agent"). Used for marketplace rankings.<br/>                                                                                                                                                                                |                                                                                                                                                                                                                                                                                           |
+| `base_url`                                                                                                                                                                                                                                                                                | *Optional[str]*                                                                                                                                                                                                                                                                           | ➖                                                                                                                                                                                                                                                                        | HTTPS base URL of an OpenAI-compatible API, used by private endpoints under this provider that set no URL of their own. Without it, each endpoint must set its own. Private, internal, metadata and OpenRouter hosts are rejected.                                                        | https://inference.example.com/v1                                                                                                                                                                                                                                                          |
+| `data_policy`                                                                                                                                                                                                                                                                             | [Optional[components.PrivateProviderDataPolicy]](../../components/privateproviderdatapolicy.mdx)                                                                                                                                                                                           | ➖                                                                                                                                                                                                                                                                        | Defaults to training on and retaining prompts, the most conservative declaration. Your own declaration; it applies to your own traffic and OpenRouter does not verify it.                                                                                                                 | \{<br/>"prompt_retention_days": null,<br/>"retains_prompts": false,<br/>"training": false<br/>}                                                                                                                                                                                            |
+| `display_name`                                                                                                                                                                                                                                                                            | *Optional[str]*                                                                                                                                                                                                                                                                           | ➖                                                                                                                                                                                                                                                                        | Defaults to `name`.                                                                                                                                                                                                                                                                       | Acme                                                                                                                                                                                                                                                                                      |
+| `slug`                                                                                                                                                                                                                                                                                    | *Optional[str]*                                                                                                                                                                                                                                                                           | ➖                                                                                                                                                                                                                                                                        | 2-64 lowercase letters and numbers, separated by single hyphens. Cannot be changed later. Defaults to the name lowercased, with every run of other characters replaced by a hyphen (`Acme Inference` becomes `acme-inference`).                                                           | acme                                                                                                                                                                                                                                                                                      |
+| `retries`                                                                                                                                                                                                                                                                                 | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.mdx)                                                                                                                                                                                                                          | ➖                                                                                                                                                                                                                                                                        | Configuration to override the default retry behavior of the client.                                                                                                                                                                                                                       |                                                                                                                                                                                                                                                                                           |
+
+### Response
+
+**[operations.CreatePrivateProviderResponse](../../operations/createprivateproviderresponse.mdx)**
+
+### Errors
+
+| Error Type                              | Status Code                             | Content Type                            |
+| --------------------------------------- | --------------------------------------- | --------------------------------------- |
+| errors.BadRequestResponseError          | 400                                     | application/json                        |
+| errors.UnauthorizedResponseError        | 401                                     | application/json                        |
+| errors.ForbiddenResponseError           | 403                                     | application/json                        |
+| errors.NotFoundResponseError            | 404                                     | application/json                        |
+| errors.RequestTimeoutResponseError      | 408                                     | application/json                        |
+| errors.ConflictResponseError            | 409                                     | application/json                        |
+| errors.UnprocessableEntityResponseError | 422                                     | application/json                        |
+| errors.TooManyRequestsResponseError     | 429                                     | application/json                        |
+| errors.InternalServerResponseError      | 500                                     | application/json                        |
+| errors.BadGatewayResponseError          | 502                                     | application/json                        |
+| errors.OpenRouterDefaultError           | 4XX, 5XX                                | \*/\*                                   |
+
+## delete
+
+Delete a private provider. Refuses (409) while any private endpoint still runs under it. [Management key](/docs/guides/overview/auth/management-api-keys) required.
+
+### Example Usage
+
+```python
+from openrouter import OpenRouter
+import os
+
+
+with OpenRouter(
+    http_referer="<value>",
+    x_open_router_title="<value>",
+    x_open_router_categories="<value>",
+    api_key=os.getenv("OPENROUTER_API_KEY", ""),
+) as open_router:
+
+    res = open_router.private_providers.delete(slug="acme")
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                                                                                                         | Type                                                                                                                                              | Required                                                                                                                                          | Description                                                                                                                                       | Example                                                                                                                                           |
+| ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `slug`                                                                                                                                            | *str*                                                                                                                                             | ✔️                                                                                                                                | N/A                                                                                                                                               | acme                                                                                                                                              |
+| `http_referer`                                                                                                                                    | *Optional[str]*                                                                                                                                   | ➖                                                                                                                                | The app identifier should be your app's URL and is used as the primary identifier for rankings.<br/>This is used to track API usage per application.<br/> |                                                                                                                                                   |
+| `x_open_router_title`                                                                                                                             | *Optional[str]*                                                                                                                                   | ➖                                                                                                                                | The app display name allows you to customize how your app appears in OpenRouter's dashboard.<br/>                                                 |                                                                                                                                                   |
+| `x_open_router_categories`                                                                                                                        | *Optional[str]*                                                                                                                                   | ➖                                                                                                                                | Comma-separated list of app categories (e.g. "cli-agent,cloud-agent"). Used for marketplace rankings.<br/>                                        |                                                                                                                                                   |
+| `retries`                                                                                                                                         | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.mdx)                                                                                  | ➖                                                                                                                                | Configuration to override the default retry behavior of the client.                                                                               |                                                                                                                                                   |
+
+### Response
+
+**[operations.DeletePrivateProviderResponse](../../operations/deleteprivateproviderresponse.mdx)**
+
+### Errors
+
+| Error Type                              | Status Code                             | Content Type                            |
+| --------------------------------------- | --------------------------------------- | --------------------------------------- |
+| errors.BadRequestResponseError          | 400                                     | application/json                        |
+| errors.UnauthorizedResponseError        | 401                                     | application/json                        |
+| errors.ForbiddenResponseError           | 403                                     | application/json                        |
+| errors.NotFoundResponseError            | 404                                     | application/json                        |
+| errors.RequestTimeoutResponseError      | 408                                     | application/json                        |
+| errors.ConflictResponseError            | 409                                     | application/json                        |
+| errors.UnprocessableEntityResponseError | 422                                     | application/json                        |
+| errors.TooManyRequestsResponseError     | 429                                     | application/json                        |
+| errors.InternalServerResponseError      | 500                                     | application/json                        |
+| errors.BadGatewayResponseError          | 502                                     | application/json                        |
+| errors.OpenRouterDefaultError           | 4XX, 5XX                                | \*/\*                                   |
+
+## get
+
+Get one of the organization’s private providers by slug. [Management key](/docs/guides/overview/auth/management-api-keys) required.
+
+### Example Usage
+
+```python
+from openrouter import OpenRouter
+import os
+
+
+with OpenRouter(
+    http_referer="<value>",
+    x_open_router_title="<value>",
+    x_open_router_categories="<value>",
+    api_key=os.getenv("OPENROUTER_API_KEY", ""),
+) as open_router:
+
+    res = open_router.private_providers.get(slug="acme")
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                                                                                                         | Type                                                                                                                                              | Required                                                                                                                                          | Description                                                                                                                                       | Example                                                                                                                                           |
+| ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `slug`                                                                                                                                            | *str*                                                                                                                                             | ✔️                                                                                                                                | N/A                                                                                                                                               | acme                                                                                                                                              |
+| `http_referer`                                                                                                                                    | *Optional[str]*                                                                                                                                   | ➖                                                                                                                                | The app identifier should be your app's URL and is used as the primary identifier for rankings.<br/>This is used to track API usage per application.<br/> |                                                                                                                                                   |
+| `x_open_router_title`                                                                                                                             | *Optional[str]*                                                                                                                                   | ➖                                                                                                                                | The app display name allows you to customize how your app appears in OpenRouter's dashboard.<br/>                                                 |                                                                                                                                                   |
+| `x_open_router_categories`                                                                                                                        | *Optional[str]*                                                                                                                                   | ➖                                                                                                                                | Comma-separated list of app categories (e.g. "cli-agent,cloud-agent"). Used for marketplace rankings.<br/>                                        |                                                                                                                                                   |
+| `retries`                                                                                                                                         | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.mdx)                                                                                  | ➖                                                                                                                                | Configuration to override the default retry behavior of the client.                                                                               |                                                                                                                                                   |
+
+### Response
+
+**[operations.GetPrivateProviderResponse](../../operations/getprivateproviderresponse.mdx)**
+
+### Errors
+
+| Error Type                         | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| errors.UnauthorizedResponseError   | 401                                | application/json                   |
+| errors.ForbiddenResponseError      | 403                                | application/json                   |
+| errors.NotFoundResponseError       | 404                                | application/json                   |
+| errors.InternalServerResponseError | 500                                | application/json                   |
+| errors.OpenRouterDefaultError      | 4XX, 5XX                           | \*/\*                              |
+
+## update
+
+Update a private provider’s details or declared data policy. The name and slug cannot change. Refuses (409) a data-policy change while OpenRouter pins the declared policy on one of its endpoints. [Management key](/docs/guides/overview/auth/management-api-keys) required.
+
+### Example Usage
+
+```python
+from openrouter import OpenRouter
+import os
+
+
+with OpenRouter(
+    http_referer="<value>",
+    x_open_router_title="<value>",
+    x_open_router_categories="<value>",
+    api_key=os.getenv("OPENROUTER_API_KEY", ""),
+) as open_router:
+
+    res = open_router.private_providers.update(slug="acme")
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                                                                          | Type                                                                                                                                                                                                                               | Required                                                                                                                                                                                                                           | Description                                                                                                                                                                                                                        | Example                                                                                                                                                                                                                            |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `slug`                                                                                                                                                                                                                             | *str*                                                                                                                                                                                                                              | ✔️                                                                                                                                                                                                                 | N/A                                                                                                                                                                                                                                | acme                                                                                                                                                                                                                               |
+| `http_referer`                                                                                                                                                                                                                     | *Optional[str]*                                                                                                                                                                                                                    | ➖                                                                                                                                                                                                                 | The app identifier should be your app's URL and is used as the primary identifier for rankings.<br/>This is used to track API usage per application.<br/>                                                                          |                                                                                                                                                                                                                                    |
+| `x_open_router_title`                                                                                                                                                                                                              | *Optional[str]*                                                                                                                                                                                                                    | ➖                                                                                                                                                                                                                 | The app display name allows you to customize how your app appears in OpenRouter's dashboard.<br/>                                                                                                                                  |                                                                                                                                                                                                                                    |
+| `x_open_router_categories`                                                                                                                                                                                                         | *Optional[str]*                                                                                                                                                                                                                    | ➖                                                                                                                                                                                                                 | Comma-separated list of app categories (e.g. "cli-agent,cloud-agent"). Used for marketplace rankings.<br/>                                                                                                                         |                                                                                                                                                                                                                                    |
+| `base_url`                                                                                                                                                                                                                         | *Optional[str]*                                                                                                                                                                                                                    | ➖                                                                                                                                                                                                                 | HTTPS base URL of an OpenAI-compatible API, used by private endpoints under this provider that set no URL of their own. Without it, each endpoint must set its own. Private, internal, metadata and OpenRouter hosts are rejected. | https://inference.example.com/v1                                                                                                                                                                                                   |
+| `data_policy`                                                                                                                                                                                                                      | [Optional[components.UpdatePrivateProviderRequestDataPolicy]](../../components/updateprivateproviderrequestdatapolicy.mdx)                                                                                                          | ➖                                                                                                                                                                                                                 | N/A                                                                                                                                                                                                                                |                                                                                                                                                                                                                                    |
+| `display_name`                                                                                                                                                                                                                     | *Optional[str]*                                                                                                                                                                                                                    | ➖                                                                                                                                                                                                                 | N/A                                                                                                                                                                                                                                | Acme                                                                                                                                                                                                                               |
+| `retries`                                                                                                                                                                                                                          | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.mdx)                                                                                                                                                                   | ➖                                                                                                                                                                                                                 | Configuration to override the default retry behavior of the client.                                                                                                                                                                |                                                                                                                                                                                                                                    |
+
+### Response
+
+**[operations.UpdatePrivateProviderResponse](../../operations/updateprivateproviderresponse.mdx)**
+
+### Errors
+
+| Error Type                              | Status Code                             | Content Type                            |
+| --------------------------------------- | --------------------------------------- | --------------------------------------- |
+| errors.BadRequestResponseError          | 400                                     | application/json                        |
+| errors.UnauthorizedResponseError        | 401                                     | application/json                        |
+| errors.ForbiddenResponseError           | 403                                     | application/json                        |
+| errors.NotFoundResponseError            | 404                                     | application/json                        |
+| errors.RequestTimeoutResponseError      | 408                                     | application/json                        |
+| errors.ConflictResponseError            | 409                                     | application/json                        |
+| errors.UnprocessableEntityResponseError | 422                                     | application/json                        |
+| errors.TooManyRequestsResponseError     | 429                                     | application/json                        |
+| errors.InternalServerResponseError      | 500                                     | application/json                        |
+| errors.BadGatewayResponseError          | 502                                     | application/json                        |
+| errors.OpenRouterDefaultError           | 4XX, 5XX                                | \*/\*                                   |
