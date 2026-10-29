@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c48cf606-fb42-4a45-9c23-8f0555307828
 management:
-  docChecksum: 6ec0cc2d95e3e118cb5a2da74a5fabd9
+  docChecksum: 8e43156309cd9d6feef062dcbfca2bbf
   docVersion: 1.0.0
   speakeasyVersion: 1.803.2
   generationVersion: 2.950.13
-  releaseVersion: 1.3.93
-  configChecksum: 197c208db2b3f3f1d4ee0bdcc3234b78
+  releaseVersion: 1.3.94
+  configChecksum: e9ab56445e50210445d6fe64c063c4d7
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
 persistentEdits:
-  generation_id: 6b3cf2fb-0692-48b7-9fb6-e57ca8969625
-  pristine_commit_hash: f4748b72f6dd2dee13598e64a94925507ef4e4c9
-  pristine_tree_hash: 69be6ca0ae492018b6e957996852abb8c34e14e3
+  generation_id: 5109fb26-c553-4c79-b1dd-3b4c29100595
+  pristine_commit_hash: c41fc2ec8286c1b2d6f8ee7ef6886b4e1ed29e3b
+  pristine_tree_hash: aab77ac303e45920016fa2ab453c45cde5596930
 features:
   python:
     acceptHeaders: 3.0.0
@@ -6320,8 +6320,8 @@ trackedFiles:
     pristine_git_object: 26932977bfd817ac0df95b9b647813ab962476d9
   docs/components/privateprovider.mdx:
     id: 0671f6003692
-    last_write_checksum: sha1:e1073aa8082762c7a1e4e89dbff7f6b4c88d34f0
-    pristine_git_object: e516a1c7c51404da8aba0b8170ea9071e120a94b
+    last_write_checksum: sha1:1624ee016d2a78168dd230f474ad7dd7a0a5b08b
+    pristine_git_object: d4a3b60344c175eb01e86f4180a7410034dde337
   docs/components/privateproviderdatapolicy.mdx:
     id: b35b9214bc7e
     last_write_checksum: sha1:d33353a373eae01c88ece5e251b3b49aa4445721
@@ -10344,8 +10344,8 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:cfaedd3a2a030e2763df59aa76f1ab46cf0efa2d
-    pristine_git_object: fa864346c8b8c61c5a4a6af027729818aa6c1314
+    last_write_checksum: sha1:8b6d5b616446a406018f6d90407cea93bcb4a335
+    pristine_git_object: 6abec6c951aecf12460ae252fff1dee7807b13ea
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77f44b60b98bc126557ec27391f91dfba764bb54
@@ -10372,8 +10372,8 @@ trackedFiles:
     pristine_git_object: 86713cfea633e09d33b3d4e65281071fe20e6137
   src/openrouter/_version.py:
     id: d8d15ad6c586
-    last_write_checksum: sha1:d5373e5b8e0868071fe77dde3f59413923de8be4
-    pristine_git_object: f0a3b5ff889bdac54d482e0179cfecc941f03aa5
+    last_write_checksum: sha1:deb67c512551b62a6938ea9b071b1a8ae1b48da3
+    pristine_git_object: 97d10fdcccf214f4c017bca3be4745e98b33816b
   src/openrouter/alpha.py:
     id: 306c4d93308d
     last_write_checksum: sha1:30f55a360f41376ab194b9ea725fe4e001a5ae1a
@@ -12944,8 +12944,8 @@ trackedFiles:
     pristine_git_object: 6e8b78ced26a0853ead11ec27400f8bf98f1fa83
   src/openrouter/components/privateprovider.py:
     id: 958158825a77
-    last_write_checksum: sha1:067ac1600eb5cf50b62745097bb1b6311f8f10b4
-    pristine_git_object: 7d29a298f94019e5308f242522546aa6a4b609a5
+    last_write_checksum: sha1:b7d1378bb1776ee2de3ca395ca1b4b2acfa111ea
+    pristine_git_object: 2e3df76124659f77cd85f95e4a27164db21d668a
   src/openrouter/components/privateproviderdatapolicy.py:
     id: a1fb1200b4cf
     last_write_checksum: sha1:0ad8732d32ae4b4bbcf002c9ceecfb70e952aeb1
@@ -19221,4 +19221,3 @@ examples:
         "502":
           application/json: {"error": {"code": 502, "message": "Provider returned error"}}
 examplesVersion: 1.0.2
-releaseNotes: "## Python SDK Changes:\n* `open_router.private_providers.list()`: **Added**\n* `open_router.private_providers.create()`: **Added**\n* `open_router.private_providers.delete()`: **Added**\n* `open_router.private_providers.get()`: **Added**\n* `open_router.private_providers.update()`: **Added**\n* `open_router.private_endpoints.create()`:  `request.settings` **Added**\n* `open_router.private_endpoints.get()`:  `response.data.settings` **Added**\n* `open_router.private_endpoints.update()`: \n  *  `request` **Changed**\n  *  `response.data.settings` **Added**\n* `open_router.private_endpoints.update_parameters()`: **Deprecated**\n* `open_router.private_endpoints.update_parameters()`:  `response.data.settings` **Added**\n* `open_router.private_endpoints.update_pricing()`: **Deprecated**\n* `open_router.private_endpoints.update_pricing()`:  `response.data.settings` **Added**\n"
