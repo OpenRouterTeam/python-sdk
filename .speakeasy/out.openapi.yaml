@@ -11799,6 +11799,32 @@ components:
       required:
         - 'data'
       type: 'object'
+    ExtractionAsset:
+      additionalProperties: false
+      description: 'An image or PDF sent once and referenced by its key in the `assets` map. `data_base64` is the file in standard base64 with no `data:` prefix. PDF is read by document models only.'
+      properties:
+        data_base64:
+          minLength: 1
+          pattern: '^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$'
+          type: 'string'
+        format:
+          enum:
+            - 'png'
+            - 'jpg'
+            - 'jpeg'
+            - 'pdf'
+          type: 'string'
+          x-speakeasy-unknown-values: allow
+        type:
+          enum:
+            - 'image'
+            - 'document'
+          type: 'string'
+          x-speakeasy-unknown-values: allow
+      required:
+        - 'format'
+        - 'data_base64'
+      type: 'object'
     ExtractionDateAnswer:
       properties:
         confidence:
@@ -11812,10 +11838,11 @@ components:
           format: 'double'
           type: 'number'
         source:
-          description: 'Set to `image` when the answer was read from an image rather than the state text.'
+          description: 'Set to `image` or `document` when the answer was read from an image or a PDF rather than the state text.'
           enum:
             - 'state'
             - 'image'
+            - 'document'
           type: 'string'
           x-speakeasy-unknown-values: allow
         span:
@@ -11842,6 +11869,7 @@ components:
         - 'value'
       type: 'object'
     ExtractionDateField:
+      additionalProperties: false
       properties:
         instructions:
           description: 'What the field should contain.'
@@ -11872,10 +11900,11 @@ components:
           format: 'double'
           type: 'number'
         source:
-          description: 'Set to `image` when the answer was read from an image rather than the state text.'
+          description: 'Set to `image` or `document` when the answer was read from an image or a PDF rather than the state text.'
           enum:
             - 'state'
             - 'image'
+            - 'document'
           type: 'string'
           x-speakeasy-unknown-values: allow
         span:
@@ -11902,6 +11931,7 @@ components:
         - 'value'
       type: 'object'
     ExtractionDatetimeField:
+      additionalProperties: false
       properties:
         instructions:
           description: 'What the field should contain.'
@@ -11933,10 +11963,11 @@ components:
           format: 'double'
           type: 'number'
         source:
-          description: 'Set to `image` when the answer was read from an image rather than the state text.'
+          description: 'Set to `image` or `document` when the answer was read from an image or a PDF rather than the state text.'
           enum:
             - 'state'
             - 'image'
+            - 'document'
           type: 'string'
           x-speakeasy-unknown-values: allow
         span:
@@ -11967,6 +11998,7 @@ components:
         - 'value'
       type: 'object'
     ExtractionDurationField:
+      additionalProperties: false
       properties:
         decimals:
           description: 'Decimal places kept in `value`.'
@@ -12046,10 +12078,11 @@ components:
               - type: 'string'
           type: 'array'
         source:
-          description: 'Set to `image` when the answer was read from an image rather than the state text.'
+          description: 'Set to `image` or `document` when the answer was read from an image or a PDF rather than the state text.'
           enum:
             - 'state'
             - 'image'
+            - 'document'
           type: 'string'
           x-speakeasy-unknown-values: allow
         spell_confidence:
@@ -12071,6 +12104,7 @@ components:
         - 'value'
       type: 'object'
     ExtractionEstimateField:
+      additionalProperties: false
       properties:
         instructions:
           description: 'What the field should contain.'
@@ -12165,10 +12199,11 @@ components:
               - type: 'string'
           type: 'array'
         source:
-          description: 'Set to `image` when the answer was read from an image rather than the state text.'
+          description: 'Set to `image` or `document` when the answer was read from an image or a PDF rather than the state text.'
           enum:
             - 'state'
             - 'image'
+            - 'document'
           type: 'string'
           x-speakeasy-unknown-values: allow
         spell_confidence:
@@ -12197,6 +12232,7 @@ components:
         - 'value'
       type: 'object'
     ExtractionForecastField:
+      additionalProperties: false
       properties:
         horizon:
           description: 'Number of forecast steps.'
@@ -12316,6 +12352,12 @@ components:
         confidence:
           format: 'double'
           type: 'number'
+        confidences:
+          description: 'One confidence per item of `value`, in the same order.'
+          items:
+            format: 'double'
+            type: 'number'
+          type: 'array'
         guess:
           description: 'The most likely value even when `value` is null because `p_null` crossed the threshold.'
           items:
@@ -12329,10 +12371,11 @@ components:
           format: 'double'
           type: 'number'
         source:
-          description: 'Set to `image` when the answer was read from an image rather than the state text.'
+          description: 'Set to `image` or `document` when the answer was read from an image or a PDF rather than the state text.'
           enum:
             - 'state'
             - 'image'
+            - 'document'
           type: 'string'
           x-speakeasy-unknown-values: allow
         spans:
@@ -12366,6 +12409,7 @@ components:
         - 'value'
       type: 'object'
     ExtractionListField:
+      additionalProperties: false
       properties:
         decimals:
           description: 'Decimal places kept in `value`.'
@@ -12410,10 +12454,11 @@ components:
           format: 'double'
           type: 'number'
         source:
-          description: 'Set to `image` when the answer was read from an image rather than the state text.'
+          description: 'Set to `image` or `document` when the answer was read from an image or a PDF rather than the state text.'
           enum:
             - 'state'
             - 'image'
+            - 'document'
           type: 'string'
           x-speakeasy-unknown-values: allow
         span:
@@ -12441,6 +12486,7 @@ components:
         - 'value'
       type: 'object'
     ExtractionNumberField:
+      additionalProperties: false
       properties:
         decimals:
           description: 'Decimal places kept in `value`.'
@@ -12468,11 +12514,12 @@ components:
         - 'type'
       type: 'object'
     ExtractionsRequest:
+      additionalProperties: false
       properties:
         assets:
           additionalProperties:
-            $ref: '#/components/schemas/DecisionsImageAsset'
-          description: 'Images keyed by reference string, as in TypeSafe''s API. Write a reference wherever the image belongs in `state`, `instructions`, or `criteria`; every asset must be referenced at least once. Jev reads a reference as a whole string value or inside longer text. Other Decisions models read a whole-string reference wherever they read an `image_url` part and reject a reference inside longer text.'
+            $ref: '#/components/schemas/ExtractionAsset'
+          description: 'Assets keyed by reference string. Write a reference wherever the asset belongs in `state` or a field `instructions`; every asset must be referenced at least once. A `state` that is exactly the sole asset''s key carries no text of its own and is read as file-only. A model that reads either text or a document per request, not both (ScaleDown Extract with a PDF), needs that form: any other text around the key is state text and is rejected with 400.'
           type: 'object'
         fields:
           additionalProperties:
@@ -12613,10 +12660,11 @@ components:
           format: 'double'
           type: 'number'
         source:
-          description: 'Set to `image` when the answer was read from an image rather than the state text.'
+          description: 'Set to `image` or `document` when the answer was read from an image or a PDF rather than the state text.'
           enum:
             - 'state'
             - 'image'
+            - 'document'
           type: 'string'
           x-speakeasy-unknown-values: allow
         span:
@@ -12643,6 +12691,7 @@ components:
         - 'value'
       type: 'object'
     ExtractionTextField:
+      additionalProperties: false
       properties:
         instructions:
           description: 'What the field should contain.'
@@ -12673,10 +12722,11 @@ components:
           format: 'double'
           type: 'number'
         source:
-          description: 'Set to `image` when the answer was read from an image rather than the state text.'
+          description: 'Set to `image` or `document` when the answer was read from an image or a PDF rather than the state text.'
           enum:
             - 'state'
             - 'image'
+            - 'document'
           type: 'string'
           x-speakeasy-unknown-values: allow
         span:
@@ -12703,6 +12753,7 @@ components:
         - 'value'
       type: 'object'
     ExtractionTimeField:
+      additionalProperties: false
       properties:
         instructions:
           description: 'What the field should contain.'

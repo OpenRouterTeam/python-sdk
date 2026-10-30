@@ -1808,6 +1808,12 @@ if TYPE_CHECKING:
         ExternalUserResponse,
         ExternalUserResponseTypedDict,
     )
+    from .extractionasset import (
+        ExtractionAsset,
+        ExtractionAssetFormat,
+        ExtractionAssetType,
+        ExtractionAssetTypedDict,
+    )
     from .extractiondateanswer import (
         ExtractionDateAnswer,
         ExtractionDateAnswerSource,
@@ -5962,6 +5968,10 @@ __all__ = [
     "ExternalUserResponse",
     "ExternalUserResponseTypedDict",
     "ExternalUserTypedDict",
+    "ExtractionAsset",
+    "ExtractionAssetFormat",
+    "ExtractionAssetType",
+    "ExtractionAssetTypedDict",
     "ExtractionDateAnswer",
     "ExtractionDateAnswerSource",
     "ExtractionDateAnswerType",
@@ -9466,6 +9476,10 @@ _dynamic_imports: dict[str, str] = {
     "ExternalUserTypedDict": ".externaluser",
     "ExternalUserResponse": ".externaluserresponse",
     "ExternalUserResponseTypedDict": ".externaluserresponse",
+    "ExtractionAsset": ".extractionasset",
+    "ExtractionAssetFormat": ".extractionasset",
+    "ExtractionAssetType": ".extractionasset",
+    "ExtractionAssetTypedDict": ".extractionasset",
     "ExtractionDateAnswer": ".extractiondateanswer",
     "ExtractionDateAnswerSource": ".extractiondateanswer",
     "ExtractionDateAnswerType": ".extractiondateanswer",

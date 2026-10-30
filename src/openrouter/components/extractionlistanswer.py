@@ -21,10 +21,11 @@ ExtractionListAnswerSource = Union[
     Literal[
         "state",
         "image",
+        "document",
     ],
     UnrecognizedStr,
 ]
-r"""Set to `image` when the answer was read from an image rather than the state text."""
+r"""Set to `image` or `document` when the answer was read from an image or a PDF rather than the state text."""
 
 
 ExtractionListAnswerType = Literal["list",]
@@ -44,12 +45,14 @@ class ExtractionListAnswerTypedDict(TypedDict):
     type: ExtractionListAnswerType
     value: Nullable[List[ExtractionListAnswerValueTypedDict]]
     confidence: NotRequired[float]
+    confidences: NotRequired[List[float]]
+    r"""One confidence per item of `value`, in the same order."""
     guess: NotRequired[List[ExtractionListAnswerGuessTypedDict]]
     r"""The most likely value even when `value` is null because `p_null` crossed the threshold."""
     p_null: NotRequired[float]
     r"""Probability that the state contains nothing for this field."""
     source: NotRequired[ExtractionListAnswerSource]
-    r"""Set to `image` when the answer was read from an image rather than the state text."""
+    r"""Set to `image` or `document` when the answer was read from an image or a PDF rather than the state text."""
     spans: NotRequired[List[List[int]]]
     spell_confidence: NotRequired[float]
     r"""Confidence in the spelling of text read from an image."""
@@ -62,6 +65,9 @@ class ExtractionListAnswer(BaseModel):
 
     confidence: Optional[float] = None
 
+    confidences: Optional[List[float]] = None
+    r"""One confidence per item of `value`, in the same order."""
+
     guess: Optional[List[ExtractionListAnswerGuess]] = None
     r"""The most likely value even when `value` is null because `p_null` crossed the threshold."""
 
@@ -69,7 +75,7 @@ class ExtractionListAnswer(BaseModel):
     r"""Probability that the state contains nothing for this field."""
 
     source: Optional[ExtractionListAnswerSource] = None
-    r"""Set to `image` when the answer was read from an image rather than the state text."""
+    r"""Set to `image` or `document` when the answer was read from an image or a PDF rather than the state text."""
 
     spans: Optional[List[List[int]]] = None
 
@@ -79,7 +85,15 @@ class ExtractionListAnswer(BaseModel):
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
-            ["confidence", "guess", "p_null", "source", "spans", "spell_confidence"]
+            [
+                "confidence",
+                "confidences",
+                "guess",
+                "p_null",
+                "source",
+                "spans",
+                "spell_confidence",
+            ]
         )
         nullable_fields = set(["value"])
         serialized = handler(self)
