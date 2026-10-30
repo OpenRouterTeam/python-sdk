@@ -9,7 +9,7 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class ProviderOptionsTypedDict(TypedDict):
-    r"""Provider-specific options keyed by provider slug. Only options for the matched provider are forwarded; the rest are ignored. Unrecognized keys are silently dropped."""
+    r"""Provider-specific options keyed by provider slug. The provider segment is case-insensitive; an endpoint tag after `/` must match the endpoint slug exactly. Only options for the matched provider are forwarded; the rest are ignored. Unrecognized keys are silently dropped."""
 
     oneai: NotRequired[Dict[str, Any]]
     ai21: NotRequired[Dict[str, Any]]
@@ -165,7 +165,7 @@ class ProviderOptionsTypedDict(TypedDict):
 
 
 class ProviderOptions(BaseModel):
-    r"""Provider-specific options keyed by provider slug. Only options for the matched provider are forwarded; the rest are ignored. Unrecognized keys are silently dropped."""
+    r"""Provider-specific options keyed by provider slug. The provider segment is case-insensitive; an endpoint tag after `/` must match the endpoint slug exactly. Only options for the matched provider are forwarded; the rest are ignored. Unrecognized keys are silently dropped."""
 
     oneai: Annotated[Optional[Dict[str, Any]], pydantic.Field(alias="01ai")] = None
 
