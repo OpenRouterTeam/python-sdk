@@ -1,0 +1,22 @@
+---
+title: "ExtractionEstimateAnswerSource"
+---
+
+Set to `image` when the answer was read from an image rather than the state text.
+
+## Example Usage
+
+```python
+from openrouter.components import ExtractionEstimateAnswerSource
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
+value: ExtractionEstimateAnswerSource = "state"
+```
+
+
+## Values
+
+This is an open enum. Unrecognized values will not fail type checks.
+
+- `"state"`
+- `"image"`

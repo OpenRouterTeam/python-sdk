@@ -1,0 +1,13 @@
+---
+title: "ExtractionListField"
+---
+
+## Fields
+
+| Field                                                                          | Type                                                                           | Required                                                                       | Description                                                                    |
+| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
+| `decimals`                                                                     | *Optional[int]*                                                                | ➖                                                             | Decimal places kept in `value`.                                                |
+| `instructions`                                                                 | *Optional[str]*                                                                | ➖                                                             | What the field should contain.                                                 |
+| `items`                                                                        | [components.Items](../components/items.mdx)                                     | ✔️                                                             | N/A                                                                            |
+| `null_threshold`                                                               | *Optional[float]*                                                              | ➖                                                             | Probability of null above which `value` is null. Default 0.5.                  |
+| `type`                                                                         | [components.ExtractionListFieldType](../components/extractionlistfieldtype.mdx) | ✔️                                                             | N/A                                                                            |

@@ -14,8 +14,8 @@ from typing import Any, Dict, Literal, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
-AnswersTypedDict = TypeAliasType(
-    "AnswersTypedDict",
+DecisionsResponseAnswersTypedDict = TypeAliasType(
+    "DecisionsResponseAnswersTypedDict",
     Union[
         DecisionsNoulAnswerTypedDict,
         DecisionsBoxAnswerTypedDict,
@@ -26,8 +26,8 @@ AnswersTypedDict = TypeAliasType(
 r"""A Decisions answer using a boolean, choice, score, or image bounding-box evaluation."""
 
 
-class UnknownAnswers(BaseModel):
-    r"""A Answers variant the SDK doesn't recognize. Preserves the raw payload."""
+class UnknownDecisionsResponseAnswers(BaseModel):
+    r"""A DecisionsResponseAnswers variant the SDK doesn't recognize. Preserves the raw payload."""
 
     type: Literal["UNKNOWN"] = "UNKNOWN"
     raw: Any
@@ -36,7 +36,7 @@ class UnknownAnswers(BaseModel):
     model_config = ConfigDict(frozen=True)
 
 
-_ANSWERS_VARIANTS: dict[str, Any] = {
+_DECISIONS_RESPONSE_ANSWERS_VARIANTS: dict[str, Any] = {
     "box": DecisionsBoxAnswer,
     "choice": DecisionsChoiceAnswer,
     "noul": DecisionsNoulAnswer,
@@ -44,21 +44,21 @@ _ANSWERS_VARIANTS: dict[str, Any] = {
 }
 
 
-Answers = Annotated[
+DecisionsResponseAnswers = Annotated[
     Union[
         DecisionsBoxAnswer,
         DecisionsChoiceAnswer,
         DecisionsNoulAnswer,
         DecisionsScoreAnswer,
-        UnknownAnswers,
+        UnknownDecisionsResponseAnswers,
     ],
     BeforeValidator(
         partial(
             parse_open_union,
             disc_key="type",
-            variants=_ANSWERS_VARIANTS,
-            unknown_cls=UnknownAnswers,
-            union_name="Answers",
+            variants=_DECISIONS_RESPONSE_ANSWERS_VARIANTS,
+            unknown_cls=UnknownDecisionsResponseAnswers,
+            union_name="DecisionsResponseAnswers",
         )
     ),
 ]
@@ -96,7 +96,7 @@ class DecisionsResponseUsage(BaseModel):
 
 
 class DecisionsResponseTypedDict(TypedDict):
-    answers: Dict[str, AnswersTypedDict]
+    answers: Dict[str, DecisionsResponseAnswersTypedDict]
     model: str
     usage: DecisionsResponseUsageTypedDict
     id: NotRequired[str]
@@ -104,7 +104,7 @@ class DecisionsResponseTypedDict(TypedDict):
 
 
 class DecisionsResponse(BaseModel):
-    answers: Dict[str, Answers]
+    answers: Dict[str, DecisionsResponseAnswers]
 
     model: str
 
