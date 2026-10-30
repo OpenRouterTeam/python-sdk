@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c48cf606-fb42-4a45-9c23-8f0555307828
 management:
-  docChecksum: e34260687cf1b3f913ed466113df763e
+  docChecksum: a0be6866e415062274038e3ba19c0f0d
   docVersion: 1.0.0
   speakeasyVersion: 1.803.2
   generationVersion: 2.950.13
-  releaseVersion: 1.3.102
-  configChecksum: db3715109a278d0dd4e4d293a2a0d93d
+  releaseVersion: 1.3.103
+  configChecksum: 9ca83bdb4d50a73dd7dc11da2a5485ea
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
 persistentEdits:
-  generation_id: 255ec96f-a9a0-4ce1-8933-b80a42fe7e59
-  pristine_commit_hash: 29be898cb1a858dd3482a26a1eea82e986daa994
-  pristine_tree_hash: c10e0af243ce9020e375c434b6d600a3b8fdea37
+  generation_id: 8cb2aeac-f03b-457f-aa3c-90eac8824e0b
+  pristine_commit_hash: ec03155fe6ece2bb076a44f5d42d993158d04920
+  pristine_tree_hash: 1e4e1550f89b80c07082c5a4d5caa19729a8a0e8
 features:
   python:
     acceptHeaders: 3.0.0
@@ -5048,8 +5048,8 @@ trackedFiles:
     pristine_git_object: 432f9b632b00dbc6e7cd8a87908df962923bf3d6
   docs/components/model.mdx:
     id: ee338c3cef0a
-    last_write_checksum: sha1:f3b13696b8564e9ef19eda5a7f26b794b41e1fcb
-    pristine_git_object: b772541599f8f2366706fef767322484a82d20d3
+    last_write_checksum: sha1:04f6bb11207ff88d5f41cb69b65d4938b4e4ddd7
+    pristine_git_object: 0a601f49dd9988385e358deb05d9c9cb216937dd
   docs/components/modelaliastarget.mdx:
     id: 4c176a0fc594
     last_write_checksum: sha1:f62206b85ab831a8851bb952302699c14d9f4aef
@@ -8908,8 +8908,8 @@ trackedFiles:
     pristine_git_object: 91ffad70186d34bf8103f1988bdbdd258e1cfbfb
   docs/operations/client.mdx:
     id: 915aebbe62cb
-    last_write_checksum: sha1:107eddce0e7ba4fff1b8a6f6c2f883ceba729e06
-    pristine_git_object: b02404ab4ec68c12902657c9b800502ce9080669
+    last_write_checksum: sha1:26f42752b22b667c1515e246f48240067a7ec999
+    pristine_git_object: c013cd9bfe5ad51566a5826a54387ca86e7b1cbf
   docs/operations/content.mdx:
     id: 6f64feb2d798
     last_write_checksum: sha1:329d9719c9e25478666963df7b79710aa626d988
@@ -10060,8 +10060,8 @@ trackedFiles:
     pristine_git_object: b6ff4ac617c15b9ce560d8f7be1f2813ac73b696
   docs/operations/listmodelsuserrequest.mdx:
     id: 01537864056e
-    last_write_checksum: sha1:896fe646a05a136a8ad8df99f22d81ad4aaffa3c
-    pristine_git_object: 950838658eb536e8845c06819580ff6c24d1d47a
+    last_write_checksum: sha1:c84bf81ea9165231ee75ed3a64978ae1b9286ea9
+    pristine_git_object: 74bcc49ed49ed4cc8ed5704399155606fb3984b1
   docs/operations/listmodelsuserresponse.mdx:
     id: 34f7a1648ceb
     last_write_checksum: sha1:2ba3da93b8dd5a76d5f1acf0a080bc45ced552b6
@@ -10688,8 +10688,8 @@ trackedFiles:
     pristine_git_object: fa46dc09c893aadcb2c56921b973a019603010e1
   docs/sdks/models/README.mdx:
     id: 58f1ca464e0b
-    last_write_checksum: sha1:1f2d511b36a2e070a4279bf1d0dc824611709b23
-    pristine_git_object: 790d5a2786e11410827317ea1a55bf48d34571f3
+    last_write_checksum: sha1:0c808e81903391f9eed2d650679d70075908fa42
+    pristine_git_object: b71064c8e3e5a10f941278a601d9ee2f9c56eb88
   docs/sdks/oauth/README.mdx:
     id: 42b5079343d2
     last_write_checksum: sha1:4a2d77d0749b9430de95a6a1d323367cf5c27151
@@ -10764,8 +10764,8 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:1c82ea3ced5489880dbe1ee670416170e1e89650
-    pristine_git_object: 468c9965bee65473f439b3dbd8ba3807add73f76
+    last_write_checksum: sha1:a47cc255adc52a027c04fdd7296b4bd5b6ac8c18
+    pristine_git_object: b80981b1939d111c80f7f03b19c31d09cf70ff6c
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77f44b60b98bc126557ec27391f91dfba764bb54
@@ -10792,8 +10792,8 @@ trackedFiles:
     pristine_git_object: 86713cfea633e09d33b3d4e65281071fe20e6137
   src/openrouter/_version.py:
     id: d8d15ad6c586
-    last_write_checksum: sha1:47445f7c3a25c2c521db435dce2e30c07b8ce9bb
-    pristine_git_object: e0515b499f9b3a0de5a26dae56c6b7faf8b2b66c
+    last_write_checksum: sha1:2944b4b1cc6add8381f856b0799c35f709502c3c
+    pristine_git_object: 60a67b362ef4ba8c3c8ea646460a659482e7748d
   src/openrouter/alpha.py:
     id: 306c4d93308d
     last_write_checksum: sha1:80cc0f39649445431cc2247ed0e0765438467766
@@ -12848,8 +12848,8 @@ trackedFiles:
     pristine_git_object: 1257b38d2001f34078cd1b052c20264e81a95e57
   src/openrouter/components/model.py:
     id: cef3adaa772b
-    last_write_checksum: sha1:093d86532aa86f31ffd4e9dd62fb550401501509
-    pristine_git_object: ff7e7c113d0bd0812d7c7e93f8a6c92b2e886170
+    last_write_checksum: sha1:5ee97a406759c20d9add899e1842edf3d63232ac
+    pristine_git_object: 2a48c80597604b994de964e07504c9a054bb7150
   src/openrouter/components/modelaliastarget.py:
     id: 9e2f95e60286
     last_write_checksum: sha1:dbb697ffdd52fd48e2cfa0c3bd5c4a7429db4d41
@@ -14524,8 +14524,8 @@ trackedFiles:
     pristine_git_object: 5b741456655ff48919d17ffd552a6410f0587966
   src/openrouter/models_.py:
     id: 4e1ae1fe5b98
-    last_write_checksum: sha1:c90581a6d3d68eb2769c9de0d9725a01342fff14
-    pristine_git_object: f983b7ea893ccfee590e6b2055d0e5b43dd09f08
+    last_write_checksum: sha1:42b5b0e1611e8a75d4faf05a16aa8f65adf7e921
+    pristine_git_object: bfefd56e979c41957e983a7c87fc635c0df756a4
   src/openrouter/oauth.py:
     id: 1948ce27255b
     last_write_checksum: sha1:d6470de6325431db64b08ff4468fb2d8ea781c6f
@@ -14964,8 +14964,8 @@ trackedFiles:
     pristine_git_object: cdde733b97c9b409d550fd58f9d49184d1647f4d
   src/openrouter/operations/listmodelsuser.py:
     id: 16eb5946cf60
-    last_write_checksum: sha1:b5eafbaa22689a89bc7d91e55abb46b5122cded1
-    pristine_git_object: a934e44d774549b3d4b8cbdba9bebd07d252a9dc
+    last_write_checksum: sha1:eec8c0a76f1fe80183b15617d25580d1547aad2b
+    pristine_git_object: c5b9f8c2f29e740fef85a4e2f2a427d94c6f04bb
   src/openrouter/operations/listoauthjwks.py:
     id: 329ac9d6fa76
     last_write_checksum: sha1:8d6b08b6637a0ff49f88313a9f1bed03349655f1
@@ -15450,7 +15450,7 @@ examples:
           limit: 500
       responses:
         "200":
-          application/json: {"data": [{"architecture": {"input_modalities": ["text"], "modality": "text->text", "output_modalities": ["text"]}, "canonical_slug": "openai/gpt-4", "context_length": 8192, "created": 1692901234, "default_parameters": null, "id": "openai/gpt-4", "links": {"details": "/api/v1/models/openai/gpt-4/endpoints"}, "name": "GPT-4", "per_request_limits": null, "pricing": {"completion": "0.00006", "prompt": "0.00003"}, "supported_parameters": ["temperature", "top_p", "max_tokens", "frequency_penalty", "presence_penalty"], "supported_voices": null, "top_provider": {"is_moderated": true}}], "links": {"next": "/api/v1/models?offset=500&limit=500"}, "total_count": 150}
+          application/json: {"data": [{"architecture": {"input_modalities": ["text"], "modality": "text->text", "output_modalities": ["text"]}, "canonical_slug": "openai/gpt-4", "context_length": 8192, "created": 1692901234, "default_parameters": null, "endpoints": ["/api/v1/chat/completions", "/api/v1/completions", "/api/v1/messages", "/api/v1/responses"], "id": "openai/gpt-4", "links": {"details": "/api/v1/models/openai/gpt-4/endpoints"}, "name": "GPT-4", "per_request_limits": null, "pricing": {"completion": "0.00006", "prompt": "0.00003"}, "supported_parameters": ["temperature", "top_p", "max_tokens", "frequency_penalty", "presence_penalty"], "supported_voices": null, "top_provider": {"is_moderated": true}}], "links": {"next": "/api/v1/models?offset=500&limit=500"}, "total_count": 150}
         "400":
           application/json: {"error": {"code": 400, "message": "Invalid request parameters"}}
         "500":
@@ -15502,7 +15502,7 @@ examples:
           limit: 500
       responses:
         "200":
-          application/json: {"data": [{"architecture": {"input_modalities": ["text"], "modality": "text->text", "output_modalities": ["text"]}, "canonical_slug": "openai/gpt-4", "context_length": 8192, "created": 1692901234, "default_parameters": null, "id": "openai/gpt-4", "links": {"details": "/api/v1/models/openai/gpt-4/endpoints"}, "name": "GPT-4", "per_request_limits": null, "pricing": {"completion": "0.00006", "prompt": "0.00003"}, "supported_parameters": ["temperature", "top_p", "max_tokens", "frequency_penalty", "presence_penalty"], "supported_voices": null, "top_provider": {"is_moderated": true}}], "links": {"next": "/api/v1/models?offset=500&limit=500"}, "total_count": 150}
+          application/json: {"data": [{"architecture": {"input_modalities": ["text"], "modality": "text->text", "output_modalities": ["text"]}, "canonical_slug": "openai/gpt-4", "context_length": 8192, "created": 1692901234, "default_parameters": null, "endpoints": ["/api/v1/chat/completions", "/api/v1/completions", "/api/v1/messages", "/api/v1/responses"], "id": "openai/gpt-4", "links": {"details": "/api/v1/models/openai/gpt-4/endpoints"}, "name": "GPT-4", "per_request_limits": null, "pricing": {"completion": "0.00006", "prompt": "0.00003"}, "supported_parameters": ["temperature", "top_p", "max_tokens", "frequency_penalty", "presence_penalty"], "supported_voices": null, "top_provider": {"is_moderated": true}}], "links": {"next": "/api/v1/models?offset=500&limit=500"}, "total_count": 150}
         "400":
           application/json: {"error": {"code": 400, "message": "Invalid request parameters"}}
         "500":
@@ -15529,7 +15529,7 @@ examples:
           limit: 500
       responses:
         "200":
-          application/json: {"data": [{"architecture": {"input_modalities": ["text"], "modality": "text->text", "output_modalities": ["text"]}, "canonical_slug": "openai/gpt-4", "context_length": 8192, "created": 1692901234, "default_parameters": null, "id": "openai/gpt-4", "links": {"details": "/api/v1/models/openai/gpt-4/endpoints"}, "name": "GPT-4", "per_request_limits": null, "pricing": {"completion": "0.00006", "prompt": "0.00003"}, "supported_parameters": ["temperature", "top_p", "max_tokens", "frequency_penalty", "presence_penalty"], "supported_voices": null, "top_provider": {"is_moderated": true}}], "links": {"next": "/api/v1/models?offset=500&limit=500"}, "total_count": 150}
+          application/json: {"data": [{"architecture": {"input_modalities": ["text"], "modality": "text->text", "output_modalities": ["text"]}, "canonical_slug": "openai/gpt-4", "context_length": 8192, "created": 1692901234, "default_parameters": null, "endpoints": ["/api/v1/chat/completions", "/api/v1/completions", "/api/v1/messages", "/api/v1/responses"], "id": "openai/gpt-4", "links": {"details": "/api/v1/models/openai/gpt-4/endpoints"}, "name": "GPT-4", "per_request_limits": null, "pricing": {"completion": "0.00006", "prompt": "0.00003"}, "supported_parameters": ["temperature", "top_p", "max_tokens", "frequency_penalty", "presence_penalty"], "supported_voices": null, "top_provider": {"is_moderated": true}}], "links": {"next": "/api/v1/models?offset=500&limit=500"}, "total_count": 150}
         "401":
           application/json: {"error": {"code": 401, "message": "Missing Authentication header"}}
         "404":
@@ -16877,7 +16877,7 @@ examples:
           slug: "gpt-4"
       responses:
         "200":
-          application/json: {"data": {"architecture": {"input_modalities": ["text"], "modality": "text->text", "output_modalities": ["text"]}, "canonical_slug": "openai/gpt-4", "context_length": 8192, "created": 1692901234, "default_parameters": null, "id": "openai/gpt-4", "links": {"details": "/api/v1/models/openai/gpt-4/endpoints"}, "name": "GPT-4", "per_request_limits": null, "pricing": {"completion": "0.00006", "prompt": "0.00003"}, "supported_parameters": ["temperature", "top_p", "max_tokens"], "supported_voices": null, "top_provider": {"is_moderated": true}}}
+          application/json: {"data": {"architecture": {"input_modalities": ["text"], "modality": "text->text", "output_modalities": ["text"]}, "canonical_slug": "openai/gpt-4", "context_length": 8192, "created": 1692901234, "default_parameters": null, "endpoints": ["/api/v1/chat/completions", "/api/v1/completions", "/api/v1/messages", "/api/v1/responses"], "id": "openai/gpt-4", "links": {"details": "/api/v1/models/openai/gpt-4/endpoints"}, "name": "GPT-4", "per_request_limits": null, "pricing": {"completion": "0.00006", "prompt": "0.00003"}, "supported_parameters": ["temperature", "top_p", "max_tokens"], "supported_voices": null, "top_provider": {"is_moderated": true}}}
         "404":
           application/json: {"error": {"code": 404, "message": "Resource not found"}}
         "500":
@@ -19816,4 +19816,9 @@ examples:
         "529":
           application/json: {"error": {"code": 529, "message": "Provider returned error"}}
 examplesVersion: 1.0.2
-releaseNotes: "## Python SDK Changes:\n* `open_router.alpha.extractions.create()`: \n  *  `request.assets.Map<ExtractionAsset>` **Changed**\n  *  `response.answers.Map<answers>` **Changed**\n"
+releaseNotes: |
+  ## Python SDK Changes:
+  * `open_router.embeddings.list_models()`:  `response.data[].endpoints` **Added**
+  * `open_router.models.get()`:  `response.data.endpoints` **Added**
+  * `open_router.models.list()`:  `response.data[].endpoints` **Added**
+  * `open_router.models.list_for_user()`:  `response.data[].endpoints` **Added**

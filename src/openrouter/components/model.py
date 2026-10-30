@@ -36,6 +36,8 @@ class ModelTypedDict(TypedDict):
     r"""Unix timestamp of when the model was created"""
     default_parameters: Nullable[DefaultParametersTypedDict]
     r"""Default parameters for this model"""
+    endpoints: List[str]
+    r"""Request API paths that serve this model, derived from the same modality and adapter rules the routers use. A model served only through an alpha surface lists only that path."""
     id: str
     r"""Unique identifier for the model"""
     links: ModelLinksTypedDict
@@ -85,6 +87,9 @@ class Model(BaseModel):
 
     default_parameters: Nullable[DefaultParameters]
     r"""Default parameters for this model"""
+
+    endpoints: List[str]
+    r"""Request API paths that serve this model, derived from the same modality and adapter rules the routers use. A model served only through an alpha surface lists only that path."""
 
     id: str
     r"""Unique identifier for the model"""
