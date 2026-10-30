@@ -1625,6 +1625,7 @@ if TYPE_CHECKING:
         DebugEventType,
         DebugEventTypedDict,
     )
+    from .decisions import Decisions, DecisionsTypedDict
     from .decisionsboxanswer import (
         Box,
         BoxTypedDict,
@@ -1794,6 +1795,7 @@ if TYPE_CHECKING:
         EdgeNetworkTimeoutResponseErrorData,
         EdgeNetworkTimeoutResponseErrorDataTypedDict,
     )
+    from .embeddings import Embeddings, EmbeddingsTypedDict
     from .endpointinfo import EndpointInfo, EndpointInfoTypedDict
     from .endpointsmetadata import EndpointsMetadata, EndpointsMetadataTypedDict
     from .endpointstatus import EndpointStatus
@@ -2290,6 +2292,7 @@ if TYPE_CHECKING:
         ImageGenCompletedEventType,
         ImageGenCompletedEventTypedDict,
     )
+    from .imagegeneration import ImageGeneration, ImageGenerationTypedDict
     from .imagegenerationproviderpreferences import (
         ImageGenerationProviderPreferences,
         ImageGenerationProviderPreferencesIgnore,
@@ -2905,6 +2908,7 @@ if TYPE_CHECKING:
         NamespaceToolTypedDict,
         UnknownNamespaceToolTool,
     )
+    from .nativetools import NativeTools, NativeToolsTypedDict
     from .notfoundresponseerrordata import (
         NotFoundResponseErrorData,
         NotFoundResponseErrorDataTypedDict,
@@ -3644,6 +3648,10 @@ if TYPE_CHECKING:
         PercentileThroughputCutoffs,
         PercentileThroughputCutoffsTypedDict,
     )
+    from .perflast30mbyworkload import (
+        PerfLast30mByWorkload,
+        PerfLast30mByWorkloadTypedDict,
+    )
     from .perrequestlimits import PerRequestLimits, PerRequestLimitsTypedDict
     from .pipelinestage import PipelineStage, PipelineStageTypedDict
     from .pipelinestagetype import PipelineStageType
@@ -3689,6 +3697,7 @@ if TYPE_CHECKING:
         PreviewWebSearchUserLocationType,
         PreviewWebSearchUserLocationTypedDict,
     )
+    from .pricing import Pricing, PricingTypedDict
     from .pricingoverride import PricingOverride, PricingOverrideTypedDict, UtcDay
     from .privateendpoint import PrivateEndpoint, PrivateEndpointTypedDict
     from .privateendpointactivation import (
@@ -3803,36 +3812,10 @@ if TYPE_CHECKING:
         ProviderSortConfig,
         ProviderSortConfigTypedDict,
     )
-    from .publicendpoint import (
-        Decisions,
-        DecisionsTypedDict,
-        Embeddings,
-        EmbeddingsTypedDict,
-        ImageGeneration,
-        ImageGenerationTypedDict,
-        NativeTools,
-        NativeToolsTypedDict,
-        PerfLast30mByWorkload,
-        PerfLast30mByWorkloadTypedDict,
-        Pricing,
-        PricingTypedDict,
-        PublicEndpoint,
-        PublicEndpointTypedDict,
-        Rerank,
-        RerankTypedDict,
-        STT,
-        STTTypedDict,
-        TTS,
-        TTSTypedDict,
-        TextGeneration,
-        TextGenerationTypedDict,
-        Unknown,
-        UnknownTypedDict,
-        VideoGeneration,
-        VideoGenerationTypedDict,
-    )
+    from .publicendpoint import PublicEndpoint, PublicEndpointTypedDict
     from .publicpricing import PublicPricing, PublicPricingTypedDict
     from .publicservicetier import PublicServiceTier
+    from .publiczdrendpoint import PublicZdrEndpoint, PublicZdrEndpointTypedDict
     from .quantization import Quantization
     from .rangecapability import (
         RangeCapability,
@@ -3943,6 +3926,7 @@ if TYPE_CHECKING:
         RequestTimeoutResponseErrorData,
         RequestTimeoutResponseErrorDataTypedDict,
     )
+    from .rerank import Rerank, RerankTypedDict
     from .responsehealingplugin import (
         ResponseHealingPlugin,
         ResponseHealingPluginID,
@@ -4225,6 +4209,7 @@ if TYPE_CHECKING:
         StreamLogprobTopLogprob,
         StreamLogprobTopLogprobTypedDict,
     )
+    from .stt import STT, STTTypedDict
     from .sttentity import STTEntity, STTEntityTypedDict
     from .sttinlineinputaudio import STTInlineInputAudio, STTInlineInputAudioTypedDict
     from .sttinputaudio import STTInputAudio, STTInputAudioTypedDict
@@ -4303,6 +4288,7 @@ if TYPE_CHECKING:
         TextExtendedConfigTypedDict,
         Verbosity,
     )
+    from .textgeneration import TextGeneration, TextGenerationTypedDict
     from .tokenexchangerequest import (
         GrantType,
         RequestedTokenType,
@@ -4366,6 +4352,7 @@ if TYPE_CHECKING:
     from .topproviderinfo import TopProviderInfo, TopProviderInfoTypedDict
     from .traceconfig import TraceConfig, TraceConfigTypedDict
     from .truncation import Truncation
+    from .tts import TTS, TTSTypedDict
     from .unauthorizedresponseerrordata import (
         UnauthorizedResponseErrorData,
         UnauthorizedResponseErrorDataTypedDict,
@@ -4416,6 +4403,7 @@ if TYPE_CHECKING:
         UnifiedBenchmarksSearchRunConfig,
         UnifiedBenchmarksSearchRunConfigTypedDict,
     )
+    from .unknown import Unknown, UnknownTypedDict
     from .unprocessableentityresponseerrordata import (
         UnprocessableEntityResponseErrorData,
         UnprocessableEntityResponseErrorDataTypedDict,
@@ -4591,6 +4579,7 @@ if TYPE_CHECKING:
         VaultSecretWriteRequest,
         VaultSecretWriteRequestTypedDict,
     )
+    from .videogeneration import VideoGeneration, VideoGenerationTypedDict
     from .videogenerationrequest import (
         VideoGenerationRequest,
         VideoGenerationRequestAspectRatio,
@@ -7395,6 +7384,8 @@ __all__ = [
     "PublicPricing",
     "PublicPricingTypedDict",
     "PublicServiceTier",
+    "PublicZdrEndpoint",
+    "PublicZdrEndpointTypedDict",
     "Purpose",
     "Quantization",
     "Questions",
@@ -9341,6 +9332,8 @@ _dynamic_imports: dict[str, str] = {
     "DebugEventTimingsTypedDict": ".debugevent",
     "DebugEventType": ".debugevent",
     "DebugEventTypedDict": ".debugevent",
+    "Decisions": ".decisions",
+    "DecisionsTypedDict": ".decisions",
     "Box": ".decisionsboxanswer",
     "BoxTypedDict": ".decisionsboxanswer",
     "DecisionsBoxAnswer": ".decisionsboxanswer",
@@ -9461,6 +9454,8 @@ _dynamic_imports: dict[str, str] = {
     "EasyInputMessageTypedDict": ".easyinputmessage",
     "EdgeNetworkTimeoutResponseErrorData": ".edgenetworktimeoutresponseerrordata",
     "EdgeNetworkTimeoutResponseErrorDataTypedDict": ".edgenetworktimeoutresponseerrordata",
+    "Embeddings": ".embeddings",
+    "EmbeddingsTypedDict": ".embeddings",
     "EndpointInfo": ".endpointinfo",
     "EndpointInfoTypedDict": ".endpointinfo",
     "EndpointsMetadata": ".endpointsmetadata",
@@ -9835,6 +9830,8 @@ _dynamic_imports: dict[str, str] = {
     "ImageGenCompletedEvent": ".imagegencompletedevent",
     "ImageGenCompletedEventType": ".imagegencompletedevent",
     "ImageGenCompletedEventTypedDict": ".imagegencompletedevent",
+    "ImageGeneration": ".imagegeneration",
+    "ImageGenerationTypedDict": ".imagegeneration",
     "ImageGenerationProviderPreferences": ".imagegenerationproviderpreferences",
     "ImageGenerationProviderPreferencesIgnore": ".imagegenerationproviderpreferences",
     "ImageGenerationProviderPreferencesIgnoreTypedDict": ".imagegenerationproviderpreferences",
@@ -10335,6 +10332,8 @@ _dynamic_imports: dict[str, str] = {
     "NamespaceToolType": ".namespacetool",
     "NamespaceToolTypedDict": ".namespacetool",
     "UnknownNamespaceToolTool": ".namespacetool",
+    "NativeTools": ".nativetools",
+    "NativeToolsTypedDict": ".nativetools",
     "NotFoundResponseErrorData": ".notfoundresponseerrordata",
     "NotFoundResponseErrorDataTypedDict": ".notfoundresponseerrordata",
     "ErrorEnum": ".oautherrorresponse",
@@ -10884,6 +10883,8 @@ _dynamic_imports: dict[str, str] = {
     "PercentileStatsTypedDict": ".percentilestats",
     "PercentileThroughputCutoffs": ".percentilethroughputcutoffs",
     "PercentileThroughputCutoffsTypedDict": ".percentilethroughputcutoffs",
+    "PerfLast30mByWorkload": ".perflast30mbyworkload",
+    "PerfLast30mByWorkloadTypedDict": ".perflast30mbyworkload",
     "PerRequestLimits": ".perrequestlimits",
     "PerRequestLimitsTypedDict": ".perrequestlimits",
     "PipelineStage": ".pipelinestage",
@@ -10917,6 +10918,8 @@ _dynamic_imports: dict[str, str] = {
     "PreviewWebSearchUserLocation": ".preview_websearchuserlocation",
     "PreviewWebSearchUserLocationType": ".preview_websearchuserlocation",
     "PreviewWebSearchUserLocationTypedDict": ".preview_websearchuserlocation",
+    "Pricing": ".pricing",
+    "PricingTypedDict": ".pricing",
     "PricingOverride": ".pricingoverride",
     "PricingOverrideTypedDict": ".pricingoverride",
     "UtcDay": ".pricingoverride",
@@ -10997,35 +11000,13 @@ _dynamic_imports: dict[str, str] = {
     "Partition": ".providersortconfig",
     "ProviderSortConfig": ".providersortconfig",
     "ProviderSortConfigTypedDict": ".providersortconfig",
-    "Decisions": ".publicendpoint",
-    "DecisionsTypedDict": ".publicendpoint",
-    "Embeddings": ".publicendpoint",
-    "EmbeddingsTypedDict": ".publicendpoint",
-    "ImageGeneration": ".publicendpoint",
-    "ImageGenerationTypedDict": ".publicendpoint",
-    "NativeTools": ".publicendpoint",
-    "NativeToolsTypedDict": ".publicendpoint",
-    "PerfLast30mByWorkload": ".publicendpoint",
-    "PerfLast30mByWorkloadTypedDict": ".publicendpoint",
-    "Pricing": ".publicendpoint",
-    "PricingTypedDict": ".publicendpoint",
     "PublicEndpoint": ".publicendpoint",
     "PublicEndpointTypedDict": ".publicendpoint",
-    "Rerank": ".publicendpoint",
-    "RerankTypedDict": ".publicendpoint",
-    "STT": ".publicendpoint",
-    "STTTypedDict": ".publicendpoint",
-    "TTS": ".publicendpoint",
-    "TTSTypedDict": ".publicendpoint",
-    "TextGeneration": ".publicendpoint",
-    "TextGenerationTypedDict": ".publicendpoint",
-    "Unknown": ".publicendpoint",
-    "UnknownTypedDict": ".publicendpoint",
-    "VideoGeneration": ".publicendpoint",
-    "VideoGenerationTypedDict": ".publicendpoint",
     "PublicPricing": ".publicpricing",
     "PublicPricingTypedDict": ".publicpricing",
     "PublicServiceTier": ".publicservicetier",
+    "PublicZdrEndpoint": ".publiczdrendpoint",
+    "PublicZdrEndpointTypedDict": ".publiczdrendpoint",
     "Quantization": ".quantization",
     "RangeCapability": ".rangecapability",
     "RangeCapabilityType": ".rangecapability",
@@ -11097,6 +11078,8 @@ _dynamic_imports: dict[str, str] = {
     "RefusalDoneEventTypedDict": ".refusaldoneevent",
     "RequestTimeoutResponseErrorData": ".requesttimeoutresponseerrordata",
     "RequestTimeoutResponseErrorDataTypedDict": ".requesttimeoutresponseerrordata",
+    "Rerank": ".rerank",
+    "RerankTypedDict": ".rerank",
     "ResponseHealingPlugin": ".responsehealingplugin",
     "ResponseHealingPluginID": ".responsehealingplugin",
     "ResponseHealingPluginTypedDict": ".responsehealingplugin",
@@ -11302,6 +11285,8 @@ _dynamic_imports: dict[str, str] = {
     "StreamLogprobTypedDict": ".streamlogprob",
     "StreamLogprobTopLogprob": ".streamlogprobtoplogprob",
     "StreamLogprobTopLogprobTypedDict": ".streamlogprobtoplogprob",
+    "STT": ".stt",
+    "STTTypedDict": ".stt",
     "STTEntity": ".sttentity",
     "STTEntityTypedDict": ".sttentity",
     "STTInlineInputAudio": ".sttinlineinputaudio",
@@ -11366,6 +11351,8 @@ _dynamic_imports: dict[str, str] = {
     "TextExtendedConfig": ".textextendedconfig",
     "TextExtendedConfigTypedDict": ".textextendedconfig",
     "Verbosity": ".textextendedconfig",
+    "TextGeneration": ".textgeneration",
+    "TextGenerationTypedDict": ".textgeneration",
     "GrantType": ".tokenexchangerequest",
     "RequestedTokenType": ".tokenexchangerequest",
     "SubjectTokenType": ".tokenexchangerequest",
@@ -11416,6 +11403,8 @@ _dynamic_imports: dict[str, str] = {
     "TraceConfig": ".traceconfig",
     "TraceConfigTypedDict": ".traceconfig",
     "Truncation": ".truncation",
+    "TTS": ".tts",
+    "TTSTypedDict": ".tts",
     "UnauthorizedResponseErrorData": ".unauthorizedresponseerrordata",
     "UnauthorizedResponseErrorDataTypedDict": ".unauthorizedresponseerrordata",
     "UnifiedBenchmarkPricing": ".unifiedbenchmarkpricing",
@@ -11448,6 +11437,8 @@ _dynamic_imports: dict[str, str] = {
     "UnifiedBenchmarksSearchItemTypedDict": ".unifiedbenchmarkssearchitem",
     "UnifiedBenchmarksSearchRunConfig": ".unifiedbenchmarkssearchrunconfig",
     "UnifiedBenchmarksSearchRunConfigTypedDict": ".unifiedbenchmarkssearchrunconfig",
+    "Unknown": ".unknown",
+    "UnknownTypedDict": ".unknown",
     "UnprocessableEntityResponseErrorData": ".unprocessableentityresponseerrordata",
     "UnprocessableEntityResponseErrorDataTypedDict": ".unprocessableentityresponseerrordata",
     "UpdateBYOKKeyRequest": ".updatebyokkeyrequest",
@@ -11571,6 +11562,8 @@ _dynamic_imports: dict[str, str] = {
     "VaultSecretResponseTypedDict": ".vaultsecretresponse",
     "VaultSecretWriteRequest": ".vaultsecretwriterequest",
     "VaultSecretWriteRequestTypedDict": ".vaultsecretwriterequest",
+    "VideoGeneration": ".videogeneration",
+    "VideoGenerationTypedDict": ".videogeneration",
     "VideoGenerationRequest": ".videogenerationrequest",
     "VideoGenerationRequestAspectRatio": ".videogenerationrequest",
     "VideoGenerationRequestOptions": ".videogenerationrequest",
