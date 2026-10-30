@@ -2085,6 +2085,12 @@ class Presets(BaseSDK):
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
+        access_programs: Optional[
+            Union[
+                components.ResponsesRequestAccessPrograms,
+                components.ResponsesRequestAccessProgramsTypedDict,
+            ]
+        ] = None,
         background: OptionalNullable[bool] = UNSET,
         cache_control: Optional[
             Union[
@@ -2205,6 +2211,7 @@ class Presets(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
+        :param access_programs: OpenAI access programs for this request. `cyber` selects the Cyber access program: `standard`, `daybreak_blue`, or `daybreak_red`. A program other than `standard` is supported only on BYOK requests that run on your own OpenAI key enrolled in that program; any other endpoint, including OpenRouter's own OpenAI credentials, rejects it with a 400 error. Requests on OpenRouter's OpenAI credentials always run `standard`. Omit the field unless your key is enrolled in a Daybreak program.
         :param background:
         :param cache_control: Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. When set on an individual content block, it marks an explicit cache breakpoint; block-level markers also work on OpenAI models that support explicit prompt caching — OpenRouter converts them to the provider's native format.
         :param debug: Debug options for inspecting request transformations (streaming only)
@@ -2266,6 +2273,9 @@ class Presets(BaseSDK):
             x_open_router_categories=x_open_router_categories,
             slug=slug,
             responses_request=components.ResponsesRequest(
+                access_programs=utils.get_pydantic_model(
+                    access_programs, Optional[components.ResponsesRequestAccessPrograms]
+                ),
                 background=background,
                 cache_control=utils.get_pydantic_model(
                     cache_control, Optional[components.AnthropicCacheControlDirective]
@@ -2457,6 +2467,12 @@ class Presets(BaseSDK):
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
+        access_programs: Optional[
+            Union[
+                components.ResponsesRequestAccessPrograms,
+                components.ResponsesRequestAccessProgramsTypedDict,
+            ]
+        ] = None,
         background: OptionalNullable[bool] = UNSET,
         cache_control: Optional[
             Union[
@@ -2577,6 +2593,7 @@ class Presets(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
+        :param access_programs: OpenAI access programs for this request. `cyber` selects the Cyber access program: `standard`, `daybreak_blue`, or `daybreak_red`. A program other than `standard` is supported only on BYOK requests that run on your own OpenAI key enrolled in that program; any other endpoint, including OpenRouter's own OpenAI credentials, rejects it with a 400 error. Requests on OpenRouter's OpenAI credentials always run `standard`. Omit the field unless your key is enrolled in a Daybreak program.
         :param background:
         :param cache_control: Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. When set on an individual content block, it marks an explicit cache breakpoint; block-level markers also work on OpenAI models that support explicit prompt caching — OpenRouter converts them to the provider's native format.
         :param debug: Debug options for inspecting request transformations (streaming only)
@@ -2638,6 +2655,9 @@ class Presets(BaseSDK):
             x_open_router_categories=x_open_router_categories,
             slug=slug,
             responses_request=components.ResponsesRequest(
+                access_programs=utils.get_pydantic_model(
+                    access_programs, Optional[components.ResponsesRequestAccessPrograms]
+                ),
                 background=background,
                 cache_control=utils.get_pydantic_model(
                     cache_control, Optional[components.AnthropicCacheControlDirective]
