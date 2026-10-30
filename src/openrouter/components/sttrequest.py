@@ -42,7 +42,7 @@ class STTRequestProviderTypedDict(TypedDict):
     - deny: use only providers which do not collect user data.
     """
     options: NotRequired[ProviderOptionsTypedDict]
-    r"""Provider-specific options keyed by provider slug. Only options for the matched provider are forwarded; the rest are ignored. Unrecognized keys are silently dropped."""
+    r"""Provider-specific options keyed by provider slug. The provider segment is case-insensitive; an endpoint tag after `/` must match the endpoint slug exactly. Only options for the matched provider are forwarded; the rest are ignored. Unrecognized keys are silently dropped."""
     zdr: NotRequired[Nullable[bool]]
     r"""Whether to restrict routing to only ZDR (Zero Data Retention) endpoints. When true, only endpoints that do not retain prompts will be used."""
 
@@ -58,7 +58,7 @@ class STTRequestProvider(BaseModel):
     """
 
     options: Optional[ProviderOptions] = None
-    r"""Provider-specific options keyed by provider slug. Only options for the matched provider are forwarded; the rest are ignored. Unrecognized keys are silently dropped."""
+    r"""Provider-specific options keyed by provider slug. The provider segment is case-insensitive; an endpoint tag after `/` must match the endpoint slug exactly. Only options for the matched provider are forwarded; the rest are ignored. Unrecognized keys are silently dropped."""
 
     zdr: OptionalNullable[bool] = UNSET
     r"""Whether to restrict routing to only ZDR (Zero Data Retention) endpoints. When true, only endpoints that do not retain prompts will be used."""
