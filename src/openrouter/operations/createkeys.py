@@ -143,7 +143,7 @@ class CreateKeysRequestBodyTypedDict(TypedDict):
     limit_reset: NotRequired[Nullable[CreateKeysLimitReset]]
     r"""Type of limit reset for the API key (daily, weekly, monthly, or null for no reset). Resets happen automatically at midnight UTC, and weeks are Monday through Sunday."""
     workspace_id: NotRequired[str]
-    r"""The workspace to create the API key in. Defaults to the default workspace if not provided."""
+    r"""The workspace to create the API key in. Defaults to the default workspace for an organization-scoped management key, or to the management key's own workspace for a workspace-scoped one, which cannot create keys elsewhere."""
 
 
 class CreateKeysRequestBody(BaseModel):
@@ -169,7 +169,7 @@ class CreateKeysRequestBody(BaseModel):
     r"""Type of limit reset for the API key (daily, weekly, monthly, or null for no reset). Resets happen automatically at midnight UTC, and weeks are Monday through Sunday."""
 
     workspace_id: Optional[str] = None
-    r"""The workspace to create the API key in. Defaults to the default workspace if not provided."""
+    r"""The workspace to create the API key in. Defaults to the default workspace for an organization-scoped management key, or to the management key's own workspace for a workspace-scoped one, which cannot create keys elsewhere."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

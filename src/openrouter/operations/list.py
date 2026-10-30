@@ -101,7 +101,7 @@ class ListRequestTypedDict(TypedDict):
     offset: NotRequired[Nullable[int]]
     r"""Number of API keys to skip for pagination"""
     workspace_id: NotRequired[str]
-    r"""Filter API keys by workspace ID. By default, keys in the default workspace are returned."""
+    r"""Filter API keys by workspace ID. By default an organization-scoped management key gets the default workspace; a workspace-scoped management key always gets its own workspace and cannot list another."""
 
 
 class ListRequest(BaseModel):
@@ -155,7 +155,7 @@ class ListRequest(BaseModel):
         Optional[str],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
-    r"""Filter API keys by workspace ID. By default, keys in the default workspace are returned."""
+    r"""Filter API keys by workspace ID. By default an organization-scoped management key gets the default workspace; a workspace-scoped management key always gets its own workspace and cannot list another."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
