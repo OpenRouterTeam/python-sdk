@@ -3,12 +3,15 @@
 from .basesdk import BaseSDK
 from .sdkconfiguration import SDKConfiguration
 from openrouter.decisions import Decisions
+from openrouter.extractions import Extractions
 from typing import Optional
 
 
 class Alpha(BaseSDK):
     decisions: Decisions
     r"""Alpha feature endpoints for Decisions requests"""
+    extractions: Extractions
+    r"""Alpha feature endpoints for Extractions requests"""
 
     def __init__(
         self, sdk_config: SDKConfiguration, parent_ref: Optional[object] = None
@@ -19,3 +22,6 @@ class Alpha(BaseSDK):
 
     def _init_sdks(self):
         self.decisions = Decisions(self.sdk_configuration, parent_ref=self.parent_ref)
+        self.extractions = Extractions(
+            self.sdk_configuration, parent_ref=self.parent_ref
+        )

@@ -21,6 +21,7 @@ APIType = Union[
         "embeddings",
         "rerank",
         "decisions",
+        "extractions",
         "video",
         "tts",
         "stt",
