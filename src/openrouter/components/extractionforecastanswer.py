@@ -65,10 +65,11 @@ ExtractionForecastAnswerSource = Union[
     Literal[
         "state",
         "image",
+        "document",
     ],
     UnrecognizedStr,
 ]
-r"""Set to `image` when the answer was read from an image rather than the state text."""
+r"""Set to `image` or `document` when the answer was read from an image or a PDF rather than the state text."""
 
 
 ExtractionForecastAnswerType = Literal["forecast",]
@@ -97,7 +98,7 @@ class ExtractionForecastAnswerTypedDict(TypedDict):
     p10: NotRequired[List[ExtractionForecastAnswerP10TypedDict]]
     p90: NotRequired[List[ExtractionForecastAnswerP90TypedDict]]
     source: NotRequired[ExtractionForecastAnswerSource]
-    r"""Set to `image` when the answer was read from an image rather than the state text."""
+    r"""Set to `image` or `document` when the answer was read from an image or a PDF rather than the state text."""
     spell_confidence: NotRequired[float]
     r"""Confidence in the spelling of text read from an image."""
     steps: NotRequired[List[ExtractionForecastStepTypedDict]]
@@ -125,7 +126,7 @@ class ExtractionForecastAnswer(BaseModel):
     p90: Optional[List[ExtractionForecastAnswerP90]] = None
 
     source: Optional[ExtractionForecastAnswerSource] = None
-    r"""Set to `image` when the answer was read from an image rather than the state text."""
+    r"""Set to `image` or `document` when the answer was read from an image or a PDF rather than the state text."""
 
     spell_confidence: Optional[float] = None
     r"""Confidence in the spelling of text read from an image."""

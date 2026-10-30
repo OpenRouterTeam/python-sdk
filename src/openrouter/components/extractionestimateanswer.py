@@ -73,10 +73,11 @@ ExtractionEstimateAnswerSource = Union[
     Literal[
         "state",
         "image",
+        "document",
     ],
     UnrecognizedStr,
 ]
-r"""Set to `image` when the answer was read from an image rather than the state text."""
+r"""Set to `image` or `document` when the answer was read from an image or a PDF rather than the state text."""
 
 
 ExtractionEstimateAnswerType = Literal["estimate",]
@@ -111,7 +112,7 @@ class ExtractionEstimateAnswerTypedDict(TypedDict):
     quantiles: NotRequired[List[ExtractionEstimateAnswerQuantileTypedDict]]
     r"""99 percentiles, present when the provider is asked for quantiles."""
     source: NotRequired[ExtractionEstimateAnswerSource]
-    r"""Set to `image` when the answer was read from an image rather than the state text."""
+    r"""Set to `image` or `document` when the answer was read from an image or a PDF rather than the state text."""
     spell_confidence: NotRequired[float]
     r"""Confidence in the spelling of text read from an image."""
 
@@ -147,7 +148,7 @@ class ExtractionEstimateAnswer(BaseModel):
     r"""99 percentiles, present when the provider is asked for quantiles."""
 
     source: Optional[ExtractionEstimateAnswerSource] = None
-    r"""Set to `image` when the answer was read from an image rather than the state text."""
+    r"""Set to `image` or `document` when the answer was read from an image or a PDF rather than the state text."""
 
     spell_confidence: Optional[float] = None
     r"""Confidence in the spelling of text read from an image."""

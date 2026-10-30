@@ -11,10 +11,11 @@ ExtractionDateAnswerSource = Union[
     Literal[
         "state",
         "image",
+        "document",
     ],
     UnrecognizedStr,
 ]
-r"""Set to `image` when the answer was read from an image rather than the state text."""
+r"""Set to `image` or `document` when the answer was read from an image or a PDF rather than the state text."""
 
 
 ExtractionDateAnswerType = Literal["date",]
@@ -29,7 +30,7 @@ class ExtractionDateAnswerTypedDict(TypedDict):
     p_null: NotRequired[float]
     r"""Probability that the state contains nothing for this field."""
     source: NotRequired[ExtractionDateAnswerSource]
-    r"""Set to `image` when the answer was read from an image rather than the state text."""
+    r"""Set to `image` or `document` when the answer was read from an image or a PDF rather than the state text."""
     span: NotRequired[List[int]]
     r"""Unicode code point offsets [start, end) into the state text: index code points (not UTF-16 code units or UTF-8 bytes), so an emoji or accented letter counts once."""
     spell_confidence: NotRequired[float]
@@ -50,7 +51,7 @@ class ExtractionDateAnswer(BaseModel):
     r"""Probability that the state contains nothing for this field."""
 
     source: Optional[ExtractionDateAnswerSource] = None
-    r"""Set to `image` when the answer was read from an image rather than the state text."""
+    r"""Set to `image` or `document` when the answer was read from an image or a PDF rather than the state text."""
 
     span: Optional[List[int]] = None
     r"""Unicode code point offsets [start, end) into the state text: index code points (not UTF-16 code units or UTF-8 bytes), so an emoji or accented letter counts once."""
