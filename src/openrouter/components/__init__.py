@@ -1275,6 +1275,24 @@ if TYPE_CHECKING:
         ChatWebSearchShorthandType,
         ChatWebSearchShorthandTypedDict,
     )
+    from .classifierfiltersfilter import (
+        ClassifierFiltersFilter,
+        ClassifierFiltersFilterTypedDict,
+    )
+    from .classifierscalarfilter import (
+        ClassifierScalarFilter,
+        ClassifierScalarFilterTypedDict,
+        ClassifierScalarFilterValue,
+        ClassifierScalarFilterValueTypedDict,
+    )
+    from .classifierscalarfilteroperator import ClassifierScalarFilterOperator
+    from .classifiersetfilter import (
+        ClassifierSetFilter,
+        ClassifierSetFilterTypedDict,
+        ClassifierSetFilterValue,
+        ClassifierSetFilterValueTypedDict,
+    )
+    from .classifiersetfilteroperator import ClassifierSetFilterOperator
     from .clientclosedrequestresponseerrordata import (
         ClientClosedRequestResponseErrorData,
         ClientClosedRequestResponseErrorDataTypedDict,
@@ -1836,6 +1854,7 @@ if TYPE_CHECKING:
         FilesServerToolConfig,
         FilesServerToolConfigTypedDict,
     )
+    from .filter_ import Filter, FilterTypedDict
     from .finishreason import FinishReason
     from .forbiddenresponseerrordata import (
         ForbiddenResponseErrorData,
@@ -2758,7 +2777,7 @@ if TYPE_CHECKING:
         ObservabilityFilterRuleGroupTypedDict,
         ObservabilityFilterRuleGroupValue,
         ObservabilityFilterRuleGroupValueTypedDict,
-        Operator,
+        OperatorEnum,
         Rule,
         RuleTypedDict,
     )
@@ -3028,6 +3047,7 @@ if TYPE_CHECKING:
         OpenRouterWebSearchServerToolType,
         OpenRouterWebSearchServerToolTypedDict,
     )
+    from .operator import Operator, OperatorName, OperatorTypedDict, ValueType
     from .oranthropicbashtoolresult import (
         ORAnthropicBashToolResult,
         ORAnthropicBashToolResultFile,
@@ -3774,6 +3794,13 @@ if TYPE_CHECKING:
     from .routerattempt import RouterAttempt, RouterAttemptTypedDict
     from .routerparams import RouterParams, RouterParamsTypedDict
     from .routingstrategy import RoutingStrategy
+    from .scalarfilter import (
+        ScalarFilter,
+        ScalarFilterTypedDict,
+        ScalarFilterValue,
+        ScalarFilterValueTypedDict,
+    )
+    from .scalarfilteroperator import ScalarFilterOperator
     from .scimgroup import ScimGroup, ScimGroupTypedDict
     from .scimgroupmapping import (
         ScimGroupMapping,
@@ -3849,6 +3876,13 @@ if TYPE_CHECKING:
         SessionCostMetaVersion,
     )
     from .sessioncostresponse import SessionCostResponse, SessionCostResponseTypedDict
+    from .setfilter import (
+        SetFilter,
+        SetFilterTypedDict,
+        SetFilterValue,
+        SetFilterValueTypedDict,
+    )
+    from .setfilteroperator import SetFilterOperator
     from .shellcallitem import (
         ShellCallItem,
         ShellCallItemAction,
@@ -5347,6 +5381,18 @@ __all__ = [
     "ChoiceTypedDict",
     "Citation",
     "CitationTypedDict",
+    "ClassifierFiltersFilter",
+    "ClassifierFiltersFilterTypedDict",
+    "ClassifierScalarFilter",
+    "ClassifierScalarFilterOperator",
+    "ClassifierScalarFilterTypedDict",
+    "ClassifierScalarFilterValue",
+    "ClassifierScalarFilterValueTypedDict",
+    "ClassifierSetFilter",
+    "ClassifierSetFilterOperator",
+    "ClassifierSetFilterTypedDict",
+    "ClassifierSetFilterValue",
+    "ClassifierSetFilterValueTypedDict",
     "ClearToolInputs",
     "ClearToolInputsTypedDict",
     "ClientClosedRequestResponseErrorData",
@@ -5767,6 +5813,8 @@ __all__ = [
     "FilesServerToolConfigTypedDict",
     "FilesServerToolType",
     "FilesServerToolTypedDict",
+    "Filter",
+    "FilterTypedDict",
     "Filters",
     "FiltersType",
     "FiltersTypedDict",
@@ -6613,6 +6661,9 @@ __all__ = [
     "Operation",
     "OperationTypedDict",
     "Operator",
+    "OperatorEnum",
+    "OperatorName",
+    "OperatorTypedDict",
     "OrganizationSettings",
     "OrganizationSettingsTypedDict",
     "Outcome",
@@ -7171,6 +7222,11 @@ __all__ = [
     "STTWord",
     "STTWordType",
     "STTWordTypedDict",
+    "ScalarFilter",
+    "ScalarFilterOperator",
+    "ScalarFilterTypedDict",
+    "ScalarFilterValue",
+    "ScalarFilterValueTypedDict",
     "ScimGroup",
     "ScimGroupMapping",
     "ScimGroupMappingRole",
@@ -7228,6 +7284,11 @@ __all__ = [
     "SessionCostMetaVersion",
     "SessionCostResponse",
     "SessionCostResponseTypedDict",
+    "SetFilter",
+    "SetFilterOperator",
+    "SetFilterTypedDict",
+    "SetFilterValue",
+    "SetFilterValueTypedDict",
     "ShadowedBy",
     "ShellCallItem",
     "ShellCallItemAction",
@@ -7677,6 +7738,7 @@ __all__ = [
     "ValidatePrivateEndpointRequest",
     "ValidatePrivateEndpointRequestTypedDict",
     "Validation",
+    "ValueType",
     "Variables",
     "VariablesTypedDict",
     "VaultEffectiveSecret",
@@ -8708,6 +8770,18 @@ _dynamic_imports: dict[str, str] = {
     "ChatWebSearchShorthand": ".chatwebsearchshorthand",
     "ChatWebSearchShorthandType": ".chatwebsearchshorthand",
     "ChatWebSearchShorthandTypedDict": ".chatwebsearchshorthand",
+    "ClassifierFiltersFilter": ".classifierfiltersfilter",
+    "ClassifierFiltersFilterTypedDict": ".classifierfiltersfilter",
+    "ClassifierScalarFilter": ".classifierscalarfilter",
+    "ClassifierScalarFilterTypedDict": ".classifierscalarfilter",
+    "ClassifierScalarFilterValue": ".classifierscalarfilter",
+    "ClassifierScalarFilterValueTypedDict": ".classifierscalarfilter",
+    "ClassifierScalarFilterOperator": ".classifierscalarfilteroperator",
+    "ClassifierSetFilter": ".classifiersetfilter",
+    "ClassifierSetFilterTypedDict": ".classifiersetfilter",
+    "ClassifierSetFilterValue": ".classifiersetfilter",
+    "ClassifierSetFilterValueTypedDict": ".classifiersetfilter",
+    "ClassifierSetFilterOperator": ".classifiersetfilteroperator",
     "ClientClosedRequestResponseErrorData": ".clientclosedrequestresponseerrordata",
     "ClientClosedRequestResponseErrorDataTypedDict": ".clientclosedrequestresponseerrordata",
     "CodeInterpreterCallCodeDeltaEvent": ".codeinterpretercallcodedeltaevent",
@@ -9103,6 +9177,8 @@ _dynamic_imports: dict[str, str] = {
     "FilesServerToolTypedDict": ".filesservertool",
     "FilesServerToolConfig": ".filesservertoolconfig",
     "FilesServerToolConfigTypedDict": ".filesservertoolconfig",
+    "Filter": ".filter_",
+    "FilterTypedDict": ".filter_",
     "FinishReason": ".finishreason",
     "ForbiddenResponseErrorData": ".forbiddenresponseerrordata",
     "ForbiddenResponseErrorDataTypedDict": ".forbiddenresponseerrordata",
@@ -9820,7 +9896,7 @@ _dynamic_imports: dict[str, str] = {
     "ObservabilityFilterRuleGroupTypedDict": ".observabilityfilterrulegroup",
     "ObservabilityFilterRuleGroupValue": ".observabilityfilterrulegroup",
     "ObservabilityFilterRuleGroupValueTypedDict": ".observabilityfilterrulegroup",
-    "Operator": ".observabilityfilterrulegroup",
+    "OperatorEnum": ".observabilityfilterrulegroup",
     "Rule": ".observabilityfilterrulegroup",
     "RuleTypedDict": ".observabilityfilterrulegroup",
     "ObservabilityFilterRulesConfig": ".observabilityfilterrulesconfig",
@@ -10020,6 +10096,10 @@ _dynamic_imports: dict[str, str] = {
     "OpenRouterWebSearchServerTool": ".openrouterwebsearchservertool",
     "OpenRouterWebSearchServerToolType": ".openrouterwebsearchservertool",
     "OpenRouterWebSearchServerToolTypedDict": ".openrouterwebsearchservertool",
+    "Operator": ".operator",
+    "OperatorName": ".operator",
+    "OperatorTypedDict": ".operator",
+    "ValueType": ".operator",
     "ORAnthropicBashToolResult": ".oranthropicbashtoolresult",
     "ORAnthropicBashToolResultFile": ".oranthropicbashtoolresult",
     "ORAnthropicBashToolResultFileTypedDict": ".oranthropicbashtoolresult",
@@ -10566,6 +10646,11 @@ _dynamic_imports: dict[str, str] = {
     "RouterParams": ".routerparams",
     "RouterParamsTypedDict": ".routerparams",
     "RoutingStrategy": ".routingstrategy",
+    "ScalarFilter": ".scalarfilter",
+    "ScalarFilterTypedDict": ".scalarfilter",
+    "ScalarFilterValue": ".scalarfilter",
+    "ScalarFilterValueTypedDict": ".scalarfilter",
+    "ScalarFilterOperator": ".scalarfilteroperator",
     "ScimGroup": ".scimgroup",
     "ScimGroupTypedDict": ".scimgroup",
     "ScimGroupMapping": ".scimgroupmapping",
@@ -10623,6 +10708,11 @@ _dynamic_imports: dict[str, str] = {
     "SessionCostMetaVersion": ".sessioncostmeta",
     "SessionCostResponse": ".sessioncostresponse",
     "SessionCostResponseTypedDict": ".sessioncostresponse",
+    "SetFilter": ".setfilter",
+    "SetFilterTypedDict": ".setfilter",
+    "SetFilterValue": ".setfilter",
+    "SetFilterValueTypedDict": ".setfilter",
+    "SetFilterOperator": ".setfilteroperator",
     "ShellCallItem": ".shellcallitem",
     "ShellCallItemAction": ".shellcallitem",
     "ShellCallItemActionTypedDict": ".shellcallitem",

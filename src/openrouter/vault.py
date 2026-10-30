@@ -1060,7 +1060,7 @@ class Vault(BaseSDK):
         If set, this operation will use `api_key` from the global security.
 
         :param intern_id: UUID of an intern in the workspace selected by the API key.
-        :param name: Secret name. Lowercase letters, digits and single underscores, starting with a letter and not ending with an underscore, 1 to 255 characters.
+        :param name: Existing secret name. Accepts legacy names stored before the 255-character write bound; new writes still require the documented name format.
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
@@ -1234,7 +1234,7 @@ class Vault(BaseSDK):
         If set, this operation will use `api_key` from the global security.
 
         :param intern_id: UUID of an intern in the workspace selected by the API key.
-        :param name: Secret name. Lowercase letters, digits and single underscores, starting with a letter and not ending with an underscore, 1 to 255 characters.
+        :param name: Existing secret name. Accepts legacy names stored before the 255-character write bound; new writes still require the documented name format.
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
@@ -1412,7 +1412,7 @@ class Vault(BaseSDK):
         :param intern_id: UUID of an intern in the workspace selected by the API key.
         :param name: Secret name. Lowercase letters, digits and single underscores, starting with a letter and not ending with an underscore, 1 to 255 characters.
         :param hosts: Exact DNS hostnames the secret may be sent to, 1 to 100 entries. Each entry is lowercased and a trailing dot is removed, so `API.Example.com.` is stored as `api.example.com`. Schemes, ports, paths, wildcards and empty values are rejected. Duplicates after normalization are collapsed. Matching is exact: a secret bound to `api.example.com` is never released to `example.com` or any other hostname.
-        :param value: Secret value, 1 to 65536 characters. It is encrypted at rest and never returned.
+        :param value: Secret value, 1 to 65536 characters; a header-set credential (a JSON object of header name to value) may run to 985721 characters. It is encrypted at rest and never returned.
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
@@ -1606,7 +1606,7 @@ class Vault(BaseSDK):
         :param intern_id: UUID of an intern in the workspace selected by the API key.
         :param name: Secret name. Lowercase letters, digits and single underscores, starting with a letter and not ending with an underscore, 1 to 255 characters.
         :param hosts: Exact DNS hostnames the secret may be sent to, 1 to 100 entries. Each entry is lowercased and a trailing dot is removed, so `API.Example.com.` is stored as `api.example.com`. Schemes, ports, paths, wildcards and empty values are rejected. Duplicates after normalization are collapsed. Matching is exact: a secret bound to `api.example.com` is never released to `example.com` or any other hostname.
-        :param value: Secret value, 1 to 65536 characters. It is encrypted at rest and never returned.
+        :param value: Secret value, 1 to 65536 characters; a header-set credential (a JSON object of header name to value) may run to 985721 characters. It is encrypted at rest and never returned.
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
@@ -2508,7 +2508,7 @@ class Vault(BaseSDK):
 
         If set, this operation will use `api_key` from the global security.
 
-        :param name: Secret name. Lowercase letters, digits and single underscores, starting with a letter and not ending with an underscore, 1 to 255 characters.
+        :param name: Existing secret name. Accepts legacy names stored before the 255-character write bound; new writes still require the documented name format.
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
@@ -2679,7 +2679,7 @@ class Vault(BaseSDK):
 
         If set, this operation will use `api_key` from the global security.
 
-        :param name: Secret name. Lowercase letters, digits and single underscores, starting with a letter and not ending with an underscore, 1 to 255 characters.
+        :param name: Existing secret name. Accepts legacy names stored before the 255-character write bound; new writes still require the documented name format.
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
@@ -2854,7 +2854,7 @@ class Vault(BaseSDK):
 
         :param name: Secret name. Lowercase letters, digits and single underscores, starting with a letter and not ending with an underscore, 1 to 255 characters.
         :param hosts: Exact DNS hostnames the secret may be sent to, 1 to 100 entries. Each entry is lowercased and a trailing dot is removed, so `API.Example.com.` is stored as `api.example.com`. Schemes, ports, paths, wildcards and empty values are rejected. Duplicates after normalization are collapsed. Matching is exact: a secret bound to `api.example.com` is never released to `example.com` or any other hostname.
-        :param value: Secret value, 1 to 65536 characters. It is encrypted at rest and never returned.
+        :param value: Secret value, 1 to 65536 characters; a header-set credential (a JSON object of header name to value) may run to 985721 characters. It is encrypted at rest and never returned.
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
@@ -3045,7 +3045,7 @@ class Vault(BaseSDK):
 
         :param name: Secret name. Lowercase letters, digits and single underscores, starting with a letter and not ending with an underscore, 1 to 255 characters.
         :param hosts: Exact DNS hostnames the secret may be sent to, 1 to 100 entries. Each entry is lowercased and a trailing dot is removed, so `API.Example.com.` is stored as `api.example.com`. Schemes, ports, paths, wildcards and empty values are rejected. Duplicates after normalization are collapsed. Matching is exact: a secret bound to `api.example.com` is never released to `example.com` or any other hostname.
-        :param value: Secret value, 1 to 65536 characters. It is encrypted at rest and never returned.
+        :param value: Secret value, 1 to 65536 characters; a header-set credential (a JSON object of header name to value) may run to 985721 characters. It is encrypted at rest and never returned.
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 

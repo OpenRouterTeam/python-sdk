@@ -2,30 +2,9 @@
 title: "Operator"
 ---
 
-## Example Usage
+## Fields
 
-```python
-from openrouter.components import Operator
-
-# Open enum: unrecognized values are captured as UnrecognizedStr
-value: Operator = "equals"
-```
-
-
-## Values
-
-This is an open enum. Unrecognized values will not fail type checks.
-
-- `"equals"`
-- `"not_equals"`
-- `"contains"`
-- `"not_contains"`
-- `"regex"`
-- `"starts_with"`
-- `"ends_with"`
-- `"gt"`
-- `"lt"`
-- `"gte"`
-- `"lte"`
-- `"exists"`
-- `"not_exists"`
+| Field                                                    | Type                                                     | Required                                                 | Description                                              | Example                                                  |
+| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
+| `name`                                                   | [components.OperatorName](../components/operatorname.mdx) | ✔️                                       | Operator identifier used in filter definitions           | eq                                                       |
+| `value_type`                                             | [components.ValueType](../components/valuetype.mdx)       | ✔️                                       | Whether the operator expects a single value or an array  |                                                          |

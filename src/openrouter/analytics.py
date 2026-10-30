@@ -540,7 +540,7 @@ class Analytics(BaseSDK):
         ] = None,
         dimensions: Optional[Iterable[str]] = None,
         filters: Optional[
-            Union[Iterable[operations.Filter], Iterable[operations.FilterTypedDict]]
+            Union[Iterable[components.Filter], Iterable[components.FilterTypedDict]]
         ] = None,
         granularity: Optional[str] = None,
         group_limit: Optional[int] = None,
@@ -605,7 +605,7 @@ class Analytics(BaseSDK):
                 ),
                 dimensions=utils.unmarshal(dimensions, Optional[List[str]]),
                 filters=utils.get_pydantic_model(
-                    filters, Optional[List[operations.Filter]]
+                    filters, Optional[List[components.Filter]]
                 ),
                 granularity=granularity,
                 group_limit=group_limit,
@@ -737,7 +737,7 @@ class Analytics(BaseSDK):
         ] = None,
         dimensions: Optional[Iterable[str]] = None,
         filters: Optional[
-            Union[Iterable[operations.Filter], Iterable[operations.FilterTypedDict]]
+            Union[Iterable[components.Filter], Iterable[components.FilterTypedDict]]
         ] = None,
         granularity: Optional[str] = None,
         group_limit: Optional[int] = None,
@@ -802,7 +802,7 @@ class Analytics(BaseSDK):
                 ),
                 dimensions=utils.unmarshal(dimensions, Optional[List[str]]),
                 filters=utils.get_pydantic_model(
-                    filters, Optional[List[operations.Filter]]
+                    filters, Optional[List[components.Filter]]
                 ),
                 granularity=granularity,
                 group_limit=group_limit,
