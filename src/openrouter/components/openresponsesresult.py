@@ -395,6 +395,28 @@ class Usage(BaseModel):
         return m
 
 
+OpenResponsesResultCyber = Union[
+    Literal[
+        "standard",
+        "daybreak_blue",
+        "daybreak_red",
+    ],
+    UnrecognizedStr,
+]
+
+
+class OpenResponsesResultAccessProgramsTypedDict(TypedDict):
+    r"""Access program the upstream provider reported for this response (OpenAI `access_programs`). `null` when the provider reported none, including OpenAI's implicit Standard program."""
+
+    cyber: OpenResponsesResultCyber
+
+
+class OpenResponsesResultAccessPrograms(BaseModel):
+    r"""Access program the upstream provider reported for this response (OpenAI `access_programs`). `null` when the provider reported none, including OpenAI's implicit Standard program."""
+
+    cyber: OpenResponsesResultCyber
+
+
 class OpenResponsesResultTypedDict(TypedDict):
     r"""Complete non-streaming response from the Responses API"""
 
@@ -438,6 +460,8 @@ class OpenResponsesResultTypedDict(TypedDict):
     usage: NotRequired[Nullable[UsageTypedDict]]
     r"""Token usage information for the response"""
     user: NotRequired[Nullable[str]]
+    access_programs: NotRequired[Nullable[OpenResponsesResultAccessProgramsTypedDict]]
+    r"""Access program the upstream provider reported for this response (OpenAI `access_programs`). `null` when the provider reported none, including OpenAI's implicit Standard program."""
     alignment: NotRequired[AlignmentTypedDict]
     r"""Beta. The result of the alignment plugin for this request; the shape may change."""
     error_type: NotRequired[APIErrorType]
@@ -525,6 +549,9 @@ class OpenResponsesResult(BaseModel):
 
     user: OptionalNullable[str] = UNSET
 
+    access_programs: OptionalNullable[OpenResponsesResultAccessPrograms] = UNSET
+    r"""Access program the upstream provider reported for this response (OpenAI `access_programs`). `null` when the provider reported none, including OpenAI's implicit Standard program."""
+
     alignment: Optional[Alignment] = None
     r"""Beta. The result of the alignment plugin for this request; the shape may change."""
 
@@ -557,6 +584,7 @@ class OpenResponsesResult(BaseModel):
                 "truncation",
                 "usage",
                 "user",
+                "access_programs",
                 "alignment",
                 "error_type",
                 "openrouter_metadata",
@@ -587,6 +615,7 @@ class OpenResponsesResult(BaseModel):
                 "truncation",
                 "usage",
                 "user",
+                "access_programs",
             ]
         )
         serialized = handler(self)

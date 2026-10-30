@@ -131,6 +131,44 @@ from typing import Any, Dict, List, Literal, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
+ResponsesRequestCyber = Union[
+    Literal[
+        "standard",
+        "daybreak_blue",
+        "daybreak_red",
+    ],
+    UnrecognizedStr,
+]
+
+
+class ResponsesRequestAccessProgramsTypedDict(TypedDict):
+    r"""OpenAI access programs for this request. `cyber` selects the Cyber access program: `standard`, `daybreak_blue`, or `daybreak_red`. A program other than `standard` is supported only on BYOK requests that run on your own OpenAI key enrolled in that program; any other endpoint, including OpenRouter's own OpenAI credentials, rejects it with a 400 error. Requests on OpenRouter's OpenAI credentials always run `standard`. Omit the field unless your key is enrolled in a Daybreak program."""
+
+    cyber: NotRequired[ResponsesRequestCyber]
+
+
+class ResponsesRequestAccessPrograms(BaseModel):
+    r"""OpenAI access programs for this request. `cyber` selects the Cyber access program: `standard`, `daybreak_blue`, or `daybreak_red`. A program other than `standard` is supported only on BYOK requests that run on your own OpenAI key enrolled in that program; any other endpoint, including OpenRouter's own OpenAI credentials, rejects it with a 400 error. Requests on OpenRouter's OpenAI credentials always run `standard`. Omit the field unless your key is enrolled in a Daybreak program."""
+
+    cyber: Optional[ResponsesRequestCyber] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["cyber"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
+
 ResponsesRequestPluginTypedDict = TypeAliasType(
     "ResponsesRequestPluginTypedDict",
     Union[
@@ -422,6 +460,8 @@ ResponsesRequestToolUnion = Annotated[
 class ResponsesRequestTypedDict(TypedDict):
     r"""Request schema for Responses endpoint"""
 
+    access_programs: NotRequired[ResponsesRequestAccessProgramsTypedDict]
+    r"""OpenAI access programs for this request. `cyber` selects the Cyber access program: `standard`, `daybreak_blue`, or `daybreak_red`. A program other than `standard` is supported only on BYOK requests that run on your own OpenAI key enrolled in that program; any other endpoint, including OpenRouter's own OpenAI credentials, rejects it with a 400 error. Requests on OpenRouter's OpenAI credentials always run `standard`. Omit the field unless your key is enrolled in a Daybreak program."""
     background: NotRequired[Nullable[bool]]
     cache_control: NotRequired[AnthropicCacheControlDirectiveTypedDict]
     r"""Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. When set on an individual content block, it marks an explicit cache breakpoint; block-level markers also work on OpenAI models that support explicit prompt caching — OpenRouter converts them to the provider's native format."""
@@ -488,6 +528,9 @@ class ResponsesRequestTypedDict(TypedDict):
 
 class ResponsesRequest(BaseModel):
     r"""Request schema for Responses endpoint"""
+
+    access_programs: Optional[ResponsesRequestAccessPrograms] = None
+    r"""OpenAI access programs for this request. `cyber` selects the Cyber access program: `standard`, `daybreak_blue`, or `daybreak_red`. A program other than `standard` is supported only on BYOK requests that run on your own OpenAI key enrolled in that program; any other endpoint, including OpenRouter's own OpenAI credentials, rejects it with a 400 error. Requests on OpenRouter's OpenAI credentials always run `standard`. Omit the field unless your key is enrolled in a Daybreak program."""
 
     background: OptionalNullable[bool] = UNSET
 
@@ -599,6 +642,7 @@ class ResponsesRequest(BaseModel):
     def serialize_model(self, handler):
         optional_fields = set(
             [
+                "access_programs",
                 "background",
                 "cache_control",
                 "debug",
