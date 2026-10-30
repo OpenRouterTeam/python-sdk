@@ -1138,6 +1138,7 @@ class Models(BaseSDK):
         limit: Optional[int] = 500,
         output_modalities: Optional[str] = None,
         sort: Optional[operations.ListModelsUserSort] = None,
+        client: Optional[operations.Client] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -1159,6 +1160,7 @@ class Models(BaseSDK):
         :param limit: Maximum number of records to return (max 1000). When both offset and limit are omitted, the full list is returned
         :param output_modalities: Filter models by output modality. Accepts a comma-separated list of modalities (text, image, embeddings, audio, video, rerank, decisions, speech, transcription) or \"all\" to include all models. Defaults to \"text\".
         :param sort: Sort the returned models server-side. Prefer this over fetching the full list and sorting client-side. Options: pricing-low-to-high, pricing-high-to-low (average prompt/completion price), context-high-to-low (context length), throughput-high-to-low, latency-low-to-high (recent median performance), most-popular, top-weekly (tokens processed in the last week), newest (creation date), intelligence-high-to-low, coding-high-to-low, agentic-high-to-low (Artificial Analysis indices), design-arena-elo-high-to-low (best Design Arena ELO across arenas). Models without a score for the chosen benchmark are placed last. When omitted, the existing default ordering is preserved.
+        :param client: Filter models and presets by the named harness's eligibility policy: tool calling is required, and when one of your guardrails sets `enforce_first_party_harness_models`, only the harness vendor's own models remain (OpenAI for codex, Anthropic for claude_code and claude_desktop). This filter doesn't apply the harness's ranking, caps or Claude Desktop model ID aliases, so returned IDs stay routable. One of: claude_code, claude_desktop, codex. Omit it to get every model you can use.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1182,6 +1184,7 @@ class Models(BaseSDK):
             limit=limit,
             output_modalities=output_modalities,
             sort=sort,
+            client=client,
         )
 
         req = self._build_request(
@@ -1259,6 +1262,7 @@ class Models(BaseSDK):
                 limit=limit,
                 output_modalities=output_modalities,
                 sort=sort,
+                client=client,
                 retries=retries,
                 server_url=server_url,
                 timeout_ms=timeout_ms,
@@ -1338,6 +1342,7 @@ class Models(BaseSDK):
         limit: Optional[int] = 500,
         output_modalities: Optional[str] = None,
         sort: Optional[operations.ListModelsUserSort] = None,
+        client: Optional[operations.Client] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -1359,6 +1364,7 @@ class Models(BaseSDK):
         :param limit: Maximum number of records to return (max 1000). When both offset and limit are omitted, the full list is returned
         :param output_modalities: Filter models by output modality. Accepts a comma-separated list of modalities (text, image, embeddings, audio, video, rerank, decisions, speech, transcription) or \"all\" to include all models. Defaults to \"text\".
         :param sort: Sort the returned models server-side. Prefer this over fetching the full list and sorting client-side. Options: pricing-low-to-high, pricing-high-to-low (average prompt/completion price), context-high-to-low (context length), throughput-high-to-low, latency-low-to-high (recent median performance), most-popular, top-weekly (tokens processed in the last week), newest (creation date), intelligence-high-to-low, coding-high-to-low, agentic-high-to-low (Artificial Analysis indices), design-arena-elo-high-to-low (best Design Arena ELO across arenas). Models without a score for the chosen benchmark are placed last. When omitted, the existing default ordering is preserved.
+        :param client: Filter models and presets by the named harness's eligibility policy: tool calling is required, and when one of your guardrails sets `enforce_first_party_harness_models`, only the harness vendor's own models remain (OpenAI for codex, Anthropic for claude_code and claude_desktop). This filter doesn't apply the harness's ranking, caps or Claude Desktop model ID aliases, so returned IDs stay routable. One of: claude_code, claude_desktop, codex. Omit it to get every model you can use.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1382,6 +1388,7 @@ class Models(BaseSDK):
             limit=limit,
             output_modalities=output_modalities,
             sort=sort,
+            client=client,
         )
 
         req = self._build_request_async(
@@ -1462,6 +1469,7 @@ class Models(BaseSDK):
                 limit=limit,
                 output_modalities=output_modalities,
                 sort=sort,
+                client=client,
                 retries=retries,
                 server_url=server_url,
                 timeout_ms=timeout_ms,

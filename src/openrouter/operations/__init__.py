@@ -833,6 +833,7 @@ if TYPE_CHECKING:
         ListModelsCountRequestTypedDict,
     )
     from .listmodelsuser import (
+        Client,
         ListModelsUserGlobals,
         ListModelsUserGlobalsTypedDict,
         ListModelsUserRequest,
@@ -1179,6 +1180,7 @@ __all__ = [
     "ClassifierDimensionsTypedDict",
     "ClassifierFilters",
     "ClassifierFiltersTypedDict",
+    "Client",
     "Content",
     "ContentImageURL",
     "ContentImageURLTypedDict",
@@ -2603,6 +2605,7 @@ _dynamic_imports: dict[str, str] = {
     "ListModelsCountGlobalsTypedDict": ".listmodelscount",
     "ListModelsCountRequest": ".listmodelscount",
     "ListModelsCountRequestTypedDict": ".listmodelscount",
+    "Client": ".listmodelsuser",
     "ListModelsUserGlobals": ".listmodelsuser",
     "ListModelsUserGlobalsTypedDict": ".listmodelsuser",
     "ListModelsUserRequest": ".listmodelsuser",
