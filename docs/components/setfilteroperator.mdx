@@ -1,16 +1,16 @@
 ---
-title: "ValueType"
+title: "SetFilterOperator"
 ---
 
-Whether the operator expects a single value or an array
+Set-membership operator taking an array filter value.
 
 ## Example Usage
 
 ```python
-from openrouter.operations import ValueType
+from openrouter.components import SetFilterOperator
 
 # Open enum: unrecognized values are captured as UnrecognizedStr
-value: ValueType = "scalar"
+value: SetFilterOperator = "in"
 ```
 
 
@@ -18,5 +18,5 @@ value: ValueType = "scalar"
 
 This is an open enum. Unrecognized values will not fail type checks.
 
-- `"scalar"`
-- `"array"`
+- `"in"`
+- `"not_in"`

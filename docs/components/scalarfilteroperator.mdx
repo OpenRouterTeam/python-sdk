@@ -1,0 +1,26 @@
+---
+title: "ScalarFilterOperator"
+---
+
+Comparison operator taking a scalar filter value.
+
+## Example Usage
+
+```python
+from openrouter.components import ScalarFilterOperator
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
+value: ScalarFilterOperator = "eq"
+```
+
+
+## Values
+
+This is an open enum. Unrecognized values will not fail type checks.
+
+- `"eq"`
+- `"neq"`
+- `"gt"`
+- `"gte"`
+- `"lt"`
+- `"lte"`

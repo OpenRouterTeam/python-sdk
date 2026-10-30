@@ -12,7 +12,7 @@ class VaultSecretWriteRequestTypedDict(TypedDict):
     hosts: List[str]
     r"""Exact DNS hostnames the secret may be sent to, 1 to 100 entries. Each entry is lowercased and a trailing dot is removed, so `API.Example.com.` is stored as `api.example.com`. Schemes, ports, paths, wildcards and empty values are rejected. Duplicates after normalization are collapsed. Matching is exact: a secret bound to `api.example.com` is never released to `example.com` or any other hostname."""
     value: str
-    r"""Secret value, 1 to 65536 characters. It is encrypted at rest and never returned."""
+    r"""Secret value, 1 to 65536 characters; a header-set credential (a JSON object of header name to value) may run to 985721 characters. It is encrypted at rest and never returned."""
 
 
 class VaultSecretWriteRequest(BaseModel):
@@ -22,4 +22,4 @@ class VaultSecretWriteRequest(BaseModel):
     r"""Exact DNS hostnames the secret may be sent to, 1 to 100 entries. Each entry is lowercased and a trailing dot is removed, so `API.Example.com.` is stored as `api.example.com`. Schemes, ports, paths, wildcards and empty values are rejected. Duplicates after normalization are collapsed. Matching is exact: a secret bound to `api.example.com` is never released to `example.com` or any other hostname."""
 
     value: str
-    r"""Secret value, 1 to 65536 characters. It is encrypted at rest and never returned."""
+    r"""Secret value, 1 to 65536 characters; a header-set credential (a JSON object of header name to value) may run to 985721 characters. It is encrypted at rest and never returned."""

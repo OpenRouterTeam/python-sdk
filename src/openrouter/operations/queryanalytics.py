@@ -2,12 +2,16 @@
 
 from __future__ import annotations
 from datetime import datetime
+from openrouter.components import (
+    classifierfiltersfilter as components_classifierfiltersfilter,
+    filter_ as components_filter_,
+)
 from openrouter.types import BaseModel, UNSET_SENTINEL, UnrecognizedStr
 from openrouter.utils import FieldMetadata, HeaderMetadata, RequestMetadata
 import pydantic
 from pydantic import model_serializer
 from typing import List, Literal, Optional, Union
-from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
+from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class QueryAnalyticsGlobalsTypedDict(TypedDict):
@@ -112,53 +116,12 @@ class ClassifierDimensions(BaseModel):
         return m
 
 
-ValueClassifierFiltersTypedDict = TypeAliasType(
-    "ValueClassifierFiltersTypedDict", Union[str, float]
-)
-
-
-ValueClassifierFilters = TypeAliasType("ValueClassifierFilters", Union[str, float])
-
-
-ClassifierFiltersValueTypedDict = TypeAliasType(
-    "ClassifierFiltersValueTypedDict",
-    Union[str, float, List[ValueClassifierFiltersTypedDict]],
-)
-r"""Filter value. Use a scalar (string or number) for eq/neq, or an array for in/not_in."""
-
-
-ClassifierFiltersValue = TypeAliasType(
-    "ClassifierFiltersValue", Union[str, float, List[ValueClassifierFilters]]
-)
-r"""Filter value. Use a scalar (string or number) for eq/neq, or an array for in/not_in."""
-
-
-class ClassifierFiltersFilterTypedDict(TypedDict):
-    field: str
-    r"""Classifier dimension name to filter on (snake_case identifier, e.g. \"department\", \"work_type\")."""
-    operator: str
-    r"""Filter operator. Only equality/set operators are supported (eq, neq, in, not_in) — ordered comparisons are not available because classification values are strings."""
-    value: ClassifierFiltersValueTypedDict
-    r"""Filter value. Use a scalar (string or number) for eq/neq, or an array for in/not_in."""
-
-
-class ClassifierFiltersFilter(BaseModel):
-    field: str
-    r"""Classifier dimension name to filter on (snake_case identifier, e.g. \"department\", \"work_type\")."""
-
-    operator: str
-    r"""Filter operator. Only equality/set operators are supported (eq, neq, in, not_in) — ordered comparisons are not available because classification values are strings."""
-
-    value: ClassifierFiltersValue
-    r"""Filter value. Use a scalar (string or number) for eq/neq, or an array for in/not_in."""
-
-
 class ClassifierFiltersTypedDict(TypedDict):
     r"""Filter results to generations with specific classifier tag values. Can be combined with classifier_dimensions (must use the same classifier_id) or used independently with standard dimensions."""
 
     classifier_id: str
     r"""UUID of the classifier whose tags to filter by. Must match classifier_dimensions.classifier_id when both are specified."""
-    filters: List[ClassifierFiltersFilterTypedDict]
+    filters: List[components_classifierfiltersfilter.ClassifierFiltersFilterTypedDict]
 
 
 class ClassifierFilters(BaseModel):
@@ -167,64 +130,7 @@ class ClassifierFilters(BaseModel):
     classifier_id: str
     r"""UUID of the classifier whose tags to filter by. Must match classifier_dimensions.classifier_id when both are specified."""
 
-    filters: List[ClassifierFiltersFilter]
-
-
-Value2TypedDict = TypeAliasType("Value2TypedDict", Union[str, float])
-
-
-Value2 = TypeAliasType("Value2", Union[str, float])
-
-
-Value1TypedDict = TypeAliasType(
-    "Value1TypedDict", Union[str, float, List[Value2TypedDict]]
-)
-r"""Filter value (scalar or array depending on operator). Several dimensions are enriched in responses (returned as human-readable labels), but filters must use the underlying ID: `api_key_id` — numeric ID (from generation metadata) or key hash (64-char hex from GET /api/v1/keys, resolved server-side); `user` — Clerk user ID (e.g. \"user_abc123\"), not the display name; `workspace` — workspace UUID, not the workspace name (filtering or grouping by the account default workspace also covers activity recorded before workspace resolution existed, which is attributed to that default workspace); `app` — numeric app ID, not the app title; `model` — permaslug (e.g. \"openai/gpt-4o\"), not the display name. Other dimensions (provider, origin, country, etc.) are not enriched and accept the value as returned."""
-
-
-Value1 = TypeAliasType("Value1", Union[str, float, List[Value2]])
-r"""Filter value (scalar or array depending on operator). Several dimensions are enriched in responses (returned as human-readable labels), but filters must use the underlying ID: `api_key_id` — numeric ID (from generation metadata) or key hash (64-char hex from GET /api/v1/keys, resolved server-side); `user` — Clerk user ID (e.g. \"user_abc123\"), not the display name; `workspace` — workspace UUID, not the workspace name (filtering or grouping by the account default workspace also covers activity recorded before workspace resolution existed, which is attributed to that default workspace); `app` — numeric app ID, not the app title; `model` — permaslug (e.g. \"openai/gpt-4o\"), not the display name. Other dimensions (provider, origin, country, etc.) are not enriched and accept the value as returned."""
-
-
-class FilterTypedDict(TypedDict):
-    field: str
-    r"""Dimension to filter on. Use the /meta endpoint for available dimensions."""
-    operator: str
-    r"""Filter operator"""
-    value: Value1TypedDict
-    r"""Filter value (scalar or array depending on operator). Several dimensions are enriched in responses (returned as human-readable labels), but filters must use the underlying ID: `api_key_id` — numeric ID (from generation metadata) or key hash (64-char hex from GET /api/v1/keys, resolved server-side); `user` — Clerk user ID (e.g. \"user_abc123\"), not the display name; `workspace` — workspace UUID, not the workspace name (filtering or grouping by the account default workspace also covers activity recorded before workspace resolution existed, which is attributed to that default workspace); `app` — numeric app ID, not the app title; `model` — permaslug (e.g. \"openai/gpt-4o\"), not the display name. Other dimensions (provider, origin, country, etc.) are not enriched and accept the value as returned."""
-    include_unset: NotRequired[bool]
-    r"""Include rows where the dimension has no value. Applies only to the `in` and `not_in` operators and dimensions that have an unset bucket."""
-
-
-class Filter(BaseModel):
-    field: str
-    r"""Dimension to filter on. Use the /meta endpoint for available dimensions."""
-
-    operator: str
-    r"""Filter operator"""
-
-    value: Value1
-    r"""Filter value (scalar or array depending on operator). Several dimensions are enriched in responses (returned as human-readable labels), but filters must use the underlying ID: `api_key_id` — numeric ID (from generation metadata) or key hash (64-char hex from GET /api/v1/keys, resolved server-side); `user` — Clerk user ID (e.g. \"user_abc123\"), not the display name; `workspace` — workspace UUID, not the workspace name (filtering or grouping by the account default workspace also covers activity recorded before workspace resolution existed, which is attributed to that default workspace); `app` — numeric app ID, not the app title; `model` — permaslug (e.g. \"openai/gpt-4o\"), not the display name. Other dimensions (provider, origin, country, etc.) are not enriched and accept the value as returned."""
-
-    include_unset: Optional[bool] = None
-    r"""Include rows where the dimension has no value. Applies only to the `in` and `not_in` operators and dimensions that have an unset bucket."""
-
-    @model_serializer(mode="wrap")
-    def serialize_model(self, handler):
-        optional_fields = set(["include_unset"])
-        serialized = handler(self)
-        m = {}
-
-        for n, f in type(self).model_fields.items():
-            k = f.alias or n
-            val = serialized.get(k, serialized.get(n))
-
-            if val != UNSET_SENTINEL:
-                if val is not None or k not in optional_fields:
-                    m[k] = val
-
-        return m
+    filters: List[components_classifierfiltersfilter.ClassifierFiltersFilter]
 
 
 Direction = Union[
@@ -271,7 +177,7 @@ class QueryAnalyticsRequestBodyTypedDict(TypedDict):
     classifier_filters: NotRequired[ClassifierFiltersTypedDict]
     r"""Filter results to generations with specific classifier tag values. Can be combined with classifier_dimensions (must use the same classifier_id) or used independently with standard dimensions."""
     dimensions: NotRequired[List[str]]
-    filters: NotRequired[List[FilterTypedDict]]
+    filters: NotRequired[List[components_filter_.FilterTypedDict]]
     granularity: NotRequired[str]
     r"""Time granularity"""
     group_limit: NotRequired[int]
@@ -293,7 +199,7 @@ class QueryAnalyticsRequestBody(BaseModel):
 
     dimensions: Optional[List[str]] = None
 
-    filters: Optional[List[Filter]] = None
+    filters: Optional[List[components_filter_.Filter]] = None
 
     granularity: Optional[str] = None
     r"""Time granularity"""

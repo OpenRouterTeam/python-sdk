@@ -1,0 +1,22 @@
+---
+title: "ClassifierScalarFilterOperator"
+---
+
+Equality operator taking a scalar filter value. Ordered comparisons are not available because classification values are strings.
+
+## Example Usage
+
+```python
+from openrouter.components import ClassifierScalarFilterOperator
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
+value: ClassifierScalarFilterOperator = "eq"
+```
+
+
+## Values
+
+This is an open enum. Unrecognized values will not fail type checks.
+
+- `"eq"`
+- `"neq"`

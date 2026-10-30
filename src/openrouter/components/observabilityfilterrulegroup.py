@@ -35,7 +35,7 @@ FieldT = Union[
 ]
 
 
-Operator = Union[
+OperatorEnum = Union[
     Literal[
         "equals",
         "not_equals",
@@ -67,14 +67,14 @@ ObservabilityFilterRuleGroupValue = TypeAliasType(
 
 class RuleTypedDict(TypedDict):
     field: FieldT
-    operator: Operator
+    operator: OperatorEnum
     value: NotRequired[ObservabilityFilterRuleGroupValueTypedDict]
 
 
 class Rule(BaseModel):
     field: FieldT
 
-    operator: Operator
+    operator: OperatorEnum
 
     value: Optional[ObservabilityFilterRuleGroupValue] = None
 

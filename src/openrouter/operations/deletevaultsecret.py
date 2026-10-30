@@ -75,7 +75,7 @@ class DeleteVaultSecretGlobals(BaseModel):
 
 class DeleteVaultSecretRequestTypedDict(TypedDict):
     name: str
-    r"""Secret name. Lowercase letters, digits and single underscores, starting with a letter and not ending with an underscore, 1 to 255 characters."""
+    r"""Existing secret name. Accepts legacy names stored before the 255-character write bound; new writes still require the documented name format."""
     http_referer: NotRequired[str]
     r"""The app identifier should be your app's URL and is used as the primary identifier for rankings.
     This is used to track API usage per application.
@@ -95,7 +95,7 @@ class DeleteVaultSecretRequest(BaseModel):
     name: Annotated[
         str, FieldMetadata(path=PathParamMetadata(style="simple", explode=False))
     ]
-    r"""Secret name. Lowercase letters, digits and single underscores, starting with a letter and not ending with an underscore, 1 to 255 characters."""
+    r"""Existing secret name. Accepts legacy names stored before the 255-character write bound; new writes still require the documented name format."""
 
     http_referer: Annotated[
         Optional[str],
