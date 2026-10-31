@@ -6,7 +6,7 @@ from openrouter._hooks import HookContext
 from openrouter.types import OptionalNullable, UNSET
 from openrouter.utils import get_security_from_env
 from openrouter.utils.unmarshal_json_response import unmarshal_json_response
-from typing import Any, Mapping, Optional, Union
+from typing import Any, Mapping, Optional
 
 
 class PrivateProviders(BaseSDK):
@@ -274,12 +274,6 @@ class PrivateProviders(BaseSDK):
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
         base_url: Optional[str] = None,
-        data_policy: Optional[
-            Union[
-                components.PrivateProviderDataPolicy,
-                components.PrivateProviderDataPolicyTypedDict,
-            ]
-        ] = None,
         display_name: Optional[str] = None,
         slug: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -300,7 +294,6 @@ class PrivateProviders(BaseSDK):
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
         :param base_url: HTTPS base URL of an OpenAI-compatible API, used by private endpoints under this provider that set no URL of their own. Without it, each endpoint must set its own. Private, internal, metadata and OpenRouter hosts are rejected.
-        :param data_policy: Defaults to training on and retaining prompts, the most conservative declaration. Your own declaration; it applies to your own traffic and OpenRouter does not verify it.
         :param display_name: Defaults to `name`.
         :param slug: 2-64 lowercase letters and numbers, separated by single hyphens. Cannot be changed later. Defaults to the name lowercased, with every run of other characters replaced by a hyphen (`Acme Inference` becomes `acme-inference`).
         :param retries: Override the default retry configuration for this method
@@ -324,9 +317,6 @@ class PrivateProviders(BaseSDK):
             x_open_router_categories=x_open_router_categories,
             create_private_provider_request=components.CreatePrivateProviderRequest(
                 base_url=base_url,
-                data_policy=utils.get_pydantic_model(
-                    data_policy, Optional[components.PrivateProviderDataPolicy]
-                ),
                 display_name=display_name,
                 name=name,
                 slug=slug,
@@ -467,12 +457,6 @@ class PrivateProviders(BaseSDK):
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
         base_url: Optional[str] = None,
-        data_policy: Optional[
-            Union[
-                components.PrivateProviderDataPolicy,
-                components.PrivateProviderDataPolicyTypedDict,
-            ]
-        ] = None,
         display_name: Optional[str] = None,
         slug: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -493,7 +477,6 @@ class PrivateProviders(BaseSDK):
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
         :param base_url: HTTPS base URL of an OpenAI-compatible API, used by private endpoints under this provider that set no URL of their own. Without it, each endpoint must set its own. Private, internal, metadata and OpenRouter hosts are rejected.
-        :param data_policy: Defaults to training on and retaining prompts, the most conservative declaration. Your own declaration; it applies to your own traffic and OpenRouter does not verify it.
         :param display_name: Defaults to `name`.
         :param slug: 2-64 lowercase letters and numbers, separated by single hyphens. Cannot be changed later. Defaults to the name lowercased, with every run of other characters replaced by a hyphen (`Acme Inference` becomes `acme-inference`).
         :param retries: Override the default retry configuration for this method
@@ -517,9 +500,6 @@ class PrivateProviders(BaseSDK):
             x_open_router_categories=x_open_router_categories,
             create_private_provider_request=components.CreatePrivateProviderRequest(
                 base_url=base_url,
-                data_policy=utils.get_pydantic_model(
-                    data_policy, Optional[components.PrivateProviderDataPolicy]
-                ),
                 display_name=display_name,
                 name=name,
                 slug=slug,
@@ -1260,12 +1240,6 @@ class PrivateProviders(BaseSDK):
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
         base_url: Optional[str] = None,
-        data_policy: Optional[
-            Union[
-                components.UpdatePrivateProviderRequestDataPolicy,
-                components.UpdatePrivateProviderRequestDataPolicyTypedDict,
-            ]
-        ] = None,
         display_name: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -1274,7 +1248,7 @@ class PrivateProviders(BaseSDK):
     ) -> operations.UpdatePrivateProviderResponse:
         r"""Update a private provider
 
-        Update a private provider’s details or declared data policy. The name and slug cannot change. Refuses (409) a data-policy change while OpenRouter pins the declared policy on one of its endpoints. [Management key](/docs/guides/overview/auth/management-api-keys) required.
+        Update a private provider’s display name or base URL. The name and slug cannot change, and the data policy is fixed by OpenRouter, so a body with no editable field is rejected (400). [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param slug:
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
@@ -1285,7 +1259,6 @@ class PrivateProviders(BaseSDK):
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
         :param base_url: HTTPS base URL of an OpenAI-compatible API, used by private endpoints under this provider that set no URL of their own. Without it, each endpoint must set its own. Private, internal, metadata and OpenRouter hosts are rejected.
-        :param data_policy:
         :param display_name:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -1309,10 +1282,6 @@ class PrivateProviders(BaseSDK):
             slug=slug,
             update_private_provider_request=components.UpdatePrivateProviderRequest(
                 base_url=base_url,
-                data_policy=utils.get_pydantic_model(
-                    data_policy,
-                    Optional[components.UpdatePrivateProviderRequestDataPolicy],
-                ),
                 display_name=display_name,
             ),
         )
@@ -1451,12 +1420,6 @@ class PrivateProviders(BaseSDK):
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
         base_url: Optional[str] = None,
-        data_policy: Optional[
-            Union[
-                components.UpdatePrivateProviderRequestDataPolicy,
-                components.UpdatePrivateProviderRequestDataPolicyTypedDict,
-            ]
-        ] = None,
         display_name: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -1465,7 +1428,7 @@ class PrivateProviders(BaseSDK):
     ) -> operations.UpdatePrivateProviderResponse:
         r"""Update a private provider
 
-        Update a private provider’s details or declared data policy. The name and slug cannot change. Refuses (409) a data-policy change while OpenRouter pins the declared policy on one of its endpoints. [Management key](/docs/guides/overview/auth/management-api-keys) required.
+        Update a private provider’s display name or base URL. The name and slug cannot change, and the data policy is fixed by OpenRouter, so a body with no editable field is rejected (400). [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param slug:
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
@@ -1476,7 +1439,6 @@ class PrivateProviders(BaseSDK):
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
         :param base_url: HTTPS base URL of an OpenAI-compatible API, used by private endpoints under this provider that set no URL of their own. Without it, each endpoint must set its own. Private, internal, metadata and OpenRouter hosts are rejected.
-        :param data_policy:
         :param display_name:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -1500,10 +1462,6 @@ class PrivateProviders(BaseSDK):
             slug=slug,
             update_private_provider_request=components.UpdatePrivateProviderRequest(
                 base_url=base_url,
-                data_policy=utils.get_pydantic_model(
-                    data_policy,
-                    Optional[components.UpdatePrivateProviderRequestDataPolicy],
-                ),
                 display_name=display_name,
             ),
         )

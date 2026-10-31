@@ -3757,16 +3757,7 @@ if TYPE_CHECKING:
         PrivateEndpointValidationResponse,
         PrivateEndpointValidationResponseTypedDict,
     )
-    from .privateprovider import (
-        PrivateProvider,
-        PrivateProviderDataPolicy1,
-        PrivateProviderDataPolicy1TypedDict,
-        PrivateProviderTypedDict,
-    )
-    from .privateproviderdatapolicy import (
-        PrivateProviderDataPolicy,
-        PrivateProviderDataPolicyTypedDict,
-    )
+    from .privateprovider import PrivateProvider, PrivateProviderTypedDict
     from .promptcachebreakpoint import (
         PromptCacheBreakpoint,
         PromptCacheBreakpointMode,
@@ -4469,8 +4460,6 @@ if TYPE_CHECKING:
     )
     from .updateprivateproviderrequest import (
         UpdatePrivateProviderRequest,
-        UpdatePrivateProviderRequestDataPolicy,
-        UpdatePrivateProviderRequestDataPolicyTypedDict,
         UpdatePrivateProviderRequestTypedDict,
     )
     from .updatescimgroupmappingrequest import (
@@ -7343,10 +7332,6 @@ __all__ = [
     "PrivateEndpointValidationResponseTypedDict",
     "PrivateEndpointValidationTypedDict",
     "PrivateProvider",
-    "PrivateProviderDataPolicy",
-    "PrivateProviderDataPolicy1",
-    "PrivateProviderDataPolicy1TypedDict",
-    "PrivateProviderDataPolicyTypedDict",
     "PrivateProviderTypedDict",
     "Profile",
     "PromptCacheBreakpoint",
@@ -8036,8 +8021,6 @@ __all__ = [
     "UpdatePrivateEndpointSettingsRequestToolChoiceTypedDict",
     "UpdatePrivateEndpointSettingsRequestTypedDict",
     "UpdatePrivateProviderRequest",
-    "UpdatePrivateProviderRequestDataPolicy",
-    "UpdatePrivateProviderRequestDataPolicyTypedDict",
     "UpdatePrivateProviderRequestTypedDict",
     "UpdateScimGroupMappingRequest",
     "UpdateScimGroupMappingRequestRole",
@@ -10961,11 +10944,7 @@ _dynamic_imports: dict[str, str] = {
     "PrivateEndpointValidationResponse": ".privateendpointvalidationresponse",
     "PrivateEndpointValidationResponseTypedDict": ".privateendpointvalidationresponse",
     "PrivateProvider": ".privateprovider",
-    "PrivateProviderDataPolicy1": ".privateprovider",
-    "PrivateProviderDataPolicy1TypedDict": ".privateprovider",
     "PrivateProviderTypedDict": ".privateprovider",
-    "PrivateProviderDataPolicy": ".privateproviderdatapolicy",
-    "PrivateProviderDataPolicyTypedDict": ".privateproviderdatapolicy",
     "PromptCacheBreakpoint": ".promptcachebreakpoint",
     "PromptCacheBreakpointMode": ".promptcachebreakpoint",
     "PromptCacheBreakpointTypedDict": ".promptcachebreakpoint",
@@ -11477,8 +11456,6 @@ _dynamic_imports: dict[str, str] = {
     "UpdatePrivateEndpointSettingsRequestToolChoiceTypedDict": ".updateprivateendpointsettingsrequest",
     "UpdatePrivateEndpointSettingsRequestTypedDict": ".updateprivateendpointsettingsrequest",
     "UpdatePrivateProviderRequest": ".updateprivateproviderrequest",
-    "UpdatePrivateProviderRequestDataPolicy": ".updateprivateproviderrequest",
-    "UpdatePrivateProviderRequestDataPolicyTypedDict": ".updateprivateproviderrequest",
     "UpdatePrivateProviderRequestTypedDict": ".updateprivateproviderrequest",
     "UpdateScimGroupMappingRequest": ".updatescimgroupmappingrequest",
     "UpdateScimGroupMappingRequestRole": ".updatescimgroupmappingrequest",

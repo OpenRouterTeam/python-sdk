@@ -6,50 +6,10 @@ from pydantic import model_serializer
 from typing_extensions import TypedDict
 
 
-class PrivateProviderDataPolicy1TypedDict(TypedDict):
-    r"""Your declared data policy, or `null` when none was declared."""
-
-    prompt_retention_days: Nullable[int]
-    r"""Days prompts are retained. Must be `null` unless `retains_prompts` is true."""
-    retains_prompts: bool
-    r"""Whether the provider retains prompts or completions."""
-    training: bool
-    r"""Whether the provider trains on prompts."""
-
-
-class PrivateProviderDataPolicy1(BaseModel):
-    r"""Your declared data policy, or `null` when none was declared."""
-
-    prompt_retention_days: Nullable[int]
-    r"""Days prompts are retained. Must be `null` unless `retains_prompts` is true."""
-
-    retains_prompts: bool
-    r"""Whether the provider retains prompts or completions."""
-
-    training: bool
-    r"""Whether the provider trains on prompts."""
-
-    @model_serializer(mode="wrap")
-    def serialize_model(self, handler):
-        serialized = handler(self)
-        m = {}
-
-        for n, f in type(self).model_fields.items():
-            k = f.alias or n
-            val = serialized.get(k, serialized.get(n))
-
-            if val != UNSET_SENTINEL:
-                m[k] = val
-
-        return m
-
-
 class PrivateProviderTypedDict(TypedDict):
     base_url: Nullable[str]
     r"""HTTPS base URL of an OpenAI-compatible API, used by private endpoints under this provider that set no URL of their own. Without it, each endpoint must set its own. Private, internal, metadata and OpenRouter hosts are rejected."""
     created_at: str
-    data_policy: Nullable[PrivateProviderDataPolicy1TypedDict]
-    r"""Your declared data policy, or `null` when none was declared."""
     display_name: str
     r"""Human-readable provider name shown in the UI."""
     name: str
@@ -63,9 +23,6 @@ class PrivateProvider(BaseModel):
     r"""HTTPS base URL of an OpenAI-compatible API, used by private endpoints under this provider that set no URL of their own. Without it, each endpoint must set its own. Private, internal, metadata and OpenRouter hosts are rejected."""
 
     created_at: str
-
-    data_policy: Nullable[PrivateProviderDataPolicy1]
-    r"""Your declared data policy, or `null` when none was declared."""
 
     display_name: str
     r"""Human-readable provider name shown in the UI."""
