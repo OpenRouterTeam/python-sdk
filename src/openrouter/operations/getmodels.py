@@ -175,6 +175,8 @@ class GetModelsRequestTypedDict(TypedDict):
     r"""Free-text search by model name or slug."""
     input_modalities: NotRequired[str]
     r"""Filter models by input modality. Comma-separated list of: text, image, audio, file."""
+    endpoints: NotRequired[str]
+    r"""Filter models by the request API paths they serve, as listed in each model's `endpoints` field. Comma-separated; a model must serve every listed path. Valid values: /api/v1/chat/completions, /api/v1/completions, /api/v1/messages, /api/v1/responses, /api/v1/embeddings, /api/v1/rerank, /api/alpha/decisions, /api/alpha/extractions, /api/v1/videos, /api/v1/audio/speech, /api/v1/audio/transcriptions, /api/v1/images, /api/v1/batches. When set without `output_modalities`, models of every output modality are considered (the companion `/api/alpha/extractions` route is served by text and decisions models alike)."""
     context: NotRequired[int]
     r"""Minimum context length (tokens). Models with smaller context are excluded."""
     min_price: NotRequired[Nullable[float]]
@@ -295,6 +297,12 @@ class GetModelsRequest(BaseModel):
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
     r"""Filter models by input modality. Comma-separated list of: text, image, audio, file."""
+
+    endpoints: Annotated[
+        Optional[str],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Filter models by the request API paths they serve, as listed in each model's `endpoints` field. Comma-separated; a model must serve every listed path. Valid values: /api/v1/chat/completions, /api/v1/completions, /api/v1/messages, /api/v1/responses, /api/v1/embeddings, /api/v1/rerank, /api/alpha/decisions, /api/alpha/extractions, /api/v1/videos, /api/v1/audio/speech, /api/v1/audio/transcriptions, /api/v1/images, /api/v1/batches. When set without `output_modalities`, models of every output modality are considered (the companion `/api/alpha/extractions` route is served by text and decisions models alike)."""
 
     context: Annotated[
         Optional[int],
@@ -437,6 +445,7 @@ class GetModelsRequest(BaseModel):
                 "sort",
                 "q",
                 "input_modalities",
+                "endpoints",
                 "context",
                 "min_price",
                 "max_price",
