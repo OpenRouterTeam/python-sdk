@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c48cf606-fb42-4a45-9c23-8f0555307828
 management:
-  docChecksum: 5a674a3eaa13d42cdb3d285f69b6529a
+  docChecksum: 6cf8ab8da8412a35be4a2864d4a2fdd1
   docVersion: 1.0.0
   speakeasyVersion: 1.803.2
   generationVersion: 2.950.13
-  releaseVersion: 1.3.109
-  configChecksum: 2aff6c2c7e108ec62579498cd20c9899
+  releaseVersion: 1.3.110
+  configChecksum: eed572c9b7a6cb521ad53254b94db8e6
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
 persistentEdits:
-  generation_id: 1eaabe5e-3ad7-47b7-8dae-e669a38993fd
-  pristine_commit_hash: 65257d51cf6b8dc9ebded13b6876d02de4ba5b2f
-  pristine_tree_hash: 4791e86e701abbaf41e66c3cabc7a023cd078b13
+  generation_id: bb45bb48-5f30-48e6-82f6-796eadbcacca
+  pristine_commit_hash: b306886cdec4457ad15d8ec5d2b09177da25d0a1
+  pristine_tree_hash: a49490fb0dc4387cc9e8e3e4e310ad203fa06c2e
 features:
   python:
     acceptHeaders: 3.0.0
@@ -7092,8 +7092,8 @@ trackedFiles:
     pristine_git_object: 0dce5ceee2929e6ef2817fd622093fbfe5ca75f4
   docs/components/responseincludesenum.mdx:
     id: 3fa11839bc55
-    last_write_checksum: sha1:045a1ca6f744774bb1a4f777c9d661faf6021e44
-    pristine_git_object: a5cb010354b5dff2d5751fcc0ddd5fa1b0563168
+    last_write_checksum: sha1:99401e9ff094c8673d1f3353d3cdd825e23b34e3
+    pristine_git_object: 7ba7813c1c22eaa8fcab89eb6b08cda244bda391
   docs/components/responseoutputtext.mdx:
     id: ff47b80fc46f
     last_write_checksum: sha1:0223676d74cdc8092bf277fbca39e7ff83717161
@@ -10756,8 +10756,8 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:3461cda5bbbce2b7a86792736172845511a08255
-    pristine_git_object: f23838109cdf7877e942cd117d6c298b19fe778a
+    last_write_checksum: sha1:8113806c64e76758ae973cbdb7484b4e7ea82139
+    pristine_git_object: c65e87a1a9f31f0b04f82e3556336b79e9e0af22
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77f44b60b98bc126557ec27391f91dfba764bb54
@@ -10784,8 +10784,8 @@ trackedFiles:
     pristine_git_object: 86713cfea633e09d33b3d4e65281071fe20e6137
   src/openrouter/_version.py:
     id: d8d15ad6c586
-    last_write_checksum: sha1:27ead17c4185151d6669d0ad97219b804f1b0f48
-    pristine_git_object: 901236ec4fa90ddaaaf05f1c3b61e5ed1d2fd185
+    last_write_checksum: sha1:4b096feed8ef81f8acec69bd50d42cd978d13e3d
+    pristine_git_object: 8a2257c8cc8e114db7ce9fdaa9c29c705d3ca653
   src/openrouter/alpha.py:
     id: 306c4d93308d
     last_write_checksum: sha1:80cc0f39649445431cc2247ed0e0765438467766
@@ -13676,8 +13676,8 @@ trackedFiles:
     pristine_git_object: 27f0ef5ce4737a56b263f8ce5f0a3973f1441c39
   src/openrouter/components/responseincludesenum.py:
     id: dff573cddd73
-    last_write_checksum: sha1:71e46afb70c23cf988579d27b6df3ebf421f1684
-    pristine_git_object: 9da58c5b22cbe284a9fa130b63c7d8ead77669c5
+    last_write_checksum: sha1:f52abafbf0bc56ab98ccacd92fb767ebabe3931f
+    pristine_git_object: 17daca9d653e1428636ff014659f63b5a2040b9c
   src/openrouter/components/responseoutputtext.py:
     id: cbc203c3ff40
     last_write_checksum: sha1:c0c6ff17b402f0cbaf8d58add175f1026b0a4097
@@ -19862,4 +19862,4 @@ examples:
         "529":
           application/json: {"error": {"code": 529, "message": "Provider returned error"}}
 examplesVersion: 1.0.2
-releaseNotes: "## Python SDK Changes:\n* `open_router.batch.create_batches()`:  `response.results[].response.body.union(class (0)).choices[].message.reasoning_details[].union(reasoning.summary).format.enum(openrouter_stealth_v1)` **Added**\n* `open_router.batch.get_batches()`:  `response.results[].response.body.union(class (0)).choices[].message.reasoning_details[].union(reasoning.text).format.enum(openrouter_stealth_v1)` **Added**\n* `open_router.presets.create_presets_chat_completions()`: \n  *  `request.messages[].union(assistant).reasoning_details[].union(reasoning.server_tool_call).format.enum(openrouter_stealth_v1)` **Added**\n* `open_router.presets.create_presets_responses()`: \n  *  `request.input.union(Array<>)[].union(class (8)).format.enum(openrouter_stealth_v1)` **Added**\n"
+releaseNotes: "## Python SDK Changes:\n* `open_router.presets.create_presets_responses()`: \n  *  `request.include[].enum(output.encrypted_content)` **Added**\n"
