@@ -134,6 +134,7 @@ class VideoGenerationRequestOptionsTypedDict(TypedDict):
     parasail: NotRequired[Dict[str, Any]]
     pareto_alpha: NotRequired[Dict[str, Any]]
     particle_ai: NotRequired[Dict[str, Any]]
+    pearl_research: NotRequired[Dict[str, Any]]
     perceptron: NotRequired[Dict[str, Any]]
     perplexity: NotRequired[Dict[str, Any]]
     phala: NotRequired[Dict[str, Any]]
@@ -435,6 +436,10 @@ class VideoGenerationRequestOptions(BaseModel):
         Optional[Dict[str, Any]], pydantic.Field(alias="particle-ai")
     ] = None
 
+    pearl_research: Annotated[
+        Optional[Dict[str, Any]], pydantic.Field(alias="pearl-research")
+    ] = None
+
     perceptron: Optional[Dict[str, Any]] = None
 
     perplexity: Optional[Dict[str, Any]] = None
@@ -650,6 +655,7 @@ class VideoGenerationRequestOptions(BaseModel):
                 "parasail",
                 "pareto-alpha",
                 "particle-ai",
+                "pearl-research",
                 "perceptron",
                 "perplexity",
                 "phala",
