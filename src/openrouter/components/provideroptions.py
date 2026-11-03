@@ -20,6 +20,7 @@ class ProviderOptionsTypedDict(TypedDict):
     amazon_bedrock_claude_on_aws: NotRequired[Dict[str, Any]]
     amazon_nova: NotRequired[Dict[str, Any]]
     ambient: NotRequired[Dict[str, Any]]
+    antdigital: NotRequired[Dict[str, Any]]
     anthropic: NotRequired[Dict[str, Any]]
     anthropic_2: NotRequired[Dict[str, Any]]
     anyscale: NotRequired[Dict[str, Any]]
@@ -193,6 +194,8 @@ class ProviderOptions(BaseModel):
     ] = None
 
     ambient: Optional[Dict[str, Any]] = None
+
+    antdigital: Optional[Dict[str, Any]] = None
 
     anthropic: Optional[Dict[str, Any]] = None
 
@@ -541,6 +544,7 @@ class ProviderOptions(BaseModel):
                 "amazon-bedrock/claude-on-aws",
                 "amazon-nova",
                 "ambient",
+                "antdigital",
                 "anthropic",
                 "anthropic/2",
                 "anyscale",

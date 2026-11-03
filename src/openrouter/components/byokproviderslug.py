@@ -15,6 +15,7 @@ BYOKProviderSlug = Union[
         "amazon-bedrock/claude-on-aws",
         "amazon-nova",
         "ambient",
+        "antdigital",
         "anthropic",
         "anthropic/2",
         "arcee-ai",

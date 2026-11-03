@@ -13,6 +13,7 @@ ProviderName = Union[
         "AionLabs",
         "Alibaba",
         "Ambient",
+        "Ant Digital",
         "Baidu",
         "Amazon Bedrock",
         "Amazon Nova",
