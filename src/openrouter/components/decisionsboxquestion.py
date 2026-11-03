@@ -9,26 +9,30 @@ from typing_extensions import TypeAliasType, TypedDict
 DecisionsBoxQuestionInstructionsTypedDict = TypeAliasType(
     "DecisionsBoxQuestionInstructionsTypedDict", Union[str, Dict[str, Any], List[Any]]
 )
-r"""A plain string, or a JSON object or array of structured guidance."""
+r"""A description of the target to find, naming the image in `state` it is in; not a command, and no `criteria`."""
 
 
 DecisionsBoxQuestionInstructions = TypeAliasType(
     "DecisionsBoxQuestionInstructions", Union[str, Dict[str, Any], List[Any]]
 )
-r"""A plain string, or a JSON object or array of structured guidance."""
+r"""A description of the target to find, naming the image in `state` it is in; not a command, and no `criteria`."""
 
 
 DecisionsBoxQuestionType = Literal["box",]
 
 
 class DecisionsBoxQuestionTypedDict(TypedDict):
+    r"""Finds one target in an image in `state` and answers with one bounding box (`top`, `bottom`, `left`, `right` as fractions of the image). Served by TypeSafe Jev endpoints only; every other provider rejects a box question with `400` before anything is sent upstream."""
+
     instructions: DecisionsBoxQuestionInstructionsTypedDict
-    r"""A plain string, or a JSON object or array of structured guidance."""
+    r"""A description of the target to find, naming the image in `state` it is in; not a command, and no `criteria`."""
     type: DecisionsBoxQuestionType
 
 
 class DecisionsBoxQuestion(BaseModel):
+    r"""Finds one target in an image in `state` and answers with one bounding box (`top`, `bottom`, `left`, `right` as fractions of the image). Served by TypeSafe Jev endpoints only; every other provider rejects a box question with `400` before anything is sent upstream."""
+
     instructions: DecisionsBoxQuestionInstructions
-    r"""A plain string, or a JSON object or array of structured guidance."""
+    r"""A description of the target to find, naming the image in `state` it is in; not a command, and no `criteria`."""
 
     type: DecisionsBoxQuestionType
