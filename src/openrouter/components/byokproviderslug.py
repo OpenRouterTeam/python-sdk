@@ -88,6 +88,7 @@ BYOKProviderSlug = Union[
         "parasail",
         "pareto-alpha",
         "particle-ai",
+        "pearl-research",
         "perceptron",
         "perplexity",
         "phala",
