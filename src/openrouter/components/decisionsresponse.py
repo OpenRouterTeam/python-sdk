@@ -5,6 +5,10 @@ from .decisionsboxanswer import DecisionsBoxAnswer, DecisionsBoxAnswerTypedDict
 from .decisionschoiceanswer import DecisionsChoiceAnswer, DecisionsChoiceAnswerTypedDict
 from .decisionsnoulanswer import DecisionsNoulAnswer, DecisionsNoulAnswerTypedDict
 from .decisionsscoreanswer import DecisionsScoreAnswer, DecisionsScoreAnswerTypedDict
+from .decisionsusageinputtokensdetails import (
+    DecisionsUsageInputTokensDetails,
+    DecisionsUsageInputTokensDetailsTypedDict,
+)
 from functools import partial
 from openrouter.types import BaseModel, UNSET_SENTINEL
 from openrouter.utils.unions import parse_open_union
@@ -69,6 +73,8 @@ class DecisionsResponseUsageTypedDict(TypedDict):
     input_tokens: int
     output_tokens: int
     cost: NotRequired[float]
+    input_tokens_details: NotRequired[DecisionsUsageInputTokensDetailsTypedDict]
+    r"""Of `input_tokens`, those the provider served from its prompt cache."""
 
 
 class DecisionsResponseUsage(BaseModel):
@@ -78,9 +84,12 @@ class DecisionsResponseUsage(BaseModel):
 
     cost: Optional[float] = None
 
+    input_tokens_details: Optional[DecisionsUsageInputTokensDetails] = None
+    r"""Of `input_tokens`, those the provider served from its prompt cache."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["cost"])
+        optional_fields = set(["cost", "input_tokens_details"])
         serialized = handler(self)
         m = {}
 
