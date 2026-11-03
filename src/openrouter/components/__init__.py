@@ -1711,6 +1711,10 @@ if TYPE_CHECKING:
         DecisionsScoreQuestionType,
         DecisionsScoreQuestionTypedDict,
     )
+    from .decisionsusageinputtokensdetails import (
+        DecisionsUsageInputTokensDetails,
+        DecisionsUsageInputTokensDetailsTypedDict,
+    )
     from .defaultparameters import DefaultParameters, DefaultParametersTypedDict
     from .deferredbm25search import (
         DeferredBm25Search,
@@ -5858,6 +5862,8 @@ __all__ = [
     "DecisionsScoreQuestionType",
     "DecisionsScoreQuestionTypedDict",
     "DecisionsTypedDict",
+    "DecisionsUsageInputTokensDetails",
+    "DecisionsUsageInputTokensDetailsTypedDict",
     "DefaultEffort",
     "DefaultParameters",
     "DefaultParametersTypedDict",
@@ -9380,6 +9386,8 @@ _dynamic_imports: dict[str, str] = {
     "DecisionsScoreQuestionInstructionsTypedDict": ".decisionsscorequestion",
     "DecisionsScoreQuestionType": ".decisionsscorequestion",
     "DecisionsScoreQuestionTypedDict": ".decisionsscorequestion",
+    "DecisionsUsageInputTokensDetails": ".decisionsusageinputtokensdetails",
+    "DecisionsUsageInputTokensDetailsTypedDict": ".decisionsusageinputtokensdetails",
     "DefaultParameters": ".defaultparameters",
     "DefaultParametersTypedDict": ".defaultparameters",
     "DeferredBm25Search": ".deferredbm25search",
