@@ -4436,14 +4436,6 @@ if TYPE_CHECKING:
         UpdateOrganizationSettingsRequest,
         UpdateOrganizationSettingsRequestTypedDict,
     )
-    from .updateprivateendpointparametersrequest import (
-        UpdatePrivateEndpointParametersRequest,
-        UpdatePrivateEndpointParametersRequestTypedDict,
-    )
-    from .updateprivateendpointpricingrequest import (
-        UpdatePrivateEndpointPricingRequest,
-        UpdatePrivateEndpointPricingRequestTypedDict,
-    )
     from .updateprivateendpointrequest import (
         UpdatePrivateEndpointRequest,
         UpdatePrivateEndpointRequestDeclaredRegion,
@@ -8008,10 +8000,6 @@ __all__ = [
     "UpdateObservabilityDestinationResponseTypedDict",
     "UpdateOrganizationSettingsRequest",
     "UpdateOrganizationSettingsRequestTypedDict",
-    "UpdatePrivateEndpointParametersRequest",
-    "UpdatePrivateEndpointParametersRequestTypedDict",
-    "UpdatePrivateEndpointPricingRequest",
-    "UpdatePrivateEndpointPricingRequestTypedDict",
     "UpdatePrivateEndpointRequest",
     "UpdatePrivateEndpointRequestDeclaredRegion",
     "UpdatePrivateEndpointRequestTypedDict",
@@ -11445,10 +11433,6 @@ _dynamic_imports: dict[str, str] = {
     "UpdateObservabilityDestinationResponseTypedDict": ".updateobservabilitydestinationresponse",
     "UpdateOrganizationSettingsRequest": ".updateorganizationsettingsrequest",
     "UpdateOrganizationSettingsRequestTypedDict": ".updateorganizationsettingsrequest",
-    "UpdatePrivateEndpointParametersRequest": ".updateprivateendpointparametersrequest",
-    "UpdatePrivateEndpointParametersRequestTypedDict": ".updateprivateendpointparametersrequest",
-    "UpdatePrivateEndpointPricingRequest": ".updateprivateendpointpricingrequest",
-    "UpdatePrivateEndpointPricingRequestTypedDict": ".updateprivateendpointpricingrequest",
     "UpdatePrivateEndpointRequest": ".updateprivateendpointrequest",
     "UpdatePrivateEndpointRequestDeclaredRegion": ".updateprivateendpointrequest",
     "UpdatePrivateEndpointRequestTypedDict": ".updateprivateendpointrequest",
