@@ -590,7 +590,7 @@ class APIKeys(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
-        :param creator_user_id: Optional user ID of the key creator. Only meaningful for organization-owned keys where a specific member is creating the key.
+        :param creator_user_id: Optional user ID of the key creator. Only meaningful for organization-owned keys where a specific member is creating the key. A workspace-scoped management key may only name a member of its own workspace.
         :param expires_at: Optional ISO 8601 UTC expiration timestamp. Must include seconds (YYYY-MM-DDTHH:MM:SSZ; fractional seconds allowed); minute-precision timestamps are rejected.
         :param external: Optional partner-defined identity associated with the created API key.
         :param include_byok_in_limit: Whether to include BYOK usage in the limit
@@ -762,7 +762,7 @@ class APIKeys(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
-        :param creator_user_id: Optional user ID of the key creator. Only meaningful for organization-owned keys where a specific member is creating the key.
+        :param creator_user_id: Optional user ID of the key creator. Only meaningful for organization-owned keys where a specific member is creating the key. A workspace-scoped management key may only name a member of its own workspace.
         :param expires_at: Optional ISO 8601 UTC expiration timestamp. Must include seconds (YYYY-MM-DDTHH:MM:SSZ; fractional seconds allowed); minute-precision timestamps are rejected.
         :param external: Optional partner-defined identity associated with the created API key.
         :param include_byok_in_limit: Whether to include BYOK usage in the limit

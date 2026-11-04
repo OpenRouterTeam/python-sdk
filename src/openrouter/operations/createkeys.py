@@ -131,7 +131,7 @@ class CreateKeysRequestBodyTypedDict(TypedDict):
     name: str
     r"""Name for the new API key"""
     creator_user_id: NotRequired[Nullable[str]]
-    r"""Optional user ID of the key creator. Only meaningful for organization-owned keys where a specific member is creating the key."""
+    r"""Optional user ID of the key creator. Only meaningful for organization-owned keys where a specific member is creating the key. A workspace-scoped management key may only name a member of its own workspace."""
     expires_at: NotRequired[Nullable[datetime]]
     r"""Optional ISO 8601 UTC expiration timestamp. Must include seconds (YYYY-MM-DDTHH:MM:SSZ; fractional seconds allowed); minute-precision timestamps are rejected."""
     external: NotRequired[ExternalTypedDict]
@@ -151,7 +151,7 @@ class CreateKeysRequestBody(BaseModel):
     r"""Name for the new API key"""
 
     creator_user_id: OptionalNullable[str] = UNSET
-    r"""Optional user ID of the key creator. Only meaningful for organization-owned keys where a specific member is creating the key."""
+    r"""Optional user ID of the key creator. Only meaningful for organization-owned keys where a specific member is creating the key. A workspace-scoped management key may only name a member of its own workspace."""
 
     expires_at: OptionalNullable[datetime] = UNSET
     r"""Optional ISO 8601 UTC expiration timestamp. Must include seconds (YYYY-MM-DDTHH:MM:SSZ; fractional seconds allowed); minute-precision timestamps are rejected."""
