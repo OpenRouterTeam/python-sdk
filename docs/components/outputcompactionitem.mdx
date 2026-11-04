@@ -1,0 +1,15 @@
+---
+title: "OutputCompactionItem"
+---
+
+A compaction output item carrying the encrypted summary of the compacted conversation. Emitted in reply to a `compaction_trigger` input item.
+
+
+## Fields
+
+| Field                                                                            | Type                                                                             | Required                                                                         | Description                                                                      |
+| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `created_by`                                                                     | *Optional[str]*                                                                  | ➖                                                               | N/A                                                                              |
+| `encrypted_content`                                                              | *str*                                                                            | ✔️                                                               | N/A                                                                              |
+| `id`                                                                             | *str*                                                                            | ✔️                                                               | N/A                                                                              |
+| `type`                                                                           | [components.OutputCompactionItemType](../components/outputcompactionitemtype.mdx) | ✔️                                                               | N/A                                                                              |

@@ -1358,6 +1358,11 @@ if TYPE_CHECKING:
         CompactionItemType,
         CompactionItemTypedDict,
     )
+    from .compactiontriggeritem import (
+        CompactionTriggerItem,
+        CompactionTriggerItemType,
+        CompactionTriggerItemTypedDict,
+    )
     from .compoundfilter import (
         CompoundFilter,
         CompoundFilterType,
@@ -3351,6 +3356,11 @@ if TYPE_CHECKING:
         OutputCodeInterpreterServerToolItemType,
         OutputCodeInterpreterServerToolItemTypedDict,
     )
+    from .outputcompactionitem import (
+        OutputCompactionItem,
+        OutputCompactionItemType,
+        OutputCompactionItemTypedDict,
+    )
     from .outputcomputercallitem import (
         OutputComputerCallItem,
         OutputComputerCallItemStatus,
@@ -3433,6 +3443,11 @@ if TYPE_CHECKING:
         OutputItemCodeInterpreterCallType,
         OutputItemCodeInterpreterCallTypedDict,
         UnknownOutputItemCodeInterpreterCallOutput,
+    )
+    from .outputitemcompaction import (
+        OutputItemCompaction,
+        OutputItemCompactionType,
+        OutputItemCompactionTypedDict,
     )
     from .outputitemcustomtoolcall import (
         OutputItemCustomToolCall,
@@ -5625,6 +5640,9 @@ __all__ = [
     "CompactionItem",
     "CompactionItemType",
     "CompactionItemTypedDict",
+    "CompactionTriggerItem",
+    "CompactionTriggerItemType",
+    "CompactionTriggerItemTypedDict",
     "CompoundFilter",
     "CompoundFilterType",
     "CompoundFilterTypedDict",
@@ -7055,6 +7073,9 @@ __all__ = [
     "OutputCodeInterpreterServerToolItem",
     "OutputCodeInterpreterServerToolItemType",
     "OutputCodeInterpreterServerToolItemTypedDict",
+    "OutputCompactionItem",
+    "OutputCompactionItemType",
+    "OutputCompactionItemTypedDict",
     "OutputComputerCallItem",
     "OutputComputerCallItemStatus",
     "OutputComputerCallItemType",
@@ -7106,6 +7127,9 @@ __all__ = [
     "OutputItemCodeInterpreterCallStatus",
     "OutputItemCodeInterpreterCallType",
     "OutputItemCodeInterpreterCallTypedDict",
+    "OutputItemCompaction",
+    "OutputItemCompactionType",
+    "OutputItemCompactionTypedDict",
     "OutputItemCustomToolCall",
     "OutputItemCustomToolCallStatus",
     "OutputItemCustomToolCallType",
@@ -9189,6 +9213,9 @@ _dynamic_imports: dict[str, str] = {
     "CompactionItem": ".compactionitem",
     "CompactionItemType": ".compactionitem",
     "CompactionItemTypedDict": ".compactionitem",
+    "CompactionTriggerItem": ".compactiontriggeritem",
+    "CompactionTriggerItemType": ".compactiontriggeritem",
+    "CompactionTriggerItemTypedDict": ".compactiontriggeritem",
     "CompoundFilter": ".compoundfilter",
     "CompoundFilterType": ".compoundfilter",
     "CompoundFilterTypedDict": ".compoundfilter",
@@ -10693,6 +10720,9 @@ _dynamic_imports: dict[str, str] = {
     "OutputCodeInterpreterServerToolItem": ".outputcodeinterpreterservertoolitem",
     "OutputCodeInterpreterServerToolItemType": ".outputcodeinterpreterservertoolitem",
     "OutputCodeInterpreterServerToolItemTypedDict": ".outputcodeinterpreterservertoolitem",
+    "OutputCompactionItem": ".outputcompactionitem",
+    "OutputCompactionItemType": ".outputcompactionitem",
+    "OutputCompactionItemTypedDict": ".outputcompactionitem",
     "OutputComputerCallItem": ".outputcomputercallitem",
     "OutputComputerCallItemStatus": ".outputcomputercallitem",
     "OutputComputerCallItemType": ".outputcomputercallitem",
@@ -10752,6 +10782,9 @@ _dynamic_imports: dict[str, str] = {
     "OutputItemCodeInterpreterCallType": ".outputitemcodeinterpretercall",
     "OutputItemCodeInterpreterCallTypedDict": ".outputitemcodeinterpretercall",
     "UnknownOutputItemCodeInterpreterCallOutput": ".outputitemcodeinterpretercall",
+    "OutputItemCompaction": ".outputitemcompaction",
+    "OutputItemCompactionType": ".outputitemcompaction",
+    "OutputItemCompactionTypedDict": ".outputitemcompaction",
     "OutputItemCustomToolCall": ".outputitemcustomtoolcall",
     "OutputItemCustomToolCallStatus": ".outputitemcustomtoolcall",
     "OutputItemCustomToolCallType": ".outputitemcustomtoolcall",

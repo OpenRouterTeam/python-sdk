@@ -9,6 +9,7 @@ from .outputitemcodeinterpretercall import (
     OutputItemCodeInterpreterCall,
     OutputItemCodeInterpreterCallTypedDict,
 )
+from .outputitemcompaction import OutputItemCompaction, OutputItemCompactionTypedDict
 from .outputitemcustomtoolcall import (
     OutputItemCustomToolCall,
     OutputItemCustomToolCallTypedDict,
@@ -45,6 +46,7 @@ AlignmentResponsesRejectedTypedDict = TypeAliasType(
     Union[
         OutputItemFileSearchCallTypedDict,
         OutputItemImageGenerationCallTypedDict,
+        OutputItemCompactionTypedDict,
         OutputItemWebSearchCallTypedDict,
         OutputMessageTypedDict,
         OutputItemReasoningTypedDict,
@@ -69,6 +71,7 @@ class UnknownAlignmentResponsesRejected(BaseModel):
 _ALIGNMENT_RESPONSES_REJECTED_VARIANTS: dict[str, Any] = {
     "apply_patch_call": OutputItemApplyPatchCall,
     "code_interpreter_call": OutputItemCodeInterpreterCall,
+    "compaction": OutputItemCompaction,
     "custom_tool_call": OutputItemCustomToolCall,
     "file_search_call": OutputItemFileSearchCall,
     "function_call": OutputItemFunctionCall,
@@ -83,6 +86,7 @@ AlignmentResponsesRejected = Annotated[
     Union[
         OutputItemApplyPatchCall,
         OutputItemCodeInterpreterCall,
+        OutputItemCompaction,
         OutputItemCustomToolCall,
         OutputItemFileSearchCall,
         OutputItemFunctionCall,
