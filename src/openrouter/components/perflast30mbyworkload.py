@@ -3,6 +3,7 @@
 from __future__ import annotations
 from .decisions import Decisions, DecisionsTypedDict
 from .embeddings import Embeddings, EmbeddingsTypedDict
+from .extractions import Extractions, ExtractionsTypedDict
 from .imagegeneration import ImageGeneration, ImageGenerationTypedDict
 from .rerank import Rerank, RerankTypedDict
 from .stt import STT, STTTypedDict
@@ -21,6 +22,7 @@ class PerfLast30mByWorkloadTypedDict(TypedDict):
 
     decisions: NotRequired[DecisionsTypedDict]
     embeddings: NotRequired[EmbeddingsTypedDict]
+    extractions: NotRequired[ExtractionsTypedDict]
     image_generation: NotRequired[ImageGenerationTypedDict]
     rerank: NotRequired[RerankTypedDict]
     stt: NotRequired[STTTypedDict]
@@ -36,6 +38,8 @@ class PerfLast30mByWorkload(BaseModel):
     decisions: Optional[Decisions] = None
 
     embeddings: Optional[Embeddings] = None
+
+    extractions: Optional[Extractions] = None
 
     image_generation: Optional[ImageGeneration] = None
 
@@ -57,6 +61,7 @@ class PerfLast30mByWorkload(BaseModel):
             [
                 "decisions",
                 "embeddings",
+                "extractions",
                 "image_generation",
                 "rerank",
                 "stt",
