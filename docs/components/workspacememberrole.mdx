@@ -2,7 +2,7 @@
 title: "WorkspaceMemberRole"
 ---
 
-Role of the member in the workspace
+Role of the member in the workspace. `viewer` and `restricted_viewer` are read-only: `viewer` can view the whole workspace, and `restricted_viewer` can view only their own activity.
 
 ## Example Usage
 
@@ -20,3 +20,5 @@ This is an open enum. Unrecognized values will not fail type checks.
 
 - `"admin"`
 - `"member"`
+- `"viewer"`
+- `"restricted_viewer"`
