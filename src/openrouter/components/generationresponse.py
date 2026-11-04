@@ -26,6 +26,7 @@ APIType = Union[
         "tts",
         "stt",
         "image",
+        "tools_invoke",
     ],
     UnrecognizedStr,
 ]
