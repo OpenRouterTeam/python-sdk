@@ -10,10 +10,12 @@ WorkspaceMemberRole = Union[
     Literal[
         "admin",
         "member",
+        "viewer",
+        "restricted_viewer",
     ],
     UnrecognizedStr,
 ]
-r"""Role of the member in the workspace"""
+r"""Role of the member in the workspace. `viewer` and `restricted_viewer` are read-only: `viewer` can view the whole workspace, and `restricted_viewer` can view only their own activity."""
 
 
 class WorkspaceMemberTypedDict(TypedDict):
@@ -22,7 +24,7 @@ class WorkspaceMemberTypedDict(TypedDict):
     id: str
     r"""Unique identifier for the workspace membership"""
     role: WorkspaceMemberRole
-    r"""Role of the member in the workspace"""
+    r"""Role of the member in the workspace. `viewer` and `restricted_viewer` are read-only: `viewer` can view the whole workspace, and `restricted_viewer` can view only their own activity."""
     user_id: str
     r"""Clerk user ID of the member"""
     workspace_id: str
@@ -37,7 +39,7 @@ class WorkspaceMember(BaseModel):
     r"""Unique identifier for the workspace membership"""
 
     role: WorkspaceMemberRole
-    r"""Role of the member in the workspace"""
+    r"""Role of the member in the workspace. `viewer` and `restricted_viewer` are read-only: `viewer` can view the whole workspace, and `restricted_viewer` can view only their own activity."""
 
     user_id: str
     r"""Clerk user ID of the member"""
