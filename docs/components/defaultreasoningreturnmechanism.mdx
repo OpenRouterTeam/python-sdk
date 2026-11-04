@@ -1,0 +1,24 @@
+---
+title: "DefaultReasoningReturnMechanism"
+---
+
+Reasoning return mechanism the endpoint uses when neither its features nor the model set one
+
+## Example Usage
+
+```python
+from openrouter.components import DefaultReasoningReturnMechanism
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
+value: DefaultReasoningReturnMechanism = "content-string"
+```
+
+
+## Values
+
+This is an open enum. Unrecognized values will not fail type checks.
+
+- `"content-string"`
+- `"reasoning-content"`
+- `"reasoning"`
+- `"none"`
