@@ -1963,6 +1963,7 @@ if TYPE_CHECKING:
         ExtractionNumberFieldType,
         ExtractionNumberFieldTypedDict,
     )
+    from .extractions import Extractions, ExtractionsTypedDict
     from .extractionsrequest import (
         ExtractionsRequest,
         ExtractionsRequestTypedDict,
@@ -6073,12 +6074,14 @@ __all__ = [
     "ExtractionTimeField",
     "ExtractionTimeFieldType",
     "ExtractionTimeFieldTypedDict",
+    "Extractions",
     "ExtractionsRequest",
     "ExtractionsRequestTypedDict",
     "ExtractionsResponse",
     "ExtractionsResponseAnswers",
     "ExtractionsResponseAnswersTypedDict",
     "ExtractionsResponseTypedDict",
+    "ExtractionsTypedDict",
     "ExtractionsUsage",
     "ExtractionsUsageTypedDict",
     "FailableToolCallStatus",
@@ -9567,6 +9570,8 @@ _dynamic_imports: dict[str, str] = {
     "ExtractionNumberField": ".extractionnumberfield",
     "ExtractionNumberFieldType": ".extractionnumberfield",
     "ExtractionNumberFieldTypedDict": ".extractionnumberfield",
+    "Extractions": ".extractions",
+    "ExtractionsTypedDict": ".extractions",
     "ExtractionsRequest": ".extractionsrequest",
     "ExtractionsRequestTypedDict": ".extractionsrequest",
     "Fields": ".extractionsrequest",
