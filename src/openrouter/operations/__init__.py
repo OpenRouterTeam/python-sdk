@@ -635,7 +635,7 @@ if TYPE_CHECKING:
         GetTaskClassificationsGlobalsTypedDict,
         GetTaskClassificationsRequest,
         GetTaskClassificationsRequestTypedDict,
-        Window,
+        GetTaskClassificationsWindow,
     )
     from .gettool import (
         GetToolGlobals,
@@ -900,6 +900,14 @@ if TYPE_CHECKING:
         ListPrivateProvidersRequestTypedDict,
         ListPrivateProvidersResponse,
         ListPrivateProvidersResponseTypedDict,
+    )
+    from .listproviderendpoints import (
+        ListProviderEndpointsGlobals,
+        ListProviderEndpointsGlobalsTypedDict,
+        ListProviderEndpointsRequest,
+        ListProviderEndpointsRequestTypedDict,
+        ListProviderEndpointsWindow,
+        PerfWorkload,
     )
     from .listproviders import (
         Datacenter,
@@ -1572,6 +1580,7 @@ __all__ = [
     "GetTaskClassificationsGlobalsTypedDict",
     "GetTaskClassificationsRequest",
     "GetTaskClassificationsRequestTypedDict",
+    "GetTaskClassificationsWindow",
     "GetToolGlobals",
     "GetToolGlobalsTypedDict",
     "GetToolRequest",
@@ -1773,6 +1782,11 @@ __all__ = [
     "ListPrivateProvidersRequestTypedDict",
     "ListPrivateProvidersResponse",
     "ListPrivateProvidersResponseTypedDict",
+    "ListProviderEndpointsGlobals",
+    "ListProviderEndpointsGlobalsTypedDict",
+    "ListProviderEndpointsRequest",
+    "ListProviderEndpointsRequestTypedDict",
+    "ListProviderEndpointsWindow",
     "ListProvidersData",
     "ListProvidersDataTypedDict",
     "ListProvidersGlobals",
@@ -1842,6 +1856,7 @@ __all__ = [
     "Order",
     "OrderBy",
     "OrderByTypedDict",
+    "PerfWorkload",
     "Period",
     "PromoteContainerFileGlobals",
     "PromoteContainerFileGlobalsTypedDict",
@@ -1965,7 +1980,6 @@ __all__ = [
     "ValidatePrivateEndpointGlobalsTypedDict",
     "ValidatePrivateEndpointRequest",
     "ValidatePrivateEndpointRequestTypedDict",
-    "Window",
     "Zdr",
 ]
 
@@ -2441,7 +2455,7 @@ _dynamic_imports: dict[str, str] = {
     "GetTaskClassificationsGlobalsTypedDict": ".gettaskclassifications",
     "GetTaskClassificationsRequest": ".gettaskclassifications",
     "GetTaskClassificationsRequestTypedDict": ".gettaskclassifications",
-    "Window": ".gettaskclassifications",
+    "GetTaskClassificationsWindow": ".gettaskclassifications",
     "GetToolGlobals": ".gettool",
     "GetToolGlobalsTypedDict": ".gettool",
     "GetToolRequest": ".gettool",
@@ -2638,6 +2652,12 @@ _dynamic_imports: dict[str, str] = {
     "ListPrivateProvidersRequestTypedDict": ".listprivateproviders",
     "ListPrivateProvidersResponse": ".listprivateproviders",
     "ListPrivateProvidersResponseTypedDict": ".listprivateproviders",
+    "ListProviderEndpointsGlobals": ".listproviderendpoints",
+    "ListProviderEndpointsGlobalsTypedDict": ".listproviderendpoints",
+    "ListProviderEndpointsRequest": ".listproviderendpoints",
+    "ListProviderEndpointsRequestTypedDict": ".listproviderendpoints",
+    "ListProviderEndpointsWindow": ".listproviderendpoints",
+    "PerfWorkload": ".listproviderendpoints",
     "Datacenter": ".listproviders",
     "Headquarters": ".listproviders",
     "ListProvidersData": ".listproviders",
