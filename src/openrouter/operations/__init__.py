@@ -1086,18 +1086,6 @@ if TYPE_CHECKING:
         UpdatePrivateEndpointRequest,
         UpdatePrivateEndpointRequestTypedDict,
     )
-    from .updateprivateendpointparameters import (
-        UpdatePrivateEndpointParametersGlobals,
-        UpdatePrivateEndpointParametersGlobalsTypedDict,
-        UpdatePrivateEndpointParametersRequest,
-        UpdatePrivateEndpointParametersRequestTypedDict,
-    )
-    from .updateprivateendpointpricing import (
-        UpdatePrivateEndpointPricingGlobals,
-        UpdatePrivateEndpointPricingGlobalsTypedDict,
-        UpdatePrivateEndpointPricingRequest,
-        UpdatePrivateEndpointPricingRequestTypedDict,
-    )
     from .updateprivateprovider import (
         UpdatePrivateProviderGlobals,
         UpdatePrivateProviderGlobalsTypedDict,
@@ -1944,14 +1932,6 @@ __all__ = [
     "UpdateOrganizationSettingsResponseTypedDict",
     "UpdatePrivateEndpointGlobals",
     "UpdatePrivateEndpointGlobalsTypedDict",
-    "UpdatePrivateEndpointParametersGlobals",
-    "UpdatePrivateEndpointParametersGlobalsTypedDict",
-    "UpdatePrivateEndpointParametersRequest",
-    "UpdatePrivateEndpointParametersRequestTypedDict",
-    "UpdatePrivateEndpointPricingGlobals",
-    "UpdatePrivateEndpointPricingGlobalsTypedDict",
-    "UpdatePrivateEndpointPricingRequest",
-    "UpdatePrivateEndpointPricingRequestTypedDict",
     "UpdatePrivateEndpointRequest",
     "UpdatePrivateEndpointRequestTypedDict",
     "UpdatePrivateProviderGlobals",
@@ -2797,14 +2777,6 @@ _dynamic_imports: dict[str, str] = {
     "UpdatePrivateEndpointGlobalsTypedDict": ".updateprivateendpoint",
     "UpdatePrivateEndpointRequest": ".updateprivateendpoint",
     "UpdatePrivateEndpointRequestTypedDict": ".updateprivateendpoint",
-    "UpdatePrivateEndpointParametersGlobals": ".updateprivateendpointparameters",
-    "UpdatePrivateEndpointParametersGlobalsTypedDict": ".updateprivateendpointparameters",
-    "UpdatePrivateEndpointParametersRequest": ".updateprivateendpointparameters",
-    "UpdatePrivateEndpointParametersRequestTypedDict": ".updateprivateendpointparameters",
-    "UpdatePrivateEndpointPricingGlobals": ".updateprivateendpointpricing",
-    "UpdatePrivateEndpointPricingGlobalsTypedDict": ".updateprivateendpointpricing",
-    "UpdatePrivateEndpointPricingRequest": ".updateprivateendpointpricing",
-    "UpdatePrivateEndpointPricingRequestTypedDict": ".updateprivateendpointpricing",
     "UpdatePrivateProviderGlobals": ".updateprivateprovider",
     "UpdatePrivateProviderGlobalsTypedDict": ".updateprivateprovider",
     "UpdatePrivateProviderRequest": ".updateprivateprovider",

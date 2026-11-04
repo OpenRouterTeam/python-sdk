@@ -55,8 +55,6 @@ class CreatePrivateEndpointRequestTypedDict(TypedDict):
     r"""Attest where this deployment processes data."""
     declared_zdr: NotRequired[Nullable[bool]]
     r"""Attest that this deployment retains no prompt or completion data."""
-    max_completion_tokens: NotRequired[int]
-    r"""Cap on completion tokens per request. Requests asking for more skip this endpoint, and the default output length stays within it. When omitted, the cap is copied from the public endpoint for the same model and provider, if there is one."""
     pricing: NotRequired[PrivateEndpointPricingTypedDict]
     r"""Negotiated per-token rates reported for requests routed to this endpoint."""
     settings: NotRequired[UpdatePrivateEndpointSettingsRequestTypedDict]
@@ -90,9 +88,6 @@ class CreatePrivateEndpointRequest(BaseModel):
     declared_zdr: OptionalNullable[bool] = UNSET
     r"""Attest that this deployment retains no prompt or completion data."""
 
-    max_completion_tokens: Optional[int] = None
-    r"""Cap on completion tokens per request. Requests asking for more skip this endpoint, and the default output length stays within it. When omitted, the cap is copied from the public endpoint for the same model and provider, if there is one."""
-
     pricing: Optional[PrivateEndpointPricing] = None
     r"""Negotiated per-token rates reported for requests routed to this endpoint."""
 
@@ -108,7 +103,6 @@ class CreatePrivateEndpointRequest(BaseModel):
                 "declared_parameters",
                 "declared_region",
                 "declared_zdr",
-                "max_completion_tokens",
                 "pricing",
                 "settings",
             ]
