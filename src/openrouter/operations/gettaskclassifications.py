@@ -73,7 +73,7 @@ class GetTaskClassificationsGlobals(BaseModel):
         return m
 
 
-GetTaskClassificationsWindow = Literal["7d",]
+Window = Literal["7d",]
 r"""Trailing time window for the classification data. Currently only `7d` (trailing 7 days) is supported."""
 
 
@@ -91,7 +91,7 @@ class GetTaskClassificationsRequestTypedDict(TypedDict):
     r"""Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
     """
-    window: NotRequired[GetTaskClassificationsWindow]
+    window: NotRequired[Window]
     r"""Trailing time window for the classification data. Currently only `7d` (trailing 7 days) is supported."""
 
 
@@ -125,7 +125,7 @@ class GetTaskClassificationsRequest(BaseModel):
     """
 
     window: Annotated[
-        Optional[GetTaskClassificationsWindow],
+        Optional[Window],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = "7d"
     r"""Trailing time window for the classification data. Currently only `7d` (trailing 7 days) is supported."""

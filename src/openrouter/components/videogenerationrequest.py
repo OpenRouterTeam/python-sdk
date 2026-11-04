@@ -3,12 +3,20 @@
 from __future__ import annotations
 from .frameimage import FrameImage, FrameImageTypedDict
 from .inputreference import InputReference, InputReferenceTypedDict
+from .providername import ProviderName
 from .traceconfig import TraceConfig, TraceConfigTypedDict
-from openrouter.types import BaseModel, UNSET_SENTINEL, UnrecognizedStr
+from openrouter.types import (
+    BaseModel,
+    Nullable,
+    OptionalNullable,
+    UNSET,
+    UNSET_SENTINEL,
+    UnrecognizedStr,
+)
 import pydantic
 from pydantic import model_serializer
 from typing import Any, Dict, List, Literal, Optional, Union
-from typing_extensions import Annotated, NotRequired, TypedDict
+from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
 VideoGenerationRequestAspectRatio = Union[
@@ -26,6 +34,26 @@ VideoGenerationRequestAspectRatio = Union[
     UnrecognizedStr,
 ]
 r"""Aspect ratio of the generated video"""
+
+
+VideoGenerationRequestIgnoreTypedDict = TypeAliasType(
+    "VideoGenerationRequestIgnoreTypedDict", Union[ProviderName, str]
+)
+
+
+VideoGenerationRequestIgnore = TypeAliasType(
+    "VideoGenerationRequestIgnore", Union[ProviderName, str]
+)
+
+
+VideoGenerationRequestOnlyTypedDict = TypeAliasType(
+    "VideoGenerationRequestOnlyTypedDict", Union[ProviderName, str]
+)
+
+
+VideoGenerationRequestOnly = TypeAliasType(
+    "VideoGenerationRequestOnly", Union[ProviderName, str]
+)
 
 
 class VideoGenerationRequestOptionsTypedDict(TypedDict):
@@ -728,29 +756,63 @@ class VideoGenerationRequestOptions(BaseModel):
         return m
 
 
-class VideoGenerationRequestProviderTypedDict(TypedDict):
-    r"""Provider-specific passthrough configuration"""
+VideoGenerationRequestOrderTypedDict = TypeAliasType(
+    "VideoGenerationRequestOrderTypedDict", Union[ProviderName, str]
+)
 
+
+VideoGenerationRequestOrder = TypeAliasType(
+    "VideoGenerationRequestOrder", Union[ProviderName, str]
+)
+
+
+class VideoGenerationRequestProviderTypedDict(TypedDict):
+    r"""Provider routing preferences (order, only, ignore) and provider-specific passthrough configuration"""
+
+    ignore: NotRequired[Nullable[List[VideoGenerationRequestIgnoreTypedDict]]]
+    r"""List of provider slugs to ignore. If provided, this list is merged with your account-wide ignored provider settings for this request."""
+    only: NotRequired[Nullable[List[VideoGenerationRequestOnlyTypedDict]]]
+    r"""List of provider slugs to allow. If provided, this list is merged with your account-wide allowed provider settings for this request."""
     options: NotRequired[VideoGenerationRequestOptionsTypedDict]
+    order: NotRequired[Nullable[List[VideoGenerationRequestOrderTypedDict]]]
+    r"""An ordered list of provider slugs. The router will attempt to use the first provider in the subset of this list that supports your requested model, and fall back to the next if it is unavailable. If no providers are available, the request will fail with an error message."""
 
 
 class VideoGenerationRequestProvider(BaseModel):
-    r"""Provider-specific passthrough configuration"""
+    r"""Provider routing preferences (order, only, ignore) and provider-specific passthrough configuration"""
+
+    ignore: OptionalNullable[List[VideoGenerationRequestIgnore]] = UNSET
+    r"""List of provider slugs to ignore. If provided, this list is merged with your account-wide ignored provider settings for this request."""
+
+    only: OptionalNullable[List[VideoGenerationRequestOnly]] = UNSET
+    r"""List of provider slugs to allow. If provided, this list is merged with your account-wide allowed provider settings for this request."""
 
     options: Optional[VideoGenerationRequestOptions] = None
 
+    order: OptionalNullable[List[VideoGenerationRequestOrder]] = UNSET
+    r"""An ordered list of provider slugs. The router will attempt to use the first provider in the subset of this list that supports your requested model, and fall back to the next if it is unavailable. If no providers are available, the request will fail with an error message."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["options"])
+        optional_fields = set(["ignore", "only", "options", "order"])
+        nullable_fields = set(["ignore", "only", "order"])
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
             if val != UNSET_SENTINEL:
-                if val is not None or k not in optional_fields:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
                     m[k] = val
 
         return m
@@ -793,7 +855,7 @@ class VideoGenerationRequestTypedDict(TypedDict):
     prompt: NotRequired[str]
     r"""Text prompt describing the video to generate. Optional for models that support generating a video from image input alone; required by all other models."""
     provider: NotRequired[VideoGenerationRequestProviderTypedDict]
-    r"""Provider-specific passthrough configuration"""
+    r"""Provider routing preferences (order, only, ignore) and provider-specific passthrough configuration"""
     resolution: NotRequired[VideoGenerationRequestResolution]
     r"""Resolution of the generated video"""
     seed: NotRequired[int]
@@ -841,7 +903,7 @@ class VideoGenerationRequest(BaseModel):
     r"""Text prompt describing the video to generate. Optional for models that support generating a video from image input alone; required by all other models."""
 
     provider: Optional[VideoGenerationRequestProvider] = None
-    r"""Provider-specific passthrough configuration"""
+    r"""Provider routing preferences (order, only, ignore) and provider-specific passthrough configuration"""
 
     resolution: Optional[VideoGenerationRequestResolution] = None
     r"""Resolution of the generated video"""
