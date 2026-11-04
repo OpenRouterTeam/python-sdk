@@ -4,7 +4,15 @@ from __future__ import annotations
 from .decisionsboxanswer import DecisionsBoxAnswer, DecisionsBoxAnswerTypedDict
 from .decisionschoiceanswer import DecisionsChoiceAnswer, DecisionsChoiceAnswerTypedDict
 from .decisionsnoulanswer import DecisionsNoulAnswer, DecisionsNoulAnswerTypedDict
+from .decisionsrefusalanswer import (
+    DecisionsRefusalAnswer,
+    DecisionsRefusalAnswerTypedDict,
+)
 from .decisionsscoreanswer import DecisionsScoreAnswer, DecisionsScoreAnswerTypedDict
+from .decisionsurlcitationannotation import (
+    DecisionsURLCitationAnnotation,
+    DecisionsURLCitationAnnotationTypedDict,
+)
 from .decisionsusageinputtokensdetails import (
     DecisionsUsageInputTokensDetails,
     DecisionsUsageInputTokensDetailsTypedDict,
@@ -14,20 +22,21 @@ from openrouter.types import BaseModel, UNSET_SENTINEL
 from openrouter.utils.unions import parse_open_union
 from pydantic import ConfigDict, model_serializer
 from pydantic.functional_validators import BeforeValidator
-from typing import Any, Dict, Literal, Optional, Union
+from typing import Any, Dict, List, Literal, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
 DecisionsResponseAnswersTypedDict = TypeAliasType(
     "DecisionsResponseAnswersTypedDict",
     Union[
+        DecisionsRefusalAnswerTypedDict,
         DecisionsNoulAnswerTypedDict,
         DecisionsBoxAnswerTypedDict,
         DecisionsChoiceAnswerTypedDict,
         DecisionsScoreAnswerTypedDict,
     ],
 )
-r"""A Decisions answer using a boolean, choice, score, or image bounding-box evaluation."""
+r"""A Decisions answer using a boolean, choice, score, or image bounding-box evaluation, or a refusal of that question."""
 
 
 class UnknownDecisionsResponseAnswers(BaseModel):
@@ -44,6 +53,7 @@ _DECISIONS_RESPONSE_ANSWERS_VARIANTS: dict[str, Any] = {
     "box": DecisionsBoxAnswer,
     "choice": DecisionsChoiceAnswer,
     "noul": DecisionsNoulAnswer,
+    "refusal": DecisionsRefusalAnswer,
     "score": DecisionsScoreAnswer,
 }
 
@@ -53,6 +63,7 @@ DecisionsResponseAnswers = Annotated[
         DecisionsBoxAnswer,
         DecisionsChoiceAnswer,
         DecisionsNoulAnswer,
+        DecisionsRefusalAnswer,
         DecisionsScoreAnswer,
         UnknownDecisionsResponseAnswers,
     ],
@@ -66,7 +77,7 @@ DecisionsResponseAnswers = Annotated[
         )
     ),
 ]
-r"""A Decisions answer using a boolean, choice, score, or image bounding-box evaluation."""
+r"""A Decisions answer using a boolean, choice, score, or image bounding-box evaluation, or a refusal of that question."""
 
 
 class DecisionsResponseUsageTypedDict(TypedDict):
@@ -108,6 +119,8 @@ class DecisionsResponseTypedDict(TypedDict):
     answers: Dict[str, DecisionsResponseAnswersTypedDict]
     model: str
     usage: DecisionsResponseUsageTypedDict
+    annotations: NotRequired[List[DecisionsURLCitationAnnotationTypedDict]]
+    r"""Sources for the request as a whole, when the provider returns them. Not attributed to individual answers."""
     id: NotRequired[str]
     provider: NotRequired[str]
 
@@ -119,13 +132,16 @@ class DecisionsResponse(BaseModel):
 
     usage: DecisionsResponseUsage
 
+    annotations: Optional[List[DecisionsURLCitationAnnotation]] = None
+    r"""Sources for the request as a whole, when the provider returns them. Not attributed to individual answers."""
+
     id: Optional[str] = None
 
     provider: Optional[str] = None
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["id", "provider"])
+        optional_fields = set(["annotations", "id", "provider"])
         serialized = handler(self)
         m = {}
 

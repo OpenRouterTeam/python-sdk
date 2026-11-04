@@ -2,7 +2,7 @@
 title: "DecisionsResponseAnswers"
 ---
 
-A Decisions answer using a boolean, choice, score, or image bounding-box evaluation.
+A Decisions answer using a boolean, choice, score, or image bounding-box evaluation, or a refusal of that question.
 
 
 ## Supported Types
@@ -23,6 +23,12 @@ value: components.DecisionsChoiceAnswer = /* values here */
 
 ```python
 value: components.DecisionsNoulAnswer = /* values here */
+```
+
+### `components.DecisionsRefusalAnswer`
+
+```python
+value: components.DecisionsRefusalAnswer = /* values here */
 ```
 
 ### `components.DecisionsScoreAnswer`
