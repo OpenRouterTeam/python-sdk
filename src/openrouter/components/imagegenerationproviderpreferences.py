@@ -141,6 +141,7 @@ class ImageGenerationProviderPreferencesOptionsTypedDict(TypedDict):
     ollama: NotRequired[Dict[str, Any]]
     open_inference: NotRequired[Dict[str, Any]]
     openai: NotRequired[Dict[str, Any]]
+    parallel: NotRequired[Dict[str, Any]]
     parasail: NotRequired[Dict[str, Any]]
     pareto_alpha: NotRequired[Dict[str, Any]]
     particle_ai: NotRequired[Dict[str, Any]]
@@ -438,6 +439,8 @@ class ImageGenerationProviderPreferencesOptions(BaseModel):
 
     openai: Optional[Dict[str, Any]] = None
 
+    parallel: Optional[Dict[str, Any]] = None
+
     parasail: Optional[Dict[str, Any]] = None
 
     pareto_alpha: Annotated[
@@ -665,6 +668,7 @@ class ImageGenerationProviderPreferencesOptions(BaseModel):
                 "ollama",
                 "open-inference",
                 "openai",
+                "parallel",
                 "parasail",
                 "pareto-alpha",
                 "particle-ai",

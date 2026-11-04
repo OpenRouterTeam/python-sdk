@@ -163,6 +163,7 @@ Provider = Union[
         "ollama",
         "open-inference",
         "openai",
+        "parallel",
         "parasail",
         "pareto-alpha",
         "particle-ai",

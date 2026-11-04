@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c48cf606-fb42-4a45-9c23-8f0555307828
 management:
-  docChecksum: 0e7f4e208ef7a971897ac382f8ea3b5f
+  docChecksum: 8ce92f492e11db3051616294d2fd0930
   docVersion: 1.0.0
   speakeasyVersion: 1.803.2
   generationVersion: 2.950.13
-  releaseVersion: 1.3.114
-  configChecksum: 79fd22df293f90d2c231dee9422ac15e
+  releaseVersion: 1.3.115
+  configChecksum: 70134424eff8d0f4d0283ae114f97dfe
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
 persistentEdits:
-  generation_id: e8345be0-7b1d-41e3-a257-b60b3ea1848c
-  pristine_commit_hash: 80975087d80a373d506d1a8d36724e6997b463f7
-  pristine_tree_hash: 745c3d46a2669248c5a69945307011df894fb3f6
+  generation_id: f91e431c-a9a3-4323-8272-a3f9611f91f2
+  pristine_commit_hash: 4791d334b1ffb575aea5773d7aaaa1252a8e459f
+  pristine_tree_hash: 5bd49186b1ff8fff3d919ca18e793e8600446ea5
 features:
   python:
     acceptHeaders: 3.0.0
@@ -1804,8 +1804,8 @@ trackedFiles:
     pristine_git_object: a00676abb210aeb3747aa6d6a0dfbe3e3ad42f76
   docs/components/byokproviderslug.mdx:
     id: 6ea70819f6d8
-    last_write_checksum: sha1:f50c7c97858a7c98d268b3fb80a62b28ee382eaa
-    pristine_git_object: e908e7c97c1fe1a19bc4c7a7efc7440d74c2a456
+    last_write_checksum: sha1:78aa7d07fbba570280aacadb3c64e956568bd5be
+    pristine_git_object: fa1124ca02f357b62a99c9e5c6b0511f54254d50
   docs/components/capabilitydescriptor.mdx:
     id: 34ac0e581d79
     last_write_checksum: sha1:62ee9ccab6cec4572383cef654997ab4106d4676
@@ -4092,8 +4092,8 @@ trackedFiles:
     pristine_git_object: 11f1471c8b6c04f52af89d74d6dec2e9d12c2d82
   docs/components/imagegenerationproviderpreferencesoptions.mdx:
     id: 32d5c4b3e06b
-    last_write_checksum: sha1:e617a8a5550c0be2f9b4cfbc8bfceb1cf668a9ac
-    pristine_git_object: 7c7a34ede1e7b84b7219b8f07c6f1be4f6c555c7
+    last_write_checksum: sha1:c8c83162bc08be1dbed20c6697417cac13e302f0
+    pristine_git_object: d4259dfa60c933dc2f1e3c19e782b0a3d3532d7e
   docs/components/imagegenerationproviderpreferencesorder.mdx:
     id: 0547877073f3
     last_write_checksum: sha1:3e890c691097373cc9a2d7e47c3594f56b57809c
@@ -6764,12 +6764,12 @@ trackedFiles:
     pristine_git_object: 70dcf1b583a3d202157814d8bd4f3c8f7811d0d9
   docs/components/providername.mdx:
     id: aa3a4904b228
-    last_write_checksum: sha1:f0b8c821a888bfd26ad1e0be8f8579dc8dcaf75e
-    pristine_git_object: 54141cb6a48355065a3dbdd86c23297ce0ffd883
+    last_write_checksum: sha1:7c82a73c20b461fab05b24b899caf9f281a86f81
+    pristine_git_object: c79e63882a9e185ff2c6667971b98a5216df6aba
   docs/components/provideroptions.mdx:
     id: 2697807524fe
-    last_write_checksum: sha1:b861ea62fc67dc896bfc0f9da089fda3407dda2c
-    pristine_git_object: b820500ec64c651d6e60e5110335774b66b09749
+    last_write_checksum: sha1:15311ce495d53957ee034e091233e88d3f848a0b
+    pristine_git_object: a346d1ba6ed3daa91c697a20db8cf91ef2bb0cb3
   docs/components/provideroverloadedresponseerrordata.mdx:
     id: dc500cd14889
     last_write_checksum: sha1:335ee4c9c2421a71205eb08871f1041cbe0c1fa7
@@ -6800,8 +6800,8 @@ trackedFiles:
     pristine_git_object: 15c816ec62505e984cc75801bdb88cf4271ab934
   docs/components/providerresponseprovidername.mdx:
     id: 2fc17b61e546
-    last_write_checksum: sha1:d6d0ad2fa1aa895e09ace8b58e1ffdd6fe9faa2d
-    pristine_git_object: c11b9ca9407633208606f98b166bebf334e42375
+    last_write_checksum: sha1:7787db8ec0056c1c7369c972f7ed291d021262f1
+    pristine_git_object: 0f0fe16af11e4fad8b5ad45ffa89f0b5f3a1c0e7
   docs/components/providersort.mdx:
     id: d73fa13eeb95
     last_write_checksum: sha1:b7e9e6842741e3433d705bd576f2ac5383f00134
@@ -8500,8 +8500,8 @@ trackedFiles:
     pristine_git_object: 67f56887bb4758559189e3e9e6123dff9a38df81
   docs/components/videogenerationrequestoptions.mdx:
     id: 1d67160e7e7a
-    last_write_checksum: sha1:b1f2a93a2c00f7b09d5e08a390d0ae054d2e45c2
-    pristine_git_object: 1f8f53d357ba3fb6bb0a355a032da603dd9b0c18
+    last_write_checksum: sha1:5178bb73428dee91884ac13b67fa33a0903059e3
+    pristine_git_object: bd8ddff7424b260e2f9cef4327d86055992736c4
   docs/components/videogenerationrequestprovider.mdx:
     id: d6424dd5de9d
     last_write_checksum: sha1:6b22c6a287de733a3d5f7b9bbf04ce4f57a5ef73
@@ -10312,8 +10312,8 @@ trackedFiles:
     pristine_git_object: edbbce3632fff19ba4cbd2677b6766805eaca140
   docs/operations/provider.mdx:
     id: c75b3bbeeaa0
-    last_write_checksum: sha1:ee42fd37239960ab45cb6ac4338a2a9b808617c3
-    pristine_git_object: 593e08c1de4830b9c8bb0200f2878aca4c00c72f
+    last_write_checksum: sha1:e6b9021e6ddbaf6d65a1396dd64bb8a6f42b3b5f
+    pristine_git_object: 7562f3a82c17f1910d7a661350e288b870c1bcec
   docs/operations/queryanalyticsdata1.mdx:
     id: 0e41beea77d0
     last_write_checksum: sha1:f9a349b4fee07f786180e94b45f92002bfae0e56
@@ -10736,8 +10736,8 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:8c3045c73332b1f2796a1d4cdacd190135990d3e
-    pristine_git_object: 4c308bfbf348b3bf4058eda95fcc6f3be9bf61c0
+    last_write_checksum: sha1:4200949e53d1b8d94b0f34ea843472ed769d905e
+    pristine_git_object: 214815fba3f4d0920b0ab5ef485b04d7631a01b0
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77f44b60b98bc126557ec27391f91dfba764bb54
@@ -10764,8 +10764,8 @@ trackedFiles:
     pristine_git_object: 86713cfea633e09d33b3d4e65281071fe20e6137
   src/openrouter/_version.py:
     id: d8d15ad6c586
-    last_write_checksum: sha1:5a0e4cf9976ffdfcea01bcd1f32f7b7513834159
-    pristine_git_object: ecaf3869eb66d8e0ede44dadbf7251985499373a
+    last_write_checksum: sha1:29836656f9ec1823f1061530886aef9eafa5ed6c
+    pristine_git_object: fec2ee72c8ef081f0e6f786e20efd3a2cccad023
   src/openrouter/alpha.py:
     id: 306c4d93308d
     last_write_checksum: sha1:80cc0f39649445431cc2247ed0e0765438467766
@@ -11544,8 +11544,8 @@ trackedFiles:
     pristine_git_object: 1b3f14e8e93ced25f87ee3ca73c01e2f32f42988
   src/openrouter/components/byokproviderslug.py:
     id: 6738a8516caf
-    last_write_checksum: sha1:a778a23d5ce24eb36508b2ab937a1b94a491c09f
-    pristine_git_object: db00338d86d459fa6bd2b9e005cd3076f9f06e3f
+    last_write_checksum: sha1:4351aca8d7ae2964f8d048f11cc6c557475bd9c1
+    pristine_git_object: d527e9f97567abf82acf91589816851c79eea50b
   src/openrouter/components/capabilitydescriptor.py:
     id: 368790a86f10
     last_write_checksum: sha1:a167551924ee82b4b5876a0ab698a45fe8c87a95
@@ -12516,8 +12516,8 @@ trackedFiles:
     pristine_git_object: fe042dd889e2f17d642f19b0d596cb3e53a7fce2
   src/openrouter/components/imagegenerationproviderpreferences.py:
     id: 100a82a54e2d
-    last_write_checksum: sha1:d9bd17c77afa854fb5c379aa5a5950bed7c4aa70
-    pristine_git_object: 374ba0dc8616b9b2384b4fbbcb2ef998a9b2f2c7
+    last_write_checksum: sha1:74c5a591b2124b340e74628a5a0e59da20cdb459
+    pristine_git_object: 010c0fa0e5022ab360e6b824d26e2c044682fd5c
   src/openrouter/components/imagegenerationrequest.py:
     id: f8291a7be9a0
     last_write_checksum: sha1:a2edac94246c81c7f86f92f1a66896eca2200965
@@ -13500,12 +13500,12 @@ trackedFiles:
     pristine_git_object: 170ae25c582bb8decd74e1c69bfa8353bd44e86d
   src/openrouter/components/providername.py:
     id: fcc722fa2fce
-    last_write_checksum: sha1:68c873e38b541ffa464d07f4cb11a78559eb1cf7
-    pristine_git_object: fd1cc17cf520d19519830e45a789f02062e5be85
+    last_write_checksum: sha1:a1690b4504574c699c746530fc9fdbb1cc56c34b
+    pristine_git_object: 482a05a9d5f5bc0b35f92139a202f4c7d111a777
   src/openrouter/components/provideroptions.py:
     id: 73dde6c8f359
-    last_write_checksum: sha1:1f7ff1c7ff643938d6b57233f874d395b32bfb7f
-    pristine_git_object: ba922170827e45e13f1eef7e47c6f5b712542442
+    last_write_checksum: sha1:29d6d2e590590df264d996e071c885d58995a779
+    pristine_git_object: 9c779f42a98c48575d64f94241dd250f48fd3b1c
   src/openrouter/components/provideroverloadedresponseerrordata.py:
     id: 5b693682570e
     last_write_checksum: sha1:b54682560ff95dad18d26f9aaf887f8f6e0e1f71
@@ -13516,8 +13516,8 @@ trackedFiles:
     pristine_git_object: 3ca57868fa02b7f5e4cd2c0fb0fbf0c6a92a8bee
   src/openrouter/components/providerresponse.py:
     id: ad3887be54c5
-    last_write_checksum: sha1:2850555b50280c61f078e9e7f5ad97649dba4380
-    pristine_git_object: cb84668ceb695d136dada6947a3af9e98df3a2ca
+    last_write_checksum: sha1:4f00257bb8266b0b20bdf8294542646a2ddf15f2
+    pristine_git_object: 9937130cf7d39a873eb17a311d33c01bafac4856
   src/openrouter/components/providersort.py:
     id: 348e382bf494
     last_write_checksum: sha1:57551507f95cd2e16ef995e1c13f859fd0726152
@@ -14244,8 +14244,8 @@ trackedFiles:
     pristine_git_object: c2f15eb53f14024dfd1e620c52a564bf4682854f
   src/openrouter/components/videogenerationrequest.py:
     id: 70e3c9ff288c
-    last_write_checksum: sha1:400e192367db8cb27870e0134f9dd0efef4310ba
-    pristine_git_object: d3e9819ac45f63d323bfa2b1a35947804a980d80
+    last_write_checksum: sha1:4b08caf596f7d9b474c3278b956425def293b85b
+    pristine_git_object: c3f8a1e992f384d8f864673c3c6e35d87813a32b
   src/openrouter/components/videogenerationresponse.py:
     id: 541f1321b072
     last_write_checksum: sha1:6ba68c4551af144f37be940f0222f434d156e275
@@ -14904,8 +14904,8 @@ trackedFiles:
     pristine_git_object: 1dfdcafa35e010924f76a24ed007796e8ad40254
   src/openrouter/operations/listbyokkeys.py:
     id: b6dd42b3e05f
-    last_write_checksum: sha1:00c18c0d453a24b0a1243645ac026f039a203c11
-    pristine_git_object: 0b25b14166b4c3263de0ffb1b00bb0b220bd03c9
+    last_write_checksum: sha1:c47a34884313b394b949719512cb61ba1ccf123c
+    pristine_git_object: 1b25dfa9444abf490819a711e99a3c471823bf15
   src/openrouter/operations/listcontainerfiles.py:
     id: 7a30b9291c76
     last_write_checksum: sha1:937c9fb30fd651d28793340285b3389518b26d96
@@ -19830,8 +19830,4 @@ examples:
         "529":
           application/json: {"error": {"code": 529, "message": "Provider returned error"}}
 examplesVersion: 1.0.2
-releaseNotes: |
-  ## Python SDK Changes:
-  * `open_router.private_endpoints.create()`:  `request.max_completion_tokens` **Removed** (Breaking ⚠️)
-  * `open_router.private_endpoints.update_parameters()`: **Removed** (Breaking ⚠️)
-  * `open_router.private_endpoints.update_pricing()`: **Removed** (Breaking ⚠️)
+releaseNotes: "## Python SDK Changes:\n* `open_router.alpha.decisions.create()`:  `request.provider` **Changed**\n* `open_router.alpha.extractions.create()`:  `request.provider` **Changed**\n* `open_router.tts.create_speech()`: \n  *  `request.provider.options.parallel` **Added**\n* `open_router.stt.create_transcription()`: \n  *  `request.provider.options.parallel` **Added**\n* `open_router.batch.create_batches()`: \n  *  `request.provider.only[].union(ProviderName).enum(parallel)` **Added**\n* `open_router.byok.list()`: \n  *  `request.provider` **Changed**\n  *  `response.data[].provider.enum(parallel)` **Added**\n* `open_router.byok.create()`: \n  *  `request.provider.enum(parallel)` **Added**\n  *  `response.data.provider.enum(parallel)` **Added**\n* `open_router.byok.get()`:  `response.data.provider.enum(parallel)` **Added**\n* `open_router.byok.update()`:  `response.data.provider.enum(parallel)` **Added**\n* `open_router.embeddings.generate()`:  `request.provider` **Changed**\n* `open_router.endpoints.list_zdr_endpoints()`:  `response.data[].provider_name.enum(parallel)` **Added**\n* `open_router.endpoints.list()`:  `response.data.endpoints[].provider_name.enum(parallel)` **Added**\n* `open_router.generations.get_generation()`:  `response.data.provider_responses[].provider_name.enum(parallel)` **Added**\n* `open_router.presets.create_presets_chat_completions()`:  `request.provider` **Changed**\n* `open_router.presets.create_presets_messages()`:  `request.provider` **Changed**\n* `open_router.presets.create_presets_responses()`:  `request.provider` **Changed**\n* `open_router.rerank.rerank()`:  `request.provider` **Changed**\n* `open_router.system_one.create()`:  `request.provider` **Changed**\n* `open_router.video_generation.generate()`: \n  *  `request.provider.options.parallel` **Added**\n"

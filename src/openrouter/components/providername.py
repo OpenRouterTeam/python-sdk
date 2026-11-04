@@ -86,6 +86,7 @@ ProviderName = Union[
         "Ollama",
         "OpenAI",
         "OpenInference",
+        "Parallel",
         "Parasail",
         "ParetoAlpha",
         "Particle AI",
