@@ -144,6 +144,8 @@ class ChatRequestReasoningTypedDict(TypedDict):
 
     effort: NotRequired[Nullable[ChatRequestEffort]]
     r"""Constrains effort on reasoning for reasoning models"""
+    max_tokens: NotRequired[Nullable[int]]
+    r"""Maximum number of tokens the model may spend on reasoning, for models that take a reasoning token budget instead of an effort level. Cannot be combined with `reasoning.effort` or the top-level `reasoning_effort`: a request that sets both is rejected with \"Only one of \"reasoning.effort\" and \"reasoning.max_tokens\" can be specified\"."""
     summary: NotRequired[Nullable[ChatReasoningSummaryVerbosityEnum]]
 
 
@@ -153,12 +155,15 @@ class ChatRequestReasoning(BaseModel):
     effort: OptionalNullable[ChatRequestEffort] = UNSET
     r"""Constrains effort on reasoning for reasoning models"""
 
+    max_tokens: OptionalNullable[int] = UNSET
+    r"""Maximum number of tokens the model may spend on reasoning, for models that take a reasoning token budget instead of an effort level. Cannot be combined with `reasoning.effort` or the top-level `reasoning_effort`: a request that sets both is rejected with \"Only one of \"reasoning.effort\" and \"reasoning.max_tokens\" can be specified\"."""
+
     summary: OptionalNullable[ChatReasoningSummaryVerbosityEnum] = UNSET
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["effort", "summary"])
-        nullable_fields = set(["effort", "summary"])
+        optional_fields = set(["effort", "max_tokens", "summary"])
+        nullable_fields = set(["effort", "max_tokens", "summary"])
         serialized = handler(self)
         m = {}
 

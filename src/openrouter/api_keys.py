@@ -2,12 +2,13 @@
 
 from .basesdk import BaseSDK
 from datetime import datetime
+from jsonpath import JSONPath
 from openrouter import components, errors, operations, utils
 from openrouter._hooks import HookContext
 from openrouter.types import OptionalNullable, UNSET
 from openrouter.utils import get_security_from_env
 from openrouter.utils.unmarshal_json_response import unmarshal_json_response
-from typing import Any, Mapping, Optional, Union
+from typing import Any, Awaitable, Dict, List, Mapping, Optional, Union
 
 
 class APIKeys(BaseSDK):
@@ -267,7 +268,7 @@ class APIKeys(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> operations.ListResponse:
+    ) -> Optional[operations.ListResponse]:
         r"""List API keys
 
         List all API keys for the authenticated user. [Management key](/docs/guides/overview/auth/management-api-keys) required.
@@ -359,9 +360,38 @@ class APIKeys(BaseSDK):
             retry_config=retry_config,
         )
 
+        def next_func() -> Optional[operations.ListResponse]:
+            body = utils.unmarshal_json(http_res.text, Union[Dict[Any, Any], List[Any]])
+
+            offset = request.offset if isinstance(request.offset, int) else 0
+
+            if not http_res.text:
+                return None
+            results = JSONPath("$.data").parse(body)
+            if len(results) == 0 or len(results[0]) == 0:
+                return None
+            next_offset = offset + len(results[0])
+
+            return self.list(
+                http_referer=http_referer,
+                x_open_router_title=x_open_router_title,
+                x_open_router_categories=x_open_router_categories,
+                include_disabled=include_disabled,
+                include_expired=include_expired,
+                offset=next_offset,
+                workspace_id=workspace_id,
+                retries=retries,
+                server_url=server_url,
+                timeout_ms=timeout_ms,
+                http_headers=http_headers,
+            )
+
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(operations.ListResponse, http_res)
+            return operations.ListResponse(
+                result=unmarshal_json_response(operations.ListResponseBody, http_res),
+                next=next_func,
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.BadRequestResponseErrorData, http_res
@@ -419,7 +449,7 @@ class APIKeys(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> operations.ListResponse:
+    ) -> Optional[operations.ListResponse]:
         r"""List API keys
 
         List all API keys for the authenticated user. [Management key](/docs/guides/overview/auth/management-api-keys) required.
@@ -511,9 +541,41 @@ class APIKeys(BaseSDK):
             retry_config=retry_config,
         )
 
+        def next_func() -> Awaitable[Optional[operations.ListResponse]]:
+            body = utils.unmarshal_json(http_res.text, Union[Dict[Any, Any], List[Any]])
+
+            async def empty_result():
+                return None
+
+            offset = request.offset if isinstance(request.offset, int) else 0
+
+            if not http_res.text:
+                return empty_result()
+            results = JSONPath("$.data").parse(body)
+            if len(results) == 0 or len(results[0]) == 0:
+                return empty_result()
+            next_offset = offset + len(results[0])
+
+            return self.list_async(
+                http_referer=http_referer,
+                x_open_router_title=x_open_router_title,
+                x_open_router_categories=x_open_router_categories,
+                include_disabled=include_disabled,
+                include_expired=include_expired,
+                offset=next_offset,
+                workspace_id=workspace_id,
+                retries=retries,
+                server_url=server_url,
+                timeout_ms=timeout_ms,
+                http_headers=http_headers,
+            )
+
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(operations.ListResponse, http_res)
+            return operations.ListResponse(
+                result=unmarshal_json_response(operations.ListResponseBody, http_res),
+                next=next_func,
+            )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
                 errors.BadRequestResponseErrorData, http_res
