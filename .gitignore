@@ -13,9 +13,6 @@ __pycache__/
 *.py[cod]
 *.egg-info/
 *.egg
-# Speakeasy generation artifacts (generated in OSS repo, not here)
-.speakeasy/*.lock
-.speakeasy/*.openapi.yaml
 # Environment
 .env
 .env.local
