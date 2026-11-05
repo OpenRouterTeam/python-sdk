@@ -2,7 +2,7 @@
 title: "ImageGenerationRequestOutputFormat"
 ---
 
-Encoding of the returned image bytes. Most models produce raster formats (png, jpeg, webp). SVG is supported by vectorization models (e.g. Quiver) — the SVG markup is UTF-8 base64-encoded in `b64_json`.
+Encoding of the returned image bytes. Most models produce raster formats (png, jpeg, webp). SVG is supported by vectorization models (e.g. Quiver) — the SVG markup is UTF-8 base64-encoded in `b64_json`. GIF produces an animation on models that support it (OpenAI gpt-image-2.6; see `frame_count`).
 
 ## Example Usage
 
@@ -22,3 +22,4 @@ This is an open enum. Unrecognized values will not fail type checks.
 - `"jpeg"`
 - `"webp"`
 - `"svg"`
+- `"gif"`

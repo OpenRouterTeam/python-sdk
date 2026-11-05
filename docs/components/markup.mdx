@@ -1,0 +1,13 @@
+---
+title: "Markup"
+---
+
+A transparent PNG overlay (arrows, circles, annotations) with the same dimensions as the first reference image, as a base64 data URL or HTTP(S) URL, guiding where an edit applies. Image-to-image requests only; honored by models with markup-guided editing (OpenAI gpt-image-2.6) and ignored otherwise.
+
+
+## Fields
+
+| Field                                                                                        | Type                                                                                         | Required                                                                                     | Description                                                                                  |
+| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `image_url`                                                                                  | [components.ImageGenerationRequestImageURL](../components/imagegenerationrequestimageurl.mdx) | ✔️                                                                           | N/A                                                                                          |
+| `type`                                                                                       | [components.ImageGenerationRequestType](../components/imagegenerationrequesttype.mdx)         | ✔️                                                                           | N/A                                                                                          |

@@ -58,16 +58,43 @@ ImageGenerationRequestBackground = Union[
 r"""Background treatment. `transparent` requires an output_format that supports alpha (png or webp)."""
 
 
+class ImageGenerationRequestImageURLTypedDict(TypedDict):
+    url: str
+
+
+class ImageGenerationRequestImageURL(BaseModel):
+    url: str
+
+
+ImageGenerationRequestType = Literal["image_url",]
+
+
+class MarkupTypedDict(TypedDict):
+    r"""A transparent PNG overlay (arrows, circles, annotations) with the same dimensions as the first reference image, as a base64 data URL or HTTP(S) URL, guiding where an edit applies. Image-to-image requests only; honored by models with markup-guided editing (OpenAI gpt-image-2.6) and ignored otherwise."""
+
+    image_url: ImageGenerationRequestImageURLTypedDict
+    type: ImageGenerationRequestType
+
+
+class Markup(BaseModel):
+    r"""A transparent PNG overlay (arrows, circles, annotations) with the same dimensions as the first reference image, as a base64 data URL or HTTP(S) URL, guiding where an edit applies. Image-to-image requests only; honored by models with markup-guided editing (OpenAI gpt-image-2.6) and ignored otherwise."""
+
+    image_url: ImageGenerationRequestImageURL
+
+    type: ImageGenerationRequestType
+
+
 ImageGenerationRequestOutputFormat = Union[
     Literal[
         "png",
         "jpeg",
         "webp",
         "svg",
+        "gif",
     ],
     UnrecognizedStr,
 ]
-r"""Encoding of the returned image bytes. Most models produce raster formats (png, jpeg, webp). SVG is supported by vectorization models (e.g. Quiver) — the SVG markup is UTF-8 base64-encoded in `b64_json`."""
+r"""Encoding of the returned image bytes. Most models produce raster formats (png, jpeg, webp). SVG is supported by vectorization models (e.g. Quiver) — the SVG markup is UTF-8 base64-encoded in `b64_json`. GIF produces an animation on models that support it (OpenAI gpt-image-2.6; see `frame_count`)."""
 
 
 ImageGenerationRequestQuality = Union[
@@ -109,14 +136,20 @@ class ImageGenerationRequestTypedDict(TypedDict):
     r"""Normalized aspect ratio of the generated image. Providers clamp to their supported subset."""
     background: NotRequired[ImageGenerationRequestBackground]
     r"""Background treatment. `transparent` requires an output_format that supports alpha (png or webp)."""
+    frame_count: NotRequired[int]
+    r"""Number of animation frames (2-64) when `output_format` is `gif`. Only honored by models that produce animations (OpenAI gpt-image-2.6, generations only); ignored otherwise."""
+    frame_duration_ms: NotRequired[int]
+    r"""Display time of each animation frame in milliseconds (20-2000) when `output_format` is `gif`. Ignored by models that do not produce animations."""
     input_references: NotRequired[List[ContentPartImageTypedDict]]
     r"""Reference images to guide image-to-image generation, as base64 data URLs or HTTP(S) URLs."""
+    markup: NotRequired[MarkupTypedDict]
+    r"""A transparent PNG overlay (arrows, circles, annotations) with the same dimensions as the first reference image, as a base64 data URL or HTTP(S) URL, guiding where an edit applies. Image-to-image requests only; honored by models with markup-guided editing (OpenAI gpt-image-2.6) and ignored otherwise."""
     n: NotRequired[int]
     r"""Upper bound on the number of images to generate (1-10). Providers may return fewer images, and providers that only support single-image generation reject n > 1."""
     output_compression: NotRequired[int]
     r"""Compression level (0-100) for jpeg/webp output. Ignored by providers without a compression knob; providers that honor it may reject it with other output formats (e.g. OpenAI requires output_format \"jpeg\" or \"webp\")."""
     output_format: NotRequired[ImageGenerationRequestOutputFormat]
-    r"""Encoding of the returned image bytes. Most models produce raster formats (png, jpeg, webp). SVG is supported by vectorization models (e.g. Quiver) — the SVG markup is UTF-8 base64-encoded in `b64_json`."""
+    r"""Encoding of the returned image bytes. Most models produce raster formats (png, jpeg, webp). SVG is supported by vectorization models (e.g. Quiver) — the SVG markup is UTF-8 base64-encoded in `b64_json`. GIF produces an animation on models that support it (OpenAI gpt-image-2.6; see `frame_count`)."""
     provider: NotRequired[ImageGenerationProviderPreferencesTypedDict]
     r"""Provider routing preferences and provider-specific passthrough configuration."""
     quality: NotRequired[ImageGenerationRequestQuality]
@@ -152,8 +185,17 @@ class ImageGenerationRequest(BaseModel):
     background: Optional[ImageGenerationRequestBackground] = None
     r"""Background treatment. `transparent` requires an output_format that supports alpha (png or webp)."""
 
+    frame_count: Optional[int] = None
+    r"""Number of animation frames (2-64) when `output_format` is `gif`. Only honored by models that produce animations (OpenAI gpt-image-2.6, generations only); ignored otherwise."""
+
+    frame_duration_ms: Optional[int] = None
+    r"""Display time of each animation frame in milliseconds (20-2000) when `output_format` is `gif`. Ignored by models that do not produce animations."""
+
     input_references: Optional[List[ContentPartImage]] = None
     r"""Reference images to guide image-to-image generation, as base64 data URLs or HTTP(S) URLs."""
+
+    markup: Optional[Markup] = None
+    r"""A transparent PNG overlay (arrows, circles, annotations) with the same dimensions as the first reference image, as a base64 data URL or HTTP(S) URL, guiding where an edit applies. Image-to-image requests only; honored by models with markup-guided editing (OpenAI gpt-image-2.6) and ignored otherwise."""
 
     n: Optional[int] = None
     r"""Upper bound on the number of images to generate (1-10). Providers may return fewer images, and providers that only support single-image generation reject n > 1."""
@@ -162,7 +204,7 @@ class ImageGenerationRequest(BaseModel):
     r"""Compression level (0-100) for jpeg/webp output. Ignored by providers without a compression knob; providers that honor it may reject it with other output formats (e.g. OpenAI requires output_format \"jpeg\" or \"webp\")."""
 
     output_format: Optional[ImageGenerationRequestOutputFormat] = None
-    r"""Encoding of the returned image bytes. Most models produce raster formats (png, jpeg, webp). SVG is supported by vectorization models (e.g. Quiver) — the SVG markup is UTF-8 base64-encoded in `b64_json`."""
+    r"""Encoding of the returned image bytes. Most models produce raster formats (png, jpeg, webp). SVG is supported by vectorization models (e.g. Quiver) — the SVG markup is UTF-8 base64-encoded in `b64_json`. GIF produces an animation on models that support it (OpenAI gpt-image-2.6; see `frame_count`)."""
 
     provider: Optional[ImageGenerationProviderPreferences] = None
     r"""Provider routing preferences and provider-specific passthrough configuration."""
@@ -197,7 +239,10 @@ class ImageGenerationRequest(BaseModel):
             [
                 "aspect_ratio",
                 "background",
+                "frame_count",
+                "frame_duration_ms",
                 "input_references",
+                "markup",
                 "n",
                 "output_compression",
                 "output_format",
