@@ -132,6 +132,7 @@ ProviderResponseProviderName = Union[
         "Reka",
         "Relace",
         "Respan",
+        "River",
         "Sail Research",
         "Sakana AI",
         "SambaNova",

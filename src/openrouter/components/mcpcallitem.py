@@ -8,10 +8,23 @@ from openrouter.types import (
     OptionalNullable,
     UNSET,
     UNSET_SENTINEL,
+    UnrecognizedStr,
 )
 from pydantic import model_serializer
-from typing import Literal
+from typing import Literal, Optional, Union
 from typing_extensions import NotRequired, TypedDict
+
+
+McpCallItemStatus = Union[
+    Literal[
+        "in_progress",
+        "completed",
+        "incomplete",
+        "calling",
+        "failed",
+    ],
+    UnrecognizedStr,
+]
 
 
 McpCallItemType = Literal["mcp_call",]
@@ -25,9 +38,11 @@ class McpCallItemTypedDict(TypedDict):
     name: str
     server_label: str
     type: McpCallItemType
+    approval_request_id: NotRequired[Nullable[str]]
     error: NotRequired[Nullable[McpToolCallErrorTypedDict]]
     r"""Error from an MCP tool call, either a plain message or a structured error"""
     output: NotRequired[Nullable[str]]
+    status: NotRequired[McpCallItemStatus]
 
 
 class McpCallItem(BaseModel):
@@ -43,15 +58,19 @@ class McpCallItem(BaseModel):
 
     type: McpCallItemType
 
+    approval_request_id: OptionalNullable[str] = UNSET
+
     error: OptionalNullable[McpToolCallError] = UNSET
     r"""Error from an MCP tool call, either a plain message or a structured error"""
 
     output: OptionalNullable[str] = UNSET
 
+    status: Optional[McpCallItemStatus] = None
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["error", "output"])
-        nullable_fields = set(["error", "output"])
+        optional_fields = set(["approval_request_id", "error", "output", "status"])
+        nullable_fields = set(["approval_request_id", "error", "output"])
         serialized = handler(self)
         m = {}
 

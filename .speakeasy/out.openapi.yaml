@@ -276,6 +276,7 @@ components:
                 required:
                   - 'type'
                 type: 'object'
+              - $ref: '#/components/schemas/McpServerTool_OpenRouter'
           type: 'array'
         type:
           enum:
@@ -677,6 +678,9 @@ components:
             file_search_call: '#/components/schemas/OutputItemFileSearchCall'
             function_call: '#/components/schemas/OutputItemFunctionCall'
             image_generation_call: '#/components/schemas/OutputItemImageGenerationCall'
+            mcp_approval_request: '#/components/schemas/OutputItemMcpApprovalRequest'
+            mcp_call: '#/components/schemas/OutputItemMcpCall'
+            mcp_list_tools: '#/components/schemas/OutputItemMcpListTools'
             message: '#/components/schemas/OutputMessage'
             reasoning: '#/components/schemas/OutputItemReasoning'
             web_search_call: '#/components/schemas/OutputItemWebSearchCall'
@@ -692,6 +696,9 @@ components:
           - $ref: '#/components/schemas/OutputItemApplyPatchCall'
           - $ref: '#/components/schemas/OutputItemCodeInterpreterCall'
           - $ref: '#/components/schemas/OutputItemCompaction'
+          - $ref: '#/components/schemas/OutputItemMcpListTools'
+          - $ref: '#/components/schemas/OutputItemMcpCall'
+          - $ref: '#/components/schemas/OutputItemMcpApprovalRequest'
       type: 'array'
     AlignmentRule:
       additionalProperties: false
@@ -4876,6 +4883,9 @@ components:
                 file_search_call: '#/components/schemas/OutputItemFileSearchCall'
                 function_call: '#/components/schemas/OutputItemFunctionCall'
                 image_generation_call: '#/components/schemas/OutputItemImageGenerationCall'
+                mcp_approval_request: '#/components/schemas/OutputItemMcpApprovalRequest'
+                mcp_call: '#/components/schemas/OutputItemMcpCall'
+                mcp_list_tools: '#/components/schemas/OutputItemMcpListTools'
                 message: '#/components/schemas/OutputMessage'
                 reasoning: '#/components/schemas/OutputItemReasoning'
                 web_search_call: '#/components/schemas/OutputItemWebSearchCall'
@@ -4891,6 +4901,9 @@ components:
               - $ref: '#/components/schemas/OutputItemApplyPatchCall'
               - $ref: '#/components/schemas/OutputItemCodeInterpreterCall'
               - $ref: '#/components/schemas/OutputItemCompaction'
+              - $ref: '#/components/schemas/OutputItemMcpListTools'
+              - $ref: '#/components/schemas/OutputItemMcpCall'
+              - $ref: '#/components/schemas/OutputItemMcpApprovalRequest'
           type: 'array'
         output_text:
           type: 'string'
@@ -7130,6 +7143,7 @@ components:
         - 'reka'
         - 'relace'
         - 'respan'
+        - 'river'
         - 'runway'
         - 'sail-research'
         - 'sakana'
@@ -10681,6 +10695,7 @@ components:
               - 'openrouter:datetime'
               - 'openrouter:fusion'
               - 'openrouter:image_generation'
+              - 'openrouter:mcp'
               - 'openrouter:experimental__search_models'
               - 'openrouter:shell'
               - 'openrouter:subagent'
@@ -11133,6 +11148,7 @@ components:
               type: 'object'
             - items: {}
               type: 'array'
+            - type: 'null'
           description: 'A plain string, or a JSON object or array of structured guidance.'
         type:
           enum:
@@ -11140,7 +11156,6 @@ components:
           type: 'string'
       required:
         - 'type'
-        - 'instructions'
         - 'criteria'
       type: 'object'
     DecisionsImageAsset:
@@ -11190,6 +11205,7 @@ components:
                   type: 'object'
                 - items: {}
                   type: 'array'
+                - type: 'null'
               description: 'A plain string, or a JSON object or array of structured guidance.'
             'true':
               anyOf:
@@ -11198,10 +11214,8 @@ components:
                   type: 'object'
                 - items: {}
                   type: 'array'
+                - type: 'null'
               description: 'A plain string, or a JSON object or array of structured guidance.'
-          required:
-            - 'true'
-            - 'false'
           type: 'object'
         instructions:
           anyOf:
@@ -11210,6 +11224,7 @@ components:
               type: 'object'
             - items: {}
               type: 'array'
+            - type: 'null'
           description: 'A plain string, or a JSON object or array of structured guidance.'
         type:
           enum:
@@ -11217,7 +11232,6 @@ components:
           type: 'string'
       required:
         - 'type'
-        - 'instructions'
       type: 'object'
     DecisionsRefusalAnswer:
       description: 'The provider declined to answer this question; no value or probabilities are returned. Other questions in the same request can still have answers.'
@@ -11383,6 +11397,7 @@ components:
               type: 'object'
             - items: {}
               type: 'array'
+            - type: 'null'
           description: 'A plain string, or a JSON object or array of structured guidance.'
         type:
           enum:
@@ -11390,7 +11405,6 @@ components:
           type: 'string'
       required:
         - 'type'
-        - 'instructions'
         - 'criteria'
       type: 'object'
     DecisionsUrlCitationAnnotation:
@@ -15473,7 +15487,7 @@ components:
           type: 'string'
           x-speakeasy-unknown-values: allow
         frame_count:
-          description: 'Number of animation frames (2-64) when `output_format` is `gif`. Only honored by models that produce animations (OpenAI gpt-image-2.6, generations only); ignored otherwise.'
+          description: 'Number of animation frames (2-64) when `output_format` is `gif`. Only honored by models that produce animations; each accepts its own range and rejects values outside it. Ignored otherwise.'
           example: 8
           type: 'integer'
         frame_duration_ms:
@@ -17724,6 +17738,10 @@ components:
         server_label: 'database-server'
         type: 'mcp_call'
       properties:
+        approval_request_id:
+          type:
+            - 'string'
+            - 'null'
         arguments:
           type: 'string'
         error:
@@ -17738,6 +17756,15 @@ components:
             - 'null'
         server_label:
           type: 'string'
+        status:
+          enum:
+            - 'in_progress'
+            - 'completed'
+            - 'incomplete'
+            - 'calling'
+            - 'failed'
+          type: 'string'
+          x-speakeasy-unknown-values: allow
         type:
           enum:
             - 'mcp_call'
@@ -17913,6 +17940,7 @@ components:
         - 'message'
       type: 'object'
     McpServerTool:
+      additionalProperties: {}
       description: 'MCP (Model Context Protocol) tool configuration'
       example:
         server_label: 'my-server'
@@ -17924,7 +17952,8 @@ components:
             - items:
                 type: 'string'
               type: 'array'
-            - properties:
+            - additionalProperties: {}
+              properties:
                 read_only:
                   type: 'boolean'
                 tool_names:
@@ -17936,17 +17965,7 @@ components:
         authorization:
           type: 'string'
         connector_id:
-          enum:
-            - 'connector_dropbox'
-            - 'connector_gmail'
-            - 'connector_googlecalendar'
-            - 'connector_googledrive'
-            - 'connector_microsoftteams'
-            - 'connector_outlookcalendar'
-            - 'connector_outlookemail'
-            - 'connector_sharepoint'
           type: 'string'
-          x-speakeasy-unknown-values: allow
         headers:
           additionalProperties:
             type: 'string'
@@ -17955,16 +17974,23 @@ components:
             - 'null'
         require_approval:
           anyOf:
-            - properties:
+            - additionalProperties: {}
+              properties:
                 always:
+                  additionalProperties: {}
                   properties:
+                    read_only:
+                      type: 'boolean'
                     tool_names:
                       items:
                         type: 'string'
                       type: 'array'
                   type: 'object'
                 never:
+                  additionalProperties: {}
                   properties:
+                    read_only:
+                      type: 'boolean'
                     tool_names:
                       items:
                         type: 'string'
@@ -17990,6 +18016,106 @@ components:
           type: 'string'
       required:
         - 'type'
+        - 'server_label'
+      type: 'object'
+    McpServerTool_OpenRouter:
+      description: 'OpenRouter built-in server tool: connects the model to a remote MCP server and runs its tools during the response'
+      example:
+        parameters:
+          server_label: 'huggingface'
+          server_url: 'https://huggingface.co/mcp'
+        type: 'openrouter:mcp'
+      properties:
+        parameters:
+          $ref: '#/components/schemas/McpServerToolParameters'
+        type:
+          enum:
+            - 'openrouter:mcp'
+          type: 'string'
+      required:
+        - 'type'
+        - 'parameters'
+      type: 'object'
+    McpServerToolParameters:
+      description: 'Configuration for a remote MCP server tool.'
+      example:
+        server_label: 'huggingface'
+        server_url: 'https://huggingface.co/mcp'
+      properties:
+        allowed_tools:
+          anyOf:
+            - items:
+                type: 'string'
+              type: 'array'
+            - additionalProperties: {}
+              properties:
+                read_only:
+                  type: 'boolean'
+                tool_names:
+                  items:
+                    type: 'string'
+                  type: 'array'
+              type: 'object'
+            - type: 'null'
+          description: 'Restrict the tools exposed to the model to this list or filter.'
+        authorization:
+          description: 'OAuth access token sent as the Authorization bearer to the server.'
+          type: 'string'
+        connector_id:
+          description: 'Provider-defined connector identifier, forwarded as written to providers that run MCP themselves.'
+          type: 'string'
+        headers:
+          additionalProperties:
+            type: 'string'
+          description: 'Extra headers sent on every request to the server.'
+          type:
+            - 'object'
+            - 'null'
+        require_approval:
+          anyOf:
+            - additionalProperties: {}
+              properties:
+                always:
+                  additionalProperties: {}
+                  properties:
+                    read_only:
+                      type: 'boolean'
+                    tool_names:
+                      items:
+                        type: 'string'
+                      type: 'array'
+                  type: 'object'
+                never:
+                  additionalProperties: {}
+                  properties:
+                    read_only:
+                      type: 'boolean'
+                    tool_names:
+                      items:
+                        type: 'string'
+                      type: 'array'
+                  type: 'object'
+              type: 'object'
+            - enum:
+                - 'always'
+              type: 'string'
+            - enum:
+                - 'never'
+              type: 'string'
+            - type: 'null'
+          description: 'Approval policy for tool calls. Defaults to always: a call that needs approval ends the response with an mcp_approval_request item, answered with an mcp_approval_response on the next request.'
+        server_description:
+          description: 'Extra context about the server, shown to the model.'
+          type: 'string'
+        server_label:
+          description: 'Label for this MCP server, used in mcp_list_tools and mcp_call items.'
+          example: 'huggingface'
+          type: 'string'
+        server_url:
+          description: 'URL of the remote MCP server (streamable HTTP).'
+          example: 'https://huggingface.co/mcp'
+          type: 'string'
+      required:
         - 'server_label'
       type: 'object'
     McpToolCallError:
@@ -19557,6 +19683,7 @@ components:
                 - 'Reka'
                 - 'Relace'
                 - 'Respan'
+                - 'River'
                 - 'Sail Research'
                 - 'Sakana AI'
                 - 'SambaNova'
@@ -23831,6 +23958,7 @@ components:
           required:
             - 'type'
           type: 'object'
+        - $ref: '#/components/schemas/ToolChoiceMcp'
       example: 'auto'
     OpenAIResponsesTruncation:
       enum:
@@ -25374,6 +25502,9 @@ components:
               file_search_call: '#/components/schemas/OutputItemFileSearchCall'
               function_call: '#/components/schemas/OutputItemFunctionCall'
               image_generation_call: '#/components/schemas/OutputItemImageGenerationCall'
+              mcp_approval_request: '#/components/schemas/OutputItemMcpApprovalRequest'
+              mcp_call: '#/components/schemas/OutputItemMcpCall'
+              mcp_list_tools: '#/components/schemas/OutputItemMcpListTools'
               message: '#/components/schemas/OutputMessage'
               reasoning: '#/components/schemas/OutputItemReasoning'
               web_search_call: '#/components/schemas/OutputItemWebSearchCall'
@@ -25389,6 +25520,9 @@ components:
             - $ref: '#/components/schemas/OutputItemApplyPatchCall'
             - $ref: '#/components/schemas/OutputItemCodeInterpreterCall'
             - $ref: '#/components/schemas/OutputItemCompaction'
+            - $ref: '#/components/schemas/OutputItemMcpListTools'
+            - $ref: '#/components/schemas/OutputItemMcpCall'
+            - $ref: '#/components/schemas/OutputItemMcpApprovalRequest'
         output_index:
           type: 'integer'
         sequence_number:
@@ -25588,6 +25722,9 @@ components:
               file_search_call: '#/components/schemas/OutputItemFileSearchCall'
               function_call: '#/components/schemas/OutputItemFunctionCall'
               image_generation_call: '#/components/schemas/OutputItemImageGenerationCall'
+              mcp_approval_request: '#/components/schemas/OutputItemMcpApprovalRequest'
+              mcp_call: '#/components/schemas/OutputItemMcpCall'
+              mcp_list_tools: '#/components/schemas/OutputItemMcpListTools'
               message: '#/components/schemas/OutputMessage'
               reasoning: '#/components/schemas/OutputItemReasoning'
               web_search_call: '#/components/schemas/OutputItemWebSearchCall'
@@ -25603,6 +25740,9 @@ components:
             - $ref: '#/components/schemas/OutputItemApplyPatchCall'
             - $ref: '#/components/schemas/OutputItemCodeInterpreterCall'
             - $ref: '#/components/schemas/OutputItemCompaction'
+            - $ref: '#/components/schemas/OutputItemMcpListTools'
+            - $ref: '#/components/schemas/OutputItemMcpCall'
+            - $ref: '#/components/schemas/OutputItemMcpApprovalRequest'
         output_index:
           type: 'integer'
         sequence_number:
@@ -25713,6 +25853,144 @@ components:
         - 'id'
         - 'status'
       type: 'object'
+    OutputItemMcpApprovalRequest:
+      properties:
+        arguments:
+          type: 'string'
+        id:
+          type: 'string'
+        name:
+          type: 'string'
+        server_label:
+          type: 'string'
+        type:
+          enum:
+            - 'mcp_approval_request'
+          type: 'string'
+      required:
+        - 'type'
+        - 'id'
+        - 'server_label'
+        - 'name'
+        - 'arguments'
+      type: 'object'
+    OutputItemMcpCall:
+      properties:
+        approval_request_id:
+          type:
+            - 'string'
+            - 'null'
+        arguments:
+          type: 'string'
+        error:
+          anyOf:
+            - type: 'string'
+            - properties:
+                code:
+                  type: 'integer'
+                message:
+                  type: 'string'
+                type:
+                  enum:
+                    - 'mcp_protocol_error'
+                  type: 'string'
+              required:
+                - 'type'
+                - 'code'
+                - 'message'
+              type: 'object'
+            - properties:
+                content: {}
+                type:
+                  enum:
+                    - 'mcp_tool_execution_error'
+                  type: 'string'
+              required:
+                - 'type'
+              type: 'object'
+            - properties:
+                code:
+                  type: 'integer'
+                message:
+                  type: 'string'
+                type:
+                  enum:
+                    - 'http_error'
+                  type: 'string'
+              required:
+                - 'type'
+                - 'code'
+                - 'message'
+              type: 'object'
+            - type: 'null'
+        id:
+          type: 'string'
+        name:
+          type: 'string'
+        output:
+          type:
+            - 'string'
+            - 'null'
+        server_label:
+          type: 'string'
+        status:
+          enum:
+            - 'in_progress'
+            - 'completed'
+            - 'incomplete'
+            - 'calling'
+            - 'failed'
+          type: 'string'
+          x-speakeasy-unknown-values: allow
+        type:
+          enum:
+            - 'mcp_call'
+          type: 'string'
+      required:
+        - 'type'
+        - 'id'
+        - 'server_label'
+        - 'name'
+        - 'arguments'
+      type: 'object'
+    OutputItemMcpListTools:
+      properties:
+        error:
+          type:
+            - 'string'
+            - 'null'
+        id:
+          type: 'string'
+        server_label:
+          type: 'string'
+        tools:
+          items:
+            properties:
+              annotations: {}
+              description:
+                type:
+                  - 'string'
+                  - 'null'
+              input_schema:
+                additionalProperties: {}
+                type: 'object'
+              name:
+                type: 'string'
+            required:
+              - 'name'
+              - 'input_schema'
+            type: 'object'
+          type: 'array'
+        type:
+          enum:
+            - 'mcp_list_tools'
+          type: 'string'
+      required:
+        - 'type'
+        - 'id'
+        - 'server_label'
+        - 'tools'
+      type: 'object'
     OutputItemReasoning:
       example:
         id: 'reasoning-abc123'
@@ -25767,6 +26045,7 @@ components:
           file_search_call: '#/components/schemas/OutputFileSearchCallItem'
           function_call: '#/components/schemas/OutputFunctionCallItem'
           image_generation_call: '#/components/schemas/OutputImageGenerationCallItem'
+          mcp_approval_request: '#/components/schemas/McpApprovalRequestItem'
           mcp_call: '#/components/schemas/McpCallItem'
           mcp_list_tools: '#/components/schemas/McpListToolsItem'
           message: '#/components/schemas/OutputMessageItem'
@@ -25831,6 +26110,7 @@ components:
         - $ref: '#/components/schemas/OutputMemoryServerToolItem'
         - $ref: '#/components/schemas/McpListToolsItem'
         - $ref: '#/components/schemas/McpCallItem'
+        - $ref: '#/components/schemas/McpApprovalRequestItem'
         - $ref: '#/components/schemas/OutputSearchModelsServerToolItem'
         - $ref: '#/components/schemas/OutputFusionServerToolItem'
         - $ref: '#/components/schemas/OutputAdvisorServerToolItem'
@@ -28154,6 +28434,7 @@ components:
         - 'Reka'
         - 'Relace'
         - 'Respan'
+        - 'River'
         - 'Sail Research'
         - 'Sakana AI'
         - 'SambaNova'
@@ -28551,6 +28832,9 @@ components:
           additionalProperties: {}
           type: 'object'
         respan:
+          additionalProperties: {}
+          type: 'object'
+        river:
           additionalProperties: {}
           type: 'object'
         runway:
@@ -28968,6 +29252,7 @@ components:
             - 'Reka'
             - 'Relace'
             - 'Respan'
+            - 'River'
             - 'Sail Research'
             - 'Sakana AI'
             - 'SambaNova'
@@ -30335,6 +30620,7 @@ components:
               - $ref: '#/components/schemas/BashServerTool'
               - $ref: '#/components/schemas/ShellServerTool_OpenRouter'
               - $ref: '#/components/schemas/ToolSearchServerTool'
+              - $ref: '#/components/schemas/McpServerTool_OpenRouter'
           type: 'array'
         top_k:
           type: 'integer'
@@ -33113,6 +33399,26 @@ components:
         - 'mode'
         - 'tools'
       type: 'object'
+    ToolChoiceMcp:
+      description: 'Forces a call to the named MCP server; `name` narrows it to one of its tools'
+      example:
+        server_label: 'huggingface'
+        type: 'mcp'
+      properties:
+        name:
+          type:
+            - 'string'
+            - 'null'
+        server_label:
+          type: 'string'
+        type:
+          enum:
+            - 'mcp'
+          type: 'string'
+      required:
+        - 'type'
+        - 'server_label'
+      type: 'object'
     ToolChoiceSupport:
       description: 'Per-variant `tool_choice` support. `tool_choice` in `supported_parameters` only says the parameter is accepted; these flags say which of its values passed testing.'
       example:
@@ -33302,6 +33608,7 @@ components:
                 required:
                   - 'type'
                 type: 'object'
+              - $ref: '#/components/schemas/McpServerTool_OpenRouter'
           type: 'array'
         type:
           enum:
@@ -34727,6 +35034,7 @@ components:
               - 'openrouter:datetime'
               - 'openrouter:fusion'
               - 'openrouter:image_generation'
+              - 'openrouter:mcp'
               - 'openrouter:experimental__search_models'
               - 'openrouter:shell'
               - 'openrouter:subagent'
@@ -38305,18 +38613,6 @@ paths:
                   example: 100
                   format: 'double'
                   type: 'number'
-                spawn_agent:
-                  description: 'Agent identifier for spawn telemetry'
-                  example: 'my-agent'
-                  type: 'string'
-                  x-fern-ignore: true
-                  x-speakeasy-ignore: true
-                spawn_cloud:
-                  description: 'Cloud identifier for spawn telemetry'
-                  example: 'aws-us-east-1'
-                  type: 'string'
-                  x-fern-ignore: true
-                  x-speakeasy-ignore: true
                 usage_limit_type:
                   description: 'Optional credit limit reset interval. When set, the credit limit resets on this interval.'
                   enum:
@@ -39248,6 +39544,7 @@ paths:
               - 'reka'
               - 'relace'
               - 'respan'
+              - 'river'
               - 'runway'
               - 'sail-research'
               - 'sakana'

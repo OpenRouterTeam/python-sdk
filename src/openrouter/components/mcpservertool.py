@@ -7,22 +7,35 @@ from openrouter.types import (
     OptionalNullable,
     UNSET,
     UNSET_SENTINEL,
-    UnrecognizedStr,
 )
-from pydantic import model_serializer
-from typing import Dict, List, Literal, Optional, Union
+import pydantic
+from pydantic import ConfigDict, model_serializer
+from typing import Any, Dict, List, Literal, Optional, Union
 from typing_extensions import NotRequired, TypeAliasType, TypedDict
 
 
-class AllowedToolsTypedDict(TypedDict):
+class McpServerToolAllowedToolsTypedDict(TypedDict):
     read_only: NotRequired[bool]
     tool_names: NotRequired[List[str]]
 
 
-class AllowedTools(BaseModel):
+class McpServerToolAllowedTools(BaseModel):
+    model_config = ConfigDict(
+        populate_by_name=True, arbitrary_types_allowed=True, extra="allow"
+    )
+    __pydantic_extra__: Dict[str, Any] = pydantic.Field(init=False)
+
     read_only: Optional[bool] = None
 
     tool_names: Optional[List[str]] = None
+
+    @property
+    def additional_properties(self):
+        return self.__pydantic_extra__
+
+    @additional_properties.setter
+    def additional_properties(self, value):
+        self.__pydantic_extra__ = value  # pyright: ignore[reportIncompatibleVariableOverride]
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
@@ -33,100 +46,142 @@ class AllowedTools(BaseModel):
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k, serialized.get(n))
+            serialized.pop(k, serialized.pop(n, None))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
                     m[k] = val
+        for k, v in serialized.items():
+            m[k] = v
 
         return m
 
 
-AllowedToolsUnionTypedDict = TypeAliasType(
-    "AllowedToolsUnionTypedDict", Union[AllowedToolsTypedDict, List[str]]
+McpServerToolAllowedToolsUnionTypedDict = TypeAliasType(
+    "McpServerToolAllowedToolsUnionTypedDict",
+    Union[McpServerToolAllowedToolsTypedDict, List[str]],
 )
 
 
-AllowedToolsUnion = TypeAliasType("AllowedToolsUnion", Union[AllowedTools, List[str]])
+McpServerToolAllowedToolsUnion = TypeAliasType(
+    "McpServerToolAllowedToolsUnion", Union[McpServerToolAllowedTools, List[str]]
+)
 
 
-ConnectorID = Union[
-    Literal[
-        "connector_dropbox",
-        "connector_gmail",
-        "connector_googlecalendar",
-        "connector_googledrive",
-        "connector_microsoftteams",
-        "connector_outlookcalendar",
-        "connector_outlookemail",
-        "connector_sharepoint",
-    ],
-    UnrecognizedStr,
-]
+McpServerToolRequireApprovalNever = Literal["never",]
 
 
-RequireApprovalNever = Literal["never",]
+McpServerToolRequireApprovalAlways = Literal["always",]
 
 
-RequireApprovalAlways = Literal["always",]
-
-
-class AlwaysTypedDict(TypedDict):
+class McpServerToolAlwaysTypedDict(TypedDict):
+    read_only: NotRequired[bool]
     tool_names: NotRequired[List[str]]
 
 
-class Always(BaseModel):
+class McpServerToolAlways(BaseModel):
+    model_config = ConfigDict(
+        populate_by_name=True, arbitrary_types_allowed=True, extra="allow"
+    )
+    __pydantic_extra__: Dict[str, Any] = pydantic.Field(init=False)
+
+    read_only: Optional[bool] = None
+
     tool_names: Optional[List[str]] = None
+
+    @property
+    def additional_properties(self):
+        return self.__pydantic_extra__
+
+    @additional_properties.setter
+    def additional_properties(self, value):
+        self.__pydantic_extra__ = value  # pyright: ignore[reportIncompatibleVariableOverride]
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["tool_names"])
+        optional_fields = set(["read_only", "tool_names"])
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k, serialized.get(n))
+            serialized.pop(k, serialized.pop(n, None))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
                     m[k] = val
+        for k, v in serialized.items():
+            m[k] = v
 
         return m
 
 
-class NeverTypedDict(TypedDict):
+class McpServerToolNeverTypedDict(TypedDict):
+    read_only: NotRequired[bool]
     tool_names: NotRequired[List[str]]
 
 
-class Never(BaseModel):
+class McpServerToolNever(BaseModel):
+    model_config = ConfigDict(
+        populate_by_name=True, arbitrary_types_allowed=True, extra="allow"
+    )
+    __pydantic_extra__: Dict[str, Any] = pydantic.Field(init=False)
+
+    read_only: Optional[bool] = None
+
     tool_names: Optional[List[str]] = None
+
+    @property
+    def additional_properties(self):
+        return self.__pydantic_extra__
+
+    @additional_properties.setter
+    def additional_properties(self, value):
+        self.__pydantic_extra__ = value  # pyright: ignore[reportIncompatibleVariableOverride]
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["tool_names"])
+        optional_fields = set(["read_only", "tool_names"])
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k, serialized.get(n))
+            serialized.pop(k, serialized.pop(n, None))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
                     m[k] = val
+        for k, v in serialized.items():
+            m[k] = v
 
         return m
 
 
-class RequireApprovalTypedDict(TypedDict):
-    always: NotRequired[AlwaysTypedDict]
-    never: NotRequired[NeverTypedDict]
+class McpServerToolRequireApprovalTypedDict(TypedDict):
+    always: NotRequired[McpServerToolAlwaysTypedDict]
+    never: NotRequired[McpServerToolNeverTypedDict]
 
 
-class RequireApproval(BaseModel):
-    always: Optional[Always] = None
+class McpServerToolRequireApproval(BaseModel):
+    model_config = ConfigDict(
+        populate_by_name=True, arbitrary_types_allowed=True, extra="allow"
+    )
+    __pydantic_extra__: Dict[str, Any] = pydantic.Field(init=False)
 
-    never: Optional[Never] = None
+    always: Optional[McpServerToolAlways] = None
+
+    never: Optional[McpServerToolNever] = None
+
+    @property
+    def additional_properties(self):
+        return self.__pydantic_extra__
+
+    @additional_properties.setter
+    def additional_properties(self, value):
+        self.__pydantic_extra__ = value  # pyright: ignore[reportIncompatibleVariableOverride]
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
@@ -137,23 +192,34 @@ class RequireApproval(BaseModel):
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k, serialized.get(n))
+            serialized.pop(k, serialized.pop(n, None))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
                     m[k] = val
+        for k, v in serialized.items():
+            m[k] = v
 
         return m
 
 
-RequireApprovalUnionTypedDict = TypeAliasType(
-    "RequireApprovalUnionTypedDict",
-    Union[RequireApprovalTypedDict, RequireApprovalAlways, RequireApprovalNever],
+McpServerToolRequireApprovalUnionTypedDict = TypeAliasType(
+    "McpServerToolRequireApprovalUnionTypedDict",
+    Union[
+        McpServerToolRequireApprovalTypedDict,
+        McpServerToolRequireApprovalAlways,
+        McpServerToolRequireApprovalNever,
+    ],
 )
 
 
-RequireApprovalUnion = TypeAliasType(
-    "RequireApprovalUnion",
-    Union[RequireApproval, RequireApprovalAlways, RequireApprovalNever],
+McpServerToolRequireApprovalUnion = TypeAliasType(
+    "McpServerToolRequireApprovalUnion",
+    Union[
+        McpServerToolRequireApproval,
+        McpServerToolRequireApprovalAlways,
+        McpServerToolRequireApprovalNever,
+    ],
 )
 
 
@@ -165,11 +231,11 @@ class McpServerToolTypedDict(TypedDict):
 
     server_label: str
     type: McpServerToolType
-    allowed_tools: NotRequired[Nullable[AllowedToolsUnionTypedDict]]
+    allowed_tools: NotRequired[Nullable[McpServerToolAllowedToolsUnionTypedDict]]
     authorization: NotRequired[str]
-    connector_id: NotRequired[ConnectorID]
+    connector_id: NotRequired[str]
     headers: NotRequired[Nullable[Dict[str, str]]]
-    require_approval: NotRequired[Nullable[RequireApprovalUnionTypedDict]]
+    require_approval: NotRequired[Nullable[McpServerToolRequireApprovalUnionTypedDict]]
     server_description: NotRequired[str]
     server_url: NotRequired[str]
 
@@ -177,23 +243,36 @@ class McpServerToolTypedDict(TypedDict):
 class McpServerTool(BaseModel):
     r"""MCP (Model Context Protocol) tool configuration"""
 
+    model_config = ConfigDict(
+        populate_by_name=True, arbitrary_types_allowed=True, extra="allow"
+    )
+    __pydantic_extra__: Dict[str, Any] = pydantic.Field(init=False)
+
     server_label: str
 
     type: McpServerToolType
 
-    allowed_tools: OptionalNullable[AllowedToolsUnion] = UNSET
+    allowed_tools: OptionalNullable[McpServerToolAllowedToolsUnion] = UNSET
 
     authorization: Optional[str] = None
 
-    connector_id: Optional[ConnectorID] = None
+    connector_id: Optional[str] = None
 
     headers: OptionalNullable[Dict[str, str]] = UNSET
 
-    require_approval: OptionalNullable[RequireApprovalUnion] = UNSET
+    require_approval: OptionalNullable[McpServerToolRequireApprovalUnion] = UNSET
 
     server_description: Optional[str] = None
 
     server_url: Optional[str] = None
+
+    @property
+    def additional_properties(self):
+        return self.__pydantic_extra__
+
+    @additional_properties.setter
+    def additional_properties(self, value):
+        self.__pydantic_extra__ = value  # pyright: ignore[reportIncompatibleVariableOverride]
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
@@ -215,6 +294,7 @@ class McpServerTool(BaseModel):
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k, serialized.get(n))
+            serialized.pop(k, serialized.pop(n, None))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
                 and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
@@ -227,5 +307,7 @@ class McpServerTool(BaseModel):
                     or is_nullable_and_explicitly_set
                 ):
                     m[k] = val
+        for k, v in serialized.items():
+            m[k] = v
 
         return m

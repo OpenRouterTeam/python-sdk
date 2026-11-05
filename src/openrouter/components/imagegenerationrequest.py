@@ -137,7 +137,7 @@ class ImageGenerationRequestTypedDict(TypedDict):
     background: NotRequired[ImageGenerationRequestBackground]
     r"""Background treatment. `transparent` requires an output_format that supports alpha (png or webp)."""
     frame_count: NotRequired[int]
-    r"""Number of animation frames (2-64) when `output_format` is `gif`. Only honored by models that produce animations (OpenAI gpt-image-2.6, generations only); ignored otherwise."""
+    r"""Number of animation frames (2-64) when `output_format` is `gif`. Only honored by models that produce animations; each accepts its own range and rejects values outside it. Ignored otherwise."""
     frame_duration_ms: NotRequired[int]
     r"""Display time of each animation frame in milliseconds (20-2000) when `output_format` is `gif`. Ignored by models that do not produce animations."""
     input_references: NotRequired[List[ContentPartImageTypedDict]]
@@ -186,7 +186,7 @@ class ImageGenerationRequest(BaseModel):
     r"""Background treatment. `transparent` requires an output_format that supports alpha (png or webp)."""
 
     frame_count: Optional[int] = None
-    r"""Number of animation frames (2-64) when `output_format` is `gif`. Only honored by models that produce animations (OpenAI gpt-image-2.6, generations only); ignored otherwise."""
+    r"""Number of animation frames (2-64) when `output_format` is `gif`. Only honored by models that produce animations; each accepts its own range and rejects values outside it. Ignored otherwise."""
 
     frame_duration_ms: Optional[int] = None
     r"""Display time of each animation frame in milliseconds (20-2000) when `output_format` is `gif`. Ignored by models that do not produce animations."""
