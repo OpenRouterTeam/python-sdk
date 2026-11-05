@@ -2,11 +2,16 @@
 
 from importlib import import_module
 import builtins
+import re
 import sys
+
+_RELATIVE_MODNAME_RE = re.compile(r"^\.[A-Za-z_][A-Za-z0-9_]*$")
 
 
 def dynamic_import(package, modname, retries=3):
     """Import a module relative to package, retrying on KeyError from half-initialized modules."""
+    if not isinstance(modname, str) or not _RELATIVE_MODNAME_RE.match(modname):
+        raise ValueError(f"Refusing to import untrusted module name: {modname!r}")
     for attempt in range(retries):
         try:
             return import_module(modname, package)
