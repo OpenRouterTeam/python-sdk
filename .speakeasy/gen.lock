@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c48cf606-fb42-4a45-9c23-8f0555307828
 management:
-  docChecksum: 36da9727d500b45bfb90060e8d4b1b88
+  docChecksum: a103037538d332613316e13a17300983
   docVersion: 1.0.0
   speakeasyVersion: 1.803.2
   generationVersion: 2.950.13
-  releaseVersion: 1.3.130
-  configChecksum: 3742c213ba91be3c474a2d54b3dbb36b
+  releaseVersion: 1.3.131
+  configChecksum: adc032422d0efdef82e0f3fb3c072d6f
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
 persistentEdits:
-  generation_id: f436448f-07a6-4cee-ba19-2a4318107d8d
-  pristine_commit_hash: 9b4fdd4385c6fc9b296765f5a2e75e83a7578377
-  pristine_tree_hash: 463d84dd062651512429d9b88a98462978cc4edc
+  generation_id: 00299001-7278-4525-85df-299f2c3aa458
+  pristine_commit_hash: b4d0a6a296b91d7f678af19ecde12c49c08a9f3c
+  pristine_tree_hash: 758afb314231c4d0aad04d3f5bb0203ebf49e93b
 features:
   python:
     acceptHeaders: 3.0.0
@@ -2964,8 +2964,8 @@ trackedFiles:
     pristine_git_object: 48ba476c6d114d79e5d5f7bd90db06c60a90239e
   docs/components/decisionsresponseusage.mdx:
     id: ab10cb1b5675
-    last_write_checksum: sha1:2697cbd759d71c445358dd1bdf1edc1d1c278ecd
-    pristine_git_object: f651a8f487bd68c8e80d2e59655b9e61a0d5fc0a
+    last_write_checksum: sha1:f8c2a0574d91aa3ae2ad1aa42ad7a37b87b62d94
+    pristine_git_object: bd8a252e63cd38c3bd6b7719f320e9f67bcfc489
   docs/components/decisionsscoreanswer.mdx:
     id: ed8cc3ae16c6
     last_write_checksum: sha1:b65aa6adeedd6836b086d27a0a0e750838f7ab81
@@ -11008,8 +11008,8 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:a07bb90cba858b3f588c91b5a0ee0fd927ef4ba9
-    pristine_git_object: 030ebeef911ea99d97a6e8c698089bd7369e8899
+    last_write_checksum: sha1:ec5bd30f505e4052b284661c9a29ff2fac35647c
+    pristine_git_object: e0c226a4f028f7fc0bd43c0c16ccf7997cf300ae
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77f44b60b98bc126557ec27391f91dfba764bb54
@@ -11036,8 +11036,8 @@ trackedFiles:
     pristine_git_object: 86713cfea633e09d33b3d4e65281071fe20e6137
   src/openrouter/_version.py:
     id: d8d15ad6c586
-    last_write_checksum: sha1:e5cb07ec383980634203c69f5b5bcc3c2d05cab8
-    pristine_git_object: c3dbcae7d7635f76346f9c2ec30ea9113725bae0
+    last_write_checksum: sha1:a6b9ba70c16d696c1b6b2786b6bc21465a2da557
+    pristine_git_object: 26e24a92c8db5c8328a8fb4655c0c4abc9c72a49
   src/openrouter/alpha.py:
     id: 306c4d93308d
     last_write_checksum: sha1:80cc0f39649445431cc2247ed0e0765438467766
@@ -12332,8 +12332,8 @@ trackedFiles:
     pristine_git_object: c3f32b631b40f5eca0a0b3c71c2fd543058cf52a
   src/openrouter/components/decisionsresponse.py:
     id: b91b81c2cf95
-    last_write_checksum: sha1:d127c853bcff3272489b94131f7e09209e708faf
-    pristine_git_object: 49dfac713420e388ff707bbe6cd8973bbba2e69f
+    last_write_checksum: sha1:c3270d7d1a547369b778c79ac7dfea7f02f56d51
+    pristine_git_object: 69684bc7085a4f956056c2032523c13923a432b1
   src/openrouter/components/decisionsscoreanswer.py:
     id: af8597465725
     last_write_checksum: sha1:e12a52051ccd6f841e0238d789b816a05156d299
@@ -20204,4 +20204,7 @@ examples:
         "500":
           application/json: {"error": {"code": 500, "message": "Internal Server Error"}}
 examplesVersion: 1.0.2
-releaseNotes: "## Python SDK Changes:\n* `open_router.batch.create_batches()`: \n  *  `request.provider.only[].union(ProviderName).enum(river)` **Added**\n  *  `response.results[].response.body.union(OpenResponsesResult)` **Changed** (Breaking ⚠️)\n* `open_router.presets.create_presets_responses()`:  `request` **Changed** (Breaking ⚠️)\n* `open_router.batch.get_batches()`:  `response.results[].response.body.union(OpenResponsesResult)` **Changed** (Breaking ⚠️)\n* `open_router.embeddings.generate()`:  `request.provider` **Changed**\n* `open_router.endpoints.list()`:  `response.data.endpoints[].provider_name.enum(river)` **Added**\n* `open_router.tts.create_speech()`:  `request.provider` **Changed**\n* `open_router.byok.list()`: \n  *  `request.provider` **Changed**\n  *  `response.data[].provider.enum(river)` **Added**\n* `open_router.byok.create()`: \n  *  `request.provider.enum(river)` **Added**\n  *  `response.data.provider.enum(river)` **Added**\n* `open_router.byok.get()`:  `response.data.provider.enum(river)` **Added**\n* `open_router.byok.update()`:  `response.data.provider.enum(river)` **Added**\n* `open_router.alpha.decisions.create()`:  `request` **Changed**\n* `open_router.endpoints.list_zdr_endpoints()`:  `response.data[].provider_name.enum(river)` **Added**\n* `open_router.stt.create_transcription()`:  `request.provider` **Changed**\n* `open_router.generations.get_generation()`:  `response.data.provider_responses[].provider_name.enum(river)` **Added**\n* `open_router.presets.create_presets_chat_completions()`:  `request.provider` **Changed**\n* `open_router.presets.create_presets_messages()`:  `request.provider` **Changed**\n* `open_router.alpha.extractions.create()`:  `request.provider` **Changed**\n* `open_router.rerank.rerank()`:  `request.provider` **Changed**\n* `open_router.system_one.create()`:  `request` **Changed**\n* `open_router.video_generation.generate()`:  `request.provider` **Changed**\n* `open_router.workspaces.create()`: \n  *  `request.disabled_server_tools[].enum(openrouter:mcp)` **Added**\n* `open_router.workspaces.update()`: \n  *  `request.disabled_server_tools[].enum(openrouter:mcp)` **Added**\n"
+releaseNotes: |
+  ## Python SDK Changes:
+  * `open_router.alpha.decisions.create()`:  `response.usage` **Changed**
+  * `open_router.system_one.create()`:  `response.usage` **Changed**
