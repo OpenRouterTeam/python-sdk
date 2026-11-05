@@ -3,9 +3,14 @@
 from __future__ import annotations
 from .failabletoolcallstatus import FailableToolCallStatus
 from openrouter.types import BaseModel, UNSET_SENTINEL
+import pydantic
 from pydantic import model_serializer
 from typing import Any, Dict, List, Literal, Optional
-from typing_extensions import NotRequired, TypedDict
+from typing_extensions import Annotated, NotRequired, TypedDict
+
+
+OutputToolSearchServerToolItemFormat = Literal["compact",]
+r"""How the model saw the matches. `compact` means each tool by name, description, and input shape, plus a call example. Replaying the item renders the same result."""
 
 
 class MatchTypedDict(TypedDict):
@@ -30,11 +35,23 @@ class OutputToolSearchServerToolItemTypedDict(TypedDict):
 
     status: FailableToolCallStatus
     type: OutputToolSearchServerToolItemType
+    arguments: NotRequired[str]
+    r"""The JSON arguments of the model call, verbatim. Replaying the item reuses them."""
+    call_id: NotRequired[str]
+    r"""The ID of the model call that ran the search. Replaying the item reuses it."""
+    catalog_index: NotRequired[str]
+    r"""The deferred-tool index the router showed the model with a pre-search, listing tool sources and names. Replaying the item shows the same index."""
     error: NotRequired[str]
     r"""The error message when the tool call failed before producing a result. Set together with `status: 'failed'`; absent on a successful call."""
+    format_: NotRequired[OutputToolSearchServerToolItemFormat]
+    r"""How the model saw the matches. `compact` means each tool by name, description, and input shape, plus a call example. Replaying the item renders the same result."""
+    hint: NotRequired[str]
+    r"""The guidance the model got when the search matched no tools."""
     id: NotRequired[str]
     matches: NotRequired[List[MatchTypedDict]]
     query: NotRequired[str]
+    turn_call_ids: NotRequired[List[str]]
+    r"""The IDs of every tool call in the model response that ran the search, in order. Replaying the item keeps those calls in one turn."""
 
 
 class OutputToolSearchServerToolItem(BaseModel):
@@ -44,8 +61,25 @@ class OutputToolSearchServerToolItem(BaseModel):
 
     type: OutputToolSearchServerToolItemType
 
+    arguments: Optional[str] = None
+    r"""The JSON arguments of the model call, verbatim. Replaying the item reuses them."""
+
+    call_id: Optional[str] = None
+    r"""The ID of the model call that ran the search. Replaying the item reuses it."""
+
+    catalog_index: Optional[str] = None
+    r"""The deferred-tool index the router showed the model with a pre-search, listing tool sources and names. Replaying the item shows the same index."""
+
     error: Optional[str] = None
     r"""The error message when the tool call failed before producing a result. Set together with `status: 'failed'`; absent on a successful call."""
+
+    format_: Annotated[
+        Optional[OutputToolSearchServerToolItemFormat], pydantic.Field(alias="format")
+    ] = None
+    r"""How the model saw the matches. `compact` means each tool by name, description, and input shape, plus a call example. Replaying the item renders the same result."""
+
+    hint: Optional[str] = None
+    r"""The guidance the model got when the search matched no tools."""
 
     id: Optional[str] = None
 
@@ -53,9 +87,25 @@ class OutputToolSearchServerToolItem(BaseModel):
 
     query: Optional[str] = None
 
+    turn_call_ids: Optional[List[str]] = None
+    r"""The IDs of every tool call in the model response that ran the search, in order. Replaying the item keeps those calls in one turn."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["error", "id", "matches", "query"])
+        optional_fields = set(
+            [
+                "arguments",
+                "call_id",
+                "catalog_index",
+                "error",
+                "format",
+                "hint",
+                "id",
+                "matches",
+                "query",
+                "turn_call_ids",
+            ]
+        )
         serialized = handler(self)
         m = {}
 
@@ -68,3 +118,9 @@ class OutputToolSearchServerToolItem(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    OutputToolSearchServerToolItem.model_rebuild()
+except NameError:
+    pass

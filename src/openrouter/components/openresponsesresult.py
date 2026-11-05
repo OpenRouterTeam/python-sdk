@@ -14,6 +14,7 @@ from .codeinterpreterservertool import (
 from .codexlocalshelltool import CodexLocalShellTool, CodexLocalShellToolTypedDict
 from .computeruseservertool import ComputerUseServerTool, ComputerUseServerToolTypedDict
 from .customtool import CustomTool, CustomToolTypedDict
+from .deferredtoolsdetails import DeferredToolsDetails, DeferredToolsDetailsTypedDict
 from .filesearchservertool import FileSearchServerTool, FileSearchServerToolTypedDict
 from .imagegenerationservertool import (
     ImageGenerationServerTool,
@@ -339,6 +340,8 @@ class UsageTypedDict(TypedDict):
     cost: NotRequired[Nullable[float]]
     r"""Cost of the completion"""
     cost_details: NotRequired[UsageCostDetailsTypedDict]
+    deferred_tools_details: NotRequired[DeferredToolsDetailsTypedDict]
+    r"""Totals across every upstream model call of a deferred-tools run. The native usage fields report only the final call; cost covers every call."""
     is_byok: NotRequired[bool]
     r"""Whether a request was made using a Bring Your Own Key configuration"""
     server_tool_use_details: NotRequired[Nullable[ServerToolUseDetailsTypedDict]]
@@ -361,6 +364,9 @@ class Usage(BaseModel):
 
     cost_details: Optional[UsageCostDetails] = None
 
+    deferred_tools_details: Optional[DeferredToolsDetails] = None
+    r"""Totals across every upstream model call of a deferred-tools run. The native usage fields report only the final call; cost covers every call."""
+
     is_byok: Optional[bool] = None
     r"""Whether a request was made using a Bring Your Own Key configuration"""
 
@@ -370,7 +376,13 @@ class Usage(BaseModel):
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
-            ["cost", "cost_details", "is_byok", "server_tool_use_details"]
+            [
+                "cost",
+                "cost_details",
+                "deferred_tools_details",
+                "is_byok",
+                "server_tool_use_details",
+            ]
         )
         nullable_fields = set(["cost", "server_tool_use_details"])
         serialized = handler(self)

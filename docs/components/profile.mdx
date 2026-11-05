@@ -2,16 +2,21 @@
 title: "Profile"
 ---
 
-Loading profile. Only `portable` is available in this release: OpenRouter serves deferral with router-built search and call wrappers on any model.
+Loading profile. `portable` serves the `defer_loading` tools with router-built search and call wrappers on any model and keeps the catalog fixed. `universal` defers every wrappable tool behind the same wrappers so the provider-facing tool list never changes, and rebuilds the catalog from each request so tools can be added or removed mid-conversation.
 
 ## Example Usage
 
 ```python
 from openrouter.components import Profile
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
 value: Profile = "portable"
 ```
 
 
 ## Values
 
+This is an open enum. Unrecognized values will not fail type checks.
+
 - `"portable"`
+- `"universal"`

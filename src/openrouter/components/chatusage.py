@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 from .costdetails import CostDetails, CostDetailsTypedDict
+from .deferredtoolsdetails import DeferredToolsDetails, DeferredToolsDetailsTypedDict
 from .servertoolusedetails import ServerToolUseDetails, ServerToolUseDetailsTypedDict
 from openrouter.types import (
     BaseModel,
@@ -147,6 +148,8 @@ class ChatUsageTypedDict(TypedDict):
     r"""Cost of the completion"""
     cost_details: NotRequired[Nullable[CostDetailsTypedDict]]
     r"""Breakdown of upstream inference costs"""
+    deferred_tools_details: NotRequired[DeferredToolsDetailsTypedDict]
+    r"""Totals across every upstream model call of a deferred-tools run. The native usage fields report only the final call; cost covers every call."""
     is_byok: NotRequired[bool]
     r"""Whether a request was made using a Bring Your Own Key configuration"""
     prompt_tokens_details: NotRequired[Nullable[ChatUsagePromptTokensDetailsTypedDict]]
@@ -178,6 +181,9 @@ class ChatUsage(BaseModel):
     cost_details: OptionalNullable[CostDetails] = UNSET
     r"""Breakdown of upstream inference costs"""
 
+    deferred_tools_details: Optional[DeferredToolsDetails] = None
+    r"""Totals across every upstream model call of a deferred-tools run. The native usage fields report only the final call; cost covers every call."""
+
     is_byok: Optional[bool] = None
     r"""Whether a request was made using a Bring Your Own Key configuration"""
 
@@ -194,6 +200,7 @@ class ChatUsage(BaseModel):
                 "completion_tokens_details",
                 "cost",
                 "cost_details",
+                "deferred_tools_details",
                 "is_byok",
                 "prompt_tokens_details",
                 "server_tool_use_details",
