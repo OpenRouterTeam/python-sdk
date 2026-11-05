@@ -57,6 +57,10 @@ from .legacy_websearchservertool import (
     LegacyWebSearchServerToolTypedDict,
 )
 from .mcpservertool import McpServerTool, McpServerToolTypedDict
+from .mcpservertool_openrouter import (
+    McpServerToolOpenRouter,
+    McpServerToolOpenRouterTypedDict,
+)
 from .moderationplugin import ModerationPlugin, ModerationPluginTypedDict
 from .namespacetool import NamespaceTool, NamespaceToolTypedDict
 from .openairesponsestoolchoice_union import (
@@ -388,26 +392,27 @@ ResponsesRequestToolUnionTypedDict = TypeAliasType(
         ShellServerToolTypedDict,
         SearchModelsServerToolOpenRouterTypedDict,
         WebFetchServerToolTypedDict,
+        McpServerToolOpenRouterTypedDict,
         ToolSearchServerToolTypedDict,
-        ShellServerToolOpenRouterTypedDict,
         CodeInterpreterServerToolTypedDict,
+        ShellServerToolOpenRouterTypedDict,
         BashServerToolTypedDict,
         ApplyPatchServerToolOpenRouterTypedDict,
         WebSearchServerToolOpenRouterTypedDict,
         ImageGenerationServerToolOpenRouterTypedDict,
         FusionServerToolOpenRouterTypedDict,
         FilesServerToolTypedDict,
-        DatetimeServerToolTypedDict,
         AdvisorServerToolOpenRouterTypedDict,
         SubagentServerToolOpenRouterTypedDict,
+        DatetimeServerToolTypedDict,
         NamespaceToolTypedDict,
         ComputerUseServerToolTypedDict,
         FileSearchServerToolTypedDict,
         CustomToolTypedDict,
         PreviewWebSearchServerToolTypedDict,
-        Preview20250311WebSearchServerToolTypedDict,
         ResponsesRequestToolFunctionTypedDict,
         WebSearchServerToolTypedDict,
+        Preview20250311WebSearchServerToolTypedDict,
         LegacyWebSearchServerToolTypedDict,
         McpServerToolTypedDict,
         ImageGenerationServerToolTypedDict,
@@ -452,6 +457,7 @@ ResponsesRequestToolUnion = Annotated[
         Annotated[BashServerTool, Tag("openrouter:bash")],
         Annotated[ShellServerToolOpenRouter, Tag("openrouter:shell")],
         Annotated[ToolSearchServerTool, Tag("openrouter:tool_search")],
+        Annotated[McpServerToolOpenRouter, Tag("openrouter:mcp")],
     ],
     Discriminator(lambda m: get_discriminator(m, "type", "type")),
 ]

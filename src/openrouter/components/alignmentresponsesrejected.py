@@ -26,6 +26,15 @@ from .outputitemimagegenerationcall import (
     OutputItemImageGenerationCall,
     OutputItemImageGenerationCallTypedDict,
 )
+from .outputitemmcpapprovalrequest import (
+    OutputItemMcpApprovalRequest,
+    OutputItemMcpApprovalRequestTypedDict,
+)
+from .outputitemmcpcall import OutputItemMcpCall, OutputItemMcpCallTypedDict
+from .outputitemmcplisttools import (
+    OutputItemMcpListTools,
+    OutputItemMcpListToolsTypedDict,
+)
 from .outputitemreasoning import OutputItemReasoning, OutputItemReasoningTypedDict
 from .outputitemwebsearchcall import (
     OutputItemWebSearchCall,
@@ -44,16 +53,19 @@ from typing_extensions import Annotated, TypeAliasType
 AlignmentResponsesRejectedTypedDict = TypeAliasType(
     "AlignmentResponsesRejectedTypedDict",
     Union[
+        OutputItemCompactionTypedDict,
         OutputItemFileSearchCallTypedDict,
         OutputItemImageGenerationCallTypedDict,
-        OutputItemCompactionTypedDict,
         OutputItemWebSearchCallTypedDict,
-        OutputMessageTypedDict,
+        OutputItemMcpListToolsTypedDict,
+        OutputItemMcpApprovalRequestTypedDict,
         OutputItemReasoningTypedDict,
         OutputItemApplyPatchCallTypedDict,
+        OutputMessageTypedDict,
         OutputItemCodeInterpreterCallTypedDict,
         OutputItemFunctionCallTypedDict,
         OutputItemCustomToolCallTypedDict,
+        OutputItemMcpCallTypedDict,
     ],
 )
 
@@ -76,6 +88,9 @@ _ALIGNMENT_RESPONSES_REJECTED_VARIANTS: dict[str, Any] = {
     "file_search_call": OutputItemFileSearchCall,
     "function_call": OutputItemFunctionCall,
     "image_generation_call": OutputItemImageGenerationCall,
+    "mcp_approval_request": OutputItemMcpApprovalRequest,
+    "mcp_call": OutputItemMcpCall,
+    "mcp_list_tools": OutputItemMcpListTools,
     "message": OutputMessage,
     "reasoning": OutputItemReasoning,
     "web_search_call": OutputItemWebSearchCall,
@@ -91,6 +106,9 @@ AlignmentResponsesRejected = Annotated[
         OutputItemFileSearchCall,
         OutputItemFunctionCall,
         OutputItemImageGenerationCall,
+        OutputItemMcpApprovalRequest,
+        OutputItemMcpCall,
+        OutputItemMcpListTools,
         OutputMessage,
         OutputItemReasoning,
         OutputItemWebSearchCall,

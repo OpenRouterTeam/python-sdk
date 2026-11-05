@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 from .toolchoiceallowed import ToolChoiceAllowed, ToolChoiceAllowedTypedDict
+from .toolchoicemcp import ToolChoiceMcp, ToolChoiceMcpTypedDict
 from openrouter.types import BaseModel
 from typing import Literal, Union
 from typing_extensions import TypeAliasType, TypedDict
@@ -94,6 +95,7 @@ OpenAIResponsesToolChoiceUnionTypedDict = TypeAliasType(
         OpenAIResponsesToolChoiceShellTypedDict,
         OpenAIResponsesToolChoiceFunctionTypedDict,
         ToolChoiceAllowedTypedDict,
+        ToolChoiceMcpTypedDict,
         OpenAIResponsesToolChoiceAuto,
         OpenAIResponsesToolChoiceNone,
         OpenAIResponsesToolChoiceRequired,
@@ -109,6 +111,7 @@ OpenAIResponsesToolChoiceUnion = TypeAliasType(
         OpenAIResponsesToolChoiceShell,
         OpenAIResponsesToolChoiceFunction,
         ToolChoiceAllowed,
+        ToolChoiceMcp,
         OpenAIResponsesToolChoiceAuto,
         OpenAIResponsesToolChoiceNone,
         OpenAIResponsesToolChoiceRequired,

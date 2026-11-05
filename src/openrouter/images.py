@@ -71,7 +71,7 @@ class Images(BaseSDK):
 
         :param aspect_ratio: Normalized aspect ratio of the generated image. Providers clamp to their supported subset.
         :param background: Background treatment. `transparent` requires an output_format that supports alpha (png or webp).
-        :param frame_count: Number of animation frames (2-64) when `output_format` is `gif`. Only honored by models that produce animations (OpenAI gpt-image-2.6, generations only); ignored otherwise.
+        :param frame_count: Number of animation frames (2-64) when `output_format` is `gif`. Only honored by models that produce animations; each accepts its own range and rejects values outside it. Ignored otherwise.
         :param frame_duration_ms: Display time of each animation frame in milliseconds (20-2000) when `output_format` is `gif`. Ignored by models that do not produce animations.
         :param input_references: Reference images to guide image-to-image generation, as base64 data URLs or HTTP(S) URLs.
         :param markup: A transparent PNG overlay (arrows, circles, annotations) with the same dimensions as the first reference image, as a base64 data URL or HTTP(S) URL, guiding where an edit applies. Image-to-image requests only; honored by models with markup-guided editing (OpenAI gpt-image-2.6) and ignored otherwise.
@@ -152,7 +152,7 @@ class Images(BaseSDK):
 
         :param aspect_ratio: Normalized aspect ratio of the generated image. Providers clamp to their supported subset.
         :param background: Background treatment. `transparent` requires an output_format that supports alpha (png or webp).
-        :param frame_count: Number of animation frames (2-64) when `output_format` is `gif`. Only honored by models that produce animations (OpenAI gpt-image-2.6, generations only); ignored otherwise.
+        :param frame_count: Number of animation frames (2-64) when `output_format` is `gif`. Only honored by models that produce animations; each accepts its own range and rejects values outside it. Ignored otherwise.
         :param frame_duration_ms: Display time of each animation frame in milliseconds (20-2000) when `output_format` is `gif`. Ignored by models that do not produce animations.
         :param input_references: Reference images to guide image-to-image generation, as base64 data URLs or HTTP(S) URLs.
         :param markup: A transparent PNG overlay (arrows, circles, annotations) with the same dimensions as the first reference image, as a base64 data URL or HTTP(S) URL, guiding where an edit applies. Image-to-image requests only; honored by models with markup-guided editing (OpenAI gpt-image-2.6) and ignored otherwise.
@@ -236,7 +236,7 @@ class Images(BaseSDK):
 
         :param aspect_ratio: Normalized aspect ratio of the generated image. Providers clamp to their supported subset.
         :param background: Background treatment. `transparent` requires an output_format that supports alpha (png or webp).
-        :param frame_count: Number of animation frames (2-64) when `output_format` is `gif`. Only honored by models that produce animations (OpenAI gpt-image-2.6, generations only); ignored otherwise.
+        :param frame_count: Number of animation frames (2-64) when `output_format` is `gif`. Only honored by models that produce animations; each accepts its own range and rejects values outside it. Ignored otherwise.
         :param frame_duration_ms: Display time of each animation frame in milliseconds (20-2000) when `output_format` is `gif`. Ignored by models that do not produce animations.
         :param input_references: Reference images to guide image-to-image generation, as base64 data URLs or HTTP(S) URLs.
         :param markup: A transparent PNG overlay (arrows, circles, annotations) with the same dimensions as the first reference image, as a base64 data URL or HTTP(S) URL, guiding where an edit applies. Image-to-image requests only; honored by models with markup-guided editing (OpenAI gpt-image-2.6) and ignored otherwise.
@@ -319,7 +319,7 @@ class Images(BaseSDK):
 
         :param aspect_ratio: Normalized aspect ratio of the generated image. Providers clamp to their supported subset.
         :param background: Background treatment. `transparent` requires an output_format that supports alpha (png or webp).
-        :param frame_count: Number of animation frames (2-64) when `output_format` is `gif`. Only honored by models that produce animations (OpenAI gpt-image-2.6, generations only); ignored otherwise.
+        :param frame_count: Number of animation frames (2-64) when `output_format` is `gif`. Only honored by models that produce animations; each accepts its own range and rejects values outside it. Ignored otherwise.
         :param frame_duration_ms: Display time of each animation frame in milliseconds (20-2000) when `output_format` is `gif`. Ignored by models that do not produce animations.
         :param input_references: Reference images to guide image-to-image generation, as base64 data URLs or HTTP(S) URLs.
         :param markup: A transparent PNG overlay (arrows, circles, annotations) with the same dimensions as the first reference image, as a base64 data URL or HTTP(S) URL, guiding where an edit applies. Image-to-image requests only; honored by models with markup-guided editing (OpenAI gpt-image-2.6) and ignored otherwise.
@@ -613,7 +613,7 @@ class Images(BaseSDK):
 
         :param aspect_ratio: Normalized aspect ratio of the generated image. Providers clamp to their supported subset.
         :param background: Background treatment. `transparent` requires an output_format that supports alpha (png or webp).
-        :param frame_count: Number of animation frames (2-64) when `output_format` is `gif`. Only honored by models that produce animations (OpenAI gpt-image-2.6, generations only); ignored otherwise.
+        :param frame_count: Number of animation frames (2-64) when `output_format` is `gif`. Only honored by models that produce animations; each accepts its own range and rejects values outside it. Ignored otherwise.
         :param frame_duration_ms: Display time of each animation frame in milliseconds (20-2000) when `output_format` is `gif`. Ignored by models that do not produce animations.
         :param input_references: Reference images to guide image-to-image generation, as base64 data URLs or HTTP(S) URLs.
         :param markup: A transparent PNG overlay (arrows, circles, annotations) with the same dimensions as the first reference image, as a base64 data URL or HTTP(S) URL, guiding where an edit applies. Image-to-image requests only; honored by models with markup-guided editing (OpenAI gpt-image-2.6) and ignored otherwise.
@@ -694,7 +694,7 @@ class Images(BaseSDK):
 
         :param aspect_ratio: Normalized aspect ratio of the generated image. Providers clamp to their supported subset.
         :param background: Background treatment. `transparent` requires an output_format that supports alpha (png or webp).
-        :param frame_count: Number of animation frames (2-64) when `output_format` is `gif`. Only honored by models that produce animations (OpenAI gpt-image-2.6, generations only); ignored otherwise.
+        :param frame_count: Number of animation frames (2-64) when `output_format` is `gif`. Only honored by models that produce animations; each accepts its own range and rejects values outside it. Ignored otherwise.
         :param frame_duration_ms: Display time of each animation frame in milliseconds (20-2000) when `output_format` is `gif`. Ignored by models that do not produce animations.
         :param input_references: Reference images to guide image-to-image generation, as base64 data URLs or HTTP(S) URLs.
         :param markup: A transparent PNG overlay (arrows, circles, annotations) with the same dimensions as the first reference image, as a base64 data URL or HTTP(S) URL, guiding where an edit applies. Image-to-image requests only; honored by models with markup-guided editing (OpenAI gpt-image-2.6) and ignored otherwise.
@@ -778,7 +778,7 @@ class Images(BaseSDK):
 
         :param aspect_ratio: Normalized aspect ratio of the generated image. Providers clamp to their supported subset.
         :param background: Background treatment. `transparent` requires an output_format that supports alpha (png or webp).
-        :param frame_count: Number of animation frames (2-64) when `output_format` is `gif`. Only honored by models that produce animations (OpenAI gpt-image-2.6, generations only); ignored otherwise.
+        :param frame_count: Number of animation frames (2-64) when `output_format` is `gif`. Only honored by models that produce animations; each accepts its own range and rejects values outside it. Ignored otherwise.
         :param frame_duration_ms: Display time of each animation frame in milliseconds (20-2000) when `output_format` is `gif`. Ignored by models that do not produce animations.
         :param input_references: Reference images to guide image-to-image generation, as base64 data URLs or HTTP(S) URLs.
         :param markup: A transparent PNG overlay (arrows, circles, annotations) with the same dimensions as the first reference image, as a base64 data URL or HTTP(S) URL, guiding where an edit applies. Image-to-image requests only; honored by models with markup-guided editing (OpenAI gpt-image-2.6) and ignored otherwise.
@@ -861,7 +861,7 @@ class Images(BaseSDK):
 
         :param aspect_ratio: Normalized aspect ratio of the generated image. Providers clamp to their supported subset.
         :param background: Background treatment. `transparent` requires an output_format that supports alpha (png or webp).
-        :param frame_count: Number of animation frames (2-64) when `output_format` is `gif`. Only honored by models that produce animations (OpenAI gpt-image-2.6, generations only); ignored otherwise.
+        :param frame_count: Number of animation frames (2-64) when `output_format` is `gif`. Only honored by models that produce animations; each accepts its own range and rejects values outside it. Ignored otherwise.
         :param frame_duration_ms: Display time of each animation frame in milliseconds (20-2000) when `output_format` is `gif`. Ignored by models that do not produce animations.
         :param input_references: Reference images to guide image-to-image generation, as base64 data URLs or HTTP(S) URLs.
         :param markup: A transparent PNG overlay (arrows, circles, annotations) with the same dimensions as the first reference image, as a base64 data URL or HTTP(S) URL, guiding where an edit applies. Image-to-image requests only; honored by models with markup-guided editing (OpenAI gpt-image-2.6) and ignored otherwise.

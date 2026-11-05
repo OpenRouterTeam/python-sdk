@@ -22,6 +22,7 @@ UpdateWorkspaceRequestDisabledServerTool = Union[
         "openrouter:datetime",
         "openrouter:fusion",
         "openrouter:image_generation",
+        "openrouter:mcp",
         "openrouter:experimental__search_models",
         "openrouter:shell",
         "openrouter:subagent",
