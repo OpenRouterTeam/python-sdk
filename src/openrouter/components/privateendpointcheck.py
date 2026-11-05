@@ -9,9 +9,10 @@ from openrouter.types import (
     UNSET,
     UNSET_SENTINEL,
 )
+import pydantic
 from pydantic import model_serializer
 from typing import Optional
-from typing_extensions import NotRequired, TypedDict
+from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class PrivateEndpointCheckTypedDict(TypedDict):
@@ -19,7 +20,7 @@ class PrivateEndpointCheckTypedDict(TypedDict):
     r"""Check name."""
     passed: bool
     actual_model: NotRequired[Nullable[str]]
-    r"""Model the upstream reported serving, when it differs from the request."""
+    r"""Deprecated: validation no longer compares the model the upstream reports, so this field is never returned."""
     reason: NotRequired[PrivateEndpointCheckReason]
     r"""Why the check failed."""
     upstream_message: NotRequired[Nullable[str]]
@@ -34,8 +35,13 @@ class PrivateEndpointCheck(BaseModel):
 
     passed: bool
 
-    actual_model: OptionalNullable[str] = UNSET
-    r"""Model the upstream reported serving, when it differs from the request."""
+    actual_model: Annotated[
+        OptionalNullable[str],
+        pydantic.Field(
+            deprecated="warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+        ),
+    ] = UNSET
+    r"""Deprecated: validation no longer compares the model the upstream reports, so this field is never returned."""
 
     reason: Optional[PrivateEndpointCheckReason] = None
     r"""Why the check failed."""
