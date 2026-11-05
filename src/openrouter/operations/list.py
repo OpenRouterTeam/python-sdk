@@ -12,7 +12,7 @@ from openrouter.types import (
 from openrouter.utils import FieldMetadata, HeaderMetadata, QueryParamMetadata
 import pydantic
 from pydantic import model_serializer
-from typing import List, Optional
+from typing import Awaitable, Callable, List, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
@@ -349,15 +349,28 @@ class ListData(BaseModel):
         return m
 
 
-class ListResponseTypedDict(TypedDict):
+class ListResponseBodyTypedDict(TypedDict):
     r"""List of API keys"""
 
     data: List[ListDataTypedDict]
     r"""List of API keys"""
 
 
-class ListResponse(BaseModel):
+class ListResponseBody(BaseModel):
     r"""List of API keys"""
 
     data: List[ListData]
     r"""List of API keys"""
+
+
+class ListResponseTypedDict(TypedDict):
+    result: ListResponseBodyTypedDict
+
+
+class ListResponse(BaseModel):
+    next: Union[
+        Callable[[], Optional[ListResponse]],
+        Callable[[], Awaitable[Optional[ListResponse]]],
+    ]
+
+    result: ListResponseBody

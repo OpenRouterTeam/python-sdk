@@ -680,6 +680,8 @@ if TYPE_CHECKING:
         ListRequest,
         ListRequestTypedDict,
         ListResponse,
+        ListResponseBody,
+        ListResponseBodyTypedDict,
         ListResponseTypedDict,
     )
     from .listbatches import (
@@ -1784,6 +1786,8 @@ __all__ = [
     "ListRequest",
     "ListRequestTypedDict",
     "ListResponse",
+    "ListResponseBody",
+    "ListResponseBodyTypedDict",
     "ListResponseTypedDict",
     "ListScimGroupMappingsGlobals",
     "ListScimGroupMappingsGlobalsTypedDict",
@@ -2474,6 +2478,8 @@ _dynamic_imports: dict[str, str] = {
     "ListRequest": ".list",
     "ListRequestTypedDict": ".list",
     "ListResponse": ".list",
+    "ListResponseBody": ".list",
+    "ListResponseBodyTypedDict": ".list",
     "ListResponseTypedDict": ".list",
     "ListBatchesGlobals": ".listbatches",
     "ListBatchesGlobalsTypedDict": ".listbatches",

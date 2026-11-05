@@ -82,8 +82,10 @@ with OpenRouter(
 
     res = open_router.api_keys.list()
 
-    # Handle response
-    print(res)
+    while res is not None:
+        # Handle items
+
+        res = res.next()
 
 ```
 
