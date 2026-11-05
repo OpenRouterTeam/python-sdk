@@ -23,12 +23,15 @@ class Images(BaseSDK):
         x_open_router_categories: Optional[str] = None,
         aspect_ratio: Optional[components.ImageGenerationRequestAspectRatio] = None,
         background: Optional[components.ImageGenerationRequestBackground] = None,
+        frame_count: Optional[int] = None,
+        frame_duration_ms: Optional[int] = None,
         input_references: Optional[
             Union[
                 Iterable[components.ContentPartImage],
                 Iterable[components.ContentPartImageTypedDict],
             ]
         ] = None,
+        markup: Optional[Union[components.Markup, components.MarkupTypedDict]] = None,
         n: Optional[int] = None,
         output_compression: Optional[int] = None,
         output_format: Optional[components.ImageGenerationRequestOutputFormat] = None,
@@ -68,10 +71,13 @@ class Images(BaseSDK):
 
         :param aspect_ratio: Normalized aspect ratio of the generated image. Providers clamp to their supported subset.
         :param background: Background treatment. `transparent` requires an output_format that supports alpha (png or webp).
+        :param frame_count: Number of animation frames (2-64) when `output_format` is `gif`. Only honored by models that produce animations (OpenAI gpt-image-2.6, generations only); ignored otherwise.
+        :param frame_duration_ms: Display time of each animation frame in milliseconds (20-2000) when `output_format` is `gif`. Ignored by models that do not produce animations.
         :param input_references: Reference images to guide image-to-image generation, as base64 data URLs or HTTP(S) URLs.
+        :param markup: A transparent PNG overlay (arrows, circles, annotations) with the same dimensions as the first reference image, as a base64 data URL or HTTP(S) URL, guiding where an edit applies. Image-to-image requests only; honored by models with markup-guided editing (OpenAI gpt-image-2.6) and ignored otherwise.
         :param n: Upper bound on the number of images to generate (1-10). Providers may return fewer images, and providers that only support single-image generation reject n > 1.
         :param output_compression: Compression level (0-100) for jpeg/webp output. Ignored by providers without a compression knob; providers that honor it may reject it with other output formats (e.g. OpenAI requires output_format \"jpeg\" or \"webp\").
-        :param output_format: Encoding of the returned image bytes. Most models produce raster formats (png, jpeg, webp). SVG is supported by vectorization models (e.g. Quiver) — the SVG markup is UTF-8 base64-encoded in `b64_json`.
+        :param output_format: Encoding of the returned image bytes. Most models produce raster formats (png, jpeg, webp). SVG is supported by vectorization models (e.g. Quiver) — the SVG markup is UTF-8 base64-encoded in `b64_json`. GIF produces an animation on models that support it (OpenAI gpt-image-2.6; see `frame_count`).
         :param provider: Provider routing preferences and provider-specific passthrough configuration.
         :param quality: Rendering quality. Providers without a quality knob ignore this.
         :param resolution: Normalized resolution tier of the generated image. Concrete pixel dimensions are derived per-provider.
@@ -98,12 +104,15 @@ class Images(BaseSDK):
         x_open_router_categories: Optional[str] = None,
         aspect_ratio: Optional[components.ImageGenerationRequestAspectRatio] = None,
         background: Optional[components.ImageGenerationRequestBackground] = None,
+        frame_count: Optional[int] = None,
+        frame_duration_ms: Optional[int] = None,
         input_references: Optional[
             Union[
                 Iterable[components.ContentPartImage],
                 Iterable[components.ContentPartImageTypedDict],
             ]
         ] = None,
+        markup: Optional[Union[components.Markup, components.MarkupTypedDict]] = None,
         n: Optional[int] = None,
         output_compression: Optional[int] = None,
         output_format: Optional[components.ImageGenerationRequestOutputFormat] = None,
@@ -143,10 +152,13 @@ class Images(BaseSDK):
 
         :param aspect_ratio: Normalized aspect ratio of the generated image. Providers clamp to their supported subset.
         :param background: Background treatment. `transparent` requires an output_format that supports alpha (png or webp).
+        :param frame_count: Number of animation frames (2-64) when `output_format` is `gif`. Only honored by models that produce animations (OpenAI gpt-image-2.6, generations only); ignored otherwise.
+        :param frame_duration_ms: Display time of each animation frame in milliseconds (20-2000) when `output_format` is `gif`. Ignored by models that do not produce animations.
         :param input_references: Reference images to guide image-to-image generation, as base64 data URLs or HTTP(S) URLs.
+        :param markup: A transparent PNG overlay (arrows, circles, annotations) with the same dimensions as the first reference image, as a base64 data URL or HTTP(S) URL, guiding where an edit applies. Image-to-image requests only; honored by models with markup-guided editing (OpenAI gpt-image-2.6) and ignored otherwise.
         :param n: Upper bound on the number of images to generate (1-10). Providers may return fewer images, and providers that only support single-image generation reject n > 1.
         :param output_compression: Compression level (0-100) for jpeg/webp output. Ignored by providers without a compression knob; providers that honor it may reject it with other output formats (e.g. OpenAI requires output_format \"jpeg\" or \"webp\").
-        :param output_format: Encoding of the returned image bytes. Most models produce raster formats (png, jpeg, webp). SVG is supported by vectorization models (e.g. Quiver) — the SVG markup is UTF-8 base64-encoded in `b64_json`.
+        :param output_format: Encoding of the returned image bytes. Most models produce raster formats (png, jpeg, webp). SVG is supported by vectorization models (e.g. Quiver) — the SVG markup is UTF-8 base64-encoded in `b64_json`. GIF produces an animation on models that support it (OpenAI gpt-image-2.6; see `frame_count`).
         :param provider: Provider routing preferences and provider-specific passthrough configuration.
         :param quality: Rendering quality. Providers without a quality knob ignore this.
         :param resolution: Normalized resolution tier of the generated image. Concrete pixel dimensions are derived per-provider.
@@ -173,12 +185,15 @@ class Images(BaseSDK):
         x_open_router_categories: Optional[str] = None,
         aspect_ratio: Optional[components.ImageGenerationRequestAspectRatio] = None,
         background: Optional[components.ImageGenerationRequestBackground] = None,
+        frame_count: Optional[int] = None,
+        frame_duration_ms: Optional[int] = None,
         input_references: Optional[
             Union[
                 Iterable[components.ContentPartImage],
                 Iterable[components.ContentPartImageTypedDict],
             ]
         ] = None,
+        markup: Optional[Union[components.Markup, components.MarkupTypedDict]] = None,
         n: Optional[int] = None,
         output_compression: Optional[int] = None,
         output_format: Optional[components.ImageGenerationRequestOutputFormat] = None,
@@ -221,10 +236,13 @@ class Images(BaseSDK):
 
         :param aspect_ratio: Normalized aspect ratio of the generated image. Providers clamp to their supported subset.
         :param background: Background treatment. `transparent` requires an output_format that supports alpha (png or webp).
+        :param frame_count: Number of animation frames (2-64) when `output_format` is `gif`. Only honored by models that produce animations (OpenAI gpt-image-2.6, generations only); ignored otherwise.
+        :param frame_duration_ms: Display time of each animation frame in milliseconds (20-2000) when `output_format` is `gif`. Ignored by models that do not produce animations.
         :param input_references: Reference images to guide image-to-image generation, as base64 data URLs or HTTP(S) URLs.
+        :param markup: A transparent PNG overlay (arrows, circles, annotations) with the same dimensions as the first reference image, as a base64 data URL or HTTP(S) URL, guiding where an edit applies. Image-to-image requests only; honored by models with markup-guided editing (OpenAI gpt-image-2.6) and ignored otherwise.
         :param n: Upper bound on the number of images to generate (1-10). Providers may return fewer images, and providers that only support single-image generation reject n > 1.
         :param output_compression: Compression level (0-100) for jpeg/webp output. Ignored by providers without a compression knob; providers that honor it may reject it with other output formats (e.g. OpenAI requires output_format \"jpeg\" or \"webp\").
-        :param output_format: Encoding of the returned image bytes. Most models produce raster formats (png, jpeg, webp). SVG is supported by vectorization models (e.g. Quiver) — the SVG markup is UTF-8 base64-encoded in `b64_json`.
+        :param output_format: Encoding of the returned image bytes. Most models produce raster formats (png, jpeg, webp). SVG is supported by vectorization models (e.g. Quiver) — the SVG markup is UTF-8 base64-encoded in `b64_json`. GIF produces an animation on models that support it (OpenAI gpt-image-2.6; see `frame_count`).
         :param provider: Provider routing preferences and provider-specific passthrough configuration.
         :param quality: Rendering quality. Providers without a quality knob ignore this.
         :param resolution: Normalized resolution tier of the generated image. Concrete pixel dimensions are derived per-provider.
@@ -250,12 +268,15 @@ class Images(BaseSDK):
         x_open_router_categories: Optional[str] = None,
         aspect_ratio: Optional[components.ImageGenerationRequestAspectRatio] = None,
         background: Optional[components.ImageGenerationRequestBackground] = None,
+        frame_count: Optional[int] = None,
+        frame_duration_ms: Optional[int] = None,
         input_references: Optional[
             Union[
                 Iterable[components.ContentPartImage],
                 Iterable[components.ContentPartImageTypedDict],
             ]
         ] = None,
+        markup: Optional[Union[components.Markup, components.MarkupTypedDict]] = None,
         n: Optional[int] = None,
         output_compression: Optional[int] = None,
         output_format: Optional[components.ImageGenerationRequestOutputFormat] = None,
@@ -298,10 +319,13 @@ class Images(BaseSDK):
 
         :param aspect_ratio: Normalized aspect ratio of the generated image. Providers clamp to their supported subset.
         :param background: Background treatment. `transparent` requires an output_format that supports alpha (png or webp).
+        :param frame_count: Number of animation frames (2-64) when `output_format` is `gif`. Only honored by models that produce animations (OpenAI gpt-image-2.6, generations only); ignored otherwise.
+        :param frame_duration_ms: Display time of each animation frame in milliseconds (20-2000) when `output_format` is `gif`. Ignored by models that do not produce animations.
         :param input_references: Reference images to guide image-to-image generation, as base64 data URLs or HTTP(S) URLs.
+        :param markup: A transparent PNG overlay (arrows, circles, annotations) with the same dimensions as the first reference image, as a base64 data URL or HTTP(S) URL, guiding where an edit applies. Image-to-image requests only; honored by models with markup-guided editing (OpenAI gpt-image-2.6) and ignored otherwise.
         :param n: Upper bound on the number of images to generate (1-10). Providers may return fewer images, and providers that only support single-image generation reject n > 1.
         :param output_compression: Compression level (0-100) for jpeg/webp output. Ignored by providers without a compression knob; providers that honor it may reject it with other output formats (e.g. OpenAI requires output_format \"jpeg\" or \"webp\").
-        :param output_format: Encoding of the returned image bytes. Most models produce raster formats (png, jpeg, webp). SVG is supported by vectorization models (e.g. Quiver) — the SVG markup is UTF-8 base64-encoded in `b64_json`.
+        :param output_format: Encoding of the returned image bytes. Most models produce raster formats (png, jpeg, webp). SVG is supported by vectorization models (e.g. Quiver) — the SVG markup is UTF-8 base64-encoded in `b64_json`. GIF produces an animation on models that support it (OpenAI gpt-image-2.6; see `frame_count`).
         :param provider: Provider routing preferences and provider-specific passthrough configuration.
         :param quality: Rendering quality. Providers without a quality knob ignore this.
         :param resolution: Normalized resolution tier of the generated image. Concrete pixel dimensions are derived per-provider.
@@ -333,9 +357,12 @@ class Images(BaseSDK):
             image_generation_request=components.ImageGenerationRequest(
                 aspect_ratio=aspect_ratio,
                 background=background,
+                frame_count=frame_count,
+                frame_duration_ms=frame_duration_ms,
                 input_references=utils.get_pydantic_model(
                     input_references, Optional[List[components.ContentPartImage]]
                 ),
+                markup=utils.get_pydantic_model(markup, Optional[components.Markup]),
                 model=model,
                 n=n,
                 output_compression=output_compression,
@@ -538,12 +565,15 @@ class Images(BaseSDK):
         x_open_router_categories: Optional[str] = None,
         aspect_ratio: Optional[components.ImageGenerationRequestAspectRatio] = None,
         background: Optional[components.ImageGenerationRequestBackground] = None,
+        frame_count: Optional[int] = None,
+        frame_duration_ms: Optional[int] = None,
         input_references: Optional[
             Union[
                 Iterable[components.ContentPartImage],
                 Iterable[components.ContentPartImageTypedDict],
             ]
         ] = None,
+        markup: Optional[Union[components.Markup, components.MarkupTypedDict]] = None,
         n: Optional[int] = None,
         output_compression: Optional[int] = None,
         output_format: Optional[components.ImageGenerationRequestOutputFormat] = None,
@@ -583,10 +613,13 @@ class Images(BaseSDK):
 
         :param aspect_ratio: Normalized aspect ratio of the generated image. Providers clamp to their supported subset.
         :param background: Background treatment. `transparent` requires an output_format that supports alpha (png or webp).
+        :param frame_count: Number of animation frames (2-64) when `output_format` is `gif`. Only honored by models that produce animations (OpenAI gpt-image-2.6, generations only); ignored otherwise.
+        :param frame_duration_ms: Display time of each animation frame in milliseconds (20-2000) when `output_format` is `gif`. Ignored by models that do not produce animations.
         :param input_references: Reference images to guide image-to-image generation, as base64 data URLs or HTTP(S) URLs.
+        :param markup: A transparent PNG overlay (arrows, circles, annotations) with the same dimensions as the first reference image, as a base64 data URL or HTTP(S) URL, guiding where an edit applies. Image-to-image requests only; honored by models with markup-guided editing (OpenAI gpt-image-2.6) and ignored otherwise.
         :param n: Upper bound on the number of images to generate (1-10). Providers may return fewer images, and providers that only support single-image generation reject n > 1.
         :param output_compression: Compression level (0-100) for jpeg/webp output. Ignored by providers without a compression knob; providers that honor it may reject it with other output formats (e.g. OpenAI requires output_format \"jpeg\" or \"webp\").
-        :param output_format: Encoding of the returned image bytes. Most models produce raster formats (png, jpeg, webp). SVG is supported by vectorization models (e.g. Quiver) — the SVG markup is UTF-8 base64-encoded in `b64_json`.
+        :param output_format: Encoding of the returned image bytes. Most models produce raster formats (png, jpeg, webp). SVG is supported by vectorization models (e.g. Quiver) — the SVG markup is UTF-8 base64-encoded in `b64_json`. GIF produces an animation on models that support it (OpenAI gpt-image-2.6; see `frame_count`).
         :param provider: Provider routing preferences and provider-specific passthrough configuration.
         :param quality: Rendering quality. Providers without a quality knob ignore this.
         :param resolution: Normalized resolution tier of the generated image. Concrete pixel dimensions are derived per-provider.
@@ -613,12 +646,15 @@ class Images(BaseSDK):
         x_open_router_categories: Optional[str] = None,
         aspect_ratio: Optional[components.ImageGenerationRequestAspectRatio] = None,
         background: Optional[components.ImageGenerationRequestBackground] = None,
+        frame_count: Optional[int] = None,
+        frame_duration_ms: Optional[int] = None,
         input_references: Optional[
             Union[
                 Iterable[components.ContentPartImage],
                 Iterable[components.ContentPartImageTypedDict],
             ]
         ] = None,
+        markup: Optional[Union[components.Markup, components.MarkupTypedDict]] = None,
         n: Optional[int] = None,
         output_compression: Optional[int] = None,
         output_format: Optional[components.ImageGenerationRequestOutputFormat] = None,
@@ -658,10 +694,13 @@ class Images(BaseSDK):
 
         :param aspect_ratio: Normalized aspect ratio of the generated image. Providers clamp to their supported subset.
         :param background: Background treatment. `transparent` requires an output_format that supports alpha (png or webp).
+        :param frame_count: Number of animation frames (2-64) when `output_format` is `gif`. Only honored by models that produce animations (OpenAI gpt-image-2.6, generations only); ignored otherwise.
+        :param frame_duration_ms: Display time of each animation frame in milliseconds (20-2000) when `output_format` is `gif`. Ignored by models that do not produce animations.
         :param input_references: Reference images to guide image-to-image generation, as base64 data URLs or HTTP(S) URLs.
+        :param markup: A transparent PNG overlay (arrows, circles, annotations) with the same dimensions as the first reference image, as a base64 data URL or HTTP(S) URL, guiding where an edit applies. Image-to-image requests only; honored by models with markup-guided editing (OpenAI gpt-image-2.6) and ignored otherwise.
         :param n: Upper bound on the number of images to generate (1-10). Providers may return fewer images, and providers that only support single-image generation reject n > 1.
         :param output_compression: Compression level (0-100) for jpeg/webp output. Ignored by providers without a compression knob; providers that honor it may reject it with other output formats (e.g. OpenAI requires output_format \"jpeg\" or \"webp\").
-        :param output_format: Encoding of the returned image bytes. Most models produce raster formats (png, jpeg, webp). SVG is supported by vectorization models (e.g. Quiver) — the SVG markup is UTF-8 base64-encoded in `b64_json`.
+        :param output_format: Encoding of the returned image bytes. Most models produce raster formats (png, jpeg, webp). SVG is supported by vectorization models (e.g. Quiver) — the SVG markup is UTF-8 base64-encoded in `b64_json`. GIF produces an animation on models that support it (OpenAI gpt-image-2.6; see `frame_count`).
         :param provider: Provider routing preferences and provider-specific passthrough configuration.
         :param quality: Rendering quality. Providers without a quality knob ignore this.
         :param resolution: Normalized resolution tier of the generated image. Concrete pixel dimensions are derived per-provider.
@@ -688,12 +727,15 @@ class Images(BaseSDK):
         x_open_router_categories: Optional[str] = None,
         aspect_ratio: Optional[components.ImageGenerationRequestAspectRatio] = None,
         background: Optional[components.ImageGenerationRequestBackground] = None,
+        frame_count: Optional[int] = None,
+        frame_duration_ms: Optional[int] = None,
         input_references: Optional[
             Union[
                 Iterable[components.ContentPartImage],
                 Iterable[components.ContentPartImageTypedDict],
             ]
         ] = None,
+        markup: Optional[Union[components.Markup, components.MarkupTypedDict]] = None,
         n: Optional[int] = None,
         output_compression: Optional[int] = None,
         output_format: Optional[components.ImageGenerationRequestOutputFormat] = None,
@@ -736,10 +778,13 @@ class Images(BaseSDK):
 
         :param aspect_ratio: Normalized aspect ratio of the generated image. Providers clamp to their supported subset.
         :param background: Background treatment. `transparent` requires an output_format that supports alpha (png or webp).
+        :param frame_count: Number of animation frames (2-64) when `output_format` is `gif`. Only honored by models that produce animations (OpenAI gpt-image-2.6, generations only); ignored otherwise.
+        :param frame_duration_ms: Display time of each animation frame in milliseconds (20-2000) when `output_format` is `gif`. Ignored by models that do not produce animations.
         :param input_references: Reference images to guide image-to-image generation, as base64 data URLs or HTTP(S) URLs.
+        :param markup: A transparent PNG overlay (arrows, circles, annotations) with the same dimensions as the first reference image, as a base64 data URL or HTTP(S) URL, guiding where an edit applies. Image-to-image requests only; honored by models with markup-guided editing (OpenAI gpt-image-2.6) and ignored otherwise.
         :param n: Upper bound on the number of images to generate (1-10). Providers may return fewer images, and providers that only support single-image generation reject n > 1.
         :param output_compression: Compression level (0-100) for jpeg/webp output. Ignored by providers without a compression knob; providers that honor it may reject it with other output formats (e.g. OpenAI requires output_format \"jpeg\" or \"webp\").
-        :param output_format: Encoding of the returned image bytes. Most models produce raster formats (png, jpeg, webp). SVG is supported by vectorization models (e.g. Quiver) — the SVG markup is UTF-8 base64-encoded in `b64_json`.
+        :param output_format: Encoding of the returned image bytes. Most models produce raster formats (png, jpeg, webp). SVG is supported by vectorization models (e.g. Quiver) — the SVG markup is UTF-8 base64-encoded in `b64_json`. GIF produces an animation on models that support it (OpenAI gpt-image-2.6; see `frame_count`).
         :param provider: Provider routing preferences and provider-specific passthrough configuration.
         :param quality: Rendering quality. Providers without a quality knob ignore this.
         :param resolution: Normalized resolution tier of the generated image. Concrete pixel dimensions are derived per-provider.
@@ -765,12 +810,15 @@ class Images(BaseSDK):
         x_open_router_categories: Optional[str] = None,
         aspect_ratio: Optional[components.ImageGenerationRequestAspectRatio] = None,
         background: Optional[components.ImageGenerationRequestBackground] = None,
+        frame_count: Optional[int] = None,
+        frame_duration_ms: Optional[int] = None,
         input_references: Optional[
             Union[
                 Iterable[components.ContentPartImage],
                 Iterable[components.ContentPartImageTypedDict],
             ]
         ] = None,
+        markup: Optional[Union[components.Markup, components.MarkupTypedDict]] = None,
         n: Optional[int] = None,
         output_compression: Optional[int] = None,
         output_format: Optional[components.ImageGenerationRequestOutputFormat] = None,
@@ -813,10 +861,13 @@ class Images(BaseSDK):
 
         :param aspect_ratio: Normalized aspect ratio of the generated image. Providers clamp to their supported subset.
         :param background: Background treatment. `transparent` requires an output_format that supports alpha (png or webp).
+        :param frame_count: Number of animation frames (2-64) when `output_format` is `gif`. Only honored by models that produce animations (OpenAI gpt-image-2.6, generations only); ignored otherwise.
+        :param frame_duration_ms: Display time of each animation frame in milliseconds (20-2000) when `output_format` is `gif`. Ignored by models that do not produce animations.
         :param input_references: Reference images to guide image-to-image generation, as base64 data URLs or HTTP(S) URLs.
+        :param markup: A transparent PNG overlay (arrows, circles, annotations) with the same dimensions as the first reference image, as a base64 data URL or HTTP(S) URL, guiding where an edit applies. Image-to-image requests only; honored by models with markup-guided editing (OpenAI gpt-image-2.6) and ignored otherwise.
         :param n: Upper bound on the number of images to generate (1-10). Providers may return fewer images, and providers that only support single-image generation reject n > 1.
         :param output_compression: Compression level (0-100) for jpeg/webp output. Ignored by providers without a compression knob; providers that honor it may reject it with other output formats (e.g. OpenAI requires output_format \"jpeg\" or \"webp\").
-        :param output_format: Encoding of the returned image bytes. Most models produce raster formats (png, jpeg, webp). SVG is supported by vectorization models (e.g. Quiver) — the SVG markup is UTF-8 base64-encoded in `b64_json`.
+        :param output_format: Encoding of the returned image bytes. Most models produce raster formats (png, jpeg, webp). SVG is supported by vectorization models (e.g. Quiver) — the SVG markup is UTF-8 base64-encoded in `b64_json`. GIF produces an animation on models that support it (OpenAI gpt-image-2.6; see `frame_count`).
         :param provider: Provider routing preferences and provider-specific passthrough configuration.
         :param quality: Rendering quality. Providers without a quality knob ignore this.
         :param resolution: Normalized resolution tier of the generated image. Concrete pixel dimensions are derived per-provider.
@@ -848,9 +899,12 @@ class Images(BaseSDK):
             image_generation_request=components.ImageGenerationRequest(
                 aspect_ratio=aspect_ratio,
                 background=background,
+                frame_count=frame_count,
+                frame_duration_ms=frame_duration_ms,
                 input_references=utils.get_pydantic_model(
                     input_references, Optional[List[components.ContentPartImage]]
                 ),
+                markup=utils.get_pydantic_model(markup, Optional[components.Markup]),
                 model=model,
                 n=n,
                 output_compression=output_compression,
