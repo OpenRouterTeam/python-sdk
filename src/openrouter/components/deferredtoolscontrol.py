@@ -5,13 +5,19 @@ from .deferredtoolssearchstrategy import (
     DeferredToolsSearchStrategy,
     DeferredToolsSearchStrategyTypedDict,
 )
-from openrouter.types import BaseModel
-from typing import Literal
+from openrouter.types import BaseModel, UnrecognizedStr
+from typing import Literal, Union
 from typing_extensions import TypedDict
 
 
-Profile = Literal["portable",]
-r"""Loading profile. Only `portable` is available in this release: OpenRouter serves deferral with router-built search and call wrappers on any model."""
+Profile = Union[
+    Literal[
+        "portable",
+        "universal",
+    ],
+    UnrecognizedStr,
+]
+r"""Loading profile. `portable` serves the `defer_loading` tools with router-built search and call wrappers on any model and keeps the catalog fixed. `universal` defers every wrappable tool behind the same wrappers so the provider-facing tool list never changes, and rebuilds the catalog from each request so tools can be added or removed mid-conversation."""
 
 
 Protocol = Literal["v1",]
@@ -25,7 +31,7 @@ class DeferredToolsControlTypedDict(TypedDict):
     r"""Opt-in versioned router-level deferred-tool protocol. Replay assistant reasoning unchanged on continuation; keep the catalog unchanged."""
 
     profile: Profile
-    r"""Loading profile. Only `portable` is available in this release: OpenRouter serves deferral with router-built search and call wrappers on any model."""
+    r"""Loading profile. `portable` serves the `defer_loading` tools with router-built search and call wrappers on any model and keeps the catalog fixed. `universal` defers every wrappable tool behind the same wrappers so the provider-facing tool list never changes, and rebuilds the catalog from each request so tools can be added or removed mid-conversation."""
     protocol: Protocol
     search: DeferredToolsSearchStrategyTypedDict
     r"""Router-local regex/BM25 or caller-owned custom search."""
@@ -37,7 +43,7 @@ class DeferredToolsControl(BaseModel):
     r"""Opt-in versioned router-level deferred-tool protocol. Replay assistant reasoning unchanged on continuation; keep the catalog unchanged."""
 
     profile: Profile
-    r"""Loading profile. Only `portable` is available in this release: OpenRouter serves deferral with router-built search and call wrappers on any model."""
+    r"""Loading profile. `portable` serves the `defer_loading` tools with router-built search and call wrappers on any model and keeps the catalog fixed. `universal` defers every wrappable tool behind the same wrappers so the provider-facing tool list never changes, and rebuilds the catalog from each request so tools can be added or removed mid-conversation."""
 
     protocol: Protocol
 

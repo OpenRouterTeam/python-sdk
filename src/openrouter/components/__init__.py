@@ -1755,6 +1755,10 @@ if TYPE_CHECKING:
         Protocol,
         Validation,
     )
+    from .deferredtoolsdetails import (
+        DeferredToolsDetails,
+        DeferredToolsDetailsTypedDict,
+    )
     from .deferredtoolssearchstrategy import (
         DeferredToolsSearchStrategy,
         DeferredToolsSearchStrategyTypedDict,
@@ -3613,6 +3617,7 @@ if TYPE_CHECKING:
         Match,
         MatchTypedDict,
         OutputToolSearchServerToolItem,
+        OutputToolSearchServerToolItemFormat,
         OutputToolSearchServerToolItemType,
         OutputToolSearchServerToolItemTypedDict,
     )
@@ -5927,6 +5932,8 @@ __all__ = [
     "DeferredRegexSearchTypedDict",
     "DeferredToolsControl",
     "DeferredToolsControlTypedDict",
+    "DeferredToolsDetails",
+    "DeferredToolsDetailsTypedDict",
     "DeferredToolsSearchStrategy",
     "DeferredToolsSearchStrategyTypedDict",
     "DeleteBYOKKeyResponse",
@@ -7254,6 +7261,7 @@ __all__ = [
     "OutputToolSearchCallItemType",
     "OutputToolSearchCallItemTypedDict",
     "OutputToolSearchServerToolItem",
+    "OutputToolSearchServerToolItemFormat",
     "OutputToolSearchServerToolItemType",
     "OutputToolSearchServerToolItemTypedDict",
     "OutputWebFetchServerToolItem",
@@ -9486,6 +9494,8 @@ _dynamic_imports: dict[str, str] = {
     "Profile": ".deferredtoolscontrol",
     "Protocol": ".deferredtoolscontrol",
     "Validation": ".deferredtoolscontrol",
+    "DeferredToolsDetails": ".deferredtoolsdetails",
+    "DeferredToolsDetailsTypedDict": ".deferredtoolsdetails",
     "DeferredToolsSearchStrategy": ".deferredtoolssearchstrategy",
     "DeferredToolsSearchStrategyTypedDict": ".deferredtoolssearchstrategy",
     "DeleteBYOKKeyResponse": ".deletebyokkeyresponse",
@@ -10914,6 +10924,7 @@ _dynamic_imports: dict[str, str] = {
     "Match": ".outputtoolsearchservertoolitem",
     "MatchTypedDict": ".outputtoolsearchservertoolitem",
     "OutputToolSearchServerToolItem": ".outputtoolsearchservertoolitem",
+    "OutputToolSearchServerToolItemFormat": ".outputtoolsearchservertoolitem",
     "OutputToolSearchServerToolItemType": ".outputtoolsearchservertoolitem",
     "OutputToolSearchServerToolItemTypedDict": ".outputtoolsearchservertoolitem",
     "OutputWebFetchServerToolItem": ".outputwebfetchservertoolitem",

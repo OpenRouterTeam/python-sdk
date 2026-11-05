@@ -178,10 +178,11 @@ Role = Union[
     Literal[
         "org:admin",
         "org:member",
+        "org:viewer",
     ],
     UnrecognizedStr,
 ]
-r"""Role of the member in the organization"""
+r"""Role of the member in the organization. `org:viewer` is coming soon and not yet available. Once launched, it has read-only organization access: it can view organization settings, billing and workspaces but not change them. Workspace roles can still grant write access in specific workspaces."""
 
 
 class ListOrganizationMembersDataTypedDict(TypedDict):
@@ -194,7 +195,7 @@ class ListOrganizationMembersDataTypedDict(TypedDict):
     last_name: Nullable[str]
     r"""Last name of the member"""
     role: Role
-    r"""Role of the member in the organization"""
+    r"""Role of the member in the organization. `org:viewer` is coming soon and not yet available. Once launched, it has read-only organization access: it can view organization settings, billing and workspaces but not change them. Workspace roles can still grant write access in specific workspaces."""
 
 
 class ListOrganizationMembersData(BaseModel):
@@ -211,7 +212,7 @@ class ListOrganizationMembersData(BaseModel):
     r"""Last name of the member"""
 
     role: Role
-    r"""Role of the member in the organization"""
+    r"""Role of the member in the organization. `org:viewer` is coming soon and not yet available. Once launched, it has read-only organization access: it can view organization settings, billing and workspaces but not change them. Workspace roles can still grant write access in specific workspaces."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
