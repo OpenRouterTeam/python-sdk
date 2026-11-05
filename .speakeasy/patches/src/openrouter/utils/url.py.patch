@@ -1,0 +1,34 @@
+diff --git a/src/openrouter/utils/url.py b/src/openrouter/utils/url.py
+index 8eeaa7b0..3c8362df 100644
+--- a/src/openrouter/utils/url.py
++++ b/src/openrouter/utils/url.py
+@@ -10,6 +10,8 @@ from typing import (
+     get_args,
+     get_origin,
+ )
++from urllib.parse import quote
++
+ from pydantic import BaseModel
+ from pydantic.fields import FieldInfo
+ 
+@@ -40,11 +42,19 @@ def generate_url(
+         _populate_path_params(gbls, None, path_param_values, globals_already_populated)
+ 
+     for key, value in path_param_values.items():
+-        path = path.replace("{" + key + "}", value, 1)
++        path = path.replace("{" + key + "}", _encode_path_param(value), 1)
+ 
+     return remove_suffix(server_url, "/") + path
+ 
+ 
++def _encode_path_param(value: str) -> str:
++    # Percent-encode "/", "?", "#" etc. so a value can't change the request path.
++    # "." and ".." contain no encodable chars and would still be dot segments.
++    if value in (".", ".."):
++        raise ValueError(f"path parameter cannot be {value!r}")
++    return quote(value, safe="")
++
++
+ def _populate_path_params(
+     path_params: Any,
+     gbls: Any,
