@@ -33,6 +33,7 @@ if TYPE_CHECKING:
     from openrouter.externalusers import ExternalUsers
     from openrouter.files import Files
     from openrouter.generations import Generations
+    from openrouter.guardrail_policies import GuardrailPolicies
     from openrouter.guardrails import Guardrails
     from openrouter.images import Images
     from openrouter.models_ import Models
@@ -95,6 +96,8 @@ class OpenRouter(BaseSDK):
     r"""Generation history endpoints"""
     guardrails: "Guardrails"
     r"""Guardrails endpoints"""
+    guardrail_policies: "GuardrailPolicies"
+    r"""Guardrail Policies endpoints"""
     images: "Images"
     r"""Images endpoints"""
     api_keys: "APIKeys"
@@ -150,6 +153,7 @@ class OpenRouter(BaseSDK):
         "files": ("openrouter.files", "Files"),
         "generations": ("openrouter.generations", "Generations"),
         "guardrails": ("openrouter.guardrails", "Guardrails"),
+        "guardrail_policies": ("openrouter.guardrail_policies", "GuardrailPolicies"),
         "images": ("openrouter.images", "Images"),
         "api_keys": ("openrouter.api_keys", "APIKeys"),
         "models": ("openrouter.models_", "Models"),

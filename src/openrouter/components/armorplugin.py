@@ -21,7 +21,7 @@ ArmorPluginMode = Union[
 r"""`enforce` withholds blocked calls; `audit` evaluates and reports the same verdicts without withholding any calls, regardless of `on_error`. Default `enforce`."""
 
 
-OnError = Union[
+ArmorPluginOnError = Union[
     Literal[
         "log",
         "block",
@@ -54,7 +54,7 @@ class ArmorPluginTypedDict(TypedDict):
     r"""Run provider-native server tools (web search, code execution, ...) through the agent loop so Armor evaluates them too. Defaults to false: native passthrough stands and such calls are reported `skipped`."""
     mode: NotRequired[ArmorPluginMode]
     r"""`enforce` withholds blocked calls; `audit` evaluates and reports the same verdicts without withholding any calls, regardless of `on_error`. Default `enforce`."""
-    on_error: NotRequired[OnError]
+    on_error: NotRequired[ArmorPluginOnError]
     r"""When the classifier cannot answer (timeout, upstream error, context too long) the call is reported `unavailable`; `block` rejects it and `log` releases it. Default `block`."""
     output_mode: NotRequired[OutputMode]
     r"""How a blocked call reaches the caller. `text` (the default): the call is withheld and an `<openrouter_armor_blocked>` marker stands in assistant text. `custom_item` (Responses API only): the call is withheld and an `openrouter:armor_blocked` output item carries its id, name, arguments and the rule that fired. `claude_code_compatibility` (Messages API only; the default when the request carries a `dangerous_tool_use` safeguard, i.e. the client speaks Claude Code's protocol): the `tool_use` stays in `content[]` and the verdict is `flagged` in `safeguard_results`, so the client withholds execution and writes the error tool result as under the native classifier. Under `text` and `custom_item` the model received a failure result in the loop and continued in the same request; under `claude_code_compatibility` the turn ends on the flagged call and the model continues on the next request, after the client's denial."""
@@ -79,7 +79,7 @@ class ArmorPlugin(BaseModel):
     mode: Optional[ArmorPluginMode] = None
     r"""`enforce` withholds blocked calls; `audit` evaluates and reports the same verdicts without withholding any calls, regardless of `on_error`. Default `enforce`."""
 
-    on_error: Optional[OnError] = None
+    on_error: Optional[ArmorPluginOnError] = None
     r"""When the classifier cannot answer (timeout, upstream error, context too long) the call is reported `unavailable`; `block` rejects it and `log` releases it. Default `block`."""
 
     output_mode: Optional[OutputMode] = None

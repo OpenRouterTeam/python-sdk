@@ -6,6 +6,19 @@ from openrouter.utils.dynamic_imports import lazy_getattr, lazy_dir
 
 if TYPE_CHECKING:
     from .aabenchmarkentry import AABenchmarkEntry, AABenchmarkEntryTypedDict
+    from .accountguardrailpolicy import (
+        AccountGuardrailPolicy,
+        AccountGuardrailPolicyTypedDict,
+        UnknownAccountGuardrailPolicy,
+    )
+    from .accountguardrailpolicyrequest import (
+        AccountGuardrailPolicyRequest,
+        AccountGuardrailPolicyRequestTypedDict,
+    )
+    from .accountguardrailpolicyresponse import (
+        AccountGuardrailPolicyResponse,
+        AccountGuardrailPolicyResponseTypedDict,
+    )
     from .activityitem import ActivityItem, ActivityItemTypedDict
     from .activityresponse import ActivityResponse, ActivityResponseTypedDict
     from .additionaltoolsitem import (
@@ -707,8 +720,8 @@ if TYPE_CHECKING:
         ArmorPlugin,
         ArmorPluginID,
         ArmorPluginMode,
+        ArmorPluginOnError,
         ArmorPluginTypedDict,
-        OnError,
         OutputMode,
     )
     from .armorrule import ArmorRule, ArmorRuleTypedDict
@@ -990,6 +1003,42 @@ if TYPE_CHECKING:
         BooleanCapabilityType,
         BooleanCapabilityTypedDict,
     )
+    from .budgetaccountguardrailpolicy import (
+        BudgetAccountGuardrailPolicy,
+        BudgetAccountGuardrailPolicyPolicyType,
+        BudgetAccountGuardrailPolicyTypedDict,
+    )
+    from .budgetaccountguardrailpolicyrequest import (
+        BudgetAccountGuardrailPolicyRequest,
+        BudgetAccountGuardrailPolicyRequestFloorReassignment,
+        BudgetAccountGuardrailPolicyRequestFloorReassignmentTypedDict,
+        BudgetAccountGuardrailPolicyRequestPolicyType,
+        BudgetAccountGuardrailPolicyRequestTypedDict,
+    )
+    from .budgetguardrailpolicy import (
+        BudgetGuardrailPolicy,
+        BudgetGuardrailPolicyPolicyType,
+        BudgetGuardrailPolicyTypedDict,
+    )
+    from .budgetguardrailpolicydetail import (
+        BudgetGuardrailPolicyDetail,
+        BudgetGuardrailPolicyDetailPolicyType,
+        BudgetGuardrailPolicyDetailReference,
+        BudgetGuardrailPolicyDetailTypedDict,
+    )
+    from .budgetguardrailpolicydetailresponse import (
+        BudgetGuardrailPolicyDetailResponse,
+        BudgetGuardrailPolicyDetailResponseTypedDict,
+    )
+    from .budgetguardrailpolicyresponse import (
+        BudgetGuardrailPolicyResponse,
+        BudgetGuardrailPolicyResponseTypedDict,
+    )
+    from .budgetguardrailpolicysummary import (
+        BudgetGuardrailPolicySummary,
+        BudgetGuardrailPolicySummaryPolicyType,
+        BudgetGuardrailPolicySummaryTypedDict,
+    )
     from .bulkaddworkspacemembersrequest import (
         BulkAddWorkspaceMembersRequest,
         BulkAddWorkspaceMembersRequestTypedDict,
@@ -1044,6 +1093,15 @@ if TYPE_CHECKING:
         CapabilityDescriptor,
         CapabilityDescriptorTypedDict,
         UnknownCapabilityDescriptor,
+    )
+    from .changeguardrailpolicyassignmentrequest import (
+        ChangeGuardrailPolicyAssignmentRequest,
+        ChangeGuardrailPolicyAssignmentRequestPolicyType,
+        ChangeGuardrailPolicyAssignmentRequestTypedDict,
+    )
+    from .changeguardrailpolicyassignmentresponse import (
+        ChangeGuardrailPolicyAssignmentResponse,
+        ChangeGuardrailPolicyAssignmentResponseTypedDict,
     )
     from .chatassistantimages import (
         ChatAssistantImages,
@@ -1496,6 +1554,11 @@ if TYPE_CHECKING:
         ContextCompressionPluginTypedDict,
     )
     from .costdetails import CostDetails, CostDetailsTypedDict
+    from .createbudgetguardrailpolicyrequest import (
+        CreateBudgetGuardrailPolicyRequest,
+        CreateBudgetGuardrailPolicyRequestPolicyType,
+        CreateBudgetGuardrailPolicyRequestTypedDict,
+    )
     from .createbyokkeyrequest import (
         CreateBYOKKeyRequest,
         CreateBYOKKeyRequestDeclaredRegion,
@@ -1516,6 +1579,16 @@ if TYPE_CHECKING:
     from .createguardrailresponse import (
         CreateGuardrailResponse,
         CreateGuardrailResponseTypedDict,
+    )
+    from .createmodelavailabilityguardrailpolicyrequest import (
+        CreateModelAvailabilityGuardrailPolicyRequest,
+        CreateModelAvailabilityGuardrailPolicyRequestPolicyType,
+        CreateModelAvailabilityGuardrailPolicyRequestTypedDict,
+    )
+    from .createmoderationguardrailpolicyrequest import (
+        CreateModerationGuardrailPolicyRequest,
+        CreateModerationGuardrailPolicyRequestPolicyType,
+        CreateModerationGuardrailPolicyRequestTypedDict,
     )
     from .createobservabilitydestinationrequest import (
         CreateObservabilityDestinationRequest,
@@ -1766,6 +1839,10 @@ if TYPE_CHECKING:
     from .deletebyokkeyresponse import (
         DeleteBYOKKeyResponse,
         DeleteBYOKKeyResponseTypedDict,
+    )
+    from .deleteguardrailpolicyresponse import (
+        DeleteGuardrailPolicyResponse,
+        DeleteGuardrailPolicyResponseTypedDict,
     )
     from .deleteguardrailresponse import (
         DeleteGuardrailResponse,
@@ -2289,8 +2366,55 @@ if TYPE_CHECKING:
         GoneResponseErrorDataTypedDict,
     )
     from .guardrail import Guardrail, GuardrailTypedDict
+    from .guardrailbudgetpolicyauthoringconfig import (
+        GuardrailBudgetPolicyAuthoringConfig,
+        GuardrailBudgetPolicyAuthoringConfigResetInterval,
+        GuardrailBudgetPolicyAuthoringConfigTypedDict,
+    )
+    from .guardrailbudgetpolicyconfig import (
+        GuardrailBudgetPolicyConfig,
+        GuardrailBudgetPolicyConfigTypedDict,
+    )
     from .guardraildataregion import GuardrailDataRegion
     from .guardrailinterval import GuardrailInterval
+    from .guardrailmodelavailabilitypolicyauthoringconfig import (
+        GuardrailModelAvailabilityPolicyAuthoringConfig,
+        GuardrailModelAvailabilityPolicyAuthoringConfigTypedDict,
+    )
+    from .guardrailmodelavailabilitypolicyconfig import (
+        GuardrailModelAvailabilityPolicyConfig,
+        GuardrailModelAvailabilityPolicyConfigTypedDict,
+    )
+    from .guardrailmoderationpolicyconfig import (
+        Armor,
+        ArmorTypedDict,
+        ContentFilter,
+        ContentFilterBuiltin,
+        ContentFilterBuiltinTypedDict,
+        ContentFilterTypedDict,
+        GuardrailModerationPolicyConfig,
+        GuardrailModerationPolicyConfigContentFilterAction,
+        GuardrailModerationPolicyConfigContentFilterBuiltinAction,
+        GuardrailModerationPolicyConfigMode,
+        GuardrailModerationPolicyConfigOnError,
+        GuardrailModerationPolicyConfigTypedDict,
+        LakeraInjectionProtectionMode,
+        ModelArmorInjectionConfidenceLevel,
+        ModelArmorInjectionProtectionMode,
+        PiiFilter,
+        PiiFilterAction,
+        PiiFilterTypedDict,
+        ScanScope,
+        Slug,
+    )
+    from .guardrailpolicyassignmentresponse import (
+        GuardrailPolicyAssignmentResponse,
+        GuardrailPolicyAssignmentResponseTypedDict,
+    )
+    from .guardrailpolicyassignmentstate import (
+        GuardrailPolicyAssignmentState,
+        GuardrailPolicyAssignmentStateTypedDict,
+    )
     from .imageconfig import ImageConfig, ImageConfigTypedDict
     from .imageendpoint import ImageEndpoint, ImageEndpointTypedDict
     from .imagegencallcompletedevent import (
@@ -2548,6 +2672,14 @@ if TYPE_CHECKING:
         LegacyWebSearchServerToolType,
         LegacyWebSearchServerToolTypedDict,
     )
+    from .listaccountguardrailpoliciesresponse import (
+        ListAccountGuardrailPoliciesResponse,
+        ListAccountGuardrailPoliciesResponseTypedDict,
+    )
+    from .listbudgetguardrailpoliciesresponse import (
+        ListBudgetGuardrailPoliciesResponse,
+        ListBudgetGuardrailPoliciesResponseTypedDict,
+    )
     from .listbyokkeysresponse import (
         ListBYOKKeysResponse,
         ListBYOKKeysResponseTypedDict,
@@ -2573,6 +2705,14 @@ if TYPE_CHECKING:
     from .listmemberassignmentsresponse import (
         ListMemberAssignmentsResponse,
         ListMemberAssignmentsResponseTypedDict,
+    )
+    from .listmodelavailabilityguardrailpoliciesresponse import (
+        ListModelAvailabilityGuardrailPoliciesResponse,
+        ListModelAvailabilityGuardrailPoliciesResponseTypedDict,
+    )
+    from .listmoderationguardrailpoliciesresponse import (
+        ListModerationGuardrailPoliciesResponse,
+        ListModerationGuardrailPoliciesResponseTypedDict,
     )
     from .listobservabilitydestinationsresponse import (
         ListObservabilityDestinationsResponse,
@@ -2969,6 +3109,42 @@ if TYPE_CHECKING:
     from .model import Model, ModelTypedDict
     from .modelaliastarget import ModelAliasTarget, ModelAliasTargetTypedDict
     from .modelarchitecture import ModelArchitecture, ModelArchitectureTypedDict
+    from .modelavailabilityaccountguardrailpolicy import (
+        ModelAvailabilityAccountGuardrailPolicy,
+        ModelAvailabilityAccountGuardrailPolicyPolicyType,
+        ModelAvailabilityAccountGuardrailPolicyTypedDict,
+    )
+    from .modelavailabilityaccountguardrailpolicyrequest import (
+        ModelAvailabilityAccountGuardrailPolicyRequest,
+        ModelAvailabilityAccountGuardrailPolicyRequestFloorReassignment,
+        ModelAvailabilityAccountGuardrailPolicyRequestFloorReassignmentTypedDict,
+        ModelAvailabilityAccountGuardrailPolicyRequestPolicyType,
+        ModelAvailabilityAccountGuardrailPolicyRequestTypedDict,
+    )
+    from .modelavailabilityguardrailpolicy import (
+        ModelAvailabilityGuardrailPolicy,
+        ModelAvailabilityGuardrailPolicyPolicyType,
+        ModelAvailabilityGuardrailPolicyTypedDict,
+    )
+    from .modelavailabilityguardrailpolicydetail import (
+        ModelAvailabilityGuardrailPolicyDetail,
+        ModelAvailabilityGuardrailPolicyDetailPolicyType,
+        ModelAvailabilityGuardrailPolicyDetailReference,
+        ModelAvailabilityGuardrailPolicyDetailTypedDict,
+    )
+    from .modelavailabilityguardrailpolicydetailresponse import (
+        ModelAvailabilityGuardrailPolicyDetailResponse,
+        ModelAvailabilityGuardrailPolicyDetailResponseTypedDict,
+    )
+    from .modelavailabilityguardrailpolicyresponse import (
+        ModelAvailabilityGuardrailPolicyResponse,
+        ModelAvailabilityGuardrailPolicyResponseTypedDict,
+    )
+    from .modelavailabilityguardrailpolicysummary import (
+        ModelAvailabilityGuardrailPolicySummary,
+        ModelAvailabilityGuardrailPolicySummaryPolicyType,
+        ModelAvailabilityGuardrailPolicySummaryTypedDict,
+    )
     from .modelbenchmarks import ModelBenchmarks, ModelBenchmarksTypedDict
     from .modelgroup import ModelGroup
     from .modellinks import ModelLinks, ModelLinksTypedDict
@@ -2985,6 +3161,42 @@ if TYPE_CHECKING:
         ModelsListResponseLinks,
         ModelsListResponseLinksTypedDict,
         ModelsListResponseTypedDict,
+    )
+    from .moderationaccountguardrailpolicy import (
+        ModerationAccountGuardrailPolicy,
+        ModerationAccountGuardrailPolicyPolicyType,
+        ModerationAccountGuardrailPolicyTypedDict,
+    )
+    from .moderationaccountguardrailpolicyrequest import (
+        ModerationAccountGuardrailPolicyRequest,
+        ModerationAccountGuardrailPolicyRequestFloorReassignment,
+        ModerationAccountGuardrailPolicyRequestFloorReassignmentTypedDict,
+        ModerationAccountGuardrailPolicyRequestPolicyType,
+        ModerationAccountGuardrailPolicyRequestTypedDict,
+    )
+    from .moderationguardrailpolicy import (
+        ModerationGuardrailPolicy,
+        ModerationGuardrailPolicyPolicyType,
+        ModerationGuardrailPolicyTypedDict,
+    )
+    from .moderationguardrailpolicydetail import (
+        ModerationGuardrailPolicyDetail,
+        ModerationGuardrailPolicyDetailPolicyType,
+        ModerationGuardrailPolicyDetailReference,
+        ModerationGuardrailPolicyDetailTypedDict,
+    )
+    from .moderationguardrailpolicydetailresponse import (
+        ModerationGuardrailPolicyDetailResponse,
+        ModerationGuardrailPolicyDetailResponseTypedDict,
+    )
+    from .moderationguardrailpolicyresponse import (
+        ModerationGuardrailPolicyResponse,
+        ModerationGuardrailPolicyResponseTypedDict,
+    )
+    from .moderationguardrailpolicysummary import (
+        ModerationGuardrailPolicySummary,
+        ModerationGuardrailPolicySummaryPolicyType,
+        ModerationGuardrailPolicySummaryTypedDict,
     )
     from .moderationplugin import (
         ModerationPlugin,
@@ -3609,8 +3821,8 @@ if TYPE_CHECKING:
         UnknownOutputItemWebSearchCallActionUnion,
     )
     from .outputmemoryservertoolitem import (
-        ActionEnum,
         OutputMemoryServerToolItem,
+        OutputMemoryServerToolItemAction,
         OutputMemoryServerToolItemType,
         OutputMemoryServerToolItemTypedDict,
     )
@@ -4545,6 +4757,10 @@ if TYPE_CHECKING:
         UnprocessableEntityResponseErrorData,
         UnprocessableEntityResponseErrorDataTypedDict,
     )
+    from .updatebudgetguardrailpolicyrequest import (
+        UpdateBudgetGuardrailPolicyRequest,
+        UpdateBudgetGuardrailPolicyRequestTypedDict,
+    )
     from .updatebyokkeyrequest import (
         UpdateBYOKKeyRequest,
         UpdateBYOKKeyRequestDeclaredRegion,
@@ -4565,6 +4781,14 @@ if TYPE_CHECKING:
     from .updateguardrailresponse import (
         UpdateGuardrailResponse,
         UpdateGuardrailResponseTypedDict,
+    )
+    from .updatemodelavailabilityguardrailpolicyrequest import (
+        UpdateModelAvailabilityGuardrailPolicyRequest,
+        UpdateModelAvailabilityGuardrailPolicyRequestTypedDict,
+    )
+    from .updatemoderationguardrailpolicyrequest import (
+        UpdateModerationGuardrailPolicyRequest,
+        UpdateModerationGuardrailPolicyRequestTypedDict,
     )
     from .updateobservabilitydestinationrequest import (
         UpdateObservabilityDestinationRequest,
@@ -4842,10 +5066,15 @@ __all__ = [
     "APIErrorType",
     "APIType",
     "Account",
+    "AccountGuardrailPolicy",
+    "AccountGuardrailPolicyRequest",
+    "AccountGuardrailPolicyRequestTypedDict",
+    "AccountGuardrailPolicyResponse",
+    "AccountGuardrailPolicyResponseTypedDict",
+    "AccountGuardrailPolicyTypedDict",
     "AccountScope",
     "AccountType",
     "AccountTypedDict",
-    "ActionEnum",
     "ActivityItem",
     "ActivityItemTypedDict",
     "ActivityResponse",
@@ -5300,6 +5529,7 @@ __all__ = [
     "ApplyPatchUpdateFileOperationTypedDict",
     "Architecture",
     "ArchitectureTypedDict",
+    "Armor",
     "ArmorAutoMode",
     "ArmorAutoModeTypedDict",
     "ArmorContext",
@@ -5309,6 +5539,7 @@ __all__ = [
     "ArmorPlugin",
     "ArmorPluginID",
     "ArmorPluginMode",
+    "ArmorPluginOnError",
     "ArmorPluginTypedDict",
     "ArmorRule",
     "ArmorRuleTypedDict",
@@ -5317,6 +5548,7 @@ __all__ = [
     "ArmorSafeguardResultStatus",
     "ArmorSafeguardResultStatusTypedDict",
     "ArmorSafeguardResultTypedDict",
+    "ArmorTypedDict",
     "AudioURL",
     "AudioURLTypedDict",
     "AuthMode",
@@ -5487,6 +5719,28 @@ __all__ = [
     "BooleanCapabilityTypedDict",
     "Box",
     "BoxTypedDict",
+    "BudgetAccountGuardrailPolicy",
+    "BudgetAccountGuardrailPolicyPolicyType",
+    "BudgetAccountGuardrailPolicyRequest",
+    "BudgetAccountGuardrailPolicyRequestFloorReassignment",
+    "BudgetAccountGuardrailPolicyRequestFloorReassignmentTypedDict",
+    "BudgetAccountGuardrailPolicyRequestPolicyType",
+    "BudgetAccountGuardrailPolicyRequestTypedDict",
+    "BudgetAccountGuardrailPolicyTypedDict",
+    "BudgetGuardrailPolicy",
+    "BudgetGuardrailPolicyDetail",
+    "BudgetGuardrailPolicyDetailPolicyType",
+    "BudgetGuardrailPolicyDetailReference",
+    "BudgetGuardrailPolicyDetailResponse",
+    "BudgetGuardrailPolicyDetailResponseTypedDict",
+    "BudgetGuardrailPolicyDetailTypedDict",
+    "BudgetGuardrailPolicyPolicyType",
+    "BudgetGuardrailPolicyResponse",
+    "BudgetGuardrailPolicyResponseTypedDict",
+    "BudgetGuardrailPolicySummary",
+    "BudgetGuardrailPolicySummaryPolicyType",
+    "BudgetGuardrailPolicySummaryTypedDict",
+    "BudgetGuardrailPolicyTypedDict",
     "BulkAddWorkspaceMembersRequest",
     "BulkAddWorkspaceMembersRequestTypedDict",
     "BulkAddWorkspaceMembersResponse",
@@ -5514,6 +5768,11 @@ __all__ = [
     "By",
     "CapabilityDescriptor",
     "CapabilityDescriptorTypedDict",
+    "ChangeGuardrailPolicyAssignmentRequest",
+    "ChangeGuardrailPolicyAssignmentRequestPolicyType",
+    "ChangeGuardrailPolicyAssignmentRequestTypedDict",
+    "ChangeGuardrailPolicyAssignmentResponse",
+    "ChangeGuardrailPolicyAssignmentResponseTypedDict",
     "ChatAssistantImages",
     "ChatAssistantImagesImageURL",
     "ChatAssistantImagesImageURLTypedDict",
@@ -5784,15 +6043,19 @@ __all__ = [
     "ContentCompactionTypedDict",
     "ContentEncryptedContent",
     "ContentEncryptedContentTypedDict",
+    "ContentFilter",
     "ContentFilterAction",
+    "ContentFilterBuiltin",
     "ContentFilterBuiltinAction",
     "ContentFilterBuiltinEntry",
     "ContentFilterBuiltinEntryInput",
     "ContentFilterBuiltinEntryInputTypedDict",
     "ContentFilterBuiltinEntryTypedDict",
     "ContentFilterBuiltinSlug",
+    "ContentFilterBuiltinTypedDict",
     "ContentFilterEntry",
     "ContentFilterEntryTypedDict",
+    "ContentFilterTypedDict",
     "ContentImageURL",
     "ContentImageURLImageURL",
     "ContentImageURLImageURLTypedDict",
@@ -5867,12 +6130,21 @@ __all__ = [
     "CreateBYOKKeyRequestTypedDict",
     "CreateBYOKKeyResponse",
     "CreateBYOKKeyResponseTypedDict",
+    "CreateBudgetGuardrailPolicyRequest",
+    "CreateBudgetGuardrailPolicyRequestPolicyType",
+    "CreateBudgetGuardrailPolicyRequestTypedDict",
     "CreateExternalUserRequest",
     "CreateExternalUserRequestTypedDict",
     "CreateGuardrailRequest",
     "CreateGuardrailRequestTypedDict",
     "CreateGuardrailResponse",
     "CreateGuardrailResponseTypedDict",
+    "CreateModelAvailabilityGuardrailPolicyRequest",
+    "CreateModelAvailabilityGuardrailPolicyRequestPolicyType",
+    "CreateModelAvailabilityGuardrailPolicyRequestTypedDict",
+    "CreateModerationGuardrailPolicyRequest",
+    "CreateModerationGuardrailPolicyRequestPolicyType",
+    "CreateModerationGuardrailPolicyRequestTypedDict",
     "CreateObservabilityDestinationRequest",
     "CreateObservabilityDestinationRequestType",
     "CreateObservabilityDestinationRequestTypedDict",
@@ -6028,6 +6300,8 @@ __all__ = [
     "DeferredToolsSearchStrategyTypedDict",
     "DeleteBYOKKeyResponse",
     "DeleteBYOKKeyResponseTypedDict",
+    "DeleteGuardrailPolicyResponse",
+    "DeleteGuardrailPolicyResponseTypedDict",
     "DeleteGuardrailResponse",
     "DeleteGuardrailResponseTypedDict",
     "DeleteObservabilityDestinationResponse",
@@ -6436,8 +6710,27 @@ __all__ = [
     "GoogleTypedDict",
     "GrantType",
     "Guardrail",
+    "GuardrailBudgetPolicyAuthoringConfig",
+    "GuardrailBudgetPolicyAuthoringConfigResetInterval",
+    "GuardrailBudgetPolicyAuthoringConfigTypedDict",
+    "GuardrailBudgetPolicyConfig",
+    "GuardrailBudgetPolicyConfigTypedDict",
     "GuardrailDataRegion",
     "GuardrailInterval",
+    "GuardrailModelAvailabilityPolicyAuthoringConfig",
+    "GuardrailModelAvailabilityPolicyAuthoringConfigTypedDict",
+    "GuardrailModelAvailabilityPolicyConfig",
+    "GuardrailModelAvailabilityPolicyConfigTypedDict",
+    "GuardrailModerationPolicyConfig",
+    "GuardrailModerationPolicyConfigContentFilterAction",
+    "GuardrailModerationPolicyConfigContentFilterBuiltinAction",
+    "GuardrailModerationPolicyConfigMode",
+    "GuardrailModerationPolicyConfigOnError",
+    "GuardrailModerationPolicyConfigTypedDict",
+    "GuardrailPolicyAssignmentResponse",
+    "GuardrailPolicyAssignmentResponseTypedDict",
+    "GuardrailPolicyAssignmentState",
+    "GuardrailPolicyAssignmentStateTypedDict",
     "GuardrailTypedDict",
     "HardDeny",
     "HardDenyTypedDict",
@@ -6651,6 +6944,7 @@ __all__ = [
     "KeyBudgetTypedDict",
     "KeyTypedDict",
     "Kty",
+    "LakeraInjectionProtectionMode",
     "LegacyChatContentVideo",
     "LegacyChatContentVideoInput",
     "LegacyChatContentVideoInputProcessing",
@@ -6662,8 +6956,12 @@ __all__ = [
     "LegacyWebSearchServerToolTypedDict",
     "Legend",
     "LegendTypedDict",
+    "ListAccountGuardrailPoliciesResponse",
+    "ListAccountGuardrailPoliciesResponseTypedDict",
     "ListBYOKKeysResponse",
     "ListBYOKKeysResponseTypedDict",
+    "ListBudgetGuardrailPoliciesResponse",
+    "ListBudgetGuardrailPoliciesResponseTypedDict",
     "ListEndpointsResponse",
     "ListEndpointsResponseTypedDict",
     "ListExternalUsersResponse",
@@ -6674,6 +6972,10 @@ __all__ = [
     "ListKeyAssignmentsResponseTypedDict",
     "ListMemberAssignmentsResponse",
     "ListMemberAssignmentsResponseTypedDict",
+    "ListModelAvailabilityGuardrailPoliciesResponse",
+    "ListModelAvailabilityGuardrailPoliciesResponseTypedDict",
+    "ListModerationGuardrailPoliciesResponse",
+    "ListModerationGuardrailPoliciesResponseTypedDict",
     "ListObservabilityDestinationsResponse",
     "ListObservabilityDestinationsResponseTypedDict",
     "ListPresetVersionsResponse",
@@ -6918,6 +7220,30 @@ __all__ = [
     "ModelAliasTargetTypedDict",
     "ModelArchitecture",
     "ModelArchitectureTypedDict",
+    "ModelArmorInjectionConfidenceLevel",
+    "ModelArmorInjectionProtectionMode",
+    "ModelAvailabilityAccountGuardrailPolicy",
+    "ModelAvailabilityAccountGuardrailPolicyPolicyType",
+    "ModelAvailabilityAccountGuardrailPolicyRequest",
+    "ModelAvailabilityAccountGuardrailPolicyRequestFloorReassignment",
+    "ModelAvailabilityAccountGuardrailPolicyRequestFloorReassignmentTypedDict",
+    "ModelAvailabilityAccountGuardrailPolicyRequestPolicyType",
+    "ModelAvailabilityAccountGuardrailPolicyRequestTypedDict",
+    "ModelAvailabilityAccountGuardrailPolicyTypedDict",
+    "ModelAvailabilityGuardrailPolicy",
+    "ModelAvailabilityGuardrailPolicyDetail",
+    "ModelAvailabilityGuardrailPolicyDetailPolicyType",
+    "ModelAvailabilityGuardrailPolicyDetailReference",
+    "ModelAvailabilityGuardrailPolicyDetailResponse",
+    "ModelAvailabilityGuardrailPolicyDetailResponseTypedDict",
+    "ModelAvailabilityGuardrailPolicyDetailTypedDict",
+    "ModelAvailabilityGuardrailPolicyPolicyType",
+    "ModelAvailabilityGuardrailPolicyResponse",
+    "ModelAvailabilityGuardrailPolicyResponseTypedDict",
+    "ModelAvailabilityGuardrailPolicySummary",
+    "ModelAvailabilityGuardrailPolicySummaryPolicyType",
+    "ModelAvailabilityGuardrailPolicySummaryTypedDict",
+    "ModelAvailabilityGuardrailPolicyTypedDict",
     "ModelBenchmarks",
     "ModelBenchmarksTypedDict",
     "ModelGroup",
@@ -6937,6 +7263,28 @@ __all__ = [
     "ModelsListResponseLinksTypedDict",
     "ModelsListResponseTypedDict",
     "Moderation",
+    "ModerationAccountGuardrailPolicy",
+    "ModerationAccountGuardrailPolicyPolicyType",
+    "ModerationAccountGuardrailPolicyRequest",
+    "ModerationAccountGuardrailPolicyRequestFloorReassignment",
+    "ModerationAccountGuardrailPolicyRequestFloorReassignmentTypedDict",
+    "ModerationAccountGuardrailPolicyRequestPolicyType",
+    "ModerationAccountGuardrailPolicyRequestTypedDict",
+    "ModerationAccountGuardrailPolicyTypedDict",
+    "ModerationGuardrailPolicy",
+    "ModerationGuardrailPolicyDetail",
+    "ModerationGuardrailPolicyDetailPolicyType",
+    "ModerationGuardrailPolicyDetailReference",
+    "ModerationGuardrailPolicyDetailResponse",
+    "ModerationGuardrailPolicyDetailResponseTypedDict",
+    "ModerationGuardrailPolicyDetailTypedDict",
+    "ModerationGuardrailPolicyPolicyType",
+    "ModerationGuardrailPolicyResponse",
+    "ModerationGuardrailPolicyResponseTypedDict",
+    "ModerationGuardrailPolicySummary",
+    "ModerationGuardrailPolicySummaryPolicyType",
+    "ModerationGuardrailPolicySummaryTypedDict",
+    "ModerationGuardrailPolicyTypedDict",
     "ModerationPlugin",
     "ModerationPluginID",
     "ModerationPluginTypedDict",
@@ -7085,7 +7433,6 @@ __all__ = [
     "ObservabilityWebhookDestinationMethod",
     "ObservabilityWebhookDestinationType",
     "ObservabilityWebhookDestinationTypedDict",
-    "OnError",
     "OpenAIFile",
     "OpenAIFileDeleted",
     "OpenAIFileDeletedObject",
@@ -7354,6 +7701,7 @@ __all__ = [
     "OutputItems",
     "OutputItemsTypedDict",
     "OutputMemoryServerToolItem",
+    "OutputMemoryServerToolItemAction",
     "OutputMemoryServerToolItemType",
     "OutputMemoryServerToolItemTypedDict",
     "OutputMessage",
@@ -7496,6 +7844,9 @@ __all__ = [
     "PercentileThroughputCutoffsTypedDict",
     "PerfLast30mByWorkload",
     "PerfLast30mByWorkloadTypedDict",
+    "PiiFilter",
+    "PiiFilterAction",
+    "PiiFilterTypedDict",
     "PipelineStage",
     "PipelineStageType",
     "PipelineStageTypedDict",
@@ -7783,6 +8134,7 @@ __all__ = [
     "ScalarFilterTypedDict",
     "ScalarFilterValue",
     "ScalarFilterValueTypedDict",
+    "ScanScope",
     "ScimGroup",
     "ScimGroupMapping",
     "ScimGroupMappingRole",
@@ -7875,6 +8227,7 @@ __all__ = [
     "SlackMemberLink",
     "SlackMemberLinkTypedDict",
     "SlackTypedDict",
+    "Slug",
     "SoftDeny",
     "SoftDenyTypedDict",
     "SourceContent",
@@ -8185,6 +8538,7 @@ __all__ = [
     "UniqueInsightTypedDict",
     "Unit",
     "Unknown",
+    "UnknownAccountGuardrailPolicy",
     "UnknownAlignmentCallRecord",
     "UnknownAlignmentResponsesRejected",
     "UnknownAnnotation",
@@ -8241,12 +8595,18 @@ __all__ = [
     "UpdateBYOKKeyRequestTypedDict",
     "UpdateBYOKKeyResponse",
     "UpdateBYOKKeyResponseTypedDict",
+    "UpdateBudgetGuardrailPolicyRequest",
+    "UpdateBudgetGuardrailPolicyRequestTypedDict",
     "UpdateExternalUserRequest",
     "UpdateExternalUserRequestTypedDict",
     "UpdateGuardrailRequest",
     "UpdateGuardrailRequestTypedDict",
     "UpdateGuardrailResponse",
     "UpdateGuardrailResponseTypedDict",
+    "UpdateModelAvailabilityGuardrailPolicyRequest",
+    "UpdateModelAvailabilityGuardrailPolicyRequestTypedDict",
+    "UpdateModerationGuardrailPolicyRequest",
+    "UpdateModerationGuardrailPolicyRequestTypedDict",
     "UpdateObservabilityDestinationRequest",
     "UpdateObservabilityDestinationRequestTypedDict",
     "UpdateObservabilityDestinationResponse",
@@ -8415,6 +8775,13 @@ __all__ = [
 _dynamic_imports: dict[str, str] = {
     "AABenchmarkEntry": ".aabenchmarkentry",
     "AABenchmarkEntryTypedDict": ".aabenchmarkentry",
+    "AccountGuardrailPolicy": ".accountguardrailpolicy",
+    "AccountGuardrailPolicyTypedDict": ".accountguardrailpolicy",
+    "UnknownAccountGuardrailPolicy": ".accountguardrailpolicy",
+    "AccountGuardrailPolicyRequest": ".accountguardrailpolicyrequest",
+    "AccountGuardrailPolicyRequestTypedDict": ".accountguardrailpolicyrequest",
+    "AccountGuardrailPolicyResponse": ".accountguardrailpolicyresponse",
+    "AccountGuardrailPolicyResponseTypedDict": ".accountguardrailpolicyresponse",
     "ActivityItem": ".activityitem",
     "ActivityItemTypedDict": ".activityitem",
     "ActivityResponse": ".activityresponse",
@@ -8890,8 +9257,8 @@ _dynamic_imports: dict[str, str] = {
     "ArmorPlugin": ".armorplugin",
     "ArmorPluginID": ".armorplugin",
     "ArmorPluginMode": ".armorplugin",
+    "ArmorPluginOnError": ".armorplugin",
     "ArmorPluginTypedDict": ".armorplugin",
-    "OnError": ".armorplugin",
     "OutputMode": ".armorplugin",
     "ArmorRule": ".armorrule",
     "ArmorRuleTypedDict": ".armorrule",
@@ -9136,6 +9503,28 @@ _dynamic_imports: dict[str, str] = {
     "BooleanCapability": ".booleancapability",
     "BooleanCapabilityType": ".booleancapability",
     "BooleanCapabilityTypedDict": ".booleancapability",
+    "BudgetAccountGuardrailPolicy": ".budgetaccountguardrailpolicy",
+    "BudgetAccountGuardrailPolicyPolicyType": ".budgetaccountguardrailpolicy",
+    "BudgetAccountGuardrailPolicyTypedDict": ".budgetaccountguardrailpolicy",
+    "BudgetAccountGuardrailPolicyRequest": ".budgetaccountguardrailpolicyrequest",
+    "BudgetAccountGuardrailPolicyRequestFloorReassignment": ".budgetaccountguardrailpolicyrequest",
+    "BudgetAccountGuardrailPolicyRequestFloorReassignmentTypedDict": ".budgetaccountguardrailpolicyrequest",
+    "BudgetAccountGuardrailPolicyRequestPolicyType": ".budgetaccountguardrailpolicyrequest",
+    "BudgetAccountGuardrailPolicyRequestTypedDict": ".budgetaccountguardrailpolicyrequest",
+    "BudgetGuardrailPolicy": ".budgetguardrailpolicy",
+    "BudgetGuardrailPolicyPolicyType": ".budgetguardrailpolicy",
+    "BudgetGuardrailPolicyTypedDict": ".budgetguardrailpolicy",
+    "BudgetGuardrailPolicyDetail": ".budgetguardrailpolicydetail",
+    "BudgetGuardrailPolicyDetailPolicyType": ".budgetguardrailpolicydetail",
+    "BudgetGuardrailPolicyDetailReference": ".budgetguardrailpolicydetail",
+    "BudgetGuardrailPolicyDetailTypedDict": ".budgetguardrailpolicydetail",
+    "BudgetGuardrailPolicyDetailResponse": ".budgetguardrailpolicydetailresponse",
+    "BudgetGuardrailPolicyDetailResponseTypedDict": ".budgetguardrailpolicydetailresponse",
+    "BudgetGuardrailPolicyResponse": ".budgetguardrailpolicyresponse",
+    "BudgetGuardrailPolicyResponseTypedDict": ".budgetguardrailpolicyresponse",
+    "BudgetGuardrailPolicySummary": ".budgetguardrailpolicysummary",
+    "BudgetGuardrailPolicySummaryPolicyType": ".budgetguardrailpolicysummary",
+    "BudgetGuardrailPolicySummaryTypedDict": ".budgetguardrailpolicysummary",
     "BulkAddWorkspaceMembersRequest": ".bulkaddworkspacemembersrequest",
     "BulkAddWorkspaceMembersRequestTypedDict": ".bulkaddworkspacemembersrequest",
     "BulkAddWorkspaceMembersResponse": ".bulkaddworkspacemembersresponse",
@@ -9167,6 +9556,11 @@ _dynamic_imports: dict[str, str] = {
     "CapabilityDescriptor": ".capabilitydescriptor",
     "CapabilityDescriptorTypedDict": ".capabilitydescriptor",
     "UnknownCapabilityDescriptor": ".capabilitydescriptor",
+    "ChangeGuardrailPolicyAssignmentRequest": ".changeguardrailpolicyassignmentrequest",
+    "ChangeGuardrailPolicyAssignmentRequestPolicyType": ".changeguardrailpolicyassignmentrequest",
+    "ChangeGuardrailPolicyAssignmentRequestTypedDict": ".changeguardrailpolicyassignmentrequest",
+    "ChangeGuardrailPolicyAssignmentResponse": ".changeguardrailpolicyassignmentresponse",
+    "ChangeGuardrailPolicyAssignmentResponseTypedDict": ".changeguardrailpolicyassignmentresponse",
     "ChatAssistantImages": ".chatassistantimages",
     "ChatAssistantImagesImageURL": ".chatassistantimages",
     "ChatAssistantImagesImageURLTypedDict": ".chatassistantimages",
@@ -9484,6 +9878,9 @@ _dynamic_imports: dict[str, str] = {
     "ContextCompressionPluginTypedDict": ".contextcompressionplugin",
     "CostDetails": ".costdetails",
     "CostDetailsTypedDict": ".costdetails",
+    "CreateBudgetGuardrailPolicyRequest": ".createbudgetguardrailpolicyrequest",
+    "CreateBudgetGuardrailPolicyRequestPolicyType": ".createbudgetguardrailpolicyrequest",
+    "CreateBudgetGuardrailPolicyRequestTypedDict": ".createbudgetguardrailpolicyrequest",
     "CreateBYOKKeyRequest": ".createbyokkeyrequest",
     "CreateBYOKKeyRequestDeclaredRegion": ".createbyokkeyrequest",
     "CreateBYOKKeyRequestTypedDict": ".createbyokkeyrequest",
@@ -9495,6 +9892,12 @@ _dynamic_imports: dict[str, str] = {
     "CreateGuardrailRequestTypedDict": ".createguardrailrequest",
     "CreateGuardrailResponse": ".createguardrailresponse",
     "CreateGuardrailResponseTypedDict": ".createguardrailresponse",
+    "CreateModelAvailabilityGuardrailPolicyRequest": ".createmodelavailabilityguardrailpolicyrequest",
+    "CreateModelAvailabilityGuardrailPolicyRequestPolicyType": ".createmodelavailabilityguardrailpolicyrequest",
+    "CreateModelAvailabilityGuardrailPolicyRequestTypedDict": ".createmodelavailabilityguardrailpolicyrequest",
+    "CreateModerationGuardrailPolicyRequest": ".createmoderationguardrailpolicyrequest",
+    "CreateModerationGuardrailPolicyRequestPolicyType": ".createmoderationguardrailpolicyrequest",
+    "CreateModerationGuardrailPolicyRequestTypedDict": ".createmoderationguardrailpolicyrequest",
     "CreateObservabilityDestinationRequest": ".createobservabilitydestinationrequest",
     "CreateObservabilityDestinationRequestType": ".createobservabilitydestinationrequest",
     "CreateObservabilityDestinationRequestTypedDict": ".createobservabilitydestinationrequest",
@@ -9668,6 +10071,8 @@ _dynamic_imports: dict[str, str] = {
     "DeferredToolsSearchStrategyTypedDict": ".deferredtoolssearchstrategy",
     "DeleteBYOKKeyResponse": ".deletebyokkeyresponse",
     "DeleteBYOKKeyResponseTypedDict": ".deletebyokkeyresponse",
+    "DeleteGuardrailPolicyResponse": ".deleteguardrailpolicyresponse",
+    "DeleteGuardrailPolicyResponseTypedDict": ".deleteguardrailpolicyresponse",
     "DeleteGuardrailResponse": ".deleteguardrailresponse",
     "DeleteGuardrailResponseTypedDict": ".deleteguardrailresponse",
     "DeleteObservabilityDestinationResponse": ".deleteobservabilitydestinationresponse",
@@ -10062,8 +10467,41 @@ _dynamic_imports: dict[str, str] = {
     "GoneResponseErrorDataTypedDict": ".goneresponseerrordata",
     "Guardrail": ".guardrail",
     "GuardrailTypedDict": ".guardrail",
+    "GuardrailBudgetPolicyAuthoringConfig": ".guardrailbudgetpolicyauthoringconfig",
+    "GuardrailBudgetPolicyAuthoringConfigResetInterval": ".guardrailbudgetpolicyauthoringconfig",
+    "GuardrailBudgetPolicyAuthoringConfigTypedDict": ".guardrailbudgetpolicyauthoringconfig",
+    "GuardrailBudgetPolicyConfig": ".guardrailbudgetpolicyconfig",
+    "GuardrailBudgetPolicyConfigTypedDict": ".guardrailbudgetpolicyconfig",
     "GuardrailDataRegion": ".guardraildataregion",
     "GuardrailInterval": ".guardrailinterval",
+    "GuardrailModelAvailabilityPolicyAuthoringConfig": ".guardrailmodelavailabilitypolicyauthoringconfig",
+    "GuardrailModelAvailabilityPolicyAuthoringConfigTypedDict": ".guardrailmodelavailabilitypolicyauthoringconfig",
+    "GuardrailModelAvailabilityPolicyConfig": ".guardrailmodelavailabilitypolicyconfig",
+    "GuardrailModelAvailabilityPolicyConfigTypedDict": ".guardrailmodelavailabilitypolicyconfig",
+    "Armor": ".guardrailmoderationpolicyconfig",
+    "ArmorTypedDict": ".guardrailmoderationpolicyconfig",
+    "ContentFilter": ".guardrailmoderationpolicyconfig",
+    "ContentFilterBuiltin": ".guardrailmoderationpolicyconfig",
+    "ContentFilterBuiltinTypedDict": ".guardrailmoderationpolicyconfig",
+    "ContentFilterTypedDict": ".guardrailmoderationpolicyconfig",
+    "GuardrailModerationPolicyConfig": ".guardrailmoderationpolicyconfig",
+    "GuardrailModerationPolicyConfigContentFilterAction": ".guardrailmoderationpolicyconfig",
+    "GuardrailModerationPolicyConfigContentFilterBuiltinAction": ".guardrailmoderationpolicyconfig",
+    "GuardrailModerationPolicyConfigMode": ".guardrailmoderationpolicyconfig",
+    "GuardrailModerationPolicyConfigOnError": ".guardrailmoderationpolicyconfig",
+    "GuardrailModerationPolicyConfigTypedDict": ".guardrailmoderationpolicyconfig",
+    "LakeraInjectionProtectionMode": ".guardrailmoderationpolicyconfig",
+    "ModelArmorInjectionConfidenceLevel": ".guardrailmoderationpolicyconfig",
+    "ModelArmorInjectionProtectionMode": ".guardrailmoderationpolicyconfig",
+    "PiiFilter": ".guardrailmoderationpolicyconfig",
+    "PiiFilterAction": ".guardrailmoderationpolicyconfig",
+    "PiiFilterTypedDict": ".guardrailmoderationpolicyconfig",
+    "ScanScope": ".guardrailmoderationpolicyconfig",
+    "Slug": ".guardrailmoderationpolicyconfig",
+    "GuardrailPolicyAssignmentResponse": ".guardrailpolicyassignmentresponse",
+    "GuardrailPolicyAssignmentResponseTypedDict": ".guardrailpolicyassignmentresponse",
+    "GuardrailPolicyAssignmentState": ".guardrailpolicyassignmentstate",
+    "GuardrailPolicyAssignmentStateTypedDict": ".guardrailpolicyassignmentstate",
     "ImageConfig": ".imageconfig",
     "ImageConfigTypedDict": ".imageconfig",
     "ImageEndpoint": ".imageendpoint",
@@ -10263,6 +10701,10 @@ _dynamic_imports: dict[str, str] = {
     "LegacyWebSearchServerTool": ".legacy_websearchservertool",
     "LegacyWebSearchServerToolType": ".legacy_websearchservertool",
     "LegacyWebSearchServerToolTypedDict": ".legacy_websearchservertool",
+    "ListAccountGuardrailPoliciesResponse": ".listaccountguardrailpoliciesresponse",
+    "ListAccountGuardrailPoliciesResponseTypedDict": ".listaccountguardrailpoliciesresponse",
+    "ListBudgetGuardrailPoliciesResponse": ".listbudgetguardrailpoliciesresponse",
+    "ListBudgetGuardrailPoliciesResponseTypedDict": ".listbudgetguardrailpoliciesresponse",
     "ListBYOKKeysResponse": ".listbyokkeysresponse",
     "ListBYOKKeysResponseTypedDict": ".listbyokkeysresponse",
     "Architecture": ".listendpointsresponse",
@@ -10277,6 +10719,10 @@ _dynamic_imports: dict[str, str] = {
     "ListKeyAssignmentsResponseTypedDict": ".listkeyassignmentsresponse",
     "ListMemberAssignmentsResponse": ".listmemberassignmentsresponse",
     "ListMemberAssignmentsResponseTypedDict": ".listmemberassignmentsresponse",
+    "ListModelAvailabilityGuardrailPoliciesResponse": ".listmodelavailabilityguardrailpoliciesresponse",
+    "ListModelAvailabilityGuardrailPoliciesResponseTypedDict": ".listmodelavailabilityguardrailpoliciesresponse",
+    "ListModerationGuardrailPoliciesResponse": ".listmoderationguardrailpoliciesresponse",
+    "ListModerationGuardrailPoliciesResponseTypedDict": ".listmoderationguardrailpoliciesresponse",
     "ListObservabilityDestinationsResponse": ".listobservabilitydestinationsresponse",
     "ListObservabilityDestinationsResponseTypedDict": ".listobservabilitydestinationsresponse",
     "ListPresetsResponse": ".listpresetsresponse",
@@ -10600,6 +11046,28 @@ _dynamic_imports: dict[str, str] = {
     "ModelAliasTargetTypedDict": ".modelaliastarget",
     "ModelArchitecture": ".modelarchitecture",
     "ModelArchitectureTypedDict": ".modelarchitecture",
+    "ModelAvailabilityAccountGuardrailPolicy": ".modelavailabilityaccountguardrailpolicy",
+    "ModelAvailabilityAccountGuardrailPolicyPolicyType": ".modelavailabilityaccountguardrailpolicy",
+    "ModelAvailabilityAccountGuardrailPolicyTypedDict": ".modelavailabilityaccountguardrailpolicy",
+    "ModelAvailabilityAccountGuardrailPolicyRequest": ".modelavailabilityaccountguardrailpolicyrequest",
+    "ModelAvailabilityAccountGuardrailPolicyRequestFloorReassignment": ".modelavailabilityaccountguardrailpolicyrequest",
+    "ModelAvailabilityAccountGuardrailPolicyRequestFloorReassignmentTypedDict": ".modelavailabilityaccountguardrailpolicyrequest",
+    "ModelAvailabilityAccountGuardrailPolicyRequestPolicyType": ".modelavailabilityaccountguardrailpolicyrequest",
+    "ModelAvailabilityAccountGuardrailPolicyRequestTypedDict": ".modelavailabilityaccountguardrailpolicyrequest",
+    "ModelAvailabilityGuardrailPolicy": ".modelavailabilityguardrailpolicy",
+    "ModelAvailabilityGuardrailPolicyPolicyType": ".modelavailabilityguardrailpolicy",
+    "ModelAvailabilityGuardrailPolicyTypedDict": ".modelavailabilityguardrailpolicy",
+    "ModelAvailabilityGuardrailPolicyDetail": ".modelavailabilityguardrailpolicydetail",
+    "ModelAvailabilityGuardrailPolicyDetailPolicyType": ".modelavailabilityguardrailpolicydetail",
+    "ModelAvailabilityGuardrailPolicyDetailReference": ".modelavailabilityguardrailpolicydetail",
+    "ModelAvailabilityGuardrailPolicyDetailTypedDict": ".modelavailabilityguardrailpolicydetail",
+    "ModelAvailabilityGuardrailPolicyDetailResponse": ".modelavailabilityguardrailpolicydetailresponse",
+    "ModelAvailabilityGuardrailPolicyDetailResponseTypedDict": ".modelavailabilityguardrailpolicydetailresponse",
+    "ModelAvailabilityGuardrailPolicyResponse": ".modelavailabilityguardrailpolicyresponse",
+    "ModelAvailabilityGuardrailPolicyResponseTypedDict": ".modelavailabilityguardrailpolicyresponse",
+    "ModelAvailabilityGuardrailPolicySummary": ".modelavailabilityguardrailpolicysummary",
+    "ModelAvailabilityGuardrailPolicySummaryPolicyType": ".modelavailabilityguardrailpolicysummary",
+    "ModelAvailabilityGuardrailPolicySummaryTypedDict": ".modelavailabilityguardrailpolicysummary",
     "ModelBenchmarks": ".modelbenchmarks",
     "ModelBenchmarksTypedDict": ".modelbenchmarks",
     "ModelGroup": ".modelgroup",
@@ -10618,6 +11086,28 @@ _dynamic_imports: dict[str, str] = {
     "ModelsListResponseLinks": ".modelslistresponse",
     "ModelsListResponseLinksTypedDict": ".modelslistresponse",
     "ModelsListResponseTypedDict": ".modelslistresponse",
+    "ModerationAccountGuardrailPolicy": ".moderationaccountguardrailpolicy",
+    "ModerationAccountGuardrailPolicyPolicyType": ".moderationaccountguardrailpolicy",
+    "ModerationAccountGuardrailPolicyTypedDict": ".moderationaccountguardrailpolicy",
+    "ModerationAccountGuardrailPolicyRequest": ".moderationaccountguardrailpolicyrequest",
+    "ModerationAccountGuardrailPolicyRequestFloorReassignment": ".moderationaccountguardrailpolicyrequest",
+    "ModerationAccountGuardrailPolicyRequestFloorReassignmentTypedDict": ".moderationaccountguardrailpolicyrequest",
+    "ModerationAccountGuardrailPolicyRequestPolicyType": ".moderationaccountguardrailpolicyrequest",
+    "ModerationAccountGuardrailPolicyRequestTypedDict": ".moderationaccountguardrailpolicyrequest",
+    "ModerationGuardrailPolicy": ".moderationguardrailpolicy",
+    "ModerationGuardrailPolicyPolicyType": ".moderationguardrailpolicy",
+    "ModerationGuardrailPolicyTypedDict": ".moderationguardrailpolicy",
+    "ModerationGuardrailPolicyDetail": ".moderationguardrailpolicydetail",
+    "ModerationGuardrailPolicyDetailPolicyType": ".moderationguardrailpolicydetail",
+    "ModerationGuardrailPolicyDetailReference": ".moderationguardrailpolicydetail",
+    "ModerationGuardrailPolicyDetailTypedDict": ".moderationguardrailpolicydetail",
+    "ModerationGuardrailPolicyDetailResponse": ".moderationguardrailpolicydetailresponse",
+    "ModerationGuardrailPolicyDetailResponseTypedDict": ".moderationguardrailpolicydetailresponse",
+    "ModerationGuardrailPolicyResponse": ".moderationguardrailpolicyresponse",
+    "ModerationGuardrailPolicyResponseTypedDict": ".moderationguardrailpolicyresponse",
+    "ModerationGuardrailPolicySummary": ".moderationguardrailpolicysummary",
+    "ModerationGuardrailPolicySummaryPolicyType": ".moderationguardrailpolicysummary",
+    "ModerationGuardrailPolicySummaryTypedDict": ".moderationguardrailpolicysummary",
     "ModerationPlugin": ".moderationplugin",
     "ModerationPluginID": ".moderationplugin",
     "ModerationPluginTypedDict": ".moderationplugin",
@@ -11078,8 +11568,8 @@ _dynamic_imports: dict[str, str] = {
     "OutputItemWebSearchCallTypeWebSearchCall": ".outputitemwebsearchcall",
     "OutputItemWebSearchCallTypedDict": ".outputitemwebsearchcall",
     "UnknownOutputItemWebSearchCallActionUnion": ".outputitemwebsearchcall",
-    "ActionEnum": ".outputmemoryservertoolitem",
     "OutputMemoryServerToolItem": ".outputmemoryservertoolitem",
+    "OutputMemoryServerToolItemAction": ".outputmemoryservertoolitem",
     "OutputMemoryServerToolItemType": ".outputmemoryservertoolitem",
     "OutputMemoryServerToolItemTypedDict": ".outputmemoryservertoolitem",
     "OutputMessage": ".outputmessage",
@@ -11780,6 +12270,8 @@ _dynamic_imports: dict[str, str] = {
     "UnknownTypedDict": ".unknown",
     "UnprocessableEntityResponseErrorData": ".unprocessableentityresponseerrordata",
     "UnprocessableEntityResponseErrorDataTypedDict": ".unprocessableentityresponseerrordata",
+    "UpdateBudgetGuardrailPolicyRequest": ".updatebudgetguardrailpolicyrequest",
+    "UpdateBudgetGuardrailPolicyRequestTypedDict": ".updatebudgetguardrailpolicyrequest",
     "UpdateBYOKKeyRequest": ".updatebyokkeyrequest",
     "UpdateBYOKKeyRequestDeclaredRegion": ".updatebyokkeyrequest",
     "UpdateBYOKKeyRequestTypedDict": ".updatebyokkeyrequest",
@@ -11791,6 +12283,10 @@ _dynamic_imports: dict[str, str] = {
     "UpdateGuardrailRequestTypedDict": ".updateguardrailrequest",
     "UpdateGuardrailResponse": ".updateguardrailresponse",
     "UpdateGuardrailResponseTypedDict": ".updateguardrailresponse",
+    "UpdateModelAvailabilityGuardrailPolicyRequest": ".updatemodelavailabilityguardrailpolicyrequest",
+    "UpdateModelAvailabilityGuardrailPolicyRequestTypedDict": ".updatemodelavailabilityguardrailpolicyrequest",
+    "UpdateModerationGuardrailPolicyRequest": ".updatemoderationguardrailpolicyrequest",
+    "UpdateModerationGuardrailPolicyRequestTypedDict": ".updatemoderationguardrailpolicyrequest",
     "UpdateObservabilityDestinationRequest": ".updateobservabilitydestinationrequest",
     "UpdateObservabilityDestinationRequestTypedDict": ".updateobservabilitydestinationrequest",
     "UpdateObservabilityDestinationResponse": ".updateobservabilitydestinationresponse",

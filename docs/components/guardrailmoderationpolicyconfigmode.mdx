@@ -1,0 +1,22 @@
+---
+title: "GuardrailModerationPolicyConfigMode"
+---
+
+`enforce` withholds blocked calls; `audit` evaluates and reports the same verdicts without withholding any calls, regardless of `on_error`. Default `enforce`.
+
+## Example Usage
+
+```python
+from openrouter.components import GuardrailModerationPolicyConfigMode
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
+value: GuardrailModerationPolicyConfigMode = "enforce"
+```
+
+
+## Values
+
+This is an open enum. Unrecognized values will not fail type checks.
+
+- `"enforce"`
+- `"audit"`

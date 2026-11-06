@@ -1,0 +1,22 @@
+---
+title: "ModerationGuardrailPolicyDetailReference"
+---
+
+`legacy_mapping` when the policy is synced from a v1 guardrail, `account_default` when it is an account-wide default, otherwise `null`
+
+## Example Usage
+
+```python
+from openrouter.components import ModerationGuardrailPolicyDetailReference
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
+value: ModerationGuardrailPolicyDetailReference = "legacy_mapping"
+```
+
+
+## Values
+
+This is an open enum. Unrecognized values will not fail type checks.
+
+- `"legacy_mapping"`
+- `"account_default"`

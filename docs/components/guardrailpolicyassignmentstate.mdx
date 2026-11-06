@@ -1,0 +1,11 @@
+---
+title: "GuardrailPolicyAssignmentState"
+---
+
+## Fields
+
+| Field                                                        | Type                                                         | Required                                                     | Description                                                  | Example                                                      |
+| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| `opted_out`                                                  | *bool*                                                       | ✔️                                           | Whether the subject is opted out of the workspace default    | false                                                        |
+| `policy_ids`                                                 | List[*str*]                                                  | ✔️                                           | Policies of this type assigned directly to the subject       | []                                                           |
+| `workspace_default_policy_ids`                               | List[*str*]                                                  | ✔️                                           | Workspace default policies of this type the subject inherits | [<br/>"2c6f1a4e-0b7d-4e59-9a61-3f8d2e7c1b90"<br/>]           |

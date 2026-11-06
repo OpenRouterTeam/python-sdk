@@ -1,0 +1,21 @@
+---
+title: "PiiFilterAction"
+---
+
+## Example Usage
+
+```python
+from openrouter.components import PiiFilterAction
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
+value: PiiFilterAction = "redact"
+```
+
+
+## Values
+
+This is an open enum. Unrecognized values will not fail type checks.
+
+- `"redact"`
+- `"block"`
+- `"flag"`

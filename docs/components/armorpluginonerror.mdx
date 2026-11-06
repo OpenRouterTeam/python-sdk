@@ -1,0 +1,22 @@
+---
+title: "ArmorPluginOnError"
+---
+
+When the classifier cannot answer (timeout, upstream error, context too long) the call is reported `unavailable`; `block` rejects it and `log` releases it. Default `block`.
+
+## Example Usage
+
+```python
+from openrouter.components import ArmorPluginOnError
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
+value: ArmorPluginOnError = "log"
+```
+
+
+## Values
+
+This is an open enum. Unrecognized values will not fail type checks.
+
+- `"log"`
+- `"block"`
