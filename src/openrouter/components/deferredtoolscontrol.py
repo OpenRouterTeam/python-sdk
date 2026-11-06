@@ -5,9 +5,20 @@ from .deferredtoolssearchstrategy import (
     DeferredToolsSearchStrategy,
     DeferredToolsSearchStrategyTypedDict,
 )
-from openrouter.types import BaseModel, UnrecognizedStr
-from typing import Literal, Union
-from typing_extensions import TypedDict
+from openrouter.types import BaseModel, UNSET_SENTINEL, UnrecognizedStr
+from pydantic import model_serializer
+from typing import Literal, Optional, Union
+from typing_extensions import NotRequired, TypedDict
+
+
+Interface = Union[
+    Literal[
+        "wrappers",
+        "code_mode",
+    ],
+    UnrecognizedStr,
+]
+r"""How the universal profile exposes the hidden catalog to the provider. Absent or `wrappers`: the `tool_search` and `tool_exec` tools. `code_mode`: one `tool_code` tool that runs a short JavaScript program in which `search()` and `call()` reach the catalog, so several searches and calls complete in one tool result. Experimental."""
 
 
 Profile = Union[
@@ -21,6 +32,16 @@ r"""Loading profile. `portable` serves the `defer_loading` tools with router-bui
 
 
 Protocol = Literal["v1",]
+
+
+DeferredToolsControlScope = Union[
+    Literal[
+        "all",
+        "mcp",
+    ],
+    UnrecognizedStr,
+]
+r"""Which tools the universal profile defers. Absent or `all`: every wrappable tool outside the coding-harness core set. `mcp`: only MCP server tools (`mcp__*` names and Responses namespaces outside `functions`); the harness keeps its own built-in tools direct. Experimental."""
 
 
 Validation = Literal["runtime",]
@@ -37,6 +58,10 @@ class DeferredToolsControlTypedDict(TypedDict):
     r"""Router-local regex/BM25 or caller-owned custom search."""
     validation: Validation
     r"""Where tool-call arguments are checked against the original schema. Only `runtime` (in OpenRouter) is available in this release."""
+    interface: NotRequired[Interface]
+    r"""How the universal profile exposes the hidden catalog to the provider. Absent or `wrappers`: the `tool_search` and `tool_exec` tools. `code_mode`: one `tool_code` tool that runs a short JavaScript program in which `search()` and `call()` reach the catalog, so several searches and calls complete in one tool result. Experimental."""
+    scope: NotRequired[DeferredToolsControlScope]
+    r"""Which tools the universal profile defers. Absent or `all`: every wrappable tool outside the coding-harness core set. `mcp`: only MCP server tools (`mcp__*` names and Responses namespaces outside `functions`); the harness keeps its own built-in tools direct. Experimental."""
 
 
 class DeferredToolsControl(BaseModel):
@@ -52,3 +77,25 @@ class DeferredToolsControl(BaseModel):
 
     validation: Validation
     r"""Where tool-call arguments are checked against the original schema. Only `runtime` (in OpenRouter) is available in this release."""
+
+    interface: Optional[Interface] = None
+    r"""How the universal profile exposes the hidden catalog to the provider. Absent or `wrappers`: the `tool_search` and `tool_exec` tools. `code_mode`: one `tool_code` tool that runs a short JavaScript program in which `search()` and `call()` reach the catalog, so several searches and calls complete in one tool result. Experimental."""
+
+    scope: Optional[DeferredToolsControlScope] = None
+    r"""Which tools the universal profile defers. Absent or `all`: every wrappable tool outside the coding-harness core set. `mcp`: only MCP server tools (`mcp__*` names and Responses namespaces outside `functions`); the harness keeps its own built-in tools direct. Experimental."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["interface", "scope"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

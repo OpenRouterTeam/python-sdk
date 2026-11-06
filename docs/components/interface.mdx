@@ -1,0 +1,22 @@
+---
+title: "Interface"
+---
+
+How the universal profile exposes the hidden catalog to the provider. Absent or `wrappers`: the `tool_search` and `tool_exec` tools. `code_mode`: one `tool_code` tool that runs a short JavaScript program in which `search()` and `call()` reach the catalog, so several searches and calls complete in one tool result. Experimental.
+
+## Example Usage
+
+```python
+from openrouter.components import Interface
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
+value: Interface = "wrappers"
+```
+
+
+## Values
+
+This is an open enum. Unrecognized values will not fail type checks.
+
+- `"wrappers"`
+- `"code_mode"`
