@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c48cf606-fb42-4a45-9c23-8f0555307828
 management:
-  docChecksum: a2c7148dfea3b69c10b8bd3f1c2e6162
+  docChecksum: 38b116dcd76ec799eea497e956a66f42
   docVersion: 1.0.0
   speakeasyVersion: 1.803.2
   generationVersion: 2.950.13
-  releaseVersion: 1.3.133
-  configChecksum: 15120a6d2f0ea88a1482d84220892fc0
+  releaseVersion: 1.3.134
+  configChecksum: 0e56e7298a9f49166f549c467785dc2a
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
 persistentEdits:
-  generation_id: d3085a65-fd81-4205-8819-2a92e22407f2
-  pristine_commit_hash: 75d38d4fec85a17eb99012f00f93d206d10fc2a9
-  pristine_tree_hash: 51a4f2979f45a390ce302b335b2be1fe9f4e85d7
+  generation_id: 3b40450a-e752-4c54-a7ea-fa2b2379e8a5
+  pristine_commit_hash: fa88f444fcfab969f83fa311fdbc0b6f854d4732
+  pristine_tree_hash: 808ca2b64e771b552d2ab1dbd7e4be848b3b22d0
 features:
   python:
     acceptHeaders: 3.0.0
@@ -8916,8 +8916,8 @@ trackedFiles:
     pristine_git_object: ec3df81fe733a4e648afc6c07b2aa00c830a74b3
   docs/components/updateprivateendpointrequest.mdx:
     id: 8a1aa4763af9
-    last_write_checksum: sha1:594e8a7a7292ab7e7c2e4c4393fc3b5ec7c3e249
-    pristine_git_object: 89ac9f1e2345ed051e1c2b9f3db884bda4e205e4
+    last_write_checksum: sha1:92290beb45d2607a2571f8e1ff756be3ee97db2a
+    pristine_git_object: 4a5c21129bf2c9c04610cc66581bcdb72986bc90
   docs/components/updateprivateendpointrequestdeclaredregion.mdx:
     id: bb4329841f25
     last_write_checksum: sha1:b0db12e42df729be3b5ee9557f5426c6a10eebfe
@@ -11504,8 +11504,8 @@ trackedFiles:
     pristine_git_object: 10dbc7da31e08f14827c9bab01ff6997b5837094
   docs/sdks/privateendpoints/README.mdx:
     id: 54dee70b8cc7
-    last_write_checksum: sha1:3ac93193ced7cea4d0acceecdc52f8348d035275
-    pristine_git_object: 471a5df2d57e9544e20f44c8086b628fc7d28980
+    last_write_checksum: sha1:df30945c0fcc9fa7e507ea2dbbfc275946151ebd
+    pristine_git_object: 7e32658db2e9f416a2ffe5c86e885edf75e47cc2
   docs/sdks/privateproviders/README.mdx:
     id: 517c31195442
     last_write_checksum: sha1:69cd8bc9ffad703ca458c861510c201be38f283b
@@ -11560,8 +11560,8 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:561c6767be55ec00414b083a9770c1019ce9e1b9
-    pristine_git_object: 8e0cd00d3bf5043c3834bd1626f2f25318a3997f
+    last_write_checksum: sha1:6e48b629c4bfafa5dcf8bc93147c57eb8f96cdb5
+    pristine_git_object: 5b4e440a737ba8ed964a5cc9b6851bd47c51c849
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77f44b60b98bc126557ec27391f91dfba764bb54
@@ -11588,8 +11588,8 @@ trackedFiles:
     pristine_git_object: 86713cfea633e09d33b3d4e65281071fe20e6137
   src/openrouter/_version.py:
     id: d8d15ad6c586
-    last_write_checksum: sha1:7b1362315ea0b04dcbc29770d30d9c622d664275
-    pristine_git_object: dbc0718671295b361bcebf663f0d8d2e6372db93
+    last_write_checksum: sha1:3b5e6293f12225b7d6c19926d454cf4c103c69dd
+    pristine_git_object: bff9ce30b9bc2b3728d6aa1754711f0e1b5de43f
   src/openrouter/alpha.py:
     id: 306c4d93308d
     last_write_checksum: sha1:80cc0f39649445431cc2247ed0e0765438467766
@@ -15240,8 +15240,8 @@ trackedFiles:
     pristine_git_object: add97f9dbdd883540c97aaeffb4a9f227097b07e
   src/openrouter/components/updateprivateendpointrequest.py:
     id: 51a950d71ff3
-    last_write_checksum: sha1:8cce23bc93220d54540778d40d0dcc615f143e8f
-    pristine_git_object: 8df7de96472560bd34435f2b65e4007b97ba3514
+    last_write_checksum: sha1:7d0d90d6a715ecf9f05973da4f0a0b69deb1b91c
+    pristine_git_object: 781779489a3864583f1bc1fd758797dfb07c08fa
   src/openrouter/components/updateprivateendpointsettingsrequest.py:
     id: 5e27265a3151
     last_write_checksum: sha1:66c49c54b08c084b95c2d46db1e373c73a116045
@@ -16312,8 +16312,8 @@ trackedFiles:
     pristine_git_object: 4edc4e886abe1848022ee7931877859e2d809bfb
   src/openrouter/private_endpoints.py:
     id: fdbce8846ed0
-    last_write_checksum: sha1:c8baf7bd88047e96d693b2d08e37c77fa8607468
-    pristine_git_object: a33f9f4f03ba25f7908cdcd47cd056128c734ca2
+    last_write_checksum: sha1:3d7385776334bff0c853f956633941c4fe1bc42e
+    pristine_git_object: 9b93b63dc7368f0eb40fe464e931dff586ac4c62
   src/openrouter/private_providers.py:
     id: d2b888527155
     last_write_checksum: sha1:73483e415ea971a08d9d76b2ed55dc164ae3953a
@@ -21493,28 +21493,3 @@ examples:
         "500":
           application/json: {"error": {"code": 500, "message": "Internal Server Error"}}
 examplesVersion: 1.0.2
-releaseNotes: |
-  ## Python SDK Changes:
-  * `open_router.guardrail_policies.list_account_policies()`: **Added**
-  * `open_router.guardrail_policies.create_account_policy()`: **Added**
-  * `open_router.guardrail_policies.delete_account_policy()`: **Added**
-  * `open_router.guardrail_policies.update_account_policy()`: **Added**
-  * `open_router.guardrail_policies.get_api_key_policy_assignment()`: **Added**
-  * `open_router.guardrail_policies.change_api_key_policy_assignment()`: **Added**
-  * `open_router.guardrail_policies.get_member_policy_assignment()`: **Added**
-  * `open_router.guardrail_policies.change_member_policy_assignment()`: **Added**
-  * `open_router.guardrail_policies.list_budget_policies()`: **Added**
-  * `open_router.guardrail_policies.create_budget_policy()`: **Added**
-  * `open_router.guardrail_policies.delete_budget_policy()`: **Added**
-  * `open_router.guardrail_policies.get_budget_policy()`: **Added**
-  * `open_router.guardrail_policies.update_budget_policy()`: **Added**
-  * `open_router.guardrail_policies.list_model_availability_policies()`: **Added**
-  * `open_router.guardrail_policies.create_model_availability_policy()`: **Added**
-  * `open_router.guardrail_policies.delete_model_availability_policy()`: **Added**
-  * `open_router.guardrail_policies.get_model_availability_policy()`: **Added**
-  * `open_router.guardrail_policies.update_model_availability_policy()`: **Added**
-  * `open_router.guardrail_policies.list_moderation_policies()`: **Added**
-  * `open_router.guardrail_policies.create_moderation_policy()`: **Added**
-  * `open_router.guardrail_policies.delete_moderation_policy()`: **Added**
-  * `open_router.guardrail_policies.get_moderation_policy()`: **Added**
-  * `open_router.guardrail_policies.update_moderation_policy()`: **Added**
