@@ -7,6 +7,7 @@ from openrouter.utils import (
     FieldMetadata,
     HeaderMetadata,
     PathParamMetadata,
+    QueryParamMetadata,
     RequestMetadata,
 )
 import pydantic
@@ -96,6 +97,8 @@ class CreatePresetsMessagesRequestTypedDict(TypedDict):
     r"""Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
     """
+    workspace_id: NotRequired[str]
+    r"""Workspace to create the preset in. Defaults to the key's workspace for a key limited to one workspace, otherwise to the account's default workspace."""
 
 
 class CreatePresetsMessagesRequest(BaseModel):
@@ -137,10 +140,21 @@ class CreatePresetsMessagesRequest(BaseModel):
 
     """
 
+    workspace_id: Annotated[
+        Optional[str],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Workspace to create the preset in. Defaults to the key's workspace for a key limited to one workspace, otherwise to the account's default workspace."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
-            ["HTTP-Referer", "X-OpenRouter-Title", "X-OpenRouter-Categories"]
+            [
+                "HTTP-Referer",
+                "X-OpenRouter-Title",
+                "X-OpenRouter-Categories",
+                "workspace_id",
+            ]
         )
         serialized = handler(self)
         m = {}
