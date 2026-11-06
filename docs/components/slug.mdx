@@ -1,0 +1,27 @@
+---
+title: "Slug"
+---
+
+## Example Usage
+
+```python
+from openrouter.components import Slug
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
+value: Slug = "email"
+```
+
+
+## Values
+
+This is an open enum. Unrecognized values will not fail type checks.
+
+- `"email"`
+- `"phone"`
+- `"ssn"`
+- `"credit-card"`
+- `"ip-address"`
+- `"secrets"`
+- `"person-name"`
+- `"address"`
+- `"regex-prompt-injection"`

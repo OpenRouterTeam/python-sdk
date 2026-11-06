@@ -1,5 +1,5 @@
 ---
-title: "OnError"
+title: "GuardrailModerationPolicyConfigOnError"
 ---
 
 When the classifier cannot answer (timeout, upstream error, context too long) the call is reported `unavailable`; `block` rejects it and `log` releases it. Default `block`.
@@ -7,10 +7,10 @@ When the classifier cannot answer (timeout, upstream error, context too long) th
 ## Example Usage
 
 ```python
-from openrouter.components import OnError
+from openrouter.components import GuardrailModerationPolicyConfigOnError
 
 # Open enum: unrecognized values are captured as UnrecognizedStr
-value: OnError = "log"
+value: GuardrailModerationPolicyConfigOnError = "log"
 ```
 
 

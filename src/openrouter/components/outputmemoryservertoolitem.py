@@ -8,7 +8,7 @@ from typing import Any, Literal, Optional, Union
 from typing_extensions import NotRequired, TypedDict
 
 
-ActionEnum = Union[
+OutputMemoryServerToolItemAction = Union[
     Literal[
         "read",
         "write",
@@ -26,7 +26,7 @@ class OutputMemoryServerToolItemTypedDict(TypedDict):
 
     status: ToolCallStatus
     type: OutputMemoryServerToolItemType
-    action: NotRequired[ActionEnum]
+    action: NotRequired[OutputMemoryServerToolItemAction]
     id: NotRequired[str]
     key: NotRequired[str]
     value: NotRequired[Any]
@@ -39,7 +39,7 @@ class OutputMemoryServerToolItem(BaseModel):
 
     type: OutputMemoryServerToolItemType
 
-    action: Optional[ActionEnum] = None
+    action: Optional[OutputMemoryServerToolItemAction] = None
 
     id: Optional[str] = None
 
