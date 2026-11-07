@@ -13,7 +13,7 @@ class ImageGenerationServerToolConfigTypedDict(TypedDict):
     r"""Configuration for the openrouter:image_generation server tool. Accepts all image_config params (aspect_ratio, quality, size, background, output_format, output_compression, moderation, etc.) plus a model field."""
 
     model: NotRequired[str]
-    r"""Which image generation model to use (e.g. \"openai/gpt-5-image\"). Defaults to \"openai/gpt-5-image\"."""
+    r"""Which image generation model to use (e.g. \"openai/gpt-image-2.6-flare\"). Defaults to \"openai/gpt-image-2.6-flare\"."""
 
 
 class ImageGenerationServerToolConfig(BaseModel):
@@ -27,7 +27,7 @@ class ImageGenerationServerToolConfig(BaseModel):
     )
 
     model: Optional[str] = None
-    r"""Which image generation model to use (e.g. \"openai/gpt-5-image\"). Defaults to \"openai/gpt-5-image\"."""
+    r"""Which image generation model to use (e.g. \"openai/gpt-image-2.6-flare\"). Defaults to \"openai/gpt-image-2.6-flare\"."""
 
     @property
     def additional_properties(self):
