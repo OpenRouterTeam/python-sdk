@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c48cf606-fb42-4a45-9c23-8f0555307828
 management:
-  docChecksum: 38338bd281ff472ac24044db0a12cc6a
+  docChecksum: eefbd24e6e0674aad757773664c7bdd1
   docVersion: 1.0.0
   speakeasyVersion: 1.803.2
   generationVersion: 2.950.13
-  releaseVersion: 1.3.136
-  configChecksum: d45fc3c35924ecc20e84934c16e9cb34
+  releaseVersion: 1.3.137
+  configChecksum: d1c13e2907122aeb4b5c9a5df16a1f3e
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
 persistentEdits:
-  generation_id: f0adead1-531c-43e9-a0c1-036bb5fb92cb
-  pristine_commit_hash: 9aa25fe696b7f04046cffb1c109a61e5a142c098
-  pristine_tree_hash: 39116fe02f2f0d412f6094e6de36a6602d4f159b
+  generation_id: 2ac5be91-6319-4f84-b98e-3431b9e7a537
+  pristine_commit_hash: 8bda6b407995baad2e9d9ba18a73785285ef1bd5
+  pristine_tree_hash: d39e78cd36dbe08ea877066bb345f54cc3cc0836
 features:
   python:
     acceptHeaders: 3.0.0
@@ -4372,16 +4372,16 @@ trackedFiles:
     pristine_git_object: 208f2a3f3108d1d74d7000b10422a6930437bcec
   docs/components/imagegenerationservertoolconfig.mdx:
     id: 1a5797a495e3
-    last_write_checksum: sha1:a46f0bc2aff5379b18ee4f3c5b7168f3c36ad0c0
-    pristine_git_object: f0e1a009f1013735bff2a0adcf51b3f0cd07edb5
+    last_write_checksum: sha1:583d365e0dd6d581383b2a12f5ef941548031779
+    pristine_git_object: 98866172dc47edb9dcf2ccf65bfcaf2006573fb9
   docs/components/imagegenerationservertoolconfigunion.mdx:
     id: 9c9b67c84754
     last_write_checksum: sha1:fe7cb74c64e24ae90fd2bb0b25448611bc091139
     pristine_git_object: 42cf7a758734065b3323fa848eac7daf4991e5f0
   docs/components/imagegenerationservertoolopenrouter.mdx:
     id: 589f9a433e7e
-    last_write_checksum: sha1:215a2a0ffeb9fad272ce94ecd7c97db517369e3d
-    pristine_git_object: dbe6e6615c149b98fceaffcdfe44721dae965999
+    last_write_checksum: sha1:b2fea53960e3c9c331fe5fc96e963e4072683a1b
+    pristine_git_object: e8e211b7ccacd5ef4577dfd62279dd8c8c5a16be
   docs/components/imagegenerationservertoolopenroutertype.mdx:
     id: 37745407ed6d
     last_write_checksum: sha1:51da31cdc1f1d5719e1e5a669d8ca3eefe0d4a5c
@@ -11568,8 +11568,8 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:95ff9b94543ae2f431ec44ebddfb3c3951a48906
-    pristine_git_object: 8e2435e484a454751df8985b15c7ad426f697c6a
+    last_write_checksum: sha1:40f7d768dcc1bc7bd1b28934ab0fc9149b1b2053
+    pristine_git_object: b24e788f7b1ed08e4fae778033f3ecb86a9bc05a
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77f44b60b98bc126557ec27391f91dfba764bb54
@@ -11596,8 +11596,8 @@ trackedFiles:
     pristine_git_object: 86713cfea633e09d33b3d4e65281071fe20e6137
   src/openrouter/_version.py:
     id: d8d15ad6c586
-    last_write_checksum: sha1:77fae83adc57a896212a721bb073472e3f08e68e
-    pristine_git_object: adc2e21b2355da8514fdd2bee226347efa23b8c1
+    last_write_checksum: sha1:0239eaf3782435e6e9ba86300b575f2e2ddce878
+    pristine_git_object: ef3e860dee0c82d2bdd77ee814a1359450bf9236
   src/openrouter/alpha.py:
     id: 306c4d93308d
     last_write_checksum: sha1:80cc0f39649445431cc2247ed0e0765438467766
@@ -13480,8 +13480,8 @@ trackedFiles:
     pristine_git_object: dbae6498aa50378e218374978a5669eb14863dea
   src/openrouter/components/imagegenerationservertoolconfig.py:
     id: 76f45207c1be
-    last_write_checksum: sha1:9ad8a69110b449f362cca95a9b98358ff41390ec
-    pristine_git_object: 2458156e5adc142fc2eb8bb438f0ef4410c40ae7
+    last_write_checksum: sha1:271380a966c0071145755264a15e09f45382fd5e
+    pristine_git_object: b6c060e27c189d97849d70a3f3c6747ec5bd6c22
   src/openrouter/components/imagegenerationservertoolconfig_union.py:
     id: d1c630a1476a
     last_write_checksum: sha1:a22b416940108c002ffa31baa5705d6032d0987d
@@ -21501,10 +21501,3 @@ examples:
         "500":
           application/json: {"error": {"code": 500, "message": "Internal Server Error"}}
 examplesVersion: 1.0.2
-releaseNotes: |
-  ## Python SDK Changes:
-  * `open_router.alpha.decisions.create()`:  `response.answers.Map<answers>.union(noul).confidence` **Added**
-  * `open_router.presets.create_presets_chat_completions()`:  `request.workspace_id` **Added**
-  * `open_router.presets.create_presets_messages()`:  `request.workspace_id` **Added**
-  * `open_router.presets.create_presets_responses()`:  `request.workspace_id` **Added**
-  * `open_router.system_one.create()`:  `response.answers.Map<answers>.union(noul).confidence` **Added**
