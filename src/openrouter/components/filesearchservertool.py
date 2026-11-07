@@ -112,7 +112,7 @@ TypeFileSearch = Literal["file_search",]
 
 
 class FileSearchServerToolTypedDict(TypedDict):
-    r"""File search tool configuration"""
+    r"""File search tool configuration. `vector_store_ids` names OpenAI vector stores, so it requires BYOK (your own OpenAI key); requests on OpenRouter credits get a 400."""
 
     type: TypeFileSearch
     vector_store_ids: List[str]
@@ -122,7 +122,7 @@ class FileSearchServerToolTypedDict(TypedDict):
 
 
 class FileSearchServerTool(BaseModel):
-    r"""File search tool configuration"""
+    r"""File search tool configuration. `vector_store_ids` names OpenAI vector stores, so it requires BYOK (your own OpenAI key); requests on OpenRouter credits get a 400."""
 
     type: TypeFileSearch
 
