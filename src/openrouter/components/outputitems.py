@@ -170,8 +170,8 @@ OutputItemsTypedDict = TypeAliasType(
         OutputShellServerToolItemTypedDict,
         OutputFunctionCallItemTypedDict,
         OutputSubagentServerToolItemTypedDict,
-        OutputToolSearchServerToolItemTypedDict,
         OutputBashServerToolItemTypedDict,
+        OutputToolSearchServerToolItemTypedDict,
     ],
 )
 r"""An output item from the response"""

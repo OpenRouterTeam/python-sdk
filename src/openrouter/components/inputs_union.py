@@ -428,8 +428,8 @@ InputsUnion1TypedDict = TypeAliasType(
         OutputFilesServerToolItemTypedDict,
         FunctionCallItemTypedDict,
         OutputSubagentServerToolItemTypedDict,
-        OutputToolSearchServerToolItemTypedDict,
         OutputBashServerToolItemTypedDict,
+        OutputToolSearchServerToolItemTypedDict,
     ],
 )
 
@@ -487,8 +487,8 @@ InputsUnion1 = TypeAliasType(
         OutputFilesServerToolItem,
         FunctionCallItem,
         OutputSubagentServerToolItem,
-        OutputToolSearchServerToolItem,
         OutputBashServerToolItem,
+        OutputToolSearchServerToolItem,
     ],
 )
 
