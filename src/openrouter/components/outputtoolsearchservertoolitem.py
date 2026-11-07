@@ -50,6 +50,8 @@ class OutputToolSearchServerToolItemTypedDict(TypedDict):
     id: NotRequired[str]
     matches: NotRequired[List[MatchTypedDict]]
     query: NotRequired[str]
+    sources: NotRequired[Dict[str, List[str]]]
+    r"""The other deferred tools of each source a match came from, by name, when the search listed siblings. Replaying the item shows the same names."""
     turn_call_ids: NotRequired[List[str]]
     r"""The IDs of every tool call in the model response that ran the search, in order. Replaying the item keeps those calls in one turn."""
 
@@ -87,6 +89,9 @@ class OutputToolSearchServerToolItem(BaseModel):
 
     query: Optional[str] = None
 
+    sources: Optional[Dict[str, List[str]]] = None
+    r"""The other deferred tools of each source a match came from, by name, when the search listed siblings. Replaying the item shows the same names."""
+
     turn_call_ids: Optional[List[str]] = None
     r"""The IDs of every tool call in the model response that ran the search, in order. Replaying the item keeps those calls in one turn."""
 
@@ -103,6 +108,7 @@ class OutputToolSearchServerToolItem(BaseModel):
                 "id",
                 "matches",
                 "query",
+                "sources",
                 "turn_call_ids",
             ]
         )

@@ -71,6 +71,8 @@ class DeferredToolsControlTypedDict(TypedDict):
     r"""Where tool-call arguments are checked against the original schema. Only `runtime` (in OpenRouter) is available in this release."""
     cascade_mode: NotRequired[CascadeMode]
     r"""How a universal `tool_search` query reaches the client's own tool search. Absent or `keywords`: a `select:` query becomes the words of the selected names and the limit is always filled. `native`: a `select:` query passes through verbatim when the client search documents `select:`, and the limit field is sent only when the model gave one, unless the client search requires it, in which case its documented default is sent. Experimental."""
+    hint: NotRequired[str]
+    r"""Universal profile only. Caller text announced to the model with the deferred catalog before its first turn, for example which sources the task needs. Repeated only when it changes. Trimmed before the length bounds apply. Recorded in the `catalog_index` discovery record of the response, so it is replayed with the conversation."""
     interface: NotRequired[Interface]
     r"""How the universal profile exposes the hidden catalog to the provider. Absent or `wrappers`: the `tool_search` and `tool_exec` tools. `code_mode`: one `tool_code` tool that runs a short JavaScript program in which `search()` and `call()` reach the catalog, so several searches and calls complete in one tool result. Experimental."""
     scope: NotRequired[DeferredToolsControlScope]
@@ -94,6 +96,9 @@ class DeferredToolsControl(BaseModel):
     cascade_mode: Optional[CascadeMode] = None
     r"""How a universal `tool_search` query reaches the client's own tool search. Absent or `keywords`: a `select:` query becomes the words of the selected names and the limit is always filled. `native`: a `select:` query passes through verbatim when the client search documents `select:`, and the limit field is sent only when the model gave one, unless the client search requires it, in which case its documented default is sent. Experimental."""
 
+    hint: Optional[str] = None
+    r"""Universal profile only. Caller text announced to the model with the deferred catalog before its first turn, for example which sources the task needs. Repeated only when it changes. Trimmed before the length bounds apply. Recorded in the `catalog_index` discovery record of the response, so it is replayed with the conversation."""
+
     interface: Optional[Interface] = None
     r"""How the universal profile exposes the hidden catalog to the provider. Absent or `wrappers`: the `tool_search` and `tool_exec` tools. `code_mode`: one `tool_code` tool that runs a short JavaScript program in which `search()` and `call()` reach the catalog, so several searches and calls complete in one tool result. Experimental."""
 
@@ -102,7 +107,7 @@ class DeferredToolsControl(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["cascade_mode", "interface", "scope"])
+        optional_fields = set(["cascade_mode", "hint", "interface", "scope"])
         serialized = handler(self)
         m = {}
 

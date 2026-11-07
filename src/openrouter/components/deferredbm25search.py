@@ -15,6 +15,8 @@ class DeferredBm25SearchTypedDict(TypedDict):
 
     type: DeferredBm25SearchType
     max_results: NotRequired[int]
+    siblings: NotRequired[bool]
+    r"""Universal profile only, for searches the router answers through the `tool_search` wrapper; code-mode `search()` and a client-owned tool search list the matched tools alone. When true, each result also names up to 16 other deferred tools of every source a match came from, so a model that found one tool of an MCP server learns its neighbours without another search. Absent or false: results list the matched tools alone."""
 
 
 class DeferredBm25Search(BaseModel):
@@ -24,9 +26,12 @@ class DeferredBm25Search(BaseModel):
 
     max_results: Optional[int] = None
 
+    siblings: Optional[bool] = None
+    r"""Universal profile only, for searches the router answers through the `tool_search` wrapper; code-mode `search()` and a client-owned tool search list the matched tools alone. When true, each result also names up to 16 other deferred tools of every source a match came from, so a model that found one tool of an MCP server learns its neighbours without another search. Absent or false: results list the matched tools alone."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["max_results"])
+        optional_fields = set(["max_results", "siblings"])
         serialized = handler(self)
         m = {}
 
