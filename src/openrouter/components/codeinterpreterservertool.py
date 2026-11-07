@@ -79,14 +79,14 @@ TypeCodeInterpreter = Literal["code_interpreter",]
 
 
 class CodeInterpreterServerToolTypedDict(TypedDict):
-    r"""Code interpreter tool configuration"""
+    r"""Code interpreter tool configuration. An existing container id or `container.file_ids` requires BYOK (your own OpenAI key); requests on OpenRouter credits must use `auto` with no `file_ids`."""
 
     container: ContainerTypedDict
     type: TypeCodeInterpreter
 
 
 class CodeInterpreterServerTool(BaseModel):
-    r"""Code interpreter tool configuration"""
+    r"""Code interpreter tool configuration. An existing container id or `container.file_ids` requires BYOK (your own OpenAI key); requests on OpenRouter credits must use `auto` with no `file_ids`."""
 
     container: Container
 

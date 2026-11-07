@@ -11,6 +11,16 @@ from typing import Literal, Optional, Union
 from typing_extensions import NotRequired, TypedDict
 
 
+CascadeMode = Union[
+    Literal[
+        "keywords",
+        "native",
+    ],
+    UnrecognizedStr,
+]
+r"""How a universal `tool_search` query reaches the client's own tool search. Absent or `keywords`: a `select:` query becomes the words of the selected names and the limit is always filled. `native`: a `select:` query passes through verbatim when the client search documents `select:`, and the limit field is sent only when the model gave one, unless the client search requires it, in which case its documented default is sent. Experimental."""
+
+
 Interface = Union[
     Literal[
         "wrappers",
@@ -38,10 +48,11 @@ DeferredToolsControlScope = Union[
     Literal[
         "all",
         "mcp",
+        "client",
     ],
     UnrecognizedStr,
 ]
-r"""Which tools the universal profile defers. Absent or `all`: every wrappable tool outside the coding-harness core set. `mcp`: only MCP server tools (`mcp__*` names and Responses namespaces outside `functions`); the harness keeps its own built-in tools direct. Experimental."""
+r"""Which tools the universal profile defers. Absent or `all`: every wrappable tool outside the coding-harness core set. `mcp`: only MCP server tools (`mcp__*` names and Responses namespaces outside `functions`); the harness keeps its own built-in tools direct. `client`: only the tools the client itself marked `defer_loading`, so a harness with its own tool search keeps its other direct tools direct; an adopted client tool search is still replaced by the router wrappers, and a client-deferred tool the router cannot wrap stays direct. Experimental."""
 
 
 Validation = Literal["runtime",]
@@ -58,10 +69,12 @@ class DeferredToolsControlTypedDict(TypedDict):
     r"""Router-local regex/BM25 or caller-owned custom search."""
     validation: Validation
     r"""Where tool-call arguments are checked against the original schema. Only `runtime` (in OpenRouter) is available in this release."""
+    cascade_mode: NotRequired[CascadeMode]
+    r"""How a universal `tool_search` query reaches the client's own tool search. Absent or `keywords`: a `select:` query becomes the words of the selected names and the limit is always filled. `native`: a `select:` query passes through verbatim when the client search documents `select:`, and the limit field is sent only when the model gave one, unless the client search requires it, in which case its documented default is sent. Experimental."""
     interface: NotRequired[Interface]
     r"""How the universal profile exposes the hidden catalog to the provider. Absent or `wrappers`: the `tool_search` and `tool_exec` tools. `code_mode`: one `tool_code` tool that runs a short JavaScript program in which `search()` and `call()` reach the catalog, so several searches and calls complete in one tool result. Experimental."""
     scope: NotRequired[DeferredToolsControlScope]
-    r"""Which tools the universal profile defers. Absent or `all`: every wrappable tool outside the coding-harness core set. `mcp`: only MCP server tools (`mcp__*` names and Responses namespaces outside `functions`); the harness keeps its own built-in tools direct. Experimental."""
+    r"""Which tools the universal profile defers. Absent or `all`: every wrappable tool outside the coding-harness core set. `mcp`: only MCP server tools (`mcp__*` names and Responses namespaces outside `functions`); the harness keeps its own built-in tools direct. `client`: only the tools the client itself marked `defer_loading`, so a harness with its own tool search keeps its other direct tools direct; an adopted client tool search is still replaced by the router wrappers, and a client-deferred tool the router cannot wrap stays direct. Experimental."""
 
 
 class DeferredToolsControl(BaseModel):
@@ -78,15 +91,18 @@ class DeferredToolsControl(BaseModel):
     validation: Validation
     r"""Where tool-call arguments are checked against the original schema. Only `runtime` (in OpenRouter) is available in this release."""
 
+    cascade_mode: Optional[CascadeMode] = None
+    r"""How a universal `tool_search` query reaches the client's own tool search. Absent or `keywords`: a `select:` query becomes the words of the selected names and the limit is always filled. `native`: a `select:` query passes through verbatim when the client search documents `select:`, and the limit field is sent only when the model gave one, unless the client search requires it, in which case its documented default is sent. Experimental."""
+
     interface: Optional[Interface] = None
     r"""How the universal profile exposes the hidden catalog to the provider. Absent or `wrappers`: the `tool_search` and `tool_exec` tools. `code_mode`: one `tool_code` tool that runs a short JavaScript program in which `search()` and `call()` reach the catalog, so several searches and calls complete in one tool result. Experimental."""
 
     scope: Optional[DeferredToolsControlScope] = None
-    r"""Which tools the universal profile defers. Absent or `all`: every wrappable tool outside the coding-harness core set. `mcp`: only MCP server tools (`mcp__*` names and Responses namespaces outside `functions`); the harness keeps its own built-in tools direct. Experimental."""
+    r"""Which tools the universal profile defers. Absent or `all`: every wrappable tool outside the coding-harness core set. `mcp`: only MCP server tools (`mcp__*` names and Responses namespaces outside `functions`); the harness keeps its own built-in tools direct. `client`: only the tools the client itself marked `defer_loading`, so a harness with its own tool search keeps its other direct tools direct; an adopted client tool search is still replaced by the router wrappers, and a client-deferred tool the router cannot wrap stays direct. Experimental."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["interface", "scope"])
+        optional_fields = set(["cascade_mode", "interface", "scope"])
         serialized = handler(self)
         m = {}
 

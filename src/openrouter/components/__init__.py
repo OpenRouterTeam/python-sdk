@@ -1822,6 +1822,7 @@ if TYPE_CHECKING:
         DeferredRegexSearchTypedDict,
     )
     from .deferredtoolscontrol import (
+        CascadeMode,
         DeferredToolsControl,
         DeferredToolsControlScope,
         DeferredToolsControlTypedDict,
@@ -5770,6 +5771,7 @@ __all__ = [
     "By",
     "CapabilityDescriptor",
     "CapabilityDescriptorTypedDict",
+    "CascadeMode",
     "ChangeGuardrailPolicyAssignmentRequest",
     "ChangeGuardrailPolicyAssignmentRequestPolicyType",
     "ChangeGuardrailPolicyAssignmentRequestTypedDict",
@@ -10064,6 +10066,7 @@ _dynamic_imports: dict[str, str] = {
     "DeferredRegexSearch": ".deferredregexsearch",
     "DeferredRegexSearchType": ".deferredregexsearch",
     "DeferredRegexSearchTypedDict": ".deferredregexsearch",
+    "CascadeMode": ".deferredtoolscontrol",
     "DeferredToolsControl": ".deferredtoolscontrol",
     "DeferredToolsControlScope": ".deferredtoolscontrol",
     "DeferredToolsControlTypedDict": ".deferredtoolscontrol",
