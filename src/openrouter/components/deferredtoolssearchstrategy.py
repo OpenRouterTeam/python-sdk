@@ -14,8 +14,8 @@ DeferredToolsSearchStrategyTypedDict = TypeAliasType(
     "DeferredToolsSearchStrategyTypedDict",
     Union[
         DeferredRegexSearchTypedDict,
-        DeferredBm25SearchTypedDict,
         DeferredCustomSearchTypedDict,
+        DeferredBm25SearchTypedDict,
     ],
 )
 r"""Router-local regex/BM25 or caller-owned custom search."""
