@@ -60,7 +60,7 @@ r"""Where tool-call arguments are checked against the original schema. Only `run
 
 
 class DeferredToolsControlTypedDict(TypedDict):
-    r"""Opt-in versioned router-level deferred-tool protocol. Replay assistant reasoning unchanged on continuation; keep the catalog unchanged."""
+    r"""Opt-in versioned router-level deferred-tool protocol. Replay assistant reasoning unchanged on continuation. The portable profile needs the catalog unchanged across a continuation; the universal profile accepts a changed catalog and, with `announce_catalog_changes`, tells the model about it."""
 
     profile: Profile
     r"""Loading profile. `portable` serves the `defer_loading` tools with router-built search and call wrappers on any model and keeps the catalog fixed. `universal` defers every wrappable tool behind the same wrappers so the provider-facing tool list never changes, and rebuilds the catalog from each request so tools can be added or removed mid-conversation."""
@@ -69,6 +69,8 @@ class DeferredToolsControlTypedDict(TypedDict):
     r"""Router-local regex/BM25 or caller-owned custom search."""
     validation: Validation
     r"""Where tool-call arguments are checked against the original schema. Only `runtime` (in OpenRouter) is available in this release."""
+    announce_catalog_changes: NotRequired[bool]
+    r"""Universal profile only. When true, a catalog whose deferred tools changed between two of the model's own turns (a client that connects MCP servers while the model works) is re-announced before the next model turn, with the sources added, changed and removed since the previous index, or that no deferred tools remain. Applies when the router lists the catalog itself; a client whose own tool search was adopted lists its deferred tools itself and is not re-announced. The announcement shares the result budget of the turn and is skipped when it does not fit. Absent or false: the catalog index is announced on a user turn only."""
     cascade_mode: NotRequired[CascadeMode]
     r"""How a universal `tool_search` query reaches the client's own tool search. Absent or `keywords`: a `select:` query becomes the words of the selected names and the limit is always filled. `native`: a `select:` query passes through verbatim when the client search documents `select:`, and the limit field is sent only when the model gave one, unless the client search requires it, in which case its documented default is sent. Experimental."""
     hint: NotRequired[str]
@@ -80,7 +82,7 @@ class DeferredToolsControlTypedDict(TypedDict):
 
 
 class DeferredToolsControl(BaseModel):
-    r"""Opt-in versioned router-level deferred-tool protocol. Replay assistant reasoning unchanged on continuation; keep the catalog unchanged."""
+    r"""Opt-in versioned router-level deferred-tool protocol. Replay assistant reasoning unchanged on continuation. The portable profile needs the catalog unchanged across a continuation; the universal profile accepts a changed catalog and, with `announce_catalog_changes`, tells the model about it."""
 
     profile: Profile
     r"""Loading profile. `portable` serves the `defer_loading` tools with router-built search and call wrappers on any model and keeps the catalog fixed. `universal` defers every wrappable tool behind the same wrappers so the provider-facing tool list never changes, and rebuilds the catalog from each request so tools can be added or removed mid-conversation."""
@@ -92,6 +94,9 @@ class DeferredToolsControl(BaseModel):
 
     validation: Validation
     r"""Where tool-call arguments are checked against the original schema. Only `runtime` (in OpenRouter) is available in this release."""
+
+    announce_catalog_changes: Optional[bool] = None
+    r"""Universal profile only. When true, a catalog whose deferred tools changed between two of the model's own turns (a client that connects MCP servers while the model works) is re-announced before the next model turn, with the sources added, changed and removed since the previous index, or that no deferred tools remain. Applies when the router lists the catalog itself; a client whose own tool search was adopted lists its deferred tools itself and is not re-announced. The announcement shares the result budget of the turn and is skipped when it does not fit. Absent or false: the catalog index is announced on a user turn only."""
 
     cascade_mode: Optional[CascadeMode] = None
     r"""How a universal `tool_search` query reaches the client's own tool search. Absent or `keywords`: a `select:` query becomes the words of the selected names and the limit is always filled. `native`: a `select:` query passes through verbatim when the client search documents `select:`, and the limit field is sent only when the model gave one, unless the client search requires it, in which case its documented default is sent. Experimental."""
@@ -107,7 +112,9 @@ class DeferredToolsControl(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["cascade_mode", "hint", "interface", "scope"])
+        optional_fields = set(
+            ["announce_catalog_changes", "cascade_mode", "hint", "interface", "scope"]
+        )
         serialized = handler(self)
         m = {}
 
