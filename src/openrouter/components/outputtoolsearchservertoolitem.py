@@ -39,6 +39,8 @@ class OutputToolSearchServerToolItemTypedDict(TypedDict):
     r"""The JSON arguments of the model call, verbatim. Replaying the item reuses them."""
     call_id: NotRequired[str]
     r"""The ID of the model call that ran the search. Replaying the item reuses it."""
+    catalog_changes: NotRequired[str]
+    r"""What the announced index added and removed since the previous one, when the request opted into `announce_catalog_changes` and the catalog changed between model turns. Replaying the item shows the same lines."""
     catalog_index: NotRequired[str]
     r"""The deferred-tool index the router showed the model with a pre-search, listing tool sources and names. Replaying the item shows the same index."""
     error: NotRequired[str]
@@ -68,6 +70,9 @@ class OutputToolSearchServerToolItem(BaseModel):
 
     call_id: Optional[str] = None
     r"""The ID of the model call that ran the search. Replaying the item reuses it."""
+
+    catalog_changes: Optional[str] = None
+    r"""What the announced index added and removed since the previous one, when the request opted into `announce_catalog_changes` and the catalog changed between model turns. Replaying the item shows the same lines."""
 
     catalog_index: Optional[str] = None
     r"""The deferred-tool index the router showed the model with a pre-search, listing tool sources and names. Replaying the item shows the same index."""
@@ -101,6 +106,7 @@ class OutputToolSearchServerToolItem(BaseModel):
             [
                 "arguments",
                 "call_id",
+                "catalog_changes",
                 "catalog_index",
                 "error",
                 "format",

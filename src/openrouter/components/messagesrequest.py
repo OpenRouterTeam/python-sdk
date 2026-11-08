@@ -1155,7 +1155,7 @@ class MessagesRequestTypedDict(TypedDict):
     r"""Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. When set on an individual content block, it marks an explicit cache breakpoint; block-level markers also work on OpenAI models that support explicit prompt caching — OpenRouter converts them to the provider's native format."""
     context_management: NotRequired[Nullable[ContextManagementTypedDict]]
     deferred_tools: NotRequired[DeferredToolsControlTypedDict]
-    r"""Opt-in versioned router-level deferred-tool protocol. Replay assistant reasoning unchanged on continuation; keep the catalog unchanged."""
+    r"""Opt-in versioned router-level deferred-tool protocol. Replay assistant reasoning unchanged on continuation. The portable profile needs the catalog unchanged across a continuation; the universal profile accepts a changed catalog and, with `announce_catalog_changes`, tells the model about it."""
     fallbacks: NotRequired[Nullable[List[MessagesFallbackParamTypedDict]]]
     r"""Fallback models to try if the primary model fails or refuses, in order. Handled by OpenRouter multi-model routing rather than Anthropic server-side fallbacks; cannot be combined with `models`. Each entry accepts only `model`. Maximum of 3 entries."""
     max_tokens: NotRequired[int]
@@ -1202,7 +1202,7 @@ class MessagesRequest(BaseModel):
     context_management: OptionalNullable[ContextManagement] = UNSET
 
     deferred_tools: Optional[DeferredToolsControl] = None
-    r"""Opt-in versioned router-level deferred-tool protocol. Replay assistant reasoning unchanged on continuation; keep the catalog unchanged."""
+    r"""Opt-in versioned router-level deferred-tool protocol. Replay assistant reasoning unchanged on continuation. The portable profile needs the catalog unchanged across a continuation; the universal profile accepts a changed catalog and, with `announce_catalog_changes`, tells the model about it."""
 
     fallbacks: OptionalNullable[List[MessagesFallbackParam]] = UNSET
     r"""Fallback models to try if the primary model fails or refuses, in order. Handled by OpenRouter multi-model routing rather than Anthropic server-side fallbacks; cannot be combined with `models`. Each entry accepts only `model`. Maximum of 3 entries."""

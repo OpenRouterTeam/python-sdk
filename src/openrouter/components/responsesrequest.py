@@ -474,7 +474,7 @@ class ResponsesRequestTypedDict(TypedDict):
     debug: NotRequired[ChatDebugOptionsTypedDict]
     r"""Debug options for inspecting request transformations (streaming only)"""
     deferred_tools: NotRequired[DeferredToolsControlTypedDict]
-    r"""Opt-in versioned router-level deferred-tool protocol. Replay assistant reasoning unchanged on continuation; keep the catalog unchanged."""
+    r"""Opt-in versioned router-level deferred-tool protocol. Replay assistant reasoning unchanged on continuation. The portable profile needs the catalog unchanged across a continuation; the universal profile accepts a changed catalog and, with `announce_catalog_changes`, tells the model about it."""
     frequency_penalty: NotRequired[Nullable[float]]
     image_config: NotRequired[Dict[str, ImageConfigTypedDict]]
     r"""Provider-specific image configuration options. Keys and values vary by model/provider. See https://openrouter.ai/docs/guides/overview/multimodal/image-generation for more details."""
@@ -547,7 +547,7 @@ class ResponsesRequest(BaseModel):
     r"""Debug options for inspecting request transformations (streaming only)"""
 
     deferred_tools: Optional[DeferredToolsControl] = None
-    r"""Opt-in versioned router-level deferred-tool protocol. Replay assistant reasoning unchanged on continuation; keep the catalog unchanged."""
+    r"""Opt-in versioned router-level deferred-tool protocol. Replay assistant reasoning unchanged on continuation. The portable profile needs the catalog unchanged across a continuation; the universal profile accepts a changed catalog and, with `announce_catalog_changes`, tells the model about it."""
 
     frequency_penalty: OptionalNullable[float] = UNSET
 
