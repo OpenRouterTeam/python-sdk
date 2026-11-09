@@ -405,6 +405,12 @@ if TYPE_CHECKING:
         DeleteObservabilityDestinationRequest,
         DeleteObservabilityDestinationRequestTypedDict,
     )
+    from .deletepreset import (
+        DeletePresetGlobals,
+        DeletePresetGlobalsTypedDict,
+        DeletePresetRequest,
+        DeletePresetRequestTypedDict,
+    )
     from .deleteprivateendpoint import (
         DeletePrivateEndpointGlobals,
         DeletePrivateEndpointGlobalsTypedDict,
@@ -1135,6 +1141,12 @@ if TYPE_CHECKING:
         TimeRange,
         TimeRangeTypedDict,
     )
+    from .restorepreset import (
+        RestorePresetGlobals,
+        RestorePresetGlobalsTypedDict,
+        RestorePresetRequest,
+        RestorePresetRequestTypedDict,
+    )
     from .sendchatcompletionrequest import (
         SendChatCompletionRequestGlobals,
         SendChatCompletionRequestGlobalsTypedDict,
@@ -1557,6 +1569,10 @@ __all__ = [
     "DeleteObservabilityDestinationGlobalsTypedDict",
     "DeleteObservabilityDestinationRequest",
     "DeleteObservabilityDestinationRequestTypedDict",
+    "DeletePresetGlobals",
+    "DeletePresetGlobalsTypedDict",
+    "DeletePresetRequest",
+    "DeletePresetRequestTypedDict",
     "DeletePrivateEndpointGlobals",
     "DeletePrivateEndpointGlobalsTypedDict",
     "DeletePrivateEndpointRequest",
@@ -2104,6 +2120,10 @@ __all__ = [
     "RateLimitTypedDict",
     "Region",
     "ResponseFormat",
+    "RestorePresetGlobals",
+    "RestorePresetGlobalsTypedDict",
+    "RestorePresetRequest",
+    "RestorePresetRequestTypedDict",
     "Result",
     "ResultTypedDict",
     "Role",
@@ -2518,6 +2538,10 @@ _dynamic_imports: dict[str, str] = {
     "DeleteObservabilityDestinationGlobalsTypedDict": ".deleteobservabilitydestination",
     "DeleteObservabilityDestinationRequest": ".deleteobservabilitydestination",
     "DeleteObservabilityDestinationRequestTypedDict": ".deleteobservabilitydestination",
+    "DeletePresetGlobals": ".deletepreset",
+    "DeletePresetGlobalsTypedDict": ".deletepreset",
+    "DeletePresetRequest": ".deletepreset",
+    "DeletePresetRequestTypedDict": ".deletepreset",
     "DeletePrivateEndpointGlobals": ".deleteprivateendpoint",
     "DeletePrivateEndpointGlobalsTypedDict": ".deleteprivateendpoint",
     "DeletePrivateEndpointRequest": ".deleteprivateendpoint",
@@ -3064,6 +3088,10 @@ _dynamic_imports: dict[str, str] = {
     "QueryAnalyticsResponseTypedDict": ".queryanalytics",
     "TimeRange": ".queryanalytics",
     "TimeRangeTypedDict": ".queryanalytics",
+    "RestorePresetGlobals": ".restorepreset",
+    "RestorePresetGlobalsTypedDict": ".restorepreset",
+    "RestorePresetRequest": ".restorepreset",
+    "RestorePresetRequestTypedDict": ".restorepreset",
     "SendChatCompletionRequestGlobals": ".sendchatcompletionrequest",
     "SendChatCompletionRequestGlobalsTypedDict": ".sendchatcompletionrequest",
     "SendChatCompletionRequestRequest": ".sendchatcompletionrequest",

@@ -92,6 +92,8 @@ class ListPresetsRequestTypedDict(TypedDict):
     r"""Number of records to skip for pagination"""
     limit: NotRequired[int]
     r"""Maximum number of records to return (max 100)"""
+    workspace_id: NotRequired[str]
+    r"""Workspace to act in. Also accepted as a `workspace_id` field in a JSON request body. Defaults to the key's workspace for a key limited to one workspace, otherwise to the account's default workspace."""
 
 
 class ListPresetsRequest(BaseModel):
@@ -135,6 +137,12 @@ class ListPresetsRequest(BaseModel):
     ] = 50
     r"""Maximum number of records to return (max 100)"""
 
+    workspace_id: Annotated[
+        Optional[str],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Workspace to act in. Also accepted as a `workspace_id` field in a JSON request body. Defaults to the key's workspace for a key limited to one workspace, otherwise to the account's default workspace."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
@@ -144,6 +152,7 @@ class ListPresetsRequest(BaseModel):
                 "X-OpenRouter-Categories",
                 "offset",
                 "limit",
+                "workspace_id",
             ]
         )
         nullable_fields = set(["offset"])

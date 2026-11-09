@@ -2,7 +2,12 @@
 
 from __future__ import annotations
 from openrouter.types import BaseModel, UNSET_SENTINEL
-from openrouter.utils import FieldMetadata, HeaderMetadata, PathParamMetadata
+from openrouter.utils import (
+    FieldMetadata,
+    HeaderMetadata,
+    PathParamMetadata,
+    QueryParamMetadata,
+)
 import pydantic
 from pydantic import model_serializer
 from typing import Optional
@@ -89,6 +94,8 @@ class GetPresetRequestTypedDict(TypedDict):
     r"""Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
     """
+    workspace_id: NotRequired[str]
+    r"""Workspace to act in. Also accepted as a `workspace_id` field in a JSON request body. Defaults to the key's workspace for a key limited to one workspace, otherwise to the account's default workspace."""
 
 
 class GetPresetRequest(BaseModel):
@@ -125,10 +132,21 @@ class GetPresetRequest(BaseModel):
 
     """
 
+    workspace_id: Annotated[
+        Optional[str],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Workspace to act in. Also accepted as a `workspace_id` field in a JSON request body. Defaults to the key's workspace for a key limited to one workspace, otherwise to the account's default workspace."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
-            ["HTTP-Referer", "X-OpenRouter-Title", "X-OpenRouter-Categories"]
+            [
+                "HTTP-Referer",
+                "X-OpenRouter-Title",
+                "X-OpenRouter-Categories",
+                "workspace_id",
+            ]
         )
         serialized = handler(self)
         m = {}
