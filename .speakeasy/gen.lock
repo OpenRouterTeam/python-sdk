@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c48cf606-fb42-4a45-9c23-8f0555307828
 management:
-  docChecksum: 8bae8d75507e25f4bce802fa8d4e51d4
+  docChecksum: 022eb2c5a16a240dbadc4af33fe7a0b2
   docVersion: 1.0.0
   speakeasyVersion: 1.803.2
   generationVersion: 2.950.13
-  releaseVersion: 1.3.142
-  configChecksum: ecad88779f821f146821691d219a36c1
+  releaseVersion: 1.3.143
+  configChecksum: f1173d9f286b063f509b47bc8f11c460
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
 persistentEdits:
-  generation_id: 4281e77a-9127-4b49-9461-c9069ab3fb98
-  pristine_commit_hash: a1bfb01c6f4b18cca2537e06836ab14978820517
-  pristine_tree_hash: a41537682739cbddba7562e9362d375b2d85be89
+  generation_id: a482e192-08bc-41ac-92eb-da7cde2731ae
+  pristine_commit_hash: b67d5c45d7129b1d3cacf13dee817e855c3d3180
+  pristine_tree_hash: f2ff85093f2980a0daa4958563987cd364e8c4bd
 features:
   python:
     acceptHeaders: 3.0.0
@@ -3132,8 +3132,8 @@ trackedFiles:
     pristine_git_object: 78c74a24e624245cbbfe2f989c4301442bbb5fee
   docs/components/deferredbm25search.mdx:
     id: 28b5539be31d
-    last_write_checksum: sha1:d14a631611b9e843f885300ea0767d3c19f0e749
-    pristine_git_object: 7c232f74da7187977ef499699d16f6cbea9abf86
+    last_write_checksum: sha1:738c355d3c517649ef2fe2882775aae25e210e04
+    pristine_git_object: f9e7fee3c75a43014fe085f18c61672eb3e398af
   docs/components/deferredbm25searchtype.mdx:
     id: 7c08005a05ac
     last_write_checksum: sha1:4c12129e0ab52db31056314a17628cbfedb600b8
@@ -3148,8 +3148,8 @@ trackedFiles:
     pristine_git_object: 8accaf302940a8ab39f159badc6daccad7fddd75
   docs/components/deferredregexsearch.mdx:
     id: 8b88be545243
-    last_write_checksum: sha1:1f76450bf1fde4fb2c157551d4579f39ed9c8097
-    pristine_git_object: 9186c94f06a12fcb64ede66bbbf693254c74c6f6
+    last_write_checksum: sha1:74034ff60550e5a9da3746e63aef9a36163d4064
+    pristine_git_object: 6b387eac8ed1c8a6f9ebaa86ad1028acf5800e46
   docs/components/deferredregexsearchtype.mdx:
     id: bcec87810dd1
     last_write_checksum: sha1:59b772e53fc1109c2cc4f42f4cf21405c35830a6
@@ -11572,8 +11572,8 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:a93813c6551be9f3bcff14e9fea4c8640b0f69b0
-    pristine_git_object: 1a7f67c5ab467c0cb958532096f18f2238d3b85a
+    last_write_checksum: sha1:56cf94dc2366ba5b3445704a6bdf5ebe06d9069a
+    pristine_git_object: 36ec87c2b92e021845ae189b0fc83ad1b91e5b2d
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77f44b60b98bc126557ec27391f91dfba764bb54
@@ -11600,8 +11600,8 @@ trackedFiles:
     pristine_git_object: 86713cfea633e09d33b3d4e65281071fe20e6137
   src/openrouter/_version.py:
     id: d8d15ad6c586
-    last_write_checksum: sha1:2d24d9a720a5ae17fd14c2b40875600f91d69ade
-    pristine_git_object: c40284be584f0d9ecb3ef6a792673d4a53f6ba43
+    last_write_checksum: sha1:807ee02ed8a8931b2b871e177f2fbbeaef4d82f2
+    pristine_git_object: e4090cd898524e1dc2d74603c793d69eb344a066
   src/openrouter/alpha.py:
     id: 306c4d93308d
     last_write_checksum: sha1:80cc0f39649445431cc2247ed0e0765438467766
@@ -12980,16 +12980,16 @@ trackedFiles:
     pristine_git_object: dccefb2123d06d6d9920e7035f21a8ab5e7b86a8
   src/openrouter/components/deferredbm25search.py:
     id: b988bf147d9f
-    last_write_checksum: sha1:b3a14b9dae651760293ecc84df9b52703b37bbf3
-    pristine_git_object: 2d6f448ab6a697eb6ca1a0b4b5d8816ff720d153
+    last_write_checksum: sha1:244c07f05441fa084c7c7ea881b81580ab58b977
+    pristine_git_object: a90be50d8b9bf7624c15dc0a8e77d59c58ffc87a
   src/openrouter/components/deferredcustomsearch.py:
     id: 71d9d33ba373
     last_write_checksum: sha1:1b308d057e8b27d8a7da76b1edf47734ab11dd0c
     pristine_git_object: b47ed4f8a5b51b416f3105bb22b93dddf23e7aa6
   src/openrouter/components/deferredregexsearch.py:
     id: 64f28f2cc1af
-    last_write_checksum: sha1:5e9edbf452c0aa3c1a9d72a585e82828a7855352
-    pristine_git_object: 28a24b67fabae6494389877dad418ebf5102ef2b
+    last_write_checksum: sha1:97a0a3a31f5223c0aea16482f3b2d600806f1a5c
+    pristine_git_object: c354e6dbcedcec520d770714fe70089c18d7d3c5
   src/openrouter/components/deferredtoolscontrol.py:
     id: b8b6ceef6f86
     last_write_checksum: sha1:400370e0b6065417a670fba03fc5faa713f503c3
