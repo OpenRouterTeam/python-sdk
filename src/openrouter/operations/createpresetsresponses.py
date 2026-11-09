@@ -98,7 +98,7 @@ class CreatePresetsResponsesRequestTypedDict(TypedDict):
 
     """
     workspace_id: NotRequired[str]
-    r"""Workspace to create the preset in. Defaults to the key's workspace for a key limited to one workspace, otherwise to the account's default workspace."""
+    r"""Workspace to act in. Also accepted as a `workspace_id` field in a JSON request body. Defaults to the key's workspace for a key limited to one workspace, otherwise to the account's default workspace."""
 
 
 class CreatePresetsResponsesRequest(BaseModel):
@@ -144,7 +144,7 @@ class CreatePresetsResponsesRequest(BaseModel):
         Optional[str],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
-    r"""Workspace to create the preset in. Defaults to the key's workspace for a key limited to one workspace, otherwise to the account's default workspace."""
+    r"""Workspace to act in. Also accepted as a `workspace_id` field in a JSON request body. Defaults to the key's workspace for a key limited to one workspace, otherwise to the account's default workspace."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

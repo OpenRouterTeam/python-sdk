@@ -21,6 +21,7 @@ class Presets(BaseSDK):
         x_open_router_categories: Optional[str] = None,
         offset: OptionalNullable[int] = 0,
         limit: Optional[int] = 50,
+        workspace_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -41,6 +42,7 @@ class Presets(BaseSDK):
 
         :param offset: Number of records to skip for pagination
         :param limit: Maximum number of records to return (max 100)
+        :param workspace_id: Workspace to act in. Also accepted as a `workspace_id` field in a JSON request body. Defaults to the key's workspace for a key limited to one workspace, otherwise to the account's default workspace.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -62,6 +64,7 @@ class Presets(BaseSDK):
             x_open_router_categories=x_open_router_categories,
             offset=offset,
             limit=limit,
+            workspace_id=workspace_id,
         )
 
         req = self._build_request(
@@ -137,6 +140,7 @@ class Presets(BaseSDK):
                 x_open_router_categories=x_open_router_categories,
                 offset=next_offset,
                 limit=limit,
+                workspace_id=workspace_id,
                 retries=retries,
                 server_url=server_url,
                 timeout_ms=timeout_ms,
@@ -166,6 +170,11 @@ class Presets(BaseSDK):
                 errors.ForbiddenResponseErrorData, http_res
             )
             raise errors.ForbiddenResponseError(response_data, http_res)
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.NotFoundResponseErrorData, http_res
+            )
+            raise errors.NotFoundResponseError(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(
                 errors.InternalServerResponseErrorData, http_res
@@ -197,6 +206,7 @@ class Presets(BaseSDK):
         x_open_router_categories: Optional[str] = None,
         offset: OptionalNullable[int] = 0,
         limit: Optional[int] = 50,
+        workspace_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -217,6 +227,7 @@ class Presets(BaseSDK):
 
         :param offset: Number of records to skip for pagination
         :param limit: Maximum number of records to return (max 100)
+        :param workspace_id: Workspace to act in. Also accepted as a `workspace_id` field in a JSON request body. Defaults to the key's workspace for a key limited to one workspace, otherwise to the account's default workspace.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -238,6 +249,7 @@ class Presets(BaseSDK):
             x_open_router_categories=x_open_router_categories,
             offset=offset,
             limit=limit,
+            workspace_id=workspace_id,
         )
 
         req = self._build_request_async(
@@ -316,6 +328,7 @@ class Presets(BaseSDK):
                 x_open_router_categories=x_open_router_categories,
                 offset=next_offset,
                 limit=limit,
+                workspace_id=workspace_id,
                 retries=retries,
                 server_url=server_url,
                 timeout_ms=timeout_ms,
@@ -345,6 +358,11 @@ class Presets(BaseSDK):
                 errors.ForbiddenResponseErrorData, http_res
             )
             raise errors.ForbiddenResponseError(response_data, http_res)
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.NotFoundResponseErrorData, http_res
+            )
+            raise errors.NotFoundResponseError(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(
                 errors.InternalServerResponseErrorData, http_res
@@ -368,6 +386,304 @@ class Presets(BaseSDK):
 
         raise errors.OpenRouterDefaultError("Unexpected response received", http_res)
 
+    def delete(
+        self,
+        *,
+        slug: str,
+        http_referer: Optional[str] = None,
+        x_open_router_title: Optional[str] = None,
+        x_open_router_categories: Optional[str] = None,
+        workspace_id: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> components.GetPresetResponse:
+        r"""Delete a preset
+
+        Archives a preset: it no longer resolves for inference and is hidden from get and list. The preset and its versions are kept, so the slug stays taken; restore it with `POST /presets/{slug}/restore`. Deleting an already-archived preset succeeds again. A disabled preset returns 409. Requires a read-write [management key](/docs/guides/overview/auth/management-api-keys); inference API keys are rejected. `workspace_id` may be sent as a query parameter or a JSON body field.
+
+        If set, this operation will use `api_key` from the global security.
+
+        :param slug: URL-safe slug identifying the preset.
+        :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
+            This is used to track API usage per application.
+
+        :param x_open_router_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+        :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
+
+        :param workspace_id: Workspace to act in. Also accepted as a `workspace_id` field in a JSON request body. Defaults to the key's workspace for a key limited to one workspace, otherwise to the account's default workspace.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = operations.DeletePresetRequest(
+            http_referer=http_referer,
+            x_open_router_title=x_open_router_title,
+            x_open_router_categories=x_open_router_categories,
+            slug=slug,
+            workspace_id=workspace_id,
+        )
+
+        req = self._build_request(
+            method="DELETE",
+            path="/presets/{slug}",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            _globals=operations.DeletePresetGlobals(
+                http_referer=self.sdk_configuration.globals.http_referer,
+                x_open_router_title=self.sdk_configuration.globals.x_open_router_title,
+                x_open_router_categories=self.sdk_configuration.globals.x_open_router_categories,
+            ),
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            allowed_fields=["api_key"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 60000, 1.5, 3600000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["5XX"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="deletePreset",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
+                tags=["Presets"],
+                extensions=None,
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(components.GetPresetResponse, http_res)
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.BadRequestResponseErrorData, http_res
+            )
+            raise errors.BadRequestResponseError(response_data, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UnauthorizedResponseErrorData, http_res
+            )
+            raise errors.UnauthorizedResponseError(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ForbiddenResponseErrorData, http_res
+            )
+            raise errors.ForbiddenResponseError(response_data, http_res)
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.NotFoundResponseErrorData, http_res
+            )
+            raise errors.NotFoundResponseError(response_data, http_res)
+        if utils.match_response(http_res, "409", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ConflictResponseErrorData, http_res
+            )
+            raise errors.ConflictResponseError(response_data, http_res)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.InternalServerResponseErrorData, http_res
+            )
+            raise errors.InternalServerResponseError(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.OpenRouterDefaultError(
+                "API error occurred", http_res, http_res_text
+            )
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.OpenRouterDefaultError(
+                "API error occurred", http_res, http_res_text
+            )
+
+        raise errors.OpenRouterDefaultError("Unexpected response received", http_res)
+
+    async def delete_async(
+        self,
+        *,
+        slug: str,
+        http_referer: Optional[str] = None,
+        x_open_router_title: Optional[str] = None,
+        x_open_router_categories: Optional[str] = None,
+        workspace_id: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> components.GetPresetResponse:
+        r"""Delete a preset
+
+        Archives a preset: it no longer resolves for inference and is hidden from get and list. The preset and its versions are kept, so the slug stays taken; restore it with `POST /presets/{slug}/restore`. Deleting an already-archived preset succeeds again. A disabled preset returns 409. Requires a read-write [management key](/docs/guides/overview/auth/management-api-keys); inference API keys are rejected. `workspace_id` may be sent as a query parameter or a JSON body field.
+
+        If set, this operation will use `api_key` from the global security.
+
+        :param slug: URL-safe slug identifying the preset.
+        :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
+            This is used to track API usage per application.
+
+        :param x_open_router_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+        :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
+
+        :param workspace_id: Workspace to act in. Also accepted as a `workspace_id` field in a JSON request body. Defaults to the key's workspace for a key limited to one workspace, otherwise to the account's default workspace.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = operations.DeletePresetRequest(
+            http_referer=http_referer,
+            x_open_router_title=x_open_router_title,
+            x_open_router_categories=x_open_router_categories,
+            slug=slug,
+            workspace_id=workspace_id,
+        )
+
+        req = self._build_request_async(
+            method="DELETE",
+            path="/presets/{slug}",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            _globals=operations.DeletePresetGlobals(
+                http_referer=self.sdk_configuration.globals.http_referer,
+                x_open_router_title=self.sdk_configuration.globals.x_open_router_title,
+                x_open_router_categories=self.sdk_configuration.globals.x_open_router_categories,
+            ),
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            allowed_fields=["api_key"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 60000, 1.5, 3600000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["5XX"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="deletePreset",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
+                tags=["Presets"],
+                extensions=None,
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(components.GetPresetResponse, http_res)
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.BadRequestResponseErrorData, http_res
+            )
+            raise errors.BadRequestResponseError(response_data, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UnauthorizedResponseErrorData, http_res
+            )
+            raise errors.UnauthorizedResponseError(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ForbiddenResponseErrorData, http_res
+            )
+            raise errors.ForbiddenResponseError(response_data, http_res)
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.NotFoundResponseErrorData, http_res
+            )
+            raise errors.NotFoundResponseError(response_data, http_res)
+        if utils.match_response(http_res, "409", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ConflictResponseErrorData, http_res
+            )
+            raise errors.ConflictResponseError(response_data, http_res)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.InternalServerResponseErrorData, http_res
+            )
+            raise errors.InternalServerResponseError(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.OpenRouterDefaultError(
+                "API error occurred", http_res, http_res_text
+            )
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.OpenRouterDefaultError(
+                "API error occurred", http_res, http_res_text
+            )
+
+        raise errors.OpenRouterDefaultError("Unexpected response received", http_res)
+
     def get(
         self,
         *,
@@ -375,6 +691,7 @@ class Presets(BaseSDK):
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
+        workspace_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -394,6 +711,7 @@ class Presets(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
+        :param workspace_id: Workspace to act in. Also accepted as a `workspace_id` field in a JSON request body. Defaults to the key's workspace for a key limited to one workspace, otherwise to the account's default workspace.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -414,6 +732,7 @@ class Presets(BaseSDK):
             x_open_router_title=x_open_router_title,
             x_open_router_categories=x_open_router_categories,
             slug=slug,
+            workspace_id=workspace_id,
         )
 
         req = self._build_request(
@@ -521,6 +840,7 @@ class Presets(BaseSDK):
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
+        workspace_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -540,6 +860,7 @@ class Presets(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
+        :param workspace_id: Workspace to act in. Also accepted as a `workspace_id` field in a JSON request body. Defaults to the key's workspace for a key limited to one workspace, otherwise to the account's default workspace.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -560,6 +881,7 @@ class Presets(BaseSDK):
             x_open_router_title=x_open_router_title,
             x_open_router_categories=x_open_router_categories,
             slug=slug,
+            workspace_id=workspace_id,
         )
 
         req = self._build_request_async(
@@ -790,7 +1112,7 @@ class Presets(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
-        :param workspace_id: Workspace to create the preset in. Defaults to the key's workspace for a key limited to one workspace, otherwise to the account's default workspace.
+        :param workspace_id: Workspace to act in. Also accepted as a `workspace_id` field in a JSON request body. Defaults to the key's workspace for a key limited to one workspace, otherwise to the account's default workspace.
         :param cache_control: Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. When set on an individual content block, it marks an explicit cache breakpoint; block-level markers also work on OpenAI models that support explicit prompt caching — OpenRouter converts them to the provider's native format.
         :param debug: Debug options for inspecting request transformations (streaming only)
         :param deferred_tools: Opt-in versioned router-level deferred-tool protocol. Replay assistant reasoning unchanged on continuation. The portable profile needs the catalog unchanged across a continuation; the universal profile accepts a changed catalog and, with `announce_catalog_changes`, tells the model about it.
@@ -1170,7 +1492,7 @@ class Presets(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
-        :param workspace_id: Workspace to create the preset in. Defaults to the key's workspace for a key limited to one workspace, otherwise to the account's default workspace.
+        :param workspace_id: Workspace to act in. Also accepted as a `workspace_id` field in a JSON request body. Defaults to the key's workspace for a key limited to one workspace, otherwise to the account's default workspace.
         :param cache_control: Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. When set on an individual content block, it marks an explicit cache breakpoint; block-level markers also work on OpenAI models that support explicit prompt caching — OpenRouter converts them to the provider's native format.
         :param debug: Debug options for inspecting request transformations (streaming only)
         :param deferred_tools: Opt-in versioned router-level deferred-tool protocol. Replay assistant reasoning unchanged on continuation. The portable profile needs the catalog unchanged across a continuation; the universal profile accepts a changed catalog and, with `announce_catalog_changes`, tells the model about it.
@@ -1539,7 +1861,7 @@ class Presets(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
-        :param workspace_id: Workspace to create the preset in. Defaults to the key's workspace for a key limited to one workspace, otherwise to the account's default workspace.
+        :param workspace_id: Workspace to act in. Also accepted as a `workspace_id` field in a JSON request body. Defaults to the key's workspace for a key limited to one workspace, otherwise to the account's default workspace.
         :param cache_control: Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. When set on an individual content block, it marks an explicit cache breakpoint; block-level markers also work on OpenAI models that support explicit prompt caching — OpenRouter converts them to the provider's native format.
         :param context_management:
         :param deferred_tools: Opt-in versioned router-level deferred-tool protocol. Replay assistant reasoning unchanged on continuation. The portable profile needs the catalog unchanged across a continuation; the universal profile accepts a changed catalog and, with `announce_catalog_changes`, tells the model about it.
@@ -1874,7 +2196,7 @@ class Presets(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
-        :param workspace_id: Workspace to create the preset in. Defaults to the key's workspace for a key limited to one workspace, otherwise to the account's default workspace.
+        :param workspace_id: Workspace to act in. Also accepted as a `workspace_id` field in a JSON request body. Defaults to the key's workspace for a key limited to one workspace, otherwise to the account's default workspace.
         :param cache_control: Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. When set on an individual content block, it marks an explicit cache breakpoint; block-level markers also work on OpenAI models that support explicit prompt caching — OpenRouter converts them to the provider's native format.
         :param context_management:
         :param deferred_tools: Opt-in versioned router-level deferred-tool protocol. Replay assistant reasoning unchanged on continuation. The portable profile needs the catalog unchanged across a continuation; the universal profile accepts a changed catalog and, with `announce_catalog_changes`, tells the model about it.
@@ -2224,7 +2546,7 @@ class Presets(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
-        :param workspace_id: Workspace to create the preset in. Defaults to the key's workspace for a key limited to one workspace, otherwise to the account's default workspace.
+        :param workspace_id: Workspace to act in. Also accepted as a `workspace_id` field in a JSON request body. Defaults to the key's workspace for a key limited to one workspace, otherwise to the account's default workspace.
         :param access_programs: OpenAI access programs for this request. `cyber` selects the Cyber access program: `standard`, `daybreak_blue`, or `daybreak_red`. A program other than `standard` is supported only on BYOK requests that run on your own OpenAI key enrolled in that program; any other endpoint, including OpenRouter's own OpenAI credentials, rejects it with a 400 error. Requests on OpenRouter's OpenAI credentials always run `standard`. Omit the field unless your key is enrolled in a Daybreak program.
         :param background:
         :param cache_control: Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. When set on an individual content block, it marks an explicit cache breakpoint; block-level markers also work on OpenAI models that support explicit prompt caching — OpenRouter converts them to the provider's native format.
@@ -2609,7 +2931,7 @@ class Presets(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
-        :param workspace_id: Workspace to create the preset in. Defaults to the key's workspace for a key limited to one workspace, otherwise to the account's default workspace.
+        :param workspace_id: Workspace to act in. Also accepted as a `workspace_id` field in a JSON request body. Defaults to the key's workspace for a key limited to one workspace, otherwise to the account's default workspace.
         :param access_programs: OpenAI access programs for this request. `cyber` selects the Cyber access program: `standard`, `daybreak_blue`, or `daybreak_red`. A program other than `standard` is supported only on BYOK requests that run on your own OpenAI key enrolled in that program; any other endpoint, including OpenRouter's own OpenAI credentials, rejects it with a 400 error. Requests on OpenRouter's OpenAI credentials always run `standard`. Omit the field unless your key is enrolled in a Daybreak program.
         :param background:
         :param cache_control: Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. When set on an individual content block, it marks an explicit cache breakpoint; block-level markers also work on OpenAI models that support explicit prompt caching — OpenRouter converts them to the provider's native format.
@@ -2860,6 +3182,304 @@ class Presets(BaseSDK):
 
         raise errors.OpenRouterDefaultError("Unexpected response received", http_res)
 
+    def restore(
+        self,
+        *,
+        slug: str,
+        http_referer: Optional[str] = None,
+        x_open_router_title: Optional[str] = None,
+        x_open_router_categories: Optional[str] = None,
+        workspace_id: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> components.GetPresetResponse:
+        r"""Restore a preset
+
+        Re-activates an archived preset so it resolves for inference again. No version is created and the designated version is unchanged. Restoring an active preset returns it unchanged. A disabled preset returns 409. Requires a read-write [management key](/docs/guides/overview/auth/management-api-keys); inference API keys are rejected. `workspace_id` may be sent as a query parameter or a JSON body field.
+
+        If set, this operation will use `api_key` from the global security.
+
+        :param slug: URL-safe slug identifying the preset.
+        :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
+            This is used to track API usage per application.
+
+        :param x_open_router_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+        :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
+
+        :param workspace_id: Workspace to act in. Also accepted as a `workspace_id` field in a JSON request body. Defaults to the key's workspace for a key limited to one workspace, otherwise to the account's default workspace.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = operations.RestorePresetRequest(
+            http_referer=http_referer,
+            x_open_router_title=x_open_router_title,
+            x_open_router_categories=x_open_router_categories,
+            slug=slug,
+            workspace_id=workspace_id,
+        )
+
+        req = self._build_request(
+            method="POST",
+            path="/presets/{slug}/restore",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            _globals=operations.RestorePresetGlobals(
+                http_referer=self.sdk_configuration.globals.http_referer,
+                x_open_router_title=self.sdk_configuration.globals.x_open_router_title,
+                x_open_router_categories=self.sdk_configuration.globals.x_open_router_categories,
+            ),
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            allowed_fields=["api_key"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 60000, 1.5, 3600000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["5XX"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="restorePreset",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
+                tags=["Presets"],
+                extensions=None,
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(components.GetPresetResponse, http_res)
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.BadRequestResponseErrorData, http_res
+            )
+            raise errors.BadRequestResponseError(response_data, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UnauthorizedResponseErrorData, http_res
+            )
+            raise errors.UnauthorizedResponseError(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ForbiddenResponseErrorData, http_res
+            )
+            raise errors.ForbiddenResponseError(response_data, http_res)
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.NotFoundResponseErrorData, http_res
+            )
+            raise errors.NotFoundResponseError(response_data, http_res)
+        if utils.match_response(http_res, "409", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ConflictResponseErrorData, http_res
+            )
+            raise errors.ConflictResponseError(response_data, http_res)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.InternalServerResponseErrorData, http_res
+            )
+            raise errors.InternalServerResponseError(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.OpenRouterDefaultError(
+                "API error occurred", http_res, http_res_text
+            )
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.OpenRouterDefaultError(
+                "API error occurred", http_res, http_res_text
+            )
+
+        raise errors.OpenRouterDefaultError("Unexpected response received", http_res)
+
+    async def restore_async(
+        self,
+        *,
+        slug: str,
+        http_referer: Optional[str] = None,
+        x_open_router_title: Optional[str] = None,
+        x_open_router_categories: Optional[str] = None,
+        workspace_id: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> components.GetPresetResponse:
+        r"""Restore a preset
+
+        Re-activates an archived preset so it resolves for inference again. No version is created and the designated version is unchanged. Restoring an active preset returns it unchanged. A disabled preset returns 409. Requires a read-write [management key](/docs/guides/overview/auth/management-api-keys); inference API keys are rejected. `workspace_id` may be sent as a query parameter or a JSON body field.
+
+        If set, this operation will use `api_key` from the global security.
+
+        :param slug: URL-safe slug identifying the preset.
+        :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
+            This is used to track API usage per application.
+
+        :param x_open_router_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
+
+        :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
+
+        :param workspace_id: Workspace to act in. Also accepted as a `workspace_id` field in a JSON request body. Defaults to the key's workspace for a key limited to one workspace, otherwise to the account's default workspace.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = operations.RestorePresetRequest(
+            http_referer=http_referer,
+            x_open_router_title=x_open_router_title,
+            x_open_router_categories=x_open_router_categories,
+            slug=slug,
+            workspace_id=workspace_id,
+        )
+
+        req = self._build_request_async(
+            method="POST",
+            path="/presets/{slug}/restore",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            _globals=operations.RestorePresetGlobals(
+                http_referer=self.sdk_configuration.globals.http_referer,
+                x_open_router_title=self.sdk_configuration.globals.x_open_router_title,
+                x_open_router_categories=self.sdk_configuration.globals.x_open_router_categories,
+            ),
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            allowed_fields=["api_key"],
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+            else:
+                retries = utils.RetryConfig(
+                    "backoff", utils.BackoffStrategy(500, 60000, 1.5, 3600000), True
+                )
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["5XX"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="restorePreset",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, components.Security
+                ),
+                tags=["Presets"],
+                extensions=None,
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(components.GetPresetResponse, http_res)
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.BadRequestResponseErrorData, http_res
+            )
+            raise errors.BadRequestResponseError(response_data, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UnauthorizedResponseErrorData, http_res
+            )
+            raise errors.UnauthorizedResponseError(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ForbiddenResponseErrorData, http_res
+            )
+            raise errors.ForbiddenResponseError(response_data, http_res)
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.NotFoundResponseErrorData, http_res
+            )
+            raise errors.NotFoundResponseError(response_data, http_res)
+        if utils.match_response(http_res, "409", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ConflictResponseErrorData, http_res
+            )
+            raise errors.ConflictResponseError(response_data, http_res)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.InternalServerResponseErrorData, http_res
+            )
+            raise errors.InternalServerResponseError(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.OpenRouterDefaultError(
+                "API error occurred", http_res, http_res_text
+            )
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.OpenRouterDefaultError(
+                "API error occurred", http_res, http_res_text
+            )
+
+        raise errors.OpenRouterDefaultError("Unexpected response received", http_res)
+
     def list_versions(
         self,
         *,
@@ -2869,6 +3489,7 @@ class Presets(BaseSDK):
         x_open_router_categories: Optional[str] = None,
         offset: OptionalNullable[int] = 0,
         limit: Optional[int] = 50,
+        workspace_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -2890,6 +3511,7 @@ class Presets(BaseSDK):
 
         :param offset: Number of records to skip for pagination
         :param limit: Maximum number of records to return (max 100)
+        :param workspace_id: Workspace to act in. Also accepted as a `workspace_id` field in a JSON request body. Defaults to the key's workspace for a key limited to one workspace, otherwise to the account's default workspace.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -2912,6 +3534,7 @@ class Presets(BaseSDK):
             slug=slug,
             offset=offset,
             limit=limit,
+            workspace_id=workspace_id,
         )
 
         req = self._build_request(
@@ -2988,6 +3611,7 @@ class Presets(BaseSDK):
                 x_open_router_categories=x_open_router_categories,
                 offset=next_offset,
                 limit=limit,
+                workspace_id=workspace_id,
                 retries=retries,
                 server_url=server_url,
                 timeout_ms=timeout_ms,
@@ -3054,6 +3678,7 @@ class Presets(BaseSDK):
         x_open_router_categories: Optional[str] = None,
         offset: OptionalNullable[int] = 0,
         limit: Optional[int] = 50,
+        workspace_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -3075,6 +3700,7 @@ class Presets(BaseSDK):
 
         :param offset: Number of records to skip for pagination
         :param limit: Maximum number of records to return (max 100)
+        :param workspace_id: Workspace to act in. Also accepted as a `workspace_id` field in a JSON request body. Defaults to the key's workspace for a key limited to one workspace, otherwise to the account's default workspace.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -3097,6 +3723,7 @@ class Presets(BaseSDK):
             slug=slug,
             offset=offset,
             limit=limit,
+            workspace_id=workspace_id,
         )
 
         req = self._build_request_async(
@@ -3176,6 +3803,7 @@ class Presets(BaseSDK):
                 x_open_router_categories=x_open_router_categories,
                 offset=next_offset,
                 limit=limit,
+                workspace_id=workspace_id,
                 retries=retries,
                 server_url=server_url,
                 timeout_ms=timeout_ms,
@@ -3241,6 +3869,7 @@ class Presets(BaseSDK):
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
+        workspace_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -3261,6 +3890,7 @@ class Presets(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
+        :param workspace_id: Workspace to act in. Also accepted as a `workspace_id` field in a JSON request body. Defaults to the key's workspace for a key limited to one workspace, otherwise to the account's default workspace.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -3282,6 +3912,7 @@ class Presets(BaseSDK):
             x_open_router_categories=x_open_router_categories,
             slug=slug,
             version=version,
+            workspace_id=workspace_id,
         )
 
         req = self._build_request(
@@ -3392,6 +4023,7 @@ class Presets(BaseSDK):
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
+        workspace_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -3412,6 +4044,7 @@ class Presets(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
+        :param workspace_id: Workspace to act in. Also accepted as a `workspace_id` field in a JSON request body. Defaults to the key's workspace for a key limited to one workspace, otherwise to the account's default workspace.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -3433,6 +4066,7 @@ class Presets(BaseSDK):
             x_open_router_categories=x_open_router_categories,
             slug=slug,
             version=version,
+            workspace_id=workspace_id,
         )
 
         req = self._build_request_async(
