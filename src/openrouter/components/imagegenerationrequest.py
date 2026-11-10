@@ -17,10 +17,12 @@ ImageGenerationRequestAspectRatio = Union[
     Literal[
         "1:1",
         "1:2",
+        "1:3",
         "1:4",
         "1:8",
         "2:1",
         "2:3",
+        "3:1",
         "2.35:1",
         "3:2",
         "3:4",
