@@ -23,3 +23,6 @@ __pycache__/
 .DS_Store
 .venv/
 output.zip
+
+# Claude Code local settings can store secrets from approved commands
+.claude/settings.local.json
