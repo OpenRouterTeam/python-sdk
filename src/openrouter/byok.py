@@ -30,7 +30,7 @@ class BYOK(BaseSDK):
     ) -> Optional[operations.ListBYOKKeysResponse]:
         r"""List BYOK provider credentials
 
-        List the bring-your-own-key (BYOK) provider credentials for the authenticated entity's default workspace. Use the `workspace_id` query parameter to scope the result to a different workspace, or the `provider` query parameter to filter by upstream provider. [Management key](/docs/guides/overview/auth/management-api-keys) required.
+        List the bring-your-own-key (BYOK) provider credentials for the authenticated entity's default workspace, or a workspace-scoped management key's own workspace. Use the `workspace_id` query parameter to scope the result to a different workspace, or the `provider` query parameter to filter by upstream provider. A workspace-scoped management key can only list its own workspace; any other `workspace_id` returns 403. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
@@ -41,7 +41,7 @@ class BYOK(BaseSDK):
 
         :param offset: Number of records to skip for pagination
         :param limit: Maximum number of records to return (max 100)
-        :param workspace_id: Optional workspace ID to filter by. When omitted, resolves to the account’s default workspace; if that default has been deleted, the request returns a 400 and you must pass `workspace_id` explicitly.
+        :param workspace_id: Optional workspace ID to filter by. When omitted, a workspace-scoped management key uses its own workspace. An organization management key uses the account’s default workspace; if that default has been deleted, the request returns a 400 and you must pass `workspace_id` explicitly.
         :param provider: Optional provider slug to filter by (e.g. `openai`, `anthropic`, `amazon-bedrock`).
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -206,7 +206,7 @@ class BYOK(BaseSDK):
     ) -> Optional[operations.ListBYOKKeysResponse]:
         r"""List BYOK provider credentials
 
-        List the bring-your-own-key (BYOK) provider credentials for the authenticated entity's default workspace. Use the `workspace_id` query parameter to scope the result to a different workspace, or the `provider` query parameter to filter by upstream provider. [Management key](/docs/guides/overview/auth/management-api-keys) required.
+        List the bring-your-own-key (BYOK) provider credentials for the authenticated entity's default workspace, or a workspace-scoped management key's own workspace. Use the `workspace_id` query parameter to scope the result to a different workspace, or the `provider` query parameter to filter by upstream provider. A workspace-scoped management key can only list its own workspace; any other `workspace_id` returns 403. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
@@ -217,7 +217,7 @@ class BYOK(BaseSDK):
 
         :param offset: Number of records to skip for pagination
         :param limit: Maximum number of records to return (max 100)
-        :param workspace_id: Optional workspace ID to filter by. When omitted, resolves to the account’s default workspace; if that default has been deleted, the request returns a 400 and you must pass `workspace_id` explicitly.
+        :param workspace_id: Optional workspace ID to filter by. When omitted, a workspace-scoped management key uses its own workspace. An organization management key uses the account’s default workspace; if that default has been deleted, the request returns a 400 and you must pass `workspace_id` explicitly.
         :param provider: Optional provider slug to filter by (e.g. `openai`, `anthropic`, `amazon-bedrock`).
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -396,7 +396,7 @@ class BYOK(BaseSDK):
     ) -> components.CreateBYOKKeyResponse:
         r"""Create a BYOK provider credential
 
-        Create a new bring-your-own-key (BYOK) provider credential. The raw key is encrypted at rest and never returned in API responses. When `workspace_id` is omitted, the credential is created in the default workspace; if that default has been deleted, the request returns a 400 and you must pass `workspace_id` explicitly. Treat the raw key as write-only; it is never returned after creation. Use `allowed_api_key_hashes` to restrict the credential to specific OpenRouter API keys. [Management key](/docs/guides/overview/auth/management-api-keys) required.
+        Create a new bring-your-own-key (BYOK) provider credential. The raw key is encrypted at rest and never returned in API responses. When `workspace_id` is omitted, the credential is created in the default workspace; if that default has been deleted, the request returns a 400 and you must pass `workspace_id` explicitly. A workspace-scoped management key creates the credential in its own workspace when `workspace_id` is omitted, and any other `workspace_id` returns 403. Treat the raw key as write-only; it is never returned after creation. Use `allowed_api_key_hashes` to restrict the credential to specific OpenRouter API keys. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param key: The raw provider API key or credential. This value is encrypted at rest and never returned in API responses.
         :param provider: The upstream provider this credential authenticates against, as a lowercase slug (e.g. `openai`, `anthropic`, `amazon-bedrock`).
@@ -407,7 +407,7 @@ class BYOK(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
-        :param allowed_api_key_hashes: Optional allowlist of OpenRouter API key hashes (`api_keys.hash`) that may use this credential. `null` means no restriction. Must contain at least one hash if provided. Hashes that do not belong to your account return a 400.
+        :param allowed_api_key_hashes: Optional allowlist of OpenRouter API key hashes (`api_keys.hash`) that may use this credential. `null` means no restriction. Must contain at least one hash if provided. Hashes that do not belong to your account return a 400; for a workspace-scoped management key, so do hashes of API keys outside its own workspace.
         :param allowed_models: Optional allowlist of model slugs this credential may be used for. `null` means no restriction.
         :param allowed_user_ids: Optional allowlist of user IDs that may use this credential. `null` means no restriction.
         :param declared_region: Your declaration of the data region in which the upstream provider account behind this credential processes requests, used for routing eligibility on OpenRouter's regional hosts. `null` means undeclared and `global` is behaviorally identical: the credential follows the region OpenRouter records for the endpoint. `europe` or `us` lets requests to `eu.openrouter.ai` or `us.openrouter.ai` use this credential for that provider (private endpoints, endpoints pinned to another cloud region, cross-region inference profiles and video models are excluded). Self-declared and not verified by OpenRouter. For OpenAI and Fireworks the region comes from the key material (a `{\"api_key\": ..., \"region\": ...}` key), so the value must match the key's region. Among other providers, Azure accepts `europe` or `us` and Anthropic accepts `us` only. Defaults to the key's region for OpenAI and Fireworks, otherwise `null`.
@@ -417,7 +417,7 @@ class BYOK(BaseSDK):
         :param is_fallback: Whether this credential is treated as a fallback — used only after non-fallback keys for the same provider have been tried. Cannot be combined with `is_byok_only`.
         :param is_required: Whether OpenRouter's shared endpoints on this provider are removed for the models this credential applies to (its `allowed_models`, or every model when `null`). Requests for those models run only on your keys; models outside the allowlist may still fall back to shared capacity on this provider. Defaults to `false`.
         :param name: Optional human-readable name for the credential.
-        :param workspace_id: Optional workspace ID to scope the credential to. When omitted, the credential is created in the account's default workspace; if that default has been deleted, the request returns a 400 and you must pass `workspace_id` explicitly.
+        :param workspace_id: Optional workspace ID to scope the credential to. When omitted, a workspace-scoped management key creates it in its own workspace. An organization management key creates it in the account's default workspace; if that default has been deleted, the request returns a 400 and you must pass `workspace_id` explicitly.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -582,7 +582,7 @@ class BYOK(BaseSDK):
     ) -> components.CreateBYOKKeyResponse:
         r"""Create a BYOK provider credential
 
-        Create a new bring-your-own-key (BYOK) provider credential. The raw key is encrypted at rest and never returned in API responses. When `workspace_id` is omitted, the credential is created in the default workspace; if that default has been deleted, the request returns a 400 and you must pass `workspace_id` explicitly. Treat the raw key as write-only; it is never returned after creation. Use `allowed_api_key_hashes` to restrict the credential to specific OpenRouter API keys. [Management key](/docs/guides/overview/auth/management-api-keys) required.
+        Create a new bring-your-own-key (BYOK) provider credential. The raw key is encrypted at rest and never returned in API responses. When `workspace_id` is omitted, the credential is created in the default workspace; if that default has been deleted, the request returns a 400 and you must pass `workspace_id` explicitly. A workspace-scoped management key creates the credential in its own workspace when `workspace_id` is omitted, and any other `workspace_id` returns 403. Treat the raw key as write-only; it is never returned after creation. Use `allowed_api_key_hashes` to restrict the credential to specific OpenRouter API keys. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param key: The raw provider API key or credential. This value is encrypted at rest and never returned in API responses.
         :param provider: The upstream provider this credential authenticates against, as a lowercase slug (e.g. `openai`, `anthropic`, `amazon-bedrock`).
@@ -593,7 +593,7 @@ class BYOK(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
-        :param allowed_api_key_hashes: Optional allowlist of OpenRouter API key hashes (`api_keys.hash`) that may use this credential. `null` means no restriction. Must contain at least one hash if provided. Hashes that do not belong to your account return a 400.
+        :param allowed_api_key_hashes: Optional allowlist of OpenRouter API key hashes (`api_keys.hash`) that may use this credential. `null` means no restriction. Must contain at least one hash if provided. Hashes that do not belong to your account return a 400; for a workspace-scoped management key, so do hashes of API keys outside its own workspace.
         :param allowed_models: Optional allowlist of model slugs this credential may be used for. `null` means no restriction.
         :param allowed_user_ids: Optional allowlist of user IDs that may use this credential. `null` means no restriction.
         :param declared_region: Your declaration of the data region in which the upstream provider account behind this credential processes requests, used for routing eligibility on OpenRouter's regional hosts. `null` means undeclared and `global` is behaviorally identical: the credential follows the region OpenRouter records for the endpoint. `europe` or `us` lets requests to `eu.openrouter.ai` or `us.openrouter.ai` use this credential for that provider (private endpoints, endpoints pinned to another cloud region, cross-region inference profiles and video models are excluded). Self-declared and not verified by OpenRouter. For OpenAI and Fireworks the region comes from the key material (a `{\"api_key\": ..., \"region\": ...}` key), so the value must match the key's region. Among other providers, Azure accepts `europe` or `us` and Anthropic accepts `us` only. Defaults to the key's region for OpenAI and Fireworks, otherwise `null`.
@@ -603,7 +603,7 @@ class BYOK(BaseSDK):
         :param is_fallback: Whether this credential is treated as a fallback — used only after non-fallback keys for the same provider have been tried. Cannot be combined with `is_byok_only`.
         :param is_required: Whether OpenRouter's shared endpoints on this provider are removed for the models this credential applies to (its `allowed_models`, or every model when `null`). Requests for those models run only on your keys; models outside the allowlist may still fall back to shared capacity on this provider. Defaults to `false`.
         :param name: Optional human-readable name for the credential.
-        :param workspace_id: Optional workspace ID to scope the credential to. When omitted, the credential is created in the account's default workspace; if that default has been deleted, the request returns a 400 and you must pass `workspace_id` explicitly.
+        :param workspace_id: Optional workspace ID to scope the credential to. When omitted, a workspace-scoped management key creates it in its own workspace. An organization management key creates it in the account's default workspace; if that default has been deleted, the request returns a 400 and you must pass `workspace_id` explicitly.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -754,7 +754,7 @@ class BYOK(BaseSDK):
     ) -> components.DeleteBYOKKeyResponse:
         r"""Delete a BYOK provider credential
 
-        Delete (soft-delete) a bring-your-own-key (BYOK) provider credential by its `id`. The encrypted key material is wiped and the record is marked as deleted. [Management key](/docs/guides/overview/auth/management-api-keys) required.
+        Delete (soft-delete) a bring-your-own-key (BYOK) provider credential by its `id`. The encrypted key material is wiped and the record is marked as deleted. A workspace-scoped management key only reaches credentials in its own workspace; any other `id` returns 404. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param id: The BYOK credential ID (UUID).
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
@@ -887,7 +887,7 @@ class BYOK(BaseSDK):
     ) -> components.DeleteBYOKKeyResponse:
         r"""Delete a BYOK provider credential
 
-        Delete (soft-delete) a bring-your-own-key (BYOK) provider credential by its `id`. The encrypted key material is wiped and the record is marked as deleted. [Management key](/docs/guides/overview/auth/management-api-keys) required.
+        Delete (soft-delete) a bring-your-own-key (BYOK) provider credential by its `id`. The encrypted key material is wiped and the record is marked as deleted. A workspace-scoped management key only reaches credentials in its own workspace; any other `id` returns 404. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param id: The BYOK credential ID (UUID).
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
@@ -1020,7 +1020,7 @@ class BYOK(BaseSDK):
     ) -> components.GetBYOKKeyResponse:
         r"""Get a BYOK provider credential
 
-        Get a single bring-your-own-key (BYOK) provider credential by its `id`. [Management key](/docs/guides/overview/auth/management-api-keys) required.
+        Get a single bring-your-own-key (BYOK) provider credential by its `id`. A workspace-scoped management key only reaches credentials in its own workspace; any other `id` returns 404. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param id: The BYOK credential ID (UUID).
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
@@ -1153,7 +1153,7 @@ class BYOK(BaseSDK):
     ) -> components.GetBYOKKeyResponse:
         r"""Get a BYOK provider credential
 
-        Get a single bring-your-own-key (BYOK) provider credential by its `id`. [Management key](/docs/guides/overview/auth/management-api-keys) required.
+        Get a single bring-your-own-key (BYOK) provider credential by its `id`. A workspace-scoped management key only reaches credentials in its own workspace; any other `id` returns 404. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param id: The BYOK credential ID (UUID).
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
@@ -1299,7 +1299,7 @@ class BYOK(BaseSDK):
     ) -> components.UpdateBYOKKeyResponse:
         r"""Update a BYOK provider credential
 
-        Update an existing bring-your-own-key (BYOK) provider credential by its `id`. Include the `key` field to rotate the raw provider API key in-place (the previous key material is overwritten). Use `allowed_api_key_hashes` to restrict the credential to specific OpenRouter API keys (`null` clears the restriction). [Management key](/docs/guides/overview/auth/management-api-keys) required.
+        Update an existing bring-your-own-key (BYOK) provider credential by its `id`. Include the `key` field to rotate the raw provider API key in-place (the previous key material is overwritten). Use `allowed_api_key_hashes` to restrict the credential to specific OpenRouter API keys (`null` clears the restriction). A workspace-scoped management key only reaches credentials in its own workspace; any other `id` returns 404. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param id: The BYOK credential ID (UUID).
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
@@ -1309,7 +1309,7 @@ class BYOK(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
-        :param allowed_api_key_hashes: Optional allowlist of OpenRouter API key hashes (`api_keys.hash`) that may use this credential. `null` clears the restriction. Must contain at least one hash if provided. Hashes that do not belong to your account return a 400.
+        :param allowed_api_key_hashes: Optional allowlist of OpenRouter API key hashes (`api_keys.hash`) that may use this credential. `null` clears the restriction. Must contain at least one hash if provided. Hashes that do not belong to your account return a 400; for a workspace-scoped management key, so do hashes of API keys outside its own workspace.
         :param allowed_models: Optional allowlist of model slugs this credential may be used for. `null` means no restriction.
         :param allowed_user_ids: Optional allowlist of user IDs that may use this credential. `null` means no restriction.
         :param declared_region: Your declaration of the data region in which the upstream provider account behind this credential processes requests, used for routing eligibility on OpenRouter's regional hosts. `null` means undeclared and `global` is behaviorally identical: the credential follows the region OpenRouter records for the endpoint. `europe` or `us` lets requests to `eu.openrouter.ai` or `us.openrouter.ai` use this credential for that provider (private endpoints, endpoints pinned to another cloud region, cross-region inference profiles and video models are excluded). Self-declared and not verified by OpenRouter. For OpenAI and Fireworks the region comes from the key material (a `{\"api_key\": ..., \"region\": ...}` key), so the value must match the key's region. Among other providers, Azure accepts `europe` or `us` and Anthropic accepts `us` only. Omit to leave the stored value unchanged (rotating an OpenAI or Fireworks `key` re-derives it from the new key); `null` clears the declaration.
@@ -1492,7 +1492,7 @@ class BYOK(BaseSDK):
     ) -> components.UpdateBYOKKeyResponse:
         r"""Update a BYOK provider credential
 
-        Update an existing bring-your-own-key (BYOK) provider credential by its `id`. Include the `key` field to rotate the raw provider API key in-place (the previous key material is overwritten). Use `allowed_api_key_hashes` to restrict the credential to specific OpenRouter API keys (`null` clears the restriction). [Management key](/docs/guides/overview/auth/management-api-keys) required.
+        Update an existing bring-your-own-key (BYOK) provider credential by its `id`. Include the `key` field to rotate the raw provider API key in-place (the previous key material is overwritten). Use `allowed_api_key_hashes` to restrict the credential to specific OpenRouter API keys (`null` clears the restriction). A workspace-scoped management key only reaches credentials in its own workspace; any other `id` returns 404. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param id: The BYOK credential ID (UUID).
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
@@ -1502,7 +1502,7 @@ class BYOK(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
-        :param allowed_api_key_hashes: Optional allowlist of OpenRouter API key hashes (`api_keys.hash`) that may use this credential. `null` clears the restriction. Must contain at least one hash if provided. Hashes that do not belong to your account return a 400.
+        :param allowed_api_key_hashes: Optional allowlist of OpenRouter API key hashes (`api_keys.hash`) that may use this credential. `null` clears the restriction. Must contain at least one hash if provided. Hashes that do not belong to your account return a 400; for a workspace-scoped management key, so do hashes of API keys outside its own workspace.
         :param allowed_models: Optional allowlist of model slugs this credential may be used for. `null` means no restriction.
         :param allowed_user_ids: Optional allowlist of user IDs that may use this credential. `null` means no restriction.
         :param declared_region: Your declaration of the data region in which the upstream provider account behind this credential processes requests, used for routing eligibility on OpenRouter's regional hosts. `null` means undeclared and `global` is behaviorally identical: the credential follows the region OpenRouter records for the endpoint. `europe` or `us` lets requests to `eu.openrouter.ai` or `us.openrouter.ai` use this credential for that provider (private endpoints, endpoints pinned to another cloud region, cross-region inference profiles and video models are excluded). Self-declared and not verified by OpenRouter. For OpenAI and Fireworks the region comes from the key material (a `{\"api_key\": ..., \"region\": ...}` key), so the value must match the key's region. Among other providers, Azure accepts `europe` or `us` and Anthropic accepts `us` only. Omit to leave the stored value unchanged (rotating an OpenAI or Fireworks `key` re-derives it from the new key); `null` clears the declaration.

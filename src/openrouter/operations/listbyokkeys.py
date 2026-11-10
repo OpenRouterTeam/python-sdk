@@ -233,7 +233,7 @@ class ListBYOKKeysRequestTypedDict(TypedDict):
     limit: NotRequired[int]
     r"""Maximum number of records to return (max 100)"""
     workspace_id: NotRequired[str]
-    r"""Optional workspace ID to filter by. When omitted, resolves to the account’s default workspace; if that default has been deleted, the request returns a 400 and you must pass `workspace_id` explicitly."""
+    r"""Optional workspace ID to filter by. When omitted, a workspace-scoped management key uses its own workspace. An organization management key uses the account’s default workspace; if that default has been deleted, the request returns a 400 and you must pass `workspace_id` explicitly."""
     provider: NotRequired[Provider]
     r"""Optional provider slug to filter by (e.g. `openai`, `anthropic`, `amazon-bedrock`)."""
 
@@ -283,7 +283,7 @@ class ListBYOKKeysRequest(BaseModel):
         Optional[str],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
-    r"""Optional workspace ID to filter by. When omitted, resolves to the account’s default workspace; if that default has been deleted, the request returns a 400 and you must pass `workspace_id` explicitly."""
+    r"""Optional workspace ID to filter by. When omitted, a workspace-scoped management key uses its own workspace. An organization management key uses the account’s default workspace; if that default has been deleted, the request returns a 400 and you must pass `workspace_id` explicitly."""
 
     provider: Annotated[
         Optional[Provider],
