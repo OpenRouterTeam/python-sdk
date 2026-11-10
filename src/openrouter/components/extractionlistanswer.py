@@ -53,7 +53,8 @@ class ExtractionListAnswerTypedDict(TypedDict):
     r"""Probability that the state contains nothing for this field."""
     source: NotRequired[ExtractionListAnswerSource]
     r"""Set to `image` or `document` when the answer was read from an image or a PDF rather than the state text."""
-    spans: NotRequired[List[List[int]]]
+    spans: NotRequired[List[Nullable[List[int]]]]
+    r"""One span per item of `value`, in the same order; null for an item that has no offsets in the state text (read from an image or a document)."""
     spell_confidence: NotRequired[float]
     r"""Confidence in the spelling of text read from an image."""
 
@@ -77,7 +78,8 @@ class ExtractionListAnswer(BaseModel):
     source: Optional[ExtractionListAnswerSource] = None
     r"""Set to `image` or `document` when the answer was read from an image or a PDF rather than the state text."""
 
-    spans: Optional[List[List[int]]] = None
+    spans: Optional[List[Nullable[List[int]]]] = None
+    r"""One span per item of `value`, in the same order; null for an item that has no offsets in the state text (read from an image or a document)."""
 
     spell_confidence: Optional[float] = None
     r"""Confidence in the spelling of text read from an image."""
