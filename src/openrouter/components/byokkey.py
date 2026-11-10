@@ -28,7 +28,7 @@ r"""Your declaration of the data region in which the upstream provider account b
 
 class BYOKKeyTypedDict(TypedDict):
     allowed_api_key_hashes: Nullable[List[str]]
-    r"""Optional allowlist of OpenRouter API key hashes (`api_keys.hash`) that may use this credential. `null` means no restriction."""
+    r"""Optional allowlist of OpenRouter API key hashes (`api_keys.hash`) that may use this credential. `null` means no restriction. A workspace-scoped management key can only name API keys in its own workspace."""
     allowed_models: Nullable[List[str]]
     r"""Optional allowlist of model slugs this credential may be used for. `null` means no restriction."""
     allowed_user_ids: Nullable[List[str]]
@@ -63,7 +63,7 @@ class BYOKKeyTypedDict(TypedDict):
 
 class BYOKKey(BaseModel):
     allowed_api_key_hashes: Nullable[List[str]]
-    r"""Optional allowlist of OpenRouter API key hashes (`api_keys.hash`) that may use this credential. `null` means no restriction."""
+    r"""Optional allowlist of OpenRouter API key hashes (`api_keys.hash`) that may use this credential. `null` means no restriction. A workspace-scoped management key can only name API keys in its own workspace."""
 
     allowed_models: Nullable[List[str]]
     r"""Optional allowlist of model slugs this credential may be used for. `null` means no restriction."""

@@ -32,7 +32,7 @@ class CreateBYOKKeyRequestTypedDict(TypedDict):
     provider: BYOKProviderSlug
     r"""The upstream provider this credential authenticates against, as a lowercase slug (e.g. `openai`, `anthropic`, `amazon-bedrock`)."""
     allowed_api_key_hashes: NotRequired[Nullable[List[str]]]
-    r"""Optional allowlist of OpenRouter API key hashes (`api_keys.hash`) that may use this credential. `null` means no restriction. Must contain at least one hash if provided. Hashes that do not belong to your account return a 400."""
+    r"""Optional allowlist of OpenRouter API key hashes (`api_keys.hash`) that may use this credential. `null` means no restriction. Must contain at least one hash if provided. Hashes that do not belong to your account return a 400; for a workspace-scoped management key, so do hashes of API keys outside its own workspace."""
     allowed_models: NotRequired[Nullable[List[str]]]
     r"""Optional allowlist of model slugs this credential may be used for. `null` means no restriction."""
     allowed_user_ids: NotRequired[Nullable[List[str]]]
@@ -52,7 +52,7 @@ class CreateBYOKKeyRequestTypedDict(TypedDict):
     name: NotRequired[Nullable[str]]
     r"""Optional human-readable name for the credential."""
     workspace_id: NotRequired[str]
-    r"""Optional workspace ID to scope the credential to. When omitted, the credential is created in the account's default workspace; if that default has been deleted, the request returns a 400 and you must pass `workspace_id` explicitly."""
+    r"""Optional workspace ID to scope the credential to. When omitted, a workspace-scoped management key creates it in its own workspace. An organization management key creates it in the account's default workspace; if that default has been deleted, the request returns a 400 and you must pass `workspace_id` explicitly."""
 
 
 class CreateBYOKKeyRequest(BaseModel):
@@ -63,7 +63,7 @@ class CreateBYOKKeyRequest(BaseModel):
     r"""The upstream provider this credential authenticates against, as a lowercase slug (e.g. `openai`, `anthropic`, `amazon-bedrock`)."""
 
     allowed_api_key_hashes: OptionalNullable[List[str]] = UNSET
-    r"""Optional allowlist of OpenRouter API key hashes (`api_keys.hash`) that may use this credential. `null` means no restriction. Must contain at least one hash if provided. Hashes that do not belong to your account return a 400."""
+    r"""Optional allowlist of OpenRouter API key hashes (`api_keys.hash`) that may use this credential. `null` means no restriction. Must contain at least one hash if provided. Hashes that do not belong to your account return a 400; for a workspace-scoped management key, so do hashes of API keys outside its own workspace."""
 
     allowed_models: OptionalNullable[List[str]] = UNSET
     r"""Optional allowlist of model slugs this credential may be used for. `null` means no restriction."""
@@ -93,7 +93,7 @@ class CreateBYOKKeyRequest(BaseModel):
     r"""Optional human-readable name for the credential."""
 
     workspace_id: Optional[str] = None
-    r"""Optional workspace ID to scope the credential to. When omitted, the credential is created in the account's default workspace; if that default has been deleted, the request returns a 400 and you must pass `workspace_id` explicitly."""
+    r"""Optional workspace ID to scope the credential to. When omitted, a workspace-scoped management key creates it in its own workspace. An organization management key creates it in the account's default workspace; if that default has been deleted, the request returns a 400 and you must pass `workspace_id` explicitly."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
