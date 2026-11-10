@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c48cf606-fb42-4a45-9c23-8f0555307828
 management:
-  docChecksum: 6690c5e4056ba9157a21c7b63f3b75be
+  docChecksum: 0339725e33577ba5dda2b1a3dd2a4178
   docVersion: 1.0.0
   speakeasyVersion: 1.803.2
   generationVersion: 2.950.13
-  releaseVersion: 1.3.146
-  configChecksum: 99c4be4baae50bfee64dfbb81b0761f9
+  releaseVersion: 1.3.147
+  configChecksum: 2c2dbced52857c6b47b66ca5c3c6c1a0
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
 persistentEdits:
-  generation_id: e1eb6ff3-32c3-4af7-812d-5efa0d14c98a
-  pristine_commit_hash: fd56fd103b44ef129d685b2c70911ea91c4ecbc5
-  pristine_tree_hash: 03fe43c339dfc26da730cef242298fb63e56b90b
+  generation_id: 487a13b0-4500-4c73-b4d5-d39079308282
+  pristine_commit_hash: bcf674cee9ed7ff479b8b3058ebe805d3978a721
+  pristine_tree_hash: 0a8e5279cc4d5375ddc19c861de5083eb925ab28
 features:
   python:
     acceptHeaders: 3.0.0
@@ -11516,8 +11516,8 @@ trackedFiles:
     pristine_git_object: 24fda0f8e544cca9d93d6a83f0917927842041aa
   docs/sdks/oauth/README.mdx:
     id: 42b5079343d2
-    last_write_checksum: sha1:4a2d77d0749b9430de95a6a1d323367cf5c27151
-    pristine_git_object: 00315e0d13e02e7ed2e00a1170fc7a8b60dc4b19
+    last_write_checksum: sha1:c498029e7b36782afeeff53d390f48fe44bd26d5
+    pristine_git_object: ccd01ea3052fba9ab4f07c91b0fc20fe96687715
   docs/sdks/observability/README.mdx:
     id: 75811527e651
     last_write_checksum: sha1:2eaa330485331f17aea43c0841e7c712ee7b6d1c
@@ -11588,8 +11588,8 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:66ed447cad17473f1f997e19cfc20e17b9141515
-    pristine_git_object: 9b19c601aff3d43346f91e3178448c47005f77cf
+    last_write_checksum: sha1:0d3c5de90e8a1c6d93eaac9d2cb2d2f80b1be723
+    pristine_git_object: 86ea998bbf21a766bed00acc75b901a8f9256e39
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77f44b60b98bc126557ec27391f91dfba764bb54
@@ -11616,8 +11616,8 @@ trackedFiles:
     pristine_git_object: 86713cfea633e09d33b3d4e65281071fe20e6137
   src/openrouter/_version.py:
     id: d8d15ad6c586
-    last_write_checksum: sha1:3a0268fd1a6d68fe9d67aa61f3e80f85ebefd902
-    pristine_git_object: 663c95c93aa58f3cf179eb89bff71f3e675c9933
+    last_write_checksum: sha1:64d92b84ee5d26fc768eb32caf32ffc3a74d23b1
+    pristine_git_object: 66dca2e10eec2437ae159c2bc111d44e67bd5941
   src/openrouter/alpha.py:
     id: 306c4d93308d
     last_write_checksum: sha1:80cc0f39649445431cc2247ed0e0765438467766
@@ -15656,8 +15656,8 @@ trackedFiles:
     pristine_git_object: 4cea7bb4be88f162bd3783c7bdc32a035ed1f411
   src/openrouter/oauth.py:
     id: 1948ce27255b
-    last_write_checksum: sha1:d6470de6325431db64b08ff4468fb2d8ea781c6f
-    pristine_git_object: 0df1c3e42dd5af1a7071a6be34253477695edb4b
+    last_write_checksum: sha1:8173753ca74f6b449d6de21e3fc7f560c71e98c2
+    pristine_git_object: 6f9385e6aa6f990eaad1ec72e4d8ddc793c1f42e
   src/openrouter/observability.py:
     id: 6a17f32d3f33
     last_write_checksum: sha1:a602b94936d973cb63a158dc94014889342a5ae5
@@ -17194,6 +17194,8 @@ examples:
           application/json: {"error": {"code": 500, "message": "Internal Server Error"}}
         "403":
           application/json: {"error": {"code": 403, "message": "Only management keys can perform this operation"}}
+        "503":
+          application/json: {"error": {"code": 503, "message": "Service temporarily unavailable"}}
   listOrganizationMembers:
     speakeasy-default-list-organization-members:
       parameters:
@@ -21571,4 +21573,6 @@ examples:
         "500":
           application/json: {"error": {"code": 500, "message": "Internal Server Error"}}
 examplesVersion: 1.0.2
-releaseNotes: "## Python SDK Changes:\n* `open_router.presets.delete()`: **Added**\n* `open_router.presets.restore()`: **Added**\n* `open_router.presets.list()`: \n  *  `request.workspace_id` **Added**\n  *  `error.status[404]` **Added**\n* `open_router.presets.get()`:  `request.workspace_id` **Added**\n* `open_router.presets.list_versions()`:  `request.workspace_id` **Added**\n* `open_router.presets.get_version()`:  `request.workspace_id` **Added**\n"
+releaseNotes: |
+  ## Python SDK Changes:
+  * `open_router.o_auth.create_auth_code()`:  `error.status[503]` **Added**
