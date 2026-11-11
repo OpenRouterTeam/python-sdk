@@ -29,7 +29,7 @@ class Guardrails(BaseSDK):
     ) -> Optional[operations.ListGuardrailsResponse]:
         r"""List guardrails
 
-        List all guardrails for the authenticated user. [Management key](/docs/guides/overview/auth/management-api-keys) required.
+        List all guardrails for the authenticated user. A workspace-scoped management key lists only its own workspace, which `workspace_id` defaults to; naming another workspace returns 403. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
@@ -40,7 +40,7 @@ class Guardrails(BaseSDK):
 
         :param offset: Number of records to skip for pagination
         :param limit: Maximum number of records to return (max 100)
-        :param workspace_id: Filter guardrails by workspace ID. By default, guardrails in the default workspace are returned.
+        :param workspace_id: Filter guardrails by workspace ID. When omitted, an organization management key gets guardrails in the default workspace and a workspace-scoped key gets guardrails in its own workspace. A workspace-scoped key gets 403 for any other workspace.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -201,7 +201,7 @@ class Guardrails(BaseSDK):
     ) -> Optional[operations.ListGuardrailsResponse]:
         r"""List guardrails
 
-        List all guardrails for the authenticated user. [Management key](/docs/guides/overview/auth/management-api-keys) required.
+        List all guardrails for the authenticated user. A workspace-scoped management key lists only its own workspace, which `workspace_id` defaults to; naming another workspace returns 403. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
@@ -212,7 +212,7 @@ class Guardrails(BaseSDK):
 
         :param offset: Number of records to skip for pagination
         :param limit: Maximum number of records to return (max 100)
-        :param workspace_id: Filter guardrails by workspace ID. By default, guardrails in the default workspace are returned.
+        :param workspace_id: Filter guardrails by workspace ID. When omitted, an organization management key gets guardrails in the default workspace and a workspace-scoped key gets guardrails in its own workspace. A workspace-scoped key gets 403 for any other workspace.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -410,7 +410,7 @@ class Guardrails(BaseSDK):
     ) -> components.CreateGuardrailResponse:
         r"""Create a guardrail
 
-        Create a new guardrail for the authenticated user. A newly created guardrail enforces nothing until it is assigned to API keys or organization members; `workspace_id` places the guardrail in a workspace but does not apply it to that workspace's traffic. To restrict all traffic in a workspace, update the workspace's default guardrail instead. Set `allowed_data_regions` to enforce [In-Region Routing](/docs/guides/features/in-region-routing#enforcing-in-region-routing-with-guardrails): governed requests must arrive through one of the listed OpenRouter domains and are rejected with a 403 otherwise. [Management key](/docs/guides/overview/auth/management-api-keys) required.
+        Create a new guardrail for the authenticated user. A newly created guardrail enforces nothing until it is assigned to API keys or organization members; `workspace_id` places the guardrail in a workspace but does not apply it to that workspace's traffic. To restrict all traffic in a workspace, update the workspace's default guardrail instead. Set `allowed_data_regions` to enforce [In-Region Routing](/docs/guides/features/in-region-routing#enforcing-in-region-routing-with-guardrails): governed requests must arrive through one of the listed OpenRouter domains and are rejected with a 403 otherwise. A workspace-scoped management key creates in its own workspace, which `workspace_id` defaults to; naming another workspace returns 403. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param name: Name for the new guardrail
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
@@ -443,7 +443,7 @@ class Guardrails(BaseSDK):
         :param include_byok_in_budgets: Whether BYOK (bring-your-own-key) inference spend counts toward this guardrail's limit_usd, in addition to OpenRouter credit spend. Defaults to false.
         :param limit_usd: Spending limit in USD. Must be provided together with `reset_interval`: a request that sets only one of the two is rejected with a 400.
         :param reset_interval: Interval at which the limit resets (daily, weekly, monthly)
-        :param workspace_id: The workspace to create the guardrail in. When omitted, the guardrail is created in the default workspace; if that default has been deleted, the request returns a 400 and you must pass `workspace_id` explicitly. This only places the guardrail in the workspace; the created guardrail enforces nothing for that workspace's traffic until it is assigned to API keys or members. To restrict all traffic in a workspace, update the workspace's default guardrail instead.
+        :param workspace_id: The workspace to create the guardrail in. When omitted, an organization management key creates the guardrail in the default workspace (a 400 if that default has been deleted, so pass `workspace_id` explicitly) and a workspace-scoped key creates it in its own workspace. A workspace-scoped key gets a 403 for any other workspace. This only places the guardrail in the workspace; the created guardrail enforces nothing for that workspace's traffic until it is assigned to API keys or members. To restrict all traffic in a workspace, update the workspace's default guardrail instead.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -653,7 +653,7 @@ class Guardrails(BaseSDK):
     ) -> components.CreateGuardrailResponse:
         r"""Create a guardrail
 
-        Create a new guardrail for the authenticated user. A newly created guardrail enforces nothing until it is assigned to API keys or organization members; `workspace_id` places the guardrail in a workspace but does not apply it to that workspace's traffic. To restrict all traffic in a workspace, update the workspace's default guardrail instead. Set `allowed_data_regions` to enforce [In-Region Routing](/docs/guides/features/in-region-routing#enforcing-in-region-routing-with-guardrails): governed requests must arrive through one of the listed OpenRouter domains and are rejected with a 403 otherwise. [Management key](/docs/guides/overview/auth/management-api-keys) required.
+        Create a new guardrail for the authenticated user. A newly created guardrail enforces nothing until it is assigned to API keys or organization members; `workspace_id` places the guardrail in a workspace but does not apply it to that workspace's traffic. To restrict all traffic in a workspace, update the workspace's default guardrail instead. Set `allowed_data_regions` to enforce [In-Region Routing](/docs/guides/features/in-region-routing#enforcing-in-region-routing-with-guardrails): governed requests must arrive through one of the listed OpenRouter domains and are rejected with a 403 otherwise. A workspace-scoped management key creates in its own workspace, which `workspace_id` defaults to; naming another workspace returns 403. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param name: Name for the new guardrail
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
@@ -686,7 +686,7 @@ class Guardrails(BaseSDK):
         :param include_byok_in_budgets: Whether BYOK (bring-your-own-key) inference spend counts toward this guardrail's limit_usd, in addition to OpenRouter credit spend. Defaults to false.
         :param limit_usd: Spending limit in USD. Must be provided together with `reset_interval`: a request that sets only one of the two is rejected with a 400.
         :param reset_interval: Interval at which the limit resets (daily, weekly, monthly)
-        :param workspace_id: The workspace to create the guardrail in. When omitted, the guardrail is created in the default workspace; if that default has been deleted, the request returns a 400 and you must pass `workspace_id` explicitly. This only places the guardrail in the workspace; the created guardrail enforces nothing for that workspace's traffic until it is assigned to API keys or members. To restrict all traffic in a workspace, update the workspace's default guardrail instead.
+        :param workspace_id: The workspace to create the guardrail in. When omitted, an organization management key creates the guardrail in the default workspace (a 400 if that default has been deleted, so pass `workspace_id` explicitly) and a workspace-scoped key creates it in its own workspace. A workspace-scoped key gets a 403 for any other workspace. This only places the guardrail in the workspace; the created guardrail enforces nothing for that workspace's traffic until it is assigned to API keys or members. To restrict all traffic in a workspace, update the workspace's default guardrail instead.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -860,7 +860,7 @@ class Guardrails(BaseSDK):
     ) -> components.DeleteGuardrailResponse:
         r"""Delete a guardrail
 
-        Delete an existing guardrail. [Management key](/docs/guides/overview/auth/management-api-keys) required.
+        Delete an existing guardrail. A workspace-scoped management key reaches only guardrails in its own workspace; any other guardrail returns 404. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param id: The unique identifier of the guardrail to delete
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
@@ -993,7 +993,7 @@ class Guardrails(BaseSDK):
     ) -> components.DeleteGuardrailResponse:
         r"""Delete a guardrail
 
-        Delete an existing guardrail. [Management key](/docs/guides/overview/auth/management-api-keys) required.
+        Delete an existing guardrail. A workspace-scoped management key reaches only guardrails in its own workspace; any other guardrail returns 404. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param id: The unique identifier of the guardrail to delete
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
@@ -1126,7 +1126,7 @@ class Guardrails(BaseSDK):
     ) -> components.GetGuardrailResponse:
         r"""Get a guardrail
 
-        Get a single guardrail by ID. [Management key](/docs/guides/overview/auth/management-api-keys) required.
+        Get a single guardrail by ID. A workspace-scoped management key reaches only guardrails in its own workspace; any other guardrail returns 404. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param id: The unique identifier of the guardrail to retrieve
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
@@ -1259,7 +1259,7 @@ class Guardrails(BaseSDK):
     ) -> components.GetGuardrailResponse:
         r"""Get a guardrail
 
-        Get a single guardrail by ID. [Management key](/docs/guides/overview/auth/management-api-keys) required.
+        Get a single guardrail by ID. A workspace-scoped management key reaches only guardrails in its own workspace; any other guardrail returns 404. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param id: The unique identifier of the guardrail to retrieve
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
@@ -1428,7 +1428,7 @@ class Guardrails(BaseSDK):
     ) -> components.UpdateGuardrailResponse:
         r"""Update a guardrail
 
-        Update an existing guardrail, or materialize an unconfigured workspace default guardrail. Collection fields use replace semantics: send the full desired set on every update. [Management key](/docs/guides/overview/auth/management-api-keys) required.
+        Update an existing guardrail, or materialize an unconfigured workspace default guardrail. Collection fields use replace semantics: send the full desired set on every update. A workspace-scoped management key reaches only guardrails in its own workspace; any other guardrail returns 404. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param id: The unique identifier of the guardrail to update
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
@@ -1681,7 +1681,7 @@ class Guardrails(BaseSDK):
     ) -> components.UpdateGuardrailResponse:
         r"""Update a guardrail
 
-        Update an existing guardrail, or materialize an unconfigured workspace default guardrail. Collection fields use replace semantics: send the full desired set on every update. [Management key](/docs/guides/overview/auth/management-api-keys) required.
+        Update an existing guardrail, or materialize an unconfigured workspace default guardrail. Collection fields use replace semantics: send the full desired set on every update. A workspace-scoped management key reaches only guardrails in its own workspace; any other guardrail returns 404. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param id: The unique identifier of the guardrail to update
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
@@ -1900,7 +1900,7 @@ class Guardrails(BaseSDK):
     ) -> Optional[operations.ListGuardrailKeyAssignmentsResponse]:
         r"""List key assignments for a guardrail
 
-        List all API key assignments for a specific guardrail. [Management key](/docs/guides/overview/auth/management-api-keys) required.
+        List all API key assignments for a specific guardrail. A workspace-scoped management key reaches only guardrails in its own workspace; any other guardrail returns 404. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param id: The unique identifier of the guardrail
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
@@ -2072,7 +2072,7 @@ class Guardrails(BaseSDK):
     ) -> Optional[operations.ListGuardrailKeyAssignmentsResponse]:
         r"""List key assignments for a guardrail
 
-        List all API key assignments for a specific guardrail. [Management key](/docs/guides/overview/auth/management-api-keys) required.
+        List all API key assignments for a specific guardrail. A workspace-scoped management key reaches only guardrails in its own workspace; any other guardrail returns 404. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param id: The unique identifier of the guardrail
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
@@ -2248,7 +2248,7 @@ class Guardrails(BaseSDK):
     ) -> components.BulkAssignKeysResponse:
         r"""Bulk assign keys to a guardrail
 
-        Assign multiple API keys to a specific guardrail. A key may hold at most one guardrail; assigning replaces any existing assignment. [Management key](/docs/guides/overview/auth/management-api-keys) required.
+        Assign multiple API keys to a specific guardrail. A key may hold at most one guardrail; assigning replaces any existing assignment. A workspace-scoped management key reaches only guardrails in its own workspace (any other returns 404), and a batch naming an unknown or out-of-workspace key hash is rejected with 400 before anything changes. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param id: The unique identifier of the guardrail
         :param key_hashes: Array of API key hashes to assign to the guardrail
@@ -2398,7 +2398,7 @@ class Guardrails(BaseSDK):
     ) -> components.BulkAssignKeysResponse:
         r"""Bulk assign keys to a guardrail
 
-        Assign multiple API keys to a specific guardrail. A key may hold at most one guardrail; assigning replaces any existing assignment. [Management key](/docs/guides/overview/auth/management-api-keys) required.
+        Assign multiple API keys to a specific guardrail. A key may hold at most one guardrail; assigning replaces any existing assignment. A workspace-scoped management key reaches only guardrails in its own workspace (any other returns 404), and a batch naming an unknown or out-of-workspace key hash is rejected with 400 before anything changes. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param id: The unique identifier of the guardrail
         :param key_hashes: Array of API key hashes to assign to the guardrail
@@ -2548,7 +2548,7 @@ class Guardrails(BaseSDK):
     ) -> components.BulkUnassignKeysResponse:
         r"""Bulk unassign keys from a guardrail
 
-        Unassign multiple API keys from a specific guardrail. [Management key](/docs/guides/overview/auth/management-api-keys) required.
+        Unassign multiple API keys from a specific guardrail. A workspace-scoped management key reaches only guardrails in its own workspace (any other returns 404), and a batch naming an unknown or out-of-workspace key hash is rejected with 400 before anything changes. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param id: The unique identifier of the guardrail
         :param key_hashes: Array of API key hashes to unassign from the guardrail
@@ -2700,7 +2700,7 @@ class Guardrails(BaseSDK):
     ) -> components.BulkUnassignKeysResponse:
         r"""Bulk unassign keys from a guardrail
 
-        Unassign multiple API keys from a specific guardrail. [Management key](/docs/guides/overview/auth/management-api-keys) required.
+        Unassign multiple API keys from a specific guardrail. A workspace-scoped management key reaches only guardrails in its own workspace (any other returns 404), and a batch naming an unknown or out-of-workspace key hash is rejected with 400 before anything changes. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param id: The unique identifier of the guardrail
         :param key_hashes: Array of API key hashes to unassign from the guardrail
@@ -2853,7 +2853,7 @@ class Guardrails(BaseSDK):
     ) -> Optional[operations.ListGuardrailMemberAssignmentsResponse]:
         r"""List member assignments for a guardrail
 
-        List all organization member assignments for a specific guardrail. [Management key](/docs/guides/overview/auth/management-api-keys) required.
+        List all organization member assignments for a specific guardrail. A workspace-scoped management key reaches only guardrails in its own workspace; any other guardrail returns 404. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param id: The unique identifier of the guardrail
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
@@ -3025,7 +3025,7 @@ class Guardrails(BaseSDK):
     ) -> Optional[operations.ListGuardrailMemberAssignmentsResponse]:
         r"""List member assignments for a guardrail
 
-        List all organization member assignments for a specific guardrail. [Management key](/docs/guides/overview/auth/management-api-keys) required.
+        List all organization member assignments for a specific guardrail. A workspace-scoped management key reaches only guardrails in its own workspace; any other guardrail returns 404. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param id: The unique identifier of the guardrail
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
@@ -3201,7 +3201,7 @@ class Guardrails(BaseSDK):
     ) -> components.BulkAssignMembersResponse:
         r"""Bulk assign members to a guardrail
 
-        Assign multiple organization members to a specific guardrail. [Management key](/docs/guides/overview/auth/management-api-keys) required.
+        Assign multiple organization members to a specific guardrail. Requires an organization-scoped management key; workspace-scoped management keys return 403. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param id: The unique identifier of the guardrail
         :param member_user_ids: Array of member user IDs to assign to the guardrail
@@ -3353,7 +3353,7 @@ class Guardrails(BaseSDK):
     ) -> components.BulkAssignMembersResponse:
         r"""Bulk assign members to a guardrail
 
-        Assign multiple organization members to a specific guardrail. [Management key](/docs/guides/overview/auth/management-api-keys) required.
+        Assign multiple organization members to a specific guardrail. Requires an organization-scoped management key; workspace-scoped management keys return 403. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param id: The unique identifier of the guardrail
         :param member_user_ids: Array of member user IDs to assign to the guardrail
@@ -3505,7 +3505,7 @@ class Guardrails(BaseSDK):
     ) -> components.BulkUnassignMembersResponse:
         r"""Bulk unassign members from a guardrail
 
-        Unassign multiple organization members from a specific guardrail. [Management key](/docs/guides/overview/auth/management-api-keys) required.
+        Unassign multiple organization members from a specific guardrail. Requires an organization-scoped management key; workspace-scoped management keys return 403. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param id: The unique identifier of the guardrail
         :param member_user_ids: Array of member user IDs to unassign from the guardrail
@@ -3657,7 +3657,7 @@ class Guardrails(BaseSDK):
     ) -> components.BulkUnassignMembersResponse:
         r"""Bulk unassign members from a guardrail
 
-        Unassign multiple organization members from a specific guardrail. [Management key](/docs/guides/overview/auth/management-api-keys) required.
+        Unassign multiple organization members from a specific guardrail. Requires an organization-scoped management key; workspace-scoped management keys return 403. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param id: The unique identifier of the guardrail
         :param member_user_ids: Array of member user IDs to unassign from the guardrail
@@ -3809,7 +3809,7 @@ class Guardrails(BaseSDK):
     ) -> Optional[operations.ListKeyAssignmentsResponse]:
         r"""List all key assignments
 
-        List all API key guardrail assignments for the authenticated user. [Management key](/docs/guides/overview/auth/management-api-keys) required.
+        List all API key guardrail assignments for the authenticated user. A workspace-scoped management key lists only its own workspace, which `workspace_id` defaults to; naming another workspace returns 403. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
@@ -3982,7 +3982,7 @@ class Guardrails(BaseSDK):
     ) -> Optional[operations.ListKeyAssignmentsResponse]:
         r"""List all key assignments
 
-        List all API key guardrail assignments for the authenticated user. [Management key](/docs/guides/overview/auth/management-api-keys) required.
+        List all API key guardrail assignments for the authenticated user. A workspace-scoped management key lists only its own workspace, which `workspace_id` defaults to; naming another workspace returns 403. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
@@ -4158,7 +4158,7 @@ class Guardrails(BaseSDK):
     ) -> Optional[operations.ListMemberAssignmentsResponse]:
         r"""List all member assignments
 
-        List all organization member guardrail assignments for the authenticated user. [Management key](/docs/guides/overview/auth/management-api-keys) required.
+        List all organization member guardrail assignments for the authenticated user. A workspace-scoped management key lists only its own workspace, which `workspace_id` defaults to; naming another workspace returns 403. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
@@ -4331,7 +4331,7 @@ class Guardrails(BaseSDK):
     ) -> Optional[operations.ListMemberAssignmentsResponse]:
         r"""List all member assignments
 
-        List all organization member guardrail assignments for the authenticated user. [Management key](/docs/guides/overview/auth/management-api-keys) required.
+        List all organization member guardrail assignments for the authenticated user. A workspace-scoped management key lists only its own workspace, which `workspace_id` defaults to; naming another workspace returns 403. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
