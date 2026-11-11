@@ -142,6 +142,99 @@ class ResultError(BaseModel):
         return m
 
 
+BatchObjectFormat2 = Literal["pcm",]
+
+
+class AudioPcm2TypedDict(TypedDict):
+    bits_per_sample: float
+    byte_length: int
+    channels: int
+    format_: BatchObjectFormat2
+    sample_rate: int
+    sha256: str
+
+
+class AudioPcm2(BaseModel):
+    bits_per_sample: float
+
+    byte_length: int
+
+    channels: int
+
+    format_: Annotated[BatchObjectFormat2, pydantic.Field(alias="format")]
+
+    sample_rate: int
+
+    sha256: str
+
+
+BatchObjectFormat1 = Literal["pcm",]
+
+
+class AudioPcm1TypedDict(TypedDict):
+    bits_per_sample: float
+    channels: int
+    data: str
+    r"""Base64-encoded PCM16 audio in the format the sibling fields give."""
+    format_: BatchObjectFormat1
+    sample_rate: int
+
+
+class AudioPcm1(BaseModel):
+    bits_per_sample: float
+
+    channels: int
+
+    data: str
+    r"""Base64-encoded PCM16 audio in the format the sibling fields give."""
+
+    format_: Annotated[BatchObjectFormat1, pydantic.Field(alias="format")]
+
+    sample_rate: int
+
+
+AudioTypedDict = TypeAliasType(
+    "AudioTypedDict", Union[AudioPcm1TypedDict, AudioPcm2TypedDict]
+)
+
+
+Audio = TypeAliasType("Audio", Union[AudioPcm1, AudioPcm2])
+
+
+ObjectAudioSpeech = Literal["audio.speech",]
+
+
+class BodyUsage4TypedDict(TypedDict):
+    completion_tokens: int
+    prompt_tokens: int
+    total_tokens: int
+
+
+class BodyUsage4(BaseModel):
+    completion_tokens: int
+
+    prompt_tokens: int
+
+    total_tokens: int
+
+
+class BodyAudioSpeechTypedDict(TypedDict):
+    audio: AudioTypedDict
+    model: str
+    object: ObjectAudioSpeech
+    usage: BodyUsage4TypedDict
+
+
+class BodyAudioSpeech(BaseModel):
+    audio: Audio
+
+    model: str
+
+    object: ObjectAudioSpeech
+
+    usage: BodyUsage4
+
+
 EmbeddingTypedDict = TypeAliasType("EmbeddingTypedDict", Union[List[float], str])
 r"""Embedding vector as an array of floats or a base64 string"""
 
@@ -1605,6 +1698,7 @@ class BodyChatCompletion(BaseModel):
 BodyTypedDict = TypeAliasType(
     "BodyTypedDict",
     Union[
+        BodyAudioSpeechTypedDict,
         BodyListTypedDict,
         BodyMessageTypedDict,
         BodyChatCompletionTypedDict,
@@ -1614,7 +1708,10 @@ BodyTypedDict = TypeAliasType(
 
 
 Body = TypeAliasType(
-    "Body", Union[BodyList, BodyMessage, BodyChatCompletion, OpenResponsesResult]
+    "Body",
+    Union[
+        BodyAudioSpeech, BodyList, BodyMessage, BodyChatCompletion, OpenResponsesResult
+    ],
 )
 
 
@@ -2048,6 +2145,14 @@ class BatchObject(BaseModel):
         return m
 
 
+try:
+    AudioPcm2.model_rebuild()
+except NameError:
+    pass
+try:
+    AudioPcm1.model_rebuild()
+except NameError:
+    pass
 try:
     ContentTopLogprob.model_rebuild()
 except NameError:

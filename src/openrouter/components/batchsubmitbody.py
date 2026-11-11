@@ -27,6 +27,7 @@ Endpoint = Union[
         "/v1/responses",
         "/v1/messages",
         "/v1/embeddings",
+        "/v1/audio/speech",
     ],
     UnrecognizedStr,
 ]
