@@ -22,7 +22,7 @@ targets:
         source: OpenRouter API
         publish:
             pypi:
-                token: $pypi_token
+                useTrustedPublishing: true
         codeSamples:
             registry:
                 location: registry.speakeasyapi.dev/openrouter/sdk/open-router-python-code-samples
