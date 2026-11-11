@@ -95,7 +95,7 @@ class ListGuardrailsRequestTypedDict(TypedDict):
     limit: NotRequired[int]
     r"""Maximum number of records to return (max 100)"""
     workspace_id: NotRequired[str]
-    r"""Filter guardrails by workspace ID. By default, guardrails in the default workspace are returned."""
+    r"""Filter guardrails by workspace ID. When omitted, an organization management key gets guardrails in the default workspace and a workspace-scoped key gets guardrails in its own workspace. A workspace-scoped key gets 403 for any other workspace."""
 
 
 class ListGuardrailsRequest(BaseModel):
@@ -143,7 +143,7 @@ class ListGuardrailsRequest(BaseModel):
         Optional[str],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
-    r"""Filter guardrails by workspace ID. By default, guardrails in the default workspace are returned."""
+    r"""Filter guardrails by workspace ID. When omitted, an organization management key gets guardrails in the default workspace and a workspace-scoped key gets guardrails in its own workspace. A workspace-scoped key gets 403 for any other workspace."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
