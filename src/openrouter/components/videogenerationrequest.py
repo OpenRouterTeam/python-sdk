@@ -33,7 +33,7 @@ VideoGenerationRequestAspectRatio = Union[
     ],
     UnrecognizedStr,
 ]
-r"""Aspect ratio of the generated video"""
+r"""Aspect ratio of the generated video. Omit it to use the model default, which on models with adaptive aspect ratio (e.g. BytePlus Seedance) follows the input image or video."""
 
 
 VideoGenerationRequestIgnoreTypedDict = TypeAliasType(
@@ -845,13 +845,13 @@ r"""Resolution of the generated video"""
 class VideoGenerationRequestTypedDict(TypedDict):
     model: str
     aspect_ratio: NotRequired[VideoGenerationRequestAspectRatio]
-    r"""Aspect ratio of the generated video"""
+    r"""Aspect ratio of the generated video. Omit it to use the model default, which on models with adaptive aspect ratio (e.g. BytePlus Seedance) follows the input image or video."""
     callback_url: NotRequired[str]
     r"""URL to receive a webhook notification when the video generation job completes. Overrides the workspace-level default callback URL if set. Must be HTTPS."""
     creativity: NotRequired[int]
     r"""Creativity level for video upscaling models only. This parameter is not supported by video generation models."""
     duration: NotRequired[int]
-    r"""Duration of the generated video in seconds"""
+    r"""Duration of the generated video in seconds, or -1 to let the provider choose the length (e.g. following an input video). -1 is only accepted by models that list it in supported_durations."""
     frame_images: NotRequired[List[FrameImageTypedDict]]
     r"""Images to use as the first and/or last frame of the generated video. Each image must specify a frame_type of first_frame or last_frame."""
     generate_audio: NotRequired[bool]
@@ -884,7 +884,7 @@ class VideoGenerationRequest(BaseModel):
     model: str
 
     aspect_ratio: Optional[VideoGenerationRequestAspectRatio] = None
-    r"""Aspect ratio of the generated video"""
+    r"""Aspect ratio of the generated video. Omit it to use the model default, which on models with adaptive aspect ratio (e.g. BytePlus Seedance) follows the input image or video."""
 
     callback_url: Optional[str] = None
     r"""URL to receive a webhook notification when the video generation job completes. Overrides the workspace-level default callback URL if set. Must be HTTPS."""
@@ -893,7 +893,7 @@ class VideoGenerationRequest(BaseModel):
     r"""Creativity level for video upscaling models only. This parameter is not supported by video generation models."""
 
     duration: Optional[int] = None
-    r"""Duration of the generated video in seconds"""
+    r"""Duration of the generated video in seconds, or -1 to let the provider choose the length (e.g. following an input video). -1 is only accepted by models that list it in supported_durations."""
 
     frame_images: Optional[List[FrameImage]] = None
     r"""Images to use as the first and/or last frame of the generated video. Each image must specify a frame_type of first_frame or last_frame."""

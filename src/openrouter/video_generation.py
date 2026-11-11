@@ -71,10 +71,10 @@ class VideoGeneration(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
-        :param aspect_ratio: Aspect ratio of the generated video
+        :param aspect_ratio: Aspect ratio of the generated video. Omit it to use the model default, which on models with adaptive aspect ratio (e.g. BytePlus Seedance) follows the input image or video.
         :param callback_url: URL to receive a webhook notification when the video generation job completes. Overrides the workspace-level default callback URL if set. Must be HTTPS.
         :param creativity: Creativity level for video upscaling models only. This parameter is not supported by video generation models.
-        :param duration: Duration of the generated video in seconds
+        :param duration: Duration of the generated video in seconds, or -1 to let the provider choose the length (e.g. following an input video). -1 is only accepted by models that list it in supported_durations.
         :param frame_images: Images to use as the first and/or last frame of the generated video. Each image must specify a frame_type of first_frame or last_frame.
         :param generate_audio: Whether to generate audio alongside the video. Defaults to the endpoint's generate_audio capability flag, false if not set.
         :param input_references: Reference assets to guide video generation. Accepts image, audio, and video references. Audio and video references are only honored by providers that support them (including BytePlus Seedance generation 2 and newer); other providers use image references and ignore the rest.
@@ -317,10 +317,10 @@ class VideoGeneration(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
-        :param aspect_ratio: Aspect ratio of the generated video
+        :param aspect_ratio: Aspect ratio of the generated video. Omit it to use the model default, which on models with adaptive aspect ratio (e.g. BytePlus Seedance) follows the input image or video.
         :param callback_url: URL to receive a webhook notification when the video generation job completes. Overrides the workspace-level default callback URL if set. Must be HTTPS.
         :param creativity: Creativity level for video upscaling models only. This parameter is not supported by video generation models.
-        :param duration: Duration of the generated video in seconds
+        :param duration: Duration of the generated video in seconds, or -1 to let the provider choose the length (e.g. following an input video). -1 is only accepted by models that list it in supported_durations.
         :param frame_images: Images to use as the first and/or last frame of the generated video. Each image must specify a frame_type of first_frame or last_frame.
         :param generate_audio: Whether to generate audio alongside the video. Defaults to the endpoint's generate_audio capability flag, false if not set.
         :param input_references: Reference assets to guide video generation. Accepts image, audio, and video references. Audio and video references are only honored by providers that support them (including BytePlus Seedance generation 2 and newer); other providers use image references and ignore the rest.

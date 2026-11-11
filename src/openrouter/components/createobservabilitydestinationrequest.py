@@ -52,7 +52,7 @@ class CreateObservabilityDestinationRequestTypedDict(TypedDict):
     type: CreateObservabilityDestinationRequestType
     r"""The destination type. Only stable destination types are accepted."""
     api_key_hashes: NotRequired[Nullable[List[str]]]
-    r"""Optional allowlist of OpenRouter API key hashes whose traffic is forwarded. `null` or omitted means all keys. Must contain at least one hash if provided. A workspace-scoped management key can only name API keys in its own workspace; any other hash returns 400."""
+    r"""Optional allowlist of OpenRouter API key hashes whose traffic is forwarded. `null` or omitted means all keys. Must contain at least one hash if provided. Every hash must belong to an API key in the destination's workspace; any other hash returns 400."""
     broadcast_generation_cost: NotRequired[bool]
     r"""When true, include cost and billing generation metadata."""
     broadcast_generation_cost_allocation: NotRequired[bool]
@@ -86,7 +86,7 @@ class CreateObservabilityDestinationRequest(BaseModel):
     r"""The destination type. Only stable destination types are accepted."""
 
     api_key_hashes: OptionalNullable[List[str]] = UNSET
-    r"""Optional allowlist of OpenRouter API key hashes whose traffic is forwarded. `null` or omitted means all keys. Must contain at least one hash if provided. A workspace-scoped management key can only name API keys in its own workspace; any other hash returns 400."""
+    r"""Optional allowlist of OpenRouter API key hashes whose traffic is forwarded. `null` or omitted means all keys. Must contain at least one hash if provided. Every hash must belong to an API key in the destination's workspace; any other hash returns 400."""
 
     broadcast_generation_cost: Optional[bool] = False
     r"""When true, include cost and billing generation metadata."""

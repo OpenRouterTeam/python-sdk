@@ -27,7 +27,7 @@ r"""Your declaration of the data region in which the upstream provider account b
 
 class UpdateBYOKKeyRequestTypedDict(TypedDict):
     allowed_api_key_hashes: NotRequired[Nullable[List[str]]]
-    r"""Optional allowlist of OpenRouter API key hashes (`api_keys.hash`) that may use this credential. `null` clears the restriction. Must contain at least one hash if provided. Hashes that do not belong to your account return a 400; for a workspace-scoped management key, so do hashes of API keys outside its own workspace."""
+    r"""Optional allowlist of OpenRouter API key hashes (`api_keys.hash`) that may use this credential. `null` clears the restriction. Must contain at least one hash if provided. Hashes that do not belong to your account return a 400; for a credential pinned to a workspace, so do hashes of API keys outside that workspace, unless the credential already lists them (a listed key that has since moved to another workspace stays listed and can be written back)."""
     allowed_models: NotRequired[Nullable[List[str]]]
     r"""Optional allowlist of model slugs this credential may be used for. `null` means no restriction."""
     allowed_user_ids: NotRequired[Nullable[List[str]]]
@@ -52,7 +52,7 @@ class UpdateBYOKKeyRequestTypedDict(TypedDict):
 
 class UpdateBYOKKeyRequest(BaseModel):
     allowed_api_key_hashes: OptionalNullable[List[str]] = UNSET
-    r"""Optional allowlist of OpenRouter API key hashes (`api_keys.hash`) that may use this credential. `null` clears the restriction. Must contain at least one hash if provided. Hashes that do not belong to your account return a 400; for a workspace-scoped management key, so do hashes of API keys outside its own workspace."""
+    r"""Optional allowlist of OpenRouter API key hashes (`api_keys.hash`) that may use this credential. `null` clears the restriction. Must contain at least one hash if provided. Hashes that do not belong to your account return a 400; for a credential pinned to a workspace, so do hashes of API keys outside that workspace, unless the credential already lists them (a listed key that has since moved to another workspace stays listed and can be written back)."""
 
     allowed_models: OptionalNullable[List[str]] = UNSET
     r"""Optional allowlist of model slugs this credential may be used for. `null` means no restriction."""
