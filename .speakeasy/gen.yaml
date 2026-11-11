@@ -87,7 +87,7 @@ python:
   flatteningOrder: parameters-first
   forwardCompatibleEnumsByDefault: false
   forwardCompatibleUnionsByDefault: tagged-only
-  httpClientLibrary: httpx
+  httpClientLibrary: httpx2
   imports:
     option: openapi
     paths:
