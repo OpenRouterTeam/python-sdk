@@ -5,9 +5,10 @@ from .guardrailpolicyassignmentstate import (
     GuardrailPolicyAssignmentState,
     GuardrailPolicyAssignmentStateTypedDict,
 )
-from openrouter.types import BaseModel, UnrecognizedStr
-from typing import Literal, Union
-from typing_extensions import TypedDict
+from openrouter.types import BaseModel, UNSET_SENTINEL, UnrecognizedStr
+from pydantic import model_serializer
+from typing import Literal, Optional, Union
+from typing_extensions import NotRequired, TypedDict
 
 
 ChangeGuardrailPolicyAssignmentRequestPolicyType = Union[
@@ -30,8 +31,8 @@ class ChangeGuardrailPolicyAssignmentRequestTypedDict(TypedDict):
     r"""Policy ID"""
     policy_type: ChangeGuardrailPolicyAssignmentRequestPolicyType
     r"""Policy type the assignment is read or changed for"""
-    workspace_id: str
-    r"""Workspace the policy belongs to"""
+    workspace_id: NotRequired[str]
+    r"""Workspace the policy belongs to. Required for an organization management key; a workspace-scoped key defaults to its own workspace and gets 403 for any other."""
 
 
 class ChangeGuardrailPolicyAssignmentRequest(BaseModel):
@@ -46,5 +47,21 @@ class ChangeGuardrailPolicyAssignmentRequest(BaseModel):
     policy_type: ChangeGuardrailPolicyAssignmentRequestPolicyType
     r"""Policy type the assignment is read or changed for"""
 
-    workspace_id: str
-    r"""Workspace the policy belongs to"""
+    workspace_id: Optional[str] = None
+    r"""Workspace the policy belongs to. Required for an organization management key; a workspace-scoped key defaults to its own workspace and gets 403 for any other."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["workspace_id"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

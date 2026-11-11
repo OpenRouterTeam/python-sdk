@@ -93,8 +93,6 @@ r"""Policy type the assignment is read or changed for"""
 class GetAPIKeyPolicyAssignmentRequestTypedDict(TypedDict):
     hash: str
     r"""API key hash"""
-    workspace_id: str
-    r"""Workspace the policy belongs to"""
     policy_type: GetAPIKeyPolicyAssignmentPolicyType
     r"""Policy type the assignment is read or changed for"""
     http_referer: NotRequired[str]
@@ -110,6 +108,8 @@ class GetAPIKeyPolicyAssignmentRequestTypedDict(TypedDict):
     r"""Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
     """
+    workspace_id: NotRequired[str]
+    r"""Workspace the policy belongs to. Required for an organization management key; a workspace-scoped key defaults to its own workspace and gets 403 for any other."""
 
 
 class GetAPIKeyPolicyAssignmentRequest(BaseModel):
@@ -117,11 +117,6 @@ class GetAPIKeyPolicyAssignmentRequest(BaseModel):
         str, FieldMetadata(path=PathParamMetadata(style="simple", explode=False))
     ]
     r"""API key hash"""
-
-    workspace_id: Annotated[
-        str, FieldMetadata(query=QueryParamMetadata(style="form", explode=True))
-    ]
-    r"""Workspace the policy belongs to"""
 
     policy_type: Annotated[
         GetAPIKeyPolicyAssignmentPolicyType,
@@ -157,10 +152,21 @@ class GetAPIKeyPolicyAssignmentRequest(BaseModel):
 
     """
 
+    workspace_id: Annotated[
+        Optional[str],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Workspace the policy belongs to. Required for an organization management key; a workspace-scoped key defaults to its own workspace and gets 403 for any other."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
-            ["HTTP-Referer", "X-OpenRouter-Title", "X-OpenRouter-Categories"]
+            [
+                "HTTP-Referer",
+                "X-OpenRouter-Title",
+                "X-OpenRouter-Categories",
+                "workspace_id",
+            ]
         )
         serialized = handler(self)
         m = {}

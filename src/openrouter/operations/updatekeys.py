@@ -109,7 +109,7 @@ class UpdateKeysRequestBodyTypedDict(TypedDict):
     name: NotRequired[str]
     r"""New name for the API key"""
     workspace_id: NotRequired[str]
-    r"""Move the API key to this workspace. The key keeps its value; guardrail selections move with it, while other workspace-scoped settings (presets, BYOK keys, broadcast destinations, routing rules) do not. Sending the key's current workspace is a no-op."""
+    r"""Move the API key to this workspace. The key keeps its value; guardrail selections move with it, except direct guardrail assignments owned by the key's current workspace, which are removed along with the selections derived from them, while other workspace-scoped settings (presets, BYOK keys, broadcast destinations, routing rules) do not. Sending the key's current workspace is a no-op."""
 
 
 class UpdateKeysRequestBody(BaseModel):
@@ -129,7 +129,7 @@ class UpdateKeysRequestBody(BaseModel):
     r"""New name for the API key"""
 
     workspace_id: Optional[str] = None
-    r"""Move the API key to this workspace. The key keeps its value; guardrail selections move with it, while other workspace-scoped settings (presets, BYOK keys, broadcast destinations, routing rules) do not. Sending the key's current workspace is a no-op."""
+    r"""Move the API key to this workspace. The key keeps its value; guardrail selections move with it, except direct guardrail assignments owned by the key's current workspace, which are removed along with the selections derived from them, while other workspace-scoped settings (presets, BYOK keys, broadcast destinations, routing rules) do not. Sending the key's current workspace is a no-op."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

@@ -3802,6 +3802,7 @@ class Guardrails(BaseSDK):
         x_open_router_categories: Optional[str] = None,
         offset: OptionalNullable[int] = 0,
         limit: Optional[int] = 50,
+        workspace_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -3820,6 +3821,7 @@ class Guardrails(BaseSDK):
 
         :param offset: Number of records to skip for pagination
         :param limit: Maximum number of records to return (max 100)
+        :param workspace_id: Only list assignments of guardrails in this workspace. When omitted, an organization management key lists every workspace and a workspace-scoped key lists its own workspace. A workspace-scoped key gets 403 for any other workspace.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -3841,6 +3843,7 @@ class Guardrails(BaseSDK):
             x_open_router_categories=x_open_router_categories,
             offset=offset,
             limit=limit,
+            workspace_id=workspace_id,
         )
 
         req = self._build_request(
@@ -3915,6 +3918,7 @@ class Guardrails(BaseSDK):
                 x_open_router_categories=x_open_router_categories,
                 offset=next_offset,
                 limit=limit,
+                workspace_id=workspace_id,
                 retries=retries,
                 server_url=server_url,
                 timeout_ms=timeout_ms,
@@ -3975,6 +3979,7 @@ class Guardrails(BaseSDK):
         x_open_router_categories: Optional[str] = None,
         offset: OptionalNullable[int] = 0,
         limit: Optional[int] = 50,
+        workspace_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -3993,6 +3998,7 @@ class Guardrails(BaseSDK):
 
         :param offset: Number of records to skip for pagination
         :param limit: Maximum number of records to return (max 100)
+        :param workspace_id: Only list assignments of guardrails in this workspace. When omitted, an organization management key lists every workspace and a workspace-scoped key lists its own workspace. A workspace-scoped key gets 403 for any other workspace.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -4014,6 +4020,7 @@ class Guardrails(BaseSDK):
             x_open_router_categories=x_open_router_categories,
             offset=offset,
             limit=limit,
+            workspace_id=workspace_id,
         )
 
         req = self._build_request_async(
@@ -4091,6 +4098,7 @@ class Guardrails(BaseSDK):
                 x_open_router_categories=x_open_router_categories,
                 offset=next_offset,
                 limit=limit,
+                workspace_id=workspace_id,
                 retries=retries,
                 server_url=server_url,
                 timeout_ms=timeout_ms,
@@ -4151,6 +4159,7 @@ class Guardrails(BaseSDK):
         x_open_router_categories: Optional[str] = None,
         offset: OptionalNullable[int] = 0,
         limit: Optional[int] = 50,
+        workspace_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -4169,6 +4178,7 @@ class Guardrails(BaseSDK):
 
         :param offset: Number of records to skip for pagination
         :param limit: Maximum number of records to return (max 100)
+        :param workspace_id: Only list assignments of guardrails in this workspace. When omitted, an organization management key lists every workspace and a workspace-scoped key lists its own workspace. A workspace-scoped key gets 403 for any other workspace.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -4190,6 +4200,7 @@ class Guardrails(BaseSDK):
             x_open_router_categories=x_open_router_categories,
             offset=offset,
             limit=limit,
+            workspace_id=workspace_id,
         )
 
         req = self._build_request(
@@ -4264,6 +4275,7 @@ class Guardrails(BaseSDK):
                 x_open_router_categories=x_open_router_categories,
                 offset=next_offset,
                 limit=limit,
+                workspace_id=workspace_id,
                 retries=retries,
                 server_url=server_url,
                 timeout_ms=timeout_ms,
@@ -4324,6 +4336,7 @@ class Guardrails(BaseSDK):
         x_open_router_categories: Optional[str] = None,
         offset: OptionalNullable[int] = 0,
         limit: Optional[int] = 50,
+        workspace_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -4342,6 +4355,7 @@ class Guardrails(BaseSDK):
 
         :param offset: Number of records to skip for pagination
         :param limit: Maximum number of records to return (max 100)
+        :param workspace_id: Only list assignments of guardrails in this workspace. When omitted, an organization management key lists every workspace and a workspace-scoped key lists its own workspace. A workspace-scoped key gets 403 for any other workspace.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -4363,6 +4377,7 @@ class Guardrails(BaseSDK):
             x_open_router_categories=x_open_router_categories,
             offset=offset,
             limit=limit,
+            workspace_id=workspace_id,
         )
 
         req = self._build_request_async(
@@ -4442,6 +4457,7 @@ class Guardrails(BaseSDK):
                 x_open_router_categories=x_open_router_categories,
                 offset=next_offset,
                 limit=limit,
+                workspace_id=workspace_id,
                 retries=retries,
                 server_url=server_url,
                 timeout_ms=timeout_ms,
