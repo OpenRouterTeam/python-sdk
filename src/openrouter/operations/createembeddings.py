@@ -179,13 +179,21 @@ class Input(BaseModel):
 
 InputUnionTypedDict = TypeAliasType(
     "InputUnionTypedDict",
-    Union[str, List[str], List[float], List[List[float]], List[InputTypedDict]],
+    Union[
+        str,
+        List[str],
+        List[List[str]],
+        List[float],
+        List[List[float]],
+        List[InputTypedDict],
+    ],
 )
 r"""Text, token, or multimodal input(s) to embed"""
 
 
 InputUnion = TypeAliasType(
-    "InputUnion", Union[str, List[str], List[float], List[List[float]], List[Input]]
+    "InputUnion",
+    Union[str, List[str], List[List[str]], List[float], List[List[float]], List[Input]],
 )
 r"""Text, token, or multimodal input(s) to embed"""
 
@@ -202,7 +210,7 @@ class CreateEmbeddingsRequestBodyTypedDict(TypedDict):
     encoding_format: NotRequired[EncodingFormat]
     r"""The format of the output embeddings"""
     input_type: NotRequired[str]
-    r"""The type of input (e.g. search_query, search_document)"""
+    r"""The type of input (e.g. search_query, search_document). Document-chunk input (`string[][]`) is only valid with a document input type."""
     provider: NotRequired[
         Nullable[components_providerpreferences.ProviderPreferencesTypedDict]
     ]
@@ -230,7 +238,7 @@ class CreateEmbeddingsRequestBody(BaseModel):
     r"""The format of the output embeddings"""
 
     input_type: Optional[str] = None
-    r"""The type of input (e.g. search_query, search_document)"""
+    r"""The type of input (e.g. search_query, search_document). Document-chunk input (`string[][]`) is only valid with a document input type."""
 
     provider: OptionalNullable[components_providerpreferences.ProviderPreferences] = (
         UNSET
@@ -368,6 +376,8 @@ class CreateEmbeddingsDataTypedDict(TypedDict):
     embedding: EmbeddingTypedDict
     r"""Embedding vector as an array of floats or a base64 string"""
     object: ObjectEmbedding
+    document_index: NotRequired[int]
+    r"""Index of the source document when `input` was a list of documents (contextual embeddings). Absent otherwise."""
     index: NotRequired[int]
     r"""Index of the embedding in the input list"""
 
@@ -380,12 +390,15 @@ class CreateEmbeddingsData(BaseModel):
 
     object: ObjectEmbedding
 
+    document_index: Optional[int] = None
+    r"""Index of the source document when `input` was a list of documents (contextual embeddings). Absent otherwise."""
+
     index: Optional[int] = None
     r"""Index of the embedding in the input list"""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["index"])
+        optional_fields = set(["document_index", "index"])
         serialized = handler(self)
         m = {}
 
