@@ -10951,7 +10951,7 @@ components:
         type: 'langfuse'
       properties:
         api_key_hashes:
-          description: 'Optional allowlist of OpenRouter API key hashes whose traffic is forwarded. `null` or omitted means all keys. Must contain at least one hash if provided.'
+          description: 'Optional allowlist of OpenRouter API key hashes whose traffic is forwarded. `null` or omitted means all keys. Must contain at least one hash if provided. A workspace-scoped management key can only name API keys in its own workspace; any other hash returns 400.'
           example: null
           items:
             type: 'string'
@@ -11042,7 +11042,7 @@ components:
           type: 'string'
           x-speakeasy-unknown-values: allow
         workspace_id:
-          description: 'Optional workspace ID. Defaults to the authenticated entity''s default workspace.'
+          description: 'Optional workspace ID. Defaults to the authenticated entity''s default workspace, or a workspace-scoped management key''s own workspace.'
           example: '550e8400-e29b-41d4-a716-446655440000'
           format: 'uuid'
           type: 'string'
@@ -12713,7 +12713,7 @@ components:
       type: 'object'
     ExtractionAsset:
       additionalProperties: false
-      description: 'An image or PDF sent once and referenced by its key in the `assets` map. `data_base64` is the file in standard base64 with no `data:` prefix. PDF is read by document models only.'
+      description: 'An image or PDF sent once and referenced by its key in the `assets` map. `data_base64` is the file in standard base64 with no `data:` prefix. Which formats are read is model-specific: a format the model cannot read fails with a 400.'
       properties:
         data_base64:
           minLength: 1
@@ -12724,6 +12724,7 @@ components:
             - 'png'
             - 'jpg'
             - 'jpeg'
+            - 'webp'
             - 'pdf'
           type: 'string'
           x-speakeasy-unknown-values: allow
@@ -12758,7 +12759,7 @@ components:
           type: 'string'
           x-speakeasy-unknown-values: allow
         span:
-          description: 'Unicode code point offsets [start, end) into the state text: index code points (not UTF-16 code units or UTF-8 bytes), so an emoji or accented letter counts once.'
+          description: 'Unicode code point offsets [start, end) into the state text: index code points (not UTF-16 code units or UTF-8 bytes), so an emoji or accented letter counts once. Absent for an answer that has no offsets in the state text, for example a null answer, one read from an image or a document, or one the provider returned without offsets that delimit it.'
           items:
             type: 'integer'
           maxItems: 2
@@ -12796,6 +12797,9 @@ components:
           enum:
             - 'date'
           type: 'string'
+        unit:
+          description: 'Unit label for the value.'
+          type: 'string'
       required:
         - 'type'
       type: 'object'
@@ -12820,7 +12824,7 @@ components:
           type: 'string'
           x-speakeasy-unknown-values: allow
         span:
-          description: 'Unicode code point offsets [start, end) into the state text: index code points (not UTF-16 code units or UTF-8 bytes), so an emoji or accented letter counts once.'
+          description: 'Unicode code point offsets [start, end) into the state text: index code points (not UTF-16 code units or UTF-8 bytes), so an emoji or accented letter counts once. Absent for an answer that has no offsets in the state text, for example a null answer, one read from an image or a document, or one the provider returned without offsets that delimit it.'
           items:
             type: 'integer'
           maxItems: 2
@@ -12858,6 +12862,9 @@ components:
           enum:
             - 'datetime'
           type: 'string'
+        unit:
+          description: 'Unit label for the value.'
+          type: 'string'
       required:
         - 'type'
       type: 'object'
@@ -12883,7 +12890,7 @@ components:
           type: 'string'
           x-speakeasy-unknown-values: allow
         span:
-          description: 'Unicode code point offsets [start, end) into the state text: index code points (not UTF-16 code units or UTF-8 bytes), so an emoji or accented letter counts once.'
+          description: 'Unicode code point offsets [start, end) into the state text: index code points (not UTF-16 code units or UTF-8 bytes), so an emoji or accented letter counts once. Absent for an answer that has no offsets in the state text, for example a null answer, one read from an image or a document, or one the provider returned without offsets that delimit it.'
           items:
             type: 'integer'
           maxItems: 2
@@ -12921,6 +12928,7 @@ components:
           description: 'What the field should contain.'
           type: 'string'
         integer:
+          description: 'Whole numbers only.'
           type: 'boolean'
         null_threshold:
           description: 'Probability of null above which `value` is null. Default 0.5.'
@@ -13032,7 +13040,7 @@ components:
               type: 'number'
             - type: 'string'
         null_threshold:
-          description: 'Probability of null above which `value` is null. Default 0.5.'
+          description: 'Not read on this field type: no model takes a null threshold here, and a request that sets it fails with a 400.'
           format: 'double'
           maximum: 1
           minimum: 0
@@ -13059,6 +13067,7 @@ components:
             - 'estimate'
           type: 'string'
         unit:
+          description: 'Unit label for the value.'
           type: 'string'
       required:
         - 'type'
@@ -13177,7 +13186,7 @@ components:
               type: 'number'
             - type: 'string'
         null_threshold:
-          description: 'Probability of null above which `value` is null. Default 0.5.'
+          description: 'Not read on this field type: no model takes a null threshold here, and a request that sets it fails with a 400.'
           format: 'double'
           maximum: 1
           minimum: 0
@@ -13204,6 +13213,7 @@ components:
             - 'forecast'
           type: 'string'
         unit:
+          description: 'Unit label for the value.'
           type: 'string'
       required:
         - 'type'
@@ -13291,7 +13301,7 @@ components:
           type: 'string'
           x-speakeasy-unknown-values: allow
         spans:
-          description: 'One span per item of `value`, in the same order; null for an item that has no offsets in the state text (read from an image or a document).'
+          description: 'One span per item of `value`, in the same order; null for an item that has no offsets in the state text: one read from an image or a document, or one the provider returned without offsets that delimit it.'
           items:
             description: 'Unicode code point offsets [start, end) into the state text: index code points (not UTF-16 code units or UTF-8 bytes), so an emoji or accented letter counts once.'
             items:
@@ -13334,6 +13344,9 @@ components:
         instructions:
           description: 'What the field should contain.'
           type: 'string'
+        integer:
+          description: 'Whole numbers only. Lists of numbers only.'
+          type: 'boolean'
         items:
           enum:
             - 'text'
@@ -13350,6 +13363,9 @@ components:
         type:
           enum:
             - 'list'
+          type: 'string'
+        unit:
+          description: 'Unit label for the value.'
           type: 'string'
       required:
         - 'type'
@@ -13377,7 +13393,7 @@ components:
           type: 'string'
           x-speakeasy-unknown-values: allow
         span:
-          description: 'Unicode code point offsets [start, end) into the state text: index code points (not UTF-16 code units or UTF-8 bytes), so an emoji or accented letter counts once.'
+          description: 'Unicode code point offsets [start, end) into the state text: index code points (not UTF-16 code units or UTF-8 bytes), so an emoji or accented letter counts once. Absent for an answer that has no offsets in the state text, for example a null answer, one read from an image or a document, or one the provider returned without offsets that delimit it.'
           items:
             type: 'integer'
           maxItems: 2
@@ -13412,6 +13428,7 @@ components:
           description: 'What the field should contain.'
           type: 'string'
         integer:
+          description: 'Whole numbers only.'
           type: 'boolean'
         null_threshold:
           description: 'Probability of null above which `value` is null. Default 0.5.'
@@ -13424,6 +13441,7 @@ components:
             - 'number'
           type: 'string'
         unit:
+          description: 'Unit label for the value.'
           type: 'string'
       required:
         - 'type'
@@ -13454,7 +13472,7 @@ components:
         assets:
           additionalProperties:
             $ref: '#/components/schemas/ExtractionAsset'
-          description: 'Assets keyed by reference string. Write a reference wherever the asset belongs in `state` or a field `instructions`; every asset must be referenced at least once. A `state` that is exactly the sole asset''s key carries no text of its own and is read as file-only. A model that reads either text or a document per request, not both (ScaleDown Extract with a PDF), needs that form: any other text around the key is state text and is rejected with 400.'
+          description: 'Assets keyed by reference string. Write a reference wherever the asset belongs in `state` or a field `instructions`; every asset must be referenced at least once, unless `state` is empty or omitted, in which case the assets are read without a reference. A `state` that is exactly the sole asset''s key carries no text of its own and is read as file-only. A model that reads either text or a document per request, not both (ScaleDown Extract with a PDF), takes that form or an empty or omitted `state`: any other text around the key is state text and is rejected with 400.'
           type: 'object'
         fields:
           additionalProperties:
@@ -13499,7 +13517,8 @@ components:
           maxLength: 256
           type: 'string'
         state:
-          description: 'The text to read from. May be empty only when the request carries image assets.'
+          default: ''
+          description: 'The text to read from. May be empty or omitted only when the request carries assets, which are then read without being referenced by key.'
           type: 'string'
         trace:
           $ref: '#/components/schemas/TraceConfig'
@@ -13508,7 +13527,6 @@ components:
           type: 'string'
       required:
         - 'model'
-        - 'state'
         - 'fields'
       type: 'object'
     ExtractionsResponse:
@@ -13603,7 +13621,7 @@ components:
           type: 'string'
           x-speakeasy-unknown-values: allow
         span:
-          description: 'Unicode code point offsets [start, end) into the state text: index code points (not UTF-16 code units or UTF-8 bytes), so an emoji or accented letter counts once.'
+          description: 'Unicode code point offsets [start, end) into the state text: index code points (not UTF-16 code units or UTF-8 bytes), so an emoji or accented letter counts once. Absent for an answer that has no offsets in the state text, for example a null answer, one read from an image or a document, or one the provider returned without offsets that delimit it.'
           items:
             type: 'integer'
           maxItems: 2
@@ -13641,6 +13659,9 @@ components:
           enum:
             - 'text'
           type: 'string'
+        unit:
+          description: 'Unit label for the value.'
+          type: 'string'
       required:
         - 'type'
       type: 'object'
@@ -13665,7 +13686,7 @@ components:
           type: 'string'
           x-speakeasy-unknown-values: allow
         span:
-          description: 'Unicode code point offsets [start, end) into the state text: index code points (not UTF-16 code units or UTF-8 bytes), so an emoji or accented letter counts once.'
+          description: 'Unicode code point offsets [start, end) into the state text: index code points (not UTF-16 code units or UTF-8 bytes), so an emoji or accented letter counts once. Absent for an answer that has no offsets in the state text, for example a null answer, one read from an image or a document, or one the provider returned without offsets that delimit it.'
           items:
             type: 'integer'
           maxItems: 2
@@ -13702,6 +13723,9 @@ components:
         type:
           enum:
             - 'time'
+          type: 'string'
+        unit:
+          description: 'Unit label for the value.'
           type: 'string'
       required:
         - 'type'
@@ -36863,7 +36887,7 @@ components:
         name: 'Updated Langfuse'
       properties:
         api_key_hashes:
-          description: 'Optional allowlist of OpenRouter API key hashes. `null` clears the filter (all keys). Omitting leaves the current value. Must contain at least one hash if provided.'
+          description: 'Optional allowlist of OpenRouter API key hashes. `null` clears the filter (all keys). Omitting leaves the current value, including any API key from another workspace that an organization-scoped key attached. Must contain at least one hash if provided. A workspace-scoped management key can only name API keys in its own workspace; any other hash returns 400.'
           example: null
           items:
             type: 'string'
@@ -53013,7 +53037,7 @@ paths:
       - $ref: "#/components/parameters/AppCategories"
   /observability/destinations:
     get:
-      description: 'List the observability destinations configured for the authenticated entity''s default workspace. Use the `workspace_id` query parameter to scope the result to a different workspace. Only destinations with stable release status are surfaced — destinations of other types are excluded. [Management key](/docs/guides/overview/auth/management-api-keys) required.'
+      description: 'List the observability destinations configured for the authenticated entity''s default workspace, or a workspace-scoped management key''s own workspace. Use the `workspace_id` query parameter to scope the result to a different workspace. A workspace-scoped management key can only list its own workspace; any other `workspace_id` returns 403. Only destinations with stable release status are surfaced — destinations of other types are excluded. [Management key](/docs/guides/overview/auth/management-api-keys) required.'
       operationId: 'listObservabilityDestinations'
       parameters:
         - description: 'Number of records to skip for pagination'
@@ -53040,12 +53064,12 @@ paths:
             maximum: 100
             minimum: 1
             type: 'integer'
-        - description: 'Optional workspace ID to filter by. Defaults to the authenticated entity''s default workspace.'
+        - description: 'Optional workspace ID to filter by. Defaults to the authenticated entity''s default workspace, or a workspace-scoped management key''s own workspace.'
           in: 'query'
           name: 'workspace_id'
           required: false
           schema:
-            description: 'Optional workspace ID to filter by. Defaults to the authenticated entity''s default workspace.'
+            description: 'Optional workspace ID to filter by. Defaults to the authenticated entity''s default workspace, or a workspace-scoped management key''s own workspace.'
             example: '550e8400-e29b-41d4-a716-446655440000'
             format: 'uuid'
             type: 'string'
@@ -53136,7 +53160,7 @@ paths:
           results: '$.data'
         type: 'offsetLimit'
     post:
-      description: 'Create a new observability destination. A maximum of 5 destinations per type is allowed. Defaults to the authenticated entity''s default workspace; use the `workspace_id` body field to scope to a different workspace. [Management key](/docs/guides/overview/auth/management-api-keys) required.'
+      description: 'Create a new observability destination. A maximum of 5 destinations per type is allowed. Defaults to the authenticated entity''s default workspace, or a workspace-scoped management key''s own workspace; use the `workspace_id` body field to scope to a different workspace. A workspace-scoped management key can only create in its own workspace; any other `workspace_id` returns 403. [Management key](/docs/guides/overview/auth/management-api-keys) required.'
       operationId: 'createObservabilityDestination'
       requestBody:
         content:
@@ -53241,7 +53265,7 @@ paths:
       - $ref: "#/components/parameters/AppCategories"
   /observability/destinations/{id}:
     delete:
-      description: 'Delete an existing observability destination. This performs a soft delete. [Management key](/docs/guides/overview/auth/management-api-keys) required.'
+      description: 'Delete an existing observability destination. This performs a soft delete. A workspace-scoped management key only reaches destinations in its own workspace; any other `id` returns 404. [Management key](/docs/guides/overview/auth/management-api-keys) required.'
       operationId: 'deleteObservabilityDestination'
       parameters:
         - description: 'The destination ID (UUID).'
@@ -53307,7 +53331,7 @@ paths:
         - 'Observability'
       x-speakeasy-name-override: 'delete'
     get:
-      description: 'Fetch a single observability destination by its UUID. [Management key](/docs/guides/overview/auth/management-api-keys) required.'
+      description: 'Fetch a single observability destination by its UUID. A workspace-scoped management key only reaches destinations in its own workspace; any other `id` returns 404. [Management key](/docs/guides/overview/auth/management-api-keys) required.'
       operationId: 'getObservabilityDestination'
       parameters:
         - description: 'The destination ID (UUID).'
@@ -53394,7 +53418,7 @@ paths:
         - 'Observability'
       x-speakeasy-name-override: 'get'
     patch:
-      description: 'Update an existing observability destination. Only the fields provided in the request body are updated. [Management key](/docs/guides/overview/auth/management-api-keys) required.'
+      description: 'Update an existing observability destination. Only the fields provided in the request body are updated. A workspace-scoped management key only reaches destinations in its own workspace; any other `id` returns 404. [Management key](/docs/guides/overview/auth/management-api-keys) required.'
       operationId: 'updateObservabilityDestination'
       parameters:
         - description: 'The destination ID (UUID).'

@@ -29,7 +29,7 @@ class Observability(BaseSDK):
     ) -> Optional[operations.ListObservabilityDestinationsResponse]:
         r"""List observability destinations
 
-        List the observability destinations configured for the authenticated entity's default workspace. Use the `workspace_id` query parameter to scope the result to a different workspace. Only destinations with stable release status are surfaced — destinations of other types are excluded. [Management key](/docs/guides/overview/auth/management-api-keys) required.
+        List the observability destinations configured for the authenticated entity's default workspace, or a workspace-scoped management key's own workspace. Use the `workspace_id` query parameter to scope the result to a different workspace. A workspace-scoped management key can only list its own workspace; any other `workspace_id` returns 403. Only destinations with stable release status are surfaced — destinations of other types are excluded. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
@@ -40,7 +40,7 @@ class Observability(BaseSDK):
 
         :param offset: Number of records to skip for pagination
         :param limit: Maximum number of records to return (max 100)
-        :param workspace_id: Optional workspace ID to filter by. Defaults to the authenticated entity's default workspace.
+        :param workspace_id: Optional workspace ID to filter by. Defaults to the authenticated entity's default workspace, or a workspace-scoped management key's own workspace.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -201,7 +201,7 @@ class Observability(BaseSDK):
     ) -> Optional[operations.ListObservabilityDestinationsResponse]:
         r"""List observability destinations
 
-        List the observability destinations configured for the authenticated entity's default workspace. Use the `workspace_id` query parameter to scope the result to a different workspace. Only destinations with stable release status are surfaced — destinations of other types are excluded. [Management key](/docs/guides/overview/auth/management-api-keys) required.
+        List the observability destinations configured for the authenticated entity's default workspace, or a workspace-scoped management key's own workspace. Use the `workspace_id` query parameter to scope the result to a different workspace. A workspace-scoped management key can only list its own workspace; any other `workspace_id` returns 403. Only destinations with stable release status are surfaced — destinations of other types are excluded. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
@@ -212,7 +212,7 @@ class Observability(BaseSDK):
 
         :param offset: Number of records to skip for pagination
         :param limit: Maximum number of records to return (max 100)
-        :param workspace_id: Optional workspace ID to filter by. Defaults to the authenticated entity's default workspace.
+        :param workspace_id: Optional workspace ID to filter by. Defaults to the authenticated entity's default workspace, or a workspace-scoped management key's own workspace.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -394,7 +394,7 @@ class Observability(BaseSDK):
     ) -> components.CreateObservabilityDestinationResponse:
         r"""Create an observability destination
 
-        Create a new observability destination. A maximum of 5 destinations per type is allowed. Defaults to the authenticated entity's default workspace; use the `workspace_id` body field to scope to a different workspace. [Management key](/docs/guides/overview/auth/management-api-keys) required.
+        Create a new observability destination. A maximum of 5 destinations per type is allowed. Defaults to the authenticated entity's default workspace, or a workspace-scoped management key's own workspace; use the `workspace_id` body field to scope to a different workspace. A workspace-scoped management key can only create in its own workspace; any other `workspace_id` returns 403. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param config: Provider-specific configuration. The shape depends on `type` and is validated server-side.
         :param name: Human-readable name for the destination.
@@ -406,7 +406,7 @@ class Observability(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
-        :param api_key_hashes: Optional allowlist of OpenRouter API key hashes whose traffic is forwarded. `null` or omitted means all keys. Must contain at least one hash if provided.
+        :param api_key_hashes: Optional allowlist of OpenRouter API key hashes whose traffic is forwarded. `null` or omitted means all keys. Must contain at least one hash if provided. A workspace-scoped management key can only name API keys in its own workspace; any other hash returns 400.
         :param broadcast_generation_cost: When true, include cost and billing generation metadata.
         :param broadcast_generation_cost_allocation: Beta. When true, include openrouter_cost_allocation: per-token-kind usage and cost, sent only when they reconcile with the billed cost.
         :param broadcast_generation_identity: When true, include identity generation metadata.
@@ -416,7 +416,7 @@ class Observability(BaseSDK):
         :param privacy_mode: When true, request/response bodies are not forwarded — only metadata.
         :param regions: Data regions this destination applies to. `eu` is accepted as an alias for `europe` and normalizes to `europe`. Omitting this field defaults to ['global']; the array must be non-empty.
         :param sampling_rate: Sampling rate between 0.0001 and 1 (1 = 100%).
-        :param workspace_id: Optional workspace ID. Defaults to the authenticated entity's default workspace.
+        :param workspace_id: Optional workspace ID. Defaults to the authenticated entity's default workspace, or a workspace-scoped management key's own workspace.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -594,7 +594,7 @@ class Observability(BaseSDK):
     ) -> components.CreateObservabilityDestinationResponse:
         r"""Create an observability destination
 
-        Create a new observability destination. A maximum of 5 destinations per type is allowed. Defaults to the authenticated entity's default workspace; use the `workspace_id` body field to scope to a different workspace. [Management key](/docs/guides/overview/auth/management-api-keys) required.
+        Create a new observability destination. A maximum of 5 destinations per type is allowed. Defaults to the authenticated entity's default workspace, or a workspace-scoped management key's own workspace; use the `workspace_id` body field to scope to a different workspace. A workspace-scoped management key can only create in its own workspace; any other `workspace_id` returns 403. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param config: Provider-specific configuration. The shape depends on `type` and is validated server-side.
         :param name: Human-readable name for the destination.
@@ -606,7 +606,7 @@ class Observability(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
-        :param api_key_hashes: Optional allowlist of OpenRouter API key hashes whose traffic is forwarded. `null` or omitted means all keys. Must contain at least one hash if provided.
+        :param api_key_hashes: Optional allowlist of OpenRouter API key hashes whose traffic is forwarded. `null` or omitted means all keys. Must contain at least one hash if provided. A workspace-scoped management key can only name API keys in its own workspace; any other hash returns 400.
         :param broadcast_generation_cost: When true, include cost and billing generation metadata.
         :param broadcast_generation_cost_allocation: Beta. When true, include openrouter_cost_allocation: per-token-kind usage and cost, sent only when they reconcile with the billed cost.
         :param broadcast_generation_identity: When true, include identity generation metadata.
@@ -616,7 +616,7 @@ class Observability(BaseSDK):
         :param privacy_mode: When true, request/response bodies are not forwarded — only metadata.
         :param regions: Data regions this destination applies to. `eu` is accepted as an alias for `europe` and normalizes to `europe`. Omitting this field defaults to ['global']; the array must be non-empty.
         :param sampling_rate: Sampling rate between 0.0001 and 1 (1 = 100%).
-        :param workspace_id: Optional workspace ID. Defaults to the authenticated entity's default workspace.
+        :param workspace_id: Optional workspace ID. Defaults to the authenticated entity's default workspace, or a workspace-scoped management key's own workspace.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -776,7 +776,7 @@ class Observability(BaseSDK):
     ) -> components.DeleteObservabilityDestinationResponse:
         r"""Delete an observability destination
 
-        Delete an existing observability destination. This performs a soft delete. [Management key](/docs/guides/overview/auth/management-api-keys) required.
+        Delete an existing observability destination. This performs a soft delete. A workspace-scoped management key only reaches destinations in its own workspace; any other `id` returns 404. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param id: The destination ID (UUID).
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
@@ -911,7 +911,7 @@ class Observability(BaseSDK):
     ) -> components.DeleteObservabilityDestinationResponse:
         r"""Delete an observability destination
 
-        Delete an existing observability destination. This performs a soft delete. [Management key](/docs/guides/overview/auth/management-api-keys) required.
+        Delete an existing observability destination. This performs a soft delete. A workspace-scoped management key only reaches destinations in its own workspace; any other `id` returns 404. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param id: The destination ID (UUID).
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
@@ -1046,7 +1046,7 @@ class Observability(BaseSDK):
     ) -> components.GetObservabilityDestinationResponse:
         r"""Get an observability destination
 
-        Fetch a single observability destination by its UUID. [Management key](/docs/guides/overview/auth/management-api-keys) required.
+        Fetch a single observability destination by its UUID. A workspace-scoped management key only reaches destinations in its own workspace; any other `id` returns 404. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param id: The destination ID (UUID).
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
@@ -1181,7 +1181,7 @@ class Observability(BaseSDK):
     ) -> components.GetObservabilityDestinationResponse:
         r"""Get an observability destination
 
-        Fetch a single observability destination by its UUID. [Management key](/docs/guides/overview/auth/management-api-keys) required.
+        Fetch a single observability destination by its UUID. A workspace-scoped management key only reaches destinations in its own workspace; any other `id` returns 404. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param id: The destination ID (UUID).
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
@@ -1333,7 +1333,7 @@ class Observability(BaseSDK):
     ) -> components.UpdateObservabilityDestinationResponse:
         r"""Update an observability destination
 
-        Update an existing observability destination. Only the fields provided in the request body are updated. [Management key](/docs/guides/overview/auth/management-api-keys) required.
+        Update an existing observability destination. Only the fields provided in the request body are updated. A workspace-scoped management key only reaches destinations in its own workspace; any other `id` returns 404. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param id: The destination ID (UUID).
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
@@ -1343,7 +1343,7 @@ class Observability(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
-        :param api_key_hashes: Optional allowlist of OpenRouter API key hashes. `null` clears the filter (all keys). Omitting leaves the current value. Must contain at least one hash if provided.
+        :param api_key_hashes: Optional allowlist of OpenRouter API key hashes. `null` clears the filter (all keys). Omitting leaves the current value, including any API key from another workspace that an organization-scoped key attached. Must contain at least one hash if provided. A workspace-scoped management key can only name API keys in its own workspace; any other hash returns 400.
         :param broadcast_generation_cost: Whether to include cost and billing generation metadata.
         :param broadcast_generation_cost_allocation: Beta. When true, include openrouter_cost_allocation: per-token-kind usage and cost, sent only when they reconcile with the billed cost.
         :param broadcast_generation_identity: Whether to include identity generation metadata.
@@ -1535,7 +1535,7 @@ class Observability(BaseSDK):
     ) -> components.UpdateObservabilityDestinationResponse:
         r"""Update an observability destination
 
-        Update an existing observability destination. Only the fields provided in the request body are updated. [Management key](/docs/guides/overview/auth/management-api-keys) required.
+        Update an existing observability destination. Only the fields provided in the request body are updated. A workspace-scoped management key only reaches destinations in its own workspace; any other `id` returns 404. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param id: The destination ID (UUID).
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
@@ -1545,7 +1545,7 @@ class Observability(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
-        :param api_key_hashes: Optional allowlist of OpenRouter API key hashes. `null` clears the filter (all keys). Omitting leaves the current value. Must contain at least one hash if provided.
+        :param api_key_hashes: Optional allowlist of OpenRouter API key hashes. `null` clears the filter (all keys). Omitting leaves the current value, including any API key from another workspace that an organization-scoped key attached. Must contain at least one hash if provided. A workspace-scoped management key can only name API keys in its own workspace; any other hash returns 400.
         :param broadcast_generation_cost: Whether to include cost and billing generation metadata.
         :param broadcast_generation_cost_allocation: Beta. When true, include openrouter_cost_allocation: per-token-kind usage and cost, sent only when they reconcile with the billed cost.
         :param broadcast_generation_identity: Whether to include identity generation metadata.

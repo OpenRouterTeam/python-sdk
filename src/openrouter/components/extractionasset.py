@@ -13,6 +13,7 @@ ExtractionAssetFormat = Union[
         "png",
         "jpg",
         "jpeg",
+        "webp",
         "pdf",
     ],
     UnrecognizedStr,
@@ -29,7 +30,7 @@ ExtractionAssetType = Union[
 
 
 class ExtractionAssetTypedDict(TypedDict):
-    r"""An image or PDF sent once and referenced by its key in the `assets` map. `data_base64` is the file in standard base64 with no `data:` prefix. PDF is read by document models only."""
+    r"""An image or PDF sent once and referenced by its key in the `assets` map. `data_base64` is the file in standard base64 with no `data:` prefix. Which formats are read is model-specific: a format the model cannot read fails with a 400."""
 
     data_base64: str
     format_: ExtractionAssetFormat
@@ -37,7 +38,7 @@ class ExtractionAssetTypedDict(TypedDict):
 
 
 class ExtractionAsset(BaseModel):
-    r"""An image or PDF sent once and referenced by its key in the `assets` map. `data_base64` is the file in standard base64 with no `data:` prefix. PDF is read by document models only."""
+    r"""An image or PDF sent once and referenced by its key in the `assets` map. `data_base64` is the file in standard base64 with no `data:` prefix. Which formats are read is model-specific: a format the model cannot read fails with a 400."""
 
     data_base64: str
 

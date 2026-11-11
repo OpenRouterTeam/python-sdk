@@ -45,9 +45,9 @@ FieldsTypedDict = TypeAliasType(
         ExtractionDateFieldTypedDict,
         ExtractionTimeFieldTypedDict,
         ExtractionDatetimeFieldTypedDict,
-        ExtractionListFieldTypedDict,
         ExtractionNumberFieldTypedDict,
         ExtractionDurationFieldTypedDict,
+        ExtractionListFieldTypedDict,
         ExtractionEstimateFieldTypedDict,
         ExtractionForecastFieldTypedDict,
     ],
@@ -76,15 +76,15 @@ class ExtractionsRequestTypedDict(TypedDict):
     fields: Dict[str, FieldsTypedDict]
     r"""Map of field name to typed field spec."""
     model: str
-    state: str
-    r"""The text to read from. May be empty only when the request carries image assets."""
     assets: NotRequired[Dict[str, ExtractionAssetTypedDict]]
-    r"""Assets keyed by reference string. Write a reference wherever the asset belongs in `state` or a field `instructions`; every asset must be referenced at least once. A `state` that is exactly the sole asset's key carries no text of its own and is read as file-only. A model that reads either text or a document per request, not both (ScaleDown Extract with a PDF), needs that form: any other text around the key is state text and is rejected with 400."""
+    r"""Assets keyed by reference string. Write a reference wherever the asset belongs in `state` or a field `instructions`; every asset must be referenced at least once, unless `state` is empty or omitted, in which case the assets are read without a reference. A `state` that is exactly the sole asset's key carries no text of its own and is read as file-only. A model that reads either text or a document per request, not both (ScaleDown Extract with a PDF), takes that form or an empty or omitted `state`: any other text around the key is state text and is rejected with 400."""
     provider: NotRequired[Nullable[ProviderPreferencesTypedDict]]
     reference_date: NotRequired[str]
     r"""ISO date that anchors dates written without a year."""
     session_id: NotRequired[str]
     r"""A unique identifier for grouping related requests (e.g., a conversation or agent workflow). Used for observability grouping in Broadcast and private logging; never sent to the provider. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters."""
+    state: NotRequired[str]
+    r"""The text to read from. May be empty or omitted only when the request carries assets, which are then read without being referenced by key."""
     trace: NotRequired[TraceConfigTypedDict]
     r"""Metadata for observability and tracing. Known keys (trace_id, trace_name, span_name, generation_name, parent_span_id) have special handling. Additional keys are passed through as custom metadata to configured broadcast destinations."""
     user: NotRequired[str]
@@ -96,11 +96,8 @@ class ExtractionsRequest(BaseModel):
 
     model: str
 
-    state: str
-    r"""The text to read from. May be empty only when the request carries image assets."""
-
     assets: Optional[Dict[str, ExtractionAsset]] = None
-    r"""Assets keyed by reference string. Write a reference wherever the asset belongs in `state` or a field `instructions`; every asset must be referenced at least once. A `state` that is exactly the sole asset's key carries no text of its own and is read as file-only. A model that reads either text or a document per request, not both (ScaleDown Extract with a PDF), needs that form: any other text around the key is state text and is rejected with 400."""
+    r"""Assets keyed by reference string. Write a reference wherever the asset belongs in `state` or a field `instructions`; every asset must be referenced at least once, unless `state` is empty or omitted, in which case the assets are read without a reference. A `state` that is exactly the sole asset's key carries no text of its own and is read as file-only. A model that reads either text or a document per request, not both (ScaleDown Extract with a PDF), takes that form or an empty or omitted `state`: any other text around the key is state text and is rejected with 400."""
 
     provider: OptionalNullable[ProviderPreferences] = UNSET
 
@@ -110,6 +107,9 @@ class ExtractionsRequest(BaseModel):
     session_id: Optional[str] = None
     r"""A unique identifier for grouping related requests (e.g., a conversation or agent workflow). Used for observability grouping in Broadcast and private logging; never sent to the provider. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters."""
 
+    state: Optional[str] = ""
+    r"""The text to read from. May be empty or omitted only when the request carries assets, which are then read without being referenced by key."""
+
     trace: Optional[TraceConfig] = None
     r"""Metadata for observability and tracing. Known keys (trace_id, trace_name, span_name, generation_name, parent_span_id) have special handling. Additional keys are passed through as custom metadata to configured broadcast destinations."""
 
@@ -118,7 +118,15 @@ class ExtractionsRequest(BaseModel):
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
-            ["assets", "provider", "reference_date", "session_id", "trace", "user"]
+            [
+                "assets",
+                "provider",
+                "reference_date",
+                "session_id",
+                "state",
+                "trace",
+                "user",
+            ]
         )
         nullable_fields = set(["provider"])
         serialized = handler(self)

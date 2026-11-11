@@ -19,7 +19,6 @@ class Extractions(BaseSDK):
             Mapping[str, components.Fields], Mapping[str, components.FieldsTypedDict]
         ],
         model: str,
-        state: str,
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
@@ -36,6 +35,7 @@ class Extractions(BaseSDK):
         ] = UNSET,
         reference_date: Optional[str] = None,
         session_id: Optional[str] = None,
+        state: Optional[str] = "",
         trace: Optional[
             Union[components.TraceConfig, components.TraceConfigTypedDict]
         ] = None,
@@ -51,7 +51,6 @@ class Extractions(BaseSDK):
 
         :param fields: Map of field name to typed field spec.
         :param model:
-        :param state: The text to read from. May be empty only when the request carries image assets.
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
@@ -59,10 +58,11 @@ class Extractions(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
-        :param assets: Assets keyed by reference string. Write a reference wherever the asset belongs in `state` or a field `instructions`; every asset must be referenced at least once. A `state` that is exactly the sole asset's key carries no text of its own and is read as file-only. A model that reads either text or a document per request, not both (ScaleDown Extract with a PDF), needs that form: any other text around the key is state text and is rejected with 400.
+        :param assets: Assets keyed by reference string. Write a reference wherever the asset belongs in `state` or a field `instructions`; every asset must be referenced at least once, unless `state` is empty or omitted, in which case the assets are read without a reference. A `state` that is exactly the sole asset's key carries no text of its own and is read as file-only. A model that reads either text or a document per request, not both (ScaleDown Extract with a PDF), takes that form or an empty or omitted `state`: any other text around the key is state text and is rejected with 400.
         :param provider:
         :param reference_date: ISO date that anchors dates written without a year.
         :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow). Used for observability grouping in Broadcast and private logging; never sent to the provider. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters.
+        :param state: The text to read from. May be empty or omitted only when the request carries assets, which are then read without being referenced by key.
         :param trace: Metadata for observability and tracing. Known keys (trace_id, trace_name, span_name, generation_name, parent_span_id) have special handling. Additional keys are passed through as custom metadata to configured broadcast destinations.
         :param user:
         :param retries: Override the default retry configuration for this method
@@ -242,7 +242,6 @@ class Extractions(BaseSDK):
             Mapping[str, components.Fields], Mapping[str, components.FieldsTypedDict]
         ],
         model: str,
-        state: str,
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
@@ -259,6 +258,7 @@ class Extractions(BaseSDK):
         ] = UNSET,
         reference_date: Optional[str] = None,
         session_id: Optional[str] = None,
+        state: Optional[str] = "",
         trace: Optional[
             Union[components.TraceConfig, components.TraceConfigTypedDict]
         ] = None,
@@ -274,7 +274,6 @@ class Extractions(BaseSDK):
 
         :param fields: Map of field name to typed field spec.
         :param model:
-        :param state: The text to read from. May be empty only when the request carries image assets.
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
@@ -282,10 +281,11 @@ class Extractions(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
-        :param assets: Assets keyed by reference string. Write a reference wherever the asset belongs in `state` or a field `instructions`; every asset must be referenced at least once. A `state` that is exactly the sole asset's key carries no text of its own and is read as file-only. A model that reads either text or a document per request, not both (ScaleDown Extract with a PDF), needs that form: any other text around the key is state text and is rejected with 400.
+        :param assets: Assets keyed by reference string. Write a reference wherever the asset belongs in `state` or a field `instructions`; every asset must be referenced at least once, unless `state` is empty or omitted, in which case the assets are read without a reference. A `state` that is exactly the sole asset's key carries no text of its own and is read as file-only. A model that reads either text or a document per request, not both (ScaleDown Extract with a PDF), takes that form or an empty or omitted `state`: any other text around the key is state text and is rejected with 400.
         :param provider:
         :param reference_date: ISO date that anchors dates written without a year.
         :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow). Used for observability grouping in Broadcast and private logging; never sent to the provider. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters.
+        :param state: The text to read from. May be empty or omitted only when the request carries assets, which are then read without being referenced by key.
         :param trace: Metadata for observability and tracing. Known keys (trace_id, trace_name, span_name, generation_name, parent_span_id) have special handling. Additional keys are passed through as custom metadata to configured broadcast destinations.
         :param user:
         :param retries: Override the default retry configuration for this method

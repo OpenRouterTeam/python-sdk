@@ -20,7 +20,7 @@ from typing_extensions import NotRequired, TypedDict
 
 class UpdateObservabilityDestinationRequestTypedDict(TypedDict):
     api_key_hashes: NotRequired[Nullable[List[str]]]
-    r"""Optional allowlist of OpenRouter API key hashes. `null` clears the filter (all keys). Omitting leaves the current value. Must contain at least one hash if provided."""
+    r"""Optional allowlist of OpenRouter API key hashes. `null` clears the filter (all keys). Omitting leaves the current value, including any API key from another workspace that an organization-scoped key attached. Must contain at least one hash if provided. A workspace-scoped management key can only name API keys in its own workspace; any other hash returns 400."""
     broadcast_generation_cost: NotRequired[bool]
     r"""Whether to include cost and billing generation metadata."""
     broadcast_generation_cost_allocation: NotRequired[bool]
@@ -46,7 +46,7 @@ class UpdateObservabilityDestinationRequestTypedDict(TypedDict):
 
 class UpdateObservabilityDestinationRequest(BaseModel):
     api_key_hashes: OptionalNullable[List[str]] = UNSET
-    r"""Optional allowlist of OpenRouter API key hashes. `null` clears the filter (all keys). Omitting leaves the current value. Must contain at least one hash if provided."""
+    r"""Optional allowlist of OpenRouter API key hashes. `null` clears the filter (all keys). Omitting leaves the current value, including any API key from another workspace that an organization-scoped key attached. Must contain at least one hash if provided. A workspace-scoped management key can only name API keys in its own workspace; any other hash returns 400."""
 
     broadcast_generation_cost: Optional[bool] = None
     r"""Whether to include cost and billing generation metadata."""

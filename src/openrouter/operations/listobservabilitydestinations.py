@@ -95,7 +95,7 @@ class ListObservabilityDestinationsRequestTypedDict(TypedDict):
     limit: NotRequired[int]
     r"""Maximum number of records to return (max 100)"""
     workspace_id: NotRequired[str]
-    r"""Optional workspace ID to filter by. Defaults to the authenticated entity's default workspace."""
+    r"""Optional workspace ID to filter by. Defaults to the authenticated entity's default workspace, or a workspace-scoped management key's own workspace."""
 
 
 class ListObservabilityDestinationsRequest(BaseModel):
@@ -143,7 +143,7 @@ class ListObservabilityDestinationsRequest(BaseModel):
         Optional[str],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
-    r"""Optional workspace ID to filter by. Defaults to the authenticated entity's default workspace."""
+    r"""Optional workspace ID to filter by. Defaults to the authenticated entity's default workspace, or a workspace-scoped management key's own workspace."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

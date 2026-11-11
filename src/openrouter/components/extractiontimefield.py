@@ -16,6 +16,8 @@ class ExtractionTimeFieldTypedDict(TypedDict):
     r"""What the field should contain."""
     null_threshold: NotRequired[float]
     r"""Probability of null above which `value` is null. Default 0.5."""
+    unit: NotRequired[str]
+    r"""Unit label for the value."""
 
 
 class ExtractionTimeField(BaseModel):
@@ -27,9 +29,12 @@ class ExtractionTimeField(BaseModel):
     null_threshold: Optional[float] = None
     r"""Probability of null above which `value` is null. Default 0.5."""
 
+    unit: Optional[str] = None
+    r"""Unit label for the value."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["instructions", "null_threshold"])
+        optional_fields = set(["instructions", "null_threshold", "unit"])
         serialized = handler(self)
         m = {}
 
