@@ -46,6 +46,8 @@ from .paretorouterplugin import ParetoRouterPlugin, ParetoRouterPluginTypedDict
 from .prediction import Prediction, PredictionTypedDict
 from .promptcacheoptions import PromptCacheOptions, PromptCacheOptionsTypedDict
 from .providerpreferences import ProviderPreferences, ProviderPreferencesTypedDict
+from .reasoningcontext import ReasoningContext
+from .reasoningmode import ReasoningMode
 from .responsehealingplugin import ResponseHealingPlugin, ResponseHealingPluginTypedDict
 from .stopservertoolswhencondition import (
     StopServerToolsWhenCondition,
@@ -142,28 +144,50 @@ r"""Constrains effort on reasoning for reasoning models"""
 class ChatRequestReasoningTypedDict(TypedDict):
     r"""Configuration options for reasoning models"""
 
+    context: NotRequired[Nullable[ReasoningContext]]
+    r"""Controls which reasoning is available to the model. `auto` uses the model default (same as omitting); `all_turns` includes reasoning from earlier turns passed in input; `current_turn` limits to the current turn only. Only supported by OpenAI GPT-5.6 and newer."""
     effort: NotRequired[Nullable[ChatRequestEffort]]
     r"""Constrains effort on reasoning for reasoning models"""
+    enabled: NotRequired[bool]
+    r"""Enables reasoning with default settings. Defaults to being inferred from `effort` or `max_tokens`."""
+    exclude: NotRequired[bool]
+    r"""When true, the model still reasons but the reasoning is omitted from the response. Defaults to false."""
     max_tokens: NotRequired[Nullable[int]]
     r"""Maximum number of tokens the model may spend on reasoning, for models that take a reasoning token budget instead of an effort level. Cannot be combined with `reasoning.effort` or the top-level `reasoning_effort`: a request that sets both is rejected with \"Only one of \"reasoning.effort\" and \"reasoning.max_tokens\" can be specified\"."""
+    mode: NotRequired[Nullable[ReasoningMode]]
+    r"""Selects the reasoning mode. `standard` is the default; `pro` engages deeper reasoning on models that support it, billed at standard token rates. Only supported by OpenAI GPT-5.6 and newer."""
     summary: NotRequired[Nullable[ChatReasoningSummaryVerbosityEnum]]
 
 
 class ChatRequestReasoning(BaseModel):
     r"""Configuration options for reasoning models"""
 
+    context: OptionalNullable[ReasoningContext] = UNSET
+    r"""Controls which reasoning is available to the model. `auto` uses the model default (same as omitting); `all_turns` includes reasoning from earlier turns passed in input; `current_turn` limits to the current turn only. Only supported by OpenAI GPT-5.6 and newer."""
+
     effort: OptionalNullable[ChatRequestEffort] = UNSET
     r"""Constrains effort on reasoning for reasoning models"""
 
+    enabled: Optional[bool] = None
+    r"""Enables reasoning with default settings. Defaults to being inferred from `effort` or `max_tokens`."""
+
+    exclude: Optional[bool] = None
+    r"""When true, the model still reasons but the reasoning is omitted from the response. Defaults to false."""
+
     max_tokens: OptionalNullable[int] = UNSET
     r"""Maximum number of tokens the model may spend on reasoning, for models that take a reasoning token budget instead of an effort level. Cannot be combined with `reasoning.effort` or the top-level `reasoning_effort`: a request that sets both is rejected with \"Only one of \"reasoning.effort\" and \"reasoning.max_tokens\" can be specified\"."""
+
+    mode: OptionalNullable[ReasoningMode] = UNSET
+    r"""Selects the reasoning mode. `standard` is the default; `pro` engages deeper reasoning on models that support it, billed at standard token rates. Only supported by OpenAI GPT-5.6 and newer."""
 
     summary: OptionalNullable[ChatReasoningSummaryVerbosityEnum] = UNSET
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["effort", "max_tokens", "summary"])
-        nullable_fields = set(["effort", "max_tokens", "summary"])
+        optional_fields = set(
+            ["context", "effort", "enabled", "exclude", "max_tokens", "mode", "summary"]
+        )
+        nullable_fields = set(["context", "effort", "max_tokens", "mode", "summary"])
         serialized = handler(self)
         m = {}
 
