@@ -110,6 +110,7 @@ ProviderName = Union[
         "Seed",
         "SiliconFlow",
         "Sourceful",
+        "Speechify",
         "StepFun",
         "Stealth",
         "StreamLake",
