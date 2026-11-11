@@ -168,7 +168,7 @@ class SpeechRequestTypedDict(TypedDict):
     r"""Text-to-speech request input"""
 
     input: SpeechInputTypedDict
-    r"""Text to synthesize, or a list of turns for multi-speaker input. Each turn has its own text, voice, and instructions. Multi-speaker input is supported by Gemini TTS models and by Fish Audio models other than S1."""
+    r"""Text to synthesize, or a list of turns for multi-speaker input. Each turn has its own text, voice, and instructions. Multi-speaker input is supported by Gemini TTS models, by Fish Audio models other than S1, and by Speechify dialogue models."""
     model: str
     r"""TTS model identifier"""
     input_references: NotRequired[List[SpeechInputReferenceTypedDict]]
@@ -195,7 +195,7 @@ class SpeechRequest(BaseModel):
     r"""Text-to-speech request input"""
 
     input: SpeechInput
-    r"""Text to synthesize, or a list of turns for multi-speaker input. Each turn has its own text, voice, and instructions. Multi-speaker input is supported by Gemini TTS models and by Fish Audio models other than S1."""
+    r"""Text to synthesize, or a list of turns for multi-speaker input. Each turn has its own text, voice, and instructions. Multi-speaker input is supported by Gemini TTS models, by Fish Audio models other than S1, and by Speechify dialogue models."""
 
     model: str
     r"""TTS model identifier"""
