@@ -55,7 +55,7 @@ def main():
     # Step 4: After authorization, the callback URL receives an authorization code
     # Step 5: Exchange the code for an API key using the SDK's exchange method
     # code = "authorization-code-from-callback"
-    # api_key_response = client.o_auth.exchange_auth_code_for_api_key(
+    # api_key_response = client.oauth.exchange_auth_code_for_api_key(
     #     code=code,
     #     code_verifier=result.code_verifier,
     #     code_challenge_method="S256",

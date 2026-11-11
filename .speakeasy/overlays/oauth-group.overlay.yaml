@@ -1,0 +1,19 @@
+overlay: 1.0.0
+x-speakeasy-jsonpath: rfc9535
+info:
+  title: Expose the OAuth operations as `oauth` rather than `o_auth`
+  version: 0.0.0
+actions:
+  # The `OAuth` tag splits on its internal capital, so the SDK attribute came out
+  # as `client.o_auth`. An explicit group names it `oauth`; the `oauth` entry in
+  # gen.yaml's customCasings keeps the class name `OAuth`.
+  - target: $.paths.*[?@.tags[?@ == 'OAuth']]
+    description: Group every operation tagged OAuth under `oauth`
+    update:
+      x-speakeasy-group: oauth
+  # The group's description comes from a tag of the same name, so rename the
+  # tag definition too; otherwise the class and docs page lose their summary.
+  - target: $.tags[?@.name == 'OAuth']
+    description: Rename the OAuth tag definition to match the group
+    update:
+      name: oauth
