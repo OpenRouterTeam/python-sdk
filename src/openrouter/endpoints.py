@@ -109,6 +109,11 @@ class Endpoints(BaseSDK):
             return unmarshal_json_response(
                 operations.ListEndpointsZdrResponse, http_res
             )
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UnauthorizedResponseErrorData, http_res
+            )
+            raise errors.UnauthorizedResponseError(response_data, http_res)
         if utils.match_response(http_res, "403", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ForbiddenResponseErrorData, http_res
@@ -234,6 +239,11 @@ class Endpoints(BaseSDK):
             return unmarshal_json_response(
                 operations.ListEndpointsZdrResponse, http_res
             )
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UnauthorizedResponseErrorData, http_res
+            )
+            raise errors.UnauthorizedResponseError(response_data, http_res)
         if utils.match_response(http_res, "403", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ForbiddenResponseErrorData, http_res
@@ -363,6 +373,11 @@ class Endpoints(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(operations.ListEndpointsResponse, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UnauthorizedResponseErrorData, http_res
+            )
+            raise errors.UnauthorizedResponseError(response_data, http_res)
         if utils.match_response(http_res, "403", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ForbiddenResponseErrorData, http_res
@@ -497,6 +512,11 @@ class Endpoints(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(operations.ListEndpointsResponse, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.UnauthorizedResponseErrorData, http_res
+            )
+            raise errors.UnauthorizedResponseError(response_data, http_res)
         if utils.match_response(http_res, "403", "application/json"):
             response_data = unmarshal_json_response(
                 errors.ForbiddenResponseErrorData, http_res

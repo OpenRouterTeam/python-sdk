@@ -94,6 +94,8 @@ class ListKeyAssignmentsRequestTypedDict(TypedDict):
     r"""Number of records to skip for pagination"""
     limit: NotRequired[int]
     r"""Maximum number of records to return (max 100)"""
+    workspace_id: NotRequired[str]
+    r"""Only list assignments of guardrails in this workspace. When omitted, an organization management key lists every workspace and a workspace-scoped key lists its own workspace. A workspace-scoped key gets 403 for any other workspace."""
 
 
 class ListKeyAssignmentsRequest(BaseModel):
@@ -137,6 +139,12 @@ class ListKeyAssignmentsRequest(BaseModel):
     ] = 50
     r"""Maximum number of records to return (max 100)"""
 
+    workspace_id: Annotated[
+        Optional[str],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Only list assignments of guardrails in this workspace. When omitted, an organization management key lists every workspace and a workspace-scoped key lists its own workspace. A workspace-scoped key gets 403 for any other workspace."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
@@ -146,6 +154,7 @@ class ListKeyAssignmentsRequest(BaseModel):
                 "X-OpenRouter-Categories",
                 "offset",
                 "limit",
+                "workspace_id",
             ]
         )
         nullable_fields = set(["offset"])

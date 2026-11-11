@@ -15,8 +15,6 @@ class UpdateModerationGuardrailPolicyRequestTypedDict(TypedDict):
     config: GuardrailModerationPolicyConfigTypedDict
     name: str
     r"""Policy name"""
-    workspace_id: str
-    r"""Workspace the policy belongs to"""
     api_key_hashes: NotRequired[List[str]]
     r"""Complete new list of assigned API keys. Send together with `member_ids`, or omit both to keep the stored assignments."""
     is_workspace_default: NotRequired[bool]
@@ -27,6 +25,8 @@ class UpdateModerationGuardrailPolicyRequestTypedDict(TypedDict):
     r"""API key hashes"""
     opted_out_member_ids: NotRequired[List[str]]
     r"""Organization member user IDs"""
+    workspace_id: NotRequired[str]
+    r"""Workspace the policy belongs to. Required for an organization management key; a workspace-scoped key defaults to its own workspace and gets 403 for any other."""
 
 
 class UpdateModerationGuardrailPolicyRequest(BaseModel):
@@ -34,9 +34,6 @@ class UpdateModerationGuardrailPolicyRequest(BaseModel):
 
     name: str
     r"""Policy name"""
-
-    workspace_id: str
-    r"""Workspace the policy belongs to"""
 
     api_key_hashes: Optional[List[str]] = None
     r"""Complete new list of assigned API keys. Send together with `member_ids`, or omit both to keep the stored assignments."""
@@ -53,6 +50,9 @@ class UpdateModerationGuardrailPolicyRequest(BaseModel):
     opted_out_member_ids: Optional[List[str]] = None
     r"""Organization member user IDs"""
 
+    workspace_id: Optional[str] = None
+    r"""Workspace the policy belongs to. Required for an organization management key; a workspace-scoped key defaults to its own workspace and gets 403 for any other."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
@@ -62,6 +62,7 @@ class UpdateModerationGuardrailPolicyRequest(BaseModel):
                 "member_ids",
                 "opted_out_api_key_hashes",
                 "opted_out_member_ids",
+                "workspace_id",
             ]
         )
         serialized = handler(self)

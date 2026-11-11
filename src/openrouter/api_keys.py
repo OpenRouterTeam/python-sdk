@@ -1556,7 +1556,7 @@ class APIKeys(BaseSDK):
         :param limit: New spending limit for the API key in USD
         :param limit_reset: New limit reset type for the API key (daily, weekly, monthly, or null for no reset). Resets happen automatically at midnight UTC, and weeks are Monday through Sunday.
         :param name: New name for the API key
-        :param workspace_id: Move the API key to this workspace. The key keeps its value; guardrail selections move with it, while other workspace-scoped settings (presets, BYOK keys, broadcast destinations, routing rules) do not. Sending the key's current workspace is a no-op.
+        :param workspace_id: Move the API key to this workspace. The key keeps its value; guardrail selections move with it, except direct guardrail assignments owned by the key's current workspace, which are removed along with the selections derived from them, while other workspace-scoped settings (presets, BYOK keys, broadcast destinations, routing rules) do not. Sending the key's current workspace is a no-op.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1737,7 +1737,7 @@ class APIKeys(BaseSDK):
         :param limit: New spending limit for the API key in USD
         :param limit_reset: New limit reset type for the API key (daily, weekly, monthly, or null for no reset). Resets happen automatically at midnight UTC, and weeks are Monday through Sunday.
         :param name: New name for the API key
-        :param workspace_id: Move the API key to this workspace. The key keeps its value; guardrail selections move with it, while other workspace-scoped settings (presets, BYOK keys, broadcast destinations, routing rules) do not. Sending the key's current workspace is a no-op.
+        :param workspace_id: Move the API key to this workspace. The key keeps its value; guardrail selections move with it, except direct guardrail assignments owned by the key's current workspace, which are removed along with the selections derived from them, while other workspace-scoped settings (presets, BYOK keys, broadcast destinations, routing rules) do not. Sending the key's current workspace is a no-op.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds

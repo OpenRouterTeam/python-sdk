@@ -1294,11 +1294,11 @@ class GuardrailPolicies(BaseSDK):
         self,
         *,
         hash: str,
-        workspace_id: str,
         policy_type: operations.GetAPIKeyPolicyAssignmentPolicyType,
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
+        workspace_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -1309,7 +1309,6 @@ class GuardrailPolicies(BaseSDK):
         Get the policies of one type that apply to an API key in a workspace. Requires a management key with write access. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param hash: API key hash
-        :param workspace_id: Workspace the policy belongs to
         :param policy_type: Policy type the assignment is read or changed for
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
@@ -1318,6 +1317,7 @@ class GuardrailPolicies(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
+        :param workspace_id: Workspace the policy belongs to. Required for an organization management key; a workspace-scoped key defaults to its own workspace and gets 403 for any other.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1440,11 +1440,11 @@ class GuardrailPolicies(BaseSDK):
         self,
         *,
         hash: str,
-        workspace_id: str,
         policy_type: operations.GetAPIKeyPolicyAssignmentPolicyType,
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
+        workspace_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -1455,7 +1455,6 @@ class GuardrailPolicies(BaseSDK):
         Get the policies of one type that apply to an API key in a workspace. Requires a management key with write access. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param hash: API key hash
-        :param workspace_id: Workspace the policy belongs to
         :param policy_type: Policy type the assignment is read or changed for
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
@@ -1464,6 +1463,7 @@ class GuardrailPolicies(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
+        :param workspace_id: Workspace the policy belongs to. Required for an organization management key; a workspace-scoped key defaults to its own workspace and gets 403 for any other.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1593,10 +1593,10 @@ class GuardrailPolicies(BaseSDK):
         ],
         policy_id: str,
         policy_type: components.ChangeGuardrailPolicyAssignmentRequestPolicyType,
-        workspace_id: str,
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
+        workspace_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -1611,7 +1611,6 @@ class GuardrailPolicies(BaseSDK):
         :param expected_assignment:
         :param policy_id: Policy ID
         :param policy_type: Policy type the assignment is read or changed for
-        :param workspace_id: Workspace the policy belongs to
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
@@ -1619,6 +1618,7 @@ class GuardrailPolicies(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
+        :param workspace_id: Workspace the policy belongs to. Required for an organization management key; a workspace-scoped key defaults to its own workspace and gets 403 for any other.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1767,10 +1767,10 @@ class GuardrailPolicies(BaseSDK):
         ],
         policy_id: str,
         policy_type: components.ChangeGuardrailPolicyAssignmentRequestPolicyType,
-        workspace_id: str,
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
+        workspace_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -1785,7 +1785,6 @@ class GuardrailPolicies(BaseSDK):
         :param expected_assignment:
         :param policy_id: Policy ID
         :param policy_type: Policy type the assignment is read or changed for
-        :param workspace_id: Workspace the policy belongs to
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
@@ -1793,6 +1792,7 @@ class GuardrailPolicies(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
+        :param workspace_id: Workspace the policy belongs to. Required for an organization management key; a workspace-scoped key defaults to its own workspace and gets 403 for any other.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1934,11 +1934,11 @@ class GuardrailPolicies(BaseSDK):
         self,
         *,
         member_id: str,
-        workspace_id: str,
         policy_type: operations.GetMemberPolicyAssignmentPolicyType,
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
+        workspace_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -1949,7 +1949,6 @@ class GuardrailPolicies(BaseSDK):
         Get the policies of one type that apply to a member in a workspace. Requires a management key with write access. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param member_id: Organization member user ID
-        :param workspace_id: Workspace the policy belongs to
         :param policy_type: Policy type the assignment is read or changed for
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
@@ -1958,6 +1957,7 @@ class GuardrailPolicies(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
+        :param workspace_id: Workspace the policy belongs to. Required for an organization management key; a workspace-scoped key defaults to its own workspace and gets 403 for any other.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -2080,11 +2080,11 @@ class GuardrailPolicies(BaseSDK):
         self,
         *,
         member_id: str,
-        workspace_id: str,
         policy_type: operations.GetMemberPolicyAssignmentPolicyType,
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
+        workspace_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -2095,7 +2095,6 @@ class GuardrailPolicies(BaseSDK):
         Get the policies of one type that apply to a member in a workspace. Requires a management key with write access. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param member_id: Organization member user ID
-        :param workspace_id: Workspace the policy belongs to
         :param policy_type: Policy type the assignment is read or changed for
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
@@ -2104,6 +2103,7 @@ class GuardrailPolicies(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
+        :param workspace_id: Workspace the policy belongs to. Required for an organization management key; a workspace-scoped key defaults to its own workspace and gets 403 for any other.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -2233,10 +2233,10 @@ class GuardrailPolicies(BaseSDK):
         ],
         policy_id: str,
         policy_type: components.ChangeGuardrailPolicyAssignmentRequestPolicyType,
-        workspace_id: str,
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
+        workspace_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -2251,7 +2251,6 @@ class GuardrailPolicies(BaseSDK):
         :param expected_assignment:
         :param policy_id: Policy ID
         :param policy_type: Policy type the assignment is read or changed for
-        :param workspace_id: Workspace the policy belongs to
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
@@ -2259,6 +2258,7 @@ class GuardrailPolicies(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
+        :param workspace_id: Workspace the policy belongs to. Required for an organization management key; a workspace-scoped key defaults to its own workspace and gets 403 for any other.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -2407,10 +2407,10 @@ class GuardrailPolicies(BaseSDK):
         ],
         policy_id: str,
         policy_type: components.ChangeGuardrailPolicyAssignmentRequestPolicyType,
-        workspace_id: str,
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
+        workspace_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -2425,7 +2425,6 @@ class GuardrailPolicies(BaseSDK):
         :param expected_assignment:
         :param policy_id: Policy ID
         :param policy_type: Policy type the assignment is read or changed for
-        :param workspace_id: Workspace the policy belongs to
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
@@ -2433,6 +2432,7 @@ class GuardrailPolicies(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
+        :param workspace_id: Workspace the policy belongs to. Required for an organization management key; a workspace-scoped key defaults to its own workspace and gets 403 for any other.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -2573,12 +2573,12 @@ class GuardrailPolicies(BaseSDK):
     def list_budget_policies(
         self,
         *,
-        workspace_id: str,
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
         offset: Optional[int] = None,
         limit: Optional[int] = None,
+        workspace_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -2588,7 +2588,6 @@ class GuardrailPolicies(BaseSDK):
 
         List the budget policies in a workspace. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
-        :param workspace_id: Workspace the policy belongs to
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
@@ -2598,6 +2597,7 @@ class GuardrailPolicies(BaseSDK):
 
         :param offset: Number of records to skip for pagination. When both offset and limit are omitted, the full list is returned
         :param limit: Maximum number of records to return (max 100). When both offset and limit are omitted, the full list is returned
+        :param workspace_id: Workspace the policy belongs to. Required for an organization management key; a workspace-scoped key defaults to its own workspace and gets 403 for any other.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -2689,12 +2689,12 @@ class GuardrailPolicies(BaseSDK):
             next_offset = offset + len(results[0])
 
             return self.list_budget_policies(
-                workspace_id=workspace_id,
                 http_referer=http_referer,
                 x_open_router_title=x_open_router_title,
                 x_open_router_categories=x_open_router_categories,
                 offset=next_offset,
                 limit=limit,
+                workspace_id=workspace_id,
                 retries=retries,
                 server_url=server_url,
                 timeout_ms=timeout_ms,
@@ -2750,12 +2750,12 @@ class GuardrailPolicies(BaseSDK):
     async def list_budget_policies_async(
         self,
         *,
-        workspace_id: str,
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
         offset: Optional[int] = None,
         limit: Optional[int] = None,
+        workspace_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -2765,7 +2765,6 @@ class GuardrailPolicies(BaseSDK):
 
         List the budget policies in a workspace. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
-        :param workspace_id: Workspace the policy belongs to
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
@@ -2775,6 +2774,7 @@ class GuardrailPolicies(BaseSDK):
 
         :param offset: Number of records to skip for pagination. When both offset and limit are omitted, the full list is returned
         :param limit: Maximum number of records to return (max 100). When both offset and limit are omitted, the full list is returned
+        :param workspace_id: Workspace the policy belongs to. Required for an organization management key; a workspace-scoped key defaults to its own workspace and gets 403 for any other.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -2869,12 +2869,12 @@ class GuardrailPolicies(BaseSDK):
             next_offset = offset + len(results[0])
 
             return self.list_budget_policies_async(
-                workspace_id=workspace_id,
                 http_referer=http_referer,
                 x_open_router_title=x_open_router_title,
                 x_open_router_categories=x_open_router_categories,
                 offset=next_offset,
                 limit=limit,
+                workspace_id=workspace_id,
                 retries=retries,
                 server_url=server_url,
                 timeout_ms=timeout_ms,
@@ -2936,7 +2936,6 @@ class GuardrailPolicies(BaseSDK):
         ],
         name: str,
         policy_type: components.CreateBudgetGuardrailPolicyRequestPolicyType,
-        workspace_id: str,
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
@@ -2945,6 +2944,7 @@ class GuardrailPolicies(BaseSDK):
         member_ids: Optional[Iterable[str]] = None,
         opted_out_api_key_hashes: Optional[Iterable[str]] = None,
         opted_out_member_ids: Optional[Iterable[str]] = None,
+        workspace_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -2957,7 +2957,6 @@ class GuardrailPolicies(BaseSDK):
         :param config:
         :param name: Policy name
         :param policy_type:
-        :param workspace_id: Workspace the policy belongs to
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
@@ -2970,6 +2969,7 @@ class GuardrailPolicies(BaseSDK):
         :param member_ids: Organization member user IDs
         :param opted_out_api_key_hashes: API keys that should not inherit the policy when it is the workspace default
         :param opted_out_member_ids: Members that should not inherit the policy when it is the workspace default
+        :param workspace_id: Workspace the policy belongs to. Required for an organization management key; a workspace-scoped key defaults to its own workspace and gets 403 for any other.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -3123,7 +3123,6 @@ class GuardrailPolicies(BaseSDK):
         ],
         name: str,
         policy_type: components.CreateBudgetGuardrailPolicyRequestPolicyType,
-        workspace_id: str,
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
@@ -3132,6 +3131,7 @@ class GuardrailPolicies(BaseSDK):
         member_ids: Optional[Iterable[str]] = None,
         opted_out_api_key_hashes: Optional[Iterable[str]] = None,
         opted_out_member_ids: Optional[Iterable[str]] = None,
+        workspace_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -3144,7 +3144,6 @@ class GuardrailPolicies(BaseSDK):
         :param config:
         :param name: Policy name
         :param policy_type:
-        :param workspace_id: Workspace the policy belongs to
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
@@ -3157,6 +3156,7 @@ class GuardrailPolicies(BaseSDK):
         :param member_ids: Organization member user IDs
         :param opted_out_api_key_hashes: API keys that should not inherit the policy when it is the workspace default
         :param opted_out_member_ids: Members that should not inherit the policy when it is the workspace default
+        :param workspace_id: Workspace the policy belongs to. Required for an organization management key; a workspace-scoped key defaults to its own workspace and gets 403 for any other.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -3305,10 +3305,10 @@ class GuardrailPolicies(BaseSDK):
         self,
         *,
         id: str,
-        workspace_id: str,
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
+        workspace_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -3319,7 +3319,6 @@ class GuardrailPolicies(BaseSDK):
         Delete a budget policy. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param id: Policy ID
-        :param workspace_id: Workspace the policy belongs to
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
@@ -3327,6 +3326,7 @@ class GuardrailPolicies(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
+        :param workspace_id: Workspace the policy belongs to. Required for an organization management key; a workspace-scoped key defaults to its own workspace and gets 403 for any other.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -3453,10 +3453,10 @@ class GuardrailPolicies(BaseSDK):
         self,
         *,
         id: str,
-        workspace_id: str,
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
+        workspace_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -3467,7 +3467,6 @@ class GuardrailPolicies(BaseSDK):
         Delete a budget policy. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param id: Policy ID
-        :param workspace_id: Workspace the policy belongs to
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
@@ -3475,6 +3474,7 @@ class GuardrailPolicies(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
+        :param workspace_id: Workspace the policy belongs to. Required for an organization management key; a workspace-scoped key defaults to its own workspace and gets 403 for any other.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -3601,10 +3601,10 @@ class GuardrailPolicies(BaseSDK):
         self,
         *,
         id: str,
-        workspace_id: str,
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
+        workspace_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -3615,7 +3615,6 @@ class GuardrailPolicies(BaseSDK):
         Get a budget policy with its member and API key assignments. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param id: Policy ID
-        :param workspace_id: Workspace the policy belongs to
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
@@ -3623,6 +3622,7 @@ class GuardrailPolicies(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
+        :param workspace_id: Workspace the policy belongs to. Required for an organization management key; a workspace-scoped key defaults to its own workspace and gets 403 for any other.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -3744,10 +3744,10 @@ class GuardrailPolicies(BaseSDK):
         self,
         *,
         id: str,
-        workspace_id: str,
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
+        workspace_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -3758,7 +3758,6 @@ class GuardrailPolicies(BaseSDK):
         Get a budget policy with its member and API key assignments. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param id: Policy ID
-        :param workspace_id: Workspace the policy belongs to
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
@@ -3766,6 +3765,7 @@ class GuardrailPolicies(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
+        :param workspace_id: Workspace the policy belongs to. Required for an organization management key; a workspace-scoped key defaults to its own workspace and gets 403 for any other.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -3892,7 +3892,6 @@ class GuardrailPolicies(BaseSDK):
             components.GuardrailBudgetPolicyAuthoringConfigTypedDict,
         ],
         name: str,
-        workspace_id: str,
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
@@ -3901,6 +3900,7 @@ class GuardrailPolicies(BaseSDK):
         member_ids: Optional[Iterable[str]] = None,
         opted_out_api_key_hashes: Optional[Iterable[str]] = None,
         opted_out_member_ids: Optional[Iterable[str]] = None,
+        workspace_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -3913,7 +3913,6 @@ class GuardrailPolicies(BaseSDK):
         :param id: Policy ID
         :param config:
         :param name: Policy name
-        :param workspace_id: Workspace the policy belongs to
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
@@ -3926,6 +3925,7 @@ class GuardrailPolicies(BaseSDK):
         :param member_ids: Complete new list of assigned members. Send together with `api_key_hashes`, or omit both to keep the stored assignments.
         :param opted_out_api_key_hashes: API key hashes
         :param opted_out_member_ids: Organization member user IDs
+        :param workspace_id: Workspace the policy belongs to. Required for an organization management key; a workspace-scoped key defaults to its own workspace and gets 403 for any other.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -4079,7 +4079,6 @@ class GuardrailPolicies(BaseSDK):
             components.GuardrailBudgetPolicyAuthoringConfigTypedDict,
         ],
         name: str,
-        workspace_id: str,
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
@@ -4088,6 +4087,7 @@ class GuardrailPolicies(BaseSDK):
         member_ids: Optional[Iterable[str]] = None,
         opted_out_api_key_hashes: Optional[Iterable[str]] = None,
         opted_out_member_ids: Optional[Iterable[str]] = None,
+        workspace_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -4100,7 +4100,6 @@ class GuardrailPolicies(BaseSDK):
         :param id: Policy ID
         :param config:
         :param name: Policy name
-        :param workspace_id: Workspace the policy belongs to
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
@@ -4113,6 +4112,7 @@ class GuardrailPolicies(BaseSDK):
         :param member_ids: Complete new list of assigned members. Send together with `api_key_hashes`, or omit both to keep the stored assignments.
         :param opted_out_api_key_hashes: API key hashes
         :param opted_out_member_ids: Organization member user IDs
+        :param workspace_id: Workspace the policy belongs to. Required for an organization management key; a workspace-scoped key defaults to its own workspace and gets 403 for any other.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -4260,12 +4260,12 @@ class GuardrailPolicies(BaseSDK):
     def list_model_availability_policies(
         self,
         *,
-        workspace_id: str,
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
         offset: Optional[int] = None,
         limit: Optional[int] = None,
+        workspace_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -4275,7 +4275,6 @@ class GuardrailPolicies(BaseSDK):
 
         List the model availability policies in a workspace. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
-        :param workspace_id: Workspace the policy belongs to
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
@@ -4285,6 +4284,7 @@ class GuardrailPolicies(BaseSDK):
 
         :param offset: Number of records to skip for pagination. When both offset and limit are omitted, the full list is returned
         :param limit: Maximum number of records to return (max 100). When both offset and limit are omitted, the full list is returned
+        :param workspace_id: Workspace the policy belongs to. Required for an organization management key; a workspace-scoped key defaults to its own workspace and gets 403 for any other.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -4376,12 +4376,12 @@ class GuardrailPolicies(BaseSDK):
             next_offset = offset + len(results[0])
 
             return self.list_model_availability_policies(
-                workspace_id=workspace_id,
                 http_referer=http_referer,
                 x_open_router_title=x_open_router_title,
                 x_open_router_categories=x_open_router_categories,
                 offset=next_offset,
                 limit=limit,
+                workspace_id=workspace_id,
                 retries=retries,
                 server_url=server_url,
                 timeout_ms=timeout_ms,
@@ -4437,12 +4437,12 @@ class GuardrailPolicies(BaseSDK):
     async def list_model_availability_policies_async(
         self,
         *,
-        workspace_id: str,
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
         offset: Optional[int] = None,
         limit: Optional[int] = None,
+        workspace_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -4452,7 +4452,6 @@ class GuardrailPolicies(BaseSDK):
 
         List the model availability policies in a workspace. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
-        :param workspace_id: Workspace the policy belongs to
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
@@ -4462,6 +4461,7 @@ class GuardrailPolicies(BaseSDK):
 
         :param offset: Number of records to skip for pagination. When both offset and limit are omitted, the full list is returned
         :param limit: Maximum number of records to return (max 100). When both offset and limit are omitted, the full list is returned
+        :param workspace_id: Workspace the policy belongs to. Required for an organization management key; a workspace-scoped key defaults to its own workspace and gets 403 for any other.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -4558,12 +4558,12 @@ class GuardrailPolicies(BaseSDK):
             next_offset = offset + len(results[0])
 
             return self.list_model_availability_policies_async(
-                workspace_id=workspace_id,
                 http_referer=http_referer,
                 x_open_router_title=x_open_router_title,
                 x_open_router_categories=x_open_router_categories,
                 offset=next_offset,
                 limit=limit,
+                workspace_id=workspace_id,
                 retries=retries,
                 server_url=server_url,
                 timeout_ms=timeout_ms,
@@ -4625,7 +4625,6 @@ class GuardrailPolicies(BaseSDK):
         ],
         name: str,
         policy_type: components.CreateModelAvailabilityGuardrailPolicyRequestPolicyType,
-        workspace_id: str,
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
@@ -4634,6 +4633,7 @@ class GuardrailPolicies(BaseSDK):
         member_ids: Optional[Iterable[str]] = None,
         opted_out_api_key_hashes: Optional[Iterable[str]] = None,
         opted_out_member_ids: Optional[Iterable[str]] = None,
+        workspace_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -4646,7 +4646,6 @@ class GuardrailPolicies(BaseSDK):
         :param config:
         :param name: Policy name
         :param policy_type:
-        :param workspace_id: Workspace the policy belongs to
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
@@ -4659,6 +4658,7 @@ class GuardrailPolicies(BaseSDK):
         :param member_ids: Organization member user IDs
         :param opted_out_api_key_hashes: API keys that should not inherit the policy when it is the workspace default
         :param opted_out_member_ids: Members that should not inherit the policy when it is the workspace default
+        :param workspace_id: Workspace the policy belongs to. Required for an organization management key; a workspace-scoped key defaults to its own workspace and gets 403 for any other.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -4812,7 +4812,6 @@ class GuardrailPolicies(BaseSDK):
         ],
         name: str,
         policy_type: components.CreateModelAvailabilityGuardrailPolicyRequestPolicyType,
-        workspace_id: str,
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
@@ -4821,6 +4820,7 @@ class GuardrailPolicies(BaseSDK):
         member_ids: Optional[Iterable[str]] = None,
         opted_out_api_key_hashes: Optional[Iterable[str]] = None,
         opted_out_member_ids: Optional[Iterable[str]] = None,
+        workspace_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -4833,7 +4833,6 @@ class GuardrailPolicies(BaseSDK):
         :param config:
         :param name: Policy name
         :param policy_type:
-        :param workspace_id: Workspace the policy belongs to
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
@@ -4846,6 +4845,7 @@ class GuardrailPolicies(BaseSDK):
         :param member_ids: Organization member user IDs
         :param opted_out_api_key_hashes: API keys that should not inherit the policy when it is the workspace default
         :param opted_out_member_ids: Members that should not inherit the policy when it is the workspace default
+        :param workspace_id: Workspace the policy belongs to. Required for an organization management key; a workspace-scoped key defaults to its own workspace and gets 403 for any other.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -4994,10 +4994,10 @@ class GuardrailPolicies(BaseSDK):
         self,
         *,
         id: str,
-        workspace_id: str,
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
+        workspace_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -5008,7 +5008,6 @@ class GuardrailPolicies(BaseSDK):
         Delete a model availability policy. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param id: Policy ID
-        :param workspace_id: Workspace the policy belongs to
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
@@ -5016,6 +5015,7 @@ class GuardrailPolicies(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
+        :param workspace_id: Workspace the policy belongs to. Required for an organization management key; a workspace-scoped key defaults to its own workspace and gets 403 for any other.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -5142,10 +5142,10 @@ class GuardrailPolicies(BaseSDK):
         self,
         *,
         id: str,
-        workspace_id: str,
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
+        workspace_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -5156,7 +5156,6 @@ class GuardrailPolicies(BaseSDK):
         Delete a model availability policy. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param id: Policy ID
-        :param workspace_id: Workspace the policy belongs to
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
@@ -5164,6 +5163,7 @@ class GuardrailPolicies(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
+        :param workspace_id: Workspace the policy belongs to. Required for an organization management key; a workspace-scoped key defaults to its own workspace and gets 403 for any other.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -5290,10 +5290,10 @@ class GuardrailPolicies(BaseSDK):
         self,
         *,
         id: str,
-        workspace_id: str,
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
+        workspace_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -5304,7 +5304,6 @@ class GuardrailPolicies(BaseSDK):
         Get a model availability policy with its member and API key assignments. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param id: Policy ID
-        :param workspace_id: Workspace the policy belongs to
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
@@ -5312,6 +5311,7 @@ class GuardrailPolicies(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
+        :param workspace_id: Workspace the policy belongs to. Required for an organization management key; a workspace-scoped key defaults to its own workspace and gets 403 for any other.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -5433,10 +5433,10 @@ class GuardrailPolicies(BaseSDK):
         self,
         *,
         id: str,
-        workspace_id: str,
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
+        workspace_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -5447,7 +5447,6 @@ class GuardrailPolicies(BaseSDK):
         Get a model availability policy with its member and API key assignments. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param id: Policy ID
-        :param workspace_id: Workspace the policy belongs to
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
@@ -5455,6 +5454,7 @@ class GuardrailPolicies(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
+        :param workspace_id: Workspace the policy belongs to. Required for an organization management key; a workspace-scoped key defaults to its own workspace and gets 403 for any other.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -5581,7 +5581,6 @@ class GuardrailPolicies(BaseSDK):
             components.GuardrailModelAvailabilityPolicyAuthoringConfigTypedDict,
         ],
         name: str,
-        workspace_id: str,
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
@@ -5590,6 +5589,7 @@ class GuardrailPolicies(BaseSDK):
         member_ids: Optional[Iterable[str]] = None,
         opted_out_api_key_hashes: Optional[Iterable[str]] = None,
         opted_out_member_ids: Optional[Iterable[str]] = None,
+        workspace_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -5602,7 +5602,6 @@ class GuardrailPolicies(BaseSDK):
         :param id: Policy ID
         :param config:
         :param name: Policy name
-        :param workspace_id: Workspace the policy belongs to
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
@@ -5615,6 +5614,7 @@ class GuardrailPolicies(BaseSDK):
         :param member_ids: Complete new list of assigned members. Send together with `api_key_hashes`, or omit both to keep the stored assignments.
         :param opted_out_api_key_hashes: API key hashes
         :param opted_out_member_ids: Organization member user IDs
+        :param workspace_id: Workspace the policy belongs to. Required for an organization management key; a workspace-scoped key defaults to its own workspace and gets 403 for any other.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -5768,7 +5768,6 @@ class GuardrailPolicies(BaseSDK):
             components.GuardrailModelAvailabilityPolicyAuthoringConfigTypedDict,
         ],
         name: str,
-        workspace_id: str,
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
@@ -5777,6 +5776,7 @@ class GuardrailPolicies(BaseSDK):
         member_ids: Optional[Iterable[str]] = None,
         opted_out_api_key_hashes: Optional[Iterable[str]] = None,
         opted_out_member_ids: Optional[Iterable[str]] = None,
+        workspace_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -5789,7 +5789,6 @@ class GuardrailPolicies(BaseSDK):
         :param id: Policy ID
         :param config:
         :param name: Policy name
-        :param workspace_id: Workspace the policy belongs to
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
@@ -5802,6 +5801,7 @@ class GuardrailPolicies(BaseSDK):
         :param member_ids: Complete new list of assigned members. Send together with `api_key_hashes`, or omit both to keep the stored assignments.
         :param opted_out_api_key_hashes: API key hashes
         :param opted_out_member_ids: Organization member user IDs
+        :param workspace_id: Workspace the policy belongs to. Required for an organization management key; a workspace-scoped key defaults to its own workspace and gets 403 for any other.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -5949,12 +5949,12 @@ class GuardrailPolicies(BaseSDK):
     def list_moderation_policies(
         self,
         *,
-        workspace_id: str,
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
         offset: Optional[int] = None,
         limit: Optional[int] = None,
+        workspace_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -5964,7 +5964,6 @@ class GuardrailPolicies(BaseSDK):
 
         List the moderation policies in a workspace. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
-        :param workspace_id: Workspace the policy belongs to
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
@@ -5974,6 +5973,7 @@ class GuardrailPolicies(BaseSDK):
 
         :param offset: Number of records to skip for pagination. When both offset and limit are omitted, the full list is returned
         :param limit: Maximum number of records to return (max 100). When both offset and limit are omitted, the full list is returned
+        :param workspace_id: Workspace the policy belongs to. Required for an organization management key; a workspace-scoped key defaults to its own workspace and gets 403 for any other.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -6065,12 +6065,12 @@ class GuardrailPolicies(BaseSDK):
             next_offset = offset + len(results[0])
 
             return self.list_moderation_policies(
-                workspace_id=workspace_id,
                 http_referer=http_referer,
                 x_open_router_title=x_open_router_title,
                 x_open_router_categories=x_open_router_categories,
                 offset=next_offset,
                 limit=limit,
+                workspace_id=workspace_id,
                 retries=retries,
                 server_url=server_url,
                 timeout_ms=timeout_ms,
@@ -6126,12 +6126,12 @@ class GuardrailPolicies(BaseSDK):
     async def list_moderation_policies_async(
         self,
         *,
-        workspace_id: str,
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
         offset: Optional[int] = None,
         limit: Optional[int] = None,
+        workspace_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -6141,7 +6141,6 @@ class GuardrailPolicies(BaseSDK):
 
         List the moderation policies in a workspace. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
-        :param workspace_id: Workspace the policy belongs to
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
@@ -6151,6 +6150,7 @@ class GuardrailPolicies(BaseSDK):
 
         :param offset: Number of records to skip for pagination. When both offset and limit are omitted, the full list is returned
         :param limit: Maximum number of records to return (max 100). When both offset and limit are omitted, the full list is returned
+        :param workspace_id: Workspace the policy belongs to. Required for an organization management key; a workspace-scoped key defaults to its own workspace and gets 403 for any other.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -6247,12 +6247,12 @@ class GuardrailPolicies(BaseSDK):
             next_offset = offset + len(results[0])
 
             return self.list_moderation_policies_async(
-                workspace_id=workspace_id,
                 http_referer=http_referer,
                 x_open_router_title=x_open_router_title,
                 x_open_router_categories=x_open_router_categories,
                 offset=next_offset,
                 limit=limit,
+                workspace_id=workspace_id,
                 retries=retries,
                 server_url=server_url,
                 timeout_ms=timeout_ms,
@@ -6314,7 +6314,6 @@ class GuardrailPolicies(BaseSDK):
         ],
         name: str,
         policy_type: components.CreateModerationGuardrailPolicyRequestPolicyType,
-        workspace_id: str,
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
@@ -6323,6 +6322,7 @@ class GuardrailPolicies(BaseSDK):
         member_ids: Optional[Iterable[str]] = None,
         opted_out_api_key_hashes: Optional[Iterable[str]] = None,
         opted_out_member_ids: Optional[Iterable[str]] = None,
+        workspace_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -6335,7 +6335,6 @@ class GuardrailPolicies(BaseSDK):
         :param config:
         :param name: Policy name
         :param policy_type:
-        :param workspace_id: Workspace the policy belongs to
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
@@ -6348,6 +6347,7 @@ class GuardrailPolicies(BaseSDK):
         :param member_ids: Organization member user IDs
         :param opted_out_api_key_hashes: API keys that should not inherit the policy when it is the workspace default
         :param opted_out_member_ids: Members that should not inherit the policy when it is the workspace default
+        :param workspace_id: Workspace the policy belongs to. Required for an organization management key; a workspace-scoped key defaults to its own workspace and gets 403 for any other.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -6501,7 +6501,6 @@ class GuardrailPolicies(BaseSDK):
         ],
         name: str,
         policy_type: components.CreateModerationGuardrailPolicyRequestPolicyType,
-        workspace_id: str,
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
@@ -6510,6 +6509,7 @@ class GuardrailPolicies(BaseSDK):
         member_ids: Optional[Iterable[str]] = None,
         opted_out_api_key_hashes: Optional[Iterable[str]] = None,
         opted_out_member_ids: Optional[Iterable[str]] = None,
+        workspace_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -6522,7 +6522,6 @@ class GuardrailPolicies(BaseSDK):
         :param config:
         :param name: Policy name
         :param policy_type:
-        :param workspace_id: Workspace the policy belongs to
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
@@ -6535,6 +6534,7 @@ class GuardrailPolicies(BaseSDK):
         :param member_ids: Organization member user IDs
         :param opted_out_api_key_hashes: API keys that should not inherit the policy when it is the workspace default
         :param opted_out_member_ids: Members that should not inherit the policy when it is the workspace default
+        :param workspace_id: Workspace the policy belongs to. Required for an organization management key; a workspace-scoped key defaults to its own workspace and gets 403 for any other.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -6683,10 +6683,10 @@ class GuardrailPolicies(BaseSDK):
         self,
         *,
         id: str,
-        workspace_id: str,
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
+        workspace_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -6697,7 +6697,6 @@ class GuardrailPolicies(BaseSDK):
         Delete a moderation policy. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param id: Policy ID
-        :param workspace_id: Workspace the policy belongs to
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
@@ -6705,6 +6704,7 @@ class GuardrailPolicies(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
+        :param workspace_id: Workspace the policy belongs to. Required for an organization management key; a workspace-scoped key defaults to its own workspace and gets 403 for any other.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -6831,10 +6831,10 @@ class GuardrailPolicies(BaseSDK):
         self,
         *,
         id: str,
-        workspace_id: str,
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
+        workspace_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -6845,7 +6845,6 @@ class GuardrailPolicies(BaseSDK):
         Delete a moderation policy. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param id: Policy ID
-        :param workspace_id: Workspace the policy belongs to
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
@@ -6853,6 +6852,7 @@ class GuardrailPolicies(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
+        :param workspace_id: Workspace the policy belongs to. Required for an organization management key; a workspace-scoped key defaults to its own workspace and gets 403 for any other.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -6979,10 +6979,10 @@ class GuardrailPolicies(BaseSDK):
         self,
         *,
         id: str,
-        workspace_id: str,
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
+        workspace_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -6993,7 +6993,6 @@ class GuardrailPolicies(BaseSDK):
         Get a moderation policy with its member and API key assignments. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param id: Policy ID
-        :param workspace_id: Workspace the policy belongs to
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
@@ -7001,6 +7000,7 @@ class GuardrailPolicies(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
+        :param workspace_id: Workspace the policy belongs to. Required for an organization management key; a workspace-scoped key defaults to its own workspace and gets 403 for any other.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -7122,10 +7122,10 @@ class GuardrailPolicies(BaseSDK):
         self,
         *,
         id: str,
-        workspace_id: str,
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
+        workspace_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -7136,7 +7136,6 @@ class GuardrailPolicies(BaseSDK):
         Get a moderation policy with its member and API key assignments. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param id: Policy ID
-        :param workspace_id: Workspace the policy belongs to
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
@@ -7144,6 +7143,7 @@ class GuardrailPolicies(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
+        :param workspace_id: Workspace the policy belongs to. Required for an organization management key; a workspace-scoped key defaults to its own workspace and gets 403 for any other.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -7270,7 +7270,6 @@ class GuardrailPolicies(BaseSDK):
             components.GuardrailModerationPolicyConfigTypedDict,
         ],
         name: str,
-        workspace_id: str,
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
@@ -7279,6 +7278,7 @@ class GuardrailPolicies(BaseSDK):
         member_ids: Optional[Iterable[str]] = None,
         opted_out_api_key_hashes: Optional[Iterable[str]] = None,
         opted_out_member_ids: Optional[Iterable[str]] = None,
+        workspace_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -7291,7 +7291,6 @@ class GuardrailPolicies(BaseSDK):
         :param id: Policy ID
         :param config:
         :param name: Policy name
-        :param workspace_id: Workspace the policy belongs to
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
@@ -7304,6 +7303,7 @@ class GuardrailPolicies(BaseSDK):
         :param member_ids: Complete new list of assigned members. Send together with `api_key_hashes`, or omit both to keep the stored assignments.
         :param opted_out_api_key_hashes: API key hashes
         :param opted_out_member_ids: Organization member user IDs
+        :param workspace_id: Workspace the policy belongs to. Required for an organization management key; a workspace-scoped key defaults to its own workspace and gets 403 for any other.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -7457,7 +7457,6 @@ class GuardrailPolicies(BaseSDK):
             components.GuardrailModerationPolicyConfigTypedDict,
         ],
         name: str,
-        workspace_id: str,
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
@@ -7466,6 +7465,7 @@ class GuardrailPolicies(BaseSDK):
         member_ids: Optional[Iterable[str]] = None,
         opted_out_api_key_hashes: Optional[Iterable[str]] = None,
         opted_out_member_ids: Optional[Iterable[str]] = None,
+        workspace_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -7478,7 +7478,6 @@ class GuardrailPolicies(BaseSDK):
         :param id: Policy ID
         :param config:
         :param name: Policy name
-        :param workspace_id: Workspace the policy belongs to
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
@@ -7491,6 +7490,7 @@ class GuardrailPolicies(BaseSDK):
         :param member_ids: Complete new list of assigned members. Send together with `api_key_hashes`, or omit both to keep the stored assignments.
         :param opted_out_api_key_hashes: API key hashes
         :param opted_out_member_ids: Organization member user IDs
+        :param workspace_id: Workspace the policy belongs to. Required for an organization management key; a workspace-scoped key defaults to its own workspace and gets 403 for any other.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds

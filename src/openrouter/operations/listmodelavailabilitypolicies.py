@@ -77,8 +77,6 @@ class ListModelAvailabilityPoliciesGlobals(BaseModel):
 
 
 class ListModelAvailabilityPoliciesRequestTypedDict(TypedDict):
-    workspace_id: str
-    r"""Workspace the policy belongs to"""
     http_referer: NotRequired[str]
     r"""The app identifier should be your app's URL and is used as the primary identifier for rankings.
     This is used to track API usage per application.
@@ -96,14 +94,11 @@ class ListModelAvailabilityPoliciesRequestTypedDict(TypedDict):
     r"""Number of records to skip for pagination. When both offset and limit are omitted, the full list is returned"""
     limit: NotRequired[int]
     r"""Maximum number of records to return (max 100). When both offset and limit are omitted, the full list is returned"""
+    workspace_id: NotRequired[str]
+    r"""Workspace the policy belongs to. Required for an organization management key; a workspace-scoped key defaults to its own workspace and gets 403 for any other."""
 
 
 class ListModelAvailabilityPoliciesRequest(BaseModel):
-    workspace_id: Annotated[
-        str, FieldMetadata(query=QueryParamMetadata(style="form", explode=True))
-    ]
-    r"""Workspace the policy belongs to"""
-
     http_referer: Annotated[
         Optional[str],
         pydantic.Field(alias="HTTP-Referer"),
@@ -144,6 +139,12 @@ class ListModelAvailabilityPoliciesRequest(BaseModel):
     ] = None
     r"""Maximum number of records to return (max 100). When both offset and limit are omitted, the full list is returned"""
 
+    workspace_id: Annotated[
+        Optional[str],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Workspace the policy belongs to. Required for an organization management key; a workspace-scoped key defaults to its own workspace and gets 403 for any other."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
@@ -153,6 +154,7 @@ class ListModelAvailabilityPoliciesRequest(BaseModel):
                 "X-OpenRouter-Categories",
                 "offset",
                 "limit",
+                "workspace_id",
             ]
         )
         serialized = handler(self)
