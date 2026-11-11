@@ -194,7 +194,7 @@ class VideoModelTypedDict(TypedDict):
     supported_aspect_ratios: Nullable[List[SupportedAspectRatio]]
     r"""Supported output aspect ratios"""
     supported_durations: Nullable[List[int]]
-    r"""Supported video durations in seconds"""
+    r"""Supported video durations in seconds. -1 means the model accepts duration -1 and chooses the length itself."""
     supported_frame_images: Nullable[List[SupportedFrameImage]]
     r"""Supported frame image types (e.g. first_frame, last_frame)"""
     supported_resolutions: Nullable[List[SupportedResolution]]
@@ -240,7 +240,7 @@ class VideoModel(BaseModel):
     r"""Supported output aspect ratios"""
 
     supported_durations: Nullable[List[int]]
-    r"""Supported video durations in seconds"""
+    r"""Supported video durations in seconds. -1 means the model accepts duration -1 and chooses the length itself."""
 
     supported_frame_images: Nullable[List[SupportedFrameImage]]
     r"""Supported frame image types (e.g. first_frame, last_frame)"""
