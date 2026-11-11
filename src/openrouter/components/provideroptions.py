@@ -144,6 +144,7 @@ class ProviderOptionsTypedDict(TypedDict):
     sf_compute: NotRequired[Dict[str, Any]]
     siliconflow: NotRequired[Dict[str, Any]]
     sourceful: NotRequired[Dict[str, Any]]
+    speechify: NotRequired[Dict[str, Any]]
     stealth: NotRequired[Dict[str, Any]]
     stepfun: NotRequired[Dict[str, Any]]
     streamlake: NotRequired[Dict[str, Any]]
@@ -489,6 +490,8 @@ class ProviderOptions(BaseModel):
 
     sourceful: Optional[Dict[str, Any]] = None
 
+    speechify: Optional[Dict[str, Any]] = None
+
     stealth: Optional[Dict[str, Any]] = None
 
     stepfun: Optional[Dict[str, Any]] = None
@@ -674,6 +677,7 @@ class ProviderOptions(BaseModel):
                 "sf-compute",
                 "siliconflow",
                 "sourceful",
+                "speechify",
                 "stealth",
                 "stepfun",
                 "streamlake",

@@ -190,6 +190,7 @@ Provider = Union[
         "seed",
         "siliconflow",
         "sourceful",
+        "speechify",
         "stepfun",
         "streamlake",
         "switchpoint",

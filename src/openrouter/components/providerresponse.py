@@ -140,6 +140,7 @@ ProviderResponseProviderName = Union[
         "Seed",
         "SiliconFlow",
         "Sourceful",
+        "Speechify",
         "StepFun",
         "Stealth",
         "StreamLake",
