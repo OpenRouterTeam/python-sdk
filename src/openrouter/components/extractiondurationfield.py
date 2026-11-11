@@ -17,6 +17,7 @@ class ExtractionDurationFieldTypedDict(TypedDict):
     instructions: NotRequired[str]
     r"""What the field should contain."""
     integer: NotRequired[bool]
+    r"""Whole numbers only."""
     null_threshold: NotRequired[float]
     r"""Probability of null above which `value` is null. Default 0.5."""
     unit: NotRequired[str]
@@ -33,6 +34,7 @@ class ExtractionDurationField(BaseModel):
     r"""What the field should contain."""
 
     integer: Optional[bool] = None
+    r"""Whole numbers only."""
 
     null_threshold: Optional[float] = None
     r"""Probability of null above which `value` is null. Default 0.5."""

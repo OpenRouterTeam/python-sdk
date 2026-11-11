@@ -54,7 +54,7 @@ class ExtractionListAnswerTypedDict(TypedDict):
     source: NotRequired[ExtractionListAnswerSource]
     r"""Set to `image` or `document` when the answer was read from an image or a PDF rather than the state text."""
     spans: NotRequired[List[Nullable[List[int]]]]
-    r"""One span per item of `value`, in the same order; null for an item that has no offsets in the state text (read from an image or a document)."""
+    r"""One span per item of `value`, in the same order; null for an item that has no offsets in the state text: one read from an image or a document, or one the provider returned without offsets that delimit it."""
     spell_confidence: NotRequired[float]
     r"""Confidence in the spelling of text read from an image."""
 
@@ -79,7 +79,7 @@ class ExtractionListAnswer(BaseModel):
     r"""Set to `image` or `document` when the answer was read from an image or a PDF rather than the state text."""
 
     spans: Optional[List[Nullable[List[int]]]] = None
-    r"""One span per item of `value`, in the same order; null for an item that has no offsets in the state text (read from an image or a document)."""
+    r"""One span per item of `value`, in the same order; null for an item that has no offsets in the state text: one read from an image or a document, or one the provider returned without offsets that delimit it."""
 
     spell_confidence: Optional[float] = None
     r"""Confidence in the spelling of text read from an image."""

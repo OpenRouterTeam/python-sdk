@@ -64,10 +64,11 @@ class ExtractionEstimateFieldTypedDict(TypedDict):
     instructions: NotRequired[str]
     r"""What the field should contain."""
     null_threshold: NotRequired[float]
-    r"""Probability of null above which `value` is null. Default 0.5."""
+    r"""Not read on this field type: no model takes a null threshold here, and a request that sets it fails with a 400."""
     scale: NotRequired[ExtractionEstimateFieldScale]
     step: NotRequired[ExtractionEstimateFieldStepUnionTypedDict]
     unit: NotRequired[str]
+    r"""Unit label for the value."""
 
 
 class ExtractionEstimateField(BaseModel):
@@ -81,13 +82,14 @@ class ExtractionEstimateField(BaseModel):
     r"""What the field should contain."""
 
     null_threshold: Optional[float] = None
-    r"""Probability of null above which `value` is null. Default 0.5."""
+    r"""Not read on this field type: no model takes a null threshold here, and a request that sets it fails with a 400."""
 
     scale: Optional[ExtractionEstimateFieldScale] = None
 
     step: Optional[ExtractionEstimateFieldStepUnion] = None
 
     unit: Optional[str] = None
+    r"""Unit label for the value."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

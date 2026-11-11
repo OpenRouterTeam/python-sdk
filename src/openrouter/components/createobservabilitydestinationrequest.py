@@ -52,7 +52,7 @@ class CreateObservabilityDestinationRequestTypedDict(TypedDict):
     type: CreateObservabilityDestinationRequestType
     r"""The destination type. Only stable destination types are accepted."""
     api_key_hashes: NotRequired[Nullable[List[str]]]
-    r"""Optional allowlist of OpenRouter API key hashes whose traffic is forwarded. `null` or omitted means all keys. Must contain at least one hash if provided."""
+    r"""Optional allowlist of OpenRouter API key hashes whose traffic is forwarded. `null` or omitted means all keys. Must contain at least one hash if provided. A workspace-scoped management key can only name API keys in its own workspace; any other hash returns 400."""
     broadcast_generation_cost: NotRequired[bool]
     r"""When true, include cost and billing generation metadata."""
     broadcast_generation_cost_allocation: NotRequired[bool]
@@ -72,7 +72,7 @@ class CreateObservabilityDestinationRequestTypedDict(TypedDict):
     sampling_rate: NotRequired[float]
     r"""Sampling rate between 0.0001 and 1 (1 = 100%)."""
     workspace_id: NotRequired[str]
-    r"""Optional workspace ID. Defaults to the authenticated entity's default workspace."""
+    r"""Optional workspace ID. Defaults to the authenticated entity's default workspace, or a workspace-scoped management key's own workspace."""
 
 
 class CreateObservabilityDestinationRequest(BaseModel):
@@ -86,7 +86,7 @@ class CreateObservabilityDestinationRequest(BaseModel):
     r"""The destination type. Only stable destination types are accepted."""
 
     api_key_hashes: OptionalNullable[List[str]] = UNSET
-    r"""Optional allowlist of OpenRouter API key hashes whose traffic is forwarded. `null` or omitted means all keys. Must contain at least one hash if provided."""
+    r"""Optional allowlist of OpenRouter API key hashes whose traffic is forwarded. `null` or omitted means all keys. Must contain at least one hash if provided. A workspace-scoped management key can only name API keys in its own workspace; any other hash returns 400."""
 
     broadcast_generation_cost: Optional[bool] = False
     r"""When true, include cost and billing generation metadata."""
@@ -116,7 +116,7 @@ class CreateObservabilityDestinationRequest(BaseModel):
     r"""Sampling rate between 0.0001 and 1 (1 = 100%)."""
 
     workspace_id: Optional[str] = None
-    r"""Optional workspace ID. Defaults to the authenticated entity's default workspace."""
+    r"""Optional workspace ID. Defaults to the authenticated entity's default workspace, or a workspace-scoped management key's own workspace."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

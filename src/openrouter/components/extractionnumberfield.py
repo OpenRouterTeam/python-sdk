@@ -17,9 +17,11 @@ class ExtractionNumberFieldTypedDict(TypedDict):
     instructions: NotRequired[str]
     r"""What the field should contain."""
     integer: NotRequired[bool]
+    r"""Whole numbers only."""
     null_threshold: NotRequired[float]
     r"""Probability of null above which `value` is null. Default 0.5."""
     unit: NotRequired[str]
+    r"""Unit label for the value."""
 
 
 class ExtractionNumberField(BaseModel):
@@ -32,11 +34,13 @@ class ExtractionNumberField(BaseModel):
     r"""What the field should contain."""
 
     integer: Optional[bool] = None
+    r"""Whole numbers only."""
 
     null_threshold: Optional[float] = None
     r"""Probability of null above which `value` is null. Default 0.5."""
 
     unit: Optional[str] = None
+    r"""Unit label for the value."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
