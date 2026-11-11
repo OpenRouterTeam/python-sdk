@@ -1,0 +1,31 @@
+overlay: 1.0.0
+x-speakeasy-jsonpath: rfc9535
+info:
+  title: Default the role of each chat message type so callers can omit it
+  version: 0.0.0
+actions:
+  - target: $.components.schemas.ChatSystemMessage.properties.role
+    description: >-
+      The public spec emits each message role as a single-value enum with no
+      default, so the generated ChatSystemMessage requires role="system" even
+      though the class already fixes it. A default lets callers construct the
+      message without passing role, as they could before the spec stopped
+      emitting const. The discriminator on ChatMessages is unchanged.
+    update:
+      default: system
+  - target: $.components.schemas.ChatUserMessage.properties.role
+    description: Same as ChatSystemMessage, for role "user".
+    update:
+      default: user
+  - target: $.components.schemas.ChatDeveloperMessage.properties.role
+    description: Same as ChatSystemMessage, for role "developer".
+    update:
+      default: developer
+  - target: $.components.schemas.ChatAssistantMessage.properties.role
+    description: Same as ChatSystemMessage, for role "assistant".
+    update:
+      default: assistant
+  - target: $.components.schemas.ChatToolMessage.properties.role
+    description: Same as ChatSystemMessage, for role "tool".
+    update:
+      default: tool
