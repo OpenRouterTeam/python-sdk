@@ -61,7 +61,7 @@ class Embeddings(BaseSDK):
 
         :param dimensions: The number of dimensions for the output embeddings
         :param encoding_format: The format of the output embeddings
-        :param input_type: The type of input (e.g. search_query, search_document)
+        :param input_type: The type of input (e.g. search_query, search_document). Document-chunk input (`string[][]`) is only valid with a document input type.
         :param provider:
         :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow). Used for observability grouping in Broadcast and private logging; never sent to the provider. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters.
         :param trace: Metadata for observability and tracing. Known keys (trace_id, trace_name, span_name, generation_name, parent_span_id) have special handling. Additional keys are passed through as custom metadata to configured broadcast destinations.
@@ -298,7 +298,7 @@ class Embeddings(BaseSDK):
 
         :param dimensions: The number of dimensions for the output embeddings
         :param encoding_format: The format of the output embeddings
-        :param input_type: The type of input (e.g. search_query, search_document)
+        :param input_type: The type of input (e.g. search_query, search_document). Document-chunk input (`string[][]`) is only valid with a document input type.
         :param provider:
         :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow). Used for observability grouping in Broadcast and private logging; never sent to the provider. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters.
         :param trace: Metadata for observability and tracing. Known keys (trace_id, trace_name, span_name, generation_name, parent_span_id) have special handling. Additional keys are passed through as custom metadata to configured broadcast destinations.

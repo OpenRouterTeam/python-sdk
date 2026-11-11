@@ -252,6 +252,8 @@ class BatchObjectDataTypedDict(TypedDict):
     embedding: EmbeddingTypedDict
     r"""Embedding vector as an array of floats or a base64 string"""
     object: ObjectEmbedding
+    document_index: NotRequired[int]
+    r"""Index of the source document when `input` was a list of documents (contextual embeddings). Absent otherwise."""
     index: NotRequired[int]
     r"""Index of the embedding in the input list"""
 
@@ -264,12 +266,15 @@ class BatchObjectData(BaseModel):
 
     object: ObjectEmbedding
 
+    document_index: Optional[int] = None
+    r"""Index of the source document when `input` was a list of documents (contextual embeddings). Absent otherwise."""
+
     index: Optional[int] = None
     r"""Index of the embedding in the input list"""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["index"])
+        optional_fields = set(["document_index", "index"])
         serialized = handler(self)
         m = {}
 
