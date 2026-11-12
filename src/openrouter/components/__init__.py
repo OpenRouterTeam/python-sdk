@@ -4294,6 +4294,12 @@ if TYPE_CHECKING:
         ResponseOutputTextType,
         ResponseOutputTextTypedDict,
     )
+    from .responsesbadrequestresponseerrordata import (
+        Code,
+        CodeTypedDict,
+        ResponsesBadRequestResponseErrorData,
+        ResponsesBadRequestResponseErrorDataTypedDict,
+    )
     from .responsesrequest import (
         ReasoningConfig,
         ReasoningConfigTypedDict,
@@ -5990,6 +5996,7 @@ __all__ = [
     "ClearToolInputsTypedDict",
     "ClientClosedRequestResponseErrorData",
     "ClientClosedRequestResponseErrorDataTypedDict",
+    "Code",
     "CodeEnum",
     "CodeInterpreterCallCodeDeltaEvent",
     "CodeInterpreterCallCodeDeltaEventType",
@@ -6017,6 +6024,7 @@ __all__ = [
     "CodeInterpreterLogsOutputTypedDict",
     "CodeInterpreterServerTool",
     "CodeInterpreterServerToolTypedDict",
+    "CodeTypedDict",
     "CodexLocalShellTool",
     "CodexLocalShellToolType",
     "CodexLocalShellToolTypedDict",
@@ -8097,6 +8105,8 @@ __all__ = [
     "ResponseOutputTextTopLogprobTypedDict",
     "ResponseOutputTextType",
     "ResponseOutputTextTypedDict",
+    "ResponsesBadRequestResponseErrorData",
+    "ResponsesBadRequestResponseErrorDataTypedDict",
     "ResponsesRequest",
     "ResponsesRequestAccessPrograms",
     "ResponsesRequestAccessProgramsTypedDict",
@@ -11953,6 +11963,10 @@ _dynamic_imports: dict[str, str] = {
     "ResponseOutputTextTopLogprobTypedDict": ".responseoutputtext",
     "ResponseOutputTextType": ".responseoutputtext",
     "ResponseOutputTextTypedDict": ".responseoutputtext",
+    "Code": ".responsesbadrequestresponseerrordata",
+    "CodeTypedDict": ".responsesbadrequestresponseerrordata",
+    "ResponsesBadRequestResponseErrorData": ".responsesbadrequestresponseerrordata",
+    "ResponsesBadRequestResponseErrorDataTypedDict": ".responsesbadrequestresponseerrordata",
     "ReasoningConfig": ".responsesrequest",
     "ReasoningConfigTypedDict": ".responsesrequest",
     "ResponsesRequest": ".responsesrequest",

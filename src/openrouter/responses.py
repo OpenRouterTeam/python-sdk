@@ -917,9 +917,11 @@ class Responses(BaseSDK):
         if utils.match_response(http_res, "400", "application/json"):
             http_res_text = utils.stream_to_text(http_res)
             response_data = unmarshal_json_response(
-                errors.BadRequestResponseErrorData, http_res, http_res_text
+                errors.ResponsesBadRequestResponseErrorData, http_res, http_res_text
             )
-            raise errors.BadRequestResponseError(response_data, http_res, http_res_text)
+            raise errors.ResponsesBadRequestResponseError(
+                response_data, http_res, http_res_text
+            )
         if utils.match_response(http_res, "401", "application/json"):
             http_res_text = utils.stream_to_text(http_res)
             response_data = unmarshal_json_response(
@@ -1929,9 +1931,11 @@ class Responses(BaseSDK):
         if utils.match_response(http_res, "400", "application/json"):
             http_res_text = await utils.stream_to_text_async(http_res)
             response_data = unmarshal_json_response(
-                errors.BadRequestResponseErrorData, http_res, http_res_text
+                errors.ResponsesBadRequestResponseErrorData, http_res, http_res_text
             )
-            raise errors.BadRequestResponseError(response_data, http_res, http_res_text)
+            raise errors.ResponsesBadRequestResponseError(
+                response_data, http_res, http_res_text
+            )
         if utils.match_response(http_res, "401", "application/json"):
             http_res_text = await utils.stream_to_text_async(http_res)
             response_data = unmarshal_json_response(
