@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c48cf606-fb42-4a45-9c23-8f0555307828
 management:
-  docChecksum: f611bdab224d0286fbaa5c8d9ee788d3
+  docChecksum: 35f9eb4e0a148b569e1f379feaa02ee6
   docVersion: 1.0.0
   speakeasyVersion: 1.803.2
   generationVersion: 2.950.13
-  releaseVersion: 1.3.167
-  configChecksum: 6f4174e9744dd1a79a9169c84bf46f7f
+  releaseVersion: 1.3.168
+  configChecksum: 592bef8f365f105df5b463a9f4256348
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
 persistentEdits:
-  generation_id: 13e378c9-1e4e-4933-8b6f-740d4d09179e
-  pristine_commit_hash: 751a04fd6a50f7216cae4e29e6d9ff261f5abc57
-  pristine_tree_hash: 050ec9f9aacd7be4dbd8f55ec4abebb186f92339
+  generation_id: 39ab7c7c-7b9b-4089-b762-a98c6ae0e6e0
+  pristine_commit_hash: 0d6e1bab971b152935b1111d437dcda5e640a89c
+  pristine_tree_hash: b4183bb0750f923eb4a0ec7ce3ee24238b16e393
 features:
   python:
     acceptHeaders: 3.0.0
@@ -11620,8 +11620,8 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:1203dbc2c60a8c1ba4296f4619f203ed2de0ab7c
-    pristine_git_object: 47de851775601f74d2bccf94a92a722486a32121
+    last_write_checksum: sha1:cd59c06a8a0fe464eb0d8e3e6b6092307758de61
+    pristine_git_object: 7c65a07cefe1a4a3e3694bd79aa6e667f7becf4e
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77f44b60b98bc126557ec27391f91dfba764bb54
@@ -11648,8 +11648,8 @@ trackedFiles:
     pristine_git_object: 86713cfea633e09d33b3d4e65281071fe20e6137
   src/openrouter/_version.py:
     id: d8d15ad6c586
-    last_write_checksum: sha1:d30bd7e48b70ac8fad34b1b243b17e93585c18d6
-    pristine_git_object: bb87867809391815626034883cd8f37e869e46e7
+    last_write_checksum: sha1:630e9bd9bb8dde4321c6bc4916d5559d4d2e9ebb
+    pristine_git_object: 53482733104881bfd573f859416dc6dd2cc35d05
   src/openrouter/alpha.py:
     id: 306c4d93308d
     last_write_checksum: sha1:80cc0f39649445431cc2247ed0e0765438467766
