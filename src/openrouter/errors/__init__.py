@@ -77,6 +77,10 @@ if TYPE_CHECKING:
         RequestTimeoutResponseError,
         RequestTimeoutResponseErrorData,
     )
+    from .responsesbadrequestresponse_error import (
+        ResponsesBadRequestResponseError,
+        ResponsesBadRequestResponseErrorData,
+    )
     from .responsevalidationerror import ResponseValidationError
     from .serviceunavailableresponse_error import (
         ServiceUnavailableResponseError,
@@ -144,6 +148,8 @@ __all__ = [
     "RequestTimeoutResponseError",
     "RequestTimeoutResponseErrorData",
     "ResponseValidationError",
+    "ResponsesBadRequestResponseError",
+    "ResponsesBadRequestResponseErrorData",
     "ServiceUnavailableResponseError",
     "ServiceUnavailableResponseErrorData",
     "TooManyRequestsResponseError",
@@ -205,6 +211,8 @@ _dynamic_imports: dict[str, str] = {
     "ProviderOverloadedResponseErrorData": ".provideroverloadedresponse_error",
     "RequestTimeoutResponseError": ".requesttimeoutresponse_error",
     "RequestTimeoutResponseErrorData": ".requesttimeoutresponse_error",
+    "ResponsesBadRequestResponseError": ".responsesbadrequestresponse_error",
+    "ResponsesBadRequestResponseErrorData": ".responsesbadrequestresponse_error",
     "ResponseValidationError": ".responsevalidationerror",
     "ServiceUnavailableResponseError": ".serviceunavailableresponse_error",
     "ServiceUnavailableResponseErrorData": ".serviceunavailableresponse_error",
