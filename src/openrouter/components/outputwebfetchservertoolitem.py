@@ -23,6 +23,8 @@ class OutputWebFetchServerToolItemTypedDict(TypedDict):
     http_status: NotRequired[int]
     r"""The HTTP status code returned by the upstream URL fetch."""
     id: NotRequired[str]
+    retrieved_at: NotRequired[str]
+    r"""The time the content was fetched, as an ISO 8601 timestamp."""
     title: NotRequired[str]
     url: NotRequired[str]
 
@@ -44,13 +46,18 @@ class OutputWebFetchServerToolItem(BaseModel):
 
     id: Optional[str] = None
 
+    retrieved_at: Optional[str] = None
+    r"""The time the content was fetched, as an ISO 8601 timestamp."""
+
     title: Optional[str] = None
 
     url: Optional[str] = None
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["content", "error", "httpStatus", "id", "title", "url"])
+        optional_fields = set(
+            ["content", "error", "httpStatus", "id", "retrieved_at", "title", "url"]
+        )
         serialized = handler(self)
         m = {}
 
