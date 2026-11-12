@@ -5,7 +5,10 @@ from .contentfilterbuiltinentry import (
     ContentFilterBuiltinEntry,
     ContentFilterBuiltinEntryTypedDict,
 )
-from .contentfilterentry import ContentFilterEntry, ContentFilterEntryTypedDict
+from .contentfilterreadentry import (
+    ContentFilterReadEntry,
+    ContentFilterReadEntryTypedDict,
+)
 from .guardraildataregion import GuardrailDataRegion
 from .guardrailinterval import GuardrailInterval
 from openrouter.types import (
@@ -46,7 +49,7 @@ class GuardrailTypedDict(TypedDict):
         Nullable[List[ContentFilterBuiltinEntryTypedDict]]
     ]
     r"""Builtin content filters applied to requests. Includes PII detectors and the regex-based prompt injection detector."""
-    content_filters: NotRequired[Nullable[List[ContentFilterEntryTypedDict]]]
+    content_filters: NotRequired[Nullable[List[ContentFilterReadEntryTypedDict]]]
     r"""Custom regex content filters applied to request messages"""
     description: NotRequired[Nullable[str]]
     r"""Description of the guardrail"""
@@ -116,7 +119,7 @@ class Guardrail(BaseModel):
     content_filter_builtins: OptionalNullable[List[ContentFilterBuiltinEntry]] = UNSET
     r"""Builtin content filters applied to requests. Includes PII detectors and the regex-based prompt injection detector."""
 
-    content_filters: OptionalNullable[List[ContentFilterEntry]] = UNSET
+    content_filters: OptionalNullable[List[ContentFilterReadEntry]] = UNSET
     r"""Custom regex content filters applied to request messages"""
 
     description: OptionalNullable[str] = UNSET
