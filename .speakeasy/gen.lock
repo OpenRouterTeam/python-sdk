@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c48cf606-fb42-4a45-9c23-8f0555307828
 management:
-  docChecksum: 10184fdaac0580ac4aac9e157313eb40
+  docChecksum: 7b326991ba70a8a48c576cf6bf36dc6c
   docVersion: 1.0.0
   speakeasyVersion: 1.803.2
   generationVersion: 2.950.13
-  releaseVersion: 1.3.169
-  configChecksum: 9240c091eb5c515165dacfff34cf3213
+  releaseVersion: 1.3.170
+  configChecksum: 990eaedd546b685ababbd0717166ab92
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
 persistentEdits:
-  generation_id: 637340c2-787b-4252-b9ef-52c1c6595368
-  pristine_commit_hash: d3226951ab1da91872621869a07abc236c1f5b72
-  pristine_tree_hash: 3f13a3b2dfe98f36d6dd595d5018d4164cdc3c53
+  generation_id: 69e6761f-bc28-4415-b052-482fbb106c90
+  pristine_commit_hash: 741529e4b9021d7ccde61b0ea7ba94f09f9fc7fe
+  pristine_tree_hash: 84ce71d677f19c37587e79ad54585c3db06883ac
 features:
   python:
     acceptHeaders: 3.0.0
@@ -5864,8 +5864,8 @@ trackedFiles:
     pristine_git_object: 089a4e220d6582b277db90fab35b2723490cc621
   docs/components/observabilityotelcollectordestinationconfig.mdx:
     id: 204fa4b1365b
-    last_write_checksum: sha1:6d478aca958d26c74545819c36452c67a211f0cb
-    pristine_git_object: 8dd8c3883b518df3163a062bda8c4564441e701c
+    last_write_checksum: sha1:fe291178f44e7aac800dfd1bb1a0d106bd7cb218
+    pristine_git_object: ef238b1525d591865702dd4bfb8f1ab5a707a101
   docs/components/observabilityotelcollectordestinationtype.mdx:
     id: 130ee89d27f9
     last_write_checksum: sha1:bd099fbb43d7f0170267758de0467d4593194bbb
@@ -6972,8 +6972,8 @@ trackedFiles:
     pristine_git_object: d68bd61421859df1e00c0ec15f5a6946ed52dfd1
   docs/components/outputtoolsearchservertoolitem.mdx:
     id: 7106fbb89729
-    last_write_checksum: sha1:17fe788112ef3866b9c4d6ee32d0b6a6d076fb11
-    pristine_git_object: 433141ae099de822c9cec8eda2c718b356503de4
+    last_write_checksum: sha1:cd30906a1411db0058111577f8c0dc7b1883ecf2
+    pristine_git_object: 201f1b8a22046f6f770e4dea3863c6f21c611843
   docs/components/outputtoolsearchservertoolitemformat.mdx:
     id: 717072e9e3e8
     last_write_checksum: sha1:04cf65dbe63614cfee6df054640472e679b4faac
@@ -11620,8 +11620,8 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:1aaa82944c6bb30732d9d428ce44cfcaa30198ff
-    pristine_git_object: d804c0cbf03075954f0381f1a38558e368d33ce3
+    last_write_checksum: sha1:6fd972a2de80493fb50b225b4b2a3c3dd40644cd
+    pristine_git_object: ca7074d884098d18f06262f84d9ffad6715ea33d
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77f44b60b98bc126557ec27391f91dfba764bb54
@@ -11648,8 +11648,8 @@ trackedFiles:
     pristine_git_object: 86713cfea633e09d33b3d4e65281071fe20e6137
   src/openrouter/_version.py:
     id: d8d15ad6c586
-    last_write_checksum: sha1:7679b06745e9a8448f76e9a04851caf342cd3fdd
-    pristine_git_object: 24df38070338b49d7f148d56856e25fd8a8c6e16
+    last_write_checksum: sha1:c1b7078545826eb3dfe078120fe142ed30e97ea1
+    pristine_git_object: 5931b7f6361978af77c74b151ac4d6bb3d4dbbf2
   src/openrouter/alpha.py:
     id: 306c4d93308d
     last_write_checksum: sha1:80cc0f39649445431cc2247ed0e0765438467766
@@ -14076,8 +14076,8 @@ trackedFiles:
     pristine_git_object: a7d2a453235cec62fc57f78c6e07b3cbd5824061
   src/openrouter/components/observabilityotelcollectordestination.py:
     id: dc77f211456a
-    last_write_checksum: sha1:4fafd63d0a1dc1120e37871c46b9a1438ac05eda
-    pristine_git_object: e94b83f5ebce437e54ace0a5079149190940eff1
+    last_write_checksum: sha1:67e451d48e15f0e9013553cc91e35f1e9c76bb5b
+    pristine_git_object: 26154ee5c99e652710414a83969fd80622ab6100
   src/openrouter/components/observabilityposthogdestination.py:
     id: 3a9f4942fcf9
     last_write_checksum: sha1:eb26037b36426da6a3c8a734946accd78045e0b2
@@ -14420,8 +14420,8 @@ trackedFiles:
     pristine_git_object: d5a5c820aff0971a68a725af296d68d8d3891992
   src/openrouter/components/outputtoolsearchservertoolitem.py:
     id: fb4ec737039d
-    last_write_checksum: sha1:ee1d3c15f23c0577932609ac3b9f5d0c486318fc
-    pristine_git_object: 90fe6d70aab60697f5fe69d3b0dc6044c69fb999
+    last_write_checksum: sha1:7322e8736317e73dc9e63758ae6d3fb0907417a9
+    pristine_git_object: cbecff6e9cdfa7834bcbb232dc71ef36398fa993
   src/openrouter/components/outputwebfetchservertoolitem.py:
     id: 2b12eb287cdf
     last_write_checksum: sha1:60ec6ef59d691699c092120ea7dffed824197872
@@ -21609,4 +21609,4 @@ examples:
         "500":
           application/json: {"error": {"code": 500, "message": "Internal Server Error"}}
 examplesVersion: 1.0.2
-releaseNotes: "## Python SDK Changes:\n* `open_router.presets.create_presets_responses()`: \n  *  `request.include[]` **Changed**\n"
+releaseNotes: "## Python SDK Changes:\n* `open_router.batch.create_batches()`:  `response.results[].response.body.union(OpenResponsesResult).output[].union(openrouter:tool_search).catalog_index_note` **Added**\n* `open_router.batch.get_batches()`:  `response.results[].response.body.union(OpenResponsesResult).output[].union(openrouter:tool_search).catalog_index_note` **Added**\n* `open_router.observability.list()`:  `response.data[].union(otel-collector).config` **Changed**\n* `open_router.observability.create()`:  `response.data.union(otel-collector).config` **Changed**\n* `open_router.observability.get()`:  `response.data.union(otel-collector).config` **Changed**\n* `open_router.observability.update()`:  `response.data.union(otel-collector).config` **Changed**\n* `open_router.presets.create_presets_responses()`: \n  *  `request.input.union(Array<>)[].union(OutputToolSearchServerToolItem).catalog_index_note` **Added**\n"

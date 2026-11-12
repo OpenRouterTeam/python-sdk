@@ -7,15 +7,20 @@ from .observabilityfilterrulesconfig import (
     ObservabilityFilterRulesConfigTypedDict,
 )
 from openrouter.types import BaseModel, Nullable, UNSET_SENTINEL
+import pydantic
 from pydantic import model_serializer
 from typing import Dict, List, Literal, Optional
-from typing_extensions import NotRequired, TypedDict
+from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class ObservabilityOtelCollectorDestinationConfigTypedDict(TypedDict):
     endpoint: str
     headers: NotRequired[Dict[str, str]]
     r"""Custom HTTP headers as a JSON object. For Axiom, use {\"Authorization\": \"Bearer xaat-xxx\", \"X-Axiom-Dataset\": \"your-dataset\"}"""
+    metrics_endpoint: NotRequired[str]
+    r"""OTLP/HTTP metrics URL. Required when `shouldSendMetrics` (Send OTLP metrics) is true; ignored otherwise."""
+    should_send_metrics: NotRequired[bool]
+    r"""Also send OTLP metrics for each delivered generation to the metrics endpoint, with the same headers."""
 
 
 class ObservabilityOtelCollectorDestinationConfig(BaseModel):
@@ -24,9 +29,19 @@ class ObservabilityOtelCollectorDestinationConfig(BaseModel):
     headers: Optional[Dict[str, str]] = None
     r"""Custom HTTP headers as a JSON object. For Axiom, use {\"Authorization\": \"Bearer xaat-xxx\", \"X-Axiom-Dataset\": \"your-dataset\"}"""
 
+    metrics_endpoint: Annotated[
+        Optional[str], pydantic.Field(alias="metricsEndpoint")
+    ] = None
+    r"""OTLP/HTTP metrics URL. Required when `shouldSendMetrics` (Send OTLP metrics) is true; ignored otherwise."""
+
+    should_send_metrics: Annotated[
+        Optional[bool], pydantic.Field(alias="shouldSendMetrics")
+    ] = False
+    r"""Also send OTLP metrics for each delivered generation to the metrics endpoint, with the same headers."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["headers"])
+        optional_fields = set(["headers", "metricsEndpoint", "shouldSendMetrics"])
         serialized = handler(self)
         m = {}
 
@@ -142,3 +157,9 @@ class ObservabilityOtelCollectorDestination(BaseModel):
                 m[k] = val
 
         return m
+
+
+try:
+    ObservabilityOtelCollectorDestinationConfig.model_rebuild()
+except NameError:
+    pass
