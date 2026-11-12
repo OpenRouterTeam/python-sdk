@@ -1503,6 +1503,10 @@ if TYPE_CHECKING:
     )
     from .contentfilterbuiltinslug import ContentFilterBuiltinSlug
     from .contentfilterentry import ContentFilterEntry, ContentFilterEntryTypedDict
+    from .contentfilterreadentry import (
+        ContentFilterReadEntry,
+        ContentFilterReadEntryTypedDict,
+    )
     from .contentpartaddedevent import (
         ContentPartAddedEvent,
         ContentPartAddedEventPart,
@@ -6092,6 +6096,8 @@ __all__ = [
     "ContentFilterBuiltinTypedDict",
     "ContentFilterEntry",
     "ContentFilterEntryTypedDict",
+    "ContentFilterReadEntry",
+    "ContentFilterReadEntryTypedDict",
     "ContentFilterTypedDict",
     "ContentImageURL",
     "ContentImageURLImageURL",
@@ -9888,6 +9894,8 @@ _dynamic_imports: dict[str, str] = {
     "ContentFilterBuiltinSlug": ".contentfilterbuiltinslug",
     "ContentFilterEntry": ".contentfilterentry",
     "ContentFilterEntryTypedDict": ".contentfilterentry",
+    "ContentFilterReadEntry": ".contentfilterreadentry",
+    "ContentFilterReadEntryTypedDict": ".contentfilterreadentry",
     "ContentPartAddedEvent": ".contentpartaddedevent",
     "ContentPartAddedEventPart": ".contentpartaddedevent",
     "ContentPartAddedEventPartTypedDict": ".contentpartaddedevent",
