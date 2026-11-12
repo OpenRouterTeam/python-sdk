@@ -8,9 +8,9 @@ from typing_extensions import TypedDict
 
 class BulkAddWorkspaceMembersRequestTypedDict(TypedDict):
     user_ids: List[str]
-    r"""List of user IDs to add to the workspace. Members are assigned the same role they hold in the organization."""
+    r"""List of user IDs to add to the workspace. New members are assigned the workspace role that matches their organization role; users already in the workspace keep their current role."""
 
 
 class BulkAddWorkspaceMembersRequest(BaseModel):
     user_ids: List[str]
-    r"""List of user IDs to add to the workspace. Members are assigned the same role they hold in the organization."""
+    r"""List of user IDs to add to the workspace. New members are assigned the workspace role that matches their organization role; users already in the workspace keep their current role."""

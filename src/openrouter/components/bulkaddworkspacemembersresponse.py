@@ -9,14 +9,14 @@ from typing_extensions import TypedDict
 
 class BulkAddWorkspaceMembersResponseTypedDict(TypedDict):
     added_count: int
-    r"""Number of workspace memberships created or updated"""
+    r"""Number of workspace memberships created"""
     data: List[WorkspaceMemberTypedDict]
     r"""List of added workspace memberships"""
 
 
 class BulkAddWorkspaceMembersResponse(BaseModel):
     added_count: int
-    r"""Number of workspace memberships created or updated"""
+    r"""Number of workspace memberships created"""
 
     data: List[WorkspaceMember]
     r"""List of added workspace memberships"""
