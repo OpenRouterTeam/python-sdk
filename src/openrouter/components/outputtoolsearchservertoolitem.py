@@ -43,6 +43,8 @@ class OutputToolSearchServerToolItemTypedDict(TypedDict):
     r"""What the announced index added and removed since the previous one, when the request opted into `announce_catalog_changes` and the catalog changed between model turns. Replaying the item shows the same lines."""
     catalog_index: NotRequired[str]
     r"""The deferred-tool index the router showed the model with a pre-search, listing tool sources and names. Replaying the item shows the same index."""
+    catalog_index_note: NotRequired[bool]
+    r"""Whether the model read, after the catalog index, that the listed sources are those connected so far. Replaying the item shows that note only when this is true. Its wording follows the replaying request: it names `WaitForMcpServers` only while that request carries the tool."""
     error: NotRequired[str]
     r"""The error message when the tool call failed before producing a result. Set together with `status: 'failed'`; absent on a successful call."""
     format_: NotRequired[OutputToolSearchServerToolItemFormat]
@@ -77,6 +79,9 @@ class OutputToolSearchServerToolItem(BaseModel):
     catalog_index: Optional[str] = None
     r"""The deferred-tool index the router showed the model with a pre-search, listing tool sources and names. Replaying the item shows the same index."""
 
+    catalog_index_note: Optional[bool] = None
+    r"""Whether the model read, after the catalog index, that the listed sources are those connected so far. Replaying the item shows that note only when this is true. Its wording follows the replaying request: it names `WaitForMcpServers` only while that request carries the tool."""
+
     error: Optional[str] = None
     r"""The error message when the tool call failed before producing a result. Set together with `status: 'failed'`; absent on a successful call."""
 
@@ -108,6 +113,7 @@ class OutputToolSearchServerToolItem(BaseModel):
                 "call_id",
                 "catalog_changes",
                 "catalog_index",
+                "catalog_index_note",
                 "error",
                 "format",
                 "hint",

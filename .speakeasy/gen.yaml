@@ -37,7 +37,7 @@ generation:
   documentation: mintlify
   preApplyUnionDiscriminators: true
 python:
-  version: 1.3.169
+  version: 1.3.170
   additionalDependencies:
     dev:
       pytest: '>=8.3'
