@@ -52,7 +52,7 @@ class UpdateWorkspaceRequestTypedDict(TypedDict):
     io_logging_sampling_rate: NotRequired[float]
     r"""Sampling rate for I/O logging (0.0001-1)"""
     is_data_discount_logging_enabled: NotRequired[bool]
-    r"""Whether data discount logging is enabled"""
+    r"""Whether data discount logging is enabled. Enabling it requires the account to allow workspace data-discount logging; otherwise the request returns 403."""
     is_observability_broadcast_enabled: NotRequired[bool]
     r"""Whether broadcast is enabled"""
     is_observability_io_logging_enabled: NotRequired[bool]
@@ -88,7 +88,7 @@ class UpdateWorkspaceRequest(BaseModel):
     r"""Sampling rate for I/O logging (0.0001-1)"""
 
     is_data_discount_logging_enabled: Optional[bool] = None
-    r"""Whether data discount logging is enabled"""
+    r"""Whether data discount logging is enabled. Enabling it requires the account to allow workspace data-discount logging; otherwise the request returns 403."""
 
     is_observability_broadcast_enabled: Optional[bool] = None
     r"""Whether broadcast is enabled"""

@@ -387,7 +387,7 @@ class Workspaces(BaseSDK):
         :param disabled_server_tools: OpenRouter server tools that requests in this workspace may not invoke. Requests naming a disabled tool are rejected with 403. An empty array or null clears the list.
         :param io_logging_api_key_ids: Optional array of API key IDs to filter I/O logging
         :param io_logging_sampling_rate: Sampling rate for I/O logging (0.0001-1)
-        :param is_data_discount_logging_enabled: Whether data discount logging is enabled
+        :param is_data_discount_logging_enabled: Whether data discount logging is enabled. Enabling it requires the account to allow workspace data-discount logging; otherwise the request returns 403.
         :param is_observability_broadcast_enabled: Whether broadcast is enabled
         :param is_observability_io_logging_enabled: Whether private logging is enabled
         :param retries: Override the default retry configuration for this method
@@ -571,7 +571,7 @@ class Workspaces(BaseSDK):
         :param disabled_server_tools: OpenRouter server tools that requests in this workspace may not invoke. Requests naming a disabled tool are rejected with 403. An empty array or null clears the list.
         :param io_logging_api_key_ids: Optional array of API key IDs to filter I/O logging
         :param io_logging_sampling_rate: Sampling rate for I/O logging (0.0001-1)
-        :param is_data_discount_logging_enabled: Whether data discount logging is enabled
+        :param is_data_discount_logging_enabled: Whether data discount logging is enabled. Enabling it requires the account to allow workspace data-discount logging; otherwise the request returns 403.
         :param is_observability_broadcast_enabled: Whether broadcast is enabled
         :param is_observability_io_logging_enabled: Whether private logging is enabled
         :param retries: Override the default retry configuration for this method
@@ -1303,7 +1303,7 @@ class Workspaces(BaseSDK):
         :param disabled_server_tools: OpenRouter server tools that requests in this workspace may not invoke. Requests naming a disabled tool are rejected with 403. An empty array or null clears the list.
         :param io_logging_api_key_ids: Optional array of API key IDs to filter I/O logging
         :param io_logging_sampling_rate: Sampling rate for I/O logging (0.0001-1)
-        :param is_data_discount_logging_enabled: Whether data discount logging is enabled
+        :param is_data_discount_logging_enabled: Whether data discount logging is enabled. Enabling it requires the account to allow workspace data-discount logging; otherwise the request returns 403.
         :param is_observability_broadcast_enabled: Whether broadcast is enabled
         :param is_observability_io_logging_enabled: Whether private logging is enabled
         :param name: New name for the workspace
@@ -1495,7 +1495,7 @@ class Workspaces(BaseSDK):
         :param disabled_server_tools: OpenRouter server tools that requests in this workspace may not invoke. Requests naming a disabled tool are rejected with 403. An empty array or null clears the list.
         :param io_logging_api_key_ids: Optional array of API key IDs to filter I/O logging
         :param io_logging_sampling_rate: Sampling rate for I/O logging (0.0001-1)
-        :param is_data_discount_logging_enabled: Whether data discount logging is enabled
+        :param is_data_discount_logging_enabled: Whether data discount logging is enabled. Enabling it requires the account to allow workspace data-discount logging; otherwise the request returns 403.
         :param is_observability_broadcast_enabled: Whether broadcast is enabled
         :param is_observability_io_logging_enabled: Whether private logging is enabled
         :param name: New name for the workspace
@@ -2004,10 +2004,10 @@ class Workspaces(BaseSDK):
     ) -> components.BulkAddWorkspaceMembersResponse:
         r"""Bulk add members to a workspace
 
-        Add multiple organization members to a workspace. Members are assigned the same role they hold in the organization. [Management key](/docs/guides/overview/auth/management-api-keys) required.
+        Add multiple organization members to a workspace. New members are assigned the workspace role that matches their organization role. Users who are already members of the workspace keep their current role and are not included in the response. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param id: The workspace ID (UUID) or slug
-        :param user_ids: List of user IDs to add to the workspace. Members are assigned the same role they hold in the organization.
+        :param user_ids: List of user IDs to add to the workspace. New members are assigned the workspace role that matches their organization role; users already in the workspace keep their current role.
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
@@ -2156,10 +2156,10 @@ class Workspaces(BaseSDK):
     ) -> components.BulkAddWorkspaceMembersResponse:
         r"""Bulk add members to a workspace
 
-        Add multiple organization members to a workspace. Members are assigned the same role they hold in the organization. [Management key](/docs/guides/overview/auth/management-api-keys) required.
+        Add multiple organization members to a workspace. New members are assigned the workspace role that matches their organization role. Users who are already members of the workspace keep their current role and are not included in the response. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param id: The workspace ID (UUID) or slug
-        :param user_ids: List of user IDs to add to the workspace. Members are assigned the same role they hold in the organization.
+        :param user_ids: List of user IDs to add to the workspace. New members are assigned the workspace role that matches their organization role; users already in the workspace keep their current role.
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
