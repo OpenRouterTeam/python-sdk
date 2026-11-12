@@ -13,6 +13,8 @@ ResponseIncludesEnum = Union[
         "reasoning.encrypted_content",
         "output.encrypted_content",
         "code_interpreter_call.outputs",
+        "web_search_call.results",
+        "web_search_call.action.sources",
     ],
     UnrecognizedStr,
 ]
