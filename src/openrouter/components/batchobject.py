@@ -63,10 +63,11 @@ from openrouter.types import (
     UNSET_SENTINEL,
     UnrecognizedStr,
 )
+from openrouter.utils import validate_const
 from openrouter.utils.unions import parse_open_union
 import pydantic
 from pydantic import ConfigDict, model_serializer
-from pydantic.functional_validators import BeforeValidator
+from pydantic.functional_validators import AfterValidator, BeforeValidator
 from typing import Any, Dict, List, Literal, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
@@ -839,6 +840,7 @@ class BatchObjectURLCitationTypedDict(TypedDict):
     title: str
     url: str
     content: NotRequired[str]
+    uncited: Literal[True]
 
 
 class BatchObjectURLCitation(BaseModel):
@@ -852,9 +854,14 @@ class BatchObjectURLCitation(BaseModel):
 
     content: Optional[str] = None
 
+    UNCITED: Annotated[
+        Annotated[Optional[Literal[True]], AfterValidator(validate_const(True))],
+        pydantic.Field(alias="uncited"),
+    ] = True
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["content"])
+        optional_fields = set(["content", "uncited"])
         serialized = handler(self)
         m = {}
 
@@ -2191,5 +2198,9 @@ except NameError:
     pass
 try:
     Refusal.model_rebuild()
+except NameError:
+    pass
+try:
+    BatchObjectURLCitation.model_rebuild()
 except NameError:
     pass

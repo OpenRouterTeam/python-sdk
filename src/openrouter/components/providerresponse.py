@@ -75,6 +75,7 @@ ProviderResponseProviderName = Union[
         "DeepSeek",
         "DekaLLM",
         "DigitalOcean",
+        "Doubleword",
         "ElevenLabs",
         "Featherless",
         "Fireworks",

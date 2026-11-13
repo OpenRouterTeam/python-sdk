@@ -84,6 +84,7 @@ class ImageGenerationProviderPreferencesOptionsTypedDict(TypedDict):
     deepseek: NotRequired[Dict[str, Any]]
     dekallm: NotRequired[Dict[str, Any]]
     digitalocean: NotRequired[Dict[str, Any]]
+    doubleword: NotRequired[Dict[str, Any]]
     elevenlabs: NotRequired[Dict[str, Any]]
     enfer: NotRequired[Dict[str, Any]]
     fake_provider: NotRequired[Dict[str, Any]]
@@ -306,6 +307,8 @@ class ImageGenerationProviderPreferencesOptions(BaseModel):
     dekallm: Optional[Dict[str, Any]] = None
 
     digitalocean: Optional[Dict[str, Any]] = None
+
+    doubleword: Optional[Dict[str, Any]] = None
 
     elevenlabs: Optional[Dict[str, Any]] = None
 
@@ -617,6 +620,7 @@ class ImageGenerationProviderPreferencesOptions(BaseModel):
                 "deepseek",
                 "dekallm",
                 "digitalocean",
+                "doubleword",
                 "elevenlabs",
                 "enfer",
                 "fake-provider",
