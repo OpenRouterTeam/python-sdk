@@ -2,9 +2,12 @@
 
 from __future__ import annotations
 from openrouter.types import BaseModel, UNSET_SENTINEL
+from openrouter.utils import validate_const
+import pydantic
 from pydantic import model_serializer
+from pydantic.functional_validators import AfterValidator
 from typing import Literal, Optional
-from typing_extensions import NotRequired, TypedDict
+from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 URLCitationType = Literal["url_citation",]
@@ -17,6 +20,7 @@ class URLCitationTypedDict(TypedDict):
     type: URLCitationType
     url: str
     content: NotRequired[str]
+    uncited: Literal[True]
 
 
 class URLCitation(BaseModel):
@@ -32,9 +36,14 @@ class URLCitation(BaseModel):
 
     content: Optional[str] = None
 
+    UNCITED: Annotated[
+        Annotated[Optional[Literal[True]], AfterValidator(validate_const(True))],
+        pydantic.Field(alias="uncited"),
+    ] = True
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["content"])
+        optional_fields = set(["content", "uncited"])
         serialized = handler(self)
         m = {}
 
@@ -47,3 +56,9 @@ class URLCitation(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    URLCitation.model_rebuild()
+except NameError:
+    pass
