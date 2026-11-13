@@ -39,7 +39,7 @@ class BatchPaymentRequiredResponseErrorData(BaseModel):
         components_batchpaymentrequiredresponse_error.BatchPaymentRequiredResponseUsage
     ]
     output: Optional[components_batchoutputreference.BatchOutputReference] = None
-    r"""The output location of a batch submitted with `input`, whose `results` are `null`. Returned only by `GET /batches/{id}`, once the batch has ended and the provider reported an output folder. Batch lists and responses for a batch with an unpaid charge leave it out."""
+    r"""The output location of a batch submitted with `input`, whose `results` are `null`. Returned only by `GET /batches/{id}`, once the batch has ended and the provider reported an output folder or table. Batch lists and responses for a batch with an unpaid charge leave it out."""
 
 
 @dataclass(unsafe_hash=True)

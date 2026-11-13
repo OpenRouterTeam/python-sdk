@@ -56,7 +56,7 @@ class BatchSubmitBodyTypedDict(TypedDict):
     r"""HTTPS URL that receives a `batch.completed`, `batch.failed`, `batch.cancelled` or `batch.expired` webhook event when the batch reaches a terminal status. Must appear before `requests` in the request body."""
     completion_window: NotRequired[BatchSubmitBodyCompletionWindow]
     input: NotRequired[BatchInputReferenceTypedDict]
-    r"""A batch input file in your own storage, named in place of `requests`. Available to allowlisted callers on Google Vertex BYOK endpoints only."""
+    r"""A batch input file or table in your own storage, named in place of `requests`. Available to allowlisted callers on Google Vertex BYOK endpoints only."""
     provider: NotRequired[Nullable[BatchProviderPreferencesTypedDict]]
     r"""Batch provider routing preferences. Only `provider.only` and `provider.allow_fallbacks` are supported."""
     requests: NotRequired[List[RequestTypedDict]]
@@ -76,7 +76,7 @@ class BatchSubmitBody(BaseModel):
     completion_window: Optional[BatchSubmitBodyCompletionWindow] = "24h"
 
     input: Optional[BatchInputReference] = None
-    r"""A batch input file in your own storage, named in place of `requests`. Available to allowlisted callers on Google Vertex BYOK endpoints only."""
+    r"""A batch input file or table in your own storage, named in place of `requests`. Available to allowlisted callers on Google Vertex BYOK endpoints only."""
 
     provider: OptionalNullable[BatchProviderPreferences] = UNSET
     r"""Batch provider routing preferences. Only `provider.only` and `provider.allow_fallbacks` are supported."""

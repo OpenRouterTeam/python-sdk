@@ -380,7 +380,7 @@ class BatchListItemTypedDict(TypedDict):
     status: BatchListItemStatus
     usage: Nullable[BatchListItemUsageTypedDict]
     output: NotRequired[BatchOutputReferenceTypedDict]
-    r"""The output location of a batch submitted with `input`, whose `results` are `null`. Returned only by `GET /batches/{id}`, once the batch has ended and the provider reported an output folder. Batch lists and responses for a batch with an unpaid charge leave it out."""
+    r"""The output location of a batch submitted with `input`, whose `results` are `null`. Returned only by `GET /batches/{id}`, once the batch has ended and the provider reported an output folder or table. Batch lists and responses for a batch with an unpaid charge leave it out."""
 
 
 class BatchListItem(BaseModel):
@@ -418,7 +418,7 @@ class BatchListItem(BaseModel):
     usage: Nullable[BatchListItemUsage]
 
     output: Optional[BatchOutputReference] = None
-    r"""The output location of a batch submitted with `input`, whose `results` are `null`. Returned only by `GET /batches/{id}`, once the batch has ended and the provider reported an output folder. Batch lists and responses for a batch with an unpaid charge leave it out."""
+    r"""The output location of a batch submitted with `input`, whose `results` are `null`. Returned only by `GET /batches/{id}`, once the batch has ended and the provider reported an output folder or table. Batch lists and responses for a batch with an unpaid charge leave it out."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
