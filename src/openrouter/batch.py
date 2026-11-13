@@ -396,7 +396,7 @@ class Batch(BaseSDK):
 
         :param callback_url: HTTPS URL that receives a `batch.completed`, `batch.failed`, `batch.cancelled` or `batch.expired` webhook event when the batch reaches a terminal status. Must appear before `requests` in the request body.
         :param completion_window:
-        :param input: A batch input file in your own storage, named in place of `requests`. Available to allowlisted callers on Google Vertex BYOK endpoints only.
+        :param input: A batch input file or table in your own storage, named in place of `requests`. Available to allowlisted callers on Google Vertex BYOK endpoints only.
         :param provider: Batch provider routing preferences. Only `provider.only` and `provider.allow_fallbacks` are supported.
         :param requests: The batch requests. Send exactly one of `requests` or `input`; `requests` must be the last field in the request body.
         :param retries: Override the default retry configuration for this method
@@ -567,7 +567,7 @@ class Batch(BaseSDK):
 
         :param callback_url: HTTPS URL that receives a `batch.completed`, `batch.failed`, `batch.cancelled` or `batch.expired` webhook event when the batch reaches a terminal status. Must appear before `requests` in the request body.
         :param completion_window:
-        :param input: A batch input file in your own storage, named in place of `requests`. Available to allowlisted callers on Google Vertex BYOK endpoints only.
+        :param input: A batch input file or table in your own storage, named in place of `requests`. Available to allowlisted callers on Google Vertex BYOK endpoints only.
         :param provider: Batch provider routing preferences. Only `provider.only` and `provider.allow_fallbacks` are supported.
         :param requests: The batch requests. Send exactly one of `requests` or `input`; `requests` must be the last field in the request body.
         :param retries: Override the default retry configuration for this method

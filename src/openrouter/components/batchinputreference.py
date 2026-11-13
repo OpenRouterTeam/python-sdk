@@ -6,14 +6,14 @@ from typing_extensions import TypedDict
 
 
 class BatchInputReferenceTypedDict(TypedDict):
-    r"""A batch input file in your own storage, named in place of `requests`. Available to allowlisted callers on Google Vertex BYOK endpoints only."""
+    r"""A batch input file or table in your own storage, named in place of `requests`. Available to allowlisted callers on Google Vertex BYOK endpoints only."""
 
     uri: str
-    r"""Cloud Storage URI of the batch input file, in the form `gs://bucket/object`. The file stays in your bucket and must already be in the provider batch input format."""
+    r"""URI of the batch input: a Cloud Storage file in the form `gs://bucket/object`, or a BigQuery table in the form `bq://project.dataset.table`. The input stays in your project and must already be in the provider batch input format."""
 
 
 class BatchInputReference(BaseModel):
-    r"""A batch input file in your own storage, named in place of `requests`. Available to allowlisted callers on Google Vertex BYOK endpoints only."""
+    r"""A batch input file or table in your own storage, named in place of `requests`. Available to allowlisted callers on Google Vertex BYOK endpoints only."""
 
     uri: str
-    r"""Cloud Storage URI of the batch input file, in the form `gs://bucket/object`. The file stays in your bucket and must already be in the provider batch input format."""
+    r"""URI of the batch input: a Cloud Storage file in the form `gs://bucket/object`, or a BigQuery table in the form `bq://project.dataset.table`. The input stays in your project and must already be in the provider batch input format."""
