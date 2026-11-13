@@ -2502,6 +2502,7 @@ if TYPE_CHECKING:
         ImageGenerationProviderPreferencesSort,
         ImageGenerationProviderPreferencesSortTypedDict,
         ImageGenerationProviderPreferencesTypedDict,
+        ImageGenerationRequestDataCollection,
     )
     from .imagegenerationrequest import (
         ImageGenerationRequest,
@@ -4986,6 +4987,7 @@ if TYPE_CHECKING:
     from .videogenerationrequest import (
         VideoGenerationRequest,
         VideoGenerationRequestAspectRatio,
+        VideoGenerationRequestDataCollection,
         VideoGenerationRequestIgnore,
         VideoGenerationRequestIgnoreTypedDict,
         VideoGenerationRequestOnly,
@@ -6867,6 +6869,7 @@ __all__ = [
     "ImageGenerationRequest",
     "ImageGenerationRequestAspectRatio",
     "ImageGenerationRequestBackground",
+    "ImageGenerationRequestDataCollection",
     "ImageGenerationRequestImageURL",
     "ImageGenerationRequestImageURLTypedDict",
     "ImageGenerationRequestOutputFormat",
@@ -8776,6 +8779,7 @@ __all__ = [
     "VideoGeneration",
     "VideoGenerationRequest",
     "VideoGenerationRequestAspectRatio",
+    "VideoGenerationRequestDataCollection",
     "VideoGenerationRequestIgnore",
     "VideoGenerationRequestIgnoreTypedDict",
     "VideoGenerationRequestOnly",
@@ -10661,6 +10665,7 @@ _dynamic_imports: dict[str, str] = {
     "ImageGenerationProviderPreferencesSort": ".imagegenerationproviderpreferences",
     "ImageGenerationProviderPreferencesSortTypedDict": ".imagegenerationproviderpreferences",
     "ImageGenerationProviderPreferencesTypedDict": ".imagegenerationproviderpreferences",
+    "ImageGenerationRequestDataCollection": ".imagegenerationproviderpreferences",
     "ImageGenerationRequest": ".imagegenerationrequest",
     "ImageGenerationRequestAspectRatio": ".imagegenerationrequest",
     "ImageGenerationRequestBackground": ".imagegenerationrequest",
@@ -12525,6 +12530,7 @@ _dynamic_imports: dict[str, str] = {
     "VideoGenerationTypedDict": ".videogeneration",
     "VideoGenerationRequest": ".videogenerationrequest",
     "VideoGenerationRequestAspectRatio": ".videogenerationrequest",
+    "VideoGenerationRequestDataCollection": ".videogenerationrequest",
     "VideoGenerationRequestIgnore": ".videogenerationrequest",
     "VideoGenerationRequestIgnoreTypedDict": ".videogenerationrequest",
     "VideoGenerationRequestOnly": ".videogenerationrequest",

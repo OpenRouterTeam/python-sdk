@@ -36,6 +36,20 @@ VideoGenerationRequestAspectRatio = Union[
 r"""Aspect ratio of the generated video. Omit it to use the model default, which on models with adaptive aspect ratio (e.g. BytePlus Seedance) follows the input image or video."""
 
 
+VideoGenerationRequestDataCollection = Union[
+    Literal[
+        "deny",
+        "allow",
+    ],
+    UnrecognizedStr,
+]
+r"""Data collection setting. If no available model provider meets the requirement, your request will return an error.
+- allow: (default) allow providers that may train on user data
+
+- deny: use only providers that do not train on user data. Providers may still retain prompts; set `zdr: true` to exclude retention.
+"""
+
+
 VideoGenerationRequestIgnoreTypedDict = TypeAliasType(
     "VideoGenerationRequestIgnoreTypedDict", Union[ProviderName, str]
 )
@@ -779,8 +793,14 @@ VideoGenerationRequestOrder = TypeAliasType(
 
 
 class VideoGenerationRequestProviderTypedDict(TypedDict):
-    r"""Provider routing preferences (order, only, ignore) and provider-specific passthrough configuration"""
+    r"""Provider routing preferences (order, only, ignore), request-level data policy (zdr, data_collection) and provider-specific passthrough configuration. No video endpoint currently offers Zero Data Retention, so `zdr: true` fails routing."""
 
+    data_collection: NotRequired[Nullable[VideoGenerationRequestDataCollection]]
+    r"""Data collection setting. If no available model provider meets the requirement, your request will return an error.
+    - allow: (default) allow providers that may train on user data
+
+    - deny: use only providers that do not train on user data. Providers may still retain prompts; set `zdr: true` to exclude retention.
+    """
     ignore: NotRequired[Nullable[List[VideoGenerationRequestIgnoreTypedDict]]]
     r"""List of provider slugs to ignore. If provided, this list is merged with your account-wide ignored provider settings for this request."""
     only: NotRequired[Nullable[List[VideoGenerationRequestOnlyTypedDict]]]
@@ -788,10 +808,19 @@ class VideoGenerationRequestProviderTypedDict(TypedDict):
     options: NotRequired[VideoGenerationRequestOptionsTypedDict]
     order: NotRequired[Nullable[List[VideoGenerationRequestOrderTypedDict]]]
     r"""An ordered list of provider slugs. The router will attempt to use the first provider in the subset of this list that supports your requested model, and fall back to the next if it is unavailable. If no providers are available, the request will fail with an error message."""
+    zdr: NotRequired[Nullable[bool]]
+    r"""Whether to restrict routing to only ZDR (Zero Data Retention) endpoints. When true, only endpoints that do not retain prompts will be used."""
 
 
 class VideoGenerationRequestProvider(BaseModel):
-    r"""Provider routing preferences (order, only, ignore) and provider-specific passthrough configuration"""
+    r"""Provider routing preferences (order, only, ignore), request-level data policy (zdr, data_collection) and provider-specific passthrough configuration. No video endpoint currently offers Zero Data Retention, so `zdr: true` fails routing."""
+
+    data_collection: OptionalNullable[VideoGenerationRequestDataCollection] = UNSET
+    r"""Data collection setting. If no available model provider meets the requirement, your request will return an error.
+    - allow: (default) allow providers that may train on user data
+
+    - deny: use only providers that do not train on user data. Providers may still retain prompts; set `zdr: true` to exclude retention.
+    """
 
     ignore: OptionalNullable[List[VideoGenerationRequestIgnore]] = UNSET
     r"""List of provider slugs to ignore. If provided, this list is merged with your account-wide ignored provider settings for this request."""
@@ -804,10 +833,15 @@ class VideoGenerationRequestProvider(BaseModel):
     order: OptionalNullable[List[VideoGenerationRequestOrder]] = UNSET
     r"""An ordered list of provider slugs. The router will attempt to use the first provider in the subset of this list that supports your requested model, and fall back to the next if it is unavailable. If no providers are available, the request will fail with an error message."""
 
+    zdr: OptionalNullable[bool] = UNSET
+    r"""Whether to restrict routing to only ZDR (Zero Data Retention) endpoints. When true, only endpoints that do not retain prompts will be used."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["ignore", "only", "options", "order"])
-        nullable_fields = set(["ignore", "only", "order"])
+        optional_fields = set(
+            ["data_collection", "ignore", "only", "options", "order", "zdr"]
+        )
+        nullable_fields = set(["data_collection", "ignore", "only", "order", "zdr"])
         serialized = handler(self)
         m = {}
 
@@ -867,7 +901,7 @@ class VideoGenerationRequestTypedDict(TypedDict):
     prompt: NotRequired[str]
     r"""Text prompt describing the video to generate. Optional for models that support generating a video from image input alone; required by all other models."""
     provider: NotRequired[VideoGenerationRequestProviderTypedDict]
-    r"""Provider routing preferences (order, only, ignore) and provider-specific passthrough configuration"""
+    r"""Provider routing preferences (order, only, ignore), request-level data policy (zdr, data_collection) and provider-specific passthrough configuration. No video endpoint currently offers Zero Data Retention, so `zdr: true` fails routing."""
     resolution: NotRequired[VideoGenerationRequestResolution]
     r"""Resolution of the generated video"""
     seed: NotRequired[int]
@@ -915,7 +949,7 @@ class VideoGenerationRequest(BaseModel):
     r"""Text prompt describing the video to generate. Optional for models that support generating a video from image input alone; required by all other models."""
 
     provider: Optional[VideoGenerationRequestProvider] = None
-    r"""Provider routing preferences (order, only, ignore) and provider-specific passthrough configuration"""
+    r"""Provider routing preferences (order, only, ignore), request-level data policy (zdr, data_collection) and provider-specific passthrough configuration. No video endpoint currently offers Zero Data Retention, so `zdr: true` fails routing."""
 
     resolution: Optional[VideoGenerationRequestResolution] = None
     r"""Resolution of the generated video"""

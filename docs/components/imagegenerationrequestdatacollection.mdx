@@ -1,0 +1,25 @@
+---
+title: "ImageGenerationRequestDataCollection"
+---
+
+Data collection setting. If no available model provider meets the requirement, your request will return an error.
+- allow: (default) allow providers that may train on user data
+
+- deny: use only providers that do not train on user data. Providers may still retain prompts; set `zdr: true` to exclude retention.
+
+## Example Usage
+
+```python
+from openrouter.components import ImageGenerationRequestDataCollection
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
+value: ImageGenerationRequestDataCollection = "deny"
+```
+
+
+## Values
+
+This is an open enum. Unrecognized values will not fail type checks.
+
+- `"deny"`
+- `"allow"`
