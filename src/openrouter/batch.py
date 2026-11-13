@@ -357,20 +357,25 @@ class Batch(BaseSDK):
         *,
         endpoint: components.Endpoint,
         model: str,
-        requests: Union[
-            Iterable[components.Request], Iterable[components.RequestTypedDict]
-        ],
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
         callback_url: Optional[str] = None,
         completion_window: Optional[components.BatchSubmitBodyCompletionWindow] = "24h",
+        input: Optional[
+            Union[
+                components.BatchInputReference, components.BatchInputReferenceTypedDict
+            ]
+        ] = None,
         provider: OptionalNullable[
             Union[
                 components.BatchProviderPreferences,
                 components.BatchProviderPreferencesTypedDict,
             ]
         ] = UNSET,
+        requests: Optional[
+            Union[Iterable[components.Request], Iterable[components.RequestTypedDict]]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -382,7 +387,6 @@ class Batch(BaseSDK):
 
         :param endpoint:
         :param model:
-        :param requests:
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
@@ -392,7 +396,9 @@ class Batch(BaseSDK):
 
         :param callback_url: HTTPS URL that receives a `batch.completed`, `batch.failed`, `batch.cancelled` or `batch.expired` webhook event when the batch reaches a terminal status. Must appear before `requests` in the request body.
         :param completion_window:
+        :param input: A batch input file in your own storage, named in place of `requests`. Available to allowlisted callers on Google Vertex BYOK endpoints only.
         :param provider: Batch provider routing preferences. Only `provider.only` and `provider.allow_fallbacks` are supported.
+        :param requests: The batch requests. Send exactly one of `requests` or `input`; `requests` must be the last field in the request body.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -416,11 +422,16 @@ class Batch(BaseSDK):
                 callback_url=callback_url,
                 completion_window=completion_window,
                 endpoint=endpoint,
+                input=utils.get_pydantic_model(
+                    input, Optional[components.BatchInputReference]
+                ),
                 model=model,
                 provider=utils.get_pydantic_model(
                     provider, OptionalNullable[components.BatchProviderPreferences]
                 ),
-                requests=utils.get_pydantic_model(requests, List[components.Request]),
+                requests=utils.get_pydantic_model(
+                    requests, Optional[List[components.Request]]
+                ),
             ),
         )
 
@@ -517,20 +528,25 @@ class Batch(BaseSDK):
         *,
         endpoint: components.Endpoint,
         model: str,
-        requests: Union[
-            Iterable[components.Request], Iterable[components.RequestTypedDict]
-        ],
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
         callback_url: Optional[str] = None,
         completion_window: Optional[components.BatchSubmitBodyCompletionWindow] = "24h",
+        input: Optional[
+            Union[
+                components.BatchInputReference, components.BatchInputReferenceTypedDict
+            ]
+        ] = None,
         provider: OptionalNullable[
             Union[
                 components.BatchProviderPreferences,
                 components.BatchProviderPreferencesTypedDict,
             ]
         ] = UNSET,
+        requests: Optional[
+            Union[Iterable[components.Request], Iterable[components.RequestTypedDict]]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -542,7 +558,6 @@ class Batch(BaseSDK):
 
         :param endpoint:
         :param model:
-        :param requests:
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
 
@@ -552,7 +567,9 @@ class Batch(BaseSDK):
 
         :param callback_url: HTTPS URL that receives a `batch.completed`, `batch.failed`, `batch.cancelled` or `batch.expired` webhook event when the batch reaches a terminal status. Must appear before `requests` in the request body.
         :param completion_window:
+        :param input: A batch input file in your own storage, named in place of `requests`. Available to allowlisted callers on Google Vertex BYOK endpoints only.
         :param provider: Batch provider routing preferences. Only `provider.only` and `provider.allow_fallbacks` are supported.
+        :param requests: The batch requests. Send exactly one of `requests` or `input`; `requests` must be the last field in the request body.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -576,11 +593,16 @@ class Batch(BaseSDK):
                 callback_url=callback_url,
                 completion_window=completion_window,
                 endpoint=endpoint,
+                input=utils.get_pydantic_model(
+                    input, Optional[components.BatchInputReference]
+                ),
                 model=model,
                 provider=utils.get_pydantic_model(
                     provider, OptionalNullable[components.BatchProviderPreferences]
                 ),
-                requests=utils.get_pydantic_model(requests, List[components.Request]),
+                requests=utils.get_pydantic_model(
+                    requests, Optional[List[components.Request]]
+                ),
             ),
         )
 

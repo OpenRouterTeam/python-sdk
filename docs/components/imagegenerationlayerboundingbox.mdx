@@ -1,0 +1,13 @@
+---
+title: "ImageGenerationLayerBoundingBox"
+---
+
+Where a layer sits on the base image
+
+
+## Fields
+
+| Field                                                                      | Type                                                                       | Required                                                                   | Description                                                                |
+| -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| `absolute`                                                                 | List[*int*]                                                                | ✔️                                                         | Layer box in pixels of the base image, as `[x_min, y_min, x_max, y_max]`   |
+| `normalized`                                                               | List[*int*]                                                                | ✔️                                                         | Layer box scaled to 0-1000 on each axis, as `[x_min, y_min, x_max, y_max]` |

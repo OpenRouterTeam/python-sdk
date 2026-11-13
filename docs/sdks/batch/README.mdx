@@ -85,20 +85,7 @@ with OpenRouter(
     api_key=os.getenv("OPENROUTER_API_KEY", ""),
 ) as open_router:
 
-    res = open_router.batch.create_batches(endpoint="/v1/chat/completions", model="openai/gpt-4o", requests=[
-        {
-            "body": {
-                "messages": [
-                    {
-                        "content": "Summarize ...",
-                        "role": "user",
-                    },
-                ],
-                "model": "openai/gpt-4o",
-            },
-            "custom_id": "req-0001",
-        },
-    ], completion_window="24h")
+    res = open_router.batch.create_batches(endpoint="/v1/chat/completions", model="openai/gpt-4o", completion_window="24h")
 
     # Handle response
     print(res)
@@ -118,21 +105,7 @@ with OpenRouter(
     api_key=os.getenv("OPENROUTER_API_KEY", ""),
 ) as open_router:
 
-    res = open_router.batch.create_batches(endpoint="/v1/messages", model="openai/gpt-5-nano", requests=[
-        {
-            "body": {
-                "max_tokens": 1024,
-                "messages": [
-                    {
-                        "content": "Summarize ...",
-                        "role": "user",
-                    },
-                ],
-                "model": "openai/gpt-5-nano",
-            },
-            "custom_id": "req-0001",
-        },
-    ], completion_window="24h")
+    res = open_router.batch.create_batches(endpoint="/v1/messages", model="openai/gpt-5-nano", completion_window="24h")
 
     # Handle response
     print(res)
@@ -152,20 +125,7 @@ with OpenRouter(
     api_key=os.getenv("OPENROUTER_API_KEY", ""),
 ) as open_router:
 
-    res = open_router.batch.create_batches(endpoint="/v1/chat/completions", model="google/gemini-3.6-flash", requests=[
-        {
-            "body": {
-                "messages": [
-                    {
-                        "content": "Summarize ...",
-                        "role": "user",
-                    },
-                ],
-                "model": "google/gemini-3.6-flash",
-            },
-            "custom_id": "req-0001",
-        },
-    ], completion_window="24h")
+    res = open_router.batch.create_batches(endpoint="/v1/chat/completions", model="google/gemini-3.6-flash", completion_window="24h")
 
     # Handle response
     print(res)
@@ -185,25 +145,7 @@ with OpenRouter(
     api_key=os.getenv("OPENROUTER_API_KEY", ""),
 ) as open_router:
 
-    res = open_router.batch.create_batches(endpoint="/v1/responses", model="openai/gpt-4o", requests=[
-        {
-            "body": {
-                "input": [
-                    {
-                        "content": [
-                            {
-                                "text": "Summarize ...",
-                                "type": "input_text",
-                            },
-                        ],
-                        "role": "user",
-                    },
-                ],
-                "model": "openai/gpt-4o",
-            },
-            "custom_id": "req-0001",
-        },
-    ], completion_window="24h")
+    res = open_router.batch.create_batches(endpoint="/v1/responses", model="openai/gpt-4o", completion_window="24h")
 
     # Handle response
     print(res)
@@ -216,13 +158,14 @@ with OpenRouter(
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `endpoint`                                                                                                                                                                                                   | [components.Endpoint](../../components/endpoint.mdx)                                                                                                                                                          | ✔️                                                                                                                                                                                           | N/A                                                                                                                                                                                                          |                                                                                                                                                                                                              |
 | `model`                                                                                                                                                                                                      | *str*                                                                                                                                                                                                        | ✔️                                                                                                                                                                                           | N/A                                                                                                                                                                                                          |                                                                                                                                                                                                              |
-| `requests`                                                                                                                                                                                                   | List[[components.Request](../../components/request.mdx)]                                                                                                                                                      | ✔️                                                                                                                                                                                           | N/A                                                                                                                                                                                                          |                                                                                                                                                                                                              |
 | `http_referer`                                                                                                                                                                                               | *Optional[str]*                                                                                                                                                                                              | ➖                                                                                                                                                                                           | The app identifier should be your app's URL and is used as the primary identifier for rankings.<br/>This is used to track API usage per application.<br/>                                                    |                                                                                                                                                                                                              |
 | `x_open_router_title`                                                                                                                                                                                        | *Optional[str]*                                                                                                                                                                                              | ➖                                                                                                                                                                                           | The app display name allows you to customize how your app appears in OpenRouter's dashboard.<br/>                                                                                                            |                                                                                                                                                                                                              |
 | `x_open_router_categories`                                                                                                                                                                                   | *Optional[str]*                                                                                                                                                                                              | ➖                                                                                                                                                                                           | Comma-separated list of app categories (e.g. "cli-agent,cloud-agent"). Used for marketplace rankings.<br/>                                                                                                   |                                                                                                                                                                                                              |
 | `callback_url`                                                                                                                                                                                               | *Optional[str]*                                                                                                                                                                                              | ➖                                                                                                                                                                                           | HTTPS URL that receives a `batch.completed`, `batch.failed`, `batch.cancelled` or `batch.expired` webhook event when the batch reaches a terminal status. Must appear before `requests` in the request body. |                                                                                                                                                                                                              |
 | `completion_window`                                                                                                                                                                                          | [Optional[components.BatchSubmitBodyCompletionWindow]](../../components/batchsubmitbodycompletionwindow.mdx)                                                                                                  | ➖                                                                                                                                                                                           | N/A                                                                                                                                                                                                          |                                                                                                                                                                                                              |
+| `input`                                                                                                                                                                                                      | [Optional[components.BatchInputReference]](../../components/batchinputreference.mdx)                                                                                                                          | ➖                                                                                                                                                                                           | A batch input file in your own storage, named in place of `requests`. Available to allowlisted callers on Google Vertex BYOK endpoints only.                                                                 |                                                                                                                                                                                                              |
 | `provider`                                                                                                                                                                                                   | [OptionalNullable[components.BatchProviderPreferences]](../../components/batchproviderpreferences.mdx)                                                                                                        | ➖                                                                                                                                                                                           | Batch provider routing preferences. Only `provider.only` and `provider.allow_fallbacks` are supported.                                                                                                       | \{<br/>"only": [<br/>"google-vertex"<br/>]<br/>}                                                                                                                                                              |
+| `requests`                                                                                                                                                                                                   | List[[components.Request](../../components/request.mdx)]                                                                                                                                                      | ➖                                                                                                                                                                                           | The batch requests. Send exactly one of `requests` or `input`; `requests` must be the last field in the request body.                                                                                        |                                                                                                                                                                                                              |
 | `retries`                                                                                                                                                                                                    | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.mdx)                                                                                                                                             | ➖                                                                                                                                                                                           | Configuration to override the default retry behavior of the client.                                                                                                                                          |                                                                                                                                                                                                              |
 
 ### Response
