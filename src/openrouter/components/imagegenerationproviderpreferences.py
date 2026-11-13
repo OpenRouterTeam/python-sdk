@@ -10,11 +10,26 @@ from openrouter.types import (
     OptionalNullable,
     UNSET,
     UNSET_SENTINEL,
+    UnrecognizedStr,
 )
 import pydantic
 from pydantic import model_serializer
-from typing import Any, Dict, List, Optional, Union
+from typing import Any, Dict, List, Literal, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
+
+
+ImageGenerationRequestDataCollection = Union[
+    Literal[
+        "deny",
+        "allow",
+    ],
+    UnrecognizedStr,
+]
+r"""Data collection setting. If no available model provider meets the requirement, your request will return an error.
+- allow: (default) allow providers that may train on user data
+
+- deny: use only providers that do not train on user data. Providers may still retain prompts; set `zdr: true` to exclude retention.
+"""
 
 
 ImageGenerationProviderPreferencesIgnoreTypedDict = TypeAliasType(
@@ -781,6 +796,12 @@ class ImageGenerationProviderPreferencesTypedDict(TypedDict):
     - false: use only the primary/custom provider, and return the upstream error if it's unavailable.
 
     """
+    data_collection: NotRequired[Nullable[ImageGenerationRequestDataCollection]]
+    r"""Data collection setting. If no available model provider meets the requirement, your request will return an error.
+    - allow: (default) allow providers that may train on user data
+
+    - deny: use only providers that do not train on user data. Providers may still retain prompts; set `zdr: true` to exclude retention.
+    """
     ignore: NotRequired[
         Nullable[List[ImageGenerationProviderPreferencesIgnoreTypedDict]]
     ]
@@ -792,6 +813,8 @@ class ImageGenerationProviderPreferencesTypedDict(TypedDict):
     r"""An ordered list of provider slugs. The router will attempt to use the first provider in the subset of this list that supports your requested model, and fall back to the next if it is unavailable. If no providers are available, the request will fail with an error message."""
     sort: NotRequired[Nullable[ImageGenerationProviderPreferencesSortTypedDict]]
     r"""The sorting strategy to use for this request, if \"order\" is not specified. When set, no load balancing is performed."""
+    zdr: NotRequired[Nullable[bool]]
+    r"""Whether to restrict routing to only ZDR (Zero Data Retention) endpoints. When true, only endpoints that do not retain prompts will be used."""
 
 
 class ImageGenerationProviderPreferences(BaseModel):
@@ -802,6 +825,13 @@ class ImageGenerationProviderPreferences(BaseModel):
     - true: (default) when the primary provider (or your custom providers in \"order\") is unavailable, use the next best provider.
     - false: use only the primary/custom provider, and return the upstream error if it's unavailable.
 
+    """
+
+    data_collection: OptionalNullable[ImageGenerationRequestDataCollection] = UNSET
+    r"""Data collection setting. If no available model provider meets the requirement, your request will return an error.
+    - allow: (default) allow providers that may train on user data
+
+    - deny: use only providers that do not train on user data. Providers may still retain prompts; set `zdr: true` to exclude retention.
     """
 
     ignore: OptionalNullable[List[ImageGenerationProviderPreferencesIgnore]] = UNSET
@@ -818,12 +848,34 @@ class ImageGenerationProviderPreferences(BaseModel):
     sort: OptionalNullable[ImageGenerationProviderPreferencesSort] = UNSET
     r"""The sorting strategy to use for this request, if \"order\" is not specified. When set, no load balancing is performed."""
 
+    zdr: OptionalNullable[bool] = UNSET
+    r"""Whether to restrict routing to only ZDR (Zero Data Retention) endpoints. When true, only endpoints that do not retain prompts will be used."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
-            ["allow_fallbacks", "ignore", "only", "options", "order", "sort"]
+            [
+                "allow_fallbacks",
+                "data_collection",
+                "ignore",
+                "only",
+                "options",
+                "order",
+                "sort",
+                "zdr",
+            ]
         )
-        nullable_fields = set(["allow_fallbacks", "ignore", "only", "order", "sort"])
+        nullable_fields = set(
+            [
+                "allow_fallbacks",
+                "data_collection",
+                "ignore",
+                "only",
+                "order",
+                "sort",
+                "zdr",
+            ]
+        )
         serialized = handler(self)
         m = {}
 
