@@ -10,6 +10,7 @@ from .anthropicusageiteration import (
     AnthropicUsageIteration,
     AnthropicUsageIterationTypedDict,
 )
+from .batchoutputreference import BatchOutputReference, BatchOutputReferenceTypedDict
 from .costdetails import CostDetails, CostDetailsTypedDict
 from openrouter.types import (
     BaseModel,
@@ -378,6 +379,8 @@ class BatchListItemTypedDict(TypedDict):
     r"""Always null: retrieve the batch with `GET /batches/{id}` to access its results."""
     status: BatchListItemStatus
     usage: Nullable[BatchListItemUsageTypedDict]
+    output: NotRequired[BatchOutputReferenceTypedDict]
+    r"""The output location of a batch submitted with `input`, whose `results` are `null`. Returned only by `GET /batches/{id}`, once the batch has ended and the provider reported an output folder. Batch lists and responses for a batch with an unpaid charge leave it out."""
 
 
 class BatchListItem(BaseModel):
@@ -414,16 +417,32 @@ class BatchListItem(BaseModel):
 
     usage: Nullable[BatchListItemUsage]
 
+    output: Optional[BatchOutputReference] = None
+    r"""The output location of a batch submitted with `input`, whose `results` are `null`. Returned only by `GET /batches/{id}`, once the batch has ended and the provider reported an output folder. Batch lists and responses for a batch with an unpaid charge leave it out."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
+        optional_fields = set(["output"])
+        nullable_fields = set(
+            ["error", "expires_at", "finalized_at", "provider", "results", "usage"]
+        )
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
             if val != UNSET_SENTINEL:
-                m[k] = val
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
 
         return m

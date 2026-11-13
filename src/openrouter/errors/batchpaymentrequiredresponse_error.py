@@ -4,6 +4,7 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 import httpx
 from openrouter.components import (
+    batchoutputreference as components_batchoutputreference,
     batchpaymentrequiredresponse_error as components_batchpaymentrequiredresponse_error,
 )
 from openrouter.errors import OpenRouterError
@@ -37,6 +38,8 @@ class BatchPaymentRequiredResponseErrorData(BaseModel):
     usage: Nullable[
         components_batchpaymentrequiredresponse_error.BatchPaymentRequiredResponseUsage
     ]
+    output: Optional[components_batchoutputreference.BatchOutputReference] = None
+    r"""The output location of a batch submitted with `input`, whose `results` are `null`. Returned only by `GET /batches/{id}`, once the batch has ended and the provider reported an output folder. Batch lists and responses for a batch with an unpaid charge leave it out."""
 
 
 @dataclass(unsafe_hash=True)
