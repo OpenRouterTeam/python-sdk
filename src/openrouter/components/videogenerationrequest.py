@@ -30,6 +30,8 @@ VideoGenerationRequestAspectRatio = Union[
         "2:3",
         "21:9",
         "9:21",
+        "2:1",
+        "5:2",
     ],
     UnrecognizedStr,
 ]
@@ -893,7 +895,7 @@ class VideoGenerationRequestTypedDict(TypedDict):
     frame_images: NotRequired[List[FrameImageTypedDict]]
     r"""Images to use as the first and/or last frame of the generated video. Each image must specify a frame_type of first_frame or last_frame."""
     generate_audio: NotRequired[bool]
-    r"""Whether to generate audio alongside the video. Defaults to the endpoint's generate_audio capability flag, false if not set."""
+    r"""Whether to generate audio alongside the video. Defaults to the endpoint's generate_audio capability flag, false if not set. When neither is set, some providers (such as xAI) apply their own default and generate audio, so send false to request a silent video. Some models always include audio and ignore false."""
     input_references: NotRequired[List[InputReferenceTypedDict]]
     r"""Reference assets to guide video generation. Accepts image, audio, and video references. Audio and video references are only honored by providers that support them (including BytePlus Seedance generation 2 and newer); other providers use image references and ignore the rest."""
     previous_job_id: NotRequired[str]
@@ -937,7 +939,7 @@ class VideoGenerationRequest(BaseModel):
     r"""Images to use as the first and/or last frame of the generated video. Each image must specify a frame_type of first_frame or last_frame."""
 
     generate_audio: Optional[bool] = None
-    r"""Whether to generate audio alongside the video. Defaults to the endpoint's generate_audio capability flag, false if not set."""
+    r"""Whether to generate audio alongside the video. Defaults to the endpoint's generate_audio capability flag, false if not set. When neither is set, some providers (such as xAI) apply their own default and generate audio, so send false to request a silent video. Some models always include audio and ignore false."""
 
     input_references: Optional[List[InputReference]] = None
     r"""Reference assets to guide video generation. Accepts image, audio, and video references. Audio and video references are only honored by providers that support them (including BytePlus Seedance generation 2 and newer); other providers use image references and ignore the rest."""
