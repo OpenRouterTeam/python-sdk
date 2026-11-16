@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c48cf606-fb42-4a45-9c23-8f0555307828
 management:
-  docChecksum: 2bbc83374f2d66f64b1d96b5d61876df
+  docChecksum: 7e01e4863466a4b473e43c47c419b196
   docVersion: 1.0.0
   speakeasyVersion: 1.803.2
   generationVersion: 2.950.13
-  releaseVersion: 1.3.181
-  configChecksum: 80a933d10a8dba8067fcef3845483e09
+  releaseVersion: 1.3.182
+  configChecksum: 93e89301ad9a52d796393b76a744e7ef
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
 persistentEdits:
-  generation_id: c7a792f5-261f-4da3-a5b1-f7c99b780d8a
-  pristine_commit_hash: 2eec7461373428cc4d40dfd2b59e5e9d1398cded
-  pristine_tree_hash: 1af1a4dd6d09e89882a19bb8d33becb3625c728a
+  generation_id: 21b1feaa-ecfe-47bf-bd5f-590eb8bc26a5
+  pristine_commit_hash: a61541c522dd7c6128eaef1b9466727b5e78d412
+  pristine_tree_hash: 723ddcad6a09d1e49ebe35bd7fd99d059a35786c
 features:
   python:
     acceptHeaders: 3.0.0
@@ -1376,12 +1376,12 @@ trackedFiles:
     pristine_git_object: 800b8e4a3fd07f10592e3ee8f9c15c7e57398d4c
   docs/components/autorouterplugin.mdx:
     id: 4d62f9b36bc2
-    last_write_checksum: sha1:d7e7c34897727c489f0425db242d706a2f088747
-    pristine_git_object: 3aae91bab56242f455574740264ca3a410ffdcb3
+    last_write_checksum: sha1:218994f2a1dbff27ea71be8f5a1e4538811d8ccd
+    pristine_git_object: 6e3cffd6ed96a00eae118aba9c1cd503377a7514
   docs/components/autorouterplugincosttier.mdx:
     id: 72049c1ccaf4
-    last_write_checksum: sha1:e39aa2557889658bd06007f9731c277e9b537e12
-    pristine_git_object: b06654b8292488471ec316b3f2aceec6eacf5db8
+    last_write_checksum: sha1:d376bd86d2a3c43e7ad9191ca83b97f92507d5fb
+    pristine_git_object: 6c57994fc76a90580714e614475fe47ffbc2027e
   docs/components/autorouterpluginid.mdx:
     id: ea9862a88ce8
     last_write_checksum: sha1:51d6cd6296501209ebc8b721adb3feadeb798f9a
@@ -4812,8 +4812,8 @@ trackedFiles:
     pristine_git_object: 5949fbaa48fde55f28b1597cd0ac15ae13c5852a
   docs/components/jevrouterplugin.mdx:
     id: 258aa7058bc5
-    last_write_checksum: sha1:f1ba78a999fd265a4ae83caa21fcca1997292eb7
-    pristine_git_object: c7d2583cf205a5abc962118f9cab3762fcfa4002
+    last_write_checksum: sha1:77aabf88838874c0ecf00076ae26c1d4cc0fcba4
+    pristine_git_object: fd57392a0ce10e1996c0e9bf28badf52bb0ba94f
   docs/components/jevrouterpluginid.mdx:
     id: 30d920f53cde
     last_write_checksum: sha1:dfc1a3a7d9011c2a15b475b51eaf48ad78856ff3
@@ -11680,8 +11680,8 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:7427ffc8ffe039541ef5a0bf0cb15bf315e072dc
-    pristine_git_object: 6ce71bfafad02f38221db45b606085923b010389
+    last_write_checksum: sha1:7345c283fb35d1d19266b68967f0bb03fcbef9b1
+    pristine_git_object: 2328adbfdbd5909ff58a402f0a49f29c9b59a692
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77f44b60b98bc126557ec27391f91dfba764bb54
@@ -11708,8 +11708,8 @@ trackedFiles:
     pristine_git_object: 86713cfea633e09d33b3d4e65281071fe20e6137
   src/openrouter/_version.py:
     id: d8d15ad6c586
-    last_write_checksum: sha1:2918aa21adc139d698e22f34f573bb9fcad7e56d
-    pristine_git_object: 4b8ffa897c22aeb12e97c3c3073e3a63bb9462f9
+    last_write_checksum: sha1:39ba4a2a21183633640d3d5cf0297ca9d0e10b39
+    pristine_git_object: b635535503d4ef9ae530217819baafaa5cbcc733
   src/openrouter/alpha.py:
     id: 306c4d93308d
     last_write_checksum: sha1:80cc0f39649445431cc2247ed0e0765438467766
@@ -12364,8 +12364,8 @@ trackedFiles:
     pristine_git_object: 9cd3b5786a3b408de1ea89f7ea25592153c78fc7
   src/openrouter/components/autorouterplugin.py:
     id: cf49add5d1ae
-    last_write_checksum: sha1:b6c8d8841b8590431f3260715fa7f91d84d29246
-    pristine_git_object: 487b74a0930560d1d0acd0415ff0765d00b9c5af
+    last_write_checksum: sha1:478341beda4b2a2e2a96b4dd4d9c5e256d1dc6c2
+    pristine_git_object: 99065ce5e2350b97b178e5b4066d0a32254a36c7
   src/openrouter/components/badgatewayresponseerrordata.py:
     id: f7a33d30d269
     last_write_checksum: sha1:d85ab25a06594703cb353767f07f4e1d44e0181c
@@ -13732,8 +13732,8 @@ trackedFiles:
     pristine_git_object: b5a0bc16faa52f26d293eea18183e4d0b0bbb901
   src/openrouter/components/jevrouterplugin.py:
     id: fcb6e65e2e08
-    last_write_checksum: sha1:d3f27bd7686c3f38a13dba021a0ff578ba95e00e
-    pristine_git_object: cd0a9e0cf7b7a334a987dcb31d4b6601906c3b89
+    last_write_checksum: sha1:95cddb747ae16339fcd4ff907c062b8667999f1e
+    pristine_git_object: deed2db578c63adb44bc894aba195f402b96458a
   src/openrouter/components/keyassignment.py:
     id: 07a64362e7fd
     last_write_checksum: sha1:4b47a6f1ab4992ec81d7236ca28dbf94d3a4fbaf
@@ -21719,7 +21719,3 @@ examples:
         "500":
           application/json: {"error": {"code": 500, "message": "Internal Server Error"}}
 examplesVersion: 1.0.2
-releaseNotes: |
-  ## Python SDK Changes:
-  * `open_router.video_generation.generate()`:  `request.aspect_ratio` **Changed**
-  * `open_router.video_generation.list_videos_models()`:  `response.data[]` **Changed**
