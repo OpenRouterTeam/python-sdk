@@ -42,7 +42,7 @@ class OAuth(BaseSDK):
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
         :param code_challenge_method: The method used to generate the code challenge
-        :param code_verifier: The code verifier if code_challenge was used in the authorization request
+        :param code_verifier: The `code_verifier` whose SHA-256 hash was sent as `code_challenge` in the authorization request.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -189,7 +189,7 @@ class OAuth(BaseSDK):
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
         :param code_challenge_method: The method used to generate the code challenge
-        :param code_verifier: The code verifier if code_challenge was used in the authorization request
+        :param code_verifier: The `code_verifier` whose SHA-256 hash was sent as `code_challenge` in the authorization request.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -340,7 +340,7 @@ class OAuth(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
-        :param code_challenge: PKCE code challenge for enhanced security
+        :param code_challenge: PKCE code challenge: the base64url-encoded SHA-256 hash of your `code_verifier`. Send it with `code_challenge_method` set to `S256`.
         :param code_challenge_method: The method used to generate the code challenge
         :param expires_at: Optional ISO 8601 UTC expiration timestamp. Must include seconds (YYYY-MM-DDTHH:MM:SSZ; fractional seconds allowed); minute-precision timestamps are rejected.
         :param key_label: Optional custom label for the API key. Defaults to the app name if not provided.
@@ -517,7 +517,7 @@ class OAuth(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
-        :param code_challenge: PKCE code challenge for enhanced security
+        :param code_challenge: PKCE code challenge: the base64url-encoded SHA-256 hash of your `code_verifier`. Send it with `code_challenge_method` set to `S256`.
         :param code_challenge_method: The method used to generate the code challenge
         :param expires_at: Optional ISO 8601 UTC expiration timestamp. Must include seconds (YYYY-MM-DDTHH:MM:SSZ; fractional seconds allowed); minute-precision timestamps are rejected.
         :param key_label: Optional custom label for the API key. Defaults to the app name if not provided.

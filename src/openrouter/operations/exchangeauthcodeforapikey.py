@@ -98,7 +98,7 @@ class ExchangeAuthCodeForAPIKeyRequestBodyTypedDict(TypedDict):
     ]
     r"""The method used to generate the code challenge"""
     code_verifier: NotRequired[str]
-    r"""The code verifier if code_challenge was used in the authorization request"""
+    r"""The `code_verifier` whose SHA-256 hash was sent as `code_challenge` in the authorization request."""
 
 
 class ExchangeAuthCodeForAPIKeyRequestBody(BaseModel):
@@ -111,7 +111,7 @@ class ExchangeAuthCodeForAPIKeyRequestBody(BaseModel):
     r"""The method used to generate the code challenge"""
 
     code_verifier: Optional[str] = None
-    r"""The code verifier if code_challenge was used in the authorization request"""
+    r"""The `code_verifier` whose SHA-256 hash was sent as `code_challenge` in the authorization request."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
