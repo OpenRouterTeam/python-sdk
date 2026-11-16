@@ -469,6 +469,11 @@ class Generations(BaseSDK):
                 errors.BadGatewayResponseErrorData, http_res
             )
             raise errors.BadGatewayResponseError(response_data, http_res)
+        if utils.match_response(http_res, "503", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ServiceUnavailableResponseErrorData, http_res
+            )
+            raise errors.ServiceUnavailableResponseError(response_data, http_res)
         if utils.match_response(http_res, "524", "application/json"):
             response_data = unmarshal_json_response(
                 errors.EdgeNetworkTimeoutResponseErrorData, http_res
@@ -627,6 +632,11 @@ class Generations(BaseSDK):
                 errors.BadGatewayResponseErrorData, http_res
             )
             raise errors.BadGatewayResponseError(response_data, http_res)
+        if utils.match_response(http_res, "503", "application/json"):
+            response_data = unmarshal_json_response(
+                errors.ServiceUnavailableResponseErrorData, http_res
+            )
+            raise errors.ServiceUnavailableResponseError(response_data, http_res)
         if utils.match_response(http_res, "524", "application/json"):
             response_data = unmarshal_json_response(
                 errors.EdgeNetworkTimeoutResponseErrorData, http_res

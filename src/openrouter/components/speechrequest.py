@@ -188,7 +188,7 @@ class SpeechRequestTypedDict(TypedDict):
     user: NotRequired[str]
     r"""A unique identifier representing your end-user. Forwarded to Broadcast and private logging as the end-user id; never sent to the provider."""
     voice: NotRequired[str]
-    r"""Voice identifier (provider-specific)."""
+    r"""Voice identifier (provider-specific). Required by most providers; only Seed Audio, HeyGen, Fish Audio, AssemblyAI, Speechify accept requests without it."""
 
 
 class SpeechRequest(BaseModel):
@@ -225,7 +225,7 @@ class SpeechRequest(BaseModel):
     r"""A unique identifier representing your end-user. Forwarded to Broadcast and private logging as the end-user id; never sent to the provider."""
 
     voice: Optional[str] = None
-    r"""Voice identifier (provider-specific)."""
+    r"""Voice identifier (provider-specific). Required by most providers; only Seed Audio, HeyGen, Fish Audio, AssemblyAI, Speechify accept requests without it."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
