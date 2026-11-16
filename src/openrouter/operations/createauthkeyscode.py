@@ -106,7 +106,7 @@ class CreateAuthKeysCodeRequestBodyTypedDict(TypedDict):
     callback_url: str
     r"""The callback URL to redirect to after authorization. Supports https URLs and localhost/127.0.0.1 URLs on any port for local CLI tools."""
     code_challenge: NotRequired[str]
-    r"""PKCE code challenge for enhanced security"""
+    r"""PKCE code challenge: the base64url-encoded SHA-256 hash of your `code_verifier`. Send it with `code_challenge_method` set to `S256`."""
     code_challenge_method: NotRequired[CreateAuthKeysCodeCodeChallengeMethod]
     r"""The method used to generate the code challenge"""
     expires_at: NotRequired[Nullable[datetime]]
@@ -126,7 +126,7 @@ class CreateAuthKeysCodeRequestBody(BaseModel):
     r"""The callback URL to redirect to after authorization. Supports https URLs and localhost/127.0.0.1 URLs on any port for local CLI tools."""
 
     code_challenge: Optional[str] = None
-    r"""PKCE code challenge for enhanced security"""
+    r"""PKCE code challenge: the base64url-encoded SHA-256 hash of your `code_verifier`. Send it with `code_challenge_method` set to `S256`."""
 
     code_challenge_method: Optional[CreateAuthKeysCodeCodeChallengeMethod] = None
     r"""The method used to generate the code challenge"""
