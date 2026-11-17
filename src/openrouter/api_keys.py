@@ -5,10 +5,10 @@ from datetime import datetime
 from jsonpath import JSONPath
 from openrouter import components, errors, operations, utils
 from openrouter._hooks import HookContext
-from openrouter.types import OptionalNullable, UNSET
+from openrouter.types import BaseModel, OptionalNullable, UNSET
 from openrouter.utils import get_security_from_env
 from openrouter.utils.unmarshal_json_response import unmarshal_json_response
-from typing import Any, Awaitable, Dict, List, Mapping, Optional, Union
+from typing import Any, Awaitable, Dict, List, Mapping, Optional, Union, cast
 
 
 class APIKeys(BaseSDK):
@@ -257,13 +257,9 @@ class APIKeys(BaseSDK):
     def list(
         self,
         *,
-        http_referer: Optional[str] = None,
-        x_open_router_title: Optional[str] = None,
-        x_open_router_categories: Optional[str] = None,
-        include_disabled: Optional[bool] = None,
-        include_expired: Optional[bool] = None,
-        offset: OptionalNullable[int] = UNSET,
-        workspace_id: Optional[str] = None,
+        request: Union[
+            operations.ListRequest, operations.ListRequestTypedDict
+        ] = operations.ListRequest(),
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -273,17 +269,7 @@ class APIKeys(BaseSDK):
 
         List all API keys for the authenticated user. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
-        :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
-            This is used to track API usage per application.
-
-        :param x_open_router_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
-
-        :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
-
-        :param include_disabled: Whether to include disabled API keys in the response
-        :param include_expired: Whether to include expired API keys in the response. Expired keys are excluded by default and returned only when this is true.
-        :param offset: Number of API keys to skip for pagination
-        :param workspace_id: Filter API keys by workspace ID. By default an organization-scoped management key gets the default workspace; a workspace-scoped management key always gets its own workspace and cannot list another.
+        :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -299,15 +285,9 @@ class APIKeys(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = operations.ListRequest(
-            http_referer=http_referer,
-            x_open_router_title=x_open_router_title,
-            x_open_router_categories=x_open_router_categories,
-            include_disabled=include_disabled,
-            include_expired=include_expired,
-            offset=offset,
-            workspace_id=workspace_id,
-        )
+        if not isinstance(request, BaseModel):
+            request = utils.unmarshal(request, operations.ListRequest)
+        request = cast(operations.ListRequest, request)
 
         req = self._build_request(
             method="GET",
@@ -373,13 +353,15 @@ class APIKeys(BaseSDK):
             next_offset = offset + len(results[0])
 
             return self.list(
-                http_referer=http_referer,
-                x_open_router_title=x_open_router_title,
-                x_open_router_categories=x_open_router_categories,
-                include_disabled=include_disabled,
-                include_expired=include_expired,
-                offset=next_offset,
-                workspace_id=workspace_id,
+                request=operations.ListRequest(
+                    http_referer=request.http_referer,
+                    x_open_router_title=request.x_open_router_title,
+                    x_open_router_categories=request.x_open_router_categories,
+                    include_disabled=request.include_disabled,
+                    include_expired=request.include_expired,
+                    offset=next_offset,
+                    workspace_id=request.workspace_id,
+                ),
                 retries=retries,
                 server_url=server_url,
                 timeout_ms=timeout_ms,
@@ -438,13 +420,9 @@ class APIKeys(BaseSDK):
     async def list_async(
         self,
         *,
-        http_referer: Optional[str] = None,
-        x_open_router_title: Optional[str] = None,
-        x_open_router_categories: Optional[str] = None,
-        include_disabled: Optional[bool] = None,
-        include_expired: Optional[bool] = None,
-        offset: OptionalNullable[int] = UNSET,
-        workspace_id: Optional[str] = None,
+        request: Union[
+            operations.ListRequest, operations.ListRequestTypedDict
+        ] = operations.ListRequest(),
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -454,17 +432,7 @@ class APIKeys(BaseSDK):
 
         List all API keys for the authenticated user. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
-        :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
-            This is used to track API usage per application.
-
-        :param x_open_router_title: The app display name allows you to customize how your app appears in OpenRouter's dashboard.
-
-        :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
-
-        :param include_disabled: Whether to include disabled API keys in the response
-        :param include_expired: Whether to include expired API keys in the response. Expired keys are excluded by default and returned only when this is true.
-        :param offset: Number of API keys to skip for pagination
-        :param workspace_id: Filter API keys by workspace ID. By default an organization-scoped management key gets the default workspace; a workspace-scoped management key always gets its own workspace and cannot list another.
+        :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -480,15 +448,9 @@ class APIKeys(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = operations.ListRequest(
-            http_referer=http_referer,
-            x_open_router_title=x_open_router_title,
-            x_open_router_categories=x_open_router_categories,
-            include_disabled=include_disabled,
-            include_expired=include_expired,
-            offset=offset,
-            workspace_id=workspace_id,
-        )
+        if not isinstance(request, BaseModel):
+            request = utils.unmarshal(request, operations.ListRequest)
+        request = cast(operations.ListRequest, request)
 
         req = self._build_request_async(
             method="GET",
@@ -557,13 +519,15 @@ class APIKeys(BaseSDK):
             next_offset = offset + len(results[0])
 
             return self.list_async(
-                http_referer=http_referer,
-                x_open_router_title=x_open_router_title,
-                x_open_router_categories=x_open_router_categories,
-                include_disabled=include_disabled,
-                include_expired=include_expired,
-                offset=next_offset,
-                workspace_id=workspace_id,
+                request=operations.ListRequest(
+                    http_referer=request.http_referer,
+                    x_open_router_title=request.x_open_router_title,
+                    x_open_router_categories=request.x_open_router_categories,
+                    include_disabled=request.include_disabled,
+                    include_expired=request.include_expired,
+                    offset=next_offset,
+                    workspace_id=request.workspace_id,
+                ),
                 retries=retries,
                 server_url=server_url,
                 timeout_ms=timeout_ms,
