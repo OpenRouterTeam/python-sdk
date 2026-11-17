@@ -330,7 +330,7 @@ class OAuth(BaseSDK):
     ) -> operations.CreateAuthKeysCodeResponse:
         r"""Create authorization code
 
-        Create an authorization code for the PKCE flow to generate a user-controlled API key
+        Create an authorization code for the PKCE flow to generate a user-controlled API key. Requires a Clerk session that completed reverification recently (Clerk `lax` level); otherwise the response is `403` with `error.metadata.reverification` set to `lax`, and the caller must reverify the session before retrying.
 
         :param callback_url: The callback URL to redirect to after authorization. Supports https URLs and localhost/127.0.0.1 URLs on any port for local CLI tools.
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
@@ -507,7 +507,7 @@ class OAuth(BaseSDK):
     ) -> operations.CreateAuthKeysCodeResponse:
         r"""Create authorization code
 
-        Create an authorization code for the PKCE flow to generate a user-controlled API key
+        Create an authorization code for the PKCE flow to generate a user-controlled API key. Requires a Clerk session that completed reverification recently (Clerk `lax` level); otherwise the response is `403` with `error.metadata.reverification` set to `lax`, and the caller must reverify the session before retrying.
 
         :param callback_url: The callback URL to redirect to after authorization. Supports https URLs and localhost/127.0.0.1 URLs on any port for local CLI tools.
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
