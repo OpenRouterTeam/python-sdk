@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c48cf606-fb42-4a45-9c23-8f0555307828
 management:
-  docChecksum: fd25ec9ed7f6e3fc7effa59cff5637b2
+  docChecksum: c3d2c7c67149470fd14184d4be2221f1
   docVersion: 1.0.0
   speakeasyVersion: 1.803.2
   generationVersion: 2.950.13
-  releaseVersion: 1.3.185
-  configChecksum: 843a9f74c6f551b57ada8a9353ca5929
+  releaseVersion: 1.3.186
+  configChecksum: f6be9d5f546a166094bacface3d9f2d0
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
 persistentEdits:
-  generation_id: 917cf744-f90d-4fbc-b822-9bc1b7fab2f5
-  pristine_commit_hash: 239e2920e8485ee220fdba3d44ad1fcedfafe1fb
-  pristine_tree_hash: 0b30491ccfe28faa43596407962ce4a3d964a471
+  generation_id: 8798e2c7-daf2-4411-b95c-3a512ec30d75
+  pristine_commit_hash: 9ce8559362251b995621240b568a7dc4ae84d545
+  pristine_tree_hash: cb88ba956d63fd61af932284ad92319d1d64d816
 features:
   python:
     acceptHeaders: 3.0.0
@@ -6224,8 +6224,8 @@ trackedFiles:
     pristine_git_object: 09effe2d3fe45536c8b0aa0f23c02ce19b15f62c
   docs/components/openresponsesresult.mdx:
     id: d0fed85674d2
-    last_write_checksum: sha1:34c227e4bc5e7f81e92539b4504f5445042a167b
-    pristine_git_object: 07a251d195675e9d2caff76690e958d2310d98d1
+    last_write_checksum: sha1:03f83cd222094820347d1c169a97d7b1092ceaba
+    pristine_git_object: 7c201caa7d8f471b6e2f08f45b24fd2a4b7b6e3e
   docs/components/openresponsesresultaccessprograms.mdx:
     id: 8bdc604d9577
     last_write_checksum: sha1:e5af38fcce3b2ccabc68b0b963f244618c10fafa
@@ -7746,6 +7746,10 @@ trackedFiles:
     id: 3c69e8a7ccae
     last_write_checksum: sha1:6740787193a5ef2ca33b52109b388e3dfc61367e
     pristine_git_object: 7a781ae1ba333185a5fd94840aa26f84c2ac39f8
+  docs/components/responsesinputtransformation.mdx:
+    id: 77d67090691f
+    last_write_checksum: sha1:70581e8d3b562237781babfef4c11c0983cfdda1
+    pristine_git_object: 5b83a005ce4c1dc70e6fa5984a83aa5bb5ce137e
   docs/components/responsesrequest.mdx:
     id: 0dbcef40a4b1
     last_write_checksum: sha1:5e2b69aa6866361fc1f9d1269bc85565af5fd3c2
@@ -11680,8 +11684,8 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:bb14fe1c9556bdc23350915831c9db901f906775
-    pristine_git_object: 01a04b80f507244b5c9962ceb9e55b48c7a1bb41
+    last_write_checksum: sha1:af93296a222f4da989cde038f614264147bf7829
+    pristine_git_object: cf6f800c46f162e2bf48db93da7d9c6ae2edf08b
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77f44b60b98bc126557ec27391f91dfba764bb54
@@ -11708,8 +11712,8 @@ trackedFiles:
     pristine_git_object: 86713cfea633e09d33b3d4e65281071fe20e6137
   src/openrouter/_version.py:
     id: d8d15ad6c586
-    last_write_checksum: sha1:215f1d88c39d15c23a2bb6c7bbbe6dcb5ef91c38
-    pristine_git_object: 7fde9643bc1b21327822e7d02081df43b13422c9
+    last_write_checksum: sha1:f3ea669c9aa153d7776155e0edfdc6ddae6ab6a0
+    pristine_git_object: 29547d1efa57af5d7af4669a9295f40595273dd3
   src/openrouter/alpha.py:
     id: 306c4d93308d
     last_write_checksum: sha1:80cc0f39649445431cc2247ed0e0765438467766
@@ -11756,8 +11760,8 @@ trackedFiles:
     pristine_git_object: ad3d247954547814054c01989a2dff3d12b3e4e1
   src/openrouter/components/__init__.py:
     id: 81754e97b3f4
-    last_write_checksum: sha1:62ad074d05ac236d8501289a195f079624f74b15
-    pristine_git_object: 82d048afb80ff11f2bebec41fe6144180e3da3e3
+    last_write_checksum: sha1:ad85b19e4df5bcb98cbdf7e4602bd005bff68e41
+    pristine_git_object: 63c4ac1dddec2fc2992e4413222b2faea7724416
   src/openrouter/components/aabenchmarkentry.py:
     id: e2e0f0b48c82
     last_write_checksum: sha1:98f5828e7188c8fa506e51773ad54f256d94978d
@@ -14264,8 +14268,8 @@ trackedFiles:
     pristine_git_object: 08d990d8cc07b7928158fc55784cd9d613f4c58b
   src/openrouter/components/openresponsesresult.py:
     id: 78f7e33b19e6
-    last_write_checksum: sha1:725f1decb21e0584c6e6153d8f95d3190bbfe8e3
-    pristine_git_object: 005d00f5257edadb3a8eb8f784d090aa46790f86
+    last_write_checksum: sha1:89b22814dac4555a7b5cad6d484107217ed4a930
+    pristine_git_object: a0f447c184480983237b581eada605a53dc9358b
   src/openrouter/components/openrouterfile.py:
     id: df1961bcb130
     last_write_checksum: sha1:1a9a1b1e640f4d0ef78ce0caa160b5ab342f02cc
@@ -14882,6 +14886,10 @@ trackedFiles:
     id: 076f3c78aa58
     last_write_checksum: sha1:c1f1208da12840aafa9c6f24d355862808e91e80
     pristine_git_object: e3f4b083aca1fd072ef8655b14160b20b9b36105
+  src/openrouter/components/responsesinputtransformation.py:
+    id: 9eaec7caea55
+    last_write_checksum: sha1:b98ef6372b2a7adfb3e6c5b2f32657833f8fff97
+    pristine_git_object: 4ce1bb3d5b4c7b38de27fb2f567dfefb4d997287
   src/openrouter/components/responsesrequest.py:
     id: 8c850080ec5d
     last_write_checksum: sha1:9d83b013b38cb11f441fd47c479290762910d303
@@ -21719,4 +21727,7 @@ examples:
         "500":
           application/json: {"error": {"code": 500, "message": "Internal Server Error"}}
 examplesVersion: 1.0.2
-releaseNotes: "## Python SDK Changes:\n* `open_router.benchmarks.get_benchmarks()`: \n  *  `request.task_type` **Changed**\n  *  `response.data[].union(UnifiedBenchmarksAAItem)` **Changed**\n* `open_router.embeddings.list_models()`:  `response.data[].benchmarks.artificial_analysis` **Changed**\n* `open_router.models.get()`:  `response.data.benchmarks.artificial_analysis` **Changed**\n* `open_router.models.list()`: \n  *  `request` **Changed**\n  *  `response.data[].benchmarks.artificial_analysis` **Changed**\n* `open_router.models.list_for_user()`: \n  *  `request.sort` **Changed**\n  *  `response.data[].benchmarks.artificial_analysis` **Changed**\n"
+releaseNotes: |
+  ## Python SDK Changes:
+  * `open_router.batch.create_batches()`:  `response.results[].response.body.union(OpenResponsesResult).input_transformations` **Added**
+  * `open_router.batch.get_batches()`:  `response.results[].response.body.union(OpenResponsesResult).input_transformations` **Added**
