@@ -26,10 +26,10 @@ from typing_extensions import TypeAliasType, TypedDict
 UnifiedBenchmarksResponseDataTypedDict = TypeAliasType(
     "UnifiedBenchmarksResponseDataTypedDict",
     Union[
-        UnifiedBenchmarksAAItemTypedDict,
         UnifiedBenchmarksORItemTypedDict,
         UnifiedBenchmarksDAItemTypedDict,
         UnifiedBenchmarksSearchItemTypedDict,
+        UnifiedBenchmarksAAItemTypedDict,
     ],
 )
 
@@ -37,10 +37,10 @@ UnifiedBenchmarksResponseDataTypedDict = TypeAliasType(
 UnifiedBenchmarksResponseData = TypeAliasType(
     "UnifiedBenchmarksResponseData",
     Union[
-        UnifiedBenchmarksAAItem,
         UnifiedBenchmarksORItem,
         UnifiedBenchmarksDAItem,
         UnifiedBenchmarksSearchItem,
+        UnifiedBenchmarksAAItem,
     ],
 )
 
