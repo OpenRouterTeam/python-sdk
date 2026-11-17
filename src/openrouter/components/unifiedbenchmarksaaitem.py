@@ -6,9 +6,10 @@ from .unifiedbenchmarkpricing import (
     UnifiedBenchmarkPricingTypedDict,
 )
 from openrouter.types import BaseModel, Nullable, UNSET_SENTINEL
+import pydantic
 from pydantic import model_serializer
 from typing import Literal
-from typing_extensions import TypedDict
+from typing_extensions import Annotated, TypedDict
 
 
 UnifiedBenchmarksAAItemSource = Literal["artificial-analysis",]
@@ -16,43 +17,107 @@ r"""Benchmark source discriminator."""
 
 
 class UnifiedBenchmarksAAItemTypedDict(TypedDict):
+    r"""One model's Artificial Analysis index scores. Each score is the model's best on that index across the configurations Artificial Analysis evaluated (for example reasoning levels), so two indexes of one model can come from different configurations. The deprecated Coding and Agentic Index scores are the exception: both come from one configuration, the model's strongest by Intelligence Index, then Coding Index, then Agentic Index. With `task_type` set to `intelligence`, `coding` or `agentic`, those three indexes all come from the configuration that scores best on the one named."""
+
     agentic_index: Nullable[float]
-    r"""Artificial Analysis Agentic Index composite score. Higher is better."""
+    r"""Deprecated: Artificial Analysis has retired its Agentic Index and no longer publishes it. Holds the last score Artificial Analysis published for the model, on a 0-100 scale, or null; it will be null for every model once those stored scores are removed."""
     coding_index: Nullable[float]
-    r"""Artificial Analysis Coding Index composite score. Higher is better."""
+    r"""Deprecated: Artificial Analysis has retired its Coding Index and no longer publishes it. Holds the last score Artificial Analysis published for the model, on a 0-100 scale, or null; it will be null for every model once those stored scores are removed."""
+    cyber_index: Nullable[float]
+    r"""Artificial Analysis Cyber Index score, on a 0-100 scale: the model's best across the configurations Artificial Analysis evaluated. Higher is better. Null when Artificial Analysis has not published a score for the model."""
+    decision_index: Nullable[float]
+    r"""Artificial Analysis Decision Index score, on a 0-100 scale: the model's best across the configurations Artificial Analysis evaluated. Higher is better. Published for decision models and for the language models Artificial Analysis evaluates on decision tasks. Null when Artificial Analysis has not published a score for the model."""
     display_name: str
     r"""Model name as listed on Artificial Analysis."""
+    economics_index: Nullable[float]
+    r"""Artificial Analysis Economics Index score, on a 0-100 scale: the model's best across the configurations Artificial Analysis evaluated. Higher is better. One of the six Artificial Analysis Capability Indexes. Null when Artificial Analysis has not published a score for the model."""
+    engineering_index: Nullable[float]
+    r"""Artificial Analysis Engineering Index score, on a 0-100 scale: the model's best across the configurations Artificial Analysis evaluated. Higher is better. One of the six Artificial Analysis Capability Indexes. Null when Artificial Analysis has not published a score for the model."""
+    finance_and_accounting_index: Nullable[float]
+    r"""Artificial Analysis Finance & Accounting Index score, on a 0-100 scale: the model's best across the configurations Artificial Analysis evaluated. Higher is better. One of the six Artificial Analysis Capability Indexes. Null when Artificial Analysis has not published a score for the model."""
+    healthcare_and_medical_index: Nullable[float]
+    r"""Artificial Analysis Healthcare & Medical Index score, on a 0-100 scale: the model's best across the configurations Artificial Analysis evaluated. Higher is better. One of the six Artificial Analysis Capability Indexes. Null when Artificial Analysis has not published a score for the model."""
     intelligence_index: Nullable[float]
-    r"""Artificial Analysis Intelligence Index composite score. Higher is better."""
+    r"""Artificial Analysis Intelligence Index score, on a 0-100 scale: the model's best across the configurations Artificial Analysis evaluated. Higher is better. Null when Artificial Analysis has not published a score for the model."""
+    legal_index: Nullable[float]
+    r"""Artificial Analysis Legal Index score, on a 0-100 scale: the model's best across the configurations Artificial Analysis evaluated. Higher is better. One of the six Artificial Analysis Capability Indexes. Null when Artificial Analysis has not published a score for the model."""
     model_permaslug: str
     r"""Stable OpenRouter model identifier."""
+    multilingual_index: Nullable[float]
+    r"""Artificial Analysis Multilingual Index score, as a fraction from 0 to 1: the model's best across the configurations Artificial Analysis evaluated. Higher is better. Null when Artificial Analysis has not published a score for the model."""
+    openness_index: Nullable[float]
+    r"""Artificial Analysis Openness Index score, on a 0-100 scale: the model's best across the configurations Artificial Analysis evaluated. Higher is better. Null when Artificial Analysis has not published a score for the model."""
     pricing: Nullable[UnifiedBenchmarkPricingTypedDict]
     r"""OpenRouter pricing per token for this model. Null if pricing is unavailable."""
     source: UnifiedBenchmarksAAItemSource
     r"""Benchmark source discriminator."""
+    strategy_and_ops_index: Nullable[float]
+    r"""Artificial Analysis Strategy & Ops Index score, on a 0-100 scale: the model's best across the configurations Artificial Analysis evaluated. Higher is better. One of the six Artificial Analysis Capability Indexes. Null when Artificial Analysis has not published a score for the model."""
 
 
 class UnifiedBenchmarksAAItem(BaseModel):
-    agentic_index: Nullable[float]
-    r"""Artificial Analysis Agentic Index composite score. Higher is better."""
+    r"""One model's Artificial Analysis index scores. Each score is the model's best on that index across the configurations Artificial Analysis evaluated (for example reasoning levels), so two indexes of one model can come from different configurations. The deprecated Coding and Agentic Index scores are the exception: both come from one configuration, the model's strongest by Intelligence Index, then Coding Index, then Agentic Index. With `task_type` set to `intelligence`, `coding` or `agentic`, those three indexes all come from the configuration that scores best on the one named."""
 
-    coding_index: Nullable[float]
-    r"""Artificial Analysis Coding Index composite score. Higher is better."""
+    agentic_index: Annotated[
+        Nullable[float],
+        pydantic.Field(
+            deprecated="warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+        ),
+    ]
+    r"""Deprecated: Artificial Analysis has retired its Agentic Index and no longer publishes it. Holds the last score Artificial Analysis published for the model, on a 0-100 scale, or null; it will be null for every model once those stored scores are removed."""
+
+    coding_index: Annotated[
+        Nullable[float],
+        pydantic.Field(
+            deprecated="warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+        ),
+    ]
+    r"""Deprecated: Artificial Analysis has retired its Coding Index and no longer publishes it. Holds the last score Artificial Analysis published for the model, on a 0-100 scale, or null; it will be null for every model once those stored scores are removed."""
+
+    cyber_index: Nullable[float]
+    r"""Artificial Analysis Cyber Index score, on a 0-100 scale: the model's best across the configurations Artificial Analysis evaluated. Higher is better. Null when Artificial Analysis has not published a score for the model."""
+
+    decision_index: Nullable[float]
+    r"""Artificial Analysis Decision Index score, on a 0-100 scale: the model's best across the configurations Artificial Analysis evaluated. Higher is better. Published for decision models and for the language models Artificial Analysis evaluates on decision tasks. Null when Artificial Analysis has not published a score for the model."""
 
     display_name: str
     r"""Model name as listed on Artificial Analysis."""
 
+    economics_index: Nullable[float]
+    r"""Artificial Analysis Economics Index score, on a 0-100 scale: the model's best across the configurations Artificial Analysis evaluated. Higher is better. One of the six Artificial Analysis Capability Indexes. Null when Artificial Analysis has not published a score for the model."""
+
+    engineering_index: Nullable[float]
+    r"""Artificial Analysis Engineering Index score, on a 0-100 scale: the model's best across the configurations Artificial Analysis evaluated. Higher is better. One of the six Artificial Analysis Capability Indexes. Null when Artificial Analysis has not published a score for the model."""
+
+    finance_and_accounting_index: Nullable[float]
+    r"""Artificial Analysis Finance & Accounting Index score, on a 0-100 scale: the model's best across the configurations Artificial Analysis evaluated. Higher is better. One of the six Artificial Analysis Capability Indexes. Null when Artificial Analysis has not published a score for the model."""
+
+    healthcare_and_medical_index: Nullable[float]
+    r"""Artificial Analysis Healthcare & Medical Index score, on a 0-100 scale: the model's best across the configurations Artificial Analysis evaluated. Higher is better. One of the six Artificial Analysis Capability Indexes. Null when Artificial Analysis has not published a score for the model."""
+
     intelligence_index: Nullable[float]
-    r"""Artificial Analysis Intelligence Index composite score. Higher is better."""
+    r"""Artificial Analysis Intelligence Index score, on a 0-100 scale: the model's best across the configurations Artificial Analysis evaluated. Higher is better. Null when Artificial Analysis has not published a score for the model."""
+
+    legal_index: Nullable[float]
+    r"""Artificial Analysis Legal Index score, on a 0-100 scale: the model's best across the configurations Artificial Analysis evaluated. Higher is better. One of the six Artificial Analysis Capability Indexes. Null when Artificial Analysis has not published a score for the model."""
 
     model_permaslug: str
     r"""Stable OpenRouter model identifier."""
+
+    multilingual_index: Nullable[float]
+    r"""Artificial Analysis Multilingual Index score, as a fraction from 0 to 1: the model's best across the configurations Artificial Analysis evaluated. Higher is better. Null when Artificial Analysis has not published a score for the model."""
+
+    openness_index: Nullable[float]
+    r"""Artificial Analysis Openness Index score, on a 0-100 scale: the model's best across the configurations Artificial Analysis evaluated. Higher is better. Null when Artificial Analysis has not published a score for the model."""
 
     pricing: Nullable[UnifiedBenchmarkPricing]
     r"""OpenRouter pricing per token for this model. Null if pricing is unavailable."""
 
     source: UnifiedBenchmarksAAItemSource
     r"""Benchmark source discriminator."""
+
+    strategy_and_ops_index: Nullable[float]
+    r"""Artificial Analysis Strategy & Ops Index score, on a 0-100 scale: the model's best across the configurations Artificial Analysis evaluated. Higher is better. One of the six Artificial Analysis Capability Indexes. Null when Artificial Analysis has not published a score for the model."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

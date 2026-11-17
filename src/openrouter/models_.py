@@ -309,6 +309,26 @@ class Models(BaseSDK):
         max_coding_index: OptionalNullable[float] = UNSET,
         min_agentic_index: OptionalNullable[float] = UNSET,
         max_agentic_index: OptionalNullable[float] = UNSET,
+        min_finance_and_accounting_index: OptionalNullable[float] = UNSET,
+        max_finance_and_accounting_index: OptionalNullable[float] = UNSET,
+        min_strategy_and_ops_index: OptionalNullable[float] = UNSET,
+        max_strategy_and_ops_index: OptionalNullable[float] = UNSET,
+        min_legal_index: OptionalNullable[float] = UNSET,
+        max_legal_index: OptionalNullable[float] = UNSET,
+        min_healthcare_and_medical_index: OptionalNullable[float] = UNSET,
+        max_healthcare_and_medical_index: OptionalNullable[float] = UNSET,
+        min_engineering_index: OptionalNullable[float] = UNSET,
+        max_engineering_index: OptionalNullable[float] = UNSET,
+        min_economics_index: OptionalNullable[float] = UNSET,
+        max_economics_index: OptionalNullable[float] = UNSET,
+        min_cyber_index: OptionalNullable[float] = UNSET,
+        max_cyber_index: OptionalNullable[float] = UNSET,
+        min_openness_index: OptionalNullable[float] = UNSET,
+        max_openness_index: OptionalNullable[float] = UNSET,
+        min_multilingual_index: OptionalNullable[float] = UNSET,
+        max_multilingual_index: OptionalNullable[float] = UNSET,
+        min_decision_index: OptionalNullable[float] = UNSET,
+        max_decision_index: OptionalNullable[float] = UNSET,
         min_tool_success_rate: OptionalNullable[float] = UNSET,
         max_tool_success_rate: OptionalNullable[float] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -330,7 +350,7 @@ class Models(BaseSDK):
         :param category: Filter models by use case category
         :param supported_parameters: Filter models by supported parameter (comma-separated)
         :param output_modalities: Filter models by output modality. Accepts a comma-separated list of modalities (text, image, embeddings, audio, video, rerank, decisions, speech, transcription) or \"all\" to include all models. Defaults to \"text\".
-        :param sort: Sort the returned models server-side. Prefer this over fetching the full list and sorting client-side. Options: pricing-low-to-high, pricing-high-to-low (average prompt/completion price), context-high-to-low (context length), throughput-high-to-low, latency-low-to-high (recent median performance), most-popular, top-weekly (tokens processed in the last week), newest (creation date), intelligence-high-to-low, coding-high-to-low, agentic-high-to-low (Artificial Analysis indices), design-arena-elo-high-to-low (best Design Arena ELO across arenas). Models without a score for the chosen benchmark are placed last. When omitted, the existing default ordering is preserved.
+        :param sort: Sort the returned models server-side. Prefer this over fetching the full list and sorting client-side. Options: pricing-low-to-high, pricing-high-to-low (average prompt/completion price), context-high-to-low (context length), throughput-high-to-low, latency-low-to-high (recent median performance), most-popular, top-weekly (tokens processed in the last week), newest (creation date), <index>-high-to-low for each Artificial Analysis index (the coding and agentic sorts are deprecated: Artificial Analysis has retired those indexes), design-arena-elo-high-to-low (best Design Arena ELO across arenas). Models without a score for the chosen benchmark are placed last. The decision sort ranks decision models, so pass output_modalities=decisions or all with it. When omitted, the existing default ordering is preserved.
         :param q: Free-text search by model name or slug.
         :param input_modalities: Filter models by input modality. Comma-separated list of: text, image, audio, file.
         :param endpoints: Filter models by the request API paths they serve, as listed in each model's `endpoints` field. Comma-separated; a model must serve every listed path. Valid values: /api/v1/chat/completions, /api/v1/completions, /api/v1/messages, /api/v1/responses, /api/v1/embeddings, /api/v1/rerank, /api/alpha/decisions, /api/alpha/extractions, /api/v1/videos, /api/v1/audio/speech, /api/v1/audio/transcriptions, /api/v1/images, /api/v1/batches. When set without `output_modalities`, models of every output modality are considered (the companion `/api/alpha/extractions` route is served by text and decisions models alike).
@@ -347,12 +367,32 @@ class Models(BaseSDK):
         :param max_output_price: Maximum completion (output) price in $/M tokens.
         :param min_age_days: Minimum model age in days since its creation date.
         :param max_age_days: Maximum model age in days since its creation date.
-        :param min_intelligence_index: Minimum Artificial Analysis intelligence index.
-        :param max_intelligence_index: Maximum Artificial Analysis intelligence index.
-        :param min_coding_index: Minimum Artificial Analysis coding index.
-        :param max_coding_index: Maximum Artificial Analysis coding index.
-        :param min_agentic_index: Minimum Artificial Analysis agentic index.
-        :param max_agentic_index: Maximum Artificial Analysis agentic index.
+        :param min_intelligence_index: Minimum Artificial Analysis Intelligence Index score (0-100); unscored models are excluded.
+        :param max_intelligence_index: Maximum Artificial Analysis Intelligence Index score (0-100); unscored models are excluded.
+        :param min_coding_index: Deprecated: Artificial Analysis has retired its Coding Index. Minimum score (0-100); unscored models are excluded.
+        :param max_coding_index: Deprecated: Artificial Analysis has retired its Coding Index. Maximum score (0-100); unscored models are excluded.
+        :param min_agentic_index: Deprecated: Artificial Analysis has retired its Agentic Index. Minimum score (0-100); unscored models are excluded.
+        :param max_agentic_index: Deprecated: Artificial Analysis has retired its Agentic Index. Maximum score (0-100); unscored models are excluded.
+        :param min_finance_and_accounting_index: Minimum Artificial Analysis Finance & Accounting Index score (0-100); unscored models are excluded.
+        :param max_finance_and_accounting_index: Maximum Artificial Analysis Finance & Accounting Index score (0-100); unscored models are excluded.
+        :param min_strategy_and_ops_index: Minimum Artificial Analysis Strategy & Ops Index score (0-100); unscored models are excluded.
+        :param max_strategy_and_ops_index: Maximum Artificial Analysis Strategy & Ops Index score (0-100); unscored models are excluded.
+        :param min_legal_index: Minimum Artificial Analysis Legal Index score (0-100); unscored models are excluded.
+        :param max_legal_index: Maximum Artificial Analysis Legal Index score (0-100); unscored models are excluded.
+        :param min_healthcare_and_medical_index: Minimum Artificial Analysis Healthcare & Medical Index score (0-100); unscored models are excluded.
+        :param max_healthcare_and_medical_index: Maximum Artificial Analysis Healthcare & Medical Index score (0-100); unscored models are excluded.
+        :param min_engineering_index: Minimum Artificial Analysis Engineering Index score (0-100); unscored models are excluded.
+        :param max_engineering_index: Maximum Artificial Analysis Engineering Index score (0-100); unscored models are excluded.
+        :param min_economics_index: Minimum Artificial Analysis Economics Index score (0-100); unscored models are excluded.
+        :param max_economics_index: Maximum Artificial Analysis Economics Index score (0-100); unscored models are excluded.
+        :param min_cyber_index: Minimum Artificial Analysis Cyber Index score (0-100); unscored models are excluded.
+        :param max_cyber_index: Maximum Artificial Analysis Cyber Index score (0-100); unscored models are excluded.
+        :param min_openness_index: Minimum Artificial Analysis Openness Index score (0-100); unscored models are excluded.
+        :param max_openness_index: Maximum Artificial Analysis Openness Index score (0-100); unscored models are excluded.
+        :param min_multilingual_index: Minimum Artificial Analysis Multilingual Index score (0-1); unscored models are excluded.
+        :param max_multilingual_index: Maximum Artificial Analysis Multilingual Index score (0-1); unscored models are excluded.
+        :param min_decision_index: Minimum Artificial Analysis Decision Index score (0-100); unscored models are excluded.
+        :param max_decision_index: Maximum Artificial Analysis Decision Index score (0-100); unscored models are excluded.
         :param min_tool_success_rate: Minimum tool-calling success rate, as a fraction in [0, 1] (e.g. 0.9 = 90% of requests finishing with a tool_calls finish reason).
         :param max_tool_success_rate: Maximum tool-calling success rate, as a fraction in [0, 1].
         :param retries: Override the default retry configuration for this method
@@ -402,6 +442,26 @@ class Models(BaseSDK):
             max_coding_index=max_coding_index,
             min_agentic_index=min_agentic_index,
             max_agentic_index=max_agentic_index,
+            min_finance_and_accounting_index=min_finance_and_accounting_index,
+            max_finance_and_accounting_index=max_finance_and_accounting_index,
+            min_strategy_and_ops_index=min_strategy_and_ops_index,
+            max_strategy_and_ops_index=max_strategy_and_ops_index,
+            min_legal_index=min_legal_index,
+            max_legal_index=max_legal_index,
+            min_healthcare_and_medical_index=min_healthcare_and_medical_index,
+            max_healthcare_and_medical_index=max_healthcare_and_medical_index,
+            min_engineering_index=min_engineering_index,
+            max_engineering_index=max_engineering_index,
+            min_economics_index=min_economics_index,
+            max_economics_index=max_economics_index,
+            min_cyber_index=min_cyber_index,
+            max_cyber_index=max_cyber_index,
+            min_openness_index=min_openness_index,
+            max_openness_index=max_openness_index,
+            min_multilingual_index=min_multilingual_index,
+            max_multilingual_index=max_multilingual_index,
+            min_decision_index=min_decision_index,
+            max_decision_index=max_decision_index,
             min_tool_success_rate=min_tool_success_rate,
             max_tool_success_rate=max_tool_success_rate,
         )
@@ -504,6 +564,26 @@ class Models(BaseSDK):
                 max_coding_index=max_coding_index,
                 min_agentic_index=min_agentic_index,
                 max_agentic_index=max_agentic_index,
+                min_finance_and_accounting_index=min_finance_and_accounting_index,
+                max_finance_and_accounting_index=max_finance_and_accounting_index,
+                min_strategy_and_ops_index=min_strategy_and_ops_index,
+                max_strategy_and_ops_index=max_strategy_and_ops_index,
+                min_legal_index=min_legal_index,
+                max_legal_index=max_legal_index,
+                min_healthcare_and_medical_index=min_healthcare_and_medical_index,
+                max_healthcare_and_medical_index=max_healthcare_and_medical_index,
+                min_engineering_index=min_engineering_index,
+                max_engineering_index=max_engineering_index,
+                min_economics_index=min_economics_index,
+                max_economics_index=max_economics_index,
+                min_cyber_index=min_cyber_index,
+                max_cyber_index=max_cyber_index,
+                min_openness_index=min_openness_index,
+                max_openness_index=max_openness_index,
+                min_multilingual_index=min_multilingual_index,
+                max_multilingual_index=max_multilingual_index,
+                min_decision_index=min_decision_index,
+                max_decision_index=max_decision_index,
                 min_tool_success_rate=min_tool_success_rate,
                 max_tool_success_rate=max_tool_success_rate,
                 retries=retries,
@@ -610,6 +690,26 @@ class Models(BaseSDK):
         max_coding_index: OptionalNullable[float] = UNSET,
         min_agentic_index: OptionalNullable[float] = UNSET,
         max_agentic_index: OptionalNullable[float] = UNSET,
+        min_finance_and_accounting_index: OptionalNullable[float] = UNSET,
+        max_finance_and_accounting_index: OptionalNullable[float] = UNSET,
+        min_strategy_and_ops_index: OptionalNullable[float] = UNSET,
+        max_strategy_and_ops_index: OptionalNullable[float] = UNSET,
+        min_legal_index: OptionalNullable[float] = UNSET,
+        max_legal_index: OptionalNullable[float] = UNSET,
+        min_healthcare_and_medical_index: OptionalNullable[float] = UNSET,
+        max_healthcare_and_medical_index: OptionalNullable[float] = UNSET,
+        min_engineering_index: OptionalNullable[float] = UNSET,
+        max_engineering_index: OptionalNullable[float] = UNSET,
+        min_economics_index: OptionalNullable[float] = UNSET,
+        max_economics_index: OptionalNullable[float] = UNSET,
+        min_cyber_index: OptionalNullable[float] = UNSET,
+        max_cyber_index: OptionalNullable[float] = UNSET,
+        min_openness_index: OptionalNullable[float] = UNSET,
+        max_openness_index: OptionalNullable[float] = UNSET,
+        min_multilingual_index: OptionalNullable[float] = UNSET,
+        max_multilingual_index: OptionalNullable[float] = UNSET,
+        min_decision_index: OptionalNullable[float] = UNSET,
+        max_decision_index: OptionalNullable[float] = UNSET,
         min_tool_success_rate: OptionalNullable[float] = UNSET,
         max_tool_success_rate: OptionalNullable[float] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -631,7 +731,7 @@ class Models(BaseSDK):
         :param category: Filter models by use case category
         :param supported_parameters: Filter models by supported parameter (comma-separated)
         :param output_modalities: Filter models by output modality. Accepts a comma-separated list of modalities (text, image, embeddings, audio, video, rerank, decisions, speech, transcription) or \"all\" to include all models. Defaults to \"text\".
-        :param sort: Sort the returned models server-side. Prefer this over fetching the full list and sorting client-side. Options: pricing-low-to-high, pricing-high-to-low (average prompt/completion price), context-high-to-low (context length), throughput-high-to-low, latency-low-to-high (recent median performance), most-popular, top-weekly (tokens processed in the last week), newest (creation date), intelligence-high-to-low, coding-high-to-low, agentic-high-to-low (Artificial Analysis indices), design-arena-elo-high-to-low (best Design Arena ELO across arenas). Models without a score for the chosen benchmark are placed last. When omitted, the existing default ordering is preserved.
+        :param sort: Sort the returned models server-side. Prefer this over fetching the full list and sorting client-side. Options: pricing-low-to-high, pricing-high-to-low (average prompt/completion price), context-high-to-low (context length), throughput-high-to-low, latency-low-to-high (recent median performance), most-popular, top-weekly (tokens processed in the last week), newest (creation date), <index>-high-to-low for each Artificial Analysis index (the coding and agentic sorts are deprecated: Artificial Analysis has retired those indexes), design-arena-elo-high-to-low (best Design Arena ELO across arenas). Models without a score for the chosen benchmark are placed last. The decision sort ranks decision models, so pass output_modalities=decisions or all with it. When omitted, the existing default ordering is preserved.
         :param q: Free-text search by model name or slug.
         :param input_modalities: Filter models by input modality. Comma-separated list of: text, image, audio, file.
         :param endpoints: Filter models by the request API paths they serve, as listed in each model's `endpoints` field. Comma-separated; a model must serve every listed path. Valid values: /api/v1/chat/completions, /api/v1/completions, /api/v1/messages, /api/v1/responses, /api/v1/embeddings, /api/v1/rerank, /api/alpha/decisions, /api/alpha/extractions, /api/v1/videos, /api/v1/audio/speech, /api/v1/audio/transcriptions, /api/v1/images, /api/v1/batches. When set without `output_modalities`, models of every output modality are considered (the companion `/api/alpha/extractions` route is served by text and decisions models alike).
@@ -648,12 +748,32 @@ class Models(BaseSDK):
         :param max_output_price: Maximum completion (output) price in $/M tokens.
         :param min_age_days: Minimum model age in days since its creation date.
         :param max_age_days: Maximum model age in days since its creation date.
-        :param min_intelligence_index: Minimum Artificial Analysis intelligence index.
-        :param max_intelligence_index: Maximum Artificial Analysis intelligence index.
-        :param min_coding_index: Minimum Artificial Analysis coding index.
-        :param max_coding_index: Maximum Artificial Analysis coding index.
-        :param min_agentic_index: Minimum Artificial Analysis agentic index.
-        :param max_agentic_index: Maximum Artificial Analysis agentic index.
+        :param min_intelligence_index: Minimum Artificial Analysis Intelligence Index score (0-100); unscored models are excluded.
+        :param max_intelligence_index: Maximum Artificial Analysis Intelligence Index score (0-100); unscored models are excluded.
+        :param min_coding_index: Deprecated: Artificial Analysis has retired its Coding Index. Minimum score (0-100); unscored models are excluded.
+        :param max_coding_index: Deprecated: Artificial Analysis has retired its Coding Index. Maximum score (0-100); unscored models are excluded.
+        :param min_agentic_index: Deprecated: Artificial Analysis has retired its Agentic Index. Minimum score (0-100); unscored models are excluded.
+        :param max_agentic_index: Deprecated: Artificial Analysis has retired its Agentic Index. Maximum score (0-100); unscored models are excluded.
+        :param min_finance_and_accounting_index: Minimum Artificial Analysis Finance & Accounting Index score (0-100); unscored models are excluded.
+        :param max_finance_and_accounting_index: Maximum Artificial Analysis Finance & Accounting Index score (0-100); unscored models are excluded.
+        :param min_strategy_and_ops_index: Minimum Artificial Analysis Strategy & Ops Index score (0-100); unscored models are excluded.
+        :param max_strategy_and_ops_index: Maximum Artificial Analysis Strategy & Ops Index score (0-100); unscored models are excluded.
+        :param min_legal_index: Minimum Artificial Analysis Legal Index score (0-100); unscored models are excluded.
+        :param max_legal_index: Maximum Artificial Analysis Legal Index score (0-100); unscored models are excluded.
+        :param min_healthcare_and_medical_index: Minimum Artificial Analysis Healthcare & Medical Index score (0-100); unscored models are excluded.
+        :param max_healthcare_and_medical_index: Maximum Artificial Analysis Healthcare & Medical Index score (0-100); unscored models are excluded.
+        :param min_engineering_index: Minimum Artificial Analysis Engineering Index score (0-100); unscored models are excluded.
+        :param max_engineering_index: Maximum Artificial Analysis Engineering Index score (0-100); unscored models are excluded.
+        :param min_economics_index: Minimum Artificial Analysis Economics Index score (0-100); unscored models are excluded.
+        :param max_economics_index: Maximum Artificial Analysis Economics Index score (0-100); unscored models are excluded.
+        :param min_cyber_index: Minimum Artificial Analysis Cyber Index score (0-100); unscored models are excluded.
+        :param max_cyber_index: Maximum Artificial Analysis Cyber Index score (0-100); unscored models are excluded.
+        :param min_openness_index: Minimum Artificial Analysis Openness Index score (0-100); unscored models are excluded.
+        :param max_openness_index: Maximum Artificial Analysis Openness Index score (0-100); unscored models are excluded.
+        :param min_multilingual_index: Minimum Artificial Analysis Multilingual Index score (0-1); unscored models are excluded.
+        :param max_multilingual_index: Maximum Artificial Analysis Multilingual Index score (0-1); unscored models are excluded.
+        :param min_decision_index: Minimum Artificial Analysis Decision Index score (0-100); unscored models are excluded.
+        :param max_decision_index: Maximum Artificial Analysis Decision Index score (0-100); unscored models are excluded.
         :param min_tool_success_rate: Minimum tool-calling success rate, as a fraction in [0, 1] (e.g. 0.9 = 90% of requests finishing with a tool_calls finish reason).
         :param max_tool_success_rate: Maximum tool-calling success rate, as a fraction in [0, 1].
         :param retries: Override the default retry configuration for this method
@@ -703,6 +823,26 @@ class Models(BaseSDK):
             max_coding_index=max_coding_index,
             min_agentic_index=min_agentic_index,
             max_agentic_index=max_agentic_index,
+            min_finance_and_accounting_index=min_finance_and_accounting_index,
+            max_finance_and_accounting_index=max_finance_and_accounting_index,
+            min_strategy_and_ops_index=min_strategy_and_ops_index,
+            max_strategy_and_ops_index=max_strategy_and_ops_index,
+            min_legal_index=min_legal_index,
+            max_legal_index=max_legal_index,
+            min_healthcare_and_medical_index=min_healthcare_and_medical_index,
+            max_healthcare_and_medical_index=max_healthcare_and_medical_index,
+            min_engineering_index=min_engineering_index,
+            max_engineering_index=max_engineering_index,
+            min_economics_index=min_economics_index,
+            max_economics_index=max_economics_index,
+            min_cyber_index=min_cyber_index,
+            max_cyber_index=max_cyber_index,
+            min_openness_index=min_openness_index,
+            max_openness_index=max_openness_index,
+            min_multilingual_index=min_multilingual_index,
+            max_multilingual_index=max_multilingual_index,
+            min_decision_index=min_decision_index,
+            max_decision_index=max_decision_index,
             min_tool_success_rate=min_tool_success_rate,
             max_tool_success_rate=max_tool_success_rate,
         )
@@ -808,6 +948,26 @@ class Models(BaseSDK):
                 max_coding_index=max_coding_index,
                 min_agentic_index=min_agentic_index,
                 max_agentic_index=max_agentic_index,
+                min_finance_and_accounting_index=min_finance_and_accounting_index,
+                max_finance_and_accounting_index=max_finance_and_accounting_index,
+                min_strategy_and_ops_index=min_strategy_and_ops_index,
+                max_strategy_and_ops_index=max_strategy_and_ops_index,
+                min_legal_index=min_legal_index,
+                max_legal_index=max_legal_index,
+                min_healthcare_and_medical_index=min_healthcare_and_medical_index,
+                max_healthcare_and_medical_index=max_healthcare_and_medical_index,
+                min_engineering_index=min_engineering_index,
+                max_engineering_index=max_engineering_index,
+                min_economics_index=min_economics_index,
+                max_economics_index=max_economics_index,
+                min_cyber_index=min_cyber_index,
+                max_cyber_index=max_cyber_index,
+                min_openness_index=min_openness_index,
+                max_openness_index=max_openness_index,
+                min_multilingual_index=min_multilingual_index,
+                max_multilingual_index=max_multilingual_index,
+                min_decision_index=min_decision_index,
+                max_decision_index=max_decision_index,
                 min_tool_success_rate=min_tool_success_rate,
                 max_tool_success_rate=max_tool_success_rate,
                 retries=retries,
@@ -1167,7 +1327,7 @@ class Models(BaseSDK):
         :param offset: Number of records to skip for pagination. When both offset and limit are omitted, the full list is returned
         :param limit: Maximum number of records to return (max 1000). When both offset and limit are omitted, the full list is returned
         :param output_modalities: Filter models by output modality. Accepts a comma-separated list of modalities (text, image, embeddings, audio, video, rerank, decisions, speech, transcription) or \"all\" to include all models. Defaults to \"text\".
-        :param sort: Sort the returned models server-side. Prefer this over fetching the full list and sorting client-side. Options: pricing-low-to-high, pricing-high-to-low (average prompt/completion price), context-high-to-low (context length), throughput-high-to-low, latency-low-to-high (recent median performance), most-popular, top-weekly (tokens processed in the last week), newest (creation date), intelligence-high-to-low, coding-high-to-low, agentic-high-to-low (Artificial Analysis indices), design-arena-elo-high-to-low (best Design Arena ELO across arenas). Models without a score for the chosen benchmark are placed last. When omitted, the existing default ordering is preserved.
+        :param sort: Sort the returned models server-side. Prefer this over fetching the full list and sorting client-side. Options: pricing-low-to-high, pricing-high-to-low (average prompt/completion price), context-high-to-low (context length), throughput-high-to-low, latency-low-to-high (recent median performance), most-popular, top-weekly (tokens processed in the last week), newest (creation date), <index>-high-to-low for each Artificial Analysis index (the coding and agentic sorts are deprecated: Artificial Analysis has retired those indexes), design-arena-elo-high-to-low (best Design Arena ELO across arenas). Models without a score for the chosen benchmark are placed last. The decision sort ranks decision models, so pass output_modalities=decisions or all with it. When omitted, the existing default ordering is preserved.
         :param client: Filter models and presets by the named harness's eligibility policy: tool calling is required, and when one of your guardrails sets `enforce_first_party_harness_models`, only the harness vendor's own models remain (OpenAI for codex, Anthropic for claude_code and claude_desktop). When your workspace's Managed Machines policy sets a model list for that harness, only the listed models remain, and a preset remains only while every model it routes to is listed. This filter doesn't apply the harness's ranking, caps or Claude Desktop model ID aliases, so returned IDs stay routable. One of: claude_code, claude_desktop, codex. Omit it to get every model you can use.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -1371,7 +1531,7 @@ class Models(BaseSDK):
         :param offset: Number of records to skip for pagination. When both offset and limit are omitted, the full list is returned
         :param limit: Maximum number of records to return (max 1000). When both offset and limit are omitted, the full list is returned
         :param output_modalities: Filter models by output modality. Accepts a comma-separated list of modalities (text, image, embeddings, audio, video, rerank, decisions, speech, transcription) or \"all\" to include all models. Defaults to \"text\".
-        :param sort: Sort the returned models server-side. Prefer this over fetching the full list and sorting client-side. Options: pricing-low-to-high, pricing-high-to-low (average prompt/completion price), context-high-to-low (context length), throughput-high-to-low, latency-low-to-high (recent median performance), most-popular, top-weekly (tokens processed in the last week), newest (creation date), intelligence-high-to-low, coding-high-to-low, agentic-high-to-low (Artificial Analysis indices), design-arena-elo-high-to-low (best Design Arena ELO across arenas). Models without a score for the chosen benchmark are placed last. When omitted, the existing default ordering is preserved.
+        :param sort: Sort the returned models server-side. Prefer this over fetching the full list and sorting client-side. Options: pricing-low-to-high, pricing-high-to-low (average prompt/completion price), context-high-to-low (context length), throughput-high-to-low, latency-low-to-high (recent median performance), most-popular, top-weekly (tokens processed in the last week), newest (creation date), <index>-high-to-low for each Artificial Analysis index (the coding and agentic sorts are deprecated: Artificial Analysis has retired those indexes), design-arena-elo-high-to-low (best Design Arena ELO across arenas). Models without a score for the chosen benchmark are placed last. The decision sort ranks decision models, so pass output_modalities=decisions or all with it. When omitted, the existing default ordering is preserved.
         :param client: Filter models and presets by the named harness's eligibility policy: tool calling is required, and when one of your guardrails sets `enforce_first_party_harness_models`, only the harness vendor's own models remain (OpenAI for codex, Anthropic for claude_code and claude_desktop). When your workspace's Managed Machines policy sets a model list for that harness, only the listed models remain, and a preset remains only while every model it routes to is listed. This filter doesn't apply the harness's ranking, caps or Claude Desktop model ID aliases, so returned IDs stay routable. One of: claude_code, claude_desktop, codex. Omit it to get every model you can use.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method

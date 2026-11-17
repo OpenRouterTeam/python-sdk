@@ -114,11 +114,21 @@ GetModelsSort = Union[
         "intelligence-high-to-low",
         "coding-high-to-low",
         "agentic-high-to-low",
+        "finance-and-accounting-high-to-low",
+        "strategy-and-ops-high-to-low",
+        "legal-high-to-low",
+        "healthcare-and-medical-high-to-low",
+        "engineering-high-to-low",
+        "economics-high-to-low",
+        "cyber-high-to-low",
+        "openness-high-to-low",
+        "multilingual-high-to-low",
+        "decision-high-to-low",
         "design-arena-elo-high-to-low",
     ],
     UnrecognizedStr,
 ]
-r"""Sort the returned models server-side. Prefer this over fetching the full list and sorting client-side. Options: pricing-low-to-high, pricing-high-to-low (average prompt/completion price), context-high-to-low (context length), throughput-high-to-low, latency-low-to-high (recent median performance), most-popular, top-weekly (tokens processed in the last week), newest (creation date), intelligence-high-to-low, coding-high-to-low, agentic-high-to-low (Artificial Analysis indices), design-arena-elo-high-to-low (best Design Arena ELO across arenas). Models without a score for the chosen benchmark are placed last. When omitted, the existing default ordering is preserved."""
+r"""Sort the returned models server-side. Prefer this over fetching the full list and sorting client-side. Options: pricing-low-to-high, pricing-high-to-low (average prompt/completion price), context-high-to-low (context length), throughput-high-to-low, latency-low-to-high (recent median performance), most-popular, top-weekly (tokens processed in the last week), newest (creation date), <index>-high-to-low for each Artificial Analysis index (the coding and agentic sorts are deprecated: Artificial Analysis has retired those indexes), design-arena-elo-high-to-low (best Design Arena ELO across arenas). Models without a score for the chosen benchmark are placed last. The decision sort ranks decision models, so pass output_modalities=decisions or all with it. When omitted, the existing default ordering is preserved."""
 
 
 Distillable = Union[
@@ -170,7 +180,7 @@ class GetModelsRequestTypedDict(TypedDict):
     output_modalities: NotRequired[str]
     r"""Filter models by output modality. Accepts a comma-separated list of modalities (text, image, embeddings, audio, video, rerank, decisions, speech, transcription) or \"all\" to include all models. Defaults to \"text\"."""
     sort: NotRequired[GetModelsSort]
-    r"""Sort the returned models server-side. Prefer this over fetching the full list and sorting client-side. Options: pricing-low-to-high, pricing-high-to-low (average prompt/completion price), context-high-to-low (context length), throughput-high-to-low, latency-low-to-high (recent median performance), most-popular, top-weekly (tokens processed in the last week), newest (creation date), intelligence-high-to-low, coding-high-to-low, agentic-high-to-low (Artificial Analysis indices), design-arena-elo-high-to-low (best Design Arena ELO across arenas). Models without a score for the chosen benchmark are placed last. When omitted, the existing default ordering is preserved."""
+    r"""Sort the returned models server-side. Prefer this over fetching the full list and sorting client-side. Options: pricing-low-to-high, pricing-high-to-low (average prompt/completion price), context-high-to-low (context length), throughput-high-to-low, latency-low-to-high (recent median performance), most-popular, top-weekly (tokens processed in the last week), newest (creation date), <index>-high-to-low for each Artificial Analysis index (the coding and agentic sorts are deprecated: Artificial Analysis has retired those indexes), design-arena-elo-high-to-low (best Design Arena ELO across arenas). Models without a score for the chosen benchmark are placed last. The decision sort ranks decision models, so pass output_modalities=decisions or all with it. When omitted, the existing default ordering is preserved."""
     q: NotRequired[str]
     r"""Free-text search by model name or slug."""
     input_modalities: NotRequired[str]
@@ -204,17 +214,57 @@ class GetModelsRequestTypedDict(TypedDict):
     max_age_days: NotRequired[Nullable[int]]
     r"""Maximum model age in days since its creation date."""
     min_intelligence_index: NotRequired[Nullable[float]]
-    r"""Minimum Artificial Analysis intelligence index."""
+    r"""Minimum Artificial Analysis Intelligence Index score (0-100); unscored models are excluded."""
     max_intelligence_index: NotRequired[Nullable[float]]
-    r"""Maximum Artificial Analysis intelligence index."""
+    r"""Maximum Artificial Analysis Intelligence Index score (0-100); unscored models are excluded."""
     min_coding_index: NotRequired[Nullable[float]]
-    r"""Minimum Artificial Analysis coding index."""
+    r"""Deprecated: Artificial Analysis has retired its Coding Index. Minimum score (0-100); unscored models are excluded."""
     max_coding_index: NotRequired[Nullable[float]]
-    r"""Maximum Artificial Analysis coding index."""
+    r"""Deprecated: Artificial Analysis has retired its Coding Index. Maximum score (0-100); unscored models are excluded."""
     min_agentic_index: NotRequired[Nullable[float]]
-    r"""Minimum Artificial Analysis agentic index."""
+    r"""Deprecated: Artificial Analysis has retired its Agentic Index. Minimum score (0-100); unscored models are excluded."""
     max_agentic_index: NotRequired[Nullable[float]]
-    r"""Maximum Artificial Analysis agentic index."""
+    r"""Deprecated: Artificial Analysis has retired its Agentic Index. Maximum score (0-100); unscored models are excluded."""
+    min_finance_and_accounting_index: NotRequired[Nullable[float]]
+    r"""Minimum Artificial Analysis Finance & Accounting Index score (0-100); unscored models are excluded."""
+    max_finance_and_accounting_index: NotRequired[Nullable[float]]
+    r"""Maximum Artificial Analysis Finance & Accounting Index score (0-100); unscored models are excluded."""
+    min_strategy_and_ops_index: NotRequired[Nullable[float]]
+    r"""Minimum Artificial Analysis Strategy & Ops Index score (0-100); unscored models are excluded."""
+    max_strategy_and_ops_index: NotRequired[Nullable[float]]
+    r"""Maximum Artificial Analysis Strategy & Ops Index score (0-100); unscored models are excluded."""
+    min_legal_index: NotRequired[Nullable[float]]
+    r"""Minimum Artificial Analysis Legal Index score (0-100); unscored models are excluded."""
+    max_legal_index: NotRequired[Nullable[float]]
+    r"""Maximum Artificial Analysis Legal Index score (0-100); unscored models are excluded."""
+    min_healthcare_and_medical_index: NotRequired[Nullable[float]]
+    r"""Minimum Artificial Analysis Healthcare & Medical Index score (0-100); unscored models are excluded."""
+    max_healthcare_and_medical_index: NotRequired[Nullable[float]]
+    r"""Maximum Artificial Analysis Healthcare & Medical Index score (0-100); unscored models are excluded."""
+    min_engineering_index: NotRequired[Nullable[float]]
+    r"""Minimum Artificial Analysis Engineering Index score (0-100); unscored models are excluded."""
+    max_engineering_index: NotRequired[Nullable[float]]
+    r"""Maximum Artificial Analysis Engineering Index score (0-100); unscored models are excluded."""
+    min_economics_index: NotRequired[Nullable[float]]
+    r"""Minimum Artificial Analysis Economics Index score (0-100); unscored models are excluded."""
+    max_economics_index: NotRequired[Nullable[float]]
+    r"""Maximum Artificial Analysis Economics Index score (0-100); unscored models are excluded."""
+    min_cyber_index: NotRequired[Nullable[float]]
+    r"""Minimum Artificial Analysis Cyber Index score (0-100); unscored models are excluded."""
+    max_cyber_index: NotRequired[Nullable[float]]
+    r"""Maximum Artificial Analysis Cyber Index score (0-100); unscored models are excluded."""
+    min_openness_index: NotRequired[Nullable[float]]
+    r"""Minimum Artificial Analysis Openness Index score (0-100); unscored models are excluded."""
+    max_openness_index: NotRequired[Nullable[float]]
+    r"""Maximum Artificial Analysis Openness Index score (0-100); unscored models are excluded."""
+    min_multilingual_index: NotRequired[Nullable[float]]
+    r"""Minimum Artificial Analysis Multilingual Index score (0-1); unscored models are excluded."""
+    max_multilingual_index: NotRequired[Nullable[float]]
+    r"""Maximum Artificial Analysis Multilingual Index score (0-1); unscored models are excluded."""
+    min_decision_index: NotRequired[Nullable[float]]
+    r"""Minimum Artificial Analysis Decision Index score (0-100); unscored models are excluded."""
+    max_decision_index: NotRequired[Nullable[float]]
+    r"""Maximum Artificial Analysis Decision Index score (0-100); unscored models are excluded."""
     min_tool_success_rate: NotRequired[Nullable[float]]
     r"""Minimum tool-calling success rate, as a fraction in [0, 1] (e.g. 0.9 = 90% of requests finishing with a tool_calls finish reason)."""
     max_tool_success_rate: NotRequired[Nullable[float]]
@@ -284,7 +334,7 @@ class GetModelsRequest(BaseModel):
         Optional[GetModelsSort],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
-    r"""Sort the returned models server-side. Prefer this over fetching the full list and sorting client-side. Options: pricing-low-to-high, pricing-high-to-low (average prompt/completion price), context-high-to-low (context length), throughput-high-to-low, latency-low-to-high (recent median performance), most-popular, top-weekly (tokens processed in the last week), newest (creation date), intelligence-high-to-low, coding-high-to-low, agentic-high-to-low (Artificial Analysis indices), design-arena-elo-high-to-low (best Design Arena ELO across arenas). Models without a score for the chosen benchmark are placed last. When omitted, the existing default ordering is preserved."""
+    r"""Sort the returned models server-side. Prefer this over fetching the full list and sorting client-side. Options: pricing-low-to-high, pricing-high-to-low (average prompt/completion price), context-high-to-low (context length), throughput-high-to-low, latency-low-to-high (recent median performance), most-popular, top-weekly (tokens processed in the last week), newest (creation date), <index>-high-to-low for each Artificial Analysis index (the coding and agentic sorts are deprecated: Artificial Analysis has retired those indexes), design-arena-elo-high-to-low (best Design Arena ELO across arenas). Models without a score for the chosen benchmark are placed last. The decision sort ranks decision models, so pass output_modalities=decisions or all with it. When omitted, the existing default ordering is preserved."""
 
     q: Annotated[
         Optional[str],
@@ -386,37 +436,169 @@ class GetModelsRequest(BaseModel):
         OptionalNullable[float],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = UNSET
-    r"""Minimum Artificial Analysis intelligence index."""
+    r"""Minimum Artificial Analysis Intelligence Index score (0-100); unscored models are excluded."""
 
     max_intelligence_index: Annotated[
         OptionalNullable[float],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = UNSET
-    r"""Maximum Artificial Analysis intelligence index."""
+    r"""Maximum Artificial Analysis Intelligence Index score (0-100); unscored models are excluded."""
 
     min_coding_index: Annotated[
         OptionalNullable[float],
+        pydantic.Field(
+            deprecated="warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+        ),
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = UNSET
-    r"""Minimum Artificial Analysis coding index."""
+    r"""Deprecated: Artificial Analysis has retired its Coding Index. Minimum score (0-100); unscored models are excluded."""
 
     max_coding_index: Annotated[
         OptionalNullable[float],
+        pydantic.Field(
+            deprecated="warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+        ),
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = UNSET
-    r"""Maximum Artificial Analysis coding index."""
+    r"""Deprecated: Artificial Analysis has retired its Coding Index. Maximum score (0-100); unscored models are excluded."""
 
     min_agentic_index: Annotated[
         OptionalNullable[float],
+        pydantic.Field(
+            deprecated="warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+        ),
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = UNSET
-    r"""Minimum Artificial Analysis agentic index."""
+    r"""Deprecated: Artificial Analysis has retired its Agentic Index. Minimum score (0-100); unscored models are excluded."""
 
     max_agentic_index: Annotated[
         OptionalNullable[float],
+        pydantic.Field(
+            deprecated="warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+        ),
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = UNSET
-    r"""Maximum Artificial Analysis agentic index."""
+    r"""Deprecated: Artificial Analysis has retired its Agentic Index. Maximum score (0-100); unscored models are excluded."""
+
+    min_finance_and_accounting_index: Annotated[
+        OptionalNullable[float],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = UNSET
+    r"""Minimum Artificial Analysis Finance & Accounting Index score (0-100); unscored models are excluded."""
+
+    max_finance_and_accounting_index: Annotated[
+        OptionalNullable[float],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = UNSET
+    r"""Maximum Artificial Analysis Finance & Accounting Index score (0-100); unscored models are excluded."""
+
+    min_strategy_and_ops_index: Annotated[
+        OptionalNullable[float],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = UNSET
+    r"""Minimum Artificial Analysis Strategy & Ops Index score (0-100); unscored models are excluded."""
+
+    max_strategy_and_ops_index: Annotated[
+        OptionalNullable[float],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = UNSET
+    r"""Maximum Artificial Analysis Strategy & Ops Index score (0-100); unscored models are excluded."""
+
+    min_legal_index: Annotated[
+        OptionalNullable[float],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = UNSET
+    r"""Minimum Artificial Analysis Legal Index score (0-100); unscored models are excluded."""
+
+    max_legal_index: Annotated[
+        OptionalNullable[float],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = UNSET
+    r"""Maximum Artificial Analysis Legal Index score (0-100); unscored models are excluded."""
+
+    min_healthcare_and_medical_index: Annotated[
+        OptionalNullable[float],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = UNSET
+    r"""Minimum Artificial Analysis Healthcare & Medical Index score (0-100); unscored models are excluded."""
+
+    max_healthcare_and_medical_index: Annotated[
+        OptionalNullable[float],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = UNSET
+    r"""Maximum Artificial Analysis Healthcare & Medical Index score (0-100); unscored models are excluded."""
+
+    min_engineering_index: Annotated[
+        OptionalNullable[float],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = UNSET
+    r"""Minimum Artificial Analysis Engineering Index score (0-100); unscored models are excluded."""
+
+    max_engineering_index: Annotated[
+        OptionalNullable[float],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = UNSET
+    r"""Maximum Artificial Analysis Engineering Index score (0-100); unscored models are excluded."""
+
+    min_economics_index: Annotated[
+        OptionalNullable[float],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = UNSET
+    r"""Minimum Artificial Analysis Economics Index score (0-100); unscored models are excluded."""
+
+    max_economics_index: Annotated[
+        OptionalNullable[float],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = UNSET
+    r"""Maximum Artificial Analysis Economics Index score (0-100); unscored models are excluded."""
+
+    min_cyber_index: Annotated[
+        OptionalNullable[float],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = UNSET
+    r"""Minimum Artificial Analysis Cyber Index score (0-100); unscored models are excluded."""
+
+    max_cyber_index: Annotated[
+        OptionalNullable[float],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = UNSET
+    r"""Maximum Artificial Analysis Cyber Index score (0-100); unscored models are excluded."""
+
+    min_openness_index: Annotated[
+        OptionalNullable[float],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = UNSET
+    r"""Minimum Artificial Analysis Openness Index score (0-100); unscored models are excluded."""
+
+    max_openness_index: Annotated[
+        OptionalNullable[float],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = UNSET
+    r"""Maximum Artificial Analysis Openness Index score (0-100); unscored models are excluded."""
+
+    min_multilingual_index: Annotated[
+        OptionalNullable[float],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = UNSET
+    r"""Minimum Artificial Analysis Multilingual Index score (0-1); unscored models are excluded."""
+
+    max_multilingual_index: Annotated[
+        OptionalNullable[float],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = UNSET
+    r"""Maximum Artificial Analysis Multilingual Index score (0-1); unscored models are excluded."""
+
+    min_decision_index: Annotated[
+        OptionalNullable[float],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = UNSET
+    r"""Minimum Artificial Analysis Decision Index score (0-100); unscored models are excluded."""
+
+    max_decision_index: Annotated[
+        OptionalNullable[float],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = UNSET
+    r"""Maximum Artificial Analysis Decision Index score (0-100); unscored models are excluded."""
 
     min_tool_success_rate: Annotated[
         OptionalNullable[float],
@@ -465,6 +647,26 @@ class GetModelsRequest(BaseModel):
                 "max_coding_index",
                 "min_agentic_index",
                 "max_agentic_index",
+                "min_finance_and_accounting_index",
+                "max_finance_and_accounting_index",
+                "min_strategy_and_ops_index",
+                "max_strategy_and_ops_index",
+                "min_legal_index",
+                "max_legal_index",
+                "min_healthcare_and_medical_index",
+                "max_healthcare_and_medical_index",
+                "min_engineering_index",
+                "max_engineering_index",
+                "min_economics_index",
+                "max_economics_index",
+                "min_cyber_index",
+                "max_cyber_index",
+                "min_openness_index",
+                "max_openness_index",
+                "min_multilingual_index",
+                "max_multilingual_index",
+                "min_decision_index",
+                "max_decision_index",
                 "min_tool_success_rate",
                 "max_tool_success_rate",
             ]
@@ -484,6 +686,26 @@ class GetModelsRequest(BaseModel):
                 "max_coding_index",
                 "min_agentic_index",
                 "max_agentic_index",
+                "min_finance_and_accounting_index",
+                "max_finance_and_accounting_index",
+                "min_strategy_and_ops_index",
+                "max_strategy_and_ops_index",
+                "min_legal_index",
+                "max_legal_index",
+                "min_healthcare_and_medical_index",
+                "max_healthcare_and_medical_index",
+                "min_engineering_index",
+                "max_engineering_index",
+                "min_economics_index",
+                "max_economics_index",
+                "min_cyber_index",
+                "max_cyber_index",
+                "min_openness_index",
+                "max_openness_index",
+                "min_multilingual_index",
+                "max_multilingual_index",
+                "min_decision_index",
+                "max_decision_index",
                 "min_tool_success_rate",
                 "max_tool_success_rate",
             ]
