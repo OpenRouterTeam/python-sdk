@@ -47,6 +47,10 @@ from .preview_websearchservertool import (
     PreviewWebSearchServerToolTypedDict,
 )
 from .promptcacheoptions import PromptCacheOptions, PromptCacheOptionsTypedDict
+from .responsesinputtransformation import (
+    ResponsesInputTransformation,
+    ResponsesInputTransformationTypedDict,
+)
 from .servertoolusedetails import ServerToolUseDetails, ServerToolUseDetailsTypedDict
 from .shellservertool import ShellServerTool, ShellServerToolTypedDict
 from .storedprompttemplate import StoredPromptTemplate, StoredPromptTemplateTypedDict
@@ -478,6 +482,8 @@ class OpenResponsesResultTypedDict(TypedDict):
     r"""Beta. The result of the alignment plugin for this request; the shape may change."""
     error_type: NotRequired[APIErrorType]
     r"""Canonical OpenRouter error type, stable across all API formats"""
+    input_transformations: NotRequired[List[ResponsesInputTransformationTypedDict]]
+    r"""Input items the upstream provider changed before inference (OpenAI `input_transformations`). Present only when the provider reported the field; empty when it changed nothing."""
     openrouter_metadata: NotRequired[OpenRouterMetadataTypedDict]
     safeguard_results: NotRequired[List[ArmorSafeguardResultTypedDict]]
     r"""OpenRouter Armor's verdict for each client tool call of this response, present whenever Armor evaluated the response (even when nothing was flagged). Independent of the `openrouter_metadata` opt-in."""
@@ -570,6 +576,9 @@ class OpenResponsesResult(BaseModel):
     error_type: Optional[APIErrorType] = None
     r"""Canonical OpenRouter error type, stable across all API formats"""
 
+    input_transformations: Optional[List[ResponsesInputTransformation]] = None
+    r"""Input items the upstream provider changed before inference (OpenAI `input_transformations`). Present only when the provider reported the field; empty when it changed nothing."""
+
     openrouter_metadata: Optional[OpenRouterMetadata] = None
 
     safeguard_results: Optional[List[ArmorSafeguardResult]] = None
@@ -599,6 +608,7 @@ class OpenResponsesResult(BaseModel):
                 "access_programs",
                 "alignment",
                 "error_type",
+                "input_transformations",
                 "openrouter_metadata",
                 "safeguard_results",
             ]
