@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c48cf606-fb42-4a45-9c23-8f0555307828
 management:
-  docChecksum: c9da7072b344134eb20731bd712ce638
+  docChecksum: 0757b19ad4945cb53518a7b8c704e3d9
   docVersion: 1.0.0
   speakeasyVersion: 1.803.2
   generationVersion: 2.950.13
-  releaseVersion: 1.3.190
-  configChecksum: b445739770bcc6cd2794ad0a87e6e945
+  releaseVersion: 1.3.191
+  configChecksum: 77ffe7400092550305f5f5e6a67abe82
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
 persistentEdits:
-  generation_id: a0ff5c3e-f728-4bdc-a59a-ba041061beec
-  pristine_commit_hash: c87692e30d60600c239be623c3e44e81af0c0d36
-  pristine_tree_hash: 6e0f16ed895970b58095bea1e671720732b3a96d
+  generation_id: dc212f4f-2d93-45d7-8c6c-7d1068544357
+  pristine_commit_hash: f8744635ad4d01c48172043961f11b0a86329837
+  pristine_tree_hash: 827ba748328ecd25f113afae7c1c0c7e447438c4
 features:
   python:
     acceptHeaders: 3.0.0
@@ -7288,8 +7288,8 @@ trackedFiles:
     pristine_git_object: 6a99a2737d18a3c227bf7fcabf58b481d3c7d94b
   docs/components/privateendpoint.mdx:
     id: 139c5b16dd66
-    last_write_checksum: sha1:41eb9890a3c84dc83008f321ad6e8d4cb2036179
-    pristine_git_object: f668081e031fcb73bf8bd7658c5a2476872a6990
+    last_write_checksum: sha1:904d1f62e82df16da8af49d94cadefc9ef11f33b
+    pristine_git_object: 9c4ccd84c3194c7f42ba390d9e8d9e96f2163d67
   docs/components/privateendpointactivation.mdx:
     id: c5cea1d4e39d
     last_write_checksum: sha1:ebb8d73296264d3c10b4cc76ecc94d4b3d0ff8dd
@@ -7318,6 +7318,10 @@ trackedFiles:
     id: 16264ba816a0
     last_write_checksum: sha1:7f5757f15d55242f1632af55da00886221fc1fc3
     pristine_git_object: 39c75b1536bc48dba971e42dd5a17b1ea67e6040
+  docs/components/privateendpointpromptcaching.mdx:
+    id: e185b93a4db9
+    last_write_checksum: sha1:fb7ada567924bdac4c5fc97c200f2cfbf93f1161
+    pristine_git_object: b411ee8e54d07219ac3c9a2888e7e349f0aebdd9
   docs/components/privateendpointquantization.mdx:
     id: 5f4c25ee2e5a
     last_write_checksum: sha1:e2a1a4b70c13660740bb22feee4c2008a74cc46a
@@ -7328,12 +7332,12 @@ trackedFiles:
     pristine_git_object: 329af60e08c83461303aec47f441c925f11edfcf
   docs/components/privateendpointresponse.mdx:
     id: 5844d85b61d8
-    last_write_checksum: sha1:ec90e4d6c30386ed0aebbfb5a3f702e71e7cc889
-    pristine_git_object: 35ec3c4fcfe1c0f832ba6f7c54378bf7b96d0395
+    last_write_checksum: sha1:6e89e8cf16d61e5672ba800b0365564f5acc63f0
+    pristine_git_object: 7ed5846f033f12f75827316caaa72f326c43dcc0
   docs/components/privateendpointsettings.mdx:
     id: aa8d95ab2a71
-    last_write_checksum: sha1:103bee400b2633c0d8117c6e8fd82c3a3e059151
-    pristine_git_object: 4f794ebbc6179a98d0c784ad31cb161a20949621
+    last_write_checksum: sha1:412d6f77e922d7eeeebbbee92b80c5dba9d39a85
+    pristine_git_object: 82eae996074556476d0cd598277e30c4d1a68e1d
   docs/components/privateendpointsettingscompletions.mdx:
     id: 917fd268a507
     last_write_checksum: sha1:4ffef539437210d355e19775abe8b2711259d2d7
@@ -9014,6 +9018,10 @@ trackedFiles:
     id: 38c4ebf7f509
     last_write_checksum: sha1:c412b92e1d6af7963cece5db3f59736cdc41bb0d
     pristine_git_object: ec3df81fe733a4e648afc6c07b2aa00c830a74b3
+  docs/components/updateprivateendpointpromptcaching.mdx:
+    id: ea6ae13d5f7a
+    last_write_checksum: sha1:f9d1b4b18a45dfe37b29a5067d51ddf0ff48ae1c
+    pristine_git_object: 836a76e525c0397f56197d100c8a5cdd853314c8
   docs/components/updateprivateendpointrequest.mdx:
     id: 8a1aa4763af9
     last_write_checksum: sha1:92290beb45d2607a2571f8e1ff756be3ee97db2a
@@ -9024,8 +9032,8 @@ trackedFiles:
     pristine_git_object: 6627ee9dbb618278fe272acde18f649c5db57552
   docs/components/updateprivateendpointsettingsrequest.mdx:
     id: f9146ce8d00c
-    last_write_checksum: sha1:8bda7119b1e90c8bd030ba08665e62c206ede3d2
-    pristine_git_object: 0f5e5ee1df6109d488a21b107a653c8c5cc162c0
+    last_write_checksum: sha1:9c747c716ed58b1b9d5bf79eb246df029cf9fe30
+    pristine_git_object: 736c1b44b735766596d066c13387b13090cd1b09
   docs/components/updateprivateendpointsettingsrequestcompletions.mdx:
     id: d04ee87c23e5
     last_write_checksum: sha1:962048f34074e161a6b7f4da45efa1724c5fd034
@@ -11684,8 +11692,8 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:4b7f55d26346f021c209beef8eb917767d419a53
-    pristine_git_object: 8276a5a66036d4b6c5dd3e48a8b55f5ee87ae894
+    last_write_checksum: sha1:9d7f793798655e4b3b5a4637046a59146096e720
+    pristine_git_object: 98e4968a2b8cca32c51531a378f8961eb2f9e09d
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77f44b60b98bc126557ec27391f91dfba764bb54
@@ -11712,8 +11720,8 @@ trackedFiles:
     pristine_git_object: 86713cfea633e09d33b3d4e65281071fe20e6137
   src/openrouter/_version.py:
     id: d8d15ad6c586
-    last_write_checksum: sha1:47380d7d68265343e57dbb94215f504a0ef965c1
-    pristine_git_object: dada0df7f1278e386e9b1982e017787d242279ab
+    last_write_checksum: sha1:b6223a11e70c47051e3b7932ec4e3943e74de0fe
+    pristine_git_object: e17a622767c3f9f68cdcaa60b22ff71f8fbe0cb1
   src/openrouter/alpha.py:
     id: 306c4d93308d
     last_write_checksum: sha1:80cc0f39649445431cc2247ed0e0765438467766
@@ -11760,8 +11768,8 @@ trackedFiles:
     pristine_git_object: ad3d247954547814054c01989a2dff3d12b3e4e1
   src/openrouter/components/__init__.py:
     id: 81754e97b3f4
-    last_write_checksum: sha1:ad85b19e4df5bcb98cbdf7e4602bd005bff68e41
-    pristine_git_object: 63c4ac1dddec2fc2992e4413222b2faea7724416
+    last_write_checksum: sha1:085379c69ae3ac2d55f8e812046986c648936293
+    pristine_git_object: 63c91de662a590176a6c124a5de542adf74c596a
   src/openrouter/components/aabenchmarkentry.py:
     id: e2e0f0b48c82
     last_write_checksum: sha1:08125e1d60df82793e11e8aed6e3c9fdb7512ebb
@@ -14662,6 +14670,10 @@ trackedFiles:
     id: 2d8979e18f5b
     last_write_checksum: sha1:9573cef75311eee6c467e4a051308dbfd9a22ec4
     pristine_git_object: 8ab720b740586c7709f13f4bdba16214327a73b0
+  src/openrouter/components/privateendpointpromptcaching.py:
+    id: 225dcedffcf9
+    last_write_checksum: sha1:cea37f022bdba126a5d5b60a392c5e408eeb03ce
+    pristine_git_object: 4904cdb2b026773128e107f75aed7a2525cd0971
   src/openrouter/components/privateendpointquantization.py:
     id: 6365eda62b77
     last_write_checksum: sha1:97c7fadefe3d6664f5ecb01d5b65a0a9be0af9ed
@@ -14676,8 +14688,8 @@ trackedFiles:
     pristine_git_object: 75b7eaee3b2aea9aa60a6b3a94e947148e9b15a9
   src/openrouter/components/privateendpointsettings.py:
     id: 2d18a4690908
-    last_write_checksum: sha1:086b9d8f07f641a1a0d0bf188233e99ff4d503b6
-    pristine_git_object: 9557860a58bb84b8b72ec9921a3ad45c0912bfbc
+    last_write_checksum: sha1:8d36f39acb22ed9284a90cddfc872309fee959d2
+    pristine_git_object: 417b317b172abbeb1734ae69c53f5c17173627f5
   src/openrouter/components/privateendpointstatus.py:
     id: c997d801be04
     last_write_checksum: sha1:d31ca8b19b14c86ecb41e2f5825071c109b5881d
@@ -15398,14 +15410,18 @@ trackedFiles:
     id: 2d255d9e4ac4
     last_write_checksum: sha1:6b703da8963b0173865bd4692d53bd53b50b42a0
     pristine_git_object: add97f9dbdd883540c97aaeffb4a9f227097b07e
+  src/openrouter/components/updateprivateendpointpromptcaching.py:
+    id: 79e2f95dcd61
+    last_write_checksum: sha1:efc99cd7e57568097880297b66647c62d1aae3fa
+    pristine_git_object: 8fadd77bad4522b22abe8935bb4699dcaac04606
   src/openrouter/components/updateprivateendpointrequest.py:
     id: 51a950d71ff3
     last_write_checksum: sha1:7d0d90d6a715ecf9f05973da4f0a0b69deb1b91c
     pristine_git_object: 781779489a3864583f1bc1fd758797dfb07c08fa
   src/openrouter/components/updateprivateendpointsettingsrequest.py:
     id: 5e27265a3151
-    last_write_checksum: sha1:66c49c54b08c084b95c2d46db1e373c73a116045
-    pristine_git_object: 4a3a6a0f3ce45aaffa2301eec6b10133bb6e948a
+    last_write_checksum: sha1:368c44b34a297b555ef48ef7b31762744b8487a4
+    pristine_git_object: e1dc7b0094d23ceaaa39a3d0815038d95235c7f6
   src/openrouter/components/updateprivateproviderrequest.py:
     id: 62230b3a1857
     last_write_checksum: sha1:6519b721854aaec8576b50255f67b955f292169b
@@ -21727,3 +21743,4 @@ examples:
         "500":
           application/json: {"error": {"code": 500, "message": "Internal Server Error"}}
 examplesVersion: 1.0.2
+releaseNotes: "## Python SDK Changes:\n* `open_router.private_endpoints.create()`: \n  *  `request.settings.prompt_caching` **Added**\n* `open_router.private_endpoints.get()`:  `response.data.settings.prompt_caching` **Added**\n* `open_router.private_endpoints.update()`: \n  *  `request.settings.prompt_caching` **Added**\n  *  `response.data.settings.prompt_caching` **Added**\n"

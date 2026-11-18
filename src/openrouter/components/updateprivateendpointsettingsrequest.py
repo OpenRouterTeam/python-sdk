@@ -5,6 +5,10 @@ from .privateendpointquantization import PrivateEndpointQuantization
 from .privateendpointreasoningreturnmechanism import (
     PrivateEndpointReasoningReturnMechanism,
 )
+from .updateprivateendpointpromptcaching import (
+    UpdatePrivateEndpointPromptCaching,
+    UpdatePrivateEndpointPromptCachingTypedDict,
+)
 from openrouter.types import (
     BaseModel,
     Nullable,
@@ -246,6 +250,8 @@ class UpdatePrivateEndpointSettingsRequestTypedDict(TypedDict):
     r"""Longest completion the upstream returns, in tokens, or `null` to keep the model default."""
     max_prompt_tokens: NotRequired[Nullable[int]]
     r"""Longest prompt, in tokens, or `null` for no cap below the context length. Cannot exceed `context_length`, or the model context length while `context_length` is `null`."""
+    prompt_caching: NotRequired[UpdatePrivateEndpointPromptCachingTypedDict]
+    r"""Change only the named prompt-caching flags; omitted flags keep their stored value."""
     quantization: NotRequired[PrivateEndpointQuantization]
     r"""Weight precision the deployment runs at; `unknown` when not stated."""
     reasoning: NotRequired[UpdatePrivateEndpointSettingsRequestReasoningTypedDict]
@@ -273,6 +279,9 @@ class UpdatePrivateEndpointSettingsRequest(BaseModel):
     max_prompt_tokens: OptionalNullable[int] = UNSET
     r"""Longest prompt, in tokens, or `null` for no cap below the context length. Cannot exceed `context_length`, or the model context length while `context_length` is `null`."""
 
+    prompt_caching: Optional[UpdatePrivateEndpointPromptCaching] = None
+    r"""Change only the named prompt-caching flags; omitted flags keep their stored value."""
+
     quantization: Optional[PrivateEndpointQuantization] = None
     r"""Weight precision the deployment runs at; `unknown` when not stated."""
 
@@ -290,6 +299,7 @@ class UpdatePrivateEndpointSettingsRequest(BaseModel):
                 "inputs",
                 "max_completion_tokens",
                 "max_prompt_tokens",
+                "prompt_caching",
                 "quantization",
                 "reasoning",
                 "tool_choice",
