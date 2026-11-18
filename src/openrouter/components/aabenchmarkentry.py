@@ -8,12 +8,12 @@ from typing_extensions import Annotated, TypedDict
 
 
 class AABenchmarkEntryTypedDict(TypedDict):
-    r"""Benchmark index scores published by Artificial Analysis (artificialanalysis.ai), one field per index. Each score is the model's best on that index across the configurations Artificial Analysis evaluated (for example reasoning levels), so two indexes of one model can come from different configurations. The deprecated Coding and Agentic Index scores are the exception: both come from one configuration, the model's strongest by Intelligence Index, then Coding Index, then Agentic Index. Attribute Artificial Analysis when you republish them. Omitted when Artificial Analysis has scored the model on none of them."""
+    r"""Benchmark index scores published by Artificial Analysis (artificialanalysis.ai), one field per index. Each score is the model's best on that index across the configurations Artificial Analysis evaluated (for example reasoning levels), so two indexes of one model can come from different configurations. The deprecated Coding Index and Agentic Index fields are null for every model: Artificial Analysis has retired those indexes. Attribute Artificial Analysis when you republish them. Omitted when Artificial Analysis has scored the model on none of them."""
 
     agentic_index: Nullable[float]
-    r"""Deprecated: Artificial Analysis has retired its Agentic Index and no longer publishes it. Holds the last score Artificial Analysis published for the model, on a 0-100 scale, or null; it will be null for every model once those stored scores are removed."""
+    r"""Deprecated: Artificial Analysis has retired its Agentic Index and no longer publishes it. Always null."""
     coding_index: Nullable[float]
-    r"""Deprecated: Artificial Analysis has retired its Coding Index and no longer publishes it. Holds the last score Artificial Analysis published for the model, on a 0-100 scale, or null; it will be null for every model once those stored scores are removed."""
+    r"""Deprecated: Artificial Analysis has retired its Coding Index and no longer publishes it. Always null."""
     cyber_index: Nullable[float]
     r"""Artificial Analysis Cyber Index score, on a 0-100 scale: the model's best across the configurations Artificial Analysis evaluated. Higher is better. Null when Artificial Analysis has not published a score for the model."""
     decision_index: Nullable[float]
@@ -39,7 +39,7 @@ class AABenchmarkEntryTypedDict(TypedDict):
 
 
 class AABenchmarkEntry(BaseModel):
-    r"""Benchmark index scores published by Artificial Analysis (artificialanalysis.ai), one field per index. Each score is the model's best on that index across the configurations Artificial Analysis evaluated (for example reasoning levels), so two indexes of one model can come from different configurations. The deprecated Coding and Agentic Index scores are the exception: both come from one configuration, the model's strongest by Intelligence Index, then Coding Index, then Agentic Index. Attribute Artificial Analysis when you republish them. Omitted when Artificial Analysis has scored the model on none of them."""
+    r"""Benchmark index scores published by Artificial Analysis (artificialanalysis.ai), one field per index. Each score is the model's best on that index across the configurations Artificial Analysis evaluated (for example reasoning levels), so two indexes of one model can come from different configurations. The deprecated Coding Index and Agentic Index fields are null for every model: Artificial Analysis has retired those indexes. Attribute Artificial Analysis when you republish them. Omitted when Artificial Analysis has scored the model on none of them."""
 
     agentic_index: Annotated[
         Nullable[float],
@@ -47,7 +47,7 @@ class AABenchmarkEntry(BaseModel):
             deprecated="warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
         ),
     ]
-    r"""Deprecated: Artificial Analysis has retired its Agentic Index and no longer publishes it. Holds the last score Artificial Analysis published for the model, on a 0-100 scale, or null; it will be null for every model once those stored scores are removed."""
+    r"""Deprecated: Artificial Analysis has retired its Agentic Index and no longer publishes it. Always null."""
 
     coding_index: Annotated[
         Nullable[float],
@@ -55,7 +55,7 @@ class AABenchmarkEntry(BaseModel):
             deprecated="warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
         ),
     ]
-    r"""Deprecated: Artificial Analysis has retired its Coding Index and no longer publishes it. Holds the last score Artificial Analysis published for the model, on a 0-100 scale, or null; it will be null for every model once those stored scores are removed."""
+    r"""Deprecated: Artificial Analysis has retired its Coding Index and no longer publishes it. Always null."""
 
     cyber_index: Nullable[float]
     r"""Artificial Analysis Cyber Index score, on a 0-100 scale: the model's best across the configurations Artificial Analysis evaluated. Higher is better. Null when Artificial Analysis has not published a score for the model."""

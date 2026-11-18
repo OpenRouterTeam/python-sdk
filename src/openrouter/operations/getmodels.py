@@ -128,7 +128,7 @@ GetModelsSort = Union[
     ],
     UnrecognizedStr,
 ]
-r"""Sort the returned models server-side. Prefer this over fetching the full list and sorting client-side. Options: pricing-low-to-high, pricing-high-to-low (average prompt/completion price), context-high-to-low (context length), throughput-high-to-low, latency-low-to-high (recent median performance), most-popular, top-weekly (tokens processed in the last week), newest (creation date), <index>-high-to-low for each Artificial Analysis index (the coding and agentic sorts are deprecated: Artificial Analysis has retired those indexes), design-arena-elo-high-to-low (best Design Arena ELO across arenas). Models without a score for the chosen benchmark are placed last. The decision sort ranks decision models, so pass output_modalities=decisions or all with it. When omitted, the existing default ordering is preserved."""
+r"""Sort the returned models server-side. Prefer this over fetching the full list and sorting client-side. Options: pricing-low-to-high, pricing-high-to-low (average prompt/completion price), context-high-to-low (context length), throughput-high-to-low, latency-low-to-high (recent median performance), most-popular, top-weekly (tokens processed in the last week), newest (creation date), <index>-high-to-low for each Artificial Analysis index (the coding and agentic sorts are deprecated: Artificial Analysis has retired those indexes, so they order by canonical slug and variant alone), design-arena-elo-high-to-low (best Design Arena ELO across arenas). Models without a score for the chosen benchmark are placed last. The decision sort ranks decision models, so pass output_modalities=decisions or all with it. When omitted, the existing default ordering is preserved."""
 
 
 Distillable = Union[
@@ -180,7 +180,7 @@ class GetModelsRequestTypedDict(TypedDict):
     output_modalities: NotRequired[str]
     r"""Filter models by output modality. Accepts a comma-separated list of modalities (text, image, embeddings, audio, video, rerank, decisions, speech, transcription) or \"all\" to include all models. Defaults to \"text\"."""
     sort: NotRequired[GetModelsSort]
-    r"""Sort the returned models server-side. Prefer this over fetching the full list and sorting client-side. Options: pricing-low-to-high, pricing-high-to-low (average prompt/completion price), context-high-to-low (context length), throughput-high-to-low, latency-low-to-high (recent median performance), most-popular, top-weekly (tokens processed in the last week), newest (creation date), <index>-high-to-low for each Artificial Analysis index (the coding and agentic sorts are deprecated: Artificial Analysis has retired those indexes), design-arena-elo-high-to-low (best Design Arena ELO across arenas). Models without a score for the chosen benchmark are placed last. The decision sort ranks decision models, so pass output_modalities=decisions or all with it. When omitted, the existing default ordering is preserved."""
+    r"""Sort the returned models server-side. Prefer this over fetching the full list and sorting client-side. Options: pricing-low-to-high, pricing-high-to-low (average prompt/completion price), context-high-to-low (context length), throughput-high-to-low, latency-low-to-high (recent median performance), most-popular, top-weekly (tokens processed in the last week), newest (creation date), <index>-high-to-low for each Artificial Analysis index (the coding and agentic sorts are deprecated: Artificial Analysis has retired those indexes, so they order by canonical slug and variant alone), design-arena-elo-high-to-low (best Design Arena ELO across arenas). Models without a score for the chosen benchmark are placed last. The decision sort ranks decision models, so pass output_modalities=decisions or all with it. When omitted, the existing default ordering is preserved."""
     q: NotRequired[str]
     r"""Free-text search by model name or slug."""
     input_modalities: NotRequired[str]
@@ -218,13 +218,13 @@ class GetModelsRequestTypedDict(TypedDict):
     max_intelligence_index: NotRequired[Nullable[float]]
     r"""Maximum Artificial Analysis Intelligence Index score (0-100); unscored models are excluded."""
     min_coding_index: NotRequired[Nullable[float]]
-    r"""Deprecated: Artificial Analysis has retired its Coding Index. Minimum score (0-100); unscored models are excluded."""
+    r"""Deprecated: Artificial Analysis has retired its Coding Index; no model has a score, so this matches no model."""
     max_coding_index: NotRequired[Nullable[float]]
-    r"""Deprecated: Artificial Analysis has retired its Coding Index. Maximum score (0-100); unscored models are excluded."""
+    r"""Deprecated: Artificial Analysis has retired its Coding Index; no model has a score, so this matches no model."""
     min_agentic_index: NotRequired[Nullable[float]]
-    r"""Deprecated: Artificial Analysis has retired its Agentic Index. Minimum score (0-100); unscored models are excluded."""
+    r"""Deprecated: Artificial Analysis has retired its Agentic Index; no model has a score, so this matches no model."""
     max_agentic_index: NotRequired[Nullable[float]]
-    r"""Deprecated: Artificial Analysis has retired its Agentic Index. Maximum score (0-100); unscored models are excluded."""
+    r"""Deprecated: Artificial Analysis has retired its Agentic Index; no model has a score, so this matches no model."""
     min_finance_and_accounting_index: NotRequired[Nullable[float]]
     r"""Minimum Artificial Analysis Finance & Accounting Index score (0-100); unscored models are excluded."""
     max_finance_and_accounting_index: NotRequired[Nullable[float]]
@@ -334,7 +334,7 @@ class GetModelsRequest(BaseModel):
         Optional[GetModelsSort],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
-    r"""Sort the returned models server-side. Prefer this over fetching the full list and sorting client-side. Options: pricing-low-to-high, pricing-high-to-low (average prompt/completion price), context-high-to-low (context length), throughput-high-to-low, latency-low-to-high (recent median performance), most-popular, top-weekly (tokens processed in the last week), newest (creation date), <index>-high-to-low for each Artificial Analysis index (the coding and agentic sorts are deprecated: Artificial Analysis has retired those indexes), design-arena-elo-high-to-low (best Design Arena ELO across arenas). Models without a score for the chosen benchmark are placed last. The decision sort ranks decision models, so pass output_modalities=decisions or all with it. When omitted, the existing default ordering is preserved."""
+    r"""Sort the returned models server-side. Prefer this over fetching the full list and sorting client-side. Options: pricing-low-to-high, pricing-high-to-low (average prompt/completion price), context-high-to-low (context length), throughput-high-to-low, latency-low-to-high (recent median performance), most-popular, top-weekly (tokens processed in the last week), newest (creation date), <index>-high-to-low for each Artificial Analysis index (the coding and agentic sorts are deprecated: Artificial Analysis has retired those indexes, so they order by canonical slug and variant alone), design-arena-elo-high-to-low (best Design Arena ELO across arenas). Models without a score for the chosen benchmark are placed last. The decision sort ranks decision models, so pass output_modalities=decisions or all with it. When omitted, the existing default ordering is preserved."""
 
     q: Annotated[
         Optional[str],
@@ -451,7 +451,7 @@ class GetModelsRequest(BaseModel):
         ),
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = UNSET
-    r"""Deprecated: Artificial Analysis has retired its Coding Index. Minimum score (0-100); unscored models are excluded."""
+    r"""Deprecated: Artificial Analysis has retired its Coding Index; no model has a score, so this matches no model."""
 
     max_coding_index: Annotated[
         OptionalNullable[float],
@@ -460,7 +460,7 @@ class GetModelsRequest(BaseModel):
         ),
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = UNSET
-    r"""Deprecated: Artificial Analysis has retired its Coding Index. Maximum score (0-100); unscored models are excluded."""
+    r"""Deprecated: Artificial Analysis has retired its Coding Index; no model has a score, so this matches no model."""
 
     min_agentic_index: Annotated[
         OptionalNullable[float],
@@ -469,7 +469,7 @@ class GetModelsRequest(BaseModel):
         ),
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = UNSET
-    r"""Deprecated: Artificial Analysis has retired its Agentic Index. Minimum score (0-100); unscored models are excluded."""
+    r"""Deprecated: Artificial Analysis has retired its Agentic Index; no model has a score, so this matches no model."""
 
     max_agentic_index: Annotated[
         OptionalNullable[float],
@@ -478,7 +478,7 @@ class GetModelsRequest(BaseModel):
         ),
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = UNSET
-    r"""Deprecated: Artificial Analysis has retired its Agentic Index. Maximum score (0-100); unscored models are excluded."""
+    r"""Deprecated: Artificial Analysis has retired its Agentic Index; no model has a score, so this matches no model."""
 
     min_finance_and_accounting_index: Annotated[
         OptionalNullable[float],
