@@ -17,12 +17,12 @@ r"""Benchmark source discriminator."""
 
 
 class UnifiedBenchmarksAAItemTypedDict(TypedDict):
-    r"""One model's Artificial Analysis index scores. Each score is the model's best on that index across the configurations Artificial Analysis evaluated (for example reasoning levels), so two indexes of one model can come from different configurations. The deprecated Coding and Agentic Index scores are the exception: both come from one configuration, the model's strongest by Intelligence Index, then Coding Index, then Agentic Index. With `task_type` set to `intelligence`, `coding` or `agentic`, those three indexes all come from the configuration that scores best on the one named."""
+    r"""One model's Artificial Analysis index scores. Each score is the model's best on that index across the configurations Artificial Analysis evaluated (for example reasoning levels), so two indexes of one model can come from different configurations. The deprecated Coding Index and Agentic Index fields are null for every model: Artificial Analysis has retired those indexes."""
 
     agentic_index: Nullable[float]
-    r"""Deprecated: Artificial Analysis has retired its Agentic Index and no longer publishes it. Holds the last score Artificial Analysis published for the model, on a 0-100 scale, or null; it will be null for every model once those stored scores are removed."""
+    r"""Deprecated: Artificial Analysis has retired its Agentic Index and no longer publishes it. Always null."""
     coding_index: Nullable[float]
-    r"""Deprecated: Artificial Analysis has retired its Coding Index and no longer publishes it. Holds the last score Artificial Analysis published for the model, on a 0-100 scale, or null; it will be null for every model once those stored scores are removed."""
+    r"""Deprecated: Artificial Analysis has retired its Coding Index and no longer publishes it. Always null."""
     cyber_index: Nullable[float]
     r"""Artificial Analysis Cyber Index score, on a 0-100 scale: the model's best across the configurations Artificial Analysis evaluated. Higher is better. Null when Artificial Analysis has not published a score for the model."""
     decision_index: Nullable[float]
@@ -56,7 +56,7 @@ class UnifiedBenchmarksAAItemTypedDict(TypedDict):
 
 
 class UnifiedBenchmarksAAItem(BaseModel):
-    r"""One model's Artificial Analysis index scores. Each score is the model's best on that index across the configurations Artificial Analysis evaluated (for example reasoning levels), so two indexes of one model can come from different configurations. The deprecated Coding and Agentic Index scores are the exception: both come from one configuration, the model's strongest by Intelligence Index, then Coding Index, then Agentic Index. With `task_type` set to `intelligence`, `coding` or `agentic`, those three indexes all come from the configuration that scores best on the one named."""
+    r"""One model's Artificial Analysis index scores. Each score is the model's best on that index across the configurations Artificial Analysis evaluated (for example reasoning levels), so two indexes of one model can come from different configurations. The deprecated Coding Index and Agentic Index fields are null for every model: Artificial Analysis has retired those indexes."""
 
     agentic_index: Annotated[
         Nullable[float],
@@ -64,7 +64,7 @@ class UnifiedBenchmarksAAItem(BaseModel):
             deprecated="warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
         ),
     ]
-    r"""Deprecated: Artificial Analysis has retired its Agentic Index and no longer publishes it. Holds the last score Artificial Analysis published for the model, on a 0-100 scale, or null; it will be null for every model once those stored scores are removed."""
+    r"""Deprecated: Artificial Analysis has retired its Agentic Index and no longer publishes it. Always null."""
 
     coding_index: Annotated[
         Nullable[float],
@@ -72,7 +72,7 @@ class UnifiedBenchmarksAAItem(BaseModel):
             deprecated="warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
         ),
     ]
-    r"""Deprecated: Artificial Analysis has retired its Coding Index and no longer publishes it. Holds the last score Artificial Analysis published for the model, on a 0-100 scale, or null; it will be null for every model once those stored scores are removed."""
+    r"""Deprecated: Artificial Analysis has retired its Coding Index and no longer publishes it. Always null."""
 
     cyber_index: Nullable[float]
     r"""Artificial Analysis Cyber Index score, on a 0-100 scale: the model's best across the configurations Artificial Analysis evaluated. Higher is better. Null when Artificial Analysis has not published a score for the model."""
