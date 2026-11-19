@@ -728,6 +728,12 @@ if TYPE_CHECKING:
         GetSessionCostResponseTypedDict,
         TurnRange,
     )
+    from .getspeechmodel import (
+        GetSpeechModelGlobals,
+        GetSpeechModelGlobalsTypedDict,
+        GetSpeechModelRequest,
+        GetSpeechModelRequestTypedDict,
+    )
     from .gettaskclassifications import (
         GetTaskClassificationsGlobals,
         GetTaskClassificationsGlobalsTypedDict,
@@ -1060,6 +1066,12 @@ if TYPE_CHECKING:
         ListScimGroupsRequestTypedDict,
         ListScimGroupsResponse,
         ListScimGroupsResponseTypedDict,
+    )
+    from .listspeechmodels import (
+        ListSpeechModelsGlobals,
+        ListSpeechModelsGlobalsTypedDict,
+        ListSpeechModelsRequest,
+        ListSpeechModelsRequestTypedDict,
     )
     from .listtools import (
         APIFormat,
@@ -1796,6 +1808,10 @@ __all__ = [
     "GetSessionCostRequestTypedDict",
     "GetSessionCostResponse",
     "GetSessionCostResponseTypedDict",
+    "GetSpeechModelGlobals",
+    "GetSpeechModelGlobalsTypedDict",
+    "GetSpeechModelRequest",
+    "GetSpeechModelRequestTypedDict",
     "GetTaskClassificationsGlobals",
     "GetTaskClassificationsGlobalsTypedDict",
     "GetTaskClassificationsRequest",
@@ -2051,6 +2067,10 @@ __all__ = [
     "ListScimGroupsRequestTypedDict",
     "ListScimGroupsResponse",
     "ListScimGroupsResponseTypedDict",
+    "ListSpeechModelsGlobals",
+    "ListSpeechModelsGlobalsTypedDict",
+    "ListSpeechModelsRequest",
+    "ListSpeechModelsRequestTypedDict",
     "ListToolsGlobals",
     "ListToolsGlobalsTypedDict",
     "ListToolsRequest",
@@ -2777,6 +2797,10 @@ _dynamic_imports: dict[str, str] = {
     "GetSessionCostResponse": ".getsessioncost",
     "GetSessionCostResponseTypedDict": ".getsessioncost",
     "TurnRange": ".getsessioncost",
+    "GetSpeechModelGlobals": ".getspeechmodel",
+    "GetSpeechModelGlobalsTypedDict": ".getspeechmodel",
+    "GetSpeechModelRequest": ".getspeechmodel",
+    "GetSpeechModelRequestTypedDict": ".getspeechmodel",
     "GetTaskClassificationsGlobals": ".gettaskclassifications",
     "GetTaskClassificationsGlobalsTypedDict": ".gettaskclassifications",
     "GetTaskClassificationsRequest": ".gettaskclassifications",
@@ -3026,6 +3050,10 @@ _dynamic_imports: dict[str, str] = {
     "ListScimGroupsRequestTypedDict": ".listscimgroups",
     "ListScimGroupsResponse": ".listscimgroups",
     "ListScimGroupsResponseTypedDict": ".listscimgroups",
+    "ListSpeechModelsGlobals": ".listspeechmodels",
+    "ListSpeechModelsGlobalsTypedDict": ".listspeechmodels",
+    "ListSpeechModelsRequest": ".listspeechmodels",
+    "ListSpeechModelsRequestTypedDict": ".listspeechmodels",
     "APIFormat": ".listtools",
     "ListToolsGlobals": ".listtools",
     "ListToolsGlobalsTypedDict": ".listtools",

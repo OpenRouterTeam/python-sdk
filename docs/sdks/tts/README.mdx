@@ -10,6 +10,8 @@ Text-to-speech endpoints
 ### Available Operations
 
 * [create_speech](#create_speech) - Create speech
+* [list_models](#list_models) - List text-to-speech models
+* [get_model](#get_model) - Get a text-to-speech model
 
 ## create_speech
 
@@ -76,4 +78,97 @@ with OpenRouter(
 | errors.ServiceUnavailableResponseError | 503                                    | application/json                       |
 | errors.EdgeNetworkTimeoutResponseError | 524                                    | application/json                       |
 | errors.ProviderOverloadedResponseError | 529                                    | application/json                       |
+| errors.OpenRouterDefaultError          | 4XX, 5XX                               | \*/\*                                  |
+
+## list_models
+
+Lists every text-to-speech model with the inputs it accepts and its speech output parameters, merged across its endpoints, plus each endpoint with its own.
+
+### Example Usage
+
+```python
+from openrouter import OpenRouter
+
+
+with OpenRouter(
+    http_referer="<value>",
+    x_open_router_title="<value>",
+    x_open_router_categories="<value>",
+) as open_router:
+
+    res = open_router.tts.list_models()
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                                                                                                         | Type                                                                                                                                              | Required                                                                                                                                          | Description                                                                                                                                       |
+| ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `http_referer`                                                                                                                                    | *Optional[str]*                                                                                                                                   | ➖                                                                                                                                | The app identifier should be your app's URL and is used as the primary identifier for rankings.<br/>This is used to track API usage per application.<br/> |
+| `x_open_router_title`                                                                                                                             | *Optional[str]*                                                                                                                                   | ➖                                                                                                                                | The app display name allows you to customize how your app appears in OpenRouter's dashboard.<br/>                                                 |
+| `x_open_router_categories`                                                                                                                        | *Optional[str]*                                                                                                                                   | ➖                                                                                                                                | Comma-separated list of app categories (e.g. "cli-agent,cloud-agent"). Used for marketplace rankings.<br/>                                        |
+| `retries`                                                                                                                                         | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.mdx)                                                                                  | ➖                                                                                                                                | Configuration to override the default retry behavior of the client.                                                                               |
+
+### Response
+
+**[components.SpeechModelsListResponse](../../components/speechmodelslistresponse.mdx)**
+
+### Errors
+
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| errors.ForbiddenResponseError          | 403                                    | application/json                       |
+| errors.InternalServerResponseError     | 500                                    | application/json                       |
+| errors.ServiceUnavailableResponseError | 503                                    | application/json                       |
+| errors.OpenRouterDefaultError          | 4XX, 5XX                               | \*/\*                                  |
+
+## get_model
+
+Returns a text-to-speech model with each endpoint's own inputs and speech output parameters.
+
+### Example Usage
+
+```python
+from openrouter import OpenRouter
+
+
+with OpenRouter(
+    http_referer="<value>",
+    x_open_router_title="<value>",
+    x_open_router_categories="<value>",
+) as open_router:
+
+    res = open_router.tts.get_model(author="openai", slug="gpt-4o-mini-tts")
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                                                                                                         | Type                                                                                                                                              | Required                                                                                                                                          | Description                                                                                                                                       | Example                                                                                                                                           |
+| ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `author`                                                                                                                                          | *str*                                                                                                                                             | ✔️                                                                                                                                | Model author/organization                                                                                                                         | openai                                                                                                                                            |
+| `slug`                                                                                                                                            | *str*                                                                                                                                             | ✔️                                                                                                                                | Model slug                                                                                                                                        | gpt-4o-mini-tts                                                                                                                                   |
+| `http_referer`                                                                                                                                    | *Optional[str]*                                                                                                                                   | ➖                                                                                                                                | The app identifier should be your app's URL and is used as the primary identifier for rankings.<br/>This is used to track API usage per application.<br/> |                                                                                                                                                   |
+| `x_open_router_title`                                                                                                                             | *Optional[str]*                                                                                                                                   | ➖                                                                                                                                | The app display name allows you to customize how your app appears in OpenRouter's dashboard.<br/>                                                 |                                                                                                                                                   |
+| `x_open_router_categories`                                                                                                                        | *Optional[str]*                                                                                                                                   | ➖                                                                                                                                | Comma-separated list of app categories (e.g. "cli-agent,cloud-agent"). Used for marketplace rankings.<br/>                                        |                                                                                                                                                   |
+| `retries`                                                                                                                                         | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.mdx)                                                                                  | ➖                                                                                                                                | Configuration to override the default retry behavior of the client.                                                                               |                                                                                                                                                   |
+
+### Response
+
+**[components.SpeechModelResponse](../../components/speechmodelresponse.mdx)**
+
+### Errors
+
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| errors.ForbiddenResponseError          | 403                                    | application/json                       |
+| errors.NotFoundResponseError           | 404                                    | application/json                       |
+| errors.InternalServerResponseError     | 500                                    | application/json                       |
+| errors.ServiceUnavailableResponseError | 503                                    | application/json                       |
 | errors.OpenRouterDefaultError          | 4XX, 5XX                               | \*/\*                                  |

@@ -1,0 +1,22 @@
+---
+title: "AudioEnum"
+---
+
+`required`: an image reference is accepted only together with an audio reference. `excluded`: only without one. Absent: either.
+
+## Example Usage
+
+```python
+from openrouter.components import AudioEnum
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
+value: AudioEnum = "required"
+```
+
+
+## Values
+
+This is an open enum. Unrecognized values will not fail type checks.
+
+- `"required"`
+- `"excluded"`

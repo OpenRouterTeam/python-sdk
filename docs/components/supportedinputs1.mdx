@@ -1,0 +1,12 @@
+---
+title: "SupportedInputs1"
+---
+
+`references` is how many audio clips a request may send. With more than one, some providers require the text to address every clip with an `@AudioN` placeholder.
+
+
+## Fields
+
+| Field                                                                    | Type                                                                     | Required                                                                 | Description                                                              | Example                                                                  |
+| ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
+| `references`                                                             | [components.SpeechReferenceCount](../components/speechreferencecount.mdx) | ✔️                                                       | N/A                                                                      | \{<br/>"max": 1,<br/>"min": 1,<br/>"type": "integer"<br/>}                |
