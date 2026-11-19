@@ -43,6 +43,9 @@ class Images(BaseSDK):
         ] = None,
         quality: Optional[components.ImageGenerationRequestQuality] = None,
         resolution: Optional[components.ImageGenerationRequestResolution] = None,
+        response_format: Optional[
+            components.ImageGenerationRequestResponseFormat
+        ] = None,
         seed: Optional[int] = None,
         session_id: Optional[str] = None,
         size: Optional[str] = None,
@@ -81,6 +84,7 @@ class Images(BaseSDK):
         :param provider: Provider routing preferences and provider-specific passthrough configuration.
         :param quality: Rendering quality. Providers without a quality knob ignore this.
         :param resolution: Normalized resolution tier of the generated image. Concrete pixel dimensions are derived per-provider.
+        :param response_format: `b64_json` (default) returns the image bytes inline. `url` stores each output in OpenRouter storage and returns a signed download URL in place of the bytes. The URL is a bearer link: anyone holding it can download the image until it expires, up to 24 hours after the image was stored (use `expires_at`); the stored copy is deleted by the storage lifecycle within the following day. The response falls back to `b64_json` when a URL cannot be issued: streaming responses, zero-data-retention requests (account settings, guardrails or `provider.zdr`) or endpoints, or storage being unavailable.
         :param seed: If specified, the generation will sample deterministically, such that repeated requests with the same seed and parameters should return the same result. Determinism is not guaranteed for all providers.
         :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow). Used for observability grouping in Broadcast and private logging; never sent to the provider. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters.
         :param size: Optional. A convenience shorthand for output dimensions — pass a tier (\"2K\", \"4K\") or explicit pixels (\"2048x2048\"). A tier size is equivalent to setting `resolution` and combines with `aspect_ratio`. Explicit pixel sizes are provider-dependent: providers that accept them treat the value as authoritative and reject a mismatched `resolution` or `aspect_ratio` alongside it with a 400. xAI and Sourceful V2/V2.5 reject explicit pixel sizes (use `resolution` and `aspect_ratio` there); Sourceful V2.6 supports them within its dimension limits and does not allow combining them with `resolution` or `aspect_ratio`.
@@ -124,6 +128,9 @@ class Images(BaseSDK):
         ] = None,
         quality: Optional[components.ImageGenerationRequestQuality] = None,
         resolution: Optional[components.ImageGenerationRequestResolution] = None,
+        response_format: Optional[
+            components.ImageGenerationRequestResponseFormat
+        ] = None,
         seed: Optional[int] = None,
         session_id: Optional[str] = None,
         size: Optional[str] = None,
@@ -162,6 +169,7 @@ class Images(BaseSDK):
         :param provider: Provider routing preferences and provider-specific passthrough configuration.
         :param quality: Rendering quality. Providers without a quality knob ignore this.
         :param resolution: Normalized resolution tier of the generated image. Concrete pixel dimensions are derived per-provider.
+        :param response_format: `b64_json` (default) returns the image bytes inline. `url` stores each output in OpenRouter storage and returns a signed download URL in place of the bytes. The URL is a bearer link: anyone holding it can download the image until it expires, up to 24 hours after the image was stored (use `expires_at`); the stored copy is deleted by the storage lifecycle within the following day. The response falls back to `b64_json` when a URL cannot be issued: streaming responses, zero-data-retention requests (account settings, guardrails or `provider.zdr`) or endpoints, or storage being unavailable.
         :param seed: If specified, the generation will sample deterministically, such that repeated requests with the same seed and parameters should return the same result. Determinism is not guaranteed for all providers.
         :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow). Used for observability grouping in Broadcast and private logging; never sent to the provider. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters.
         :param size: Optional. A convenience shorthand for output dimensions — pass a tier (\"2K\", \"4K\") or explicit pixels (\"2048x2048\"). A tier size is equivalent to setting `resolution` and combines with `aspect_ratio`. Explicit pixel sizes are provider-dependent: providers that accept them treat the value as authoritative and reject a mismatched `resolution` or `aspect_ratio` alongside it with a 400. xAI and Sourceful V2/V2.5 reject explicit pixel sizes (use `resolution` and `aspect_ratio` there); Sourceful V2.6 supports them within its dimension limits and does not allow combining them with `resolution` or `aspect_ratio`.
@@ -205,6 +213,9 @@ class Images(BaseSDK):
         ] = None,
         quality: Optional[components.ImageGenerationRequestQuality] = None,
         resolution: Optional[components.ImageGenerationRequestResolution] = None,
+        response_format: Optional[
+            components.ImageGenerationRequestResponseFormat
+        ] = None,
         seed: Optional[int] = None,
         session_id: Optional[str] = None,
         size: Optional[str] = None,
@@ -246,6 +257,7 @@ class Images(BaseSDK):
         :param provider: Provider routing preferences and provider-specific passthrough configuration.
         :param quality: Rendering quality. Providers without a quality knob ignore this.
         :param resolution: Normalized resolution tier of the generated image. Concrete pixel dimensions are derived per-provider.
+        :param response_format: `b64_json` (default) returns the image bytes inline. `url` stores each output in OpenRouter storage and returns a signed download URL in place of the bytes. The URL is a bearer link: anyone holding it can download the image until it expires, up to 24 hours after the image was stored (use `expires_at`); the stored copy is deleted by the storage lifecycle within the following day. The response falls back to `b64_json` when a URL cannot be issued: streaming responses, zero-data-retention requests (account settings, guardrails or `provider.zdr`) or endpoints, or storage being unavailable.
         :param seed: If specified, the generation will sample deterministically, such that repeated requests with the same seed and parameters should return the same result. Determinism is not guaranteed for all providers.
         :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow). Used for observability grouping in Broadcast and private logging; never sent to the provider. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters.
         :param size: Optional. A convenience shorthand for output dimensions — pass a tier (\"2K\", \"4K\") or explicit pixels (\"2048x2048\"). A tier size is equivalent to setting `resolution` and combines with `aspect_ratio`. Explicit pixel sizes are provider-dependent: providers that accept them treat the value as authoritative and reject a mismatched `resolution` or `aspect_ratio` alongside it with a 400. xAI and Sourceful V2/V2.5 reject explicit pixel sizes (use `resolution` and `aspect_ratio` there); Sourceful V2.6 supports them within its dimension limits and does not allow combining them with `resolution` or `aspect_ratio`.
@@ -288,6 +300,9 @@ class Images(BaseSDK):
         ] = None,
         quality: Optional[components.ImageGenerationRequestQuality] = None,
         resolution: Optional[components.ImageGenerationRequestResolution] = None,
+        response_format: Optional[
+            components.ImageGenerationRequestResponseFormat
+        ] = None,
         seed: Optional[int] = None,
         session_id: Optional[str] = None,
         size: Optional[str] = None,
@@ -329,6 +344,7 @@ class Images(BaseSDK):
         :param provider: Provider routing preferences and provider-specific passthrough configuration.
         :param quality: Rendering quality. Providers without a quality knob ignore this.
         :param resolution: Normalized resolution tier of the generated image. Concrete pixel dimensions are derived per-provider.
+        :param response_format: `b64_json` (default) returns the image bytes inline. `url` stores each output in OpenRouter storage and returns a signed download URL in place of the bytes. The URL is a bearer link: anyone holding it can download the image until it expires, up to 24 hours after the image was stored (use `expires_at`); the stored copy is deleted by the storage lifecycle within the following day. The response falls back to `b64_json` when a URL cannot be issued: streaming responses, zero-data-retention requests (account settings, guardrails or `provider.zdr`) or endpoints, or storage being unavailable.
         :param seed: If specified, the generation will sample deterministically, such that repeated requests with the same seed and parameters should return the same result. Determinism is not guaranteed for all providers.
         :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow). Used for observability grouping in Broadcast and private logging; never sent to the provider. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters.
         :param size: Optional. A convenience shorthand for output dimensions — pass a tier (\"2K\", \"4K\") or explicit pixels (\"2048x2048\"). A tier size is equivalent to setting `resolution` and combines with `aspect_ratio`. Explicit pixel sizes are provider-dependent: providers that accept them treat the value as authoritative and reject a mismatched `resolution` or `aspect_ratio` alongside it with a 400. xAI and Sourceful V2/V2.5 reject explicit pixel sizes (use `resolution` and `aspect_ratio` there); Sourceful V2.6 supports them within its dimension limits and does not allow combining them with `resolution` or `aspect_ratio`.
@@ -373,6 +389,7 @@ class Images(BaseSDK):
                 ),
                 quality=quality,
                 resolution=resolution,
+                response_format=response_format,
                 seed=seed,
                 session_id=session_id,
                 size=size,
@@ -585,6 +602,9 @@ class Images(BaseSDK):
         ] = None,
         quality: Optional[components.ImageGenerationRequestQuality] = None,
         resolution: Optional[components.ImageGenerationRequestResolution] = None,
+        response_format: Optional[
+            components.ImageGenerationRequestResponseFormat
+        ] = None,
         seed: Optional[int] = None,
         session_id: Optional[str] = None,
         size: Optional[str] = None,
@@ -623,6 +643,7 @@ class Images(BaseSDK):
         :param provider: Provider routing preferences and provider-specific passthrough configuration.
         :param quality: Rendering quality. Providers without a quality knob ignore this.
         :param resolution: Normalized resolution tier of the generated image. Concrete pixel dimensions are derived per-provider.
+        :param response_format: `b64_json` (default) returns the image bytes inline. `url` stores each output in OpenRouter storage and returns a signed download URL in place of the bytes. The URL is a bearer link: anyone holding it can download the image until it expires, up to 24 hours after the image was stored (use `expires_at`); the stored copy is deleted by the storage lifecycle within the following day. The response falls back to `b64_json` when a URL cannot be issued: streaming responses, zero-data-retention requests (account settings, guardrails or `provider.zdr`) or endpoints, or storage being unavailable.
         :param seed: If specified, the generation will sample deterministically, such that repeated requests with the same seed and parameters should return the same result. Determinism is not guaranteed for all providers.
         :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow). Used for observability grouping in Broadcast and private logging; never sent to the provider. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters.
         :param size: Optional. A convenience shorthand for output dimensions — pass a tier (\"2K\", \"4K\") or explicit pixels (\"2048x2048\"). A tier size is equivalent to setting `resolution` and combines with `aspect_ratio`. Explicit pixel sizes are provider-dependent: providers that accept them treat the value as authoritative and reject a mismatched `resolution` or `aspect_ratio` alongside it with a 400. xAI and Sourceful V2/V2.5 reject explicit pixel sizes (use `resolution` and `aspect_ratio` there); Sourceful V2.6 supports them within its dimension limits and does not allow combining them with `resolution` or `aspect_ratio`.
@@ -666,6 +687,9 @@ class Images(BaseSDK):
         ] = None,
         quality: Optional[components.ImageGenerationRequestQuality] = None,
         resolution: Optional[components.ImageGenerationRequestResolution] = None,
+        response_format: Optional[
+            components.ImageGenerationRequestResponseFormat
+        ] = None,
         seed: Optional[int] = None,
         session_id: Optional[str] = None,
         size: Optional[str] = None,
@@ -704,6 +728,7 @@ class Images(BaseSDK):
         :param provider: Provider routing preferences and provider-specific passthrough configuration.
         :param quality: Rendering quality. Providers without a quality knob ignore this.
         :param resolution: Normalized resolution tier of the generated image. Concrete pixel dimensions are derived per-provider.
+        :param response_format: `b64_json` (default) returns the image bytes inline. `url` stores each output in OpenRouter storage and returns a signed download URL in place of the bytes. The URL is a bearer link: anyone holding it can download the image until it expires, up to 24 hours after the image was stored (use `expires_at`); the stored copy is deleted by the storage lifecycle within the following day. The response falls back to `b64_json` when a URL cannot be issued: streaming responses, zero-data-retention requests (account settings, guardrails or `provider.zdr`) or endpoints, or storage being unavailable.
         :param seed: If specified, the generation will sample deterministically, such that repeated requests with the same seed and parameters should return the same result. Determinism is not guaranteed for all providers.
         :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow). Used for observability grouping in Broadcast and private logging; never sent to the provider. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters.
         :param size: Optional. A convenience shorthand for output dimensions — pass a tier (\"2K\", \"4K\") or explicit pixels (\"2048x2048\"). A tier size is equivalent to setting `resolution` and combines with `aspect_ratio`. Explicit pixel sizes are provider-dependent: providers that accept them treat the value as authoritative and reject a mismatched `resolution` or `aspect_ratio` alongside it with a 400. xAI and Sourceful V2/V2.5 reject explicit pixel sizes (use `resolution` and `aspect_ratio` there); Sourceful V2.6 supports them within its dimension limits and does not allow combining them with `resolution` or `aspect_ratio`.
@@ -747,6 +772,9 @@ class Images(BaseSDK):
         ] = None,
         quality: Optional[components.ImageGenerationRequestQuality] = None,
         resolution: Optional[components.ImageGenerationRequestResolution] = None,
+        response_format: Optional[
+            components.ImageGenerationRequestResponseFormat
+        ] = None,
         seed: Optional[int] = None,
         session_id: Optional[str] = None,
         size: Optional[str] = None,
@@ -788,6 +816,7 @@ class Images(BaseSDK):
         :param provider: Provider routing preferences and provider-specific passthrough configuration.
         :param quality: Rendering quality. Providers without a quality knob ignore this.
         :param resolution: Normalized resolution tier of the generated image. Concrete pixel dimensions are derived per-provider.
+        :param response_format: `b64_json` (default) returns the image bytes inline. `url` stores each output in OpenRouter storage and returns a signed download URL in place of the bytes. The URL is a bearer link: anyone holding it can download the image until it expires, up to 24 hours after the image was stored (use `expires_at`); the stored copy is deleted by the storage lifecycle within the following day. The response falls back to `b64_json` when a URL cannot be issued: streaming responses, zero-data-retention requests (account settings, guardrails or `provider.zdr`) or endpoints, or storage being unavailable.
         :param seed: If specified, the generation will sample deterministically, such that repeated requests with the same seed and parameters should return the same result. Determinism is not guaranteed for all providers.
         :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow). Used for observability grouping in Broadcast and private logging; never sent to the provider. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters.
         :param size: Optional. A convenience shorthand for output dimensions — pass a tier (\"2K\", \"4K\") or explicit pixels (\"2048x2048\"). A tier size is equivalent to setting `resolution` and combines with `aspect_ratio`. Explicit pixel sizes are provider-dependent: providers that accept them treat the value as authoritative and reject a mismatched `resolution` or `aspect_ratio` alongside it with a 400. xAI and Sourceful V2/V2.5 reject explicit pixel sizes (use `resolution` and `aspect_ratio` there); Sourceful V2.6 supports them within its dimension limits and does not allow combining them with `resolution` or `aspect_ratio`.
@@ -830,6 +859,9 @@ class Images(BaseSDK):
         ] = None,
         quality: Optional[components.ImageGenerationRequestQuality] = None,
         resolution: Optional[components.ImageGenerationRequestResolution] = None,
+        response_format: Optional[
+            components.ImageGenerationRequestResponseFormat
+        ] = None,
         seed: Optional[int] = None,
         session_id: Optional[str] = None,
         size: Optional[str] = None,
@@ -871,6 +903,7 @@ class Images(BaseSDK):
         :param provider: Provider routing preferences and provider-specific passthrough configuration.
         :param quality: Rendering quality. Providers without a quality knob ignore this.
         :param resolution: Normalized resolution tier of the generated image. Concrete pixel dimensions are derived per-provider.
+        :param response_format: `b64_json` (default) returns the image bytes inline. `url` stores each output in OpenRouter storage and returns a signed download URL in place of the bytes. The URL is a bearer link: anyone holding it can download the image until it expires, up to 24 hours after the image was stored (use `expires_at`); the stored copy is deleted by the storage lifecycle within the following day. The response falls back to `b64_json` when a URL cannot be issued: streaming responses, zero-data-retention requests (account settings, guardrails or `provider.zdr`) or endpoints, or storage being unavailable.
         :param seed: If specified, the generation will sample deterministically, such that repeated requests with the same seed and parameters should return the same result. Determinism is not guaranteed for all providers.
         :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow). Used for observability grouping in Broadcast and private logging; never sent to the provider. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters.
         :param size: Optional. A convenience shorthand for output dimensions — pass a tier (\"2K\", \"4K\") or explicit pixels (\"2048x2048\"). A tier size is equivalent to setting `resolution` and combines with `aspect_ratio`. Explicit pixel sizes are provider-dependent: providers that accept them treat the value as authoritative and reject a mismatched `resolution` or `aspect_ratio` alongside it with a 400. xAI and Sourceful V2/V2.5 reject explicit pixel sizes (use `resolution` and `aspect_ratio` there); Sourceful V2.6 supports them within its dimension limits and does not allow combining them with `resolution` or `aspect_ratio`.
@@ -915,6 +948,7 @@ class Images(BaseSDK):
                 ),
                 quality=quality,
                 resolution=resolution,
+                response_format=response_format,
                 seed=seed,
                 session_id=session_id,
                 size=size,
