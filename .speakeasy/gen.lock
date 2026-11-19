@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c48cf606-fb42-4a45-9c23-8f0555307828
 management:
-  docChecksum: 41a8a75014e44aa569adffd5080f2e22
+  docChecksum: ceacd0d1f590fb1a700821abbc548601
   docVersion: 1.0.0
   speakeasyVersion: 1.803.2
   generationVersion: 2.950.13
-  releaseVersion: 1.3.196
-  configChecksum: 4a8eee36442c94702720302cabb66b9b
+  releaseVersion: 1.3.197
+  configChecksum: c4b036ac8ad809b4ac103c748efe6632
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
 persistentEdits:
-  generation_id: 582efff3-b3a2-4f2b-a31e-ba1ee3034af8
-  pristine_commit_hash: 4e985f311f7e49a5a14e3b5dab599f154c5ddd25
-  pristine_tree_hash: e79945f9672c586eaf149a8b84475367de41cd09
+  generation_id: 733af22f-2f89-4013-9ed6-d0f930d75ec8
+  pristine_commit_hash: 0f6880dbfc8a765a971e920bcb159970cb9554bc
+  pristine_tree_hash: 890138ac6d2c14acb9f13ba9c5dd934a76ada61e
 features:
   python:
     acceptHeaders: 3.0.0
@@ -7104,8 +7104,8 @@ trackedFiles:
     pristine_git_object: 7bcc872b70da2f1c7edb03ffddc8e96363e8a3d9
   docs/components/parameter.mdx:
     id: 732881d0420c
-    last_write_checksum: sha1:7bcc630ce6294c6792e9f62bfafec09576e49841
-    pristine_git_object: 223d99a64ce9f4e53eae50f6a8f221b0fbeb69ec
+    last_write_checksum: sha1:a3f177903359e491d5f40e77f94149cff51f55d9
+    pristine_git_object: 451b7072eb3681f56555aa2d958ba320a213c466
   docs/components/parameters1.mdx:
     id: 5de8e94956c0
     last_write_checksum: sha1:382f4471f8f1a7c8a627fec6e59ba39d7c399857
@@ -7312,8 +7312,8 @@ trackedFiles:
     pristine_git_object: bddfe2448682987da6a9c04aeb8ce24bea53b327
   docs/components/privateendpointdeclaredparameter.mdx:
     id: ae4ffd7444e4
-    last_write_checksum: sha1:81aff8656953885ffa17b0b6c1b46470852c1f25
-    pristine_git_object: 19e8f1c3c5fe01d2875994564af75f19964ce536
+    last_write_checksum: sha1:9fbf8af5a54b4e824b4eac8353254e5f080031c4
+    pristine_git_object: b8c2f058ecef33de50be1e00febd928712200a95
   docs/components/privateendpointdeclaredregion.mdx:
     id: 6bc8d66ba11d
     last_write_checksum: sha1:049bc2538e8098eb26254f01c49c81ad3d3df57b
@@ -7352,8 +7352,8 @@ trackedFiles:
     pristine_git_object: df321f0b64b8388e9e5e3e4089dca7a595ae86ac
   docs/components/privateendpointsettingsexcludedparameter.mdx:
     id: fb4e4a036c42
-    last_write_checksum: sha1:9c3de17408b63f8e4a08c9c1db6910123c972bb3
-    pristine_git_object: 86fe9ff2d006203b4d3e4ad7af4ff8639ace082c
+    last_write_checksum: sha1:6a0dc74ad5fafbe289f12287215184448295e19b
+    pristine_git_object: 7ed37e3470f0d18e5498f8226b506a377fbed03c
   docs/components/privateendpointsettingsinputs.mdx:
     id: e6e603b0bd4a
     last_write_checksum: sha1:5cbe7e8604c2106f077f586f4eb3ebeb260efae4
@@ -9160,8 +9160,8 @@ trackedFiles:
     pristine_git_object: 10877313575502bf54e73f0291f43d0bda64d209
   docs/components/updateprivateendpointsettingsrequestexcludedparameter.mdx:
     id: 57d948bba179
-    last_write_checksum: sha1:2586edec3913840e7e5449901c41ed7b75859f9b
-    pristine_git_object: bfc86e03a360e76d11d9413af48261ecfcabda12
+    last_write_checksum: sha1:3abcfb78f16c3cc9267dd5f15a7e2814dc1da18d
+    pristine_git_object: 9c3a777ea00f170e79beae8dc724bb1d5e900f2e
   docs/components/updateprivateendpointsettingsrequestinputs.mdx:
     id: 419357a3610d
     last_write_checksum: sha1:28614d5184f73ff3ab141114c4a231499275ab72
@@ -11828,8 +11828,8 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:6ef85736698212323ea276dcd1e0f38813ca9196
-    pristine_git_object: 5d9ddde21dd469d18659f66802e4d08c92f9390f
+    last_write_checksum: sha1:f3407878ec7596ebb3eb013dd501b1345ca34629
+    pristine_git_object: adbe42f1468463310322c80ecd2d3601eb0a8669
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77f44b60b98bc126557ec27391f91dfba764bb54
@@ -11856,8 +11856,8 @@ trackedFiles:
     pristine_git_object: 86713cfea633e09d33b3d4e65281071fe20e6137
   src/openrouter/_version.py:
     id: d8d15ad6c586
-    last_write_checksum: sha1:691af069fa7966b0791d280f854a7eb50b992b72
-    pristine_git_object: f5475508aa06b88acf03f1a2edc34a42d4699c69
+    last_write_checksum: sha1:cf2931824717e6c06d126a530deccad6ccc1d86b
+    pristine_git_object: 8a66c53f4f0fb2d30e8ffbce031005d2b7e6774a
   src/openrouter/alpha.py:
     id: 306c4d93308d
     last_write_checksum: sha1:80cc0f39649445431cc2247ed0e0765438467766
@@ -14672,8 +14672,8 @@ trackedFiles:
     pristine_git_object: c685e720f8dc63be4660d3e6ba3699a4c4bd0411
   src/openrouter/components/parameter.py:
     id: d76aede00388
-    last_write_checksum: sha1:8b9c7afc4794748a8fc89fe5bba65bb8cdf5c62a
-    pristine_git_object: 27208f70776f6533f6d9fe26f1774e874de6922e
+    last_write_checksum: sha1:8e1c3422b74279c8a543223f2e129864535f1716
+    pristine_git_object: 1a2df09612a04f6e71506f028794b9d1f14a2d8f
   src/openrouter/components/paretorouterplugin.py:
     id: b239c8e11899
     last_write_checksum: sha1:61a3e9c14f1093d3258cfea3fa30b0bac5c1dbe8
@@ -14792,8 +14792,8 @@ trackedFiles:
     pristine_git_object: 6ffcf06c517bb10538ee5b759b913a7fee8d1398
   src/openrouter/components/privateendpointdeclaredparameter.py:
     id: 968808bc8e46
-    last_write_checksum: sha1:5a777d609c01df7fa2ec271bbee97f0e9aab41f3
-    pristine_git_object: c0a1a100086c2752ed6d0bd7f484be744f423d52
+    last_write_checksum: sha1:dcd9ebf9e18f53a5a5ba878150005330edc7cc05
+    pristine_git_object: edeb469d6b595cc54abd4973bc208192898b0259
   src/openrouter/components/privateendpointdeclaredregion.py:
     id: 265271c1f0ed
     last_write_checksum: sha1:7b7a787dfecf4f3f62b70811498a563f5df35491
@@ -14824,8 +14824,8 @@ trackedFiles:
     pristine_git_object: 75b7eaee3b2aea9aa60a6b3a94e947148e9b15a9
   src/openrouter/components/privateendpointsettings.py:
     id: 2d18a4690908
-    last_write_checksum: sha1:8d36f39acb22ed9284a90cddfc872309fee959d2
-    pristine_git_object: 417b317b172abbeb1734ae69c53f5c17173627f5
+    last_write_checksum: sha1:d8545a68f1c2e2a71a3a508c71375c1825ab6155
+    pristine_git_object: 86dc863ea8e9d5d65f181be8edf6793f99e497ac
   src/openrouter/components/privateendpointstatus.py:
     id: c997d801be04
     last_write_checksum: sha1:d31ca8b19b14c86ecb41e2f5825071c109b5881d
@@ -15600,8 +15600,8 @@ trackedFiles:
     pristine_git_object: 781779489a3864583f1bc1fd758797dfb07c08fa
   src/openrouter/components/updateprivateendpointsettingsrequest.py:
     id: 5e27265a3151
-    last_write_checksum: sha1:368c44b34a297b555ef48ef7b31762744b8487a4
-    pristine_git_object: e1dc7b0094d23ceaaa39a3d0815038d95235c7f6
+    last_write_checksum: sha1:341c41af403a0f49081f4543f51640be39961c0d
+    pristine_git_object: 4dc0fe78d70a24db2d2453f87b5576e2c09b97dd
   src/openrouter/components/updateprivateproviderrequest.py:
     id: 62230b3a1857
     last_write_checksum: sha1:6519b721854aaec8576b50255f67b955f292169b
@@ -21959,7 +21959,4 @@ examples:
         "503":
           application/json: {"error": {"code": 503, "message": "Service temporarily unavailable"}}
 examplesVersion: 1.0.2
-releaseNotes: |
-  ## Python SDK Changes:
-  * `open_router.video_generation.generate()`:  `response` **Changed**
-  * `open_router.video_generation.get_generation()`:  `response` **Changed**
+releaseNotes: "## Python SDK Changes:\n* `open_router.embeddings.list_models()`:  `response.data[].supported_parameters[].enum(strict_tool_schemas)` **Added**\n* `open_router.endpoints.list_zdr_endpoints()`:  `response.data[].supported_parameters[].enum(strict_tool_schemas)` **Added**\n* `open_router.endpoints.list()`:  `response.data.endpoints[].supported_parameters[].enum(strict_tool_schemas)` **Added**\n* `open_router.models.get()`:  `response.data.supported_parameters[].enum(strict_tool_schemas)` **Added**\n* `open_router.models.list()`:  `response.data[].supported_parameters[].enum(strict_tool_schemas)` **Added**\n* `open_router.models.list_for_user()`:  `response.data[].supported_parameters[].enum(strict_tool_schemas)` **Added**\n* `open_router.private_endpoints.create()`:  `request` **Changed**\n* `open_router.private_endpoints.get()`:  `response.data.settings.excluded_parameters[].enum(strict_tool_schemas)` **Added**\n* `open_router.private_endpoints.update()`: \n  *  `request` **Changed**\n  *  `response.data.settings.excluded_parameters[].enum(strict_tool_schemas)` **Added**\n"
