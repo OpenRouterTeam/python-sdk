@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c48cf606-fb42-4a45-9c23-8f0555307828
 management:
-  docChecksum: 41d402151c64afa63371e5c2ef3d573b
+  docChecksum: 41a8a75014e44aa569adffd5080f2e22
   docVersion: 1.0.0
   speakeasyVersion: 1.803.2
   generationVersion: 2.950.13
-  releaseVersion: 1.3.195
-  configChecksum: 90d218c3bfee2162397b761f542cb95e
+  releaseVersion: 1.3.196
+  configChecksum: 4a8eee36442c94702720302cabb66b9b
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
 persistentEdits:
-  generation_id: 009b948e-a799-4e4e-bcb6-76a1b73451be
-  pristine_commit_hash: d1a5a3d7060477c1cabd81e7cc8780ea64e2319d
-  pristine_tree_hash: 82465578defaab6ded2569774b8a9b849f7602bd
+  generation_id: 582efff3-b3a2-4f2b-a31e-ba1ee3034af8
+  pristine_commit_hash: 4e985f311f7e49a5a14e3b5dab599f154c5ddd25
+  pristine_tree_hash: e79945f9672c586eaf149a8b84475367de41cd09
 features:
   python:
     acceptHeaders: 3.0.0
@@ -8282,6 +8282,10 @@ trackedFiles:
     id: 5f13bb58ae41
     last_write_checksum: sha1:3c1825cf0232520f8bf0a7d763391689c8ded8d0
     pristine_git_object: 00263cb8d99a3b5fabd9154030b29959a2f66fef
+  docs/components/statusdetail.mdx:
+    id: 42734afd80ac
+    last_write_checksum: sha1:66c8f7c06df4bef36bfcc88b2d5726ef45307b43
+    pristine_git_object: 0a5e29460aa77d9af78272a5f4b182d6b23fe3a9
   docs/components/stopservertoolswhencondition.mdx:
     id: 5fdb9a5c17ee
     last_write_checksum: sha1:fd59b93bfdf655a268171fc4f35170cbffa72f47
@@ -9348,8 +9352,8 @@ trackedFiles:
     pristine_git_object: 050aab049bb847e511ea272a5d238d7e64e6f137
   docs/components/videogenerationresponse.mdx:
     id: 3a932213188e
-    last_write_checksum: sha1:d9ffc2f662c2ee60cf58e933e999cf4ebbcde8d3
-    pristine_git_object: 710dd6392bb92e456b4fb68feea44af30ff20bd7
+    last_write_checksum: sha1:303c2be56f1091f577b090034b2da583b6e6607a
+    pristine_git_object: d3988005a00e52b40678840e60c0ec6c7182efb9
   docs/components/videogenerationresponsestatus.mdx:
     id: 637442fde0ff
     last_write_checksum: sha1:9368ca45d569e511e5faf18118efd7e3341473a7
@@ -11824,8 +11828,8 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:294e7cefe0396a8cef9e5a7e2ec903b49845eba5
-    pristine_git_object: 727db44388706e0efc292530827ea0b0209a228c
+    last_write_checksum: sha1:6ef85736698212323ea276dcd1e0f38813ca9196
+    pristine_git_object: 5d9ddde21dd469d18659f66802e4d08c92f9390f
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77f44b60b98bc126557ec27391f91dfba764bb54
@@ -11852,8 +11856,8 @@ trackedFiles:
     pristine_git_object: 86713cfea633e09d33b3d4e65281071fe20e6137
   src/openrouter/_version.py:
     id: d8d15ad6c586
-    last_write_checksum: sha1:c8d57dc48762728c84f8c37c698a081d63c2616e
-    pristine_git_object: da165f5ad0843b54a96396a8c681c3dd2db6a5cc
+    last_write_checksum: sha1:691af069fa7966b0791d280f854a7eb50b992b72
+    pristine_git_object: f5475508aa06b88acf03f1a2edc34a42d4699c69
   src/openrouter/alpha.py:
     id: 306c4d93308d
     last_write_checksum: sha1:80cc0f39649445431cc2247ed0e0765438467766
@@ -11900,8 +11904,8 @@ trackedFiles:
     pristine_git_object: ad3d247954547814054c01989a2dff3d12b3e4e1
   src/openrouter/components/__init__.py:
     id: 81754e97b3f4
-    last_write_checksum: sha1:dcde151db91a9baa7c7285a403a18e948935cad8
-    pristine_git_object: fa9b11cb967ad7ed5c53f429979cd9fbcc52d57a
+    last_write_checksum: sha1:508175d36ccb705befd92e7c0f0876f7ebc621c1
+    pristine_git_object: 09e3fe5cccbfe146c7826a9096b9c4dd18113f40
   src/openrouter/components/aabenchmarkentry.py:
     id: e2e0f0b48c82
     last_write_checksum: sha1:08125e1d60df82793e11e8aed6e3c9fdb7512ebb
@@ -15680,8 +15684,8 @@ trackedFiles:
     pristine_git_object: f66f14a193c93748930655556df27b70f05eabbd
   src/openrouter/components/videogenerationresponse.py:
     id: 541f1321b072
-    last_write_checksum: sha1:6ba68c4551af144f37be940f0222f434d156e275
-    pristine_git_object: 867a1aa29de8df4c3dd67498b390a53985efcd5f
+    last_write_checksum: sha1:6b21b862a2da1009f5506144da69ecdbbd32fdf3
+    pristine_git_object: bd252d41ed2c8206e95e8e3188d0c4db33020e9a
   src/openrouter/components/videogenerationusage.py:
     id: dded36eba597
     last_write_checksum: sha1:a19d286bfda3ca9a373128c5118f3e6715060470
@@ -21957,5 +21961,5 @@ examples:
 examplesVersion: 1.0.2
 releaseNotes: |
   ## Python SDK Changes:
-  * `open_router.tts.list_models()`: **Added**
-  * `open_router.tts.get_model()`: **Added**
+  * `open_router.video_generation.generate()`:  `response` **Changed**
+  * `open_router.video_generation.get_generation()`:  `response` **Changed**
