@@ -21,6 +21,18 @@ VideoGenerationResponseStatus = Union[
 ]
 
 
+StatusDetail = Union[
+    Literal[
+        "submitting",
+        "queued_at_provider",
+        "generating",
+        "finalizing",
+    ],
+    UnrecognizedStr,
+]
+r"""The step within `status` for a job that is not finished: `submitting` and `queued_at_provider` under `pending`, `generating` and `finalizing` under `in_progress`. When present, it only moves forward, and steps may be skipped between polls. It is absent once the job is finished and can also be absent mid-job when the step is unknown, so use `status` to tell whether the job is finished."""
+
+
 class VideoGenerationResponseTypedDict(TypedDict):
     id: str
     r"""The video job ID, in the `gen-vid-<timestamp>-<20 alphanumerics>` generation ID format. Pass it as `previous_job_id` to continue the generation."""
@@ -31,6 +43,10 @@ class VideoGenerationResponseTypedDict(TypedDict):
     r"""Unix timestamp in seconds when OpenRouter's stored copy of the outputs stops being available. Present only when that copy exists."""
     generation_id: NotRequired[str]
     r"""The generation ID associated with this video generation job. Available once the job has been processed."""
+    progress: NotRequired[float]
+    r"""Percent complete, from 0 to 100 and possibly fractional, reported by the provider while `status_detail` is `generating`. Present only for providers that report it, and absent once the job moves to `finalizing`."""
+    status_detail: NotRequired[StatusDetail]
+    r"""The step within `status` for a job that is not finished: `submitting` and `queued_at_provider` under `pending`, `generating` and `finalizing` under `in_progress`. When present, it only moves forward, and steps may be skipped between polls. It is absent once the job is finished and can also be absent mid-job when the step is unknown, so use `status` to tell whether the job is finished."""
     unsigned_urls: NotRequired[List[str]]
     r"""OpenRouter content URLs for each output. They need your API key in the `Authorization` header and keep working for as long as the output is available."""
     urls: NotRequired[List[str]]
@@ -55,6 +71,12 @@ class VideoGenerationResponse(BaseModel):
     generation_id: Optional[str] = None
     r"""The generation ID associated with this video generation job. Available once the job has been processed."""
 
+    progress: Optional[float] = None
+    r"""Percent complete, from 0 to 100 and possibly fractional, reported by the provider while `status_detail` is `generating`. Present only for providers that report it, and absent once the job moves to `finalizing`."""
+
+    status_detail: Optional[StatusDetail] = None
+    r"""The step within `status` for a job that is not finished: `submitting` and `queued_at_provider` under `pending`, `generating` and `finalizing` under `in_progress`. When present, it only moves forward, and steps may be skipped between polls. It is absent once the job is finished and can also be absent mid-job when the step is unknown, so use `status` to tell whether the job is finished."""
+
     unsigned_urls: Optional[List[str]] = None
     r"""OpenRouter content URLs for each output. They need your API key in the `Authorization` header and keep working for as long as the output is available."""
 
@@ -67,7 +89,16 @@ class VideoGenerationResponse(BaseModel):
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
-            ["error", "expires_at", "generation_id", "unsigned_urls", "urls", "usage"]
+            [
+                "error",
+                "expires_at",
+                "generation_id",
+                "progress",
+                "status_detail",
+                "unsigned_urls",
+                "urls",
+                "usage",
+            ]
         )
         serialized = handler(self)
         m = {}

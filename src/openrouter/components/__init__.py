@@ -5076,6 +5076,7 @@ if TYPE_CHECKING:
         VideoGenerationRequestTypedDict,
     )
     from .videogenerationresponse import (
+        StatusDetail,
         VideoGenerationResponse,
         VideoGenerationResponseStatus,
         VideoGenerationResponseTypedDict,
@@ -8478,6 +8479,7 @@ __all__ = [
     "StanceTypedDict",
     "State",
     "StateTypedDict",
+    "StatusDetail",
     "StopServerToolsWhenCondition",
     "StopServerToolsWhenConditionTypedDict",
     "StopServerToolsWhenFinishReasonIs",
@@ -12721,6 +12723,7 @@ _dynamic_imports: dict[str, str] = {
     "VideoGenerationRequestProviderTypedDict": ".videogenerationrequest",
     "VideoGenerationRequestResolution": ".videogenerationrequest",
     "VideoGenerationRequestTypedDict": ".videogenerationrequest",
+    "StatusDetail": ".videogenerationresponse",
     "VideoGenerationResponse": ".videogenerationresponse",
     "VideoGenerationResponseStatus": ".videogenerationresponse",
     "VideoGenerationResponseTypedDict": ".videogenerationresponse",
