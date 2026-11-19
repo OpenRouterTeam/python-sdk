@@ -149,6 +149,8 @@ class CreateAudioTranscriptionsMultipartRequestBodyTypedDict(TypedDict):
     r"""Domain terms, names, or phrases to bias recognition toward; repeat the part once per term (keyterms=... is also accepted). Only supported by some providers; 400 when the selected model cannot use keyterms."""
     language: NotRequired[str]
     r"""The language of the input audio (ISO-639-1)."""
+    prompt: NotRequired[str]
+    r"""Context to guide transcription on providers that support contextual prompting. Takes precedence over provider-specific prompt options, including when empty."""
     provider: NotRequired[str]
     r"""JSON-encoded provider preferences object, the same shape as the JSON body field: { \"zdr\": true, \"data_collection\": \"deny\", \"options\": { \"<provider-slug>\": { ... } } }. Only options for the matched provider are forwarded. Must decode to a JSON object."""
     response_format: NotRequired[ResponseFormat]
@@ -190,6 +192,9 @@ class CreateAudioTranscriptionsMultipartRequestBody(BaseModel):
     language: Annotated[Optional[str], FieldMetadata(multipart=True)] = None
     r"""The language of the input audio (ISO-639-1)."""
 
+    prompt: Annotated[Optional[str], FieldMetadata(multipart=True)] = None
+    r"""Context to guide transcription on providers that support contextual prompting. Takes precedence over provider-specific prompt options, including when empty."""
+
     provider: Annotated[Optional[str], FieldMetadata(multipart=True)] = None
     r"""JSON-encoded provider preferences object, the same shape as the JSON body field: { \"zdr\": true, \"data_collection\": \"deny\", \"options\": { \"<provider-slug>\": { ... } } }. Only options for the matched provider are forwarded. Must decode to a JSON object."""
 
@@ -228,6 +233,7 @@ class CreateAudioTranscriptionsMultipartRequestBody(BaseModel):
                 "file",
                 "keyterms[]",
                 "language",
+                "prompt",
                 "provider",
                 "response_format",
                 "session_id",

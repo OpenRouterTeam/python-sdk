@@ -177,6 +177,8 @@ class STTRequestTypedDict(TypedDict):
     r"""Domain terms, names, or phrases to bias recognition toward. Only supported by some providers; the request is rejected with a 400 when the selected model cannot use keyterms. Providers may cap the number of terms or characters per term and may charge extra."""
     language: NotRequired[str]
     r"""ISO-639-1 language code (e.g., \"en\", \"ja\"). Auto-detected if omitted."""
+    prompt: NotRequired[str]
+    r"""Context to guide transcription, such as domain vocabulary or a previous segment. Honored by OpenAI (except gpt-4o-transcribe-diarize), Azure OpenAI, Groq, Together, Alibaba, and AssemblyAI endpoints with prompted pricing configured. Other providers ignore it; use keyterms for supported keyword boosting. Takes precedence over provider-specific prompt options, including when empty."""
     provider: NotRequired[STTRequestProviderTypedDict]
     r"""Provider configuration: provider routing preferences (`order`, `only`, `ignore`, `allow_fallbacks`), data policy routing preferences (`zdr`, `data_collection`) and provider-specific passthrough options"""
     response_format: NotRequired[STTRequestResponseFormat]
@@ -211,6 +213,9 @@ class STTRequest(BaseModel):
     language: Optional[str] = None
     r"""ISO-639-1 language code (e.g., \"en\", \"ja\"). Auto-detected if omitted."""
 
+    prompt: Optional[str] = None
+    r"""Context to guide transcription, such as domain vocabulary or a previous segment. Honored by OpenAI (except gpt-4o-transcribe-diarize), Azure OpenAI, Groq, Together, Alibaba, and AssemblyAI endpoints with prompted pricing configured. Other providers ignore it; use keyterms for supported keyword boosting. Takes precedence over provider-specific prompt options, including when empty."""
+
     provider: Optional[STTRequestProvider] = None
     r"""Provider configuration: provider routing preferences (`order`, `only`, `ignore`, `allow_fallbacks`), data policy routing preferences (`zdr`, `data_collection`) and provider-specific passthrough options"""
 
@@ -239,6 +244,7 @@ class STTRequest(BaseModel):
                 "diarize",
                 "keyterms",
                 "language",
+                "prompt",
                 "provider",
                 "response_format",
                 "session_id",

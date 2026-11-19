@@ -23,6 +23,7 @@ class STT(BaseSDK):
         diarize: Optional[bool] = None,
         keyterms: Optional[Iterable[str]] = None,
         language: Optional[str] = None,
+        prompt: Optional[str] = None,
         provider: Optional[
             Union[components.STTRequestProvider, components.STTRequestProviderTypedDict]
         ] = None,
@@ -57,6 +58,7 @@ class STT(BaseSDK):
         :param diarize: Label each word with the speaker who said it. Speaker labels are returned on the words array (speaker, speaker_label), so response_format must be \"verbose_json\" (a \"json\" request is rejected with a 400) and word timestamps are included even when timestamp_granularities omits \"word\". Only supported by some providers; the request is rejected with a 400 when the selected model cannot diarize. Providers may charge extra.
         :param keyterms: Domain terms, names, or phrases to bias recognition toward. Only supported by some providers; the request is rejected with a 400 when the selected model cannot use keyterms. Providers may cap the number of terms or characters per term and may charge extra.
         :param language: ISO-639-1 language code (e.g., \"en\", \"ja\"). Auto-detected if omitted.
+        :param prompt: Context to guide transcription, such as domain vocabulary or a previous segment. Honored by OpenAI (except gpt-4o-transcribe-diarize), Azure OpenAI, Groq, Together, Alibaba, and AssemblyAI endpoints with prompted pricing configured. Other providers ignore it; use keyterms for supported keyword boosting. Takes precedence over provider-specific prompt options, including when empty.
         :param provider: Provider configuration: provider routing preferences (`order`, `only`, `ignore`, `allow_fallbacks`), data policy routing preferences (`zdr`, `data_collection`) and provider-specific passthrough options
         :param response_format: Output format. \"json\" (default) returns { text, usage }. \"verbose_json\" additionally returns task, language, duration, and segment-level timestamps; only supported by OpenAI-compatible providers.
         :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow). Used for observability grouping in Broadcast and private logging; never sent to the provider. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters.
@@ -91,6 +93,7 @@ class STT(BaseSDK):
                 keyterms=utils.unmarshal(keyterms, Optional[List[str]]),
                 language=language,
                 model=model,
+                prompt=prompt,
                 provider=utils.get_pydantic_model(
                     provider, Optional[components.STTRequestProvider]
                 ),
@@ -252,6 +255,7 @@ class STT(BaseSDK):
         diarize: Optional[bool] = None,
         keyterms: Optional[Iterable[str]] = None,
         language: Optional[str] = None,
+        prompt: Optional[str] = None,
         provider: Optional[
             Union[components.STTRequestProvider, components.STTRequestProviderTypedDict]
         ] = None,
@@ -286,6 +290,7 @@ class STT(BaseSDK):
         :param diarize: Label each word with the speaker who said it. Speaker labels are returned on the words array (speaker, speaker_label), so response_format must be \"verbose_json\" (a \"json\" request is rejected with a 400) and word timestamps are included even when timestamp_granularities omits \"word\". Only supported by some providers; the request is rejected with a 400 when the selected model cannot diarize. Providers may charge extra.
         :param keyterms: Domain terms, names, or phrases to bias recognition toward. Only supported by some providers; the request is rejected with a 400 when the selected model cannot use keyterms. Providers may cap the number of terms or characters per term and may charge extra.
         :param language: ISO-639-1 language code (e.g., \"en\", \"ja\"). Auto-detected if omitted.
+        :param prompt: Context to guide transcription, such as domain vocabulary or a previous segment. Honored by OpenAI (except gpt-4o-transcribe-diarize), Azure OpenAI, Groq, Together, Alibaba, and AssemblyAI endpoints with prompted pricing configured. Other providers ignore it; use keyterms for supported keyword boosting. Takes precedence over provider-specific prompt options, including when empty.
         :param provider: Provider configuration: provider routing preferences (`order`, `only`, `ignore`, `allow_fallbacks`), data policy routing preferences (`zdr`, `data_collection`) and provider-specific passthrough options
         :param response_format: Output format. \"json\" (default) returns { text, usage }. \"verbose_json\" additionally returns task, language, duration, and segment-level timestamps; only supported by OpenAI-compatible providers.
         :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow). Used for observability grouping in Broadcast and private logging; never sent to the provider. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters.
@@ -320,6 +325,7 @@ class STT(BaseSDK):
                 keyterms=utils.unmarshal(keyterms, Optional[List[str]]),
                 language=language,
                 model=model,
+                prompt=prompt,
                 provider=utils.get_pydantic_model(
                     provider, Optional[components.STTRequestProvider]
                 ),
@@ -486,6 +492,7 @@ class STT(BaseSDK):
         ] = None,
         keyterms: Optional[Iterable[str]] = None,
         language: Optional[str] = None,
+        prompt: Optional[str] = None,
         provider: Optional[str] = None,
         response_format: Optional[operations.ResponseFormat] = None,
         session_id: Optional[str] = None,
@@ -517,6 +524,7 @@ class STT(BaseSDK):
         :param file: The audio file to transcribe. The format is derived from the filename extension or the file part content type. Max 25 MB; send larger files as base64 JSON via input_audio, or by URL via source_url. Exactly one of file or source_url is required.
         :param keyterms: Domain terms, names, or phrases to bias recognition toward; repeat the part once per term (keyterms=... is also accepted). Only supported by some providers; 400 when the selected model cannot use keyterms.
         :param language: The language of the input audio (ISO-639-1).
+        :param prompt: Context to guide transcription on providers that support contextual prompting. Takes precedence over provider-specific prompt options, including when empty.
         :param provider: JSON-encoded provider preferences object, the same shape as the JSON body field: { \"zdr\": true, \"data_collection\": \"deny\", \"options\": { \"<provider-slug>\": { ... } } }. Only options for the matched provider are forwarded. Must decode to a JSON object.
         :param response_format: The response format. \"json\" (default) returns { text, usage }; \"verbose_json\" additionally returns task, language, duration, and segment-level timestamps (OpenAI-compatible providers only).
         :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow). Used for observability grouping in Broadcast and private logging; never sent to the provider. If provided in both the request body and the x-session-id header, the body value takes precedence.
@@ -552,6 +560,7 @@ class STT(BaseSDK):
                 keyterms=utils.unmarshal(keyterms, Optional[List[str]]),
                 language=language,
                 model=model,
+                prompt=prompt,
                 provider=provider,
                 response_format=response_format,
                 session_id=session_id,
@@ -721,6 +730,7 @@ class STT(BaseSDK):
         ] = None,
         keyterms: Optional[Iterable[str]] = None,
         language: Optional[str] = None,
+        prompt: Optional[str] = None,
         provider: Optional[str] = None,
         response_format: Optional[operations.ResponseFormat] = None,
         session_id: Optional[str] = None,
@@ -752,6 +762,7 @@ class STT(BaseSDK):
         :param file: The audio file to transcribe. The format is derived from the filename extension or the file part content type. Max 25 MB; send larger files as base64 JSON via input_audio, or by URL via source_url. Exactly one of file or source_url is required.
         :param keyterms: Domain terms, names, or phrases to bias recognition toward; repeat the part once per term (keyterms=... is also accepted). Only supported by some providers; 400 when the selected model cannot use keyterms.
         :param language: The language of the input audio (ISO-639-1).
+        :param prompt: Context to guide transcription on providers that support contextual prompting. Takes precedence over provider-specific prompt options, including when empty.
         :param provider: JSON-encoded provider preferences object, the same shape as the JSON body field: { \"zdr\": true, \"data_collection\": \"deny\", \"options\": { \"<provider-slug>\": { ... } } }. Only options for the matched provider are forwarded. Must decode to a JSON object.
         :param response_format: The response format. \"json\" (default) returns { text, usage }; \"verbose_json\" additionally returns task, language, duration, and segment-level timestamps (OpenAI-compatible providers only).
         :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow). Used for observability grouping in Broadcast and private logging; never sent to the provider. If provided in both the request body and the x-session-id header, the body value takes precedence.
@@ -787,6 +798,7 @@ class STT(BaseSDK):
                 keyterms=utils.unmarshal(keyterms, Optional[List[str]]),
                 language=language,
                 model=model,
+                prompt=prompt,
                 provider=provider,
                 response_format=response_format,
                 session_id=session_id,
