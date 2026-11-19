@@ -10,17 +10,19 @@ from typing_extensions import NotRequired, TypedDict
 
 
 class ImageGenerationResponseDataTypedDict(TypedDict):
-    b64_json: str
-    r"""Base64-encoded image bytes"""
+    b64_json: NotRequired[str]
+    r"""Base64-encoded image bytes. Present unless the request asked for `response_format: \"url\"` and `url` was issued."""
     layer: NotRequired[ImageGenerationLayerTypedDict]
     r"""Layer metadata, present when the request asked the provider to split the image into layers (Seedream: `provider.options.seed.layer_decomposition: true` with the required `layer_decomposition_options.max_images`, 2 to 16). Decomposition requires `n` to be 1 or omitted; the response returns up to `max_images` images (the base image plus its layers)."""
     media_type: NotRequired[str]
     r"""Media type (MIME type) of the image, e.g. `image/png`, `image/jpeg`, `image/webp`, `image/svg+xml`. May be omitted if the format could not be determined."""
+    url: NotRequired[str]
+    r"""Signed download URL for the image bytes, issued for `response_format: \"url\"` requests. Valid until `expires_at`. Absent when the response fell back to `b64_json`."""
 
 
 class ImageGenerationResponseData(BaseModel):
-    b64_json: str
-    r"""Base64-encoded image bytes"""
+    b64_json: Optional[str] = None
+    r"""Base64-encoded image bytes. Present unless the request asked for `response_format: \"url\"` and `url` was issued."""
 
     layer: Optional[ImageGenerationLayer] = None
     r"""Layer metadata, present when the request asked the provider to split the image into layers (Seedream: `provider.options.seed.layer_decomposition: true` with the required `layer_decomposition_options.max_images`, 2 to 16). Decomposition requires `n` to be 1 or omitted; the response returns up to `max_images` images (the base image plus its layers)."""
@@ -28,9 +30,12 @@ class ImageGenerationResponseData(BaseModel):
     media_type: Optional[str] = None
     r"""Media type (MIME type) of the image, e.g. `image/png`, `image/jpeg`, `image/webp`, `image/svg+xml`. May be omitted if the format could not be determined."""
 
+    url: Optional[str] = None
+    r"""Signed download URL for the image bytes, issued for `response_format: \"url\"` requests. Valid until `expires_at`. Absent when the response fell back to `b64_json`."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["layer", "media_type"])
+        optional_fields = set(["b64_json", "layer", "media_type", "url"])
         serialized = handler(self)
         m = {}
 
@@ -52,6 +57,8 @@ class ImageGenerationResponseTypedDict(TypedDict):
     r"""Unix timestamp (seconds) when the image was generated"""
     data: List[ImageGenerationResponseDataTypedDict]
     r"""Generated images"""
+    expires_at: NotRequired[int]
+    r"""Unix timestamp (seconds) of the earliest expiry among the `url`s in `data`; treat every URL as expired after it. Present only when URLs were issued."""
     usage: NotRequired[ImageGenerationUsageTypedDict]
     r"""Token and cost usage for the image generation request, when available"""
 
@@ -65,12 +72,15 @@ class ImageGenerationResponse(BaseModel):
     data: List[ImageGenerationResponseData]
     r"""Generated images"""
 
+    expires_at: Optional[int] = None
+    r"""Unix timestamp (seconds) of the earliest expiry among the `url`s in `data`; treat every URL as expired after it. Present only when URLs were issued."""
+
     usage: Optional[ImageGenerationUsage] = None
     r"""Token and cost usage for the image generation request, when available"""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["usage"])
+        optional_fields = set(["expires_at", "usage"])
         serialized = handler(self)
         m = {}
 

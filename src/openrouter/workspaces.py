@@ -385,11 +385,11 @@ class Workspaces(BaseSDK):
         :param default_text_model: Default text model for this workspace
         :param description: Description of the workspace
         :param disabled_server_tools: OpenRouter server tools that requests in this workspace may not invoke. Requests naming a disabled tool are rejected with 403. An empty array or null clears the list.
-        :param io_logging_api_key_ids: Optional array of API key IDs to filter I/O logging
-        :param io_logging_sampling_rate: Sampling rate for I/O logging (0.0001-1)
-        :param is_data_discount_logging_enabled: Whether data discount logging is enabled. Enabling it requires the account to allow workspace data-discount logging; otherwise the request returns 403.
+        :param io_logging_api_key_ids: Optional array of API key IDs to filter I/O logging. Read-only for management keys: any value other than the default returns 403. Change it in the OpenRouter dashboard.
+        :param io_logging_sampling_rate: Sampling rate for I/O logging (0.0001-1). Read-only for management keys: any value other than the default returns 403. Change it in the OpenRouter dashboard.
+        :param is_data_discount_logging_enabled: Whether data discount logging is enabled. Read-only for management keys: any value other than the default returns 403. Change it in the OpenRouter dashboard.
         :param is_observability_broadcast_enabled: Whether broadcast is enabled
-        :param is_observability_io_logging_enabled: Whether private logging is enabled
+        :param is_observability_io_logging_enabled: Whether private logging is enabled. Read-only for management keys: any value other than the default returns 403. Change it in the OpenRouter dashboard.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -569,11 +569,11 @@ class Workspaces(BaseSDK):
         :param default_text_model: Default text model for this workspace
         :param description: Description of the workspace
         :param disabled_server_tools: OpenRouter server tools that requests in this workspace may not invoke. Requests naming a disabled tool are rejected with 403. An empty array or null clears the list.
-        :param io_logging_api_key_ids: Optional array of API key IDs to filter I/O logging
-        :param io_logging_sampling_rate: Sampling rate for I/O logging (0.0001-1)
-        :param is_data_discount_logging_enabled: Whether data discount logging is enabled. Enabling it requires the account to allow workspace data-discount logging; otherwise the request returns 403.
+        :param io_logging_api_key_ids: Optional array of API key IDs to filter I/O logging. Read-only for management keys: any value other than the default returns 403. Change it in the OpenRouter dashboard.
+        :param io_logging_sampling_rate: Sampling rate for I/O logging (0.0001-1). Read-only for management keys: any value other than the default returns 403. Change it in the OpenRouter dashboard.
+        :param is_data_discount_logging_enabled: Whether data discount logging is enabled. Read-only for management keys: any value other than the default returns 403. Change it in the OpenRouter dashboard.
         :param is_observability_broadcast_enabled: Whether broadcast is enabled
-        :param is_observability_io_logging_enabled: Whether private logging is enabled
+        :param is_observability_io_logging_enabled: Whether private logging is enabled. Read-only for management keys: any value other than the default returns 403. Change it in the OpenRouter dashboard.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1301,11 +1301,11 @@ class Workspaces(BaseSDK):
         :param default_text_model: Default text model for this workspace
         :param description: New description for the workspace
         :param disabled_server_tools: OpenRouter server tools that requests in this workspace may not invoke. Requests naming a disabled tool are rejected with 403. An empty array or null clears the list.
-        :param io_logging_api_key_ids: Optional array of API key IDs to filter I/O logging
-        :param io_logging_sampling_rate: Sampling rate for I/O logging (0.0001-1)
-        :param is_data_discount_logging_enabled: Whether data discount logging is enabled. Enabling it requires the account to allow workspace data-discount logging; otherwise the request returns 403.
+        :param io_logging_api_key_ids: Optional array of API key IDs to filter I/O logging. Read-only for management keys: any value other than the stored one returns 403. Change it in the OpenRouter dashboard.
+        :param io_logging_sampling_rate: Sampling rate for I/O logging (0.0001-1). Read-only for management keys: any value other than the stored one returns 403. Change it in the OpenRouter dashboard.
+        :param is_data_discount_logging_enabled: Whether data discount logging is enabled. Read-only for management keys: any value other than the stored one returns 403. Change it in the OpenRouter dashboard.
         :param is_observability_broadcast_enabled: Whether broadcast is enabled
-        :param is_observability_io_logging_enabled: Whether private logging is enabled
+        :param is_observability_io_logging_enabled: Whether private logging is enabled. Read-only for management keys: any value other than the stored one returns 403. Change it in the OpenRouter dashboard.
         :param name: New name for the workspace
         :param slug: New URL-friendly slug (lowercase alphanumeric segments separated by single hyphens, no leading/trailing hyphens)
         :param retries: Override the default retry configuration for this method
@@ -1493,11 +1493,11 @@ class Workspaces(BaseSDK):
         :param default_text_model: Default text model for this workspace
         :param description: New description for the workspace
         :param disabled_server_tools: OpenRouter server tools that requests in this workspace may not invoke. Requests naming a disabled tool are rejected with 403. An empty array or null clears the list.
-        :param io_logging_api_key_ids: Optional array of API key IDs to filter I/O logging
-        :param io_logging_sampling_rate: Sampling rate for I/O logging (0.0001-1)
-        :param is_data_discount_logging_enabled: Whether data discount logging is enabled. Enabling it requires the account to allow workspace data-discount logging; otherwise the request returns 403.
+        :param io_logging_api_key_ids: Optional array of API key IDs to filter I/O logging. Read-only for management keys: any value other than the stored one returns 403. Change it in the OpenRouter dashboard.
+        :param io_logging_sampling_rate: Sampling rate for I/O logging (0.0001-1). Read-only for management keys: any value other than the stored one returns 403. Change it in the OpenRouter dashboard.
+        :param is_data_discount_logging_enabled: Whether data discount logging is enabled. Read-only for management keys: any value other than the stored one returns 403. Change it in the OpenRouter dashboard.
         :param is_observability_broadcast_enabled: Whether broadcast is enabled
-        :param is_observability_io_logging_enabled: Whether private logging is enabled
+        :param is_observability_io_logging_enabled: Whether private logging is enabled. Read-only for management keys: any value other than the stored one returns 403. Change it in the OpenRouter dashboard.
         :param name: New name for the workspace
         :param slug: New URL-friendly slug (lowercase alphanumeric segments separated by single hyphens, no leading/trailing hyphens)
         :param retries: Override the default retry configuration for this method

@@ -52,15 +52,15 @@ class CreateWorkspaceRequestTypedDict(TypedDict):
     ]
     r"""OpenRouter server tools that requests in this workspace may not invoke. Requests naming a disabled tool are rejected with 403. An empty array or null clears the list."""
     io_logging_api_key_ids: NotRequired[Nullable[List[int]]]
-    r"""Optional array of API key IDs to filter I/O logging"""
+    r"""Optional array of API key IDs to filter I/O logging. Read-only for management keys: any value other than the default returns 403. Change it in the OpenRouter dashboard."""
     io_logging_sampling_rate: NotRequired[float]
-    r"""Sampling rate for I/O logging (0.0001-1)"""
+    r"""Sampling rate for I/O logging (0.0001-1). Read-only for management keys: any value other than the default returns 403. Change it in the OpenRouter dashboard."""
     is_data_discount_logging_enabled: NotRequired[bool]
-    r"""Whether data discount logging is enabled. Enabling it requires the account to allow workspace data-discount logging; otherwise the request returns 403."""
+    r"""Whether data discount logging is enabled. Read-only for management keys: any value other than the default returns 403. Change it in the OpenRouter dashboard."""
     is_observability_broadcast_enabled: NotRequired[bool]
     r"""Whether broadcast is enabled"""
     is_observability_io_logging_enabled: NotRequired[bool]
-    r"""Whether private logging is enabled"""
+    r"""Whether private logging is enabled. Read-only for management keys: any value other than the default returns 403. Change it in the OpenRouter dashboard."""
 
 
 class CreateWorkspaceRequest(BaseModel):
@@ -88,19 +88,19 @@ class CreateWorkspaceRequest(BaseModel):
     r"""OpenRouter server tools that requests in this workspace may not invoke. Requests naming a disabled tool are rejected with 403. An empty array or null clears the list."""
 
     io_logging_api_key_ids: OptionalNullable[List[int]] = UNSET
-    r"""Optional array of API key IDs to filter I/O logging"""
+    r"""Optional array of API key IDs to filter I/O logging. Read-only for management keys: any value other than the default returns 403. Change it in the OpenRouter dashboard."""
 
     io_logging_sampling_rate: Optional[float] = None
-    r"""Sampling rate for I/O logging (0.0001-1)"""
+    r"""Sampling rate for I/O logging (0.0001-1). Read-only for management keys: any value other than the default returns 403. Change it in the OpenRouter dashboard."""
 
     is_data_discount_logging_enabled: Optional[bool] = None
-    r"""Whether data discount logging is enabled. Enabling it requires the account to allow workspace data-discount logging; otherwise the request returns 403."""
+    r"""Whether data discount logging is enabled. Read-only for management keys: any value other than the default returns 403. Change it in the OpenRouter dashboard."""
 
     is_observability_broadcast_enabled: Optional[bool] = None
     r"""Whether broadcast is enabled"""
 
     is_observability_io_logging_enabled: Optional[bool] = None
-    r"""Whether private logging is enabled"""
+    r"""Whether private logging is enabled. Read-only for management keys: any value other than the default returns 403. Change it in the OpenRouter dashboard."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

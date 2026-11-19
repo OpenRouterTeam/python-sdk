@@ -127,6 +127,16 @@ ImageGenerationRequestResolution = Union[
 r"""Normalized resolution tier of the generated image. Concrete pixel dimensions are derived per-provider."""
 
 
+ImageGenerationRequestResponseFormat = Union[
+    Literal[
+        "b64_json",
+        "url",
+    ],
+    UnrecognizedStr,
+]
+r"""`b64_json` (default) returns the image bytes inline. `url` stores each output in OpenRouter storage and returns a signed download URL in place of the bytes. The URL is a bearer link: anyone holding it can download the image until it expires, up to 24 hours after the image was stored (use `expires_at`); the stored copy is deleted by the storage lifecycle within the following day. The response falls back to `b64_json` when a URL cannot be issued: streaming responses, zero-data-retention requests (account settings, guardrails or `provider.zdr`) or endpoints, or storage being unavailable."""
+
+
 class ImageGenerationRequestTypedDict(TypedDict):
     r"""Image generation request input"""
 
@@ -158,6 +168,8 @@ class ImageGenerationRequestTypedDict(TypedDict):
     r"""Rendering quality. Providers without a quality knob ignore this."""
     resolution: NotRequired[ImageGenerationRequestResolution]
     r"""Normalized resolution tier of the generated image. Concrete pixel dimensions are derived per-provider."""
+    response_format: NotRequired[ImageGenerationRequestResponseFormat]
+    r"""`b64_json` (default) returns the image bytes inline. `url` stores each output in OpenRouter storage and returns a signed download URL in place of the bytes. The URL is a bearer link: anyone holding it can download the image until it expires, up to 24 hours after the image was stored (use `expires_at`); the stored copy is deleted by the storage lifecycle within the following day. The response falls back to `b64_json` when a URL cannot be issued: streaming responses, zero-data-retention requests (account settings, guardrails or `provider.zdr`) or endpoints, or storage being unavailable."""
     seed: NotRequired[int]
     r"""If specified, the generation will sample deterministically, such that repeated requests with the same seed and parameters should return the same result. Determinism is not guaranteed for all providers."""
     session_id: NotRequired[str]
@@ -217,6 +229,9 @@ class ImageGenerationRequest(BaseModel):
     resolution: Optional[ImageGenerationRequestResolution] = None
     r"""Normalized resolution tier of the generated image. Concrete pixel dimensions are derived per-provider."""
 
+    response_format: Optional[ImageGenerationRequestResponseFormat] = None
+    r"""`b64_json` (default) returns the image bytes inline. `url` stores each output in OpenRouter storage and returns a signed download URL in place of the bytes. The URL is a bearer link: anyone holding it can download the image until it expires, up to 24 hours after the image was stored (use `expires_at`); the stored copy is deleted by the storage lifecycle within the following day. The response falls back to `b64_json` when a URL cannot be issued: streaming responses, zero-data-retention requests (account settings, guardrails or `provider.zdr`) or endpoints, or storage being unavailable."""
+
     seed: Optional[int] = None
     r"""If specified, the generation will sample deterministically, such that repeated requests with the same seed and parameters should return the same result. Determinism is not guaranteed for all providers."""
 
@@ -251,6 +266,7 @@ class ImageGenerationRequest(BaseModel):
                 "provider",
                 "quality",
                 "resolution",
+                "response_format",
                 "seed",
                 "session_id",
                 "size",
