@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c48cf606-fb42-4a45-9c23-8f0555307828
 management:
-  docChecksum: ceacd0d1f590fb1a700821abbc548601
+  docChecksum: c5cb0e8ef826a7612fbc2d3472f5735c
   docVersion: 1.0.0
   speakeasyVersion: 1.803.2
   generationVersion: 2.950.13
-  releaseVersion: 1.3.197
-  configChecksum: c4b036ac8ad809b4ac103c748efe6632
+  releaseVersion: 1.3.198
+  configChecksum: 3de4306f10419dc38b535a8666980613
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
 persistentEdits:
-  generation_id: 733af22f-2f89-4013-9ed6-d0f930d75ec8
-  pristine_commit_hash: 0f6880dbfc8a765a971e920bcb159970cb9554bc
-  pristine_tree_hash: 890138ac6d2c14acb9f13ba9c5dd934a76ada61e
+  generation_id: f6f41236-50d5-400c-b735-a9a4ce0941a1
+  pristine_commit_hash: c815b935bc68a90eef86ff4de1dabf7234719063
+  pristine_tree_hash: 2faaa2f33d2d207e5961866ba8a2145a94ad8cfd
 features:
   python:
     acceptHeaders: 3.0.0
@@ -11820,16 +11820,16 @@ trackedFiles:
     pristine_git_object: 94f9c0c08b2942b9a2e809a82bb435995e94e74e
   docs/sdks/workspaces/README.mdx:
     id: 0c75d023ef6b
-    last_write_checksum: sha1:f1a5581dd5ff695670551986daa785199adcd9f1
-    pristine_git_object: ca8360ed689ae203d9dd89c034ab728fed5d68ea
+    last_write_checksum: sha1:de729c7c10c0503de8b658eeca0dda6721893a41
+    pristine_git_object: 4c912696934e003a450a69b3971117aab09a51ab
   py.typed:
     id: 258c3ed47ae4
     last_write_checksum: sha1:8efc425ffe830805ffcc0f3055871bdcdc542c60
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:f3407878ec7596ebb3eb013dd501b1345ca34629
-    pristine_git_object: adbe42f1468463310322c80ecd2d3601eb0a8669
+    last_write_checksum: sha1:dcd8f82c611dd77cbf111395368b1dd568b9cf71
+    pristine_git_object: 9cf9619bd1f030368e5bca0eb561fe87e8c35a0e
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77f44b60b98bc126557ec27391f91dfba764bb54
@@ -11856,8 +11856,8 @@ trackedFiles:
     pristine_git_object: 86713cfea633e09d33b3d4e65281071fe20e6137
   src/openrouter/_version.py:
     id: d8d15ad6c586
-    last_write_checksum: sha1:cf2931824717e6c06d126a530deccad6ccc1d86b
-    pristine_git_object: 8a66c53f4f0fb2d30e8ffbce031005d2b7e6774a
+    last_write_checksum: sha1:356ef5df633f407a14440f8db03d041830f9f8f4
+    pristine_git_object: 0d83e9bdec9e89d316dcf02c90bbbdd58f76795a
   src/openrouter/alpha.py:
     id: 306c4d93308d
     last_write_checksum: sha1:80cc0f39649445431cc2247ed0e0765438467766
@@ -16836,8 +16836,8 @@ trackedFiles:
     pristine_git_object: ad510dfd4cbcb4544239161053d0c5fe4a824b71
   src/openrouter/workspaces.py:
     id: cd6c533b1802
-    last_write_checksum: sha1:7d0ee430f2cb8024c2824eb2f8ec6841907d62ba
-    pristine_git_object: b622e931604c25c149a2ba5665c0dc2831de455f
+    last_write_checksum: sha1:ca0c91cf94644abcaa005b7d78449c034c3107ef
+    pristine_git_object: 647042908b9ae2e3f4e826e94ea421587047d851
 examples:
   createResponses:
     speakeasy-default-create-responses:
@@ -21959,4 +21959,3 @@ examples:
         "503":
           application/json: {"error": {"code": 503, "message": "Service temporarily unavailable"}}
 examplesVersion: 1.0.2
-releaseNotes: "## Python SDK Changes:\n* `open_router.embeddings.list_models()`:  `response.data[].supported_parameters[].enum(strict_tool_schemas)` **Added**\n* `open_router.endpoints.list_zdr_endpoints()`:  `response.data[].supported_parameters[].enum(strict_tool_schemas)` **Added**\n* `open_router.endpoints.list()`:  `response.data.endpoints[].supported_parameters[].enum(strict_tool_schemas)` **Added**\n* `open_router.models.get()`:  `response.data.supported_parameters[].enum(strict_tool_schemas)` **Added**\n* `open_router.models.list()`:  `response.data[].supported_parameters[].enum(strict_tool_schemas)` **Added**\n* `open_router.models.list_for_user()`:  `response.data[].supported_parameters[].enum(strict_tool_schemas)` **Added**\n* `open_router.private_endpoints.create()`:  `request` **Changed**\n* `open_router.private_endpoints.get()`:  `response.data.settings.excluded_parameters[].enum(strict_tool_schemas)` **Added**\n* `open_router.private_endpoints.update()`: \n  *  `request` **Changed**\n  *  `response.data.settings.excluded_parameters[].enum(strict_tool_schemas)` **Added**\n"
