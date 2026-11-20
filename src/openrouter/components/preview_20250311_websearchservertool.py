@@ -42,7 +42,7 @@ class Preview20250311WebSearchServerToolTypedDict(TypedDict):
     r"""Size of the search context for web search tools"""
     user_location: NotRequired[Nullable[PreviewWebSearchUserLocationTypedDict]]
     x_search: NotRequired[XSearchOptionsTypedDict]
-    r"""Enable SpaceXAI X (Twitter) search alongside native web search, with optional filters. Only applies to SpaceXAI endpoints with native search; omit to search the web only. X search is billed separately by SpaceXAI, per post and per user profile fetched."""
+    r"""Enable SpaceXSI X (Twitter) search alongside native web search, with optional filters. Only applies to SpaceXSI endpoints with native search; omit to search the web only. X search is billed separately by SpaceXSI, per post and per user profile fetched."""
 
 
 class Preview20250311WebSearchServerTool(BaseModel):
@@ -70,7 +70,7 @@ class Preview20250311WebSearchServerTool(BaseModel):
     user_location: OptionalNullable[PreviewWebSearchUserLocation] = UNSET
 
     x_search: Optional[XSearchOptions] = None
-    r"""Enable SpaceXAI X (Twitter) search alongside native web search, with optional filters. Only applies to SpaceXAI endpoints with native search; omit to search the web only. X search is billed separately by SpaceXAI, per post and per user profile fetched."""
+    r"""Enable SpaceXSI X (Twitter) search alongside native web search, with optional filters. Only applies to SpaceXSI endpoints with native search; omit to search the web only. X search is billed separately by SpaceXSI, per post and per user profile fetched."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
