@@ -14,45 +14,49 @@ from typing_extensions import NotRequired, TypedDict
 
 
 class WorkspaceTypedDict(TypedDict):
+    r"""Workspace metadata. Configuration fields are omitted without permission to view workspace settings."""
+
     created_at: str
     r"""ISO 8601 timestamp of when the workspace was created"""
     created_by: Nullable[str]
     r"""User ID of the workspace creator"""
     default_guardrail_id: str
     r"""Deterministic ID derived from the workspace ID. The default guardrail is materialized when its configuration is first written."""
-    default_image_model: Nullable[str]
-    r"""Default image model for this workspace"""
-    default_provider_sort: Nullable[str]
-    r"""Default provider sort preference (price, throughput, latency, exacto)"""
-    default_text_model: Nullable[str]
-    r"""Default text model for this workspace"""
     description: Nullable[str]
     r"""Description of the workspace"""
     id: str
     r"""Unique identifier for the workspace"""
-    io_logging_api_key_ids: Nullable[List[int]]
-    r"""Optional array of API key IDs to filter I/O logging. Null means all keys are logged."""
-    io_logging_sampling_rate: float
-    r"""Sampling rate for I/O logging (0.0001-1). 1 means 100% of requests are logged."""
-    is_data_discount_logging_enabled: bool
-    r"""Whether data discount logging is enabled for this workspace"""
-    is_observability_broadcast_enabled: bool
-    r"""Whether broadcast is enabled for this workspace"""
-    is_observability_io_logging_enabled: bool
-    r"""Whether private logging is enabled for this workspace"""
     name: str
     r"""Name of the workspace"""
     slug: str
     r"""URL-friendly slug for the workspace"""
     updated_at: Nullable[str]
     r"""ISO 8601 timestamp of when the workspace was last updated"""
+    default_image_model: NotRequired[Nullable[str]]
+    r"""Default image model for this workspace"""
+    default_provider_sort: NotRequired[Nullable[str]]
+    r"""Default provider sort preference (price, throughput, latency, exacto)"""
+    default_text_model: NotRequired[Nullable[str]]
+    r"""Default text model for this workspace"""
     disabled_server_tools: NotRequired[Nullable[List[str]]]
     r"""OpenRouter server tools (e.g. openrouter:web_search) that requests in this workspace may not invoke. Null means no tools are disabled."""
     include_byok_in_budgets: NotRequired[bool]
-    r"""Whether BYOK (bring-your-own-key) spend counts toward this workspace's budgets. Set it via the workspace budget endpoints."""
+    r"""Whether BYOK (bring-your-own-key) spend counts toward this workspace's budgets. Omitted without settings and budget visibility. Set it via the workspace budget endpoints."""
+    io_logging_api_key_ids: NotRequired[Nullable[List[int]]]
+    r"""API key IDs used to filter I/O logging. Null means all keys are logged. Omitted without access to workspace settings and API key identifiers."""
+    io_logging_sampling_rate: NotRequired[float]
+    r"""Sampling rate for I/O logging (0.0001-1). 1 means 100% of requests are logged."""
+    is_data_discount_logging_enabled: NotRequired[bool]
+    r"""Whether data discount logging is enabled for this workspace"""
+    is_observability_broadcast_enabled: NotRequired[bool]
+    r"""Whether broadcast is enabled for this workspace"""
+    is_observability_io_logging_enabled: NotRequired[bool]
+    r"""Whether private logging is enabled for this workspace"""
 
 
 class Workspace(BaseModel):
+    r"""Workspace metadata. Configuration fields are omitted without permission to view workspace settings."""
+
     created_at: str
     r"""ISO 8601 timestamp of when the workspace was created"""
 
@@ -62,35 +66,11 @@ class Workspace(BaseModel):
     default_guardrail_id: str
     r"""Deterministic ID derived from the workspace ID. The default guardrail is materialized when its configuration is first written."""
 
-    default_image_model: Nullable[str]
-    r"""Default image model for this workspace"""
-
-    default_provider_sort: Nullable[str]
-    r"""Default provider sort preference (price, throughput, latency, exacto)"""
-
-    default_text_model: Nullable[str]
-    r"""Default text model for this workspace"""
-
     description: Nullable[str]
     r"""Description of the workspace"""
 
     id: str
     r"""Unique identifier for the workspace"""
-
-    io_logging_api_key_ids: Nullable[List[int]]
-    r"""Optional array of API key IDs to filter I/O logging. Null means all keys are logged."""
-
-    io_logging_sampling_rate: float
-    r"""Sampling rate for I/O logging (0.0001-1). 1 means 100% of requests are logged."""
-
-    is_data_discount_logging_enabled: bool
-    r"""Whether data discount logging is enabled for this workspace"""
-
-    is_observability_broadcast_enabled: bool
-    r"""Whether broadcast is enabled for this workspace"""
-
-    is_observability_io_logging_enabled: bool
-    r"""Whether private logging is enabled for this workspace"""
 
     name: str
     r"""Name of the workspace"""
@@ -100,16 +80,53 @@ class Workspace(BaseModel):
 
     updated_at: Nullable[str]
     r"""ISO 8601 timestamp of when the workspace was last updated"""
+
+    default_image_model: OptionalNullable[str] = UNSET
+    r"""Default image model for this workspace"""
+
+    default_provider_sort: OptionalNullable[str] = UNSET
+    r"""Default provider sort preference (price, throughput, latency, exacto)"""
+
+    default_text_model: OptionalNullable[str] = UNSET
+    r"""Default text model for this workspace"""
 
     disabled_server_tools: OptionalNullable[List[str]] = UNSET
     r"""OpenRouter server tools (e.g. openrouter:web_search) that requests in this workspace may not invoke. Null means no tools are disabled."""
 
     include_byok_in_budgets: Optional[bool] = None
-    r"""Whether BYOK (bring-your-own-key) spend counts toward this workspace's budgets. Set it via the workspace budget endpoints."""
+    r"""Whether BYOK (bring-your-own-key) spend counts toward this workspace's budgets. Omitted without settings and budget visibility. Set it via the workspace budget endpoints."""
+
+    io_logging_api_key_ids: OptionalNullable[List[int]] = UNSET
+    r"""API key IDs used to filter I/O logging. Null means all keys are logged. Omitted without access to workspace settings and API key identifiers."""
+
+    io_logging_sampling_rate: Optional[float] = None
+    r"""Sampling rate for I/O logging (0.0001-1). 1 means 100% of requests are logged."""
+
+    is_data_discount_logging_enabled: Optional[bool] = None
+    r"""Whether data discount logging is enabled for this workspace"""
+
+    is_observability_broadcast_enabled: Optional[bool] = None
+    r"""Whether broadcast is enabled for this workspace"""
+
+    is_observability_io_logging_enabled: Optional[bool] = None
+    r"""Whether private logging is enabled for this workspace"""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["disabled_server_tools", "include_byok_in_budgets"])
+        optional_fields = set(
+            [
+                "default_image_model",
+                "default_provider_sort",
+                "default_text_model",
+                "disabled_server_tools",
+                "include_byok_in_budgets",
+                "io_logging_api_key_ids",
+                "io_logging_sampling_rate",
+                "is_data_discount_logging_enabled",
+                "is_observability_broadcast_enabled",
+                "is_observability_io_logging_enabled",
+            ]
+        )
         nullable_fields = set(
             [
                 "created_by",
