@@ -39,7 +39,7 @@ class PublicEndpointTypedDict(TypedDict):
     r"""The service tier this endpoint sells, or null for a standard endpoint. The same value whether the provider selects the tier with a request parameter or with a dedicated model id. Always the canonical tier: priority covers the fast request alias and the turbo, highspeed, and prime provider model-id spellings, none of which this field reports."""
     supported_parameters: List[Parameter]
     supports_diarization: bool
-    r"""Whether this STT endpoint can label each transcript segment with a speaker (speaker diarization). False when the endpoint has not declared support."""
+    r"""Whether this STT endpoint can label each transcript segment with a speaker (speaker diarization). For transcription endpoints, derived from the serving STT adapter: true when that adapter supports `diarize: true` for this model. Diarized requests also need `response_format: verbose_json`."""
     supports_implicit_caching: bool
     supports_tool_choice: ToolChoiceSupportTypedDict
     r"""Per-variant `tool_choice` support. `tool_choice` in `supported_parameters` only says the parameter is accepted; these flags say which of its values passed testing."""
@@ -96,7 +96,7 @@ class PublicEndpoint(BaseModel):
     supported_parameters: List[Parameter]
 
     supports_diarization: bool
-    r"""Whether this STT endpoint can label each transcript segment with a speaker (speaker diarization). False when the endpoint has not declared support."""
+    r"""Whether this STT endpoint can label each transcript segment with a speaker (speaker diarization). For transcription endpoints, derived from the serving STT adapter: true when that adapter supports `diarize: true` for this model. Diarized requests also need `response_format: verbose_json`."""
 
     supports_implicit_caching: bool
 
