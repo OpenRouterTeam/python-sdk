@@ -1,0 +1,10 @@
+overlay: 1.0.0
+x-speakeasy-jsonpath: rfc9535
+info:
+  title: Remove global tags with no SDK operations
+  version: 0.0.0
+actions:
+  # POST /messages carries x-speakeasy-ignore upstream (the docs site renders it), which leaves its tag with no operations
+  - target: $.tags[?@.name == "Anthropic Messages"]
+    description: Remove the Anthropic Messages tag
+    remove: true
