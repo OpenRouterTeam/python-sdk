@@ -1,6 +1,6 @@
 [project]
 name = "openrouter"
-version = "1.3.201"
+version = "1.3.202"
 description = "Official Python Client SDK for OpenRouter."
 authors = [{ name = "OpenRouter" },]
 readme = "README-PYPI.md"
