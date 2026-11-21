@@ -681,9 +681,6 @@ class Scim(BaseSDK):
 
         raise errors.OpenRouterDefaultError("Unexpected response received", http_res)
 
-    @deprecated(
-        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
-    )
     def delete(
         self,
         *,
@@ -699,7 +696,7 @@ class Scim(BaseSDK):
     ) -> components.DeleteScimGroupMappingResponse:
         r"""Delete a SCIM group mapping
 
-        Delete a SCIM group-to-workspace mapping. Disabled: no API key can perform this write, including management keys. Use the organization settings in the dashboard, which require step-up verification. A valid management key for an organization with SCIM access receives 403; an invalid key still receives 401 and an organization without SCIM access receives 404.
+        Delete a SCIM group-to-workspace mapping. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param id:
         :param keep_members: Required. Whether to keep workspace members after deleting the mapping. `false` **removes** the members this mapping granted access to; `true` deletes the mapping while leaving membership intact as manually-managed. There is deliberately no default — omitting it returns `400` so the destructive path cannot be reached by accident. Mirrors the dashboard, whose `DeleteMappingSchema.keepMembers` is likewise required.
@@ -827,9 +824,6 @@ class Scim(BaseSDK):
 
         raise errors.OpenRouterDefaultError("Unexpected response received", http_res)
 
-    @deprecated(
-        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
-    )
     async def delete_async(
         self,
         *,
@@ -845,7 +839,7 @@ class Scim(BaseSDK):
     ) -> components.DeleteScimGroupMappingResponse:
         r"""Delete a SCIM group mapping
 
-        Delete a SCIM group-to-workspace mapping. Disabled: no API key can perform this write, including management keys. Use the organization settings in the dashboard, which require step-up verification. A valid management key for an organization with SCIM access receives 403; an invalid key still receives 401 and an organization without SCIM access receives 404.
+        Delete a SCIM group-to-workspace mapping. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param id:
         :param keep_members: Required. Whether to keep workspace members after deleting the mapping. `false` **removes** the members this mapping granted access to; `true` deletes the mapping while leaving membership intact as manually-managed. There is deliberately no default — omitting it returns `400` so the destructive path cannot be reached by accident. Mirrors the dashboard, whose `DeleteMappingSchema.keepMembers` is likewise required.
@@ -1243,9 +1237,6 @@ class Scim(BaseSDK):
 
         raise errors.OpenRouterDefaultError("Unexpected response received", http_res)
 
-    @deprecated(
-        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
-    )
     def update(
         self,
         *,
@@ -1261,7 +1252,7 @@ class Scim(BaseSDK):
     ) -> components.UpdateScimGroupMappingResponse:
         r"""Update a SCIM group mapping
 
-        Update a SCIM group mapping role. Disabled: no API key can perform this write, including management keys. Use the organization settings in the dashboard, which require step-up verification. A valid management key for an organization with SCIM access receives 403; an invalid key still receives 401 and an organization without SCIM access receives 404.
+        Update a SCIM group mapping role. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param id:
         :param role:
@@ -1398,9 +1389,6 @@ class Scim(BaseSDK):
 
         raise errors.OpenRouterDefaultError("Unexpected response received", http_res)
 
-    @deprecated(
-        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
-    )
     async def update_async(
         self,
         *,
@@ -1416,7 +1404,7 @@ class Scim(BaseSDK):
     ) -> components.UpdateScimGroupMappingResponse:
         r"""Update a SCIM group mapping
 
-        Update a SCIM group mapping role. Disabled: no API key can perform this write, including management keys. Use the organization settings in the dashboard, which require step-up verification. A valid management key for an organization with SCIM access receives 403; an invalid key still receives 401 and an organization without SCIM access receives 404.
+        Update a SCIM group mapping role. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param id:
         :param role:
@@ -1908,9 +1896,6 @@ class Scim(BaseSDK):
 
         raise errors.OpenRouterDefaultError("Unexpected response received", http_res)
 
-    @deprecated(
-        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
-    )
     def create_sync_job(
         self,
         *,
@@ -1924,7 +1909,7 @@ class Scim(BaseSDK):
     ) -> operations.CreateScimSyncJobResponse:
         r"""Start a SCIM directory sync
 
-        Start a SCIM directory sync. Disabled: no API key can perform this write, including management keys. Use the organization settings in the dashboard, which require step-up verification. A valid management key for an organization with SCIM access receives 403; an invalid key still receives 401 and an organization without SCIM access receives 404.
+        Start a SCIM directory sync. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
@@ -2046,9 +2031,6 @@ class Scim(BaseSDK):
 
         raise errors.OpenRouterDefaultError("Unexpected response received", http_res)
 
-    @deprecated(
-        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
-    )
     async def create_sync_job_async(
         self,
         *,
@@ -2062,7 +2044,7 @@ class Scim(BaseSDK):
     ) -> operations.CreateScimSyncJobResponse:
         r"""Start a SCIM directory sync
 
-        Start a SCIM directory sync. Disabled: no API key can perform this write, including management keys. Use the organization settings in the dashboard, which require step-up verification. A valid management key for an organization with SCIM access receives 403; an invalid key still receives 401 and an organization without SCIM access receives 404.
+        Start a SCIM directory sync. [Management key](/docs/guides/overview/auth/management-api-keys) required.
 
         :param http_referer: The app identifier should be your app's URL and is used as the primary identifier for rankings.
             This is used to track API usage per application.
