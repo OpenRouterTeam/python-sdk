@@ -160,6 +160,7 @@ class ImageGenerationProviderPreferencesOptionsTypedDict(TypedDict):
     parallel: NotRequired[Dict[str, Any]]
     parasail: NotRequired[Dict[str, Any]]
     pareto_alpha: NotRequired[Dict[str, Any]]
+    pareto_inference: NotRequired[Dict[str, Any]]
     particle_ai: NotRequired[Dict[str, Any]]
     pearl_research: NotRequired[Dict[str, Any]]
     perceptron: NotRequired[Dict[str, Any]]
@@ -467,6 +468,10 @@ class ImageGenerationProviderPreferencesOptions(BaseModel):
         Optional[Dict[str, Any]], pydantic.Field(alias="pareto-alpha")
     ] = None
 
+    pareto_inference: Annotated[
+        Optional[Dict[str, Any]], pydantic.Field(alias="pareto-inference")
+    ] = None
+
     particle_ai: Annotated[
         Optional[Dict[str, Any]], pydantic.Field(alias="particle-ai")
     ] = None
@@ -696,6 +701,7 @@ class ImageGenerationProviderPreferencesOptions(BaseModel):
                 "parallel",
                 "parasail",
                 "pareto-alpha",
+                "pareto-inference",
                 "particle-ai",
                 "pearl-research",
                 "perceptron",

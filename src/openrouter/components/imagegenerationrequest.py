@@ -121,6 +121,7 @@ ImageGenerationRequestResolution = Union[
         "1.5K",
         "2K",
         "4K",
+        "8K",
     ],
     UnrecognizedStr,
 ]
