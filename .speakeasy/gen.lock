@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c48cf606-fb42-4a45-9c23-8f0555307828
 management:
-  docChecksum: 5417e0c9fa504ddf03567a094059518c
+  docChecksum: 06cda0195f12e737138188f3b42e0ff7
   docVersion: 1.0.0
   speakeasyVersion: 1.803.2
   generationVersion: 2.950.13
-  releaseVersion: 1.3.204
-  configChecksum: 4ea69dd04c35cd72e1e1389f01b96fe9
+  releaseVersion: 1.3.205
+  configChecksum: 2d6c5ab323a773be11a7559c23ffdaa2
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
 persistentEdits:
-  generation_id: 92468160-f3b4-4368-aaff-7fe7c00c41d6
-  pristine_commit_hash: aa50f5f55736ffe684f2a07a2d2d262c7315767b
-  pristine_tree_hash: ff0a767f398f8f74357d7c7ed26ef034715b5514
+  generation_id: 629b1878-7aeb-41db-95d7-257c5e1425c0
+  pristine_commit_hash: 2578644676fca8403ddfb784690e0daa9b31630e
+  pristine_tree_hash: c19471271158e60ffd5a867c13a581ea47c51f45
 features:
   python:
     acceptHeaders: 3.0.0
@@ -4396,8 +4396,8 @@ trackedFiles:
     pristine_git_object: bccd158982dba4b4ed810b98b5f7d4a6c04afaa7
   docs/components/imagegenerationrequest.mdx:
     id: b093cb0f5e81
-    last_write_checksum: sha1:30fbee66a3e0fd9946beee7177dfcf80132586f0
-    pristine_git_object: db92a380f3efccb3a1749fa8c76b6e5dabc2af40
+    last_write_checksum: sha1:6f1b494ecaaff1c30a2be246ca4959b93c9f3b3a
+    pristine_git_object: d03ddede6b3362ef24106176c5556851a537fab0
   docs/components/imagegenerationrequestaspectratio.mdx:
     id: bda89377f32d
     last_write_checksum: sha1:291771c6756771aabfadcee9b78e2aca504e7697
@@ -9976,8 +9976,8 @@ trackedFiles:
     pristine_git_object: a6c4419863fafcae74571865bdcabade605767c9
   docs/operations/createimagesrequest.mdx:
     id: "245236481860"
-    last_write_checksum: sha1:1e263c82c8f1772cab95e90756ede8efbd94025d
-    pristine_git_object: c9b49336afdb1ec74358aa0e3c21e981a952bce0
+    last_write_checksum: sha1:e7fdcb922a2cf8794cedacf4f2327ee0edf78174
+    pristine_git_object: c0f7189f23f7be89280141a032b7d9a796910852
   docs/operations/createimagesresponse.mdx:
     id: 852027a00620
     last_write_checksum: sha1:f65739779d5b4cd6cbacf59817765623554abef6
@@ -11788,8 +11788,8 @@ trackedFiles:
     pristine_git_object: 3f96698736d6078dfb33689dd2fdca320bac0a03
   docs/sdks/images/README.mdx:
     id: 534a6c102c4f
-    last_write_checksum: sha1:2e5532a4a851671d06693d38d67884e64ca112df
-    pristine_git_object: 931e40f773c106a8ae654c501164ce4c5674385d
+    last_write_checksum: sha1:7d425634484b9e3150e3cdc11b2c9e8b8bd52d76
+    pristine_git_object: a330c3f121d866703e37cd7274051b1caa6023eb
   docs/sdks/models/README.mdx:
     id: 58f1ca464e0b
     last_write_checksum: sha1:2e89247b7ad63c2bdcf9da989ac4f2e758eee729
@@ -11868,8 +11868,8 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:eb8a6dcd6a25c7fba19e2a378c0e0e1ec1f5f9c5
-    pristine_git_object: 50c8f5046c4629d52f5ea09bc967fee4759b2681
+    last_write_checksum: sha1:d8cc281cb93fcaab2fe16540214aa7eee3f4fd1a
+    pristine_git_object: b77d6a8e21319f6653e1c3940c5c66946f5a2394
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77f44b60b98bc126557ec27391f91dfba764bb54
@@ -11896,8 +11896,8 @@ trackedFiles:
     pristine_git_object: 86713cfea633e09d33b3d4e65281071fe20e6137
   src/openrouter/_version.py:
     id: d8d15ad6c586
-    last_write_checksum: sha1:8da6be4d2bc71b8ad5feffd06f2d585a47f863b6
-    pristine_git_object: b3fca5005dc0db552abab5b2e0f20881310a260d
+    last_write_checksum: sha1:8ee72a1123cd74afcc2fb9435e29233bc80a58eb
+    pristine_git_object: 8fe5bc785851f067a45abd68577f00341c893d80
   src/openrouter/alpha.py:
     id: 306c4d93308d
     last_write_checksum: sha1:80cc0f39649445431cc2247ed0e0765438467766
@@ -22023,4 +22023,3 @@ examples:
         "503":
           application/json: {"error": {"code": 503, "message": "Service temporarily unavailable"}}
 examplesVersion: 1.0.2
-releaseNotes: "## Python SDK Changes:\n* `open_router.presets.create_presets_messages()`: \n  *  `request.messages[].content.union(Array<>)[].union(tool_search_tool_result)` **Added**\n"
