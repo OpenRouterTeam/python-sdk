@@ -14,6 +14,7 @@ from typing_extensions import NotRequired, TypedDict
 
 
 class GuardrailModelAvailabilityPolicyAuthoringConfigTypedDict(TypedDict):
+    allow_provisional_providers: NotRequired[Nullable[bool]]
     allow_safety_retention_google: NotRequired[Nullable[bool]]
     allow_safety_retention_other: NotRequired[Nullable[bool]]
     allowed_data_regions: NotRequired[Nullable[List[str]]]
@@ -38,6 +39,8 @@ class GuardrailModelAvailabilityPolicyAuthoringConfigTypedDict(TypedDict):
 
 
 class GuardrailModelAvailabilityPolicyAuthoringConfig(BaseModel):
+    allow_provisional_providers: OptionalNullable[bool] = UNSET
+
     allow_safety_retention_google: OptionalNullable[bool] = UNSET
 
     allow_safety_retention_other: OptionalNullable[bool] = UNSET
@@ -84,6 +87,7 @@ class GuardrailModelAvailabilityPolicyAuthoringConfig(BaseModel):
     def serialize_model(self, handler):
         optional_fields = set(
             [
+                "allow_provisional_providers",
                 "allow_safety_retention_google",
                 "allow_safety_retention_other",
                 "allowed_data_regions",
@@ -109,6 +113,7 @@ class GuardrailModelAvailabilityPolicyAuthoringConfig(BaseModel):
         )
         nullable_fields = set(
             [
+                "allow_provisional_providers",
                 "allow_safety_retention_google",
                 "allow_safety_retention_other",
                 "allowed_data_regions",

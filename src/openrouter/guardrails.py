@@ -367,6 +367,7 @@ class Guardrails(BaseSDK):
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
+        allow_provisional_providers: OptionalNullable[bool] = UNSET,
         allow_safety_retention_google: OptionalNullable[bool] = UNSET,
         allow_safety_retention_other: OptionalNullable[bool] = UNSET,
         allowed_data_regions: OptionalNullable[
@@ -420,6 +421,7 @@ class Guardrails(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
+        :param allow_provisional_providers: Whether requests may use provisional providers, whose security practices have not been reviewed by OpenRouter. false excludes them. true and null never override an account that excludes them. Inherits the account setting when not provided.
         :param allow_safety_retention_google: Whether ZDR-only requests to google/* models may also use Safety Retention endpoints, which may retain prompts and responses from any request, only to prevent abuse, and do not use them for training. false allows only ZDR endpoints. A guardrail can only be more restrictive than the account setting. Inherits the account setting when not provided.
         :param allow_safety_retention_other: Whether ZDR-only requests to models outside the named providers (for example open-weight models on Vertex) may also use Safety Retention endpoints, which may retain prompts and responses from any request, only to prevent abuse, and do not use them for training. false allows only ZDR endpoints. A guardrail can only be more restrictive than the account setting. Inherits the account setting when not provided.
         :param allowed_data_regions: Data regions through which requests governed by this guardrail must arrive. `global` is https://openrouter.ai, `europe` is https://eu.openrouter.ai, and `us` is https://us.openrouter.ai. Requests arriving through any other region are rejected. `null` leaves the ingress region unrestricted. When several guardrails apply (workspace default, member, API key), the effective regions are the intersection of every non-null value. An empty array is rejected.
@@ -464,6 +466,7 @@ class Guardrails(BaseSDK):
             x_open_router_title=x_open_router_title,
             x_open_router_categories=x_open_router_categories,
             create_guardrail_request=components.CreateGuardrailRequest(
+                allow_provisional_providers=allow_provisional_providers,
                 allow_safety_retention_google=allow_safety_retention_google,
                 allow_safety_retention_other=allow_safety_retention_other,
                 allowed_data_regions=utils.unmarshal(
@@ -610,6 +613,7 @@ class Guardrails(BaseSDK):
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
+        allow_provisional_providers: OptionalNullable[bool] = UNSET,
         allow_safety_retention_google: OptionalNullable[bool] = UNSET,
         allow_safety_retention_other: OptionalNullable[bool] = UNSET,
         allowed_data_regions: OptionalNullable[
@@ -663,6 +667,7 @@ class Guardrails(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
+        :param allow_provisional_providers: Whether requests may use provisional providers, whose security practices have not been reviewed by OpenRouter. false excludes them. true and null never override an account that excludes them. Inherits the account setting when not provided.
         :param allow_safety_retention_google: Whether ZDR-only requests to google/* models may also use Safety Retention endpoints, which may retain prompts and responses from any request, only to prevent abuse, and do not use them for training. false allows only ZDR endpoints. A guardrail can only be more restrictive than the account setting. Inherits the account setting when not provided.
         :param allow_safety_retention_other: Whether ZDR-only requests to models outside the named providers (for example open-weight models on Vertex) may also use Safety Retention endpoints, which may retain prompts and responses from any request, only to prevent abuse, and do not use them for training. false allows only ZDR endpoints. A guardrail can only be more restrictive than the account setting. Inherits the account setting when not provided.
         :param allowed_data_regions: Data regions through which requests governed by this guardrail must arrive. `global` is https://openrouter.ai, `europe` is https://eu.openrouter.ai, and `us` is https://us.openrouter.ai. Requests arriving through any other region are rejected. `null` leaves the ingress region unrestricted. When several guardrails apply (workspace default, member, API key), the effective regions are the intersection of every non-null value. An empty array is rejected.
@@ -707,6 +712,7 @@ class Guardrails(BaseSDK):
             x_open_router_title=x_open_router_title,
             x_open_router_categories=x_open_router_categories,
             create_guardrail_request=components.CreateGuardrailRequest(
+                allow_provisional_providers=allow_provisional_providers,
                 allow_safety_retention_google=allow_safety_retention_google,
                 allow_safety_retention_other=allow_safety_retention_other,
                 allowed_data_regions=utils.unmarshal(
@@ -1385,6 +1391,7 @@ class Guardrails(BaseSDK):
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
+        allow_provisional_providers: OptionalNullable[bool] = UNSET,
         allow_safety_retention_google: OptionalNullable[bool] = UNSET,
         allow_safety_retention_other: OptionalNullable[bool] = UNSET,
         allowed_data_regions: OptionalNullable[
@@ -1438,6 +1445,7 @@ class Guardrails(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
+        :param allow_provisional_providers: Whether requests may use provisional providers, whose security practices have not been reviewed by OpenRouter. false excludes them. true and null never override an account that excludes them. Inherits the account setting when not provided.
         :param allow_safety_retention_google: Whether ZDR-only requests to google/* models may also use Safety Retention endpoints, which may retain prompts and responses from any request, only to prevent abuse, and do not use them for training. false allows only ZDR endpoints. A guardrail can only be more restrictive than the account setting. Inherits the account setting when not provided.
         :param allow_safety_retention_other: Whether ZDR-only requests to models outside the named providers (for example open-weight models on Vertex) may also use Safety Retention endpoints, which may retain prompts and responses from any request, only to prevent abuse, and do not use them for training. false allows only ZDR endpoints. A guardrail can only be more restrictive than the account setting. Inherits the account setting when not provided.
         :param allowed_data_regions: Data regions through which requests governed by this guardrail must arrive. `global` is https://openrouter.ai, `europe` is https://eu.openrouter.ai, and `us` is https://us.openrouter.ai. Requests arriving through any other region are rejected. `null` leaves the ingress region unrestricted. When several guardrails apply (workspace default, member, API key), the effective regions are the intersection of every non-null value. An empty array is rejected.
@@ -1483,6 +1491,7 @@ class Guardrails(BaseSDK):
             x_open_router_categories=x_open_router_categories,
             id=id,
             update_guardrail_request=components.UpdateGuardrailRequest(
+                allow_provisional_providers=allow_provisional_providers,
                 allow_safety_retention_google=allow_safety_retention_google,
                 allow_safety_retention_other=allow_safety_retention_other,
                 allowed_data_regions=utils.unmarshal(
@@ -1638,6 +1647,7 @@ class Guardrails(BaseSDK):
         http_referer: Optional[str] = None,
         x_open_router_title: Optional[str] = None,
         x_open_router_categories: Optional[str] = None,
+        allow_provisional_providers: OptionalNullable[bool] = UNSET,
         allow_safety_retention_google: OptionalNullable[bool] = UNSET,
         allow_safety_retention_other: OptionalNullable[bool] = UNSET,
         allowed_data_regions: OptionalNullable[
@@ -1691,6 +1701,7 @@ class Guardrails(BaseSDK):
 
         :param x_open_router_categories: Comma-separated list of app categories (e.g. \"cli-agent,cloud-agent\"). Used for marketplace rankings.
 
+        :param allow_provisional_providers: Whether requests may use provisional providers, whose security practices have not been reviewed by OpenRouter. false excludes them. true and null never override an account that excludes them. Inherits the account setting when not provided.
         :param allow_safety_retention_google: Whether ZDR-only requests to google/* models may also use Safety Retention endpoints, which may retain prompts and responses from any request, only to prevent abuse, and do not use them for training. false allows only ZDR endpoints. A guardrail can only be more restrictive than the account setting. Inherits the account setting when not provided.
         :param allow_safety_retention_other: Whether ZDR-only requests to models outside the named providers (for example open-weight models on Vertex) may also use Safety Retention endpoints, which may retain prompts and responses from any request, only to prevent abuse, and do not use them for training. false allows only ZDR endpoints. A guardrail can only be more restrictive than the account setting. Inherits the account setting when not provided.
         :param allowed_data_regions: Data regions through which requests governed by this guardrail must arrive. `global` is https://openrouter.ai, `europe` is https://eu.openrouter.ai, and `us` is https://us.openrouter.ai. Requests arriving through any other region are rejected. `null` leaves the ingress region unrestricted. When several guardrails apply (workspace default, member, API key), the effective regions are the intersection of every non-null value. An empty array is rejected.
@@ -1736,6 +1747,7 @@ class Guardrails(BaseSDK):
             x_open_router_categories=x_open_router_categories,
             id=id,
             update_guardrail_request=components.UpdateGuardrailRequest(
+                allow_provisional_providers=allow_provisional_providers,
                 allow_safety_retention_google=allow_safety_retention_google,
                 allow_safety_retention_other=allow_safety_retention_other,
                 allowed_data_regions=utils.unmarshal(
