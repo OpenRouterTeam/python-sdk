@@ -24,6 +24,8 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 class CreateGuardrailRequestTypedDict(TypedDict):
     name: str
     r"""Name for the new guardrail"""
+    allow_provisional_providers: NotRequired[Nullable[bool]]
+    r"""Whether requests may use provisional providers, whose security practices have not been reviewed by OpenRouter. false excludes them. true and null never override an account that excludes them. Inherits the account setting when not provided."""
     allow_safety_retention_google: NotRequired[Nullable[bool]]
     r"""Whether ZDR-only requests to google/* models may also use Safety Retention endpoints, which may retain prompts and responses from any request, only to prevent abuse, and do not use them for training. false allows only ZDR endpoints. A guardrail can only be more restrictive than the account setting. Inherits the account setting when not provided."""
     allow_safety_retention_other: NotRequired[Nullable[bool]]
@@ -79,6 +81,9 @@ class CreateGuardrailRequestTypedDict(TypedDict):
 class CreateGuardrailRequest(BaseModel):
     name: str
     r"""Name for the new guardrail"""
+
+    allow_provisional_providers: OptionalNullable[bool] = UNSET
+    r"""Whether requests may use provisional providers, whose security practices have not been reviewed by OpenRouter. false excludes them. true and null never override an account that excludes them. Inherits the account setting when not provided."""
 
     allow_safety_retention_google: OptionalNullable[bool] = UNSET
     r"""Whether ZDR-only requests to google/* models may also use Safety Retention endpoints, which may retain prompts and responses from any request, only to prevent abuse, and do not use them for training. false allows only ZDR endpoints. A guardrail can only be more restrictive than the account setting. Inherits the account setting when not provided."""
@@ -163,6 +168,7 @@ class CreateGuardrailRequest(BaseModel):
     def serialize_model(self, handler):
         optional_fields = set(
             [
+                "allow_provisional_providers",
                 "allow_safety_retention_google",
                 "allow_safety_retention_other",
                 "allowed_data_regions",
@@ -191,6 +197,7 @@ class CreateGuardrailRequest(BaseModel):
         )
         nullable_fields = set(
             [
+                "allow_provisional_providers",
                 "allow_safety_retention_google",
                 "allow_safety_retention_other",
                 "allowed_data_regions",

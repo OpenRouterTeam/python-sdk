@@ -35,6 +35,8 @@ class GuardrailTypedDict(TypedDict):
     r"""Name of the guardrail"""
     workspace_id: Nullable[str]
     r"""The workspace this guardrail belongs to, or `null` for an unscoped legacy guardrail predating workspaces. Workspace membership organizes the guardrail; it does not apply the guardrail to the workspace's traffic. A `null` value does not mean the default workspace, and does not apply the guardrail across every workspace."""
+    allow_provisional_providers: NotRequired[Nullable[bool]]
+    r"""Whether requests may use provisional providers, whose security practices have not been reviewed by OpenRouter. false excludes them. true and null never override an account that excludes them. Inherits the account setting when not provided."""
     allow_safety_retention_google: NotRequired[Nullable[bool]]
     r"""Whether ZDR-only requests to google/* models may also use Safety Retention endpoints, which may retain prompts and responses from any request, only to prevent abuse, and do not use them for training. false allows only ZDR endpoints. A guardrail can only be more restrictive than the account setting. Inherits the account setting when not provided."""
     allow_safety_retention_other: NotRequired[Nullable[bool]]
@@ -100,6 +102,9 @@ class Guardrail(BaseModel):
 
     workspace_id: Nullable[str]
     r"""The workspace this guardrail belongs to, or `null` for an unscoped legacy guardrail predating workspaces. Workspace membership organizes the guardrail; it does not apply the guardrail to the workspace's traffic. A `null` value does not mean the default workspace, and does not apply the guardrail across every workspace."""
+
+    allow_provisional_providers: OptionalNullable[bool] = UNSET
+    r"""Whether requests may use provisional providers, whose security practices have not been reviewed by OpenRouter. false excludes them. true and null never override an account that excludes them. Inherits the account setting when not provided."""
 
     allow_safety_retention_google: OptionalNullable[bool] = UNSET
     r"""Whether ZDR-only requests to google/* models may also use Safety Retention endpoints, which may retain prompts and responses from any request, only to prevent abuse, and do not use them for training. false allows only ZDR endpoints. A guardrail can only be more restrictive than the account setting. Inherits the account setting when not provided."""
@@ -179,6 +184,7 @@ class Guardrail(BaseModel):
     def serialize_model(self, handler):
         optional_fields = set(
             [
+                "allow_provisional_providers",
                 "allow_safety_retention_google",
                 "allow_safety_retention_other",
                 "allowed_data_regions",
@@ -206,6 +212,7 @@ class Guardrail(BaseModel):
         )
         nullable_fields = set(
             [
+                "allow_provisional_providers",
                 "allow_safety_retention_google",
                 "allow_safety_retention_other",
                 "allowed_data_regions",
