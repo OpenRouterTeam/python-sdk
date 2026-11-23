@@ -3153,6 +3153,33 @@ if TYPE_CHECKING:
         MessagesToolRemovalBlockTypedDict,
         TypeToolRemoval,
     )
+    from .messagestoolsearchtoolreference import (
+        MessagesToolSearchToolReference,
+        MessagesToolSearchToolReferenceType,
+        MessagesToolSearchToolReferenceTypedDict,
+    )
+    from .messagestoolsearchtoolresultblock import (
+        MessagesToolSearchToolResultBlock,
+        MessagesToolSearchToolResultBlockType,
+        MessagesToolSearchToolResultBlockTypedDict,
+    )
+    from .messagestoolsearchtoolresultcontent import (
+        MessagesToolSearchToolResultContent,
+        MessagesToolSearchToolResultContentTypedDict,
+    )
+    from .messagestoolsearchtoolresulterror import (
+        MessagesToolSearchToolResultError,
+        MessagesToolSearchToolResultErrorType,
+        MessagesToolSearchToolResultErrorTypedDict,
+    )
+    from .messagestoolsearchtoolresulterrorcode import (
+        MessagesToolSearchToolResultErrorCode,
+    )
+    from .messagestoolsearchtoolsearchresult import (
+        MessagesToolSearchToolSearchResult,
+        MessagesToolSearchToolSearchResultType,
+        MessagesToolSearchToolSearchResultTypedDict,
+    )
     from .metadatalevel import MetadataLevel
     from .model import Model, ModelTypedDict
     from .modelaliastarget import ModelAliasTarget, ModelAliasTargetTypedDict
@@ -7374,6 +7401,21 @@ __all__ = [
     "MessagesToolRemovalBlockTypeMcpToolsetReference",
     "MessagesToolRemovalBlockTypeToolReference",
     "MessagesToolRemovalBlockTypedDict",
+    "MessagesToolSearchToolReference",
+    "MessagesToolSearchToolReferenceType",
+    "MessagesToolSearchToolReferenceTypedDict",
+    "MessagesToolSearchToolResultBlock",
+    "MessagesToolSearchToolResultBlockType",
+    "MessagesToolSearchToolResultBlockTypedDict",
+    "MessagesToolSearchToolResultContent",
+    "MessagesToolSearchToolResultContentTypedDict",
+    "MessagesToolSearchToolResultError",
+    "MessagesToolSearchToolResultErrorCode",
+    "MessagesToolSearchToolResultErrorType",
+    "MessagesToolSearchToolResultErrorTypedDict",
+    "MessagesToolSearchToolSearchResult",
+    "MessagesToolSearchToolSearchResultType",
+    "MessagesToolSearchToolSearchResultTypedDict",
     "MetadataLevel",
     "MismatchBehavior",
     "Modality",
@@ -11299,6 +11341,21 @@ _dynamic_imports: dict[str, str] = {
     "MessagesToolRemovalBlockTypeToolReference": ".messagestoolremovalblock",
     "MessagesToolRemovalBlockTypedDict": ".messagestoolremovalblock",
     "TypeToolRemoval": ".messagestoolremovalblock",
+    "MessagesToolSearchToolReference": ".messagestoolsearchtoolreference",
+    "MessagesToolSearchToolReferenceType": ".messagestoolsearchtoolreference",
+    "MessagesToolSearchToolReferenceTypedDict": ".messagestoolsearchtoolreference",
+    "MessagesToolSearchToolResultBlock": ".messagestoolsearchtoolresultblock",
+    "MessagesToolSearchToolResultBlockType": ".messagestoolsearchtoolresultblock",
+    "MessagesToolSearchToolResultBlockTypedDict": ".messagestoolsearchtoolresultblock",
+    "MessagesToolSearchToolResultContent": ".messagestoolsearchtoolresultcontent",
+    "MessagesToolSearchToolResultContentTypedDict": ".messagestoolsearchtoolresultcontent",
+    "MessagesToolSearchToolResultError": ".messagestoolsearchtoolresulterror",
+    "MessagesToolSearchToolResultErrorType": ".messagestoolsearchtoolresulterror",
+    "MessagesToolSearchToolResultErrorTypedDict": ".messagestoolsearchtoolresulterror",
+    "MessagesToolSearchToolResultErrorCode": ".messagestoolsearchtoolresulterrorcode",
+    "MessagesToolSearchToolSearchResult": ".messagestoolsearchtoolsearchresult",
+    "MessagesToolSearchToolSearchResultType": ".messagestoolsearchtoolsearchresult",
+    "MessagesToolSearchToolSearchResultTypedDict": ".messagestoolsearchtoolsearchresult",
     "MetadataLevel": ".metadatalevel",
     "Model": ".model",
     "ModelTypedDict": ".model",

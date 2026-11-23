@@ -50,6 +50,10 @@ from .messagestoolremovalblock import (
     MessagesToolRemovalBlock,
     MessagesToolRemovalBlockTypedDict,
 )
+from .messagestoolsearchtoolresultblock import (
+    MessagesToolSearchToolResultBlock,
+    MessagesToolSearchToolResultBlockTypedDict,
+)
 from .oranthropictoolsearchresultparam import (
     ORAnthropicToolSearchResultParam,
     ORAnthropicToolSearchResultParamTypedDict,
@@ -414,6 +418,7 @@ MessagesMessageParamContentUnion4TypedDict = TypeAliasType(
         ContentWebSearchToolResultTypedDict,
         AnthropicTextBlockParamTypedDict,
         ContentCompactionTypedDict,
+        MessagesToolSearchToolResultBlockTypedDict,
         ContentServerToolUseTypedDict,
         ContentToolResultTypedDict,
         ContentToolUseTypedDict,
@@ -446,6 +451,7 @@ MessagesMessageParamContentUnion4 = Annotated[
         Annotated[
             ORAnthropicToolSearchResultParam, Tag("openrouter_tool_search_result")
         ],
+        Annotated[MessagesToolSearchToolResultBlock, Tag("tool_search_tool_result")],
     ],
     Discriminator(lambda m: get_discriminator(m, "type", "type")),
 ]
