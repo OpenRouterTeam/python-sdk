@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c48cf606-fb42-4a45-9c23-8f0555307828
 management:
-  docChecksum: 90b5c601e50bf1248d8d3f181db723b2
+  docChecksum: f00f4877991e323acf772528df87cb1b
   docVersion: 1.0.0
   speakeasyVersion: 1.803.2
   generationVersion: 2.950.13
-  releaseVersion: 1.3.206
-  configChecksum: a317104236c4390658a9de646cc7ef98
+  releaseVersion: 1.3.207
+  configChecksum: ce48fa8116cb1aeca35db174039a77e0
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
 persistentEdits:
-  generation_id: 0d883268-6125-46fa-a7c1-4becd1407ee2
-  pristine_commit_hash: 78ad4c7c57d85f3ea0837280c1abc43ebfa3a715
-  pristine_tree_hash: 6da40b5a650f0d474ab71d6ce1b3db448a502035
+  generation_id: 817b016f-a024-4e0a-98d3-63c7e5353cc9
+  pristine_commit_hash: 3e94a8543f36f9aa91ea2f1157dc1540e5666309
+  pristine_tree_hash: b5e8a4dc7ac674b0caf564247d4bbdde0cba6a38
 features:
   python:
     acceptHeaders: 3.0.0
@@ -11832,8 +11832,8 @@ trackedFiles:
     pristine_git_object: 65eb984d913d1196f223e1c2f8004891d1a53058
   docs/sdks/scim/README.mdx:
     id: fd6d8a91a053
-    last_write_checksum: sha1:6136229f6e3a4c8e4fc29cd78d5e366a0e365c3f
-    pristine_git_object: 8cf828c5931cbfccdd9fc951c393a49ef72d4f8e
+    last_write_checksum: sha1:b8fa2f34e39af30ae7fe4c4fc497d943bf57cae9
+    pristine_git_object: 3f0a3e567b411bd360fd2603d9b9e6b6e40d4787
   docs/sdks/stt/README.mdx:
     id: 190b0dc9a5d1
     last_write_checksum: sha1:a72a850312d8c2f8d6b00c588d35b48af7978f15
@@ -11868,8 +11868,8 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:3d70d397242ef93646b660b8bc74bbcaeb5d0cf9
-    pristine_git_object: f0e785f413610a6a9fd22f057a40164ad038dd64
+    last_write_checksum: sha1:4e9a05be8dbbf04f39efd9bcd31be07eb77c503d
+    pristine_git_object: 85d1ed5782f392b79dae55a935ec298d283f29fa
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77f44b60b98bc126557ec27391f91dfba764bb54
@@ -11896,8 +11896,8 @@ trackedFiles:
     pristine_git_object: 86713cfea633e09d33b3d4e65281071fe20e6137
   src/openrouter/_version.py:
     id: d8d15ad6c586
-    last_write_checksum: sha1:8707e4a35ad0b57e8e1a9c447dbba1b7b92f01df
-    pristine_git_object: 89dbf37220263e720c3e9c26e3034213db1d21bc
+    last_write_checksum: sha1:00be086432928f2a43e42b34e29dcbf0794ad190
+    pristine_git_object: 008b851764d4084f5d4a471adfb1067699cb4182
   src/openrouter/alpha.py:
     id: 306c4d93308d
     last_write_checksum: sha1:80cc0f39649445431cc2247ed0e0765438467766
@@ -16776,8 +16776,8 @@ trackedFiles:
     pristine_git_object: 6583a0b59f3ede8c72897bb922c1f85de280e8e0
   src/openrouter/scim.py:
     id: 351afd6b616e
-    last_write_checksum: sha1:546824af92ab0508b74e1709faf0811199f0943e
-    pristine_git_object: ccc8221f38142a6b2b89521932fc49c970652510
+    last_write_checksum: sha1:8d1dfe362ca7c5ab91c3a46e7cdf1ac16f4207fb
+    pristine_git_object: 56788ad9f6329b1f8c1b5f4832af6484b4021e16
   src/openrouter/sdk.py:
     id: ee9846c4c9c5
     last_write_checksum: sha1:e2ac234f50cf2fa57417f0be1c9222dc8cfcf947
@@ -22023,4 +22023,3 @@ examples:
         "503":
           application/json: {"error": {"code": 503, "message": "Service temporarily unavailable"}}
 examplesVersion: 1.0.2
-releaseNotes: "## Python SDK Changes:\n* `open_router.guardrails.list()`:  `response.data[].allow_provisional_providers` **Added**\n* `open_router.guardrails.create()`: \n  *  `request.allow_provisional_providers` **Added**\n  *  `response.data.allow_provisional_providers` **Added**\n* `open_router.guardrails.get()`:  `response.data.allow_provisional_providers` **Added**\n* `open_router.guardrails.update()`: \n  *  `request.allow_provisional_providers` **Added**\n  *  `response.data.allow_provisional_providers` **Added**\n* `open_router.guardrail_policies.list_account_policies()`:  `response.data[].union(model_availability).config.allow_provisional_providers` **Added**\n* `open_router.guardrail_policies.create_account_policy()`: \n  *  `request.account_guardrail_policy_request.union(model_availability).config.allow_provisional_providers` **Added**\n  *  `response.data.union(model_availability).config.allow_provisional_providers` **Added**\n* `open_router.guardrail_policies.update_account_policy()`: \n  *  `request.account_guardrail_policy_request.union(model_availability).config.allow_provisional_providers` **Added**\n  *  `response.data.union(model_availability).config.allow_provisional_providers` **Added**\n* `open_router.guardrail_policies.list_model_availability_policies()`:  `response.data[].config.allow_provisional_providers` **Added**\n* `open_router.guardrail_policies.create_model_availability_policy()`: \n  *  `request.config.allow_provisional_providers` **Added**\n  *  `response.data.config.allow_provisional_providers` **Added**\n* `open_router.guardrail_policies.get_model_availability_policy()`:  `response.data.config.allow_provisional_providers` **Added**\n* `open_router.guardrail_policies.update_model_availability_policy()`: \n  *  `request.config.allow_provisional_providers` **Added**\n  *  `response.data.config.allow_provisional_providers` **Added**\n"
