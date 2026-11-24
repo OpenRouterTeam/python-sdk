@@ -28,6 +28,7 @@ class TTS(BaseSDK):
             ]
         ] = None,
         instructions: Optional[str] = None,
+        output_delivery: Optional[components.OutputDelivery] = None,
         provider: Optional[
             Union[
                 components.SpeechRequestProvider,
@@ -49,7 +50,7 @@ class TTS(BaseSDK):
     ) -> httpx.Response:
         r"""Create speech
 
-        Synthesizes audio from the input text. Returns a raw audio bytestream in the requested format (e.g. mp3, pcm, wav).
+        Synthesizes audio from the input text. Returns a raw audio bytestream in the requested format (e.g. mp3, pcm) by default, or a JSON response with a 24-hour signed download URL when `output_delivery` is set to `\"url\"`.
 
         :param input: Text to synthesize, or a list of turns for multi-speaker input. Each turn has its own text, voice, and instructions. Multi-speaker input is supported by Gemini TTS models, by Fish Audio models other than S1, and by Speechify dialogue models.
         :param model: TTS model identifier
@@ -62,6 +63,7 @@ class TTS(BaseSDK):
 
         :param input_references: Reference content for stateless voice cloning or voice design. Audio mode: one to three `input_audio` parts, each optionally paired with a `text` part carrying its transcript (a single clip accepts its transcript before or after it; with multiple clips each transcript immediately follows its clip), plus at most one `image_url` part as a scene image on providers that condition the cloned voice on its setting; only routed to endpoints that support voice cloning (and multiple references or image references when those parts are sent). Image mode: exactly one `image_url` part; only routed to endpoints that support image references. An empty array is treated as no reference.
         :param instructions: Delivery instructions for the whole request, such as tone, pacing, or emotion. Supported by OpenAI gpt-4o-mini-tts, Gemini TTS, and Fish Audio models. Ignored by other providers.
+        :param output_delivery: `stream` (default) streams the audio bytes directly in the response body. `url` stores the generated audio in OpenRouter storage and returns a JSON response with a signed download `url`, `expires_at`, and `media_type`. The URL is a bearer link: anyone holding it can download the audio until it expires, up to 24 hours after the audio was stored (use `expires_at`); the stored copy is deleted by the storage lifecycle within the following day. Falls back to streaming raw audio bytes when a URL cannot be issued because zero-data-retention applies (account settings, guardrails, `provider.zdr`, or a ZDR endpoint) or the request has no workspace.
         :param provider: Provider configuration: provider routing preferences (`order`, `only`, `ignore`, `allow_fallbacks`), data policy routing preferences (`zdr`, `data_collection`) and provider-specific passthrough options
         :param response_format: Audio output format
         :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow). Used for observability grouping in Broadcast and private logging; never sent to the provider. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters.
@@ -95,6 +97,7 @@ class TTS(BaseSDK):
                 ),
                 instructions=instructions,
                 model=model,
+                output_delivery=output_delivery,
                 provider=utils.get_pydantic_model(
                     provider, Optional[components.SpeechRequestProvider]
                 ),
@@ -284,6 +287,7 @@ class TTS(BaseSDK):
             ]
         ] = None,
         instructions: Optional[str] = None,
+        output_delivery: Optional[components.OutputDelivery] = None,
         provider: Optional[
             Union[
                 components.SpeechRequestProvider,
@@ -305,7 +309,7 @@ class TTS(BaseSDK):
     ) -> httpx.Response:
         r"""Create speech
 
-        Synthesizes audio from the input text. Returns a raw audio bytestream in the requested format (e.g. mp3, pcm, wav).
+        Synthesizes audio from the input text. Returns a raw audio bytestream in the requested format (e.g. mp3, pcm) by default, or a JSON response with a 24-hour signed download URL when `output_delivery` is set to `\"url\"`.
 
         :param input: Text to synthesize, or a list of turns for multi-speaker input. Each turn has its own text, voice, and instructions. Multi-speaker input is supported by Gemini TTS models, by Fish Audio models other than S1, and by Speechify dialogue models.
         :param model: TTS model identifier
@@ -318,6 +322,7 @@ class TTS(BaseSDK):
 
         :param input_references: Reference content for stateless voice cloning or voice design. Audio mode: one to three `input_audio` parts, each optionally paired with a `text` part carrying its transcript (a single clip accepts its transcript before or after it; with multiple clips each transcript immediately follows its clip), plus at most one `image_url` part as a scene image on providers that condition the cloned voice on its setting; only routed to endpoints that support voice cloning (and multiple references or image references when those parts are sent). Image mode: exactly one `image_url` part; only routed to endpoints that support image references. An empty array is treated as no reference.
         :param instructions: Delivery instructions for the whole request, such as tone, pacing, or emotion. Supported by OpenAI gpt-4o-mini-tts, Gemini TTS, and Fish Audio models. Ignored by other providers.
+        :param output_delivery: `stream` (default) streams the audio bytes directly in the response body. `url` stores the generated audio in OpenRouter storage and returns a JSON response with a signed download `url`, `expires_at`, and `media_type`. The URL is a bearer link: anyone holding it can download the audio until it expires, up to 24 hours after the audio was stored (use `expires_at`); the stored copy is deleted by the storage lifecycle within the following day. Falls back to streaming raw audio bytes when a URL cannot be issued because zero-data-retention applies (account settings, guardrails, `provider.zdr`, or a ZDR endpoint) or the request has no workspace.
         :param provider: Provider configuration: provider routing preferences (`order`, `only`, `ignore`, `allow_fallbacks`), data policy routing preferences (`zdr`, `data_collection`) and provider-specific passthrough options
         :param response_format: Audio output format
         :param session_id: A unique identifier for grouping related requests (e.g., a conversation or agent workflow). Used for observability grouping in Broadcast and private logging; never sent to the provider. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters.
@@ -351,6 +356,7 @@ class TTS(BaseSDK):
                 ),
                 instructions=instructions,
                 model=model,
+                output_delivery=output_delivery,
                 provider=utils.get_pydantic_model(
                     provider, Optional[components.SpeechRequestProvider]
                 ),

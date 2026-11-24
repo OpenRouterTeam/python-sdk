@@ -4606,6 +4606,7 @@ if TYPE_CHECKING:
         SpeechReferenceCountTypedDict,
     )
     from .speechrequest import (
+        OutputDelivery,
         SpeechRequest,
         SpeechRequestDataCollection,
         SpeechRequestIgnore,
@@ -7812,6 +7813,7 @@ __all__ = [
     "OutputDatetimeItem",
     "OutputDatetimeItemType",
     "OutputDatetimeItemTypedDict",
+    "OutputDelivery",
     "OutputFileSearchCallItem",
     "OutputFileSearchCallItemType",
     "OutputFileSearchCallItemTypedDict",
@@ -12409,6 +12411,7 @@ _dynamic_imports: dict[str, str] = {
     "SpeechReferenceCount": ".speechreferencecount",
     "SpeechReferenceCountType": ".speechreferencecount",
     "SpeechReferenceCountTypedDict": ".speechreferencecount",
+    "OutputDelivery": ".speechrequest",
     "SpeechRequest": ".speechrequest",
     "SpeechRequestDataCollection": ".speechrequest",
     "SpeechRequestIgnore": ".speechrequest",
