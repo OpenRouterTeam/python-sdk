@@ -19,6 +19,16 @@ from typing import List, Literal, Optional, Union
 from typing_extensions import NotRequired, TypeAliasType, TypedDict
 
 
+OutputDelivery = Union[
+    Literal[
+        "stream",
+        "url",
+    ],
+    UnrecognizedStr,
+]
+r"""`stream` (default) streams the audio bytes directly in the response body. `url` stores the generated audio in OpenRouter storage and returns a JSON response with a signed download `url`, `expires_at`, and `media_type`. The URL is a bearer link: anyone holding it can download the audio until it expires, up to 24 hours after the audio was stored (use `expires_at`); the stored copy is deleted by the storage lifecycle within the following day. Falls back to streaming raw audio bytes when a URL cannot be issued because zero-data-retention applies (account settings, guardrails, `provider.zdr`, or a ZDR endpoint) or the request has no workspace."""
+
+
 SpeechRequestDataCollection = Union[
     Literal[
         "deny",
@@ -175,6 +185,8 @@ class SpeechRequestTypedDict(TypedDict):
     r"""Reference content for stateless voice cloning or voice design. Audio mode: one to three `input_audio` parts, each optionally paired with a `text` part carrying its transcript (a single clip accepts its transcript before or after it; with multiple clips each transcript immediately follows its clip), plus at most one `image_url` part as a scene image on providers that condition the cloned voice on its setting; only routed to endpoints that support voice cloning (and multiple references or image references when those parts are sent). Image mode: exactly one `image_url` part; only routed to endpoints that support image references. An empty array is treated as no reference."""
     instructions: NotRequired[str]
     r"""Delivery instructions for the whole request, such as tone, pacing, or emotion. Supported by OpenAI gpt-4o-mini-tts, Gemini TTS, and Fish Audio models. Ignored by other providers."""
+    output_delivery: NotRequired[OutputDelivery]
+    r"""`stream` (default) streams the audio bytes directly in the response body. `url` stores the generated audio in OpenRouter storage and returns a JSON response with a signed download `url`, `expires_at`, and `media_type`. The URL is a bearer link: anyone holding it can download the audio until it expires, up to 24 hours after the audio was stored (use `expires_at`); the stored copy is deleted by the storage lifecycle within the following day. Falls back to streaming raw audio bytes when a URL cannot be issued because zero-data-retention applies (account settings, guardrails, `provider.zdr`, or a ZDR endpoint) or the request has no workspace."""
     provider: NotRequired[SpeechRequestProviderTypedDict]
     r"""Provider configuration: provider routing preferences (`order`, `only`, `ignore`, `allow_fallbacks`), data policy routing preferences (`zdr`, `data_collection`) and provider-specific passthrough options"""
     response_format: NotRequired[SpeechRequestResponseFormat]
@@ -206,6 +218,9 @@ class SpeechRequest(BaseModel):
     instructions: Optional[str] = None
     r"""Delivery instructions for the whole request, such as tone, pacing, or emotion. Supported by OpenAI gpt-4o-mini-tts, Gemini TTS, and Fish Audio models. Ignored by other providers."""
 
+    output_delivery: Optional[OutputDelivery] = None
+    r"""`stream` (default) streams the audio bytes directly in the response body. `url` stores the generated audio in OpenRouter storage and returns a JSON response with a signed download `url`, `expires_at`, and `media_type`. The URL is a bearer link: anyone holding it can download the audio until it expires, up to 24 hours after the audio was stored (use `expires_at`); the stored copy is deleted by the storage lifecycle within the following day. Falls back to streaming raw audio bytes when a URL cannot be issued because zero-data-retention applies (account settings, guardrails, `provider.zdr`, or a ZDR endpoint) or the request has no workspace."""
+
     provider: Optional[SpeechRequestProvider] = None
     r"""Provider configuration: provider routing preferences (`order`, `only`, `ignore`, `allow_fallbacks`), data policy routing preferences (`zdr`, `data_collection`) and provider-specific passthrough options"""
 
@@ -233,6 +248,7 @@ class SpeechRequest(BaseModel):
             [
                 "input_references",
                 "instructions",
+                "output_delivery",
                 "provider",
                 "response_format",
                 "session_id",
