@@ -86,6 +86,10 @@ from .reasoningmode import ReasoningMode
 from .reasoningsummaryverbosity import ReasoningSummaryVerbosity
 from .responsehealingplugin import ResponseHealingPlugin, ResponseHealingPluginTypedDict
 from .responseincludesenum import ResponseIncludesEnum
+from .responsescontextmanagement import (
+    ResponsesContextManagement,
+    ResponsesContextManagementTypedDict,
+)
 from .searchmodelsservertool_openrouter import (
     SearchModelsServerToolOpenRouter,
     SearchModelsServerToolOpenRouterTypedDict,
@@ -471,6 +475,8 @@ class ResponsesRequestTypedDict(TypedDict):
     background: NotRequired[Nullable[bool]]
     cache_control: NotRequired[AnthropicCacheControlDirectiveTypedDict]
     r"""Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. When set on an individual content block, it marks an explicit cache breakpoint; block-level markers also work on OpenAI models that support explicit prompt caching — OpenRouter converts them to the provider's native format."""
+    context_management: NotRequired[Nullable[List[ResponsesContextManagementTypedDict]]]
+    r"""Server-side context management (compaction). Supported for OpenAI models served by OpenAI or Azure, which return `compaction` output items. Providers translated to another API format drop it. Replay returned `compaction` items in `input` on later turns."""
     debug: NotRequired[ChatDebugOptionsTypedDict]
     r"""Debug options for inspecting request transformations (streaming only)"""
     deferred_tools: NotRequired[DeferredToolsControlTypedDict]
@@ -542,6 +548,9 @@ class ResponsesRequest(BaseModel):
 
     cache_control: Optional[AnthropicCacheControlDirective] = None
     r"""Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. When set on an individual content block, it marks an explicit cache breakpoint; block-level markers also work on OpenAI models that support explicit prompt caching — OpenRouter converts them to the provider's native format."""
+
+    context_management: OptionalNullable[List[ResponsesContextManagement]] = UNSET
+    r"""Server-side context management (compaction). Supported for OpenAI models served by OpenAI or Azure, which return `compaction` output items. Providers translated to another API format drop it. Replay returned `compaction` items in `input` on later turns."""
 
     debug: Optional[ChatDebugOptions] = None
     r"""Debug options for inspecting request transformations (streaming only)"""
@@ -651,6 +660,7 @@ class ResponsesRequest(BaseModel):
                 "access_programs",
                 "background",
                 "cache_control",
+                "context_management",
                 "debug",
                 "deferred_tools",
                 "frequency_penalty",
@@ -695,6 +705,7 @@ class ResponsesRequest(BaseModel):
         nullable_fields = set(
             [
                 "background",
+                "context_management",
                 "frequency_penalty",
                 "include",
                 "instructions",

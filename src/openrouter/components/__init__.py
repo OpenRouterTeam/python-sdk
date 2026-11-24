@@ -4363,6 +4363,10 @@ if TYPE_CHECKING:
         ResponsesBadRequestResponseErrorData,
         ResponsesBadRequestResponseErrorDataTypedDict,
     )
+    from .responsescontextmanagement import (
+        ResponsesContextManagement,
+        ResponsesContextManagementTypedDict,
+    )
     from .responsesinputtransformation import (
         ResponsesInputTransformation,
         ResponsesInputTransformationTypedDict,
@@ -8281,6 +8285,8 @@ __all__ = [
     "ResponseOutputTextTypedDict",
     "ResponsesBadRequestResponseErrorData",
     "ResponsesBadRequestResponseErrorDataTypedDict",
+    "ResponsesContextManagement",
+    "ResponsesContextManagementTypedDict",
     "ResponsesInputTransformation",
     "ResponsesInputTransformationTypedDict",
     "ResponsesRequest",
@@ -12230,6 +12236,8 @@ _dynamic_imports: dict[str, str] = {
     "CodeTypedDict": ".responsesbadrequestresponseerrordata",
     "ResponsesBadRequestResponseErrorData": ".responsesbadrequestresponseerrordata",
     "ResponsesBadRequestResponseErrorDataTypedDict": ".responsesbadrequestresponseerrordata",
+    "ResponsesContextManagement": ".responsescontextmanagement",
+    "ResponsesContextManagementTypedDict": ".responsescontextmanagement",
     "ResponsesInputTransformation": ".responsesinputtransformation",
     "ResponsesInputTransformationTypedDict": ".responsesinputtransformation",
     "ReasoningConfig": ".responsesrequest",
