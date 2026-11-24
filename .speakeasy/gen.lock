@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: c48cf606-fb42-4a45-9c23-8f0555307828
 management:
-  docChecksum: 193a6755690700b57734c377ef268104
+  docChecksum: 5523a99aeba8d22ec99fe29fde3081cc
   docVersion: 1.0.0
   speakeasyVersion: 1.803.2
   generationVersion: 2.950.13
-  releaseVersion: 1.3.208
-  configChecksum: 398ff4eeb8d92e4721f69a9eaea473a0
+  releaseVersion: 1.3.209
+  configChecksum: 594ea931660cc5a95f0b833ceef0dfe7
   repoURL: https://github.com/OpenRouterTeam/python-sdk.git
   installationURL: https://github.com/OpenRouterTeam/python-sdk.git
   published: true
 persistentEdits:
-  generation_id: 1369b62a-5a5a-40c5-9929-32a9d4457849
-  pristine_commit_hash: b6fe83b984cc0e49c80e3a7a254e9b31960c379e
-  pristine_tree_hash: 4d245e8efab89ab1bbd0ba3f02cd21c9d4d5c576
+  generation_id: 23b0b72b-48f1-477e-ab26-c3d14487b550
+  pristine_commit_hash: 5e57e5c447618ca19068a8c4f83afdc92acfadba
+  pristine_tree_hash: 579b0a5ed8b74495b33dd8793b3ccdc68a9e4aaa
 features:
   python:
     acceptHeaders: 3.0.0
@@ -4820,12 +4820,12 @@ trackedFiles:
     pristine_git_object: 5949fbaa48fde55f28b1597cd0ac15ae13c5852a
   docs/components/jevrouterplugin.mdx:
     id: 258aa7058bc5
-    last_write_checksum: sha1:77aabf88838874c0ecf00076ae26c1d4cc0fcba4
-    pristine_git_object: fd57392a0ce10e1996c0e9bf28badf52bb0ba94f
+    last_write_checksum: sha1:4938eac4b55ce7df1085eec7033de9aa4a042173
+    pristine_git_object: c7160bce8a20d7e16399431a023ea67f2e3ca628
   docs/components/jevrouterpluginid.mdx:
     id: 30d920f53cde
-    last_write_checksum: sha1:dfc1a3a7d9011c2a15b475b51eaf48ad78856ff3
-    pristine_git_object: 5eb47c20b3849e3ad7d3ae15a2c999b30285e509
+    last_write_checksum: sha1:41ff36188b1bbe74b3db81ced562a42ecb4f6cd4
+    pristine_git_object: a05e11771cd1ae8000f6abb3aca3f86892e9e57e
   docs/components/keep.mdx:
     id: c3da64331e76
     last_write_checksum: sha1:f58b4b0416619717f16b37897c0cfe19bdac2362
@@ -11868,8 +11868,8 @@ trackedFiles:
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:233bfc6255ec2b6c6c17407e33dbc737ba1f87aa
-    pristine_git_object: c7fc4f275659cbbae09af590dcb34a64bc3bdc2e
+    last_write_checksum: sha1:e214a515a04c4f88bc4a0f08e53c5d4a612c6e34
+    pristine_git_object: a649c156d0e05683d3018647b3d85c5fddb057b0
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:77f44b60b98bc126557ec27391f91dfba764bb54
@@ -11896,8 +11896,8 @@ trackedFiles:
     pristine_git_object: 86713cfea633e09d33b3d4e65281071fe20e6137
   src/openrouter/_version.py:
     id: d8d15ad6c586
-    last_write_checksum: sha1:9b4b5edefa5a743c7ec64641755294a5e2056283
-    pristine_git_object: 7edc16dbb12298bb4465325aa2b8adbb89222a99
+    last_write_checksum: sha1:8d5c0cb3469fb60dd52dcb492cbfb3a50bef23a8
+    pristine_git_object: f1438eace800a2d3e09d3ff6a7dfdd84723e7ab0
   src/openrouter/alpha.py:
     id: 306c4d93308d
     last_write_checksum: sha1:80cc0f39649445431cc2247ed0e0765438467766
@@ -13920,8 +13920,8 @@ trackedFiles:
     pristine_git_object: b5a0bc16faa52f26d293eea18183e4d0b0bbb901
   src/openrouter/components/jevrouterplugin.py:
     id: fcb6e65e2e08
-    last_write_checksum: sha1:95cddb747ae16339fcd4ff907c062b8667999f1e
-    pristine_git_object: deed2db578c63adb44bc894aba195f402b96458a
+    last_write_checksum: sha1:8e502d7e89ed5230e2f7923d95a6c3c5ad7adc7a
+    pristine_git_object: 331032213a026767c5c1fcb13498362958638247
   src/openrouter/components/keyassignment.py:
     id: 07a64362e7fd
     last_write_checksum: sha1:4b47a6f1ab4992ec81d7236ca28dbf94d3a4fbaf
@@ -22023,4 +22023,3 @@ examples:
         "503":
           application/json: {"error": {"code": 503, "message": "Service temporarily unavailable"}}
 examplesVersion: 1.0.2
-releaseNotes: "## Python SDK Changes:\n* `open_router.byok.list()`:  `response.data[].is_exclusive` **Added**\n* `open_router.byok.create()`: \n  *  `request.is_exclusive` **Added**\n  *  `response.data.is_exclusive` **Added**\n* `open_router.byok.get()`:  `response.data.is_exclusive` **Added**\n* `open_router.byok.update()`: \n  *  `request.is_exclusive` **Added**\n  *  `response.data.is_exclusive` **Added**\n"

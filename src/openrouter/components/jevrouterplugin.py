@@ -8,10 +8,12 @@ from typing_extensions import NotRequired, TypedDict
 
 
 JevRouterPluginID = Literal["jev-router",]
+r"""The decisions router plugin. A request may also send `decisions-router`, an alias that configures the same plugin; responses and pipeline stages report it as `jev-router`."""
 
 
 class JevRouterPluginTypedDict(TypedDict):
     id: JevRouterPluginID
+    r"""The decisions router plugin. A request may also send `decisions-router`, an alias that configures the same plugin; responses and pipeline stages report it as `jev-router`."""
     allowed_models: NotRequired[List[str]]
     r"""Alias of `models`, matching the auto-router field name. Entries from both fields are combined."""
     cost_tier: NotRequired[str]
@@ -24,6 +26,7 @@ class JevRouterPluginTypedDict(TypedDict):
 
 class JevRouterPlugin(BaseModel):
     id: JevRouterPluginID
+    r"""The decisions router plugin. A request may also send `decisions-router`, an alias that configures the same plugin; responses and pipeline stages report it as `jev-router`."""
 
     allowed_models: Optional[List[str]] = None
     r"""Alias of `models`, matching the auto-router field name. Entries from both fields are combined."""
