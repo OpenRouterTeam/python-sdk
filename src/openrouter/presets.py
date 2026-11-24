@@ -2433,6 +2433,12 @@ class Presets(BaseSDK):
                 components.AnthropicCacheControlDirectiveTypedDict,
             ]
         ] = None,
+        context_management: OptionalNullable[
+            Union[
+                Iterable[components.ResponsesContextManagement],
+                Iterable[components.ResponsesContextManagementTypedDict],
+            ]
+        ] = UNSET,
         debug: Optional[
             Union[components.ChatDebugOptions, components.ChatDebugOptionsTypedDict]
         ] = None,
@@ -2550,6 +2556,7 @@ class Presets(BaseSDK):
         :param access_programs: OpenAI access programs for this request. `cyber` selects the Cyber access program: `standard`, `daybreak_blue`, or `daybreak_red`. A program other than `standard` is supported only on BYOK requests that run on your own OpenAI key enrolled in that program; any other endpoint, including OpenRouter's own OpenAI credentials, rejects it with a 400 error. Requests on OpenRouter's OpenAI credentials always run `standard`. Omit the field unless your key is enrolled in a Daybreak program.
         :param background:
         :param cache_control: Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. When set on an individual content block, it marks an explicit cache breakpoint; block-level markers also work on OpenAI models that support explicit prompt caching — OpenRouter converts them to the provider's native format.
+        :param context_management: Server-side context management (compaction). Supported for OpenAI models served by OpenAI or Azure, which return `compaction` output items. Providers translated to another API format drop it. Replay returned `compaction` items in `input` on later turns.
         :param debug: Debug options for inspecting request transformations (streaming only)
         :param deferred_tools: Opt-in versioned router-level deferred-tool protocol. Replay assistant reasoning unchanged on continuation. The portable profile needs the catalog unchanged across a continuation; the universal profile accepts a changed catalog and, with `announce_catalog_changes`, tells the model about it.
         :param frequency_penalty:
@@ -2616,6 +2623,10 @@ class Presets(BaseSDK):
                 background=background,
                 cache_control=utils.get_pydantic_model(
                     cache_control, Optional[components.AnthropicCacheControlDirective]
+                ),
+                context_management=utils.get_pydantic_model(
+                    context_management,
+                    OptionalNullable[List[components.ResponsesContextManagement]],
                 ),
                 debug=utils.get_pydantic_model(
                     debug, Optional[components.ChatDebugOptions]
@@ -2818,6 +2829,12 @@ class Presets(BaseSDK):
                 components.AnthropicCacheControlDirectiveTypedDict,
             ]
         ] = None,
+        context_management: OptionalNullable[
+            Union[
+                Iterable[components.ResponsesContextManagement],
+                Iterable[components.ResponsesContextManagementTypedDict],
+            ]
+        ] = UNSET,
         debug: Optional[
             Union[components.ChatDebugOptions, components.ChatDebugOptionsTypedDict]
         ] = None,
@@ -2935,6 +2952,7 @@ class Presets(BaseSDK):
         :param access_programs: OpenAI access programs for this request. `cyber` selects the Cyber access program: `standard`, `daybreak_blue`, or `daybreak_red`. A program other than `standard` is supported only on BYOK requests that run on your own OpenAI key enrolled in that program; any other endpoint, including OpenRouter's own OpenAI credentials, rejects it with a 400 error. Requests on OpenRouter's OpenAI credentials always run `standard`. Omit the field unless your key is enrolled in a Daybreak program.
         :param background:
         :param cache_control: Enable automatic prompt caching. When set at the top level, the system automatically applies cache breakpoints to the last cacheable block in the request. When set on an individual content block, it marks an explicit cache breakpoint; block-level markers also work on OpenAI models that support explicit prompt caching — OpenRouter converts them to the provider's native format.
+        :param context_management: Server-side context management (compaction). Supported for OpenAI models served by OpenAI or Azure, which return `compaction` output items. Providers translated to another API format drop it. Replay returned `compaction` items in `input` on later turns.
         :param debug: Debug options for inspecting request transformations (streaming only)
         :param deferred_tools: Opt-in versioned router-level deferred-tool protocol. Replay assistant reasoning unchanged on continuation. The portable profile needs the catalog unchanged across a continuation; the universal profile accepts a changed catalog and, with `announce_catalog_changes`, tells the model about it.
         :param frequency_penalty:
@@ -3001,6 +3019,10 @@ class Presets(BaseSDK):
                 background=background,
                 cache_control=utils.get_pydantic_model(
                     cache_control, Optional[components.AnthropicCacheControlDirective]
+                ),
+                context_management=utils.get_pydantic_model(
+                    context_management,
+                    OptionalNullable[List[components.ResponsesContextManagement]],
                 ),
                 debug=utils.get_pydantic_model(
                     debug, Optional[components.ChatDebugOptions]
