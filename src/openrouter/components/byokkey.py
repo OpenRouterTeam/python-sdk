@@ -45,6 +45,8 @@ class BYOKKeyTypedDict(TypedDict):
     r"""Stable public identifier for this BYOK credential."""
     is_byok_only: bool
     r"""Whether OpenRouter's shared endpoints on this provider are removed for every model, including models outside `allowed_models` and after all of your keys for the provider fail. The provider is skipped instead of spending OpenRouter credits. Only valid on non-fallback credentials."""
+    is_exclusive: bool
+    r"""Whether requests for the models this credential covers run only on exclusive credentials covering that model: never on another provider, a non-exclusive key, or OpenRouter's shared capacity. Every exclusive credential that covers the model and is eligible for the request may serve it, so two exclusive credentials with overlapping models share those models. Only credentials eligible for the request (its API key and member restrictions) count, so a request no exclusive credential is eligible for uses normal routing. A request for a model that an eligible exclusive credential covers returns a 404 when none of those credentials can serve it. The covered models are `allowed_models` when non-empty; with no or an empty `allowed_models`, an OpenAI, Anthropic, or Google credential covers every closed-weight model by that lab (for example every `openai/*` model except open-weight models such as `openai/gpt-oss-120b`, which stay on normal routing unless listed), and other providers must set a non-empty `allowed_models`. Only valid on non-fallback credentials."""
     is_fallback: bool
     r"""Whether this credential is treated as a fallback — used only after non-fallback keys for the same provider have been tried. Cannot be combined with `is_byok_only`."""
     is_required: bool
@@ -88,6 +90,9 @@ class BYOKKey(BaseModel):
 
     is_byok_only: bool
     r"""Whether OpenRouter's shared endpoints on this provider are removed for every model, including models outside `allowed_models` and after all of your keys for the provider fail. The provider is skipped instead of spending OpenRouter credits. Only valid on non-fallback credentials."""
+
+    is_exclusive: bool
+    r"""Whether requests for the models this credential covers run only on exclusive credentials covering that model: never on another provider, a non-exclusive key, or OpenRouter's shared capacity. Every exclusive credential that covers the model and is eligible for the request may serve it, so two exclusive credentials with overlapping models share those models. Only credentials eligible for the request (its API key and member restrictions) count, so a request no exclusive credential is eligible for uses normal routing. A request for a model that an eligible exclusive credential covers returns a 404 when none of those credentials can serve it. The covered models are `allowed_models` when non-empty; with no or an empty `allowed_models`, an OpenAI, Anthropic, or Google credential covers every closed-weight model by that lab (for example every `openai/*` model except open-weight models such as `openai/gpt-oss-120b`, which stay on normal routing unless listed), and other providers must set a non-empty `allowed_models`. Only valid on non-fallback credentials."""
 
     is_fallback: bool
     r"""Whether this credential is treated as a fallback — used only after non-fallback keys for the same provider have been tried. Cannot be combined with `is_byok_only`."""

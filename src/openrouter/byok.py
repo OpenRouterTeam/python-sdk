@@ -385,6 +385,7 @@ class BYOK(BaseSDK):
         declared_zdr: OptionalNullable[bool] = UNSET,
         disabled: Optional[bool] = None,
         is_byok_only: Optional[bool] = None,
+        is_exclusive: Optional[bool] = None,
         is_fallback: Optional[bool] = None,
         is_required: Optional[bool] = None,
         name: OptionalNullable[str] = UNSET,
@@ -414,6 +415,7 @@ class BYOK(BaseSDK):
         :param declared_zdr: Your declaration of whether the upstream provider account behind this credential has zero data retention (ZDR). `null` inherits OpenRouter's data policy for the provider's endpoint; `true` declares the account ZDR so requests that require ZDR may route to this credential even when the shared endpoint retains data; `false` declares it non-ZDR so such requests never route to it. Self-declared and not verified by OpenRouter. Defaults to `null`.
         :param disabled: Whether this credential should be created in a disabled state.
         :param is_byok_only: Whether OpenRouter's shared endpoints on this provider are removed for every model, including models outside `allowed_models` and after all of your keys for the provider fail. The provider is skipped instead of spending OpenRouter credits. Only valid on non-fallback credentials. Defaults to `false`.
+        :param is_exclusive: Whether requests for the models this credential covers run only on exclusive credentials covering that model: never on another provider, a non-exclusive key, or OpenRouter's shared capacity. Every exclusive credential that covers the model and is eligible for the request may serve it, so two exclusive credentials with overlapping models share those models. Only credentials eligible for the request (its API key and member restrictions) count, so a request no exclusive credential is eligible for uses normal routing. A request for a model that an eligible exclusive credential covers returns a 404 when none of those credentials can serve it. The covered models are `allowed_models` when non-empty; with no or an empty `allowed_models`, an OpenAI, Anthropic, or Google credential covers every closed-weight model by that lab (for example every `openai/*` model except open-weight models such as `openai/gpt-oss-120b`, which stay on normal routing unless listed), and other providers must set a non-empty `allowed_models`. Only valid on non-fallback credentials. Defaults to `false`.
         :param is_fallback: Whether this credential is treated as a fallback — used only after non-fallback keys for the same provider have been tried. Cannot be combined with `is_byok_only`.
         :param is_required: Whether OpenRouter's shared endpoints on this provider are removed for the models this credential applies to (its `allowed_models`, or every model when `null`). Requests for those models run only on your keys; models outside the allowlist may still fall back to shared capacity on this provider. Defaults to `false`.
         :param name: Optional human-readable name for the credential.
@@ -451,6 +453,7 @@ class BYOK(BaseSDK):
                 declared_zdr=declared_zdr,
                 disabled=disabled,
                 is_byok_only=is_byok_only,
+                is_exclusive=is_exclusive,
                 is_fallback=is_fallback,
                 is_required=is_required,
                 key=key,
@@ -571,6 +574,7 @@ class BYOK(BaseSDK):
         declared_zdr: OptionalNullable[bool] = UNSET,
         disabled: Optional[bool] = None,
         is_byok_only: Optional[bool] = None,
+        is_exclusive: Optional[bool] = None,
         is_fallback: Optional[bool] = None,
         is_required: Optional[bool] = None,
         name: OptionalNullable[str] = UNSET,
@@ -600,6 +604,7 @@ class BYOK(BaseSDK):
         :param declared_zdr: Your declaration of whether the upstream provider account behind this credential has zero data retention (ZDR). `null` inherits OpenRouter's data policy for the provider's endpoint; `true` declares the account ZDR so requests that require ZDR may route to this credential even when the shared endpoint retains data; `false` declares it non-ZDR so such requests never route to it. Self-declared and not verified by OpenRouter. Defaults to `null`.
         :param disabled: Whether this credential should be created in a disabled state.
         :param is_byok_only: Whether OpenRouter's shared endpoints on this provider are removed for every model, including models outside `allowed_models` and after all of your keys for the provider fail. The provider is skipped instead of spending OpenRouter credits. Only valid on non-fallback credentials. Defaults to `false`.
+        :param is_exclusive: Whether requests for the models this credential covers run only on exclusive credentials covering that model: never on another provider, a non-exclusive key, or OpenRouter's shared capacity. Every exclusive credential that covers the model and is eligible for the request may serve it, so two exclusive credentials with overlapping models share those models. Only credentials eligible for the request (its API key and member restrictions) count, so a request no exclusive credential is eligible for uses normal routing. A request for a model that an eligible exclusive credential covers returns a 404 when none of those credentials can serve it. The covered models are `allowed_models` when non-empty; with no or an empty `allowed_models`, an OpenAI, Anthropic, or Google credential covers every closed-weight model by that lab (for example every `openai/*` model except open-weight models such as `openai/gpt-oss-120b`, which stay on normal routing unless listed), and other providers must set a non-empty `allowed_models`. Only valid on non-fallback credentials. Defaults to `false`.
         :param is_fallback: Whether this credential is treated as a fallback — used only after non-fallback keys for the same provider have been tried. Cannot be combined with `is_byok_only`.
         :param is_required: Whether OpenRouter's shared endpoints on this provider are removed for the models this credential applies to (its `allowed_models`, or every model when `null`). Requests for those models run only on your keys; models outside the allowlist may still fall back to shared capacity on this provider. Defaults to `false`.
         :param name: Optional human-readable name for the credential.
@@ -637,6 +642,7 @@ class BYOK(BaseSDK):
                 declared_zdr=declared_zdr,
                 disabled=disabled,
                 is_byok_only=is_byok_only,
+                is_exclusive=is_exclusive,
                 is_fallback=is_fallback,
                 is_required=is_required,
                 key=key,
@@ -1288,6 +1294,7 @@ class BYOK(BaseSDK):
         declared_zdr: OptionalNullable[bool] = UNSET,
         disabled: Optional[bool] = None,
         is_byok_only: Optional[bool] = None,
+        is_exclusive: Optional[bool] = None,
         is_fallback: Optional[bool] = None,
         is_required: Optional[bool] = None,
         key: Optional[str] = None,
@@ -1316,6 +1323,7 @@ class BYOK(BaseSDK):
         :param declared_zdr: Your declaration of whether the upstream provider account behind this credential has zero data retention (ZDR). `null` inherits OpenRouter's data policy for the provider's endpoint; `true` declares the account ZDR so requests that require ZDR may route to this credential even when the shared endpoint retains data; `false` declares it non-ZDR so such requests never route to it. Self-declared and not verified by OpenRouter. Omit to leave the stored value unchanged; `null` clears the declaration.
         :param disabled: Whether this credential is disabled.
         :param is_byok_only: Whether OpenRouter's shared endpoints on this provider are removed for every model, including models outside `allowed_models` and after all of your keys for the provider fail. The provider is skipped instead of spending OpenRouter credits. Only valid on non-fallback credentials. Omit to leave the stored value unchanged.
+        :param is_exclusive: Whether requests for the models this credential covers run only on exclusive credentials covering that model: never on another provider, a non-exclusive key, or OpenRouter's shared capacity. Every exclusive credential that covers the model and is eligible for the request may serve it, so two exclusive credentials with overlapping models share those models. Only credentials eligible for the request (its API key and member restrictions) count, so a request no exclusive credential is eligible for uses normal routing. A request for a model that an eligible exclusive credential covers returns a 404 when none of those credentials can serve it. The covered models are `allowed_models` when non-empty; with no or an empty `allowed_models`, an OpenAI, Anthropic, or Google credential covers every closed-weight model by that lab (for example every `openai/*` model except open-weight models such as `openai/gpt-oss-120b`, which stay on normal routing unless listed), and other providers must set a non-empty `allowed_models`. Only valid on non-fallback credentials. Omit to leave the stored value unchanged.
         :param is_fallback: Whether this credential is treated as a fallback — used only after non-fallback keys for the same provider have been tried. Cannot be combined with `is_byok_only`. Omit to leave the stored value unchanged.
         :param is_required: Whether OpenRouter's shared endpoints on this provider are removed for the models this credential applies to (its `allowed_models`, or every model when `null`). Requests for those models run only on your keys; models outside the allowlist may still fall back to shared capacity on this provider. Omit to leave the stored value unchanged.
         :param key: A new raw provider API key to rotate the credential in-place. The previous key material is overwritten and the masked label is regenerated. Encrypted at rest and never returned in API responses.
@@ -1354,6 +1362,7 @@ class BYOK(BaseSDK):
                 declared_zdr=declared_zdr,
                 disabled=disabled,
                 is_byok_only=is_byok_only,
+                is_exclusive=is_exclusive,
                 is_fallback=is_fallback,
                 is_required=is_required,
                 key=key,
@@ -1481,6 +1490,7 @@ class BYOK(BaseSDK):
         declared_zdr: OptionalNullable[bool] = UNSET,
         disabled: Optional[bool] = None,
         is_byok_only: Optional[bool] = None,
+        is_exclusive: Optional[bool] = None,
         is_fallback: Optional[bool] = None,
         is_required: Optional[bool] = None,
         key: Optional[str] = None,
@@ -1509,6 +1519,7 @@ class BYOK(BaseSDK):
         :param declared_zdr: Your declaration of whether the upstream provider account behind this credential has zero data retention (ZDR). `null` inherits OpenRouter's data policy for the provider's endpoint; `true` declares the account ZDR so requests that require ZDR may route to this credential even when the shared endpoint retains data; `false` declares it non-ZDR so such requests never route to it. Self-declared and not verified by OpenRouter. Omit to leave the stored value unchanged; `null` clears the declaration.
         :param disabled: Whether this credential is disabled.
         :param is_byok_only: Whether OpenRouter's shared endpoints on this provider are removed for every model, including models outside `allowed_models` and after all of your keys for the provider fail. The provider is skipped instead of spending OpenRouter credits. Only valid on non-fallback credentials. Omit to leave the stored value unchanged.
+        :param is_exclusive: Whether requests for the models this credential covers run only on exclusive credentials covering that model: never on another provider, a non-exclusive key, or OpenRouter's shared capacity. Every exclusive credential that covers the model and is eligible for the request may serve it, so two exclusive credentials with overlapping models share those models. Only credentials eligible for the request (its API key and member restrictions) count, so a request no exclusive credential is eligible for uses normal routing. A request for a model that an eligible exclusive credential covers returns a 404 when none of those credentials can serve it. The covered models are `allowed_models` when non-empty; with no or an empty `allowed_models`, an OpenAI, Anthropic, or Google credential covers every closed-weight model by that lab (for example every `openai/*` model except open-weight models such as `openai/gpt-oss-120b`, which stay on normal routing unless listed), and other providers must set a non-empty `allowed_models`. Only valid on non-fallback credentials. Omit to leave the stored value unchanged.
         :param is_fallback: Whether this credential is treated as a fallback — used only after non-fallback keys for the same provider have been tried. Cannot be combined with `is_byok_only`. Omit to leave the stored value unchanged.
         :param is_required: Whether OpenRouter's shared endpoints on this provider are removed for the models this credential applies to (its `allowed_models`, or every model when `null`). Requests for those models run only on your keys; models outside the allowlist may still fall back to shared capacity on this provider. Omit to leave the stored value unchanged.
         :param key: A new raw provider API key to rotate the credential in-place. The previous key material is overwritten and the masked label is regenerated. Encrypted at rest and never returned in API responses.
@@ -1547,6 +1558,7 @@ class BYOK(BaseSDK):
                 declared_zdr=declared_zdr,
                 disabled=disabled,
                 is_byok_only=is_byok_only,
+                is_exclusive=is_exclusive,
                 is_fallback=is_fallback,
                 is_required=is_required,
                 key=key,
