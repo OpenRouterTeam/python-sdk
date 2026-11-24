@@ -306,6 +306,7 @@ def main():
         api_key=os.getenv("OPENROUTER_API_KEY", ""),
     ) as open_router:
         # Rest of application here...
+        pass
 
 
 # Or when using async:
@@ -318,6 +319,7 @@ async def amain():
         api_key=os.getenv("OPENROUTER_API_KEY", ""),
     ) as open_router:
         # Rest of application here...
+        pass
 ```
 <!-- End Resource Management [resource-management] -->
 
