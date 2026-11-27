@@ -1,0 +1,16 @@
+---
+title: "BatchResultPromptTokensDetails2"
+---
+
+Per-modality token breakdown. Only present when the input contains 2+ modalities (e.g. text + image) and the upstream provider returns modality-level usage data. Only non-zero modality counts are included.
+
+
+## Fields
+
+| Field                                       | Type                                        | Required                                    | Description                                 | Example                                     |
+| ------------------------------------------- | ------------------------------------------- | ------------------------------------------- | ------------------------------------------- | ------------------------------------------- |
+| `audio_tokens`                              | *Optional[int]*                             | ➖                          | Number of audio tokens in the input         |                                             |
+| `file_tokens`                               | *Optional[int]*                             | ➖                          | Number of file/document tokens in the input |                                             |
+| `image_tokens`                              | *Optional[int]*                             | ➖                          | Number of image tokens in the input         | 258                                         |
+| `text_tokens`                               | *Optional[int]*                             | ➖                          | Number of text tokens in the input          | 8                                           |
+| `video_tokens`                              | *Optional[int]*                             | ➖                          | Number of video tokens in the input         |                                             |

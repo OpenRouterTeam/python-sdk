@@ -16,6 +16,7 @@ from typing_extensions import NotRequired, TypedDict
 class GuardrailModelAvailabilityPolicyConfigTypedDict(TypedDict):
     allow_provisional_providers: NotRequired[Nullable[bool]]
     allow_safety_retention_google: NotRequired[Nullable[bool]]
+    allow_safety_retention_openai: NotRequired[Nullable[bool]]
     allow_safety_retention_other: NotRequired[Nullable[bool]]
     allowed_data_regions: NotRequired[Nullable[List[str]]]
     allowed_models: NotRequired[Nullable[List[str]]]
@@ -42,6 +43,8 @@ class GuardrailModelAvailabilityPolicyConfig(BaseModel):
     allow_provisional_providers: OptionalNullable[bool] = UNSET
 
     allow_safety_retention_google: OptionalNullable[bool] = UNSET
+
+    allow_safety_retention_openai: OptionalNullable[bool] = UNSET
 
     allow_safety_retention_other: OptionalNullable[bool] = UNSET
 
@@ -89,6 +92,7 @@ class GuardrailModelAvailabilityPolicyConfig(BaseModel):
             [
                 "allow_provisional_providers",
                 "allow_safety_retention_google",
+                "allow_safety_retention_openai",
                 "allow_safety_retention_other",
                 "allowed_data_regions",
                 "allowed_models",
@@ -115,6 +119,7 @@ class GuardrailModelAvailabilityPolicyConfig(BaseModel):
             [
                 "allow_provisional_providers",
                 "allow_safety_retention_google",
+                "allow_safety_retention_openai",
                 "allow_safety_retention_other",
                 "allowed_data_regions",
                 "allowed_models",

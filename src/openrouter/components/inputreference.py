@@ -16,7 +16,7 @@ InputReferenceTypedDict = TypeAliasType(
         ContentPartImageTypedDict, ContentPartAudioTypedDict, ContentPartVideoTypedDict
     ],
 )
-r"""A reference asset used to guide video generation. Image references are supported by all providers; audio and video references are only honored by providers that support them (including BytePlus Seedance generation 2 and newer)."""
+r"""A reference asset used to guide video generation. Image references are the most widely supported; audio and video references are only accepted by providers that advertise those input modalities (including BytePlus Seedance generation 2 and newer)."""
 
 
 InputReference = Annotated[
@@ -27,4 +27,4 @@ InputReference = Annotated[
     ],
     Discriminator(lambda m: get_discriminator(m, "type", "type")),
 ]
-r"""A reference asset used to guide video generation. Image references are supported by all providers; audio and video references are only honored by providers that support them (including BytePlus Seedance generation 2 and newer)."""
+r"""A reference asset used to guide video generation. Image references are the most widely supported; audio and video references are only accepted by providers that advertise those input modalities (including BytePlus Seedance generation 2 and newer)."""

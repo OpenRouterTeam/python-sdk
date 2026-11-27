@@ -801,7 +801,7 @@ VideoGenerationRequestOrder = TypeAliasType(
 
 
 class VideoGenerationRequestProviderTypedDict(TypedDict):
-    r"""Provider routing preferences (order, only, ignore), request-level data policy (zdr, data_collection) and provider-specific passthrough configuration. No video endpoint currently offers Zero Data Retention, so `zdr: true` fails routing."""
+    r"""Provider routing preferences (order, only, ignore), request-level data policy (zdr, data_collection) and provider-specific passthrough configuration. Sorting by price, latency, or throughput and automatic provider fallbacks are not supported. No video endpoint currently offers Zero Data Retention, so `zdr: true` fails routing."""
 
     data_collection: NotRequired[Nullable[VideoGenerationRequestDataCollection]]
     r"""Data collection setting. If no available model provider meets the requirement, your request will return an error.
@@ -815,13 +815,13 @@ class VideoGenerationRequestProviderTypedDict(TypedDict):
     r"""List of provider slugs to allow. If provided, this list is merged with your account-wide allowed provider settings for this request."""
     options: NotRequired[VideoGenerationRequestOptionsTypedDict]
     order: NotRequired[Nullable[List[VideoGenerationRequestOrderTypedDict]]]
-    r"""An ordered list of provider slugs. The router will attempt to use the first provider in the subset of this list that supports your requested model, and fall back to the next if it is unavailable. If no providers are available, the request will fail with an error message."""
+    r"""An ordered list of provider slugs to prefer when choosing an eligible video endpoint. The request is submitted to one endpoint and is not retried on another provider if submission fails."""
     zdr: NotRequired[Nullable[bool]]
     r"""Whether to restrict routing to only ZDR (Zero Data Retention) endpoints. When true, only endpoints that do not retain prompts will be used."""
 
 
 class VideoGenerationRequestProvider(BaseModel):
-    r"""Provider routing preferences (order, only, ignore), request-level data policy (zdr, data_collection) and provider-specific passthrough configuration. No video endpoint currently offers Zero Data Retention, so `zdr: true` fails routing."""
+    r"""Provider routing preferences (order, only, ignore), request-level data policy (zdr, data_collection) and provider-specific passthrough configuration. Sorting by price, latency, or throughput and automatic provider fallbacks are not supported. No video endpoint currently offers Zero Data Retention, so `zdr: true` fails routing."""
 
     data_collection: OptionalNullable[VideoGenerationRequestDataCollection] = UNSET
     r"""Data collection setting. If no available model provider meets the requirement, your request will return an error.
@@ -839,7 +839,7 @@ class VideoGenerationRequestProvider(BaseModel):
     options: Optional[VideoGenerationRequestOptions] = None
 
     order: OptionalNullable[List[VideoGenerationRequestOrder]] = UNSET
-    r"""An ordered list of provider slugs. The router will attempt to use the first provider in the subset of this list that supports your requested model, and fall back to the next if it is unavailable. If no providers are available, the request will fail with an error message."""
+    r"""An ordered list of provider slugs to prefer when choosing an eligible video endpoint. The request is submitted to one endpoint and is not retried on another provider if submission fails."""
 
     zdr: OptionalNullable[bool] = UNSET
     r"""Whether to restrict routing to only ZDR (Zero Data Retention) endpoints. When true, only endpoints that do not retain prompts will be used."""
@@ -899,21 +899,21 @@ class VideoGenerationRequestTypedDict(TypedDict):
     duration: NotRequired[int]
     r"""Duration of the generated video in seconds, or -1 to let the provider choose the length (e.g. following an input video). -1 is only accepted by models that list it in supported_durations."""
     frame_images: NotRequired[List[FrameImageTypedDict]]
-    r"""Images to use as the first and/or last frame of the generated video. Each image must specify a frame_type of first_frame or last_frame."""
+    r"""Images to use as the first and/or last frame of the generated video. Each image must specify a frame_type of first_frame or last_frame, and each frame_type may appear at most once. Combining frame_images with input_references is provider-specific: some models reject the combination (as a 400 on submit or as a failed job), some use the frame images alone, and some use both (e.g. Runway applies image references as style/guidance alongside the frame anchors)."""
     generate_audio: NotRequired[bool]
-    r"""Whether to generate audio alongside the video. Defaults to the endpoint's generate_audio capability flag, false if not set. When neither is set, some providers (such as xAI) apply their own default and generate audio, so send false to request a silent video. Some models always include audio and ignore false."""
+    r"""Whether to generate audio alongside the video. Defaults to the endpoint's generate_audio capability flag, false if not set. When neither is set, some providers (such as xAI) apply their own default and generate audio, so send false to request a silent video. Some models always include audio and ignore false. POST /videos returns 400 for true if every otherwise eligible endpoint explicitly disables audio generation."""
     input_references: NotRequired[List[InputReferenceTypedDict]]
-    r"""Reference assets to guide video generation. Accepts image, audio, and video references. Audio and video references are only honored by providers that support them (including BytePlus Seedance generation 2 and newer); other providers use image references and ignore the rest."""
+    r"""Reference assets to guide video generation. Accepts image, audio, and video references. POST /videos rejects the request with a 400 when the model or its provider integration does not support a supplied reference modality. Combining input_references with frame_images is provider-specific: some models reject the combination (as a 400 on submit or as a failed job), some use the frame images alone, and some use both (e.g. Runway applies image references as style/guidance alongside the frame anchors)."""
     previous_job_id: NotRequired[str]
     r"""ID of a completed video job to edit or extend, as returned by the submit response. The new job runs on the same model and endpoint that produced the previous one. Only models that support continuation accept this field."""
     prompt: NotRequired[str]
     r"""Text prompt describing the video to generate. Optional for models that support generating a video from image input alone; required by all other models."""
     provider: NotRequired[VideoGenerationRequestProviderTypedDict]
-    r"""Provider routing preferences (order, only, ignore), request-level data policy (zdr, data_collection) and provider-specific passthrough configuration. No video endpoint currently offers Zero Data Retention, so `zdr: true` fails routing."""
+    r"""Provider routing preferences (order, only, ignore), request-level data policy (zdr, data_collection) and provider-specific passthrough configuration. Sorting by price, latency, or throughput and automatic provider fallbacks are not supported. No video endpoint currently offers Zero Data Retention, so `zdr: true` fails routing."""
     resolution: NotRequired[VideoGenerationRequestResolution]
     r"""Resolution of the generated video"""
     seed: NotRequired[int]
-    r"""If specified, the generation will sample deterministically, such that repeated requests with the same seed and parameters should return the same result. Determinism is not guaranteed for all providers."""
+    r"""If specified, the generation will sample deterministically, such that repeated requests with the same seed and parameters should return the same result. Determinism is not guaranteed for all providers. POST /videos returns 400 if every otherwise eligible endpoint explicitly declares seed unsupported."""
     session_id: NotRequired[str]
     r"""A unique identifier for grouping related requests (e.g., a conversation or agent workflow). Used for observability grouping in Broadcast and private logging; never sent to the provider. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters."""
     size: NotRequired[str]
@@ -942,13 +942,13 @@ class VideoGenerationRequest(BaseModel):
     r"""Duration of the generated video in seconds, or -1 to let the provider choose the length (e.g. following an input video). -1 is only accepted by models that list it in supported_durations."""
 
     frame_images: Optional[List[FrameImage]] = None
-    r"""Images to use as the first and/or last frame of the generated video. Each image must specify a frame_type of first_frame or last_frame."""
+    r"""Images to use as the first and/or last frame of the generated video. Each image must specify a frame_type of first_frame or last_frame, and each frame_type may appear at most once. Combining frame_images with input_references is provider-specific: some models reject the combination (as a 400 on submit or as a failed job), some use the frame images alone, and some use both (e.g. Runway applies image references as style/guidance alongside the frame anchors)."""
 
     generate_audio: Optional[bool] = None
-    r"""Whether to generate audio alongside the video. Defaults to the endpoint's generate_audio capability flag, false if not set. When neither is set, some providers (such as xAI) apply their own default and generate audio, so send false to request a silent video. Some models always include audio and ignore false."""
+    r"""Whether to generate audio alongside the video. Defaults to the endpoint's generate_audio capability flag, false if not set. When neither is set, some providers (such as xAI) apply their own default and generate audio, so send false to request a silent video. Some models always include audio and ignore false. POST /videos returns 400 for true if every otherwise eligible endpoint explicitly disables audio generation."""
 
     input_references: Optional[List[InputReference]] = None
-    r"""Reference assets to guide video generation. Accepts image, audio, and video references. Audio and video references are only honored by providers that support them (including BytePlus Seedance generation 2 and newer); other providers use image references and ignore the rest."""
+    r"""Reference assets to guide video generation. Accepts image, audio, and video references. POST /videos rejects the request with a 400 when the model or its provider integration does not support a supplied reference modality. Combining input_references with frame_images is provider-specific: some models reject the combination (as a 400 on submit or as a failed job), some use the frame images alone, and some use both (e.g. Runway applies image references as style/guidance alongside the frame anchors)."""
 
     previous_job_id: Optional[str] = None
     r"""ID of a completed video job to edit or extend, as returned by the submit response. The new job runs on the same model and endpoint that produced the previous one. Only models that support continuation accept this field."""
@@ -957,13 +957,13 @@ class VideoGenerationRequest(BaseModel):
     r"""Text prompt describing the video to generate. Optional for models that support generating a video from image input alone; required by all other models."""
 
     provider: Optional[VideoGenerationRequestProvider] = None
-    r"""Provider routing preferences (order, only, ignore), request-level data policy (zdr, data_collection) and provider-specific passthrough configuration. No video endpoint currently offers Zero Data Retention, so `zdr: true` fails routing."""
+    r"""Provider routing preferences (order, only, ignore), request-level data policy (zdr, data_collection) and provider-specific passthrough configuration. Sorting by price, latency, or throughput and automatic provider fallbacks are not supported. No video endpoint currently offers Zero Data Retention, so `zdr: true` fails routing."""
 
     resolution: Optional[VideoGenerationRequestResolution] = None
     r"""Resolution of the generated video"""
 
     seed: Optional[int] = None
-    r"""If specified, the generation will sample deterministically, such that repeated requests with the same seed and parameters should return the same result. Determinism is not guaranteed for all providers."""
+    r"""If specified, the generation will sample deterministically, such that repeated requests with the same seed and parameters should return the same result. Determinism is not guaranteed for all providers. POST /videos returns 400 if every otherwise eligible endpoint explicitly declares seed unsupported."""
 
     session_id: Optional[str] = None
     r"""A unique identifier for grouping related requests (e.g., a conversation or agent workflow). Used for observability grouping in Broadcast and private logging; never sent to the provider. If provided in both the request body and the x-session-id header, the body value takes precedence. Maximum of 256 characters."""

@@ -168,6 +168,7 @@ SpeechRequestResponseFormat = Union[
     Literal[
         "mp3",
         "pcm",
+        "wav",
     ],
     UnrecognizedStr,
 ]

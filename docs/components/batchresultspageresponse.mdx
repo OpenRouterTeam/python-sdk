@@ -1,0 +1,15 @@
+---
+title: "BatchResultsPageResponse"
+---
+
+A cursor-paginated page of normalized batch result rows.
+
+
+## Fields
+
+| Field                                                                                        | Type                                                                                         | Required                                                                                     | Description                                                                                  |
+| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `data`                                                                                       | List[[components.BatchResult](../components/batchresult.mdx)]                                 | ✔️                                                                           | N/A                                                                                          |
+| `has_more`                                                                                   | *bool*                                                                                       | ✔️                                                                           | N/A                                                                                          |
+| `next_cursor`                                                                                | *Nullable[str]*                                                                              | ✔️                                                                           | N/A                                                                                          |
+| `object`                                                                                     | [components.BatchResultsPageResponseObject](../components/batchresultspageresponseobject.mdx) | ✔️                                                                           | N/A                                                                                          |
