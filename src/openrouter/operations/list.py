@@ -102,6 +102,8 @@ class ListRequestTypedDict(TypedDict):
     r"""Number of API keys to skip for pagination"""
     workspace_id: NotRequired[str]
     r"""Filter API keys by workspace ID. By default an organization-scoped management key gets the default workspace; a workspace-scoped management key always gets its own workspace and cannot list another."""
+    creator_user_id: NotRequired[str]
+    r"""Only return API keys created by this user ID (the `creator_user_id` on each key). Requires a management key that can view key creators."""
 
 
 class ListRequest(BaseModel):
@@ -157,6 +159,12 @@ class ListRequest(BaseModel):
     ] = None
     r"""Filter API keys by workspace ID. By default an organization-scoped management key gets the default workspace; a workspace-scoped management key always gets its own workspace and cannot list another."""
 
+    creator_user_id: Annotated[
+        Optional[str],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Only return API keys created by this user ID (the `creator_user_id` on each key). Requires a management key that can view key creators."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
@@ -168,6 +176,7 @@ class ListRequest(BaseModel):
                 "include_expired",
                 "offset",
                 "workspace_id",
+                "creator_user_id",
             ]
         )
         nullable_fields = set(["offset"])
